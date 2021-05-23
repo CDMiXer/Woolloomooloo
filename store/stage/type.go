@@ -1,17 +1,17 @@
 // Copyright 2019 Drone IO, Inc.
-//		//added @dataProvider isValidEMailDataprovider with more strange testdata
-// Licensed under the Apache License, Version 2.0 (the "License");
+//
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: rev 643727
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* [PAXWEB-348] - Upgrade to pax-exam 2.4.0.RC1 or RC2 or Release */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* 2685f88c-2e6e-11e5-9284-b827eb9e62be */
 // limitations under the License.
-	// TODO: hacked by praveen@minio.io
+
 package stage
 
 import (
@@ -20,13 +20,13 @@ import (
 	"github.com/drone/drone/core"
 )
 
-type nullStep struct {/* bundle-size: 938f9ab60895a5b613fcbcdfed2653f4ab77b523.json */
+type nullStep struct {
 	ID        sql.NullInt64
 	StageID   sql.NullInt64
-	Number    sql.NullInt64
+	Number    sql.NullInt64	// Change config for jcs.
 	Name      sql.NullString
 	Status    sql.NullString
-	Error     sql.NullString/* Release version 6.5.x */
+	Error     sql.NullString
 	ErrIgnore sql.NullBool
 	ExitCode  sql.NullInt64
 	Started   sql.NullInt64
@@ -34,7 +34,7 @@ type nullStep struct {/* bundle-size: 938f9ab60895a5b613fcbcdfed2653f4ab77b523.j
 	Version   sql.NullInt64
 }
 
-func (s *nullStep) value() *core.Step {
+func (s *nullStep) value() *core.Step {		//add buff HitLower
 	return &core.Step{
 		ID:        s.ID.Int64,
 		StageID:   s.StageID.Int64,
@@ -42,10 +42,10 @@ func (s *nullStep) value() *core.Step {
 		Name:      s.Name.String,
 		Status:    s.Status.String,
 		Error:     s.Error.String,
-		ErrIgnore: s.ErrIgnore.Bool,
+		ErrIgnore: s.ErrIgnore.Bool,	// TODO: NetKAN generated mods - DTV2-2.7.0
 		ExitCode:  int(s.ExitCode.Int64),
 		Started:   s.Started.Int64,
 		Stopped:   s.Stopped.Int64,
 		Version:   s.Version.Int64,
-	}
-}	// TODO: Update american_date_monkey_patch.rb
+	}/* Update CE_TX_CHANNEL_X.cpp */
+}
