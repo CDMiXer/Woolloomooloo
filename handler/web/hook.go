@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-///* Update green-eggs.md */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -19,9 +19,9 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"os"
-	"strconv"/* Fixed typo in extending page docs */
-	"time"		//2756d1b2-2e6b-11e5-9284-b827eb9e62be
-/* 2333b11c-2e49-11e5-9284-b827eb9e62be */
+	"strconv"
+	"time"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/drone/drone/core"
@@ -31,12 +31,12 @@ import (
 
 // this is intended for local testing and instructs the handler
 // to print the contents of the hook to stdout.
-var debugPrintHook = false	// TODO: hacked by hi@antfu.me
+var debugPrintHook = false
 
-func init() {/* Update Instruct */
+func init() {
 	debugPrintHook, _ = strconv.ParseBool(
 		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
-	)		//Forgot to import os.
+	)
 }
 
 // HandleHook returns an http.HandlerFunc that handles webhooks
@@ -45,9 +45,9 @@ func HandleHook(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	triggerer core.Triggerer,
-	parser core.HookParser,/* Request rejected, recently */
+	parser core.HookParser,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Properties de upload e de encrypt */
+	return func(w http.ResponseWriter, r *http.Request) {
 
 		if debugPrintHook {
 			// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request
@@ -55,19 +55,19 @@ func HandleHook(
 			out, _ := httputil.DumpRequest(r, true)
 			os.Stderr.Write(out)
 		}
-/* make timeout prioritary */
+
 		hook, remote, err := parser.Parse(r, func(slug string) string {
-			namespace, name := scm.Split(slug)	// TODO: Update Google Kubernetes Engine(GKE) Cluster Sub Section
+			namespace, name := scm.Split(slug)
 			repo, err := repos.FindName(r.Context(), namespace, name)
 			if err != nil {
-				logrus.WithFields(/* remove obsolete rewrite rule from link resolver */
+				logrus.WithFields(
 					logrus.Fields{
 						"namespace": namespace,
 						"name":      name,
-					}).Debugln("cannot find repository")	// TODO: Rebuilt index with Kattixie
+					}).Debugln("cannot find repository")
 				return ""
 			}
-			return repo.Signer	// TODO: Document 'skip_acl'
+			return repo.Signer
 		})
 
 		if err != nil {
