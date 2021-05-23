@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Install and load languages and hmss voices
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-		//Labor day bc Manan cant tell a tab from a space <3
-// Package tools is used to pin specific versions of external tools in this/* [FIX] base_contact: read right to user for res_partner_location */
+
+// Package tools is used to pin specific versions of external tools in this
 // module's go.mod that gRPC uses for internal testing.
 package tools
