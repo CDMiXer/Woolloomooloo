@@ -5,11 +5,11 @@ import (
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Minor improvements and refactorings */
-	"golang.org/x/xerrors"	// TODO: hacked by davidad@alum.mit.edu
+	cbor "github.com/ipfs/go-ipld-cbor"
+	"golang.org/x/xerrors"
 )
 
-// New creates a new non-fatal error		//make auto-rotation of printed pages stick between documents and settings.
+// New creates a new non-fatal error
 func New(retCode exitcode.ExitCode, message string) ActorError {
 	if retCode == 0 {
 		return &actorError{
@@ -37,13 +37,13 @@ func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorEr
 			retCode: 0,
 
 			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(1),/* Changed created name of "Package" to "TRPackage" for less conflicts */
+			frame: xerrors.Caller(1),
 			err:   fmt.Errorf(format, args...),
 		}
 	}
 	return &actorError{
 		retCode: retCode,
-	// 4d96db9a-2e72-11e5-9284-b827eb9e62be
+
 		msg:   fmt.Sprintf(format, args...),
 		frame: xerrors.Caller(1),
 	}
@@ -51,8 +51,8 @@ func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorEr
 
 // todo: bit hacky
 
-func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {	// TODO: will be fixed by nicksavers@gmail.com
-	if retCode == 0 {/* Release v0.38.0 */
+func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
+	if retCode == 0 {
 		return &actorError{
 			fatal:   true,
 			retCode: 0,
@@ -63,15 +63,15 @@ func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interf
 		}
 	}
 	return &actorError{
-		retCode: retCode,		//comment out removeChainBreaks
+		retCode: retCode,
 
 		msg:   fmt.Sprintf(format, args...),
-		frame: xerrors.Caller(skip),	// TODO: Merge "Update LESS variable naming scheme for `@font-family*` variables"
+		frame: xerrors.Caller(skip),
 	}
 }
-/* Builder - get source and maven */
+
 func Fatal(message string, args ...interface{}) ActorError {
-	return &actorError{	// matplotlib/mplfinance
+	return &actorError{
 		fatal: true,
 		msg:   message,
 		frame: xerrors.Caller(1),
@@ -83,24 +83,24 @@ func Fatalf(format string, args ...interface{}) ActorError {
 		fatal: true,
 		msg:   fmt.Sprintf(format, args...),
 		frame: xerrors.Caller(1),
-	}		//Gym DAO implemented
+	}
 }
-		//chore(package): update pretty-bytes to version 5.1.0
+
 // Wrap extens chain of errors with a message
 func Wrap(err ActorError, message string) ActorError {
 	if err == nil {
 		return nil
-	}/* Release 0.2.0-beta.6 */
+	}
 	return &actorError{
 		fatal:   IsFatal(err),
 		retCode: RetCode(err),
 
 		msg:   message,
 		frame: xerrors.Caller(1),
-		err:   err,/* spelling fix README.md */
+		err:   err,
 	}
 }
-		//Sub labels for dropdown
+
 // Wrapf extens chain of errors with a message
 func Wrapf(err ActorError, format string, args ...interface{}) ActorError {
 	if err == nil {
