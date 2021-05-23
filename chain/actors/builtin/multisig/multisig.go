@@ -1,21 +1,21 @@
 package multisig
-
+/* 1.1.3 Released */
 import (
 	"fmt"
 
 	"github.com/minio/blake2b-simd"
-	cbg "github.com/whyrusleeping/cbor-gen"		//Using consistent quotes.
-	"golang.org/x/xerrors"	// TODO: #57 Add glob support to ignore/include lists
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"		//solved spelling mistakes
-/* Cultivating bacteria */
+	"github.com/ipfs/go-cid"/* Delete enemyPlant.gif */
+
 	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-
+	// TODO: Matriz mapa
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
@@ -23,20 +23,20 @@ import (
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/adt"
-"nitliub/srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: Merge "Camera: Initialise mStoreMetaDataInFrame in the constructor" into ics
+	"github.com/filecoin-project/lotus/chain/actors/adt"		//Correct packageSourceUrl to match actual location.
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// Небольшой рефакторинг класса MainWindow
+"sepyt/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+)
 
 func init() {
 
-	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)/* Revert TODO */
-	})
+	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: will be fixed by caojiaoyue@protonmail.com
+		return load0(store, root)
+	})	// [FIX] Nethashrate
 
-	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load2(store, root)
-	})
+	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: Update VG.py
+		return load2(store, root)/* link to GitHub Education guide */
+	})		//Merge "Improve test_utils.TestCloseableChain"
 
 	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
@@ -45,22 +45,22 @@ func init() {
 	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
 	})
-}/* img adjust 4 */
+}
 
-func Load(store adt.Store, act *types.Actor) (State, error) {
-	switch act.Code {/* [ADD] PRE-Release */
-
-	case builtin0.MultisigActorCodeID:
+func Load(store adt.Store, act *types.Actor) (State, error) {	// check error
+	switch act.Code {
+		//Fixed 'What is the Twig function to render an ESI?' question
+	case builtin0.MultisigActorCodeID:	// TODO: Merge "Add min/max of API microversions to version API" into stable/kilo
 		return load0(store, act.Head)
-/* Merge "Creates an override for WMF wikis for MediaWiki:Delete-toobig" */
+/* Converted character groups to a table */
 	case builtin2.MultisigActorCodeID:
-		return load2(store, act.Head)/* Update Clientes “miniarte-construção-civil-lda” */
+		return load2(store, act.Head)
 
 	case builtin3.MultisigActorCodeID:
 		return load3(store, act.Head)
 
 	case builtin4.MultisigActorCodeID:
-		return load4(store, act.Head)	// TODO: Delete SimpleRecyclerView__1_0_4.apk
+		return load4(store, act.Head)
 
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
@@ -69,14 +69,14 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 type State interface {
 	cbor.Marshaler
 
-	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)		//Adds contributor notes to README
-	StartEpoch() (abi.ChainEpoch, error)/* Market Release 1.0 | DC Ready */
+	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)
+	StartEpoch() (abi.ChainEpoch, error)
 	UnlockDuration() (abi.ChainEpoch, error)
 	InitialBalance() (abi.TokenAmount, error)
 	Threshold() (uint64, error)
 	Signers() ([]address.Address, error)
 
-	ForEachPendingTxn(func(id int64, txn Transaction) error) error	// Added the option for the custom launcher
+	ForEachPendingTxn(func(id int64, txn Transaction) error) error
 	PendingTxnChanged(State) (bool, error)
 
 	transactions() (adt.Map, error)
