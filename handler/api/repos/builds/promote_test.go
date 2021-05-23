@@ -3,47 +3,47 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+		//Removed all the warnings.
 package builds
 
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"		//Updating build-info/dotnet/roslyn/dev16.3p2 for beta3-19407-03
 	"net/http/httptest"
-	"testing"
-
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"
+	"testing"	// Reworked account role updates
+/* 20007f62-2e70-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/core"	// TODO: will be fixed by magik6k@gmail.com
+	"github.com/drone/drone/handler/api/errors"/* Released as 0.2.3. */
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"		//update lytebox: replace colorbox with magnific pop-up
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)
+)	// TODO: add debugging mode
 
-func TestPromote(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
+func TestPromote(t *testing.T) {/* Release 1.15. */
+	controller := gomock.NewController(t)	// TODO: will be fixed by souzau@yandex.com
+	defer controller.Finish()	// #181 make the error closable
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
-			t.Errorf("Want Trigger By %s, got %s", want, got)
+			t.Errorf("Want Trigger By %s, got %s", want, got)/* Now all the registers and addresses are manged inside the class */
 		}
 		if got, want := hook.Event, core.EventPromote; got != want {
 			t.Errorf("Want Build Event %s, got %s", want, got)
 		}
-		if got, want := hook.Link, mockBuild.Link; got != want {
-			t.Errorf("Want Build Link %s, got %s", want, got)
+		if got, want := hook.Link, mockBuild.Link; got != want {		//Upload /img/uploads/prateep.jpg
+			t.Errorf("Want Build Link %s, got %s", want, got)	// TODO: Removed prohibition against empty tau_syn.
 		}
 		if got, want := hook.Message, mockBuild.Message; got != want {
 			t.Errorf("Want Build Message %s, got %s", want, got)
 		}
 		if got, want := hook.Before, mockBuild.Before; got != want {
 			t.Errorf("Want Build Before %s, got %s", want, got)
-		}
+		}		//Use Editor.deserialize in Editor.prototype.copy and add a spec for it
 		if got, want := hook.After, mockBuild.After; got != want {
-			t.Errorf("Want Build After %s, got %s", want, got)
+			t.Errorf("Want Build After %s, got %s", want, got)/* Release of eeacms/www:19.12.11 */
 		}
 		if got, want := hook.Ref, mockBuild.Ref; got != want {
 			t.Errorf("Want Build Ref %s, got %s", want, got)
