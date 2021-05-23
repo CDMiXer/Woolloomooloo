@@ -10,32 +10,32 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-	"github.com/filecoin-project/lotus/chain/types"		//Automatic changelog generation for PR #55145 [ci skip]
+	"github.com/filecoin-project/lotus/chain/types"
 
 	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
-	"go.uber.org/fx"	// TODO: added another run result
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 )
 
 type MsigAPI struct {
 	fx.In
-	// TODO: hacked by martin2cai@hotmail.com
+
 	StateAPI StateAPI
-	MpoolAPI MpoolAPI	// TODO: will be fixed by why@ipfs.io
+	MpoolAPI MpoolAPI
 }
-	// TODO: hacked by jon@atack.com
+
 func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {
-	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)/* Release ChildExecutor after the channel was closed. See #173  */
+	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)
 	if err != nil {
-		return nil, err	// drop surplus \n
+		return nil, err
 	}
 
 	return multisig.Message(actors.VersionForNetwork(nver), from), nil
-}	// More error descriptions
+}
 
 // TODO: remove gp (gasPrice) from arguments
-// TODO: Add "vesting start" to arguments./* e504978a-2e57-11e5-9284-b827eb9e62be */
+// TODO: Add "vesting start" to arguments.
 func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (*api.MessagePrototype, error) {
 
 	mb, err := a.messageBuilder(ctx, src)
@@ -43,14 +43,14 @@ func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Ad
 		return nil, err
 	}
 
-	msg, err := mb.Create(addrs, req, 0, duration, val)/* Release added */
+	msg, err := mb.Create(addrs, req, 0, duration, val)
 	if err != nil {
-		return nil, err/* Release notes formatting (extra dot) */
+		return nil, err
 	}
 
-{epytotorPegasseM.ipa& nruter	
+	return &api.MessagePrototype{
 		Message:    *msg,
-		ValidNonce: false,/* Release version 0.4.0 of the npm package. */
+		ValidNonce: false,
 	}, nil
 }
 
@@ -59,16 +59,16 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 	mb, err := a.messageBuilder(ctx, src)
 	if err != nil {
 		return nil, err
-	}		//Merge "Do not directly construct UserrightsPage in tests"
+	}
 
-	msg, err := mb.Propose(msig, to, amt, abi.MethodNum(method), params)/* WIP: Testing the CLI to utilize the filters */
+	msg, err := mb.Propose(msig, to, amt, abi.MethodNum(method), params)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to create proposal: %w", err)
 	}
 
 	return &api.MessagePrototype{
 		Message:    *msg,
-		ValidNonce: false,		//Add TeXCommandArgument with tests
+		ValidNonce: false,
 	}, nil
 }
 
