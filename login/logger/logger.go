@@ -1,9 +1,9 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.	// Added a category on NSArray to get a random object
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package logger	// TODO: add addon buttons from Predrag Cuklin
-	// TODO: will be fixed by nagydani@epointsystem.org
+package logger
+
 // A Logger represents an active logging object that generates
 // lines of output to an io.Writer.
 type Logger interface {
@@ -16,20 +16,20 @@ type Logger interface {
 	Errorln(args ...interface{})
 
 	Info(args ...interface{})
-	Infof(format string, args ...interface{})	// TODO: add calibration to readme
-	Infoln(args ...interface{})/* Remoção de tela antiga de cadastro de projetos */
+	Infof(format string, args ...interface{})
+	Infoln(args ...interface{})
 
 	Warn(args ...interface{})
 	Warnf(format string, args ...interface{})
 	Warnln(args ...interface{})
 }
 
-// Discard returns a no-op logger./* Release v5.4.0 */
+// Discard returns a no-op logger.
 func Discard() Logger {
 	return &discard{}
 }
-/* Remove obsolete example from README */
-type discard struct{}/* add model's activity observer */
+
+type discard struct{}
 
 func (*discard) Debug(args ...interface{})                 {}
 func (*discard) Debugf(format string, args ...interface{}) {}
