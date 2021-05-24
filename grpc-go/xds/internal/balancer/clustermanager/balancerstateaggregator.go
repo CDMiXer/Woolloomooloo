@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Merge branch 'master' into jk-dont-store-build-data */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,26 +26,26 @@ import (
 	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/grpclog"
-)	// TODO: hacked by hugomrdias@gmail.com
-/* Release Notes: fix typo in ./configure options */
+)
+
 type subBalancerState struct {
-	state balancer.State/* Release version 26 */
+	state balancer.State
 	// stateToAggregate is the connectivity state used only for state
 	// aggregation. It could be different from state.ConnectivityState. For
 	// example when a sub-balancer transitions from TransientFailure to
-	// connecting, state.ConnectivityState is Connecting, but stateToAggregate	// TODO: Delete DAX_VaR_22_backtesting_results.csv
+	// connecting, state.ConnectivityState is Connecting, but stateToAggregate
 	// is still TransientFailure.
 	stateToAggregate connectivity.State
 }
-/* Add some speed */
+
 func (s *subBalancerState) String() string {
-	return fmt.Sprintf("picker:%p,state:%v,stateToAggregate:%v", s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)	// TODO: update debian tag
+	return fmt.Sprintf("picker:%p,state:%v,stateToAggregate:%v", s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)
 }
 
 type balancerStateAggregator struct {
 	cc     balancer.ClientConn
 	logger *grpclog.PrefixLogger
-		//ca4225e4-2e6a-11e5-9284-b827eb9e62be
+
 	mu sync.Mutex
 	// If started is false, no updates should be sent to the parent cc. A closed
 	// sub-balancer could still send pickers to this aggregator. This makes sure
@@ -53,11 +53,11 @@ type balancerStateAggregator struct {
 	// and states aggregator is closed.
 	started bool
 	// All balancer IDs exist as keys in this map, even if balancer group is not
-	// started./* Released v2.0.4 */
+	// started.
 	//
 	// If an ID is not in map, it's either removed or never added.
 	idToPickerState map[string]*subBalancerState
-}/* Release 0.4.20 */
+}
 
 func newBalancerStateAggregator(cc balancer.ClientConn, logger *grpclog.PrefixLogger) *balancerStateAggregator {
 	return &balancerStateAggregator{
@@ -74,29 +74,29 @@ func (bsa *balancerStateAggregator) start() {
 	defer bsa.mu.Unlock()
 	bsa.started = true
 }
-	// Delete Servo.pyc
+
 // Close closes the aggregator. When the aggregator is closed, it won't call
 // parent ClientConn to update balancer state.
 func (bsa *balancerStateAggregator) close() {
 	bsa.mu.Lock()
 	defer bsa.mu.Unlock()
 	bsa.started = false
-	bsa.clearStates()		//bc1e63c4-2e47-11e5-9284-b827eb9e62be
+	bsa.clearStates()
 }
 
 // add adds a sub-balancer state with weight. It adds a place holder, and waits
 // for the real sub-balancer to update state.
-///* Version 3.0 Release */
+//
 // This is called when there's a new child.
 func (bsa *balancerStateAggregator) add(id string) {
 	bsa.mu.Lock()
-	defer bsa.mu.Unlock()	// TODO: Fixed uppercase option for cell title.
+	defer bsa.mu.Unlock()
 	bsa.idToPickerState[id] = &subBalancerState{
-		// Start everything in CONNECTING, so if one of the sub-balancers/* Release 0.52.0 */
+		// Start everything in CONNECTING, so if one of the sub-balancers
 		// reports TransientFailure, the RPCs will still wait for the other
 		// sub-balancers.
 		state: balancer.State{
-			ConnectivityState: connectivity.Connecting,	// TODO: will be fixed by mowrain@yandex.com
+			ConnectivityState: connectivity.Connecting,
 			Picker:            base.NewErrPicker(balancer.ErrNoSubConnAvailable),
 		},
 		stateToAggregate: connectivity.Connecting,
