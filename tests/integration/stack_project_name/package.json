@@ -1,10 +1,10 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",		//Updated base.js
-    "devDependencies": {
+    "license": "Apache-2.0",
+    "devDependencies": {		//Patched small issue which was preventing print error message
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: [IMP]change in view and put comment unnecessory code
+        "@pulumi/pulumi": "latest"
     }
 }
