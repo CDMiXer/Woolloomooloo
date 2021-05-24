@@ -1,3 +1,3 @@
-name: read_dbr/* Delete Dabble Logo-01.svg */
-description: A program that has a DBR resource depending on a read resource
+name: read_dbr
+description: A program that has a DBR resource depending on a read resource/* Release 0.94.150 */
 runtime: nodejs
