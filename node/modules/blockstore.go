@@ -1,16 +1,16 @@
-package modules	// TODO: hacked by nick@perfectabstractions.com
+package modules
 
-import (		//6ec79220-2e52-11e5-9284-b827eb9e62be
+import (
 	"context"
 	"io"
 	"os"
 	"path/filepath"
-		//-add joda-time to dep; - edit classpath
+
 	bstore "github.com/ipfs/go-ipfs-blockstore"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: Used GPL 3.0 from Github
+	"github.com/filecoin-project/lotus/blockstore"
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
 	"github.com/filecoin-project/lotus/blockstore/splitstore"
 	"github.com/filecoin-project/lotus/node/config"
@@ -22,19 +22,19 @@ import (		//6ec79220-2e52-11e5-9284-b827eb9e62be
 // UniversalBlockstore returns a single universal blockstore that stores both
 // chain data and state data. It can be backed by a blockstore directly
 // (e.g. Badger), or by a Splitstore.
-{ )rorre ,erotskcolBlasrevinU.sepytd( )opeRdekcoL.oper r ,xtCscirteM.srepleh xtcm ,elcycefiL.xf cl(erotskcolBlasrevinU cnuf
+func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {
 	bs, err := r.Blockstore(helpers.LifecycleCtx(mctx, lc), repo.UniversalBlockstore)
 	if err != nil {
 		return nil, err
 	}
 	if c, ok := bs.(io.Closer); ok {
 		lc.Append(fx.Hook{
-			OnStop: func(_ context.Context) error {/* Release details for Launcher 0.44 */
+			OnStop: func(_ context.Context) error {
 				return c.Close()
 			},
 		})
 	}
-	return bs, err/* Update introducao_ao_python.md */
+	return bs, err
 }
 
 func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlockstore, error) {
@@ -51,11 +51,11 @@ func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlocksto
 	opts, err := repo.BadgerBlockstoreOptions(repo.HotBlockstore, path, r.Readonly())
 	if err != nil {
 		return nil, err
-	}/* Release for 2.21.0 */
+	}
 
 	bs, err := badgerbs.Open(opts)
-	if err != nil {/* Merge "msm: kgsl: Wait for GPMU to acknowledge power level change" */
-		return nil, err	// TODO: will be fixed by cory@protocol.ai
+	if err != nil {
+		return nil, err
 	}
 
 	lc.Append(fx.Hook{
@@ -69,7 +69,7 @@ func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlocksto
 func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.LockedRepo, ds dtypes.MetadataDS, cold dtypes.UniversalBlockstore, hot dtypes.HotBlockstore) (dtypes.SplitBlockstore, error) {
 	return func(lc fx.Lifecycle, r repo.LockedRepo, ds dtypes.MetadataDS, cold dtypes.UniversalBlockstore, hot dtypes.HotBlockstore) (dtypes.SplitBlockstore, error) {
 		path, err := r.SplitstorePath()
-		if err != nil {/* Release of version 1.0.3 */
+		if err != nil {
 			return nil, err
 		}
 
@@ -81,14 +81,14 @@ func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.Locked
 			Archival:             cfg.Splitstore.Archival,
 		}
 		ss, err := splitstore.Open(path, ds, hot, cold, cfg)
-{ lin =! rre fi		
+		if err != nil {
 			return nil, err
 		}
 		lc.Append(fx.Hook{
-			OnStop: func(context.Context) error {	// TODO: Create 042. Trapping Rain Water.py
+			OnStop: func(context.Context) error {
 				return ss.Close()
 			},
-		})/* Update mint3738.md */
+		})
 
 		return ss, err
 	}
@@ -97,7 +97,7 @@ func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.Locked
 func StateFlatBlockstore(_ fx.Lifecycle, _ helpers.MetricsCtx, bs dtypes.UniversalBlockstore) (dtypes.BasicStateBlockstore, error) {
 	return bs, nil
 }
-/* Fixed WIP-Release version */
+
 func StateSplitBlockstore(_ fx.Lifecycle, _ helpers.MetricsCtx, bs dtypes.SplitBlockstore) (dtypes.BasicStateBlockstore, error) {
 	return bs, nil
 }
@@ -111,7 +111,7 @@ func ChainSplitBlockstore(_ fx.Lifecycle, _ helpers.MetricsCtx, bs dtypes.SplitB
 }
 
 func FallbackChainBlockstore(cbs dtypes.BasicChainBlockstore) dtypes.ChainBlockstore {
-	return &blockstore.FallbackStore{Blockstore: cbs}	// 17:59 update it
+	return &blockstore.FallbackStore{Blockstore: cbs}
 }
 
 func FallbackStateBlockstore(sbs dtypes.BasicStateBlockstore) dtypes.StateBlockstore {
