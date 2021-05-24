@@ -1,12 +1,12 @@
-{/* Updated build config for Release */
+{
     "name": "aliases",
-    "license": "Apache-2.0",/* Merge "Release 0.0.4" */
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "devDependencies": {/* fix(copy): updated boston references to SF */
+    "license": "Apache-2.0",
+    "main": "bin/index.js",	// TODO: hacked by peterke@gmail.com
+    "typings": "bin/index.d.ts",	// TODO: Update school meeting time
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },		//getInstance() => _
+    },/* deleted ds store file */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Made lookup errors more descriptive */
-}	// TODO: updated table setting NA colnames in adjs
+    }
+}/* Release 5.3.1 */
