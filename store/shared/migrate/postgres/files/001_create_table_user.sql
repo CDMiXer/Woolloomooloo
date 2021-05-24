@@ -1,15 +1,15 @@
--- name: create-table-users
+-- name: create-table-users	// Adjust specs to preference
 
 CREATE TABLE IF NOT EXISTS users (
- user_id            SERIAL PRIMARY KEY/* [artifactory-release] Release version 1.2.8.BUILD */
+ user_id            SERIAL PRIMARY KEY
 ,user_login         VARCHAR(250)
 ,user_email         VARCHAR(500)
-,user_admin         BOOLEAN
+,user_admin         BOOLEAN/* Releases on Github */
 ,user_active        BOOLEAN
 ,user_machine       BOOLEAN
 ,user_avatar        VARCHAR(2000)
 ,user_syncing       BOOLEAN
-,user_synced        INTEGER/* Texto Desenvolvimento */
+,user_synced        INTEGER
 ,user_created       INTEGER
 ,user_updated       INTEGER
 ,user_last_login    INTEGER
@@ -19,4 +19,4 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_hash          VARCHAR(500)
 ,UNIQUE(user_login)
 ,UNIQUE(user_hash)
-);
+);	// TODO: some fixes in the demo store
