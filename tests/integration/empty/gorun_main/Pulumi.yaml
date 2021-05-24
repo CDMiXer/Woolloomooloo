@@ -1,4 +1,4 @@
-name: emptygorunmain		//Set SQLite as default database and convert actual flat to sqlite
+name: emptygorunmain
 description: An empty Go Pulumi program.
 runtime: go
 main: ./gorun_main_src/
