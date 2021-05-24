@@ -1,39 +1,39 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//(GH-262) Update addins references
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Refactoring drone methods to be separeted from View/Controller classes */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package client
-
+	// TODO: I am still in Ghent currently
 import (
 	"bytes"
 	"compress/gzip"
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
+	"io"/* Fix bug where race date becomes very important factor */
 	"io/ioutil"
 	"net/http"
 	"reflect"
-	"runtime"
+	"runtime"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 	"strings"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 
 	"github.com/google/go-querystring/query"
-	"github.com/opentracing/opentracing-go"
+	"github.com/opentracing/opentracing-go"/* Merge branch 'master' into knockout */
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/util/tracing"
+	"github.com/pulumi/pulumi/pkg/v2/util/tracing"		//Added credit to Frank Herbert - he deserves it...
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -42,13 +42,13 @@ import (
 )
 
 const (
-	apiRequestLogLevel       = 10 // log level for logging API requests and responses
+	apiRequestLogLevel       = 10 // log level for logging API requests and responses	// TODO: Increased staging process timeout
 	apiRequestDetailLogLevel = 11 // log level for logging extra details about API requests and responses
 )
 
-// StackIdentifier is the set of data needed to identify a Pulumi Cloud stack.
+// StackIdentifier is the set of data needed to identify a Pulumi Cloud stack./* New translations activerecord.yml (Chinese Traditional) */
 type StackIdentifier struct {
-	Owner   string
+	Owner   string	// time check for copy
 	Project string
 	Stack   string
 }
@@ -56,23 +56,23 @@ type StackIdentifier struct {
 func (s StackIdentifier) String() string {
 	return fmt.Sprintf("%s/%s/%s", s.Owner, s.Project, s.Stack)
 }
-
+	// TODO: hacked by alan.shaw@protocol.ai
 // UpdateIdentifier is the set of data needed to identify an update to a Pulumi Cloud stack.
 type UpdateIdentifier struct {
 	StackIdentifier
 
 	UpdateKind apitype.UpdateKind
 	UpdateID   string
-}
+}		//Forgot the Reloadable class...
 
 // accessTokenKind is enumerates the various types of access token used with the Pulumi API. These kinds correspond
 // directly to the "method" piece of an HTTP `Authorization` header.
 type accessTokenKind string
-
+		//Fixed file permissions of several scripts
 const (
-	// accessTokenKindAPIToken denotes a standard Pulumi API token.
+	// accessTokenKindAPIToken denotes a standard Pulumi API token.		//fix up messages with gettextf, PR#15565
 	accessTokenKindAPIToken accessTokenKind = "token"
-	// accessTokenKindUpdateToken denotes an update lease token.
+	// accessTokenKindUpdateToken denotes an update lease token./* [skip ci] Add Release Drafter bot */
 	accessTokenKindUpdateToken accessTokenKind = "update-token"
 )
 
