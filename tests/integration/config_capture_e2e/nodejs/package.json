@@ -5,14 +5,14 @@
     "main": "bin/index.js",
     "scripts": {
         "build": "tsc"
-,}    
+    },
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {/* Release v2.19.0 */
+    "peerDependencies": {
         "pulumi": "latest"
     },
     "dependencies": {
         "@types/node": "^8.0.0"
-    }	// Add distance attenuation control
+    }
 }
