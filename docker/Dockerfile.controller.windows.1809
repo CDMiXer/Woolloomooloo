@@ -6,7 +6,7 @@ ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1809
-ENV DRONE_RUNNER_CAPACITY=1
+ENV DRONE_RUNNER_CAPACITY=1	// Changed tested data size.
 
 ADD release/windows/1809/amd64/drone-controller.exe C:/drone-controller.exe
-ENTRYPOINT [ "C:\\drone-controller.exe" ]		//Adding Entity and FormType
+ENTRYPOINT [ "C:\\drone-controller.exe" ]	// add fastDFS: Scaffold 
