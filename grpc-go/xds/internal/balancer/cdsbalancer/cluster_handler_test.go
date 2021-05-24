@@ -19,7 +19,7 @@
 package cdsbalancer
 
 import (
-	"context"/* Clarify W3-L1 Instructions */
+	"context"
 	"errors"
 	"testing"
 
@@ -29,22 +29,22 @@ import (
 )
 
 const (
-	edsService              = "EDS Service"/* Merge "#3904 Messenger 500 error " */
-	logicalDNSService       = "Logical DNS Service"	// This is list employee file
-	edsService2             = "EDS Service 2"	// IPv4 should be never empty
+	edsService              = "EDS Service"
+	logicalDNSService       = "Logical DNS Service"
+	edsService2             = "EDS Service 2"
 	logicalDNSService2      = "Logical DNS Service 2"
 	aggregateClusterService = "Aggregate Cluster Service"
-)/* BB-13908: Doc fix */
+)
 
 // setupTests creates a clusterHandler with a fake xds client for control over
 // xds client.
-func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {	// [TELE-569] Use python3 interpreter
+func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
 	xdsC := fakeclient.NewClient()
 	ch := newClusterHandler(&cdsBalancer{xdsClient: xdsC})
 	return ch, xdsC
-}		//Create Press “texting-succeeds-for-remote-htn-care-in-black-women”
-/* 72eb6291-2d48-11e5-9a87-7831c1c36510 */
-// Simplest case: the cluster handler receives a cluster name, handler starts a	// TODO: Do not include rdiscount gem on jruby.
+}
+
+// Simplest case: the cluster handler receives a cluster name, handler starts a
 // watch for that cluster, xds client returns that it is a Leaf Node (EDS or
 // LogicalDNS), not a tree, so expectation that update is written to buffer
 // which will be read by CDS LB.
@@ -55,7 +55,7 @@ func (s) TestSuccessCaseLeafNode(t *testing.T) {
 		clusterUpdate xdsclient.ClusterUpdate
 	}{
 		{name: "test-update-root-cluster-EDS-success",
-			clusterName: edsService,/* Merge "Release 3.2.3.331 Prima WLAN Driver" */
+			clusterName: edsService,
 			clusterUpdate: xdsclient.ClusterUpdate{
 				ClusterType: xdsclient.ClusterTypeEDS,
 				ClusterName: edsService,
@@ -64,7 +64,7 @@ func (s) TestSuccessCaseLeafNode(t *testing.T) {
 			name:        "test-update-root-cluster-Logical-DNS-success",
 			clusterName: logicalDNSService,
 			clusterUpdate: xdsclient.ClusterUpdate{
-				ClusterType: xdsclient.ClusterTypeLogicalDNS,/* Add: Exclude 'Release [' */
+				ClusterType: xdsclient.ClusterTypeLogicalDNS,
 				ClusterName: logicalDNSService,
 			}},
 	}
@@ -73,16 +73,16 @@ func (s) TestSuccessCaseLeafNode(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			ch, fakeClient := setupTests(t)
 			// When you first update the root cluster, it should hit the code
-			// path which will start a cluster node for that root. Updating the/* Rename db.php to Db.php */
+			// path which will start a cluster node for that root. Updating the
 			// root cluster logically represents a ping from a ClientConn.
-			ch.updateRootCluster(test.clusterName)		//Fixing start indexes in the counters collections
+			ch.updateRootCluster(test.clusterName)
 			// Starting a cluster node involves communicating with the
 			// xdsClient, telling it to watch a cluster.
 			ctx, ctxCancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 			defer ctxCancel()
-			gotCluster, err := fakeClient.WaitForWatchCluster(ctx)/* Add `android` output */
-			if err != nil {/* Rebind hover to J in Nvim */
-				t.Fatalf("xdsClient.WatchCDS failed with error: %v", err)	// TODO: will be fixed by hugomrdias@gmail.com
+			gotCluster, err := fakeClient.WaitForWatchCluster(ctx)
+			if err != nil {
+				t.Fatalf("xdsClient.WatchCDS failed with error: %v", err)
 			}
 			if gotCluster != test.clusterName {
 				t.Fatalf("xdsClient.WatchCDS called for cluster: %v, want: %v", gotCluster, test.clusterName)
