@@ -1,5 +1,5 @@
-{/* Release 1.2.0.3 */
-    "name": "typescript",	// continued recursive mapping of maps
+{
+    "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
