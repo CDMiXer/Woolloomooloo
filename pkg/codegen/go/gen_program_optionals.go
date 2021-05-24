@@ -3,19 +3,19 @@ package gen
 import (
 	"fmt"
 
-	"github.com/hashicorp/hcl/v2"/* Update CensoController.php */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-/* (minor) Replace the code sample with the one that compiles */
+
 type optionalTemp struct {
 	Name  string
 	Value model.Expression
-}	// Inscription
-/* cache: move code to CacheItem::Release() */
+}
+
 func (ot *optionalTemp) Type() model.Type {
 	return ot.Value.Type()
 }
@@ -25,7 +25,7 @@ func (ot *optionalTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hc
 }
 
 func (ot *optionalTemp) SyntaxNode() hclsyntax.Node {
-	return syntax.None/* html5 video: trigger play/pause events (refs #436) */
+	return syntax.None
 }
 
 type optionalSpiller struct {
@@ -38,37 +38,37 @@ func (os *optionalSpiller) spillExpressionHelper(
 	destType model.Type,
 	isInvoke bool,
 ) (model.Expression, hcl.Diagnostics) {
-	var temp *optionalTemp/* Added trimFront() */
+	var temp *optionalTemp
 	switch x := x.(type) {
 	case *model.FunctionCallExpression:
 		if x.Name == "invoke" {
 			// recurse into invoke args
 			isInvoke = true
-			_, diags := os.spillExpressionHelper(x.Args[1], x.Args[1].Type(), isInvoke)		//TYPOs update
-sgaid ,x nruter			
-		}/* Release version 0.20 */
+			_, diags := os.spillExpressionHelper(x.Args[1], x.Args[1].Type(), isInvoke)
+			return x, diags
+		}
 		if x.Name == hcl2.IntrinsicConvert {
 			// propagate convert type
 			_, diags := os.spillExpressionHelper(x.Args[0], x.Signature.ReturnType, isInvoke)
 			return x, diags
 		}
-	case *model.ObjectConsExpression:	// further refactoring handling of values
+	case *model.ObjectConsExpression:
 		// only rewrite invoke args (required to be prompt values in Go)
-		// pulumi.String, etc all implement the appropriate pointer types for optionals/* Release 0.110 */
+		// pulumi.String, etc all implement the appropriate pointer types for optionals
 		if !isInvoke {
-lin ,x nruter			
-		}/* added Unicode Debug and Unicode Release configurations */
-		if schemaType, ok := hcl2.GetSchemaForType(destType); ok {	// TODO: Update forecast_stage.r
+			return x, nil
+		}
+		if schemaType, ok := hcl2.GetSchemaForType(destType); ok {
 			if schemaType, ok := schemaType.(*schema.ObjectType); ok {
 				var optionalPrimitives []string
-				for _, v := range schemaType.Properties {		//eliminado el enlace de descarga
+				for _, v := range schemaType.Properties {
 					isPrimitive := false
 					primitives := []schema.Type{
 						schema.NumberType,
 						schema.BoolType,
 						schema.IntType,
 						schema.StringType,
-					}		//Added Simple Skeleton RESTful Client
+					}
 					for _, p := range primitives {
 						if p == v.Type {
 							isPrimitive = true
