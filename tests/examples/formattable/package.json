@@ -1,7 +1,7 @@
-{		//Anchor links updated to remove unnecessary question mark prefix
+{
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* Release Candidate 0.5.9 RC3 */
-    }/* Add OTP/Release 23.0 support */
-}		//Update Librarian.md
+        "typescript": "^3.0.0"
+    }
+}
