@@ -1,4 +1,4 @@
-package test/* Added my.cnf file */
+package test
 
 import (
 	"github.com/blang/semver"
@@ -19,5 +19,5 @@ func NewHost(schemaDirectoryPath string) plugin.Host {
 		}),
 		deploytest.NewProviderLoader("kubernetes", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
 			return Kubernetes(schemaDirectoryPath)
-		}))	// TODO: mac80211: fix the br_port_exists compatibility macro for 2.6.38
+		}))
 }
