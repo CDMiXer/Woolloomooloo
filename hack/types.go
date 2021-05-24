@@ -1,4 +1,4 @@
-package main/* Add return type for ArangoDatabase.deleteAqlFunction() */
+package main
 
 type obj = map[string]interface{}
 type array = []interface{}
