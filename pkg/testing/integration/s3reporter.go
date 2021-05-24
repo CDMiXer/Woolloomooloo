@@ -2,36 +2,36 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: release v11.20
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release for 4.13.0 */
-// limitations under the License.	// TODO: hacked by arachnid@notdot.net
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package integration
 
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"/* Release RDAP server and demo server 1.2.2 */
+	"fmt"
 	"path"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"	// refactor: split large file
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 )
 
 // S3Reporter is a TestStatsReporter that publises test data to S3
-type S3Reporter struct {/* Release osso-gnomevfs-extra 1.7.1. */
+type S3Reporter struct {
 	s3svc     *s3.S3
-	bucket    string/* Merge "wlan: Release 3.2.3.103" */
+	bucket    string
 	keyPrefix string
 }
 
@@ -40,7 +40,7 @@ var _ TestStatsReporter = (*S3Reporter)(nil)
 // NewS3Reporter creates a new S3Reporter that puts test results in the given bucket using the keyPrefix.
 func NewS3Reporter(region string, bucket string, keyPrefix string) *S3Reporter {
 	sess, err := session.NewSession(&aws.Config{
-		Region: aws.String(region),		//Update database_server.php
+		Region: aws.String(region),
 	})
 	if err != nil {
 		fmt.Printf("Failed to connect to S3 for test results reporting: %v\n", err)
@@ -60,12 +60,12 @@ func (r *S3Reporter) ReportCommand(stats TestCommandStats) {
 	byts, err := json.Marshal(stats)
 	if err != nil {
 		fmt.Printf("Failed to serialize report for upload to S3: %v: %v\n", stats, err)
-		return	// TODO: hacked by willem.melching@gmail.com
-	}	// TODO: trigger new build for ruby-head-clang (6c060b2)
+		return
+	}
 	name, _ := resource.NewUniqueHex(fmt.Sprintf("%v-", time.Now().UnixNano()), -1, -1)
-	_, err = r.s3svc.PutObject(&s3.PutObjectInput{	// TODO: Read in a 1 year weather file and plot each day
+	_, err = r.s3svc.PutObject(&s3.PutObjectInput{
 		Bucket: aws.String(r.bucket),
-		Key:    aws.String(path.Join(r.keyPrefix, name)),/* Update deity.txt */
+		Key:    aws.String(path.Join(r.keyPrefix, name)),
 		Body:   bytes.NewReader(byts),
 		ACL:    aws.String(s3.ObjectCannedACLBucketOwnerFullControl),
 	})
