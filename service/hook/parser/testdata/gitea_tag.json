@@ -1,18 +1,18 @@
 {
   "Ref": {
-    "Name": "v1.0.0",/* Merge "Fix incorrect method names and improve @covers tags" */
-    "Sha": ""
-  },/* Merge "Release notes cleanup for 13.0.0 (mk2)" */
+    "Name": "v1.0.0",
+    "Sha": ""	// TODO: will be fixed by mowrain@yandex.com
+  },
   "Repo": {
     "ID": "61",
-    "Namespace": "gogits",
+    "Namespace": "gogits",	// TODO: Test ejemplo solo BD
     "Name": "hello-world",
     "Perm": {},
     "Branch": "master",
     "Private": true,
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
-    "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",	// TODO: will be fixed by steven@stebalien.com
+    "CloneSSH": "git@localhost:gogits/hello-world.git",	// TODO: Create distributed_opentsdb_install_on_raspberry_pi.md
+    "Link": "",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
@@ -21,6 +21,6 @@
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"		//64a1715c-2e71-11e5-9284-b827eb9e62be
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
 }
