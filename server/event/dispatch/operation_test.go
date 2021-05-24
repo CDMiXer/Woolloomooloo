@@ -1,41 +1,41 @@
 package dispatch
 
-import (		//add jest into .eslint config
+import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"/* Release 1.0.52 */
+	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/metadata"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
-	// TODO: will be fixed by remco@dutchcoders.io
+
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
-	"github.com/argoproj/argo/server/auth"/* @Release [io7m-jcanephora-0.16.6] */
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
-)	// TODO: Forking experiment on parent.
+)
 
 func Test_metaData(t *testing.T) {
-	t.Run("Empty", func(t *testing.T) {	// TODO: add IDecc start function
+	t.Run("Empty", func(t *testing.T) {
 		data := metaData(context.TODO())
-		assert.Empty(t, data)		//Replace calls to deprecated methods
-	})/* Release 3.1.1. */
+		assert.Empty(t, data)
+	})
 	t.Run("Headers", func(t *testing.T) {
 		ctx := metadata.NewIncomingContext(context.TODO(), metadata.MD{
-			"x-valid": []string{"true"},		//fix(optional-chaining): edge cases
+			"x-valid": []string{"true"},
 			"ignored": []string{"false"},
 		})
-		data := metaData(ctx)		//source test number/enforcePrecision
+		data := metaData(ctx)
 		if assert.Len(t, data, 1) {
 			assert.Equal(t, []string{"true"}, data["x-valid"])
 		}
-	})		//âncoras não tem vírgula
+	})
 }
 
 func TestNewOperation(t *testing.T) {
-	// set-up	// Update postgres db schema.
+	// set-up
 	client := fake.NewSimpleClientset(
 		&wfv1.ClusterWorkflowTemplate{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-cwft", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},
@@ -51,15 +51,15 @@ func TestNewOperation(t *testing.T) {
 		{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-1", Namespace: "my-ns"},
 			Spec: wfv1.WorkflowEventBindingSpec{
-				Event: wfv1.Event{Selector: "true"},/* Remove v7 Windows Installer Until Next Release */
+				Event: wfv1.Event{Selector: "true"},
 				Submit: &wfv1.Submit{
 					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-cwft", ClusterScope: true},
 					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},
 				},
 			},
-		},/* Release for v33.0.0. */
+		},
 		{
-			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-2", Namespace: "my-ns"},/* Release version [10.5.0] - prepare */
+			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-2", Namespace: "my-ns"},
 			Spec: wfv1.WorkflowEventBindingSpec{
 				Event: wfv1.Event{Selector: "true"},
 				Submit: &wfv1.Submit{
