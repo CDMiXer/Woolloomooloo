@@ -1,10 +1,10 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""/* Use MmDeleteKernelStack and remove KeReleaseThread */
 
 [global]
-  plan = "lotus-soup"
-  case = "deals-e2e"
+  plan = "lotus-soup"/* Delete stopwords.txt */
+  case = "deals-e2e"/* Remove empty line at start */
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
@@ -14,18 +14,18 @@
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
-[global.build_config]
+/* Add typeids for FSMC A16 to A23 */
+[global.build_config]/* Fixed confg */
   enable_go_build_cache = true
-
-[global.run.test_params]
+/* Merge "Release 1.0.0.148A QCACLD WLAN Driver" */
+[global.run.test_params]/* Released under MIT License */
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "100000"
+  genesis_timestamp_offset = "100000"/* Update PLOS spelling */
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  enable_pubsub_tracer = "true"
+  enable_pubsub_tracer = "true"		//Delete walpic.png
 
 [[groups]]
  id = "pubsub-tracer"
@@ -43,21 +43,21 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* Release areca-7.1.3 */
 
 [[groups]]
   id = "miners"
-  [groups.instances]
-    count = 2
+  [groups.instances]/* 0.16.0: Milestone Release (close #23) */
+    count = 2	// TODO: hacked by martin2cai@hotmail.com
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//[cli skip] update readme
       role = "miner"
 
-[[groups]]
-  id = "clients"
+[[groups]]		//‘unescapeXMLEntities:isHTML:’ method improved, podspec v.0.14
+  id = "clients"/* Updated Release badge */
   [groups.instances]
-    count = 3
+    count = 3/* Spelling, better comments on speaker example */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
