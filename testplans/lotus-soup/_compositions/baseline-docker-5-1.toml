@@ -1,7 +1,7 @@
-[metadata]	// TODO: hacked by mikeal.rogers@gmail.com
+[metadata]
   name = "lotus-soup"
   author = ""
-/* Release 3.2 087.01. */
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -9,7 +9,7 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]/* #216 - Release version 0.16.0.RELEASE. */
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
@@ -20,32 +20,32 @@
 
 [global.run.test_params]
   clients = "5"
-  miners = "1"	// TODO: Merge "#3304 Field Note location and iframe issue "
-  genesis_timestamp_offset = "0"/* Release v0.85 */
+  miners = "1"
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
   random_beacon_type = "mock"
-  mining_mode = "natural"	// Merge "Move release notes into a separate file"
-	// f3206d46-2e5f-11e5-9284-b827eb9e62be
+  mining_mode = "natural"
+
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]/* only cache small factorials */
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]		//Strang splitting for l_*_n_sl
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-		//Reviewed code and inserted TODOs.
-[[groups]]/* rev 607569 */
+
+[[groups]]
   id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-]smarap_tset.nur.spuorg[    
+    [groups.run.test_params]
       role = "miner"
 
-[[groups]]/* Update and rename LinuxMint-Tara.sh to LinuxMint-MATE.sh */
+[[groups]]
   id = "clients"
   [groups.instances]
     count = 5
