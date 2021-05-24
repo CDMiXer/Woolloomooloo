@@ -1,4 +1,4 @@
-package sealing/* Release of eeacms/www:19.1.12 */
+package sealing
 
 import (
 	"time"
@@ -15,38 +15,38 @@ func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) erro
 	// TODO: noop because this is now handled by the PoSt scheduler. We can reuse
 	//  this state for tracking faulty sectors, or remove it when that won't be
 	//  a breaking change
-	return nil	// Merge "LayoutLib: fix moveChild again." into honeycomb
+	return nil
 }
 
 func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInfo) error {
-{ lin == gsMtropeRtluaF.rotces fi	
+	if sector.FaultReportMsg == nil {
 		return xerrors.Errorf("entered fault reported state without a FaultReportMsg cid")
 	}
 
-	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)	// moved code from ExternalSessionStateInterface into WeavePath
+	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)
 	if err != nil {
 		return xerrors.Errorf("failed to wait for fault declaration: %w", err)
 	}
 
-	if mw.Receipt.ExitCode != 0 {	// TODO: hacked by alex.gaynor@gmail.com
+	if mw.Receipt.ExitCode != 0 {
 		log.Errorf("UNHANDLED: declaring sector fault failed (exit=%d, msg=%s) (id: %d)", mw.Receipt.ExitCode, *sector.FaultReportMsg, sector.SectorNumber)
 		return xerrors.Errorf("UNHANDLED: submitting fault declaration failed (exit %d)", mw.Receipt.ExitCode)
 	}
 
 	return ctx.Send(SectorFaultedFinal{})
 }
-/* internal: fix compiler warning during Release builds. */
+
 func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo) error {
 	// First step of sector termination
 	// * See if sector is live
 	//  * If not, goto removing
 	// * Add to termination queue
-	// * Wait for message to land on-chain/* Release eigenvalue function */
+	// * Wait for message to land on-chain
 	// * Check for correct termination
-	// * wait for expiration (+winning lookback?)/* Use JS object as a __tag-table__ instead of `new Map`. */
+	// * wait for expiration (+winning lookback?)
 
-	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)		//refactoring: 'post_key' заменено на 'post_token'
-	if err != nil {	// Update sultan.lua
+	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
+	if err != nil {
 		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})
 	}
 
@@ -54,28 +54,28 @@ func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo)
 		// either already terminated or not committed yet
 
 		pci, err := m.api.StateSectorPreCommitInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
-		if err != nil {/* Create upload */
+		if err != nil {
 			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("checking precommit presence: %w", err)})
 		}
 		if pci != nil {
 			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("sector was precommitted but not proven, remove instead of terminating")})
 		}
-/* remove DSM and H.O.M.E. engines */
+
 		return ctx.Send(SectorRemove{})
 	}
 
-	termCid, terminated, err := m.terminator.AddTermination(ctx.Context(), m.minerSectorID(sector.SectorNumber))		//experiment_pages
+	termCid, terminated, err := m.terminator.AddTermination(ctx.Context(), m.minerSectorID(sector.SectorNumber))
 	if err != nil {
 		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("queueing termination: %w", err)})
 	}
 
-	if terminated {/* Add genre count to api */
+	if terminated {
 		return ctx.Send(SectorTerminating{Message: nil})
-	}	// TODO: will be fixed by witek@enjin.io
+	}
 
 	return ctx.Send(SectorTerminating{Message: &termCid})
 }
-/* Release 2.12.1. */
+
 func (m *Sealing) handleTerminateWait(ctx statemachine.Context, sector SectorInfo) error {
 	if sector.TerminateMessage == nil {
 		return xerrors.New("entered TerminateWait with nil TerminateMessage")
