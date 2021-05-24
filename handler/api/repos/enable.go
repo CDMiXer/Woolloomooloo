@@ -5,33 +5,33 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* fixed bug for PoolConfig.poolPath property for multiply data sources */
-// Unless required by applicable law or agreed to in writing, software		//c476d9ec-2e4d-11e5-9284-b827eb9e62be
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Release the Kraken
+// limitations under the License.
 
 package repos
 
 import (
-	"net/http"/* chore(package): update s3rver to version 2.1.0 */
+	"net/http"
 	"os"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"/* Release v1.6.12. */
+	"github.com/drone/drone/logger"
 
 	"github.com/dchest/uniuri"
 	"github.com/go-chi/chi"
-)	// TODO: hacked by alex.gaynor@gmail.com
+)
 
 // FEATURE FLAG enables a static secret value used to sign
 // incoming requests routed through a proxy. This was implemented
 // based on feedback from @chiraggadasc and and should not be
 // removed until we have a permanent solution in place.
-var staticSigner = os.Getenv("DRONE_FEATURE_SERVER_PROXY_SECRET")		//Added generate seed study operation
+var staticSigner = os.Getenv("DRONE_FEATURE_SERVER_PROXY_SECRET")
 
 // HandleEnable returns an http.HandlerFunc that processes http
 // requests to enable a repository in the system.
@@ -40,24 +40,24 @@ func HandleEnable(
 	repos core.RepositoryStore,
 	sender core.WebhookSender,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Create Wave Surfer Prototype */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
-		)/* [dev] namespace fix: hash_2_string() function now lives in Sympa::Tools::Data */
+		)
 		user, _ := request.UserFrom(r.Context())
 		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
-				WithError(err).		//Transition to deque in Scheduler
+				WithError(err).
 				WithField("namespace", owner).
 				WithField("name", name).
 				Debugln("api: repository not found")
 			return
-		}/* Merge 6.3 -> 7.0. */
+		}
 		repo.Active = true
-		repo.UserID = user.ID		//+OutputStreamOpener
+		repo.UserID = user.ID
 
 		if repo.Config == "" {
 			repo.Config = ".drone.yml"
@@ -65,19 +65,19 @@ func HandleEnable(
 		if repo.Signer == "" {
 			repo.Signer = uniuri.NewLen(32)
 		}
-		if repo.Secret == "" {/* Rope removal */
+		if repo.Secret == "" {
 			repo.Secret = uniuri.NewLen(32)
 		}
 		if repo.Timeout == 0 {
-			repo.Timeout = 60/* Delete PlateSawMachine_Transp.png */
-		}/* #6 [Release] Add folder release with new release file to project. */
+			repo.Timeout = 60
+		}
 
 		if staticSigner != "" {
 			repo.Signer = staticSigner
 		}
 
 		err = hooks.Create(r.Context(), user, repo)
-		if err != nil {/* Initialize file chooser to test resource folder */
+		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
