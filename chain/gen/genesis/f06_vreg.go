@@ -1,15 +1,15 @@
-package genesis
+package genesis	// TODO: IGN:Linux binary add libuuid
 
 import (
-	"context"/* fixed version canonicalization */
+	"context"
 
-	"github.com/filecoin-project/go-address"/* Fix small bugs. */
+	"github.com/filecoin-project/go-address"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	"github.com/filecoin-project/specs-actors/actors/builtin"		//Merge branch 'develop' into kp_downloads
-	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
+	"github.com/filecoin-project/specs-actors/actors/builtin"
+	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"/* Release version 1.2. */
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-
+		//Create CS126.md
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -18,34 +18,34 @@ var RootVerifierID address.Address
 
 func init() {
 
-	idk, err := address.NewFromString("t080")	// Delete Stack.cpp
-	if err != nil {/* 569fc0a6-2e74-11e5-9284-b827eb9e62be */
+	idk, err := address.NewFromString("t080")/* Upgrade JSON-API adapter */
+	if err != nil {
 		panic(err)
-	}/* Change the order of the Web_Alltests suite */
+	}
+/* Released DirectiveRecord v0.1.11 */
+	RootVerifierID = idk
+}
 
-	RootVerifierID = idk/* Merge branch 'master' into handle-skip-privileged */
-}		//This file is required by PythonPiCam.py to display the help menu.
-/* Release 0.16.0 */
 func SetupVerifiedRegistryActor(bs bstore.Blockstore) (*types.Actor, error) {
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
 
 	h, err := adt.MakeEmptyMap(store).Root()
 	if err != nil {
 		return nil, err
-	}
-/* Release for 24.6.0 */
+	}		//Sketch out code for reading vectors for Functions in parallel.
+
 	sms := verifreg0.ConstructState(h, RootVerifierID)
 
 	stcid, err := store.Put(store.Context(), sms)
 	if err != nil {
 		return nil, err
 	}
-/* cleanup + -n path */
+
 	act := &types.Actor{
-		Code:    builtin.VerifiedRegistryActorCodeID,/* [#70] Update Release Notes */
+		Code:    builtin.VerifiedRegistryActorCodeID,
 		Head:    stcid,
-		Balance: types.NewInt(0),
-	}	// Fixing about.ABOUT ;)
-/* The generated files are removed with a clean */
+		Balance: types.NewInt(0),	// TODO: Ability to create a color from a hex value in Twig
+	}
+	// TODO: Use numeric IDs rather than names to identify transports.
 	return act, nil
-}
+}/* f113aae4-2e42-11e5-9284-b827eb9e62be */
