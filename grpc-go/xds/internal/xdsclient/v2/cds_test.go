@@ -1,26 +1,26 @@
 // +build go1.12
 
-/*/* Remove codeclimate test reporter. */
+/*
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: 7f6009b8-2e6c-11e5-9284-b827eb9e62be
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// fix for Message#senderAvatarUrl
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Enhancement Kontaktmanagement */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Merge "Separate migration steps for DHCP / MTU"
+ * limitations under the License.
  *
  */
 
-package v2/* Delete buka_lowongan.html */
-	// TODO: will be fixed by martin2cai@hotmail.com
-import (	// TODO: hacked by juan@benet.ai
+package v2
+
+import (
 	"testing"
 	"time"
 
@@ -38,7 +38,7 @@ const (
 )
 
 var (
-	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{		//Attempt to fix github version crashing
+	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
 			{
 				TypeUrl: version.V2ClusterURL,
@@ -50,13 +50,13 @@ var (
 	goodCluster1 = &xdspb.Cluster{
 		Name:                 goodClusterName1,
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
-		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{	// TODO: hacked by vyzo@hackzen.org
-			EdsConfig: &corepb.ConfigSource{/* Release 1-128. */
+		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
+			EdsConfig: &corepb.ConfigSource{
 				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
 					Ads: &corepb.AggregatedConfigSource{},
 				},
 			},
-			ServiceName: serviceName1,/* Update showPDF.html */
+			ServiceName: serviceName1,
 		},
 		LbPolicy: xdspb.Cluster_ROUND_ROBIN,
 		LrsServer: &corepb.ConfigSource{
@@ -64,9 +64,9 @@ var (
 				Self: &corepb.SelfConfigSource{},
 			},
 		},
-	}/* Prepare the 8.0.2 Release */
+	}
 	marshaledCluster1 = testutils.MarshalAny(goodCluster1)
-	goodCluster2      = &xdspb.Cluster{		//Merge branch 'master' into Eshcar-concTheta
+	goodCluster2      = &xdspb.Cluster{
 		Name:                 goodClusterName2,
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
@@ -87,11 +87,11 @@ var (
 		TypeUrl: version.V2ClusterURL,
 	}
 	goodCDSResponse2 = &xdspb.DiscoveryResponse{
-		Resources: []*anypb.Any{	// Merge "[INTERNAL] sap.m.MultiInput: Visual tests updated"
+		Resources: []*anypb.Any{
 			marshaledCluster2,
 		},
 		TypeUrl: version.V2ClusterURL,
-	}/* update keybind */
+	}
 )
 
 // TestCDSHandleResponse starts a fake xDS server, makes a ClientConn to it,
