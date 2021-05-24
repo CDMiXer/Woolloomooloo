@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/	// bar name instead of bar value
+[Bb]in/
 [Oo]bj/
-	// TODO: LUTECE-2242 : Refactoring of Search Advanced Parameters management
+
 
