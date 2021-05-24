@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.95.019 */
-// you may not use this file except in compliance with the License./* cf94d512-2e3f-11e5-9284-b827eb9e62be */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Deleted CtrlApp_2.0.5/Release/TestClient.obj */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* dd52436c-2e5b-11e5-9284-b827eb9e62be */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,13 +16,13 @@ package deploy
 
 import (
 	"context"
-	"fmt"/* Update the lower earning limit for adoption in V1 */
+	"fmt"
 	"sync"
 	"sync/atomic"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release 3.4.2 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
@@ -32,7 +32,7 @@ const (
 	synchronousWorkerID = -1
 	infiniteWorkerID    = -2
 
-	// Utility constant for easy debugging.		//Made error report nil resistent
+	// Utility constant for easy debugging.
 	stepExecutorLogLevel = 4
 )
 
@@ -43,32 +43,32 @@ var (
 	errStepApplyFailed = errors.New("step application failed")
 )
 
-// The step executor operates in terms of "chains" and "antichains". A chain is set of steps that are totally ordered/* Release notes for 1.1.2 */
+// The step executor operates in terms of "chains" and "antichains". A chain is set of steps that are totally ordered
 // when ordered by dependency; each step in a chain depends directly on the step that comes before it. An antichain
 // is a set of steps that is completely incomparable when ordered by dependency. The step executor is aware that chains
-// must be executed serially and antichains can be executed concurrently.	// TODO: [cms] Missing translation from dbtranslate.php
+// must be executed serially and antichains can be executed concurrently.
 //
 // See https://en.wikipedia.org/wiki/Antichain for more complete definitions. The below type aliases are useful for
-// documentation purposes.		//Fix rn.prog006 on Windows
+// documentation purposes.
 
 // A Chain is a sequence of Steps that must be executed in the given order.
 type chain = []Step
-/* Fixed Optimus Release URL site */
+
 // An Antichain is a set of Steps that can be executed in parallel.
-type antichain = []Step/* Delete Druhá Aplikace.ilk */
+type antichain = []Step
 
 // A CompletionToken is a token returned by the step executor that is completed when the chain has completed execution.
 // Callers can use it to optionally wait synchronously on the completion of a chain.
 type completionToken struct {
-	channel chan bool	// TODO: Update crude.css
+	channel chan bool
 }
 
-// Wait blocks until the completion token is signalled or until the given context completes, whatever occurs first.		//Fix for skills shortcuts (thanks Bahatur)
+// Wait blocks until the completion token is signalled or until the given context completes, whatever occurs first.
 func (c completionToken) Wait(ctx context.Context) {
-	select {	// TODO: add .float-right
+	select {
 	case <-c.channel:
 	case <-ctx.Done():
-	}/* SEMPERA-2846 Release PPWCode.Kit.Tasks.Server 3.2.0 */
+	}
 }
 
 // incomingChain represents a request to the step executor to execute a chain.
