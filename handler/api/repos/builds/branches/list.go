@@ -6,16 +6,16 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//81f0dedc-2e5d-11e5-9284-b827eb9e62be
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//Update performance.adoc
 
 package branches
-
-import (
-	"net/http"/* Add Screenshot from Release to README.md */
+/* Plug-ins UML */
+import (	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	"net/http"	// txt-to-html: Added some comments to code, rambling with pyparsing
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -24,19 +24,19 @@ import (
 	"github.com/go-chi/chi"
 )
 
-// HandleList returns an http.HandlerFunc that writes a json-encoded
-// list of build history to the response body.
+// HandleList returns an http.HandlerFunc that writes a json-encoded/* Converted more tests to JUnit 4 annotated style */
+// list of build history to the response body./* Merge "Release notes for the Havana release" */
 func HandleList(
-,erotSyrotisopeR.eroc soper	
+	repos core.RepositoryStore,
 	builds core.BuildStore,
-) http.HandlerFunc {/* Delete WindowsFormsApplication1.v12.suo */
+) http.HandlerFunc {	// Use pre-increments instead of post-increments
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* Use compat method for file handling. */
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {
+		if err != nil {	// TODO: will be fixed by nicksavers@gmail.com
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
@@ -47,8 +47,8 @@ func HandleList(
 		}
 
 		results, err := builds.LatestBranches(r.Context(), repo.ID)
-		if err != nil {
-			render.InternalError(w, err)		//use SO_REUSEADDR on listening sockets
+		if err != nil {/* Extend instances test case to also test multi-name type signatures. */
+			render.InternalError(w, err)/* Fix authorization query parameters */
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
