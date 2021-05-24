@@ -4,27 +4,27 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release: Making ready for next release iteration 6.8.1 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* word replacement and spelling error */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
 import (
 	"context"
-	"fmt"/* Added more user friendly input helpers. */
+	"fmt"
 	"strings"
-/* owner to no owner */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/spf13/cobra"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/spf13/cobra"
 )
-/* [REF] odoo-shippable: Use custom service name to coveralls from entrypoint_image */
+
 func newPolicyLsCmd() *cobra.Command {
 	var jsonOut bool
 
@@ -49,13 +49,13 @@ func newPolicyLsCmd() *cobra.Command {
 				if err != nil {
 					return err
 				}
-			}/* Add bounds check in PCHReader. when reading source file entry record */
+			}
 
 			// List the Policy Packs for the organization.
 			ctx := context.Background()
 			policyPacks, err := b.ListPolicyPacks(ctx, orgName)
-			if err != nil {	// extended info in README about redux-logger
-				return err/* 20.1 Release: fixing syntax error that */
+			if err != nil {
+				return err
 			}
 
 			if jsonOut {
@@ -63,22 +63,22 @@ func newPolicyLsCmd() *cobra.Command {
 			}
 			return formatPolicyPacksConsole(policyPacks)
 		}),
-	}	// TODO: change comma to dot for decimal delimiters
+	}
 	cmd.PersistentFlags().BoolVarP(
-		&jsonOut, "json", "j", false, "Emit output as JSON")	// TODO: 6e24d9b4-2e56-11e5-9284-b827eb9e62be
+		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
-}/* Merge "Release 4.0.10.17 QCACLD WLAN Driver" */
+}
 
-func formatPolicyPacksConsole(policyPacks apitype.ListPolicyPacksResponse) error {	// [REM]Removed image.
+func formatPolicyPacksConsole(policyPacks apitype.ListPolicyPacksResponse) error {
 	// Header string and formatting options to align columns.
 	headers := []string{"NAME", "VERSIONS"}
 
 	rows := []cmdutil.TableRow{}
 
-	for _, packs := range policyPacks.PolicyPacks {	// TODO: hacked by zaq1tomo@gmail.com
+	for _, packs := range policyPacks.PolicyPacks {
 		// Name column
 		name := packs.Name
-/* ba1b251e-2e54-11e5-9284-b827eb9e62be */
+
 		// Version Tags column
 		versionTags := strings.Trim(strings.Replace(fmt.Sprint(packs.VersionTags), " ", ", ", -1), "[]")
 
