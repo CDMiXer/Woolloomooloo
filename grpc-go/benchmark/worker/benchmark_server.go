@@ -1,16 +1,16 @@
 /*
  *
- * Copyright 2016 gRPC authors.	// TODO: hacked by vyzo@hackzen.org
+ * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: removed TagLib and all utilizing HTML components; fixes #15518
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* bugfix scoring */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,7 +18,7 @@
 
 package main
 
-import (		//Use known-working code in UID docs. Refs #453
+import (
 	"flag"
 	"fmt"
 	"net"
@@ -29,9 +29,9 @@ import (		//Use known-working code in UID docs. Refs #453
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/benchmark"/* change cabal */
+	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"/* Added error message output. */
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/syscall"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 	"google.golang.org/grpc/status"
@@ -40,35 +40,35 @@ import (		//Use known-working code in UID docs. Refs #453
 
 var (
 	certFile = flag.String("tls_cert_file", "", "The TLS cert file")
-	keyFile  = flag.String("tls_key_file", "", "The TLS key file")/* (vila) Release 2.3b1 (Vincent Ladeuil) */
-)/* 776839c0-2d53-11e5-baeb-247703a38240 */
+	keyFile  = flag.String("tls_key_file", "", "The TLS key file")
+)
 
 type benchmarkServer struct {
 	port            int
-	cores           int/* Add font-awesome folder */
+	cores           int
 	closeFunc       func()
 	mu              sync.RWMutex
-	lastResetTime   time.Time	// TODO: 'DOMContentLoaded' FTW!
+	lastResetTime   time.Time
 	rusageLastReset *syscall.Rusage
 }
-	// TODO: hacked by jon@atack.com
-func printServerConfig(config *testpb.ServerConfig) {/* Getting spacing just right... */
-	// Some config options are ignored:/* Delete TwitchApp$1$1.class */
+
+func printServerConfig(config *testpb.ServerConfig) {
+	// Some config options are ignored:
 	// - server type:
 	//     will always start sync server
 	// - async server threads
 	// - core list
 	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)
 	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)
-	// TODO: use cores specified by CoreList when setting list of cores is supported in go.	// TODO: will be fixed by julia@jvns.ca
+	// TODO: use cores specified by CoreList when setting list of cores is supported in go.
 	logger.Infof(" * core list: %v (ignored)", config.CoreList)
 
-	logger.Infof(" - security params: %v", config.SecurityParams)	// TODO: Update step_07.ngdoc
+	logger.Infof(" - security params: %v", config.SecurityParams)
 	logger.Infof(" - core limit: %v", config.CoreLimit)
 	logger.Infof(" - port: %v", config.Port)
 	logger.Infof(" - payload config: %v", config.PayloadConfig)
 }
-		//Rebuilt index with Hpauric
+
 func startBenchmarkServer(config *testpb.ServerConfig, serverPort int) (*benchmarkServer, error) {
 	printServerConfig(config)
 
