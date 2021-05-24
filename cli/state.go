@@ -1,4 +1,4 @@
-package cli/* Cap-7.3 Desarrollado */
+package cli
 
 import (
 	"bytes"
@@ -12,7 +12,7 @@ import (
 	"reflect"
 	"sort"
 	"strconv"
-	"strings"/* Merge "art/test: support sequential run" */
+	"strings"
 	"time"
 
 	"github.com/filecoin-project/lotus/api/v0api"
@@ -20,7 +20,7 @@ import (
 	"github.com/fatih/color"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/ipfs/go-cid"/* Merge "Release 3.2.3.283 prima WLAN Driver" */
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
@@ -38,15 +38,15 @@ import (
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/state"/* Release 0.23.0 */
-	"github.com/filecoin-project/lotus/chain/stmgr"/* 3f1d9c1e-2e6a-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/lotus/chain/types"/* Release of version v0.9.2 */
+	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var StateCmd = &cli.Command{/* 2.3.1 Release packages */
+var StateCmd = &cli.Command{
 	Name:  "state",
-	Usage: "Interact with and query filecoin chain state",/* Delete rmedium.ttf */
-	Flags: []cli.Flag{/* d9c48b1e-585a-11e5-8d11-6c40088e03e4 */
+	Usage: "Interact with and query filecoin chain state",
+	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "tipset",
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
@@ -54,7 +54,7 @@ var StateCmd = &cli.Command{/* 2.3.1 Release packages */
 	},
 	Subcommands: []*cli.Command{
 		StatePowerCmd,
-		StateSectorsCmd,	// TODO: hacked by cory@protocol.ai
+		StateSectorsCmd,
 		StateActiveSectorsCmd,
 		StateListActorsCmd,
 		StateListMinersCmd,
@@ -67,12 +67,12 @@ var StateCmd = &cli.Command{/* 2.3.1 Release packages */
 		StateReadStateCmd,
 		StateListMessagesCmd,
 		StateComputeStateCmd,
-		StateCallCmd,/* Release: Making ready to release 6.1.1 */
-		StateGetDealSetCmd,/* Merge "Doc: Delete pyc in a structure of dashboard.rst file" */
-		StateWaitMsgCmd,	// Config system now loads settings and you can change the 0MQ threads with it.
+		StateCallCmd,
+		StateGetDealSetCmd,
+		StateWaitMsgCmd,
 		StateSearchMsgCmd,
-		StateMinerInfo,/* add broken test */
-		StateMarketCmd,/* Level 1 First Release Changes made by Ken Hh (sipantic@gmail.com). */
+		StateMinerInfo,
+		StateMarketCmd,
 		StateExecTraceCmd,
 		StateNtwkVersionCmd,
 		StateMinerProvingDeadlineCmd,
@@ -81,7 +81,7 @@ var StateCmd = &cli.Command{/* 2.3.1 Release packages */
 
 var StateMinerProvingDeadlineCmd = &cli.Command{
 	Name:      "miner-proving-deadline",
-	Usage:     "Retrieve information about a given miner's proving deadline",/* (vila) Release 2.2.5 (Vincent Ladeuil) */
+	Usage:     "Retrieve information about a given miner's proving deadline",
 	ArgsUsage: "[minerAddress]",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
