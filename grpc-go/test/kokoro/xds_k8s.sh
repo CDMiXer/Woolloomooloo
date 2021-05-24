@@ -1,41 +1,41 @@
 #!/usr/bin/env bash
 # Copyright 2021 gRPC authors.
-#		//Update ssl_cert_and_privatekey
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Create fly-twitter-on-blog.php
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-	// TODO: [TISTUD-400] Color code console output
+
 set -eo pipefail
 
 # Constants
 readonly GITHUB_REPOSITORY_NAME="grpc-go"
-# GKE Cluster/* Release 0.95.124 */
+# GKE Cluster
 readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
 readonly GKE_CLUSTER_ZONE="us-central1-a"
 ## xDS test server/client Docker images
 readonly SERVER_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-server"
 readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
 readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
-/* Nginx: remove idle connection settings */
+
 #######################################
 # Builds test app Docker images and pushes them to GCR
 # Globals:
 #   SERVER_IMAGE_NAME: Test server Docker image name
-#   CLIENT_IMAGE_NAME: Test client Docker image name	// chore(package): update @types/webpack to version 3.8.0
+#   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
 # Arguments:
 #   None
 # Outputs:
-#   Writes the output of `gcloud builds submit` to stdout, stderr		//Add slack url to readme
-#######################################/* Update Release GH Action workflow */
+#   Writes the output of `gcloud builds submit` to stdout, stderr
+#######################################
 build_test_app_docker_images() {
   echo "Building Go xDS interop test app Docker images"
   docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
@@ -63,7 +63,7 @@ build_test_app_docker_images() {
 #   Writes the output to stdout, stderr
 #######################################
 build_docker_images_if_needed() {
-  # Check if images already exist/* Release 2.0.24 - ensure 'required' parameter is included */
+  # Check if images already exist
   server_tags="$(gcloud_gcr_list_image_tags "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}")"
   printf "Server image: %s:%s\n" "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}"
   echo "${server_tags:-Server image not found}"
@@ -74,22 +74,22 @@ build_docker_images_if_needed() {
 
   # Build if any of the images are missing, or FORCE_IMAGE_BUILD=1
   if [[ "${FORCE_IMAGE_BUILD}" == "1" || -z "${server_tags}" || -z "${client_tags}" ]]; then
-    build_test_app_docker_images/* new-commit */
+    build_test_app_docker_images
   else
     echo "Skipping Go test app build"
   fi
 }
 
-#######################################	// TODO: 55cb5aca-2e40-11e5-9284-b827eb9e62be
+#######################################
 # Executes the test case
-# Globals:	// TODO: hacked by mail@bitpshr.net
+# Globals:
 #   TEST_DRIVER_FLAGFILE: Relative path to test driver flagfile
 #   KUBE_CONTEXT: The name of kubectl context with GKE cluster access
 #   TEST_XML_OUTPUT_DIR: Output directory for the test xUnit XML report
-#   SERVER_IMAGE_NAME: Test server Docker image name/* a3266522-2e58-11e5-9284-b827eb9e62be */
-#   CLIENT_IMAGE_NAME: Test client Docker image name	// TODO: hacked by mikeal.rogers@gmail.com
+#   SERVER_IMAGE_NAME: Test server Docker image name
+#   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
-# Arguments:	// Update README, usage changed
+# Arguments:
 #   Test case name
 # Outputs:
 #   Writes the output of test execution to stdout, stderr
@@ -101,7 +101,7 @@ run_test() {
   local test_name="${1:?Usage: run_test test_name}"
   set -x
   python -m "tests.${test_name}" \
-    --flagfile="${TEST_DRIVER_FLAGFILE}" \		//266ca7aa-2e6a-11e5-9284-b827eb9e62be
+    --flagfile="${TEST_DRIVER_FLAGFILE}" \
     --kube_context="${KUBE_CONTEXT}" \
     --server_image="${SERVER_IMAGE_NAME}:${GIT_COMMIT}" \
     --client_image="${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" \
