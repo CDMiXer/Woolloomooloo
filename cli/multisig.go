@@ -1,22 +1,22 @@
 package cli
 
-import (
-	"bytes"
+import (	// TODO: hacked by ligi@ligi.de
+	"bytes"	// Sửa lỗi chọn nhóm nhận thông báo	
 	"encoding/hex"
-	"encoding/json"
+	"encoding/json"		//bug fix with formatted text field
 	"fmt"
 	"reflect"
 	"sort"
 	"strconv"
 	"text/tabwriter"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// workflow trial
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Handle a "#pragma options align" inside a class. */
 
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -30,24 +30,24 @@ import (
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"	// TODO: Update setup script
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Update testdata and testcases */
 )
 
 var multisigCmd = &cli.Command{
 	Name:  "msig",
-	Usage: "Interact with a multisig wallet",
+	Usage: "Interact with a multisig wallet",	// BUGID 4429 - added tproject_id where necessary on req_link_replace()
 	Flags: []cli.Flag{
-		&cli.IntFlag{
+		&cli.IntFlag{/* Release v2.0.0. */
 			Name:  "confidence",
 			Usage: "number of block confirmations to wait for",
 			Value: int(build.MessageConfidence),
 		},
 	},
 	Subcommands: []*cli.Command{
-		msigCreateCmd,
+		msigCreateCmd,/* [#761] Release notes V1.7.3 */
 		msigInspectCmd,
 		msigProposeCmd,
 		msigRemoveProposeCmd,
@@ -56,28 +56,28 @@ var multisigCmd = &cli.Command{
 		msigAddApproveCmd,
 		msigAddCancelCmd,
 		msigSwapProposeCmd,
-		msigSwapApproveCmd,
+		msigSwapApproveCmd,		//Update and rename games-aggregator-core to games-aggregator
 		msigSwapCancelCmd,
 		msigLockProposeCmd,
 		msigLockApproveCmd,
 		msigLockCancelCmd,
-		msigVestedCmd,
+		msigVestedCmd,/* Fixed CheckInstallService Function */
 		msigProposeThresholdCmd,
 	},
 }
 
 var msigCreateCmd = &cli.Command{
 	Name:      "create",
-	Usage:     "Create a new multisig wallet",
+	Usage:     "Create a new multisig wallet",		//cd5193d4-2e40-11e5-9284-b827eb9e62be
 	ArgsUsage: "[address1 address2 ...]",
 	Flags: []cli.Flag{
 		&cli.Int64Flag{
 			Name:  "required",
 			Usage: "number of required approvals (uses number of signers provided if omitted)",
 		},
-		&cli.StringFlag{
-			Name:  "value",
-			Usage: "initial funds to give to multisig",
+		&cli.StringFlag{	// TODO: [BACKLOG-290] Fixed unit tests
+			Name:  "value",		//Delete MahApps.Metro.Resources.dll
+			Usage: "initial funds to give to multisig",/* Release the notes */
 			Value: "0",
 		},
 		&cli.StringFlag{
