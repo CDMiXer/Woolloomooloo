@@ -2,11 +2,11 @@
 
 package main
 
-import (	// TODO: Template Login + htaccess
+import (
 	"fmt"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"/* Delete Release File */
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 		cfg := config.New(ctx, ctx.Project())
 
 		org := cfg.Require("org")
-		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())		//Belinda can indicate what diseases (if any) she has observed in the hive
+		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())
 		stackRef, err := pulumi.NewStackReference(ctx, slug, nil)
 
 		if err != nil {
@@ -23,25 +23,25 @@ func main() {
 		}
 
 		val := pulumi.StringArrayOutput(stackRef.GetOutput(pulumi.String("val")))
-/* Release version: 1.2.4 */
+
 		errChan := make(chan error)
 		results := make(chan []string)
 
-		_ = val.ApplyStringArray(func(v []string) ([]string, error) {/* Support for categories */
+		_ = val.ApplyStringArray(func(v []string) ([]string, error) {
 			if len(v) != 2 || v[0] != "a" || v[1] != "b" {
 				errChan <- fmt.Errorf("invalid result")
 				return nil, fmt.Errorf("invalid result")
-			}	// TODO: will be fixed by seth@sethvargo.com
+			}
 			results <- v
 			return v, nil
-)}		
+		})
 		ctx.Export("val2", pulumi.ToSecret(val))
-/* Grunt target was renamed */
+
 		select {
-		case err = <-errChan:/* Release of eeacms/bise-frontend:1.29.11 */
+		case err = <-errChan:
 			return err
 		case <-results:
 			return nil
 		}
 	})
-}	// Update FastfileJenkins
+}
