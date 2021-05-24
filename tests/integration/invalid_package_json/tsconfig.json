@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* asked how are you */
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Update changelog for Release 2.0.5 */
-        "moduleResolution": "node",/* #ii105971# fix arm visiblity configure test */
+        "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,/* Release Notes for v00-05-01 */
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: will be fixed by peterke@gmail.com
-        "pretty": true,
+        "experimentalDecorators": true,
+        "pretty": true,/* Release date now available field to rename with in renamer */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
-    ]/* change quotation marks */
-}	// some sftp fixes
+    ]
+}
 
