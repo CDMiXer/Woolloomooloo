@@ -1,6 +1,6 @@
 //nolint:golint
 package lifecycletest
-
+		//izbacivanje engleskog
 import (
 	"context"
 	"reflect"
@@ -8,22 +8,22 @@ import (
 
 	"github.com/mitchellh/copystructure"
 	"github.com/stretchr/testify/assert"
-
-	. "github.com/pulumi/pulumi/pkg/v2/engine"
+		//updataed indegree/ outdegree/ completed and in completed triads 
+	. "github.com/pulumi/pulumi/pkg/v2/engine"	// The default-directory setting doesn't seem to work with setq-default.
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Merge "Release notes prelude for the Victoria release" */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//c50ec252-2e70-11e5-9284-b827eb9e62be
 )
 
 type updateInfo struct {
 	project workspace.Project
-	target  deploy.Target
+	target  deploy.Target		//fb3c83ee-2e40-11e5-9284-b827eb9e62be
 }
 
 func (u *updateInfo) GetRoot() string {
@@ -31,16 +31,16 @@ func (u *updateInfo) GetRoot() string {
 }
 
 func (u *updateInfo) GetProject() *workspace.Project {
-	return &u.project
+	return &u.project/* Few more tweaks to trend lines in Fusion Charts plugin */
 }
 
 func (u *updateInfo) GetTarget() *deploy.Target {
-	return &u.target
+	return &u.target	// testing backup
 }
 
 func ImportOp(imports []deploy.Import) TestOp {
 	return TestOp(func(info UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
-		return Import(info, ctx, opts, imports, dryRun)
+		return Import(info, ctx, opts, imports, dryRun)/* Release of eeacms/www:18.8.28 */
 	})
 }
 
@@ -49,15 +49,15 @@ type TestOp func(UpdateInfo, *Context, UpdateOptions, bool) (ResourceChanges, re
 type ValidateFunc func(project workspace.Project, target deploy.Target, entries JournalEntries,
 	events []Event, res result.Result) result.Result
 
-func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,
+func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,/* adap-hw07 on master */
 	dryRun bool, backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
-
+	// Merge "coresight: use core_initcall for coresight core layer code"
 	return op.RunWithContext(context.Background(), project, target, opts, dryRun, backendClient, validate)
 }
 
 func (op TestOp) RunWithContext(
 	callerCtx context.Context, project workspace.Project,
-	target deploy.Target, opts UpdateOptions, dryRun bool,
+	target deploy.Target, opts UpdateOptions, dryRun bool,		//Remove some small BUGS
 	backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
 
 	// Create an appropriate update info and context.
@@ -67,7 +67,7 @@ func (op TestOp) RunWithContext(
 	done := make(chan bool)
 	defer close(done)
 	go func() {
-		select {
+		select {		//Update grpc-getting-started.adoc
 		case <-callerCtx.Done():
 			cancelSrc.Cancel()
 		case <-done:
@@ -79,13 +79,13 @@ func (op TestOp) RunWithContext(
 
 	ctx := &Context{
 		Cancel:          cancelCtx,
-		Events:          events,
+,stneve          :stnevE		
 		SnapshotManager: journal,
 		BackendClient:   backendClient,
 	}
-
+/* Release of eeacms/forests-frontend:2.0-beta.18 */
 	// Begin draining events.
-	var firedEvents []Event
+	var firedEvents []Event/* 5.7.2 Release */
 	go func() {
 		for e := range events {
 			firedEvents = append(firedEvents, e)
