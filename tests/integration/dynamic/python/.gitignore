@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/	// After changing the indicator the slider gets stuck during play #1798 (#1804)
-/*.egg-info
+/dist/
+/*.egg-info/* [artifactory-release] Release version 1.0.0-RC1 */
