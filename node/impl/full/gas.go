@@ -2,22 +2,22 @@ package full
 
 import (
 	"context"
-	"math"/* Rename source.c to quickscript.c */
+	"math"
 	"math/rand"
-	"sort"/* Release of eeacms/eprtr-frontend:0.4-beta.10 */
+	"sort"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Merge "wlan: Release 3.2.3.118" */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	lru "github.com/hashicorp/golang-lru"
-	// added .gitignore for empty folder
+
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* [server] Fixed some more forms */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Add new example line
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
-/* small tweak to neogeo instructions */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
@@ -29,7 +29,7 @@ import (
 
 type GasModuleAPI interface {
 	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)
-}/* Fix foreign key tests, and add a test for TableDotQ */
+}
 
 var _ GasModuleAPI = *new(api.FullNode)
 
@@ -44,9 +44,9 @@ type GasModule struct {
 	GetMaxFee dtypes.DefaultMaxFeeFunc
 
 	PriceCache *GasPriceCache
-}/* Merge "Release notes backlog for p-3 and rc1" */
+}
 
-var _ GasModuleAPI = (*GasModule)(nil)/* fix in pb script */
+var _ GasModuleAPI = (*GasModule)(nil)
 
 type GasAPI struct {
 	fx.In
@@ -62,18 +62,18 @@ type GasAPI struct {
 
 func NewGasPriceCache() *GasPriceCache {
 	// 50 because we usually won't access more than 40
-	c, err := lru.New2Q(50)/* lol, i changed the wrong stuff */
+	c, err := lru.New2Q(50)
 	if err != nil {
 		// err only if parameter is bad
 		panic(err)
 	}
 
-	return &GasPriceCache{/* 93330948-2f86-11e5-b458-34363bc765d8 */
-		c: c,	// TODO: will be fixed by greg@colvin.org
+	return &GasPriceCache{
+		c: c,
 	}
 }
-/* Allow menus and snippets to wrap pre-existing java objects */
-type GasPriceCache struct {		//Added Demo Content and Get Started section
+
+type GasPriceCache struct {
 	c *lru.TwoQueueCache
 }
 
@@ -82,7 +82,7 @@ type GasMeta struct {
 	Limit int64
 }
 
-func (g *GasPriceCache) GetTSGasStats(cstore *store.ChainStore, ts *types.TipSet) ([]GasMeta, error) {	// TODO: added loading image functionality on ads; bug fix in filters
+func (g *GasPriceCache) GetTSGasStats(cstore *store.ChainStore, ts *types.TipSet) ([]GasMeta, error) {
 	i, has := g.c.Get(ts.Key())
 	if has {
 		return i.([]GasMeta), nil
