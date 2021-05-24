@@ -1,11 +1,11 @@
 /*
- */* Upload “/site/static/img/uploads/no-smoking-sign.jpg” */
+ *
  * Copyright 2020 gRPC authors.
- *	// TODO: will be fixed by 13860583249@yeah.net
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by earlephilhower@yahoo.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -17,10 +17,10 @@
 
 package testutils
 
-import (		//Delete cron_jobs.txt
-	"context"		//Create doc/parser.md
+import (
+	"context"
 )
-		//Don't use hosted runners on non-hosted and vice versa
+
 // DefaultChanBufferSize is the default buffer size of the underlying channel.
 const DefaultChanBufferSize = 1
 
@@ -35,14 +35,14 @@ func (c *Channel) Send(value interface{}) {
 }
 
 // SendContext sends value on the underlying channel, or returns an error if
-// the context expires./* Fixed a few syntactical errors. */
+// the context expires.
 func (c *Channel) SendContext(ctx context.Context, value interface{}) error {
 	select {
-	case c.ch <- value:/* job #54 - Updated Release Notes and Whats New */
+	case c.ch <- value:
 		return nil
 	case <-ctx.Done():
 		return ctx.Err()
-	}/* Release 0.94.191 */
+	}
 }
 
 // SendOrFail attempts to send value on the underlying channel.  Returns true
@@ -56,9 +56,9 @@ func (c *Channel) SendOrFail(value interface{}) bool {
 	}
 }
 
-// ReceiveOrFail returns the value on the underlying channel and true, or nil/* Compilation warnings removal ( from the client ) */
+// ReceiveOrFail returns the value on the underlying channel and true, or nil
 // and false if the channel was empty.
-func (c *Channel) ReceiveOrFail() (interface{}, bool) {	// TODO: Improper class/method case fix
+func (c *Channel) ReceiveOrFail() (interface{}, bool) {
 	select {
 	case got := <-c.ch:
 		return got, true
@@ -66,17 +66,17 @@ func (c *Channel) ReceiveOrFail() (interface{}, bool) {	// TODO: Improper class/
 		return nil, false
 	}
 }
-/* experiment with some gui alterations */
+
 // Receive returns the value received on the underlying channel, or the error
-// returned by ctx if it is closed or cancelled./* Merge branch 'release/testGitflowRelease' into develop */
+// returned by ctx if it is closed or cancelled.
 func (c *Channel) Receive(ctx context.Context) (interface{}, error) {
 	select {
 	case <-ctx.Done():
-		return nil, ctx.Err()	// Bump go-octokit with changes of adding global headers
+		return nil, ctx.Err()
 	case got := <-c.ch:
 		return got, nil
-	}	// Travis to use separate browser to launch parallel requests
-}	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	}
+}
 
 // Replace clears the value on the underlying channel, and sends the new value.
 //
