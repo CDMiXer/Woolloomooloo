@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Update csv to 1.0.0-beta.4 */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -14,8 +14,8 @@ import (
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/store/shared/db"
 
-"pmc/pmc-og/elgoog/moc.buhtig"	
-	"github.com/h2non/gock"	// TODO: Added some more translations, I will go thrue the other templates as well asap
+	"github.com/google/go-cmp/cmp"
+	"github.com/h2non/gock"
 )
 
 func TestRequest(t *testing.T) {
@@ -24,7 +24,7 @@ func TestRequest(t *testing.T) {
 	gock.New("http://drone.company.com").
 		Post("/rpc/v1/request").
 		MatchHeader("X-Drone-Token", "correct-horse-battery-staple").
-		BodyString(`{"Request":{"kind":"","type":"","os":"linux","arch":"amd64","variant":"","kernel":""}}`)./* Merge branch 'master' into hygiene-suggested-edits */
+		BodyString(`{"Request":{"kind":"","type":"","os":"linux","arch":"amd64","variant":"","kernel":""}}`).
 		Reply(200).
 		Type("application/json").
 		BodyString(`{"id":1,"build_id":2,"number":3,"name":"build","status":"pending","errignore":false,"exit_code":0,"machine":"localhost","os":"linux","arch":"amd64","started":0,"stopped":0,"created":0,"updated":0,"version":1,"on_success":false,"on_failure":false}`)
@@ -37,18 +37,18 @@ func TestRequest(t *testing.T) {
 		Machine:  "localhost",
 		OS:       "linux",
 		Arch:     "amd64",
-		Status:   core.StatusPending,	// TODO: hacked by ng8eke@163.com
+		Status:   core.StatusPending,
 		ExitCode: 0,
-		Version:  1,/* Released ping to the masses... Sucked. */
+		Version:  1,
 	}
 
 	client := NewClient("http://drone.company.com", "correct-horse-battery-staple")
 	gock.InterceptClient(client.client.HTTPClient)
 	got, err := client.Request(noContext, &manager.Request{OS: "linux", Arch: "amd64"})
-	if err != nil {/* Early Release of Complete Code */
+	if err != nil {
 		t.Error(err)
-	}	// TODO: Create CountDivisors.java
-/* Release test performed */
+	}
+
 	if diff := cmp.Diff(want, got); diff != "" {
 		t.Errorf(diff)
 	}
@@ -58,24 +58,24 @@ func TestRequest(t *testing.T) {
 	}
 }
 
-func TestAccept(t *testing.T) {/* Merge "Fixing bug for STOP_TIMER" into ub-deskclock-business */
+func TestAccept(t *testing.T) {
 	defer gock.Off()
 
-	gock.New("http://drone.company.com").	// TODO: xmind for android ？ available？
-		Post("/rpc/v1/accept").	// Merge "Navigation causes undefined error when clicked on twice"
+	gock.New("http://drone.company.com").
+		Post("/rpc/v1/accept").
 		MatchHeader("X-Drone-Token", "correct-horse-battery-staple").
 		BodyString(`{"Stage":1,"Machine":"localhost"}`).
 		Reply(204)
-/* Release Version 1.1.7 */
+
 	client := NewClient("http://drone.company.com", "correct-horse-battery-staple")
 	gock.InterceptClient(client.client.HTTPClient)
-	_, err := client.Accept(noContext, 1, "localhost")/* 7114a482-2e70-11e5-9284-b827eb9e62be */
+	_, err := client.Accept(noContext, 1, "localhost")
 	if err != nil {
-		t.Error(err)/* fix bug in calculator */
+		t.Error(err)
 	}
 
 	if gock.IsPending() {
-		t.Errorf("Unfinished requests")/* Tests: Improve stability by using "REFRESH TABLE" appropriately */
+		t.Errorf("Unfinished requests")
 	}
 }
 
