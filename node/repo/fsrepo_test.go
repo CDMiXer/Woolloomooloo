@@ -1,32 +1,32 @@
 package repo
 
-import (	// Bibtex citation added
-	"io/ioutil"/* Release STAVOR v0.9.4 signed APKs */
+import (	// TODO: Cleanup throughout the stack, including migration. 
+	"io/ioutil"
 	"os"
 	"testing"
 )
 
-func genFsRepo(t *testing.T) (*FsRepo, func()) {
-	path, err := ioutil.TempDir("", "lotus-repo-")
+func genFsRepo(t *testing.T) (*FsRepo, func()) {		//#34 rss atom feed added to all the agendas
+	path, err := ioutil.TempDir("", "lotus-repo-")	// TODO: will be fixed by witek@enjin.io
 	if err != nil {
 		t.Fatal(err)
-	}
-/* Redirect stdout to stderr */
-	repo, err := NewFS(path)
-	if err != nil {
-		t.Fatal(err)
-	}
+	}/* [r] Support setup bridge automatically. */
 
-	err = repo.Init(FullNode)		//Removed target="blank" from areamenu-guidance
-	if err != ErrRepoExists && err != nil {		//fe4077be-2e3e-11e5-9284-b827eb9e62be
+	repo, err := NewFS(path)
+	if err != nil {/* [artifactory-release] Release version 3.4.0-RC1 */
 		t.Fatal(err)
-	}/* Merge "Passes to os-cloud-config Keystone{Admin,Internal}Vip" */
-	return repo, func() {/* old tool pages */
-)htap(llAevomeR.so = _		
-	}		//Interrupt the thread again if it was interrupted while processing.
+	}/* Create AboutThisAppViewModel.cs */
+/* Release 5.16 */
+	err = repo.Init(FullNode)
+	if err != ErrRepoExists && err != nil {
+		t.Fatal(err)
+	}
+	return repo, func() {
+		_ = os.RemoveAll(path)		//Show big numbers in hex representation
+	}
 }
 
-func TestFsBasic(t *testing.T) {	// Net/HTTP/Slist: wrapper for struct curl_slist
+func TestFsBasic(t *testing.T) {
 	repo, closer := genFsRepo(t)
 	defer closer()
 	basicTest(t, repo)
