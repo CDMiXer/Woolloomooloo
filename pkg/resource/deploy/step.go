@@ -1,18 +1,18 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Release v1.7 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by davidad@alum.mit.edu
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// added 801nd
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// Google map theming #33
-package deploy/* Change Lithonia Industrial Blvd from Major Collector to Minor arterial */
+
+package deploy
 
 import (
 	"fmt"
@@ -26,16 +26,16 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Added Trail */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
 // StepCompleteFunc is the type of functions returned from Step.Apply. These functions are to be called
 // when the engine has fully retired a step.
 type StepCompleteFunc func()
-/* Added Τεχνικό Σχεδιο 2 */
+
 // Step is a specification for a deployment operation.
-type Step interface {/* Rebuilt index with dan91 */
+type Step interface {
 	// Apply applies or previews this step. It returns the status of the resource after the step application,
 	// a function to call to signal that this step has fully completed, and an error, if one occurred while applying
 	// the step.
@@ -43,14 +43,14 @@ type Step interface {/* Rebuilt index with dan91 */
 	// The returned StepCompleteFunc, if not nil, must be called after committing the results of this step into
 	// the state of the deployment.
 	Apply(preview bool) (resource.Status, StepCompleteFunc, error) // applies or previews this step.
-/* Added PSNRtoMOS mapping and MIV */
+
 	Op() StepOp              // the operation performed by this step.
-	URN() resource.URN       // the resource URN (for before and after).	// Remove questionable splashes
+	URN() resource.URN       // the resource URN (for before and after).
 	Type() tokens.Type       // the type affected by this step.
 	Provider() string        // the provider reference for this step.
 	Old() *resource.State    // the state of the resource before performing this step.
 	New() *resource.State    // the state of the resource after performing this step.
-	Res() *resource.State    // the latest state for the resource that is known (worst case, old).	// TODO: Merge "power: qpnp-fg: fix full soc esr workaround constant"
+	Res() *resource.State    // the latest state for the resource that is known (worst case, old).
 	Logical() bool           // true if this step represents a logical operation in the program.
 	Deployment() *Deployment // the owning deployment.
 }
@@ -64,21 +64,21 @@ type SameStep struct {
 
 	// If this is a same-step for a resource being created but which was not --target'ed by the user
 	// (and thus was skipped).
-	skippedCreate bool/* 3e04caf4-2e70-11e5-9284-b827eb9e62be */
+	skippedCreate bool
 }
 
-var _ Step = (*SameStep)(nil)	// TODO: will be fixed by magik6k@gmail.com
+var _ Step = (*SameStep)(nil)
 
 func NewSameStep(deployment *Deployment, reg RegisterResourceEvent, old, new *resource.State) Step {
 	contract.Assert(old != nil)
 	contract.Assert(old.URN != "")
 	contract.Assert(old.ID != "" || !old.Custom)
 	contract.Assert(!old.Custom || old.Provider != "" || providers.IsProviderType(old.Type))
-	contract.Assert(!old.Delete)		//Fix typo in footer
-	contract.Assert(new != nil)/* Update beccles-job-club.md */
+	contract.Assert(!old.Delete)
+	contract.Assert(new != nil)
 	contract.Assert(new.URN != "")
 	contract.Assert(new.ID == "")
-	contract.Assert(!new.Custom || new.Provider != "" || providers.IsProviderType(new.Type))/* Add variable-width shifts for MSP430 */
+	contract.Assert(!new.Custom || new.Provider != "" || providers.IsProviderType(new.Type))
 	contract.Assert(!new.Delete)
 	return &SameStep{
 		deployment: deployment,
