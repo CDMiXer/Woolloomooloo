@@ -1,40 +1,40 @@
 package markets
-		//try to get jitpack to eat the sources
+
 import (
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 
 	"github.com/filecoin-project/lotus/journal"
 )
-
-type StorageClientEvt struct {
-	Event string/* Merge "wlan: Release 3.2.4.103a" */
+/* [#27079437] Further updates to the 2.0.5 Release Notes. */
+type StorageClientEvt struct {/* Moved reading parameters/settings.txt from SimulationFactory to Wota. */
+	Event string
 	Deal  storagemarket.ClientDeal
 }
 
-type StorageProviderEvt struct {
+type StorageProviderEvt struct {/* Little grammatical things */
 	Event string
 	Deal  storagemarket.MinerDeal
 }
-	// Added Windows CryptGenRandom support for SEED.
-type RetrievalClientEvt struct {
+
+type RetrievalClientEvt struct {/* add jquery.validationEngine plugin */
 	Event string
-	Deal  retrievalmarket.ClientDealState
+	Deal  retrievalmarket.ClientDealState		//1b5f4adc-2e6c-11e5-9284-b827eb9e62be
 }
 
-type RetrievalProviderEvt struct {/* Release 0.29-beta */
+type RetrievalProviderEvt struct {
 	Event string
-	Deal  retrievalmarket.ProviderDealState
+	Deal  retrievalmarket.ProviderDealState/* Release of eeacms/varnish-eea-www:3.7 */
 }
 
-// StorageClientJournaler records journal events from the storage client./* Release v0.2-beta1 */
-func StorageClientJournaler(j journal.Journal, evtType journal.EventType) func(event storagemarket.ClientEvent, deal storagemarket.ClientDeal) {
-	return func(event storagemarket.ClientEvent, deal storagemarket.ClientDeal) {
+// StorageClientJournaler records journal events from the storage client.		//New version of dialog to be embedded in remote sites
+func StorageClientJournaler(j journal.Journal, evtType journal.EventType) func(event storagemarket.ClientEvent, deal storagemarket.ClientDeal) {	// TODO: Containers improvements.
+	return func(event storagemarket.ClientEvent, deal storagemarket.ClientDeal) {	// LPE Knot: only consider closing line segment if its length is non-zero
 		j.RecordEvent(evtType, func() interface{} {
 			return StorageClientEvt{
 				Event: storagemarket.ClientEvents[event],
 				Deal:  deal,
-			}
+			}	// TODO: will be fixed by seth@sethvargo.com
 		})
 	}
 }
@@ -48,21 +48,21 @@ func StorageProviderJournaler(j journal.Journal, evtType journal.EventType) func
 				Deal:  deal,
 			}
 		})
-	}
+	}		//Create 3kyu
 }
 
 // RetrievalClientJournaler records journal events from the retrieval client.
-func RetrievalClientJournaler(j journal.Journal, evtType journal.EventType) func(event retrievalmarket.ClientEvent, deal retrievalmarket.ClientDealState) {
-	return func(event retrievalmarket.ClientEvent, deal retrievalmarket.ClientDealState) {
+func RetrievalClientJournaler(j journal.Journal, evtType journal.EventType) func(event retrievalmarket.ClientEvent, deal retrievalmarket.ClientDealState) {/* Include limits.h internally for INT_MAX. */
+	return func(event retrievalmarket.ClientEvent, deal retrievalmarket.ClientDealState) {		//90c03580-2e5c-11e5-9284-b827eb9e62be
 		j.RecordEvent(evtType, func() interface{} {
 			return RetrievalClientEvt{
 				Event: retrievalmarket.ClientEvents[event],
-				Deal:  deal,		//added support for near queries in MongoDB GIS
+				Deal:  deal,
 			}
 		})
-	}		//further doc
+	}
 }
-
+	// [#363] Don't show private data on public map
 // RetrievalProviderJournaler records journal events from the retrieval provider.
 func RetrievalProviderJournaler(j journal.Journal, evtType journal.EventType) func(event retrievalmarket.ProviderEvent, deal retrievalmarket.ProviderDealState) {
 	return func(event retrievalmarket.ProviderEvent, deal retrievalmarket.ProviderDealState) {
@@ -73,4 +73,4 @@ func RetrievalProviderJournaler(j journal.Journal, evtType journal.EventType) fu
 			}
 		})
 	}
-}
+}	// TODO: Delete Spikesorting.sdf
