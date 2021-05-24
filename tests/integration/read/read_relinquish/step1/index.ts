@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: will be fixed by joshua@yottadb.com
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,6 +13,6 @@
 // limitations under the License.
 
 import { Resource } from "./resource";
-		//removed unused fields.
+
 // Setup: "a" is a protected non-external resource.
 const a = new Resource("a", { state: 42 }, { protect: true });
