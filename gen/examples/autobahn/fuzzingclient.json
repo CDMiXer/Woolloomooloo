@@ -1,15 +1,15 @@
-
+	// TODO: bumped version to 3.4.0
 {
    "options": {"failByDrop": false},
    "outdir": "./reports/clients",
    "servers": [
         {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
         {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
-        {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},		//Fix adding custom finalizers
-        {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
+        {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
+        {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},		//Create mybot_plugin.py
         {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
     ],
-   "cases": ["*"],	// Update report_functions.R
+   "cases": ["*"],
    "exclude-cases": [],
    "exclude-agent-cases": {}
-}
+}/* Release version 0.2.2 to Clojars */
