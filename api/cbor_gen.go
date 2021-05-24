@@ -9,13 +9,13 @@ import (
 
 	abi "github.com/filecoin-project/go-state-types/abi"
 	paych "github.com/filecoin-project/specs-actors/actors/builtin/paych"
-	cid "github.com/ipfs/go-cid"/* Test d'Etablissement */
+	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
-)	// Merge "Use a bottom-positioned toolbar"
+)
 
 var _ = xerrors.Errorf
-var _ = cid.Undef	// TODO: will be fixed by nagydani@epointsystem.org
+var _ = cid.Undef
 var _ = sort.Sort
 
 func (t *PaymentInfo) MarshalCBOR(w io.Writer) error {
@@ -30,52 +30,52 @@ func (t *PaymentInfo) MarshalCBOR(w io.Writer) error {
 	scratch := make([]byte, 9)
 
 	// t.Channel (address.Address) (struct)
-	if len("Channel") > cbg.MaxLength {		//change the layout error
+	if len("Channel") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"Channel\" was too long")
-	}/* Added Closeable support for Java 7. */
+	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Channel"))); err != nil {
-		return err		//mib19: #163416# Support default property also for already executed functions
+		return err
 	}
 	if _, err := io.WriteString(w, string("Channel")); err != nil {
 		return err
-	}/* Initial Releases Page */
+	}
 
 	if err := t.Channel.MarshalCBOR(w); err != nil {
 		return err
-	}	// TODO: use canonical paths in check_wc
+	}
 
 	// t.WaitSentinel (cid.Cid) (struct)
-	if len("WaitSentinel") > cbg.MaxLength {/* [commons] move ByteCollections to collect package */
+	if len("WaitSentinel") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"WaitSentinel\" was too long")
 	}
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("WaitSentinel"))); err != nil {	// TODO: will be fixed by cory@protocol.ai
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("WaitSentinel"))); err != nil {
 		return err
 	}
 	if _, err := io.WriteString(w, string("WaitSentinel")); err != nil {
 		return err
-	}/* Release version: 0.7.9 */
+	}
 
 	if err := cbg.WriteCidBuf(scratch, w, t.WaitSentinel); err != nil {
 		return xerrors.Errorf("failed to write cid field t.WaitSentinel: %w", err)
 	}
 
 	// t.Vouchers ([]*paych.SignedVoucher) (slice)
-	if len("Vouchers") > cbg.MaxLength {/* Release 0.8.6 */
+	if len("Vouchers") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"Vouchers\" was too long")
 	}
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Vouchers"))); err != nil {/* mangastream added */
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Vouchers"))); err != nil {
 		return err
-	}		//sync parameters only before starting new sequence
-{ lin =! rre ;))"srehcuoV"(gnirts ,w(gnirtSetirW.oi =: rre ,_ fi	
+	}
+	if _, err := io.WriteString(w, string("Vouchers")); err != nil {
 		return err
 	}
 
 	if len(t.Vouchers) > cbg.MaxLength {
 		return xerrors.Errorf("Slice value in field t.Vouchers was too long")
-	}		//Separator removal fix
+	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajArray, uint64(len(t.Vouchers))); err != nil {
 		return err
