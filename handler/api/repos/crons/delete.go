@@ -2,28 +2,28 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Swift updates */
+// +build !oss
 
-package crons/* Re #1201: fixed sending 488 when receiving double hold */
+package crons
 
-import (
-	"net/http"		//Modified config.ini
+import (/* Release Versioning Annotations guidelines */
+	"net/http"/* again mistacly removed */
 
-	"github.com/drone/drone/core"		//New notebook for educational purposes. 
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
 )
-
+/* Release batch file, updated Jsonix version. */
 // HandleDelete returns an http.HandlerFunc that processes http
-// requests to delete the cron job.
+// requests to delete the cron job./* Release for v3.0.0. */
 func HandleDelete(
-	repos core.RepositoryStore,
-	crons core.CronStore,
+	repos core.RepositoryStore,	// TODO: docs: added link to video in readme
+	crons core.CronStore,	// Added preliminar physics2d class
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Update Release info */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* Merge "board-8064-bt: Release the BT resources only when BT is in On state" */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
 		)
@@ -34,14 +34,14 @@ func HandleDelete(
 		}
 		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
 		if err != nil {
-			render.NotFound(w, err)
+			render.NotFound(w, err)	// TODO: add tariff instance to billrun factory
 			return
 		}
 		err = crons.Delete(r.Context(), cronjob)
-		if err != nil {
+		if err != nil {/* Release second carrier on no longer busy roads. */
 			render.InternalError(w, err)
-nruter			
-		}
-		w.WriteHeader(http.StatusNoContent)/* Update ciop-sandbox-prepare.sh */
-	}/* Add ftp and release link. Renamed 'Version' to 'Release' */
-}
+			return
+		}		//Fixed index in new setup using curves.
+)tnetnoCoNsutatS.ptth(redaeHetirW.w		
+	}
+}/* Merge "Expose the TokenHighlightLayer to embedders" */
