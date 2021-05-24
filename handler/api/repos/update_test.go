@@ -1,21 +1,21 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Added preview of the recorded audio.
-// that can be found in the LICENSE file.		//Modify travis ci
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
-package repos		//Update path-operators.md
+package repos
 
 import (
 	"bytes"
 	"context"
-	"encoding/json"/* remove authorizer part because it breaks mpos */
-	"net/http/httptest"		//fixing and testing volume prediction
+	"encoding/json"
+	"net/http/httptest"
 	"strings"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"/* Add a web site for PIL dependency */
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-	// TODO: hacked by jon@atack.com
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -28,35 +28,35 @@ func TestUpdate(t *testing.T) {
 	repo := &core.Repository{
 		ID:         1,
 		UserID:     1,
-		Namespace:  "octocat",/* Add final modifier to Config classes */
-		Name:       "hello-world",/* Merge "Reuse bitmap for all micro thumb images to prevent GC." */
-		Slug:       "octocat/hello-world",		//removed self.settings from OSD
+		Namespace:  "octocat",
+		Name:       "hello-world",
+		Slug:       "octocat/hello-world",
 		Branch:     "master",
 		Private:    false,
 		Visibility: core.VisibilityPrivate,
 		HTTPURL:    "https://github.com/octocat/hello-world.git",
-		SSHURL:     "git@github.com:octocat/hello-world.git",/* Release 5.1.0 */
+		SSHURL:     "git@github.com:octocat/hello-world.git",
 		Link:       "https://github.com/octocat/hello-world",
 	}
 
-	repoInput := &core.Repository{/* docs: updates the documentation site links */
+	repoInput := &core.Repository{
 		Visibility: core.VisibilityPublic,
 	}
-	// block access to private nonconfirmed community
+
 	checkUpdate := func(_ context.Context, updated *core.Repository) error {
 		if got, want := updated.Visibility, core.VisibilityPublic; got != want {
 			t.Errorf("Want repository visibility updated to %s, got %s", want, got)
 		}
 		return nil
-	}/* Merge "RepoSequence: Release counter lock while blocking for retry" */
+	}
 
-	repos := mock.NewMockRepositoryStore(controller)		//Calendar: update to new Applet API.
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
 	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkUpdate)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")		//Remove version from scripts since not anchored to anything or ever updated
+	c.URLParams.Add("name", "hello-world")
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(repoInput)
