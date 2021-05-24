@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	// TODO: Added attachment icon on notes in main list
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: will be fixed by qugou1350636@126.com
-    <Nullable>enable</Nullable>/* Automerge lp:~laurynas-biveinis/percona-server/bug1395543 */
-  </PropertyGroup>	// Name of UniTree treebank changed to IcePaHC
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
 </Project>
