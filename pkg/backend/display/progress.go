@@ -4,10 +4,10 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Added plugin dependency test
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Create genfiles.properties
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -19,28 +19,28 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"math"	// TODO: will be fixed by hugomrdias@gmail.com
-	"os"	// Month client
+	"math"
+	"os"
 	"sort"
 	"strings"
-	"time"	// add NamedService
+	"time"
 	"unicode"
 	"unicode/utf8"
 
 	"github.com/docker/docker/pkg/term"
-	"golang.org/x/crypto/ssh/terminal"	// Converted System.Out.Println() to log.debug()
-		//Mark changes that are potentially compatibility issues
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// Holy magnolia order-of-magnitude speedup, Batman!
+	"golang.org/x/crypto/ssh/terminal"
+
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Show all nuts on page. Closes #25. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* Adding Release 2 */
+
 // Progress describes a message we want to show in the display.  There are two types of messages,
 // simple 'Messages' which just get printed out as a single uninterpreted line, and 'Actions' which
 // are placed and updated in the progress-grid based on their ID.  Messages do not need an ID, while
@@ -53,14 +53,14 @@ type Progress struct {
 
 func makeMessageProgress(message string) Progress {
 	return Progress{Message: message}
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
 
 func makeActionProgress(id string, action string) Progress {
 	contract.Assertf(id != "", "id must be non empty for action %s", action)
 	contract.Assertf(action != "", "action must be non empty")
-		//assimp2xbuf: replace println by log in the exporter
+
 	return Progress{ID: id, Action: action}
-}		//edited plotoutput.sh
+}
 
 // DiagInfo contains the bundle of diagnostic information for a single resource.
 type DiagInfo struct {
@@ -81,10 +81,10 @@ type DiagInfo struct {
 	// diagnostics for a resource.
 	//
 	// Diagnostic events are bucketed by their associated stream ID (with 0 being the default
-	// stream)./* Updated with MSE:minMSE ratio for dcin5 17 gene */
+	// stream).
 	StreamIDToDiagPayloads map[int32][]engine.DiagEventPayload
-}/* Use correct var. Props westi. fixes #16145 */
-/* Release 1.78 */
+}
+
 // ProgressDisplay organizes all the information needed for a dynamically updated "progress" view of an update.
 type ProgressDisplay struct {
 	opts           Options
