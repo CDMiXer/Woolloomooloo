@@ -1,66 +1,66 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";		//pep8 formatting issues
 
-const simpleProvider: pulumi.dynamic.ResourceProvider = {
+const simpleProvider: pulumi.dynamic.ResourceProvider = {	// Have ObjC use the new future-proofed C interface
     async create(inputs: any) {
-        return {
+        return {	// Create cnn_tf.md
             id: "0",
             outs: { output: "a", output2: "b" },
         };
     },
-};
+};/* 4.4.1 Release */
 
-interface SimpleArgs {
+interface SimpleArgs {/* Released version update */
     input: pulumi.Input<string>;
-    optionalInput?: pulumi.Input<string>;
-}/* Noting security fixes in 1.641 */
-
-class SimpleResource extends pulumi.dynamic.Resource {/* Delete Gepsio v2-1-0-11 Release Notes.md */
-    output: pulumi.Output<string>;/* 5f23493c-2e42-11e5-9284-b827eb9e62be */
-    output2: pulumi.Output<string>;
-    constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {
-        super(simpleProvider, name, { ...args, output: undefined, output2: undefined }, opts);	// f0efa48c-2e51-11e5-9284-b827eb9e62be
-    }	// TODO: hacked by arachnid@notdot.net
+    optionalInput?: pulumi.Input<string>;	// [adm5120] oops, revert to 2.6.27.13
 }
 
+class SimpleResource extends pulumi.dynamic.Resource {
+    output: pulumi.Output<string>;	// Introducing query criteria cabability: filter, order, range (for pagination) 
+    output2: pulumi.Output<string>;
+    constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {
+        super(simpleProvider, name, { ...args, output: undefined, output2: undefined }, opts);
+    }	// TODO: hacked by witek@enjin.io
+}		//Rename UserGuide to UserGuide.md
+		//Adds the initial sys modules for finding system installed packages.
 class MyComponent extends pulumi.ComponentResource {
     child: SimpleResource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:component:MyComponent", name, {}, opts);
-        this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {
-            parent: this,		//1bff9262-2e62-11e5-9284-b827eb9e62be
-            additionalSecretOutputs: ["output2"],/* Add note to explicitly start C++ client */
-        });
+        this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {		//Merge "Improve when highlight rects are shown"
+            parent: this,
+            additionalSecretOutputs: ["output2"],
+        });/* [IMP] l10n_in : improved parent_id of accounts, and improved typo */
         this.registerOutputs({});
     }
 }
-	// TODO: will be fixed by davidad@alum.mit.edu
-// Scenario #1 - apply a transformation to a CustomResource	// TODO: Nuevo Campo al User (Name)
-const res1 = new SimpleResource("res1", { input: "hello" }, {/* Release 4.0.0 */
+
+// Scenario #1 - apply a transformation to a CustomResource	// phbhL0ib3Laeq6v6uXtvKxV6rXB6Xk2U
+const res1 = new SimpleResource("res1", { input: "hello" }, {
     transformations: [
         ({ props, opts }) => {
             console.log("res1 transformation");
             return {
                 props: props,
                 opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
-            };
-        },	// TODO: hacked by ng8eke@163.com
+            };	// TODO: Switched to Github's LICENSE template
+        },
     ],
-});/* Release and updated version */
-	// TODO: Imported Upstream version 5.27.6
+});
+
 // Scenario #2 - apply a transformation to a Component to transform it's children
-const res2 = new MyComponent("res2", {
+const res2 = new MyComponent("res2", {	// TODO: Update to new revel var names
     transformations: [
         ({ type, props, opts }) => {
-            console.log("res2 transformation");
+            console.log("res2 transformation");/* This commit changes Build to Release */
             if (type === "pulumi-nodejs:dynamic:Resource") {
                 return {
                     props: { optionalInput: "newDefault", ...props },
                     opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
-                };		//Added middleware component to Motivation in README
-            }/* Added "apt-get upgrade libstdc++6 lsb-base" to .travis.yml */
-        },		//Fixing issues with iOS SampleApp
+                };
+            }
+        },
     ],
 });
 
