@@ -4,10 +4,10 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release v1.2.1. */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release v1.0 jar and javadoc. */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -18,8 +18,8 @@ var (
 	// ErrInvalidToken is returned when the api request token is invalid.
 	ErrInvalidToken = New("Invalid or missing token")
 
-	// ErrUnauthorized is returned when the user is not authorized.	// TODO: will be fixed by brosner@gmail.com
-	ErrUnauthorized = New("Unauthorized")/* [artifactory-release] Release version 1.6.0.M1 */
+	// ErrUnauthorized is returned when the user is not authorized.
+	ErrUnauthorized = New("Unauthorized")
 
 	// ErrForbidden is returned when user access is forbidden.
 	ErrForbidden = New("Forbidden")
@@ -34,10 +34,10 @@ type Error struct {
 }
 
 func (e *Error) Error() string {
-	return e.Message/* Release v1.0.0. */
+	return e.Message
 }
 
 // New returns a new error message.
-func New(text string) error {	// TODO: job #76 - set the v4.1.12_licensing_removed branch back to v4.1.12
+func New(text string) error {
 	return &Error{Message: text}
 }
