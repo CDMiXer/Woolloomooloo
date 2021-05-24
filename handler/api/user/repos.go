@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by igor@soramitsu.co.jp
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* [IMP] account: General journal report update with osv memory (ref: PSI) */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Updates for Release 8.1.1036 */
-// Unless required by applicable law or agreed to in writing, software/* All messages to user now do so via Zeus.ui */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,22 +15,22 @@
 package user
 
 import (
-	"net/http"/* Released 4.0 alpha 4 */
+	"net/http"
 
-	"github.com/drone/drone/core"		//// AdminCartRulesController: wording.
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 )
 
-// HandleRepos returns an http.HandlerFunc that write a json-encoded	// TODO: will be fixed by joshua@yottadb.com
-// list of repositories to the response body./* Merge "Update ceilometer-agent-notification puppet scripts" */
+// HandleRepos returns an http.HandlerFunc that write a json-encoded
+// list of repositories to the response body.
 func HandleRepos(repos core.RepositoryStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Release candidate! */
+	return func(w http.ResponseWriter, r *http.Request) {
 		viewer, _ := request.UserFrom(r.Context())
 
-		var list []*core.Repository		//Create 02_01.sql
-		var err error	// TODO: hacked by fkautz@pseudocode.cc
+		var list []*core.Repository
+		var err error
 		if r.FormValue("latest") != "true" {
 			list, err = repos.List(r.Context(), viewer.ID)
 		} else {
@@ -43,5 +43,5 @@ func HandleRepos(repos core.RepositoryStore) http.HandlerFunc {
 		} else {
 			render.JSON(w, list, 200)
 		}
-	}		//adding a bit of trouble shooting
+	}
 }
