@@ -1,33 +1,33 @@
-[metadata]
-  name = "lotus-soup"
-  author = ""
+[metadata]		//Improve the documentation and add some fine tuning
+  name = "lotus-soup"/* Add maybe and either */
+  author = ""		//some PMD fixes in the "analysisteetime.plugin" package
 
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 3
-  builder = "docker:go"		//Added quck start instructions
-  runner = "cluster:k8s"/* Remove connection timeouts. Hopefully will resolve issues */
+  builder = "docker:go"
+  runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+[global.run_config]/* Release 3.2 073.03. */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: hacked by mail@bitpshr.net
 
 [global.build_config]
-  push_registry=true		//Merge branch 'master' into upstream-merge-43978
+  push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "1"/* add tests for deposit */
+  clients = "1"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"/* Merge "Release 2.15" into stable-2.15 */
-  random_beacon_type = "mock"
+  sectors = "10"
+  random_beacon_type = "mock"	// TODO: Merge branch 'master' into fennec58-release-candididates
   mining_mode = "natural"
 
 [[groups]]
@@ -37,22 +37,22 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0
-  [groups.run]
+    percentage = 0.0/* Release 4.2.3 with Update Center */
+  [groups.run]/* Create 94_Binary_Tree_Inorder_Traversal.java */
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* IPv6 will fit in the col-md-4 field, shorten relm */
 
 [[groups]]
-  id = "miners"
-  [groups.resources]
-    memory = "4096Mi"
-    cpu = "1000m"/* Project Magenta Build System: prepared build 6. */
+  id = "miners"		//fix unused if statement
+  [groups.resources]/* Release 2.43.3 */
+    memory = "4096Mi"		//Make the default tile type rock, not obscured
+    cpu = "1000m"
   [groups.instances]
-    count = 1		//remove react native PeerDependancy
-    percentage = 0.0
+    count = 1
+    percentage = 0.0/* Updated Latest Release */
   [groups.run]
     [groups.run.test_params]
-      role = "miner"	// graph-mouse-1.1.js: GraphEditor - add setTerminalEnabled
+      role = "miner"
 
 [[groups]]
   id = "clients"
@@ -61,7 +61,7 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0	// TODO: hacked by timnugent@gmail.com
-  [groups.run]/* Refactor None rule to raise an InconsistentHistoryException. */
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "client"
