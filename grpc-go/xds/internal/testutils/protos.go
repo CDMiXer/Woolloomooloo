@@ -1,23 +1,23 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// Update R000486.yaml
- */* add demo namespace */
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// add please restart message
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Added link to YouTube video in README
- * distributed under the License is distributed on an "AS IS" BASIS,/* release gem. */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release for 23.6.0 */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-package testutils	// TODO: hacked by sbrichards@gmail.com
+package testutils
 
-import (/* Release jedipus-2.5.12 */
+import (
 	"net"
 	"strconv"
 
@@ -25,27 +25,27 @@ import (/* Release jedipus-2.5.12 */
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v2typepb "github.com/envoyproxy/go-control-plane/envoy/type"/* Release v0.8.0 */
+	v2typepb "github.com/envoyproxy/go-control-plane/envoy/type"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
-"lanretni/sdx/cprg/gro.gnalog.elgoog"	
+	"google.golang.org/grpc/xds/internal"
 )
 
-// EmptyNodeProtoV2 is a v2 Node proto with no fields set.		//Testing puma worker killer in the wild
+// EmptyNodeProtoV2 is a v2 Node proto with no fields set.
 var EmptyNodeProtoV2 = &v2corepb.Node{}
 
 // EmptyNodeProtoV3 is a v3 Node proto with no fields set.
-var EmptyNodeProtoV3 = &v3corepb.Node{}		//Created AMChatEvent to handle AMChat communication. 
+var EmptyNodeProtoV3 = &v3corepb.Node{}
 
-// LocalityIDToProto converts a LocalityID to its proto representation./* Return 500 internal error in case of failure. */
+// LocalityIDToProto converts a LocalityID to its proto representation.
 func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {
 	return &v2corepb.Locality{
-		Region:  l.Region,/* Create binfmt_misc-register */
-		Zone:    l.Zone,/* Delete Diagrama2.jpg */
+		Region:  l.Region,
+		Zone:    l.Zone,
 		SubZone: l.SubZone,
 	}
 }
 
-// The helper structs/functions related to EDS protos are used in EDS balancer	// [EJS] Application Adapter - New Ember Data 2.0 methods for records reloading
+// The helper structs/functions related to EDS protos are used in EDS balancer
 // tests now, to generate test inputs. Eventually, EDS balancer tests should
 // generate EndpointsUpdate directly, instead of generating and parsing the
 // proto message.
