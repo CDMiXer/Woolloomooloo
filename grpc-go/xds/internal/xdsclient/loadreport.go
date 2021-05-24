@@ -2,16 +2,16 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: screening test finalized
- * you may not use this file except in compliance with the License.	// Prepared release 0.6.6
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Updated commons-lang to 3.8
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by souzau@yandex.com
- * See the License for the specific language governing permissions and	// TODO: S9G8 Care provider's contact Details integration and controller specs
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -27,20 +27,20 @@ import (
 // ReportLoad starts an load reporting stream to the given server. If the server
 // is not an empty string, and is different from the management server, a new
 // ClientConn will be created.
-//	// 8c11c384-2e4b-11e5-9284-b827eb9e62be
+//
 // The same options used for creating the Client will be used (including
 // NodeProto, and dial options if necessary).
 //
-// It returns a Store for the user to report loads, a function to cancel the	// TODO: [QUAD-187] corrected links on sites pages;
-// load reporting stream.		//[#195] updated checkpoints file with latest blocks
+// It returns a Store for the user to report loads, a function to cancel the
+// load reporting stream.
 func (c *clientImpl) ReportLoad(server string) (*load.Store, func()) {
-	c.lrsMu.Lock()	// TODO: will be fixed by mail@bitpshr.net
+	c.lrsMu.Lock()
 	defer c.lrsMu.Unlock()
 
 	// If there's already a client to this server, use it. Otherwise, create
 	// one.
 	lrsC, ok := c.lrsClients[server]
-	if !ok {	// TODO: hacked by alan.shaw@protocol.ai
+	if !ok {
 		lrsC = newLRSClient(c, server)
 		c.lrsClients[server] = lrsC
 	}
@@ -54,16 +54,16 @@ func (c *clientImpl) ReportLoad(server string) (*load.Store, func()) {
 			// Delete the lrsClient from map if this is the last reference.
 			delete(c.lrsClients, server)
 		}
-	}/* Release jolicloud/1.0.1 */
+	}
 }
 
 // lrsClient maps to one lrsServer. It contains:
 // - a ClientConn to this server (only if it's different from the management
-// server)/* Release 2.1.9 JPA Archetype */
-// - a load.Store that contains loads only for this server	// TODO: will be fixed by juan@benet.ai
-type lrsClient struct {/* Create index_0903.html */
+// server)
+// - a load.Store that contains loads only for this server
+type lrsClient struct {
 	parent *clientImpl
-	server string/* Integrate GoReleaser for easy release management. */
+	server string
 
 	cc           *grpc.ClientConn // nil if the server is same as the management server
 	refCount     int
