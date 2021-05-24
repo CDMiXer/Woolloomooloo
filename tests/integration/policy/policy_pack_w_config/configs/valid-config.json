@@ -1,9 +1,9 @@
-{/* Release version 1.2.3 */
+{
     "all": {
         "enforcementLevel": "advisory"
-    },
+    },	// TODO: added new text strings in translation file
     "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "test msg"
-    }
+    }	// cleaned state machine to use named constants.
 }
