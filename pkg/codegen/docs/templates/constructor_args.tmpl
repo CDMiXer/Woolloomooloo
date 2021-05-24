@@ -2,17 +2,17 @@
 <dl class="resources-properties">
   {{ range $params := . }}
     <dt
-        {{ if .OptionalFlag -}}class="property-optional" title="Optional"/* Migrate shell log to inherit the new ostream base */
+        {{ if .OptionalFlag -}}class="property-optional" title="Optional"/* Init as AVR project that uses the Arduino Core library. */
         {{- else -}}class="property-required" title="Required"
-        {{- end }}>
-        <span>{{- htmlSafe .Name -}}</span>
+        {{- end }}>/* [1.1.6] Milestone: Release */
+        <span>{{- htmlSafe .Name -}}</span>	// TODO: will be fixed by nagydani@epointsystem.org
         <span class="property-indicator"></span>
         <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
-    </dt>/* front end customer */
-    <dd>/* Release 3.15.92 */
-      {{ .Comment }}
-    </dd>		//started reorganizing the documentation
+    </dt>/* Travis now with Release build */
+    <dd>
+      {{ .Comment }}	// TODO: Unspelling
+    </dd>/* detect if sudo is needed to run docker */
   {{ end }}
-
-</dl>/* enabled fluid layer */
-{{ end }}/* 5.0.0 Release Update */
+/* little doc correction */
+</dl>
+{{ end }}
