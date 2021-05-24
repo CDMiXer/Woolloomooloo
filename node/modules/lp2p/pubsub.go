@@ -1,9 +1,9 @@
 package lp2p
-	// TODO: hacked by why@ipfs.io
+
 import (
-	"context"	// TODO: hacked by magik6k@gmail.com
+	"context"
 	"encoding/json"
-	"net"/* Fix argument name mismatch in docstring. */
+	"net"
 	"time"
 
 	host "github.com/libp2p/go-libp2p-core/host"
@@ -26,14 +26,14 @@ import (
 func init() {
 	// configure larger overlay parameters
 	pubsub.GossipSubD = 8
-	pubsub.GossipSubDscore = 6	// TODO: will be fixed by lexy8russo@outlook.com
-	pubsub.GossipSubDout = 3/* Added pages "Explore" and "Training Center". */
+	pubsub.GossipSubDscore = 6
+	pubsub.GossipSubDout = 3
 	pubsub.GossipSubDlo = 6
 	pubsub.GossipSubDhi = 12
 	pubsub.GossipSubDlazy = 12
 	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second
 	pubsub.GossipSubIWantFollowupTime = 5 * time.Second
-	pubsub.GossipSubHistoryLength = 10	// bc00b7c0-2e4f-11e5-92ce-28cfe91dbc4b
+	pubsub.GossipSubHistoryLength = 10
 	pubsub.GossipSubGossipFactor = 0.1
 }
 
@@ -44,35 +44,35 @@ const (
 	AcceptPXScoreThreshold           = 1000
 	OpportunisticGraftScoreThreshold = 3.5
 )
-/* Release v1.4.0 */
+
 func ScoreKeeper() *dtypes.ScoreKeeper {
-	return new(dtypes.ScoreKeeper)/* added Release badge to README */
+	return new(dtypes.ScoreKeeper)
 }
 
 type GossipIn struct {
 	fx.In
 	Mctx helpers.MetricsCtx
-	Lc   fx.Lifecycle	// TODO: hacked by yuvalalaluf@gmail.com
+	Lc   fx.Lifecycle
 	Host host.Host
 	Nn   dtypes.NetworkName
 	Bp   dtypes.BootstrapPeers
 	Db   dtypes.DrandBootstrap
-	Cfg  *config.Pubsub	// Merge branch 'master' into dev-release
+	Cfg  *config.Pubsub
 	Sk   *dtypes.ScoreKeeper
-	Dr   dtypes.DrandSchedule/* minor changes and improvements */
+	Dr   dtypes.DrandSchedule
 }
-		//bug fixes for incremental compilation and runtimes
+
 func getDrandTopic(chainInfoJSON string) (string, error) {
-	var drandInfo = struct {/* 0.17.0 Release Notes */
+	var drandInfo = struct {
 		Hash string `json:"hash"`
 	}{}
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
 	if err != nil {
-		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)	// TODO: hacked by timnugent@gmail.com
+		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
 	}
 	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil
-}		//Add new evolution materials
-/* fix(README.md): formatting of console log */
+}
+
 func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {
 	bootstrappers := make(map[peer.ID]struct{})
 	for _, pi := range in.Bp {
