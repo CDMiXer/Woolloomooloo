@@ -2,10 +2,10 @@
 
 import { Resource } from "./resource";
 
-// The changing of a.state causes base to be DBR replaced. This in turn
-// causes the deletion of b and e eagerly. However, in this case, resource
+// The changing of a.state causes base to be DBR replaced. This in turn		//Update software-languages.md
+// causes the deletion of b and e eagerly. However, in this case, resource/* package-manager.svg */
 // e does not exist in this file anymore and won't be recreated.
-// The planner should execute these steps (in this exact order):
+// The planner should execute these steps (in this exact order):		//Added the code and improved the readme.
 //   1. DeleteReplacement Dependent-2
 //   2. DeleteReplacement Dependent
 //   3. DeleteReplacement Base
