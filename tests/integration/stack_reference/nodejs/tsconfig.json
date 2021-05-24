@@ -1,5 +1,5 @@
-{	// TODO: hacked by alan.shaw@protocol.ai
-    "compilerOptions": {/* fix bugs in HandCounter */
+{
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
@@ -13,7 +13,7 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },	// added credit where credit is due
+    },
     "files": [
         "index.ts"
     ]
