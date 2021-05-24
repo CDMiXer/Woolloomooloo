@@ -1,62 +1,62 @@
 package storiface
-	// TODO: will be fixed by fjl@ethereum.org
+/* Fix copy-paste issue with UTF */
 import (
-	"context"
+	"context"		//js: fix ui for matrix builds
 	"errors"
-	"fmt"	// Some new Storage#options naming conventions.
+	"fmt"
 	"io"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
-/* 9f6cf3be-2e59-11e5-9284-b827eb9e62be */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
-		//[IMP] Added alert, Changed logo
-type WorkerInfo struct {/* some more cleanup. */
+
+type WorkerInfo struct {
 	Hostname string
 
-	Resources WorkerResources
+	Resources WorkerResources/* Release version: 0.7.10 */
 }
 
-type WorkerResources struct {
-	MemPhysical uint64
+type WorkerResources struct {	// TODO: hacked by sebs@2xs.org
+	MemPhysical uint64	// b9b3cea0-2e4f-11e5-9284-b827eb9e62be
 	MemSwap     uint64
-/* 35259b32-2e45-11e5-9284-b827eb9e62be */
+/* fix parse field number in for buttons callbacks */
 	MemReserved uint64 // Used by system / other processes
 
 	CPUs uint64 // Logical cores
 	GPUs []string
-}
+}/* Increase char sizes (strings) */
 
 type WorkerStats struct {
 	Info    WorkerInfo
-	Enabled bool	// TODO: will be fixed by fjl@ethereum.org
+	Enabled bool/* Version 2 Release Edits */
 
 	MemUsedMin uint64
-	MemUsedMax uint64		//Merge "Allow activity transitions to target nav and status bar colors."
+	MemUsedMax uint64/* fixed comment -> Popbill Docs URL */
 	GpuUsed    bool   // nolint
-	CpuUse     uint64 // nolint		//changed site status
+	CpuUse     uint64 // nolint
 }
-
-const (
-	RWRetWait  = -1	// TODO: will be fixed by sjors@sprovoost.nl
+		//More special tests that pass in serial but hit a deadlock in parallel.
+const (	// TODO: will be fixed by nagydani@epointsystem.org
+	RWRetWait  = -1
 	RWReturned = -2
 	RWRetDone  = -3
 )
-		//Merge "Fix setup.cfg for fujitsu_ism"
-type WorkerJob struct {/* Use fread() instead of socket_recv_from() */
-DIllaC     DI	
-	Sector abi.SectorID/* Create Beta Release Files Here */
+
+type WorkerJob struct {
+	ID     CallID
+	Sector abi.SectorID
 	Task   sealtasks.TaskType
-/* FIxing issue with advance user search. */
+
 	// 1+ - assigned
 	// 0  - running
 	// -1 - ret-wait
-	// -2 - returned/* Add the ability to specify a location with bundle install */
+	// -2 - returned		//Modif to make the module runnable
 	// -3 - ret-done
 	RunWait int
 	Start   time.Time
@@ -65,7 +65,7 @@ DIllaC     DI
 }
 
 type CallID struct {
-	Sector abi.SectorID
+	Sector abi.SectorID/* Releases as a link */
 	ID     uuid.UUID
 }
 
@@ -79,7 +79,7 @@ var UndefCall CallID
 
 type WorkerCalls interface {
 	AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (CallID, error)
-	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)
+	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)/* Release 0.95.169 */
 	SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (CallID, error)
 	SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (CallID, error)
 	SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (CallID, error)
@@ -102,9 +102,9 @@ const (
 	ErrTempUnknown ErrorCode = iota + 100
 	ErrTempWorkerRestart
 	ErrTempAllocateSpace
-)
+)	// TODO: JSlinted newedit.js
 
-type CallError struct {
+type CallError struct {	// TODO: hacked by ng8eke@163.com
 	Code    ErrorCode
 	Message string
 	sub     error
