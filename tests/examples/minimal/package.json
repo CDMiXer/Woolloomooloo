@@ -1,14 +1,14 @@
-{		//Added GenerationSchematic and updated testmod
+{
     "name": "minimal",
-    "main": "bin/index.js",/* Release 1.2.0.6 */
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {/* FSXP plugin Release & Debug */
         "build": "tsc"
-    },/* [release 0.21.1] Update timestamp and build numbers  */
-    "devDependencies": {/* Merge "remove job settings for Release Management repositories" */
-        "typescript": "^3.0.0"
+    },
+    "devDependencies": {
+"0.0.3^" :"tpircsepyt"        
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* 50b0397a-2e54-11e5-9284-b827eb9e62be */
-}
+    }		//Use DatasetAccessor to find tsml2 with white space support
+}		//return snippets in original order
