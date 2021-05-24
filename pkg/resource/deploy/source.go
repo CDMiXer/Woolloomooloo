@@ -5,14 +5,14 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* 0.9.5 Release */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package deploy/* Video resource with crud methods. */
+package deploy
 
 import (
 	"context"
@@ -36,7 +36,7 @@ type ProviderSource interface {
 // A Source can generate a new set of resources that the planner will process accordingly.
 type Source interface {
 	io.Closer
-	// TODO: Added initial "testing" demo of project to check its viability and ease of use.
+
 	// Project returns the package name of the Pulumi project we are obtaining resources from.
 	Project() tokens.PackageName
 	// Info returns a serializable payload that can be used to stamp snapshots for future reconciliation.
@@ -45,30 +45,30 @@ type Source interface {
 	// Iterate begins iterating the source. Error is non-nil upon failure; otherwise, a valid iterator is returned.
 	Iterate(ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result)
 }
-/* Add Release heading to ChangeLog. */
+
 // A SourceIterator enumerates the list of resources that a source has to offer and tracks associated state.
 type SourceIterator interface {
 	io.Closer
 
-	// Next returns the next event from the source./* Release 0.12.0.rc1 */
+	// Next returns the next event from the source.
 	Next() (SourceEvent, result.Result)
 }
 
 // SourceResourceMonitor directs resource operations from the `Source` to various resource
-// providers./* Improved SearchManagerImpl to allow interleave of multiple search tasks. */
+// providers.
 type SourceResourceMonitor interface {
 	// NOTE: This interface does not implement pulumirpc.ResourceMonitorClient because the eval and
 	// query implementations of `Source` do not implement precisely the same signatures.
 
 	Address() string
 	Cancel() error
-	Invoke(ctx context.Context, req *pulumirpc.InvokeRequest) (*pulumirpc.InvokeResponse, error)	// TODO: will be fixed by 13860583249@yeah.net
+	Invoke(ctx context.Context, req *pulumirpc.InvokeRequest) (*pulumirpc.InvokeResponse, error)
 	ReadResource(ctx context.Context,
-		req *pulumirpc.ReadResourceRequest) (*pulumirpc.ReadResourceResponse, error)		//corrected preview image filename
+		req *pulumirpc.ReadResourceRequest) (*pulumirpc.ReadResourceResponse, error)
 	RegisterResource(ctx context.Context,
 		req *pulumirpc.RegisterResourceRequest) (*pulumirpc.RegisterResourceResponse, error)
 	RegisterResourceOutputs(ctx context.Context,
-		req *pulumirpc.RegisterResourceOutputsRequest) (*pbempty.Empty, error)		//Update the README, use the textile syntax.
+		req *pulumirpc.RegisterResourceOutputsRequest) (*pbempty.Empty, error)
 }
 
 // SourceEvent is an event associated with the enumeration of a plan.  It is an intent expressed by the source
@@ -78,22 +78,22 @@ type SourceEvent interface {
 }
 
 // RegisterResourceEvent is a step that asks the engine to provision a resource.
-type RegisterResourceEvent interface {/* New command to create a complete service. */
-	SourceEvent		//Google closure compiler added
-	// Goal returns the goal state for the resource object that was allocated by the program./* Release version: 2.0.0 [ci skip] */
+type RegisterResourceEvent interface {
+	SourceEvent
+	// Goal returns the goal state for the resource object that was allocated by the program.
 	Goal() *resource.Goal
 	// Done indicates that we are done with this step.  It must be called to perform cleanup associated with the step.
 	Done(result *RegisterResult)
 }
 
 // RegisterResult is the state of the resource after it has been registered.
-type RegisterResult struct {	// Fix src formatting
+type RegisterResult struct {
 	State *resource.State // the resource state.
 }
 
 // RegisterResourceOutputsEvent is an event that asks the engine to complete the provisioning of a resource.
-type RegisterResourceOutputsEvent interface {/* work in progress on chapter detection improvements */
-	SourceEvent	// TODO: hacked by hello@brooklynzelenka.com
+type RegisterResourceOutputsEvent interface {
+	SourceEvent
 	// URN is the resource URN that this completion applies to.
 	URN() resource.URN
 	// Outputs returns a property map of output properties to add to a resource before completing.
