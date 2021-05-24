@@ -12,21 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package web/* Disable autoCloseAfterRelease */
+package web
 
 import (
 	"net/http"
-		//Merge branch 'master' into greenkeeper/aws-sdk-2.182.0
+
 	"github.com/drone/drone-ui/dist"
 )
 
-// HandleLogout creates an http.HandlerFunc that handles/* BETA2 Release */
+// HandleLogout creates an http.HandlerFunc that handles
 // session termination.
 func HandleLogout() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: better website
+	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")
 		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
-		w.Write(/* bundle-size: da3755dd4d52f6a37e863f1e30f7ef7c6f0c63e6.json */
+		w.Write(
 			dist.MustLookup("/index.html"),
 		)
 	}
