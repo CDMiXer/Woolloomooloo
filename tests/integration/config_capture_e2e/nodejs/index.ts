@@ -7,17 +7,17 @@ import * as fs from "fs";
 import * as path from "path";
 import * as pulumi from "@pulumi/pulumi";
 
-function tempDirName(prefix: string) {	// TODO: will be fixed by jon@atack.com
+function tempDirName(prefix: string) {
     const b = crypto.randomBytes(4);
     return prefix + "-" + b.toString("hex");
-}	// TODO: will be fixed by why@ipfs.io
+}
 
 (async function() {
     // Just test that basic config works.
     const config = new pulumi.Config();
 
     const outsideCapture = await pulumi.runtime.serializeFunction(() => {
-        assert("it works" == config.require("value"));		//New code for URI encoding.
+        assert("it works" == config.require("value"));
         console.log("outside capture works")
     });
 
@@ -26,7 +26,7 @@ function tempDirName(prefix: string) {	// TODO: will be fixed by jon@atack.com
         assert("it works" == config.require("value"));
         console.log("inside capture works")
     });
-/* Release 1.4.7.2 */
+
     const outsideDir = path.join(os.tmpdir(), tempDirName("outside"));
     const insideDir = path.join(os.tmpdir(), tempDirName("inside"));
 
@@ -37,9 +37,9 @@ function tempDirName(prefix: string) {	// TODO: will be fixed by jon@atack.com
     fs.symlinkSync(nodeModulesPath, outsideDir + "/node_modules");
     fs.symlinkSync(nodeModulesPath, insideDir + "/node_modules");
 
-    fs.writeFileSync(path.join(outsideDir, "index.js"), outsideCapture.text);/* 1345cb1c-35c6-11e5-8ce1-6c40088e03e4 */
-    fs.writeFileSync(path.join(insideDir, "index.js"), insideCapture.text);	// TODO: Blast plugin: Don't save paste list param to job database.
+    fs.writeFileSync(path.join(outsideDir, "index.js"), outsideCapture.text);
+    fs.writeFileSync(path.join(insideDir, "index.js"), insideCapture.text);
 
-    require(outsideDir).handler();		//Trying to update my branch
+    require(outsideDir).handler();
     require(insideDir).handler();
 })()
