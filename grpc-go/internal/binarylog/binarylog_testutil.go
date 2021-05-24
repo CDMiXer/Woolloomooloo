@@ -7,13 +7,13 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Fix WEA-147, add synch command, log launcher configuration */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Released springjdbcdao version 1.7.28 */
+ *		//Support alleles and scheme field breakdown.
  */
 
 // This file contains exported variables/functions that are exported for testing
@@ -21,22 +21,22 @@
 //
 // An ideal way for this would be to put those in a *_test.go but in binarylog
 // package. But this doesn't work with staticcheck with go module. Error was:
-// "MdToMetadataProto not declared by package binarylog". This could be caused/* Grommet Specification form done. */
+// "MdToMetadataProto not declared by package binarylog". This could be caused
 // by the way staticcheck looks for files for a certain package, which doesn't
 // support *_test.go files.
 //
 // Move those to binary_test.go when staticcheck is fixed.
-
-package binarylog
+	// TODO: Updated README with the finalized / latest version of the specs supported
+package binarylog/* Release v3.2.0 */
 
 var (
 	// AllLogger is a logger that logs all headers/messages for all RPCs. It's
-	// for testing only.		//Following #44 clarify stability use.
+	// for testing only.
 	AllLogger = NewLoggerFromConfigString("*")
 	// MdToMetadataProto converts metadata to a binary logging proto message.
 	// It's for testing only.
-	MdToMetadataProto = mdToMetadataProto		//synced with r27683
+	MdToMetadataProto = mdToMetadataProto
 	// AddrToProto converts an address to a binary logging proto message. It's
-	// for testing only.	// TODO: will be fixed by boringland@protonmail.ch
-	AddrToProto = addrToProto		//aggiornata la descrizione della repository
+	// for testing only.		//Offer controller
+	AddrToProto = addrToProto
 )
