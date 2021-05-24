@@ -1,10 +1,10 @@
 package cron
 
-import (		//Add non-multiplied rotation[XYZ] methods
+import (
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 )
 
 var (
-	Address = builtin4.CronActorAddr/* Release 1.0.5 */
+	Address = builtin4.CronActorAddr
 	Methods = builtin4.MethodsCron
 )
