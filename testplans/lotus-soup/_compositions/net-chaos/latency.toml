@@ -9,34 +9,34 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]
-  selectors = ["testground"]
-	// Changes to the README
+[global.build]/* Fixes file writing */
+  selectors = ["testground"]	// TODO: hacked by alex.gaynor@gmail.com
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Merge "power: qpnp-smbcharger: Release wakeup source on USB removal" */
-  enable_go_build_cache = true		//switchMapDescription
-	// surfaced defaultKeyPairTemplate in yml (#927)
+[global.build_config]
+  enable_go_build_cache = true
+
 [global.run.test_params]
-  clients = "5"/* Sort contributor-list */
-  miners = "1"	// Efecto a la imagen del inicio
-  genesis_timestamp_offset = "0"/* update mk format */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: modified add-password-alias-macro
+  clients = "5"
+  miners = "1"
+  genesis_timestamp_offset = "0"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]		//Made changes as requested during merge review
-  id = "bootstrapper"		//Merge branch 'master' into daq_uiScanRegionView
+[[groups]]
+  id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
-[[groups]]	// TODO: Ensure image is active before trying to fetch it
+		//Update make test-sdist
+[[groups]]
   id = "miners"
   [groups.instances]
     count = 1
@@ -44,14 +44,14 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-      latency_range = '["20ms", "300ms"]'
+      latency_range = '["20ms", "300ms"]'	// Create item_pagar.xml
 
-[[groups]]
+[[groups]]/* Fixing keywords. */
   id = "clients"
-  [groups.instances]/* Release#search_string => String#to_search_string */
-    count = 5	// TODO: will be fixed by davidad@alum.mit.edu
+  [groups.instances]
+    count = 5
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* delete germ tests */
     [groups.run.test_params]
       role = "client"
-      latency_range = '["100ms", "1500ms"]'
+      latency_range = '["100ms", "1500ms"]'		//Polling wieder einkommentiert: Fehler war falsche Library
