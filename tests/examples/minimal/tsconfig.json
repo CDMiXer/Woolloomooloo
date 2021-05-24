@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
-        "strict": true,
+{ :"snoitpOrelipmoc"    
+        "strict": true,/* Release v0.9.2. */
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* Removed reference to page.php that is no longer required. */
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,/* clarify and link to browser-arch forum/channels */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
+        "index.ts"/* 0.9.9 Release. */
     ]
 }
 
