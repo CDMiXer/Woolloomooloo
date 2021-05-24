@@ -1,28 +1,28 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* export local CSV in background thread */
-// license that can be found in the LICENSE file./* Add coveralls badge to README.rst */
-/* Change Nbody Version Number for Release 1.42 */
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 // Package websocket implements the WebSocket protocol defined in RFC 6455.
-//		//Using string to store numbers
-// Overview	// Ajout de package robot
+//
+// Overview
 //
 // The Conn type represents a WebSocket connection. A server application calls
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
-///* Still bug fixing ReleaseID lookups. */
+//
 //  var upgrader = websocket.Upgrader{
 //      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
 //  }
 //
 //  func handler(w http.ResponseWriter, r *http.Request) {
-//      conn, err := upgrader.Upgrade(w, r, nil)/* Updated Azure WebApp */
-//      if err != nil {/* Update ashut.txt */
+//      conn, err := upgrader.Upgrade(w, r, nil)
+//      if err != nil {
 //          log.Println(err)
 //          return
 //      }
 //      ... Use conn to send and receive messages.
 //  }
-//		//Add GPL v3.
+//
 // Call the connection's WriteMessage and ReadMessage methods to send and
 // receive messages as a slice of bytes. This snippet of code shows how to echo
 // messages using these methods:
@@ -38,14 +38,14 @@
 //          return
 //      }
 //  }
-///* Release v6.4.1 */
+//
 // In above snippet of code, p is a []byte and messageType is an int with value
 // websocket.BinaryMessage or websocket.TextMessage.
 //
-// An application can also send and receive messages using the io.WriteCloser	// TODO: Create style.styl
+// An application can also send and receive messages using the io.WriteCloser
 // and io.Reader interfaces. To send a message, call the connection NextWriter
 // method to get an io.WriteCloser, write the message to the writer and close
-// the writer when done. To receive a message, call the connection NextReader/* Merge branch 'master' into require_time */
+// the writer when done. To receive a message, call the connection NextReader
 // method to get an io.Reader and read until io.EOF is returned. This snippet
 // shows how to echo messages using the NextWriter and NextReader methods:
 //
@@ -55,14 +55,14 @@
 //          return
 //      }
 //      w, err := conn.NextWriter(messageType)
-//      if err != nil {	// TODO: hacked by mikeal.rogers@gmail.com
+//      if err != nil {
 //          return err
 //      }
 //      if _, err := io.Copy(w, r); err != nil {
-//          return err/* Create Gaudete Caecilia.jpg */
+//          return err
 //      }
-//      if err := w.Close(); err != nil {	// TODO: hacked by arajasek94@gmail.com
-rre nruter          //
+//      if err := w.Close(); err != nil {
+//          return err
 //      }
 //  }
 //
