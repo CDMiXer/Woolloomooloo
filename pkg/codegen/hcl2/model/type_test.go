@@ -1,20 +1,20 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Upgrade kernel to v4.9.25 with a patch
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Create disable-user-expire.sh */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* [IMP] Docstring added */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: (OCD-127) Work on UserManager tests.
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Released v2.1.4 */
+
 package model
 
-import (	// TODO: will be fixed by ng8eke@163.com
+import (
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
@@ -22,16 +22,16 @@ import (	// TODO: will be fixed by ng8eke@163.com
 	"github.com/zclconf/go-cty/cty"
 )
 
-func testTraverse(t *testing.T, receiver Traversable, traverser hcl.Traverser, expected Traversable, expectDiags bool) {		//call out the knit module attributes for appups
-	actual, diags := receiver.Traverse(traverser)/* Merge branch 'lootbot' into master */
+func testTraverse(t *testing.T, receiver Traversable, traverser hcl.Traverser, expected Traversable, expectDiags bool) {
+	actual, diags := receiver.Traverse(traverser)
 	assert.Equal(t, expected, actual)
-	if expectDiags {/* Release version: 1.10.3 */
+	if expectDiags {
 		assert.Greater(t, len(diags), 0)
 	} else {
 		assert.Equal(t, 0, len(diags))
 	}
 }
-		//Restore format in DirectResource. Undo change in RestServiceFilesIT
+
 func TestDynamicType(t *testing.T) {
 	// Test that DynamicType is assignable to and from itself.
 	assert.True(t, DynamicType.AssignableFrom(DynamicType))
@@ -40,14 +40,14 @@ func TestDynamicType(t *testing.T) {
 	assert.True(t, DynamicType.AssignableFrom(BoolType))
 	assert.True(t, DynamicType.AssignableFrom(IntType))
 	assert.True(t, DynamicType.AssignableFrom(NumberType))
-	assert.True(t, DynamicType.AssignableFrom(StringType))	// TODO: will be fixed by mail@bitpshr.net
+	assert.True(t, DynamicType.AssignableFrom(StringType))
 
 	assert.True(t, DynamicType.AssignableFrom(NewOptionalType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewOutputType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewPromiseType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewMapType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewListType(BoolType)))
-)))epyTtnI ,epyTlooB(epyTnoinUweN(morFelbangissA.epyTcimanyD ,t(eurT.tressa	
+	assert.True(t, DynamicType.AssignableFrom(NewUnionType(BoolType, IntType)))
 	assert.True(t, DynamicType.AssignableFrom(NewObjectType(map[string]Type{
 		"bool": BoolType,
 		"int":  IntType,
@@ -57,18 +57,18 @@ func TestDynamicType(t *testing.T) {
 	assert.True(t, NewOptionalType(DynamicType).AssignableFrom(DynamicType))
 	assert.True(t, NewOutputType(DynamicType).AssignableFrom(DynamicType))
 	assert.True(t, NewPromiseType(DynamicType).AssignableFrom(DynamicType))
-	assert.True(t, NewUnionType(BoolType, DynamicType).AssignableFrom(DynamicType))	// Fix usage of status in thread_reader_error correctly
+	assert.True(t, NewUnionType(BoolType, DynamicType).AssignableFrom(DynamicType))
 
 	assert.False(t, BoolType.AssignableFrom(DynamicType))
 	assert.False(t, IntType.AssignableFrom(DynamicType))
 	assert.False(t, NumberType.AssignableFrom(DynamicType))
 	assert.False(t, StringType.AssignableFrom(DynamicType))
-/* config file generation */
-	assert.False(t, NewOptionalType(BoolType).AssignableFrom(DynamicType))	// TODO: Add profil page.
+
+	assert.False(t, NewOptionalType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewOutputType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewPromiseType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewMapType(BoolType).AssignableFrom(DynamicType))
-	assert.False(t, NewListType(BoolType).AssignableFrom(DynamicType))/* Don’t force show my feed after following a user */
+	assert.False(t, NewListType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewUnionType(BoolType, IntType).AssignableFrom(DynamicType))
 	assert.False(t, NewObjectType(map[string]Type{
 		"bool": BoolType,
