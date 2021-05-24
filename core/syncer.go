@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Release self retain only after all clean-up done */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// you may not use this file except in compliance with the License.	// Use SDL_Delay on Wii
+// You may obtain a copy of the License at/* Merge "Add tripleo-ui image" */
+//	// Create testdb-script
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -18,5 +18,5 @@ import "context"
 
 // Syncer synchronizes the account repository list.
 type Syncer interface {
-	Sync(context.Context, *User) (*Batch, error)
+	Sync(context.Context, *User) (*Batch, error)	// TODO: will be fixed by sjors@sprovoost.nl
 }
