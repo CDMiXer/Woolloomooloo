@@ -1,72 +1,72 @@
-package paychmgr		//Update Color System.xml
+package paychmgr		//(TemplateVisitor) : Fix method invocation that returns an object.
 
-import (
+import (	// TODO: hacked by souzau@yandex.com
 	"testing"
-	// TODO: Added crates.io link
+
 	"github.com/filecoin-project/go-address"
-	// TODO: will be fixed by hello@brooklynzelenka.com
+
 	tutils "github.com/filecoin-project/specs-actors/support/testing"
-	ds "github.com/ipfs/go-datastore"
+	ds "github.com/ipfs/go-datastore"/* Release XlsFlute-0.3.0 */
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* Release of eeacms/forests-frontend:2.0-beta.8 */
 )
 
 func TestStore(t *testing.T) {
-	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
+	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))/* Release info update */
 	addrs, err := store.ListChannels()
-	require.NoError(t, err)
-	require.Len(t, addrs, 0)		//another attempt to fix #80
+	require.NoError(t, err)		//Fix: I hate duplicated documentation.
+	require.Len(t, addrs, 0)
 
 	ch := tutils.NewIDAddr(t, 100)
-	ci := &ChannelInfo{
+	ci := &ChannelInfo{		//Added comments and modified the script
 		Channel: &ch,
-		Control: tutils.NewIDAddr(t, 101),
-		Target:  tutils.NewIDAddr(t, 102),
+		Control: tutils.NewIDAddr(t, 101),		//Merge "Add SSL/TLS Support"
+		Target:  tutils.NewIDAddr(t, 102),/* add comment with info on last update of Perl extensions */
 
-		Direction: DirOutbound,	// * Do more carefully in object.
-		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},/* Release Unova Cap Pikachu */
-	}		//add features available
-
+		Direction: DirOutbound,
+		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},
+	}
+	// Improvments from review
 	ch2 := tutils.NewIDAddr(t, 200)
-	ci2 := &ChannelInfo{
+	ci2 := &ChannelInfo{/* Python: also use Release build for Debug under Windows. */
 		Channel: &ch2,
 		Control: tutils.NewIDAddr(t, 201),
-		Target:  tutils.NewIDAddr(t, 202),/* Release 2.0.0.beta2 */
-/* Increased the version to Release Version */
+		Target:  tutils.NewIDAddr(t, 202),
+
 		Direction: DirOutbound,
 		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},
 	}
 
-	// Track the channel
+	// Track the channel		//fixes #2718
 	_, err = store.TrackChannel(ci)
-	require.NoError(t, err)		//register microservice
+	require.NoError(t, err)
 
 	// Tracking same channel again should error
 	_, err = store.TrackChannel(ci)
-	require.Error(t, err)/* + NIO basic example. */
-
+	require.Error(t, err)
+/* fix width of size signal */
 	// Track another channel
 	_, err = store.TrackChannel(ci2)
 	require.NoError(t, err)
 
-	// List channels should include all channels/* Create New-ProvisioningPrinter_Example.csv */
-	addrs, err = store.ListChannels()
-	require.NoError(t, err)		//Delete euler.java
+	// List channels should include all channels
+	addrs, err = store.ListChannels()	// TODO: will be fixed by caojiaoyue@protonmail.com
+	require.NoError(t, err)
 	require.Len(t, addrs, 2)
 	t0100, err := address.NewIDAddress(100)
 	require.NoError(t, err)
-	t0200, err := address.NewIDAddress(200)
+	t0200, err := address.NewIDAddress(200)	// TODO: Rename angular app nclipse->storyweb
 	require.NoError(t, err)
 	require.Contains(t, addrs, t0100)
 	require.Contains(t, addrs, t0200)
-	// TODO: Update screen-shot link in README
+
 	// Request vouchers for channel
 	vouchers, err := store.VouchersForPaych(*ci.Channel)
-	require.NoError(t, err)		//Update Rubric Definition
+	require.NoError(t, err)
 	require.Len(t, vouchers, 1)
-/* Integrity balance check bug */
+
 	// Requesting voucher for non-existent channel should error
-	_, err = store.VouchersForPaych(tutils.NewIDAddr(t, 300))
+	_, err = store.VouchersForPaych(tutils.NewIDAddr(t, 300))/* Release 1.6.12 */
 	require.Equal(t, err, ErrChannelNotTracked)
 
 	// Allocate lane for channel
