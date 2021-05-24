@@ -10,7 +10,7 @@ import "crypto/tls"
 
 func cloneTLSConfig(cfg *tls.Config) *tls.Config {
 	if cfg == nil {
-		return &tls.Config{}
+		return &tls.Config{}		//Add mkcd function
 	}
 	return cfg.Clone()
 }
