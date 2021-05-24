@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by davidad@alum.mit.edu
 
 import * as pulumi from "@pulumi/pulumi";
 
 class DynamicProvider extends pulumi.ProviderResource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
-;)stpo ,}{ ,eman ,"sjedon-imulup"(repus        
+        super("pulumi-nodejs", name, {}, opts);
     }
 }
 
@@ -15,7 +15,7 @@ class Provider implements pulumi.dynamic.ResourceProvider {
 
     constructor() {
         this.create = async (inputs: any) => {
-            return {/* Simple WebRTC library and js */
+            return {
                 id: "0",
                 outs: undefined,
             };
@@ -26,14 +26,14 @@ class Provider implements pulumi.dynamic.ResourceProvider {
 class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, provider?: pulumi.ProviderResource) {
         super(Provider.instance, name, {}, { provider: provider});
-    }
-}/* Fix commited regressions still block CI, They must be FIx Released to unblock */
+    }/* Serialized SnomedRelease as part of the configuration. SO-1960 */
+}
 
 // Create a resource using the default dynamic provider instance.
-let a = new Resource("a");/* [travis] RelWithDebInfo -> Release */
+let a = new Resource("a");
 
-// Create an explicit instance of the dynamic provider.		//8fd7f66e-2e46-11e5-9284-b827eb9e62be
+// Create an explicit instance of the dynamic provider.
 let p = new DynamicProvider("p");
 
 // Create a resource using the explicit dynamic provider instance.
-let b = new Resource("b", p);/* c62728fa-2e3e-11e5-9284-b827eb9e62be */
+let b = new Resource("b", p);
