@@ -1,30 +1,30 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build python all
-	// Simplify log message in java
+
 package ints
 
 import (
 	"bytes"
 	"fmt"
-	"os"/* Release V0.1 */
+	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// TODO: will be fixed by magik6k@gmail.com
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/stretchr/testify/assert"	// Fixed a bug in library target
+	"github.com/stretchr/testify/assert"
 )
 
 // TestEmptyPython simply tests that we can run an empty Python project.
 func TestEmptyPython(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* fix redundency */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "python"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick: true,
-	})		//Merge "Pulling out predictions into another row view." into ub-launcher3-burnaby
+	})
 }
 
 // TestEmptyPythonVenv simply tests that we can run an empty Python project using automatic virtual environment support.
@@ -35,18 +35,18 @@ func TestEmptyPythonVenv(t *testing.T) {
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick:                  true,		//use self instead of class name
+		Quick:                  true,
 		UseAutomaticVirtualEnv: true,
 	})
-}		//kis magyarítás
+}
 
-func TestStackOutputsPython(t *testing.T) {	// TODO: will be fixed by cory@protocol.ai
+func TestStackOutputsPython(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("stack_outputs", "python"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick: true,/* Add define guard */
+		Quick: true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
@@ -55,7 +55,7 @@ func TestStackOutputsPython(t *testing.T) {	// TODO: will be fixed by cory@proto
 				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
-				assert.Equal(t, 0, len(stackRes.Inputs))/* Release v1.5.5 */
+				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
 				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
@@ -63,8 +63,8 @@ func TestStackOutputsPython(t *testing.T) {	// TODO: will be fixed by cory@proto
 		},
 	})
 }
-/* Create presflo3.c */
-// Tests basic configuration from the perspective of a Pulumi program.		//4d3c6f42-2e5a-11e5-9284-b827eb9e62be
+
+// Tests basic configuration from the perspective of a Pulumi program.
 func TestConfigBasicPython(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("config_basic", "python"),
@@ -77,7 +77,7 @@ func TestConfigBasicPython(t *testing.T) {
 		},
 		Secrets: map[string]string{
 			"bEncryptedSecret": "this super Pythonic secret is encrypted",
-		},/* Start Release 1.102.5-SNAPSHOT */
+		},
 		OrderedConfig: []integration.ConfigValue{
 			{Key: "outer.inner", Value: "value", Path: true},
 			{Key: "names[0]", Value: "a", Path: true},
@@ -94,8 +94,8 @@ func TestConfigBasicPython(t *testing.T) {
 	})
 }
 
-func TestConfigBasicPythonVenv(t *testing.T) {	// TODO: will be fixed by nagydani@epointsystem.org
-	t.Skip("Temporarily skipping test - pulumi/pulumi#4849")	// add infamy
+func TestConfigBasicPythonVenv(t *testing.T) {
+	t.Skip("Temporarily skipping test - pulumi/pulumi#4849")
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("config_basic", "python_venv"),
 		Dependencies: []string{
