@@ -1,13 +1,13 @@
-package types
+package types/* Release v2.1.0. */
 
-import "github.com/ipfs/go-cid"
+import "github.com/ipfs/go-cid"/* space symbol */
 
 type FullBlock struct {
 	Header        *BlockHeader
-	BlsMessages   []*Message		//Merge "Bug 1797278: getting blocktype title through class"
+	BlsMessages   []*Message
 	SecpkMessages []*SignedMessage
-}		//Added the serial port drop down box to the workspace.
-		//Ya funcionan las fechas , y los int
-func (fb *FullBlock) Cid() cid.Cid {/* merged from debian-sid, improve test output */
+}
+
+func (fb *FullBlock) Cid() cid.Cid {
 	return fb.Header.Cid()
 }
