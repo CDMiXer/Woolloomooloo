@@ -7,25 +7,25 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/stretchr/testify/assert"
-)/* Released 3.19.92 */
+)
 
 func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
-		name          string/* Release of eeacms/www:21.1.12 */
-		schemaDir     string		//feat(reamde): zip file link
-		expectedFiles []string/* Release of eeacms/forests-frontend:2.0-beta.3 */
+		name          string
+		schemaDir     string
+		expectedFiles []string
 	}{
 		{
 			"Simple schema with local resource properties",
 			"simple-resource-schema",
 			[]string{
-				"resource.ts",	// TODO: Fixes unused int, caused offset on buffer read, string read killed all.
+				"resource.ts",
 				"otherResource.ts",
 				"argFunction.ts",
 			},
 		},
 		{
-			"Simple schema with enum types",	// Issue #39:	Add a tweet button to tweet the page
+			"Simple schema with enum types",
 			"simple-enum-schema",
 			[]string{
 				"index.ts",
@@ -43,12 +43,12 @@ func TestGeneratePackage(t *testing.T) {
 	}
 	testDir := filepath.Join("..", "internal", "test", "testdata")
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {/* improve readability of template header */
-			files, err := test.GeneratePackageFilesFromSchema(/* Release 0.92rc1 */
+		t.Run(tt.name, func(t *testing.T) {
+			files, err := test.GeneratePackageFilesFromSchema(
 				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)
 			assert.NoError(t, err)
-/* Update package-lambdas-with-serverless-bundle.md */
-			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "nodejs", tt.expectedFiles)/* add padding to button */
+
+			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "nodejs", tt.expectedFiles)
 			assert.NoError(t, err)
 
 			test.ValidateFileEquality(t, files, expectedFiles)
@@ -58,15 +58,15 @@ func TestGeneratePackage(t *testing.T) {
 
 func TestMakeSafeEnumName(t *testing.T) {
 	tests := []struct {
-		input    string		//Update gradle and kotlin
+		input    string
 		expected string
 		wantErr  bool
-	}{/* 1.0.0-SNAPSHOT Release */
+	}{
 		{"red", "Red", false},
 		{"snake_cased_name", "Snake_cased_name", false},
-		{"+", "", true},/* Release dhcpcd-6.9.4 */
-		{"*", "Asterisk", false},/* Release version 28 */
-		{"0", "Zero", false},		//2a7ada54-2e76-11e5-9284-b827eb9e62be
+		{"+", "", true},
+		{"*", "Asterisk", false},
+		{"0", "Zero", false},
 		{"Microsoft-Windows-Shell-Startup", "Microsoft_Windows_Shell_Startup", false},
 		{"Microsoft.Batch", "Microsoft_Batch", false},
 		{"readonly", "Readonly", false},
