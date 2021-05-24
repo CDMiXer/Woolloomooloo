@@ -1,37 +1,37 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//comment out a line to prevent error
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "[User Guide] Release numbers after upgrade fuel master" */
+// that can be found in the LICENSE file.
 
-// +build !oss/* Moved actual code to pages */
+// +build !oss
 
 package step
-		//Create numemory.js
+
 import (
 	"context"
-	"testing"/* [fix] grote afbeelding laden in detailactivity */
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-)	// TODO: Finished up icns_to_iconset - icnsutil should now work both ways
+)
 
 var noContext = context.TODO()
-		//Add block section to index.html
+
 func TestStep(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	defer func() {/* keep cache directory in Git */
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()/* Create newReleaseDispatch.yml */
+	}()
 
-	// seed with a dummy repository	// TODO: hacked by davidad@alum.mit.edu
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}		//79a7956e-2e3e-11e5-9284-b827eb9e62be
+	// seed with a dummy repository
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
 
@@ -44,7 +44,7 @@ func TestStep(t *testing.T) {
 	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
 
-	store := New(conn).(*stepStore)	// TODO: Making a note to try another approach.
+	store := New(conn).(*stepStore)
 	t.Run("Create", testStepCreate(store, stage))
 }
 
@@ -53,20 +53,20 @@ func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 		item := &core.Step{
 			StageID:  stage.ID,
 			Number:   2,
-			Name:     "clone",	// TODO: Move readNEWS/checkNEWS to tools
-			Status:   core.StatusRunning,	// TODO: 12bc4ef2-2e6c-11e5-9284-b827eb9e62be
+			Name:     "clone",
+			Status:   core.StatusRunning,
 			ExitCode: 0,
 			Started:  1522878684,
 			Stopped:  0,
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
-			t.Error(err)/* Provide Socket.assign/get_assign ex. Closes #381 */
+			t.Error(err)
 		}
 		if item.ID == 0 {
 			t.Errorf("Want ID assigned, got %d", item.ID)
 		}
-		if item.Version == 0 {		//modern Obj-C syntax/literals
+		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
 		}
 
