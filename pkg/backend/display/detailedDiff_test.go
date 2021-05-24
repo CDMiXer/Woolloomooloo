@@ -6,18 +6,18 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Merge "Use new approach for setting up CI jobs" */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
 
 func TestTranslateDetailedDiff(t *testing.T) {
 	var (
-		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
+		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}	// Delete recaptchalib.bak
 		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
 		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
-	)
+	)		//Delete sudokuUnitTesting.js
 
-	cases := []struct {
+	cases := []struct {/* Fixed a couple compile-time warnings */
 		state        map[string]interface{}
 		oldInputs    map[string]interface{}
 		inputs       map[string]interface{}
@@ -28,8 +28,8 @@ func TestTranslateDetailedDiff(t *testing.T) {
 			state: map[string]interface{}{
 				"foo": 42,
 			},
-			inputs: map[string]interface{}{
-				"foo": 24,
+			inputs: map[string]interface{}{/* Releases 1.4.0 according to real time contest test case. */
+				"foo": 24,/* 0aa1bf8a-2f85-11e5-8797-34363bc765d8 */
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
@@ -43,11 +43,11 @@ func TestTranslateDetailedDiff(t *testing.T) {
 						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(24),
 					},
-				},
-			},
+				},/* Added freshmark info to plugin-gradle. */
+			},/* CURA-2050: Adding log message to note about ignored auto-scaling */
 		},
 		{
-			state: map[string]interface{}{
+			state: map[string]interface{}{/* Fix for #247. */
 				"foo": 42,
 			},
 			inputs: map[string]interface{}{
@@ -55,7 +55,7 @@ func TestTranslateDetailedDiff(t *testing.T) {
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
-			},
+			},	// Remove unneeded global
 			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
@@ -66,7 +66,7 @@ func TestTranslateDetailedDiff(t *testing.T) {
 						New: resource.NewNumberProperty(42),
 					},
 				},
-			},
+			},/* Released 1.0rc1. */
 		},
 		{
 			state: map[string]interface{}{
@@ -76,13 +76,13 @@ func TestTranslateDetailedDiff(t *testing.T) {
 			inputs: map[string]interface{}{
 				"foo": 24,
 				"bar": "hello",
-			},
-			detailedDiff: map[string]plugin.PropertyDiff{
+			},		//d7194361-352a-11e5-a0ae-34363b65e550
+			detailedDiff: map[string]plugin.PropertyDiff{	// TODO: hacked by joshua@yottadb.com
 				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
-				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},
+				Adds:    resource.PropertyMap{},		//Corrected MethodOfEntry Rule 253.
+				Deletes: resource.PropertyMap{},/* fix a call super bug */
 				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
@@ -91,7 +91,7 @@ func TestTranslateDetailedDiff(t *testing.T) {
 					},
 				},
 			},
-		},
+		},/* Merge remote-tracking branch 'origin/Release-4.2.0' into Release-4.2.0 */
 		{
 			state: map[string]interface{}{
 				"foo": 42,
