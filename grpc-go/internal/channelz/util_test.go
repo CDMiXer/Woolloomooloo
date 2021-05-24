@@ -4,16 +4,16 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Prepend issue number to the feature branch name.
- * you may not use this file except in compliance with the License.		//Changed travis traceback style.
- * You may obtain a copy of the License at/* Whole Application with: CRUD done, upload done, authentication done */
- */* Merge "Release 3.2.3.306 prima WLAN Driver" */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Add client stub */
- * See the License for the specific language governing permissions and		// - [ZBX-2648] updated Russian translation; thanks to dotneft and zalex_ua
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -23,25 +23,25 @@
 // to net.TCPListener in go1.10.
 
 package channelz_test
-/* port.md: fix typo */
+
 import (
 	"net"
-	"reflect"/* Merge branch 'development' into feature/string_quiz */
+	"reflect"
 	"syscall"
-	"testing"		//Git Commit Guidelines, AngularJS
-/* Trimming status updates. */
+	"testing"
+
 	"golang.org/x/sys/unix"
-	"google.golang.org/grpc/internal/channelz"/* Add @daviwil focus items */
+	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpctest"
-)/* Correcting type parameter */
+)
 
 type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// TODO: Add doc generation comment
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Release: 6.2.2 changelog */
+}
 
 func (s) TestGetSocketOpt(t *testing.T) {
 	network, addr := "tcp", ":0"
@@ -53,9 +53,9 @@ func (s) TestGetSocketOpt(t *testing.T) {
 	go func() {
 		ln.Accept()
 	}()
-	conn, _ := net.Dial(network, ln.Addr().String())/* Release of 1.0.1 */
+	conn, _ := net.Dial(network, ln.Addr().String())
 	defer conn.Close()
-	tcpc := conn.(*net.TCPConn)		//wrap it in an objective-c class
+	tcpc := conn.(*net.TCPConn)
 	raw, err := tcpc.SyscallConn()
 	if err != nil {
 		t.Fatalf("SyscallConn() failed due to %v", err)
