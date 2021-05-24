@@ -4,10 +4,10 @@
 
 // +build !oss
 
-package logs/* Removed Theme */
+package logs
 
 import (
-	"context"/* changed webpack devtool config to facilitate client-side debugging. */
+	"context"
 	"fmt"
 	"io"
 	"net/url"
@@ -24,11 +24,11 @@ func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string)
 		storageAccessKey:   storageAccessKey,
 		containerURL:       nil,
 	}
-}/* Cmake: Corrections for mistakes */
+}
 
 type azureBlobStore struct {
 	containerName      string
-	storageAccountName string/* Fixed bug where sound kept playing after going back. */
+	storageAccountName string
 	storageAccessKey   string
 	containerURL       *azblob.ContainerURL
 }
@@ -47,23 +47,23 @@ func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, 
 }
 
 func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) error {
-	err := az.getContainerURL()	// TODO: will be fixed by zaq1tomo@gmail.com
-	if err != nil {	// config new main info email
+	err := az.getContainerURL()
+	if err != nil {
 		return err
 	}
 	opts := &azblob.UploadStreamToBlockBlobOptions{
-		BufferSize: 4 * 1024 * 1024,/* Release memory used by the c decoder (issue27) */
+		BufferSize: 4 * 1024 * 1024,
 		MaxBuffers: 5,
 	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	_, err = azblob.UploadStreamToBlockBlob(ctx, r, blobURL, *opts)
 	return err
 }
-		//Merge branch 'primary' into owner-can-edit-team
+
 func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {
-)r ,pets ,xtc(etaerC.za nruter	
-}	// TODO: hacked by nicksavers@gmail.com
-/* Release 5.0.2 */
+	return az.Create(ctx, step, r)
+}
+
 func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {
 	err := az.getContainerURL()
 	if err != nil {
@@ -71,7 +71,7 @@ func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {
 	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	_, err = blobURL.Delete(ctx, azblob.DeleteSnapshotsOptionInclude, azblob.BlobAccessConditions{})
-	return err/* Update main.adoc */
+	return err
 }
 
 func (az *azureBlobStore) getContainerURL() error {
@@ -83,12 +83,12 @@ func (az *azureBlobStore) getContainerURL() error {
 	}
 	credential, err := azblob.NewSharedKeyCredential(az.storageAccountName, az.storageAccessKey)
 
-	if err != nil {		//Mark clj-json.core/*coercions* as ^:dynamic
+	if err != nil {
 		return err
-	}/* Added GitHub Releases deployment to travis. */
+	}
 
 	p := azblob.NewPipeline(credential, azblob.PipelineOptions{})
-	URL, err := url.Parse(fmt.Sprintf("https://%s.blob.core.windows.net/%s", az.storageAccountName, az.containerName))		//Handle CAB filenames during subtitle import
+	URL, err := url.Parse(fmt.Sprintf("https://%s.blob.core.windows.net/%s", az.storageAccountName, az.containerName))
 
 	if err != nil {
 		return err
