@@ -2,8 +2,8 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Light stage */
-///* Move concatZipWithM into Util */
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package hcl2/* Reverting to 4596 */
+package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: will be fixed by alex.gaynor@gmail.com
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* gh-594: Continue after corrupt line. */
-)	// Update META-SHARE-LicenseMetadata.xsd
+	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+)
 
 // Component represents a component definition in a program.
 //
@@ -26,8 +26,8 @@ type Component struct {
 	Syntax *hclsyntax.Block
 
 	InputTypes  map[string]model.Type
-	OutputTypes map[string]model.Type	// TODO: will be fixed by julia@jvns.ca
+	OutputTypes map[string]model.Type
 
 	Children []*Resource
 	Locals   []*LocalVariable
-}		//Merge "bravo(c): updated handset & headset gain"
+}
