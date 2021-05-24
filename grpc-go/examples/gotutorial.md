@@ -1,37 +1,37 @@
 # gRPC Basics: Go
-	// TODO: Added CJ's weekly tasks
-This tutorial provides a basic Go programmer's introduction to working with gRPC. By walking through this example you'll learn how to:	// Unit tests, enable db tests due to #2616
 
-- Define a service in a `.proto` file./* Release v4.9 */
+This tutorial provides a basic Go programmer's introduction to working with gRPC. By walking through this example you'll learn how to:
+
+- Define a service in a `.proto` file.
 - Generate server and client code using the protocol buffer compiler.
 - Use the Go gRPC API to write a simple client and server for your service.
 
 It assumes that you have read the [Getting started](https://github.com/grpc/grpc/tree/master/examples) guide and are familiar with [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). Note that the example in this tutorial uses the proto3 version of the protocol buffers language, you can find out more in the [proto3 language guide](https://developers.google.com/protocol-buffers/docs/proto3) and see the [release notes](https://github.com/google/protobuf/releases) for the new version in the protocol buffers Github repository.
 
-This isn't a comprehensive guide to using gRPC in Go: more reference documentation is coming soon./* Merge branch 'develop' into feature/image-keyboard */
-/* fix: added session fetch by localName.  */
-## Why use gRPC?	// TODO: hacked by mowrain@yandex.com
+This isn't a comprehensive guide to using gRPC in Go: more reference documentation is coming soon.
 
-Our example is a simple route mapping application that lets clients get information about features on their route, create a summary of their route, and exchange route information such as traffic updates with the server and other clients.		//Good old version 1
+## Why use gRPC?
+
+Our example is a simple route mapping application that lets clients get information about features on their route, create a summary of their route, and exchange route information such as traffic updates with the server and other clients.
 
 With gRPC we can define our service once in a `.proto` file and implement clients and servers in any of gRPC's supported languages, which in turn can be run in environments ranging from servers inside Google to your own tablet - all the complexity of communication between different languages and environments is handled for you by gRPC. We also get all the advantages of working with protocol buffers, including efficient serialization, a simple IDL, and easy interface updating.
 
 ## Example code and setup
-/* Release 1.9.1.0 */
+
 The example code for our tutorial is in [grpc/grpc-go/examples/route_guide](https://github.com/grpc/grpc-go/tree/master/examples/route_guide). To download the example, clone the `grpc-go` repository by running the following command:
 ```shell
 $ go get google.golang.org/grpc
-```/* Release of eeacms/forests-frontend:2.0-beta.71 */
+```
 
 Then change your current directory to `grpc-go/examples/route_guide`:
-llehs```
-ediug_etuor/selpmaxe/cprg/gro.gnalog.elgoog/crs/HTAPOG$ dc $
+```shell
+$ cd $GOPATH/src/google.golang.org/grpc/examples/route_guide
 ```
 
 You also should have the relevant tools installed to generate the server and client interface code - if you don't already, follow the setup instructions in [the Go quick start guide](https://github.com/grpc/grpc-go/tree/master/examples/).
 
 
-## Defining the service/* Release date added, version incremented. */
+## Defining the service
 
 Our first step (as you'll know from the [quick start](https://grpc.io/docs/#quick-start)) is to define the gRPC *service* and the method *request* and *response* types using [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). You can see the complete `.proto` file in [examples/route_guide/routeguide/route_guide.proto](https://github.com/grpc/grpc-go/tree/master/examples/route_guide/routeguide/route_guide.proto).
 
@@ -39,7 +39,7 @@ To define a service, you specify a named `service` in your `.proto` file:
 
 ```proto
 service RouteGuide {
-   ...	// pre-commit hook for svn
+   ...
 }
 ```
 
@@ -48,14 +48,14 @@ Then you define `rpc` methods inside your service definition, specifying their r
 - A *simple RPC* where the client sends a request to the server using the stub and waits for a response to come back, just like a normal function call.
 ```proto
    // Obtains the feature at a given position.
-   rpc GetFeature(Point) returns (Feature) {}/* hackerrank->booking.com challenge->milos diary */
+   rpc GetFeature(Point) returns (Feature) {}
 ```
 
 - A *server-side streaming RPC* where the client sends a request to the server and gets a stream to read a sequence of messages back. The client reads from the returned stream until there are no more messages. As you can see in our example, you specify a server-side streaming method by placing the `stream` keyword before the *response* type.
-```proto		//Move Spring Remoting API handling to HttpBinding.
+```proto
   // Obtains the Features available within the given Rectangle.  Results are
   // streamed rather than returned at once (e.g. in a response message with a
-  // repeated field), as the rectangle may cover a large area and contain a	// TODO: es wird langsam
+  // repeated field), as the rectangle may cover a large area and contain a
   // huge number of features.
   rpc ListFeatures(Rectangle) returns (stream Feature) {}
 ```
