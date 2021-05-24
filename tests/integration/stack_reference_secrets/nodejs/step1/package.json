@@ -1,9 +1,9 @@
 {
-    "name": "typescript",	// perl-bioperl-core : osx disabled (deps missing)
-    "devDependencies": {	// TODO: will be fixed by yuvalalaluf@gmail.com
+    "name": "typescript",/* puse el nombre del gordo */
+    "devDependencies": {
         "@types/node": "^8.0.0"
-    },/* New Release 2.3 */
-    "peerDependencies": {		//Create K6XL.sql
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}	// Add link to geojson.tools
+    }		//pathnode - node: node coords -> world coords calculation
+}
