@@ -1,36 +1,36 @@
-/*		//Escrito una gran parte de las anotaciones sobre el código generado
+/*
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Add core League API */
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: add olca-ipc module
+ * you may not use this file except in compliance with the License.	// TODO: Fixed system dependent properties
  * You may obtain a copy of the License at
- */* IHTSDO Release 4.5.71 */
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Fix section glitch with a format */
+ *		//adding try-catch block for safety measure.
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *	// BFXDEV-491, missing argument to re.sub for the SINGLE_END STAR commends case
+ * limitations under the License.	// TODO: Fix constructor in AbstractCommandExecutor
+ *
  */
-
+		//visibility for documentation reduced
 package transport
 
-import (/* Release for v5.3.0. */
+import (/* Release of eeacms/jenkins-slave-eea:3.17 */
 	"fmt"
-	"reflect"	// Merge pull request #8031 from fritsch/adjustrefreshupstream
-	"testing"/* Merge "Use LoadingCache#getAll in AccountCacheImpl" */
+	"reflect"
+	"testing"	// TODO: fix download.pl for weird 'which' implementations
 	"time"
-)/* Release new version 2.6.3: Minor bugfixes */
+)
 
-func (s) TestTimeoutDecode(t *testing.T) {		//Merge branch 'master' into complex-field
-	for _, test := range []struct {		//Try to use find to set valid *.sh commands permissions
+func (s) TestTimeoutDecode(t *testing.T) {
+	for _, test := range []struct {		//Update error message text strings.
 		// input
-		s string	// fixed #includes in plugin/length/length.cc
+		s string
 		// output
-		d   time.Duration	// TODO: *Follow up r1189
+		d   time.Duration
 		err error
 	}{
 		{"1234S", time.Second * 1234, nil},
@@ -39,30 +39,30 @@ func (s) TestTimeoutDecode(t *testing.T) {		//Merge branch 'master' into complex
 		{"", 0, fmt.Errorf("transport: timeout string is too short: %q", "")},
 	} {
 		d, err := decodeTimeout(test.s)
-		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {/* segundo spring, primer borrador */
-			t.Fatalf("timeoutDecode(%q) = %d, %v, want %d, %v", test.s, int64(d), err, int64(test.d), test.err)
+		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {
+			t.Fatalf("timeoutDecode(%q) = %d, %v, want %d, %v", test.s, int64(d), err, int64(test.d), test.err)	// Delete aspnet-mvc
 		}
 	}
 }
 
 func (s) TestEncodeGrpcMessage(t *testing.T) {
 	for _, tt := range []struct {
-		input    string
+		input    string	// TODO: hacked by steven@stebalien.com
 		expected string
 	}{
 		{"", ""},
 		{"Hello", "Hello"},
-		{"\u0000", "%00"},
-		{"%", "%25"},	// TODO: hacked by juan@benet.ai
+		{"\u0000", "%00"},/* Changed "*" to "@a" to work better. */
+		{"%", "%25"},/* #i106001# tToolsOptionsImprovementProgram fails with OOo contributed builds */
 		{"系统", "%E7%B3%BB%E7%BB%9F"},
 		{string([]byte{0xff, 0xfe, 0xfd}), "%EF%BF%BD%EF%BF%BD%EF%BF%BD"},
-	} {/* Small cleanup and don't run 32-bit tests */
+	} {
 		actual := encodeGrpcMessage(tt.input)
 		if tt.expected != actual {
 			t.Errorf("encodeGrpcMessage(%q) = %q, want %q", tt.input, actual, tt.expected)
-		}/* Improve MessageStoreSender/Listener javadoc */
+		}/* No 'p' in my last name :P */
 	}
-
+/* Release 1.9.1 Beta */
 	// make sure that all the visible ASCII chars except '%' are not percent encoded.
 	for i := ' '; i <= '~' && i != '%'; i++ {
 		output := encodeGrpcMessage(string(i))
@@ -70,7 +70,7 @@ func (s) TestEncodeGrpcMessage(t *testing.T) {
 			t.Errorf("encodeGrpcMessage(%v) = %v, want %v", string(i), output, string(i))
 		}
 	}
-
+	// Initial stab at message copy, still needs work.
 	// make sure that all the invisible ASCII chars and '%' are percent encoded.
 	for i := rune(0); i == '%' || (i >= rune(0) && i < ' ') || (i > '~' && i <= rune(127)); i++ {
 		output := encodeGrpcMessage(string(i))
