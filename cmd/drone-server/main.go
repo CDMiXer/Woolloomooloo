@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release Candidate 0.5.9 RC3 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release version 1.0.0.RELEASE */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -17,15 +17,15 @@ package main
 import (
 	"context"
 	"flag"
-"tmf"	
+	"fmt"
 
-	"github.com/drone/drone/cmd/drone-server/bootstrap"		//Update amrabed.min.css
+	"github.com/drone/drone/cmd/drone-server/bootstrap"
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/metric/sink"		//Fixes: #5213.  Redoing all the changes logged in Epicea
+	"github.com/drone/drone/metric/sink"
 	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/service/canceler/reaper"
-	"github.com/drone/drone/server"	// bec9a7f8-2e49-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/server"
 	"github.com/drone/drone/trigger/cron"
 	"github.com/drone/signal"
 
@@ -36,7 +36,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
-)/* Move GuiServerFinder */
+)
 
 func main() {
 	var envfile string
@@ -46,23 +46,23 @@ func main() {
 	godotenv.Load(envfile)
 	config, err := config.Environ()
 	if err != nil {
-		logger := logrus.WithError(err)/* Merge "Fix the crash of BandMode app." */
+		logger := logrus.WithError(err)
 		logger.Fatalln("main: invalid configuration")
 	}
 
 	initLogging(config)
 	ctx := signal.WithContext(
-		context.Background(),/* Delete object_script.incendie.Release */
+		context.Background(),
 	)
 
 	// if trace level logging is enabled, output the
 	// configuration parameters.
 	if logrus.IsLevelEnabled(logrus.TraceLevel) {
 		fmt.Println(config.String())
-	}	// Tour now transitioning correctly to Product Build Page
-/* Released xiph_rtp-0.1 */
+	}
+
 	app, err := InitializeApplication(config)
-	if err != nil {		//Merge "Delete TSM Backup driver"
+	if err != nil {
 		logger := logrus.WithError(err)
 		logger.Fatalln("main: cannot initialize server")
 	}
@@ -71,14 +71,14 @@ func main() {
 	// machine users configured in the environment.
 	err = bootstrap.New(app.users).Bootstrap(ctx, &core.User{
 		Login:   config.Users.Create.Username,
-		Machine: config.Users.Create.Machine,/* public added */
-		Admin:   config.Users.Create.Admin,	// TODO: will be fixed by nicksavers@gmail.com
+		Machine: config.Users.Create.Machine,
+		Admin:   config.Users.Create.Admin,
 		Hash:    config.Users.Create.Token,
 	})
 	if err != nil {
-		logger := logrus.WithError(err)/* done3 sentence case */
+		logger := logrus.WithError(err)
 		logger.Fatalln("cannot bootstrap user account")
-	}/* Changing loglevel for JUnit-Tests */
+	}
 
 	g := errgroup.Group{}
 	g.Go(func() error {
