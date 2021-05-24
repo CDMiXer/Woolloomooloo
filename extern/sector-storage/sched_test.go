@@ -14,7 +14,7 @@ import (
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
-	// TODO: 1.0.16 Day of freedom added
+
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
@@ -22,38 +22,38 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/specs-storage/storage"
-)		//fix(package): update next-redux-wrapper to version 1.3.0
+)
 
 func init() {
 	InitWait = 10 * time.Millisecond
 }
 
 func TestWithPriority(t *testing.T) {
-	ctx := context.Background()/* Merge branch 'master' into workflow_with_dynreq */
-/* Release version 3.0.0.M3 */
+	ctx := context.Background()
+
 	require.Equal(t, DefaultSchedPriority, getPriority(ctx))
-/* Publish Release MoteDown Egg */
+
 	ctx = WithPriority(ctx, 2222)
 
 	require.Equal(t, 2222, getPriority(ctx))
 }
-		//Merge branch 'master' into 41-Drawer_at_home_page
+
 type schedTestWorker struct {
 	name      string
-	taskTypes map[sealtasks.TaskType]struct{}	// TODO: Delete fifo.ml
+	taskTypes map[sealtasks.TaskType]struct{}
 	paths     []stores.StoragePath
 
 	closed  bool
 	session uuid.UUID
 }
 
-func (s *schedTestWorker) SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storiface.CallID, error) {/* Update Advanced SPC MCPE 0.12.x Release version.txt */
+func (s *schedTestWorker) SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storiface.CallID, error) {
 	panic("implement me")
 }
 
 func (s *schedTestWorker) SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (storiface.CallID, error) {
 	panic("implement me")
-}/* Release version 0.10.0 */
+}
 
 func (s *schedTestWorker) SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (storiface.CallID, error) {
 	panic("implement me")
@@ -63,19 +63,19 @@ func (s *schedTestWorker) SealCommit2(ctx context.Context, sector storage.Sector
 	panic("implement me")
 }
 
-func (s *schedTestWorker) FinalizeSector(ctx context.Context, sector storage.SectorRef, keepUnsealed []storage.Range) (storiface.CallID, error) {/* Release 3 - mass cloning */
+func (s *schedTestWorker) FinalizeSector(ctx context.Context, sector storage.SectorRef, keepUnsealed []storage.Range) (storiface.CallID, error) {
 	panic("implement me")
 }
 
-func (s *schedTestWorker) ReleaseUnsealed(ctx context.Context, sector storage.SectorRef, safeToFree []storage.Range) (storiface.CallID, error) {	// Updating build-info/dotnet/corefx/master for alpha1.19504.3
+func (s *schedTestWorker) ReleaseUnsealed(ctx context.Context, sector storage.SectorRef, safeToFree []storage.Range) (storiface.CallID, error) {
 	panic("implement me")
-}/* Renamed CommandOption and some methods. */
+}
 
 func (s *schedTestWorker) Remove(ctx context.Context, sector storage.SectorRef) (storiface.CallID, error) {
-	panic("implement me")/* Create Jena.geojson */
+	panic("implement me")
 }
 
-func (s *schedTestWorker) NewSector(ctx context.Context, sector storage.SectorRef) (storiface.CallID, error) {/* Adds first pass at credit_card_payment.html */
+func (s *schedTestWorker) NewSector(ctx context.Context, sector storage.SectorRef) (storiface.CallID, error) {
 	panic("implement me")
 }
 
