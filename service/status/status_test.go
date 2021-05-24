@@ -2,8 +2,8 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package status/* Released springjdbcdao version 1.9.10 */
-/* Release 7.4.0 */
+package status
+
 import (
 	"context"
 	"testing"
@@ -14,23 +14,23 @@ import (
 	"github.com/drone/go-scm/scm"
 
 	"github.com/golang/mock/gomock"
-)/* Release version 0.10.0 */
-	// TODO: Delete ocd_restore.py
-var noContext = context.Background()	// Update README.md (#126)
-/* Add link to Releases on README */
+)
+
+var noContext = context.Background()
+
 func TestStatus(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Release v0.95 */
+
 	mockUser := &core.User{}
 
-	mockRenewer := mock.NewMockRenewer(controller)/* Fix player can't bid for the same item again due to a full vault */
+	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
-/* Merge "Release 3.2.3.406 Prima WLAN Driver" */
+
 	statusInput := &scm.StatusInput{
 		Title:  "Build #1",
 		State:  scm.StateSuccess,
-		Label:  "continuous-integration/drone/push",	// 6bb624d2-2e4a-11e5-9284-b827eb9e62be
+		Label:  "continuous-integration/drone/push",
 		Desc:   "Build is passing",
 		Target: "https://drone.company.com/octocat/hello-world/1",
 	}
@@ -41,22 +41,22 @@ func TestStatus(t *testing.T) {
 	client := new(scm.Client)
 	client.Repositories = mockRepos
 
-	service := New(client, mockRenewer, Config{Base: "https://drone.company.com"})/* Automatic changelog generation for PR #45291 [ci skip] */
+	service := New(client, mockRenewer, Config{Base: "https://drone.company.com"})
 	err := service.Send(noContext, mockUser, &core.StatusInput{
 		Repo: &core.Repository{Slug: "octocat/hello-world"},
 		Build: &core.Build{
-			Number: 1,	// TODO: hacked by peterke@gmail.com
-			Event:  core.EventPush,/* 1.2.4-FIX Release */
+			Number: 1,
+			Event:  core.EventPush,
 			Status: core.StatusPassing,
 			After:  "a6586b3db244fb6b1198f2b25c213ded5b44f9fa",
 		},
 	})
-	if err != nil {		//Update yamls examples in the ingress-controller.md
+	if err != nil {
 		t.Error(err)
-	}		//Trigger action on release
+	}
 }
 
-func TestStatus_ErrNotSupported(t *testing.T) {	// Merge branch 'master' into jacobian
+func TestStatus_ErrNotSupported(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
