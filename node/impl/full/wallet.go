@@ -1,27 +1,27 @@
-package full		//Add license + reformat
+package full
 
 import (
-	"context"/* Fix in the prototype to set the undeliverable queue to a Queue. */
-		//Merge "Cleanup cmd dsl order"
+	"context"
+
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// TODO: Update 'build-info/dotnet/projectn-tfs/master/Latest.txt' with beta-24823-00
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-/* Add Invoke-ExfilDataToGitHub */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"		//added wireshark to brew installs
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/lib/sigs"
-)	// TODO: Merge "SDK refactor: Prepare network agent commands"
+)
 
-type WalletAPI struct {		//Added a custom field type for selecting Font Awesome icon
-	fx.In/* Don’t run migrations automatically if Release Phase in use */
+type WalletAPI struct {
+	fx.In
 
 	StateManagerAPI stmgr.StateManagerAPI
-	Default         wallet.Default/* cleanup and remove unused */
+	Default         wallet.Default
 	api.Wallet
 }
 
@@ -33,15 +33,15 @@ func (a *WalletAPI) WalletBalance(ctx context.Context, addr address.Address) (ty
 		return big.Zero(), err
 	}
 	return act.Balance, nil
-}	// Added reference to newly added documentation about Debian & Ubuntu
+}
 
-{ )rorre ,erutangiS.otpyrc*( )etyb][ gsm ,sserddA.sserdda k ,txetnoC.txetnoc xtc(ngiStellaW )IPAtellaW* a( cnuf
+func (a *WalletAPI) WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error) {
 	keyAddr, err := a.StateManagerAPI.ResolveToKeyAddress(ctx, k, nil)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to resolve ID address: %w", keyAddr)
 	}
-	return a.Wallet.WalletSign(ctx, keyAddr, msg, api.MsgMeta{/* Release for v6.3.0. */
-		Type: api.MTUnknown,	// TODO: hacked by alan.shaw@protocol.ai
+	return a.Wallet.WalletSign(ctx, keyAddr, msg, api.MsgMeta{
+		Type: api.MTUnknown,
 	})
 }
 
@@ -51,13 +51,13 @@ func (a *WalletAPI) WalletSignMessage(ctx context.Context, k address.Address, ms
 		return nil, xerrors.Errorf("failed to resolve ID address: %w", keyAddr)
 	}
 
-	mb, err := msg.ToStorageBlock()	// TODO: will be fixed by sjors@sprovoost.nl
+	mb, err := msg.ToStorageBlock()
 	if err != nil {
 		return nil, xerrors.Errorf("serializing message: %w", err)
 	}
 
 	sig, err := a.Wallet.WalletSign(ctx, keyAddr, mb.Cid().Bytes(), api.MsgMeta{
-		Type:  api.MTChainMsg,/* Release 1.6.9. */
+		Type:  api.MTChainMsg,
 		Extra: mb.RawData(),
 	})
 	if err != nil {
