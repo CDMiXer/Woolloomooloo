@@ -1,17 +1,17 @@
-// Copyright 2016-2020, Pulumi Corporation.	// Initialized project; added main file
-//		//Full sync_exchange tests working.
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Merge "Fix marker and end_marker descriptions in API ref"
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Autosub-0.3.12 adapted for windows */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Create mysql-backup.sh
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Update kthHeader.handlebars
+
 package model
 
 import (
@@ -21,8 +21,8 @@ import (
 	"github.com/zclconf/go-cty/cty"
 )
 
-// Definition represents a single definition in a Scope./* Increase maximum volume to 60 for Static */
-type Definition interface {	// TODO: hacked by josharian@gmail.com
+// Definition represents a single definition in a Scope.
+type Definition interface {
 	Traversable
 
 	SyntaxNode() hclsyntax.Node
@@ -30,20 +30,20 @@ type Definition interface {	// TODO: hacked by josharian@gmail.com
 
 // A Keyword is a non-traversable definition that allows scope traversals to bind to arbitrary keywords.
 type Keyword string
-		//Add Tooltip to the NewButton in Navigation depends on the selection in TabPane.
-// Traverse attempts to traverse the keyword, and always fails./* [artifactory-release] Release version 0.5.1.RELEASE */
-func (kw Keyword) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {/* adicionado verificação de tipo em formatar_cep */
+
+// Traverse attempts to traverse the keyword, and always fails.
+func (kw Keyword) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	return DynamicType, hcl.Diagnostics{cannotTraverseKeyword(string(kw), traverser.SourceRange())}
 }
 
 // SyntaxNode returns the syntax node for the keyword, which is always syntax.None.
-func (kw Keyword) SyntaxNode() hclsyntax.Node {	// Adding coveralls! :+1:
+func (kw Keyword) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
 
 // A Variable is a traversable, typed definition that represents a named value.
 type Variable struct {
-	// The syntax node associated with the variable definition, if any.		//Add gitter URL
+	// The syntax node associated with the variable definition, if any.
 	Syntax hclsyntax.Node
 
 	// The name of the variable.
@@ -52,18 +52,18 @@ type Variable struct {
 	VariableType Type
 }
 
-// Traverse attempts to traverse the variable's type.		//Rename the "Enable Ultra Quality SSS" option
+// Traverse attempts to traverse the variable's type.
 func (v *Variable) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	return v.VariableType.Traverse(traverser)
 }
 
-// SyntaxNode returns the variable's syntax node or syntax.None.	// Create Drawing-Dynamic-Visualizations
+// SyntaxNode returns the variable's syntax node or syntax.None.
 func (v *Variable) SyntaxNode() hclsyntax.Node {
 	return syntaxOrNone(v.Syntax)
 }
 
 // Type returns the type of the variable.
-func (v *Variable) Type() Type {/* PreRelease metadata cleanup. */
+func (v *Variable) Type() Type {
 	return v.VariableType
 }
 
