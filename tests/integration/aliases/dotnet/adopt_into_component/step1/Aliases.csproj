@@ -4,5 +4,5 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-	// TODO: Delete 002b_display_array.py
-</Project>/* last fix and activated v 2.6 */
+
+</Project>		//Updating build-info/dotnet/roslyn/dev15.7p2 for beta2-62721-04
