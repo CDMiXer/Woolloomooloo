@@ -1,11 +1,11 @@
 {
-  "Ref": "refs/tags/v0.0.1",/* [dev] use italics for better visual structuration */
+  "Ref": "refs/tags/v0.0.1",
   "Repo": {
     "ID": "13933572",
     "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",/* Release new version 2.0.15: Respect filter subscription expiration dates */
+    "Name": "drone-test-go",
     "Perm": null,
-    "Branch": "master",/* Release 2.15.2 */
+    "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
@@ -17,25 +17,25 @@
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Message": "Update .drone.yml",
     "Author": {
-      "Name": "Brad Rydzewski",	// TODO: Removed legacy method from python version.
-      "Email": "brad.rydzewski@gmail.com",	// TODO: hacked by xiemengjun@gmail.com
+      "Name": "Brad Rydzewski",
+      "Email": "brad.rydzewski@gmail.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "bradrydzewski",
       "Avatar": ""
     },
     "Committer": {
       "Name": "GitHub",
-      "Email": "noreply@github.com",	// AR-4.0 inspired rake task impl (usable and shared with Rails 3.x/2.3 tasks)
-      "Date": "0001-01-01T00:00:00Z",		//rtorrent-flood: update versions
+      "Email": "noreply@github.com",
+      "Date": "0001-01-01T00:00:00Z",
       "Login": "web-flow",
       "Avatar": ""
-    },/* Create emacs modes */
+    },
     "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
   },
   "Sender": {
     "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"		//More documentation for the read part
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
 }
