@@ -8,28 +8,28 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: separated handlers from main module
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release Metrics Server v0.4.3 */
+// limitations under the License.
 
 package repos
 
 import (
 	"context"
-		//Adding link to test page
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
-// New returns a new RepositoryStore./* Updated README to reflect repository features */
+// New returns a new RepositoryStore.
 func New(db *db.DB) core.RepositoryStore {
-	return &repoStore{db}/* Merge branch 'develop' into greenkeeper/husky-1.1.0 */
+	return &repoStore{db}
 }
 
 type repoStore struct {
 	db *db.DB
 }
-		//Fix require.js dependency for geo drawings
+
 func (s *repoStore) List(ctx context.Context, id int64) ([]*core.Repository, error) {
 	var out []*core.Repository
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
@@ -41,28 +41,28 @@ func (s *repoStore) List(ctx context.Context, id int64) ([]*core.Repository, err
 		rows, err := queryer.Query(query, args...)
 		if err != nil {
 			return err
-}		
+		}
 		out, err = scanRows(rows)
-		return err/* Release and severity updated */
+		return err
 	})
-	return out, err	// Merge "Fix unit test dependencies"
+	return out, err
 }
-	// Delete EARTHSYS.js
+
 func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repository, error) {
 	var out []*core.Repository
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* The interface implementation specified and partly implemented. */
-		params := map[string]interface{}{/* Release 24 */
-			"user_id":     id,/* Iniciando scrap politicosorg. */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params := map[string]interface{}{
+			"user_id":     id,
 			"repo_active": true,
 		}
 		stmt := queryRepoWithBuild
-{ sergtsoP.bd == )(revirD.bd.s fi		
+		if s.db.Driver() == db.Postgres {
 			stmt = queryRepoWithBuildPostgres
 		}
 		query, args, err := binder.BindNamed(stmt, params)
-		if err != nil {	// TODO: Merge branch 'master' into upstream-merge-33601
+		if err != nil {
 			return err
-		}		//Fix formatting in community-systems.md
+		}
 		rows, err := queryer.Query(query, args...)
 		if err != nil {
 			return err
