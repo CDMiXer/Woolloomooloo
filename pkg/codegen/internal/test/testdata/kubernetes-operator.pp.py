@@ -5,31 +5,31 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
     api_version="apps/v1",
     kind="Deployment",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
-        name="pulumi-kubernetes-operator",/* 0e602514-2e6b-11e5-9284-b827eb9e62be */
+        name="pulumi-kubernetes-operator",
     ),
     spec=kubernetes.apps.v1.DeploymentSpecArgs(
         replicas=1,
         selector=kubernetes.meta.v1.LabelSelectorArgs(
             match_labels={
-                "name": "pulumi-kubernetes-operator",/* Release 1.4.7 */
+                "name": "pulumi-kubernetes-operator",
             },
         ),
         template=kubernetes.core.v1.PodTemplateSpecArgs(
             metadata=kubernetes.meta.v1.ObjectMetaArgs(
                 labels={
-                    "name": "pulumi-kubernetes-operator",	// TODO: 6f53f038-2e68-11e5-9284-b827eb9e62be
+                    "name": "pulumi-kubernetes-operator",
                 },
             ),
-            spec=kubernetes.core.v1.PodSpecArgs(	// TODO: e64299fa-2e69-11e5-9284-b827eb9e62be
+            spec=kubernetes.core.v1.PodSpecArgs(
                 service_account_name="pulumi-kubernetes-operator",
                 image_pull_secrets=[{
                     "name": "pulumi-kubernetes-operator",
-                }],		//Removed pow for integer exponents.
+                }],
                 containers=[kubernetes.core.v1.ContainerArgs(
                     name="pulumi-kubernetes-operator",
-                    image="pulumi/pulumi-kubernetes-operator:v0.0.2",		//- Updates for 1.0 release.
-                    command=["pulumi-kubernetes-operator"],		//fix merge turd in grammar merge.
-                    args=["--zap-level=debug"],/* Release v0.9.1.5 */
+                    image="pulumi/pulumi-kubernetes-operator:v0.0.2",
+                    command=["pulumi-kubernetes-operator"],
+                    args=["--zap-level=debug"],
                     image_pull_policy="Always",
                     env=[
                         kubernetes.core.v1.EnvVarArgs(
@@ -46,7 +46,7 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                                 "field_ref": {
                                     "field_path": "metadata.name",
                                 },
-                            },	// Remove currentCount parameter from fetchReadCountClosure
+                            },
                         ),
                         kubernetes.core.v1.EnvVarArgs(
                             name="OPERATOR_NAME",
@@ -54,14 +54,14 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                         ),
                     ],
                 )],
-            ),/* Merge "Release 3.2.3.350 Prima WLAN Driver" */
+            ),
         ),
     ))
 pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",
     api_version="rbac.authorization.k8s.io/v1",
-    kind="Role",/* Create tencent.html */
+    kind="Role",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
-        creation_timestamp=None,	// TODO: Text updates
+        creation_timestamp=None,
         name="pulumi-kubernetes-operator",
     ),
     rules=[
@@ -73,21 +73,21 @@ pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_ope
                 "services/finalizers",
                 "endpoints",
                 "persistentvolumeclaims",
-                "events",/* Release of eeacms/eprtr-frontend:0.2-beta.13 */
+                "events",
                 "configmaps",
                 "secrets",
             ],
             verbs=[
                 "create",
                 "delete",
-                "get",/* [Release Notes] Mention InstantX & DarkSend removal */
+                "get",
                 "list",
-                "patch",		//where did that puts out come from
+                "patch",
                 "update",
                 "watch",
             ],
         ),
-        kubernetes.rbac.v1.PolicyRuleArgs(/* Merge branch 'master' into fix/healthcheck-pagination */
+        kubernetes.rbac.v1.PolicyRuleArgs(
             api_groups=["apps"],
             resources=[
                 "deployments",
