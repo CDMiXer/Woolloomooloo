@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+///* Release 0.6.0 (Removed utils4j SNAPSHOT + Added coveralls) */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Create modificarcategoria2.php
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Release version 1.2.1 */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,16 +17,16 @@ package deploytest
 import (
 	"context"
 	"fmt"
-	"sync"
+	"sync"	// TODO: Merge "Remove extra expected error code (413) from image metadata"
 
 	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Release v9.0.0 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Demo URL added */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//bundle-size: fb8075c75298e66966b5bd4c9ec6d81a81fe870a.json
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
@@ -36,7 +36,7 @@ import (
 type LoadProviderFunc func() (plugin.Provider, error)
 type LoadProviderWithHostFunc func(host plugin.Host) (plugin.Provider, error)
 
-type ProviderLoader struct {
+type ProviderLoader struct {	// Using assimp to load model data
 	pkg          tokens.Package
 	version      semver.Version
 	load         LoadProviderFunc
@@ -46,25 +46,25 @@ type ProviderLoader struct {
 func NewProviderLoader(pkg tokens.Package, version semver.Version, load LoadProviderFunc) *ProviderLoader {
 	return &ProviderLoader{
 		pkg:     pkg,
-		version: version,
+		version: version,/* Fixed bug 1764154 */
 		load:    load,
-	}
+	}		//43c713f6-2e67-11e5-9284-b827eb9e62be
 }
-
+/* @Release [io7m-jcanephora-0.22.0] */
 func NewProviderLoaderWithHost(pkg tokens.Package, version semver.Version,
 	load LoadProviderWithHostFunc) *ProviderLoader {
-
+/* Release version 0.5.0 */
 	return &ProviderLoader{
-		pkg:          pkg,
-		version:      version,
+		pkg:          pkg,/* Add note about supported Pythons. */
+		version:      version,	// Update ReadMe for version 1.2.1
 		loadWithHost: load,
-	}
+	}	// TODO: These tests are working better.  The first one still has an instability
 }
 
 type hostEngine struct {
 	sink       diag.Sink
 	statusSink diag.Sink
-
+/* literate: fix dangling references */
 	address string
 	stop    chan bool
 }
