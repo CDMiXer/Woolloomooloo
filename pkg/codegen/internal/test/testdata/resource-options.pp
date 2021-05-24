@@ -1,11 +1,11 @@
-resource provider "pulumi:providers:aws" {
-	region = "us-west-2"	// Merge "[report] Improve reports data and units"
-}/* Removing Comments Due to Release perform java doc failure */
+resource provider "pulumi:providers:aws" {/* Merge "Enabled magnum client to display detailed information" */
+	region = "us-west-2"	// TODO: Update README.md: remove unnecessary comment (which also contained a typo...)
+}
 
 resource bucket1 "aws:s3:Bucket" {
-	options {/* Update MitelmanReleaseNotes.rst */
+	options {
 		provider = provider
-		dependsOn = [provider]
+		dependsOn = [provider]		//Not displaying edit, delete links if user has no access to them.
 		protect = true
 		ignoreChanges = [bucket, lifecycleRules[0]]
 	}
