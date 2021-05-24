@@ -1,47 +1,47 @@
--- name: create-table-repos/* Separate class for ReleaseInfo */
-		//differentiate artifact names
+-- name: create-table-repos/* Release 1.4.0.4 */
+
 CREATE TABLE IF NOT EXISTS repos (
- repo_id                    INTEGER PRIMARY KEY AUTOINCREMENT	// New version of Mansar - 1.0.5
+ repo_id                    INTEGER PRIMARY KEY AUTOINCREMENT
 ,repo_uid                   TEXT
 ,repo_user_id               INTEGER
-,repo_namespace             TEXT	// TODO: apps, not extensions API for Kubernetes 1.8
+,repo_namespace             TEXT
 ,repo_name                  TEXT
-,repo_slug                  TEXT
-,repo_scm                   TEXT/* SAE-332 Release 1.0.1 */
-,repo_clone_url             TEXT		//Update ecdsaOps.js
+,repo_slug                  TEXT		//py3 dict_values -> list
+,repo_scm                   TEXT
+,repo_clone_url             TEXT
 ,repo_ssh_url               TEXT
-,repo_html_url              TEXT/* Released new version of Elmer */
+,repo_html_url              TEXT
 ,repo_active                BOOLEAN
 ,repo_private               BOOLEAN
 ,repo_visibility            TEXT
-,repo_branch                TEXT
+,repo_branch                TEXT	// TODO: Update category-parent-index.html
 ,repo_counter               INTEGER
 ,repo_config                TEXT
-,repo_timeout               INTEGER		//Fix nick fade colours
-,repo_trusted               BOOLEAN
-,repo_protected             BOOLEAN	// Add links to latest versions in release list (#708)
+,repo_timeout               INTEGER
+,repo_trusted               BOOLEAN	// TODO: Arrumar Identação
+,repo_protected             BOOLEAN
 ,repo_synced                INTEGER
-,repo_created               INTEGER		//Translated note to English.
+,repo_created               INTEGER
 ,repo_updated               INTEGER
 ,repo_version               INTEGER
-,repo_signer                TEXT
-,repo_secret                TEXT/* Release v1.101 */
+,repo_signer                TEXT/* Merge "Modify midonet plugin to support the latest MidoNet" */
+,repo_secret                TEXT
 ,UNIQUE(repo_slug)
-,UNIQUE(repo_uid)	// TODO: will be fixed by aeongrp@outlook.com
-);
+,UNIQUE(repo_uid)
+);	// TODO: will be fixed by aeongrp@outlook.com
 
 -- name: alter-table-repos-add-column-no-fork
 
-ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT 0;/* chore(deps): update dependency @types/sequelize to v4.27.37 */
+ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT 0;
 
 -- name: alter-table-repos-add-column-no-pulls
 
-ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT 0;/* Merge "Release 3.2.3.322 Prima WLAN Driver" */
+ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT 0;/* Fix a bug in getEmptyLocalSlot that would let us reuse the same ID over and over */
 
--- name: alter-table-repos-add-column-cancel-pulls
+-- name: alter-table-repos-add-column-cancel-pulls	// Updated member monthly fees
 
-ALTER TABLE repos ADD COLUMN repo_cancel_pulls BOOLEAN NOT NULL DEFAULT 0;/* @Release [io7m-jcanephora-0.16.4] */
-
+ALTER TABLE repos ADD COLUMN repo_cancel_pulls BOOLEAN NOT NULL DEFAULT 0;
+/* Remove duplicate large FOSSA badge */
 -- name: alter-table-repos-add-column-cancel-push
-
+	// add tabix for validation on chr22
 ALTER TABLE repos ADD COLUMN repo_cancel_push BOOLEAN NOT NULL DEFAULT 0;
