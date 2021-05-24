@@ -2,25 +2,25 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package gogs		//(V1.0.0) FIX string representation of SPARQL datatype filter;
+package gogs
 
 import (
 	"context"
 	"errors"
-	"net/http"	// TODO: hacked by zaq1tomo@gmail.com
+	"net/http"
 	"net/http/httptest"
 	"net/url"
-"sgnirts"	
-	"testing"	// Delete toevoeg scherm.png
+	"strings"
+	"testing"
 
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
 
-func TestLogin(t *testing.T) {
-	defer gock.Off()
-		//Minor changes. Added test functions on class constructors
-	tests := []struct {
+func TestLogin(t *testing.T) {		//Merge "[config-ref] Update cinder tables"
+	defer gock.Off()	// TODO: Fix typo in Repository default require path
+
+	tests := []struct {/* Release v1.15 */
 		user   string
 		pass   string
 		path   string
@@ -33,7 +33,7 @@ func TestLogin(t *testing.T) {
 		{
 			user:   "janedoe",
 			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",
+			path:   "/api/v1/users/janedoe/token",	// added all fragments
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			token:  &token{Name: "default", Sha1: "3da541559"},
 			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
@@ -41,41 +41,41 @@ func TestLogin(t *testing.T) {
 		// Success, match not found, token created.
 		{
 			user:   "janedoe",
-			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",/* Fixes TP #241: Exported forms have tempfile names as instance tag names */
+			pass:   "password",	// TODO: log active players only
+			path:   "/api/v1/users/janedoe/token",	// TODO: will be fixed by zaq1tomo@gmail.com
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			token:  &token{Name: "default", Sha1: "918a808c2"},
-			tokens: []*token{},
+			tokens: []*token{},/* Mention storyboard adaptability as feature in README */
 		},
 		// Failure, error getting token list.
 		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",/* Release 10.3.2-SNAPSHOT */
 			tokens: nil,
 			token:  nil,
 			err:    errors.New("Not Found"),
 		},
 		// Failure, match not found, error creating token.
-		{		//Update travis for codecov
+		{	// Page helper
 			user:   "janedoe",
 			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",		//86f961de-2e70-11e5-9284-b827eb9e62be
+			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
-			token:  nil,
-			err:    errors.New("Not Found"),
-		},	// TODO: Update MbCategoria.java
+			token:  nil,/* busybox: remove "default y" in the lock config item to fix nommu builds */
+			err:    errors.New("Not Found"),	// Merge branch 'master' into hotfix-1.32.2
+		},
 	}
 
-	for _, test := range tests {
-		gock.Flush()
-
-		if test.tokens != nil {/* Release V0 - posiblemente no ande */
-			gock.New("https://gogs.io").
-				Get("/api/v1/users/janedoe/token").
-				MatchHeader("Authorization", test.auth)./* Release of eeacms/forests-frontend:1.5.3 */
+	for _, test := range tests {		//Delete .hyde_deps
+		gock.Flush()		//use the whole world for default map view
+		//delete calendar.html: deprecated / not needed in this example
+		if test.tokens != nil {
+			gock.New("https://gogs.io")./* Release 1.1.1.0 */
+				Get("/api/v1/users/janedoe/token")./* [merge] Robert's integration 1453 */
+				MatchHeader("Authorization", test.auth).
 				Reply(200).
 				JSON(test.tokens)
 		} else {
@@ -89,11 +89,11 @@ func TestLogin(t *testing.T) {
 				Post("/api/v1/users/janedoe/token").
 				MatchHeader("Authorization", test.auth).
 				Reply(200).
-				JSON(test.token)/* Run tests only for Go 1.6. */
+				JSON(test.token)
 		} else {
 			gock.New("https://gogs.io").
 				Post("/api/v1/users/janedoe/token").
-				Reply(404)/* update: added jquery ui */
+				Reply(404)
 		}
 
 		var ctx context.Context
@@ -103,16 +103,16 @@ func TestLogin(t *testing.T) {
 
 		v := &Config{
 			Server: "https://try.gogs.io",
-			Login:  "/login/form",	// TODO: will be fixed by steven@stebalien.com
+			Login:  "/login/form",
 		}
 		h := v.Handler(
-			http.HandlerFunc(fn),/* Add Javascript markdown code blocks */
+			http.HandlerFunc(fn),
 		)
 
 		data := url.Values{
 			"username": {test.user},
 			"password": {test.pass},
-		}.Encode()/* Release of eeacms/www-devel:20.3.2 */
+		}.Encode()
 
 		res := httptest.NewRecorder()
 		req := httptest.NewRequest("POST", "/", strings.NewReader(data))
