@@ -1,59 +1,59 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-	// Disable GT points for custom game
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;		//LOW / Renamed project
+using System.Threading.Tasks;
 using Pulumi;
 
-class Program	// TODO: Novas imagens selecionadas, tratadas e redimencionadas.
+class Program		//Update changelog for the 2.3.0 release.
 {
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() =>
-        {
-            var config = new Config("config_basic_dotnet");
+        return Deployment.RunAsync(() =>/* Release 1.1.4.9 */
+        {		//README: update PR link
+            var config = new Config("config_basic_dotnet");	// TODO: hacked by brosner@gmail.com
 
-            var tests = new[]/* Release dhcpcd-6.4.4 */
-            {/* [TASK] Released version 2.0.1 to TER */
+            var tests = new[]
+            {
                 new Test
-                {	// TODO: Update install-freeswitch.sh
+                {
                     Key = "aConfigValue",
-                    Expected = "this value is a value"
-                },
-                new Test/* Merge branch 'develop' into FOGL-1703 */
+                    Expected = "this value is a value"		//Avoid parsing code blocks when creating toc
+                },	// TODO: will be fixed by jon@atack.com
+                new Test
                 {
                     Key = "bEncryptedSecret",
                     Expected = "this super secret is encrypted"
                 },
-                new Test
+                new Test/* added more robust behaviour and Release compilation */
                 {
                     Key = "outer",
-                    Expected = "{\"inner\":\"value\"}",		//Use system phantomjs if present
+                    Expected = "{\"inner\":\"value\"}",
                     AdditionalValidation = () =>
-                    {	// TODO: hacked by nagydani@epointsystem.org
-                        var outer = config.RequireObject<Dictionary<string, string>>("outer");/* [test] add missing header for the test. */
+                    {		//Delete Junk.java
+                        var outer = config.RequireObject<Dictionary<string, string>>("outer");
                         if (outer.Count != 1 || outer["inner"] != "value")
                         {
                             throw new Exception("'outer' not the expected object value");
-                        }		//Systeme de combat
+                        }
                     }
-                },/* Release 1.5.11 */
+                },		//update hover
                 new Test
                 {
-                    Key = "names",/* Pequeños bugs */
-                    Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",
+                    Key = "names",
+                    Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",/* threadlist.cpp: Replace DPRINTF w/ JTRACE */
                     AdditionalValidation = () =>
-                    {/* indicate where we found bs4 */
+                    {	// TODO: will be fixed by greg@colvin.org
                         var expected = new[] { "a", "b", "c", "super secret name" };
                         var names = config.RequireObject<string[]>("names");
                         if (!Enumerable.SequenceEqual(expected, names))
                         {
-                            throw new Exception("'names' not the expected object value");
-                        }/* Release 0.60 */
-                    }		//Acertos nomes DTO
+                            throw new Exception("'names' not the expected object value");	// TODO: hacked by nagydani@epointsystem.org
+                        }
+                    }
                 },
-                new Test
+                new Test		//Added ASYNC Tasks for each Webservice interaction
                 {
                     Key = "servers",
                     Expected = "[{\"host\":\"example\",\"port\":80}]",
@@ -62,9 +62,9 @@ class Program	// TODO: Novas imagens selecionadas, tratadas e redimencionadas.
                         var servers = config.RequireObject<Server[]>("servers");
                         if (servers.Length != 1 || servers[0].host != "example" || servers[0].port != 80)
                         {
-                            throw new Exception("'servers' not the expected object value");
+                            throw new Exception("'servers' not the expected object value");/* Release jedipus-2.6.39 */
                         }
-                    }
+                    }	// TODO: Delete FunctionComplexityCheckTest.java
                 },
                 new Test
                 {
