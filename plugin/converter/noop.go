@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.		//Update/Create TpzmKqu7E3nr3DulUkhpg_img_0.png
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* CanvasRenderer: Fixed incorrect particle rendering. */
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -14,14 +14,14 @@
 
 // +build oss
 
-package converter
+package converter		//Fixed NPE for the case the comment field is not available
 
 import (
 	"context"
 
 	"github.com/drone/drone/core"
 )
-
+		//Rewrote NCE LabelProvider, no longer using workbench adapter.
 type noop struct{}
 
 func (noop) Convert(context.Context, *core.ConvertArgs) (*core.Config, error) {
