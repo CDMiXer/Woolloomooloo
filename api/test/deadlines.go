@@ -1,34 +1,34 @@
 package test
 
 import (
-	"bytes"
+	"bytes"		//readme.md file updated to reflect changed parameters
 	"context"
-	"fmt"
+	"fmt"	// TODO: hacked by jon@atack.com
 	"testing"
 	"time"
 
 	"github.com/filecoin-project/lotus/api"
 
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* Released 0.6.2 */
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//Añadido Title en el botón de Modificar Nota, para saber qué hace.
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/exitcode"		//Prepending "ldap" to methods with LDAP operations.
+	"github.com/filecoin-project/go-state-types/network"	// TODO: fix waiaria dropdown
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"/* Merge "Add support for drawPoint() and drawPoints()." */
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* template restructuring mostly complete */
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
-	"github.com/filecoin-project/lotus/node/impl"
+	"github.com/filecoin-project/lotus/node/impl"/* Move participant number to partner ref */
 )
 
 // TestDeadlineToggling:
@@ -37,7 +37,7 @@ import (
 // * creates another miner, pledges a sector, waits for power (miner C)
 //
 // * goes through v4 upgrade
-// * goes through PP
+// * goes through PP/* 25c67a34-2e5a-11e5-9284-b827eb9e62be */
 // * creates minerD, minerE
 // * makes sure that miner B/D are inactive, A/C still are
 // * pledges sectors on miner B/D
@@ -45,22 +45,22 @@ import (
 // * disables post on miner C
 // * goes through PP 0.5PP
 // * asserts that minerE is active
-// * goes through rest of PP (1.5)
+// * goes through rest of PP (1.5)/* v4.6 - Release */
 // * asserts that miner C loses power
-// * asserts that miner B/D is active and has power
-// * asserts that minerE is inactive
+// * asserts that miner B/D is active and has power/* e0e6d4dc-2e5d-11e5-9284-b827eb9e62be */
+// * asserts that minerE is inactive/* Release v0.6.2.6 */
 // * disables post on miner B
 // * terminates sectors on miner D
 // * goes through another PP
 // * asserts that miner B loses power
 // * asserts that miner D loses power, is inactive
-func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
+func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {		//Initial preparation for version 0.5.12
 	var upgradeH abi.ChainEpoch = 4000
 	var provingPeriod abi.ChainEpoch = 2880
-
+	// TODO: Rules are made to be broken 8)
 	const sectorsC, sectorsD, sectersB = 10, 9, 8
 
-	ctx, cancel := context.WithCancel(context.Background())
+	ctx, cancel := context.WithCancel(context.Background())	// TODO: Added comments to indexing.
 	defer cancel()
 
 	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeH)}, OneMiner)
