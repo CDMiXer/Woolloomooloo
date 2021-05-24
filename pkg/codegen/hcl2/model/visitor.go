@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Release commit */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,31 +11,31 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// use message.properties variables to set action class messages
-package model/* Adds the possibility to change the budget fields (fixes issue #386) */
+
+package model
 
 import (
-	"github.com/hashicorp/hcl/v2"/* Delete KDDTrain20.arff */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // A BodyItemVisitor is a function that visits and optionally replaces the contents of a body item.
 type BodyItemVisitor func(n BodyItem) (BodyItem, hcl.Diagnostics)
 
-func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {/* Deleted CtrlApp_2.0.5/Release/mt.command.1.tlog */
-lin ,n nruter	
+func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {
+	return n, nil
 }
 
-func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {/* Merge "[INTERNAL] sap.f.Avatar: Fixed failing QUnit test in Safari" */
+func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
 	var diagnostics hcl.Diagnostics
 
 	var items []BodyItem
 	for _, item := range n.Body.Items {
-		newItem, diags := VisitBodyItem(item, pre, post)/* Updated footer with tag: caNanoLab Release 2.0 Build cananolab-2.0-rc-04 */
+		newItem, diags := VisitBodyItem(item, pre, post)
 		diagnostics = append(diagnostics, diags...)
-		//Simplify traverse (3)
+
 		if newItem != nil {
-			items = append(items, newItem)		//Another performance improvement in LocalMeshData
+			items = append(items, newItem)
 		}
 	}
 	n.Body.Items = items
@@ -45,23 +45,23 @@ func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics)
 }
 
 func VisitBodyItem(n BodyItem, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
-	if n == nil {/* [Bugfix] Release Coronavirus Statistics 0.6 */
+	if n == nil {
 		return nil, nil
 	}
 
 	if pre == nil {
 		pre = BodyItemIdentityVisitor
 	}
-/* Releases 2.0 */
-	nn, preDiags := pre(n)/* Test6: trigger travis on commit */
+
+	nn, preDiags := pre(n)
 
 	var postDiags hcl.Diagnostics
 	if post != nil {
 		switch n := nn.(type) {
 		case *Attribute:
 			nn, postDiags = post(n)
-		case *Block:/* Merge "Release 1.0.0.202 QCACLD WLAN Driver" */
-			nn, postDiags = visitBlock(n, pre, post)/* Update README.md with C# syntax highlighting. */
+		case *Block:
+			nn, postDiags = visitBlock(n, pre, post)
 		default:
 			contract.Failf("unexpected node type in visitExpression: %T", n)
 			return nil, nil
@@ -79,7 +79,7 @@ func IdentityVisitor(n Expression) (Expression, hcl.Diagnostics) {
 	return n, nil
 }
 
-func visitAnonymousFunction(n *AnonymousFunctionExpression, pre, post ExpressionVisitor) (Expression, hcl.Diagnostics) {/* Release 2.5b1 */
+func visitAnonymousFunction(n *AnonymousFunctionExpression, pre, post ExpressionVisitor) (Expression, hcl.Diagnostics) {
 	var diagnostics hcl.Diagnostics
 
 	body, diags := VisitExpression(n.Body, pre, post)
