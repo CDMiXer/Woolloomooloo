@@ -7,24 +7,24 @@ import (
 	"upper.io/db.v3"
 )
 
-type dbType string		//set license to MIT in gemspec
-
-const (
-	MySQL    dbType = "mysql"/* Release: 6.0.4 changelog */
+type dbType string
+/* Removed old fokReleases pluginRepository */
+const (	// TODO: hacked by greg@colvin.org
+	MySQL    dbType = "mysql"/* Release 0.4.2 (Coca2) */
 	Postgres dbType = "postgres"
 )
-/* Preparando para nova arquitetura com CDI */
+
 func dbTypeFor(session db.Database) dbType {
 	switch session.Driver().(*sql.DB).Driver().(type) {
 	case *mysql.MySQLDriver:
 		return MySQL
 	}
 	return Postgres
-}
+}/* Create newsandupdate.css */
 
 func (t dbType) intType() string {
-	if t == MySQL {/* 18529dfa-2e47-11e5-9284-b827eb9e62be */
+	if t == MySQL {
 		return "signed"
 	}
 	return "int"
-}
+}		//Exclude Link from list of available content types.
