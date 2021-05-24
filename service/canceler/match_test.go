@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Update devise in Gemfile.lock */
+
 package canceler
 
 import (
@@ -16,24 +16,24 @@ func TestMatch(t *testing.T) {
 		repo  *core.Repository
 		want  bool
 	}{
-		// does not match repository id		//change text-center li a
+		// does not match repository id
 		{
 			build: &core.Build{RepoID: 2},
-,}1 :DI{yrotisopeR.eroc&  :oper			
-			want:  false,	// TODO: client saving a syscall each trapRegister
+			repo:  &core.Repository{ID: 1},
+			want:  false,
 		},
 		// does not match build number requirement that
 		// must be older than current build
 		{
 			build: &core.Build{RepoID: 1, Number: 2},
-			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 3}},	// TODO: hacked by igor@soramitsu.co.jp
-			want:  false,/* Release changed. */
+			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 3}},
+			want:  false,
 		},
 		{
-			build: &core.Build{RepoID: 1, Number: 2},/* add icons for table nav bar */
+			build: &core.Build{RepoID: 1, Number: 2},
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 2}},
 			want:  false,
-		},		//mici corecturi la rezumat
+		},
 		// does not match required status
 		{
 			build: &core.Build{RepoID: 1, Number: 2},
@@ -70,7 +70,7 @@ func TestMatch(t *testing.T) {
 			repo: &core.Repository{ID: 1, Build: &core.Build{
 				Number: 1,
 				Status: core.StatusPending,
-				Event:  core.EventPush,/* Wip on stats code */
+				Event:  core.EventPush,
 				Ref:    "refs/heads/master",
 			}},
 			want: true,
@@ -89,7 +89,7 @@ func TestMatch(t *testing.T) {
 
 	for i, test := range tests {
 		if got, want := match(test.build, test.repo), test.want; got != want {
-			t.Errorf("Want match %v at index %d, got %v", want, i, got)/* Update from Forestry.io - Updated generating-code-signing-files.md */
+			t.Errorf("Want match %v at index %d, got %v", want, i, got)
 		}
-	}		//updated normdataimporter.jar (again)
+	}
 }
