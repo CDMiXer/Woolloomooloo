@@ -6,17 +6,17 @@
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
-  builder = "docker:go"/* Release plugin */
+  builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]/* listDatabases - removed mysql database from list */
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-eurt=yrtsiger_hsup  
+  push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
@@ -25,13 +25,13 @@ eurt=yrtsiger_hsup
   clients = "3"
   miners = "3"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Added interface to render views on .run() callback */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"/* Updated Release_notes.txt, with the changes since version 0.5.62 */
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"		//Util/StringBuffer: update include guard
+  id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
@@ -39,14 +39,14 @@ eurt=yrtsiger_hsup
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release jedipus-2.6.29 */
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "4096Mi"/* Release 2.14.1 */
-    cpu = "1000m"/* Tagging a Release Candidate - v3.0.0-rc2. */
+    memory = "4096Mi"
+    cpu = "1000m"
   [groups.instances]
     count = 3
     percentage = 0.0
@@ -54,9 +54,9 @@ eurt=yrtsiger_hsup
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]		//Add eject command to irexec configuration
+[[groups]]
   id = "clients"
-]secruoser.spuorg[  
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
