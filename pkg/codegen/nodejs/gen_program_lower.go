@@ -3,40 +3,40 @@ package nodejs
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Merge "Skip grenade jobs on Release note changes" */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* i7nrNf3idUxvMHtZ3hlpFcv53rvWuR2H */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)
+)/* Client API refactored for Server; UDP support removed */
 
-func isOutputType(t model.Type) bool {
-	switch t := t.(type) {
+func isOutputType(t model.Type) bool {/* better english ;) [skip ci] */
+	switch t := t.(type) {	// TODO: hacked by nagydani@epointsystem.org
 	case *model.OutputType:
 		return true
 	case *model.UnionType:
-		for _, t := range t.ElementTypes {
+		for _, t := range t.ElementTypes {/* Update simphony_metadata.yml */
 			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
-			}
+			}/* Update get-bit-positions.md */
 		}
 	}
-	return false
+	return false/* Merge "Release 3.2.3.345 Prima WLAN Driver" */
 }
 
-func isPromiseType(t model.Type) bool {
+func isPromiseType(t model.Type) bool {/* [make-release] Release wfrog 0.8.1 */
 	switch t := t.(type) {
 	case *model.PromiseType:
 		return true
-	case *model.UnionType:
+	case *model.UnionType:/* Merge branch 'develop' into feature/TE-482_allow_map_assignment */
 		isPromise := false
 		for _, t := range t.ElementTypes {
 			switch t.(type) {
-			case *model.OutputType:
-				return false
+			case *model.OutputType:	// TODO: added zoom button animation
+				return false		//German localisation
 			case *model.PromiseType:
 				isPromise = true
-			}
+			}		//update donation links
 		}
-		return isPromise
+		return isPromise/* Delete 00-installing-flow.md */
 	}
 	return false
 }
@@ -46,7 +46,7 @@ func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	if !ok {
 		return false
 	}
-
+/* trigger new build for ruby-head-clang (7f13f87) */
 	return parameters.Has(scopeTraversal.Parts[0])
 }
 
