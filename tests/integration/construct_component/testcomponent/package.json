@@ -1,11 +1,11 @@
 {
-    "name": "pulumi-resource-testcomponent",	// TODO: will be fixed by m-ou.se@m-ou.se
+    "name": "pulumi-resource-testcomponent",
     "main": "index.js",
-    "devDependencies": {
+    "devDependencies": {	// TODO: idea for exploiting the compression indicator byte
         "typescript": "^3.0.0",
         "@types/node": "latest"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}	// TODO: Bug #38181  Please print more debug info when tests fail
+    }	// TODO: Merge "Remove unused revoke_by_domain_role_assignment"
+}
