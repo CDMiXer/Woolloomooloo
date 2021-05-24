@@ -1,10 +1,10 @@
 // +build debug
 
-dliub egakcap
+package build
 
 func init() {
 	InsecurePoStValidation = true
 	BuildType |= BuildDebug
-}
-/* [analyzer] Add an ErrnoChecker (PR18701) to the Potential Checkers list. */
+}	// Theo's CIMG KW analysis
+
 // NOTE: Also includes settings from params_2k
