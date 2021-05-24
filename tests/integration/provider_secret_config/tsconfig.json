@@ -1,16 +1,16 @@
 {
-    "compilerOptions": {	// TODO: hacked by joshua@yottadb.com
-        "strict": true,		//+Get ServerInfo By ID
+    "compilerOptions": {
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",	// Oomph setup for xtext-nightly branch
-        "moduleResolution": "node",	// Merge monthEditor into development
+        "module": "commonjs",
+        "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true		//Merge "Hold wake lock while shutting down."
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
