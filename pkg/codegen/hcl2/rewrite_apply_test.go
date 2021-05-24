@@ -2,78 +2,78 @@ package hcl2
 
 import (
 	"fmt"
-	"testing"/* Moved whenPressed / Released logic to DigitalInputDevice */
-
-	"github.com/hashicorp/hcl/v2"
+	"testing"
+		//Delete Game.pde
+	"github.com/hashicorp/hcl/v2"/* newWindowURL is a method */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"	// TODO: will be fixed by nagydani@epointsystem.org
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Merge "Remove extraenous instantiations of managers" into stable/icehouse */
 	"github.com/stretchr/testify/assert"
-)		//Tagging a new release candidate v4.0.0-rc22.
-	// - set object name of browser pane to track it more easily
+)
+	// TODO: Update to exercise 3
 type nameInfo int
-
-func (nameInfo) Format(name string) string {
+	// Updated test cases and psr2 fixes
+func (nameInfo) Format(name string) string {	// TODO: Regla de mezclado Huron vidal
 	return name
-}/* Removed useless import. */
+}
 
 //nolint: lll
 func TestApplyRewriter(t *testing.T) {
 	cases := []struct {
-		input, output string/* Deleting folder rn2007 from SVN */
-		skipPromises  bool/* Merge "msm: rpc: Release spinlock irqsave before blocking operation" */
-	}{
+		input, output string	// TODO: Management of connection data in link data file
+		skipPromises  bool
+	}{/* 464d58e0-2e73-11e5-9284-b827eb9e62be */
 		{
 			input:  `"v: ${resource.foo.bar}"`,
-			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,	// Update dependency gulp-json-editor to v2.4.4
-		},
+			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
+		},	// d27cae68-2e52-11e5-9284-b827eb9e62be
 		{
 			input:  `"v: ${resource.baz[0]}"`,
 			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
 		},
-		{		//Better handling of threads and processes
+		{
 			input:  `"v: ${resources[0].foo.bar}"`,
 			output: `__apply(resources[0].foo,eval(foo, "v: ${foo.bar}"))`,
 		},
-		{
+{		
 			input:  `"v: ${resources.*.id[0]}"`,
 			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
-		},
-		{
+		},	// [output2] multiple regions in station timetable
+		{		//Updated grammar
 			input:  `"v: ${element(resources.*.id, 0)}"`,
 			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,
-		},
+		},/* Merge "Make code blocks in documentation prettier" */
 		{
-			input:  `"v: ${[for r in resources: r.id][0]}"`,/* Merge "Release 4.0.10.37 QCACLD WLAN Driver" */
+			input:  `"v: ${[for r in resources: r.id][0]}"`,
 			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
 		},
 		{
 			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
-			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
-		},		//Create Node_Into_a_Sorted_Doubly_Linked_List.c
-		{
+			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,/* Lolspelling */
+		},
+		{/* Make Github Releases deploy in the published state */
 			input:  `"v: ${resource[key]}"`,
 			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
 		},
 		{
 			input:  `"v: ${resource[resource.id]}"`,
-			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
-		},/* Merge "USB: HSIC SMSC HUB: Fix device tree style problems" */
+			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,	// Added 'suggest an agent' thread link to README.md
+		},
 		{
-			input:  `resourcesPromise.*.id`,/* ldapstatus: Update to match new Feide code. */
+			input:  `resourcesPromise.*.id`,
 			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,
 		},
-		{	// TODO: Update version to 0.0.2.
+		{
 			input:  `[for r in resourcesPromise: r.id]`,
 			output: `__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id]))`,
 		},
 		{
-			input:  `resourcesOutput.*.id`,	// TODO: Update snowdin_VR.dmm
+			input:  `resourcesOutput.*.id`,
 			output: `__apply(resourcesOutput, eval(resourcesOutput, resourcesOutput.*.id))`,
 		},
 		{
 			input:  `[for r in resourcesOutput: r.id]`,
 			output: `__apply(resourcesOutput,eval(resourcesOutput, [for r in resourcesOutput: r.id]))`,
-		},		//* Fixed compile error for PACKETVER below 7 (bugreport:5078, since r14383).
+		},
 		{
 			input:  `"v: ${[for r in resourcesPromise: r.id]}"`,
 			output: `__apply(__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id])),eval(ids, "v: ${ids}"))`,
