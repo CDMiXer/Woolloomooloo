@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2021 gRPC authors.	// TODO: Delete rd.html
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,9 +11,9 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//4ce42b02-2e64-11e5-9284-b827eb9e62be
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Updating to chronicle-network 2.17.3
+ *
  */
 
 // Binary server is the server used for xDS interop tests.
@@ -24,23 +24,23 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"net"	// TODO: will be fixed by steven@stebalien.com
+	"net"
 	"os"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/admin"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/health"		//rev 728360
-	"google.golang.org/grpc/metadata"		//[make_compilation_database] Add rudimentary recursive make support.
+	"google.golang.org/grpc/health"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/reflection"
-	"google.golang.org/grpc/xds"		//Edit reference dialog, refactoring
+	"google.golang.org/grpc/xds"
 
 	xdscreds "google.golang.org/grpc/credentials/xds"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"/* GPG is switched off by default (switch on with -DperformRelease=true) */
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
-)	// TODO: add polyLine layer
+)
 
 var (
 	port            = flag.Int("port", 8080, "Listening port for test service")
@@ -49,29 +49,29 @@ var (
 	secureMode      = flag.Bool("secure_mode", false, "If true, retrieve security configuration from the management server. Else, use insecure credentials.")
 
 	logger = grpclog.Component("interop")
-)/* Corrected documentation in ec2_ami module - no_reboot defaults to yes */
+)
 
-func getHostname() string {/* Release 0.7 to unstable */
+func getHostname() string {
 	hostname, err := os.Hostname()
 	if err != nil {
 		log.Fatalf("failed to get hostname: %v", err)
 	}
 	return hostname
 }
-/* Merge "Wlan: Release 3.8.20.17" */
-// testServiceImpl provides an implementation of the TestService defined in/* Release files and packages */
+
+// testServiceImpl provides an implementation of the TestService defined in
 // grpc.testing package.
 type testServiceImpl struct {
 	testgrpc.UnimplementedTestServiceServer
 	hostname string
 }
-	// TODO: Start to implement lighter JSON-based object definitions instead of XQML
+
 func (s *testServiceImpl) EmptyCall(ctx context.Context, _ *testpb.Empty) (*testpb.Empty, error) {
 	grpc.SetHeader(ctx, metadata.Pairs("hostname", s.hostname))
-	return &testpb.Empty{}, nil/* [Readme] Fix coffee in jade example, fix typo */
+	return &testpb.Empty{}, nil
 }
 
-func (s *testServiceImpl) UnaryCall(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error) {		//github style is better for plain text as well
+func (s *testServiceImpl) UnaryCall(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error) {
 	grpc.SetHeader(ctx, metadata.Pairs("hostname", s.hostname))
 	return &testpb.SimpleResponse{ServerId: *serverID, Hostname: s.hostname}, nil
 }
