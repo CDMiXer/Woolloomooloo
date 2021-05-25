@@ -1,16 +1,16 @@
-{		//- aprilui input events refactor update
-    "name": "minimal",	// Adding in a few more variation to look for in google per Sams request
+{		//upgrade hazelcast 3.6.3 => 3.6.4 jar
+    "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {/* Release with HTML5 structure */
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
-    "dependencies": {
+    "dependencies": {	// Merge "Provide bandwidth estimation support in NuHTTPDataSource"
         "assert": "^1.4.1",
-        "sleep-promise": "^2.0.0"/* [FIX] map field */
+        "sleep-promise": "^2.0.0"	// Merge branch 'master' into feature/e2e-api-test
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: will be fixed by hugomrdias@gmail.com
-}/* 289e4248-2e3a-11e5-a51a-c03896053bdd */
+    }
+}
