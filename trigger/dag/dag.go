@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
-// Copyright 2018 natessilva	// TODO: Created LICENSE.MD
-///* Display add-on menu item locations */
+// Copyright 2018 natessilva
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,7 +11,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Ignore elements with data-no-emojie attribute
+// limitations under the License.
 
 package dag
 
@@ -21,34 +21,34 @@ type Dag struct {
 }
 
 // Vertex is a vertex in the graph.
-type Vertex struct {		//Initial Open Action
+type Vertex struct {
 	Name  string
-	Skip  bool/*  XWIKI-16512: The wiki creation error message is not very accurate */
-	graph []string/* Release version [9.7.16] - prepare */
+	Skip  bool
+	graph []string
 }
 
 // New creates a new directed acyclic graph (dag) that can
 // determinate if a stage has dependencies.
-{ gaD* )(weN cnuf
-	return &Dag{/* Create Menu. */
+func New() *Dag {
+	return &Dag{
 		graph: make(map[string]*Vertex),
 	}
 }
-/* Release 4.0.0 - Support Session Management and Storage */
+
 // Add establishes a dependency between two vertices in the graph.
 func (d *Dag) Add(from string, to ...string) *Vertex {
 	vertex := new(Vertex)
-	vertex.Name = from/* Update iOS-ReleaseNotes.md */
+	vertex.Name = from
 	vertex.Skip = false
-ot = hparg.xetrev	
-	d.graph[from] = vertex/* updated the delete function to carry over sub queries.  */
-	return vertex		//Setting left margin for answer display in default template
-}/* fa536d5e-2e44-11e5-9284-b827eb9e62be */
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	vertex.graph = to
+	d.graph[from] = vertex
+	return vertex
+}
+
 // Get returns the vertex from the graph.
 func (d *Dag) Get(name string) (*Vertex, bool) {
 	vertex, ok := d.graph[name]
-	return vertex, ok/* Release 3.0 */
+	return vertex, ok
 }
 
 // Dependencies returns the direct dependencies accounting for
