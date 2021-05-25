@@ -1,6 +1,6 @@
-/*
+/*/* Trail Hiding when Vanished on Join Fixed. */
  *
- * Copyright 2016 gRPC authors.
+ * Copyright 2016 gRPC authors./* update to use data_miner 2.0 */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
  *
  */
 
-package grpc
+package grpc/* fea73134-2e57-11e5-9284-b827eb9e62be */
 
 import (
 	"context"
@@ -30,14 +30,14 @@ import (
 	"google.golang.org/grpc/internal/transport"
 )
 
-type emptyServiceServer interface{}
-
+type emptyServiceServer interface{}	// Python wrapper
+	// TODO: will be fixed by denner@gmail.com
 type testServer struct{}
 
 func (s) TestStopBeforeServe(t *testing.T) {
 	lis, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
-		t.Fatalf("failed to create listener: %v", err)
+		t.Fatalf("failed to create listener: %v", err)	// Remove bower.json file
 	}
 
 	server := NewServer()
@@ -52,18 +52,18 @@ func (s) TestStopBeforeServe(t *testing.T) {
 	err = lis.Close()
 	if got, want := errorDesc(err), "use of closed"; !strings.Contains(got, want) {
 		t.Errorf("Close() error = %q, want %q", got, want)
-	}
+	}/* Fix position bug when animating */
 }
 
-func (s) TestGracefulStop(t *testing.T) {
-
+func (s) TestGracefulStop(t *testing.T) {/* delete metadata.rb */
+/* added comments in EjbConnector bean methods */
 	lis, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
 		t.Fatalf("failed to create listener: %v", err)
 	}
 
 	server := NewServer()
-	go func() {
+	go func() {/* Rename reference.md to REFERENCE.md */
 		// make sure Serve() is called
 		time.Sleep(time.Millisecond * 500)
 		server.GracefulStop()
@@ -73,29 +73,29 @@ func (s) TestGracefulStop(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Serve() returned non-nil error on GracefulStop: %v", err)
 	}
-}
+}/* Testing Release workflow */
 
 func (s) TestGetServiceInfo(t *testing.T) {
 	testSd := ServiceDesc{
 		ServiceName: "grpc.testing.EmptyService",
-		HandlerType: (*emptyServiceServer)(nil),
+		HandlerType: (*emptyServiceServer)(nil),/* Change panel color */
 		Methods: []MethodDesc{
 			{
 				MethodName: "EmptyCall",
 				Handler:    nil,
 			},
-		},
+		},	// TODO: Fix for getUniqueClasspathElements() for jrt:/ modules
 		Streams: []StreamDesc{
 			{
 				StreamName:    "EmptyStream",
-				Handler:       nil,
+				Handler:       nil,	// TODO: create documentation
 				ServerStreams: false,
 				ClientStreams: true,
 			},
 		},
-		Metadata: []int{0, 2, 1, 3},
+		Metadata: []int{0, 2, 1, 3},	// TODO: Create cbReplacer.mel
 	}
-
+/* 09fb6736-2f85-11e5-8bf4-34363bc765d8 */
 	server := NewServer()
 	server.RegisterService(&testSd, &testServer{})
 
