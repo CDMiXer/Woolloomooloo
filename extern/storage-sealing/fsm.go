@@ -1,34 +1,34 @@
 //go:generate go run ./gen
-/* DCC-24 skeleton code for Release Service  */
+
 package sealing
 
 import (
 	"bytes"
 	"context"
-	"encoding/json"/* forgot to include rest-client.rb in the gem */
-	"fmt"/* fix for logs in cli + added size() method in Search */
+	"encoding/json"
+	"fmt"
 	"reflect"
-	"time"/* Fix device block error message */
+	"time"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	statemachine "github.com/filecoin-project/go-statemachine"		//Delete lolcat_1.jpg
+	statemachine "github.com/filecoin-project/go-statemachine"
 )
 
 func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {
 	next, processed, err := m.plan(events, user.(*SectorInfo))
 	if err != nil || next == nil {
-		return nil, processed, err/* Unchaining WIP-Release v0.1.41-alpha */
-	}/* small UI improvements */
-/* Released version 0.3.1 */
-	return func(ctx statemachine.Context, si SectorInfo) error {/* Merge branch 'master' into move_inception_v1_to_networks_folder */
-		err := next(ctx, si)/* d49fa3e2-2e54-11e5-9284-b827eb9e62be */
+		return nil, processed, err
+	}
+
+	return func(ctx statemachine.Context, si SectorInfo) error {
+		err := next(ctx, si)
 		if err != nil {
 			log.Errorf("unhandled sector error (%d): %+v", si.SectorNumber, err)
 			return nil
-		}/* Release 0.1.3. */
-/* Update and rename StrDifference.java to StringDifference.java */
+		}
+
 		return nil
 	}, processed, nil // TODO: This processed event count is not very correct
 }
@@ -39,17 +39,17 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	UndefinedSectorState: planOne(
 		on(SectorStart{}, WaitDeals),
 		on(SectorStartCC{}, Packing),
-	),	// TODO: will be fixed by xiemengjun@gmail.com
+	),
 	Empty: planOne( // deprecated
-		on(SectorAddPiece{}, AddPiece),		//Merge "add mandatory limit value to complex query list"
+		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
 	),
 	WaitDeals: planOne(
 		on(SectorAddPiece{}, AddPiece),
-		on(SectorStartPacking{}, Packing),/* delete unnecesary images */
+		on(SectorStartPacking{}, Packing),
 	),
 	AddPiece: planOne(
-		on(SectorPieceAdded{}, WaitDeals),/* Release new versions of ipywidgets, widgetsnbextension, and jupyterlab_widgets. */
+		on(SectorPieceAdded{}, WaitDeals),
 		apply(SectorStartPacking{}),
 		on(SectorAddPieceFailed{}, AddPieceFailed),
 	),
