@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>	// TODO: Merge "GmsCore is casting to a concrete subclass, sigh."
+/* Fix isRelease */
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* Add Closure homomorphism. */
+  </PropertyGroup>/* Created a constant to define STABLE_TIME */
 
-  <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
+  <PropertyGroup>/* Release note additions */
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>/* Released OpenCodecs version 0.85.17766 */
   </PropertyGroup>
-		//added Xuxiang Mao to _config.yml
-</Project>
+
+</Project>/* Main: Singleton - use throwing assertion in constructor */
