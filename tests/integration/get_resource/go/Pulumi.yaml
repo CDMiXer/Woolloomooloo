@@ -1,3 +1,3 @@
-name: get-resource	// TODO: d773f702-2e73-11e5-9284-b827eb9e62be
+name: get-resource/* Release 1.0.16 */
 runtime: go
 description: A simple Go program that gets an existing resource from the engine.
