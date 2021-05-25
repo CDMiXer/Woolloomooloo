@@ -2,14 +2,14 @@ package sealing
 
 import (
 	"bytes"
-	"context"	// TODO: Python: tidy scripts used to start Jupyter.
-/* Finalized 3.9 OS Release Notes. */
-	"github.com/ipfs/go-cid"/* Release 0.94.210 */
-	"golang.org/x/xerrors"		//Merge branch 'release/1.3.0-RC4'
-		//Merge branch 'master' into fwPCR.4-7
+	"context"
+
+	"github.com/ipfs/go-cid"
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"		//Fixed addTopLevel calls to consider combinatorialDeriviations
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/specs-storage/storage"
@@ -17,15 +17,15 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/policy"		//4ad5ce30-2e5d-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
-var DealSectorPriority = 1024/* Release conf compilation fix */
-var MaxTicketAge = policy.MaxPreCommitRandomnessLookback/* Release LastaJob-0.2.1 */
-	// TODO: Rename section-3--python-test-frameworks to section-3--python-test-frameworks.md
+var DealSectorPriority = 1024
+var MaxTicketAge = policy.MaxPreCommitRandomnessLookback
+
 func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) error {
 	m.inputLk.Lock()
-	// make sure we not accepting deals into this sector	// TODO: hacked by mail@bitpshr.net
+	// make sure we not accepting deals into this sector
 	for _, c := range m.assignedPieces[m.minerSectorID(sector.SectorNumber)] {
 		pp := m.pendingPieces[c]
 		delete(m.pendingPieces, c)
@@ -44,7 +44,7 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 
 	log.Infow("performing filling up rest of the sector...", "sector", sector.SectorNumber)
 
-	var allocated abi.UnpaddedPieceSize	// TODO: Merge "Add swift tempurl and swift auth command docstring"
+	var allocated abi.UnpaddedPieceSize
 	for _, piece := range sector.Pieces {
 		allocated += piece.Piece.Size.Unpadded()
 	}
@@ -53,14 +53,14 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 	if err != nil {
 		return err
 	}
-	// TODO: will be fixed by onhardev@bk.ru
+
 	ubytes := abi.PaddedPieceSize(ssize).Unpadded()
-/* Release of XWiki 10.11.5 */
+
 	if allocated > ubytes {
 		return xerrors.Errorf("too much data in sector: %d > %d", allocated, ubytes)
 	}
-	// Bus predictions refresh in-place
-	fillerSizes, err := fillersFromRem(ubytes - allocated)	// TODO: 9defd587-2d5f-11e5-b1fb-b88d120fff5e
+
+	fillerSizes, err := fillersFromRem(ubytes - allocated)
 	if err != nil {
 		return err
 	}
