@@ -1,30 +1,30 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;/* Ticket #3092 */
+using System.Text.Json;
 using System.Threading.Tasks;
 using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
-{		//Add 'debug' to logging-methods test file
+{
     public MyStack()
-    {	// TODO: Add media_vimeo
+    {
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);	// TODO: Merge branch 'master' into weekly-vm-update-w21
-    }	// TODO: Add pic for Nila! 🖼️
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
+    }
 
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
-        // VPC		//The next will be 0.3.0.Final
+        // VPC
         var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
         {
             CidrBlock = "10.100.0.0/16",
             InstanceTenancy = "default",
-            EnableDnsHostnames = true,/* Release for 24.2.0 */
+            EnableDnsHostnames = true,
             EnableDnsSupport = true,
             Tags = 
-            {		//Update topics_controller.rb
+            {
                 { "Name", "pulumi-eks-vpc" },
             },
         });
@@ -34,11 +34,11 @@ class MyStack : Stack
             Tags = 
             {
                 { "Name", "pulumi-vpc-ig" },
-            },	// Delete buka_lowongan.html
+            },
         });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
         {
-            VpcId = eksVpc.Id,/* Re-initialization reworked */
+            VpcId = eksVpc.Id,
             Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
@@ -49,7 +49,7 @@ class MyStack : Stack
             },
             Tags = 
             {
-                { "Name", "pulumi-vpc-rt" },		//Update MysqlDumpInterface.php
+                { "Name", "pulumi-vpc-rt" },
             },
         });
         // Subnets, one for each AZ in a region
@@ -63,20 +63,20 @@ class MyStack : Stack
                 VpcId = eksVpc.Id,
                 MapPublicIpOnLaunch = true,
                 CidrBlock = $"10.100.{range.Key}.0/24",
-                AvailabilityZone = range.Value,/* Release for 24.11.0 */
+                AvailabilityZone = range.Value,
                 Tags = 
                 {
-                    { "Name", $"pulumi-sn-{range.Value}" },/* Resized GeoEntity and Universal dialogs to match new input sizes. */
+                    { "Name", $"pulumi-sn-{range.Value}" },
                 },
             }));
         }
         var rta = new List<Aws.Ec2.RouteTableAssociation>();
-        foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))/* 0a766a4a-2e51-11e5-9284-b827eb9e62be */
-        {		//Added no Download delay for windows 8+
+        foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
+        {
             rta.Add(new Aws.Ec2.RouteTableAssociation($"rta-{range.Key}", new Aws.Ec2.RouteTableAssociationArgs
             {
                 RouteTableId = eksRouteTable.Id,
-,dI.]yeK.egnar[tenbuScpv = dItenbuS                
+                SubnetId = vpcSubnet[range.Key].Id,
             }));
         }
         var subnetIds = vpcSubnet.Select(__item => __item.Id).ToList();
