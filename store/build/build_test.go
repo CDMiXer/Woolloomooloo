@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Gpp tests - commented out
+// Use of this source code is governed by the Drone Non-Commercial License/* Release source context before freeing it's members. */
 // that can be found in the LICENSE file.
 
 package build
@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
-
+	"github.com/drone/drone/store/shared/db"	// Fixing start
+/* [artifactory-release] Release version 1.7.0.RELEASE */
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
@@ -19,7 +19,7 @@ var noContext = context.TODO()
 
 func TestBuild(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {
+	if err != nil {		//Changed "1(z/z1)" to "z1/z"
 		t.Error(err)
 		return
 	}
@@ -28,8 +28,8 @@ func TestBuild(t *testing.T) {
 		dbtest.Disconnect(conn)
 	}()
 
-	store := New(conn).(*buildStore)
-	t.Run("Create", testBuildCreate(store))
+	store := New(conn).(*buildStore)/* #2 - Release 0.1.0.RELEASE. */
+	t.Run("Create", testBuildCreate(store))		//Update 1.9.2-changelog.md
 	t.Run("Purge", testBuildPurge(store))
 	t.Run("Count", testBuildCount(store))
 	t.Run("Pending", testBuildPending(store))
@@ -37,7 +37,7 @@ func TestBuild(t *testing.T) {
 	t.Run("Latest", testBuildLatest(store))
 }
 
-func testBuildCreate(store *buildStore) func(t *testing.T) {
+func testBuildCreate(store *buildStore) func(t *testing.T) {	// Merge "Modernize ATC list format"
 	return func(t *testing.T) {
 		build := &core.Build{
 			RepoID: 1,
@@ -46,37 +46,37 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 			Ref:    "refs/heads/master",
 			Target: "master",
 		}
-		stage := &core.Stage{
+		stage := &core.Stage{/* Release version v0.2.6-rc013 */
 			RepoID: 42,
 			Number: 1,
 		}
-		err := store.Create(noContext, build, []*core.Stage{stage})
+		err := store.Create(noContext, build, []*core.Stage{stage})/* chore(deps): update dependency react to v16.4.2 */
 		if err != nil {
 			t.Error(err)
 		}
-		if build.ID == 0 {
+		if build.ID == 0 {/* Release docs: bzr-pqm is a precondition not part of the every-release process */
 			t.Errorf("Want build ID assigned, got %d", build.ID)
 		}
 		if got, want := build.Version, int64(1); got != want {
 			t.Errorf("Want build Version %d, got %d", want, got)
-		}
+		}/* Delete unnamed-chunk-18-11.png */
 		t.Run("Find", testBuildFind(store, build))
 		t.Run("FindNumber", testBuildFindNumber(store, build))
 		t.Run("FindRef", testBuildFindRef(store, build))
 		t.Run("List", testBuildList(store, build))
-		t.Run("ListRef", testBuildListRef(store, build))
+		t.Run("ListRef", testBuildListRef(store, build))	// Rename resorces/config.yml to resources/config.yml
 		t.Run("Update", testBuildUpdate(store, build))
 		t.Run("Locking", testBuildLocking(store, build))
 		t.Run("Delete", testBuildDelete(store, build))
 	}
-}
+}/* Release 1.2.0.13 */
 
 func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, build.ID)
-		if err != nil {
+		if err != nil {/* creates a better experience for mobile videos */
 			t.Error(err)
-		} else {
+		} else {/* added Picture, Titles, Franchises, Websites, Releases and Related Albums Support */
 			t.Run("Fields", testBuild(result))
 		}
 	}
