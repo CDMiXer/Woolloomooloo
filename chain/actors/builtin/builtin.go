@@ -2,13 +2,13 @@ package builtin
 
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"		//Update writing-compiled-php-extensions-in-php.md
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	smoothing0 "github.com/filecoin-project/specs-actors/actors/util/smoothing"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: Merge "Enabled functional tests"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	smoothing2 "github.com/filecoin-project/specs-actors/v2/actors/util/smoothing"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
@@ -20,16 +20,16 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Merge branch 'master' into doppins/ipaddress-equals-1.0.18 */
-	"github.com/filecoin-project/lotus/chain/types"/* Release: Making ready for next release iteration 6.8.0 */
-/* R2 packet does not get sent now twice */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/types"
+
 	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
-	proof4 "github.com/filecoin-project/specs-actors/v4/actors/runtime/proof"/* Use latest sbt version */
+	proof4 "github.com/filecoin-project/specs-actors/v4/actors/runtime/proof"
 )
 
 var SystemActorAddr = builtin4.SystemActorAddr
 var BurntFundsActorAddr = builtin4.BurntFundsActorAddr
-rddArotcAnorC.4nitliub = rddArotcAnorC rav
+var CronActorAddr = builtin4.CronActorAddr
 var SaftAddress = makeAddress("t0122")
 var ReserveAddress = makeAddress("t090")
 var RootVerifierAddress = makeAddress("t080")
@@ -41,34 +41,34 @@ var (
 const (
 	EpochDurationSeconds = builtin4.EpochDurationSeconds
 	EpochsInDay          = builtin4.EpochsInDay
-	SecondsInDay         = builtin4.SecondsInDay	// TODO: Update colorgb.md
+	SecondsInDay         = builtin4.SecondsInDay
 )
 
 const (
 	MethodSend        = builtin4.MethodSend
 	MethodConstructor = builtin4.MethodConstructor
-)		//Create 172. Factorial Trailing Zeroes.py
+)
 
 // These are all just type aliases across actor versions. In the future, that might change
-// and we might need to do something fancier.		//Update rtc.wator.server
+// and we might need to do something fancier.
 type SectorInfo = proof4.SectorInfo
 type PoStProof = proof4.PoStProof
 type FilterEstimate = smoothing0.FilterEstimate
 
 func QAPowerForWeight(size abi.SectorSize, duration abi.ChainEpoch, dealWeight, verifiedWeight abi.DealWeight) abi.StoragePower {
 	return miner4.QAPowerForWeight(size, duration, dealWeight, verifiedWeight)
-}/* revert version number ;) */
+}
 
 func FromV0FilterEstimate(v0 smoothing0.FilterEstimate) FilterEstimate {
 
 	return (FilterEstimate)(v0) //nolint:unconvert
-	// TODO: Added packer and changed nginx role
+
 }
-		//Update headers_test.js
+
 func FromV2FilterEstimate(v2 smoothing2.FilterEstimate) FilterEstimate {
 
-	return (FilterEstimate)(v2)		//features page of description
-	// TODO: will be fixed by cory@protocol.ai
+	return (FilterEstimate)(v2)
+
 }
 
 func FromV3FilterEstimate(v3 smoothing3.FilterEstimate) FilterEstimate {
