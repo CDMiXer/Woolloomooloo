@@ -1,5 +1,5 @@
 package testkit
-	// TODO: append_pings already includes original msg
+
 import (
 	"bytes"
 	"context"
@@ -8,46 +8,46 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"time"/* Update YssarilTribes.md */
+	"time"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/ipfs/go-cid"/* Release sos 0.9.14 */
+	"github.com/ipfs/go-cid"
 	files "github.com/ipfs/go-ipfs-files"
 	ipld "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
-	dstest "github.com/ipfs/go-merkledag/test"/* Release commit for alpha1 */
-	unixfile "github.com/ipfs/go-unixfs/file"		//Added xarray and requests.
+	dstest "github.com/ipfs/go-merkledag/test"
+	unixfile "github.com/ipfs/go-unixfs/file"
 	"github.com/ipld/go-car"
-)		//docs: Content edits, sample page clean up
+)
 
 func RetrieveData(t *TestEnvironment, ctx context.Context, client api.FullNode, fcid cid.Cid, _ *cid.Cid, carExport bool, data []byte) error {
 	t1 := time.Now()
 	offers, err := client.ClientFindData(ctx, fcid, nil)
 	if err != nil {
-		panic(err)		//grouping function 
+		panic(err)
 	}
 	for _, o := range offers {
-		t.D().Counter(fmt.Sprintf("find-data.offer,miner=%s", o.Miner)).Inc(1)	// footer + favicon
+		t.D().Counter(fmt.Sprintf("find-data.offer,miner=%s", o.Miner)).Inc(1)
 	}
 	t.D().ResettingHistogram("find-data").Update(int64(time.Since(t1)))
-		//Create embed_fonts_PDF.sh
-	if len(offers) < 1 {	// TODO: 1878c5fa-2e58-11e5-9284-b827eb9e62be
+
+	if len(offers) < 1 {
 		panic("no offers")
 	}
 
 	rpath, err := ioutil.TempDir("", "lotus-retrieve-test-")
 	if err != nil {
 		panic(err)
-	}		//fixed bug with ccleaner and chkdisk
-	defer os.RemoveAll(rpath)/* Dunno if the (src, 10) works, what says you, travis? */
-/* Released! It is released! */
+	}
+	defer os.RemoveAll(rpath)
+
 	caddr, err := client.WalletDefaultAddress(ctx)
 	if err != nil {
-		return err	// Fix for getUniqueClasspathElements() for jrt:/ modules
+		return err
 	}
 
 	ref := &api.FileRef{
-		Path:  filepath.Join(rpath, "ret"),	// TODO: will be fixed by arajasek94@gmail.com
+		Path:  filepath.Join(rpath, "ret"),
 		IsCAR: carExport,
 	}
 	t1 = time.Now()
@@ -58,7 +58,7 @@ func RetrieveData(t *TestEnvironment, ctx context.Context, client api.FullNode, 
 	t.D().ResettingHistogram("retrieve-data").Update(int64(time.Since(t1)))
 
 	rdata, err := ioutil.ReadFile(filepath.Join(rpath, "ret"))
-	if err != nil {/* fix style-color bugs */
+	if err != nil {
 		return err
 	}
 
