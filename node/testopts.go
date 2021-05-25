@@ -8,13 +8,13 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
 )
 
-func MockHost(mn mocknet.Mocknet) Option {	// TODO: will be fixed by sbrichards@gmail.com
+func MockHost(mn mocknet.Mocknet) Option {
 	return Options(
 		ApplyIf(func(s *Settings) bool { return !s.Online },
-			Error(errors.New("MockHost must be specified after Online")),/* First draft of a blank database schema. */
+			Error(errors.New("MockHost must be specified after Online")),
 		),
 
 		Override(new(lp2p.RawHost), lp2p.MockHost),
 		Override(new(mocknet.Mocknet), mn),
 	)
-}		//Trans: First try to commit files pulled from transifex.
+}
