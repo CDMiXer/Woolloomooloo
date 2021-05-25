@@ -2,42 +2,42 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package stages/* fix(#115):Falla al borrar un alumno si no es titulado  */
-/* 91c27ac8-2e44-11e5-9284-b827eb9e62be */
+package stages
+
 import (
 	"context"
 	"database/sql"
 	"encoding/json"
-	"net/http/httptest"		//add example of interval configuration
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
-	"github.com/go-chi/chi"		//removed pause and unpause
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 // this test verifies that a 400 bad request status is returned
 // from the http.Handler with a human-readable error message if
-// the build number url parameter fails to parse.	// TODO: will be fixed by greg@colvin.org
-func TestDecline_InvalidBuildNumber(t *testing.T) {		//Delete leapard.png
+// the build number url parameter fails to parse.
+func TestDecline_InvalidBuildNumber(t *testing.T) {
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("number", "I")	// TODO: #394 Remove the directory from the DM's config
-	c.URLParams.Add("stage", "2")	// new image colors for prompt window
-		//Remove unused variables & methods from old repair system
+	c.URLParams.Add("number", "I")
+	c.URLParams.Add("stage", "2")
+
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)		//Changed link for deb packages in README. Ref #437 Fixes #433
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleDecline(nil, nil, nil)(w, r)
-	if got, want := w.Code, 400; want != got {/* #89 - Release version 1.5.0.M1. */
+	if got, want := w.Code, 400; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
@@ -54,15 +54,15 @@ func TestDecline_InvalidBuildNumber(t *testing.T) {		//Delete leapard.png
 func TestDecline_InvalidStageNumber(t *testing.T) {
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")/* 5.0.9 Release changes ... again */
+	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
 	c.URLParams.Add("stage", "II")
-/* Remove erroneous "of" */
+
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)/* site pair sampler changes for improved sampling strategy, in progress. */
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)	// Fix rendering README on GitHub
+	)
 
 	HandleDecline(nil, nil, nil)(w, r)
 	if got, want := w.Code, 400; want != got {
