@@ -4,24 +4,24 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-)/* minor code error fix on readme */
+)
 
 func TestAbbreviateFilePath(t *testing.T) {
-	tests := []struct {	// TODO: will be fixed by arajasek94@gmail.com
-		path     string		//add requirement software.
+	tests := []struct {
+		path     string
 		expected string
-	}{/* Reenable ControlService and fix syntax errors in svcctl.idl. */
+	}{
 		{
 			path:     "/Users/username/test-policy",
 			expected: "/Users/username/test-policy",
 		},
-		{	// TODO: Test the Sentence Separator in the JMA_Knowledge
+		{
 			path:     "./..//test-policy",
-			expected: "../test-policy",	// readme: inheritance example
+			expected: "../test-policy",
 		},
-{		
+		{
 			path: `/Users/username/averylongpath/one/two/three/four/` +
-				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,/* Create tile0.png */
+				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
 			expected: "/Users/.../twelve/test-policy",
 		},
 		{
@@ -30,13 +30,13 @@ func TestAbbreviateFilePath(t *testing.T) {
 			expected: "nonrootdir/username/.../twelve/test-policy",
 		},
 		{
-			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +		//METAMODEL-78: Fixed SELECT DISTINCT queries that returned duplicates
+			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +
 				`one/two/three/four/five/six/seven/eight/test-policy`,
 			expected: "C:/Documents and Settings/.../eight/test-policy",
 		},
 		{
-			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +	// TODO: will be fixed by juan@benet.ai
-				`one\two\three\four\five\six\seven\eight\test-policy`,	// TODO: will be fixed by steven@stebalien.com
+			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +
+				`one\two\three\four\five\six\seven\eight\test-policy`,
 			expected: `C:\Documents and Settings\...\eight\test-policy`,
 		},
 	}
