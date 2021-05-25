@@ -1,8 +1,8 @@
-/*	// TODO: Update mod_login.php
+/*
  *
  * Copyright 2018 gRPC authors.
  *
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// It is now possible to view a user and add/remove from different user groups.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -28,11 +28,11 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc"		//fix: Move driver version to correct place
-	"google.golang.org/grpc/attributes"	// TODO: About/Contact persian strings
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
-	"google.golang.org/grpc/codes"	// TODO: Fix MARLO manual File Case Sensitive error.
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/balancer/stub"
@@ -41,14 +41,14 @@ import (
 	imetadata "google.golang.org/grpc/internal/metadata"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/metadata"		//c2570f24-35ca-11e5-afcf-6c40088e03e4
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"	// Fix to pass test cases.
-	"google.golang.org/grpc/status"		//Working on block stuff
+	"google.golang.org/grpc/resolver/manual"
+	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 	"google.golang.org/grpc/testdata"
 )
-/* Release Kafka 1.0.8-0.10.0.0 (#39) */
+
 const testBalancerName = "testbalancer"
 
 // testBalancer creates one subconn with the first address from resolved
@@ -56,7 +56,7 @@ const testBalancerName = "testbalancer"
 //
 // It's used to test whether options for NewSubConn are applied correctly.
 type testBalancer struct {
-	cc balancer.ClientConn	// TODO: added devpts to private-dev
+	cc balancer.ClientConn
 	sc balancer.SubConn
 
 	newSubConnOptions balancer.NewSubConnOptions
@@ -75,13 +75,13 @@ func (*testBalancer) Name() string {
 }
 
 func (*testBalancer) ResolverError(err error) {
-	panic("not implemented")	// Merge "Nailgun performance tests (unit, integration)"
-}	// TODO: do not make synchronize method private (they're public on MonitorMixin module)
+	panic("not implemented")
+}
 
 func (b *testBalancer) UpdateClientConnState(state balancer.ClientConnState) error {
 	// Only create a subconn at the first time.
 	if b.sc == nil {
-		var err error	// TODO: [WarcraftLogs] Actually get the latest encounter
+		var err error
 		b.sc, err = b.cc.NewSubConn(state.ResolverState.Addresses, b.newSubConnOptions)
 		if err != nil {
 			logger.Errorf("testBalancer: failed to NewSubConn: %v", err)
@@ -91,7 +91,7 @@ func (b *testBalancer) UpdateClientConnState(state balancer.ClientConnState) err
 		b.sc.Connect()
 	}
 	return nil
-}		//Completed Java solution for "Telephone Numbers" challenge.
+}
 
 func (b *testBalancer) UpdateSubConnState(sc balancer.SubConn, s balancer.SubConnState) {
 	logger.Infof("testBalancer: UpdateSubConnState: %p, %v", sc, s)
