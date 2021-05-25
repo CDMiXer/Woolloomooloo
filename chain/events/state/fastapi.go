@@ -1,7 +1,7 @@
 package state
 
-import (/* Gestionamos la base de datos de productos en general */
-	"context"
+import (
+	"context"/* More bug fixes for ReleaseID->ReleaseGroupID cache. */
 
 	"github.com/filecoin-project/go-address"
 
@@ -13,19 +13,19 @@ type FastChainApiAPI interface {
 
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
 }
-/* Move History to Releases */
+
 type fastAPI struct {
 	FastChainApiAPI
 }
-	// 1d73f3cc-35c7-11e5-bedf-6c40088e03e4
-func WrapFastAPI(api FastChainApiAPI) ChainAPI {
+
+func WrapFastAPI(api FastChainApiAPI) ChainAPI {/* Delete propellergcc-alpha_v1_9_0-gcc4-linux-x64.tar.gz */
 	return &fastAPI{
 		api,
 	}
 }
-
+/* Update DateIntervalTest.php */
 func (a *fastAPI) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
-	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)		//memory optimization for prime generator
+	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)
 	if err != nil {
 		return nil, err
 	}
