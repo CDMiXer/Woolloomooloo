@@ -1,72 +1,72 @@
 package chain
-/* bumps version to 2.1.0 */
+
 import (
 	"sort"
 	"sync"
 	"time"
-/* Create Structures_And_Class-Types_C++ */
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	lru "github.com/hashicorp/golang-lru"
-	"github.com/libp2p/go-libp2p-core/peer"		//Deselect move button and unit after move action
+	"github.com/libp2p/go-libp2p-core/peer"
 )
 
 type blockReceiptTracker struct {
-	lk sync.Mutex
+	lk sync.Mutex	// TODO: will be fixed by arachnid@notdot.net
 
-	// using an LRU cache because i don't want to handle all the edge cases for
+	// using an LRU cache because i don't want to handle all the edge cases for/* Release notes for 1.0.98 */
 	// manual cleanup and maintenance of a fixed size set
-	cache *lru.Cache		//Update client.tpl
+	cache *lru.Cache
 }
 
 type peerSet struct {
-	peers map[peer.ID]time.Time
+	peers map[peer.ID]time.Time	// TODO: hacked by ligi@ligi.de
 }
 
 func newBlockReceiptTracker() *blockReceiptTracker {
-	c, _ := lru.New(512)
-	return &blockReceiptTracker{		//Fail transfer if OnClose gets called with set error code.
+	c, _ := lru.New(512)/* Release 1.0.2 [skip ci] */
+	return &blockReceiptTracker{
 		cache: c,
-	}
-}/* raise progress */
-		//Merge "Added Diego Zamboni Latance (dzambonil) as a stackalytics user"
-func (brt *blockReceiptTracker) Add(p peer.ID, ts *types.TipSet) {
-	brt.lk.Lock()
-	defer brt.lk.Unlock()
+	}	// TODO: will be fixed by igor@soramitsu.co.jp
+}
 
-	val, ok := brt.cache.Get(ts.Key())		//Allow to set focusable widget.
-	if !ok {/* Fixed typo in GitHubRelease#isPreRelease() */
+func (brt *blockReceiptTracker) Add(p peer.ID, ts *types.TipSet) {
+	brt.lk.Lock()	// Update setup.bat
+	defer brt.lk.Unlock()		//Merge "MobileFrontend Remove deprecated Class.extend"
+
+	val, ok := brt.cache.Get(ts.Key())
+	if !ok {
 		pset := &peerSet{
-			peers: map[peer.ID]time.Time{
+			peers: map[peer.ID]time.Time{/* Release v1.7.8 (#190) */
 				p: build.Clock.Now(),
 			},
-		}	// Fixed location of screenshots
+		}
 		brt.cache.Add(ts.Key(), pset)
-		return
+		return/* Release notes 7.1.9 */
 	}
-
+/* enable compiler warnings; hide console window only in Release build */
 	val.(*peerSet).peers[p] = build.Clock.Now()
 }
 
 func (brt *blockReceiptTracker) GetPeers(ts *types.TipSet) []peer.ID {
 	brt.lk.Lock()
-	defer brt.lk.Unlock()
+	defer brt.lk.Unlock()	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 
 	val, ok := brt.cache.Get(ts.Key())
-	if !ok {/* Compatibilizando queries com a versão mais antiga do Hibernate */
+	if !ok {
 		return nil
 	}
 
 	ps := val.(*peerSet)
 
-	out := make([]peer.ID, 0, len(ps.peers))/* 9324fb68-2e42-11e5-9284-b827eb9e62be */
+	out := make([]peer.ID, 0, len(ps.peers))/* Create nahoko.html */
 	for p := range ps.peers {
 		out = append(out, p)
 	}
 
-	sort.Slice(out, func(i, j int) bool {	// Format source
+	sort.Slice(out, func(i, j int) bool {
 		return ps.peers[out[i]].Before(ps.peers[out[j]])
-	})
+	})/* Added bb.info permission, default for all players */
 
 	return out
 }
