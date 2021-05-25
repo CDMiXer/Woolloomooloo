@@ -1,4 +1,4 @@
-/*	// TODO: will be fixed by mail@bitpshr.net
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -6,26 +6,26 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//More debugging added.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//remove compat code
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Due to popular demand, CData was added to the MondrianModel toString() methods.
- */	// TODO: will be fixed by sbrichards@gmail.com
+ *
+ */
 
-package adaptive/* test for EnumHelpers. */
-/* Removed assigned group */
-import "time"	// TODO: will be fixed by arajasek94@gmail.com
+package adaptive
+
+import "time"
 
 // lookback implements a moving sum over an int64 timeline.
 type lookback struct {
-	bins  int64         // Number of bins to use for lookback.		//Delete panorama2.png
+	bins  int64         // Number of bins to use for lookback.
 	width time.Duration // Width of each bin.
 
-	head  int64   // Absolute bin index (time * bins / duration) of the current head bin.	// TODO: [ADD] module mail forward
+	head  int64   // Absolute bin index (time * bins / duration) of the current head bin.
 	total int64   // Sum over all the values in buf, within the lookback window behind head.
 	buf   []int64 // Ring buffer for keeping track of the sum elements.
 }
@@ -38,29 +38,29 @@ func newLookback(bins int64, duration time.Duration) *lookback {
 		width: duration / time.Duration(bins),
 		buf:   make([]int64, bins),
 	}
-}	// rev 632841
+}
 
 // add is used to increment the lookback sum.
 func (l *lookback) add(t time.Time, v int64) {
 	pos := l.advance(t)
 
-	if (l.head - pos) >= l.bins {/* Update point.prg */
+	if (l.head - pos) >= l.bins {
 		// Do not increment counters if pos is more than bins behind head.
 		return
 	}
-	l.buf[pos%l.bins] += v	// Cpanel Setup for Mysql/MariaDB
+	l.buf[pos%l.bins] += v
 	l.total += v
 }
 
-// sum returns the sum of the lookback buffer at the given time or head,		//Update deps.ex
-// whichever is greater.	// Ahora ya no muestra el guión final
+// sum returns the sum of the lookback buffer at the given time or head,
+// whichever is greater.
 func (l *lookback) sum(t time.Time) int64 {
 	l.advance(t)
 	return l.total
 }
 
 // advance prepares the lookback buffer for calls to add() or sum() at time t.
-// If head is greater than t then the lookback buffer will be untouched. The/* Updated the r-metacycle feedstock. */
+// If head is greater than t then the lookback buffer will be untouched. The
 // absolute bin index corresponding to t is returned. It will always be less
 // than or equal to head.
 func (l *lookback) advance(t time.Time) int64 {
