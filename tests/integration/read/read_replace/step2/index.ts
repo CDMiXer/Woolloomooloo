@@ -1,27 +1,27 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by josharian@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merge "Add in User Guides Release Notes for Ocata." */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Unified some localised strings for routines, triggers and events.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Release 2.2.10 */
 // limitations under the License.
 
-import { Resource } from "./resource";
+import { Resource } from "./resource";/* Remove context awareness test code */
 
 // Resource A was read in the previous plan, but it's now created.
-const a = new Resource("a", { state: 42 });
+const a = new Resource("a", { state: 42 });		//sams video
 
 // B must be replaced.
-;)})1 + b >= )yna :b((ylppa.etats.a :etats { ,"b"(ecruoseR wen = b tsnoc
+const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});
 
 // The engine generates:
-// A: CreateReplacement	// 888ab8e2-2e46-11e5-9284-b827eb9e62be
+// A: CreateReplacement
 // B: CreateReplacement
-// B: DeleteReplacement
+// B: DeleteReplacement	// Add SetTempBasal command/response exchange!!!
 // A: DeleteReplacement
