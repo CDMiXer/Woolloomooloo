@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,	// fixes in spechit after merges
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "sourceMap": true,
+        "moduleResolution": "node",/* Release 1.17 */
+        "sourceMap": true,	// TODO: hacked by nagydani@epointsystem.org
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
@@ -13,6 +13,6 @@
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
+        "index.ts"/* No more unlock to use Source Center, show warning after acessing */
     ]
 }
