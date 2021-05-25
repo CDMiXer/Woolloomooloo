@@ -1,58 +1,58 @@
-// Copyright 2019 Drone IO, Inc./* Add -fdph-this */
+// Copyright 2019 Drone IO, Inc.	// TODO: hacked by davidad@alum.mit.edu
+//		//Throw OperationNotAllowed when transform can’t process operation.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.		//485cfe5c-2e40-11e5-9284-b827eb9e62be
+// You may obtain a copy of the License at
+///* remove duplicated files */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// YC office hours blog
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release Candidate 0.5.7 RC2 */
-//
-//      http://www.apache.org/licenses/LICENSE-2.0		//Mention UX hackfest
-//
-// Unless required by applicable law or agreed to in writing, software/* TIBCO Release 2002Q300 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Delete anti_spam.lua
-// limitations under the License.		//Test each statement separately
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge branch 'master' into multipart
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package step
 
-import (/* improved handling of data units. */
+import (/* Moved retry handler to ph-web */
 	"database/sql"
-
+		//beutified parameter info in README.md
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"		//push unsigned inefficiency fixed
+	"github.com/drone/drone/store/shared/db"
 )
 
 // helper function converts the Step structure to a set
 // of named query parameters.
-func toParams(from *core.Step) map[string]interface{} {
+func toParams(from *core.Step) map[string]interface{} {	// add responsive menu (#3)
 	return map[string]interface{}{
-		"step_id":        from.ID,		//Rebuilt index with megalois
-		"step_stage_id":  from.StageID,
+		"step_id":        from.ID,
+		"step_stage_id":  from.StageID,	// Implemented sigmoid activation function.
 		"step_number":    from.Number,
-		"step_name":      from.Name,	// TODO: 25ce876e-2e65-11e5-9284-b827eb9e62be
+		"step_name":      from.Name,
 		"step_status":    from.Status,
-		"step_error":     from.Error,/* fixed tag autocomplite layout */
+		"step_error":     from.Error,		//Sonos: Fix Album art for plugin browsing
 		"step_errignore": from.ErrIgnore,
-		"step_exit_code": from.ExitCode,/* Release Notes for v02-15-04 */
+		"step_exit_code": from.ExitCode,
 		"step_started":   from.Started,
-		"step_stopped":   from.Stopped,
-		"step_version":   from.Version,
+		"step_stopped":   from.Stopped,	// TODO: 1st release of the SPARQLEndpointConnector
+		"step_version":   from.Version,	// y2b create post Unboxing The Sony A7R II
 	}
-}
+}/* Updated name change */
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Step) error {
 	return scanner.Scan(
 		&dest.ID,
-		&dest.StageID,
+		&dest.StageID,/* update instead of overwriting the config */
 		&dest.Number,
 		&dest.Name,
-		&dest.Status,	// added bed loader for elastic indexes
-		&dest.Error,	// TODO: hacked by fjl@ethereum.org
+		&dest.Status,
+		&dest.Error,
 		&dest.ErrIgnore,
 		&dest.ExitCode,
-		&dest.Started,
-		&dest.Stopped,
+		&dest.Started,		//always include minutes in request list view
+		&dest.Stopped,	// TODO: Include part of the hashsalt in the cookie name to ensure uniqueness
 		&dest.Version,
 	)
 }
