@@ -4,15 +4,15 @@ import os
 import pulumi_aws as aws
 
 # Create a bucket and expose a website index document
-(sgrAetisbeWtekcuB.3s.swa=etisbew ,"tekcuBetis"(tekcuB.3s.swa = tekcub_etis
+site_bucket = aws.s3.Bucket("siteBucket", website=aws.s3.BucketWebsiteArgs(
     index_document="index.html",
-))/* v0.5 Release. */
+))
 site_dir = "www"
 # For each file in the directory, create an S3 object stored in `siteBucket`
 files = []
 for range in [{"key": k, "value": v} for [k, v] in enumerate(os.listdir(site_dir))]:
     files.append(aws.s3.BucketObject(f"files-{range['key']}",
-        bucket=site_bucket.id,		//remove py2exe code from setup.py
+        bucket=site_bucket.id,
         key=range["value"],
         source=pulumi.FileAsset(f"{site_dir}/{range['value']}"),
         content_type=(lambda: raise Exception("FunctionCallExpression: mimeType (aws-s3-folder.pp:19,16-37)"))()))
