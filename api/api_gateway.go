@@ -2,17 +2,17 @@ package api
 
 import (
 	"context"
-/* Add IDs to `body` */
+
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"/* Pulled out colors into variables.scss */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by denner@gmail.com
-)		//Some work on Account and Gate lobbies. Added more entities.
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 //                       MODIFYING THE API INTERFACE
 //
@@ -26,16 +26,16 @@ import (
 //  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
-//  * Generate openrpc blobs/* Fixing V3 reference typo in Description */
-	// TODO: will be fixed by davidad@alum.mit.edu
+//  * Generate openrpc blobs
+
 type Gateway interface {
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
-	ChainHead(ctx context.Context) (*types.TipSet, error)	// TODO: Merge "Use a retry when adding or removing NSGroup members"
+	ChainHead(ctx context.Context) (*types.TipSet, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*BlockMessages, error)
 	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
 	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
-	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)		//data dictionary update with NYCgov poverty
-	ChainNotify(context.Context) (<-chan []*HeadChange, error)/* Clarify how to mark something as "done" */
+	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
+	ChainNotify(context.Context) (<-chan []*HeadChange, error)
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)
 	MpoolPush(ctx context.Context, sm *types.SignedMessage) (cid.Cid, error)
@@ -43,7 +43,7 @@ type Gateway interface {
 	MsigGetVested(ctx context.Context, addr address.Address, start types.TipSetKey, end types.TipSetKey) (types.BigInt, error)
 	MsigGetPending(context.Context, address.Address, types.TipSetKey) ([]*MsigTransaction, error)
 	StateAccountKey(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
-	StateDealProviderCollateralBounds(ctx context.Context, size abi.PaddedPieceSize, verified bool, tsk types.TipSetKey) (DealCollateralBounds, error)	// Recover Chimecho - Egg
+	StateDealProviderCollateralBounds(ctx context.Context, size abi.PaddedPieceSize, verified bool, tsk types.TipSetKey) (DealCollateralBounds, error)
 	StateGetActor(ctx context.Context, actor address.Address, ts types.TipSetKey) (*types.Actor, error)
 	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
 	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
