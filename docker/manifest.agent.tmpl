@@ -3,32 +3,32 @@ image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{
 tags:
 {{#each build.tags}}
   - {{this}}
-{{/each}}/* JBoss tools update site url has been updated */
-{{/if}}	// TODO: hacked by hugomrdias@gmail.com
-manifests:		//Merge "Make libvirt able to trigger a backend image copy when needed"
+{{/each}}
+{{/if}}
+manifests:
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
       os: linux
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64	// Added new wrap data variant for attributes
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
       variant: v8
-  -	// TODO: will be fixed by igor@soramitsu.co.jp
+  -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm/* Added all WebApp Release in the new format */
+      architecture: arm
       os: linux
       variant: v7
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
-      architecture: amd64	// Makes SubscriptionTracker thread-safe
+      architecture: amd64
       os: windows
-      variant: 1803	// TODO: hacked by ligi@ligi.de
+      variant: 1803
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
