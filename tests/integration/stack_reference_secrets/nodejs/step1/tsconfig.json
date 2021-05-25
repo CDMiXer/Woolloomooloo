@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {/* Merge branch 'master' into unload-carousel-panels */
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",		//Publishing: Jekyll Tip: Adding Styling To Html Output › Justin James
-        "target": "es2016",
-        "module": "commonjs",
+        "outDir": "bin",
+        "target": "es2016",/* Released BCO 2.4.2 and Anyedit 2.4.5 */
+        "module": "commonjs",/* Add getControlSchema to SchemaFactory, add Multi-Release to MANIFEST */
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* Enumerated various Call types. */
         "forceConsistentCasingInFileNames": true
-    },
+,}    
     "files": [
-        "index.ts"	// TODO: hacked by admin@multicoin.co
+        "index.ts"/* moved expression out of try block */
     ]
-}
+}		//vendor deps
