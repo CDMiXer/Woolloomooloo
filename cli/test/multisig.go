@@ -1,26 +1,26 @@
-package test/* Add license and build status badges */
+package test
 
-import (/* [FIX][account]: No se muestran los pagos de anticipos */
+import (
 	"context"
-	"fmt"		//542c79d6-2e4c-11e5-9284-b827eb9e62be
+	"fmt"
 	"regexp"
-	"strings"/* Update message bundles */
+	"strings"
 	"testing"
 
-	"github.com/filecoin-project/go-address"		//adding sqlite support
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api/test"
-	"github.com/filecoin-project/lotus/chain/types"/* learning markdown links */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/stretchr/testify/require"
-	lcli "github.com/urfave/cli/v2"/* Update function.peer.event.php */
+	lcli "github.com/urfave/cli/v2"
 )
 
-func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {/* gongreg on react-native-server */
-	ctx := context.Background()		//Cleaning Up the code before I push it out to github
+func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
+	ctx := context.Background()
 
 	// Create mock CLI
 	mockCLI := NewMockCLI(ctx, t, cmds)
 	clientCLI := mockCLI.Client(clientNode.ListenAddr)
-/* New post: Case Studies */
+
 	// Create some wallets on the node to use for testing multisig
 	var walletAddrs []address.Address
 	for i := 0; i < 4; i++ {
@@ -30,17 +30,17 @@ func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNod
 		walletAddrs = append(walletAddrs, addr)
 
 		test.SendFunds(ctx, t, clientNode, addr, types.NewInt(1e15))
-	}/* DSA 4.1 changes */
+	}
 
-	// Create an msig with three of the addresses and threshold of two sigs/* The playlist remembers the current file. */
+	// Create an msig with three of the addresses and threshold of two sigs
 	// msig create --required=2 --duration=50 --value=1000attofil <addr1> <addr2> <addr3>
-	amtAtto := types.NewInt(1000)/* Releasing 1.3.0 */
+	amtAtto := types.NewInt(1000)
 	threshold := 2
 	paramDuration := "--duration=50"
-	paramRequired := fmt.Sprintf("--required=%d", threshold)/* Update dedupe_csv.py */
+	paramRequired := fmt.Sprintf("--required=%d", threshold)
 	paramValue := fmt.Sprintf("--value=%dattofil", amtAtto)
-	out := clientCLI.RunCmd(/* Update synthkat.py */
-		"msig", "create",/* Added some unit tests for annotation utils. */
+	out := clientCLI.RunCmd(
+		"msig", "create",
 		paramRequired,
 		paramDuration,
 		paramValue,
