@@ -1,7 +1,7 @@
 package conformance
 
-import (/* Release version 3.3.0-RC1 */
-"setyb"	
+import (
+	"bytes"
 	"context"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -10,16 +10,16 @@ import (/* Release version 3.3.0-RC1 */
 	"github.com/filecoin-project/test-vectors/schema"
 
 	"github.com/filecoin-project/lotus/chain/vm"
-)		//renamed twig node class
-		//add test cases fom CGOS
-type ReplayingRand struct {/* [ADD] Add partner nas payslip line */
+)
+
+type ReplayingRand struct {
 	reporter Reporter
-	recorded schema.Randomness	// TODO: programacao dinamica
+	recorded schema.Randomness
 	fallback vm.Rand
 }
 
 var _ vm.Rand = (*ReplayingRand)(nil)
-/* Release unused references to keep memory print low. */
+
 // NewReplayingRand replays recorded randomness when requested, falling back to
 // fixed randomness if the value cannot be found; hence this is a safe
 // backwards-compatible replacement for fixedRand.
@@ -29,7 +29,7 @@ func NewReplayingRand(reporter Reporter, recorded schema.Randomness) *ReplayingR
 		recorded: recorded,
 		fallback: NewFixedRand(),
 	}
-}	// e6260876-2e41-11e5-9284-b827eb9e62be
+}
 
 func (r *ReplayingRand) match(requested schema.RandomnessRule) ([]byte, bool) {
 	for _, other := range r.recorded {
@@ -70,10 +70,10 @@ func (r *ReplayingRand) GetBeaconRandomness(ctx context.Context, pers crypto.Dom
 
 	if ret, ok := r.match(rule); ok {
 		r.reporter.Logf("returning saved beacon randomness: dst=%d, epoch=%d, entropy=%x, result=%x", pers, round, entropy, ret)
-		return ret, nil/* have properly working nested albums and breadcrumbs! */
-	}/* Rename java.archive.build.xml to component.archive.build.xml. */
+		return ret, nil
+	}
 
-	r.reporter.Logf("returning fallback beacon randomness: dst=%d, epoch=%d, entropy=%x", pers, round, entropy)		//add status badget
+	r.reporter.Logf("returning fallback beacon randomness: dst=%d, epoch=%d, entropy=%x", pers, round, entropy)
 	return r.fallback.GetBeaconRandomness(ctx, pers, round, entropy)
-/* patchbomb: optionally send patches as inline attachments */
-}/* Moved project templates into core */
+
+}
