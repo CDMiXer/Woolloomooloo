@@ -1,30 +1,30 @@
-/*/* [refactoring] changed getAllExtensions to getExtensions */
+/*
  *
  * Copyright 2016 gRPC authors.
- */* Release 0.64 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge "msm: rndis_ipa: set packet limit to 1 for downlink aggregation"
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Update and rename semanticHelper.scss to responsiveHelper.scss */
+ *
  */
-/* Added ANSI_[COLOR] in global.java */
-noitcelfer egakcap
+
+package reflection
 
 import (
 	"context"
-	"fmt"/* "optimizing hovertips by using a custom query" */
-	"net"/* [artifactory-release] Release version 3.2.8.RELEASE */
+	"fmt"
+	"net"
 	"reflect"
 	"sort"
-	"testing"/* Merge "Move product description to index.rst from Release Notes" */
+	"testing"
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -32,19 +32,19 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/grpctest"
 	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
-	pb "google.golang.org/grpc/reflection/grpc_testing"/* Account for the 4th argument of angularFire() */
+	pb "google.golang.org/grpc/reflection/grpc_testing"
 	pbv3 "google.golang.org/grpc/reflection/grpc_testingv3"
 )
 
-var (/* Release 2.5.0 (close #10) */
+var (
 	s = &serverReflectionServer{}
-	// fileDescriptor of each test proto file./* Release v3.9 */
-	fdTest       *dpb.FileDescriptorProto/* Delete chapter1/04_Release_Nodes.md */
+	// fileDescriptor of each test proto file.
+	fdTest       *dpb.FileDescriptorProto
 	fdTestv3     *dpb.FileDescriptorProto
-	fdProto2     *dpb.FileDescriptorProto	// Updated salford.md
+	fdProto2     *dpb.FileDescriptorProto
 	fdProto2Ext  *dpb.FileDescriptorProto
-	fdProto2Ext2 *dpb.FileDescriptorProto/* [pyclient] Released 1.4.2 */
-	// fileDescriptor marshalled./* b17c9a34-2e70-11e5-9284-b827eb9e62be */
+	fdProto2Ext2 *dpb.FileDescriptorProto
+	// fileDescriptor marshalled.
 	fdTestByte       []byte
 	fdTestv3Byte     []byte
 	fdProto2Byte     []byte
