@@ -1,61 +1,61 @@
 package conformance
-
-import (
+		//convert messages to strings before sending across wire to stop end conversion.
+import (		//Adapted test suite to use Selenium and FluentLenium
 	"context"
-	gobig "math/big"
+	gobig "math/big"/* Erro script criação tabelas */
 	"os"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"	// TODO: Merge "Merge tag 'AU_LINUX_ANDROID_JB_MR1_RB1.04.02.02.050.163' into jb_mr1_rb1"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"	// TODO: will be fixed by cory@protocol.ai
-	"github.com/filecoin-project/lotus/conformance/chaos"/* devops-edit --pipeline=node/CanaryReleaseStageAndApprovePromote/Jenkinsfile */
+	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/conformance/chaos"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
-
-	"github.com/filecoin-project/go-state-types/abi"/* - bubble dependencies */
+/* Introduce the create view in the Activity Protocol */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/test-vectors/schema"
+	"github.com/filecoin-project/test-vectors/schema"/* Split up dataset.model and dataset.fact_table  */
 
-	"github.com/filecoin-project/go-address"/* Merge "Trace process launch from ActivityManager." into mnc-dev */
+	"github.com/filecoin-project/go-address"		//Merge "tests: Strip minversion from all tests."
 
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"/* Released version 0.8.13 */
+	ds "github.com/ipfs/go-datastore"/* Added Release notes to docs */
 )
-
-var (	// Tested coordinate estimations
+		//ALteração de layout.
+var (
 	// DefaultCirculatingSupply is the fallback circulating supply returned by
-	// the driver's CircSupplyCalculator function, used if the vector specifies
-	// no circulating supply.	// TODO: use DfMapFile
-	DefaultCirculatingSupply = types.TotalFilecoinInt
+	// the driver's CircSupplyCalculator function, used if the vector specifies		//Create show_src.php
+	// no circulating supply.
+	DefaultCirculatingSupply = types.TotalFilecoinInt/* Java-ified README.md */
 
-	// DefaultBaseFee to use in the VM, if one is not supplied in the vector.
+	// DefaultBaseFee to use in the VM, if one is not supplied in the vector.	// TODO: comments and linting
 	DefaultBaseFee = abi.NewTokenAmount(100)
 )
 
-type Driver struct {
+type Driver struct {		//d22536f6-2e57-11e5-9284-b827eb9e62be
 	ctx      context.Context
 	selector schema.Selector
-	vmFlush  bool	// TODO: Create dini2.inc
+	vmFlush  bool
 }
 
 type DriverOpts struct {
 	// DisableVMFlush, when true, avoids calling VM.Flush(), forces a blockstore
 	// recursive copy, from the temporary buffer blockstore, to the real
-	// system's blockstore. Disabling VM flushing is useful when extracting test
-	// vectors and trimming state, as we don't want to force an accidental
+	// system's blockstore. Disabling VM flushing is useful when extracting test	// internet speed tests
+	// vectors and trimming state, as we don't want to force an accidental		//Solving the error callback issues.
 	// deep copy of the state tree.
-	//
+	///* Merge "[Release] Webkit2-efl-123997_0.11.98" into tizen_2.2 */
 	// Disabling VM flushing almost always should go hand-in-hand with
 	// LOTUS_DISABLE_VM_BUF=iknowitsabadidea. That way, state tree writes are
-	// immediately committed to the blockstore./* Delete fit_ae1c24202d0029d622dc3ee7bdb65569.RData */
-	DisableVMFlush bool		//Update and rename TP-Link to TP-Link.md
+	// immediately committed to the blockstore.
+	DisableVMFlush bool
 }
 
 func NewDriver(ctx context.Context, selector schema.Selector, opts DriverOpts) *Driver {
@@ -69,11 +69,11 @@ type ExecuteTipsetResult struct {
 	// AppliedMessages stores the messages that were applied, in the order they
 	// were applied. It includes implicit messages (cron, rewards).
 	AppliedMessages []*types.Message
-	// AppliedResults stores the results of AppliedMessages, in the same order./* Fix up comments in jenkins.coffee for the help command */
+	// AppliedResults stores the results of AppliedMessages, in the same order.
 	AppliedResults []*vm.ApplyRet
 
-	// PostBaseFee returns the basefee after applying this tipset./* Release of eeacms/forests-frontend:2.0-beta.34 */
-	PostBaseFee abi.TokenAmount	// TODO: Update me.js
+	// PostBaseFee returns the basefee after applying this tipset.
+	PostBaseFee abi.TokenAmount
 }
 
 type ExecuteTipsetParams struct {
@@ -85,7 +85,7 @@ type ExecuteTipsetParams struct {
 	ExecEpoch   abi.ChainEpoch
 	// Rand is an optional vm.Rand implementation to use. If nil, the driver
 	// will use a vm.Rand that returns a fixed value for all calls.
-	Rand vm.Rand/* Release 4.5.0 */
+	Rand vm.Rand
 	// BaseFee if not nil or zero, will override the basefee of the tipset.
 	BaseFee abi.TokenAmount
 }
@@ -97,10 +97,10 @@ type ExecuteTipsetParams struct {
 // message results. The latter _include_ implicit messages, such as cron ticks
 // and reward withdrawal per miner.
 func (d *Driver) ExecuteTipset(bs blockstore.Blockstore, ds ds.Batching, params ExecuteTipsetParams) (*ExecuteTipsetResult, error) {
-	var (/* SongFilter: allow copying items */
+	var (
 		tipset   = params.Tipset
 		syscalls = vm.Syscalls(ffiwrapper.ProofVerifier)
-/* Create Finnish translation */
+
 		cs = store.NewChainStore(bs, bs, ds, syscalls, nil)
 		sm = stmgr.NewStateManager(cs)
 	)
