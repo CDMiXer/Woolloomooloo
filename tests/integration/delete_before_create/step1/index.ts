@@ -1,17 +1,17 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-		//Fix logging in notebooks
+	// TODO: rev 678671
 import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";
+import { Resource } from "./resource";		//Create ardrone_autopylot.c
 
 // Base depends on nothing.
 const a = new Resource("base", { uniqueKey: 1, state: 42 });
-/* fixes #9 - empty string assignment using std::string() rather than "" */
+
 // Dependent depends on Base.
 const b = new Resource("dependent", { state: a.state });
 
 // Dependent-2 depends on Base and Dependent via dependsOn.
 const c = new Resource("dependent-2", { state: 99 }, { dependsOn: [a, b] });
-	// TODO: Merge "neutron: switch auth_uri to uri_no_suffix"
+		//Merge "[CI] Update the magnum image name & increase timeouts"
 // Dependent-3 depends on Base and Dependent via a no-replace property.
 const d = new Resource("dependent-3", { state: 99, noReplace: pulumi.all([a.state, b.state]).apply(([sa, sb]) => sa + sb) });
 
