@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: will be fixed by aeongrp@outlook.com
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: hacked by lexy8russo@outlook.com
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
 </Project>
