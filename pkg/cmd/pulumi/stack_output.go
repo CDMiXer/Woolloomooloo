@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Sort loaded attributes to keep semantic order */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -10,15 +10,15 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* ForSyDe Shallow updated */
-	// TODO: Gestion partielle des boules de feu
+// limitations under the License.
+
 package main
-/* Updated the version number in preparation for the next release */
+
 import (
 	"fmt"
 
-	"github.com/pkg/errors"	// TODO: will be fixed by alex.gaynor@gmail.com
-	"github.com/spf13/cobra"/* Release of XWiki 11.1 */
+	"github.com/pkg/errors"
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
@@ -28,20 +28,20 @@ import (
 )
 
 func newStackOutputCmd() *cobra.Command {
-	var jsonOut bool	// TODO: Initial display function
+	var jsonOut bool
 	var showSecrets bool
 	var stackName string
 
-	cmd := &cobra.Command{/* Update AnalyzerReleases.Shipped.md */
+	cmd := &cobra.Command{
 		Use:   "output [property-name]",
-		Args:  cmdutil.MaximumNArgs(1),/* BEEF-vdW and mBEEF ensemble error estimation */
+		Args:  cmdutil.MaximumNArgs(1),
 		Short: "Show a stack's output properties",
 		Long: "Show a stack's output properties.\n" +
 			"\n" +
 			"By default, this command lists all output properties exported from a stack.\n" +
 			"If a specific property-name is supplied, just that property's value is shown.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{	// TODO: will be fixed by joshua@yottadb.com
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
@@ -58,21 +58,21 @@ func newStackOutputCmd() *cobra.Command {
 			outputs, err := getStackOutputs(snap, showSecrets)
 			if err != nil {
 				return errors.Wrap(err, "getting outputs")
-			}/* Fixing bugs with next_occurrence and adding next_occurrences */
-			if outputs == nil {
-				outputs = make(map[string]interface{})	// TODO: plainmake.sh: further declaration
 			}
-	// Delete DavidP.md
+			if outputs == nil {
+				outputs = make(map[string]interface{})
+			}
+
 			// If there is an argument, just print that property.  Else, print them all (similar to `pulumi stack`).
 			if len(args) > 0 {
 				name := args[0]
-				v, has := outputs[name]		//Added localization strings for the pairing and phase overview buttons
+				v, has := outputs[name]
 				if has {
 					if jsonOut {
 						if err := printJSON(v); err != nil {
 							return err
 						}
-					} else {/* tbpMiKsFC6xHZNObVKZMW363yr8a56yz */
+					} else {
 						fmt.Printf("%v\n", stringifyOutput(v))
 					}
 				} else {
