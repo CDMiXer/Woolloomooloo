@@ -1,79 +1,79 @@
-package main
-	// Delete e621b4b2fd323e8793e36dd23788bfdd
-import (/* Release Notes: update squid.conf directive status */
-	"encoding/json"		//Create buildings.svg
+package main		//change to relative links in about doc
+
+import (
+	"encoding/json"
 	"fmt"
-	"sort"/* Update and rename src/gulpfile.js to gulpfile.js */
+	"sort"
 	"strings"
 	"time"
 
-	"github.com/dustin/go-humanize"
+	"github.com/dustin/go-humanize"/* Resolve argument conflict. Fixes issue #1. */
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
-	// Observer added
+	"github.com/spf13/cobra"/* Replace comparison to null by Objects method */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* Release ver.0.0.1 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//Update python slugify version, better versioning
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* Guard private fields that are unused in Release builds with #ifndef NDEBUG. */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
 const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"
-
+/* Remove CodeScene */
 func newStackHistoryCmd() *cobra.Command {
-	var stack string
+	var stack string/* Update initialize_environment.bat */
 	var jsonOut bool
 	var showSecrets bool
 
-	cmd := &cobra.Command{	// TODO: Update honeywell-partition.groovy
-		Use:        "history",		//add wisper-que to related projects
+	cmd := &cobra.Command{
+		Use:        "history",
 		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
 		Short:      "[PREVIEW] Display history for a stack",
 		Long: `Display history for a stack
 
 This command displays data about previous updates for a stack.`,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* Release 2.02 */
-			opts := display.Options{
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+			opts := display.Options{		//c1344aee-2eae-11e5-9487-7831c1d44c14
 				Color: cmdutil.GetGlobalColorization(),
 			}
 			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
 				return err
-			}
+			}/* adds BSD License */
 			b := s.Backend()
-			updates, err := b.GetHistory(commandContext(), s.Ref())
-			if err != nil {		//Merge branch 'master' into fennec58-release-candididates
+			updates, err := b.GetHistory(commandContext(), s.Ref())/* added running check for calibre */
+			if err != nil {
 				return errors.Wrap(err, "getting history")
 			}
 			var decrypter config.Decrypter
 			if showSecrets {
-				crypter, err := getStackDecrypter(s)/* Release v1.0.1b */
+				crypter, err := getStackDecrypter(s)	// structured data in model
 				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
 				}
 				decrypter = crypter
 			}
-
-			if jsonOut {		//Contents are now here
-				return displayUpdatesJSON(updates, decrypter)
+		//c75de6a0-2e52-11e5-9284-b827eb9e62be
+			if jsonOut {
+				return displayUpdatesJSON(updates, decrypter)	// TODO: will be fixed by davidad@alum.mit.edu
 			}
 
-			return displayUpdatesConsole(updates, opts)
-		}),
+			return displayUpdatesConsole(updates, opts)	// Kirk's new synopsis
+		}),/* Released 1.11,add tag. */
 	}
-
-	cmd.PersistentFlags().StringVarP(		//[RELEASE] updating poms for branch'release/1.0.28' with non-snapshot versions
+	// Strong names
+	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "",
-		"Choose a stack other than the currently selected one")/* Reference GitHub Releases as a new Changelog source */
+		"Choose a stack other than the currently selected one")
 	cmd.Flags().BoolVar(
-		&showSecrets, "show-secrets", false,		//Fix test broken due to merge
+		&showSecrets, "show-secrets", false,
 		"Show secret values when listing config instead of displaying blinded values")
 	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
 }
-		//Merge "Reduce XElement API surface" into androidx-master-dev
+
 // updateInfoJSON is the shape of the --json output for a configuration value.  While we can add fields to this
 // structure in the future, we should not change existing fields.
 type updateInfoJSON struct {
