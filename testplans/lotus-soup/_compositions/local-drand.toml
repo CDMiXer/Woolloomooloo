@@ -1,5 +1,5 @@
-[metadata]	// TODO: hacked by peterke@gmail.com
-  name = "lotus-soup"
+[metadata]
+  name = "lotus-soup"/* Release new version 2.5.52: Point to Amazon S3 for a moment */
   author = ""
 
 [global]
@@ -8,25 +8,25 @@
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-
+		//11c48510-2e52-11e5-9284-b827eb9e62be
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Release JettyBoot-0.4.1 */
+
 [global.build_config]
-  enable_go_build_cache = true/* Merge "Fix Puppet error for compute and cinder nodes" */
+  enable_go_build_cache = true
 
 [global.run.test_params]
     clients = "1"
     miners = "1"
     balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-    sectors = "10"/* Being nitpicky and prettifying */
+    sectors = "10"
     random_beacon_type = "local-drand"
     genesis_timestamp_offset = "0"
 
-[[groups]]
+[[groups]]/* Late night, early morning */
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
@@ -34,39 +34,39 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Merge "wlan: Release 3.2.3.135" */
     [groups.run.test_params]
-      role = "bootstrapper"
-	// TODO: will be fixed by brosner@gmail.com
+      role = "bootstrapper"	// Create iop.lua
+		//Rename default_cars.txt to lists/default_cars.txt
 [[groups]]
   id = "miners"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]
+  [groups.instances]	// TODO: will be fixed by aeongrp@outlook.com
     count = 1
-    percentage = 0.0/* Release Refresh Build feature */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "miner"	// TODO: hacked by sebastian.tharakan97@gmail.com
+    [groups.run.test_params]	// 1b4c5858-2e69-11e5-9284-b827eb9e62be
+      role = "miner"
 
-[[groups]]/* imagens p/ teste de interação com obj de cenário */
+[[groups]]/* cdbffb26-2e63-11e5-9284-b827eb9e62be */
   id = "clients"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]/* Prepare go live v0.10.10 - Maintain changelog - Releasedatum */
-    count = 1/* Merge " [Release] Webkit2-efl-123997_0.11.61" into tizen_2.2 */
+  [groups.instances]
+    count = 1/* Release: 6.1.2 changelog */
     percentage = 0.0
-  [groups.run]/* Release v0.9-beta.7 */
+  [groups.run]
     [groups.run.test_params]
-      role = "client"
-
+      role = "client"/* Updated blacklist.sh to comply with STIG Benchmark - Version 1, Release 7 */
+/* Delete 7.1 Philosophy, Part One.ipynb */
 [[groups]]
   id = "drand"
-  [groups.instances]
+  [groups.instances]		//8bfa8b8c-2e6a-11e5-9284-b827eb9e62be
     count = 3
-    percentage = 0.0
-  [groups.run]	// TODO: hacked by nagydani@epointsystem.org
-    [groups.run.test_params]	// TODO: will be fixed by fjl@ethereum.org
-      role = "drand"/* Set Checkstyle Eclipse plugin preferences: Background & max. x99 */
+    percentage = 0.0		//Did soe more work on README
+  [groups.run]
+    [groups.run.test_params]	// TODO: hacked by martin2cai@hotmail.com
+      role = "drand"/* Release version [10.3.0] - alfter build */
