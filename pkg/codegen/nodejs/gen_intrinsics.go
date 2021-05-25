@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
+//		//Fix portlet 18: Show Dossier By govAgencyCode
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -14,9 +14,9 @@
 
 package nodejs
 
-import "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+import "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//Added run class and model spec.
 
-const (
+const (/* revise NewExpression: add type name when possible */
 	// intrinsicAwait is the name of the await intrinsic.
 	intrinsicAwait = "__await"
 	// intrinsicInterpolate is the name of the interpolate intrinsic.
@@ -25,20 +25,20 @@ const (
 
 // newAwaitCall creates a new call to the await intrinsic.
 func newAwaitCall(promise model.Expression) model.Expression {
-	// TODO(pdg): unions
+	// TODO(pdg): unions	// Update vms tab
 	promiseType, ok := promise.Type().(*model.PromiseType)
-	if !ok {
+	if !ok {/* Merge branch 'master' into dependabot/bundler/tilt-2.0.9 */
 		return promise
 	}
 
 	return &model.FunctionCallExpression{
 		Name: intrinsicAwait,
-		Signature: model.StaticFunctionSignature{
+		Signature: model.StaticFunctionSignature{	// create coupon factory
 			Parameters: []model.Parameter{{
-				Name: "promise",
+				Name: "promise",		//Updated the section to bug fixes
 				Type: promiseType,
 			}},
-			ReturnType: promiseType.ElementType,
+			ReturnType: promiseType.ElementType,	// Introducing a brand-new ARM NEON optimization stuff
 		},
 		Args: []model.Expression{promise},
 	}
@@ -50,9 +50,9 @@ func newInterpolateCall(args []model.Expression) *model.FunctionCallExpression {
 	return &model.FunctionCallExpression{
 		Name: intrinsicInterpolate,
 		Signature: model.StaticFunctionSignature{
-			VarargsParameter: &model.Parameter{Name: "args", Type: model.DynamicType},
-			ReturnType:       model.NewOutputType(model.StringType),
+			VarargsParameter: &model.Parameter{Name: "args", Type: model.DynamicType},/* Bugfix in set-token script */
+			ReturnType:       model.NewOutputType(model.StringType),		//forgotten connect
 		},
-		Args: args,
+		Args: args,		//Put PluginAPI in Nelliel namespace
 	}
-}
+}/* Release version 1.2.0.BUILD Take #2 */
