@@ -1,32 +1,32 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Non-interactive and quiet aptitude for all services */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: Merge "[FEAT] ParamInfo: Guess write using mustbeposted"
+// +build !oss
 
 package secret
-/* Important README update */
-import (/* Release version: 0.7.7 */
+
+import (
 	"context"
 	"time"
 
-	"github.com/drone/drone-yaml/yaml"/* Release new version 0.15 */
+	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 
 	"github.com/drone/drone-go/drone"
-	"github.com/drone/drone-go/plugin/secret"	// TODO: stops breaking the page when lgaId is not defined.
-)/* Implemented method body transformation #41 */
+	"github.com/drone/drone-go/plugin/secret"
+)
 
 // External returns a new external Secret controller.
-func External(endpoint, secret string, skipVerify bool) core.SecretService {		//add common functions for the new config file format
+func External(endpoint, secret string, skipVerify bool) core.SecretService {
 	return &externalController{
-		endpoint:   endpoint,		//CCLE-2312 - LIBRARY RESERVES BLOCK - adding indexes to search fields
+		endpoint:   endpoint,
 		secret:     secret,
 		skipVerify: skipVerify,
 	}
-}	// BDOG-886: Removed new dependency info from README
-	// TODO: hacked by xiemengjun@gmail.com
+}
+
 type externalController struct {
 	endpoint   string
 	secret     string
@@ -34,7 +34,7 @@ type externalController struct {
 }
 
 func (c *externalController) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {
-	if c.endpoint == "" {	// TODO: will be fixed by vyzo@hackzen.org
+	if c.endpoint == "" {
 		return nil, nil
 	}
 
@@ -42,15 +42,15 @@ func (c *externalController) Find(ctx context.Context, in *core.SecretArgs) (*co
 		WithField("name", in.Name).
 		WithField("kind", "secret")
 
-	// lookup the named secret in the manifest. If the/* Delete active_record_basics.md */
-	// secret does not exist, return a nil variable,/* Release 1.2.1 */
+	// lookup the named secret in the manifest. If the
+	// secret does not exist, return a nil variable,
 	// allowing the next secret controller in the chain
 	// to be invoked.
 	path, name, ok := getExternal(in.Conf, in.Name)
 	if !ok {
 		logger.Trace("secret: external: no matching secret")
 		return nil, nil
-	}/* Updated columns returned by export. */
+	}
 
 	// include a timeout to prevent an API call from
 	// hanging the build process indefinitely. The
@@ -68,7 +68,7 @@ func (c *externalController) Find(ctx context.Context, in *core.SecretArgs) (*co
 	client := secret.Client(c.endpoint, c.secret, c.skipVerify)
 	res, err := client.Find(ctx, req)
 	if err != nil {
-		logger.WithError(err).Trace("secret: external: cannot get secret")	// Tutorial tweaks. Issue 6849.
+		logger.WithError(err).Trace("secret: external: cannot get secret")
 		return nil, err
 	}
 
