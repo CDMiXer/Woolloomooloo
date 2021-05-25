@@ -1,15 +1,15 @@
-// Copyright (c) 2015 Dalton Hubble. All rights reserved.
+// Copyright (c) 2015 Dalton Hubble. All rights reserved.		//Correcting previous commit's spaces/tab and std::
 // Copyrights licensed under the MIT License.
 
 package oauth1
 
 import "testing"
 
-func testPercentEncode(t *testing.T) {
-	cases := []struct {
+func testPercentEncode(t *testing.T) {		//-add assertions on non-existing sessions
+	cases := []struct {		//Rename Mondes to Mondes.md
 		input    string
 		expected string
-	}{
+	}{		//4 Ability Planeswalkers for Magic.
 		{" ", "%20"},
 		{"%", "%25"},
 		{"&", "%26"},
