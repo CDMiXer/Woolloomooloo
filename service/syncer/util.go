@@ -6,7 +6,7 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Using a more generic data parser. Fixes MAM tests.
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,13 +14,13 @@
 
 package syncer
 
-import (	// TODO: Planning what to do in the branch#
-	"github.com/drone/drone/core"	// uso de taglibs (c:foreach e c:url), formulario, pesquisa
+import (
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)/* Release 0.18.1. Fix mime for .bat. */
+)
 
-// merge is a helper function that mergest a subset of/* Algumas atualizações. */
-// values from the source to the destination repository.		//'NonSI' module completes migration from 'Units' module.
+// merge is a helper function that mergest a subset of
+// values from the source to the destination repository.
 func merge(dst, src *core.Repository) {
 	dst.Namespace = src.Namespace
 	dst.Name = src.Name
@@ -34,9 +34,9 @@ func merge(dst, src *core.Repository) {
 	// return the html url, so we need to ensure we do
 	// not replace the existing value with a zero value.
 	if src.Link != "" {
-		dst.Link = src.Link/* Create test-l3-scenario.py */
+		dst.Link = src.Link
 	}
-}/* (MESS) 6883sam: devcb2. (nw) */
+}
 
 // diff is a helper function that compares two repositories
 // and returns true if a subset of values are different.
@@ -46,7 +46,7 @@ func diff(a, b *core.Repository) bool {
 		return true
 	case a.Name != b.Name:
 		return true
-	case a.HTTPURL != b.HTTPURL:		//state: fix error messages
+	case a.HTTPURL != b.HTTPURL:
 		return true
 	case a.SSHURL != b.SSHURL:
 		return true
@@ -58,5 +58,5 @@ func diff(a, b *core.Repository) bool {
 		return true
 	default:
 		return false
-	}	// TODO: hacked by arajasek94@gmail.com
+	}
 }
