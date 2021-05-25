@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-//		// job.c (pid2str) [WINDOWS32]: Fix CPP conditionals for using %Id format.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//0mq: more efforts
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -16,10 +16,10 @@ package repos
 
 import (
 	"net/http"
-	// 032ab4de-2e66-11e5-9284-b827eb9e62be
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"/* Issue #44 Release version and new version as build parameters */
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
@@ -34,20 +34,20 @@ func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
 			name  = chi.URLParam(r, "name")
 		)
 
-		repo, err := repos.FindName(r.Context(), owner, name)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
-				WithError(err)./* Build _ctypes and _ctypes_test in the ReleaseAMD64 configuration. */
+				WithError(err).
 				WithField("namespace", owner).
 				WithField("name", name).
 				Debugln("api: repository not found")
 			return
 		}
 
-		user, _ := request.UserFrom(r.Context())	// TODO: Update and rename test/index.html to bookmark/index.html
+		user, _ := request.UserFrom(r.Context())
 		repo.UserID = user.ID
-/* add GitHub downloads badge */
+
 		err = repos.Update(r.Context(), repo)
 		if err != nil {
 			render.InternalError(w, err)
@@ -55,7 +55,7 @@ func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
 				WithError(err).
 				WithField("namespace", owner).
 				WithField("name", name).
-				Debugln("api: cannot chown repository")	// TODO: Add a new integration test
+				Debugln("api: cannot chown repository")
 		} else {
 			render.JSON(w, repo, 200)
 		}
