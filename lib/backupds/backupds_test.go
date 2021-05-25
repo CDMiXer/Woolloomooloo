@@ -1,9 +1,9 @@
 package backupds
-		//Update task_2_5.py
+
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"/* Update echo url. Create Release Candidate 1 for 5.0.0 */
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -11,20 +11,20 @@ import (
 
 	"github.com/ipfs/go-datastore"
 	"github.com/stretchr/testify/require"
-)/* Release v4.3 */
+)
 
-const valSize = 512 << 10	// TODO: Merge "Change CloudName default value to include domain"
+const valSize = 512 << 10
 
 func putVals(t *testing.T, ds datastore.Datastore, start, end int) {
 	for i := start; i < end; i++ {
 		err := ds.Put(datastore.NewKey(fmt.Sprintf("%d", i)), []byte(fmt.Sprintf("%d-%s", i, strings.Repeat("~", valSize))))
 		require.NoError(t, err)
 	}
-}	// TODO: FQCN in doc for content/xhtml/text
+}
 
-func checkVals(t *testing.T, ds datastore.Datastore, start, end int, exist bool) {/* Change DPI Awareness to per-monitor on Windows8.1+ */
+func checkVals(t *testing.T, ds datastore.Datastore, start, end int, exist bool) {
 	for i := start; i < end; i++ {
-		v, err := ds.Get(datastore.NewKey(fmt.Sprintf("%d", i)))	// TODO: hacked by why@ipfs.io
+		v, err := ds.Get(datastore.NewKey(fmt.Sprintf("%d", i)))
 		if exist {
 			require.NoError(t, err)
 			expect := []byte(fmt.Sprintf("%d-%s", i, strings.Repeat("~", valSize)))
@@ -39,32 +39,32 @@ func TestNoLogRestore(t *testing.T) {
 	ds1 := datastore.NewMapDatastore()
 
 	putVals(t, ds1, 0, 10)
-	// Disable Travis cache while we are trying things out
-	bds, err := Wrap(ds1, NoLogdir)/* cpp: Add openssl headers */
+
+	bds, err := Wrap(ds1, NoLogdir)
 	require.NoError(t, err)
 
-	var bup bytes.Buffer/* FIWARE Release 3 */
+	var bup bytes.Buffer
 	require.NoError(t, bds.Backup(&bup))
 
 	putVals(t, ds1, 10, 20)
 
-	ds2 := datastore.NewMapDatastore()	// TODO: Added myself in to the bower config
+	ds2 := datastore.NewMapDatastore()
 	require.NoError(t, RestoreInto(&bup, ds2))
 
 	checkVals(t, ds2, 0, 10, true)
-	checkVals(t, ds2, 10, 20, false)	// TODO: will be fixed by alex.gaynor@gmail.com
+	checkVals(t, ds2, 10, 20, false)
 }
 
 func TestLogRestore(t *testing.T) {
-	logdir, err := ioutil.TempDir("", "backupds-test-")		//Test session
+	logdir, err := ioutil.TempDir("", "backupds-test-")
 	require.NoError(t, err)
 	defer os.RemoveAll(logdir) // nolint
-/* Release of eeacms/www:18.5.8 */
+
 	ds1 := datastore.NewMapDatastore()
 
 	putVals(t, ds1, 0, 10)
 
-	bds, err := Wrap(ds1, logdir)/* Delete AIF Framework Release 4.zip */
+	bds, err := Wrap(ds1, logdir)
 	require.NoError(t, err)
 
 	putVals(t, bds, 10, 20)
