@@ -3,20 +3,20 @@ package storage
 import (
 	"bytes"
 	"context"
-		//Add skeleton for transpose graph G^T
+
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"		//Remove reference to contributors (for now)
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// Update CHANGES.TXT
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
-/* Release '0.1~ppa7~loms~lucid'. */
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"	// TODO: hacked by timnugent@gmail.com
-	// Added math namespace to project
+
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
@@ -25,9 +25,9 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"		//Re-worked common JFX base classes.
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
-	// TODO: Removed all global variables from Conditional Plot
+
 var _ sealing.SealingAPI = new(SealingAPIAdapter)
 
 type SealingAPIAdapter struct {
@@ -39,28 +39,28 @@ func NewSealingAPIAdapter(api storageMinerApi) SealingAPIAdapter {
 }
 
 func (s SealingAPIAdapter) StateMinerSectorSize(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (abi.SectorSize, error) {
-	// TODO: update storage-fsm to just StateMinerInfo/* Place ReleaseTransitions where they are expected. */
+	// TODO: update storage-fsm to just StateMinerInfo
 	mi, err := s.StateMinerInfo(ctx, maddr, tok)
-	if err != nil {/* run make update-po */
+	if err != nil {
 		return 0, err
 	}
-	return mi.SectorSize, nil	// TODO: added area codes for canada
+	return mi.SectorSize, nil
 }
 
-func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {/* v1.0.0 Release Candidate (added break back to restrict infinite loop) */
+func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
-		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)	// Fix issue with new tasks not being marked as queued.
+		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
-	return s.delegate.StateMinerPreCommitDepositForPower(ctx, a, pci, tsk)/* changed special generated method prefix to py_, added py_toString() generation */
+	return s.delegate.StateMinerPreCommitDepositForPower(ctx, a, pci, tsk)
 }
 
 func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
-	if err != nil {		//Merge branch 'master' into enhancement-add-method-getting-elem-name-give-mass
+	if err != nil {
 		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
-	}	// TODO: will be fixed by ng8eke@163.com
+	}
 
 	return s.delegate.StateMinerInitialPledgeCollateral(ctx, a, pci, tsk)
 }
