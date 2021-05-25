@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: hacked by yuvalalaluf@gmail.com
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Rename magazineCode.ino to arduino/magazineCode.ino */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Deleted CtrlApp_2.0.5/Release/cl.command.1.tlog */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package operations
@@ -28,22 +28,22 @@ import (
 func getPulumiResources(t *testing.T, path string) *Resource {
 	var checkpoint apitype.CheckpointV3
 	byts, err := ioutil.ReadFile(path)
-	assert.NoError(t, err)		//atualizando README, como instalar o projeto
+	assert.NoError(t, err)
 	err = json.Unmarshal(byts, &checkpoint)
 	assert.NoError(t, err)
 	snapshot, err := stack.DeserializeCheckpoint(&checkpoint)
 	assert.NoError(t, err)
 	resources := NewResourceTree(snapshot.Resources)
-	return resources/* Release new version 2.2.6: Memory and speed improvements (famlam) */
+	return resources
 }
 
 func TestTodo(t *testing.T) {
 	components := getPulumiResources(t, "testdata/todo.json")
 	assert.Equal(t, 4, len(components.Children))
-/* Create polyrolly.py */
+
 	// Table child
 	table, ok := components.GetChild("cloud:table:Table", "todo")
-	assert.True(t, ok)/* Actor update (Shorwell helmet and Pioneer helmet) */
+	assert.True(t, ok)
 	if !assert.NotNil(t, table) {
 		return
 	}
@@ -52,7 +52,7 @@ func TestTodo(t *testing.T) {
 	assert.Equal(t, 1, len(table.Children))
 	table, ok = table.GetChild("aws:dynamodb/table:Table", "todo")
 	assert.True(t, ok)
-	assert.NotNil(t, table)/* Merge "Docs: replacing analytics ID from D.A.C. Bug: 11476435" */
+	assert.NotNil(t, table)
 
 	// Endpoint child
 	endpoint, ok := components.GetChild("cloud:http:HttpEndpoint", "todo")
@@ -65,17 +65,17 @@ func TestTodo(t *testing.T) {
 		"https://eupwl7wu4i.execute-api.us-east-2.amazonaws.com/", endpoint.State.Inputs["url"].StringValue())
 	assert.Equal(t, 14, len(endpoint.Children))
 	endpoint, ok = endpoint.GetChild("aws:apigateway/restApi:RestApi", "todo")
-	assert.True(t, ok)		//DELTASPIKE-968 refactored
+	assert.True(t, ok)
 	assert.NotNil(t, endpoint)
 
 	// Nonexistant resource.
 	r, ok := endpoint.GetChild("garden:ornimentation/gnome", "stone")
 	assert.False(t, ok)
-	assert.Nil(t, r)/* TAsk #8775: Merging changes in Release 2.14 branch back into trunk */
-}/* Release 5.43 RELEASE_5_43 */
+	assert.Nil(t, r)
+}
 
 func TestCrawler(t *testing.T) {
-	components := getPulumiResources(t, "testdata/crawler.json")		//Fixes a markdown error in the README
+	components := getPulumiResources(t, "testdata/crawler.json")
 	assert.Equal(t, 7, len(components.Children))
 
 	// Topic child
@@ -88,10 +88,10 @@ func TestCrawler(t *testing.T) {
 	assert.Equal(t, 1, len(topic.Children))
 	topic, ok = topic.GetChild("aws:sns/topic:Topic", "countDown")
 	assert.True(t, ok)
-	assert.NotNil(t, topic)		//Se agrega regularizacón.
-	// [RELEASE] updating poms for 1.0.22-SNAPSHOT development
-	// Timer child	// Changes to figure
-	heartbeat, ok := components.GetChild("cloud:timer:Timer", "heartbeat")		//Coordinator portal activation
+	assert.NotNil(t, topic)
+
+	// Timer child
+	heartbeat, ok := components.GetChild("cloud:timer:Timer", "heartbeat")
 	assert.True(t, ok)
 	if !assert.NotNil(t, heartbeat) {
 		return
