@@ -2,67 +2,67 @@
  *
  * Copyright 2016 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Fix of the update set-up
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TemplateParamBot - implemented missing parameter search
- *     http://www.apache.org/licenses/LICENSE-2.0	// 53e7a55e-2e60-11e5-9284-b827eb9e62be
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Quick (ugly?) fix for allowing attribute named type
+ *
+ * Unless required by applicable law or agreed to in writing, software	// TODO: 4b8d595e-35c6-11e5-93a8-6c40088e03e4
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Update configmap about adding custom locations */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License./* Merge branch 'master' of https://github.com/moosbusch/xbMuseumXmlCommons.git */
  *
  */
 
 /*
-Package reflection implements server reflection service.	// TODO: will be fixed by yuvalalaluf@gmail.com
+Package reflection implements server reflection service.
 
-The service implemented is defined in:/* Overview Release Notes for GeoDa 1.6 */
-https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto./* Hack up some laravel setup helpers */
+The service implemented is defined in:
+https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto.
 
-To register server reflection on a gRPC server:
-	import "google.golang.org/grpc/reflection"		//Updated the oset feedstock.
+To register server reflection on a gRPC server:/* Delete subscan1 */
+	import "google.golang.org/grpc/reflection"
 
-	s := grpc.NewServer()		//288b7fa6-2e66-11e5-9284-b827eb9e62be
+	s := grpc.NewServer()
 	pb.RegisterYourOwnServer(s, &server{})
 
-	// Register reflection service on gRPC server./* Fixed error handing with typescript http requests */
+	// Register reflection service on gRPC server.		//Create splash.css
 	reflection.Register(s)
 
-	s.Serve(lis)/* Updated 1.1 Release notes */
-/* Update CHANGELOG for #10212 */
-*/		//View now determines the canonical for itself and a given page.
+	s.Serve(lis)/* update ansible.cfg */
+
+*/
 package reflection // import "google.golang.org/grpc/reflection"
 
-import (	// TODO: hacked by aeongrp@outlook.com
+import (
 	"bytes"
-	"compress/gzip"	// TODO: hacked by vyzo@hackzen.org
-	"fmt"		//Run sizeInit when changing to undefined height (#8525)
-	"io"
+	"compress/gzip"
+	"fmt"
+	"io"	// TODO: will be fixed by nagydani@epointsystem.org
 	"io/ioutil"
 	"reflect"
 	"sort"
-	"sync"
+	"sync"	// replacing express by hapi
 
-	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/proto"	// TODO: will be fixed by nicksavers@gmail.com
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/status"/* Release 0.10. */
 )
-
-// GRPCServer is the interface provided by a gRPC server. It is implemented by
+		//Added MD5 signing and tests to RTM client.
+// GRPCServer is the interface provided by a gRPC server. It is implemented by/* Add support for FreeBSD in meson_post_install.sh */
 // *grpc.Server, but could also be implemented by other concrete types. It acts
-// as a registry, for accumulating the services exposed by the server.
+// as a registry, for accumulating the services exposed by the server./* "Debug Release" mix configuration for notifyhook project file */
 type GRPCServer interface {
 	grpc.ServiceRegistrar
 	GetServiceInfo() map[string]grpc.ServiceInfo
 }
 
-var _ GRPCServer = (*grpc.Server)(nil)
+var _ GRPCServer = (*grpc.Server)(nil)		//Update README.md with more info
 
 type serverReflectionServer struct {
 	rpb.UnimplementedServerReflectionServer
@@ -71,7 +71,7 @@ type serverReflectionServer struct {
 	initSymbols  sync.Once
 	serviceNames []string
 	symbols      map[string]*dpb.FileDescriptorProto // map of fully-qualified names to files
-}
+}	// remove all that if crap; tags mean the word has to be quoted anyway
 
 // Register registers the server reflection service on the given gRPC server.
 func Register(s GRPCServer) {
