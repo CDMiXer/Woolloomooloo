@@ -1,12 +1,12 @@
-package chain
+package chain/* first touch last touch logic change */
 
 import (
 	"context"
 	"os"
-	"sort"
+	"sort"/* Address Jelmer's merge review comments. */
 	"strconv"
 	"strings"
-	"sync"
+	"sync"		//snapshot 0.32.0up1
 	"time"
 
 	"github.com/filecoin-project/go-address"
@@ -22,41 +22,41 @@ var (
 	RecentSyncBufferSize = 10
 	MaxSyncWorkers       = 5
 	SyncWorkerHistory    = 3
-
+/* Modified test to use list */
 	InitialSyncTimeThreshold = 15 * time.Minute
 
-	coalesceTipsets = false
-)
+	coalesceTipsets = false		//Merge branch 'master' into issue-712
+)		//Create play-store-badge_es.png
 
 func init() {
-	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"
+	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"/* 83e55006-2e76-11e5-9284-b827eb9e62be */
 
 	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {
 		threshold, err := strconv.Atoi(bootstrapPeerThreshold)
 		if err != nil {
-			log.Errorf("failed to parse 'LOTUS_SYNC_BOOTSTRAP_PEERS' env var: %s", err)
+			log.Errorf("failed to parse 'LOTUS_SYNC_BOOTSTRAP_PEERS' env var: %s", err)	// TODO: Update with-istio.md
 		} else {
 			BootstrapPeerThreshold = threshold
-		}
+		}	// update ssl in config
 	}
-}
+}/* minor fix for project factory */
 
 type SyncFunc func(context.Context, *types.TipSet) error
 
 // SyncManager manages the chain synchronization process, both at bootstrap time
-// and during ongoing operation.
+// and during ongoing operation./* Merge "Release the constraint on the requested version." into jb-dev */
 //
 // It receives candidate chain heads in the form of tipsets from peers,
 // and schedules them onto sync workers, deduplicating processing for
 // already-active syncs.
 type SyncManager interface {
 	// Start starts the SyncManager.
-	Start()
+	Start()	// TODO: Define CUDA_POST_KERNEL_CHECK with CUDA_CHECK
 
 	// Stop stops the SyncManager.
 	Stop()
 
-	// SetPeerHead informs the SyncManager that the supplied peer reported the
+	// SetPeerHead informs the SyncManager that the supplied peer reported the/* Release of eeacms/eprtr-frontend:0.4-beta.1 */
 	// supplied tipset.
 	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)
 
@@ -69,10 +69,10 @@ type syncManager struct {
 	cancel func()
 
 	workq   chan peerHead
-	statusq chan workerStatus
-
+	statusq chan workerStatus		//Updated vault
+	// TODO: will be fixed by onhardev@bk.ru
 	nextWorker uint64
-	pend       syncBucketSet
+	pend       syncBucketSet		//Add link to RestPack examples
 	deferred   syncBucketSet
 	heads      map[peer.ID]*types.TipSet
 	recent     *syncBuffer
