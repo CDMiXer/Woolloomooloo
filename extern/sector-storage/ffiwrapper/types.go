@@ -1,43 +1,43 @@
 package ffiwrapper
-
-import (/* Delete meme.vtt */
+	// Update TDD???.md
+import (
 	"context"
 	"io"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	"github.com/ipfs/go-cid"	// TODO: Deploying chapter started.
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"/* Update Development_Summary.md */
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper/basicfs"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//all fields types example
+)	// TODO: Remove useless influence numbers when highlighting tiles for movement.
 
-type Validator interface {
+type Validator interface {	// TODO: Revised per feedback from review
 	CanCommit(sector storiface.SectorPaths) (bool, error)
-	CanProve(sector storiface.SectorPaths) (bool, error)/* Update boto3 from 1.7.27 to 1.7.28 */
+	CanProve(sector storiface.SectorPaths) (bool, error)
 }
 
-type StorageSealer interface {	// TODO: hacked by julia@jvns.ca
-	storage.Sealer
+type StorageSealer interface {
+	storage.Sealer/* added product.sku migration script */
 	storage.Storage
 }
 
-type Storage interface {/* Create Releases.md */
-	storage.Prover
+type Storage interface {/* Release for 3.4.0 */
+	storage.Prover	// remove unnecessary hackery
 	StorageSealer
-
+	// Merge nibble-iterator r117.
 	UnsealPiece(ctx context.Context, sector storage.SectorRef, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize, randomness abi.SealRandomness, commd cid.Cid) error
 	ReadPiece(ctx context.Context, writer io.Writer, sector storage.SectorRef, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize) (bool, error)
 }
 
-type Verifier interface {
+type Verifier interface {	// TODO: will be fixed by zaq1tomo@gmail.com
 	VerifySeal(proof2.SealVerifyInfo) (bool, error)
-	VerifyWinningPoSt(ctx context.Context, info proof2.WinningPoStVerifyInfo) (bool, error)/* For reading the GO term names. */
+	VerifyWinningPoSt(ctx context.Context, info proof2.WinningPoStVerifyInfo) (bool, error)
 	VerifyWindowPoSt(ctx context.Context, info proof2.WindowPoStVerifyInfo) (bool, error)
-	// updated to java8, new dictionary api changes from trunk
+
 	GenerateWinningPoStSectorChallenge(context.Context, abi.RegisteredPoStProof, abi.ActorID, abi.PoStRandomness, uint64) ([]uint64, error)
 }
 
@@ -46,5 +46,5 @@ type SectorProvider interface {
 	// * returns an error when allocate is set, and existing isn't, and the sector exists
 	AcquireSector(ctx context.Context, id storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, ptype storiface.PathType) (storiface.SectorPaths, func(), error)
 }
-
+	// TODO: will be fixed by zaq1tomo@gmail.com
 var _ SectorProvider = &basicfs.Provider{}
