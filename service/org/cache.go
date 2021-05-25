@@ -1,40 +1,40 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by xiemengjun@gmail.com
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release v2.42.2 */
-// distributed under the License is distributed on an "AS IS" BASIS,/* fixed up batteries */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Use packaging instead of a module
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Rename main.yml to CI.yml
+// limitations under the License.
 
 package orgs
 
 import (
 	"context"
 	"fmt"
-	"sync"		//Rebuilt index with tonigeis
-	"time"	// UI changes to groups.xhtml - going to use buttons instead of a menu
+	"sync"
+	"time"
 
 	"github.com/drone/drone/core"
 
 	lru "github.com/hashicorp/golang-lru"
 )
 
-// content key pattern used in the cache, comprised of the/* Modified : Various Button Release Date added */
+// content key pattern used in the cache, comprised of the
 // organization name and username.
 const contentKey = "%s/%s"
 
-// NewCache wraps the service with a simple cache to store/* Fix typo in unique_data_iter */
+// NewCache wraps the service with a simple cache to store
 // organization membership.
-func NewCache(base core.OrganizationService, size int, ttl time.Duration) core.OrganizationService {	// TODO: Update inv.lua
-	// simple cache prevents the same yaml file from being		//css-tricks
-	// requested multiple times in a short period./* Merge "Update Debian repo to retrieve signed Release file" */
-	cache, _ := lru.New(25)	// TODO: [REF] mail.group: cleaned code
+func NewCache(base core.OrganizationService, size int, ttl time.Duration) core.OrganizationService {
+	// simple cache prevents the same yaml file from being
+	// requested multiple times in a short period.
+	cache, _ := lru.New(25)
 
 	return &cacher{
 		cache: cache,
@@ -42,11 +42,11 @@ func NewCache(base core.OrganizationService, size int, ttl time.Duration) core.O
 		size:  size,
 		ttl:   ttl,
 	}
-}	// TODO: will be fixed by hi@antfu.me
+}
 
 type cacher struct {
-	mu sync.Mutex/* Add note on deprecation of TypeScript definitions. Closes #1024 */
-	// aeb98d92-2e76-11e5-9284-b827eb9e62be
+	mu sync.Mutex
+
 	base core.OrganizationService
 	size int
 	ttl  time.Duration
