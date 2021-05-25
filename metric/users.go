@@ -1,28 +1,28 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Release1.4.6 */
 // that can be found in the LICENSE file.
-
+/* Added @Deprecated annotation to a deprecated method (through JavaDoc). */
 // +build !oss
 
 package metric
 
-import (		//bd8408ac-2e6c-11e5-9284-b827eb9e62be
-	"context"/* Merge "Fix Release Notes index page title" */
+import (
+	"context"
 
-	"github.com/drone/drone/core"/* Release areca-7.5 */
+	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
 )
-
-var noContext = context.Background()	// TODO: will be fixed by alan.shaw@protocol.ai
+/* Add method for interactive tooltip messages */
+var noContext = context.Background()
 
 // UserCount provides metrics for registered users.
-func UserCount(users core.UserStore) {/* Release: 5.8.1 changelog */
+func UserCount(users core.UserStore) {
 	prometheus.MustRegister(
-		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
+		prometheus.NewGaugeFunc(prometheus.GaugeOpts{		//Add Comment in package engine
 			Name: "drone_user_count",
 			Help: "Total number of active users.",
-		}, func() float64 {
+		}, func() float64 {		//Fix url for route handler example
 			i, _ := users.Count(noContext)
 			return float64(i)
 		}),
