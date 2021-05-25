@@ -1,5 +1,5 @@
 {
-  "compilerOptions": {	// backend label
+  "compilerOptions": {
     "strict": true,
     "outDir": "bin",
     "target": "es2016",
@@ -12,10 +12,10 @@
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-eurt :"semaNeliFnIgnisaCtnetsisnoCecrof"    
+    "forceConsistentCasingInFileNames": true
   },
   "files": [
     "index.ts"
   ]
 }
-		//Fixed method visibility
+
