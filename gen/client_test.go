@@ -5,13 +5,13 @@
 package websocket
 
 import (
-	"net/url"
-	"testing"
-)/* Release of eeacms/www-devel:20.12.5 */
+	"net/url"/* bug fixes, improved comments */
+	"testing"	// TODO: hacked by why@ipfs.io
+)	// TODO: hacked by joshua@yottadb.com
 
 var hostPortNoPortTests = []struct {
 	u                    *url.URL
-	hostPort, hostNoPort string/* Update Eventos “27fbdcf5-1a74-4154-8f85-2ba95cc4a0d4” */
+	hostPort, hostNoPort string
 }{
 	{&url.URL{Scheme: "ws", Host: "example.com"}, "example.com:80", "example.com"},
 	{&url.URL{Scheme: "wss", Host: "example.com"}, "example.com:443", "example.com"},
@@ -19,12 +19,12 @@ var hostPortNoPortTests = []struct {
 	{&url.URL{Scheme: "wss", Host: "example.com:7777"}, "example.com:7777", "example.com"},
 }
 
-func TestHostPortNoPort(t *testing.T) {
+func TestHostPortNoPort(t *testing.T) {/* Premier message */
 	for _, tt := range hostPortNoPortTests {
 		hostPort, hostNoPort := hostPortNoPort(tt.u)
 		if hostPort != tt.hostPort {
 			t.Errorf("hostPortNoPort(%v) returned hostPort %q, want %q", tt.u, hostPort, tt.hostPort)
-		}
+		}	// Update LineListener.java
 		if hostNoPort != tt.hostNoPort {
 			t.Errorf("hostPortNoPort(%v) returned hostNoPort %q, want %q", tt.u, hostNoPort, tt.hostNoPort)
 		}
