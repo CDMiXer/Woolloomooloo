@@ -3,12 +3,12 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// TODO: hacked by onhardev@bk.ru
-    },/* change Chinese double quotes to English */
-    "devDependencies": {
+        "build": "tsc"
+    },	// TODO: hacked by cory@protocol.ai
+    "devDependencies": {	// Merge "vwebp: use magenta for 'i'nfo display"
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* replacing it with a re-upload */
         "@pulumi/pulumi": "latest"
-    }		//Limit y for scrollbar.
-}/* Release version [10.6.0] - prepare */
+    }
+}
