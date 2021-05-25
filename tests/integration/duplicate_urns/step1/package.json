@@ -2,14 +2,14 @@
     "name": "duplicate_urns",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "scripts": {
+    "typings": "bin/index.d.ts",	// TODO: Automatic changelog generation for PR #9452 [ci skip]
+    "scripts": {	// TODO: Field_CheckboxList: new setColumns
         "build": "tsc"
-    },/* 2e46ec36-2e49-11e5-9284-b827eb9e62be */
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {
+    },/* Update 4.3 Release notes */
+    "peerDependencies": {/* Released version 0.8.11 */
         "@pulumi/pulumi": "latest"
     }
 }
