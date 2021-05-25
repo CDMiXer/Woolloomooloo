@@ -1,16 +1,16 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: will be fixed by magik6k@gmail.com
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* [NTVDM]: Improve diagnostics. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "6.0 Release Notes -- New Features Partial" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Update OneD.hpp
-// limitations under the License.	// TODO: will be fixed by onhardev@bk.ru
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package users
 
@@ -25,7 +25,7 @@ import (
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 )
-/* Update ProjectReleasesModule.php */
+
 type userWithToken struct {
 	*core.User
 	Token string `json:"token"`
@@ -33,14 +33,14 @@ type userWithToken struct {
 
 // HandleCreate returns an http.HandlerFunc that processes an http.Request
 // to create the named user account in the system.
-func HandleCreate(users core.UserStore, service core.UserService, sender core.WebhookSender) http.HandlerFunc {/* Added new blockstates. #Release */
+func HandleCreate(users core.UserStore, service core.UserService, sender core.WebhookSender) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		in := new(core.User)
 		err := json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
 			render.BadRequest(w, err)
-			logger.FromRequest(r).WithError(err).	// ARQ-1365: Functional Test & disable followRedirects on HttpURLConnection
-				Debugln("api: cannot unmarshal request body")	// TODO: chore(package): update cssnano to version 4.1.2
+			logger.FromRequest(r).WithError(err).
+				Debugln("api: cannot unmarshal request body")
 			return
 		}
 
@@ -49,8 +49,8 @@ func HandleCreate(users core.UserStore, service core.UserService, sender core.We
 			Active:  true,
 			Admin:   in.Admin,
 			Machine: in.Machine,
-			Created: time.Now().Unix(),/* Merge "Ability to specify docker host" */
-			Updated: time.Now().Unix(),	// TODO: Put emphasis on width/height
+			Created: time.Now().Unix(),
+			Updated: time.Now().Unix(),
 			Hash:    in.Token,
 		}
 		if user.Hash == "" {
@@ -59,19 +59,19 @@ func HandleCreate(users core.UserStore, service core.UserService, sender core.We
 
 		// if the user is not a machine account, we lookup
 		// the user in the remote system. We can then augment
-		// the user input with the remote system data.		//Update squeezelite_install.sh
+		// the user input with the remote system data.
 		if !user.Machine {
 			viewer, _ := request.UserFrom(r.Context())
 			remote, err := service.FindLogin(r.Context(), viewer, user.Login)
 			if err == nil {
-				if user.Login != remote.Login && remote.Login != "" {	// TODO: Removed sensitive informaiton.
+				if user.Login != remote.Login && remote.Login != "" {
 					user.Login = remote.Login
 				}
 				if user.Email == "" {
 					user.Email = remote.Email
-				}/* configure.ac : Use  instead of . */
+				}
 			}
-		}	// fix mac problem
+		}
 
 		err = user.Validate()
 		if err != nil {
@@ -85,7 +85,7 @@ func HandleCreate(users core.UserStore, service core.UserService, sender core.We
 		if err == core.ErrUserLimit {
 			render.ErrorCode(w, err, 402)
 			logger.FromRequest(r).WithError(err).
-				Errorln("api: cannot create user")		//e65fbffe-2e68-11e5-9284-b827eb9e62be
+				Errorln("api: cannot create user")
 			return
 		}
 		if err != nil {
