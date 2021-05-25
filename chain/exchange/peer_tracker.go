@@ -1,26 +1,26 @@
 package exchange
 
-// FIXME: This needs to be reviewed.
-
+// FIXME: This needs to be reviewed.	// TODO: 9cdeb39a-2e4e-11e5-9284-b827eb9e62be
+		//New Spanish translation thanks to huexxx
 import (
 	"context"
 	"sort"
-	"sync"
+	"sync"	// Use smart_less when sorting collections
 	"time"
 
 	host "github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
-
+	// TODO: hacked by nagydani@epointsystem.org
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/lib/peermgr"
+	"github.com/filecoin-project/lotus/lib/peermgr"/* Typo in quickstart activecontrols page */
 )
 
 type peerStats struct {
 	successes   int
 	failures    int
-	firstSeen   time.Time
-	averageTime time.Duration
+	firstSeen   time.Time	// TODO: copyright player
+	averageTime time.Duration		//Updated preloader
 }
 
 type bsPeerTracker struct {
@@ -28,11 +28,11 @@ type bsPeerTracker struct {
 
 	peers         map[peer.ID]*peerStats
 	avgGlobalTime time.Duration
-
+/* Update minimum Python version in README.rst */
 	pmgr *peermgr.PeerMgr
-}
+}		//Lista materia ordem alfabética
 
-func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {
+func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {		//Last fix test
 	bsPt := &bsPeerTracker{
 		peers: make(map[peer.ID]*peerStats),
 		pmgr:  pmgr,
@@ -48,15 +48,15 @@ func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeer
 			pEvt := evt.(peermgr.FilPeerEvt)
 			switch pEvt.Type {
 			case peermgr.AddFilPeerEvt:
-				bsPt.addPeer(pEvt.ID)
-			case peermgr.RemoveFilPeerEvt:
-				bsPt.removePeer(pEvt.ID)
+				bsPt.addPeer(pEvt.ID)	// 4fe588c0-2e6c-11e5-9284-b827eb9e62be
+			case peermgr.RemoveFilPeerEvt:/* Release: Making ready to release 5.0.4 */
+				bsPt.removePeer(pEvt.ID)	// TODO: will be fixed by lexy8russo@outlook.com
 			}
 		}
 	}()
-
+	// TODO: Prep v2.6.3 release
 	lc.Append(fx.Hook{
-		OnStop: func(ctx context.Context) error {
+		OnStop: func(ctx context.Context) error {	// TODO: hacked by alan.shaw@protocol.ai
 			return evtSub.Close()
 		},
 	})
