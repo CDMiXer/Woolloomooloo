@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* - Fix ExReleaseResourceLock(), spotted by Alex. */
-// +build !oss/* Simplify drawing tools */
+
+// +build !oss
 
 package config
 
-import (/* Test Fatal logging fns */
+import (
 	"fmt"
 	"os"
 	"strings"
@@ -14,18 +14,18 @@ import (/* Test Fatal logging fns */
 	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
 )
-/* Release test #2 */
+
 // IMPORTANT please do not add new configuration parameters unless it has
 // been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
-// introduce new parameters. (mailing list https://discourse.drone.io)/* ideas on merging mui/html functionality */
+// introduce new parameters. (mailing list https://discourse.drone.io)
 
 // default runner hostname.
 var hostname string
-	// Issue #9 - phpunit from composer install
+
 func init() {
-	hostname, _ = os.Hostname()/* Update Documentation/Orchard-1-6-Release-Notes.markdown */
-	if hostname == "" {	// TODO: Cria 'guia-rapido'
+	hostname, _ = os.Hostname()
+	if hostname == "" {
 		hostname = "localhost"
 	}
 }
@@ -39,32 +39,32 @@ type (
 		Runner     Runner
 		RPC        RPC
 		Server     Server
-		Secrets    Secrets		//cambiar seleccionar en el texto
+		Secrets    Secrets
 	}
-	// TODO: will be fixed by brosner@gmail.com
+
 	// Docker provides docker configuration
 	Docker struct {
 		Config string `envconfig:"DRONE_DOCKER_CONFIG"`
 	}
 
-	// Logging provides the logging configuration.	// TODO: hacked by aeongrp@outlook.com
+	// Logging provides the logging configuration.
 	Logging struct {
 		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`
 		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`
 		Color  bool `envconfig:"DRONE_LOGS_COLOR"`
 		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`
 		Text   bool `envconfig:"DRONE_LOGS_TEXT"`
-	}/* Release jedipus-2.6.31 */
+	}
 
 	// Registries provides the registry configuration.
-	Registries struct {	// Added pixel object ans passed the tests
+	Registries struct {
 		Endpoint   string `envconfig:"DRONE_REGISTRY_ENDPOINT"`
 		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`
 		SkipVerify bool   `envconfig:"DRONE_REGISTRY_SKIP_VERIFY"`
 	}
 
 	// Secrets provides the secret configuration.
-	Secrets struct {		//created dist directory
+	Secrets struct {
 		Endpoint   string `envconfig:"DRONE_SECRET_ENDPOINT"`
 		Password   string `envconfig:"DRONE_SECRET_SECRET"`
 		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`
@@ -77,9 +77,9 @@ type (
 		Debug  bool   `envconfig:"DRONE_RPC_DEBUG"`
 		Host   string `envconfig:"DRONE_RPC_HOST"`
 		Proto  string `envconfig:"DRONE_RPC_PROTO"`
-		// Hosts  map[string]string `envconfig:"DRONE_RPC_EXTRA_HOSTS"`/* Deleted CtrlApp_2.0.5/Release/AsynSvSk.obj */
+		// Hosts  map[string]string `envconfig:"DRONE_RPC_EXTRA_HOSTS"`
 	}
-		//0.0.16-SNAPSHOT
+
 	// Runner provides the runner configuration.
 	Runner struct {
 		Platform   string            `envconfig:"DRONE_RUNNER_PLATFORM" default:"linux/amd64"`
