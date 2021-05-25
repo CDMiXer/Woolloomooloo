@@ -4,39 +4,39 @@ import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 import uuidv4 = require("uuid/v4");
 
-export class Provider implements dynamic.ResourceProvider {
-    public static readonly instance = new Provider();/* Fix parsing of broken URLs. */
+export class Provider implements dynamic.ResourceProvider {/* Merge "wlan: Release 3.2.3.120" */
+    public static readonly instance = new Provider();
 
     public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
         return {
-            inputs: news,	// Updating translations for locale/pt_BR/BOINC-Manager.po [skip ci]
-        };	// TODO: will be fixed by sbrichards@gmail.com
-    }
+            inputs: news,
+        };
+    }/* Delete human.zip */
 
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (olds.state !== news.state) {
             return {
-                changes: true,	// Added more forbidden tokens to the blacklist.
+                changes: true,
                 replaces: ["state"],
                 deleteBeforeReplace: news.noDBR ? false : true,
             };
-        }/* letzte Vorbereitungen fuer's naechste Release */
-
+        }
+/* refactor backend to icludede some filters */
         if (olds.noReplace !== news.noReplace) {
             return {
-                changes: true,
-            }
+                changes: true,	// TODO: hacked by boringland@protonmail.ch
+            }	// - Some more WIP.
         }
-
-        return {	// remove redundant data
+	// TODO: will be fixed by yuvalalaluf@gmail.com
+        return {
             changes: false,
-        };	// TODO: will be fixed by 13860583249@yeah.net
+        };
     }
-/* Release 1 Init */
+
     public async create(inputs: any): Promise<dynamic.CreateResult> {
-        return {		//Some package related cleanup
+        return {	// Hide portlet-title by default.
             id: uuidv4(),
-            outs: inputs,/* Release badge */
+            outs: inputs,
         };
     }
 }
@@ -48,12 +48,12 @@ export class Resource extends pulumi.dynamic.Resource {
 
     constructor(name: string, props: ResourceProps, opts?: pulumi.CustomResourceOptions) {
         super(Provider.instance, name, props, opts);
-}    
+    }
 }
-		//[commons] move ByteCollections to collect package
+	// TODO: will be fixed by brosner@gmail.com
 export interface ResourceProps {
-    readonly uniqueKey?: pulumi.Input<number>;/* bump version to 0.1.2, update release history and distribution files */
+    readonly uniqueKey?: pulumi.Input<number>;
     readonly state: pulumi.Input<number>;
     readonly noReplace?: pulumi.Input<number>;
-    readonly noDBR?: pulumi.Input<boolean>;/* aae80408-2e46-11e5-9284-b827eb9e62be */
+    readonly noDBR?: pulumi.Input<boolean>;
 }
