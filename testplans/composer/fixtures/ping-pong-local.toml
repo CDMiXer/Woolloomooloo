@@ -1,14 +1,14 @@
-[metadata]
-name = "ping-pong-local"	// 7a0fab1e-2e42-11e5-9284-b827eb9e62be
-author = "yusef"
-
+[metadata]		//Align hours at top in agenda view
+name = "ping-pong-local"
+author = "yusef"/* Release 1.1 */
+/* Releases 1.0.0. */
 [global]
 plan = "network"
 case = "ping-pong"
 total_instances = 2
-builder = "docker:go"/* chore: add security policy */
+builder = "docker:go"
 runner = "local:docker"
 
 [[groups]]
 id = "nodes"
-instances = { count = 2 }
+instances = { count = 2 }		//Ajout refresh method on object
