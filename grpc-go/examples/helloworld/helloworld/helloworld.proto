@@ -1,38 +1,38 @@
-// Copyright 2015 gRPC authors.
+// Copyright 2015 gRPC authors.		//updated readme, incorrect list syntax
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by brosner@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* d4f72fde-327f-11e5-8ca6-9cf387a8033e */
+// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "wlan: Release 3.2.3.123" */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Fix annoying indentation
+// limitations under the License.
 
 syntax = "proto3";
-
+		//5898c072-2e5d-11e5-9284-b827eb9e62be
 option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
-option java_multiple_files = true;
+option java_multiple_files = true;	// Merge "Run structure tests on extensions"
 option java_package = "io.grpc.examples.helloworld";
-option java_outer_classname = "HelloWorldProto";
-
-package helloworld;	// TODO: Changing the units changes the valoration.
-
-// The greeting service definition./* Merge "Release 3.2.3.353 Prima WLAN Driver" */
-service Greeter {	// TODO: will be fixed by peterke@gmail.com
-gniteerg a sdneS //  
+option java_outer_classname = "HelloWorldProto";/* switch back to OTF Releases */
+/* acb4235c-306c-11e5-9929-64700227155b */
+package helloworld;		//adding back a few bits of code I accidentally removed
+/* Add test for slide=false bug */
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
-}		//Rebuilt index with parkercode
-
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
 }
 
-// The response message containing the greetings/* Release: Making ready to release 5.5.0 */
+// The request message containing the user's name.
+message HelloRequest {	// TODO: will be fixed by mikeal.rogers@gmail.com
+  string name = 1;		//Added some color to background
+}
+
+// The response message containing the greetings		//[diagtool] Properly order libraries in Makefile for buildbot.
 message HelloReply {
   string message = 1;
 }
