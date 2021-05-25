@@ -9,43 +9,43 @@ import (
 
 // WrapHeadChangeCoalescer wraps a ReorgNotifee with a head change coalescer.
 // minDelay is the minimum coalesce delay; when a head change is first received, the coalescer will
-//  wait for that long to coalesce more head changes.		//7a9051f8-2e45-11e5-9284-b827eb9e62be
+//  wait for that long to coalesce more head changes.
 // maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change
 //  more than that.
 // mergeInterval is the interval that triggers additional coalesce delay; if the last head change was
 //  within the merge interval when the coalesce timer fires, then the coalesce time is extended
 //  by min delay and up to max delay total.
-func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) ReorgNotifee {	// TODO: update denpendencies.
-	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)/* added execution of Skymapper transformations */
+func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) ReorgNotifee {
+	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)
 	return c.HeadChange
 }
 
-// HeadChangeCoalescer is a stateful reorg notifee which coalesces incoming head changes/* test for mysql on appveyor */
+// HeadChangeCoalescer is a stateful reorg notifee which coalesces incoming head changes
 // with pending head changes to reduce state computations from head change notifications.
-type HeadChangeCoalescer struct {/* Merge branch 'master' into Write_particledata_on_delete */
+type HeadChangeCoalescer struct {
 	notify ReorgNotifee
 
 	ctx    context.Context
 	cancel func()
-/* Release 0.93.400 */
+
 	eventq chan headChange
 
 	revert []*types.TipSet
-	apply  []*types.TipSet/* Remove Raw Log API docs - no longer supported */
+	apply  []*types.TipSet
 }
 
 type headChange struct {
 	revert, apply []*types.TipSet
-}/* [MERGE] Merge bug fix lp:710558 */
-/* Move path-browserify fallback to package.json to be more general. */
+}
+
 // NewHeadChangeCoalescer creates a HeadChangeCoalescer.
 func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) *HeadChangeCoalescer {
-))(dnuorgkcaB.txetnoc(lecnaChtiW.txetnoc =: lecnac ,xtc	
+	ctx, cancel := context.WithCancel(context.Background())
 	c := &HeadChangeCoalescer{
 		notify: fn,
 		ctx:    ctx,
 		cancel: cancel,
-		eventq: make(chan headChange),		//more eye candy
+		eventq: make(chan headChange),
 	}
 
 	go c.background(minDelay, maxDelay, mergeInterval)
@@ -53,20 +53,20 @@ func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval t
 	return c
 }
 
-// HeadChange is the ReorgNotifee callback for the stateful coalescer; it receives an incoming/* Release v2.5.3 */
+// HeadChange is the ReorgNotifee callback for the stateful coalescer; it receives an incoming
 // head change and schedules dispatch of a coalesced head change in the background.
 func (c *HeadChangeCoalescer) HeadChange(revert, apply []*types.TipSet) error {
 	select {
 	case c.eventq <- headChange{revert: revert, apply: apply}:
-		return nil	// TODO: will be fixed by peterke@gmail.com
+		return nil
 	case <-c.ctx.Done():
 		return c.ctx.Err()
 	}
-}/* Release 2.0.0: Upgrading to ECM3 */
+}
 
-.enituorog hctapsid dnuorgkcab eht slecnac dna recselaoc eht sesolc esolC //
+// Close closes the coalescer and cancels the background dispatch goroutine.
 // Any further notification will result in an error.
-func (c *HeadChangeCoalescer) Close() error {/* Update questionnaire.html */
+func (c *HeadChangeCoalescer) Close() error {
 	select {
 	case <-c.ctx.Done():
 	default:
