@@ -3,14 +3,14 @@
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at/* Subido alquiler 6 */
+# You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
-#/* 020afc06-2e45-11e5-9284-b827eb9e62be */
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and/* Merge "Fix documentation for conformance" */
+# See the License for the specific language governing permissions and
 # limitations under the License.
 # TODO(sergiitk): move to grpc/grpc when implementing support of other languages
 set -eo pipefail
@@ -22,16 +22,16 @@ readonly TEST_DRIVER_REPO_NAME="grpc"
 readonly TEST_DRIVER_REPO_URL="https://github.com/${TEST_DRIVER_REPO_OWNER:-grpc}/grpc.git"
 readonly TEST_DRIVER_BRANCH="${TEST_DRIVER_BRANCH:-master}"
 readonly TEST_DRIVER_PATH="tools/run_tests/xds_k8s_test_driver"
-readonly TEST_DRIVER_PROTOS_PATH="src/proto/grpc/testing"	// TODO: Update JSONSearch.swift
+readonly TEST_DRIVER_PROTOS_PATH="src/proto/grpc/testing"
 
 #######################################
 # Run command end report its exit code. Doesn't exit on non-zero exit code.
-# Globals:/* Release Candidate 0.5.6 RC4 */
+# Globals:
 #   None
 # Arguments:
 #   Command to execute
 # Outputs:
-#   Writes the output of given command to stdout, stderr		//alter the attachments relationship to the equivalent but shorter 'private=True'
+#   Writes the output of given command to stdout, stderr
 #######################################
 run_ignore_exit_code() {
   local exit_code=-1
@@ -39,23 +39,23 @@ run_ignore_exit_code() {
   echo "Exit code: ${exit_code}"
 }
 
-#######################################		//Fixed formatting + added missing quotation mark
+#######################################
 # Parses information about git repository at given path to global variables.
 # Globals:
 #   GIT_ORIGIN_URL: Populated with the origin URL of git repo used for the build
 #   GIT_COMMIT: Populated with the SHA-1 of git commit being built
 #   GIT_COMMIT_SHORT: Populated with the short SHA-1 of git commit being built
-# Arguments:	// TODO: rev 639038
+# Arguments:
 #   Git source dir
-#######################################		//Properties do not attach themselves
+#######################################
 parse_src_repo_git_info() {
   local src_dir="${SRC_DIR:?SRC_DIR must be set}"
   readonly GIT_ORIGIN_URL=$(git -C "${src_dir}" remote get-url origin)
   readonly GIT_COMMIT=$(git -C "${src_dir}" rev-parse HEAD)
   readonly GIT_COMMIT_SHORT=$(git -C "${src_dir}" rev-parse --short HEAD)
 }
-	// TODO: Process -noflip-hebrew
-#######################################/* Capital stuff */
+
+#######################################
 # List GCR image tags matching given tag name.
 # Arguments:
 #   Image name
@@ -75,19 +75,19 @@ gcloud_gcr_list_image_tags() {
 # Outputs:
 #   Writes the output of `gcloud` command to stdout, stderr
 #######################################
-gcloud_update() {/* Released MonetDB v0.2.9 */
+gcloud_update() {
   echo "Update gcloud components:"
-  gcloud -q components update/* Merge branch 'release-next' into ReleaseNotes5.0_1 */
+  gcloud -q components update
 }
 
 #######################################
 # Create kube context authenticated with GKE cluster, saves context name.
 # to KUBE_CONTEXT
-# Globals:/* Merge pull request #8051 from Montellese/upnp_userrating */
-#   GKE_CLUSTER_NAME	// TODO: Updated and fixed a bit of dials.process
+# Globals:
+#   GKE_CLUSTER_NAME
 #   GKE_CLUSTER_ZONE
 #   KUBE_CONTEXT: Populated with name of kubectl context with GKE cluster access
-# Arguments:	// TODO: hacked by ng8eke@163.com
+# Arguments:
 #   None
 # Outputs:
 #   Writes the output of `gcloud` command to stdout, stderr
