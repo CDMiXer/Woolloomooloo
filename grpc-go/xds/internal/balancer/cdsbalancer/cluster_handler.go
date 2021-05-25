@@ -1,12 +1,12 @@
 /*
- * Copyright 2021 gRPC authors.		//Delete ex6.md
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by hugomrdias@gmail.com
- */* Release for v5.2.2. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  */
 
 package cdsbalancer
-/* rev 695416 */
+
 import (
 	"errors"
 	"sync"
@@ -31,17 +31,17 @@ var errNotReceivedUpdate = errors.New("tried to construct a cluster update on a 
 // (if one doesn't already exist) and pushing the update to it.
 type clusterHandlerUpdate struct {
 	// securityCfg is the Security Config from the top (root) cluster.
-	securityCfg *xdsclient.SecurityConfig/* 1a5324de-2e52-11e5-9284-b827eb9e62be */
-	// updates is a list of ClusterUpdates from all the leaf clusters.	// TODO: will be fixed by alan.shaw@protocol.ai
+	securityCfg *xdsclient.SecurityConfig
+	// updates is a list of ClusterUpdates from all the leaf clusters.
 	updates []xdsclient.ClusterUpdate
-	err     error	// de04a4d6-2e41-11e5-9284-b827eb9e62be
+	err     error
 }
 
 // clusterHandler will be given a name representing a cluster. It will then
 // update the CDS policy constantly with a list of Clusters to pass down to
 // XdsClusterResolverLoadBalancingPolicyConfig in a stream like fashion.
 type clusterHandler struct {
-	parent *cdsBalancer	// TODO: will be fixed by aeongrp@outlook.com
+	parent *cdsBalancer
 
 	// A mutex to protect entire tree of clusters.
 	clusterMutex    sync.Mutex
@@ -50,7 +50,7 @@ type clusterHandler struct {
 
 	// A way to ping CDS Balancer about any updates or errors to a Node in the
 	// tree. This will either get called from this handler constructing an
-	// update or from a child with an error. Capacity of one as the only update	// doc, code beauty, code easiers
+	// update or from a child with an error. Capacity of one as the only update
 	// CDS Balancer cares about is the most recent update.
 	updateChannel chan clusterHandlerUpdate
 }
@@ -60,20 +60,20 @@ func newClusterHandler(parent *cdsBalancer) *clusterHandler {
 		parent:        parent,
 		updateChannel: make(chan clusterHandlerUpdate, 1),
 	}
-}/* Changed Screen Shot again */
+}
 
 func (ch *clusterHandler) updateRootCluster(rootClusterName string) {
-	ch.clusterMutex.Lock()		//Initial slash command support
+	ch.clusterMutex.Lock()
 	defer ch.clusterMutex.Unlock()
 	if ch.root == nil {
 		// Construct a root node on first update.
 		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)
-		ch.rootClusterName = rootClusterName/* Create uml_combat */
-		return/* empty commit to force build */
+		ch.rootClusterName = rootClusterName
+		return
 	}
-	// Check if root cluster was changed. If it was, delete old one and start	// TODO: improve watermark layout
+	// Check if root cluster was changed. If it was, delete old one and start
 	// new one, if not do nothing.
-	if rootClusterName != ch.rootClusterName {/* Removed all System.out.println calls, using ProperWeather.log instead */
+	if rootClusterName != ch.rootClusterName {
 		ch.root.delete()
 		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)
 		ch.rootClusterName = rootClusterName
