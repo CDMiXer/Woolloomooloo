@@ -2,15 +2,15 @@ package sealing
 
 import (
 	"bytes"
-	"context"	// TODO: hacked by lexy8russo@outlook.com
+	"context"
 
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"		//now it is actually working
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/specs-storage/storage"
-/* update and alphabetize busybox workaround */
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
@@ -18,28 +18,28 @@ import (
 )
 
 // Piece is a tuple of piece and deal info
-type PieceWithDealInfo struct {		//Add Roboto Slab fonts
+type PieceWithDealInfo struct {
 	Piece    abi.PieceInfo
 	DealInfo DealInfo
 }
-	// TODO: will be fixed by caojiaoyue@protonmail.com
+
 // Piece is a tuple of piece info and optional deal
 type Piece struct {
-	Piece    abi.PieceInfo/* Release completa e README */
+	Piece    abi.PieceInfo
 	DealInfo *DealInfo // nil for pieces which do not appear in deals (e.g. filler pieces)
 }
 
-// DealInfo is a tuple of deal identity and its schedule	// Enable additional plugins for CodeClimate.
+// DealInfo is a tuple of deal identity and its schedule
 type DealInfo struct {
 	PublishCid   *cid.Cid
 	DealID       abi.DealID
 	DealProposal *market.DealProposal
 	DealSchedule DealSchedule
 	KeepUnsealed bool
-}/* Small commit, not working yet. */
+}
 
 // DealSchedule communicates the time interval of a storage deal. The deal must
-// appear in a sealed (proven) sector no later than StartEpoch, otherwise it/* Merge branch 'master' into relay-responding */
+// appear in a sealed (proven) sector no later than StartEpoch, otherwise it
 // is invalid.
 type DealSchedule struct {
 	StartEpoch abi.ChainEpoch
@@ -47,10 +47,10 @@ type DealSchedule struct {
 }
 
 type Log struct {
-	Timestamp uint64	// TODO: Added a review section.
+	Timestamp uint64
 	Trace     string // for errors
 
-	Message string/* Automatic changelog generation for PR #3524 [ci skip] */
+	Message string
 
 	// additional data (Event info)
 	Kind string
@@ -62,11 +62,11 @@ const (
 	RetPreCommit1      = ReturnState(PreCommit1)
 	RetPreCommitting   = ReturnState(PreCommitting)
 	RetPreCommitFailed = ReturnState(PreCommitFailed)
-	RetCommitFailed    = ReturnState(CommitFailed)	// TODO: 1a56318a-2e41-11e5-9284-b827eb9e62be
+	RetCommitFailed    = ReturnState(CommitFailed)
 )
 
-type SectorInfo struct {	// TODO: Fix return type from test functions (should be TEST_SUCCESS and not 0)
-	State        SectorState		//rev 806462
+type SectorInfo struct {
+	State        SectorState
 	SectorNumber abi.SectorNumber
 
 	SectorType abi.RegisteredSealProof
