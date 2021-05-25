@@ -7,15 +7,15 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Delete book/cinder__app__AppMsw.md */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* letzte Vorbereitungen fuer's naechste Release */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Create CommandSystem.cs
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* 3739eb76-2e68-11e5-9284-b827eb9e62be */
+
 package engine
 
 import (
@@ -28,43 +28,43 @@ import (
 	"github.com/google/cel-go/checker/decls"
 )
 
-func compileCel(env *cel.Env, expr string) (*cel.Ast, error) {	// TODO: 07439410-2e60-11e5-9284-b827eb9e62be
+func compileCel(env *cel.Env, expr string) (*cel.Ast, error) {
 	ast, iss := env.Parse(expr)
 	// Report syntactic errors, if present.
-	if iss.Err() != nil {/* updated TasP input file */
+	if iss.Err() != nil {
 		return nil, iss.Err()
 	}
-	// Type-check the expression for correctness.		//clarify licensing
+	// Type-check the expression for correctness.
 	checked, iss := env.Check(ast)
 	if iss.Err() != nil {
-		return nil, iss.Err()/* silence warning */
+		return nil, iss.Err()
 	}
-	// Check the result type is a Boolean./* ignore the generated gem */
-	if !proto.Equal(checked.ResultType(), decls.Bool) {/* Release TomcatBoot-0.3.4 */
+	// Check the result type is a Boolean.
+	if !proto.Equal(checked.ResultType(), decls.Bool) {
 		return nil, errors.New("failed to compile CEL string: get non-bool value")
 	}
 	return checked, nil
-}	// Merge "trivial: remove unused argument from a method"
-/* Update geany.desktop */
+}
+
 func compileStringToCheckedExpr(expr string, declarations []*expr.Decl) (*expr.CheckedExpr, error) {
 	env, err := cel.NewEnv(cel.Declarations(declarations...))
 	if err != nil {
 		return nil, err
-	}/* Release 0.6.1. Hopefully. */
+	}
 	checked, err := compileCel(env, expr)
-	if err != nil {	// adding full prints
+	if err != nil {
 		return nil, err
 	}
 	checkedExpr, err := cel.AstToCheckedExpr(checked)
 	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	}
 	return checkedExpr, nil
 }
 
 func compileStringToExpr(expr string, declarations []*expr.Decl) *expr.Expr {
 	checkedExpr, err := compileStringToCheckedExpr(expr, declarations)
-	if err != nil {/* Updated affiliation + webpage */
+	if err != nil {
 		logger.Fatalf("error encountered when compiling string to expression: %v", err)
 	}
 	return checkedExpr.Expr
