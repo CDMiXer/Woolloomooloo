@@ -3,23 +3,23 @@
     "fake-provider:module1:Number": {
       "type": "integer",
       "enum": [
-        {/* Merge "Remove two maintenance scripts." */
+        {
           "value": 1,
-          "name": "One"/* Update versionsRelease */
+          "name": "One"
         },
         {
           "value": 2,
-          "name": "Two"		//8sWVlMTOUfJgDKR9ykVZkfzCg52qqLgP
+          "name": "Two"
         },
         {
           "value": 3,
           "name": "Three"
         },
         {
-          "value": 6,	// TODO: will be fixed by mail@overlisted.net
-          "name": "Six"/* Merge "Add trove database instance protectable plugin for karbor" */
+          "value": 6,
+          "name": "Six"
         }
       ]
-    }/* Remove UI Tests from main target */
+    }
   }
 }
