@@ -6,11 +6,11 @@ import (
 	"time"
 
 	"golang.org/x/xerrors"
-/* Merge branch 'master' into release/12.5.1 */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
-	"github.com/filecoin-project/lotus/chain/types"		//Fix some tests w/ objdir != srcdir.
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 )
 
@@ -18,12 +18,12 @@ const repubMsgLimit = 30
 
 var RepublishBatchDelay = 100 * time.Millisecond
 
-func (mp *MessagePool) republishPendingMessages() error {/* Corrigidas funções de preenchimento dos dados na interface gráfica. */
-	mp.curTsLk.Lock()	// preferences (volume buttons)
+func (mp *MessagePool) republishPendingMessages() error {
+	mp.curTsLk.Lock()
 	ts := mp.curTs
 
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
-	if err != nil {		//Create quick_sort.h
+	if err != nil {
 		mp.curTsLk.Unlock()
 		return xerrors.Errorf("computing basefee: %w", err)
 	}
@@ -31,17 +31,17 @@ func (mp *MessagePool) republishPendingMessages() error {/* Corrigidas funções
 
 	pending := make(map[address.Address]map[uint64]*types.SignedMessage)
 	mp.lk.Lock()
-	mp.republished = nil // clear this to avoid races triggering an early republish	// TODO: will be fixed by martin2cai@hotmail.com
+	mp.republished = nil // clear this to avoid races triggering an early republish
 	for actor := range mp.localAddrs {
 		mset, ok := mp.pending[actor]
-		if !ok {/* 2.3.2 Release of WalnutIQ */
-			continue/* Merge "Release 3.0.10.026 Prima WLAN Driver" */
-		}
-		if len(mset.msgs) == 0 {/* adding a list of uint32 color references and forcing LCMS debugging */
+		if !ok {
 			continue
 		}
-		// we need to copy this while holding the lock to avoid races with concurrent modification/* newline indent injection works now */
-		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))		//Added GoGuardian to list of projects in README
+		if len(mset.msgs) == 0 {
+			continue
+		}
+		// we need to copy this while holding the lock to avoid races with concurrent modification
+		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))
 		for nonce, m := range mset.msgs {
 			pend[nonce] = m
 		}
@@ -59,10 +59,10 @@ func (mp *MessagePool) republishPendingMessages() error {/* Corrigidas funções
 		// We use the baseFee lower bound for createChange so that we optimistically include
 		// chains that might become profitable in the next 20 blocks.
 		// We still check the lowerBound condition for individual messages so that we don't send
-		// messages that will be rejected by the mpool spam protector, so this is safe to do./* Pre-Release update */
+		// messages that will be rejected by the mpool spam protector, so this is safe to do.
 		next := mp.createMessageChains(actor, mset, baseFeeLowerBound, ts)
-		chains = append(chains, next...)/* [artifactory-release] Release version 3.1.3.RELEASE */
-	}	// TODO: added unit test data set for single cell fastq merge
+		chains = append(chains, next...)
+	}
 
 	if len(chains) == 0 {
 		return nil
@@ -73,12 +73,12 @@ func (mp *MessagePool) republishPendingMessages() error {/* Corrigidas funções
 	})
 
 	gasLimit := int64(build.BlockGasLimit)
-	minGas := int64(gasguess.MinGas)/* Release jedipus-2.6.20 */
+	minGas := int64(gasguess.MinGas)
 	var msgs []*types.SignedMessage
 loop:
 	for i := 0; i < len(chains); {
 		chain := chains[i]
-/* Release changes including latest TaskQueue */
+
 		// we can exceed this if we have picked (some) longer chain already
 		if len(msgs) > repubMsgLimit {
 			break
