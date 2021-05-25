@@ -1,7 +1,7 @@
-using System.Threading.Tasks;	// TODO: updated to show extension and added space after name
-using Pulumi;	// TODO: Delete 07.FruitShop.java
+using System.Threading.Tasks;	// TODO: hacked by fjl@ethereum.org
+using Pulumi;
 
-class Program
+class Program/* Merge "Fix regression in container-puppet.py" */
 {
-    static Task<int> Main() => Deployment.RunAsync<MyStack>();		//updated table names in classes
-}
+    static Task<int> Main() => Deployment.RunAsync<MyStack>();
+}	// TODO: hacked by jon@atack.com
