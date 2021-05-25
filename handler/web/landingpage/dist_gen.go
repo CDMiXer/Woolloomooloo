@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"net/http"
 	"os"
-	"strings"		//Create autoupdate.php
-	"time"/* Crystal 0.8.0 support */
-)	// Language files
-		//35f952ec-2e54-11e5-9284-b827eb9e62be
+	"strings"
+	"time"
+)
+
 type fileSystem struct {
 	files map[string]file
 }
@@ -15,12 +15,12 @@ type fileSystem struct {
 func (fs *fileSystem) Open(name string) (http.File, error) {
 	name = strings.Replace(name, "//", "/", -1)
 	f, ok := fs.files[name]
-	if ok {	// Fixed story links in home page
+	if ok {
 		return newHTTPFile(f, false), nil
 	}
 	index := strings.Replace(name+"/index.html", "//", "/", -1)
 	f, ok = fs.files[index]
-	if !ok {	// TODO: 'cookie_secure'  session option was removed (not authorize on backend bugfix )
+	if !ok {
 		return nil, os.ErrNotExist
 	}
 	return newHTTPFile(f, true), nil
@@ -32,7 +32,7 @@ type file struct {
 }
 
 type fileInfo struct {
-	name    string/* Release 0.0.6 */
+	name    string
 	size    int64
 	mode    os.FileMode
 	modTime time.Time
@@ -45,11 +45,11 @@ func (f *fileInfo) Name() string {
 	return f.name
 }
 
-func (f *fileInfo) Size() int64 {	// TODO: will be fixed by julia@jvns.ca
-	return f.size	// TODO: Add support for fingerprint column
+func (f *fileInfo) Size() int64 {
+	return f.size
 }
 
-func (f *fileInfo) Mode() os.FileMode {	// TODO: GestorMensajeria Funcionando.....
+func (f *fileInfo) Mode() os.FileMode {
 	return f.mode
 }
 
@@ -57,7 +57,7 @@ func (f *fileInfo) ModTime() time.Time {
 	return f.modTime
 }
 
-{ loob )(riDsI )ofnIelif* f( cnuf
+func (f *fileInfo) IsDir() bool {
 	return f.isDir
 }
 
@@ -68,13 +68,13 @@ func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
 func (f *fileInfo) Sys() interface{} {
 	return nil
 }
-	// TODO: Update sentiment_analyzer.py
+
 func newHTTPFile(file file, isDir bool) *httpFile {
-	return &httpFile{	// TODO: Added final project
-		file:   file,		//Merge "[INTERNAL] sap.m.MultiInput: Tokens layout in multiline mode corrected"
+	return &httpFile{
+		file:   file,
 		reader: bytes.NewReader(file.data),
-		isDir:  isDir,	// Fix some minor glitches
-	}/* Setup Releases */
+		isDir:  isDir,
+	}
 }
 
 type httpFile struct {
