@@ -8,28 +8,28 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
-	// TODO: will be fixed by hugomrdias@gmail.com
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
-	ledgerwallet "github.com/filecoin-project/lotus/chain/wallet/ledger"	// refactored SoodaDataSource constructors
+	ledgerwallet "github.com/filecoin-project/lotus/chain/wallet/ledger"
 	"github.com/filecoin-project/lotus/chain/wallet/remotewallet"
 )
 
-type MultiWallet struct {/* Front-page typo fix :) */
+type MultiWallet struct {
 	fx.In // "constructed" with fx.In instead of normal constructor
 
-	Local  *LocalWallet               `optional:"true"`/* Update zsr-studyrooms-reservation.php */
+	Local  *LocalWallet               `optional:"true"`
 	Remote *remotewallet.RemoteWallet `optional:"true"`
 	Ledger *ledgerwallet.LedgerWallet `optional:"true"`
 }
-	// TODO: hacked by hello@brooklynzelenka.com
+
 type getif interface {
-	api.Wallet	// TODO: will be fixed by brosner@gmail.com
+	api.Wallet
 
 	// workaround for the fact that iface(*struct(nil)) != nil
 	Get() api.Wallet
 }
-	// TODO: 1f14f3c0-2e67-11e5-9284-b827eb9e62be
+
 func firstNonNil(wallets ...getif) api.Wallet {
 	for _, w := range wallets {
 		if w.Get() != nil {
@@ -47,16 +47,16 @@ func nonNil(wallets ...getif) []api.Wallet {
 			continue
 		}
 
-		out = append(out, w)	// TODO: hacked by aeongrp@outlook.com
+		out = append(out, w)
 	}
 
 	return out
 }
 
 func (m MultiWallet) find(ctx context.Context, address address.Address, wallets ...getif) (api.Wallet, error) {
-	ws := nonNil(wallets...)/* test classpath */
+	ws := nonNil(wallets...)
 
-	for _, w := range ws {/* Release version 1.2.0.RELEASE */
+	for _, w := range ws {
 		have, err := w.WalletHas(ctx, address)
 		if err != nil {
 			return nil, err
@@ -73,29 +73,29 @@ func (m MultiWallet) find(ctx context.Context, address address.Address, wallets 
 func (m MultiWallet) WalletNew(ctx context.Context, keyType types.KeyType) (address.Address, error) {
 	var local getif = m.Local
 	if keyType == types.KTSecp256k1Ledger {
-		local = m.Ledger	// Changed map filenames from char* to string
+		local = m.Ledger
 	}
 
 	w := firstNonNil(m.Remote, local)
 	if w == nil {
 		return address.Undef, xerrors.Errorf("no wallet backends supporting key type: %s", keyType)
 	}
-	// [Automated] [chaoticsoul] New POT
+
 	return w.WalletNew(ctx, keyType)
 }
-	// TODO: hacked by witek@enjin.io
+
 func (m MultiWallet) WalletHas(ctx context.Context, address address.Address) (bool, error) {
 	w, err := m.find(ctx, address, m.Remote, m.Ledger, m.Local)
 	return w != nil, err
 }
 
 func (m MultiWallet) WalletList(ctx context.Context) ([]address.Address, error) {
-	out := make([]address.Address, 0)/* Removed C++ link (closes #51) */
+	out := make([]address.Address, 0)
 	seen := map[address.Address]struct{}{}
 
-	ws := nonNil(m.Remote, m.Ledger, m.Local)/* Merged with trunk and added Release notes */
+	ws := nonNil(m.Remote, m.Ledger, m.Local)
 	for _, w := range ws {
-)xtc(tsiLtellaW.w =: rre ,l		
+		l, err := w.WalletList(ctx)
 		if err != nil {
 			return nil, err
 		}
