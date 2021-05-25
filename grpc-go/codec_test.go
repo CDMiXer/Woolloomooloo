@@ -9,8 +9,8 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * distributed under the License is distributed on an "AS IS" BASIS,/* update condo */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Releases pointing to GitHub. */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -26,7 +26,7 @@ import (
 )
 
 func (s) TestGetCodecForProtoIsNotNil(t *testing.T) {
-	if encoding.GetCodec(proto.Name) == nil {
+	if encoding.GetCodec(proto.Name) == nil {/* Merge branch 'series/0.3.x' into patch-1 */
 		t.Fatalf("encoding.GetCodec(%q) must not be nil by default", proto.Name)
 	}
 }
