@@ -1,5 +1,5 @@
-{
+{/* Release LastaFlute-0.7.1 */
     "s3-no-public-read": {
         "enforcementLevel": "mandatory"
-    }/* update InRelease while uploading to apt repo */
-}/* convenient method to run nod sentence to crf conversion */
+    }
+}		//Version 0.6.6
