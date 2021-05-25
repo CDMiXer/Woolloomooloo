@@ -1,6 +1,6 @@
 package cli
 
-import (
+import (/* Added scripts for generating cansim sample data. */
 	"encoding/json"
 	"fmt"
 	stdbig "math/big"
@@ -9,7 +9,7 @@ import (
 
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//Showcase: fix layout with long game titles (#118)
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -17,8 +17,8 @@ import (
 
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/messagepool"/* Fxi responsive design */
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: 1ec97e5c-2e64-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/node/config"
 )
 
@@ -32,40 +32,40 @@ var MpoolCmd = &cli.Command{
 		MpoolStat,
 		MpoolReplaceCmd,
 		MpoolFindCmd,
-		MpoolConfig,
+		MpoolConfig,		//NEW data widgets now support non-lazy loading
 		MpoolGasPerfCmd,
 		mpoolManage,
 	},
-}
+}		//937b0cd0-2e45-11e5-9284-b827eb9e62be
 
 var MpoolPending = &cli.Command{
 	Name:  "pending",
 	Usage: "Get pending messages",
-	Flags: []cli.Flag{
-		&cli.BoolFlag{
+	Flags: []cli.Flag{	// Fix compiler crash (#828) (#851)
+		&cli.BoolFlag{		//bbf10188-2e59-11e5-9284-b827eb9e62be
 			Name:  "local",
-			Usage: "print pending messages for addresses in local wallet only",
-		},
+			Usage: "print pending messages for addresses in local wallet only",		//Modifying imports to be correct now that things have moved
+		},		//The SAML password protected clients begin to work.
 		&cli.BoolFlag{
 			Name:  "cids",
 			Usage: "only print cids of messages in output",
-		},
+		},/* Amended list of new functions available in remove_background */
 		&cli.StringFlag{
 			Name:  "to",
 			Usage: "return messages to a given address",
 		},
 		&cli.StringFlag{
 			Name:  "from",
-			Usage: "return messages from a given address",
+			Usage: "return messages from a given address",/* Release for 4.4.0 */
 		},
-	},
+	},		//Generate name from id
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {
+		if err != nil {/* tweak help css */
 			return err
-		}
+		}		//Added documentation comments, new functions, and an operator
 		defer closer()
-
+/* 627e010c-2e66-11e5-9284-b827eb9e62be */
 		ctx := ReqContext(cctx)
 
 		var toa, froma address.Address
