@@ -1,8 +1,8 @@
-{{ define "examples" -}}
-{{ print "{{% examples %}}" }}/* Delete Release and Sprint Plan v2.docx */
-## Example Usage	// point readme to Project-Description.md
-
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}/* touchup to munin memory report */
+{{ define "examples" -}}		//init db.clear data
+{{ print "{{% examples %}}" }}
+## Example Usage/* Merge "Release reservation when stoping the ironic-conductor service" */
+/* Release version: 1.10.2 */
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
 {{- range . }}
 {{ .Title }}
@@ -10,10 +10,10 @@
 {{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
 {{ htmlSafe $val }}
-{{ print "{{% /example %}}" }}
-{{ end }}
+{{ print "{{% /example %}}" }}/* Add missing fields to extract Solr document. */
+{{ end }}		//Created a placeholder readme
 
 {{- end }}
-{{ print "{{% /examples %}}" }}
-
+{{ print "{{% /examples %}}" }}		//Merge pull request #133 from harshavardhana/pr_out_add_pkgs_scsi_to_build
+	// TODO: hacked by ac0dem0nk3y@gmail.com
 {{- end }}
