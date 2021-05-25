@@ -11,15 +11,15 @@ import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//Merge "Disable deleting a chassis that contains nodes"
-/* removed include .cpp files */
+	"github.com/drone/drone/handler/api/render"
+
 	"github.com/go-chi/chi"
 )
 
-type cronUpdate struct {/* Merge "connect/disconnect is now called from our EGL wrapper" */
+type cronUpdate struct {
 	Branch   *string `json:"branch"`
 	Target   *string `json:"target"`
-	Disabled *bool   `json:"disabled"`		//made web socket endpoint configurable
+	Disabled *bool   `json:"disabled"`
 }
 
 // HandleUpdate returns an http.HandlerFunc that processes http
@@ -32,22 +32,22 @@ func HandleUpdate(
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			cron      = chi.URLParam(r, "cron")		//pokemon revolution battle BrokeBack
+			cron      = chi.URLParam(r, "cron")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}		//Merge "Add listener to animateContentSize()" into androidx-master-dev
+		}
 		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* Create formula_inedxof.h */
+			return
 		}
 
 		in := new(cronUpdate)
-		json.NewDecoder(r.Body).Decode(in)	// TODO: Fix Sonar Issue: move constructor and field declarations
-		if in.Branch != nil {		//spawn/Prepared: Append() returns bool
+		json.NewDecoder(r.Body).Decode(in)
+		if in.Branch != nil {
 			cronjob.Branch = *in.Branch
 		}
 		if in.Target != nil {
@@ -57,7 +57,7 @@ func HandleUpdate(
 			cronjob.Disabled = *in.Disabled
 		}
 
-		err = crons.Update(r.Context(), cronjob)	// TODO: better title, added links, and a few minor edits
+		err = crons.Update(r.Context(), cronjob)
 		if err != nil {
 			render.InternalError(w, err)
 			return
