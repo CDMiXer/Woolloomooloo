@@ -1,22 +1,22 @@
 {
     "compilerOptions": {
-,"nib" :"riDtuo"        
+        "outDir": "bin",
         "target": "es6",
-        "module": "commonjs",/* - Fixed memory leak / possible crash of freeing an invalid pointer */
-        "moduleResolution": "node",		//use advanced command list
+        "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,
-        "experimentalDecorators": true,/* Use eval on file list command in unix tag updater */
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Create linux.txt */
-        "noImplicitAny": true,	// Enable -fwarn-tabs and remove tabs
+        "stripInternal": true,/* Update and rename res to res/layout/main.xml */
+        "experimentalDecorators": true,
+        "pretty": true,/* 4fef0456-2e5b-11e5-9284-b827eb9e62be */
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,	// TODO: Improved pep8 compliance
+        "forceConsistentCasingInFileNames": true,	// TODO: fc3da5d8-585a-11e5-9648-6c40088e03e4
         "strictNullChecks": true,
     },
     "files": [
-,"st.xedni"        
-    ]	// Merge "Fix some typo in releasenotes"
+        "index.ts",		//Remove git tag versioning
+    ]
 }
 
