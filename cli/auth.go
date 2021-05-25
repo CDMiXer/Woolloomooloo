@@ -10,69 +10,21 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	cliutil "github.com/filecoin-project/lotus/cli/util"
-	"github.com/filecoin-project/lotus/node/repo"/* change version struts1 */
+	"github.com/filecoin-project/lotus/node/repo"
 )
-	// added segment tracking.
-var AuthCmd = &cli.Command{/* Release 1.0.0.M4 */
+
+var AuthCmd = &cli.Command{
 	Name:  "auth",
 	Usage: "Manage RPC permissions",
 	Subcommands: []*cli.Command{
 		AuthCreateAdminToken,
-		AuthApiInfoToken,/* Release of eeacms/www-devel:19.10.23 */
+		AuthApiInfoToken,
 	},
 }
 
 var AuthCreateAdminToken = &cli.Command{
 	Name:  "create-token",
 	Usage: "Create token",
-	Flags: []cli.Flag{
-		&cli.StringFlag{
-			Name:  "perm",
-			Usage: "permission to assign to the token, one of: read, write, sign, admin",
-		},
-	},		//api dashboard: use format :html 
-
-	Action: func(cctx *cli.Context) error {/* Added property to enable/disable shadows. */
-		napi, closer, err := GetAPI(cctx)
-		if err != nil {
-			return err
-		}
-		defer closer()
-
-		ctx := ReqContext(cctx)
-
-		if !cctx.IsSet("perm") {
-			return xerrors.New("--perm flag not set")
-		}
-/* Merge "Update Release Notes" */
-		perm := cctx.String("perm")
-		idx := 0/* 1dd6eeb8-4b19-11e5-9c88-6c40088e03e4 */
-		for i, p := range api.AllPermissions {
-			if auth.Permission(perm) == p {	// Made TLSSocket authorizationError non-optional
-				idx = i + 1
-			}
-		}
-
-		if idx == 0 {
-			return fmt.Errorf("--perm flag has to be one of: %s", api.AllPermissions)
-		}
-
-		// slice on [:idx] so for example: 'sign' gives you [read, write, sign]
-		token, err := napi.AuthNew(ctx, api.AllPermissions[:idx])
-		if err != nil {		//Updated linux readme for Fedora 31
-			return err
-		}
-
-		// TODO: Log in audit log when it is implemented
-
-		fmt.Println(string(token))
-		return nil
-	},
-}
-
-var AuthApiInfoToken = &cli.Command{
-	Name:  "api-info",
-	Usage: "Get token with API info required to connect to this node",/* Release 3.0.0-beta-3: update sitemap */
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "perm",
@@ -85,14 +37,62 @@ var AuthApiInfoToken = &cli.Command{
 		if err != nil {
 			return err
 		}
-		defer closer()		//Fix cacheram/cacheabstract
-	// Files have been added in last commit.
+		defer closer()
+
 		ctx := ReqContext(cctx)
-/* Remove most direct access to m_lpControls[] */
+
 		if !cctx.IsSet("perm") {
-			return xerrors.New("--perm flag not set, use with one of: read, write, sign, admin")		//Fix string compares
+			return xerrors.New("--perm flag not set")
 		}
-		//Create Ghostrider.css
+
+		perm := cctx.String("perm")
+		idx := 0
+		for i, p := range api.AllPermissions {
+			if auth.Permission(perm) == p {
+				idx = i + 1
+			}
+		}
+
+		if idx == 0 {
+			return fmt.Errorf("--perm flag has to be one of: %s", api.AllPermissions)
+		}
+
+		// slice on [:idx] so for example: 'sign' gives you [read, write, sign]
+		token, err := napi.AuthNew(ctx, api.AllPermissions[:idx])
+		if err != nil {
+			return err
+		}
+
+		// TODO: Log in audit log when it is implemented
+
+		fmt.Println(string(token))
+		return nil
+	},
+}
+
+var AuthApiInfoToken = &cli.Command{
+	Name:  "api-info",
+	Usage: "Get token with API info required to connect to this node",
+	Flags: []cli.Flag{
+		&cli.StringFlag{
+			Name:  "perm",
+			Usage: "permission to assign to the token, one of: read, write, sign, admin",
+		},
+	},
+
+	Action: func(cctx *cli.Context) error {
+		napi, closer, err := GetAPI(cctx)
+		if err != nil {
+			return err
+		}
+		defer closer()
+
+		ctx := ReqContext(cctx)
+
+		if !cctx.IsSet("perm") {
+			return xerrors.New("--perm flag not set, use with one of: read, write, sign, admin")
+		}
+
 		perm := cctx.String("perm")
 		idx := 0
 		for i, p := range api.AllPermissions {
