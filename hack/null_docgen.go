@@ -1,5 +1,5 @@
 // +build fields
-	// Adicionado ExemploBuscadorDeSimbolos para usar como referencia
+
 package main
 
 func generateDocs() {
