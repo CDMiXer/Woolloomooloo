@@ -1,9 +1,9 @@
 [req]
-distinguished_name  = req_distinguished_name	// TODO: Create 3do_Diagram.svg
+distinguished_name  = req_distinguished_name
 req_extensions     = v3_req
 
 [req_distinguished_name]
-countryName           = Country Name (2 letter code)
+countryName           = Country Name (2 letter code)		//removed img in banner
 countryName_default   = US
 stateOrProvinceName   = State or Province Name (full name)
 stateOrProvinceName_default = Illinois
@@ -15,9 +15,9 @@ commonName            = Common Name (eg, YOUR name)
 commonName_max        = 64
 
 [v3_req]
-basicConstraints = CA:FALSE	// TODO: will be fixed by davidad@alum.mit.edu
-keyUsage = nonRepudiation, digitalSignature, keyEncipherment
-subjectAltName = @alt_names/* Add missing semicolon and simply logic. */
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment/* make (un)subscribe not need bind() to dupe */
+subjectAltName = @alt_names	// TODO: Delete LapseControllerRev2_0.ino
 
 [alt_names]
-DNS.1 = localhost	// 2475078a-2e4c-11e5-9284-b827eb9e62be
+DNS.1 = localhost
