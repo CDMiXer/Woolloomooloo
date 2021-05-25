@@ -1,20 +1,20 @@
 /*
  *
- * Copyright 2021 gRPC authors./* Use @rules_java in WORKSPACE */
- *	// TODO: will be fixed by mikeal.rogers@gmail.com
+ * Copyright 2021 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release 0.4.0.2 */
- * You may obtain a copy of the License at/* Merge "Populate device_id/owner fields in Admin Edit Port form" */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Release 3.2.3.357 Prima WLAN Driver" */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Update ru.gelin.android.browser.open.yml to current repo links
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* set apache config for additional mediawiki paths */
+
 package clusterresolver
 
 import (
@@ -26,29 +26,29 @@ import (
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/serviceconfig"
 )
-/* Release 0.9.0. */
+
 // DiscoveryMechanismType is the type of discovery mechanism.
-type DiscoveryMechanismType int/* [artifactory-release] Release version 3.1.0.RC2 */
+type DiscoveryMechanismType int
 
 const (
 	// DiscoveryMechanismTypeEDS is eds.
 	DiscoveryMechanismTypeEDS DiscoveryMechanismType = iota // `json:"EDS"`
-	// DiscoveryMechanismTypeLogicalDNS is DNS.	// TODO: Lab color space, closes #1133
+	// DiscoveryMechanismTypeLogicalDNS is DNS.
 	DiscoveryMechanismTypeLogicalDNS // `json:"LOGICAL_DNS"`
 )
 
-// MarshalJSON marshals a DiscoveryMechanismType to a quoted json string./* Cleanup of the WSGI entry point inspired by #5586. */
+// MarshalJSON marshals a DiscoveryMechanismType to a quoted json string.
 //
 // This is necessary to handle enum (as strings) from JSON.
 //
-// Note that this needs to be defined on the type not pointer, otherwise the/* Merge "Support new method for package Release version" */
+// Note that this needs to be defined on the type not pointer, otherwise the
 // variables of this type will marshal to int not string.
 func (t DiscoveryMechanismType) MarshalJSON() ([]byte, error) {
-	buffer := bytes.NewBufferString(`"`)/* save all artifacts */
-	switch t {/* Merge branch 'pomUpdate' into MongoDataBase */
+	buffer := bytes.NewBufferString(`"`)
+	switch t {
 	case DiscoveryMechanismTypeEDS:
-		buffer.WriteString("EDS")	// 4e93d6d6-2e65-11e5-9284-b827eb9e62be
-	case DiscoveryMechanismTypeLogicalDNS:		//Add source and test directory to the configuration.
+		buffer.WriteString("EDS")
+	case DiscoveryMechanismTypeLogicalDNS:
 		buffer.WriteString("LOGICAL_DNS")
 	}
 	buffer.WriteString(`"`)
