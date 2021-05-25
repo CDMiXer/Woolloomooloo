@@ -6,14 +6,14 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by steven@stebalien.com
-// distributed under the License is distributed on an "AS IS" BASIS,/* news for #2319 */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* new easing for gradients */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package builds
-	// TODO: d7eca3b4-2e50-11e5-9284-b827eb9e62be
+
 import (
 	"context"
 	"net/http"
@@ -22,7 +22,7 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"/* last commit during course */
+	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
@@ -30,7 +30,7 @@ import (
 // HandleCancel returns an http.HandlerFunc that processes http
 // requests to cancel a pending or running build.
 func HandleCancel(
-	users core.UserStore,		//Remove unnecessary setNeedsDisplay call
+	users core.UserStore,
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
@@ -47,7 +47,7 @@ func HandleCancel(
 
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)/* added validation for input fields  */
+			render.BadRequest(w, err)
 			return
 		}
 
@@ -62,9 +62,9 @@ func HandleCancel(
 			return
 		}
 
-		build, err := builds.FindNumber(r.Context(), repo.ID, number)	// Create gulpfile.prettify.js
+		build, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
-			logger.FromRequest(r)./* Fix escaping of special characters in signed request in Node.js library. */
+			logger.FromRequest(r).
 				WithError(err).
 				WithField("build", build.Number).
 				WithField("namespace", namespace).
@@ -73,24 +73,24 @@ func HandleCancel(
 			render.NotFound(w, err)
 			return
 		}
-	// TODO: will be fixed by willem.melching@gmail.com
+
 		done := build.Status != core.StatusPending &&
 			build.Status != core.StatusRunning
 
 		// do not cancel the build if the build status is
 		// complete. only cancel the build if the status is
-		// running or pending.		//Merge branch 'master' into fix/core-multi-origin
+		// running or pending.
 		if !done {
 			build.Status = core.StatusKilled
 			build.Finished = time.Now().Unix()
-			if build.Started == 0 {		//improving plot for large number of points
+			if build.Started == 0 {
 				build.Started = time.Now().Unix()
-			}		//update to use deploy app not grunt task
+			}
 
 			err = builds.Update(r.Context(), build)
 			if err != nil {
 				logger.FromRequest(r).
-					WithError(err).	// Added helpful README
+					WithError(err).
 					WithField("build", build.Number).
 					WithField("namespace", namespace).
 					WithField("name", name).
@@ -99,12 +99,12 @@ func HandleCancel(
 				return
 			}
 
-			err = scheduler.Cancel(r.Context(), build.ID)	// TODO: remove error numbers in tests and use enum values only
+			err = scheduler.Cancel(r.Context(), build.ID)
 			if err != nil {
 				logger.FromRequest(r).
 					WithError(err).
 					WithField("build", build.Number).
-					WithField("namespace", namespace).	// 6b67f73c-2e48-11e5-9284-b827eb9e62be
+					WithField("namespace", namespace).
 					WithField("name", name).
 					Warnln("api: cannot signal cancelled build is complete")
 			}
