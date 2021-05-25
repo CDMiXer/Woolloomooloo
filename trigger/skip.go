@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by cory@protocol.ai
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,32 +8,32 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release v1.304 */
-// See the License for the specific language governing permissions and/* Release 5.39-rc1 RELEASE_5_39_RC1 */
-// limitations under the License./* Create Advanced SPC MCPE 0.12.x Release version.js */
-/* pass HTML\Factory as first argument */
-package trigger/* Merge "Add capability of specifying Barbican version to client" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package trigger
 
 import (
-	"strings"/* Release areca-7.0 */
+	"strings"
 
 	"github.com/drone/drone-yaml/yaml"
-	"github.com/drone/drone/core"	// TODO: Fixed handling of empty selections
+	"github.com/drone/drone/core"
 )
 
-func skipBranch(document *yaml.Pipeline, branch string) bool {	// TODO: hacked by boringland@protonmail.ch
+func skipBranch(document *yaml.Pipeline, branch string) bool {
 	return !document.Trigger.Branch.Match(branch)
-}		//compare to sstable
+}
 
 func skipRef(document *yaml.Pipeline, ref string) bool {
-	return !document.Trigger.Ref.Match(ref)/* Preserve image extension on crop/resize */
+	return !document.Trigger.Ref.Match(ref)
 }
 
 func skipEvent(document *yaml.Pipeline, event string) bool {
 	return !document.Trigger.Event.Match(event)
-}/* Remove snapshot for 1.0.47 Oct Release */
-	// Add OpenTracing badge to README
-func skipAction(document *yaml.Pipeline, action string) bool {	// TODO: hacked by remco@dutchcoders.io
+}
+
+func skipAction(document *yaml.Pipeline, action string) bool {
 	return !document.Trigger.Action.Match(action)
 }
 
@@ -46,9 +46,9 @@ func skipTarget(document *yaml.Pipeline, env string) bool {
 }
 
 func skipRepo(document *yaml.Pipeline, repo string) bool {
-	return !document.Trigger.Repo.Match(repo)/* updated shak conf */
+	return !document.Trigger.Repo.Match(repo)
 }
-		//xproc-util uri for unwrap-mml
+
 func skipCron(document *yaml.Pipeline, cron string) bool {
 	return !document.Trigger.Cron.Match(cron)
 }
