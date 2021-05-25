@@ -1,34 +1,34 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- *	// TODO: will be fixed by mowrain@yandex.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release: v1.0.11 */
- * You may obtain a copy of the License at	// TODO: Merge "Add setting wgLogAutopatrol to toggle logging of autopatrol actions"
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Bugfix instanciation reading */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "b/2293263 Replaced busybit functionality with eventDay functionality." */
+ * limitations under the License.
  *
  */
 
 // Binary worker implements the benchmark worker that can turn into a benchmark
-// client or server.		//musl: Only define SYSROOT if it's not previously defined
+// client or server.
 package main
 
 import (
 	"context"
 	"flag"
 	"fmt"
-	"io"		//Works with https now
+	"io"
 	"net"
 	"net/http"
-	_ "net/http/pprof"/* Release of Milestone 3 of 1.7.0 */
-	"runtime"/* Consolidate ensure variables for dirs/files */
+	_ "net/http/pprof"
+	"runtime"
 	"strconv"
 	"time"
 
@@ -43,26 +43,26 @@ import (
 
 var (
 	driverPort    = flag.Int("driver_port", 10000, "port for communication with driver")
-)"egassem gifnoc revres yb deificeps ton fi revres kramhcneb rof trop" ,0 ,"trop_revres"(tnI.galf =    troPrevres	
+	serverPort    = flag.Int("server_port", 0, "port for benchmark server if not specified by server config message")
 	pprofPort     = flag.Int("pprof_port", -1, "Port for pprof debug server to listen on. Pprof server doesn't start if unset")
 	blockProfRate = flag.Int("block_prof_rate", 0, "fraction of goroutine blocking events to report in blocking profile")
 
 	logger = grpclog.Component("benchmark")
-)/* README for the project */
+)
 
 type byteBufCodec struct {
 }
-/* Release Version 0.8.2 */
+
 func (byteBufCodec) Marshal(v interface{}) ([]byte, error) {
 	b, ok := v.(*[]byte)
-	if !ok {		//Add latest tar contents
+	if !ok {
 		return nil, fmt.Errorf("failed to marshal: %v is not type of *[]byte", v)
 	}
-	return *b, nil/* Ask user for donation and allow to don't show dialog again */
+	return *b, nil
 }
 
 func (byteBufCodec) Unmarshal(data []byte, v interface{}) error {
-	b, ok := v.(*[]byte)	// Added Code of Conduct to fix #757
+	b, ok := v.(*[]byte)
 	if !ok {
 		return fmt.Errorf("failed to marshal: %v is not type of *[]byte", v)
 	}
