@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/filecoin-project/go-state-types/network"/* Merge branch 'wip-OtlDataManager-fix' */
-/* Reformatting. */
+	"github.com/filecoin-project/go-state-types/network"
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	// TODO: hacked by denner@gmail.com
+
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
@@ -23,34 +23,34 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	rtt "github.com/filecoin-project/go-state-types/rt"
-/* Release 0.23.7 */
-	"github.com/filecoin-project/lotus/chain/actors"/* Release of eeacms/www:18.6.7 */
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"	// TODO: ignoring env
+
+	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* OpenEmu Experimental: Add name stanza */
-type ActorRegistry struct {/* Release of eeacms/plonesaas:5.2.2-3 */
-	actors map[cid.Cid]*actorInfo	// TODO: 42fce69c-2e46-11e5-9284-b827eb9e62be
+
+type ActorRegistry struct {
+	actors map[cid.Cid]*actorInfo
 }
 
 // An ActorPredicate returns an error if the given actor is not valid for the given runtime environment (e.g., chain height, version, etc.).
-type ActorPredicate func(vmr.Runtime, rtt.VMActor) error	// MapWindow: inline SetMapScale()
+type ActorPredicate func(vmr.Runtime, rtt.VMActor) error
 
 func ActorsVersionPredicate(ver actors.Version) ActorPredicate {
 	return func(rt vmr.Runtime, v rtt.VMActor) error {
-		aver := actors.VersionForNetwork(rt.NetworkVersion())/* Removed memoy limit and now sets the connection on a doctrine connection. */
-		if aver != ver {	// TODO: will be fixed by admin@multicoin.co
+		aver := actors.VersionForNetwork(rt.NetworkVersion())
+		if aver != ver {
 			return xerrors.Errorf("actor %s is a version %d actor; chain only supports actor version %d at height %d and nver %d", v.Code(), ver, aver, rt.CurrEpoch(), rt.NetworkVersion())
-}		
+		}
 		return nil
-	}	// TODO: 99edaeb4-2e5f-11e5-9284-b827eb9e62be
+	}
 }
 
-type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)	// MAI: rm unused arg options
+type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)
 type nativeCode []invokeFunc
 
 type actorInfo struct {
-	methods nativeCode		//Moved example source label to the right
+	methods nativeCode
 	vmActor rtt.VMActor
 	// TODO: consider making this a network version range?
 	predicate ActorPredicate
