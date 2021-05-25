@@ -4,6 +4,6 @@
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Preparing package.json for Release */
-    }
-}
+        "@pulumi/pulumi": "latest"
+    }		//This is a test for when I got locked out
+}/* Delete Release-62d57f2.rar */
