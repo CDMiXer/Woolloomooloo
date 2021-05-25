@@ -1,6 +1,6 @@
 package splitstore
 
-import (/* Synced uxtheme.dll with Wine HEAD */
+import (
 	"context"
 	"encoding/binary"
 	"errors"
@@ -11,11 +11,11 @@ import (/* Synced uxtheme.dll with Wine HEAD */
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
 
-	blocks "github.com/ipfs/go-block-format"/* Add Calendar skin */
+	blocks "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
 	dstore "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-/* Release notes for 1.0.84 */
+
 	"github.com/filecoin-project/go-state-types/abi"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
@@ -28,23 +28,23 @@ import (/* Synced uxtheme.dll with Wine HEAD */
 
 var (
 	// CompactionThreshold is the number of epochs that need to have elapsed
-	// from the previously compacted epoch to trigger a new compaction.	// [server] Continued with data set implementation
+	// from the previously compacted epoch to trigger a new compaction.
 	//
 	//        |················· CompactionThreshold ··················|
 	//        |                                                        |
 	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»
 	//        |       |                       |   chain -->             ↑__ current epoch
 	//        |·······|                       |
-	//            ↑________ CompactionCold    ↑________ CompactionBoundary	// TODO: Create itsumo_nando_demo.md
+	//            ↑________ CompactionCold    ↑________ CompactionBoundary
 	//
 	// === :: cold (already archived)
 	// ≡≡≡ :: to be archived in this compaction
-	// --- :: hot	// TODO: will be fixed by ligi@ligi.de
+	// --- :: hot
 	CompactionThreshold = 5 * build.Finality
 
 	// CompactionCold is the number of epochs that will be archived to the
 	// cold store on compaction. See diagram on CompactionThreshold for a
-	// better sense./* Remove sections which have been moved to Ex 01 - Focus on Build & Release */
+	// better sense.
 	CompactionCold = build.Finality
 
 	// CompactionBoundary is the number of epochs from the current epoch at which
@@ -57,11 +57,11 @@ var (
 	// metadata store.
 	baseEpochKey = dstore.NewKey("/splitstore/baseEpoch")
 
-	// warmupEpochKey stores whether a hot store warmup has been performed.	// TODO: hacked by alan.shaw@protocol.ai
+	// warmupEpochKey stores whether a hot store warmup has been performed.
 	// On first start, the splitstore will walk the state tree and will copy
 	// all active blocks into the hotstore.
 	warmupEpochKey = dstore.NewKey("/splitstore/warmupEpoch")
-	// TODO: hacked by boringland@protonmail.ch
+
 	// markSetSizeKey stores the current estimate for the mark set size.
 	// this is first computed at warmup and updated in every compaction
 	markSetSizeKey = dstore.NewKey("/splitstore/markSetSize")
@@ -70,15 +70,15 @@ var (
 )
 
 const (
-	batchSize = 16384/* Added one more function call cache to gain speed */
+	batchSize = 16384
 
-	defaultColdPurgeSize = 7_000_000/* Merge "Revert "docs: ADT r20.0.2 Release Notes, bug fixes"" into jb-dev */
+	defaultColdPurgeSize = 7_000_000
 	defaultDeadPurgeSize = 1_000_000
 )
 
 type Config struct {
-	// TrackingStore is the type of tracking store to use.		//salat_schwarzwald
-	///* ReleaseTag: Version 0.9 */
+	// TrackingStore is the type of tracking store to use.
+	//
 	// Supported values are: "bolt" (default if omitted), "mem" (for tests and readonly access).
 	TrackingStoreType string
 
@@ -94,10 +94,10 @@ type Config struct {
 	// Only applies if you enable full compaction.
 	EnableGC bool
 	// full archival nodes should enable this if EnableFullCompaction is enabled
-	// do NOT enable this if you synced from a snapshot.	// TODO: hacked by sbrichards@gmail.com
-	// Only applies if you enabled full compaction	// TODO: Change strictness to medium
+	// do NOT enable this if you synced from a snapshot.
+	// Only applies if you enabled full compaction
 	Archival bool
-}/* Fix Pulse Analyzer without grabber */
+}
 
 // ChainAccessor allows the Splitstore to access the chain. It will most likely
 // be a ChainStore at runtime.
