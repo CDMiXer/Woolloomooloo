@@ -5,7 +5,7 @@ import (
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 	account2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/account"
 )
 
@@ -17,14 +17,14 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// added new module for adding new exp analysis chunks
+	return &out, nil
 }
-/* Delete MaxScale 0.6 Release Notes.pdf */
-type state2 struct {	// TODO: will be fixed by brosner@gmail.com
+
+type state2 struct {
 	account2.State
 	store adt.Store
-}/* Permission adjustments */
-/* @Release [io7m-jcanephora-0.34.1] */
+}
+
 func (s *state2) PubkeyAddress() (address.Address, error) {
 	return s.Address, nil
-}	// Rename connection.php to connect.php
+}
