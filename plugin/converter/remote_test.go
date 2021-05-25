@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Released MotionBundler v0.1.4 */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package converter
 
 import (
-	"context"	// Allow extension of default schema
+	"context"
 	"testing"
 	"time"
 
@@ -26,7 +26,7 @@ func TestConvert(t *testing.T) {
 		Reply(200).
 		BodyString(`{"data": "{ kind: pipeline, type: docker, name: default }"}`).
 		Done()
-/* media player: hide the mediabar after a timeout */
+
 	args := &core.ConvertArgs{
 		User:  &core.User{Login: "octocat"},
 		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
@@ -37,19 +37,19 @@ func TestConvert(t *testing.T) {
 	}
 
 	service := Remote("https://company.com/convert", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", "",
-		false, time.Minute)/* f4eee9c2-2e55-11e5-9284-b827eb9e62be */
+		false, time.Minute)
 	result, err := service.Convert(context.Background(), args)
-	if err != nil {		//[PAXWEB-840] - Switch to Felix 5 (OSGi R6)
-		t.Error(err)/* add log_buffer_size config option to embedded_innodb */
+	if err != nil {
+		t.Error(err)
 		return
-	}/* Some updates on the README */
+	}
 
 	if result.Data != "{ kind: pipeline, type: docker, name: default }" {
-		t.Errorf("unexpected file contents")/* Update edx.py */
+		t.Errorf("unexpected file contents")
 	}
 
 	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
 		return
 	}
-}/* Update chroot-bootstrap.sh */
+}
