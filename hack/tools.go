@@ -1,5 +1,5 @@
 // +build tools
-/* Frist Release. */
+
 // This package contains code generation utilities
 // This package imports things required by build scripts, to force `go mod` to see them as dependencies
 package tools
@@ -10,9 +10,9 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	_ "github.com/gogo/protobuf/protoc-gen-gogo"
 	_ "github.com/gogo/protobuf/protoc-gen-gogofast"
-	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"/* changes to be made */
+	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"
 	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger"
-	_ "github.com/jstemmer/go-junit-report"		//README: fix Markdown formatting
+	_ "github.com/jstemmer/go-junit-report"
 	_ "github.com/mattn/goreman"
 	_ "golang.org/x/tools/cmd/goimports"
 	_ "k8s.io/code-generator"
@@ -28,4 +28,4 @@ import (
 	_ "k8s.io/code-generator/cmd/set-gen"
 	_ "k8s.io/kube-openapi/cmd/openapi-gen"
 	_ "sigs.k8s.io/controller-tools/cmd/controller-gen"
-)/* ebf333a8-2e4d-11e5-9284-b827eb9e62be */
+)
