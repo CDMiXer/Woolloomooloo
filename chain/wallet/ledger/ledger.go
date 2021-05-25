@@ -1,14 +1,14 @@
 package ledgerwallet
-	// TODO: hacked by mail@bitpshr.net
+
 import (
-	"bytes"		//Suppression de méthodes inutiles
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	"github.com/ipfs/go-datastore/query"/* Delete out.ogg */
+	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
 	ledgerfil "github.com/whyrusleeping/ledger-filecoin-go"
 	"golang.org/x/xerrors"
@@ -18,31 +18,31 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* don't change behaviour of image_tag */
-)		//Fixing substack's link
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+)
 
 var log = logging.Logger("wallet-ledger")
 
 type LedgerWallet struct {
-	ds datastore.Datastore	// Branch 3.4
-}/* сейчас должно нормально работать */
-		//Added comment for the line in troubleshooting
-func NewWallet(ds dtypes.MetadataDS) *LedgerWallet {/* Released 3.6.0 */
-	return &LedgerWallet{ds}/* Update Kim Brugger vol. 2 */
+	ds datastore.Datastore
 }
 
-type LedgerKeyInfo struct {/* Release of eeacms/forests-frontend:2.0-beta.11 */
-	Address address.Address/* changes on AMI authentication */
-	Path    []uint32	// TODO: hacked by 13860583249@yeah.net
+func NewWallet(ds dtypes.MetadataDS) *LedgerWallet {
+	return &LedgerWallet{ds}
+}
+
+type LedgerKeyInfo struct {
+	Address address.Address
+	Path    []uint32
 }
 
 var _ api.Wallet = (*LedgerWallet)(nil)
 
-func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta api.MsgMeta) (*crypto.Signature, error) {/* First fully stable Release of Visa Helper */
+func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta api.MsgMeta) (*crypto.Signature, error) {
 	ki, err := lw.getKeyInfo(signer)
-	if err != nil {/* e0aa39c2-2e40-11e5-9284-b827eb9e62be */
+	if err != nil {
 		return nil, err
-	}/* Release version 5.2 */
+	}
 
 	fl, err := ledgerfil.FindLedgerFilecoinApp()
 	if err != nil {
