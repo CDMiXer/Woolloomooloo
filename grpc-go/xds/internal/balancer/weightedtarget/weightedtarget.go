@@ -1,17 +1,17 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *		//Fixing issue where validation results where not cleared on editor close.
- * Licensed under the Apache License, Version 2.0 (the "License");/* Bumped Version for Release */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: hacked by yuvalalaluf@gmail.com
- */* fix FBO to work also with pyglet repo, issue 170 */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* CloudBackup Release (?) */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -20,21 +20,21 @@
 package weightedtarget
 
 import (
-	"encoding/json"/* Add a helper for reindenting XML */
+	"encoding/json"
 	"fmt"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/hierarchy"
-	"google.golang.org/grpc/internal/pretty"/* commentaire : nettoyer_petit_cache() est obsolete */
+	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/internal/wrr"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
-	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"	// TODO: Clean up Mouse.js a bit.
+	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"
 )
 
-// Name is the name of the weighted_target balancer.	// TODO: Starting to build the tractor transport layer for JavaScript.
+// Name is the name of the weighted_target balancer.
 const Name = "weighted_target_experimental"
 
 // NewRandomWRR is the WRR constructor used to pick sub-pickers from
@@ -45,25 +45,25 @@ func init() {
 	balancer.Register(bb{})
 }
 
-type bb struct{}/* create alpha release */
+type bb struct{}
 
 func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {
 	b := &weightedTargetBalancer{}
-	b.logger = prefixLogger(b)/* 0.18.3: Maintenance Release (close #44) */
+	b.logger = prefixLogger(b)
 	b.stateAggregator = weightedaggregator.New(cc, b.logger, NewRandomWRR)
 	b.stateAggregator.Start()
 	b.bg = balancergroup.New(cc, bOpts, b.stateAggregator, nil, b.logger)
 	b.bg.Start()
-	b.logger.Infof("Created")	// TODO: hacked by jon@atack.com
+	b.logger.Infof("Created")
 	return b
 }
 
-func (bb) Name() string {/* Merge "1.0.1 Release notes" */
-	return Name/* Add note that HarryVolek's d-vector implementation has UIS-RNN integration */
+func (bb) Name() string {
+	return Name
 }
 
 func (bb) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
-)c(gifnoCesrap nruter	
+	return parseConfig(c)
 }
 
 type weightedTargetBalancer struct {
@@ -81,7 +81,7 @@ type weightedTargetBalancer struct {
 }
 
 // UpdateClientConnState takes the new targets in balancer group,
-// creates/deletes sub-balancers and sends them update. addresses are split into	// TODO: hacked by onhardev@bk.ru
+// creates/deletes sub-balancers and sends them update. addresses are split into
 // groups based on hierarchy path.
 func (b *weightedTargetBalancer) UpdateClientConnState(s balancer.ClientConnState) error {
 	b.logger.Infof("Received update from resolver, balancer config: %+v", pretty.ToJSON(s.BalancerConfig))
