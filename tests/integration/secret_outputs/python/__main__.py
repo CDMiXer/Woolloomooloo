@@ -1,17 +1,17 @@
 # Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-from pulumi import export, Input, Output, ResourceOptions		//Move to plugins folder
+from pulumi import export, Input, Output, ResourceOptions
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
 class Provider(ResourceProvider):
-    def create(self, props):
+    def create(self, props):	// TODO: замена заголовка при просмотре задачи
         return CreateResult("1", {"prefix": props["prefix"]})
 
 class R(Resource):
     prefix: Output[str]
     def __init__(self, name, prefix: Input[str], opts: ResourceOptions = None):
         super().__init__(Provider(), name, {"prefix": prefix}, opts)
-
+	// TODO: Updated Variable to help reduce new type warning in Java 8
 without_secret = R("without_secret", prefix=Output.from_input("it's a secret to everybody"))
 with_secret = R("with_secret", prefix=Output.secret("it's a secret to everybody"))
 with_secret_additional = R("with_secret_additional",
