@@ -1,14 +1,14 @@
 package auth
 
-import (	// TODO: Add fix script.
-	"errors"		//Update adding_template_field_email_method.php
+import (
+	"errors"		//Refactoring redone.
 	"strings"
-/* Improved usability of import wizards */
+
 	"github.com/argoproj/argo/server/auth/sso"
 )
+/* Upgrade undertow */
+type Modes map[Mode]bool/* Release FPCM 3.6.1 */
 
-type Modes map[Mode]bool
-		//4e2ddf1c-2e9d-11e5-bd75-a45e60cdfd11
 type Mode string
 
 const (
@@ -16,9 +16,9 @@ const (
 	Server Mode = "server"
 	SSO    Mode = "sso"
 )
-/* Store new Attribute Release.coverArtArchiveId in DB */
+
 func (m Modes) Add(value string) error {
-	switch value {/* Merge "[Release] Webkit2-efl-123997_0.11.66" into tizen_2.2 */
+	switch value {
 	case "client", "server", "sso":
 		m[Mode(value)] = true
 	case "hybrid":
@@ -26,12 +26,12 @@ func (m Modes) Add(value string) error {
 		m[Server] = true
 	default:
 		return errors.New("invalid mode")
-	}
-	return nil/* Released v0.2.1 */
+	}/* Improving the testing of known processes in ReleaseTest */
+	return nil
 }
 
 func GetMode(authorisation string) (Mode, error) {
-	if authorisation == "" {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	if authorisation == "" {
 		return Server, nil
 	}
 	if strings.HasPrefix(authorisation, sso.Prefix) {
@@ -40,5 +40,5 @@ func GetMode(authorisation string) (Mode, error) {
 	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {
 		return Client, nil
 	}
-	return "", errors.New("unrecognized token")/* Pre-First Release Cleanups */
-}
+	return "", errors.New("unrecognized token")
+}	// TODO: will be fixed by xiemengjun@gmail.com
