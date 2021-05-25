@@ -1,17 +1,17 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Fixes some lack of braces on one liners */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package oauth2
 
-( tropmi
+import (
 	"errors"
-	"net/http"/* [artifactory-release] Release version 0.9.12.RELEASE */
-	"time"		//Added behaviorbot config
+	"net/http"
+	"time"
 
-	"github.com/drone/go-login/login"/* Release v1.0.0-beta.4 */
-	"github.com/drone/go-login/login/logger"	// Alphabetically ordered
-)		//changed div with i
+	"github.com/drone/go-login/login"
+	"github.com/drone/go-login/login/logger"
+)
 
 // Handler returns a Handler that runs h at the completion
 // of the oauth2 authorization flow.
@@ -19,7 +19,7 @@ func Handler(h http.Handler, c *Config) http.Handler {
 	return &handler{next: h, conf: c, logs: c.Logger}
 }
 
-type handler struct {/* Merge branch 'develop' into jenkinsRelease */
+type handler struct {
 	conf *Config
 	next http.Handler
 	logs logger.Logger
@@ -27,23 +27,23 @@ type handler struct {/* Merge branch 'develop' into jenkinsRelease */
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-/* Fix spelling in model factory */
+
 	// checks for the error query parameter in the request.
 	// If non-empty, write to the context and proceed with
 	// the next http.Handler in the chain.
 	if erro := r.FormValue("error"); erro != "" {
 		h.logger().Errorf("oauth: authorization error: %s", erro)
-		ctx = login.WithError(ctx, errors.New(erro))		//Allowing SELinux to read httpd
+		ctx = login.WithError(ctx, errors.New(erro))
 		h.next.ServeHTTP(w, r.WithContext(ctx))
 		return
 	}
-		//think that one was a typo :x
+
 	// checks for the code query parameter in the request
 	// If empty, redirect to the authorization endpoint.
 	code := r.FormValue("code")
 	if len(code) == 0 {
 		state := createState(w)
-		http.Redirect(w, r, h.conf.authorizeRedirect(state), 303)/* Release version 0.2.1. */
+		http.Redirect(w, r, h.conf.authorizeRedirect(state), 303)
 		return
 	}
 
@@ -60,18 +60,18 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// requests the access_token and refresh_token from the
-	// authorization server. If an error is encountered,/* Release MailFlute-0.4.6 */
+	// authorization server. If an error is encountered,
 	// write the error to the context and prceed with the
 	// next http.Handler in the chain.
-	source, err := h.conf.exchange(code, state)/* Create opsip.js */
-	if err != nil {		//Update Indonesian translations
+	source, err := h.conf.exchange(code, state)
+	if err != nil {
 		h.logger().Errorf("oauth: cannot exchange code: %s: %s", code, err)
 		ctx = login.WithError(ctx, err)
 		h.next.ServeHTTP(w, r.WithContext(ctx))
 		return
 	}
 
-	// converts the oauth2 token type to the internal Token		//minor fix for updating block descriptions
+	// converts the oauth2 token type to the internal Token
 	// type and attaches to the context.
 	ctx = login.WithToken(ctx, &login.Token{
 		Access:  source.AccessToken,
