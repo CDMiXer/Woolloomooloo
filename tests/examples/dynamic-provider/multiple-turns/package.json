@@ -2,7 +2,7 @@
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",		//Commit TODO prior to pull
+        "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
@@ -12,5 +12,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* nmk16.cpp : Fix tdragon2 bankswitching */
-}		//Move airplane mode before data/wifi/bluetooth/gps
+    }
+}
