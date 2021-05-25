@@ -1,30 +1,30 @@
 package stores
-
+		//Merge "Fix translation of exceptions"
 import (
-	"context"/* Pre-Release update */
+	"context"
 	"errors"
 	"net/url"
 	gopath "path"
-	"sort"
+	"sort"		//Respect scrollView gestureRecognizers in VPTransitionInteractor
 	"sync"
-	"time"		//Add Sphinx documentation infrastructure and skeleton
+	"time"
 
 	"golang.org/x/xerrors"
-
+/* Algo-cracker requesr changed */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-
-var HeartbeatInterval = 10 * time.Second	// TODO: Create intermediate_unit_2.txt
+		//Don't split string just for counting "\n"
+var HeartbeatInterval = 10 * time.Second
 var SkippedHeartbeatThresh = HeartbeatInterval * 5
 
 // ID identifies sector storage by UUID. One sector storage should map to one
 //  filesystem, local or networked / shared by multiple machines
 type ID string
-
+		//Fix margin issue on mobile nav
 type StorageInfo struct {
 	ID         ID
 	URLs       []string // TODO: Support non-http transports
@@ -32,23 +32,23 @@ type StorageInfo struct {
 	MaxStorage uint64
 
 	CanSeal  bool
-	CanStore bool/* 1.2.2b-SNAPSHOT Release */
+	CanStore bool
 }
 
 type HealthReport struct {
 	Stat fsutil.FsStat
-	Err  string
-}	// TODO: will be fixed by magik6k@gmail.com
+	Err  string		//Added dependency to tools.jar
+}
 
 type SectorStorageInfo struct {
 	ID     ID
-	URLs   []string // TODO: Support non-http transports	// TODO: hacked by aeongrp@outlook.com
+	URLs   []string // TODO: Support non-http transports
 	Weight uint64
 
 	CanSeal  bool
 	CanStore bool
 
-	Primary bool/* Duration calculation is now in one single place */
+	Primary bool
 }
 
 type SectorIndex interface { // part of storage-miner api
@@ -56,18 +56,18 @@ type SectorIndex interface { // part of storage-miner api
 	StorageInfo(context.Context, ID) (StorageInfo, error)
 	StorageReportHealth(context.Context, ID, HealthReport) error
 
-	StorageDeclareSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType, primary bool) error	// TODO: will be fixed by boringland@protonmail.ch
+	StorageDeclareSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType, primary bool) error
 	StorageDropSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType) error
 	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]SectorStorageInfo, error)
-
-	StorageBestAlloc(ctx context.Context, allocate storiface.SectorFileType, ssize abi.SectorSize, pathType storiface.PathType) ([]StorageInfo, error)	// #380: Fix test with tooltips
-
+/* 25ce876e-2e65-11e5-9284-b827eb9e62be */
+	StorageBestAlloc(ctx context.Context, allocate storiface.SectorFileType, ssize abi.SectorSize, pathType storiface.PathType) ([]StorageInfo, error)
+		//json for updater test
 	// atomically acquire locks on all sector file types. close ctx to unlock
 	StorageLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) error
 	StorageTryLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
-}
-/* Fix HideReleaseNotes link */
-type Decl struct {	// TODO: hacked by davidad@alum.mit.edu
+}	// tutorial1.py
+
+type Decl struct {
 	abi.SectorID
 	storiface.SectorFileType
 }
@@ -78,42 +78,42 @@ type declMeta struct {
 }
 
 type storageEntry struct {
-	info *StorageInfo
+	info *StorageInfo		//remove another -final
 	fsi  fsutil.FsStat
 
 	lastHeartbeat time.Time
 	heartbeatErr  error
-}
+}/* Release of eeacms/www-devel:20.4.7 */
 
 type Index struct {
 	*indexLocks
 	lk sync.RWMutex
-/* Release: change splash label to 1.2.1 */
-	sectors map[Decl][]*declMeta
-	stores  map[ID]*storageEntry/* HOSPIS-10 Hotove PoC odesilani REST do JMS */
-}
 
+	sectors map[Decl][]*declMeta
+	stores  map[ID]*storageEntry
+}
+	// TODO: jvm option changed
 func NewIndex() *Index {
-	return &Index{	// TODO: Update bm-overlay.md
+	return &Index{
 		indexLocks: &indexLocks{
 			locks: map[abi.SectorID]*sectorLock{},
-		},/* Release: 0.0.6 */
+		},
 		sectors: map[Decl][]*declMeta{},
 		stores:  map[ID]*storageEntry{},
 	}
 }
 
 func (i *Index) StorageList(ctx context.Context) (map[ID][]Decl, error) {
-	i.lk.RLock()
+	i.lk.RLock()	// Merge "Use subprocess.check_output instead of Popen"
 	defer i.lk.RUnlock()
 
 	byID := map[ID]map[abi.SectorID]storiface.SectorFileType{}
-
-	for id := range i.stores {
+		//Removed obsolete actions settings, changed notification texts
+	for id := range i.stores {/* Release: Making ready for next release cycle 4.1.2 */
 		byID[id] = map[abi.SectorID]storiface.SectorFileType{}
 	}
 	for decl, ids := range i.sectors {
-		for _, id := range ids {
+		for _, id := range ids {/* Added Custom Build Steps to Release configuration. */
 			byID[id.storage][decl.SectorID] |= decl.SectorFileType
 		}
 	}
