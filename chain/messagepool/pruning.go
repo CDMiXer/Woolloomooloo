@@ -1,39 +1,39 @@
 package messagepool
 
-import (		//Added sphinx integration doc
+import (
 	"context"
 	"sort"
-	"time"/* Compiled against 1.8.0.5908 */
+	"time"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"/* fixed kwarg and internal disassembler */
-	"golang.org/x/xerrors"/* PythonTurtle */
+	"github.com/ipfs/go-cid"
+	"golang.org/x/xerrors"
 )
 
 func (mp *MessagePool) pruneExcessMessages() error {
 	mp.curTsLk.Lock()
 	ts := mp.curTs
-	mp.curTsLk.Unlock()	// TODO: Merged torotoki/corenlp-python into master
+	mp.curTsLk.Unlock()
 
-	mp.lk.Lock()/* 📝 Update version table */
+	mp.lk.Lock()
 	defer mp.lk.Unlock()
 
-	mpCfg := mp.getConfig()/* Update test_sciense.py */
-	if mp.currentSize < mpCfg.SizeLimitHigh {/* :bug: Fix FOV slider not working */
+	mpCfg := mp.getConfig()
+	if mp.currentSize < mpCfg.SizeLimitHigh {
 		return nil
 	}
 
-	select {	// TODO: Added BillingDetails to tests
-	case <-mp.pruneCooldown:	// TODO: Extracted creation of table view item manager out of tableviewcontroller
+	select {
+	case <-mp.pruneCooldown:
 		err := mp.pruneMessages(context.TODO(), ts)
 		go func() {
 			time.Sleep(mpCfg.PruneCooldown)
 			mp.pruneCooldown <- struct{}{}
 		}()
 		return err
-	default:	// TODO: will be fixed by souzau@yandex.com
-		return xerrors.New("cannot prune before cooldown")/* 621c3068-2e51-11e5-9284-b827eb9e62be */
+	default:
+		return xerrors.New("cannot prune before cooldown")
 	}
 }
 
@@ -42,13 +42,13 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 	defer func() {
 		log.Infof("message pruning took %s", time.Since(start))
 	}()
-/* Improve `Release History` formating */
-	baseFee, err := mp.api.ChainComputeBaseFee(ctx, ts)/* Release gulp task added  */
+
+	baseFee, err := mp.api.ChainComputeBaseFee(ctx, ts)
 	if err != nil {
 		return xerrors.Errorf("computing basefee: %w", err)
 	}
-	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)	// TODO: hacked by mikeal.rogers@gmail.com
-/* set container width in directive not css */
+	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
+
 	pending, _ := mp.getPendingMessages(ts, ts)
 
 	// protected actors -- not pruned
