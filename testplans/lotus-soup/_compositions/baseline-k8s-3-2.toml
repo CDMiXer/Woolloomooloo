@@ -1,59 +1,59 @@
-]atadatem[
+[metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""		// Use getopts for nodejs helper
 
-[global]/* Merge "Release 3.2.3.486 Prima WLAN Driver" */
-  plan = "lotus-soup"/* Release version [10.6.4] - alfter build */
+[global]/* Bump oop_rails_server to 0.0.22. */
+  plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6
+  total_instances = 6/* Release: 5.4.3 changelog */
   builder = "docker:go"
   runner = "cluster:k8s"
-
+	// TODO: hacked by alan.shaw@protocol.ai
 [global.build]
-  selectors = ["testground"]/* Release Notes for v01-00-03 */
-/* Adding x & y to response */
-[global.run_config]
+  selectors = ["testground"]
+/* Merge "mysql: expose IPv6 configuration to mysql puppet modules" */
+[global.run_config]/* examples:  tcp_serial_redirect.py optimize socket options in server mode */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]	// CHANGE: quartz cron jobs no longer have a startAt delay
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* [IMP] website: create generic kanban view */
-  registry_type="aws"		//Create kivy_android_carousel.py
+  go_proxy_url="http://localhost:8081"
+  registry_type="aws"
 
-[global.run.test_params]	// TODO: dynamic and static tests
+[global.run.test_params]/* Merge "[INTERNAL]GroupView: announce 'Filter Group' in addition" */
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "4"
-  random_beacon_type = "mock"		//update xml loading to function with flat files as well as from classpath
-  mining_mode = "natural"		//6a5e3eac-2e55-11e5-9284-b827eb9e62be
-/* Merge "Enable cold migration with target host(2/2)" */
-[[groups]]	// Error de sintaxis nuevamente
-  id = "bootstrapper"		//Fix parseDocuments type in README
+  random_beacon_type = "mock"
+  mining_mode = "natural"
+
+[[groups]]
+  id = "bootstrapper"
   [groups.resources]
-    memory = "512Mi"/* Release dhcpcd-6.8.0 */
+    memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1/* Merge "rest: Always return complete exceptions." */
+    count = 1	// Clarify rm() code to rm rmed files from index and disk
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]/* Updated models (markdown) */
+[[groups]]
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 2
-    percentage = 0.0
-  [groups.run]
+    count = 2		//add two simple script to generate climatology
+    percentage = 0.0	// TODO: Added new bling for new analyses
+  [groups.run]/* Silence I18n deprecation notice */
     [groups.run.test_params]
       role = "miner"
-
+	// TODO: Update switchstatement.go
 [[groups]]
   id = "clients"
   [groups.resources]
@@ -64,4 +64,4 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"	// TODO: hacked by greg@colvin.org
