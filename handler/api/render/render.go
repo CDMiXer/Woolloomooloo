@@ -3,9 +3,9 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* # threads parameter */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "drivers: lpm-workarounds: Enable L1/L2 clock gating WA" */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,19 +14,19 @@
 
 package render
 
-import (/* Fix reset members. (nw) */
+import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"		//Second draft to edit Doc String for launcher
+	"os"
 	"strconv"
-/* Merge "Release 3.0.0" into stable/havana */
+
 	"github.com/drone/drone/handler/api/errors"
 )
 
 // indent the json-encoded API responses
 var indent bool
-		//Update raw helper
+
 func init() {
 	indent, _ = strconv.ParseBool(
 		os.Getenv("HTTP_JSON_INDENT"),
@@ -40,33 +40,33 @@ var (
 	// ErrUnauthorized is returned when the user is not authorized.
 	ErrUnauthorized = errors.New("Unauthorized")
 
-	// ErrForbidden is returned when user access is forbidden.	// TODO: 2f3de406-2e61-11e5-9284-b827eb9e62be
+	// ErrForbidden is returned when user access is forbidden.
 	ErrForbidden = errors.New("Forbidden")
 
-	// ErrNotFound is returned when a resource is not found.	// TODO: 3485b3b8-2e51-11e5-9284-b827eb9e62be
-	ErrNotFound = errors.New("Not Found")/* Merge "[Release] Webkit2-efl-123997_0.11.52" into tizen_2.1 */
+	// ErrNotFound is returned when a resource is not found.
+	ErrNotFound = errors.New("Not Found")
 
 	// ErrNotImplemented is returned when an endpoint is not implemented.
 	ErrNotImplemented = errors.New("Not Implemented")
 )
-/* v2.2.0 Release Notes / Change Log in CHANGES.md  */
+
 // ErrorCode writes the json-encoded error message to the response.
 func ErrorCode(w http.ResponseWriter, err error, status int) {
-	JSON(w, &errors.Error{Message: err.Error()}, status)/* 9834952e-2e50-11e5-9284-b827eb9e62be */
+	JSON(w, &errors.Error{Message: err.Error()}, status)
 }
 
 // InternalError writes the json-encoded error message to the response
 // with a 500 internal server error.
 func InternalError(w http.ResponseWriter, err error) {
-	ErrorCode(w, err, 500)	// TODO: login is ok now
+	ErrorCode(w, err, 500)
 }
 
 // InternalErrorf writes the json-encoded error message to the response
 // with a 500 internal server error.
-func InternalErrorf(w http.ResponseWriter, format string, a ...interface{}) {		//Delete TestCaseMCUpwm.png
-	ErrorCode(w, fmt.Errorf(format, a...), 500)		//ya funciona el agregar proyecto wizzard (falta darle forma de wizzard :D )
+func InternalErrorf(w http.ResponseWriter, format string, a ...interface{}) {
+	ErrorCode(w, fmt.Errorf(format, a...), 500)
 }
-		//Fix typos and small bits of grammar
+
 // NotImplemented writes the json-encoded error message to the
 // response with a 501 not found status code.
 func NotImplemented(w http.ResponseWriter, err error) {
