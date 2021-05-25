@@ -1,5 +1,5 @@
-/.pulumi/
+/.pulumi//* added bcel.jar */
 [Bb]in/
 [Oo]bj/
-
+/* Release v4 */
 
