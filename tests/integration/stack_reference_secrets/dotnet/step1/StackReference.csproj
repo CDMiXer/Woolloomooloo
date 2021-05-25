@@ -3,10 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* Release of eeacms/plonesaas:5.2.4-13 */
-
-  <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
-	// TODO: will be fixed by why@ipfs.io
-</Project>/* POM Maven Release Plugin changes */
+	// fb641516-2e5a-11e5-9284-b827eb9e62be
+  <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>/* Add bucketed trades and improve code safety */
+  </PropertyGroup>
+
+</Project>/* fix attributes for newer module */
