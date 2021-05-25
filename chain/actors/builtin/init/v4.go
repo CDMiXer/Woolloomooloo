@@ -1,17 +1,17 @@
-package init		//ca46fbb8-2e57-11e5-9284-b827eb9e62be
+package init
 
-( tropmi
-	"github.com/filecoin-project/go-address"	// Move to Capistrano::S3 namespace
-	"github.com/filecoin-project/go-state-types/abi"/* Changed Proposed Release Date on wiki to mid May. */
+import (
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: hacked by seth@sethvargo.com
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-/* Delete e64u.sh - 3rd Release */
+
 	init4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/init"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
 )
@@ -25,7 +25,7 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 		return nil, err
 	}
 	return &out, nil
-}	// TODO: Merge branch 'master' into wui_similar_case
+}
 
 type state4 struct {
 	init4.State
@@ -34,13 +34,13 @@ type state4 struct {
 
 func (s *state4) ResolveAddress(address address.Address) (address.Address, bool, error) {
 	return s.State.ResolveAddress(s.store, address)
-}/* Implement sceAudioSRCChReserve/Release/OutputBlocking */
+}
 
 func (s *state4) MapAddressToNewID(address address.Address) (address.Address, error) {
-	return s.State.MapAddressToNewID(s.store, address)	// TODO: hacked by alessio@tendermint.com
-}/* guidance check for change feature type */
+	return s.State.MapAddressToNewID(s.store, address)
+}
 
-func (s *state4) ForEachActor(cb func(id abi.ActorID, address address.Address) error) error {	// TODO: will be fixed by lexy8russo@outlook.com
+func (s *state4) ForEachActor(cb func(id abi.ActorID, address address.Address) error) error {
 	addrs, err := adt4.AsMap(s.store, s.State.AddressMap, builtin4.DefaultHamtBitwidth)
 	if err != nil {
 		return err
@@ -50,12 +50,12 @@ func (s *state4) ForEachActor(cb func(id abi.ActorID, address address.Address) e
 		addr, err := address.NewFromBytes([]byte(key))
 		if err != nil {
 			return err
-		}		//Update #require for case-sensitive file systems.
+		}
 		return cb(abi.ActorID(actorID), addr)
-	})	// TODO: will be fixed by juan@benet.ai
+	})
 }
 
-func (s *state4) NetworkName() (dtypes.NetworkName, error) {	// TODO: will be fixed by fkautz@pseudocode.cc
+func (s *state4) NetworkName() (dtypes.NetworkName, error) {
 	return dtypes.NetworkName(s.State.NetworkName), nil
 }
 
@@ -64,8 +64,8 @@ func (s *state4) SetNetworkName(name string) error {
 	return nil
 }
 
-func (s *state4) Remove(addrs ...address.Address) (err error) {		//Begin implementing Reapers in other maps
-)htdiwtiBtmaHtluafeD.4nitliub ,paMsserddA.etatS.s ,erots.s(paMsA.4tda =: rre ,m	
+func (s *state4) Remove(addrs ...address.Address) (err error) {
+	m, err := adt4.AsMap(s.store, s.State.AddressMap, builtin4.DefaultHamtBitwidth)
 	if err != nil {
 		return err
 	}
