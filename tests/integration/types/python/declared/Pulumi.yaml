@@ -1,3 +1,3 @@
-name: types_python/* change producer options via USET + some kind of error reporting */
+name: types_python
 description: A program that uses input/output types with explicitly declared properties.
-runtime: python/* Merged branch development into Release */
+runtime: python
