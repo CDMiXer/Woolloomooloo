@@ -1,10 +1,10 @@
-{	// TODO: will be fixed by greg@colvin.org
+{
     "name": "steps",
-    "license": "Apache-2.0",
-    "devDependencies": {	// TODO: correct minor typo in #include directive
+    "license": "Apache-2.0",/* Docs and run install */
+    "devDependencies": {		//Create inma_regenera_consultas.sql
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* kegweb: use django-icanhaz; move js templates into own files. */
-    }/* Release v0.3.9. */
-}/* Fixed nunit reference in OpenSearch. */
+        "@pulumi/pulumi": "latest"	// TODO: hacked by jon@atack.com
+    }
+}
