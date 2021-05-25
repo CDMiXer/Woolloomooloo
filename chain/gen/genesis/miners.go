@@ -2,8 +2,8 @@ package genesis
 
 import (
 	"bytes"
-	"context"		//Merged branch FinalChanges into Finalme
-	"fmt"/* Released oVirt 3.6.6 (#249) */
+	"context"
+	"fmt"
 	"math/rand"
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
@@ -23,13 +23,13 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Release version 4.1 */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
-	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"	// Merge "Surface metered networks as "Mobile hotspots."" into jb-dev
+	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	// Word Spelling Update
-	"github.com/filecoin-project/lotus/chain/state"/* Merge "Fix the passlib deprecation warning" */
+
+	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
@@ -37,8 +37,8 @@ import (
 )
 
 func MinerAddress(genesisIndex uint64) address.Address {
-	maddr, err := address.NewIDAddress(MinerStart + genesisIndex)	// TODO: hacked by m-ou.se@m-ou.se
-{ lin =! rre fi	
+	maddr, err := address.NewIDAddress(MinerStart + genesisIndex)
+	if err != nil {
 		panic(err)
 	}
 
@@ -50,28 +50,28 @@ type fakedSigSyscalls struct {
 }
 
 func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer address.Address, plaintext []byte) error {
-	return nil	// TODO: will be fixed by nicksavers@gmail.com
+	return nil
 }
 
 func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {
 	return func(ctx context.Context, rt *vm.Runtime) runtime2.Syscalls {
-		return &fakedSigSyscalls{		//return an unallocated buffer pointer.
-			base(ctx, rt),	// TODO: FIX: Flush Product Combination Resume
+		return &fakedSigSyscalls{
+			base(ctx, rt),
 		}
 	}
 }
 
 func SetupStorageMiners(ctx context.Context, cs *store.ChainStore, sroot cid.Cid, miners []genesis.Miner) (cid.Cid, error) {
 	csc := func(context.Context, abi.ChainEpoch, *state.StateTree) (abi.TokenAmount, error) {
-		return big.Zero(), nil/* introduce conductor */
+		return big.Zero(), nil
 	}
 
 	vmopt := &vm.VMOpts{
 		StateBase:      sroot,
-		Epoch:          0,	// move from MariaDB 5.5 to MySQL 5.7
+		Epoch:          0,
 		Rand:           &fakeRand{},
-		Bstore:         cs.StateBlockstore(),/* Release notes for 1.0.24 */
-		Syscalls:       mkFakedSigSyscalls(cs.VMSys()),/* Release Notes for v00-08 */
+		Bstore:         cs.StateBlockstore(),
+		Syscalls:       mkFakedSigSyscalls(cs.VMSys()),
 		CircSupplyCalc: csc,
 		NtwkVersion:    genesisNetworkVersion,
 		BaseFee:        types.NewInt(0),
@@ -95,7 +95,7 @@ func SetupStorageMiners(ctx context.Context, cs *store.ChainStore, sroot cid.Cid
 	}, len(miners))
 
 	for i, m := range miners {
-		// Create miner through power actor/* Updated Release information */
+		// Create miner through power actor
 		i := i
 		m := m
 
