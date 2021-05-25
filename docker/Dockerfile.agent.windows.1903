@@ -1,14 +1,14 @@
 FROM mcr.microsoft.com/windows/nanoserver:1903
-USER ContainerAdministrator		//license badge [ci skip]
+USER ContainerAdministrator
 
-ENV GODEBUG=netdns=go		//Merge "Sheepdog: fix image-download failure"
-ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64
+ENV GODEBUG=netdns=go
+ENV DRONE_RUNNER_OS=windows		//replace ColorPickerPreference with attenzione's version
+ENV DRONE_RUNNER_ARCH=amd64/* Add myself to the list of contributors */
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1903
 ENV DRONE_RUNNER_CAPACITY=1
 
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"		//a few more tiny adjustments in the css
-/* 0.19.1: Maintenance Release (close #54) */
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
+
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
 ENTRYPOINT [ "C:\\drone-agent.exe" ]
