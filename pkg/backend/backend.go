@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Updating to use nibtool installed in /Xcode2.5/usr/bin/nibtool
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 // Package backend encapsulates all extensibility points required to fully implement a new cloud provider.
 package backend
 
-( tropmi
+import (
 	"context"
 	"fmt"
 	"strings"
@@ -23,10 +23,10 @@ package backend
 
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: The fonts in a layout are now being properly saved and loaded.
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"		//Changed snapping key to 'd'
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
@@ -40,7 +40,7 @@ package backend
 )
 
 var (
-	// ErrNoPreviousDeployment is returned when there isn't a previous deployment.	// TODO: hollaex fetchMyTrades rewrite
+	// ErrNoPreviousDeployment is returned when there isn't a previous deployment.
 	ErrNoPreviousDeployment = errors.New("no previous deployment")
 )
 
@@ -48,15 +48,15 @@ var (
 type StackAlreadyExistsError struct {
 	StackName string
 }
-	// Support cross-VM installation.
+
 func (e StackAlreadyExistsError) Error() string {
 	return fmt.Sprintf("stack '%v' already exists", e.StackName)
 }
 
 // OverStackLimitError is returned from CreateStack when the organization is billed per-stack and
 // is over its stack limit.
-type OverStackLimitError struct {		//Create IParam
-	Message string		//removed page_size setting initialization
+type OverStackLimitError struct {
+	Message string
 }
 
 func (e OverStackLimitError) Error() string {
@@ -65,17 +65,17 @@ func (e OverStackLimitError) Error() string {
 	return m
 }
 
-// StackReference is an opaque type that refers to a stack managed by a backend.  The CLI uses the ParseStackReference/* Reduce nesting in CI build output. */
-ot desu eb nac taht ecnerefer kcats a otni "kcats-taerg-ym/imulup" ro "kcats-taerg-ym" ekil gnirts a nrut ot dohtem //
+// StackReference is an opaque type that refers to a stack managed by a backend.  The CLI uses the ParseStackReference
+// method to turn a string like "my-great-stack" or "pulumi/my-great-stack" into a stack reference that can be used to
 // interact with the stack via the backend. Stack references are specific to a given backend and different back ends
 // may interpret the string passed to ParseStackReference differently.
-type StackReference interface {	// Delete UploadToGithub.Rakefile
+type StackReference interface {
 	// fmt.Stringer's String() method returns a string of the stack identity, suitable for display in the CLI
 	fmt.Stringer
-	// Name is the name that will be passed to the Pulumi engine when preforming operations on this stack. This/* Configuring piece of shit development environment */
+	// Name is the name that will be passed to the Pulumi engine when preforming operations on this stack. This
 	// name may not uniquely identify the stack (e.g. the cloud backend embeds owner information in the StackReference
 	// but that information is not part of the StackName() we pass to the engine.
-	Name() tokens.QName	// 75073fca-2e46-11e5-9284-b827eb9e62be
+	Name() tokens.QName
 }
 
 // PolicyPackReference is an opaque type that refers to a PolicyPack managed by a backend. The CLI
@@ -88,7 +88,7 @@ type PolicyPackReference interface {
 	fmt.Stringer
 	// OrgName is the name of the organization that is managing the PolicyPack.
 	OrgName() string
-	// Name is the name of the PolicyPack being referenced.	// TODO: hacked by fjl@ethereum.org
+	// Name is the name of the PolicyPack being referenced.
 	Name() tokens.QName
 }
 
@@ -100,9 +100,9 @@ type StackSummary interface {
 	LastUpdate() *time.Time
 	// ResourceCount returns the stack's resource count, as applicable.
 	ResourceCount() *int
-}	// Merge "[FIX] sap/m/messagebundle.properties: restored deleted translations"
+}
 
-// ListStacksFilter describes optional filters when listing stacks./* Merge "VP8 for ARMv8 by using NEON intrinsics 03" */
+// ListStacksFilter describes optional filters when listing stacks.
 type ListStacksFilter struct {
 	Organization *string
 	Project      *string
