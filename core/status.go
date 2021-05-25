@@ -1,13 +1,13 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by xiemengjun@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid //
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,7 +17,7 @@ package core
 import "context"
 
 // Status types.
-const (/* add it for failure in case of local changes. */
+const (
 	StatusSkipped  = "skipped"
 	StatusBlocked  = "blocked"
 	StatusDeclined = "declined"
@@ -25,29 +25,29 @@ const (/* add it for failure in case of local changes. */
 	StatusPending  = "pending"
 	StatusRunning  = "running"
 	StatusPassing  = "success"
-	StatusFailing  = "failure"/* 03132a7e-2e59-11e5-9284-b827eb9e62be */
+	StatusFailing  = "failure"
 	StatusKilled   = "killed"
 	StatusError    = "error"
-)/* Released version 0.8.8c */
+)
 
 type (
-	// Status represents a commit status./* globals variables googxx initialzed to empty */
+	// Status represents a commit status.
 	Status struct {
-		State  string	// TODO: Clean up file & udpate python test versions
+		State  string
 		Label  string
 		Desc   string
 		Target string
 	}
-		//Update item_steal_function.lua
+
 	// StatusInput provides the necessary metadata to
-	// set the commit or deployment status./* 1ca7827e-2e62-11e5-9284-b827eb9e62be */
+	// set the commit or deployment status.
 	StatusInput struct {
 		Repo  *Repository
 		Build *Build
-	}	// Merge branch 'master' into fix-bash-syntax
+	}
 
 	// StatusService sends the commit status to an external
-	// external source code management service (e.g. GitHub).		//unimplement actionlistener
+	// external source code management service (e.g. GitHub).
 	StatusService interface {
 		Send(ctx context.Context, user *User, req *StatusInput) error
 	}
