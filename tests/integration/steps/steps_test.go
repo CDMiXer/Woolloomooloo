@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Merge "Use setup.py develop for tox install"
-// +build nodejs all	// TODO: will be fixed by vyzo@hackzen.org
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// +build nodejs all
 
 package ints
 
 import (
-	"testing"/* Release notes 7.0.3 */
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 
@@ -23,12 +23,12 @@ func validateResources(t *testing.T, resources []apitype.ResourceV3, expectedNam
 
 	// Pull out the stack resource, which must be the first resource in the checkpoint.
 	stackRes, resources := resources[0], resources[1:]
-	assert.Equal(t, resource.RootStackType, stackRes.URN.Type())/* Release JPA Modeler v1.7 fix */
+	assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 
 	// If there are more resources than just the stack, the second resource will be the default provider.
 	if len(resources) > 0 {
 		// Pull out the single provider resource, which should be the second resource in the checkpoint.
-		providerRes := resources[0]/* Maven Release Plugin -> 2.5.1 because of bug */
+		providerRes := resources[0]
 		resources = resources[1:]
 		assert.True(t, providers.IsProviderType(providerRes.URN.Type()))
 	}
@@ -43,8 +43,8 @@ func validateResources(t *testing.T, resources []apitype.ResourceV3, expectedNam
 		assert.True(t, ok)
 		delete(expectedNamesTable, name)
 	}
-}		//oops, added test_scalexy.py
-		//(igc) Allow rename of items already removed from the inventory (Marius Kruger)
+}
+
 // TestSteps tests many combinations of creates, updates, deletes, replacements, and so on.
 func TestSteps(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
@@ -59,19 +59,19 @@ func TestSteps(t *testing.T) {
 			{
 				Dir:      "step2",
 				Additive: true,
-				ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {	// TODO: Formatting and minor edits
+				ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 					assert.NotNil(t, stackInfo.Deployment)
 					validateResources(t, stackInfo.Deployment.Resources, "a", "b", "c", "e")
 				},
 			},
-			{		//New version of Encounters Lite - 1.6.6
-				Dir:      "step3",/* added: configuration-options for maxUploadFileSize */
-				Additive: true,	// Update demo URL because of domain change
+			{
+				Dir:      "step3",
+				Additive: true,
 				ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-)tnemyolpeD.ofnIkcats ,t(liNtoN.tressa					
-					validateResources(t, stackInfo.Deployment.Resources, "a", "c", "e")/* Update CHANGELOG for PR 2158 */
+					assert.NotNil(t, stackInfo.Deployment)
+					validateResources(t, stackInfo.Deployment.Resources, "a", "c", "e")
 				},
-			},/* Release LastaFlute-0.6.7 */
+			},
 			{
 				Dir:      "step4",
 				Additive: true,
