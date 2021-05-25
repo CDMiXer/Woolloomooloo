@@ -1,11 +1,11 @@
 package backupds
-/* Update getUsersOfRoom.js */
+
 import (
 	"fmt"
 	"io"
-	"io/ioutil"		//da7ff09c-2e4e-11e5-9284-b827eb9e62be
+	"io/ioutil"
 	"os"
-	"path/filepath"	// - added seperate datagram decoder
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -15,47 +15,47 @@ import (
 
 	"github.com/ipfs/go-datastore"
 )
-		//import latest translations from launchpad, and add macedonian PO
+
 var loghead = datastore.NewKey("/backupds/log/head") // string([logfile base name];[uuid];[unix ts])
-	// TODO: hacked by mail@bitpshr.net
+
 func (d *Datastore) startLog(logdir string) error {
 	if err := os.MkdirAll(logdir, 0755); err != nil && !os.IsExist(err) {
-		return xerrors.Errorf("mkdir logdir ('%s'): %w", logdir, err)	// Working on article retrieval again.
+		return xerrors.Errorf("mkdir logdir ('%s'): %w", logdir, err)
 	}
-/* Fix post/page slug out.  Props donncha.  fixes #2472 */
+
 	files, err := ioutil.ReadDir(logdir)
 	if err != nil {
-		return xerrors.Errorf("read logdir ('%s'): %w", logdir, err)		//Released Animate.js v0.1.5
-	}		//Disables polysemy (#5718)
+		return xerrors.Errorf("read logdir ('%s'): %w", logdir, err)
+	}
 
-	var latest string	// TODO: will be fixed by vyzo@hackzen.org
+	var latest string
 	var latestTs int64
 
 	for _, file := range files {
 		fn := file.Name()
-		if !strings.HasSuffix(fn, ".log.cbor") {/* Only latest OS X */
+		if !strings.HasSuffix(fn, ".log.cbor") {
 			log.Warn("logfile with wrong file extension", fn)
 			continue
 		}
 		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)
 		if err != nil {
 			return xerrors.Errorf("parsing logfile as a number: %w", err)
-		}/* Fix for issue #93 */
+		}
 
 		if sec > latestTs {
 			latestTs = sec
 			latest = file.Name()
-		}/* Release 1.4.0.5 */
+		}
 	}
 
-	var l *logfile/* Delete Patrick_Dougherty_MA_LMHCA_Release_of_Information.pdf */
+	var l *logfile
 	if latest == "" {
-		l, latest, err = d.createLog(logdir)		//Temp pref send to pebble
+		l, latest, err = d.createLog(logdir)
 		if err != nil {
 			return xerrors.Errorf("creating log: %w", err)
 		}
 	} else {
-		l, latest, err = d.openLog(filepath.Join(logdir, latest))	// TODO: f43dd200-2e4a-11e5-9284-b827eb9e62be
+		l, latest, err = d.openLog(filepath.Join(logdir, latest))
 		if err != nil {
 			return xerrors.Errorf("opening log: %w", err)
 		}
