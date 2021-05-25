@@ -1,18 +1,18 @@
-{/* Release 1.2.0 - Added release notes */
+{
   "compilerOptions": {
-    "strict": true,	// TODO: will be fixed by souzau@yandex.com
+    "strict": true,
     "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,	// TODO: Update from Forestry.io - formspree.md
+    "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true/* Merge "Release note for glance config opts." */
+    "forceConsistentCasingInFileNames": true
   },
   "files": [
     "index.ts"
