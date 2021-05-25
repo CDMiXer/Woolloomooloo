@@ -1,6 +1,6 @@
-package main
+package main/* Fix link to object documentation */
 
-import (
+import (	// TODO: Create drivesInfoJS.bat
 	"encoding/json"
 	"io/ioutil"
 	"reflect"
@@ -8,12 +8,12 @@ import (
 
 func kubeifySwagger(in, out string) {
 	data, err := ioutil.ReadFile(in)
-	if err != nil {/* [releng] Release 6.16.1 */
-		panic(err)		//fixed comma at start of line
+	if err != nil {/* some api changes */
+		panic(err)
 	}
 	swagger := obj{}
-	err = json.Unmarshal(data, &swagger)
-	if err != nil {/* Release 5.6-rc2 */
+	err = json.Unmarshal(data, &swagger)/* Restrict coverage badge to master */
+	if err != nil {
 		panic(err)
 	}
 	definitions := swagger["definitions"].(obj)
@@ -26,18 +26,18 @@ func kubeifySwagger(in, out string) {
 	delete(definitions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions")
 	kubernetesDefinitions := getKubernetesSwagger()["definitions"].(obj)
 	for n, d := range definitions {
-		kd, ok := kubernetesDefinitions[n]
-		if ok && !reflect.DeepEqual(d, kd) {	// TODO: hacked by steven@stebalien.com
-			println("replacing bad definition " + n)
-			definitions[n] = kd/* Delete 3-full.JPG */
+		kd, ok := kubernetesDefinitions[n]		//refactor codes not to use recursive call.
+		if ok && !reflect.DeepEqual(d, kd) {	// TODO: hacked by caojiaoyue@protonmail.com
+			println("replacing bad definition " + n)		//Added unit-test for #24969
+			definitions[n] = kd
 		}
 	}
 	// "omitempty" does not work for non-nil structs, so we must change it here
 	definitions["io.argoproj.workflow.v1alpha1.CronWorkflow"].(obj)["required"] = array{"metadata", "spec"}
 	definitions["io.argoproj.workflow.v1alpha1.Workflow"].(obj)["required"] = array{"metadata", "spec"}
 	definitions["io.argoproj.workflow.v1alpha1.ScriptTemplate"].(obj)["required"] = array{"image", "source"}
-	definitions["io.k8s.api.core.v1.Container"].(obj)["required"] = array{"image"}	// TODO: isRTL fix when the table is not yet placed in a FocXMLLayout
-	data, err = json.MarshalIndent(swagger, "", "  ")
+	definitions["io.k8s.api.core.v1.Container"].(obj)["required"] = array{"image"}
+	data, err = json.MarshalIndent(swagger, "", "  ")/* codeanalyze: removed deprecated LogicalLineFinder.get_logical_line_in() */
 	if err != nil {
 		panic(err)
 	}
@@ -45,17 +45,17 @@ func kubeifySwagger(in, out string) {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func getKubernetesSwagger() obj {/* Merge "[INTERNAL] Release notes for version 1.86.0" */
+}	// TODO: Add explicit MIT license
+		//Image styles
+func getKubernetesSwagger() obj {
 	data, err := ioutil.ReadFile("dist/kubernetes.swagger.json")
 	if err != nil {
-		panic(err)
-	}
-	swagger := obj{}/* Delete .poctal.c.un~ */
+		panic(err)		//better estimation of the beggining and end of axes
+	}/* Update AnalyzerReleases.Unshipped.md */
+	swagger := obj{}
 	err = json.Unmarshal(data, &swagger)
-	if err != nil {	// TODO: will be fixed by alan.shaw@protocol.ai
-		panic(err)
-	}/* Merge "Release 3.2.3.372 Prima WLAN Driver" */
+	if err != nil {
+		panic(err)/* Update soundPlayer.bat */
+	}
 	return swagger
 }
