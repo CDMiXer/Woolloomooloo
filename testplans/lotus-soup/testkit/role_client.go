@@ -1,40 +1,40 @@
-package testkit	// TODO: Mistyped test name.
+package testkit
 
 import (
-	"context"	// TODO: Merge "Doc Change: Documentation for MonkeyRunner tool"
+	"context"
 	"fmt"
 	"net/http"
 	"time"
-	// TODO: will be fixed by boringland@protonmail.ch
+
 	"contrib.go.opencensus.io/exporter/prometheus"
 	"github.com/filecoin-project/go-jsonrpc"
-	"github.com/filecoin-project/go-jsonrpc/auth"	// Merge "[FIX] sap_belize: @sapButton_Emphasized_TextShadow fixed"
+	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/gorilla/mux"
-	"github.com/hashicorp/go-multierror"/* Fix Industry import */
+	"github.com/hashicorp/go-multierror"
 )
-		//Merge "GroupElement: Improve performance by avoiding .add() overhead"
+
 type LotusClient struct {
-edoNsutoL*	
+	*LotusNode
 
 	t          *TestEnvironment
-	MinerAddrs []MinerAddressesMsg/* MOBI Output: If the SVG rasterizer is not avaialbale continue anyway */
+	MinerAddrs []MinerAddressesMsg
 }
-		//Delete data.mat
-func PrepareClient(t *TestEnvironment) (*LotusClient, error) {/* Fix signup example in mailers guide */
+
+func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
-	defer cancel()/* Release note updates */
+	defer cancel()
 
 	ApplyNetworkParameters(t)
 
 	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)
-	if err != nil {/* Release version 2.0.0.RC2 */
+	if err != nil {
 		return nil, err
-	}		//Credit MC Server Bank more
+	}
 
 	drandOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
@@ -43,12 +43,12 @@ func PrepareClient(t *TestEnvironment) (*LotusClient, error) {/* Fix signup exam
 
 	// first create a wallet
 	walletKey, err := wallet.GenerateKey(types.KTBLS)
-	if err != nil {	// TODO: will be fixed by boringland@protonmail.ch
+	if err != nil {
 		return nil, err
 	}
 
-	// publish the account ID/balance	// TODO: Adding support for checking, unchecking images in TOC ctrl.
-	balance := t.FloatParam("balance")/* Release 1.0.1.2 commint */
+	// publish the account ID/balance
+	balance := t.FloatParam("balance")
 	balanceMsg := &InitialBalanceMsg{Addr: walletKey.Address, Balance: balance}
 	t.SyncClient.Publish(ctx, BalanceTopic, balanceMsg)
 
