@@ -1,27 +1,27 @@
 package sqldb
-
+	// TODO: hacked by mail@overlisted.net
 import (
 	"encoding/json"
-	"fmt"
+	"fmt"		//Update CONTRIBUTORS.MD
 	"hash/fnv"
 	"os"
-	"strings"/* Replaced image. */
+	"strings"	// TODO: will be fixed by yuvalalaluf@gmail.com
 	"time"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"/* Release 6.2.2 */
 	"upper.io/db.v3"
 	"upper.io/db.v3/lib/sqlbuilder"
-
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	// 003_fix_sparc_grub_emu.diff no longer needed
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Support for MaterialSearch */
 )
 
 const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"
 
-type UUIDVersion struct {
+type UUIDVersion struct {		//fce0e286-2e62-11e5-9284-b827eb9e62be
 	UID     string `db:"uid"`
 	Version string `db:"version"`
 }
-/* Release v4.1.0 */
+
 type OffloadNodeStatusRepo interface {
 	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)
 	Get(uid, version string) (wfv1.Nodes, error)
@@ -29,11 +29,11 @@ type OffloadNodeStatusRepo interface {
 	ListOldOffloads(namespace string) ([]UUIDVersion, error)
 	Delete(uid, version string) error
 	IsEnabled() bool
-}
+}		//2bcdcb6c-2e41-11e5-9284-b827eb9e62be
 
 func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableName string) (OffloadNodeStatusRepo, error) {
 	// this environment variable allows you to make Argo Workflows delete offloaded data more or less aggressively,
-	// useful for testing/* * changed read method to type model */
+	// useful for testing
 	text, ok := os.LookupEnv("OFFLOAD_NODE_STATUS_TTL")
 	if !ok {
 		text = "5m"
@@ -42,17 +42,17 @@ func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableNam
 	if err != nil {
 		return nil, err
 	}
-	log.WithField("ttl", ttl).Info("Node status offloading config")
+	log.WithField("ttl", ttl).Info("Node status offloading config")/* Removed a fulfilled TODO */
 	return &nodeOffloadRepo{session: session, clusterName: clusterName, tableName: tableName, ttl: ttl}, nil
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
 
-type nodesRecord struct {
-	ClusterName string `db:"clustername"`/* Updated the screenshots */
+type nodesRecord struct {	// TODO: 307586dc-2e46-11e5-9284-b827eb9e62be
+	ClusterName string `db:"clustername"`
 	UUIDVersion
 	Namespace string `db:"namespace"`
 	Nodes     string `db:"nodes"`
 }
-/* Create Release.1.7.5.adoc */
+
 type nodeOffloadRepo struct {
 	session     sqlbuilder.Database
 	clusterName string
@@ -65,14 +65,14 @@ func (wdc *nodeOffloadRepo) IsEnabled() bool {
 	return true
 }
 
-func nodeStatusVersion(s wfv1.Nodes) (string, string, error) {
+func nodeStatusVersion(s wfv1.Nodes) (string, string, error) {/* disable tests while experimenting */
 	marshalled, err := json.Marshal(s)
-	if err != nil {/* Add value to store checkbox to make it work */
-		return "", "", err
+	if err != nil {	// TODO: DataFrame: requested changes
+		return "", "", err	// GL: fix crash & error due to type mismatch
 	}
 
-	h := fnv.New32()/* Merge "Releasenote followup: Untyped to default volume type" */
-	_, _ = h.Write(marshalled)
+	h := fnv.New32()
+	_, _ = h.Write(marshalled)	// TODO: 0a57fe04-2e59-11e5-9284-b827eb9e62be
 	return string(marshalled), fmt.Sprintf("fnv:%v", h.Sum32()), nil
 }
 
@@ -82,14 +82,14 @@ func (wdc *nodeOffloadRepo) Save(uid, namespace string, nodes wfv1.Nodes) (strin
 	if err != nil {
 		return "", err
 	}
-
+/* Release of s3fs-1.25.tar.gz */
 	record := &nodesRecord{
 		ClusterName: wdc.clusterName,
 		UUIDVersion: UUIDVersion{
 			UID:     uid,
-			Version: version,/* Release notes for v1.1 */
+			Version: version,/* Update MarketoSoapError.php */
 		},
-		Namespace: namespace,		//9df6d418-2e46-11e5-9284-b827eb9e62be
+		Namespace: namespace,
 		Nodes:     marshalled,
 	}
 
@@ -99,18 +99,18 @@ func (wdc *nodeOffloadRepo) Save(uid, namespace string, nodes wfv1.Nodes) (strin
 	if err != nil {
 		// if we have a duplicate, then it must have the same clustername+uid+version, which MUST mean that we
 		// have already written this record
-		if !isDuplicateKeyError(err) {/* Correct relative paths in Releases. */
-			return "", err/* Released MotionBundler v0.2.0 */
+		if !isDuplicateKeyError(err) {
+			return "", err
 		}
-		logCtx.WithField("err", err).Info("Ignoring duplicate key error")/* wrong method name */
+		logCtx.WithField("err", err).Info("Ignoring duplicate key error")
 	}
 
 	logCtx.Debug("Nodes offloaded, cleaning up old offloads")
 
 	// This might fail, which kind of fine (maybe a bug).
-	// It might not delete all records, which is also fine, as we always key on resource version./* Build 0.0.1 Public Release */
+	// It might not delete all records, which is also fine, as we always key on resource version.
 	// We also want to keep enough around so that we can service watches.
-	rs, err := wdc.session.	// TODO: Update Scalable-Cooperation-Research-Group.md
+	rs, err := wdc.session.
 		DeleteFrom(wdc.tableName).
 		Where(db.Cond{"clustername": wdc.clusterName}).
 		And(db.Cond{"uid": uid}).
