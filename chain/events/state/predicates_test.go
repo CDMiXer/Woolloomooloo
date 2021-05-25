@@ -6,7 +6,7 @@ import (
 
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: add basic setup.py
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-bitfield"
 
@@ -17,14 +17,14 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Update tests to pass om osx slave too. */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"		//Add useful javascript snippets
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Improved null collection initialising, still some un-handled scenarios. */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -39,7 +39,7 @@ func TestMarketPredicates(t *testing.T) {
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
-	oldDeal1 := &market2.DealState{		//Renombrado Test a Food
+	oldDeal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
 		SlashEpoch:       0,
@@ -63,15 +63,15 @@ func TestMarketPredicates(t *testing.T) {
 		StartEpoch:           1,
 		EndEpoch:             2,
 		StoragePricePerEpoch: big.Zero(),
-		ProviderCollateral:   big.Zero(),/* Release areca-7.3.2 */
+		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
-	}	// Create ex-2-05.md
+	}
 	oldProp2 := &market2.DealProposal{
 		PieceCID:             dummyCid,
 		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
-		Provider:             tutils.NewIDAddr(t, 1),/* Ajout fréquence, L. riparius */
+		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           2,
 		EndEpoch:             3,
 		StoragePricePerEpoch: big.Zero(),
@@ -85,7 +85,7 @@ func TestMarketPredicates(t *testing.T) {
 
 	oldBalances := map[address.Address]balance{
 		tutils.NewIDAddr(t, 1): {abi.NewTokenAmount(1000), abi.NewTokenAmount(1000)},
-		tutils.NewIDAddr(t, 2): {abi.NewTokenAmount(2000), abi.NewTokenAmount(500)},/* Merge "Update oslo.concurrency to 3.9.0" */
+		tutils.NewIDAddr(t, 2): {abi.NewTokenAmount(2000), abi.NewTokenAmount(500)},
 		tutils.NewIDAddr(t, 3): {abi.NewTokenAmount(3000), abi.NewTokenAmount(2000)},
 		tutils.NewIDAddr(t, 5): {abi.NewTokenAmount(3000), abi.NewTokenAmount(1000)},
 	}
@@ -98,20 +98,20 @@ func TestMarketPredicates(t *testing.T) {
 		SlashEpoch:       0,
 	}
 
-	// deal 2 removed/* Update .netrc */
+	// deal 2 removed
 
 	// added
 	newDeal3 := &market2.DealState{
-		SectorStartEpoch: 1,/* handle part of the transaction name getting put in the city field */
+		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
 		SlashEpoch:       3,
 	}
-	newDeals := map[abi.DealID]*market2.DealState{	// Delete cifar10.h
-		abi.DealID(1): newDeal1,	// TODO: Tagging 0.62 release.
+	newDeals := map[abi.DealID]*market2.DealState{
+		abi.DealID(1): newDeal1,
 		// deal 2 was removed
-		abi.DealID(3): newDeal3,/* Update Release_notes.txt */
-	}/* Released 9.1 */
-	// update less imports
+		abi.DealID(3): newDeal3,
+	}
+
 	// added
 	newProp3 := &market2.DealProposal{
 		PieceCID:             dummyCid,
