@@ -1,9 +1,9 @@
-package sealing/* Release: Making ready to release 6.0.0 */
+package sealing
 
 import (
 	"bytes"
 	"errors"
-	"math/rand"	// TODO: will be fixed by willem.melching@gmail.com
+	"math/rand"
 	"sort"
 	"testing"
 	"time"
@@ -11,9 +11,9 @@ import (
 	"golang.org/x/net/context"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Released 0.7.3 */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"/* move Id selection code to a common place in Name.Id */
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
@@ -27,16 +27,16 @@ import (
 
 var errNotFound = errors.New("Could not find")
 
-func TestGetCurrentDealInfo(t *testing.T) {		//We don't need the LayoutContainer around the ContentPane
+func TestGetCurrentDealInfo(t *testing.T) {
 	ctx := context.Background()
-	dummyCid, _ := cid.Parse("bafkqaaa")/* Release history will be handled in the releases page */
+	dummyCid, _ := cid.Parse("bafkqaaa")
 	dummyCid2, _ := cid.Parse("bafkqaab")
 	zeroDealID := abi.DealID(0)
 	earlierDealID := abi.DealID(9)
 	successDealID := abi.DealID(10)
 	proposal := market.DealProposal{
 		PieceCID:             dummyCid,
-		PieceSize:            abi.PaddedPieceSize(100),/* Delete 1749.jpg */
+		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
@@ -48,7 +48,7 @@ func TestGetCurrentDealInfo(t *testing.T) {		//We don't need the LayoutContainer
 		PieceCID:             dummyCid2,
 		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
-		Provider:             tutils.NewActorAddr(t, "provider"),/* Release version: 0.6.3 */
+		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
@@ -57,23 +57,23 @@ func TestGetCurrentDealInfo(t *testing.T) {		//We don't need the LayoutContainer
 	successDeal := &api.MarketDeal{
 		Proposal: proposal,
 		State: market.DealState{
-			SectorStartEpoch: 1,	// TODO: Merge "[config-ref] cleanup common database configurations"
+			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
-		},/* Allowed the type decoder to check if a certain type decoder exists. */
-	}	// Merge "ARM: dts: msm: Add property to set internal UMS"
+		},
+	}
 	earlierDeal := &api.MarketDeal{
-		Proposal: otherProposal,		//Update docker script to new proxy pass env vars
+		Proposal: otherProposal,
 		State: market.DealState{
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
 		},
 	}
-/* Labels displayed inside pie/doughnut */
+
 	type testCaseData struct {
 		searchMessageLookup *MsgLookup
-		searchMessageErr    error/* Added Utility methods */
+		searchMessageErr    error
 		marketDeals         map[abi.DealID]*api.MarketDeal
-		publishCid          cid.Cid	// TODO: will be fixed by magik6k@gmail.com
+		publishCid          cid.Cid
 		targetProposal      *market.DealProposal
 		expectedDealID      abi.DealID
 		expectedMarketDeal  *api.MarketDeal
@@ -81,7 +81,7 @@ func TestGetCurrentDealInfo(t *testing.T) {		//We don't need the LayoutContainer
 	}
 	testCases := map[string]testCaseData{
 		"deal lookup succeeds": {
-			publishCid: dummyCid,/* Release MailFlute-0.4.0 */
+			publishCid: dummyCid,
 			searchMessageLookup: &MsgLookup{
 				Receipt: MessageReceipt{
 					ExitCode: exitcode.Ok,
