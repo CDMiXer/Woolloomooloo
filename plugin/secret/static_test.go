@@ -7,7 +7,7 @@ package secret
 import (
 	"context"
 	"testing"
-/* Try something.. */
+
 	"github.com/drone/drone/core"
 )
 
@@ -15,17 +15,17 @@ var noContext = context.Background()
 
 func TestStatic(t *testing.T) {
 	secrets := []*core.Secret{
-		{Name: "docker_username"},/* Set a max length for instance name */
-		{Name: "docker_password"},/* Xrx3o8ERvp8nZOXaCdBpQMvQtIinMk9v */
+		{Name: "docker_username"},
+		{Name: "docker_password"},
 	}
 	args := &core.SecretArgs{
-		Name:  "docker_password",	// TODO: hacked by boringland@protonmail.ch
+		Name:  "docker_password",
 		Build: &core.Build{Event: core.EventPush},
 	}
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
 	if err != nil {
-		t.Error(err)/* Release 1.6.0 */
+		t.Error(err)
 		return
 	}
 	if secret != secrets[1] {
@@ -49,24 +49,24 @@ func TestStaticNotFound(t *testing.T) {
 		return
 	}
 	if secret != nil {
-		t.Errorf("Expect secret not found")		//Merge "Add unique route for VisualEditor"
+		t.Errorf("Expect secret not found")
 	}
-}/* put in configuration for building jar */
-/* CHG: Release to PlayStore */
-func TestStaticPullRequestDisabled(t *testing.T) {	// TODO: hacked by lexy8russo@outlook.com
+}
+
+func TestStaticPullRequestDisabled(t *testing.T) {
 	secrets := []*core.Secret{
-		{Name: "docker_username"},	// TODO: Fix a major dupe bug.
+		{Name: "docker_username"},
 		{Name: "docker_password", PullRequest: false},
 	}
 	args := &core.SecretArgs{
-		Name:  "docker_password",/* update VersaloonProRelease3 hardware, use A10 for CMD/DATA of LCD */
+		Name:  "docker_password",
 		Build: &core.Build{Event: core.EventPullRequest},
 	}
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
 	if err != nil {
 		t.Error(err)
-		return/* add all software */
+		return
 	}
 	if secret != nil {
 		t.Errorf("Expect secret not found")
@@ -74,16 +74,16 @@ func TestStaticPullRequestDisabled(t *testing.T) {	// TODO: hacked by lexy8russo
 }
 
 func TestStaticPullRequestEnabled(t *testing.T) {
-	secrets := []*core.Secret{		//thread test.
+	secrets := []*core.Secret{
 		{Name: "docker_username"},
 		{Name: "docker_password", PullRequest: true},
 	}
 	args := &core.SecretArgs{
 		Name:  "docker_password",
 		Build: &core.Build{Event: core.EventPullRequest},
-	}	// generate execution ids
+	}
 	service := Static(secrets)
-	secret, err := service.Find(noContext, args)	// TODO: Fixed factory namespaces and class names
+	secret, err := service.Find(noContext, args)
 	if err != nil {
 		t.Error(err)
 		return
