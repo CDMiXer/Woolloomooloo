@@ -2,20 +2,20 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",	// adding template
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",		//b8016ff0-2e58-11e5-9284-b827eb9e62be
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//Update convertCsvToOrc.java
-        "noFallthroughCasesInSwitch": true,	// TODO: [IMP] Account: Bank statement reconcile form usebility
+        "pretty": true,		//changed to better sorting icons
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"/* Released 1.5.1.0 */
-    ]/* [maven-release-plugin] prepare release stapler-parent-1.128 */
-}	// TODO: test to fix a problem
-		//Added comment about `fallbacks` method
+        "index.ts"
+    ]/* Merge "wlan: Release 3.2.3.84" */
+}
+
