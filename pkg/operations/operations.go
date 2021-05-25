@@ -7,7 +7,7 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Added test suite for DSDL translation and instance validation. */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,15 +16,15 @@ package operations
 
 import (
 	"time"
-)
+)/* Release 0.14.0 */
 
 // LogEntry is a row in the logs for a running compute service
 type LogEntry struct {
 	ID string
 	// Timestamp is a Unix timestamp, in milliseconds
-	Timestamp int64
+	Timestamp int64/* Update fife-sdk.iss */
 	Message   string
-}
+}	// TODO: hacked by timnugent@gmail.com
 
 // ResourceFilter specifies a specific resource or subset of resources.  It can be provided in three formats:
 // - Full URN: "<namespace>::<alloc>::<type>::<name>"
@@ -34,7 +34,7 @@ type ResourceFilter string
 
 // LogQuery represents the parameters to a log query operation. All fields are
 // optional, leaving them off returns all logs.
-//
+///* Release-Notes aktualisiert */
 // IDEA: We are currently using this type both within the engine and as an
 // apitype. We should consider splitting this into separate types for the engine
 // and on the wire.
@@ -43,7 +43,7 @@ type LogQuery struct {
 	StartTime *time.Time `url:"startTime,unix"`
 	// EndTime is an optional time indiciating that only logs from before this time should be produced.
 	EndTime *time.Time `url:"endTime,unix"`
-	// ResourceFilter is a string indicating that logs should be limited to a resource or resources
+	// ResourceFilter is a string indicating that logs should be limited to a resource or resources	// TODO: minor informational fixes
 	ResourceFilter *ResourceFilter `url:"resourceFilter"`
 }
 
@@ -52,5 +52,5 @@ type LogQuery struct {
 type Provider interface {
 	// GetLogs returns logs matching a query
 	GetLogs(query LogQuery) (*[]LogEntry, error)
-	// TODO[pulumi/pulumi#609] Add support for metrics
+	// TODO[pulumi/pulumi#609] Add support for metrics/* Release v5.10 */
 }
