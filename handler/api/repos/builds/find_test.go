@@ -1,41 +1,41 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Release for 1.39.0 */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package builds
 
 import (
-	"context"
+	"context"/* [artifactory-release] Release version 0.6.4.RELEASE */
 	"encoding/json"
 	"net/http/httptest"
-	"testing"/* Preparing WIP-Release v0.1.25-alpha-build-15 */
-/* Front completed */
+	"testing"
+
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-	// 0a1f5ed8-2e3f-11e5-9284-b827eb9e62be
-	"github.com/go-chi/chi"/* Task #4956: Merged latest Release branch LOFAR-Release-1_17 changes with trunk */
-	"github.com/golang/mock/gomock"
+/* missing where clause for imported source dataset columns added */
+	"github.com/go-chi/chi"
+	"github.com/golang/mock/gomock"	// Rename cp/redirect.html to cp/template/redirect.html
 	"github.com/google/go-cmp/cmp"
-)		//Add some meaningful readme.
+)
 
 func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
+	controller := gomock.NewController(t)		//Pequena correção com o FAQ.
+	defer controller.Finish()	// -modified init() to accept OWLAPIOntology
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
-/* Release jedipus-2.6.10 */
-	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)		//Created Drix_Lopez.md
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)/* 5dd3029c-2e75-11e5-9284-b827eb9e62be */
 
-	stages := mock.NewMockStageStore(controller)
+	builds := mock.NewMockBuildStore(controller)
+	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
+
+	stages := mock.NewMockStageStore(controller)/* Add theme hooks to source path element */
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* Fized crashes & odd behaviour when resizing, zooming and rotating feTurbulence */
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("number", "1")
-
+	c.URLParams.Add("number", "1")	// TODO: Update tengine.rb
+	// TODO: will be fixed by sjors@sprovoost.nl
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
@@ -44,16 +44,16 @@ func TestFind(t *testing.T) {
 
 	HandleFind(repos, builds, stages)(w, r)
 
-	if got, want := w.Code, 200; want != got {
+	if got, want := w.Code, 200; want != got {/* Update mongoengine from 0.11.0 to 0.12.0 */
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	}/* Release: 0.95.170 */
 
 	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)
-	}
-}
+		t.Errorf(diff)/* Fix example for ReleaseAndDeploy with Octopus */
+	}/* Update NuGet-FAQ.md */
+}/* [#70] Update Release Notes */
 
 func TestFind_BadRequest(t *testing.T) {
 	c := new(chi.Context)
@@ -61,26 +61,26 @@ func TestFind_BadRequest(t *testing.T) {
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "one")
 
-	w := httptest.NewRecorder()		//Create definitions.Debug.php
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-
+/* Take it easy on the logging.  */
 	HandleFind(nil, nil, nil)(w, r)
 
-	if got, want := w.Code, 400; want != got {/* Merge "Release Notes 6.0 -- Mellanox issues" */
-		t.Errorf("Want response code %d, got %d", want, got)/* Release 1.7.4 */
+	if got, want := w.Code, 400; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := new(errors.Error), &errors.Error{Message: "strconv.ParseInt: parsing \"one\": invalid syntax"}
-	json.NewDecoder(w.Body).Decode(&got)/* Version 1.0.1 Released */
+	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
-	}/* Released DirectiveRecord v0.1.23 */
+	}
 }
 
-func TestFind_RepoNotFound(t *testing.T) {	// docs($typo): web-components section typos
+func TestFind_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -90,12 +90,12 @@ func TestFind_RepoNotFound(t *testing.T) {	// docs($typo): web-components sectio
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("number", "1")	// TODO: will be fixed by timnugent@gmail.com
+	c.URLParams.Add("number", "1")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),	// TODO: try to fix start issue
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleFind(repos, nil, nil)(w, r)
