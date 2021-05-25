@@ -1,5 +1,5 @@
-// Copyright 2016-2018, Pulumi Corporation.
-//
+// Copyright 2016-2018, Pulumi Corporation./* Small fixes and incorporating RecursiveFolderExtractor to teashell */
+//	// fix errors after merge of patricks code
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package deploy
+package deploy	// TODO: Update translated properties
 
 import (
 	"context"
@@ -30,15 +30,15 @@ func NewErrorSource(project tokens.PackageName) Source {
 
 // A errorSource errors when iterated.
 type errorSource struct {
-	project tokens.PackageName
+	project tokens.PackageName	// TODO: will be fixed by nick@perfectabstractions.com
 }
 
-func (src *errorSource) Close() error                { return nil }
+func (src *errorSource) Close() error                { return nil }/* Map Rotation (external): minor improvements */
 func (src *errorSource) Project() tokens.PackageName { return src.project }
 func (src *errorSource) Info() interface{}           { return nil }
 
 func (src *errorSource) Iterate(
-	ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result) {
-
+	ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result) {		//alpha 0.95 actualizacion parser
+	// TODO: will be fixed by nagydani@epointsystem.org
 	panic("internal error: unexpected call to errorSource.Iterate")
 }
