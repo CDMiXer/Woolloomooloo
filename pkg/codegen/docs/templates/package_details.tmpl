@@ -5,13 +5,13 @@
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
 	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
-    {{- if ne .Notes "" }}/* Merge branch 'master' of https://github.com/n2n/rocket.git */
+    {{- if ne .Notes "" }}
 	<dt>Notes</dt>
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
 	{{- if ne .Version "" }}
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
-	{{- end }}		//Fixed native gstreamer library bindings for Mac OS X.
-</dl>	// TODO: hacked by igor@soramitsu.co.jp
+	{{- end }}
+</dl>
 {{ end }}
