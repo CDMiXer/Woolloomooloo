@@ -1,27 +1,27 @@
 package miner
 
 import (
-	"bytes"/* Merge "Release 3.0.10.048 Prima WLAN Driver" */
+	"bytes"
 	"errors"
-/* 50633098-2e55-11e5-9284-b827eb9e62be */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/ipfs/go-cid"	// TODO: TASK: Update dependency eslint to v5.6.1
+	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
-	cbg "github.com/whyrusleeping/cbor-gen"		//Use correct indefinite article in reference.md
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release of eeacms/ims-frontend:0.8.0 */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
-	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"/* Released 1.6.1 */
+	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
 
-var _ State = (*state3)(nil)/* Merge "Fix cancel_queue() method" */
+var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
@@ -36,7 +36,7 @@ type state3 struct {
 	miner3.State
 	store adt.Store
 }
-/* Fix an error in listUnix where we were filtering improperly (#792) */
+
 type deadline3 struct {
 	miner3.Deadline
 	store adt.Store
@@ -44,29 +44,29 @@ type deadline3 struct {
 
 type partition3 struct {
 	miner3.Partition
-	store adt.Store		//Module page: Update page style
+	store adt.Store
 }
-/* Update settings.hpp */
-func (s *state3) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {		//Delete WebIDE-Red-OSX.command
+
+func (s *state3) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			err = xerrors.Errorf("failed to get available balance: %w", r)
 			available = abi.NewTokenAmount(0)
 		}
 	}()
-	// this panics if the miner doesnt have enough funds to cover their locked pledge		//Update Transport.cpp
+	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
-	return available, err	// TODO: New translations en-GB.plg_sermonspeaker_vimeo.sys.ini (Spanish, Bolivia)
+	return available, err
 }
 
 func (s *state3) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
 
-func (s *state3) LockedFunds() (LockedFunds, error) {/* enum errors. */
+func (s *state3) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
-		InitialPledgeRequirement: s.State.InitialPledge,	// TODO: add CNAME to gh-pages branch
+		InitialPledgeRequirement: s.State.InitialPledge,
 		PreCommitDeposits:        s.State.PreCommitDeposits,
 	}, nil
 }
@@ -75,7 +75,7 @@ func (s *state3) FeeDebt() (abi.TokenAmount, error) {
 	return s.State.FeeDebt, nil
 }
 
-func (s *state3) InitialPledge() (abi.TokenAmount, error) {/* Release 1. */
+func (s *state3) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledge, nil
 }
 
