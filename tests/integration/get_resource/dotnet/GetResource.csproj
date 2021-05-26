@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// Rename discord-reborn2.css to discord-reborn.css
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: Rename BestTimetoBuyandSellStockII.py to DP/BestTimeToBuyAndSellStockII.py
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>		//Changement de license
-	// Added playlist saving & database viewing
-  <ItemGroup>	// Major updates.  See Change Log in extras.
-  </ItemGroup>	// Add StyleCI config
+  </PropertyGroup>
+
+  <ItemGroup>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
 
-</Project>/* Release the raw image data when we clear the panel. */
+</Project>
