@@ -1,15 +1,15 @@
-{/* fixing #30 - typo in versionCreator readme */
+{
   "Action": "opened",
   "Repo": {
     "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
-    "Perm": null,/* Merge "Link $wgVersion on Special:Version to Release Notes" */
+    "Perm": null,
     "Branch": "master",
     "Private": true,
-    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",	// TODO: hacked by lexy8russo@outlook.com
+    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
-    "Link": "https://github.com/bradrydzewski/drone-test-go",		//Mainly updates to Team section.
+    "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
@@ -18,7 +18,7 @@
     "Title": "Update .drone.yml",
     "Body": "",
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
-    "Ref": "refs/pull/1/head",		//Fix dependencies node when generating pom file. 
+    "Ref": "refs/pull/1/head",
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
@@ -29,13 +29,13 @@
       "Login": "bradrydzewski",
       "Name": "",
       "Email": "",
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: http: simplify loop over locations
-    },	// adding encoder unit tests from JXT
-    "Created": "2018-06-22T23:54:09Z",/* updated model->save() to SQLQuery-Class */
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
+    },
+    "Created": "2018-06-22T23:54:09Z",
     "Updated": "2018-06-22T23:54:09Z"
-  },		//orderInteraction now better supported in QTI 2.0.
-  "Sender": {		//Added missing visualizer toolbar code.
-    "Login": "bradrydzewski",/* Markdown 2.4 */
+  },
+  "Sender": {
+    "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
