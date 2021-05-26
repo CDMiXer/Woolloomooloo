@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash	// TODO: hacked by mikeal.rogers@gmail.com
 set -eu -o pipefail
-/* hook up tutorials schedule */
-echo "# This is an auto-generated file. DO NOT EDIT"/* Renamed ActionFact to Action */
-cat
+
+echo "# This is an auto-generated file. DO NOT EDIT"/* chore(deps): update dependency nock to v10.0.6 */
+cat/* Typo in HOWTO */
