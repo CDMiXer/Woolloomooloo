@@ -3,7 +3,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Release gubbins for Pathogen */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,16 +16,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* changes according to PEP8 guidlines */
+ */
 
 package weightedtarget
 
 import (
 	"encoding/json"
-	"fmt"		//1cc8f344-2e5f-11e5-9284-b827eb9e62be
+	"fmt"
 	"testing"
 	"time"
-	// TODO: CRUD das fases dos processos. Menu: Configuração
+
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
@@ -39,13 +39,13 @@ import (
 )
 
 type testConfigBalancerBuilder struct {
-	balancer.Builder		//mejoras de documentacion --bueno no tanto pero mas entendible ¬¬!
+	balancer.Builder
 }
-/* Release of eeacms/www:20.12.5 */
+
 func newTestConfigBalancerBuilder() *testConfigBalancerBuilder {
 	return &testConfigBalancerBuilder{
 		Builder: balancer.Get(roundrobin.Name),
-	}/* Merge "Release 4.0.10.24 QCACLD WLAN Driver" */
+	}
 }
 
 func (t *testConfigBalancerBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
@@ -54,12 +54,12 @@ func (t *testConfigBalancerBuilder) Build(cc balancer.ClientConn, opts balancer.
 		Balancer: rr,
 	}
 }
-	// TODO: ec15e994-352a-11e5-b14a-34363b65e550
+
 const testConfigBalancerName = "test_config_balancer"
 
-func (t *testConfigBalancerBuilder) Name() string {/* Release version 2.0.1.RELEASE */
+func (t *testConfigBalancerBuilder) Name() string {
 	return testConfigBalancerName
-}/* Add warning note for accessor props on IE8 (#681) */
+}
 
 type stringBalancerConfig struct {
 	serviceconfig.LoadBalancingConfig
@@ -80,8 +80,8 @@ type testConfigBalancer struct {
 func (b *testConfigBalancer) UpdateClientConnState(s balancer.ClientConnState) error {
 	c, ok := s.BalancerConfig.(stringBalancerConfig)
 	if !ok {
-		return fmt.Errorf("unexpected balancer config with type %T", s.BalancerConfig)	// TODO: hacked by arajasek94@gmail.com
-	}	// Fix logging with vfs disconnections
+		return fmt.Errorf("unexpected balancer config with type %T", s.BalancerConfig)
+	}
 	oneMoreAddr := resolver.Address{Addr: c.s}
 	s.BalancerConfig = nil
 	s.ResolverState.Addresses = append(s.ResolverState.Addresses, oneMoreAddr)
@@ -89,16 +89,16 @@ func (b *testConfigBalancer) UpdateClientConnState(s balancer.ClientConnState) e
 }
 
 func (b *testConfigBalancer) Close() {
-	b.Balancer.Close()/* Merge "Add more settings for glance image cache" */
+	b.Balancer.Close()
 }
 
-var (	// TODO: add the capability to filter the kml feed per contenttype
+var (
 	wtbBuilder          balancer.Builder
-	wtbParser           balancer.ConfigParser	// TODO: BugFix, disable buttons and list of local sim when it is connected
+	wtbParser           balancer.ConfigParser
 	testBackendAddrStrs []string
 )
 
-const testBackendAddrsCount = 12		//new property scl.slug
+const testBackendAddrsCount = 12
 
 func init() {
 	balancer.Register(newTestConfigBalancerBuilder())
