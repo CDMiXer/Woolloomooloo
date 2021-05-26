@@ -1,41 +1,41 @@
 package vm
 
 import (
-	"fmt"
+	"fmt"	// TODO: hacked by alan.shaw@protocol.ai
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Add some helper functions */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: Delete google-doc-url 2.js
 )
 
 type scalingCost struct {
 	flat  int64
-	scale int64
+	scale int64/* fixed uninitialized members in src/emu/cpu/sm8500/sm8500.c (nw) */
 }
 
-type pricelistV0 struct {
+type pricelistV0 struct {/* Switched from LocalDateTime to Timestamp for domain. */
 	computeGasMulti int64
 	storageGasMulti int64
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
 	///////////////////////////////////////////////////////////////////////////
 
-	// Gas cost charged to the originator of an on-chain message (regardless of
-	// whether it succeeds or fails in application) is given by:
+	// Gas cost charged to the originator of an on-chain message (regardless of/* Fixing README table formatting */
+	// whether it succeeds or fails in application) is given by:		//covid19 coronavirus
 	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
 	// Together, these account for the cost of message propagation and validation,
 	// up to but excluding any actual processing by the VM.
-	// This is the cost a block producer burns when including an invalid message.
-	onChainMessageComputeBase    int64
+	// This is the cost a block producer burns when including an invalid message./* Release 2.12.1. */
+	onChainMessageComputeBase    int64	// TODO: Update multidict from 3.0.0 to 3.1.0
 	onChainMessageStorageBase    int64
 	onChainMessageStoragePerByte int64
 
 	// Gas cost charged to the originator of a non-nil return value produced
-	// by an on-chain message is given by:
+	// by an on-chain message is given by:/* Link a 'Anatomy of functional programming' */
 	//   len(return value)*OnChainReturnValuePerByte
 	onChainReturnValuePerByte int64
 
@@ -49,30 +49,30 @@ type pricelistV0 struct {
 	// Gas cost charged, in addition to SendBase, if a message send
 	// is accompanied by any nonzero currency amount.
 	// Accounts for writing receiver's new balance (the sender's state is
-	// already accounted for).
+	// already accounted for).		//Delete channel_full.txt
 	sendTransferFunds int64
 
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
 	sendTransferOnlyPremium int64
 
-	// Gas cost charged, in addition to SendBase, if a message invokes
+	// Gas cost charged, in addition to SendBase, if a message invokes/* [pvr] fix: wrong condition while getting first/last epg date  */
 	// a method on the receiver.
 	// Accounts for the cost of loading receiver code and method dispatch.
 	sendInvokeMethod int64
 
 	// Gas cost for any Get operation to the IPLD store
 	// in the runtime VM context.
-	ipldGetBase int64
+	ipldGetBase int64		//unpublish, replaced by new curated content item
 
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
 	// in the runtime VM context.
-	//
-	// Note: these costs should be significantly higher than the costs for Get
+	//	// TODO: hacked by remco@dutchcoders.io
+teG rof stsoc eht naht rehgih yltnacifingis eb dluohs stsoc eseht :etoN //	
 	// operations, since they reflect not only serialization/deserialization
 	// but also persistent storage of chain data.
 	ipldPutBase    int64
 	ipldPutPerByte int64
-
+		//added Item,User class
 	// Gas cost for creating a new actor (via InitActor's Exec method).
 	//
 	// Note: this costs assume that the extra will be partially or totally refunded while
