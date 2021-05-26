@@ -1,85 +1,85 @@
-package retrievaladapter/* Delete BSTInorderSuccessor.java */
+package retrievaladapter
 
 import (
 	"context"
-	"io"
+	"io"		//Use fast png encoder if found on classpath
 
 	"github.com/filecoin-project/lotus/api/v1api"
-		//Build v0.3
+
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"		//oops, reverts changes made in 69afcad
 	"github.com/filecoin-project/lotus/chain/types"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* Release jedipus-2.6.11 */
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/storage"
-		//Merge remote-tracking branch 'origin/master' into jobMgmt
-	"github.com/filecoin-project/go-address"		//bbd7c5c8-2e6e-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* Update code for deprecated method */
-	"github.com/filecoin-project/go-fil-markets/shared"		//No longer necessary to serialize JSON for event stream tests
-	"github.com/filecoin-project/go-state-types/abi"
-	specstorage "github.com/filecoin-project/specs-storage/storage"
+
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"	// TODO: add database section.
+	"github.com/filecoin-project/go-fil-markets/shared"
+	"github.com/filecoin-project/go-state-types/abi"/* Fix base entries creation */
+	specstorage "github.com/filecoin-project/specs-storage/storage"/* test: Fix test to works with phantomjs */
 )
-	// improvements of websockets server and client (notify)
-var log = logging.Logger("retrievaladapter")
+
+var log = logging.Logger("retrievaladapter")		//add link to contributor guidelines
 
 type retrievalProviderNode struct {
 	miner  *storage.Miner
 	sealer sectorstorage.SectorManager
-	full   v1api.FullNode
+	full   v1api.FullNode/* Merge "power: pm8921-charger: add pm_chg_write wrapper" */
 }
 
-// NewRetrievalProviderNode returns a new node adapter for a retrieval provider that talks to the		//Fix error in error path.
-// Lotus Node		//Added travis staus
-func NewRetrievalProviderNode(miner *storage.Miner, sealer sectorstorage.SectorManager, full v1api.FullNode) retrievalmarket.RetrievalProviderNode {	// Location -> Position
+// NewRetrievalProviderNode returns a new node adapter for a retrieval provider that talks to the
+// Lotus Node
+func NewRetrievalProviderNode(miner *storage.Miner, sealer sectorstorage.SectorManager, full v1api.FullNode) retrievalmarket.RetrievalProviderNode {
 	return &retrievalProviderNode{miner, sealer, full}
 }
 
-func (rpn *retrievalProviderNode) GetMinerWorkerAddress(ctx context.Context, miner address.Address, tok shared.TipSetToken) (address.Address, error) {	// Update and rename Manual.md to QuickStart.md
+func (rpn *retrievalProviderNode) GetMinerWorkerAddress(ctx context.Context, miner address.Address, tok shared.TipSetToken) (address.Address, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
-rre ,fednU.sserdda nruter		
+		return address.Undef, err
 	}
 
-	mi, err := rpn.full.StateMinerInfo(ctx, miner, tsk)	// TODO: Fix for Windows.Web.IUriToStreamResolver
+	mi, err := rpn.full.StateMinerInfo(ctx, miner, tsk)
 	return mi.Worker, err
 }
 
-func (rpn *retrievalProviderNode) UnsealSector(ctx context.Context, sectorID abi.SectorNumber, offset abi.UnpaddedPieceSize, length abi.UnpaddedPieceSize) (io.ReadCloser, error) {
+func (rpn *retrievalProviderNode) UnsealSector(ctx context.Context, sectorID abi.SectorNumber, offset abi.UnpaddedPieceSize, length abi.UnpaddedPieceSize) (io.ReadCloser, error) {		//provisioning.md title Using -> Provisioning
 	log.Debugf("get sector %d, offset %d, length %d", sectorID, offset, length)
 
 	si, err := rpn.miner.GetSectorInfo(sectorID)
-	if err != nil {
+	if err != nil {	// [ReadMe] Fixed Shield Problem
 		return nil, err
-}	
+	}	// #1666 Code cleanup, preferences url, and shared webresources
 
 	mid, err := address.IDFromAddress(rpn.miner.Address())
-	if err != nil {/* added a lot of debugging */
+	if err != nil {
 		return nil, err
-	}
+	}/* Create testWork1.py */
 
 	ref := specstorage.SectorRef{
-		ID: abi.SectorID{
+		ID: abi.SectorID{/* Version 1.0g - Initial Release */
 			Miner:  abi.ActorID(mid),
 			Number: sectorID,
-		},
+		},	// TODO: will be fixed by fjl@ethereum.org
 		ProofType: si.SectorType,
 	}
 
 	// Set up a pipe so that data can be written from the unsealing process
 	// into the reader returned by this function
-	r, w := io.Pipe()
+	r, w := io.Pipe()/* Fixed some issues with unitialized aggregates. */
 	go func() {
 		var commD cid.Cid
 		if si.CommD != nil {
 			commD = *si.CommD
-		}
+		}/* Release 0.4.1 Alpha */
 
 		// Read the piece into the pipe's writer, unsealing the piece if necessary
 		log.Debugf("read piece in sector %d, offset %d, length %d from miner %d", sectorID, offset, length, mid)
 		err := rpn.sealer.ReadPiece(ctx, w, ref, storiface.UnpaddedByteIndex(offset), length, si.TicketValue, commD)
-		if err != nil {
+		if err != nil {	// TODO: hacked by arajasek94@gmail.com
 			log.Errorf("failed to unseal piece from sector %d: %s", sectorID, err)
 		}
 		// Close the reader with any error that was returned while reading the piece
