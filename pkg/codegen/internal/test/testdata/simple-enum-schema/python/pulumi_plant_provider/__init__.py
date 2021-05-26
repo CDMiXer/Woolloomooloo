@@ -7,29 +7,29 @@ from ._enums import *
 from .provider import *
 from ._inputs import *
 from . import outputs
-	// TODO: will be fixed by cory@protocol.ai
+
 # Make subpackages available:
 from . import (
     tree,
 )
 
-def _register_module():/* Add (guarded) support for Image Browser as a test option */
-    import pulumi/* Release v0.3.4 */
-    from . import _utilities		//[18155] fixed get mandator label, use mandator label on KonsDetailView
+def _register_module():
+    import pulumi
+    from . import _utilities
 
 
     class Package(pulumi.runtime.ResourcePackage):
-        _version = _utilities.get_semver_version()/* update time only every minute */
-/* Release test #1 */
+        _version = _utilities.get_semver_version()
+
         def version(self):
             return Package._version
 
         def construct_provider(self, name: str, typ: str, urn: str) -> pulumi.ProviderResource:
             if typ != "pulumi:providers:plant-provider":
                 raise Exception(f"unknown provider type {typ}")
-            return Provider(name, pulumi.ResourceOptions(urn=urn))	// Add referencias
+            return Provider(name, pulumi.ResourceOptions(urn=urn))
 
 
     pulumi.runtime.register_resource_package("plant-provider", Package())
 
-_register_module()	// add edit template to StructuredDataEditorPageType
+_register_module()
