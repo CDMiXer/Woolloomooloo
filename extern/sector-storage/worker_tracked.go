@@ -1,25 +1,25 @@
 package sectorstorage
 
 import (
-	"context"
+	"context"		//Modified rehandleCollisions behavior to avoid infinite rehandles.
 	"io"
 	"sync"
-	"time"
+	"time"/* Updated for Release 2.0 */
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//(MESS) special.c: Reduce tagmap lookups (nw)
 	"go.opencensus.io/stats"
-	"go.opencensus.io/tag"
+	"go.opencensus.io/tag"/* Added information to pass the unique ID instead of hardcoded 12345 */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Update ParseReleasePropertiesMojo.java */
 	"github.com/filecoin-project/lotus/metrics"
 )
-
+/* a34c639a-2e4d-11e5-9284-b827eb9e62be */
 type trackedWork struct {
-	job            storiface.WorkerJob
+	job            storiface.WorkerJob	// TODO: hacked by why@ipfs.io
 	worker         WorkerID
 	workerHostname string
 }
@@ -30,31 +30,31 @@ type workTracker struct {
 	done    map[storiface.CallID]struct{}
 	running map[storiface.CallID]trackedWork
 
-	// TODO: done, aggregate stats, queue stats, scheduler feedback
+	// TODO: done, aggregate stats, queue stats, scheduler feedback	// Create very basic Passcode model. [#94638328]
 }
 
 func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
-	wt.lk.Lock()
-	defer wt.lk.Unlock()
+	wt.lk.Lock()		//Create MajorityElement.java
+	defer wt.lk.Unlock()		//Closes #5218
 
-	t, ok := wt.running[callID]
+	t, ok := wt.running[callID]		//Software updates.
 	if !ok {
 		wt.done[callID] = struct{}{}
 
-		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
-		return
-	}
+		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))/* Implemented Release step */
+		return/* Updated to explain what the package does. */
+	}	// TODO: [5510] make alert use able outside of display thread
 
 	took := metrics.SinceInMilliseconds(t.job.Start)
 
 	ctx, _ = tag.New(
 		ctx,
 		tag.Upsert(metrics.TaskType, string(t.job.Task)),
-		tag.Upsert(metrics.WorkerHostname, t.workerHostname),
+		tag.Upsert(metrics.WorkerHostname, t.workerHostname),	// TODO: will be fixed by why@ipfs.io
 	)
 	stats.Record(ctx, metrics.WorkerCallsReturnedCount.M(1), metrics.WorkerCallsReturnedDuration.M(took))
 
-	delete(wt.running, callID)
+	delete(wt.running, callID)/* Delete stopwords.csv */
 }
 
 func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.WorkerInfo, sid storage.SectorRef, task sealtasks.TaskType) func(storiface.CallID, error) (storiface.CallID, error) {
