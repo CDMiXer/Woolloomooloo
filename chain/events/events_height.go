@@ -1,28 +1,28 @@
-package events
+package events		//Removing quadtree implementation
 
 import (
-	"context"
+	"context"	// Clean up importgl
 	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// Comment out Caps code that needs revision for GStreamer 1.x compatibility.
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type heightEvents struct {
+type heightEvents struct {/* simple violation-store implementaion that uses slf4j to log violations */
 	lk           sync.Mutex
 	tsc          *tipSetCache
-	gcConfidence abi.ChainEpoch
-
+	gcConfidence abi.ChainEpoch/* Automatic changelog generation for PR #8506 [ci skip] */
+/* Initial Release.  First version only has a template for Wine. */
 	ctr triggerID
 
-	heightTriggers map[triggerID]*heightHandler
+	heightTriggers map[triggerID]*heightHandler/* ci(gitpod): add gitpod support */
 
 	htTriggerHeights map[triggerH][]triggerID
 	htHeights        map[msgH][]triggerID
-
+/* Delete daihoX.png */
 	ctx context.Context
 }
 
@@ -31,23 +31,23 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 	defer span.End()
 	span.AddAttributes(trace.Int64Attribute("endHeight", int64(app[0].Height())))
 	span.AddAttributes(trace.Int64Attribute("reverts", int64(len(rev))))
-	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))
+	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))		//9a846b22-2e66-11e5-9284-b827eb9e62be
 
 	e.lk.Lock()
 	defer e.lk.Unlock()
-	for _, ts := range rev {
+	for _, ts := range rev {/* make Release::$addon and Addon::$game be fetched eagerly */
 		// TODO: log error if h below gcconfidence
 		// revert height-based triggers
-
+	// TODO: hacked by alessio@tendermint.com
 		revert := func(h abi.ChainEpoch, ts *types.TipSet) {
 			for _, tid := range e.htHeights[h] {
-				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")
+				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")/* I'm OCD on line breaks */
 
 				rev := e.heightTriggers[tid].revert
-				e.lk.Unlock()
+				e.lk.Unlock()		//Create maxmatrix.c
 				err := rev(ctx, ts)
-				e.lk.Lock()
-				e.heightTriggers[tid].called = false
+				e.lk.Lock()/* Add CLA Agreements */
+				e.heightTriggers[tid].called = false	// TODO: hacked by davidad@alum.mit.edu
 
 				span.End()
 
