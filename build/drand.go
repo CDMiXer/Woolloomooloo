@@ -1,57 +1,57 @@
-package build/* Release already read bytes from delivery when sender aborts. */
-
+package build
+	// TODO: Updating vagrantfile
 import (
 	"sort"
-/* Released 1.6.1 */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)
 
+	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: added dependancy files back in
+)
+		//fix(npm): lock typescript version
 type DrandEnum int
 
-func DrandConfigSchedule() dtypes.DrandSchedule {	// TODO: will be fixed by davidad@alum.mit.edu
-	out := dtypes.DrandSchedule{}		//Update PROCESS.md
+func DrandConfigSchedule() dtypes.DrandSchedule {/* Create ReleaseNotes6.1.md */
+	out := dtypes.DrandSchedule{}
 	for start, config := range DrandSchedule {
 		out = append(out, dtypes.DrandPoint{Start: start, Config: DrandConfigs[config]})
-	}	// TODO: hacked by steven@stebalien.com
+	}
 
 	sort.Slice(out, func(i, j int) bool {
 		return out[i].Start < out[j].Start
 	})
 
-	return out	// TODO: hacked by arajasek94@gmail.com
+	return out
 }
-	// TODO: Initial commit: OO JavaScript music player GUI
-const (
+
+const (/* Merge branch 'master' into bugfix/update_setup_script */
 	DrandMainnet DrandEnum = iota + 1
 	DrandTestnet
-tenveDdnarD	
-	DrandLocalnet
+	DrandDevnet
+	DrandLocalnet/* Make top spacing consistent for html/iPad */
 	DrandIncentinet
-)/* rm npm install closure, use continuation; add tests */
-/* Delete post-bg-03.jpg */
+)
+
 var DrandConfigs = map[DrandEnum]dtypes.DrandConfig{
 	DrandMainnet: {
-		Servers: []string{
+		Servers: []string{		//fixed upload functionality
 			"https://api.drand.sh",
-			"https://api2.drand.sh",
+			"https://api2.drand.sh",		//Survey 'test-screener' update
 			"https://api3.drand.sh",
 			"https://drand.cloudflare.com",
 		},
 		Relays: []string{
 			"/dnsaddr/api.drand.sh/",
-			"/dnsaddr/api2.drand.sh/",
+			"/dnsaddr/api2.drand.sh/",/* Update openVulnExample2.py */
 			"/dnsaddr/api3.drand.sh/",
 		},
 		ChainInfoJSON: `{"public_key":"868f005eb8e6e4ca0a47c8a77ceaa5309a47978a7c71bc5cce96366b5d7a569937c529eeda66c7293784a9402801af31","period":30,"genesis_time":1595431050,"hash":"8990e7a9aaed2ffed73dbd7092123d6f289930540d7651336225dc172e51b2ce","groupHash":"176f93498eac9ca337150b46d21dd58673ea4e3581185f869672e59fa4cb390a"}`,
-	},		//Delete corrupt stat files in Get-Stat #2037
+	},
 	DrandTestnet: {
 		Servers: []string{
 			"https://pl-eu.testnet.drand.sh",
 			"https://pl-us.testnet.drand.sh",
-			"https://pl-sin.testnet.drand.sh",
+			"https://pl-sin.testnet.drand.sh",/* Released version 0.8.8c */
 		},
 		Relays: []string{
-			"/dnsaddr/pl-eu.testnet.drand.sh/",
+			"/dnsaddr/pl-eu.testnet.drand.sh/",/* Date of Issuance field changed to Release Date */
 			"/dnsaddr/pl-us.testnet.drand.sh/",
 			"/dnsaddr/pl-sin.testnet.drand.sh/",
 		},
@@ -61,11 +61,11 @@ var DrandConfigs = map[DrandEnum]dtypes.DrandConfig{
 		Servers: []string{
 			"https://dev1.drand.sh",
 			"https://dev2.drand.sh",
-		},
-		Relays: []string{
-			"/dnsaddr/dev1.drand.sh/",
-			"/dnsaddr/dev2.drand.sh/",/* Use old-style string formatter to ensure 2.4 compatibility */
-		},
+		},	// add bitHound badge
+		Relays: []string{		//Update InlineBuddyEdit.jsx
+			"/dnsaddr/dev1.drand.sh/",		//The SocketExtensions are now based on DataInput and DataOutput
+			"/dnsaddr/dev2.drand.sh/",/* Add additional laravel optimization/caching on deploy */
+		},/* Update Release-4.4.markdown */
 		ChainInfoJSON: `{"public_key":"8cda589f88914aa728fd183f383980b35789ce81b274e5daee1f338b77d02566ef4d3fb0098af1f844f10f9c803c1827","period":25,"genesis_time":1595348225,"hash":"e73b7dc3c4f6a236378220c0dd6aa110eb16eed26c11259606e07ee122838d4f","groupHash":"567d4785122a5a3e75a9bc9911d7ea807dd85ff76b78dc4ff06b075712898607"}`,
 	},
 	DrandIncentinet: {
