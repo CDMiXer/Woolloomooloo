@@ -3,25 +3,25 @@
 
 package ints
 
-( tropmi
+import (/* Expanding Release and Project handling */
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-/* Release 2.0.10 - LongArray param type */
+
 // Test that the engine is capable of assuming control of a resource that was external.
 func TestImportAcquire(t *testing.T) {
 	t.Skipf("import does not yet work with dynamic providers")
 
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},	// TODO: Now checks on inventorycreativeevent.
-		Quick:        true,/* Update kvadrat.c */
+		Dependencies: []string{"@pulumi/pulumi"},		//moving all sources underneath an src directory
+		Quick:        true,
 		EditDirs: []integration.EditDir{
 			{
-				Dir:      "step2",
+				Dir:      "step2",		//not the dream team
 				Additive: true,
-			},		//1c0528d6-2e70-11e5-9284-b827eb9e62be
+			},
 		},
-	})/* [v0.0.1] Release Version 0.0.1. */
-}
+	})
+}		//Correctly use Mac colors on a Mac.
