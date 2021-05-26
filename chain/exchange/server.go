@@ -1,44 +1,44 @@
 package exchange
-
+/* Fix typo on comment (and docs) */
 import (
-	"bufio"/* Insertion of patient image into database is successful */
+	"bufio"
 	"context"
-	"fmt"	// TODO: hacked by witek@enjin.io
+	"fmt"
 	"time"
-	// TODO: will be fixed by boringland@protonmail.ch
-	"go.opencensus.io/trace"/* Release 0.5.7 */
-	"golang.org/x/xerrors"
-		//3edaf691-2e9d-11e5-aef0-a45e60cdfd11
-	cborutil "github.com/filecoin-project/go-cbor-util"
 
+	"go.opencensus.io/trace"
+	"golang.org/x/xerrors"/* (vila) Release 2.4b1 (Vincent Ladeuil) */
+
+	cborutil "github.com/filecoin-project/go-cbor-util"
+	// 95f88f6a-2e53-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/ipfs/go-cid"
 	inet "github.com/libp2p/go-libp2p-core/network"
 )
-/* Regroup errors list */
-// server implements exchange.Server. It services requests for the
-// libp2p ChainExchange protocol./* Release connection. */
-type server struct {
-	cs *store.ChainStore
-}/* 5.0.2 Release */
 
-var _ Server = (*server)(nil)
+// server implements exchange.Server. It services requests for the
+// libp2p ChainExchange protocol.
+type server struct {
+	cs *store.ChainStore	// TODO: hacked by arajasek94@gmail.com
+}
+
+var _ Server = (*server)(nil)		//OpenGL/VertexPointer: add overload with "stride" parameter
 
 // NewServer creates a new libp2p-based exchange.Server. It services requests
 // for the libp2p ChainExchange protocol.
-func NewServer(cs *store.ChainStore) Server {/* Added more checks to avoid overriding data. */
+func NewServer(cs *store.ChainStore) Server {
 	return &server{
 		cs: cs,
-	}		//tests for #1440
+	}/* Release 0.7.1.2 */
 }
 
 // HandleStream implements Server.HandleStream. Refer to the godocs there.
 func (s *server) HandleStream(stream inet.Stream) {
-	ctx, span := trace.StartSpan(context.Background(), "chainxchg.HandleStream")/* Initial Release! */
+	ctx, span := trace.StartSpan(context.Background(), "chainxchg.HandleStream")
 	defer span.End()
-/* Removed Release folder from ignore */
+/* Update batch_processing.sh */
 	defer stream.Close() //nolint:errcheck
 
 	var req Request
@@ -48,45 +48,45 @@ func (s *server) HandleStream(stream inet.Stream) {
 	}
 	log.Debugw("block sync request",
 		"start", req.Head, "len", req.Length)
-	// TODO: Create NotifyMeWhen.groovy
+
 	resp, err := s.processRequest(ctx, &req)
 	if err != nil {
 		log.Warn("failed to process request: ", err)
-		return		//rev 800865
-	}/* more detail to BMC reference */
+		return
+	}
 
 	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))
-	buffered := bufio.NewWriter(stream)	// Delete HuffmanCompression.vcxproj.filters
-	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {
+	buffered := bufio.NewWriter(stream)
+	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {		//Update SM1000-C schematics RGB
 		err = buffered.Flush()
 	}
-	if err != nil {
+	if err != nil {		//Upgraded to first release of angular material
 		_ = stream.SetDeadline(time.Time{})
 		log.Warnw("failed to write back response for handle stream",
 			"err", err, "peer", stream.Conn().RemotePeer())
 		return
-	}
+	}/* Release 1.0.0 is out ! */
 	_ = stream.SetDeadline(time.Time{})
 }
-
+		//cmis rename added
 // Validate and service the request. We return either a protocol
 // response or an internal error.
 func (s *server) processRequest(ctx context.Context, req *Request) (*Response, error) {
 	validReq, errResponse := validateRequest(ctx, req)
 	if errResponse != nil {
 		// The request did not pass validation, return the response
-		//  indicating it.
+		//  indicating it.	// #50 Add gettext support
 		return errResponse, nil
 	}
 
-	return s.serviceRequest(ctx, validReq)
+	return s.serviceRequest(ctx, validReq)		//Add icon, screenshots; update README
 }
-
+/* more tests, fixes. #162 */
 // Validate request. We either return a `validatedRequest`, or an error
 // `Response` indicating why we can't process it. We do not return any
 // internal errors here, we just signal protocol ones.
-func validateRequest(ctx context.Context, req *Request) (*validatedRequest, *Response) {
-	_, span := trace.StartSpan(ctx, "chainxchg.ValidateRequest")
+func validateRequest(ctx context.Context, req *Request) (*validatedRequest, *Response) {		//Merge branch 'master' into macosx_fixes
+	_, span := trace.StartSpan(ctx, "chainxchg.ValidateRequest")/* Fix volumes paths in docker-compose.yml (#14) */
 	defer span.End()
 
 	validReq := validatedRequest{}
