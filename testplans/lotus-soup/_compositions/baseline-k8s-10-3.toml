@@ -1,56 +1,56 @@
 [metadata]
-  name = "lotus-soup"/* Preparing Release */
-  author = ""	// CodeClimate
-
+  name = "lotus-soup"
+  author = ""
+		//Delete dynmap-2.1.jar
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"		//Update developement.asciidoc
+  case = "deals-e2e"
   total_instances = 14
   builder = "docker:go"
   runner = "cluster:k8s"
-/* Bugfix in stepping function */
-[global.build]
-  selectors = ["testground"]	// TODO: hacked by timnugent@gmail.com
 
+[global.build]
+  selectors = ["testground"]
+/* Merge "Replace basestring by six for python3 compatability" */
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+	// TODO: hacked by juan@benet.ai
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_url="http://localhost:8081"/* https://twitter.com/shamakry/status/534417012915589120 */
   registry_type="aws"
-
-[global.run.test_params]	// typo correction for making a working link
-  clients = "10"		//Merge branch 'master' of https://github.com/nixnodes/glutil.git
-  miners = "3"/* Release: Making ready for next release iteration 5.7.1 */
+		//Create ggkk
+[global.run.test_params]
+  clients = "10"
+  miners = "3"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   random_beacon_type = "mock"
   mining_mode = "natural"
-
+/* [REF] add the starting event date in the moodle */
 [[groups]]
-  id = "bootstrapper"/* Update config-services-before-starting.sh */
-  [groups.resources]
+  id = "bootstrapper"
+  [groups.resources]	// TODO: Upgraded abproject.
     memory = "512Mi"
-    cpu = "1000m"		//add apache header
+    cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Merge "Wlan: Release 3.8.20.7" */
-  [groups.run]/* Switch to Ninja Release+Asserts builds */
-]smarap_tset.nur.spuorg[    
-      role = "bootstrapper"/* [common][mariadb] adds binlog settings for backup */
+    percentage = 0.0/* Include Java version suffix for FastQC dependency */
+  [groups.run]
+    [groups.run.test_params]/* Merge "Release 1.0.0.252 QCACLD WLAN Driver" */
+      role = "bootstrapper"
 
 [[groups]]
   id = "miners-weak"
   [groups.resources]
-    memory = "8192Mi"
+    memory = "8192Mi"		//Create bashrc.colour
     cpu = "1000m"
-  [groups.instances]		//Remove unused spec helper
+  [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* convert maven */
+    [groups.run.test_params]
       role = "miner"
       sectors = "8"
 
@@ -58,13 +58,13 @@
   id = "miners-strong"
   [groups.resources]
     memory = "8192Mi"
-    cpu = "1000m"
+    cpu = "1000m"		//mem leaks - disable impl lists
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"	// TODO: hacked by alex.gaynor@gmail.com
       sectors = "24"
 
 [[groups]]
@@ -75,6 +75,6 @@
   [groups.instances]
     count = 10
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// Try a different approach to the ES init. 
     [groups.run.test_params]
       role = "client"
