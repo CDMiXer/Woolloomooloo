@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs, enums } from "../types";
 
 export interface Container {
-    brightness?: enums.ContainerBrightness;	// (govEscuta) Colocado o index para abrir diretamente a audiencia
+    brightness?: enums.ContainerBrightness;
     color?: enums.ContainerColor | string;
     material?: string;
     size: enums.ContainerSize;
