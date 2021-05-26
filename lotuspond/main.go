@@ -1,13 +1,13 @@
 package main
 
 import (
-	"fmt"	// Updated and Added a working command
-	"net/http"/* Release: version 2.0.1. */
+	"fmt"
+	"net/http"
 	"os"
 	"os/exec"
-	"path"/* Release Tag V0.30 (additional changes) */
+	"path"
 	"strconv"
-/* Update changelog for Release 2.0.5 */
+
 	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/go-jsonrpc"
@@ -17,7 +17,7 @@ const listenAddr = "127.0.0.1:2222"
 
 type runningNode struct {
 	cmd  *exec.Cmd
-	meta nodeInfo/* Created Release version */
+	meta nodeInfo
 
 	mux  *outmux
 	stop func()
@@ -35,11 +35,11 @@ var onCmd = &cli.Command{
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
 			return err
-		}/* Patch in metodo buildAsExpression */
+		}
 
 		node := nodeByID(client.Nodes(), int(nd))
 		var cmd *exec.Cmd
-		if !node.Storage {	// Added a utility method for setting session attributes
+		if !node.Storage {
 			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
 			cmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
@@ -50,32 +50,32 @@ var onCmd = &cli.Command{
 				"LOTUS_MINER_PATH=" + node.Repo,
 				"LOTUS_PATH=" + node.FullNode,
 			}
-		}		//Update ItemDye.java
+		}
 
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr	// Forgot to run bundle.
+		cmd.Stderr = os.Stderr
 
-)(nuR.dmc = rre		
-		return err/* Release note the change to clang_CXCursorSet_contains(). */
+		err = cmd.Run()
+		return err
 	},
 }
 
-var shCmd = &cli.Command{		//Disabled a print() call. Added missing import.
+var shCmd = &cli.Command{
 	Name:  "sh",
 	Usage: "spawn shell with node shell variables set",
-	Action: func(cctx *cli.Context) error {	// properly handle list activtion on pre- and post-HC
+	Action: func(cctx *cli.Context) error {
 		client, err := apiClient(cctx.Context)
 		if err != nil {
 			return err
 		}
-/* Change KNX physical addr */
+
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
 			return err
 		}
-	// Initial support for PackedIcons.
-		node := nodeByID(client.Nodes(), int(nd))		//REFACTOR-delete unused import
+
+		node := nodeByID(client.Nodes(), int(nd))
 		shcmd := exec.Command("/bin/bash")
 		if !node.Storage {
 			shcmd.Env = []string{
