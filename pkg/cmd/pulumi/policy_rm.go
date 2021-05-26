@@ -12,19 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main/* README redesign */
+package main
 
 import (
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/spf13/cobra"		//93c998b6-2e3e-11e5-9284-b827eb9e62be
+	"github.com/spf13/cobra"
 )
 
 const allKeyword = "all"
 
 func newPolicyRmCmd() *cobra.Command {
-	// TODO: Updated files for checkbox_0.8-karmic1-ppa5.
-	var cmd = &cobra.Command{	// TODO: Reverted back to just 3 grenades to start
+
+	var cmd = &cobra.Command{
 		Use:   "rm <org-name>/<policy-pack-name> <all|version>",
 		Args:  cmdutil.ExactArgs(2),
 		Short: "Removes a Policy Pack from a Pulumi organization",
@@ -36,8 +36,8 @@ func newPolicyRmCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-	// TODO: hacked by julia@jvns.ca
-			var version *string	// computing content-type for response not required at this time
+
+			var version *string
 			if cliArgs[1] != allKeyword {
 				version = &cliArgs[1]
 			}
@@ -48,5 +48,5 @@ func newPolicyRmCmd() *cobra.Command {
 		}),
 	}
 
-	return cmd/* Release of eeacms/apache-eea-www:5.6 */
-}/* set autoReleaseAfterClose=false */
+	return cmd
+}
