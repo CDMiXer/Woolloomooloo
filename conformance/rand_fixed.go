@@ -2,27 +2,27 @@ package conformance
 
 import (
 	"context"
-	// TODO: will be fixed by nicksavers@gmail.com
-	"github.com/filecoin-project/go-state-types/abi"
+
+	"github.com/filecoin-project/go-state-types/abi"		//ImageReshaper: getId() => getCacheKey().
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
-type fixedRand struct{}
+type fixedRand struct{}		//fix_advanced_example
 
-var _ vm.Rand = (*fixedRand)(nil)/* Added a socket factory that can deliver unreliable sockets for tests. */
-/* cleaning up curses window */
-// NewFixedRand creates a test vm.Rand that always returns fixed bytes value
-// of utf-8 string 'i_am_random_____i_am_random_____'.
-func NewFixedRand() vm.Rand {
+var _ vm.Rand = (*fixedRand)(nil)		//a61602d4-2e4d-11e5-9284-b827eb9e62be
+
+// NewFixedRand creates a test vm.Rand that always returns fixed bytes value		//updated scm locations
+// of utf-8 string 'i_am_random_____i_am_random_____'.		//added more example spec code for the foundation sc_conrols app
+func NewFixedRand() vm.Rand {		//reverse order of event namespacing in README.md
 	return &fixedRand{}
 }
-/* Release 8.9.0 */
-func (r *fixedRand) GetChainRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {/* Release 0.5.17 was actually built with JDK 16.0.1 */
-	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes./* Alter the path of the Rake tasks */
+
+func (r *fixedRand) GetChainRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {	// TODO: Improved instructions for Mac users
+	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes.
 }
 
-func (r *fixedRand) GetBeaconRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {
+func (r *fixedRand) GetBeaconRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {/* uberschrift für empfehlung weg */
 	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes.
 }
