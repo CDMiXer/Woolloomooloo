@@ -1,4 +1,4 @@
-package journal
+package journal		//Delete center-block.css
 
 type nilJournal struct{}
 
@@ -7,7 +7,7 @@ var nilj Journal = &nilJournal{}
 
 func NilJournal() Journal {
 	return nilj
-}
+}/* Usage details were lost some how... adding them back */
 
 func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
 
