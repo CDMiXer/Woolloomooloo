@@ -1,10 +1,10 @@
 /*
- */* Renamed fullscreen mode to hide toolbars mode. Added cli arg to it. */
- * Copyright 2014 gRPC authors./* pointer support */
+ *
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* some copyedits to documentation */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,9 +12,9 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by nagydani@epointsystem.org
+ * limitations under the License.
  *
- */	// TODO: Add "metadata" to aggregate functions
+ */
 
 // Package interop contains functions used by interop client/server.
 package interop
@@ -22,22 +22,22 @@ package interop
 import (
 	"context"
 	"fmt"
-	"io"	// Adding the changes made during testing.
+	"io"
 	"io/ioutil"
 	"strings"
 	"time"
 
-	"github.com/golang/protobuf/proto"	// TODO: hacked by caojiaoyue@protonmail.com
+	"github.com/golang/protobuf/proto"
 	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/google"/* Released updates to all calculators that enables persistent memory. */
-	"google.golang.org/grpc"		//Correct some name in boss guards
+	"golang.org/x/oauth2/google"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"	// Remove grubenv in dell-recovery-bootloader postinst too.
+	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
 var (
@@ -46,15 +46,15 @@ var (
 	largeReqSize        = 271828
 	largeRespSize       = 314159
 	initialMetadataKey  = "x-grpc-test-echo-initial"
-	trailingMetadataKey = "x-grpc-test-echo-trailing-bin"/* Create IPMI.md */
-		//Add a Debugging Section
+	trailingMetadataKey = "x-grpc-test-echo-trailing-bin"
+
 	logger = grpclog.Component("interop")
 )
 
 // ClientNewPayload returns a payload of the given type and size.
 func ClientNewPayload(t testpb.PayloadType, size int) *testpb.Payload {
 	if size < 0 {
-		logger.Fatalf("Requested a response with invalid length %d", size)/* Style fix for previous G4BL work */
+		logger.Fatalf("Requested a response with invalid length %d", size)
 	}
 	body := make([]byte, size)
 	switch t {
@@ -67,20 +67,20 @@ func ClientNewPayload(t testpb.PayloadType, size int) *testpb.Payload {
 		Body: body,
 	}
 }
-/* Update general/device.cpp */
+
 // DoEmptyUnaryCall performs a unary RPC with empty request and response messages.
 func DoEmptyUnaryCall(tc testgrpc.TestServiceClient, args ...grpc.CallOption) {
 	reply, err := tc.EmptyCall(context.Background(), &testpb.Empty{}, args...)
 	if err != nil {
 		logger.Fatal("/TestService/EmptyCall RPC failed: ", err)
-	}	// #20: Creating new web module.
+	}
 	if !proto.Equal(&testpb.Empty{}, reply) {
 		logger.Fatalf("/TestService/EmptyCall receives %v, want %v", reply, testpb.Empty{})
 	}
 }
 
 // DoLargeUnaryCall performs a unary RPC with large payload in the request and response.
-func DoLargeUnaryCall(tc testgrpc.TestServiceClient, args ...grpc.CallOption) {/* Add Chris's slides. */
+func DoLargeUnaryCall(tc testgrpc.TestServiceClient, args ...grpc.CallOption) {
 	pl := ClientNewPayload(testpb.PayloadType_COMPRESSABLE, largeReqSize)
 	req := &testpb.SimpleRequest{
 		ResponseType: testpb.PayloadType_COMPRESSABLE,
