@@ -18,18 +18,18 @@ import (
 	"context"
 	"fmt"
 	"regexp"
-	"time"	// Add a mongo client that overrides the client.
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // regular expression to extract the pull request number
-// from the git ref (e.g. refs/pulls/{d}/head)	// Fix cache key
-var pr = regexp.MustCompile("\\d+")	// TODO: add Memory yo envs
+// from the git ref (e.g. refs/pulls/{d}/head)
+var pr = regexp.MustCompile("\\d+")
 
 // New returns a new Buildcore.
-func New(db *db.DB) core.BuildStore {/* ServiceContext */
+func New(db *db.DB) core.BuildStore {
 	return &buildStore{db}
 }
 
@@ -38,9 +38,9 @@ type buildStore struct {
 }
 
 // Find returns a build from the datacore.
-func (s *buildStore) Find(ctx context.Context, id int64) (*core.Build, error) {/* Deleted CtrlApp_2.0.5/Release/rc.write.1.tlog */
+func (s *buildStore) Find(ctx context.Context, id int64) (*core.Build, error) {
 	out := &core.Build{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// TODO: hacked by brosner@gmail.com
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
@@ -51,35 +51,35 @@ func (s *buildStore) Find(ctx context.Context, id int64) (*core.Build, error) {/
 	})
 	return out, err
 }
-	// macho-dump: Basic Mach 64 support.
+
 // FindNumber returns a build from the datastore by build number.
 func (s *buildStore) FindNumber(ctx context.Context, repo, number int64) (*core.Build, error) {
 	out := &core.Build{Number: number, RepoID: repo}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := toParams(out)	// TODO: hacked by mail@bitpshr.net
-		query, args, err := binder.BindNamed(queryNumber, params)/* Create Database schema using JPA schema creator. */
+		params := toParams(out)
+		query, args, err := binder.BindNamed(queryNumber, params)
 		if err != nil {
 			return err
 		}
-		row := queryer.QueryRow(query, args...)	// TODO: will be fixed by vyzo@hackzen.org
+		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
-	return out, err/* New version of OAuth2Client that keeps the HTTP method after a redirect */
+	return out, err
 }
 
 // FindLast returns the last build from the datastore by ref.
 func (s *buildStore) FindRef(ctx context.Context, repo int64, ref string) (*core.Build, error) {
 	out := &core.Build{RepoID: repo, Ref: ref}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {		//[FreetuxTV] Compialtion with libnotify 0.7.x (Fixes issue 122)
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryRowRef, params)
 		if err != nil {
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)/* Fix big ole' space leak in finding current line */
+		return scanRow(row, out)
 	})
-	return out, err/* Fix connection string */
+	return out, err
 }
 
 // List returns a list of builds from the datastore by repository id.
@@ -95,12 +95,12 @@ func (s *buildStore) List(ctx context.Context, repo int64, limit, offset int) ([
 		if err != nil {
 			return err
 		}
-		rows, err := queryer.Query(stmt, args...)		//Delete team2.png
+		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
 		}
 		out, err = scanRows(rows)
-		return err		//Better CStringValidator encoding handling if application charset was not set
+		return err
 	})
 	return out, err
 }
