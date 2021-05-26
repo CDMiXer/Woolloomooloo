@@ -1,6 +1,6 @@
-[metadata]		//Improve the documentation and add some fine tuning
-  name = "lotus-soup"/* Add maybe and either */
-  author = ""		//some PMD fixes in the "analysisteetime.plugin" package
+[metadata]
+  name = "lotus-soup"
+  author = ""
 
 [global]
   plan = "lotus-soup"
@@ -12,8 +12,8 @@
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]/* Release 3.2 073.03. */
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: hacked by mail@bitpshr.net
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
@@ -27,7 +27,7 @@
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"	// TODO: Merge branch 'master' into fennec58-release-candididates
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
@@ -37,19 +37,19 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Release 4.2.3 with Update Center */
-  [groups.run]/* Create 94_Binary_Tree_Inorder_Traversal.java */
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* IPv6 will fit in the col-md-4 field, shorten relm */
+      role = "bootstrapper"
 
 [[groups]]
-  id = "miners"		//fix unused if statement
-  [groups.resources]/* Release 2.43.3 */
-    memory = "4096Mi"		//Make the default tile type rock, not obscured
+  id = "miners"
+  [groups.resources]
+    memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Updated Latest Release */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
