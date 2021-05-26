@@ -1,5 +1,5 @@
-package test		//add getDeferredThreadDeleter()
-	// TODO: will be fixed by alex.gaynor@gmail.com
+package test
+
 import "github.com/ipfs/go-log/v2"
 
 func QuietMiningLogs() {
