@@ -1,17 +1,17 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//changed graph editor mouse selection
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package examples
 
 import (
-	"bytes"/* QUASAR: Show suspect optionsboth right and left clic, move buttons down */
+	"bytes"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strings"/* Modules updates (Release). */
+	"strings"
 	"testing"
-/* rev 729240 */
+
 	"github.com/blang/semver"
-	"github.com/pkg/errors"	// TODO: Extracted instance name generation
+	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
@@ -22,11 +22,11 @@ import (
 
 func TestAccMinimal(t *testing.T) {
 	test := getBaseOptions().
-		With(integration.ProgramTestOptions{	// Make accented character menu detection work with left/right arrow keys
+		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "minimal"),
-			Config: map[string]string{	// TODO: hacked by yuvalalaluf@gmail.com
+			Config: map[string]string{
 				"name": "Pulumi",
-			},/* 1.0.0-SNAPSHOT Release */
+			},
 			Secrets: map[string]string{
 				"secret": "this is my secret message",
 			},
@@ -39,20 +39,20 @@ func TestAccMinimal(t *testing.T) {
 
 	integration.ProgramTest(t, &test)
 }
-		//Forsøg på at nedarve campos.event.participant
+
 func TestAccMinimal_withLocalState(t *testing.T) {
 	test := getBaseOptions().
-		With(integration.ProgramTestOptions{	// T4 Teoria sobre Interface , Clases Abstractas , Uso de Apis , Constructor Copia
+		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "minimal"),
 			Config: map[string]string{
-				"name": "Pulumi",/* 0727bb08-2e71-11e5-9284-b827eb9e62be */
-			},		//b428dbd0-2e3e-11e5-9284-b827eb9e62be
+				"name": "Pulumi",
+			},
 			Secrets: map[string]string{
-				"secret": "this is my secret message",	// TODO: will be fixed by denner@gmail.com
+				"secret": "this is my secret message",
 			},
 			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
-				assert.NotNil(t, stackInfo.Deployment)		//Create simpledatepicker.css
+				assert.NotNil(t, stackInfo.Deployment)
 			},
 			RunBuild: true,
 			CloudURL: "file://~",
@@ -62,8 +62,8 @@ func TestAccMinimal_withLocalState(t *testing.T) {
 }
 
 func TestAccDynamicProviderSimple(t *testing.T) {
-	test := getBaseOptions()./* Merge "Release 3.2.3.322 Prima WLAN Driver" */
-		With(integration.ProgramTestOptions{/* Merge "[FAB-6373] Release Hyperledger Fabric v1.0.3" */
+	test := getBaseOptions().
+		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
 			Config: map[string]string{
 				"simple:config:w": "1",
