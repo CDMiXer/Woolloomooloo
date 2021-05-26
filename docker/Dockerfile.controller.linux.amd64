@@ -1,14 +1,14 @@
 FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
-
+/* Release of eeacms/eprtr-frontend:0.4-beta.29 */
 FROM alpine:3.11
 ENV GODEBUG netdns=go
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=amd64	// TODO: will be fixed by mail@bitpshr.net
+ENV DRONE_RUNNER_ARCH=amd64		//warehouse tile cleanup stage 2
 ENV DRONE_RUNNER_PLATFORM=linux/amd64
 ENV DRONE_RUNNER_CAPACITY=1
 ADD release/linux/amd64/drone-controller /bin/
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-
+	// Listeners reorganizados. Função de inversão de sinal implementada.
 ENTRYPOINT ["/bin/drone-controller"]
