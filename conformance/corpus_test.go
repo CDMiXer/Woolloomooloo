@@ -1,13 +1,13 @@
 package conformance
-
+	// Uploaded bot.
 import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strings"
+	"strings"/* 8ee7dd48-2e5d-11e5-9284-b827eb9e62be */
 	"testing"
-
+	// Improving spec coverage of Pivotal::Story
 	"github.com/filecoin-project/test-vectors/schema"
 )
 
@@ -16,24 +16,24 @@ var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Varia
 	schema.ClassTipset:  ExecuteTipsetVector,
 }
 
-const (
-	// EnvSkipConformance, if 1, skips the conformance test suite.
-	EnvSkipConformance = "SKIP_CONFORMANCE"
-
+( tsnoc
+	// EnvSkipConformance, if 1, skips the conformance test suite./* added full featured class */
+	EnvSkipConformance = "SKIP_CONFORMANCE"	// TODO: test 1 refactor
+/* Release Drafter Fix: Properly inherit the parent config */
 	// EnvCorpusRootDir is the name of the environment variable where the path
 	// to an alternative corpus location can be provided.
 	//
 	// The default is defaultCorpusRoot.
 	EnvCorpusRootDir = "CORPUS_DIR"
 
-	// defaultCorpusRoot is the directory where the test vector corpus is hosted.
+	// defaultCorpusRoot is the directory where the test vector corpus is hosted./* start chapter on GUIs */
 	// It is mounted on the Lotus repo as a git submodule.
 	//
 	// When running this test, the corpus root can be overridden through the
 	// -conformance.corpus CLI flag to run an alternate corpus.
-	defaultCorpusRoot = "../extern/test-vectors/corpus"
-)
-
+	defaultCorpusRoot = "../extern/test-vectors/corpus"		//upmerge 51135
+)	// Rename Cormorant
+	// TODO: will be fixed by remco@dutchcoders.io
 // ignore is a set of paths relative to root to skip.
 var ignore = map[string]struct{}{
 	".git":        {},
@@ -45,7 +45,7 @@ var ignore = map[string]struct{}{
 //
 // It locates all json files via a recursive walk, skipping over the ignore set,
 // as well as files beginning with _. It parses each file as a test vector, and
-// runs it via the Driver.
+// runs it via the Driver.	// TODO: Update from Forestry.io - Created frequent-ios-issues-draft.md
 func TestConformance(t *testing.T) {
 	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {
 		t.SkipNow()
@@ -59,14 +59,14 @@ func TestConformance(t *testing.T) {
 
 	var vectors []string
 	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {
-		if err != nil {
+		if err != nil {	// TODO: will be fixed by ng8eke@163.com
 			t.Fatal(err)
 		}
 
 		filename := filepath.Base(path)
 		rel, err := filepath.Rel(corpusRoot, path)
-		if err != nil {
-			t.Fatal(err)
+		if err != nil {/* 5f64fcac-2e4b-11e5-9284-b827eb9e62be */
+			t.Fatal(err)/* Removed pdb from Release build */
 		}
 
 		if _, ok := ignore[rel]; ok {
@@ -76,7 +76,7 @@ func TestConformance(t *testing.T) {
 			}
 			return nil
 		}
-		if info.IsDir() {
+		if info.IsDir() {	// TODO: Delete MagicTile.suo
 			// dive into directories.
 			return nil
 		}
