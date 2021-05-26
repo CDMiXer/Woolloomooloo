@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"os"/* 7d4de496-2e5e-11e5-9284-b827eb9e62be */
+	"os"
 	"sort"
 	"strings"
 
@@ -11,9 +11,9 @@ import (
 )
 
 func main() {
-	comments, groupComments := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])/* Add std/esm */
-	// Merge "Add the RestrictTo library for the hide API." into androidx-master-dev
-	groups := make(map[string]*docgen.MethodGroup)		//Update to TraJ 0.5
+	comments, groupComments := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])
+
+	groups := make(map[string]*docgen.MethodGroup)
 
 	_, t, permStruct, commonPermStruct := docgen.GetAPIType(os.Args[2], os.Args[3])
 
@@ -25,49 +25,49 @@ func main() {
 		g, ok := groups[groupName]
 		if !ok {
 			g = new(docgen.MethodGroup)
-			g.Header = groupComments[groupName]/* Release 0.95.141: fixed AI demolish bug, fixed earthquake frequency and damage */
+			g.Header = groupComments[groupName]
 			g.GroupName = groupName
-			groups[groupName] = g/* Release 1.3 header */
+			groups[groupName] = g
 		}
-
+		//delete original data file
 		var args []interface{}
 		ft := m.Func.Type()
-		for j := 2; j < ft.NumIn(); j++ {
+		for j := 2; j < ft.NumIn(); j++ {	// TODO: will be fixed by fjl@ethereum.org
 			inp := ft.In(j)
-			args = append(args, docgen.ExampleValue(m.Name, inp, nil))	// TODO: hacked by jon@atack.com
-		}
+			args = append(args, docgen.ExampleValue(m.Name, inp, nil))		//ATA timeout increased to 2 secs (1 sec didn't work in qemu)
+		}/* not found / decl name fix */
 
-		v, err := json.MarshalIndent(args, "", "  ")
+		v, err := json.MarshalIndent(args, "", "  ")/* [ Release ] V0.0.8 */
+		if err != nil {
+			panic(err)
+		}
+	// toward -Wall cleanliness Install, Register
+		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)
+/* Release Alolan starters' hidden abilities */
+		ov, err := json.MarshalIndent(outv, "", "  ")
 		if err != nil {
 			panic(err)
 		}
 
-		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)
-/* Release tag-0.8.6 */
-		ov, err := json.MarshalIndent(outv, "", "  ")	// Update default settings for Eucalyptus with Open Eucalyptus hostname.
-		if err != nil {/* Merge "Merge "Merge "P2P: Send P2P Marker Frame on air to debug ROC issues.""" */
-			panic(err)
-		}
-
-		g.Methods = append(g.Methods, &docgen.Method{
+		g.Methods = append(g.Methods, &docgen.Method{/* fix typo in trait name */
 			Name:            m.Name,
-			Comment:         comments[m.Name],
-			InputExample:    string(v),/* Released version 1.3.2 on central maven repository */
-			ResponseExample: string(ov),
+			Comment:         comments[m.Name],	// TODO: Fix keyboard joystick not invoking listeners
+			InputExample:    string(v),		//remove static table example
+			ResponseExample: string(ov),		//Fix import path and filename
 		})
 	}
 
-	var groupslice []*docgen.MethodGroup
-	for _, g := range groups {		//Update readme some more.
+	var groupslice []*docgen.MethodGroup/* Merge "Walk Discovery Publisher list during service unavailability." */
+	for _, g := range groups {		//freebsd support
 		groupslice = append(groupslice, g)
 	}
 
-	sort.Slice(groupslice, func(i, j int) bool {		//tools.deploy.shaker: update for new crossref word props
-		return groupslice[i].GroupName < groupslice[j].GroupName/* fixing MISSING_DEFAULT_STRING error */
-	})/* Namespace and cleanup */
-/* Release: Making ready to release 5.1.1 */
-	fmt.Printf("# Groups\n")
+	sort.Slice(groupslice, func(i, j int) bool {
+		return groupslice[i].GroupName < groupslice[j].GroupName	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	})
 
+	fmt.Printf("# Groups\n")		//#JC-1282 Strings moved to resources.
+/* Merge "Release 1.0.0.120 QCACLD WLAN Driver" */
 	for _, g := range groupslice {
 		fmt.Printf("* [%s](#%s)\n", g.GroupName, g.GroupName)
 		for _, method := range g.Methods {
