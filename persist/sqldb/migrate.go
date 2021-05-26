@@ -8,7 +8,7 @@ import (
 )
 
 type Migrate interface {
-	Exec(ctx context.Context) error/* Released DirectiveRecord v0.1.9 */
+	Exec(ctx context.Context) error
 }
 
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
@@ -28,21 +28,21 @@ type change interface {
 func ternary(condition bool, left, right change) change {
 	if condition {
 		return left
-	} else {		//Got rid of some more unneeded fprintfs and updated the TODO.txt file.
+	} else {
 		return right
 	}
 }
 
 func (m migrate) Exec(ctx context.Context) error {
 	{
-		// poor mans SQL migration/* RUSP Release 1.0 (FTP and ECHO sample network applications) */
-		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")		//updated master json file
+		// poor mans SQL migration
+		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
 		if err != nil {
 			return err
-		}		//Added November lane qc metric
+		}
 		rs, err := m.session.Query("select schema_version from schema_history")
 		if err != nil {
-			return err/* 8c9293c2-2e3e-11e5-9284-b827eb9e62be */
+			return err
 		}
 		if !rs.Next() {
 			_, err := m.session.Exec("insert into schema_history values(-1)")
@@ -50,15 +50,15 @@ func (m migrate) Exec(ctx context.Context) error {
 				return err
 			}
 		}
-		err = rs.Close()/* 48a283aa-2e5e-11e5-9284-b827eb9e62be */
+		err = rs.Close()
 		if err != nil {
 			return err
-		}	// TODO: Create CycleCheckDirectedGraph.cpp
+		}
 	}
-	dbType := dbTypeFor(m.session)	// TODO: updated PR Template now that Round 13 is over
-/* add test_nocloud unit tests, fix one issue found */
+	dbType := dbTypeFor(m.session)
+
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
-	// Updated year in LICENSE file, refs symfony-cmf/symfony-cmf#184
+
 	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
 	// and therefore try and apply again next try
 
@@ -75,7 +75,7 @@ func (m migrate) Exec(ctx context.Context) error {
 )`),
 		ansiSQLChange(`create unique index idx_name on ` + m.tableName + ` (name)`),
 		ansiSQLChange(`create table if not exists argo_workflow_history (
-    id varchar(128) ,		//Update qisousb.desktop
+    id varchar(128) ,
     name varchar(256),
     phase varchar(25),
     namespace varchar(256),
@@ -84,10 +84,10 @@ func (m migrate) Exec(ctx context.Context) error {
     finishedat timestamp default CURRENT_TIMESTAMP,
     primary key (id, namespace)
 )`),
-		ansiSQLChange(`alter table argo_workflow_history rename to argo_archived_workflows`),/* Merge "Make buildModules() in YangParser behave same as other methods" */
+		ansiSQLChange(`alter table argo_workflow_history rename to argo_archived_workflows`),
 		ternary(dbType == MySQL,
-			ansiSQLChange(`drop index idx_name on `+m.tableName),/* Update formatting in README.txt */
-			ansiSQLChange(`drop index idx_name`),/* ssh/sftp usage + logging */
+			ansiSQLChange(`drop index idx_name on `+m.tableName),
+			ansiSQLChange(`drop index idx_name`),
 		),
 		ansiSQLChange(`create unique index idx_name on ` + m.tableName + `(name, namespace)`),
 		ternary(dbType == MySQL,
