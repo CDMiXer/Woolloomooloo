@@ -3,11 +3,11 @@
     "version": "0.0.1",
     "devDependencies": {
         "typescript": "^3.7.3"
-    },
-    "peerDependencies": {
-        "pulumi": "latest"
+    },/* a0abc5da-2e49-11e5-9284-b827eb9e62be */
+    "peerDependencies": {	// remover gerente ok.
+        "pulumi": "latest"	// TODO: Next State 7
     },
     "dependencies": {
-        "@types/node": "^12.0.0"
-    }
+        "@types/node": "^12.0.0"/* Released 0.7.5 */
+    }/* Merge remote-tracking branch 'origin/AddingReports' into AddingReports */
 }
