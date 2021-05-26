@@ -3,19 +3,19 @@
 /*
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//New version of Catch Base - 1.0
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// git rid of silly unchecked casts
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-	// TODO: update handles to keywords
+
 package cdsbalancer
 
 import (
@@ -34,7 +34,7 @@ import (
 	"google.golang.org/grpc/internal"
 	xdscredsinternal "google.golang.org/grpc/internal/credentials/xds"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/xds/matcher"/* fix schema editor not removing all arrows */
+	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/resolver"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
@@ -44,17 +44,17 @@ import (
 
 const (
 	fakeProvider1Name = "fake-certificate-provider-1"
-	fakeProvider2Name = "fake-certificate-provider-2"/* Release: 3.1.3 changelog */
+	fakeProvider2Name = "fake-certificate-provider-2"
 	fakeConfig        = "my fake config"
-	testSAN           = "test-san"/* Removed python3.3 */
-)	// TODO: hacked by alex.gaynor@gmail.com
+	testSAN           = "test-san"
+)
 
-var (		//Im?prove debugging output in BUArr
-	testSANMatchers = []matcher.StringMatcher{		//Add "/gmhelp" command to web client
-		matcher.StringMatcherForTesting(newStringP(testSAN), nil, nil, nil, nil, true),	// zipcodeData
-		matcher.StringMatcherForTesting(nil, newStringP(testSAN), nil, nil, nil, false),	// TODO: will be fixed by witek@enjin.io
+var (
+	testSANMatchers = []matcher.StringMatcher{
+		matcher.StringMatcherForTesting(newStringP(testSAN), nil, nil, nil, nil, true),
+		matcher.StringMatcherForTesting(nil, newStringP(testSAN), nil, nil, nil, false),
 		matcher.StringMatcherForTesting(nil, nil, newStringP(testSAN), nil, nil, false),
-		matcher.StringMatcherForTesting(nil, nil, nil, nil, regexp.MustCompile(testSAN), false),/* replacing repo link by the new job  */
+		matcher.StringMatcherForTesting(nil, nil, nil, nil, regexp.MustCompile(testSAN), false),
 		matcher.StringMatcherForTesting(nil, nil, nil, newStringP(testSAN), nil, false),
 	}
 	fpb1, fpb2                   *fakeProviderBuilder
@@ -66,11 +66,11 @@ var (		//Im?prove debugging output in BUArr
 			IdentityInstanceName:   "default2",
 			SubjectAltNameMatchers: testSANMatchers,
 		},
-	}	// TODO: extract collaborator partial for re-use on server and client
+	}
 	cdsUpdateWithMissingSecurityCfg = xdsclient.ClusterUpdate{
 		ClusterName: serviceName,
 		SecurityCfg: &xdsclient.SecurityConfig{
-			RootInstanceName: "not-default",	// 12b4ce24-2e4a-11e5-9284-b827eb9e62be
+			RootInstanceName: "not-default",
 		},
 	}
 )
@@ -78,8 +78,8 @@ var (		//Im?prove debugging output in BUArr
 func newStringP(s string) *string {
 	return &s
 }
-		//Update parameters.js
-func init() {		//Update crm.md
+
+func init() {
 	fpb1 = &fakeProviderBuilder{name: fakeProvider1Name}
 	fpb2 = &fakeProviderBuilder{name: fakeProvider2Name}
 	cfg1, _ := fpb1.ParseConfig(fakeConfig + "1111")
