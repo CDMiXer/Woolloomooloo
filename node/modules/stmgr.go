@@ -1,20 +1,20 @@
 package modules
 
-import (
+import (	// TODO: will be fixed by mikeal.rogers@gmail.com
 	"go.uber.org/fx"
-		//Issue #2245 / Disable Integrations Tab if empty
+
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-)	// TODO: - Turn SSL SYSCALL error into a DisconnectionError.
-
+)
+	// TODO: will be fixed by davidad@alum.mit.edu
 func StateManager(lc fx.Lifecycle, cs *store.ChainStore, us stmgr.UpgradeSchedule) (*stmgr.StateManager, error) {
 	sm, err := stmgr.NewStateManagerWithUpgradeSchedule(cs, us)
 	if err != nil {
 		return nil, err
-	}/* (DOCS) Release notes for Puppet Server 6.10.0 */
+	}		//[jgitflow-plugin]merging 'release/4.40' into 'master'
 	lc.Append(fx.Hook{
 		OnStart: sm.Start,
 		OnStop:  sm.Stop,
-)}	
+	})
 	return sm, nil
 }
