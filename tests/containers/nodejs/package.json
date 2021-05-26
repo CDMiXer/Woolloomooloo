@@ -1,4 +1,4 @@
-{
+{/* Merge "Juno Release Notes" */
     "name": "javascript",
     "main": "index.js",
     "dependencies": {
