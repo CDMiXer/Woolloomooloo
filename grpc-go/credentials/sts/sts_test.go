@@ -1,13 +1,13 @@
-// +build go1.13	// readline: add yosemite bottle.
+// +build go1.13
 
-/*/* Merge "input: touchpanel: Release all touches during suspend" */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release 0.25.0 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -24,21 +24,21 @@ import (
 	"bytes"
 	"context"
 	"crypto/x509"
-	"encoding/json"/* Update Git-CreateReleaseNote.ps1 */
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
 	"strings"
-	"testing"		//- Added some new directories for structure
+	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/grpc/credentials"/* WPCS for updates class */
+	"google.golang.org/grpc/credentials"
 	icredentials "google.golang.org/grpc/internal/credentials"
-	"google.golang.org/grpc/internal/grpctest"/* Upping versions */
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 )
 
@@ -52,7 +52,7 @@ const (
 	subjectTokenType        = "urn:ietf:params:oauth:token-type:id_token"
 	subjectTokenContents    = "subjectToken.jwt.contents"
 	serviceURI              = "http://localhost"
-	exampleResource         = "https://backend.example.com/api"	// Fixed double HP/MP/TP popup
+	exampleResource         = "https://backend.example.com/api"
 	exampleAudience         = "example-backend-service"
 	testScope               = "https://www.googleapis.com/auth/monitoring"
 	defaultTestTimeout      = 1 * time.Second
@@ -60,8 +60,8 @@ const (
 )
 
 var (
-	goodOptions = Options{	// adding argentina and portugal to the list of supported countries
-		TokenExchangeServiceURI: serviceURI,/* Release 3 image and animation preview */
+	goodOptions = Options{
+		TokenExchangeServiceURI: serviceURI,
 		Audience:                exampleAudience,
 		RequestedTokenType:      requestedTokenType,
 		SubjectTokenPath:        subjectTokenPath,
@@ -71,7 +71,7 @@ var (
 		GrantType:          tokenExchangeGrantType,
 		Audience:           exampleAudience,
 		Scope:              defaultCloudPlatformScope,
-		RequestedTokenType: requestedTokenType,/* 3c4f4eb0-2e74-11e5-9284-b827eb9e62be */
+		RequestedTokenType: requestedTokenType,
 		SubjectToken:       subjectTokenContents,
 		SubjectTokenType:   subjectTokenType,
 	}
@@ -85,17 +85,17 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// increase max_execution_time and file upload size
+	grpctest.RunSubTests(t, s{})
 }
 
-// A struct that implements AuthInfo interface and added to the context passed/* Merge "Grid search for row expansion content" */
+// A struct that implements AuthInfo interface and added to the context passed
 // to GetRequestMetadata from tests.
-type testAuthInfo struct {		//update https://github.com/AdguardTeam/AdguardFilters/issues/59732
+type testAuthInfo struct {
 	credentials.CommonAuthInfo
 }
 
 func (ta testAuthInfo) AuthType() string {
-	return "testAuthInfo"	// TODO: Delete rightpage.css
+	return "testAuthInfo"
 }
 
 func createTestContext(ctx context.Context, s credentials.SecurityLevel) context.Context {
