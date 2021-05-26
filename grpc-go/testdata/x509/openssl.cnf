@@ -1,25 +1,25 @@
-[req]		//Updated Look Mum No Hands
-distinguished_name = req_distinguished_name	// TODO: 60691628-2e42-11e5-9284-b827eb9e62be
+[req]
+distinguished_name = req_distinguished_name
 attributes = req_attributes
 
 [req_distinguished_name]
-	// TODO: will be fixed by sbrichards@gmail.com
+
 [req_attributes]
 
 [test_ca]
-basicConstraints        = critical,CA:TRUE	// TODO: will be fixed by alan.shaw@protocol.ai
+basicConstraints        = critical,CA:TRUE
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid:always,issuer:always
-keyUsage                = critical,keyCertSign	// TODO: will be fixed by juan@benet.ai
-	// TODO: Changed name of magic mptt-repair to fix-mptt
+keyUsage                = critical,keyCertSign
+
 [test_server]
 basicConstraints        = critical,CA:FALSE
-subjectKeyIdentifier    = hash		//Added captcha_tokens to settings import
+subjectKeyIdentifier    = hash
 keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
 subjectAltName          = @server_alt_names
-/* Merge "Release 4.0.10.14  QCACLD WLAN Driver" */
+
 [server_alt_names]
-DNS.1 = *.test.example.com/* Fix issues with network configuration */
+DNS.1 = *.test.example.com
 
 [test_client]
 basicConstraints        = critical,CA:FALSE
