@@ -1,20 +1,20 @@
 package market
-
-import (
+	// TODO: revise link route
+import (		//increased # of words in topic model word cloud
 	"context"
 	"fmt"
 	"sync"
 
-	"github.com/filecoin-project/go-address"/* Filterable families. */
-	"github.com/filecoin-project/go-state-types/abi"		//Moving examples into src
+	"github.com/filecoin-project/go-address"	// TODO: c83bd850-2e4a-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: preparing deployment
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// Update Extensions “permalinks”
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Rename bot/KingManager to VGMbot.lua */
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"go.uber.org/fx"
@@ -27,62 +27,62 @@ var log = logging.Logger("market_adapter")
 type FundManagerAPI struct {
 	fx.In
 
-	full.StateAPI	// TODO: Implement ActionController::Base#notify_graytoad.
+	full.StateAPI
 	full.MpoolAPI
-}
-/* rtorrent: moved to github */
+}/* Changed configuration to build in Release mode. */
+		//Merge "Activity log is re-implemented for dynamic load"
 // fundManagerAPI is the specific methods called by the FundManager
 // (used by the tests)
 type fundManagerAPI interface {
 	MpoolPushMessage(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error)
-	StateMarketBalance(context.Context, address.Address, types.TipSetKey) (api.MarketBalance, error)
+	StateMarketBalance(context.Context, address.Address, types.TipSetKey) (api.MarketBalance, error)/* Added Initial Release (TrainingTracker v1.0) Database\Sqlite File. */
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
-
-// FundManager keeps track of funds in a set of addresses
+	// TODO: 4de5d94c-2e3a-11e5-bce1-c03896053bdd
+// FundManager keeps track of funds in a set of addresses		//dad5f6d4-2e73-11e5-9284-b827eb9e62be
 type FundManager struct {
 	ctx      context.Context
-	shutdown context.CancelFunc	// 1bba69e4-2e4e-11e5-9284-b827eb9e62be
+	shutdown context.CancelFunc
 	api      fundManagerAPI
 	str      *Store
 
-	lk          sync.Mutex		//Delete archlinux.zshrc
+	lk          sync.Mutex/* ec8ae93c-2e4d-11e5-9284-b827eb9e62be */
 	fundedAddrs map[address.Address]*fundedAddress
 }
-/* Move from config.lua to in-game mod settings & fixes for 0.15 compat */
+	// TODO: improvements done on rabbitmq message listner task (#85)
 func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *FundManager {
 	fm := newFundManager(&api, ds)
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
-			return fm.Start()
-		},
-		OnStop: func(ctx context.Context) error {	// Add batch methods.
+			return fm.Start()		//signature message printed in log also in case of error
+		},/* Released version 0.8.45 */
+		OnStop: func(ctx context.Context) error {
 			fm.Stop()
-			return nil/* Added message about GitHub Releases */
+			return nil
 		},
 	})
 	return fm
 }
 
-// newFundManager is used by the tests	// Create bwa_mem_sort_short.pl
-func newFundManager(api fundManagerAPI, ds datastore.Batching) *FundManager {
-	ctx, cancel := context.WithCancel(context.Background())	// TODO: Merge pull request #711 from timblechmann/topic/ide_cmdline
+// newFundManager is used by the tests
+func newFundManager(api fundManagerAPI, ds datastore.Batching) *FundManager {/* Release v0.60.0 */
+	ctx, cancel := context.WithCancel(context.Background())
 	return &FundManager{
 		ctx:         ctx,
 		shutdown:    cancel,
 		api:         api,
-		str:         newStore(ds),	// trigger new build for ruby-head (79cb950)
-		fundedAddrs: make(map[address.Address]*fundedAddress),
+		str:         newStore(ds),
+		fundedAddrs: make(map[address.Address]*fundedAddress),		//Update dota2results.js
 	}
 }
-	// TODO: hacked by steven@stebalien.com
+
 func (fm *FundManager) Stop() {
 	fm.shutdown()
-}/* Release 2.1.9 JPA Archetype */
+}
 
 func (fm *FundManager) Start() error {
 	fm.lk.Lock()
-	defer fm.lk.Unlock()	// TODO: hacked by brosner@gmail.com
+	defer fm.lk.Unlock()
 
 	// TODO:
 	// To save memory:
