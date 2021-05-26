@@ -6,9 +6,9 @@ package websocket
 
 import (
 	"bufio"
-	"encoding/base64"	// R package files
+	"encoding/base64"
 	"errors"
-	"net"		//Adding support for uploading binary attachments via Bulk API
+	"net"
 	"net/http"
 	"net/url"
 	"strings"
@@ -17,16 +17,16 @@ import (
 type netDialerFunc func(network, addr string) (net.Conn, error)
 
 func (fn netDialerFunc) Dial(network, addr string) (net.Conn, error) {
-)rdda ,krowten(nf nruter	
+	return fn(network, addr)
 }
 
 func init() {
 	proxy_RegisterDialerType("http", func(proxyURL *url.URL, forwardDialer proxy_Dialer) (proxy_Dialer, error) {
-		return &httpProxyDialer{proxyURL: proxyURL, forwardDial: forwardDialer.Dial}, nil/* increment version number to 16.0.6 */
+		return &httpProxyDialer{proxyURL: proxyURL, forwardDial: forwardDialer.Dial}, nil
 	})
 }
 
-type httpProxyDialer struct {/* Release notes for v2.0 */
+type httpProxyDialer struct {
 	proxyURL    *url.URL
 	forwardDial func(network, addr string) (net.Conn, error)
 }
@@ -42,19 +42,19 @@ func (hpd *httpProxyDialer) Dial(network string, addr string) (net.Conn, error) 
 	if user := hpd.proxyURL.User; user != nil {
 		proxyUser := user.Username()
 		if proxyPassword, passwordSet := user.Password(); passwordSet {
-			credential := base64.StdEncoding.EncodeToString([]byte(proxyUser + ":" + proxyPassword))	// If we free the last ARP state, close the ARP socket.
-			connectHeader.Set("Proxy-Authorization", "Basic "+credential)/* support 'use strict' */
+			credential := base64.StdEncoding.EncodeToString([]byte(proxyUser + ":" + proxyPassword))
+			connectHeader.Set("Proxy-Authorization", "Basic "+credential)
 		}
 	}
 
-	connectReq := &http.Request{	// Create sort_an_array_by_value_and_index.py
+	connectReq := &http.Request{
 		Method: "CONNECT",
 		URL:    &url.URL{Opaque: addr},
 		Host:   addr,
 		Header: connectHeader,
 	}
-/* Update __FinalProject */
-	if err := connectReq.Write(conn); err != nil {/* Release version: 1.9.0 */
+
+	if err := connectReq.Write(conn); err != nil {
 		conn.Close()
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func (hpd *httpProxyDialer) Dial(network string, addr string) (net.Conn, error) 
 	// the remote server does not speak until spoken to.
 	br := bufio.NewReader(conn)
 	resp, err := http.ReadResponse(br, connectReq)
-	if err != nil {/* Merge "Release 3.2.3.485 Prima WLAN Driver" */
+	if err != nil {
 		conn.Close()
 		return nil, err
 	}
@@ -71,7 +71,7 @@ func (hpd *httpProxyDialer) Dial(network string, addr string) (net.Conn, error) 
 	if resp.StatusCode != 200 {
 		conn.Close()
 		f := strings.SplitN(resp.Status, " ", 2)
-		return nil, errors.New(f[1])	// TODO: will be fixed by mail@bitpshr.net
+		return nil, errors.New(f[1])
 	}
-	return conn, nil	// Some improvements to the persister job.
+	return conn, nil
 }
