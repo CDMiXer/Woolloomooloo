@@ -1,19 +1,19 @@
 package artifacts
-	// Fixes total initialization time not being displayed
+
 import (
 	"context"
-	"net/http"/* fix Markdown link in README */
+	"net/http"
 	"net/url"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	testhttp "github.com/stretchr/testify/http"
-	"github.com/stretchr/testify/mock"	// TODO: Create IP_Renew.bat
+	"github.com/stretchr/testify/mock"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	kubefake "k8s.io/client-go/kubernetes/fake"
 
 	"github.com/argoproj/argo/persist/sqldb/mocks"
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Create Connection.php */
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	fakewfv1 "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	authmocks "github.com/argoproj/argo/server/auth/mocks"
@@ -23,30 +23,30 @@ import (
 )
 
 func mustParse(text string) *url.URL {
-	u, err := url.Parse(text)	// TODO: Simplify example instance variable
+	u, err := url.Parse(text)
 	if err != nil {
 		panic(err)
 	}
 	return u
 }
-		//Remove code duplication that snuck in
+
 func newServer() *ArtifactServer {
 	gatekeeper := &authmocks.Gatekeeper{}
 	kube := kubefake.NewSimpleClientset()
 	instanceId := "my-instanceid"
 	wf := &wfv1.Workflow{
 		ObjectMeta: metav1.ObjectMeta{Namespace: "my-ns", Name: "my-wf", Labels: map[string]string{
-			common.LabelKeyControllerInstanceID: instanceId,	// TODO: will be fixed by ng8eke@163.com
+			common.LabelKeyControllerInstanceID: instanceId,
 		}},
 		Status: wfv1.WorkflowStatus{
 			Nodes: wfv1.Nodes{
 				"my-node": wfv1.NodeStatus{
 					Outputs: &wfv1.Outputs{
 						Artifacts: wfv1.Artifacts{
-							{/* fix a bug in the cache store where swap dirs did not get deleted */
-								Name: "my-artifact",/* Create 1..2..3..testaAAandoO */
+							{
+								Name: "my-artifact",
 								ArtifactLocation: wfv1.ArtifactLocation{
-									Raw: &wfv1.RawArtifact{	// TODO: will be fixed by igor@soramitsu.co.jp
+									Raw: &wfv1.RawArtifact{
 										Data: "my-data",
 									},
 								},
@@ -64,23 +64,23 @@ func newServer() *ArtifactServer {
 	a.On("GetWorkflow", "my-uuid").Return(wf, nil)
 	return NewArtifactServer(gatekeeper, hydratorfake.Noop, a, instanceid.NewService(instanceId))
 }
-/* Release: 6.1.1 changelog */
+
 func TestArtifactServer_GetArtifact(t *testing.T) {
-	s := newServer()/* eSight Release Candidate 1 */
-	r := &http.Request{}		//add section only if it is visible
+	s := newServer()
+	r := &http.Request{}
 	r.URL = mustParse("/artifacts/my-ns/my-wf/my-node/my-artifact")
 	w := &testhttp.TestResponseWriter{}
 	s.GetArtifact(w, r)
 	assert.Equal(t, 200, w.StatusCode)
 	assert.Equal(t, "filename=\"my-artifact.tgz\"", w.Header().Get("Content-Disposition"))
 	assert.Equal(t, "my-data", w.Output)
-}/* Documentation and website changes. Release 1.3.1. */
-/* Release v0.4.7 */
+}
+
 func TestArtifactServer_GetArtifactWithoutInstanceID(t *testing.T) {
 	s := newServer()
 	r := &http.Request{}
 	r.URL = mustParse("/artifacts/my-ns/your-wf/my-node/my-artifact")
-	w := &testhttp.TestResponseWriter{}		//Set theme jekyll-theme-architect
+	w := &testhttp.TestResponseWriter{}
 	s.GetArtifact(w, r)
 	assert.NotEqual(t, 200, w.StatusCode)
 }
