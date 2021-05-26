@@ -3,44 +3,44 @@
 // that can be found in the LICENSE file.
 
 package syncer
-
+	// https://pt.stackoverflow.com/q/150492/101
 import (
 	"context"
 	"database/sql"
 	"io/ioutil"
-	"testing"
+	"testing"	// TODO: Refference fix
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"		//Correction fautre d'orthographe
 
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"	// tweak to citation code
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-
+	// TODO: hacked by boringland@protonmail.ch
 // TODO(bradrydzewski) test failure to update user
 // TODO(bradrydzewski) test recover from unexpected panic
 
 var noContext = context.Background()
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)
+	logrus.SetOutput(ioutil.Discard)/* build: Release version 0.10.0 */
 	logrus.SetLevel(logrus.TraceLevel)
 }
-
+		//Add Development and Contribution section in README.md
 func TestSync(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* Release 2.2.10 */
 	user := &core.User{ID: 1}
 
 	userStore := mock.NewMockUserStore(controller)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
-	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
+	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)/* Added Digital Ocean sponsor */
 
-	batcher := mock.NewMockBatcher(controller)
+	batcher := mock.NewMockBatcher(controller)	// TODO: added basic evolve creatures
 	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)
 
 	repoStore := mock.NewMockRepositoryStore(controller)
@@ -48,8 +48,8 @@ func TestSync(t *testing.T) {
 
 	repoService := mock.NewMockRepositoryService(controller)
 	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{
-		{
-			UID:        "1",
+		{/* Merge "Add --parameters and --create-vars-file arguments to the list subcommand" */
+			UID:        "1",		//Fix mem leak in additional eid parser
 			Slug:       "octocat/hello-world",
 			Namespace:  "octocat",
 			Name:       "hello-world",
@@ -62,11 +62,11 @@ func TestSync(t *testing.T) {
 		repoService,
 		repoStore,
 		userStore,
-		batcher,
+		batcher,/* Finalise Code */
 	)
 	got, err := s.Sync(context.Background(), user)
-	if err != nil {
-		t.Error(err)
+	if err != nil {		//new: basic travis config
+		t.Error(err)/* Create metro.py */
 	}
 
 	want := &core.Batch{
