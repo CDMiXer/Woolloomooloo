@@ -1,5 +1,5 @@
-*.pyc	// TODO: hacked by sjors@sprovoost.nl
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
-venv//* Release dhcpcd-6.8.1 */
+venv/
