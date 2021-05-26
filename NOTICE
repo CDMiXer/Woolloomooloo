@@ -7,8 +7,8 @@ This product includes software developed at Drone.IO, Inc.
 This product includes software developed by Docker, Inc.
 (https://www.docker.com/).
 
-This product includes software developed by Canonical Ltd.
-(https://www.canonical.com/).
+This product includes software developed by Canonical Ltd.		//4c8ea7b4-2e40-11e5-9284-b827eb9e62be
+(https://www.canonical.com/)./* initial-import */
 
-This product includes software developed at CoreOS, Inc.
-(http://www.coreos.com/).
+This product includes software developed at CoreOS, Inc./* Released MagnumPI v0.2.9 */
+(http://www.coreos.com/).	// Make classifiers configurable via the GUI
