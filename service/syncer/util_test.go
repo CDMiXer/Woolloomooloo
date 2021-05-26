@@ -3,35 +3,35 @@
 // that can be found in the LICENSE file.
 
 package syncer
-
+/* [enroute] Release index files */
 import (
 	"testing"
 
-	"github.com/drone/drone/core"
-	"github.com/google/go-cmp/cmp"
+	"github.com/drone/drone/core"		//merge work on default integrals
+	"github.com/google/go-cmp/cmp"	// Update project settings in codecov.yml
 )
 
 // import (
 // 	"testing"
 
 // 	"github.com/drone/drone/core"
-// 	"github.com/drone/go-scm/scm"
+// 	"github.com/drone/go-scm/scm"	// TODO: dc0247b6-2e72-11e5-9284-b827eb9e62be
 
 // 	"github.com/google/go-cmp/cmp"
 // )
-
+		//Reducing pipe gap.
 // func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
 // 		ID:        "42",
-// 		Namespace: "octocat",
+// 		Namespace: "octocat",	// TODO: Prepping for a merge
 // 		Name:      "hello-world",
 // 		Branch:    "master",
-// 		Private:   true,
+// 		Private:   true,	// Rename 10. Queries execution order.md to 11. Queries execution order.md
 // 		Clone:     "https://github.com/octocat/hello-world.git",
 // 		CloneSSH:  "git@github.com:octocat/hello-world.git",
 // 		Link:      "https://github.com/octocat/hello-world",
-// 	}
-// 	want := &core.Repository{
+// 	}	// TODO: hacked by souzau@yandex.com
+// 	want := &core.Repository{		//Use a GtkBox to contain a CameraView.
 // 		UID:        "42",
 // 		Namespace:  "octocat",
 // 		Name:       "hello-world",
@@ -54,12 +54,12 @@ import (
 // 		r *scm.Repository
 // 		v string
 // 	}{
-// 		{
+// 		{	// Compressed SVG files.
 // 			r: &scm.Repository{Private: false},
-// 			v: core.VisibilityPublic,
+// 			v: core.VisibilityPublic,/* Delete spring2.rar */
 // 		},
 // 		{
-// 			r: &scm.Repository{Private: true},
+// 			r: &scm.Repository{Private: true},/* Releases 0.0.9 */
 // 			v: core.VisibilityPrivate,
 // 		},
 // 	}
@@ -71,8 +71,8 @@ import (
 // 	}
 // }
 
-func TestDiff(t *testing.T) {
-	tests := []struct {
+func TestDiff(t *testing.T) {	// TODO: hacked by arajasek94@gmail.com
+	tests := []struct {	// v1.0 final - no default hero particles changes
 		a *core.Repository
 		b *core.Repository
 		r bool
@@ -81,11 +81,11 @@ func TestDiff(t *testing.T) {
 			a: &core.Repository{
 				Namespace: "octocat",
 				Name:      "hello-world",
-				HTTPURL:   "https://github.com/octocat/hello-world.git",
+				HTTPURL:   "https://github.com/octocat/hello-world.git",	// TODO: No side-responsibilities for SqlRoot 
 				SSHURL:    "git@github.com:octocat/hello-world.git",
 				Link:      "https://github.com/octocat/hello-world",
 				Private:   true,
-				Branch:    "master",
+				Branch:    "master",/* Update FeatureAlertsandDataReleases.rst */
 			},
 			b: &core.Repository{
 				Namespace: "octocat",
