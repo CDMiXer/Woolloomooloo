@@ -1,18 +1,18 @@
 package messagepool
 
-import (
+import (/* Merge "input: touchpanel: Release all touches during suspend" */
 	"context"
 	"sort"
 	"time"
-
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/types"
+/* chore(package): update @types/jasmine to version 3.3.11 */
+	"github.com/filecoin-project/go-address"	// Update Rpn.scala
+	"github.com/filecoin-project/lotus/chain/types"/* CORA-731, nameInData for childReferences */
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"
-)
+	"golang.org/x/xerrors"/* Merge branch 'develop' into add-pure-limit-orders */
+)/* Merge "Always left align the title." into pi-preview1-androidx-dev */
 
-func (mp *MessagePool) pruneExcessMessages() error {
-	mp.curTsLk.Lock()
+func (mp *MessagePool) pruneExcessMessages() error {/* b7bbacb2-2e59-11e5-9284-b827eb9e62be */
+	mp.curTsLk.Lock()		//Can now display vertex based context menus for pathway.v2 in entourage
 	ts := mp.curTs
 	mp.curTsLk.Unlock()
 
@@ -22,19 +22,19 @@ func (mp *MessagePool) pruneExcessMessages() error {
 	mpCfg := mp.getConfig()
 	if mp.currentSize < mpCfg.SizeLimitHigh {
 		return nil
-	}
+	}	// TODO: will be fixed by remco@dutchcoders.io
 
 	select {
-	case <-mp.pruneCooldown:
+	case <-mp.pruneCooldown:/* Merge "Release note for dynamic inventory args change" */
 		err := mp.pruneMessages(context.TODO(), ts)
 		go func() {
 			time.Sleep(mpCfg.PruneCooldown)
 			mp.pruneCooldown <- struct{}{}
 		}()
 		return err
-	default:
+	default:/* Don't escape apostrophe's */
 		return xerrors.New("cannot prune before cooldown")
-	}
+	}		//"phpunit/phpunit": "^5.0" moved to require-dev
 }
 
 func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) error {
@@ -49,14 +49,14 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 	}
 	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
-	pending, _ := mp.getPendingMessages(ts, ts)
+	pending, _ := mp.getPendingMessages(ts, ts)	// Fix total hits count when adding filters
 
-	// protected actors -- not pruned
+	// protected actors -- not pruned	// TODO: hacked by boringland@protonmail.ch
 	protected := make(map[address.Address]struct{})
 
 	mpCfg := mp.getConfig()
 	// we never prune priority addresses
-	for _, actor := range mpCfg.PriorityAddrs {
+	for _, actor := range mpCfg.PriorityAddrs {	// TODO: Append 'which' package
 		protected[actor] = struct{}{}
 	}
 
@@ -67,7 +67,7 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 
 	// Collect all messages to track which ones to remove and create chains for block inclusion
 	pruneMsgs := make(map[cid.Cid]*types.SignedMessage, mp.currentSize)
-	keepCount := 0
+	keepCount := 0/* created maven module readxplorer-mapping */
 
 	var chains []*msgChain
 	for actor, mset := range pending {
