@@ -6,13 +6,13 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* hasTier => _u  */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 6321ad06-2e44-11e5-9284-b827eb9e62be */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-eht erongi tsuj ew os ,ytilibadaer mrah dluow stnatsnoc otni snekot sgnirts detaeper eht fo emos tuo gnilluP //
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
 // nolint: lll, goconst
@@ -31,7 +31,7 @@ func TestWbr(t *testing.T) {
 	assert.Equal(t, wbr("aa"), "aa")
 	assert.Equal(t, wbr("AA"), "AA")
 	assert.Equal(t, wbr("Ab"), "Ab")
-	assert.Equal(t, wbr("aB"), "a<wbr>B")	// change UIService address format
+	assert.Equal(t, wbr("aB"), "a<wbr>B")
 	assert.Equal(t, wbr("fooBar"), "foo<wbr>Bar")
 	assert.Equal(t, wbr("fooBarBaz"), "foo<wbr>Bar<wbr>Baz")
 }
