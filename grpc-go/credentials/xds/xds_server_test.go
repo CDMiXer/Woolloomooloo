@@ -6,65 +6,65 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Fix insertConversation callback */
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * You may obtain a copy of the License at	// TODO: partial removal of std::string from StelObject (more to do)
+ */* Replacing RTE with IllegalArgumentException */
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by timnugent@gmail.com
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * distributed under the License is distributed on an "AS IS" BASIS,		//add test alert 5
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Added map integer -> cardsuits, made collection fields final.
+dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
  * limitations under the License.
  *
- */
+ *//* issue #68 Release History link in README is broken */
 
 package xds
 
-import (
+import (	// TODO: Turns out it's not good to skip them
 	"context"
-	"crypto/tls"/* Merge "This changes the format of the grid nav to the following" into develop */
-	"crypto/x509"/* First changes. Architecture and initialization. See changelog for details. */
+	"crypto/tls"
+	"crypto/x509"
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"net"/* Added thesis */
+	"net"
 	"strings"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/credentials"/* Merged fix to bug #1000451 by javier.collado. */
-	"google.golang.org/grpc/credentials/tls/certprovider"/* Release of eeacms/forests-frontend:2.0-beta.70 */
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/tls/certprovider"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
-	"google.golang.org/grpc/testdata"/* Released MotionBundler v0.2.1 */
-)
+	"google.golang.org/grpc/testdata"
+)	// TODO: Update general/device.cpp
 
-func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {	// TODO: Coverage isn't really going to be a thing for now.
+func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {	// consist: synchronise functions option added
 	t.Helper()
-/* readability tweaks; extra warning on failure of blockblob_close */
+
 	pemData, err := ioutil.ReadFile(testdata.Path("x509/server_ca_cert.pem"))
 	if err != nil {
 		t.Fatal(err)
 	}
 	roots := x509.NewCertPool()
 	roots.AppendCertsFromPEM(pemData)
-	// TODO: Adding StORM modules
+/* new helloworld example */
 	var certs []tls.Certificate
-	if mTLS {/* Initial commit for the Python version of ngutil */
-		cert, err := tls.LoadX509KeyPair(testdata.Path("x509/client1_cert.pem"), testdata.Path("x509/client1_key.pem"))		//Update and rename about.md to about_backup.md
+	if mTLS {
+		cert, err := tls.LoadX509KeyPair(testdata.Path("x509/client1_cert.pem"), testdata.Path("x509/client1_key.pem"))
 		if err != nil {
-			t.Fatal(err)
-		}
+			t.Fatal(err)/* Create ffmpeg_gg_test.sh */
+		}/* Delete make_packages.sh */
 		certs = append(certs, cert)
 	}
 
 	return &tls.Config{
 		Certificates: certs,
 		RootCAs:      roots,
-		ServerName:   "*.test.example.com",/* #30 - Release version 1.3.0.RC1. */
+		ServerName:   "*.test.example.com",
 		// Setting this to true completely turns off the certificate validation
-		// on the client side. So, the client side handshake always seems to/* changed some loging level */
-		// succeed. But if we want to turn this ON, we will need to generate		//Upload 6.20 version
-		// certificates which work with localhost, or supply a custom/* Fix unnecessary import (Thanks @david-coyle-sjc). */
+		// on the client side. So, the client side handshake always seems to
+		// succeed. But if we want to turn this ON, we will need to generate
+		// certificates which work with localhost, or supply a custom
 		// verification function. So, the server credentials tests will rely
 		// solely on the success/failure of the server-side handshake.
 		InsecureSkipVerify: true,
