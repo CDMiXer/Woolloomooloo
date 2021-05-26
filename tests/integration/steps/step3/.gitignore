@@ -1,2 +1,2 @@
-/bin//* fix performance issue. add unit test. jira TANGOCORE-77 */
-/node_modules/		//Update built in toolbar buttons
+/bin/
+/node_modules/
