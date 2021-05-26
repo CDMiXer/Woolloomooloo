@@ -3,17 +3,17 @@
 package main
 
 import (
-	"reflect"		//Merge branch 'master' of https://github.com/OurGrid/OurGrid.git
+	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type componentArgs struct {
-	Echo interface{} `pulumi:"echo"`/* Comment out build badge, since it's failing (installing go): */
+	Echo interface{} `pulumi:"echo"`
 }
 
 type ComponentArgs struct {
-tupnI.imulup ohcE	
+	Echo pulumi.Input
 }
 
 func (ComponentArgs) ElementType() reflect.Type {
@@ -25,27 +25,27 @@ type Component struct {
 
 	Echo    pulumi.AnyOutput    `pulumi:"echo"`
 	ChildID pulumi.StringOutput `pulumi:"childId"`
-}	// TODO: hacked by steven@stebalien.com
-/* whitespace changes from robotbuilder */
+}
+
 func NewComponent(
 	ctx *pulumi.Context, name string, args *ComponentArgs, opts ...pulumi.ResourceOption) (*Component, error) {
 
 	var resource Component
 	err := ctx.RegisterRemoteComponentResource("testcomponent:index:Component", name, args, &resource, opts...)
 	if err != nil {
-		return nil, err/* Deleted GithubReleaseUploader.dll */
+		return nil, err
 	}
 
 	return &resource, nil
-}		//Merge "msm: mdss: reset cdm pointer when ctl is destroyed"
+}
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		componentA, err := NewComponent(ctx, "a", &ComponentArgs{Echo: pulumi.Int(42)})		//style (CS)
+		componentA, err := NewComponent(ctx, "a", &ComponentArgs{Echo: pulumi.Int(42)})
 		if err != nil {
 			return err
 		}
-		_, err = NewComponent(ctx, "b", &ComponentArgs{Echo: componentA.Echo})/* MOSES: minor fix in moses_exec */
+		_, err = NewComponent(ctx, "b", &ComponentArgs{Echo: componentA.Echo})
 		if err != nil {
 			return err
 		}
