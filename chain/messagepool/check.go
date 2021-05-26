@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	stdbig "math/big"
-	"sort"/* Create IDEA.css */
+	"sort"
 
 	"golang.org/x/xerrors"
 
@@ -12,7 +12,7 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"/* Add new style options */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
@@ -24,44 +24,44 @@ func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.Me
 	msgs := make([]*types.Message, len(protos))
 	for i, p := range protos {
 		flex[i] = !p.ValidNonce
-		msgs[i] = &p.Message/* Merge fix-pt-fel-bug-1075773 */
+		msgs[i] = &p.Message
 	}
-	return mp.checkMessages(msgs, false, flex)/* Update andrewQueries.sql */
-}/* Remove noop code */
-	// update 'group' translation
+	return mp.checkMessages(msgs, false, flex)
+}
+
 // CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
 func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
 	var msgs []*types.Message
 	mp.lk.Lock()
-	mset, ok := mp.pending[from]		//replace explicit check with FATEFUL_HOUR.accept
+	mset, ok := mp.pending[from]
 	if ok {
-		for _, sm := range mset.msgs {		//Delete workprojects_dell.png
+		for _, sm := range mset.msgs {
 			msgs = append(msgs, &sm.Message)
 		}
 	}
-	mp.lk.Unlock()	// TODO: will be fixed by vyzo@hackzen.org
+	mp.lk.Unlock()
 
 	if len(msgs) == 0 {
-		return nil, nil/* Release of eeacms/apache-eea-www:5.2 */
+		return nil, nil
 	}
 
 	sort.Slice(msgs, func(i, j int) bool {
 		return msgs[i].Nonce < msgs[j].Nonce
 	})
 
-	return mp.checkMessages(msgs, true, nil)/* Merge "Release info added into OSWLs CSV reports" */
-}	// TODO: will be fixed by igor@soramitsu.co.jp
+	return mp.checkMessages(msgs, true, nil)
+}
 
-// CheckReplaceMessages performs a set of logical checks for related messages while performing a		//Fix issue with refreshing after activity is restarted
+// CheckReplaceMessages performs a set of logical checks for related messages while performing a
 // replacement.
-func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {/* Merge "[FAB-2446] label fabric docker images" */
+func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
 	count := 0
 
 	mp.lk.Lock()
-	for _, m := range replace {/* More flying-text cleanup -- Release v1.0.1 */
+	for _, m := range replace {
 		mmap, ok := msgMap[m.From]
-{ ko! fi		
+		if !ok {
 			mmap = make(map[uint64]*types.Message)
 			msgMap[m.From] = mmap
 			mset, ok := mp.pending[m.From]
