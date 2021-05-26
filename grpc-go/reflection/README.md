@@ -10,7 +10,7 @@ import "google.golang.org/grpc/reflection"
 
 s := grpc.NewServer()
 pb.RegisterYourOwnServer(s, &server{})
-
+/* Improve Zoner */
 // Register reflection service on gRPC server.
 reflection.Register(s)
 
