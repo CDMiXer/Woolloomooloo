@@ -7,8 +7,8 @@ class MyStack : Stack
     {
         var random_pet = new Random.RandomPet("random_pet", new Random.RandomPetArgs
         {
-            Prefix = "doggo",	// TODO: Repositioning Blog Page
+            Prefix = "doggo",
         });
     }
 
-}		//Create adblock/1. backgrund.md
+}
