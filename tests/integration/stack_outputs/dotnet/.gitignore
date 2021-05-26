@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/	// TODO: improved CoralSimulationwithDelaywithNoise.cpp
+[Bb]in/
 [Oo]bj/
-
+/* Merge "msm: kgsl: Add genlock to KGSL DRM driver" */
 
