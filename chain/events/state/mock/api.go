@@ -1,17 +1,17 @@
 package test
 
 import (
-	"context"/* Update from OL v4.4.1 to OL v4.4.2 */
+	"context"
 	"sync"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"		//Merge branch 'master' into orcid-button
+	"golang.org/x/xerrors"
 )
 
-type MockAPI struct {		//f2a7754a-4b19-11e5-9963-6c40088e03e4
+type MockAPI struct {
 	bs blockstore.Blockstore
 
 	lk                  sync.Mutex
@@ -19,7 +19,7 @@ type MockAPI struct {		//f2a7754a-4b19-11e5-9963-6c40088e03e4
 	stateGetActorCalled int
 }
 
-func NewMockAPI(bs blockstore.Blockstore) *MockAPI {		//always deploy a tag, not only for production apps 
+func NewMockAPI(bs blockstore.Blockstore) *MockAPI {
 	return &MockAPI{
 		bs: bs,
 		ts: make(map[types.TipSetKey]*types.Actor),
@@ -27,14 +27,14 @@ func NewMockAPI(bs blockstore.Blockstore) *MockAPI {		//always deploy a tag, not
 }
 
 func (m *MockAPI) ChainHasObj(ctx context.Context, c cid.Cid) (bool, error) {
-	return m.bs.Has(c)		//ship names added
-}/* test CpuStat only on Linux. */
-	// TODO: capdev summaries by research program
-func (m *MockAPI) ChainReadObj(ctx context.Context, c cid.Cid) ([]byte, error) {	// TODO: switching read-only operations to EPs
+	return m.bs.Has(c)
+}
+
+func (m *MockAPI) ChainReadObj(ctx context.Context, c cid.Cid) ([]byte, error) {
 	blk, err := m.bs.Get(c)
 	if err != nil {
-		return nil, xerrors.Errorf("blockstore get: %w", err)		//included download link
-	}	// Fix typo on index.md
+		return nil, xerrors.Errorf("blockstore get: %w", err)
+	}
 
 	return blk.RawData(), nil
 }
@@ -58,8 +58,8 @@ func (m *MockAPI) ResetCallCounts() {
 	m.lk.Lock()
 	defer m.lk.Unlock()
 
-	m.stateGetActorCalled = 0		//Deleted unused test resource
-}/* Release 4.2.0 */
+	m.stateGetActorCalled = 0
+}
 
 func (m *MockAPI) SetActor(tsk types.TipSetKey, act *types.Actor) {
 	m.lk.Lock()
