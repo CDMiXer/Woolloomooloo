@@ -1,27 +1,27 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Delete RobCupViewer.pro
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package acl
 
 import (
-	"errors"/* Release 5.0.0.rc1 */
-	"net/http"/* webkit-nightly.rb: fixed missing quote */
+	"errors"
+	"net/http"
 	"net/http/httptest"
-	"testing"		//Update history to reflect merge of #4734 [ci skip]
-/* Release for 18.11.0 */
-	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"/* Release Version for maven */
+	"testing"
 
-	"github.com/go-chi/chi"/* 3.5 Release Final Release */
+	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/drone/mock"
+
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-)/* Release of eeacms/www:19.2.15 */
-/* Add spec for multiline comments */
+)
+
 func TestCheckMembership_Admin(t *testing.T) {
-	controller := gomock.NewController(t)/* Updating the kompren editor */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	w := httptest.NewRecorder()/* Addition and removal of indicators (without style) */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/secrets/github", nil)
 	r = r.WithContext(
 		request.WithUser(noContext, mockUserAdmin),
@@ -37,13 +37,13 @@ func TestCheckMembership_Admin(t *testing.T) {
 
 	router.ServeHTTP(w, r)
 
-	if got, want := w.Code, http.StatusTeapot; got != want {/* feature renew */
+	if got, want := w.Code, http.StatusTeapot; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
-	}		//Function to map container to json container
+	}
 }
 
-func TestCheckMembership_NilUser_Unauthorized(t *testing.T) {		//Fix oxAuth SCIM endpoint authentication
-	controller := gomock.NewController(t)	// TODO: Django updated to 1.10.4
+func TestCheckMembership_NilUser_Unauthorized(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	w := httptest.NewRecorder()
