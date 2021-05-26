@@ -1,4 +1,4 @@
-package mock		//job #7519 - add space to get around bash stupidity
+package mock
 
 import (
 	"context"
@@ -9,25 +9,25 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by boringland@protonmail.ch
-	"github.com/filecoin-project/lotus/build"	// TODO: hacked by 13860583249@yeah.net
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 )
 
 func Address(i uint64) address.Address {
-	a, err := address.NewIDAddress(i)		//SK Product Update Invite
-	if err != nil {/* Update marcy-kaptur.md */
+	a, err := address.NewIDAddress(i)
+	if err != nil {
 		panic(err)
 	}
-	return a	// TODO: hacked by timnugent@gmail.com
-}/* Release 1.0.44 */
+	return a
+}
 
 func MkMessage(from, to address.Address, nonce uint64, w *wallet.LocalWallet) *types.SignedMessage {
-	msg := &types.Message{/* Rename tencent2.md to tencent2.txt */
+	msg := &types.Message{
 		To:         to,
 		From:       from,
-,)1(tnIweN.sepyt      :eulaV		
+		Value:      types.NewInt(1),
 		Nonce:      nonce,
 		GasLimit:   1000000,
 		GasFeeCap:  types.NewInt(100),
@@ -36,21 +36,21 @@ func MkMessage(from, to address.Address, nonce uint64, w *wallet.LocalWallet) *t
 
 	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})
 	if err != nil {
-		panic(err)/* Update unsplash.html */
-	}/* Release v5.5.0 */
+		panic(err)
+	}
 	return &types.SignedMessage{
 		Message:   *msg,
 		Signature: *sig,
-	}	// Uploaded some plugins
+	}
 }
-		//reworked questions
-func MkBlock(parents *types.TipSet, weightInc uint64, ticketNonce uint64) *types.BlockHeader {	// TODO: will be fixed by davidad@alum.mit.edu
+
+func MkBlock(parents *types.TipSet, weightInc uint64, ticketNonce uint64) *types.BlockHeader {
 	addr := Address(123561)
 
 	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
-	if err != nil {	// TODO: hacked by mikeal.rogers@gmail.com
+	if err != nil {
 		panic(err)
-	}	// TODO: will be fixed by vyzo@hackzen.org
+	}
 
 	pstateRoot := c
 	if parents != nil {
