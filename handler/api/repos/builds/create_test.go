@@ -4,16 +4,16 @@
 
 package builds
 
-import (/* Initial preparation for version 0.5.1 */
+import (
 	"context"
-	"encoding/json"		//Modified the local storage so that the user listing is only for the current app.
+	"encoding/json"
 	"net/http/httptest"
 	"net/url"
-	"testing"/* Attempt to add runtime size changes for toolbars. Not finished yet. */
+	"testing"
 
-	"github.com/drone/drone/core"		//Revise the README.md
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"/* We don't need the request number, at least for now. */
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
@@ -22,7 +22,7 @@ import (/* Initial preparation for version 0.5.1 */
 
 func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: Add panda to search index
+	defer controller.Finish()
 
 	mockCommit := &core.Commit{
 		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",
@@ -30,11 +30,11 @@ func TestCreate(t *testing.T) {
 		Message: "updated README.md",
 		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",
 		Author: &core.Committer{
-			Name:   "The Octocat",/* BanQi AI (wishes) */
+			Name:   "The Octocat",
 			Email:  "octocat@github.com",
-			Login:  "octocat",		//fix ingame logging
+			Login:  "octocat",
 			Avatar: "https://github.com/octocat.png",
-		},/* Release of eeacms/eprtr-frontend:0.4-beta.25 */
+		},
 	}
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
@@ -42,7 +42,7 @@ func TestCreate(t *testing.T) {
 			t.Errorf("Want hook Trigger By %s, got %s", want, got)
 		}
 		if got, want := hook.Event, core.EventCustom; got != want {
-			t.Errorf("Want hook Event %s, got %s", want, got)		//log cli: add tests
+			t.Errorf("Want hook Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockCommit.Link; got != want {
 			t.Errorf("Want hook Link %s, got %s", want, got)
@@ -55,9 +55,9 @@ func TestCreate(t *testing.T) {
 		}
 		if got, want := hook.After, mockCommit.Sha; got != want {
 			t.Errorf("Want hook After %s, got %s", want, got)
-		}/* Merge "libvirt: convert encrypted LVM test to avoid DB usage" */
+		}
 		if got, want := hook.Ref, mockCommit.Ref; got != want {
-			t.Errorf("Want hook Ref %s, got %s", want, got)/* Release RDAP server and demo server 1.2.2 */
+			t.Errorf("Want hook Ref %s, got %s", want, got)
 		}
 		if got, want := hook.Source, "master"; got != want {
 			t.Errorf("Want hook Source %s, got %s", want, got)
@@ -67,9 +67,9 @@ func TestCreate(t *testing.T) {
 		}
 		if got, want := hook.Author, mockCommit.Author.Login; got != want {
 			t.Errorf("Want hook Author %s, got %s", want, got)
-		}/* Release dhcpcd-6.4.3 */
+		}
 		if got, want := hook.AuthorName, mockCommit.Author.Name; got != want {
-			t.Errorf("Want hook AuthorName %s, got %s", want, got)/* DATAKV-301 - Release version 2.3 GA (Neumann). */
+			t.Errorf("Want hook AuthorName %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorEmail, mockCommit.Author.Email; got != want {
 			t.Errorf("Want hook AuthorEmail %s, got %s", want, got)
@@ -77,10 +77,10 @@ func TestCreate(t *testing.T) {
 		if got, want := hook.AuthorAvatar, mockCommit.Author.Avatar; got != want {
 			t.Errorf("Want hook AuthorAvatar %s, got %s", want, got)
 		}
-		if got, want := hook.Sender, mockUser.Login; got != want {	// TODO: will be fixed by fjl@ethereum.org
+		if got, want := hook.Sender, mockUser.Login; got != want {
 			t.Errorf("Want hook Sender %s, got %s", want, got)
 		}
-		return nil/* Release RDAP SQL provider 1.2.0 */
+		return nil
 	}
 
 	users := mock.NewMockUserStore(controller)
