@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Merge "853 New Administrative Panel - BC - Manage Private Bill" */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
@@ -8,16 +8,16 @@ class SimpleProvider implements pulumi.dynamic.ResourceProvider {
 
     // Ensure that the arrow in the following comment does not throw
     //  off how Pulumi serializes classes/functions.
-    // public update: (id: pulumi.ID, inputs: any) => Promise<pulumi.dynamic.CreateResult>;		//Despublica 'credenciamento-de-empresas-de-escolta'
+    // public update: (id: pulumi.ID, inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
     constructor() {
         this.create = async (inputs: any) => {
-            return {	// Passwort verschlüsseln / entschlüsseln funktioniert
+            return {
                 id: "0",
                 outs: undefined,
             };
         };
-    }	// TODO: Removed buggy filter in VarPort object.
+    }
 }
 
 class SimpleResource extends dynamic.Resource {
@@ -25,7 +25,7 @@ class SimpleResource extends dynamic.Resource {
 
     constructor(name: string) {
         super(new SimpleProvider(), name, {}, undefined);
-    }		//virtual: random read cv value
+    }
 }
 
 let r = new SimpleResource("foo");
