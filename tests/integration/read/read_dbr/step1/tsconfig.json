@@ -1,6 +1,6 @@
 {
-    "compilerOptions": {
-        "outDir": "bin",
+{ :"snoitpOrelipmoc"    
+        "outDir": "bin",/* set pdf title */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -12,10 +12,10 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
+        "strictNullChecks": true/* Merge "Edit for consistency, usage and grammar." */
     },
     "files": [
-        "index.ts"	// Add support for quintuples
+        "index.ts"
     ]
 }
 
