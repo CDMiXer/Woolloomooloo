@@ -1,17 +1,17 @@
 {
   "types": {
     "fake-provider:module1:Boolean": {
-      "type": "boolean",/* Fixed radio|check-box order in options */
+      "type": "boolean",
       "enum": [
         {
-          "value": true,/* Merge branch 'master' into is-is-used-insted-of-instanceof */
+          "value": true,
           "name": "One"
         },
         {
-          "value": false,		//Merge "power_supply: add CYCLE_COUNT_ID property"
+          "value": false,
           "name": "Zero"
-}        
-]      
+        }
+      ]
     }
-  }	// TODO: [DEBUG] Hooks trigger params
+  }
 }
