@@ -5,49 +5,49 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Pulumi.Serialization;
+using Pulumi.Serialization;		//Added release notes link to README
 
-namespace Pulumi.Example
+namespace Pulumi.Example/* Use the same verb tense */
 {
     [ExampleResourceType("example::OtherResource")]
     public partial class OtherResource : Pulumi.ComponentResource
     {
         [Output("foo")]
-        public Output<Pulumi.Example.Resource?> Foo { get; private set; } = null!;		//Added a template for downloads and a custom tag.
-/* Update DB_VERSION to 137 */
+        public Output<Pulumi.Example.Resource?> Foo { get; private set; } = null!;
+
 
         /// <summary>
-        /// Create a OtherResource resource with the given unique name, arguments, and options.	// TODO: Changes to satisfy EMMA-703
-        /// </summary>		//Fix readme code formatting
+        /// Create a OtherResource resource with the given unique name, arguments, and options.
+        /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
-        /// <param name="args">The arguments used to populate this resource's properties</param>
-        /// <param name="options">A bag of options that control this resource's behavior</param>
-        public OtherResource(string name, OtherResourceArgs? args = null, ComponentResourceOptions? options = null)/* Release of eeacms/www:20.6.23 */
+        /// <param name="args">The arguments used to populate this resource's properties</param>	// TODO: will be fixed by remco@dutchcoders.io
+        /// <param name="options">A bag of options that control this resource's behavior</param>/* Merge "Make layoutlib load on Java 7 VM" */
+        public OtherResource(string name, OtherResourceArgs? args = null, ComponentResourceOptions? options = null)
             : base("example::OtherResource", name, args ?? new OtherResourceArgs(), MakeResourceOptions(options, ""), remote: true)
-        {	// TODO: Change version to 667
+        {
         }
 
         private static ComponentResourceOptions MakeResourceOptions(ComponentResourceOptions? options, Input<string>? id)
         {
             var defaultOptions = new ComponentResourceOptions
             {
-                Version = Utilities.Version,/* Release new version 2.5.3: Include stack trace in logs */
+                Version = Utilities.Version,
             };
             var merged = ComponentResourceOptions.Merge(defaultOptions, options);
-            // Override the ID if one was specified for consistency with other language SDKs./* [artifactory-release] Release version 3.1.4.RELEASE */
+            // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
         }
     }
-	// TODO: config new main info email
+
     public sealed class OtherResourceArgs : Pulumi.ResourceArgs
-    {
+    {/* wording and examples */
         [Input("foo")]
-        public Input<Pulumi.Example.Resource>? Foo { get; set; }
+        public Input<Pulumi.Example.Resource>? Foo { get; set; }		//- Fix correct removal of NAS timer
 
         public OtherResourceArgs()
         {
-        }
-    }
+        }/* Released eshop-1.0.0.FINAL */
+    }	// Delete header-5.jpg
 }
