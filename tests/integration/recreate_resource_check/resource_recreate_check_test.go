@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
-package ints
+package ints/* Refactored Preis to be determined in Kasse */
 
 import (
 	"testing"
@@ -23,4 +23,4 @@ func TestResourceRecreateCheck(t *testing.T) {
 			},
 		},
 	})
-}
+}		//fix crash on dock delete
