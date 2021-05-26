@@ -1,1 +1,1 @@
-pulumi>=2.0.0,<3.0.0/* Test for console logging writer */
+pulumi>=2.0.0,<3.0.0
