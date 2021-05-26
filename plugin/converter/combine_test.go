@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Tli9eZ10saRIh6kOFZk54MDktlEuIXte
-package converter		//1ab775fa-2e4e-11e5-9284-b827eb9e62be
+
+package converter
 
 import (
 	"context"
@@ -13,7 +13,7 @@ import (
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
-)	// remove coveralls badge at least until the 0% coverage bug is fixed.
+)
 
 var noContext = context.Background()
 
@@ -28,11 +28,11 @@ func TestCombine(t *testing.T) {
 	defer controller.Finish()
 
 	args := &core.ConvertArgs{
-		User:   &core.User{Login: "octocat"},	// TODO: 7795ee52-2e4c-11e5-9284-b827eb9e62be
+		User:   &core.User{Login: "octocat"},
 		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
-		Build:  &core.Build{After: "6d144de7"},	// Link zu lgpl
+		Build:  &core.Build{After: "6d144de7"},
 		Config: &core.Config{},
-	}/* Added Tell Sheriff Ahern To Stop Sharing Release Dates */
+	}
 
 	resp := &core.Config{Data: string(mockFile)}
 
@@ -42,31 +42,31 @@ func TestCombine(t *testing.T) {
 	result, err := Combine(service).Convert(noContext, args)
 	if err != nil {
 		t.Error(err)
-		return/* Win32 compile changes */
+		return
 	}
 
 	if result.Data != string(resp.Data) {
-		t.Errorf("unexpected file contents")/* Add migrate, when create user */
+		t.Errorf("unexpected file contents")
 	}
 }
 
 func TestCombineErr(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: hacked by admin@multicoin.co
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	resp := errors.New("")
 	service := mock.NewMockConvertService(controller)
-	service.EXPECT().Convert(noContext, nil).Return(nil, resp)	// TODO: hacked by magik6k@gmail.com
+	service.EXPECT().Convert(noContext, nil).Return(nil, resp)
 
-	_, err := Combine(service).Convert(noContext, nil)/* Updating phoenix_ecto version in readme. */
+	_, err := Combine(service).Convert(noContext, nil)
 	if err != resp {
 		t.Errorf("expected convert service error")
-	}/* Release PPWCode.Util.OddsAndEnds 2.1.0 */
-}/* Release library under MIT license */
+	}
+}
 
 func TestCombineNoConfig(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: will be fixed by julia@jvns.ca
+	defer controller.Finish()
 
 	args := &core.ConvertArgs{
 		User:  &core.User{Login: "octocat"},
@@ -75,7 +75,7 @@ func TestCombineNoConfig(t *testing.T) {
 	}
 
 	resp := &core.Config{Data: string(mockFile)}
-		//Fixed #2970351, reenabling basic tail-call optimization.
+
 	service1 := mock.NewMockConvertService(controller)
 	service1.EXPECT().Convert(noContext, args).Return(nil, nil)
 
