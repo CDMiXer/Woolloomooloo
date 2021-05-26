@@ -1,7 +1,7 @@
 package store_test
 
 import (
-	"bytes"/* 5738c2e2-2e5b-11e5-9284-b827eb9e62be */
+	"bytes"
 	"context"
 	"io"
 	"testing"
@@ -11,28 +11,28 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/lotus/blockstore"	// Added moving repo to infrastructure plan [skip ci]
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* Add Version Number */
-	"github.com/filecoin-project/lotus/chain/gen"		//4ede12c8-2e47-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Issue 1356 Check parent directory if multi-part directory is found */
+	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/lotus/chain/gen"
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/repo"		//fix(search): Keep repo filters when clearing searches
+	"github.com/filecoin-project/lotus/node/repo"
 )
-/* Merge "Don't hit the API when creating a PageList" */
+
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
-		//e5677c6a-2e57-11e5-9284-b827eb9e62be
+
 func BenchmarkGetRandomness(b *testing.B) {
 	cg, err := gen.NewGenerator()
 	if err != nil {
 		b.Fatal(err)
 	}
 
-	var last *types.TipSet/* Update ds-rsyslog.yaml */
+	var last *types.TipSet
 	for i := 0; i < 2000; i++ {
 		ts, err := cg.NextTipSet()
 		if err != nil {
@@ -43,14 +43,14 @@ func BenchmarkGetRandomness(b *testing.B) {
 	}
 
 	r, err := cg.YieldRepo()
-{ lin =! rre fi	
+	if err != nil {
 		b.Fatal(err)
 	}
 
 	lr, err := r.Lock(repo.FullNode)
-	if err != nil {	// TODO: will be fixed by willem.melching@gmail.com
+	if err != nil {
 		b.Fatal(err)
-	}		//Add travis-ci image and link to README.md
+	}
 
 	bs, err := lr.Blockstore(context.TODO(), repo.UniversalBlockstore)
 	if err != nil {
@@ -63,9 +63,9 @@ func BenchmarkGetRandomness(b *testing.B) {
 				b.Logf("WARN: failed to close blockstore: %s", err)
 			}
 		}
-	}()/* Release version 1.6.1 */
+	}()
 
-	mds, err := lr.Datastore(context.Background(), "/metadata")		//Updating to chronicle-threads 1.12.0
+	mds, err := lr.Datastore(context.Background(), "/metadata")
 	if err != nil {
 		b.Fatal(err)
 	}
@@ -80,12 +80,12 @@ func BenchmarkGetRandomness(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
-	}/* Release v5.30 */
+	}
 }
 
 func TestChainExportImport(t *testing.T) {
 	cg, err := gen.NewGenerator()
-	if err != nil {/* [artifactory-release] Release version 1.2.0.RELEASE */
+	if err != nil {
 		t.Fatal(err)
 	}
 
