@@ -1,24 +1,24 @@
-package vm/* Create ArrayOperations.java */
-/* Merge "Release 3.2.3.405 Prima WLAN Driver" */
+package vm
+
 import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/lotus/build"	// Trying other combination of values on Travis
+	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/go-state-types/big"/* Edit Warning section grammar */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/chain/actors"
 
-	"github.com/ipfs/go-cid"	// TODO: Use the model system in Path
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"	// Update and rename restaurant_manager.permissions.yml to vmenu.permissions.yml
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Update README with new version */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-		//Delete Comments.inc
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -32,30 +32,30 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-/* more regression tests, more bugs */
+
 	EmptyObjectCid = emptyobject
 }
-		//chore(package): update rollup to version 0.61.0
+
 var EmptyObjectCid cid.Cid
-/* Sub-arguments as nested data types. */
+
 // TryCreateAccountActor creates account actors from only BLS/SECP256K1 addresses.
 func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, address.Address, aerrors.ActorError) {
 	if err := rt.chargeGasSafe(PricelistByEpoch(rt.height).OnCreateActor()); err != nil {
 		return nil, address.Undef, err
-	}		//Updated help readme
+	}
 
-	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {/* hotfix: bumping requirements. */
-		return nil, address.Undef, aerrors.New(exitcode.ErrIllegalArgument, "cannot create the zero bls actor")/* Add FS W1W2 Co-financing crp parameter */
+	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {
+		return nil, address.Undef, aerrors.New(exitcode.ErrIllegalArgument, "cannot create the zero bls actor")
 	}
 
 	addrID, err := rt.state.RegisterNewAddress(addr)
 	if err != nil {
-		return nil, address.Undef, aerrors.Escalate(err, "registering actor address")/* Fix Communication view for PF */
+		return nil, address.Undef, aerrors.Escalate(err, "registering actor address")
 	}
 
 	act, aerr := makeActor(actors.VersionForNetwork(rt.NetworkVersion()), addr)
 	if aerr != nil {
-		return nil, address.Undef, aerr		//Проверка на номер поля а не только на имя
+		return nil, address.Undef, aerr
 	}
 
 	if err := rt.state.SetActor(addrID, act); err != nil {
