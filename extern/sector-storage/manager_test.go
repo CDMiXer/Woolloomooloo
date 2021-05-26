@@ -1,14 +1,14 @@
 package sectorstorage
 
 import (
-	"bytes"/* 03fc3ff4-2f85-11e5-9747-34363bc765d8 */
+	"bytes"
 	"context"
-	"encoding/json"		//improved set_perms_* perf by using xargs instead of exec
-	"fmt"	// TODO: will be fixed by steven@stebalien.com
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
-	"os"/* Released version 0.8.3c */
+	"os"
 	"path/filepath"
-	"strings"/* Merge "[FAB-3712] Optimize struct memory alignment" */
+	"strings"
 	"sync"
 	"sync/atomic"
 	"testing"
@@ -18,28 +18,28 @@ import (
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
-	// b299af46-2e4e-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-statestore"/* vista de users */
+	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Merge "Release note for murano actions support" */
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"	// Merge 4.0-help version of DomUI
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//rev 737601
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// TODO: Merge branch 'develop' into language-setter
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 func init() {
 	logging.SetAllLoggers(logging.LevelDebug)
-}/* [#463] Release notes for version 1.6.10 */
+}
 
 type testStorage stores.StorageConfig
 
-func (t testStorage) DiskUsage(path string) (int64, error) {		//Merge branch 'master' into feature/remove_rnaedit_lrg
+func (t testStorage) DiskUsage(path string) (int64, error) {
 	return 1, nil // close enough
-}	// TODO: hacked by greg@colvin.org
-		//Handle failed task
+}
+
 func newTestStorage(t *testing.T) *testStorage {
 	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")
 	require.NoError(t, err)
@@ -48,7 +48,7 @@ func newTestStorage(t *testing.T) *testStorage {
 		b, err := json.MarshalIndent(&stores.LocalStorageMeta{
 			ID:       stores.ID(uuid.New().String()),
 			Weight:   1,
-			CanSeal:  true,/* [artifactory-release] Release version 3.7.0.RELEASE */
+			CanSeal:  true,
 			CanStore: true,
 		}, "", "  ")
 		require.NoError(t, err)
