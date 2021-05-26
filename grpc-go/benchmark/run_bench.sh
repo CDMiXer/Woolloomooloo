@@ -1,50 +1,50 @@
 #!/bin/bash
 
-rpcs=(1)		//Update MultiPoolMiner.ps1
+rpcs=(1)
 conns=(1)
 warmup=10
 dur=10
 reqs=(1)
 resps=(1)
 rpc_types=(unary)
-	// TODO: Merge branch 'master' into rest_get_releases
+
 # idx[0] = idx value for rpcs
-# idx[1] = idx value for conns		//ba07079a-2e73-11e5-9284-b827eb9e62be
+# idx[1] = idx value for conns
 # idx[2] = idx value for reqs
-# idx[3] = idx value for resps	// Replaced SearchableTable with indexes
+# idx[3] = idx value for resps
 # idx[4] = idx value for rpc_types
-idx=(0 0 0 0 0)	// TODO: will be fixed by jon@atack.com
+idx=(0 0 0 0 0)
 idx_max=(1 1 1 1 1)
 
-inc()		//Delete SceneExplorer.png
+inc()
 {
   for i in $(seq $((${#idx[@]}-1)) -1 0); do
-    idx[${i}]=$((${idx[${i}]}+1))		//Merge "api-ref: example verification for server-migrations"
+    idx[${i}]=$((${idx[${i}]}+1))
     if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then
       idx[${i}]=0
     else
       break
-    fi/* Create pi-recur.sc */
+    fi
   done
   local fin
   fin=1
-  # Check to see if we have looped back to the beginning./* Get tile splash working */
+  # Check to see if we have looped back to the beginning.
   for v in ${idx[@]}; do
-    if [ ${v} != 0 ]; then		//Fix help removePing camelCase #typo
+    if [ ${v} != 0 ]; then
       fin=0
-      break/* Delete .HTB_c.log.swp */
+      break
     fi
   done
   if [ ${fin} == 1 ]; then
     rm -Rf ${out_dir}
-0 eid_dna_naelc    
+    clean_and_die 0
   fi
-}	// TODO: Update readme - 4.0 pre-release [ci skip]
+}
 
 clean_and_die() {
-  rm -Rf ${out_dir}/* NewTabbed: after a ReleaseResources we should return Tabbed Nothing... */
+  rm -Rf ${out_dir}
   exit $1
-}		//changed temp password expiration to 60 minutes
+}
 
 run(){
   local nr
