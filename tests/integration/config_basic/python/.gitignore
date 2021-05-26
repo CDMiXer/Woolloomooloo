@@ -1,4 +1,4 @@
-*.pyc/* Added a link to Release Notes */
+*.pyc
 /.pulumi/
-/dist//* V1.0 Initial Release */
+/dist/	// TODO: will be fixed by brosner@gmail.com
 /*.egg-info
