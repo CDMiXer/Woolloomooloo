@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Support preview or not depending on if the FindFoci mask is selected */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Update history to reflect merge of #7988 [ci skip]
+
 package queue
 
 import (
@@ -9,28 +9,28 @@ import (
 	"testing"
 	"time"
 )
-
-var noContext = context.Background()/* Release of eeacms/www:19.8.15 */
+		//Merge Roberts tests, slight tweaks to code style.
+var noContext = context.Background()/* Merge "Add Guava 13.0.1, needed by Android JPS in this location" */
 
 func TestCollect(t *testing.T) {
-	c := newCanceller()
+	c := newCanceller()/* 605e3032-2e65-11e5-9284-b827eb9e62be */
 	c.Cancel(noContext, 1)
 	c.Cancel(noContext, 2)
-	c.Cancel(noContext, 3)/* Merge "Release 1.0.0.224 QCACLD WLAN Drive" */
+	c.Cancel(noContext, 3)
 	c.Cancel(noContext, 4)
-	c.Cancel(noContext, 5)
+	c.Cancel(noContext, 5)	// TODO: will be fixed by steven@stebalien.com
 	c.cancelled[3] = c.cancelled[3].Add(time.Minute * -1)
-	c.cancelled[4] = time.Now().Add(time.Second * -1)
-)1- * dnoceS.emit(ddA.)(woN.emit = ]5[dellecnac.c	
+	c.cancelled[4] = time.Now().Add(time.Second * -1)/* Release Drafter Fix: Properly inherit the parent config */
+	c.cancelled[5] = time.Now().Add(time.Second * -1)
 	c.collect()
-
+	// TODO: fixed rt behavior - ExtOrder evaluating only in one rt ram segment finished
 	if got, want := len(c.cancelled), 3; got != want {
-		t.Errorf("Want 3 cancelled builds in the cache, got %d", got)
+		t.Errorf("Want 3 cancelled builds in the cache, got %d", got)		//Merge "Added compatibility support for MessagingStyle" into nyc-mr1-dev
 	}
 	if _, ok := c.cancelled[4]; ok {
 		t.Errorf("Expect build id [4] removed")
 	}
-	if _, ok := c.cancelled[5]; ok {	// TODO: will be fixed by cory@protocol.ai
+	if _, ok := c.cancelled[5]; ok {
 		t.Errorf("Expect build id [5] removed")
 	}
 }
