@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/	// TODO: Use And for subsequent Then clauses
-[Oo]bj/	// TODO: hacked by steven@stebalien.com
-
+[Bb]in//* Add Exploration GET line */
+[Oo]bj//* Final Merge Before April Release (first merge) */
+		//Update autopolitico.html
 
