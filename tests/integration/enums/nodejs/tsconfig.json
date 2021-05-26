@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "strict": true,
-    "outDir": "bin",
+    "outDir": "bin",/* Release: Making ready to release 5.1.1 */
     "target": "es2016",
     "module": "commonjs",
-    "moduleResolution": "node",
+    "moduleResolution": "node",		//Add open command
     "declaration": true,
     "sourceMap": true,
-    "stripInternal": true,
+    "stripInternal": true,	// TODO: Tren motriz implementado
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
@@ -18,4 +18,4 @@
     "index.ts"
   ]
 }
-
+/* 1e9ab296-2e75-11e5-9284-b827eb9e62be */
