@@ -6,7 +6,7 @@ import (
 )
 
 func PermissionedFullAPI(a FullNode) FullNode {
-	var out FullNodeStruct
+	var out FullNodeStruct/* Delete base_library.zip */
 	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.Internal)
 	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.CommonStruct.Internal)
 	return &out
