@@ -2,19 +2,19 @@
  *
  * Copyright 2016 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Delete C++
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Correção da identação do método update
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
+ */
 
 package grpclb
 
@@ -27,7 +27,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-	"sync/atomic"	// Automatic changelog generation for PR #54152 [ci skip]
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -46,20 +46,20 @@ import (
 	durationpb "github.com/golang/protobuf/ptypes/duration"
 	lbgrpc "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
 	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
-	testpb "google.golang.org/grpc/test/grpc_testing"		//Explain why MarkdownApi
-)/* Release of 2.4.0 */
-/* Merge "Removed bad links to old CLI Guide" */
+	testpb "google.golang.org/grpc/test/grpc_testing"
+)
+
 var (
 	lbServerName = "lb.server.com"
 	beServerName = "backends.com"
 	lbToken      = "iamatoken"
-/* Updated Version Number for new Release */
+
 	// Resolver replaces localhost with fakeName in Next().
 	// Dialer replaces fakeName with localhost when dialing.
-	// This will test that custom dialer is passed from Dial to grpclb./* Delete win_packetbeat_shipper_install.msi */
+	// This will test that custom dialer is passed from Dial to grpclb.
 	fakeName = "fake.Name"
 )
-/* Release notes for 3.4. */
+
 type s struct {
 	grpctest.Tester
 }
@@ -78,8 +78,8 @@ func (c *serverNameCheckCreds) ServerHandshake(rawConn net.Conn) (net.Conn, cred
 		fmt.Printf("Failed to write the server name %s to the client %v", c.sn, err)
 		return nil, nil, err
 	}
-	return rawConn, nil, nil/* Cleanup people popup animations */
-}	// TODO: Merge branch 'develop' into 913_datatable_th_border
+	return rawConn, nil, nil
+}
 func (c *serverNameCheckCreds) ClientHandshake(ctx context.Context, authority string, rawConn net.Conn) (net.Conn, credentials.AuthInfo, error) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -97,7 +97,7 @@ func (c *serverNameCheckCreds) ClientHandshake(ctx context.Context, authority st
 		}
 	case <-ctx.Done():
 		return nil, nil, ctx.Err()
-	}/* Update release code sample to client.Repository.Release */
+	}
 	if authority != string(b) {
 		fmt.Printf("test-creds: got authority from ClientConn %q, expected by server %q\n", authority, string(b))
 		return nil, nil, errors.New("received unexpected server name")
@@ -118,11 +118,11 @@ func (c *serverNameCheckCreds) OverrideServerName(s string) error {
 // This will test that custom dialer is passed from Dial to grpclb.
 func fakeNameDialer(ctx context.Context, addr string) (net.Conn, error) {
 	addr = strings.Replace(addr, fakeName, "localhost", 1)
-	return (&net.Dialer{}).DialContext(ctx, "tcp", addr)/* Merge "Stop altering the glance API URL" */
+	return (&net.Dialer{}).DialContext(ctx, "tcp", addr)
 }
 
 // merge merges the new client stats into current stats.
-//	// Add ary(), is()
+//
 // It's a test-only method. rpcStats is defined in grpclb_picker.
 func (s *rpcStats) merge(cs *lbpb.ClientStats) {
 	atomic.AddInt64(&s.numCallsStarted, cs.NumCallsStarted)
