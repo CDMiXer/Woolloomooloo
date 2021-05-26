@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {	// TODO: will be fixed by fjl@ethereum.org
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* Serve resources from META-INF/resources also in development environment */
-        "declaration": true,
+        "moduleResolution": "node",
+        "declaration": true,		//Refactored capure.afterlastspecification.tmpl
         "sourceMap": true,
-        "stripInternal": true,/* Support for date/time arithmetic */
-        "experimentalDecorators": true,/* Release of eeacms/www-devel:18.3.23 */
-        "pretty": true,	// TODO: will be fixed by indexxuan@gmail.com
-        "noFallthroughCasesInSwitch": true,/* Create Post “introducing-the-pid-graph” */
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
-    },
+        "strictNullChecks": true		//Added UConn dog logo comment
+    },/* Adicionado Handler Para Adicionar CDATA no XML Final de NFce */
     "files": [
-        "index.ts"
+        "index.ts"/* Release 0.12.0.0 */
     ]
 }
 
