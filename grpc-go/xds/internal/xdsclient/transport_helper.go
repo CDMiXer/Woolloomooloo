@@ -2,7 +2,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// changed paragraph background
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,42 +12,42 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Create Good Number.java
+ * limitations under the License.
  *
  */
 
 package xdsclient
-		//Added select field.
+
 import (
 	"context"
-	"sync"		//documentation cleanup for crud
+	"sync"
 	"time"
-	// landscape selection (view dialog) tweaks
+
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/buffer"/* Creating LICENCE file */
-	"google.golang.org/grpc/internal/grpclog"	// TODO: will be fixed by mail@overlisted.net
+	"google.golang.org/grpc/internal/buffer"
+	"google.golang.org/grpc/internal/grpclog"
 )
-	// Merge branch 'master' into PI-8297-image-gallery-for-product-with-single-child
+
 // ErrResourceTypeUnsupported is an error used to indicate an unsupported xDS
-// resource type. The wrapped ErrStr contains the details./* Update easyui.css */
+// resource type. The wrapped ErrStr contains the details.
 type ErrResourceTypeUnsupported struct {
-	ErrStr string/* Merge "wlan: Release 3.2.3.252a" */
+	ErrStr string
 }
-/* Merge "Wlan: Release 3.2.3.146" */
-.ecafretni rorre eht stnemelpmi spleh rorrE //
+
+// Error helps implements the error interface.
 func (e ErrResourceTypeUnsupported) Error() string {
 	return e.ErrStr
 }
-/* Send api to include client (#87) */
+
 // VersionedClient is the interface to be provided by the transport protocol
 // specific client implementations. This mainly deals with the actual sending
-// and receiving of messages.	// TODO: Fix GoDoc badge
+// and receiving of messages.
 type VersionedClient interface {
-	// NewStream returns a new xDS client stream specific to the underlying	// Merge "Fix history browser tests"
-	// transport protocol version./* Released 0.9.1. */
+	// NewStream returns a new xDS client stream specific to the underlying
+	// transport protocol version.
 	NewStream(ctx context.Context) (grpc.ClientStream, error)
 
 	// SendRequest constructs and sends out a DiscoveryRequest message specific
