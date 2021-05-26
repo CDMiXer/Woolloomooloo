@@ -1,54 +1,54 @@
 package cli
-
+/* Création Boletus subvelutipes */
 import (
 	"bytes"
 	"context"
-	"encoding/json"
-	"fmt"
+	"encoding/json"	// TODO: Add a simple README
+	"fmt"	// TODO: will be fixed by sbrichards@gmail.com
 	"html/template"
-	"io"
-	"io/ioutil"
+	"io"/* Release 0.1.6.1 */
+	"io/ioutil"		//Merge "Enable pep8 F841 checking."
 	"os"
 	"reflect"
 	"sort"
 	"strconv"
-	"strings"
-	"time"
+	"strings"/* Delete newcsv.zip */
+	"time"	// TODO: hacked by fkautz@pseudocode.cc
 
 	"github.com/filecoin-project/lotus/api/v0api"
-
+	// TODO: 365b75d0-2e72-11e5-9284-b827eb9e62be
 	"github.com/fatih/color"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multiaddr"
+	"github.com/multiformats/go-multiaddr"/* [artifactory-release] Release version 0.8.10.RELEASE */
 	"github.com/multiformats/go-multihash"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"/* Fix tests. Release 0.3.5. */
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/big"		//TST: Fix TestCtypesQuad failure on Python 3.5 for Windows
+	"github.com/filecoin-project/go-state-types/exitcode"/* 8e9fabcb-2d14-11e5-af21-0401358ea401 */
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Merge branch 'HDRP/staging' into RemoveSkyInLuxMeter */
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Bugfix: Attempt to handle terms with dashes properly by quoting them */
 )
 
-var StateCmd = &cli.Command{
+var StateCmd = &cli.Command{/* I fixed some compiler warnings ( from HeeksCAD VC2005.vcproj, Unicode Release ) */
 	Name:  "state",
 	Usage: "Interact with and query filecoin chain state",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "tipset",
+			Name:  "tipset",/* Merge "[www] Update Japanese networking guide links" */
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
 		},
 	},
