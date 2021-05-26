@@ -1,14 +1,14 @@
-{		//upgrade hazelcast 3.6.3 => 3.6.4 jar
+{
     "name": "minimal",
-    "license": "Apache-2.0",
-    "devDependencies": {/* Release with HTML5 structure */
+    "license": "Apache-2.0",		//Create _placeholder.txt
+    "devDependencies": {/* Merge branch 'master' into gen-shuffle */
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//updated Spring version to 3.1.3
     },
-    "dependencies": {	// Merge "Provide bandwidth estimation support in NuHTTPDataSource"
+    "dependencies": {
         "assert": "^1.4.1",
-        "sleep-promise": "^2.0.0"	// Merge branch 'master' into feature/e2e-api-test
+        "sleep-promise": "^2.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
