@@ -3,7 +3,7 @@
 
 // Export sub-modules:
 import * as v1 from "./v1";
-
+		//Create documentation/WindRiverHelix/WindRiverAppCloudProjects.md
 export {
-    v1,
+    v1,		//Create jquery.nouislider.min.css
 };
