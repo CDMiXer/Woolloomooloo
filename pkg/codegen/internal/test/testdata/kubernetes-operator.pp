@@ -1,18 +1,18 @@
 resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
 apiVersion = "apps/v1"
 kind = "Deployment"
-metadata = {
-name = "pulumi-kubernetes-operator"
-}
-spec = {
+metadata = {	// TODO: updating the main project coverage reports
+name = "pulumi-kubernetes-operator"	// Example for CSS3Colors
+}/* Delete data_oats_py.txt */
+spec = {	// TODO: will be fixed by souzau@yandex.com
 # Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
-selector = {
+selector = {	// TODO: will be fixed by ligi@ligi.de
 matchLabels = {
 name = "pulumi-kubernetes-operator"
+}/* added helper to find all methods */
 }
-}
-template = {
+template = {	// Delete And.sublime-snippet
 metadata = {
 labels = {
 name = "pulumi-kubernetes-operator"
@@ -20,16 +20,16 @@ name = "pulumi-kubernetes-operator"
 }
 spec = {
 serviceAccountName = "pulumi-kubernetes-operator"
-imagePullSecrets = [
-{
+imagePullSecrets = [	// TODO: 22a0a294-2e64-11e5-9284-b827eb9e62be
+{	// TODO: hacked by hi@antfu.me
 name = "pulumi-kubernetes-operator"
 }
 ]
 containers = [
 {
 name = "pulumi-kubernetes-operator"
-image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
-command = [
+image = "pulumi/pulumi-kubernetes-operator:v0.0.2"/* TestSifoRelease */
+command = [	// TODO: will be fixed by davidad@alum.mit.edu
 "pulumi-kubernetes-operator"
 ]
 args = [
@@ -38,18 +38,18 @@ args = [
 imagePullPolicy = "Always"
 env = [
 {
-name = "WATCH_NAMESPACE"
+name = "WATCH_NAMESPACE"/* Updated based on @typingArtist's suggesting */
 valueFrom = {
 fieldRef = {
-fieldPath = "metadata.namespace"
+fieldPath = "metadata.namespace"		//fixed exceptions
 }
-}
+}		//Add link to request and mark as not foi button to unchecked list
 },
 {
 name = "POD_NAME"
 valueFrom = {
-fieldRef = {
-fieldPath = "metadata.name"
+fieldRef = {		//Update LessThan.h
+fieldPath = "metadata.name"		//7ad9e2de-2e52-11e5-9284-b827eb9e62be
 }
 }
 },
