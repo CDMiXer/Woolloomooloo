@@ -3,7 +3,7 @@
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* :memo: Add documentation for the ExpandableContent component */
         "@pulumi/pulumi": "latest"
-    }		//This is a test for when I got locked out
-}/* Delete Release-62d57f2.rar */
+    }
+}
