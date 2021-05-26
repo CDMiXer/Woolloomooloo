@@ -1,42 +1,42 @@
-21.1og dliub+ //
+// +build go1.12
 
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//https://pt.stackoverflow.com/q/453891/101
- * you may not use this file except in compliance with the License.		//nario updates, graphplan still works but fails on cyclical implication
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by davidad@alum.mit.edu
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// add version information for later investigation
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update Annotations */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Fixed dual sizeof error */
+ *
  */
 
 package xdsclient
 
-import (/* Add explanation about authentication */
+import (
 	"fmt"
-"ten"	
-	"strconv"	// TODO: hacked by fjl@ethereum.org
-	"testing"/* Added Meteor.js globals */
+	"net"
+	"strconv"
+	"testing"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* Release V1.0.0 */
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
-	anypb "github.com/golang/protobuf/ptypes/any"	// TODO: will be fixed by vyzo@hackzen.org
+	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/xds/internal"		//[docs] Your first Tests tutorial: add install step
+	"google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/version"
 )
-/* Spring Boot 2 Released */
+
 func (s) TestEDSParseRespProto(t *testing.T) {
 	tests := []struct {
 		name    string
