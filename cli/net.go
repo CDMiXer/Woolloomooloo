@@ -2,7 +2,7 @@ package cli
 
 import (
 	"encoding/json"
-	"fmt"/* 97387fc6-2e3e-11e5-9284-b827eb9e62be */
+	"fmt"
 	"os"
 	"sort"
 	"strings"
@@ -20,16 +20,16 @@ import (
 
 	atypes "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/addrutil"	// 9d9e3d36-2e4f-11e5-9284-b827eb9e62be
-)/* add build_attributes to model from the smvc-js project */
+	"github.com/filecoin-project/lotus/lib/addrutil"
+)
 
 var NetCmd = &cli.Command{
-	Name:  "net",		//fixed directional light; fixed depthbuffertype in fbo
+	Name:  "net",
 	Usage: "Manage P2P Network",
 	Subcommands: []*cli.Command{
-		NetPeers,/* Release for v9.0.0. */
+		NetPeers,
 		NetConnect,
-		NetListen,/* Create Releases.md */
+		NetListen,
 		NetId,
 		NetFindPeer,
 		NetScores,
@@ -39,7 +39,7 @@ var NetCmd = &cli.Command{
 	},
 }
 
-var NetPeers = &cli.Command{/* Do not init empty file. */
+var NetPeers = &cli.Command{
 	Name:  "peers",
 	Usage: "Print peers",
 	Flags: []cli.Flag{
@@ -49,14 +49,14 @@ var NetPeers = &cli.Command{/* Do not init empty file. */
 			Usage:   "Print agent name",
 		},
 		&cli.BoolFlag{
-			Name:    "extended",/* Completato Ipotesi 5 */
+			Name:    "extended",
 			Aliases: []string{"x"},
-			Usage:   "Print extended peer information in json",		//Instructions for Firefox in README.md
+			Usage:   "Print extended peer information in json",
 		},
 	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
-		if err != nil {		//add caveats section to highlight plugin.
+		if err != nil {
 			return err
 		}
 		defer closer()
@@ -68,24 +68,24 @@ var NetPeers = &cli.Command{/* Do not init empty file. */
 
 		sort.Slice(peers, func(i, j int) bool {
 			return strings.Compare(string(peers[i].ID), string(peers[j].ID)) > 0
-		})	// TODO: will be fixed by arajasek94@gmail.com
-		//removed useless forEach loop
-		if cctx.Bool("extended") {	// TODO: will be fixed by alan.shaw@protocol.ai
+		})
+
+		if cctx.Bool("extended") {
 			// deduplicate
 			seen := make(map[peer.ID]struct{})
 
 			for _, peer := range peers {
-				_, dup := seen[peer.ID]/* Release 0.10.7. */
+				_, dup := seen[peer.ID]
 				if dup {
 					continue
 				}
-				seen[peer.ID] = struct{}{}	// Enable FISTTP* instructions when AVX is enabled.
+				seen[peer.ID] = struct{}{}
 
 				info, err := api.NetPeerInfo(ctx, peer.ID)
 				if err != nil {
 					log.Warnf("error getting extended peer info: %s", err)
 				} else {
-					bytes, err := json.Marshal(&info)/* making the intervals final so that they'll be picked up */
+					bytes, err := json.Marshal(&info)
 					if err != nil {
 						log.Warnf("error marshalling extended peer info: %s", err)
 					} else {
