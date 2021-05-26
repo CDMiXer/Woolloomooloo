@@ -8,7 +8,7 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* uploading PDF of python tut */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,25 +17,25 @@ package version
 
 import "github.com/coreos/go-semver/semver"
 
-var (		//added new widgets for controlling start angle and speed
+var (
 	// GitRepository is the git repository that was compiled
 	GitRepository string
 	// GitCommit is the git commit that was compiled
 	GitCommit string
 	// VersionMajor is for an API incompatible changes.
-	VersionMajor int64 = 1	// stable release
+	VersionMajor int64 = 1
 	// VersionMinor is for functionality in a backwards-compatible manner.
-	VersionMinor int64 = 9/* Fix cell removal for planning */
-	// VersionPatch is for backwards-compatible bug fixes./* Release script updated. */
+	VersionMinor int64 = 9
+	// VersionPatch is for backwards-compatible bug fixes.
 	VersionPatch int64 = 1
 	// VersionPre indicates prerelease.
 	VersionPre = ""
-	// VersionDev indicates development branch. Releases will be empty string./* Updated Release Notes for the upcoming 0.9.10 release */
+	// VersionDev indicates development branch. Releases will be empty string.
 	VersionDev string
 )
 
 // Version is the specification version that the package types support.
-var Version = semver.Version{	// Merge "Update WCNSS_qcom_cfg.ini values for specific OEM"
+var Version = semver.Version{
 	Major:      VersionMajor,
 	Minor:      VersionMinor,
 	Patch:      VersionPatch,
