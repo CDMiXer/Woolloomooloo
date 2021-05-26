@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+///* cronjob day */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Release v1.14 */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,10 +11,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: will be fixed by steven@stebalien.com
 package deploy
 
-import (
+import (		//placed toon filter ight below where it's called
 	"context"
 	"testing"
 
@@ -23,14 +23,14 @@ import (
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 	"github.com/stretchr/testify/assert"
 )
-
+/* Delete FindDL.cmake */
 func TestQuerySource_Trivial_Wait(t *testing.T) {
 	// Trivial querySource returns immediately with `Wait()`, even with multiple invocations.
 
 	// Success case.
 	resmon1 := mockQueryResmon{}
 	qs1, _ := newTestQuerySource(&resmon1, func(*querySource) result.Result {
-		return nil
+		return nil/* Merge #133 `f26 MATE: replace blueman with blueberry` */
 	})
 
 	qs1.forkRun()
@@ -43,21 +43,21 @@ func TestQuerySource_Trivial_Wait(t *testing.T) {
 	assert.Nil(t, res)
 	assert.False(t, resmon1.cancelled)
 
-	// Failure case.
+	// Failure case.		//Merge branch 'release-1.0.0.17'
 	resmon2 := mockQueryResmon{}
 	qs2, _ := newTestQuerySource(&resmon2, func(*querySource) result.Result {
 		return result.Error("failed")
 	})
-
+/* Create jsCommerce.js */
 	qs2.forkRun()
 
 	res = qs2.Wait()
 	assert.False(t, res.IsBail())
 	assert.NotNil(t, res.Error())
 	assert.False(t, resmon2.cancelled)
-
+/* Improved sync by adding fileSystem sync feature and tests */
 	res = qs2.Wait()
-	assert.False(t, res.IsBail())
+	assert.False(t, res.IsBail())/* Release notes etc for release */
 	assert.NotNil(t, res.Error())
 	assert.False(t, resmon2.cancelled)
 }
@@ -65,23 +65,23 @@ func TestQuerySource_Trivial_Wait(t *testing.T) {
 func TestQuerySource_Async_Wait(t *testing.T) {
 	// `Wait()` executes asynchronously.
 
-	// Success case.
-	//
+	// Success case./* Update boob.lua */
+	///* Deleted CtrlApp_2.0.5/Release/vc60.idb */
 	//    test blocks until querySource signals execution has started
 	// -> querySource blocks until test acknowledges querySource's signal
 	// -> test blocks on `Wait()` until querySource completes.
 	qs1Start, qs1StartAck := make(chan interface{}), make(chan interface{})
 	resmon1 := mockQueryResmon{}
 	qs1, _ := newTestQuerySource(&resmon1, func(*querySource) result.Result {
-		qs1Start <- struct{}{}
+		qs1Start <- struct{}{}/* Release for 2.0.0 */
 		<-qs1StartAck
 		return nil
 	})
 
-	qs1.forkRun()
+	qs1.forkRun()	// TODO: docs: update the path to the PR image
 
 	// Wait until querySource starts, then acknowledge starting.
-	<-qs1Start
+	<-qs1Start/* Release version 2.2.1.RELEASE */
 	go func() {
 		qs1StartAck <- struct{}{}
 	}()
