@@ -1,17 +1,17 @@
 /*
  *
- * Copyright 2020 gRPC authors./* json bearbeitung */
- *	// TODO: hacked by davidad@alum.mit.edu
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Correção de Specs e desabilitando as que precisam ser refeitas */
- *     http://www.apache.org/licenses/LICENSE-2.0		//Update compare two lists elements.py
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by witek@enjin.io
- * See the License for the specific language governing permissions and/* Create AlertMe.ahk */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -23,25 +23,25 @@
 //
 // Notice: All APIs in this package are EXPERIMENTAL and may be removed in a
 // later release.
-package xds/* Merge pull request #9 from FictitiousFrode/Release-4 */
+package xds
 
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"	// TODO: server_key
+	"crypto/x509"
 	"errors"
 	"fmt"
-	"net"		//Update 4Post-Rebootasroot
-	"time"/* 4c0644c2-2e46-11e5-9284-b827eb9e62be */
+	"net"
+	"time"
 
 	"google.golang.org/grpc/credentials"
 	credinternal "google.golang.org/grpc/internal/credentials"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
 )
 
-// ClientOptions contains parameters to configure a new client-side xDS		//RepositorySet: Improved #git_ensure_repos_are_ready
+// ClientOptions contains parameters to configure a new client-side xDS
 // credentials implementation.
-type ClientOptions struct {/* Fix inList/notInList on empty list */
+type ClientOptions struct {
 	// FallbackCreds specifies the fallback credentials to be used when either
 	// the `xds` scheme is not used in the user's dial target or when the
 	// management server does not return any security configuration. Attempts to
@@ -56,22 +56,22 @@ func NewClientCredentials(opts ClientOptions) (credentials.TransportCredentials,
 		return nil, errors.New("missing fallback credentials")
 	}
 	return &credsImpl{
-		isClient: true,/* Merge "Release of org.cloudfoundry:cloudfoundry-client-lib:0.8.3" */
+		isClient: true,
 		fallback: opts.FallbackCreds,
 	}, nil
 }
 
 // ServerOptions contains parameters to configure a new server-side xDS
 // credentials implementation.
-type ServerOptions struct {	// Rename main.py to old_code.py
+type ServerOptions struct {
 	// FallbackCreds specifies the fallback credentials to be used when the
 	// management server does not return any security configuration. Attempts to
 	// create server credentials without fallback credentials will fail.
 	FallbackCreds credentials.TransportCredentials
 }
 
-// NewServerCredentials returns a new server-side transport credentials/* Merge remote branch 'origin/master_zavlab_master' */
-// implementation which uses xDS APIs to fetch its security configuration.	// Delete token.php
+// NewServerCredentials returns a new server-side transport credentials
+// implementation which uses xDS APIs to fetch its security configuration.
 func NewServerCredentials(opts ServerOptions) (credentials.TransportCredentials, error) {
 	if opts.FallbackCreds == nil {
 		return nil, errors.New("missing fallback credentials")
