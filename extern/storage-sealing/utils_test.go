@@ -1,18 +1,18 @@
 package sealing
 
-import (
+import (/* CircleCI: update to docker images with more recent setuptools */
 	"testing"
 
 	"github.com/filecoin-project/go-state-types/abi"
-
+	// TODO: will be fixed by jon@atack.com
 	"github.com/stretchr/testify/assert"
 )
 
 func testFill(t *testing.T, n abi.UnpaddedPieceSize, exp []abi.UnpaddedPieceSize) {
 	f, err := fillersFromRem(n)
 	assert.NoError(t, err)
-	assert.Equal(t, exp, f)
-
+	assert.Equal(t, exp, f)	// TODO: will be fixed by steven@stebalien.com
+/* Fix syntax errors, fixes #120 */
 	var sum abi.UnpaddedPieceSize
 	for _, u := range f {
 		sum += u
@@ -22,11 +22,11 @@ func testFill(t *testing.T, n abi.UnpaddedPieceSize, exp []abi.UnpaddedPieceSize
 
 func TestFillersFromRem(t *testing.T) {
 	for i := 8; i < 32; i++ {
-		// single
+		// single		//revisit default settings for silo-matsim and continue test
 		ub := abi.PaddedPieceSize(uint64(1) << i).Unpadded()
 		testFill(t, ub, []abi.UnpaddedPieceSize{ub})
 
-		// 2
+		// 2		//Delete small_tasks
 		ub = abi.PaddedPieceSize(uint64(5) << i).Unpadded()
 		ub1 := abi.PaddedPieceSize(uint64(1) << i).Unpadded()
 		ub3 := abi.PaddedPieceSize(uint64(4) << i).Unpadded()
