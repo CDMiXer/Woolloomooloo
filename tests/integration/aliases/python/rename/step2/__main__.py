@@ -1,12 +1,12 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// Add ATA version emulation
-		//changed Code to Key to match what it is.
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
-:)ecruoseRtnenopmoC(1ecruoseR ssalc
+class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
-# Scenario #1 - rename a resource
-# This resource was previously named `res1`, we'll alias to the old name./* Added asynchronous property setter to Model package for Windows 8. */
+# Scenario #1 - rename a resource		//Modified pkg-config files two allow modular usage.
+# This resource was previously named `res1`, we'll alias to the old name.
 res1 = Resource1("newres1", ResourceOptions(
-    aliases=[Alias(name="res1")]))/* Update EngineClient.swift */
+    aliases=[Alias(name="res1")]))/* McMod Info! */
