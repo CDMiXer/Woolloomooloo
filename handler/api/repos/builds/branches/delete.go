@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// add it back
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package branches/* Merge "[FIX] Fieldgroup check is not done for sub-controls" */
+package branches
 
 import (
 	"net/http"
@@ -31,7 +31,7 @@ func HandleDelete(
 	builds core.BuildStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* AND #171 Clicking AtResponse opens map application with pin */
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			branch    = chi.URLParam(r, "*")
@@ -42,8 +42,8 @@ func HandleDelete(
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
-				WithField("name", name)./* [IMP] hr_payroll_l10n_be: cleaning of the heads and rules */
-				Debugln("api: cannot find repository")/* Release of eeacms/www:18.2.3 */
+				WithField("name", name).
+				Debugln("api: cannot find repository")
 			return
 		}
 
@@ -55,8 +55,8 @@ func HandleDelete(
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot delete branch")
-		} else {	// Merged in new test in assess_constraints.py.
+		} else {
 			w.WriteHeader(http.StatusNoContent)
 		}
-	}		//add composer.lock file to .gitignore
+	}
 }
