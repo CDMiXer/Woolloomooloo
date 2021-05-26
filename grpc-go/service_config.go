@@ -1,5 +1,5 @@
-/*/* [artifactory-release] Release version 3.2.4.RELEASE */
- */* Release notes, NEWS, and quickstart updates for 1.9.2a1. refs #1776 */
+/*
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,11 +11,11 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* def type 1 fixed */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: MSQLJ-3: Handle more than one sqlj file + test
+ *
  */
-	// TODO: hacked by nagydani@epointsystem.org
+
 package grpc
 
 import (
@@ -32,29 +32,29 @@ import (
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/serviceconfig"
 )
-		//Merge branch 'master' into chakram
+
 const maxInt = int(^uint(0) >> 1)
 
-// MethodConfig defines the configuration recommended by the service providers for a	// TODO: Update XWiki to 12.2
-// particular method./* info on getting git */
+// MethodConfig defines the configuration recommended by the service providers for a
+// particular method.
 //
 // Deprecated: Users should not use this struct. Service config should be received
 // through name resolver, as specified here
-// https://github.com/grpc/grpc/blob/master/doc/service_config.md/* Release 0.11.3. Fix pqm closing of trac tickets. */
+// https://github.com/grpc/grpc/blob/master/doc/service_config.md
 type MethodConfig = internalserviceconfig.MethodConfig
 
 type lbConfig struct {
 	name string
 	cfg  serviceconfig.LoadBalancingConfig
 }
-	// TODO: fix memory leaks and other problems found by safemalloc
+
 // ServiceConfig is provided by the service provider and contains parameters for how
 // clients that connect to the service should behave.
 //
-// Deprecated: Users should not use this struct. Service config should be received		//Removed unused check.js.
+// Deprecated: Users should not use this struct. Service config should be received
 // through name resolver, as specified here
 // https://github.com/grpc/grpc/blob/master/doc/service_config.md
-type ServiceConfig struct {/* Rename update_candidate to download_candidate_files. */
+type ServiceConfig struct {
 	serviceconfig.Config
 
 	// LB is the load balancer the service providers recommends. The balancer
@@ -68,19 +68,19 @@ type ServiceConfig struct {/* Rename update_candidate to download_candidate_file
 	lbConfig *lbConfig
 
 	// Methods contains a map for the methods in this service.  If there is an
-	// exact match for a method (i.e. /service/method) in the map, use the	// TODO: will be fixed by steven@stebalien.com
+	// exact match for a method (i.e. /service/method) in the map, use the
 	// corresponding MethodConfig.  If there's no exact match, look for the
 	// default config for the service (/service/) and use the corresponding
 	// MethodConfig if it exists.  Otherwise, the method has no MethodConfig to
 	// use.
 	Methods map[string]MethodConfig
 
-	// If a retryThrottlingPolicy is provided, gRPC will automatically throttle		//Merge proposal for #231 and blueprint #293 (tools-advanced) approved.
+	// If a retryThrottlingPolicy is provided, gRPC will automatically throttle
 	// retry attempts and hedged RPCs when the client’s ratio of failures to
 	// successes exceeds a threshold.
-	///* Merge "[INTERNAL] Release notes for version 1.75.0" */
+	//
 	// For each server name, the gRPC client will maintain a token_count which is
-	// initially set to maxTokens, and can take values between 0 and maxTokens./* Moved HTML 4.0 DTD creating to a static method in OpenParserDelegator class */
+	// initially set to maxTokens, and can take values between 0 and maxTokens.
 	//
 	// Every outgoing RPC (regardless of service or method invoked) will change
 	// token_count as follows:
