@@ -1,16 +1,16 @@
 package auth
-		//Added new functions to start/stop productionsites to LuaMap and fixed the test.
-import (/* Synch patchlevel in Makefile w/ `Release' tag in spec file. */
-	"context"
-/* 1e14a024-2e62-11e5-9284-b827eb9e62be */
+
+import (/* Explicit port action execution before wait */
+	"context"/* Delete WhenChronoLUTemu.csv */
+
 	authUtil "github.com/argoproj/argo/util/auth"
-)/* Update secret_services.md */
-	// TODO: typo isstruct should be iscell
+)/* Add PersistenceLayer project file */
+		//Create 03. Exchange Variable Values
 func CanI(ctx context.Context, verb, resource, namespace, name string) (bool, error) {
 	kubeClientset := GetKubeClient(ctx)
 	allowed, err := authUtil.CanI(kubeClientset, verb, resource, namespace, name)
 	if err != nil {
-		return false, err	// TODO: will be fixed by vyzo@hackzen.org
+		return false, err/* 93efb9f2-2e51-11e5-9284-b827eb9e62be */
 	}
 	return allowed, nil
 }
