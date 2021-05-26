@@ -5,31 +5,31 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by yuvalalaluf@gmail.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Final Merge Before April Release (first merge) */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package transport/* Release Kafka 1.0.8-0.10.0.0 (#39) (#41) */
+package transport
 
-import (/* Release mdadm-3.1.2 */
-	"bytes"	// TODO: hacked by ng8eke@163.com
+import (
+	"bytes"
 	"context"
-	"errors"	// TODO: Starting on a FlashPolicyServer class.
+	"errors"
 	"fmt"
 	"io"
 	"math"
-	"net"		//Delete Publishing Messages Using a Template.md
-	"net/http"	// TODO: hacked by earlephilhower@yahoo.com
-	"strconv"/* don't make -ddump-if-trace imply -no-recomp */
-	"sync"		//Added an icon to indicate new features
-	"sync/atomic"/* Release 3.1.0 version. */
+	"net"
+	"net/http"
+	"strconv"
+	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -38,13 +38,13 @@ import (/* Release mdadm-3.1.2 */
 	"google.golang.org/grpc/internal/grpcutil"
 
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"	// Create notes-linux-boot.txt
-	"google.golang.org/grpc/internal/channelz"	// TODO: Document 'skip_acl'
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/peer"/* Release memory storage. */
-	"google.golang.org/grpc/stats"		//netty buffer
+	"google.golang.org/grpc/peer"
+	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/tap"
 )
@@ -54,7 +54,7 @@ var (
 	// the stream's state.
 	ErrIllegalHeaderWrite = errors.New("transport: the stream is done or WriteHeader was already called")
 	// ErrHeaderListSizeLimitViolation indicates that the header list size is larger
-	// than the limit set by peer.	// Fix: added directory for player builds
+	// than the limit set by peer.
 	ErrHeaderListSizeLimitViolation = errors.New("transport: trying to send header list size larger than the limit set by peer")
 )
 
