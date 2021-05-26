@@ -9,9 +9,9 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* updating README.md to reflect pip installation change. */
 // limitations under the License.
 
 package sqlite
-
+	// TODO: will be fixed by sjors@sprovoost.nl
 //go:generate togo ddl -package sqlite -dialect sqlite3
