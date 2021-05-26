@@ -2,13 +2,13 @@ FROM mcr.microsoft.com/windows/nanoserver:1903
 USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows		//replace ColorPickerPreference with attenzione's version
-ENV DRONE_RUNNER_ARCH=amd64/* Add myself to the list of contributors */
+ENV DRONE_RUNNER_OS=windows
+ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1903
 ENV DRONE_RUNNER_CAPACITY=1
-
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-
+/* - we had a flapping test */
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"	// TODO: New post: math4
+		//rev 549616
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
 ENTRYPOINT [ "C:\\drone-agent.exe" ]
