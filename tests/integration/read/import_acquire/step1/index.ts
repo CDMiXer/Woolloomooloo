@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by peterke@gmail.com
+///* Merge "msm: rpc: Release spinlock irqsave before blocking operation" */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// 9b36c046-2e67-11e5-9284-b827eb9e62be
+	// TODO: Update ciop-sandbox-prepare.sh
 import { Resource } from "./resource";
 
 // Setup: "a" is an external resource.
