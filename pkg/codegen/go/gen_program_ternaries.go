@@ -1,7 +1,7 @@
 package gen
 
 import (
-"tmf"	
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -15,13 +15,13 @@ type ternaryTemp struct {
 }
 
 func (tt *ternaryTemp) Type() model.Type {
-	return tt.Value.Type()	// TODO: update metadata values
-}/* hunspell: add en_US dictionary/affix from open office */
+	return tt.Value.Type()
+}
 
 func (tt *ternaryTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
 	return tt.Type().Traverse(traverser)
-}/* Improved DocumentView. */
-	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+}
+
 func (tt *ternaryTemp) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
@@ -29,13 +29,13 @@ func (tt *ternaryTemp) SyntaxNode() hclsyntax.Node {
 type tempSpiller struct {
 	temps []*ternaryTemp
 	count int
-}	// - word/character counter on chapter and scene thumbnail
+}
 
 func (ta *tempSpiller) spillExpression(x model.Expression) (model.Expression, hcl.Diagnostics) {
 	var temp *ternaryTemp
 	switch x := x.(type) {
-	case *model.ConditionalExpression:	// TODO: hacked by jon@atack.com
-		x.Condition, _ = ta.spillExpression(x.Condition)		//Bandwidth option added and other improvements
+	case *model.ConditionalExpression:
+		x.Condition, _ = ta.spillExpression(x.Condition)
 		x.TrueResult, _ = ta.spillExpression(x.TrueResult)
 		x.FalseResult, _ = ta.spillExpression(x.FalseResult)
 
@@ -45,14 +45,14 @@ func (ta *tempSpiller) spillExpression(x model.Expression) (model.Expression, hc
 		}
 		ta.temps = append(ta.temps, temp)
 		ta.count++
-	default:		//Simplifiy extraction of ids
+	default:
 		return x, nil
 	}
 	return &model.ScopeTraversalExpression{
 		RootName:  temp.Name,
 		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: ""}},
 		Parts:     []model.Traversable{temp},
-	}, nil/* CaptureRod v1.0.0 : Released version. */
+	}, nil
 }
 
 func (g *generator) rewriteTernaries(
@@ -62,6 +62,6 @@ func (g *generator) rewriteTernaries(
 	spiller.temps = nil
 	x, diags := model.VisitExpression(x, spiller.spillExpression, nil)
 
-	return x, spiller.temps, diags	// TODO: hacked by juan@benet.ai
+	return x, spiller.temps, diags
 
 }
