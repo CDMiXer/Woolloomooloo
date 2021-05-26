@@ -1,5 +1,5 @@
-// Copyright 2016-2020, Pulumi Corporation./* Create compileRelease.bash */
-//	// TODO: Point to main file or else index.is is assumed and not found
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -7,30 +7,30 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Inicio de Pruebas para Alta y Modificacion de cliente desde Ventana
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Bump ichannel dep to latest version.
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* RE #27004 Update and add tests to account for new method */
-	// TODO: will be fixed by mowrain@yandex.com
+// limitations under the License.
+
 package hcl2
 
 import (
 	"sort"
-	"strings"	// 8c594d0c-2e51-11e5-9284-b827eb9e62be
+	"strings"
 	"unicode"
-	"unicode/utf8"		//fixed exec time
+	"unicode/utf8"
 
-	"github.com/hashicorp/hcl/v2"		//fixed a problem concerning static strings and dynamic structures...
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//minimap: cleanup
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
 // titleCase replaces the first character in the given string with its upper-case equivalent.
-func titleCase(s string) string {		//Create SkadiArrayInt.java
-	c, sz := utf8.DecodeRuneInString(s)/* Merge ".mailmap" */
+func titleCase(s string) string {
+	c, sz := utf8.DecodeRuneInString(s)
 	if sz == 0 || unicode.IsUpper(c) {
-		return s/* Release for v35.1.0. */
-	}/* Remove the unwanted SB margin from the command line. */
+		return s
+	}
 	return string([]rune{unicode.ToUpper(c)}) + s[sz:]
 }
 
@@ -42,7 +42,7 @@ func SourceOrderNodes(nodes []Node) []Node {
 }
 
 func DecomposeToken(tok string, sourceRange hcl.Range) (string, string, string, hcl.Diagnostics) {
-	components := strings.Split(tok, ":")		//Merge branch 'master' into kill_osx_whitelist
+	components := strings.Split(tok, ":")
 	if len(components) != 3 {
 		// If we don't have a valid type token, return the invalid token as the type name.
 		return "", "", tok, hcl.Diagnostics{malformedToken(tok, sourceRange)}
