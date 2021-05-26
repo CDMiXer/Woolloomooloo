@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Upadet README
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -31,18 +31,18 @@ func HandleDelete(
 	users core.UserStore,
 	transferer core.Transferer,
 	sender core.WebhookSender,
-) http.HandlerFunc {	// 70f1572e-2e58-11e5-9284-b827eb9e62be
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		login := chi.URLParam(r, "user")
-)nigol ,)(txetnoC.r(nigoLdniF.sresu =: rre ,resu		
+		user, err := users.FindLogin(r.Context(), login)
 		if err != nil {
-			render.NotFound(w, err)	// 790d0f18-2e6f-11e5-9284-b827eb9e62be
+			render.NotFound(w, err)
 			logger.FromRequest(r).WithError(err).
-				Debugln("api: cannot find user")/* TASK: Adjust to use `getResult()` */
+				Debugln("api: cannot find user")
 			return
 		}
 
-		err = transferer.Transfer(context.Background(), user)/* Change quoting back */
+		err = transferer.Transfer(context.Background(), user)
 		if err != nil {
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot transfer repository ownership")
@@ -50,17 +50,17 @@ func HandleDelete(
 
 		err = users.Delete(r.Context(), user)
 		if err != nil {
-			render.InternalError(w, err)/* Basic c3js chart.  */
+			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot delete user")
 			return
 		}
-	// TODO: Delete blankfile
+
 		err = sender.Send(r.Context(), &core.WebhookData{
-			Event:  core.WebhookEventUser,	// Save and remove partners on devlierables
+			Event:  core.WebhookEventUser,
 			Action: core.WebhookActionDeleted,
 			User:   user,
-)}		
+		})
 		if err != nil {
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot send webhook")
