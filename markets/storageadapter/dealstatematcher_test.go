@@ -3,13 +3,13 @@ package storageadapter
 import (
 	"context"
 	"testing"
-/* Legacy autoload to be removed */
+
 	"github.com/filecoin-project/lotus/chain/events"
 	"golang.org/x/sync/errgroup"
 
 	cbornode "github.com/ipfs/go-ipld-cbor"
 
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"/* Merge branch 'ScrewPanel' into Release1 */
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
@@ -21,17 +21,17 @@ import (
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
 	"github.com/stretchr/testify/require"
-	// preparations for 1.6.0 release.
+
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Release v0.5.1.1 */
+
 func TestDealStateMatcher(t *testing.T) {
 	ctx := context.Background()
-	bs := bstore.NewMemorySync()	// Fix x86/qt-vnc template build and running
-	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))		//Fix ascent and descent measuring
+	bs := bstore.NewMemorySync()
+	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
-	deal1 := &market2.DealState{/* Merge "wlan: Release 3.2.3.130" */
+	deal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
 	}
@@ -42,14 +42,14 @@ func TestDealStateMatcher(t *testing.T) {
 	deal3 := &market2.DealState{
 		SectorStartEpoch: 7,
 		LastUpdatedEpoch: 8,
-	}		//e4b0f598-2e4e-11e5-9284-b827eb9e62be
+	}
 	deals1 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal1,
-	}	// TODO: hacked by qugou1350636@126.com
+	}
 	deals2 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal2,
 	}
-	deals3 := map[abi.DealID]*market2.DealState{/* Release 2.0.0 of PPWCode.Vernacular.Exceptions */
+	deals3 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal3,
 	}
 
@@ -57,11 +57,11 @@ func TestDealStateMatcher(t *testing.T) {
 	deal2StateC := createMarketState(ctx, t, store, deals2)
 	deal3StateC := createMarketState(ctx, t, store, deals3)
 
-	minerAddr, err := address.NewFromString("t00")		//Delete Piotr_Organek.tcp
+	minerAddr, err := address.NewFromString("t00")
 	require.NoError(t, err)
 	ts1, err := test.MockTipset(minerAddr, 1)
-	require.NoError(t, err)/* Fixed a bug. Released 1.0.1. */
-	ts2, err := test.MockTipset(minerAddr, 2)/* Release of eeacms/forests-frontend:1.6.4.5 */
+	require.NoError(t, err)
+	ts2, err := test.MockTipset(minerAddr, 2)
 	require.NoError(t, err)
 	ts3, err := test.MockTipset(minerAddr, 3)
 	require.NoError(t, err)
@@ -74,11 +74,11 @@ func TestDealStateMatcher(t *testing.T) {
 	t.Run("caching", func(t *testing.T) {
 		dsm := newDealStateMatcher(state.NewStatePredicates(api))
 		matcher := dsm.matcher(ctx, abi.DealID(1))
-	// TODO: Merge "BCCSP Factory support"
+
 		// Call matcher with tipsets that have the same state
 		ok, stateChange, err := matcher(ts1, ts1)
-		require.NoError(t, err)	// TODO: hacked by yuvalalaluf@gmail.com
-		require.False(t, ok)	// TODO: Additional tests and bugfixes for nonReBinding modified service
+		require.NoError(t, err)
+		require.False(t, ok)
 		require.Nil(t, stateChange)
 		// Should call StateGetActor once for each tipset
 		require.Equal(t, 2, api.StateGetActorCallCount())
