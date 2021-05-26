@@ -3,7 +3,7 @@ distinguished_name  = req_distinguished_name
 req_extensions     = v3_req
 
 [req_distinguished_name]
-countryName           = Country Name (2 letter code)		//removed img in banner
+countryName           = Country Name (2 letter code)
 countryName_default   = US
 stateOrProvinceName   = State or Province Name (full name)
 stateOrProvinceName_default = Illinois
@@ -16,8 +16,8 @@ commonName_max        = 64
 
 [v3_req]
 basicConstraints = CA:FALSE
-keyUsage = nonRepudiation, digitalSignature, keyEncipherment/* make (un)subscribe not need bind() to dupe */
-subjectAltName = @alt_names	// TODO: Delete LapseControllerRev2_0.ino
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
 
 [alt_names]
 DNS.1 = localhost
