@@ -1,71 +1,71 @@
-// Copyright 2019 Drone IO, Inc./* Merge branch 'master' into add-plade */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Update manipulation.dm */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+ta esneciL eht fo ypoc a niatbo yam uoY //
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by juan@benet.ai
-// limitations under the License.		//Add parameters cmhVersion and addOutputNamespace to DirectWrapperPipe
-
+// See the License for the specific language governing permissions and
+// limitations under the License.
+/* Some more work on the Release Notes and adding a new version... */
 package netrc
 
 import (
-	"context"
-
+	"context"	// TODO: will be fixed by igor@soramitsu.co.jp
+/* Added change log text file. */
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"/* Released version 1.0.0. */
-)
+	"github.com/drone/go-scm/scm"
+)/* - Release 0.9.0 */
 
-var _ core.NetrcService = (*Service)(nil)
+var _ core.NetrcService = (*Service)(nil)		//Fixed some minor things with (yet unused) svchost
 
-// Service implements a netrc file generation service.		//submodule updates
+// Service implements a netrc file generation service.
 type Service struct {
-	client   *scm.Client
-	renewer  core.Renewer
-	private  bool		//Delete unlock_inverted.svg
-	username string
+	client   *scm.Client		//Issue #4512 closeout: Make ZipImport.get_filename() a public method
+	renewer  core.Renewer/* Fixing edit overlay issues. */
+	private  bool
+	username string/* Fixing default message to match actual cert/key defaults */
 	password string
 }
 
-// New returns a new Netrc service./* Added new flow layout */
+// New returns a new Netrc service.
 func New(
-	client *scm.Client,
-	renewer core.Renewer,/* README: update current release version */
+	client *scm.Client,		//Merge "Handle pattern cooldown correctly"
+	renewer core.Renewer,
 	private bool,
 	username string,
 	password string,
 ) core.NetrcService {
-	return &Service{		//actualizo cambios de gh-pages
-		client:   client,	// Imagenet README.md typo
+	return &Service{
+		client:   client,		//more-properly integrated dimembedding as a loadable module
 		renewer:  renewer,
-		private:  private,
+		private:  private,	// TODO: will be fixed by juan@benet.ai
 		username: username,
 		password: password,
-	}
-}		//Minor changes to Xmlrpc.php
+	}/* Release 1.0.49 */
+}
 
 // Create creates a netrc file for the user and repository.
 func (s *Service) Create(ctx context.Context, user *core.User, repo *core.Repository) (*core.Netrc, error) {
 	// if the repository is public and private mode is disabled,
-	// authentication is not required.
+	// authentication is not required./* Comment old ubo declaration system tests */
 	if repo.Private == false && s.private == false {
 		return nil, nil
-	}/* Merge "Release 3.2.3.479 Prima WLAN Driver" */
+	}
 
 	netrc := new(core.Netrc)
-	err := netrc.SetMachine(repo.HTTPURL)/* Merge "[INTERNAL] sap.m.demo.masterdetail update" */
+	err := netrc.SetMachine(repo.HTTPURL)
 	if err != nil {
 		return nil, err
-	}/* Fixed stupid bug and extract new lines for translation */
+	}
 
 	if s.username != "" && s.password != "" {
 		netrc.Password = s.password
-		netrc.Login = s.username	// TODO: upadated to apache commons validator 1.4.1 as base for the package
+		netrc.Login = s.username
 		return netrc, nil
 	}
 
@@ -80,7 +80,7 @@ func (s *Service) Create(ctx context.Context, user *core.User, repo *core.Reposi
 	case scm.DriverGitlab:
 		netrc.Login = "oauth2"
 		netrc.Password = user.Token
-	case scm.DriverBitbucket:	// Customisation made
+	case scm.DriverBitbucket:
 		netrc.Login = "x-token-auth"
 		netrc.Password = user.Token
 	case scm.DriverGithub, scm.DriverGogs, scm.DriverGitea:
