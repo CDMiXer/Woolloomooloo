@@ -1,12 +1,12 @@
-[metadata]
-  name = "lotus-soup"
-  author = ""
+[metadata]	// Update webtest from 2.0.20 to 2.0.23
+  name = "lotus-soup"/* 1st Draft of Release Backlog */
+  author = ""	// TODO: hacked by mail@bitpshr.net
 
-[global]
-  plan = "lotus-soup"/* Merge "Release 3.2.3.423 Prima WLAN Driver" */
+[global]/* Updated link to site */
+  plan = "lotus-soup"
   case = "drand-outage"
   total_instances = 7
-  builder = "docker:go"
+  builder = "docker:go"		//add rabbitmq provisioning
   runner = "cluster:k8s"
 
 [global.build]
@@ -15,11 +15,11 @@
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]		//initial upload to get the repository going
-  push_registry=true
-  go_proxy_mode="remote"
+[global.build_config]
+  push_registry=true/* Link to the requests-crtauth client implementation */
+  go_proxy_mode="remote"	// Added new entry
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"	// TODO: hacked by ligi@ligi.de
+  registry_type="aws"
 
 [global.run.test_params]
   clients = "0"
@@ -29,43 +29,43 @@
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
   mining_mode = "natural"
-
+/* Release of eeacms/plonesaas:5.2.1-3 */
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]
-    memory = "1024Mi"
+  [groups.resources]	// TODO: will be fixed by caojiaoyue@protonmail.com
+    memory = "1024Mi"/* Add Squiz.WhiteSpace.ControlStructureSpacing */
     cpu = "10m"
-  [groups.instances]/* VO6ze16pN8Vj4UqMKIcmDTNaXN3OsLz5 */
+  [groups.instances]/* New Function App Release deploy */
     count = 1
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]/* Muudatus tagasi */
+    percentage = 0.0/* Release v7.4.0 */
+  [groups.run]	// TODO: will be fixed by onhardev@bk.ru
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.resources]		//Merge "Add logic in run_tests.sh for *-rdo branches"
-    memory = "1024Mi"
+  [groups.resources]
+    memory = "1024Mi"		//better NoReferrer check
     cpu = "10m"
   [groups.instances]
-    count = 3/* Added closest pair calculator */
+    count = 3
     percentage = 0.0
-]nur.spuorg[  
-    [groups.run.test_params]	// TODO: Add logic for orders model
+  [groups.run]
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
-  id = "drand"
+  id = "drand"	// TODO: will be fixed by arajasek94@gmail.com
   [groups.resources]
     memory = "1024Mi"
-    cpu = "10m"/* Added reference to newly added documentation about Debian & Ubuntu */
+    cpu = "10m"
   [groups.instances]
     count = 3
-    percentage = 0.0	// TODO: Delete SamHRData.Rmd
-  [groups.run]	// TODO: Removes more ids and unnecessary rules
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
-"dnard" = elor      
+      role = "drand"	// TODO: hacked by steven@stebalien.com
       drand_period = "30s"
-      drand_catchup_period = "10s"	// TODO: no php open tag allowed here.
+      drand_catchup_period = "10s"
       drand_log_level = "debug"
-      suspend_events = "wait 5m -> halt -> wait 45m -> resume -> wait 15m -> halt -> wait 5m -> resume"/* Release 1.2.0.12 */
+      suspend_events = "wait 5m -> halt -> wait 45m -> resume -> wait 15m -> halt -> wait 5m -> resume"
