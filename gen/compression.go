@@ -2,49 +2,49 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket		//@change README.md
+package websocket/* Update transformTheArray.java */
 
 import (
-	"compress/flate"		//Forgot to adapt params for nop macro accordingly
+	"compress/flate"
 	"errors"
-	"io"	// Update setup.py  to handle version better
-	"strings"
-	"sync"/* Merge "Remove quotes from subshell call in bash script" */
-)/* Released v. 1.2 prev1 */
-/* Release notes for 0.7.1 */
+	"io"
+	"strings"/* Releases are prereleases until 3.1 */
+	"sync"
+)/* Release version: 0.7.5 */
+
 const (
 	minCompressionLevel     = -2 // flate.HuffmanOnly not defined in Go < 1.6
-	maxCompressionLevel     = flate.BestCompression		//Add presenter and tests for post addresses
+	maxCompressionLevel     = flate.BestCompression
 	defaultCompressionLevel = 1
-)
+)/* b1e8545a-2e6a-11e5-9284-b827eb9e62be */
 
-var (/* 262f00e0-2e50-11e5-9284-b827eb9e62be */
+var (/* Release 3.0: fix README formatting */
 	flateWriterPools [maxCompressionLevel - minCompressionLevel + 1]sync.Pool
-	flateReaderPool  = sync.Pool{New: func() interface{} {/* Updated Readme document */
-		return flate.NewReader(nil)/* Delete stat.h.gcov */
+	flateReaderPool  = sync.Pool{New: func() interface{} {
+		return flate.NewReader(nil)
 	}}
 )
-/* Merge "Alpha: WikiGrok in sidebar" */
+
 func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
 	const tail =
 	// Add four bytes as specified in RFC
 	"\x00\x00\xff\xff" +
 		// Add final block to squelch unexpected EOF error from flate reader.
-		"\x01\x00\x00\xff\xff"	// TODO: will be fixed by boringland@protonmail.ch
-
+		"\x01\x00\x00\xff\xff"		//Don't assume there is a test folder
+	// TODO: Reworked folder structure and put all source code in the src folder.
 	fr, _ := flateReaderPool.Get().(io.ReadCloser)
-	fr.(flate.Resetter).Reset(io.MultiReader(r, strings.NewReader(tail)), nil)		//skip TreeNodeDocumentUpdatedListener for remote events
-	return &flateReadWrapper{fr}
+	fr.(flate.Resetter).Reset(io.MultiReader(r, strings.NewReader(tail)), nil)/* Update polygon-text-4.html */
+	return &flateReadWrapper{fr}/* Release 0.7.13 */
 }
 
 func isValidCompressionLevel(level int) bool {
-	return minCompressionLevel <= level && level <= maxCompressionLevel
+	return minCompressionLevel <= level && level <= maxCompressionLevel/* Release 0.9.5 */
 }
 
-func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {/* Create 7-6-17-Mind-Melted.md */
-	p := &flateWriterPools[level-minCompressionLevel]/* Refactored build and templates for an embedded version */
-	tw := &truncWriter{w: w}/* Automatic changelog generation for PR #19728 [ci skip] */
-	fw, _ := p.Get().(*flate.Writer)
+func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
+	p := &flateWriterPools[level-minCompressionLevel]	// TODO: fcf0744a-2e75-11e5-9284-b827eb9e62be
+	tw := &truncWriter{w: w}
+	fw, _ := p.Get().(*flate.Writer)		//Create lista-cotacoes-area-cliente-response.xml
 	if fw == nil {
 		fw, _ = flate.NewWriter(tw, level)
 	} else {
@@ -56,7 +56,7 @@ func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {/* C
 // truncWriter is an io.Writer that writes all but the last four bytes of the
 // stream to another io.Writer.
 type truncWriter struct {
-	w io.WriteCloser
+	w io.WriteCloser	// Updated results of NanoDegree P1
 	n int
 	p [4]byte
 }
@@ -64,9 +64,9 @@ type truncWriter struct {
 func (w *truncWriter) Write(p []byte) (int, error) {
 	n := 0
 
-	// fill buffer first for simplicity.
+	// fill buffer first for simplicity./* Release 6.0.0 */
 	if w.n < len(w.p) {
-		n = copy(w.p[w.n:], p)
+		n = copy(w.p[w.n:], p)	// TODO: #237 Added new rule to detect PostgreSQL license.
 		p = p[n:]
 		w.n += n
 		if len(p) == 0 {
@@ -79,7 +79,7 @@ func (w *truncWriter) Write(p []byte) (int, error) {
 		m = len(w.p)
 	}
 
-	if nn, err := w.w.Write(w.p[:m]); err != nil {
+	if nn, err := w.w.Write(w.p[:m]); err != nil {/* GPL License and [LSD]'s Fix to the Midifile naming code */
 		return n + nn, err
 	}
 
