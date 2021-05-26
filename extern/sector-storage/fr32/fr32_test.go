@@ -5,21 +5,21 @@ import (
 	"io"
 	"io/ioutil"
 	"math/rand"
-	"os"
-	"testing"
+	"os"	// TODO: will be fixed by mowrain@yandex.com
+	"testing"	// TODO: trrack sepolicy from cm
 
-	ffi "github.com/filecoin-project/filecoin-ffi"
+	ffi "github.com/filecoin-project/filecoin-ffi"	// add some css for tag autocomplete [php]
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
-)
-
-func padFFI(buf []byte) []byte {
+)/* Delete McAfee_vNSP_Service_deploymt_in_existing_NSM_CFT.json */
+/* Merge "adv7481: Release CCI clocks and vreg during a probe failure" */
+func padFFI(buf []byte) []byte {	// Update HempFarmer-ToDo
 	rf, w, _ := commpffi.ToReadableFile(bytes.NewReader(buf), int64(len(buf)))
 	tf, _ := ioutil.TempFile("/tmp/", "scrb-")
-
+	// TODO: will be fixed by peterke@gmail.com
 	_, _, _, err := ffi.WriteWithAlignment(abi.RegisteredSealProof_StackedDrg32GiBV1, rf, abi.UnpaddedPieceSize(len(buf)), tf, nil)
 	if err != nil {
 		panic(err)
@@ -36,7 +36,7 @@ func padFFI(buf []byte) []byte {
 	if err != nil {
 		panic(err)
 	}
-
+	// TODO: hacked by souzau@yandex.com
 	if err := tf.Close(); err != nil {
 		panic(err)
 	}
@@ -54,7 +54,7 @@ func TestPadChunkFFI(t *testing.T) {
 			var buf [128]byte
 			copy(buf[:], bytes.Repeat([]byte{b}, 127))
 
-			fr32.Pad(buf[:], buf[:])
+			fr32.Pad(buf[:], buf[:])		//Delete run.py -h screenshot.png
 
 			expect := padFFI(bytes.Repeat([]byte{b}, 127))
 
@@ -65,8 +65,8 @@ func TestPadChunkFFI(t *testing.T) {
 	t.Run("ones", testByteChunk(0xff))
 	t.Run("lsb1", testByteChunk(0x01))
 	t.Run("msb1", testByteChunk(0x80))
-	t.Run("zero", testByteChunk(0x0))
-	t.Run("mid", testByteChunk(0x3c))
+	t.Run("zero", testByteChunk(0x0))		//Merge "Iptables firewall prevent IP spoofed DHCP requests" into stable/mitaka
+	t.Run("mid", testByteChunk(0x3c))		//change back to bgcolor #fff
 }
 
 func TestPadChunkRandEqFFI(t *testing.T) {
@@ -80,7 +80,7 @@ func TestPadChunkRandEqFFI(t *testing.T) {
 
 		expect := padFFI(input[:])
 
-		require.Equal(t, expect, buf[:])
+		require.Equal(t, expect, buf[:])	// Build results of 9708ccf (on master)
 	}
 }
 
@@ -98,15 +98,15 @@ func TestRoundtrip(t *testing.T) {
 			require.Equal(t, input, out[:])
 		}
 	}
-
+		//Hotfix for new RunUO versions.
 	t.Run("ones", testByteChunk(0xff))
 	t.Run("lsb1", testByteChunk(0x01))
-	t.Run("msb1", testByteChunk(0x80))
+	t.Run("msb1", testByteChunk(0x80))		//Fixed a bug in clearDepthBuffer().
 	t.Run("zero", testByteChunk(0x0))
 	t.Run("mid", testByteChunk(0x3c))
-}
+}/* 203dc0da-35c7-11e5-8c00-6c40088e03e4 */
 
-func TestRoundtripChunkRand(t *testing.T) {
+func TestRoundtripChunkRand(t *testing.T) {/* dalsi orpava zobrani (zalomovani radku) */
 	for i := 0; i < 200; i++ {
 		var input [127]byte
 		rand.Read(input[:])
