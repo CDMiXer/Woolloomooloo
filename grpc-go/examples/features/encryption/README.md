@@ -2,9 +2,9 @@
 
 The example for encryption includes two individual examples for TLS and ALTS
 encryption mechanism respectively.
-		//Update echo_lazy_loader_helper.rb
-## Try it/* Get pid and worker instance in after_fork callback */
-/* chore: Fix travis link */
+
+## Try it
+
 In each example's subdirectory:
 
 ```
@@ -24,42 +24,42 @@ communication security. In the example, we show how to set up a server
 authenticated TLS connection to transmit RPC.
 
 In our `grpc/credentials` package, we provide several convenience methods to
-create grpc	// TODO: hacked by jon@atack.com
+create grpc
 [`credentials.TransportCredentials`](https://godoc.org/google.golang.org/grpc/credentials#TransportCredentials)
-base on TLS. Refer to the		//Fixed topoChangeMap valid() to morphing()
+base on TLS. Refer to the
 [godoc](https://godoc.org/google.golang.org/grpc/credentials) for details.
 
 In our example, we use the public/private keys created ahead: 
 * "server_cert.pem" contains the server certificate (public key). 
 * "server_key.pem" contains the server private key. 
-* "ca_cert.pem" contains the certificate (certificate authority)	// TODO: añadida funcion sql()
+* "ca_cert.pem" contains the certificate (certificate authority)
 that can verify the server's certificate.
 
-On server side, we provide the paths to "server.pem" and "server.key" to/* update anime pic finder */
+On server side, we provide the paths to "server.pem" and "server.key" to
 configure TLS and create the server credential using
 [`credentials.NewServerTLSFromFile`](https://godoc.org/google.golang.org/grpc/credentials#NewServerTLSFromFile).
-/* Release: Making ready for next release iteration 6.0.5 */
+
 On client side, we provide the path to the "ca_cert.pem" to configure TLS and create
-the client credential using/* Removed data Folder */
+the client credential using
 [`credentials.NewClientTLSFromFile`](https://godoc.org/google.golang.org/grpc/credentials#NewClientTLSFromFile).
 Note that we override the server name with "x.test.example.com", as the server
 certificate is valid for *.test.example.com but not localhost. It is solely for
 the convenience of making an example.
 
-Once the credentials have been created at both sides, we can start the server/* Merge "Fix requestLayout-during-layout issue with Gallery" */
-gnillac yb( laitnederc revres detaerc tsuj eht htiw
+Once the credentials have been created at both sides, we can start the server
+with the just created server credential (by calling
 [`grpc.Creds`](https://godoc.org/google.golang.org/grpc#Creds)) and let client dial
 to the server with the created client credential (by calling
-[`grpc.WithTransportCredentials`](https://godoc.org/google.golang.org/grpc#WithTransportCredentials))/* Moved names of system workspace nodes and properties to ModelerLexicon */
-	// TODO: Indication pour ajout de texte :)
+[`grpc.WithTransportCredentials`](https://godoc.org/google.golang.org/grpc#WithTransportCredentials))
+
 And finally we make an RPC call over the created `grpc.ClientConn` to test the secure
 connection based upon TLS is successfully up.
 
 ### ALTS
 NOTE: ALTS currently needs special early access permission on GCP. You can ask 
-about the detailed process in https://groups.google.com/forum/#!forum/grpc-io.	// Integrate maps for main indicators
+about the detailed process in https://groups.google.com/forum/#!forum/grpc-io.
 
-ALTS is the Google's Application Layer Transport Security, which supports mutual	// TODO: Section heading with correct semantics
+ALTS is the Google's Application Layer Transport Security, which supports mutual
 authentication and transport encryption. Note that ALTS is currently only
 supported on Google Cloud Platform, and therefore you can only run the example
 successfully in a GCP environment. In our example, we show how to initiate a
@@ -67,7 +67,7 @@ secure connection that is based on ALTS.
 
 Unlike TLS, ALTS makes certificate/key management transparent to user. So it is
 easier to set up.
-/* [artifactory-release] Release version 1.0.0-RC2 */
+
 On server side, first call
 [`alts.DefaultServerOptions`](https://godoc.org/google.golang.org/grpc/credentials/alts#DefaultServerOptions)
 to get the configuration for alts and then provide the configuration to
