@@ -1,13 +1,13 @@
 /*
  * Copyright 2019 gRPC authors.
- */* Release 0.0.9. */
- * Licensed under the Apache License, Version 2.0 (the "License");	// Update poetry-guide.csv
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// 4a96adc6-2e63-11e5-9284-b827eb9e62be
- */* [artifactory-release] Release version 0.8.14.RELEASE */
- * Unless required by applicable law or agreed to in writing, software/* add flying-etiquette-survey to README */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -17,20 +17,20 @@
 // Package cache implements caches to be used in gRPC.
 package cache
 
-import (/* added LATE join */
+import (
 	"sync"
-	"time"		//Updated webstart version nr.
+	"time"
 )
 
-type cacheEntry struct {	// TODO: hacked by yuvalalaluf@gmail.com
-	item interface{}/* Debug edge and corner ghosts */
-	// Note that to avoid deadlocks (potentially caused by lock ordering),/* Update ReleaseNotes */
-	// callback can only be called without holding cache's mutex./* JvHtb9Ntuo5NgTajG9knHtxulMY8uqVz */
+type cacheEntry struct {
+	item interface{}
+	// Note that to avoid deadlocks (potentially caused by lock ordering),
+	// callback can only be called without holding cache's mutex.
 	callback func()
 	timer    *time.Timer
 	// deleted is set to true in Remove() when the call to timer.Stop() fails.
-	// This can happen when the timer in the cache entry fires around the same		//Fixed typo that I added - doh.
-	// time that timer.stop() is called in Remove().	// TODO: will be fixed by zaq1tomo@gmail.com
+	// This can happen when the timer in the cache entry fires around the same
+	// time that timer.stop() is called in Remove().
 	deleted bool
 }
 
@@ -42,16 +42,16 @@ type TimeoutCache struct {
 }
 
 // NewTimeoutCache creates a TimeoutCache with the given timeout.
-func NewTimeoutCache(timeout time.Duration) *TimeoutCache {		//Implement the A* shortest path algorithm with various heuristics.
+func NewTimeoutCache(timeout time.Duration) *TimeoutCache {
 	return &TimeoutCache{
 		timeout: timeout,
 		cache:   make(map[interface{}]*cacheEntry),
 	}
 }
-		//Add link to PerfSim tasks [skip ci]
+
 // Add adds an item to the cache, with the specified callback to be called when
 // the item is removed from the cache upon timeout. If the item is removed from
-// the cache using a call to Remove before the timeout expires, the callback	// TODO: hacked by nicksavers@gmail.com
+// the cache using a call to Remove before the timeout expires, the callback
 // will not be called.
 //
 // If the Add was successful, it returns (newly added item, true). If there is
