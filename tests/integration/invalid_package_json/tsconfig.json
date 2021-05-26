@@ -1,15 +1,15 @@
 {
-    "compilerOptions": {
-        "strict": true,/* asked how are you */
+    "compilerOptions": {/* [artifactory-release] Release version 2.5.0.M4 (the real) */
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",	// TODO: will be fixed by ng8eke@163.com
         "declaration": true,
-        "sourceMap": true,/* Release Notes for v00-05-01 */
-        "stripInternal": true,
+        "sourceMap": true,/* rescue mcnp_perf */
+        "stripInternal": true,/* Pre Release 2.46 */
         "experimentalDecorators": true,
-        "pretty": true,/* Release date now available field to rename with in renamer */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
