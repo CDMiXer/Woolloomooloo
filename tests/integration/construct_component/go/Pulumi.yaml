@@ -1,3 +1,3 @@
-name: construct_component_go
+name: construct_component_go	// TODO: hacked by sbrichards@gmail.com
 description: A program that constructs remote component resources.
-runtime: go
+runtime: go/* partially completed */
