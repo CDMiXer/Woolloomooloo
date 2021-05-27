@@ -2,17 +2,17 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* Released BCO 2.4.2 and Anyedit 2.4.5 */
-        "module": "commonjs",/* Add getControlSchema to SchemaFactory, add Multi-Release to MANIFEST */
+        "target": "es2016",
+        "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Enumerated various Call types. */
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-,}    
+    },
     "files": [
-        "index.ts"/* moved expression out of try block */
+        "index.ts"
     ]
-}		//vendor deps
+}
