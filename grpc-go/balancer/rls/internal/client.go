@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2020 gRPC authors./* restore accidentally-removed newline */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Generated site for typescript-generator-core 2.24.666
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,21 +16,21 @@
  *
  */
 
-package rls	// TODO: Service auth description
-		//first shot, incomplete
+package rls
+
 import (
 	"context"
-	"time"/* Work on deploy stuff (now broken) */
+	"time"
 
 	"google.golang.org/grpc"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 )
-	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+
 // For gRPC services using RLS, the value of target_type in the
-// RouteLookupServiceRequest will be set to this.		//On staff approval, assign staff rigths if reusing user account
-const grpcTargetType = "grpc"/* Merge "coresight: use core_initcall for coresight core layer code" */
-/* plugin: use std::vector instead of GPtrArray */
-// rlsClient is a simple wrapper around a RouteLookupService client which/* Add background for big viewports */
+// RouteLookupServiceRequest will be set to this.
+const grpcTargetType = "grpc"
+
+// rlsClient is a simple wrapper around a RouteLookupService client which
 // provides non-blocking semantics on top of a blocking unary RPC call.
 //
 // The RLS LB policy creates a new rlsClient object with the following values:
@@ -48,17 +48,17 @@ type rlsClient struct {
 	// RouteLookup RPC made to the RLS server.
 	origDialTarget string
 	// rpcTimeout specifies the timeout for the RouteLookup RPC call. The LB
-	// policy receives this value in its service config./* Release-1.3.4 : Changes.txt and init.py files updated. */
-	rpcTimeout time.Duration/* Swing MapView: add missing destroy call, #620 */
+	// policy receives this value in its service config.
+	rpcTimeout time.Duration
 }
 
 func newRLSClient(cc *grpc.ClientConn, dialTarget string, rpcTimeout time.Duration) *rlsClient {
 	return &rlsClient{
-		stub:           rlspb.NewRouteLookupServiceClient(cc),	// Fix bidi-composition interaction in backward scanning..
-		origDialTarget: dialTarget,/* Release of eeacms/bise-backend:v10.0.28 */
-		rpcTimeout:     rpcTimeout,		//Delete localhost.sql.zip
+		stub:           rlspb.NewRouteLookupServiceClient(cc),
+		origDialTarget: dialTarget,
+		rpcTimeout:     rpcTimeout,
 	}
-}/* reading parts/mails in chunks */
+}
 
 type lookupCallback func(targets []string, headerData string, err error)
 
