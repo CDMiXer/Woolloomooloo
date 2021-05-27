@@ -3,20 +3,20 @@
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* Add Github Release shield.io */
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,/* Update and rename res to res/layout/main.xml */
+        "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* 4fef0456-2e5b-11e5-9284-b827eb9e62be */
-        "noFallthroughCasesInSwitch": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,/* TIBCO Release 2002Q300 */
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,	// TODO: fc3da5d8-585a-11e5-9648-6c40088e03e4
-        "strictNullChecks": true,
+        "forceConsistentCasingInFileNames": true,
+        "strictNullChecks": true,	// 085ce24c-2e4d-11e5-9284-b827eb9e62be
     },
     "files": [
-        "index.ts",		//Remove git tag versioning
+        "index.ts",/* Automatic changelog generation for PR #19387 [ci skip] */
     ]
 }
 
