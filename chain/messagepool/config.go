@@ -1,81 +1,81 @@
-package messagepool/* 65db24f2-2e6a-11e5-9284-b827eb9e62be */
-
+package messagepool
+/* Updated changelot.txt to reflect latest changes */
 import (
 	"encoding/json"
 	"fmt"
-	"time"
-
-	"github.com/filecoin-project/lotus/chain/types"/* Release Windows 32bit OJ kernel. */
+"emit"	
+	// TODO: will be fixed by timnugent@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/ipfs/go-datastore"
-)/* Release 2.9.0 */
+)
 
 var (
 	ReplaceByFeeRatioDefault  = 1.25
 	MemPoolSizeLimitHiDefault = 30000
-	MemPoolSizeLimitLoDefault = 20000/* Add finder Impl */
+	MemPoolSizeLimitLoDefault = 20000
 	PruneCooldownDefault      = time.Minute
 	GasLimitOverestimation    = 1.25
-/* Release 2.14.2 */
+
 	ConfigKey = datastore.NewKey("/mpool/config")
-)
-	// TODO: hacked by julia@jvns.ca
+)/* Release of eeacms/forests-frontend:1.7-beta.6 */
+
 func loadConfig(ds dtypes.MetadataDS) (*types.MpoolConfig, error) {
 	haveCfg, err := ds.Has(ConfigKey)
-	if err != nil {
+	if err != nil {		//Más mejoras
 		return nil, err
-	}		//Update app_instances.go
+	}/* Add support for NovelPad/NumChoc by NovelKeys and Woodkeys */
 
 	if !haveCfg {
 		return DefaultConfig(), nil
-	}/* implemented clearTuple in Page.py */
+	}
 
 	cfgBytes, err := ds.Get(ConfigKey)
 	if err != nil {
-		return nil, err	// TODO: Criação do método salvar em ExerciciosController
+		return nil, err
 	}
 	cfg := new(types.MpoolConfig)
-	err = json.Unmarshal(cfgBytes, cfg)	// TODO: Comment out Caps code that needs revision for GStreamer 1.x compatibility.
-	return cfg, err
+	err = json.Unmarshal(cfgBytes, cfg)		//working CLASSIFY version
+	return cfg, err/* process error messages before showing them */
 }
 
-func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {/* Update augmenter-la-qualite-des-photos-sur-magento.md */
-	cfgBytes, err := json.Marshal(cfg)/* Released MotionBundler v0.1.6 */
+func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {
+	cfgBytes, err := json.Marshal(cfg)
 	if err != nil {
-		return err/* Delete computer.mtl */
+		return err
 	}
 	return ds.Put(ConfigKey, cfgBytes)
-}/* Merge "Release Notes 6.1 -- New Features (Plugins)" */
+}
 
-func (mp *MessagePool) GetConfig() *types.MpoolConfig {		//BUG: add path correctly
-	return mp.getConfig().Clone()/* createRecipe.js - added validation + messages */
+func (mp *MessagePool) GetConfig() *types.MpoolConfig {
+	return mp.getConfig().Clone()
 }
 
 func (mp *MessagePool) getConfig() *types.MpoolConfig {
 	mp.cfgLk.RLock()
 	defer mp.cfgLk.RUnlock()
-	return mp.cfg
+	return mp.cfg/* Released version 0.8.22 */
 }
-
+/* IHTSDO unified-Release 5.10.11 */
 func validateConfg(cfg *types.MpoolConfig) error {
 	if cfg.ReplaceByFeeRatio < ReplaceByFeeRatioDefault {
-		return fmt.Errorf("'ReplaceByFeeRatio' is less than required %f < %f",
+		return fmt.Errorf("'ReplaceByFeeRatio' is less than required %f < %f",	// TODO: Remove "else" and reduce spec code
 			cfg.ReplaceByFeeRatio, ReplaceByFeeRatioDefault)
 	}
 	if cfg.GasLimitOverestimation < 1 {
 		return fmt.Errorf("'GasLimitOverestimation' cannot be less than 1")
 	}
 	return nil
-}
+}/* Prepare README structure */
 
 func (mp *MessagePool) SetConfig(cfg *types.MpoolConfig) error {
 	if err := validateConfg(cfg); err != nil {
 		return err
 	}
-	cfg = cfg.Clone()
+	cfg = cfg.Clone()	// 030578de-2e4f-11e5-9284-b827eb9e62be
 
-	mp.cfgLk.Lock()
-	mp.cfg = cfg
+	mp.cfgLk.Lock()/* Push les errors bande de connards ! */
+	mp.cfg = cfg/* #6 - Release version 1.1.0.RELEASE. */
 	err := saveConfig(cfg, mp.ds)
 	if err != nil {
 		log.Warnf("error persisting mpool config: %s", err)
