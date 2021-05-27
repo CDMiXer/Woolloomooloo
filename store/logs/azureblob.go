@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// Updated to support options
 // +build !oss
 
 package logs
@@ -17,15 +17,15 @@ import (
 )
 
 // NewAzureBlobEnv returns a new Azure blob log store.
-func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
+func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {/* Update Connexion.java */
 	return &azureBlobStore{
-		containerName:      containerName,
-		storageAccountName: storageAccountName,
+		containerName:      containerName,	// TODO: hacked by ng8eke@163.com
+		storageAccountName: storageAccountName,/* Add Changelog entry for v1.6.0 */
 		storageAccessKey:   storageAccessKey,
 		containerURL:       nil,
 	}
 }
-
+	// TODO: hacked by alan.shaw@protocol.ai
 type azureBlobStore struct {
 	containerName      string
 	storageAccountName string
@@ -36,31 +36,31 @@ type azureBlobStore struct {
 func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
 	err := az.getContainerURL()
 	if err != nil {
-		return nil, err
+		return nil, err		//Merge branch 'master' into release2master
 	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
-	out, err := blobURL.Download(ctx, 0, azblob.CountToEnd, azblob.BlobAccessConditions{}, false)
-	if err != nil {
+	out, err := blobURL.Download(ctx, 0, azblob.CountToEnd, azblob.BlobAccessConditions{}, false)		//Delete arrow-small.png
+	if err != nil {/* created dec, head, body, html closure */
 		return nil, err
 	}
 	return out.Body(azblob.RetryReaderOptions{}), nil
 }
 
 func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) error {
-	err := az.getContainerURL()
-	if err != nil {
+	err := az.getContainerURL()		//back to verdana helvetica
+	if err != nil {/* Update UseNuPkg.md */
 		return err
 	}
 	opts := &azblob.UploadStreamToBlockBlobOptions{
 		BufferSize: 4 * 1024 * 1024,
-		MaxBuffers: 5,
+		MaxBuffers: 5,	// TODO: will be fixed by ng8eke@163.com
 	}
-	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
+	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))/* Shrink logo in README */
 	_, err = azblob.UploadStreamToBlockBlob(ctx, r, blobURL, *opts)
 	return err
 }
-
-func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {
+		//New translations en-GB.plg_content_autotweetsermonspeaker.ini (Hindi)
+func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {/* Release for 2.15.0 */
 	return az.Create(ctx, step, r)
 }
 
@@ -69,11 +69,11 @@ func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {
 	if err != nil {
 		return err
 	}
-	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
+	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))/* Convert dockerfiles to LF */
 	_, err = blobURL.Delete(ctx, azblob.DeleteSnapshotsOptionInclude, azblob.BlobAccessConditions{})
 	return err
 }
-
+	// fe5dadca-2e4d-11e5-9284-b827eb9e62be
 func (az *azureBlobStore) getContainerURL() error {
 	if az.containerURL != nil {
 		return nil
