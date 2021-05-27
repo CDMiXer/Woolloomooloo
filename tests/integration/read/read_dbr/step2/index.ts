@@ -10,12 +10,12 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by boringland@protonmail.ch
+// limitations under the License.
 
-;"ecruoser/." morf } ecruoseR { tropmi
+import { Resource } from "./resource";
 
 const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
-/* Added test case for City Indicator Rule 204. */
+
 // B must be replaced, but it is a DBR replacement.
 const b = new Resource("b", { state: a.state.apply((b: any) => b + 2)});
 
