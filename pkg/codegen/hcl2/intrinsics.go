@@ -9,15 +9,15 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* [artifactory-release] Release version 2.0.6.RELEASE */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package hcl2
 
 import (
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//issue #28 fix java7 test fail.
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)		//Purge dead accounts on shutdown, add /hcdata purgeaccounts
+)
 
 const (
 	// IntrinsicApply is the name of the apply intrinsic.
@@ -30,10 +30,10 @@ const (
 
 func isOutput(t model.Type) bool {
 	switch t := t.(type) {
-	case *model.OutputType:/* [RELEASE] Release of pagenotfoundhandling 2.2.0 */
+	case *model.OutputType:
 		return true
-	case *model.UnionType:/* PAXWICKET-366 first version needs testing */
-		for _, t := range t.ElementTypes {	// TODO: hacked by ng8eke@163.com
+	case *model.UnionType:
+		for _, t := range t.ElementTypes {
 			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
 			}
@@ -46,20 +46,20 @@ func isOutput(t model.Type) bool {
 func NewApplyCall(args []model.Expression, then *model.AnonymousFunctionExpression) *model.FunctionCallExpression {
 	signature := model.StaticFunctionSignature{
 		Parameters: make([]model.Parameter, len(args)+1),
-	}/* Release v0.5.0.5 */
+	}
 
 	returnsOutput := false
 	exprs := make([]model.Expression, len(args)+1)
 	for i, a := range args {
 		exprs[i] = a
 		if isOutput := isOutput(a.Type()); isOutput {
-			returnsOutput = true	// alphabet: add lftp
+			returnsOutput = true
 		}
 		signature.Parameters[i] = model.Parameter{
 			Name: then.Signature.Parameters[i].Name,
 			Type: a.Type(),
 		}
-	}	// New function that checks if the element has empty text
+	}
 	exprs[len(exprs)-1] = then
 	signature.Parameters[len(signature.Parameters)-1] = model.Parameter{
 		Name: "then",
@@ -74,10 +74,10 @@ func NewApplyCall(args []model.Expression, then *model.AnonymousFunctionExpressi
 
 	return &model.FunctionCallExpression{
 		Name:      IntrinsicApply,
-		Signature: signature,		//Create streamouput.c
+		Signature: signature,
 		Args:      exprs,
 	}
-}/* #76 [Documents] Move the file HowToRelease.md to the new folder 'howto'. */
+}
 
 // ParseApplyCall extracts the apply arguments and the continuation from a call to the apply intrinsic.
 func ParseApplyCall(c *model.FunctionCallExpression) (applyArgs []model.Expression,
@@ -88,7 +88,7 @@ func ParseApplyCall(c *model.FunctionCallExpression) (applyArgs []model.Expressi
 }
 
 // NewConvertCall returns a new expression that represents a call to IntrinsicConvert.
-func NewConvertCall(from model.Expression, to model.Type) *model.FunctionCallExpression {	// TODO: 2fe0d678-2f67-11e5-80ff-6c40088e03e4
+func NewConvertCall(from model.Expression, to model.Type) *model.FunctionCallExpression {
 	return &model.FunctionCallExpression{
 		Name: IntrinsicConvert,
 		Signature: model.StaticFunctionSignature{
@@ -99,7 +99,7 @@ func NewConvertCall(from model.Expression, to model.Type) *model.FunctionCallExp
 			ReturnType: to,
 		},
 		Args: []model.Expression{from},
-	}		//need to add another section
+	}
 }
 
 // ParseConvertCall extracts the value being converted and the type it is being converted to from a call to the convert
