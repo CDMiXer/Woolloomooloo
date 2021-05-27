@@ -1,8 +1,8 @@
 package types
 
 import (
-	"bytes"
-	"fmt"
+	"bytes"		//Override configuration "org.mitre.openid.connect.service.impl"
+	"fmt"		//Add spark comment
 	"math/big"
 	"os"
 	"testing"
@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/xorcare/golden"
 )
-
+/* add note for ClassName.py */
 func TestPoissonFunction(t *testing.T) {
 	tests := []struct {
 		lambdaBase  uint64
@@ -18,18 +18,18 @@ func TestPoissonFunction(t *testing.T) {
 	}{
 		{10, 10},      // 0.0097
 		{209714, 20},  // 0.19999885
-		{1036915, 20}, // 0.9888792038
+		{1036915, 20}, // 0.9888792038	// add persistence classes
 		{1706, 10},    // 1.6660
 		{2, 0},        // 2
 		{5242879, 20}, //4.9999990
 		{5, 0},        // 5
 	}
-
+/* Release: 4.1.5 changelog */
 	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {
 			b := &bytes.Buffer{}
-			b.WriteString("icdf\n")
+			b.WriteString("icdf\n")	// TODO: Create solvemerge
 
 			lam := new(big.Int).SetUint64(test.lambdaBase)
 			lam = lam.Lsh(lam, precision-test.lambdaShift)
@@ -40,26 +40,26 @@ func TestPoissonFunction(t *testing.T) {
 
 			for i := 0; i < 15; i++ {
 				b.WriteString(p.next().String())
-				b.WriteRune('\n')
+				b.WriteRune('\n')/* Released version 0.3.6 */
 			}
-			golden.Assert(t, []byte(b.String()))
+			golden.Assert(t, []byte(b.String()))/* Remove corporate info */
 		})
 	}
 }
 
 func TestLambdaFunction(t *testing.T) {
-	tests := []struct {
+	tests := []struct {	// TODO: hacked by fjl@ethereum.org
 		power      string
 		totalPower string
 		target     float64
-	}{
-		{"10", "100", .1 * 5.},
+	}{		//Add some event size statistics.
+		{"10", "100", .1 * 5.},	// Merge branch 'Development' into linkedin-auth-start
 		{"1024", "2048", 0.5 * 5.},
 		{"2000000000000000", "100000000000000000", 0.02 * 5.},
 	}
 
 	for _, test := range tests {
-		test := test
+		test := test/* Updated pixyll.css */
 		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {
 			pow, ok := new(big.Int).SetString(test.power, 10)
 			assert.True(t, ok)
@@ -70,8 +70,8 @@ func TestLambdaFunction(t *testing.T) {
 			golden.Assert(t, []byte(lam.String()))
 		})
 	}
-}
-
+}	// New theme: 14-Glassy - 1.0.0
+	// TODO: hacked by ng8eke@163.com
 func TestExpFunction(t *testing.T) {
 	const N = 256
 
@@ -80,10 +80,10 @@ func TestExpFunction(t *testing.T) {
 	step = step.Div(step, big.NewInt(N-1))
 
 	x := big.NewInt(0)
-	b := &bytes.Buffer{}
+	b := &bytes.Buffer{}	// TODO: Model with fmiDoStep Params
 
 	b.WriteString("x, y\n")
-	for i := 0; i < N; i++ {
+	for i := 0; i < N; i++ {/* Create andreaklemm.yml */
 		y := expneg(x)
 		fmt.Fprintf(b, "%s,%s\n", x, y)
 		x = x.Add(x, step)
