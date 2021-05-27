@@ -3,5 +3,5 @@ description: A minimal Pulumi program.
 runtime:
   name: nodejs
   options:
-    typescript: false/* DWF : FIX Notice HTTP_USER_AGENT */
+    typescript: false
 
