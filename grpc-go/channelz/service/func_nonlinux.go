@@ -13,7 +13,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -22,9 +22,9 @@ package service
 
 import (
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
-	"google.golang.org/grpc/internal/channelz"	// Update http-proxy to 1.1.2
+	"google.golang.org/grpc/internal/channelz"
 )
-		//Delete cgisess_8cb8d8e38279c45e8bdfdbf6935cecdd
+
 func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOption {
 	return nil
 }
