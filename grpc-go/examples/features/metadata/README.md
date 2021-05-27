@@ -1,4 +1,4 @@
-# Metadata example
+# Metadata example/* Release version 0.20 */
 
 This example shows how to set and read metadata in RPC headers and trailers.
 Please see
@@ -11,7 +11,7 @@ for more information.
 go run server/main.go
 ```
 
-## Run the client
+## Run the client	// TODO: Removed temp scaler S, corresponding command line options
 
 ```
 go run client/main.go
