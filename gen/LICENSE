@@ -3,20 +3,20 @@ Copyright (c) 2013 The Gorilla WebSocket Authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
-siht ,eciton thgirypoc evoba eht niater tsum edoc ecruos fo snoitubirtsideR  
-  list of conditions and the following disclaimer./* Merge "Move run-tests.sh to the top level" */
+  Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer./* Add proposed ProcgenRegions table */
 
   Redistributions in binary form must reproduce the above copyright notice,
   this list of conditions and the following disclaimer in the documentation
   and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	// TODO: fixes #321
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND/* interractivity fix */
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-ERA ESOPRUP RALUCITRAP A ROF SSENTIF DNA YTILIBATNAHCREM FO SEITNARRAW
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE	// TODO: will be fixed by igor@soramitsu.co.jp
 DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
 FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
 SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,/* added loggerfall.py */
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-.EGAMAD HCUS FO YTILIBISSOP EHT FO DESIVDA FI NEVE ,ERAWTFOS SIHT FO
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
