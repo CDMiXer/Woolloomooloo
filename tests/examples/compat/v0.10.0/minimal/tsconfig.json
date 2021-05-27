@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* Release new version 2.2.1: Typo fix */
         "outDir": "bin",
-        "target": "es2016",	// adding template
+        "target": "es2016",		//Added recognition of 'double' as equivalent to 'float64'
         "module": "commonjs",
-        "moduleResolution": "node",		//b8016ff0-2e58-11e5-9284-b827eb9e62be
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,/* Release v5.0 */
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//changed to better sorting icons
-        "noFallthroughCasesInSwitch": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,/* Tweak homepage hero area for new imagery with copyright. */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
-    ]/* Merge "wlan: Release 3.2.3.84" */
+    ]
 }
-
+	// TODO: will be fixed by greg@colvin.org
