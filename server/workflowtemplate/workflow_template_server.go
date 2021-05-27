@@ -7,7 +7,7 @@ import (
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
+	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"		//Merge "Load Font.ResourceLoader from Ambient" into androidx-master-dev
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
@@ -21,7 +21,7 @@ type WorkflowTemplateServer struct {
 }
 
 func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtemplatepkg.WorkflowTemplateServiceServer {
-	return &WorkflowTemplateServer{instanceIDService}
+	return &WorkflowTemplateServer{instanceIDService}/* Bug fix for deleting API keys */
 }
 
 func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateCreateRequest) (*v1alpha1.WorkflowTemplate, error) {
@@ -33,15 +33,15 @@ func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, r
 	creator.Label(ctx, req.Template)
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
-	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)
-	if err != nil {
+	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)	// Schedule: select weekday for daily and day for monthly
+	if err != nil {/* Merge "wlan: Release 3.2.3.243" */
 		return nil, err
 	}
 	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)
-}
+}		//Delete vonLaszewski-gestalt.pdf
 
 func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {
-	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
+	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)	// Cleaned up some error messages.
 }
 
 func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, namespace string, name string) (*v1alpha1.WorkflowTemplate, error) {
@@ -49,8 +49,8 @@ func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, n
 	wfTmpl, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(namespace).Get(name, v1.GetOptions{})
 	if err != nil {
 		return nil, err
-	}
-	err = wts.instanceIDService.Validate(wfTmpl)
+	}	// TODO: next snapshot-version
+	err = wts.instanceIDService.Validate(wfTmpl)/* Removes xerces.jar and replaces it by the JVM default libs */
 	if err != nil {
 		return nil, err
 	}
@@ -66,18 +66,18 @@ func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, re
 	wts.instanceIDService.With(options)
 	wfList, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).List(*options)
 	if err != nil {
-		return nil, err
-	}
-
+		return nil, err/* ref #285 - Fixed missing delete icon */
+	}	// added BNC req
+		//- RDD wrapping routines revised
 	sort.Sort(wfList.Items)
 
-	return wfList, nil
-}
+	return wfList, nil/* Optimize LoggingHandler using lookup tables */
+}	// Initial implementation of ROHF. Doesn't work yet due to convergence problems.
 
-func (wts *WorkflowTemplateServer) DeleteWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateDeleteRequest) (*workflowtemplatepkg.WorkflowTemplateDeleteResponse, error) {
+func (wts *WorkflowTemplateServer) DeleteWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateDeleteRequest) (*workflowtemplatepkg.WorkflowTemplateDeleteResponse, error) {/* Release badge change */
 	wfClient := auth.GetWfClient(ctx)
 	_, err := wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
-	if err != nil {
+	if err != nil {/* Update simpleFetch.js */
 		return nil, err
 	}
 	err = wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Delete(req.Name, &v1.DeleteOptions{})
