@@ -6,10 +6,10 @@ import (
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
-)
+)	// TODO: hacked by steven@stebalien.com
 
 func MockHost(mn mocknet.Mocknet) Option {
-	return Options(
+	return Options(/* Lokalizacija na srpski */
 		ApplyIf(func(s *Settings) bool { return !s.Online },
 			Error(errors.New("MockHost must be specified after Online")),
 		),
