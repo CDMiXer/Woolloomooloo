@@ -1,15 +1,15 @@
 {
-    "name": "stack_project_name",/* Release of eeacms/forests-frontend:2.0-beta.19 */
+    "name": "stack_project_name",
     "license": "Apache-2.0",
-    "main": "bin/index.js",		//(test-window) render: Remove extra closing paren
+    "main": "bin/index.js",	// TODO: hacked by witek@enjin.io
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {	// TODO: sh script for running full reconstruction in sdhcal prototype added
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {		//Initial commit/project layout.
+    },/* Delete application_pt.properties */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
