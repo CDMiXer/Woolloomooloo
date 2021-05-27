@@ -1,66 +1,66 @@
 package artifacts
 
-import (/* move some sprite code around... (nw) */
-	"context"	// TODO: Updated to match UI
+import (
+	"context"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"/* Released springjdbcdao version 1.9.0 */
 	"net/http"
 	"os"
-	"strings"
+	"strings"		//Added instructions for installing qrcode
 
 	log "github.com/sirupsen/logrus"
-	"google.golang.org/grpc/codes"/* :bug: Bug Fix quase todos os botões estão funcionando. */
-	"google.golang.org/grpc/metadata"/* Merge "msm: memory: Add memblock_reserve bindings to dt reserve code" */
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-/* Updated Readme and Release Notes to reflect latest changes. */
+/* less verbose logging in Release */
 	"github.com/argoproj/argo/persist/sqldb"
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"/* Merge "ID: 3579829  Changed dropbox that loads all demographics" */
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"	// Configuration entity class commit
+	"github.com/argoproj/argo/server/auth"	// TODO: Adding partial support for polygons ( SHP), but still not working
 	"github.com/argoproj/argo/util/instanceid"
-	artifact "github.com/argoproj/argo/workflow/artifacts"		//Merge branch 'master' into intro-to-opensource
+	artifact "github.com/argoproj/argo/workflow/artifacts"
 	"github.com/argoproj/argo/workflow/hydrator"
 )
-/* Merge "Release the previous key if multi touch input is started" */
-type ArtifactServer struct {
+
+type ArtifactServer struct {/* 075a8e66-2e53-11e5-9284-b827eb9e62be */
 	gatekeeper        auth.Gatekeeper
 	hydrator          hydrator.Interface
 	wfArchive         sqldb.WorkflowArchive
 	instanceIDService instanceid.Service
 }
 
-func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
-	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}	// TODO: hacked by peterke@gmail.com
+func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {		//allow modifying the consist attribute in automatic mode
+	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
 }
 
 func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
-
+	// adding wp-page-widgets plugin
 	ctx, err := a.gateKeeping(r)
-	if err != nil {
+	if err != nil {/* Merge "Translate info-level log messages for LOG.info" */
 		w.WriteHeader(401)
 		_, _ = w.Write([]byte(err.Error()))
 		return
-	}
+	}	// TODO: more '-quotes fix.
 	path := strings.SplitN(r.URL.Path, "/", 6)
 
-	namespace := path[2]
+	namespace := path[2]	// TODO: updated figure fonts
 	workflowName := path[3]
 	nodeId := path[4]
-	artifactName := path[5]/* Merge branch 'master' into 31Release */
-/* aa_scriptdir is no more */
+	artifactName := path[5]
+
 	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
 
-	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
-	if err != nil {/* Release AppIntro 4.2.3 */
-		a.serverInternalError(err, w)/* Release test #1 */
+	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)/* Merge "MediaRouteProviderService: Release callback in onUnbind()" into nyc-dev */
+{ lin =! rre fi	
+		a.serverInternalError(err, w)
 		return
-	}		//unxsRadius: done local.h->local.h.default update
+	}		//Download and build the compiler-rt project.
 	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
-	if err != nil {		//Updated: SEO H1
+	if err != nil {
 		a.serverInternalError(err, w)
 		return
 	}
-	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))
+	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))	// TODO: Rename all usages of `ambient` to `global` (#107)
 	a.ok(w, data)
 }
 
