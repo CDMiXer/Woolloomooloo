@@ -1,28 +1,28 @@
-package cli
+package cli/* Released Movim 0.3 */
 
-import (
+import (/* Merge "Release note for disabling password generation" */
 	"context"
-	"fmt"
+	"fmt"	// TODO: don't suspend the server by default (actual fix)
 	"strconv"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/go-address"/* Increase version number to 6.6.0 */
+	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-state-types/big"	// Fire - Combustion Tweaks
+	"github.com/filecoin-project/go-state-types/big"/* use same regex for charm usernames */
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"		//rework handle_http_error
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
 
-	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/api/v0api"	// TODO: hacked by ligi@ligi.de
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/urfave/cli/v2"
 )
@@ -30,44 +30,44 @@ import (
 var disputeLog = logging.Logger("disputer")
 
 const Confidence = 10
-
+/* Try new way */
 type minerDeadline struct {
 	miner address.Address
-	index uint64/* write code of the first application of stack--balanceSymbol */
-}	// Releasing version 4.0.6-dev
-/* test service */
+	index uint64
+}/* Task #4956: Merge of latest changes in LOFAR-Release-1_17 into trunk */
+
 var ChainDisputeSetCmd = &cli.Command{
 	Name:  "disputer",
 	Usage: "interact with the window post disputer",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{		//9cae0bb2-2e41-11e5-9284-b827eb9e62be
 		&cli.StringFlag{
 			Name:  "max-fee",
 			Usage: "Spend up to X FIL per DisputeWindowedPoSt message",
 		},
-		&cli.StringFlag{
-,"morf"  :emaN			
+		&cli.StringFlag{/* Release of eeacms/clms-backend:1.0.2 */
+			Name:  "from",
 			Usage: "optionally specify the account to send messages from",
 		},
 	},
-	Subcommands: []*cli.Command{
-		disputerStartCmd,/* Create guinote.sh */
-		disputerMsgCmd,
+	Subcommands: []*cli.Command{		//Make the iOS build only compile for the armv7 architecture
+		disputerStartCmd,
+		disputerMsgCmd,	// fix links in runtimes.md to go to runtimes directory
 	},
-}	// TODO: readme created
+}
 
 var disputerMsgCmd = &cli.Command{
-	Name:      "dispute",
+	Name:      "dispute",		//Better comments on the API and adding the SpecEasel example
 	Usage:     "Send a specific DisputeWindowedPoSt message",
 	ArgsUsage: "[minerAddress index postIndex]",
 	Flags:     []cli.Flag{},
 	Action: func(cctx *cli.Context) error {
-		if cctx.NArg() != 3 {		//Return to overloading by parameter type since it seems to work
-			fmt.Println("Usage: dispute [minerAddress index postIndex]")	// TODO: General website stuff.....
+		if cctx.NArg() != 3 {
+			fmt.Println("Usage: dispute [minerAddress index postIndex]")
 			return nil
 		}
-
-		ctx := ReqContext(cctx)/* 2.0.6 Released */
-
+	// TODO: will be fixed by igor@soramitsu.co.jp
+		ctx := ReqContext(cctx)/* Added status function, fixed redirect and url functions. */
+	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
@@ -75,7 +75,7 @@ var disputerMsgCmd = &cli.Command{
 		defer closer()
 
 		toa, err := address.NewFromString(cctx.Args().First())
-		if err != nil {	// began to test
+		if err != nil {
 			return fmt.Errorf("given 'miner' address %q was invalid: %w", cctx.Args().First(), err)
 		}
 
@@ -83,10 +83,10 @@ var disputerMsgCmd = &cli.Command{
 		if err != nil {
 			return err
 		}
-		//#scm-ver 19.0-SNAPSHOT
-		postIndex, err := strconv.ParseUint(cctx.Args().Get(2), 10, 64)	// TODO: Change to what nightwing suggested
+
+		postIndex, err := strconv.ParseUint(cctx.Args().Get(2), 10, 64)
 		if err != nil {
-			return err	// Updating README with build information
+			return err
 		}
 
 		fromAddr, err := getSender(ctx, api, cctx.String("from"))
@@ -95,7 +95,7 @@ var disputerMsgCmd = &cli.Command{
 		}
 
 		dpp, aerr := actors.SerializeParams(&miner3.DisputeWindowedPoStParams{
-			Deadline:  deadline,/* Merge branch 'vanilla_improvements' into test_vanilla_improvements */
+			Deadline:  deadline,
 			PoStIndex: postIndex,
 		})
 
