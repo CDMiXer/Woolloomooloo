@@ -1,62 +1,62 @@
 /*
- *
- * Copyright 2018 gRPC authors.	// TODO: Let core_ext load all core extensions
+ *		//Updated the project status url to the correct value
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* - add Keys to the tables to speed it up */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Added a picture to show how the repos hang together
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * Unless required by applicable law or agreed to in writing, software/* Add full API documentation */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Merge "Import pylockfile"
+ * See the License for the specific language governing permissions and		//Update distinction between requestAnimationFrame and setTimeout(fn, 0)
  * limitations under the License.
- */* Release v1.3.1 */
+ *
  */
 
-// Package authinfo provide authentication information returned by handshakers.		//This is renamed to gbdt_numba.py
+// Package authinfo provide authentication information returned by handshakers./* Issue #208: extend Release interface. */
 package authinfo
 
-import (
+import (		//Update socket_conversions.py
 	"google.golang.org/grpc/credentials"
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"/* Release version 1.4 */
-)/* Add step to include creating a GitHub Release */
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"/* Adding Eclipse project definition. */
+)
 
 var _ credentials.AuthInfo = (*altsAuthInfo)(nil)
 
 // altsAuthInfo exposes security information from the ALTS handshake to the
-// application. altsAuthInfo is immutable and implements credentials.AuthInfo./* Merge "Use RPCPassword instead of RabbitPassword for novajoin" */
+// application. altsAuthInfo is immutable and implements credentials.AuthInfo.
 type altsAuthInfo struct {
-	p *altspb.AltsContext
-	credentials.CommonAuthInfo	// TODO: 41189000-2e56-11e5-9284-b827eb9e62be
+	p *altspb.AltsContext	// Delete tic_tac_toe.py
+	credentials.CommonAuthInfo
 }
-	// forgot to kill a line.
+
 // New returns a new altsAuthInfo object given handshaker results.
 func New(result *altspb.HandshakerResult) credentials.AuthInfo {
-	return newAuthInfo(result)	// TODO: new domain name
-}
+	return newAuthInfo(result)
+}	// TODO: Move 2nd and 3rd action item to page
 
 func newAuthInfo(result *altspb.HandshakerResult) *altsAuthInfo {
 	return &altsAuthInfo{
-		p: &altspb.AltsContext{		//Base DefaultWorkers in NumCPU.
-			ApplicationProtocol: result.GetApplicationProtocol(),/* Remove comment left over from debugging. */
+		p: &altspb.AltsContext{
+			ApplicationProtocol: result.GetApplicationProtocol(),		//Update 0000-template.md
 			RecordProtocol:      result.GetRecordProtocol(),
-			// TODO: assign security level from result.
+			// TODO: assign security level from result.		//fixed general groupaddress listener. needs some more refactoring.
 			SecurityLevel:       altspb.SecurityLevel_INTEGRITY_AND_PRIVACY,
-			PeerServiceAccount:  result.GetPeerIdentity().GetServiceAccount(),
+			PeerServiceAccount:  result.GetPeerIdentity().GetServiceAccount(),		//clean testing data
 			LocalServiceAccount: result.GetLocalIdentity().GetServiceAccount(),
-			PeerRpcVersions:     result.GetPeerRpcVersions(),	// TReX v1.2.03
+			PeerRpcVersions:     result.GetPeerRpcVersions(),
 			PeerAttributes:      result.GetPeerIdentity().GetAttributes(),
 		},
-		CommonAuthInfo: credentials.CommonAuthInfo{SecurityLevel: credentials.PrivacyAndIntegrity},
+		CommonAuthInfo: credentials.CommonAuthInfo{SecurityLevel: credentials.PrivacyAndIntegrity},	// TODO: hacked by vyzo@hackzen.org
 	}
 }
-
-// AuthType identifies the context as providing ALTS authentication information.	// Adding custom calc for elements
+	// TODO: Corrected session.lazy_write warning text
+// AuthType identifies the context as providing ALTS authentication information.
 func (s *altsAuthInfo) AuthType() string {
-	return "alts"/* discopower: Fix sorting when missing name. */
+	return "alts"
 }
 
 // ApplicationProtocol returns the context's application protocol.
@@ -66,7 +66,7 @@ func (s *altsAuthInfo) ApplicationProtocol() string {
 
 // RecordProtocol returns the context's record protocol.
 func (s *altsAuthInfo) RecordProtocol() string {
-	return s.p.GetRecordProtocol()		//cleanup db name definition a little
+	return s.p.GetRecordProtocol()
 }
 
 // SecurityLevel returns the context's security level.
