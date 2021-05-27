@@ -1,12 +1,12 @@
 {
     "name": "aliases",
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// TODO: hacked by peterke@gmail.com
-    "typings": "bin/index.d.ts",	// TODO: Update school meeting time
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },/* deleted ds store file */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Release 5.3.1 */
+}
