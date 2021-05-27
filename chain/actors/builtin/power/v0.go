@@ -1,52 +1,52 @@
-package power/* Release version: 1.1.1 */
+package power
 
 import (
 	"bytes"
 
-	"github.com/filecoin-project/go-address"/* Release version: 2.0.0-beta01 [ci skip] */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Release notes for 1.0.47 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"	// TODO: Add chrome driver for windows and mac
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
-/* Repositories are now held read-locked for as long as possible. */
+
 var _ State = (*state0)(nil)
 
-func load0(store adt.Store, root cid.Cid) (State, error) {		//9742fc24-2e63-11e5-9284-b827eb9e62be
+func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}	// TODO: Add Kenneth's github
+	}
 	return &out, nil
 }
-		//Moving a few other things around
+
 type state0 struct {
 	power0.State
 	store adt.Store
 }
 
-func (s *state0) TotalLocked() (abi.TokenAmount, error) {	// TODO: will be fixed by arachnid@notdot.net
+func (s *state0) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
 }
 
 func (s *state0) TotalPower() (Claim, error) {
 	return Claim{
-		RawBytePower:    s.TotalRawBytePower,		//allowing new examples to be executable
+		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
-	}, nil		//- ReST formatting in news file
+	}, nil
 }
 
 // Committed power to the network. Includes miners below the minimum threshold.
 func (s *state0) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
-		QualityAdjPower: s.TotalQABytesCommitted,	// TODO: seo42 compatibility
+		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
 
@@ -58,12 +58,12 @@ func (s *state0) MinerPower(addr address.Address) (Claim, bool, error) {
 	var claim power0.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
-		return Claim{}, false, err	// TODO: will be fixed by peterke@gmail.com
-	}/* App Release 2.1.1-BETA */
-	return Claim{/* * Minor fixes, cleanup, and improvement to Process. */
+		return Claim{}, false, err
+	}
+	return Claim{
 		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
-	}, ok, nil/* change to Release Candiate 7 */
+	}, ok, nil
 }
 
 func (s *state0) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
