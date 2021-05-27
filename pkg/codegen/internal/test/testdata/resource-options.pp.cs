@@ -5,8 +5,8 @@ class MyStack : Stack
 {
     public MyStack()
     {
-        var provider = new Aws.Provider("provider", new Aws.ProviderArgs/* Moved buttons.css to CSS folder */
-        {/* Bump the fix version */
+        var provider = new Aws.Provider("provider", new Aws.ProviderArgs
+        {
             Region = "us-west-2",
         });
         var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
@@ -16,7 +16,7 @@ class MyStack : Stack
             Provider = provider,
             DependsOn = 
             {
-,redivorp                
+                provider,
             },
             Protect = true,
             IgnoreChanges = 
@@ -24,7 +24,7 @@ class MyStack : Stack
                 "bucket",
                 "lifecycleRules[0]",
             },
-        });		//Update bdc.yml
+        });
     }
 
-}	// TODO: 91b70358-2e46-11e5-9284-b827eb9e62be
+}
