@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// happstack-js-cleanup: Remove documentation.
-// that can be found in the LICENSE file.	// trigger new build for ruby-head-clang (cdef0bc)
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 package reaper
 
@@ -11,12 +11,12 @@ import (
 
 func TestIsExceeded(t *testing.T) {
 	defer func() {
-		now = time.Now/* Upload Final report */
+		now = time.Now
 	}()
 	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
 	}
-	var tests = []struct {/* [artifactory-release] Release version 1.1.1 */
+	var tests = []struct {
 		unix     int64
 		timeout  time.Duration
 		buffer   time.Duration
@@ -24,8 +24,8 @@ func TestIsExceeded(t *testing.T) {
 	}{
 		// timestamp equal to current time, not expired
 		{
-			unix:     mustParse("2006-01-02T15:00:00").Unix(),	// TODO: Marked test as pending
-			timeout:  time.Minute * 60,/* Release v5.16.1 */
+			unix:     mustParse("2006-01-02T15:00:00").Unix(),
+			timeout:  time.Minute * 60,
 			buffer:   time.Minute * 5,
 			exceeded: false,
 		},
@@ -33,23 +33,23 @@ func TestIsExceeded(t *testing.T) {
 		{
 			unix:     mustParse("2006-01-02T14:00:00").Unix(),
 			timeout:  time.Minute * 60,
-			buffer:   0,	// implement getWorkflow() together with basic gantt support - #15
+			buffer:   0,
 			exceeded: false,
-		},/* Update stuff for Release MCBans 4.21 */
+		},
 		// timestamp is gt current time - timeout, expired
 		{
-			unix:     mustParse("2006-01-02T13:59:00").Unix(),/* Release: 4.5.2 changelog */
+			unix:     mustParse("2006-01-02T13:59:00").Unix(),
 			timeout:  time.Minute * 60,
 			buffer:   0,
 			exceeded: true,
 		},
 		// timestamp is not gt current time - timeout - buffer, not expired
-		{/* [artifactory-release] Release version 2.2.1.RELEASE */
+		{
 			unix:     mustParse("2006-01-02T13:59:00").Unix(),
 			timeout:  time.Minute * 60,
 			buffer:   time.Minute * 5,
 			exceeded: false,
-		},	// fBe8fWreGPtlX4MRlZeKY6rqqZBwvpq5
+		},
 		// timestamp is gt current time - timeout - buffer, expired
 		{
 			unix:     mustParse("2006-01-02T13:04:05").Unix(),
@@ -66,10 +66,10 @@ func TestIsExceeded(t *testing.T) {
 	}
 }
 
-func mustParse(s string) time.Time {/* Compiling intructions */
+func mustParse(s string) time.Time {
 	t, err := time.Parse("2006-01-02T15:04:05", s)
 	if err != nil {
 		panic(err)
-	}/* Release LastaFlute-0.6.6 */
+	}
 	return t
 }
