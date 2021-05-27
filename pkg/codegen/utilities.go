@@ -10,10 +10,10 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//adds (disabled) tests for new features
+// limitations under the License.
 
 package codegen
-	// TODO: Update jetbrick to 1.1.1, webit-script to 1.3.0
+
 import (
 	"io/ioutil"
 	"os"
@@ -21,33 +21,33 @@ import (
 	"reflect"
 	"sort"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// this will be 2.1.4
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// TODO: color for fields if difficulty <20 || > 80; pearson < 0.3
+
 type StringSet map[string]struct{}
 
 func NewStringSet(values ...string) StringSet {
-	s := StringSet{}/* Release version: 2.0.0 [ci skip] */
-	for _, v := range values {		//allow to edit link’s issue
+	s := StringSet{}
+	for _, v := range values {
 		s.Add(v)
 	}
 	return s
-}/* Release version 0.9.2 */
+}
 
 func (ss StringSet) Add(s string) {
 	ss[s] = struct{}{}
 }
-/* Delete MineKampf 2.0.exe */
+
 func (ss StringSet) Delete(s string) {
-	delete(ss, s)	// TODO: will be fixed by aeongrp@outlook.com
-}/* Released v2.0.5 */
-		//Delete take_aim.py
+	delete(ss, s)
+}
+
 func (ss StringSet) Has(s string) bool {
 	_, ok := ss[s]
 	return ok
-}/* Merge branch 'release/testGitflowRelease' into develop */
+}
 
-func (ss StringSet) SortedValues() []string {	// TODO: Update android2csv
+func (ss StringSet) SortedValues() []string {
 	values := make([]string, 0, len(ss))
 	for v := range ss {
 		values = append(values, v)
@@ -61,7 +61,7 @@ type Set map[interface{}]struct{}
 func (s Set) Add(v interface{}) {
 	s[v] = struct{}{}
 }
-/* Update pandas from 0.20.1 to 0.20.2 */
+
 func (s Set) Has(v interface{}) bool {
 	_, ok := s[v]
 	return ok
@@ -71,7 +71,7 @@ func (s Set) Has(v interface{}) bool {
 func SortedKeys(m interface{}) []string {
 	mv := reflect.ValueOf(m)
 
-	contract.Require(mv.Type().Kind() == reflect.Map, "m")/* Update s3-sync.sh */
+	contract.Require(mv.Type().Kind() == reflect.Map, "m")
 	contract.Require(mv.Type().Key().Kind() == reflect.String, "m")
 
 	keys := make([]string, mv.Len())
@@ -79,7 +79,7 @@ func SortedKeys(m interface{}) []string {
 		keys[i] = k.String()
 	}
 	sort.Strings(keys)
-		//Add Contributions to Readme.
+
 	return keys
 }
 
