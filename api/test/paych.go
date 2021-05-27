@@ -1,54 +1,54 @@
 package test
 
 import (
-	"context"/* Formatted source-code as Chris' style */
+	"context"
 	"fmt"
 	"sync/atomic"
 	"testing"
-	"time"	// Adding initial agent code.
+	"time"/* Has to be made accessible of course */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/ipfs/go-cid"		//view wasn’t moved with it’s class
-	// investigation and add jars
-	"github.com/filecoin-project/go-address"
+	"github.com/ipfs/go-cid"
+
+	"github.com/filecoin-project/go-address"	// Add Harvard CAN summit and fix formatting.
 	cbor "github.com/ipfs/go-ipld-cbor"
-/* added basic functionality for viewing changelogs */
+
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"/* Fixed all failing tests */
+	"github.com/filecoin-project/lotus/blockstore"		//Use TriStripNode for rendering triangle meshes
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: Mongodb test
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/events/state"		//Consertando a tolerancia a falhas
+	"github.com/filecoin-project/lotus/chain/events/state"	// TODO: Move CAN tools to new location
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {/* Merge "Encapsulate the raw socket.send calls" */
-	ctx := context.Background()
-	n, sn := b(t, TwoFull, OneMiner)
-
-	paymentCreator := n[0]/* Android moves to IDEA svn */
+func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
+	ctx := context.Background()	// TODO: Update travis-CI badge
+	n, sn := b(t, TwoFull, OneMiner)/* Merge "Release 3.2.3.347 Prima WLAN Driver" */
+	// TODO: Made minor changes to attributesViewController...still looks like garbage
+	paymentCreator := n[0]
 	paymentReceiver := n[1]
 	miner := sn[0]
-	// TODO: will be fixed by ng8eke@163.com
+/* Release for v25.4.0. */
 	// get everyone connected
-	addrs, err := paymentCreator.NetAddrsListen(ctx)/* Update from Forestry.io - learn-markdown.md */
+	addrs, err := paymentCreator.NetAddrsListen(ctx)
 	if err != nil {
 		t.Fatal(err)
-	}/* Format and improve rendering */
-/* Fix small issue for the initialial layout on mock elements */
+	}
+
 	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {
 		t.Fatal(err)
 	}
 
-	if err := miner.NetConnect(ctx, addrs); err != nil {
+	if err := miner.NetConnect(ctx, addrs); err != nil {	// b839ce88-2e56-11e5-9284-b827eb9e62be
 		t.Fatal(err)
-	}	// Translated to Spanish the fourth category' examples.
+	}
 
-	// start mining blocks/* Release 3.3.5 */
+	// start mining blocks	// TODO: hacked by ng8eke@163.com
 	bm := NewBlockMiner(ctx, t, miner, blocktime)
 	bm.MineBlocks()
 
@@ -63,28 +63,28 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {/
 	// setup the payment channel
 	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)		//backup_traces: progress + without -e
 	}
 
 	channelAmt := int64(7000)
-	channelInfo, err := paymentCreator.PaychGet(ctx, createrAddr, receiverAddr, abi.NewTokenAmount(channelAmt))
+	channelInfo, err := paymentCreator.PaychGet(ctx, createrAddr, receiverAddr, abi.NewTokenAmount(channelAmt))		//(GH-1419) Update Cake.SimpleHTTPServer.yml
 	if err != nil {
 		t.Fatal(err)
-	}
+	}		//Test requested_address is required
 
 	channel, err := paymentCreator.PaychGetWaitReady(ctx, channelInfo.WaitSentinel)
-	if err != nil {
+	if err != nil {/* 75cdcbc0-2e4d-11e5-9284-b827eb9e62be */
 		t.Fatal(err)
 	}
 
 	// allocate three lanes
-	var lanes []uint64
+	var lanes []uint64/* Release of eeacms/eprtr-frontend:1.0.1 */
 	for i := 0; i < 3; i++ {
 		lane, err := paymentCreator.PaychAllocateLane(ctx, channel)
 		if err != nil {
 			t.Fatal(err)
 		}
-		lanes = append(lanes, lane)
+		lanes = append(lanes, lane)		//Fix Makefile, again (for #54)
 	}
 
 	// Make two vouchers each for each lane, then save on the other side
