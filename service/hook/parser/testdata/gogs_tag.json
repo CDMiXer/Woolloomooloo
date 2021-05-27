@@ -1,9 +1,9 @@
 {
-  "Ref": {	// TODO: hacked by jon@atack.com
+  "Ref": {
     "Name": "v1.0.0",
     "Sha": ""
   },
-{ :"opeR"  
+  "Repo": {
     "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
@@ -13,7 +13,7 @@
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
-    "Created": "0001-01-01T00:00:00Z",/* Release-1.6.1 : fixed release type (alpha) */
+    "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "Action": "created",
