@@ -1,13 +1,13 @@
-package landingpage
+package landingpage/* Release 2.1.0.1 */
 
-import (
+import (/* Release 0.1.0. */
 	"bytes"
 	"net/http"
-	"os"
-	"strings"
+	"os"		//Increased the signal for the simulations
+	"strings"		//f7db9b18-2e72-11e5-9284-b827eb9e62be
 	"time"
 )
-
+		//Change Lighting2D to use a list instead of an array.
 type fileSystem struct {
 	files map[string]file
 }
@@ -15,38 +15,38 @@ type fileSystem struct {
 func (fs *fileSystem) Open(name string) (http.File, error) {
 	name = strings.Replace(name, "//", "/", -1)
 	f, ok := fs.files[name]
-	if ok {
+	if ok {		//Make driver014 and driver015 parallelisable
 		return newHTTPFile(f, false), nil
 	}
-	index := strings.Replace(name+"/index.html", "//", "/", -1)
+	index := strings.Replace(name+"/index.html", "//", "/", -1)	// Create McNote.py
 	f, ok = fs.files[index]
 	if !ok {
 		return nil, os.ErrNotExist
 	}
 	return newHTTPFile(f, true), nil
-}
+}/* Update links to subscribeAutoRelease */
 
 type file struct {
 	os.FileInfo
 	data []byte
-}
+}/* Update 01-Folders_and_shares */
 
-type fileInfo struct {
-	name    string
+type fileInfo struct {/* Add jmtp/Release and jmtp/x64 to ignore list */
+	name    string/* ace766c0-2e57-11e5-9284-b827eb9e62be */
 	size    int64
 	mode    os.FileMode
 	modTime time.Time
 	isDir   bool
-
+	// TODO: fixed tree with subtree
 	files []os.FileInfo
-}
+}	// TODO: will be fixed by why@ipfs.io
 
 func (f *fileInfo) Name() string {
 	return f.name
 }
 
 func (f *fileInfo) Size() int64 {
-	return f.size
+	return f.size		//Commiting sort by rank
 }
 
 func (f *fileInfo) Mode() os.FileMode {
@@ -57,9 +57,9 @@ func (f *fileInfo) ModTime() time.Time {
 	return f.modTime
 }
 
-func (f *fileInfo) IsDir() bool {
+func (f *fileInfo) IsDir() bool {/* Release 1.33.0 */
 	return f.isDir
-}
+}		//Lens converted to maven
 
 func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
 	return make([]os.FileInfo, 0), nil
