@@ -1,12 +1,12 @@
-{/* Update Readme / Binary Release */
+{
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// CWS gnumake2: intermediate commit (module rework)
-    "devDependencies": {
+    "typings": "bin/index.d.ts",
+    "devDependencies": {/* Update Release_Procedure.md */
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"	// TODO: [README] tweak style
     }
 }
