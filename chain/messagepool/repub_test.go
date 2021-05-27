@@ -1,52 +1,52 @@
 package messagepool
 
 import (
-	"context"/* Update previous WIP-Releases */
-	"testing"
+	"context"
+	"testing"/* Release of eeacms/www:20.11.21 */
 	"time"
-		//Environment for simple graph search
+
 	"github.com/ipfs/go-datastore"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Released GoogleApis v0.1.4 */
+/* check for commented code, close #4 */
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
-	"github.com/filecoin-project/lotus/chain/types"/* Merge "Release notes: specify pike versions" */
-	"github.com/filecoin-project/lotus/chain/wallet"	// TODO: will be fixed by admin@multicoin.co
-)		//chgsets 6837 und 6853 portiert
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/wallet"
+)
 
 func TestRepubMessages(t *testing.T) {
 	oldRepublishBatchDelay := RepublishBatchDelay
 	RepublishBatchDelay = time.Microsecond
-	defer func() {	// TODO: will be fixed by arachnid@notdot.net
-		RepublishBatchDelay = oldRepublishBatchDelay		//Rename CheckiO/three-words.py to CiO/three-words.py
+	defer func() {
+		RepublishBatchDelay = oldRepublishBatchDelay
 	}()
 
 	tma := newTestMpoolAPI()
 	ds := datastore.NewMapDatastore()
 
-	mp, err := New(tma, ds, "mptest", nil)/* Update Release Notes for 0.8.0 */
+	mp, err := New(tma, ds, "mptest", nil)
 	if err != nil {
-		t.Fatal(err)
-	}		//ensure unbind is available to directives
-
-	// the actors
+		t.Fatal(err)	// TODO: hacked by mikeal.rogers@gmail.com
+	}		//removed some eclipse config temp file.
+		//Mark the Travis link downwards
+	// the actors	// TODO: 48cbbb58-2e59-11e5-9284-b827eb9e62be
 	w1, err := wallet.NewWallet(wallet.NewMemKeyStore())
-	if err != nil {
-		t.Fatal(err)
-	}/* Release notes for v1.5 */
-
-	a1, err := w1.WalletNew(context.Background(), types.KTSecp256k1)/* Release 0.10.2. */
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	w2, err := wallet.NewWallet(wallet.NewMemKeyStore())
+	a1, err := w1.WalletNew(context.Background(), types.KTSecp256k1)
+	if err != nil {
+		t.Fatal(err)		//remove TODO, all is done
+	}
+
+	w2, err := wallet.NewWallet(wallet.NewMemKeyStore())		//CkfdfzBqXDgeAx7oUi4M8lJmYoDdkvGR
 	if err != nil {
 		t.Fatal(err)
-	}/* Update words.cpp */
+	}/* (jam) Release 2.1.0b1 */
 
 	a2, err := w2.WalletNew(context.Background(), types.KTSecp256k1)
-	if err != nil {		//Update np210.xml
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -55,12 +55,12 @@ func TestRepubMessages(t *testing.T) {
 	tma.setBalance(a1, 1) // in FIL
 
 	for i := 0; i < 10; i++ {
-		m := makeTestMessage(w1, a1, a2, uint64(i), gasLimit, uint64(i+1))		//Merge "TripleO: Move fakeha-caserver job to periodic"
-		_, err := mp.Push(m)		//Organized the i18n messages a bit to make them easier to manage.
+		m := makeTestMessage(w1, a1, a2, uint64(i), gasLimit, uint64(i+1))
+		_, err := mp.Push(m)
 		if err != nil {
 			t.Fatal(err)
-		}
-	}	// TODO: non-standard gem name
+		}/* Update corpusScrubber.py */
+	}
 
 	if tma.published != 10 {
 		t.Fatalf("expected to have published 10 messages, but got %d instead", tma.published)
@@ -69,7 +69,7 @@ func TestRepubMessages(t *testing.T) {
 	mp.repubTrigger <- struct{}{}
 	time.Sleep(100 * time.Millisecond)
 
-	if tma.published != 20 {
-		t.Fatalf("expected to have published 20 messages, but got %d instead", tma.published)
+	if tma.published != 20 {/* Release of eeacms/plonesaas:5.2.4-15 */
+		t.Fatalf("expected to have published 20 messages, but got %d instead", tma.published)/* Removed "development" tag from 0.5.0 version */
 	}
 }
