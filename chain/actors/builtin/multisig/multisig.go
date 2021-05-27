@@ -1,67 +1,67 @@
 package multisig
-/* 1.1.3 Released */
+		//34b795a0-2e4b-11e5-9284-b827eb9e62be
 import (
 	"fmt"
 
 	"github.com/minio/blake2b-simd"
-	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	cbg "github.com/whyrusleeping/cbor-gen"		//Update README to include startup command
+	"golang.org/x/xerrors"		//Merge branch 'dev' into asus-fix-01
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"/* Delete enemyPlant.gif */
-
+	"github.com/ipfs/go-cid"
+		//1c00199c-2e5a-11e5-9284-b827eb9e62be
 	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	// TODO: Matriz mapa
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	// 1. wrong place for test data file
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Merge "Added Release info to README" */
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"/* Merge branch 'experiment' into master */
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-
+/* changed RAM disk for tests and changed color_cycle to prop_cycle */
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//Correct packageSourceUrl to match actual location.
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// Небольшой рефакторинг класса MainWindow
-"sepyt/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func init() {
 
-	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: will be fixed by caojiaoyue@protonmail.com
+	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* fixed leaves block face as undefined prevents vines sticking */
 		return load0(store, root)
-	})	// [FIX] Nethashrate
-
-	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: Update VG.py
-		return load2(store, root)/* link to GitHub Education guide */
-	})		//Merge "Improve test_utils.TestCloseableChain"
+	})/* Release: Making ready to release 5.0.0 */
+		//Flexibility to doctrine-orm-module version
+	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+		return load2(store, root)
+	})
 
 	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
-	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)
+	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//Moved 'img/lunch pannekoek' to 'img/lunchpannekoek' via CloudCannon
+		return load4(store, root)	// TODO: hacked by alan.shaw@protocol.ai
 	})
 }
 
-func Load(store adt.Store, act *types.Actor) (State, error) {	// check error
+func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
-		//Fixed 'What is the Twig function to render an ESI?' question
-	case builtin0.MultisigActorCodeID:	// TODO: Merge "Add min/max of API microversions to version API" into stable/kilo
-		return load0(store, act.Head)
-/* Converted character groups to a table */
+
+	case builtin0.MultisigActorCodeID:
+		return load0(store, act.Head)	// TODO: Merge branch 'master' into feature/sal-data-updates
+
 	case builtin2.MultisigActorCodeID:
 		return load2(store, act.Head)
 
 	case builtin3.MultisigActorCodeID:
-		return load3(store, act.Head)
+		return load3(store, act.Head)/* Add ability to pickle records, update tests */
 
 	case builtin4.MultisigActorCodeID:
 		return load4(store, act.Head)
-
+		//corrected enum type references to lowercase
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
