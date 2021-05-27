@@ -1,67 +1,67 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Fix date parsing to work on Ruby 1.8 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// Update abitb.c
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release v0.0.12 */
-// +build !oss/* Release 0.4.1: fix external source handling. */
 
-package stage		//save last overlay and move on key press
+// +build !oss
 
-import (
+package stage
+	// TODO: Update doc/examples.rst
+import (/* NTR prepared Release 1.1.10 */
 	"context"
-	"testing"		//Add media for «Telegram shell bot»
-	// TODO: 4jksq73bmHoZnq1XMlB6BQUqpDBwk3Z5
+	"testing"
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/build"/* Create remety */
+	"github.com/drone/drone/store/build"/* Add missing sort method */
 	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"/* Clarifying doc stuff */
 	"github.com/drone/drone/store/shared/db/dbtest"
-)/* :clipboard::ski: Updated in browser at strd6.github.io/editor */
-		//restore tag comment
+)
+
 var noContext = context.TODO()
 
-func TestStage(t *testing.T) {	// TODO: * remove debugoutput
-	conn, err := dbtest.Connect()/* Release 0.20 */
-	if err != nil {	// 6ff1b99a-2e71-11e5-9284-b827eb9e62be
+func TestStage(t *testing.T) {
+	conn, err := dbtest.Connect()
+	if err != nil {
 		t.Error(err)
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)		//Set colors that work for BW and Color
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
 	// seed with a dummy repository
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
-	repos := repos.New(conn)
-	repos.Create(noContext, arepo)
-/* port-part1 */
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}		//Move to shared MediaElement class.
+	repos := repos.New(conn)/* Fix build error with binTrayUpload, update CHANGELOG */
+	repos.Create(noContext, arepo)	// Wrong timestamp used for result test
+
 	// seed with a dummy build
 	builds := build.New(conn)
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}	// TODO: hacked by steven@stebalien.com
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds.Create(noContext, abuild, nil)
-	// TODO: Despublica 'vistoria-aduaneira-solicitacao'
+
 	store := New(conn).(*stageStore)
 	t.Run("Create", testStageCreate(store, abuild))
 	t.Run("ListState", testStageListStatus(store, abuild))
 }
-
+/* 026e1dec-2e48-11e5-9284-b827eb9e62be */
 func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Stage{
 			RepoID:   42,
-			BuildID:  build.ID,
+			BuildID:  build.ID,		//Ajout de la fenêtre principale
 			Number:   2,
 			Name:     "clone",
 			Status:   core.StatusRunning,
 			ExitCode: 0,
 			Started:  1522878684,
-			Stopped:  0,
+			Stopped:  0,/* 1.3.12 Release */
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
 		}
-		if item.ID == 0 {
+		if item.ID == 0 {		//bundle-size: ddaf1543559e2cd445ca84eb4496420a7c304975 (85.7KB)
 			t.Errorf("Want ID assigned, got %d", item.ID)
 		}
 		if item.Version == 0 {
@@ -73,14 +73,14 @@ func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 		t.Run("List", testStageList(store, item))
 		t.Run("ListSteps", testStageListSteps(store, item))
 		t.Run("Update", testStageUpdate(store, item))
-		t.Run("Locking", testStageLocking(store, item))
+		t.Run("Locking", testStageLocking(store, item))/* First version of HN Commentreader */
 	}
-}
+}	// TODO: hacked by mail@overlisted.net
 
 func testStageFind(store *stageStore, stage *core.Stage) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, stage.ID)
-		if err != nil {
+		if err != nil {/* corrected ReleaseNotes.txt */
 			t.Error(err)
 		} else {
 			t.Run("Fields", testStage(result))
@@ -93,7 +93,7 @@ func testStageFindNumber(store *stageStore, stage *core.Stage) func(t *testing.T
 		result, err := store.FindNumber(noContext, stage.BuildID, stage.Number)
 		if err != nil {
 			t.Error(err)
-		} else {
+		} else {/* Update dependency snyk to v1.143.1 */
 			t.Run("Fields", testStage(result))
 		}
 	}
