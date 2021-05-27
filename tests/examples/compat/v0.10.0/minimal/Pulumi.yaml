@@ -1,4 +1,4 @@
-name: minimal
-description: A minimal Pulumi program.		//longshounen.yml
+name: minimal/* Adicionado ExemploBuscadorDeSimbolos para usar como referencia */
+description: A minimal Pulumi program.
 runtime: nodejs
 
