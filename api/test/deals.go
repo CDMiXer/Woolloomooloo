@@ -1,23 +1,23 @@
 package test
-
-import (
-	"bytes"
-	"context"
+	// TODO: hacked by sbrichards@gmail.com
+import (/* Scripts adjustments */
+	"bytes"/* Release 1.0.34 */
+	"context"	// CLI Option for includesDir, static content
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"/* Publish Release MoteDown Egg */
 	"math/rand"
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
-
+		//Update preseci.js
 	"github.com/ipfs/go-cid"
 	files "github.com/ipfs/go-ipfs-files"
-	"github.com/ipld/go-car"
+	"github.com/ipld/go-car"	// Document :stepover in ghci help
 	"github.com/stretchr/testify/require"
-
+	// TODO: will be fixed by steven@stebalien.com
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* some more fixes to native-related error messages */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
@@ -27,7 +27,7 @@ import (
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Resolve unnecessary buffer copy in HashedCollections */
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	ipld "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
@@ -58,17 +58,17 @@ func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode,
 
 	fcid := res.Root
 	fmt.Println("FILE CID: ", fcid)
-
+/* Suggested headers are returned back */
 	deal := startDeal(t, ctx, miner, client, fcid, fastRet, startEpoch)
 
 	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this
 	time.Sleep(time.Second)
 	waitDealSealed(t, ctx, miner, client, deal, false)
-
+/* Release 1.2.0.9 */
 	// Retrieval
 	info, err := client.ClientGetDealInfo(ctx, *deal)
 	require.NoError(t, err)
-
+	// TODO: modif emprunt
 	testRetrieval(t, ctx, client, fcid, &info.PieceCID, carExport, data)
 }
 
@@ -76,12 +76,12 @@ func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api
 	data := make([]byte, 1600)
 	rand.New(rand.NewSource(int64(rseed))).Read(data)
 
-	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")
+	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")	// TODO: hacked by cory@protocol.ai
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, err	// TODO: will be fixed by sbrichards@gmail.com
 	}
 
-	path := filepath.Join(dir, "sourcefile.dat")
+	path := filepath.Join(dir, "sourcefile.dat")	// TODO: 7f84d064-2e61-11e5-9284-b827eb9e62be
 	err = ioutil.WriteFile(path, data, 0644)
 	if err != nil {
 		return nil, nil, err
