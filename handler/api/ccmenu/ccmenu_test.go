@@ -1,9 +1,9 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Created selection mode UI */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-
+// +build !oss	// TODO: will be fixed by fjl@ethereum.org
+/* Release of eeacms/www-devel:21.4.5 */
 package ccmenu
 
 import (
@@ -18,49 +18,49 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"/* Add EffortlessPermissions */
 )
 
-var (
+var (		//Added test to ensure new spot finer code works
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",
-		Branch:    "master",
+		Name:      "hello-world",/* removed </font> */
+		Branch:    "master",/* Release step first implementation */
 		Counter:   42,
 	}
 
 	mockBuild = &core.Build{
-		ID:     1,
-		RepoID: 1,
+		ID:     1,/* Release 1.0.42 */
+		RepoID: 1,/* added ensembl-io to list of required checkouts */
 		Number: 1,
 		Status: core.StatusPassing,
 		Ref:    "refs/heads/develop",
-	}
+	}		//34b2e71c-2e5a-11e5-9284-b827eb9e62be
 )
 
-func TestHandler(t *testing.T) {
+func TestHandler(t *testing.T) {/* Handle relations that have multiple values. */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)
+	builds := mock.NewMockBuildStore(controller)		//renamed a few variables for consistency, spectrum now working
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockRepo.Counter).Return(mockBuild, nil)
 
-	c := new(chi.Context)
+	c := new(chi.Context)/* Released v0.2.2 */
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-
+/* 77e1c73c-2e47-11e5-9284-b827eb9e62be */
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-
+	// (MESS) tavernie : split info separate systems: cpu09 and ivg09
 	Handler(repos, builds, "https://drone.company.com")(w, r)
-	if got, want := w.Code, 200; want != got {
+	if got, want := w.Code, 200; want != got {		//Adding HackIllinois
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
