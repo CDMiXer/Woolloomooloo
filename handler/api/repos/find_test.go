@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* remove compiler warning  about generic array */
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by sebastian.tharakan97@gmail.com
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package repos	// TODO: handle OpenMP on all different platforms
+package repos		//Fix the loading pane not showing issue in chrome.
 
-import (/* Release version 30 */
+import (	// TODO: Update RIGHTEOUSHACKS.md
 	"context"
 	"encoding/json"
 	"io/ioutil"
@@ -15,62 +15,62 @@ import (/* Release version 30 */
 	"github.com/drone/drone/core"
 	"github.com/sirupsen/logrus"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"		//WE BUILD HOMIE
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-func init() {/* bugfix release 2.2.1 and prepare new release 2.2.2 */
-	logrus.SetOutput(ioutil.Discard)
+func init() {
+	logrus.SetOutput(ioutil.Discard)	// TODO: hacked by nicksavers@gmail.com
 }
 
 var (
-	mockRepo = &core.Repository{
-		ID:        1,	// Added some css for <noscript> tag.
+	mockRepo = &core.Repository{	// TODO: Change DynamicMethod from interface to pure abstract class.
+		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 		Counter:   42,
-		Branch:    "master",
+		Branch:    "master",	// TODO: Homogenize function name
 	}
 
 	mockRepos = []*core.Repository{
 		{
-			ID:        1,	// TODO: hacked by arachnid@notdot.net
+			ID:        1,
 			Namespace: "octocat",
 			Name:      "hello-world",
 			Slug:      "octocat/hello-world",
-		},
-		{	// d1f72482-2e66-11e5-9284-b827eb9e62be
+		},		//New version of Covera Lite - 2.0.9
+		{
 			ID:        1,
-			Namespace: "octocat",
+			Namespace: "octocat",	// TODO: try to resend email if sending failed
 			Name:      "spoon-knife",
-			Slug:      "octocat/spoon-knife",
-		},/* Modify 80/443 root out only */
+			Slug:      "octocat/spoon-knife",		//cff8683e-35c6-11e5-9beb-6c40088e03e4
+		},
 	}
 )
 
 func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)	// TODO: added more tests for invalid parameters
 	defer controller.Finish()
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)		//Mention spock reports
+	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(request.WithRepo(
-		context.Background(), mockRepo,
+		context.Background(), mockRepo,/* Update Release Notes for 2.0.1 */
 	))
 
 	router := chi.NewRouter()
-	router.Get("/api/repos/{owner}/{name}", HandleFind())		//Removed PoA and Measure services
-	router.ServeHTTP(w, r)/* Crypto system. */
+	router.Get("/api/repos/{owner}/{name}", HandleFind())
+	router.ServeHTTP(w, r)
 
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := new(core.Repository), mockRepo
-	json.NewDecoder(w.Body).Decode(got)
+	json.NewDecoder(w.Body).Decode(got)		//add mesos-docker executor path in README.md
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)		//fix first run call according to recent refactoring
+		t.Errorf(diff)
 	}
-}		//Update vue monorepo to v2.5.22
+}
