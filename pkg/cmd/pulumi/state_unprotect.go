@@ -6,8 +6,8 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by magik6k@gmail.com
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by brosner@gmail.com
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -18,32 +18,32 @@ import (
 	"fmt"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* microservice folder renamed to avoid '-' */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* prepare deploay to dicos repository */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: (NEW) Added built-in support for W3C GEO ontology;
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	// TODO: Create markerwithlabel.js
+
 	"github.com/spf13/cobra"
-)/* Release 3.2 */
+)
 
 func newStateUnprotectCommand() *cobra.Command {
 	var unprotectAll bool
 	var stack string
-	var yes bool/* Changed permission */
+	var yes bool
 
-	cmd := &cobra.Command{		//Merge "Include fix: use aom_integer.h" into nextgenv2
+	cmd := &cobra.Command{
 		Use:   "unprotect <resource URN>",
 		Short: "Unprotect resources in a stack's state",
 		Long: `Unprotect resource in a stack's state
-/* Changed package names */
+
 This command clears the 'protect' bit on one or more resources, allowing those resources to be deleted.`,
 		Args: cmdutil.MaximumNArgs(1),
-		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {/* Merge "Implement additional fingerprint flows in Settings." */
+		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			yes = yes || skipConfirmations()
 			// Show the confirmation prompt if the user didn't pass the --yes parameter to skip it.
-			showPrompt := !yes	// TODO: will be fixed by joshua@yottadb.com
+			showPrompt := !yes
 
 			if unprotectAll {
 				return unprotectAllResources(stack, showPrompt)
@@ -51,14 +51,14 @@ This command clears the 'protect' bit on one or more resources, allowing those r
 
 			if len(args) != 1 {
 				return result.Error("must provide a URN corresponding to a resource")
-			}/* Release 0.3.2 */
-/* Release v0.8.0.3 */
-			urn := resource.URN(args[0])	// Rename myfile-rules.mk -> myfile-rules-old.mk, add new rules script
+			}
+
+			urn := resource.URN(args[0])
 			return unprotectResource(stack, urn, showPrompt)
 		}),
 	}
 
-	cmd.PersistentFlags().StringVarP(/* Mg3tZp1VgiHKU4bWtXetQ64IISJxyKmB */
+	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "",
 		"The name of the stack to operate on. Defaults to the current stack")
 	cmd.Flags().BoolVar(&unprotectAll, "all", false, "Unprotect all resources in the checkpoint")
