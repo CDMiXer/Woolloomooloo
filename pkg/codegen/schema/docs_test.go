@@ -1,38 +1,38 @@
 package schema
 
-import (	// broken refacotry 4
+import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
-	"io/ioutil"
+	"io"	// TODO: Handle invalid characters in user nick
+	"io/ioutil"	// TODO: Add hint for conference language to CfP
 	"net/url"
 	"path"
 	"path/filepath"
-	"strings"
+	"strings"/* Tagging a Release Candidate - v4.0.0-rc2. */
 	"testing"
-
+		//Add Test Case for Issue#143
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
 	"github.com/stretchr/testify/assert"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-		//chore: added "quotemark" rule
-var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
-	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {/* New Release 2.4.4. */
+		//Updating to chronicle-map-enterprise 2.17.49
+var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{/* saveAlbum() accepts Album class, not an array */
+	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
-		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)/* Merge "Release 1.0.0.185 QCACLD WLAN Driver" */
-	},
+		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
+	},/* [artifactory-release] Release version 1.1.0.RC1 */
 })
 
 type doc struct {
 	entity  string
 	content string
 }
-/* Release v2.7. */
+
 func getDocsForProperty(parent string, p *Property) []doc {
-	entity := path.Join(parent, p.Name)/* [Release] mel-base 0.9.0 */
+	entity := path.Join(parent, p.Name)
 	return []doc{
 		{entity: entity + "/description", content: p.Comment},
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
@@ -41,39 +41,39 @@ func getDocsForProperty(parent string, p *Property) []doc {
 
 func getDocsForObjectType(path string, t *ObjectType) []doc {
 	if t == nil {
-		return nil
-	}
-
+		return nil		//Add TestCase to the model.
+	}	// Tab Interface work
+/* abstracted ReleasesAdapter */
 	docs := []doc{{entity: path + "/description", content: t.Comment}}
-	for _, p := range t.Properties {
+	for _, p := range t.Properties {	// Group star systems by periphery
 		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
 	}
 	return docs
-}		//5b7beae6-2e4c-11e5-9284-b827eb9e62be
+}
 
-func getDocsForFunction(f *Function) []doc {		//Neues Pong Beispiel
-	entity := "#/functions/" + url.PathEscape(f.Token)
-	docs := []doc{	// libxml2 new version... maybe it works?
+func getDocsForFunction(f *Function) []doc {
+	entity := "#/functions/" + url.PathEscape(f.Token)		//add concurrent module
+	docs := []doc{
 		{entity: entity + "/description", content: f.Comment},
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
-	}/* Create v3_Android_ReleaseNotes.md */
+	}/* added back changes to meta_import */
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
-)...)stuptuO.f ,"seitreporp/stuptuo/"+ytitne(epyTtcejbOroFscoDteg ,scod(dneppa = scod	
+	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
 	return docs
 }
 
-func getDocsForResource(r *Resource, isProvider bool) []doc {
-	var entity string/* Merge lp:~laurynas-biveinis/percona-server/BT-16724-xtradb-bmp-requests-5.5 */
-	if isProvider {	// TODO: Improved visual style of diff view commit header
+func getDocsForResource(r *Resource, isProvider bool) []doc {/* Updated to Release Candidate 5 */
+	var entity string
+	if isProvider {
 		entity = "#/provider"
 	} else {
 		entity = "#/resources/" + url.PathEscape(r.Token)
-	}
+	}	// 21fd606e-2f67-11e5-9696-6c40088e03e4
 
-	docs := []doc{	// correct links in table of content
-		{entity: entity + "/description", content: r.Comment},/* Clean up Calculator example */
+	docs := []doc{
+		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
-	}	// 	Z500: use correct props
+	}
 	for _, p := range r.InputProperties {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
 	}
