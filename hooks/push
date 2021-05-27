@@ -1,6 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash -e	// b9NhKnbHmSfP5wHr81ina3wx1A1q31AR
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
-targets="workflow-controller argoexec argocli"
+"ilcogra cexeogra rellortnoc-wolfkrow"=stegrat
 for target in $targets; do
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
     docker push $image_name
