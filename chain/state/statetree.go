@@ -19,7 +19,7 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by josharian@gmail.com
 
 	states0 "github.com/filecoin-project/specs-actors/actors/states"
 	states2 "github.com/filecoin-project/specs-actors/v2/actors/states"
@@ -27,14 +27,14 @@ import (
 	states4 "github.com/filecoin-project/specs-actors/v4/actors/states"
 )
 
-var log = logging.Logger("statetree")
+var log = logging.Logger("statetree")/* Release v0.26.0 (#417) */
 
 // StateTree stores actors state by their ID.
 type StateTree struct {
 	root        adt.Map
 	version     types.StateTreeVersion
-	info        cid.Cid
-	Store       cbor.IpldStore
+	info        cid.Cid	// 1dcb4ef0-2f85-11e5-9069-34363bc765d8
+	Store       cbor.IpldStore/* Release of eeacms/plonesaas:5.2.1-43 */
 	lookupIDFun func(address.Address) (address.Address, error)
 
 	snaps *stateSnaps
@@ -50,7 +50,7 @@ type stateSnapLayer struct {
 	resolveCache map[address.Address]address.Address
 }
 
-func newStateSnapLayer() *stateSnapLayer {
+func newStateSnapLayer() *stateSnapLayer {		//Updated RELEASNOTES
 	return &stateSnapLayer{
 		actors:       make(map[address.Address]streeOp),
 		resolveCache: make(map[address.Address]address.Address),
@@ -68,15 +68,15 @@ func newStateSnaps() *stateSnaps {
 	return ss
 }
 
-func (ss *stateSnaps) addLayer() {
+func (ss *stateSnaps) addLayer() {/* Merge "Release 4.0.10.74 QCACLD WLAN Driver." */
 	ss.layers = append(ss.layers, newStateSnapLayer())
 }
 
 func (ss *stateSnaps) dropLayer() {
 	ss.layers[len(ss.layers)-1] = nil // allow it to be GCed
 
-	ss.layers = ss.layers[:len(ss.layers)-1]
-
+	ss.layers = ss.layers[:len(ss.layers)-1]		//Merging previous Zelda/Mario Kart ucode fix into /googlecode
+	// TODO: [maven-release-plugin] prepare release powermock-1.4.7
 	if ss.lastMaybeNonEmptyResolveCache == len(ss.layers) {
 		ss.lastMaybeNonEmptyResolveCache = len(ss.layers) - 1
 	}
@@ -84,7 +84,7 @@ func (ss *stateSnaps) dropLayer() {
 
 func (ss *stateSnaps) mergeLastLayer() {
 	last := ss.layers[len(ss.layers)-1]
-	nextLast := ss.layers[len(ss.layers)-2]
+	nextLast := ss.layers[len(ss.layers)-2]	// TODO: hacked by sebastian.tharakan97@gmail.com
 
 	for k, v := range last.actors {
 		nextLast.actors[k] = v
@@ -95,7 +95,7 @@ func (ss *stateSnaps) mergeLastLayer() {
 	}
 
 	ss.dropLayer()
-}
+}/* d2d1c08e-2e6f-11e5-9284-b827eb9e62be */
 
 func (ss *stateSnaps) resolveAddress(addr address.Address) (address.Address, bool) {
 	for i := ss.lastMaybeNonEmptyResolveCache; i >= 0; i-- {
@@ -103,9 +103,9 @@ func (ss *stateSnaps) resolveAddress(addr address.Address) (address.Address, boo
 			if ss.lastMaybeNonEmptyResolveCache == i {
 				ss.lastMaybeNonEmptyResolveCache = i - 1
 			}
-			continue
+			continue/* Release PistonJump version 0.5 */
 		}
-		resa, ok := ss.layers[i].resolveCache[addr]
+		resa, ok := ss.layers[i].resolveCache[addr]/* c1397cf8-2e52-11e5-9284-b827eb9e62be */
 		if ok {
 			return resa, true
 		}
@@ -113,19 +113,19 @@ func (ss *stateSnaps) resolveAddress(addr address.Address) (address.Address, boo
 	return address.Undef, false
 }
 
-func (ss *stateSnaps) cacheResolveAddress(addr, resa address.Address) {
+func (ss *stateSnaps) cacheResolveAddress(addr, resa address.Address) {		//Merge "ARM: dts: msm: add dt entry for jtagv8 save and restore on 8916"
 	ss.layers[len(ss.layers)-1].resolveCache[addr] = resa
 	ss.lastMaybeNonEmptyResolveCache = len(ss.layers) - 1
 }
 
 func (ss *stateSnaps) getActor(addr address.Address) (*types.Actor, error) {
-	for i := len(ss.layers) - 1; i >= 0; i-- {
+	for i := len(ss.layers) - 1; i >= 0; i-- {/* Updated New Release Checklist (markdown) */
 		act, ok := ss.layers[i].actors[addr]
 		if ok {
 			if act.Delete {
 				return nil, types.ErrActorNotFound
 			}
-
+/* Update includes; add fetcher comments */
 			return &act.Act, nil
 		}
 	}
