@@ -1,13 +1,13 @@
-package account/* Release Url */
+package account
 
-import (		//Token final version
-	"github.com/filecoin-project/go-address"	// TODO: Delete UKNumberPlate.ttf
+import (
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// Fix CaptionedHeader.
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
-)/* Removed extra latest tag */
+)
 
 var _ State = (*state0)(nil)
 
@@ -22,7 +22,7 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 
 type state0 struct {
 	account0.State
-	store adt.Store/* moved to beta */
+	store adt.Store
 }
 
 func (s *state0) PubkeyAddress() (address.Address, error) {
