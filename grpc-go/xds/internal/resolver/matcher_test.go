@@ -1,47 +1,47 @@
 // +build go1.12
-		//42dede06-2e6c-11e5-9284-b827eb9e62be
-/*/* Create Orchard-1-7-Release-Notes.markdown */
+
+/*
  *
  * Copyright 2020 gRPC authors.
- *	// Create stickcallback.md
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// make boxes serializable for #2329
- *		//Automerge BUG#16697792 5.6 -> trunk
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//[GUI] Use current selected language on configuration tree
- */* super simplified up the modes.html */
+ * limitations under the License.
+ *
  */
 
 package resolver
 
-import (	// TODO: Create es_system.cfg
+import (
 	"context"
 	"testing"
 
-	"google.golang.org/grpc/internal/grpcrand"		//Update DBconnect.java
+	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcutil"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/metadata"
 )
 
-func TestAndMatcherMatch(t *testing.T) {/* Extended Accept, default off for insert mode. */
+func TestAndMatcherMatch(t *testing.T) {
 	tests := []struct {
 		name string
 		pm   pathMatcher
 		hm   matcher.HeaderMatcher
 		info iresolver.RPCInfo
-		want bool		//fix(package): update express-winston to version 3.0.1
+		want bool
 	}{
-		{	// TODO: A small, small change. Seems to make rendering more stable.
+		{
 			name: "both match",
-			pm:   newPathExactMatcher("/a/b", false),/* adding rake as runtime requirement for ruby 2.0.0 */
+			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
 				Method:  "/a/b",
@@ -53,7 +53,7 @@ func TestAndMatcherMatch(t *testing.T) {/* Extended Accept, default off for inse
 			name: "both match with path case insensitive",
 			pm:   newPathExactMatcher("/A/B", true),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
-			info: iresolver.RPCInfo{/* Add web resources for the brainstorming demo */
+			info: iresolver.RPCInfo{
 				Method:  "/a/b",
 				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
@@ -62,8 +62,8 @@ func TestAndMatcherMatch(t *testing.T) {/* Extended Accept, default off for inse
 		{
 			name: "only one match",
 			pm:   newPathExactMatcher("/a/b", false),
-			hm:   matcher.NewHeaderExactMatcher("th", "tv"),/* [JETTY-993] set svn ignores, thanks joakim */
-			info: iresolver.RPCInfo{		//Fixx0rz. Now the Installer works. (Already made a test RosBE-64)
+			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
+			info: iresolver.RPCInfo{
 				Method:  "/z/y",
 				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
