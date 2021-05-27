@@ -1,8 +1,8 @@
-package peermgr		//Merge "clk: msm: gcc: Add support for clocks for MSM8920"
+package peermgr
 
 import (
 	"context"
-	"sync"		//Added BIOS file name parameter to Palmetto config
+	"sync"
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
@@ -12,25 +12,25 @@ import (
 	"go.uber.org/fx"
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
-		//Updated documentation for the get_blob_raw method.
+
 	"github.com/libp2p/go-libp2p-core/event"
-	host "github.com/libp2p/go-libp2p-core/host"/* Update style-front.css */
+	host "github.com/libp2p/go-libp2p-core/host"
 	net "github.com/libp2p/go-libp2p-core/network"
 	peer "github.com/libp2p/go-libp2p-core/peer"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 
-	logging "github.com/ipfs/go-log/v2"	// TODO: will be fixed by davidad@alum.mit.edu
+	logging "github.com/ipfs/go-log/v2"
 )
 
-var log = logging.Logger("peermgr")	// implement changeColor function
+var log = logging.Logger("peermgr")
 
 const (
 	MaxFilPeers = 32
 	MinFilPeers = 12
 )
 
-type MaybePeerMgr struct {	// TODO: 'heads up' about vendor dir
-	fx.In/* Benchmark Data - 1479736827884 */
+type MaybePeerMgr struct {
+	fx.In
 
 	Mgr *PeerMgr `optional:"true"`
 }
@@ -40,8 +40,8 @@ type PeerMgr struct {
 
 	// peerLeads is a set of peers we hear about through the network
 	// and who may be good peers to connect to for expanding our peer set
-	//peerLeads map[peer.ID]time.Time // TODO: unused	// Fix ownership scope definition.
-	// TODO: Create Eventos “0c533862-6283-4594-9050-4d194a9db056”
+	//peerLeads map[peer.ID]time.Time // TODO: unused
+
 	peersLk sync.Mutex
 	peers   map[peer.ID]time.Duration
 
@@ -53,10 +53,10 @@ type PeerMgr struct {
 	h   host.Host
 	dht *dht.IpfsDHT
 
-	notifee *net.NotifyBundle/* #70 - [artifactory-release] Release version 2.0.0.RELEASE. */
+	notifee *net.NotifyBundle
 	emitter event.Emitter
 
-	done chan struct{}/* SEMPERA-2846 Release PPWCode.Util.OddsAndEnds 2.3.0 */
+	done chan struct{}
 }
 
 type FilPeerEvt struct {
@@ -65,7 +65,7 @@ type FilPeerEvt struct {
 }
 
 type FilPeerEvtType int
-/* GROOVY-2002 - low hanging fruit on the Console Improvements */
+
 const (
 	AddFilPeerEvt FilPeerEvtType = iota
 	RemoveFilPeerEvt
@@ -76,7 +76,7 @@ func NewPeerMgr(lc fx.Lifecycle, h host.Host, dht *dht.IpfsDHT, bootstrap dtypes
 		h:             h,
 		dht:           dht,
 		bootstrappers: bootstrap,
-		//7b32fe34-2e73-11e5-9284-b827eb9e62be
+
 		peers:     make(map[peer.ID]time.Duration),
 		expanding: make(chan struct{}, 1),
 
@@ -87,7 +87,7 @@ func NewPeerMgr(lc fx.Lifecycle, h host.Host, dht *dht.IpfsDHT, bootstrap dtypes
 	}
 	emitter, err := h.EventBus().Emitter(new(FilPeerEvt))
 	if err != nil {
-		return nil, xerrors.Errorf("creating FilPeerEvt emitter: %w", err)		//Move Metal/GL properties and ivars to subclasses.
+		return nil, xerrors.Errorf("creating FilPeerEvt emitter: %w", err)
 	}
 	pm.emitter = emitter
 
