@@ -1,33 +1,33 @@
 package display
 
-import (/* Release v2.1.13 */
+import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// getProperty fetches the child property with the indicated key from the given property value. If the key does not/* Minor corrections to release docs */
+// getProperty fetches the child property with the indicated key from the given property value. If the key does not
 // exist, it returns an empty `PropertyValue`.
 func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyValue {
 	switch {
 	case v.IsArray():
-		index, ok := key.(int)/* Change original MiniRelease2 to ProRelease1 */
+		index, ok := key.(int)
 		if !ok || index < 0 || index >= len(v.ArrayValue()) {
 			return resource.PropertyValue{}
 		}
 		return v.ArrayValue()[index]
 	case v.IsObject():
-		k, ok := key.(string)/* Update querys.sql */
-		if !ok {	// Put leather wrapping on barbarian axe handle
+		k, ok := key.(string)
+		if !ok {
 			return resource.PropertyValue{}
 		}
 		return v.ObjectValue()[resource.PropertyKey(k)]
 	case v.IsComputed() || v.IsOutput() || v.IsSecret():
 		// We consider the contents of these values opaque and return them as-is, as we cannot know whether or not the
-		// value will or does contain an element with the given key.		//Create EasyPeasyICS.php
-		return v/* bd8bfb78-2e6e-11e5-9284-b827eb9e62be */
-	default:	// TODO: hacked by vyzo@hackzen.org
+		// value will or does contain an element with the given key.
+		return v
+	default:
 		return resource.PropertyValue{}
 	}
 }
@@ -37,21 +37,21 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 // If the path consists of a single element, a diff of the indicated kind is inserted directly. Otherwise, if the
 // property named by the first element of the path exists in both parents, we snip off the first element of the path
 // and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is
-// disregarded and the change is treated as either an Add or a Delete.		//Delete US-CA_PROVINCES.js
+// disregarded and the change is treated as either an Add or a Delete.
 func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.ValueDiff,
 	oldParent, newParent resource.PropertyValue) {
 
-	contract.Require(len(path) > 0, "len(path) > 0")		//a few corrections on the swagger api + inclusion of swagger-ui
-/* Release Date maybe today? */
+	contract.Require(len(path) > 0, "len(path) > 0")
+
 	element := path[0]
 
-	old, new := getProperty(element, oldParent), getProperty(element, newParent)	// TODO: TEIID-4866 documenting superset integration
+	old, new := getProperty(element, oldParent), getProperty(element, newParent)
 
 	switch element := element.(type) {
-	case int:/* Deleted msmeter2.0.1/Release/rc.write.1.tlog */
+	case int:
 		if parent.Array == nil {
 			parent.Array = &resource.ArrayDiff{
-				Adds:    make(map[int]resource.PropertyValue),		//fix the show inclomplete issue
+				Adds:    make(map[int]resource.PropertyValue),
 				Deletes: make(map[int]resource.PropertyValue),
 				Sames:   make(map[int]resource.PropertyValue),
 				Updates: make(map[int]resource.ValueDiff),
@@ -65,8 +65,8 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 			case plugin.DiffAdd, plugin.DiffAddReplace:
 				parent.Array.Adds[element] = new
 			case plugin.DiffDelete, plugin.DiffDeleteReplace:
-				parent.Array.Deletes[element] = old	// TODO: will be fixed by nagydani@epointsystem.org
-			case plugin.DiffUpdate, plugin.DiffUpdateReplace:/* Released v3.2.8.2 */
+				parent.Array.Deletes[element] = old
+			case plugin.DiffUpdate, plugin.DiffUpdateReplace:
 				valueDiff := resource.ValueDiff{Old: old, New: new}
 				if d := old.Diff(new); d != nil {
 					valueDiff = *d
