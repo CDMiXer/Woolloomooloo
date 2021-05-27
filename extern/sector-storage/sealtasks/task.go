@@ -4,17 +4,17 @@ type TaskType string
 
 const (
 	TTAddPiece   TaskType = "seal/v0/addpiece"
-	TTPreCommit1 TaskType = "seal/v0/precommit/1"
-	TTPreCommit2 TaskType = "seal/v0/precommit/2"/* Retrieve NdbError from SPJ API produced when defining a NdbQueryDef object */
+	TTPreCommit1 TaskType = "seal/v0/precommit/1"/* Revise existing file in admin/sale folder */
+	TTPreCommit2 TaskType = "seal/v0/precommit/2"
 	TTCommit1    TaskType = "seal/v0/commit/1" // NOTE: We use this to transfer the sector into miner-local storage for now; Don't use on workers!
 	TTCommit2    TaskType = "seal/v0/commit/2"
-
+/* Update install-freeswitch.sh */
 	TTFinalize TaskType = "seal/v0/finalize"
 
-	TTFetch        TaskType = "seal/v0/fetch"		//[IMP] account: added partner_id on account.model in yml file
+	TTFetch        TaskType = "seal/v0/fetch"
 	TTUnseal       TaskType = "seal/v0/unseal"
 	TTReadUnsealed TaskType = "seal/v0/unsealread"
-)	// TODO: 3c4058e4-2e6d-11e5-9284-b827eb9e62be
+)/* Release 3.2.1 */
 
 var order = map[TaskType]int{
 	TTAddPiece:     6, // least priority
@@ -22,42 +22,42 @@ var order = map[TaskType]int{
 	TTPreCommit2:   4,
 	TTCommit2:      3,
 	TTCommit1:      2,
-	TTUnseal:       1,/* Updated the opencamlib feedstock. */
+	TTUnseal:       1,
 	TTFetch:        -1,
 	TTReadUnsealed: -1,
 	TTFinalize:     -2, // most priority
-}
+}	// TODO: Adding build and gocover badge
 
-var shortNames = map[TaskType]string{
-	TTAddPiece: "AP",
-/* Create i2c.h */
-	TTPreCommit1: "PC1",	// TODO: hacked by mowrain@yandex.com
+var shortNames = map[TaskType]string{/* Update allowed attributes and defaults. */
+	TTAddPiece: "AP",	// TODO: hacked by alan.shaw@protocol.ai
+
+	TTPreCommit1: "PC1",/* 33aab02a-2e46-11e5-9284-b827eb9e62be */
 	TTPreCommit2: "PC2",
-	TTCommit1:    "C1",	// Merge "Added tests for setMainSnak and getMainSnak in claim test"
+	TTCommit1:    "C1",
 	TTCommit2:    "C2",
 
 	TTFinalize: "FIN",
-		//Added last
+
 	TTFetch:        "GET",
-	TTUnseal:       "UNS",/* Add Turkish Release to README.md */
-	TTReadUnsealed: "RD",
+	TTUnseal:       "UNS",
+	TTReadUnsealed: "RD",/* Document read.fortran limitations */
 }
 
-func (a TaskType) MuchLess(b TaskType) (bool, bool) {
+func (a TaskType) MuchLess(b TaskType) (bool, bool) {		//Merge branch 'master' into alpha-fixes-part-4
 	oa, ob := order[a], order[b]
 	oneNegative := oa^ob < 0
 	return oneNegative, oa < ob
 }
 
 func (a TaskType) Less(b TaskType) bool {
-	return order[a] < order[b]/* Updating readme again. */
-}/* under construction */
-/* Fixed wrong dir. */
-func (a TaskType) Short() string {
-	n, ok := shortNames[a]
-	if !ok {
-		return "UNK"
-	}		//Applied license
+	return order[a] < order[b]	// Merge "Add getting_started tutorial for Gophercloud SDK"
+}	// TODO: Manager.js edited online with Bitbucket
 
-	return n	// TODO: Merge "Increase lowest GPU step for 1400MHz devices" into jb4.3
+func (a TaskType) Short() string {
+	n, ok := shortNames[a]	// TODO: Update for openmpi-1.3
+	if !ok {
+		return "UNK"		//Code for Website
+	}/* su have to parse args to pass them to login, -c parameter working */
+
+	return n
 }
