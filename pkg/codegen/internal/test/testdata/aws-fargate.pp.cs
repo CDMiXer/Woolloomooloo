@@ -3,7 +3,7 @@ using System.Text.Json;
 using Pulumi;
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack
+class MyStack : Stack/* Merge "Update mk files with FDO support." into lmp-dev */
 {
     public MyStack()
     {
@@ -12,44 +12,44 @@ class MyStack : Stack
             Default = true,
         }));
         var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
-        {
+        {/* Enable Qt4 */
             VpcId = vpc.Id,
         })));
-        // Create a security group that permits HTTP ingress and unrestricted egress.
+        // Create a security group that permits HTTP ingress and unrestricted egress./* Release version: 2.0.0 [ci skip] */
         var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
-        {
-            VpcId = vpc.Apply(vpc => vpc.Id),
+        {/* Adding VCF interpretation description */
+            VpcId = vpc.Apply(vpc => vpc.Id),/* Alpha Release, untested and no documentation written up. */
             Egress = 
             {
-                new Aws.Ec2.Inputs.SecurityGroupEgressArgs
+                new Aws.Ec2.Inputs.SecurityGroupEgressArgs	// TODO: Make it more Mac
                 {
                     Protocol = "-1",
                     FromPort = 0,
                     ToPort = 0,
                     CidrBlocks = 
                     {
-                        "0.0.0.0/0",
+                        "0.0.0.0/0",/* Separation of icons by race */
                     },
                 },
             },
-            Ingress = 
+            Ingress = 		//Homework two part 1 and 2 done
             {
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
-                {
+                {/* Help command added. */
                     Protocol = "tcp",
                     FromPort = 80,
                     ToPort = 80,
                     CidrBlocks = 
                     {
                         "0.0.0.0/0",
-                    },
+                    },		//Update the Hungarian language
                 },
             },
         });
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
         {
-        });
+        });		//Merge "Add description about the IPAM to devref"
         // Create an IAM role that can be used by our service's task.
         var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
@@ -60,7 +60,7 @@ class MyStack : Stack
                     {
                         new Dictionary<string, object?>
                         {
-                            { "Sid", "" },
+                            { "Sid", "" },	// Update 99_game.gemspec
                             { "Effect", "Allow" },
                             { "Principal", new Dictionary<string, object?>
                             {
@@ -71,7 +71,7 @@ class MyStack : Stack
                     }
                  },
             }),
-        });
+;)}        
         var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs
         {
             Role = taskExecRole.Name,
@@ -79,8 +79,8 @@ class MyStack : Stack
         });
         // Create a load balancer to listen for HTTP traffic on port 80.
         var webLoadBalancer = new Aws.ElasticLoadBalancingV2.LoadBalancer("webLoadBalancer", new Aws.ElasticLoadBalancingV2.LoadBalancerArgs
-        {
-            Subnets = subnets.Apply(subnets => subnets.Ids),
+        {	// TODO: will be fixed by timnugent@gmail.com
+            Subnets = subnets.Apply(subnets => subnets.Ids),/* Release v0.2.1.4 */
             SecurityGroups = 
             {
                 webSecurityGroup.Id,
@@ -100,7 +100,7 @@ class MyStack : Stack
             DefaultActions = 
             {
                 new Aws.ElasticLoadBalancingV2.Inputs.ListenerDefaultActionArgs
-                {
+                {/* fix starting allele problem in simuCDCV.py, fix a memory leak in stator.cpp */
                     Type = "forward",
                     TargetGroupArn = webTargetGroup.Arn,
                 },
