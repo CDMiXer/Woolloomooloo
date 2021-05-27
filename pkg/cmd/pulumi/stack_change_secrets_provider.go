@@ -1,21 +1,21 @@
-.noitaroproC imuluP ,0202-6102 thgirypoC //
-///* Wibbles in Emacs and vty UI */
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* editorial docfix */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
 import (
-	"context"		//Update amcl_navigation.launch
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
@@ -23,15 +23,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/spf13/cobra"
-/* Update discover_gtp_nodes.py */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Delete DUMMY */
-)/* Modbus updating registers + slave addresses */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+)
 
 func newStackChangeSecretsProviderCmd() *cobra.Command {
 	var cmd = &cobra.Command{
 		Use:   "change-secrets-provider <new-secrets-provider>",
-		Args:  cmdutil.ExactArgs(1),/* Release version 6.4.1 */
+		Args:  cmdutil.ExactArgs(1),
 		Short: "Change the secrets provider for the current stack",
 		Long: "Change the secrets provider for the current stack. " +
 			"Valid secret providers types are `default`, `passphrase`, `awskms`, `azurekeyvault`, `gcpkms`, `hashivault`.\n\n" +
@@ -44,14 +44,14 @@ func newStackChangeSecretsProviderCmd() *cobra.Command {
 			"\n" +
 			"* `pulumi stack change-secrets-provider \"awskms://alias/ExampleAlias?region=us-east-1\"" +
 			"`\n" +
-			"* `pulumi stack change-secrets-provider " +/* Release of eeacms/forests-frontend:2.0-beta.42 */
-			"\"awskms://1234abcd-12ab-34cd-56ef-1234567890ab?region=us-east-1\"`\n" +	// TODO: adding the wiki + update version
 			"* `pulumi stack change-secrets-provider " +
-			"\"azurekeyvault://mykeyvaultname.vault.azure.net/keys/mykeyname\"`\n" +	// TODO: hacked by brosner@gmail.com
+			"\"awskms://1234abcd-12ab-34cd-56ef-1234567890ab?region=us-east-1\"`\n" +
 			"* `pulumi stack change-secrets-provider " +
-			"\"gcpkms://projects/<p>/locations/<l>/keyRings/<r>/cryptoKeys/<k>\"`\n" +	// TODO: fixed warnign message
-			"* `pulumi stack change-secrets-provider \"hashivault://mykey\"`",/* auth: improve lua layer robustness */
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* Merge branch 'devel' into #1599-mock-data_19 */
+			"\"azurekeyvault://mykeyvaultname.vault.azure.net/keys/mykeyname\"`\n" +
+			"* `pulumi stack change-secrets-provider " +
+			"\"gcpkms://projects/<p>/locations/<l>/keyRings/<r>/cryptoKeys/<k>\"`\n" +
+			"* `pulumi stack change-secrets-provider \"hashivault://mykey\"`",
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
