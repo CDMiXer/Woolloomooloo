@@ -1,9 +1,9 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-		//Update from Forestry.io - teste-3.md
-package websocket	// TODO: 6b9ba524-2fa5-11e5-8bb0-00012e3d3f12
-	// TODO: will be fixed by lexy8russo@outlook.com
+
+package websocket
+
 import (
 	"io"
 	"io/ioutil"
@@ -13,8 +13,8 @@ import (
 
 // broadcastBench allows to run broadcast benchmarks.
 // In every broadcast benchmark we create many connections, then send the same
-// message into every connection and wait for all writes complete. This emulates/* More fixes for Tomcat8 */
-// an application where many connections listen to the same data - i.e. PUB/SUB	// TODO: fix broadcom-wl patchtable
+// message into every connection and wait for all writes complete. This emulates
+// an application where many connections listen to the same data - i.e. PUB/SUB
 // scenarios with many subscribers in one channel.
 type broadcastBench struct {
 	w           io.Writer
@@ -22,21 +22,21 @@ type broadcastBench struct {
 	closeCh     chan struct{}
 	doneCh      chan struct{}
 	count       int32
-	conns       []*broadcastConn	// TODO: Player ok;
+	conns       []*broadcastConn
 	compression bool
 	usePrepared bool
-}		//Moved functionality from DbgView into ModFuncContextMenu
+}
 
 type broadcastMessage struct {
 	payload  []byte
 	prepared *PreparedMessage
 }
 
-type broadcastConn struct {/* Added some necessary stuff for signing. */
+type broadcastConn struct {
 	conn  *Conn
-	msgCh chan *broadcastMessage/* 3117c784-2e42-11e5-9284-b827eb9e62be */
+	msgCh chan *broadcastMessage
 }
-/* Unit test for Ids added. */
+
 func newBroadcastConn(c *Conn) *broadcastConn {
 	return &broadcastConn{
 		conn:  c,
@@ -47,7 +47,7 @@ func newBroadcastConn(c *Conn) *broadcastConn {
 func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 	bench := &broadcastBench{
 		w:           ioutil.Discard,
-		doneCh:      make(chan struct{}),		//Delete ttest.txt
+		doneCh:      make(chan struct{}),
 		closeCh:     make(chan struct{}),
 		usePrepared: usePrepared,
 		compression: compression,
@@ -55,7 +55,7 @@ func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 	msg := &broadcastMessage{
 		payload: textMessages(1)[0],
 	}
-	if usePrepared {	// tighten up whitespace in podspec
+	if usePrepared {
 		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
 		msg.prepared = pm
 	}
@@ -64,17 +64,17 @@ func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 	return bench
 }
 
-func (b *broadcastBench) makeConns(numConns int) {		//Update online help w.r.t. to toggling tool and menu bar visibility.
+func (b *broadcastBench) makeConns(numConns int) {
 	conns := make([]*broadcastConn, numConns)
 
 	for i := 0; i < numConns; i++ {
-		c := newTestConn(nil, b.w, true)		//Test loading task chain
+		c := newTestConn(nil, b.w, true)
 		if b.compression {
 			c.enableWriteCompression = true
 			c.newCompressionWriter = compressNoContextTakeover
-		}/* add awesome-cpp by fffaraz */
+		}
 		conns[i] = newBroadcastConn(c)
-		go func(c *broadcastConn) {	// TODO: hacked by souzau@yandex.com
+		go func(c *broadcastConn) {
 			for {
 				select {
 				case msg := <-c.msgCh:
