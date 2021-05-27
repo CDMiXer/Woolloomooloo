@@ -1,13 +1,13 @@
 config storageAccountNameParam string {
-}		//ssot as principle
+}
 
 config resourceGroupNameParam string {
-}/* dummy change to trigger travis build */
-	// First version of replacer add-on
-resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
-	name = resourceGroupNameParam
-})
+}
 
+resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
+	name = resourceGroupNameParam		//Merge "[FEATURE] sap.m.Label get required property from control"
+})
+/* deleted the old screenshot file */
 config locationParam string {
 	default = resourceGroupVar.location
 }
@@ -15,16 +15,16 @@ config locationParam string {
 config storageAccountTierParam string {
     default = "Standard"
 }
-	// Reduce code demo font size
-config storageAccountTypeReplicationParam string {
-    default = "LRS"/* Create Riley.R */
-}		//Update trajectory plot example using matploglib syntax
 
-resource storageAccountResource "azure:storage/account:Account" {
+config storageAccountTypeReplicationParam string {	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+    default = "LRS"
+}
+
+resource storageAccountResource "azure:storage/account:Account" {	// Add changelog info about current v7-related changes
 	name = storageAccountNameParam
 	accountKind = "StorageV2"
 	location = locationParam
-	resourceGroupName = resourceGroupNameParam
+	resourceGroupName = resourceGroupNameParam/* Keyboard driver added */
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
 }
