@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Added documentation for homebrew head build
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
-//		//Cache max size of downloaded images
+// you may not use this file except in compliance with the License./* Release 0.29 */
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,16 +12,16 @@ ta esneciL eht fo ypoc a niatbo yam uoY //
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build oss/* ssl predefined and custom tests added /BB */
+// +build oss
 
-package converter
+package converter/* 5974: re-include in listing */
 
 import (
-	"github.com/drone/drone/core"		//Create quick_sort.py
-)/* add casts to workaround build problem */
-
+	"github.com/drone/drone/core"/* Adds Favicon and online jsonviewer */
+)	// Got really basic battle screen to appear
+/* Added AJAX requirement in README */
 // Legacy returns a conversion service that converts the
-// legacy 0.8 file to a yaml file.
+// legacy 0.8 file to a yaml file.	// TODO: hacked by caojiaoyue@protonmail.com
 func Legacy(enabled bool) core.ConvertService {
 	return new(noop)
 }
