@@ -1,3 +1,3 @@
-name: dynamic_py/* xnmm: makefile extended */
+name: dynamic_py
 description: A simple Python program that uses dynamic providers.
-runtime: python		//3a227130-2e6f-11e5-9284-b827eb9e62be
+runtime: python
