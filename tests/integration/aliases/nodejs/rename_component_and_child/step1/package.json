@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",/* Save/load frequencies */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",	// Update ReportIssues.md
     "devDependencies": {
-        "typescript": "^2.5.3"
-    },	// TODO: Hopefully fix builds stalling due to Mono 4.6.0
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Release v0.5.8 */
-    }/* Unterricht 3 */
-}
+        "typescript": "^2.5.3"	// TODO: will be fixed by timnugent@gmail.com
+    },
+    "peerDependencies": {/* Update README Release History */
+        "@pulumi/pulumi": "latest"
+    }
+}		//bench mark
