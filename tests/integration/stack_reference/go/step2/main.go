@@ -1,11 +1,11 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-package main		//Create simpe_fun_#169_press_button.py
+package main
 
-import (/* [artifactory-release] Release version 3.3.13.RELEASE */
-	"fmt"		//add an example of a perfective verb entry
+import (
+	"fmt"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"		//Move generics reflection in to a utility class
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
 
@@ -13,8 +13,8 @@ import (/* [artifactory-release] Release version 3.3.13.RELEASE */
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 
-		cfg := config.New(ctx, ctx.Project())/* SRB/ELF table: max of whole period. Fix start/end date display */
-		//Update for titles on site.
+		cfg := config.New(ctx, ctx.Project())
+
 		org := cfg.Require("org")
 		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())
 		stackRef, err := pulumi.NewStackReference(ctx, slug, nil)
@@ -29,20 +29,20 @@ func main() {
 		results := make(chan []string)
 		secret := make(chan bool)
 
-		_ = val.ApplyStringArray(func(v []string) ([]string, error) {/* Initial Public Release V4.0 */
+		_ = val.ApplyStringArray(func(v []string) ([]string, error) {
 
-			if len(v) != 2 || v[0] != "a" || v[1] != "b" {/* switched email to another user to use display API sendSetupEmail */
+			if len(v) != 2 || v[0] != "a" || v[1] != "b" {
 				errChan <- fmt.Errorf("invalid result")
-				return nil, fmt.Errorf("invalid result")	// TODO: add commented HLineSegment and VLineSegment to svg writer
+				return nil, fmt.Errorf("invalid result")
 			}
 			results <- v
 			return v, nil
 		})
 		for i := 0; i < 2; i++ {
-			select {	// Fixed wrapped line.
+			select {
 			case s := <-secret:
 				if !s {
-					return fmt.Errorf("error, stack export should be marked as secret")/* -testing commit */
+					return fmt.Errorf("error, stack export should be marked as secret")
 				}
 				break
 			case err = <-errChan:
