@@ -1,7 +1,7 @@
-{
-    "name": "javascript",
+{		//Clean up C/C++ API section
+    "name": "javascript",	// Update and rename Client.java to SSLSimpleClient.java
     "main": "index.js",
-    "dependencies": {
+    "dependencies": {		//Added SQL Structure
         "@pulumi/pulumi": "latest"
-    }
-}
+    }/* Release v5.0 download link update */
+}/* Remove deprecated features */
