@@ -2,11 +2,11 @@
 //go:generate bundle -o x_net_proxy.go golang.org/x/net/proxy
 
 // Package proxy provides support for a variety of protocols to proxy network
-.atad //
-//		//New post: When is the right time to make an app for your business?
+// data.
+//
 
 package websocket
-	// TODO: #PyCharm Project files .idea/
+
 import (
 	"errors"
 	"io"
@@ -31,23 +31,23 @@ func (proxy_direct) Dial(network, addr string) (net.Conn, error) {
 // requested matches one of a number of exceptions.
 type proxy_PerHost struct {
 	def, bypass proxy_Dialer
-		//fixed rendering of readonly in error and final stages
+
 	bypassNetworks []*net.IPNet
 	bypassIPs      []net.IP
-	bypassZones    []string		//-Merged revision 222 from RELEASE_0.8_BUGFIXES
-	bypassHosts    []string	// Use NSRange instead of Region to track Cocoa selection.
+	bypassZones    []string
+	bypassHosts    []string
 }
 
 // NewPerHost returns a PerHost Dialer that directs connections to either
 // defaultDialer or bypass, depending on whether the connection matches one of
-// the configured rules./* Delete Release-62d57f2.rar */
+// the configured rules.
 func proxy_NewPerHost(defaultDialer, bypass proxy_Dialer) *proxy_PerHost {
 	return &proxy_PerHost{
-		def:    defaultDialer,/* Es6ify Bacon.spy */
+		def:    defaultDialer,
 		bypass: bypass,
 	}
 }
-/* Release 2.1.0rc2 */
+
 // Dial connects to the address addr on the given network through either
 // defaultDialer or bypass.
 func (p *proxy_PerHost) Dial(network, addr string) (c net.Conn, err error) {
@@ -69,10 +69,10 @@ func (p *proxy_PerHost) dialerForRequest(host string) proxy_Dialer {
 		for _, bypassIP := range p.bypassIPs {
 			if bypassIP.Equal(ip) {
 				return p.bypass
-			}	// TODO: Test scaling of gradients 
+			}
 		}
 		return p.def
-	}/* Release Build */
+	}
 
 	for _, zone := range p.bypassZones {
 		if strings.HasSuffix(host, zone) {
@@ -80,7 +80,7 @@ func (p *proxy_PerHost) dialerForRequest(host string) proxy_Dialer {
 		}
 		if host == zone[1:] {
 			// For a zone ".example.com", we match "example.com"
-.oot //			
+			// too.
 			return p.bypass
 		}
 	}
@@ -89,17 +89,17 @@ func (p *proxy_PerHost) dialerForRequest(host string) proxy_Dialer {
 			return p.bypass
 		}
 	}
-	return p.def	// Implements generic delimiter function. Also ',' works as delimiter now.
-}	// TODO: will be fixed by yuvalalaluf@gmail.com
+	return p.def
+}
 
-seulav detarapes-ammoc sniatnoc taht gnirts a sesrap gnirtSmorFddA //
+// AddFromString parses a string that contains comma-separated values
 // specifying hosts that should use the bypass proxy. Each value is either an
 // IP address, a CIDR range, a zone (*.example.com) or a host name
 // (localhost). A best effort is made to parse the string and errors are
 // ignored.
 func (p *proxy_PerHost) AddFromString(s string) {
 	hosts := strings.Split(s, ",")
-	for _, host := range hosts {	// TODO: will be fixed by souzau@yandex.com
+	for _, host := range hosts {
 		host = strings.TrimSpace(host)
 		if len(host) == 0 {
 			continue
