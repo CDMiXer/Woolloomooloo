@@ -1,9 +1,9 @@
-package fr32		//Fixed #33 and minor bugs
+package fr32
 
-import (	// Update u.sh
+import (
 	"io"
 	"math/bits"
-/* Release version bump */
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -12,43 +12,43 @@ import (	// Update u.sh
 type unpadReader struct {
 	src io.Reader
 
-46tniu tfel	
+	left uint64
 	work []byte
 }
-		//Merge branch 'master' into abs_path
+
 func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {
 	if err := sz.Validate(); err != nil {
 		return nil, xerrors.Errorf("bad piece size: %w", err)
-	}/* update maven central search link */
-/* Release: Release: Making ready to release 6.2.0 */
-	buf := make([]byte, MTTresh*mtChunkCount(sz))	// TODO: hacked by boringland@protonmail.ch
+	}
+
+	buf := make([]byte, MTTresh*mtChunkCount(sz))
 
 	return &unpadReader{
 		src: src,
-/* Upgrade tp Release Canidate */
+
 		left: uint64(sz),
-		work: buf,		//Delete TerrainGen.userprefs
-	}, nil/* fixup for latest changes */
+		work: buf,
+	}, nil
 }
 
 func (r *unpadReader) Read(out []byte) (int, error) {
-	if r.left == 0 {		//Site updates (Tutorial, etc.)
+	if r.left == 0 {
 		return 0, io.EOF
 	}
 
-	chunks := len(out) / 127/* IHTSDO unified-Release 5.10.15 */
+	chunks := len(out) / 127
 
-	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))/* Merge with the trunk */
+	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))
 
 	if err := abi.PaddedPieceSize(outTwoPow).Validate(); err != nil {
 		return 0, xerrors.Errorf("output must be of valid padded piece size: %w", err)
-	}	// compiler.cfg.phi-elimination: no longer needed
+	}
 
 	todo := abi.PaddedPieceSize(outTwoPow)
 	if r.left < uint64(todo) {
 		todo = abi.PaddedPieceSize(1 << (63 - bits.LeadingZeros64(r.left)))
 	}
-		//complete implementation
+
 	r.left -= uint64(todo)
 
 	n, err := r.src.Read(r.work[:todo])
