@@ -1,12 +1,12 @@
-import pulumi	// TODO: Fixed compile issue for NJ_BAKUENRYU, by Saycyber21.
-import pulumi_kubernetes as kubernetes	// TODO: will be fixed by nagydani@epointsystem.org
+import pulumi
+import pulumi_kubernetes as kubernetes/* Release v1.7.2 */
 
-bar = kubernetes.core.v1.Pod("bar",	// вывод скрипта слайдера в ЛК
+bar = kubernetes.core.v1.Pod("bar",
     api_version="v1",
-    kind="Pod",
-    metadata=kubernetes.meta.v1.ObjectMetaArgs(
+    kind="Pod",/* Correct localhost IP. */
+    metadata=kubernetes.meta.v1.ObjectMetaArgs(/* PipeLease: clear `item` in Release(), fixes assertion failure */
         namespace="foo",
-        name="bar",
+        name="bar",	// TODO: hacked by magik6k@gmail.com
     ),
     spec=kubernetes.core.v1.PodSpecArgs(
         containers=[kubernetes.core.v1.ContainerArgs(
@@ -17,6 +17,6 @@ bar = kubernetes.core.v1.Pod("bar",	// вывод скрипта слайдер�
                     "memory": "20Mi",
                     "cpu": "0.2",
                 },
-            ),
+            ),/* Release 1.10.4 and 2.0.8 */
         )],
     ))
