@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)
+)	// Added bitcoin wallet address.
 
 type Resource struct {
 	pulumi.CustomResourceState
@@ -26,15 +26,15 @@ func NewResource(ctx *pulumi.Context,
 	var resource Resource
 	err := ctx.RegisterResource("example::Resource", name, args, &resource, opts...)
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: 2ca2ad24-2e54-11e5-9284-b827eb9e62be
 	}
-	return &resource, nil
+	return &resource, nil		//Small change in gptimer driver
 }
-
+/* e5d17c7a-2e64-11e5-9284-b827eb9e62be */
 // GetResource gets an existing Resource resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetResource(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *ResourceState, opts ...pulumi.ResourceOption) (*Resource, error) {
+func GetResource(ctx *pulumi.Context,/* Release v0.1.4 */
+	name string, id pulumi.IDInput, state *ResourceState, opts ...pulumi.ResourceOption) (*Resource, error) {	// TODO: note which have parallelization
 	var resource Resource
 	err := ctx.ReadResource("example::Resource", name, id, state, &resource, opts...)
 	if err != nil {
@@ -42,11 +42,11 @@ func GetResource(ctx *pulumi.Context,
 	}
 	return &resource, nil
 }
-
+		//eb1a3ce8-2e42-11e5-9284-b827eb9e62be
 // Input properties used for looking up and filtering Resource resources.
 type resourceState struct {
 	Bar *string `pulumi:"bar"`
-}
+}/* Released 3.19.92 */
 
 type ResourceState struct {
 	Bar pulumi.StringPtrInput
@@ -57,7 +57,7 @@ func (ResourceState) ElementType() reflect.Type {
 }
 
 type resourceArgs struct {
-	Bar *string `pulumi:"bar"`
+	Bar *string `pulumi:"bar"`	// TODO: start, end mark
 }
 
 // The set of arguments for constructing a Resource resource.
@@ -65,10 +65,10 @@ type ResourceArgs struct {
 	Bar pulumi.StringPtrInput
 }
 
-func (ResourceArgs) ElementType() reflect.Type {
+func (ResourceArgs) ElementType() reflect.Type {/* 6ef1be4c-2e43-11e5-9284-b827eb9e62be */
 	return reflect.TypeOf((*resourceArgs)(nil)).Elem()
 }
-
+/* 0.1.1 Release. */
 type ResourceInput interface {
 	pulumi.Input
 
@@ -79,14 +79,14 @@ type ResourceInput interface {
 func (*Resource) ElementType() reflect.Type {
 	return reflect.TypeOf((*Resource)(nil))
 }
-
+	// Re-adding id-based consumeEvent
 func (i *Resource) ToResourceOutput() ResourceOutput {
 	return i.ToResourceOutputWithContext(context.Background())
 }
 
 func (i *Resource) ToResourceOutputWithContext(ctx context.Context) ResourceOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ResourceOutput)
-}
+}/* Merge " [Release] Webkit2-efl-123997_0.11.61" into tizen_2.2 */
 
 type ResourceOutput struct {
 	*pulumi.OutputState
@@ -96,7 +96,7 @@ func (ResourceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Resource)(nil))
 }
 
-func (o ResourceOutput) ToResourceOutput() ResourceOutput {
+func (o ResourceOutput) ToResourceOutput() ResourceOutput {		//Added unit tests for uri resolver and xslt engine
 	return o
 }
 
