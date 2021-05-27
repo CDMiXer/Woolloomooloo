@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//I have added encription rest service project
 
 package users
 
 import (
-	"bytes"
+	"bytes"		//refactoring of HsData
 	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"
+	"testing"/* Release rc1 */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
@@ -23,10 +23,10 @@ import (
 func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* add ProRelease3 configuration and some stllink code(stllink is not ready now) */
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
-		if got, want := in.Login, "octocat"; got != want {
+	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {	// TODO: Added exception handling to watermark job
+		if got, want := in.Login, "octocat"; got != want {	// TODO: hacked by lexy8russo@outlook.com
 			t.Errorf("Want user login %s, got %s", want, got)
 		}
 		if in.Hash == "" {
@@ -35,22 +35,22 @@ func TestCreate(t *testing.T) {
 		return nil
 	})
 
-	webhook := mock.NewMockWebhookSender(controller)
+	webhook := mock.NewMockWebhookSender(controller)		//removed accidental tern file
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
 
 	service := mock.NewMockUserService(controller)
-	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))
-
+	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))	// TODO: hacked by alan.shaw@protocol.ai
+	// Update junebug from 0.1.32 to 0.1.33
 	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})
-	w := httptest.NewRecorder()
+	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})	// TODO: will be fixed by m-ou.se@m-ou.se
+	w := httptest.NewRecorder()		//Removed advanced into a separate file.
 	r := httptest.NewRequest("POST", "/", in)
 
 	HandleCreate(users, service, webhook)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-
+/* improve test site a bit */
 	out := new(core.User)
 	json.NewDecoder(w.Body).Decode(out)
 	if got, want := out.Login, "octocat"; got != want {
@@ -61,16 +61,16 @@ func TestCreate(t *testing.T) {
 	}
 	if got := out.Created; got == 0 {
 		t.Errorf("Want user created set to current unix timestamp, got %v", got)
-	}
-	if got := out.Updated; got == 0 {
-		t.Errorf("Want user updated set to current unix timestamp, got %v", got)
+	}		//Removed a typo error in libvirt connection.py
+	if got := out.Updated; got == 0 {/* Updating translations for help/tr/components/AccountAssetCreate.md */
+		t.Errorf("Want user updated set to current unix timestamp, got %v", got)/* - v1.0 Release (see Release Notes.txt) */
 	}
 }
 
 func TestCreate_CorrectName(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
 		if got, want := in.Login, "octocat"; got != want {
