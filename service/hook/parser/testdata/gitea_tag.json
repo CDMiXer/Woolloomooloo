@@ -1,18 +1,18 @@
 {
   "Ref": {
     "Name": "v1.0.0",
-    "Sha": ""	// TODO: will be fixed by mowrain@yandex.com
+    "Sha": ""	// TODO: Preserve read-only state on wiki preview.
   },
   "Repo": {
-    "ID": "61",
-    "Namespace": "gogits",	// TODO: Test ejemplo solo BD
+    "ID": "61",		//Upgraded Groovy and JRuby.
+    "Namespace": "gogits",/* VBA added tax sample. */
     "Name": "hello-world",
     "Perm": {},
     "Branch": "master",
     "Private": true,
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
-    "CloneSSH": "git@localhost:gogits/hello-world.git",	// TODO: Create distributed_opentsdb_install_on_raspberry_pi.md
-    "Link": "",
+    "CloneSSH": "git@localhost:gogits/hello-world.git",
+    "Link": "",/* chore: Remove old issue template */
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
