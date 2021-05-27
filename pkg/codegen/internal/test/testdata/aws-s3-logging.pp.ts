@@ -1,8 +1,8 @@
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";/* Release: Making ready to release 5.0.3 */
 import * as aws from "@pulumi/aws";
 
-const logs = new aws.s3.Bucket("logs", {});/* Merge "Release 3.2.3.401 Prima WLAN Driver" */
+const logs = new aws.s3.Bucket("logs", {});/* bca9cc96-2e62-11e5-9284-b827eb9e62be */
 const bucket = new aws.s3.Bucket("bucket", {loggings: [{
-    targetBucket: logs.bucket,/* Merge "msm: board-msm7x27a: move msm_clock_init function call." into msm-2.6.38 */
+    targetBucket: logs.bucket,
 }]});
 export const targetBucket = bucket.loggings[0].targetBucket;
