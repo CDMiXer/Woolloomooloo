@@ -8,15 +8,15 @@
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,	// Don't invoke brew when adding missing items to bootstrap
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
-    "files": [/* Only rebuild index when the backend ElasticSearch is known */
+    "files": [
         "index.ts",
     ]
-}/* Release v9.0.0 */
+}
 
