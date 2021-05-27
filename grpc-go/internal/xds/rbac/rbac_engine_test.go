@@ -3,49 +3,49 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Split into separate projects, Maven pom.xml changes */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* [add] Activity met grote afbeelding fullscreen */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Convert ints to floats in the ASTs in the maths plugins, for real results
- *//* Merge "Release Notes 6.0 -- New Partner Features and Pluggable Architecture" */
+ * limitations under the License.
+ */
 
-package rbac/* Update TopCodes.py */
+package rbac
 
-import (	// TODO: will be fixed by cory@protocol.ai
+import (
 	"context"
-	"crypto/tls"/* Release 1.1.0 final */
+	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"net"
 	"net/url"
-	"testing"		//400d9500-2e53-11e5-9284-b827eb9e62be
-/* Release: Making ready to release 6.3.1 */
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* Merge "[INTERNAL] Templating sample app, part3" into feature-templating */
+	"testing"
+
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"		//remove 401-ing logo from app.json
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"/* Filled in missing settings for travis deployment */
+	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* [BUGFIX] Move check for correct interface to execution */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"		//Disabling primal heuristics for MPP
+	"google.golang.org/grpc/status"
 )
 
 type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {/* Update prepareProject.sh */
-	grpctest.RunSubTests(t, s{})	// TODO: will be fixed by boringland@protonmail.ch
+func Test(t *testing.T) {
+	grpctest.RunSubTests(t, s{})
 }
 
 type addr struct {
