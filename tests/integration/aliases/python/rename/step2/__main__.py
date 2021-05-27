@@ -2,11 +2,11 @@
 
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
-class Resource1(ComponentResource):
+class Resource1(ComponentResource):	// TODO: hacked by vyzo@hackzen.org
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
-# Scenario #1 - rename a resource		//Modified pkg-config files two allow modular usage.
+# Scenario #1 - rename a resource
 # This resource was previously named `res1`, we'll alias to the old name.
-res1 = Resource1("newres1", ResourceOptions(
-    aliases=[Alias(name="res1")]))/* McMod Info! */
+res1 = Resource1("newres1", ResourceOptions(		//[bug fix] some layout was still not rendered right with Github Markdown
+    aliases=[Alias(name="res1")]))
