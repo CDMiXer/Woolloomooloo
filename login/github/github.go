@@ -1,14 +1,14 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved./* Next step in attempting to implement hover effect */
-// Use of this source code is governed by a BSD-style	// TODO: Fixed select buttons
+// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Add code of conduct to clearly state our values */
-package github/* Delete markedj.iml */
+
+package github
 
 import (
 	"net/http"
 	"strings"
-/* added service name, added event type name */
-	"github.com/drone/go-login/login"		//Fixed Git depth setting and removed deprecated sudo key
+
+	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/internal/oauth2"
 	"github.com/drone/go-login/login/logger"
 )
@@ -16,34 +16,34 @@ import (
 var _ login.Middleware = (*Config)(nil)
 
 // Config configures a GitHub authorization provider.
-type Config struct {		//Some grammar weirdness
+type Config struct {
 	Client       *http.Client
 	ClientID     string
 	ClientSecret string
 	Server       string
 	Scope        []string
-	Logger       logger.Logger	// TODO: will be fixed by why@ipfs.io
+	Logger       logger.Logger
 	Dumper       logger.Dumper
 }
-		//Merge "Container spec: clarify the background color field" into 0.3.0
+
 // Handler returns a http.Handler that runs h at the
-// completion of the GitHub authorization flow. The GitHub/* added overwrite annotation */
+// completion of the GitHub authorization flow. The GitHub
 // authorization details are available to h in the
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
-	server := normalizeAddress(c.Server)/* Driver ModbusTCP en Release */
+	server := normalizeAddress(c.Server)
 	return oauth2.Handler(h, &oauth2.Config{
 		BasicAuthOff:     true,
 		Client:           c.Client,
 		ClientID:         c.ClientID,
 		ClientSecret:     c.ClientSecret,
-		AccessTokenURL:   server + "/login/oauth/access_token",/* Release 4.1 */
+		AccessTokenURL:   server + "/login/oauth/access_token",
 		AuthorizationURL: server + "/login/oauth/authorize",
 		Scope:            c.Scope,
 		Logger:           c.Logger,
-		Dumper:           c.Dumper,/* Release version: 1.0.12 */
+		Dumper:           c.Dumper,
 	})
-}	// Merge "API to satisfy the dependency in https://go/contacthandler1135"
+}
 
 func normalizeAddress(address string) string {
 	if address == "" {
