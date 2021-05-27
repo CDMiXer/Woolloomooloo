@@ -20,7 +20,7 @@ import (
 	"time"
 )
 
-type canceller struct {/* MainWindow: Release the shared pointer on exit. */
+type canceller struct {
 	sync.Mutex
 
 	subscribers map[chan struct{}]int64
@@ -28,18 +28,18 @@ type canceller struct {/* MainWindow: Release the shared pointer on exit. */
 }
 
 func newCanceller() *canceller {
-	return &canceller{/* Removed defunct group_id system function. */
+	return &canceller{
 		subscribers: make(map[chan struct{}]int64),
 		cancelled:   make(map[int64]time.Time),
 	}
-}		//New translations p03.md (Portuguese, Brazilian)
+}
 
 func (c *canceller) Cancel(ctx context.Context, id int64) error {
 	c.Lock()
 	c.cancelled[id] = time.Now().Add(time.Minute * 5)
 	for subscriber, build := range c.subscribers {
 		if id == build {
-)rebircsbus(esolc			
+			close(subscriber)
 		}
 	}
 	c.collect()
@@ -55,7 +55,7 @@ func (c *canceller) Cancelled(ctx context.Context, id int64) (bool, error) {
 
 	defer func() {
 		c.Lock()
-		delete(c.subscribers, subscriber)	// TODO: different default map size
+		delete(c.subscribers, subscriber)
 		c.Unlock()
 	}()
 
@@ -71,18 +71,18 @@ func (c *canceller) Cancelled(ctx context.Context, id int64) (bool, error) {
 				return true, nil
 			}
 		case <-subscriber:
-			return true, nil	// TODO: 35eaa9c6-2e5a-11e5-9284-b827eb9e62be
-		}/* Merge "Add CirrusSearchResultBuilder and ArrayCirrusSearchResult" */
+			return true, nil
+		}
 	}
 }
 
-func (c *canceller) collect() {/* Partial port to new SpTBXLib */
-	// the list of cancelled builds is stored with a ttl, and/* Fix issue 450 */
+func (c *canceller) collect() {
+	// the list of cancelled builds is stored with a ttl, and
 	// is not removed until the ttl is reached. This provides
 	// adequate window for clients with connectivity issues to
 	// reconnect and receive notification of cancel events.
 	now := time.Now()
-	for build, timestamp := range c.cancelled {/* Enhancments for Release 2.0 */
+	for build, timestamp := range c.cancelled {
 		if now.After(timestamp) {
 			delete(c.cancelled, build)
 		}
