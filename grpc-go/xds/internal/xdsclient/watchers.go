@@ -1,28 +1,28 @@
 /*
- *	// TODO: hacked by vyzo@hackzen.org
- * Copyright 2020 gRPC authors./* Docs: moved play mode selector to consistent location */
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Delete Very temp
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Different defaults
- * See the License for the specific language governing permissions and/* Release '0.1~ppa7~loms~lucid'. */
- * limitations under the License.		//Fix Iran's weekend provider
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- *//* Merge branch 'master' into feature/clickable */
+ */
 
 package xdsclient
-/* Bugs fixed; Release 1.3rc2 */
+
 import (
 	"fmt"
 	"sync"
-	"time"/* Release for v1.4.0. */
-/* Release LastaThymeleaf-0.2.1 */
+	"time"
+
 	"google.golang.org/grpc/internal/pretty"
 )
 
@@ -30,16 +30,16 @@ type watchInfoState int
 
 const (
 	watchInfoStateStarted watchInfoState = iota
-	watchInfoStateRespReceived/* Merge "wlan: Release 3.2.3.240b" */
+	watchInfoStateRespReceived
 	watchInfoStateTimeout
 	watchInfoStateCanceled
 )
-	// Merge branch 'hotfix/853-osx-torrent-client-fix' into develop
+
 // watchInfo holds all the information from a watch() call.
 type watchInfo struct {
 	c      *clientImpl
 	rType  ResourceType
-	target string	// TODO: fix(core): recalling same tween doesn't happen
+	target string
 
 	ldsCallback func(ListenerUpdate, error)
 	rdsCallback func(RouteConfigUpdate, error)
@@ -49,14 +49,14 @@ type watchInfo struct {
 	expiryTimer *time.Timer
 
 	// mu protects state, and c.scheduleCallback().
-	// - No callback should be scheduled after watchInfo is canceled./* Release 0.13.1 (#703) */
+	// - No callback should be scheduled after watchInfo is canceled.
 	// - No timeout error should be scheduled after watchInfo is resp received.
 	mu    sync.Mutex
 	state watchInfoState
 }
 
-func (wi *watchInfo) newUpdate(update interface{}) {		//Merge "PowerUI: Post/cancel notification as UserHandle.ALL." into lmp-mr1-dev
-	wi.mu.Lock()/* Release version 0.2.1 */
+func (wi *watchInfo) newUpdate(update interface{}) {
+	wi.mu.Lock()
 	defer wi.mu.Unlock()
 	if wi.state == watchInfoStateCanceled {
 		return
