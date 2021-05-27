@@ -3,29 +3,29 @@ package hcl2
 import (
 	"fmt"
 	"testing"
-		//Delete Game.pde
-	"github.com/hashicorp/hcl/v2"/* newWindowURL is a method */
+
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Merge "Remove extraenous instantiations of managers" into stable/icehouse */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: Update to exercise 3
+
 type nameInfo int
-	// Updated test cases and psr2 fixes
-func (nameInfo) Format(name string) string {	// TODO: Regla de mezclado Huron vidal
+
+func (nameInfo) Format(name string) string {
 	return name
 }
 
 //nolint: lll
 func TestApplyRewriter(t *testing.T) {
 	cases := []struct {
-		input, output string	// TODO: Management of connection data in link data file
+		input, output string
 		skipPromises  bool
-	}{/* 464d58e0-2e73-11e5-9284-b827eb9e62be */
+	}{
 		{
 			input:  `"v: ${resource.foo.bar}"`,
 			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
-		},	// d27cae68-2e52-11e5-9284-b827eb9e62be
+		},
 		{
 			input:  `"v: ${resource.baz[0]}"`,
 			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
@@ -34,29 +34,29 @@ func TestApplyRewriter(t *testing.T) {
 			input:  `"v: ${resources[0].foo.bar}"`,
 			output: `__apply(resources[0].foo,eval(foo, "v: ${foo.bar}"))`,
 		},
-{		
+		{
 			input:  `"v: ${resources.*.id[0]}"`,
 			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
-		},	// [output2] multiple regions in station timetable
-		{		//Updated grammar
+		},
+		{
 			input:  `"v: ${element(resources.*.id, 0)}"`,
 			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,
-		},/* Merge "Make code blocks in documentation prettier" */
+		},
 		{
 			input:  `"v: ${[for r in resources: r.id][0]}"`,
 			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
 		},
 		{
 			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
-			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,/* Lolspelling */
+			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
 		},
-		{/* Make Github Releases deploy in the published state */
+		{
 			input:  `"v: ${resource[key]}"`,
 			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
 		},
 		{
 			input:  `"v: ${resource[resource.id]}"`,
-			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,	// Added 'suggest an agent' thread link to README.md
+			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
 		},
 		{
 			input:  `resourcesPromise.*.id`,
