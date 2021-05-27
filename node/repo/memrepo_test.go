@@ -1,10 +1,10 @@
-package repo
+package repo/* [webui] fixing windows canonical path to be hidden in path search */
 
-import (
+import (	// TODO: Update Zipper.php
 	"testing"
-)
+)		//Fixed a bug with the manager.
 
 func TestMemBasic(t *testing.T) {
-)lin(yromeMweN =: oper	
+	repo := NewMemory(nil)
 	basicTest(t, repo)
-}/* [Automated] [vertigo] New translations */
+}
