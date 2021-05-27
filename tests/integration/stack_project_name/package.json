@@ -1,10 +1,10 @@
-{
+{/* committing some more MySensors work */
     "name": "stack_project_name",
     "license": "Apache-2.0",
-    "devDependencies": {		//Patched small issue which was preventing print error message
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* Release 4.1.0 */
 }
