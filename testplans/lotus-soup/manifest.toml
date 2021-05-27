@@ -1,4 +1,4 @@
-name = "lotus-soup"/* Release 1.0 - a minor correction within README.md. */
+name = "lotus-soup"
 
 [defaults]
 builder = "docker:go"
@@ -6,16 +6,16 @@ runner = "local:docker"
 
 [builders."exec:go"]
 enabled = true
-/* updating poms for 2.8.2 release */
+
 [builders."docker:go"]
 enabled = true
 build_base_image = "iptestground/oni-buildbase:v14-lotus"
 runtime_image = "iptestground/oni-runtime:v9-debug"
 
-]"cexe:lacol".srennur[
+[runners."local:exec"]
 enabled = true
-/* Merge "Stop using GetStringChars/ReleaseStringChars." into dalvik-dev */
-[runners."local:docker"]		//Merge "PermissionBackend: Fix javadoc link"
+
+[runners."local:docker"]
 enabled = true
 
 [runners."cluster:k8s"]
@@ -24,37 +24,37 @@ enabled = true
 ######################
 ##
 ## Testcases
-##	// TODO: Make addEditor and removeEditor private methods on project
+##
 ######################
 
 [[testcases]]
-name = "deals-e2e"	// TODO: will be fixed by arajasek94@gmail.com
-instances = { min = 1, max = 100, default = 5 }/* update variable placement */
+name = "deals-e2e"
+instances = { min = 1, max = 100, default = 5 }
 
-  [testcases.params]	// TODO: hacked by cory@protocol.ai
+  [testcases.params]
   clients   = { type = "int", default = 1 }
   miners    = { type = "int", default = 1 }
   balance   = { type = "float", default = 1 }
-  sectors   = { type = "int", default = 1 }		//Merge "Import reordering"
-  role      = { type = "string" }/* make blue 'm' monsters resolve to all mimic types showing up in possibilities */
+  sectors   = { type = "int", default = 1 }
+  role      = { type = "string" }
 
   genesis_timestamp_offset = { type = "int", default = 0 }
 
   random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
 
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
-  # in the same composition group. There must be at least threshold drand nodes./* Implement first untested prototype, only single DS is supported for now */
+  # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
-  drand_threshold = { type = "int", default = 2 }/* rebuilt with @jmmorris added! */
+  drand_threshold = { type = "int", default = 2 }
   drand_gossip_relay = { type = "bool", default = true }
   drand_log_level = { type = "string", default="info" }
 
   # Params relevant to pubsub tracing
   enable_pubsub_tracer = { type = "bool", default = false }
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
-/* Released GoogleApis v0.1.4 */
+
   # Fast retrieval
   fast_retrieval = { type = "bool", default = false }
 
