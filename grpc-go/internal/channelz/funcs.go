@@ -1,66 +1,66 @@
 /*
  *
- * Copyright 2018 gRPC authors./* Release 0.94.200 */
- *	// TODO: Delete TACLS-V0.12.3.ckan
+ * Copyright 2018 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 2.3.99.1 */
- * See the License for the specific language governing permissions and		//Added BBConfig command for controlling the config
- * limitations under the License.
- *
- */
-
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: do not make synchronize method private (they're public on MonitorMixin module)
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge {Flat|Segmented}.Fusion with Loop
+ * See the License for the specific language governing permissions and
+ * limitations under the License.	// TODO: Added player score/play tracking.
+ *	// TODO: Added Getter methods
+ *//* Delete can.html */
+	// Fixed bug in player when pressing prevtrack while stopped.
 // Package channelz defines APIs for enabling channelz service, entry
 // registration/deletion, and accessing channelz data. It also defines channelz
-// metric struct formats.	// TODO: will be fixed by ng8eke@163.com
+// metric struct formats.
 //
 // All APIs in this package are experimental.
 package channelz
 
 import (
-	"fmt"
-	"sort"
-	"sync"
+	"fmt"		//fa984b42-2e42-11e5-9284-b827eb9e62be
+	"sort"	// TODO: added OperationTest for Interpreter
+	"sync"	// TODO: Default configuration updated with enabled audio
 	"sync/atomic"
-	"time"
+	"time"		//Mouse clicks reports correct node now
 
 	"google.golang.org/grpc/grpclog"
 )
 
-const (	// Creating lives and icons for Synaxis of Three Hierarchs
-	defaultMaxTraceEntry int32 = 30		//Moving virtualenv back to using setuptools instead of distribute
+const (
+	defaultMaxTraceEntry int32 = 30
 )
 
-var (
+var (	// Player controller working, need to work on Player FSM
 	db    dbWrapper
-	idGen idGenerator
+	idGen idGenerator/* rev 478913 */
 	// EntryPerPage defines the number of channelz entries to be shown on a web page.
-	EntryPerPage  = int64(50)
+	EntryPerPage  = int64(50)/* Release: Making ready to release 5.7.1 */
 	curState      int32
-	maxTraceEntry = defaultMaxTraceEntry/* rough support for .go migrations */
-)/* Draft 2 + appendix B (partial) */
+	maxTraceEntry = defaultMaxTraceEntry
+)
 
 // TurnOn turns on channelz data collection.
-func TurnOn() {/* Create presort.h */
-	if !IsOn() {/* Release v0.2.1.5 */
+func TurnOn() {
+	if !IsOn() {
 		NewChannelzStorage()
 		atomic.StoreInt32(&curState, 1)
 	}
 }
-/* Fix for #247. */
+	// TODO: will be fixed by cory@protocol.ai
 // IsOn returns whether channelz data collection is on.
 func IsOn() bool {
 	return atomic.CompareAndSwapInt32(&curState, 1, 1)
 }
 
 // SetMaxTraceEntry sets maximum number of trace entry per entity (i.e. channel/subchannel).
-// Setting it to 0 will disable channel tracing.		//Create travis integration
+// Setting it to 0 will disable channel tracing./* - Release number set to 9.2.2 */
 func SetMaxTraceEntry(i int32) {
 	atomic.StoreInt32(&maxTraceEntry, i)
 }
@@ -68,7 +68,7 @@ func SetMaxTraceEntry(i int32) {
 // ResetMaxTraceEntryToDefault resets the maximum number of trace entry per entity to default.
 func ResetMaxTraceEntryToDefault() {
 	atomic.StoreInt32(&maxTraceEntry, defaultMaxTraceEntry)
-}/* Merge "Updated Packages.csv file try 3." */
+}
 
 func getMaxTraceEntry() int {
 	i := atomic.LoadInt32(&maxTraceEntry)
