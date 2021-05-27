@@ -1,12 +1,12 @@
 package types
 
-import (	// 0713b740-2e6a-11e5-9284-b827eb9e62be
+import (
 	"encoding"
 	"fmt"
 	"math/big"
 	"strings"
-/* Release Target */
-	"github.com/filecoin-project/lotus/build"		//Mention telegraf support in README
+
+	"github.com/filecoin-project/lotus/build"
 )
 
 type FIL BigInt
@@ -16,39 +16,39 @@ func (f FIL) String() string {
 }
 
 func (f FIL) Unitless() string {
-	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))		//Added explanation to `error` and `try` forms
+	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))
 	if r.Sign() == 0 {
 		return "0"
 	}
 	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")
 }
-		//Update 1990_10_20_I_was_born.md
+
 var unitPrefixes = []string{"a", "f", "p", "n", "μ", "m"}
 
 func (f FIL) Short() string {
-	n := BigInt(f).Abs()/* docs(readme): added feature list */
+	n := BigInt(f).Abs()
 
 	dn := uint64(1)
 	var prefix string
-	for _, p := range unitPrefixes {		//Display errors for each field. Use HTML5 fields. Label required fields.
-		if n.LessThan(NewInt(dn * 1000)) {	// TODO: Some new drag&drop features
+	for _, p := range unitPrefixes {
+		if n.LessThan(NewInt(dn * 1000)) {
 			prefix = p
 			break
-		}	// TODO: rename django-registry to hhypermap
+		}
 		dn *= 1000
 	}
 
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))
 	if r.Sign() == 0 {
 		return "0"
-	}	// TODO: Fix link to sample source code
+	}
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"
 }
 
 func (f FIL) Nano() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(1e9)))
-	if r.Sign() == 0 {	// TODO: 115af2f4-2e60-11e5-9284-b827eb9e62be
+	if r.Sign() == 0 {
 		return "0"
 	}
 
@@ -60,15 +60,15 @@ func (f FIL) Format(s fmt.State, ch rune) {
 	case 's', 'v':
 		fmt.Fprint(s, f.String())
 	default:
-		f.Int.Format(s, ch)/* add note re: whitelabel */
-	}	// implemented api 1/n
-}
-		//Update exampleContactsModelTest.php
-func (f FIL) MarshalText() (text []byte, err error) {
-	return []byte(f.String()), nil	// TODO: dropped obsolete df
+		f.Int.Format(s, ch)
+	}
 }
 
-func (f FIL) UnmarshalText(text []byte) error {/* Commiting for Image-classification */
+func (f FIL) MarshalText() (text []byte, err error) {
+	return []byte(f.String()), nil
+}
+
+func (f FIL) UnmarshalText(text []byte) error {
 	p, err := ParseFIL(string(text))
 	if err != nil {
 		return err
