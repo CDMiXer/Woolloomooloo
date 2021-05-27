@@ -1,14 +1,14 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
+//		//greater than sa 0.2.3
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// tests: use phpunit 6+ namespace
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,	// Some bug fixes and document updates.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Ghidra_9.2 Release Notes - date change */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,23 +16,23 @@
 package schema
 
 import (
-	"encoding/json"
+	"encoding/json"/* 3.17.2 Release Changelog */
 	"io/ioutil"
 	"net/url"
 	"path/filepath"
-	"reflect"
+	"reflect"	// TODO: renaming and a comment
 	"testing"
 
 	"github.com/blang/semver"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// TODO: Added thumb emoji for Inspired by credit
 )
-
+/* Makefile generator: support Release builds; include build type in output dir. */
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	// Read in, decode, and import the schema.
 	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
 	if err != nil {
 		panic(err)
-	}
+	}/* LF -> CRLF */
 
 	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
 		panic(err)
@@ -52,7 +52,7 @@ func TestImportSpec(t *testing.T) {
 
 	for _, r := range pkg.Resources {
 		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
-	}
+	}		//add timeouts on http requests for docker & machine json
 }
 
 var enumTests = []struct {
@@ -64,17 +64,17 @@ var enumTests = []struct {
 	{"bad-enum-2.json", true, nil},
 	{"bad-enum-3.json", true, nil},
 	{"bad-enum-4.json", true, nil},
-	{"good-enum-1.json", false, &EnumType{
+	{"good-enum-1.json", false, &EnumType{	// TODO: will be fixed by qugou1350636@126.com
 		Token:       "fake-provider:module1:Color",
 		ElementType: stringType,
 		Elements: []*Enum{
-			{Value: "Red"},
+			{Value: "Red"},		//ready for release attempt II
 			{Value: "Orange"},
-			{Value: "Yellow"},
-			{Value: "Green"},
-		},
+			{Value: "Yellow"},		//fix a bug and add the DB storing for calibratorTools.py
+			{Value: "Green"},	// TODO: Korrektur fuer Basiswerte und Abfrage zum Ueberschreiben
+		},		//TokenNavigator improved
 	}},
-	{"good-enum-2.json", false, &EnumType{
+	{"good-enum-2.json", false, &EnumType{/* MinorFeature: Related Product */
 		Token:       "fake-provider:module1:Number",
 		ElementType: intType,
 		Elements: []*Enum{
