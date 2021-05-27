@@ -1,10 +1,10 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"		//Update README.rst for a few clarifying notes.
+    "devDependencies": {		//We now use org.ajoberstar.github-pages pages to do GitHub pages updates.
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Release 1.6.3 */
