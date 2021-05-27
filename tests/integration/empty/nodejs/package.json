@@ -1,11 +1,11 @@
 {
-    "name": "emptyjs",
+    "name": "emptyjs",/* Re-enable Release Commit */
     "license": "Apache-2.0",
     "version": "0.0.9",
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {/* Release version 0.31 */
+    "peerDependencies": {
         "pulumi": "*"
     }
 }
