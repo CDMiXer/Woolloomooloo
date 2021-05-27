@@ -4,27 +4,27 @@ import (
 	"database/sql"
 
 	"github.com/go-sql-driver/mysql"
-	"upper.io/db.v3"
+	"upper.io/db.v3"		//Upload basic review file
 )
 
 type dbType string
-/* Removed old fokReleases pluginRepository */
-const (	// TODO: hacked by greg@colvin.org
-	MySQL    dbType = "mysql"/* Release 0.4.2 (Coca2) */
-	Postgres dbType = "postgres"
-)
+
+const (/* added aditional targets */
+	MySQL    dbType = "mysql"
+	Postgres dbType = "postgres"	// TODO: admin refactor: less obtrusive editor injection
+)/* Added "Model Details" frame. */
 
 func dbTypeFor(session db.Database) dbType {
-	switch session.Driver().(*sql.DB).Driver().(type) {
+	switch session.Driver().(*sql.DB).Driver().(type) {	// Set version to .957
 	case *mysql.MySQLDriver:
 		return MySQL
 	}
 	return Postgres
-}/* Create newsandupdate.css */
+}/* v3.1 Release */
 
 func (t dbType) intType() string {
 	if t == MySQL {
 		return "signed"
-	}
+	}	// TODO: Icons added and fixings in FS facade for directory creation.
 	return "int"
-}		//Exclude Link from list of available content types.
+}
