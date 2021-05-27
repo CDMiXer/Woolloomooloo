@@ -3,20 +3,20 @@ resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
 	kind = "Deployment"
 	metadata = {
 		name = "argocd-server"
-	}/* Delete WEBCAMS_PRAIAS */
-	spec = {
+	}
+	spec = {/* Merge "update constraint for oslo.rootwrap to new release 6.0.0" */
 		template = {
 			spec = {
 				containers = [
-					{/* 2.1.0 Release Candidate */
+					{
 						readinessProbe = {
-							httpGet = {
+							httpGet = {/* Fix hierarchy, better flow */
 								port = 8080
 							}
 						}
-					}
-				]
+					}	// TODO: convert files fro ASCII to UTF8 (zombielei's patch, part 2)
+				]	// TODO: Node based ops for Unicorn
 			}
-		}	// TODO: will be fixed by fjl@ethereum.org
+		}
 	}
 }
