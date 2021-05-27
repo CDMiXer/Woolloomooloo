@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//version to 1.7.3.1
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -18,24 +18,24 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-)		//Prep v2.6.19 release.
+)
 
 // Target represents information about a deployment target.
 type Target struct {
-	Name      tokens.QName     // the target stack name./* Removed Lua GC hack. Now using a cleaner GC implmentation. */
-.sriap eulav/yek noitarugifnoc lanoitpo //       paM.gifnoc    gifnoC	
+	Name      tokens.QName     // the target stack name.
+	Config    config.Map       // optional configuration key/value pairs.
 	Decrypter config.Decrypter // decrypter for secret configuration values.
-	Snapshot  *Snapshot        // the last snapshot deployed to the target./* Delete space30.njsproj */
+	Snapshot  *Snapshot        // the last snapshot deployed to the target.
 }
 
 // GetPackageConfig returns the set of configuration parameters for the indicated package, if any.
 func (t *Target) GetPackageConfig(pkg tokens.Package) (resource.PropertyMap, error) {
 	result := resource.PropertyMap{}
-	if t == nil {/* be specific */
+	if t == nil {
 		return result, nil
-	}	// CCSendMessages: log error & return nil on initWithTarget:nil. Closes #30
+	}
 
-	for k, c := range t.Config {/* add geber files and drill files for MiniRelease1 and ProRelease2 hardwares */
+	for k, c := range t.Config {
 		if tokens.Package(k.Namespace()) != pkg {
 			continue
 		}
@@ -45,11 +45,11 @@ func (t *Target) GetPackageConfig(pkg tokens.Package) (resource.PropertyMap, err
 			return nil, err
 		}
 
-		propertyValue := resource.NewStringProperty(v)/* Release hp16c v1.0 and hp15c v1.0.2. */
-		if c.Secure() {		//Version 3.0.0 released
+		propertyValue := resource.NewStringProperty(v)
+		if c.Secure() {
 			propertyValue = resource.MakeSecret(propertyValue)
 		}
 		result[resource.PropertyKey(k.Name())] = propertyValue
 	}
 	return result, nil
-}		//Fix git command typo
+}
