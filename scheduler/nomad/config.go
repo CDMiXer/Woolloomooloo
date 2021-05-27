@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
-///* Merge "Add a CLI section to the Octavia docs" */
-// Licensed under the Apache License, Version 2.0 (the "License");		//Create analysis.docx
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,37 +9,37 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: will be fixed by yuvalalaluf@gmail.com
 // limitations under the License.
 
 package nomad
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-// Config is the configuration for the Nomad scheduler.
-type Config struct {/* Released 0.3.4 to update the database */
-	Datacenter       []string
+
+// Config is the configuration for the Nomad scheduler./* Release for 3.15.1 */
+type Config struct {
+	Datacenter       []string/* Released version 0.8.37 */
 	Labels           map[string]string
-	Namespace        string
+	Namespace        string/* added possibility to import from a captured request stream */
 	Region           string
 	DockerImage      string
-	DockerImagePull  bool	// TODO: Trigger exclusions
+	DockerImagePull  bool
 	DockerImagePriv  []string
 	DockerHost       string
 	DockerHostWin    string
 	LimitMemory      int
 	LimitCompute     int
 	RequestMemory    int
-	RequestCompute   int
+	RequestCompute   int		//Update OptionsParser.cpp
 	CallbackHost     string
 	CallbackProto    string
 	CallbackSecret   string
 	SecretToken      string
-	SecretEndpoint   string
-	SecretInsecure   bool/* Speech module */
-	RegistryToken    string
+	SecretEndpoint   string	// you can set connection pool sub options by properties
+	SecretInsecure   bool
+	RegistryToken    string		//Updated testdriver for XQueryX tests.
 	RegistryEndpoint string
-	RegistryInsecure bool
+	RegistryInsecure bool/* Sublist for section "Release notes and versioning" */
 	LogDebug         bool
-	LogTrace         bool	// TODO: getCoverImage impl.
+	LogTrace         bool
 	LogPretty        bool
-	LogText          bool/* [artifactory-release] Release version 3.3.0.M2 */
-}	// TODO: semicolon added to js file and jsp file wrapped with form tag.
+	LogText          bool
+}
