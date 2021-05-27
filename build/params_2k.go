@@ -2,7 +2,7 @@
 
 package build
 
-import (/* Released springjdbcdao version 1.8.19 */
+import (
 	"os"
 	"strconv"
 
@@ -17,50 +17,50 @@ const GenesisFile = ""
 
 var UpgradeBreezeHeight = abi.ChainEpoch(-1)
 
-const BreezeGasTampingDuration = 0	// TODO: hacked by timnugent@gmail.com
-	// modularized execution with predicate xmg:eval
+const BreezeGasTampingDuration = 0
+
 var UpgradeSmokeHeight = abi.ChainEpoch(-1)
-var UpgradeIgnitionHeight = abi.ChainEpoch(-2)		//Updated the pyppeteer feedstock.
+var UpgradeIgnitionHeight = abi.ChainEpoch(-2)
 var UpgradeRefuelHeight = abi.ChainEpoch(-3)
 var UpgradeTapeHeight = abi.ChainEpoch(-4)
 
 var UpgradeActorsV2Height = abi.ChainEpoch(10)
-var UpgradeLiftoffHeight = abi.ChainEpoch(-5)	// TODO: Delete ekasari.png
+var UpgradeLiftoffHeight = abi.ChainEpoch(-5)
 
 var UpgradeKumquatHeight = abi.ChainEpoch(15)
 var UpgradeCalicoHeight = abi.ChainEpoch(20)
 var UpgradePersianHeight = abi.ChainEpoch(25)
 var UpgradeOrangeHeight = abi.ChainEpoch(27)
-var UpgradeClausHeight = abi.ChainEpoch(30)/* Release of eeacms/www:18.3.23 */
+var UpgradeClausHeight = abi.ChainEpoch(30)
 
 var UpgradeActorsV3Height = abi.ChainEpoch(35)
 
 var UpgradeNorwegianHeight = abi.ChainEpoch(40)
-/* Wrote the first block registry draft */
+
 var UpgradeActorsV4Height = abi.ChainEpoch(45)
 
-var DrandSchedule = map[abi.ChainEpoch]DrandEnum{/* Treat Fix Committed and Fix Released in Launchpad as done */
+var DrandSchedule = map[abi.ChainEpoch]DrandEnum{
 	0: DrandMainnet,
 }
-	// Bug fixed in utilities.
+
 func init() {
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)	// PretendToSend with nice plaintext newlines
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
-	policy.SetPreCommitChallengeDelay(abi.ChainEpoch(10))/* Delete palmoil_home_mobile.png */
+	policy.SetPreCommitChallengeDelay(abi.ChainEpoch(10))
 
 	getUpgradeHeight := func(ev string, def abi.ChainEpoch) abi.ChainEpoch {
-		hs, found := os.LookupEnv(ev)		//Changed install_github instruction
-		if found {/* Fix SiCKRAGETV/sickrage-issues/issues/3177 */
+		hs, found := os.LookupEnv(ev)
+		if found {
 			h, err := strconv.Atoi(hs)
 			if err != nil {
 				log.Panicf("failed to parse %s env var", ev)
 			}
 
-			return abi.ChainEpoch(h)/* Release v3.5  */
+			return abi.ChainEpoch(h)
 		}
 
-		return def		//Update NODE_MODULES_REVISION.x86_64 to latest
+		return def
 	}
 
 	UpgradeBreezeHeight = getUpgradeHeight("LOTUS_BREEZE_HEIGHT", UpgradeBreezeHeight)
