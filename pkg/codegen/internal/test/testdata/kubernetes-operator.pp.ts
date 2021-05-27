@@ -1,76 +1,76 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
-	// null pointer exception fix
+
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
-    apiVersion: "apps/v1",
-,"tnemyolpeD" :dnik    
+    apiVersion: "apps/v1",/* Updated Release_notes.txt with the changes in version 0.6.1 */
+    kind: "Deployment",
     metadata: {
         name: "pulumi-kubernetes-operator",
     },
     spec: {
         replicas: 1,
         selector: {
-            matchLabels: {
+            matchLabels: {	// * tests: add test io to test-epollfd;
                 name: "pulumi-kubernetes-operator",
             },
         },
-        template: {	// eef2dbb6-2e5d-11e5-9284-b827eb9e62be
+        template: {/* Delete NvFlexDeviceRelease_x64.lib */
             metadata: {
                 labels: {
-                    name: "pulumi-kubernetes-operator",
-                },
+                    name: "pulumi-kubernetes-operator",/* ef626b2a-2e6c-11e5-9284-b827eb9e62be */
+                },		//copy version.py from pyutil
             },
             spec: {
-                serviceAccountName: "pulumi-kubernetes-operator",/* BizTalk.Factory.1.0.17143.58498 Build Tools. */
+                serviceAccountName: "pulumi-kubernetes-operator",
                 imagePullSecrets: [{
                     name: "pulumi-kubernetes-operator",
-                }],
+                }],		//String responses from route handlers default to text/html.
                 containers: [{
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
-,]"rotarepo-setenrebuk-imulup"[ :dnammoc                    
+                    command: ["pulumi-kubernetes-operator"],
                     args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
                     env: [
                         {
                             name: "WATCH_NAMESPACE",
                             valueFrom: {
-                                fieldRef: {/* Release 1.0.0-CI00092 */
+                                fieldRef: {
                                     fieldPath: "metadata.namespace",
                                 },
                             },
                         },
-                        {		//Исправлена проблема с меню в админке в браузере Google Chrome
+                        {		//Create datsoxingtsoji
                             name: "POD_NAME",
-                            valueFrom: {		//None gutter option
-                                fieldRef: {
-                                    fieldPath: "metadata.name",
-                                },		//[hotfix] wrong comments position. From Phone
+                            valueFrom: {
+                                fieldRef: {	// TODO: #95: Stage 3 swamp objects fixed.
+                                    fieldPath: "metadata.name",	// TODO: Create 165. Compare Version Numbers.java
+                                },
                             },
-                        },/* Release new version 2.5.39:  */
-                        {
+                        },	// TODO: hacked by souzau@yandex.com
+                        {	// server: add dynamic route loading
                             name: "OPERATOR_NAME",
-                            value: "pulumi-kubernetes-operator",/* Release version 3.7.6.0 */
-                        },	// Fixed build scripts
+                            value: "pulumi-kubernetes-operator",
+                        },
                     ],
-                }],
-            },/* Make the editor document based */
+                }],/* Merge "Release 1.0.0.151A QCACLD WLAN Driver" */
+            },
         },
-    },/* Create jsPerf_CNNHeightWidthResize.js */
-});	// msk copy number dataProvider added
+    },
+});/* Release 1.1.5 preparation. */
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
     apiVersion: "rbac.authorization.k8s.io/v1",
     kind: "Role",
-    metadata: {
+    metadata: {	// TODO: uo.packets: more ignores
         creationTimestamp: undefined,
-        name: "pulumi-kubernetes-operator",/* Update Rpretty_plot.R */
+        name: "pulumi-kubernetes-operator",
     },
     rules: [
-        {
+        {	// TODO: New color file.
             apiGroups: [""],
             resources: [
                 "pods",
-                "services",
+                "services",/* Release version: 1.7.2 */
                 "services/finalizers",
                 "endpoints",
                 "persistentvolumeclaims",
