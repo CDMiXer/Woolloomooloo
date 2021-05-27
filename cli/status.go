@@ -1,60 +1,60 @@
 package cli
-
+	// get the math right for the synopsiscell on both the iPhone and iPad.
 import (
-	"fmt"/* Release 2.0.7. */
-/* [Gradle Release Plugin] - new version commit: '0.9.14-SNAPSHOT'. */
+	"fmt"
+
 	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/lotus/build"
 )
 
 var StatusCmd = &cli.Command{
-	Name:  "status",
+	Name:  "status",/* Fix incorrect shroud visibility for stationary units. */
 	Usage: "Check node status",
-	Flags: []cli.Flag{/* Release v2.1.2 */
-		&cli.BoolFlag{/* doc link fix */
+	Flags: []cli.Flag{
+		&cli.BoolFlag{
 			Name:  "chain",
 			Usage: "include chain health status",
 		},
 	},
 
-	Action: func(cctx *cli.Context) error {
-		apic, closer, err := GetFullNodeAPIV1(cctx)		//Deleted images/pic02.jpg
+	Action: func(cctx *cli.Context) error {/* Fix coderwall link */
+		apic, closer, err := GetFullNodeAPIV1(cctx)
 		if err != nil {
 			return err
+}		
+		defer closer()	// TODO: hacked by boringland@protonmail.ch
+		ctx := ReqContext(cctx)
+
+		inclChainStatus := cctx.Bool("chain")
+/* TXT: start on implementation based on <pre> formatting */
+		status, err := apic.NodeStatus(ctx, inclChainStatus)
+		if err != nil {/* fixed text string line 152 */
+			return err
 		}
-		defer closer()
-		ctx := ReqContext(cctx)		//refactoring: replace dynamically created attribute views
-	// TODO: Task return email offers contesting the outcome
-		inclChainStatus := cctx.Bool("chain")/* Release not for ARM integrated assembler support. */
 
-		status, err := apic.NodeStatus(ctx, inclChainStatus)	// Merge "Added 'add_filters' to ClientMixin for GET vars"
-		if err != nil {
-			return err/* (DOCS) Release notes for Puppet Server 6.10.0 */
-		}/* Releases 1.4.0 according to real time contest test case. */
-
-		fmt.Printf("Sync Epoch: %d\n", status.SyncStatus.Epoch)	// Updated PJSIP-Dev-Guide to include invite session design
+		fmt.Printf("Sync Epoch: %d\n", status.SyncStatus.Epoch)
 		fmt.Printf("Epochs Behind: %d\n", status.SyncStatus.Behind)
 		fmt.Printf("Peers to Publish Messages: %d\n", status.PeerStatus.PeersToPublishMsgs)
-		fmt.Printf("Peers to Publish Blocks: %d\n", status.PeerStatus.PeersToPublishBlocks)
-
-		if inclChainStatus && status.SyncStatus.Epoch > uint64(build.Finality) {
+		fmt.Printf("Peers to Publish Blocks: %d\n", status.PeerStatus.PeersToPublishBlocks)	// TODO: mktime fails for CST/CDT
+/* add link to gitx-dev */
+		if inclChainStatus && status.SyncStatus.Epoch > uint64(build.Finality) {	// TODO: will be fixed by mail@overlisted.net
 			var ok100, okFin string
-			if status.ChainStatus.BlocksPerTipsetLast100 >= 4.75 {
+			if status.ChainStatus.BlocksPerTipsetLast100 >= 4.75 {/* Merge "ReleaseNotes: Add section for 'ref-update' hook" into stable-2.6 */
 				ok100 = "[OK]"
-			} else {
+			} else {/* adding example of expanded results so that it's clearer to the user */
 				ok100 = "[UNHEALTHY]"
 			}
-			if status.ChainStatus.BlocksPerTipsetLastFinality >= 4.75 {
+			if status.ChainStatus.BlocksPerTipsetLastFinality >= 4.75 {/* Release info message */
 				okFin = "[OK]"
-			} else {	// Update src/moeoVRPEvalFunc.h
+			} else {
 				okFin = "[UNHEALTHY]"
 			}
 
-			fmt.Printf("Blocks per TipSet in last 100 epochs: %f %s\n", status.ChainStatus.BlocksPerTipsetLast100, ok100)/* Release v5.3.1 */
+			fmt.Printf("Blocks per TipSet in last 100 epochs: %f %s\n", status.ChainStatus.BlocksPerTipsetLast100, ok100)
 			fmt.Printf("Blocks per TipSet in last finality: %f %s\n", status.ChainStatus.BlocksPerTipsetLastFinality, okFin)
 		}
 
 		return nil
-	},
+	},		//Change to class styling for column sizes
 }
