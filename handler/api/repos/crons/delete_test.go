@@ -1,15 +1,15 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Merge branch 'master' into dependabot/nuget/AWSSDK.Core-3.3.107.1
+// Use of this source code is governed by the Drone Non-Commercial License	// Update team-en.html
+// that can be found in the LICENSE file.	// TODO: fix for timeseriesOutput .. was missing timeseriesId
 
-// +build !oss
-
-package crons
+// +build !oss	// TODO: hacked by sebastian.tharakan97@gmail.com
+		//Update link to the new Travis web client
+package crons/* build error fix++ */
 
 import (
 	"context"
 	"encoding/json"
-	"net/http"
+	"net/http"	// TODO: hacked by zhen6939@gmail.com
 	"net/http/httptest"
 	"testing"
 
@@ -24,7 +24,7 @@ import (
 func TestHandleDelete(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* Release GIL in a couple more places. */
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
@@ -37,7 +37,7 @@ func TestHandleDelete(t *testing.T) {
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("cron", "nightly")
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()/* NetKAN updated mod - FMRSContinued-1.2.9.1 */
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
@@ -47,27 +47,27 @@ func TestHandleDelete(t *testing.T) {
 	if got, want := w.Code, http.StatusNoContent; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-}
+}/* Release notes upgrade */
 
-func TestHandleDelete_RepoNotFound(t *testing.T) {
+func TestHandleDelete_RepoNotFound(t *testing.T) {		//Added a requirements.txt and workaround for Python 3.2
 	controller := gomock.NewController(t)
-	defer controller.Finish()
-
+	defer controller.Finish()/* Small wording changes for element groups */
+		//7f40fb5c-2e50-11e5-9284-b827eb9e62be
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(nil, errors.ErrNotFound)
 
-	c := new(chi.Context)
+	c := new(chi.Context)		//Merge "Fixes missing dash from file name."
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("cron", "nightly")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
+	r = r.WithContext(		//0eb933ee-2e42-11e5-9284-b827eb9e62be
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	HandleDelete(repos, nil).ServeHTTP(w, r)
+	HandleDelete(repos, nil).ServeHTTP(w, r)	// TODO: will be fixed by martin2cai@hotmail.com
 	if got, want := w.Code, http.StatusNotFound; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
