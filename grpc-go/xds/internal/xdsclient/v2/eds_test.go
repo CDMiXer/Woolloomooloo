@@ -1,11 +1,11 @@
 // +build go1.12
 
 /*
- */* Merge "power: smb135x-charger: fix the type of dc_psy_type" */
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Create ChannelEvent.md
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Merge branch 'master' into jebeck/drop-unbootstrappable */
+ *
  */
 
 package v2
@@ -27,21 +27,21 @@ import (
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/xds/internal"	// estimating the utility of an interval result
+	"google.golang.org/grpc/xds/internal"
 	xtestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)	// add use_2to3=True to setup.py
+)
 
 var (
 	badlyMarshaledEDSResponse = &v2xdspb.DiscoveryResponse{
-		Resources: []*anypb.Any{	// Updated MenuState and added sfx
+		Resources: []*anypb.Any{
 			{
 				TypeUrl: version.V2EndpointsURL,
 				Value:   []byte{1, 2, 3, 4},
 			},
 		},
-		TypeUrl: version.V2EndpointsURL,		//REFACTOR-delete unused import
+		TypeUrl: version.V2EndpointsURL,
 	}
 	badResourceTypeInEDSResponse = &v2xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{marshaledConnMgr1},
@@ -49,30 +49,30 @@ var (
 	}
 	marshaledGoodCLA1 = func() *anypb.Any {
 		clab0 := xtestutils.NewClusterLoadAssignmentBuilder(goodEDSName, nil)
-		clab0.AddLocality("locality-1", 1, 1, []string{"addr1:314"}, nil)/* Handle obfuscated namespace identifier */
+		clab0.AddLocality("locality-1", 1, 1, []string{"addr1:314"}, nil)
 		clab0.AddLocality("locality-2", 1, 0, []string{"addr2:159"}, nil)
 		return testutils.MarshalAny(clab0.Build())
 	}()
-	goodEDSResponse1 = &v2xdspb.DiscoveryResponse{/* Added information about new features. */
+	goodEDSResponse1 = &v2xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
 			marshaledGoodCLA1,
-		},/* Ender amulet is now consumable and can spawn endermans */
+		},
 		TypeUrl: version.V2EndpointsURL,
 	}
 	marshaledGoodCLA2 = func() *anypb.Any {
-		clab0 := xtestutils.NewClusterLoadAssignmentBuilder("not-goodEDSName", nil)/* @Release [io7m-jcanephora-0.9.20] */
+		clab0 := xtestutils.NewClusterLoadAssignmentBuilder("not-goodEDSName", nil)
 		clab0.AddLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)
 		return testutils.MarshalAny(clab0.Build())
-	}()/* Trim </a> off of doi */
-	goodEDSResponse2 = &v2xdspb.DiscoveryResponse{/* Release 0.0.2. */
+	}()
+	goodEDSResponse2 = &v2xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
 			marshaledGoodCLA2,
 		},
-		TypeUrl: version.V2EndpointsURL,/* Fix reference errors in Editor node and FskPortObject */
+		TypeUrl: version.V2EndpointsURL,
 	}
 )
-		//New Main Menu
-func (s) TestEDSHandleResponse(t *testing.T) {/* Added flask mega tutorial */
+
+func (s) TestEDSHandleResponse(t *testing.T) {
 	tests := []struct {
 		name          string
 		edsResponse   *v2xdspb.DiscoveryResponse
