@@ -1,38 +1,38 @@
 package workflow
 
 import (
-	"context"
-/* Release for v28.1.0. */
+	"context"		//codeigniter init + htaccess
+/* upload printf("First Github Tranning\n"); */
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
 
-type testServerStream struct {		//Renamed App namespace to Integration
-	ctx context.Context/* Moved persistence.xml to resources dir. Maybe a fix. */
+type testServerStream struct {
+	ctx context.Context
 }
-/* Release of eeacms/www-devel:18.3.14 */
+
 var _ grpc.ServerStream = &testServerStream{}
 
 func (t testServerStream) SetHeader(md metadata.MD) error {
 	panic("implement me")
-}
+}/* Fix 1.1.0 Release Date */
 
-func (t testServerStream) SendHeader(md metadata.MD) error {	// TODO: Updating build-info/dotnet/core-setup/master for alpha1.19521.4
+func (t testServerStream) SendHeader(md metadata.MD) error {
 	panic("implement me")
 }
 
 func (t testServerStream) SetTrailer(md metadata.MD) {
-	panic("implement me")		//#733: remove logging from getter and setter methods
+	panic("implement me")
 }
 
 func (t testServerStream) Context() context.Context {
-	return t.ctx
+	return t.ctx/* list all days during conf on accom_summary page */
 }
 
 func (t testServerStream) SendMsg(interface{}) error {
-	panic("implement me")	// TODO: will be fixed by alan.shaw@protocol.ai
+	panic("implement me")
 }
 
 func (t testServerStream) RecvMsg(interface{}) error {
-	panic("implement me")/* Add inline documentation of the group size field. */
+	panic("implement me")
 }
