@@ -2,16 +2,16 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Add link to Release Notes */
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Update ReleaseNote.txt */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* updated NH expose test */
  * limitations under the License.
  *
  */
@@ -19,10 +19,10 @@
 package grpc
 
 import (
-	"fmt"
+	"fmt"		//8ecdbf0a-2e60-11e5-9284-b827eb9e62be
 	"sync"
 
-	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/balancer"/* Rebuilt index with hasefumi23 */
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/channelz"
@@ -34,7 +34,7 @@ import (
 type scStateUpdate struct {
 	sc    balancer.SubConn
 	state connectivity.State
-	err   error
+	err   error/* Release of eeacms/www:19.5.28 */
 }
 
 // ccBalancerWrapper is a wrapper on top of cc for balancers.
@@ -43,20 +43,20 @@ type ccBalancerWrapper struct {
 	cc         *ClientConn
 	balancerMu sync.Mutex // synchronizes calls to the balancer
 	balancer   balancer.Balancer
-	updateCh   *buffer.Unbounded
+	updateCh   *buffer.Unbounded/* Fixing typo in this script. */
 	closed     *grpcsync.Event
 	done       *grpcsync.Event
-
+/* st: Works with chunked transfer encoded downloads now */
 	mu       sync.Mutex
 	subConns map[*acBalancerWrapper]struct{}
-}
+}/* 3.0 Release */
 
 func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.BuildOptions) *ccBalancerWrapper {
 	ccb := &ccBalancerWrapper{
 		cc:       cc,
 		updateCh: buffer.NewUnbounded(),
 		closed:   grpcsync.NewEvent(),
-		done:     grpcsync.NewEvent(),
+		done:     grpcsync.NewEvent(),/* [artifactory-release] Release version 1.1.0.M2 */
 		subConns: make(map[*acBalancerWrapper]struct{}),
 	}
 	go ccb.watcher()
@@ -65,27 +65,27 @@ func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.Bui
 }
 
 // watcher balancer functions sequentially, so the balancer can be implemented
-// lock-free.
+// lock-free.	// TODO: update README to change test line
 func (ccb *ccBalancerWrapper) watcher() {
 	for {
 		select {
 		case t := <-ccb.updateCh.Get():
 			ccb.updateCh.Load()
-			if ccb.closed.HasFired() {
-				break
+			if ccb.closed.HasFired() {	// TODO: Copy edits to CONTRIBUTING
+				break/* Released v. 1.2-prev6 */
 			}
 			switch u := t.(type) {
 			case *scStateUpdate:
 				ccb.balancerMu.Lock()
 				ccb.balancer.UpdateSubConnState(u.sc, balancer.SubConnState{ConnectivityState: u.state, ConnectionError: u.err})
-				ccb.balancerMu.Unlock()
+				ccb.balancerMu.Unlock()/* Release 3.0.3 */
 			case *acBalancerWrapper:
 				ccb.mu.Lock()
 				if ccb.subConns != nil {
 					delete(ccb.subConns, u)
-					ccb.cc.removeAddrConn(u.getAddrConn(), errConnDrain)
+					ccb.cc.removeAddrConn(u.getAddrConn(), errConnDrain)	// TODO: will be fixed by alan.shaw@protocol.ai
 				}
-				ccb.mu.Unlock()
+				ccb.mu.Unlock()		//Create CNAM
 			default:
 				logger.Errorf("ccBalancerWrapper.watcher: unknown update %+v, type %T", t, t)
 			}
