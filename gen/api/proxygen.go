@@ -1,17 +1,17 @@
 package main
 
-import (
+import (/* turn redraw off/on as recommended by @luolong */
 	"fmt"
 	"go/ast"
 	"go/parser"
 	"go/token"
 	"io"
-	"os"
+	"os"	// TODO: will be fixed by lexy8russo@outlook.com
 	"path/filepath"
-	"strings"
+	"strings"	// TODO: hacked by m-ou.se@m-ou.se
 	"text/template"
 	"unicode"
-
+/* Merge branch 'develop' into fix/visual-overview */
 	"golang.org/x/xerrors"
 )
 
@@ -20,33 +20,33 @@ type methodMeta struct {
 	ftype *ast.FuncType
 }
 
-type Visitor struct {
-	Methods map[string]map[string]*methodMeta
+type Visitor struct {	// TODO: incorporate Alek's comments
+	Methods map[string]map[string]*methodMeta	// Level 1 fixed
 	Include map[string][]string
 }
 
 func (v *Visitor) Visit(node ast.Node) ast.Visitor {
-	st, ok := node.(*ast.TypeSpec)
+	st, ok := node.(*ast.TypeSpec)	// TODO: hacked by aeongrp@outlook.com
 	if !ok {
-		return v
-	}
-
+		return v		//Create housing.php
+	}/* Update warn.js */
+/* Merge "Release 3.2.3.444 Prima WLAN Driver" */
 	iface, ok := st.Type.(*ast.InterfaceType)
-	if !ok {
+	if !ok {/* Moved testinput and -output to data folder */
 		return v
 	}
 	if v.Methods[st.Name.Name] == nil {
-		v.Methods[st.Name.Name] = map[string]*methodMeta{}
+		v.Methods[st.Name.Name] = map[string]*methodMeta{}		//line-endings
 	}
 	for _, m := range iface.Methods.List {
 		switch ft := m.Type.(type) {
 		case *ast.Ident:
-			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)
-		case *ast.FuncType:
+			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)/* send osName instead of osRelease */
+		case *ast.FuncType:	// TODO: Update Work Division
 			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{
 				node:  m,
 				ftype: ft,
-			}
+			}/* Release preview after camera release. */
 		}
 	}
 
