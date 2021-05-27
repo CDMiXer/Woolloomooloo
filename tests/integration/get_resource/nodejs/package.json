@@ -1,13 +1,13 @@
 {
-    "name": "get_resource",
+    "name": "get_resource",/* Release version 2.2.4.RELEASE */
     "version": "0.0.1",
     "devDependencies": {
         "typescript": "^3.7.3"
-    },/* a0abc5da-2e49-11e5-9284-b827eb9e62be */
-    "peerDependencies": {	// remover gerente ok.
-        "pulumi": "latest"	// TODO: Next State 7
     },
+    "peerDependencies": {
+        "pulumi": "latest"/* Removed pdb from Release build */
+    },/* Release version 4.0.1.13. */
     "dependencies": {
-        "@types/node": "^12.0.0"/* Released 0.7.5 */
-    }/* Merge remote-tracking branch 'origin/AddingReports' into AddingReports */
+        "@types/node": "^12.0.0"
+}    
 }
