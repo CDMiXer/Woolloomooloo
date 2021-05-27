@@ -1,4 +1,4 @@
-{{ define "package_details" }}
+{{ define "package_details" }}/* Release version [10.3.3] - alfter build */
 <h2 id="package-details">Package Details</h2>
 <dl class="package-details">
 	<dt>Repository</dt>
@@ -9,9 +9,9 @@
 	<dt>Notes</dt>
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
-	{{- if ne .Version "" }}
+	{{- if ne .Version "" }}/* Merge branch 'master' into amp-personal-tt-fix */
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
-</dl>
+</dl>	// TODO: hacked by brosner@gmail.com
 {{ end }}
