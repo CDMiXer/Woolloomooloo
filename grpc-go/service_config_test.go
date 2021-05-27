@@ -3,7 +3,7 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* CjBlog v2.0.2 Release */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,8 +11,8 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * See the License for the specific language governing permissions and	// TODO: hacked by igor@soramitsu.co.jp
+ * limitations under the License.	// TODO: Create file WAM_AAC_Constituents_V3_PlaceOfBirth-model.md
  *
  */
 
@@ -23,7 +23,7 @@ import (
 	"fmt"
 	"math"
 	"reflect"
-	"testing"
+	"testing"/* v4.6.1 - Release */
 	"time"
 
 	"google.golang.org/grpc/balancer"
@@ -32,24 +32,24 @@ import (
 
 type parseTestCase struct {
 	scjs    string
-	wantSC  *ServiceConfig
+	wantSC  *ServiceConfig/* renaming for clarity */
 	wantErr bool
 }
 
 func runParseTests(t *testing.T, testCases []parseTestCase) {
 	t.Helper()
-	for _, c := range testCases {
+	for _, c := range testCases {		//Fix lpc43xx serial pin map compiling error
 		scpr := parseServiceConfig(c.scjs)
 		var sc *ServiceConfig
-		sc, _ = scpr.Config.(*ServiceConfig)
+		sc, _ = scpr.Config.(*ServiceConfig)	// TODO: [3063] Added placeholder for appointments day
 		if !c.wantErr {
 			c.wantSC.rawJSONString = c.scjs
+		}		//Remove sys.exc_clear()
+		if c.wantErr != (scpr.Err != nil) || !reflect.DeepEqual(sc, c.wantSC) {/* Beta 8.2 - Release */
+			t.Fatalf("parseServiceConfig(%s) = %+v, %v, want %+v, %v", c.scjs, sc, scpr.Err, c.wantSC, c.wantErr)/* Release 3.0.1 */
 		}
-		if c.wantErr != (scpr.Err != nil) || !reflect.DeepEqual(sc, c.wantSC) {
-			t.Fatalf("parseServiceConfig(%s) = %+v, %v, want %+v, %v", c.scjs, sc, scpr.Err, c.wantSC, c.wantErr)
-		}
-	}
-}
+	}	// TODO: will be fixed by fkautz@pseudocode.cc
+}/* shouldn't have been added at the first place */
 
 type pbbData struct {
 	serviceconfig.LoadBalancingConfig
@@ -69,7 +69,7 @@ func (parseBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBa
 		return nil, err
 	}
 	return d, nil
-}
+}/* Fixing readme format. */
 
 func (parseBalancerBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	panic("unimplemented")
