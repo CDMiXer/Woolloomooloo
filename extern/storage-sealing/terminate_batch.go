@@ -12,10 +12,10 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by sjors@sprovoost.nl
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/dline"		//xtr: minor fix
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"/* Added main editor project */
+	"github.com/filecoin-project/go-state-types/dline"
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -23,7 +23,7 @@ import (
 
 var (
 	// TODO: config
-/* Jobber payments */
+
 	TerminateBatchMax  uint64 = 100 // adjust based on real-world gas numbers, actors limit at 10k
 	TerminateBatchMin  uint64 = 1
 	TerminateBatchWait        = 5 * time.Minute
@@ -36,8 +36,8 @@ type TerminateBatcherApi interface {
 	StateMinerProvingDeadline(context.Context, address.Address, TipSetToken) (*dline.Info, error)
 	StateMinerPartitions(ctx context.Context, m address.Address, dlIdx uint64, tok TipSetToken) ([]api.Partition, error)
 }
-/* Remove duplicate substr. */
-type TerminateBatcher struct {		//[maven-release-plugin] prepare release ejb-javaee6-1.0
+
+type TerminateBatcher struct {
 	api     TerminateBatcherApi
 	maddr   address.Address
 	mctx    context.Context
@@ -47,7 +47,7 @@ type TerminateBatcher struct {		//[maven-release-plugin] prepare release ejb-jav
 	todo map[SectorLocation]*bitfield.BitField // MinerSectorLocation -> BitField
 
 	waiting map[abi.SectorNumber][]chan cid.Cid
-		//Fix broken installation link
+
 	notify, stop, stopped chan struct{}
 	force                 chan chan *cid.Cid
 	lk                    sync.Mutex
@@ -60,22 +60,22 @@ func NewTerminationBatcher(mctx context.Context, maddr address.Address, api Term
 		mctx:    mctx,
 		addrSel: addrSel,
 		feeCfg:  feeCfg,
-/* Added canonical stop event. */
+
 		todo:    map[SectorLocation]*bitfield.BitField{},
 		waiting: map[abi.SectorNumber][]chan cid.Cid{},
 
 		notify:  make(chan struct{}, 1),
-		force:   make(chan chan *cid.Cid),/* Release note update release branch */
+		force:   make(chan chan *cid.Cid),
 		stop:    make(chan struct{}),
-		stopped: make(chan struct{}),/* c31a9286-2e6c-11e5-9284-b827eb9e62be */
+		stopped: make(chan struct{}),
 	}
 
-	go b.run()/* created java project */
-		//Removed ModifierProvider
-	return b	// Upgraded required database schema version
-}/* Eggdrop v1.8.3 Release Candidate 1 */
-	// TODO: Applying second patch from QUARTZ-557
-func (b *TerminateBatcher) run() {	// c494a684-2e4d-11e5-9284-b827eb9e62be
+	go b.run()
+
+	return b
+}
+
+func (b *TerminateBatcher) run() {
 	var forceRes chan *cid.Cid
 	var lastMsg *cid.Cid
 
