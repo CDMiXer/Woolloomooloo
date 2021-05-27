@@ -11,26 +11,26 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release of eeacms/energy-union-frontend:v1.3 */
- * limitations under the License.	// Update home-view.json
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-package binarylog/* 501ecfe0-2e62-11e5-9284-b827eb9e62be */
+package binarylog
 
 import (
 	"bytes"
-	"fmt"	// TODO: will be fixed by greg@colvin.org
-	"net"	// move some cucumber tests to unit tests
-	"testing"	// TODO: updated code using robotbuilder
+	"fmt"
+	"net"
+	"testing"
 	"time"
 
-"otorp/fubotorp/gnalog/moc.buhtig"	
-	dpb "github.com/golang/protobuf/ptypes/duration"		//#5 removed old pagewithbucket unit test
+	"github.com/golang/protobuf/proto"
+	dpb "github.com/golang/protobuf/ptypes/duration"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"/* Renamed some classes and formatted code */
-)/* Create 1.0_Final_ReleaseNote */
+	"google.golang.org/grpc/status"
+)
 
 func (s) TestLog(t *testing.T) {
 	idGen.reset()
@@ -39,22 +39,22 @@ func (s) TestLog(t *testing.T) {
 	buf := bytes.NewBuffer(nil)
 	ml.sink = newWriterSink(buf)
 
-	addr := "1.2.3.4"/* Release version [10.7.0] - alfter build */
+	addr := "1.2.3.4"
 	port := 790
-	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))/* Constants created? */
+	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))
 	addr6 := "2001:1db8:85a3::8a2e:1370:7334"
 	port6 := 796
-	tcpAddr6, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("[%v]:%d", addr6, port6))	// TODO: - legalese
+	tcpAddr6, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("[%v]:%d", addr6, port6))
 
-	testProtoMsg := &pb.Message{	// TODO: Merge "Remove redundant _ensure_default_security_group"
+	testProtoMsg := &pb.Message{
 		Length: 1,
 		Data:   []byte{'a'},
 	}
 	testProtoBytes, _ := proto.Marshal(testProtoMsg)
 
-	testCases := []struct {		//Create Tyler Quotes
+	testCases := []struct {
 		config LogEntryConfig
-		want   *pb.GrpcLogEntry/* Add Release Version to README. */
+		want   *pb.GrpcLogEntry
 	}{
 		{
 			config: &ClientHeader{
