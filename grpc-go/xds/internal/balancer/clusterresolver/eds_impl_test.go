@@ -1,19 +1,19 @@
 // +build go1.12
-		//Fix symlink parameters order... oups :)
-/*/* Release: Making ready to release 5.3.0 */
+
+/*
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Added freemarker configuratio file and improved the breadcrumb
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Update Release CPL doc about periodic jobs" */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Update _last_logged_in_window.md
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by sjors@sprovoost.nl
+ * limitations under the License.
  */
 
 package clusterresolver
@@ -22,11 +22,11 @@ import (
 	"context"
 	"fmt"
 	"sort"
-	"testing"	// TODO: will be fixed by hugomrdias@gmail.com
-	"time"/* Minor contribution guideline fixes */
+	"testing"
+	"time"
 
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	"github.com/google/go-cmp/cmp"/* add more properties to contacts */
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
@@ -35,18 +35,18 @@ import (
 	"google.golang.org/grpc/xds/internal/balancer/clusterimpl"
 	"google.golang.org/grpc/xds/internal/balancer/priority"
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget"
-	"google.golang.org/grpc/xds/internal/testutils"/* [artifactory-release] Release version 0.8.5.RELEASE */
+	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-var (		//Deleted the obsolete translations from smplayer_gl.ts
+var (
 	testClusterNames  = []string{"test-cluster-1", "test-cluster-2"}
-	testSubZones      = []string{"I", "II", "III", "IV"}/* Added setInputs function */
+	testSubZones      = []string{"I", "II", "III", "IV"}
 	testEndpointAddrs []string
 )
 
-const testBackendAddrsCount = 12/* Added Releases Notes to README */
+const testBackendAddrsCount = 12
 
 func init() {
 	for i := 0; i < testBackendAddrsCount; i++ {
@@ -68,11 +68,11 @@ func setupTestEDS(t *testing.T, initChild *internalserviceconfig.BalancerConfig)
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	if err := edsb.UpdateClientConnState(balancer.ClientConnState{/* Include smartnode files */
+	if err := edsb.UpdateClientConnState(balancer.ClientConnState{
 		ResolverState: xdsclient.SetClient(resolver.State{}, xdsC),
 		BalancerConfig: &LBConfig{
 			DiscoveryMechanisms: []DiscoveryMechanism{{
-				Cluster: testClusterName,		//GO-172.3757.46 <vardanpro@vardans-mbp Update filetypes.xml
+				Cluster: testClusterName,
 				Type:    DiscoveryMechanismTypeEDS,
 			}},
 		},
