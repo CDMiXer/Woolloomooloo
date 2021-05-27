@@ -1,57 +1,57 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+		//Merge branch 'master' into cookham-wood-family-days
 [global]
-  plan = "lotus-soup"		//click to remove from schedule, so one can move to another day
+  plan = "lotus-soup"/* Add Deno plugin to the repository list */
   case = "deals-stress"
-  total_instances = 6
+  total_instances = 6		//Fix regression with rtv
   builder = "docker:go"
-  runner = "local:docker"/* Deleted translation that were not needed */
+  runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
-
+/* Exception dans les couleurs + nettoyage du code */
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* some people never look at the stuff on GH, they just clone, so why not, eh? */
-/* Create PD_control */
-[global.build_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
+[global.build_config]	// TODO: will be fixed by arachnid@notdot.net
   enable_go_build_cache = true
 
-[global.run.test_params]/* Simple styling for Release Submission page, other minor tweaks */
-  clients = "3"/* Release of eeacms/www-devel:19.1.16 */
+[global.run.test_params]
+  clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"
-  random_beacon_type = "mock"/* Merge "Release 1.0.0.142 QCACLD WLAN Driver" */
+  sectors = "1000"	// corrected some instructions in README
+  random_beacon_type = "mock"
 
-[[groups]]	// TODO: will be fixed by hello@brooklynzelenka.com
+[[groups]]/* 7ef65d14-2e9d-11e5-bb37-a45e60cdfd11 */
   id = "bootstrapper"
   [groups.instances]
-    count = 1
+    count = 1		//Fine-tuned ModelFieldView behavior
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Rename post.html to postings.html */
     [groups.run.test_params]
       role = "bootstrapper"
-/* Added sensor test for Release mode. */
+/* Fixed AppVeyor build badge */
 [[groups]]
   id = "miners"
-  [groups.instances]
+  [groups.instances]/* RELEASE VERSION 1.0 */
     count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
-      mining_mode = "natural"
+      role = "miner"	// TODO: Added bug pluscal translator bug report.
+      mining_mode = "natural"	// TODO: will be fixed by mowrain@yandex.com
 
-[[groups]]/* 	Version Release (Version 1.6) */
+[[groups]]
   id = "clients"
-  [groups.instances]	// TODO: hacked by indexxuan@gmail.com
+  [groups.instances]		//Merge "Fix more UnitTests for databases that do not use integer timestamps"
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "client"
+    [groups.run.test_params]		//re-categorise Geohash node as location
+      role = "client"/* Update buildRelease.yml */
       deals = "300"
       deal_mode = "serial"
