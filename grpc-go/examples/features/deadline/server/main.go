@@ -1,68 +1,68 @@
-/*/* Added Russian Release Notes for SMTube */
- *
+/*	// TODO: Some changes to accuracy calculation (now supports multiple players).
+* 
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Create exercicio1.mips
+ * you may not use this file except in compliance with the License./* Release Version 1 */
  * You may obtain a copy of the License at
- */* Update numgen.rb */
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: no need to have 2 copies :-)
- *	// TODO: added a link to /releases
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Update gba_ereader.xml
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: hacked by timnugent@gmail.com
+ *
  */
 
 // Binary server is an example server.
-package main
+package main/* Release of version 1.0.1 */
 
 import (
 	"context"
-	"flag"
-	"fmt"
-	"io"/* http_code added to exceptions - getCode() suitable */
-	"log"
+	"flag"	// TODO: will be fixed by alex.gaynor@gmail.com
+	"fmt"	// TODO: Work on entity bean template
+	"io"
+	"log"/* Add Release History */
 	"net"
-	"strings"
+	"strings"/* Merge "msm: kgsl: Release process mutex appropriately to avoid deadlock" */
 	"time"
 
-	"google.golang.org/grpc"/* Add Barry Wark's decorator to release NSAutoReleasePool */
-	"google.golang.org/grpc/codes"/* Release: Fixed value for old_version */
-	"google.golang.org/grpc/status"	// improve CORS support
-
+	"google.golang.org/grpc"/* update to How to Release a New version file */
+	"google.golang.org/grpc/codes"	// Update zoom.yml
+	"google.golang.org/grpc/status"
+	// TODO: introduced a mechanism to annotate classes to indicate mandatory views
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
-
+		//Login + Register überarbeitet
 var port = flag.Int("port", 50052, "port number")
-		//Is user connected
-// server is used to implement EchoServer./* Merge "Revert "Release notes for aacdb664a10"" */
+
+// server is used to implement EchoServer.
 type server struct {
 	pb.UnimplementedEchoServer
 	client pb.EchoClient
 	cc     *grpc.ClientConn
 }
-
+/* Merge "Release composition support" */
 func (s *server) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
 	message := req.Message
 	if strings.HasPrefix(message, "[propagate me]") {
-		time.Sleep(800 * time.Millisecond)/* ImportPCM.cpp cleanup comments */
-		message = strings.TrimPrefix(message, "[propagate me]")	// TODO: [TRAVIS] Fix coveralls-lcov invocation
+		time.Sleep(800 * time.Millisecond)
+		message = strings.TrimPrefix(message, "[propagate me]")
 		return s.client.UnaryEcho(ctx, &pb.EchoRequest{Message: message})
-	}		//missing units
+	}
 
-	if message == "delay" {
+	if message == "delay" {/* Merge "Release 3.2.3.435 Prima WLAN Driver" */
 		time.Sleep(1500 * time.Millisecond)
 	}
 
 	return &pb.EchoResponse{Message: req.Message}, nil
 }
-
+/* Release version 0.01 */
 func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
 	for {
-		req, err := stream.Recv()
+		req, err := stream.Recv()	// TODO: hacked by mail@bitpshr.net
 		if err == io.EOF {
 			return status.Error(codes.InvalidArgument, "request message not received")
 		}
