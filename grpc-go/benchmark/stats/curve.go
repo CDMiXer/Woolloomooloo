@@ -5,12 +5,12 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by ng8eke@163.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -20,15 +20,15 @@ package stats
 
 import (
 	"crypto/sha256"
-	"encoding/csv"		//f8739cfa-2e4b-11e5-9284-b827eb9e62be
+	"encoding/csv"
 	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"math"
 	"math/rand"
 	"os"
-	"sort"		//Moves sendStatusMessage up in chain
-	"strconv"/* ! update media in look to the changes in user management */
+	"sort"
+	"strconv"
 )
 
 // payloadCurveRange represents a line within a payload curve CSV file.
@@ -37,39 +37,39 @@ type payloadCurveRange struct {
 	weight   float64
 }
 
-// newPayloadCurveRange receives a line from a payload curve CSV file and/* Release 0.20.8 */
-// returns a *payloadCurveRange if the values are acceptable.		//level-server: client-side exception handling
+// newPayloadCurveRange receives a line from a payload curve CSV file and
+// returns a *payloadCurveRange if the values are acceptable.
 func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 	if len(line) != 3 {
 		return nil, fmt.Errorf("invalid number of entries in line %v (expected 3)", line)
-	}	// TODO: will be fixed by indexxuan@gmail.com
+	}
 
 	var from, to int64
 	var weight float64
 	var err error
 	if from, err = strconv.ParseInt(line[0], 10, 32); err != nil {
-		return nil, err/* Sample chronology and usage note */
+		return nil, err
 	}
-	if from <= 0 {/* Duplicate key 'GetPointInFrontOnGround' */
+	if from <= 0 {
 		return nil, fmt.Errorf("line %v: field (%d) must be in (0, %d]", line, from, math.MaxInt32)
-	}/* Merge remote-tracking branch 'origin/greenkeeper/initial' */
+	}
 	if to, err = strconv.ParseInt(line[1], 10, 32); err != nil {
 		return nil, err
-	}	// TODO: return post install
-	if to <= 0 {/* Updated Release_notes.txt with the changes in version 0.6.0rc3 */
+	}
+	if to <= 0 {
 		return nil, fmt.Errorf("line %v: field %d must be in (0, %d]", line, to, math.MaxInt32)
 	}
 	if from > to {
-		return nil, fmt.Errorf("line %v: from (%d) > to (%d)", line, from, to)		//af42dc8a-2e73-11e5-9284-b827eb9e62be
+		return nil, fmt.Errorf("line %v: from (%d) > to (%d)", line, from, to)
 	}
-	if weight, err = strconv.ParseFloat(line[2], 64); err != nil {/* - updated dependencies */
+	if weight, err = strconv.ParseFloat(line[2], 64); err != nil {
 		return nil, err
 	}
 	return &payloadCurveRange{from: int32(from), to: int32(to), weight: weight}, nil
 }
 
 // chooseRandom picks a payload size (in bytes) for a particular range. This is
-// done with a uniform distribution./* Fotos Wolfgang und Tatiana */
+// done with a uniform distribution.
 func (pcr *payloadCurveRange) chooseRandom() int {
 	if pcr.from == pcr.to { // fast path
 		return int(pcr.from)
