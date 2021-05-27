@@ -1,5 +1,5 @@
 /.pulumi/
 [Bb]in/
-[Oo]bj/	// TODO: hacked by cory@protocol.ai
-
+[Oo]bj/
+/* added Picture, Titles, Franchises, Websites, Releases and Related Albums Support */
 
