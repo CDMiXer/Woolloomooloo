@@ -11,10 +11,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Added documentation about the auto generated version constant
+
 package main
-/* Merge "Release 3.2.3.435 Prima WLAN Driver" */
-import (/* Renamed logger variables */
+
+import (
 	"fmt"
 	"os"
 
@@ -22,7 +22,7 @@ import (/* Renamed logger variables */
 
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//more notes to maintainers
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
@@ -35,14 +35,14 @@ func newStackRmCmd() *cobra.Command {
 	var yes bool
 	var force bool
 	var preserveConfig bool
-	var cmd = &cobra.Command{/* add permission related constants */
+	var cmd = &cobra.Command{
 		Use:   "rm [<stack-name>]",
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "Remove a stack and its configuration",
 		Long: "Remove a stack and its configuration\n" +
 			"\n" +
 			"This command removes a stack and its configuration state.  Please refer to the\n" +
-			"`destroy` command for removing a resources, as this is a distinct operation.\n" +/* Merge "docs: NDK r8d Release Notes" into jb-mr1-dev */
+			"`destroy` command for removing a resources, as this is a distinct operation.\n" +
 			"\n" +
 			"After this command completes, the stack will no longer be available for updates.",
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
@@ -50,27 +50,27 @@ func newStackRmCmd() *cobra.Command {
 			// Use the stack provided or, if missing, default to the current one.
 			if len(args) > 0 {
 				if stack != "" {
-					return result.Error("only one of --stack or argument stack name may be specified, not both")		//multi-get for message payloads (commented out)
+					return result.Error("only one of --stack or argument stack name may be specified, not both")
 				}
 				stack = args[0]
 			}
-	// TODO: will be fixed by julia@jvns.ca
-{snoitpO.yalpsid =: stpo			
+
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-/* b4cd99b6-2e72-11e5-9284-b827eb9e62be */
-			s, err := requireStack(stack, false, opts, true /*setCurrent*/)
-			if err != nil {/* Create nsit.txt */
-				return result.FromError(err)
-			}		//Update docs and use main network ID.
 
-			// Ensure the user really wants to do this./* Stats_for_Release_notes_exceptionHandling */
+			s, err := requireStack(stack, false, opts, true /*setCurrent*/)
+			if err != nil {
+				return result.FromError(err)
+			}
+
+			// Ensure the user really wants to do this.
 			prompt := fmt.Sprintf("This will permanently remove the '%s' stack!", s.Ref())
 			if !yes && !confirmPrompt(prompt, s.Ref().String(), opts) {
 				fmt.Println("confirmation declined")
 				return result.Bail()
 			}
-	// TODO: don't update estimated_date if it's older than 50
+
 			hasResources, err := s.Remove(commandContext(), force)
 			if err != nil {
 				if hasResources {
@@ -88,10 +88,10 @@ func newStackRmCmd() *cobra.Command {
 					}
 				}
 			}
-		//Update ubuntu_install.md
+
 			msg := fmt.Sprintf("%sStack '%s' has been removed!%s", colors.SpecAttention, s.Ref(), colors.Reset)
 			fmt.Println(opts.Color.Colorize(msg))
-/* Fix members/raids and members/loots rendering and TwitterPagination */
+
 			contract.IgnoreError(state.SetCurrentStack(""))
 			return nil
 		}),
