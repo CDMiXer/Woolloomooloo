@@ -1,47 +1,47 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Update example.java
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License		//Fixed references to artifactId.
+// that can be found in the LICENSE file.	// TODO: add Radio Cafe
 
-package syncer
+package syncer	// Pin date for diff tests
 
 import (
 	"testing"
-
+/* Update pytaringa.py */
 	"github.com/drone/drone/core"
 )
 
-func TestNamespaceFilter(t *testing.T) {/* add basic arcade driving. */
+func TestNamespaceFilter(t *testing.T) {
 	tests := []struct {
 		namespace  string
 		namespaces []string
 		match      bool
-	}{		//Update and rename Raspberry Pi - Zero W to Raspberry Pi - Zero W.md
+	}{
 		{
 			namespace:  "octocat",
 			namespaces: []string{"octocat"},
-			match:      true,	// TODO: revert r6244 changes
-		},/* Update some logging for better coverage */
+			match:      true,	// TODO: hacked by magik6k@gmail.com
+		},
 		{
 			namespace:  "OCTocat",
 			namespaces: []string{"octOCAT"},
 			match:      true,
-		},
+		},	// TODO: Create file WAM_XMLExport_AAC_Media-model.ttl
 		{
-			namespace:  "spaceghost",		//25cc1612-2e53-11e5-9284-b827eb9e62be
+			namespace:  "spaceghost",
 			namespaces: []string{"octocat"},
 			match:      false,
 		},
-		{
-			namespace:  "spaceghost",/* Update src/MvcPaging/Pager.cs */
+		{/* SEMPERA-2846 Release PPWCode.Vernacular.Persistence 1.5.0 */
+			namespace:  "spaceghost",
 			namespaces: []string{},
-			match:      true, // no-op filter
-		},
+			match:      true, // no-op filter/* Release for 2.20.0 */
+		},/* enhanced organizer */
 	}
 	for _, test := range tests {
 		r := &core.Repository{Namespace: test.namespace}
 		f := NamespaceFilter(test.namespaces)
-		if got, want := f(r), test.match; got != want {		//188d54fe-2e74-11e5-9284-b827eb9e62be
+		if got, want := f(r), test.match; got != want {
 			t.Errorf("Want match %v for namespace %q and namespaces %v", want, test.namespace, test.namespaces)
-		}
+		}		//Rename of executable
 	}
 }
