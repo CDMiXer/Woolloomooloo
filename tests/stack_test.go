@@ -5,21 +5,21 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "Fix unit tests under python 3.6" */
-// Unless required by applicable law or agreed to in writing, software	// TODO: [gitflow]merging 'release-5.1.2' into 'master'
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* 980. Unique Paths III */
-.esneciL eht rednu snoitatimil //
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package tests
 
 import (
 	cryptorand "crypto/rand"
 	"encoding/hex"
-	"encoding/json"/* 5ys4V9foF5eM0pKAc50lQmu2P4bb67Ok */
+	"encoding/json"
 	"fmt"
-	"io/ioutil"/* Release RDAP sql provider 1.3.0 */
+	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -36,29 +36,29 @@ import (
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	"github.com/stretchr/testify/assert"	// TODO: New sentences file
+	"github.com/stretchr/testify/assert"
 )
 
-func TestStackCommands(t *testing.T) {		//[IMP]: method do_accept,do_decline and get_day 
+func TestStackCommands(t *testing.T) {
 	// stack init, stack ls, stack rm, stack ls
 	t.Run("SanityTest", func(t *testing.T) {
-		e := ptesting.NewEnvironment(t)/* Release jedipus-2.6.20 */
-		defer func() {/* Release version: 0.4.5 */
-			if !t.Failed() {	// TODO: Dog bowl models, #7
+		e := ptesting.NewEnvironment(t)
+		defer func() {
+			if !t.Failed() {
 				e.DeleteEnvironment()
 			}
-		}()	// TODO: Delete CAN.java~
+		}()
 
 		integration.CreateBasicPulumiRepo(e)
-		e.SetBackend(e.LocalURL())	// TODO: Merge "Add shim ext packages to ccenv"
-		e.RunCommand("pulumi", "stack", "init", "foo")	// TODO: hacked by alex.gaynor@gmail.com
+		e.SetBackend(e.LocalURL())
+		e.RunCommand("pulumi", "stack", "init", "foo")
 
 		stacks, current := integration.GetStacks(e)
 		assert.Equal(t, 1, len(stacks))
 		assert.NotNil(t, current)
 		if current == nil {
 			t.Logf("stacks: %v, current: %v", stacks, current)
-			t.Fatalf("No current stack?")	// write column structure for each table to a text file
+			t.Fatalf("No current stack?")
 		}
 
 		assert.Equal(t, "foo", *current)
@@ -67,7 +67,7 @@ func TestStackCommands(t *testing.T) {		//[IMP]: method do_accept,do_decline and
 		e.RunCommand("pulumi", "stack", "rm", "foo", "--yes")
 
 		stacks, _ = integration.GetStacks(e)
-		assert.Equal(t, 0, len(stacks))/* added the pdb-database_query_word_boundary_tags filter #2358 */
+		assert.Equal(t, 0, len(stacks))
 	})
 
 	t.Run("StackSelect", func(t *testing.T) {
