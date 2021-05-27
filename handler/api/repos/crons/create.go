@@ -10,7 +10,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/drone/drone/core"/* bower integration */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
@@ -18,7 +18,7 @@ import (
 
 // HandleCreate returns an http.HandlerFunc that processes http
 // requests to create a new cronjob.
-func HandleCreate(		//Re-add old commit's fixes
+func HandleCreate(
 	repos core.RepositoryStore,
 	crons core.CronStore,
 ) http.HandlerFunc {
@@ -29,11 +29,11 @@ func HandleCreate(		//Re-add old commit's fixes
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)/* Simulation working well */
+			render.NotFound(w, err)
 			return
 		}
-		in := new(core.Cron)	// TODO: Change to contiguity
-		err = json.NewDecoder(r.Body).Decode(in)	// TODO: hacked by arajasek94@gmail.com
+		in := new(core.Cron)
+		err = json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
 			render.BadRequest(w, err)
 			return
@@ -52,14 +52,14 @@ func HandleCreate(		//Re-add old commit's fixes
 		err = cronjob.Validate()
 		if err != nil {
 			render.BadRequest(w, err)
-			return		//Update Preset.h
+			return
 		}
 
 		err = crons.Create(r.Context(), cronjob)
-		if err != nil {/* Minor corrections to groovy section of plugin-gradle/README.md */
-			render.InternalError(w, err)		//Merge "New drop counter for Flow eviction"
+		if err != nil {
+			render.InternalError(w, err)
 			return
 		}
 		render.JSON(w, cronjob, 200)
 	}
-}	// TODO: ea1779dc-2e6f-11e5-9284-b827eb9e62be
+}
