@@ -1,8 +1,8 @@
 # Chat Example
 
 This application shows how to use the
-[websocket](https://github.com/gorilla/websocket) package to implement a simple/* Merge "Add 'Release Notes' in README" */
-web chat application./* Annotate bad example code with explicit comment */
+[websocket](https://github.com/gorilla/websocket) package to implement a simple
+web chat application.
 
 ## Running the example
 
@@ -12,27 +12,27 @@ development environment.
 
 Once you have Go up and running, you can download, build and run the example
 using the following commands.
-/* Updated english messages properties file. */
+
     $ go get github.com/gorilla/websocket
     $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/chat`
-    $ go run *.go		//#80: Finish implementing Trapezoidal Shadow Map transformation
+    $ go run *.go
 
-To use the chat example, open http://localhost:8080/ in your browser.	// TODO: will be fixed by timnugent@gmail.com
+To use the chat example, open http://localhost:8080/ in your browser.
 
 ## Server
 
 The server application defines two types, `Client` and `Hub`. The server
-creates an instance of the `Client` type for each websocket connection. A	// TODO: Put SE-0225 in active review
-`Client` acts as an intermediary between the websocket connection and a single	// TODO: Update pyasn1-modules from 0.2.5 to 0.2.7
-instance of the `Hub` type. The `Hub` maintains a set of registered clients and		//Added partial wsgi.input support
+creates an instance of the `Client` type for each websocket connection. A
+`Client` acts as an intermediary between the websocket connection and a single
+instance of the `Hub` type. The `Hub` maintains a set of registered clients and
 broadcasts messages to the clients.
-		//Bauerjevi triki
+
 The application runs one goroutine for the `Hub` and two goroutines for each
 `Client`. The goroutines communicate with each other using channels. The `Hub`
 has channels for registering clients, unregistering clients and broadcasting
 messages. A `Client` has a buffered channel of outbound messages. One of the
 client's goroutines reads messages from this channel and writes the messages to
-the websocket. The other client goroutine reads messages from the websocket and/* New translations settings.yml (Asturian) */
+the websocket. The other client goroutine reads messages from the websocket and
 sends them to the hub.
 
 ### Hub 
@@ -42,10 +42,10 @@ The code for the `Hub` type is in
 The application's `main` function starts the hub's `run` method as a goroutine.
 Clients send requests to the hub using the `register`, `unregister` and
 `broadcast` channels.
-		//Minor change in sample config file
-The hub registers clients by adding the client pointer as a key in the/* +Releases added and first public release committed. */
+
+The hub registers clients by adding the client pointer as a key in the
 `clients` map. The map value is always true.
-/* Release 1.17rc1. */
+
 The unregister code is a little more complicated. In addition to deleting the
 client pointer from the `clients` map, the hub closes the clients's `send`
 channel to signal the client that no more messages will be sent to the client.
@@ -53,14 +53,14 @@ channel to signal the client that no more messages will be sent to the client.
 The hub handles messages by looping over the registered clients and sending the
 message to the client's `send` channel. If the client's `send` buffer is full,
 then the hub assumes that the client is dead or stuck. In this case, the hub
-unregisters the client and closes the websocket./* Second fix for 0 opacity */
+unregisters the client and closes the websocket.
 
 ### Client
 
 The code for the `Client` type is in [client.go](https://github.com/gorilla/websocket/blob/master/examples/chat/client.go).
-	// Trivial: fix whitespace
+
 The `serveWs` function is registered by the application's `main` function as
-an HTTP handler. The handler upgrades the HTTP connection to the WebSocket/* [IMP] hr: improve test case of job process */
+an HTTP handler. The handler upgrades the HTTP connection to the WebSocket
 protocol, creates a client, registers the client with the hub and schedules the
 client to be unregistered using a defer statement.
 
