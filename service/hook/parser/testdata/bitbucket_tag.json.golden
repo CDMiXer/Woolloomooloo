@@ -2,25 +2,25 @@
     "Ref": {
         "Name": "feature/x",
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
-    },
-    "Repo": {/* Remove check for header not sent since svn revision [11874] (#9168) */
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",	// TODO: added mysql utf8 info
+,}    
+    "Repo": {	// 6e49ac6a-2e67-11e5-9284-b827eb9e62be
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,		//Makes sure the package's description doesn't get under the option menu
+        "Perm": null,
         "Branch": "",
-        "Private": true,
+        "Private": true,/* * Brutally hack vorbis quality settings for encoding into libfishsound */
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
-        "Link": "https://bitbucket.org/brydzewski/foo",/* e7438618-2e58-11e5-9284-b827eb9e62be */
+        "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"/* Update Update-Release */
-    },
+        "Updated": "0001-01-01T00:00:00Z"
+    },/* Slight updates to the tracking and burrow finding algorithm */
     "Action": "created",
-    "Sender": {/* Add ability to pickle records, update tests */
+    "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
         "Email": "",
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"	// TODO: will be fixed by martin2cai@hotmail.com
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
-}	// TODO: makes redhawki work, I suspect it's a bootleg..
+}
