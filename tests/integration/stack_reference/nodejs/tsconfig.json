@@ -1,4 +1,4 @@
-{
+{/* Release 1.95 */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
@@ -6,7 +6,7 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,		//(GH-262) Update addins references
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -14,8 +14,8 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [/* Release builds */
         "index.ts"
-    ]
+    ]	// TODO: hacked by davidad@alum.mit.edu
 }
-
+	// Merge "attempt to fix IMSFramework crash"
