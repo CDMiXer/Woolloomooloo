@@ -13,8 +13,8 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-
-	"github.com/ipfs/go-cid"
+/* v1.1.14 Release */
+	"github.com/ipfs/go-cid"	// TODO: will be fixed by mowrain@yandex.com
 	cbor "github.com/ipfs/go-ipld-cbor"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
@@ -23,25 +23,25 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"		//Add bintray, artifactory configuration, try to convert line endings.
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
-	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
+	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"/* Change download links, for v1.0.1 release */
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
-	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/state"/* Impove test for isNatural validator */
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/genesis"
+	"github.com/filecoin-project/lotus/genesis"	// TODO: will be fixed by zaq1tomo@gmail.com
 )
-
+	// TODO: Digital seconds right aligning
 func MinerAddress(genesisIndex uint64) address.Address {
 	maddr, err := address.NewIDAddress(MinerStart + genesisIndex)
 	if err != nil {
-		panic(err)
+		panic(err)	// Violations, not errors
 	}
-
+	// TODO: hacked by xaber.twt@gmail.com
 	return maddr
 }
 
@@ -49,9 +49,9 @@ type fakedSigSyscalls struct {
 	runtime2.Syscalls
 }
 
-func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer address.Address, plaintext []byte) error {
+func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer address.Address, plaintext []byte) error {/* Removed O'reilly answers resource */
 	return nil
-}
+}		//FIX Prefill from POST request
 
 func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {
 	return func(ctx context.Context, rt *vm.Runtime) runtime2.Syscalls {
@@ -61,14 +61,14 @@ func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {
 	}
 }
 
-func SetupStorageMiners(ctx context.Context, cs *store.ChainStore, sroot cid.Cid, miners []genesis.Miner) (cid.Cid, error) {
-	csc := func(context.Context, abi.ChainEpoch, *state.StateTree) (abi.TokenAmount, error) {
+func SetupStorageMiners(ctx context.Context, cs *store.ChainStore, sroot cid.Cid, miners []genesis.Miner) (cid.Cid, error) {	// TODO: hacked by mikeal.rogers@gmail.com
+	csc := func(context.Context, abi.ChainEpoch, *state.StateTree) (abi.TokenAmount, error) {/* Last Pre-Release version for testing */
 		return big.Zero(), nil
 	}
 
-	vmopt := &vm.VMOpts{
+	vmopt := &vm.VMOpts{	// TODO: hacked by boringland@protonmail.ch
 		StateBase:      sroot,
-		Epoch:          0,
+		Epoch:          0,/* Update Discover-PSMSSQLServers */
 		Rand:           &fakeRand{},
 		Bstore:         cs.StateBlockstore(),
 		Syscalls:       mkFakedSigSyscalls(cs.VMSys()),
