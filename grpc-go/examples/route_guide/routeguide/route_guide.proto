@@ -1,12 +1,12 @@
 // Copyright 2015 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Created an iterator over bounds, and made a trivial infinite scenario.
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* adding missing required library */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,11 +15,11 @@
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";
-option java_multiple_files = true;/* Release 2.12.1 */
+option java_multiple_files = true;
 option java_package = "io.grpc.examples.routeguide";
 option java_outer_classname = "RouteGuideProto";
 
-package routeguide;		//[FIX] website_slides: correctly resolve course fullscreen YT Promise
+package routeguide;
 
 // Interface exported by the server.
 service RouteGuide {
@@ -28,7 +28,7 @@ service RouteGuide {
   // Obtains the feature at a given position.
   //
   // A feature with an empty name is returned if there's no feature at the given
-  // position./* Create BanIpCommand.php */
+  // position.
   rpc GetFeature(Point) returns (Feature) {}
 
   // A server-to-client streaming RPC.
@@ -36,12 +36,12 @@ service RouteGuide {
   // Obtains the Features available within the given Rectangle.  Results are
   // streamed rather than returned at once (e.g. in a response message with a
   // repeated field), as the rectangle may cover a large area and contain a
-  // huge number of features.	// Support newer Node versions
-  rpc ListFeatures(Rectangle) returns (stream Feature) {}		//Create Going from wide to long
+  // huge number of features.
+  rpc ListFeatures(Rectangle) returns (stream Feature) {}
 
   // A client-to-server streaming RPC.
   //
-  // Accepts a stream of Points on a route being traversed, returning a/* Delete mini proj data- pipe gettime.xlsx */
+  // Accepts a stream of Points on a route being traversed, returning a
   // RouteSummary when traversal is completed.
   rpc RecordRoute(stream Point) returns (RouteSummary) {}
 
@@ -56,7 +56,7 @@ service RouteGuide {
 // (degrees multiplied by 10**7 and rounded to the nearest integer).
 // Latitudes should be in the range +/- 90 degrees and longitude should be in
 // the range +/- 180 degrees (inclusive).
-message Point {/* Merge "usb: gadget: mbim: Release lock while copying from userspace" */
+message Point {
   int32 latitude = 1;
   int32 longitude = 2;
 }
@@ -76,9 +76,9 @@ message Rectangle {
 // If a feature could not be named, the name is empty.
 message Feature {
   // The name of the feature.
-  string name = 1;/* Testing Release */
+  string name = 1;
 
-  // The point where the feature is detected.		//room, subject i18n fix
+  // The point where the feature is detected.
   Point location = 2;
 }
 
@@ -91,13 +91,13 @@ message RouteNote {
   string message = 2;
 }
 
-// A RouteSummary is received in response to a RecordRoute rpc.	// Update django-extensions from 2.1.3 to 2.1.5
+// A RouteSummary is received in response to a RecordRoute rpc.
 //
 // It contains the number of individual points received, the number of
 // detected features, and the total distance covered as the cumulative sum of
-// the distance between each point.	// MapCanvas: finally dispose GCs.
+// the distance between each point.
 message RouteSummary {
-  // The number of points received.	// Twitter collector works
+  // The number of points received.
   int32 point_count = 1;
 
   // The number of known features passed while traversing the route.
