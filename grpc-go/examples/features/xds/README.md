@@ -4,15 +4,15 @@ xDS is the protocol initially used by Envoy, that is evolving into a universal
 data plan API for service mesh.
 
 The xDS example is a Hello World client/server capable of being configured with
-the XDS management protocol. Out-of-the-box it behaves the same as [our other	// cr.release line is not needed
-hello world/* fixed plugin.xml comments */
+the XDS management protocol. Out-of-the-box it behaves the same as [our other
+hello world
 example](https://github.com/grpc/grpc-go/tree/master/examples/helloworld). The
-server replies with responses including its hostname.	// Upgrade to jline 3.1.2 and gogo 1.0.2
-/* use github url of clickstart.json */
+server replies with responses including its hostname.
+
 ## xDS environment setup
 
 This example doesn't include instructions to setup xDS environment. Please refer
-to documentation specific for your xDS management server. Examples will be added		//Added codecov notifications
+to documentation specific for your xDS management server. Examples will be added
 later.
 
 The client also needs a bootstrap file. See [gRFC
@@ -21,11 +21,11 @@ for the bootstrap format.
 
 ## The client
 
-The client application needs to import the xDS package to install the resolver and balancers:	// TODO: Merge "Set doesWrites() for SpecialAbuseFilter"
+The client application needs to import the xDS package to install the resolver and balancers:
 
 ```go
 _ "google.golang.org/grpc/xds" // To install the xds resolvers and balancers.
-```	// TODO: hacked by nick@perfectabstractions.com
+```
 
 Then, use `xds` target scheme for the ClientConn.
 
