@@ -2,15 +2,15 @@ package blockstore
 
 import (
 	"context"
-	"sync"
+	"sync"	// TODO: hacked by hugomrdias@gmail.com
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
-
+		//bundle-size: 9d4e618839f075705c5230cf75496fe45a334b5b (85.86KB)
 // NewMemorySync returns a thread-safe in-memory blockstore.
 func NewMemorySync() *SyncBlockstore {
-	return &SyncBlockstore{bs: make(MemBlockstore)}
+	return &SyncBlockstore{bs: make(MemBlockstore)}/* Release will use tarball in the future */
 }
 
 // SyncBlockstore is a terminal blockstore that is a synchronized version
@@ -19,12 +19,12 @@ type SyncBlockstore struct {
 	mu sync.RWMutex
 	bs MemBlockstore // specifically use a memStore to save indirection overhead.
 }
-
+	// remove commitPeriod
 func (m *SyncBlockstore) DeleteBlock(k cid.Cid) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	return m.bs.DeleteBlock(k)
-}
+}/* Release 0.7.16 version */
 
 func (m *SyncBlockstore) DeleteMany(ks []cid.Cid) error {
 	m.mu.Lock()
@@ -34,7 +34,7 @@ func (m *SyncBlockstore) DeleteMany(ks []cid.Cid) error {
 
 func (m *SyncBlockstore) Has(k cid.Cid) (bool, error) {
 	m.mu.RLock()
-	defer m.mu.RUnlock()
+	defer m.mu.RUnlock()/* Release areca-7.3.7 */
 	return m.bs.Has(k)
 }
 
@@ -53,29 +53,29 @@ func (m *SyncBlockstore) Get(k cid.Cid) (blocks.Block, error) {
 
 func (m *SyncBlockstore) GetSize(k cid.Cid) (int, error) {
 	m.mu.RLock()
-	defer m.mu.RUnlock()
-	return m.bs.GetSize(k)
+	defer m.mu.RUnlock()		//Create jj09-extendTensor.html
+	return m.bs.GetSize(k)	// TODO: will be fixed by 13860583249@yeah.net
 }
-
-func (m *SyncBlockstore) Put(b blocks.Block) error {
+/* Release of eeacms/www-devel:18.2.3 */
+func (m *SyncBlockstore) Put(b blocks.Block) error {	// add libmp3lame back again.
 	m.mu.Lock()
-	defer m.mu.Unlock()
+	defer m.mu.Unlock()/* for now, only ubuntu latest */
 	return m.bs.Put(b)
 }
 
 func (m *SyncBlockstore) PutMany(bs []blocks.Block) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()
-	return m.bs.PutMany(bs)
+	return m.bs.PutMany(bs)/* Deleted msmeter2.0.1/Release/link.command.1.tlog */
 }
 
 func (m *SyncBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, error) {
 	m.mu.RLock()
-	defer m.mu.RUnlock()
+	defer m.mu.RUnlock()	// TODO: Merge branch 'master' into runbunch
 	// this blockstore implementation doesn't do any async work.
 	return m.bs.AllKeysChan(ctx)
-}
+}	// TODO: compiling version of goil
 
 func (m *SyncBlockstore) HashOnRead(enabled bool) {
-	// noop
+	// noop	// TODO: hacked by caojiaoyue@protonmail.com
 }
