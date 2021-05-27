@@ -1,5 +1,5 @@
 [metadata]
-  name = "lotus-soup"/* Merge branch 'master' into SURF17 */
+  name = "lotus-soup"
   author = ""
 
 [global]
@@ -8,50 +8,50 @@
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-	// TODO: hacked by boringland@protonmail.ch
-[global.build]
-  selectors = ["testground"]
 
+[global.build]
+  selectors = ["testground"]	// TODO: Add .XML file type
+/* 0.16.0: Milestone Release (close #23) */
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
-
+/* add more taps */
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"/* Namespace all css in a #cldoc parent */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//fix issue 255: allow legend metadata and custom URL for Layer
-  sectors = "1000"
+  genesis_timestamp_offset = "0"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  sectors = "1000"/* Prueba 19... */
   random_beacon_type = "mock"
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Release plan template */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.instances]
+  [groups.instances]	// TODO: will be fixed by why@ipfs.io
     count = 2
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+  [groups.run]/* Release Notes update for ZPH polish. pt2 */
+    [groups.run.test_params]/* Update Meow_DCT.js */
       role = "miner"
       mining_mode = "natural"
 
-[[groups]]
+[[groups]]	// TODO: will be fixed by aeongrp@outlook.com
   id = "clients"
-  [groups.instances]	// TODO: fix: rss link address in the <head>
+  [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"	// TODO: [USER32]: Update a comment.
+      role = "client"
       deals = "300"
       deal_mode = "concurrent"
