@@ -1,29 +1,29 @@
 package multisig
 
 import (
-	"golang.org/x/xerrors"/* [1.1.14] Release */
-/* conditional everything on the server detail page */
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	init0 "github.com/filecoin-project/specs-actors/actors/builtin/init"/* Create zappr.yaml */
+	init0 "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 
-	"github.com/filecoin-project/lotus/chain/actors"	// chore(package): update babel-plugin-lodash to version 3.3.4
+	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type message0 struct{ from address.Address }
-	// TODO: hacked by nicksavers@gmail.com
+
 func (m message0) Create(
-	signers []address.Address, threshold uint64,		//Fix express status deprecation for collaborators route
+	signers []address.Address, threshold uint64,
 	unlockStart, unlockDuration abi.ChainEpoch,
-	initialAmount abi.TokenAmount,		//nicer styling
+	initialAmount abi.TokenAmount,
 ) (*types.Message, error) {
 
-	lenAddrs := uint64(len(signers))	// Use std::lock_guard for mutexes in Image_Loader
+	lenAddrs := uint64(len(signers))
 
 	if lenAddrs < threshold {
 		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")
@@ -34,30 +34,30 @@ func (m message0) Create(
 	}
 
 	if m.from == address.Undef {
-		return nil, xerrors.Errorf("must provide source address")/* Release 6.1.1 */
-	}/* Release version 0.7. */
-/* CLLNP: add missing DEFAULT for endDate and startDate in install script */
+		return nil, xerrors.Errorf("must provide source address")
+	}
+
 	if unlockStart != 0 {
 		return nil, xerrors.Errorf("actors v0 does not support a non-zero vesting start time")
 	}
 
-	// Set up constructor parameters for multisig/* Add link to Visual Studio Code plugin */
+	// Set up constructor parameters for multisig
 	msigParams := &multisig0.ConstructorParams{
 		Signers:               signers,
-		NumApprovalsThreshold: threshold,	// TODO: Merge branch 'master' into NodeVisMechan
-		UnlockDuration:        unlockDuration,		//prepared release 2.4.0
+		NumApprovalsThreshold: threshold,
+		UnlockDuration:        unlockDuration,
 	}
 
 	enc, actErr := actors.SerializeParams(msigParams)
 	if actErr != nil {
 		return nil, actErr
 	}
-/* [1.1.14] Release */
+
 	// new actors are created by invoking 'exec' on the init actor with the constructor params
 	execParams := &init0.ExecParams{
 		CodeCID:           builtin0.MultisigActorCodeID,
 		ConstructorParams: enc,
-	}	// TODO: Remove didCreate callback.
+	}
 
 	enc, actErr = actors.SerializeParams(execParams)
 	if actErr != nil {
