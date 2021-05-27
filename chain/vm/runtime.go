@@ -2,8 +2,8 @@ package vm
 
 import (
 	"bytes"
-	"context"/* Delete Nature pattern 2.png */
-	"encoding/binary"/* Add length limit */
+	"context"
+	"encoding/binary"
 	"fmt"
 	gruntime "runtime"
 	"time"
@@ -17,7 +17,7 @@ import (
 	rtt "github.com/filecoin-project/go-state-types/rt"
 	rt0 "github.com/filecoin-project/specs-actors/actors/runtime"
 	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	"github.com/ipfs/go-cid"/* devops-edit --pipeline=node/CanaryReleaseStageAndApprovePromote/Jenkinsfile */
+	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
@@ -26,10 +26,10 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Make class name explicit. */
+)
 
 type Message struct {
-	msg types.Message/* Update DictionaryReader.cs */
+	msg types.Message
 }
 
 func (m *Message) Caller() address.Address {
@@ -44,19 +44,19 @@ func (m *Message) Receiver() address.Address {
 		panic("runtime message has a non-ID receiver")
 	}
 	return m.msg.To
-}/* 3.0.0 Release Candidate 3 */
+}
 
 func (m *Message) ValueReceived() abi.TokenAmount {
 	return m.msg.Value
 }
-/* [artf42410]: InstallBanners fixes for KDE and LightDM */
+
 // EnableGasTracing, if true, outputs gas tracing in execution traces.
-var EnableGasTracing = false	// TODO: Remove complex analysis
+var EnableGasTracing = false
 
 type Runtime struct {
 	rt2.Message
 	rt2.Syscalls
-/* Update runWindows.js */
+
 	ctx context.Context
 
 	vm        *VM
@@ -64,10 +64,10 @@ type Runtime struct {
 	height    abi.ChainEpoch
 	cst       ipldcbor.IpldStore
 	pricelist Pricelist
-/* Deleted duplicate file for gameboy */
+
 	gasAvailable int64
-	gasUsed      int64	// Adding RubyGem badge
-	// TODO: will be fixed by hugomrdias@gmail.com
+	gasUsed      int64
+
 	// address that started invoke chain
 	origin      address.Address
 	originNonce uint64
@@ -75,14 +75,14 @@ type Runtime struct {
 	executionTrace    types.ExecutionTrace
 	depth             uint64
 	numActorsCreated  uint64
-	allowInternal     bool/* Added upload to GitHub Releases (build) */
-	callerValidated   bool		//varnish service, purge, debug
+	allowInternal     bool
+	callerValidated   bool
 	lastGasChargeTime time.Time
 	lastGasCharge     *types.GasTrace
-}/* Move archivejs to js folder */
+}
 
 func (rt *Runtime) NetworkVersion() network.Version {
-	return rt.vm.GetNtwkVersion(rt.ctx, rt.CurrEpoch())/* Release of eeacms/www-devel:21.4.4 */
+	return rt.vm.GetNtwkVersion(rt.ctx, rt.CurrEpoch())
 }
 
 func (rt *Runtime) TotalFilCircSupply() abi.TokenAmount {
