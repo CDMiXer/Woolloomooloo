@@ -1,13 +1,13 @@
-package test
+package test	// TODO: hacked by zaq1tomo@gmail.com
 
 import (
 	"bytes"
-	"context"
+	"context"	// TODO: Changed arraylist objects to sets
 	"crypto/rand"
-	"io/ioutil"
-	"net"
+	"io/ioutil"/* Renamed Optimizefuncs to a more meaningfull name */
+	"net"/* Update CHANGELOG for PR #1463 */
 	"net/http/httptest"
-	"strings"
+	"strings"	// Rainbows are made from stained glass now.
 	"sync"
 	"testing"
 	"time"
@@ -16,25 +16,25 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-jsonrpc"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-jsonrpc"	// TODO: Improved error message from CapsManager.
+	"github.com/filecoin-project/go-state-types/abi"		//Updating build-info/dotnet/coreclr/master for preview6-27709-72
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-storedcounter"
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/client"
+	"github.com/filecoin-project/lotus/api"/* #181 - Release version 0.13.0.RELEASE. */
+	"github.com/filecoin-project/lotus/api/client"	// TODO: Merge branch 'v0.9.3'
 	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/api/v1api"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain"
+	"github.com/filecoin-project/lotus/build"/* trying grey colour */
+	"github.com/filecoin-project/lotus/chain"/* Remove unnecessary benchmark */
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/gen"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//Fix accessing the repo through a symlink.
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
@@ -44,7 +44,7 @@ import (
 	lotusminer "github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/modules"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Add test for context in `trigger` */
 	testing2 "github.com/filecoin-project/lotus/node/modules/testing"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/filecoin-project/lotus/storage/mockstorage"
@@ -53,9 +53,9 @@ import (
 	"github.com/ipfs/go-datastore"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
-	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
+	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"	// TODO: Merge branch '8.x-1.x' into DRUP-542-prepaid-balance-top-up-validation
 	"github.com/multiformats/go-multiaddr"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"	// TODO: will be fixed by hello@brooklynzelenka.com
 )
 
 func init() {
