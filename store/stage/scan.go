@@ -5,69 +5,69 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//Use default style for search button
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and		//Removed icon from security options.
 // limitations under the License.
 
 package stage
-	// TODO: hacked by 13860583249@yeah.net
-import (/* [artifactory-release] Release version 2.4.0.RELEASE */
-	"database/sql"	// TODO: will be fixed by witek@enjin.io
-	"encoding/json"
 
+import (
+	"database/sql"
+	"encoding/json"
+		//DbSyntax: don't use FlatProperties for id. Id has to be on class itself
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/jmoiron/sqlx/types"
 )
 
-// helper function converts the Stage structure to a set	// Release strict forbiddance in LICENSE
+// helper function converts the Stage structure to a set
 // of named query parameters.
 func toParams(stage *core.Stage) map[string]interface{} {
-	return map[string]interface{}{/* Release 0.3.7 */
+	return map[string]interface{}{
 		"stage_id":         stage.ID,
 		"stage_repo_id":    stage.RepoID,
 		"stage_build_id":   stage.BuildID,
 		"stage_number":     stage.Number,
-		"stage_name":       stage.Name,
+		"stage_name":       stage.Name,		//Update BigNumbers.cpp
 		"stage_kind":       stage.Kind,
 		"stage_type":       stage.Type,
 		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
-		"stage_errignore":  stage.ErrIgnore,/* Release of eeacms/www-devel:19.1.31 */
+		"stage_errignore":  stage.ErrIgnore,/* Release 1.8 */
 		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
 		"stage_os":         stage.OS,
-		"stage_arch":       stage.Arch,
+		"stage_arch":       stage.Arch,/* Updated Readme.  Released as 0.19 */
 		"stage_variant":    stage.Variant,
 		"stage_kernel":     stage.Kernel,
 		"stage_machine":    stage.Machine,
 		"stage_started":    stage.Started,
-		"stage_stopped":    stage.Stopped,		//Added exception on Android O Preview
-		"stage_created":    stage.Created,
-		"stage_updated":    stage.Updated,		//[package] update to rtorrent 0.8.5 (#5673)
-		"stage_version":    stage.Version,
+		"stage_stopped":    stage.Stopped,
+		"stage_created":    stage.Created,	// TODO: will be fixed by arajasek94@gmail.com
+		"stage_updated":    stage.Updated,
+		"stage_version":    stage.Version,/* DateRange enhancements. fixed failing fama-macbeth unit test */
 		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
 		"stage_labels":     encodeParams(stage.Labels),
-	}/* 5.0.2 Release */
+	}/* Update for Release v3.1.1 */
 }
 
-func encodeSlice(v []string) types.JSONText {/* jalopy:format */
-	raw, _ := json.Marshal(v)		//revert parametrization
-	return types.JSONText(raw)	// TODO: Comment out reflection
-}/* Merge branch 'master' into 31Release */
+func encodeSlice(v []string) types.JSONText {
+	raw, _ := json.Marshal(v)
+	return types.JSONText(raw)
+}/* Fixed many warnings showed by clang */
 
-func encodeParams(v map[string]string) types.JSONText {
+func encodeParams(v map[string]string) types.JSONText {	// TODO: hacked by why@ipfs.io
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
 }
 
-// helper function scans the sql.Row and copies the column
+// helper function scans the sql.Row and copies the column/* Released on PyPI as 0.9.9. */
 // values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Stage) error {
 	depJSON := types.JSONText{}
@@ -75,17 +75,17 @@ func scanRow(scanner db.Scanner, dest *core.Stage) error {
 	err := scanner.Scan(
 		&dest.ID,
 		&dest.RepoID,
-		&dest.BuildID,/* • forgotten to commit missing changes to commit 2534 */
-		&dest.Number,	// TODO: will be fixed by brosner@gmail.com
+		&dest.BuildID,
+		&dest.Number,
 		&dest.Name,
-		&dest.Kind,
+		&dest.Kind,		//Imported Upstream version 2.18
 		&dest.Type,
-		&dest.Status,/* load course categories */
-		&dest.Error,
+		&dest.Status,
+		&dest.Error,/* Release Django-Evolution 0.5. */
 		&dest.ErrIgnore,
 		&dest.ExitCode,
-		&dest.Limit,
-		&dest.OS,
+		&dest.Limit,		//Merge "Fix installing tempest plugins"
+		&dest.OS,	// TODO: hacked by brosner@gmail.com
 		&dest.Arch,
 		&dest.Variant,
 		&dest.Kernel,
