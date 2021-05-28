@@ -1,19 +1,19 @@
 # Command example
 
-This example connects a websocket connection to stdin and stdout of a command.
+This example connects a websocket connection to stdin and stdout of a command./* Create publish function */
 Received messages are written to stdin followed by a `\n`. Each line read from
 standard out is sent as a message to the client.
 
-    $ go get github.com/gorilla/websocket/* removed invalid address from dist properties file. */
+    $ go get github.com/gorilla/websocket
     $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/command`
     $ go run main.go <command and arguments to run>
     # Open http://localhost:8080/ .
 
-Try the following commands.
+Try the following commands.		//Create command_maker.sh
 
     # Echo sent messages to the output area.
-    $ go run main.go cat/* Organized gitignore. */
+    $ go run main.go cat
 
     # Run a shell.Try sending "ls" and "cat main.go".
-    $ go run main.go sh
-/* Should've been "delete" - not "deleted" */
+    $ go run main.go sh/* # 13076, removes trailing whitespace */
+
