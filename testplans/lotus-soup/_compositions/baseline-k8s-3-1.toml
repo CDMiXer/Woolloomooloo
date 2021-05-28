@@ -1,67 +1,67 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+/* Start refactoring: UIComponentVisibilityDispatcher, CollapseableBoxBuilder */
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
   runner = "cluster:k8s"
-
-[global.build]/* 3.4.0 Release */
+/* equals en hashcode op setcoverproblem klasse */
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// Create unlicense
-		//changed metadata for ezfind
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// MOS6502 update
+
 [global.build_config]
-  push_registry=true
+eurt=yrtsiger_hsup  
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]
+[global.run.test_params]		//Rimosse alcune stampe.
   clients = "3"
   miners = "1"
-  genesis_timestamp_offset = "0"/* Release of eeacms/www:18.7.11 */
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
+  sectors = "10"/* Release ChildExecutor after the channel was closed. See #173 */
   random_beacon_type = "mock"
-  mining_mode = "natural"	// Use `variable is None` and not `variable == None`
-
+  mining_mode = "natural"
+	// Private members now accessible
 [[groups]]
-  id = "bootstrapper"/* common user_add task handled user's without key specified */
-  [groups.resources]
-    memory = "512Mi"	// Pulled out database properties for our Oracle Database
+  id = "bootstrapper"
+  [groups.resources]/* [1.2.3] Release */
+"iM215" = yromem    
     cpu = "1000m"
   [groups.instances]
-    count = 1
+    count = 1/* Update phase-slide.js */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* chore: add dry-run option to Release workflow */
-      role = "bootstrapper"
-
-[[groups]]	// TODO: fixing dirname in daemonize mode (chdir issue)
+    [groups.run.test_params]/* Delete Labyrinth Lord.CSS */
+      role = "bootstrapper"/* Merge "Avoid loading same service plugin more than once" */
+		//improved cycle-based CPU usage calculation
+[[groups]]
   id = "miners"
-  [groups.resources]
+  [groups.resources]	// TODO: hacked by mail@bitpshr.net
     memory = "8192Mi"
-    cpu = "1000m"/* Change README encoding to UTF8 */
+    cpu = "1000m"	// TODO: Update manifest-bot.jps
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release 1.1.0-CI00271 */
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
-  [groups.resources]
+  [groups.resources]/* Release 1.0.1.2 commint */
     memory = "1024Mi"
     cpu = "1000m"
-]secnatsni.spuorg[  
+  [groups.instances]
     count = 3
-    percentage = 0.0	// TODO: will be fixed by sjors@sprovoost.nl
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"		//6c92bcc6-2e63-11e5-9284-b827eb9e62be
+      role = "client"
