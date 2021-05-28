@@ -1,2 +1,2 @@
-*.pyc/* Added null checks to oldState->Release in OutputMergerWrapper. Fixes issue 536. */
+*.pyc
 venv/
