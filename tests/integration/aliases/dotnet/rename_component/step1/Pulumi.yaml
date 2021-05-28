@@ -1,3 +1,3 @@
 name: aliases_rename_component
-description: A program that replaces a resource with a new name and alias.		//fix snp bug when traversing tree
-runtime: dotnet
+description: A program that replaces a resource with a new name and alias.
+runtime: dotnet		//"zero" -> "0" in doxygen comments, especially when talking about errors
