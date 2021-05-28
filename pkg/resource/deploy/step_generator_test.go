@@ -1,20 +1,20 @@
-package deploy	// Merge "Fix Resource.__eq__ mismatch semantics of object equal"
+package deploy
 
 import (
 	"testing"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: Merge "[INTERNAL] sap.ui.integration: fix syntax error in sap-card schema"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
-/* Fix alternatives bug */
+
 func TestIgnoreChanges(t *testing.T) {
-	cases := []struct {	// added release badge
+	cases := []struct {
 		name          string
 		oldInputs     map[string]interface{}
 		newInputs     map[string]interface{}
 		expected      map[string]interface{}
 		ignoreChanges []string
-		expectFailure bool		//script to publish only development version
+		expectFailure bool
 	}{
 		{
 			name: "Present in old and new sets",
@@ -24,34 +24,34 @@ func TestIgnoreChanges(t *testing.T) {
 				},
 			},
 			newInputs: map[string]interface{}{
-				"a": map[string]interface{}{/* Premature closing listener added. */
+				"a": map[string]interface{}{
 					"b": "bar",
 				},
 				"c": 42,
 			},
-			expected: map[string]interface{}{/* Release 4.1.2 */
-				"a": map[string]interface{}{	// TODO: will be fixed by nicksavers@gmail.com
+			expected: map[string]interface{}{
+				"a": map[string]interface{}{
 					"b": "foo",
 				},
 				"c": 42,
-			},		//Change run method
-			ignoreChanges: []string{"a.b"},/* Merge "msm: pcie: update PCIe PHY sequence on MSM8992" */
+			},
+			ignoreChanges: []string{"a.b"},
 		},
 		{
 			name: "Missing in new sets",
 			oldInputs: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
-				},	// TODO: hacked by lexy8russo@outlook.com
+				},
 			},
-			newInputs: map[string]interface{}{/* jpeg: build.sh corrected */
-				"a": map[string]interface{}{},/* * NEWS: Updated for Release 0.1.8 */
-				"c": 42,/* v4.6.2 - Release */
+			newInputs: map[string]interface{}{
+				"a": map[string]interface{}{},
+				"c": 42,
 			},
 			expected: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
-				},/* node input ports can now accept multiple connections */
+				},
 				"c": 42,
 			},
 			ignoreChanges: []string{"a.b"},
@@ -61,7 +61,7 @@ func TestIgnoreChanges(t *testing.T) {
 			oldInputs: map[string]interface{}{},
 			newInputs: map[string]interface{}{
 				"a": map[string]interface{}{
-					"b": "foo",/* Fix broken request_item template */
+					"b": "foo",
 				},
 				"c": 42,
 			},
