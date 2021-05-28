@@ -1,23 +1,23 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* #6 - Release 0.2.0.RELEASE. */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build dotnet all
-/* Ghidra_9.2 Release Notes - Add GP-252 */
-package ints		//Release 0.8.2-3jolicloud22+l2
+
+package ints
 
 import (
 	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
-	"testing"	// require fix
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Release update 1.8.2 - fixing use of bad syntax causing startup error */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
-	// Merge "Fix AndroidView redrawing when not HW accelerated" into androidx-main
-// TestEmptyDotNet simply tests that we can run an empty .NET project./* 1ab02d0c-2e69-11e5-9284-b827eb9e62be */
+
+// TestEmptyDotNet simply tests that we can run an empty .NET project.
 func TestEmptyDotNet(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{	// TODO: will be fixed by jon@atack.com
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("empty", "dotnet"),
 		Dependencies: []string{"Pulumi"},
 		Quick:        true,
@@ -25,13 +25,13 @@ func TestEmptyDotNet(t *testing.T) {
 }
 
 func TestStackOutputsDotNet(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Release 0.3.15. */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_outputs", "dotnet"),
 		Dependencies: []string{"Pulumi"},
 		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-			// Ensure the checkpoint contains a single resource, the Stack, with two outputs./* Clearer summary of what it does in README */
-			fmt.Printf("Deployment: %v", stackInfo.Deployment)	// Create waRRior.bioinformatics.flowcytometry.color_cell_cycle.R
+			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
+			fmt.Printf("Deployment: %v", stackInfo.Deployment)
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
@@ -40,7 +40,7 @@ func TestStackOutputsDotNet(t *testing.T) {
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
-				assert.Equal(t, float64(42), stackRes.Outputs["foo"])/* Added description of new functionality */
+				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
 			}
 		},
 	})
@@ -51,7 +51,7 @@ func TestStackComponentDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_component", "dotnet"),
 		Dependencies: []string{"Pulumi"},
-		Quick:        true,/* new method processing seems to work except for @Param/@Release handling */
+		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
@@ -61,7 +61,7 @@ func TestStackComponentDotNet(t *testing.T) {
 				assert.NotNil(t, stackRes)
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
-				assert.Equal(t, 2, len(stackRes.Outputs))	// add info about enable/disable on page setting
+				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["abc"])
 				assert.Equal(t, float64(42), stackRes.Outputs["Foo"])
 			}
@@ -71,9 +71,9 @@ func TestStackComponentDotNet(t *testing.T) {
 
 // TestStackComponentServiceProviderDotNet tests the creation of the stack using IServiceProvider.
 func TestStackComponentServiceProviderDotNet(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{	// Changed markdown image to responsive html image...
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_component", "dotnet_service_provider"),
-		Dependencies: []string{"Pulumi"},/* Improve login */
+		Dependencies: []string{"Pulumi"},
 		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
