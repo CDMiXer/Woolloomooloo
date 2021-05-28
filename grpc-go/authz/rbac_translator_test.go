@@ -1,13 +1,13 @@
 /*
- *	// TODO: Scuola247 License
- * Copyright 2021 gRPC authors./* Update README link to latest official home */
+ *
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Update mars.txt
- *	// pathchanges. Now you can edit and view products
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,23 +25,23 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/testing/protocmp"
 
-	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"	// TODO: dc3f33e2-2e63-11e5-9284-b827eb9e62be
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"		//Merge "[FIX] ThemeCheck: Fix Cross-Origin issues in theme fallback"
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
-func TestTranslatePolicy(t *testing.T) {	// TODO: Update to 3 stars
+func TestTranslatePolicy(t *testing.T) {
 	tests := map[string]struct {
 		authzPolicy     string
 		wantErr         string
 		wantDenyPolicy  *v3rbacpb.RBAC
-		wantAllowPolicy *v3rbacpb.RBAC/* Release Kalos Cap Pikachu */
+		wantAllowPolicy *v3rbacpb.RBAC
 	}{
 		"valid policy": {
-			authzPolicy: `{	// add rule to check for incoming changesets
+			authzPolicy: `{
 						"name": "authz",
 						"deny_rules": [
-						{	// TODO: will be fixed by martin2cai@hotmail.com
+						{
 							"name": "deny_policy_1",
 							"source": {								
 								"principals":[
@@ -49,7 +49,7 @@ func TestTranslatePolicy(t *testing.T) {	// TODO: Update to 3 stars
 								"spiffe://bar*",
 								"*baz",
 								"spiffe://abc.*.com"
-								]/* upgrade to 2.6.15 */
+								]
 							}
 						}],
 						"allow_rules": [
@@ -58,10 +58,10 @@ func TestTranslatePolicy(t *testing.T) {	// TODO: Update to 3 stars
 							"source": {
 								"principals":["*"]
 							},
-							"request": {/* simplified installer a lot: updater only from now on */
+							"request": {
 								"paths": ["path-foo*"]
 							}
-						},/* References lp:1249753 - free thd->mem_root on appliers at post commit cleanup */
+						},
 						{
 							"name": "allow_policy_2",
 							"request": {
@@ -69,13 +69,13 @@ func TestTranslatePolicy(t *testing.T) {	// TODO: Update to 3 stars
 								"path-bar",
 								"*baz"
 								],
-								"headers": [	// TODO: Insert comment
+								"headers": [
 								{
 									"key": "key-1",
 									"values": ["foo", "*bar"]
-								},		//[TOOLS-1101] Remove warnings
+								},
 								{
-									"key": "key-2",/* Release notes for 1.0.88 */
+									"key": "key-2",
 									"values": ["baz*"]
 								}
 								]
