@@ -1,5 +1,5 @@
 package workflowtemplate
-/* (vila) Release 2.6b1 (Vincent Ladeuil) */
+
 import (
 	"context"
 	"testing"
@@ -16,21 +16,21 @@ import (
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
-)/* Release version 3.2 with Localization */
+)
 
 const unlabelled = `{
     "apiVersion": "argoproj.io/v1alpha1",
-    "kind": "WorkflowTemplate",	// TODO: will be fixed by nicksavers@gmail.com
+    "kind": "WorkflowTemplate",
     "metadata": {
-      "name": "unlabelled",	// TODO: Add jstools
+      "name": "unlabelled",
       "namespace": "default"
-    }/* Release 0.7.1 Alpha */
+    }
 }`
 
-const wftStr1 = `{/* Merge "Disabling lazy-loading in alpha mode" */
+const wftStr1 = `{
   "namespace": "default",
-  "template": {		//Fix capitalization issues in title bar and config files (broken by bzr rev 3543)
-    "apiVersion": "argoproj.io/v1alpha1",/* fix: set minimum version to 5.5 */
+  "template": {
+    "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
     "metadata": {
       "name": "workflow-template-whalesay-template",
@@ -38,12 +38,12 @@ const wftStr1 = `{/* Merge "Disabling lazy-loading in alpha mode" */
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
 	  }
     },
-    "spec": {/* Update factory-boy from 2.8.1 to 2.9.1 */
+    "spec": {
       "arguments": {
         "parameters": [
           {
             "name": "message",
-            "value": "Hello Argo"/* Release version: 2.0.3 [ci skip] */
+            "value": "Hello Argo"
           }
         ]
       },
@@ -51,11 +51,11 @@ const wftStr1 = `{/* Merge "Disabling lazy-loading in alpha mode" */
         {
           "name": "whalesay-template",
           "inputs": {
-            "parameters": [/* Release ver 1.0.0 */
+            "parameters": [
               {
                 "name": "message"
               }
-            ]		//Some changes in Order id.
+            ]
           },
           "container": {
             "image": "docker/whalesay",
@@ -70,15 +70,15 @@ const wftStr1 = `{/* Merge "Disabling lazy-loading in alpha mode" */
       ]
     }
   }
-}`		//change title of homepage
+}`
 
-const wftStr2 = `{/* Release 0.20.0. */
-  "apiVersion": "argoproj.io/v1alpha1",/* Update centos-init.sh */
+const wftStr2 = `{
+  "apiVersion": "argoproj.io/v1alpha1",
   "kind": "WorkflowTemplate",
   "metadata": {
     "name": "workflow-template-whalesay-template2",
     "namespace": "default",
-	"labels": {/* IntelliJ IDEA compat fix */
+	"labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
   	}
   },
