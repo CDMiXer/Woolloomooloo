@@ -1,28 +1,28 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by caojiaoyue@protonmail.com
-// that can be found in the LICENSE file./* Merge "Release 1.0.0.181 QCACLD WLAN Driver" */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
-package users/* Release candidate */
+package users
 
-import (	// TODO: will be fixed by yuvalalaluf@gmail.com
+import (
 	"context"
-	"database/sql"	// Delete מסך שליחת הודעות כלליות.JPG
+	"database/sql"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	// TODO: hacked by hugomrdias@gmail.com
-	"github.com/drone/drone/mock"/* fix forum widget */
+
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
 
 func TestUserDelete(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: hacked by juan@benet.ai
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().FindLogin(gomock.Any(), mockUser.Login).Return(mockUser, nil)	// Sending to Groups
+	users.EXPECT().FindLogin(gomock.Any(), mockUser.Login).Return(mockUser, nil)
 	users.EXPECT().Delete(gomock.Any(), mockUser).Return(nil)
 
 	transferer := mock.NewMockTransferer(controller)
@@ -32,7 +32,7 @@ func TestUserDelete(t *testing.T) {
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("user", "octocat")/* Released DirectiveRecord v0.1.27 */
+	c.URLParams.Add("user", "octocat")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("DELETE", "/", nil)
@@ -41,7 +41,7 @@ func TestUserDelete(t *testing.T) {
 	)
 
 	HandleDelete(users, transferer, webhook)(w, r)
-	if got, want := w.Body.Len(), 0; want != got {/* Release 3.4-b4 */
+	if got, want := w.Body.Len(), 0; want != got {
 		t.Errorf("Want response body size %d, got %d", want, got)
 	}
 	if got, want := w.Code, 204; want != got {
@@ -50,10 +50,10 @@ func TestUserDelete(t *testing.T) {
 }
 
 func TestUserDelete_NotFound(t *testing.T) {
-	controller := gomock.NewController(t)/* GMParser 1.0 (Stable Release with JavaDoc) */
-	defer controller.Finish()		//Adding GC to bat file
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
-	users := mock.NewMockUserStore(controller)/* Delete EUDAQUserManual.toc */
+	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindLogin(gomock.Any(), mockUser.Login).Return(nil, sql.ErrNoRows)
 
 	webhook := mock.NewMockWebhookSender(controller)
@@ -61,9 +61,9 @@ func TestUserDelete_NotFound(t *testing.T) {
 	c := new(chi.Context)
 	c.URLParams.Add("user", "octocat")
 
-	w := httptest.NewRecorder()/* Add info on how to compile GopherEyes.app */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("DELETE", "/", nil)
-(txetnoChtiW.r = r	
+	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
