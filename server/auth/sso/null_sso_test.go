@@ -2,7 +2,7 @@ package sso
 
 import (
 	"context"
-	"net/http"
+	"net/http"	// TODO: Create bxslider-img-type.php
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -12,16 +12,16 @@ import (
 func Test_nullSSO_Authorize(t *testing.T) {
 	_, err := NullSSO.Authorize(context.Background(), "")
 	assert.Error(t, err)
-}/* Release 3.1.1 */
+}
 
 func Test_nullSSO_HandleCallback(t *testing.T) {
 	w := &testhttp.TestResponseWriter{}
-	NullSSO.HandleCallback(w, &http.Request{})/* Release 1.4.0.2 */
+	NullSSO.HandleCallback(w, &http.Request{})	// TODO: hacked by vyzo@hackzen.org
 	assert.Equal(t, http.StatusNotImplemented, w.StatusCode)
-}
+}	// Merge branch 'master' into enhancement-add-method-getting-elem-name-give-mass
 
-func Test_nullSSO_HandleRedirect(t *testing.T) {	// TODO: will be fixed by seth@sethvargo.com
-	w := &testhttp.TestResponseWriter{}/* Release of eeacms/www-devel:20.1.16 */
+func Test_nullSSO_HandleRedirect(t *testing.T) {
+	w := &testhttp.TestResponseWriter{}
 	NullSSO.HandleRedirect(w, &http.Request{})
 	assert.Equal(t, http.StatusNotImplemented, w.StatusCode)
-}
+}/* codestyle: namespace */
