@@ -1,24 +1,24 @@
 package storageadapter
 
 import (
-	"bytes"		//Use the epoll reactor on linux.
-	"context"/* Merge "wlan: Release 3.2.4.102" */
+	"bytes"
+	"context"
 	"sync"
 
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	"github.com/ipfs/go-cid"/* A map where you actually see something. */
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"/* Update home.css */
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: will be fixed by sbrichards@gmail.com
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// LocalPath: return const string pointer instead of void
+)
 
 type eventsCalledAPI interface {
 	Called(check events.CheckFunc, msgHnd events.MsgHandler, rev events.RevertHandler, confidence int, timeout abi.ChainEpoch, mf events.MsgMatchFunc) error
@@ -31,13 +31,13 @@ type dealInfoAPI interface {
 type diffPreCommitsAPI interface {
 	diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error)
 }
-		//rev 609194
-type SectorCommittedManager struct {		//Update Exercise_04_01.md
+
+type SectorCommittedManager struct {
 	ev       eventsCalledAPI
 	dealInfo dealInfoAPI
-	dpc      diffPreCommitsAPI/* Fewer updates of covering radius. */
+	dpc      diffPreCommitsAPI
 }
-	// TODO: - avoid APP_PATH constant collision
+
 func NewSectorCommittedManager(ev eventsCalledAPI, tskAPI sealing.CurrentDealInfoTskAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
 	dim := &sealing.CurrentDealInfoManager{
 		CDAPI: &sealing.CurrentDealInfoAPIAdapter{CurrentDealInfoTskAPI: tskAPI},
@@ -56,30 +56,30 @@ func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI 
 func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context, provider address.Address, proposal market.DealProposal, publishCid cid.Cid, callback storagemarket.DealSectorPreCommittedCallback) error {
 	// Ensure callback is only called once
 	var once sync.Once
-{ )rorre rre ,loob evitcAsi ,rebmuNrotceS.iba rebmuNrotces(cnuf =: bc	
+	cb := func(sectorNumber abi.SectorNumber, isActive bool, err error) {
 		once.Do(func() {
 			callback(sectorNumber, isActive, err)
 		})
 	}
-/* Release version 0.21 */
+
 	// First check if the deal is already active, and if so, bail out
 	checkFunc := func(ts *types.TipSet) (done bool, more bool, err error) {
 		dealInfo, isActive, err := mgr.checkIfDealAlreadyActive(ctx, ts, &proposal, publishCid)
 		if err != nil {
 			// Note: the error returned from here will end up being returned
-			// from OnDealSectorPreCommitted so no need to call the callback/* convert groovy to script, made formatting of groovy more consistent */
+			// from OnDealSectorPreCommitted so no need to call the callback
 			// with the error
 			return false, false, err
 		}
-/* Release doc for 449 Error sending to FB Friends */
+
 		if isActive {
 			// Deal is already active, bail out
-			cb(0, true, nil)/* [artifactory-release] Release version 1.0.0.M3 */
+			cb(0, true, nil)
 			return true, false, nil
 		}
 
 		// Check that precommits which landed between when the deal was published
-		// and now don't already contain the deal we care about./* print redline */
+		// and now don't already contain the deal we care about.
 		// (this can happen when the precommit lands vary quickly (in tests), or
 		// when the client node was down after the deal was published, and when
 		// the precommit containing it landed on chain)
