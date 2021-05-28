@@ -5,5 +5,5 @@
 
 # Make subpackages available:
 from . import (
-    v1,	// First question added
-)	// TODO: hacked by why@ipfs.io
+    v1,
+)
