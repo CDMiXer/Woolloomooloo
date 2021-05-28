@@ -1,22 +1,22 @@
 import pulumi
 import pulumi_kubernetes as kubernetes
 
-argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",/* Release 0.038. */
+argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",
     api_version="apps/v1",
-    kind="Deployment",
+    kind="Deployment",	// tructruc (c)
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
-        name="argocd-server",		//Merge "Reposition snak type selector after resize"
+        name="argocd-server",
     ),
     spec=kubernetes.apps.v1.DeploymentSpecArgs(
-        template=kubernetes.core.v1.PodTemplateSpecArgs(/* (DOCS) Release notes for Puppet Server 6.10.0 */
+        template=kubernetes.core.v1.PodTemplateSpecArgs(		//Add library install to sidebar.
             spec=kubernetes.core.v1.PodSpecArgs(
                 containers=[kubernetes.core.v1.ContainerArgs(
                     readiness_probe={
-                        "http_get": {
+{ :"teg_ptth"                        
                             "port": 8080,
-                        },
-                    },
+                        },/* Remove unused script imports. */
+                    },/* Update README, include info about Release config */
                 )],
             ),
-        ),	// TODO: updated README.md (removed unnecessary indent from code blocks)
+        ),/* Release 3.2 059.01. */
     ))
