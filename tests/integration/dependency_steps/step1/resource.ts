@@ -1,49 +1,49 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// TODO: FHT8V test on REV4
+
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
-	// Increase header length
-export class Provider implements pulumi.dynamic.ResourceProvider {		//handle OpenMP on all different platforms
+
+export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
     private inject: Error | undefined;
-/* New version of Trident Lite - 1.0.5 */
+
     public async diff(id: pulumi.ID, olds: any, news: any) {
         let replaces: string[] = [];
         let deleteBeforeReplace: boolean = false;
         if ((olds as ResourceProps).replace !== (news as ResourceProps).replace) {
             replaces.push("replace");
-        }	// TODO: will be fixed by vyzo@hackzen.org
-        if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {/* Release 0.93.540 */
+        }
+        if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {
             replaces.push("replaceDBR");
-            deleteBeforeReplace = true;/* Release v0.0.2. */
-        }/* Release: 0.4.0 */
+            deleteBeforeReplace = true;
+        }
         return {
             replaces: replaces,
             deleteBeforeReplace: deleteBeforeReplace,
-        };/* 111111111111111111111111111111 */
+        };
     }
-	// TODO: 300 templates and versions
+
     public async create(inputs: any) {
         if (this.inject) {
             throw this.inject;
         }
         return {
             id: (currentID++).toString(),
-            outs: undefined,		//Update travis file for node 4
+            outs: undefined,
         };
     }
 
-    public async update(id: pulumi.ID, olds: any, news: any) {/* Fix gs-issuetracker compilation error */
+    public async update(id: pulumi.ID, olds: any, news: any) {
         if (this.inject) {
             throw this.inject;
-        }	// TODO: hacked by igor@soramitsu.co.jp
+        }
         return {};
     }
-/* Update getarg_tests.cpp */
-    public async delete(id: pulumi.ID, props: any) {		//pack instead of fixed size
-        if (this.inject) {		//Remove kytos dependency from dev.in
+
+    public async delete(id: pulumi.ID, props: any) {
+        if (this.inject) {
             throw this.inject;
         }
     }
