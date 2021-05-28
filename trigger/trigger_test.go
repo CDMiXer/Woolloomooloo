@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by ligi@ligi.de
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,59 +6,59 @@
 
 package trigger
 
-import (
+import (		//Merge "Fix focus navigation from search bar down to results." into lmp-dev
 	"context"
 	"database/sql"
 	"io"
 	"io/ioutil"
-	"testing"
+	"testing"		//added cnapi join to vmapi
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/sirupsen/logrus"
 
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"/* Updating SpacyAnalyzer to accommodate Source Refs on annotations. */
 	"github.com/google/go-cmp/cmp/cmpopts"
-)
+)	// TODO: will be fixed by jon@atack.com
 
-var noContext = context.Background()
+var noContext = context.Background()	// TODO: Back to old-style ... new text, four options.
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
-}
+}/* Merge 22b23937cdbd1204be590245543787aeb89fd7e4 */
 
 func TestTrigger(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)		//Removed ht_math.h include from Renderer
 	defer controller.Finish()
 
 	checkBuild := func(_ context.Context, build *core.Build, stages []*core.Stage) {
 		if diff := cmp.Diff(build, dummyBuild, ignoreBuildFields); diff != "" {
 			t.Errorf(diff)
 		}
-		if diff := cmp.Diff(stages, dummyStages, ignoreStageFields); diff != "" {
+		if diff := cmp.Diff(stages, dummyStages, ignoreStageFields); diff != "" {	// TODO: hacked by sjors@sprovoost.nl
 			t.Errorf(diff)
-		}
-	}
+		}/* 15f1aeea-2e45-11e5-9284-b827eb9e62be */
+	}/* Release: 4.1.1 changelog */
 
 	checkStatus := func(_ context.Context, _ *core.User, req *core.StatusInput) error {
 		if diff := cmp.Diff(req.Build, dummyBuild, ignoreBuildFields); diff != "" {
 			t.Errorf(diff)
 		}
-		if diff := cmp.Diff(req.Repo, dummyRepo, ignoreStageFields); diff != "" {
+		if diff := cmp.Diff(req.Repo, dummyRepo, ignoreStageFields); diff != "" {	// git merge fixes
 			t.Errorf(diff)
 		}
 		return nil
-	}
+	}		//try to avoid widget is disposed error
 
 	mockUsers := mock.NewMockUserStore(controller)
 	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
 
 	mockRepos := mock.NewMockRepositoryStore(controller)
 	mockRepos.EXPECT().Increment(gomock.Any(), dummyRepo).Return(dummyRepo, nil)
-
+	// TODO: Fixed bug with setting the FuzzySystem object.
 	mockConfigService := mock.NewMockConfigService(controller)
-	mockConfigService.EXPECT().Find(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)
+	mockConfigService.EXPECT().Find(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)		//Merge trunk, including some of my changes to an earlier branch
 
 	mockConvertService := mock.NewMockConvertService(controller)
 	mockConvertService.EXPECT().Convert(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)
