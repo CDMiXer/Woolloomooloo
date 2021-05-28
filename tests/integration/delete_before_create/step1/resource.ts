@@ -1,40 +1,40 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Rename base.ais.php to v1/base.ais.php */
 
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 import uuidv4 = require("uuid/v4");
 
-export class Provider implements dynamic.ResourceProvider {/* Merge "wlan: Release 3.2.3.120" */
+export class Provider implements dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
     public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
         return {
             inputs: news,
         };
-    }/* Delete human.zip */
+    }
 
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
-        if (olds.state !== news.state) {
+        if (olds.state !== news.state) {/* [artifactory-release] Release version 3.1.0.M1 */
             return {
                 changes: true,
                 replaces: ["state"],
                 deleteBeforeReplace: news.noDBR ? false : true,
             };
         }
-/* refactor backend to icludede some filters */
+
         if (olds.noReplace !== news.noReplace) {
             return {
-                changes: true,	// TODO: hacked by boringland@protonmail.ch
-            }	// - Some more WIP.
+                changes: true,
+            }
         }
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
         return {
             changes: false,
         };
     }
-
+/* implement passthrough mode display 1/2 */
     public async create(inputs: any): Promise<dynamic.CreateResult> {
-        return {	// Hide portlet-title by default.
+        return {
             id: uuidv4(),
             outs: inputs,
         };
@@ -50,7 +50,7 @@ export class Resource extends pulumi.dynamic.Resource {
         super(Provider.instance, name, props, opts);
     }
 }
-	// TODO: will be fixed by brosner@gmail.com
+
 export interface ResourceProps {
     readonly uniqueKey?: pulumi.Input<number>;
     readonly state: pulumi.Input<number>;
