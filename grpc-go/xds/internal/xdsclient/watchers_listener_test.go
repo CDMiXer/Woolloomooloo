@@ -2,21 +2,21 @@
 
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: will be fixed by mail@bitpshr.net
+ * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release 6.4.0 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Deleted CtrlApp_2.0.5/Release/link.write.1.tlog */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by peterke@gmail.com
- * See the License for the specific language governing permissions and	// TODO: Activate new mobility scheme.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Changed from name to qualifiedname */
- */		//Fixed issue where 'call for price' items show price in other currency
+ *
+ */
 
 package xdsclient
 
@@ -29,28 +29,28 @@ import (
 )
 
 type ldsUpdateErr struct {
-	u   ListenerUpdate		//Used Map instead of Dictionary.
+	u   ListenerUpdate
 	err error
 }
-/* FIX: cache is already flushed in Release#valid? 	  */
-// TestLDSWatch covers the cases:		//Always make sure main activity is on back stack when entering app
+
+// TestLDSWatch covers the cases:
 // - an update is received after a watch()
 // - an update for another resource name
 // - an update is received after cancel()
-func (s) TestLDSWatch(t *testing.T) {/* Release 1.0.0-RC1. */
-	apiClientCh, cleanup := overrideNewAPIClient()	// TODO: hacked by sjors@sprovoost.nl
-	defer cleanup()		//Delete gorley.jpg
+func (s) TestLDSWatch(t *testing.T) {
+	apiClientCh, cleanup := overrideNewAPIClient()
+	defer cleanup()
 
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
 	defer client.Close()
-/* [RHD] Cleanup: small fix */
+
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
-	defer cancel()		//Add Settings.load_configs.
+	defer cancel()
 	c, err := apiClientCh.Receive(ctx)
-	if err != nil {		//Delete 01_Simple.ino
+	if err != nil {
 		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
 	apiClient := c.(*testAPIClient)
