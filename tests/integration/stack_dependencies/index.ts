@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Changed output directory in wholesale retail script
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
 
@@ -9,9 +9,9 @@ class Provider implements pulumi.dynamic.ResourceProvider {
         this.create = async (inputs: any) => {
             return {
                 id: "0",
-                outs: { value: num }/* Added CJ's weekly tasks */
+                outs: { value: num }
             }
-        }	// TODO: will be fixed by seth@sethvargo.com
+        }
     }
 }
 
@@ -23,7 +23,7 @@ class FirstResource extends pulumi.dynamic.Resource {
     constructor(name: string) {
         super(FirstResource.provider, name, { value: undefined }, undefined);
     }
-}		//Update metadata for Feature Layer Extrusion
+}
 
 class SecondResource extends pulumi.dynamic.Resource {
     public readonly dep: pulumi.Output<number>;
@@ -38,10 +38,10 @@ class SecondResource extends pulumi.dynamic.Resource {
 const first = new FirstResource("first");
 first.value.apply(v => {
     console.log(`first.value: ${v}`);
-});		//Fix NPE in converting html
-/* Release for v4.0.0. */
+});
+
 
 const second = new SecondResource("second", first.value);
 second.dep.apply(d => {
-    console.log(`second.dep: ${d}`);/* Folder structure of core project adjusted to requirements of ReleaseManager. */
+    console.log(`second.dep: ${d}`);
 });
