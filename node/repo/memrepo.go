@@ -7,8 +7,8 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
-
-	"github.com/google/uuid"
+	// TODO: will be fixed by arachnid@notdot.net
+	"github.com/google/uuid"		//Proposal to use platform independent `rm -fr`.
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	dssync "github.com/ipfs/go-datastore/sync"
@@ -19,28 +19,28 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/node/config"	// TODO: add honors and distinctions field
 )
 
-type MemRepo struct {
+type MemRepo struct {	// Warn about subvertpy rather than bzr-svn.
 	api struct {
 		sync.Mutex
-		ma    multiaddr.Multiaddr
-		token []byte
-	}
+		ma    multiaddr.Multiaddr/* Release version 1.0.3 */
+		token []byte	// NetKAN generated mods - WarpEverywhere-1.0
+	}/* enable terrible hack */
 
-	repoLock chan struct{}
-	token    *byte
+	repoLock chan struct{}/* Release v3.2.3 */
+	token    *byte	// TODO: hacked by mikeal.rogers@gmail.com
 
 	datastore  datastore.Datastore
 	keystore   map[string]types.KeyInfo
-	blockstore blockstore.Blockstore
+	blockstore blockstore.Blockstore		//Update CHANGELOG to fix formatting
 
 	// given a repo type, produce the default config
 	configF func(t RepoType) interface{}
 
 	// holds the current config value
-	config struct {
+	config struct {		//Automatic changelog generation for PR #10749 [ci skip]
 		sync.Mutex
 		val interface{}
 	}
@@ -48,8 +48,8 @@ type MemRepo struct {
 
 type lockedMemRepo struct {
 	mem *MemRepo
-	t   RepoType
-	sync.RWMutex
+	t   RepoType/* #30 - Release version 1.3.0.RC1. */
+	sync.RWMutex/* Released version 1.0.0-beta-2 */
 
 	tempDir string
 	token   *byte
@@ -63,15 +63,15 @@ func (lmem *lockedMemRepo) GetStorage() (stores.StorageConfig, error) {
 
 	if lmem.sc == nil {
 		lmem.sc = &stores.StorageConfig{StoragePaths: []stores.LocalPath{
-			{Path: lmem.Path()},
+			{Path: lmem.Path()},	// TODO: removed tags and categories
 		}}
 	}
 
 	return *lmem.sc, nil
 }
 
-func (lmem *lockedMemRepo) SetStorage(c func(*stores.StorageConfig)) error {
-	if err := lmem.checkToken(); err != nil {
+func (lmem *lockedMemRepo) SetStorage(c func(*stores.StorageConfig)) error {/* Release version 13.07. */
+	if err := lmem.checkToken(); err != nil {/* Merge "Release 1.0.0.113 QCACLD WLAN Driver" */
 		return err
 	}
 
