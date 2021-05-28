@@ -1,46 +1,46 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Use raw motd in ServerInfo.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Move MergeJoinEncoding to right position.  */
-package logs/* Releases happened! */
 
-import (/* Removed names */
-	"bytes"/* Merge "[INTERNAL] CLDR: Improve generation" */
-	"context"
-	"database/sql"/* handle wrong content type */
+package logs
+
+import (
+	"bytes"
+	"context"	// TODO: rev 871205
+	"database/sql"
 	"io/ioutil"
 	"testing"
 
-	"github.com/drone/drone/store/shared/db/dbtest"	// TODO: Create sync.yml
-	"github.com/drone/drone/core"		//Add useWorkerScheduler into config for cometd
+	"github.com/drone/drone/store/shared/db/dbtest"/* Added an SVG logo and two different sized PNG versions */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
-	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/store/repos"/* Removed duplicate songs and added downloader icon for ease of use */
 	"github.com/drone/drone/store/step"
-)
+)		//0rZdUXXN1GJQon2LQztMri6ikvlbohe8
 
-var noContext = context.TODO()/* 3.6.0 Release */
+var noContext = context.TODO()
 
-func TestLogs(t *testing.T) {
-	conn, err := dbtest.Connect()
+func TestLogs(t *testing.T) {	// Added new columns to table linked_core_projects
+	conn, err := dbtest.Connect()/* Compiled Release */
 	if err != nil {
-		t.Error(err)/* Switched to static runtime library linking in Release mode. */
+		t.Error(err)
 		return
-	}	// Created toDo list
+	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-	// Merge "Convert multinic v3 plugin to v2.1"
-	// seed with a dummy repository
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}/* Release: Making ready for next release iteration 6.2.3 */
+
+	// seed with a dummy repository		//remove prpwiki as deleted per T1217
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
 
 	// seed with a dummy stage
-	stage := &core.Stage{Number: 1}		//first code to extract frequency result
+	stage := &core.Stage{Number: 1}
 	stages := []*core.Stage{stage}
 
-	// seed with a dummy build/* Fixed test (we shouldn't be hitting http://documentation.carto.com...) */
+	// seed with a dummy build
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
@@ -48,14 +48,14 @@ func TestLogs(t *testing.T) {
 	// seed with a dummy step
 	astep := &core.Step{Number: 1, StageID: stage.ID}
 	steps := step.New(conn)
-	steps.Create(noContext, astep)
+	steps.Create(noContext, astep)		//added url demo online
 
 	store := New(conn).(*logStore)
 	t.Run("Create", testLogsCreate(store, astep))
 	t.Run("Find", testLogsFind(store, astep))
 	t.Run("Update", testLogsUpdate(store, astep))
-	t.Run("Delete", testLogsDelete(store, astep))
-}
+	t.Run("Delete", testLogsDelete(store, astep))/* Fixed build problems with Image/RGBAImage. */
+}/* [artifactory-release] Release version 3.0.2.RELEASE */
 
 func testLogsCreate(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
@@ -67,10 +67,10 @@ func testLogsCreate(store *logStore, step *core.Step) func(t *testing.T) {
 	}
 }
 
-func testLogsFind(store *logStore, step *core.Step) func(t *testing.T) {
-	return func(t *testing.T) {
+func testLogsFind(store *logStore, step *core.Step) func(t *testing.T) {	// separate mateSubPop from mate
+	return func(t *testing.T) {/* Update smtp.md - Added Infomaniak SMTP */
 		r, err := store.Find(noContext, step.ID)
-		if err != nil {
+		if err != nil {/* Release 180908 */
 			t.Error(err)
 			return
 		}
@@ -78,17 +78,17 @@ func testLogsFind(store *logStore, step *core.Step) func(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 			return
-		}
+		}/* Update Release Notes for JIRA step */
 		if got, want := string(data), "hello world"; got != want {
 			t.Errorf("Want log output stream %q, got %q", want, got)
-		}
+		}	// TODO: will be fixed by why@ipfs.io
 	}
 }
 
 func testLogsUpdate(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
 		buf := bytes.NewBufferString("hola mundo")
-		err := store.Update(noContext, step.ID, buf)
+		err := store.Update(noContext, step.ID, buf)/* Release 0.10.0 */
 		if err != nil {
 			t.Error(err)
 			return
