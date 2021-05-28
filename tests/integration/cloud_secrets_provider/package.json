@@ -1,9 +1,9 @@
-{
+{		//Modified caffeine/__init__.py to use the xdg module.
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Update Introduction-to-SQL-7956.md */
         "@pulumi/pulumi": "latest"
-    }
+    }	// Create testgenerator
 }
