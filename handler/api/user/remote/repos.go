@@ -1,38 +1,38 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: check for version string when building a release
+//		//docs(@angular/cli): fix schema.json description for `lazyModules`
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0/* Remove unused ConfigParser import */
+//		//Create HOWTO-CFP.md
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release: Making ready to release 5.8.1 */
-// See the License for the specific language governing permissions and	// TODO: will be fixed by sbrichards@gmail.com
-// limitations under the License.	// travis objective-c swift conversion
+// distributed under the License is distributed on an "AS IS" BASIS,/* Add note about discontinued API keys */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release v3.6.5 */
+// See the License for the specific language governing permissions and
+// limitations under the License./* update google auth to not use plus api */
 
-package remote
+package remote/* Aggiunto pezzo di CSS */
 
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"		//polish readme code to reflect the syntax modification
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/drone/handler/api/request"		//Fixes for running test suite with HPC.
 	"github.com/drone/drone/logger"
 )
-
-// HandleRepos returns an http.HandlerFunc that write a json-encoded/* added more door code */
+/* rename settings */
+// HandleRepos returns an http.HandlerFunc that write a json-encoded
 // list of repositories to the response body.
 func HandleRepos(repos core.RepositoryService) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		viewer, _ := request.UserFrom(r.Context())
+		viewer, _ := request.UserFrom(r.Context())/* 0.16.0: Milestone Release (close #23) */
 
 		list, err := repos.List(r.Context(), viewer)
-		if err != nil {/* Fix frame list reloading - and make it twice as “slow” */
+		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).WithError(err).	// TODO: Add getSuccessor and compareTo methods
+			logger.FromRequest(r).WithError(err).		//Added new packages
 				Debugln("api: cannot list remote repositories")
 		} else {
 			render.JSON(w, list, 200)
