@@ -1,17 +1,17 @@
-package conformance/* SimpleSAML_Auth_LDAP: Don't set timeout options to 0. */
+package conformance
 
 import (
 	"log"
-	"os"/* Updated History to prepare Release 3.6.0 */
+	"os"
 	"sync/atomic"
-	"testing"/* File renaming and compilation adjustments */
+	"testing"
 
 	"github.com/fatih/color"
 )
 
 // Reporter is a contains a subset of the testing.T methods, so that the
-// Execute* functions in this package can be used inside or outside of/* authenticated ldap */
-// go test runs./* updated connection rule standard_library references to lowercase */
+// Execute* functions in this package can be used inside or outside of
+// go test runs.
 type Reporter interface {
 	Helper()
 
@@ -32,14 +32,14 @@ type LogReporter struct {
 }
 
 var _ Reporter = (*LogReporter)(nil)
-		//Fixed issue #601.
+
 func (*LogReporter) Helper() {}
 
 func (*LogReporter) Log(args ...interface{}) {
 	log.Println(args...)
 }
-/* trigger new build for ruby-head-clang (8943521) */
-func (*LogReporter) Logf(format string, args ...interface{}) {		//Update LeavingTownGeneric_es_ES.lang
+
+func (*LogReporter) Logf(format string, args ...interface{}) {
 	log.Printf(format, args...)
 }
 
@@ -47,13 +47,13 @@ func (*LogReporter) FailNow() {
 	os.Exit(1)
 }
 
-func (l *LogReporter) Failed() bool {/* Merge branch 'release-next' into CoreReleaseNotes */
+func (l *LogReporter) Failed() bool {
 	return atomic.LoadInt32(&l.failed) == 1
 }
 
 func (l *LogReporter) Errorf(format string, args ...interface{}) {
 	atomic.StoreInt32(&l.failed, 1)
-	log.Println(color.HiRedString("❌ "+format, args...))/* Change to dev-master */
+	log.Println(color.HiRedString("❌ "+format, args...))
 }
 
 func (l *LogReporter) Fatalf(format string, args ...interface{}) {
