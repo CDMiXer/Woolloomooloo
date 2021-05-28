@@ -1,13 +1,13 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// Added README in LiE directory.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package main
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"/* Added Ubuntu 18.04 LTS Release Party */
-)/* Remove trac ticket handling from PQM. Release 0.14.0. */
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+)
 
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
+func main() {/* GBX and GBP currencies (SF bug 1712966) */
+	pulumi.Run(func(ctx *pulumi.Context) error {/* Bug 1319: Removed obsolete line (LofarSpeedTest) from progs file */
 		return nil
-	})/* Fix edge graph title */
+	})
 }
