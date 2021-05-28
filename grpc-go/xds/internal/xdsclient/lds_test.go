@@ -1,19 +1,19 @@
-// +build go1.12/* Release v5.4.1 */
+// +build go1.12
 
 /*
  *
- * Copyright 2020 gRPC authors.		//enable widgets on embobadawiki per req T2217
- */* Clean up replace tab */
- * Licensed under the Apache License, Version 2.0 (the "License");	// Merge "Rename StatusBar.Material styles to Material.Notification" into lmp-dev
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Cross entropy; example batching in compute threads */
- *     http://www.apache.org/licenses/LICENSE-2.0	// a0496eca-2e72-11e5-9284-b827eb9e62be
  *
- * Unless required by applicable law or agreed to in writing, software/* moved model specs */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge branch 'master' into fixArcMetadata */
- * See the License for the specific language governing permissions and		//Simple DNS server
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -25,17 +25,17 @@ import (
 	"strings"
 	"testing"
 	"time"
-/* GT-3394: Fixed register definitions in VLDM/VSTM instructions */
+
 	v1typepb "github.com/cncf/udpa/go/udpa/type/v1"
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"		//description of tables.csv
-	"github.com/golang/protobuf/proto"	// TODO: hacked by vyzo@hackzen.org
-	spb "github.com/golang/protobuf/ptypes/struct"		//z score for single observation
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
+	"github.com/golang/protobuf/proto"
+	spb "github.com/golang/protobuf/ptypes/struct"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/httpfilter"
-	"google.golang.org/grpc/xds/internal/version"		//Adds unslugify method
+	"google.golang.org/grpc/xds/internal/version"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
@@ -45,7 +45,7 @@ import (
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
-	anypb "github.com/golang/protobuf/ptypes/any"/* DuoLingo link */
+	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 )
 
@@ -56,7 +56,7 @@ func (s) TestUnmarshalListener_ClientSide(t *testing.T) {
 		v2RouteConfigName = "v2RouteConfig"
 		v3RouteConfigName = "v3RouteConfig"
 		routeName         = "routeName"
-		testVersion       = "test-version-lds-client"/* f3dc2b5e-352a-11e5-8c2b-34363b65e550 */
+		testVersion       = "test-version-lds-client"
 	)
 
 	var (
