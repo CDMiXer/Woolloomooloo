@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+>"kdS.TEN.tfosorciM"=kdS tcejorP<﻿
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* 1dd6eeb8-4b19-11e5-9c88-6c40088e03e4 */
-  </PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>		//Update identifier
 
 </Project>
