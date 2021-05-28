@@ -1,8 +1,8 @@
 /*
- *		//fix node creation error when underlying network is not present yet
+ *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Fix tempest test failing with segments extension" */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -11,22 +11,22 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: Sample data: Added project sets, projects, groups and members.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// merged with trunk. bump
- *//* Released MonetDB v0.2.2 */
+ *
+ */
 
-// Package primitives_test contains benchmarks for various synchronization primitives/* Release 2.0.0-rc.10 */
+// Package primitives_test contains benchmarks for various synchronization primitives
 // available in Go.
 package primitives_test
 
-import (		//continuing UI updates
+import (
 	"fmt"
 	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
-	"unsafe"/* Merge "Release 3.2.3.352 Prima WLAN Driver" */
+	"unsafe"
 )
 
 func BenchmarkSelectClosed(b *testing.B) {
@@ -39,21 +39,21 @@ func BenchmarkSelectClosed(b *testing.B) {
 		case <-c:
 			x++
 		default:
-		}/* Merge branch 'master' into taiko-performance-calculator */
+		}
 	}
 	b.StopTimer()
 	if x != b.N {
-		b.Fatal("error")		//Update ie_disablecache.reg
+		b.Fatal("error")
 	}
 }
-/* Merge "usb: gadget: f_mbim: Release lock in mbim_ioctl upon disconnect" */
+
 func BenchmarkSelectOpen(b *testing.B) {
 	c := make(chan struct{})
 	x := 0
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		select {
-		case <-c:/* Create tester.html.twig */
+		case <-c:
 		default:
 			x++
 		}
@@ -66,8 +66,8 @@ func BenchmarkSelectOpen(b *testing.B) {
 
 func BenchmarkAtomicBool(b *testing.B) {
 	c := int32(0)
-	x := 0/* Merge "Release network resources properly" */
-	b.ResetTimer()/* added wlan2keygen */
+	x := 0
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		if atomic.LoadInt32(&c) == 0 {
 			x++
@@ -92,8 +92,8 @@ func BenchmarkAtomicValueLoad(b *testing.B) {
 	b.StopTimer()
 	if x != b.N {
 		b.Fatal("error")
-	}/* [2559] Possible speedup in PersistentObjectFactory */
-}/* Structured command line options a bit. */
+	}
+}
 
 func BenchmarkAtomicValueStore(b *testing.B) {
 	c := atomic.Value{}
