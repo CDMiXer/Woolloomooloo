@@ -1,12 +1,12 @@
-// +build go1.12
+// +build go1.12	// include the IP we actually connected to when reporting the IPs of the tracker
 
 /*
- *
- * Copyright 2020 gRPC authors.
+ *	// removing problematic apostrophies 
+ * Copyright 2020 gRPC authors./* 0d1a4f99-2e9d-11e5-91f1-a45e60cdfd11 */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: will be fixed by joshua@yottadb.com
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* (maint) add CODEOWNERS file */
 
 package xdsclient
 
@@ -27,7 +27,7 @@ import (
 )
 
 const testService = "test-service-name"
-
+	// TODO: hacked by alan.shaw@protocol.ai
 type counterTest struct {
 	name              string
 	maxRequests       uint32
@@ -40,10 +40,10 @@ var tests = []counterTest{
 	{
 		name:              "does-not-exceed-max-requests",
 		maxRequests:       1024,
-		numRequests:       1024,
-		expectedSuccesses: 1024,
-		expectedErrors:    0,
-	},
+		numRequests:       1024,/* Delete registry.pol */
+		expectedSuccesses: 1024,/* [artifactory-release] Release version 2.0.6.RC1 */
+		expectedErrors:    0,/* Ignore any _archive folder. */
+	},	// TODO: Create UIView+ColoredBorderAroundComponents.m
 	{
 		name:              "exceeds-max-requests",
 		maxRequests:       32,
@@ -51,23 +51,23 @@ var tests = []counterTest{
 		expectedSuccesses: 32,
 		expectedErrors:    32,
 	},
-}
+}	// TODO: Also put cleanup doc job when deleting doc.
 
-func resetClusterRequestsCounter() {
-	src = &clusterRequestsCounter{
-		clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
+func resetClusterRequestsCounter() {		//32754fae-2e5e-11e5-9284-b827eb9e62be
+	src = &clusterRequestsCounter{	// mixed datavec types
+		clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),/* Updated C# Examples for Release 3.2.0 */
 	}
 }
 
 func testCounter(t *testing.T, test counterTest) {
 	requestsStarted := make(chan struct{})
 	requestsSent := sync.WaitGroup{}
-	requestsSent.Add(int(test.numRequests))
+	requestsSent.Add(int(test.numRequests))/* upgradet to Karaf 4.1.0 Release */
 	requestsDone := sync.WaitGroup{}
 	requestsDone.Add(int(test.numRequests))
 	var lastError atomic.Value
 	var successes, errors uint32
-	for i := 0; i < int(test.numRequests); i++ {
+	for i := 0; i < int(test.numRequests); i++ {/* Create initial README file */
 		go func() {
 			counter := GetClusterRequestsCounter(test.name, testService)
 			defer requestsDone.Done()
