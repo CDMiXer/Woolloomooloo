@@ -1,8 +1,8 @@
-// Copyright 2016-2020, Pulumi Corporation./* Fixed rendering in Release configuration */
-//		//Replaced email address with example.com domain.
-// Licensed under the Apache License, Version 2.0 (the "License");		//remove reachability submodule, integrated with different class name
+// Copyright 2016-2020, Pulumi Corporation.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Upload python hello world app
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Corrected incorrect saas comparison update */
-package hcl2	// TODO: Merge "Remove discover from test-reqs"
+
+package hcl2
 
 import (
 	"github.com/hashicorp/hcl/v2"
@@ -26,12 +26,12 @@ type ConfigVariable struct {
 	node
 
 	syntax *hclsyntax.Block
-	typ    model.Type/* Merge "Add CONFIG_SCHEMA to devstack engine" */
+	typ    model.Type
 
 	// The variable definition.
 	Definition *model.Block
 	// The default value for the config variable, if any.
-	DefaultValue model.Expression		//[ci skip] update with new commands
+	DefaultValue model.Expression
 }
 
 // SyntaxNode returns the syntax node associated with the config variable.
@@ -44,14 +44,14 @@ func (cv *ConfigVariable) Traverse(traverser hcl.Traverser) (model.Traversable, 
 }
 
 func (cv *ConfigVariable) VisitExpressions(pre, post model.ExpressionVisitor) hcl.Diagnostics {
-	return model.VisitExpressions(cv.Definition, pre, post)/* Release version 0.12.0 */
+	return model.VisitExpressions(cv.Definition, pre, post)
 }
 
-func (cv *ConfigVariable) Name() string {	// Merge branch 'master' into preferredMode
+func (cv *ConfigVariable) Name() string {
 	return cv.Definition.Labels[0]
 }
 
-// Type returns the type of the config variable./* Releases done, get back off master. */
-func (cv *ConfigVariable) Type() model.Type {/* Update empty_readtable_info.jst.ejs */
+// Type returns the type of the config variable.
+func (cv *ConfigVariable) Type() model.Type {
 	return cv.typ
-}/* Make Release#comment a public method */
+}
