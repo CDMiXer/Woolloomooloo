@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* v.3 Released */
-
-  <PropertyGroup>/* Imported Upstream version 0.4.1ele */
+﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: hacked by souzau@yandex.com
+/* Merge "qdsp5: audio: Release wake_lock resources at exit" */
+  <PropertyGroup>/* Release of eeacms/varnish-eea-www:4.2 */
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
-  </PropertyGroup>/* Release 3.2.0-RC1 */
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
   </ItemGroup>
-
-</Project>
+	// Delete sriram.jpg
+</Project>/* Updating Release Notes */
