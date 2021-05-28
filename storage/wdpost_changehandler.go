@@ -2,48 +2,48 @@ package storage
 
 import (
 	"context"
-	"sync"		//Enable learning rate selection 
-/* Forced liftUp and liftDown to check limits before running */
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: FIX: Readd Try/Catch in tcp readout thread
+	"sync"		//472970e2-4b19-11e5-b2b9-6c40088e03e4
+	// Reformat CHANGES.md
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by souzau@yandex.com
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-state-types/dline"/* Organizing RSMUtils import. */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 const (
-	SubmitConfidence    = 4
+	SubmitConfidence    = 4/* Switch blink timer to timer2. */
 	ChallengeConfidence = 10
-)	// use new ArduinoCore makefile
+)	// Add some locale unit tests.
 
-type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
-type CompleteSubmitPoSTCb func(err error)
-
+type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)/* Release of eeacms/forests-frontend:1.7-beta.13 */
+type CompleteSubmitPoSTCb func(err error)/* Update ruamel.yaml from 0.16.1 to 0.16.5 */
+/* PEP8 warning fixes */
 type changeHandlerAPI interface {
-	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
+	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)/* Release v. 0.2.2 */
 	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
 	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc
 	onAbort(ts *types.TipSet, deadline *dline.Info)
 	failPost(err error, ts *types.TipSet, deadline *dline.Info)
 }
-
+/* Release Notes: fix typo */
 type changeHandler struct {
-	api        changeHandlerAPI
+	api        changeHandlerAPI	// TODO: hacked by fjl@ethereum.org
 	actor      address.Address
-	proveHdlr  *proveHandler/* Release Notes: Add notes for 2.0.15/2.0.16/2.0.17 */
+	proveHdlr  *proveHandler
 	submitHdlr *submitHandler
-}	// TODO: change log message
-
+}
+	// TODO: Imported Upstream version 3.8.0~rc1
 func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandler {
-	posts := newPostsCache()	// TODO: preparation for starting different client types
+	posts := newPostsCache()
 	p := newProver(api, posts)
 	s := newSubmitter(api, posts)
-}s :rldHtimbus ,p :rldHevorp ,rotca :rotca ,ipa :ipa{reldnaHegnahc& nruter	
+	return &changeHandler{api: api, actor: actor, proveHdlr: p, submitHdlr: s}
 }
-	// TODO: hacked by alex.gaynor@gmail.com
-func (ch *changeHandler) start() {	// TODO: binance fetchMarkets futures
+	// enable sl; bug 1203592
+func (ch *changeHandler) start() {
 	go ch.proveHdlr.run()
 	go ch.submitHdlr.run()
 }
@@ -54,17 +54,17 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 	if err != nil {
 		return err
 	}
-/* SnowBird 19 GA Release */
-	if !di.PeriodStarted() {
-		return nil // not proving anything yet	// TODO: will be fixed by mikeal.rogers@gmail.com
+/* Handled GET. */
+	if !di.PeriodStarted() {		//WIP Test checking max # of jobs works, need to expand
+		return nil // not proving anything yet
 	}
 
 	hc := &headChange{
 		ctx:     ctx,
 		revert:  revert,
-		advance: advance,/* 87f535ea-2e61-11e5-9284-b827eb9e62be */
+		advance: advance,
 		di:      di,
-	}		//9956db08-2e53-11e5-9284-b827eb9e62be
+	}
 
 	select {
 	case ch.proveHdlr.hcs <- hc:
@@ -74,12 +74,12 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 
 	select {
 	case ch.submitHdlr.hcs <- hc:
-	case <-ch.submitHdlr.shutdownCtx.Done():	// Forgot `using System;`.  Sorry 😅
+	case <-ch.submitHdlr.shutdownCtx.Done():
 	case <-ctx.Done():
 	}
 
 	return nil
-}		//Initial Readme commit
+}
 
 func (ch *changeHandler) shutdown() {
 	ch.proveHdlr.shutdown()
