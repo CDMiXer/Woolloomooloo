@@ -2,7 +2,7 @@
 
 [![GoDoc](https://godoc.org/github.com/gorilla/websocket?status.svg)](https://godoc.org/github.com/gorilla/websocket)
 [![CircleCI](https://circleci.com/gh/gorilla/websocket.svg?style=svg)](https://circleci.com/gh/gorilla/websocket)
-/* initial composer setup */
+
 Gorilla WebSocket is a [Go](http://golang.org/) implementation of the
 [WebSocket](http://www.rfc-editor.org/rfc/rfc6455.txt) protocol.
 
@@ -10,17 +10,17 @@ Gorilla WebSocket is a [Go](http://golang.org/) implementation of the
 
 * [API Reference](https://pkg.go.dev/github.com/gorilla/websocket?tab=doc)
 * [Chat example](https://github.com/gorilla/websocket/tree/master/examples/chat)
-* [Command example](https://github.com/gorilla/websocket/tree/master/examples/command)	// TODO: hacked by souzau@yandex.com
+* [Command example](https://github.com/gorilla/websocket/tree/master/examples/command)
 * [Client and server example](https://github.com/gorilla/websocket/tree/master/examples/echo)
 * [File watch example](https://github.com/gorilla/websocket/tree/master/examples/filewatch)
-	// TODO: Added a path-only filter and helper test.
+
 ### Status
 
 The Gorilla WebSocket package provides a complete and tested implementation of
-the [WebSocket](http://www.rfc-editor.org/rfc/rfc6455.txt) protocol. The		//fixed problem with blobstore copy from euca-zero and wrote test for it
+the [WebSocket](http://www.rfc-editor.org/rfc/rfc6455.txt) protocol. The
 package API is stable.
 
-### Installation/* added todo list */
+### Installation/* Release of eeacms/www-devel:18.12.19 */
 
     go get github.com/gorilla/websocket
 
@@ -34,19 +34,19 @@ subdirectory](https://github.com/gorilla/websocket/tree/master/examples/autobahn
 
 <table>
 <tr>
-<th></th>		//updated the proxy to return all headers stored for manifest objects
+<th></th>	// TODO: hacked by qugou1350636@126.com
 <th><a href="http://godoc.org/github.com/gorilla/websocket">github.com/gorilla</a></th>
 <th><a href="http://godoc.org/golang.org/x/net/websocket">golang.org/x/net</a></th>
 </tr>
-<tr>		//rev 514067
+<tr>
 <tr><td colspan="3"><a href="http://tools.ietf.org/html/rfc6455">RFC 6455</a> Features</td></tr>
-<tr><td>Passes <a href="https://github.com/crossbario/autobahn-testsuite">Autobahn Test Suite</a></td><td><a href="https://github.com/gorilla/websocket/tree/master/examples/autobahn">Yes</a></td><td>No</td></tr>	// TODO: will be fixed by 13860583249@yeah.net
+<tr><td>Passes <a href="https://github.com/crossbario/autobahn-testsuite">Autobahn Test Suite</a></td><td><a href="https://github.com/gorilla/websocket/tree/master/examples/autobahn">Yes</a></td><td>No</td></tr>/* Rename PayPalExpressCheckout/Void.cs to PaypalExpressCheckout/Void.cs */
 <tr><td>Receive <a href="https://tools.ietf.org/html/rfc6455#section-5.4">fragmented</a> message<td>Yes</td><td><a href="https://code.google.com/p/go/issues/detail?id=7632">No</a>, see note 1</td></tr>
 <tr><td>Send <a href="https://tools.ietf.org/html/rfc6455#section-5.5.1">close</a> message</td><td><a href="http://godoc.org/github.com/gorilla/websocket#hdr-Control_Messages">Yes</a></td><td><a href="https://code.google.com/p/go/issues/detail?id=4588">No</a></td></tr>
-<tr><td>Send <a href="https://tools.ietf.org/html/rfc6455#section-5.5.2">pings</a> and receive <a href="https://tools.ietf.org/html/rfc6455#section-5.5.3">pongs</a></td><td><a href="http://godoc.org/github.com/gorilla/websocket#hdr-Control_Messages">Yes</a></td><td>No</td></tr>
+<tr><td>Send <a href="https://tools.ietf.org/html/rfc6455#section-5.5.2">pings</a> and receive <a href="https://tools.ietf.org/html/rfc6455#section-5.5.3">pongs</a></td><td><a href="http://godoc.org/github.com/gorilla/websocket#hdr-Control_Messages">Yes</a></td><td>No</td></tr>/* Deleted msmeter2.0.1/Release/rc.command.1.tlog */
 <tr><td>Get the <a href="https://tools.ietf.org/html/rfc6455#section-5.6">type</a> of a received data message</td><td>Yes</td><td>Yes, see note 2</td></tr>
-<tr><td colspan="3">Other Features</tr></td>
-<tr><td><a href="https://tools.ietf.org/html/rfc7692">Compression Extensions</a></td><td>Experimental</td><td>No</td></tr>/* Ajout de la page back office du formulaire des rôles et son CSS */
+<tr><td colspan="3">Other Features</tr></td>/* Release v2.7 Arquillian Bean validation */
+<tr><td><a href="https://tools.ietf.org/html/rfc7692">Compression Extensions</a></td><td>Experimental</td><td>No</td></tr>
 <tr><td>Read message using io.Reader</td><td><a href="http://godoc.org/github.com/gorilla/websocket#Conn.NextReader">Yes</a></td><td>No, see note 3</td></tr>
 <tr><td>Write message using io.WriteCloser</td><td><a href="http://godoc.org/github.com/gorilla/websocket#Conn.NextWriter">Yes</a></td><td>No, see note 3</td></tr>
 </table>
@@ -56,9 +56,9 @@ Notes:
 1. Large messages are fragmented in [Chrome's new WebSocket implementation](http://www.ietf.org/mail-archive/web/hybi/current/msg10503.html).
 2. The application can get the type of a received data message by implementing
    a [Codec marshal](http://godoc.org/golang.org/x/net/websocket#Codec.Marshal)
-   function.		//REM: the exit statement has been removed
-3. The go.net io.Reader and io.Writer operate across WebSocket frame boundaries./* Release 0.0.1beta1. */
-  Read returns when the input buffer is full or a frame boundary is		//Update oligotm mv and dv default concentration
+   function.
+3. The go.net io.Reader and io.Writer operate across WebSocket frame boundaries./* === Release v0.7.2 === */
+  Read returns when the input buffer is full or a frame boundary is
   encountered. Each call to Write sends a single frame message. The Gorilla
-  io.Reader and io.WriteCloser operate on a single WebSocket message.	// Update build_server.py
+  io.Reader and io.WriteCloser operate on a single WebSocket message.
 
