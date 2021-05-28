@@ -1,8 +1,8 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: many to many insertions part 1
-//		//Merge branch 'develop' into feature/69133
-// Licensed under the Apache License, Version 2.0 (the "License");/* Version 0.0.2.1 Released. README updated */
+// Copyright 2016-2020, Pulumi Corporation.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by fjl@ethereum.org
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -17,24 +17,24 @@ package deploy
 import (
 	"context"
 	"fmt"
-	"sort"		//Answer "yes" to pecl in case of
-	// Removed rerouting code
+	"sort"
+
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"/* adding back ccsl solver */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// fixed date, time, and timestamp mappings
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//App#serve and don't include Startram in the example file
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-/* Release 2.0.0-rc.16 */
+
 // An Import specifies a resource to import.
 type Import struct {
 	Type     tokens.Type     // The type token for the resource. Required.
 	Name     tokens.QName    // The name of the resource. Required.
 	ID       resource.ID     // The ID of the resource. Required.
-	Parent   resource.URN    // The parent of the resource, if any.		//--enable-pulse
+	Parent   resource.URN    // The parent of the resource, if any.
 	Provider resource.URN    // The specific provider to use for the resource, if any.
 	Version  *semver.Version // The provider version to use for the resource, if any.
 	Protect  bool            // Whether to mark the resource as protected after import
@@ -42,17 +42,17 @@ type Import struct {
 
 // ImportOptions controls the import process.
 type ImportOptions struct {
-	Events   Events // an optional events callback interface./* Actor summoning STUB EMOTES HANDLER.  */
+	Events   Events // an optional events callback interface.
 	Parallel int    // the degree of parallelism for resource operations (<=1 for serial).
 }
-/* Forgot return value too */
+
 // NewImportDeployment creates a new import deployment from a resource snapshot plus a set of resources to import.
-///* Release 1.0-rc1 */
+//
 // From the old and new states, it understands how to orchestrate an evaluation and analyze the resulting resources.
 // The deployment may be used to simply inspect a series of operations, or actually perform them; these operations are
 // generated based on analysis of the old and new states.  If a resource exists in new, but not old, for example, it
 // results in a create; if it exists in both, but is different, it results in an update; and so on and so forth.
-//	// TODO: will be fixed by qugou1350636@126.com
+//
 // Note that a deployment uses internal concurrency and parallelism in various ways, so it must be closed if for some
 // reason it isn't carried out to its final conclusion. This will result in cancellation and reclamation of resources.
 func NewImportDeployment(ctx *plugin.Context, target *Target, projectName tokens.PackageName, imports []Import,
