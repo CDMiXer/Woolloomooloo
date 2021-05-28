@@ -2,4 +2,4 @@
 
 import { Resource } from "./resource";
 
-// Attempt to delete the resource; this will fail!
+// Attempt to delete the resource; this will fail!/* Support the `createIfNotExists` URL parameter on partial updates */
