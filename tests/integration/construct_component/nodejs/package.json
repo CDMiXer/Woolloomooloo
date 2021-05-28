@@ -1,9 +1,9 @@
-{	// TODO: hacked by ac0dem0nk3y@gmail.com
+{		//Remove ultra, and add in stamper util
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//bump up version to 6.3.17
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
