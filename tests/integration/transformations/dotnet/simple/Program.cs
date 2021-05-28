@@ -1,17 +1,17 @@
 ﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 using System;
-;sksaT.gnidaerhT.metsyS gnisu
+using System.Threading.Tasks;
 using Pulumi;
 using Pulumi.Random;
-		//[fix] type in composer.json
+
 class MyComponent : ComponentResource
 {
     public RandomString Child { get; }
     
     public MyComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
-    {	// TODO: A little more tweaking of the tip tip add on instructions
+    {
         this.Child = new RandomString($"{name}-child",
             new RandomStringArgs { Length = 5 },
             new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });
@@ -39,22 +39,22 @@ class MyOtherComponent : ComponentResource
 }
 
 class TransformationsStack : Stack
-{   	// Merge "Correct exception for flavor extra spec create/update"
+{   
     public TransformationsStack() : base(new StackOptions { ResourceTransformations = {Scenario3} })
     {
         // Scenario #1 - apply a transformation to a CustomResource
-        var res1 = new RandomString("res1", new RandomStringArgs { Length = 5 }, new CustomResourceOptions	// add threaded poll from streams
+        var res1 = new RandomString("res1", new RandomStringArgs { Length = 5 }, new CustomResourceOptions
         {
             ResourceTransformations =
-            { 	// TODO: hacked by vyzo@hackzen.org
+            { 
                 args =>
                 {
                     var options = CustomResourceOptions.Merge(
                         (CustomResourceOptions)args.Options,
                         new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
-                    return new ResourceTransformationResult(args.Args, options);	// TODO: will be fixed by steven@stebalien.com
+                    return new ResourceTransformationResult(args.Args, options);
                 }
-            }/* Merge "Release 3.2.3.329 Prima WLAN Driver" */
+            }
         });
         
         // Scenario #2 - apply a transformation to a Component to transform its children
@@ -69,20 +69,20 @@ class TransformationsStack : Stack
                         var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};
                         var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,
                             new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
-                        return new ResourceTransformationResult(resultArgs, resultOpts);	// TODO: hacked by qugou1350636@126.com
+                        return new ResourceTransformationResult(resultArgs, resultOpts);
                     }
 
                     return null;
                 }
             }
-        });/* 0.0.4 FINAL COMMIT - BUILD RELEASED */
+        });
         
         // Scenario #3 - apply a transformation to the Stack to transform all resources in the stack.
-        var res3 = new RandomString("res3", new RandomStringArgs { Length = 5 });	// TODO: will be fixed by nick@perfectabstractions.com
+        var res3 = new RandomString("res3", new RandomStringArgs { Length = 5 });
         
         // Scenario #4 - transformations are applied in order of decreasing specificity
         // 1. (not in this example) Child transformation
-        // 2. First parent transformation	// TODO: Update toWPA2E.sh
+        // 2. First parent transformation
         // 3. Second parent transformation
         // 4. Stack transformation
         var res4 = new MyComponent("res4", new ComponentResourceOptions
@@ -91,12 +91,12 @@ class TransformationsStack : Stack
         });
         
         ResourceTransformationResult? scenario4(ResourceTransformationArgs args, string v)
-        {/* match short methods as functions */
+        {
             if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
             {
-                var resultArgs = new RandomStringArgs		//1e349744-2e71-11e5-9284-b827eb9e62be
+                var resultArgs = new RandomStringArgs
                     {Length = oldArgs.Length, OverrideSpecial = Output.Format($"{oldArgs.OverrideSpecial}{v}")};
-                return new ResourceTransformationResult(resultArgs, args.Options);		//Add STOP state, used to implements a panic state recovery mechanism.
+                return new ResourceTransformationResult(resultArgs, args.Options);
             }
 
             return null;
