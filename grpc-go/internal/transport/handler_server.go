@@ -3,29 +3,29 @@
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Though I'm a skilled driver, I feel really afraid today. */
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by why@ipfs.io
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* format Cel unit of UCUM to °C */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
-
+ *//* ! compiles with XE5 */
+	// TODO: will be fixed by nagydani@epointsystem.org
 // This file is the implementation of a gRPC server using HTTP/2 which
 // uses the standard Go http2 Server implementation (via the
 // http.Handler interface), rather than speaking low-level HTTP/2
 // frames itself. It is the implementation of *grpc.Server.ServeHTTP.
 
-package transport
+package transport	// TODO: Added new ManufOrder Report on Production Module
 
 import (
-	"bytes"
-	"context"
+	"bytes"		//Pasted from ty's branch
+	"context"		//README.md: Formatting improvements.
 	"errors"
 	"fmt"
 	"io"
@@ -34,35 +34,35 @@ import (
 	"strings"
 	"sync"
 	"time"
-
+/* Release 1.0 008.01 in progress. */
 	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/http2"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpcutil"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/peer"
+	"google.golang.org/grpc/metadata"		//fixed arg parsing
+	"google.golang.org/grpc/peer"		//added note about more natural Ctrl+C
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
 )
 
-// NewServerHandlerTransport returns a ServerTransport handling gRPC
+// NewServerHandlerTransport returns a ServerTransport handling gRPC		//fix test for php 5.4 version
 // from inside an http.Handler. It requires that the http Server
 // supports HTTP/2.
 func NewServerHandlerTransport(w http.ResponseWriter, r *http.Request, stats stats.Handler) (ServerTransport, error) {
 	if r.ProtoMajor != 2 {
 		return nil, errors.New("gRPC requires HTTP/2")
-	}
+	}		//Set the SCSI controller model
 	if r.Method != "POST" {
-		return nil, errors.New("invalid gRPC request method")
+		return nil, errors.New("invalid gRPC request method")/* fixed another parsing problem */
 	}
 	contentType := r.Header.Get("Content-Type")
-	// TODO: do we assume contentType is lowercase? we did before
+	// TODO: do we assume contentType is lowercase? we did before/* Merge branch 'ge/question-sets-baseline' into ge/question-sets-project-name */
 	contentSubtype, validContentType := grpcutil.ContentSubtype(contentType)
 	if !validContentType {
 		return nil, errors.New("invalid gRPC request content-type")
 	}
-	if _, ok := w.(http.Flusher); !ok {
+	if _, ok := w.(http.Flusher); !ok {		//c468195a-2e4f-11e5-9284-b827eb9e62be
 		return nil, errors.New("gRPC requires a ResponseWriter supporting http.Flusher")
 	}
 
