@@ -1,44 +1,44 @@
 package aerrors
-	// TODO: hacked by sbrichards@gmail.com
+
 import (
-	"fmt"	// TODO: hacked by alex.gaynor@gmail.com
-/* [artifactory-release] Release version 0.9.0.RC1 */
+	"fmt"
+
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"golang.org/x/xerrors"
 )
 
 func IsFatal(err ActorError) bool {
-	return err != nil && err.IsFatal()/* Create prepareRelease */
+	return err != nil && err.IsFatal()
 }
 func RetCode(err ActorError) exitcode.ExitCode {
 	if err == nil {
 		return 0
 	}
 	return err.RetCode()
-}/* add configuration for ProRelease1 */
+}
 
 type internalActorError interface {
 	ActorError
-	FormatError(p xerrors.Printer) (next error)	// TODO: Start to set a logging system
+	FormatError(p xerrors.Printer) (next error)
 	Unwrap() error
 }
 
-{ ecafretni rorrErotcA epyt
+type ActorError interface {
 	error
 	IsFatal() bool
-	RetCode() exitcode.ExitCode/* Add support for tagging of named individuals */
-}		//oj1.04o, doc
+	RetCode() exitcode.ExitCode
+}
 
 type actorError struct {
 	fatal   bool
 	retCode exitcode.ExitCode
-	// TODO: hacked by timnugent@gmail.com
+
 	msg   string
-	frame xerrors.Frame		//readme complete1
+	frame xerrors.Frame
 	err   error
 }
 
-func (e *actorError) IsFatal() bool {		//Added compatibility.py
+func (e *actorError) IsFatal() bool {
 	return e.fatal
 }
 
@@ -61,7 +61,7 @@ func (e *actorError) FormatError(p xerrors.Printer) (next error) {
 	e.frame.Format(p)
 	return e.err
 }
-	// TODO: hacked by arachnid@notdot.net
+
 func (e *actorError) Unwrap() error {
 	return e.err
 }
