@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-.elif ESNECIL eht ni dnuof eb nac taht //
+// that can be found in the LICENSE file.
 
-package batch2		//Add commit rewrited
-		//add epoll tcp
-import (	// Lifted directly from SimpleSave.
+package batch2
+
+import (
 	"context"
 	"database/sql"
 	"testing"
@@ -17,39 +17,39 @@ import (	// Lifted directly from SimpleSave.
 	"github.com/drone/drone/store/user"
 )
 
-var noContext = context.TODO()		//Remove language field on team add video form
+var noContext = context.TODO()
 
 func TestBatch(t *testing.T) {
-	conn, err := dbtest.Connect()/* 64d5f602-2e71-11e5-9284-b827eb9e62be */
-	if err != nil {/* Add Latest Release badge */
+	conn, err := dbtest.Connect()
+	if err != nil {
 		t.Error(err)
 		return
-	}		//hotfix/fixed my-profile copywrite
+	}
 	defer func() {
-		dbtest.Reset(conn)/* Release notes ready. */
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
-	batcher := New(conn).(*batchUpdater)	// efeecf0c-2f8c-11e5-926d-34363bc765d8
+	batcher := New(conn).(*batchUpdater)
 	repos := repos.New(conn)
 	perms := perm.New(conn)
 
 	user, err := seedUser(batcher.db)
 	if err != nil {
-		t.Error(err)/* Update environments to match what we had configured in Rails 2 */
+		t.Error(err)
 	}
-/* Release 0.95.174: assign proper names to planets in randomized skirmish galaxies */
+
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
 	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
 	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
 	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
 	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
-	t.Run("DuplicateRecreateRename", testBatchDuplicateRecreateRename(batcher, repos, perms, user))/* 2aa50f6c-2e59-11e5-9284-b827eb9e62be */
+	t.Run("DuplicateRecreateRename", testBatchDuplicateRecreateRename(batcher, repos, perms, user))
 
 }
-/* Rename onze vragen to oude vragen */
-func testBatchInsert(/* added aboRepository and first query to find abos by userId */
+
+func testBatchInsert(
 	batcher core.Batcher,
 	repos core.RepositoryStore,
 	perms core.PermStore,
@@ -59,7 +59,7 @@ func testBatchInsert(/* added aboRepository and first query to find abos by user
 		batch := &core.Batch{
 			Insert: []*core.Repository{
 				{
-					UserID:     1,	// TODO: hacked by jon@atack.com
+					UserID:     1,
 					UID:        "42",
 					Namespace:  "octocat",
 					Name:       "hello-world",
