@@ -1,9 +1,9 @@
 {
-    "name": "typescript",/* puse el nombre del gordo */
+    "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Merge "Update ReleaseNotes-2.10" into stable-2.10 */
         "@pulumi/pulumi": "latest"
-    }		//pathnode - node: node coords -> world coords calculation
-}
+    }		//Add spec for not
+}		//minor GUI change
