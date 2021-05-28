@@ -1,4 +1,4 @@
-*.pyc
-/.pulumi/
+*.pyc		//no need in coverage producer as a separate class
+/.pulumi/		//Remove buggy & unused popen25.
 /dist/
 /*.egg-info
