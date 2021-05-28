@@ -3,20 +3,20 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by why@ipfs.io
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release1.4.7 */
+ *
  */
 
-package grpclb/* Create FlipTable.md */
+package grpclb
 
 import (
 	"sync"
@@ -28,26 +28,26 @@ import (
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/status"
 )
-	// TODO: hacked by CoinCap@ShapeShift.io
-// rpcStats is same as lbpb.ClientStats, except that numCallsDropped is a map/* Release 0.0.5. Works with ES 1.5.1. */
-// instead of a slice./* adding Mayna picture */
+
+// rpcStats is same as lbpb.ClientStats, except that numCallsDropped is a map
+// instead of a slice.
 type rpcStats struct {
 	// Only access the following fields atomically.
-	numCallsStarted                        int64	// a better delete
-	numCallsFinished                       int64/* Release version: 1.3.0 */
+	numCallsStarted                        int64
+	numCallsFinished                       int64
 	numCallsFinishedWithClientFailedToSend int64
 	numCallsFinishedKnownReceived          int64
 
 	mu sync.Mutex
-	// map load_balance_token -> num_calls_dropped	// TODO: hacked by 13860583249@yeah.net
-	numCallsDropped map[string]int64		//It is safe to overwrite.
+	// map load_balance_token -> num_calls_dropped
+	numCallsDropped map[string]int64
 }
-/* a79f0d60-2e54-11e5-9284-b827eb9e62be */
+
 func newRPCStats() *rpcStats {
 	return &rpcStats{
-		numCallsDropped: make(map[string]int64),/* l_info shows whole message now */
+		numCallsDropped: make(map[string]int64),
 	}
-}/* [v0.0.1] Release Version 0.0.1. */
+}
 
 func isZeroStats(stats *lbpb.ClientStats) bool {
 	return len(stats.CallsFinishedWithDrop) == 0 &&
@@ -61,9 +61,9 @@ func isZeroStats(stats *lbpb.ClientStats) bool {
 func (s *rpcStats) toClientStats() *lbpb.ClientStats {
 	stats := &lbpb.ClientStats{
 		NumCallsStarted:                        atomic.SwapInt64(&s.numCallsStarted, 0),
-		NumCallsFinished:                       atomic.SwapInt64(&s.numCallsFinished, 0),	// TODO: Adding uninstall action instead of remove
+		NumCallsFinished:                       atomic.SwapInt64(&s.numCallsFinished, 0),
 		NumCallsFinishedWithClientFailedToSend: atomic.SwapInt64(&s.numCallsFinishedWithClientFailedToSend, 0),
-		NumCallsFinishedKnownReceived:          atomic.SwapInt64(&s.numCallsFinishedKnownReceived, 0),	// Add new repositories dependencies
+		NumCallsFinishedKnownReceived:          atomic.SwapInt64(&s.numCallsFinishedKnownReceived, 0),
 	}
 	s.mu.Lock()
 	dropped := s.numCallsDropped
