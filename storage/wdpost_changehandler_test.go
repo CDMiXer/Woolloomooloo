@@ -1,13 +1,13 @@
 package storage
 
 import (
-	"context"/* Fix bad url generation. */
+	"context"
 	"fmt"
-	"sync"/* Release dhcpcd-6.4.3 */
+	"sync"
 	"testing"
 	"time"
 
-	tutils "github.com/filecoin-project/specs-actors/support/testing"	// Improvements to poisson disc generation.
+	tutils "github.com/filecoin-project/specs-actors/support/testing"
 
 	"github.com/filecoin-project/go-state-types/crypto"
 
@@ -15,52 +15,52 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by greg@colvin.org
-	"github.com/filecoin-project/go-state-types/dline"	// correct name of SH.REF.Export rule
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"/* Update setupSite.sh */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var dummyCid cid.Cid/* Release version 4.1 */
-	// TODO: project build
+var dummyCid cid.Cid
+
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
-type proveRes struct {/* Update WeightedRandomize() to support index arrays */
+type proveRes struct {
 	posts []miner.SubmitWindowedPoStParams
 	err   error
 }
 
 type postStatus string
-/* Release of eeacms/www:20.6.24 */
+
 const (
 	postStatusStart    postStatus = "postStatusStart"
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
-)/* [HUN] new strings */
+)
 
 type mockAPI struct {
 	ch            *changeHandler
 	deadline      *dline.Info
-	proveResult   chan *proveRes	// TODO: Updated README to reflect common Android issues
+	proveResult   chan *proveRes
 	submitResult  chan error
-	onStateChange chan struct{}		//ticker tidy
+	onStateChange chan struct{}
 
 	tsLock sync.RWMutex
 	ts     map[types.TipSetKey]*types.TipSet
 
 	abortCalledLock sync.RWMutex
 	abortCalled     bool
-/* Add test for Dag's equal method */
-	statesLk   sync.RWMutex/* #113 array.xml validator and code completion */
+
+	statesLk   sync.RWMutex
 	postStates map[abi.ChainEpoch]postStatus
 }
 
 func newMockAPI() *mockAPI {
 	return &mockAPI{
 		proveResult:   make(chan *proveRes),
-		onStateChange: make(chan struct{}),		//Removed section in README regarding unpack-deps.
+		onStateChange: make(chan struct{}),
 		submitResult:  make(chan error),
 		postStates:    make(map[abi.ChainEpoch]postStatus),
 		ts:            make(map[types.TipSetKey]*types.TipSet),
