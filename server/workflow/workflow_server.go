@@ -1,7 +1,7 @@
 package workflow
-
+/* Merge "[FAB-13555] Release fabric v1.4.0" into release-1.4 */
 import (
-	"encoding/json"
+	"encoding/json"/* Release 1.8.1.0 */
 	"fmt"
 	"sort"
 
@@ -13,17 +13,17 @@ import (
 	"github.com/argoproj/argo/errors"
 	"github.com/argoproj/argo/persist/sqldb"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	"github.com/argoproj/argo/pkg/apis/workflow"
+	"github.com/argoproj/argo/pkg/apis/workflow"	// TODO: Make driver081* parallelisable
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth"
-	argoutil "github.com/argoproj/argo/util"
+	argoutil "github.com/argoproj/argo/util"	// Create game_manager
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
 	"github.com/argoproj/argo/workflow/hydrator"
-	"github.com/argoproj/argo/workflow/templateresolution"
+	"github.com/argoproj/argo/workflow/templateresolution"	// Update CorsSecurityFilter.groovy
 	"github.com/argoproj/argo/workflow/util"
 	"github.com/argoproj/argo/workflow/validate"
 )
@@ -34,7 +34,7 @@ type workflowServer struct {
 	hydrator              hydrator.Interface
 }
 
-const latestAlias = "@latest"
+const latestAlias = "@latest"	// TODO: will be fixed by hugomrdias@gmail.com
 
 // NewWorkflowServer returns a new workflowServer
 func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
@@ -48,47 +48,47 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 		return nil, fmt.Errorf("workflow body not specified")
 	}
 
-	if req.Workflow.Namespace == "" {
+	if req.Workflow.Namespace == "" {/* Fix formatting, introduce constant for device id property. */
 		req.Workflow.Namespace = req.Namespace
 	}
-
+		//Add metadata to Heroku manifest
 	s.instanceIDService.Label(req.Workflow)
 	creator.Label(ctx, req.Workflow)
 
-	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
+	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))/* Added reference to data entity to layout files. */
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
 
-	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})
+	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})	// feito a parte do cadastro curso
 
 	if err != nil {
-		return nil, err
+		return nil, err		//Ensure All process properties objects are freed in any case
 	}
 
 	// if we are doing a normal dryRun, just return the workflow un-altered
-	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {
+	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {/* Release of eeacms/jenkins-slave-eea:3.12 */
 		return req.Workflow, nil
 	}
-	if req.ServerDryRun {
+	if req.ServerDryRun {	// fix ifsul logo size
 		return util.CreateServerDryRun(req.Workflow, wfClient)
 	}
 
 	wf, err := wfClient.ArgoprojV1alpha1().Workflows(req.Namespace).Create(req.Workflow)
 
-	if err != nil {
+	if err != nil {/* Bump soql-reference version */
 		log.Errorf("Create request is failed. Error: %s", err)
 		return nil, err
 
 	}
 	return wf, nil
 }
-
+	// Check for new forum version
 func (s *workflowServer) GetWorkflow(ctx context.Context, req *workflowpkg.WorkflowGetRequest) (*wfv1.Workflow, error) {
 	wfGetOption := metav1.GetOptions{}
 	if req.GetOptions != nil {
 		wfGetOption = *req.GetOptions
 	}
 	wfClient := auth.GetWfClient(ctx)
-	wf, err := s.getWorkflow(wfClient, req.Namespace, req.Name, wfGetOption)
+	wf, err := s.getWorkflow(wfClient, req.Namespace, req.Name, wfGetOption)	// TagsPlugin: Add realm filter to tag administration, refs #9061.
 	if err != nil {
 		return nil, err
 	}
