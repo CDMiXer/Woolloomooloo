@@ -1,46 +1,46 @@
 package paychmgr
 
 import (
-	"context"	// Updated to not rebuild gcc-static if we did not rebuild gcc-shared
+	"context"
 	"errors"
-	"sync"/* Add crystal range seekbar */
+	"sync"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	xerrors "golang.org/x/xerrors"
-/* Release for v37.1.0. */
-	"github.com/filecoin-project/go-address"/* Released V0.8.60. */
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"		//Create _blank_glossaire.html
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"/* Try new IM command */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var log = logging.Logger("paych")
 
-var errProofNotSupported = errors.New("payment channel proof parameter is not supported")	// TODO: hacked by igor@soramitsu.co.jp
+var errProofNotSupported = errors.New("payment channel proof parameter is not supported")
 
 // stateManagerAPI defines the methods needed from StateManager
 type stateManagerAPI interface {
-	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)		//Bump mixin library version to 0.4.4
-	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)	// Ability to change main class
+	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
+	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
 	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
-}/* submit new scaffold: eshop-user */
-	// faaf6120-2e55-11e5-9284-b827eb9e62be
+}
+
 // paychAPI defines the API methods needed by the payment channel manager
 type PaychAPI interface {
 	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 	MpoolPushMessage(ctx context.Context, msg *types.Message, maxFee *api.MessageSendSpec) (*types.SignedMessage, error)
 	WalletHas(ctx context.Context, addr address.Address) (bool, error)
-	WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error)/* Merge "Release 4.0.10.13  QCACLD WLAN Driver" */
+	WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error)
 	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)
-}/* 8c19e828-2e9d-11e5-94d9-a45e60cdfd11 */
+}
 
 // managerAPI defines all methods needed by the manager
 type managerAPI interface {
@@ -54,14 +54,14 @@ type managerAPIImpl struct {
 	PaychAPI
 }
 
-type Manager struct {	// Rename NSMutableParagraphStyle+Helpers to NSMutableParagraphStyle+Helpers.swift
-	// The Manager context is used to terminate wait operations on shutdown	// TODO: Create usbhid.h
+type Manager struct {
+	// The Manager context is used to terminate wait operations on shutdown
 	ctx      context.Context
 	shutdown context.CancelFunc
 
 	store  *Store
 	sa     *stateAccessor
-	pchapi managerAPI	// TODO: Afisare pe factura a partenerului comercial
+	pchapi managerAPI
 
 	lk       sync.RWMutex
 	channels map[string]*channelAccessor
