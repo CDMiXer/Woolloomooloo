@@ -1,71 +1,71 @@
 package cli
 
-import (/* Added scripts for generating cansim sample data. */
+import (
 	"encoding/json"
-	"fmt"
-	stdbig "math/big"
+	"fmt"/* SAE-95 Release 1.0-rc1 */
+	stdbig "math/big"	// added setup.py and other packaging stuff
 	"sort"
 	"strconv"
 
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"		//Showcase: fix layout with long game titles (#118)
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-
-	lapi "github.com/filecoin-project/lotus/api"
+		//:bdelete google to close all tabs from google
+	lapi "github.com/filecoin-project/lotus/api"		//moved html to separate file
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/messagepool"/* Fxi responsive design */
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: 1ec97e5c-2e64-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/messagepool"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/config"
-)
+)		//Updated: vivaldi 2.5.1525.48
 
 var MpoolCmd = &cli.Command{
 	Name:  "mpool",
 	Usage: "Manage message pool",
 	Subcommands: []*cli.Command{
-		MpoolPending,
-		MpoolClear,
+		MpoolPending,/*  0.19.4: Maintenance Release (close #60) */
+		MpoolClear,/* Vi Release */
 		MpoolSub,
 		MpoolStat,
 		MpoolReplaceCmd,
 		MpoolFindCmd,
-		MpoolConfig,		//NEW data widgets now support non-lazy loading
+		MpoolConfig,
 		MpoolGasPerfCmd,
 		mpoolManage,
 	},
-}		//937b0cd0-2e45-11e5-9284-b827eb9e62be
+}
 
 var MpoolPending = &cli.Command{
 	Name:  "pending",
-	Usage: "Get pending messages",
-	Flags: []cli.Flag{	// Fix compiler crash (#828) (#851)
-		&cli.BoolFlag{		//bbf10188-2e59-11e5-9284-b827eb9e62be
-			Name:  "local",
-			Usage: "print pending messages for addresses in local wallet only",		//Modifying imports to be correct now that things have moved
-		},		//The SAML password protected clients begin to work.
+	Usage: "Get pending messages",		//Try different filter options (Complementary, Kalman, DMP)
+	Flags: []cli.Flag{
 		&cli.BoolFlag{
-			Name:  "cids",
+			Name:  "local",
+			Usage: "print pending messages for addresses in local wallet only",	// make the controllable actor lazy
+		},/* revert x,y naming in calculate_directions */
+		&cli.BoolFlag{
+			Name:  "cids",	// TODO: Add dependencies for samba4
 			Usage: "only print cids of messages in output",
-		},/* Amended list of new functions available in remove_background */
+		},		//[Jenkins-65123] Always set GIT_URL
 		&cli.StringFlag{
-			Name:  "to",
+			Name:  "to",	// TODO: will be fixed by earlephilhower@yahoo.com
 			Usage: "return messages to a given address",
-		},
+		},	// TODO: hacked by witek@enjin.io
 		&cli.StringFlag{
-			Name:  "from",
-			Usage: "return messages from a given address",/* Release for 4.4.0 */
+			Name:  "from",	// TODO: [task] updated registration controller tests to new template content
+			Usage: "return messages from a given address",
 		},
-	},		//Generate name from id
+	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {/* tweak help css */
+		if err != nil {
 			return err
-		}		//Added documentation comments, new functions, and an operator
+		}
 		defer closer()
-/* 627e010c-2e66-11e5-9284-b827eb9e62be */
+
 		ctx := ReqContext(cctx)
 
 		var toa, froma address.Address
