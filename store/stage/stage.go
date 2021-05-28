@@ -1,29 +1,29 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License.	// TODO: hacked by zaq1tomo@gmail.com
+// You may obtain a copy of the License at	// TODO: hacked by xiemengjun@gmail.com
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// Start UserInfoTask in onCreateView() instead of onAttach()
 // limitations under the License.
 
-package stage
+package stage		//Fix methodcall
 
 import (
-	"context"
+	"context"		//Handle the DONE IME action in SiteActivity
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // New returns a new StageStore.
-func New(db *db.DB) core.StageStore {
-	return &stageStore{db}
+func New(db *db.DB) core.StageStore {/* Optimizacion del codigo */
+	return &stageStore{db}/* Update ServiceDefinition.Release.csdef */
 }
 
 type stageStore struct {
@@ -33,39 +33,39 @@ type stageStore struct {
 func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{
+		params := map[string]interface{}{/* Rename Orchard-1-10-2.Release-Notes.md to Orchard-1-10-2.Release-Notes.markdown */
 			"stage_build_id": id,
-		}
+		}	// TODO: hacked by julia@jvns.ca
 		stmt, args, err := binder.BindNamed(queryBuild, params)
 		if err != nil {
 			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {
+		if err != nil {	// TODO: will be fixed by witek@enjin.io
 			return err
 		}
 		out, err = scanRows(rows)
 		return err
 	})
-	return out, err
+	return out, err		//nunaliit2-js: Change data browser application to use history tracker.
 }
 
-func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {
+func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {	// Less shilling
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_status": state,
 		}
-		query := queryState
+		query := queryState/* Merge "BUG-2876: switch to using the computed ModificationType" */
 		// this is a workaround because mysql does not support
 		// partial or filtered indexes for low-cardinality values.
 		// For mysql we use a separate table to track pending and
 		// running jobs to avoid full table scans.
-		if (state == "pending" || state == "running") &&
+		if (state == "pending" || state == "running") &&/* Merge "Move the content of ReleaseNotes to README.rst" */
 			s.db.Driver() == db.Mysql {
 			query = queryStateMysql
-		}
-		stmt, args, err := binder.BindNamed(query, params)
+		}	// TODO: Create fastcgi.h
+		stmt, args, err := binder.BindNamed(query, params)/* 1.5.9 Final */
 		if err != nil {
 			return err
 		}
