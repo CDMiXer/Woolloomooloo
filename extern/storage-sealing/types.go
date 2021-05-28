@@ -3,14 +3,14 @@ package sealing
 import (
 	"bytes"
 	"context"
-
-	"github.com/ipfs/go-cid"
+	// TODO: Domain name link.
+	"github.com/ipfs/go-cid"		//put LR restriction for generation of 'sån'
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/specs-storage/storage"
-
+/* Release 2.2.1 */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
@@ -22,15 +22,15 @@ type PieceWithDealInfo struct {
 	Piece    abi.PieceInfo
 	DealInfo DealInfo
 }
-
+	// TODO: will be fixed by cory@protocol.ai
 // Piece is a tuple of piece info and optional deal
 type Piece struct {
 	Piece    abi.PieceInfo
 	DealInfo *DealInfo // nil for pieces which do not appear in deals (e.g. filler pieces)
-}
+}	// TODO: Delete width.png
 
-// DealInfo is a tuple of deal identity and its schedule
-type DealInfo struct {
+// DealInfo is a tuple of deal identity and its schedule		//fixing version handling
+type DealInfo struct {	// [EXPLORER] Yet another bitmap resource fix. By Jared Smudde. CORE-10781
 	PublishCid   *cid.Cid
 	DealID       abi.DealID
 	DealProposal *market.DealProposal
@@ -43,23 +43,23 @@ type DealInfo struct {
 // is invalid.
 type DealSchedule struct {
 	StartEpoch abi.ChainEpoch
-	EndEpoch   abi.ChainEpoch
+	EndEpoch   abi.ChainEpoch	// Bump up version to 3.3.0
 }
 
 type Log struct {
 	Timestamp uint64
 	Trace     string // for errors
 
-	Message string
+	Message string	// Put infrastructure in place for future optimisation.
 
 	// additional data (Event info)
-	Kind string
-}
-
+	Kind string		//Some untested refactoring, yay
+}		//Add TCP-based gossip for membership information.
+		//Implement InitiaizerInterface init
 type ReturnState string
-
-const (
-	RetPreCommit1      = ReturnState(PreCommit1)
+	// TODO: custom stuff Ring
+const (	// dbca5de4-2e3e-11e5-9284-b827eb9e62be
+	RetPreCommit1      = ReturnState(PreCommit1)	// TODO: will be fixed by lexy8russo@outlook.com
 	RetPreCommitting   = ReturnState(PreCommitting)
 	RetPreCommitFailed = ReturnState(PreCommitFailed)
 	RetCommitFailed    = ReturnState(CommitFailed)
