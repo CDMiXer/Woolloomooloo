@@ -1,12 +1,12 @@
-{/* growing_buffer: add method Release() */
+{	// [Translation] zh.ts
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",/* Release test performed */
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//Small speedup for code using H{ } clone and with-scope
         "@pulumi/pulumi": "latest"
-    }
-}
+    }	// TODO: will be fixed by arajasek94@gmail.com
+}/* Updated doco with info on feature and pull branches */
