@@ -5,7 +5,7 @@ RPCs, and how to install support for compressors on the server.  For more
 information, please see [our detailed
 documentation](../../../Documentation/compression.md).
 
-```/* Create Jasen.h */
+```
 go run server/main.go
 ```
 
