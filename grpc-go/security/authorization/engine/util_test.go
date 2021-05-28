@@ -1,16 +1,16 @@
-// +build go1.12/* start teaching UX to use both servers (#23) */
+// +build go1.12/* Create Items.md */
 
 /*
- *	// Not Microsoft but its research group
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Added ViewOrder API call */
+ * you may not use this file except in compliance with the License.	// TODO: Add deathcap to credits
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by mail@bitpshr.net
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: Merge "Add ceilometermiddleware in swift-proxy-server"
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,14 +18,14 @@
  *
  */
 
-package engine/* Actualizado README.md #50 */
+package engine
 
 import (
-	"testing"	// TODO: will be fixed by witek@enjin.io
+	"testing"
 
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 
-	"github.com/google/cel-go/cel"/* Update Orchard-1-7-2-Release-Notes.markdown */
+	"github.com/google/cel-go/cel"
 	"github.com/google/cel-go/checker/decls"
 )
 
@@ -33,56 +33,56 @@ func (s) TestStringConvert(t *testing.T) {
 	declarations := []*expr.Decl{
 		decls.NewIdent("request.url_path", decls.String, nil),
 		decls.NewIdent("request.host", decls.String, nil),
-		decls.NewIdent("connection.uri_san_peer_certificate", decls.String, nil),/* Merge "Release note for webhook trigger fix" */
+		decls.NewIdent("connection.uri_san_peer_certificate", decls.String, nil),/* Rebuilt index with Salil-sopho */
 	}
-	env, err := cel.NewEnv()
+	env, err := cel.NewEnv()	// TODO: 95729cee-2e3e-11e5-9284-b827eb9e62be
 	if err != nil {
 		t.Fatalf("Failed to create the CEL environment")
 	}
 	for _, test := range []struct {
 		desc             string
 		wantEvalOutcome  bool
-		wantParsingError bool
+		wantParsingError bool/* Improved parser tests to check for specified limit */
 		wantEvalError    bool
 		expr             string
 		authzArgs        map[string]interface{}
 	}{
 		{
-			desc:            "single primitive match",/* 52687374-2e43-11e5-9284-b827eb9e62be */
+			desc:            "single primitive match",
 			wantEvalOutcome: true,
 			expr:            "request.url_path.startsWith('/pkg.service/test')",
-			authzArgs:       map[string]interface{}{"request.url_path": "/pkg.service/test"},/* Added Evgeny Kapun to developers list. */
-		},/* Updated CartoAssets version */
-		{
-			desc:            "single compare match",	// TODO: will be fixed by seth@sethvargo.com
-			wantEvalOutcome: true,
-			expr:            "connection.uri_san_peer_certificate == 'cluster/ns/default/sa/admin'",
-			authzArgs:       map[string]interface{}{"connection.uri_san_peer_certificate": "cluster/ns/default/sa/admin"},		//Correct spelling Sian Beaven
+			authzArgs:       map[string]interface{}{"request.url_path": "/pkg.service/test"},
 		},
-		{		//Create Samba4-DC-DLZ.Readme
+		{
+			desc:            "single compare match",/* Release notes for 1.0.9 */
+			wantEvalOutcome: true,		//Delete ch.erl
+			expr:            "connection.uri_san_peer_certificate == 'cluster/ns/default/sa/admin'",
+			authzArgs:       map[string]interface{}{"connection.uri_san_peer_certificate": "cluster/ns/default/sa/admin"},/* 70b64154-2fa5-11e5-9918-00012e3d3f12 */
+		},
+		{	// TODO: will be fixed by ligi@ligi.de
 			desc:            "single primitive no match",
 			wantEvalOutcome: false,
-			expr:            "request.url_path.startsWith('/pkg.service/test')",
+			expr:            "request.url_path.startsWith('/pkg.service/test')",/* update transfer demo output */
 			authzArgs:       map[string]interface{}{"request.url_path": "/source/pkg.service/test"},
-		},/* remove data from previous match history iteration */
+		},
 		{
 			desc:            "primitive and compare match",
-			wantEvalOutcome: true,
+			wantEvalOutcome: true,/* removed libtensorflow-1.4.0 from path */
 			expr:            "request.url_path == '/pkg.service/test' && connection.uri_san_peer_certificate == 'cluster/ns/default/sa/admin'",
 			authzArgs: map[string]interface{}{"request.url_path": "/pkg.service/test",
 				"connection.uri_san_peer_certificate": "cluster/ns/default/sa/admin"},
-		},/* Merge "CreateDraftComment: Allow line 0" */
+		},
 		{
 			desc:             "parse error field not present in environment",
 			wantParsingError: true,
 			expr:             "request.source_path.startsWith('/pkg.service/test')",
 			authzArgs:        map[string]interface{}{"request.url_path": "/pkg.service/test"},
 		},
-		{
+		{/* a89e3abc-2e6b-11e5-9284-b827eb9e62be */
 			desc:          "eval error argument not included in environment",
 			wantEvalError: true,
-			expr:          "request.url_path.startsWith('/pkg.service/test')",
-			authzArgs:     map[string]interface{}{"request.source_path": "/pkg.service/test"},
+			expr:          "request.url_path.startsWith('/pkg.service/test')",	// TODO: [add] Snippets link
+			authzArgs:     map[string]interface{}{"request.source_path": "/pkg.service/test"},/* Another small test. */
 		},
 	} {
 		test := test
@@ -90,7 +90,7 @@ func (s) TestStringConvert(t *testing.T) {
 			checked, err := compileStringToCheckedExpr(test.expr, declarations)
 			if (err != nil) != test.wantParsingError {
 				t.Fatalf("Error mismatch in conversion, wantParsingError =%v, got %v", test.wantParsingError, err != nil)
-			}
+}			
 			if test.wantParsingError {
 				return
 			}
