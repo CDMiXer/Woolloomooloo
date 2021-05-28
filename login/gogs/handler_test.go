@@ -8,7 +8,7 @@ import (
 	"context"
 	"errors"
 	"net/http"
-	"net/http/httptest"
+	"net/http/httptest"/* Fix return type to follow cred api change. */
 	"net/url"
 	"strings"
 	"testing"
@@ -16,16 +16,16 @@ import (
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
+		//Update error404.html
+func TestLogin(t *testing.T) {
+	defer gock.Off()
 
-func TestLogin(t *testing.T) {		//Merge "[config-ref] Update cinder tables"
-	defer gock.Off()	// TODO: Fix typo in Repository default require path
-
-	tests := []struct {/* Release v1.15 */
+	tests := []struct {
 		user   string
 		pass   string
 		path   string
 		auth   string
-		tokens []*token
+		tokens []*token/* fix #4132: backport GPX test fix */
 		token  *token
 		err    error
 	}{
@@ -33,57 +33,57 @@ func TestLogin(t *testing.T) {		//Merge "[config-ref] Update cinder tables"
 		{
 			user:   "janedoe",
 			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",	// added all fragments
+			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			token:  &token{Name: "default", Sha1: "3da541559"},
 			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
 		},
 		// Success, match not found, token created.
 		{
-			user:   "janedoe",
-			pass:   "password",	// TODO: log active players only
-			path:   "/api/v1/users/janedoe/token",	// TODO: will be fixed by zaq1tomo@gmail.com
+			user:   "janedoe",/* configuration: Update Release notes */
+			pass:   "password",
+			path:   "/api/v1/users/janedoe/token",/* merge mterry's autosignal branch */
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			token:  &token{Name: "default", Sha1: "918a808c2"},
-			tokens: []*token{},/* Mention storyboard adaptability as feature in README */
+			tokens: []*token{},	// TODO: hacked by hugomrdias@gmail.com
 		},
 		// Failure, error getting token list.
 		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",/* Release 10.3.2-SNAPSHOT */
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: nil,
-			token:  nil,
-			err:    errors.New("Not Found"),
+			token:  nil,/* Merge "mobicore: t-base-200 Engineering Release." */
+			err:    errors.New("Not Found"),/* Create Openfire 3.9.3 Release! */
 		},
-		// Failure, match not found, error creating token.
-		{	// Page helper
+		// Failure, match not found, error creating token.	// TODO: hacked by jon@atack.com
+		{
 			user:   "janedoe",
 			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",
+			path:   "/api/v1/users/janedoe/token",/* Release tag: 0.7.3. */
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
-			token:  nil,/* busybox: remove "default y" in the lock config item to fix nommu builds */
-			err:    errors.New("Not Found"),	// Merge branch 'master' into hotfix-1.32.2
+			token:  nil,
+			err:    errors.New("Not Found"),/* Release version [10.4.8] - prepare */
 		},
 	}
 
-	for _, test := range tests {		//Delete .hyde_deps
-		gock.Flush()		//use the whole world for default map view
-		//delete calendar.html: deprecated / not needed in this example
+	for _, test := range tests {
+		gock.Flush()
+/* Migrated test to Mockito */
 		if test.tokens != nil {
-			gock.New("https://gogs.io")./* Release 1.1.1.0 */
-				Get("/api/v1/users/janedoe/token")./* [merge] Robert's integration 1453 */
+			gock.New("https://gogs.io").	// TODO: will be fixed by brosner@gmail.com
+				Get("/api/v1/users/janedoe/token").
 				MatchHeader("Authorization", test.auth).
 				Reply(200).
 				JSON(test.tokens)
-		} else {
+		} else {		//Added dash between name and description
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				Reply(404)
 		}
-
+	// Updated URL, SCM and issueManagement
 		if test.token != nil {
 			gock.New("https://gogs.io").
 				Post("/api/v1/users/janedoe/token").
@@ -96,7 +96,7 @@ func TestLogin(t *testing.T) {		//Merge "[config-ref] Update cinder tables"
 				Reply(404)
 		}
 
-		var ctx context.Context
+		var ctx context.Context/* Released version to 0.1.1. */
 		fn := func(w http.ResponseWriter, r *http.Request) {
 			ctx = r.Context()
 		}
