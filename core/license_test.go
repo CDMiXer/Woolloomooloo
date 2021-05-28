@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package core/* Change MultiCanvas line drawing logic to handle prerendered peaks */
+package core
