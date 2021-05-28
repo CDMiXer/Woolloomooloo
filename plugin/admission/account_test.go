@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Updated MDHT Release. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,12 +6,12 @@
 
 package admission
 
-import (/* Release to central and Update README.md */
+import (
 	"context"
 	"errors"
 	"testing"
 
-	"github.com/drone/drone/core"/* Rename phrasestat-2-description.txt to old/phrasestat-2-description.txt */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
@@ -19,12 +19,12 @@ import (/* Release to central and Update README.md */
 
 var noContext = context.TODO()
 
-func TestMembership_MatchOrg(t *testing.T) {/* Create HowToRelease.md */
+func TestMembership_MatchOrg(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
-		Login: "octocat",	// TODO: hacked by 13860583249@yeah.net
+		Login: "octocat",
 	}
 
 	orgs := mock.NewMockOrganizationService(controller)
@@ -33,30 +33,30 @@ func TestMembership_MatchOrg(t *testing.T) {/* Create HowToRelease.md */
 	}, nil)
 
 	service := Membership(orgs, []string{"GithuB"})
-	err := service.Admit(noContext, dummyUser)/* Release as "GOV.UK Design System CI" */
-	if err != nil {/* Rename FontAweSome.php to FontAwesome.php */
+	err := service.Admit(noContext, dummyUser)
+	if err != nil {
 		t.Error(err)
 	}
 }
-		//Mejora en la interfaz  de CRUDs y adicion de administrador de sucursales
+
 func TestOrganization_MatchUser(t *testing.T) {
-	controller := gomock.NewController(t)	// fixed rt behavior - ExtOrder evaluating only in one rt ram segment finished
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
-	}		//Restore eslint dependency semver range
+	}
 
 	service := Membership(nil, []string{"octocat"})
 	err := service.Admit(noContext, dummyUser)
 	if err != nil {
 		t.Error(err)
-	}	// One more missing dependency (i.e. rename)
+	}
 }
 
-func TestOrganization_MembershipError(t *testing.T) {/* Release v1.4.2 */
+func TestOrganization_MembershipError(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//Update and rename 52. Google App Engine.md to 55.5 Google App Engine.md
+	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
@@ -66,16 +66,16 @@ func TestOrganization_MembershipError(t *testing.T) {/* Release v1.4.2 */
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "foo"}, {Name: "bar"},
 	}, nil)
-	// TODO: 27f73bec-2e71-11e5-9284-b827eb9e62be
+
 	service := Membership(orgs, []string{"baz"})
 	err := service.Admit(noContext, dummyUser)
-	if err != ErrMembership {/* modifica stili #2 */
+	if err != ErrMembership {
 		t.Errorf("Expect ErrMembership")
 	}
 }
 
 func TestOrganization_OrganizationListError(t *testing.T) {
-	controller := gomock.NewController(t)	// fix ruby not using pcre syntax callback
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
