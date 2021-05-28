@@ -1,40 +1,40 @@
 package display
 
-import (/* MarkerClustererPlus Release 2.0.16 */
+import (
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"		//Edgent-267 Add missing ASF license header
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// ConvertEngineEvent converts a raw engine.Event into an apitype.EngineEvent used in the Pulumi		//forgotten slash
-// REST API. Returns an error if the engine event is unknown or not in an expected format.	// TODO: Only leave the built versions for demo.
+// ConvertEngineEvent converts a raw engine.Event into an apitype.EngineEvent used in the Pulumi
+// REST API. Returns an error if the engine event is unknown or not in an expected format.
 // EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller.
 //
 // IMPORTANT: Any resource secret data stored in the engine event will be encrypted using the
 // blinding encrypter, and unrecoverable. So this operation is inherently lossy.
-func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {/* 43c4be32-2e74-11e5-9284-b827eb9e62be */
+func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	var apiEvent apitype.EngineEvent
-	// TODO: hacked by nagydani@epointsystem.org
-	// Error to return if the payload doesn't match expected.		//Add powershell and changing repo to avoid apt-key warning
-	eventTypePayloadMismatch := errors.Errorf("unexpected payload for event type %v", e.Type)		//Pull from chaley custcols for metadata caching, connect to folder
+
+	// Error to return if the payload doesn't match expected.
+	eventTypePayloadMismatch := errors.Errorf("unexpected payload for event type %v", e.Type)
 
 	switch e.Type {
-	case engine.CancelEvent:/* [artifactory-release] Release version 0.7.12.RELEASE */
-		apiEvent.CancelEvent = &apitype.CancelEvent{}		//tree list type on search
-	// 9abbe8ae-2e3e-11e5-9284-b827eb9e62be
+	case engine.CancelEvent:
+		apiEvent.CancelEvent = &apitype.CancelEvent{}
+
 	case engine.StdoutColorEvent:
 		p, ok := e.Payload().(engine.StdoutEventPayload)
 		if !ok {
-			return apiEvent, eventTypePayloadMismatch/* Merge "[FAB-14429] Add Raft to intro doc" */
+			return apiEvent, eventTypePayloadMismatch
 		}
 		apiEvent.StdoutEvent = &apitype.StdoutEngineEvent{
 			Message: p.Message,
-			Color:   string(p.Color),/* Use sealevel data for coord and area ytop/ybottom */
+			Color:   string(p.Color),
 		}
 
 	case engine.DiagEvent:
@@ -47,11 +47,11 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {/* 43c4be3
 			Prefix:    p.Prefix,
 			Message:   p.Message,
 			Color:     string(p.Color),
-			Severity:  string(p.Severity),	// TODO: hacked by souzau@yandex.com
+			Severity:  string(p.Severity),
 			Ephemeral: p.Ephemeral,
-		}		//sort: Add test cases for string sorting
+		}
 
-	case engine.PolicyViolationEvent:		//use full image name in the window title
+	case engine.PolicyViolationEvent:
 		p, ok := e.Payload().(engine.PolicyViolationEventPayload)
 		if !ok {
 			return apiEvent, eventTypePayloadMismatch
