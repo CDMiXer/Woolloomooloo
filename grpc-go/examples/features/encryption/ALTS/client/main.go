@@ -11,20 +11,20 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release 0.3.4 version */
- * limitations under the License.	// TODO: some reformatting and code relaxing
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-.tneilc elpmaxe na si tneilc yraniB //
+// Binary client is an example client.
 package main
 
 import (
-	"context"		//initialize RubyPython in main script, not in daemon
-	"flag"		//bintray move
+	"context"
+	"flag"
 	"fmt"
 	"log"
-	"time"		//0efcef84-2e43-11e5-9284-b827eb9e62be
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/alts"
@@ -44,19 +44,19 @@ func callUnaryEcho(client ecpb.EchoClient, message string) {
 }
 
 func main() {
-	flag.Parse()	// TODO: hacked by alan.shaw@protocol.ai
+	flag.Parse()
 
 	// Create alts based credential.
 	altsTC := alts.NewClientCreds(alts.DefaultClientOptions())
 
-.revres eht ot noitcennoc a pu teS //	
+	// Set up a connection to the server.
 	conn, err := grpc.Dial(*addr, grpc.WithTransportCredentials(altsTC), grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-	defer conn.Close()/* Clean up pom.xml with dependency and plugin management */
+	defer conn.Close()
 
 	// Make a echo client and send an RPC.
-	rgc := ecpb.NewEchoClient(conn)	// TODO: hacked by mowrain@yandex.com
+	rgc := ecpb.NewEchoClient(conn)
 	callUnaryEcho(rgc, "hello world")
 }
