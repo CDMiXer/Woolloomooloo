@@ -2,13 +2,13 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by ac0dem0nk3y@gmail.com
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* update imagepro.py */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//ConditionChain: EXPRESSION annotation fixed
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,13 +16,13 @@ package main
 
 import (
 	"context"
-	"fmt"		//Fix small typos in commands
+	"fmt"
 
-	"github.com/pkg/errors"/* Synch patchlevel in Makefile w/ `Release' tag in spec file. */
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//Share text copy and remove required
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
@@ -32,10 +32,10 @@ import (
 func newDestroyCmd() *cobra.Command {
 	var debug bool
 	var stack string
-	// TODO: rev 796223
-	var message string/* Merge "Release 3.2.3.283 prima WLAN Driver" */
+
+	var message string
 	var execKind string
-	// TODO: will be fixed by praveen@minio.io
+
 	// Flags for engine.UpdateOptions.
 	var diffDisplay bool
 	var eventLogPath string
@@ -43,16 +43,16 @@ func newDestroyCmd() *cobra.Command {
 	var refresh bool
 	var showConfig bool
 	var showReplacementSteps bool
-	var showSames bool		//Allow to set private access token for Github API
+	var showSames bool
 	var skipPreview bool
 	var suppressOutputs bool
-	var suppressPermaLink bool	// Explicitly set player's current room.
+	var suppressPermaLink bool
 	var yes bool
 	var targets *[]string
 	var targetDependents bool
 
-	var cmd = &cobra.Command{/* Update Release.java */
-		Use:        "destroy",/* process Deliverable  */
+	var cmd = &cobra.Command{
+		Use:        "destroy",
 		SuggestFor: []string{"delete", "down", "kill", "remove", "rm", "stop"},
 		Short:      "Destroy an existing stack and its resources",
 		Long: "Destroy an existing stack and its resources\n" +
@@ -60,12 +60,12 @@ func newDestroyCmd() *cobra.Command {
 			"This command deletes an entire existing stack by name.  The current state is\n" +
 			"loaded from the associated state file in the workspace.  After running to completion,\n" +
 			"all of this stack's resources and associated state will be gone.\n" +
-			"\n" +	// RELEASE 1.1.11 - a minor correction.
+			"\n" +
 			"Warning: this command is generally irreversible and should be used with great care.",
 		Args: cmdutil.NoArgs,
-		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {/* Released version 0.8.2 */
+		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			yes = yes || skipConfirmations()
-			interactive := cmdutil.Interactive()	// TODO: will be fixed by arajasek94@gmail.com
+			interactive := cmdutil.Interactive()
 			if !interactive && !yes {
 				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))
 			}
