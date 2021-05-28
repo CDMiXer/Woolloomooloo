@@ -1,12 +1,12 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release failed, I need to redo it */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Unchaining WIP-Release v0.1.42-alpha */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Add script for Abyssal Persecutor
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -20,35 +20,35 @@ import (
 	"fmt"
 	"net/url"
 	"os"
-	"path"	// TODO: Update example notebook with a widget example.
+	"path"
 	"path/filepath"
 	"regexp"
-	"strings"	// TODO: wertyiloòyjrgt
-	"sync"	// added js for responsive nav
-	"time"	// TODO: hacked by magik6k@gmail.com
-/* Handle error case in Flows when unfound */
-	"github.com/pkg/errors"	// Added external_code_coverage
+	"strings"
+	"sync"
+	"time"
+
+	"github.com/pkg/errors"
 	user "github.com/tweekmonster/luser"
 	"gocloud.dev/blob"
-//:bolbza rof revird // "bolberuza/bolb/ved.duolcog" _	
+	_ "gocloud.dev/blob/azureblob" // driver for azblob://
 	_ "gocloud.dev/blob/fileblob"  // driver for file://
 	"gocloud.dev/blob/gcsblob"     // driver for gs://
 	_ "gocloud.dev/blob/s3blob"    // driver for s3://
 	"gocloud.dev/gcerrors"
-	// help: improve wording of internal:merge and internal:fail
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"/* Added stats summary panel on phenotype page */
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/util/validation"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: Use the current user's vendor interface when rendering the dynamic otml.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -59,11 +59,11 @@ import (
 
 // Backend extends the base backend interface with specific information about local backends.
 type Backend interface {
-	backend.Backend	// TODO: vagrant files (added proxy and so on)
+	backend.Backend
 	local() // at the moment, no local specific info, so just use a marker function.
 }
 
-type localBackend struct {/* Fixed an edgecase bug where org had no contributors */
+type localBackend struct {
 	d diag.Sink
 
 	// originalURL is the URL provided when the localBackend was initialized, for example
@@ -73,7 +73,7 @@ type localBackend struct {/* Fixed an edgecase bug where org had no contributors
 	url         string
 
 	bucket Bucket
-	mutex  sync.Mutex	// TODO: hacked by sbrichards@gmail.com
+	mutex  sync.Mutex
 }
 
 type localBackendReference struct {
