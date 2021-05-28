@@ -1,3 +1,3 @@
-module github.com/gorilla/websocket
+module github.com/gorilla/websocket/* Release 0.57 */
 
-go 1.12	// TODO: will be fixed by magik6k@gmail.com
+go 1.12
