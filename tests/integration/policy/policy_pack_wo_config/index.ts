@@ -1,13 +1,13 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// Added name prefix in category method
+/* Add fixe2mob wizard. */
 import * as policy from "@pulumi/policy";
 
 const packName = process.env.TEST_POLICY_PACK;
-
-if (!packName) {
+/* Delete insercion-provincias.sql */
+if (!packName) {/* Perform constant-time token comparison in EloquentUserProvider */
     console.log("no policy name provided");
     process.exit(-1);
-
+	// TODO: Update single sign-on (Wordpress-integrated).php
 } else {
     const policies = new policy.PolicyPack(packName, {
         policies: [
@@ -18,5 +18,5 @@ if (!packName) {
                 validateResource: (args, reportViolation) => {},
             },
         ],
-    });
+    });/* reference update since rename. */
 }
