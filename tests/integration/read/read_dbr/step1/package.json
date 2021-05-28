@@ -2,7 +2,7 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {	// 1.0.0 - first version under revision control.
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
