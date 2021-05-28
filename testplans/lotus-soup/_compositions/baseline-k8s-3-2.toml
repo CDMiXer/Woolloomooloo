@@ -1,67 +1,67 @@
 [metadata]
   name = "lotus-soup"
-  author = ""		// Use getopts for nodejs helper
+  author = ""
 
-[global]/* Bump oop_rails_server to 0.0.22. */
+[global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6/* Release: 5.4.3 changelog */
+  total_instances = 6
   builder = "docker:go"
   runner = "cluster:k8s"
-	// TODO: hacked by alan.shaw@protocol.ai
+
 [global.build]
   selectors = ["testground"]
-/* Merge "mysql: expose IPv6 configuration to mysql puppet modules" */
-[global.run_config]/* examples:  tcp_serial_redirect.py optimize socket options in server mode */
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// CHANGE: quartz cron jobs no longer have a startAt delay
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//use realpath in fastcgi
+
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]/* Merge "[INTERNAL]GroupView: announce 'Filter Group' in addition" */
+[global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  genesis_timestamp_offset = "0"/* Correct jacoco path */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Icecast 2.3 RC2 Release */
   sectors = "4"
   random_beacon_type = "mock"
-  mining_mode = "natural"
+  mining_mode = "natural"/* Release 0.95.168: some minor fixes */
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"		//Add syntax highlighting to README.md.
   [groups.resources]
-    memory = "512Mi"
+    memory = "512Mi"	// TODO: will be fixed by why@ipfs.io
     cpu = "1000m"
   [groups.instances]
-    count = 1	// Clarify rm() code to rm rmed files from index and disk
+    count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+]smarap_tset.nur.spuorg[    
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
+  id = "miners"/* - v1.0 Release (see Release Notes.txt) */
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 2		//add two simple script to generate climatology
-    percentage = 0.0	// TODO: Added new bling for new analyses
-  [groups.run]/* Silence I18n deprecation notice */
-    [groups.run.test_params]
+    count = 2
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]/* Rails update */
       role = "miner"
-	// TODO: Update switchstatement.go
+
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
-    cpu = "1000m"
+    cpu = "1000m"	// TODO: hacked by igor@soramitsu.co.jp
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "client"	// TODO: hacked by greg@colvin.org
+    [groups.run.test_params]	// Updating build-info/dotnet/roslyn/dev15.8p1 for beta1-62513-01
+      role = "client"		//Update Main1.java
