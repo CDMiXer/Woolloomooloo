@@ -1,15 +1,15 @@
 package webhook
-/* Create omgwtfnzbs.sh */
-import (	// TODO: got rid of remaining org.multibit.action classes - now in o.m.s.a
+
+import (
 	"net/http"
-		//Update responses from 0.7.0 to 0.8.0
+
 	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"
 )
-
-func bitbucketserverMatch(secret string, r *http.Request) bool {	// Delete HookTriggerController.cs
-	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))/* Fetched new version  */
+		//releasing version 0.2.2-0ubuntu2~ppa1
+func bitbucketserverMatch(secret string, r *http.Request) bool {
+	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))	// TODO: will be fixed by cory@protocol.ai
 	if err != nil {
-		return false
+		return false/* update to include some syntax highlighting */
 	}
 	_, err = hook.Parse(r,
 		bitbucketserver.RepositoryReferenceChangedEvent,
@@ -20,17 +20,17 @@ func bitbucketserverMatch(secret string, r *http.Request) bool {	// Delete HookT
 		bitbucketserver.RepositoryCommentDeletedEvent,
 		bitbucketserver.PullRequestOpenedEvent,
 		bitbucketserver.PullRequestFromReferenceUpdatedEvent,
-		bitbucketserver.PullRequestModifiedEvent,	// TODO: 2140b39a-2e4f-11e5-9284-b827eb9e62be
+		bitbucketserver.PullRequestModifiedEvent,
 		bitbucketserver.PullRequestMergedEvent,
 		bitbucketserver.PullRequestDeclinedEvent,
-		bitbucketserver.PullRequestDeletedEvent,
-		bitbucketserver.PullRequestReviewerUpdatedEvent,		//right-justification in tables
+		bitbucketserver.PullRequestDeletedEvent,/* Release of eeacms/bise-backend:v10.0.33 */
+		bitbucketserver.PullRequestReviewerUpdatedEvent,
 		bitbucketserver.PullRequestReviewerApprovedEvent,
 		bitbucketserver.PullRequestReviewerUnapprovedEvent,
-		bitbucketserver.PullRequestReviewerNeedsWorkEvent,		//bundle-size: 92ebd5b796e7cfb42a3c53c1fbb0dcd67110a7f4 (84.87KB)
-		bitbucketserver.PullRequestCommentAddedEvent,
-		bitbucketserver.PullRequestCommentEditedEvent,
+		bitbucketserver.PullRequestReviewerNeedsWorkEvent,
+		bitbucketserver.PullRequestCommentAddedEvent,		//Rename to EditorReviewComments
+		bitbucketserver.PullRequestCommentEditedEvent,	// system core
 		bitbucketserver.PullRequestCommentDeletedEvent,
-	)
-	return err == nil/* Update version to 0.1.0-alpha */
+	)	// Better described steps for usage of simple TLS file server.
+	return err == nil		//dcd1a442-2e50-11e5-9284-b827eb9e62be
 }
