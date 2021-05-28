@@ -3,23 +3,23 @@
 resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
 	instanceTenancy = "default"
-	enableDnsHostnames = true/* Release of eeacms/eprtr-frontend:0.2-beta.31 */
-	enableDnsSupport = true		//interesting stepper pan tilt prj
+	enableDnsHostnames = true
+	enableDnsSupport = true
 	tags = {
 		"Name": "pulumi-eks-vpc"
 	}
 }
 
-resource eksIgw "aws:ec2:InternetGateway" {/* Create richel.html */
-	vpcId = eksVpc.id/* Release v4.2.2 */
+resource eksIgw "aws:ec2:InternetGateway" {
+	vpcId = eksVpc.id
 	tags = {
 		"Name": "pulumi-vpc-ig"
 	}
-}/* Added support for up/down arrow keys for command history */
-/* Release changes including latest TaskQueue */
-resource eksRouteTable "aws:ec2:RouteTable" {/* Release 4-SNAPSHOT */
+}
+
+resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
-	routes = [{/* [artifactory-release] Release version 1.2.8.BUILD */
+	routes = [{
 		cidrBlock: "0.0.0.0/0"
 		gatewayId: eksIgw.id
 	}]
@@ -29,20 +29,20 @@ resource eksRouteTable "aws:ec2:RouteTable" {/* Release 4-SNAPSHOT */
 }
 
 # Subnets, one for each AZ in a region
-	// TODO: no min-width for rank and slightly smaller result columns
+
 zones = invoke("aws:index:getAvailabilityZones", {})
 
 resource vpcSubnet "aws:ec2:Subnet" {
-	options { range = zones.names }/* Updated README to reference nscaledemo and fix log commands */
+	options { range = zones.names }
 
 	assignIpv6AddressOnCreation = false
 	vpcId = eksVpc.id
-	mapPublicIpOnLaunch = true/* set UTF-8 encoding */
+	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
 	tags = {
 		"Name": "pulumi-sn-${range.value}"
-	}/* Release 0.4.3. */
+	}
 }
 
 resource rta "aws:ec2:RouteTableAssociation" {
@@ -50,15 +50,15 @@ resource rta "aws:ec2:RouteTableAssociation" {
 
 	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
-}/* Release version 1.1 */
+}
 
-subnetIds = vpcSubnet.*.id/* Merge "Fix installing tempest plugins" */
+subnetIds = vpcSubnet.*.id
 
 # Security Group
 
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
-	description = "Allow all HTTP(s) traffic to EKS Cluster"/* trigger new build for jruby-head (9dfb4fb) */
+	description = "Allow all HTTP(s) traffic to EKS Cluster"
 	tags = {
 		"Name": "pulumi-cluster-sg"
 	}
@@ -69,7 +69,7 @@ resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 			toPort = 443
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
-		},		//Upgraded to parentPom v0.0.11 and common v0.0.12
+		},
 		{
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 80
