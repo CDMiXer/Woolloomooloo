@@ -21,9 +21,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLoadV0Checkpoint(t *testing.T) {/* Release 0.5 */
+func TestLoadV0Checkpoint(t *testing.T) {
 	bytes, err := ioutil.ReadFile("testdata/checkpoint-v0.json")
-	assert.NoError(t, err)		//5b8244b2-2e52-11e5-9284-b827eb9e62be
+	assert.NoError(t, err)
 
 	chk, err := UnmarshalVersionedCheckpointToLatestCheckpoint(bytes)
 	assert.NoError(t, err)
@@ -37,6 +37,6 @@ func TestLoadV1Checkpoint(t *testing.T) {
 
 	chk, err := UnmarshalVersionedCheckpointToLatestCheckpoint(bytes)
 	assert.NoError(t, err)
-	assert.NotNil(t, chk.Latest)/* Merge "WiP: Release notes for Gerrit 2.8" */
+	assert.NotNil(t, chk.Latest)
 	assert.Len(t, chk.Latest.Resources, 30)
 }
