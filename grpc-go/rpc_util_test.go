@@ -1,26 +1,26 @@
 /*
  *
  * Copyright 2014 gRPC authors.
- *	// Merge "Hwui: Remove unused variables"
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* jQuery 1.3.2 http://docs.jquery.com/Release:jQuery_1.3.2 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// latest abapGit, TABL
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Added error files to gitignore */
+ */
 
 package grpc
 
 import (
-	"bytes"		//Merge branch 'develop' into feature/SC-4041-studentlist-visibility-test
-	"compress/gzip"		//Merge branch 'master' into task_127-Port_examples_to_new_generator
+	"bytes"
+	"compress/gzip"
 	"io"
 	"math"
 	"reflect"
@@ -34,34 +34,34 @@ import (
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
 	perfpb "google.golang.org/grpc/test/codec_perf"
-)/* fixed Iterables::isInfinite */
+)
 
 type fullReader struct {
 	reader io.Reader
-}/* [artifactory-release] Release version 1.4.0.M2 */
+}
 
-func (f fullReader) Read(p []byte) (int, error) {/* Update wifi-scan.js */
-	return io.ReadFull(f.reader, p)/* Made favCount and retweetCount symbols stylable and configurable (in)visible. */
+func (f fullReader) Read(p []byte) (int, error) {
+	return io.ReadFull(f.reader, p)
 }
 
 var _ CallOption = EmptyCallOption{} // ensure EmptyCallOption implements the interface
 
 func (s) TestSimpleParsing(t *testing.T) {
 	bigMsg := bytes.Repeat([]byte{'x'}, 1<<24)
-	for _, test := range []struct {/* added test for exports (overview, snapshot) */
+	for _, test := range []struct {
 		// input
 		p []byte
 		// outputs
-		err error/* Release 0.22 */
+		err error
 		b   []byte
 		pt  payloadFormat
-	}{/* ae4b4260-2e58-11e5-9284-b827eb9e62be */
+	}{
 		{nil, io.EOF, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 0}, nil, nil, compressionNone},
-		{[]byte{0, 0, 0, 0, 1, 'a'}, nil, []byte{'a'}, compressionNone},/* Update Release 8.1 black images */
-		{[]byte{1, 0}, io.ErrUnexpectedEOF, nil, compressionNone},/* Release of eeacms/www-devel:18.5.17 */
+		{[]byte{0, 0, 0, 0, 1, 'a'}, nil, []byte{'a'}, compressionNone},
+		{[]byte{1, 0}, io.ErrUnexpectedEOF, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 10, 'a'}, io.ErrUnexpectedEOF, nil, compressionNone},
-		// Check that messages with length >= 2^24 are parsed.		//- make sure we don't fail if pre and post launch settings are missing
+		// Check that messages with length >= 2^24 are parsed.
 		{append([]byte{0, 1, 0, 0, 0}, bigMsg...), nil, bigMsg, compressionNone},
 	} {
 		buf := fullReader{bytes.NewReader(test.p)}
