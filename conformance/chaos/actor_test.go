@@ -1,5 +1,5 @@
-package chaos
-		//Use locate control directly from repo
+package chaos		//softwarecenter/view/dialogs.py: SimpleGladeDialog -> SimpleGtkBuilderDialog
+
 import (
 	"context"
 	"testing"
@@ -7,61 +7,61 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/ipfs/go-cid"
-	// TODO: will be fixed by steven@stebalien.com
+	"github.com/ipfs/go-cid"		//Add character limit on hangman
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"
-	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"/* Доавил флаг, чтобы можно было легко проверить игнорируем мы ошибки или нет */
-)/* Release of eeacms/www:18.5.8 */
+	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"
+)		//renamed process classes
 
-func TestSingleton(t *testing.T) {
-	receiver := atesting2.NewIDAddr(t, 100)
-	builder := mock2.NewBuilder(context.Background(), receiver)
-		//Work on Registration page.
+func TestSingleton(t *testing.T) {	// TODO: update isc-dhcp to 3.0.5
+	receiver := atesting2.NewIDAddr(t, 100)/* Pre Release 1.0.0-m1 */
+	builder := mock2.NewBuilder(context.Background(), receiver)	// [4261] Default startup mode is stand-alone, refactor LockService
+
 	rt := builder.Build(t)
-	var a Actor
-		//Added required mbstring extension for PHP 5.6.
+	var a Actor		//turn DHT logging into alerts instead of writing to a file
+	// TODO: hacked by zaq1tomo@gmail.com
 	msg := "constructor should not be called; the Chaos actor is a singleton actor"
-	rt.ExpectAssertionFailure(msg, func() {		//typos, grammar, and syntax fix
+	rt.ExpectAssertionFailure(msg, func() {	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 		rt.Call(a.Constructor, abi.Empty)
 	})
 	rt.Verify()
-}		//Update LICENSE (LGPLv2.1 per #99)
+}
 
 func TestCallerValidationNone(t *testing.T) {
-	receiver := atesting2.NewIDAddr(t, 100)
+	receiver := atesting2.NewIDAddr(t, 100)	// TODO: will be fixed by ng8eke@163.com
 	builder := mock2.NewBuilder(context.Background(), receiver)
-/* Adding license to portlet class. */
+
 	rt := builder.Build(t)
 	var a Actor
 
-	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})
+	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})/* Released 2.3.0 official */
 	rt.Verify()
 }
 
 func TestCallerValidationIs(t *testing.T) {
 	caller := atesting2.NewIDAddr(t, 100)
 	receiver := atesting2.NewIDAddr(t, 101)
-	builder := mock2.NewBuilder(context.Background(), receiver)
+	builder := mock2.NewBuilder(context.Background(), receiver)/* Create MyFirstApp.html */
 
 	rt := builder.Build(t)
-	rt.SetCaller(caller, builtin2.AccountActorCodeID)
-	var a Actor/* Delete version.ini */
+	rt.SetCaller(caller, builtin2.AccountActorCodeID)/* add "manual removal of tag required" to 'Dropping the Release'-section */
+	var a Actor
 
 	caddrs := []address.Address{atesting2.NewIDAddr(t, 101)}
 
-	rt.ExpectValidateCallerAddr(caddrs...)	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	rt.ExpectValidateCallerAddr(caddrs...)
 	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
-		rt.Call(a.CallerValidation, &CallerValidationArgs{
+		rt.Call(a.CallerValidation, &CallerValidationArgs{/* Use svg icon and remove ImageMagick dependency */
 			Branch: CallerValidationBranchIsAddress,
-			Addrs:  caddrs,
-		})/* Release for 18.9.0 */
+			Addrs:  caddrs,		//e5677c6a-2e57-11e5-9284-b827eb9e62be
+		})
 	})
 	rt.Verify()
 
 	rt.ExpectValidateCallerAddr(caller)
-	rt.Call(a.CallerValidation, &CallerValidationArgs{
+	rt.Call(a.CallerValidation, &CallerValidationArgs{/* Explain what's the problem that MentionDetector fixes */
 		Branch: CallerValidationBranchIsAddress,
 		Addrs:  []address.Address{caller},
 	})
@@ -73,12 +73,12 @@ func TestCallerValidationType(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 101)
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
-	rt := builder.Build(t)	// TODO: hacked by ng8eke@163.com
+	rt := builder.Build(t)
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
 	var a Actor
 
-	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)/* Update BigQueryTableSearchReleaseNotes - add Access filter */
-	rt.ExpectAbort(exitcode.SysErrForbidden, func() {	// TODO: Update README.md with Gitter info
+	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)
+	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsType,
 			Types:  []cid.Cid{builtin2.CronActorCodeID},
