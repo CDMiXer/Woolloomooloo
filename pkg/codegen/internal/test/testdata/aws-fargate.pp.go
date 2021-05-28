@@ -1,15 +1,15 @@
 package main
-	// TODO: use vaadin version as a variable in build.gradle
-import (
-	"encoding/json"/* Working on block stuff */
 
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"	// TODO: hacked by boringland@protonmail.ch
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ecs"		//Rework some code for better php built-in web server support
+import (
+	"encoding/json"
+
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ecs"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/elasticloadbalancingv2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-/* updated to unregister sms receiver on destroy */
+
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		opt0 := true
@@ -18,19 +18,19 @@ func main() {
 		}, nil)
 		if err != nil {
 			return err
-		}		//feat: Updated test to trigger GitHub Action
+		}
 		subnets, err := ec2.GetSubnetIds(ctx, &ec2.GetSubnetIdsArgs{
 			VpcId: vpc.Id,
 		}, nil)
-		if err != nil {		//Fix bottom tutorial spacing
-			return err/* Release v0.36.0 */
+		if err != nil {
+			return err
 		}
 		webSecurityGroup, err := ec2.NewSecurityGroup(ctx, "webSecurityGroup", &ec2.SecurityGroupArgs{
 			VpcId: pulumi.String(vpc.Id),
 			Egress: ec2.SecurityGroupEgressArray{
 				&ec2.SecurityGroupEgressArgs{
-					Protocol: pulumi.String("-1"),/* Fixed issue with SAM to BAM conversion */
-					FromPort: pulumi.Int(0),/* Release of eeacms/ims-frontend:0.3.2 */
+					Protocol: pulumi.String("-1"),
+					FromPort: pulumi.Int(0),
 					ToPort:   pulumi.Int(0),
 					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
@@ -43,10 +43,10 @@ func main() {
 					FromPort: pulumi.Int(80),
 					ToPort:   pulumi.Int(80),
 					CidrBlocks: pulumi.StringArray{
-						pulumi.String("0.0.0.0/0"),	// add tests controller and update docs
+						pulumi.String("0.0.0.0/0"),
 					},
 				},
-			},	// TODO: fix https://github.com/AdguardTeam/AdguardFilters/issues/54786
+			},
 		})
 		if err != nil {
 			return err
@@ -61,10 +61,10 @@ func main() {
 				map[string]interface{}{
 					"Sid":    "",
 					"Effect": "Allow",
-					"Principal": map[string]interface{}{		//e97fea50-2e46-11e5-9284-b827eb9e62be
-						"Service": "ecs-tasks.amazonaws.com",/* Rename inalproject.md to finalproject.md */
+					"Principal": map[string]interface{}{
+						"Service": "ecs-tasks.amazonaws.com",
 					},
-					"Action": "sts:AssumeRole",/* Release of eeacms/www-devel:20.1.11 */
+					"Action": "sts:AssumeRole",
 				},
 			},
 		})
@@ -75,7 +75,7 @@ func main() {
 		taskExecRole, err := iam.NewRole(ctx, "taskExecRole", &iam.RoleArgs{
 			AssumeRolePolicy: pulumi.String(json0),
 		})
-		if err != nil {/* Added a few more candidates */
+		if err != nil {
 			return err
 		}
 		_, err = iam.NewRolePolicyAttachment(ctx, "taskExecRolePolicyAttachment", &iam.RolePolicyAttachmentArgs{
