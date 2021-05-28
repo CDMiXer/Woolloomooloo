@@ -1,12 +1,12 @@
 ﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-using System;/* Create Broker codes */
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;	// TODO: hacked by mowrain@yandex.com
+using System.Threading.Tasks;
 using Pulumi;
-/* task for Lasta Job */
+
 class MyStack : Stack
-{	// Implemented convolutional neural networks
+{
     [Output("abc")]
     public Output<string> Abc { get; private set; }
 
@@ -25,29 +25,29 @@ class MyStack : Stack
 }
 
 class Program
-{		//Create multiperiod.R
+{
     static Task<int> Main(string[] args)
-    {	// TODO: will be fixed by brosner@gmail.com
+    {
         return Deployment.RunAsync<MyStack>(new SampleServiceProvider());
     }
 }
-/* Create botbroken.js */
+
 class Dependency
 {
     public string Abc { get; set; } = "ABC";
-    public int Foo { get; set; } = 42;/* Some python exports for handling music stuff. */
+    public int Foo { get; set; } = 42;
     public string Bar { get; set; } = "this should not come to output";
-}		//[FIX] #1365 Galerie option de type d'affichage
+}
 
 class SampleServiceProvider : IServiceProvider
 {
-    public object GetService(Type serviceType)/* Add Release to README */
+    public object GetService(Type serviceType)
     {
         if (serviceType == typeof(MyStack))
         {
             return new MyStack(new Dependency()); 
         }
 
-        return null;	// TODO: c075e8de-2e47-11e5-9284-b827eb9e62be
+        return null;
     }
 }
