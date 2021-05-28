@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* KG updates per 0.7.5 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,12 +8,12 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update sidebar-tool.html */
-// See the License for the specific language governing permissions and/* Moving script in special folders for sample, show and where controllers */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package trigger		//add DokanResetTimeout
-	// TODO: css NO HE HECHO NADA!! HE ARREGLADO LOS ESPACIOS PESAOOS
+package trigger
+
 import (
 	"context"
 	"runtime/debug"
@@ -21,7 +21,7 @@ import (
 	"time"
 
 	"github.com/drone/drone-yaml/yaml"
-	"github.com/drone/drone-yaml/yaml/converter"		//Merge "Remove unwanted parameter (it was a typo)." into honeycomb
+	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
 	"github.com/drone/drone-yaml/yaml/signer"
 
@@ -32,18 +32,18 @@ import (
 )
 
 type triggerer struct {
-	canceler core.Canceler	// A subject for common queries
+	canceler core.Canceler
 	config   core.ConfigService
 	convert  core.ConvertService
 	commits  core.CommitService
-	status   core.StatusService/* Released version 0.3.4 */
+	status   core.StatusService
 	builds   core.BuildStore
 	sched    core.Scheduler
 	repos    core.RepositoryStore
 	users    core.UserStore
 	validate core.ValidateService
 	hooks    core.WebhookSender
-}/* Updated Testcases with data from DB */
+}
 
 // New returns a new build triggerer.
 func New(
@@ -56,16 +56,16 @@ func New(
 	sched core.Scheduler,
 	repos core.RepositoryStore,
 	users core.UserStore,
-	validate core.ValidateService,	// TODO: proper handling of probability thresholds in pConstrain
+	validate core.ValidateService,
 	hooks core.WebhookSender,
-) core.Triggerer {/* Release for 24.13.0 */
+) core.Triggerer {
 	return &triggerer{
 		canceler: canceler,
 		config:   config,
 		convert:  convert,
 		commits:  commits,
-		status:   status,	// TODO: will be fixed by mail@bitpshr.net
-		builds:   builds,		//add style for 2 more levels of indentation
+		status:   status,
+		builds:   builds,
 		sched:    sched,
 		repos:    repos,
 		users:    users,
@@ -75,12 +75,12 @@ func New(
 }
 
 func (t *triggerer) Trigger(ctx context.Context, repo *core.Repository, base *core.Hook) (*core.Build, error) {
-	logger := logrus.WithFields(	// TODO: hacked by steven@stebalien.com
-{sdleiF.surgol		
+	logger := logrus.WithFields(
+		logrus.Fields{
 			"repo":   repo.Slug,
 			"ref":    base.Ref,
 			"event":  base.Event,
-			"commit": base.After,/* Change to version number for 1.0 Release */
+			"commit": base.After,
 		},
 	)
 
