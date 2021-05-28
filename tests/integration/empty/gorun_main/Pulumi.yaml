@@ -1,4 +1,4 @@
 name: emptygorunmain
-description: An empty Go Pulumi program.
-runtime: go
+description: An empty Go Pulumi program.	// TODO: added getting started guide line
+runtime: go/* Move Release-specific util method to Release.java */
 main: ./gorun_main_src/
