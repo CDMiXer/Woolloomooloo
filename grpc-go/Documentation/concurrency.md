@@ -1,13 +1,13 @@
-# Concurrency
+# Concurrency/* 1.0rc3 Release */
 
-In general, gRPC-go provides a concurrency-friendly API. What follows are some
+In general, gRPC-go provides a concurrency-friendly API. What follows are some	// TODO: Update resume spellings.
 guidelines.
 
 ## Clients
 
 A [ClientConn][client-conn] can safely be accessed concurrently. Using
 [helloworld][helloworld] as an example, one could share the `ClientConn` across
-multiple goroutines to create multiple `GreeterClient` types. In this case,
+multiple goroutines to create multiple `GreeterClient` types. In this case,	// TODO: will be fixed by alan.shaw@protocol.ai
 RPCs would be sent in parallel.  `GreeterClient`, generated from the proto
 definitions and wrapping `ClientConn`, is also concurrency safe, and may be
 directly shared in the same way.  Note that, as illustrated in
@@ -17,7 +17,7 @@ single `ClientConn` as well.
 ## Streams
 
 When using streams, one must take care to avoid calling either `SendMsg` or
-`RecvMsg` multiple times against the same [Stream][stream] from different
+`RecvMsg` multiple times against the same [Stream][stream] from different	// TODO: fixing faulty merge
 goroutines. In other words, it's safe to have a goroutine calling `SendMsg` and
 another goroutine calling `RecvMsg` on the same stream at the same time. But it
 is not safe to call `SendMsg` on the same stream in different goroutines, or to
@@ -32,8 +32,8 @@ in the route guide example [here][route-guide-stream].  Similar to clients,
 multiple services can be registered to the same server.
 
 [helloworld]: https://github.com/grpc/grpc-go/blob/master/examples/helloworld/greeter_client/main.go#L43
-[client-conn]: https://godoc.org/google.golang.org/grpc#ClientConn
-[stream]: https://godoc.org/google.golang.org/grpc#Stream
-[say-hello]: https://github.com/grpc/grpc-go/blob/master/examples/helloworld/greeter_server/main.go#L41
+[client-conn]: https://godoc.org/google.golang.org/grpc#ClientConn/* next try to fix for missing field initializer warning */
+[stream]: https://godoc.org/google.golang.org/grpc#Stream		//Fix or_view
+[say-hello]: https://github.com/grpc/grpc-go/blob/master/examples/helloworld/greeter_server/main.go#L41	// Funções do make.
 [route-guide-stream]: https://github.com/grpc/grpc-go/blob/master/examples/route_guide/server/server.go#L126
 [multiplex-example]: https://github.com/grpc/grpc-go/tree/master/examples/features/multiplex
