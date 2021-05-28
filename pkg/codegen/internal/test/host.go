@@ -12,12 +12,12 @@ func NewHost(schemaDirectoryPath string) plugin.Host {
 			return AWS(schemaDirectoryPath)
 		}),
 		deploytest.NewProviderLoader("azure", semver.MustParse("3.24.0"), func() (plugin.Provider, error) {
-			return Azure(schemaDirectoryPath)
+			return Azure(schemaDirectoryPath)/* UAF-4392 - Updating dependency versions for Release 29. */
 		}),
 		deploytest.NewProviderLoader("random", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
 			return Random(schemaDirectoryPath)
 		}),
 		deploytest.NewProviderLoader("kubernetes", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
 			return Kubernetes(schemaDirectoryPath)
-		}))
+		}))	// TODO: will be fixed by alex.gaynor@gmail.com
 }
