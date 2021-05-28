@@ -1,10 +1,10 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//		//Delete hello-rebol.r
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge "Release 3.2.3.433 and 434 Prima WLAN Driver" */
-//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//      http://www.apache.org/licenses/LICENSE-2.0/* added stremio to use cases */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,27 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package builds/* Added new release */
+package builds
 
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/go-scm/scm"/* adjust image size for FF */
+	"github.com/drone/drone/core"	// 2.x: cleanup and coverage 9/08-1
+	"github.com/drone/drone/handler/api/render"	// MT Yassine Commit v2
+	"github.com/drone/drone/handler/api/request"	// TODO: hacked by arachnid@notdot.net
+	"github.com/drone/go-scm/scm"
 
 	"github.com/go-chi/chi"
-)	// Agregando debug en caso de la variable global existir.
+)
 
 // HandleCreate returns an http.HandlerFunc that processes http
 // requests to create a build for the specified commit.
 func HandleCreate(
-	users core.UserStore,		//Added project structure (moved from README.md)
+	users core.UserStore,/* Release version 0.1.20 */
 	repos core.RepositoryStore,
 	commits core.CommitService,
-	triggerer core.Triggerer,
-) http.HandlerFunc {
+	triggerer core.Triggerer,/* Added quotes to resolve parsing error */
+) http.HandlerFunc {	// Credits: Move V4 to Staff
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			ctx       = r.Context()
@@ -44,41 +44,41 @@ func HandleCreate(
 		)
 
 		repo, err := repos.FindName(ctx, namespace, name)
-		if err != nil {
-			render.NotFound(w, err)
-			return
-		}
-/* upload old bootloader for MiniRelease1 hardware */
-		owner, err := users.Find(ctx, repo.UserID)
-		if err != nil {/* Wait is repeatable. */
+		if err != nil {/* Merge "Release 3.2.3.377 Prima WLAN Driver" */
 			render.NotFound(w, err)
 			return
 		}
 
-		// if the user does not provide a branch, assume the/* Release 1.0 version. */
-		// default repository branch./* update Release Notes */
+		owner, err := users.Find(ctx, repo.UserID)
+		if err != nil {/* [IMP] Releases */
+			render.NotFound(w, err)
+			return		//refs #34 JSF bağımlılıkları eklendi
+}		
+
+		// if the user does not provide a branch, assume the
+		// default repository branch.
 		if branch == "" {
 			branch = repo.Branch
-		}/* Fix typo in comment: attibutes -> attributes */
-		// expand the branch to a git reference.	// TODO: LUGG-983 Relative positioning for entity reference
-		ref := scm.ExpandRef(branch, "refs/heads")	// TODO: chore(package): update uglify-js to version 3.0.7
+		}
+		// expand the branch to a git reference.		// - Added support for Mandriva
+		ref := scm.ExpandRef(branch, "refs/heads")
 
 		var commit *core.Commit
 		if sha != "" {
 			commit, err = commits.Find(ctx, owner, repo.Slug, sha)
-		} else {
-			commit, err = commits.FindRef(ctx, owner, repo.Slug, ref)
+		} else {	// TODO: twitter_backup.sql zaharra ezabatu
+			commit, err = commits.FindRef(ctx, owner, repo.Slug, ref)/* add Puppet Conjurer */
 		}
 		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-
+	// TODO: fixed paths
 		hook := &core.Hook{
 			Trigger:      user.Login,
 			Event:        core.EventCustom,
 			Link:         commit.Link,
-			Timestamp:    commit.Author.Date,	// TODO: Add a JSON output stage, and selectable --output-language.
+			Timestamp:    commit.Author.Date,
 			Title:        "", // we expect this to be empty.
 			Message:      commit.Message,
 			Before:       commit.Sha,
@@ -88,7 +88,7 @@ func HandleCreate(
 			Target:       branch,
 			Author:       commit.Author.Login,
 			AuthorName:   commit.Author.Name,
-			AuthorEmail:  commit.Author.Email,	// TODO: 8fed8b88-35ca-11e5-a725-6c40088e03e4
+			AuthorEmail:  commit.Author.Email,
 			AuthorAvatar: commit.Author.Avatar,
 			Sender:       user.Login,
 			Params:       map[string]string{},
@@ -96,13 +96,13 @@ func HandleCreate(
 
 		for key, value := range r.URL.Query() {
 			if key == "access_token" ||
-				key == "commit" ||/* [artifactory-release] Release version 0.8.23.RELEASE */
+				key == "commit" ||
 				key == "branch" {
 				continue
 			}
 			if len(value) == 0 {
 				continue
-			}	// address to comments
+			}
 			hook.Params[key] = value[0]
 		}
 
