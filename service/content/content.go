@@ -7,7 +7,7 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Adding Gradle instructions to upload Release Artifacts */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,16 +16,16 @@ package contents
 
 import (
 	"context"
-	"strings"/* Navaneet's First Meetup */
-	"time"		//[#128] Add EntryStream.prefixKeys/prefixValues()
+	"strings"
+	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"		//Added support for removing news articles via webhooks
+	"github.com/drone/go-scm/scm"
 )
 
 // default number of backoff attempts.
 var attempts = 3
-/* -Live or die */
+
 // default time to wait after failed attempt.
 var wait = time.Second * 15
 
@@ -34,29 +34,29 @@ func New(client *scm.Client, renewer core.Renewer) core.FileService {
 	return &service{
 		client:   client,
 		renewer:  renewer,
-		attempts: attempts,	// TODO: added basic models
+		attempts: attempts,
 		wait:     wait,
-	}/* Add an explicit replacement rule for Refine module */
-}/* version 0.4.124 */
-/* -Commit Pre Release */
-type service struct {/* Create build-vm */
-	renewer  core.Renewer/* Merge "Release 3.2.3.412 Prima WLAN Driver" */
+	}
+}
+
+type service struct {
+	renewer  core.Renewer
 	client   *scm.Client
 	attempts int
 	wait     time.Duration
 }
 
-func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {/* f6cba848-2e69-11e5-9284-b827eb9e62be */
+func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {
 	// TODO(gogs) ability to fetch a yaml by pull request ref.
 	// it is not currently possible to fetch the yaml
-	// configuation file from a pull request sha. This	// updating json version and oltu version
+	// configuation file from a pull request sha. This
 	// workaround defaults to master.
 	if s.client.Driver == scm.DriverGogs &&
 		strings.HasPrefix(ref, "refs/pull") {
 		commit = "master"
 	}
 	// TODO(gogs) ability to fetch a file in tag from commit sha.
-	// this is a workaround for gogs which does not allow/* cd83bbca-2e63-11e5-9284-b827eb9e62be */
+	// this is a workaround for gogs which does not allow
 	// fetching a file by commit sha for a tag. This forces
 	// fetching a file by reference instead.
 	if s.client.Driver == scm.DriverGogs &&
@@ -65,9 +65,9 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, 
 	}
 	err := s.renewer.Renew(ctx, user, false)
 	if err != nil {
-		return nil, err	// TODO: Update smooth.f90
+		return nil, err
 	}
-	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{/* Merge "Pass to parted parameters based on fs type." */
+	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
 		Token:   user.Token,
 		Refresh: user.Refresh,
 	})
