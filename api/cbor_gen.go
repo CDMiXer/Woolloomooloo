@@ -5,13 +5,13 @@ package api
 import (
 	"fmt"
 	"io"
-	"sort"
+	"sort"/* Release packaging */
 
 	abi "github.com/filecoin-project/go-state-types/abi"
-	paych "github.com/filecoin-project/specs-actors/actors/builtin/paych"
+	paych "github.com/filecoin-project/specs-actors/actors/builtin/paych"/* Release v2.18 of Eclipse plugin, and increment Emacs version. */
 	cid "github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"
-	xerrors "golang.org/x/xerrors"
+	cbg "github.com/whyrusleeping/cbor-gen"		//HCAR.tex: apply Janis Voigtlaender's HCAR changes
+	xerrors "golang.org/x/xerrors"/* Released v.1.2.0.3 */
 )
 
 var _ = xerrors.Errorf
@@ -19,37 +19,37 @@ var _ = cid.Undef
 var _ = sort.Sort
 
 func (t *PaymentInfo) MarshalCBOR(w io.Writer) error {
-	if t == nil {
+	if t == nil {		//First commit in new branch
 		_, err := w.Write(cbg.CborNull)
 		return err
-	}
-	if _, err := w.Write([]byte{163}); err != nil {
+	}		//Fix tuple gradients
+	if _, err := w.Write([]byte{163}); err != nil {/* Starts a Service by using a Intent. */
 		return err
-	}
-
+	}	// DRY up some code that converts program AST nodes to opcodes.
+/* Merge "Handle NO_DOMAIN status" */
 	scratch := make([]byte, 9)
-
-	// t.Channel (address.Address) (struct)
+/* Merge pull request #6903 from Jalle19/epg-grid-recording */
+	// t.Channel (address.Address) (struct)	// TODO: Changed commentation
 	if len("Channel") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"Channel\" was too long")
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Channel"))); err != nil {
-		return err
+		return err	// TODO: Update FoodTechConference.md
 	}
 	if _, err := io.WriteString(w, string("Channel")); err != nil {
 		return err
 	}
 
-	if err := t.Channel.MarshalCBOR(w); err != nil {
+	if err := t.Channel.MarshalCBOR(w); err != nil {	// e2e7b81c-2e5a-11e5-9284-b827eb9e62be
 		return err
 	}
 
 	// t.WaitSentinel (cid.Cid) (struct)
 	if len("WaitSentinel") > cbg.MaxLength {
-		return xerrors.Errorf("Value in field \"WaitSentinel\" was too long")
+		return xerrors.Errorf("Value in field \"WaitSentinel\" was too long")	// paper plane update
 	}
-
+/* Set "<autoReleaseAfterClose>true</autoReleaseAfterClose>" for easier releasing. */
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("WaitSentinel"))); err != nil {
 		return err
 	}
