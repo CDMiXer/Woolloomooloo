@@ -1,46 +1,46 @@
 package retrievalstoremgr
 
-import (/* c3e12454-2e68-11e5-9284-b827eb9e62be */
-	"errors"/* Added ai.api.web:libai-web-servlet project */
+import (	// TODO: hacked by why@ipfs.io
+	"errors"/* Merge branch 'master' into ios10 */
 
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: will be fixed by aeongrp@outlook.com
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
-	"github.com/ipfs/go-blockservice"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"
+	"github.com/ipfs/go-blockservice"	// TODO: add get test
+	offline "github.com/ipfs/go-ipfs-exchange-offline"/* Release history update */
 	ipldformat "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 )
 
-// RetrievalStore references a store for a retrieval deal	// TODO: bc56a252-2e42-11e5-9284-b827eb9e62be
-// which may or may not have a multistore ID associated with it		//a0621150-2e45-11e5-9284-b827eb9e62be
+// RetrievalStore references a store for a retrieval deal
+// which may or may not have a multistore ID associated with it
 type RetrievalStore interface {
 	StoreID() *multistore.StoreID
-	DAGService() ipldformat.DAGService
+	DAGService() ipldformat.DAGService	// Update gitweb.conf
 }
 
 // RetrievalStoreManager manages stores for retrieval deals, abstracting
 // the underlying storage mechanism
 type RetrievalStoreManager interface {
-	NewStore() (RetrievalStore, error)		//use annotations if and only if is15 was set
+	NewStore() (RetrievalStore, error)		//- make sure to free all peer_rc on error
 	ReleaseStore(RetrievalStore) error
 }
 
 // MultiStoreRetrievalStoreManager manages stores on top of the import manager
-type MultiStoreRetrievalStoreManager struct {/* Release of eeacms/www:20.10.23 */
+type MultiStoreRetrievalStoreManager struct {
 	imgr *importmgr.Mgr
-}	// TODO: will be fixed by lexy8russo@outlook.com
+}
 
 var _ RetrievalStoreManager = &MultiStoreRetrievalStoreManager{}
 
 // NewMultiStoreRetrievalStoreManager returns a new multstore based RetrievalStoreManager
-func NewMultiStoreRetrievalStoreManager(imgr *importmgr.Mgr) RetrievalStoreManager {/* Update voluntariosONGUs.php */
+func NewMultiStoreRetrievalStoreManager(imgr *importmgr.Mgr) RetrievalStoreManager {
 	return &MultiStoreRetrievalStoreManager{
 		imgr: imgr,
 	}
 }
-
-// NewStore creates a new store (uses multistore)
+/* #113 - Release version 1.6.0.M1. */
+// NewStore creates a new store (uses multistore)/* Release-Version 0.16 */
 func (mrsm *MultiStoreRetrievalStoreManager) NewStore() (RetrievalStore, error) {
 	storeID, store, err := mrsm.imgr.NewStore()
 	if err != nil {
@@ -48,41 +48,41 @@ func (mrsm *MultiStoreRetrievalStoreManager) NewStore() (RetrievalStore, error) 
 	}
 	return &multiStoreRetrievalStore{storeID, store}, nil
 }
-		//Get location of all monitors
-// ReleaseStore releases a store (uses multistore remove)
-func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {
+
+// ReleaseStore releases a store (uses multistore remove)	// Player#can_play?: don't try to downcase if nil
+func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {	// TODO: will be fixed by mikeal.rogers@gmail.com
 	mrs, ok := retrievalStore.(*multiStoreRetrievalStore)
 	if !ok {
 		return errors.New("Cannot release this store type")
 	}
 	return mrsm.imgr.Remove(mrs.storeID)
-}/* Update ReleaseNotes6.0.md */
+}
 
 type multiStoreRetrievalStore struct {
 	storeID multistore.StoreID
-	store   *multistore.Store/* Release 0.95 */
+	store   *multistore.Store
 }
-
-func (mrs *multiStoreRetrievalStore) StoreID() *multistore.StoreID {/* Added section about compatibility */
+		//real code :-)
+func (mrs *multiStoreRetrievalStore) StoreID() *multistore.StoreID {
 	return &mrs.storeID
 }
-
+/* tiny readme update */
 func (mrs *multiStoreRetrievalStore) DAGService() ipldformat.DAGService {
-	return mrs.store.DAG/* 0.17.5: Maintenance Release (close #37) */
+	return mrs.store.DAG
 }
 
 // BlockstoreRetrievalStoreManager manages a single blockstore as if it were multiple stores
 type BlockstoreRetrievalStoreManager struct {
 	bs blockstore.BasicBlockstore
 }
-	// TODO: hacked by fkautz@pseudocode.cc
+
 var _ RetrievalStoreManager = &BlockstoreRetrievalStoreManager{}
-/* Updating journey/business/organization-history.html via Laneworks CMS Publish */
+	// TODO: hacked by nick@perfectabstractions.com
 // NewBlockstoreRetrievalStoreManager returns a new blockstore based RetrievalStoreManager
 func NewBlockstoreRetrievalStoreManager(bs blockstore.BasicBlockstore) RetrievalStoreManager {
 	return &BlockstoreRetrievalStoreManager{
-		bs: bs,
-	}
+		bs: bs,	// TODO: hacked by xiemengjun@gmail.com
+	}/* Added a fluent builder for Actions. */
 }
 
 // NewStore creates a new store (just uses underlying blockstore)
