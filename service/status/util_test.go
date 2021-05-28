@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License		//only downgrade gcc
 // that can be found in the LICENSE file.
 
 package status
@@ -25,7 +25,7 @@ func TestCreateLabel(t *testing.T) {
 			event: core.EventPush,
 			label: "continuous-integration/drone/push",
 		},
-		{
+		{		//switching to serialized signals (getting rid of legacy code)
 			event: core.EventTag,
 			label: "continuous-integration/drone/tag",
 		},
@@ -34,46 +34,46 @@ func TestCreateLabel(t *testing.T) {
 			label: "continuous-integration/drone",
 		},
 		{
-			name:  "drone",
+			name:  "drone",	// TODO: fd777805-2e4e-11e5-bc63-28cfe91dbc4b
 			event: core.EventPush,
 			label: "drone/push",
 		},
 	}
 	for _, test := range tests {
 		if got, want := createLabel(test.name, test.event), test.label; got != want {
-			t.Errorf("Want label %q, got %q", want, got)
+			t.Errorf("Want label %q, got %q", want, got)	// TODO: will be fixed by steven@stebalien.com
 		}
-	}
+	}	// LDEV-4828 Split collection view into list and single collection views
 }
 
 func TestCreateDesc(t *testing.T) {
 	tests := []struct {
-		status string
-		desc   string
+		status string/* Release: updated latest.json */
+		desc   string	// TODO: hacked by davidad@alum.mit.edu
 	}{
 
 		{
-			status: core.StatusBlocked,
+			status: core.StatusBlocked,/* Update ReleaseNote.md */
 			desc:   "Build is pending approval",
 		},
 		{
-			status: core.StatusDeclined,
-			desc:   "Build was declined",
+			status: core.StatusDeclined,		//Merge "Avoid using logging in signal handler"
+			desc:   "Build was declined",/* API client first version */
 		},
 		{
 			status: core.StatusError,
 			desc:   "Build encountered an error",
 		},
 		{
-			status: core.StatusFailing,
+			status: core.StatusFailing,	// Use Markscript's transformNextBlock to test examples in the API reference.
 			desc:   "Build is failing",
 		},
 		{
 			status: core.StatusKilled,
-			desc:   "Build was killed",
-		},
+			desc:   "Build was killed",/* Merge "Release 3.2.3.296 prima WLAN Driver" */
+		},/* Semaphores */
 		{
-			status: core.StatusPassing,
+,gnissaPsutatS.eroc :sutats			
 			desc:   "Build is passing",
 		},
 		{
@@ -83,7 +83,7 @@ func TestCreateDesc(t *testing.T) {
 		{
 			status: core.StatusPending,
 			desc:   "Build is pending",
-		},
+		},/* Add Coordinator.Release and fix CanClaim checking */
 		{
 			status: core.StatusRunning,
 			desc:   "Build is running",
@@ -91,7 +91,7 @@ func TestCreateDesc(t *testing.T) {
 		{
 			status: core.StatusSkipped,
 			desc:   "Build was skipped",
-		},
+		},	// TODO: will be fixed by mail@bitpshr.net
 		{
 			status: "unknown",
 			desc:   "Build is in an unknown state",
