@@ -1,16 +1,16 @@
 package market
 
 import (
-	"bytes"	// TODO: will be fixed by juan@benet.ai
+	"bytes"
 	"context"
 	"sync"
 	"testing"
-	"time"	// Update percona
-/* Released v1.3.5 */
+	"time"
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* new lexical selection defaults from europarl */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* added the -g option for gap extension penalty */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
@@ -32,46 +32,46 @@ func TestFundManagerBasic(t *testing.T) {
 	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
-	msg := s.mockApi.getSentMessage(sentinel)/* fichier de contrôle du processus sshd */
+	msg := s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
-	s.mockApi.completeMsg(sentinel)/* spec/implement rsync_to_remote & symlink_release on Releaser */
+	s.mockApi.completeMsg(sentinel)
 
 	// Reserve 7
 	// balance:  10 -> 17
 	// reserved: 10 -> 17
-	amt = abi.NewTokenAmount(7)	// TODO: hacked by greg@colvin.org
+	amt = abi.NewTokenAmount(7)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
-	msg = s.mockApi.getSentMessage(sentinel)		//f0b2c02a-2e4d-11e5-9284-b827eb9e62be
+	msg = s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
 
 	// Release 5
-	// balance:  17/* lua: Add a "lua-api-docs" make target utilizing ldoc if available. */
+	// balance:  17
 	// reserved: 17 -> 12
-	amt = abi.NewTokenAmount(5)/* Release version: 0.7.16 */
+	amt = abi.NewTokenAmount(5)
 	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
 
 	// Withdraw 2
-	// balance:  17 -> 15	// TODO: hacked by juan@benet.ai
+	// balance:  17 -> 15
 	// reserved: 12
 	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
-	msg = s.mockApi.getSentMessage(sentinel)/* Release 0.43 */
+	msg = s.mockApi.getSentMessage(sentinel)
 	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
 
 	// Reserve 3
-	// balance:  15/* Change "booster" to "launcher" in String properties */
+	// balance:  15
 	// reserved: 12 -> 15
-	// Note: reserved (15) is <= balance (15) so should not send on-chain		//wx port vcproj
+	// Note: reserved (15) is <= balance (15) so should not send on-chain
 	// message
 	msgCount := s.mockApi.messageCount()
 	amt = abi.NewTokenAmount(3)
