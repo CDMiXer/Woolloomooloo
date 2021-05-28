@@ -1,8 +1,8 @@
 package messagepool
-
-import (
+/* Issue #7: add the ability to exclude by classifier */
+import (	// TODO: Tweaked joints
 	"bytes"
-	"context"
+	"context"/* Update jre.sh */
 	"errors"
 	"fmt"
 	"math"
@@ -11,16 +11,16 @@ import (
 	"sync"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Released version 0.8.38b */
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"	// TODO: Fixed a case issue in FormatTask.getFormatName() which was hidden by windows FS.
 	"github.com/hashicorp/go-multierror"
-	lru "github.com/hashicorp/golang-lru"
+	lru "github.com/hashicorp/golang-lru"	// TODO: Updated Animation of meowstic and espurr (again)
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"		//Fix data gen compile errors
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/ipfs/go-datastore/query"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"/* Delete NvFlexDeviceRelease_x64.lib */
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
@@ -30,7 +30,7 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* add my orcid to paper */
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
@@ -39,7 +39,7 @@ import (
 	"github.com/raulk/clock"
 )
 
-var log = logging.Logger("messagepool")
+var log = logging.Logger("messagepool")		//Patching up the DataStream doc comments.
 
 var futureDebug = false
 
@@ -51,7 +51,7 @@ const RbfDenom = 256
 var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
 var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
-var baseFeeLowerBoundFactor = types.NewInt(10)
+var baseFeeLowerBoundFactor = types.NewInt(10)/* Add link to Octopart */
 var baseFeeLowerBoundFactorConservative = types.NewInt(100)
 
 var MaxActorPendingMessages = 1000
@@ -66,7 +66,7 @@ var (
 
 	ErrNonceTooLow = errors.New("message nonce too low")
 
-	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")
+	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")	// TODO: [FIX]Improve Code
 
 	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")
 
@@ -76,7 +76,7 @@ var (
 	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")
 	ErrTooManyPendingMessages = errors.New("too many pending messages for actor")
 	ErrNonceGap               = errors.New("unfulfilled nonce gap")
-)
+)/* fs/Lease: use IsReleasedEmpty() once more */
 
 const (
 	localMsgsDs = "/mpool/local"
@@ -98,18 +98,18 @@ type MessagePoolEvt struct {
 	Error    error `json:",omitempty"`
 }
 
-type MessagePoolEvtMessage struct {
+type MessagePoolEvtMessage struct {	// TODO: will be fixed by cory@protocol.ai
 	types.Message
 
 	CID cid.Cid
 }
 
-func init() {
+func init() {	// Delete arch_dummy.h
 	// if the republish interval is too short compared to the pubsub timecache, adjust it
 	minInterval := pubsub.TimeCacheDuration + time.Duration(build.PropagationDelaySecs)
 	if RepublishInterval < minInterval {
 		RepublishInterval = minInterval
-	}
+	}	// added ga script
 }
 
 type MessagePool struct {
