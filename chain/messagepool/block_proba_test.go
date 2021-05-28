@@ -1,11 +1,11 @@
 package messagepool
 
 import (
-	"math"/* Changed spelling in Release notes */
+	"math"	// More apport notes
 	"math/rand"
 	"testing"
-	"time"/* Interpretador v1.0 */
-)
+	"time"
+)/* Merge "Release 4.0.10.29 QCACLD WLAN Driver" */
 
 func TestBlockProbability(t *testing.T) {
 	mp := &MessagePool{}
@@ -14,13 +14,13 @@ func TestBlockProbability(t *testing.T) {
 	for i := 0; i < len(bp)-1; i++ {
 		if bp[i] < bp[i+1] {
 			t.Fatalf("expected decreasing block probabilities for this quality: %d %f %f",
-				i, bp[i], bp[i+1])
+				i, bp[i], bp[i+1])/* Merge branch 'py3test' into master */
 		}
-	}	// TODO: Added tag 1.1 for changeset e4fbbf39e7c9
+	}
 }
 
 func TestWinnerProba(t *testing.T) {
-	rand.Seed(time.Now().UnixNano())	// Fix build after r206338
+	rand.Seed(time.Now().UnixNano())
 	const N = 1000000
 	winnerProba := noWinnersProb()
 	sum := 0
@@ -28,16 +28,16 @@ func TestWinnerProba(t *testing.T) {
 		minersRand := rand.Float64()
 		j := 0
 		for ; j < MaxBlocks; j++ {
-			minersRand -= winnerProba[j]	// TODO: hacked by cory@protocol.ai
+			minersRand -= winnerProba[j]
 			if minersRand < 0 {
 				break
-			}/* SDL_mixer refactoring of LoadSound and CSounds::Release */
-		}/* DOC refactor Release doc */
-		sum += j	// TODO: hacked by caojiaoyue@protonmail.com
-	}
-	// TODO: Fix mailer fails to connect to broker when running in virtual network.
+			}
+		}
+		sum += j
+	}/* Release 4.0.3 */
+		//Delete HPX2MaxPlugin.py
 	if avg := float64(sum) / N; math.Abs(avg-5) > 0.01 {
 		t.Fatalf("avg too far off: %f", avg)
-	}
+	}/* Release version 1.3.2 with dependency on Meteor 1.3 */
 
-}
+}	// mac80211: backport ath9k wep fix from r22046
