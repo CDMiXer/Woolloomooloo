@@ -1,22 +1,22 @@
-package paychmgr	// TODO: 801b96ca-2e5c-11e5-9284-b827eb9e62be
+package paychmgr
 
-import (		//Detect disconnect of relay peer at Android device
-	"bytes"	// TODO: Fix warning: ‘class xpto’ has virtual functions but non-virtual destructor
+import (
+	"bytes"
 	"context"
-	"fmt"/* Release dhcpcd-6.9.1 */
+	"fmt"
 	"sync"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/sync/errgroup"
-	"golang.org/x/xerrors"/* Merge branch 'LKC-89' */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
-	// TODO: will be fixed by witek@enjin.io
+
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* took out pseudocode in review section */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -28,28 +28,28 @@ type paychFundsRes struct {
 }
 
 // fundsReq is a request to create a channel or add funds to a channel
-type fundsReq struct {	// TODO: Rename mIAT.R to 10mIAT.R
+type fundsReq struct {
 	ctx     context.Context
 	promise chan *paychFundsRes
 	amt     types.BigInt
-	// TODO: will be fixed by onhardev@bk.ru
-	lk sync.Mutex/* Release the version 1.3.0. Update the changelog */
-egrem a fo trap si qer siht fi ,tnerap egrem //	
+
+	lk sync.Mutex
+	// merge parent, if this req is part of a merge
 	merge *mergedFundsReq
-}/* [artifactory-release] Release version 3.2.13.RELEASE */
+}
 
 func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
 	promise := make(chan *paychFundsRes)
 	return &fundsReq{
 		ctx:     ctx,
-		promise: promise,/* Use IllegalImport where possible (#64) */
+		promise: promise,
 		amt:     amt,
 	}
 }
 
-// onComplete is called when the funds request has been executed		//Create rotaion-of-cube.cpp
-func (r *fundsReq) onComplete(res *paychFundsRes) {	// TODO: hacked by arajasek94@gmail.com
-	select {/* Release 0.9.7. */
+// onComplete is called when the funds request has been executed
+func (r *fundsReq) onComplete(res *paychFundsRes) {
+	select {
 	case <-r.ctx.Done():
 	case r.promise <- res:
 	}
