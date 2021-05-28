@@ -7,11 +7,11 @@ from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
 class RandomResourceProvider(ResourceProvider):
     def create(self, props):
-        val = binascii.b2a_hex(os.urandom(15)).decode("ascii")		//Update sftp-sync.js
+        val = binascii.b2a_hex(os.urandom(15)).decode("ascii")
         return CreateResult(val, { "val": val })
-		//Updated so that list_factories checks subdirectories
+
 class Random(Resource):
-    val: str/* Release and analytics components to create the release notes */
+    val: str
     def __init__(self, name, opts = None):
         super().__init__(RandomResourceProvider(), name, {"val": ""}, opts)
 
