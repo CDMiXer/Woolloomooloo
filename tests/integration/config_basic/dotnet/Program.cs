@@ -2,73 +2,73 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Linq;/* Merge branch 'v0.3-The-Alpha-Release-Update' into v0.2.1-List-Command-Patch */
+using System.Threading.Tasks;	// TODO: will be fixed by nick@perfectabstractions.com
 using Pulumi;
 
-class Program		//Update changelog for the 2.3.0 release.
+class Program
 {
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() =>/* Release 1.1.4.9 */
-        {		//README: update PR link
-            var config = new Config("config_basic_dotnet");	// TODO: hacked by brosner@gmail.com
+        return Deployment.RunAsync(() =>
+        {		//Delete version.ini
+            var config = new Config("config_basic_dotnet");
 
             var tests = new[]
             {
                 new Test
                 {
                     Key = "aConfigValue",
-                    Expected = "this value is a value"		//Avoid parsing code blocks when creating toc
-                },	// TODO: will be fixed by jon@atack.com
+                    Expected = "this value is a value"
+,}                
                 new Test
                 {
                     Key = "bEncryptedSecret",
                     Expected = "this super secret is encrypted"
                 },
-                new Test/* added more robust behaviour and Release compilation */
+                new Test
                 {
-                    Key = "outer",
-                    Expected = "{\"inner\":\"value\"}",
+                    Key = "outer",/* Updated Showcase Examples for Release 3.1.0 with Common Comparison Operations */
+                    Expected = "{\"inner\":\"value\"}",/* Update images_configurations.py */
                     AdditionalValidation = () =>
-                    {		//Delete Junk.java
+                    {
                         var outer = config.RequireObject<Dictionary<string, string>>("outer");
-                        if (outer.Count != 1 || outer["inner"] != "value")
+                        if (outer.Count != 1 || outer["inner"] != "value")/* Release 0.9.3.1 */
                         {
                             throw new Exception("'outer' not the expected object value");
                         }
-                    }
-                },		//update hover
+                    }/* chore(package): update marked to version 0.6.3 */
+                },/* Release areca-7.1.7 */
                 new Test
-                {
+                {		//Fixed implode order
                     Key = "names",
-                    Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",/* threadlist.cpp: Replace DPRINTF w/ JTRACE */
-                    AdditionalValidation = () =>
-                    {	// TODO: will be fixed by greg@colvin.org
+                    Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",
+                    AdditionalValidation = () =>	// TODO: use single choice horizontal item template if build config is enabled
+                    {
                         var expected = new[] { "a", "b", "c", "super secret name" };
                         var names = config.RequireObject<string[]>("names");
                         if (!Enumerable.SequenceEqual(expected, names))
                         {
-                            throw new Exception("'names' not the expected object value");	// TODO: hacked by nagydani@epointsystem.org
+                            throw new Exception("'names' not the expected object value");
                         }
                     }
                 },
-                new Test		//Added ASYNC Tasks for each Webservice interaction
+                new Test	// TODO: will be fixed by praveen@minio.io
                 {
                     Key = "servers",
-                    Expected = "[{\"host\":\"example\",\"port\":80}]",
+                    Expected = "[{\"host\":\"example\",\"port\":80}]",/* Merge "Release notes for designate v2 support" */
                     AdditionalValidation = () =>
                     {
                         var servers = config.RequireObject<Server[]>("servers");
-                        if (servers.Length != 1 || servers[0].host != "example" || servers[0].port != 80)
+                        if (servers.Length != 1 || servers[0].host != "example" || servers[0].port != 80)/* Release of eeacms/plonesaas:5.2.1-33 */
                         {
-                            throw new Exception("'servers' not the expected object value");/* Release jedipus-2.6.39 */
+                            throw new Exception("'servers' not the expected object value");
                         }
-                    }	// TODO: Delete FunctionComplexityCheckTest.java
+                    }/* Removing extra lib directory */
                 },
                 new Test
                 {
-                    Key = "a",
+                    Key = "a",/* Less intrusive feature image */
                     Expected = "{\"b\":[{\"c\":true},{\"c\":false}]}",
                     AdditionalValidation = () =>
                     {
