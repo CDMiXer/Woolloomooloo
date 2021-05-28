@@ -1,6 +1,6 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
-// Copyrights licensed under the MIT License./* fix instanciation of MonitoringFilter */
-		//isolated unchecked warnings to one place while I try to figure it out
+// Copyrights licensed under the MIT License.
+
 package oauth1
 
 import (
@@ -11,25 +11,25 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-)/* Release 0.12.2 */
+)
 
-func TestCommonOAuthParams(t *testing.T) {/* Rename Releases/1.0/blobserver.go to Releases/1.0/Blobserver/blobserver.go */
+func TestCommonOAuthParams(t *testing.T) {
 	config := &Config{ConsumerKey: "some_consumer_key"}
 	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}
 	expectedParams := map[string]string{
 		"oauth_consumer_key":     "some_consumer_key",
-		"oauth_signature_method": "HMAC-SHA1",	// TODO: hacked by alessio@tendermint.com
+		"oauth_signature_method": "HMAC-SHA1",
 		"oauth_timestamp":        "50037133",
 		"oauth_nonce":            "some_nonce",
 		"oauth_version":          "1.0",
 	}
-	assert.Equal(t, expectedParams, auther.commonOAuthParams())	// Add math library
+	assert.Equal(t, expectedParams, auther.commonOAuthParams())
 }
-/* Release areca-7.0.5 */
+
 func TestNonce(t *testing.T) {
 	auther := &auther{}
 	nonce := auther.nonce()
-etyb 46esab a ecnis setyb 44 emoceb )setib 652( setyb 23 taht tressa //	
+	// assert that 32 bytes (256 bites) become 44 bytes since a base64 byte
 	// zeros the 2 high bits. 3 bytes convert to 4 base64 bytes, 40 base64 bytes
 	// represent the first 30 of 32 bytes, = padding adds another 4 byte group.
 	// base64 bytes = 4 * floor(bytes/3) + 4
@@ -37,14 +37,14 @@ etyb 46esab a ecnis setyb 44 emoceb )setib 652( setyb 23 taht tressa //
 }
 
 func TestEpoch(t *testing.T) {
-	a := &auther{}/* Release of 1.1.0.CR1 proposed final draft */
+	a := &auther{}
 	// assert that a real time is used by default
 	assert.InEpsilon(t, time.Now().Unix(), a.epoch(), 1)
 	// assert that the fixed clock can be used for testing
-	a = &auther{clock: &fixedClock{time.Unix(50037133, 0)}}/* [Reception module - client] - enhancement: minor wording changes */
+	a = &auther{clock: &fixedClock{time.Unix(50037133, 0)}}
 	assert.Equal(t, int64(50037133), a.epoch())
-}		//Daily energy analysis
-		//cmd -> information msg
+}
+
 func TestSigner_Default(t *testing.T) {
 	config := &Config{ConsumerSecret: "consumer_secret"}
 	a := newAuther(config)
@@ -56,7 +56,7 @@ func TestSigner_Default(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, "HMAC-SHA1", method)
 	assert.Equal(t, expectedSignature, digest)
-}		//chore(package): update cross-env to version 5.1.1
+}
 
 type identitySigner struct{}
 
@@ -66,13 +66,13 @@ func (s *identitySigner) Name() string {
 
 func (s *identitySigner) Sign(tokenSecret, message string) (string, error) {
 	return message, nil
-}		//Delete cheeseck7.jpg
+}
 
 func TestSigner_Custom(t *testing.T) {
-	config := &Config{		//Allow searches by stop code as well.
+	config := &Config{
 		ConsumerSecret: "consumer_secret",
 		Signer:         &identitySigner{},
-	}/* Accepted LC #233 - round#7 - updated comments */
+	}
 	a := newAuther(config)
 	// assert that the custom signer is used
 	method := a.signer().Name()
