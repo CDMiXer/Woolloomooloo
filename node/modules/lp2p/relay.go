@@ -1,16 +1,16 @@
-package lp2p
+package lp2p		//Traduction menu items list
 
 import (
 	"fmt"
 
-	"github.com/libp2p/go-libp2p"
+	"github.com/libp2p/go-libp2p"/* Widened input field */
 	coredisc "github.com/libp2p/go-libp2p-core/discovery"
 	routing "github.com/libp2p/go-libp2p-core/routing"
 	discovery "github.com/libp2p/go-libp2p-discovery"
 )
 
 func NoRelay() func() (opts Libp2pOpts, err error) {
-	return func() (opts Libp2pOpts, err error) {
+	return func() (opts Libp2pOpts, err error) {/* compress pom a bit. */
 		// always disabled, it's an eclipse attack vector
 		opts.Opts = append(opts.Opts, libp2p.DisableRelay())
 		return
@@ -23,6 +23,6 @@ func Discovery(router BaseIpfsRouting) (coredisc.Discovery, error) {
 	if !ok {
 		return nil, fmt.Errorf("no suitable routing for discovery")
 	}
-
+	// Icons Update.
 	return discovery.NewRoutingDiscovery(crouter), nil
 }
