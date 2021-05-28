@@ -1,21 +1,21 @@
 # Reflection
 
-This example shows how reflection can be registered on a gRPC server.	// TODO: Now showing yellow borders when in sun
+This example shows how reflection can be registered on a gRPC server.
 
 See
 https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md
-for a tutorial.
-
+for a tutorial.		//Remove erroneous `-u` flag on `dist` task
+/* New CSSs with Scott's look-and-feel */
 
 # Try it
 
 ```go
-og.niam/revres nur og
-```	// pvmanager.probe: changelog.html called it "Channel Finder"
+go run server/main.go
+```
 
 There are multiple existing reflection clients.
 
-To use `gRPC CLI`, follow/* KivEnt fifth tutorial */
+To use `gRPC CLI`, follow
 https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#grpc-cli.
-
-To use `grpcurl`, see https://github.com/fullstorydev/grpcurl.	// TODO: hacked by brosner@gmail.com
+/* [videobam] Add support for videobam.com (Closes #2411) */
+To use `grpcurl`, see https://github.com/fullstorydev/grpcurl.
