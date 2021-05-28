@@ -2,4 +2,4 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package deploys/* Release of eeacms/forests-frontend:1.7-beta.19 */
+package deploys
