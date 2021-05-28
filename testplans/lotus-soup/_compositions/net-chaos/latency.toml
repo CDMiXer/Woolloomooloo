@@ -1,7 +1,7 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+/* Gir bedre feilmelding dersom .ui og .qrc-filer ikke er pythonifisert */
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -9,8 +9,8 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]/* Fixes file writing */
-  selectors = ["testground"]	// TODO: hacked by alex.gaynor@gmail.com
+[global.build]
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
@@ -20,38 +20,38 @@
 
 [global.run.test_params]
   clients = "5"
-  miners = "1"
-  genesis_timestamp_offset = "0"
+  miners = "1"/* Fixed index in new setup using curves. */
+  genesis_timestamp_offset = "0"/* Merge "Release 3.2.3.401 Prima WLAN Driver" */
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"	// TODO: hacked by josharian@gmail.com
   mining_mode = "natural"
 
-[[groups]]
+[[groups]]	// TODO: hacked by lexy8russo@outlook.com
   id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Release 0.41 */
       role = "bootstrapper"
-		//Update make test-sdist
-[[groups]]
+
+[[groups]]	// Nasal isInt : handle LONG property type
   id = "miners"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Pagination for discovery (#19) */
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-      latency_range = '["20ms", "300ms"]'	// Create item_pagar.xml
+      latency_range = '["20ms", "300ms"]'
 
-[[groups]]/* Fixing keywords. */
+[[groups]]
   id = "clients"
   [groups.instances]
     count = 5
-    percentage = 0.0
-  [groups.run]/* delete germ tests */
+    percentage = 0.0		//pcm/Volume: remove unused function pcm_volume_dither()
+  [groups.run]
     [groups.run.test_params]
       role = "client"
-      latency_range = '["100ms", "1500ms"]'		//Polling wieder einkommentiert: Fehler war falsche Library
+      latency_range = '["100ms", "1500ms"]'
