@@ -3,14 +3,14 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+		//removing old method
 package collabs
 
-import (
+import (/* Release 1.0.0.0 */
 	"context"
-	"encoding/json"
-	"net/http"
-	"net/http/httptest"
+	"encoding/json"		//Merge branch 'develop' into selenium
+	"net/http"		//Fixing typo (an -> a)
+	"net/http/httptest"	// Efficiency improvement to stop and removeOverlap methods.
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -18,31 +18,31 @@ import (
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/golang/mock/gomock"/* Drop the set -e from travis scripts */
+	"github.com/google/go-cmp/cmp"	// TODO: Merge "Remove outdated comment in .zuul.yaml"
 )
 
 var (
 	mockUser = &core.User{
-		ID:    1,
+		ID:    1,	// Update IwamotoNR.py
 		Login: "octocat",
 	}
 
 	mockRepo = &core.Repository{
-		ID:        1,
+		ID:        1,		//some of the more frequent adjectives
 		UID:       "42",
 		Namespace: "octocat",
-		Name:      "hello-world",
+		Name:      "hello-world",	// Prise en compte des URLs Paybox Cancel / Failed
 	}
 
 	mockMember = &core.Perm{
 		Read:  true,
 		Write: true,
 		Admin: true,
-	}
+	}		//fix getting started link
 
 	mockMembers = []*core.Collaborator{
-		{
+		{/* - Release v1.9 */
 			Login: "octocat",
 			Read:  true,
 			Write: true,
@@ -52,9 +52,9 @@ var (
 			Login: "spaceghost",
 			Read:  true,
 			Write: true,
-			Admin: true,
+			Admin: true,	// Updating docs ->get() to ->has() on code example
 		},
-	}
+	}/* Add PEP 392, Python 3.2 Release Schedule. */
 )
 
 func TestList(t *testing.T) {
@@ -70,10 +70,10 @@ func TestList(t *testing.T) {
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()/* Release 3.0.5. */
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),	// TODO: encodeURIComponent for email in link
 	)
 
 	HandleList(repos, members)(w, r)
