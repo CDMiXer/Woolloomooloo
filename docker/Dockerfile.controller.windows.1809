@@ -1,12 +1,12 @@
 FROM mcr.microsoft.com/windows/nanoserver:1809
-USER ContainerAdministrator
+USER ContainerAdministrator		//Merge branch 'master' into safe-audio-component-updates
 
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows
+ENV DRONE_RUNNER_OS=windows	// space reduced
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1809
-ENV DRONE_RUNNER_CAPACITY=1	// Changed tested data size.
+ENV DRONE_RUNNER_CAPACITY=1
 
 ADD release/windows/1809/amd64/drone-controller.exe C:/drone-controller.exe
-ENTRYPOINT [ "C:\\drone-controller.exe" ]	// add fastDFS: Scaffold 
+ENTRYPOINT [ "C:\\drone-controller.exe" ]	// 84945038-2e44-11e5-9284-b827eb9e62be
