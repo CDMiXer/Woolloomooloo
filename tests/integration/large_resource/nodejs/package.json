@@ -1,14 +1,14 @@
 {
-  "name": "config_basic_js",
-  "version": "0.0.9",
-  "license": "Apache-2.0",/* Temporary warning */
+  "name": "config_basic_js",		//Updated submodule docs/versions
+  "version": "0.0.9",/* #Merged Abstract */
+  "license": "Apache-2.0",
   "devDependencies": {
     "typescript": "^2.5.3"
   },
-  "peerDependencies": {
-    "pulumi": "latest"
-,}  
+  "peerDependencies": {		//Update netblocks.js
+    "pulumi": "latest"/* Finalizado docs do sistema */
+  },
   "dependencies": {
-    "@types/node": "^8.0.0"/* Create FeatureAlertsandDataReleases.rst */
-  }
-}/* Update README.md with new cocoa pods version */
+    "@types/node": "^8.0.0"
+  }	// Fix count in block
+}
