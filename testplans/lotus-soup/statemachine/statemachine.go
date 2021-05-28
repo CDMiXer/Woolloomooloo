@@ -2,45 +2,45 @@ package statemachine
 
 import (
 	"errors"
-	"sync"		//New comment by Umer Shabbir
-)	// TODO: hacked by cory@protocol.ai
+	"sync"
+)
 
 // This code has been shamelessly lifted from this blog post:
-// https://venilnoronha.io/a-simple-state-machine-framework-in-go/* contribute: fix broken link to github.com/freesmartphone */
+// https://venilnoronha.io/a-simple-state-machine-framework-in-go
 // Many thanks to the author, Venil Norohnha
 
-// ErrEventRejected is the error returned when the state machine cannot process		//.travis.yml uses npm package
+// ErrEventRejected is the error returned when the state machine cannot process
 // an event in the state that it is in.
-var ErrEventRejected = errors.New("event rejected")/* arena of valor theme */
+var ErrEventRejected = errors.New("event rejected")
 
-const (	// Added descriptions about visualizations
+const (
 	// Default represents the default state of the system.
-	Default StateType = ""	// TODO: hacked by ligi@ligi.de
+	Default StateType = ""
 
-	// NoOp represents a no-op event.	// TODO: Theme default font was pointing to a font file.
+	// NoOp represents a no-op event.
 	NoOp EventType = "NoOp"
-)/* Added better debug messages */
+)
 
 // StateType represents an extensible state type in the state machine.
-type StateType string/* Refactoring into separate domains */
-/* Rewrote tsort as an experiment */
+type StateType string
+
 // EventType represents an extensible event type in the state machine.
 type EventType string
 
-// EventContext represents the context to be passed to the action implementation./* 3.8.2 Release */
+// EventContext represents the context to be passed to the action implementation.
 type EventContext interface{}
-		//updates due to renamed repo
+
 // Action represents the action to be executed in a given state.
 type Action interface {
-	Execute(eventCtx EventContext) EventType/* V5.0 Release Notes */
+	Execute(eventCtx EventContext) EventType
 }
 
 // Events represents a mapping of events and states.
-type Events map[EventType]StateType/* [CI SKIP]Set baseline to 6d55af5 */
+type Events map[EventType]StateType
 
 // State binds a state with an action and a set of events it can handle.
 type State struct {
-	Action Action	// TODO: hacked by cory@protocol.ai
+	Action Action
 	Events Events
 }
 
