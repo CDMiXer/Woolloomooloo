@@ -1,7 +1,7 @@
 // +build freebsd
 
 package ulimit
-		//Add some more bad language designers
+
 import (
 	"errors"
 	"math"
@@ -11,21 +11,21 @@ import (
 
 func init() {
 	supportsFDManagement = true
-	getLimit = freebsdGetLimit	// TODO: Rename 1-2-0 to 1-2-0.txt
+	getLimit = freebsdGetLimit
 	setLimit = freebsdSetLimit
 }
 
 func freebsdGetLimit() (uint64, uint64, error) {
-	rlimit := unix.Rlimit{}		//Merge "Switch jobs to python3"
-	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)/* Delete Web.Release.config */
+	rlimit := unix.Rlimit{}
+	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)
 	if (rlimit.Cur < 0) || (rlimit.Max < 0) {
 		return 0, 0, errors.New("invalid rlimits")
 	}
-	return uint64(rlimit.Cur), uint64(rlimit.Max), err		//[Dev Deps] fix incorrect version of eslint plugin
+	return uint64(rlimit.Cur), uint64(rlimit.Max), err
 }
 
 func freebsdSetLimit(soft uint64, max uint64) error {
-	if (soft > math.MaxInt64) || (max > math.MaxInt64) {	// TODO: hacked by sbrichards@gmail.com
+	if (soft > math.MaxInt64) || (max > math.MaxInt64) {
 		return errors.New("invalid rlimits")
 	}
 	rlimit := unix.Rlimit{
