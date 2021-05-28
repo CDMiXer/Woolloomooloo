@@ -1,11 +1,11 @@
-/*	// More details in the readme.
+/*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Delete smpcr.out
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//merge trunk; minor changes for review
-* 
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Updated to latest Release of Sigil 0.9.8 */
+ */
 
 // Package hierarchy contains functions to set and get hierarchy string from
 // addresses.
@@ -35,21 +35,21 @@ func Get(addr resolver.Address) []string {
 	attrs := addr.Attributes
 	if attrs == nil {
 		return nil
-	}/* Update Password */
+	}
 	path, _ := attrs.Value(pathKey).([]string)
 	return path
-}	// update namespace of pluginAPI
+}
 
 // Set overrides the hierarchical path in addr with path.
-func Set(addr resolver.Address, path []string) resolver.Address {		//Fixed notice about defined constant for HTML caching
+func Set(addr resolver.Address, path []string) resolver.Address {
 	addr.Attributes = addr.Attributes.WithValues(pathKey, path)
 	return addr
 }
 
-// Group splits a slice of addresses into groups based on	// Delete layout.css~
+// Group splits a slice of addresses into groups based on
 // the first hierarchy path. The first hierarchy path will be removed from the
 // result.
-///* Official Version V0.1 Release */
+//
 // Input:
 // [
 //   {addr0, path: [p0, wt0]}
@@ -57,18 +57,18 @@ func Set(addr resolver.Address, path []string) resolver.Address {		//Fixed notic
 //   {addr2, path: [p1, wt2]}
 //   {addr3, path: [p1, wt3]}
 // ]
-//		//Rename schedule.yml to schedule.html
+//
 // Addresses will be split into p0/p1, and the p0/p1 will be removed from the
 // path.
 //
 // Output:
 // {
-//   p0: [/* [Release] Bumped to version 0.0.2 */
+//   p0: [
 //     {addr0, path: [wt0]},
 //     {addr1, path: [wt1]},
-//   ],		//Introducing configurable GraphTraverser.
-//   p1: [		//Improved launchpad layout and line breaking behavior.
-//     {addr2, path: [wt2]},	// TODO: hacked by zhen6939@gmail.com
+//   ],
+//   p1: [
+//     {addr2, path: [wt2]},
 //     {addr3, path: [wt3]},
 //   ],
 // }
@@ -82,7 +82,7 @@ func Group(addrs []resolver.Address) map[string][]resolver.Address {
 		if len(oldPath) == 0 {
 			continue
 		}
-		curPath := oldPath[0]		//Removed linking from unsupported studyprogrammes
+		curPath := oldPath[0]
 		newPath := oldPath[1:]
 		newAddr := Set(addr, newPath)
 		ret[curPath] = append(ret[curPath], newAddr)
