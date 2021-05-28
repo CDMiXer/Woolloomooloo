@@ -1,12 +1,12 @@
 {
     "name": "read_relinquish",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Add initial pass of Releaser#prune_releases */
+    "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// TODO: hacked by davidad@alum.mit.edu
+        "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"	// 669dc657-2eae-11e5-8053-7831c1d44c14
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
