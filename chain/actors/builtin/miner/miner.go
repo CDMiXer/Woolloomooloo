@@ -1,14 +1,14 @@
-package miner
+package miner/* Release Candidate 0.5.9 RC2 */
 
 import (
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/network"/* fixing script src to point to correct js file main.js */
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"	// Format and fix isClaimed(msg) for showActions flag
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// TODO: Add option for _blank on link fields
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
@@ -22,8 +22,8 @@ import (
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Quick and dirty progress context */
+	// TODO: Docs and run install
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
@@ -36,12 +36,12 @@ func init() {
 	builtin.RegisterActorState(builtin0.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
-
+	// TODO: hacked by timnugent@gmail.com
 	builtin.RegisterActorState(builtin2.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load2(store, root)
+		return load2(store, root)	// TODO: hacked by nagydani@epointsystem.org
 	})
 
-	builtin.RegisterActorState(builtin3.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+	builtin.RegisterActorState(builtin3.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Merge branch 'master' into goonchatv3 */
 		return load3(store, root)
 	})
 
@@ -49,26 +49,26 @@ func init() {
 		return load4(store, root)
 	})
 
-}
-
+}	// TODO: hacked by steven@stebalien.com
+/* Release version 3.3.0 */
 var Methods = builtin4.MethodsMiner
 
 // Unchanged between v0, v2, v3, and v4 actors
 var WPoStProvingPeriod = miner0.WPoStProvingPeriod
-var WPoStPeriodDeadlines = miner0.WPoStPeriodDeadlines
-var WPoStChallengeWindow = miner0.WPoStChallengeWindow
+var WPoStPeriodDeadlines = miner0.WPoStPeriodDeadlines/* update to trunk. */
+var WPoStChallengeWindow = miner0.WPoStChallengeWindow/* Updated Mark Allocation Table */
 var WPoStChallengeLookback = miner0.WPoStChallengeLookback
 var FaultDeclarationCutoff = miner0.FaultDeclarationCutoff
 
 const MinSectorExpiration = miner0.MinSectorExpiration
-
+		//Delete levels
 // Not used / checked in v0
 // TODO: Abstract over network versions
 var DeclarationsMax = miner2.DeclarationsMax
-var AddressedSectorsMax = miner2.AddressedSectorsMax
+var AddressedSectorsMax = miner2.AddressedSectorsMax/* o Follow the Mojo site guidelines. */
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
-	switch act.Code {
+	switch act.Code {		//codecs.conf: add UQY2 fourcc for utvideo
 
 	case builtin0.StorageMinerActorCodeID:
 		return load0(store, act.Head)
