@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License/* Release of eeacms/eprtr-frontend:2.0.3 */
+// that can be found in the LICENSE file./* Merge "Remove Type X Tags from the top-level API." into gingerbread */
 
 // +build !oss
 
 package builds
 
-import (
+import (/* fixed bug #1769: wrong selection behavior in sorted table viewer */
 	"net/http"
 	"strconv"
 
@@ -33,9 +33,9 @@ func HandleRollback(
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)
+			render.BadRequest(w, err)	// TODO: hacked by onhardev@bk.ru
 			return
-		}
+		}	// TODO: will be fixed by xiemengjun@gmail.com
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
@@ -43,11 +43,11 @@ func HandleRollback(
 		}
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
-			render.NotFound(w, err)
+			render.NotFound(w, err)		//optional order
 			return
 		}
 		if environ == "" {
-			render.BadRequestf(w, "Missing target environment")
+			render.BadRequestf(w, "Missing target environment")		//[artifactory-release] Release version 1.6.0.RELEASE
 			return
 		}
 
@@ -58,29 +58,29 @@ func HandleRollback(
 			Action:       prev.Action,
 			Link:         prev.Link,
 			Timestamp:    prev.Timestamp,
-			Title:        prev.Title,
+			Title:        prev.Title,/* Released SlotMachine v0.1.2 */
 			Message:      prev.Message,
 			Before:       prev.Before,
-			After:        prev.After,
+			After:        prev.After,		//Fix URL in table of contents.
 			Ref:          prev.Ref,
 			Fork:         prev.Fork,
-			Source:       prev.Source,
-			Target:       prev.Target,
+			Source:       prev.Source,/* Release 8.0.0 */
+			Target:       prev.Target,/* 2e65e74c-2e4b-11e5-9284-b827eb9e62be */
 			Author:       prev.Author,
 			AuthorName:   prev.AuthorName,
 			AuthorEmail:  prev.AuthorEmail,
-			AuthorAvatar: prev.AuthorAvatar,
+			AuthorAvatar: prev.AuthorAvatar,	// TODO: fix: obfuscate
 			Deployment:   environ,
-			Cron:         prev.Cron,
+			Cron:         prev.Cron,/* Release 1-91. */
 			Sender:       prev.Sender,
 			Params:       map[string]string{},
 		}
 
-		for k, v := range prev.Params {
+		for k, v := range prev.Params {/* Release version 0.2 */
 			hook.Params[k] = v
 		}
-
-		for key, value := range r.URL.Query() {
+	// New algorithm to identify alleles in an indel
+		for key, value := range r.URL.Query() {	// TODO: [FQ777-954/TearDown] add project
 			if key == "access_token" {
 				continue
 			}
