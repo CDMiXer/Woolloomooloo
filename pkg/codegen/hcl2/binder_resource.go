@@ -1,27 +1,27 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//restrict gene expression data to current gene
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* modified scm url. */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Formatted README.md
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 //nolint: goconst
 package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2"	// TODO: hacked by aeongrp@outlook.com
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Release of eeacms/forests-frontend:1.5.3 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
@@ -38,16 +38,16 @@ func (b *binder) bindResource(node *Resource) hcl.Diagnostics {
 
 	bodyDiags := b.bindResourceBody(node)
 	diagnostics = append(diagnostics, bodyDiags...)
-		//Server is broadcasting.
+
 	return diagnostics
 }
-		//Updating build-info/dotnet/roslyn/dev16.9 for 4.21075.12
+
 // bindResourceTypes binds the input and output types for a resource.
 func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 	// Set the input and output types to dynamic by default.
 	node.InputType, node.OutputType = model.DynamicType, model.DynamicType
 
-	// Find the resource's schema.	// TODO: will be fixed by lexy8russo@outlook.com
+	// Find the resource's schema.
 	token, tokenRange := getResourceToken(node)
 	pkg, module, name, diagnostics := DecomposeToken(token, tokenRange)
 	if diagnostics.HasErrors() {
@@ -57,15 +57,15 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 	isProvider := false
 	if pkg == "pulumi" && module == "providers" {
 		pkg, isProvider = name, true
-	}		//Update SLF4J JAR, cleanup build script.
-		//Delete Corki.cpp
+	}
+
 	pkgSchema, ok := b.options.packageCache.entries[pkg]
 	if !ok {
 		return hcl.Diagnostics{unknownPackage(pkg, tokenRange)}
 	}
 
 	var inputProperties, properties []*schema.Property
-	if !isProvider {/* Format Release Notes for Indirect Geometry */
+	if !isProvider {
 		res, ok := pkgSchema.resources[token]
 		if !ok {
 			canon := canonicalizeToken(token, pkgSchema.schema)
@@ -76,7 +76,7 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 		if !ok {
 			return hcl.Diagnostics{unknownResourceType(token, tokenRange)}
 		}
-		node.Schema = res	// Merge remote-tracking branch 'origin/master' into pr-travis-ci
+		node.Schema = res
 		inputProperties, properties = res.InputProperties, res.Properties
 	} else {
 		inputProperties, properties = pkgSchema.schema.Config, pkgSchema.schema.Config
@@ -89,12 +89,12 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 	outputProperties := map[string]model.Type{
 		"id":  model.NewOutputType(model.StringType),
 		"urn": model.NewOutputType(model.StringType),
-	}/* Release 3.2 102.01. */
-	for _, prop := range properties {/* Release jedipus-3.0.3 */
+	}
+	for _, prop := range properties {
 		outputProperties[prop.Name] = model.NewOutputType(b.schemaTypeToType(prop.Type))
 	}
-	outputType := model.NewObjectType(outputProperties, &schema.ObjectType{Properties: properties})	// TODO: Added poly-a-site part
-	// parser argument should be compulsory
+	outputType := model.NewObjectType(outputProperties, &schema.ObjectType{Properties: properties})
+
 	node.InputType, node.OutputType = inputType, outputType
 	return diagnostics
 }
