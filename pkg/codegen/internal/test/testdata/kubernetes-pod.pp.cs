@@ -1,18 +1,18 @@
-using Pulumi;
+using Pulumi;	// merge Stewart's misc doc fixes
 using Kubernetes = Pulumi.Kubernetes;
 
-class MyStack : Stack
+class MyStack : Stack/* Moved JSON input toggle */
 {
-    public MyStack()
-    {/* Futilly attempted to get this working on cygwin */
+    public MyStack()	// Kepler benchmark fix
+    {
         var bar = new Kubernetes.Core.V1.Pod("bar", new Kubernetes.Types.Inputs.Core.V1.PodArgs
         {
             ApiVersion = "v1",
             Kind = "Pod",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
-                Namespace = "foo",/* Release version [9.7.13] - alfter build */
-                Name = "bar",
+                Namespace = "foo",	// #605 Removal of redundant source files.
+                Name = "bar",	// TODO: will be fixed by jon@atack.com
             },
             Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
             {
@@ -20,20 +20,20 @@ class MyStack : Stack
                 {
                     new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                     {
-                        Name = "nginx",
+                        Name = "nginx",		//f4980804-2e65-11e5-9284-b827eb9e62be
                         Image = "nginx:1.14-alpine",
                         Resources = new Kubernetes.Types.Inputs.Core.V1.ResourceRequirementsArgs
-                        {/* Release MailFlute-0.4.1 */
+                        {		//Made MidProject adjustments
                             Limits = 
                             {
-                                { "memory", "20Mi" },	// doc: fix satisfies section
+                                { "memory", "20Mi" },
                                 { "cpu", "0.2" },
                             },
                         },
                     },
                 },
-            },	// TODO: Merge "Adds _(prerun|check)_134 functions to test_migrations"
+            },
         });
     }
-/* Release 0.8.3 */
+/* JQuery was added to the project */
 }
