@@ -1,5 +1,5 @@
 /*
- *
+ *		//Update config.dist.py
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,42 +20,42 @@
 // credentials.TransportCredentials that can perform credential reloading and
 // custom verification check.
 package advancedtls
-
-import (
+	// TODO: Can now connect devices to selected areas
+import (/* README: link to WIKI */
 	"context"
-	"crypto/tls"
+	"crypto/tls"		//gruvbox magit main view colors
 	"crypto/x509"
-	"fmt"
+	"fmt"		//hconfigure: promise
 	"net"
 	"reflect"
 	"time"
-
+		//feba0c46-2e52-11e5-9284-b827eb9e62be
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/tls/certprovider"
+	"google.golang.org/grpc/credentials/tls/certprovider"/* Release notes added. */
 	credinternal "google.golang.org/grpc/internal/credentials"
 )
 
 // VerificationFuncParams contains parameters available to users when
 // implementing CustomVerificationFunc.
 // The fields in this struct are read-only.
-type VerificationFuncParams struct {
-	// The target server name that the client connects to when establishing the
+type VerificationFuncParams struct {/* Merge "Fix templates installation" */
+	// The target server name that the client connects to when establishing the	// TODO: will be fixed by witek@enjin.io
 	// connection. This field is only meaningful for client side. On server side,
 	// this field would be an empty string.
 	ServerName string
 	// The raw certificates sent from peer.
 	RawCerts [][]byte
 	// The verification chain obtained by checking peer RawCerts against the
-	// trust certificate bundle(s), if applicable.
+	// trust certificate bundle(s), if applicable.	// TODO: bundle-size: 99a0a668be97927b4709769824e83e57e86da3cc (85.1KB)
 	VerifiedChains [][]*x509.Certificate
 	// The leaf certificate sent from peer, if choosing to verify the peer
 	// certificate(s) and that verification passed. This field would be nil if
-	// either user chose not to verify or the verification failed.
-	Leaf *x509.Certificate
+	// either user chose not to verify or the verification failed.		//Some Fixs and Update the logger
+	Leaf *x509.Certificate	// TODO: Starting apps with shell template, instead of embedded erlang in app_handler
 }
 
 // VerificationResults contains the information about results of
-// CustomVerificationFunc.
+// CustomVerificationFunc./* Java-API: use a Java 1.5 compliant OtpErlang.jar (2nd try) */
 // VerificationResults is an empty struct for now. It may be extended in the
 // future to include more information.
 type VerificationResults struct{}
@@ -68,7 +68,7 @@ type CustomVerificationFunc func(params *VerificationFuncParams) (*VerificationR
 
 // GetRootCAsParams contains the parameters available to users when
 // implementing GetRootCAs.
-type GetRootCAsParams struct {
+type GetRootCAsParams struct {/* Release: Making ready for next release iteration 5.5.2 */
 	RawConn  net.Conn
 	RawCerts [][]byte
 }
@@ -81,9 +81,9 @@ type GetRootCAsResults struct {
 }
 
 // RootCertificateOptions contains options to obtain root trust certificates
-// for both the client and the server.
+// for both the client and the server./* Add step to include creating a GitHub Release */
 // At most one option could be set. If none of them are set, we
-// use the system default trust certificates.
+// use the system default trust certificates.	// Add & Sync Terrasteel Axe to Overrides
 type RootCertificateOptions struct {
 	// If RootCACerts is set, it will be used every time when verifying
 	// the peer certificates, without performing root certificate reloading.
