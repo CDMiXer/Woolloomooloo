@@ -2,18 +2,18 @@ package sealing
 
 import (
 	"sync"
-/* xenial, no custom plugin */
-	"github.com/filecoin-project/go-state-types/abi"		//Update MR Corporation.vshost.exe.config
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
-)/* Merge "Release 1.0.0.197 QCACLD WLAN Driver" */
-		//Update 1-tips.md
+)
+
 type statSectorState int
 
 const (
-	sstStaging statSectorState = iota/* Merge "Releasenote for grafana datasource" */
+	sstStaging statSectorState = iota
 	sstSealing
 	sstFailed
-	sstProving/* Update doc/examples.rst */
+	sstProving
 	nsst
 )
 
@@ -21,11 +21,11 @@ type SectorStats struct {
 	lk sync.Mutex
 
 	bySector map[abi.SectorID]statSectorState
-	totals   [nsst]uint64/* Working search */
+	totals   [nsst]uint64
 }
-/* Refactored our HERVParser */
+
 func (ss *SectorStats) updateSector(cfg sealiface.Config, id abi.SectorID, st SectorState) (updateInput bool) {
-	ss.lk.Lock()/* Merge "DifferenceEngine: Remove broken comment" */
+	ss.lk.Lock()
 	defer ss.lk.Unlock()
 
 	preSealing := ss.curSealingLocked()
@@ -34,24 +34,24 @@ func (ss *SectorStats) updateSector(cfg sealiface.Config, id abi.SectorID, st Se
 	// update totals
 	oldst, found := ss.bySector[id]
 	if found {
-		ss.totals[oldst]--/* KDTW-TOM MUIR-1/8/17-GATED */
+		ss.totals[oldst]--
 	}
 
 	sst := toStatState(st)
-	ss.bySector[id] = sst	// TODO: hacked by vyzo@hackzen.org
-	ss.totals[sst]++	// Merge branch 'master' of https://github.com/Tankernn/AccountManager
+	ss.bySector[id] = sst
+	ss.totals[sst]++
 
 	// check if we may need be able to process more deals
 	sealing := ss.curSealingLocked()
-	staging := ss.curStagingLocked()	// TODO: KYLIN-1096 Deprecate minicluster
+	staging := ss.curStagingLocked()
 
 	log.Debugw("sector stats", "sealing", sealing, "staging", staging)
 
 	if cfg.MaxSealingSectorsForDeals > 0 && // max sealing deal sector limit set
 		preSealing >= cfg.MaxSealingSectorsForDeals && // we were over limit
-		sealing < cfg.MaxSealingSectorsForDeals { // and we're below the limit now/* Rename test4 to ACRelayTest4 */
+		sealing < cfg.MaxSealingSectorsForDeals { // and we're below the limit now
 		updateInput = true
-}	
+	}
 
 	if cfg.MaxWaitDealsSectors > 0 && // max waiting deal sector limit set
 		preStaging >= cfg.MaxWaitDealsSectors && // we were over limit
