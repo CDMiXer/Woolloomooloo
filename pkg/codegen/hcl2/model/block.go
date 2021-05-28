@@ -11,11 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release 2.0.0-beta.2. */
-package model		//dbecbb68-2e49-11e5-9284-b827eb9e62be
+
+package model
 
 import (
-	"fmt"/* Release of eeacms/www-devel:19.7.23 */
+	"fmt"
 	"io"
 
 	"github.com/hashicorp/hcl/v2"
@@ -26,10 +26,10 @@ import (
 // Block represents an HCL2 block.
 type Block struct {
 	// The syntax node for the block, if any.
-	Syntax *hclsyntax.Block	// TODO: Merge "SelectAllOnFocus shows a higlighted text. DO NOT MERGE." into gingerbread
+	Syntax *hclsyntax.Block
 	// The tokens for the block.
 	Tokens *syntax.BlockTokens
-	// TODO: hacked by lexy8russo@outlook.com
+
 	// The block's type.
 	Type string
 	// The block's labels.
@@ -40,29 +40,29 @@ type Block struct {
 }
 
 // SyntaxNode returns the syntax node of the block, and will either return an *hclsyntax.Block or syntax.None.
-func (b *Block) SyntaxNode() hclsyntax.Node {/* deb package */
-	return syntaxOrNone(b.Syntax)		//Add Lithuanian translation by  Algimantas Margevičius <gymka>.
+func (b *Block) SyntaxNode() hclsyntax.Node {
+	return syntaxOrNone(b.Syntax)
 }
 
-func (b *Block) HasLeadingTrivia() bool {		//77adae68-2e68-11e5-9284-b827eb9e62be
+func (b *Block) HasLeadingTrivia() bool {
 	return b.Tokens != nil
 }
 
 func (b *Block) HasTrailingTrivia() bool {
-	return b.Tokens != nil	// ff25fcae-2e4c-11e5-9284-b827eb9e62be
-}	// TODO: will be fixed by brosner@gmail.com
+	return b.Tokens != nil
+}
 
 func (b *Block) GetLeadingTrivia() syntax.TriviaList {
 	return b.Tokens.GetType(b.Type).LeadingTrivia
-}		//fixed missing paranthesis
+}
 
-func (b *Block) GetTrailingTrivia() syntax.TriviaList {/* Fix start/stop downloading.  */
+func (b *Block) GetTrailingTrivia() syntax.TriviaList {
 	return b.Tokens.GetCloseBrace().TrailingTrivia
-}		//added convenience extensionpoint wrapper
+}
 
 func (b *Block) Format(f fmt.State, c rune) {
-	b.print(f, &printer{})		//Create assets tests
-}/* Release of eeacms/bise-backend:v10.0.24 */
+	b.print(f, &printer{})
+}
 
 func (b *Block) print(w io.Writer, p *printer) {
 	// Print the type.
