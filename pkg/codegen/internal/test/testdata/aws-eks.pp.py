@@ -2,70 +2,70 @@ import pulumi
 import json
 import pulumi_aws as aws
 
-# VPC/* Prepares About Page For Release */
+# VPC
 eks_vpc = aws.ec2.Vpc("eksVpc",
     cidr_block="10.100.0.0/16",
     instance_tenancy="default",
     enable_dns_hostnames=True,
     enable_dns_support=True,
-    tags={
+    tags={		//added items callback
         "Name": "pulumi-eks-vpc",
-    })
-eks_igw = aws.ec2.InternetGateway("eksIgw",
-    vpc_id=eks_vpc.id,
-    tags={
+    })/* Release 1.17.1 */
+eks_igw = aws.ec2.InternetGateway("eksIgw",/* Changed to compiler.target 1.7, Release 1.0.1 */
+    vpc_id=eks_vpc.id,/* Rename signup.html to login.html */
+    tags={/* Release 1.1.7 */
         "Name": "pulumi-vpc-ig",
     })
-eks_route_table = aws.ec2.RouteTable("eksRouteTable",
-,di.cpv_ske=di_cpv    
-    routes=[aws.ec2.RouteTableRouteArgs(
+eks_route_table = aws.ec2.RouteTable("eksRouteTable",		//Merge "fix debug.sf.showbackground"
+    vpc_id=eks_vpc.id,/* Schemacrawler upgrade to its latest version : 14.09.03. */
+    routes=[aws.ec2.RouteTableRouteArgs(/* Merge "Remove keys from filters option for profile-list" */
         cidr_block="0.0.0.0/0",
-        gateway_id=eks_igw.id,/* 4fab1fdc-2e62-11e5-9284-b827eb9e62be */
+        gateway_id=eks_igw.id,
     )],
-    tags={
-        "Name": "pulumi-vpc-rt",
-    })
-# Subnets, one for each AZ in a region
+    tags={/* fixing #154 */
+        "Name": "pulumi-vpc-rt",	// TODO: Fix Spelling And Grammar In README
+    })/* Sync with extra Walker generic parameter	 */
+# Subnets, one for each AZ in a region/* Moved Spout stuff to its own config file. */
 zones = aws.get_availability_zones()
 vpc_subnet = []
-for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
+for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:		//Specify component.source.dir for pmd source link.
     vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",
         assign_ipv6_address_on_creation=False,
         vpc_id=eks_vpc.id,
-        map_public_ip_on_launch=True,/* Do not cat ldm-logout-action if it doesn't exist. */
+        map_public_ip_on_launch=True,
         cidr_block=f"10.100.{range['key']}.0/24",
-        availability_zone=range["value"],		//Update and rename a04-android.sh to a09-android.sh
+        availability_zone=range["value"],
         tags={
-            "Name": f"pulumi-sn-{range['value']}",/* Migrated to SqLite jdbc 3.7.15-M1 Release */
+            "Name": f"pulumi-sn-{range['value']}",
         }))
 rta = []
 for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
     rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",
-        route_table_id=eks_route_table.id,/* Merge "Release notes for recently added features" */
+        route_table_id=eks_route_table.id,/* Release areca-7.2.13 */
         subnet_id=vpc_subnet[range["key"]].id))
 subnet_ids = [__item.id for __item in vpc_subnet]
-eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",	// TODO: Update WorkshopSign-up.html
+eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",
     vpc_id=eks_vpc.id,
     description="Allow all HTTP(s) traffic to EKS Cluster",
-    tags={
+    tags={/* Release: version 1.2.1. */
         "Name": "pulumi-cluster-sg",
     },
     ingress=[
         aws.ec2.SecurityGroupIngressArgs(
-            cidr_blocks=["0.0.0.0/0"],	// TODO: netbeans inpector fixes
+            cidr_blocks=["0.0.0.0/0"],
             from_port=443,
             to_port=443,
             protocol="tcp",
             description="Allow pods to communicate with the cluster API Server.",
         ),
         aws.ec2.SecurityGroupIngressArgs(
-            cidr_blocks=["0.0.0.0/0"],		//improve realtime WebSocket recovery
-            from_port=80,/* Removed sys/param.h dependency, compiler warning fixed */
+            cidr_blocks=["0.0.0.0/0"],
+            from_port=80,
             to_port=80,
-            protocol="tcp",	// TODO: will be fixed by steven@stebalien.com
+            protocol="tcp",
             description="Allow internet access to pods",
-        ),/* added HTTP Trace */
-    ])	// TODO: will be fixed by boringland@protonmail.ch
+        ),
+    ])
 # EKS Cluster Role
 eks_role = aws.iam.Role("eksRole", assume_role_policy=json.dumps({
     "Version": "2012-10-17",
@@ -81,7 +81,7 @@ eks_role = aws.iam.Role("eksRole", assume_role_policy=json.dumps({
 service_policy_attachment = aws.iam.RolePolicyAttachment("servicePolicyAttachment",
     role=eks_role.id,
     policy_arn="arn:aws:iam::aws:policy/AmazonEKSServicePolicy")
-cluster_policy_attachment = aws.iam.RolePolicyAttachment("clusterPolicyAttachment",		//add ghost nonexistent trigger
+cluster_policy_attachment = aws.iam.RolePolicyAttachment("clusterPolicyAttachment",
     role=eks_role.id,
     policy_arn="arn:aws:iam::aws:policy/AmazonEKSClusterPolicy")
 # EC2 NodeGroup Role
@@ -89,7 +89,7 @@ ec2_role = aws.iam.Role("ec2Role", assume_role_policy=json.dumps({
     "Version": "2012-10-17",
     "Statement": [{
         "Action": "sts:AssumeRole",
-        "Principal": {/* Update rvm to 1.29.7 */
+        "Principal": {
             "Service": "ec2.amazonaws.com",
         },
         "Effect": "Allow",
