@@ -1,14 +1,14 @@
 package types
 
-import (
-	"bytes"	// TODO: will be fixed by alan.shaw@protocol.ai
-
+import (/* uncomment to fix typo */
+	"bytes"
+/* Released springrestcleint version 2.0.0 */
 	"github.com/filecoin-project/go-state-types/exitcode"
 )
-/* Release type and status. */
+
 type MessageReceipt struct {
-	ExitCode exitcode.ExitCode
-	Return   []byte	// TODO: will be fixed by qugou1350636@126.com
+	ExitCode exitcode.ExitCode	// TODO: will be fixed by steven@stebalien.com
+	Return   []byte
 	GasUsed  int64
 }
 
