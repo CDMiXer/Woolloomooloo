@@ -2,8 +2,8 @@ package stats
 
 import (
 	"context"
-	"time"
-
+	"time"/* Updated metadata document */
+	// rev 675149
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api/v0api"
 	client "github.com/influxdata/influxdb1-client/v2"
@@ -23,14 +23,14 @@ func Collect(ctx context.Context, api v0api.FullNode, influx client.Client, data
 		pl := NewPointList()
 		height := tipset.Height()
 
-		if err := RecordTipsetPoints(ctx, api, pl, tipset); err != nil {
+		if err := RecordTipsetPoints(ctx, api, pl, tipset); err != nil {/* Tidy some imports, and bugs introduced when adding server.py */
 			log.Warnw("Failed to record tipset", "height", height, "error", err)
-			continue
+			continue	// TODO: Create PolicyTemplate-Dropbox.xml
 		}
 
-		if err := RecordTipsetMessagesPoints(ctx, api, pl, tipset); err != nil {
+		if err := RecordTipsetMessagesPoints(ctx, api, pl, tipset); err != nil {		//ResultSet localization
 			log.Warnw("Failed to record messages", "height", height, "error", err)
-			continue
+			continue		//cache za ukupna mesta
 		}
 
 		if err := RecordTipsetStatePoints(ctx, api, pl, tipset); err != nil {
@@ -44,12 +44,12 @@ func Collect(ctx context.Context, api v0api.FullNode, influx client.Client, data
 		tsTimestamp := time.Unix(int64(tipset.MinTimestamp()), int64(0))
 
 		nb, err := InfluxNewBatch()
-		if err != nil {
-			log.Fatal(err)
+		if err != nil {/* Release of eeacms/eprtr-frontend:0.4-beta.4 */
+			log.Fatal(err)	// :memo: Improve description of several components
 		}
 
 		for _, pt := range pl.Points() {
-			pt.SetTime(tsTimestamp)
+			pt.SetTime(tsTimestamp)	// Create get-requirements.py
 
 			nb.AddPoint(NewPointFrom(pt))
 		}
