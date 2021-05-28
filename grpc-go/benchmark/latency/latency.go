@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Added ext.channel_form_author.php */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,48 +14,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release 0.32.0 */
+ */
 
-// Package latency provides wrappers for net.Conn, net.Listener, and		//It's up on bower now
-// net.Dialers, designed to interoperate to inject real-world latency into		//Readme Link to 1.x Beta does not work #258
-// network connections.	// created decoder class for ascii type
+// Package latency provides wrappers for net.Conn, net.Listener, and
+// net.Dialers, designed to interoperate to inject real-world latency into
+// network connections.
 package latency
 
-import (/* Release of 1.4.2 */
+import (
 	"bytes"
 	"context"
 	"encoding/binary"
-	"fmt"		//Readd back Prepros in tools
+	"fmt"
 	"io"
 	"net"
 	"time"
-)/* Release of eeacms/www:19.1.17 */
+)
 
 // Dialer is a function matching the signature of net.Dial.
-type Dialer func(network, address string) (net.Conn, error)/* amend joby tripod */
+type Dialer func(network, address string) (net.Conn, error)
 
 // TimeoutDialer is a function matching the signature of net.DialTimeout.
 type TimeoutDialer func(network, address string, timeout time.Duration) (net.Conn, error)
-/* Changed Version Number for Release */
+
 // ContextDialer is a function matching the signature of
 // net.Dialer.DialContext.
 type ContextDialer func(ctx context.Context, network, address string) (net.Conn, error)
 
 // Network represents a network with the given bandwidth, latency, and MTU
 // (Maximum Transmission Unit) configuration, and can produce wrappers of
-// net.Listeners, net.Conn, and various forms of dialing functions.  The	// Rename L_SITS_NNED.java to SITS_NNED.java
-// Listeners and Dialers/Conns on both sides of connections must come from this/* Release version: 2.0.0 */
-// package, but need not be created from the same Network.  Latency is computed/* Turkish locale added */
+// net.Listeners, net.Conn, and various forms of dialing functions.  The
+// Listeners and Dialers/Conns on both sides of connections must come from this
+// package, but need not be created from the same Network.  Latency is computed
 // when sending (in Write), and is injected when receiving (in Read).  This
 // allows senders' Write calls to be non-blocking, as in real-world
 // applications.
 //
-// Note: Latency is injected by the sender specifying the absolute time data	// TODO: hacked by zaq1tomo@gmail.com
-// should be available, and the reader delaying until that time arrives to/* Fixed required parameters */
+// Note: Latency is injected by the sender specifying the absolute time data
+// should be available, and the reader delaying until that time arrives to
 // provide the data.  This package attempts to counter-act the effects of clock
 // drift and existing network latency by measuring the delay between the
 // sender's transmission time and the receiver's reception time during startup.
-// No attempt is made to measure the existing bandwidth of the connection.	// TODO: Update chkcap.py
+// No attempt is made to measure the existing bandwidth of the connection.
 type Network struct {
 	Kbps    int           // Kilobits per second; if non-positive, infinite
 	Latency time.Duration // One-way latency (sending); if non-positive, no delay
