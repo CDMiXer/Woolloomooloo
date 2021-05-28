@@ -3,9 +3,9 @@
 import * as pulumi from "@pulumi/pulumi";
 
 let config = new pulumi.Config();
-let org = config.require("org");		//Create employeeAddPayment.html
-let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;	// add styling for main boxes
-let a = new pulumi.StackReference(slug);/* add autoReleaseAfterClose  */
+let org = config.require("org");
+let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;
+let a = new pulumi.StackReference(slug);
 
 const oldVal: string[] = a.getOutputSync("val");
 if (oldVal.length !== 2 || oldVal[0] !== "a" || oldVal[1] !== "b") {
