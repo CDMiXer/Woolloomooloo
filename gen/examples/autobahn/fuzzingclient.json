@@ -1,15 +1,15 @@
-	// TODO: bumped version to 3.4.0
+/* added moon style (sass) */
 {
    "options": {"failByDrop": false},
    "outdir": "./reports/clients",
    "servers": [
         {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
-        {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
+        {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},/* (I) Release version */
         {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
-        {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},		//Create mybot_plugin.py
+        {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
         {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
     ],
    "cases": ["*"],
-   "exclude-cases": [],
+   "exclude-cases": [],/* Release build needed UndoManager.h included. */
    "exclude-agent-cases": {}
-}/* Release version 0.2.2 to Clojars */
+}
