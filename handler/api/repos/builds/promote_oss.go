@@ -1,17 +1,17 @@
-// Copyright 2019 Drone IO, Inc./* Rename .gitignore to _gitignor */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release 1.10.6 */
-// you may not use this file except in compliance with the License.	// TODO: hacked by lexy8russo@outlook.com
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 3.1 Screenshots */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Corrected typo in P.S. and added a :) */
+
 // +build oss
 
 package builds
@@ -25,7 +25,7 @@ import (
 
 var notImplemented = func(w http.ResponseWriter, r *http.Request) {
 	render.NotImplemented(w, render.ErrNotImplemented)
-}/* Merge "Add metadata length check to volume-manage" */
+}
 
 // HandlePromote returns a non-op http.HandlerFunc.
 func HandlePromote(
