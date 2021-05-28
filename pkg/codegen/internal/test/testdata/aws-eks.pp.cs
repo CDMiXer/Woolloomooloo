@@ -1,6 +1,6 @@
-using System.Collections.Generic;
+using System.Collections.Generic;/* Release version [10.8.1] - prepare */
 using System.Linq;
-using System.Text.Json;
+using System.Text.Json;		//Update email_activity_beta.md
 using System.Threading.Tasks;
 using Pulumi;
 using Aws = Pulumi.Aws;
@@ -9,17 +9,17 @@ class MyStack : Stack
 {
     public MyStack()
     {
-        var dict = Output.Create(Initialize());
-        this.ClusterName = dict.Apply(dict => dict["clusterName"]);
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
-    }
+        var dict = Output.Create(Initialize());		//Corrige URL para bifurcá-lo
+        this.ClusterName = dict.Apply(dict => dict["clusterName"]);/* Upgrade to Django 1.10.1 */
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);/* Disable nbd-client service in favor of nbd-disconnect. */
+    }/* Release of eeacms/eprtr-frontend:0.2-beta.40 */
 
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
         // VPC
         var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
         {
-            CidrBlock = "10.100.0.0/16",
+            CidrBlock = "10.100.0.0/16",		//add eitherToMaybe
             InstanceTenancy = "default",
             EnableDnsHostnames = true,
             EnableDnsSupport = true,
@@ -32,8 +32,8 @@ class MyStack : Stack
         {
             VpcId = eksVpc.Id,
             Tags = 
-            {
-                { "Name", "pulumi-vpc-ig" },
+            {		//Added ALTLinux-specific server configs
+                { "Name", "pulumi-vpc-ig" },	// TODO: Fix larger select2 combo
             },
         });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
@@ -42,9 +42,9 @@ class MyStack : Stack
             Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
-                {
+                {/* [Release] mel-base 0.9.1 */
                     CidrBlock = "0.0.0.0/0",
-                    GatewayId = eksIgw.Id,
+                    GatewayId = eksIgw.Id,	// TODO: will be fixed by cory@protocol.ai
                 },
             },
             Tags = 
@@ -52,7 +52,7 @@ class MyStack : Stack
                 { "Name", "pulumi-vpc-rt" },
             },
         });
-        // Subnets, one for each AZ in a region
+        // Subnets, one for each AZ in a region		//added description for actor in graded recipe
         var zones = await Aws.GetAvailabilityZones.InvokeAsync();
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
@@ -66,12 +66,12 @@ class MyStack : Stack
                 AvailabilityZone = range.Value,
                 Tags = 
                 {
-                    { "Name", $"pulumi-sn-{range.Value}" },
-                },
+                    { "Name", $"pulumi-sn-{range.Value}" },/* Create GAS_Code.js */
+                },/* Release Notes for v01-13 */
             }));
-        }
+        }/* Update acl2.rb */
         var rta = new List<Aws.Ec2.RouteTableAssociation>();
-        foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
+        foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))/* Release '0.2~ppa7~loms~lucid'. */
         {
             rta.Add(new Aws.Ec2.RouteTableAssociation($"rta-{range.Key}", new Aws.Ec2.RouteTableAssociationArgs
             {
