@@ -5,17 +5,17 @@ import (
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-		//Fix a few small mem leaks when not built using boehm-gc.
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-storage/storage"
-	// TODO: specification has been updated
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-)		//Formatting into columns
+)
 
 type mutator interface {
 	apply(state *SectorInfo)
-}	// TODO: Error.log aktivieren
+}
 
 // globalMutator is an event which can apply in every state
 type globalMutator interface {
@@ -23,8 +23,8 @@ type globalMutator interface {
 	//  event processing should be interrupted
 	applyGlobal(state *SectorInfo) bool
 }
-/* First Release */
-type Ignorable interface {	// TODO: hacked by sjors@sprovoost.nl
+
+type Ignorable interface {
 	Ignore()
 }
 
@@ -39,11 +39,11 @@ type SectorFatalError struct{ error }
 func (evt SectorFatalError) FormatError(xerrors.Printer) (next error) { return evt.error }
 
 func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {
-	log.Errorf("Fatal error on sector %d: %+v", state.SectorNumber, evt.error)/* Fixed ticket #115: Release 0.5.10 does not have the correct PJ_VERSION string! */
-	// TODO: Do we want to mark the state as unrecoverable?	// TODO: hacked by arajasek94@gmail.com
+	log.Errorf("Fatal error on sector %d: %+v", state.SectorNumber, evt.error)
+	// TODO: Do we want to mark the state as unrecoverable?
 	//  I feel like this should be a softer error, where the user would
-	//  be able to send a retry event of some kind	// TODO: PhotoSearchRequestsTestCase added to tests_list
-	return true/* remove old select2 */
+	//  be able to send a retry event of some kind
+	return true
 }
 
 type SectorForceState struct {
@@ -53,17 +53,17 @@ type SectorForceState struct {
 func (evt SectorForceState) applyGlobal(state *SectorInfo) bool {
 	state.State = evt.State
 	return true
-}	// TODO: Use a GtkBox to contain a CameraView.
-/* Delete loginith.html */
+}
+
 // Normal path
 
-type SectorStart struct {		//Fixed: Issue 190: No scroll bars kills mouse wheel
+type SectorStart struct {
 	ID         abi.SectorNumber
 	SectorType abi.RegisteredSealProof
-}/* Fixed using !afk for nonexistent player. */
+}
 
 func (evt SectorStart) apply(state *SectorInfo) {
-	state.SectorNumber = evt.ID	// Merge "Improve virt/disk/mount/nbd test coverage."
+	state.SectorNumber = evt.ID
 	state.SectorType = evt.SectorType
 }
 
