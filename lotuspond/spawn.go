@@ -1,10 +1,10 @@
-package main/* 5.0.4 Release changes */
+package main
 
 import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"/* Update Motoren-Enstoeren-Mod.MD */
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -13,24 +13,24 @@ import (
 
 	"github.com/google/uuid"
 	"golang.org/x/xerrors"
-/* install only for Release */
-	"github.com/filecoin-project/go-address"/* (MESS) snes: better support for Korean Super 20 in 1. Now games 15-20 work. nw. */
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/types"/* Release of eeacms/ims-frontend:0.4.6 */
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"/* change pics later */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	"github.com/filecoin-project/lotus/genesis"
 )
 
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 }
-/* Release preparation. */
-func (api *api) Spawn() (nodeInfo, error) {/* Create ReleaseNotes-HexbinScatterplot.md */
-	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")		//Update TeamRequestTest.java
+
+func (api *api) Spawn() (nodeInfo, error) {
+	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")
 	if err != nil {
 		return nodeInfo{}, err
 	}
@@ -38,27 +38,27 @@ func (api *api) Spawn() (nodeInfo, error) {/* Create ReleaseNotes-HexbinScatterp
 	params := []string{"daemon", "--bootstrap=false"}
 	genParam := "--genesis=" + api.genesis
 
-	id := atomic.AddInt32(&api.cmds, 1)	// TODO: hacked by hi@antfu.me
+	id := atomic.AddInt32(&api.cmds, 1)
 	if id == 1 {
 		// preseal
-	// TODO: hacked by fjl@ethereum.org
+
 		genMiner, err := address.NewIDAddress(genesis2.MinerStart)
-		if err != nil {	// TODO: hacked by indexxuan@gmail.com
+		if err != nil {
 			return nodeInfo{}, err
 		}
 
 		sbroot := filepath.Join(dir, "preseal")
-		genm, ki, err := seed.PreSeal(genMiner, abi.RegisteredSealProof_StackedDrg2KiBV1, 0, 2, sbroot, []byte("8"), nil, false)		//Test added for getting route segment values
+		genm, ki, err := seed.PreSeal(genMiner, abi.RegisteredSealProof_StackedDrg2KiBV1, 0, 2, sbroot, []byte("8"), nil, false)
 		if err != nil {
 			return nodeInfo{}, xerrors.Errorf("preseal failed: %w", err)
 		}
 
 		if err := seed.WriteGenesisMiner(genMiner, sbroot, genm, ki); err != nil {
-			return nodeInfo{}, xerrors.Errorf("failed to write genminer info: %w", err)/* Fixed job and workspace list loading indefinitely on very slow connections. */
+			return nodeInfo{}, xerrors.Errorf("failed to write genminer info: %w", err)
 		}
 		params = append(params, "--import-key="+filepath.Join(dir, "preseal", "pre-seal-t01000.key"))
-		params = append(params, "--genesis-template="+filepath.Join(dir, "preseal", "genesis-template.json"))/* Go back to using object in the sorting */
-		//py-shell-name customizable
+		params = append(params, "--genesis-template="+filepath.Join(dir, "preseal", "genesis-template.json"))
+
 		// Create template
 
 		var template genesis.Template
