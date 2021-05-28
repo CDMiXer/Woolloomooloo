@@ -7,6 +7,6 @@
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"	// TODO: fbfdbd4c-2e41-11e5-9284-b827eb9e62be
     }
 }
