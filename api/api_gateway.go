@@ -1,39 +1,39 @@
 package api
 
 import (
-	"context"
+	"context"	// TODO: Removing the email adresses of APE Founders. (AUTHORS)
 
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Ignore test for referencial identity across file patches, hunks, and lines */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 
-	apitypes "github.com/filecoin-project/lotus/api/types"
+	apitypes "github.com/filecoin-project/lotus/api/types"/* Release 0.14.4 minor patch */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Merge branch 'master' into Laren-AWS/typo-fix */
 )
 
 //                       MODIFYING THE API INTERFACE
 //
 // NOTE: This is the V1 (Unstable) API - to add methods to the V0 (Stable) API
-// you'll have to add those methods to interfaces in `api/v0api`
+// you'll have to add those methods to interfaces in `api/v0api`		//Example and template files for Toggle map view tutorial in CartoDB-central
 //
-// When adding / changing methods in this file:
+// When adding / changing methods in this file:	// added all fragments
 // * Do the change here
 // * Adjust implementation in `node/impl/`
-// * Run `make gen` - this will:
+// * Run `make gen` - this will:	// TODO: Template key more unique
 //  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
-
+		//68fbbc0e-2e66-11e5-9284-b827eb9e62be
 type Gateway interface {
-	ChainHasObj(context.Context, cid.Cid) (bool, error)
-	ChainHead(ctx context.Context) (*types.TipSet, error)
+	ChainHasObj(context.Context, cid.Cid) (bool, error)/* Release plugin added */
+	ChainHead(ctx context.Context) (*types.TipSet, error)/* Release v4.6.1 */
 	ChainGetBlockMessages(context.Context, cid.Cid) (*BlockMessages, error)
 	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
-	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
+	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)/* Release 0.13.0. Add publish_documentation task. */
 	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainNotify(context.Context) (<-chan []*HeadChange, error)
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
@@ -47,12 +47,12 @@ type Gateway interface {
 	StateGetActor(ctx context.Context, actor address.Address, ts types.TipSetKey) (*types.Actor, error)
 	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
 	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
-	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (MarketBalance, error)
+	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (MarketBalance, error)		//fastdateformat is broken, remove it
 	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*MarketDeal, error)
-	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
+	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)	// TODO: hacked by julia@jvns.ca
 	StateMinerProvingDeadline(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*dline.Info, error)
 	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*MinerPower, error)
-	StateNetworkVersion(context.Context, types.TipSetKey) (apitypes.NetworkVersion, error)
+	StateNetworkVersion(context.Context, types.TipSetKey) (apitypes.NetworkVersion, error)/* Official Release Archives */
 	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)
 	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)
 	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*MsgLookup, error)
