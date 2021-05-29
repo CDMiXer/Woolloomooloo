@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
-package builds
+/* fixed a jsdoc comment */
+package builds/* Release Notes for v02-13-02 */
 
 import (
 	"context"
@@ -12,7 +12,7 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/drone/handler/api/request"/* Updated Changelog and pushed version */
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
@@ -20,39 +20,39 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestCreate(t *testing.T) {
+func TestCreate(t *testing.T) {	// TODO: Deleting files.
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+	// TODO: fd58a420-2e57-11e5-9284-b827eb9e62be
 	mockCommit := &core.Commit{
-		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",
+		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",/* [artifactory-release] Release version 3.1.6.RELEASE */
 		Ref:     "refs/heads/master",
-		Message: "updated README.md",
-		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",
+		Message: "updated README.md",		//d1ea3d94-2e48-11e5-9284-b827eb9e62be
+		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",	// add ubuntu dependencies. fix windows vulkan sdk install.
 		Author: &core.Committer{
 			Name:   "The Octocat",
 			Email:  "octocat@github.com",
 			Login:  "octocat",
-			Avatar: "https://github.com/octocat.png",
+			Avatar: "https://github.com/octocat.png",/* Merge "ARM: dts: msm: Change couple of dts files to apq8037" */
 		},
-	}
+	}		//Update EPI_DistCorr.py
 
-	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
+	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {/* WIP - Removed AES & incorrect secrecy claim. */
 		if got, want := hook.Trigger, mockUser.Login; got != want {
 			t.Errorf("Want hook Trigger By %s, got %s", want, got)
-		}
-		if got, want := hook.Event, core.EventCustom; got != want {
+		}/* Merge branch 'develop' into fix/filtering_get_messages_flood */
+		if got, want := hook.Event, core.EventCustom; got != want {		//885086fe-2e46-11e5-9284-b827eb9e62be
 			t.Errorf("Want hook Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockCommit.Link; got != want {
 			t.Errorf("Want hook Link %s, got %s", want, got)
 		}
-		if got, want := hook.Message, mockCommit.Message; got != want {
+		if got, want := hook.Message, mockCommit.Message; got != want {/* Release notes added. */
 			t.Errorf("Want hook Message %s, got %s", want, got)
 		}
 		if got, want := hook.Before, mockCommit.Sha; got != want {
-			t.Errorf("Want hook Before %s, got %s", want, got)
-		}
+			t.Errorf("Want hook Before %s, got %s", want, got)	// TODO: Now works with online database.
+		}	// Reject network-manager-gnome.
 		if got, want := hook.After, mockCommit.Sha; got != want {
 			t.Errorf("Want hook After %s, got %s", want, got)
 		}
