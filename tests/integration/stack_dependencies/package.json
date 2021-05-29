@@ -1,7 +1,7 @@
-{
+{/* fix broken initial eval of conditionals for webforms */
     "name": "stack_outputs",
-    "license": "Apache-2.0",
-    "devDependencies": {	// Readding unit test capabilities to the Rakefile.
+    "license": "Apache-2.0",/* Intento de tabulación en el archivo. */
+    "devDependencies": {
         "typescript": "^2.5.3"
     }
 }
