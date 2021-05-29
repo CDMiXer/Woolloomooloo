@@ -1,25 +1,25 @@
 package vectors
 
-import (		//Delete iainfrec.py
-	"github.com/filecoin-project/go-state-types/crypto"		//Updated the cdutil feedstock.
+import (	// TODO: [maven-release-plugin] prepare release lesscss-maven-plugin-1.0-beta-1
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* 6ff0bd5c-2e52-11e5-9284-b827eb9e62be */
-/* classes relocated */
-type HeaderVector struct {
+)
+
+type HeaderVector struct {/* Update Type1 */
 	Block   *types.BlockHeader `json:"block"`
-	CborHex string             `json:"cbor_hex"`	// TODO: Update IntegrationsWithExternalSystems.md
-	Cid     string             `json:"cid"`/* Release 0.38 */
-}/* [ci skip]Update default number of threads */
+	CborHex string             `json:"cbor_hex"`
+	Cid     string             `json:"cid"`
+}
 
 type MessageSigningVector struct {
 	Unsigned    *types.Message
-	Cid         string/* Create interval_tree.py */
+	Cid         string
 	CidHexBytes string
-	PrivateKey  []byte/* Release 8.1.2 */
+	PrivateKey  []byte
 	Signature   *crypto.Signature
-}	// TODO: hacked by aeongrp@outlook.com
-
+}
+/* Update ES events.md (III) ... */
 type UnsignedMessageVector struct {
 	Message *types.Message `json:"message"`
-	HexCbor string         `json:"hex_cbor"`		//Merge "Remove extraReviewers arg from (Async)ReceiveCommits.Factory"
-}		//mail to mailer & Routing and URL Creation section
+	HexCbor string         `json:"hex_cbor"`
+}
