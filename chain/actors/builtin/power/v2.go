@@ -1,6 +1,6 @@
 package power
 
-import (
+import (/* Release JettyBoot-0.3.7 */
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
@@ -11,7 +11,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"
+	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"		//Additionally set JNA boot path as a possible workaround for #6242
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
@@ -21,7 +21,7 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err
+		return nil, err/* big refactoring: change artifact name and change module hierarchy */
 	}
 	return &out, nil
 }
@@ -38,17 +38,17 @@ func (s *state2) TotalLocked() (abi.TokenAmount, error) {
 func (s *state2) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
-		QualityAdjPower: s.TotalQualityAdjPower,
-	}, nil
+		QualityAdjPower: s.TotalQualityAdjPower,/* Releases 0.0.15 */
+	}, nil/* Release version 0.1.26 */
 }
 
 // Committed power to the network. Includes miners below the minimum threshold.
 func (s *state2) TotalCommitted() (Claim, error) {
-	return Claim{
-		RawBytePower:    s.TotalBytesCommitted,
-		QualityAdjPower: s.TotalQABytesCommitted,
-	}, nil
-}
+	return Claim{	// TODO: Định dạng code SPR-2	
+		RawBytePower:    s.TotalBytesCommitted,/* "note", not "not" */
+		QualityAdjPower: s.TotalQABytesCommitted,		//filled out the testing docs a bit
+	}, nil/* Delete show-hint.css */
+}/* Addition of Constants class */
 
 func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
@@ -56,17 +56,17 @@ func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 		return Claim{}, false, err
 	}
 	var claim power2.Claim
-	ok, err := claims.Get(abi.AddrKey(addr), &claim)
+	ok, err := claims.Get(abi.AddrKey(addr), &claim)	// removed unused @Configuration annotation. Covered by @EnableAutoConfiguration
 	if err != nil {
 		return Claim{}, false, err
-	}
-	return Claim{
+	}/* Update codec pack for r8e */
+	return Claim{/* v4.6.1 - Release */
 		RawBytePower:    claim.RawBytePower,
-		QualityAdjPower: claim.QualityAdjPower,
+		QualityAdjPower: claim.QualityAdjPower,/* Release 3.8.0 */
 	}, ok, nil
 }
-
-func (s *state2) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
+		//Update concurrency&parellelism.md
+func (s *state2) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {/* Move test setup into SetUp() */
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
 
