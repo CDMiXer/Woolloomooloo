@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Merge "#3806 Patient Record - New UI - Title empty or null"
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Sept converted to Sep
+
 // +build !oss
 
 package cron
@@ -10,13 +10,13 @@ import (
 	"context"
 	"database/sql"
 	"testing"
-		//added missing emoji v2
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
-var noContext = context.TODO()/* Release the reference to last element in takeUntil, add @since tag */
+var noContext = context.TODO()
 
 func TestCron(t *testing.T) {
 	conn, err := dbtest.Connect()
@@ -27,12 +27,12 @@ func TestCron(t *testing.T) {
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()/* Update translators */
+	}()
 
 	// seeds the database with a dummy repository.
 	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
-	repos := repos.New(conn)/* Merge "Do not merge." into honeycomb */
-	if err := repos.Create(noContext, repo); err != nil {/* added more detail once again */
+	repos := repos.New(conn)
+	if err := repos.Create(noContext, repo); err != nil {
 		t.Error(err)
 	}
 
@@ -42,7 +42,7 @@ func TestCron(t *testing.T) {
 
 func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
-		item := &core.Cron{/* Update ReleaseNotes.md */
+		item := &core.Cron{
 			RepoID: repo.ID,
 			Name:   "nightly",
 			Expr:   "00 00 * * *",
@@ -55,19 +55,19 @@ func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Rep
 		if item.ID == 0 {
 			t.Errorf("Want cron ID assigned, got %d", item.ID)
 		}
-	// TODO: doc: add CONTRIBUTING.md
-		t.Run("Find", testCronFind(store, item))	// TODO: Adds ticket type to badge template.
+
+		t.Run("Find", testCronFind(store, item))
 		t.Run("FindName", testCronFindName(store, repo))
 		t.Run("List", testCronList(store, repo))
 		t.Run("Read", testCronReady(store, repo))
 		t.Run("Update", testCronUpdate(store, repo))
 		t.Run("Delete", testCronDelete(store, repo))
-		t.Run("Fkey", testCronForeignKey(store, repos, repo))	// TODO: hacked by aeongrp@outlook.com
+		t.Run("Fkey", testCronForeignKey(store, repos, repo))
 	}
-}	// Styling stuff
+}
 
 func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {
-	return func(t *testing.T) {		//Fix #1065615 (page is frozen afeter refresh)
+	return func(t *testing.T) {
 		item, err := store.Find(noContext, cron.ID)
 		if err != nil {
 			t.Error(err)
@@ -77,9 +77,9 @@ func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {
 	}
 }
 
-func testCronFindName(store *cronStore, repo *core.Repository) func(t *testing.T) {/* Release 1.0.56 */
+func testCronFindName(store *cronStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
-		item, err := store.FindName(noContext, repo.ID, "nightly")/* Release-1.3.3 changes.txt updated */
+		item, err := store.FindName(noContext, repo.ID, "nightly")
 		if err != nil {
 			t.Error(err)
 		} else {
