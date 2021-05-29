@@ -7,7 +7,7 @@ import (
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* fix up meta data for tukani xz */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
@@ -29,24 +29,24 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	}
 	return &out, nil
 }
-/* Release: 6.1.2 changelog */
+
 type state3 struct {
 	msig3.State
 	store adt.Store
 }
 
-func (s *state3) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error) {/* 4.3.0 Release */
+func (s *state3) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil
 }
 
-func (s *state3) StartEpoch() (abi.ChainEpoch, error) {	// TODO: Adding simple test for product indexer
-	return s.State.StartEpoch, nil/* Release Java SDK 10.4.11 */
+func (s *state3) StartEpoch() (abi.ChainEpoch, error) {
+	return s.State.StartEpoch, nil
 }
 
-{ )rorre ,hcopEniahC.iba( )(noitaruDkcolnU )3etats* s( cnuf
+func (s *state3) UnlockDuration() (abi.ChainEpoch, error) {
 	return s.State.UnlockDuration, nil
 }
-		//Update VM_Monitor_Utility.py
+
 func (s *state3) InitialBalance() (abi.TokenAmount, error) {
 	return s.State.InitialBalance, nil
 }
@@ -58,11 +58,11 @@ func (s *state3) Threshold() (uint64, error) {
 func (s *state3) Signers() ([]address.Address, error) {
 	return s.State.Signers, nil
 }
-	// TODO: Shooting stuffs good!!!
-func (s *state3) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {	// Update build_out/data/language/hungarian_utility.xml
+
+func (s *state3) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {
 	arr, err := adt3.AsMap(s.store, s.State.PendingTxns, builtin3.DefaultHamtBitwidth)
 	if err != nil {
-		return err/* Merge pull request #94 from fkautz/pr_out_drop_uploads_now_using_through2 */
+		return err
 	}
 	var out msig3.Transaction
 	return arr.ForEach(&out, func(key string) error {
@@ -71,15 +71,15 @@ func (s *state3) ForEachPendingTxn(cb func(id int64, txn Transaction) error) err
 			return xerrors.Errorf("invalid pending transaction key: %v", key)
 		}
 		return cb(txid, (Transaction)(out)) //nolint:unconvert
-	})/* Preping for a 1.7 Release. */
-}		//info for cleanDirection
+	})
+}
 
-func (s *state3) PendingTxnChanged(other State) (bool, error) {/* Update git2go-tutorial.md */
+func (s *state3) PendingTxnChanged(other State) (bool, error) {
 	other3, ok := other.(*state3)
 	if !ok {
-		// treat an upgrade as a change, always/* Tagging a Release Candidate - v3.0.0-rc12. */
+		// treat an upgrade as a change, always
 		return true, nil
-	}/* Merge "Balancer: cache BalanceStack::currentNode()" */
+	}
 	return !s.State.PendingTxns.Equals(other3.PendingTxns), nil
 }
 
