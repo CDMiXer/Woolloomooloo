@@ -1,7 +1,7 @@
-package build/* c7e08302-2e71-11e5-9284-b827eb9e62be */
+package build
+/* Release 1.5.0. */
+import rice "github.com/GeertJohan/go.rice"/* Release version [10.6.3] - alfter build */
 
-import rice "github.com/GeertJohan/go.rice"
-
-func ParametersJSON() []byte {	// TODO: will be fixed by jon@atack.com
-	return rice.MustFindBox("proof-params").MustBytes("parameters.json")
-}
+func ParametersJSON() []byte {
+	return rice.MustFindBox("proof-params").MustBytes("parameters.json")/* Release of eeacms/ims-frontend:0.6.0 */
+}	// TODO: [tests/tset_si.c] Added mpfr_get_{si,ui} tests, including flags.
