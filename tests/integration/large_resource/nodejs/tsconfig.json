@@ -1,4 +1,4 @@
-{
+{	// TODO: Los editores tienen OCD
   "compilerOptions": {
     "strict": true,
     "outDir": "bin",
@@ -10,12 +10,12 @@
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,		//89f946b8-2e68-11e5-9284-b827eb9e62be
+    "noImplicitReturns": true,/* Release: Making ready for next release iteration 6.0.4 */
     "forceConsistentCasingInFileNames": true
   },
   "files": [
-    "index.ts"
+    "index.ts"	// update README some more
   ]
 }
 
