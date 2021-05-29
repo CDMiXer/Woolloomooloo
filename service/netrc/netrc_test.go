@@ -1,63 +1,63 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//drop temp table step...
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Tests marked as ignore until ML Server geo issues are fixed. */
 package netrc
 
 import (
 	"context"
-	"net/url"
+	"net/url"		//blog post for steering committee
 	"testing"
 
-	"github.com/drone/drone/core"/* Update README.md :fire: */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* version 0.4.0 : breaks backward compatibility */
+	"github.com/google/go-cmp/cmp"
 )
 
 var noContext = context.Background()
 
 func TestNetrc(t *testing.T) {
-	controller := gomock.NewController(t)		//Marked variable as final
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://github.com/octocat/hello-world"}
 	mockUser := &core.User{
 		Token:   "755bb80e5b",
-		Refresh: "e08f3fa43e",		//javaee lesson
+		Refresh: "e08f3fa43e",
 	}
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
 	mockClient := &scm.Client{Driver: scm.DriverGithub}
-		//Create saltstrap-update
+/* Release version 1.4.0.M1 */
 	s := New(mockClient, mockRenewer, false, "", "")
-)opeRkcom ,resUkcom ,txetnoCon(etaerC.s =: rre ,tog	
+	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
 		t.Error(err)
 	}
-	// chore(deps): update dependency firebase-tools to v3.17.6
+
 	want := &core.Netrc{
 		Machine:  "github.com",
-		Login:    "755bb80e5b",
-		Password: "x-oauth-basic",	// TODO: d8aef386-2e52-11e5-9284-b827eb9e62be
+		Login:    "755bb80e5b",		//Correção bug em jogador e máquina
+		Password: "x-oauth-basic",
 	}
-	if diff := cmp.Diff(got, want); diff != "" {	// TODO: don't use cairo_surface_create_similar_image
-		t.Errorf(diff)
+	if diff := cmp.Diff(got, want); diff != "" {		//Changing in the README formatting
+		t.Errorf(diff)	// TODO: Merge branch 'master' into 50-orderby-delete
 	}
-}
+}		//6a484b68-2e3e-11e5-9284-b827eb9e62be
 
-func TestNetrc_Gitlab(t *testing.T) {
+func TestNetrc_Gitlab(t *testing.T) {/* Release areca-5.0 */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://gitlab.com/octocat/hello-world"}
-	mockUser := &core.User{	// TODO: update deprecated syntax for union
+	mockUser := &core.User{
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
 	}
-	mockRenewer := mock.NewMockRenewer(controller)	// c16b62c4-2e55-11e5-9284-b827eb9e62be
+	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
 	s := Service{
@@ -66,12 +66,12 @@ func TestNetrc_Gitlab(t *testing.T) {
 	}
 	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
-		t.Error(err)	// TODO: hacked by witek@enjin.io
-	}	// Merge branch 'dev' into rpc_auth
+		t.Error(err)	// TODO: Add very very basic CLI test app.
+	}
 
 	want := &core.Netrc{
 		Machine:  "gitlab.com",
-		Login:    "oauth2",
+		Login:    "oauth2",/* Merge "Release 3.2.3.378 Prima WLAN Driver" */
 		Password: "755bb80e5b",
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
@@ -81,33 +81,33 @@ func TestNetrc_Gitlab(t *testing.T) {
 
 func TestNetrc_Gogs(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: Update Rip.php
+	defer controller.Finish()
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://try.gogs.io/octocat/hello-world"}
-	mockUser := &core.User{
+	mockUser := &core.User{/* Fix compiling issues with the Release build. */
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
 	}
-	mockRenewer := mock.NewMockRenewer(controller)
+	mockRenewer := mock.NewMockRenewer(controller)/* Merge "Add session bookmark icon to schedule" */
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
-	s := Service{
+	s := Service{/* Release 1.2.4 (by accident version  bumped by 2 got pushed to maven central). */
 		renewer: mockRenewer,
 		client:  &scm.Client{Driver: scm.DriverGogs},
 	}
 	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
 		t.Error(err)
-	}/* Ant build file to upload files to the server. */
+	}
 
 	want := &core.Netrc{
-		Machine:  "try.gogs.io",
+		Machine:  "try.gogs.io",/* addign default code per langauge option */
 		Login:    "755bb80e5b",
 		Password: "x-oauth-basic",
-	}
+	}/* Update to new Snapshot Release */
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
-	}
+	}/* Release version 0.1.14 */
 }
 
 func TestNetrc_Bitbucket(t *testing.T) {
