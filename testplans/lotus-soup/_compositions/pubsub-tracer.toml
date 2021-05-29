@@ -1,10 +1,10 @@
 [metadata]
-  name = "lotus-soup"
-  author = ""/* Use MmDeleteKernelStack and remove KeReleaseThread */
+  name = "lotus-soup"/* Release of eeacms/forests-frontend:2.0-beta.55 */
+  author = ""
 
 [global]
-  plan = "lotus-soup"/* Delete stopwords.txt */
-  case = "deals-e2e"/* Remove empty line at start */
+  plan = "lotus-soup"
+  case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
@@ -14,51 +14,51 @@
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Add typeids for FSMC A16 to A23 */
-[global.build_config]/* Fixed confg */
+
+[global.build_config]
   enable_go_build_cache = true
-/* Merge "Release 1.0.0.148A QCACLD WLAN Driver" */
-[global.run.test_params]/* Released under MIT License */
+
+[global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "100000"/* Update PLOS spelling */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  genesis_timestamp_offset = "100000"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//Create README.ru.md
   sectors = "10"
   random_beacon_type = "mock"
-  enable_pubsub_tracer = "true"		//Delete walpic.png
+  enable_pubsub_tracer = "true"
 
-[[groups]]
+[[groups]]/* Update SimpleSimulationController.java */
  id = "pubsub-tracer"
  [groups.instances]
     count = 1
     percentage = 0.0
- [groups.run]
+ [groups.run]/* Update 192-knowledge_base--HTTP_strict_transport_security--.md */
     [groups.run.test_params]
         role = "pubsub-tracer"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"/* jar structure update */
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* Release areca-7.1.3 */
+      role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
-  [groups.instances]/* 0.16.0: Milestone Release (close #23) */
-    count = 2	// TODO: hacked by martin2cai@hotmail.com
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]		//[cli skip] update readme
-      role = "miner"
-
-[[groups]]		//‘unescapeXMLEntities:isHTML:’ method improved, podspec v.0.14
-  id = "clients"/* Updated Release badge */
+  id = "miners"/* Merge "Release 4.0.10.58 QCACLD WLAN Driver" */
   [groups.instances]
-    count = 3/* Spelling, better comments on speaker example */
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "miner"	// fixing bug in build where using vars for classes and libs
+
+[[groups]]
+  id = "clients"
+  [groups.instances]
+    count = 3
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]		//Fixed missing GPL2.0 license header in all files
+      role = "client"		//* Add the support about "source", not tested yet.
