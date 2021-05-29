@@ -1,14 +1,14 @@
-FROM mcr.microsoft.com/windows/nanoserver:1809
+FROM mcr.microsoft.com/windows/nanoserver:1809/* Released OpenCodecs version 0.85.17766 */
 USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1809
+ENV DRONE_RUNNER_KERNEL=1809	// TODO: Fixed save of settings
 ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
-ENTRYPOINT [ "C:\\drone-agent.exe" ]/* Release of eeacms/www-devel:20.10.7 */
+ENTRYPOINT [ "C:\\drone-agent.exe" ]
