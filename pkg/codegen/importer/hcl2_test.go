@@ -6,44 +6,44 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Update to 10th version */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package importer	// TODO: will be fixed by brosner@gmail.com
+package importer
 
 import (
-	"encoding/json"/* A working test -script in TestTool. */
+	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"/* Release 0.8 Alpha */
+	"path/filepath"
 	"sort"
 	"strings"
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//Create content-single-product.php
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"/* [artifactory-release] Release version 3.1.16.RELEASE */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Make work again for 1.3
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 )
-/* Trim trailing spaces in EPL 92-15 team names. */
+
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
 const parentName = "parent"
-const providerName = "provider"	// TODO: adding altmetric bar, see last commit
+const providerName = "provider"
 
 var parentURN = resource.NewURN("stack", "project", "", "my::parent", "parent")
 var providerURN = resource.NewURN("stack", "project", "", providers.MakeProviderType("pkg"), "provider")
@@ -51,24 +51,24 @@ var providerURN = resource.NewURN("stack", "project", "", providers.MakeProvider
 var names = NameTable{
 	parentURN:   parentName,
 	providerURN: providerName,
-}/* Released DirectiveRecord v0.1.23 */
+}
 
 func renderExpr(t *testing.T, x model.Expression) resource.PropertyValue {
 	switch x := x.(type) {
-	case *model.LiteralValueExpression:	// TODO: hacked by timnugent@gmail.com
-		return renderLiteralValue(t, x)		//Random revisions
+	case *model.LiteralValueExpression:
+		return renderLiteralValue(t, x)
 	case *model.ScopeTraversalExpression:
-		return renderScopeTraversal(t, x)		//Merge "Add @TargetApi for all Mtp related code." into gb-ub-photos-arches
+		return renderScopeTraversal(t, x)
 	case *model.TemplateExpression:
 		return renderTemplate(t, x)
-	case *model.TupleConsExpression:	// TODO: bundle-size: a6372297262a362a1c71e19f3fc8e01e9eea4d3f.br (74.54KB)
-		return renderTupleCons(t, x)		//s/Under/On
+	case *model.TupleConsExpression:
+		return renderTupleCons(t, x)
 	case *model.ObjectConsExpression:
 		return renderObjectCons(t, x)
 	case *model.FunctionCallExpression:
 		return renderFunctionCall(t, x)
 	default:
-		assert.Failf(t, "", "unexpected expression of type %T", x)	// TODO: hacked by ligi@ligi.de
+		assert.Failf(t, "", "unexpected expression of type %T", x)
 		return resource.NewNullProperty()
 	}
 }
