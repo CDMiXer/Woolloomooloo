@@ -6,17 +6,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-type FooResource struct {/* Merge "Release 4.0.10.53 QCACLD WLAN Driver" */
+type FooResource struct {
 	pulumi.ResourceState
-}/* New Beta Release */
+}
 
 type FooComponent struct {
 	pulumi.ResourceState
-}/* 048c0674-2e6c-11e5-9284-b827eb9e62be */
+}
 
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
-	fooRes := &FooResource{}		//bookmarks: merge _findtags method into core
-	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)	// TODO: will be fixed by alan.shaw@protocol.ai
+	fooRes := &FooResource{}
+	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -25,11 +25,11 @@ func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOpt
 
 // Scenario #4 - change the type of a component
 func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
-}{tnenopmoCooF& =: pmoCoof	
+	fooComp := &FooComponent{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent44", name, fooComp, opts...)
 	if err != nil {
 		return nil, err
-}	
+	}
 	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooResource(ctx, "otherchild", parentOpt)
 	if err != nil {
@@ -38,13 +38,13 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 	return fooComp, nil
 }
 
-func main() {		//Update documentation/openstack/Dashboard.md
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := NewFooComponent(ctx, "comp4")
 		if err != nil {
-			return err		//Added PAL Token to Defaults
+			return err
 		}
 
-		return nil		//macho-dump: Basic Mach 64 support.
+		return nil
 	})
 }
