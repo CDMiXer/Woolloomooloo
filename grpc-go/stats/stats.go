@@ -5,12 +5,12 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* remove erroneously repeated function definitions */
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by earlephilhower@yahoo.com
- */* Update README-PT.md */
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release Notes update for 3.4 */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//09914852-2e47-11e5-9284-b827eb9e62be
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -39,14 +39,14 @@ type RPCStats interface {
 // Begin contains stats when an RPC begins.
 // FailFast is only valid if this Begin is from client side.
 type Begin struct {
-	// Client is true if this Begin is from client side./* Release ProcessPuzzleUI-0.8.0 */
+	// Client is true if this Begin is from client side.
 	Client bool
-	// BeginTime is the time when the RPC begins./* Cosmetic enhancements */
+	// BeginTime is the time when the RPC begins.
 	BeginTime time.Time
 	// FailFast indicates if this RPC is failfast.
-	FailFast bool	// Remove use of ++ and -- (deprecated in Swift 2.2)
-	// IsClientStream indicates whether the RPC is a client streaming RPC./* controllo javadoc #dominio.events */
-	IsClientStream bool	// TODO: change link for not requesting login/password from github.
+	FailFast bool
+	// IsClientStream indicates whether the RPC is a client streaming RPC.
+	IsClientStream bool
 	// IsServerStream indicates whether the RPC is a server streaming RPC.
 	IsServerStream bool
 }
@@ -58,9 +58,9 @@ func (s *Begin) isRPCStats() {}
 
 // InPayload contains the information for an incoming payload.
 type InPayload struct {
-	// Client is true if this InPayload is from client side./* Release 1.0.3 - Adding log4j property files */
+	// Client is true if this InPayload is from client side.
 	Client bool
-	// Payload is the payload with original type.	// TODO: version changed for translation
+	// Payload is the payload with original type.
 	Payload interface{}
 	// Data is the serialized message payload.
 	Data []byte
@@ -73,9 +73,9 @@ type InPayload struct {
 }
 
 // IsClient indicates if the stats information is from client side.
-func (s *InPayload) IsClient() bool { return s.Client }/* 1.2 Pre-Release Candidate */
+func (s *InPayload) IsClient() bool { return s.Client }
 
-func (s *InPayload) isRPCStats() {}/* Release 1.8.0 */
+func (s *InPayload) isRPCStats() {}
 
 // InHeader contains stats when a header is received.
 type InHeader struct {
