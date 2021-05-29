@@ -1,10 +1,10 @@
--- name: create-table-users	// Adjust specs to preference
+-- name: create-table-users
 
 CREATE TABLE IF NOT EXISTS users (
  user_id            SERIAL PRIMARY KEY
 ,user_login         VARCHAR(250)
 ,user_email         VARCHAR(500)
-,user_admin         BOOLEAN/* Releases on Github */
+,user_admin         BOOLEAN
 ,user_active        BOOLEAN
 ,user_machine       BOOLEAN
 ,user_avatar        VARCHAR(2000)
@@ -19,4 +19,4 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_hash          VARCHAR(500)
 ,UNIQUE(user_login)
 ,UNIQUE(user_hash)
-);	// TODO: some fixes in the demo store
+);
