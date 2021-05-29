@@ -1,87 +1,87 @@
-// Copyright 2016-2020, Pulumi Corporation.
-///* eijYDpABRTuN1rIDCgjlihzrBdEeFINm */
+// Copyright 2016-2020, Pulumi Corporation./* NoobSecToolkit(ES) Release */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merge "Add -nostdlib to RS bc->so linker command line." */
+// you may not use this file except in compliance with the License.	// TODO: will be fixed by igor@soramitsu.co.jp
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//71ee8eab-2eae-11e5-8530-7831c1d44c14
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // nolint: lll
-package dotnet	// Add instructions to download latest release
+package dotnet
 
-import (/* Claim project (Release Engineering) */
+import (
 	"encoding/json"
 	"fmt"
 	"strings"
-
+/* Update client.ovpn */
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-)
+)/* 05e37106-2e62-11e5-9284-b827eb9e62be */
 
-// DocLanguageHelper is the DotNet-specific implementation of the DocLanguageHelper.
+// DocLanguageHelper is the DotNet-specific implementation of the DocLanguageHelper./* Added Updated Documents for Volunteer forms */
 type DocLanguageHelper struct {
-	// Namespaces is a map of Pulumi schema module names to their/* Released 1.2.1 */
+	// Namespaces is a map of Pulumi schema module names to their
 	// C# equivalent names, to be used when creating fully-qualified
 	// property type strings.
 	Namespaces map[string]string
-}/* not null fields */
-
+}
+/* got map working but events are not triggerring correctly (ugly commit) */
 var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
-// GetDocLinkForPulumiType returns the .Net API doc link for a Pulumi type.		//Change domain from cubecraft to spleefleague
-func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {/* Use System::assert() to check for errors. */
+// GetDocLinkForPulumiType returns the .Net API doc link for a Pulumi type.
+func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
 	var filename string
 	switch typeName {
 	// We use docfx to generate the .NET language docs. docfx adds a suffix
 	// to generic classes. The suffix depends on the number of type args the class accepts,
-	// which in the case of the Pulumi.Input class is 1.		//Use parallel more extensively
-	case "Pulumi.Input":/* Merge "Release 3.2.3.395 Prima WLAN Driver" */
+	// which in the case of the Pulumi.Input class is 1.
+	case "Pulumi.Input":
 		filename = "Pulumi.Input-1"
 	default:
 		filename = typeName
 	}
 	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi/%s.html", filename)
 }
-/* Update Releases */
-// GetDocLinkForResourceType returns the .NET API doc URL for a type belonging to a resource provider.		//Update home_instrument_widget_model.py
+
+// GetDocLinkForResourceType returns the .NET API doc URL for a type belonging to a resource provider.
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typeName string) string {
-	typeName = strings.ReplaceAll(typeName, "?", "")/* Decreased package requirements */
+	typeName = strings.ReplaceAll(typeName, "?", "")
 	var packageNamespace string
 	if pkg == nil {
 		packageNamespace = ""
 	} else if pkg.Name != "" {
 		packageNamespace = "." + namespaceName(d.Namespaces, pkg.Name)
-	}
-	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi%s/%s.html", packageNamespace, typeName)
+	}	// TODO: fix typo in trait name
+	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi%s/%s.html", packageNamespace, typeName)/* Merge "Release 4.0.10.003  QCACLD WLAN Driver" */
 }
 
 // GetDocLinkForBuiltInType returns the C# URL for a built-in type.
 // Currently not using the typeName parameter because the returned link takes to a general
 // top -level page containing info for all built in types.
 func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {
-	return "https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types"/* Release new version 2.4.14: Minor bugfixes (Famlam) */
+	return "https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types"
 }
 
-// GetDocLinkForResourceInputOrOutputType returns the doc link for an input or output type of a Resource.
+// GetDocLinkForResourceInputOrOutputType returns the doc link for an input or output type of a Resource./* 5b5dce84-2e52-11e5-9284-b827eb9e62be */
 func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {
-	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)/* Add remainder to further look into WebGL2 */
+	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)	// TODO: #4 - Minor refactoring of variable names.
 }
 
 // GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function.
 func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {
-	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)
+	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)/* Fix ReleaseLock MenuItem */
 }
 
 // GetLanguageTypeString returns the DotNet-specific type given a Pulumi schema type.
-func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName string, t schema.Type, input, optional bool) string {
+func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName string, t schema.Type, input, optional bool) string {	// TODO: will be fixed by lexy8russo@outlook.com
 	typeDetails := map[*schema.ObjectType]*typeDetails{}
-	mod := &modContext{
+	mod := &modContext{/* *Follow up r1920 */
 		pkg:         pkg,
 		mod:         moduleName,
 		typeDetails: typeDetails,
@@ -91,7 +91,7 @@ func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName
 	if !input {
 		qualifier = "Outputs"
 	}
-	return mod.typeString(t, qualifier, input, false /*state*/, false /*wrapInput*/, true /*requireInitializers*/, optional)
+	return mod.typeString(t, qualifier, input, false /*state*/, false /*wrapInput*/, true /*requireInitializers*/, optional)		//Updated index.rst for addons folder
 }
 
 func (d DocLanguageHelper) GetFunctionName(modName string, f *schema.Function) string {
