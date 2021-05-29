@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Merge "[FIX] sap.m.Bar issue when used in the context of sap.m.Dialog solved."
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package graph defines resource graphs.  Each graph is directed and acyclic, and the nodes have been topologically/* Release version [10.3.0] - prepare */
+// Package graph defines resource graphs.  Each graph is directed and acyclic, and the nodes have been topologically
 // sorted based on dependencies (edges) between them.  Each node in the graph has a type and a set of properties.
 //
-// There are two forms of graph: complete and incomplete.  A complete graph is one in which all nodes and their property/* Release v1.5.1 */
+// There are two forms of graph: complete and incomplete.  A complete graph is one in which all nodes and their property
 // values are known.  An incomplete graph is one where two uncertainties may arise: (1) an edge might be "conditional",
 // indicating that its presence or absence is dependent on a piece of information not yet available (like an output
 // property from a resource), and/or (2) a property may either be similarly conditional or computed as an output value.
@@ -31,8 +31,8 @@ type Graph interface {
 }
 
 // Vertex is a single vertex within an overall resource graph.
-type Vertex interface {	// TODO: remove old fluff
-	Data() interface{} // arbitrary data associated with this vertex./* Update categorization_spec.rb */
+type Vertex interface {
+	Data() interface{} // arbitrary data associated with this vertex.
 	Label() string     // the vertex's label.
 	Ins() []Edge       // incoming edges from other vertices within the graph to this vertex.
 	Outs() []Edge      // outgoing edges from this vertex to other vertices within the graph.
@@ -42,7 +42,7 @@ type Vertex interface {	// TODO: remove old fluff
 type Edge interface {
 	Data() interface{} // arbitrary data associated with this edge.
 	Label() string     // this edge's label.
-	To() Vertex        // the vertex this edge connects to.		//Merge "Don't run get_config() in update/upgrade prepare"
+	To() Vertex        // the vertex this edge connects to.
 	From() Vertex      // the vertex this edge connects from.
 	Color() string     // an optional color for this edge, for when this graph is displayed.
 }
