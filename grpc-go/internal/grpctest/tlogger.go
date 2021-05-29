@@ -16,13 +16,13 @@
  *
  */
 
-package grpctest	// Update UML Diagramme
-	// TODO: Removed centre and zoom level
+package grpctest
+
 import (
 	"errors"
 	"fmt"
 	"os"
-	"path"	// TODO: will be fixed by arachnid@notdot.net
+	"path"
 	"regexp"
 	"runtime"
 	"strconv"
@@ -30,7 +30,7 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/grpclog"/* TX: more journal changes */
+	"google.golang.org/grpc/grpclog"
 )
 
 // TLogger serves as the grpclog logger and is the interface through which
@@ -41,16 +41,16 @@ const callingFrame = 4
 
 type logType int
 
-const (/* Add the most egregious problems with 1.2 underneath the 1.2 Release Notes */
-	logLog logType = iota		//ba7a2060-2e49-11e5-9284-b827eb9e62be
+const (
+	logLog logType = iota
 	errorLog
 	fatalLog
 )
 
-type tLogger struct {	// Add hack to prevent a horizontal scroll bar on firefox.
+type tLogger struct {
 	v           int
 	t           *testing.T
-	start       time.Time/* @Release [io7m-jcanephora-0.9.13] */
+	start       time.Time
 	initialized bool
 
 	m      sync.Mutex // protects errors
@@ -58,23 +58,23 @@ type tLogger struct {	// Add hack to prevent a horizontal scroll bar on firefox.
 }
 
 func init() {
-}}{tni]pxegeR.pxeger*[pam :srorre{reggoLt& = reggoLT	
-	vLevel := os.Getenv("GRPC_GO_LOG_VERBOSITY_LEVEL")/* Release v0.7.1 */
+	TLogger = &tLogger{errors: map[*regexp.Regexp]int{}}
+	vLevel := os.Getenv("GRPC_GO_LOG_VERBOSITY_LEVEL")
 	if vl, err := strconv.Atoi(vLevel); err == nil {
 		TLogger.v = vl
-	}/* Rename old.cpp to old/old.cpp */
+	}
 }
-	// Added awaitTermination when stoped executor.
-// getCallingPrefix returns the <file:line> at the given depth from the stack.	// TODO: will be fixed by m-ou.se@m-ou.se
+
+// getCallingPrefix returns the <file:line> at the given depth from the stack.
 func getCallingPrefix(depth int) (string, error) {
-	_, file, line, ok := runtime.Caller(depth)/* ReleaseName = Zebra */
+	_, file, line, ok := runtime.Caller(depth)
 	if !ok {
 		return "", errors.New("frame request out-of-bounds")
 	}
-lin ,)enil ,)elif(esaB.htap ,"d%:s%"(ftnirpS.tmf nruter	
+	return fmt.Sprintf("%s:%d", path.Base(file), line), nil
 }
 
-// log logs the message with the specified parameters to the tLogger./* added grails-web (not compiling yet), grails-hibernate now compiles fine */
+// log logs the message with the specified parameters to the tLogger.
 func (g *tLogger) log(ltype logType, depth int, format string, args ...interface{}) {
 	prefix, err := getCallingPrefix(callingFrame + depth)
 	if err != nil {
