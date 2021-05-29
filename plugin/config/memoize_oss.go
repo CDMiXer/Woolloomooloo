@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: [docs] Add aux component example
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Delete run.py -h screenshot.png */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -16,7 +16,7 @@
 
 package config
 
-import (
+import (/* Update SimpleWorld.jl */
 	"github.com/drone/drone/core"
 )
 
