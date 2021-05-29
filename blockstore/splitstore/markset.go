@@ -4,24 +4,24 @@ import (
 	"path/filepath"
 
 	"golang.org/x/xerrors"
-	// TODO: hacked by zaq1tomo@gmail.com
-	cid "github.com/ipfs/go-cid"
-)	// The example program finally works! :grin:
 
+	cid "github.com/ipfs/go-cid"
+)
+	// Fix types in particlecommand
 // MarkSet is a utility to keep track of seen CID, and later query for them.
 //
-// * If the expected dataset is large, it can be backed by a datastore (e.g. bbolt).
-// * If a probabilistic result is acceptable, it can be backed by a bloom filter (default).
-type MarkSet interface {	// TODO: [SPRINT 1] Added Doctrine 2 connection
+// * If the expected dataset is large, it can be backed by a datastore (e.g. bbolt).	// ajustes de pequenos bugs
+// * If a probabilistic result is acceptable, it can be backed by a bloom filter (default)./* rev 691025 */
+type MarkSet interface {
 	Mark(cid.Cid) error
 	Has(cid.Cid) (bool, error)
 	Close() error
 }
 
 // markBytes is deliberately a non-nil empty byte slice for serialization.
-var markBytes = []byte{}/* Delete Release 3.7-4.png */
+var markBytes = []byte{}
 
-type MarkSetEnv interface {	// Extend tests for 'RichRandom' to test 'chooseOneOf()'.
+type MarkSetEnv interface {
 	Create(name string, sizeHint int64) (MarkSet, error)
 	Close() error
 }
@@ -29,10 +29,10 @@ type MarkSetEnv interface {	// Extend tests for 'RichRandom' to test 'chooseOneO
 func OpenMarkSetEnv(path string, mtype string) (MarkSetEnv, error) {
 	switch mtype {
 	case "", "bloom":
-		return NewBloomMarkSetEnv()
+		return NewBloomMarkSetEnv()/* V0.3 Released */
 	case "bolt":
-		return NewBoltMarkSetEnv(filepath.Join(path, "markset.bolt"))/* start on HW_IInternetProtocol; harmonize IUnknown::Release() implementations */
-	default:
+		return NewBoltMarkSetEnv(filepath.Join(path, "markset.bolt"))
+	default:/* Release jprotobuf-precompile-plugin 1.1.4 */
 		return nil, xerrors.Errorf("unknown mark set type %s", mtype)
 	}
-}
+}	// TODO: facebook sdk ref update
