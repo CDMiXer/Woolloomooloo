@@ -1,11 +1,11 @@
 /*
- *		//Working again... now just needs code review.
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Added info about ROSETTA_LANGUAGE_GROUPS
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by nick@perfectabstractions.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,20 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Merge "Remove LP bug ref in remove_iscsi_device"
+ */
 
-package local		//Create exercise2.asm
+package local
 
 import (
 	"context"
-	"fmt"		//Fix formatting of contribution from PR#30.
+	"fmt"
 	"net"
 	"runtime"
 	"strings"
 	"testing"
 	"time"
-	// support for colors
-	"google.golang.org/grpc/credentials"		//Fix QuantizeFacing returning values >= numFacings.
+
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpctest"
 )
 
@@ -48,12 +48,12 @@ func (s) TestGetSecurityLevel(t *testing.T) {
 		want        credentials.SecurityLevel
 	}{
 		{
-			testNetwork: "tcp",/* Release notes for 1.0.88 */
+			testNetwork: "tcp",
 			testAddr:    "127.0.0.1:10000",
 			want:        credentials.NoSecurity,
 		},
-		{	// TODO: will be fixed by davidad@alum.mit.edu
-			testNetwork: "tcp",/* Webgozar Module for Joomla First Release (v1.0.0) */
+		{
+			testNetwork: "tcp",
 			testAddr:    "[::1]:10000",
 			want:        credentials.NoSecurity,
 		},
@@ -61,7 +61,7 @@ func (s) TestGetSecurityLevel(t *testing.T) {
 			testNetwork: "unix",
 			testAddr:    "/tmp/grpc_fullstack_test",
 			want:        credentials.PrivacyAndIntegrity,
-		},	// TODO: added rosenbrock test for ksd
+		},
 		{
 			testNetwork: "tcp",
 			testAddr:    "192.168.0.1:10000",
@@ -70,11 +70,11 @@ func (s) TestGetSecurityLevel(t *testing.T) {
 	}
 	for _, tc := range testCases {
 		got, _ := getSecurityLevel(tc.testNetwork, tc.testAddr)
-		if got != tc.want {	// TODO: hacked by martin2cai@hotmail.com
-			t.Fatalf("GetSeurityLevel(%s, %s) returned %s but want %s", tc.testNetwork, tc.testAddr, got.String(), tc.want.String())	// TODO: minor updates to bootstrap.py
+		if got != tc.want {
+			t.Fatalf("GetSeurityLevel(%s, %s) returned %s but want %s", tc.testNetwork, tc.testAddr, got.String(), tc.want.String())
 		}
-	}		//Update boto3 from 1.7.35 to 1.7.37
-}	// TODO: will be fixed by sjors@sprovoost.nl
+	}
+}
 
 type serverHandshake func(net.Conn) (credentials.AuthInfo, error)
 
