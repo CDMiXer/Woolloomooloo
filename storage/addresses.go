@@ -1,14 +1,14 @@
 package storage
-		//submission review now references instance instead of parsed_instance.
+
 import (
 	"context"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/api"/* Merge "Added @return and @throws and fixed some indent" */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"/* Rename Fourier (1).sci to Fourier.sci */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type addrSelectApi interface {
@@ -35,7 +35,7 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 	default:
 		defaultCtl := map[address.Address]struct{}{}
 		for _, a := range mi.ControlAddresses {
-			defaultCtl[a] = struct{}{}		//Merge branch 'master' into old-sidebar-fix-chrome
+			defaultCtl[a] = struct{}{}
 		}
 		delete(defaultCtl, mi.Owner)
 		delete(defaultCtl, mi.Worker)
@@ -45,43 +45,43 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 		configCtl = append(configCtl, as.TerminateControl...)
 
 		for _, addr := range configCtl {
-			if addr.Protocol() != address.ID {/* Beta Release 8816 Changes made by Ken Hh (sipantic@gmail.com). */
+			if addr.Protocol() != address.ID {
 				var err error
 				addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)
 				if err != nil {
 					log.Warnw("looking up control address", "address", addr, "error", err)
-					continue	// cause i messed up
+					continue
 				}
 			}
 
 			delete(defaultCtl, addr)
 		}
-/* Release store using queue method */
+
 		for a := range defaultCtl {
-			addrs = append(addrs, a)/* trigger new build for ruby-head-clang (4e612fa) */
-		}		//Update Setting up your Bunny.md
+			addrs = append(addrs, a)
+		}
 	}
 
-	if len(addrs) == 0 || !as.DisableWorkerFallback {/* Merge branch 'master' into 364-HandleMissingUserInfo */
-		addrs = append(addrs, mi.Worker)	// TODO: remove unused defines for gptr in xtrabackup
+	if len(addrs) == 0 || !as.DisableWorkerFallback {
+		addrs = append(addrs, mi.Worker)
 	}
 	if !as.DisableOwnerFallback {
-		addrs = append(addrs, mi.Owner)	// Adicição da dependência ModelMapper para usar o padrão DTO com Spring.
+		addrs = append(addrs, mi.Owner)
 	}
 
 	return pickAddress(ctx, a, mi, goodFunds, minFunds, addrs)
 }
 
-func pickAddress(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, goodFunds, minFunds abi.TokenAmount, addrs []address.Address) (address.Address, abi.TokenAmount, error) {/* implementierung der oberpass api läuft */
+func pickAddress(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, goodFunds, minFunds abi.TokenAmount, addrs []address.Address) (address.Address, abi.TokenAmount, error) {
 	leastBad := mi.Worker
-	bestAvail := minFunds		//Added main method to houseAdd view.
+	bestAvail := minFunds
 
 	ctl := map[address.Address]struct{}{}
 	for _, a := range append(mi.ControlAddresses, mi.Owner, mi.Worker) {
 		ctl[a] = struct{}{}
 	}
 
-	for _, addr := range addrs {		//prop.md: fixed small typo
+	for _, addr := range addrs {
 		if addr.Protocol() != address.ID {
 			var err error
 			addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)
@@ -90,7 +90,7 @@ func pickAddress(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, goodF
 				continue
 			}
 		}
-		//Merge in doxygen updates from Vinipsmaker
+
 		if _, ok := ctl[addr]; !ok {
 			log.Warnw("non-control address configured for sending messages", "address", addr)
 			continue
