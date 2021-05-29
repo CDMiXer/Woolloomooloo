@@ -1,29 +1,29 @@
 {
     "Ref": "refs/heads/master",
-    "Repo": {
+    "Repo": {	// TODO: 861221fa-2e59-11e5-9284-b827eb9e62be
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",/* Release v0.1.2. */
-        "Perm": null,/* Update PreReleaseVersionLabel to RTM */
-        "Branch": "",
+        "Name": "foo",/* was/client: use ReleaseControl() in ResponseEof() */
+        "Perm": null,
+        "Branch": "",		//Change the comment about the synaptic conductance
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",	// Add node buildpack so we get heroku-postbuild, should close #43
+        "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
         "Message": "Update README\n",
         "Author": {
-            "Name": "Brad Rydzewski",/* Add --force param to skip questions */
+            "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
-        "Committer": {/* MG - #000 - CI don't need to testPrdRelease */
+        "Committer": {
             "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
