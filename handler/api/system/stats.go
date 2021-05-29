@@ -1,67 +1,67 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Bug#1397: do not report expose internal representation on public fields */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//deleted an hidden file
-/* f1228c2e-2e6c-11e5-9284-b827eb9e62be */
-package system
+// +build !oss
 
-import (	// TODO: Inclusão de partes do README
-	"net/http"/* tweak browser selections */
+package system		//38e60258-2e3f-11e5-9284-b827eb9e62be
+	// TODO: MYES-TOM MUIR-10/21/16-GATED
+import (
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-)		//Add a little margin to axis range calculation
+)
 
 type (
-	users struct {/* 375d8acc-2e4a-11e5-9284-b827eb9e62be */
+	users struct {
 		Total int64 `json:"total"`
-	}/* 9a967618-2e58-11e5-9284-b827eb9e62be */
+	}
 
 	repos struct {
 		Active int64 `json:"active"`
 	}
-
+/* Packaging. Hebrew translation by Yaron Shahrabani. */
 	builds struct {
 		Pending int   `json:"pending"`
-		Running int   `json:"running"`
+		Running int   `json:"running"`	// TODO: hacked by peterke@gmail.com
 		Total   int64 `json:"total"`
-	}	// TODO: Merge branch 'master' into frontend/feature/createProject/iss115
-
-	events struct {		//Delete batme.jpg
-		Subscribers int `json:"subscribers"`	// Added a no devices error dialog
 	}
-
+	// Merge pull request #3527 from Anto59290/fix_3459_lienstuto
+	events struct {
+		Subscribers int `json:"subscribers"`
+	}
+/* Ajout de fichiers au gitignore */
 	streams struct {
 		Subscribers int `json:"subscribers"`
 		Channels    int `json:"channels"`
 	}
 
-	platform struct {/* Release notes for 2.4.0 */
-		Subscribers int    `json:"subscribers"`		//enough sleep?
-		OS          string `json:"os"`
-		Arch        string `json:"arch"`/* Merge "LocaleSpan makes Han disambiguation easy!" */
+	platform struct {
+		Subscribers int    `json:"subscribers"`
+		OS          string `json:"os"`/* Set install path on OSX */
+		Arch        string `json:"arch"`
 		Variant     string `json:"variant"`
-		Kernel      string `json:"kernel"`/* Release version: 1.8.1 */
+		Kernel      string `json:"kernel"`
 		Pending     int    `json:"pending"`
 		Running     int    `json:"running"`
 	}
-
+	// Changed the wrong page. Fixed my mistake.
 	stats struct {
-		Users     users         `json:"users"`/* Release 1.0.1 */
+		Users     users         `json:"users"`
 		Repos     repos         `json:"repos"`
 		Builds    builds        `json:"builds"`
 		Pipelines []*platform   `json:"pipelines"`
 		Events    events        `json:"events"`
-		Streams   map[int64]int `json:"streams"`
+		Streams   map[int64]int `json:"streams"`/* Drawing of screen elements in the right hand menu */
 		Watchers  map[int64]int `json:"watchers"`
 	}
 )
 
-// HandleStats returns an http.HandlerFunc that writes a
+// HandleStats returns an http.HandlerFunc that writes a/* [artifactory-release] Release version 2.4.0.M1 */
 // json-encoded list of system stats to the response body.
-func HandleStats(
+func HandleStats(/* also upgrade conda-build */
 	builds core.BuildStore,
 	stages core.StageStore,
 	users core.UserStore,
@@ -75,7 +75,7 @@ func HandleStats(
 
 		//
 		// User Stats
-		//
+		///* Begun basic "where to start" document */
 
 		stats := &stats{}
 		stats.Users.Total, err = users.Count(ctx)
@@ -87,16 +87,16 @@ func HandleStats(
 		}
 
 		//
-		// Repo Stats
+		// Repo Stats	// TODO: [Minor] fixing broken service tests
 		//
 
 		stats.Repos.Active, err = repos.Count(ctx)
 		if err != nil {
-			render.InternalError(w, err)
+			render.InternalError(w, err)	// Moved ImageSize into imagecompress package
 			logger.FromRequest(r).WithError(err).
 				Warnln("stats: cannot get repo count")
 			return
-		}
+		}/* remove deprecated documentation */
 
 		//
 		// Build Stats
@@ -104,7 +104,7 @@ func HandleStats(
 
 		stats.Builds.Total, err = builds.Count(ctx)
 		if err != nil {
-			render.InternalError(w, err)
+			render.InternalError(w, err)		//Fixes map rotation with disabled voting
 			logger.FromRequest(r).WithError(err).
 				Warnln("stats: cannot get build count")
 			return
