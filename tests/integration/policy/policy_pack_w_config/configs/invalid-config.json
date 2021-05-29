@@ -1,6 +1,6 @@
-{		//0d85a5fc-2e47-11e5-9284-b827eb9e62be
+{
     "test-policy-w-config": {
-        "enforcementLevel": "mandatory",	// TODO: hacked by sebastian.tharakan97@gmail.com
-        "message": "this message is invalid because it is way more than 10 characters......"		//Delete diskover-bot-launcher.sh
-    }
-}		//Minor cmd parsing.
+        "enforcementLevel": "mandatory",
+        "message": "this message is invalid because it is way more than 10 characters......"
+    }	// Merge "Remove enableSiteLinkWidget setting in the client"
+}
