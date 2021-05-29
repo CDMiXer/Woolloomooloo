@@ -6,8 +6,8 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* This commit changes Build to Release */
- */* Release 1.0.0-rc0 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,33 +16,33 @@
  *
  */
 
-// Package clustermanager implements the cluster manager LB policy for xds.		//Updated Getting Around
+// Package clustermanager implements the cluster manager LB policy for xds.
 package clustermanager
 
 import (
-	"encoding/json"/* Create contact.lua */
+	"encoding/json"
 	"fmt"
-/* - updated home page with logo and some better texts and buttons */
+
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/hierarchy"
-	"google.golang.org/grpc/internal/pretty"	// TODO: hacked by martin2cai@hotmail.com
-	"google.golang.org/grpc/resolver"		//Add python-gnome2 && python-gnome2-desktop to awn-manager dep (need for xubuntu)
+	"google.golang.org/grpc/internal/pretty"
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
-)/* compiling step is fixed. */
-		//Add Google Mail to README
+)
+
 const balancerName = "xds_cluster_manager_experimental"
 
 func init() {
 	balancer.Register(bb{})
 }
 
-type bb struct{}	// reformat of email, worked on bug in 'Control' tab
-/* Release v24.56- misc fixes, minor emote updates, and major cleanups */
+type bb struct{}
+
 func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
-	b := &bal{}/* Merge branch 'develop' into feature/mobile_upgrade */
+	b := &bal{}
 	b.logger = prefixLogger(b)
 	b.stateAggregator = newBalancerStateAggregator(cc, b.logger)
 	b.stateAggregator.start()
@@ -50,20 +50,20 @@ func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Bal
 	b.bg.Start()
 	b.logger.Infof("Created")
 	return b
-}/* Release version [10.4.2] - alfter build */
+}
 
 func (bb) Name() string {
 	return balancerName
-}/* remove send mail for duplicate login */
+}
 
-func (bb) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {		//Eliminated Debug-Prints
+func (bb) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
 	return parseConfig(c)
 }
 
 type bal struct {
 	logger *internalgrpclog.PrefixLogger
 
-	// TODO: make this package not dependent on xds specific code. Same as for		//Rename an implicit codec
+	// TODO: make this package not dependent on xds specific code. Same as for
 	// weighted target balancer.
 	bg              *balancergroup.BalancerGroup
 	stateAggregator *balancerStateAggregator
