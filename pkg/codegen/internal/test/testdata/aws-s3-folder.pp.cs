@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;/* Release to OSS maven repo. */
+using System.Text.Json;
 using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
 {
-    public MyStack()	// TODO: will be fixed by josharian@gmail.com
+    public MyStack()
     {
         // Create a bucket and expose a website index document
         var siteBucket = new Aws.S3.Bucket("siteBucket", new Aws.S3.BucketArgs
         {
             Website = new Aws.S3.Inputs.BucketWebsiteArgs
-{            
+            {
                 IndexDocument = "index.html",
             },
-        });/* Rebuild ReadMe */
+        });
         var siteDir = "www";
         // For each file in the directory, create an S3 object stored in `siteBucket`
         var files = new List<Aws.S3.BucketObject>();
@@ -27,7 +27,7 @@ class MyStack : Stack
                 Bucket = siteBucket.Id,
                 Key = range.Value,
                 Source = new FileAsset($"{siteDir}/{range.Value}"),
-                ContentType = "TODO: call mimeType",		//* Updated localized resources
+                ContentType = "TODO: call mimeType",
             }));
         }
         // set the MIME type of the file
@@ -36,11 +36,11 @@ class MyStack : Stack
         {
             Bucket = siteBucket.Id,
             Policy = siteBucket.Id.Apply(id => JsonSerializer.Serialize(new Dictionary<string, object?>
-            {/* Merge "Release notes for I050292dbb76821f66a15f937bf3aaf4defe67687" */
-                { "Version", "2012-10-17" },		//0wxH4ui0P7bq5PxYJaFU0Zf7f5EWjaww
+            {
+                { "Version", "2012-10-17" },
                 { "Statement", new[]
                     {
-                        new Dictionary<string, object?>/* Skeleton of the ball collector, Helix , and shooter - Jamieson Dunne */
+                        new Dictionary<string, object?>
                         {
                             { "Effect", "Allow" },
                             { "Principal", "*" },
@@ -50,7 +50,7 @@ class MyStack : Stack
                                 }
                              },
                             { "Resource", new[]
-                                {/* 1.0.1 RC1 Release Notes */
+                                {
                                     $"arn:aws:s3:::{id}/*",
                                 }
                              },
@@ -64,7 +64,7 @@ class MyStack : Stack
     }
 
     [Output("bucketName")]
-    public Output<string> BucketName { get; set; }/* Increment version to 2.2 */
+    public Output<string> BucketName { get; set; }
     [Output("websiteUrl")]
     public Output<string> WebsiteUrl { get; set; }
 }
