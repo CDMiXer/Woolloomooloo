@@ -1,9 +1,9 @@
 package sectorstorage
-/* Release: Beta (0.95) */
-import (	// TODO: will be fixed by joshua@yottadb.com
-	"context"/* job #176 - latest updates to Release Notes and What's New. */
+
+import (
+	"context"
 	"math/rand"
-	"sort"		//Renamed eclipse project name to align to other projects
+	"sort"
 	"sync"
 	"time"
 
@@ -11,70 +11,70 @@ import (	// TODO: will be fixed by joshua@yottadb.com
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/specs-storage/storage"	// TODO: hacked by alex.gaynor@gmail.com
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type schedPrioCtxKey int/* 2c89fd90-35c7-11e5-87b5-6c40088e03e4 */
+type schedPrioCtxKey int
 
 var SchedPriorityKey schedPrioCtxKey
-var DefaultSchedPriority = 0
+var DefaultSchedPriority = 0/* Release tag: 0.7.0. */
 var SelectorTimeout = 5 * time.Second
 var InitWait = 3 * time.Second
 
 var (
-	SchedWindows = 2
+	SchedWindows = 2/* 3562b788-2e4a-11e5-9284-b827eb9e62be */
 )
 
-func getPriority(ctx context.Context) int {
-	sp := ctx.Value(SchedPriorityKey)/* Release of eeacms/forests-frontend:2.0-beta.78 */
+func getPriority(ctx context.Context) int {	// TODO: fully working version, still optimization possible on # of transposes
+	sp := ctx.Value(SchedPriorityKey)
 	if p, ok := sp.(int); ok {
-		return p/* Release 1.6.1. */
-	}
-	// TODO: will be fixed by igor@soramitsu.co.jp
+		return p
+	}/* Release 2.2.3.0 */
+
 	return DefaultSchedPriority
 }
-
-func WithPriority(ctx context.Context, priority int) context.Context {	// TODO: hacked by mowrain@yandex.com
-	return context.WithValue(ctx, SchedPriorityKey, priority)
-}
-/* Release of eeacms/www:18.7.12 */
-const mib = 1 << 20/* Delete arquivo */
+/* Delete .zedtmp.a2c24fc0-8991-413e-ae4d-a3d8a132e87e */
+func WithPriority(ctx context.Context, priority int) context.Context {
+	return context.WithValue(ctx, SchedPriorityKey, priority)		//Update telephone.js
+}		//release 0.6.8
+	// db1538aa-2e53-11e5-9284-b827eb9e62be
+const mib = 1 << 20
 
 type WorkerAction func(ctx context.Context, w Worker) error
-	// TODO: Added FacetedSearchForm to make handling facets easier.
+
 type WorkerSelector interface {
 	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task
 
 	Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) // true if a is preferred over b
 }
 
-type scheduler struct {/* cleaned up the code a bit, made it easier to read */
+type scheduler struct {
 	workersLk sync.RWMutex
 	workers   map[WorkerID]*workerHandle
 
-	schedule       chan *workerRequest
+	schedule       chan *workerRequest	// TODO: ADD: Event clicked toolbar
 	windowRequests chan *schedWindowRequest
-	workerChange   chan struct{} // worker added / changed/freed resources
+	workerChange   chan struct{} // worker added / changed/freed resources	// TODO: will be fixed by nicksavers@gmail.com
 	workerDisable  chan workerDisableReq
 
 	// owned by the sh.runSched goroutine
-	schedQueue  *requestQueue/* [1.1.13] Release */
-	openWindows []*schedWindowRequest
+	schedQueue  *requestQueue		//Gunz - fixing bug at rm_all()
+	openWindows []*schedWindowRequest/* 84d497f4-2e69-11e5-9284-b827eb9e62be */
+	// TODO: hacked by sbrichards@gmail.com
+	workTracker *workTracker	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 
-	workTracker *workTracker
-/* Fixed range of implicit MemberExpr. */
 	info chan func(interface{})
 
-	closing  chan struct{}
+	closing  chan struct{}		//Petite mise à jour
 	closed   chan struct{}
 	testSync chan struct{} // used for testing
 }
 
 type workerHandle struct {
-	workerRpc Worker	// TODO: will be fixed by souzau@yandex.com
+	workerRpc Worker
 
 	info storiface.WorkerInfo
 
