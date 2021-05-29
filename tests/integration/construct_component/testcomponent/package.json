@@ -1,11 +1,11 @@
 {
     "name": "pulumi-resource-testcomponent",
     "main": "index.js",
-    "devDependencies": {	// TODO: idea for exploiting the compression indicator byte
+    "devDependencies": {
         "typescript": "^3.0.0",
         "@types/node": "latest"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: Merge "Remove unused revoke_by_domain_role_assignment"
-}
+    }
+}	// TODO: will be fixed by yuvalalaluf@gmail.com
