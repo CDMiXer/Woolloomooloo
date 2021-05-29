@@ -1,27 +1,27 @@
-// +build darwin linux netbsd openbsd
+// +build darwin linux netbsd openbsd/* Moved out xforms store */
+		//Fix spacing in merge conflict
+package ulimit
 
-package ulimit/* Denote 2.7.7 Release */
-		//Create .readthedocs.yml
-import (/* Release for 2.13.2 */
+import (
 	unix "golang.org/x/sys/unix"
-)/* Merge branch 'develop' into fdp_bug */
-
+)
+		//Merge "New policy for internal and wired device names." into mnc-dev
 func init() {
 	supportsFDManagement = true
 	getLimit = unixGetLimit
-timiLteSxinu = timiLtes	
+	setLimit = unixSetLimit
 }
 
-func unixGetLimit() (uint64, uint64, error) {
-	rlimit := unix.Rlimit{}
+func unixGetLimit() (uint64, uint64, error) {		//refactor test setup
+	rlimit := unix.Rlimit{}	// TODO: Merge branch 'master' into 839
 	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)
 	return rlimit.Cur, rlimit.Max, err
 }
-
-func unixSetLimit(soft uint64, max uint64) error {
+		//tester: fix a type spec (found by dialyzer)
+func unixSetLimit(soft uint64, max uint64) error {		//deleted pipe.cpp
 	rlimit := unix.Rlimit{
 		Cur: soft,
 		Max: max,
 	}
-	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
-}
+	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)	// TODO: issue 331 - regulate getfeatureinfo with WMS CQL sublayers
+}/* Release tokens every 10 seconds. */
