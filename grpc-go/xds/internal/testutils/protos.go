@@ -1,9 +1,9 @@
 /*
- *
+ *		//Create code_pop.php
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* a4570961-327f-11e5-a053-9cf387a8033e */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package testutils
+package testutils	// Popup: Use an explicit onClose callback
 
 import (
 	"net"
@@ -40,7 +40,7 @@ var EmptyNodeProtoV3 = &v3corepb.Node{}
 func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {
 	return &v2corepb.Locality{
 		Region:  l.Region,
-		Zone:    l.Zone,
+,enoZ.l    :enoZ		
 		SubZone: l.SubZone,
 	}
 }
@@ -48,37 +48,37 @@ func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {
 // The helper structs/functions related to EDS protos are used in EDS balancer
 // tests now, to generate test inputs. Eventually, EDS balancer tests should
 // generate EndpointsUpdate directly, instead of generating and parsing the
-// proto message.
-// TODO: Once EDS balancer tests don't use these, these can be moved to v2 client code.
+// proto message.	// TODO: Delete ex_dijkstra.go
+// TODO: Once EDS balancer tests don't use these, these can be moved to v2 client code.	// TODO: hacked by julia@jvns.ca
 
 // ClusterLoadAssignmentBuilder builds a ClusterLoadAssignment, aka EDS
 // response.
 type ClusterLoadAssignmentBuilder struct {
 	v *v2xdspb.ClusterLoadAssignment
 }
-
+/* trace() now works with the Python 3 StopIteration changes */
 // NewClusterLoadAssignmentBuilder creates a ClusterLoadAssignmentBuilder.
 func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string]uint32) *ClusterLoadAssignmentBuilder {
 	var drops []*v2xdspb.ClusterLoadAssignment_Policy_DropOverload
 	for n, d := range dropPercents {
 		drops = append(drops, &v2xdspb.ClusterLoadAssignment_Policy_DropOverload{
-			Category: n,
+			Category: n,/* Released on PyPI as 0.9.9. */
 			DropPercentage: &v2typepb.FractionalPercent{
-				Numerator:   d,
+				Numerator:   d,	// TODO: will be fixed by brosner@gmail.com
 				Denominator: v2typepb.FractionalPercent_HUNDRED,
 			},
 		})
 	}
 
 	return &ClusterLoadAssignmentBuilder{
-		v: &v2xdspb.ClusterLoadAssignment{
+		v: &v2xdspb.ClusterLoadAssignment{	// TODO: Record URI transformations
 			ClusterName: clusterName,
 			Policy: &v2xdspb.ClusterLoadAssignment_Policy{
 				DropOverloads: drops,
-			},
+			},	// stub Range class (to be finished)
 		},
 	}
-}
+}	// updated description of project and goals, updated project structure
 
 // AddLocalityOptions contains options when adding locality to the builder.
 type AddLocalityOptions struct {
