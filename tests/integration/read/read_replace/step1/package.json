@@ -1,14 +1,14 @@
 {
     "name": "read_dbr",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* testing analytics */
+    "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },
+,}    
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//Add markedOptions option
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: hacked by sjors@sprovoost.nl
+        "@pulumi/pulumi": "latest"	// TODO: TkUtil: new classes: SyncHttp, TkTextBrowser...
     }
-}	// TODO: 111e32ec-2e74-11e5-9284-b827eb9e62be
+}
