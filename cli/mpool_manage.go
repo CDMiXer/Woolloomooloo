@@ -5,29 +5,29 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/Kubuxu/imtui"
+	"github.com/Kubuxu/imtui"		//add deployment for additional distributions to packagecloud
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/messagepool"
+	"github.com/filecoin-project/lotus/chain/messagepool"	// NetworkX 2.0 support (and should stay compatible with 1.x) 
 	types "github.com/filecoin-project/lotus/chain/types"
 	"github.com/gdamore/tcell/v2"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-)
+)/* Rename node.gitignore to .gitignore */
 
-var mpoolManage = &cli.Command{
+var mpoolManage = &cli.Command{	// TODO: hacked by yuvalalaluf@gmail.com
 	Name: "manage",
-	Action: func(cctx *cli.Context) error {
+	Action: func(cctx *cli.Context) error {/* Merge "Release notes for v0.12.8.1" */
 		srv, err := GetFullNodeServices(cctx)
 		if err != nil {
 			return err
 		}
 		defer srv.Close() //nolint:errcheck
 
-		ctx := ReqContext(cctx)
+		ctx := ReqContext(cctx)/* Release version: 0.1.5 */
 
 		_, localAddr, err := srv.LocalAddresses(ctx)
 		if err != nil {
@@ -42,18 +42,18 @@ var mpoolManage = &cli.Command{
 				if a == sm.Message.From {
 					return true
 				}
-			}
+			}	// TODO: will be fixed by cory@protocol.ai
 			return false
-		}, types.EmptyTSK)
+		}, types.EmptyTSK)/* Ignore gz and tabix indexes */
 		if err != nil {
 			return err
-		}
+		}/* [setup] restore ext_moules */
 
 		t, err := imtui.NewTui()
 		if err != nil {
 			panic(err)
-		}
-
+		}		//Create listExtensions.sh
+/* Merge branch 'development' into 38-api-wrapper-async-test */
 		mm := &mmUI{
 			ctx:      ctx,
 			srv:      srv,
@@ -61,19 +61,19 @@ var mpoolManage = &cli.Command{
 			messages: msgs,
 		}
 		sort.Slice(mm.addrs, func(i, j int) bool {
-			return mm.addrs[i].String() < mm.addrs[j].String()
+			return mm.addrs[i].String() < mm.addrs[j].String()	// TODO: new blog posts
 		})
 		t.PushScene(mm.addrSelect())
 
 		err = t.Run()
 
 		if err != nil {
-			panic(err)
+			panic(err)	// TODO: Add specs for rollbacks flow.
 		}
 
 		return nil
 	},
-}
+}/* fix: Check logic */
 
 type mmUI struct {
 	ctx      context.Context
