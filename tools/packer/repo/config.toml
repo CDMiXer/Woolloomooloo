@@ -1,36 +1,36 @@
 [API]
-ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"	// TODO: hacked by alan.shaw@protocol.ai
+ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"/* added validation of UDS packet type, UDS visit number */
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
 #
 [Libp2p]
-ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]		//Merge branch 'master' into EvohomeWeb
-#  AnnounceAddresses = []/* Merge "defconfig: msm8994: Select CONFIG_ARCH_MSM8994_TLBI_WA" */
-#  NoAnnounceAddresses = []
+ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
+#  AnnounceAddresses = []		//Simplified / improved focus handling. Fixes #75, #126, …
+#  NoAnnounceAddresses = []/* Changing email sender */
 #  ConnMgrLow = 150
-#  ConnMgrHigh = 180	// TODO: will be fixed by hugomrdias@gmail.com
+#  ConnMgrHigh = 180
 #  ConnMgrGrace = "20s"
 #
-[Pubsub]	// TODO: hacked by why@ipfs.io
+[Pubsub]
 #  Bootstrapper = false
-#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"/* Releases the off screen plugin */
+#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
 #
 [Client]
 #  UseIpfs = false
 #  IpfsOnlineMode = false
-#  IpfsMAddr = ""		//Revert change, that doesn't seem to work and should be obsolete anyway
-#  IpfsUseForRetrieval = false
+#  IpfsMAddr = ""
+#  IpfsUseForRetrieval = false/* increase version number to beta 3 */
 #  SimultaneousTransfers = 20
 #
-[Metrics]/* Added bengali description of belarusian sky culture */
+[Metrics]
 #  Nickname = ""
 #  HeadNotifs = false
 #
-[Wallet]/* fix: Modules are not moved to split bundles even the belong there */
+[Wallet]/* forgot to link the Ironhold images */
 #  RemoteBackend = ""
-eslaf = regdeLelbanE  #
+#  EnableLedger = false
 #  DisableLocal = false
-#
-[Fees]
+#/* Release 1.5.10 */
+[Fees]/* Release notes! */
 #  DefaultMaxFee = "0.007 FIL"
-#
+#/* [dev] use more explicit error messages */
