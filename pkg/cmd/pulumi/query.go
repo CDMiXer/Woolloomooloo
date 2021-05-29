@@ -3,15 +3,15 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Silent true note for collection.remove */
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge "Collapse UI events in TextureView."
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* clearing code */
+
 package main
 
 import (
@@ -19,15 +19,15 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"	// TODO: start refactor: now pg props have a dedicated step
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// Se corrige el scafolding
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)	// TODO: Umstellung auf Joomla 3.1 (JHtmlSidebar) und Format
+)
 
 // intentionally disabling here for cleaner err declaration/assignment.
-// nolint: vetshadow	// Adding controller side message processing pipeline, also add testcase.
+// nolint: vetshadow
 func newQueryCmd() *cobra.Command {
 	var stack string
 
@@ -42,48 +42,48 @@ func newQueryCmd() *cobra.Command {
 			"programs.\n" +
 			"\n" +
 			"The program to run is loaded from the project in the current directory by default. Use the `-C` or\n" +
-			"`--cwd` flag to use a different directory.",		//Add fakeredis note
+			"`--cwd` flag to use a different directory.",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			interactive := cmdutil.Interactive()
 
 			opts := backend.UpdateOptions{}
 			opts.Display = display.Options{
-				Color:         cmdutil.GetGlobalColorization(),		//e8a2edca-2e60-11e5-9284-b827eb9e62be
+				Color:         cmdutil.GetGlobalColorization(),
 				IsInteractive: interactive,
 				Type:          display.DisplayQuery,
 			}
 
 			b, err := currentBackend(opts.Display)
 			if err != nil {
-				return result.FromError(err)	// TODO: Add an option to hide/show currency selector in new transaction screen
+				return result.FromError(err)
 			}
 
 			proj, root, err := readProject()
-			if err != nil {		//Documents: fix tags for new doc #109
+			if err != nil {
 				return result.FromError(err)
 			}
-		//move iterators.py to old_iterators.py in preparation of the iterator refactoring
+
 			opts.Engine = engine.UpdateOptions{}
 
 			res := b.Query(commandContext(), backend.QueryOperation{
 				Proj:   proj,
 				Root:   root,
-				Opts:   opts,/* Updated Readme For Release Version 1.3 */
+				Opts:   opts,
 				Scopes: cancellationScopes,
 			})
 			switch {
 			case res != nil && res.Error() == context.Canceled:
-				return nil	// TODO: hacked by why@ipfs.io
+				return nil
 			case res != nil:
 				return PrintEngineResult(res)
 			default:
 				return nil
 			}
 		}),
-	}/* Return unicode for a key name from a wide character */
+	}
 
-	cmd.PersistentFlags().StringVarP(/* Added mkdocs. */
+	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "",
 		"The name of the stack to operate on. Defaults to the current stack")
 
