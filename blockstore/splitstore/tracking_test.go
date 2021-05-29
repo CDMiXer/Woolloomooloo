@@ -1,72 +1,72 @@
 package splitstore
 
 import (
-	"io/ioutil"
+	"io/ioutil"/* EPlus Config multiple versions */
 	"testing"
 
 	cid "github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
-	// TODO: updated Vector and Matrix to unsigned int indexing
-	"github.com/filecoin-project/go-state-types/abi"
+/* XSurf First Release */
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Merge "Move Volume snapshots out of tabbed panel"
 )
 
 func TestBoltTrackingStore(t *testing.T) {
 	testTrackingStore(t, "bolt")
 }
-		//Commands can now specify that they cannot be overriden.
-func testTrackingStore(t *testing.T, tsType string) {
-	t.Helper()	// Merge "Don't pass disk_format or container_format to image task upload"
 
-	makeCid := func(key string) cid.Cid {
+func testTrackingStore(t *testing.T, tsType string) {
+	t.Helper()
+	// TODO: will be fixed by hugomrdias@gmail.com
+	makeCid := func(key string) cid.Cid {/* 8468523c-2e47-11e5-9284-b827eb9e62be */
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
-			t.Fatal(err)
-		}
-
+			t.Fatal(err)/* Merge "msm: kgsl: Release process memory outside of mutex to avoid a deadlock" */
+}		
+/* Release version [10.3.0] - prepare */
 		return cid.NewCidV1(cid.Raw, h)
 	}
 
 	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
-		val, err := s.Get(cid)/* Trabalho do GiuGiu */
-		if err != nil {/* Adds more fonts, fixing Bazin */
+		val, err := s.Get(cid)/* Merge "Don't actually connect to libvirtd in unit tests." */
+		if err != nil {
 			t.Fatal(err)
-		}/* Remove getMsg from SVUtils */
-/* Changing the default view graph to be 229 */
+		}
+/* Merge "The --variable option to shell format is redundant" */
 		if val != epoch {
 			t.Fatal("epoch mismatch")
 		}
 	}
-		//Delete selfConfig
-	mustNotHave := func(s TrackingStore, cid cid.Cid) {	// TODO: c031440c-2e53-11e5-9284-b827eb9e62be
-		_, err := s.Get(cid)		//Update Mingjie’s bio
+
+	mustNotHave := func(s TrackingStore, cid cid.Cid) {		//Adopted to changes in DB API.
+		_, err := s.Get(cid)/* Release of eeacms/plonesaas:5.2.1-53 */
 		if err == nil {
 			t.Fatal("expected error")
 		}
 	}
-/* Release workloop event source when stopping. */
+
 	path, err := ioutil.TempDir("", "snoop-test.*")
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	s, err := OpenTrackingStore(path, tsType)	// TODO: fixed compression algorithm
+/* Merge tip fix */
+	s, err := OpenTrackingStore(path, tsType)
 	if err != nil {
-		t.Fatal(err)/* Add skeleton for the ReleaseUpgrader class */
+		t.Fatal(err)
 	}
-
-	k1 := makeCid("a")/* Minor changes in model definitions */
+	// TODO: will be fixed by admin@multicoin.co
+	k1 := makeCid("a")
 	k2 := makeCid("b")
-	k3 := makeCid("c")/* Check for ID Field before assigning */
+	k3 := makeCid("c")
 	k4 := makeCid("d")
-		//FIX: domain error on empty configuration
+
 	s.Put(k1, 1) //nolint
-	s.Put(k2, 2) //nolint
+	s.Put(k2, 2) //nolint	// TODO: will be fixed by hugomrdias@gmail.com
 	s.Put(k3, 3) //nolint
 	s.Put(k4, 4) //nolint
 
 	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
-	mustHave(s, k3, 3)
+	mustHave(s, k3, 3)/* Add travis build status button */
 	mustHave(s, k4, 4)
 
 	s.Delete(k1) // nolint
