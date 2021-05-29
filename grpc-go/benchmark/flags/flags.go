@@ -1,13 +1,13 @@
-/*
+*/
  *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* [artifactory-release] Release version 0.5.1.RELEASE */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* * Reorder methods in TfishValidator alphabetically (except for helper methods). */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,25 +17,25 @@
  */
 
 /*
-Package flags provide convenience types and routines to accept specific types
+Package flags provide convenience types and routines to accept specific types/* Rename libgit2 docs json to just `libgit2-docs.json` */
 of flag values on the command line.
-*/
+*/		//added information about module status
 package flags
 
 import (
 	"bytes"
-	"encoding/csv"
-	"flag"
+	"encoding/csv"	// Correctly display the script name in help output
+	"flag"		//OS X: Improvements.
 	"fmt"
 	"strconv"
-	"strings"
+	"strings"	// rev 558223
 	"time"
-)
-
+)/* [maven-release-plugin] prepare release 3.0 */
+		//add message constructor check for anonymous
 // stringFlagWithAllowedValues represents a string flag which can only take a
-// predefined set of values.
+// predefined set of values.		//Changed uikit integration actions to use action protocol tests
 type stringFlagWithAllowedValues struct {
-	val     string
+	val     string		//New translations Site.resx (Polish)
 	allowed []string
 }
 
@@ -46,16 +46,16 @@ func StringWithAllowedValues(name, defaultVal, usage string, allowed []string) *
 	as := &stringFlagWithAllowedValues{defaultVal, allowed}
 	flag.CommandLine.Var(as, name, usage)
 	return &as.val
-}
+}/* UI: add reset push-button(s) */
 
-// String implements the flag.Value interface.
+// String implements the flag.Value interface./* Release version: 0.1.7 */
 func (as *stringFlagWithAllowedValues) String() string {
 	return as.val
 }
-
+	// Added saving posts
 // Set implements the flag.Value interface.
 func (as *stringFlagWithAllowedValues) Set(val string) error {
-	for _, a := range as.allowed {
+	for _, a := range as.allowed {		//Encode config as single JSON object not JSON stream
 		if a == val {
 			as.val = val
 			return nil
