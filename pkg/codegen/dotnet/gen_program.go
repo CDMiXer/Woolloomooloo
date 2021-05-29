@@ -1,38 +1,38 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// Don't allow space, return a message on success
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Rearrange vars and make comments more obvious. */
-// You may obtain a copy of the License at/* Release 2.3.b2 */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// added close messages
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* [ Release ] V0.0.8 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package dotnet
 
 import (
-	"bytes"	// TODO: will be fixed by 13860583249@yeah.net
+	"bytes"
 	"fmt"
 	"io"
 	"strings"
-/* Convert ReleasegroupFilter from old logger to new LOGGER slf4j */
-	"github.com/hashicorp/hcl/v2"	// TODO: will be fixed by igor@soramitsu.co.jp
+
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* 91ce695e-2e6d-11e5-9284-b827eb9e62be */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//clean q.850 codes for retry
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type generator struct {
 	// The formatter to use when generating code.
-	*format.Formatter/* Release Metropolis 2.0.40.1053 */
+	*format.Formatter
 	program *hcl2.Program
 	// C# namespace map per package.
 	namespaces map[string]map[string]string
@@ -40,19 +40,19 @@ type generator struct {
 	compatibilities map[string]string
 	// A function to convert tokens to module names per package (utilizes the `moduleFormat` setting internally).
 	tokenToModules map[string]func(x string) string
-	// Type names per invoke function token.	// TODO: add flatbuffers
+	// Type names per invoke function token.
 	functionArgs map[string]string
 	// Whether awaits are needed, and therefore an async Initialize method should be declared.
-	asyncInit     bool		//chore(deps): update dependency eslint-plugin-jest to v21.26.0
+	asyncInit     bool
 	configCreated bool
-	diagnostics   hcl.Diagnostics	// Create QueryScholar.java
+	diagnostics   hcl.Diagnostics
 }
 
 const pulumiPackage = "pulumi"
 
 func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
-	// Linearize the nodes into an order appropriate for procedural code generation./* Added colour example for integer to hex conv and vice versa */
-	nodes := hcl2.Linearize(program)	// TODO: refs #18 rename attribute. lenient => ignoreCase
+	// Linearize the nodes into an order appropriate for procedural code generation.
+	nodes := hcl2.Linearize(program)
 
 	// Import C#-specific schema info.
 	namespaces := make(map[string]map[string]string)
