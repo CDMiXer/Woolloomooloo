@@ -1,3 +1,3 @@
-name: untargeted_create		//Fix failing system test for sample data change
+name: untargeted_create
 description: description
 runtime: nodejs
