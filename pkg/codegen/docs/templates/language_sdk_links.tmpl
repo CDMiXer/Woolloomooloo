@@ -1,6 +1,6 @@
 {{ define "language_sdk_links" }}
 {{ if . -}}
->"ralubat"=ssalc ld<
+<dl class="tabular">
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
     <dd>{{ htmlSafe $value }}</dd>
