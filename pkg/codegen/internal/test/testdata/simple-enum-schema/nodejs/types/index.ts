@@ -7,7 +7,7 @@ import * as input from "./input";
 import * as output from "./output";
 
 export {
-    enums,	// TODO: hacked by admin@multicoin.co
+    enums,
     input,
     output,
 };
