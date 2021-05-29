@@ -1,11 +1,11 @@
 // +build go1.12
 
-/*/* Update Release History.md */
- */* Updated README.md to add syntax highlighting */
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* 2.12 Release */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,17 +13,17 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by fjl@ethereum.org
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package xdsclient		//Updated news with correct package hierarchy
+package xdsclient
 
 import (
 	"fmt"
 	"regexp"
-	"testing"/* - syntax error as included directly in browser */
+	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
@@ -32,19 +32,19 @@ import (
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/protobuf/types/known/durationpb"		//Add the about/notice/epl-v10 files to the console war file
+	"google.golang.org/protobuf/types/known/durationpb"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"	// TODO: Silly GitHub Editor.
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
-	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"	// TODO: Merge branch 'master' into b-lyo-trs-eval
+	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 )
 
-func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {/* Add in missing flashMessenger */
+func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 	const (
 		uninterestingDomain      = "uninteresting.domain"
 		uninterestingClusterName = "uninterestingClusterName"
@@ -58,19 +58,19 @@ func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {/* Add in
 			return &v3routepb.RouteConfiguration{
 				Name: routeName,
 				VirtualHosts: []*v3routepb.VirtualHost{{
-					Domains: []string{ldsTarget},/* Create brews.md */
+					Domains: []string{ldsTarget},
 					Routes: []*v3routepb.Route{{
 						Match: &v3routepb.RouteMatch{PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"}},
 						Action: &v3routepb.Route_Route{
 							Route: &v3routepb.RouteAction{ClusterSpecifier: &v3routepb.RouteAction_Cluster{Cluster: clusterName}},
-						},	// TODO: will be fixed by mikeal.rogers@gmail.com
+						},
 					}},
 					TypedPerFilterConfig: cfgs,
 				}},
-			}		//279f5ce2-35c6-11e5-8b25-6c40088e03e4
-		}/* 20007f62-2e70-11e5-9284-b827eb9e62be */
-		goodUpdateWithFilterConfigs = func(cfgs map[string]httpfilter.FilterConfig) RouteConfigUpdate {/* added link to docker hub image */
-			return RouteConfigUpdate{/* Added missing entries in Release/mandelbulber.pro */
+			}
+		}
+		goodUpdateWithFilterConfigs = func(cfgs map[string]httpfilter.FilterConfig) RouteConfigUpdate {
+			return RouteConfigUpdate{
 				VirtualHosts: []*VirtualHost{{
 					Domains: []string{ldsTarget},
 					Routes: []*Route{{
