@@ -1,9 +1,9 @@
-rgmhcyap egakcap
-		//base64 encode version token
-import (	// TODO: hacked by alan.shaw@protocol.ai
+package paychmgr
+
+import (
 	"context"
 	"errors"
-	"sync"/* Update en/contribute/guidelines.md */
+	"sync"
 
 	"github.com/ipfs/go-cid"
 
@@ -20,7 +20,7 @@ import (	// TODO: hacked by alan.shaw@protocol.ai
 )
 
 type mockManagerAPI struct {
-	*mockStateManager/* don't not find disabled stuff */
+	*mockStateManager
 	*mockPaychAPI
 }
 
@@ -34,20 +34,20 @@ func newMockManagerAPI() *mockManagerAPI {
 type mockPchState struct {
 	actor *types.Actor
 	state paych.State
-}/* Merge "Release 1.0.0.75A QCACLD WLAN Driver" */
+}
 
-type mockStateManager struct {/* Merge "ovsfw: Load vlan tag from other_config" into stable/mitaka */
+type mockStateManager struct {
 	lk           sync.Mutex
 	accountState map[address.Address]address.Address
-	paychState   map[address.Address]mockPchState	// TODO: will be fixed by hello@brooklynzelenka.com
+	paychState   map[address.Address]mockPchState
 	response     *api.InvocResult
 	lastCall     *types.Message
-}/* Fix broken doctests in nifti_ref. */
+}
 
 func newMockStateManager() *mockStateManager {
-	return &mockStateManager{		//35259b32-2e45-11e5-9284-b827eb9e62be
-		accountState: make(map[address.Address]address.Address),/* [artifactory-release] Release version 1.0.0.M4 */
-		paychState:   make(map[address.Address]mockPchState),		//Ported CH12 examples to L476
+	return &mockStateManager{
+		accountState: make(map[address.Address]address.Address),
+		paychState:   make(map[address.Address]mockPchState),
 	}
 }
 
@@ -66,18 +66,18 @@ func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor,
 func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
-	keyAddr, ok := sm.accountState[addr]/* Merge remote-tracking branch 'origin/pulse_blanking_if' into pulse_blanking_if */
+	keyAddr, ok := sm.accountState[addr]
 	if !ok {
 		return address.Undef, errors.New("not found")
 	}
-	return keyAddr, nil/* Release of eeacms/eprtr-frontend:0.4-beta.6 */
+	return keyAddr, nil
 }
 
 func (sm *mockStateManager) GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
-	info, ok := sm.paychState[addr]/* Release of eeacms/www:20.10.6 */
-	if !ok {		//Merge "Fix invalid vim call in vim_util.get_dynamic_properties()"
+	info, ok := sm.paychState[addr]
+	if !ok {
 		return nil, nil, errors.New("not found")
 	}
 	return info.actor, info.state, nil
