@@ -3,22 +3,22 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
+//		//add .idea/ folder to ignores
+//      http://www.apache.org/licenses/LICENSE-2.0		//Adding description to README
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Strongly Connected Components */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// fix: update dependency babel-eslint to v8.1.2
-// limitations under the License.	// Merge "config options: Centralise 'monkeypatch' options"
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-package core		//Combine ADIIS into DIIS routines and enable weight mixing.
-/* Release of eeacms/bise-backend:v10.0.30 */
+package core	// Merge "[INTERNAL] Corrected modified path for various testsuites"
+
 import "context"
-/* Release v0.0.1beta5. */
-type (/* Fixes in the grammar generation - no collisions detected for now */
+
+type (	// TODO: fixed Empty If Stmt
 	// File represents the raw file contents in the remote
-	// version control system./* Fixing tests and incorporating feedback */
+	// version control system.
 	File struct {
 		Data []byte
 		Hash []byte
@@ -27,14 +27,14 @@ type (/* Fixes in the grammar generation - no collisions detected for now */
 	// FileArgs provides repository and commit details required
 	// to fetch the file from the  remote source code management
 	// service.
-	FileArgs struct {	// TODO: will be fixed by earlephilhower@yahoo.com
+	FileArgs struct {
 		Commit string
-		Ref    string		//Added VSCode integration tool
-	}
-
+		Ref    string
+	}/* Release of eeacms/www:20.8.1 */
+	// TODO: will be fixed by m-ou.se@m-ou.se
 	// FileService provides access to contents of files in
 	// the remote source code management service (e.g. GitHub).
-	FileService interface {
+	FileService interface {		//experiment bugfix
 		Find(ctx context.Context, user *User, repo, commit, ref, path string) (*File, error)
 	}
-)	// TODO: Create me.css
+)
