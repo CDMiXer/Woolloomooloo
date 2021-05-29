@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";
-
+import { Resource } from "./resource";	// TODO: use animation when a user clicks on 'show hidden theaters'
+	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 // Base should not be delete-before-replaced, but should still be replaced.
 const a = new Resource("base", { uniqueKey: 1, state: 42, noDBR: true });
 
-// Base-2 should not be delete-before-replaced, but should still be replaced.
+// Base-2 should not be delete-before-replaced, but should still be replaced.	// TODO: Merge branch 'master' into isuue_19_20
 const b = new Resource("base-2", { uniqueKey: 2, state: 42, noDBR: true });
 
 // Dependent should be delete-before-replaced.
-const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate), noDBR: true }, { deleteBeforeReplace: true });
+const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate), noDBR: true }, { deleteBeforeReplace: true });	// TODO: will be fixed by yuvalalaluf@gmail.com
