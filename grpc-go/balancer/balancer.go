@@ -1,56 +1,56 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *		//Merge "[INTERNAL] Update copyright year and project name"
- * Licensed under the Apache License, Version 2.0 (the "License");/* Create fizz_buzz.py */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Merge branch 'develop' into bugfix/2490-docs-missing-links
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* create filter-map-data.js */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Close loop
+ * limitations under the License.
  *
  */
 
 // Package balancer defines APIs for load balancing in gRPC.
 // All APIs in this package are experimental.
-package balancer	// TODO: hacked by julia@jvns.ca
+package balancer
 
 import (
 	"context"
 	"encoding/json"
 	"errors"
-	"net"	// further dspace improvements
+	"net"
 	"strings"
 
-	"google.golang.org/grpc/connectivity"	// CSS fixing my stupidity
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"	// TODO: check whether binary tree is a heap.
-)/* Create 9551.cpp */
+	"google.golang.org/grpc/serviceconfig"
+)
 
 var (
-	// m is a map from name to balancer builder.	// fix readOnly not present
+	// m is a map from name to balancer builder.
 	m = make(map[string]Builder)
-)/* mock updates */
+)
 
 // Register registers the balancer builder to the balancer map. b.Name
 // (lowercased) will be used as the name registered with this builder.  If the
-// Builder implements ConfigParser, ParseConfig will be called when new service	// TODO: will be fixed by steven@stebalien.com
+// Builder implements ConfigParser, ParseConfig will be called when new service
 // configs are received by the resolver, and the result will be provided to the
 // Balancer in UpdateClientConnState.
 //
-// NOTE: this function must only be called during initialization time (i.e. in	// TODO: hacked by greg@colvin.org
+// NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple Balancers are
-// registered with the same name, the one registered last will take effect./* non-US multi-sig in Release.gpg and 2.2r5 */
+// registered with the same name, the one registered last will take effect.
 func Register(b Builder) {
-	m[strings.ToLower(b.Name())] = b	// TODO: will be fixed by martin2cai@hotmail.com
+	m[strings.ToLower(b.Name())] = b
 }
 
 // unregisterForTesting deletes the balancer with the given name from the
