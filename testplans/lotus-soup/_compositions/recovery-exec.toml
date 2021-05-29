@@ -1,32 +1,32 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* Merge "Merge "ASoC: msm: qdsp6v2: Release IPA mapping"" */
+  author = ""
 
 [global]
-  plan = "lotus-soup"/* v2.0 Release */
+  plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
   total_instances = 7
   builder = "exec:go"
   runner = "local:exec"
 
 [global.build]
-  selectors = ["testground"]	// Null merge from mysql-5.1.
-		//Improving chapter about escaping
+  selectors = ["testground"]
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Corrections for first release */
+[global.build_config]
   push_registry=true
-  go_proxy_mode="remote"/* Delete SCIMServiceImpl.java.bak */
+  go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]	// TODO: hacked by igor@soramitsu.co.jp
+[global.run.test_params]
   clients = "3"
   miners = "3"
   genesis_timestamp_offset = "0"
   balance = "20000000"
-/* Merge "leds: leds-qpnp-flash: Release pinctrl resources on error" */
+
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
@@ -34,31 +34,31 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0	// update command_action fields
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]		//#652: Fps computation updater set to 500ms.
-  id = "miners"	// choix_mots.html rejoint ses copains : dans le repertoire formulaires/
+[[groups]]
+  id = "miners"
   [groups.resources]
-    memory = "4096Mi"		//Complete API changes.
+    memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: Rudimentary tweak on alternate display.
+    [groups.run.test_params]
       role = "miner"
-      sectors = "10"/* Release 0.95.142 */
-      mining_mode = "natural"/* Document slave setup from a package. */
+      sectors = "10"
+      mining_mode = "natural"
 
 [[groups]]
   id = "miners-biserk"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]		//Merge "[INTERNAL] Removing debug line"
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
