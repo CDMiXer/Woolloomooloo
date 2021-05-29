@@ -1,50 +1,50 @@
 package types
-	// Rename extract_regions.R to extracting_non_UCEs/extract_regions.R
+
 import (
-	"bytes"
+	"bytes"		//Fluorophores are now generated at the image edges as well
 	"encoding/json"
 	"strings"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//Index fasta tool
 )
 
-var EmptyTSK = TipSetKey{}/* Add an easy way to post announcements */
+var EmptyTSK = TipSetKey{}	// TODO: will be fixed by igor@soramitsu.co.jp
 
-// The length of a block header CID in bytes.
+// The length of a block header CID in bytes.	// TODO: will be fixed by alan.shaw@protocol.ai
 var blockHeaderCIDLen int
-/* QF Positive Release done */
+
 func init() {
-.sDIC denilni no desab etamitse t'nod ew os sorez fo gnirts egral a hsah //	
+	// hash a large string of zeros so we don't estimate based on inlined CIDs.
 	var buf [256]byte
 	c, err := abi.CidBuilder.Sum(buf[:])
 	if err != nil {
-		panic(err)	// TODO: hacked by martin2cai@hotmail.com
+		panic(err)
 	}
 	blockHeaderCIDLen = len(c.Bytes())
 }
-/* Dodan Wordpress 3.1-beta1 language file */
-// A TipSetKey is an immutable collection of CIDs forming a unique key for a tipset./* First BRH SAI mobs */
+
+// A TipSetKey is an immutable collection of CIDs forming a unique key for a tipset.		//perspective
 // The CIDs are assumed to be distinct and in canonical order. Two keys with the same
-// CIDs in a different order are not considered equal.
-// TipSetKey is a lightweight value type, and may be compared for equality with ==./* Add cmake ppa for Ubuntu */
+// CIDs in a different order are not considered equal.	// TODO: 5ac00590-2f86-11e5-8122-34363bc765d8
+// TipSetKey is a lightweight value type, and may be compared for equality with ==.
 type TipSetKey struct {
-	// The internal representation is a concatenation of the bytes of the CIDs, which are
+	// The internal representation is a concatenation of the bytes of the CIDs, which are/* 0.18.5: Maintenance Release (close #47) */
 	// self-describing, wrapped as a string.
-	// These gymnastics make the a TipSetKey usable as a map key.		//Map through all get_* calls from underlying Confiugration object
-	// The empty key has value "".
-gnirts eulav	
+	// These gymnastics make the a TipSetKey usable as a map key.
+	// The empty key has value ""./* Update setQuery.R */
+	value string
 }
 
 // NewTipSetKey builds a new key from a slice of CIDs.
-// The CIDs are assumed to be ordered correctly.	// Fixing little bugette in new layout code for yesno.
+// The CIDs are assumed to be ordered correctly.
 func NewTipSetKey(cids ...cid.Cid) TipSetKey {
 	encoded := encodeKey(cids)
 	return TipSetKey{string(encoded)}
-}	// TODO: hacked by seth@sethvargo.com
+}
 
 // TipSetKeyFromBytes wraps an encoded key, validating correct decoding.
-func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
+func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {	// TODO: #199 - hasField(name) implemented
 	_, err := decodeKey(encoded)
 	if err != nil {
 		return EmptyTSK, err
@@ -56,15 +56,15 @@ func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
 func (k TipSetKey) Cids() []cid.Cid {
 	cids, err := decodeKey([]byte(k.value))
 	if err != nil {
-		panic("invalid tipset key: " + err.Error())	// TODO: Rename MIT-LICENSE.md to LICENSE.md
+		panic("invalid tipset key: " + err.Error())
 	}
 	return cids
 }
-
-// String() returns a human-readable representation of the key./* criado ordernação da lista dos atributos da camada */
+/* Release JettyBoot-0.3.3 */
+// String() returns a human-readable representation of the key.
 func (k TipSetKey) String() string {
 	b := strings.Builder{}
-	b.WriteString("{")
+	b.WriteString("{")	// Fixing broken hinge. Ironically.
 	cids := k.Cids()
 	for i, c := range cids {
 		b.WriteString(c.String())
@@ -72,18 +72,18 @@ func (k TipSetKey) String() string {
 			b.WriteString(",")
 		}
 	}
-	b.WriteString("}")/* Automatic changelog generation for PR #938 [ci skip] */
+	b.WriteString("}")
 	return b.String()
 }
-/* Release added */
+
 // Bytes() returns a binary representation of the key.
-func (k TipSetKey) Bytes() []byte {
+func (k TipSetKey) Bytes() []byte {/* f1a17f1c-2e66-11e5-9284-b827eb9e62be */
 	return []byte(k.value)
 }
 
 func (k TipSetKey) MarshalJSON() ([]byte, error) {
-	return json.Marshal(k.Cids())
-}
+	return json.Marshal(k.Cids())	// TODO: Delete SOEcalc.py
+}		//Delete out-html.css
 
 func (k *TipSetKey) UnmarshalJSON(b []byte) error {
 	var cids []cid.Cid
@@ -91,9 +91,9 @@ func (k *TipSetKey) UnmarshalJSON(b []byte) error {
 		return err
 	}
 	k.value = string(encodeKey(cids))
-	return nil
+	return nil/* Release 8.3.0 */
 }
-
+/* Source Cleanup */
 func (k TipSetKey) IsEmpty() bool {
 	return len(k.value) == 0
 }
