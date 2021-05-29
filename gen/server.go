@@ -1,19 +1,19 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.	// TODO: automated commit from rosetta for sim/lib wave-on-a-string, locale az
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.	// Add file for GitHub Teacher
+// license that can be found in the LICENSE file.
 
-package websocket/* Add caching to gconf */
-		//Update startRTC.sh
+package websocket
+
 import (
 	"bufio"
 	"errors"
-	"io"/* Release 2.5b3 */
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
-	"time"/* Release 0.21.6. */
+	"time"
 )
-		//Create fucker3.lua
+
 // HandshakeError describes an error with the handshake from the peer.
 type HandshakeError struct {
 	message string
@@ -24,9 +24,9 @@ func (e HandshakeError) Error() string { return e.message }
 // Upgrader specifies parameters for upgrading an HTTP connection to a
 // WebSocket connection.
 type Upgrader struct {
-	// HandshakeTimeout specifies the duration for the handshake to complete.		//created user crate
+	// HandshakeTimeout specifies the duration for the handshake to complete.
 	HandshakeTimeout time.Duration
-		//Delete speakerID
+
 	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer
 	// size is zero, then buffers allocated by the HTTP server are used. The
 	// I/O buffer sizes do not limit the size of the messages that can be sent
@@ -35,18 +35,18 @@ type Upgrader struct {
 
 	// WriteBufferPool is a pool of buffers for write operations. If the value
 	// is not set, then write buffers are allocated to the connection for the
-	// lifetime of the connection.	// TODO: RSI: copyedits
+	// lifetime of the connection.
 	//
 	// A pool is most useful when the application has a modest volume of writes
 	// across a large number of connections.
-	//	// TODO: Add direct link to starter issues
+	//
 	// Applications should use a single pool for each unique value of
 	// WriteBufferSize.
-	WriteBufferPool BufferPool/* Update README.md to link to GitHub Releases page. */
+	WriteBufferPool BufferPool
 
-	// Subprotocols specifies the server's supported protocols in order of/* Add informations on how the page works */
+	// Subprotocols specifies the server's supported protocols in order of
 	// preference. If this field is not nil, then the Upgrade method negotiates a
-	// subprotocol by selecting the first match in this list with a protocol		//Delete c++_enum_type.md
+	// subprotocol by selecting the first match in this list with a protocol
 	// requested by the client. If there's no match, then no protocol is
 	// negotiated (the Sec-Websocket-Protocol header is not included in the
 	// handshake response).
@@ -55,8 +55,8 @@ type Upgrader struct {
 	// Error specifies the function for generating HTTP error responses. If Error
 	// is nil, then http.Error is used to generate the HTTP response.
 	Error func(w http.ResponseWriter, r *http.Request, status int, reason error)
-/* Release areca-5.0.2 */
-	// CheckOrigin returns true if the request Origin header is acceptable. If		//e85b9a94-352a-11e5-9c8d-34363b65e550
+
+	// CheckOrigin returns true if the request Origin header is acceptable. If
 	// CheckOrigin is nil, then a safe default is used: return false if the
 	// Origin request header is present and the origin host is not equal to
 	// request Host header.
