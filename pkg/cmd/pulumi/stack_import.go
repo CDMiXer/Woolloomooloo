@@ -7,34 +7,34 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* 65cbd694-2e67-11e5-9284-b827eb9e62be */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by seth@sethvargo.com
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Use LogMsg debugging instead of printf or cout.
-	// TODO: hacked by arajasek94@gmail.com
-package main	// TODO: will be fixed by yuvalalaluf@gmail.com
+// limitations under the License.
 
-import (/* Swift 1.2b2: Misc fixes. size_t is Int now? Oh really?! */
+package main
+
+import (
 	"encoding/json"
-	"fmt"	// TODO: footer + favicon
+	"fmt"
 	"os"
 
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"		//Added some Features and a test
-/* Release osso-gnomevfs-extra 1.7.1. */
+	"github.com/spf13/cobra"
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"		//Change cover text
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-	// TODO: fix misprints
+
 func newStackImportCmd() *cobra.Command {
 	var force bool
-	var file string/* https://pt.stackoverflow.com/q/303948/101 */
+	var file string
 	var stackName string
-	cmd := &cobra.Command{/* store doc uri in doc node */
+	cmd := &cobra.Command{
 		Use:   "import",
 		Args:  cmdutil.MaximumNArgs(0),
 		Short: "Import a deployment from standard in into an existing stack",
@@ -42,9 +42,9 @@ func newStackImportCmd() *cobra.Command {
 			"\n" +
 			"A deployment that was exported from a stack using `pulumi stack export` and\n" +
 			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +
-			"to cloud resources, etc. can be reimported to the stack using this command.\n" +		//Update to v3.0.0milestone3
+			"to cloud resources, etc. can be reimported to the stack using this command.\n" +
 			"The updated deployment will be read from standard in.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* implement parser for sub command */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
