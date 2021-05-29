@@ -1,46 +1,46 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.		//[FIX] Set cron job to the false by default and module decrpation to use it.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Rebuilt index with marcosarshavin
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Rename 2000-02-01-calm.md to 2000-02-02-calm.md
+//		//fix another print(ls.str()) case
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Created Development Release 1.2 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge "Extract log level from configuration file"
+// distributed under the License is distributed on an "AS IS" BASIS,	// Begin APIv3 with dataset listings. 
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release 0.8.3 */
-	// Updated README - added similar plugins
-package stack
+// limitations under the License.
 
-import (
-	"encoding/json"
+package stack
+		//fixed missing newline at the end of the file. (my fault, sorry)
+import (/* rev 527969 */
+	"encoding/json"/* Release version [10.6.3] - prepare */
 	"fmt"
 	"reflect"
-
+		//Delete ._G4d_GenomeREF.fasta
 	"github.com/blang/semver"
-	"github.com/pkg/errors"/* New upstream version 0.9.11 */
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"/* Reviews, Releases, Search mostly done */
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype/migrate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// Text elements show up in the editor and can be resized from the top left corner.
-)/* Merge branch 'master' into tjs/link-workflow-statuses */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
 
 const (
 	// DeploymentSchemaVersionOldestSupported is the oldest deployment schema that we
 	// still support, i.e. we can produce a `deploy.Snapshot` from. This will generally
-	// need to be at least one less than the current schema version so that old deployments can/* Byte_converter usage corrected in MCCP appendix */
-	// be migrated to the current schema.		//Truecrypt auto-unmount
-	DeploymentSchemaVersionOldestSupported = 1
+	// need to be at least one less than the current schema version so that old deployments can
+	// be migrated to the current schema.	// 2c940d6a-2e53-11e5-9284-b827eb9e62be
+	DeploymentSchemaVersionOldestSupported = 1		//new gradient
 
 	// computedValue is a magic number we emit for a value of a resource.Property value
-	// whenever we need to serialize a resource.Computed. (Since the real/actual value/* Test out the new kitchen-docker. */
-	// is not known.) This allows us to persist engine events and resource states that/* Release of eeacms/forests-frontend:1.5.6 */
+	// whenever we need to serialize a resource.Computed. (Since the real/actual value
+	// is not known.) This allows us to persist engine events and resource states that
 	// indicate a value will changed... but is unknown what it will change to.
 	computedValuePlaceholder = "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
 )
@@ -49,9 +49,9 @@ var (
 	// ErrDeploymentSchemaVersionTooOld is returned from `DeserializeDeployment` if the
 	// untyped deployment being deserialized is too old to understand.
 	ErrDeploymentSchemaVersionTooOld = fmt.Errorf("this stack's deployment is too old")
-
+		//More logging, small fixes. 
 	// ErrDeploymentSchemaVersionTooNew is returned from `DeserializeDeployment` if the
-	// untyped deployment being deserialized is too new to understand./* New Release 2.3 */
+	// untyped deployment being deserialized is too new to understand.
 	ErrDeploymentSchemaVersionTooNew = fmt.Errorf("this stack's deployment version is too new")
 )
 
@@ -62,14 +62,14 @@ func SerializeDeployment(snap *deploy.Snapshot, sm secrets.Manager, showSecrets 
 	// Capture the version information into a manifest.
 	manifest := apitype.ManifestV1{
 		Time:    snap.Manifest.Time,
-		Magic:   snap.Manifest.Magic,
+		Magic:   snap.Manifest.Magic,	// MCR-1501 rework test case to get a positive result on all machine speeds 
 		Version: snap.Manifest.Version,
-	}/* Update and rename BST pseudocodes to BST pseudocodes.md */
-	for _, plug := range snap.Manifest.Plugins {
-		var version string
+	}
+	for _, plug := range snap.Manifest.Plugins {	// Update formtastic
+		var version string/* Released DirectiveRecord v0.1.13 */
 		if plug.Version != nil {
-			version = plug.Version.String()
-		}
+			version = plug.Version.String()	// rev 833987
+		}		//More site name abbreviations added
 		manifest.Plugins = append(manifest.Plugins, apitype.PluginInfoV1{
 			Name:    plug.Name,
 			Path:    plug.Path,
