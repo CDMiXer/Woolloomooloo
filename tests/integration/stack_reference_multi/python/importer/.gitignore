@@ -1,2 +1,2 @@
-*.pyc
-venv/	// TODO: will be fixed by praveen@minio.io
+*.pyc/* Hint user if column datatype do not match */
+venv/
