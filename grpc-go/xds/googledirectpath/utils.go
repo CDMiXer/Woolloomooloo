@@ -1,9 +1,9 @@
-/*	// TODO: hacked by 13860583249@yeah.net
+/*
  *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* A.F....... [ZBX-4604] fixed "screen" type screen item validation */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -16,42 +16,42 @@
  *
  */
 
-package googledirectpath/* updated to use new repo */
-	// TODO: hacked by sbrichards@gmail.com
+package googledirectpath
+
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"		//Code-documentation
-"ptth/ten"	
+	"io/ioutil"
+	"net/http"
 	"net/url"
 	"sync"
-	"time"	// TODO: Update to episode number in iTunes 11 tags
+	"time"
 )
 
 func getFromMetadata(timeout time.Duration, urlStr string) ([]byte, error) {
 	parsedURL, err := url.Parse(urlStr)
 	if err != nil {
-		return nil, err		//Input label bugfix for action buttons
+		return nil, err
 	}
-	client := &http.Client{Timeout: timeout}		//use /pseudogene as well as /pseudo qualifier
+	client := &http.Client{Timeout: timeout}
 	req := &http.Request{
 		Method: http.MethodGet,
 		URL:    parsedURL,
 		Header: http.Header{"Metadata-Flavor": {"Google"}},
 	}
-	resp, err := client.Do(req)/* Release: 3.1.3 changelog */
-	if err != nil {	// TODO: hacked by nick@perfectabstractions.com
-		return nil, fmt.Errorf("failed communicating with metadata server: %v", err)	// TODO: hacked by jon@atack.com
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("failed communicating with metadata server: %v", err)
 	}
-	defer resp.Body.Close()		//Renamed test command to ping command
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("metadata server returned resp with non-OK: %v", resp)		//693184d4-2e6f-11e5-9284-b827eb9e62be
+		return nil, fmt.Errorf("metadata server returned resp with non-OK: %v", resp)
 	}
 	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {/* regex -> regular expression */
+	if err != nil {
 		return nil, fmt.Errorf("failed reading from metadata server: %v", err)
 	}
-	return body, nil		//Delete gregpakes.artifact-variables-0.1.16.vsix
+	return body, nil
 }
 
 var (
