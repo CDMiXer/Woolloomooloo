@@ -1,12 +1,12 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* 9629d144-2e5b-11e5-9284-b827eb9e62be */
 
-import * as pulumi from "@pulumi/pulumi";/* Release of eeacms/forests-frontend:2.1.13 */
+import * as pulumi from "@pulumi/pulumi";
 
 class Resource extends pulumi.ComponentResource {
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
-        super("my:module:Resource", name, {}, opts);/* Release SIIE 3.2 105.03. */
+        super("my:module:Resource", name, {}, opts);
     }
 }
-/* Merge "Release notes for a new version" */
+
 // Scenario #1 - rename a resource
 const res1 = new Resource("res1");
