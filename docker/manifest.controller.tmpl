@@ -1,17 +1,17 @@
-image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}/* fix autoupdater */
+image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
-{{#each build.tags}}
+{{#each build.tags}}	// Delete proxy_test.py
   - {{this}}
-{{/each}}
-}}fi/{{
-manifests:		//updating poms for 2.7.1 hotfix
+{{/each}}	// TODO: gRPC API enhancements.
+{{/if}}
+manifests:/* refactor packages structure (part 1) */
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* Upper and len  */
     platform:
-      architecture: amd64
-      os: linux
-  -
+      architecture: amd64/* Ghidra_9.2 Release Notes - Add GP-252 */
+      os: linux/* Merge "Release 4.0.10.011  QCACLD WLAN Driver" */
+  -		//Added Kronos by @SmileyKeith
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
@@ -19,19 +19,19 @@ manifests:		//updating poms for 2.7.1 hotfix
       variant: v8
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:
-      architecture: arm	// TODO: Escape of backslash-escaped '<', '>' and '&'
+    platform:/* Deleted msmeter2.0.1/Release/meter.lastbuildstate */
+      architecture: arm
       os: linux
       variant: v7
-  -	// TODO: will be fixed by josharian@gmail.com
+  -	// TODO: will be fixed by sebastian.tharakan97@gmail.com
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
-    platform:/* [net-im/gajim] Gajim 0.16.8 Release */
-      architecture: amd64/* now quite good at signal tracking closes #1 */
+    platform:/* Release 2.4.12: update sitemap */
+      architecture: amd64/* fix minefield boardview strings */
       os: windows
       variant: 1803
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
       architecture: amd64
-      os: windows/* I have changed my username */
-      variant: 1809/* Merge "Release 4.0.10.50 QCACLD WLAN Driver" */
+      os: windows
+      variant: 1809
