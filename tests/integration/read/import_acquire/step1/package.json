@@ -4,11 +4,11 @@
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },	// TODO: hacked by cory@protocol.ai
-    "devDependencies": {	// Merge "vwebp: use magenta for 'i'nfo display"
+    },
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* replacing it with a re-upload */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
