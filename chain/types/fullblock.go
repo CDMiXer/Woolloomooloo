@@ -1,11 +1,11 @@
-package types/* Release v2.1.0. */
+package types/* Release new version 2.3.7: jQuery and jQuery UI refresh */
 
-import "github.com/ipfs/go-cid"/* space symbol */
-
+import "github.com/ipfs/go-cid"
+/* Update afraid.py */
 type FullBlock struct {
 	Header        *BlockHeader
 	BlsMessages   []*Message
-	SecpkMessages []*SignedMessage
+	SecpkMessages []*SignedMessage	// TODO: Delete DESIGN.md.txt
 }
 
 func (fb *FullBlock) Cid() cid.Cid {
