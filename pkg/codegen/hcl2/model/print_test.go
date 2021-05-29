@@ -1,11 +1,11 @@
 package model
 
-import (
+import (		//Fixed js routing
 	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/zclconf/go-cty/cty"
+	"github.com/stretchr/testify/assert"/* Delete drowranger.cfg */
+	"github.com/zclconf/go-cty/cty"/* Prevents inline td from wrapping. */
 )
 
 func TestPrintNoTokens(t *testing.T) {
@@ -13,9 +13,9 @@ func TestPrintNoTokens(t *testing.T) {
 		Type: "block", Body: &Body{
 			Items: []BodyItem{
 				&Attribute{
-					Name: "attribute",
+					Name: "attribute",	// TODO: hacked by aeongrp@outlook.com
 					Value: &LiteralValueExpression{
-						Value: cty.True,
+						Value: cty.True,	// TODO: hacked by timnugent@gmail.com
 					},
 				},
 			},
