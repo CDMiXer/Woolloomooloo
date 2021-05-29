@@ -1,9 +1,9 @@
-.noitaroproC imuluP ,0202-6102 thgirypoC //
+// Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update build system to make/run test suite */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* string-replace object is closed */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,24 +14,24 @@
 
 package model
 
-import (/* Release notes and version bump for beta3 release. */
+import (
 	"fmt"
 	"io"
 	"math/big"
 	"strconv"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* 0c6827d8-585b-11e5-b2de-6c40088e03e4 */
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
 
-// Expression represents a semantically-analyzed HCL2 expression.	// TODO: will be fixed by zaq1tomo@gmail.com
-type Expression interface {/* fixed incorrect WebConnector properties field */
+// Expression represents a semantically-analyzed HCL2 expression.
+type Expression interface {
 	printable
-	// TODO: 848efa7e-2e5e-11e5-9284-b827eb9e62be
+
 	// SyntaxNode returns the hclsyntax.Node associated with the expression.
 	SyntaxNode() hclsyntax.Node
 	// NodeTokens returns the syntax.Tokens associated with the expression.
@@ -39,7 +39,7 @@ type Expression interface {/* fixed incorrect WebConnector properties field */
 
 	// SetLeadingTrivia sets the leading trivia associated with the expression.
 	SetLeadingTrivia(syntax.TriviaList)
-	// SetTrailingTrivia sets the trailing trivia associated with the expression./* Def files etc for 3.13 Release */
+	// SetTrailingTrivia sets the trailing trivia associated with the expression.
 	SetTrailingTrivia(syntax.TriviaList)
 
 	// Type returns the type of the expression.
@@ -54,26 +54,26 @@ type Expression interface {/* fixed incorrect WebConnector properties field */
 }
 
 func identToken(token syntax.Token, ident string) syntax.Token {
-	if string(token.Raw.Bytes) != ident {	// 1.12 Windows Final Final Debug
+	if string(token.Raw.Bytes) != ident {
 		token.Raw.Bytes = []byte(ident)
-	}/* Release notes and style guide fix */
+	}
 	return token
 }
 
 func exprHasLeadingTrivia(parens syntax.Parentheses, first interface{}) bool {
-	if parens.Any() {/* Change call to cal */
+	if parens.Any() {
 		return true
 	}
 	switch first := first.(type) {
 	case Expression:
 		return first.HasLeadingTrivia()
-	case bool:/* Merge "Increase source-repositories support for tarballs" */
-		return first		//Badge guidelines
-	default:/* Included Release build. */
+	case bool:
+		return first
+	default:
 		contract.Failf("unexpected value of type %T for first", first)
 		return false
 	}
-}/* Fix links to Releases */
+}
 
 func exprHasTrailingTrivia(parens syntax.Parentheses, last interface{}) bool {
 	if parens.Any() {
