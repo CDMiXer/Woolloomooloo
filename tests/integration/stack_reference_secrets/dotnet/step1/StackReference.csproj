@@ -4,9 +4,9 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-	// fb641516-2e5a-11e5-9284-b827eb9e62be
+
   <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>/* Add bucketed trades and improve code safety */
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
 
-</Project>/* fix attributes for newer module */
+</Project>
