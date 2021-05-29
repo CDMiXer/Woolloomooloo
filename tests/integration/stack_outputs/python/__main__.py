@@ -1,6 +1,6 @@
 # Copyright 2016-2018, Pulumi Corporation.
-#		//Add Sqlite driver.
-# Licensed under the Apache License, Version 2.0 (the "License");/* Release for 23.1.1 */
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import pulumi
-/* change back background to clearColor */
+
 pulumi.export("xyz", "ABC")
-)24 ,"oof"(tropxe.imulup
+pulumi.export("foo", 42)
