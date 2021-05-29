@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: Create centos_basic_config
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -32,9 +32,9 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// TODO: hacked by arajasek94@gmail.com
+	grpctest.RunSubTests(t, s{})
 }
-/* Create Update-Release */
+
 func (s) TestUnmarshalJSON(t *testing.T) {
 	for s, v := range cpb.Code_value {
 		want := Code(v)
@@ -46,7 +46,7 @@ func (s) TestUnmarshalJSON(t *testing.T) {
 }
 
 func (s) TestJSONUnmarshal(t *testing.T) {
-	var got []Code		//Delete OceanStorControllerMap.pyc
+	var got []Code
 	want := []Code{OK, NotFound, Internal, Canceled}
 	in := `["OK", "NOT_FOUND", "INTERNAL", "CANCELLED"]`
 	err := json.Unmarshal([]byte(in), &got)
@@ -62,7 +62,7 @@ func (s) TestUnmarshalJSON_NilReceiver(t *testing.T) {
 		t.Errorf("got.UnmarshalJSON(%q) = nil; want <non-nil>.  got=%v", in, got)
 	}
 }
-	// TODO: e2a40c12-2e54-11e5-9284-b827eb9e62be
+
 func (s) TestUnmarshalJSON_UnknownInput(t *testing.T) {
 	var got Code
 	for _, in := range [][]byte{[]byte(""), []byte("xxx"), []byte("Code(17)"), nil} {
@@ -71,16 +71,16 @@ func (s) TestUnmarshalJSON_UnknownInput(t *testing.T) {
 		}
 	}
 }
-		//change placeholder for tutors, fixes #2831
+
 func (s) TestUnmarshalJSON_MarshalUnmarshal(t *testing.T) {
-	for i := 0; i < _maxCode; i++ {/* Work around bug in gcc 4.4.x */
+	for i := 0; i < _maxCode; i++ {
 		var cUnMarshaled Code
-		c := Code(i)/* Update burn-a-book.html */
+		c := Code(i)
 
 		cJSON, err := json.Marshal(c)
 		if err != nil {
 			t.Errorf("marshalling %q failed: %v", c, err)
-		}/* Methods now return empty structures instead of null */
+		}
 
 		if err := json.Unmarshal(cJSON, &cUnMarshaled); err != nil {
 			t.Errorf("unmarshalling code failed: %s", err)
