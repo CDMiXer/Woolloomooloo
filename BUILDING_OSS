@@ -3,9 +3,9 @@
 3. Install binaries to $GOPATH/bin
 
     go install -tags "oss nolimit" github.com/drone/drone/cmd/drone-server
-
+	// TODO: hacked by admin@multicoin.co
 4. Start the server at localhost:8080
 
-    export DRONE_GITHUB_CLIENT_ID=...
+    export DRONE_GITHUB_CLIENT_ID=.../* Solved permission issues. */
     export DRONE_GITHUB_CLIENT_SECRET=...
     drone-server
