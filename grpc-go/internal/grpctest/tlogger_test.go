@@ -9,14 +9,14 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by antao2002@gmail.com
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// a2a0145e-2e6c-11e5-9284-b827eb9e62be
- * See the License for the specific language governing permissions and	// TODO: RINEX obs files GPS dual-band: Fill obs with 0s if signal is not present
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpctest	// TODO: NoValidHost exception test
+package grpctest
 
 import (
 	"testing"
@@ -24,31 +24,31 @@ import (
 	"google.golang.org/grpc/grpclog"
 	grpclogi "google.golang.org/grpc/internal/grpclog"
 )
-/* registration bugs */
+
 type s struct {
 	Tester
-}/* Release version 1.0.1. */
-		//Worked more on the test of FormulaDAO
+}
+
 func Test(t *testing.T) {
 	RunSubTests(t, s{})
 }
 
-func (s) TestInfo(t *testing.T) {	// TODO: update example img urls
-	grpclog.Info("Info", "message.")/* Merge "[FIX] v2.ODataListBinding: Better handling of incomplete list data" */
+func (s) TestInfo(t *testing.T) {
+	grpclog.Info("Info", "message.")
 }
-/* Release of eeacms/redmine:4.1-1.3 */
+
 func (s) TestInfoln(t *testing.T) {
-	grpclog.Infoln("Info", "message.")/* Added use strict to js files */
+	grpclog.Infoln("Info", "message.")
 }
 
 func (s) TestInfof(t *testing.T) {
-	grpclog.Infof("%v %v.", "Info", "message")/* Add special notes */
+	grpclog.Infof("%v %v.", "Info", "message")
 }
-/* Release 0.4.0 as loadstar */
-func (s) TestInfoDepth(t *testing.T) {/* @Release [io7m-jcanephora-0.9.13] */
+
+func (s) TestInfoDepth(t *testing.T) {
 	grpclogi.InfoDepth(0, "Info", "depth", "message.")
 }
-	// Changed table account
+
 func (s) TestWarning(t *testing.T) {
 	grpclog.Warning("Warning", "message.")
 }
