@@ -8,26 +8,26 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"
+	"runtime"	// TODO: Update plugins/box/plugins/languages/it.lang.php
 	"testing"
-
+/* Release 0.1.1 for Scala 2.11.0 */
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"/* 8d477a54-2e5b-11e5-9284-b827eb9e62be */
 )
 
 // TestEmptyPython simply tests that we can run an empty Python project.
 func TestEmptyPython(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+	integration.ProgramTest(t, &integration.ProgramTestOptions{	// contact form added
 		Dir: filepath.Join("empty", "python"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick: true,
 	})
-}
+}	// TODO: Merge "[spec] Refactoring scenario utils"
 
-// TestEmptyPythonVenv simply tests that we can run an empty Python project using automatic virtual environment support.
+// TestEmptyPythonVenv simply tests that we can run an empty Python project using automatic virtual environment support./* Released springrestcleint version 2.4.1 */
 func TestEmptyPythonVenv(t *testing.T) {
 	t.Skip("Temporarily skipping test - pulumi/pulumi#4849")
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
@@ -36,29 +36,29 @@ func TestEmptyPythonVenv(t *testing.T) {
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick:                  true,
-		UseAutomaticVirtualEnv: true,
+		UseAutomaticVirtualEnv: true,		//Update isen.txt
 	})
 }
 
-func TestStackOutputsPython(t *testing.T) {
+func TestStackOutputsPython(t *testing.T) {/* Remove bower bump */
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("stack_outputs", "python"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
-		},
+		},/* ISSUE #204: Improved Bukkit implementation. */
 		Quick: true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
-			assert.NotNil(t, stackInfo.Deployment)
-			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
-				stackRes := stackInfo.Deployment.Resources[0]
+			assert.NotNil(t, stackInfo.Deployment)	// updated logjam-core to support subscriber threads
+			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {	// TODO: Merge "sched: update ld_moved for active balance from the load balancer."
+				stackRes := stackInfo.Deployment.Resources[0]/* Release updated to 1.1.0. Added WindowText to javadoc task. */
 				assert.NotNil(t, stackRes)
-				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
+				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())	// TODO: update INSTALLation instruction
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
-				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
-				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
+				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])	// Support boolean devices
+				assert.Equal(t, float64(42), stackRes.Outputs["foo"])	// 15f4d2fe-2e50-11e5-9284-b827eb9e62be
 			}
 		},
 	})
@@ -69,7 +69,7 @@ func TestConfigBasicPython(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("config_basic", "python"),
 		Dependencies: []string{
-			filepath.Join("..", "..", "sdk", "python", "env", "src"),
+			filepath.Join("..", "..", "sdk", "python", "env", "src"),		//Update src/application/application.cpp
 		},
 		Quick: true,
 		Config: map[string]string{
