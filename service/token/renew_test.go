@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by yuvalalaluf@gmail.com
-// Use of this source code is governed by the Drone Non-Commercial License
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Add User Manual - pdf version
+// Use of this source code is governed by the Drone Non-Commercial License/* Added driver menu name in config file */
 // that can be found in the LICENSE file.
-	// TODO: Added setting to exclude specified tags.
+/* Runtime type checking on return types of functions and operations */
 // +build !oss
-	// TODO: cefc8720-2fbc-11e5-b64f-64700227155b
+
 package token
