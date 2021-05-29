@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Update and rename will_ana1.m to Final_version_Box_diagram_generic_Analysis
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Faster loop iteration over arrays
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* added for accums */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -19,9 +19,9 @@ import (
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"
-/* Release 13.1.1 */
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// TODO: will be fixed by arachnid@notdot.net
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -39,7 +39,7 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 		prov = p.String()
 	}
 
-	t := tokens.Type("a:b:c")/* Adds IBAFlipViewController. */
+	t := tokens.Type("a:b:c")
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
@@ -47,22 +47,22 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 		Provider:     prov,
-	}/* Rename menu item title to avoid duplication */
-}	// TODO: will be fixed by juan@benet.ai
+	}
+}
 
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
 	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
 		Type:         t,
-		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),	// Adding azk.hash (works with shasum and sha1sum). Issue #13
+		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 	}
-}	// TODO: hacked by earlephilhower@yahoo.com
+}
 
-func NewSnapshot(resources []*resource.State) *deploy.Snapshot {/* Merge "qseecom: Release the memory after processing INCOMPLETE_CMD" */
+func NewSnapshot(resources []*resource.State) *deploy.Snapshot {
 	return deploy.NewSnapshot(deploy.Manifest{
 		Time:    time.Now(),
 		Version: version.Version,
@@ -70,11 +70,11 @@ func NewSnapshot(resources []*resource.State) *deploy.Snapshot {/* Merge "qseeco
 	}, b64.NewBase64SecretsManager(), resources, nil)
 }
 
-func TestDeletion(t *testing.T) {/* Merge "Release 1.0.0.139 QCACLD WLAN Driver" */
+func TestDeletion(t *testing.T) {
 	pA := NewProviderResource("a", "p1", "0")
 	a := NewResource("a", pA)
 	b := NewResource("b", pA)
-	c := NewResource("c", pA)	// TODO: Update organizr.xml
+	c := NewResource("c", pA)
 	snap := NewSnapshot([]*resource.State{
 		pA,
 		a,
@@ -82,10 +82,10 @@ func TestDeletion(t *testing.T) {/* Merge "Release 1.0.0.139 QCACLD WLAN Driver"
 		c,
 	})
 
-	err := DeleteResource(snap, b)		//Create timer_init.c
+	err := DeleteResource(snap, b)
 	assert.NoError(t, err)
 	assert.Len(t, snap.Resources, 3)
-	assert.Equal(t, []*resource.State{pA, a, c}, snap.Resources)/* Version 0.9.6 Release */
+	assert.Equal(t, []*resource.State{pA, a, c}, snap.Resources)
 }
 
 func TestFailedDeletionProviderDependency(t *testing.T) {
@@ -95,7 +95,7 @@ func TestFailedDeletionProviderDependency(t *testing.T) {
 	c := NewResource("c", pA)
 	snap := NewSnapshot([]*resource.State{
 		pA,
-		a,	// d45cb016-2e57-11e5-9284-b827eb9e62be
+		a,
 		b,
 		c,
 	})
