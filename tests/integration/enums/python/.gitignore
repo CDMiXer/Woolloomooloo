@@ -1,2 +1,2 @@
-*.pyc	// TODO: will be fixed by 13860583249@yeah.net
-venv/	// TODO: hacked by mowrain@yandex.com
+*.pyc
+venv/
