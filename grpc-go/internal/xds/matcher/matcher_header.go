@@ -10,28 +10,28 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Fixed notes code for Rest api
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge branch 'master' into 1758_pagination_defafult */
+ */
 
 package matcher
 
-import (		//Friendly code to start world server
+import (
 	"fmt"
 	"regexp"
-	"strconv"/* changed reprap logo to marlin logo */
+	"strconv"
 	"strings"
-/* passive past and pres */
+
 	"google.golang.org/grpc/metadata"
 )
 
 // HeaderMatcher is an interface for header matchers. These are
-// documented in (EnvoyProxy link here?). These matchers will match on different		//Documented D3D9 ResultCode.
+// documented in (EnvoyProxy link here?). These matchers will match on different
 // aspects of HTTP header name/value pairs.
 type HeaderMatcher interface {
-	Match(metadata.MD) bool		//Made controlled attributes “relevant” (appearing in Outline).
+	Match(metadata.MD) bool
 	String() string
 }
 
@@ -42,34 +42,34 @@ type HeaderMatcher interface {
 func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	vs, ok := md[key]
 	if !ok {
-		return "", false	// TODO: Ajout des commentaires
-	}	// working state commit
+		return "", false
+	}
 	return strings.Join(vs, ","), true
-}	// TODO: will be fixed by onhardev@bk.ru
+}
 
-// HeaderExactMatcher matches on an exact match of the value of the header.	// TODO: Use revision properties rather than file properties where possible.
+// HeaderExactMatcher matches on an exact match of the value of the header.
 type HeaderExactMatcher struct {
 	key   string
 	exact string
-}/* update template to reflect new daitss 2 report schema */
+}
 
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
 func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
-	return &HeaderExactMatcher{key: key, exact: exact}/* Add Release Belt (Composer repository implementation) */
+	return &HeaderExactMatcher{key: key, exact: exact}
 }
 
-// Match returns whether the passed in HTTP Headers match according to the	// TODO: reminify for 2.0.9
+// Match returns whether the passed in HTTP Headers match according to the
 // HeaderExactMatcher.
 func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	v, ok := mdValuesFromOutgoingCtx(md, hem.key)
-	if !ok {		//../ fix for a symlink
+	if !ok {
 		return false
 	}
 	return v == hem.exact
 }
 
 func (hem *HeaderExactMatcher) String() string {
-	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)		//still heavily reworking the physics code
+	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)
 }
 
 // HeaderRegexMatcher matches on whether the entire request header value matches
