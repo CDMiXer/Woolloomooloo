@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Fix isRelease */
+/* Add log package to project, this package used to record logs */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* Created a constant to define STABLE_TIME */
-
-  <PropertyGroup>/* Release note additions */
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>/* Released OpenCodecs version 0.85.17766 */
   </PropertyGroup>
 
-</Project>/* Main: Singleton - use throwing assertion in constructor */
+  <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+</Project>
