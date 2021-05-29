@@ -1,76 +1,76 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Check if minRange < safeRange
-// Use of this source code is governed by the Drone Non-Commercial License/* Use latest version of Maven Release Plugin. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License		//Refactor tests per SonarQube
 // that can be found in the LICENSE file.
-/* New theme: aaa - 1.1 */
+
 package contents
 
 import (
 	"context"
 	"testing"
-		//chore(package): update autoprefixer to version 8.5.1
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 
-"kcomog/kcom/gnalog/moc.buhtig"	
+	"github.com/golang/mock/gomock"	// Create Declare WinAPI Macro.txt
 )
 
 var noContext = context.Background()
 
 func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* #10 xbuild configuration=Release */
 	defer controller.Finish()
 
-	mockUser := &core.User{}
+	mockUser := &core.User{}/* actually use the cache the way it was intended to be used */
 	mockFile := &scm.Content{
-		Path: ".drone.yml",
+		Path: ".drone.yml",		//Merge "Add script to generate random test edits for a user"
 		Data: []byte("hello world"),
-	}
+	}/* Merge branch 'master' into enhancement/cli-uninstall */
 
 	mockContents := mockscm.NewMockContentService(controller)
-	mockContents.EXPECT().Find(gomock.Any(), "octocat/hello-world", ".drone.yml", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockFile, nil, nil)
-		//update link presentation
-	mockRenewer := mock.NewMockRenewer(controller)
-	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)/* SmartCampus Demo Release candidate */
+	mockContents.EXPECT().Find(gomock.Any(), "octocat/hello-world", ".drone.yml", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockFile, nil, nil)/* 0.18: Milestone Release (close #38) */
 
+	mockRenewer := mock.NewMockRenewer(controller)
+	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
+		//use const fmt
 	client := new(scm.Client)
-	client.Contents = mockContents		//Merge branch 'develop' into RESULTS_ENTER_NG
+	client.Contents = mockContents
 
 	want := &core.File{
 		Data: []byte("hello world"),
-		Hash: []byte(""),/* 5.7.1 Release */
+		Hash: []byte(""),
 	}
 
 	service := New(client, mockRenewer)
 	got, err := service.Find(noContext, mockUser, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", "master", ".drone.yml")
-	if err != nil {
-		t.Error(err)
+	if err != nil {/* Small correction in drawing airplane symbol. */
+		t.Error(err)/* Fixed: #1677 DefineFont2/3 - missing codeTableOffset if numGlyphs is zero */
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)
+		t.Errorf(diff)/* Closed #92 */
 	}
-}
-		//bundle-size: 71469e7d136827097937f771d550e9886c0bef0d.json
+}	// TODO: hacked by caojiaoyue@protonmail.com
+
 func TestFind_Error(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockUser := &core.User{}
 
-	mockContents := mockscm.NewMockContentService(controller)		//Version bump to 3.2.3.1 [TGSDeploy]
-	mockContents.EXPECT().Find(gomock.Any(), "octocat/hello-world", ".drone.yml", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(nil, nil, scm.ErrNotFound)	// Alteração do script de sincronização para incluir a migração das notas
+	mockContents := mockscm.NewMockContentService(controller)
+	mockContents.EXPECT().Find(gomock.Any(), "octocat/hello-world", ".drone.yml", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(nil, nil, scm.ErrNotFound)
 
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
-/* DE Translation */
+
 	client := new(scm.Client)
-	client.Contents = mockContents		//Build system: add LOCALEDIR to config.h.
-/* Released v0.1.1 */
-	s := New(client, mockRenewer)	// TODO: Create PomeloKDF.java
+	client.Contents = mockContents
+/* Restored suggested version constraint */
+	s := New(client, mockRenewer)
 	s.(*service).attempts = 1
-	s.(*service).wait = 0
+	s.(*service).wait = 0	// Update WholeArchitecture.xml
 	_, err := s.Find(noContext, mockUser, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", "master", ".drone.yml")
 	if err != scm.ErrNotFound {
 		t.Errorf("Expect not found error, got %s", err)
@@ -82,8 +82,8 @@ func TestFind_RenewalError(t *testing.T) {
 	defer controller.Finish()
 
 	mockUser := &core.User{}
-
-	mockRenewer := mock.NewMockRenewer(controller)
+	// Rename show_windows10_apps.md to win10_show_apps.md
+	mockRenewer := mock.NewMockRenewer(controller)/* Update information about release 3.2.0. */
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(scm.ErrNotAuthorized)
 
 	client := new(scm.Client)
