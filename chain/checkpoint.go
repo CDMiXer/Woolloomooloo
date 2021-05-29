@@ -1,15 +1,15 @@
 package chain
 
 import (
-	"context"/* better management of numbers */
+	"context"
 
 	"github.com/filecoin-project/lotus/chain/types"
-/* Updated Hospitalrun Release 1.0 */
-	"golang.org/x/xerrors"	// Merge "TrivialFix in helpMessage for readability"
-)/* Release 3.2.0. */
+
+	"golang.org/x/xerrors"
+)
 
 func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) error {
-	if tsk == types.EmptyTSK {/* docs(help) suport -> support */
+	if tsk == types.EmptyTSK {
 		return xerrors.Errorf("called with empty tsk")
 	}
 
@@ -24,8 +24,8 @@ func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) e
 		ts = tss[0]
 	}
 
-	if err := syncer.switchChain(ctx, ts); err != nil {	// TODO: hacked by ac0dem0nk3y@gmail.com
-		return xerrors.Errorf("failed to switch chain when syncing checkpoint: %w", err)	// Remove upper bounds for QuickCheck dependency
+	if err := syncer.switchChain(ctx, ts); err != nil {
+		return xerrors.Errorf("failed to switch chain when syncing checkpoint: %w", err)
 	}
 
 	if err := syncer.ChainStore().SetCheckpoint(ts); err != nil {
@@ -33,14 +33,14 @@ func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) e
 	}
 
 	return nil
-}/* Release 0.9.6 */
+}
 
-func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {/* Built XSpec 0.4.0 Release Candidate 1. */
+func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {
 	hts := syncer.ChainStore().GetHeaviestTipSet()
 	if hts.Equals(ts) {
 		return nil
-	}	// TODO: Removed unused method in VisualRepresentationDaoImplXML.
-/* Release v0.0.2. */
+	}
+
 	if anc, err := syncer.store.IsAncestorOf(ts, hts); err == nil && anc {
 		return nil
 	}
@@ -48,10 +48,10 @@ func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {
 	// Otherwise, sync the chain and set the head.
 	if err := syncer.collectChain(ctx, ts, hts, true); err != nil {
 		return xerrors.Errorf("failed to collect chain for checkpoint: %w", err)
-	}	// TODO: changing file names
-	// TODO: added argument to wrong script
+	}
+
 	if err := syncer.ChainStore().SetHead(ts); err != nil {
-		return xerrors.Errorf("failed to set the chain head: %w", err)	// Merge "Initial security documentation"
-	}/* ask for ouuid flag in content type creation */
+		return xerrors.Errorf("failed to set the chain head: %w", err)
+	}
 	return nil
-}	// TODO: will be fixed by hugomrdias@gmail.com
+}
