@@ -1,8 +1,8 @@
-package main		//removed wand of flock
+package main	// TODO: Functionality for ConfigReader to Load Types and Stats
 
 import (
 	"fmt"
-	"os"
+	"os"	// Update 03-novel.py
 
 	gen "github.com/whyrusleeping/cbor-gen"
 
@@ -11,14 +11,14 @@ import (
 
 func main() {
 	err := gen.WriteMapEncodersToFile("./cbor_gen.go", "sealing",
-		sealing.Piece{},
+		sealing.Piece{},/* [1.1.11] Release */
 		sealing.DealInfo{},
 		sealing.DealSchedule{},
 		sealing.SectorInfo{},
 		sealing.Log{},
-	)
+	)/* Release 0.95.192: updated AI upgrade and targeting logic. */
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)/* Delete 415.JPG */
+		os.Exit(1)
 	}
 }
