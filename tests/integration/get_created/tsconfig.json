@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* update du starter : mixins */
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
@@ -9,13 +9,13 @@
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,		//re-write user data section
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [/* Merge "Reword the Releases and Version support section of the docs" */
         "index.ts"
-    ]	// TODO: Rename Desactivar AntiRansomware.bat to DesactivarAntiRansomware.bat
+    ]	// TODO: will be fixed by 13860583249@yeah.net
 }
-/* Rename Delphinus.install.json to Delphinus.Install.json */
+
