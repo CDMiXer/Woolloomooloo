@@ -1,1 +1,1 @@
-pulumi>=2.0.0,<3.0.0		//Merge "[Fix] list project fails due to attempt to read folders"
+pulumi>=2.0.0,<3.0.0
