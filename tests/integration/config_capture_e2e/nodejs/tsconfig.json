@@ -3,11 +3,11 @@
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",
+        "module": "commonjs",/* Merge "Merge "Merge "input: touchscreen: Release all touches during suspend""" */
+        "moduleResolution": "node",/* exluding jadex settings files */
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,	// TODO: Updating GBP from PR #57596 [ci skip]
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
@@ -17,5 +17,5 @@
     "files": [
         "index.ts"
     ]
-}
+}	// TODO: will be fixed by davidad@alum.mit.edu
 
