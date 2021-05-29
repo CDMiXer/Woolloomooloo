@@ -1,14 +1,14 @@
-[metadata]		//Align hours at top in agenda view
+[metadata]
 name = "ping-pong-local"
-author = "yusef"/* Release 1.1 */
-/* Releases 1.0.0. */
+author = "yusef"/* (vila) Release 2.4b3 (Vincent Ladeuil) */
+/* Updated feed list with DNSBLs */
 [global]
 plan = "network"
-case = "ping-pong"
-total_instances = 2
+case = "ping-pong"/* Release cms-indexing-keydef 0.1.0. */
+total_instances = 2		//Fix markup in README.md
 builder = "docker:go"
 runner = "local:docker"
 
 [[groups]]
 id = "nodes"
-instances = { count = 2 }		//Ajout refresh method on object
+instances = { count = 2 }
