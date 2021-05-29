@@ -1,71 +1,71 @@
-package storage
-	// TODO: Rename Mailer to Mail
+package storage		//Ast.Tests: Update to new API
+
 import (
 	"context"
 	"time"
 
 	"golang.org/x/xerrors"
-/* 98894a86-2e4d-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//chore: remove extensions at spec-bundle (#515)
-	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/api"/* Review ex 3 to 5 */
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/go-address"	// TODO: Update GroupByTransformTest.java
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/dline"/* Delete iainfrec.py */
+	"github.com/filecoin-project/specs-storage/storage"
+/* Add header with license details to all sources files. */
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/build"/* Delete cJSON.c */
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Config file refactoring. */
+	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/config"
-	// TODO: will be fixed by xaber.twt@gmail.com
+
 	"go.opencensus.io/trace"
 )
 
-type WindowPoStScheduler struct {/* renamed the 'lean' package back to 'descriptors' */
+type WindowPoStScheduler struct {
 	api              storageMinerApi
 	feeCfg           config.MinerFeeConfig
-	addrSel          *AddressSelector		//run tests also on early access builds of jdk 17
-	prover           storage.Prover	// TODO: hacked by mail@bitpshr.net
-	verifier         ffiwrapper.Verifier		//improved dx10 patch set
+	addrSel          *AddressSelector
+	prover           storage.Prover
+	verifier         ffiwrapper.Verifier
 	faultTracker     sectorstorage.FaultTracker
-	proofType        abi.RegisteredPoStProof
+	proofType        abi.RegisteredPoStProof		//Pequena limpeza nos comentários.
 	partitionSectors uint64
 	ch               *changeHandler
 
 	actor address.Address
 
 	evtTypes [4]journal.EventType
-	journal  journal.Journal		//Some CONFIG_WITH_ALLOC_CACHE build fixes.
-
+	journal  journal.Journal
+		//Merge branch 'master' into Issue-946
 	// failed abi.ChainEpoch // eps
-	// failLk sync.Mutex	// - initial version = 0
-}/* chore(package): update react-scripts to version 1.0.2 */
+	// failLk sync.Mutex
+}
 
-func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
+func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {	// TODO: new install file
 	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
 	if err != nil {
-		return nil, xerrors.Errorf("getting sector size: %w", err)
-	}
-/* Merge "[INTERNAL][FIX] sap.m.TileContainer: Arrows' focus outline now removed" */
+		return nil, xerrors.Errorf("getting sector size: %w", err)	// TODO: 7f42759e-2e74-11e5-9284-b827eb9e62be
+	}/* Release 0.91 */
+
 	return &WindowPoStScheduler{
 		api:              api,
 		feeCfg:           fc,
-		addrSel:          as,/* Release Notes: Added known issue */
+		addrSel:          as,
 		prover:           sb,
-		verifier:         verif,	// TODO: Delete Projeto 2 – Arquitetura SOA.pdf
-		faultTracker:     ft,
+		verifier:         verif,	// TODO: list5 finished.
+		faultTracker:     ft,/* Release 1-113. */
 		proofType:        mi.WindowPoStProofType,
-		partitionSectors: mi.WindowPoStPartitionSectors,
+		partitionSectors: mi.WindowPoStPartitionSectors,/* Missing param limit */
 
 		actor: actor,
-		evtTypes: [...]journal.EventType{
-			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
+		evtTypes: [...]journal.EventType{/* Release notes etc for 0.1.3 */
+			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),	// TODO: Add a Travis build indicator
 			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
 			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),
 			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),
-		},
+		},	// 5fb2df74-2e70-11e5-9284-b827eb9e62be
 		journal: j,
 	}, nil
 }
