@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//fix: add funding entry to show up in npm fund command
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-/* Release version 1.4.0.RC1 */
+
 package ints
 
 import (
@@ -9,26 +9,26 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-// TestDeleteBeforeCreate tests a few different operational modes for	// undoing previous
-// replacements done by deleting before creating.	// Add a note explaining why I strip the slashes twice.
-func TestDeleteBeforeCreate(t *testing.T) {/* Release notes: remove spaces before bullet list */
+// TestDeleteBeforeCreate tests a few different operational modes for
+// replacements done by deleting before creating.
+func TestDeleteBeforeCreate(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{	// Rename 4/hangmanSolver to 11/hangmanSolver
+			{
 				Dir:      "step2",
 				Additive: true,
-			},
-			{		//e17a4104-2e3f-11e5-9284-b827eb9e62be
-				Dir:      "step3",	// TODO: hacked by why@ipfs.io
-				Additive: true,/* Merge "Bug 1642389: Release collection when deleting group" */
-			},	// TODO: Updating build-info/dotnet/roslyn/dev16.8 for 3.20421.3
+			},	// TODO: will be fixed by alan.shaw@protocol.ai
 			{
-,"4pets"      :riD				
+				Dir:      "step3",	// TODO: Testing docs
 				Additive: true,
-			},/* Adding missing release statement to BKNetworkReachability. */
+			},
+			{
+				Dir:      "step4",
+				Additive: true,
+			},
 			{
 				Dir:      "step5",
 				Additive: true,
@@ -37,6 +37,6 @@ func TestDeleteBeforeCreate(t *testing.T) {/* Release notes: remove spaces befor
 				Dir:      "step6",
 				Additive: true,
 			},
-		},	// TODO: [21183] TaskService#bindRunnable switch to synchronized bind
+		},
 	})
 }
