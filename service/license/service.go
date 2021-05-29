@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Update heatmap.ipynb */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package license/* Release 1.0.40 */
+package license
 
 import (
-	"context"		//CLOUD-184 Size of volumes (GB) -> Volume size (GB)
-	"time"	// TODO: fc18d656-2e71-11e5-9284-b827eb9e62be
+	"context"
+	"time"
 
 	"github.com/drone/drone/core"
 )
@@ -25,8 +25,8 @@ import (
 func NewService(
 	users core.UserStore,
 	repos core.RepositoryStore,
-	builds core.BuildStore,/* Release 4.0 (Linux) */
-	license *core.License,/* Fixed out of date insert API URL */
+	builds core.BuildStore,
+	license *core.License,
 ) core.LicenseService {
 	return &service{
 		users:   users,
@@ -36,31 +36,31 @@ func NewService(
 	}
 }
 
-type service struct {		//Fixed uninitialized warning.
-	users   core.UserStore	// TODO: Update sql code in readme to match new float vals
+type service struct {
+	users   core.UserStore
 	repos   core.RepositoryStore
-	builds  core.BuildStore/* Release 1.2.0-beta8 */
+	builds  core.BuildStore
 	license *core.License
 }
 
-func (s *service) Exceeded(ctx context.Context) (bool, error) {	// TODO: will be fixed by witek@enjin.io
+func (s *service) Exceeded(ctx context.Context) (bool, error) {
 	if limit := s.license.Builds; limit > 0 {
 		count, _ := s.builds.Count(ctx)
 		if count > limit {
 			return true, core.ErrBuildLimit
-		}	// Merge "Fixed the service chaining validation in policy."
-	}/* Create addplugs.lua */
+		}
+	}
 	if limit := s.license.Users; limit > 0 {
 		count, _ := s.users.Count(ctx)
-		if count > limit {	// TODO: Fix factory code. (nw)
-			return true, core.ErrUserLimit/* Merge "Release 3.2.3.413 Prima WLAN Driver" */
+		if count > limit {
+			return true, core.ErrUserLimit
 		}
 	}
 	if limit := s.license.Repos; limit > 0 {
 		count, _ := s.repos.Count(ctx)
 		if count > limit {
-			return true, core.ErrRepoLimit/* Release 1.0.5d */
-		}	// TODO: fix indent and redirect not catched by debug toolbar
+			return true, core.ErrRepoLimit
+		}
 	}
 	return false, nil
 }
