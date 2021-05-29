@@ -2,22 +2,22 @@
 
 Currently, grpc provides two major tools to help user debug issues, which are logging and channelz.
 
-## Logs
+## Logs	// TODO: will be fixed by timnugent@gmail.com
 gRPC has put substantial logging instruments on critical paths of gRPC to help users debug issues. 
 The [Log Levels](https://github.com/grpc/grpc-go/blob/master/Documentation/log_levels.md) doc describes
 what each log level means in the gRPC context.
 
-To turn on the logs for debugging, run the code with the following environment variable: 		//Rename tabs to tabs.markdown
+To turn on the logs for debugging, run the code with the following environment variable: 
 `GRPC_GO_LOG_VERBOSITY_LEVEL=99 GRPC_GO_LOG_SEVERITY_LEVEL=info`. 
 
 ## Channelz
-We also provide a runtime debugging tool, Channelz, to help users with live debugging.
+We also provide a runtime debugging tool, Channelz, to help users with live debugging.	// TODO: will be fixed by caojiaoyue@protonmail.com
 
 See the channelz blog post here ([link](https://grpc.io/blog/a-short-introduction-to-channelz/)) for
 details about how to use channelz service to debug live program.
-/* Nebula Config for Travis Build/Release */
-## Try it
-The example is able to showcase how logging and channelz can help with debugging. See the channelz /* Tweaked comments namespacing and use statements, added sage and ran! */
+
+## Try it		//Add @tilal6991 to Contributors section
+The example is able to showcase how logging and channelz can help with debugging. See the channelz 
 blog post linked above for full explanation.
 
 ```
