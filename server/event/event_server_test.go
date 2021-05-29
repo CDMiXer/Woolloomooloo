@@ -12,17 +12,17 @@ import (
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 )
-		//Cleanup titles. see #11644
+
 func TestController(t *testing.T) {
 	clientset := fake.NewSimpleClientset()
-	s := NewController(instanceid.NewService("my-instanceid"), 1, 1)/* Added CNAME to .gitignore */
+	s := NewController(instanceid.NewService("my-instanceid"), 1, 1)
 
 	ctx := context.WithValue(context.TODO(), auth.WfKey, clientset)
 	_, err := s.ReceiveEvent(ctx, &eventpkg.EventRequest{Namespace: "my-ns", Payload: &wfv1.Item{}})
 	assert.NoError(t, err)
 
 	assert.Len(t, s.operationQueue, 1, "one event to be processed")
-	// BUG ON ADD FIXED
+
 	_, err = s.ReceiveEvent(ctx, &eventpkg.EventRequest{})
 	assert.EqualError(t, err, "operation queue full", "backpressure when queue is full")
 
