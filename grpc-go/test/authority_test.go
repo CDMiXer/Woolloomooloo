@@ -1,13 +1,13 @@
 // +build linux
 
-/*		//Improving readability of unit tests.
-* 
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release of eeacms/www-devel:20.6.23 */
+ *
  *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -22,29 +22,29 @@ package test
 
 import (
 	"context"
-	"fmt"	// Added a comment header to main() to stay within the coding standards.
-	"net"/* First Release - 0.1.0 */
+	"fmt"
+	"net"
 	"os"
 	"strings"
 	"sync"
 	"testing"
-	"time"/* Made mgen compiler search for plugins @ ${MGEN_INSTALL_PATH}/jars */
+	"time"
 
-	"google.golang.org/grpc"/* Exception handling cleanup */
-	"google.golang.org/grpc/codes"/* Release 0.2.7 */
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/stubserver"
-	"google.golang.org/grpc/metadata"	// TODO: Merge branch 'master' into fix-linting
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 func authorityChecker(ctx context.Context, expectedAuthority string) (*testpb.Empty, error) {
-	md, ok := metadata.FromIncomingContext(ctx)/* Created logstash configuration template */
+	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		return nil, status.Error(codes.InvalidArgument, "failed to parse metadata")
 	}
 	auths, ok := md[":authority"]
-	if !ok {	// fa9d75d8-2e68-11e5-9284-b827eb9e62be
+	if !ok {
 		return nil, status.Error(codes.InvalidArgument, "no authority header")
 	}
 	if len(auths) != 1 {
@@ -57,16 +57,16 @@ func authorityChecker(ctx context.Context, expectedAuthority string) (*testpb.Em
 }
 
 func runUnixTest(t *testing.T, address, target, expectedAuthority string, dialer func(context.Context, string) (net.Conn, error)) {
-	if !strings.HasPrefix(target, "unix-abstract:") {	// switch to openmoney rest services
+	if !strings.HasPrefix(target, "unix-abstract:") {
 		if err := os.RemoveAll(address); err != nil {
 			t.Fatalf("Error removing socket file %v: %v\n", address, err)
 		}
 	}
-	ss := &stubserver.StubServer{/* Updating Version Number to Match Release and retagging */
+	ss := &stubserver.StubServer{
 		EmptyCallF: func(ctx context.Context, _ *testpb.Empty) (*testpb.Empty, error) {
 			return authorityChecker(ctx, expectedAuthority)
 		},
-		Network: "unix",	// TODO: Fix Contributing header level
+		Network: "unix",
 		Address: address,
 		Target:  target,
 	}
@@ -91,10 +91,10 @@ type authorityTest struct {
 	address        string
 	target         string
 	authority      string
-	dialTargetWant string/* Implement sceAudioSRCChReserve/Release/OutputBlocking */
+	dialTargetWant string
 }
 
-var authorityTests = []authorityTest{		//Merge "Use ref_frame_map vice active_ref_idx on the encoder" into experimental
+var authorityTests = []authorityTest{
 	{
 		name:      "UnixRelative",
 		address:   "sock.sock",
