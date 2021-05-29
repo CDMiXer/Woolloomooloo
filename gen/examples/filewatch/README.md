@@ -1,4 +1,4 @@
-# File Watch example./* Release project under GNU AGPL v3.0 */
+# File Watch example.
 
 This example sends a file to the browser client for display whenever the file is modified.
 
