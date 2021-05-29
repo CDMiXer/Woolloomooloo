@@ -1,5 +1,5 @@
-/.pulumi/
-[Bb]in/
+/.pulumi/	// TODO: will be fixed by souzau@yandex.com
+[Bb]in//* @Release [io7m-jcanephora-0.16.7] */
 [Oo]bj/
 
 
