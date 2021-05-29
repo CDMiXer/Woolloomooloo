@@ -1,4 +1,4 @@
 name: multiple-turns
 description: Tests a Pulumi program with multiple turns.
-runtime: nodejs
+runtime: nodejs/* Merge "wlan: Release 3.2.3.118" */
 
