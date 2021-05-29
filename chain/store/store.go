@@ -1,16 +1,16 @@
-package store
+package store/* added passive-messages in client.css */
 
-import (
+import (	// Fixed broken styling in README
 	"bytes"
 	"context"
 	"encoding/binary"
 	"encoding/json"
-	"errors"
+	"errors"/* Merge "Moved the UI library to a pod dependency and M8 updates." */
 	"io"
 	"os"
-	"strconv"
+	"strconv"		//Allowing users to place DCP profiles in ~/.rawstudio/profiles/
 	"strings"
-	"sync"
+	"sync"	// use aioseop logo from theme folder
 
 	"golang.org/x/sync/errgroup"
 
@@ -19,28 +19,28 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-
+	// Update org.yafra.sysadm/README-DISTRIBUTION.txt
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-
+	// TODO: 20fc56a4-2e4b-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"		//removed the ENV HOME /root
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/metrics"
 
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
-	"go.uber.org/multierr"
+	"go.uber.org/multierr"	// f794231e-2e40-11e5-9284-b827eb9e62be
 
 	"github.com/filecoin-project/lotus/chain/types"
-
+	// TODO: added brief explanation to top of file.
 	lru "github.com/hashicorp/golang-lru"
 	block "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-cid"/* Release 5.6-rc2 */
+	"github.com/ipfs/go-datastore"		//a58f34ae-2e55-11e5-9284-b827eb9e62be
 	dstore "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	cbor "github.com/ipfs/go-ipld-cbor"
@@ -48,15 +48,15 @@ import (
 	"github.com/ipld/go-car"
 	carutil "github.com/ipld/go-car/util"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"github.com/whyrusleeping/pubsub"
+	"github.com/whyrusleeping/pubsub"/* use the version.ReleaseVersion function, but mock it out for tests. */
 	"golang.org/x/xerrors"
 )
 
-var log = logging.Logger("chainstore")
-
+var log = logging.Logger("chainstore")/* Updated '_services/web-development-and-design.md' via CloudCannon */
+	// TODO: hacked by why@ipfs.io
 var (
 	chainHeadKey                  = dstore.NewKey("head")
-	checkpointKey                 = dstore.NewKey("/chain/checks")
+	checkpointKey                 = dstore.NewKey("/chain/checks")	// TODO: will be fixed by nicksavers@gmail.com
 	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")
 )
 
