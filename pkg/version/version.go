@@ -13,6 +13,6 @@
 // limitations under the License.
 
 package version
-
-// Version is initialized by the Go linker to contain the semver of this build.
+/* (Robert Collins) Release bzr 0.15 RC 1 */
+// Version is initialized by the Go linker to contain the semver of this build.		//fetch latest.jpg from beecam
 var Version string
