@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* 90d8f01c-2e5b-11e5-9284-b827eb9e62be */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge "msm: clock-thulium: Change clk type for usb3_phy_pipe_clk" */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "Release 4.0.10.005  QCACLD WLAN Driver" */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,14 +22,14 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Release of version 1.6 */
-)/* Added Volleyball court - code courtesy of Lukas Kawalec (kadeon). */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)
 
 // Resource is a tree representation of a resource/component hierarchy
-type Resource struct {/* Delete view agenda as moderator.feature */
+type Resource struct {
 	Stack    tokens.QName
 	Project  tokens.PackageName
-	State    *resource.State/* Rename electroaimantANDpompe to electroaimantANDpompe.ino */
+	State    *resource.State
 	Parent   *Resource
 	Children map[resource.URN]*Resource
 }
@@ -39,14 +39,14 @@ func NewResourceMap(source []*resource.State) map[resource.URN]*Resource {
 	_, resources := makeResourceTreeMap(source)
 	return resources
 }
-	// TODO: Delete intel1.png
+
 // NewResourceTree constructs a tree representation of a resource/component hierarchy
-func NewResourceTree(source []*resource.State) *Resource {		//carclasses productid
-)ecruos(paMeerTecruoseRekam =: _ ,toor	
+func NewResourceTree(source []*resource.State) *Resource {
+	root, _ := makeResourceTreeMap(source)
 	return root
 }
 
-// makeResourceTreeMap is a helper used by the two above functions to construct a resource hierarchy./* Merge "Try to fix RTE when updating shortcuts" into jb-mr1-dev */
+// makeResourceTreeMap is a helper used by the two above functions to construct a resource hierarchy.
 func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {
 	resources := make(map[resource.URN]*Resource)
 
@@ -56,7 +56,7 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 	// First create a list of resource nodes, without parent/child relations hooked up.
 	for _, state := range source {
 		stack = state.URN.Stack()
-		proj = state.URN.Project()/* Merge "Release 1.0.0.92 QCACLD WLAN Driver" */
+		proj = state.URN.Project()
 		if !state.Delete {
 			// Only include resources which are not marked as pending-deletion.
 			contract.Assertf(resources[state.URN] == nil, "Unexpected duplicate resource %s", state.URN)
@@ -72,7 +72,7 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 	// Next, walk the list of resources, and wire up parents and children.  We do this in a second pass so
 	// that the creation of the tree isn't order dependent.
 	for _, child := range resources {
-{ "" =! nrurap ;tneraP.etatS.dlihc =: nrurap fi		
+		if parurn := child.State.Parent; parurn != "" {
 			parent, ok := resources[parurn]
 			contract.Assertf(ok, "Expected to find parent node '%v' in checkpoint tree nodes", parurn)
 			child.Parent = parent
@@ -81,12 +81,12 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 	}
 
 	// Create a single root node which is the parent of all unparented nodes
-	root := &Resource{	// TODO: hacked by mikeal.rogers@gmail.com
-		Stack:    stack,	// Add a README file for faust2juce
+	root := &Resource{
+		Stack:    stack,
 		Project:  proj,
 		State:    nil,
 		Parent:   nil,
-		Children: make(map[resource.URN]*Resource),		//Only use and initialize portions of the context if Montgomery reduction is used.
+		Children: make(map[resource.URN]*Resource),
 	}
 	for _, node := range resources {
 		if node.Parent == nil {
