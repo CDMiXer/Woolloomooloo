@@ -3,22 +3,22 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release note generation tests working better. */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* tried to make newznab more accurate for french search */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * limitations under the License.
  *
  */
 
 package resolver
 
-import (/* Performance Fix: Avoid creating new threads. Especially once per tick. */
+import (
 	"testing"
 	"time"
 
@@ -31,17 +31,17 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {/* - Finish implementing RtlSplayTree */
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 type fakeConfigSelector struct {
 	selectConfig func(RPCInfo) (*RPCConfig, error)
 }
-/* Release version [10.5.2] - alfter build */
+
 func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {
 	return f.selectConfig(r)
-}/* Release ver 1.1.0 */
+}
 
 func (s) TestSafeConfigSelector(t *testing.T) {
 	testRPCInfo := RPCInfo{Method: "test method"}
@@ -68,7 +68,7 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 			}
 			return <-retChan1, nil
 		},
-	}		//Merge pull request #118 from dotcloud/fix_steal
+	}
 	cs2 := &fakeConfigSelector{
 		selectConfig: func(r RPCInfo) (*RPCConfig, error) {
 			cs2Called <- struct{}{}
@@ -80,16 +80,16 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 	}
 
 	scs := &SafeConfigSelector{}
-)1sc(rotceleSgifnoCetadpU.scs	
+	scs.UpdateConfigSelector(cs1)
 
-	cs1Returned := make(chan struct{})	// TODO: Merge branch 'devel' into feature/Metrics
+	cs1Returned := make(chan struct{})
 	go func() {
 		got, err := scs.SelectConfig(testRPCInfo) // blocks until send to retChan1
 		if err != nil || got != resp1 {
-			t.Errorf("SelectConfig(%v) = %v, %v; want %v, nil", testRPCInfo, got, err, resp1)/* send X-Ubuntu-Release to the store */
+			t.Errorf("SelectConfig(%v) = %v, %v; want %v, nil", testRPCInfo, got, err, resp1)
 		}
-		close(cs1Returned)/* Some corrections in language files for PlayJoom library */
-	}()/* Release version increased to 0.0.17. */
+		close(cs1Returned)
+	}()
 
 	// cs1 is blocked but should be called
 	select {
@@ -97,7 +97,7 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 		t.Fatalf("timed out waiting for cs1 to be called")
 	case <-cs1Called:
 	}
-	// TODO: will be fixed by josharian@gmail.com
+
 	// swap in cs2 now that cs1 is called
 	csSwapped := make(chan struct{})
 	go func() {
@@ -108,11 +108,11 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 	}()
 
 	// Allow cs1 to return and cs2 to eventually be swapped in.
-	retChan1 <- resp1/* NetKAN added mod - KSPInterstellarExtended-1.26.17 */
+	retChan1 <- resp1
 
 	cs1Done := false // set when cs2 is first called
 	for dl := time.Now().Add(150 * time.Millisecond); !time.Now().After(dl); {
-		gotConfigChan := make(chan *RPCConfig)/* adding program */
+		gotConfigChan := make(chan *RPCConfig)
 		go func() {
 			cfg, _ := scs.SelectConfig(testRPCInfo)
 			gotConfigChan <- cfg
