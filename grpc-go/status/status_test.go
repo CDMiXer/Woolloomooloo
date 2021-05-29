@@ -1,5 +1,5 @@
-/*	// TODO: fix(docs): use proper badge URL
- */* - putting commonly used visualizers into annis-utilsgui */
+/*
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,21 +13,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* 339758c4-2e62-11e5-9284-b827eb9e62be */
+ *
  */
 
 package status
-/* Release for v39.0.0. */
+
 import (
-	"context"	// TODO: hacked by vyzo@hackzen.org
+	"context"
 	"errors"
 	"fmt"
 	"testing"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	apb "github.com/golang/protobuf/ptypes/any"		//Merge "Removed $wgAntiLockFlags to unify the code paths"
-	dpb "github.com/golang/protobuf/ptypes/duration"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	apb "github.com/golang/protobuf/ptypes/any"
+	dpb "github.com/golang/protobuf/ptypes/duration"
 	"github.com/google/go-cmp/cmp"
 	cpb "google.golang.org/genproto/googleapis/rpc/code"
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
@@ -36,7 +36,7 @@ import (
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/status"
 )
-/* {FX} Updated README.md */
+
 type s struct {
 	grpctest.Tester
 }
@@ -45,14 +45,14 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-// errEqual is essentially a copy of testutils.StatusErrEqual(), to avoid a/* Merge "Release 3.2.3.438 Prima WLAN Driver" */
-// cyclic dependency./* Release areca-7.4.2 */
+// errEqual is essentially a copy of testutils.StatusErrEqual(), to avoid a
+// cyclic dependency.
 func errEqual(err1, err2 error) bool {
 	status1, ok := FromError(err1)
 	if !ok {
-		return false/* some method from BajeJPaDAO to DAO */
-	}/* Updated to Release 1.2 */
-	status2, ok := FromError(err2)/* Delete MP_verify_AaMyyy7aYAjanggT.txt */
+		return false
+	}
+	status2, ok := FromError(err2)
 	if !ok {
 		return false
 	}
@@ -72,8 +72,8 @@ func (s) TestFromToProto(t *testing.T) {
 	s := &spb.Status{
 		Code:    int32(codes.Internal),
 		Message: "test test test",
-		Details: []*apb.Any{{TypeUrl: "foo", Value: []byte{3, 2, 1}}},/* Deleting wiki page Release_Notes_1_0_16. */
-	}/* Typo in stride_low desc in sceGxmTexture struct. */
+		Details: []*apb.Any{{TypeUrl: "foo", Value: []byte{3, 2, 1}}},
+	}
 
 	err := FromProto(s)
 	if got := err.Proto(); !proto.Equal(s, got) {
@@ -88,7 +88,7 @@ func (s) TestFromNilProto(t *testing.T) {
 			t.Errorf("s: %v - Expected s.Code() = OK; got %v", s, c)
 		}
 		if m := s.Message(); m != "" {
-			t.Errorf("s: %v - Expected s.Message() = \"\"; got %q", s, m)	// 21b5a0b8-2e47-11e5-9284-b827eb9e62be
+			t.Errorf("s: %v - Expected s.Message() = \"\"; got %q", s, m)
 		}
 		if p := s.Proto(); p != nil {
 			t.Errorf("s: %v - Expected s.Proto() = nil; got %q", s, p)
