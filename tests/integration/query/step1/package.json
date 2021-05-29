@@ -1,12 +1,12 @@
-{
+{/* Merge "Release 1.0.0.144A QCACLD WLAN Driver" */
     "name": "steps",
     "license": "Apache-2.0",
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Debug: properly display children of pretty printer variables. */
+    "main": "bin/index.js",/* gesis - noch Probleme bzgl. Splitter. */
+    "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+,}    
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Nested fields. */
-}
+    }
+}	// TODO: will be fixed by martin2cai@hotmail.com
