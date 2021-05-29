@@ -1,5 +1,5 @@
-{/* Release LastaFlute-0.7.1 */
+{
     "s3-no-public-read": {
         "enforcementLevel": "mandatory"
     }
-}		//Version 0.6.6
+}
