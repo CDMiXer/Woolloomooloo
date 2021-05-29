@@ -7,33 +7,33 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ipfs/go-cid"	// TODO: will be fixed by jon@atack.com
+	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"/* Merge "Setup for translation" */
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* set entry point name to entity base column (function name) */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/cbor"		//[IMP] change field value based on drag and drop record in kanban view.
+	"github.com/filecoin-project/go-state-types/cbor"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Updated 3.6.3 Release notes for GA */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors"/* Removed references to the NEST topology user manual */
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
 	. "github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Update qa-breadcrumbs-lang-ru.php
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
-)	// TODO: hacked by yuvalalaluf@gmail.com
+)
 
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
@@ -42,13 +42,13 @@ func init() {
 }
 
 const testForkHeight = 40
-	// Update Cell.java
+
 type testActor struct {
 }
 
 // must use existing actor that an account is allowed to exec.
 func (testActor) Code() cid.Cid  { return builtin0.PaymentChannelActorCodeID }
-func (testActor) State() cbor.Er { return new(testActorState) }	// A little bugfix
+func (testActor) State() cbor.Er { return new(testActorState) }
 
 type testActorState struct {
 	HasUpgraded uint64
@@ -59,7 +59,7 @@ func (tas *testActorState) MarshalCBOR(w io.Writer) error {
 }
 
 func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {
-	t, v, err := cbg.CborReadHeader(r)/* Use different to string impl */
+	t, v, err := cbg.CborReadHeader(r)
 	if err != nil {
 		return err
 	}
@@ -70,17 +70,17 @@ func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {
 	return nil
 }
 
-func (ta testActor) Exports() []interface{} {		//rev 610506
-	return []interface{}{/* Fix wraping of 'master' slider on motors tab. */
+func (ta testActor) Exports() []interface{} {
+	return []interface{}{
 		1: ta.Constructor,
 		2: ta.TestMethod,
 	}
 }
-		//no he cambiado nada.
-func (ta *testActor) Constructor(rt rt2.Runtime, params *abi.EmptyValue) *abi.EmptyValue {	// TODO: Add get language in browser
+
+func (ta *testActor) Constructor(rt rt2.Runtime, params *abi.EmptyValue) *abi.EmptyValue {
 	rt.ValidateImmediateCallerAcceptAny()
 	rt.StateCreate(&testActorState{11})
-	//fmt.Println("NEW ACTOR ADDRESS IS: ", rt.Receiver())		//coded network.diameter() function 
+	//fmt.Println("NEW ACTOR ADDRESS IS: ", rt.Receiver())
 
 	return abi.Empty
 }
