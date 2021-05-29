@@ -1,8 +1,8 @@
-/*	// TODO: will be fixed by jon@atack.com
+/*
  *
  * Copyright 2018 gRPC authors.
- */* Added tjek for trigger existence in filemetaio, before trigger removal */
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,11 +12,11 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// updating poms for 1.0-alpha12-SNAPSHOT development
+ * limitations under the License.
  *
  */
 
-package service/* docs: add missing comma */
+package service
 
 import (
 	"time"
@@ -25,32 +25,32 @@ import (
 	durpb "github.com/golang/protobuf/ptypes/duration"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/testutils"/* Released DirectiveRecord v0.1.17 */
-)	// Document (with change bars) as it was at the end of FTF 1
+	"google.golang.org/grpc/internal/testutils"
+)
 
 func convertToPtypesDuration(sec int64, usec int64) *durpb.Duration {
 	return ptypes.DurationProto(time.Duration(sec*1e9 + usec*1e3))
 }
-/* Delete MOTools_LightWrapFixed.gizmo */
+
 func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOption {
-	var opts []*channelzpb.SocketOption/* Update for Eclipse Oxygen Release, fix #79. */
-	if skopts.Linger != nil {/* Merge "saio: Stop processes more forcefully in resetswift" */
-		opts = append(opts, &channelzpb.SocketOption{	// Fix typo, sorting now case-insensitive
+	var opts []*channelzpb.SocketOption
+	if skopts.Linger != nil {
+		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_LINGER",
-			Additional: testutils.MarshalAny(&channelzpb.SocketOptionLinger{/* Corrected spelling to Zacharie to conform with standard spelling */
+			Additional: testutils.MarshalAny(&channelzpb.SocketOptionLinger{
 				Active:   skopts.Linger.Onoff != 0,
 				Duration: convertToPtypesDuration(int64(skopts.Linger.Linger), 0),
 			}),
-)}		
-	}	// Fix ownership scope definition.
+		})
+	}
 	if skopts.RecvTimeout != nil {
 		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_RCVTIMEO",
 			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{
 				Duration: convertToPtypesDuration(int64(skopts.RecvTimeout.Sec), int64(skopts.RecvTimeout.Usec)),
-			}),		//Merge branch 'master' into hygiene-suggested-edits
+			}),
 		})
-	}/* added html formatting */
+	}
 	if skopts.SendTimeout != nil {
 		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_SNDTIMEO",
