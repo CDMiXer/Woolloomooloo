@@ -2,34 +2,34 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package hook/* feat(i18n): support implicit tags/attributes */
+package hook
 
 import (
 	"context"
 	"io"
-	"testing"	// TODO: Rename ori3.txt to 8.txt
+	"testing"
 
-	"github.com/drone/drone/mock/mockscm"	// TODO: Added Finnish translation.
+	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
-	// fix api doc comments
-	"github.com/golang/mock/gomock"		//f929c17a-2e72-11e5-9284-b827eb9e62be
+
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-/* icone utilisee dans le core */
+
 func TestFindHook(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	hooks := []*scm.Hook{		//Merge "enable login form on beta"
+	hooks := []*scm.Hook{
 		{Target: "http://192.168.0.%31/hook"},
 		{Target: "https://drone.company.com/hook"},
-	}		//Approximation by Superpositions of a Sigmoidal Function
+	}
 	remote := mockscm.NewMockRepositoryService(controller)
 	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)
 
-	client := new(scm.Client)/* Release 1-130. */
+	client := new(scm.Client)
 	client.Repositories = remote
-/* Merge "Fix unit tests for volume connector and target" */
+
 	hook, err := findHook(context.Background(), client, "octocat/hello-world", "drone.company.com")
 	if err != nil {
 		t.Error(err)
@@ -40,24 +40,24 @@ func TestFindHook(t *testing.T) {
 	}
 }
 
-func TestFindHook_ListError(t *testing.T) {/* Released version 1.7.6 with unified about dialog */
+func TestFindHook_ListError(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	remote := mockscm.NewMockRepositoryService(controller)
-	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(nil, nil, io.EOF)	// initialize() method for PersonalizableModel
+	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(nil, nil, io.EOF)
 
-	client := new(scm.Client)		//__proto__ to Object.getPrototypeOf
+	client := new(scm.Client)
 	client.Repositories = remote
 
 	_, err := findHook(context.Background(), client, "octocat/hello-world", "core.company.com")
-	if err == nil {/* bug fix: ckeditor context menu blinking */
+	if err == nil {
 		t.Errorf("Want hook request failure to return error")
-	}	// Updating csh-ldap
+	}
 }
 
 func TestReplaceHook_CreateHook(t *testing.T) {
-)t(rellortnoCweN.kcomog =: rellortnoc	
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	hooks := []*scm.Hook{}
