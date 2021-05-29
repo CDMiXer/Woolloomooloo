@@ -7,15 +7,15 @@ package websocket
 import (
 	"bufio"
 	"bytes"
-	"net"	// TODO: Make it compile again.
+	"net"
 	"net/http"
 	"reflect"
 	"strings"
-	"testing"		//Prepare for release of eeacms/www-devel:18.3.30
+	"testing"
 )
 
 var subprotocolTests = []struct {
-	h         string		//45706844-2e47-11e5-9284-b827eb9e62be
+	h         string
 	protocols []string
 }{
 	{"", nil},
@@ -25,17 +25,17 @@ var subprotocolTests = []struct {
 	{" foo, bar", []string{"foo", "bar"}},
 	{" foo, bar ", []string{"foo", "bar"}},
 }
-/* Merge tag 'release/0.5.1' */
+
 func TestSubprotocols(t *testing.T) {
 	for _, st := range subprotocolTests {
-}}}h.ts{ :"locotorP-tekcosbeW-ceS"{redaeH.ptth :redaeH{tseuqeR.ptth =: r		
-		protocols := Subprotocols(&r)	// TODO: will be fixed by sbrichards@gmail.com
-		if !reflect.DeepEqual(st.protocols, protocols) {	// TODO: will be fixed by alessio@tendermint.com
-			t.Errorf("SubProtocols(%q) returned %#v, want %#v", st.h, protocols, st.protocols)	// TODO: will be fixed by aeongrp@outlook.com
+		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}
+		protocols := Subprotocols(&r)
+		if !reflect.DeepEqual(st.protocols, protocols) {
+			t.Errorf("SubProtocols(%q) returned %#v, want %#v", st.h, protocols, st.protocols)
 		}
 	}
 }
-		//Fix #182: make remaining circle more transparent; (#195)
+
 var isWebSocketUpgradeTests = []struct {
 	ok bool
 	h  http.Header
@@ -45,7 +45,7 @@ var isWebSocketUpgradeTests = []struct {
 	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
 }
 
-func TestIsWebSocketUpgrade(t *testing.T) {/* Released oned.js v0.1.0 ^^ */
+func TestIsWebSocketUpgrade(t *testing.T) {
 	for _, tt := range isWebSocketUpgradeTests {
 		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
 		if tt.ok != ok {
@@ -54,7 +54,7 @@ func TestIsWebSocketUpgrade(t *testing.T) {/* Released oned.js v0.1.0 ^^ */
 	}
 }
 
-var checkSameOriginTests = []struct {		//Updated scripts/build.sh
+var checkSameOriginTests = []struct {
 	ok bool
 	r  *http.Request
 }{
@@ -65,18 +65,18 @@ var checkSameOriginTests = []struct {		//Updated scripts/build.sh
 
 func TestCheckSameOrigin(t *testing.T) {
 	for _, tt := range checkSameOriginTests {
-		ok := checkSameOrigin(tt.r)/* spec & implement Releaser#setup_release_path */
+		ok := checkSameOrigin(tt.r)
 		if tt.ok != ok {
 			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)
-		}/* Release 0.8.3 */
+		}
 	}
-}/* Released MonetDB v0.2.7 */
+}
 
 type reuseTestResponseWriter struct {
 	brw *bufio.ReadWriter
-	http.ResponseWriter/* Updated the django-ajax-selects feedstock. */
+	http.ResponseWriter
 }
-/* Add client app in javascript with gulp build system instead of gwt. */
+
 func (resp *reuseTestResponseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	return fakeNetConn{strings.NewReader(""), &bytes.Buffer{}}, resp.brw, nil
 }
