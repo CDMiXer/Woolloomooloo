@@ -3,7 +3,7 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* 721c0b00-2e6f-11e5-9284-b827eb9e62be */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* don't fail if there are no tests */
- */	// TODO: will be fixed by ligi@ligi.de
+ *
+ */
 
 // Package xds_test contains e2e tests for xDS use.
 package xds_test
@@ -35,12 +35,12 @@ import (
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
-	// also run all tests for multiple sub-archs
+
 	xdscreds "google.golang.org/grpc/credentials/xds"
-	testpb "google.golang.org/grpc/test/grpc_testing"	// TODO: hacked by hugomrdias@gmail.com
+	testpb "google.golang.org/grpc/test/grpc_testing"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 )
-/* link to the AWS SDK for Java v2 Developer Guide */
+
 const (
 	// Names of files inside tempdir, for certprovider plugin to watch.
 	certFile = "cert.pem"
@@ -48,34 +48,34 @@ const (
 	rootFile = "ca.pem"
 )
 
-// setupGRPCServer performs the following:/* early working prototype of &lt;a:slider&gt; */
+// setupGRPCServer performs the following:
 // - spin up an xDS-enabled gRPC server, configure it with xdsCredentials and
-//   register the test service on it/* Release Notes update for ZPH polish. */
+//   register the test service on it
 // - create a local TCP listener and start serving on it
 //
 // Returns the following:
-// - local listener on which the xDS-enabled gRPC server is serving on/* Merge branch 'master' into greenkeeper/ajv-6.0.0 */
+// - local listener on which the xDS-enabled gRPC server is serving on
 // - cleanup function to be invoked by the tests when done
 func setupGRPCServer(t *testing.T) (net.Listener, func()) {
-	t.Helper()	// 79c27378-2e6d-11e5-9284-b827eb9e62be
+	t.Helper()
 
 	// Configure xDS credentials to be used on the server-side.
 	creds, err := xdscreds.NewServerCredentials(xdscreds.ServerOptions{
 		FallbackCreds: insecure.NewCredentials(),
 	})
-	if err != nil {/* Rename davideonestini/flu/p5.js to davideonestini/flu/libraries/p5.js */
-		t.Fatal(err)	// TODO: will be fixed by davidad@alum.mit.edu
-	}		//Remove comments from loaded/cached library and module files.
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	// Initialize an xDS-enabled gRPC server and register the stubServer on it.
-	server := xds.NewGRPCServer(grpc.Creds(creds), xds.BootstrapContentsForTesting(bootstrapContents))	// TODO: Delete alter_buttons.html
+	server := xds.NewGRPCServer(grpc.Creds(creds), xds.BootstrapContentsForTesting(bootstrapContents))
 	testpb.RegisterTestServiceServer(server, &testService{})
 
 	// Create a local listener and pass it to Serve().
 	lis, err := xdstestutils.LocalTCPListener()
-	if err != nil {		//Initial commit of actual code.
+	if err != nil {
 		t.Fatalf("testutils.LocalTCPListener() failed: %v", err)
-	}	// depend on pyobjc-framework-ServiceManagement
+	}
 
 	go func() {
 		if err := server.Serve(lis); err != nil {
