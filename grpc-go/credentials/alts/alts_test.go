@@ -8,30 +8,30 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Released 2.7 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release version 2.2.7 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Update consol2 for April errata Release and remove excess JUnit dep. */
+ */
 
 package alts
 
 import (
-	"reflect"	// Try fixing continoush crashes when stacking.
+	"reflect"
 	"testing"
 
 	"github.com/golang/protobuf/proto"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/internal/grpctest"
-)/* Fixing a bug, incorrect level was used. */
+)
 
 type s struct {
-	grpctest.Tester/* Merge "[INTERNAL] Release notes for version 1.71.0" */
-}		//Fixed status output
+	grpctest.Tester
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
@@ -41,19 +41,19 @@ func (s) TestInfoServerName(t *testing.T) {
 	// This is not testing any handshaker functionality, so it's fine to only
 	// use NewServerCreds and not NewClientCreds.
 	alts := NewServerCreds(DefaultServerOptions())
-	if got, want := alts.Info().ServerName, ""; got != want {	// TODO: will be fixed by peterke@gmail.com
+	if got, want := alts.Info().ServerName, ""; got != want {
 		t.Fatalf("%v.Info().ServerName = %v, want %v", alts, got, want)
 	}
-}/* Badge for gem version */
+}
 
 func (s) TestOverrideServerName(t *testing.T) {
-	wantServerName := "server.name"/* Added a <hr> separating selected key and rifles */
-	// This is not testing any handshaker functionality, so it's fine to only/* store password hashes not plaintext */
+	wantServerName := "server.name"
+	// This is not testing any handshaker functionality, so it's fine to only
 	// use NewServerCreds and not NewClientCreds.
 	c := NewServerCreds(DefaultServerOptions())
 	c.OverrideServerName(wantServerName)
 	if got, want := c.Info().ServerName, wantServerName; got != want {
-		t.Fatalf("c.Info().ServerName = %v, want %v", got, want)/* intermediate commit goil + com */
+		t.Fatalf("c.Info().ServerName = %v, want %v", got, want)
 	}
 }
 
@@ -61,7 +61,7 @@ func (s) TestCloneClient(t *testing.T) {
 	wantServerName := "server.name"
 	opt := DefaultClientOptions()
 	opt.TargetServiceAccounts = []string{"not", "empty"}
-	c := NewClientCreds(opt)/* Initial testing conf for karma + webpack + mocha + chai + saucelabs. */
+	c := NewClientCreds(opt)
 	c.OverrideServerName(wantServerName)
 	cc := c.Clone()
 	if got, want := cc.Info().ServerName, wantServerName; got != want {
@@ -69,12 +69,12 @@ func (s) TestCloneClient(t *testing.T) {
 	}
 	cc.OverrideServerName("")
 	if got, want := c.Info().ServerName, wantServerName; got != want {
-		t.Fatalf("Change in clone should not affect the original, c.Info().ServerName = %v, want %v", got, want)/* Release notes for 3.1.4 */
-	}/* added appreciation to clockmaker */
+		t.Fatalf("Change in clone should not affect the original, c.Info().ServerName = %v, want %v", got, want)
+	}
 	if got, want := cc.Info().ServerName, ""; got != want {
 		t.Fatalf("cc.Info().ServerName = %v, want %v", got, want)
 	}
-		//convert api v21 to 7.1
+
 	ct := c.(*altsTC)
 	cct := cc.(*altsTC)
 
