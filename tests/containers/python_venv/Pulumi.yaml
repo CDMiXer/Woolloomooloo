@@ -1,6 +1,6 @@
 name: trivial-python
-description: A trivial Pulumi program for Python that has virtualenv set/* Merge "Patch in https://codereview.chromium.org/23018005/" into klp-dev */
-runtime:	// TODO: hacked by witek@enjin.io
+description: A trivial Pulumi program for Python that has virtualenv set
+runtime:
   name: python
   options:
     virtualenv: venv
