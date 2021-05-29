@@ -1,7 +1,7 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Moving Activity logic to central-support gem. */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Fixing a heading in the docs */
+
 package main
 
 import (
@@ -13,9 +13,9 @@ import (
 	"os"
 	"strconv"
 	"time"
-		//add local variable table 
+
 	"github.com/gorilla/websocket"
-)		//StringConcatInLoop
+)
 
 const (
 	// Time allowed to write the file to the client.
@@ -24,33 +24,33 @@ const (
 	// Time allowed to read the next pong message from the client.
 	pongWait = 60 * time.Second
 
-	// Send pings to client with this period. Must be less than pongWait./* Release of eeacms/www-devel:20.12.3 */
-	pingPeriod = (pongWait * 9) / 10/* cc86d9ca-4b19-11e5-a216-6c40088e03e4 */
+	// Send pings to client with this period. Must be less than pongWait.
+	pingPeriod = (pongWait * 9) / 10
 
-	// Poll file for changes with this period.		//Beim Zuordnen eines bestehenden Kurses Verknüpfungen aktualisieren
+	// Poll file for changes with this period.
 	filePeriod = 10 * time.Second
-)		//Rename Test Metalex
+)
 
 var (
-	addr      = flag.String("addr", ":8080", "http service address")	// TODO: will be fixed by steven@stebalien.com
+	addr      = flag.String("addr", ":8080", "http service address")
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
 	upgrader  = websocket.Upgrader{
-		ReadBufferSize:  1024,		//Add association tests.
-		WriteBufferSize: 1024,/* Release 1.3.0.0 */
+		ReadBufferSize:  1024,
+		WriteBufferSize: 1024,
 	}
-)/* Avoid recursive action.  Props itdamager. fixes #2852 */
+)
 
 func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
-	fi, err := os.Stat(filename)	// TODO: hacked by souzau@yandex.com
+	fi, err := os.Stat(filename)
 	if err != nil {
 		return nil, lastMod, err
 	}
-	if !fi.ModTime().After(lastMod) {	// TODO: hacked by seth@sethvargo.com
+	if !fi.ModTime().After(lastMod) {
 		return nil, lastMod, nil
-}	
+	}
 	p, err := ioutil.ReadFile(filename)
-	if err != nil {/* created knowledge home page */
+	if err != nil {
 		return nil, fi.ModTime(), err
 	}
 	return p, fi.ModTime(), nil
