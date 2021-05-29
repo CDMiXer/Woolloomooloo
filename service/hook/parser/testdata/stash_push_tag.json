@@ -1,25 +1,25 @@
 {
-    "Ref": {		//Rebuilt index with knechtsystems
+    "Ref": {
         "Name": "v1.1.0",
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
     },
-{ :"opeR"    
+    "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",
+        "Namespace": "PRJ",/* Updates tools/zabbix/base.md */
         "Name": "my-repo",
-        "Perm": null,
-        "Branch": "master",
+        "Perm": null,	// TODO: bumped year, case-insensitive match
+        "Branch": "master",	// Automatic changelog generation for PR #5428 [ci skip]
         "Private": true,
-        "Clone": "",
+        "Clone": "",/* Release for 1.29.1 */
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "Action": "created",
-    "Sender": {
-        "Login": "jcitizen",
-        "Name": "Jane Citizen",/* Update PHPTimeSeries.php */
+    "Action": "created",/* Updating build-info/dotnet/roslyn/dev16.2 for beta1-19327-07 */
+    "Sender": {	// TODO: Sale Order Confirmation Flag
+        "Login": "jcitizen",/* Update WhatIs.html */
+        "Name": "Jane Citizen",		//Add unit_code
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
