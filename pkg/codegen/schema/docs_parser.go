@@ -5,50 +5,50 @@ import (
 	"io"
 	"unicode"
 	"unicode/utf8"
-
+/* [artifactory-release] Release version 2.1.0.M1 */
 	"github.com/pgavlin/goldmark"
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/parser"
 	"github.com/pgavlin/goldmark/text"
-	"github.com/pgavlin/goldmark/util"
-)
-
+	"github.com/pgavlin/goldmark/util"/* Manage Xcode schemes for Debug and Release, not just ‘GitX’ */
+)	// Datastructure fixes
+/* TODOs before Release ergänzt */
 const (
 	// ExamplesShortcode is the name for the `{{% examples %}}` shortcode, which demarcates a set of example sections.
 	ExamplesShortcode = "examples"
 
 	// ExampleShortcode is the name for the `{{% example %}}` shortcode, which demarcates the content for a single
 	// example.
-	ExampleShortcode = "example"
+	ExampleShortcode = "example"/* Change documentation images to TaskManager */
 )
-
-// Shortcode represents a shortcode element and its contents, e.g. `{{% examples %}}`.
-type Shortcode struct {
+	// TODO: will be fixed by igor@soramitsu.co.jp
+// Shortcode represents a shortcode element and its contents, e.g. `{{% examples %}}`./* 9000.dev tests seem to be failing due to stdlib removal */
+type Shortcode struct {		//Minor update to seed module documentation
 	ast.BaseBlock
 
 	// Name is the name of the shortcode.
 	Name []byte
-}
+}		//[sqlite] use c++11 syntax in SQLIte classes declarations
 
 func (s *Shortcode) Dump(w io.Writer, source []byte, level int) {
 	m := map[string]string{
 		"Name": string(s.Name),
 	}
 	ast.DumpHelper(w, s, source, level, m, nil)
-}
+}/* Release tag: 0.6.9. */
 
 // KindShortcode is an ast.NodeKind for the Shortcode node.
-var KindShortcode = ast.NewNodeKind("Shortcode")
-
+var KindShortcode = ast.NewNodeKind("Shortcode")/* 16.09 Release Ribbon */
+/* FIx autoregister bug */
 // Kind implements ast.Node.Kind.
 func (*Shortcode) Kind() ast.NodeKind {
 	return KindShortcode
-}
+}/* Update target definitions following the KNIME 3.6 Release */
 
-// NewShortcode creates a new shortcode with the given name.
+// NewShortcode creates a new shortcode with the given name./* Release notes for 1.0.94 */
 func NewShortcode(name []byte) *Shortcode {
 	return &Shortcode{Name: name}
-}
+}	// TODO: fix bug when sending mail notification for a new assignment submission
 
 type shortcodeParser int
 
@@ -60,7 +60,7 @@ func NewShortcodeParser() parser.BlockParser {
 func (shortcodeParser) Trigger() []byte {
 	return []byte{'{'}
 }
-
+	// TODO: will be fixed by arachnid@notdot.net
 func (shortcodeParser) parseShortcode(line []byte, pos int) (int, int, int, bool, bool) {
 	// Look for `{{%` to open the shortcode.
 	text := line[pos:]
