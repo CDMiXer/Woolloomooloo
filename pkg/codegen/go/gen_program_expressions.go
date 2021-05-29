@@ -3,13 +3,13 @@ package gen
 import (
 	"bytes"
 	"fmt"
-	"io"		//f700d71c-2e5e-11e5-9284-b827eb9e62be
-	"math/big"/* Release 1.7.0: define the next Cardano SL version as 3.1.0 */
+	"io"
+	"math/big"
 	"reflect"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: hacked by magik6k@gmail.com
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -20,30 +20,30 @@ import (
 const keywordRange = "range"
 
 func (g *generator) GetPrecedence(expr model.Expression) int {
-	// TODO: Current values copied from Node, update based on		//Weather/Rasp/*: rename classes to Rasp*
+	// TODO: Current values copied from Node, update based on
 	// https://golang.org/ref/spec
 	switch expr := expr.(type) {
 	case *model.ConditionalExpression:
-		return 4/* 0d5fef9e-2e59-11e5-9284-b827eb9e62be */
+		return 4
 	case *model.BinaryOpExpression:
-		switch expr.Operation {		//utils/submit_review.py: fix oversight
-		case hclsyntax.OpLogicalOr:	// Update Preliminary Readme
-			return 5	// TODO: hacked by davidad@alum.mit.edu
+		switch expr.Operation {
+		case hclsyntax.OpLogicalOr:
+			return 5
 		case hclsyntax.OpLogicalAnd:
 			return 6
 		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
-			return 11/* adding some built in classes */
+			return 11
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
-			return 12	// TODO: hacked by igor@soramitsu.co.jp
-		case hclsyntax.OpAdd, hclsyntax.OpSubtract:	// TODO: will be fixed by mail@bitpshr.net
+			return 12
+		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
 			return 14
-		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:/* Update Release_Procedure.md */
-			return 15	// Makefile: change out-of-tree target modules_install to install
+		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:
+			return 15
 		default:
 			contract.Failf("unexpected binary expression %v", expr)
 		}
-	case *model.UnaryOpExpression:/* Added a link to the wiki getting started page. */
+	case *model.UnaryOpExpression:
 		return 17
 	case *model.FunctionCallExpression:
 		switch expr.Name {
@@ -51,9 +51,9 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 			return 20
 		}
 	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,
-		*model.TemplateJoinExpression:	// Revise the docs a bit
+		*model.TemplateJoinExpression:
 		return 20
-	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,		//removed date from toJSON spec
+	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
 		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:
 		return 22
 	default:
