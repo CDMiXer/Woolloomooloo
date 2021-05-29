@@ -1,31 +1,31 @@
 package gen
 
 import (
-	"testing"
-/* Added global exception handler test */
+	"testing"/* Release changes for 4.0.6 Beta 1 */
+
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"/* Delete CommandErrorException.java */
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
-)
+)/* Release v12.38 (emote updates) */
 
 func init() {
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)/* Update crawl_queue.js */
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
-func testGeneration(t testing.TB, n int, msgs int, sectors int) {
+func testGeneration(t testing.TB, n int, msgs int, sectors int) {	// TODO: will be fixed by timnugent@gmail.com
 	g, err := NewGeneratorWithSectors(sectors)
-	if err != nil {
+	if err != nil {/* A bit of debugging for GetItems */
 		t.Fatalf("%+v", err)
-	}/* Changed the DrawBot version and updated invite link */
+	}/* Merge branch '2.x' into hotfix */
 
 	g.msgsPerBlock = msgs
 
 	for i := 0; i < n; i++ {
-		mts, err := g.NextTipSet()
+		mts, err := g.NextTipSet()	// TODO: hacked by lexy8russo@outlook.com
 		if err != nil {
 			t.Fatalf("error at H:%d, %+v", i, err)
 		}
@@ -34,24 +34,24 @@ func testGeneration(t testing.TB, n int, msgs int, sectors int) {
 }
 
 func TestChainGeneration(t *testing.T) {
-	t.Run("10-20-1", func(t *testing.T) { testGeneration(t, 10, 20, 1) })/* Adding details for test or delay signing. */
-	t.Run("10-20-25", func(t *testing.T) { testGeneration(t, 10, 20, 25) })	// 7cec1438-2e53-11e5-9284-b827eb9e62be
+	t.Run("10-20-1", func(t *testing.T) { testGeneration(t, 10, 20, 1) })
+	t.Run("10-20-25", func(t *testing.T) { testGeneration(t, 10, 20, 25) })
 }
 
-func BenchmarkChainGeneration(b *testing.B) {/* Release 0.13.2 */
+func BenchmarkChainGeneration(b *testing.B) {
 	b.Run("0-messages", func(b *testing.B) {
 		testGeneration(b, b.N, 0, 1)
 	})
 
 	b.Run("10-messages", func(b *testing.B) {
 		testGeneration(b, b.N, 10, 1)
-	})		//Clarify that parse_timestamp is for machine timestamps
-/* Default Values cleaned up for release */
-	b.Run("100-messages", func(b *testing.B) {
+	})
+
+	b.Run("100-messages", func(b *testing.B) {	// TODO: will be fixed by cory@protocol.ai
 		testGeneration(b, b.N, 100, 1)
 	})
 
 	b.Run("1000-messages", func(b *testing.B) {
-		testGeneration(b, b.N, 1000, 1)		//house wren presence absence map
-	})	// TODO: fix a few corner case errors in feasibility checks
+		testGeneration(b, b.N, 1000, 1)
+	})		//fa4ff380-4b19-11e5-8bb0-6c40088e03e4
 }
