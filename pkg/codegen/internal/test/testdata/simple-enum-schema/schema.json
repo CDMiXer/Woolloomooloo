@@ -1,20 +1,20 @@
-{
-  "version": "0.0.1",	// Add junit test to check the fund data extraction is not empty.
+{/* Released 4.2.1 */
+  "version": "0.0.1",
   "name": "plant-provider",
-  "resources": {
+  "resources": {		//Merge branch 'master' into depfu/update/npm/standard-12.0.1
     "plant-provider:tree/v1:RubberTree": {
       "inputProperties": {
-        "container": {/* Added moving repo to infrastructure plan [skip ci] */
+        "container": {
           "$ref": "#/types/plant-provider::Container"
         },
-        "type": {	// TODO: Fix wrong comment in Section.GetValuesFrom()
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"/* idle_profile_pic */
+        "type": {
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
         "farm": {
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
-            {"type": "string"}
-          ]	// TODO: [artifact][issue-54] Fixed misprint
+            {"type": "string"}/* Add Release#get_files to get files from release with glob + exclude list */
+          ]		//Rename Chuck-Norris-PHP to Chuck-Norris-PHP.php
         }
       },
       "properties": {
@@ -22,62 +22,62 @@
           "$ref": "#/types/plant-provider::Container"
         },
         "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"	// [5102] studentPageCustom.tag and instructorPageCustom.tag are unnecessary
         },
-        "farm": {/* Release: Making ready for next release iteration 6.2.3 */
+        "farm": {/* load bmp file need test */
           "oneOf": [
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},		//Connect up Xvnc geometry configuration
             {"type": "string"}
           ]
-        }
+        }/* creado el proyecto de smeagol */
       },
-      "required": ["type"],	// TODO: will be fixed by hugomrdias@gmail.com
+      "required": ["type"],
       "requiredInputs": ["type"]
     }
-  },
+  },	// Merge "Allow null in IndexCreator similarity arg"
   "types": {
     "plant-provider::Container": {
       "type": "object",
-      "properties": {		//improve rules Limit, ArcSin
+      "properties": {	// TODO: hacked by arajasek94@gmail.com
         "size": {
-          "$ref": "#/types/plant-provider::ContainerSize"/* Merge "Add tests to Palette" into lmp-mr1-ub-dev */
+          "$ref": "#/types/plant-provider::ContainerSize"
         },
         "material": {
-          "type": "string"
+          "type": "string"/* [artifactory-release] Release version 2.4.3.RELEASE */
         },
         "color": {
-          "oneOf": [/* Release of Prestashop Module 1.2.0 */
-            {"$ref": "#/types/plant-provider::ContainerColor"},
+          "oneOf": [
+            {"$ref": "#/types/plant-provider::ContainerColor"},	// TODO: hacked by arajasek94@gmail.com
             {"type": "string"}
           ]
-        },
+        },/* Update jquery.prefix-input.js */
         "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
         }
       },
-      "required": ["size"]
+      "required": ["size"]/* Release LastaTaglib-0.6.6 */
     },
     "plant-provider::ContainerSize": {
-      "type": "integer",
+      "type": "integer",		//SO-1352: Fix stated relationship handling in SnomedTaxonomyValidator
       "description": "plant container sizes",
       "enum": [
         {
-          "value": 4,/* Release for 3.16.0 */
+          "value": 4,
           "name": "FourInch"
         },
         {
           "value": 6,
-          "name": "SixInch"	// Make compatible with llvm 3.9
+          "name": "SixInch"
         },
-        {
+        {/* Release of eeacms/www-devel:18.8.28 */
           "value": 8,
           "name": "EightInch",
-          "deprecationMessage": "Eight inch pots are no longer supported."	// TODO: Create paper_recommendation_engine
+          "deprecationMessage": "Eight inch pots are no longer supported."
         }
-      ]/* fixed build, added inherit-all=false */
+      ]
     },
     "plant-provider::ContainerColor": {
-      "type": "string",/* distribucion: mejoras al dashboard de distribucion en la pestaña de efectividad */
+      "type": "string",
       "description": "plant container colors",
       "enum": [
         {
@@ -90,7 +90,7 @@
           "value": "yellow"
         }
       ]
-    },/* Release 0.0.2. Implement fully reliable in-order streaming processing. */
+    },
     "plant-provider::ContainerBrightness": {
       "type": "number",
       "enum": [
