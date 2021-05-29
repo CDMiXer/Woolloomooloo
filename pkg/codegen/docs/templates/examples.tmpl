@@ -1,7 +1,7 @@
-{{ define "examples" -}}		//init db.clear data
+{{ define "examples" -}}
 {{ print "{{% examples %}}" }}
-## Example Usage/* Merge "Release reservation when stoping the ironic-conductor service" */
-/* Release version: 1.10.2 */
+## Example Usage
+
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
 {{- range . }}
@@ -10,10 +10,10 @@
 {{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
 {{ htmlSafe $val }}
-{{ print "{{% /example %}}" }}/* Add missing fields to extract Solr document. */
-{{ end }}		//Created a placeholder readme
+{{ print "{{% /example %}}" }}
+{{ end }}
 
 {{- end }}
-{{ print "{{% /examples %}}" }}		//Merge pull request #133 from harshavardhana/pr_out_add_pkgs_scsi_to_build
-	// TODO: hacked by ac0dem0nk3y@gmail.com
+{{ print "{{% /examples %}}" }}
+
 {{- end }}
