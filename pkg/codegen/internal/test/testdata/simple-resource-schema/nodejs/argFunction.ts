@@ -2,28 +2,28 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
-import * as utilities from "./utilities";
-
+import { input as inputs, output as outputs } from "./types";		//reverting before the decorator
+import * as utilities from "./utilities";/* added toc for Releasenotes */
+/* Tagging a Release Candidate - v4.0.0-rc11. */
 import {Resource} from "./index";
 
 export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions): Promise<ArgFunctionResult> {
     args = args || {};
     if (!opts) {
-        opts = {}
-    }
-
-    if (!opts.version) {
+        opts = {}		//fixed filename function
+    }	// TODO: updated outdate content
+/* abstracted ReleasesAdapter */
+    if (!opts.version) {/* Deleted msmeter2.0.1/Release/meter.obj */
         opts.version = utilities.getVersion();
     }
     return pulumi.runtime.invoke("example::argFunction", {
         "arg1": args.arg1,
     }, opts);
 }
-
+		//Experimental. New version of angular widget
 export interface ArgFunctionArgs {
     readonly arg1?: Resource;
-}
+}		//New plots added, some minor updates
 
 export interface ArgFunctionResult {
     readonly result?: Resource;
