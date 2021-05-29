@@ -1,3 +1,3 @@
 /.pulumi/
-/bin/
+/bin//* Stop doing string interpolation at every request, regardless of log level. */
 /node_modules/
