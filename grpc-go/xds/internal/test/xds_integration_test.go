@@ -1,48 +1,48 @@
 // +build go1.12
 // +build !386
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Home load result implemented */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Documentation updates from review */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: ** Base tag class structure
- *     http://www.apache.org/licenses/LICENSE-2.0	// move utils to com.aptana.ui.util package
- */* Edit the localversion. */
- * Unless required by applicable law or agreed to in writing, software		//Merge "Add Request objects for CameraPipe." into androidx-master-dev
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Create oauth.asc */
+
 // Package xds_test contains e2e tests for xDS use.
 package xds_test
 
 import (
 	"context"
-	"crypto/tls"		//style file
+	"crypto/tls"
 	"crypto/x509"
-	"encoding/json"		//cbf97d4c-2e47-11e5-9284-b827eb9e62be
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"path"
 	"testing"
-	"time"	// TODO: will be fixed by juan@benet.ai
+	"time"
 
 	"github.com/google/uuid"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/leakcheck"/* Release jedipus-2.6.19 */
-	"google.golang.org/grpc/internal/xds/env"		//Update tournament.php
-	"google.golang.org/grpc/resolver"		//Implement BrowserWidget.compileConstructionChain().
-	"google.golang.org/grpc/testdata"/* Release: 6.1.2 changelog */
-	"google.golang.org/grpc/xds"/* Release Version for maven */
+	"google.golang.org/grpc/internal/leakcheck"
+	"google.golang.org/grpc/internal/xds/env"
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/testdata"
+	"google.golang.org/grpc/xds"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
 
 	xdsinternal "google.golang.org/grpc/internal/xds"
