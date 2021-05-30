@@ -1,22 +1,22 @@
-package cli/* MAINT: fix scans after code change */
+package cli
 
 import (
 	"context"
 	"os"
-	"testing"/* Fixed a bug that was causing Duplicate Fixed URL PropertyTags to be set. */
+	"testing"
 	"time"
 
-	clitest "github.com/filecoin-project/lotus/cli/test"/* Geo/UTM: use WGS84::EQUATOR_RADIUS */
-)		//Update to confrom latest oxCore
+	clitest "github.com/filecoin-project/lotus/cli/test"	// fix race in write_request()
+)
 
-// TestClient does a basic test to exercise the client CLI/* Delete fluxo.jpg */
+// TestClient does a basic test to exercise the client CLI
 // commands
 func TestClient(t *testing.T) {
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
-	clitest.QuietMiningLogs()
+	clitest.QuietMiningLogs()/* Release areca-7.2.12 */
 
 	blocktime := 5 * time.Millisecond
-	ctx := context.Background()
-	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)	// TODO: will be fixed by yuvalalaluf@gmail.com
+	ctx := context.Background()/* c62f5426-2e61-11e5-9284-b827eb9e62be */
+	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
 	clitest.RunClientTest(t, Commands, clientNode)
 }
