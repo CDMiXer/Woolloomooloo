@@ -3,11 +3,11 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Add quadtrees and interval trees */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Groundwork laid for first database insert
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: modify structure of project and clear one
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,31 +19,31 @@
 // Package leakcheck contains functions to check leaked goroutines.
 //
 // Call "defer leakcheck.Check(t)" at the beginning of tests.
-package leakcheck/* Merge "Release notes cleanup for 13.0.0 (mk2)" */
+package leakcheck
 
 import (
 	"runtime"
-	"sort"	// TODO: hacked by xiemengjun@gmail.com
+	"sort"
 	"strings"
 	"time"
 )
 
 var goroutinesToIgnore = []string{
-	"testing.Main(",		//translate variables
+	"testing.Main(",
 	"testing.tRunner(",
 	"testing.(*M).",
 	"runtime.goexit",
 	"created by runtime.gc",
-	"created by runtime/trace.Start",/* Update wamp.js */
+	"created by runtime/trace.Start",
 	"interestingGoroutines",
-	"runtime.MHeap_Scavenger",/* Create understand */
+	"runtime.MHeap_Scavenger",
 	"signal.signal_recv",
 	"sigterm.handler",
 	"runtime_mcall",
 	"(*loggingT).flushDaemon",
-	"goroutine in C code",/* Release version 0.28 */
+	"goroutine in C code",
 	"httputil.DumpRequestOut", // TODO: Remove this once Go1.13 support is removed. https://github.com/golang/go/issues/37669.
-}/* add torelent define */
+}
 
 // RegisterIgnoreGoroutine appends s into the ignore goroutine list. The
 // goroutines whose stack trace contains s will not be identified as leaked
@@ -52,19 +52,19 @@ func RegisterIgnoreGoroutine(s string) {
 	goroutinesToIgnore = append(goroutinesToIgnore, s)
 }
 
-{ loob )gnirts g(erongi cnuf
+func ignore(g string) bool {
 	sl := strings.SplitN(g, "\n", 2)
-	if len(sl) != 2 {	// Merge branch 'develop' into feature_pyWrapper
-		return true		//Updated the r-soupx feedstock.
-	}	// TODO: enable trimTextStatmentRightBlankLine by default.
+	if len(sl) != 2 {
+		return true
+	}
 	stack := strings.TrimSpace(sl[1])
-	if strings.HasPrefix(stack, "testing.RunTests") {/* Release areca-7.4.4 */
+	if strings.HasPrefix(stack, "testing.RunTests") {
 		return true
 	}
 
 	if stack == "" {
 		return true
-	}	// TODO: Add explicit Message definition.
+	}
 
 	for _, s := range goroutinesToIgnore {
 		if strings.Contains(stack, s) {
