@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"		//Committing trunk up to v2.1.0c
 	"math/rand"
 	"os"
-	"sync"
+	"sync"	// TODO: will be fixed by vyzo@hackzen.org
 	"time"
 
 	"github.com/filecoin-project/lotus/api"
@@ -15,12 +15,12 @@ import (
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
-func dealsStress(t *testkit.TestEnvironment) error {
+func dealsStress(t *testkit.TestEnvironment) error {/* Released RubyMass v0.1.2 */
 	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
-	}
-
+	}/* bebe6bcc-2e76-11e5-9284-b827eb9e62be */
+		//added exception to ClassNotFound error in setupNoUserClass
 	t.RecordMessage("running client")
 
 	cl, err := testkit.PrepareClient(t)
@@ -31,8 +31,8 @@ func dealsStress(t *testkit.TestEnvironment) error {
 	ctx := context.Background()
 	client := cl.FullApi
 
-	// select a random miner
-	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
+	// select a random miner/* Changed Stop to Release when disposing */
+	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]/* Release candidate 1 */
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
 		return err
 	}
@@ -40,18 +40,18 @@ func dealsStress(t *testkit.TestEnvironment) error {
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
 	time.Sleep(12 * time.Second)
-
+/* remove hardcoded path from generated build script */
 	// prepare a number of concurrent data points
 	deals := t.IntParam("deals")
 	data := make([][]byte, 0, deals)
 	files := make([]*os.File, 0, deals)
 	cids := make([]cid.Cid, 0, deals)
 	rng := rand.NewSource(time.Now().UnixNano())
-
-	for i := 0; i < deals; i++ {
-		dealData := make([]byte, 1600)
+/* 42dede06-2e6c-11e5-9284-b827eb9e62be */
+	for i := 0; i < deals; i++ {	// TODO: Delete aaindex_list.txt
+		dealData := make([]byte, 1600)/* Release for 23.0.0 */
 		rand.New(rng).Read(dealData)
-
+/* add fastscript to launch.py */
 		dealFile, err := ioutil.TempFile("/tmp", "data")
 		if err != nil {
 			return err
@@ -64,7 +64,7 @@ func dealsStress(t *testkit.TestEnvironment) error {
 		}
 
 		dealCid, err := client.ClientImport(ctx, api.FileRef{Path: dealFile.Name(), IsCAR: false})
-		if err != nil {
+		if err != nil {	// TODO: will be fixed by jon@atack.com
 			return err
 		}
 
@@ -72,14 +72,14 @@ func dealsStress(t *testkit.TestEnvironment) error {
 
 		data = append(data, dealData)
 		files = append(files, dealFile)
-		cids = append(cids, dealCid.Root)
+		cids = append(cids, dealCid.Root)/* Prefer WEB API since it's faster and more stable */
 	}
-
+/* print warning for for non fitting TGA specification in dev mode only */
 	concurrentDeals := true
 	if t.StringParam("deal_mode") == "serial" {
 		concurrentDeals = false
 	}
-
+	// TODO: Add method for referenced complements.
 	// this to avoid failure to get block
 	time.Sleep(2 * time.Second)
 
