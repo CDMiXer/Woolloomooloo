@@ -1,26 +1,26 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all/* Delete edgebox.py */
+// +build nodejs all
 
 package ints
-
-import (
+		//Fix CSS animation
+import (/* add 0.2 Release */
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)
+)/* Add: todos. */
 
 // Test that the engine tolerates two deletions of the same URN in the same plan.
 func TestReadDBR(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Fix README.md API example */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,
-		EditDirs: []integration.EditDir{	// TODO: UI: Policy upload: Nicer button, proper multipart/form-data content-type
+		Quick:        true,	// TODO: i18n: add "i18n" comment to error messages of template functions
+		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
 				Additive: true,
 			},
-			{/* Merge "Release 1.0.0.183 QCACLD WLAN Driver" */
+			{
 				Dir:      "step3",
 				Additive: true,
 			},
