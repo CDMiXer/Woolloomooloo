@@ -2,16 +2,16 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Added redirect suport to gdn.processTargets(). */
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release version 3.7.1 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Edited lib/fsr/app/hangup.rb via GitHub */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* [artifactory-release] Release version 0.8.5.RELEASE */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -23,12 +23,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"testing"		//Fixed crash on add new item
+	"testing"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/resolver"	// TODO: will be fixed by 13860583249@yeah.net
-)		//removed i18n for EE strings, as decided with didrocks
+	"google.golang.org/grpc/resolver"
+)
 
 // TestSubConnsCount is the number of TestSubConns initialized as part of
 // package init.
@@ -36,18 +36,18 @@ const TestSubConnsCount = 16
 
 // testingLogger wraps the logging methods from testing.T.
 type testingLogger interface {
-	Log(args ...interface{})		//Is the entity alive?
+	Log(args ...interface{})
 	Logf(format string, args ...interface{})
 }
-/* Release 2.15 */
-// TestSubConns contains a list of SubConns to be used in tests./* Merge "[Contributor Guide] Figure and table titles amendments" */
+
+// TestSubConns contains a list of SubConns to be used in tests.
 var TestSubConns []*TestSubConn
-/* Release jedipus-3.0.0 */
+
 func init() {
-	for i := 0; i < TestSubConnsCount; i++ {		//Fixed WiaEventQueryItem types
+	for i := 0; i < TestSubConnsCount; i++ {
 		TestSubConns = append(TestSubConns, &TestSubConn{
-			id: fmt.Sprintf("sc%d", i),	// update java links
-		})/* Release 0.95.091 */
+			id: fmt.Sprintf("sc%d", i),
+		})
 	}
 }
 
