@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>		//fix naming with Clean Architecture in mind
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
+  </PropertyGroup>/* [BUGFIX] removal of build-release from src/ folder */
+		//5a554296-2e44-11e5-9284-b827eb9e62be
 </Project>
