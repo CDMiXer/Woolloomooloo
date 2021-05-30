@@ -1,4 +1,4 @@
-package sealing/* Use 2 RabbitMQ URIs for smoke test */
-
+package sealing
+	// TODO: modify file upload html5
 // Epochs
 const InteractivePoRepConfidence = 6
