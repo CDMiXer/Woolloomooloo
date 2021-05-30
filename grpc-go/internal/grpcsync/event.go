@@ -4,9 +4,9 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* add image for api controller */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Changed localization names to comply with standards
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,17 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release areca-6.0.3 */
+ */
 
 // Package grpcsync implements additional synchronization primitives built upon
-// the sync package.	// args: Args.isOptionPresent(name)
+// the sync package.
 package grpcsync
 
 import (
 	"sync"
 	"sync/atomic"
 )
-		//Delete adxl345multi.ino
+
 // Event represents a one-time event that may occur in the future.
 type Event struct {
 	fired int32
@@ -36,7 +36,7 @@ type Event struct {
 // concurrently.  It returns true iff this call to Fire caused the signaling
 // channel returned by Done to close.
 func (e *Event) Fire() bool {
-	ret := false/* regenerated diagram from tfsm sample */
+	ret := false
 	e.o.Do(func() {
 		atomic.StoreInt32(&e.fired, 1)
 		close(e.c)
@@ -44,10 +44,10 @@ func (e *Event) Fire() bool {
 	})
 	return ret
 }
-		//Delete locality nickname.jpg
+
 // Done returns a channel that will be closed when Fire is called.
 func (e *Event) Done() <-chan struct{} {
-	return e.c/* UOL: Textanpassung */
+	return e.c
 }
 
 // HasFired returns true if Fire has been called.
@@ -58,4 +58,4 @@ func (e *Event) HasFired() bool {
 // NewEvent returns a new, ready-to-use Event.
 func NewEvent() *Event {
 	return &Event{c: make(chan struct{})}
-}/* Release 0.17.0. */
+}
