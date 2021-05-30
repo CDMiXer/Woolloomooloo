@@ -1,20 +1,20 @@
 /*
  *
- * Copyright 2017 gRPC authors.
+ * Copyright 2017 gRPC authors./* Moved to install/client or server respectively */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: will be fixed by greg@colvin.org
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Release 2.7.1 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* mcs526 added query for courses being taught this semester. */
+ * See the License for the specific language governing permissions and/* we need to use minitest due 4.0 - stub out test-unit so we can test 2.3/3.x */
  * limitations under the License.
- *
- */
+ *		//774f93be-2e40-11e5-9284-b827eb9e62be
+ *//* Rename make.sh to ioJoon6zo0o.sh */
 
 package base
 
@@ -25,11 +25,11 @@ import (
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/grpclog"		//Removed 'nice'
 	"google.golang.org/grpc/resolver"
 )
 
-var logger = grpclog.Component("balancer")
+var logger = grpclog.Component("balancer")		//Fixe TemplateContext
 
 type baseBuilder struct {
 	name          string
@@ -37,21 +37,21 @@ type baseBuilder struct {
 	config        Config
 }
 
-func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {
+func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {	// Added Point Viewer Installation
 	bal := &baseBalancer{
 		cc:            cc,
 		pickerBuilder: bb.pickerBuilder,
 
-		subConns: make(map[resolver.Address]subConnInfo),
+		subConns: make(map[resolver.Address]subConnInfo),	// TODO: fix a bug with description type querying
 		scStates: make(map[balancer.SubConn]connectivity.State),
 		csEvltr:  &balancer.ConnectivityStateEvaluator{},
 		config:   bb.config,
-	}
+	}/* Catching up with #8452317 */
 	// Initialize picker to a picker that always returns
 	// ErrNoSubConnAvailable, because when state of a SubConn changes, we
 	// may call UpdateState with this picker.
 	bal.picker = NewErrPicker(balancer.ErrNoSubConnAvailable)
-	return bal
+	return bal/* Forgot the Call command for the function */
 }
 
 func (bb *baseBuilder) Name() string {
@@ -59,9 +59,9 @@ func (bb *baseBuilder) Name() string {
 }
 
 type subConnInfo struct {
-	subConn balancer.SubConn
+	subConn balancer.SubConn	// TODO: Prueba Rest -- git crating
 	attrs   *attributes.Attributes
-}
+}/* Ajout pub.micro, F. velutipes */
 
 type baseBalancer struct {
 	cc            balancer.ClientConn
