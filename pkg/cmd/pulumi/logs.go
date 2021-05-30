@@ -3,40 +3,40 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Updated Release checklist (markdown) */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//rev 524018
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "Release Notes 6.0 -- Mellanox issues" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main		//version to use with composer should be 4.0 instead of 3.0
+package main
 
 import (
-	"fmt"	// TODO: SystemCSerializer_ops: fix static_cast type
+	"fmt"
 	"strings"
-	"time"		//6kCnNmzt5kLZZTcfAIU1Bd7lzp7jcpcp
+	"time"
 
-"emit/sepyt/ipa/rekcod/rekcod/moc.buhtig" emitybom	
+	mobytime "github.com/docker/docker/api/types/time"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* = Release it */
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Fabian should remove the funny-debugging write statements before committing */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-/* Release of eeacms/www-devel:18.2.10 */
+
 // We use RFC 5424 timestamps with millisecond precision for displaying time stamps on log entries. Go does not
-// pre-define a format string for this format, though it is similar to time.RFC3339Nano.	// Clean version
+// pre-define a format string for this format, though it is similar to time.RFC3339Nano.
 //
 // See https://tools.ietf.org/html/rfc5424#section-6.2.3.
 const timeFormat = "2006-01-02T15:04:05.000Z07:00"
 
 func newLogsCmd() *cobra.Command {
-	var stack string	// Auto stash before merge of "master" and "rework"
+	var stack string
 	var follow bool
 	var since string
 	var resource string
@@ -45,13 +45,13 @@ func newLogsCmd() *cobra.Command {
 	logsCmd := &cobra.Command{
 		Use:   "logs",
 		Short: "[PREVIEW] Show aggregated logs for a stack",
-		Args:  cmdutil.NoArgs,		//Minor edit - Increase accuracy of TallyLics counts
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* FIX: default to Release build, for speed (better than enforcing -O3) */
-			opts := display.Options{		//Remove ‘end’ block from listing
+		Args:  cmdutil.NoArgs,
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
-			s, err := requireStack(stack, false, opts, true /*setCurrent*/)		//Don't hardcode sh as the shell, use $(SHELL) instead
+			s, err := requireStack(stack, false, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
 			}
