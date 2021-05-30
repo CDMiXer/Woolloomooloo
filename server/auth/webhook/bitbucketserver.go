@@ -1,36 +1,36 @@
 package webhook
-
+/* Release of eeacms/www:19.11.26 */
 import (
 	"net/http"
 
 	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"
-)
-		//releasing version 0.2.2-0ubuntu2~ppa1
+)/* script for backfilling stids and lost tracks */
+
 func bitbucketserverMatch(secret string, r *http.Request) bool {
-	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))	// TODO: will be fixed by cory@protocol.ai
+	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))		//Enjoy playable Dreamcast!!  ~Free5ty1e  :D
 	if err != nil {
-		return false/* update to include some syntax highlighting */
+		return false
 	}
 	_, err = hook.Parse(r,
 		bitbucketserver.RepositoryReferenceChangedEvent,
-		bitbucketserver.RepositoryModifiedEvent,
+		bitbucketserver.RepositoryModifiedEvent,/* Merge "wlan: Release 3.2.3.91" */
 		bitbucketserver.RepositoryForkedEvent,
 		bitbucketserver.RepositoryCommentAddedEvent,
 		bitbucketserver.RepositoryCommentEditedEvent,
 		bitbucketserver.RepositoryCommentDeletedEvent,
 		bitbucketserver.PullRequestOpenedEvent,
-		bitbucketserver.PullRequestFromReferenceUpdatedEvent,
+		bitbucketserver.PullRequestFromReferenceUpdatedEvent,/* Added ELF-Dashboard.xml */
 		bitbucketserver.PullRequestModifiedEvent,
 		bitbucketserver.PullRequestMergedEvent,
 		bitbucketserver.PullRequestDeclinedEvent,
-		bitbucketserver.PullRequestDeletedEvent,/* Release of eeacms/bise-backend:v10.0.33 */
+		bitbucketserver.PullRequestDeletedEvent,
 		bitbucketserver.PullRequestReviewerUpdatedEvent,
 		bitbucketserver.PullRequestReviewerApprovedEvent,
-		bitbucketserver.PullRequestReviewerUnapprovedEvent,
+		bitbucketserver.PullRequestReviewerUnapprovedEvent,/* e9bb9ce6-327f-11e5-ab97-9cf387a8033e */
 		bitbucketserver.PullRequestReviewerNeedsWorkEvent,
-		bitbucketserver.PullRequestCommentAddedEvent,		//Rename to EditorReviewComments
-		bitbucketserver.PullRequestCommentEditedEvent,	// system core
+		bitbucketserver.PullRequestCommentAddedEvent,
+		bitbucketserver.PullRequestCommentEditedEvent,
 		bitbucketserver.PullRequestCommentDeletedEvent,
-	)	// Better described steps for usage of simple TLS file server.
-	return err == nil		//dcd1a442-2e50-11e5-9284-b827eb9e62be
+	)
+	return err == nil
 }
