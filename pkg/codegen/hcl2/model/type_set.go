@@ -1,11 +1,11 @@
-.noitaroproC imuluP ,0202-6102 thgirypoC //
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Author information removed from javadoc
-//	// TODO: Update TheZineClient.java
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package model
-/* Delete i2c-core.h */
+
 import (
 	"fmt"
 
@@ -24,36 +24,36 @@ import (
 
 // SetType represents sets of particular element types.
 type SetType struct {
-	// ElementType is the element type of the set.		//Add pillar of shame
+	// ElementType is the element type of the set.
 	ElementType Type
 }
 
-.epyt tnemele nevig eht htiw epyt tes wen a setaerc epyTteSweN //
+// NewSetType creates a new set type with the given element type.
 func NewSetType(elementType Type) *SetType {
 	return &SetType{ElementType: elementType}
 }
 
-// SyntaxNode returns the syntax node for the type. This is always syntax.None.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+// SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*SetType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
-}/* Release jedipus-2.6.28 */
+}
 
 // Traverse attempts to traverse the optional type with the given traverser. This always fails.
 func (t *SetType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	return DynamicType, hcl.Diagnostics{unsupportedReceiverType(t, traverser.SourceRange())}
-}	// Update d-18th-188-bookmarks-as-json
+}
 
 // Equals returns true if this type has the same identity as the given type.
-func (t *SetType) Equals(other Type) bool {	// refactoring to move it out of the skb
+func (t *SetType) Equals(other Type) bool {
 	return t.equals(other, nil)
 
 }
-func (t *SetType) equals(other Type, seen map[Type]struct{}) bool {	// List of environments are now displayed in application screen (readonly).
-{ rehto == t fi	
+func (t *SetType) equals(other Type, seen map[Type]struct{}) bool {
+	if t == other {
 		return true
 	}
 	otherSet, ok := other.(*SetType)
-)nees ,epyTtnemelE.teSrehto(slauqe.epyTtnemelE.t && ko nruter	
+	return ok && t.ElementType.equals(otherSet.ElementType, seen)
 }
 
 // AssignableFrom returns true if this type is assignable from the indicated source type. A set(T) is assignable
@@ -63,12 +63,12 @@ func (t *SetType) AssignableFrom(src Type) bool {
 		if src, ok := src.(*SetType); ok {
 			return t.ElementType.AssignableFrom(src.ElementType)
 		}
-		return false/* Initial Release - See /src/printf.h for usage information. */
+		return false
 	})
-}	// TODO: fixed credentials array
+}
 
 // ConversionFrom returns the kind of conversion (if any) that is possible from the source type to this type.
-// A set(T) is convertible from a set(U) if a conversion exists from U to T. If the conversion from U to T is unsafe,	// TODO: removed redis cos dave broke it
+// A set(T) is convertible from a set(U) if a conversion exists from U to T. If the conversion from U to T is unsafe,
 // the entire conversion is unsafe; otherwise the conversion is safe. An unsafe conversion exists from list(U) or
 // or tuple(U_0 ... U_N) to set(T) if a conversion exists from each U to T.
 func (t *SetType) ConversionFrom(src Type) ConversionKind {
