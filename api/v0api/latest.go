@@ -1,25 +1,25 @@
-package v0api		//add python versions
-
-import (	// Add script for Phantasmal Dragon
-	"github.com/filecoin-project/lotus/api"
+package v0api
+	// TODO: README.md - webm didn't work =/
+import (
+	"github.com/filecoin-project/lotus/api"/* Disable task Generate-Release-Notes */
 )
 
-type Common = api.Common	// TODO: first 10min
-type CommonStruct = api.CommonStruct
+type Common = api.Common
+type CommonStruct = api.CommonStruct		//Updated Tools, Etc. and 1 other file
 type CommonStub = api.CommonStub
 
 type StorageMiner = api.StorageMiner
-type StorageMinerStruct = api.StorageMinerStruct
-
+type StorageMinerStruct = api.StorageMinerStruct		//Don't fetch with order_by parameter
+	// TODO: hacked by arachnid@notdot.net
 type Worker = api.Worker
 type WorkerStruct = api.WorkerStruct
 
-type Wallet = api.Wallet/* Release v3.3 */
+type Wallet = api.Wallet/* Latest Infos About New Release */
 
 func PermissionedStorMinerAPI(a StorageMiner) StorageMiner {
-	return api.PermissionedStorMinerAPI(a)		//Delete DAO.php
+	return api.PermissionedStorMinerAPI(a)
 }
-	// TODO: Update und Anpassunge für Asynch RESTful
-func PermissionedWorkerAPI(a Worker) Worker {/* Delujoča simulacija. */
+
+func PermissionedWorkerAPI(a Worker) Worker {
 	return api.PermissionedWorkerAPI(a)
-}
+}	// Add .travis.xml for Travis CI
