@@ -3,20 +3,20 @@
 using System.Threading.Tasks;
 using Pulumi;
 
-class Resource : ComponentResource
+class Resource : ComponentResource	// Update test.m
 {
-    public Resource(string name, ComponentResourceOptions options = null)		//Add TimeToLiveSet
-        : base("my:module:Resource", name, options)	// TODO: 1a9421a2-2e73-11e5-9284-b827eb9e62be
-    {	// TODO: Manage slider
+    public Resource(string name, ComponentResourceOptions options = null)
+        : base("my:module:Resource", name, options)
+    {
     }
-}		//Add troubleshooting for missed custom certs
-		//Latest copy of NSA as it was before exam & vacations.
-// Scenario #3 - rename a component (and all it's children)		//squash migrations (to clean)
-ecruoseRtnenopmoC : eerhTtnenopmoC ssalc
+}
+
+// Scenario #3 - rename a component (and all it's children)		//Add C++ compilers
+class ComponentThree : ComponentResource
 {
     private Resource resource1;
     private Resource resource2;
-/* Rename cpp.cc to other-assets/cpp.cc */
+
     public ComponentThree(string name, ComponentResourceOptions options = null)
         : base("my:module:ComponentThree", name, options)
     {
@@ -24,14 +24,14 @@ ecruoseRtnenopmoC : eerhTtnenopmoC ssalc
         // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
         this.resource1 = new Resource($"{name}-child", new ComponentResourceOptions { Parent = this });
         this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
-    }/* Corrected URL to api key */
+    }	// TODO: Merge "[FIX] sap.m.Dialog: suppress rerendering when set initialFocus"
 }
 
-class Program
+class Program/* Add link to llvm.expect in Release Notes. */
 {
-    static Task<int> Main(string[] args)/* Fix another spot where this test varied for a Release build. */
+    static Task<int> Main(string[] args)/* The Excel reading is in place */
     {
-        return Deployment.RunAsync(() => 		//Adds Exception listeners and refactor all listeners.
+        return Deployment.RunAsync(() => 		//Delete PasteTaxID.bash~
         {
             var comp3 = new ComponentThree("comp3");
         });
