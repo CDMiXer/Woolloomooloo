@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in//* Update likebox */
+[Bb]in/
 [Oo]bj/
 
-
+	// TODO: #75 do not sign up for newsletter
