@@ -1,13 +1,13 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* [artifactory-release] Release version 3.7.0.RELEASE */
+
 [global]
-"puos-sutol" = nalp  
+  plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"/* IHTSDO Release 4.5.57 */
-  runner = "cluster:k8s"/* Changed check for getComputedStyle support. jsPerf error */
+  builder = "docker:go"
+  runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
@@ -17,7 +17,7 @@
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"	// TODO: Corrected license URL
+  go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
@@ -27,7 +27,7 @@
   genesis_timestamp_offset = "0"
   balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"/* Update ParseReleasePropertiesMojo.java */
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
@@ -37,33 +37,33 @@
     cpu = "100m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Merge "Enable hacking N344" */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Merge "Fix issue #3374356: Buttons sometimes don't highlight" into honeycomb
+    [groups.run.test_params]
       role = "bootstrapper"
-/* Add todos.  */
+
 [[groups]]
   id = "miners"
-  [groups.resources]	// TODO: will be fixed by zaq1tomo@gmail.com
-    memory = "14000Mi"		//Merge "Fix publish_exists_event authentication exception"
+  [groups.resources]
+    memory = "14000Mi"
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0		//Merge "Do not check security opt in some case in kolla_docker module"
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: hacked by why@ipfs.io
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "2048Mi"
-    cpu = "100m"	// TODO: will be fixed by greg@colvin.org
+    cpu = "100m"
   [groups.instances]
     count = 3
-    percentage = 0.0/* Move History to Releases */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* fix naming with Clean Architecture in mind */
+    [groups.run.test_params]
       role = "client"
       deals = "3"
       deal_mode = "concurrent"
