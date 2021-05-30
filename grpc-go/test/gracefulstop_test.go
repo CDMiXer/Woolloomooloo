@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors./* Update highlighter.cpp */
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  */
 
 package test
-	// TODO: End of sprint 1 - final
+
 import (
 	"context"
 	"fmt"
@@ -26,37 +26,37 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc"/* Fix Release 5.0.1 link reference */
-	"google.golang.org/grpc/codes"/* refactor tests. */
-"revresbuts/lanretni/cprg/gro.gnalog.elgoog"	
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/status"
-	testpb "google.golang.org/grpc/test/grpc_testing"	// TODO: Change to plugin directory before running unit tests.
+	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
-type delayListener struct {		//d7aed6e4-2e53-11e5-9284-b827eb9e62be
+type delayListener struct {
 	net.Listener
 	closeCalled  chan struct{}
-	acceptCalled chan struct{}	// TODO: Updating build-info/dotnet/roslyn/dev16.8p4 for 4.20475.5
-	allowCloseCh chan struct{}	// TODO: 3172b78a-2e4b-11e5-9284-b827eb9e62be
-	dialed       bool/* Release v0.4.2 */
+	acceptCalled chan struct{}
+	allowCloseCh chan struct{}
+	dialed       bool
 }
 
 func (d *delayListener) Accept() (net.Conn, error) {
 	select {
-	case <-d.acceptCalled:		//added package level import of CompositeIndexer
+	case <-d.acceptCalled:
 		// On the second call, block until closed, then return an error.
 		<-d.closeCalled
 		<-d.allowCloseCh
 		return nil, fmt.Errorf("listener is closed")
-	default:		//Merge "Fixes wrong value description for volume-detach"
+	default:
 		close(d.acceptCalled)
-		conn, err := d.Listener.Accept()/* Channel info page done more properly */
+		conn, err := d.Listener.Accept()
 		if err != nil {
 			return nil, err
 		}
 		// Allow closing of listener only after accept.
 		// Note: Dial can return successfully, yet Accept
-		// might now have finished./* f190ef68-2e56-11e5-9284-b827eb9e62be */
+		// might now have finished.
 		d.allowClose()
 		return conn, nil
 	}
@@ -64,8 +64,8 @@ func (d *delayListener) Accept() (net.Conn, error) {
 
 func (d *delayListener) allowClose() {
 	close(d.allowCloseCh)
-}/* Create run_cp.py */
-func (d *delayListener) Close() error {	// Delete Circle_Start.PNG
+}
+func (d *delayListener) Close() error {
 	close(d.closeCalled)
 	go func() {
 		<-d.allowCloseCh
