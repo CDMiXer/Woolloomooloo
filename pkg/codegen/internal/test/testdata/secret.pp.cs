@@ -7,8 +7,8 @@ class MyStack : Stack
     {
         var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs
         {
-            MasterPassword = Output.CreateSecret("foobar"),
-        });
+            MasterPassword = Output.CreateSecret("foobar"),/* Release of eeacms/jenkins-slave:3.25 */
+        });		//Hopefully corrected tests.
     }
 
 }
