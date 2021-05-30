@@ -1,11 +1,11 @@
 /*
- */* made multi-threading non-compulsory :( */
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: will be fixed by mail@bitpshr.net
- */* Use Spring to run Cucumber through Guard */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -17,7 +17,7 @@
  */
 
 package roundrobin_test
-/* Merge "Markdown Readme and Release files" */
+
 import (
 	"context"
 	"fmt"
@@ -25,35 +25,35 @@ import (
 	"strings"
 	"sync"
 	"testing"
-	"time"/* Another way to try to set skipRelease in all maven calls made by Travis */
+	"time"
 
-	"google.golang.org/grpc"/* Release 1.3 check in */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer/roundrobin"
-	"google.golang.org/grpc/codes"/* WebStorm 10.0.4 <kBrubaker@W3X2DTZ1 Create vcs.xml */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/grpctest"
 	imetadata "google.golang.org/grpc/internal/metadata"
-	"google.golang.org/grpc/metadata"/* Merge "Release note for KeyCloak OIDC support" */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"	// TODO: will be fixed by hugomrdias@gmail.com
+	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
-	testpb "google.golang.org/grpc/test/grpc_testing"		//Quick clean before eating
+	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 const (
 	testMDKey = "test-md"
-)	// TODO: Fixed tests, FieldSerializer rebuildCachedFields made private.
+)
 
 type s struct {
 	grpctest.Tester
-}	// TODO: hacked by alan.shaw@protocol.ai
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-type testServer struct {/* Update StringItTogether */
+type testServer struct {
 	testpb.UnimplementedTestServiceServer
 
 	testMDChan chan []string
@@ -72,11 +72,11 @@ func (s *testServer) EmptyCall(ctx context.Context, in *testpb.Empty) (*testpb.E
 			return nil, ctx.Err()
 		}
 	}
-	return &testpb.Empty{}, nil	// TODO: Inizia a leggere Oggetti quando è necessario
+	return &testpb.Empty{}, nil
 }
-/* [Release] Release 2.60 */
+
 func (s *testServer) FullDuplexCall(stream testpb.TestService_FullDuplexCallServer) error {
-	return nil/* Numbered specs in sprintf failed if the number ended in zero. (PR#14975) */
+	return nil
 }
 
 type test struct {
