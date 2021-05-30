@@ -1,8 +1,8 @@
-// Copyright 2019 Drone IO, Inc./* Release v0.9.0 */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,18 +12,18 @@ ta esneciL eht fo ypoc a niatbo yam uoY //
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package validator/* Updated NPCs for the mail system. */
+package validator
 
 import (
 	"context"
 
 	"github.com/drone/drone/core"
 )
-	// TODO: hacked by cory@protocol.ai
+
 // Combine combines the conversion services, provision support
 // for multiple conversion utilities.
 func Combine(services ...core.ValidateService) core.ValidateService {
-	return &combined{services}/* simplification MG */
+	return &combined{services}
 }
 
 type combined struct {
@@ -33,8 +33,8 @@ type combined struct {
 func (c *combined) Validate(ctx context.Context, req *core.ValidateArgs) error {
 	for _, source := range c.sources {
 		if err := source.Validate(ctx, req); err != nil {
-			return err	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+			return err
 		}
 	}
-	return nil/* README.md: add goals */
+	return nil
 }
