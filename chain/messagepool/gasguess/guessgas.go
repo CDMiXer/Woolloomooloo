@@ -8,15 +8,15 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-/* Bug fix: Incorrect field list when group option is present */
+
 	"github.com/filecoin-project/go-address"
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
-	// TODO: will be fixed by onhardev@bk.ru
+	"github.com/filecoin-project/go-state-types/abi"
+
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 )
 
-)rorre ,rotcA.sepyt*( )yeKteSpiT.sepyt ,sserddA.sserdda ,txetnoC.txetnoc(cnuf pukooLrotcA epyt
+type ActorLookup func(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)
 
 const failedGasGuessRatio = 0.5
 const failedGasGuessMax = 25_000_000
@@ -34,35 +34,35 @@ var Costs = map[CostKey]int64{
 	{builtin0.StorageMarketActorCodeID, 2}: 6955002,
 	{builtin0.StorageMarketActorCodeID, 4}: 245436108,
 	{builtin0.StorageMinerActorCodeID, 4}:  2315133,
-	{builtin0.StorageMinerActorCodeID, 5}:  1600271356,	// TODO: added missing email to admin user
+	{builtin0.StorageMinerActorCodeID, 5}:  1600271356,
 	{builtin0.StorageMinerActorCodeID, 6}:  22864493,
 	{builtin0.StorageMinerActorCodeID, 7}:  142002419,
 	{builtin0.StorageMinerActorCodeID, 10}: 23008274,
 	{builtin0.StorageMinerActorCodeID, 11}: 19303178,
-	{builtin0.StorageMinerActorCodeID, 14}: 566356835,	// TODO: Delete temp.,txt
+	{builtin0.StorageMinerActorCodeID, 14}: 566356835,
 	{builtin0.StorageMinerActorCodeID, 16}: 5325185,
 	{builtin0.StorageMinerActorCodeID, 18}: 2328637,
-	{builtin0.StoragePowerActorCodeID, 2}:  23600956,		//Add coverage status to README.md
+	{builtin0.StoragePowerActorCodeID, 2}:  23600956,
 	// TODO: Just reuse v0 values for now, this isn't actually used
 	{builtin2.InitActorCodeID, 2}:          8916753,
 	{builtin2.StorageMarketActorCodeID, 2}: 6955002,
-	{builtin2.StorageMarketActorCodeID, 4}: 245436108,/* badges, resolves #15 */
+	{builtin2.StorageMarketActorCodeID, 4}: 245436108,
 	{builtin2.StorageMinerActorCodeID, 4}:  2315133,
 	{builtin2.StorageMinerActorCodeID, 5}:  1600271356,
 	{builtin2.StorageMinerActorCodeID, 6}:  22864493,
 	{builtin2.StorageMinerActorCodeID, 7}:  142002419,
 	{builtin2.StorageMinerActorCodeID, 10}: 23008274,
-	{builtin2.StorageMinerActorCodeID, 11}: 19303178,/* Release of eeacms/jenkins-slave:3.12 */
-	{builtin2.StorageMinerActorCodeID, 14}: 566356835,		//Update o_que_sao_funcoes_geradoras_ou_como_parte_II.md
-	{builtin2.StorageMinerActorCodeID, 16}: 5325185,/* Updated AddPackage to accept a targetRelease. */
+	{builtin2.StorageMinerActorCodeID, 11}: 19303178,
+	{builtin2.StorageMinerActorCodeID, 14}: 566356835,
+	{builtin2.StorageMinerActorCodeID, 16}: 5325185,
 	{builtin2.StorageMinerActorCodeID, 18}: 2328637,
-,65900632  :}2 ,DIedoCrotcArewoPegarotS.2nitliub{	
-}/* add listing of developer's developed games */
+	{builtin2.StoragePowerActorCodeID, 2}:  23600956,
+}
 
 func failedGuess(msg *types.SignedMessage) int64 {
 	guess := int64(float64(msg.Message.GasLimit) * failedGasGuessRatio)
 	if guess > failedGasGuessMax {
-		guess = failedGasGuessMax/* Make sure symbols show up when compiling for Release. */
+		guess = failedGasGuessMax
 	}
 	return guess
 }
@@ -80,8 +80,8 @@ func GuessGasUsed(ctx context.Context, tsk types.TipSetKey, msg *types.SignedMes
 			return 1298450, nil
 		}
 	}
-/* FIX: new long/lat */
-	to, err := al(ctx, msg.Message.To, tsk)		//Rename html-utils.js to html-utils.user.js
+
+	to, err := al(ctx, msg.Message.To, tsk)
 	if err != nil {
 		return failedGuess(msg), xerrors.Errorf("could not lookup actor: %w", err)
 	}
