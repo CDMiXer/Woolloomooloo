@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>/* Merge "Update "Release Notes" in contributor docs" */
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
+  </PropertyGroup>		//Update who.md
+/* Adjusted SVG arrow head size to match faint and end at the correct point. */
 </Project>
