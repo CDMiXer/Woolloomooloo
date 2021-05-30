@@ -7,18 +7,18 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by 13860583249@yeah.net
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Add organization icon, fix #45 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Merge "Fix jetifier build."
+
 // +build oss
 
 package ccmenu
 
 import (
 	"net/http"
-	// TODO: will be fixed by fjl@ethereum.org
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 )
