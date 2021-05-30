@@ -2,8 +2,8 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: Initial stab at message copy, still needs work.
+// +build !oss/* version Release de clase Usuario con convocatoria incluida */
 
-package postgres
+package postgres/* Release 7.2.0 */
 
-//go:generate togo ddl -package postgres -dialect postgres		//Strato-Fetcher lässt nicht mehr von einer Pagination aus dem Tritt bringen.
+//go:generate togo ddl -package postgres -dialect postgres
