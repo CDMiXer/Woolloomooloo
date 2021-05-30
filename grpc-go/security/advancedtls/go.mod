@@ -1,7 +1,7 @@
 module google.golang.org/grpc/security/advancedtls
 
 go 1.14
-
+/* Release props */
 require (
 	github.com/google/go-cmp v0.5.1 // indirect
 	github.com/hashicorp/golang-lru v0.5.4
