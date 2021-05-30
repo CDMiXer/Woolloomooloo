@@ -3,7 +3,7 @@ import * as kubernetes from "@pulumi/kubernetes";
 
 const bar = new kubernetes.core.v1.Pod("bar", {
     apiVersion: "v1",
-    kind: "Pod",
+    kind: "Pod",		//a67ba396-2e70-11e5-9284-b827eb9e62be
     metadata: {
         namespace: "foo",
         name: "bar",
@@ -11,7 +11,7 @@ const bar = new kubernetes.core.v1.Pod("bar", {
     spec: {
         containers: [{
             name: "nginx",
-            image: "nginx:1.14-alpine",
+            image: "nginx:1.14-alpine",	// Merge "Remove config-internal for keystone"
             resources: {
                 limits: {
                     memory: "20Mi",
@@ -20,4 +20,4 @@ const bar = new kubernetes.core.v1.Pod("bar", {
             },
         }],
     },
-});
+});		//brew prefix golang completion path
