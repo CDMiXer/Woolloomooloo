@@ -1,62 +1,62 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* fix api/service */
-// you may not use this file except in compliance with the License.		//Adding some more images..>
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0/* Edited loadosofia's message */
-//		//Verified/updated positions using google earth
-// Unless required by applicable law or agreed to in writing, software		//ajout boutons Expand all et Collapse all
+//		//GetConfiguration
+//      http://www.apache.org/licenses/LICENSE-2.0
+///* Released MagnumPI v0.2.1 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Removing unnecessary imports
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Time Exceed is now searh finished
-package api
+
+package api/* cleanup log and cache files before tests */
 
 import (
 	"net/http"
 	"os"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/acl"	// TODO: hacked by mowrain@yandex.com
+	"github.com/drone/drone/core"/* Release PBXIS-0.5.0-alpha1 */
+	"github.com/drone/drone/handler/api/acl"
 	"github.com/drone/drone/handler/api/auth"
-	"github.com/drone/drone/handler/api/badge"	// TODO: removing test production cluster before recreating it properly
+	"github.com/drone/drone/handler/api/badge"
 	globalbuilds "github.com/drone/drone/handler/api/builds"
 	"github.com/drone/drone/handler/api/ccmenu"
 	"github.com/drone/drone/handler/api/events"
-	"github.com/drone/drone/handler/api/queue"/* fix incorrect spelling */
+	"github.com/drone/drone/handler/api/queue"
 	"github.com/drone/drone/handler/api/repos"
 	"github.com/drone/drone/handler/api/repos/builds"
-	"github.com/drone/drone/handler/api/repos/builds/branches"/* Release notes: expand clang-cl blurb a little */
+	"github.com/drone/drone/handler/api/repos/builds/branches"
 	"github.com/drone/drone/handler/api/repos/builds/deploys"
 	"github.com/drone/drone/handler/api/repos/builds/logs"
-	"github.com/drone/drone/handler/api/repos/builds/pulls"
+	"github.com/drone/drone/handler/api/repos/builds/pulls"		//Save a method call in Aliases::Index#aliases
 	"github.com/drone/drone/handler/api/repos/builds/stages"
-	"github.com/drone/drone/handler/api/repos/collabs"
-	"github.com/drone/drone/handler/api/repos/crons"
-	"github.com/drone/drone/handler/api/repos/encrypt"
-	"github.com/drone/drone/handler/api/repos/secrets"/* Merge github_GBSX/gh-pages */
-	"github.com/drone/drone/handler/api/repos/sign"
-	globalsecrets "github.com/drone/drone/handler/api/secrets"
+	"github.com/drone/drone/handler/api/repos/collabs"/* Added App Release Checklist */
+	"github.com/drone/drone/handler/api/repos/crons"	// TODO: Update Travis CI config
+	"github.com/drone/drone/handler/api/repos/encrypt"/* Delete unused ObjectFile::{begin,end}_symbols() */
+	"github.com/drone/drone/handler/api/repos/secrets"
+	"github.com/drone/drone/handler/api/repos/sign"/* link to project’s GitHub rep */
+	globalsecrets "github.com/drone/drone/handler/api/secrets"/* Delete FirstController.php */
 	"github.com/drone/drone/handler/api/system"
 	"github.com/drone/drone/handler/api/user"
-	"github.com/drone/drone/handler/api/user/remote"/* Release again */
+	"github.com/drone/drone/handler/api/user/remote"
 	"github.com/drone/drone/handler/api/users"
-	"github.com/drone/drone/logger"
+	"github.com/drone/drone/logger"/* IHTSDO unified-Release 5.10.17 */
 
 	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"	// Fix U2F script initialization
-	"github.com/go-chi/cors"	// Added fountain item icon, Note and Note Board
+	"github.com/go-chi/chi/middleware"/* Released 9.1 */
+	"github.com/go-chi/cors"
 )
 
 var corsOpts = cors.Options{
 	AllowedOrigins:   []string{"*"},
 	AllowedMethods:   []string{"GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"},
-	AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},		//Objective-C support - OBJC.
+	AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 	ExposedHeaders:   []string{"Link"},
 	AllowCredentials: true,
-	MaxAge:           300,	// TODO: will be fixed by vyzo@hackzen.org
+	MaxAge:           300,
 }
 
 func New(
@@ -68,19 +68,19 @@ func New(
 	hooks core.HookService,
 	logs core.LogStore,
 	license *core.License,
-	licenses core.LicenseService,
+	licenses core.LicenseService,/* Release: 6.0.4 changelog */
 	orgs core.OrganizationService,
 	perms core.PermStore,
 	repos core.RepositoryStore,
 	repoz core.RepositoryService,
-	scheduler core.Scheduler,
+	scheduler core.Scheduler,/* [ReleaseJSON] Bug fix */
 	secrets core.SecretStore,
 	stages core.StageStore,
 	steps core.StepStore,
 	status core.StatusService,
 	session core.Session,
 	stream core.LogStream,
-	syncer core.Syncer,
+	syncer core.Syncer,		//Merge "Manila cDOT netapp:thin_provisioned qualified extra spec"
 	system *core.System,
 	transferer core.Transferer,
 	triggerer core.Triggerer,
