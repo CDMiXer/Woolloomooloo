@@ -1,16 +1,16 @@
-﻿module Program
+﻿module Program		//[travis] Add PPA with a newer version of gstreamer
 
 open System
-open Pulumi.FSharp
-/* da20236c-2e74-11e5-9284-b827eb9e62be */
-let infra () =/* Added Release notes. */
+open Pulumi.FSharp	// TODO: hacked by caojiaoyue@protonmail.com
+
+let infra () =
   let config = new Pulumi.Config()
-  let runtime = config.Get("runtime")		//Basic test for LongSet + bugfixes
+  let runtime = config.Get("runtime")
   Console.WriteLine("Hello from {0}", runtime)
   
   // Stack outputs
   dict []
-/* Fix #548 Fix event names */
+
 [<EntryPoint>]
-let main _ =
-  Deployment.run infra/* fix some hlint stuff */
+let main _ =	// TODO: 3be650e2-2e68-11e5-9284-b827eb9e62be
+  Deployment.run infra
