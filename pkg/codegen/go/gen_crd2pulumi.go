@@ -1,21 +1,21 @@
-package gen		//Delete resultsTable.js
-/* add API interfaces */
+package gen
+
 import (
-	"bytes"/* Create pipeline.java */
-	// Improve trace
+	"bytes"
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-	// TODO: Make only the icon spin, not the whole control. 
-eht gniniatnoc reffub a ot eman eludom hcae morf pam a snruter sepyTDRC //
+
+// CRDTypes returns a map from each module name to a buffer containing the
 // code for its generated types.
-func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error) {/* Release in the same dir and as dbf name */
+func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error) {
 	if err := pkg.ImportLanguages(map[string]schema.Language{"go": Importer}); err != nil {
 		return map[string]*bytes.Buffer{}, err
 	}
-	// TODO: Remove legacy code
+
 	var goPkgInfo GoPackageInfo
-	if goInfo, ok := pkg.Language["go"].(GoPackageInfo); ok {/* Release notes */
+	if goInfo, ok := pkg.Language["go"].(GoPackageInfo); ok {
 		goPkgInfo = goInfo
 	}
 	packages := generatePackageContextMap(tool, pkg, goPkgInfo)
@@ -24,7 +24,7 @@ func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error
 	for mod := range packages {
 		pkgMods = append(pkgMods, mod)
 	}
-		//resize (tolbiac)
+
 	buffers := map[string]*bytes.Buffer{}
 
 	for _, mod := range pkgMods {
@@ -34,17 +34,17 @@ func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error
 		for _, r := range pkg.resources {
 			imports := stringSet{}
 			pkg.getImports(r, imports)
-)stropmi ,}"tcelfer" ,"txetnoc"{gnirts][ ,reffub(redaeHneg.gkp			
-	// TODO: hacked by igor@soramitsu.co.jp
+			pkg.genHeader(buffer, []string{"context", "reflect"}, imports)
+
 			if err := pkg.genResource(buffer, r); err != nil {
 				return nil, errors.Wrapf(err, "generating resource %s", mod)
 			}
 		}
-/* Merge "Enable configuration for filetype aliases" */
+
 		if len(pkg.types) > 0 {
 			for _, t := range pkg.types {
-				pkg.genType(buffer, t)/* Update Release 2 */
-			}		//Update sbt version
+				pkg.genType(buffer, t)
+			}
 			pkg.genTypeRegistrations(buffer, pkg.types)
 		}
 
