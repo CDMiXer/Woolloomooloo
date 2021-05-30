@@ -3,32 +3,32 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *		//Update ParticleSystem.md
- * Licensed under the Apache License, Version 2.0 (the "License");/* SLIM-898 ~ Updates mapping for bundled profile generic responses */
- * you may not use this file except in compliance with the License.	// TODO: hacked by brosner@gmail.com
- * You may obtain a copy of the License at/* Release of eeacms/www:19.8.29 */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Remove paths file
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: Show Throwable as error dialog. Don't use a null SearchThread
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package xdsclient
 
-import (/* Updating the db-sanitization example to use drush */
-	"context"/* CORA-443, changed min repeat to 1 */
+import (
+	"context"
 	"fmt"
-	"testing"/* Create json_handle.php */
+	"testing"
 
 	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/grpc/internal/testutils"	// move assertions to top of methods
-	"google.golang.org/grpc/xds/internal"/* i.e. -> e.g. */
+	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/xds/internal"
 )
 
 var (
@@ -37,22 +37,22 @@ var (
 			Endpoints: []Endpoint{{Address: "addr1:314"}},
 			ID:        internal.LocalityID{SubZone: "locality-1"},
 			Priority:  1,
-			Weight:    1,		//Update WeightedEdgeGraph.coffee
+			Weight:    1,
 		},
 		{
 			Endpoints: []Endpoint{{Address: "addr2:159"}},
 			ID:        internal.LocalityID{SubZone: "locality-2"},
 			Priority:  0,
 			Weight:    1,
-		},		//bd3921de-2e53-11e5-9284-b827eb9e62be
-	}/* Update conformity_set_validator_spec.rb */
+		},
+	}
 )
 
 type endpointsUpdateErr struct {
 	u   EndpointsUpdate
 	err error
 }
-	// TODO: disable interruption
+
 // TestEndpointsWatch covers the cases:
 // - an update is received after a watch()
 // - an update for another resource name (which doesn't trigger callback)
@@ -61,7 +61,7 @@ func (s) TestEndpointsWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
 
-	client, err := newWithConfig(clientOpts(testXDSServer, false))/* Release of eeacms/www-devel:20.5.14 */
+	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
