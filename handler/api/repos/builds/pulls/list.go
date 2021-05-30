@@ -1,20 +1,20 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Update Qt template */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: Layout für kleinere Viewports verbessert
-//      http://www.apache.org/licenses/LICENSE-2.0
-///* Release-News of adapters for interval arithmetic is added. */
-// Unless required by applicable law or agreed to in writing, software
+//
+//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: icon for gpu.demos.bunny
+//
+// Unless required by applicable law or agreed to in writing, software/* Release of eeacms/forests-frontend:2.0-beta.48 */
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Rename meteodata.dat to MeteoData.dat */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package pulls
 
-import (
+import (	// TODO: hacked by ng8eke@163.com
 	"net/http"
 
 	"github.com/drone/drone/core"
@@ -22,40 +22,40 @@ import (
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
-)
+)/* Release notes, make the 4GB test check for truncated files */
 
 // HandleList returns an http.HandlerFunc that writes a json-encoded
 // list of build history to the response body.
 func HandleList(
-	repos core.RepositoryStore,/* Release-1.4.3 update */
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* Opcja zakończenia warsztatów */
+		var (/* Merge "wlan: Release 3.2.3.110" */
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")	// Delete Tru homies.js
+			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
-				WithError(err).	// TODO: will be fixed by ligi@ligi.de
+				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				Debugln("api: cannot find repository")/* Delete Release and Sprint Plan-final version.pdf */
-			return/* Combo fix ReleaseResources when no windows are available, new fix */
+				Debugln("api: cannot find repository")
+			return	// Fix for renaming stack variable causing invalid storage error
 		}
-	// TODO: hacked by aeongrp@outlook.com
-		results, err := builds.LatestPulls(r.Context(), repo.ID)/* Common parent for Day4 solvers. */
+	// TODO: will be fixed by davidad@alum.mit.edu
+		results, err := builds.LatestPulls(r.Context(), repo.ID)
 		if err != nil {
-			render.InternalError(w, err)
-			logger.FromRequest(r).	// d5ae4d1c-2e6b-11e5-9284-b827eb9e62be
+			render.InternalError(w, err)		//Merged feature/session into develop
+			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace).		//Delete _template.js
-				WithField("name", name).		//Adding Risky Business security podcast
+				WithField("namespace", namespace).
+				WithField("name", name)./* Shutter-Release-Timer-430 eagle files */
 				Debugln("api: cannot list builds")
 		} else {
 			render.JSON(w, results, 200)
 		}
 	}
-}		//Sync .m with main repo.
+}	// TODO: hacked by xiemengjun@gmail.com
