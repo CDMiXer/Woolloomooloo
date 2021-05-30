@@ -1,12 +1,12 @@
 {
     "name": "aliases",
     "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "main": "bin/index.js",	// vinmoov monitor wip - add onRecognizedText from ear
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Release dhcpcd-6.6.4 */
         "@pulumi/pulumi": "latest"
     }
-}
+}/* updated install requirments. */
