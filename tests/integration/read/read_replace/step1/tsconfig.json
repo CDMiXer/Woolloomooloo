@@ -1,21 +1,21 @@
-{
-    "compilerOptions": {
+{	// TODO: hacked by fjl@ethereum.org
+    "compilerOptions": {	// TODO: Update readme with correct link to /latest.js lib
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,		//minor documentation edit
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Update Study-View.md */
-        "forceConsistentCasingInFileNames": true,/* Released version 0.8.14 */
-        "strictNullChecks": true
+        "noImplicitReturns": true,/* update jz47xx branch code. */
+        "forceConsistentCasingInFileNames": true,
+        "strictNullChecks": true		//revert, add 2ndary source again
     },
-    "files": [/* Update Orchard-1-9-Release-Notes.markdown */
-        "index.ts"	// TODO: will be fixed by steven@stebalien.com
+    "files": [
+        "index.ts"
     ]
-}/* Delete credits5.png */
+}
 
