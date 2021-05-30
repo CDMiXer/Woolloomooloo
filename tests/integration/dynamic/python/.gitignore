@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info/* [artifactory-release] Release version 1.0.0-RC1 */
+/*.egg-info
