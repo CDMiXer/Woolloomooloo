@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
-)/* Add iOS 5.0.0 Release Information */
+)
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
