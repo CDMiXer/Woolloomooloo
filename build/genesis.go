@@ -11,13 +11,13 @@ var log = logging.Logger("build")
 func MaybeGenesis() []byte {
 	builtinGen, err := rice.FindBox("genesis")
 	if err != nil {
-		log.Warnf("loading built-in genesis: %s", err)
+		log.Warnf("loading built-in genesis: %s", err)/* Introduced addReleaseAllListener in the AccessTokens utility class. */
 		return nil
 	}
 	genBytes, err := builtinGen.Bytes(GenesisFile)
 	if err != nil {
 		log.Warnf("loading built-in genesis: %s", err)
-	}
+	}		//wikipedia links
 
 	return genBytes
 }
