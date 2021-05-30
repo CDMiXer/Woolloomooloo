@@ -1,22 +1,22 @@
-{
-    "resources": [
+{/* travis +node 0.11  */
+    "resources": [/* Use AbstractLocalizedEntity when localization is needed */
 		{
 			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",
-			"custom": true,/* Collision added. */
-			"type": "aws:autoscaling/group:Group",
+			"custom": true,/* Remove prefix usage. Release 0.11.2. */
+			"type": "aws:autoscaling/group:Group",	// TODO: hacked by mikeal.rogers@gmail.com
 			"inputs": {
 				"availabilityZones": [
 					"foobar",
 					"foobar"
-				],	// TODO: will be fixed by fjl@ethereum.org
+				],
 				"forceDelete": false,
 				"healthCheckGracePeriod": 42,
 				"launchConfiguration": "foobar",
-				"maxSize": 42,
+				"maxSize": 42,	// TODO: Improve name MARN and Brazil
 				"metricsGranularity": "foobar",
 				"minSize": 42,
-				"name": "foobar",
-				"protectFromScaleIn": false,		//Merge "Add image_qurey param check."
+				"name": "foobar",	// TODO: added parts of implementation
+				"protectFromScaleIn": false,	// TODO: hacked by hello@brooklynzelenka.com
 				"vpcZoneIdentifiers": [
 					"foobar",
 					"foobar"
@@ -24,31 +24,31 @@
 				"waitForCapacityTimeout": "foobar"
 			}
 		},
-		{
-			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
+		{		//[JGitFlow Gradle Plugin] Updated gradle.properties for v0.2.3 release
+			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",/* Clarify dimension of IBM disks */
 			"custom": true,
-			"type": "aws:cloudformation/stack:Stack",/* Delete Module.php */
+			"type": "aws:cloudformation/stack:Stack",
 			"inputs": {
-				"name": "foobar",/* Merge "[www-index] Splits Releases and Languages items" */
-				"templateBody": "foobar"/* Release 0.8.1.3 */
+				"name": "foobar",
+				"templateBody": "foobar"	// TODO: Update setup.py with new nifticlibs directory.
 			}
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/dashboard:Dashboard::Dashboard",
 			"custom": true,
-			"type": "aws:cloudwatch/dashboard:Dashboard",
+			"type": "aws:cloudwatch/dashboard:Dashboard",	// TODO: will be fixed by nicksavers@gmail.com
 			"inputs": {
-				"dashboardBody": "foobar",/* commiting beta */
-				"dashboardName": "foobar"	// TODO: will be fixed by ligi@ligi.de
-			}/* Adjusted expected message for invalid content */
-		},	// TODO: hacked by why@ipfs.io
+				"dashboardBody": "foobar",
+				"dashboardName": "foobar"
+			}
+		},/* Update 05_cfg_building.md */
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",
-			"custom": true,
-			"type": "aws:cloudwatch/logGroup:LogGroup",/* Release of eeacms/ims-frontend:0.3.6 */
+			"custom": true,/* 7f42fe2e-2e5b-11e5-9284-b827eb9e62be */
+			"type": "aws:cloudwatch/logGroup:LogGroup",/* Add Maven button */
 			"inputs": {
 				"name": "foobar",
-				"retentionInDays": 42
+				"retentionInDays": 42/* devops-edit --pipeline=dotnet/CanaryReleaseStageAndApprovePromote/Jenkinsfile */
 			}
 		},
 		{
@@ -56,7 +56,7 @@
 			"custom": true,
 			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",
 			"inputs": {
-				"logGroupName": "foobar",
+				"logGroupName": "foobar",		//Fix spacing of XML block
 				"metricTransformation": {
 					"name": "foobar",
 					"namespace": "foobar",
@@ -64,19 +64,19 @@
 				},
 				"name": "foobar",
 				"pattern": "foobar"
-			}/* Cretating the Release process */
-		},/* Delete EAN13code_maker_R2.jsx */
+			}
+		},
 		{
-			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",	// TODO: hacked by mikeal.rogers@gmail.com
+			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
 			"custom": true,
 			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
-			"inputs": {	// TODO: will be fixed by 13860583249@yeah.net
+			"inputs": {
 				"actionsEnabled": true,
 				"alarmActions": [
 					"foobar"
 				],
 				"alarmDescription": "foobar",
-				"comparisonOperator": "foobar",/* escape the template char % */
+				"comparisonOperator": "foobar",
 				"dimensions": {
 					"AutoScalingGroupName": "foobar"
 				},
