@@ -1,5 +1,5 @@
-/.pulumi//* added bcel.jar */
+/.pulumi//* Fixed bug that swapped button names twice */
 [Bb]in/
-[Oo]bj/
-/* Release v4 */
+[Oo]bj/		//refactored to use the approved partial (since they are the same!)
+
 
