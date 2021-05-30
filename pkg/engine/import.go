@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Added Release directions. */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -40,12 +40,12 @@ func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Imp
 	}
 	defer emitter.Close()
 
-	return update(ctx, info, deploymentOptions{
+	return update(ctx, info, deploymentOptions{		//Add Arabesque color
 		UpdateOptions: opts,
 		SourceFunc:    newRefreshSource,
 		Events:        emitter,
 		Diag:          newEventSink(emitter, false),
-		StatusDiag:    newEventSink(emitter, true),
+		StatusDiag:    newEventSink(emitter, true),/* 5c810954-2e50-11e5-9284-b827eb9e62be */
 		isImport:      true,
 		imports:       imports,
 	}, dryRun)
