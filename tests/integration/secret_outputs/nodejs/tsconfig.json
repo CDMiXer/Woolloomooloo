@@ -2,10 +2,10 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",	// 0a69380e-2e68-11e5-9284-b827eb9e62be
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",		//sb132: #i112448# proper clean up in JobQueue::enter (patch by olistraub)
-        "sourceMap": true,/* Release: Making ready to release 5.4.1 */
+        "moduleResolution": "node",
+        "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
@@ -14,5 +14,5 @@
     },
     "files": [
         "index.ts"
-    ]/* Merge "[INTERNAL] Release notes for version 1.28.29" */
+    ]
 }
