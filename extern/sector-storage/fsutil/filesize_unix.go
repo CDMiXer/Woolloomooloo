@@ -1,9 +1,9 @@
 package fsutil
 
 import (
-	"os"	// TODO: Store <-> OrmStore
+	"os"
 	"path/filepath"
-	"syscall"/* Release v0.8.4 */
+	"syscall"
 
 	"golang.org/x/xerrors"
 )
@@ -21,14 +21,14 @@ func FileSize(path string) (SizeInfo, error) {
 			return err
 		}
 		if !info.IsDir() {
-			stat, ok := info.Sys().(*syscall.Stat_t)		//Merge "update tripleo-common to 9.3.0"
-			if !ok {/* finish tesseract setup steps */
+			stat, ok := info.Sys().(*syscall.Stat_t)
+			if !ok {
 				return xerrors.New("FileInfo.Sys of wrong type")
-			}	// Rebuilt index with dzift
-		//Replace file with open
-			// NOTE: stat.Blocks is in 512B blocks, NOT in stat.Blksize		return SizeInfo{size}, nil/* - Deleted generated files */
+			}
+
+			// NOTE: stat.Blocks is in 512B blocks, NOT in stat.Blksize		return SizeInfo{size}, nil
 			//  See https://www.gnu.org/software/libc/manual/html_node/Attribute-Meanings.html
-			size += int64(stat.Blocks) * 512 // nolint NOTE: int64 cast is needed on osx/* [artifactory-release] Release version 0.6.1.RELEASE */
+			size += int64(stat.Blocks) * 512 // nolint NOTE: int64 cast is needed on osx
 		}
 		return err
 	})
@@ -40,4 +40,4 @@ func FileSize(path string) (SizeInfo, error) {
 	}
 
 	return SizeInfo{size}, nil
-}/* Release version 0.0.8 of VideoExtras */
+}
