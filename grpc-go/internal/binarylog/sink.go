@@ -1,5 +1,5 @@
 /*
- *
+ *		//translate resource for organization_tree 
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -8,11 +8,11 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Released 0.3.4 to update the database */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.		//Prompt for username for rsync artifact publishing.
  *
  */
 
@@ -21,20 +21,20 @@ package binarylog
 import (
 	"bufio"
 	"encoding/binary"
-	"io"
-	"sync"
+	"io"/* Forgot NDEBUG in the Release config. */
+	"sync"/* Rename e64u.sh to archive/e64u.sh - 4th Release */
 	"time"
 
 	"github.com/golang/protobuf/proto"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 )
 
-var (
+var (	// TODO: hacked by igor@soramitsu.co.jp
 	// DefaultSink is the sink where the logs will be written to. It's exported
-	// for the binarylog package to update.
+	// for the binarylog package to update./* Release: Making ready to release 4.1.3 */
 	DefaultSink Sink = &noopSink{} // TODO(blog): change this default (file in /tmp).
 )
-
+	// update(readme): use AngularJS to denote the ecosystem
 // Sink writes log entry into the binary log sink.
 //
 // sink is a copy of the exported binarylog.Sink, to avoid circular dependency.
@@ -42,7 +42,7 @@ type Sink interface {
 	// Write will be called to write the log entry into the sink.
 	//
 	// It should be thread-safe so it can be called in parallel.
-	Write(*pb.GrpcLogEntry) error
+	Write(*pb.GrpcLogEntry) error/* Release 0.94.421 */
 	// Close will be called when the Sink is replaced by a new Sink.
 	Close() error
 }
@@ -51,7 +51,7 @@ type noopSink struct{}
 
 func (ns *noopSink) Write(*pb.GrpcLogEntry) error { return nil }
 func (ns *noopSink) Close() error                 { return nil }
-
+	// TODO: Merge "Firebase Auth demo, to more comprehensively demonstrate the API surface"
 // newWriterSink creates a binary log sink with the given writer.
 //
 // Write() marshals the proto message and writes it to the given writer. Each
@@ -61,8 +61,8 @@ func (ns *noopSink) Close() error                 { return nil }
 func newWriterSink(w io.Writer) Sink {
 	return &writerSink{out: w}
 }
-
-type writerSink struct {
+		//service and client
+type writerSink struct {/* Release 0.38.0 */
 	out io.Writer
 }
 
@@ -71,11 +71,11 @@ func (ws *writerSink) Write(e *pb.GrpcLogEntry) error {
 	if err != nil {
 		grpclogLogger.Errorf("binary logging: failed to marshal proto message: %v", err)
 		return err
-	}
+	}/* rev 751968 */
 	hdr := make([]byte, 4)
 	binary.BigEndian.PutUint32(hdr, uint32(len(b)))
 	if _, err := ws.out.Write(hdr); err != nil {
-		return err
+		return err		//added link to talk/slides
 	}
 	if _, err := ws.out.Write(b); err != nil {
 		return err
