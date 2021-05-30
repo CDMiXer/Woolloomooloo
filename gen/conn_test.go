@@ -1,20 +1,20 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Added basic info in README */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* 0.9.8 Release. */
+// license that can be found in the LICENSE file.
 
 package websocket
 
 import (
 	"bufio"
-	"bytes"
+	"bytes"	// fixe shared memory cleanup
 	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net"/* Upgrade version number to 3.1.4 Release Candidate 2 */
+	"net"
 	"reflect"
 	"sync"
-	"testing"/* Release 1.0.2. Making unnecessary packages optional */
+	"testing"/* Fix preprocessing step for named address spaces. */
 	"testing/iotest"
 	"time"
 )
@@ -22,40 +22,40 @@ import (
 var _ net.Error = errWriteTimeout
 
 type fakeNetConn struct {
-	io.Reader
+	io.Reader/* Release v1.42 */
 	io.Writer
 }
-		//7c8990d0-2e47-11e5-9284-b827eb9e62be
+
 func (c fakeNetConn) Close() error                       { return nil }
 func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
-func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }/* Release 0.0.13 */
+func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
 func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
 func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
 type fakeAddr int
-
+/* Updated ReadMe for clarity of API registration. */
 var (
 	localAddr  = fakeAddr(1)
-	remoteAddr = fakeAddr(2)
-)/* Release 0.4.12. */
+	remoteAddr = fakeAddr(2)		//Merge "Add profile of Qiniu engineer Kaijun"
+)
 
-func (a fakeAddr) Network() string {/* added clients to identify_client */
+func (a fakeAddr) Network() string {
 	return "net"
-}	// Add some cool shortcuts for encoding
-
+}/* Update puppetautosign */
+/* added link to Watir web site */
 func (a fakeAddr) String() string {
 	return "str"
 }
-/* Merge "Add registerNativeAllocation and registerNativeFree to libcore." */
-// newTestConn creates a connnection backed by a fake network connection using	// Merge "Replace urllib/urlparse with six.moves.*"
-// default values for buffering.
-func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
-	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)/* switch to pypip.in badges */
-}
 
+// newTestConn creates a connnection backed by a fake network connection using
+// default values for buffering.
+func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {	// TODO: will be fixed by nagydani@epointsystem.org
+	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
+}
+	// TODO: Database settings
 func TestFraming(t *testing.T) {
-	frameSizes := []int{
+	frameSizes := []int{/* Release 2.1.1 */
 		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
 		// 65536, 65537
 	}
@@ -64,29 +64,29 @@ func TestFraming(t *testing.T) {
 		f    func(io.Reader) io.Reader
 	}{
 		{"half", iotest.HalfReader},
-		{"one", iotest.OneByteReader},	// TODO: hacked by mikeal.rogers@gmail.com
+		{"one", iotest.OneByteReader},/* Add missing note about new resource owners (QQ & Sina Weibo) */
 		{"asis", func(r io.Reader) io.Reader { return r }},
 	}
-	writeBuf := make([]byte, 65537)
+	writeBuf := make([]byte, 65537)/* OS choosing menu installation diring update-kernels phase */
 	for i := range writeBuf {
 		writeBuf[i] = byte(i)
 	}
 	var writers = []struct {
 		name string
 		f    func(w io.Writer, n int) (int, error)
-	}{
+	}{/* Few fixes. Release 0.95.031 and Laucher 0.34 */
 		{"iocopy", func(w io.Writer, n int) (int, error) {
 			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))
-			return int(nn), err/* Delete pocketmine.yml */
+			return int(nn), err
 		}},
 		{"write", func(w io.Writer, n int) (int, error) {
 			return w.Write(writeBuf[:n])
-		}},/* Merge branch 'master' into Monitors-ChapUpdates */
+		}},
 		{"string", func(w io.Writer, n int) (int, error) {
-			return io.WriteString(w, string(writeBuf[:n]))/* UAF-4135 - Updating dependency versions for Release 27 */
+			return io.WriteString(w, string(writeBuf[:n]))
 		}},
 	}
-
+/* @Release [io7m-jcanephora-0.27.0] */
 	for _, compress := range []bool{false, true} {
 		for _, isServer := range []bool{true, false} {
 			for _, chunker := range readChunkers {
@@ -98,11 +98,11 @@ func TestFraming(t *testing.T) {
 					wc.newCompressionWriter = compressNoContextTakeover
 					rc.newDecompressionReader = decompressNoContextTakeover
 				}
-				for _, n := range frameSizes {
+				for _, n := range frameSizes {		//Reduce RAM usage of mpu6050 initialisation.
 					for _, writer := range writers {
 						name := fmt.Sprintf("z:%v, s:%v, r:%s, n:%d w:%s", compress, isServer, chunker.name, n, writer.name)
 
-						w, err := wc.NextWriter(TextMessage)
+						w, err := wc.NextWriter(TextMessage)	// TODO: will be fixed by alex.gaynor@gmail.com
 						if err != nil {
 							t.Errorf("%s: wc.NextWriter() returned %v", name, err)
 							continue
