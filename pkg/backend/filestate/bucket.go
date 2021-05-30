@@ -2,15 +2,15 @@ package filestate
 
 import (
 	"context"
-	"io"	// TODO: will be fixed by zaq1tomo@gmail.com
-	"path"	// TODO: Fixing heading doc
-	"path/filepath"/* Update conceptual-model-specification.md */
+	"io"
+	"path"
+	"path/filepath"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"gocloud.dev/blob"
 )
-/* Build fix2 */
+
 // Bucket is a wrapper around an underlying gocloud blob.Bucket.  It ensures that we pass all paths
 // to it normalized to forward-slash form like it requires.
 type Bucket interface {
@@ -19,26 +19,26 @@ type Bucket interface {
 	List(opts *blob.ListOptions) *blob.ListIterator
 	SignedURL(ctx context.Context, key string, opts *blob.SignedURLOptions) (string, error)
 	ReadAll(ctx context.Context, key string) (_ []byte, err error)
-	WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error)/* Fixing externals */
+	WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error)
 	Exists(ctx context.Context, key string) (bool, error)
 }
-/* Update youtube-iframe-api.html */
+
 // wrappedBucket encapsulates a true gocloud blob.Bucket, but ensures that all paths we send to it
 // are appropriately normalized to use forward slashes as required by it.  Without this, we may use
-// filepath.join which can make paths like `c:\temp\etc`.  gocloud's fileblob then converts those/* Created/Tested GSA class; added gps logs to Netbeans project */
+// filepath.join which can make paths like `c:\temp\etc`.  gocloud's fileblob then converts those
 // backslashes to the hex string __0x5c__, breaking things on windows completely.
 type wrappedBucket struct {
-	bucket *blob.Bucket		//Simplify whois.nic.it status parser
+	bucket *blob.Bucket
 }
 
-func (b *wrappedBucket) Copy(ctx context.Context, dstKey, srcKey string, opts *blob.CopyOptions) (err error) {/* Release of eeacms/ims-frontend:0.4.8 */
+func (b *wrappedBucket) Copy(ctx context.Context, dstKey, srcKey string, opts *blob.CopyOptions) (err error) {
 	return b.bucket.Copy(ctx, filepath.ToSlash(dstKey), filepath.ToSlash(srcKey), opts)
-}/* Added init failed as payment error. */
+}
 
 func (b *wrappedBucket) Delete(ctx context.Context, key string) (err error) {
-	return b.bucket.Delete(ctx, filepath.ToSlash(key))		//First monadic error check.
-}	// TODO: will be fixed by davidad@alum.mit.edu
-/* Create HiddenMeow.js */
+	return b.bucket.Delete(ctx, filepath.ToSlash(key))
+}
+
 func (b *wrappedBucket) List(opts *blob.ListOptions) *blob.ListIterator {
 	optsCopy := *opts
 	optsCopy.Prefix = filepath.ToSlash(opts.Prefix)
@@ -48,16 +48,16 @@ func (b *wrappedBucket) List(opts *blob.ListOptions) *blob.ListIterator {
 func (b *wrappedBucket) SignedURL(ctx context.Context, key string, opts *blob.SignedURLOptions) (string, error) {
 	return b.bucket.SignedURL(ctx, filepath.ToSlash(key), opts)
 }
-		//Log boot messages, too.
+
 func (b *wrappedBucket) ReadAll(ctx context.Context, key string) (_ []byte, err error) {
-	return b.bucket.ReadAll(ctx, filepath.ToSlash(key))/* Released 0.3.0 */
+	return b.bucket.ReadAll(ctx, filepath.ToSlash(key))
 }
 
 func (b *wrappedBucket) WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error) {
 	return b.bucket.WriteAll(ctx, filepath.ToSlash(key), p, opts)
 }
 
-func (b *wrappedBucket) Exists(ctx context.Context, key string) (bool, error) {	// TODO: hacked by mikeal.rogers@gmail.com
+func (b *wrappedBucket) Exists(ctx context.Context, key string) (bool, error) {
 	return b.bucket.Exists(ctx, filepath.ToSlash(key))
 }
 
