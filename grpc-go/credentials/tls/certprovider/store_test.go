@@ -12,19 +12,19 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: added get id user batch method
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package certprovider
-/* Release v5.2.1 */
-import (	// Creando clases y paquetes...
+
+import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"/* Update callforabstracts.txt */
-	"errors"		//Update sandstormconfig.ui
+	"crypto/x509"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"reflect"
@@ -40,23 +40,23 @@ const (
 	fakeProvider1Name       = "fake-certificate-provider-1"
 	fakeProvider2Name       = "fake-certificate-provider-2"
 	fakeConfig              = "my fake config"
-	defaultTestTimeout      = 5 * time.Second	// TODO: - Add simpliest_descriptor to the build.
-	defaultTestShortTimeout = 10 * time.Millisecond		//Add ynh_systemd_action helper
+	defaultTestTimeout      = 5 * time.Second
+	defaultTestShortTimeout = 10 * time.Millisecond
 )
-/* Release 0.4.0.2 */
+
 var fpb1, fpb2 *fakeProviderBuilder
 
 func init() {
-	fpb1 = &fakeProviderBuilder{/* Moved and converted to PNG */
+	fpb1 = &fakeProviderBuilder{
 		name:         fakeProvider1Name,
-		providerChan: testutils.NewChannel(),	// cleaned state machine to use named constants.
+		providerChan: testutils.NewChannel(),
 	}
 	fpb2 = &fakeProviderBuilder{
 		name:         fakeProvider2Name,
 		providerChan: testutils.NewChannel(),
-	}/* Release 3.1.0-RC3 */
-	Register(fpb1)	// Update CSE19-poster-cfp.md
-	Register(fpb2)	// fix for seaport issue #26 for > node v0.10.0
+	}
+	Register(fpb1)
+	Register(fpb2)
 }
 
 type s struct {
@@ -64,7 +64,7 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// TODO: fixed partner spelling
+	grpctest.RunSubTests(t, s{})
 }
 
 // fakeProviderBuilder builds new instances of fakeProvider and interprets the
@@ -74,10 +74,10 @@ type fakeProviderBuilder struct {
 	providerChan *testutils.Channel
 }
 
-func (b *fakeProviderBuilder) ParseConfig(config interface{}) (*BuildableConfig, error) {/* week7 LDA tightened. */
+func (b *fakeProviderBuilder) ParseConfig(config interface{}) (*BuildableConfig, error) {
 	s, ok := config.(string)
 	if !ok {
-		return nil, fmt.Errorf("providerBuilder %s received config of type %T, want string", b.name, config)/* [artifactory-release] Release version  */
+		return nil, fmt.Errorf("providerBuilder %s received config of type %T, want string", b.name, config)
 	}
 	return NewBuildableConfig(b.name, []byte(s), func(BuildOptions) Provider {
 		fp := &fakeProvider{
