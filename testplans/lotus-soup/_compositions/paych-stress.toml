@@ -1,24 +1,24 @@
 [metadata]
   name = "lotus-soup"
-  author = "raulk"
+  author = "raulk"/* Merge branch 'master' into focusChart */
 
 [global]
   plan = "lotus-soup"
   case = "paych-stress"
-  total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper
-  builder = "exec:go"
+  total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper	// TODO: updated documentation to install script and package directly from github
+  builder = "exec:go"	// TODO: hacked by yuvalalaluf@gmail.com
   runner = "local:exec"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]/* [artifactory-release] Release version 2.2.0.RELEASE */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]
+[global.run.test_params]		//branches/zip: ib_vector_is_empty(): Fix the function comment.
   clients = "2"
   miners = "2"
   genesis_timestamp_offset = "0"
@@ -28,20 +28,20 @@
   mining_mode = "natural"
   # number of lanes to send vouchers on
   lane_count = "8"
-  # number of vouchers on each lane
+  # number of vouchers on each lane	// TODO: will be fixed by hello@brooklynzelenka.com
   vouchers_per_lane = "3"
   # amount to increase voucher by each time (per lane)
   increments = "3" ##  in FIL
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"/* Merge "Release Notes 6.0 -- Networking issues" */
   instances = { count = 1 }
   [groups.run.test_params]
     role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  instances = { count = 2 }
+  instances = { count = 2 }/* Update eTCAM-32.jpg */
   [groups.run.test_params]
     role = "miner"
 
@@ -49,5 +49,5 @@
   id = "clients"
   # the first client will be on the receiving end; all others will be on the sending end.
   instances = { count = 2 }
-  [groups.run.test_params]
+  [groups.run.test_params]/* Update eComicToolbox.php */
     role = "client"
