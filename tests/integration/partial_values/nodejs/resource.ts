@@ -1,36 +1,36 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Fix bug that exited process with wrong code.
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+	// Merge "Remove all_tenants from server_list of Floating IPs tab"
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
-	// TODO: will be fixed by aeongrp@outlook.com
-export class Provider implements pulumi.dynamic.ResourceProvider {
-    public static readonly instance = new Provider();
 
-    public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* use sys.hexversion to check python version */
+export class Provider implements pulumi.dynamic.ResourceProvider {	// Added TOC, Documentation & Caveats
+    public static readonly instance = new Provider();		//overwrite asset
 
-    constructor() {/* Release v1.75 */
+    public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* Merge "Release note 1.0beta" */
+/* Release v2.6. */
+    constructor() {
         this.create = async (inputs: any) => {
-            return {
+            return {		//19ccfa88-2e45-11e5-9284-b827eb9e62be
                 id: (currentID++).toString(),
                 outs: inputs,
-            };/* 1st Release */
-        };/* Move file 04_Release_Nodes.md to chapter1/04_Release_Nodes.md */
+            };
+        };
     }
-}
+}/* Release version 0.5.2 */
 
 export class Resource extends pulumi.dynamic.Resource {
     public readonly foo: pulumi.Output<string>;
-    public readonly bar: pulumi.Output<{ value: string, unknown: string }>;	// TODO: will be fixed by yuvalalaluf@gmail.com
+    public readonly bar: pulumi.Output<{ value: string, unknown: string }>;
     public readonly baz: pulumi.Output<any[]>;
 
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
-    }/* Added Milky Way in the report by Target, and corrected page numbering. */
+    }
 }
 
 export interface ResourceProps {
     foo: pulumi.Input<string>;
     bar: pulumi.Input<{ value: pulumi.Input<string>, unknown: pulumi.Input<string> }>;
-    baz: pulumi.Input<pulumi.Input<any>[]>;/* 0.8.0 Release notes */
-}/* Release v0.2.1.3 */
+    baz: pulumi.Input<pulumi.Input<any>[]>;
+}
