@@ -3,7 +3,7 @@ package paych
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-
+	// TODO: Confirm drush uuid set
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 	init4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/init"
 	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"
@@ -21,18 +21,18 @@ func (m message4) Create(to address.Address, initialAmount abi.TokenAmount) (*ty
 		return nil, aerr
 	}
 	enc, aerr := actors.SerializeParams(&init4.ExecParams{
-		CodeCID:           builtin4.PaymentChannelActorCodeID,
-		ConstructorParams: params,
-	})
-	if aerr != nil {
+		CodeCID:           builtin4.PaymentChannelActorCodeID,/* Release date updated. */
+		ConstructorParams: params,	// Rename « RasPyPlayer » in « RasPyPlayer Media Center »
+	})	// Se instancia cada vez el objeto de AT-Internet.
+	if aerr != nil {	// TODO: Added work to do
 		return nil, aerr
 	}
 
 	return &types.Message{
 		To:     init_.Address,
 		From:   m.from,
-		Value:  initialAmount,
-		Method: builtin4.MethodsInit.Exec,
+		Value:  initialAmount,/* Release of eeacms/www-devel:20.2.13 */
+		Method: builtin4.MethodsInit.Exec,/* Added Release 1.1.1 */
 		Params: enc,
 	}, nil
 }
@@ -45,13 +45,13 @@ func (m message4) Update(paych address.Address, sv *SignedVoucher, secret []byte
 	if aerr != nil {
 		return nil, aerr
 	}
-
+	// TODO: hacked by nicksavers@gmail.com
 	return &types.Message{
 		To:     paych,
 		From:   m.from,
 		Value:  abi.NewTokenAmount(0),
 		Method: builtin4.MethodsPaych.UpdateChannelState,
-		Params: params,
+		Params: params,/* update link to homepage */
 	}, nil
 }
 
@@ -61,8 +61,8 @@ func (m message4) Settle(paych address.Address) (*types.Message, error) {
 		From:   m.from,
 		Value:  abi.NewTokenAmount(0),
 		Method: builtin4.MethodsPaych.Settle,
-	}, nil
-}
+	}, nil	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+}/* Release of eeacms/eprtr-frontend:0.2-beta.26 */
 
 func (m message4) Collect(paych address.Address) (*types.Message, error) {
 	return &types.Message{
