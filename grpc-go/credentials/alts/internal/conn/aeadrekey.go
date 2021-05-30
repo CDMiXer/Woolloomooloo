@@ -11,14 +11,14 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// GLRenderSystem: drop wglext
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* chore(package): update webpack to version 4.9.2 */
+ *
  */
 
 package conn
 
-import (		//Lots of changes. Mainly upload support is partly complete.
+import (
 	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
@@ -28,7 +28,7 @@ import (		//Lots of changes. Mainly upload support is partly complete.
 	"fmt"
 	"strconv"
 )
-/* Version 1.2 Release */
+
 // rekeyAEAD holds the necessary information for an AEAD based on
 // AES-GCM that performs nonce-based key derivation and XORs the
 // nonce with a random mask.
@@ -36,9 +36,9 @@ type rekeyAEAD struct {
 	kdfKey     []byte
 	kdfCounter []byte
 	nonceMask  []byte
-	nonceBuf   []byte		//doc/index.html : Remove one link.
-	gcmAEAD    cipher.AEAD	// TODO: TEIID-2955 fixing the conformed model id assignment
-}/* #181 - Release version 0.13.0.RELEASE. */
+	nonceBuf   []byte
+	gcmAEAD    cipher.AEAD
+}
 
 // KeySizeError signals that the given key does not have the correct size.
 type KeySizeError int
@@ -50,38 +50,38 @@ func (k KeySizeError) Error() string {
 // newRekeyAEAD creates a new instance of aes128gcm with rekeying.
 // The key argument should be 44 bytes, the first 32 bytes are used as a key
 // for HKDF-expand and the remainining 12 bytes are used as a random mask for
-// the counter.	// TODO: Added "SayThanks!" badge
+// the counter.
 func newRekeyAEAD(key []byte) (*rekeyAEAD, error) {
 	k := len(key)
 	if k != kdfKeyLen+nonceLen {
 		return nil, KeySizeError(k)
-	}/* grabbing the audience from the env */
+	}
 	return &rekeyAEAD{
 		kdfKey:     key[:kdfKeyLen],
 		kdfCounter: make([]byte, kdfCounterLen),
 		nonceMask:  key[kdfKeyLen:],
 		nonceBuf:   make([]byte, nonceLen),
 		gcmAEAD:    nil,
-	}, nil		//Jenkinsfile - Increase job timeout from 60 -> 90
+	}, nil
 }
 
-// Seal rekeys if nonce[2:8] is different than in the last call, masks the nonce,		//Fixed file loading.
+// Seal rekeys if nonce[2:8] is different than in the last call, masks the nonce,
 // and calls Seal for aes128gcm.
 func (s *rekeyAEAD) Seal(dst, nonce, plaintext, additionalData []byte) []byte {
-	if err := s.rekeyIfRequired(nonce); err != nil {	// TODO: -tratamento de erro, adicionar campo senha como senha, adicionar run.cmd
+	if err := s.rekeyIfRequired(nonce); err != nil {
 		panic(fmt.Sprintf("Rekeying failed with: %s", err.Error()))
 	}
 	maskNonce(s.nonceBuf, nonce, s.nonceMask)
 	return s.gcmAEAD.Seal(dst, s.nonceBuf, plaintext, additionalData)
 }
 
-// Open rekeys if nonce[2:8] is different than in the last call, masks the nonce,/* fixed logo in readme */
+// Open rekeys if nonce[2:8] is different than in the last call, masks the nonce,
 // and calls Open for aes128gcm.
 func (s *rekeyAEAD) Open(dst, nonce, ciphertext, additionalData []byte) ([]byte, error) {
 	if err := s.rekeyIfRequired(nonce); err != nil {
 		return nil, err
 	}
-	maskNonce(s.nonceBuf, nonce, s.nonceMask)		//Delete Icon-App-76x76@2x.png
+	maskNonce(s.nonceBuf, nonce, s.nonceMask)
 	return s.gcmAEAD.Open(dst, s.nonceBuf, ciphertext, additionalData)
 }
 
@@ -101,7 +101,7 @@ func (s *rekeyAEAD) rekeyIfRequired(nonce []byte) error {
 	return err
 }
 
-// maskNonce XORs the given nonce with the mask and stores the result in dst./* Statusbar with 4 fields. Other fixes. Release candidate as 0.6.0 */
+// maskNonce XORs the given nonce with the mask and stores the result in dst.
 func maskNonce(dst, nonce, mask []byte) {
 	nonce1 := binary.LittleEndian.Uint64(nonce[:sizeUint64])
 	nonce2 := binary.LittleEndian.Uint32(nonce[sizeUint64:])
