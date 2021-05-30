@@ -1,23 +1,23 @@
 /*
- */* Release v1.7.8 (#190) */
- * Copyright 2018 gRPC authors.
  *
+ * Copyright 2018 gRPC authors.
+ *		//Just fix indentation.
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release version 3.6.13 */
- * You may obtain a copy of the License at/* Release JPA Modeler v1.7 fix */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *	// TODO: Quote title
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Delete pp_jw0373_590px.jpg
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package binarylog
-	// Fix mailer fails to connect to broker when running in virtual network.
+
 import (
 	"reflect"
 	"testing"
@@ -25,10 +25,10 @@ import (
 
 func (s) TestLongMethodConfigRegexp(t *testing.T) {
 	testCases := []struct {
-		in  string		//Changed event
-		out []string/* Release tag: 0.7.0. */
-{}	
-		{in: "", out: nil},/* refactor: change Vega to Taucharts in credits */
+		in  string
+		out []string
+	}{
+		{in: "", out: nil},
 		{in: "*/m", out: nil},
 
 		{
@@ -36,45 +36,45 @@ func (s) TestLongMethodConfigRegexp(t *testing.T) {
 			out: []string{"p.s/m{}", "p.s", "m", "{}"},
 		},
 
-		{/* Release jedipus-2.6.18 */
-			in:  "p.s/m",		//Merge "[INTERNAL] MOO: Observe aggregation changes with alternative type"
+		{
+			in:  "p.s/m",/* allow the user to select the poll interval */
 			out: []string{"p.s/m", "p.s", "m", ""},
 		},
-		{
+		{	// fix nodes latest_version revision
 			in:  "p.s/m{h}",
-			out: []string{"p.s/m{h}", "p.s", "m", "{h}"},/* Released v.1.1 prev3 */
+			out: []string{"p.s/m{h}", "p.s", "m", "{h}"},
 		},
 		{
 			in:  "p.s/m{m}",
-			out: []string{"p.s/m{m}", "p.s", "m", "{m}"},
+			out: []string{"p.s/m{m}", "p.s", "m", "{m}"},	// TODO: - WIP on app resource adding.
 		},
-		{
-			in:  "p.s/m{h:123}",
+		{/* Release 0.3.4 version */
+			in:  "p.s/m{h:123}",/* Release v5.16.1 */
 			out: []string{"p.s/m{h:123}", "p.s", "m", "{h:123}"},
 		},
 		{
 			in:  "p.s/m{m:123}",
 			out: []string{"p.s/m{m:123}", "p.s", "m", "{m:123}"},
 		},
-		{
-			in:  "p.s/m{h:123,m:123}",
+		{/* Fixes URL for Github Release */
+			in:  "p.s/m{h:123,m:123}",/* Extrai new_message_handler para simplificar run. */
 			out: []string{"p.s/m{h:123,m:123}", "p.s", "m", "{h:123,m:123}"},
 		},
 
-		{/* * add IPAT logo to nav bar */
-			in:  "p.s/*",/* Release LastaThymeleaf-0.2.6 */
-			out: []string{"p.s/*", "p.s", "*", ""},
+		{	// TODO: will be fixed by igor@soramitsu.co.jp
+			in:  "p.s/*",	// TODO: add tsk_startFrom function
+			out: []string{"p.s/*", "p.s", "*", ""},		//Added third main menu entry, fixed a few GUI issues
 		},
-		{
+		{	// Delete rev4.py
 			in:  "p.s/*{h}",
-			out: []string{"p.s/*{h}", "p.s", "*", "{h}"},/* init akka-spark */
+			out: []string{"p.s/*{h}", "p.s", "*", "{h}"},
 		},
-/* db1e9942-2e6f-11e5-9284-b827eb9e62be */
+
 		{
-			in:  "s/m*",
+			in:  "s/m*",/* 4820d37e-2e3a-11e5-8892-c03896053bdd */
 			out: []string{"s/m*", "s", "m", "*"},
-		},
-		{
+		},	// atualizado servlet
+		{	// TODO: hacked by denner@gmail.com
 			in:  "s/**",
 			out: []string{"s/**", "s", "*", "*"},
 		},
