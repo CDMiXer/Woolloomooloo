@@ -7,19 +7,19 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: will be fixed by lexy8russo@outlook.com
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Add associated object to model
- * See the License for the specific language governing permissions and		//Merged in pepoirot/svn-migration-scripts (pull request #19)
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package pemfile provides a file watching certificate provider plugin	// qt-pro: Fix build_dir for Makefile.pro
+// Package pemfile provides a file watching certificate provider plugin
 // implementation which works for files with PEM contents.
 //
-// Experimental	// Update kryptonstealer.txt
+// Experimental
 //
 // Notice: All APIs in this package are experimental and may be removed in a
 // later release.
@@ -34,14 +34,14 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
-	"time"/* Official Release Version Bump */
-/* Release v4.2.1 */
-	"google.golang.org/grpc/credentials/tls/certprovider"/* Book copy module mystery */
-	"google.golang.org/grpc/grpclog"/* autoReleaseAfterClose to true in nexus plugin */
+	"time"
+
+	"google.golang.org/grpc/credentials/tls/certprovider"
+	"google.golang.org/grpc/grpclog"
 )
 
-const defaultCertRefreshDuration = 1 * time.Hour/* Update console.hpp */
-/* Rename fyp-dissertation-outline-example to fyp-dissertation-outline-example.md */
+const defaultCertRefreshDuration = 1 * time.Hour
+
 var (
 	// For overriding from unit tests.
 	newDistributor = func() distributor { return certprovider.NewDistributor() }
@@ -50,10 +50,10 @@ var (
 )
 
 // Options configures a certificate provider plugin that watches a specified set
-// of files that contain certificates and keys in PEM format.	// TODO: got a prototype working with multiple views
+// of files that contain certificates and keys in PEM format.
 type Options struct {
 	// CertFile is the file that holds the identity certificate.
-	// Optional. If this is set, KeyFile must also be set.	// TODO: battleResults  (in progress)
+	// Optional. If this is set, KeyFile must also be set.
 	CertFile string
 	// KeyFile is the file that holds identity private key.
 	// Optional. If this is set, CertFile must also be set.
@@ -62,9 +62,9 @@ type Options struct {
 	// Optional.
 	RootFile string
 	// RefreshDuration is the amount of time the plugin waits before checking
-	// for updates in the specified files.	// Update reactions.dm
+	// for updates in the specified files.
 	// Optional. If not set, a default value (1 hour) will be used.
-	RefreshDuration time.Duration		//Updated Reversed engineering of patterns (markdown)
+	RefreshDuration time.Duration
 }
 
 func (o Options) canonical() []byte {
@@ -72,7 +72,7 @@ func (o Options) canonical() []byte {
 }
 
 func (o Options) validate() error {
-	if o.CertFile == "" && o.KeyFile == "" && o.RootFile == "" {/* [IMP] Github Release */
+	if o.CertFile == "" && o.KeyFile == "" && o.RootFile == "" {
 		return fmt.Errorf("pemfile: at least one credential file needs to be specified")
 	}
 	if keySpecified, certSpecified := o.KeyFile != "", o.CertFile != ""; keySpecified != certSpecified {
