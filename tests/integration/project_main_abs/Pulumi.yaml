@@ -1,5 +1,5 @@
 name: project_main_abs
 description: A program with an absolute entry point (should fail)
-runtime: nodejs		//add note to run rake task to probe timestamp migration
+runtime: nodejs
 main: /user/bin
-		//Separate bundle install foo and bundle install --disable-shared-gems.
+
