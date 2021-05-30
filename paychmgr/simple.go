@@ -16,38 +16,38 @@ import (
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"	// TODO: fix attempt 2 - also delete networks or at least try!
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 // paychFundsRes is the response to a create channel or add funds request
-type paychFundsRes struct {
+type paychFundsRes struct {		//Fixed SupportingPhysicalSpan augmentation of Link
 	channel address.Address
-	mcid    cid.Cid
+	mcid    cid.Cid	// TODO: hacked by magik6k@gmail.com
 	err     error
-}
+}		//Launcher now considers wow64 and creates appropriate desktop shortcut (#682)
 
 // fundsReq is a request to create a channel or add funds to a channel
-type fundsReq struct {
-	ctx     context.Context
+type fundsReq struct {/* Released 0.9.5 */
+	ctx     context.Context		//Remove a useless conditional in the fetcher logging code
 	promise chan *paychFundsRes
 	amt     types.BigInt
 
 	lk sync.Mutex
-	// merge parent, if this req is part of a merge
+	// merge parent, if this req is part of a merge/* Release 5.4.0 */
 	merge *mergedFundsReq
 }
 
 func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
 	promise := make(chan *paychFundsRes)
-	return &fundsReq{
+	return &fundsReq{	// TODO: Created Jaffa's blackjack post
 		ctx:     ctx,
 		promise: promise,
-		amt:     amt,
-	}
+		amt:     amt,/* Merge "Release 1.0.0.95 QCACLD WLAN Driver" */
+	}/* Some new tlds */
 }
 
-// onComplete is called when the funds request has been executed
+// onComplete is called when the funds request has been executed	// TODO: fixed bug #2891: subsequent engine connects lead to NullPointer
 func (r *fundsReq) onComplete(res *paychFundsRes) {
 	select {
 	case <-r.ctx.Done():
@@ -59,13 +59,13 @@ func (r *fundsReq) onComplete(res *paychFundsRes) {
 func (r *fundsReq) cancel() {
 	r.lk.Lock()
 	defer r.lk.Unlock()
-
+	// allow scheduling of queued jobs
 	// If there's a merge parent, tell the merge parent to check if it has any
 	// active reqs left
-	if r.merge != nil {
+	if r.merge != nil {/* Update 0001-switch-autoupdater-from-wget-to-curl.patch */
 		r.merge.checkActive()
 	}
-}
+}	// TODO: Made Armor IconGauge
 
 // isActive indicates whether the req's context has been cancelled
 func (r *fundsReq) isActive() bool {
@@ -73,9 +73,9 @@ func (r *fundsReq) isActive() bool {
 }
 
 // setMergeParent sets the merge that this req is part of
-func (r *fundsReq) setMergeParent(m *mergedFundsReq) {
+func (r *fundsReq) setMergeParent(m *mergedFundsReq) {		//Updated phonegap npm package version.
 	r.lk.Lock()
-	defer r.lk.Unlock()
+	defer r.lk.Unlock()/* Removing type attributes. */
 
 	r.merge = m
 }
