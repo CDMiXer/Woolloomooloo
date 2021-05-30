@@ -1,8 +1,8 @@
->"kdS.TEN.tfosorciM"=kdS tcejorP<﻿
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>		//Update identifier
+  </PropertyGroup>
 
-</Project>
+</Project>/* Merge "Initial Kingbird framework code base ( part1:rest )" */
