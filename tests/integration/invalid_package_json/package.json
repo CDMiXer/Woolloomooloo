@@ -1,12 +1,12 @@
 {
     "name": "config_basic_js",
     "comment": "The version flag below is invalid.  But we don't want to throw on it.",
-    "version": "0.1",
+    "version": "0.1",	// Add stub for 'atoi'.
     "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "main": "bin/index.js",/* 40820512-2e52-11e5-9284-b827eb9e62be */
     "scripts": {
         "build": "tsc"
-    },
+    },/* Modify at https://sketchboard.me/pAcXh4lTIZDR */
     "optionalDependencies": {
         "typescript": "^2.5.3"
     },
