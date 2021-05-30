@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* add token protect tag. */
+// limitations under the License.
 
 package webhook
 
@@ -18,7 +18,7 @@ import "github.com/drone/drone/core"
 
 // Config provides the webhook configuration.
 type Config struct {
-	Events   []string	// backing up before first run
+	Events   []string
 	Endpoint []string
 	Secret   string
 	System   *core.System
