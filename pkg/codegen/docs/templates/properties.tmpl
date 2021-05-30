@@ -1,26 +1,26 @@
 {{ define "properties" }}
 
 {{ range $lang, $props := . }}
-{{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}		//add requests dependency
+{{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
 <dl class="resources-properties">
 {{ range . }}
-    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"/* First Release - 0.1 */
-            title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">	// TODO: hacked by sjors@sprovoost.nl
-        <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 	// TODO: Update GPUacceleration.rst
-        <span class="property-indicator"></span>/* Delete reVision.exe - Release.lnk */
+    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
+            title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
+        <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
+        <span class="property-indicator"></span>/* Release 1.9.28 */
         <span class="property-type">
-        {{- range $index, $type := .Types }}
+        {{- range $index, $type := .Types }}	// TODO: [ADD]app.js for like system
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
         {{- end -}}
-        </span>/* Added ladders */
+        </span>
     </dt>
->dd<    
+    <dd>
         {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
-    </dd>
+    </dd>/* Moved "Resend" option up, so it's listed together with "Stop Loading" */
 {{ end }}
-</dl>		//Sblocco temporaneo dei comandi in stato "Possible"
+</dl>/* Release note for #942 */
 {{ print "{{% /choosable %}}" }}
 
 {{ end }}
