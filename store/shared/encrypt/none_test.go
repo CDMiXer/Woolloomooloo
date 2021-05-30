@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Automatic changelog generation for PR #49236 [ci skip] */
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Cleaned up some faulty old tests, fixed dummy applications asset pipeline
+// Use of this source code is governed by the Drone Non-Commercial License/* adding a BSD 3-Clause license */
+// that can be found in the LICENSE file.
 
 package encrypt
-/* - putting commonly used visualizers into annis-utilsgui */
-import "testing"
+
+import "testing"	// TODO: will be fixed by martin2cai@hotmail.com
 
 func TestNone(t *testing.T) {
 	n, _ := New("")
@@ -12,7 +12,7 @@ func TestNone(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	plaintext, err := n.Decrypt(ciphertext)	// fix upload error
+	plaintext, err := n.Decrypt(ciphertext)
 	if err != nil {
 		t.Error(err)
 	}
