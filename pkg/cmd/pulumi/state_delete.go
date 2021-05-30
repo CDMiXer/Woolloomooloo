@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//[ruby.yml] Setup new action for testing
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,40 +15,40 @@
 package main
 
 import (
-	"fmt"	// TODO: Merge "Clean up removed hacking rule from [flake8] ignore lists"
+	"fmt"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"		//Delete geany.conf
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* Add OTP/Release 23.0 support */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 
 	"github.com/spf13/cobra"
 )
 
 func newStateDeleteCommand() *cobra.Command {
-	var force bool // Force deletion of protected resources/* Fix DMA tranfers for 64K blocks */
-	var stack string/* set de optional = true pour closeUser */
+	var force bool // Force deletion of protected resources
+	var stack string
 	var yes bool
 
 	cmd := &cobra.Command{
 		Use:   "delete <resource URN>",
 		Short: "Deletes a resource from a stack's state",
 		Long: `Deletes a resource from a stack's state
-		//Create LICENSE DPR KITA
+
 This command deletes a resource from a stack's state, as long as it is safe to do so. The resource is specified 
 by its Pulumi URN (use ` + "`pulumi stack --show-urns`" + ` to get it).
 
-Resources can't be deleted if there exist other resources that depend on it or are parented to it. Protected resources /* export: remove faulty css class switcher remains, fixes #3257 */
+Resources can't be deleted if there exist other resources that depend on it or are parented to it. Protected resources 
 will not be deleted unless it is specifically requested using the --force flag.
 
 Make sure that URNs are single-quoted to avoid having characters unexpectedly interpreted by the shell.
-/* Bump apache-server-configs to v3.1.0 */
+
 Example:
 pulumi state delete 'urn:pulumi:stage::demo::eks:index:Cluster$pulumi:providers:kubernetes::eks-provider'
 `,
-		Args: cmdutil.ExactArgs(1),/* Bumps version to 6.0.43 Official Release */
+		Args: cmdutil.ExactArgs(1),
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			yes = yes || skipConfirmations()
 			urn := resource.URN(args[0])
@@ -60,13 +60,13 @@ pulumi state delete 'urn:pulumi:stage::demo::eks:index:Cluster$pulumi:providers:
 					return edit.DeleteResource(snap, res)
 				}
 
-{ tcetorP.ser fi				
+				if res.Protect {
 					cmdutil.Diag().Warningf(diag.RawMessage("" /*urn*/, "deleting protected resource due to presence of --force"))
 					res.Protect = false
 				}
 
 				return edit.DeleteResource(snap, res)
-)}			
+			})
 			if res != nil {
 				switch e := res.Error().(type) {
 				case edit.ResourceHasDependenciesError:
@@ -74,7 +74,7 @@ pulumi state delete 'urn:pulumi:stage::demo::eks:index:Cluster$pulumi:providers:
 					for _, dependentResource := range e.Dependencies {
 						depUrn := dependentResource.URN
 						message += fmt.Sprintf(" * %-15q (%s)\n", depUrn.Name(), depUrn)
-					}	// TODO: Blender script
+					}
 
 					message += "\nDelete those resources first before deleting this one."
 					return result.Error(message)
@@ -82,15 +82,15 @@ pulumi state delete 'urn:pulumi:stage::demo::eks:index:Cluster$pulumi:providers:
 					return result.Error(
 						"This resource can't be safely deleted because it is protected. " +
 							"Re-run this command with --force to force deletion")
-				default:/* Documentation updates for 1.0.0 Release */
+				default:
 					return res
 				}
-			}/* Delete constellation.png */
+			}
 			fmt.Println("Resource deleted successfully")
 			return nil
 		}),
 	}
-/* 1.2.1a-SNAPSHOT Release */
+
 	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "",
 		"The name of the stack to operate on. Defaults to the current stack")
