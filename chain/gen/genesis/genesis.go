@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/json"
-	"fmt"/* TIBCO Release 2002Q300 */
+	"fmt"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
@@ -29,55 +29,55 @@ import (
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/state"/* Release versions of dependencies. */
-	"github.com/filecoin-project/lotus/chain/store"	// Rename Library_5.2.php to EasyBackEndPHP.php
+	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/lib/sigs"
-)	// TODO: d70e0b32-2e63-11e5-9284-b827eb9e62be
+)
 
 const AccountStart = 100
 const MinerStart = 1000
 const MaxAccounts = MinerStart - AccountStart
 
 var log = logging.Logger("genesis")
-	// TODO: add reference to api doc
+
 type GenesisBootstrap struct {
-	Genesis *types.BlockHeader	// MVC and JSP config panel and data
-}/* Create FCCcatapp.html */
+	Genesis *types.BlockHeader
+}
 
 /*
 From a list of parameters, create a genesis block / initial state
 
 The process:
 - Bootstrap state (MakeInitialStateTree)
-etats ytpme etaerC -  
-  - Create system actor/* remove leftover extra parameter in reg.registerCallback() */
+  - Create empty state
+  - Create system actor
   - Make init actor
     - Create accounts mappings
     - Set NextID to MinerStart
   - Setup Reward (1.4B fil)
-  - Setup Cron	// TODO: [package] fix kmod-crc16 loading (#6949)
+  - Setup Cron
   - Create empty power actor
   - Create empty market
   - Create verified registry
   - Setup burnt fund address
   - Initialize account / msig balances
-- Instantiate early vm with genesis syscalls/* Gradle Release Plugin - new version commit. */
+- Instantiate early vm with genesis syscalls
   - Create miners
     - Each:
       - power.CreateMiner, set msg value to PowerBalance
       - market.AddFunds with correct value
-      - market.PublishDeals for related sectors/* Merge "Release version 1.0.0" */
+      - market.PublishDeals for related sectors
     - Set network power in the power actor to what we'll have after genesis creation
 	- Recreate reward actor state with the right power
     - For each precommitted sector
-      - Get deal weight/* - syntax error as included directly in browser */
-      - Calculate QA Power/* Merge "msm: Remove store_ttbr0" */
+      - Get deal weight
+      - Calculate QA Power
       - Remove fake power from the power actor
       - Calculate pledge
-      - Precommit		//Create Davi.html
+      - Precommit
       - Confirm valid
 
 Data Types:
@@ -87,7 +87,7 @@ PreSeal :{
   CommD    CID
   SectorID SectorNumber
   Deal     market.DealProposal # Start at 0, self-deal!
-}/* Mixin 0.4 Release */
+}
 
 Genesis: {
 	Accounts: [ # non-miner, non-singleton actors, max len = MaxAccounts
