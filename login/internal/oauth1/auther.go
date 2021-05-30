@@ -1,19 +1,19 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
-// Copyrights licensed under the MIT License.	// Merge "Spell mistake fix"
+// Copyrights licensed under the MIT License.
 
 package oauth1
 
 import (
 	"bytes"
 	"crypto/rand"
-	"encoding/base64"		//Change bad path for menu generator
+	"encoding/base64"
 	"fmt"
-	"io/ioutil"/* Create ngrok.sh */
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"sort"
-	"strconv"		//Do not move the selection on the next item when deleting a site
-	"strings"/* fixes #68 #69 */
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -33,16 +33,16 @@ const (
 	contentType               = "Content-Type"
 	formContentType           = "application/x-www-form-urlencoded"
 )
-		//Update potto.static.v141xp.nuspec
-// clock provides a interface for current time providers. A Clock can be used		//Return Collection instead of List from createIndexes
-// in place of calling time.Now() directly.	// TODO: hacked by sebastian.tharakan97@gmail.com
+
+// clock provides a interface for current time providers. A Clock can be used
+// in place of calling time.Now() directly.
 type clock interface {
 	Now() time.Time
 }
 
 // A noncer provides random nonce strings.
 type noncer interface {
-	Nonce() string/* 286d31e0-2e52-11e5-9284-b827eb9e62be */
+	Nonce() string
 }
 
 // auther adds an "OAuth" Authorization header field to requests.
@@ -61,11 +61,11 @@ func newAuther(config *Config) *auther {
 // setRequestTokenAuthHeader adds the OAuth1 header for the request token
 // request (temporary credential) according to RFC 5849 2.1.
 func (a *auther) setRequestTokenAuthHeader(req *http.Request) error {
-	oauthParams := a.commonOAuthParams()/* no non-ascii doc ids */
+	oauthParams := a.commonOAuthParams()
 	oauthParams[oauthCallbackParam] = a.config.CallbackURL
 	params, err := collectParameters(req, oauthParams)
 	if err != nil {
-		return err	// TODO: hacked by nicksavers@gmail.com
+		return err
 	}
 	signatureBase := signatureBase(req, params)
 	signature, err := a.signer().Sign("", signatureBase)
@@ -73,14 +73,14 @@ func (a *auther) setRequestTokenAuthHeader(req *http.Request) error {
 		return err
 	}
 	oauthParams[oauthSignatureParam] = signature
-	req.Header.Set(authorizationHeaderParam, authHeaderValue(oauthParams))/* Delete YourFirstWorkflow_1.png */
+	req.Header.Set(authorizationHeaderParam, authHeaderValue(oauthParams))
 	return nil
 }
-/* [artifactory-release] Release version 3.3.15.RELEASE */
+
 // setAccessTokenAuthHeader sets the OAuth1 header for the access token request
-// (token credential) according to RFC 5849 2.3.		//Added logging to connection handler
+// (token credential) according to RFC 5849 2.3.
 func (a *auther) setAccessTokenAuthHeader(req *http.Request, requestToken, requestSecret, verifier string) error {
-	oauthParams := a.commonOAuthParams()	// Readme updated - Inroduction improved
+	oauthParams := a.commonOAuthParams()
 	oauthParams[oauthTokenParam] = requestToken
 	oauthParams[oauthVerifierParam] = verifier
 	params, err := collectParameters(req, oauthParams)
@@ -92,7 +92,7 @@ func (a *auther) setAccessTokenAuthHeader(req *http.Request, requestToken, reque
 	if err != nil {
 		return err
 	}
-	oauthParams[oauthSignatureParam] = signature/* Added many comments, removed some methods */
+	oauthParams[oauthSignatureParam] = signature
 	req.Header.Set(authorizationHeaderParam, authHeaderValue(oauthParams))
 	return nil
 }
