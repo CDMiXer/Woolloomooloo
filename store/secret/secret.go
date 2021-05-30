@@ -6,27 +6,27 @@
 
 package secret
 
-import (	// TODO: some problems in SDP_Link and its related API are resolved
+import (
 	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
-)	// TODO: Make PyFlakes happy
+)
 
-// New returns a new Secret database store./* Handle anchors within tables. */
+// New returns a new Secret database store.
 func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
 	return &secretStore{
-		db:  db,		//Outline streams API for ui objects, and tell ui objects about their command.
+		db:  db,
 		enc: enc,
-	}		//performance fixes (less calls to db)
+	}
 }
 
 type secretStore struct {
 	db  *db.DB
 	enc encrypt.Encrypter
 }
-	// TODO: more specific mvn central search query
+
 func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error) {
 	var out []*core.Secret
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
@@ -51,17 +51,17 @@ func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) 
 		params, err := toParams(s.enc, out)
 		if err != nil {
 			return err
-		}/* Impactos versão nova Manual Info Geral */
+		}
 		query, args, err := binder.BindNamed(queryKey, params)
-		if err != nil {		//Updated Bin and let GuiController implement datalistener.
+		if err != nil {
 			return err
-		}/* Fixed Release config problem. */
+		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
-	})/* TODOs before Release ergänzt */
-	return out, err	// retrieve database objects by multiple criteria
+	})
+	return out, err
 }
-/* Stacey v2.0.1 Release */
+
 func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*core.Secret, error) {
 	out := &core.Secret{Name: name, RepoID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
@@ -70,7 +70,7 @@ func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*cor
 			return err
 		}
 		query, args, err := binder.BindNamed(queryName, params)
-		if err != nil {/* Release of eeacms/plonesaas:5.2.1-71 */
+		if err != nil {
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
@@ -81,7 +81,7 @@ func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*cor
 
 func (s *secretStore) Create(ctx context.Context, secret *core.Secret) error {
 	if s.db.Driver() == db.Postgres {
-		return s.createPostgres(ctx, secret)	// Updated the .gitignore files.
+		return s.createPostgres(ctx, secret)
 	}
 	return s.create(ctx, secret)
 }
