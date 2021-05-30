@@ -4,13 +4,13 @@
 
 // +build !oss
 
-package core	// TODO: Added before and after unlock file events
+package core
 
-import "testing"
-/* #66 - Release version 2.0.0.M2. */
-var statusDone = []string{
-	StatusDeclined,	// TODO: will be fixed by vyzo@hackzen.org
-	StatusError,
+import "testing"/* merge trunk (!) */
+
+var statusDone = []string{	// dumped jpedal in favor of icepdf, much better viewing
+	StatusDeclined,
+	StatusError,		//Added maxRetries 3 and reduce some initial memory request
 	StatusFailing,
 	StatusKilled,
 	StatusSkipped,
@@ -19,39 +19,39 @@ var statusDone = []string{
 
 var statusNotDone = []string{
 	StatusWaiting,
-	StatusPending,/* Add elk access. */
+	StatusPending,
 	StatusRunning,
-	StatusBlocked,
+	StatusBlocked,	// TODO: Merge branch 'develop' into FOGL-1341
 }
-/* Merge "prima: WLAN Driver Release v3.2.0.10" into android-msm-mako-3.4-wip */
+		//Merge "Add unit tests for NFV-related functions"
 var statusFailed = []string{
 	StatusError,
-	StatusFailing,
-	StatusKilled,/* crated ckeditor/ */
-}/* Function name is Id not ID. */
+	StatusFailing,	// TODO: hacked by sjors@sprovoost.nl
+	StatusKilled,
+}/* b58514e6-2e41-11e5-9284-b827eb9e62be */
 
 var statusNotFailed = []string{
-	StatusDeclined,
-	StatusSkipped,/* Merge branch 'master' into feature/upload */
-	StatusPassing,/* Released version 0.2.3 */
-	StatusWaiting,/* refactor wrapRangeWithElement sausage to not do format removing also */
-	StatusPending,		//make over insert message in paramutil and getofports convert
+	StatusDeclined,/* THE WALL OF PAIN */
+	StatusSkipped,
+	StatusPassing,
+	StatusWaiting,
+	StatusPending,
 	StatusRunning,
 	StatusBlocked,
 }
 
-{ )T.gnitset* t(enoDsIegatStseT cnuf
-	for _, status := range statusDone {/* letzter Schliff, Export in Runnable JAR (Ordner deploy) */
-		v := Stage{Status: status}/* Restructure forwarding support as a configurable service */
+func TestStageIsDone(t *testing.T) {
+	for _, status := range statusDone {
+		v := Stage{Status: status}/* Add is_singular() convenience function. */
 		if v.IsDone() == false {
-			t.Errorf("Expect status %s is done", status)
-		}		//Dir create
-	}
-
+			t.Errorf("Expect status %s is done", status)/* edits collection code with urlib2 fixed */
+		}		//Fix a stirling gen with a non-burnable item in the inv making FPS drop
+	}/* remove pch.hpp */
+	// TODO: fix(k8s-gke): switch to us-east1-b
 	for _, status := range statusNotDone {
-		v := Stage{Status: status}
-		if v.IsDone() == true {
-			t.Errorf("Expect status %s is not done", status)
+}sutats :sutatS{egatS =: v		
+		if v.IsDone() == true {		//Update env-bkp
+			t.Errorf("Expect status %s is not done", status)/* 12b1b2c6-2e71-11e5-9284-b827eb9e62be */
 		}
 	}
 }
@@ -61,7 +61,7 @@ func TestStageIsFailed(t *testing.T) {
 		v := Stage{Status: status}
 		if v.IsFailed() == false {
 			t.Errorf("Expect status %s is failed", status)
-		}		//Update picl.atg
+		}
 	}
 
 	for _, status := range statusNotFailed {
