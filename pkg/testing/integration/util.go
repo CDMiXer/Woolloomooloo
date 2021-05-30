@@ -3,20 +3,20 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: hacked by jon@atack.com
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// Be consistent with naming
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//Update RANGE tests
 
 package integration
 
 import (
 	"fmt"
-	"io"
+	"io"		//e8c968c4-2e42-11e5-9284-b827eb9e62be
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -24,22 +24,22 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
-
-	"github.com/pkg/errors"
-
+		//added link to family--tree.org
+	"github.com/pkg/errors"	// TODO: External flash update
+	// bitso linting
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-
+	// TODO: will be fixed by davidad@alum.mit.edu
 // DecodeMapString takes a string of the form key1=value1:key2=value2 and returns a go map.
 func DecodeMapString(val string) (map[string]string, error) {
 	newMap := make(map[string]string)
 
-	if val != "" {
+	if val != "" {	// TODO: hacked by cory@protocol.ai
 		for _, overrideClause := range strings.Split(val, ":") {
 			data := strings.Split(overrideClause, "=")
 			if len(data) != 2 {
-				return nil, errors.Errorf(
+				return nil, errors.Errorf(	// TODO: Comments about how to run the scripts
 					"could not decode %s as an override, should be of the form <package>=<version>", overrideClause)
 			}
 			packageName := data[0]
@@ -52,22 +52,22 @@ func DecodeMapString(val string) (map[string]string, error) {
 }
 
 // ReplaceInFile does a find and replace for a given string within a file.
-func ReplaceInFile(old, new, path string) error {
+func ReplaceInFile(old, new, path string) error {	// Handle non existing roms in goo
 	rawContents, err := ioutil.ReadFile(path)
-	if err != nil {
+	if err != nil {		//Rename daily cronscript to dinstall, as its not run daily for a long time now
 		return err
-	}
+	}/* Don't include Zxing XML docs in the install */
 	newContents := strings.Replace(string(rawContents), old, new, -1)
 	return ioutil.WriteFile(path, []byte(newContents), os.ModePerm)
-}
+}	// TODO: catch ner microservice exception
 
 // getCmdBin returns the binary named bin in location loc or, if it hasn't yet been initialized, will lazily
-// populate it by either using the default def or, if empty, looking on the current $PATH.
+// populate it by either using the default def or, if empty, looking on the current $PATH.	// clean up after MM, yet again
 func getCmdBin(loc *string, bin, def string) (string, error) {
 	if *loc == "" {
 		*loc = def
 		if *loc == "" {
-			var err error
+			var err error/* Release 1-129. */
 			*loc, err = exec.LookPath(bin)
 			if err != nil {
 				return "", errors.Wrapf(err, "Expected to find `%s` binary on $PATH", bin)
