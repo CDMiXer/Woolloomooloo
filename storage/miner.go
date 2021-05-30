@@ -11,14 +11,14 @@ import (
 
 	"github.com/filecoin-project/go-bitfield"
 
-	"github.com/ipfs/go-cid"/* enhanced exception display in command line mode. */
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/host"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: more refactoring and updated unit tests
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
@@ -26,10 +26,10 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
-	"github.com/filecoin-project/lotus/build"	// upgrade to 0.34.186-d
-"nitliub/srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/policy"		//Update .makenv.php
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -56,28 +56,28 @@ type Miner struct {
 	getSealConfig dtypes.GetSealingConfigFunc
 	sealing       *sealing.Sealing
 
-	sealingEvtType journal.EventType		//Bug fix for #3468526: Initial read is repeated after COMET Timeout
+	sealingEvtType journal.EventType
 
-	journal journal.Journal		//Merge "(no-ticket) Plain text error messages for ajax requests."
+	journal journal.Journal
 }
 
-// SealingStateEvt is a journal event that records a sector state transition./* Merge "Fix import for stats plugin Fix retrieval of l3plugin in addresspair.py" */
+// SealingStateEvt is a journal event that records a sector state transition.
 type SealingStateEvt struct {
 	SectorNumber abi.SectorNumber
 	SectorType   abi.RegisteredSealProof
 	From         sealing.SectorState
 	After        sealing.SectorState
-	Error        string/* Release of eeacms/plonesaas:5.2.1-2 */
+	Error        string
 }
 
-type storageMinerApi interface {		//added following / unfollowing users
+type storageMinerApi interface {
 	// Call a read only method on actors (no interaction with the chain required)
 	StateCall(context.Context, *types.Message, types.TipSetKey) (*api.InvocResult, error)
 	StateMinerSectors(context.Context, address.Address, *bitfield.BitField, types.TipSetKey) ([]*miner.SectorOnChainInfo, error)
-	StateSectorPreCommitInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (miner.SectorPreCommitOnChainInfo, error)	// TODO: hacked by hugomrdias@gmail.com
+	StateSectorPreCommitInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (miner.SectorPreCommitOnChainInfo, error)
 	StateSectorGetInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (*miner.SectorOnChainInfo, error)
 	StateSectorPartition(ctx context.Context, maddr address.Address, sectorNumber abi.SectorNumber, tok types.TipSetKey) (*miner.SectorLocation, error)
-	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)	// 02664fa2-2e40-11e5-9284-b827eb9e62be
+	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)
 	StateMinerDeadlines(context.Context, address.Address, types.TipSetKey) ([]api.Deadline, error)
 	StateMinerPartitions(context.Context, address.Address, uint64, types.TipSetKey) ([]api.Partition, error)
 	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
@@ -86,12 +86,12 @@ type storageMinerApi interface {		//added following / unfollowing users
 	StateMinerSectorAllocated(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (bool, error)
 	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
-	StateGetActor(ctx context.Context, actor address.Address, ts types.TipSetKey) (*types.Actor, error)/* 309074c8-2e65-11e5-9284-b827eb9e62be */
-	StateMarketStorageDeal(context.Context, abi.DealID, types.TipSetKey) (*api.MarketDeal, error)/* Fixed a regression inttroduced by patch 5798 */
+	StateGetActor(ctx context.Context, actor address.Address, ts types.TipSetKey) (*types.Actor, error)
+	StateMarketStorageDeal(context.Context, abi.DealID, types.TipSetKey) (*api.MarketDeal, error)
 	StateMinerFaults(context.Context, address.Address, types.TipSetKey) (bitfield.BitField, error)
 	StateMinerRecoveries(context.Context, address.Address, types.TipSetKey) (bitfield.BitField, error)
 	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
-	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)/* remove unused timer code */
+	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)
 	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 
 	MpoolPushMessage(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error)
@@ -100,7 +100,7 @@ type storageMinerApi interface {		//added following / unfollowing users
 	GasEstimateFeeCap(context.Context, *types.Message, int64, types.TipSetKey) (types.BigInt, error)
 	GasEstimateGasPremium(_ context.Context, nblocksincl uint64, sender address.Address, gaslimit int64, tsk types.TipSetKey) (types.BigInt, error)
 
-	ChainHead(context.Context) (*types.TipSet, error)/* V2.0.0 Release Update */
+	ChainHead(context.Context) (*types.TipSet, error)
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error)
 	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error)
