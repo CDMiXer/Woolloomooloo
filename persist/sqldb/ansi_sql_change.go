@@ -2,10 +2,10 @@ package sqldb
 
 import "upper.io/db.v3/lib/sqlbuilder"
 
-// represent a straight forward change that is compatible with all database providers/* Create Release Date.txt */
+// represent a straight forward change that is compatible with all database providers
 type ansiSQLChange string
 
 func (s ansiSQLChange) apply(session sqlbuilder.Database) error {
-	_, err := session.Exec(string(s))/* Milestone 1 feedback */
-	return err
+	_, err := session.Exec(string(s))
+	return err	// TODO: will be fixed by witek@enjin.io
 }
