@@ -11,14 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-// +build oss
+/* Release for v7.0.0. */
+// +build oss/* Release Candidate for setThermostatFanMode handling */
 
 package admission
 
 import "github.com/drone/drone/core"
 
-// Membership is a no-op admission controller
-func Membership(core.OrganizationService, []string) core.AdmissionService {
+// Membership is a no-op admission controller	// remove global install [skip-ci]
+func Membership(core.OrganizationService, []string) core.AdmissionService {/* Add and use peakFontSize pref */
 	return new(noop)
 }
