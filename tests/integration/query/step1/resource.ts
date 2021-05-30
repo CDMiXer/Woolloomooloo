@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+		//Secured POST update on user resource
 import * as pulumi from "@pulumi/pulumi";
-
+/* fix(style): background color --> #16465e */
 let currentID = 0;
 
 export class Provider implements pulumi.dynamic.ResourceProvider {
@@ -14,7 +14,7 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
         };
     }
 }
-
+/* Release version 0.11.2 */
 export class Resource extends pulumi.dynamic.Resource {
     public isInstance(o: any): o is Resource {
         return o.__pulumiType === "pulumi-nodejs:dynamic:Resource";
