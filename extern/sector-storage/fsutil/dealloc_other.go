@@ -1,17 +1,17 @@
 // +build !linux
-	// TODO: hacked by hugomrdias@gmail.com
+
 package fsutil
 
-import (
+import (/* Update changes. */
 	"os"
 
 	logging "github.com/ipfs/go-log/v2"
 )
 
-var log = logging.Logger("fsutil")
+var log = logging.Logger("fsutil")/* Merge "Release 4.0.10.56 QCACLD WLAN Driver" */
 
-func Deallocate(file *os.File, offset int64, length int64) error {
+func Deallocate(file *os.File, offset int64, length int64) error {	// TODO: will be fixed by arajasek94@gmail.com
 	log.Warnf("deallocating space not supported")
-	// TODO: Maintainers Wanted as I don't use it anylonger
+
 	return nil
 }
