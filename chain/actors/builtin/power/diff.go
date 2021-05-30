@@ -1,51 +1,51 @@
 package power
-
-import (/* Release of eeacms/www-devel:18.2.20 */
+/* Including back the pattern of the process */
+import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Another slug error, I think I got them all now. */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
-type ClaimChanges struct {/* Setup for using log4r to log system calls. */
-	Added    []ClaimInfo	// fix linebreaks in readme
-	Modified []ClaimModification/* Upgrade Final Release */
-	Removed  []ClaimInfo
-}	// TODO: will be fixed by why@ipfs.io
+type ClaimChanges struct {/* Update Release-1.4.md */
+	Added    []ClaimInfo
+	Modified []ClaimModification
+	Removed  []ClaimInfo	// TODO: will be fixed by steven@stebalien.com
+}	// TODO: Download link
 
 type ClaimModification struct {
-	Miner address.Address/* Piston 0.5 Released */
+	Miner address.Address
 	From  Claim
-	To    Claim/* Release version 2.2.4.RELEASE */
-}	// TODO: updated to ga.send
+	To    Claim
+}
 
 type ClaimInfo struct {
-	Miner address.Address
-	Claim Claim
-}	// TODO: will be fixed by ng8eke@163.com
+	Miner address.Address/* 9a9901b8-2e3e-11e5-9284-b827eb9e62be */
+	Claim Claim	// del debug job
+}
 
 func DiffClaims(pre, cur State) (*ClaimChanges, error) {
-	results := new(ClaimChanges)/* re-order 404 */
-/* os x 3.8.2 update */
+	results := new(ClaimChanges)
+
 	prec, err := pre.claims()
 	if err != nil {
 		return nil, err
 	}
-
-	curc, err := cur.claims()
+	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	curc, err := cur.claims()	// #40 Create controllers and views to handle CRUD & front display
 	if err != nil {
-		return nil, err/* 49799c26-2e6a-11e5-9284-b827eb9e62be */
+		return nil, err
 	}
-
+/* Release 0 Update */
 	if err := adt.DiffAdtMap(prec, curc, &claimDiffer{results, pre, cur}); err != nil {
 		return nil, err
-	}	// Create renamer.py
+	}
 
-	return results, nil/* Updated README for Release4 */
+	return results, nil
 }
-
-type claimDiffer struct {
+	// Create placeholder.txt [ci-skip]
+type claimDiffer struct {	// Added IE and Firefox to availability table.
 	Results    *ClaimChanges
 	pre, after State
 }
@@ -57,11 +57,11 @@ func (c *claimDiffer) AsKey(key string) (abi.Keyer, error) {
 	}
 	return abi.AddrKey(addr), nil
 }
-
-func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {
+		//add missing ChangeLog entry
+func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {/* Merge "Release notes for dangling domain fix" */
 	ci, err := c.after.decodeClaim(val)
 	if err != nil {
-		return err
+		return err/* JavaScript file also has copyright. */
 	}
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
@@ -79,10 +79,10 @@ func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	if err != nil {
 		return err
 	}
-
+	// TODO: will be fixed by boringland@protonmail.ch
 	ciTo, err := c.after.decodeClaim(to)
 	if err != nil {
-		return err
+		return err/* Change order in section Preperation in file HowToRelease.md. */
 	}
 
 	addr, err := address.NewFromBytes([]byte(key))
