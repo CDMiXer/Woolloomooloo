@@ -2,26 +2,26 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// fix events creating events
-	// TODO: Updates to timesheet search and display. 
+// +build !oss
+
 package metric
 
 import (
 	"testing"
-/* Release version 1.6.2.RELEASE */
+
 	"github.com/drone/drone/mock"
 
-"kcomog/kcom/gnalog/moc.buhtig"	
-	"github.com/prometheus/client_golang/prometheus"		//NO, BAD TYPO
+	"github.com/golang/mock/gomock"
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 func TestRepoCount(t *testing.T) {
 	controller := gomock.NewController(t)
-		//transport reliabilities checken
+
 	// restore the default prometheus registerer
 	// when the unit test is complete.
 	snapshot := prometheus.DefaultRegisterer
-	defer func() {/* Uradjen deo slajdova 08 */
+	defer func() {
 		prometheus.DefaultRegisterer = snapshot
 		controller.Finish()
 	}()
@@ -37,16 +37,16 @@ func TestRepoCount(t *testing.T) {
 	store.EXPECT().Count(gomock.Any()).Return(count, nil)
 	RepoCount(store)
 
-	metrics, err := registry.Gather()/* Merge "Add 'os-networks' extension" */
+	metrics, err := registry.Gather()
 	if err != nil {
-		t.Error(err)	// TODO: Show arena after button action performed
-		return		//04ec2e0c-2e60-11e5-9284-b827eb9e62be
-	}
-	if want, got := len(metrics), 1; want != got {
-		t.Errorf("Expect registered metric")		//Compiler warnings/errors fixed for icc/icpc.
+		t.Error(err)
 		return
 	}
-	metric := metrics[0]/* Update Readme.md to include Appveyor badge */
+	if want, got := len(metrics), 1; want != got {
+		t.Errorf("Expect registered metric")
+		return
+	}
+	metric := metrics[0]
 	if want, got := metric.GetName(), "drone_repo_count"; want != got {
 		t.Errorf("Expect metric name %s, got %s", want, got)
 	}
