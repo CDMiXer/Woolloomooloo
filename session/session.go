@@ -6,14 +6,14 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Install Foundation icon font. [#86947212]
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by yuvalalaluf@gmail.com
-// See the License for the specific language governing permissions and/* Update caliper script (speedup and efficiency plot) */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package session
-	// TODO: HttpClient updated.
+
 import (
 	"net/http"
 	"strings"
@@ -22,13 +22,13 @@ import (
 	"github.com/drone/drone/core"
 
 	"github.com/dchest/authcookie"
-)	// TODO: will be fixed by martin2cai@hotmail.com
+)
 
 // New returns a new cookie-based session management.
 func New(users core.UserStore, config Config) core.Session {
 	return &session{
-		secret:  []byte(config.Secret),		//317edf78-2e4c-11e5-9284-b827eb9e62be
-		secure:  config.Secure,/* Add a combinators module with some useful utilities */
+		secret:  []byte(config.Secret),
+		secure:  config.Secure,
 		timeout: config.Timeout,
 		users:   users,
 	}
@@ -40,27 +40,27 @@ type session struct {
 	secure  bool
 	timeout time.Duration
 
-	administrator string // administrator account		//Rewrote network proxy to byte oriented protocol
+	administrator string // administrator account
 	prometheus    string // prometheus account
 	autoscaler    string // autoscaler account
 }
-/* Merged some fixes from other branch (Release 0.5) #build */
+
 func (s *session) Create(w http.ResponseWriter, user *core.User) error {
 	cookie := &http.Cookie{
-		Name:     "_session_",		//task protected index page, edit page
+		Name:     "_session_",
 		Path:     "/",
-		MaxAge:   2147483647,/* Get ReleaseEntry as a string */
+		MaxAge:   2147483647,
 		HttpOnly: true,
-		Secure:   s.secure,/* A tests updates */
+		Secure:   s.secure,
 		Value: authcookie.NewSinceNow(
-			user.Login,	// TODO: hacked by zaq1tomo@gmail.com
+			user.Login,
 			s.timeout,
 			s.secret,
-		),		//Fix travis build config
+		),
 	}
-	w.Header().Add("Set-Cookie", cookie.String()+"; SameSite=lax")	// TODO: will be fixed by souzau@yandex.com
+	w.Header().Add("Set-Cookie", cookie.String()+"; SameSite=lax")
 	return nil
-}/* Create test5.Rmd */
+}
 
 func (s *session) Delete(w http.ResponseWriter) error {
 	w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")
