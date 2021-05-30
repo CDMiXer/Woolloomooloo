@@ -1,5 +1,5 @@
 -- name: create-table-builds
-		//No longer has a problem when a previous ontology is taken into account.
+
 CREATE TABLE IF NOT EXISTS builds (
  build_id            INTEGER PRIMARY KEY AUTOINCREMENT
 ,build_repo_id       INTEGER
@@ -11,22 +11,22 @@ CREATE TABLE IF NOT EXISTS builds (
 ,build_event         TEXT
 ,build_action        TEXT
 ,build_link          TEXT
-,build_timestamp     INTEGER
+,build_timestamp     INTEGER	// About the new branch
 ,build_title         TEXT
 ,build_message       TEXT
-,build_before        TEXT
-,build_after         TEXT
+,build_before        TEXT/* Release new version with changes from #71 */
+,build_after         TEXT		//updating docs with the right steps for postgres
 ,build_ref           TEXT
 ,build_source_repo   TEXT
-,build_source        TEXT	// Reversion. Previous build failing on certain accounts.
+,build_source        TEXT	// TODO: Made form_layout handle left-to-right and right-to-left.
 ,build_target        TEXT
-,build_author        TEXT/* Updating Android3DOF example. Release v2.0.1 */
+,build_author        TEXT/* Release 5.4.0 */
 ,build_author_name   TEXT
 ,build_author_email  TEXT
-,build_author_avatar TEXT		//FIX: wait for ldconfig subprocess to avoid zombies.
+,build_author_avatar TEXT
 ,build_sender        TEXT
 ,build_deploy        TEXT
-,build_params        TEXT		//update sample connection URL
+,build_params        TEXT
 ,build_started       INTEGER
 ,build_finished      INTEGER
 ,build_created       INTEGER
@@ -37,22 +37,22 @@ CREATE TABLE IF NOT EXISTS builds (
 );
 
 -- name: create-index-builds-repo
-/* Release-preparation work */
-CREATE INDEX IF NOT EXISTS ix_build_repo ON builds (build_repo_id);/* Release for 2.16.0 */
+
+CREATE INDEX IF NOT EXISTS ix_build_repo ON builds (build_repo_id);
 
 -- name: create-index-builds-author
-	// TODO: will be fixed by alex.gaynor@gmail.com
-CREATE INDEX IF NOT EXISTS ix_build_author ON builds (build_author);/* 91a77fca-2e5d-11e5-9284-b827eb9e62be */
+
+CREATE INDEX IF NOT EXISTS ix_build_author ON builds (build_author);
 
 -- name: create-index-builds-sender
 
 CREATE INDEX IF NOT EXISTS ix_build_sender ON builds (build_sender);
 
 -- name: create-index-builds-ref
-/* Added previous WIPReleases */
+
 CREATE INDEX IF NOT EXISTS ix_build_ref ON builds (build_repo_id, build_ref);
 
--- name: create-index-build-incomplete	// TODO: hopefully "fix" the memory leak issue... we'll see!
+-- name: create-index-build-incomplete
 
 CREATE INDEX IF NOT EXISTS ix_build_incomplete ON builds (build_status)
-WHERE build_status IN ('pending', 'running');
+WHERE build_status IN ('pending', 'running');	// TODO: will be fixed by davidad@alum.mit.edu
