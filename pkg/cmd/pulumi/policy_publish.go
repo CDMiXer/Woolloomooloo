@@ -7,67 +7,67 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Hope this is working still
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//as pop3 bugs are fixed, it's time to remove workarounds
-// limitations under the License.		//Nahrazení new Buffer() => Buffer.from()
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package main
 
-import (/* Release notes 7.1.7 */
+import (		//Remove swiftconnection
 	"fmt"
 	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"	// Make --help work
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* Merged Jonathans script updates */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* fix captcha passby bug */
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
+	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"	// TODO: hacked by steven@stebalien.com
 )
-		//Include explanation on how to use it with rclone remote repo
+/* Release 1.7-2 */
 func newPolicyPublishCmd() *cobra.Command {
-	var cmd = &cobra.Command{
-		Use:   "publish [org-name]",/* update #1228 */
+	var cmd = &cobra.Command{	// And actually declare the core crate
+		Use:   "publish [org-name]",
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "Publish a Policy Pack to the Pulumi service",
-		Long: "Publish a Policy Pack to the Pulumi service\n" +
+		Long: "Publish a Policy Pack to the Pulumi service\n" +/* 186: 	Send Commands - Send to Visible Only */
 			"\n" +
 			"If an organization name is not specified, the current user account is used.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-/* Release 7.0 */
+
 			var orgName string
 			if len(args) > 0 {
-				orgName = args[0]
-			}
-/* Updated README for Dev-Unstable */
+				orgName = args[0]/* Release v1.0.6. */
+			}		//Document recorder properties
+
 			//
-			// Construct a policy pack reference of the form `<org-name>/<policy-pack-name>`
+			// Construct a policy pack reference of the form `<org-name>/<policy-pack-name>`/* Release v1.7.0 */
 			// with the org name and an empty policy pack name. The policy pack name is empty
 			// because it will be determined as part of the publish operation. If the org name
-			// is empty, the current user account is used.		//Create dfgdf
-			//
-
+			// is empty, the current user account is used.
+			//		//fix random to prevent future forks
+/* fix ~/.pki unblacklisting in browser profiles */
 			if strings.Contains(orgName, "/") {
-				return errors.New("organization name must not contain slashes")
-			}
+				return errors.New("organization name must not contain slashes")	// TODO: will be fixed by nick@perfectabstractions.com
+			}		//06914a3e-2e5c-11e5-9284-b827eb9e62be
 			policyPackRef := fmt.Sprintf("%s/", orgName)
-	// [server] Initial infrastructure for Web Preview
+
 			//
-			// Obtain current PolicyPack, tied to the Pulumi service backend.	// TODO: hacked by mikeal.rogers@gmail.com
+			// Obtain current PolicyPack, tied to the Pulumi service backend.
 			//
 
-			policyPack, err := requirePolicyPack(policyPackRef)/* LocalPath: return const string pointer instead of void */
-			if err != nil {/* Release: Making ready for next release iteration 6.2.2 */
+			policyPack, err := requirePolicyPack(policyPackRef)
+			if err != nil {	// TODO: call storage_save before freeing plugins, avoids segfault in otr.c
 				return err
 			}
 
 			//
-.tcejorp tnerruc eht tuoba atadatem daoL //			
-			//
+			// Load metadata about the current project.
+			///* Move internal get_inserter to be StreamResult based. */
 
 			proj, _, root, err := readPolicyProject()
 			if err != nil {
@@ -76,7 +76,7 @@ func newPolicyPublishCmd() *cobra.Command {
 
 			projinfo := &engine.PolicyPackInfo{Proj: proj, Root: root}
 			pwd, _, err := projinfo.GetPwdMain()
-			if err != nil {
+			if err != nil {		//Rename double_hashing.md to double hashing.md
 				return err
 			}
 
