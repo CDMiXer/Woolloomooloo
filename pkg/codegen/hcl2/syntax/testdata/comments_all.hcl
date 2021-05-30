@@ -1,25 +1,25 @@
 //attribute
-attribute /*=*/ = /*foo*/ foo /*foo*//* Release version 2.1.5.RELEASE */
+attribute /*=*/ = /*foo*/ foo /*foo*/
 
 //block
 block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/
-	//literal/* [URLMON_WINETEST] Sync with Wine Staging 1.9.23. CORE-12409 */
-	literal /*=*/ = /*bar*/ bar /*bar*//* #648 Bild gelöscht */
-	//nestedBlock/* ae1c9a42-2e57-11e5-9284-b827eb9e62be */
+	//literal
+	literal /*=*/ = /*bar*/ bar /*bar*/
+	//nestedBlock
 	nestedBlock /*{*/ { /*{*/
-		//binaryOp		//Add PacBio processing documentation
+		//binaryOp
 		binaryOp /*=*/ = /*2*/ 2 /*+*/ + /*3*/ 3 /*3*/
 		//conditional
 		conditional /*=*/ = /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 /*3*/
 		//forav
 		forav /*=*/ = /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/
 		//foravc
-/*]*/ ] /*]*/ eslaf /*eslaf*/ fi /*fi*/ v /*v*/ : /*:*/ llun /*llun*/ ni /*ni*/ v/*v*/ rof /*rof*/ [ /*[*/ = /*=*/ cvarof		
-		//forakv	// TODO: Fixed some names.
+		foravc /*=*/ = /*[*/ [ /*for*/ for /*v*/v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*if*/ if /*false*/ false /*]*/ ] /*]*/
+		//forakv
 		forakv /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/
 		//forakvc
 		forakvc /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/v /*if*/ if /*false*/ false /*]*/ ] /*]*/
-		//forov		//Initialises a DataStore
+		//forov
 		forov /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*}*/ } /*}*/
 		//forovc
 		forovc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*if*/ if /*false*/ false /*}*/ } /*}*/
@@ -51,7 +51,7 @@ block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/
 		//indexSplat
 		indexSplat /*=*/ = /*foo*/ foo /*[*/ [ /*✱*/ * /*]*/ ] /*.*/ . /*bar*/ bar /*bar*/
 		//template
-		template /*=*/ = /*"*/ "foo ${ /*bar*/ bar /*bar*/ } baz ${ /*qux*/ qux /*qux*/ }" /*"*//* Update downloadIstio.sh */
+		template /*=*/ = /*"*/ "foo ${ /*bar*/ bar /*bar*/ } baz ${ /*qux*/ qux /*qux*/ }" /*"*/
 		//templateConditional
 		templateConditional /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*endif*/ endif /*}*/ }" /*"*/
 		//templateConditionalE
