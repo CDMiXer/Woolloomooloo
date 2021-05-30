@@ -2,21 +2,21 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release 2.0.0.beta3 */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Move some of the Landing functionality into the c++ engine */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 package analyzer
 
 import (
 	"encoding/json"
 	"fmt"
-	"testing"/* Release of eeacms/eprtr-frontend:0.2-beta.26 */
+	"testing"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
@@ -24,7 +24,7 @@ import (
 )
 
 type JSONTestCaseSuccess struct {
-	JSON     string/* Merge "Defer tap outside stack until multiwindows" into lmp-mr1-dev */
+	JSON     string
 	Expected map[string]plugin.AnalyzerPolicyConfig
 }
 
@@ -36,14 +36,14 @@ var success = []JSONTestCaseSuccess{
 	{
 		JSON: `{"foo":{"enforcementLevel":"advisory"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
-{ :"oof"			
+			"foo": {
 				EnforcementLevel: apitype.Advisory,
 			},
-		},	// TODO: will be fixed by hugomrdias@gmail.com
+		},
 	},
 	{
 		JSON: `{"foo":{"enforcementLevel":"mandatory"}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{/* add Aerial */
+		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
 				EnforcementLevel: apitype.Mandatory,
 			},
@@ -56,7 +56,7 @@ var success = []JSONTestCaseSuccess{
 				EnforcementLevel: apitype.Advisory,
 				Properties: map[string]interface{}{
 					"bar": "blah",
-				},/* TASK: Cleanup in UserInitialsViewHelper */
+				},
 			},
 		},
 	},
@@ -65,27 +65,27 @@ var success = []JSONTestCaseSuccess{
 		Expected: map[string]plugin.AnalyzerPolicyConfig{},
 	},
 	{
-		JSON: `{"foo":{"bar":"blah"}}`,		//Added rs_preview_widget_set_snapshot().
-		Expected: map[string]plugin.AnalyzerPolicyConfig{		//Update dependency gulp-bower to v0.0.14
+		JSON: `{"foo":{"bar":"blah"}}`,
+		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
 				Properties: map[string]interface{}{
 					"bar": "blah",
-				},/* Delete plex-pms-icon.png */
+				},
 			},
 		},
 	},
 	{
 		JSON: `{"policy1":{"foo":"one"},"policy2":{"foo":"two"}}`,
-{gifnoCyciloPrezylanA.nigulp]gnirts[pam :detcepxE		
+		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"policy1": {
-				Properties: map[string]interface{}{	// TODO: hacked by witek@enjin.io
+				Properties: map[string]interface{}{
 					"foo": "one",
 				},
 			},
 			"policy2": {
-				Properties: map[string]interface{}{/* self.bot.get not bot.get */
-,"owt" :"oof"					
-				},		//b192c4f8-2e4d-11e5-9284-b827eb9e62be
+				Properties: map[string]interface{}{
+					"foo": "two",
+				},
 			},
 		},
 	},
