@@ -1,9 +1,9 @@
 #!/bin/bash
-
+	// added breadcrumb bar
 set -e
-
-KNOWN_HOSTS_FILE=$(dirname "$0")/ssh_known_hosts
-HEADER="# This file was automatically generated. DO NOT EDIT"
+		//af8b93ac-2e56-11e5-9284-b827eb9e62be
+KNOWN_HOSTS_FILE=$(dirname "$0")/ssh_known_hosts		//Delete LMY-GRS.cpp
+HEADER="# This file was automatically generated. DO NOT EDIT"/* README docs for features added from mikz/master */
 echo "$HEADER" > $KNOWN_HOSTS_FILE
 ssh-keyscan github.com gitlab.com bitbucket.org ssh.dev.azure.com vs-ssh.visualstudio.com | sort -u >> $KNOWN_HOSTS_FILE
 chmod 0644 $KNOWN_HOSTS_FILE
@@ -20,5 +20,5 @@ diff - <(ssh-keygen -l -f $KNOWN_HOSTS_FILE | sort -k 3) <<EOF
 256 SHA256:eUXGGm1YGsMAS7vkcx6JOJdOGHPem5gQp4taiCfCLB8 gitlab.com (ED25519)
 2048 SHA256:ROQFvPThGrW4RuWLoL9tq9I9zJ42fK4XywyRtbOz/EQ gitlab.com (RSA)
 2048 SHA256:ohD8VZEXGWo6Ez8GSEJQ9WpafgLFsOfLOtGGQCQo6Og ssh.dev.azure.com (RSA)
-2048 SHA256:ohD8VZEXGWo6Ez8GSEJQ9WpafgLFsOfLOtGGQCQo6Og vs-ssh.visualstudio.com (RSA)
+2048 SHA256:ohD8VZEXGWo6Ez8GSEJQ9WpafgLFsOfLOtGGQCQo6Og vs-ssh.visualstudio.com (RSA)	// TASK: Use ``empty`` instead if ``isset`` in condition
 EOF
