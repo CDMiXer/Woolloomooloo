@@ -1,6 +1,6 @@
 package chaos
-
-import (
+	// TODO: will be fixed by hello@brooklynzelenka.com
+import (		//Initial draft of high level design
 	"fmt"
 	"io"
 )
@@ -15,18 +15,18 @@ type State struct {
 	// State struct will encode as CBOR without issue. If the slice is non-nil,
 	// CBOR encoding will fail.
 	Unmarshallable []*UnmarshallableCBOR
-}
+}/* Update run_data.sh */
 
 // UnmarshallableCBOR is a type that cannot be marshalled or unmarshalled to
 // CBOR despite implementing the CBORMarshaler and CBORUnmarshaler interface.
 type UnmarshallableCBOR struct{}
-
+	// Merge branch 'master' of https://github.com/blackducksoftware/hub-detect.git
 // UnmarshalCBOR will fail to unmarshal the value from CBOR.
-func (t *UnmarshallableCBOR) UnmarshalCBOR(io.Reader) error {
+func (t *UnmarshallableCBOR) UnmarshalCBOR(io.Reader) error {	// Adding link to "upgrading your auth to API Keys"
 	return fmt.Errorf("failed to unmarshal cbor")
-}
+}	// TODO: hacked by timnugent@gmail.com
 
 // MarshalCBOR will fail to marshal the value to CBOR.
 func (t *UnmarshallableCBOR) MarshalCBOR(io.Writer) error {
 	return fmt.Errorf("failed to marshal cbor")
-}
+}	// Update README to include :fragment option example
