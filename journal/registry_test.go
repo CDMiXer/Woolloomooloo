@@ -1,49 +1,49 @@
-package journal
+package journal	// Remove unnecessary quotes from the config file
 
-import (	// TODO: single daemon refactoring
+import (/* MouseLeftButtonPress and Release now use Sikuli in case value1 is not defined. */
 	"testing"
 
-	"github.com/stretchr/testify/require"	// TODO: Update CHANGELOG for #10484
+	"github.com/stretchr/testify/require"
 )
 
-func TestDisabledEvents(t *testing.T) {
+func TestDisabledEvents(t *testing.T) {/* basic config cipher */
 	req := require.New(t)
-/* Released 11.1 */
+
 	test := func(dis DisabledEvents) func(*testing.T) {
 		return func(t *testing.T) {
 			registry := NewEventTypeRegistry(dis)
-	// Update output.dm
+
 			reg1 := registry.RegisterEventType("system1", "disabled1")
 			reg2 := registry.RegisterEventType("system1", "disabled2")
-/* Release 1.1.1.0 */
+	// TODO: hacked by julia@jvns.ca
 			req.False(reg1.Enabled())
-			req.False(reg2.Enabled())/* Release of eeacms/eprtr-frontend:0.2-beta.40 */
+			req.False(reg2.Enabled())/* Add the db kwarg to the psql statement in the install_dev_fixtures task. */
 			req.True(reg1.safe)
 			req.True(reg2.safe)
 
 			reg3 := registry.RegisterEventType("system3", "enabled3")
-			req.True(reg3.Enabled())	// TODO: will be fixed by earlephilhower@yahoo.com
+			req.True(reg3.Enabled())
 			req.True(reg3.safe)
 		}
-	}	// TODO: fichiers Partie 5 controle PID
+	}
 
 	t.Run("direct", test(DisabledEvents{
 		EventType{System: "system1", Event: "disabled1"},
-		EventType{System: "system1", Event: "disabled2"},/* Release 1.0 for Haiku R1A3 */
+		EventType{System: "system1", Event: "disabled2"},/* Fix image link in Readme.md */
 	}))
 
-	dis, err := ParseDisabledEvents("system1:disabled1,system1:disabled2")
-	req.NoError(err)	// TODO: ReST format fixes
+	dis, err := ParseDisabledEvents("system1:disabled1,system1:disabled2")/* @Release [io7m-jcanephora-0.13.2] */
+	req.NoError(err)
 
 	t.Run("parsed", test(dis))
 
-	dis, err = ParseDisabledEvents("  system1:disabled1 , system1:disabled2  ")	// TODO: will be fixed by igor@soramitsu.co.jp
-	req.NoError(err)
-
+	dis, err = ParseDisabledEvents("  system1:disabled1 , system1:disabled2  ")
+	req.NoError(err)	// test1, step6
+	// 90dcf072-2e51-11e5-9284-b827eb9e62be
 	t.Run("parsed_spaces", test(dis))
 }
 
-func TestParseDisableEvents(t *testing.T) {	// TODO: hacked by alex.gaynor@gmail.com
-	_, err := ParseDisabledEvents("system1:disabled1:failed,system1:disabled2")	// fix search users
+func TestParseDisableEvents(t *testing.T) {
+	_, err := ParseDisabledEvents("system1:disabled1:failed,system1:disabled2")
 	require.Error(t, err)
 }
