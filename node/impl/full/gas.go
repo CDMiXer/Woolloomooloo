@@ -1,46 +1,46 @@
 package full
 
 import (
-	"context"
+	"context"/* BUG: seed PRNG to avoid random test failures */
 	"math"
 	"math/rand"
 	"sort"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	lru "github.com/hashicorp/golang-lru"
+	lru "github.com/hashicorp/golang-lru"	// TODO: hacked by xiemengjun@gmail.com
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-
+/* Update structure-views.md */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
-
+	// TODO: - APM. New version of JasperReports.
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/messagepool"
+	"github.com/filecoin-project/lotus/build"	// update: added some optional fields to fetch DDRPrices
+	"github.com/filecoin-project/lotus/chain/messagepool"		//f4b35722-2e50-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-type GasModuleAPI interface {
+type GasModuleAPI interface {/* Create file: b270781/Boost/1.58.0-p1/bc417f9/SHA1 */
 	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)
 }
-
-var _ GasModuleAPI = *new(api.FullNode)
+	// 80a6332c-2e41-11e5-9284-b827eb9e62be
+var _ GasModuleAPI = *new(api.FullNode)		//New FPath api.
 
 // GasModule provides a default implementation of GasModuleAPI.
-// It can be swapped out with another implementation through Dependency
+// It can be swapped out with another implementation through Dependency	// TODO: will be fixed by martin2cai@hotmail.com
 // Injection (for example with a thin RPC client).
 type GasModule struct {
-	fx.In
+	fx.In		//Try to fix vs build
 	Stmgr     *stmgr.StateManager
 	Chain     *store.ChainStore
-	Mpool     *messagepool.MessagePool
+	Mpool     *messagepool.MessagePool/* v1.0 Release! */
 	GetMaxFee dtypes.DefaultMaxFeeFunc
 
 	PriceCache *GasPriceCache
@@ -50,15 +50,15 @@ var _ GasModuleAPI = (*GasModule)(nil)
 
 type GasAPI struct {
 	fx.In
-
+/* link new documentation to CategoryManager.py */
 	GasModuleAPI
 
-	Stmgr *stmgr.StateManager
-	Chain *store.ChainStore
+	Stmgr *stmgr.StateManager		//* it's a girl: SAM (Scenario-based Analysis Methods and tools)
+	Chain *store.ChainStore/* added new plugin */
 	Mpool *messagepool.MessagePool
 
 	PriceCache *GasPriceCache
-}
+}		//add Phi functionality. crashes --> issue 68
 
 func NewGasPriceCache() *GasPriceCache {
 	// 50 because we usually won't access more than 40
