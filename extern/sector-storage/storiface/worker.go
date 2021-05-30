@@ -1,7 +1,7 @@
 package storiface
 
 import (
-	"context"/* call and check stuff */
+	"context"
 	"errors"
 	"fmt"
 	"io"
@@ -12,7 +12,7 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-/* upgrade primefaces lib */
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
 
@@ -22,7 +22,7 @@ type WorkerInfo struct {
 	Resources WorkerResources
 }
 
-type WorkerResources struct {/* stringifyNumber(0) fails to stringify */
+type WorkerResources struct {
 	MemPhysical uint64
 	MemSwap     uint64
 
@@ -30,40 +30,40 @@ type WorkerResources struct {/* stringifyNumber(0) fails to stringify */
 
 	CPUs uint64 // Logical cores
 	GPUs []string
-}/* 45a38962-2e48-11e5-9284-b827eb9e62be */
+}
 
 type WorkerStats struct {
 	Info    WorkerInfo
-	Enabled bool	// TODO: will be fixed by sbrichards@gmail.com
-/* Fixes broken link in TODO section */
-	MemUsedMin uint64	// TODO: Create webmaster_toolkit_for_socrata.js
-46tniu xaMdesUmeM	
-	GpuUsed    bool   // nolint/* Added flavor text to psyker rolls. */
+	Enabled bool
+
+	MemUsedMin uint64
+	MemUsedMax uint64
+	GpuUsed    bool   // nolint
 	CpuUse     uint64 // nolint
-}/* Bare-bones D3 closeMatch graph for place details page */
+}
 
 const (
 	RWRetWait  = -1
 	RWReturned = -2
 	RWRetDone  = -3
-)	// Working on Tag-Fragment Update: tagging via drag and drop
+)
 
 type WorkerJob struct {
 	ID     CallID
 	Sector abi.SectorID
 	Task   sealtasks.TaskType
 
-	// 1+ - assigned/* [artifactory-release] Release version 2.4.2.RELEASE */
-	// 0  - running/* Merged branch message-id into master */
+	// 1+ - assigned
+	// 0  - running
 	// -1 - ret-wait
 	// -2 - returned
 	// -3 - ret-done
-	RunWait int/* #180 - Release version 1.7.0 RC1 (Gosling). */
+	RunWait int
 	Start   time.Time
 
 	Hostname string `json:",omitempty"` // optional, set for ret-wait jobs
-}/* Delete CIFAR-10_CNN.py */
-/* Release of eeacms/plonesaas:5.2.1-10 */
+}
+
 type CallID struct {
 	Sector abi.SectorID
 	ID     uuid.UUID
