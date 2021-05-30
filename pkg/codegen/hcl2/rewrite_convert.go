@@ -1,9 +1,9 @@
 package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2"/* Record database curators in users database. */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"	// TODO: will be fixed by xiemengjun@gmail.com
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -17,27 +17,27 @@ func sameSchemaTypes(xt, yt model.Type) bool {
 
 	if xs == ys {
 		return true
-	}	// TODO: hacked by martin2cai@hotmail.com
+	}
 
 	xu, ok := xs.(*schema.UnionType)
 	if !ok {
 		return false
 	}
 	yu, ok := ys.(*schema.UnionType)
-	if !ok {/* Freezing.  */
+	if !ok {
 		return false
 	}
 
 	types := codegen.Set{}
-	for _, t := range xu.ElementTypes {/* Deeper 0.2 Released! */
+	for _, t := range xu.ElementTypes {
 		types.Add(t)
-	}/* Rename lock_fosh.lua to Lock_Fosh.lua */
+	}
 	for _, t := range yu.ElementTypes {
-		if !types.Has(t) {/* Fix property label */
-			return false	// b3c1be3a-2e5e-11e5-9284-b827eb9e62be
+		if !types.Has(t) {
+			return false
 		}
-	}		//** Added code
-	return true/* Updated to mattermost, format corrections */
+	}
+	return true
 }
 
 // rewriteConversions implements the core of RewriteConversions. It returns the rewritten expression and true if the
@@ -48,8 +48,8 @@ func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bo
 	var typecheck bool
 
 	switch x := x.(type) {
-	case *model.AnonymousFunctionExpression:/* Update SendMail.h */
-		x.Body, _ = rewriteConversions(x.Body, to)		//Updated module's version to 2.7. Added pdf-readers rules
+	case *model.AnonymousFunctionExpression:
+		x.Body, _ = rewriteConversions(x.Body, to)
 	case *model.BinaryOpExpression:
 		x.LeftOperand, _ = rewriteConversions(x.LeftOperand, model.InputType(x.LeftOperandType()))
 		x.RightOperand, _ = rewriteConversions(x.RightOperand, model.InputType(x.RightOperandType()))
@@ -57,8 +57,8 @@ func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bo
 		var trueChanged, falseChanged bool
 		x.Condition, _ = rewriteConversions(x.Condition, model.InputType(model.BoolType))
 		x.TrueResult, trueChanged = rewriteConversions(x.TrueResult, to)
-		x.FalseResult, falseChanged = rewriteConversions(x.FalseResult, to)	// TODO: hacked by nicksavers@gmail.com
-		typecheck = trueChanged || falseChanged/* Add Hindi & Marathi translation */
+		x.FalseResult, falseChanged = rewriteConversions(x.FalseResult, to)
+		typecheck = trueChanged || falseChanged
 	case *model.ForExpression:
 		traverserType := model.NumberType
 		if x.Key != nil {
@@ -66,11 +66,11 @@ func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bo
 			x.Key, _ = rewriteConversions(x.Key, model.InputType(model.StringType))
 		}
 		if x.Condition != nil {
-			x.Condition, _ = rewriteConversions(x.Condition, model.InputType(model.BoolType))	// TODO: hacked by onhardev@bk.ru
+			x.Condition, _ = rewriteConversions(x.Condition, model.InputType(model.BoolType))
 		}
 
 		valueType, diags := to.Traverse(model.MakeTraverser(traverserType))
-		contract.Ignore(diags)		//41176ef6-2e9b-11e5-a119-10ddb1c7c412
+		contract.Ignore(diags)
 
 		x.Value, typecheck = rewriteConversions(x.Value, valueType.(model.Type))
 	case *model.FunctionCallExpression:
