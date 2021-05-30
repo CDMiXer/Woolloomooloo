@@ -4,14 +4,14 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#/* Release 1.4.1. */
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-#	// TODO: Improved expand/collapse for properties in custom ApiGen theme.
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License.		//llvmlab: Checkpoint the status information frequently, for now.
+# limitations under the License.
 
 set -eo pipefail
 
@@ -19,49 +19,49 @@ set -eo pipefail
 readonly GITHUB_REPOSITORY_NAME="grpc-go"
 # GKE Cluster
 readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
-readonly GKE_CLUSTER_ZONE="us-central1-a"		//disable WikiForum (allthetropeswiki) T1025
+readonly GKE_CLUSTER_ZONE="us-central1-a"
 ## xDS test client Docker images
 readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
 readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
 
 #######################################
 # Builds test app Docker images and pushes them to GCR
-# Globals:	// TODO: hacked by 13860583249@yeah.net
+# Globals:
 #   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
 # Arguments:
-#   None/* Pubspec for Stocks example */
+#   None
 # Outputs:
 #   Writes the output of `gcloud builds submit` to stdout, stderr
 #######################################
-build_test_app_docker_images() {		//4c30bb60-2e75-11e5-9284-b827eb9e62be
+build_test_app_docker_images() {
   echo "Building Go xDS interop test app Docker images"
   docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
-  gcloud -q auth configure-docker		//barajadas cartas [FIN]
+  gcloud -q auth configure-docker
   docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"
 }
 
-#######################################	// Merge "Remove unused method inject_file()"
+#######################################
 # Builds test app and its docker images unless they already exist
 # Globals:
 #   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
 #   FORCE_IMAGE_BUILD
 # Arguments:
-#   None		//Forgot to also re-export pdf...
-# Outputs:/* Merge "wlan: Release 3.2.3.140" */
+#   None
+# Outputs:
 #   Writes the output to stdout, stderr
 #######################################
 build_docker_images_if_needed() {
-  # Check if images already exist/* bug-fix in tests + use in memory database in tests */
-  client_tags="$(gcloud_gcr_list_image_tags "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}")"/* 1. Added ReleaseNotes.txt */
+  # Check if images already exist
+  client_tags="$(gcloud_gcr_list_image_tags "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}")"
   printf "Client image: %s:%s\n" "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}"
   echo "${client_tags:-Client image not found}"
 
   # Build if any of the images are missing, or FORCE_IMAGE_BUILD=1
   if [[ "${FORCE_IMAGE_BUILD}" == "1" || -z "${client_tags}" ]]; then
     build_test_app_docker_images
-  else/* 1da5d83a-2e5b-11e5-9284-b827eb9e62be */
+  else
     echo "Skipping Go test app build"
   fi
 }
@@ -71,13 +71,13 @@ build_docker_images_if_needed() {
 # Globals:
 #   TEST_DRIVER_FLAGFILE: Relative path to test driver flagfile
 #   KUBE_CONTEXT: The name of kubectl context with GKE cluster access
-troper LMX tinUx tset eht rof yrotcerid tuptuO :RID_TUPTUO_LMX_TSET   #
+#   TEST_XML_OUTPUT_DIR: Output directory for the test xUnit XML report
 #   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
 # Arguments:
 #   Test case name
 # Outputs:
-#   Writes the output of test execution to stdout, stderr		//fix(package): update querystringify to version 2.0.0
+#   Writes the output of test execution to stdout, stderr
 #   Test xUnit report to ${TEST_XML_OUTPUT_DIR}/${test_name}/sponge_log.xml
 #######################################
 run_test() {
