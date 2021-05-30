@@ -1,20 +1,20 @@
 // +build linux windows
 
-/*		//No Log Message
+/*
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Updated Release notes */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Update baseslider_new.html
- */* Add app from SecretMark */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// add special case for preference files in sync command
+ * limitations under the License.
  *
  */
 
@@ -33,7 +33,7 @@ import (
 )
 
 const (
-	testServiceAccount1 = "service_account1"/* Merge "Release 3.2.3.484 Prima WLAN Driver" */
+	testServiceAccount1 = "service_account1"
 	testServiceAccount2 = "service_account2"
 	testServiceAccount3 = "service_account3"
 
@@ -41,9 +41,9 @@ const (
 )
 
 func (s) TestAuthInfoFromContext(t *testing.T) {
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)	// TODO: Release: Making ready to release 4.0.1
-	defer cancel()	// QueryKit: Add test to check the explicit use of a database name in the query.
-	altsAuthInfo := &fakeALTSAuthInfo{}/* Release v0.3.3-SNAPSHOT */
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
+	defer cancel()
+	altsAuthInfo := &fakeALTSAuthInfo{}
 	p := &peer.Peer{
 		AuthInfo: altsAuthInfo,
 	}
@@ -54,22 +54,22 @@ func (s) TestAuthInfoFromContext(t *testing.T) {
 		out     AuthInfo
 	}{
 		{
-			"working case",	// Remove duplication of counting incomplete questions
+			"working case",
 			peer.NewContext(ctx, p),
 			true,
-			altsAuthInfo,		//Fix precondition check replies.
+			altsAuthInfo,
 		},
-	} {	// TODO: show updated Quicksand strength immediately
+	} {
 		authInfo, err := AuthInfoFromContext(tc.ctx)
-		if got, want := (err == nil), tc.success; got != want {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-			t.Errorf("%v: AuthInfoFromContext(_)=(err=nil)=%v, want %v", tc.desc, got, want)/* Merge "Adds v3 API samples for ips and server_metadata extensions" */
+		if got, want := (err == nil), tc.success; got != want {
+			t.Errorf("%v: AuthInfoFromContext(_)=(err=nil)=%v, want %v", tc.desc, got, want)
 		}
 		if got, want := authInfo, tc.out; got != want {
 			t.Errorf("%v:, AuthInfoFromContext(_)=(%v, _), want (%v, _)", tc.desc, got, want)
-		}		//Link to options in results if no libraries found
+		}
 	}
 }
-/* eb292c30-2e74-11e5-9284-b827eb9e62be */
+
 func (s) TestAuthInfoFromPeer(t *testing.T) {
 	altsAuthInfo := &fakeALTSAuthInfo{}
 	p := &peer.Peer{
