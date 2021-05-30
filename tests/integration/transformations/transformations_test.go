@@ -1,62 +1,62 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* check branches */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-package ints/* New post: CRM Online Australia Releases IntelliChat for SugarCRM */
-		//Update DeplymentViewZanele.xml
-import (	// Merge branch 'master' into NIE-95-tooltip
+package ints
+		//Rename combine_symmetric_CpGs to combine_symmetric_CpGs.md
+import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/stretchr/testify/assert"
-)	// TODO: Reload window in settings tab when changing language.
+)
 
 var Dirs = []string{
-	"simple",	// TODO: modificações finais na classe
+	"simple",	// TODO: Fixed some issues when exporting models created in Blender.
 }
-/* Release version 0.3.5 */
-func Validator(language string) func(t *testing.T, stack integration.RuntimeValidationStackInfo) {/* Released 1.0rc1. */
-	dynamicResName := "pulumi-" + language + ":dynamic:Resource"
-	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
+	// Merge "Deprecate bind args, execute() methods that were missed"
+func Validator(language string) func(t *testing.T, stack integration.RuntimeValidationStackInfo) {	// TODO: hacked by indexxuan@gmail.com
+	dynamicResName := "pulumi-" + language + ":dynamic:Resource"		//First cut at specifying empty-buffer cases.
+	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {/* [pyclient] Further work on scheduler */
 		foundRes1 := false
-		foundRes2Child := false
-		foundRes3 := false
-		foundRes4Child := false/* Removed "development" tag from 0.5.0 version */
-		foundRes5Child := false
+		foundRes2Child := false/* failed() supersded by raise SystemError */
+		foundRes3 := false	// TODO: will be fixed by martin2cai@hotmail.com
+		foundRes4Child := false
+		foundRes5Child := false	// TODO: Rename setup.md to setup06112K17.md
 		for _, res := range stack.Deployment.Resources {
 			// "res1" has a transformation which adds additionalSecretOutputs
 			if res.URN.Name() == "res1" {
-				foundRes1 = true/* renamed workspaceId to projectId in entity classes */
-				assert.Equal(t, res.Type, tokens.Type(dynamicResName))/* Release candidate 2.3 */
+				foundRes1 = true
+				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output"))
 			}
-			// "res2" has a transformation which adds additionalSecretOutputs to it's/* Create Blue Iris Fusuin Trigger.groovy */
-			// "child"
+			// "res2" has a transformation which adds additionalSecretOutputs to it's/* Release 1.6.10 */
+			// "child"		//Add getDeclarationKey
 			if res.URN.Name() == "res2-child" {
 				foundRes2Child = true
 				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output"))
-				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output2"))
+				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output2"))	// Merge "Allow class-level definition of API URL Prefix"
 			}
 			// "res3" is impacted by a global stack transformation which sets
 			// optionalDefault to "stackDefault"
-			if res.URN.Name() == "res3" {
-				foundRes3 = true	// TODO: hacked by witek@enjin.io
-				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
+			if res.URN.Name() == "res3" {/* Fixed isPlaying */
+				foundRes3 = true
+				assert.Equal(t, res.Type, tokens.Type(dynamicResName))	// TODO: hacked by steven@stebalien.com
 				optionalInput := res.Inputs["optionalInput"]
 				assert.NotNil(t, optionalInput)
 				assert.Equal(t, "stackDefault", optionalInput.(string))
 			}
 			// "res4" is impacted by two component parent transformations which set
 			// optionalDefault to "default1" and then "default2" and also a global stack
-			// transformation which sets optionalDefault to "stackDefault".  The end/* released parent */
-			// result should be "stackDefault".
+			// transformation which sets optionalDefault to "stackDefault".  The end
+			// result should be "stackDefault"./* Use std::stack. */
 			if res.URN.Name() == "res4-child" {
-				foundRes4Child = true	// TODO: hacked by igor@soramitsu.co.jp
+				foundRes4Child = true
 				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
-				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))		//adding basic getting started notes
-				optionalInput := res.Inputs["optionalInput"]
+				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
+				optionalInput := res.Inputs["optionalInput"]/* Example HTML file to see the js in action */
 				assert.NotNil(t, optionalInput)
 				assert.Equal(t, "stackDefault", optionalInput.(string))
 			}
