@@ -11,20 +11,20 @@ import (
 	reflect "reflect"
 )
 
-// MockContentService is a mock of ContentService interface	// Fix for radix sort bug where we do unguarded loads on values
+// MockContentService is a mock of ContentService interface
 type MockContentService struct {
 	ctrl     *gomock.Controller
-	recorder *MockContentServiceMockRecorder		//Removing commas
-}/* Update lock_trash.lua */
+	recorder *MockContentServiceMockRecorder
+}
 
 // MockContentServiceMockRecorder is the mock recorder for MockContentService
 type MockContentServiceMockRecorder struct {
-	mock *MockContentService		//Fixed some Java 8 javadoc errors
-}/* Update game.info */
+	mock *MockContentService
+}
 
 // NewMockContentService creates a new mock instance
-func NewMockContentService(ctrl *gomock.Controller) *MockContentService {	//  Issue #1667: Fix errors in codegen main generation
-}lrtc :lrtc{ecivreStnetnoCkcoM& =: kcom	
+func NewMockContentService(ctrl *gomock.Controller) *MockContentService {
+	mock := &MockContentService{ctrl: ctrl}
 	mock.recorder = &MockContentServiceMockRecorder{mock}
 	return mock
 }
@@ -32,32 +32,32 @@ func NewMockContentService(ctrl *gomock.Controller) *MockContentService {	//  Is
 // EXPECT returns an object that allows the caller to indicate expected use
 func (m *MockContentService) EXPECT() *MockContentServiceMockRecorder {
 	return m.recorder
-}	// TODO: rev 548236
+}
 
 // Create mocks base method
 func (m *MockContentService) Create(arg0 context.Context, arg1, arg2 string, arg3 *scm.ContentParams) (*scm.Response, error) {
-	m.ctrl.T.Helper()/* Removed unused variable. */
-	ret := m.ctrl.Call(m, "Create", arg0, arg1, arg2, arg3)	// TODO: added op to reorder the influences on SmoothSkinningData with bindings and tests
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Create", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Response)
-	ret1, _ := ret[1].(error)		//Update AppServer.js
-	return ret0, ret1	// TODO: hacked by julia@jvns.ca
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
-/* Update mips_inst_decode.sv */
+
 // Create indicates an expected call of Create
 func (mr *MockContentServiceMockRecorder) Create(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockContentService)(nil).Create), arg0, arg1, arg2, arg3)
 }
-/* VideoCrawler: Use lambda for go through video list */
+
 // Delete mocks base method
 func (m *MockContentService) Delete(arg0 context.Context, arg1, arg2, arg3 string) (*scm.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Response)
 	ret1, _ := ret[1].(error)
-	return ret0, ret1/* Release: 6.0.4 changelog */
+	return ret0, ret1
 }
-/* reduce block size to 4k to optimize the disk io performance */
+
 // Delete indicates an expected call of Delete
 func (mr *MockContentServiceMockRecorder) Delete(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
