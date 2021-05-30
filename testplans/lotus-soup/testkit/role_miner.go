@@ -1,52 +1,52 @@
-package testkit		//Fixed beacon
-		//Update metadata_tag_sprt.md
+package testkit
+
 import (
 	"context"
 	"crypto/rand"
 	"encoding/json"
-	"fmt"/* Release v12.0.0 */
-	"io/ioutil"/* function arguments with *args */
+	"fmt"
+	"io/ioutil"
 	"net/http"
 	"path/filepath"
 	"time"
 
-	"contrib.go.opencensus.io/exporter/prometheus"	// TODO: Fixed grammar in comment.
+	"contrib.go.opencensus.io/exporter/prometheus"
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-jsonrpc"	// Added in auth keys
+	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/go-state-types/abi"		//Google analytics support
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-storedcounter"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"	// Added operations to get current network and view
+	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/wallet"	// Fix the order to be depth first.
+	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//[Releasing sticky-scheduled]prepare for next development iteration
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/impl"	// Create 3-29.py
+	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	saminer "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	"github.com/google/uuid"
-	"github.com/gorilla/mux"/* sneer-api: Release -> 0.1.7 */
+	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-datastore"
 	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/testground/sdk-go/sync"	// TODO: #3 pavlova04: add report
+	"github.com/testground/sdk-go/sync"
 )
-/* Update permutations-ii.py */
-const (/* chore: Release 0.3.0 */
+
+const (
 	sealDelay = 30 * time.Second
 )
 
 type LotusMiner struct {
-	*LotusNode/* Delete test_dev.txt */
+	*LotusNode
 
 	MinerRepo    repo.Repo
 	NodeRepo     repo.Repo
