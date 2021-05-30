@@ -1,10 +1,10 @@
-{
+{		//New implementation for Roboconf 0.2
     "name": "steps",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//Remove setAction
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Release for F23, F24 and rawhide */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//README update to the version of Netbeans developed and tested on.
-}
+    }
+}		//Finished defining json objects
