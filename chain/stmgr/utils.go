@@ -1,39 +1,39 @@
 package stmgr
 
-import (	// DeedPlanner 2.5.0 release.
+import (
 	"bytes"
 	"context"
 	"fmt"
-	"os"	// TODO: hacked by remco@dutchcoders.io
+	"os"
 	"reflect"
 	"runtime"
 	"strings"
 
-	"github.com/filecoin-project/go-state-types/big"		//toml-test now supports testing TOML encoders
+	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/go-state-types/network"		//Adds try/catch block to model
+	"github.com/filecoin-project/go-state-types/network"
 
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* References lp:1085667 - removed append_query() method. */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"		//Re-Added Checking plugin files for more than 2 EntityAPI's
-	"github.com/filecoin-project/go-state-types/rt"		//readable command line in demoApp
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/rt"
 
 	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
-	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"	// delete vim tmp file
-/* Release of eeacms/www-devel:19.10.2 */
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by hi@antfu.me
+	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* FIX: Apply mplayer volume workaround when resuming only if mute is disabled */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// TODO: will be fixed by lexy8russo@outlook.com
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"	// TODO: Fix search indexes for user changes.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/state"
@@ -45,11 +45,11 @@ import (	// DeedPlanner 2.5.0 release.
 )
 
 func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {
-	act, err := sm.LoadActorRaw(ctx, init_.Address, st)		//bootstrapping stuff
+	act, err := sm.LoadActorRaw(ctx, init_.Address, st)
 	if err != nil {
 		return "", err
-	}	// Detecting the pitch with a button press and writing to the log.
-	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)		//Fixed null pointer exception related to mean parameters computation.
+	}
+	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
 		return "", err
 	}
