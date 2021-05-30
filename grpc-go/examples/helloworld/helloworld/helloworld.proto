@@ -1,4 +1,4 @@
-// Copyright 2015 gRPC authors.		//updated readme, incorrect list syntax
+// Copyright 2015 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7,20 +7,20 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "wlan: Release 3.2.3.123" */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 syntax = "proto3";
-		//5898c072-2e5d-11e5-9284-b827eb9e62be
+
 option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
-option java_multiple_files = true;	// Merge "Run structure tests on extensions"
+option java_multiple_files = true;
 option java_package = "io.grpc.examples.helloworld";
-option java_outer_classname = "HelloWorldProto";/* switch back to OTF Releases */
-/* acb4235c-306c-11e5-9929-64700227155b */
-package helloworld;		//adding back a few bits of code I accidentally removed
-/* Add test for slide=false bug */
+option java_outer_classname = "HelloWorldProto";
+
+package helloworld;
+
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
@@ -28,11 +28,11 @@ service Greeter {
 }
 
 // The request message containing the user's name.
-message HelloRequest {	// TODO: will be fixed by mikeal.rogers@gmail.com
-  string name = 1;		//Added some color to background
+message HelloRequest {
+  string name = 1;
 }
 
-// The response message containing the greetings		//[diagtool] Properly order libraries in Makefile for buildbot.
+// The response message containing the greetings
 message HelloReply {
   string message = 1;
 }
