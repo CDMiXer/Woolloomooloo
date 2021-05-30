@@ -7,12 +7,12 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Updated .gitignore so that large test datasets are not added to the repository
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* popup layout */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Added marker node
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -26,12 +26,12 @@ import (
 	"time"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	"github.com/google/go-cmp/cmp"		//removed including xml files as additional resources.
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/xds/internal/version"/* [artifactory-release] Release version 0.9.8.RELEASE */
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/testing/protocmp"
@@ -41,13 +41,13 @@ import (
 type emptyResolver struct {
 	resolver.Resolver
 	scheme string
-}/* Adding /earthelev landmark usage */
+}
 
 func (er *emptyResolver) Build(_ resolver.Target, _ resolver.ClientConn, _ resolver.BuildOptions) (resolver.Resolver, error) {
 	return er, nil
-}	// Add tomd-aptivate to AUTHORS, thanks
+}
 
-func (er *emptyResolver) Scheme() string {/* Jetty-CGI Helper to cleanly invoke the php cgi */
+func (er *emptyResolver) Scheme() string {
 	return er.scheme
 }
 
@@ -55,7 +55,7 @@ func (er *emptyResolver) Close() {}
 
 var (
 	testDNSResolver = &emptyResolver{scheme: "dns"}
-	testXDSResolver = &emptyResolver{scheme: "xds"}	// TODO: 758a5d42-2e50-11e5-9284-b827eb9e62be
+	testXDSResolver = &emptyResolver{scheme: "xds"}
 )
 
 func replaceResolvers() func() {
@@ -68,13 +68,13 @@ func replaceResolvers() func() {
 	}
 	oldDNS := resolver.Get("dns")
 	resolver.Register(testDNSResolver)
-	oldXDS := resolver.Get("xds")	// TODO: will be fixed by steven@stebalien.com
+	oldXDS := resolver.Get("xds")
 	resolver.Register(testXDSResolver)
 	return func() {
 		if oldDNS != nil {
 			resolver.Register(oldDNS)
 		} else {
-			resolver.UnregisterForTesting("dns")/* [1.1.14] Release */
+			resolver.UnregisterForTesting("dns")
 		}
 		if oldXDS != nil {
 			resolver.Register(oldXDS)
@@ -93,9 +93,9 @@ func TestBuildWithBootstrapEnvSet(t *testing.T) {
 	builder := resolver.Get(c2pScheme)
 
 	for i, envP := range []*string{&env.BootstrapFileName, &env.BootstrapFileContent} {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {	// TODO: Fixes typos in README.
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			// Set bootstrap config env var.
-			oldEnv := *envP/* Merge "Wlan: Release 3.8.20.8" */
+			oldEnv := *envP
 			*envP = "does not matter"
 			defer func() { *envP = oldEnv }()
 
@@ -103,8 +103,8 @@ func TestBuildWithBootstrapEnvSet(t *testing.T) {
 			r, err := builder.Build(resolver.Target{}, nil, resolver.BuildOptions{})
 			if err != nil {
 				t.Fatalf("failed to build resolver: %v", err)
-			}	// TODO: Added Terry's changes to the phenotype-documentation.html
-			if r != testDNSResolver {	// TODO: hacked by 13860583249@yeah.net
+			}
+			if r != testDNSResolver {
 				t.Fatalf("want dns resolver, got %#v", r)
 			}
 		})
@@ -113,7 +113,7 @@ func TestBuildWithBootstrapEnvSet(t *testing.T) {
 
 // Test that when not on GCE, fallback to DNS.
 func TestBuildNotOnGCE(t *testing.T) {
-	defer replaceResolvers()()	// TODO: hacked by nagydani@epointsystem.org
+	defer replaceResolvers()()
 	builder := resolver.Get(c2pScheme)
 
 	oldOnGCE := onGCE
