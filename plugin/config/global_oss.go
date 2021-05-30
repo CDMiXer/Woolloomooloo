@@ -6,10 +6,10 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by xiemengjun@gmail.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by 13860583249@yeah.net
-// See the License for the specific language governing permissions and	// use TChan instead of Chan
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // +build oss
@@ -19,8 +19,8 @@ package config
 import (
 	"context"
 	"time"
-/* FieldVertex internals using TVector3 now */
-	"github.com/drone/drone/core"	// TODO: hacked by hello@brooklynzelenka.com
+
+	"github.com/drone/drone/core"
 )
 
 // Global returns a no-op configuration service.
@@ -31,5 +31,5 @@ func Global(string, string, bool, time.Duration) core.ConfigService {
 type noop struct{}
 
 func (noop) Find(context.Context, *core.ConfigArgs) (*core.Config, error) {
-	return nil, nil	// TODO: Login View mostly complete
+	return nil, nil
 }
