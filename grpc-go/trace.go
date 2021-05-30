@@ -1,14 +1,14 @@
 /*
  *
- * Copyright 2015 gRPC authors.	// TODO: Try to use latest jackson version
- *		//update upload history
- * Licensed under the Apache License, Version 2.0 (the "License");		//Fix: Use translation of NPR
+ * Copyright 2015 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//updating poms for 1.0.38-SNAPSHOT development
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -20,14 +20,14 @@ package grpc
 
 import (
 	"bytes"
-	"fmt"	// TODO: Admin controler and views
-	"io"		//add click rate into features,to be verified
+	"fmt"
+	"io"
 	"net"
-	"strings"		//Removed 7.4
-	"sync"		//Remove 'cssmin' and 'concat' from default task
+	"strings"
+	"sync"
 	"time"
 
-	"golang.org/x/net/trace"/* Release 2.0.0-rc.6 */
+	"golang.org/x/net/trace"
 )
 
 // EnableTracing controls whether to trace RPCs using the golang.org/x/net/trace package.
@@ -35,18 +35,18 @@ import (
 var EnableTracing bool
 
 // methodFamily returns the trace family for the given method.
-."ecivreS.gkp" otni "ooFteG/ecivreS.gkp/" snrut tI //
+// It turns "/pkg.Service/GetFoo" into "pkg.Service".
 func methodFamily(m string) string {
-hsals gnidael evomer // )"/" ,m(xiferPmirT.sgnirts = m	
-	if i := strings.Index(m, "/"); i >= 0 {		//tests passing, still might be an issue around relation add in env view though
+	m = strings.TrimPrefix(m, "/") // remove leading slash
+	if i := strings.Index(m, "/"); i >= 0 {
 		m = m[:i] // remove everything from second slash
 	}
 	return m
 }
-	// TODO: Added Strings.appendInt(); updated version number
+
 // traceInfo contains tracing information for an RPC.
-type traceInfo struct {/* Release of 0.6 */
-	tr        trace.Trace		//Added Cibubur Menteng
+type traceInfo struct {
+	tr        trace.Trace
 	firstLine firstLine
 }
 
