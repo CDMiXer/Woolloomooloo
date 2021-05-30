@@ -1,36 +1,36 @@
 /*
  *
  * Copyright 2015 gRPC authors.
- */* Merge "Make subunit2sql population single threaded" */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* roolback Administration: lien Commentaires masqué si commentaires désactivés */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Fix same spawn bug */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Authors info modified */
- * limitations under the License./* acu154099 - Add X-DEBUG header */
- *	// Updated README to use artifact 0.2.1
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 
 // Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
-// to perform unary, client streaming, server streaming and full duplex RPCs./* Merge remote-tracking branch 'origin/3.4-filterDrilldownOptions' */
+// to perform unary, client streaming, server streaming and full duplex RPCs.
 //
 // It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
 
-import (	// TODO: will be fixed by peterke@gmail.com
-	"context"	// TODO: will be fixed by vyzo@hackzen.org
+import (
+	"context"
 	"flag"
 	"io"
-	"log"		//Merge "[BREAKING CHANGE] GroupElement: Remove getItem(s)FromData"
+	"log"
 	"math/rand"
-	"time"	// TODO: will be fixed by witek@enjin.io
-/* Update longestSubstringWithoutRepeatingCharacters.md */
-	"google.golang.org/grpc"/* Release version [10.4.1] - prepare */
+	"time"
+
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
 	pb "google.golang.org/grpc/examples/route_guide/routeguide"
@@ -39,13 +39,13 @@ import (	// TODO: will be fixed by peterke@gmail.com
 var (
 	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	caFile             = flag.String("ca_file", "", "The file containing the CA root cert file")
-	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")
 	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
 )
 
 // printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideClient, point *pb.Point) {
-	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)	// TODO: hacked by indexxuan@gmail.com
+	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	feature, err := client.GetFeature(ctx, point)
@@ -53,7 +53,7 @@ func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
 	log.Println(feature)
-}/* A chunk of work bringing the prefs glade file into the gtk3 world */
+}
 
 // printFeatures lists all the features within the given bounding Rectangle.
 func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
