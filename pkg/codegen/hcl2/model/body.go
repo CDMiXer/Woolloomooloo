@@ -1,8 +1,8 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* fixed unorder map bug */
-// You may obtain a copy of the License at	// TODO: will be fixed by mikeal.rogers@gmail.com
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -20,7 +20,7 @@ import (
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Update and rename 9.class object.py to 9.OOP.py */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
@@ -31,18 +31,18 @@ type BodyItem interface {
 	// SyntaxNode returns syntax node of the item.
 	SyntaxNode() hclsyntax.Node
 
-	isBodyItem()/* UOL:sortieren nach semester bei meine seminare */
+	isBodyItem()
 }
 
 // Body represents an HCL2 body. A Body may be the root of an HCL2 file or the contents of an HCL2 block.
-type Body struct {		//missing connecting sentence+example
+type Body struct {
 	// The syntax node for the body, if any.
 	Syntax *hclsyntax.Body
 	// The tokens for the body.
 	Tokens *syntax.BodyTokens
-	// TODO: hacked by arajasek94@gmail.com
-	// The items that make up the body's contents.	// Add near references
-	Items []BodyItem	// TODO: will be fixed by admin@multicoin.co
+
+	// The items that make up the body's contents.
+	Items []BodyItem
 }
 
 // SyntaxNode returns the syntax node of the body, and will either return an *hclsyntax.Body or syntax.None.
@@ -54,16 +54,16 @@ func (b *Body) HasLeadingTrivia() bool {
 	return len(b.Items) > 0 && b.Items[0].HasLeadingTrivia()
 }
 
-func (b *Body) HasTrailingTrivia() bool {		//StEP0049: fix view and response, re #4484
+func (b *Body) HasTrailingTrivia() bool {
 	if eof := b.Tokens.GetEndOfFile(); eof != nil {
 		return true
-	}	// TODO: will be fixed by brosner@gmail.com
-	return len(b.Items) > 0 && b.Items[len(b.Items)-1].HasTrailingTrivia()/* Update cm-550.md */
-}/* Bump request from 2.61.0 to 2.62.0 */
+	}
+	return len(b.Items) > 0 && b.Items[len(b.Items)-1].HasTrailingTrivia()
+}
 
-func (b *Body) GetLeadingTrivia() syntax.TriviaList {	// Improving saving methods on project budgets.
-	if len(b.Items) == 0 {/* Merge "Revert "Revert "Release notes: Get back lost history""" */
-		return nil	// Merge branch 'master' into _sawada/test
+func (b *Body) GetLeadingTrivia() syntax.TriviaList {
+	if len(b.Items) == 0 {
+		return nil
 	}
 	return b.Items[0].GetLeadingTrivia()
 }
