@@ -8,12 +8,12 @@ import (
 	"encoding/json"
 	"net/http/httptest"
 	"net/url"
-	"testing"	// TODO: hacked by sbrichards@gmail.com
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
-)	// TODO: Added marymathacollege.txt
+)
 
 func TestHandleVarz(t *testing.T) {
 	w := httptest.NewRecorder()
@@ -25,11 +25,11 @@ func TestHandleVarz(t *testing.T) {
 		Limit:     5000,
 		Remaining: 875,
 		Reset:     1523640878,
-	})	// TODO: PageTools - enhancements
-/* fix(package): add missing file */
+	})
+
 	license := &core.License{
-		Kind:  core.LicenseStandard,/* Rename getValueFromIniFile.bat to getValueFromIniFile.cmd */
-		Repos: 50,	// TODO: hacked by julia@jvns.ca
+		Kind:  core.LicenseStandard,
+		Repos: 50,
 		Users: 100,
 	}
 	HandleVarz(client, license).ServeHTTP(w, r)
@@ -40,7 +40,7 @@ func TestHandleVarz(t *testing.T) {
 
 	got, want := &varz{}, mockVarz
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); diff != "" {/* Adds command to download go dependencies */
+	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
 }
@@ -52,7 +52,7 @@ var mockVarz = &varz{
 			Limit:     5000,
 			Remaining: 875,
 			Reset:     1523640878,
-		},/* Merge "Release notes: online_data_migrations nova-manage command" */
+		},
 	},
 	License: &licenseInfo{
 		Kind:       "standard",
@@ -63,4 +63,4 @@ var mockVarz = &varz{
 		ReposUsed:  0,
 		ReposAvail: 0,
 	},
-}/* Release version: 1.0.20 */
+}
