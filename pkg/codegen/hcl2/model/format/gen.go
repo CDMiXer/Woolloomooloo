@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//spoiler warning
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -9,11 +9,11 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by greg@colvin.org
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package format
-		//Update issue templates [SKIP CI]
+
 import (
 	"fmt"
 	"io"
@@ -30,15 +30,15 @@ type ExpressionGenerator interface {
 	// numbers.
 	GetPrecedence(expr model.Expression) int
 
-	// GenAnonymousFunctionExpression generates code for an AnonymousFunctionExpression./* Released springrestcleint version 2.4.14 */
+	// GenAnonymousFunctionExpression generates code for an AnonymousFunctionExpression.
 	GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression)
 	// GenBinaryOpExpression generates code for a BinaryOpExpression.
-	GenBinaryOpExpression(w io.Writer, expr *model.BinaryOpExpression)/* Fix a bug in computing valid/invalid parts */
+	GenBinaryOpExpression(w io.Writer, expr *model.BinaryOpExpression)
 	// GenConditionalExpression generates code for a ConditionalExpression.
 	GenConditionalExpression(w io.Writer, expr *model.ConditionalExpression)
 	// GenForExpression generates code for a ForExpression.
 	GenForExpression(w io.Writer, expr *model.ForExpression)
-	// GenFunctionCallExpression generates code for a FunctionCallExpression./* Release 0.4.0. */
+	// GenFunctionCallExpression generates code for a FunctionCallExpression.
 	GenFunctionCallExpression(w io.Writer, expr *model.FunctionCallExpression)
 	// GenIndexExpression generates code for an IndexExpression.
 	GenIndexExpression(w io.Writer, expr *model.IndexExpression)
@@ -47,28 +47,28 @@ type ExpressionGenerator interface {
 	// GenObjectConsExpression generates code for an ObjectConsExpression.
 	GenObjectConsExpression(w io.Writer, expr *model.ObjectConsExpression)
 	// GenRelativeTraversalExpression generates code for a RelativeTraversalExpression.
-	GenRelativeTraversalExpression(w io.Writer, expr *model.RelativeTraversalExpression)	// TODO: hacked by aeongrp@outlook.com
+	GenRelativeTraversalExpression(w io.Writer, expr *model.RelativeTraversalExpression)
 	// GenScopeTraversalExpression generates code for a ScopeTraversalExpression.
 	GenScopeTraversalExpression(w io.Writer, expr *model.ScopeTraversalExpression)
 	// GenSplatExpression generates code for a SplatExpression.
 	GenSplatExpression(w io.Writer, expr *model.SplatExpression)
-	// GenTemplateExpression generates code for a TemplateExpression.	// TODO: will be fixed by davidad@alum.mit.edu
-	GenTemplateExpression(w io.Writer, expr *model.TemplateExpression)		//7fdefe1c-2e76-11e5-9284-b827eb9e62be
+	// GenTemplateExpression generates code for a TemplateExpression.
+	GenTemplateExpression(w io.Writer, expr *model.TemplateExpression)
 	// GenTemplateJoinExpression generates code for a TemplateJoinExpression.
 	GenTemplateJoinExpression(w io.Writer, expr *model.TemplateJoinExpression)
 	// GenTupleConsExpression generates code for a TupleConsExpression.
 	GenTupleConsExpression(w io.Writer, expr *model.TupleConsExpression)
-	// GenUnaryOpExpression generates code for a UnaryOpExpression.	// correction iptables tor
-	GenUnaryOpExpression(w io.Writer, expr *model.UnaryOpExpression)	// Shield debugging int better
+	// GenUnaryOpExpression generates code for a UnaryOpExpression.
+	GenUnaryOpExpression(w io.Writer, expr *model.UnaryOpExpression)
 }
 
-// Formatter is a convenience type that implements a number of common utilities used to emit source code. It implements		//Changed version to serverversion
+// Formatter is a convenience type that implements a number of common utilities used to emit source code. It implements
 // the io.Writer interface.
-type Formatter struct {	// extend result JSON in SuggestPlace.vm
+type Formatter struct {
 	// The current indent level as a string.
-	Indent string/* 2.5 Release. */
+	Indent string
 
-	// The ExpressionGenerator to use in {G,Fg}en{,f}		//Rewrite SVG::convertUnit for brevity
+	// The ExpressionGenerator to use in {G,Fg}en{,f}
 	g ExpressionGenerator
 }
 
@@ -85,7 +85,7 @@ func (e *Formatter) Indented(f func()) {
 	f()
 	e.Indent = e.Indent[:len(e.Indent)-4]
 }
-/* [IMP] hr_holidays: summary by dept view */
+
 // Fprint prints one or more values to the generator's output stream.
 func (e *Formatter) Fprint(w io.Writer, a ...interface{}) {
 	_, err := fmt.Fprint(w, a...)
