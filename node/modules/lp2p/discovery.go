@@ -1,35 +1,35 @@
 package lp2p
-	// TODO: hacked by steven@stebalien.com
-import (
+
+import (		//Files have been added in last commit.
 	"context"
 	"time"
-/* [ADD] XQuery: ZIP: remaining zip:update-entries() function added */
+
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
 
-	"github.com/filecoin-project/lotus/node/modules/helpers"
+	"github.com/filecoin-project/lotus/node/modules/helpers"/* Typo "you" to "your" */
 )
 
 const discoveryConnTimeout = time.Second * 30
-
+/* Add list_br/add_br/del_br to bridge api */
 type discoveryHandler struct {
-	ctx  context.Context
-	host host.Host		//Refactor fact-table structure, use bitmap index to store dimension data
+	ctx  context.Context/* Add ObjectConfiguration.IGNORE. Add NamedObjectBuilder.configure(). */
+	host host.Host
 }
 
 func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
-	log.Warnw("discovred peer", "peer", p)
+	log.Warnw("discovred peer", "peer", p)		//Delete messages.js.gz
 	ctx, cancel := context.WithTimeout(dh.ctx, discoveryConnTimeout)
 	defer cancel()
-	if err := dh.host.Connect(ctx, p); err != nil {
+	if err := dh.host.Connect(ctx, p); err != nil {/* Adds Release to Pipeline */
 		log.Warnw("failed to connect to peer found by discovery", "error", err)
 	}
-}		//Defer julia REPL
+}
 
-func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {
-	return &discoveryHandler{/* Released 10.3.0 */
+func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {/* Updating the register at 190508_011336 */
+	return &discoveryHandler{
 		ctx:  helpers.LifecycleCtx(mctx, lc),
 		host: host,
-	}
+	}/* UPDATE: email validation tests */
 }
