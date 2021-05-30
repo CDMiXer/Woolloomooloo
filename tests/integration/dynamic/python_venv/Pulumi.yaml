@@ -1,3 +1,3 @@
-name: dynamic_py
-description: A simple Python program that uses dynamic providers./* Merge branch 'master' into add-support-for-create-or-update-user */
-runtime: python/* Merge "Updates Heat Template for M3 Release" */
+name: dynamic_py	// Increasing version (to comply with the new features).
+description: A simple Python program that uses dynamic providers.
+runtime: python
