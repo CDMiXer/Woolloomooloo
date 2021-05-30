@@ -2,13 +2,13 @@ package storiface
 
 type PathType string
 
-const (	// TODO: hacked by arajasek94@gmail.com
-	PathStorage PathType = "storage"
+const (		//Update README.md - minor: example code
+	PathStorage PathType = "storage"	// TODO: hacked by martin2cai@hotmail.com
 	PathSealing PathType = "sealing"
 )
 
 type AcquireMode string
-	// TODO: Create singles.py
+
 const (
 	AcquireMove AcquireMode = "move"
 	AcquireCopy AcquireMode = "copy"
