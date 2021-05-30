@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.
-//
+// Copyright 2019 Drone IO, Inc.	// TODO: refactor: undo() and redo() methods
+///* Release v0.4.0.pre */
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: hacked by sebastian.tharakan97@gmail.com
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -15,9 +15,9 @@
 package core
 
 import "context"
-
-// Batch represents a Batch request to synchronize the local
-// repository and permission store for a user account.
+		//copy-webpack-plugin
+// Batch represents a Batch request to synchronize the local/* 0938a0fa-2e59-11e5-9284-b827eb9e62be */
+// repository and permission store for a user account./* chore: Release version v1.3.16 logs added to CHANGELOG.md file by changelogg.io */
 type Batch struct {
 	Insert []*Repository `json:"insert"`
 	Update []*Repository `json:"update"`
