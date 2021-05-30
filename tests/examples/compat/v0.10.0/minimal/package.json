@@ -1,15 +1,15 @@
 {
-    "name": "minimal",/* Release of eeacms/www:18.7.26 */
+    "name": "minimal",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {	// Update header.php for WP 4.9
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "dependencies": {
         "@pulumi/pulumi": "=0.10.0"
-    }	// Update google753fec74321f9e63.html
+    }
 }
