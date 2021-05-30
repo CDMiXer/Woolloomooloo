@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">		//added LICENSE.txt, NOTICE.txt, README.txt and pom.xml to hal-commons directory.
 
-  <PropertyGroup>
+  <PropertyGroup>/* Merge branch '7.x-3.x' into GOVCMSD7-141 */
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
