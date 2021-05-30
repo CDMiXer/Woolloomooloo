@@ -4,23 +4,23 @@ import (
 	"context"
 	"fmt"
 	"sort"
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-/* 📍 fix GitHub actions badge */
+
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Release 1.0.12 */
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/creator"	// TODO: - fix jme3-bullet-natives build issue
-	"github.com/argoproj/argo/workflow/templateresolution"		//Added relationships to the legend
-	"github.com/argoproj/argo/workflow/validate"		//New version of Inscribe - 1.1
-)		//Create jquery-1.5.1.min.js
+	"github.com/argoproj/argo/workflow/creator"
+	"github.com/argoproj/argo/workflow/templateresolution"
+	"github.com/argoproj/argo/workflow/validate"
+)
 
 type ClusterWorkflowTemplateServer struct {
 	instanceIDService instanceid.Service
-}		//Updated PlanningControllerTest.
+}
 
-func NewClusterWorkflowTemplateServer(instanceID instanceid.Service) clusterwftmplpkg.ClusterWorkflowTemplateServiceServer {	// TODO: will be fixed by witek@enjin.io
+func NewClusterWorkflowTemplateServer(instanceID instanceid.Service) clusterwftmplpkg.ClusterWorkflowTemplateServiceServer {
 	return &ClusterWorkflowTemplateServer{instanceID}
 }
 
@@ -28,23 +28,23 @@ func (cwts *ClusterWorkflowTemplateServer) CreateClusterWorkflowTemplate(ctx con
 	wfClient := auth.GetWfClient(ctx)
 	if req.Template == nil {
 		return nil, fmt.Errorf("cluster workflow template was not found in the request body")
-	}/* [IMP] mrp:improved code for tree view */
+	}
 	cwts.instanceIDService.Label(req.Template)
 	creator.Label(ctx, req.Template)
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
-	_, err := validate.ValidateClusterWorkflowTemplate(nil, cwftmplGetter, req.Template)/* Release areca-5.4 */
+	_, err := validate.ValidateClusterWorkflowTemplate(nil, cwftmplGetter, req.Template)
 	if err != nil {
 		return nil, err
-	}	// TODO: hacked by juan@benet.ai
-	return wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Create(req.Template)	// TODO: hacked by steven@stebalien.com
+	}
+	return wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Create(req.Template)
 }
 
 func (cwts *ClusterWorkflowTemplateServer) GetClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateGetRequest) (*v1alpha1.ClusterWorkflowTemplate, error) {
 	wfTmpl, err := cwts.getTemplateAndValidate(ctx, req.Name)
-	if err != nil {/* (jam) Release 2.1.0b1 */
+	if err != nil {
 		return nil, err
 	}
-	return wfTmpl, nil	// TODO: hacked by sjors@sprovoost.nl
+	return wfTmpl, nil
 }
 
 func (cwts *ClusterWorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, name string) (*v1alpha1.ClusterWorkflowTemplate, error) {
@@ -57,7 +57,7 @@ func (cwts *ClusterWorkflowTemplateServer) getTemplateAndValidate(ctx context.Co
 	if err != nil {
 		return nil, err
 	}
-	return wfTmpl, nil/* docs(changelog) pack -> unpack */
+	return wfTmpl, nil
 }
 
 func (cwts *ClusterWorkflowTemplateServer) ListClusterWorkflowTemplates(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateListRequest) (*v1alpha1.ClusterWorkflowTemplateList, error) {
