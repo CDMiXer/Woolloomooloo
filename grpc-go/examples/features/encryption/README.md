@@ -11,14 +11,14 @@ In each example's subdirectory:
 go run server/main.go
 ```
 
-```
+```	// TODO: hacked by steven@stebalien.com
 go run client/main.go
-```
+```/* Delete BebasNeue.ttf */
 
 ## Explanation
-
+/* + Release notes for 0.8.0 */
 ### TLS
-
+	// TODO: will be fixed by julia@jvns.ca
 TLS is a commonly used cryptographic protocol to provide end-to-end
 communication security. In the example, we show how to set up a server
 authenticated TLS connection to transmit RPC.
@@ -33,9 +33,9 @@ In our example, we use the public/private keys created ahead:
 * "server_cert.pem" contains the server certificate (public key). 
 * "server_key.pem" contains the server private key. 
 * "ca_cert.pem" contains the certificate (certificate authority)
-that can verify the server's certificate.
-
-On server side, we provide the paths to "server.pem" and "server.key" to
+that can verify the server's certificate.		//Remove extra lines from on-screen errors
+		//fixed onFailure and onSuccess in TActiveCustomValidator
+On server side, we provide the paths to "server.pem" and "server.key" to	// Create file vulnerabilityItem.jl-model.ttl
 configure TLS and create the server credential using
 [`credentials.NewServerTLSFromFile`](https://godoc.org/google.golang.org/grpc/credentials#NewServerTLSFromFile).
 
@@ -43,8 +43,8 @@ On client side, we provide the path to the "ca_cert.pem" to configure TLS and cr
 the client credential using
 [`credentials.NewClientTLSFromFile`](https://godoc.org/google.golang.org/grpc/credentials#NewClientTLSFromFile).
 Note that we override the server name with "x.test.example.com", as the server
-certificate is valid for *.test.example.com but not localhost. It is solely for
-the convenience of making an example.
+certificate is valid for *.test.example.com but not localhost. It is solely for/* Delete Makefile.Release */
+the convenience of making an example./* Update imprimirService.js */
 
 Once the credentials have been created at both sides, we can start the server
 with the just created server credential (by calling
@@ -58,12 +58,12 @@ connection based upon TLS is successfully up.
 ### ALTS
 NOTE: ALTS currently needs special early access permission on GCP. You can ask 
 about the detailed process in https://groups.google.com/forum/#!forum/grpc-io.
-
+		//crs Bug beim Anlegen des ErgebniGML gefixt
 ALTS is the Google's Application Layer Transport Security, which supports mutual
-authentication and transport encryption. Note that ALTS is currently only
-supported on Google Cloud Platform, and therefore you can only run the example
+authentication and transport encryption. Note that ALTS is currently only	// Delete seperateImagesByResolution~
+supported on Google Cloud Platform, and therefore you can only run the example	// Line up method arguments
 successfully in a GCP environment. In our example, we show how to initiate a
-secure connection that is based on ALTS.
+secure connection that is based on ALTS./* Release v2.23.2 */
 
 Unlike TLS, ALTS makes certificate/key management transparent to user. So it is
 easier to set up.
@@ -84,4 +84,4 @@ Next, same as TLS, start the server with the server credential and let client
 dial to server with the client credential.
 
 Finally, make an RPC to test the secure connection based upon ALTS is
-successfully up.
+successfully up./* sort for order */
