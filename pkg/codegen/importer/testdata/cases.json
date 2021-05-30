@@ -1,9 +1,9 @@
-{/* travis +node 0.11  */
-    "resources": [/* Use AbstractLocalizedEntity when localization is needed */
+{
+    "resources": [
 		{
-			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",
-			"custom": true,/* Remove prefix usage. Release 0.11.2. */
-			"type": "aws:autoscaling/group:Group",	// TODO: hacked by mikeal.rogers@gmail.com
+			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",/* Delete prop_calc_best_practices.bbl */
+			"custom": true,
+			"type": "aws:autoscaling/group:Group",
 			"inputs": {
 				"availabilityZones": [
 					"foobar",
@@ -11,12 +11,12 @@
 				],
 				"forceDelete": false,
 				"healthCheckGracePeriod": 42,
-				"launchConfiguration": "foobar",
-				"maxSize": 42,	// TODO: Improve name MARN and Brazil
+				"launchConfiguration": "foobar",/* [artifactory-release] Release version 3.2.0.RC1 */
+				"maxSize": 42,
 				"metricsGranularity": "foobar",
 				"minSize": 42,
-				"name": "foobar",	// TODO: added parts of implementation
-				"protectFromScaleIn": false,	// TODO: hacked by hello@brooklynzelenka.com
+				"name": "foobar",
+				"protectFromScaleIn": false,
 				"vpcZoneIdentifiers": [
 					"foobar",
 					"foobar"
@@ -24,39 +24,39 @@
 				"waitForCapacityTimeout": "foobar"
 			}
 		},
-		{		//[JGitFlow Gradle Plugin] Updated gradle.properties for v0.2.3 release
-			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",/* Clarify dimension of IBM disks */
-			"custom": true,
+		{
+			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
+			"custom": true,	// Just some formatting fixes for the README.
 			"type": "aws:cloudformation/stack:Stack",
 			"inputs": {
 				"name": "foobar",
-				"templateBody": "foobar"	// TODO: Update setup.py with new nifticlibs directory.
+				"templateBody": "foobar"
 			}
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/dashboard:Dashboard::Dashboard",
 			"custom": true,
-			"type": "aws:cloudwatch/dashboard:Dashboard",	// TODO: will be fixed by nicksavers@gmail.com
+			"type": "aws:cloudwatch/dashboard:Dashboard",
 			"inputs": {
-				"dashboardBody": "foobar",
+				"dashboardBody": "foobar",/* Update lec4.md */
 				"dashboardName": "foobar"
-			}
-		},/* Update 05_cfg_building.md */
-		{
-			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",
-			"custom": true,/* 7f42fe2e-2e5b-11e5-9284-b827eb9e62be */
-			"type": "aws:cloudwatch/logGroup:LogGroup",/* Add Maven button */
-			"inputs": {
-				"name": "foobar",
-				"retentionInDays": 42/* devops-edit --pipeline=dotnet/CanaryReleaseStageAndApprovePromote/Jenkinsfile */
-			}
+}			
 		},
 		{
-			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",
+			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",
 			"custom": true,
+			"type": "aws:cloudwatch/logGroup:LogGroup",
+			"inputs": {
+				"name": "foobar",
+				"retentionInDays": 42	// TODO: Delete Adding a Subscription to the Topi.md
+			}
+		},/* add mysql instance define */
+		{		//9d656050-2e4b-11e5-9284-b827eb9e62be
+			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",
+			"custom": true,	// TODO: will be fixed by vyzo@hackzen.org
 			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",
 			"inputs": {
-				"logGroupName": "foobar",		//Fix spacing of XML block
+				"logGroupName": "foobar",
 				"metricTransformation": {
 					"name": "foobar",
 					"namespace": "foobar",
@@ -64,21 +64,21 @@
 				},
 				"name": "foobar",
 				"pattern": "foobar"
-			}
+			}/* Merge "Add contrail-snmp-collector to NodeUVEImplementedServices" */
 		},
-		{
+		{		//More description about development environments
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
 			"custom": true,
 			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
-			"inputs": {
+			"inputs": {/* Merge branch 'master' of git@github.com:Quanticol/CARMA.git */
 				"actionsEnabled": true,
 				"alarmActions": [
 					"foobar"
 				],
-				"alarmDescription": "foobar",
+				"alarmDescription": "foobar",/* use PublicationDocument and StudyDocument */
 				"comparisonOperator": "foobar",
 				"dimensions": {
-					"AutoScalingGroupName": "foobar"
+					"AutoScalingGroupName": "foobar"/* merge corrigé */
 				},
 				"evaluationPeriods": 42,
 				"metricName": "foobar",
@@ -86,13 +86,13 @@
 				"namespace": "foobar",
 				"period": 42,
 				"statistic": "foobar",
-				"threshold": 42,
+				"threshold": 42,		//Update and rename haxelib.xml to haxelib.json
 				"treatMissingData": "foobar"
 			}
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
-			"custom": true,
+			"custom": true,/* Update README: add info about jconditions */
 			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
 			"inputs": {
 				"actionsEnabled": true,
