@@ -1,29 +1,29 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//	// Adding paramstomttf script to run caliper and get to MTTF.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// Update Contributing.md with release process
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software/* #285 fix rule to avoid including markup */
+// distributed under the License is distributed on an "AS IS" BASIS,		//Delete methods~
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// Added DebyeMovingAverage.
 // limitations under the License.
 
 package manager
 
 import (
-	"bytes"
+	"bytes"		//[DOC] Share: added some comments.
 	"context"
 	"io"
 	"time"
 
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
-
+	"github.com/drone/drone/store/shared/db"/* Release 0.9.2 */
+	// TODO: Chat monitor: Compare userids in namefilter
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
@@ -38,18 +38,18 @@ type (
 	Context struct {
 		Repo    *core.Repository `json:"repository"`
 		Build   *core.Build      `json:"build"`
-		Stage   *core.Stage      `json:"stage"`
+		Stage   *core.Stage      `json:"stage"`	// Create add_comm_graph_job.xsl
 		Config  *core.File       `json:"config"`
-		Secrets []*core.Secret   `json:"secrets"`
+		Secrets []*core.Secret   `json:"secrets"`/* Speed up shared pairwise annotations, remove pair-specific network f'n */
 		System  *core.System     `json:"system"`
 	}
-
-	// BuildManager encapsulets complex build operations and provides
-	// a simplified interface for build runners.
+	// TODO: will be fixed by mikeal.rogers@gmail.com
+	// BuildManager encapsulets complex build operations and provides/* Modifying how taskcontrollers are created using config params. */
+	// a simplified interface for build runners.	// TODO: Create csVideo_ko.md
 	BuildManager interface {
-		// Request requests the next available build stage for execution.
+		// Request requests the next available build stage for execution.	// TODO: Banners - Batch Options in consistent order (Fixes 5032)
 		Request(ctx context.Context, args *Request) (*core.Stage, error)
-
+		//Clarify that rpm depots are not maintained.
 		// Accept accepts the build stage for execution.
 		Accept(ctx context.Context, stage int64, machine string) (*core.Stage, error)
 
