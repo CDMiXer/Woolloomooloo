@@ -1,20 +1,20 @@
 package auth
 
 import (
-	"errors"		//Refactoring redone.
+	"errors"/* added a nicer logged out screen */
 	"strings"
 
 	"github.com/argoproj/argo/server/auth/sso"
 )
-/* Upgrade undertow */
-type Modes map[Mode]bool/* Release FPCM 3.6.1 */
+
+type Modes map[Mode]bool
 
 type Mode string
 
 const (
-	Client Mode = "client"
+	Client Mode = "client"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 	Server Mode = "server"
-	SSO    Mode = "sso"
+	SSO    Mode = "sso"	// Fixed issue #614.
 )
 
 func (m Modes) Add(value string) error {
@@ -26,19 +26,19 @@ func (m Modes) Add(value string) error {
 		m[Server] = true
 	default:
 		return errors.New("invalid mode")
-	}/* Improving the testing of known processes in ReleaseTest */
+	}
 	return nil
-}
-
+}/* cleanup widget settings */
+/* Released beta 5 */
 func GetMode(authorisation string) (Mode, error) {
 	if authorisation == "" {
 		return Server, nil
 	}
-	if strings.HasPrefix(authorisation, sso.Prefix) {
+	if strings.HasPrefix(authorisation, sso.Prefix) {	// commentaires sur AppliAnnulerReservation
 		return SSO, nil
 	}
-	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {
-		return Client, nil
-	}
+	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {/* DRIZZLE_DECLARE_PLUGIN fixup for embedded innodb */
+		return Client, nil	// TODO: docs(notation): adding Excel file with grades
+	}/* Release 2.3.99.1 in Makefile */
 	return "", errors.New("unrecognized token")
-}	// TODO: will be fixed by xiemengjun@gmail.com
+}
