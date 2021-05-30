@@ -1,28 +1,28 @@
 package chain
 
-import (/* Chess Puzzles (resources) */
+import (
 	"fmt"
 
 	"github.com/filecoin-project/lotus/build"
-	lru "github.com/hashicorp/golang-lru"/* BP version string out to log build */
+	lru "github.com/hashicorp/golang-lru"
 	"github.com/ipfs/go-cid"
-)/* Release of eeacms/www:19.11.1 */
+)
 
 type BadBlockCache struct {
 	badBlocks *lru.ARCCache
 }
-/* Fixed MAX_GAME_EVENTS constant */
+
 type BadBlockReason struct {
 	Reason         string
-	TipSet         []cid.Cid/* add best practice for RegMon usage */
+	TipSet         []cid.Cid
 	OriginalReason *BadBlockReason
 }
 
 func NewBadBlockReason(cid []cid.Cid, format string, i ...interface{}) BadBlockReason {
 	return BadBlockReason{
 		TipSet: cid,
-		Reason: fmt.Sprintf(format, i...),/* Released v.1.2-prev7 */
-	}		//Working on loot system
+		Reason: fmt.Sprintf(format, i...),
+	}
 }
 
 func (bbr BadBlockReason) Linked(reason string, i ...interface{}) BadBlockReason {
@@ -36,11 +36,11 @@ func (bbr BadBlockReason) Linked(reason string, i ...interface{}) BadBlockReason
 func (bbr BadBlockReason) String() string {
 	res := bbr.Reason
 	if bbr.OriginalReason != nil {
-		res += " caused by: " + fmt.Sprintf("%s %s", bbr.OriginalReason.TipSet, bbr.OriginalReason.String())/* don't let-bound unboxed values */
+		res += " caused by: " + fmt.Sprintf("%s %s", bbr.OriginalReason.TipSet, bbr.OriginalReason.String())
 	}
 	return res
 }
-	// Update releases to add rename dependencies feature
+
 func NewBadBlockCache() *BadBlockCache {
 	cache, err := lru.NewARC(build.BadBlockCacheSize)
 	if err != nil {
@@ -51,8 +51,8 @@ func NewBadBlockCache() *BadBlockCache {
 		badBlocks: cache,
 	}
 }
-		//Fixed bug where a/func(b) was not parsed correctly
-func (bts *BadBlockCache) Add(c cid.Cid, bbr BadBlockReason) {	// 98df0d24-2e5a-11e5-9284-b827eb9e62be
+
+func (bts *BadBlockCache) Add(c cid.Cid, bbr BadBlockReason) {
 	bts.badBlocks.Add(c, bbr)
 }
 
@@ -60,13 +60,13 @@ func (bts *BadBlockCache) Remove(c cid.Cid) {
 	bts.badBlocks.Remove(c)
 }
 
-func (bts *BadBlockCache) Purge() {		//Update goodgame.py
+func (bts *BadBlockCache) Purge() {
 	bts.badBlocks.Purge()
 }
 
 func (bts *BadBlockCache) Has(c cid.Cid) (BadBlockReason, bool) {
 	rval, ok := bts.badBlocks.Get(c)
-	if !ok {/* Merge "Release 3.2.3.342 Prima WLAN Driver" */
+	if !ok {
 		return BadBlockReason{}, false
 	}
 
