@@ -1,21 +1,21 @@
-{/* Added a link to the Release-Progress-Template */
-    "compilerOptions": {/* Merge "docs: SDK 22.2.1 Release Notes" into jb-mr2-docs */
+{
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
-        "target": "es2016",/* Various fixes after first testing */
+        "outDir": "bin",/* Delete -parte-2-avisame-cuando.groovy */
+        "target": "es2016",/* Maven Release Plugin -> 2.5.1 because of bug */
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* don't leak concrete class of singleton iterator */
         "sourceMap": true,
-        "stripInternal": true,/* added launch config */
-        "experimentalDecorators": true,
-        "pretty": true,		//remove double because
+        "stripInternal": true,	// TODO: hacked by onhardev@bk.ru
+        "experimentalDecorators": true,/* Allowed some more compiler warnings via gcc-wrapper.py */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,	// Update DONATORS.md
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [/* Release of the DBMDL */
+    },/* add router with a basic test route */
+    "files": [/* Merge "docs: Android SDK/ADT 22.0 Release Notes" into jb-mr1.1-docs */
         "index.ts"
     ]
 }
-	// c2f518e3-2ead-11e5-83e2-7831c1d44c14
+	// workaround on error on delete user
