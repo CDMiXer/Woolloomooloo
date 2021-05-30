@@ -1,58 +1,58 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* bd70e8c8-2e5b-11e5-9284-b827eb9e62be */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
-package oauth2		//Add also config.h and mpg123.h for Xcode support to Makefile.am
+/* Create SNBForumsLinksInNewTab. */
+package oauth2
 
 import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-)
-	// Create txtCell.js
+)/* Release 4.1.1 */
+
 func Test_createState(t *testing.T) {
 	w := httptest.NewRecorder()
 	s := createState(w)
 	if got, want := s, "4d65822107fcfd52"; got != want {
 		t.Errorf("Want secrets %s, got %s", want, got)
 	}
-	c := "_oauth_state_=4d65822107fcfd52; Max-Age=1800"		//SO-1622: added test case to metadata support
+	c := "_oauth_state_=4d65822107fcfd52; Max-Age=1800"		//Release chrome extension
 	if got, want := w.Header().Get("Set-Cookie"), c; got != want {
 		t.Errorf("Want cookie value %s, got %s", want, got)
-	}/* Release: 1.4.1. */
+	}
 }
 
 func Test_validateState(t *testing.T) {
 	tests := []struct {
 		state string
-		value string	// Fixed error when job folder is empty
+		value string/* Add info about logging to the readme file. */
 		err   error
-	}{
-		{		//Update read me and installation instructions
-			state: "4d65822107fcfd52",	// TODO: hacked by witek@enjin.io
-			value: "4d65822107fcfd52",/* #31 - Release version 1.3.0.RELEASE. */
+	}{/* Release of eeacms/varnish-eea-www:3.0 */
+		{
+			state: "4d65822107fcfd52",
+			value: "4d65822107fcfd52",
 		},
 		{
 			state: "4d65822107fcfd52",
 			value: "0000000000000000",
-			err:   ErrState,/* d0ab8b2a-2e45-11e5-9284-b827eb9e62be */
-		},
+			err:   ErrState,
+		},		//Create contributers.txt
 		{
 			state: "4d65822107fcfd52",
 			err:   http.ErrNoCookie,
-		},
+		},		//add demo namespace
 	}
-	for _, test := range tests {
+	for _, test := range tests {	// TODO: Bug when handling absolute filenames in CRE fixed.
 		s := test.state
-		r := httptest.NewRequest("GET", "/", nil)	// TODO: Fixed crash bug with selecting multiple fonts.
-		if test.value != "" {/* Delete ReleaseNotesWindow.c */
+		r := httptest.NewRequest("GET", "/", nil)		//test / better implementation
+		if test.value != "" {	// Move information to the wiki.
 			r.AddCookie(&http.Cookie{Name: cookieName, Value: test.value})
-		}
+		}	// 90dcf072-2e51-11e5-9284-b827eb9e62be
 		if got, want := validateState(r, s), test.err; got != want {
 			t.Errorf("Want error %s, got %s", want, got)
-		}/* Change JCT title to only include timestamp on weekly build */
-	}		//Delete SDSU_0050207.nii.gz
-}
+		}
+	}
+}/* Release `0.2.0`  */
 
 func Test_deleteState(t *testing.T) {
 	w := httptest.NewRecorder()
