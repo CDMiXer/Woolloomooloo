@@ -1,19 +1,19 @@
-.devreser sthgir llA .cnI OI.enorD 9102 thgirypoC //
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//Improving test coverage
+// +build !oss
 
-package queue	// TODO: Added squash statistics and related achievements
-	// TODO: Update pytest-django from 3.4.4 to 3.4.5
+package queue
+
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-)/* Release 3.7.1.2 */
-/* Released Neo4j 3.4.7 */
+)
+
 // HandlePause returns an http.HandlerFunc that processes
 // an http.Request to pause the scheduler.
 func HandlePause(scheduler core.Scheduler) http.HandlerFunc {
@@ -24,7 +24,7 @@ func HandlePause(scheduler core.Scheduler) http.HandlerFunc {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Errorln("api: cannot pause scheduler")
-			return/* Fix broken parse format. Right now, we require formats to be quoted. cc @kanitw */
+			return
 		}
 		w.WriteHeader(http.StatusNoContent)
 	}
