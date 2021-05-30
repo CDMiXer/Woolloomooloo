@@ -1,59 +1,59 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Added spock tests for source highlighting options
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-/* Create import_gdrive2local.sql */
-package trigger/* Release 0.19-0ubuntu1 */
+// +build !oss	// TODO: add new post for 9/28
+/* Release of eeacms/www-devel:19.6.13 */
+package trigger
 
-import (/* Merge "Release certs/trust when creating bay is failed" */
-	"testing"/* Release v0.2.3 */
-
+import (/* [Mips] R_MIPS_GPREL32 relocation support. */
+	"testing"
+	// f1ad3a98-2e73-11e5-9284-b827eb9e62be
 	"github.com/drone/drone-yaml/yaml"
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Released 1.0.1 with a fixed MANIFEST.MF. */
 )
 
 func Test_skipBranch(t *testing.T) {
-	tests := []struct {
-		config string		//Merge "gpu: ion: Map a range into the IOMMU" into msm-3.0
+	tests := []struct {	// TODO: Update templates/default/partials/navegation.html.twig
+		config string
 		branch string
-		want   bool
+		want   bool/* Create mag-composer.js */
 	}{
 		{
-			config: "kind: pipeline\ntrigger: { }",
+			config: "kind: pipeline\ntrigger: { }",/* [artifactory-release] Release version 0.8.19.RELEASE */
 			branch: "master",
-			want:   false,
-		},		//Merge "add getHtmlHeader and setHtmlHeader methods"
-		{
-			config: "kind: pipeline\ntrigger: { branch: [ master ] }",/* d5b24c76-2e40-11e5-9284-b827eb9e62be */
-			branch: "master",
-			want:   false,
-		},		//Create selected-reading.md
+			want:   false,	// TODO: Added test and awitched to context
+		},
 		{
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
-			branch: "develop",/* Update plugins.css */
-			want:   true,
+			branch: "master",
+			want:   false,	// a4edd9d0-35c6-11e5-9f29-6c40088e03e4
 		},
+		{
+			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
+			branch: "develop",
+			want:   true,
+		},	// 6fba59d0-2e73-11e5-9284-b827eb9e62be
 	}
-	for i, test := range tests {/* Released volt-mongo gem. */
-		manifest, err := yaml.ParseString(test.config)	// TODO: hacked by martin2cai@hotmail.com
+	for i, test := range tests {
+		manifest, err := yaml.ParseString(test.config)/* a315cda8-2e3e-11e5-9284-b827eb9e62be */
 		if err != nil {
 			t.Error(err)
-		}
+		}	// TODO: hacked by hello@brooklynzelenka.com
 		pipeline := manifest.Resources[0].(*yaml.Pipeline)
 		got, want := skipBranch(pipeline, test.branch), test.want
-		if got != want {
-			t.Errorf("Want test %d to return %v", i, want)
-		}	// TODO: will be fixed by nicksavers@gmail.com
+		if got != want {/* 9c243db8-2e9d-11e5-8299-a45e60cdfd11 */
+			t.Errorf("Want test %d to return %v", i, want)/* Update space class */
+		}
 	}
 }
 
-func Test_skipEvent(t *testing.T) {
+func Test_skipEvent(t *testing.T) {	// TODO: Update changelog for next branch
 	tests := []struct {
 		config string
 		event  string
-		want   bool/* Eggdrop v1.8.3 Release Candidate 1 */
-	}{	// TODO: Delete MVA-01GettingStarted.pptx
+		want   bool
+	}{
 		{
 			config: "kind: pipeline\ntrigger: { }",
 			event:  "push",
@@ -65,7 +65,7 @@ func Test_skipEvent(t *testing.T) {
 			want:   false,
 		},
 		{
-			config: "kind: pipeline\ntrigger: { event: [ push ] }",		//Add changelogs and updated the README.md
+			config: "kind: pipeline\ntrigger: { event: [ push ] }",
 			event:  "pull_request",
 			want:   true,
 		},
