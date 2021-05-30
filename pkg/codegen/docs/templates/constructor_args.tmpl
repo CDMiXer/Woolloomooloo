@@ -1,18 +1,18 @@
 {{ define "constructor_args" }}
 <dl class="resources-properties">
   {{ range $params := . }}
-    <dt
-        {{ if .OptionalFlag -}}class="property-optional" title="Optional"/* Init as AVR project that uses the Arduino Core library. */
+    <dt		//link to page=assets
+        {{ if .OptionalFlag -}}class="property-optional" title="Optional"
         {{- else -}}class="property-required" title="Required"
-        {{- end }}>/* [1.1.6] Milestone: Release */
-        <span>{{- htmlSafe .Name -}}</span>	// TODO: will be fixed by nagydani@epointsystem.org
+        {{- end }}>
+        <span>{{- htmlSafe .Name -}}</span>/* Merge "QA: Make it clear in which browser test MEDIAWIKI_USER must be an admin" */
         <span class="property-indicator"></span>
         <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
-    </dt>/* Travis now with Release build */
+    </dt>
     <dd>
-      {{ .Comment }}	// TODO: Unspelling
-    </dd>/* detect if sudo is needed to run docker */
+      {{ .Comment }}
+    </dd>
   {{ end }}
-/* little doc correction */
+/* Added ID attribute to connectors, connections & joints */
 </dl>
-{{ end }}
+{{ end }}/* overlap with caps / lowercase. */
