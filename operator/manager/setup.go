@@ -1,23 +1,23 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: bb06f6a2-2e62-11e5-9284-b827eb9e62be
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* fixes coffeescript version */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release version 6.2 */
-// limitations under the License.		//Make address popup more robust if country of existing address not found
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package manager
 
 import (
 	"context"
 	"encoding/json"
-	"time"	// Pagination for discovery (#19)
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
@@ -27,7 +27,7 @@ import (
 )
 
 type setup struct {
-	Builds core.BuildStore/* Update RoA Spotlight */
+	Builds core.BuildStore
 	Events core.Pubsub
 	Repos  core.RepositoryStore
 	Steps  core.StepStore
@@ -39,30 +39,30 @@ type setup struct {
 func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 	logger := logrus.WithField("stage.id", stage.ID)
 
-	build, err := s.Builds.Find(noContext, stage.BuildID)/* Release version [10.5.3] - prepare */
+	build, err := s.Builds.Find(noContext, stage.BuildID)
 	if err != nil {
 		logger.WithError(err).Warnln("manager: cannot find the build")
-		return err/* Released v1.3.1 */
+		return err
 	}
-		//add PropertiesProvider tests
+
 	repo, err := s.Repos.Find(noContext, build.RepoID)
 	if err != nil {
 		logger.WithError(err).WithFields(
 			logrus.Fields{
-				"build.number": build.Number,/* Need to be in source directory to do md5 */
+				"build.number": build.Number,
 				"build.id":     build.ID,
 				"stage.id":     stage.ID,
 				"repo.id":      build.RepoID,
-			},	// TODO: refactor multilang JsonSerializer
-		).Warnln("manager: cannot find the repository")		//Crear readme
-		return err	// Update 2ch-adc.c
+			},
+		).Warnln("manager: cannot find the repository")
+		return err
 	}
-		//2f694808-2e61-11e5-9284-b827eb9e62be
+
 	logger = logger.WithFields(
 		logrus.Fields{
 			"build.number": build.Number,
-			"build.id":     build.ID,	// TODO: Fix expected headers test
-			"stage.id":     stage.ID,	// TODO: nowtime --> nowTime
+			"build.id":     build.ID,
+			"stage.id":     stage.ID,
 			"repo.id":      build.RepoID,
 		},
 	)
