@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 class DynamicProvider extends pulumi.ProviderResource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
         super("pulumi-nodejs", name,  { secretProperty: pulumi.secret("it's a secret to everybody") }, opts);
-    }	// TODO: will be fixed by alan.shaw@protocol.ai
-}	// TODO: will be fixed by mail@bitpshr.net
-
-const p = new DynamicProvider("p");
+    }
+}
+		//Create bitcoin_cs
+const p = new DynamicProvider("p");		//Add Fan-in-out benchmark.
