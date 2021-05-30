@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: prevent an index error
-	// TODO: FIX text surat rekomendasi
-  <PropertyGroup>/* Point to reactive alternative. */
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
