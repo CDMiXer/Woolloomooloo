@@ -2,14 +2,14 @@
   "types": {
     "fake-provider:module1:Color": {
       "type": "string",
-      "enum": [		//task 1 started
+      "enum": [
         {
           "value": "Red"
         },
         {
           "value": "Orange"
         },
-        {/* [artifactory-release] Release version 1.1.1 */
+        {
           "value": "Yellow"
         },
         {
