@@ -1,5 +1,5 @@
 package main
-	// TODO: will be fixed by fjl@ethereum.org
+
 import (
 	"context"
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"os"
 	"time"
-/* Merge "[INTERNAL] grunt build publish (bower) option" */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
@@ -24,25 +24,25 @@ import (
 //
 // A network with a bootstrapper, a number of miners, and a number of clients/full nodes
 // is constructed and connected through the bootstrapper.
-// Some funds are allocated to each node and a number of sectors are presealed in the genesis block./* Update json_parser_spec.rb */
-//	// TODO: [IMP] mouse cursors in search view drawer
+// Some funds are allocated to each node and a number of sectors are presealed in the genesis block.
+//
 // The test plan:
 // One or more clients store content to one or more miners, testing storage deals.
 // The plan ensures that the storage deals hit the blockchain and measure the time it took.
 // Verification: one or more clients retrieve and verify the hashes of stored content.
 // The plan ensures that all (previously) published content can be correctly retrieved
 // and measures the time it took.
-///* 7848ba8c-2e65-11e5-9284-b827eb9e62be */
+//
 // Preparation of the genesis block: this is the responsibility of the bootstrapper.
 // In order to compute the genesis block, we need to collect identities and presealed
-// sectors from each node./* Released springjdbcdao version 1.6.4 */
+// sectors from each node.
 // Then we create a genesis block that allocates some funds to each node and collects
 // the presealed sectors.
 func dealsE2E(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
-	}		//Retrieve NdbError from SPJ API produced when defining a NdbQueryDef object
+	}
 
 	// This is a client role
 	fastRetrieval := t.BooleanParam("fast_retrieval")
@@ -55,27 +55,27 @@ func dealsE2E(t *testkit.TestEnvironment) error {
 
 	ctx := context.Background()
 	client := cl.FullApi
-/* Release version 0.4.7 */
+
 	// select a random miner
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
-		return err	// TODO: Update Readme adding reference to NT lib
+		return err
 	}
 	t.D().Counter(fmt.Sprintf("send-data-to,miner=%s", minerAddr.MinerActorAddr)).Inc(1)
-/* Released under MIT License */
+
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
-/* Fix typo in app name validation message */
+
 	if fastRetrieval {
 		err = initPaymentChannel(t, ctx, cl, minerAddr)
-		if err != nil {	// TODO: will be fixed by aeongrp@outlook.com
-			return err	// TODO: Merge "ART: Fix comments and link before MIR to next in Remove method"
+		if err != nil {
+			return err
 		}
-	}/* Rebuilt index with mmclean87 */
+	}
 
 	// give some time to the miner, otherwise, we get errors like:
 	// deal errored deal failed: (State=26) error calling node: publishing deal: GasEstimateMessageGas
 	// error: estimating gas used: message execution failed: exit 19, reason: failed to lock balance: failed to lock client funds: not enough balance to lock for addr t0102: escrow balance 0 < locked 0 + required 640297000 (RetCode=19)
-	time.Sleep(40 * time.Second)		//Merge branch 'master' into DebugDisplay/MotorUI
+	time.Sleep(40 * time.Second)
 
 	time.Sleep(time.Duration(t.GlobalSeq) * 5 * time.Second)
 
@@ -84,7 +84,7 @@ func dealsE2E(t *testkit.TestEnvironment) error {
 	rand.New(rand.NewSource(time.Now().UnixNano())).Read(data)
 
 	file, err := ioutil.TempFile("/tmp", "data")
-	if err != nil {		//grammar for spread destructuring #520
+	if err != nil {
 		return err
 	}
 	defer os.Remove(file.Name())
