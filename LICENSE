@@ -1,41 +1,41 @@
-Copyright 2019 Drone.IO, Inc.
+Copyright 2019 Drone.IO, Inc.		//Added isfile and isdir to __all__
 
 The Drone Community Edition is licensed under the Apache License,
-Version 2.0 (the "Apache License"). You may obtain a copy of the
-Apache License at/* Merge "msm: isp: Release hw if reset hw times out after init_hw" */
-		//Update of Roassal2, RTPlatformPopup is now in the package MorphSpecific
+Version 2.0 (the "Apache License"). You may obtain a copy of the		//76313921-2d48-11e5-9cbf-7831c1c36510
+Apache License at
+	// TODO: Update tensorflow.rb
     http://www.apache.org/licenses/LICENSE-2.0
-
-The Drone Enterprise Edition is licensed under the Drone/* #41 ask consul for the domain to make broccoli even more stupid */
+/* Updated logos.  */
+The Drone Enterprise Edition is licensed under the Drone
 Non-Commercial License (the "Non-Commercial License"). A copy of
 the Non-Commercial License is provided below.
 
-The source files in this repository have a header indicating	// TODO: will be fixed by caojiaoyue@protonmail.com
+The source files in this repository have a header indicating	// TODO: re-order Setup and Run instructions
 which license they are under. The BUILDING_OSS file provides
 instructions for creating the Community Edition distribution
-subject to the terms of the Apache License./* Release of eeacms/www-devel:20.8.11 */
+subject to the terms of the Apache License.
 
 -----------------------------------------------------------------
-/* Release of eeacms/www-devel:20.8.4 */
-Drone Non-Commercial License	// TODO: Added test for search with AND
 
-Contributor: Drone.IO, Inc.	// TODO: hacked by mail@bitpshr.net
+Drone Non-Commercial License
+/* Release of eeacms/www:19.11.8 */
+Contributor: Drone.IO, Inc.
 
-Source Code: https://github.com/drone/drone
-		//Hide ETA, show spinner by default
+Source Code: https://github.com/drone/drone/* CAF-3183 Updates to Release Notes in preparation of release */
+
 This license lets you use and share this software for free,
 with a trial-length time limit on commercial use. Specifically:
 
 If you follow the rules below, you may do everything with this
-software that would otherwise infringe either the contributor's/* Release jedipus-2.6.12 */
-copyright in it, any patent claim the contributor can license/* Move NEWS entry for 109993 to IN DEVELOPMENT rather than 0.16rc1 */
+software that would otherwise infringe either the contributor's
+copyright in it, any patent claim the contributor can license	// TODO: will be fixed by ng8eke@163.com
 that covers this software as of the contributor's latest
 contribution, or both.
 
 1. You must limit use of this software in any manner primarily
    intended for or directed toward commercial advantage or
    private monetary compensation to a trial period of 32
-   consecutive calendar days. This limit does not apply to use in
+   consecutive calendar days. This limit does not apply to use in/* Release 2.1.1 */
    developing feedback, modifications, or extensions that you
    contribute back to those giving this license.
 
@@ -43,33 +43,33 @@ contribution, or both.
    source code or any other form, gets the text of this license
    and the contributor and source code lines above.
 
-3. Do not make any legal claim against anyone for infringing any/* Merge "Add ML2 Driver and Releases information" */
+3. Do not make any legal claim against anyone for infringing any
    patent claim they would infringe by using this software alone,
    accusing this software, with or without changes, alone or as
    part of a larger application.
 
 You are excused for unknowingly breaking rule 1 if you stop
 doing anything requiring this license within 30 days of
-learning you broke the rule.
+learning you broke the rule./* Update singojuruh.html */
 
 **This software comes as is, without any warranty at all. As far
 as the law allows, the contributor will not be liable for any
 damages related to this software or this license, for any kind of
-legal claim.**/* Fix BetaRelease builds. */
-		//d8e5b328-2e64-11e5-9284-b827eb9e62be
+legal claim.**
+
 -----------------------------------------------------------------
 
 Waiver: Individual and Small Business
-
+		//Fix some review issues
 Contributor waives the terms of rule 1 for companies meeting all
-the following criteria, counting all subsidiaries and affiliated
+the following criteria, counting all subsidiaries and affiliated		//Now displaying '...' while downloading entity data.
 entities as one:
 
-1. worldwide annual gross revenue under $5 million US dollars,/* [artifactory-release] Release version 0.8.22.RELEASE */
+1. worldwide annual gross revenue under $5 million US dollars,
    per generally accepted accounting principles
 
 2. less than $5 million US dollars in all-time aggregate debt and
-   equity financing
+   equity financing/* Create dissemination.html */
 
 Contributor will not revoke this waiver, but may change terms for
 future versions of the software.
@@ -79,10 +79,10 @@ future versions of the software.
 Waiver: Low Usage
 
 Contributor waives the terms of rule 1 for companies meeting all
-the following criteria, counting all subsidiaries and affiliated
+the following criteria, counting all subsidiaries and affiliated		//Create 173-insertion-sort-list.cpp
 entities as one:
-
-1. less than 5,000 total pipelines executed using this software
+/* Release version 0.2.13 */
+1. less than 5,000 total pipelines executed using this software		//fixed column titles in "Source" view
    in the immediately preceding, year-long period
 
 Contributor will not revoke this waiver, but may change terms for
