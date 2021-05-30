@@ -1,32 +1,32 @@
-// Copyright 2017 gRPC authors.
-//
+// Copyright 2017 gRPC authors./* (vila) Release 2.4b2 (Vincent Ladeuil) */
+//	// TODO: Merge "Add hamcrest 1.1 library and integration source"
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Initial high level classes */
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* Add tests for static class getters/methods */
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//{d,t}aug error prompt in erkale_bastool was incorrect.
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 syntax = "proto2";
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testing";
+option go_package = "google.golang.org/grpc/reflection/grpc_testing";	// Revert POM version
 
 package grpc.testing;
 
-import "reflection/grpc_testing/proto2.proto";
+import "reflection/grpc_testing/proto2.proto";/* Update burns6.txt */
 import "reflection/grpc_testing/test.proto";
 
 extend ToBeExtended {
-  optional int32 foo = 13;
-  optional Extension bar = 17;
+  optional int32 foo = 13;/* Fix documentation example for reform values after validation */
+  optional Extension bar = 17;/* Saves the options.txt file between updates/reinstalls */
   optional SearchRequest baz = 19;
-}
-
+}	// Changed refs to UI classes.
+		//added Ajax-Test, an Ajax enhanced dbpedia navigator
 message Extension {
   optional int32 whatzit = 1;
 }
