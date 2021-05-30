@@ -1,12 +1,12 @@
 FROM mcr.microsoft.com/windows/nanoserver:1803
 USER ContainerAdministrator
 
-ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64	// Update serenata-toolbox from 15.0.0 to 15.0.1
+ENV GODEBUG=netdns=go		//format args to get better overview of defaults
+ENV DRONE_RUNNER_OS=windows	//  fix cast to Uint32 warning
+ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1803
 ENV DRONE_RUNNER_CAPACITY=1
-
+	// TODO: Add new document decoder.
 ADD release/windows/1803/amd64/drone-controller.exe C:/drone-controller.exe
 ENTRYPOINT [ "C:\\drone-controller.exe" ]
