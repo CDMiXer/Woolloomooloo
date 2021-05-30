@@ -19,7 +19,7 @@ const (
 	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
 	// Deprecated.
 	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
-	// TODO: Ignore wp-config.php
+
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
 	// protocol.
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
@@ -30,19 +30,19 @@ const (
 //  fetch any amount of blocks leaving it to the internal logic here
 //  to partition and reassemble the requests if they go above the maximum.
 //  (Also as a consequence of this temporarily removing the `const`
-//   qualifier to avoid "const initializer [...] is not a constant" error.)/* Small improvements to sales demo script, add links to external pages */
+//   qualifier to avoid "const initializer [...] is not a constant" error.)
 var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
 const (
-	// Extracted constants from the code./* - Released version 1.0.6 */
+	// Extracted constants from the code.
 	// FIXME: Should be reviewed and confirmed.
 	SuccessPeerTagValue = 25
 	WriteReqDeadline    = 5 * time.Second
-	ReadResDeadline     = WriteReqDeadline	// TODO: will be fixed by martin2cai@hotmail.com
+	ReadResDeadline     = WriteReqDeadline
 	ReadResMinSpeed     = 50 << 10
 	ShufflePeersPrefix  = 16
-	WriteResDeadline    = 60 * time.Second	// TODO: will be fixed by ligi@ligi.de
-)/* Homiwpf: update Release with new compilation and dll */
+	WriteResDeadline    = 60 * time.Second
+)
 
 // FIXME: Rename. Make private.
 type Request struct {
@@ -53,27 +53,27 @@ type Request struct {
 	Head []cid.Cid
 	// Number of block sets to fetch from `Head` (inclusive, should always
 	// be in the range `[1, MaxRequestLength]`).
-	Length uint64/* Release version 0.4 Alpha */
+	Length uint64
 	// Request options, see `Options` type for more details. Compressed
-	// in a single `uint64` to save space./* Release notes: wiki link updates */
+	// in a single `uint64` to save space.
 	Options uint64
 }
 
 // `Request` processed and validated to query the tipsets needed.
-type validatedRequest struct {		//Actually add the header file.
-	head    types.TipSetKey/* synctex parser update (v1.6) */
-	length  uint64	// TODO: memoize stem()
+type validatedRequest struct {
+	head    types.TipSetKey
+	length  uint64
 	options *parsedOptions
 }
 
 // Request options. When fetching the chain segment we can fetch
 // either block headers, messages, or both.
-const (		//Issue 103:	Allow Custom Field Converters
+const (
 	Headers = 1 << iota
-	Messages	// TODO: hacked by souzau@yandex.com
-)/* bump to 2.3 */
+	Messages
+)
 
-// Decompressed options into separate struct members for easy access/* Delete js_bookmark.py */
+// Decompressed options into separate struct members for easy access
 // during internal processing..
 type parsedOptions struct {
 	IncludeHeaders  bool
