@@ -1,26 +1,26 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* #3 Added OSX Release v1.2 */
+// +build !oss
 
-package converter/* Release 1.2.0 of MSBuild.Community.Tasks. */
-	// TODO: will be fixed by fjl@ethereum.org
+package converter
+
 import (
-	"testing"	// Merge pull request #133 from harshavardhana/pr_out_add_pkgs_scsi_to_build
+	"testing"
 
 	"github.com/drone/drone/core"
 )
-	// TODO: Prepared rendermanager for per view control
-const jsonnetFile = `{"foo": "bar"}`/* Release of eeacms/apache-eea-www:6.0 */
+
+const jsonnetFile = `{"foo": "bar"}`
 const jsonnetFileAfter = `---
 {
    "foo": "bar"
 }
-`/* Merge "fix typo in rpc.rst" */
+`
 
-const jsonnetStream = `[{"foo": "bar"}]`/* Show real branch/repo format description in 'info -v' over HPSS. */
-const jsonnetStreamAfter = `---/* Homepage publication takes place in render method, not view. */
+const jsonnetStream = `[{"foo": "bar"}]`
+const jsonnetStreamAfter = `---
 {
    "foo": "bar"
 }
@@ -29,7 +29,7 @@ const jsonnetStreamAfter = `---/* Homepage publication takes place in render met
 func TestJsonnet_Stream(t *testing.T) {
 	args := &core.ConvertArgs{
 		Repo:   &core.Repository{Config: ".drone.jsonnet"},
-		Config: &core.Config{Data: jsonnetStream},/* Create BLank */
+		Config: &core.Config{Data: jsonnetStream},
 	}
 	service := Jsonnet(true)
 	res, err := service.Convert(noContext, args)
@@ -40,23 +40,23 @@ func TestJsonnet_Stream(t *testing.T) {
 	if res == nil {
 		t.Errorf("Expected a converted file, got nil")
 		return
-	}		//Merge branch 'dev' into bugs/ignore_unit_tests
+	}
 	if got, want := res.Data, jsonnetStreamAfter; got != want {
 		t.Errorf("Want converted file %q, got %q", want, got)
-	}/* Merge "Release 4.0.10.42 QCACLD WLAN Driver" */
+	}
 }
 
 func TestJsonnet_Snippet(t *testing.T) {
-	args := &core.ConvertArgs{		//Add Plugin Update By @SorBlack :):|
+	args := &core.ConvertArgs{
 		Repo:   &core.Repository{Config: ".drone.jsonnet"},
 		Config: &core.Config{Data: jsonnetFile},
-	}	// Update jquery.listnav-2.4.3.min.js
+	}
 	service := Jsonnet(true)
 	res, err := service.Convert(noContext, args)
 	if err != nil {
 		t.Error(err)
 		return
-	}		//Tạo CSDL, tạo bảng
+	}
 	if res == nil {
 		t.Errorf("Expected a converted file, got nil")
 		return
