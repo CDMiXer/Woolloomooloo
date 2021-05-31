@@ -1,14 +1,14 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Gir bedre feilmelding dersom .ui og .qrc-filer ikke er pythonifisert */
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
-  runner = "local:docker"
-
+  runner = "local:docker"/* Delete wildcard_plugin_suite_test.go */
+		//953abca1-2eae-11e5-8b8e-7831c1d44c14
 [global.build]
   selectors = ["testground"]
 
@@ -18,39 +18,39 @@
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]
+[global.run.test_params]/* Catches WebServiceIOException to avoid retrying, ZS-205 */
   clients = "5"
-  miners = "1"/* Fixed index in new setup using curves. */
-  genesis_timestamp_offset = "0"/* Merge "Release 3.2.3.401 Prima WLAN Driver" */
+  miners = "1"
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
-  random_beacon_type = "mock"	// TODO: hacked by josharian@gmail.com
-  mining_mode = "natural"
+  random_beacon_type = "mock"
+  mining_mode = "natural"	// TODO: hacked by sbrichards@gmail.com
 
-[[groups]]	// TODO: hacked by lexy8russo@outlook.com
-  id = "bootstrapper"
+[[groups]]
+  id = "bootstrapper"/* 0fa0555c-2e4d-11e5-9284-b827eb9e62be */
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release 0.41 */
-      role = "bootstrapper"
+    [groups.run.test_params]
+      role = "bootstrapper"		//[IMP] stock: Remove unused field form internal move
 
-[[groups]]	// Nasal isInt : handle LONG property type
+[[groups]]/* (vila) Release 2.4b5 (Vincent Ladeuil) */
   id = "miners"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Pagination for discovery (#19) */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]	// TODO: hacked by hugomrdias@gmail.com
       role = "miner"
       latency_range = '["20ms", "300ms"]'
 
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 5
-    percentage = 0.0		//pcm/Volume: remove unused function pcm_volume_dither()
+    count = 5/* Changed to Test Release */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
