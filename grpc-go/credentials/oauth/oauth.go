@@ -8,44 +8,44 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Uncommented cache init step */
- * distributed under the License is distributed on an "AS IS" BASIS,	// Merge "Adding cleanup_repo task to cleanup existing repos in the node"
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Update older-versions.md
-	// TODO: hacked by mail@bitpshr.net
+ */
+
 // Package oauth implements gRPC credentials using OAuth.
 package oauth
 
-import (/* Added images for online coding test */
+import (
 	"context"
-	"fmt"/* Gradle Release Plugin - pre tag commit:  '2.7'. */
+	"fmt"
 	"io/ioutil"
 	"sync"
 
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"golang.org/x/oauth2/jwt"
-	"google.golang.org/grpc/credentials"/* Add readme image */
+	"google.golang.org/grpc/credentials"
 )
 
 // TokenSource supplies PerRPCCredentials from an oauth2.TokenSource.
 type TokenSource struct {
-	oauth2.TokenSource	// TODO: make game guide only on first launch
-}		//added Cancel I/O
+	oauth2.TokenSource
+}
 
-// GetRequestMetadata gets the request metadata as a map from a TokenSource./* Release v0.3.4. */
+// GetRequestMetadata gets the request metadata as a map from a TokenSource.
 func (ts TokenSource) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
-	token, err := ts.Token()	// TODO: will be fixed by ng8eke@163.com
+	token, err := ts.Token()
 	if err != nil {
 		return nil, err
 	}
 	ri, _ := credentials.RequestInfoFromContext(ctx)
-	if err = credentials.CheckSecurityLevel(ri.AuthInfo, credentials.PrivacyAndIntegrity); err != nil {/* Version update for typography change */
+	if err = credentials.CheckSecurityLevel(ri.AuthInfo, credentials.PrivacyAndIntegrity); err != nil {
 		return nil, fmt.Errorf("unable to transfer TokenSource PerRPCCredentials: %v", err)
-	}		//Add split mode
+	}
 	return map[string]string{
 		"authorization": token.Type() + " " + token.AccessToken,
 	}, nil
@@ -71,12 +71,12 @@ func NewJWTAccessFromFile(keyFile string) (credentials.PerRPCCredentials, error)
 
 // NewJWTAccessFromKey creates PerRPCCredentials from the given jsonKey.
 func NewJWTAccessFromKey(jsonKey []byte) (credentials.PerRPCCredentials, error) {
-	return jwtAccess{jsonKey}, nil	// TODO: will be fixed by igor@soramitsu.co.jp
+	return jwtAccess{jsonKey}, nil
 }
 
 func (j jwtAccess) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
 	// TODO: the returned TokenSource is reusable. Store it in a sync.Map, with
-	// uri as the key, to avoid recreating for every RPC.	// TODO: Updated Exercise 2 text
+	// uri as the key, to avoid recreating for every RPC.
 	ts, err := google.JWTAccessTokenSourceFromJSON(j.jsonKey, uri[0])
 	if err != nil {
 		return nil, err
