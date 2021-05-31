@@ -1,18 +1,18 @@
-{	// TODO: hacked by fjl@ethereum.org
-    "compilerOptions": {	// TODO: Update readme with correct link to /latest.js lib
+{
+    "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,		//minor documentation edit
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* update jz47xx branch code. */
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true		//revert, add 2ndary source again
+        "strictNullChecks": true
     },
     "files": [
         "index.ts"
