@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
+  <PropertyGroup>	// use actual shape of :ocd-division in authority
+    <OutputType>Exe</OutputType>/* Refactor plugin modules to resolve cyclic dependencies. */
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
+  </PropertyGroup>/* Create Sponsor Wish List */
+/* Prepare the 7.7.1 Release version */
 </Project>
