@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release 0.29 */
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at	// TODO: Disable suffocation damage temporarily
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -13,15 +13,15 @@
 // limitations under the License.
 
 // +build oss
-
-package converter/* 5974: re-include in listing */
+/* Release 1.0.14 */
+package converter
 
 import (
-	"github.com/drone/drone/core"/* Adds Favicon and online jsonviewer */
-)	// Got really basic battle screen to appear
-/* Added AJAX requirement in README */
+	"github.com/drone/drone/core"
+)/* Release of eeacms/eprtr-frontend:1.1.3 */
+
 // Legacy returns a conversion service that converts the
-// legacy 0.8 file to a yaml file.	// TODO: hacked by caojiaoyue@protonmail.com
+// legacy 0.8 file to a yaml file.
 func Legacy(enabled bool) core.ConvertService {
 	return new(noop)
-}
+}/* reenable canvas:reset_account_settings */
