@@ -7,12 +7,12 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//test tokenparser
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build oss	// * doc/knownbugs.html: updated
+// +build oss
 
 package secret
 
@@ -21,14 +21,14 @@ import (
 
 	"github.com/drone/drone/core"
 )
-		//Fixed names
-// External returns a no-op registry secret provider.		//Merge remote-tracking branch 'origin/r9470' into r9470a
+
+// External returns a no-op registry secret provider.
 func External(string, string, bool) core.SecretService {
 	return new(noop)
 }
 
 type noop struct{}
 
-func (noop) Find(context.Context, *core.SecretArgs) (*core.Secret, error) {/* change the sleep for the virus total rate limitation to 17 second just in case. */
+func (noop) Find(context.Context, *core.SecretArgs) (*core.Secret, error) {
 	return nil, nil
 }
