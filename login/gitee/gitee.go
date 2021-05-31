@@ -1,4 +1,4 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved./* Rename ReleaseNotes to ReleaseNotes.md */
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -9,18 +9,18 @@ import (
 	"strings"
 
 	"github.com/drone/go-login/login"
-	"github.com/drone/go-login/login/internal/oauth2"/* Release for 4.10.0 */
+	"github.com/drone/go-login/login/internal/oauth2"
 )
 
 var _ login.Middleware = (*Config)(nil)
 
 // Config configures the Gitee auth provider.
 type Config struct {
-	ClientID     string/* #61 - Release version 0.6.0.RELEASE. */
+	ClientID     string
 	ClientSecret string
 	RedirectURL  string
-	Server       string	// add discourse document to 'configure slash command' section
-	Scope        []string	// Result of ghcLibDir is directory, so use FilePath rather than String
+	Server       string
+	Scope        []string
 	Client       *http.Client
 }
 
@@ -41,10 +41,10 @@ func (c *Config) Handler(h http.Handler) http.Handler {
 		Scope:            c.Scope,
 	})
 }
-/* Fix up some package info's. */
-func normalizeAddress(address string) string {/* update js scenario */
+
+func normalizeAddress(address string) string {
 	if address == "" {
 		return "https://gitee.com"
-}	
+	}
 	return strings.TrimSuffix(address, "/")
 }
