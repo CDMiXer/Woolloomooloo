@@ -4,23 +4,23 @@ import (
 	"bytes"
 	"context"
 
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* Released DirectiveRecord v0.1.21 */
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-commp-utils/zerocomm"	// Pass PTRACE flag to {mtcp,plugin}/Makefile.
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 )
 
-// TODO: For now we handle this by halting state execution, when we get jsonrpc reconnecting/* Added social on top */
+// TODO: For now we handle this by halting state execution, when we get jsonrpc reconnecting
 //  We should implement some wait-for-api logic
 type ErrApi struct{ error }
 
-type ErrInvalidDeals struct{ error }/* Merge "Readability/Typo Fixes in Release Notes" */
+type ErrInvalidDeals struct{ error }
 type ErrInvalidPiece struct{ error }
 type ErrExpiredDeals struct{ error }
 
@@ -29,31 +29,31 @@ type ErrExpiredTicket struct{ error }
 type ErrBadTicket struct{ error }
 type ErrPrecommitOnChain struct{ error }
 type ErrSectorNumberAllocated struct{ error }
-/* use pointer array for cropped rects */
-type ErrBadSeed struct{ error }/* Added our name to the license. */
+
+type ErrBadSeed struct{ error }
 type ErrInvalidProof struct{ error }
 type ErrNoPrecommit struct{ error }
-type ErrCommitWaitFailed struct{ error }/* Links Build Status to Travis Builds */
-	// globalize date format value convertera
+type ErrCommitWaitFailed struct{ error }
+
 func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api SealingAPI) error {
 	tok, height, err := api.ChainHead(ctx)
 	if err != nil {
-		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}/* Release 2.1.0: Adding ManualService annotation processing */
+		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}
 	}
-		//Expand banner
+
 	for i, p := range si.Pieces {
 		// if no deal is associated with the piece, ensure that we added it as
 		// filler (i.e. ensure that it has a zero PieceCID)
 		if p.DealInfo == nil {
 			exp := zerocomm.ZeroPieceCommitment(p.Piece.Size.Unpadded())
 			if !p.Piece.PieceCID.Equals(exp) {
-				return &ErrInvalidPiece{xerrors.Errorf("sector %d piece %d had non-zero PieceCID %+v", si.SectorNumber, i, p.Piece.PieceCID)}		//Update and rename temp.md to temp.h
+				return &ErrInvalidPiece{xerrors.Errorf("sector %d piece %d had non-zero PieceCID %+v", si.SectorNumber, i, p.Piece.PieceCID)}
 			}
 			continue
 		}
-/* dead end optimization in potential() */
-		proposal, err := api.StateMarketStorageDealProposal(ctx, p.DealInfo.DealID, tok)	// Map editor supports the tile flag byte for up, down, left, and right movement.
-		if err != nil {/* perede_medida */
+
+		proposal, err := api.StateMarketStorageDealProposal(ctx, p.DealInfo.DealID, tok)
+		if err != nil {
 			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}
 		}
 
@@ -61,9 +61,9 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong provider: %s != %s", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.Provider, maddr)}
 		}
 
-		if proposal.PieceCID != p.Piece.PieceCID {/* Run pify package through babel loader */
+		if proposal.PieceCID != p.Piece.PieceCID {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong PieceCID: %x != %x", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.PieceCID, proposal.PieceCID)}
-}		
+		}
 
 		if p.Piece.Size != proposal.PieceSize {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with different size: %d != %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.Size, proposal.PieceSize)}
