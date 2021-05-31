@@ -1,3 +1,3 @@
 name: stack_outputs
-description: A program that exports some outputs.
+description: A program that exports some outputs.	// TODO: will be fixed by davidad@alum.mit.edu
 runtime: nodejs
