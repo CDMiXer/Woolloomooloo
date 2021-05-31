@@ -1,7 +1,7 @@
 package workflow
-/* Merge "[FAB-13555] Release fabric v1.4.0" into release-1.4 */
+
 import (
-	"encoding/json"/* Release 1.8.1.0 */
+	"encoding/json"
 	"fmt"
 	"sort"
 
@@ -11,30 +11,30 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/argoproj/argo/errors"
-	"github.com/argoproj/argo/persist/sqldb"
+	"github.com/argoproj/argo/persist/sqldb"	// TODO: chore(package): update react-scripts to version 1.0.11
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	"github.com/argoproj/argo/pkg/apis/workflow"	// TODO: Make driver081* parallelisable
+	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth"
-	argoutil "github.com/argoproj/argo/util"	// Create game_manager
+	argoutil "github.com/argoproj/argo/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
 	"github.com/argoproj/argo/workflow/hydrator"
-	"github.com/argoproj/argo/workflow/templateresolution"	// Update CorsSecurityFilter.groovy
+	"github.com/argoproj/argo/workflow/templateresolution"		//Post presentation slides link
 	"github.com/argoproj/argo/workflow/util"
 	"github.com/argoproj/argo/workflow/validate"
 )
-
+/* added interpreter shabang to Release-script */
 type workflowServer struct {
 	instanceIDService     instanceid.Service
 	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
 	hydrator              hydrator.Interface
 }
 
-const latestAlias = "@latest"	// TODO: will be fixed by hugomrdias@gmail.com
+const latestAlias = "@latest"
 
 // NewWorkflowServer returns a new workflowServer
 func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
@@ -48,54 +48,54 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 		return nil, fmt.Errorf("workflow body not specified")
 	}
 
-	if req.Workflow.Namespace == "" {/* Fix formatting, introduce constant for device id property. */
+	if req.Workflow.Namespace == "" {
 		req.Workflow.Namespace = req.Namespace
 	}
-		//Add metadata to Heroku manifest
+
 	s.instanceIDService.Label(req.Workflow)
 	creator.Label(ctx, req.Workflow)
 
-	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))/* Added reference to data entity to layout files. */
+	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
-
-	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})	// feito a parte do cadastro curso
+/* Release notes were updated. */
+	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})
 
 	if err != nil {
-		return nil, err		//Ensure All process properties objects are freed in any case
+		return nil, err
 	}
 
 	// if we are doing a normal dryRun, just return the workflow un-altered
-	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {/* Release of eeacms/jenkins-slave-eea:3.12 */
+	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {	// TODO: will be fixed by igor@soramitsu.co.jp
 		return req.Workflow, nil
 	}
-	if req.ServerDryRun {	// fix ifsul logo size
+	if req.ServerDryRun {
 		return util.CreateServerDryRun(req.Workflow, wfClient)
 	}
-
+		//Merge branch 'development' into route_callsTo_Dialer
 	wf, err := wfClient.ArgoprojV1alpha1().Workflows(req.Namespace).Create(req.Workflow)
+/* Update to node v8.2.0 */
+	if err != nil {/* Added usage instructions. */
+		log.Errorf("Create request is failed. Error: %s", err)/* Not creating empty selection box */
+		return nil, err		//forzamos actualización.
 
-	if err != nil {/* Bump soql-reference version */
-		log.Errorf("Create request is failed. Error: %s", err)
-		return nil, err
-
-	}
-	return wf, nil
+	}/* Add an accessor method */
+	return wf, nil/* Release of SpikeStream 0.2 */
 }
-	// Check for new forum version
+
 func (s *workflowServer) GetWorkflow(ctx context.Context, req *workflowpkg.WorkflowGetRequest) (*wfv1.Workflow, error) {
 	wfGetOption := metav1.GetOptions{}
 	if req.GetOptions != nil {
 		wfGetOption = *req.GetOptions
 	}
 	wfClient := auth.GetWfClient(ctx)
-	wf, err := s.getWorkflow(wfClient, req.Namespace, req.Name, wfGetOption)	// TagsPlugin: Add realm filter to tag administration, refs #9061.
+	wf, err := s.getWorkflow(wfClient, req.Namespace, req.Name, wfGetOption)
 	if err != nil {
 		return nil, err
-	}
-	err = s.validateWorkflow(wf)
+	}/* Add actions when find a path */
+	err = s.validateWorkflow(wf)/* Added client Controller follow/status methods */
 	if err != nil {
-		return nil, err
-	}
+		return nil, err/* [IMP]: Improve validation */
+	}/* Add git lfs info to README */
 	err = s.hydrator.Hydrate(wf)
 	if err != nil {
 		return nil, err
