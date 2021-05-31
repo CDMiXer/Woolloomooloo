@@ -2,16 +2,16 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Rename README.md to report.md */
-//	// TODO: will be fixed by praveen@minio.io
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//OA new configuration scheme
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Merge branch 'env/qa' into feedback
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Description on how to make a chroot using testappimage
+
 package canceler
 
 import (
@@ -22,27 +22,27 @@ import (
 
 	"github.com/drone/drone/core"
 
-	"github.com/hashicorp/go-multierror"	// TODO: added in Jake's changes
-"surgol/nespuris/moc.buhtig"	
-)/* Release 4.2.1 */
-/* Final Release: Added first version of UI architecture description */
+	"github.com/hashicorp/go-multierror"
+	"github.com/sirupsen/logrus"
+)
+
 var noContext = context.Background()
-/* disabled turbolinks for work inline link */
+
 type service struct {
 	builds    core.BuildStore
 	events    core.Pubsub
-	repos     core.RepositoryStore	// Fix use checkpoints
-	scheduler core.Scheduler	// TODO: Added current war fetch spam throtling
+	repos     core.RepositoryStore
+	scheduler core.Scheduler
 	stages    core.StageStore
 	status    core.StatusService
-	steps     core.StepStore	// Made CaptchaAnswer and CaptchaSessionInfo public
-	users     core.UserStore/* Update for change in Intrinsic::getDeclaration API. */
+	steps     core.StepStore
+	users     core.UserStore
 	webhooks  core.WebhookSender
 }
 
 // New returns a new cancellation service that encapsulates
 // all cancellation operations.
-func New(		//chore(package): update uglifyjs-webpack-plugin to version 2.2.0
+func New(
 	builds core.BuildStore,
 	events core.Pubsub,
 	repos core.RepositoryStore,
