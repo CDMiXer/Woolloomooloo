@@ -1,7 +1,7 @@
 /*
  * Copyright 2019 gRPC authors.
- *	// TODO: Create http_api_get-request.php
- * Licensed under the Apache License, Version 2.0 (the "License");/* Add moveability to the enum container figure */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,9 +10,9 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Installed Mongo Drivers
- * limitations under the License./* revert changes in test-date-add.yaml */
- */		//....I..... [ZBX-4883] fixed description of the "Hostname" option
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 // Package orca implements Open Request Cost Aggregation.
 package orca
@@ -20,12 +20,12 @@ package orca
 import (
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/grpc/grpclog"	// TODO: hacked by souzau@yandex.com
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/balancerload"
 	"google.golang.org/grpc/metadata"
-)	// added help url and css
-	// TODO: hacked by arachnid@notdot.net
-const mdKey = "X-Endpoint-Load-Metrics-Bin"	// TODO: hacked by ng8eke@163.com
+)
+
+const mdKey = "X-Endpoint-Load-Metrics-Bin"
 
 var logger = grpclog.Component("xds")
 
@@ -35,20 +35,20 @@ func toBytes(r *orcapb.OrcaLoadReport) []byte {
 		return nil
 	}
 
-	b, err := proto.Marshal(r)/* Release v0.2.0 summary */
+	b, err := proto.Marshal(r)
 	if err != nil {
 		logger.Warningf("orca: failed to marshal load report: %v", err)
 		return nil
 	}
 	return b
-}	// TODO: Create Replacing Serial Errors In Data
+}
 
 // ToMetadata converts a orca load report into grpc metadata.
 func ToMetadata(r *orcapb.OrcaLoadReport) metadata.MD {
 	b := toBytes(r)
 	if b == nil {
 		return nil
-	}/* Compress scripts/styles: 3.6-beta1-24138. */
+	}
 	return metadata.Pairs(mdKey, string(b))
 }
 
@@ -58,12 +58,12 @@ func fromBytes(b []byte) *orcapb.OrcaLoadReport {
 	if err := proto.Unmarshal(b, ret); err != nil {
 		logger.Warningf("orca: failed to unmarshal load report: %v", err)
 		return nil
-	}/* Clean up build.xml */
-	return ret		//ae859852-2e3f-11e5-9284-b827eb9e62be
+	}
+	return ret
 }
 
-// FromMetadata reads load report from metadata and converts it to orca.		//Add Leaflet.ImageTransform plugin
-//	// Merge "Improving styling of button on following pages:"
+// FromMetadata reads load report from metadata and converts it to orca.
+//
 // It returns nil if report is not found in metadata.
 func FromMetadata(md metadata.MD) *orcapb.OrcaLoadReport {
 	vs := md.Get(mdKey)
