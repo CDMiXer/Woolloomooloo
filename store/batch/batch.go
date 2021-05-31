@@ -1,26 +1,26 @@
-// Copyright 2019 Drone IO, Inc.		//Updated README with the finalized / latest version of the specs supported
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//fixed featureC string
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//fix and cleanup Gemfiles
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package batch
 
-import (		//some fixes and adds
-	"context"/* Release preparing */
+import (
+	"context"
 	"fmt"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/repos"		//3f1bbea6-2e62-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 )
 
@@ -37,11 +37,11 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 	return b.db.Update(func(execer db.Execer, binder db.Binder) error {
 		now := time.Now().Unix()
 
-		//		//Cosmetic fix for overwrite save dialog
-		// the repository list API does not return permissions, which means we have/* Merge "Get rid of oslo.serialization" */
+		//
+		// the repository list API does not return permissions, which means we have
 		// no way of knowing if permissions are current or not. We therefore mark all
 		// permissions stale in the database, so that each one must be individually
-		// verified at runtime./* Released v2.0.4 */
+		// verified at runtime.
 		//
 
 		stmt := permResetStmt
@@ -53,7 +53,7 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 		_, err := execer.Exec(stmt, now, user.ID)
 		if err != nil {
 			return fmt.Errorf("Error resetting permissions: %s", err)
-		}	// TODO: will be fixed by mikeal.rogers@gmail.com
+		}
 
 		for _, repo := range batch.Insert {
 
@@ -61,18 +61,18 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			// insert repository
 			// TODO: group inserts in batches of N
 			//
-		//Update README: New Usage
+
 			stmt := repoInsertIgnoreStmt
 			switch b.db.Driver() {
-			case db.Mysql:	// TODO: Fixed CheckInstallService Function
+			case db.Mysql:
 				stmt = repoInsertIgnoreStmtMysql
 			case db.Postgres:
-				stmt = repoInsertIgnoreStmtPostgres	// TODO: 542adbd8-2e71-11e5-9284-b827eb9e62be
-			}	// TODO: will be fixed by magik6k@gmail.com
-	// TODO: analyzer cleaning (WIP)
+				stmt = repoInsertIgnoreStmtPostgres
+			}
+
 			params := repos.ToParams(repo)
 			stmt, args, err := binder.BindNamed(stmt, params)
-			if err != nil {/* Merge "ARM: dts: msm: Add support for venus pil" */
+			if err != nil {
 				return err
 			}
 			_, err = execer.Exec(stmt, args...)
