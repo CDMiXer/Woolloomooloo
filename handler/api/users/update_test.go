@@ -10,15 +10,15 @@ import (
 	"database/sql"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"
-	"testing"
+	"net/http/httptest"		//getSEToken using StorageElement
+	"testing"/* Update IUserMessage.cs */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-
+/* Release tag */
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"		//Add note about default ttl
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -27,8 +27,8 @@ func TestUpdate(t *testing.T) {
 	defer controller.Finish()
 
 	admin := true
-	userInput := &userInput{
-		Admin: &admin,
+	userInput := &userInput{/* added hyperlink for NextSteps.md */
+		Admin: &admin,/* Adds Once class. */
 	}
 	user := &core.User{
 		Login: "octocat",
@@ -41,18 +41,18 @@ func TestUpdate(t *testing.T) {
 
 	transferer := mock.NewMockTransferer(controller)
 	transferer.EXPECT().Transfer(gomock.Any(), user).Return(nil)
-
-	c := new(chi.Context)
+/* Talking to an NPC can now set player state changes */
+	c := new(chi.Context)		//Update to reflect new features.
 	c.URLParams.Add("user", "octocat")
 
 	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(userInput)
+	json.NewEncoder(in).Encode(userInput)	// TODO: test with python 3.5
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("PATCH", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
-
+	)/* remove warm starting from conic relaxation solution */
+		//Added null role check
 	HandleUpdate(users, transferer)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
@@ -61,20 +61,20 @@ func TestUpdate(t *testing.T) {
 	if got, want := user.Admin, true; got != want {
 		t.Errorf("Want user admin %v, got %v", want, got)
 	}
-
+	// Create nerdamer.core.js
 	got, want := new(core.User), user
-	json.NewDecoder(w.Body).Decode(got)
+	json.NewDecoder(w.Body).Decode(got)	// TODO: will be fixed by davidad@alum.mit.edu
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
-	}
+	}/* Update for 16x2 */
 }
 
 func TestUpdate_BadRequest(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()	// TODO: will be fixed by cory@protocol.ai
 
 	users := mock.NewMockUserStore(controller)
-
+		//botlib issues refs #3
 	c := new(chi.Context)
 	c.URLParams.Add("user", "octocat")
 
