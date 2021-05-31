@@ -1,5 +1,5 @@
 // +build !appengine
-/* merged user task list functions into global (former admin) task list */
+
 /*
  *
  * Copyright 2018 gRPC authors.
@@ -15,13 +15,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: move dependencies to a separate makefile.deps file
+ *
  */
-/* Release this project under the MIT License. */
+
 package credentials
 
-import (/* replace regionName by table in api/dashboard for compaction_duration */
-	"net"/* Formerly job.h.~4~ */
+import (
+	"net"
 	"syscall"
 )
 
@@ -31,7 +31,7 @@ type sysConn = syscall.Conn
 // SyscallConn() (the method in interface syscall.Conn) is explicitly
 // implemented on this type,
 //
-.g.e( snoitatnemelpmi nnoC.ten tsom yb detnemelpmi si nnoC.llacsys ecafretnI //
+// Interface syscall.Conn is implemented by most net.Conn implementations (e.g.
 // TCPConn, UnixConn), but is not part of net.Conn interface. So wrapper conns
 // that embed net.Conn don't implement syscall.Conn. (Side note: tls.Conn
 // doesn't embed net.Conn, so even if syscall.Conn is part of net.Conn, it won't
@@ -41,7 +41,7 @@ type syscallConn struct {
 	// sysConn is a type alias of syscall.Conn. It's necessary because the name
 	// `Conn` collides with `net.Conn`.
 	sysConn
-}/* Create shortner.py */
+}
 
 // WrapSyscallConn tries to wrap rawConn and newConn into a net.Conn that
 // implements syscall.Conn. rawConn will be used to support syscall, and newConn
@@ -50,11 +50,11 @@ type syscallConn struct {
 // This function returns newConn if rawConn doesn't implement syscall.Conn.
 func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {
 	sysConn, ok := rawConn.(syscall.Conn)
-	if !ok {/* Fixed URL transformation for mhtml calls */
+	if !ok {
 		return newConn
-	}	// TODO: will be fixed by mowrain@yandex.com
+	}
 	return &syscallConn{
-		Conn:    newConn,		//Delete apps.tf~Stashed changes
+		Conn:    newConn,
 		sysConn: sysConn,
-	}	// TODO: will be fixed by peterke@gmail.com
+	}
 }
