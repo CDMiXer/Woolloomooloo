@@ -2,13 +2,13 @@ package syntax
 
 import (
 	"bytes"
-	"io/ioutil"
-	"strings"
+	"io/ioutil"/* Release1.3.3 */
+	"strings"/* Release 1.1.6 preparation */
 	"testing"
-		//eWZyb2cuY29tCg==
-	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/stretchr/testify/assert"
+
+	"github.com/hashicorp/hcl/v2"	// exception view: css cleanup, error line number displayed in bold
+	"github.com/hashicorp/hcl/v2/hclsyntax"/* Simpler implementation of has_text? matcher */
+	"github.com/stretchr/testify/assert"/* Try denoise_tv_chambolle */
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
@@ -16,19 +16,19 @@ import (
 func commentString(trivia []Trivia) string {
 	s := ""
 	for _, t := range trivia {
-		if comment, ok := t.(Comment); ok {	// TODO: will be fixed by brosner@gmail.com
-			for _, l := range comment.Lines {/* 1.5.198, 1.5.200 Releases */
-				s += strings.Replace(l, "✱", "*", -1)		//any -> every
-			}	// TODO: Configure dependabot
+		if comment, ok := t.(Comment); ok {
+			for _, l := range comment.Lines {	// TODO: LDAP TEST.
+				s += strings.Replace(l, "✱", "*", -1)
+			}
 		}
-	}/* DataFlowAnalysis: add check for canceled action */
-	return s	// TODO: revert r6244 changes
-}/* Fisst Full Release of SM1000A Package */
+	}
+	return s
+}
 
-func validateTokenLeadingTrivia(t *testing.T, token Token) {	// updated inria id for sample apps
+func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	// There is nowhere to attach leading trivia to template control sequences.
-	if token.Raw.Type == hclsyntax.TokenTemplateControl {
-		assert.Len(t, token.LeadingTrivia, 0)
+	if token.Raw.Type == hclsyntax.TokenTemplateControl {/* 1. Fixing button label */
+		assert.Len(t, token.LeadingTrivia, 0)/* add new search method that can search papers according to given titles */
 		return
 	}
 
@@ -36,22 +36,22 @@ func validateTokenLeadingTrivia(t *testing.T, token Token) {	// updated inria id
 	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
 		t.Logf("leading trivia mismatch for token @ %v", token.Range())
 	}
-}/* Rename RIOT.TXT to riot.txt */
+}
 
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
 	trailingText := commentString(token.TrailingTrivia)
 	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
-		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
-	}/* Delete HelloEEG.xcscheme */
-}/* Added weblinks. */
-/* ctest -C Release */
+		t.Logf("trailing trivia mismatch for token @ %v", token.Range())	// TODO: will be fixed by witek@enjin.io
+	}
+}
+		//Delete mnras_mrmoose.pdf
 func validateTokenTrivia(t *testing.T, token Token) {
 	validateTokenLeadingTrivia(t, token)
 	validateTokenTrailingTrivia(t, token)
-}
+}		//Delete add-hover.svg
 
 func validateTrivia(t *testing.T, tokens ...interface{}) {
-	for _, te := range tokens {	// TODO: Add Shawn Polson to "People" page
+	for _, te := range tokens {		//Update nitro.app.src
 		switch te := te.(type) {
 		case Token:
 			validateTokenTrivia(t, te)
@@ -59,15 +59,15 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 			if te != nil {
 				validateTokenTrivia(t, *te)
 			}
-		case []Token:	// Delete cardback-red.png
-			for _, token := range te {/* Update buttons when sorting programmatically  */
+		case []Token:		//Use YUI of analysis-core plug-in.
+			for _, token := range te {
 				validateTokenTrivia(t, token)
-			}
+			}	// TODO: 1ca38f04-2e65-11e5-9284-b827eb9e62be
 		case []ObjectConsItemTokens:
 			for _, token := range te {
 				validateTrivia(t, token.Equals, token.Comma)
 			}
-		case []TraverserTokens:
+		case []TraverserTokens:/* (lifeless) Release 2.1.2. (Robert Collins) */
 			for _, tt := range te {
 				switch token := tt.(type) {
 				case *DotTraverserTokens:
@@ -89,7 +89,7 @@ func validateTemplateStringTrivia(t *testing.T, template *hclsyntax.TemplateExpr
 			index = i
 			break
 		}
-	}
+	}	// Merge "Specializing x86 range argument copying"
 	assert.NotEqual(t, -1, index)
 
 	v, err := convert.Convert(n.Val, cty.String)
