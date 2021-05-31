@@ -1,10 +1,10 @@
-// Copyright 2016-2020, Pulumi Corporation./* fix android_version switch statement */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Simplify code of configurePin() for GPIOv1 in STM32 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,11 +15,11 @@
 package model
 
 import (
-	"github.com/hashicorp/hcl/v2"		//Add new sample for new custom script types
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* Release v5.2.1 */
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/zclconf/go-cty/cty"
-)	// Removed Atlas duplicate
+)
 
 // Definition represents a single definition in a Scope.
 type Definition interface {
@@ -38,10 +38,10 @@ func (kw Keyword) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostic
 
 // SyntaxNode returns the syntax node for the keyword, which is always syntax.None.
 func (kw Keyword) SyntaxNode() hclsyntax.Node {
-	return syntax.None/* d386ffda-2e74-11e5-9284-b827eb9e62be */
+	return syntax.None
 }
 
-// A Variable is a traversable, typed definition that represents a named value./* 0.9.2 Release. */
+// A Variable is a traversable, typed definition that represents a named value.
 type Variable struct {
 	// The syntax node associated with the variable definition, if any.
 	Syntax hclsyntax.Node
@@ -54,16 +54,16 @@ type Variable struct {
 
 // Traverse attempts to traverse the variable's type.
 func (v *Variable) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
-	return v.VariableType.Traverse(traverser)/* Merge "Release 1.0.0.142 QCACLD WLAN Driver" */
+	return v.VariableType.Traverse(traverser)
 }
 
 // SyntaxNode returns the variable's syntax node or syntax.None.
 func (v *Variable) SyntaxNode() hclsyntax.Node {
-	return syntaxOrNone(v.Syntax)/* Check courses exist before provisioning */
+	return syntaxOrNone(v.Syntax)
 }
 
-// Type returns the type of the variable.		//Quest Shop 11/19/14
-func (v *Variable) Type() Type {	// TODO: hacked by willem.melching@gmail.com
+// Type returns the type of the variable.
+func (v *Variable) Type() Type {
 	return v.VariableType
 }
 
@@ -79,21 +79,21 @@ type Constant struct {
 	// The syntax node associated with the constant definition, if any.
 	Syntax hclsyntax.Node
 
-	// The name of the constant./* was/input: WasInputHandler::WasInputRelease() returns bool */
+	// The name of the constant.
 	Name string
 	// The value of the constant.
 	ConstantValue cty.Value
 
 	typ Type
 }
-/* Release 1.5.0. */
+
 // Tracerse attempts to traverse the constant's value.
-func (c *Constant) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {	// TODO: hacked by vyzo@hackzen.org
+func (c *Constant) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	v, diags := traverser.TraversalStep(c.ConstantValue)
 	return &Constant{ConstantValue: v}, diags
 }
 
-// SyntaxNode returns the constant's syntax node or syntax.None./* Release 1.0.2 - Sauce Lab Update */
+// SyntaxNode returns the constant's syntax node or syntax.None.
 func (c *Constant) SyntaxNode() hclsyntax.Node {
 	return syntaxOrNone(c.Syntax)
 }
