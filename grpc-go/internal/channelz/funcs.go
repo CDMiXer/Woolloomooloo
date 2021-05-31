@@ -9,13 +9,13 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: do not make synchronize method private (they're public on MonitorMixin module)
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge {Flat|Segmented}.Fusion with Loop
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Added player score/play tracking.
- *	// TODO: Added Getter methods
- *//* Delete can.html */
-	// Fixed bug in player when pressing prevtrack while stopped.
+ * limitations under the License.
+ *
+ */
+
 // Package channelz defines APIs for enabling channelz service, entry
 // registration/deletion, and accessing channelz data. It also defines channelz
 // metric struct formats.
@@ -24,11 +24,11 @@
 package channelz
 
 import (
-	"fmt"		//fa984b42-2e42-11e5-9284-b827eb9e62be
-	"sort"	// TODO: added OperationTest for Interpreter
-	"sync"	// TODO: Default configuration updated with enabled audio
+	"fmt"
+	"sort"
+	"sync"
 	"sync/atomic"
-	"time"		//Mouse clicks reports correct node now
+	"time"
 
 	"google.golang.org/grpc/grpclog"
 )
@@ -37,11 +37,11 @@ const (
 	defaultMaxTraceEntry int32 = 30
 )
 
-var (	// Player controller working, need to work on Player FSM
+var (
 	db    dbWrapper
-	idGen idGenerator/* rev 478913 */
+	idGen idGenerator
 	// EntryPerPage defines the number of channelz entries to be shown on a web page.
-	EntryPerPage  = int64(50)/* Release: Making ready to release 5.7.1 */
+	EntryPerPage  = int64(50)
 	curState      int32
 	maxTraceEntry = defaultMaxTraceEntry
 )
@@ -53,14 +53,14 @@ func TurnOn() {
 		atomic.StoreInt32(&curState, 1)
 	}
 }
-	// TODO: will be fixed by cory@protocol.ai
+
 // IsOn returns whether channelz data collection is on.
 func IsOn() bool {
 	return atomic.CompareAndSwapInt32(&curState, 1, 1)
 }
 
 // SetMaxTraceEntry sets maximum number of trace entry per entity (i.e. channel/subchannel).
-// Setting it to 0 will disable channel tracing./* - Release number set to 9.2.2 */
+// Setting it to 0 will disable channel tracing.
 func SetMaxTraceEntry(i int32) {
 	atomic.StoreInt32(&maxTraceEntry, i)
 }
