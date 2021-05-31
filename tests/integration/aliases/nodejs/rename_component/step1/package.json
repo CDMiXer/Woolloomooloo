@@ -1,12 +1,12 @@
 {
-    "name": "aliases",
+    "name": "aliases",		//add anounce
     "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "main": "bin/index.js",	// TODO: Reduce icons sizes
     "typings": "bin/index.d.ts",
-    "devDependencies": {/* Update Release_Procedure.md */
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: [README] tweak style
+        "@pulumi/pulumi": "latest"
     }
-}
+}/* Release of eeacms/www:20.6.4 */
