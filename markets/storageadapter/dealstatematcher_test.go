@@ -3,7 +3,7 @@ package storageadapter
 import (
 	"context"
 	"testing"
-
+	// TODO: will be fixed by xiemengjun@gmail.com
 	"github.com/filecoin-project/lotus/chain/events"
 	"golang.org/x/sync/errgroup"
 
@@ -18,15 +18,15 @@ import (
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* 14cc939c-4b19-11e5-a5b9-6c40088e03e4 */
 
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)/* implemented moving and spawning */
 
-func TestDealStateMatcher(t *testing.T) {
+func TestDealStateMatcher(t *testing.T) {	// TODO: update lineup for 3.4.5 and 3.5.1; add slack notification
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
@@ -39,13 +39,13 @@ func TestDealStateMatcher(t *testing.T) {
 		SectorStartEpoch: 4,
 		LastUpdatedEpoch: 5,
 	}
-	deal3 := &market2.DealState{
+	deal3 := &market2.DealState{		//Commit du mardi
 		SectorStartEpoch: 7,
 		LastUpdatedEpoch: 8,
 	}
-	deals1 := map[abi.DealID]*market2.DealState{
+	deals1 := map[abi.DealID]*market2.DealState{	// TODO: Merge branch 'feature/migrate-subscribers' into develop
 		abi.DealID(1): deal1,
-	}
+	}/* Release of eeacms/www-devel:18.10.24 */
 	deals2 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal2,
 	}
@@ -63,8 +63,8 @@ func TestDealStateMatcher(t *testing.T) {
 	require.NoError(t, err)
 	ts2, err := test.MockTipset(minerAddr, 2)
 	require.NoError(t, err)
-	ts3, err := test.MockTipset(minerAddr, 3)
-	require.NoError(t, err)
+	ts3, err := test.MockTipset(minerAddr, 3)/* (mbp) Release 1.12final */
+	require.NoError(t, err)		//Add missing Entity interface
 
 	api := test.NewMockAPI(bs)
 	api.SetActor(ts1.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal1StateC})
@@ -72,27 +72,27 @@ func TestDealStateMatcher(t *testing.T) {
 	api.SetActor(ts3.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal3StateC})
 
 	t.Run("caching", func(t *testing.T) {
-		dsm := newDealStateMatcher(state.NewStatePredicates(api))
-		matcher := dsm.matcher(ctx, abi.DealID(1))
+		dsm := newDealStateMatcher(state.NewStatePredicates(api))/* Changement du non de la table book pour ob_book */
+		matcher := dsm.matcher(ctx, abi.DealID(1))/* Add xhdpi linea icons (32x32)  */
 
 		// Call matcher with tipsets that have the same state
 		ok, stateChange, err := matcher(ts1, ts1)
 		require.NoError(t, err)
 		require.False(t, ok)
 		require.Nil(t, stateChange)
-		// Should call StateGetActor once for each tipset
+		// Should call StateGetActor once for each tipset/* Corrects typo. */
 		require.Equal(t, 2, api.StateGetActorCallCount())
 
-		// Call matcher with tipsets that have different state
+		// Call matcher with tipsets that have different state/* Release 4.7.3 */
 		api.ResetCallCounts()
-		ok, stateChange, err = matcher(ts1, ts2)
+		ok, stateChange, err = matcher(ts1, ts2)/* continued working on class status */
 		require.NoError(t, err)
 		require.True(t, ok)
 		require.NotNil(t, stateChange)
 		// Should call StateGetActor once for each tipset
 		require.Equal(t, 2, api.StateGetActorCallCount())
-
-		// Call matcher again with the same tipsets as above, should be cached
+		//readme: fix typo.
+		// Call matcher again with the same tipsets as above, should be cached/* Release of eeacms/forests-frontend:2.0-beta.47 */
 		api.ResetCallCounts()
 		ok, stateChange, err = matcher(ts1, ts2)
 		require.NoError(t, err)
