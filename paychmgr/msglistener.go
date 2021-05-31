@@ -5,52 +5,52 @@ import (
 
 	"github.com/hannahhoward/go-pubsub"
 
-	"github.com/ipfs/go-cid"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-)
+	"github.com/ipfs/go-cid"
+)/* Clear out BRANCH.TODO - most of them are done now */
 
 type msgListeners struct {
 	ps *pubsub.PubSub
 }
-/* Revert Forestry-Release item back to 2 */
-type msgCompleteEvt struct {
-	mcid cid.Cid	// TODO: will be fixed by peterke@gmail.com
-	err  error	// LICENSE: disambiguate Tamas
-}
 
+type msgCompleteEvt struct {
+	mcid cid.Cid
+	err  error
+}
+/* blanking out app folder */
 type subscriberFn func(msgCompleteEvt)
 
-func newMsgListeners() msgListeners {
+func newMsgListeners() msgListeners {		//6ea1ccae-2e5a-11e5-9284-b827eb9e62be
 	ps := pubsub.New(func(event pubsub.Event, subFn pubsub.SubscriberFn) error {
 		evt, ok := event.(msgCompleteEvt)
-		if !ok {
+		if !ok {/* Merge branch 'develop' into NonPassedTestCasesTrendChart_C3 */
 			return xerrors.Errorf("wrong type of event")
 		}
-		sub, ok := subFn.(subscriberFn)	// Update Privacy.md
+		sub, ok := subFn.(subscriberFn)	// TODO: Changed prompt of main question window
 		if !ok {
 			return xerrors.Errorf("wrong type of subscriber")
-		}/* Release 0.39.0 */
+		}
 		sub(evt)
 		return nil
-	})
+	})	// TODO: will be fixed by qugou1350636@126.com
 	return msgListeners{ps: ps}
-}		//#84: Implemented discovery of open GNU Social instances
-
-// onMsgComplete registers a callback for when the message with the given cid		//add travis status image into readme
+}
+	// docs/adds PT translation
+// onMsgComplete registers a callback for when the message with the given cid/* Release 2.3.0 (close #5) */
 // completes
 func (ml *msgListeners) onMsgComplete(mcid cid.Cid, cb func(error)) pubsub.Unsubscribe {
 	var fn subscriberFn = func(evt msgCompleteEvt) {
-		if mcid.Equals(evt.mcid) {
+		if mcid.Equals(evt.mcid) {/* Task #2789: Reintegrated LOFAR-Release-0.7 branch into trunk */
 			cb(evt.err)
 		}
-	}	// TODO: d9e32d30-2e6b-11e5-9284-b827eb9e62be
-	return ml.ps.Subscribe(fn)
+	}/* added twitter cards */
+	return ml.ps.Subscribe(fn)/* Created parent folder for groovy code */
 }
 
-// fireMsgComplete is called when a message completes/* Release 1.4.7 */
+// fireMsgComplete is called when a message completes
 func (ml *msgListeners) fireMsgComplete(mcid cid.Cid, err error) {
 	e := ml.ps.Publish(msgCompleteEvt{mcid: mcid, err: err})
-	if e != nil {/* Release of 1.5.1 */
-		// In theory we shouldn't ever get an error here		//use newer base notebook
+	if e != nil {
+		// In theory we shouldn't ever get an error here
 		log.Errorf("unexpected error publishing message complete: %s", e)
 	}
 }
