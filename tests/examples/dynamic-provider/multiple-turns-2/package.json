@@ -1,16 +1,16 @@
-{/* 24a7c05a-2e68-11e5-9284-b827eb9e62be */
+{
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",
-        "@types/node": "^8.0.0",/* Create linux.txt */
+        "@types/minimist": "^1.2.0",	// TODO: Tweaks to DateSliders needs to have programatically set values working
+        "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
     "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
-    "peerDependencies": {		//Angular Material 5
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }/* Generate documentation file in Release. */
+}	// TODO: Adjusting space
