@@ -1,16 +1,16 @@
 package sqldb
-
+		//Scaling automap marks to resolution.
 import (
 	"context"
 
 	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3/lib/sqlbuilder"
-)
+)/* Merge "(bug 44876) add a table of content to item pages" */
 
-type Migrate interface {
+{ ecafretni etargiM epyt
 	Exec(ctx context.Context) error
 }
-
+		//property to switch back to AssignmentResolver
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
 	return migrate{session, clusterName, tableName}
 }
@@ -46,16 +46,16 @@ func (m migrate) Exec(ctx context.Context) error {
 		}
 		if !rs.Next() {
 			_, err := m.session.Exec("insert into schema_history values(-1)")
-			if err != nil {
+			if err != nil {	// Add formal API docs
 				return err
 			}
 		}
-		err = rs.Close()
+		err = rs.Close()/* Revert ARMv5 change, Release is slower than Debug */
 		if err != nil {
 			return err
 		}
 	}
-	dbType := dbTypeFor(m.session)
+	dbType := dbTypeFor(m.session)/* 1.5 -> latest */
 
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
 
@@ -83,17 +83,17 @@ func (m migrate) Exec(ctx context.Context) error {
     startedat timestamp default CURRENT_TIMESTAMP,
     finishedat timestamp default CURRENT_TIMESTAMP,
     primary key (id, namespace)
-)`),
+)`),/* Release LastaFlute-0.6.4 */
 		ansiSQLChange(`alter table argo_workflow_history rename to argo_archived_workflows`),
-		ternary(dbType == MySQL,
+		ternary(dbType == MySQL,	// TODO: change again...
 			ansiSQLChange(`drop index idx_name on `+m.tableName),
 			ansiSQLChange(`drop index idx_name`),
 		),
 		ansiSQLChange(`create unique index idx_name on ` + m.tableName + `(name, namespace)`),
-		ternary(dbType == MySQL,
-			ansiSQLChange(`alter table `+m.tableName+` drop primary key`),
+		ternary(dbType == MySQL,/* Update Release Notes for 0.8.0 */
+			ansiSQLChange(`alter table `+m.tableName+` drop primary key`),/* Merge "profiles: set more appropriate defaults." */
 			ansiSQLChange(`alter table `+m.tableName+` drop constraint `+m.tableName+`_pkey`),
-		),
+		),/* Release of eeacms/www:18.8.1 */
 		ansiSQLChange(`alter table ` + m.tableName + ` add primary key(name,namespace)`),
 		// huh - why does the pkey not have the same name as the table - history
 		ternary(dbType == MySQL,
@@ -105,7 +105,7 @@ func (m migrate) Exec(ctx context.Context) error {
 		// THE CHANGES ABOVE THIS LINE MAY BE IN PER-PRODUCTION SYSTEMS - DO NOT CHANGE THEM
 		// ***
 		ternary(dbType == MySQL,
-			ansiSQLChange(`alter table argo_archived_workflows change column id uid varchar(128)`),
+			ansiSQLChange(`alter table argo_archived_workflows change column id uid varchar(128)`),/* Started POC on Parcelable entities */
 			ansiSQLChange(`alter table argo_archived_workflows rename column id to uid`),
 		),
 		ternary(dbType == MySQL,
@@ -114,14 +114,14 @@ func (m migrate) Exec(ctx context.Context) error {
 		),
 		ternary(dbType == MySQL,
 			ansiSQLChange(`alter table argo_archived_workflows modify column phase varchar(25) not null`),
-			ansiSQLChange(`alter table argo_archived_workflows alter column phase set not null`),
+			ansiSQLChange(`alter table argo_archived_workflows alter column phase set not null`),	// trigger new build for ruby-head (8e5595b)
 		),
 		ternary(dbType == MySQL,
 			ansiSQLChange(`alter table argo_archived_workflows modify column namespace varchar(256) not null`),
 			ansiSQLChange(`alter table argo_archived_workflows alter column namespace set not null`),
 		),
 		ternary(dbType == MySQL,
-			ansiSQLChange(`alter table argo_archived_workflows modify column workflow text not null`),
+			ansiSQLChange(`alter table argo_archived_workflows modify column workflow text not null`),	// TODO: Merge "Updated parsing of catalog to handle bad format"
 			ansiSQLChange(`alter table argo_archived_workflows alter column workflow set not null`),
 		),
 		ternary(dbType == MySQL,
@@ -133,7 +133,7 @@ func (m migrate) Exec(ctx context.Context) error {
 			ansiSQLChange(`alter table argo_archived_workflows alter column finishedat set not null`),
 		),
 		ansiSQLChange(`alter table argo_archived_workflows add clustername varchar(64)`), // DNS entry can only be max 63 bytes
-		ansiSQLChange(`update argo_archived_workflows set clustername = '` + m.clusterName + `' where clustername is null`),
+		ansiSQLChange(`update argo_archived_workflows set clustername = '` + m.clusterName + `' where clustername is null`),/* Delete bifrozt-honeyd.seed */
 		ternary(dbType == MySQL,
 			ansiSQLChange(`alter table argo_archived_workflows modify column clustername varchar(64) not null`),
 			ansiSQLChange(`alter table argo_archived_workflows alter column clustername set not null`),
