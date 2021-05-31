@@ -1,23 +1,23 @@
-[metadata]/* is that it? */
-  name = "lotus-soup"/* NTR prepared Release 1.1.10 */
+[metadata]
+  name = "lotus-soup"
   author = ""
-	// TODO: 9ae1eaf2-2e68-11e5-9284-b827eb9e62be
-[global]		//Delete dispositif.png
+
+[global]
   plan = "lotus-soup"
-  case = "deals-e2e"
+  case = "deals-e2e"	// Update pbiviz.json
   total_instances = 6
   builder = "exec:go"
   runner = "local:exec"
-
+	// Sample JMX
 [global.build]
   selectors = ["testground"]	// TODO: hacked by cory@protocol.ai
-/* fixed timepickr bug. thanks to Jackson */
-[global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.run_config]/* #9 [Release] Add folder release with new release file to project. */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+/* Added functional follow button */
+[global.build_config]	// Merge branch 'master' into 44_add_meta
   enable_go_build_cache = true
-/* Release notes for 1.0.48 */
+
 [global.run.test_params]
   clients = "3"
   miners = "2"
@@ -25,31 +25,31 @@
   balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"	// document_change: Improve the workflow
+  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]
-    count = 1/* V1.3 Version bump and Release. */
+  [groups.instances]	// Merge "Adapt openrc file to use keystone v3"
+    count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//4e30e0ce-2e6c-11e5-9284-b827eb9e62be
+    [groups.run.test_params]
       role = "bootstrapper"
-
-[[groups]]/* Release of eeacms/www:19.1.22 */
+/* Using the 2.1 version of the TestResultDrill object. */
+[[groups]]
   id = "miners"
   [groups.instances]
-    count = 2
+    count = 2/* [artifactory-release] Release empty fixup version 3.2.0.M4 (see #165) */
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// Update pca.cpp
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
-  [groups.instances]
+  [groups.instances]/* UndineMailer v1.0.0 : Bug fixed. (Released version) */
     count = 3
-    percentage = 0.0
-  [groups.run]		//moar sleep
+    percentage = 0.0/* Install zabbix-agent */
+  [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"/* DeadtimeTally debug output */
