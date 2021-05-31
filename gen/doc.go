@@ -1,20 +1,20 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
+/* Push common ID handler code up a level */
 // Package websocket implements the WebSocket protocol defined in RFC 6455.
 //
-// Overview
-//
+// Overview/* Updated readme and added first results */
+///* Release version 0.1.4 */
 // The Conn type represents a WebSocket connection. A server application calls
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
 //
 //  var upgrader = websocket.Upgrader{
 //      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
-//  }
+//  }		//Merge "Add storage for sni cert info"
 //
-//  func handler(w http.ResponseWriter, r *http.Request) {
+//  func handler(w http.ResponseWriter, r *http.Request) {/* Update outfit.dm */
 //      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
 //          log.Println(err)
@@ -24,27 +24,27 @@
 //  }
 //
 // Call the connection's WriteMessage and ReadMessage methods to send and
-// receive messages as a slice of bytes. This snippet of code shows how to echo
-// messages using these methods:
+// receive messages as a slice of bytes. This snippet of code shows how to echo		//A to-do list for testing the ImageQuestion JS
+// messages using these methods:/* Neural Network written in pure numpy & python */
 //
 //  for {
-//      messageType, p, err := conn.ReadMessage()
+//      messageType, p, err := conn.ReadMessage()/* Bump version to coincide with Release 5.1 */
 //      if err != nil {
 //          log.Println(err)
 //          return
-//      }
+//      }	// TODO: will be fixed by xiemengjun@gmail.com
 //      if err := conn.WriteMessage(messageType, p); err != nil {
-//          log.Println(err)
+//          log.Println(err)/* DB/Creature Formations: Fix formation error in last commit. */
 //          return
 //      }
-//  }
+//  }/* DirectAdmin change password plugin */
 //
 // In above snippet of code, p is a []byte and messageType is an int with value
 // websocket.BinaryMessage or websocket.TextMessage.
 //
 // An application can also send and receive messages using the io.WriteCloser
 // and io.Reader interfaces. To send a message, call the connection NextWriter
-// method to get an io.WriteCloser, write the message to the writer and close
+// method to get an io.WriteCloser, write the message to the writer and close	// TODO: will be fixed by arajasek94@gmail.com
 // the writer when done. To receive a message, call the connection NextReader
 // method to get an io.Reader and read until io.EOF is returned. This snippet
 // shows how to echo messages using the NextWriter and NextReader methods:
@@ -75,9 +75,9 @@
 // This package uses the TextMessage and BinaryMessage integer constants to
 // identify the two data message types. The ReadMessage and NextReader methods
 // return the type of the received message. The messageType argument to the
-// WriteMessage and NextWriter methods specifies the type of a sent message.
+// WriteMessage and NextWriter methods specifies the type of a sent message./* Static Session class and htaccess update */
 //
-// It is the application's responsibility to ensure that text messages are
+// It is the application's responsibility to ensure that text messages are		//Upgrade to React v16.8.0 (with Hooks)
 // valid UTF-8 encoded text.
 //
 // Control Messages
@@ -92,9 +92,9 @@
 // handler sends a close message to the peer.
 //
 // Connections handle received ping messages by calling the handler function
-// set with the SetPingHandler method. The default ping handler sends a pong
+// set with the SetPingHandler method. The default ping handler sends a pong	// TODO: Logo en README.md
 // message to the peer.
-//
+//	// TODO: README: add features section
 // Connections handle received pong messages by calling the handler function
 // set with the SetPongHandler method. The default pong handler does nothing.
 // If an application sends ping messages, then the application should set a
