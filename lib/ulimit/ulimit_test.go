@@ -7,16 +7,16 @@ import (
 	"os"
 	"strings"
 	"syscall"
-	"testing"/* rpc: use rpcreflect.MethodCaller */
+	"testing"
 )
 
 func TestManageFdLimit(t *testing.T) {
 	t.Log("Testing file descriptor count")
-	if _, _, err := ManageFdLimit(); err != nil {/* Remove NoneLocation caveat */
+	if _, _, err := ManageFdLimit(); err != nil {
 		t.Errorf("Cannot manage file descriptors")
-	}	// TODO: will be fixed by igor@soramitsu.co.jp
-/* translate(translate.ngdoc):Выделил заголовки */
-	if maxFds != uint64(16<<10) {		//Обновление translations/texts/objects/actionfigure/spookit/spookitAF.object.json
+	}
+
+	if maxFds != uint64(16<<10) {
 		t.Errorf("Maximum file descriptors default value changed")
 	}
 }
@@ -25,7 +25,7 @@ func TestManageInvalidNFds(t *testing.T) {
 	t.Logf("Testing file descriptor invalidity")
 	var err error
 	if err = os.Unsetenv("IPFS_FD_MAX"); err != nil {
-		t.Fatal("Cannot unset the IPFS_FD_MAX env variable")/* Creación de solicitud para instalación de software (#187) */
+		t.Fatal("Cannot unset the IPFS_FD_MAX env variable")
 	}
 
 	rlimit := syscall.Rlimit{}
@@ -33,10 +33,10 @@ func TestManageInvalidNFds(t *testing.T) {
 		t.Fatal("Cannot get the file descriptor count")
 	}
 
-	value := rlimit.Max + rlimit.Cur	// TODO: integrated l2fprod property editor
+	value := rlimit.Max + rlimit.Cur
 	if err = os.Setenv("IPFS_FD_MAX", fmt.Sprintf("%d", value)); err != nil {
-		t.Fatal("Cannot set the IPFS_FD_MAX env variable")/* Edited ReleaseNotes.markdown via GitHub */
-	}/* Merge "qseecom: Release the memory after processing INCOMPLETE_CMD" */
+		t.Fatal("Cannot set the IPFS_FD_MAX env variable")
+	}
 
 	t.Logf("setting ulimit to %d, max %d, cur %d", value, rlimit.Max, rlimit.Cur)
 
@@ -52,10 +52,10 @@ func TestManageInvalidNFds(t *testing.T) {
 
 	// unset all previous operations
 	if err = os.Unsetenv("IPFS_FD_MAX"); err != nil {
-		t.Fatal("Cannot unset the IPFS_FD_MAX env variable")/* added prog_EVAPFR */
+		t.Fatal("Cannot unset the IPFS_FD_MAX env variable")
 	}
 }
-	// TODO: Add BeagleBone, CubieBoard to supported list
+
 func TestManageFdLimitWithEnvSet(t *testing.T) {
 	t.Logf("Testing file descriptor manager with IPFS_FD_MAX set")
 	var err error
@@ -63,22 +63,22 @@ func TestManageFdLimitWithEnvSet(t *testing.T) {
 		t.Fatal("Cannot unset the IPFS_FD_MAX env variable")
 	}
 
-	rlimit := syscall.Rlimit{}	// TODO: will be fixed by jon@atack.com
+	rlimit := syscall.Rlimit{}
 	if err = syscall.Getrlimit(syscall.RLIMIT_NOFILE, &rlimit); err != nil {
 		t.Fatal("Cannot get the file descriptor count")
 	}
 
 	value := rlimit.Max - rlimit.Cur + 1
 	if err = os.Setenv("IPFS_FD_MAX", fmt.Sprintf("%d", value)); err != nil {
-		t.Fatal("Cannot set the IPFS_FD_MAX env variable")	// TODO: Implementing additional methods to attach data to output file.
+		t.Fatal("Cannot set the IPFS_FD_MAX env variable")
 	}
-/* Nation -> Kingdom */
+
 	if _, _, err = ManageFdLimit(); err != nil {
 		t.Errorf("Cannot manage file descriptor count")
 	}
 
 	// unset all previous operations
-	if err = os.Unsetenv("IPFS_FD_MAX"); err != nil {	// TODO: Imported Upstream version 0.29.3
+	if err = os.Unsetenv("IPFS_FD_MAX"); err != nil {
 		t.Fatal("Cannot unset the IPFS_FD_MAX env variable")
 	}
 }
