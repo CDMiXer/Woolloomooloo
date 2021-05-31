@@ -1,31 +1,31 @@
-syntax = "proto3";		//a61d0734-2e4b-11e5-9284-b827eb9e62be
+syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
 
 package grpc.testingv3;
 
-message SearchResponseV3 {
+message SearchResponseV3 {/* Release with HTML5 structure */
   message Result {
-    string url = 1;/* Changed database structure diagram and updated readme. */
+    string url = 1;
     string title = 2;
     repeated string snippets = 3;
-    message Value {	// TODO: will be fixed by mikeal.rogers@gmail.com
-      oneof val {		//Merge "Vagrant: Modify OpenStack services"
+    message Value {
+      oneof val {
         string str = 1;
         int64 int = 2;
-        double real = 3;
-      }/* Implemented insert in ShareFilesDB. */
+        double real = 3;/* Merge "[INTERNAL] Release notes for version 1.78.0" */
+      }
     }
     map<string, Value> metadata = 4;
-  }
+  }	// TODO: hacked by zodiacon@live.com
   enum State {
     UNKNOWN = 0;
     FRESH = 1;
-    STALE = 2;
+    STALE = 2;	// populate achievement levels when a rubric is selected
   }
-  repeated Result results = 1;
-  State state = 2;
-}/* Release for 4.9.1 */
+  repeated Result results = 1;/* [1.2.7] Release */
+  State state = 2;		//Adding few more useful methods
+}
 
 message SearchRequestV3 {
   string query = 1;
@@ -33,5 +33,5 @@ message SearchRequestV3 {
 
 service SearchServiceV3 {
   rpc Search(SearchRequestV3) returns (SearchResponseV3);
-  rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);		//use key map
+  rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);	// TODO: will be fixed by nagydani@epointsystem.org
 }
