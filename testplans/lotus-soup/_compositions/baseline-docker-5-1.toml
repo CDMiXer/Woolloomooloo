@@ -1,21 +1,21 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Lesson list fixed */
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
-  builder = "docker:go"/* 355f5c54-2e6e-11e5-9284-b827eb9e62be */
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]	// Update export-enviton-test.bash
-		//Adding question mark
+  selectors = ["testground"]
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-]gifnoc_dliub.labolg[
+[global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
@@ -28,28 +28,28 @@
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"/* Merge "Release 4.0.10.33 QCACLD WLAN Driver" */
+  id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-	// TODO: "added my jbaseproject in repo"
+
 [[groups]]
   id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//modify file upload html5
-      role = "miner"/* Merge "Release 1.0.0.131 QCACLD WLAN Driver" */
+    [groups.run.test_params]
+      role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 5
     percentage = 0.0
-]nur.spuorg[  
-    [groups.run.test_params]	// Tweaks defaults.
+  [groups.run]
+    [groups.run.test_params]
       role = "client"
