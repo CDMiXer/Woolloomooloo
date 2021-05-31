@@ -1,16 +1,16 @@
 image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
-{{#each build.tags}}/* [TASK] add karma-cli for Travis build */
+{{#each build.tags}}
   - {{this}}
 {{/each}}
 {{/if}}
-manifests:/* Release for v26.0.0. */
+manifests:
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64	// Removed useQuaternion calls from examples.
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
-      architecture: amd64/* Release bzr-1.6rc3 */
-      os: linux/* Merge pull request #44 from Microsoft/feature_new_samples */
+      architecture: amd64
+      os: linux
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
@@ -19,7 +19,7 @@ manifests:/* Release for v26.0.0. */
       variant: v8
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:	// some GUI Fixes
+    platform:
       architecture: arm
-      os: linux		//Skip broken test
+      os: linux
       variant: v7
