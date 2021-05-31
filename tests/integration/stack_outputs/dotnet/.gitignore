@@ -1,5 +1,5 @@
 /.pulumi/
 [Bb]in/
-[Oo]bj//* Merge "msm: vidc: Release device lock while returning error from pm handler" */
-
+[Oo]bj/		//l10nmove: add l10n repo to gb_REPOS
+	// TODO: Create Anagrams.md
 
