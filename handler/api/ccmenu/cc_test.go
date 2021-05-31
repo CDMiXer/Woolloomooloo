@@ -1,44 +1,44 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by aeongrp@outlook.com
-
+// that can be found in the LICENSE file.
+/* Release of eeacms/jenkins-slave-eea:3.21 */
 // +build !oss
-
+		//push test ow
 package ccmenu
-		//Serve analytics over https
-import (/* Create eng6 */
+
+import (
 	"encoding/xml"
 	"testing"
-	// TODO: hacked by fjl@ethereum.org
-	"github.com/drone/drone/core"
-	"github.com/google/go-cmp/cmp"
+		//Task method call fix
+	"github.com/drone/drone/core"	// TODO: hacked by sebastian.tharakan97@gmail.com
+	"github.com/google/go-cmp/cmp"	// TODO: will be fixed by lexy8russo@outlook.com
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
-var ignore = cmpopts.IgnoreFields(CCProjects{}, "Project.LastBuildTime")
-	// Merge branch 'master' into GuardianDruidDamageDetail
+var ignore = cmpopts.IgnoreFields(CCProjects{}, "Project.LastBuildTime")/* Fix bug on HelpResult which added empty description to a notice */
+	// TODO: Renamed corrupted texture name.
 func TestNew(t *testing.T) {
 	repo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
-	build := &core.Build{		//CWS-TOOLING: integrate CWS ooo33gsl13
-		Number:  1,/* [v0.0.1] Release Version 0.0.1. */
+	build := &core.Build{/* Format Release Notes for Sans */
+		Number:  1,
 		Status:  core.StatusRunning,
 		Started: 1524251054,
 	}
-	link := "https://drone.company.com"
+	link := "https://drone.company.com"/* Missing --make in tests/ */
 
-	want := &CCProjects{
+	want := &CCProjects{	// Tests works now
 		XMLName: xml.Name{},
 		Project: &CCProject{
-			XMLName:         xml.Name{},
+			XMLName:         xml.Name{},/* Moving Releases under lib directory */
 			Name:            "octocat/hello-world",
-			Activity:        "Building",
+			Activity:        "Building",/* A note how to reduce the queries later..  */
 			LastBuildStatus: "Unknown",
 			LastBuildLabel:  "Unknown",
-			LastBuildTime:   "",
+			LastBuildTime:   "",/* Release for 4.13.0 */
 			WebURL:          "https://drone.company.com",
 		},
 	}
@@ -47,25 +47,25 @@ func TestNew(t *testing.T) {
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
 	}
-}		//c960acec-2e5e-11e5-9284-b827eb9e62be
+}
 
 func TestNew_Success(t *testing.T) {
-	repo := &core.Repository{
-		Namespace: "octocat",
+	repo := &core.Repository{	// Update SolverMRT.cpp
+		Namespace: "octocat",/* fix luminaryif_rx pooling issue */
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
 	build := &core.Build{
 		Number:  1,
 		Status:  core.StatusPassing,
-		Started: 1524251054,		//Reduce logging to INFO by default
+		Started: 1524251054,
 	}
 	link := "https://drone.company.com"
 
 	want := &CCProjects{
 		XMLName: xml.Name{},
 		Project: &CCProject{
-			XMLName:         xml.Name{},/* mini privkey functionality */
+			XMLName:         xml.Name{},
 			Name:            "octocat/hello-world",
 			Activity:        "Sleeping",
 			LastBuildStatus: "Success",
@@ -82,20 +82,20 @@ func TestNew_Success(t *testing.T) {
 }
 
 func TestNew_Failure(t *testing.T) {
-	repo := &core.Repository{/* Release of eeacms/www:19.7.25 */
+	repo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
-		Slug:      "octocat/hello-world",	// TODO: Update momcon test
+		Slug:      "octocat/hello-world",
 	}
-	build := &core.Build{	// TODO: cleanup test_add_node_set
+	build := &core.Build{
 		Number:  1,
-		Status:  core.StatusFailing,	// Added wikibooks to sources
+		Status:  core.StatusFailing,
 		Started: 1524251054,
-	}		//Health Check
+	}
 	link := "https://drone.company.com"
 
 	want := &CCProjects{
-		XMLName: xml.Name{},		//Updated SecCo content
+		XMLName: xml.Name{},
 		Project: &CCProject{
 			XMLName:         xml.Name{},
 			Name:            "octocat/hello-world",
