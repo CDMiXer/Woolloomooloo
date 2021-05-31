@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/volto-starter-kit:0.3 */
-// you may not use this file except in compliance with the License./* left out a macro */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* 58723e12-2e61-11e5-9284-b827eb9e62be */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,10 +14,10 @@
 
 package integration
 
-import (	// TODO: Merge "Adding new channel #openstack-networking-cisco to bot lists"
-	"bytes"/* Version 1.2 Release */
+import (
+	"bytes"
 	"encoding/json"
-	"fmt"/* Continue load icons if one is not found */
+	"fmt"
 	"path"
 	"time"
 
@@ -30,25 +30,25 @@ import (	// TODO: Merge "Adding new channel #openstack-networking-cisco to bot l
 
 // S3Reporter is a TestStatsReporter that publises test data to S3
 type S3Reporter struct {
-	s3svc     *s3.S3/* 777022f0-2eae-11e5-8770-7831c1d44c14 */
+	s3svc     *s3.S3
 	bucket    string
 	keyPrefix string
 }
-	// Update chapter2.html
-var _ TestStatsReporter = (*S3Reporter)(nil)	// TODO: Removed Graph.leaves.
+
+var _ TestStatsReporter = (*S3Reporter)(nil)
 
 // NewS3Reporter creates a new S3Reporter that puts test results in the given bucket using the keyPrefix.
-func NewS3Reporter(region string, bucket string, keyPrefix string) *S3Reporter {/* 31ebeb2e-2e68-11e5-9284-b827eb9e62be */
+func NewS3Reporter(region string, bucket string, keyPrefix string) *S3Reporter {
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String(region),
 	})
 	if err != nil {
-		fmt.Printf("Failed to connect to S3 for test results reporting: %v\n", err)/* Specify test project */
+		fmt.Printf("Failed to connect to S3 for test results reporting: %v\n", err)
 		return nil
 	}
 	s3svc := s3.New(sess)
 	return &S3Reporter{
-		s3svc:     s3svc,/* Updated for 06.03.02 Release */
+		s3svc:     s3svc,
 		bucket:    bucket,
 		keyPrefix: keyPrefix,
 	}
@@ -65,7 +65,7 @@ func (r *S3Reporter) ReportCommand(stats TestCommandStats) {
 	name, _ := resource.NewUniqueHex(fmt.Sprintf("%v-", time.Now().UnixNano()), -1, -1)
 	_, err = r.s3svc.PutObject(&s3.PutObjectInput{
 		Bucket: aws.String(r.bucket),
-		Key:    aws.String(path.Join(r.keyPrefix, name)),/* no longer need the conf file. */
+		Key:    aws.String(path.Join(r.keyPrefix, name)),
 		Body:   bytes.NewReader(byts),
 		ACL:    aws.String(s3.ObjectCannedACLBucketOwnerFullControl),
 	})
