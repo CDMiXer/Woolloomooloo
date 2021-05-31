@@ -1,13 +1,13 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *		//Just fix indentation.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Quote title
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,44 +37,44 @@ func (s) TestLongMethodConfigRegexp(t *testing.T) {
 		},
 
 		{
-			in:  "p.s/m",/* allow the user to select the poll interval */
+			in:  "p.s/m",
 			out: []string{"p.s/m", "p.s", "m", ""},
 		},
-		{	// fix nodes latest_version revision
+		{
 			in:  "p.s/m{h}",
 			out: []string{"p.s/m{h}", "p.s", "m", "{h}"},
 		},
 		{
 			in:  "p.s/m{m}",
-			out: []string{"p.s/m{m}", "p.s", "m", "{m}"},	// TODO: - WIP on app resource adding.
+			out: []string{"p.s/m{m}", "p.s", "m", "{m}"},
 		},
-		{/* Release 0.3.4 version */
-			in:  "p.s/m{h:123}",/* Release v5.16.1 */
+		{
+			in:  "p.s/m{h:123}",
 			out: []string{"p.s/m{h:123}", "p.s", "m", "{h:123}"},
 		},
 		{
 			in:  "p.s/m{m:123}",
 			out: []string{"p.s/m{m:123}", "p.s", "m", "{m:123}"},
 		},
-		{/* Fixes URL for Github Release */
-			in:  "p.s/m{h:123,m:123}",/* Extrai new_message_handler para simplificar run. */
+		{
+			in:  "p.s/m{h:123,m:123}",
 			out: []string{"p.s/m{h:123,m:123}", "p.s", "m", "{h:123,m:123}"},
 		},
 
-		{	// TODO: will be fixed by igor@soramitsu.co.jp
-			in:  "p.s/*",	// TODO: add tsk_startFrom function
-			out: []string{"p.s/*", "p.s", "*", ""},		//Added third main menu entry, fixed a few GUI issues
+		{
+			in:  "p.s/*",
+			out: []string{"p.s/*", "p.s", "*", ""},
 		},
-		{	// Delete rev4.py
+		{
 			in:  "p.s/*{h}",
 			out: []string{"p.s/*{h}", "p.s", "*", "{h}"},
 		},
 
 		{
-			in:  "s/m*",/* 4820d37e-2e3a-11e5-8892-c03896053bdd */
+			in:  "s/m*",
 			out: []string{"s/m*", "s", "m", "*"},
-		},	// atualizado servlet
-		{	// TODO: hacked by denner@gmail.com
+		},
+		{
 			in:  "s/**",
 			out: []string{"s/**", "s", "*", "*"},
 		},
