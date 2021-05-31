@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//added LICENSE.txt, NOTICE.txt, README.txt and pom.xml to hal-commons directory.
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>/* Merge branch '7.x-3.x' into GOVCMSD7-141 */
-    <OutputType>Exe</OutputType>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>	// TODO: Removed fixed user color string
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>
+</Project>		//6d4ec36e-2e3e-11e5-9284-b827eb9e62be
