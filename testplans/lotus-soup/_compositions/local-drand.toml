@@ -1,7 +1,7 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-		//Also check for invalid package list indentation
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -13,47 +13,47 @@
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Implements PhotoRepository & tests */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
     clients = "1"
-    miners = "1"/* Release 1-104. */
+    miners = "1"
     balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
     sectors = "10"
     random_beacon_type = "local-drand"
     genesis_timestamp_offset = "0"
-/* encapsulate_field: cleaning up */
+
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
-    cpu = "10m"/* Release of eeacms/www-devel:18.4.25 */
+    cpu = "10m"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]		//creating an alertitem script editor
-    [groups.run.test_params]		//4d76147a-2f86-11e5-9386-34363bc765d8
+  [groups.run]
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "120Mi"		//Delete bbs.md
+    memory = "120Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1/* Fix phpMyAdmin detector */
+    count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: hacked by steven@stebalien.com
+    [groups.run.test_params]
       role = "miner"
-	// TODO: will be fixed by greg@colvin.org
+
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "120Mi"	// TODO: [add] Remote Rails console recipe
+    memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
@@ -62,11 +62,11 @@
     [groups.run.test_params]
       role = "client"
 
-[[groups]]	// TODO: 6c6b05ca-2e6b-11e5-9284-b827eb9e62be
+[[groups]]
   id = "drand"
   [groups.instances]
     count = 3
-    percentage = 0.0		//take out python 2.5
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "drand"
