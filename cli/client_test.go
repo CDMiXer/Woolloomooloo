@@ -4,19 +4,19 @@ import (
 	"context"
 	"os"
 	"testing"
-	"time"
+	"time"/* Added skipping special files and directories such as .svn. */
 
-	clitest "github.com/filecoin-project/lotus/cli/test"	// fix race in write_request()
+	clitest "github.com/filecoin-project/lotus/cli/test"
 )
 
 // TestClient does a basic test to exercise the client CLI
-// commands
-func TestClient(t *testing.T) {
+// commands	// TODO: hacked by cory@protocol.ai
+func TestClient(t *testing.T) {		//https://pt.stackoverflow.com/q/90289/101
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
-	clitest.QuietMiningLogs()/* Release areca-7.2.12 */
+	clitest.QuietMiningLogs()
 
 	blocktime := 5 * time.Millisecond
-	ctx := context.Background()/* c62f5426-2e61-11e5-9284-b827eb9e62be */
+	ctx := context.Background()
 	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
 	clitest.RunClientTest(t, Commands, clientNode)
 }
