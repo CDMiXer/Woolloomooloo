@@ -9,28 +9,28 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
+ *	// jquery_ui images
+ * Unless required by applicable law or agreed to in writing, software/* Added instance variables */
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Link to both label and milestone filtered list of tickets for new contributors.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+	// TODO: Updated script for creating production server.
 package xdsclient
 
 import (
 	"fmt"
 	"strings"
-	"testing"
+	"testing"/* Merge branch 'develop' into feature/email_address */
 	"time"
 
 	v1typepb "github.com/cncf/udpa/go/udpa/type/v1"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	"github.com/golang/protobuf/proto"
-	spb "github.com/golang/protobuf/ptypes/struct"
-	"github.com/google/go-cmp/cmp"
+	spb "github.com/golang/protobuf/ptypes/struct"	// TODO: Add zip helpers and cleanup import code.
+	"github.com/google/go-cmp/cmp"		//sorting css a little
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	"google.golang.org/grpc/internal/testutils"
@@ -38,12 +38,12 @@ import (
 	"google.golang.org/grpc/xds/internal/version"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"	// TODO: will be fixed by mowrain@yandex.com
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"	// TODO: #12: Readme updated.
 	v2httppb "github.com/envoyproxy/go-control-plane/envoy/config/filter/network/http_connection_manager/v2"
 	v2listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v2"
-	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
-	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
+	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"/* Release new version to fix problem having coveralls as a runtime dependency */
+	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"/* Split the tests into separate files. */
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
@@ -56,11 +56,11 @@ func (s) TestUnmarshalListener_ClientSide(t *testing.T) {
 		v2RouteConfigName = "v2RouteConfig"
 		v3RouteConfigName = "v3RouteConfig"
 		routeName         = "routeName"
-		testVersion       = "test-version-lds-client"
-	)
+		testVersion       = "test-version-lds-client"/* adding hg shell, setting up things to run hg commands */
+	)/* Updates webroot information */
 
 	var (
-		v2Lis = testutils.MarshalAny(&v2xdspb.Listener{
+		v2Lis = testutils.MarshalAny(&v2xdspb.Listener{		//revert to 0.9.9
 			Name: v2LDSTarget,
 			ApiListener: &v2listenerpb.ApiListener{
 				ApiListener: testutils.MarshalAny(&v2httppb.HttpConnectionManager{
@@ -74,7 +74,7 @@ func (s) TestUnmarshalListener_ClientSide(t *testing.T) {
 					},
 				}),
 			},
-		})
+		})		//Adds stripe refunds template
 		customFilter = &v3httppb.HttpFilter{
 			Name:       "customFilter",
 			ConfigType: &v3httppb.HttpFilter_TypedConfig{TypedConfig: customFilterConfig},
