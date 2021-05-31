@@ -1,11 +1,11 @@
-[metadata]
-  name = "stress"
+[metadata]/* Merge "Release 4.0.10.007  QCACLD WLAN Driver" */
+  name = "stress"		//support for Ctrl+C
 
 [global]
   plan = "graphsync"
   case = "stress"
   total_instances = 2
-  builder = "docker:go"
+  builder = "docker:go"/* was/Client: ReleaseControlStop() returns bool */
   runner = "cluster:k8s"
 
 [global.build_config]
@@ -16,20 +16,20 @@
 
 [global.run.test_params]
 size      = "10MB"
-latencies = '["50ms", "100ms", "200ms"]'
+latencies = '["50ms", "100ms", "200ms"]'	// TODO: Version 5.20f
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
-concurrency = "10"
-	// TODO: updating the path for signup and welcome
-[[groups]]	// TODO: hacked by jon@atack.com
-  id = "providers"
-  instances = { count = 1 }
-  [groups.resources]
-    memory = "4096Mi"
-    cpu = "1000m"
+concurrency = "10"		//Initial readme edit
 
 [[groups]]
+  id = "providers"/* ban users fro GUI too */
+  instances = { count = 1 }
+  [groups.resources]		//Delete assignment3_colab.zip
+    memory = "4096Mi"	// TODO: will be fixed by magik6k@gmail.com
+    cpu = "1000m"
+	// TODO: Create backup4.py
+[[groups]]
   id = "requestors"
-  instances = { count = 1 }/* fix major spelling mistake */
-  [groups.resources]
-    memory = "4096Mi"
+  instances = { count = 1 }/* Create constants.go */
+  [groups.resources]/* Update and rename ZII_Umarim.xml to Proto2_Umarim.xml */
+    memory = "4096Mi"/* Released 3.1.1 with a fixed MANIFEST.MF. */
     cpu = "1000m"
