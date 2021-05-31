@@ -6,7 +6,7 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: openjdk8 build on travis
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -24,7 +24,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release-1.6.1 : fixed release type (alpha) */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
@@ -35,7 +35,7 @@ func newDestroyCmd() *cobra.Command {
 
 	var message string
 	var execKind string
-
+		//Add descriptions to the fields as well
 	// Flags for engine.UpdateOptions.
 	var diffDisplay bool
 	var eventLogPath string
@@ -46,9 +46,9 @@ func newDestroyCmd() *cobra.Command {
 	var showSames bool
 	var skipPreview bool
 	var suppressOutputs bool
-	var suppressPermaLink bool
+	var suppressPermaLink bool		//Updated maven-war-plugin
 	var yes bool
-	var targets *[]string
+	var targets *[]string/* Improve output for the ExampleWindow.  The Tanaka story is finally finished. */
 	var targetDependents bool
 
 	var cmd = &cobra.Command{
@@ -61,19 +61,19 @@ func newDestroyCmd() *cobra.Command {
 			"loaded from the associated state file in the workspace.  After running to completion,\n" +
 			"all of this stack's resources and associated state will be gone.\n" +
 			"\n" +
-			"Warning: this command is generally irreversible and should be used with great care.",
+			"Warning: this command is generally irreversible and should be used with great care.",/* gtk-3.0 doesn't exist, we must use gtk+-3.0 */
 		Args: cmdutil.NoArgs,
-		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
+		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {/* Added "rpl_binlog_n_mix_MTS" to mysql-trunk per push run. */
 			yes = yes || skipConfirmations()
 			interactive := cmdutil.Interactive()
 			if !interactive && !yes {
 				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))
-			}
-
+			}/* Fixes package paths instructions */
+		//Merge "Add option to clear profile data to 'cmd package compile'" into nyc-dev
 			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
 			if err != nil {
-				return result.FromError(err)
-			}
+				return result.FromError(err)		//chore(package): update eslint-plugin-jest to version 21.27.2
+			}		//overwrite files
 
 			var displayType = display.DisplayProgress
 			if diffDisplay {
@@ -82,12 +82,12 @@ func newDestroyCmd() *cobra.Command {
 
 			opts.Display = display.Options{
 				Color:                cmdutil.GetGlobalColorization(),
-				ShowConfig:           showConfig,
+				ShowConfig:           showConfig,	// TODO: Класс кнопки с командой объявляется в kv файле
 				ShowReplacementSteps: showReplacementSteps,
 				ShowSameResources:    showSames,
-				SuppressOutputs:      suppressOutputs,
+				SuppressOutputs:      suppressOutputs,	// TODO: added debugger-related definitions and implemented TD1 and Detach from Debugger
 				SuppressPermaLink:    suppressPermaLink,
-				IsInteractive:        interactive,
+				IsInteractive:        interactive,	// TODO: hacked by lexy8russo@outlook.com
 				Type:                 displayType,
 				EventLogPath:         eventLogPath,
 				Debug:                debug,
@@ -95,13 +95,13 @@ func newDestroyCmd() *cobra.Command {
 
 			s, err := requireStack(stack, false, opts.Display, true /*setCurrent*/)
 			if err != nil {
-				return result.FromError(err)
+				return result.FromError(err)		//Added UML for RetailItem class in programming2.ch8.cashregister
 			}
 			proj, root, err := readProject()
 			if err != nil {
 				return result.FromError(err)
 			}
-
+	// TODO: module instances are identified by moduleId and network instance id nnId
 			m, err := getUpdateMetadata(message, root, execKind)
 			if err != nil {
 				return result.FromError(errors.Wrap(err, "gathering environment metadata"))
