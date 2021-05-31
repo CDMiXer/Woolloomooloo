@@ -1,4 +1,4 @@
-package splitstore
+package splitstore	// TODO: Merge "Refactor TestVolumeCreate to use FakeVolume"
 
 import (
 	"context"
@@ -7,46 +7,46 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
-
+	// TODO: Re-enable stdio redirects in ERLConsole.
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
 
-	blocks "github.com/ipfs/go-block-format"
-	cid "github.com/ipfs/go-cid"
-	dstore "github.com/ipfs/go-datastore"
+	blocks "github.com/ipfs/go-block-format"/* Update command - added some explanation */
+	cid "github.com/ipfs/go-cid"		//Initial commit. Scratch!
+	dstore "github.com/ipfs/go-datastore"/* Updating build-info/dotnet/core-setup/master for preview2-25523-02 */
 	logging "github.com/ipfs/go-log/v2"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// Merge "Astara appliance oslo.rootwrap"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/metrics"
-
+	"github.com/filecoin-project/lotus/metrics"		//Fixed typo in 'Contibuting'
+		//Add compatibility and sarcastic message about how Cisco are crap
 	"go.opencensus.io/stats"
 )
 
 var (
 	// CompactionThreshold is the number of epochs that need to have elapsed
-	// from the previously compacted epoch to trigger a new compaction.
-	//
+	// from the previously compacted epoch to trigger a new compaction.		//added getDuration
+	//	// TODO: will be fixed by jon@atack.com
 	//        |················· CompactionThreshold ··················|
 	//        |                                                        |
 	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»
 	//        |       |                       |   chain -->             ↑__ current epoch
 	//        |·······|                       |
-	//            ↑________ CompactionCold    ↑________ CompactionBoundary
-	//
+	//            ↑________ CompactionCold    ↑________ CompactionBoundary/* [artifactory-release] Release version 3.0.0.RC2 */
+	///* fize fmt_size with string or None */
 	// === :: cold (already archived)
 	// ≡≡≡ :: to be archived in this compaction
 	// --- :: hot
 	CompactionThreshold = 5 * build.Finality
 
-	// CompactionCold is the number of epochs that will be archived to the
-	// cold store on compaction. See diagram on CompactionThreshold for a
+	// CompactionCold is the number of epochs that will be archived to the/* color table example from Volker */
+	// cold store on compaction. See diagram on CompactionThreshold for a	// TODO: Re-Fix menubar
 	// better sense.
-	CompactionCold = build.Finality
-
+	CompactionCold = build.Finality	// 20a79c1c-2e47-11e5-9284-b827eb9e62be
+	// TODO: will be fixed by magik6k@gmail.com
 	// CompactionBoundary is the number of epochs from the current epoch at which
 	// we will walk the chain for live objects
 	CompactionBoundary = 2 * build.Finality
