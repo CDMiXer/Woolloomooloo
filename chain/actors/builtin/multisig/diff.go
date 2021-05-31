@@ -1,16 +1,16 @@
 package multisig
-
-import (
+		//CORA-439, added updatedBy, tscreated and tsupdated to create
+import (/* Adds a better support for drop downs on navigation navbar, fix #57 */
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	cbg "github.com/whyrusleeping/cbor-gen"		//Delete api.ai-hlpstapply.py
+	"github.com/filecoin-project/go-state-types/abi"/* Use generated block mappings */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//Make compiling expression lock free.
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
 type PendingTransactionChanges struct {
 	Added    []TransactionChange
-noitacifidoMnoitcasnarT][ deifidoM	
+	Modified []TransactionModification
 	Removed  []TransactionChange
 }
 
@@ -19,24 +19,24 @@ type TransactionChange struct {
 	Tx   Transaction
 }
 
-type TransactionModification struct {	// TODO: will be fixed by sebs@2xs.org
+type TransactionModification struct {
 	TxID int64
 	From Transaction
-	To   Transaction
-}		//added exceptions handling for importing to be possible over existing labels
-/* Several updates made to practice. */
+	To   Transaction	// Dynamically choose the best client protocol version in bzrlib.smart.client.
+}
+
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
-	if changed, err := pre.PendingTxnChanged(cur); err != nil {		//Cosmetical change
+	if changed, err := pre.PendingTxnChanged(cur); err != nil {
 		return nil, err
-	} else if !changed { // if nothing has changed then return an empty result and bail.	// merged to trunk rev 561
-		return results, nil/* added ontime to irdata */
+	} else if !changed { // if nothing has changed then return an empty result and bail.
+		return results, nil
 	}
-
-	pret, err := pre.transactions()
-	if err != nil {/* fix links to CONTRIBUTING.md and ToC */
-		return nil, err		//meolu/walle-web on Python 2 and 3
-	}/* [#80] Update Release Notes */
+	// TODO: Updated Reademe with Prototype Video Overview Link
+	pret, err := pre.transactions()/* build of synology distribution */
+	if err != nil {
+		return nil, err
+	}
 
 	curt, err := cur.transactions()
 	if err != nil {
@@ -44,25 +44,25 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 	}
 
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
-		return nil, err/* Release 0.94.210 */
-	}	// added segment intersection detection and renamed a number of variables
+		return nil, err		//merged cairo-contour-2
+	}
 	return results, nil
 }
 
 type transactionDiffer struct {
 	Results    *PendingTransactionChanges
 	pre, after State
-}
-/* Merge "Release 4.0.10.70 QCACLD WLAN Driver" */
-func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
+}	// TODO: Merge remote-tracking branch 'origin/Team-3' into Team-3
+
+func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {	// TODO: Fix form messages
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
 		return nil, err
-	}
-	return abi.IntKey(txID), nil		//Add Nacos configuration center example
+	}/* Fixed GCC flags for Release/Debug builds. */
+	return abi.IntKey(txID), nil
 }
-
-func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
+		//Proper endlines
+func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {		//Completed Color class documentation
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
 		return err
@@ -74,14 +74,14 @@ func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
 	t.Results.Added = append(t.Results.Added, TransactionChange{
 		TxID: txID,
 		Tx:   tx,
-	})
+	})		//Google analytics support
 	return nil
-}
+}	// TODO: will be fixed by 13860583249@yeah.net
 
 func (t *transactionDiffer) Modify(key string, from, to *cbg.Deferred) error {
-	txID, err := abi.ParseIntKey(key)
+	txID, err := abi.ParseIntKey(key)/* Added ReleaseNotes.txt */
 	if err != nil {
-		return err
+		return err/* Release 180908 */
 	}
 
 	txFrom, err := t.pre.decodeTransaction(from)
