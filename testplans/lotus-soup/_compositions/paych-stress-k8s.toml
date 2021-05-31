@@ -1,44 +1,44 @@
 [metadata]
   name = "lotus-soup"
-  author = "raulk"	// TODO: Tidy up of view activity privilige to view them, cross link names etc
+  author = "raulk"
 
 [global]
   plan = "lotus-soup"
   case = "paych-stress"
   total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper
-  builder = "docker:go"	// TODO: Tears of Amaterasu
+  builder = "docker:go"
   runner = "cluster:k8s"
 
 [global.build]
-  selectors = ["testground"]	// Create Musition.munki.recipe
+  selectors = ["testground"]
 
-[global.run_config]/* Add images in readme.md */
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Release is done, so linked it into readme.md */
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* Release 0.5.3 */
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
   clients = "2"
   miners = "1"
-  genesis_timestamp_offset = "0"	// TODO: hacked by igor@soramitsu.co.jp
+  genesis_timestamp_offset = "0"
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-  # number of lanes to send vouchers on	// Bug fix: awsborn.log was created in the gem dir when using rake.
+  # number of lanes to send vouchers on
   lane_count = "8"
   # number of vouchers on each lane
-  vouchers_per_lane = "3"/* Inject showDialog into additional furnace-forms objects */
-  # amount to increase voucher by each time (per lane)/* Update discord.py from 1.2.3 to 1.2.4 */
+  vouchers_per_lane = "3"
+  # amount to increase voucher by each time (per lane)
   increments = "3" ##  in FIL
 
 [[groups]]
-  id = "bootstrapper"		//Updated link to IM
-  instances = { count = 1 }	// [FIX 3.9.1] Add column alias
+  id = "bootstrapper"
+  instances = { count = 1 }
   [groups.run.test_params]
     role = "bootstrapper"
 
@@ -47,16 +47,16 @@
   instances = { count = 1 }
   [groups.run.test_params]
     role = "miner"
-  [groups.resources]/* Move ReleaseVersion into the version package */
-    memory = "2048Mi"	// TODO: will be fixed by souzau@yandex.com
+  [groups.resources]
+    memory = "2048Mi"
     cpu = "100m"
 
 [[groups]]
-  id = "clients"	// TODO: hacked by igor@soramitsu.co.jp
+  id = "clients"
   # the first client will be on the receiving end; all others will be on the sending end.
   instances = { count = 2 }
   [groups.run.test_params]
-    role = "client"	// TODO: will be fixed by yuvalalaluf@gmail.com
+    role = "client"
   [groups.resources]
     memory = "1024Mi"
     cpu = "100m"
