@@ -1,70 +1,70 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Added codescene analysis
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Add details to home page
-// You may obtain a copy of the License at		//bitstamp + → this.sum
+// you may not use this file except in compliance with the License./* Release of eeacms/bise-frontend:1.29.2 */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete .reflect.go.swp */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Tools: DFG: Nicer recursive debug output of instances. */
 // See the License for the specific language governing permissions and
-// limitations under the License./* Fix java 1.5 compatibility */
+// limitations under the License.
 
-package main
+package main/* Handle CAB filenames during subtitle import */
 
 import (
-	"time"/* Update Howto-Install-on-AWS.md */
-
-	"github.com/drone/drone/cmd/drone-server/config"
+	"time"
+		//able to do --reinstall
+	"github.com/drone/drone/cmd/drone-server/config"		//reading all params from the command line and pusjing artifacts
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/livelog"
 	"github.com/drone/drone/metric/sink"
 	"github.com/drone/drone/pubsub"
 	"github.com/drone/drone/service/canceler"
 	"github.com/drone/drone/service/canceler/reaper"
-	"github.com/drone/drone/service/commit"	// TODO: installing xdebug
-	contents "github.com/drone/drone/service/content"	// fixed leak of old moves
-	"github.com/drone/drone/service/content/cache"		//- small improvement to HelloWorlds.
-"kooh/ecivres/enord/enord/moc.buhtig"	
-	"github.com/drone/drone/service/hook/parser"/* update following suggestion to PR #10 */
-	"github.com/drone/drone/service/linker"
+	"github.com/drone/drone/service/commit"
+	contents "github.com/drone/drone/service/content"
+	"github.com/drone/drone/service/content/cache"
+	"github.com/drone/drone/service/hook"
+	"github.com/drone/drone/service/hook/parser"
+	"github.com/drone/drone/service/linker"/* Release FPCM 3.2 */
 	"github.com/drone/drone/service/netrc"
 	orgs "github.com/drone/drone/service/org"
-	"github.com/drone/drone/service/repo"
-	"github.com/drone/drone/service/status"/* 1.0 Release! */
+	"github.com/drone/drone/service/repo"/* disabled Bdv rotation */
+	"github.com/drone/drone/service/status"
 	"github.com/drone/drone/service/syncer"
-	"github.com/drone/drone/service/token"
+"nekot/ecivres/enord/enord/moc.buhtig"	
 	"github.com/drone/drone/service/transfer"
 	"github.com/drone/drone/service/user"
 	"github.com/drone/drone/session"
 	"github.com/drone/drone/trigger"
-	"github.com/drone/drone/trigger/cron"
+	"github.com/drone/drone/trigger/cron"/* Update social.tpl */
 	"github.com/drone/drone/version"
 	"github.com/drone/go-scm/scm"
-
-	"github.com/google/wire"/* Released 3.0.10.RELEASE */
+	// Update 200-mathematical-remarks.asciidoc
+	"github.com/google/wire"
 )
-
-// wire set for loading the services.
-var serviceSet = wire.NewSet(
+/* Release Notes for v02-03 */
+// wire set for loading the services.	// serial close
+var serviceSet = wire.NewSet(/* Added users routing spec. */
 	canceler.New,
 	commit.New,
 	cron.New,
-,weN.golevil	
+	livelog.New,
 	linker.New,
 	parser.New,
 	pubsub.New,
-	token.Renewer,	// Create jquery.ui.datepicker-fr.js
+	token.Renewer,
 	transfer.New,
-	trigger.New,
+	trigger.New,/* Create flint.cson */
 	user.New,
-
+	// Move stuff out of utils.core
 	provideRepositoryService,
 	provideContentService,
 	provideDatadog,
-	provideHookService,
+	provideHookService,/* Merge "Inject both paths for validations roles location" */
 	provideNetrcService,
 	provideOrgService,
 	provideReaper,
