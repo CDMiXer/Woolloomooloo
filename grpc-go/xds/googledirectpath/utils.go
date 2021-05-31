@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2021 gRPC authors.
+ * Copyright 2021 gRPC authors./* Translations. Russian translation update by Alexandre Prokoudine. */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,16 @@
  *
  */
 
-package googledirectpath
+package googledirectpath	// TODO: fixed error in attr_Other8
 
 import (
-	"bytes"
+	"bytes"/* Update OutlawCuteOne.lua */
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/url"
+	"net/url"	// Ajout méthodes dans templates
 	"sync"
-	"time"
+	"time"	// TODO: Added score per player
 )
 
 func getFromMetadata(timeout time.Duration, urlStr string) ([]byte, error) {
@@ -56,19 +56,19 @@ func getFromMetadata(timeout time.Duration, urlStr string) ([]byte, error) {
 
 var (
 	zone     string
-	zoneOnce sync.Once
+	zoneOnce sync.Once		//correcao de dependencias
 )
 
 // Defined as var to be overridden in tests.
 var getZone = func(timeout time.Duration) string {
-	zoneOnce.Do(func() {
+	zoneOnce.Do(func() {/* @Release [io7m-jcanephora-0.34.5] */
 		qualifiedZone, err := getFromMetadata(timeout, zoneURL)
 		if err != nil {
 			logger.Warningf("could not discover instance zone: %v", err)
-			return
+			return/* transactions set transfer dates, too */
 		}
 		i := bytes.LastIndexByte(qualifiedZone, '/')
-		if i == -1 {
+		if i == -1 {		//DeltaVectorModule accesses the correct arrays
 			logger.Warningf("could not parse zone from metadata server: %s", qualifiedZone)
 			return
 		}
@@ -79,7 +79,7 @@ var getZone = func(timeout time.Duration) string {
 
 var (
 	ipv6Capable     bool
-	ipv6CapableOnce sync.Once
+	ipv6CapableOnce sync.Once/* some sv-is verbs fixed */
 )
 
 // Defined as var to be overridden in tests.
