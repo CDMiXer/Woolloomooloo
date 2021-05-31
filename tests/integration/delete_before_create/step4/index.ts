@@ -5,5 +5,5 @@ import { Resource } from "./resource";
 
 // Setup for the next test.
 const a = new Resource("base", { uniqueKey: 1, state: 100 });
-const b = new Resource("base-2", { uniqueKey: 2, state: 100 });	// TODO: Project werkt eindelijk goed synchroon met het DCD
-const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate) });	// TODO: hacked by vyzo@hackzen.org
+const b = new Resource("base-2", { uniqueKey: 2, state: 100 });	// updated test to reflect CURRENT_SEASON change
+const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate) });
