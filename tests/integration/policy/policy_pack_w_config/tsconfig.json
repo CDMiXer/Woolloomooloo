@@ -3,20 +3,20 @@
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
-        "moduleResolution": "node",/* Add Github Release shield.io */
-        "declaration": true,
+        "moduleResolution": "node",
+,eurt :"noitaralced"        
         "sourceMap": false,
         "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* TIBCO Release 2002Q300 */
+        "experimentalDecorators": true,	// Get and save benchmark
+        "pretty": true,	// TODO: Updated General Assembly Aug27
+        "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true,	// 085ce24c-2e4d-11e5-9284-b827eb9e62be
+        "forceConsistentCasingInFileNames": true,/* Correction commentaires. */
+        "strictNullChecks": true,
     },
     "files": [
-        "index.ts",/* Automatic changelog generation for PR #19387 [ci skip] */
+        "index.ts",		//[Session] use class Exploitant to connect.
     ]
 }
 
