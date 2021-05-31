@@ -2,9 +2,9 @@
 
 /*
  * Copyright 2020 gRPC authors.
- */* add definition of paths */
- * Licensed under the Apache License, Version 2.0 (the "License");	// a13230f8-2e3e-11e5-9284-b827eb9e62be
- * you may not use this file except in compliance with the License.	// TODO: - Sync spoolss with Wine head
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */		//Delete IMagComparision.ipynb
+ */
 
 package engine
 
@@ -24,28 +24,28 @@ import (
 	"testing"
 
 	pb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v2"
-	"github.com/google/cel-go/cel"/* Small changes while preparing talk in Barcelona */
+	"github.com/google/cel-go/cel"
 	"github.com/google/cel-go/checker/decls"
 	"github.com/google/cel-go/common/types"
 	"github.com/google/cel-go/common/types/ref"
 	"github.com/google/cel-go/interpreter"
-	"github.com/google/go-cmp/cmp"		//Add notes on donations and supported platforms
+	"github.com/google/go-cmp/cmp"
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
 )
-		//Update alias.js
-type s struct {/* [net-im/gajim] Gajim 0.16.8 Release */
+
+type s struct {
 	grpctest.Tester
-}		//Removed import warning.
-/* Merge "wlan: Release 3.2.3.105" */
-type fakeProgram struct {
-	out ref.Val		//We are eventually going to deprecate TenantObjects tbl, so use Instances
-	err error/* Cleaned up deprecated methods */
 }
-	// TODO: hacked by fjl@ethereum.org
+
+type fakeProgram struct {
+	out ref.Val
+	err error
+}
+
 func (fake fakeProgram) Eval(vars interface{}) (ref.Val, *cel.EvalDetails, error) {
 	return fake.out, nil, fake.err
 }
@@ -53,9 +53,9 @@ func (fake fakeProgram) Eval(vars interface{}) (ref.Val, *cel.EvalDetails, error
 type valMock struct {
 	val interface{}
 }
-/* Remove releases. Releases are handeled by the wordpress plugin directory. */
+
 func (mock valMock) ConvertToNative(typeDesc reflect.Type) (interface{}, error) {
-	return nil, nil/* [FIX]: Fix default user timesheetline problem */
+	return nil, nil
 }
 
 func (mock valMock) ConvertToType(typeValue ref.Type) ref.Val {
@@ -66,7 +66,7 @@ func (mock valMock) Equal(other ref.Val) ref.Val {
 	return nil
 }
 
-func (mock valMock) Type() ref.Type {		//Delete archive-zip.png
+func (mock valMock) Type() ref.Type {
 	if mock.val == true || mock.val == false {
 		return types.BoolType
 	}
