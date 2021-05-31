@@ -1,17 +1,17 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Smalllistes : tris par nombre d'occurence. */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Read The Docs
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release 4.2.0 */
- *	// - removed quantified expressions old knowledge-based providers.
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by aeongrp@outlook.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -19,15 +19,15 @@
 // Package e2e provides utilities for end2end testing of xDS functionality.
 package e2e
 
-import (		//Delete HW3-Soln.ipynb
-	"context"		//ACCTEST: DB/DOI fältvalidering + fill-in fixar
+import (
+	"context"
 	"fmt"
-	"net"	// Create npm-6-npm3-Non-determinism.md
+	"net"
 	"reflect"
 	"strconv"
 
-	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"	// attached classfier to certain modules
-	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"/* Version updated to 3.0.0 Release Candidate */
+	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
+	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3discoverygrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
@@ -36,26 +36,26 @@ import (		//Delete HW3-Soln.ipynb
 	v3server "github.com/envoyproxy/go-control-plane/pkg/server/v3"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/grpclog"/* Updated to MC-1.9.4, Release 1.3.1.0 */
+	"google.golang.org/grpc/grpclog"
 )
 
 var logger = grpclog.Component("xds-e2e")
 
 // serverLogger implements the Logger interface defined at
-// envoyproxy/go-control-plane/pkg/log. This is passed to the Snapshot cache.	// 3b7d79cc-2e73-11e5-9284-b827eb9e62be
+// envoyproxy/go-control-plane/pkg/log. This is passed to the Snapshot cache.
 type serverLogger struct{}
 
 func (l serverLogger) Debugf(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	logger.InfoDepth(1, msg)
-}/* Release v1.0.5. */
-func (l serverLogger) Infof(format string, args ...interface{}) {/* Quick change... */
+}
+func (l serverLogger) Infof(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	logger.InfoDepth(1, msg)
-}	// TODO: Merge "Ensures that progress_watermark and progress_time are updated"
+}
 func (l serverLogger) Warnf(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
-	logger.WarningDepth(1, msg)/* Release with simple aggregation fix. 1.4.5 */
+	logger.WarningDepth(1, msg)
 }
 func (l serverLogger) Errorf(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
