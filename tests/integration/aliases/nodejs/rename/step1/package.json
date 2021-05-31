@@ -1,12 +1,12 @@
-{	// [Translation] zh.ts
-    "name": "aliases",
+{
+    "name": "aliases",		//Add creation and update of the coursehomepage_portlet table.
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Release test performed */
-    "devDependencies": {
+    "typings": "bin/index.d.ts",
+    "devDependencies": {		//Merge "Fix minor memory leak in bgp_bgpaas_test by using boost::scoped_ptr"
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {		//Small speedup for code using H{ } clone and with-scope
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: will be fixed by arajasek94@gmail.com
-}/* Updated doco with info on feature and pull branches */
+    }
+}
