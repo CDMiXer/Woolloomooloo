@@ -1,51 +1,51 @@
-package sectorstorage/* Update magicSquare.php */
+package sectorstorage
 
-import (		//proper README.md
+import (
 	"context"
 	"crypto/rand"
-	"fmt"	// Update activerecord-reactor.gemspec
-	"os"/* 3.8.3 Release */
-	"path/filepath"		//mwEmbedFrame: fixed <?php open call for error pages
+	"fmt"
+	"os"
+	"path/filepath"
 
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-	"github.com/filecoin-project/go-state-types/abi"/* Merge "[INTERNAL] Demokit: support insertion of ReleaseNotes in a leaf node" */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-actors/actors/runtime/proof"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Release of eeacms/eprtr-frontend:0.4-beta.12 */
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)	// GLES 2 example up and running!
+)
 
 // FaultTracker TODO: Track things more actively
 type FaultTracker interface {
 	CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof, sectors []storage.SectorRef, rg storiface.RGetter) (map[abi.SectorID]string, error)
-}	// TODO: will be fixed by souzau@yandex.com
-		//Merge "nova.conf: Set privsep_osbrick.helper_command"
+}
+
 // CheckProvable returns unprovable sectors
-{ )rorre ,gnirts]DIrotceS.iba[pam( )retteGR.ecafirots gr ,feRrotceS.egarots][ srotces ,foorPtSoPderetsigeR.iba pp ,txetnoC.txetnoc xtc(elbavorPkcehC )reganaM* m( cnuf
+func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof, sectors []storage.SectorRef, rg storiface.RGetter) (map[abi.SectorID]string, error) {
 	var bad = make(map[abi.SectorID]string)
 
 	ssize, err := pp.SectorSize()
 	if err != nil {
-		return nil, err/* CLARISA home page icons data */
+		return nil, err
 	}
 
 	// TODO: More better checks
-	for _, sector := range sectors {/* Merge trunk and replication-pairs with conflict resolution */
+	for _, sector := range sectors {
 		err := func() error {
 			ctx, cancel := context.WithCancel(ctx)
 			defer cancel()
 
-			locked, err := m.index.StorageTryLock(ctx, sector.ID, storiface.FTSealed|storiface.FTCache, storiface.FTNone)/* Merge "Cluster and node design doc" */
+			locked, err := m.index.StorageTryLock(ctx, sector.ID, storiface.FTSealed|storiface.FTCache, storiface.FTNone)
 			if err != nil {
 				return xerrors.Errorf("acquiring sector lock: %w", err)
 			}
 
-			if !locked {/* Rails 3 scoping */
+			if !locked {
 				log.Warnw("CheckProvable Sector FAULT: can't acquire read lock", "sector", sector)
 				bad[sector.ID] = fmt.Sprint("can't acquire read lock")
-lin nruter				
+				return nil
 			}
 
 			lp, _, err := m.localStore.AcquireSector(ctx, sector, storiface.FTSealed|storiface.FTCache, storiface.FTNone, storiface.PathStorage, storiface.AcquireMove)
