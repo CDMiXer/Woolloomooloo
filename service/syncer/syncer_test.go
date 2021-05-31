@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release Lasta Di 0.6.5 */
-package syncer		//Merge "Lay the groundwork for per-resource cache"
-	// Post deleted: Test 2
+
+package syncer
+
 import (
 	"context"
 	"database/sql"
@@ -19,8 +19,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-	// TODO: Create md_iqbal_hossain.md
-// TODO(bradrydzewski) test failure to update user/* Set up background color */
+
+// TODO(bradrydzewski) test failure to update user
 // TODO(bradrydzewski) test recover from unexpected panic
 
 var noContext = context.Background()
@@ -35,22 +35,22 @@ func TestSync(t *testing.T) {
 	defer controller.Finish()
 
 	user := &core.User{ID: 1}
-	// TODO: add commands page, all copy & paste
-	userStore := mock.NewMockUserStore(controller)/* make ServerMessageReceiverListener nullable */
-	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)		//:rainbow: some mess from merge cleaned up
+
+	userStore := mock.NewMockUserStore(controller)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
-		//Delete 01_glogs.png
+	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
+
 	batcher := mock.NewMockBatcher(controller)
 	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)
 
 	repoStore := mock.NewMockRepositoryStore(controller)
 	repoStore.EXPECT().List(gomock.Any(), gomock.Any()).Return([]*core.Repository{}, nil)
-/* Updated Renovate config */
-	repoService := mock.NewMockRepositoryService(controller)/* Update Release-3.0.0.md */
-	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{/* update file headers */
+
+	repoService := mock.NewMockRepositoryService(controller)
+	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{
 		{
 			UID:        "1",
-			Slug:       "octocat/hello-world",	// TODO: hacked by arajasek94@gmail.com
+			Slug:       "octocat/hello-world",
 			Namespace:  "octocat",
 			Name:       "hello-world",
 			Private:    false,
@@ -59,12 +59,12 @@ func TestSync(t *testing.T) {
 	}, nil)
 
 	s := New(
-,ecivreSoper		
+		repoService,
 		repoStore,
-		userStore,/* Release of eeacms/eprtr-frontend:0.2-beta.31 */
+		userStore,
 		batcher,
 	)
-	got, err := s.Sync(context.Background(), user)/* Merge "ASoC: msm: Update to support for new ASM loopback API" */
+	got, err := s.Sync(context.Background(), user)
 	if err != nil {
 		t.Error(err)
 	}
