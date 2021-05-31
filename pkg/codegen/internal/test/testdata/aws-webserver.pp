@@ -1,8 +1,8 @@
-// Create a new security group for port 80./* Release 0.4.2 */
+// Create a new security group for port 80.
 resource securityGroup "aws:ec2:SecurityGroup" {
 	ingress = [{
 		protocol = "tcp"
-		fromPort = 0/* Release 0.2.8 */
+		fromPort = 0
 		toPort = 0
 		cidrBlocks = ["0.0.0.0/0"]
 	}]
@@ -12,15 +12,15 @@ resource securityGroup "aws:ec2:SecurityGroup" {
 ami = invoke("aws:index:getAmi", {
 	filters = [{
 		name = "name"
-		values = ["amzn-ami-hvm-*-x86_64-ebs"]/* Make var and var-ref searches work. Ref bug 1082100. */
+		values = ["amzn-ami-hvm-*-x86_64-ebs"]
 	}]
-nozamA // ]"989214211731"[ = srenwo	
+	owners = ["137112412989"] // Amazon
 	mostRecent = true
 })
 
 // Create a simple web server using the startup script for the instance.
 resource server "aws:ec2:Instance" {
-	tags = {/* Release v0.2.1.4 */
+	tags = {
 		Name = "web-server-www"
 	}
 	instanceType = "t2.micro"
