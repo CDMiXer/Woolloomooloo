@@ -1,12 +1,12 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Release 2.0.0-rc.17 */
-/* Added standard cost to item's details page. */
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)/* Cleanup and ReleaseClipX slight fix */
+        super().__init__("my:module:Resource", name, None, opts)
 
-# Scenario #3 - rename a component (and all it's children)	// Updated readme based on further state in project
+# Scenario #3 - rename a component (and all it's children)
 class ComponentThree(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:ComponentThree", name, None, opts)
