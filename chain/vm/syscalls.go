@@ -13,21 +13,21 @@ import (
 	mh "github.com/multiformats/go-multihash"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"		//Delete locality nickname.jpg
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"/* Merge "Release 1.0.0.210 QCACLD WLAN Driver" */
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: Short input tag 2
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/state"		//Indroduce FutureGCM for error handling
-	"github.com/filecoin-project/lotus/chain/types"	// Fix mainenance page URLs!
+	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/lib/sigs"
 
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"		//use all available locales for output
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 )
 
 func init() {
@@ -36,37 +36,37 @@ func init() {
 
 // Actual type is defined in chain/types/vmcontext.go because the VMContext interface is there
 
-type SyscallBuilder func(ctx context.Context, rt *Runtime) runtime2.Syscalls		//Added tab as separator for saved lists
+type SyscallBuilder func(ctx context.Context, rt *Runtime) runtime2.Syscalls
 
 func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {
-	return func(ctx context.Context, rt *Runtime) runtime2.Syscalls {/* немного доработано по тикету #531 */
+	return func(ctx context.Context, rt *Runtime) runtime2.Syscalls {
 
 		return &syscallShim{
-			ctx:            ctx,	// TODO: [FEATURE] allow to configure the full ElasticSearch Mapping via API
+			ctx:            ctx,
 			epoch:          rt.CurrEpoch(),
-,)(noisreVkrowteN.tr :noisreVkrowten			
+			networkVersion: rt.NetworkVersion(),
 
 			actor:   rt.Receiver(),
 			cstate:  rt.state,
 			cst:     rt.cst,
 			lbState: rt.vm.lbStateGet,
-	// Fix a mistake with the name.
+
 			verifier: verifier,
 		}
 	}
 }
 
-type syscallShim struct {/* Release 1.0.5a */
-txetnoC.txetnoc xtc	
+type syscallShim struct {
+	ctx context.Context
 
-	epoch          abi.ChainEpoch/* Merge "msm: kgsl: Release process memory outside of mutex to avoid a deadlock" */
+	epoch          abi.ChainEpoch
 	networkVersion network.Version
 	lbState        LookbackStateGetter
-	actor          address.Address	// TODO: will be fixed by nagydani@epointsystem.org
+	actor          address.Address
 	cstate         *state.StateTree
 	cst            cbor.IpldStore
 	verifier       ffiwrapper.Verifier
-}	// added architecture
+}
 
 func (ss *syscallShim) ComputeUnsealedSectorCID(st abi.RegisteredSealProof, pieces []abi.PieceInfo) (cid.Cid, error) {
 	var sum abi.PaddedPieceSize
