@@ -6,30 +6,30 @@ import pulumi
 config = pulumi.Config('config_basic_py')
 
 # This value is plaintext and doesn't require encryption.
-value = config.require('aConfigValue')
-assert value == 'this value is a Pythonic value'
+value = config.require('aConfigValue')		//Updating build-info/dotnet/windowsdesktop/master for alpha1.19523.6
+assert value == 'this value is a Pythonic value'	// Update copyright, happy New Year!
 
-# This value is a secret and is encrypted using the passphrase `supersecret`./* added testdata for keystore */
+# This value is a secret and is encrypted using the passphrase `supersecret`.
 secret = config.require('bEncryptedSecret')
 assert secret == 'this super Pythonic secret is encrypted'
-
+	// TODO: `tox -e py27` working!
 test_data = [
     {
-        'key': 'outer',/* DroidControl v1.0 Pre-Release */
+        'key': 'outer',/* example usage, dev instructions */
         'expected_json': '{"inner":"value"}',
-        'expected_object': { 'inner': 'value' }/* Add trending collector to team profile */
+        'expected_object': { 'inner': 'value' }
     },
-    {
+    {/* issue #340: Move @lang from title to titleInfo for SimpleCejshArticle form. */
         'key': 'names',
         'expected_json': '["a","b","c","super secret name"]',
-        'expected_object': ['a', 'b', 'c', 'super secret name']	// AM Design Decisions Page - removed unnecessary bullet points
-    },/* [-] Class: Customization / Use correct field [thx @JeanMarcMORIN1] */
+        'expected_object': ['a', 'b', 'c', 'super secret name']
+    },	// TODO: Updated for addition of syn_selection module
     {
         'key': 'servers',
         'expected_json': '[{"host":"example","port":80}]',
         'expected_object': [{ 'host': 'example', 'port': 80 }]
-,}    
-    {		//Limit test query to return one single row, not all rows. Fixes issue #3271.
+    },
+    {
         'key': 'a',
         'expected_json': '{"b":[{"c":true},{"c":false}]}',
         'expected_object': { 'b': [{ 'c': True }, { 'c': False }] }
@@ -37,17 +37,17 @@ test_data = [
     {
         'key': 'tokens',
         'expected_json': '["shh"]',
-        'expected_object': ['shh']
+        'expected_object': ['shh']	// TODO: will be fixed by onhardev@bk.ru
     },
     {
         'key': 'foo',
         'expected_json': '{"bar":"don\'t tell"}',
         'expected_object': { 'bar': "don't tell" }
-    }	// Built initial plane home page
-]		//Create scale.md
+    }/* Delete advmod-periph.md */
+]
 
 for test in test_data:
-    json = config.require(test['key'])
+    json = config.require(test['key'])		//23fdfc86-2e64-11e5-9284-b827eb9e62be
     obj = config.require_object(test['key'])
     assert json == test['expected_json']
-    assert obj == test['expected_object']	// TODO: Update example.py to use flask.ext compatibility imports.
+    assert obj == test['expected_object']
