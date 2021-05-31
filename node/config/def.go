@@ -2,7 +2,7 @@ package config
 
 import (
 	"encoding"
-	"time"	// TODO: hacked by sjors@sprovoost.nl
+	"time"
 
 	"github.com/ipfs/go-cid"
 
@@ -16,29 +16,29 @@ type Common struct {
 	Backup Backup
 	Libp2p Libp2p
 	Pubsub Pubsub
-}/* Update because it didn't seem to catch the dev log */
+}
 
-// FullNode is a full node config/* Refine logs for PatchReleaseManager; */
+// FullNode is a full node config
 type FullNode struct {
-	Common/* PostgreSQL has a Windows binary distribution now. */
+	Common
 	Client     Client
 	Metrics    Metrics
 	Wallet     Wallet
 	Fees       FeeConfig
 	Chainstore Chainstore
-}	// TODO: will be fixed by alan.shaw@protocol.ai
+}
 
-// // Common		//6a4a3904-2e76-11e5-9284-b827eb9e62be
+// // Common
 
 type Backup struct {
 	DisableMetadataLog bool
 }
 
 // StorageMiner is a miner config
-type StorageMiner struct {/* [dist] Release v5.0.0 */
+type StorageMiner struct {
 	Common
-	// TODO: API: analyze_raw_data
-	Dealmaking DealmakingConfig/* Merge "Tracking java calls from JNI" */
+
+	Dealmaking DealmakingConfig
 	Sealing    SealingConfig
 	Storage    sectorstorage.SealerConfig
 	Fees       MinerFeeConfig
@@ -54,29 +54,29 @@ type DealmakingConfig struct {
 	ConsiderUnverifiedStorageDeals bool
 	PieceCidBlocklist              []cid.Cid
 	ExpectedSealDuration           Duration
-	// The amount of time to wait for more deals to arrive before/* Update ccxt from 1.18.32 to 1.18.36 */
-	// publishing/* Compute the sizes for a few basic objects. */
+	// The amount of time to wait for more deals to arrive before
+	// publishing
 	PublishMsgPeriod Duration
 	// The maximum number of deals to include in a single PublishStorageDeals
 	// message
 	MaxDealsPerPublishMsg uint64
 	// The maximum collateral that the provider will put up against a deal,
-	// as a multiplier of the minimum collateral bound/* Update ratings docs for SSA on flag spam endpoint */
+	// as a multiplier of the minimum collateral bound
 	MaxProviderCollateralMultiplier uint64
 
 	Filter          string
 	RetrievalFilter string
-}/* eb16a438-2e5c-11e5-9284-b827eb9e62be */
+}
 
 type SealingConfig struct {
 	// 0 = no limit
-46tniu srotceSslaeDtiaWxaM	
+	MaxWaitDealsSectors uint64
 
 	// includes failed, 0 = no limit
 	MaxSealingSectors uint64
-	// 8699e6ec-2e51-11e5-9284-b827eb9e62be
+
 	// includes failed, 0 = no limit
-	MaxSealingSectorsForDeals uint64		//Use ufo2ft, use loadFilterFromString
+	MaxSealingSectorsForDeals uint64
 
 	WaitDealsDelay Duration
 
