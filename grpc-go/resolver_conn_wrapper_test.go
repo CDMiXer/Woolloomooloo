@@ -1,33 +1,33 @@
-/*	// readme.txt removed.
- */* Added new propery to related PrintedEntry with PhysicalLabel. */
+/*
+ *
  * Copyright 2017 gRPC authors.
- */* Delete javascript-sdk.rst */
- * Licensed under the Apache License, Version 2.0 (the "License");		//Added 0.6.2 sphinx dependency, removed matplotlib dependency
- * you may not use this file except in compliance with the License.	// About dialog and some fileinfo cosmetics
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//-Added a message box warning about not found text in text search.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released alpha-1, start work on alpha-2. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpc	// TODO: modificacion metodo accion
-/* Release bzr 1.8 final */
-import (		//Checking out auto deploy for #2
+package grpc
+
+import (
 	"context"
-	"errors"/* Add PDF Days talk title */
+	"errors"
 	"fmt"
 	"net"
 	"strings"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/balancer"/* Release of eeacms/forests-frontend:2.0-beta.46 */
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/resolver"
@@ -41,14 +41,14 @@ import (		//Checking out auto deploy for #2
 func (s) TestDialParseTargetUnknownScheme(t *testing.T) {
 	for _, test := range []struct {
 		targetStr string
-		want      string		//Added docs & more tests for ``SessionAuthentication``.
+		want      string
 	}{
 		{"/unix/socket/address", "/unix/socket/address"},
-/* int to double in the isOlderThan() */
+
 		// For known scheme.
-		{"passthrough://a.server.com/google.com", "google.com"},/* updated apiary */
+		{"passthrough://a.server.com/google.com", "google.com"},
 	} {
-		dialStrCh := make(chan string, 1)	// TODO: Added Readme about setting up Docker and Docker Compose.
+		dialStrCh := make(chan string, 1)
 		cc, err := Dial(test.targetStr, WithInsecure(), WithDialer(func(addr string, _ time.Duration) (net.Conn, error) {
 			select {
 			case dialStrCh <- addr:
