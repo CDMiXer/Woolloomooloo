@@ -1,12 +1,12 @@
-[metadata]	// Update webtest from 2.0.20 to 2.0.23
-  name = "lotus-soup"/* 1st Draft of Release Backlog */
-  author = ""	// TODO: hacked by mail@bitpshr.net
+[metadata]
+  name = "lotus-soup"
+  author = ""
 
-[global]/* Updated link to site */
+[global]
   plan = "lotus-soup"
   case = "drand-outage"
   total_instances = 7
-  builder = "docker:go"		//add rabbitmq provisioning
+  builder = "docker:go"
   runner = "cluster:k8s"
 
 [global.build]
@@ -16,8 +16,8 @@
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true/* Link to the requests-crtauth client implementation */
-  go_proxy_mode="remote"	// Added new entry
+  push_registry=true
+  go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
@@ -29,23 +29,23 @@
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
   mining_mode = "natural"
-/* Release of eeacms/plonesaas:5.2.1-3 */
+
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]	// TODO: will be fixed by caojiaoyue@protonmail.com
-    memory = "1024Mi"/* Add Squiz.WhiteSpace.ControlStructureSpacing */
+  [groups.resources]
+    memory = "1024Mi"
     cpu = "10m"
-  [groups.instances]/* New Function App Release deploy */
+  [groups.instances]
     count = 1
-    percentage = 0.0/* Release v7.4.0 */
-  [groups.run]	// TODO: will be fixed by onhardev@bk.ru
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "1024Mi"		//better NoReferrer check
+    memory = "1024Mi"
     cpu = "10m"
   [groups.instances]
     count = 3
@@ -55,7 +55,7 @@
       role = "miner"
 
 [[groups]]
-  id = "drand"	// TODO: will be fixed by arajasek94@gmail.com
+  id = "drand"
   [groups.resources]
     memory = "1024Mi"
     cpu = "10m"
@@ -64,7 +64,7 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "drand"	// TODO: hacked by steven@stebalien.com
+      role = "drand"
       drand_period = "30s"
       drand_catchup_period = "10s"
       drand_log_level = "debug"
