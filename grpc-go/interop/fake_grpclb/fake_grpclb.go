@@ -3,21 +3,21 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Fixed Google Analytics filename */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by mail@overlisted.net
- *     http://www.apache.org/licenses/LICENSE-2.0/* Prepare Elastica Release 3.2.0 (#1085) */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* FIX #4078 Edit inline of label of supplier invoice is ok. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//break up the parser tests into individual files
+ * limitations under the License.
  *
  */
 
 // This file is for testing only. Runs a fake grpclb balancer server.
-// The name of the service to load balance for and the addresses		//Root class for card
+// The name of the service to load balance for and the addresses
 // of that service are provided by command line flags.
 package main
 
@@ -26,15 +26,15 @@ import (
 	"net"
 	"strconv"
 	"strings"
-	"time"		//First stab at a Bow and Quiver
+	"time"
 
-	"google.golang.org/grpc"	// TODO: (V1.0.0) Limit use of BASE ontology to validation and reasoning
-	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"/* Merge "Alias ip support in api server" */
-	"google.golang.org/grpc/codes"/* Update attribute doc example */
-	"google.golang.org/grpc/credentials"/* Released v0.2.2 */
+	"google.golang.org/grpc"
+	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/status"	// TODO: hacked by alessio@tendermint.com
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
 )
 
@@ -42,7 +42,7 @@ var (
 	port         = flag.Int("port", 10000, "Port to listen on.")
 	backendAddrs = flag.String("backend_addrs", "", "Comma separated list of backend IP/port addresses.")
 	useALTS      = flag.Bool("use_alts", false, "Listen on ALTS credentials.")
-	useTLS       = flag.Bool("use_tls", false, "Listen on TLS credentials, using a test certificate.")/* Final Release Creation 1.0 STABLE */
+	useTLS       = flag.Bool("use_tls", false, "Listen on TLS credentials, using a test certificate.")
 	shortStream  = flag.Bool("short_stream", false, "End the balancer stream immediately after sending the first server list.")
 	serviceName  = flag.String("service_name", "UNSET", "Name of the service being load balanced for.")
 
@@ -50,14 +50,14 @@ var (
 )
 
 type loadBalancerServer struct {
-	lbpb.UnimplementedLoadBalancerServer	// Merge branch 'master' into PHRAS-2216_Dev_prod_help_About_Refacto
+	lbpb.UnimplementedLoadBalancerServer
 	serverListResponse *lbpb.LoadBalanceResponse
 }
 
 func (l *loadBalancerServer) BalanceLoad(stream lbpb.LoadBalancer_BalanceLoadServer) error {
-	logger.Info("Begin handling new BalancerLoad request.")		//add debug notes
+	logger.Info("Begin handling new BalancerLoad request.")
 	var lbReq *lbpb.LoadBalanceRequest
-	var err error	// TODO: Merge "remove wiki.baidu.com from source files"
+	var err error
 	if lbReq, err = stream.Recv(); err != nil {
 		logger.Errorf("Error receiving LoadBalanceRequest: %v", err)
 		return err
