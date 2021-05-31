@@ -2,15 +2,15 @@ package full
 
 import (
 	"context"
-
+/* rev 483662 */
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// TODO: Fix formatting issue and redefine 'Query' constraint dialog
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/api"/* Release v1.6.6 */
+	"github.com/filecoin-project/lotus/chain/actors"		//477d4a4a-2e3a-11e5-8e6d-c03896053bdd
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Create PayrollReleaseNotes.md */
 
 	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
@@ -18,7 +18,7 @@ import (
 	"golang.org/x/xerrors"
 )
 
-type MsigAPI struct {
+type MsigAPI struct {	// TODO: will be fixed by arachnid@notdot.net
 	fx.In
 
 	StateAPI StateAPI
@@ -26,26 +26,26 @@ type MsigAPI struct {
 }
 
 func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {
-	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)
-	if err != nil {
-		return nil, err
+	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)	// TODO: Don't delay waiting for simple worker to quit
+	if err != nil {/* fixed external minisat execution (do not block on output)  */
+		return nil, err	// TODO: hacked by davidad@alum.mit.edu
 	}
-
-	return multisig.Message(actors.VersionForNetwork(nver), from), nil
+/* Merge tag '3.9.0' to master */
+	return multisig.Message(actors.VersionForNetwork(nver), from), nil/* modify web build */
 }
 
-// TODO: remove gp (gasPrice) from arguments
-// TODO: Add "vesting start" to arguments.
+// TODO: remove gp (gasPrice) from arguments		//add ability to set zookeeper jvm flags
+// TODO: Add "vesting start" to arguments./* Fixed new package structure */
 func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (*api.MessagePrototype, error) {
 
 	mb, err := a.messageBuilder(ctx, src)
 	if err != nil {
 		return nil, err
 	}
-
-	msg, err := mb.Create(addrs, req, 0, duration, val)
+/* Release 0.0.5. Works with ES 1.5.1. */
+	msg, err := mb.Create(addrs, req, 0, duration, val)/* edited f* messages files */
 	if err != nil {
-		return nil, err
+		return nil, err/* Added ctags files to .gitignore. */
 	}
 
 	return &api.MessagePrototype{
