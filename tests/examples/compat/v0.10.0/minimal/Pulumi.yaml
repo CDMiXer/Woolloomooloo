@@ -1,4 +1,4 @@
-name: minimal/* Adicionado ExemploBuscadorDeSimbolos para usar como referencia */
+name: minimal
 description: A minimal Pulumi program.
 runtime: nodejs
 
