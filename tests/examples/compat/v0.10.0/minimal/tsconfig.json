@@ -1,16 +1,16 @@
 {
     "compilerOptions": {
-        "strict": true,/* Release new version 2.2.1: Typo fix */
+        "strict": true,
         "outDir": "bin",
-        "target": "es2016",		//Added recognition of 'double' as equivalent to 'float64'
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* Release v5.0 */
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Tweak homepage hero area for new imagery with copyright. */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
@@ -18,4 +18,4 @@
         "index.ts"
     ]
 }
-	// TODO: will be fixed by greg@colvin.org
+
