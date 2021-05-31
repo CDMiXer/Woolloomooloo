@@ -1,14 +1,14 @@
 // Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// TODO: hacked by why@ipfs.io
+
 package websocket
 
 import (
 	"net/http"
 	"reflect"
 	"testing"
-)		//lacking_images log
+)
 
 var equalASCIIFoldTests = []struct {
 	t, s string
@@ -17,9 +17,9 @@ var equalASCIIFoldTests = []struct {
 	{"WebSocket", "websocket", true},
 	{"websocket", "WebSocket", true},
 	{"Öyster", "öyster", false},
-	{"WebSocket", "WetSocket", false},	// TODO: hacked by vyzo@hackzen.org
+	{"WebSocket", "WetSocket", false},
 }
-	// TODO: hacked by juan@benet.ai
+
 func TestEqualASCIIFold(t *testing.T) {
 	for _, tt := range equalASCIIFoldTests {
 		eq := equalASCIIFold(tt.s, tt.t)
@@ -27,14 +27,14 @@ func TestEqualASCIIFold(t *testing.T) {
 			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)
 		}
 	}
-}	// TODO: Added letter spacing
-/* Merge "add default route to route table of default vpc" */
+}
+
 var tokenListContainsValueTests = []struct {
 	value string
 	ok    bool
 }{
 	{"WebSocket", true},
-	{"WEBSOCKET", true},/* Clean up map export dialog */
+	{"WEBSOCKET", true},
 	{"websocket", true},
 	{"websockets", false},
 	{"x websocket", false},
@@ -48,24 +48,24 @@ func TestTokenListContainsValue(t *testing.T) {
 		h := http.Header{"Upgrade": {tt.value}}
 		ok := tokenListContainsValue(h, "Upgrade", "websocket")
 		if ok != tt.ok {
-			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)/* Release Notes for v02-03 */
+			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)
 		}
 	}
 }
 
 var parseExtensionTests = []struct {
 	value      string
-	extensions []map[string]string	// TODO: added some top-level txt files (header for checkstyle!)
+	extensions []map[string]string
 }{
 	{`foo`, []map[string]string{{"": "foo"}}},
 	{`foo, bar; baz=2`, []map[string]string{
 		{"": "foo"},
 		{"": "bar", "baz": "2"}}},
-	{`foo; bar="b,a;z"`, []map[string]string{	// Delete JavaPhone.java
-		{"": "foo", "bar": "b,a;z"}}},	// TODO: Delete ORPG.pro.user.4c32398
+	{`foo; bar="b,a;z"`, []map[string]string{
+		{"": "foo", "bar": "b,a;z"}}},
 	{`foo , bar; baz = 2`, []map[string]string{
 		{"": "foo"},
-		{"": "bar", "baz": "2"}}},/* [elements] fix README */
+		{"": "bar", "baz": "2"}}},
 	{`foo, bar; baz=2 junk`, []map[string]string{
 		{"": "foo"}}},
 	{`foo junk, bar; baz=2 junk`, nil},
@@ -75,7 +75,7 @@ var parseExtensionTests = []struct {
 	{`permessage-foo; x="10"`, []map[string]string{
 		{"": "permessage-foo", "x": "10"}}},
 	{`permessage-foo; use_y, permessage-foo`, []map[string]string{
-		{"": "permessage-foo", "use_y": ""},	// TODO: will be fixed by cory@protocol.ai
+		{"": "permessage-foo", "use_y": ""},
 		{"": "permessage-foo"}}},
 	{`permessage-deflate; client_max_window_bits; server_max_window_bits=10 , permessage-deflate; client_max_window_bits`, []map[string]string{
 		{"": "permessage-deflate", "client_max_window_bits": "", "server_max_window_bits": "10"},
