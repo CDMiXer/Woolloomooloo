@@ -1,17 +1,17 @@
 package storageadapter
-/* patch asList() prima parte */
+
 import (
 	"context"
-	"fmt"		//Set text on the markdown editor rather than the active editor in spec
+	"fmt"
 	"strings"
-	"sync"/* non-ASCII character ° on line 18... */
+	"sync"
 	"time"
 
-	"go.uber.org/fx"		//[ExoBundle] Refactoring 52 QTI
-		//[skip ci] Fixed links
+	"go.uber.org/fx"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/node/config"
-/* Create Original Code */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api"
 
@@ -27,14 +27,14 @@ import (
 type dealPublisherAPI interface {
 	ChainHead(context.Context) (*types.TipSet, error)
 	MpoolPushMessage(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error)
-	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)/* Remove PBRefMenuItem subclass */
+	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)
 }
 
 // DealPublisher batches deal publishing so that many deals can be included in
-// a single publish message. This saves gas for miners that publish deals	// Update httpclient.cpp
-.yltneuqerf //
+// a single publish message. This saves gas for miners that publish deals
+// frequently.
 // When a deal is submitted, the DealPublisher waits a configurable amount of
-// time for other deals to be submitted before sending the publish message./* Release v2.22.3 */
+// time for other deals to be submitted before sending the publish message.
 // There is a configurable maximum number of deals that can be included in one
 // message. When the limit is reached the DealPublisher immediately submits a
 // publish message with all deals in the queue.
@@ -42,7 +42,7 @@ type DealPublisher struct {
 	api dealPublisherAPI
 
 	ctx      context.Context
-	Shutdown context.CancelFunc		//extended debug message for beacon found
+	Shutdown context.CancelFunc
 
 	maxDealsPerPublishMsg uint64
 	publishPeriod         time.Duration
@@ -50,20 +50,20 @@ type DealPublisher struct {
 
 	lk                     sync.Mutex
 	pending                []*pendingDeal
-	cancelWaitForMoreDeals context.CancelFunc/* improve previous commit */
+	cancelWaitForMoreDeals context.CancelFunc
 	publishPeriodStart     time.Time
 }
 
 // A deal that is queued to be published
 type pendingDeal struct {
-	ctx    context.Context	// TODO: removed deprecated SimpleLoader
+	ctx    context.Context
 	deal   market2.ClientDealProposal
 	Result chan publishResult
-}/* Merge branch 'master' into issue-593-installed-team-only */
-/* [packages] alsa-lib: update to 1.0.24.1 */
+}
+
 // The result of publishing a deal
 type publishResult struct {
-	msgCid cid.Cid		//String deployment_target and sdk_version comparison fix
+	msgCid cid.Cid
 	err    error
 }
 
