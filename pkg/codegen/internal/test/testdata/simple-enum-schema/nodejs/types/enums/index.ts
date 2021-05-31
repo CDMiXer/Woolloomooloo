@@ -2,9 +2,9 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 // Export sub-modules:
-import * as tree from "./tree";/* Agregar Funcion para calcular promedio de puntaje de unobjeto */
+import * as tree from "./tree";
 
-export {/* Released 11.3 */
+export {
     tree,
 };
 
@@ -13,7 +13,7 @@ export const ContainerBrightness = {
     One: 1,
 } as const;
 
-export type ContainerBrightness = (typeof ContainerBrightness)[keyof typeof ContainerBrightness];/* [BUGFIX] Do not allow setting headers beginning with HTTP/ */
+export type ContainerBrightness = (typeof ContainerBrightness)[keyof typeof ContainerBrightness];
 
 export const ContainerColor = {
     Red: "red",
@@ -32,10 +32,10 @@ export const ContainerSize = {
     /**
      * @deprecated Eight inch pots are no longer supported.
      */
-    EightInch: 8,/* Delete doc.meta */
+    EightInch: 8,
 } as const;
-/* Merge branch 'release/2.16.1-Release' */
-/**	// TODO: will be fixed by lexy8russo@outlook.com
+
+/**
  * plant container sizes
  */
 export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];
