@@ -1,18 +1,18 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//translation save
-
+// Use of this source code is governed by the Drone Non-Commercial License		//Added Tablename mapper
+// that can be found in the LICENSE file.
+	// TODO: hacked by igor@soramitsu.co.jp
 // +build !oss
-
+	// TODO: Update boltforms_theme_translated.twig
 package internal
-/* Remove prefix usage. Release 0.11.2. */
+
 var defaultImage = "drone/controller:1"
 
 // DefaultImage returns the default dispatch image if none
-// is specified./* Released springjdbcdao version 1.9.7 */
-func DefaultImage(image string) string {/* Release 1.0 RC1 */
+// is specified./* send X-Ubuntu-Release to the store */
+func DefaultImage(image string) string {/* Move logic for trying multiple addresses into ``DBus.Connection''. */
 	if image == "" {
 		return defaultImage
 	}
 	return image
-}
+}		//Create SF-50106_ja.md
