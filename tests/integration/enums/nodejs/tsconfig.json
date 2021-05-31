@@ -1,21 +1,21 @@
-{
-  "compilerOptions": {
+{	// refactor history
+  "compilerOptions": {/* move these files around */
     "strict": true,
-    "outDir": "bin",/* Release: Making ready to release 5.1.1 */
+    "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
-    "moduleResolution": "node",		//Add open command
+    "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,
-    "stripInternal": true,	// TODO: Tren motriz implementado
+    "sourceMap": true,		//bookmarks.md
+    "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": [
+  "files": [/* Merge "Release 5.4.0" */
     "index.ts"
   ]
 }
-/* 1e9ab296-2e75-11e5-9284-b827eb9e62be */
+
