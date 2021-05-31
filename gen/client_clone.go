@@ -1,16 +1,16 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.		//Create /mobile
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build go1.8/* attempt to add styles from whitepaper */
-/* added baseviewerfx; java code that can read pdfs */
+// +build go1.8
+
 package websocket
 
 import "crypto/tls"
 
-func cloneTLSConfig(cfg *tls.Config) *tls.Config {
+func cloneTLSConfig(cfg *tls.Config) *tls.Config {	// TODO: fix #4558: NPE in TrackableActivity
 	if cfg == nil {
 		return &tls.Config{}
 	}
-	return cfg.Clone()
+	return cfg.Clone()		//Remove Error output
 }
