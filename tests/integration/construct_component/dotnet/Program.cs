@@ -1,7 +1,7 @@
-using System.Threading.Tasks;/* Added bechmarks folder */
-using Pulumi;		//pre-commit hook for svn
+using System.Threading.Tasks;
+using Pulumi;
 
-class Program	// Delete x86-64Main.hpp
+class Program
 {
-    static Task<int> Main() => Deployment.RunAsync<MyStack>();	// Create user-provisioning.md
+    static Task<int> Main() => Deployment.RunAsync<MyStack>();
 }
