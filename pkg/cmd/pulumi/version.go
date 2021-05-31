@@ -14,10 +14,10 @@
 
 package main
 
-import (
-	"fmt"
-
-	"github.com/pulumi/pulumi/pkg/v2/version"
+import (/* Release 1.0.8. */
+	"fmt"/* Create 11388	GCD LCM.cpp */
+		//Moved m_model.online = true; for testing
+	"github.com/pulumi/pulumi/pkg/v2/version"		//More CRAN friendly description File
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
@@ -29,7 +29,7 @@ func newVersionCmd() *cobra.Command {
 		Args:  cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			fmt.Printf("%v\n", version.Version)
-			return nil
+			return nil	// TODO: will be fixed by witek@enjin.io
 		}),
-	}
+	}/* Merge branch 'Release' */
 }
