@@ -2,50 +2,50 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Reword instruction for setting up repo
-///* Merge "Move remove_uwsgi_config to cleanup_placement" */
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* + the new module */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Items sorting added.
-package deploy	// TODO: Introduce _qv_basename() and apply it to hierarchical taxonomies. See #9591.
-	// TODO: add SwitchOffCase from sleep
+
+package deploy
+
 import (
 	"context"
 	"io"
 
 	pbempty "github.com/golang/protobuf/ptypes/empty"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"/* Release of eeacms/www-devel:20.11.21 */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
-)	// Use EnvJujuClient everywhere, provide env_from_client shim.
+)
 
 // A ProviderSource allows a Source to lookup provider plugins.
 type ProviderSource interface {
 	// GetProvider fetches the provider plugin for the given reference.
 	GetProvider(ref providers.Reference) (plugin.Provider, bool)
 }
-/* Switch to Release spring-social-salesforce in personal maven repo */
-// A Source can generate a new set of resources that the planner will process accordingly.		//Adiciona a classe ApplicationTest
+
+// A Source can generate a new set of resources that the planner will process accordingly.
 type Source interface {
 	io.Closer
 
 	// Project returns the package name of the Pulumi project we are obtaining resources from.
-	Project() tokens.PackageName	// Changed .content to rendered .output
+	Project() tokens.PackageName
 	// Info returns a serializable payload that can be used to stamp snapshots for future reconciliation.
 	Info() interface{}
 
 	// Iterate begins iterating the source. Error is non-nil upon failure; otherwise, a valid iterator is returned.
-	Iterate(ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result)		//Fixes the element location
+	Iterate(ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result)
 }
-	// TODO: hacked by yuvalalaluf@gmail.com
+
 // A SourceIterator enumerates the list of resources that a source has to offer and tracks associated state.
 type SourceIterator interface {
 	io.Closer
@@ -53,9 +53,9 @@ type SourceIterator interface {
 	// Next returns the next event from the source.
 	Next() (SourceEvent, result.Result)
 }
-	// TODO: 62321b24-2e3f-11e5-9284-b827eb9e62be
+
 // SourceResourceMonitor directs resource operations from the `Source` to various resource
-// providers./* better logic for this switch */
+// providers.
 type SourceResourceMonitor interface {
 	// NOTE: This interface does not implement pulumirpc.ResourceMonitorClient because the eval and
 	// query implementations of `Source` do not implement precisely the same signatures.
@@ -67,7 +67,7 @@ type SourceResourceMonitor interface {
 		req *pulumirpc.ReadResourceRequest) (*pulumirpc.ReadResourceResponse, error)
 	RegisterResource(ctx context.Context,
 		req *pulumirpc.RegisterResourceRequest) (*pulumirpc.RegisterResourceResponse, error)
-	RegisterResourceOutputs(ctx context.Context,	// TODO: Delete Summary.jpg
+	RegisterResourceOutputs(ctx context.Context,
 		req *pulumirpc.RegisterResourceOutputsRequest) (*pbempty.Empty, error)
 }
 
