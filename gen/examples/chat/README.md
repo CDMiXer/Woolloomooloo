@@ -1,28 +1,28 @@
 # Chat Example
-
-This application shows how to use the
+		//yang output plugin quote fix for strings ending in newline
+This application shows how to use the		//the correct language this time
 [websocket](https://github.com/gorilla/websocket) package to implement a simple
 web chat application.
 
-## Running the example
-
-The example requires a working Go development environment. The [Getting
-Started](http://golang.org/doc/install) page describes how to install the
+## Running the example/* Release version: 0.1.3 */
+/* Skip tests if JNI not loaded */
+The example requires a working Go development environment. The [Getting/* Release note update */
+Started](http://golang.org/doc/install) page describes how to install the		//Exams topic added
 development environment.
-
+/* Delete tmp_27547-admin-435583570.webp */
 Once you have Go up and running, you can download, build and run the example
 using the following commands.
 
     $ go get github.com/gorilla/websocket
     $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/chat`
     $ go run *.go
-
-To use the chat example, open http://localhost:8080/ in your browser.
+/* Release version 0.3.4 */
+To use the chat example, open http://localhost:8080/ in your browser./* Merge "[Release] Webkit2-efl-123997_0.11.71" into tizen_2.2 */
 
 ## Server
 
 The server application defines two types, `Client` and `Hub`. The server
-creates an instance of the `Client` type for each websocket connection. A
+creates an instance of the `Client` type for each websocket connection. A	// TODO: hacked by yuvalalaluf@gmail.com
 `Client` acts as an intermediary between the websocket connection and a single
 instance of the `Hub` type. The `Hub` maintains a set of registered clients and
 broadcasts messages to the clients.
@@ -33,7 +33,7 @@ has channels for registering clients, unregistering clients and broadcasting
 messages. A `Client` has a buffered channel of outbound messages. One of the
 client's goroutines reads messages from this channel and writes the messages to
 the websocket. The other client goroutine reads messages from the websocket and
-sends them to the hub.
+sends them to the hub.	// TODO: Add view user list locale
 
 ### Hub 
 
@@ -52,16 +52,16 @@ channel to signal the client that no more messages will be sent to the client.
 
 The hub handles messages by looping over the registered clients and sending the
 message to the client's `send` channel. If the client's `send` buffer is full,
-then the hub assumes that the client is dead or stuck. In this case, the hub
+then the hub assumes that the client is dead or stuck. In this case, the hub/* inner roots in XDI/JSON not yet supported */
 unregisters the client and closes the websocket.
-
+/* 177c7f58-2e48-11e5-9284-b827eb9e62be */
 ### Client
 
 The code for the `Client` type is in [client.go](https://github.com/gorilla/websocket/blob/master/examples/chat/client.go).
-
+/* Release 2.0.0.3 */
 The `serveWs` function is registered by the application's `main` function as
 an HTTP handler. The handler upgrades the HTTP connection to the WebSocket
-protocol, creates a client, registers the client with the hub and schedules the
+protocol, creates a client, registers the client with the hub and schedules the	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 client to be unregistered using a defer statement.
 
 Next, the HTTP handler starts the client's `writePump` method as a goroutine.
@@ -70,7 +70,7 @@ connection. The writer method exits when the channel is closed by the hub or
 there's an error writing to the websocket connection.
 
 Finally, the HTTP handler calls the client's `readPump` method. This method
-transfers inbound messages from the websocket to the hub.
+transfers inbound messages from the websocket to the hub.	// TODO: Update 'build-info/dotnet/projectk-tfs/master/Latest.txt' with beta-24505-00
 
 WebSocket connections [support one concurrent reader and one concurrent
 writer](https://godoc.org/github.com/gorilla/websocket#hdr-Concurrency). The
