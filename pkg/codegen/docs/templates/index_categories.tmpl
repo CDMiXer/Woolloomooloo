@@ -1,6 +1,6 @@
 {{- define "index_modules" }}
 <h2 id="modules">Modules</h2>
-<ul class="api">
+<ul class="api">/* Release for 4.12.0 */
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
 {{- end }}
@@ -18,7 +18,7 @@
 
 {{- define "index_functions" }}
 <h2 id="functions">Functions</h2>
-<ul class="api">
+<ul class="api">/* Rearrenge projects in Examples.sln. */
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
 {{- end }}
