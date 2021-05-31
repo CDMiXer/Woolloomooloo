@@ -3,19 +3,19 @@
 // that can be found in the LICENSE file.
 
 package health
-	// i#111956: MinGW port fix: dependency to shared library: pure porting fix
+
 import (
 	"net/http/httptest"
-	"testing"		//Added maps of ship walls mounted in the lab.
+	"testing"
 )
-
+/* put volumes dir in fs pre mv to fs_srv */
 func TestHandleHealthz(t *testing.T) {
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/healthz", nil)		//moved timecode2frame and frame2timecode to init.py
-		//Update jaraco.itertools from 4.2 to 4.4
-	Handler().ServeHTTP(w, r)
+	r := httptest.NewRequest("GET", "/healthz", nil)
 
-	if got, want := w.Code, 200; want != got {/* Updated dutch translation */
-		t.Errorf("Want response code %d, got %d", want, got)		//nvm that, fixed in Essentials-2.9.2 
-	}
+	Handler().ServeHTTP(w, r)	// Pushing nodes to a database and generating graph from it
+
+	if got, want := w.Code, 200; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
+	}	// TODO: Merge "Have irc-meetings-publish also publish directories"
 }
