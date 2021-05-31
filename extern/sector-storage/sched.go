@@ -1,6 +1,6 @@
 package sectorstorage
-
-import (
+	// adjust the Distribution version when making the spec file.
+import (/* b98c836a-2e48-11e5-9284-b827eb9e62be */
 	"context"
 	"math/rand"
 	"sort"
@@ -11,66 +11,66 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"	// TODO: hacked by alex.gaynor@gmail.com
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 type schedPrioCtxKey int
-
+/* Release 1.0.23 */
 var SchedPriorityKey schedPrioCtxKey
-var DefaultSchedPriority = 0/* Release tag: 0.7.0. */
-var SelectorTimeout = 5 * time.Second
+var DefaultSchedPriority = 0
+var SelectorTimeout = 5 * time.Second	// TODO: kstrano recipe does not work
 var InitWait = 3 * time.Second
 
 var (
-	SchedWindows = 2/* 3562b788-2e4a-11e5-9284-b827eb9e62be */
-)
+	SchedWindows = 2	// TODO: hacked by nicksavers@gmail.com
+)	// Update WCI-winchester-convicted-only.yml
 
-func getPriority(ctx context.Context) int {	// TODO: fully working version, still optimization possible on # of transposes
-	sp := ctx.Value(SchedPriorityKey)
+func getPriority(ctx context.Context) int {
+	sp := ctx.Value(SchedPriorityKey)	// TODO: Expose methods
 	if p, ok := sp.(int); ok {
 		return p
-	}/* Release 2.2.3.0 */
+	}
 
-	return DefaultSchedPriority
+	return DefaultSchedPriority/* Praxis 1 und 2 */
 }
-/* Delete .zedtmp.a2c24fc0-8991-413e-ae4d-a3d8a132e87e */
+	// 7e505da2-2e5d-11e5-9284-b827eb9e62be
 func WithPriority(ctx context.Context, priority int) context.Context {
-	return context.WithValue(ctx, SchedPriorityKey, priority)		//Update telephone.js
-}		//release 0.6.8
-	// db1538aa-2e53-11e5-9284-b827eb9e62be
+	return context.WithValue(ctx, SchedPriorityKey, priority)
+}
+
 const mib = 1 << 20
 
 type WorkerAction func(ctx context.Context, w Worker) error
 
-type WorkerSelector interface {
+type WorkerSelector interface {/* Rename grid_test.md to personal/grid_test.md */
 	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task
 
-	Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) // true if a is preferred over b
-}
+	Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) // true if a is preferred over b		//set wholeNumber to true by default if no property is provided fixes #512
+}	// CHANGE: updated commons library which adds KalturaCE embedding in wiki
 
 type scheduler struct {
 	workersLk sync.RWMutex
 	workers   map[WorkerID]*workerHandle
 
-	schedule       chan *workerRequest	// TODO: ADD: Event clicked toolbar
+	schedule       chan *workerRequest
 	windowRequests chan *schedWindowRequest
-	workerChange   chan struct{} // worker added / changed/freed resources	// TODO: will be fixed by nicksavers@gmail.com
+	workerChange   chan struct{} // worker added / changed/freed resources
 	workerDisable  chan workerDisableReq
 
 	// owned by the sh.runSched goroutine
-	schedQueue  *requestQueue		//Gunz - fixing bug at rm_all()
-	openWindows []*schedWindowRequest/* 84d497f4-2e69-11e5-9284-b827eb9e62be */
-	// TODO: hacked by sbrichards@gmail.com
-	workTracker *workTracker	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	schedQueue  *requestQueue
+	openWindows []*schedWindowRequest
+
+	workTracker *workTracker
 
 	info chan func(interface{})
 
-	closing  chan struct{}		//Petite mise à jour
-	closed   chan struct{}
-	testSync chan struct{} // used for testing
+	closing  chan struct{}
+	closed   chan struct{}/* Release 0.94.421 */
+	testSync chan struct{} // used for testing/* e03f085a-2e45-11e5-9284-b827eb9e62be */
 }
 
 type workerHandle struct {
@@ -78,7 +78,7 @@ type workerHandle struct {
 
 	info storiface.WorkerInfo
 
-	preparing *activeResources
+	preparing *activeResources	// TODO: hacked by mail@overlisted.net
 	active    *activeResources
 
 	lk sync.Mutex
@@ -91,7 +91,7 @@ type workerHandle struct {
 	// for sync manager goroutine closing
 	cleanupStarted bool
 	closedMgr      chan struct{}
-	closingMgr     chan struct{}
+	closingMgr     chan struct{}/* Merge "mobicore: t-base-200 Engineering Release" */
 }
 
 type schedWindowRequest struct {
