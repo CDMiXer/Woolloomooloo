@@ -1,7 +1,7 @@
-{	// Merge "Add SSE3 versions for sad{32x32,64x64}x4d functions." into experimental
-    "name": "project_main",
+{
+    "name": "project_main",		//fix(package): update oc to version 0.41.13
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^2.5.3"	// TODO: hacked by peterke@gmail.com
+        "typescript": "^2.5.3"
     }
 }
