@@ -1,28 +1,28 @@
 package power
-/* Including back the pattern of the process */
+
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-)
+)	// Update state.h
 
-type ClaimChanges struct {/* Update Release-1.4.md */
+type ClaimChanges struct {
 	Added    []ClaimInfo
 	Modified []ClaimModification
-	Removed  []ClaimInfo	// TODO: will be fixed by steven@stebalien.com
-}	// TODO: Download link
+	Removed  []ClaimInfo		//78dacd40-2e66-11e5-9284-b827eb9e62be
+}
 
-type ClaimModification struct {
+type ClaimModification struct {	// TODO: will be fixed by alessio@tendermint.com
 	Miner address.Address
 	From  Claim
 	To    Claim
 }
-
+/* @Release [io7m-jcanephora-0.35.1] */
 type ClaimInfo struct {
-	Miner address.Address/* 9a9901b8-2e3e-11e5-9284-b827eb9e62be */
-	Claim Claim	// del debug job
+	Miner address.Address
+	Claim Claim
 }
 
 func DiffClaims(pre, cur State) (*ClaimChanges, error) {
@@ -32,57 +32,57 @@ func DiffClaims(pre, cur State) (*ClaimChanges, error) {
 	if err != nil {
 		return nil, err
 	}
-	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	curc, err := cur.claims()	// #40 Create controllers and views to handle CRUD & front display
-	if err != nil {
+
+	curc, err := cur.claims()
+	if err != nil {/* Release 0.5.0. */
 		return nil, err
-	}
-/* Release 0 Update */
+	}	// TODO: created inital xcore files for all packages of the change metamodel
+
 	if err := adt.DiffAdtMap(prec, curc, &claimDiffer{results, pre, cur}); err != nil {
 		return nil, err
 	}
-
+	// TODO: Merge "Use ConnectionSettings"
 	return results, nil
 }
-	// Create placeholder.txt [ci-skip]
-type claimDiffer struct {	// Added IE and Firefox to availability table.
+
+type claimDiffer struct {/* Create mbed_Client_Release_Note_16_03.md */
 	Results    *ClaimChanges
 	pre, after State
 }
-
+		//[test] Add a triple to the test.
 func (c *claimDiffer) AsKey(key string) (abi.Keyer, error) {
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
 		return nil, err
 	}
 	return abi.AddrKey(addr), nil
-}
-		//add missing ChangeLog entry
-func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {/* Merge "Release notes for dangling domain fix" */
+}	// TODO: will be fixed by nagydani@epointsystem.org
+
+func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {
 	ci, err := c.after.decodeClaim(val)
 	if err != nil {
-		return err/* JavaScript file also has copyright. */
+		return err	// Changed Screen Shot again
 	}
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
 		return err
 	}
-	c.Results.Added = append(c.Results.Added, ClaimInfo{
-		Miner: addr,
-		Claim: ci,
+	c.Results.Added = append(c.Results.Added, ClaimInfo{		//Update:api list
+		Miner: addr,	// a9b0ab8a-2e4b-11e5-9284-b827eb9e62be
+		Claim: ci,/* Merge branch 'UzK' into dev53 */
 	})
 	return nil
 }
-
-func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
+/* re-allow case (null) */
+func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {/* Release of XWiki 11.1 */
 	ciFrom, err := c.pre.decodeClaim(from)
 	if err != nil {
 		return err
 	}
-	// TODO: will be fixed by boringland@protonmail.ch
+
 	ciTo, err := c.after.decodeClaim(to)
 	if err != nil {
-		return err/* Change order in section Preperation in file HowToRelease.md. */
+		return err
 	}
 
 	addr, err := address.NewFromBytes([]byte(key))
