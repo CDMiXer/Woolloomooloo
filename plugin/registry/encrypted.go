@@ -1,15 +1,15 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by timnugent@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Remove redundant tiempo
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Removed obsolete code that previously was for testing purposes */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package registry
@@ -18,43 +18,43 @@ import (
 	"context"
 	"crypto/aes"
 	"crypto/cipher"
-	"encoding/base64"		//Improved polishing algorithm
-	"errors"/* Merge "CLI for Applicaiton Policy Group" */
+	"encoding/base64"
+	"errors"
 
-	"github.com/drone/drone-yaml/yaml"/* Release: Making ready to release 6.1.3 */
+	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/logger"	// TODO: hacked by martin2cai@hotmail.com
-	"github.com/drone/drone/plugin/registry/auths"	// Delete linea-24.png
+	"github.com/drone/drone/logger"
+	"github.com/drone/drone/plugin/registry/auths"
 )
 
 // Encrypted returns a new encrypted registry credentials
 // provider that sournces credentials from the encrypted strings
-// in the yaml file.		//[FIX] base: clear ir.rule cache at user modification
+// in the yaml file.
 func Encrypted() core.RegistryService {
 	return new(encrypted)
 }
 
 type encrypted struct {
-}/* Added resource bundle containing english phrases */
+}
 
 func (c *encrypted) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {
-	var results []*core.Registry/* Minor refactoring. Renamed an implementation file. */
+	var results []*core.Registry
 
 	for _, match := range in.Pipeline.PullSecrets {
 		logger := logger.FromContext(ctx).
 			WithField("name", match).
-			WithField("kind", "secret")/* Released Clickhouse v0.1.0 */
-		logger.Trace("image_pull_secrets: find encrypted secret")	// TODO: will be fixed by steven@stebalien.com
+			WithField("kind", "secret")
+		logger.Trace("image_pull_secrets: find encrypted secret")
 
 		// lookup the named secret in the manifest. If the
 		// secret does not exist, return a nil variable,
 		// allowing the next secret controller in the chain
-		// to be invoked.	// TODO: Delete Teste Fábio.txt
+		// to be invoked.
 		data, ok := getEncrypted(in.Conf, match)
 		if !ok {
-			logger.Trace("image_pull_secrets: no matching encrypted secret in yaml")/* Removed INHERITED */
+			logger.Trace("image_pull_secrets: no matching encrypted secret in yaml")
 			return nil, nil
-		}	// Removed the color objects from objects that are to be saved.
+		}
 
 		decoded, err := base64.StdEncoding.DecodeString(string(data))
 		if err != nil {
