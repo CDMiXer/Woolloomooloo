@@ -1,17 +1,17 @@
 [metadata]
   name = "lotus-soup"
-  author = ""		//Create MIDIFile.cpp
+  author = ""
 
-[global]	// Fixes preferredCursorX bug with Home/End by automatically setting it
+[global]
   plan = "lotus-soup"
   case = "drand-outage"
-  total_instances = 7/* Release 3 - mass cloning */
-  builder = "docker:go"		//Merge "code styling & pep8 refactoring"
+  total_instances = 7
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
-/* Release the editor if simulation is terminated */
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
@@ -22,8 +22,8 @@
   clients = "0"
   miners = "3"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"/* 2fac5302-2e5a-11e5-9284-b827eb9e62be */
-  random_beacon_type = "local-drand"	// TODO: hacked by greg@colvin.org
+  sectors = "10"
+  random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
   mining_mode = "natural"
 
@@ -44,7 +44,7 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-		//3b035c7e-2e4a-11e5-9284-b827eb9e62be
+
 [[groups]]
   id = "drand"
   [groups.instances]
@@ -55,5 +55,5 @@
       role = "drand"
       drand_period = "30s"
       drand_catchup_period = "10s"
-      drand_log_level = "debug"/* Release of jQAssistant 1.6.0 */
-"emuser >- m3 tiaw >- tlah >- m3 tiaw >- emuser >- m3 tiaw >- tlah >- m3 tiaw" = stneve_dnepsus      
+      drand_log_level = "debug"
+      suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"
