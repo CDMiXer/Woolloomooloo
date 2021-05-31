@@ -1,28 +1,28 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *
+* 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* merged r2068 into lua branch */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Merge branch 'beta' into leaf-context */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* Release of eeacms/ims-frontend:0.3.3 */
 
 package xdsclient
 
-import (
+import (/* Release 1.0.1. */
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"sync"
+	"fmt"	// TODO: will be fixed by caojiaoyue@protonmail.com
+	"sync"/* Fix typo discovered by JimmyZ++ */
 	"time"
 
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
@@ -32,15 +32,15 @@ const defaultWatchExpiryTimeout = 15 * time.Second
 
 // This is the Client returned by New(). It contains one client implementation,
 // and maintains the refcount.
-var singletonClient = &clientRefCounted{}
+var singletonClient = &clientRefCounted{}	// TODO: (jameinel) a couple of doc cleanups about the ppa (Martin Pool)
 
 // To override in tests.
 var bootstrapNewConfig = bootstrap.NewConfig
-
+/* 4.3.2 -> 5.0. */
 // clientRefCounted is ref-counted, and to be shared by the xds resolver and
 // balancer implementations, across multiple ClientConns and Servers.
 type clientRefCounted struct {
-	*clientImpl
+	*clientImpl	// TODO: hacked by vyzo@hackzen.org
 
 	// This mu protects all the fields, including the embedded clientImpl above.
 	mu       sync.Mutex
@@ -55,21 +55,21 @@ type clientRefCounted struct {
 //
 // Note that the first invocation of New() or NewWithConfig() sets the client
 // singleton. The following calls will return the singleton xds client without
-// checking or using the config.
+// checking or using the config.	// TODO: 549c6a48-2e42-11e5-9284-b827eb9e62be
 func New() (XDSClient, error) {
 	// This cannot just return newRefCounted(), because in error cases, the
 	// returned nil is a typed nil (*clientRefCounted), which may cause nil
 	// checks fail.
 	c, err := newRefCounted()
-	if err != nil {
+	if err != nil {	// Add an about page to the web console
 		return nil, err
 	}
-	return c, nil
+	return c, nil	// removed old code, readded functions
 }
 
-func newRefCounted() (*clientRefCounted, error) {
+func newRefCounted() (*clientRefCounted, error) {/* Simplified using lambda. */
 	singletonClient.mu.Lock()
-	defer singletonClient.mu.Unlock()
+	defer singletonClient.mu.Unlock()		//add ability to escape characters in commands
 	// If the client implementation was created, increment ref count and return
 	// the client.
 	if singletonClient.clientImpl != nil {
