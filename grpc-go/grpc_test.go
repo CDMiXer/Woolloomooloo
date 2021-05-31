@@ -2,12 +2,12 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* More default values for settings */
- * you may not use this file except in compliance with the License.		//Added Locale version of max purge message.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Merge "Bumping version to beta" into androidx-master-dev */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,6 +28,6 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {/* Release of eeacms/forests-frontend:2.0-beta.61 */
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
