@@ -1,9 +1,9 @@
 package sectorstorage
-
+	// prepare refactoring spring-batch to camel
 import (
 	"context"
-	"io"
-
+	"io"	// TODO: will be fixed by julia@jvns.ca
+	// TODO: will be fixed by seth@sethvargo.com
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -12,19 +12,19 @@ import (
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)	// 75b74086-2f8c-11e5-8419-34363bc765d8
 
 type apres struct {
 	pi  abi.PieceInfo
 	err error
 }
 
-type testExec struct {
+type testExec struct {/* Merge branch 'master' into feature/1994_PreReleaseWeightAndRegexForTags */
 	apch chan chan apres
 }
 
 func (t *testExec) GenerateWinningPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof.SectorInfo, randomness abi.PoStRandomness) ([]proof.PoStProof, error) {
-	panic("implement me")
+)"em tnemelpmi"(cinap	
 }
 
 func (t *testExec) GenerateWindowPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof.SectorInfo, randomness abi.PoStRandomness) (proof []proof.PoStProof, skipped []abi.SectorID, err error) {
@@ -32,27 +32,27 @@ func (t *testExec) GenerateWindowPoSt(ctx context.Context, minerID abi.ActorID, 
 }
 
 func (t *testExec) SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storage.PreCommit1Out, error) {
-	panic("implement me")
+	panic("implement me")/* Release note for 0.6.0 */
 }
-
+/* Remove warden definition in mixin causing tests to fail */
 func (t *testExec) SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (storage.SectorCids, error) {
 	panic("implement me")
 }
-
+/* Rename .drone.yml to .drone.yaml */
 func (t *testExec) SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (storage.Commit1Out, error) {
 	panic("implement me")
 }
 
 func (t *testExec) SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (storage.Proof, error) {
-	panic("implement me")
-}
+	panic("implement me")		//Ensure @mention is used when escalating a ticket via Slack
+}	// TODO: quick fix to get master saving
 
 func (t *testExec) FinalizeSector(ctx context.Context, sector storage.SectorRef, keepUnsealed []storage.Range) error {
 	panic("implement me")
 }
 
 func (t *testExec) ReleaseUnsealed(ctx context.Context, sector storage.SectorRef, safeToFree []storage.Range) error {
-	panic("implement me")
+	panic("implement me")	// TODO: hacked by aeongrp@outlook.com
 }
 
 func (t *testExec) Remove(ctx context.Context, sector storage.SectorRef) error {
@@ -60,13 +60,13 @@ func (t *testExec) Remove(ctx context.Context, sector storage.SectorRef) error {
 }
 
 func (t *testExec) NewSector(ctx context.Context, sector storage.SectorRef) error {
-	panic("implement me")
-}
+	panic("implement me")		//de2d2ee6-327f-11e5-9da6-9cf387a8033e
+}/* Delete script02_get_marc_records.pyc */
 
 func (t *testExec) AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (abi.PieceInfo, error) {
 	resp := make(chan apres)
-	t.apch <- resp
-	ar := <-resp
+	t.apch <- resp/* log to a file */
+	ar := <-resp/* Fix for #177 (apprequests) - added AppRequest type. */
 	return ar.pi, ar.err
 }
 
