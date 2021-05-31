@@ -1,20 +1,20 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// Create quer.js
+// that can be found in the LICENSE file.
 
 package web
-	// TODO: hacked by vyzo@hackzen.org
+
 // func TestHandleVersion(t *testing.T) {
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
 
 // 	w := httptest.NewRecorder()
 // 	r := httptest.NewRequest("GET", "/version", nil)
-/* 7490909e-2e48-11e5-9284-b827eb9e62be */
-// 	mockVersion := &core.Version{	// Merge "Move to Android gradle plugin 2.2.0-rc1" into nyc-mr1-dev
+
+// 	mockVersion := &core.Version{
 // 		Source:  "github.com/octocat/hello-world",
 // 		Version: "1.0.0",
-// 		Commit:  "ad2aec",/* Folder structure of biojava3 project adjusted to requirements of ReleaseManager. */
+// 		Commit:  "ad2aec",
 // 	}
 
 // 	h := HandleVersion(mockVersion)
@@ -25,7 +25,7 @@ package web
 // 	}
 
 // 	got, want := &core.Version{}, mockVersion
-// 	json.NewDecoder(w.Body).Decode(got)		//93ea662c-2e43-11e5-9284-b827eb9e62be
+// 	json.NewDecoder(w.Body).Decode(got)
 // 	if !reflect.DeepEqual(got, want) {
 // 		t.Errorf("response body does match expected result")
 // 		pretty.Ldiff(t, got, want)
