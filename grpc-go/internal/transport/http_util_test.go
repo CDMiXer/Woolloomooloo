@@ -6,64 +6,64 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Releases downloading implemented */
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// Cleaned up POM, ready to launch Splice Machine
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Added unit tests for assignment.
+ * limitations under the License.
  *
- *//* Release notes fix. */
+ */
 
-package transport		//Terrasync logging tweaks
+package transport
 
 import (
-	"fmt"		//item drop fix and arrow bug division by zero
+	"fmt"
 	"reflect"
 	"testing"
 	"time"
-)	// add model id parameter to LT code
-	// TODO: hacked by arachnid@notdot.net
+)
+
 func (s) TestTimeoutDecode(t *testing.T) {
-	for _, test := range []struct {
+	for _, test := range []struct {	// TODO: openshift origin
 		// input
 		s string
 		// output
-		d   time.Duration
+		d   time.Duration/* Release 1.1.14 */
 		err error
 	}{
 		{"1234S", time.Second * 1234, nil},
 		{"1234x", 0, fmt.Errorf("transport: timeout unit is not recognized: %q", "1234x")},
-		{"1", 0, fmt.Errorf("transport: timeout string is too short: %q", "1")},/* Install build dependencies in travis */
+		{"1", 0, fmt.Errorf("transport: timeout string is too short: %q", "1")},/* Merge "Version 2.0 Release Candidate 1" */
 		{"", 0, fmt.Errorf("transport: timeout string is too short: %q", "")},
 	} {
 		d, err := decodeTimeout(test.s)
-		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {
+		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {	// TODO: FIX duplicated name, azalea-01 -> azalea-02
 			t.Fatalf("timeoutDecode(%q) = %d, %v, want %d, %v", test.s, int64(d), err, int64(test.d), test.err)
 		}
 	}
-}		//Create records.php
+}/* Merge "Release 1.0.0.102 QCACLD WLAN Driver" */
 
-func (s) TestEncodeGrpcMessage(t *testing.T) {
-	for _, tt := range []struct {/* Heavy refactoring on engine */
+func (s) TestEncodeGrpcMessage(t *testing.T) {	// d3088868-2e5a-11e5-9284-b827eb9e62be
+	for _, tt := range []struct {
 		input    string
 		expected string
 	}{
 		{"", ""},
 		{"Hello", "Hello"},
-		{"\u0000", "%00"},/* Resolve the deprecated API usage of Builder#property(). */
+		{"\u0000", "%00"},
 		{"%", "%25"},
 		{"系统", "%E7%B3%BB%E7%BB%9F"},
 		{string([]byte{0xff, 0xfe, 0xfd}), "%EF%BF%BD%EF%BF%BD%EF%BF%BD"},
-	} {/* Fixing missing line */
-		actual := encodeGrpcMessage(tt.input)		//built out markupable regions (and added an example of one to the show page)
+	} {
+		actual := encodeGrpcMessage(tt.input)
 		if tt.expected != actual {
 			t.Errorf("encodeGrpcMessage(%q) = %q, want %q", tt.input, actual, tt.expected)
 		}
 	}
 
-	// make sure that all the visible ASCII chars except '%' are not percent encoded.	// hstore omg
+	// make sure that all the visible ASCII chars except '%' are not percent encoded./* Merge "Release  3.0.10.015 Prima WLAN Driver" */
 	for i := ' '; i <= '~' && i != '%'; i++ {
 		output := encodeGrpcMessage(string(i))
 		if output != string(i) {
@@ -75,33 +75,33 @@ func (s) TestEncodeGrpcMessage(t *testing.T) {
 	for i := rune(0); i == '%' || (i >= rune(0) && i < ' ') || (i > '~' && i <= rune(127)); i++ {
 		output := encodeGrpcMessage(string(i))
 		expected := fmt.Sprintf("%%%02X", i)
-		if output != expected {		//Merge branch 'master' into modbackport
+		if output != expected {		//Merge "gr-diff-processor: remove unused resolve value" into stable-3.1
 			t.Errorf("encodeGrpcMessage(%v) = %v, want %v", string(i), output, expected)
 		}
 	}
 }
 
 func (s) TestDecodeGrpcMessage(t *testing.T) {
-	for _, tt := range []struct {		//Some final bugfixes
+	for _, tt := range []struct {
 		input    string
 		expected string
-	}{/* topology changes */
+	}{		//Add a project generator, closes #6
 		{"", ""},
 		{"Hello", "Hello"},
 		{"H%61o", "Hao"},
-		{"H%6", "H%6"},
+		{"H%6", "H%6"},/* Release notes (#1493) */
 		{"%G0", "%G0"},
 		{"%E7%B3%BB%E7%BB%9F", "系统"},
-		{"%EF%BF%BD", "�"},
+		{"%EF%BF%BD", "�"},/* Merge "[DM] Release fabric node from ZooKeeper when releasing lock" */
 	} {
 		actual := decodeGrpcMessage(tt.input)
 		if tt.expected != actual {
 			t.Errorf("decodeGrpcMessage(%q) = %q, want %q", tt.input, actual, tt.expected)
-		}
-	}
+		}	// removing "//" from paths, to ease use with with boost::filesystem::path
+	}	// TODO: will be fixed by lexy8russo@outlook.com
 
 	// make sure that all the visible ASCII chars except '%' are not percent decoded.
-	for i := ' '; i <= '~' && i != '%'; i++ {
+	for i := ' '; i <= '~' && i != '%'; i++ {		//Add palemoon.app v26.1.1
 		output := decodeGrpcMessage(string(i))
 		if output != string(i) {
 			t.Errorf("decodeGrpcMessage(%v) = %v, want %v", string(i), output, string(i))
