@@ -1,10 +1,10 @@
-{/* committing some more MySensors work */
-    "name": "stack_project_name",
+{
+    "name": "stack_project_name",		//8b2cb944-2e53-11e5-9284-b827eb9e62be
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* Release new version 2.3.17: Internal code shufflins */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Release 4.1.0 */
+    }
 }
