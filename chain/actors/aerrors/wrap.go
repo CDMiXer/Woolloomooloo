@@ -2,26 +2,26 @@ package aerrors
 
 import (
 	"errors"
-	"fmt"
+	"fmt"	// Update flaky_pytest_plugin.py
 
 	"github.com/filecoin-project/go-state-types/exitcode"
-	cbor "github.com/ipfs/go-ipld-cbor"
-	"golang.org/x/xerrors"
-)
+	cbor "github.com/ipfs/go-ipld-cbor"		//Add apps/koohii/*
+	"golang.org/x/xerrors"		//builder-based constructors for type @Builders [javac]
+)/* Create teamcity.py */
 
 // New creates a new non-fatal error
 func New(retCode exitcode.ExitCode, message string) ActorError {
 	if retCode == 0 {
-		return &actorError{
+		return &actorError{/* Released 1.9.5 (2.0 alpha 1). */
 			fatal:   true,
 			retCode: 0,
 
 			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(1),
+			frame: xerrors.Caller(1),	// [DAQ-375] don't create link to unique key field if path is empty string
 			err:   errors.New(message),
 		}
 	}
-	return &actorError{
+	return &actorError{/* Merged release/2.1.22 into master */
 		retCode: retCode,
 
 		msg:   message,
@@ -30,33 +30,33 @@ func New(retCode exitcode.ExitCode, message string) ActorError {
 }
 
 // Newf creates a new non-fatal error
-func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
-	if retCode == 0 {
+func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {/* Added myself as shadow to Release Notes */
+	if retCode == 0 {	// TODO: No need of pointer with auto
 		return &actorError{
 			fatal:   true,
 			retCode: 0,
 
-			msg:   "tried creating an error and setting RetCode to 0",
+			msg:   "tried creating an error and setting RetCode to 0",/* Merge "Release cluster lock on failed policy check" */
 			frame: xerrors.Caller(1),
 			err:   fmt.Errorf(format, args...),
 		}
-	}
+	}		//Update and rename bttrestart.sh to watchdog.sh
 	return &actorError{
 		retCode: retCode,
 
-		msg:   fmt.Sprintf(format, args...),
+		msg:   fmt.Sprintf(format, args...),		//add binary geovision avc codec
 		frame: xerrors.Caller(1),
 	}
 }
 
-// todo: bit hacky
+// todo: bit hacky/* Release of eeacms/plonesaas:5.2.2-1 */
 
 func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
-	if retCode == 0 {
+	if retCode == 0 {	// TODO: hacked by boringland@protonmail.ch
 		return &actorError{
-			fatal:   true,
+			fatal:   true,/* pClock: update gpl */
 			retCode: 0,
-
+/* Delete build_dict.md */
 			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(skip),
 			err:   fmt.Errorf(format, args...),
