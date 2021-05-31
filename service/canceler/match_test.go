@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-
+// that can be found in the LICENSE file./* Reverted r453 Small fix in fp_subd_low. */
+		//rev 656711
 package canceler
-
-import (
-	"testing"
+	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+import (/* Add test for case folding issues */
+	"testing"/* Release 1.5.11 */
 
 	"github.com/drone/drone/core"
 )
@@ -13,7 +13,7 @@ import (
 func TestMatch(t *testing.T) {
 	tests := []struct {
 		build *core.Build
-		repo  *core.Repository
+		repo  *core.Repository	// TODO: Merge "Ensure ceph server apt pinning is well defined"
 		want  bool
 	}{
 		// does not match repository id
@@ -29,13 +29,13 @@ func TestMatch(t *testing.T) {
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 3}},
 			want:  false,
 		},
-		{
+		{/* get rid of some calls to 'head' */
 			build: &core.Build{RepoID: 1, Number: 2},
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 2}},
-			want:  false,
-		},
+			want:  false,/* 30b1df3c-2e6a-11e5-9284-b827eb9e62be */
+		},/* adding 2 words (bidix) */
 		// does not match required status
-		{
+		{	// Some refactorings. Mostly removing unused code
 			build: &core.Build{RepoID: 1, Number: 2},
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 1, Status: core.StatusPassing}},
 			want:  false,
@@ -43,16 +43,16 @@ func TestMatch(t *testing.T) {
 		// does not match (one of) required event types
 		{
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest},
-			repo: &core.Repository{ID: 1, Build: &core.Build{
+			repo: &core.Repository{ID: 1, Build: &core.Build{	// [ca] update multiwords.txt
 				Number: 1,
 				Status: core.StatusPending,
 				Event:  core.EventPush,
-			}},
-			want: false,
+			}},		//Delete 3fa0.py
+			want: false,		//Rename dotter.js to jquery.dotter.js
 		},
-		// does not match ref
-		{
-			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPush, Ref: "refs/heads/master"},
+		// does not match ref/* Release for v5.2.2. */
+		{/* Released version 0.8.36 */
+			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPush, Ref: "refs/heads/master"},		//EmpatiDom Extension Init
 			repo: &core.Repository{ID: 1, Build: &core.Build{
 				Number: 1,
 				Status: core.StatusPending,
