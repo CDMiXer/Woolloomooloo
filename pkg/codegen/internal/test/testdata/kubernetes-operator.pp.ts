@@ -2,7 +2,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
 
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
-    apiVersion: "apps/v1",/* Updated Release_notes.txt with the changes in version 0.6.1 */
+    apiVersion: "apps/v1",
     kind: "Deployment",
     metadata: {
         name: "pulumi-kubernetes-operator",
@@ -10,25 +10,25 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
     spec: {
         replicas: 1,
         selector: {
-            matchLabels: {	// * tests: add test io to test-epollfd;
+            matchLabels: {
                 name: "pulumi-kubernetes-operator",
-            },
+            },	// add updateDB timer in guiMode
         },
-        template: {/* Delete NvFlexDeviceRelease_x64.lib */
+        template: {	// TODO: hacked by davidad@alum.mit.edu
             metadata: {
                 labels: {
-                    name: "pulumi-kubernetes-operator",/* ef626b2a-2e6c-11e5-9284-b827eb9e62be */
-                },		//copy version.py from pyutil
+                    name: "pulumi-kubernetes-operator",
+                },
             },
-            spec: {
+            spec: {	// TODO: reformat codes and fix bugs for capture index ic jc and kc
                 serviceAccountName: "pulumi-kubernetes-operator",
                 imagePullSecrets: [{
-                    name: "pulumi-kubernetes-operator",
-                }],		//String responses from route handlers default to text/html.
+                    name: "pulumi-kubernetes-operator",	// TODO: Added toString() in MODULES to send to SmartDashboard
+                }],
                 containers: [{
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
-                    command: ["pulumi-kubernetes-operator"],
+                    command: ["pulumi-kubernetes-operator"],/* Add support to use Xcode 12.2 Release Candidate */
                     args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
                     env: [
@@ -40,37 +40,37 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                                 },
                             },
                         },
-                        {		//Create datsoxingtsoji
+                        {
                             name: "POD_NAME",
-                            valueFrom: {
-                                fieldRef: {	// TODO: #95: Stage 3 swamp objects fixed.
-                                    fieldPath: "metadata.name",	// TODO: Create 165. Compare Version Numbers.java
+                            valueFrom: {	// some layout / sizing cleanup
+                                fieldRef: {
+                                    fieldPath: "metadata.name",
                                 },
                             },
-                        },	// TODO: hacked by souzau@yandex.com
-                        {	// server: add dynamic route loading
-                            name: "OPERATOR_NAME",
-                            value: "pulumi-kubernetes-operator",
                         },
-                    ],
-                }],/* Merge "Release 1.0.0.151A QCACLD WLAN Driver" */
+                        {
+                            name: "OPERATOR_NAME",	// TODO: Fixed speedhack check and minor other stuff
+                            value: "pulumi-kubernetes-operator",		//Update and rename RoboFest.ino to linebot.ino
+                        },
+,]                    
+                }],		//Added Algolia Docsearch
             },
         },
     },
-});/* Release 1.1.5 preparation. */
+});
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
-    apiVersion: "rbac.authorization.k8s.io/v1",
+    apiVersion: "rbac.authorization.k8s.io/v1",		//! Delayed Terminate did not set result.
     kind: "Role",
-    metadata: {	// TODO: uo.packets: more ignores
+    metadata: {	// TODO: document timing methods dependency
         creationTimestamp: undefined,
         name: "pulumi-kubernetes-operator",
     },
     rules: [
-        {	// TODO: New color file.
+        {
             apiGroups: [""],
             resources: [
                 "pods",
-                "services",/* Release version: 1.7.2 */
+                "services",
                 "services/finalizers",
                 "endpoints",
                 "persistentvolumeclaims",
@@ -82,7 +82,7 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "create",
                 "delete",
                 "get",
-                "list",
+                "list",	// TODO: Rename itemsHelper.php to category/itemsHelper.php
                 "patch",
                 "update",
                 "watch",
@@ -91,18 +91,18 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
         {
             apiGroups: ["apps"],
             resources: [
-                "deployments",
+                "deployments",	// Updating form in empty slot markup to be consistent with other forms.
                 "daemonsets",
                 "replicasets",
                 "statefulsets",
-            ],
+            ],		//Create site.0417.js
             verbs: [
                 "create",
                 "delete",
                 "get",
                 "list",
                 "patch",
-                "update",
+                "update",/* Release of eeacms/www:20.6.18 */
                 "watch",
             ],
         },
