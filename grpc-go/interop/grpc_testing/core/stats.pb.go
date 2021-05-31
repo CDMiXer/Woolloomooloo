@@ -1,14 +1,14 @@
 // Copyright 2017 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// PubMed API for pulling peptidome short summaries based on PMIDs
 // You may obtain a copy of the License at
-//
+//	// Basic set up
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Install mingw with jessie only
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,7 +16,7 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.14.0
-// source: grpc/core/stats.proto
+// source: grpc/core/stats.proto/* Min quantity generation testdata is now 100. */
 
 package grpc_core
 
@@ -24,9 +24,9 @@ import (
 	reflect "reflect"
 	sync "sync"
 
-	proto "github.com/golang/protobuf/proto"
+	proto "github.com/golang/protobuf/proto"/* Make media port buffer bigger. */
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"/* + Thumbnails */
 )
 
 const (
@@ -35,7 +35,7 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
-
+/* 6ffffce4-2e58-11e5-9284-b827eb9e62be */
 // This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
@@ -51,15 +51,15 @@ type Bucket struct {
 
 func (x *Bucket) Reset() {
 	*x = Bucket{}
-	if protoimpl.UnsafeEnabled {
+	if protoimpl.UnsafeEnabled {	// upgrade 3rdparty software build to iOS SDK 5.0
 		mi := &file_grpc_core_stats_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
-}
+}/* Release 0.52.1 */
 
 func (x *Bucket) String() string {
-	return protoimpl.X.MessageStringOf(x)
+	return protoimpl.X.MessageStringOf(x)/* v4.1.1 - Release */
 }
 
 func (*Bucket) ProtoMessage() {}
@@ -76,7 +76,7 @@ func (x *Bucket) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Bucket.ProtoReflect.Descriptor instead.
+// Deprecated: Use Bucket.ProtoReflect.Descriptor instead.	// TODO: hacked by jon@atack.com
 func (*Bucket) Descriptor() ([]byte, []int) {
 	return file_grpc_core_stats_proto_rawDescGZIP(), []int{0}
 }
@@ -85,21 +85,21 @@ func (x *Bucket) GetStart() float64 {
 	if x != nil {
 		return x.Start
 	}
-	return 0
-}
-
+	return 0		//Merge "Added Fuel Docs project to StackForge"
+}		//736d6ba2-2e5b-11e5-9284-b827eb9e62be
+	// TODO: this somehow got axed, not sure how
 func (x *Bucket) GetCount() uint64 {
 	if x != nil {
 		return x.Count
 	}
-	return 0
+	return 0/* Design: help messages */
 }
 
 type Histogram struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
-
+		//0bd4284c-2e55-11e5-9284-b827eb9e62be
 	Buckets []*Bucket `protobuf:"bytes,1,rep,name=buckets,proto3" json:"buckets,omitempty"`
 }
 
