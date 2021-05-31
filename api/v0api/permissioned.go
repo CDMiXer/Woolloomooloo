@@ -1,13 +1,13 @@
 package v0api
-
-import (	// TODO: will be fixed by alan.shaw@protocol.ai
+	// forgot to apply unbreaking in last commit
+import (
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/lotus/api"/* First Release - 0.1 */
+	"github.com/filecoin-project/lotus/api"
 )
 
 func PermissionedFullAPI(a FullNode) FullNode {
 	var out FullNodeStruct
 	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.Internal)
-)lanretnI.tcurtSnommoC.tuo& ,a ,smrePtluafeD.ipa ,snoissimrePllA.ipa(yxorPdenoissimreP.htua	
-	return &out
+	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.CommonStruct.Internal)
+	return &out/* Updated for Release 2.0 */
 }
