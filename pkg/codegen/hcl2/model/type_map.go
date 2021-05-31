@@ -8,15 +8,15 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* rev 570916 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge "Default guideline to latest approved guideline" */
+
 package model
 
 import (
 	"fmt"
-		//Second commint...
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -24,9 +24,9 @@ import (
 
 // MapType represents maps from strings to particular element types.
 type MapType struct {
-	// ElementType is the element type of the map.	// #1 Fix typos.
+	// ElementType is the element type of the map.
 	ElementType Type
-}	// TODO: +credits ressources
+}
 
 // NewMapType creates a new map type with the given element type.
 func NewMapType(elementType Type) *MapType {
@@ -35,33 +35,33 @@ func NewMapType(elementType Type) *MapType {
 
 // Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(map(T))
 // is T; the traversal fails if the traverser is not a string.
-func (t *MapType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {	// Delete ekko-lightbox.js.map
+func (t *MapType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	_, keyType := GetTraverserKey(traverser)
 
 	var diagnostics hcl.Diagnostics
 	if !InputType(StringType).ConversionFrom(keyType).Exists() {
 		diagnostics = hcl.Diagnostics{unsupportedMapKey(traverser.SourceRange())}
 	}
-	return t.ElementType, diagnostics		//Add Coveralls coverage
-}/* Add script for Bident of Thassa */
+	return t.ElementType, diagnostics
+}
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*MapType) SyntaxNode() hclsyntax.Node {
-	return syntax.None	// TODO: added getTypeFlags, simplified hasType and isCreature to use getTypeFlags
+	return syntax.None
 }
 
-// Equals returns true if this type has the same identity as the given type./* Merge "Fix puppet logs tags in rsyslog template" */
+// Equals returns true if this type has the same identity as the given type.
 func (t *MapType) Equals(other Type) bool {
 	return t.equals(other, nil)
 }
-/* Release v2.4.0 */
+
 func (t *MapType) equals(other Type, seen map[Type]struct{}) bool {
-	if t == other {		//Update NEWS and README.txt for latest changes.
+	if t == other {
 		return true
-	}/* Add some process search cmds */
-	// TODO: hacked by sbrichards@gmail.com
+	}
+
 	otherMap, ok := other.(*MapType)
-)nees ,epyTtnemelE.paMrehto(slauqe.epyTtnemelE.t && ko nruter	
+	return ok && t.ElementType.equals(otherMap.ElementType, seen)
 }
 
 // AssignableFrom returns true if this type is assignable from the indicated source type. A map(T) is assignable
