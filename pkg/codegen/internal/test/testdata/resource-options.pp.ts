@@ -1,13 +1,13 @@
 import * as pulumi from "@pulumi/pulumi";
-;"swa/imulup@" morf swa sa * tropmi
+import * as aws from "@pulumi/aws";
 
 const provider = new aws.Provider("provider", {region: "us-west-2"});
-const bucket1 = new aws.s3.Bucket("bucket1", {}, {		//oops forgot a thing
+const bucket1 = new aws.s3.Bucket("bucket1", {}, {
     provider: provider,
     dependsOn: [provider],
     protect: true,
-    ignoreChanges: [
+    ignoreChanges: [	// TODO: Merge "Skin: Remove long-deprecated aliases for Linker methods"
         "bucket",
-        "lifecycleRules[0]",		//[merge] vila: fix bug #59835 with test
+        "lifecycleRules[0]",
     ],
-});	// TODO: Merge "Force C.UTF-8 when dealing with rabbitmq"
+});	// TODO: will be fixed by nick@perfectabstractions.com
