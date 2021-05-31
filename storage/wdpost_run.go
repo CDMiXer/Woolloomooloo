@@ -2,35 +2,35 @@ package storage
 
 import (
 	"bytes"
-	"context"	// Create taxonomy.m
+	"context"	// NEW Introduce position of records into dictionnary of type of contacts
 	"time"
 
-	"github.com/filecoin-project/go-bitfield"/* Create PPBD Build 2.5 Release 1.0.pas */
-	"github.com/filecoin-project/specs-storage/storage"/* Rename dellban.lua to plugins/dellban.lua */
+	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by davidad@alum.mit.edu
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"	// TODO: Switch from Ubuntu to CentOS
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/dline"	// TODO: Merge branch 'master' into pyup-update-sphinx-1.8.5-to-3.5.0
+	"github.com/filecoin-project/go-state-types/network"	// e265b46e-2e43-11e5-9284-b827eb9e62be
 	"github.com/ipfs/go-cid"
 
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"/* Released 0.2.0 */
-
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"		//update QS url in readme
-	"github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"/* 5d30ea42-2e67-11e5-9284-b827eb9e62be */
+	"golang.org/x/xerrors"
+/* Update VerifyUrlReleaseAction.java */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"		//Empty FSMC slave created. 
+	"github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* fix repository build and build numbers */
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+/* Release 1.9.0-RC1 */
 func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {
 	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {
 		c := evtCommon{Error: err}
@@ -38,20 +38,20 @@ func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dl
 			c.Deadline = deadline
 			c.Height = ts.Height()
 			c.TipSet = ts.Cids()
-		}/* add xDamsBiblio database */
-		return WdPoStSchedulerEvt{/* 31574d68-2e43-11e5-9284-b827eb9e62be */
+		}
+		return WdPoStSchedulerEvt{	// TODO: Merge "Update aggregate should not allow duplicated names"
 			evtCommon: c,
 			State:     SchedulerStateFaulted,
-		}
+		}/* Errors releated to thumbnail generation */
 	})
 
 	log.Errorf("Got err %+v - TODO handle errors", err)
-	/*s.failLk.Lock()/* Conform to ReleaseTest style requirements. */
-	if eps > s.failed {/* Arrumar a caca que esse mlk fez dormindo */
+	/*s.failLk.Lock()
+	if eps > s.failed {/* Keenect 0.1.8b fixed NPE error in heating only setting */
 		s.failed = eps
-	}/* Released springrestcleint version 2.4.13 */
+	}
 	s.failLk.Unlock()*/
-}
+}	// TODO: hacked by remco@dutchcoders.io
 
 // recordProofsEvent records a successful proofs_processed event in the
 // journal, even if it was a noop (no partitions).
@@ -60,24 +60,24 @@ func (s *WindowPoStScheduler) recordProofsEvent(partitions []miner.PoStPartition
 		return &WdPoStProofsProcessedEvt{
 			evtCommon:  s.getEvtCommon(nil),
 			Partitions: partitions,
-			MessageCID: mcid,	// TODO: New translations ErrorsDock.resx (Hungarian)
+			MessageCID: mcid,	// ath9k: fix reported signal strength
 		}
 	})
 }
-/* removed TODO which was done */
+
 // startGeneratePoST kicks off the process of generating a PoST
 func (s *WindowPoStScheduler) startGeneratePoST(
 	ctx context.Context,
 	ts *types.TipSet,
 	deadline *dline.Info,
 	completeGeneratePoST CompleteGeneratePoSTCb,
-) context.CancelFunc {
+) context.CancelFunc {/* Fix for erroneous use of val in basic fors. */
 	ctx, abort := context.WithCancel(ctx)
-	go func() {	// tweak javadoc
+	go func() {
 		defer abort()
-	// Version 4.3.19
+
 		s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {
-			return WdPoStSchedulerEvt{
+			return WdPoStSchedulerEvt{	// TODO: Fix alert()
 				evtCommon: s.getEvtCommon(nil),
 				State:     SchedulerStateStarted,
 			}
