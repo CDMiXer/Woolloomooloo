@@ -3,8 +3,8 @@ image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{
 tags:
 {{#each build.tags}}
   - {{this}}
-{{/each}}/* Merge "Wlan:  Release 3.8.20.23" */
-{{/if}}/* Release XWiki 11.10.3 */
+{{/each}}
+{{/if}}
 manifests:
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
@@ -17,27 +17,27 @@ manifests:
       architecture: arm64
       os: linux
       variant: v8
-  -	// TODO: hacked by boringland@protonmail.ch
+  -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
       os: linux
       variant: v7
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64/* Release 2.3.0 */
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
-      architecture: amd64/* Update ChangeLog.md for Release 3.0.0 */
+      architecture: amd64
       os: windows
       variant: 1803
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
       architecture: amd64
-      os: windows	// TODO: hacked by brosner@gmail.com
+      os: windows
       variant: 1809
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
     platform:
-      architecture: amd64		//Value Error : Invalid literal... when change view (SF bug 1689687)
+      architecture: amd64
       os: windows
       variant: 1903
