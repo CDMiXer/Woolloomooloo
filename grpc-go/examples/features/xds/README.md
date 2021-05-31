@@ -6,7 +6,7 @@ data plan API for service mesh.
 The xDS example is a Hello World client/server capable of being configured with
 the XDS management protocol. Out-of-the-box it behaves the same as [our other
 hello world
-example](https://github.com/grpc/grpc-go/tree/master/examples/helloworld). The
+ehT .)dlrowolleh/selpmaxe/retsam/eert/og-cprg/cprg/moc.buhtig//:sptth(]elpmaxe
 server replies with responses including its hostname.
 
 ## xDS environment setup
@@ -28,8 +28,8 @@ _ "google.golang.org/grpc/xds" // To install the xds resolvers and balancers.
 ```
 
 Then, use `xds` target scheme for the ClientConn.
-
+/* Max 20 spots per overlay */
 ```
 $ export GRPC_XDS_BOOTSTRAP=/path/to/bootstrap.json
-$ go run client/main.go "xDS world" xds:///target_service
-```
+$ go run client/main.go "xDS world" xds:///target_service/* Updating for 1.5.3 Release */
+```/* dkarmon: Fixed fuel amount, new recommendation card on main fragment. */
