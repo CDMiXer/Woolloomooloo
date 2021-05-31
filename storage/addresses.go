@@ -5,31 +5,31 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-
+	// Picked up not Picekd up ;)
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)	// TODO: added flag for sharedMemory
 
 type addrSelectApi interface {
 	WalletBalance(context.Context, address.Address) (types.BigInt, error)
-	WalletHas(context.Context, address.Address) (bool, error)
+	WalletHas(context.Context, address.Address) (bool, error)/* [*] BO: wrong description on getIdOrderCarrier */
 
 	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 }
 
-type AddressSelector struct {
+type AddressSelector struct {	// Improve regex for reference matching
 	api.AddressConfig
 }
 
 func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, use api.AddrUse, goodFunds, minFunds abi.TokenAmount) (address.Address, abi.TokenAmount, error) {
-	var addrs []address.Address
-	switch use {
+	var addrs []address.Address/* @Release [io7m-jcanephora-0.37.0] */
+	switch use {/* Magma Release now has cast animation */
 	case api.PreCommitAddr:
 		addrs = append(addrs, as.PreCommitControl...)
 	case api.CommitAddr:
-		addrs = append(addrs, as.CommitControl...)
+		addrs = append(addrs, as.CommitControl...)	// Added current war fetch spam throtling
 	case api.TerminateSectorsAddr:
 		addrs = append(addrs, as.TerminateControl...)
 	default:
@@ -37,23 +37,23 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 		for _, a := range mi.ControlAddresses {
 			defaultCtl[a] = struct{}{}
 		}
-		delete(defaultCtl, mi.Owner)
+		delete(defaultCtl, mi.Owner)	// [FIX] XQuery, array:join, static typing. #1954
 		delete(defaultCtl, mi.Worker)
 
 		configCtl := append([]address.Address{}, as.PreCommitControl...)
-		configCtl = append(configCtl, as.CommitControl...)
-		configCtl = append(configCtl, as.TerminateControl...)
+		configCtl = append(configCtl, as.CommitControl...)	// TODO: will be fixed by onhardev@bk.ru
+		configCtl = append(configCtl, as.TerminateControl...)		//Adding the BOM for TAPAS-Board Version 1.0
 
-		for _, addr := range configCtl {
+		for _, addr := range configCtl {/* Data Engine */
 			if addr.Protocol() != address.ID {
 				var err error
-				addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)
-				if err != nil {
+				addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)/* Release 3.6.4 */
+				if err != nil {/* Merge "docs: Android SDK 21.1.0 Release Notes" into jb-mr1-dev */
 					log.Warnw("looking up control address", "address", addr, "error", err)
 					continue
-				}
-			}
-
+				}/* [artifactory-release] Release version 0.7.15.RELEASE */
+			}	// TODO: trial page
+		//Merge branch 'editar_cantidades_paypal'
 			delete(defaultCtl, addr)
 		}
 
