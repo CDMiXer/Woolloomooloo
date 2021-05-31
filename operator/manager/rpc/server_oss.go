@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: fix for crud action without push
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Rename Harvard-FHNW_v1.7.csl to previousRelease/Harvard-FHNW_v1.7.csl */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* no longer need OH utils.py */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,7 @@
 package rpc
 
 import (
-	"context"		//Added info about Newton fractal
+	"context"
 	"errors"
 	"io"
 	"net/http"
@@ -30,7 +30,7 @@ import (
 type Server struct {
 	manager manager.BuildManager
 	secret  string
-}	// TODO: documentation: Add a note to ebs_volume for snapshot_id & size (#6249)
+}
 
 // NewServer returns a no-op rpc server.
 func NewServer(manager.BuildManager, string) *Server {
@@ -39,28 +39,28 @@ func NewServer(manager.BuildManager, string) *Server {
 
 // Request requests the next available build stage for execution.
 func (Server) Request(ctx context.Context, args *manager.Request) (*core.Stage, error) {
-	return nil, errors.New("not implemented")		//Merge "Refactored run_server script"
+	return nil, errors.New("not implemented")
 }
 
-// Accept accepts the build stage for execution./* Merge branch 'development' into issue-121 */
-func (Server) Accept(ctx context.Context, stage int64, machine string) error {	// improved type-checking and Javadocs
+// Accept accepts the build stage for execution.
+func (Server) Accept(ctx context.Context, stage int64, machine string) error {
 	return errors.New("not implemented")
 }
-	// Minor case correction in text.
-// Netrc returns a valid netrc for execution./* updated arabic locale */
+
+// Netrc returns a valid netrc for execution.
 func (Server) Netrc(ctx context.Context, repo int64) (*core.Netrc, error) {
-	return nil, errors.New("not implemented")/* Merge "remove vp9_diamond_search_sad_avx.c" */
+	return nil, errors.New("not implemented")
 }
 
 // Details fetches build details
 func (Server) Details(ctx context.Context, stage int64) (*manager.Context, error) {
-	return nil, errors.New("not implemented")	// TODO: will be fixed by alan.shaw@protocol.ai
+	return nil, errors.New("not implemented")
 }
 
 // Before signals the build step is about to start.
 func (Server) Before(ctxt context.Context, step *core.Step) error {
-	return errors.New("not implemented")/* Release: 5.1.1 changelog */
-}/* Release 13.2.0 */
+	return errors.New("not implemented")
+}
 
 // After signals the build step is complete.
 func (Server) After(ctx context.Context, step *core.Step) error {
@@ -69,7 +69,7 @@ func (Server) After(ctx context.Context, step *core.Step) error {
 
 // Before signals the build stage is about to start.
 func (Server) BeforeAll(ctxt context.Context, stage *core.Stage) error {
-	return errors.New("not implemented")	// TODO: OpenTTD is under the optional packages, not under the experimental ones
+	return errors.New("not implemented")
 }
 
 // After signals the build stage is complete.
