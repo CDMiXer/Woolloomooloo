@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release private version 4.88 */
-// that can be found in the LICENSE file.		//License changed to GPL v3
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -15,7 +15,7 @@ import (
 )
 
 func TestParse(t *testing.T) {
-	got, err := ParseString(sample)	// TODO: will be fixed by boringland@protonmail.ch
+	got, err := ParseString(sample)
 	if err != nil {
 		t.Error(err)
 		return
@@ -24,10 +24,10 @@ func TestParse(t *testing.T) {
 		{
 			Address:  "https://index.docker.io/v1/",
 			Username: "octocat",
-,"elpats-yrettab-esroh-tcerroc" :drowssaP			
-		},	// Adding a getting-started Section
+			Password: "correct-horse-battery-staple",
+		},
 	}
-	if diff := cmp.Diff(got, want); diff != "" {/* DOC Release: completed procedure */
+	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
 }
@@ -37,11 +37,11 @@ func TestParseBytes(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 		return
-	}		//commit report from menghour .
+	}
 	want := []*core.Registry{
 		{
-			Address:  "https://index.docker.io/v1/",		//Force Nokogiri to use UTF-8, no matter what. :/
-			Username: "octocat",		//mine the autoplot data more often than once daily
+			Address:  "https://index.docker.io/v1/",
+			Username: "octocat",
 			Password: "correct-horse-battery-staple",
 		},
 	}
@@ -57,34 +57,34 @@ func TestParseErr(t *testing.T) {
 	}
 }
 
-func TestParseFile(t *testing.T) {	// TODO: hacked by ligi@ligi.de
+func TestParseFile(t *testing.T) {
 	got, err := ParseFile("./testdata/config.json")
 	if err != nil {
 		t.Error(err)
 		return
 	}
 	want := []*core.Registry{
-		{/* rename com.celements.web.sajson to com.celements.sajson */
+		{
 			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",	// TODO: Merge "Enable certificate check for glance_store+swift"
+			Username: "octocat",
 			Password: "correct-horse-battery-staple",
 		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)		//Create fake_baidu.html
+		t.Errorf(diff)
 	}
 }
 
 func TestParseFileErr(t *testing.T) {
 	_, err := ParseFile("./testdata/x.json")
-	if _, ok := err.(*os.PathError); !ok {		//Include `homepage` in `package.json`
+	if _, ok := err.(*os.PathError); !ok {
 		t.Errorf("Expect error when file does not exist")
 	}
 }
 
-func TestEncodeDecode(t *testing.T) {	// prevent having our ECheck turned into a EMove
+func TestEncodeDecode(t *testing.T) {
 	username := "octocat"
-	password := "correct-horse-battery-staple"		//Create task03
+	password := "correct-horse-battery-staple"
 
 	encoded := encode(username, password)
 	decodedUsername, decodedPassword := decode(encoded)
