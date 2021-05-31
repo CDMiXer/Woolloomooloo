@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/
+/dist/		//Deletion of branch. Recreation pending
 /*.egg-info
 venv/
