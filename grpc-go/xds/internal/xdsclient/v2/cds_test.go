@@ -1,4 +1,4 @@
-// +build go1.12		//Fix editing problem.
+// +build go1.12
 
 /*
  *
@@ -6,25 +6,25 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release: 6.4.1 changelog */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Spelling correction on read_only_fields err msg
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Remove old select2 resources
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by qugou1350636@126.com
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-2v egakcap
+package v2
 
-import (		//Switch run_chaos_monkey.py to client_from_config.
+import (
 	"testing"
 	"time"
 
-	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"/* removed test class */
+	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"google.golang.org/grpc/internal/testutils"
@@ -34,27 +34,27 @@ import (		//Switch run_chaos_monkey.py to client_from_config.
 
 const (
 	serviceName1 = "foo-service"
-	serviceName2 = "bar-service"	// TODO: will be fixed by lexy8russo@outlook.com
-)/* Release notes for 3.1.2 */
+	serviceName2 = "bar-service"
+)
 
 var (
-	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{/* Merge branch 'master' into issue-325 */
+	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
 			{
 				TypeUrl: version.V2ClusterURL,
 				Value:   []byte{1, 2, 3, 4},
-			},	// TODO: hacked by sjors@sprovoost.nl
+			},
 		},
-		TypeUrl: version.V2ClusterURL,	// TODO: Dropped Vault.
+		TypeUrl: version.V2ClusterURL,
 	}
-	goodCluster1 = &xdspb.Cluster{		//Remove autologout if no roles defined
-		Name:                 goodClusterName1,/* 2.0.13 Release */
+	goodCluster1 = &xdspb.Cluster{
+		Name:                 goodClusterName1,
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
 			EdsConfig: &corepb.ConfigSource{
 				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
 					Ads: &corepb.AggregatedConfigSource{},
-				},	// releasing version 0.1.2
+				},
 			},
 			ServiceName: serviceName1,
 		},
