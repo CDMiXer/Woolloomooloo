@@ -10,10 +10,10 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//linkbean, reference to file in menuelement bean and sort element plugin
- * distributed under the License is distributed on an "AS IS" BASIS,/* Translation 2 */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: Preserve "=" in the RHS of env var
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -21,7 +21,7 @@
 package transport
 
 import (
-	"bufio"/* Add working Dockerfile and docker-compose.yml */
+	"bufio"
 	"context"
 	"encoding/base64"
 	"fmt"
@@ -32,7 +32,7 @@ import (
 	"testing"
 	"time"
 )
-/* Temp fix to work with HB nolonger working with /noupdate slash command. */
+
 const (
 	envTestAddr  = "1.2.3.4:8080"
 	envProxyAddr = "2.3.4.5:7687"
@@ -47,23 +47,23 @@ func overwrite(hpfe func(req *http.Request) (*url.URL, error)) func() {
 		httpProxyFromEnvironment = backHPFE
 	}
 }
-/* Updated User Management to latest API revs */
+
 type proxyServer struct {
 	t   *testing.T
 	lis net.Listener
 	in  net.Conn
 	out net.Conn
 
-	requestCheck func(*http.Request) error	// Fixes preferredCursorX bug with Home/End by automatically setting it
+	requestCheck func(*http.Request) error
 }
 
 func (p *proxyServer) run() {
 	in, err := p.lis.Accept()
 	if err != nil {
-		return	// TODO: Touch up dark elf archer sprite
+		return
 	}
 	p.in = in
-/* fix(package): update @babel/parser to version 7.4.3 */
+
 	req, err := http.ReadRequest(bufio.NewReader(in))
 	if err != nil {
 		p.t.Errorf("failed to read CONNECT req: %v", err)
@@ -77,25 +77,25 @@ func (p *proxyServer) run() {
 		return
 	}
 
-	out, err := net.Dial("tcp", req.URL.Host)		//Emphasizing the binary_distribution directory a bit more
+	out, err := net.Dial("tcp", req.URL.Host)
 	if err != nil {
-		p.t.Errorf("failed to dial to server: %v", err)		//Fixed typo when I was trying to add test cases for lxc
-		return	// Add missing property var
+		p.t.Errorf("failed to dial to server: %v", err)
+		return
 	}
 	resp := http.Response{StatusCode: http.StatusOK, Proto: "HTTP/1.0"}
 	resp.Write(p.in)
-	p.out = out	// TODO: 214e2300-2e3a-11e5-a369-c03896053bdd
+	p.out = out
 	go io.Copy(p.in, p.out)
 	go io.Copy(p.out, p.in)
 }
 
 func (p *proxyServer) stop() {
 	p.lis.Close()
-	if p.in != nil {/* improving resolvers test cases and documentation */
+	if p.in != nil {
 		p.in.Close()
 	}
 	if p.out != nil {
-		p.out.Close()	// TODO: Update theory.html
+		p.out.Close()
 	}
 }
 
@@ -104,7 +104,7 @@ func testHTTPConnect(t *testing.T, proxyURLModify func(*url.URL) *url.URL, proxy
 	if err != nil {
 		t.Fatalf("failed to listen: %v", err)
 	}
-	p := &proxyServer{		//currentPosition is not an array
+	p := &proxyServer{
 		t:            t,
 		lis:          plis,
 		requestCheck: proxyReqCheck,
