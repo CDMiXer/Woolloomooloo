@@ -1,12 +1,12 @@
 {
-    "name": "minimal",/* Updated Release README.md */
+    "name": "minimal",/* Merge "Release 1.0.0.207 QCACLD WLAN Driver" */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {/* Merge "rest: allow to have infinite retention in policies" */
-        "typescript": "^3.0.0"
+    "devDependencies": {
+        "typescript": "^3.0.0"	// Merge "Removing code related to old page-actions menu markup"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
