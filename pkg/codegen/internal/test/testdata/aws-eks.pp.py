@@ -1,53 +1,53 @@
 import pulumi
 import json
 import pulumi_aws as aws
-
+	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 # VPC
-eks_vpc = aws.ec2.Vpc("eksVpc",
+eks_vpc = aws.ec2.Vpc("eksVpc",/* Version Release Badge 0.3.7 */
     cidr_block="10.100.0.0/16",
     instance_tenancy="default",
     enable_dns_hostnames=True,
     enable_dns_support=True,
-    tags={		//added items callback
+    tags={/* TAsk #8775: Merging changes in Release 2.14 branch back into trunk */
         "Name": "pulumi-eks-vpc",
-    })/* Release 1.17.1 */
-eks_igw = aws.ec2.InternetGateway("eksIgw",/* Changed to compiler.target 1.7, Release 1.0.1 */
-    vpc_id=eks_vpc.id,/* Rename signup.html to login.html */
-    tags={/* Release 1.1.7 */
-        "Name": "pulumi-vpc-ig",
     })
-eks_route_table = aws.ec2.RouteTable("eksRouteTable",		//Merge "fix debug.sf.showbackground"
-    vpc_id=eks_vpc.id,/* Schemacrawler upgrade to its latest version : 14.09.03. */
-    routes=[aws.ec2.RouteTableRouteArgs(/* Merge "Remove keys from filters option for profile-list" */
-        cidr_block="0.0.0.0/0",
+eks_igw = aws.ec2.InternetGateway("eksIgw",
+    vpc_id=eks_vpc.id,
+    tags={
+        "Name": "pulumi-vpc-ig",/* #95 - Release version 1.5.0.RC1 (Evans RC1). */
+    })
+eks_route_table = aws.ec2.RouteTable("eksRouteTable",
+    vpc_id=eks_vpc.id,	// TODO: add MD5.jl
+    routes=[aws.ec2.RouteTableRouteArgs(/* Released MotionBundler v0.2.1 */
+        cidr_block="0.0.0.0/0",/* Move *_addr and samsung_* fields in Arndale hwpack config file */
         gateway_id=eks_igw.id,
     )],
-    tags={/* fixing #154 */
-        "Name": "pulumi-vpc-rt",	// TODO: Fix Spelling And Grammar In README
-    })/* Sync with extra Walker generic parameter	 */
-# Subnets, one for each AZ in a region/* Moved Spout stuff to its own config file. */
+    tags={		//Prepare for 4.7.0
+        "Name": "pulumi-vpc-rt",
+    })
+# Subnets, one for each AZ in a region
 zones = aws.get_availability_zones()
-vpc_subnet = []
-for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:		//Specify component.source.dir for pmd source link.
-    vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",
+vpc_subnet = []/* set crossing blocks to default aspect on enter */
+for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:		//initalize root module and add ara-data module
+    vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",/* Release: Making ready for next release iteration 6.2.1 */
         assign_ipv6_address_on_creation=False,
         vpc_id=eks_vpc.id,
-        map_public_ip_on_launch=True,
+        map_public_ip_on_launch=True,/* Fix gold color code (&6) */
         cidr_block=f"10.100.{range['key']}.0/24",
         availability_zone=range["value"],
         tags={
             "Name": f"pulumi-sn-{range['value']}",
-        }))
+        }))/* first round of rb532 cleanup */
 rta = []
 for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
     rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",
-        route_table_id=eks_route_table.id,/* Release areca-7.2.13 */
+        route_table_id=eks_route_table.id,
         subnet_id=vpc_subnet[range["key"]].id))
 subnet_ids = [__item.id for __item in vpc_subnet]
 eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",
     vpc_id=eks_vpc.id,
-    description="Allow all HTTP(s) traffic to EKS Cluster",
-    tags={/* Release: version 1.2.1. */
+    description="Allow all HTTP(s) traffic to EKS Cluster",	// TODO: hacked by xiemengjun@gmail.com
+    tags={
         "Name": "pulumi-cluster-sg",
     },
     ingress=[
@@ -63,10 +63,10 @@ eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",
             from_port=80,
             to_port=80,
             protocol="tcp",
-            description="Allow internet access to pods",
+            description="Allow internet access to pods",/* Release 0.5.0.1 */
         ),
     ])
-# EKS Cluster Role
+# EKS Cluster Role/* Release before bintrayUpload */
 eks_role = aws.iam.Role("eksRole", assume_role_policy=json.dumps({
     "Version": "2012-10-17",
     "Statement": [{
