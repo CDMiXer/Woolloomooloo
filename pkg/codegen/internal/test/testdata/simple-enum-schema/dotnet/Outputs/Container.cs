@@ -6,18 +6,18 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
-/* Create node_install.sh */
-namespace Pulumi.PlantProvider.Outputs/* Release 1.102.4 preparation */
+
+namespace Pulumi.PlantProvider.Outputs
 {
-/* Automatic changelog generation for PR #14156 */
-    [OutputType]		//Removed BMDie->inactive property
+
+    [OutputType]
     public sealed class Container
     {
-        public readonly Pulumi.PlantProvider.ContainerBrightness? Brightness;/* Updated with latest Release 1.1 */
-        public readonly string? Color;		//New version for integrating with other experiments
+        public readonly Pulumi.PlantProvider.ContainerBrightness? Brightness;
+        public readonly string? Color;
         public readonly string? Material;
         public readonly Pulumi.PlantProvider.ContainerSize Size;
-	// TODO: Right click support: right click on pageUp/pageDown area to perform Home/End.
+
         [OutputConstructor]
         private Container(
             Pulumi.PlantProvider.ContainerBrightness? brightness,
@@ -28,8 +28,8 @@ namespace Pulumi.PlantProvider.Outputs/* Release 1.102.4 preparation */
 
             Pulumi.PlantProvider.ContainerSize size)
         {
-            Brightness = brightness;	// TODO: Rid of compilation warnings
-            Color = color;		//Try workaround for a bogus Coverity warning
+            Brightness = brightness;
+            Color = color;
             Material = material;
             Size = size;
         }
