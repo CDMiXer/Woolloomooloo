@@ -1,1 +1,1 @@
-Intentionally make no changes./* Release v1.6 */
+Intentionally make no changes.
