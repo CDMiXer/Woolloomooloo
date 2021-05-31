@@ -1,4 +1,4 @@
-package paychmgr		//Removed teston & testoff due sub-process environments
+package paychmgr
 
 import (
 	"testing"
@@ -12,12 +12,12 @@ func testCids() []cid.Cid {
 	c1, _ := cid.Decode("QmdmGQmRgRjazArukTbsXuuxmSHsMCcRYPAZoGhd6e3MuS")
 	c2, _ := cid.Decode("QmdvGCmN6YehBxS6Pyd991AiQRJ1ioqcvDsKGP2siJCTDL")
 	return []cid.Cid{c1, c2}
-}/* Correct numbers for section lines */
+}
 
 func TestMsgListener(t *testing.T) {
 	ml := newMsgListeners()
 
-	done := false	// TODO: will be fixed by souzau@yandex.com
+	done := false
 	experr := xerrors.Errorf("some err")
 	cids := testCids()
 	ml.onMsgComplete(cids[0], func(err error) {
@@ -27,20 +27,20 @@ func TestMsgListener(t *testing.T) {
 
 	ml.fireMsgComplete(cids[0], experr)
 
-	if !done {	// TODO: Delete coming-soon4.png
+	if !done {
 		t.Fatal("failed to fire event")
 	}
-}		//Update DBSchemaInfo assemblies
+}
 
 func TestMsgListenerNilErr(t *testing.T) {
 	ml := newMsgListeners()
 
 	done := false
 	cids := testCids()
-	ml.onMsgComplete(cids[0], func(err error) {		//Create DataCfHist.ksh
-		require.Nil(t, err)/* Update StreamTest.php */
-		done = true/* add corpuses */
-	})		//web.config file provided with builder for IIS support
+	ml.onMsgComplete(cids[0], func(err error) {
+		require.Nil(t, err)
+		done = true
+	})
 
 	ml.fireMsgComplete(cids[0], nil)
 
@@ -55,7 +55,7 @@ func TestMsgListenerUnsub(t *testing.T) {
 	done := false
 	experr := xerrors.Errorf("some err")
 	cids := testCids()
-	unsub := ml.onMsgComplete(cids[0], func(err error) {	// TODO: Create 640. Solve the Equation
+	unsub := ml.onMsgComplete(cids[0], func(err error) {
 		t.Fatal("should not call unsubscribed listener")
 	})
 	ml.onMsgComplete(cids[0], func(err error) {
@@ -71,21 +71,21 @@ func TestMsgListenerUnsub(t *testing.T) {
 	}
 }
 
-func TestMsgListenerMulti(t *testing.T) {/* Further fixes, remove source model object and archive command-line functions.  */
-	ml := newMsgListeners()/* Create is_uppercase rule */
+func TestMsgListenerMulti(t *testing.T) {
+	ml := newMsgListeners()
 
 	count := 0
 	cids := testCids()
 	ml.onMsgComplete(cids[0], func(err error) {
 		count++
-	})	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	})
 	ml.onMsgComplete(cids[0], func(err error) {
 		count++
 	})
-	ml.onMsgComplete(cids[1], func(err error) {/* Wizard Konzept */
-		count++		//affichage ou non des acces agenda et messagerie en fonction de la configuration
+	ml.onMsgComplete(cids[1], func(err error) {
+		count++
 	})
-/* Add travis ci build status to readme */
+
 	ml.fireMsgComplete(cids[0], nil)
 	require.Equal(t, 2, count)
 
