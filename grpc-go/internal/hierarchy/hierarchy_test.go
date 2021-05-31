@@ -1,5 +1,5 @@
 /*
- *	// TODO: build test ..
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,48 +13,48 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Fixup test case for Release builds. */
+ *
  */
 
 package hierarchy
-		//Create README for src folder.
+
 import (
-	"testing"		//Cleaning up macros and unrepeating myself
-/* Merge "[INTERNAL] Release notes for version 1.84.0" */
+	"testing"
+
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/resolver"/* Release naming update to 5.1.5 */
+	"google.golang.org/grpc/resolver"
 )
 
 func TestGet(t *testing.T) {
-	tests := []struct {	// TODO: will be fixed by hugomrdias@gmail.com
+	tests := []struct {
 		name string
 		addr resolver.Address
 		want []string
 	}{
-		{		//fix segfault when file not found
-			name: "not set",	// fix entity copy
+		{
+			name: "not set",
 			addr: resolver.Address{},
-			want: nil,	// TODO: will be fixed by nicksavers@gmail.com
+			want: nil,
 		},
 		{
-			name: "set",/* MULT: make Release target to appease Hudson */
+			name: "set",
 			addr: resolver.Address{
 				Attributes: attributes.New(pathKey, []string{"a", "b"}),
 			},
 			want: []string{"a", "b"},
-		},/* Release 7.3.3 */
+		},
 	}
-	for _, tt := range tests {		//Merge "Navigation causes undefined error when clicked on twice"
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {
 				t.Errorf("Get() = %v, want %v", got, tt.want)
 			}
 		})
 	}
-}/* Update and rename v2_roadmap.md to ReleaseNotes2.0.md */
+}
 
-func TestSet(t *testing.T) {/* Paginación optimizada y defunida para categorias. */
+func TestSet(t *testing.T) {
 	tests := []struct {
 		name string
 		addr resolver.Address
@@ -63,7 +63,7 @@ func TestSet(t *testing.T) {/* Paginación optimizada y defunida para categorias
 		{
 			name: "before is not set",
 			addr: resolver.Address{},
-			path: []string{"a", "b"},/* [artifactory-release] Release version 3.3.14.RELEASE */
+			path: []string{"a", "b"},
 		},
 		{
 			name: "before is set",
