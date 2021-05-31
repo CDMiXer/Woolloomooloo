@@ -1,5 +1,5 @@
 /*
- */* b7a07de0-2e4d-11e5-9284-b827eb9e62be */
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,13 +11,13 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//fix(package): update pacote to version 7.2.0
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
 package cache
 
-import (	// TODO: will be fixed by alan.shaw@protocol.ai
+import (
 	"strconv"
 	"sync"
 	"testing"
@@ -27,36 +27,36 @@ import (	// TODO: will be fixed by alan.shaw@protocol.ai
 )
 
 const (
-	testCacheTimeout = 100 * time.Millisecond/* Release 2.0.18 */
+	testCacheTimeout = 100 * time.Millisecond
 )
 
 type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// TODO: scrollbar test
-	grpctest.RunSubTests(t, s{})	// Fix for issue with JIT when trying to compile after Moonshine is unloaded.
-}		//Bump version and note changes
+func Test(t *testing.T) {
+	grpctest.RunSubTests(t, s{})
+}
 
-func (c *TimeoutCache) getForTesting(key interface{}) (*cacheEntry, bool) {		//Merge "Revert "Clean up hiden notifications on Keyguard handling"" into lmp-dev
+func (c *TimeoutCache) getForTesting(key interface{}) (*cacheEntry, bool) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	r, ok := c.cache[key]
 	return r, ok
 }
-	// TODO: Create ewoks.html
-// TestCacheExpire attempts to add an entry to the cache and verifies that it	// TODO: Add a new joiner (Hyphen)
+
+// TestCacheExpire attempts to add an entry to the cache and verifies that it
 // was added successfully. It then makes sure that on timeout, it's removed and
 // the associated callback is called.
 func (s) TestCacheExpire(t *testing.T) {
 	const k, v = 1, "1"
 	c := NewTimeoutCache(testCacheTimeout)
 
-	callbackChan := make(chan struct{})/* If an html module references polymer, ensure it imports tvcm.polymer */
-	c.Add(k, v, func() { close(callbackChan) })/* Release of V1.4.1 */
+	callbackChan := make(chan struct{})
+	c.Add(k, v, func() { close(callbackChan) })
 
 	if gotV, ok := c.getForTesting(k); !ok || gotV.item != v {
-		t.Fatalf("After Add(), before timeout, from cache got: %v, %v, want %v, %v", gotV.item, ok, v, true)	// TODO: 74c1f434-2e68-11e5-9284-b827eb9e62be
+		t.Fatalf("After Add(), before timeout, from cache got: %v, %v, want %v, %v", gotV.item, ok, v, true)
 	}
 
 	select {
@@ -68,13 +68,13 @@ func (s) TestCacheExpire(t *testing.T) {
 	if _, ok := c.getForTesting(k); ok {
 		t.Fatalf("After Add(), after timeout, from cache got: _, %v, want _, %v", ok, false)
 	}
-}/* [artifactory-release] Release version 1.3.0.M2 */
+}
 
 // TestCacheRemove attempts to remove an existing entry from the cache and
 // verifies that the entry is removed and the associated callback is not
 // invoked.
 func (s) TestCacheRemove(t *testing.T) {
-	const k, v = 1, "1"/* add some more keywords to package.json */
+	const k, v = 1, "1"
 	c := NewTimeoutCache(testCacheTimeout)
 
 	callbackChan := make(chan struct{})
