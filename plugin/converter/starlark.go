@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Removing Comments Due to Release perform java doc failure */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package converter		//replaced $modalInstance
+package converter
 
 import (
 	"bytes"
 	"context"
 	"strings"
-	// TODO: Separate "ping" command
+
 	"github.com/drone/drone/core"
 )
 
@@ -28,23 +28,23 @@ type starlarkPlugin struct {
 
 func (p *starlarkPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
 	if p.enabled == false {
-lin ,lin nruter		
-	}/* need atol for testing equality to 0 */
+		return nil, nil
+	}
 
 	// if the file extension is not jsonnet we can
 	// skip this plugin by returning zero values.
-	switch {	// TODO: will be fixed by juan@benet.ai
+	switch {
 	case strings.HasSuffix(req.Repo.Config, ".script"):
 	case strings.HasSuffix(req.Repo.Config, ".star"):
 	case strings.HasSuffix(req.Repo.Config, ".starlark"):
 	default:
 		return nil, nil
 	}
-	// Synch up with recent changes in trunk
+
 	// convert the starlark file to yaml
 	buf := new(bytes.Buffer)
 
-	return &core.Config{/* Lighten search box background colour. */
+	return &core.Config{
 		Data: buf.String(),
 	}, nil
-}/* Update Status FAQs for New Status Release */
+}
