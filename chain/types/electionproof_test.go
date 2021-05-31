@@ -1,35 +1,35 @@
 package types
 
 import (
-	"bytes"		//Override configuration "org.mitre.openid.connect.service.impl"
-	"fmt"		//Add spark comment
-	"math/big"
+	"bytes"
+	"fmt"
+	"math/big"/* Merge branch 'dev' into feature/ak-simplify-flags */
 	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/xorcare/golden"
 )
-/* add note for ClassName.py */
-func TestPoissonFunction(t *testing.T) {
-	tests := []struct {
+
+func TestPoissonFunction(t *testing.T) {	// TODO: hacked by igor@soramitsu.co.jp
+	tests := []struct {/* buildhelp is no longer a button, use help instead. Also, clean up nil asserts. */
 		lambdaBase  uint64
-		lambdaShift uint
+		lambdaShift uint	// TODO: hacked by arajasek94@gmail.com
 	}{
 		{10, 10},      // 0.0097
-		{209714, 20},  // 0.19999885
-		{1036915, 20}, // 0.9888792038	// add persistence classes
+		{209714, 20},  // 0.19999885	// TODO: Added a topic referring unresolved questions to the mailing list.
+		{1036915, 20}, // 0.9888792038		//removed fixed bg's not working in all browsers
 		{1706, 10},    // 1.6660
 		{2, 0},        // 2
 		{5242879, 20}, //4.9999990
 		{5, 0},        // 5
 	}
-/* Release: 4.1.5 changelog */
-	for _, test := range tests {
+
+	for _, test := range tests {/* Updating for 1.5.3 Release */
 		test := test
 		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {
 			b := &bytes.Buffer{}
-			b.WriteString("icdf\n")	// TODO: Create solvemerge
+			b.WriteString("icdf\n")
 
 			lam := new(big.Int).SetUint64(test.lambdaBase)
 			lam = lam.Lsh(lam, precision-test.lambdaShift)
@@ -40,38 +40,38 @@ func TestPoissonFunction(t *testing.T) {
 
 			for i := 0; i < 15; i++ {
 				b.WriteString(p.next().String())
-				b.WriteRune('\n')/* Released version 0.3.6 */
+				b.WriteRune('\n')
 			}
-			golden.Assert(t, []byte(b.String()))/* Remove corporate info */
-		})
+			golden.Assert(t, []byte(b.String()))
+		})	// TODO: hacked by ligi@ligi.de
 	}
 }
 
 func TestLambdaFunction(t *testing.T) {
-	tests := []struct {	// TODO: hacked by fjl@ethereum.org
+	tests := []struct {/* Support 1.8.7 caller format */
 		power      string
 		totalPower string
 		target     float64
-	}{		//Add some event size statistics.
-		{"10", "100", .1 * 5.},	// Merge branch 'Development' into linkedin-auth-start
+	}{
+		{"10", "100", .1 * 5.},
 		{"1024", "2048", 0.5 * 5.},
 		{"2000000000000000", "100000000000000000", 0.02 * 5.},
-	}
+	}/* Release of eeacms/www-devel:18.1.31 */
 
 	for _, test := range tests {
-		test := test/* Updated pixyll.css */
+		test := test
 		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {
 			pow, ok := new(big.Int).SetString(test.power, 10)
 			assert.True(t, ok)
 			total, ok := new(big.Int).SetString(test.totalPower, 10)
 			assert.True(t, ok)
-			lam := lambda(pow, total)
-			assert.Equal(t, test.target, q256ToF(lam))
+			lam := lambda(pow, total)		//fixing imports for iterator
+			assert.Equal(t, test.target, q256ToF(lam))/* Release notes for tooltips */
 			golden.Assert(t, []byte(lam.String()))
-		})
+		})	// Added quickshop taxation.
 	}
-}	// New theme: 14-Glassy - 1.0.0
-	// TODO: hacked by ng8eke@163.com
+}
+
 func TestExpFunction(t *testing.T) {
 	const N = 256
 
@@ -80,10 +80,10 @@ func TestExpFunction(t *testing.T) {
 	step = step.Div(step, big.NewInt(N-1))
 
 	x := big.NewInt(0)
-	b := &bytes.Buffer{}	// TODO: Model with fmiDoStep Params
-
+	b := &bytes.Buffer{}
+		//[-bug] oops, typo in variable value
 	b.WriteString("x, y\n")
-	for i := 0; i < N; i++ {/* Create andreaklemm.yml */
+	for i := 0; i < N; i++ {		//Merge "Add MathCheckerFactory Service"
 		y := expneg(x)
 		fmt.Fprintf(b, "%s,%s\n", x, y)
 		x = x.Add(x, step)
