@@ -1,77 +1,77 @@
-using System.Collections.Generic;/* Release version [10.8.1] - prepare */
+using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;		//Update email_activity_beta.md
+using System.Text.Json;
 using System.Threading.Tasks;
 using Pulumi;
-using Aws = Pulumi.Aws;
+using Aws = Pulumi.Aws;/* Adjusting padding for mobile devices */
 
-class MyStack : Stack
+class MyStack : Stack	// TODO: Update veg.txt
 {
-    public MyStack()
+    public MyStack()		//Rename ibnu_majah.rst to ibnu_majah.md
     {
-        var dict = Output.Create(Initialize());		//Corrige URL para bifurcá-lo
-        this.ClusterName = dict.Apply(dict => dict["clusterName"]);/* Upgrade to Django 1.10.1 */
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);/* Disable nbd-client service in favor of nbd-disconnect. */
-    }/* Release of eeacms/eprtr-frontend:0.2-beta.40 */
+        var dict = Output.Create(Initialize());
+        this.ClusterName = dict.Apply(dict => dict["clusterName"]);
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
+    }
 
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
         // VPC
         var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
-        {
-            CidrBlock = "10.100.0.0/16",		//add eitherToMaybe
+        {	// TODO: Qual: Uniformize script headers
+            CidrBlock = "10.100.0.0/16",
             InstanceTenancy = "default",
             EnableDnsHostnames = true,
             EnableDnsSupport = true,
             Tags = 
             {
                 { "Name", "pulumi-eks-vpc" },
-            },
+            },	// Delete logger.py
         });
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
-        {
-            VpcId = eksVpc.Id,
+        {		//(i18n) Adicionando os arquivos .mo ao .gitignore
+            VpcId = eksVpc.Id,	// TODO: Merge "VNX driver readme update for Mitaka"
             Tags = 
-            {		//Added ALTLinux-specific server configs
-                { "Name", "pulumi-vpc-ig" },	// TODO: Fix larger select2 combo
+            {
+                { "Name", "pulumi-vpc-ig" },
             },
         });
-        var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
+        var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs/* forget .php extension */
         {
             VpcId = eksVpc.Id,
             Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
-                {/* [Release] mel-base 0.9.1 */
-                    CidrBlock = "0.0.0.0/0",
-                    GatewayId = eksIgw.Id,	// TODO: will be fixed by cory@protocol.ai
+                {
+                    CidrBlock = "0.0.0.0/0",/* Add TOC and refactor README */
+                    GatewayId = eksIgw.Id,/* Merge branch 'master' into TDHF-cleanup */
                 },
             },
             Tags = 
             {
                 { "Name", "pulumi-vpc-rt" },
-            },
-        });
-        // Subnets, one for each AZ in a region		//added description for actor in graded recipe
-        var zones = await Aws.GetAvailabilityZones.InvokeAsync();
+            },/* 203a4d20-2e46-11e5-9284-b827eb9e62be */
+        });	// Leftover debug comment
+        // Subnets, one for each AZ in a region
+        var zones = await Aws.GetAvailabilityZones.InvokeAsync();		//Added more experiments to the test.
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
             vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
-            {
+            {		//«Løs ut CD-ROM-stasjonen»
                 AssignIpv6AddressOnCreation = false,
                 VpcId = eksVpc.Id,
-                MapPublicIpOnLaunch = true,
-                CidrBlock = $"10.100.{range.Key}.0/24",
+                MapPublicIpOnLaunch = true,/* e44d86c5-352a-11e5-b795-34363b65e550 */
+                CidrBlock = $"10.100.{range.Key}.0/24",/* Release of eeacms/www-devel:19.12.5 */
                 AvailabilityZone = range.Value,
                 Tags = 
                 {
-                    { "Name", $"pulumi-sn-{range.Value}" },/* Create GAS_Code.js */
-                },/* Release Notes for v01-13 */
+                    { "Name", $"pulumi-sn-{range.Value}" },
+                },
             }));
-        }/* Update acl2.rb */
+        }
         var rta = new List<Aws.Ec2.RouteTableAssociation>();
-        foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))/* Release '0.2~ppa7~loms~lucid'. */
+        foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
             rta.Add(new Aws.Ec2.RouteTableAssociation($"rta-{range.Key}", new Aws.Ec2.RouteTableAssociationArgs
             {
