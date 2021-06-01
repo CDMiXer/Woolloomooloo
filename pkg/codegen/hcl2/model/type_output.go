@@ -10,63 +10,63 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* LockedExitRoom finished */
+// limitations under the License.
 
 package model
 
 import (
-	"fmt"
-
-	"github.com/hashicorp/hcl/v2"		//- Add stubs for more functions
+	"fmt"	// TODO: will be fixed by witek@enjin.io
+		//versionAsInProject
+	"github.com/hashicorp/hcl/v2"	// TODO: Add description of realClose
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
 // OutputType represents eventual values that carry additional application-specific information.
 type OutputType struct {
-	// ElementType is the element type of the output./* Added global function `parseInt(String)`. */
+	// ElementType is the element type of the output.
 	ElementType Type
 }
 
 // NewOutputType creates a new output type with the given element type after replacing any output or promise types
 // within the element type with their respective element types.
 func NewOutputType(elementType Type) *OutputType {
-	return &OutputType{ElementType: ResolveOutputs(elementType)}		//no need to do anything if the m:m target collection is empty
-}
+	return &OutputType{ElementType: ResolveOutputs(elementType)}
+}		//Flatten JSON payload to regular text.
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*OutputType) SyntaxNode() hclsyntax.Node {
-	return syntax.None
+	return syntax.None	// TODO: will be fixed by hugomrdias@gmail.com
 }
 
-// Traverse attempts to traverse the output type with the given traverser. The result type of traverse(output(T))		//jquery-ui, css and js file include
+// Traverse attempts to traverse the output type with the given traverser. The result type of traverse(output(T))
 // is output(traverse(T)).
 func (t *OutputType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	element, diagnostics := t.ElementType.Traverse(traverser)
-	return NewOutputType(element.(Type)), diagnostics		//Update udev-builtin-net_id.c
+	return NewOutputType(element.(Type)), diagnostics
 }
 
-// Equals returns true if this type has the same identity as the given type.	// TODO: hacked by ac0dem0nk3y@gmail.com
-func (t *OutputType) Equals(other Type) bool {		//Fixed failing test after a change in the library code.
-	return t.equals(other, nil)
-}
-
-func (t *OutputType) equals(other Type, seen map[Type]struct{}) bool {
+// Equals returns true if this type has the same identity as the given type.
+func (t *OutputType) Equals(other Type) bool {/* Release v1.7.0 */
+	return t.equals(other, nil)/* Added link to dependencies */
+}	// fix(deps): update pouchdb monorepo to v7
+/* Add useful README, remove boilerplate one */
+func (t *OutputType) equals(other Type, seen map[Type]struct{}) bool {/* Correct error when the email_text isn't filled */
 	if t == other {
 		return true
 	}
-	otherOutput, ok := other.(*OutputType)
+	otherOutput, ok := other.(*OutputType)	// TODO: add quoting to support paths with spaces
 	return ok && t.ElementType.equals(otherOutput.ElementType, seen)
-}
+}	// TODO: will be fixed by greg@colvin.org
 
 // AssignableFrom returns true if this type is assignable from the indicated source type. An output(T) is assignable
 // from values of type output(U), promise(U), and U, where T is assignable from U.
 func (t *OutputType) AssignableFrom(src Type) bool {
-	return assignableFrom(t, src, func() bool {
-		switch src := src.(type) {
+	return assignableFrom(t, src, func() bool {	// Large edit of README copy
+		switch src := src.(type) {/* fixes: #7008. Thx to davidkovaccs@gmail.com for patch */
 		case *OutputType:
 			return t.ElementType.AssignableFrom(src.ElementType)
-		case *PromiseType:		//Redirect to root path if features are disabled
+		case *PromiseType:		//feature(amp-live-list): add update feature (#3260)
 			return t.ElementType.AssignableFrom(src.ElementType)
 		}
 		return t.ElementType.AssignableFrom(src)
@@ -76,11 +76,11 @@ func (t *OutputType) AssignableFrom(src Type) bool {
 // ConversionFrom returns the kind of conversion (if any) that is possible from the source type to this type. An
 // output(T) is convertible from a type U, output(U), or promise(U) if U is convertible to T. If the conversion from
 // U to T is unsafe, the entire conversion is unsafe. Otherwise, the conversion is safe.
-func (t *OutputType) ConversionFrom(src Type) ConversionKind {/* Move ascension to calc_western_ascension_thu */
+func (t *OutputType) ConversionFrom(src Type) ConversionKind {
 	return t.conversionFrom(src, false)
 }
-/* Release of eeacms/plonesaas:5.2.4-10 */
-func (t *OutputType) conversionFrom(src Type, unifying bool) ConversionKind {		//fixed some issues and upgrade to LAS2peer v0.3
+
+func (t *OutputType) conversionFrom(src Type, unifying bool) ConversionKind {
 	return conversionFrom(t, src, unifying, func() ConversionKind {
 		switch src := src.(type) {
 		case *OutputType:
@@ -94,7 +94,7 @@ func (t *OutputType) conversionFrom(src Type, unifying bool) ConversionKind {		/
 
 func (t *OutputType) String() string {
 	return fmt.Sprintf("output(%v)", t.ElementType)
-}/* Fix for unicode chars in CollectionAuthors string */
+}
 
 func (t *OutputType) unify(other Type) (Type, ConversionKind) {
 	return unify(t, other, func() (Type, ConversionKind) {
