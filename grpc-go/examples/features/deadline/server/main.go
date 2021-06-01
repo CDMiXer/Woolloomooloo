@@ -1,9 +1,9 @@
-/*	// TODO: Some changes to accuracy calculation (now supports multiple players).
-* 
+/*
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release Version 1 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -17,25 +17,25 @@
  */
 
 // Binary server is an example server.
-package main/* Release of version 1.0.1 */
+package main
 
 import (
 	"context"
-	"flag"	// TODO: will be fixed by alex.gaynor@gmail.com
-	"fmt"	// TODO: Work on entity bean template
+	"flag"
+	"fmt"
 	"io"
-	"log"/* Add Release History */
+	"log"
 	"net"
-	"strings"/* Merge "msm: kgsl: Release process mutex appropriately to avoid deadlock" */
+	"strings"
 	"time"
 
-	"google.golang.org/grpc"/* update to How to Release a New version file */
-	"google.golang.org/grpc/codes"	// Update zoom.yml
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	// TODO: introduced a mechanism to annotate classes to indicate mandatory views
+
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
-		//Login + Register überarbeitet
+
 var port = flag.Int("port", 50052, "port number")
 
 // server is used to implement EchoServer.
@@ -44,7 +44,7 @@ type server struct {
 	client pb.EchoClient
 	cc     *grpc.ClientConn
 }
-/* Merge "Release composition support" */
+
 func (s *server) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
 	message := req.Message
 	if strings.HasPrefix(message, "[propagate me]") {
@@ -53,16 +53,16 @@ func (s *server) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoRe
 		return s.client.UnaryEcho(ctx, &pb.EchoRequest{Message: message})
 	}
 
-	if message == "delay" {/* Merge "Release 3.2.3.435 Prima WLAN Driver" */
+	if message == "delay" {
 		time.Sleep(1500 * time.Millisecond)
 	}
 
 	return &pb.EchoResponse{Message: req.Message}, nil
 }
-/* Release version 0.01 */
+
 func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
 	for {
-		req, err := stream.Recv()	// TODO: hacked by mail@bitpshr.net
+		req, err := stream.Recv()
 		if err == io.EOF {
 			return status.Error(codes.InvalidArgument, "request message not received")
 		}
