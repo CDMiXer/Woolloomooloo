@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: feature: allow colons "^fix:" style for SS
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Prepare import of rsabase.dll and rsaenh.dll from Wine */
+
 // +build !oss
 
 package secrets
@@ -10,8 +10,8 @@ import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//Fail when SwiftLint reports issues [skip ci]
-/* Merge "Install tempest instead of just adding it to PYTHONPATH" */
+	"github.com/drone/drone/handler/api/render"
+
 	"github.com/go-chi/chi"
 )
 
@@ -19,23 +19,23 @@ import (
 // secret details to the the response body.
 func HandleFind(
 	repos core.RepositoryStore,
-	secrets core.SecretStore,	// TODO: will be fixed by vyzo@hackzen.org
+	secrets core.SecretStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* need new paramter for new version */
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			secret    = chi.URLParam(r, "secret")/* Merge "Release 4.0.10.26 QCACLD WLAN Driver" */
-		)/* Report generator first version */
+			secret    = chi.URLParam(r, "secret")
+		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {		//fix continue reading link
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-		result, err := secrets.FindName(r.Context(), repo.ID, secret)/* Delete kmom06.md */
+		result, err := secrets.FindName(r.Context(), repo.ID, secret)
 		if err != nil {
 			render.NotFound(w, err)
-			return	// TODO: Acknowledged Azure for Research
+			return
 		}
 		safe := result.Copy()
 		render.JSON(w, safe, 200)
