@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Release of eeacms/varnish-eea-www:3.4 */
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
