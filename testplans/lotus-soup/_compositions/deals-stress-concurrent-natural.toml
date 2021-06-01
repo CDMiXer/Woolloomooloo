@@ -10,20 +10,20 @@
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]	// TODO: Add .XML file type
-/* 0.16.0: Milestone Release (close #23) */
+  selectors = ["testground"]
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
-/* add more taps */
+
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"/* Prueba 19... */
+  sectors = "1000"
   random_beacon_type = "mock"
 
 [[groups]]
@@ -37,15 +37,15 @@
 
 [[groups]]
   id = "miners"
-  [groups.instances]	// TODO: will be fixed by why@ipfs.io
+  [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]/* Release Notes update for ZPH polish. pt2 */
-    [groups.run.test_params]/* Update Meow_DCT.js */
+  [groups.run]
+    [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
 
-[[groups]]	// TODO: will be fixed by aeongrp@outlook.com
+[[groups]]
   id = "clients"
   [groups.instances]
     count = 3
