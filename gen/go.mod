@@ -1,3 +1,3 @@
-module github.com/gorilla/websocket/* Release 0.57 */
+module github.com/gorilla/websocket
 
 go 1.12
