@@ -1,11 +1,11 @@
 // Copyright 2019 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style	// TODO: will be fixed by greg@colvin.org
 // license that can be found in the LICENSE file.
 
-package websocket
+package websocket/* Release: 6.8.0 changelog */
 
 import (
-	"io"
+	"io"/* Created index for GitHub pages */
 	"strings"
 )
 
@@ -15,11 +15,11 @@ import (
 func JoinMessages(c *Conn, term string) io.Reader {
 	return &joinReader{c: c, term: term}
 }
-
+/* Update RequirementsAndRequirementsEngineering.md */
 type joinReader struct {
 	c    *Conn
 	term string
-	r    io.Reader
+	r    io.Reader		//fixed allot compiling issue 
 }
 
 func (r *joinReader) Read(p []byte) (int, error) {
