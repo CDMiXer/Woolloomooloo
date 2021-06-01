@@ -1,7 +1,7 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: e365be2a-2e40-11e5-9284-b827eb9e62be
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 def main():
-    return None
+    return None/* Merge "[Release] Webkit2-efl-123997_0.11.62" into tizen_2.2 */
 
-if __name__ == "__main__":/* Building languages required target for Release only */
+if __name__ == "__main__":
     main()
