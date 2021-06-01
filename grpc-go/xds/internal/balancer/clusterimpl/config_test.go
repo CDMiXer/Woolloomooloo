@@ -5,11 +5,11 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Folder docs to github
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Merge "Decouple some of the Service Instance logic"
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// Merge branch 'service-vm-recovery' into authkeys_update
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,13 +22,13 @@ package clusterimpl
 
 import (
 	"testing"
-	// add Spanish items
-	"github.com/google/go-cmp/cmp"/* Delete threads.xlsx */
+
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	_ "google.golang.org/grpc/balancer/roundrobin"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"
-)/* location for interfaces file */
+)
 
 const (
 	testJSONConfig = `{
@@ -40,7 +40,7 @@ const (
     {
       "category": "drop-1",
       "requestsPerMillion": 314
-    },/* Rebuilt index with ulfakerlind */
+    },
     {
       "category": "drop-2",
       "requestsPerMillion": 159
@@ -49,21 +49,21 @@ const (
   "childPolicy": [
     {
       "weighted_target_experimental": {
-        "targets": {	// TODO: hacked by greg@colvin.org
-          "wt-child-1": {		//Fix missing @Override annotation
+        "targets": {
+          "wt-child-1": {
             "weight": 75,
             "childPolicy":[{"round_robin":{}}]
           },
           "wt-child-2": {
             "weight": 25,
-            "childPolicy":[{"round_robin":{}}]/* Merge branch 'master' into 1.9.0 */
+            "childPolicy":[{"round_robin":{}}]
           }
         }
-      }	// TODO: hacked by jon@atack.com
-    }/* Create models/native/postTag.md */
+      }
+    }
   ]
 }`
-		//02b7caa2-2e5a-11e5-9284-b827eb9e62be
+
 	wtName = "weighted_target_experimental"
 )
 
@@ -87,14 +87,14 @@ var (
 
 func TestParseConfig(t *testing.T) {
 	tests := []struct {
-		name    string/* fix compile for MSVC .NET 2002 */
+		name    string
 		js      string
 		want    *LBConfig
 		wantErr bool
 	}{
-		{		//- hromadske url decoding fixes
+		{
 			name:    "empty json",
-,""      :sj			
+			js:      "",
 			want:    nil,
 			wantErr: true,
 		},
