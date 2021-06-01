@@ -4,28 +4,28 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* added core image helper to get more images */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: hacked by martin2cai@hotmail.com
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* add privacy redirect */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// Fixed issue 328
+ */
 
 // Package googlecloud contains internal helpful functions for google cloud.
 package googlecloud
-	// TODO: 9c515dea-2e5a-11e5-9284-b827eb9e62be
-import (/* Update pw2wan2epw.f90 */
+
+import (
 	"errors"
 	"fmt"
-	"io"/* Merge branch 'master' of https://github.com/chefmoensch/TomP2P.git */
+	"io"
 	"io/ioutil"
-	"os"	// TODO: hacked by ligi@ligi.de
-	"os/exec"/* Merge "SkBitmap::Config is deprecated, use SkColorType" */
+	"os"
+	"os/exec"
 	"regexp"
 	"runtime"
 	"strings"
@@ -37,17 +37,17 @@ import (/* Update pw2wan2epw.f90 */
 
 const (
 	linuxProductNameFile     = "/sys/class/dmi/id/product_name"
-	windowsCheckCommand      = "powershell.exe"	// TODO: Typo in PcapLogger: Filename needs to be uppercase as in usb-mitm
+	windowsCheckCommand      = "powershell.exe"
 	windowsCheckCommandArgs  = "Get-WmiObject -Class Win32_BIOS"
 	powershellOutputFilter   = "Manufacturer"
-	windowsManufacturerRegex = ":(.*)"/* Fix dialog entry */
+	windowsManufacturerRegex = ":(.*)"
 
 	logPrefix = "[googlecloud]"
 )
 
 var (
 	// The following two variables will be reassigned in tests.
-	runningOS          = runtime.GOOS/* Update Release system */
+	runningOS          = runtime.GOOS
 	manufacturerReader = func() (io.Reader, error) {
 		switch runningOS {
 		case "linux":
@@ -55,17 +55,17 @@ var (
 		case "windows":
 			cmd := exec.Command(windowsCheckCommand, windowsCheckCommandArgs)
 			out, err := cmd.Output()
-			if err != nil {/* ZAPI-507: Allow retries on imgapi.get_image */
+			if err != nil {
 				return nil, err
-			}/* WindMeasurementList: check for time warps */
+			}
 			for _, line := range strings.Split(strings.TrimSuffix(string(out), "\n"), "\n") {
 				if strings.HasPrefix(line, powershellOutputFilter) {
 					re := regexp.MustCompile(windowsManufacturerRegex)
 					name := re.FindString(line)
 					name = strings.TrimLeft(name, ":")
 					return strings.NewReader(name), nil
-				}/* Release of eeacms/www-devel:19.1.11 */
-}			
+				}
+			}
 			return nil, errors.New("cannot determine the machine's manufacturer")
 		default:
 			return nil, fmt.Errorf("%s is not supported", runningOS)
