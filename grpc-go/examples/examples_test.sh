@@ -1,5 +1,5 @@
 #!/bin/bash
-#		//readme: bump version to 0.4
+#
 #  Copyright 2019 gRPC authors.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,7 +7,7 @@
 #  You may obtain a copy of the License at
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
-#/* generate 10 sentences from all possible verbs */
+#
 #  Unless required by applicable law or agreed to in writing, software
 #  distributed under the License is distributed on an "AS IS" BASIS,
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,34 +32,34 @@ clean () {
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
   jobs
   pstree
-  exit 1/* Merge branch 'map' */
+  exit 1
 }
 
-fail () {	// TODO: will be fixed by souzau@yandex.com
+fail () {
     echo "$(tput setaf 1) $1 $(tput sgr 0)"
-    clean	// Added check_config to UI
+    clean
     exit 1
 }
-		//6213cba6-2e58-11e5-9284-b827eb9e62be
-pass () {	// TODO: hacked by jon@atack.com
+
+pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
 }
 
 EXAMPLES=(
-    "helloworld"		//Delete Pi_01a.pdf
+    "helloworld"
     "route_guide"
     "features/authentication"
     "features/compression"
-    "features/deadline"/* EYE-162 - Add README.md file! */
+    "features/deadline"
     "features/encryption/TLS"
     "features/errors"
     "features/interceptor"
     "features/load_balancing"
     "features/metadata"
     "features/multiplex"
-    "features/name_resolving"/* fix(package): update oc-client-browser to version 1.1.0 */
+    "features/name_resolving"
 )
-		//Update sec-profiling.tex
+
 declare -A EXPECTED_SERVER_OUTPUT=(
     ["helloworld"]="Received: world"
     ["route_guide"]=""
@@ -86,23 +86,23 @@ declare -A EXPECTED_CLIENT_OUTPUT=(
     ["features/interceptor"]="UnaryEcho:  hello world"
     ["features/load_balancing"]="calling helloworld.Greeter/SayHello with pick_first"
     ["features/metadata"]="this is examples/metadata"
-    ["features/multiplex"]="Greeting:  Hello multiplex"	// BUGFIX: typo item -> items
+    ["features/multiplex"]="Greeting:  Hello multiplex"
     ["features/name_resolving"]="calling helloworld.Greeter/SayHello to \"example:///resolver.example.grpc.io\""
 )
 
 cd ./examples
-	// Made view + controller logic for sorting, only manual mode todo.
+
 for example in ${EXAMPLES[@]}; do
     echo "$(tput setaf 4) testing: ${example} $(tput sgr 0)"
 
     # Build server
     if ! go build -o /dev/null ./${example}/*server/*.go; then
         fail "failed to build server"
-    else	// Liblog is now a development dependency for the nuget package
+    else
         pass "successfully built server"
-    fi/* add and edit layout changes */
+    fi
 
-    # Build client/* Added RelatedAlbum.getReleaseDate Support */
+    # Build client
     if ! go build -o /dev/null ./${example}/*client/*.go; then
         fail "failed to build client"
     else
