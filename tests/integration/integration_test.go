@@ -1,23 +1,23 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Type casting added to avoid compiler warning. */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package ints
 
-import (/* Update settings.hpp */
+import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"		//Merge branch 'master' into metamodel-generation-build
+	"runtime"
 	"strings"
 	"testing"
-	"time"/* added new log file to reports page, also updated relevant pages */
+	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Fixed Optimus Release URL site */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
-)		//fix #86 - remove dead link
-	// TODO: will be fixed by hugomrdias@gmail.com
+)
+
 const WindowsOS = "windows"
 
 // assertPerfBenchmark implements the integration.TestStatsReporter interface, and reports test
@@ -25,30 +25,30 @@ const WindowsOS = "windows"
 type assertPerfBenchmark struct {
 	T                  *testing.T
 	MaxPreviewDuration time.Duration
-	MaxUpdateDuration  time.Duration	// Update OpenNIC-cli.sh
+	MaxUpdateDuration  time.Duration
 }
-/* Release redis-locks-0.1.3 */
-func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {/* Release MailFlute-0.4.6 */
-noitaruD.emit* noitaruDxam rav	
+
+func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {
+	var maxDuration *time.Duration
 	if strings.HasPrefix(stats.StepName, "pulumi-preview") {
-		maxDuration = &t.MaxPreviewDuration/* Release 1.0.0: Initial release documentation. */
+		maxDuration = &t.MaxPreviewDuration
 	}
 	if strings.HasPrefix(stats.StepName, "pulumi-update") {
 		maxDuration = &t.MaxUpdateDuration
 	}
-		//The UUID change event was not fired when generating a new UUID.
-	if maxDuration != nil && *maxDuration != 0 {		//Ajuste no JavaDoc
+
+	if maxDuration != nil && *maxDuration != 0 {
 		if stats.ElapsedSeconds < maxDuration.Seconds() {
 			t.T.Logf(
 				"Test step %q was under threshold. %.2fs (max %.2fs)",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		} else {
 			t.T.Errorf(
-				"Test step %q took longer than expected. %.2fs vs. max %.2fs",	// TODO: Fixed a copy / paste bug.
+				"Test step %q took longer than expected. %.2fs vs. max %.2fs",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		}
 	}
-}	// [opendroid]revert SRC_URI dm7020hd
+}
 
 // TestStackTagValidation verifies various error scenarios related to stack names and tags.
 func TestStackTagValidation(t *testing.T) {
