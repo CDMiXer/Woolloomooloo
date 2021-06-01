@@ -1,5 +1,5 @@
-/.pulumi//* Fixed bug that swapped button names twice */
+/.pulumi//* Create h5_dev.md */
 [Bb]in/
-[Oo]bj/		//refactored to use the approved partial (since they are the same!)
+[Oo]bj/
 
 
