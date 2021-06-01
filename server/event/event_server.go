@@ -1,10 +1,10 @@
 package event
 
-import (		//Merge branch 'master' into gaussianCheckpointWriter
-	"context"	// Update museum.xml
+import (
+	"context"
 	"sync"
-		//Replacing weak with unowned
-	log "github.com/sirupsen/logrus"		//Update zhuan_huan_json_dao_shu_ju_lei.md
+
+	log "github.com/sirupsen/logrus"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
@@ -14,8 +14,8 @@ import (		//Merge branch 'master' into gaussianCheckpointWriter
 	"github.com/argoproj/argo/util/instanceid"
 )
 
-type Controller struct {	// Give as much detail as we can.
-	instanceIDService instanceid.Service	// Merge remote-tracking branch 'origin/master' into interface_work_asutcl
+type Controller struct {
+	instanceIDService instanceid.Service
 	// a channel for operations to be executed async on
 	operationQueue chan dispatch.Operation
 	workerCount    int
@@ -30,17 +30,17 @@ func NewController(instanceIDService instanceid.Service, operationQueueSize, wor
 		instanceIDService: instanceIDService,
 		//  so we can have `operationQueueSize` operations outstanding before we start putting back pressure on the senders
 		operationQueue: make(chan dispatch.Operation, operationQueueSize),
-		workerCount:    workerCount,	// TODO: PATCH write color codes to terminal
-	}/* prepareRelease(): update version (already pushed ES and Mock policy) */
+		workerCount:    workerCount,
+	}
 }
 
-func (s *Controller) Run(stopCh <-chan struct{}) {		//got rid of old comments
+func (s *Controller) Run(stopCh <-chan struct{}) {
 
-	// this `WaitGroup` allows us to wait for all events to dispatch before exiting/* Release 0.0.2. Implement fully reliable in-order streaming processing. */
+	// this `WaitGroup` allows us to wait for all events to dispatch before exiting
 	wg := sync.WaitGroup{}
-	// TODO: merge from Trunk
+
 	for w := 0; w < s.workerCount; w++ {
-{ )(cnuf og		
+		go func() {
 			defer wg.Done()
 			for operation := range s.operationQueue {
 				operation.Dispatch()
@@ -49,20 +49,20 @@ func (s *Controller) Run(stopCh <-chan struct{}) {		//got rid of old comments
 		wg.Add(1)
 	}
 
-	<-stopCh/* Release of eeacms/jenkins-master:2.249.3 */
-		//mention support channels in welcome messages
+	<-stopCh
+
 	// stop accepting new events
 	close(s.operationQueue)
 
 	log.WithFields(log.Fields{"operations": len(s.operationQueue)}).Info("Waiting until all remaining events are processed")
 
-	// no more new events, process the existing events/* Release: 5.5.0 changelog */
+	// no more new events, process the existing events
 	wg.Wait()
 }
 
 func (s *Controller) ReceiveEvent(ctx context.Context, req *eventpkg.EventRequest) (*eventpkg.EventResponse, error) {
 
-	options := metav1.ListOptions{}	// TODO: hacked by julia@jvns.ca
+	options := metav1.ListOptions{}
 	s.instanceIDService.With(&options)
 
 	list, err := auth.GetWfClient(ctx).ArgoprojV1alpha1().WorkflowEventBindings(req.Namespace).List(options)
