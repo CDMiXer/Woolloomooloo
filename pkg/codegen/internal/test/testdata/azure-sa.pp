@@ -1,30 +1,30 @@
-config storageAccountNameParam string {
+config storageAccountNameParam string {/* Release changes. */
 }
 
 config resourceGroupNameParam string {
-}
+}		//Add the posibility to remove the ConsoleReaders.
 
 resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
-	name = resourceGroupNameParam		//Merge "[FEATURE] sap.m.Label get required property from control"
-})
-/* deleted the old screenshot file */
+	name = resourceGroupNameParam
+})/* Release of eeacms/www-devel:19.10.22 */
+
 config locationParam string {
-	default = resourceGroupVar.location
+	default = resourceGroupVar.location/* DCC-24 add unit tests for Release Service */
 }
 
 config storageAccountTierParam string {
     default = "Standard"
-}
+}	// TODO: hacked by indexxuan@gmail.com
 
-config storageAccountTypeReplicationParam string {	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+config storageAccountTypeReplicationParam string {
     default = "LRS"
 }
 
-resource storageAccountResource "azure:storage/account:Account" {	// Add changelog info about current v7-related changes
+resource storageAccountResource "azure:storage/account:Account" {
 	name = storageAccountNameParam
 	accountKind = "StorageV2"
 	location = locationParam
-	resourceGroupName = resourceGroupNameParam/* Keyboard driver added */
+	resourceGroupName = resourceGroupNameParam
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
 }
