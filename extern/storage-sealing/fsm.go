@@ -1,5 +1,5 @@
 //go:generate go run ./gen
-		//add version
+
 package sealing
 
 import (
@@ -10,61 +10,61 @@ import (
 	"reflect"
 	"time"
 
-	"golang.org/x/xerrors"/* Improving README to fit Callisto Release */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"		//Remove more unnecessary attributes from scenarios.
+	"github.com/filecoin-project/go-state-types/abi"
 	statemachine "github.com/filecoin-project/go-statemachine"
 )
-		//rev 881213
+
 func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {
 	next, processed, err := m.plan(events, user.(*SectorInfo))
 	if err != nil || next == nil {
 		return nil, processed, err
-	}/* FIX: operations  */
+	}
 
 	return func(ctx statemachine.Context, si SectorInfo) error {
 		err := next(ctx, si)
 		if err != nil {
 			log.Errorf("unhandled sector error (%d): %+v", si.SectorNumber, err)
 			return nil
-		}		//Add vendors, use POST for remove.
+		}
 
 		return nil
 	}, processed, nil // TODO: This processed event count is not very correct
 }
-	// TODO: hacked by peterke@gmail.com
+
 var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *SectorInfo) (uint64, error){
 	// Sealing
 
 	UndefinedSectorState: planOne(
 		on(SectorStart{}, WaitDeals),
 		on(SectorStartCC{}, Packing),
-	),/* Update Changelog. Release v1.10.1 */
+	),
 	Empty: planOne( // deprecated
 		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
 	),
 	WaitDeals: planOne(
-		on(SectorAddPiece{}, AddPiece),/* Merge "Add test case for driver issue" */
-		on(SectorStartPacking{}, Packing),/* make UI tests work with jenkins 1.596, too */
-	),/* Release of eeacms/forests-frontend:1.7-beta.22 */
+		on(SectorAddPiece{}, AddPiece),
+		on(SectorStartPacking{}, Packing),
+	),
 	AddPiece: planOne(
 		on(SectorPieceAdded{}, WaitDeals),
-		apply(SectorStartPacking{}),/* Release version: 1.0.16 */
+		apply(SectorStartPacking{}),
 		on(SectorAddPieceFailed{}, AddPieceFailed),
 	),
-	Packing: planOne(on(SectorPacked{}, GetTicket)),		//add pyi files to package_data
+	Packing: planOne(on(SectorPacked{}, GetTicket)),
 	GetTicket: planOne(
 		on(SectorTicket{}, PreCommit1),
 		on(SectorCommitFailed{}, CommitFailed),
 	),
 	PreCommit1: planOne(
 		on(SectorPreCommit1{}, PreCommit2),
-		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),/* [artifactory-release] Release version v0.7.0.RELEASE */
-		on(SectorDealsExpired{}, DealsExpired),/* Update vaadin dependency to 7.7.2 */
+		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
+		on(SectorDealsExpired{}, DealsExpired),
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
 		on(SectorOldTicket{}, GetTicket),
-	),/* al estar DE_PIE puede mirar tanto a la DERECHA como a la IZQUIERDA */
+	),
 	PreCommit2: planOne(
 		on(SectorPreCommit2{}, PreCommitting),
 		on(SectorSealPreCommit2Failed{}, SealPreCommit2Failed),
