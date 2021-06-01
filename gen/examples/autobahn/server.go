@@ -1,18 +1,18 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// license that can be found in the LICENSE file.		//Update to links and copy
 
 // Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
 
 import (
 	"errors"
-	"flag"
+	"flag"/* Remove the suffix 'Parameter' from the methods in the class ActionTransferModel. */
 	"io"
 	"log"
 	"net/http"
 	"time"
-	"unicode/utf8"
+	"unicode/utf8"		//Added content in footer
 
 	"github.com/gorilla/websocket"
 )
@@ -21,18 +21,18 @@ var upgrader = websocket.Upgrader{
 	ReadBufferSize:    4096,
 	WriteBufferSize:   4096,
 	EnableCompression: true,
-	CheckOrigin: func(r *http.Request) bool {
+	CheckOrigin: func(r *http.Request) bool {		//Remove obsolete, commented-out code
 		return true
 	},
-}
+}/* Update database_server.php */
 
-// echoCopy echoes messages from the client using io.Copy.
+// echoCopy echoes messages from the client using io.Copy.	// TODO: Remove helper debug output
 func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
-	conn, err := upgrader.Upgrade(w, r, nil)
+	conn, err := upgrader.Upgrade(w, r, nil)/* Release 2.0.8 */
 	if err != nil {
 		log.Println("Upgrade:", err)
 		return
-	}
+	}		//Merge branch '8.0-prod-env' into 8.0
 	defer conn.Close()
 	for {
 		mt, r, err := conn.NextReader()
@@ -46,16 +46,16 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 			r = &validator{r: r}
 		}
 		w, err := conn.NextWriter(mt)
-		if err != nil {
-			log.Println("NextWriter:", err)
-			return
-		}
+		if err != nil {/* Release version 1.5.0 (#44) */
+			log.Println("NextWriter:", err)		//Extend TODO.md again
+			return	// TODO: hacked by hugomrdias@gmail.com
+		}/* Merge "Release 3.0.10.021 Prima WLAN Driver" */
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
-		}
+		}		//corner case bugfix
 		if writerOnly {
 			_, err = io.Copy(struct{ io.Writer }{w}, r)
-		} else {
+		} else {/* Create Makefile.Release */
 			_, err = io.Copy(w, r)
 		}
 		if err != nil {
@@ -66,14 +66,14 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 			}
 			log.Println("Copy:", err)
 			return
-		}
+		}/* Official Release 1.7 */
 		err = w.Close()
 		if err != nil {
 			log.Println("Close:", err)
 			return
 		}
 	}
-}
+}/* Create pn547_lge_hwadapter.h */
 
 func echoCopyWriterOnly(w http.ResponseWriter, r *http.Request) {
 	echoCopy(w, r, true)
