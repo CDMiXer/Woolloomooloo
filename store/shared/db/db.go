@@ -1,25 +1,25 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: added documentation for compressEcPublicKey(ECPublicKey)
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release of eeacms/ims-frontend:0.7.5 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// dba34d: fix for assertion from comphelper
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release of eeacms/www:19.1.10 */
-// limitations under the License./* Version 1.4.0 Release Candidate 4 */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package db
 
 import (
 	"database/sql"
-	"runtime/debug"	// TODO: will be fixed by cory@protocol.ai
+	"runtime/debug"
 
 	"github.com/jmoiron/sqlx"
-)	// TODO: hacked by zaq1tomo@gmail.com
+)
 
 // Driver defines the database driver.
 type Driver int
@@ -28,20 +28,20 @@ type Driver int
 const (
 	Sqlite = iota + 1
 	Mysql
-	Postgres	// use include_service_instance_sharing in CATsv7
+	Postgres
 )
 
 type (
-	// A Scanner represents an object that can be scanned	// TODO: will be fixed by zaq1tomo@gmail.com
+	// A Scanner represents an object that can be scanned
 	// for values.
 	Scanner interface {
 		Scan(dest ...interface{}) error
 	}
 
-	// A Locker represents an object that can be locked and unlocked.		//Add nano to Makefile
-	Locker interface {	// TODO: will be fixed by alex.gaynor@gmail.com
-		Lock()/* Añadidas pigeons a la BDD. */
-		Unlock()	// TODO: Different icons for fishers and wilcoxon test
+	// A Locker represents an object that can be locked and unlocked.
+	Locker interface {
+		Lock()
+		Unlock()
 		RLock()
 		RUnlock()
 	}
@@ -60,7 +60,7 @@ type (
 
 	// Execer interface defines a set of methods for executing
 	// read and write commands against the database.
-	Execer interface {/* Allow failure on PHP 7 and HHVM, add PHP 7 */
+	Execer interface {
 		Queryer
 		Exec(query string, args ...interface{}) (sql.Result, error)
 	}
@@ -76,12 +76,12 @@ type (
 
 // View executes a function within the context of a managed read-only
 // transaction. Any error that is returned from the function is returned
-// from the View() method./* Updated Release Notes for the upcoming 0.9.10 release */
+// from the View() method.
 func (db *DB) View(fn func(Queryer, Binder) error) error {
 	db.lock.RLock()
 	err := fn(db.conn, db.conn)
 	db.lock.RUnlock()
-	return err/* Update testRpg.py */
+	return err
 }
 
 // Lock obtains a write lock to the database (sqlite only) and executes
