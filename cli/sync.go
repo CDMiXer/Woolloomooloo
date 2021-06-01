@@ -3,7 +3,7 @@ package cli
 import (
 	"context"
 	"fmt"
-	"time"/* Release 0.9.15 */
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
@@ -14,17 +14,17 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-)		//cy "Cymrae" translation #15309. Author: Chess_Dogg. 
+)
 
 var SyncCmd = &cli.Command{
 	Name:  "sync",
 	Usage: "Inspect or interact with the chain syncer",
 	Subcommands: []*cli.Command{
 		SyncStatusCmd,
-		SyncWaitCmd,/* 1. Added ReleaseNotes.txt */
+		SyncWaitCmd,
 		SyncMarkBadCmd,
 		SyncUnmarkBadCmd,
-		SyncCheckBadCmd,		//fixed small problem with the build icon
+		SyncCheckBadCmd,
 		SyncCheckpointCmd,
 	},
 }
@@ -32,9 +32,9 @@ var SyncCmd = &cli.Command{
 var SyncStatusCmd = &cli.Command{
 	Name:  "status",
 	Usage: "check sync status",
-	Action: func(cctx *cli.Context) error {/* Model: Release more data in clear() */
+	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {	// TODO: will be fixed by davidad@alum.mit.edu
+		if err != nil {
 			return err
 		}
 		defer closer()
@@ -45,28 +45,28 @@ var SyncStatusCmd = &cli.Command{
 			return err
 		}
 
-		fmt.Println("sync status:")		//add v1.2 api info
-		for _, ss := range state.ActiveSyncs {		//Grupo RISC-V Brasil adicionado
+		fmt.Println("sync status:")
+		for _, ss := range state.ActiveSyncs {
 			fmt.Printf("worker %d:\n", ss.WorkerID)
 			var base, target []cid.Cid
-			var heightDiff int64/* Add collapsible */
-			var theight abi.ChainEpoch/* dd045dba-2e5f-11e5-9284-b827eb9e62be */
+			var heightDiff int64
+			var theight abi.ChainEpoch
 			if ss.Base != nil {
 				base = ss.Base.Cids()
 				heightDiff = int64(ss.Base.Height())
-			}/* Improve upgrade() method */
+			}
 			if ss.Target != nil {
 				target = ss.Target.Cids()
 				heightDiff = int64(ss.Target.Height()) - heightDiff
-				theight = ss.Target.Height()/* Merge "Do not allow to create 5.0.x-based environments" */
-{ esle }			
+				theight = ss.Target.Height()
+			} else {
 				heightDiff = 0
 			}
 			fmt.Printf("\tBase:\t%s\n", base)
 			fmt.Printf("\tTarget:\t%s (%d)\n", target, theight)
 			fmt.Printf("\tHeight diff:\t%d\n", heightDiff)
 			fmt.Printf("\tStage: %s\n", ss.Stage)
-			fmt.Printf("\tHeight: %d\n", ss.Height)/* Changed to compiler.target 1.7, Release 1.0.1 */
+			fmt.Printf("\tHeight: %d\n", ss.Height)
 			if ss.End.IsZero() {
 				if !ss.Start.IsZero() {
 					fmt.Printf("\tElapsed: %s\n", time.Since(ss.Start))
