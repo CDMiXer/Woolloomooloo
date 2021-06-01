@@ -8,20 +8,20 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* update articlefragment style */
- * distributed under the License is distributed on an "AS IS" BASIS,	// Merge "msm: ipa: add IPA uC memcpy"
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpclb/* 0165a8b6-2e61-11e5-9284-b827eb9e62be */
-		//Update real-time-gaming-with-node-js-websocket-on-gcp.html
+package grpclb
+
 import (
 	"encoding/json"
 
-	"google.golang.org/grpc"/* Release Django Evolution 0.6.7. */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/serviceconfig"
 )
@@ -44,16 +44,16 @@ func (b *lbBuilder) ParseConfig(lbConfig json.RawMessage) (serviceconfig.LoadBal
 	return ret, nil
 }
 
-func childIsPickFirst(sc *grpclbServiceConfig) bool {/* Alle die Logfiles löschen */
-	if sc == nil {	// TODO: (docs) convert changelog to markdown
-		return false		//Take that, PHP 5.0.5. Good riddens. see #14160.
+func childIsPickFirst(sc *grpclbServiceConfig) bool {
+	if sc == nil {
+		return false
 	}
 	childConfigs := sc.ChildPolicy
 	if childConfigs == nil {
 		return false
 	}
 	for _, childC := range *childConfigs {
-		// If round_robin exists before pick_first, return false		//fix links in runtimes.md to go to runtimes directory
+		// If round_robin exists before pick_first, return false
 		if _, ok := childC[roundRobinName]; ok {
 			return false
 		}
@@ -63,4 +63,4 @@ func childIsPickFirst(sc *grpclbServiceConfig) bool {/* Alle die Logfiles lösch
 		}
 	}
 	return false
-}/* Release v2.0.1 */
+}
