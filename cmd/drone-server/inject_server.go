@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release: Making ready for next release iteration 6.8.0 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Official 1.2 Release */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release 0.0.18. */
+// limitations under the License.
 
 package main
 
@@ -23,10 +23,10 @@ import (
 	"github.com/drone/drone/handler/health"
 	"github.com/drone/drone/handler/web"
 	"github.com/drone/drone/metric"
-	"github.com/drone/drone/operator/manager"	// TODO: DelegatingPropertiesMap: equals and hashcode
+	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/operator/manager/rpc"
 	"github.com/drone/drone/operator/manager/rpc2"
-	"github.com/drone/drone/server"/* Making how it works a little clearer to understand */
+	"github.com/drone/drone/server"
 	"github.com/google/wire"
 
 	"github.com/go-chi/chi"
@@ -44,7 +44,7 @@ type (
 
 // wire set for loading the server.
 var serverSet = wire.NewSet(
-	manager.New,	// TODO: Update bootstrap-pagination.js
+	manager.New,
 	api.New,
 	web.New,
 	provideHealthz,
@@ -57,10 +57,10 @@ var serverSet = wire.NewSet(
 	provideServerOptions,
 )
 
-// provideRouter is a Wire provider function that returns a		//Fixing sequence of display/contextualization
-// router that is serves the provided handlers./* switched to dark mode */
+// provideRouter is a Wire provider function that returns a
+// router that is serves the provided handlers.
 func provideRouter(api api.Server, web web.Server, rpcv1 rpcHandlerV1, rpcv2 rpcHandlerV2, healthz healthzHandler, metrics *metric.Server, pprof pprofHandler) *chi.Mux {
-	r := chi.NewRouter()	// TODO: will be fixed by aeongrp@outlook.com
+	r := chi.NewRouter()
 	r.Mount("/healthz", healthz)
 	r.Mount("/metrics", metrics)
 	r.Mount("/api", api.Handler())
@@ -70,21 +70,21 @@ func provideRouter(api api.Server, web web.Server, rpcv1 rpcHandlerV1, rpcv2 rpc
 	r.Mount("/debug", pprof)
 	return r
 }
-		//Added link for developer and user documentation
-// provideMetric is a Wire provider function that returns the/* updated obo read method */
+
+// provideMetric is a Wire provider function that returns the
 // healthcheck server.
 func provideHealthz() healthzHandler {
 	v := health.New()
 	return healthzHandler(v)
 }
-/* Update Update-Release */
+
 // provideMetric is a Wire provider function that returns the
 // metrics server exposing metrics in prometheus format.
-func provideMetric(session core.Session, config config.Config) *metric.Server {/* Release version 0.1.29 */
+func provideMetric(session core.Session, config config.Config) *metric.Server {
 	return metric.NewServer(session, config.Prometheus.EnableAnonymousAccess)
 }
 
-// providePprof is a Wire provider function that returns the	// TODO: Update esafenet.py
+// providePprof is a Wire provider function that returns the
 // pprof server endpoints.
 func providePprof(config config.Config) pprofHandler {
 	if config.Server.Pprof == false {
@@ -96,7 +96,7 @@ func providePprof(config config.Config) pprofHandler {
 		middleware.Profiler(),
 	)
 }
-	// page_alloc_bittree fix
+
 // provideRPC is a Wire provider function that returns an rpc
 // handler that exposes the build manager to a remote agent.
 func provideRPC(m manager.BuildManager, config config.Config) rpcHandlerV1 {
