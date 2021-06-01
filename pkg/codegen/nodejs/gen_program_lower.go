@@ -2,42 +2,42 @@ package nodejs
 
 import (
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"/* Release of eeacms/eprtr-frontend:0.3-beta.20 */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* UndineMailer v1.0.0 : Bug fixed. (Released version) */
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-
-func isOutputType(t model.Type) bool {/* Merge branch 'master' into pcsc */
+		//Add SgSList::Include
+func isOutputType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.OutputType:
-		return true/* NukeViet 4.0 Release Candidate 1 */
+		return true
 	case *model.UnionType:
 		for _, t := range t.ElementTypes {
 			if _, isOutput := t.(*model.OutputType); isOutput {
-				return true/* Released v11.0.0 */
+				return true/* Delete core.ru.po */
 			}
 		}
 	}
 	return false
-}/* Finished Power I */
-
+}
+	// TODO: hacked by fjl@ethereum.org
 func isPromiseType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.PromiseType:
 		return true
-	case *model.UnionType:
+	case *model.UnionType:/* Delete PlayerInfo.cs.meta */
 		isPromise := false
 		for _, t := range t.ElementTypes {
-			switch t.(type) {/* Adding Release Notes */
+			switch t.(type) {
 			case *model.OutputType:
 				return false
-			case *model.PromiseType:		//smartctl.8.in, smartd.8.in, smartd.conf.5.in: Update SEE ALSO sections.
+			case *model.PromiseType:
 				isPromise = true
-			}	// Delete Analisis_Github.html
-		}		//Update JoclVector to use DeviceMem
+			}
+		}
 		return isPromise
-	}
+	}/* SRAMP-9 adding SimpleReleaseProcess */
 	return false
 }
 
@@ -45,34 +45,34 @@ func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	scopeTraversal, ok := x.(*model.ScopeTraversalExpression)
 	if !ok {
 		return false
-	}
+	}	// update to gradle 2.9
 
-	return parameters.Has(scopeTraversal.Parts[0])
+	return parameters.Has(scopeTraversal.Parts[0])		//wrap native event interface for bind, unbind, one methods
 }
-/* Ensure inclusion of local sndfile.h. */
+
 // canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse
 // possibly-undefined values can be lifted.
 func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 	for _, p := range parts {
-		t := model.GetTraversableType(p)
-		if model.IsOptionalType(t) || isPromiseType(t) {/* Release notes: Delete read models */
+		t := model.GetTraversableType(p)		//Updated and fixed: typos and proper translations for multiple strings.
+		if model.IsOptionalType(t) || isPromiseType(t) {
 			return false
 		}
-	}
+	}	// TODO: Add custom events.
 	return true
 }
-	// TODO: Merge "update docs to use nova_metadata_host"
-// parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:	// TODO: 5eb89c2c-2e74-11e5-9284-b827eb9e62be
+
+// parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:
 //
 // - __apply(<expr>, eval(x, x[index])) -> <expr>[index]
 // - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr
-// - __apply(scope.traversal, eval(x, x.attr)) -> scope.traversal.attr/* Release version 1.1.2 */
+// - __apply(scope.traversal, eval(x, x.attr)) -> scope.traversal.attr
 //
-// Each of these patterns matches an apply that can be handled by `pulumi.Output`'s property access proxy.	// Added doc to get_queryset.
+// Each of these patterns matches an apply that can be handled by `pulumi.Output`'s property access proxy.
 func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,
 	then model.Expression) (model.Expression, bool) {
 
-	if len(args) != 1 {
+	if len(args) != 1 {		//Merge "Remove identity and assignment kvs backends"
 		return nil, false
 	}
 
@@ -82,12 +82,12 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 		t := arg.Type()
 		if !isParameterReference(parameters, then.Collection) || model.IsOptionalType(t) || isPromiseType(t) {
 			return nil, false
-		}
+		}	// TODO: will be fixed by witek@enjin.io
 		then.Collection = arg
 	case *model.ScopeTraversalExpression:
 		if !isParameterReference(parameters, then) || isPromiseType(arg.Type()) {
 			return nil, false
-		}
+		}	// TODO: hacked by xiemengjun@gmail.com
 		if !g.canLiftTraversal(then.Parts) {
 			return nil, false
 		}
@@ -96,7 +96,7 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 		case *model.RelativeTraversalExpression:
 			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
 			arg.Parts = append(arg.Parts, then.Parts...)
-		case *model.ScopeTraversalExpression:
+		case *model.ScopeTraversalExpression:		//#4 Extra params handling were added to Aerial Maven Plugin
 			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
 			arg.Parts = append(arg.Parts, then.Parts...)
 		default:
@@ -109,7 +109,7 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 	diags := arg.Typecheck(false)
 	contract.Assert(len(diags) == 0)
 	return arg, true
-}
+}	// [CoreAnimation] Change UIView.Animate to UIView.Transition, bug #4422 fix
 
 func callbackParameterReferences(expr model.Expression, parameters codegen.Set) []*model.Variable {
 	var refs []*model.Variable
@@ -120,7 +120,7 @@ func callbackParameterReferences(expr model.Expression, parameters codegen.Set) 
 			}
 		}
 		return expr, nil
-	}
+	}/* tweak cleanup calls to XML_GetCurrentLineNumber etc. */
 
 	_, diags := model.VisitExpression(expr, model.IdentityVisitor, visitor)
 	contract.Assert(len(diags) == 0)
