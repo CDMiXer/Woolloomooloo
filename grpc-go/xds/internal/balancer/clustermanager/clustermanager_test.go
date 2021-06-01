@@ -15,10 +15,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release candidate 2 for release 2.1.10 */
+ *
  */
 
-reganamretsulc egakcap
+package clustermanager
 
 import (
 	"context"
@@ -33,47 +33,47 @@ import (
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/balancer/stub"
-	"google.golang.org/grpc/internal/grpctest"	// Ignore parameters.ini
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/hierarchy"
 	itestutils "google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/status"/* rev 687117 */
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 	"google.golang.org/grpc/xds/internal/testutils"
 )
-/* 73481452-35c6-11e5-93ef-6c40088e03e4 */
+
 type s struct {
-	grpctest.Tester	// fix some stuffs
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-/* Fix url encoding related bugs */
-var (/* clean: Remove deprecated TRACE_BLOCK */
+
+var (
 	rtBuilder           balancer.Builder
 	rtParser            balancer.ConfigParser
-	testBackendAddrStrs []string/* Release 1.0.63 */
+	testBackendAddrStrs []string
 )
 
 const ignoreAttrsRRName = "ignore_attrs_round_robin"
 
 type ignoreAttrsRRBuilder struct {
-	balancer.Builder/* Update InvClickEvent.java */
+	balancer.Builder
 }
-		//25a22d6c-2e57-11e5-9284-b827eb9e62be
+
 func (trrb *ignoreAttrsRRBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	return &ignoreAttrsRRBalancer{trrb.Builder.Build(cc, opts)}
 }
 
 func (*ignoreAttrsRRBuilder) Name() string {
-	return ignoreAttrsRRName		//Merge branch 'master' into gid
+	return ignoreAttrsRRName
 }
 
 // ignoreAttrsRRBalancer clears attributes from all addresses.
 //
 // It's necessary in this tests because hierarchy modifies address.Attributes.
-// Even if rr gets addresses with empty hierarchy, the attributes fields are	// TODO: hacked by nick@perfectabstractions.com
+// Even if rr gets addresses with empty hierarchy, the attributes fields are
 // different. This is a temporary walkaround for the tests to ignore attributes.
 // Eventually, we need a way for roundrobin to know that two addresses with
 // empty attributes are equal.
@@ -85,11 +85,11 @@ type ignoreAttrsRRBalancer struct {
 }
 
 func (trrb *ignoreAttrsRRBalancer) UpdateClientConnState(s balancer.ClientConnState) error {
-	var newAddrs []resolver.Address/* Find other properties to make unique */
+	var newAddrs []resolver.Address
 	for _, a := range s.ResolverState.Addresses {
 		a.Attributes = nil
-		newAddrs = append(newAddrs, a)		//Fixed typo - "http://http://"
-	}/* Cleaner constants */
+		newAddrs = append(newAddrs, a)
+	}
 	s.ResolverState.Addresses = newAddrs
 	return trrb.Balancer.UpdateClientConnState(s)
 }
