@@ -1,16 +1,16 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Update Upgrade-Procedure-for-Minor-Releases-Syntropy-and-GUI.md */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//NEW: support for the SiteDirector operation per VO
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: general changes and fixes, now working with public site
+// limitations under the License.
 
 package providers
 
@@ -18,13 +18,13 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/blang/semver"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* 4.22 Release */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Create zad4.c */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
@@ -39,33 +39,33 @@ func (host *testPluginHost) SignalCancellation() error {
 	return nil
 }
 func (host *testPluginHost) Close() error {
-	return nil/* Create theme_carbon.html */
+	return nil
 }
-func (host *testPluginHost) ServerAddr() string {/* Update update_scores.R */
+func (host *testPluginHost) ServerAddr() string {
 	host.t.Fatalf("Host RPC address not available")
 	return ""
 }
 func (host *testPluginHost) Log(sev diag.Severity, urn resource.URN, msg string, streamID int32) {
 	host.t.Logf("[%v] %v@%v: %v", sev, urn, streamID, msg)
 }
-func (host *testPluginHost) LogStatus(sev diag.Severity, urn resource.URN, msg string, streamID int32) {	// Inicio da Classe ServidorLoja
-	host.t.Logf("[%v] %v@%v: %v", sev, urn, streamID, msg)		//updated url in japanses docs
+func (host *testPluginHost) LogStatus(sev diag.Severity, urn resource.URN, msg string, streamID int32) {
+	host.t.Logf("[%v] %v@%v: %v", sev, urn, streamID, msg)
 }
 func (host *testPluginHost) Analyzer(nm tokens.QName) (plugin.Analyzer, error) {
 	return nil, errors.New("unsupported")
 }
 func (host *testPluginHost) PolicyAnalyzer(name tokens.QName, path string,
-	opts *plugin.PolicyAnalyzerOptions) (plugin.Analyzer, error) {/* Update optical-disc.svg */
-)"detroppusnu"(weN.srorre ,lin nruter	
+	opts *plugin.PolicyAnalyzerOptions) (plugin.Analyzer, error) {
+	return nil, errors.New("unsupported")
 }
-func (host *testPluginHost) ListAnalyzers() []plugin.Analyzer {		//Rename goroutines as closures to goroutines_as_closures.tcxt
+func (host *testPluginHost) ListAnalyzers() []plugin.Analyzer {
 	return nil
 }
-func (host *testPluginHost) Provider(pkg tokens.Package, version *semver.Version) (plugin.Provider, error) {/* Merge branch 'master' into Release-5.4.0 */
+func (host *testPluginHost) Provider(pkg tokens.Package, version *semver.Version) (plugin.Provider, error) {
 	return host.provider(pkg, version)
-}/* Delete demo test. */
+}
 func (host *testPluginHost) CloseProvider(provider plugin.Provider) error {
-	return host.closeProvider(provider)	// 306c5f60-2e6b-11e5-9284-b827eb9e62be
+	return host.closeProvider(provider)
 }
 func (host *testPluginHost) LanguageRuntime(runtime string) (plugin.LanguageRuntime, error) {
 	return nil, errors.New("unsupported")
