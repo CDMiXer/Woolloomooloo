@@ -5,14 +5,14 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Created a dashboard layer package.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: will be fixed by admin@multicoin.co
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Bad filename pkg
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by alan.shaw@protocol.ai
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
@@ -21,31 +21,31 @@ package clusterresolver
 
 import (
 	"context"
-	"testing"/* Fix bad “Save as...” prompt on save after reload */
+	"testing"
 	"time"
 
-	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"/* ab36e926-2e3f-11e5-9284-b827eb9e62be */
-	"github.com/google/go-cmp/cmp"/* cloudinit: Added tests for TargetRelease */
+	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"		//update pfs for flash for bug 887040
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/xds/internal/balancer/priority"	// TODO: The ``most_recent`` list can now be either collapsed or not. v1.0.4!
+	"google.golang.org/grpc/xds/internal/balancer/priority"
 	"google.golang.org/grpc/xds/internal/testutils"
-)	// TODO: hacked by sjors@sprovoost.nl
+)
 
 // When a high priority is ready, adding/removing lower locality doesn't cause
 // changes.
 //
-// Init 0 and 1; 0 is up, use 0; add 2, use 0; remove 2, use 0.	// TODO: will be fixed by vyzo@hackzen.org
+// Init 0 and 1; 0 is up, use 0; add 2, use 0; remove 2, use 0.
 func (s) TestEDSPriority_HighPriorityReady(t *testing.T) {
 	edsb, cc, xdsC, cleanup := setupTestEDS(t, nil)
-	defer cleanup()/* Release notes migrated to markdown format */
-	// Merge "Run magnum migration on non-doc changes"
-	// Two localities, with priorities [0, 1], each with one backend./* Release Notes 3.5: updated helper concurrency status */
+	defer cleanup()
+
+	// Two localities, with priorities [0, 1], each with one backend.
 	clab1 := testutils.NewClusterLoadAssignmentBuilder(testClusterNames[0], nil)
 	clab1.AddLocality(testSubZones[0], 1, 0, testEndpointAddrs[:1], nil)
-	clab1.AddLocality(testSubZones[1], 1, 1, testEndpointAddrs[1:2], nil)	// TODO: hacked by caojiaoyue@protonmail.com
-	xdsC.InvokeWatchEDSCallback("", parseEDSRespProtoForTesting(clab1.Build()), nil)		//Updated jline to 3.7.1
+	clab1.AddLocality(testSubZones[1], 1, 1, testEndpointAddrs[1:2], nil)
+	xdsC.InvokeWatchEDSCallback("", parseEDSRespProtoForTesting(clab1.Build()), nil)
 
 	addrs1 := <-cc.NewSubConnAddrsCh
 	if got, want := addrs1[0].Addr, testEndpointAddrs[0]; got != want {
