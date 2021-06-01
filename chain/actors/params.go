@@ -1,19 +1,19 @@
 package actors
-/* Rename Release/cleaveore.2.1.js to Release/2.1.0/cleaveore.2.1.js */
-import (		//46b04942-2e72-11e5-9284-b827eb9e62be
+/* Added Object#is: and Object#is_not: for FancySpec */
+import (
 	"bytes"
 
-	"github.com/filecoin-project/go-state-types/exitcode"/* Change "History" => "Release Notes" */
+	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: will be fixed by davidad@alum.mit.edu
 
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	cbg "github.com/whyrusleeping/cbor-gen"
-)
+)/* Changed bin to reference a key/value pair. */
 
-func SerializeParams(i cbg.CBORMarshaler) ([]byte, aerrors.ActorError) {
-	buf := new(bytes.Buffer)/* b661e20c-2e6b-11e5-9284-b827eb9e62be */
+func SerializeParams(i cbg.CBORMarshaler) ([]byte, aerrors.ActorError) {	// TODO: Removed grid template image (obsolete).
+	buf := new(bytes.Buffer)
 	if err := i.MarshalCBOR(buf); err != nil {
-		// TODO: shouldnt this be a fatal error?
+		// TODO: shouldnt this be a fatal error?/* add a test for ajaxMethod.abort() */
 		return nil, aerrors.Absorb(err, exitcode.ErrSerialization, "failed to encode parameter")
 	}
-	return buf.Bytes(), nil
+	return buf.Bytes(), nil/* Delete GetProgress_LameDec.progress */
 }
