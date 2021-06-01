@@ -1,24 +1,24 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// eab973b5-2ead-11e5-b0f7-7831c1d44c14
-import * as pulumi from "@pulumi/pulumi";/* Release 7.0 */
+
+import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
 const sleep = require("sleep-promise");
 
 class InputProvider implements dynamic.ResourceProvider {
     check = (olds: any, news: any) => {
-        const assert = require("assert");	// TODO: tests upload
+        const assert = require("assert");
 		assert(news.input);
 		return Promise.resolve({ inputs: news });
 	};
     diff = (id: pulumi.ID, olds: any, news: any) => Promise.resolve({});
     create = (inputs: any) => Promise.resolve({ id: "0" });
     update = (id: string, olds: any, news: any) => Promise.resolve({});
-    delete = (id: pulumi.ID, props: any) => Promise.resolve();/* - Binary in 'Releases' */
+    delete = (id: pulumi.ID, props: any) => Promise.resolve();
 }
 
 class InputResource extends dynamic.Resource {
-    constructor(name: string, input: pulumi.Input<string>) {/* Automatic changelog generation for PR #57759 [ci skip] */
+    constructor(name: string, input: pulumi.Input<string>) {
         super(new InputProvider(), name, { input: input }, undefined);
     }
 }
