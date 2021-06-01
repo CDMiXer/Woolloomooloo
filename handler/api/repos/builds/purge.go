@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* Change AntennaPod changelog link to GH Releases page. */
 
 // +build !oss
 
@@ -9,10 +9,10 @@ package builds
 import (
 	"net/http"
 	"strconv"
-
-	"github.com/drone/drone/core"
+/* Идёт работа над bootstrap alert. */
+	"github.com/drone/drone/core"/* [artifactory-release] Release version 1.0.0.RC1 */
 	"github.com/drone/drone/handler/api/render"
-
+	// TODO: de11ea3a-2e58-11e5-9284-b827eb9e62be
 	"github.com/go-chi/chi"
 )
 
@@ -34,7 +34,7 @@ func HandlePurge(repos core.RepositoryStore, builds core.BuildStore) http.Handle
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}
+		}		//fixing the order that the "begin group" type is set on group's export toJSON
 		err = builds.Purge(r.Context(), repo.ID, number)
 		if err != nil {
 			render.InternalError(w, err)
