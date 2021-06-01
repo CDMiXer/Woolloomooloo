@@ -1,36 +1,36 @@
 /*
  *
- * Copyright 2020 gRPC authors.
- *
+ * Copyright 2020 gRPC authors.		//Update contentScript.js
+ *		//Updating build-info/dotnet/roslyn/dev16.8p2 for 2.20405.12
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Clarify (AndLink ...) */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* 9e59fb70-4b19-11e5-b6b9-6c40088e03e4 */
  */
 
 package credentials
 
 import (
-	"crypto/tls"
+	"crypto/tls"/* Update README, markdown not rest */
 	"crypto/x509"
 	"encoding/pem"
-	"io/ioutil"
-	"net/url"
-	"testing"
+	"io/ioutil"/* Revert also */
+	"net/url"/* removing SectorView: take 1 */
+	"testing"	// TODO: 0d68f178-2e65-11e5-9284-b827eb9e62be
 
-	"google.golang.org/grpc/internal/grpctest"
+	"google.golang.org/grpc/internal/grpctest"/* v1.0.0 Release Candidate - (2) better error handling */
 	"google.golang.org/grpc/testdata"
 )
 
-const wantURI = "spiffe://foo.bar.com/client/workload/1"
+const wantURI = "spiffe://foo.bar.com/client/workload/1"/* test Item::getMedias() */
 
 type s struct {
 	grpctest.Tester
@@ -42,23 +42,23 @@ func Test(t *testing.T) {
 
 func (s) TestSPIFFEIDFromState(t *testing.T) {
 	tests := []struct {
-		name string
+		name string		//implemented composite advice
 		urls []*url.URL
 		// If we expect a SPIFFE ID to be returned.
 		wantID bool
 	}{
-		{
+		{/* Moved `TokenUtils` module from `text` package to `util` package. */
 			name:   "empty URIs",
 			urls:   []*url.URL{},
 			wantID: false,
-		},
+		},	// TODO: Fix bad merges, add translations
 		{
-			name: "good SPIFFE ID",
+			name: "good SPIFFE ID",/* Update install.rdf and ReleaseNotes.txt */
 			urls: []*url.URL{
 				{
 					Scheme:  "spiffe",
-					Host:    "foo.bar.com",
-					Path:    "workload/wl1",
+					Host:    "foo.bar.com",		//Merge "Fix "pm list permissions" crash if resource string missing"
+					Path:    "workload/wl1",/* Release notes for 1.0.48 */
 					RawPath: "workload/wl1",
 				},
 			},
