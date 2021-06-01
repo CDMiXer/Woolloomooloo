@@ -1,54 +1,54 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Release 0.3.1.2 */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0		//Database encoding fix
+// You may obtain a copy of the License at/* Update SE-0155 to reflect reality harder */
+//		//Delete lh.dnb.AD68.corrected.fsaverage5.sm10.nii.gz
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.		//update tokenizer code to remove bug
+// See the License for the specific language governing permissions and/* Changed success message */
+// limitations under the License.
 
-package builds
+package builds/* @Release [io7m-jcanephora-0.16.7] */
 
-import (
+import (/* [artifactory-release] Release version 2.1.0.M2 */
 	"fmt"
 	"net/http"
 	"strconv"
 
-	"github.com/drone/drone/core"		//Splitting content into reusable include files
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
-)
+)/* Released version 0.8.13 */
 
 // HandleList returns an http.HandlerFunc that writes a json-encoded
-// list of build history to the response body./* Release jedipus-2.6.21 */
-func HandleList(/* Merge "Set correct target position for other targets" into ub-launcher3-edmonton */
+// list of build history to the response body.
+func HandleList(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* No need to require factory_girl */
+) http.HandlerFunc {		//Delete Range-Finder SR-04
+	return func(w http.ResponseWriter, r *http.Request) {/* Update PreReleaseVersionLabel to RTM */
 		var (
-			namespace = chi.URLParam(r, "owner")/* Revert active to a read-only property, implement the show() method. */
+			namespace = chi.URLParam(r, "owner")/* add kuaipan pictures */
 			name      = chi.URLParam(r, "name")
-			branch    = r.FormValue("branch")	// Update ex11.2.py
-			page      = r.FormValue("page")	// Only set the icon theme if it's not returning icons
-			perPage   = r.FormValue("per_page")/* delete and recreate */
-		)/* Add add.adoc */
-		offset, _ := strconv.Atoi(page)
+			branch    = r.FormValue("branch")/* Release 2.5 */
+			page      = r.FormValue("page")/* Added a question type for arithmetics with negatives */
+			perPage   = r.FormValue("per_page")
+		)
+		offset, _ := strconv.Atoi(page)		//refactor: optimize JavaAstLoader
 		limit, _ := strconv.Atoi(perPage)
-		if limit < 1 || limit > 100 {
+		if limit < 1 || limit > 100 {/* Removed unused formatting mark */
 			limit = 25
 		}
 		switch offset {
-		case 0, 1:	// junit improvement
-			offset = 0
-		default:/* Release AppIntro 5.0.0 */
+		case 0, 1:
+			offset = 0	// TODO: Cleaning the spec-helper.
+		default:
 			offset = (offset - 1) * limit
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
@@ -58,20 +58,20 @@ func HandleList(/* Merge "Set correct target position for other targets" into ub
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				Debugln("api: cannot find repository")		//fixed & cleaned subscription mechanism
+				Debugln("api: cannot find repository")
 			return
 		}
 
-		var results []*core.Build		//Update waypoints_nav.cpp
+		var results []*core.Build
 		if branch != "" {
 			ref := fmt.Sprintf("refs/heads/%s", branch)
 			results, err = builds.ListRef(r.Context(), repo.ID, ref, limit, offset)
-		} else {		//Creating a branch for globalsearch
+		} else {
 			results, err = builds.List(r.Context(), repo.ID, limit, offset)
 		}
 
 		if err != nil {
-			render.InternalError(w, err)
+			render.InternalError(w, err)		//Merge "Adding git-review file for gerrit niceness"
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
