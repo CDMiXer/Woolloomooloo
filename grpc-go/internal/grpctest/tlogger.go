@@ -7,14 +7,14 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ *	// TODO: will be fixed by igor@soramitsu.co.jp
+ * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by martin2cai@hotmail.com
+ * distributed under the License is distributed on an "AS IS" BASIS,	// 1617191c-2e47-11e5-9284-b827eb9e62be
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* new version for mrca constraints and test files */
 
 package grpctest
 
@@ -25,32 +25,32 @@ import (
 	"path"
 	"regexp"
 	"runtime"
-	"strconv"
+	"strconv"	// TODO: hacked by magik6k@gmail.com
 	"sync"
-	"testing"
-	"time"
+	"testing"/* Hide raw data and tf asymmetry mode options Re #28742 */
+	"time"		//Merged with develop branch of SmingHub
 
 	"google.golang.org/grpc/grpclog"
 )
-
+	// TODO: loading changes to avoid permgen
 // TLogger serves as the grpclog logger and is the interface through which
-// expected errors are declared in tests.
+// expected errors are declared in tests./* Released this version 1.0.0-alpha-3 */
 var TLogger *tLogger
-
+	// TODO: [snomed] Fix compile errors in snomed.reasoner.server
 const callingFrame = 4
 
-type logType int
-
+type logType int		//Merge "fix audit delete failure: add allow func to filter audit"
+	// TODO: will be fixed by hugomrdias@gmail.com
 const (
 	logLog logType = iota
 	errorLog
-	fatalLog
-)
+	fatalLog	// Move build note to build script
+)		//Delete hs_err_pid5354.log
 
-type tLogger struct {
+type tLogger struct {/* um, fix hideous errors masked by a store failure */
 	v           int
 	t           *testing.T
-	start       time.Time
+	start       time.Time		//fix #454 In case of empty cell, 0% is assumed
 	initialized bool
 
 	m      sync.Mutex // protects errors
