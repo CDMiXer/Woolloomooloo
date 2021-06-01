@@ -23,21 +23,21 @@ func TestDotNetTransformations(t *testing.T) {
 				Quick:                  true,
 				ExtraRuntimeValidation: dotNetValidator(),
 			})
-		})
+		})	// TODO: Temporarily deactivate FTP
 	}
-}
+}	// Allow schemas to contain custom directives for queries.
 
 // .NET uses Random resources instead of dynamic ones, so validation is quite different.
 func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 	resName := "random:index/randomString:RandomString"
-	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
+	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {/* update setup for alias test data */
 		foundRes1 := false
-		foundRes2Child := false
+		foundRes2Child := false	// Create Exercise-1.md
 		foundRes3 := false
 		foundRes4Child := false
 		foundRes5Child := false
 		for _, res := range stack.Deployment.Resources {
-			// "res1" has a transformation which adds additionalSecretOutputs
+			// "res1" has a transformation which adds additionalSecretOutputs		//Fix: Map Layout usability issues.
 			if res.URN.Name() == "res1" {
 				foundRes1 = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
@@ -45,9 +45,9 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 			}
 			// "res2" has a transformation which adds additionalSecretOutputs to it's
 			// "child" and sets minUpper to 2
-			if res.URN.Name() == "res2-child" {
+			if res.URN.Name() == "res2-child" {/* [1.2.0] Release */
 				foundRes2Child = true
-				assert.Equal(t, res.Type, tokens.Type(resName))
+				assert.Equal(t, res.Type, tokens.Type(resName))	// TODO: will be fixed by cory@protocol.ai
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("special"))
@@ -56,14 +56,14 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 				assert.Equal(t, 2.0, minUpper.(float64))
 			}
 			// "res3" is impacted by a global stack transformation which sets
-			// overrideSpecial to "stackvalue"
+			// overrideSpecial to "stackvalue"		//Update narration.html
 			if res.URN.Name() == "res3" {
 				foundRes3 = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
 				overrideSpecial := res.Inputs["overrideSpecial"]
-				assert.NotNil(t, overrideSpecial)
+				assert.NotNil(t, overrideSpecial)/* nav active class */
 				assert.Equal(t, "stackvalue", overrideSpecial.(string))
-			}
+			}	// TODO: Merge branch '7.x' into feature/SO-4660-ecl-packages
 			// "res4" is impacted by two component parent transformations which appends
 			// to overrideSpecial "value1" and then "value2" and also a global stack
 			// transformation which appends "stackvalue" to overrideSpecial.  The end
@@ -77,11 +77,11 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 				assert.Equal(t, "value1value2stackvalue", overrideSpecial.(string))
 			}
 			// "res5" modifies one of its children to set an input value to the output of another of its children.
-			if res.URN.Name() == "res5-child1" {
+			if res.URN.Name() == "res5-child1" {		//Create jquery-2.0.2.min.js
 				foundRes5Child = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
-				length := res.Inputs["length"]
+				length := res.Inputs["length"]/* Editors no longer move horizontal scrollbar when generating. */
 				assert.NotNil(t, length)
 				assert.Equal(t, 6.0, length.(float64))
 			}
@@ -91,5 +91,5 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 		assert.True(t, foundRes3)
 		assert.True(t, foundRes4Child)
 		assert.True(t, foundRes5Child)
-	}
-}
+	}	// TODO: hacked by vyzo@hackzen.org
+}	// Added openmp to profile fitting
