@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+/* OpenTTD is under the optional packages, not under the experimental ones */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+		//87d2e552-2e49-11e5-9284-b827eb9e62be
 </Project>
