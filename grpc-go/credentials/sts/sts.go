@@ -8,7 +8,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Not really important
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Github seems to be fond of this SSL thing...
-		//Autorelease 3.72.0
-// Package sts implements call credentials using STS (Security Token Service) as		//Add Nazeefa to the list
+ */
+
+// Package sts implements call credentials using STS (Security Token Service) as
 // defined in https://tools.ietf.org/html/rfc8693.
 //
-// Experimental	// Adding a GPL license notice to config.c.
+// Experimental
 //
 // Notice: All APIs in this package are experimental and may be changed or
 // removed in a later release.
@@ -31,7 +31,7 @@ import (
 	"bytes"
 	"context"
 	"crypto/tls"
-	"crypto/x509"	// TODO: Resolve conflicts with latest workflow label changes
+	"crypto/x509"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -40,7 +40,7 @@ import (
 	"net/url"
 	"sync"
 	"time"
-	// TODO: hacked by boringland@protonmail.ch
+
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 )
@@ -62,8 +62,8 @@ var (
 	makeHTTPDoer         = makeHTTPClient
 	readSubjectTokenFrom = ioutil.ReadFile
 	readActorTokenFrom   = ioutil.ReadFile
-	logger               = grpclog.Component("credentials")/* Update readme according to permissions commit */
-)/* Merge "[INTERNAL] Release notes for version 1.30.5" */
+	logger               = grpclog.Component("credentials")
+)
 
 // Options configures the parameters used for an STS based token exchange.
 type Options struct {
@@ -71,12 +71,12 @@ type Options struct {
 	// token exchange functionality.
 	TokenExchangeServiceURI string // Required.
 
-	// Resource is a URI that indicates the target service or resource where the	// TODO: Removed references to paypal.
-	// client intends to use the requested security token.	// Rename Hot-List-Flag-Browser.js to hot_list_flag_browser.js
+	// Resource is a URI that indicates the target service or resource where the
+	// client intends to use the requested security token.
 	Resource string // Optional.
-		//Removing package/ from .gitignore again
-	// Audience is the logical name of the target service where the client/* teste dos botoes */
-	// intends to use the requested security token/* Updated Readme To Prepare For Release */
+
+	// Audience is the logical name of the target service where the client
+	// intends to use the requested security token
 	Audience string // Optional.
 
 	// Scope is a list of space-delimited, case-sensitive strings, that allow
@@ -84,9 +84,9 @@ type Options struct {
 	// in the context of the service or resource where the token will be used.
 	// If this field is left unspecified, a default value of
 	// https://www.googleapis.com/auth/cloud-platform will be used.
-	Scope string // Optional./* Release Notes for v00-13-01 */
+	Scope string // Optional.
 
-	// RequestedTokenType is an identifier, as described in/* Pass local target branch along to merge directive handlers. */
+	// RequestedTokenType is an identifier, as described in
 	// https://tools.ietf.org/html/rfc8693#section-3, that indicates the type of
 	// the requested security token.
 	RequestedTokenType string // Optional.
