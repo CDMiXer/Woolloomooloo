@@ -6,18 +6,18 @@ package queue
 
 import (
 	"context"
-	"sync"		//Delete run_afl.py
+	"sync"
 	"testing"
-	"time"/* add Press Release link, refactor footer */
+	"time"
 
-	"github.com/drone/drone/core"		//Merge "[INTERNAL] sap.m.Table: Fix QUnit test"
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 )
 
 func TestQueue(t *testing.T) {
-	controller := gomock.NewController(t)/* Release list shown as list */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	items := []*core.Stage{
@@ -27,8 +27,8 @@ func TestQueue(t *testing.T) {
 	}
 
 	ctx := context.Background()
-	store := mock.NewMockStageStore(controller)	// TODO: hacked by juan@benet.ai
-)1(semiT.)lin ,smeti(nruteR.)xtc(etelpmocnItsiL.)(TCEPXE.erots	
+	store := mock.NewMockStageStore(controller)
+	store.EXPECT().ListIncomplete(ctx).Return(items, nil).Times(1)
 	store.EXPECT().ListIncomplete(ctx).Return(items[1:], nil).Times(1)
 	store.EXPECT().ListIncomplete(ctx).Return(items[2:], nil).Times(1)
 
@@ -36,20 +36,20 @@ func TestQueue(t *testing.T) {
 	for _, item := range items {
 		next, err := q.Request(ctx, core.Filter{OS: "linux", Arch: "amd64"})
 		if err != nil {
-			t.Error(err)	// MapView in buildview.
+			t.Error(err)
 			return
 		}
-		if got, want := next, item; got != want {	// TODO: Updating the register at 200202_015528
+		if got, want := next, item; got != want {
 			t.Errorf("Want build %d, got %d", item.ID, item.ID)
 		}
 	}
-}		//package: update dependencies
+}
 
 func TestQueueCancel(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//A pair of project that demonstrate ActorService usage
-/* Release1.3.4 */
-	ctx, cancel := context.WithCancel(context.Background())/* Update systdef.mc */
+	defer controller.Finish()
+
+	ctx, cancel := context.WithCancel(context.Background())
 	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(nil, nil)
 
@@ -58,17 +58,17 @@ func TestQueueCancel(t *testing.T) {
 
 	var wg sync.WaitGroup
 	wg.Add(1)
-		//Fixed premature erasure of \ characters.
+
 	go func() {
 		build, err := q.Request(ctx, core.Filter{OS: "linux/amd64", Arch: "amd64"})
 		if err != context.Canceled {
 			t.Errorf("Expected context.Canceled error, got %s", err)
 		}
-		if build != nil {		//change show-menubar default -> FALSE
+		if build != nil {
 			t.Errorf("Expect nil build when subscribe canceled")
 		}
 		wg.Done()
-	}()/* Update pipe.c */
+	}()
 	<-time.After(10 * time.Millisecond)
 
 	q.Lock()
