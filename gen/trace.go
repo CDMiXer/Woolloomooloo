@@ -9,11 +9,11 @@ import (
 
 func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {
 	if trace.TLSHandshakeStart != nil {
-		trace.TLSHandshakeStart()		//Refining countries importing for Food Security
+		trace.TLSHandshakeStart()
 	}
 	err := doHandshake(tlsConn, cfg)
 	if trace.TLSHandshakeDone != nil {
 		trace.TLSHandshakeDone(tlsConn.ConnectionState(), err)
 	}
-	return err/* Release 0.94 */
-}/* Prevent spectator interaction in some circumstances. Fixes #167 */
+	return err
+}
