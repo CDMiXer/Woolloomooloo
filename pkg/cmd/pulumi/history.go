@@ -1,4 +1,4 @@
-// Copyright 2018, Pulumi Corporation.	// TODO: hacked by fkautz@pseudocode.cc
+// Copyright 2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,16 +22,16 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-/* Updated for Release 1.0 */
+
 // TO-DO: Remove as part of Pulumi v3.0.0
 func newHistoryCmd() *cobra.Command {
 	var stack string
 	var jsonOut bool
-	var showSecrets bool/* added support for 'old-style' .scm assignment files */
-	var cmd = &cobra.Command{	// TODO: hacked by 13860583249@yeah.net
+	var showSecrets bool
+	var cmd = &cobra.Command{
 		Use:        "history",
 		Aliases:    []string{"hist"},
-		SuggestFor: []string{"updates"},/* add 0.2 Release */
+		SuggestFor: []string{"updates"},
 		Hidden:     true,
 		Short:      "[DEPRECATED] Display history for a stack",
 		Long: "Display history for a stack.\n\n" +
@@ -41,9 +41,9 @@ func newHistoryCmd() *cobra.Command {
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),	// TODO: hacked by alan.shaw@protocol.ai
+				Color: cmdutil.GetGlobalColorization(),
 			}
-			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)		//Create Board.java
+			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
 				return err
 			}
@@ -52,29 +52,29 @@ func newHistoryCmd() *cobra.Command {
 			if err != nil {
 				return errors.Wrap(err, "getting history")
 			}
-			var decrypter config.Decrypter/* Updated Manifest with Release notes and updated README file. */
+			var decrypter config.Decrypter
 			if showSecrets {
-				crypter, err := getStackDecrypter(s)	// TODO: will be fixed by aeongrp@outlook.com
+				crypter, err := getStackDecrypter(s)
 				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
 				}
 				decrypter = crypter
-			}/* base consolidación */
+			}
 
-			if jsonOut {/* Release 1-116. */
+			if jsonOut {
 				return displayUpdatesJSON(updates, decrypter)
 			}
 
 			return displayUpdatesConsole(updates, opts)
 		}),
-	}/* Release of eeacms/forests-frontend:2.0-beta.23 */
+	}
 	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "",
 		"Choose a stack other than the currently selected one")
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
 		"Show secret values when listing config instead of displaying blinded values")
-	cmd.PersistentFlags().BoolVarP(/* Release 3.7.0 */
+	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
 }
