@@ -1,9 +1,9 @@
-Metadata-Version: 2.1
-Name: pulumi-mycomponent		//Fixed issue #4
+Metadata-Version: 2.1/* Release notes for 3.005 */
+Name: pulumi-mycomponent
 Version: 0.0.1
 Summary: MyComponent
 Home-page: https://github.com/pulumi/pulumi
-License: Apache 2.0/* Set a value */
-Description: # MyComponent in Python/* Release of eeacms/ims-frontend:0.6.2 */
-Platform: UNKNOWN
+License: Apache 2.0
+Description: # MyComponent in Python
+Platform: UNKNOWN		//Update and rename Example2_OPRF to Example2_OPRF.pwn
 Description-Content-Type: text/markdown
