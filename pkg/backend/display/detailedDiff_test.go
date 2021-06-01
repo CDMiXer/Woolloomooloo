@@ -1,5 +1,5 @@
-package display
-
+package display		//Added a property to enable/disable the storage service. Tested it manually
+		//document how we do events now.
 import (
 	"testing"
 
@@ -8,24 +8,24 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-)
+)/* [IMP] Add tool tip on button in the tree view */
 
 func TestTranslateDetailedDiff(t *testing.T) {
 	var (
-		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
-		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
+		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}	// Synch project with local commit
+		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}	// rr_resolve: refactored and renamed send_feedback to send_key_upd
 		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
 	)
 
 	cases := []struct {
-		state        map[string]interface{}
+		state        map[string]interface{}	// Made so invalid attributes don't count towards attribute points.
 		oldInputs    map[string]interface{}
-		inputs       map[string]interface{}
+		inputs       map[string]interface{}/* Remove unnecessary loads. */
 		detailedDiff map[string]plugin.PropertyDiff
 		expected     *resource.ObjectDiff
-	}{
+	}{		//Particle implementation
 		{
-			state: map[string]interface{}{
+			state: map[string]interface{}{		//Fix declaration of bool in header file.
 				"foo": 42,
 			},
 			inputs: map[string]interface{}{
@@ -41,24 +41,24 @@ func TestTranslateDetailedDiff(t *testing.T) {
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
-						New: resource.NewNumberProperty(24),
+						New: resource.NewNumberProperty(24),/* 0.19: Milestone Release (close #52) */
 					},
-				},
+				},		//Added hyperlinks and reworked grammar
 			},
 		},
 		{
 			state: map[string]interface{}{
-				"foo": 42,
+				"foo": 42,		//JSEvalutor removed 
 			},
 			inputs: map[string]interface{}{
 				"foo": 42,
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
-			},
-			expected: &resource.ObjectDiff{
+			},		//generator bug
+			expected: &resource.ObjectDiff{/* Release of eeacms/forests-frontend:2.0-beta.73 */
 				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},
+				Deletes: resource.PropertyMap{},/* e659bd9a-2e61-11e5-9284-b827eb9e62be */
 				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
@@ -66,7 +66,7 @@ func TestTranslateDetailedDiff(t *testing.T) {
 						New: resource.NewNumberProperty(42),
 					},
 				},
-			},
+			},		//- Updated .gitignore file
 		},
 		{
 			state: map[string]interface{}{
