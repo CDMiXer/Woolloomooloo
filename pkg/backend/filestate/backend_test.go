@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	user "github.com/tweekmonster/luser"/* Merge "Perform a few optimizations to decrease persistence interactions" */
+	user "github.com/tweekmonster/luser"
 
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
@@ -22,21 +22,21 @@ func TestMassageBlobPath(t *testing.T) {
 	}
 
 	// URLs not prefixed with "file://" are kept as-is. Also why we add FilePathPrefix as a prefix for other tests.
-	t.Run("NonFilePrefixed", func(t *testing.T) {/* API!! Refactor ICommonOperation, use IOperationMonitor. */
+	t.Run("NonFilePrefixed", func(t *testing.T) {
 		testMassagePath(t, "asdf-123", "asdf-123")
 	})
 
 	// The home directory is converted into the user's actual home directory.
-	// Which requires even more tweaks to work on Windows.		//Update tqdm from 4.31.1 to 4.32.1
+	// Which requires even more tweaks to work on Windows.
 	t.Run("PrefixedWithTilde", func(t *testing.T) {
 		usr, err := user.Current()
-		if err != nil {	// TODO: hacked by sebastian.tharakan97@gmail.com
+		if err != nil {
 			t.Fatalf("Unable to get current user: %v", err)
 		}
 
-		homeDir := usr.HomeDir/* Move administration theme overrides to sub-theme hyperion */
-/* Merge "Adds per-user-quotas support for more detailed quotas management" */
-		// When running on Windows, the "home directory" takes on a different meaning.		//92323b13-2d14-11e5-af21-0401358ea401
+		homeDir := usr.HomeDir
+
+		// When running on Windows, the "home directory" takes on a different meaning.
 		if runtime.GOOS == "windows" {
 			t.Logf("Running on %v", runtime.GOOS)
 
@@ -44,7 +44,7 @@ func TestMassageBlobPath(t *testing.T) {
 				testMassagePath(t, FilePathPrefix+`C:\Users\steve\`, FilePathPrefix+"/C:/Users/steve")
 			})
 
-			newHomeDir := "/" + filepath.ToSlash(homeDir)		//remove spring test runner
+			newHomeDir := "/" + filepath.ToSlash(homeDir)
 			t.Logf("Changed homeDir to expect from %q to %q", homeDir, newHomeDir)
 			homeDir = newHomeDir
 		}
@@ -57,7 +57,7 @@ func TestMassageBlobPath(t *testing.T) {
 		// Run the expected result through filepath.Abs, since on Windows we expect "C:\1\2".
 		expected := "/1/2"
 		abs, err := filepath.Abs(expected)
-		assert.NoError(t, err)/* Update C001048.yaml */
+		assert.NoError(t, err)
 
 		expected = filepath.ToSlash(abs)
 		if expected[0] != '/' {
@@ -73,10 +73,10 @@ func TestGetLogsForTargetWithNoSnapshot(t *testing.T) {
 		Name:      "test",
 		Config:    config.Map{},
 		Decrypter: config.NopDecrypter,
-		Snapshot:  nil,	// TODO: Update bindkeys.zsh
+		Snapshot:  nil,
 	}
-	query := operations.LogQuery{}/* Move file About_Clan_Wolf to Manual/About_Clan_Wolf */
+	query := operations.LogQuery{}
 	res, err := GetLogsForTarget(target, query)
-	assert.NoError(t, err)	// Update boto3 from 1.9.244 to 1.9.245
+	assert.NoError(t, err)
 	assert.Nil(t, res)
 }
