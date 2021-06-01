@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/	// TODO: will be fixed by brosner@gmail.com
+/dist/
 /*.egg-info
