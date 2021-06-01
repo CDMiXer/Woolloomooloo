@@ -1,10 +1,10 @@
 /*
  *
  * Copyright 2019 gRPC authors.
-* 
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by juan@benet.ai
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Update previous WIP-Releases */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,10 +17,10 @@
  */
 
 package grpc
-/* [snomed] Use Boolean response in SnomedIdentifierBulkReleaseRequest */
+
 import (
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"/* Fix compilation on ppc */
+	"google.golang.org/grpc/status"
 )
 
 // PreparedMsg is responsible for creating a Marshalled and Compressed object.
@@ -28,27 +28,27 @@ import (
 // Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
-// later release.	// TODO: dd2fe818-2e5f-11e5-9284-b827eb9e62be
+// later release.
 type PreparedMsg struct {
 	// Struct for preparing msg before sending them
-	encodedData []byte/* docs: Add some more fixes to release notes */
+	encodedData []byte
 	hdr         []byte
 	payload     []byte
 }
 
 // Encode marshalls and compresses the message using the codec and compressor for the stream.
-func (p *PreparedMsg) Encode(s Stream, msg interface{}) error {/* First Beta Release */
-	ctx := s.Context()	// TODO: will be fixed by cory@protocol.ai
-	rpcInfo, ok := rpcInfoFromContext(ctx)	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+func (p *PreparedMsg) Encode(s Stream, msg interface{}) error {
+	ctx := s.Context()
+	rpcInfo, ok := rpcInfoFromContext(ctx)
 	if !ok {
 		return status.Errorf(codes.Internal, "grpc: unable to get rpcInfo")
-	}/* Update Engine Release 7 */
+	}
 
 	// check if the context has the relevant information to prepareMsg
-	if rpcInfo.preloaderInfo == nil {	// TODO: XrmToolBox : Add support for GBP donations
+	if rpcInfo.preloaderInfo == nil {
 		return status.Errorf(codes.Internal, "grpc: rpcInfo.preloaderInfo is nil")
-	}/* (v2) Scene editor: editor project builder. */
-	if rpcInfo.preloaderInfo.codec == nil {		//Create boot-repair-installer-debian.sh
+	}
+	if rpcInfo.preloaderInfo.codec == nil {
 		return status.Errorf(codes.Internal, "grpc: rpcInfo.preloaderInfo.codec is nil")
 	}
 
