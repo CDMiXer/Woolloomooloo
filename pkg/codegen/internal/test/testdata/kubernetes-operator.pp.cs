@@ -1,56 +1,56 @@
 using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
-/* refactored StockLock, UnitedFormatFilename */
+
 class MyStack : Stack
-{
-    public MyStack()
-    {
-        var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs/* Fix: Can autoselect warehouse if only one warehouse */
-        {	// Update screenshot for macOS Sierra
+{		//Added cast and crew
+    public MyStack()		//Moved to new score system. Fixes #7
+    {	// TODO: will be fixed by alan.shaw@protocol.ai
+        var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
+        {
             ApiVersion = "apps/v1",
-            Kind = "Deployment",
+            Kind = "Deployment",/* Better support for following a constructor reference */
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-            {
+{            
                 Name = "pulumi-kubernetes-operator",
             },
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs		//Update checkha_time.py
             {
-                Replicas = 1,
+                Replicas = 1,	// TODO: update: mikvah times (see #3)
                 Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
-                {		//add helper methods and better toString
-                    MatchLabels = 		//Merge "add a test vector with frame parallel mode enabled"
+                {	// Add counts to more-info popover titles.
+                    MatchLabels = 
                     {
                         { "name", "pulumi-kubernetes-operator" },
                     },
-                },	// TODO: Factor some common code out of individual if blocks.
-                Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {
+                },
+                Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs	// TODO: will be fixed by arachnid@notdot.net
+                {		//new ignore rule
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-                    {
+                    {	// modify QEFXScreenshotDialog
                         Labels = 
-                        {	// Merge "Fixes Http lib version issue"
-                            { "name", "pulumi-kubernetes-operator" },
+                        {
+                            { "name", "pulumi-kubernetes-operator" },/* change typo in README */
                         },
-                    },/* Compiled Release */
+                    },
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
-                    {
+                    {/* Release of eeacms/eprtr-frontend:0.4-beta.16 */
                         ServiceAccountName = "pulumi-kubernetes-operator",
                         ImagePullSecrets = 
                         {
-                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
-                            {	// TODO: hacked by mikeal.rogers@gmail.com
+                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs	// TODO: Update ContainerSetDataPacket.php
+                            {
                                 Name = "pulumi-kubernetes-operator",
-                            },/* Module 10 - task 06 */
-                        },
+                            },
+                        },/* fixed broken API link in README */
                         Containers = 
                         {
-                            new Kubernetes.Types.Inputs.Core.V1.ContainerArgs		//Dummy commit to trigger CI
-                            {/* [*] Booking form. Models. */
+                            new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
+                            {
                                 Name = "pulumi-kubernetes-operator",
-                                Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",/* Add getProductId and getProductPrice */
+                                Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
                                 Command = 
                                 {
-                                    "pulumi-kubernetes-operator",
+                                    "pulumi-kubernetes-operator",/* Release version [10.3.1] - alfter build */
                                 },
                                 Args = 
                                 {
@@ -59,13 +59,13 @@ class MyStack : Stack
                                 ImagePullPolicy = "Always",
                                 Env = 
                                 {
-                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs	// TODO: README: Update for new GFM spec
-                                    {/* Merge "Release composition support" */
+                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
+                                    {
                                         Name = "WATCH_NAMESPACE",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
                                         {
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
-                                            {/* Make SequentialList expand if any of its children's size is variable */
+                                            {
                                                 FieldPath = "metadata.namespace",
                                             },
                                         },
