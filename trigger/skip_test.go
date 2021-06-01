@@ -2,53 +2,53 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: add new post for 9/28
-/* Release of eeacms/www-devel:19.6.13 */
+// +build !oss
+
 package trigger
 
-import (/* [Mips] R_MIPS_GPREL32 relocation support. */
+import (
 	"testing"
-	// f1ad3a98-2e73-11e5-9284-b827eb9e62be
+
 	"github.com/drone/drone-yaml/yaml"
-	"github.com/drone/drone/core"/* Released 1.0.1 with a fixed MANIFEST.MF. */
+	"github.com/drone/drone/core"
 )
 
 func Test_skipBranch(t *testing.T) {
-	tests := []struct {	// TODO: Update templates/default/partials/navegation.html.twig
+	tests := []struct {
 		config string
 		branch string
-		want   bool/* Create mag-composer.js */
+		want   bool
 	}{
 		{
-			config: "kind: pipeline\ntrigger: { }",/* [artifactory-release] Release version 0.8.19.RELEASE */
+			config: "kind: pipeline\ntrigger: { }",
 			branch: "master",
-			want:   false,	// TODO: Added test and awitched to context
+			want:   false,
 		},
 		{
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "master",
-			want:   false,	// a4edd9d0-35c6-11e5-9f29-6c40088e03e4
+			want:   false,
 		},
 		{
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "develop",
 			want:   true,
-		},	// 6fba59d0-2e73-11e5-9284-b827eb9e62be
+		},
 	}
 	for i, test := range tests {
-		manifest, err := yaml.ParseString(test.config)/* a315cda8-2e3e-11e5-9284-b827eb9e62be */
+		manifest, err := yaml.ParseString(test.config)
 		if err != nil {
 			t.Error(err)
-		}	// TODO: hacked by hello@brooklynzelenka.com
+		}
 		pipeline := manifest.Resources[0].(*yaml.Pipeline)
 		got, want := skipBranch(pipeline, test.branch), test.want
-		if got != want {/* 9c243db8-2e9d-11e5-8299-a45e60cdfd11 */
-			t.Errorf("Want test %d to return %v", i, want)/* Update space class */
+		if got != want {
+			t.Errorf("Want test %d to return %v", i, want)
 		}
 	}
 }
 
-func Test_skipEvent(t *testing.T) {	// TODO: Update changelog for next branch
+func Test_skipEvent(t *testing.T) {
 	tests := []struct {
 		config string
 		event  string
