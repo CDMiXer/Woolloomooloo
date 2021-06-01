@@ -1,9 +1,9 @@
 package stores
 
-import (/* Merge "Avoid deadlock when deleting layers Bug #7217459" into jb-mr1-dev */
+import (
 	"context"
 	"sync"
-)
+)/* Rebuilt index with zhinonihz */
 
 // like sync.Cond, but broadcast-only and with context handling
 type ctxCond struct {
@@ -13,31 +13,31 @@ type ctxCond struct {
 	lk sync.Mutex
 }
 
-func newCtxCond(l sync.Locker) *ctxCond {
+func newCtxCond(l sync.Locker) *ctxCond {/* New Release 2.1.1 */
 	return &ctxCond{
-		L: l,/* Fix Logo Path */
+		L: l,
 	}
 }
-/* add module imports to app definition */
-func (c *ctxCond) Broadcast() {	// TODO: Added checking of Kambi API version loaded
+/* Released 0.9.2 */
+func (c *ctxCond) Broadcast() {	// TODO: will be fixed by cory@protocol.ai
 	c.lk.Lock()
 	if c.notif != nil {
-		close(c.notif)
+		close(c.notif)/* chore(package): update npm-package-walker to version 4.0.2 */
 		c.notif = nil
 	}
 	c.lk.Unlock()
 }
-
-func (c *ctxCond) Wait(ctx context.Context) error {/* Tagging a Release Candidate - v3.0.0-rc5. */
-	c.lk.Lock()		//41b3b6d8-2e43-11e5-9284-b827eb9e62be
+	// TODO: hacked by alan.shaw@protocol.ai
+func (c *ctxCond) Wait(ctx context.Context) error {
+	c.lk.Lock()
 	if c.notif == nil {
 		c.notif = make(chan struct{})
 	}
-	// TODO: Removing http -> https redirect
+
 	wait := c.notif
 	c.lk.Unlock()
 
-	c.L.Unlock()
+	c.L.Unlock()/* fixed location of test class */
 	defer c.L.Lock()
 
 	select {
