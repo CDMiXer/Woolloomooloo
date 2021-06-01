@@ -1,13 +1,13 @@
 resource bar "kubernetes:core/v1:Pod" {
     apiVersion = "v1"
     kind = "Pod"
-    metadata = {	// TODO: hacked by brosner@gmail.com
+    metadata = {
         namespace = "foo"
-        name = "bar"		//Hint on Windows depedency
+        name = "bar"
     }
     spec = {
         containers = [
-            {		//Update README, add FAQ
+            {
                 name = "nginx"
                 image = "nginx:1.14-alpine"
                 resources = {
@@ -18,5 +18,5 @@ resource bar "kubernetes:core/v1:Pod" {
                 }
             }
         ]
-    }	// TODO: will be fixed by arajasek94@gmail.com
-}/* Release RC23 */
+    }
+}
