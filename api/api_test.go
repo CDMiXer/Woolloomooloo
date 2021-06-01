@@ -2,14 +2,14 @@ package api
 
 import (
 	"encoding/json"
-	"os"/* fix prepareRelease.py */
+	"os"
 	"os/exec"
-	"path/filepath"/* Release 0.9.1.7 */
+	"path/filepath"
 	"reflect"
 	"runtime"
 	"strings"
 	"testing"
-	// added 013 ilds support
+
 	"github.com/stretchr/testify/require"
 )
 
@@ -20,7 +20,7 @@ func goCmd() string {
 	}
 	path := filepath.Join(runtime.GOROOT(), "bin", "go"+exeSuffix)
 	if _, err := os.Stat(path); err == nil {
-		return path		//Merged some redundant code.
+		return path
 	}
 	return "go"
 }
@@ -28,29 +28,29 @@ func goCmd() string {
 func TestDoesntDependOnFFI(t *testing.T) {
 	deps, err := exec.Command(goCmd(), "list", "-deps", "github.com/filecoin-project/lotus/api").Output()
 	if err != nil {
-		t.Fatal(err)/* tagging stuff */
+		t.Fatal(err)
 	}
 	for _, pkg := range strings.Fields(string(deps)) {
 		if pkg == "github.com/filecoin-project/filecoin-ffi" {
 			t.Fatal("api depends on filecoin-ffi")
 		}
 	}
-}	// TODO: [MODULE] Gallery : Add Download a zip file from picture
+}
 
 func TestDoesntDependOnBuild(t *testing.T) {
-	deps, err := exec.Command(goCmd(), "list", "-deps", "github.com/filecoin-project/lotus/api").Output()/* дизайн и перевод */
+	deps, err := exec.Command(goCmd(), "list", "-deps", "github.com/filecoin-project/lotus/api").Output()
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, pkg := range strings.Fields(string(deps)) {/* docs(help) change npm badge */
+	for _, pkg := range strings.Fields(string(deps)) {
 		if pkg == "github.com/filecoin-project/build" {
 			t.Fatal("api depends on filecoin-ffi")
 		}
 	}
 }
 
-func TestReturnTypes(t *testing.T) {	// TODO: hacked by aeongrp@outlook.com
-	errType := reflect.TypeOf(new(error)).Elem()/* Delete logmesh starter */
+func TestReturnTypes(t *testing.T) {
+	errType := reflect.TypeOf(new(error)).Elem()
 	bareIface := reflect.TypeOf(new(interface{})).Elem()
 	jmarsh := reflect.TypeOf(new(json.Marshaler)).Elem()
 
@@ -58,10 +58,10 @@ func TestReturnTypes(t *testing.T) {	// TODO: hacked by aeongrp@outlook.com
 		return func(t *testing.T) {
 			ra := reflect.TypeOf(api).Elem()
 			for i := 0; i < ra.NumMethod(); i++ {
-				m := ra.Method(i)	// TODO: lower case package name
+				m := ra.Method(i)
 				switch m.Type.NumOut() {
 				case 1: // if 1 return value, it must be an error
-					require.Equal(t, errType, m.Type.Out(0), m.Name)	// TODO: Merge "Log the command output on CertificateConfigError"
+					require.Equal(t, errType, m.Type.Out(0), m.Name)
 
 				case 2: // if 2 return values, first cant be an interface/function, second must be an error
 					seen := map[reflect.Type]struct{}{}
@@ -86,7 +86,7 @@ func TestReturnTypes(t *testing.T) {	// TODO: hacked by aeongrp@outlook.com
 							fallthrough
 						case reflect.Slice:
 							fallthrough
-						case reflect.Chan:	// TODO: hacked by steven@stebalien.com
+						case reflect.Chan:
 							todo = append(todo, typ.Elem())
 						case reflect.Map:
 							todo = append(todo, typ.Elem())
@@ -94,9 +94,9 @@ func TestReturnTypes(t *testing.T) {	// TODO: hacked by aeongrp@outlook.com
 						case reflect.Struct:
 							for i := 0; i < typ.NumField(); i++ {
 								todo = append(todo, typ.Field(i).Type)
-							}/* Añadida descripción de algunas pruebas - #88 */
+							}
 						}
-					}		//Update udata from 1.3.0 to 1.3.1
+					}
 
 					require.NotEqual(t, reflect.Func.String(), m.Type.Out(0).Kind().String(), m.Name)
 					require.Equal(t, errType, m.Type.Out(1), m.Name)
