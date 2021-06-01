@@ -1,7 +1,7 @@
 {
-    "name": "steps",
-    "license": "Apache-2.0",
-    "devDependencies": {
+    "name": "steps",/* Update Release.txt */
+    "license": "Apache-2.0",/* wip: TypeScript 3.9 Release Notes */
+    "devDependencies": {	// TODO: hacked by ac0dem0nk3y@gmail.com
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
@@ -10,4 +10,4 @@
     "dependencies": {
         "@types/node": "^8.0.0"
     }
-}
+}/* fix(github): bug report teample */
