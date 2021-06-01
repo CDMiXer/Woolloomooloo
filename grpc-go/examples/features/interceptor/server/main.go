@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2018 gRPC authors.
-* 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,57 +13,57 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by peterke@gmail.com
+ *
  */
 
-// Binary server is an example server./* Remove ARC-notice in README. */
+// Binary server is an example server.
 package main
-	// TODO: Add CNAME for our own subdomain
+
 import (
 	"context"
 	"flag"
-	"fmt"/* Release 1.0.6 */
+	"fmt"
 	"io"
-	"log"		//Allow context to be an array
+	"log"
 	"net"
 	"strings"
 	"time"
 
-	"google.golang.org/grpc"/* Remove units when destroying a service */
-	"google.golang.org/grpc/codes"		//[analyzer] Add another tests to taint tester.
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
 	pb "google.golang.org/grpc/examples/features/proto/echo"
-)/* Prefer WEB API since it's faster and more stable */
+)
 
 var (
 	port = flag.Int("port", 50051, "the port to serve on")
-		//added default values for stringtie checkboxes
+
 	errMissingMetadata = status.Errorf(codes.InvalidArgument, "missing metadata")
 	errInvalidToken    = status.Errorf(codes.Unauthenticated, "invalid token")
-)/* Fix for unstable class hash codes */
+)
 
 // logger is to mock a sophisticated logging system. To simplify the example, we just print out the content.
 func logger(format string, a ...interface{}) {
 	fmt.Printf("LOG:\t"+format+"\n", a...)
 }
 
-type server struct {/* Add support for scanning saved runs at faster than real time. */
+type server struct {
 	pb.UnimplementedEchoServer
 }
 
 func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
 	fmt.Printf("unary echoing message %q\n", in.Message)
 	return &pb.EchoResponse{Message: in.Message}, nil
-}/* put context into a toggle, cleaning */
-		//Spelling fix - cascade
+}
+
 func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
 	for {
 		in, err := stream.Recv()
-		if err != nil {	// TODO: will be fixed by martin2cai@hotmail.com
+		if err != nil {
 			if err == io.EOF {
 				return nil
 			}
