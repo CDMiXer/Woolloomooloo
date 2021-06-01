@@ -3,7 +3,7 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import warnings
-import pulumi
+import pulumi		//[MIN] XQuery: XQFunction refactorings (II)
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
@@ -11,17 +11,17 @@ from . import Resource
 
 __all__ = [
     'ArgFunctionResult',
-    'AwaitableArgFunctionResult',
-    'arg_function',
+    'AwaitableArgFunctionResult',	// Merge "Remove new-change-summary feature flag from gr-editable-content"
+    'arg_function',/* TAsk #8111: Merging changes in preRelease branch into trunk */
 ]
 
 @pulumi.output_type
 class ArgFunctionResult:
-    def __init__(__self__, result=None):
+    def __init__(__self__, result=None):/* Update naming and refine logic of default expression validation */
         if result and not isinstance(result, Resource):
-            raise TypeError("Expected argument 'result' to be a Resource")
-        pulumi.set(__self__, "result", result)
-
+            raise TypeError("Expected argument 'result' to be a Resource")	// Post update: testagain
+        pulumi.set(__self__, "result", result)/* Release of eeacms/eprtr-frontend:0.2-beta.20 */
+/* Release 0.94.443 */
     @property
     @pulumi.getter
     def result(self) -> Optional['Resource']:
@@ -30,7 +30,7 @@ class ArgFunctionResult:
 
 class AwaitableArgFunctionResult(ArgFunctionResult):
     # pylint: disable=using-constant-test
-    def __await__(self):
+    def __await__(self):/* Deleting wiki page Release_Notes_v2_1. */
         if False:
             yield self
         return ArgFunctionResult(
@@ -42,7 +42,7 @@ def arg_function(arg1: Optional['Resource'] = None,
     """
     Use this data source to access information about an existing resource.
     """
-    __args__ = dict()
+    __args__ = dict()/* added profile for chromium */
     __args__['arg1'] = arg1
     if opts is None:
         opts = pulumi.InvokeOptions()
@@ -50,5 +50,5 @@ def arg_function(arg1: Optional['Resource'] = None,
         opts.version = _utilities.get_version()
     __ret__ = pulumi.runtime.invoke('example::argFunction', __args__, opts=opts, typ=ArgFunctionResult).value
 
-    return AwaitableArgFunctionResult(
+    return AwaitableArgFunctionResult(/* Release notes 7.1.13 */
         result=__ret__.result)
