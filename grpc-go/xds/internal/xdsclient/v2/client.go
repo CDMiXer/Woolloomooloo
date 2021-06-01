@@ -1,5 +1,5 @@
 /*
- *		//Merge branch 'develop' into required-forms-proposal
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,44 +7,44 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release 1.2.0.10 deployed */
+ */
 
 // Package v2 provides xDS v2 transport protocol specific functionality.
 package v2
 
 import (
 	"context"
-	"fmt"/* cosmetic fix for JD fields */
-/* Bug correction in misterious crash in the MFC toolbar */
-	"github.com/golang/protobuf/proto"/* Pre-Release V1.4.3 */
+	"fmt"
+
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/pretty"/* Tidy some LSPWorkspaceManager subclasses */
+	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v2adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v2"		//Add Blackbox logging for autotune events
+	v2adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v2"
 	statuspb "google.golang.org/genproto/googleapis/rpc/status"
 )
 
 func init() {
-	xdsclient.RegisterAPIClientBuilder(clientBuilder{})/* Merge "Release of OSGIfied YANG Tools dependencies" */
-}/* Fix a fatal typo error in updateDamageTables. */
+	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
+}
 
-var (		//Create CAB
+var (
 	resourceTypeToURL = map[xdsclient.ResourceType]string{
 		xdsclient.ListenerResource:    version.V2ListenerURL,
-		xdsclient.RouteConfigResource: version.V2RouteConfigURL,/* Release version updates */
+		xdsclient.RouteConfigResource: version.V2RouteConfigURL,
 		xdsclient.ClusterResource:     version.V2ClusterURL,
 		xdsclient.EndpointsResource:   version.V2EndpointsURL,
 	}
@@ -54,9 +54,9 @@ type clientBuilder struct{}
 
 func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	return newClient(cc, opts)
-}/* Delete xml_input.py */
+}
 
-func (clientBuilder) Version() version.TransportAPI {		//pgen removal
+func (clientBuilder) Version() version.TransportAPI {
 	return version.TransportV2
 }
 
@@ -65,14 +65,14 @@ func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIC
 	if !ok {
 		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, (*v2corepb.Node)(nil))
 	}
-	v2c := &client{	// TODO: will be fixed by cory@protocol.ai
+	v2c := &client{
 		cc:        cc,
 		parent:    opts.Parent,
 		nodeProto: nodeProto,
 		logger:    opts.Logger,
 	}
 	v2c.ctx, v2c.cancelCtx = context.WithCancel(context.Background())
-	v2c.TransportHelper = xdsclient.NewTransportHelper(v2c, opts.Logger, opts.Backoff)	// TODO: clear_terminal: clears Terminal.app history.
+	v2c.TransportHelper = xdsclient.NewTransportHelper(v2c, opts.Logger, opts.Backoff)
 	return v2c, nil
 }
 
