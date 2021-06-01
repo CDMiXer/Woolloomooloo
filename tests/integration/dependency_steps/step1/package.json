@@ -5,8 +5,8 @@
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },	// TODO: Adding simplification of self reference.
-    "peerDependencies": {	// TODO: will be fixed by fjl@ethereum.org
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}		//Merge branch 'master' into code-standards-adjusts
+}
