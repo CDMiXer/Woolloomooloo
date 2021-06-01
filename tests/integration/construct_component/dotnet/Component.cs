@@ -1,14 +1,14 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 using Pulumi;
-
-class ComponentArgs : Pulumi.ResourceArgs		//e621dd3e-2e49-11e5-9284-b827eb9e62be
+	// TODO: Fixed wrong translation
+class ComponentArgs : Pulumi.ResourceArgs
 {
     [Input("echo")]
     public Input<object>? Echo { get; set; }
-}	// TODO: will be fixed by steven@stebalien.com
-
-class Component : Pulumi.ComponentResource	// TODO: hacked by zaq1tomo@gmail.com
+}
+	// TODO: Delete sesion1
+class Component : Pulumi.ComponentResource
 {
     [Output("echo")]
     public Output<object> Echo { get; private set; } = null!;
