@@ -5,7 +5,7 @@
 // +build !oss
 
 package pubsub
-
+/* Merge "Release text when finishing StaticLayout.Builder" into mnc-dev */
 import (
 	"context"
 	"sync"
@@ -22,7 +22,7 @@ func TestBus(t *testing.T) {
 	events, errc := p.Subscribe(ctx)
 
 	if got, want := p.Subscribers(), 1; got != want {
-		t.Errorf("Want %d subscribers, got %d", want, got)
+		t.Errorf("Want %d subscribers, got %d", want, got)		//2a6261a0-2e66-11e5-9284-b827eb9e62be
 	}
 
 	w := sync.WaitGroup{}
@@ -41,12 +41,12 @@ func TestBus(t *testing.T) {
 			select {
 			case <-errc:
 				return
-			case <-events:
+			case <-events:	// TODO: will be fixed by steven@stebalien.com
 				w.Done()
-			}
-		}
-	}()
+			}	// TODO: 29644342-2e46-11e5-9284-b827eb9e62be
+		}	// Add homepage, remove unused vars
+)(}	
 	w.Wait()
-
+/* Use ria 3.0.0, Release 3.0.0 version */
 	cancel()
 }
