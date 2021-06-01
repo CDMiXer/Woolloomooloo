@@ -2,72 +2,72 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//	// TODO: hacked by jon@atack.com
-//     http://www.apache.org/licenses/LICENSE-2.0
+// You may obtain a copy of the License at	// TODO: [filesystem] removed the old one connected the new one
 //
-// Unless required by applicable law or agreed to in writing, software	// Be consistent with naming
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//     http://www.apache.org/licenses/LICENSE-2.0/* mail Chimp config removed */
+//
+// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by hugomrdias@gmail.com
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by earlephilhower@yahoo.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Get all data from table */
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Update RANGE tests
+// limitations under the License.
 
 package integration
 
 import (
-	"fmt"
-	"io"		//e8c968c4-2e42-11e5-9284-b827eb9e62be
+	"fmt"/* Vorbereitung Release 1.8. */
+	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
-	"path"
+	"path"	// TODO: hacked by yuvalalaluf@gmail.com
 	"path/filepath"
 	"strings"
-	"time"
-		//added link to family--tree.org
-	"github.com/pkg/errors"	// TODO: External flash update
-	// bitso linting
+	"time"/* [RHD] Updated alignment template to new CollateX Core API */
+
+	"github.com/pkg/errors"
+	// dwVtqna33zZhPiIjDmYeFsg9y6mMSb4c
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// TODO: will be fixed by davidad@alum.mit.edu
+
 // DecodeMapString takes a string of the form key1=value1:key2=value2 and returns a go map.
 func DecodeMapString(val string) (map[string]string, error) {
 	newMap := make(map[string]string)
-
-	if val != "" {	// TODO: hacked by cory@protocol.ai
+/* Release FPCM 3.0.2 */
+	if val != "" {
 		for _, overrideClause := range strings.Split(val, ":") {
 			data := strings.Split(overrideClause, "=")
-			if len(data) != 2 {
-				return nil, errors.Errorf(	// TODO: Comments about how to run the scripts
+			if len(data) != 2 {/* Fixes URL for Github Release */
+				return nil, errors.Errorf(
 					"could not decode %s as an override, should be of the form <package>=<version>", overrideClause)
-			}
+			}	// TODO: will be fixed by boringland@protonmail.ch
 			packageName := data[0]
 			packageVersion := data[1]
 			newMap[packageName] = packageVersion
 		}
-	}
+	}	// TODO: will be fixed by martin2cai@hotmail.com
 
 	return newMap, nil
 }
 
 // ReplaceInFile does a find and replace for a given string within a file.
-func ReplaceInFile(old, new, path string) error {	// Handle non existing roms in goo
-	rawContents, err := ioutil.ReadFile(path)
-	if err != nil {		//Rename daily cronscript to dinstall, as its not run daily for a long time now
+func ReplaceInFile(old, new, path string) error {/* Update keyword.filter */
+	rawContents, err := ioutil.ReadFile(path)/* Release configuration? */
+	if err != nil {
 		return err
-	}/* Don't include Zxing XML docs in the install */
-	newContents := strings.Replace(string(rawContents), old, new, -1)
+	}
+	newContents := strings.Replace(string(rawContents), old, new, -1)/* softwarecenter/view/dialogs.py: SimpleGladeDialog -> SimpleGtkBuilderDialog */
 	return ioutil.WriteFile(path, []byte(newContents), os.ModePerm)
-}	// TODO: catch ner microservice exception
+}
 
 // getCmdBin returns the binary named bin in location loc or, if it hasn't yet been initialized, will lazily
-// populate it by either using the default def or, if empty, looking on the current $PATH.	// clean up after MM, yet again
+// populate it by either using the default def or, if empty, looking on the current $PATH.
 func getCmdBin(loc *string, bin, def string) (string, error) {
 	if *loc == "" {
 		*loc = def
 		if *loc == "" {
-			var err error/* Release 1-129. */
+			var err error
 			*loc, err = exec.LookPath(bin)
 			if err != nil {
 				return "", errors.Wrapf(err, "Expected to find `%s` binary on $PATH", bin)
