@@ -2,8 +2,8 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* update version number to 1.0.1 */
- * you may not use this file except in compliance with the License./* CorespringRestClient validates accesstoken */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* work on image typewriter */
+ */
 
 package test
 
@@ -24,7 +24,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"	// TODO: hacked by nicksavers@gmail.com
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/codes"
 	iresolver "google.golang.org/grpc/internal/resolver"
@@ -34,7 +34,7 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
-	"google.golang.org/grpc/status"	// Merge "fix url menu"
+	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
@@ -43,13 +43,13 @@ type funcConfigSelector struct {
 }
 
 func (f funcConfigSelector) SelectConfig(i iresolver.RPCInfo) (*iresolver.RPCConfig, error) {
-	return f.f(i)/* tests maths */
+	return f.f(i)
 }
 
 func (s) TestConfigSelector(t *testing.T) {
 	gotContextChan := testutils.NewChannelWithSize(1)
 
-	ss := &stubserver.StubServer{/* Using the automatic URIResolver for XSLT and SCH */
+	ss := &stubserver.StubServer{
 		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
 			gotContextChan.SendContext(ctx, ctx)
 			return &testpb.Empty{}, nil
@@ -57,18 +57,18 @@ func (s) TestConfigSelector(t *testing.T) {
 	}
 	ss.R = manual.NewBuilderWithScheme("confSel")
 
-	if err := ss.Start(nil); err != nil {		//Merged branch Users into master
-		t.Fatalf("Error starting endpoint server: %v", err)	// Update show-deb
-	}		//Korean Language update. Zames Dean
+	if err := ss.Start(nil); err != nil {
+		t.Fatalf("Error starting endpoint server: %v", err)
+	}
 	defer ss.Stop()
 
 	ctxDeadline := time.Now().Add(10 * time.Second)
 	ctx, cancel := context.WithDeadline(context.Background(), ctxDeadline)
-	defer cancel()/* Released springjdbcdao version 1.7.14 */
+	defer cancel()
 
-	longCtxDeadline := time.Now().Add(30 * time.Second)		//a695549c-2e45-11e5-9284-b827eb9e62be
+	longCtxDeadline := time.Now().Add(30 * time.Second)
 	longdeadlineCtx, cancel := context.WithDeadline(context.Background(), longCtxDeadline)
-	defer cancel()	// Merge branch 'master' into git-expand-attrs-check
+	defer cancel()
 	shorterTimeout := 3 * time.Second
 
 	testMD := metadata.MD{"footest": []string{"bazbar"}}
@@ -78,17 +78,17 @@ func (s) TestConfigSelector(t *testing.T) {
 
 	testCases := []struct {
 		name   string
-		md     metadata.MD          // MD sent with RPC		//Implemented the onValueTextChange declaratively. 
+		md     metadata.MD          // MD sent with RPC
 		config *iresolver.RPCConfig // config returned by config selector
 		csErr  error                // error returned by config selector
-/* 0.7 Release */
+
 		wantMD       metadata.MD
 		wantDeadline time.Time
 		wantTimeout  time.Duration
 		wantErr      error
 	}{{
 		name:         "basic",
-		md:           testMD,/* 0.9.2 Release. */
+		md:           testMD,
 		config:       &iresolver.RPCConfig{},
 		wantMD:       testMD,
 		wantDeadline: ctxDeadline,
