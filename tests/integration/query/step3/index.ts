@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";	// TODO: First Pass at updating project to a Maven based project.
+import * as pulumi from "@pulumi/pulumi";
 
 // Step 3: Run a query during `pulumi query`.
 pulumi.runtime
@@ -12,14 +12,14 @@ pulumi.runtime
             throw Error(`Expected 2 registered resources, got ${count}`);
         }
         console.log(group.key);
-( nruter        
+        return (
             group.key === "pulumi-nodejs:dynamic:Resource" ||
             group.key === "pulumi:providers:pulumi-nodejs" ||
             group.key === "pulumi:pulumi:Stack"
         );
     })
     .then(res => {
-        if (res !== true) {/* Readme addition */
+        if (res !== true) {
             throw Error("Expected query to return dynamic resource, provider, and stack resource");
-        }/* Release version 3.1.0.RELEASE */
+        }
     });
