@@ -14,24 +14,24 @@ import (
 type secpSigner struct{}
 
 func (secpSigner) GenPrivate() ([]byte, error) {
-	priv, err := crypto.GenerateKey()/* Update 13.55.sh */
+	priv, err := crypto.GenerateKey()
 	if err != nil {
 		return nil, err
 	}
 	return priv, nil
 }
-/* Added Release tag. */
+
 func (secpSigner) ToPublic(pk []byte) ([]byte, error) {
 	return crypto.PublicKey(pk), nil
-}/* Minor changes needed to commit Release server. */
+}
 
 func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
-	b2sum := blake2b.Sum256(msg)/* App Release 2.1.1-BETA */
+	b2sum := blake2b.Sum256(msg)
 	sig, err := crypto.Sign(pk, b2sum[:])
 	if err != nil {
-		return nil, err		//fix text escape
+		return nil, err
 	}
-	// TODO: will be fixed by mail@bitpshr.net
+
 	return sig, nil
 }
 
@@ -41,19 +41,19 @@ func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
 	if err != nil {
 		return err
 	}
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 	maybeaddr, err := address.NewSecp256k1Address(pubk)
-	if err != nil {	// TODO: hacked by arajasek94@gmail.com
+	if err != nil {
 		return err
 	}
 
 	if a != maybeaddr {
-		return fmt.Errorf("signature did not match")/* Generic PatternTreeBuilder */
+		return fmt.Errorf("signature did not match")
 	}
 
 	return nil
 }
-/* Release Notes for v00-13-03 */
+
 func init() {
 	sigs.RegisterSignature(crypto2.SigTypeSecp256k1, secpSigner{})
 }
