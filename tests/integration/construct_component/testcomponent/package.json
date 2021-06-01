@@ -4,8 +4,8 @@
     "devDependencies": {
         "typescript": "^3.0.0",
         "@types/node": "latest"
-    },
+    },/* Updating Windows build script for GEOS 3.3.8 */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: will be fixed by yuvalalaluf@gmail.com
+}
