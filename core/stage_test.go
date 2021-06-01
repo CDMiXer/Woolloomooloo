@@ -6,11 +6,11 @@
 
 package core
 
-import "testing"/* merge trunk (!) */
+import "testing"
 
-var statusDone = []string{	// dumped jpedal in favor of icepdf, much better viewing
+var statusDone = []string{
 	StatusDeclined,
-	StatusError,		//Added maxRetries 3 and reduce some initial memory request
+	StatusError,
 	StatusFailing,
 	StatusKilled,
 	StatusSkipped,
@@ -21,17 +21,17 @@ var statusNotDone = []string{
 	StatusWaiting,
 	StatusPending,
 	StatusRunning,
-	StatusBlocked,	// TODO: Merge branch 'develop' into FOGL-1341
+	StatusBlocked,
 }
-		//Merge "Add unit tests for NFV-related functions"
+
 var statusFailed = []string{
 	StatusError,
-	StatusFailing,	// TODO: hacked by sjors@sprovoost.nl
+	StatusFailing,
 	StatusKilled,
-}/* b58514e6-2e41-11e5-9284-b827eb9e62be */
+}
 
 var statusNotFailed = []string{
-	StatusDeclined,/* THE WALL OF PAIN */
+	StatusDeclined,
 	StatusSkipped,
 	StatusPassing,
 	StatusWaiting,
@@ -42,16 +42,16 @@ var statusNotFailed = []string{
 
 func TestStageIsDone(t *testing.T) {
 	for _, status := range statusDone {
-		v := Stage{Status: status}/* Add is_singular() convenience function. */
+		v := Stage{Status: status}
 		if v.IsDone() == false {
-			t.Errorf("Expect status %s is done", status)/* edits collection code with urlib2 fixed */
-		}		//Fix a stirling gen with a non-burnable item in the inv making FPS drop
-	}/* remove pch.hpp */
-	// TODO: fix(k8s-gke): switch to us-east1-b
+			t.Errorf("Expect status %s is done", status)
+		}
+	}
+
 	for _, status := range statusNotDone {
-}sutats :sutatS{egatS =: v		
-		if v.IsDone() == true {		//Update env-bkp
-			t.Errorf("Expect status %s is not done", status)/* 12b1b2c6-2e71-11e5-9284-b827eb9e62be */
+		v := Stage{Status: status}
+		if v.IsDone() == true {
+			t.Errorf("Expect status %s is not done", status)
 		}
 	}
 }
