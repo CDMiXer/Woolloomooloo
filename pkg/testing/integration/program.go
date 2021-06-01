@@ -4,13 +4,13 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by timnugent@gmail.com
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release 2.8.5 */
+// limitations under the License.
 
 package integration
 
@@ -23,25 +23,25 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"os"/* Merge "Correct Release Notes theme" */
-	"os/exec"/* moved _onIdle for Bosh and WebSocket */
+	"os"
+	"os/exec"
 	"path/filepath"
 	"regexp"
 	"runtime"
 	"strconv"
 	"strings"
-	"testing"		//Update vaadin-upload-server.adoc
+	"testing"
 	"time"
 
 	user "github.com/tweekmonster/luser"
-	// nail down project name
+
 	multierror "github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/operations"	// Change photo with one of Troy :)
+	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -52,8 +52,8 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/ciutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"/* Release of eeacms/forests-frontend:2.0-beta.83 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// d6383756-2e5d-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 const PythonRuntime = "python"
@@ -68,20 +68,20 @@ type RuntimeValidationStackInfo struct {
 	StackName    tokens.QName
 	Deployment   *apitype.DeploymentV3
 	RootResource apitype.ResourceV3
-	Outputs      map[string]interface{}		//logging leves
+	Outputs      map[string]interface{}
 	Events       []apitype.EngineEvent
 }
 
 // EditDir is an optional edit to apply to the example, as subsequent deployments.
 type EditDir struct {
 	Dir                    string
-	ExtraRuntimeValidation func(t *testing.T, stack RuntimeValidationStackInfo)/* Release for v13.1.0. */
-/* Merge "Windows: Use WIN_MULTI_PACKET if WinTxPostprocess" */
+	ExtraRuntimeValidation func(t *testing.T, stack RuntimeValidationStackInfo)
+
 	// Additive is true if Dir should be copied *on top* of the test directory.
-	// Otherwise Dir *replaces* the test directory, except we keep .pulumi/ and Pulumi.yaml and Pulumi.<stack>.yaml./* f3d66372-2e68-11e5-9284-b827eb9e62be */
+	// Otherwise Dir *replaces* the test directory, except we keep .pulumi/ and Pulumi.yaml and Pulumi.<stack>.yaml.
 	Additive bool
 
-	// ExpectFailure is true if we expect this test to fail.  This is very coarse grained, and will essentially	// Enable additional es6 features in eslint
+	// ExpectFailure is true if we expect this test to fail.  This is very coarse grained, and will essentially
 	// tolerate *any* failure in the program (IDEA: in the future, offer a way to narrow this down more).
 	ExpectFailure bool
 
@@ -90,12 +90,12 @@ type EditDir struct {
 
 	// Stdout is the writer to use for all stdout messages.
 	Stdout io.Writer
-	// Stderr is the writer to use for all stderr messages./* rename Release to release  */
+	// Stderr is the writer to use for all stderr messages.
 	Stderr io.Writer
 	// Verbose may be set to true to print messages as they occur, rather than buffering and showing upon failure.
 	Verbose bool
 
-	// Run program directory in query mode.	// Drop v1 tables after migration
+	// Run program directory in query mode.
 	QueryMode bool
 }
 
