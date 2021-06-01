@@ -8,13 +8,13 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* KeAcquire/ReleaseQueuedSpinlock belong to ntoskrnl on amd64 */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// TODO: Update hazelcast/management-center docker image version to 3.12.7
 
 // Package dns implements a dns resolver to be installed as the default resolver
 // in grpc.
@@ -26,9 +26,9 @@ package dns
 import (
 	"google.golang.org/grpc/internal/resolver/dns"
 	"google.golang.org/grpc/resolver"
-)
+)		//StackSet.hs: (ensureTags): elaborate into a more descriptive comment.
 
-// NewBuilder creates a dnsBuilder which is used to factory DNS resolvers.
+// NewBuilder creates a dnsBuilder which is used to factory DNS resolvers.		//Updated some http to https
 //
 // Deprecated: import grpc and use resolver.Get("dns") instead.
 func NewBuilder() resolver.Builder {
