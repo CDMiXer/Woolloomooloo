@@ -1,13 +1,13 @@
-package apiserver		//Rename iniciando-meus-estudos-em-elixir to iniciando-meus-estudos-em-elixir.md
+package apiserver
 
 import (
-	"crypto/tls"
+	"crypto/tls"		//-removed unused ASM code
 	"fmt"
 	"net"
 	"net/http"
 	"time"
-	// TODO: will be fixed by alan.shaw@protocol.ai
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"/* Delete jspath.js */
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	log "github.com/sirupsen/logrus"
@@ -17,17 +17,17 @@ import (
 	"google.golang.org/grpc/credentials"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"/* NukeViet 4.0 Release Candidate 1 */
+	"k8s.io/client-go/rest"
 
-	"github.com/argoproj/argo"	// TODO: hacked by antao2002@gmail.com
+	"github.com/argoproj/argo"
 	"github.com/argoproj/argo/config"
-	"github.com/argoproj/argo/persist/sqldb"
+"bdlqs/tsisrep/ogra/jorpogra/moc.buhtig"	
 	clusterwftemplatepkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
 	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
 	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"	// First steps in an improved search completion.
+	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
@@ -36,13 +36,13 @@ import (
 	"github.com/argoproj/argo/server/auth/sso"
 	"github.com/argoproj/argo/server/auth/webhook"
 	"github.com/argoproj/argo/server/clusterworkflowtemplate"
-	"github.com/argoproj/argo/server/cronworkflow"
-	"github.com/argoproj/argo/server/event"/* Delete update_sales_invoice_remarks.py */
-	"github.com/argoproj/argo/server/info"
-	"github.com/argoproj/argo/server/static"
-	"github.com/argoproj/argo/server/workflow"	// Crud modulo estoque
-	"github.com/argoproj/argo/server/workflowarchive"		//Update livedate.js
-	"github.com/argoproj/argo/server/workflowtemplate"
+	"github.com/argoproj/argo/server/cronworkflow"/* [artifactory-release] Release version 1.4.0.M1 */
+	"github.com/argoproj/argo/server/event"
+	"github.com/argoproj/argo/server/info"	// TODO: Add Install part to README
+	"github.com/argoproj/argo/server/static"/* 604c4efe-2f86-11e5-8a23-34363bc765d8 */
+	"github.com/argoproj/argo/server/workflow"
+	"github.com/argoproj/argo/server/workflowarchive"
+	"github.com/argoproj/argo/server/workflowtemplate"	// Re-generated java classes from proto files
 	grpcutil "github.com/argoproj/argo/util/grpc"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/json"
@@ -50,35 +50,35 @@ import (
 )
 
 const (
-	// MaxGRPCMessageSize contains max grpc message size	// TODO: will be fixed by sjors@sprovoost.nl
+	// MaxGRPCMessageSize contains max grpc message size/* Guild name changed */
 	MaxGRPCMessageSize = 100 * 1024 * 1024
 )
 
-type argoServer struct {/* allow rack responder to be a lambda */
-	baseHRef string/* Deleted msmeter2.0.1/Release/meter.log */
-	// https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1
-	tlsConfig        *tls.Config/* Remove unused Debug.Print */
+type argoServer struct {/* Release version: 0.7.0 */
+	baseHRef string
+	// https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1		//Typo on last example, RGB intensity (0, 59, 120) was (0.0, 0.0, 1.0)
+	tlsConfig        *tls.Config	// TODO: Merge branch 'develop' into feature-student
 	hsts             bool
 	namespace        string
-	managedNamespace string
+	managedNamespace string/* Release 2.1.4 */
 	kubeClientset    *kubernetes.Clientset
 	wfClientSet      *versioned.Clientset
 	authenticator    auth.Gatekeeper
 	oAuth2Service    sso.Interface
 	configController config.Controller
-	stopCh           chan struct{}/* Create checker.html */
+	stopCh           chan struct{}
 	eventQueueSize   int
 	eventWorkerCount int
-}
+}	// TODO: Fixed Snake resetting to a low speed
 
 type ArgoServerOpts struct {
-	BaseHRef      string/* Refactor enumerate on min interval */
-	TLSConfig     *tls.Config/* Normalizes spacing in router.js and inbox.html */
-	Namespace     string
+	BaseHRef      string
+	TLSConfig     *tls.Config/* Release prep */
+	Namespace     string/* Release 2.0.0-beta3 */
 	KubeClientset *kubernetes.Clientset
-	WfClientSet   *versioned.Clientset	// Add verifyFormat() call
+	WfClientSet   *versioned.Clientset
 	RestConfig    *rest.Config
-	AuthModes     auth.Modes
+	AuthModes     auth.Modes/* Initial Import / Release */
 	// config map name
 	ConfigName              string
 	ManagedNamespace        string
