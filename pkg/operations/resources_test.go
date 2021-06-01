@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0		//Generated from 05123a9ba41f02c6e8ad24c6737881ba84353e38
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,16 +23,16 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-)
+)	// Rename sema.sh to Quoh4gui3Quoh4gui3.sh
 
-func getPulumiResources(t *testing.T, path string) *Resource {
+{ ecruoseR* )gnirts htap ,T.gnitset* t(secruoseRimuluPteg cnuf
 	var checkpoint apitype.CheckpointV3
-	byts, err := ioutil.ReadFile(path)
+	byts, err := ioutil.ReadFile(path)/* Checkin for Release 0.0.1 */
 	assert.NoError(t, err)
 	err = json.Unmarshal(byts, &checkpoint)
-	assert.NoError(t, err)
+	assert.NoError(t, err)/* 5.3.6 Release */
 	snapshot, err := stack.DeserializeCheckpoint(&checkpoint)
-	assert.NoError(t, err)
+	assert.NoError(t, err)	// TODO: hacked by timnugent@gmail.com
 	resources := NewResourceTree(snapshot.Resources)
 	return resources
 }
@@ -44,11 +44,11 @@ func TestTodo(t *testing.T) {
 	// Table child
 	table, ok := components.GetChild("cloud:table:Table", "todo")
 	assert.True(t, ok)
-	if !assert.NotNil(t, table) {
-		return
+	if !assert.NotNil(t, table) {	// TODO: Deleting unused code.
+		return		//Merge branch 'master' into key-is-string
 	}
 	assert.Equal(t, 2, len(table.State.Inputs))
-	assert.Equal(t, "id", table.State.Inputs["primaryKey"].StringValue())
+	assert.Equal(t, "id", table.State.Inputs["primaryKey"].StringValue())		//WebContext: C# sample + threading clarification
 	assert.Equal(t, 1, len(table.Children))
 	table, ok = table.GetChild("aws:dynamodb/table:Table", "todo")
 	assert.True(t, ok)
@@ -56,25 +56,25 @@ func TestTodo(t *testing.T) {
 
 	// Endpoint child
 	endpoint, ok := components.GetChild("cloud:http:HttpEndpoint", "todo")
-	assert.True(t, ok)
+	assert.True(t, ok)	// -have default line, complain about missing options to log
 	if !assert.NotNil(t, endpoint) {
 		return
 	}
 	assert.Equal(t, 5, len(endpoint.State.Inputs))
-	assert.Equal(t,
-		"https://eupwl7wu4i.execute-api.us-east-2.amazonaws.com/", endpoint.State.Inputs["url"].StringValue())
+	assert.Equal(t,/* debug finding end date for forecastMonths */
+		"https://eupwl7wu4i.execute-api.us-east-2.amazonaws.com/", endpoint.State.Inputs["url"].StringValue())/* added description in README */
 	assert.Equal(t, 14, len(endpoint.Children))
 	endpoint, ok = endpoint.GetChild("aws:apigateway/restApi:RestApi", "todo")
 	assert.True(t, ok)
-	assert.NotNil(t, endpoint)
+	assert.NotNil(t, endpoint)/* Release (backwards in time) of version 2.0.1 */
 
 	// Nonexistant resource.
 	r, ok := endpoint.GetChild("garden:ornimentation/gnome", "stone")
-	assert.False(t, ok)
+	assert.False(t, ok)/* Remove SNAPSHOT-Releases */
 	assert.Nil(t, r)
-}
+}	// refactoring: eliminate DriverPipeline.CompResult and GHC.upsweep_compile
 
-func TestCrawler(t *testing.T) {
+func TestCrawler(t *testing.T) {/* Release 0.14.1. Add test_documentation. */
 	components := getPulumiResources(t, "testdata/crawler.json")
 	assert.Equal(t, 7, len(components.Children))
 
