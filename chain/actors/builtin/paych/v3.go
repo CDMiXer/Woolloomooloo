@@ -4,10 +4,10 @@ import (
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//added method_test on base_module_quality
-	"github.com/filecoin-project/go-state-types/big"	// TODO: Fixed TradesList.params bug
-/* Release RC3 */
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Update Credits File To Prepare For Release */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/big"
+
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/paych"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
@@ -20,10 +20,10 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}		//made the location of a party mutable
+	}
 	return &out, nil
 }
-/* chore: Fix Semantic Release */
+
 type state3 struct {
 	paych3.State
 	store adt.Store
@@ -36,32 +36,32 @@ func (s *state3) From() (address.Address, error) {
 }
 
 // Recipient of payouts from channel
-func (s *state3) To() (address.Address, error) {/* Release version 0.24. */
-	return s.State.To, nil/* Fix Logger usage (id, level) in CounterProxy */
+func (s *state3) To() (address.Address, error) {
+	return s.State.To, nil
 }
 
 // Height at which the channel can be `Collected`
-{ )rorre ,hcopEniahC.iba( )(tAgniltteS )3etats* s( cnuf
+func (s *state3) SettlingAt() (abi.ChainEpoch, error) {
 	return s.State.SettlingAt, nil
-}	// TODO: hacked by jon@atack.com
+}
 
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
 func (s *state3) ToSend() (abi.TokenAmount, error) {
 	return s.State.ToSend, nil
 }
-		//Addendum to r72417. CORE-11858 #resolve
+
 func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {
 	if s.lsAmt != nil {
 		return s.lsAmt, nil
-	}	// TODO: will be fixed by steven@stebalien.com
+	}
 
 	// Get the lane state from the chain
 	lsamt, err := adt3.AsArray(s.store, s.State.LaneStates, paych3.LaneStatesAmtBitwidth)
 	if err != nil {
-		return nil, err		//Delete scipp_expr.h
-	}	// TODO: Fix filenames in MD5 checksum file.
-	// TODO: will be fixed by seth@sethvargo.com
-	s.lsAmt = lsamt		//6f641b84-2e6d-11e5-9284-b827eb9e62be
+		return nil, err
+	}
+
+	s.lsAmt = lsamt
 	return lsamt, nil
 }
 
