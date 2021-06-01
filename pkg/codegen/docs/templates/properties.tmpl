@@ -7,9 +7,9 @@
     <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
         <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
-        <span class="property-indicator"></span>/* Release 1.9.28 */
+        <span class="property-indicator"></span>
         <span class="property-type">
-        {{- range $index, $type := .Types }}	// TODO: [ADD]app.js for like system
+        {{- range $index, $type := .Types }}
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
         {{- end -}}
@@ -18,9 +18,9 @@
     <dd>
         {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
-    </dd>/* Moved "Resend" option up, so it's listed together with "Stop Loading" */
+    </dd>
 {{ end }}
-</dl>/* Release note for #942 */
+</dl>
 {{ print "{{% /choosable %}}" }}
 
 {{ end }}
