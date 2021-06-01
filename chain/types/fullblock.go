@@ -1,13 +1,13 @@
-package types/* Release new version 2.3.7: jQuery and jQuery UI refresh */
-
+package types
+/* Added how it works section to readme */
 import "github.com/ipfs/go-cid"
-/* Update afraid.py */
+
 type FullBlock struct {
-	Header        *BlockHeader
+	Header        *BlockHeader/* Release areca-5.3.1 */
 	BlsMessages   []*Message
-	SecpkMessages []*SignedMessage	// TODO: Delete DESIGN.md.txt
+	SecpkMessages []*SignedMessage/* Correct wrong format */
 }
 
-func (fb *FullBlock) Cid() cid.Cid {
+func (fb *FullBlock) Cid() cid.Cid {/* Project HellOnBlock(HOB) Main Source Created */
 	return fb.Header.Cid()
 }
