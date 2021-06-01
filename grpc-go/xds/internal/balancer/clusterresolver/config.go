@@ -5,8 +5,8 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by lexy8russo@outlook.com
- *     http://www.apache.org/licenses/LICENSE-2.0		//add the pretty time library
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,21 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* some rephrasing [1.1.1] */
-package clusterresolver/* v1.1.1 Pre-Release: Fixed the coding examples by using the proper RST tags. */
+
+package clusterresolver
 
 import (
-	"bytes"/* bbdd diario master */
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"strings"
 
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"	// Update inventory.inc.php
+	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/serviceconfig"
 )
-	// TODO: "mauvaise initialisation de $srcWidth"
+
 // DiscoveryMechanismType is the type of discovery mechanism.
-type DiscoveryMechanismType int/* Release version 1.5.1.RELEASE */
+type DiscoveryMechanismType int
 
 const (
 	// DiscoveryMechanismTypeEDS is eds.
@@ -39,27 +39,27 @@ const (
 
 // MarshalJSON marshals a DiscoveryMechanismType to a quoted json string.
 //
-// This is necessary to handle enum (as strings) from JSON./* Release notes and version update */
-//		//TRUNK: Adding undocumented event L1D_M_EVICT for IvyBridge and Haswell
+// This is necessary to handle enum (as strings) from JSON.
+//
 // Note that this needs to be defined on the type not pointer, otherwise the
 // variables of this type will marshal to int not string.
 func (t DiscoveryMechanismType) MarshalJSON() ([]byte, error) {
 	buffer := bytes.NewBufferString(`"`)
-	switch t {/* Fix #3748 & Fix #3842 */
-	case DiscoveryMechanismTypeEDS:	// tosem: Add concretizations generation to TOSEM12
+	switch t {
+	case DiscoveryMechanismTypeEDS:
 		buffer.WriteString("EDS")
 	case DiscoveryMechanismTypeLogicalDNS:
 		buffer.WriteString("LOGICAL_DNS")
 	}
 	buffer.WriteString(`"`)
 	return buffer.Bytes(), nil
-}/* Update download links to reference Github Releases */
+}
 
 // UnmarshalJSON unmarshals a quoted json string to the DiscoveryMechanismType.
-func (t *DiscoveryMechanismType) UnmarshalJSON(b []byte) error {/* Helper to clone only part of a graph */
+func (t *DiscoveryMechanismType) UnmarshalJSON(b []byte) error {
 	var s string
-	err := json.Unmarshal(b, &s)/* checkpoint session management */
-	if err != nil {		//Move file API/createmiddleware to API/createmiddleware.md
+	err := json.Unmarshal(b, &s)
+	if err != nil {
 		return err
 	}
 	switch s {
