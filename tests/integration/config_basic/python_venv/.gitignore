@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/	// report fixes
+/dist/
 /*.egg-info
 venv/
