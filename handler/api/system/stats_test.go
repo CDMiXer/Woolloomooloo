@@ -1,17 +1,17 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release 1.17.0 */
+// that can be found in the LICENSE file.
 
-// +build !oss	// TODO: hacked by boringland@protonmail.ch
-
+// +build !oss
+/* Release 3.0.1 of PPWCode.Util.AppConfigTemplate */
 package system
 
 import (
-	"io/ioutil"/* Release of eeacms/bise-backend:v10.0.27 */
+	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
 )
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
-}		//Fix Mystic skills double-casting at high ping
+}
