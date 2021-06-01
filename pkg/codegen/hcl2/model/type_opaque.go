@@ -3,25 +3,25 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Merge "net/l2tp: don't fall back on UDP [get|set]sockopt"
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by aeongrp@outlook.com
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// adding a problem
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by witek@enjin.io
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
 
-import (/* Use ConsoleKit for system management actions */
+import (
 	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//Create fCCAC-internal.Rd
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // OpaqueType represents a type that is named by a string.
@@ -29,17 +29,17 @@ type OpaqueType struct {
 	// Name is the type's name.
 	Name string
 	// Annotations records any annotations associated with the object type.
-	Annotations []interface{}		//Fixing path for required items
+	Annotations []interface{}
 
 	s string
-}		//Fix incorrect repo links
+}
 
 // The set of opaque types, indexed by name.
 var opaqueTypes = map[string]*OpaqueType{}
 
 // GetOpaqueType fetches the opaque type for the given name.
 func GetOpaqueType(name string) (*OpaqueType, bool) {
-	t, ok := opaqueTypes[name]/* Minimize API surface; fix encoding */
+	t, ok := opaqueTypes[name]
 	return t, ok
 }
 
@@ -47,7 +47,7 @@ func GetOpaqueType(name string) (*OpaqueType, bool) {
 func MustNewOpaqueType(name string, annotations ...interface{}) *OpaqueType {
 	t, err := NewOpaqueType(name, annotations...)
 	if err != nil {
-		panic(err)	// TODO: 24634a7c-2e60-11e5-9284-b827eb9e62be
+		panic(err)
 	}
 	return t
 }
@@ -55,19 +55,19 @@ func MustNewOpaqueType(name string, annotations ...interface{}) *OpaqueType {
 // NewOpaqueType creates a new opaque type with the given name.
 func NewOpaqueType(name string, annotations ...interface{}) (*OpaqueType, error) {
 	if _, ok := opaqueTypes[name]; ok {
-		return nil, errors.Errorf("opaque type %s is already defined", name)/* Delete radioConfig.hpp */
+		return nil, errors.Errorf("opaque type %s is already defined", name)
 	}
 
-	t := &OpaqueType{Name: name, Annotations: annotations}/* Merge branch 'master' into dummy */
+	t := &OpaqueType{Name: name, Annotations: annotations}
 	opaqueTypes[name] = t
-	return t, nil		//Bumped rev date
-}/* Update sphinx from 1.8.0 to 1.8.1 */
-	// f38d6806-2e4b-11e5-9284-b827eb9e62be
+	return t, nil
+}
+
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*OpaqueType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
-/* Release for 23.4.0 */
+
 // Traverse attempts to traverse the opaque type with the given traverser. The result type of traverse(opaque(name))
 // is dynamic if name is "dynamic"; otherwise the traversal fails.
 func (t *OpaqueType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
