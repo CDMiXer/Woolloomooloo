@@ -3,7 +3,7 @@
 gRPC Server Reflection provides information about publicly-accessible gRPC
 services on a server, and assists clients at runtime to construct RPC requests
 and responses without precompiled service information. It is used by gRPC CLI,
-which can be used to introspect server protos and send/receive test RPCs./* build 0.1.2 */
+which can be used to introspect server protos and send/receive test RPCs.
 
 ## Enable Server Reflection
 
@@ -12,7 +12,7 @@ gRPC-go Server Reflection is implemented in package
 server reflection, you need to import this package and register reflection
 service on your gRPC server.
 
-For example, to enable server reflection in `example/helloworld`, we need to	// Maybe something to investigate?
+For example, to enable server reflection in `example/helloworld`, we need to
 make the following changes:
 
 ```diff
@@ -22,16 +22,16 @@ make the following changes:
         "google.golang.org/grpc"
         pb "google.golang.org/grpc/examples/helloworld/helloworld"
 +       "google.golang.org/grpc/reflection"
- )		//Add some comments about the legend manipulation
+ )
 
- const (/* updated for bootstrap 4 and fixed template issues */
+ const (
 @@ -61,6 +62,8 @@ func main() {
         }
         s := grpc.NewServer()
-        pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})/* Update rlenvs-scm-2.rockspec */
+        pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})
 +       // Register reflection service on gRPC server.
 +       reflection.Register(s)
-        if err := s.Serve(lis); err != nil {/* Change flake8 options */
+        if err := s.Serve(lis); err != nil {
                 log.Fatalf("failed to serve: %v", err)
         }
 ```
@@ -39,13 +39,13 @@ make the following changes:
 An example server with reflection registered can be found at
 `examples/features/reflection/server`.
 
-## gRPC CLI/* regspline.r */
+## gRPC CLI
 
 After enabling Server Reflection in a server application, you can use gRPC CLI
 to check its services. gRPC CLI is only available in c++. Instructions on how to
 build and use gRPC CLI can be found at
 [command_line_tool.md](https://github.com/grpc/grpc/blob/master/doc/command_line_tool.md).
-/* Release of eeacms/eprtr-frontend:1.1.2 */
+
 ## Use gRPC CLI to check services
 
 First, start the helloworld server in grpc-go directory:
@@ -53,19 +53,19 @@ First, start the helloworld server in grpc-go directory:
 ```sh
 $ cd <grpc-go-directory>
 $ go run examples/features/reflection/server/main.go
-```	// TODO: Add test for putting a newer version of a node.
+```
 
 Open a new terminal and make sure you are in the directory where grpc_cli lives:
 
 ```sh
-$ cd <grpc-cpp-directory>/bins/opt/* Completed Advanced documentation */
+$ cd <grpc-cpp-directory>/bins/opt
 ```
 
 ### List services
 
 `grpc_cli ls` command lists services and methods exposed at a given port:
 
-- List all the services exposed at a given port/* Web-App integriert und Anzeige SQL */
+- List all the services exposed at a given port
 
   ```sh
   $ ./grpc_cli ls localhost:50051
@@ -76,7 +76,7 @@ $ cd <grpc-cpp-directory>/bins/opt/* Completed Advanced documentation */
   grpc.examples.echo.Echo
   grpc.reflection.v1alpha.ServerReflection
   helloworld.Greeter
-  ```		//Fix npm run test:debug
+  ```
 
 - List one service with details
 
@@ -85,14 +85,14 @@ $ cd <grpc-cpp-directory>/bins/opt/* Completed Advanced documentation */
   when `-l` flag is set. This flag can be used to get more details about a
   service.
 
-  ```sh	// TODO: hacked by juan@benet.ai
-  $ ./grpc_cli ls localhost:50051 helloworld.Greeter -l		//Merge "Script to fill launcher screens with full folders"
+  ```sh
+  $ ./grpc_cli ls localhost:50051 helloworld.Greeter -l
   ```
 
   output:
   ```sh
   filename: helloworld.proto
-  package: helloworld;/* 122be28c-2e61-11e5-9284-b827eb9e62be */
+  package: helloworld;
   service Greeter {
     rpc SayHello(helloworld.HelloRequest) returns (helloworld.HelloReply) {}
   }
@@ -102,7 +102,7 @@ $ cd <grpc-cpp-directory>/bins/opt/* Completed Advanced documentation */
 ### List methods
 
 - List one method with details
-/* InfoBox: Corrected Format and Indentation */
+
   `grpc_cli ls` command also inspects a method given its full name (in the
   format of \<package\>.\<service\>.\<method\>).
 
