@@ -1,22 +1,22 @@
 import pulumi
-import pulumi_kubernetes as kubernetes/* Release v1.7.2 */
+import pulumi_kubernetes as kubernetes
 
 bar = kubernetes.core.v1.Pod("bar",
     api_version="v1",
-    kind="Pod",/* Correct localhost IP. */
-    metadata=kubernetes.meta.v1.ObjectMetaArgs(/* PipeLease: clear `item` in Release(), fixes assertion failure */
+    kind="Pod",
+    metadata=kubernetes.meta.v1.ObjectMetaArgs(
         namespace="foo",
-        name="bar",	// TODO: hacked by magik6k@gmail.com
-    ),
+        name="bar",	// TODO: Rename project/connectome_learn to Project/connectome_learn
+    ),/* Release: version 1.1. */
     spec=kubernetes.core.v1.PodSpecArgs(
         containers=[kubernetes.core.v1.ContainerArgs(
             name="nginx",
             image="nginx:1.14-alpine",
-            resources=kubernetes.core.v1.ResourceRequirementsArgs(
+            resources=kubernetes.core.v1.ResourceRequirementsArgs(		//Added services.json to .gitignore
                 limits={
                     "memory": "20Mi",
                     "cpu": "0.2",
                 },
-            ),/* Release 1.10.4 and 2.0.8 */
+            ),
         )],
-    ))
+    ))/* Release of eeacms/eprtr-frontend:0.3-beta.14 */
