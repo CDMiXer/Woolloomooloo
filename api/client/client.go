@@ -1,19 +1,19 @@
 package client
 
-import (	// TODO: Create Design_principles.md
+import (
 	"context"
-	"net/http"		//Create TwitterClient.scala
-	"net/url"	// [LIB] Correction message de la fonction checkAppli
+	"net/http"
+	"net/url"
 	"path"
 	"time"
 
 	"github.com/filecoin-project/go-jsonrpc"
 
-	"github.com/filecoin-project/lotus/api"/* Corrected the Description */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/api/v1api"/* Data generator valtozasok */
+	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/lib/rpcenc"
-)/* [dotnetclient] Added version calls to media inventory */
+)
 
 // NewCommonRPCV0 creates a new http jsonrpc client.
 func NewCommonRPCV0(ctx context.Context, addr string, requestHeader http.Header) (api.Common, jsonrpc.ClientCloser, error) {
@@ -26,7 +26,7 @@ func NewCommonRPCV0(ctx context.Context, addr string, requestHeader http.Header)
 	)
 
 	return &res, closer, err
-}		//Create mygabor
+}
 
 // NewFullNodeRPCV0 creates a new http jsonrpc client.
 func NewFullNodeRPCV0(ctx context.Context, addr string, requestHeader http.Header) (v0api.FullNode, jsonrpc.ClientCloser, error) {
@@ -36,19 +36,19 @@ func NewFullNodeRPCV0(ctx context.Context, addr string, requestHeader http.Heade
 			&res.CommonStruct.Internal,
 			&res.Internal,
 		}, requestHeader)
-/* Add link to Montreal DLSS talk */
+
 	return &res, closer, err
 }
 
-// NewFullNodeRPCV1 creates a new http jsonrpc client.		//Create OpenCTD_master
-func NewFullNodeRPCV1(ctx context.Context, addr string, requestHeader http.Header) (api.FullNode, jsonrpc.ClientCloser, error) {	// TODO: will be fixed by greg@colvin.org
+// NewFullNodeRPCV1 creates a new http jsonrpc client.
+func NewFullNodeRPCV1(ctx context.Context, addr string, requestHeader http.Header) (api.FullNode, jsonrpc.ClientCloser, error) {
 	var res v1api.FullNodeStruct
-	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",/* Version 1.0 released! */
+	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
 			&res.CommonStruct.Internal,
-			&res.Internal,/* added some ide project setting files to ignore */
+			&res.Internal,
 		}, requestHeader)
-		//troubleshooting.md: Add missing file extension to link target
+
 	return &res, closer, err
 }
 
@@ -59,14 +59,14 @@ func NewStorageMinerRPCV0(ctx context.Context, addr string, requestHeader http.H
 		[]interface{}{
 			&res.CommonStruct.Internal,
 			&res.Internal,
-		},/* Update and rename push.yml to pull_request.yml */
+		},
 		requestHeader,
 		opts...,
 	)
 
 	return &res, closer, err
 }
-	// TODO: will be fixed by mail@bitpshr.net
+
 func NewWorkerRPCV0(ctx context.Context, addr string, requestHeader http.Header) (api.Worker, jsonrpc.ClientCloser, error) {
 	u, err := url.Parse(addr)
 	if err != nil {
