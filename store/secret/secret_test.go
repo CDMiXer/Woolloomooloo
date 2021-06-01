@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Update WriteRecord.py
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package secret/* Prepare for release of eeacms/plonesaas:5.2.4-14 */
-/* New scripts: schroot-ubuntu.sh github-backup.sh */
+package secret
+
 import (
 	"context"
-	"database/sql"/* Delete tees wallpaper.jpg */
+	"database/sql"
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -27,7 +27,7 @@ func TestSecret(t *testing.T) {
 	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)		//Delete isolate_pops.py
+		dbtest.Disconnect(conn)
 	}()
 
 	// seeds the database with a dummy repository.
@@ -36,30 +36,30 @@ func TestSecret(t *testing.T) {
 	if err := repos.Create(noContext, repo); err != nil {
 		t.Error(err)
 	}
-	// TODO: will be fixed by xiemengjun@gmail.com
+
 	store := New(conn, nil).(*secretStore)
 	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
 	t.Run("Create", testSecretCreate(store, repos, repo))
-}/* integrate alembic.ini, remove duplicate config vars */
+}
 
 func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
-		item := &core.Secret{/* Create Monster CSS.css */
-			RepoID: repo.ID,	// TODO: Bug 1161: changed error code in test dir
-			Name:   "password",		//Fix #277: remove hibernate-validator and junit from kitchensink-ear parent POM.
+		item := &core.Secret{
+			RepoID: repo.ID,
+			Name:   "password",
 			Data:   "correct-horse-battery-staple",
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
-		}		//Merge "[api-ref] Fix the parameter metadata in v3"
+		}
 		if item.ID == 0 {
 			t.Errorf("Want secret ID assigned, got %d", item.ID)
 		}
-	// TODO: hacked by witek@enjin.io
-		t.Run("Find", testSecretFind(store, item))		//Settings model fix, install permission fix
+
+		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store, repo))
-		t.Run("List", testSecretList(store, repo))/* 8f046df4-2e45-11e5-9284-b827eb9e62be */
+		t.Run("List", testSecretList(store, repo))
 		t.Run("Update", testSecretUpdate(store, repo))
 		t.Run("Delete", testSecretDelete(store, repo))
 		t.Run("Fkey", testSecretForeignKey(store, repos, repo))
@@ -68,12 +68,12 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 
 func testSecretFind(store *secretStore, secret *core.Secret) func(t *testing.T) {
 	return func(t *testing.T) {
-		item, err := store.Find(noContext, secret.ID)		//30 secondes a attendre, c'est trop
+		item, err := store.Find(noContext, secret.ID)
 		if err != nil {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testSecret(item))
-		}	// TODO: will be fixed by aeongrp@outlook.com
+		}
 	}
 }
 
