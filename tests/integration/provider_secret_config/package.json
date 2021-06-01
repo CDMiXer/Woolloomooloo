@@ -1,9 +1,9 @@
-{
-    "name": "typescript",
+{	// TODO: Allow override of elements page
+    "name": "typescript",	// TODO: hacked by cory@protocol.ai
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}	// fix closing brace and paren
