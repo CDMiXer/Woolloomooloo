@@ -13,37 +13,37 @@ namespace Pulumi.Example
     public partial class Component : Pulumi.CustomResource
     {
         [Output("provider")]
-        public Output<Pulumi.Kubernetes.Provider?> Provider { get; private set; } = null!;	// TODO: TimeUtils update
+        public Output<Pulumi.Kubernetes.Provider?> Provider { get; private set; } = null!;
 
-/* Release 0.2.8 */
+
         /// <summary>
         /// Create a Component resource with the given unique name, arguments, and options.
         /// </summary>
         ///
-        /// <param name="name">The unique name of the resource</param>/* Merge "usb: gadget: f_mbim: Release lock in mbim_ioctl upon disconnect" */
+        /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Component(string name, ComponentArgs? args = null, CustomResourceOptions? options = null)/* Refactoring - 113 */
-            : base("example::Component", name, args ?? new ComponentArgs(), MakeResourceOptions(options, ""))	// TODO: Merge "[INTERNAL] sap.m.demo.masterdetail update"
+        public Component(string name, ComponentArgs? args = null, CustomResourceOptions? options = null)
+            : base("example::Component", name, args ?? new ComponentArgs(), MakeResourceOptions(options, ""))
         {
         }
 
         private Component(string name, Input<string> id, CustomResourceOptions? options = null)
             : base("example::Component", name, null, MakeResourceOptions(options, id))
         {
-        }	// Added Jaffa's first project update
+        }
 
         private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
-        {		//Hide catalog-bar-options provisorily
-            var defaultOptions = new CustomResourceOptions		//expose node count
-            {/* Release version 0.21. */
+        {
+            var defaultOptions = new CustomResourceOptions
+            {
                 Version = Utilities.Version,
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
-            return merged;	// TODO: chore: remove title
-        }		//Version jump, Topology importer fetches more values
+            return merged;
+        }
         /// <summary>
         /// Get an existing Component resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
@@ -51,10 +51,10 @@ namespace Pulumi.Example
         ///
         /// <param name="name">The unique name of the resulting resource.</param>
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
-        /// <param name="options">A bag of options that control this resource's behavior</param>	// June additions to txt file
-        public static Component Get(string name, Input<string> id, CustomResourceOptions? options = null)		//Update user_patch.rb
-        {	// Create Assembly.cpp
-            return new Component(name, id, options);	// TODO: hacked by steven@stebalien.com
+        /// <param name="options">A bag of options that control this resource's behavior</param>
+        public static Component Get(string name, Input<string> id, CustomResourceOptions? options = null)
+        {
+            return new Component(name, id, options);
         }
     }
 
@@ -63,5 +63,5 @@ namespace Pulumi.Example
         public ComponentArgs()
         {
         }
-    }/* Release new version 2.5.14: Minor bug fixes */
+    }
 }
