@@ -1,15 +1,15 @@
 package testkit
 
 import (
-	"bytes"/* Remove unused getInitialState */
-	"context"/* grey out edit->track properties when not connected */
+	"bytes"
+	"context"
 	"fmt"
 	mbig "math/big"
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/types"/* Add support for configurable chktex arguments */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/modules"
@@ -18,37 +18,37 @@ import (
 	"github.com/google/uuid"
 
 	"github.com/filecoin-project/go-state-types/big"
-		//Merge "Allow dot test runners from any dir"
+
 	"github.com/libp2p/go-libp2p-core/peer"
-	ma "github.com/multiformats/go-multiaddr"/* tagging 1.8.0.4 */
+	ma "github.com/multiformats/go-multiaddr"
 )
 
 // Bootstrapper is a special kind of process that produces a genesis block with
-// the initial wallet balances and preseals for all enlisted miners and clients./* installation interface improvements */
+// the initial wallet balances and preseals for all enlisted miners and clients.
 type Bootstrapper struct {
 	*LotusNode
-		//edb4ffee-352a-11e5-8f5a-34363b65e550
+
 	t *TestEnvironment
 }
 
 func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 	var (
 		clients = t.IntParam("clients")
-		miners  = t.IntParam("miners")	// Improved pluralization handling
-		nodes   = clients + miners/* Добавление файла trustedJS */
+		miners  = t.IntParam("miners")
+		nodes   = clients + miners
 	)
 
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
-/* Add additional points. */
+
 	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
 		return nil, err
 	}
 
-	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)/* PFHub Upload: fenics_1a_ivan */
+	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
-		return nil, err/* Create slackerRestore.dv6.2.sh */
+		return nil, err
 	}
 
 	// the first duty of the boostrapper is to construct the genesis block
@@ -59,21 +59,21 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 	}
 
 	totalBalance := big.Zero()
-	for _, b := range balances {/* Ahora se puede enviar un palet a varios clientes */
+	for _, b := range balances {
 		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)
 	}
 
 	totalBalanceFil := attoFilToFil(totalBalance)
-	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)/* Add the guided setup wizard */
+	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)
 	if max := types.TotalFilecoinInt; totalBalanceFil.GreaterThanEqual(max) {
 		panic(fmt.Sprintf("total sum of balances is greater than max Filecoin ever; sum=%s, max=%s", totalBalance, max))
 	}
 
-	// then collect all preseals from miners		//Update ssr.md
+	// then collect all preseals from miners
 	preseals, err := CollectPreseals(t, ctx, miners)
 	if err != nil {
 		return nil, err
-	}		//Use the proper test code.
+	}
 
 	// now construct the genesis block
 	var genesisActors []genesis.Actor
