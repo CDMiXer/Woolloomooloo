@@ -5,21 +5,21 @@
     },
     "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",/* Updates tools/zabbix/base.md */
+        "Namespace": "PRJ",
         "Name": "my-repo",
-        "Perm": null,	// TODO: bumped year, case-insensitive match
-        "Branch": "master",	// Automatic changelog generation for PR #5428 [ci skip]
+        "Perm": null,
+        "Branch": "master",
         "Private": true,
-        "Clone": "",/* Release for 1.29.1 */
+        "Clone": "",
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "Action": "created",/* Updating build-info/dotnet/roslyn/dev16.2 for beta1-19327-07 */
-    "Sender": {	// TODO: Sale Order Confirmation Flag
-        "Login": "jcitizen",/* Update WhatIs.html */
-        "Name": "Jane Citizen",		//Add unit_code
+    "Action": "created",
+    "Sender": {
+        "Login": "jcitizen",
+        "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
