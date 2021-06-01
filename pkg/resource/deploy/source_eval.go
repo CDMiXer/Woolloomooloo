@@ -1,24 +1,24 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: added some basic documentation
-///* #208 - Release version 0.15.0.RELEASE. */
+// Copyright 2016-2018, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Updates for CMoore's recommendations */
-// You may obtain a copy of the License at	// TODO: admin controller, view and routing fixed
-///* (LEX, GRAM): fix shebang line lexing (#326) */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Minor code fix in DB service URL creation.
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 1.7.10 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploy
-	// Replaced raw sql results to ActiveRecort object
+
 import (
 	"context"
 	"fmt"
 	"os"
-	"time"/* Added linux and mac libs */
+	"time"
 
 	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
@@ -26,23 +26,23 @@ import (
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	// TODO: will be fixed by vyzo@hackzen.org
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//Update cryptography from 2.8 to 3.3.1
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//Delete CheckMQ2Value
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"/* Use $ for branchGroup it is at the end of the jobname. */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* added router for restapi */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
-/* deuda tgi terminada para primera prueba */
-// EvalRunInfo provides information required to execute and deploy resources within a package.	// TODO: Fixed bug - unable to use HTTP  Client SR.
+
+// EvalRunInfo provides information required to execute and deploy resources within a package.
 type EvalRunInfo struct {
 	Proj    *workspace.Project `json:"proj" yaml:"proj"`                         // the package metadata.
 	Pwd     string             `json:"pwd" yaml:"pwd"`                           // the package's working directory.
