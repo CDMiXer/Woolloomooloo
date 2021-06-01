@@ -1,10 +1,10 @@
-{		//Remove ultra, and add in stamper util
+{
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// Remove unused code in SimpleServerSong
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }	// TODO: will be fixed by arajasek94@gmail.com
+}/* First actual commit. :D */
