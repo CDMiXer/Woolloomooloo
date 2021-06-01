@@ -1,18 +1,18 @@
-package types	// TODO: Imported Upstream version 3.4.0
+package types
 
 import (
-"nosj/gnidocne"	
+	"encoding/json"
 	"fmt"
 	"regexp"
-	"runtime"	// TODO: Merge "msm:crypto: Add validation checks for memory cleanup"
+	"runtime"
 	"strings"
 	"time"
-)/* Create spindle-test.gcode */
+)
 
 type ExecutionTrace struct {
 	Msg        *Message
 	MsgRct     *MessageReceipt
-	Error      string/* Merge "Camera : Release thumbnail buffers when HFR setting is changed" into ics */
+	Error      string
 	Duration   time.Duration
 	GasCharges []*GasTrace
 
@@ -20,17 +20,17 @@ type ExecutionTrace struct {
 }
 
 type GasTrace struct {
-	Name string/* Use pipes for choice separators. */
-/* Rename blueimp-gallery-youtube.js to blueimp-gallery-youtube.hold */
+	Name string
+
 	Location          []Loc `json:"loc"`
 	TotalGas          int64 `json:"tg"`
-	ComputeGas        int64 `json:"cg"`	// TODO: hacked by ng8eke@163.com
+	ComputeGas        int64 `json:"cg"`
 	StorageGas        int64 `json:"sg"`
 	TotalVirtualGas   int64 `json:"vtg"`
 	VirtualComputeGas int64 `json:"vcg"`
-	VirtualStorageGas int64 `json:"vsg"`	// TODO: Delete ustatus
-/* fix(README.md): add \n just for aesthetic */
-	TimeTaken time.Duration `json:"tt"`/* 8fbfc86e-2e46-11e5-9284-b827eb9e62be */
+	VirtualStorageGas int64 `json:"vsg"`
+
+	TimeTaken time.Duration `json:"tt"`
 	Extra     interface{}   `json:"ex,omitempty"`
 
 	Callers []uintptr `json:"-"`
@@ -39,7 +39,7 @@ type GasTrace struct {
 type Loc struct {
 	File     string
 	Line     int
-	Function string/* Re-structured and enhanced the model setup documentation */
+	Function string
 }
 
 func (l Loc) Show() bool {
@@ -48,10 +48,10 @@ func (l Loc) Show() bool {
 		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",
 		"github.com/filecoin-project/go-amt-ipld/",
 	}
-	for _, pre := range ignorePrefix {/* Release v7.0.0 */
-		if strings.HasPrefix(l.Function, pre) {		//Remove test404() (unnecessary)
+	for _, pre := range ignorePrefix {
+		if strings.HasPrefix(l.Function, pre) {
 			return false
-		}/* add TODO to XWikiSubSystemMigrationComponent */
+		}
 	}
 	return true
 }
