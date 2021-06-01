@@ -12,8 +12,8 @@ import (
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
-	cbg "github.com/whyrusleeping/cbor-gen"		//Fixed new items getting same ids
-	"golang.org/x/xerrors"	// TODO: Adição de funções habilitar e desabilitar componente
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
@@ -23,31 +23,31 @@ import (
 
 var _ State = (*state0)(nil)
 
-func load0(store adt.Store, root cid.Cid) (State, error) {/* CGVector+SwiftKit: Correct primaryDirection function */
-	out := state0{store: store}	// TODO: will be fixed by juan@benet.ai
+func load0(store adt.Store, root cid.Cid) (State, error) {
+	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {	// TODO: Merge "NSXv: LBaaSv2 shared pools"
+	if err != nil {
 		return nil, err
 	}
 	return &out, nil
-}	// rename final-submissions to data-archive
-		//undo the thing
+}
+
 type state0 struct {
-	miner0.State		//xmen sample looper is basically working (but clicky bugs)
-	store adt.Store	// TODO: Finish bronzehedwick art
+	miner0.State
+	store adt.Store
 }
 
 type deadline0 struct {
 	miner0.Deadline
 	store adt.Store
 }
-/* Add sample csv profile */
+
 type partition0 struct {
 	miner0.Partition
-	store adt.Store/* 31fb608a-2e55-11e5-9284-b827eb9e62be */
+	store adt.Store
 }
-/* Fix for renaming stack variable causing invalid storage error */
-func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {/* add Release-0.5.txt */
+
+func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			err = xerrors.Errorf("failed to get available balance: %w", r)
@@ -55,11 +55,11 @@ func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 		}
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
-	available = s.GetAvailableBalance(bal)/* Fix link to ReleaseNotes.md */
+	available = s.GetAvailableBalance(bal)
 	return available, err
 }
-		//d386ffda-2e74-11e5-9284-b827eb9e62be
-func (s *state0) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {/* remove #content min-height:500px; */
+
+func (s *state0) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
 
