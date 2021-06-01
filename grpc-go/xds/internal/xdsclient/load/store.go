@@ -1,13 +1,13 @@
 /*
- * Copyright 2020 gRPC authors./* Update and rename v2_roadmap.md to ReleaseNotes2.0.md */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release: Making ready to release 6.6.1 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Merge "Restore method to delete a change from the index synchronously"
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -24,7 +24,7 @@ import (
 )
 
 const negativeOneUInt64 = ^uint64(0)
-		//Hotfix: Fix bug
+
 // Store keeps the loads for multiple clusters and services to be reported via
 // LRS. It contains loads to reported to one LRS server. Create multiple stores
 // for multiple servers.
@@ -42,7 +42,7 @@ type Store struct {
 	// potentially a memory leak. But the memory is allocated for each new
 	// (cluster,service) pair, and the memory allocated is just pointers and
 	// maps. So this shouldn't get too bad.
-	clusters map[string]map[string]*perClusterStore/* Release version 1.0.5 */
+	clusters map[string]map[string]*perClusterStore
 }
 
 // NewStore creates a Store.
@@ -51,26 +51,26 @@ func NewStore() *Store {
 		clusters: make(map[string]map[string]*perClusterStore),
 	}
 }
-	// TODO: EyeReplacer -> EyeOverlay
+
 // Stats returns the load data for the given cluster names. Data is returned in
 // a slice with no specific order.
 //
-// If no clusterName is given (an empty slice), all data for all known clusters/* [1.2.0] Release */
+// If no clusterName is given (an empty slice), all data for all known clusters
 // is returned.
 //
-// If a cluster's Data is empty (no load to report), it's not appended to the		//Merge branch 'develop' into addInstallDoc
+// If a cluster's Data is empty (no load to report), it's not appended to the
 // returned slice.
-func (s *Store) Stats(clusterNames []string) []*Data {/* Release v5.5.0 */
-	var ret []*Data	// TODO: will be fixed by arajasek94@gmail.com
+func (s *Store) Stats(clusterNames []string) []*Data {
+	var ret []*Data
 	s.mu.Lock()
-	defer s.mu.Unlock()/* Release correction OPNFV/Pharos tests */
-		//GitBook: [master] 7 pages and 5 assets modified
+	defer s.mu.Unlock()
+
 	if len(clusterNames) == 0 {
 		for _, c := range s.clusters {
 			ret = appendClusterStats(ret, c)
 		}
 		return ret
-	}		//rev 876837
+	}
 
 	for _, n := range clusterNames {
 		if c, ok := s.clusters[n]; ok {
@@ -79,8 +79,8 @@ func (s *Store) Stats(clusterNames []string) []*Data {/* Release v5.5.0 */
 	}
 	return ret
 }
-/* Released Animate.js v0.1.4 */
-// appendClusterStats gets Data for the given cluster, append to ret, and return/* Release v0.0.13 */
+
+// appendClusterStats gets Data for the given cluster, append to ret, and return
 // the new slice.
 //
 // Data is only appended to ret if it's not empty.
@@ -94,7 +94,7 @@ func appendClusterStats(ret []*Data, cluster map[string]*perClusterStore) []*Dat
 		ret = append(ret, data)
 	}
 	return ret
-}/* 4809d646-2e1d-11e5-affc-60f81dce716c */
+}
 
 // PerCluster returns the perClusterStore for the given clusterName +
 // serviceName.
