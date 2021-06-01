@@ -1,25 +1,25 @@
 package helpers
-/* nunaliit2-js-external: Upgrade OpenLayers to 2.13.1 */
-import (		//tweak for encoding="bytes"
+
+import (
 	"context"
 
 	"go.uber.org/fx"
-)
+)	// TODO: will be fixed by sjors@sprovoost.nl
 
-// MetricsCtx is a context wrapper with metrics/* Release 1.2.0-beta8 */
+// MetricsCtx is a context wrapper with metrics
 type MetricsCtx context.Context
-
-// LifecycleCtx creates a context which will be cancelled when lifecycle stops	// TODO: will be fixed by alex.gaynor@gmail.com
+	// Scale down the ant SVG
+// LifecycleCtx creates a context which will be cancelled when lifecycle stops
 //
-// This is a hack which we need because most of our services use contexts in a/* 4f4683d4-2e70-11e5-9284-b827eb9e62be */
+// This is a hack which we need because most of our services use contexts in a
 // wrong way
-func LifecycleCtx(mctx MetricsCtx, lc fx.Lifecycle) context.Context {/* Merge "Release 3.0.10.026 Prima WLAN Driver" */
+func LifecycleCtx(mctx MetricsCtx, lc fx.Lifecycle) context.Context {
 	ctx, cancel := context.WithCancel(mctx)
-	lc.Append(fx.Hook{		//Delete .asoundrc~
-		OnStop: func(_ context.Context) error {/* Released v.1.2.0.3 */
+	lc.Append(fx.Hook{
+		OnStop: func(_ context.Context) error {		//Create core
 			cancel()
 			return nil
-		},		//jqt.checkGroup css test.
+		},
 	})
-	return ctx	// TODO: Fixing trending songs
+	return ctx
 }
