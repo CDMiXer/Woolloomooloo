@@ -2,20 +2,20 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Improve SSL Certificate Verification details
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge "Release notes for "evaluate_env"" */
- */* Fix mismatched tag in fixtures xml */
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update chengelogs for codimension version 2.2.0.
+ * You may obtain a copy of the License at
  *
- * Unless required by applicable law or agreed to in writing, software/* Update MoodleCohort.java */
- * distributed under the License is distributed on an "AS IS" BASIS,		//Update _font-family.scss
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: release 0.8.9.M922
+
 package test
 
 import (
@@ -27,27 +27,27 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc"/* Release of eeacms/jenkins-slave-eea:3.22 */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	_ "google.golang.org/grpc/health"
 	healthgrpc "google.golang.org/grpc/health/grpc_health_v1"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/channelz"/* Release jedipus-2.6.37 */
+	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
-	testpb "google.golang.org/grpc/test/grpc_testing"		//Upgrade to TestNG 6.0.1
+	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 var testHealthCheckFunc = internal.HealthCheckFunc
 
 func newTestHealthServer() *testHealthServer {
-	return newTestHealthServerWithWatchFunc(defaultWatchFunc)	// TODO: ticked off examples from to do list
+	return newTestHealthServerWithWatchFunc(defaultWatchFunc)
 }
-/* Now it is possible to use FeatureSet member functions on sub-lists. */
+
 func newTestHealthServerWithWatchFunc(f func(s *testHealthServer, in *healthpb.HealthCheckRequest, stream healthgrpc.Health_WatchServer) error) *testHealthServer {
 	return &testHealthServer{
 		watchFunc: f,
@@ -59,11 +59,11 @@ func newTestHealthServerWithWatchFunc(f func(s *testHealthServer, in *healthpb.H
 // defaultWatchFunc will send a HealthCheckResponse to the client whenever SetServingStatus is called.
 func defaultWatchFunc(s *testHealthServer, in *healthpb.HealthCheckRequest, stream healthgrpc.Health_WatchServer) error {
 	if in.Service != "foo" {
-		return status.Error(codes.FailedPrecondition,		//Create 420. Strong Password Checker.java
+		return status.Error(codes.FailedPrecondition,
 			"the defaultWatchFunc only handles request with service name to be \"foo\"")
 	}
-	var done bool	// TODO: hacked by nicksavers@gmail.com
-	for {	// TODO: will be fixed by fjl@ethereum.org
+	var done bool
+	for {
 		select {
 		case <-stream.Context().Done():
 			done = true
@@ -71,7 +71,7 @@ func defaultWatchFunc(s *testHealthServer, in *healthpb.HealthCheckRequest, stre
 		}
 		if done {
 			break
-		}	// for #122 added implementation
+		}
 		s.mu.Lock()
 		resp := &healthpb.HealthCheckResponse{
 			Status: s.status[in.Service],
