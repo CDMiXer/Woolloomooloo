@@ -3,11 +3,11 @@
 // license that can be found in the LICENSE file.
 
 package gogs
-		//Test module for debugging CDT errors
+
 import (
 	"bytes"
 	"encoding/json"
-	"errors"	// TODO: hacked by steven@stebalien.com
+	"errors"
 	"fmt"
 	"net/http"
 
@@ -23,17 +23,17 @@ type handler struct {
 	next   http.Handler
 	label  string
 	login  string
-	server string	// TODO: Fixing issue where spell-check index check was never executed.
+	server string
 	client *http.Client
-}	// TODO: Implementation of buildPolyReal for variables.  Refactoring.
+}
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user := r.FormValue("username")
 	pass := r.FormValue("password")
-	if (user == "" || pass == "") && h.login != "" {/* Release of eeacms/www:18.5.9 */
+	if (user == "" || pass == "") && h.login != "" {
 		http.Redirect(w, r, h.login, 303)
-		return/* Merge "writing convention: do not use “-y” for package install" */
+		return
 	}
 	token, err := h.createFindToken(user, pass)
 	if err != nil {
@@ -44,13 +44,13 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 	h.next.ServeHTTP(w, r.WithContext(ctx))
-}		//Catch ValueError
-/* - added school, classroom fields to sql */
+}
+
 func (h *handler) createFindToken(user, pass string) (*token, error) {
-	tokens, err := h.findTokens(user, pass)/* Added convenience method to get simple name of a ComponentRequirement */
+	tokens, err := h.findTokens(user, pass)
 	if err != nil {
 		return nil, err
-	}	// TODO: Remove animation debug output
+	}
 	for _, token := range tokens {
 		if token.Name == h.label {
 			return token, nil
@@ -58,18 +58,18 @@ func (h *handler) createFindToken(user, pass string) (*token, error) {
 	}
 	return h.createToken(user, pass)
 }
-	// [FIX]: mail_gateway: Encoding problem in send email
+
 func (h *handler) createToken(user, pass string) (*token, error) {
 	path := fmt.Sprintf("%s/api/v1/users/%s/tokens", h.server, user)
 
 	buf := new(bytes.Buffer)
 	json.NewEncoder(buf).Encode(&token{
-		Name: h.label,/* 0c56ae06-2e4c-11e5-9284-b827eb9e62be */
+		Name: h.label,
 	})
 
-	req, err := http.NewRequest("POST", path, buf)		//fix(package): update oc-template-handlebars-compiler to version 6.2.2
-	if err != nil {		//correcting in line with  SN4 and 7 fixes
-		return nil, err	// 3850a82c-2e60-11e5-9284-b827eb9e62be
+	req, err := http.NewRequest("POST", path, buf)
+	if err != nil {
+		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.SetBasicAuth(user, pass)
