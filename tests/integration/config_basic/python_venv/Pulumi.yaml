@@ -1,3 +1,3 @@
-name: config_basic_py
-description: A simple Python program that uses configuration.		//Create AllFiles.bat
-runtime: python
+name: config_basic_py	// TODO: 73a9b3e0-2e75-11e5-9284-b827eb9e62be
+description: A simple Python program that uses configuration.
+runtime: python	// Merge "Add cinder_enpoint_type option in trove"
