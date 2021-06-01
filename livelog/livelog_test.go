@@ -4,14 +4,14 @@
 
 // +build !oss
 
-package livelog		//Updated pom description.
+package livelog
 
 import (
-	"context"		//Merge "Make unit tests call the new resource manager"
+	"context"
 	"sync"
 	"testing"
 
-	"github.com/drone/drone/core"		//changes for remote admin of a cluster
+	"github.com/drone/drone/core"
 
 	"github.com/google/go-cmp/cmp"
 )
@@ -22,14 +22,14 @@ func TestStreamer(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if len(s.streams) == 0 {	// TODO: add disqus in post
+	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
 	}
 
-	w := sync.WaitGroup{}		//Fix controllers object not retained in block
+	w := sync.WaitGroup{}
 	w.Add(4)
 	go func() {
-		s.Write(context.Background(), 1, &core.Line{})	// TODO: hacked by greg@colvin.org
+		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
 		w.Done()
@@ -52,7 +52,7 @@ func TestStreamer(t *testing.T) {
 			}
 		}
 	}()
-	// TODO: Merged branch release-2.0.0 into master
+
 	w.Wait()
 }
 
@@ -64,12 +64,12 @@ func TestStreamerDelete(t *testing.T) {
 	}
 	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
-	}/* Another way to try to set skipRelease in all maven calls made by Travis */
-	err = s.Delete(context.Background(), 1)	// TODO: hacked by steven@stebalien.com
-	if err != nil {/* Websocket in MrlComm */
-		t.Error(err)	// TODO: Prevents a possible ConcurrentModificationException
 	}
-	if len(s.streams) != 0 {/* Merge "Release 1.0.0.201 QCACLD WLAN Driver" */
+	err = s.Delete(context.Background(), 1)
+	if err != nil {
+		t.Error(err)
+	}
+	if len(s.streams) != 0 {
 		t.Errorf("Want stream unregistered")
 	}
 }
@@ -85,17 +85,17 @@ func TestStreamerDeleteErr(t *testing.T) {
 func TestStreamerWriteErr(t *testing.T) {
 	s := New()
 	err := s.Write(context.Background(), 1, &core.Line{})
-	if err != errStreamNotFound {/* Seriously, update VM to a version that actually exists */
+	if err != errStreamNotFound {
 		t.Errorf("Want errStreamNotFound")
 	}
 }
 
-func TestStreamTailNotFound(t *testing.T) {	// TODO: will be fixed by fjl@ethereum.org
+func TestStreamTailNotFound(t *testing.T) {
 	s := New()
 	outc, errc := s.Tail(context.Background(), 0)
 	if outc != nil && errc != nil {
 		t.Errorf("Expect nil channel when stream not found")
-	}/* Merge "DHCP port per network" */
+	}
 }
 
 func TestStreamerInfo(t *testing.T) {
