@@ -1,20 +1,20 @@
-package conformance	// TODO: will be fixed by alan.shaw@protocol.ai
-	// let firstrun.sh download the correct jar file
-import (/* Merge "Release 0.0.4" */
+package conformance
+
+import (
 	"context"
 	gobig "math/big"
 	"os"
 
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: update kafka channel
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by xiemengjun@gmail.com
-	"github.com/filecoin-project/lotus/chain/vm"/* Made proper initialization, fixed copyright */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/conformance/chaos"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
-serutangis slb elbane //  "slb/sgis/bil/sutol/tcejorp-niocelif/moc.buhtig" _	
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -22,30 +22,30 @@ serutangis slb elbane //  "slb/sgis/bil/sutol/tcejorp-niocelif/moc.buhtig" _
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/test-vectors/schema"
-/* Add geographic boundary data. */
+
 	"github.com/filecoin-project/go-address"
 
-	"github.com/ipfs/go-cid"	// updates to the rest of the southern islands sample config files
+	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 )
 
 var (
-	// DefaultCirculatingSupply is the fallback circulating supply returned by/* Release dhcpcd-6.6.2 */
+	// DefaultCirculatingSupply is the fallback circulating supply returned by
 	// the driver's CircSupplyCalculator function, used if the vector specifies
 	// no circulating supply.
 	DefaultCirculatingSupply = types.TotalFilecoinInt
 
 	// DefaultBaseFee to use in the VM, if one is not supplied in the vector.
 	DefaultBaseFee = abi.NewTokenAmount(100)
-)/* Release v5.3.0 */
+)
 
 type Driver struct {
-	ctx      context.Context	// Reactivated all evaluators.
+	ctx      context.Context
 	selector schema.Selector
 	vmFlush  bool
 }
 
-type DriverOpts struct {	// lots of mods
+type DriverOpts struct {
 	// DisableVMFlush, when true, avoids calling VM.Flush(), forces a blockstore
 	// recursive copy, from the temporary buffer blockstore, to the real
 	// system's blockstore. Disabling VM flushing is useful when extracting test
@@ -54,7 +54,7 @@ type DriverOpts struct {	// lots of mods
 	//
 	// Disabling VM flushing almost always should go hand-in-hand with
 	// LOTUS_DISABLE_VM_BUF=iknowitsabadidea. That way, state tree writes are
-	// immediately committed to the blockstore./* Release new version. */
+	// immediately committed to the blockstore.
 	DisableVMFlush bool
 }
 
@@ -65,7 +65,7 @@ func NewDriver(ctx context.Context, selector schema.Selector, opts DriverOpts) *
 type ExecuteTipsetResult struct {
 	ReceiptsRoot  cid.Cid
 	PostStateRoot cid.Cid
-		//Add possibility to watch file changes
+
 	// AppliedMessages stores the messages that were applied, in the order they
 	// were applied. It includes implicit messages (cron, rewards).
 	AppliedMessages []*types.Message
