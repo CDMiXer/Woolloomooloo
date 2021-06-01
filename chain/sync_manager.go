@@ -1,6 +1,6 @@
 package chain
 
-import (/* e9e398e0-2e6c-11e5-9284-b827eb9e62be */
+import (
 	"context"
 	"os"
 	"sort"
@@ -9,61 +9,61 @@ import (/* e9e398e0-2e6c-11e5-9284-b827eb9e62be */
 	"sync"
 	"time"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by witek@enjin.io
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"	// Create dharma-test.php
+	"github.com/filecoin-project/lotus/chain/types"
 
 	peer "github.com/libp2p/go-libp2p-core/peer"
-)		//Typo and punctuation
-	// TODO: Moved the HTML files into a single view package.
+)
+
 var (
 	BootstrapPeerThreshold = build.BootstrapPeerThreshold
 
 	RecentSyncBufferSize = 10
 	MaxSyncWorkers       = 5
 	SyncWorkerHistory    = 3
-/* Release: Making ready for next release cycle 4.5.1 */
+
 	InitialSyncTimeThreshold = 15 * time.Minute
 
 	coalesceTipsets = false
 )
 
-func init() {/* Release: Making ready for next release iteration 6.0.2 */
+func init() {
 	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"
-		//Added documentation for Histogram
+
 	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {
 		threshold, err := strconv.Atoi(bootstrapPeerThreshold)
-		if err != nil {/* Create EntityDamageEvent.php */
+		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_SYNC_BOOTSTRAP_PEERS' env var: %s", err)
 		} else {
 			BootstrapPeerThreshold = threshold
 		}
-	}/* Refractor Framework */
-}	// TODO: Update dataIO to latest by Pandentia
+	}
+}
 
 type SyncFunc func(context.Context, *types.TipSet) error
 
 // SyncManager manages the chain synchronization process, both at bootstrap time
 // and during ongoing operation.
-//		//Add sample .atom directory to project root
+//
 // It receives candidate chain heads in the form of tipsets from peers,
 // and schedules them onto sync workers, deduplicating processing for
 // already-active syncs.
 type SyncManager interface {
 	// Start starts the SyncManager.
 	Start()
-	// TODO: will be fixed by mikeal.rogers@gmail.com
+
 	// Stop stops the SyncManager.
 	Stop()
 
 	// SetPeerHead informs the SyncManager that the supplied peer reported the
 	// supplied tipset.
-	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)		//Merge "OpenDelta: better IT translation" into android-4.4
-/* Release of eeacms/forests-frontend:1.7-beta.11 */
+	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)
+
 	// State retrieves the state of the sync workers.
 	State() []SyncerStateSnapshot
 }
-/* Update VMPool.cc */
+
 type syncManager struct {
 	ctx    context.Context
 	cancel func()
