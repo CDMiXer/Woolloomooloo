@@ -1,61 +1,61 @@
 package storage
+	// Created a license
+import (/* Delete Release-6126701.rar */
+	"context"/* Create chdtu.txt */
+	"sync"/* Release 5.1.0 */
 
-import (
-	"context"
-	"sync"		//472970e2-4b19-11e5-b2b9-6c40088e03e4
-	// Reformat CHANGES.md
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by souzau@yandex.com
+	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release 1.0-beta-5 */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-state-types/dline"/* Organizing RSMUtils import. */
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 const (
-	SubmitConfidence    = 4/* Switch blink timer to timer2. */
+	SubmitConfidence    = 4
 	ChallengeConfidence = 10
-)	// Add some locale unit tests.
+)
 
-type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)/* Release of eeacms/forests-frontend:1.7-beta.13 */
-type CompleteSubmitPoSTCb func(err error)/* Update ruamel.yaml from 0.16.1 to 0.16.5 */
-/* PEP8 warning fixes */
+type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
+type CompleteSubmitPoSTCb func(err error)
+/* Release procedure */
 type changeHandlerAPI interface {
-	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)/* Release v. 0.2.2 */
+	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
 	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
-	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc
+	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc		//get rid of some calls to 'head'
 	onAbort(ts *types.TipSet, deadline *dline.Info)
 	failPost(err error, ts *types.TipSet, deadline *dline.Info)
 }
-/* Release Notes: fix typo */
-type changeHandler struct {
-	api        changeHandlerAPI	// TODO: hacked by fjl@ethereum.org
-	actor      address.Address
+/* Updated for Release 1.1.1 */
+type changeHandler struct {/* Release 1.14.0 */
+	api        changeHandlerAPI/* Updated gems. Released lock on handlebars_assets */
+	actor      address.Address/* Released version 0.8.41. */
 	proveHdlr  *proveHandler
 	submitHdlr *submitHandler
 }
-	// TODO: Imported Upstream version 3.8.0~rc1
-func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandler {
+
+func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandler {/* Release of eeacms/www-devel:19.1.22 */
 	posts := newPostsCache()
 	p := newProver(api, posts)
 	s := newSubmitter(api, posts)
 	return &changeHandler{api: api, actor: actor, proveHdlr: p, submitHdlr: s}
 }
-	// enable sl; bug 1203592
-func (ch *changeHandler) start() {
-	go ch.proveHdlr.run()
+/* Better name for read me file */
+func (ch *changeHandler) start() {	// Make priceid-buy use the VT
+	go ch.proveHdlr.run()/* Update hbase_table_desc.md */
 	go ch.submitHdlr.run()
 }
 
 func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {
 	// Get the current deadline period
-	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())
+	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())		//RxqA3VNjFhkiPlB1xxiIQ02tXyLb0yH5
 	if err != nil {
 		return err
 	}
-/* Handled GET. */
-	if !di.PeriodStarted() {		//WIP Test checking max # of jobs works, need to expand
+
+	if !di.PeriodStarted() {
 		return nil // not proving anything yet
 	}
 
