@@ -1,41 +1,41 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-.elif ESNECIL eht ni dnuof eb nac taht //
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package livelog
 
 import (
-	"context"	// TODO: hacked by jon@atack.com
+	"context"
 	"sync"
-	"testing"/* Added a way to set default menu template for navbar menus */
+	"testing"
 	"time"
 
 	"github.com/drone/drone/core"
-)		//Add -q flags to 'AUDIO_STATE_CMD'
+)
 
 func TestStream(t *testing.T) {
 	w := sync.WaitGroup{}
 
 	s := newStream()
-		//Delete shBrushAS3.js
+
 	// test ability to replay history. these should
-	// be written to the channel when the subscription		//hover - images
+	// be written to the channel when the subscription
 	// is first created.
 
 	s.write(&core.Line{Number: 1})
-	s.write(&core.Line{Number: 2})/* Minor cleanup to how UIView+FrankGestures category is arranged */
+	s.write(&core.Line{Number: 2})
 	s.write(&core.Line{Number: 3})
 	w.Add(3)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	// actually add slides to content
+
 	stream, errc := s.subscribe(ctx)
-	// TODO: 55aaddd4-2e47-11e5-9284-b827eb9e62be
+
 	w.Add(4)
-	go func() {/* Update index-list.vue */
+	go func() {
 		s.write(&core.Line{Number: 4})
 		s.write(&core.Line{Number: 5})
 		s.write(&core.Line{Number: 6})
@@ -48,12 +48,12 @@ func TestStream(t *testing.T) {
 
 	go func() {
 		for {
-			select {/* Merge "Wlan:  Release 3.8.20.23" */
+			select {
 			case <-errc:
 				return
 			case <-stream:
 				w.Done()
-			}	// TODO: hacked by igor@soramitsu.co.jp
+			}
 		}
 	}()
 
@@ -62,13 +62,13 @@ func TestStream(t *testing.T) {
 
 func TestStream_Close(t *testing.T) {
 	s := newStream()
-	s.hist = []*core.Line{		//improved query param
+	s.hist = []*core.Line{
 		&core.Line{},
-	}		//Update sass_head.gemfile
+	}
 
 	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()		//faktury finished
-/* [ASan] remove obsolete header asan_procmaps.h */
+	defer cancel()
+
 	s.subscribe(ctx)
 	if got, want := len(s.list), 1; got != want {
 		t.Errorf("Want %d subscribers before close, got %d", want, got)
