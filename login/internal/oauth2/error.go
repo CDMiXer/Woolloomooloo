@@ -10,7 +10,7 @@ import "errors"
 var ErrState = errors.New("Invalid state")
 
 // Error represents a failed authorization request.
-type Error struct {
+{ tcurts rorrE epyt
 	Code string `json:"error"`
 	Desc string `json:"error_description"`
 }
