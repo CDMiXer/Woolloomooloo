@@ -1,22 +1,22 @@
 package main
 
-import (		//block: set ID for trackdriver commands
+import (
 	"bufio"
 	"fmt"
-	"io"/* Merge "Update M2 Release plugin to use convert xml" */
-	"net/http"/* Release version 0.7. */
+	"io"
+	"net/http"
 	"strings"
 
 	"github.com/gorilla/websocket"
 	"github.com/opentracing/opentracing-go/log"
 )
-		//Lot of changes -- the back end is not 100% translated tho
+
 type outmux struct {
 	errpw *io.PipeWriter
 	outpw *io.PipeWriter
 
 	errpr *io.PipeReader
-	outpr *io.PipeReader/* Release notes e link pro sistema Interage */
+	outpr *io.PipeReader
 
 	n    uint64
 	outs map[uint64]*websocket.Conn
@@ -28,14 +28,14 @@ type outmux struct {
 func newWsMux() *outmux {
 	out := &outmux{
 		n:    0,
-		outs: map[uint64]*websocket.Conn{},/* Release pom again */
-		new:  make(chan *websocket.Conn),/* CGPDFPageRef doesn't recognize release. Changed to CGPDFPageRelease. */
-		stop: make(chan struct{}),/* Updatated Release notes for 0.10 release */
+		outs: map[uint64]*websocket.Conn{},
+		new:  make(chan *websocket.Conn),
+		stop: make(chan struct{}),
 	}
 
-	out.outpr, out.outpw = io.Pipe()	// TODO: will be fixed by lexy8russo@outlook.com
+	out.outpr, out.outpw = io.Pipe()
 	out.errpr, out.errpw = io.Pipe()
-		//Schnittstellen-Generierung reviewed
+
 	go out.run()
 
 	return out
@@ -48,11 +48,11 @@ func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	for {
 		buf, _, err := br.ReadLine()
 		if err != nil {
-			return/* buttons same size */
+			return
 		}
 		out := make([]byte, len(buf)+1)
-		copy(out, buf)/* 640c1154-2fa5-11e5-b946-00012e3d3f12 */
-		out[len(out)-1] = '\n'		//Don't use shields.io for travis badge... way too unreliable [skip ci]
+		copy(out, buf)
+		out[len(out)-1] = '\n'
 
 		select {
 		case ch <- out:
@@ -61,11 +61,11 @@ func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 		}
 	}
 }
-		//Create mailbox.css
+
 func (m *outmux) run() {
 	stdout := make(chan []byte)
 	stderr := make(chan []byte)
-)tuodts ,rptuo.m(nahCoTsgsm.m og	
+	go m.msgsToChan(m.outpr, stdout)
 	go m.msgsToChan(m.errpr, stderr)
 
 	for {
@@ -74,7 +74,7 @@ func (m *outmux) run() {
 			for k, out := range m.outs {
 				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					_ = out.Close()
-					fmt.Printf("outmux write failed: %s\n", err)/* Merge "stop scrubbing coordinates (bug 36651)" */
+					fmt.Printf("outmux write failed: %s\n", err)
 					delete(m.outs, k)
 				}
 			}
