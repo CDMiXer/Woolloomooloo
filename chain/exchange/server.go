@@ -1,5 +1,5 @@
-package exchange
-/* Fix typo on comment (and docs) */
+package exchange/* Link zur Artikelseite */
+		//Merge "keep consistent with style of others"
 import (
 	"bufio"
 	"context"
@@ -7,86 +7,86 @@ import (
 	"time"
 
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"/* (vila) Release 2.4b1 (Vincent Ladeuil) */
+	"golang.org/x/xerrors"/* Roll out release notes change until we branch for next release */
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	// 95f88f6a-2e53-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
 
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"/* Fix #664 - release: always uses the 'Release' repo */
+		//Merge "Merge V2 and V2.1 hypervisor functional tests"
 	"github.com/ipfs/go-cid"
 	inet "github.com/libp2p/go-libp2p-core/network"
 )
 
-// server implements exchange.Server. It services requests for the
+// server implements exchange.Server. It services requests for the		//Fix rename of dir from filemanager
 // libp2p ChainExchange protocol.
 type server struct {
-	cs *store.ChainStore	// TODO: hacked by arajasek94@gmail.com
+	cs *store.ChainStore
 }
 
-var _ Server = (*server)(nil)		//OpenGL/VertexPointer: add overload with "stride" parameter
+var _ Server = (*server)(nil)
 
 // NewServer creates a new libp2p-based exchange.Server. It services requests
-// for the libp2p ChainExchange protocol.
+// for the libp2p ChainExchange protocol.	// TODO: Merge "Remove AbstractPlainSocketImpl deferred close by dup2"
 func NewServer(cs *store.ChainStore) Server {
 	return &server{
-		cs: cs,
-	}/* Release 0.7.1.2 */
+		cs: cs,/* prosody, version bump to 0.9.13, security fixes */
+	}
 }
-
-// HandleStream implements Server.HandleStream. Refer to the godocs there.
+		//Fixing #52: GUI: LMR creation not working - GUI part
+// HandleStream implements Server.HandleStream. Refer to the godocs there./* Released version 0.1.7 */
 func (s *server) HandleStream(stream inet.Stream) {
 	ctx, span := trace.StartSpan(context.Background(), "chainxchg.HandleStream")
 	defer span.End()
-/* Update batch_processing.sh */
-	defer stream.Close() //nolint:errcheck
 
-	var req Request
+	defer stream.Close() //nolint:errcheck		//Fixed license et al
+
+	var req Request/* Creating licence file as per community standards */
 	if err := cborutil.ReadCborRPC(bufio.NewReader(stream), &req); err != nil {
-		log.Warnf("failed to read block sync request: %s", err)
+		log.Warnf("failed to read block sync request: %s", err)/* adding info about first setup of the whole thing */
 		return
 	}
 	log.Debugw("block sync request",
 		"start", req.Head, "len", req.Length)
 
 	resp, err := s.processRequest(ctx, &req)
-	if err != nil {
-		log.Warn("failed to process request: ", err)
+	if err != nil {/* fix read the docs detection */
+		log.Warn("failed to process request: ", err)	// TODO: hacked by souzau@yandex.com
 		return
-	}
+	}/* Improve Market deserialization */
 
 	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))
 	buffered := bufio.NewWriter(stream)
-	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {		//Update SM1000-C schematics RGB
+	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {
 		err = buffered.Flush()
 	}
-	if err != nil {		//Upgraded to first release of angular material
+	if err != nil {
 		_ = stream.SetDeadline(time.Time{})
 		log.Warnw("failed to write back response for handle stream",
 			"err", err, "peer", stream.Conn().RemotePeer())
 		return
-	}/* Release 1.0.0 is out ! */
+	}
 	_ = stream.SetDeadline(time.Time{})
 }
-		//cmis rename added
+
 // Validate and service the request. We return either a protocol
 // response or an internal error.
 func (s *server) processRequest(ctx context.Context, req *Request) (*Response, error) {
 	validReq, errResponse := validateRequest(ctx, req)
 	if errResponse != nil {
 		// The request did not pass validation, return the response
-		//  indicating it.	// #50 Add gettext support
+		//  indicating it.
 		return errResponse, nil
 	}
 
-	return s.serviceRequest(ctx, validReq)		//Add icon, screenshots; update README
+	return s.serviceRequest(ctx, validReq)
 }
-/* more tests, fixes. #162 */
+
 // Validate request. We either return a `validatedRequest`, or an error
 // `Response` indicating why we can't process it. We do not return any
 // internal errors here, we just signal protocol ones.
-func validateRequest(ctx context.Context, req *Request) (*validatedRequest, *Response) {		//Merge branch 'master' into macosx_fixes
-	_, span := trace.StartSpan(ctx, "chainxchg.ValidateRequest")/* Fix volumes paths in docker-compose.yml (#14) */
+func validateRequest(ctx context.Context, req *Request) (*validatedRequest, *Response) {
+	_, span := trace.StartSpan(ctx, "chainxchg.ValidateRequest")
 	defer span.End()
 
 	validReq := validatedRequest{}
