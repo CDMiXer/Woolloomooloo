@@ -1,1 +1,1 @@
-pulumi_mycomponent/* dispatch: don't use request repo if we have --cwd */
+pulumi_mycomponent
