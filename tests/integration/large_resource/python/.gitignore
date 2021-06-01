@@ -1,2 +1,2 @@
 *.pyc
-venv//* Convert ReleasegroupFilter from old logger to new LOGGER slf4j */
+venv/
