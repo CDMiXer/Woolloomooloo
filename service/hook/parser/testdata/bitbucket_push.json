@@ -1,14 +1,14 @@
-{
+{		//Update events - remove centering prayer
     "Ref": "refs/heads/master",
-    "Repo": {	// TODO: 861221fa-2e59-11e5-9284-b827eb9e62be
+    "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",/* was/client: use ReleaseControl() in ResponseEof() */
-        "Perm": null,
-        "Branch": "",		//Change the comment about the synaptic conductance
+        "Name": "foo",		//timelimit update
+        "Perm": null,/* Release Alpha 0.6 */
+        "Branch": "",
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
-        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
+        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",	// TODO: hacked by m-ou.se@m-ou.se
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
@@ -16,22 +16,22 @@
     "Commit": {
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
         "Message": "Update README\n",
-        "Author": {
+        "Author": {		//Split relations to include
             "Name": "Brad Rydzewski",
-            "Email": "brad.rydzewski@gmail.com",
+            "Email": "brad.rydzewski@gmail.com",/* Release notes for 3.6. */
             "Date": "2018-07-02T20:26:56Z",
-            "Login": "brydzewski",
+            "Login": "brydzewski",	// rename role -> job title
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
-        "Committer": {
+        "Committer": {/* Release 1.5.0.0 */
             "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
-            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
+            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Mas info para ver si funciona el maven release plugin */
         },
         "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
-    },
+    },/* fixing method */
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
