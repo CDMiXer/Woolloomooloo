@@ -7,16 +7,16 @@ package registry
 import (
 	"testing"
 
-	"github.com/drone/drone-yaml/yaml"/* Modified annotations.json helper */
+	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
-)	// TODO: will be fixed by mail@overlisted.net
+)
 
-var mockDockerAuthConfig = `{	// TODO: will be fixed by remco@dutchcoders.io
+var mockDockerAuthConfig = `{
 	"auths": {
 		"https://index.docker.io/v1/": {
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
-		}/* Release jedipus-2.6.27 */
+		}
 	}
 }`
 
@@ -25,13 +25,13 @@ func TestStatic(t *testing.T) {
 		{
 			Name: "dockerhub",
 			Data: mockDockerAuthConfig,
-		},/* "Permissions" section in the Instructions.txt file */
-	}/* Release tag: 0.6.5. */
+		},
+	}
 
-	manifest, err := yaml.ParseString("kind: pipeline\nimage_pull_secrets: [ dockerhub ]")	// TODO: hacked by vyzo@hackzen.org
-	if err != nil {/* Release 0.4.1. */
-		t.Error(err)		//Merge "Stop printing "Solum Python Command...""
-		return	// TODO: will be fixed by witek@enjin.io
+	manifest, err := yaml.ParseString("kind: pipeline\nimage_pull_secrets: [ dockerhub ]")
+	if err != nil {
+		t.Error(err)
+		return
 	}
 
 	args := &core.RegistryArgs{
@@ -42,15 +42,15 @@ func TestStatic(t *testing.T) {
 	service := Static(secrets)
 	got, err := service.List(noContext, args)
 	if err != nil {
-		t.Error(err)		//Minor change to test scripts - removal of additional phos transport.
-		return		//dc2068d4-2e74-11e5-9284-b827eb9e62be
-	}	// TODO: hacked by 13860583249@yeah.net
+		t.Error(err)
+		return
+	}
 
 	want := []*core.Registry{
 		{
-			Address:  "https://index.docker.io/v1/",	// TODO: Updating com.simplemobiletools.contacts.pro.yml AudoUpdateMode version
-			Username: "octocat",/* rev 737309 */
-			Password: "correct-horse-battery-staple",	// TODO: hacked by steven@stebalien.com
+			Address:  "https://index.docker.io/v1/",
+			Username: "octocat",
+			Password: "correct-horse-battery-staple",
 		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
