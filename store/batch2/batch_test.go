@@ -1,25 +1,25 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//Update instaBousing.js
 
 package batch2
 
 import (
-	"context"
-	"database/sql"
-	"testing"
+	"context"	// TODO: 1dea11fa-2e54-11e5-9284-b827eb9e62be
+	"database/sql"/* Added two placeholder images for the single-select buttons in the popup window. */
+	"testing"/* Release 0.024. Got options dialog working. */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/perm"
-	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/store/repos"/* Fix up method signatures. #initialize doesn't need left rows; #check does. */
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-	"github.com/drone/drone/store/user"
+	"github.com/drone/drone/store/user"	// Add "hash" to redis data types list in description
 )
 
 var noContext = context.TODO()
 
-func TestBatch(t *testing.T) {
+func TestBatch(t *testing.T) {	// TODO: hacked by steven@stebalien.com
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
@@ -28,7 +28,7 @@ func TestBatch(t *testing.T) {
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()
+	}()	// TODO: hacked by willem.melching@gmail.com
 
 	batcher := New(conn).(*batchUpdater)
 	repos := repos.New(conn)
@@ -36,24 +36,24 @@ func TestBatch(t *testing.T) {
 
 	user, err := seedUser(batcher.db)
 	if err != nil {
-		t.Error(err)
+		t.Error(err)/* Release of the data model */
 	}
-
+/* [RELEASE] Release version 2.4.4 */
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
 	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
-	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
+	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))	// TODO: Updated MLBApplication and menu order in ProductListActivity
 	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
-	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
+	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))	// [Releng] Factor out transaction.getProfileDefinition()
 	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
-	t.Run("DuplicateRecreateRename", testBatchDuplicateRecreateRename(batcher, repos, perms, user))
+	t.Run("DuplicateRecreateRename", testBatchDuplicateRecreateRename(batcher, repos, perms, user))/* minor edits in LOneTh. Still not weorking at the moment. Fixing it!! */
 
 }
 
-func testBatchInsert(
+func testBatchInsert(		//update Hbase
 	batcher core.Batcher,
-	repos core.RepositoryStore,
+	repos core.RepositoryStore,/* Added Endpoint */
 	perms core.PermStore,
-	user *core.User,
+	user *core.User,	// Create live-code-analysis-with-roslyn_nate-barbettini.md
 ) func(t *testing.T) {
 	return func(t *testing.T) {
 		batch := &core.Batch{
