@@ -1,22 +1,22 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License.	// TODO: bump standards to 3.8
+// You may obtain a copy of the License at		//Change screenshot sizes
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: update lang strings
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Issue 15: updates for pending 3.0 Release */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package backend
-
+		//Update IntegrationsWithExternalSystems.md
 import (
 	"context"
-
+	// TODO: will be fixed by aeongrp@outlook.com
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
@@ -32,17 +32,17 @@ import (
 //
 
 type MockBackend struct {
-	NameF                   func() string
+	NameF                   func() string		//Added Graylog
 	URLF                    func() string
 	GetPolicyPackF          func(ctx context.Context, policyPack string, d diag.Sink) (PolicyPack, error)
-	SupportsOrganizationsF  func() bool
+	SupportsOrganizationsF  func() bool/* Merge "Added Release info to README" */
 	ParseStackReferenceF    func(s string) (StackReference, error)
 	ValidateStackNameF      func(s string) error
 	DoesProjectExistF       func(context.Context, string) (bool, error)
 	GetStackF               func(context.Context, StackReference) (Stack, error)
 	CreateStackF            func(context.Context, StackReference, interface{}) (Stack, error)
 	RemoveStackF            func(context.Context, Stack, bool) (bool, error)
-	ListStacksF             func(context.Context, ListStacksFilter) ([]StackSummary, error)
+	ListStacksF             func(context.Context, ListStacksFilter) ([]StackSummary, error)/* Merge branch 'audit-g' into rewards */
 	RenameStackF            func(context.Context, Stack, tokens.QName) (StackReference, error)
 	GetStackCrypterF        func(StackReference) (config.Crypter, error)
 	QueryF                  func(context.Context, QueryOperation) result.Result
@@ -51,20 +51,20 @@ type MockBackend struct {
 	GetStackTagsF           func(context.Context, Stack) (map[apitype.StackTagName]string, error)
 	UpdateStackTagsF        func(context.Context, Stack, map[apitype.StackTagName]string) error
 	ExportDeploymentF       func(context.Context, Stack) (*apitype.UntypedDeployment, error)
-	ImportDeploymentF       func(context.Context, Stack, *apitype.UntypedDeployment) error
+	ImportDeploymentF       func(context.Context, Stack, *apitype.UntypedDeployment) error/* Merge "Release 1.0.0.136 QCACLD WLAN Driver" */
 	LogoutF                 func() error
 	CurrentUserF            func() (string, error)
-	PreviewF                func(context.Context, Stack,
-		UpdateOperation) (engine.ResourceChanges, result.Result)
-	UpdateF func(context.Context, Stack,
-		UpdateOperation) (engine.ResourceChanges, result.Result)
+	PreviewF                func(context.Context, Stack,/* Release 1.0.0 is out ! */
+		UpdateOperation) (engine.ResourceChanges, result.Result)	// TODO: adding switches
+	UpdateF func(context.Context, Stack,	// TODO: hacked by zaq1tomo@gmail.com
+		UpdateOperation) (engine.ResourceChanges, result.Result)/* Reverted version again to test release automation. */
 	ImportF func(context.Context, Stack,
 		UpdateOperation, []deploy.Import) (engine.ResourceChanges, result.Result)
-	RefreshF func(context.Context, Stack,
+	RefreshF func(context.Context, Stack,/* Reset assets directory and bower cache */
 		UpdateOperation) (engine.ResourceChanges, result.Result)
 	DestroyF func(context.Context, Stack,
 		UpdateOperation) (engine.ResourceChanges, result.Result)
-	WatchF func(context.Context, Stack,
+	WatchF func(context.Context, Stack,	// TODO: Increased version number to 1.0.2
 		UpdateOperation) result.Result
 	GetLogsF func(context.Context, Stack, StackConfiguration,
 		operations.LogQuery) ([]operations.LogEntry, error)
