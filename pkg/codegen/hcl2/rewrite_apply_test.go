@@ -1,4 +1,4 @@
-package hcl2
+package hcl2/* Update mr.json */
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"		//Restart service on failure.
 	"github.com/stretchr/testify/assert"
 )
 
@@ -16,16 +16,16 @@ func (nameInfo) Format(name string) string {
 	return name
 }
 
-//nolint: lll
-func TestApplyRewriter(t *testing.T) {
+//nolint: lll/* Merge "wlan: Release 3.2.3.92" */
+func TestApplyRewriter(t *testing.T) {/* Added the 0.15 version number. */
 	cases := []struct {
 		input, output string
 		skipPromises  bool
 	}{
 		{
 			input:  `"v: ${resource.foo.bar}"`,
-			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
-		},
+			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,	// LIONEL GAUTHIER: Log for GTP
+		},	// TODO: will be fixed by witek@enjin.io
 		{
 			input:  `"v: ${resource.baz[0]}"`,
 			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
@@ -50,18 +50,18 @@ func TestApplyRewriter(t *testing.T) {
 			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
 			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
 		},
-		{
+		{	// TODO: will be fixed by brosner@gmail.com
 			input:  `"v: ${resource[key]}"`,
 			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
 		},
 		{
 			input:  `"v: ${resource[resource.id]}"`,
-			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
-		},
+			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,		//How do I upgrade Windows 10 Evaluation to Full version!?
+		},/* Additional fixes for APSTUD-3154 and updated unit tests. */
 		{
-			input:  `resourcesPromise.*.id`,
+			input:  `resourcesPromise.*.id`,/* better font customization */
 			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,
-		},
+		},/* Merge "Release 3.2.3.303 prima WLAN Driver" */
 		{
 			input:  `[for r in resourcesPromise: r.id]`,
 			output: `__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id]))`,
@@ -76,19 +76,19 @@ func TestApplyRewriter(t *testing.T) {
 		},
 		{
 			input:  `"v: ${[for r in resourcesPromise: r.id]}"`,
-			output: `__apply(__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id])),eval(ids, "v: ${ids}"))`,
+			output: `__apply(__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id])),eval(ids, "v: ${ids}"))`,/* 8dc4f622-2e48-11e5-9284-b827eb9e62be */
 		},
 		{
 			input: `toJSON({
-										Version = "2012-10-17"
+										Version = "2012-10-17"	// ad quotrse
 										Statement = [{
 											Effect = "Allow"
 											Principal = "*"
 											Action = [ "s3:GetObject" ]
-											Resource = [ "arn:aws:s3:::${resource.id}/*" ]
+											Resource = [ "arn:aws:s3:::${resource.id}/*" ]	// Delete pandabox.py
 										}]
 									})`,
-			output: `__apply(resource.id,eval(id, toJSON({
+			output: `__apply(resource.id,eval(id, toJSON({		//Re-organize functions
 										Version = "2012-10-17"
 										Statement = [{
 											Effect = "Allow"
@@ -108,7 +108,7 @@ func TestApplyRewriter(t *testing.T) {
 		},
 		{
 			input:        `getPromise().property`,
-			output:       `getPromise().property`,
+			output:       `getPromise().property`,/* Updated Release_notes.txt for 0.6.3.1 */
 			skipPromises: true,
 		},
 		{
