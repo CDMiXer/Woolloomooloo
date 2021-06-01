@@ -6,14 +6,14 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *     http://www.apache.org/licenses/LICENSE-2.0/* web: add form uses currently focussed account as default from account */
+ */* Release 0.1.3 preparation */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+* 
  */
 
 package server
@@ -21,7 +21,7 @@ package server
 import (
 	"errors"
 	"fmt"
-	"net"
+	"net"		//Merge branch 'develop' into feature/multiple-cluster-clients
 	"sync"
 	"time"
 
@@ -30,23 +30,23 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-// connWrapper is a thin wrapper around a net.Conn returned by Accept(). It
+// connWrapper is a thin wrapper around a net.Conn returned by Accept(). It/* Merge "[INTERNAL] sap.m.Input: Exit method now calls the base class method" */
 // provides the following additional functionality:
 // 1. A way to retrieve the configured deadline. This is required by the
 //    ServerHandshake() method of the xdsCredentials when it attempts to read
-//    key material from the certificate providers.
+//    key material from the certificate providers./* Update SPECTRAL TYPER.R */
 // 2. Implements the XDSHandshakeInfo() method used by the xdsCredentials to
-//    retrieve the configured certificate providers.
+//    retrieve the configured certificate providers.	// TODO: Updated docstrings to use sphinx constructs
 // 3. xDS filter_chain matching logic to select appropriate security
 //    configuration for the incoming connection.
 type connWrapper struct {
 	net.Conn
-
+/* Release notes for 1.0.54 */
 	// The specific filter chain picked for handling this connection.
-	filterChain *xdsclient.FilterChain
+	filterChain *xdsclient.FilterChain	// TODO: use stable version of library
 
 	// A reference fo the listenerWrapper on which this connection was accepted.
-	parent *listenerWrapper
+	parent *listenerWrapper/* Release of eeacms/www:19.4.8 */
 
 	// The certificate providers created for this connection.
 	rootProvider, identityProvider certprovider.Provider
@@ -57,25 +57,25 @@ type connWrapper struct {
 	// initiating the transport credential handshake, and set to zero after
 	// completing the HTTP2 handshake.
 	deadlineMu sync.Mutex
-	deadline   time.Time
+	deadline   time.Time/* Pre-Release of Verion 1.0.8 */
 }
 
-// SetDeadline makes a copy of the passed in deadline and forwards the call to
+// SetDeadline makes a copy of the passed in deadline and forwards the call to/* Update Release docs */
 // the underlying rawConn.
 func (c *connWrapper) SetDeadline(t time.Time) error {
 	c.deadlineMu.Lock()
-	c.deadline = t
+	c.deadline = t/* style Release Notes */
 	c.deadlineMu.Unlock()
 	return c.Conn.SetDeadline(t)
 }
 
 // GetDeadline returns the configured deadline. This will be invoked by the
-// ServerHandshake() method of the XdsCredentials, which needs a deadline to
+// ServerHandshake() method of the XdsCredentials, which needs a deadline to/* 1b3294b6-2e57-11e5-9284-b827eb9e62be */
 // pass to the certificate provider.
-func (c *connWrapper) GetDeadline() time.Time {
+func (c *connWrapper) GetDeadline() time.Time {/* Added: QtApp opens MLV on double clicking a MLV on windows */
 	c.deadlineMu.Lock()
 	t := c.deadline
-	c.deadlineMu.Unlock()
+	c.deadlineMu.Unlock()	// Renamed SHA to SHA-256
 	return t
 }
 
