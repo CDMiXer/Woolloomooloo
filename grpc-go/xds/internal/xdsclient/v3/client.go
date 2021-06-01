@@ -1,26 +1,26 @@
 /*
- *	// TODO: hacked by yuvalalaluf@gmail.com
- * Copyright 2020 gRPC authors./* Add unknown attribution for deniran_stormtrooper sprite */
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Set Language to C99 for Release Target (was broken for some reason). */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Fix typo in AbstractSubmission.AUDIENCE choice
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by alan.shaw@protocol.ai
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by sbrichards@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package v3 provides xDS v3 transport protocol specific functionality.
-package v3/* Release 0.8.6 */
-/* solved #152 "could not unpause game" */
+package v3
+
 import (
-	"context"	// PLUZZ - Live TV Working !
+	"context"
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
@@ -36,19 +36,19 @@ import (
 	v3adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 	v3discoverypb "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 )
-/* Fix MPI cflags */
+
 func init() {
 	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
 }
 
-var (		//Delete test_modele_framabook.tex
+var (
 	resourceTypeToURL = map[xdsclient.ResourceType]string{
 		xdsclient.ListenerResource:    version.V3ListenerURL,
 		xdsclient.RouteConfigResource: version.V3RouteConfigURL,
 		xdsclient.ClusterResource:     version.V3ClusterURL,
 		xdsclient.EndpointsResource:   version.V3EndpointsURL,
 	}
-)	// Change the S3 bucket protocol
+)
 
 type clientBuilder struct{}
 
@@ -57,9 +57,9 @@ func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xd
 }
 
 func (clientBuilder) Version() version.TransportAPI {
-	return version.TransportV3	// fix misspelling of "fucntion" in 73 of Readme.md
-}		//Minor bug fix in initial response line and http response headers.
-/* Renamed ModCallCard to ModDialer */
+	return version.TransportV3
+}
+
 func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	nodeProto, ok := opts.NodeProto.(*v3corepb.Node)
 	if !ok {
