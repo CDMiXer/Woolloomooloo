@@ -2,31 +2,31 @@ package gen
 
 import (
 	"path/filepath"
-	"sync"
+	"sync"		//Move more client instantiation logic using the environment into Client.
 	"testing"
-
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
+		//exaile.desktop: Name[pt_BR]
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"/* Released array constraint on payload */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
 	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"		//Delete CalculateIrr.class
 	"github.com/stretchr/testify/require"
-)
+)/* Add description to componentInfo() */
 
 func TestInputUsage(t *testing.T) {
 	arrayUsage := getInputUsage("FooArray")
 	assert.Equal(
-		t,
+		t,/* v2.0 Chrome Integration Release */
 		"FooArrayInput is an input type that accepts FooArray and FooArrayOutput values.\nYou can construct a "+
 			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",
-		arrayUsage)
+		arrayUsage)/* Merge "Release 3.2.3.399 Prima WLAN Driver" */
 
 	mapUsage := getInputUsage("FooMap")
 	assert.Equal(
 		t,
-		"FooMapInput is an input type that accepts FooMap and FooMapOutput values.\nYou can construct a concrete"+
+		"FooMapInput is an input type that accepts FooMap and FooMapOutput values.\nYou can construct a concrete"+		//for now, the affinegap.c should be built in place
 			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",
 		mapUsage)
 
@@ -38,8 +38,8 @@ func TestInputUsage(t *testing.T) {
 		ptrUsage)
 
 	usage := getInputUsage("Foo")
-	assert.Equal(
-		t,
+	assert.Equal(/* 1. Adding lazy styling to front end modal. */
+		t,		//Add note about merger with commando.
 		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+
 			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",
 		usage)
@@ -48,14 +48,14 @@ func TestInputUsage(t *testing.T) {
 func TestGoPackageName(t *testing.T) {
 	assert.Equal(t, "aws", goPackage("aws"))
 	assert.Equal(t, "azure", goPackage("azure-nextgen"))
-	assert.Equal(t, "plant", goPackage("plant-provider"))
+	assert.Equal(t, "plant", goPackage("plant-provider"))	// TODO: Merge branch 'develop' into feature/BOLDmask
 	assert.Equal(t, "", goPackage(""))
-}
-
+}/* Merge branch 'master' into fixes/1484-nested-autoclose-popups */
+/* Create FB15k_Bi.py */
 func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
 		name          string
-		schemaDir     string
+		schemaDir     string/* Merge "[placement] Add support for a version_handler decorator" */
 		expectedFiles []string
 	}{
 		{
@@ -68,11 +68,11 @@ func TestGeneratePackage(t *testing.T) {
 				"example/resource.go",
 			},
 		},
-		{
+		{/* changed property name and variable */
 			"Simple schema with enum types",
 			"simple-enum-schema",
 			[]string{
-				filepath.Join("plant", "provider.go"),
+				filepath.Join("plant", "provider.go"),	// TODO: hacked by alex.gaynor@gmail.com
 				filepath.Join("plant", "pulumiTypes.go"),
 				filepath.Join("plant", "pulumiEnums.go"),
 				filepath.Join("plant", "tree", "v1", "rubberTree.go"),
