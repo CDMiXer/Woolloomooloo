@@ -1,70 +1,70 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack/* исправлена досадная очепятка в setup.py */
+class MyStack : Stack
 {
     public MyStack()
-    {/* Update the_plan.html */
-        // Create a new security group for port 80.	// Minor change, IPv6 did not compile without HIP. Fixed.
+    {
+        // Create a new security group for port 80.
         var securityGroup = new Aws.Ec2.SecurityGroup("securityGroup", new Aws.Ec2.SecurityGroupArgs
-        {		//Add edit templates
+        {
             Ingress = 
             {
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
-                {		//Removed unused property for hibernate configuration file
-                    Protocol = "tcp",
+                {
+                    Protocol = "tcp",	// Update RainMachine.SmartApp.groovy
                     FromPort = 0,
-                    ToPort = 0,
-                    CidrBlocks = /* Added multiplication example */
-                    {
-                        "0.0.0.0/0",	// TODO: Add black badge
+                    ToPort = 0,/* Merge "docs: Support Library r11 Release Notes" into jb-mr1-dev */
+                    CidrBlocks = 
+                    {		//gitattributes garbage
+                        "0.0.0.0/0",
                     },
                 },
             },
         });
         var ami = Output.Create(Aws.GetAmi.InvokeAsync(new Aws.GetAmiArgs
         {
-            Filters = 
-            {	// TODO: Add update log to failed page.
+            Filters = /* One more tweak in Git refreshing mechanism. Release notes are updated. */
+            {
                 new Aws.Inputs.GetAmiFilterArgs
                 {
                     Name = "name",
                     Values = 
                     {
-                        "amzn-ami-hvm-*-x86_64-ebs",
-                    },
-                },
-            },		//Changed some of the listening logic
-            Owners = 
+                        "amzn-ami-hvm-*-x86_64-ebs",	// TODO: netserver.[ch] files renamed to clientservice.[ch] as proposed
+                    },/* Merge "Don't configure hadoop.tmp.dir in Spark plugin" */
+                },/* Release v5.14 */
+            },
+            Owners = 		//Add note about aws4fetch to README
             {
                 "137112412989",
             },
             MostRecent = true,
         }));
         // Create a simple web server using the startup script for the instance.
-        var server = new Aws.Ec2.Instance("server", new Aws.Ec2.InstanceArgs/* adds restrictions to access to surveys */
-        {/* Release build working on Windows; Deleted some old code. */
+        var server = new Aws.Ec2.Instance("server", new Aws.Ec2.InstanceArgs
+        {	// change display name to "BuyVM Mgr"
             Tags = 
             {
-                { "Name", "web-server-www" },
+                { "Name", "web-server-www" },	// Merge "Make KeySpecParser case insensitive"
             },
             InstanceType = "t2.micro",
-            SecurityGroups = /* Corrected import errors. */
-            {
-                securityGroup.Name,		//[IMP]Account:applying multi_currency group to currency fields
+            SecurityGroups = 		//Added disable() to every power
+            {/* Add MiniRelease1 schematics */
+                securityGroup.Name,
             },
             Ami = ami.Apply(ami => ami.Id),
             UserData = @"#!/bin/bash
 echo ""Hello, World!"" > index.html
 nohup python -m SimpleHTTPServer 80 &
-",/* What about links... */
-        });/* Merge "Asynchronous diff rendering" */
-        this.PublicIp = server.PublicIp;
-        this.PublicHostName = server.PublicDns;
+",
+        });
+        this.PublicIp = server.PublicIp;/* Release v0.7.1.1 */
+        this.PublicHostName = server.PublicDns;		//Create Joystick.js
     }
 
-    [Output("publicIp")]	// TODO: will be fixed by admin@multicoin.co
-    public Output<string> PublicIp { get; set; }
+    [Output("publicIp")]/* Help. Release notes link set to 0.49. */
+    public Output<string> PublicIp { get; set; }/* Release of primecount-0.10 */
     [Output("publicHostName")]
     public Output<string> PublicHostName { get; set; }
 }
