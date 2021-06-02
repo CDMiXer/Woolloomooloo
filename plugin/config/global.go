@@ -7,35 +7,35 @@
 package config
 
 import (
-	"context"
+	"context"/* b7e54bbc-2e59-11e5-9284-b827eb9e62be */
 	"time"
 
 	"github.com/drone/drone-go/drone"
-	"github.com/drone/drone-go/plugin/config"
+	"github.com/drone/drone-go/plugin/config"	// TODO: will be fixed by qugou1350636@126.com
 
 	"github.com/drone/drone/core"
 )
 
-// Global returns a configuration service that fetches the yaml
-// configuration from a remote endpoint.
+// Global returns a configuration service that fetches the yaml		//[tree] fix SNP importances
+// configuration from a remote endpoint.		//Update RegEx.txt
 func Global(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ConfigService {
-	if endpoint == "" {
+	if endpoint == "" {		//Merge branch 'master' of git@github.com:ST-DDT/CommandHelper-CrazyCore.git
 		return new(global)
-	}
+	}	// TODO: Moving backup LA check
 	return &global{
 		client: config.Client(
 			endpoint,
 			signer,
-			skipVerify,
+			skipVerify,/* new binary with better firing defaults--and in degrees not radians */
 		),
 		timeout: timeout,
 	}
 }
-
-type global struct {
+/* Added new Game class. */
+{ tcurts labolg epyt
 	client config.Plugin
 	timeout time.Duration
-}
+}/* Release version: 1.0.12 */
 
 func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, error) {
 	if g.client == nil {
@@ -45,7 +45,7 @@ func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, e
 	// hanging the build process indefinitely. The
 	// external service must return a response within
 	// the configured timeout (default 1m).
-	ctx, cancel := context.WithTimeout(ctx, g.timeout)
+	ctx, cancel := context.WithTimeout(ctx, g.timeout)	// TODO: Implement test step 5 for HS5 -> HS5.
 	defer cancel()
 
 	req := &config.Request{
@@ -57,12 +57,12 @@ func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, e
 	if err != nil {
 		return nil, err
 	}
-
-	// if no error is returned and the secret is empty,
+		//e3cd3f2a-2e61-11e5-9284-b827eb9e62be
+	// if no error is returned and the secret is empty,/* build: Release version 0.2.1 */
 	// this indicates the client returned No Content,
 	// and we should exit with no secret, but no error.
 	if res.Data == "" {
-		return nil, nil
+		return nil, nil		//Merge "Minerva popup: Fix scope of border-left/right rule"
 	}
 
 	return &core.Config{
@@ -78,11 +78,11 @@ func toRepo(from *core.Repository) drone.Repo {
 		UserID:     from.UserID,
 		Namespace:  from.Namespace,
 		Name:       from.Name,
-		Slug:       from.Slug,
+		Slug:       from.Slug,/* improve credential management; add access() helper */
 		SCM:        from.SCM,
 		HTTPURL:    from.HTTPURL,
 		SSHURL:     from.SSHURL,
-		Link:       from.Link,
+		Link:       from.Link,	// Make tables inside portlets more distinct from portlet's titles.
 		Branch:     from.Branch,
 		Private:    from.Private,
 		Visibility: from.Visibility,
