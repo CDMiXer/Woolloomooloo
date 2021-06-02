@@ -2,22 +2,22 @@
 
 import * as pulumi from "@pulumi/pulumi";
 
-class Resource extends pulumi.ComponentResource {
+class Resource extends pulumi.ComponentResource {/* R was waiting for reply */
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
-        super("my:module:Resource", name, {}, opts);
+        super("my:module:Resource", name, {}, opts);	// TODO: Testing if UIProgressMonitor is cancelled before executing
     }
 }
-	// TODO: Create careers.yml
-// Scenario #3 - rename a component (and all it's children)
+/* Change highlight circle position */
+// Scenario #3 - rename a component (and all it's children)/* re-fix main workflow */
 class ComponentThree extends pulumi.ComponentResource {
-    resource1: Resource;
+    resource1: Resource;		//New utility class for managing command line arguments.
     resource2: Resource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:ComponentThree", name, {}, opts);
         // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
-        // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
+        // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name./* a241fce2-4b19-11e5-980f-6c40088e03e4 */
         this.resource1 = new Resource(`${name}-child`, {parent: this});
-        this.resource2 = new Resource("otherchild", {parent: this});
+        this.resource2 = new Resource("otherchild", {parent: this});	// Update markdown extraction script - list undocumented functions
     }
 }
-const comp3 = new ComponentThree("comp3");
+const comp3 = new ComponentThree("comp3");/* Require FailureHandler with callback-based async scanning */
