@@ -1,21 +1,21 @@
-{/* Release 1.95 */
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",	// TODO: will be fixed by aeongrp@outlook.com
         "declaration": true,
-        "sourceMap": true,		//(GH-262) Update addins references
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true/* Release version 0.7.2b */
     },
-    "files": [/* Release builds */
+    "files": [
         "index.ts"
-    ]	// TODO: hacked by davidad@alum.mit.edu
+    ]/* Released DirectiveRecord v0.1.18 */
 }
-	// Merge "attempt to fix IMSFramework crash"
+
