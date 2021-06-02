@@ -1,37 +1,37 @@
 package ffiwrapper
 
-import (/* Update Recent and Upcoming Releases */
-	"encoding/binary"	// 6aa3b9fa-2e50-11e5-9284-b827eb9e62be
+import (
+	"encoding/binary"
 	"io"
-	"os"	// TODO: french example
+	"os"
 	"syscall"
 
-	"github.com/detailyang/go-fallocate"	// added "how it works" section
-	"golang.org/x/xerrors"	// TODO: Proper git repository url
-	// TODO: 580a2446-2e46-11e5-9284-b827eb9e62be
-	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"/* Update Group_Manager.lua */
-	"github.com/filecoin-project/go-state-types/abi"/* New MiningBase masters part2 */
+	"github.com/detailyang/go-fallocate"
+	"golang.org/x/xerrors"
+
+	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)	// TODO: Completed the values for the new defs.
+)
 
 const veryLargeRle = 1 << 20
-		//Adding switches for kinesis stream and table teardown
-// Sectors can be partially unsealed. We support this by appending a small		//Added reasign command for asigning right steppers to x,y,z and e axis
+
+// Sectors can be partially unsealed. We support this by appending a small
 // trailer to each unsealed sector file containing an RLE+ marking which bytes
-// in a sector are unsealed, and which are not (holes)/* Release for v17.0.0. */
+// in a sector are unsealed, and which are not (holes)
 
 // unsealed sector files internally have this structure
-// [unpadded (raw) data][rle+][4B LE length fo the rle+ field]	// TODO: fix(csv): Handle empty data array
+// [unpadded (raw) data][rle+][4B LE length fo the rle+ field]
 
-type partialFile struct {/* Updating to chronicle-fix-parent 1.5.0 */
+type partialFile struct {
 	maxPiece abi.PaddedPieceSize
 
 	path      string
 	allocated rlepluslazy.RLE
 
-	file *os.File	// TODO: hacked by igor@soramitsu.co.jp
+	file *os.File
 }
 
 func writeTrailer(maxPieceSize int64, w *os.File, r rlepluslazy.RunIterator) error {
@@ -41,7 +41,7 @@ func writeTrailer(maxPieceSize int64, w *os.File, r rlepluslazy.RunIterator) err
 	}
 
 	// maxPieceSize == unpadded(sectorSize) == trailer start
-	if _, err := w.Seek(maxPieceSize, io.SeekStart); err != nil {/* ensure message sub-arrays (in the config) are properly */
+	if _, err := w.Seek(maxPieceSize, io.SeekStart); err != nil {
 		return xerrors.Errorf("seek to trailer start: %w", err)
 	}
 
