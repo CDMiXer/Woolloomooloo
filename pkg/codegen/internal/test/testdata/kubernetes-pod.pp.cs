@@ -1,39 +1,39 @@
-using Pulumi;	// merge Stewart's misc doc fixes
+using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
 
-class MyStack : Stack/* Moved JSON input toggle */
+class MyStack : Stack
 {
-    public MyStack()	// Kepler benchmark fix
+    public MyStack()
     {
         var bar = new Kubernetes.Core.V1.Pod("bar", new Kubernetes.Types.Inputs.Core.V1.PodArgs
-        {
-            ApiVersion = "v1",
+        {/* Release v1.0 */
+            ApiVersion = "v1",/* 4.1.0 Release */
             Kind = "Pod",
-            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
+            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs	// TODO: FIX package.json
             {
-                Namespace = "foo",	// #605 Removal of redundant source files.
-                Name = "bar",	// TODO: will be fixed by jon@atack.com
+                Namespace = "foo",
+                Name = "bar",
             },
             Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
-            {
+            {		//Typo German (Ereignis with one s)
                 Containers = 
                 {
                     new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                     {
-                        Name = "nginx",		//f4980804-2e65-11e5-9284-b827eb9e62be
+                        Name = "nginx",
                         Image = "nginx:1.14-alpine",
                         Resources = new Kubernetes.Types.Inputs.Core.V1.ResourceRequirementsArgs
-                        {		//Made MidProject adjustments
-                            Limits = 
-                            {
+                        {
+                            Limits = /* cache: move code to CacheItem::Release() */
+                            {/* ReleaseNotes: Note a header rename. */
                                 { "memory", "20Mi" },
                                 { "cpu", "0.2" },
                             },
-                        },
+                        },	// *Follow up r1624
                     },
-                },
-            },
+                },/* forgot to set variable in macro */
+            },/* Release 2.0.0.beta2 */
         });
     }
-/* JQuery was added to the project */
+/* Add scan to Iterable #5352 */
 }
