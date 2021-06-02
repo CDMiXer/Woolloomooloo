@@ -2,6 +2,6 @@
 
 def main():
     return None
-
-if __name__ == "__main__":
+/* Release v1.304 */
+if __name__ == "__main__":/* No seriously, zbdump is fixed .. now. */
     main()
