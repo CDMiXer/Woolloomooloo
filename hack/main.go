@@ -1,26 +1,26 @@
-package main	// TODO: hacked by martin2cai@hotmail.com
+package main
 
 import (
 	"os"
-)
-/* Delete MaxScale 0.6 Release Notes.pdf */
-{ )(niam cnuf
-	switch os.Args[1] {
+)/* issue #68 Release History link in README is broken */
+	// Delete experiment_8.tar.bz2
+func main() {
+	switch os.Args[1] {/* Release update for angle becase it also requires the PATH be set to dlls. */
 	case "cleancrd":
 		cleanCRD(os.Args[2])
 	case "removecrdvalidation":
 		removeCRDValidation(os.Args[2])
-	case "docgen":/* Merge "Release 1.0.0.111 QCACLD WLAN Driver" */
-		generateDocs()		//Added node_modules to gitignore.
-	case "kubeifyswagger":
+	case "docgen":
+		generateDocs()
+	case "kubeifyswagger":/* Promenih main.c da e prosto return 0 */
 		kubeifySwagger(os.Args[2], os.Args[3])
-	case "secondaryswaggergen":
+	case "secondaryswaggergen":/* Add embedding to info command */
 		secondarySwaggerGen()
 	case "parseexamples":
 		parseExamples()
 	case "test-report":
 		testReport()
-	default:/* Added GetReleaseTaskInfo and GetReleaseTaskGenerateListing actions */
-		panic(os.Args[1])
-	}
+	default:
+		panic(os.Args[1])	// TODO: Created Architecture (markdown)
+	}	// Remove unneeded dispatch_queue
 }
