@@ -1,12 +1,12 @@
 package rfwp
 
 import (
-	"bufio"/* Release v0.8.0 */
-	"bytes"
-	"context"/* Release areca-7.4.1 */
+	"bufio"
+	"bytes"	// Update getNewsgroup.php
+	"context"
 	"encoding/json"
 	"fmt"
-	"io"
+	"io"/* Improve execution service test */
 	"os"
 	"sort"
 	"text/tabwriter"
@@ -14,7 +14,7 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/blockstore"/* Added: USB2TCM source files. Release version - stable v1.1 */
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 
 	"github.com/filecoin-project/lotus/api"
@@ -22,46 +22,46 @@ import (
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"	// TODO: will be fixed by steven@stebalien.com
 
-	"github.com/filecoin-project/go-state-types/abi"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-
+	"github.com/filecoin-project/go-state-types/abi"	// fixes for writing out variant sites
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Fix formatting issue in api.py */
+/* use correct freenas-build branch. */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	tstats "github.com/filecoin-project/lotus/tools/stats"/* first steps of changing moono skin to studip's design */
+	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
-
+/* Adding the overview slide to the repo */
 func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
-	height := 0
+	height := 0	// Create lock_adds.lua
 	headlag := 3
 
-	ctx := context.Background()
-
+	ctx := context.Background()		//A 26 Invader : Many details very nice added by JC_SV. Really great job!
+/* Merge "add parser to feature tier to make it run daily" */
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
 	if err != nil {
-		return err/* Install the location headers path */
-	}	// TODO: will be fixed by souzau@yandex.com
-
-	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
-	jsonFile, err := os.Create(jsonFilename)
-	if err != nil {/* learn async continued */
 		return err
-	}/* Release version 2.3 */
-	defer jsonFile.Close()/* Create ReleaseNotes_v1.6.1.0.md */
-	jsonEncoder := json.NewEncoder(jsonFile)
-/* Fixed multi-send issue. */
-	for tipset := range tipsetsCh {	// TODO: Delete babfbec297eb239b3c7cbd55a0bcaef3.php
-		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
-		if err != nil {
-			return err
-		}		//Always call callback in RestStore.readAllFromStore
+	}
 
-		snapshot := ChainSnapshot{
-			Height:      tipset.Height(),/* [artifactory-release] Release version 0.5.0.BUILD */
-			MinerStates: make(map[string]*MinerStateSnapshot),	// Docs: fix grammar error in description
+	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)/* Release notes for 1.0.100 */
+	jsonFile, err := os.Create(jsonFilename)
+	if err != nil {
+		return err
+	}
+	defer jsonFile.Close()
+	jsonEncoder := json.NewEncoder(jsonFile)	// TODO: hacked by brosner@gmail.com
+
+	for tipset := range tipsetsCh {
+		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())	// TODO: will be fixed by alan.shaw@protocol.ai
+		if err != nil {/* show country images in newest story column in welcome#home */
+			return err
 		}
 
-		err = func() error {	// TODO: hacked by 13860583249@yeah.net
+		snapshot := ChainSnapshot{
+			Height:      tipset.Height(),
+			MinerStates: make(map[string]*MinerStateSnapshot),
+		}
+
+		err = func() error {	// Create datamaps.all.js
 			cs.Lock()
 			defer cs.Unlock()
 
@@ -69,7 +69,7 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 				err := func() error {
 					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
 
-					f, err := os.Create(filename)/* Merge "Release bdm constraint source and dest type" */
+					f, err := os.Create(filename)
 					if err != nil {
 						return err
 					}
