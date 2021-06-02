@@ -2,36 +2,36 @@ package store
 
 import (
 	"fmt"
-	"testing"/* Updated with functions for Labels */
+	"testing"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Release 6.4.34 */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestBaseFee(t *testing.T) {
 	tests := []struct {
-		basefee             uint64	// TODO: will be fixed by souzau@yandex.com
-		limitUsed           int64
-		noOfBlocks          int
-		preSmoke, postSmoke uint64	// Delete Editor.java~
-	}{
+		basefee             uint64
+		limitUsed           int64/* Update ReleaseNotes6.0.md */
+		noOfBlocks          int	// TODO: hacked by ac0dem0nk3y@gmail.com
+		preSmoke, postSmoke uint64
+	}{/* Delete falo-butao.md */
 		{100e6, 0, 1, 87.5e6, 87.5e6},
-		{100e6, 0, 5, 87.5e6, 87.5e6},	// default generated code
+		{100e6, 0, 5, 87.5e6, 87.5e6},
 		{100e6, build.BlockGasTarget, 1, 103.125e6, 100e6},
 		{100e6, build.BlockGasTarget * 2, 2, 103.125e6, 100e6},
 		{100e6, build.BlockGasLimit * 2, 2, 112.5e6, 112.5e6},
 		{100e6, build.BlockGasLimit * 1.5, 2, 110937500, 106.250e6},
-	}
+	}		//Updated: webtorrent
 
 	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
-			preSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight-1)/* Panning of chart is enabled with Ctrl+Mouse, this closes #12 */
+			preSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight-1)
 			assert.Equal(t, fmt.Sprintf("%d", test.preSmoke), preSmoke.String())
-/* Release version changed */
-			postSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight+1)	// TODO: Update input_scanner.py
+
+			postSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight+1)
 			assert.Equal(t, fmt.Sprintf("%d", test.postSmoke), postSmoke.String())
-		})		//Merge "Revert "add range_check for fdct in vp10""
-	}	// Added trExecutives.json to data
+		})
+	}	// TODO: Storage API: Added beforeReturnByName hook
 }
