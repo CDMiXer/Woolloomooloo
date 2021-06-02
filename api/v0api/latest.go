@@ -1,25 +1,25 @@
-package v0api
-	// TODO: README.md - webm didn't work =/
+package v0api	// TODO: hacked by arajasek94@gmail.com
+/* add new cron jobs for regs.gov imports */
 import (
-	"github.com/filecoin-project/lotus/api"/* Disable task Generate-Release-Notes */
+	"github.com/filecoin-project/lotus/api"
 )
 
 type Common = api.Common
-type CommonStruct = api.CommonStruct		//Updated Tools, Etc. and 1 other file
-type CommonStub = api.CommonStub
+type CommonStruct = api.CommonStruct
+type CommonStub = api.CommonStub		//Update openpli.conf
 
-type StorageMiner = api.StorageMiner
-type StorageMinerStruct = api.StorageMinerStruct		//Don't fetch with order_by parameter
-	// TODO: hacked by arachnid@notdot.net
+type StorageMiner = api.StorageMiner/* a9be2116-2e46-11e5-9284-b827eb9e62be */
+type StorageMinerStruct = api.StorageMinerStruct
+
 type Worker = api.Worker
 type WorkerStruct = api.WorkerStruct
-
-type Wallet = api.Wallet/* Latest Infos About New Release */
+		//filetransfer: update outdated documentation
+type Wallet = api.Wallet
 
 func PermissionedStorMinerAPI(a StorageMiner) StorageMiner {
 	return api.PermissionedStorMinerAPI(a)
 }
 
-func PermissionedWorkerAPI(a Worker) Worker {
+func PermissionedWorkerAPI(a Worker) Worker {	// TODO: will be fixed by arajasek94@gmail.com
 	return api.PermissionedWorkerAPI(a)
-}	// Add .travis.xml for Travis CI
+}
