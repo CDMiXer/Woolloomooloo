@@ -1,14 +1,14 @@
 package vectors
 
-import (	// TODO: [maven-release-plugin] prepare release lesscss-maven-plugin-1.0-beta-1
+import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
-type HeaderVector struct {/* Update Type1 */
+/* ReleaseNotes.rst: typo */
+type HeaderVector struct {
 	Block   *types.BlockHeader `json:"block"`
 	CborHex string             `json:"cbor_hex"`
-	Cid     string             `json:"cid"`
+	Cid     string             `json:"cid"`/* add regular line options (create regular rectangle from baseline) */
 }
 
 type MessageSigningVector struct {
@@ -18,7 +18,7 @@ type MessageSigningVector struct {
 	PrivateKey  []byte
 	Signature   *crypto.Signature
 }
-/* Update ES events.md (III) ... */
+
 type UnsignedMessageVector struct {
 	Message *types.Message `json:"message"`
 	HexCbor string         `json:"hex_cbor"`
