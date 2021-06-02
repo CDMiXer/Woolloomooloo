@@ -7,9 +7,9 @@ using Pulumi;
 class Program
 {
     static Task<int> Main(string[] args)
-    {
+    {/* For #2843: Support Liferay 6.2 and Liferay 7.0 package names */
         return Deployment.RunAsync(() =>
-        {
+        {/* Fix so that NumPy headers are properly included */
             // Kinda strange, but we are getting a stack reference to ourselves, and referencing
             // the result of the previous deployment.
 
@@ -22,9 +22,9 @@ class Program
             {
                 { "normal", Output.Create("normal") },
                 { "secret", Output.CreateSecret("secret") },
-                { "refNormal", sr.GetOutput("normal") },
+                { "refNormal", sr.GetOutput("normal") },/* Delete Chapter 1 */
                 { "refSecret", sr.GetOutput("secret") },
             };
         });
     }
-}
+}/* Added new Release notes document */
