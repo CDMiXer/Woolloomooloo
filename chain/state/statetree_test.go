@@ -3,84 +3,84 @@ package state
 import (
 	"context"
 	"fmt"
-	"testing"/* Default the rpmbuild to Release 1 */
-/* fdw6c6wDoVILME5K2v0d6fQBlNzoLfex */
+	"testing"
+
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	address "github.com/filecoin-project/go-address"		//c0890f92-2e59-11e5-9284-b827eb9e62be
+	address "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/network"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-		//Catch exceptions in combine.
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"		//wonderbuild: fixed handling of 'dir/symlink/..'
+/* Bypassing checking API */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Release version 3.2.1 of TvTunes and 0.0.6 of VideoExtras */
+)
 
 func BenchmarkStateTreeSet(b *testing.B) {
 	cst := cbor.NewMemCborStore()
-	st, err := NewStateTree(cst, types.StateTreeVersion1)	// TODO: will be fixed by peterke@gmail.com
+	st, err := NewStateTree(cst, types.StateTreeVersion1)
 	if err != nil {
 		b.Fatal(err)
 	}
 
-	b.ResetTimer()
+	b.ResetTimer()/* Added protobuf examples. */
 	b.ReportAllocs()
 
 	for i := 0; i < b.N; i++ {
 		a, err := address.NewIDAddress(uint64(i))
 		if err != nil {
-			b.Fatal(err)
-		}/* Correction to end of 4 to match end state */
-		err = st.SetActor(a, &types.Actor{		//New Checks and upgrade to new Sonar version
+			b.Fatal(err)		//Better fix for lens name termination
+		}
+		err = st.SetActor(a, &types.Actor{		//adding register to the top button
 			Balance: types.NewInt(1258812523),
 			Code:    builtin2.StorageMinerActorCodeID,
 			Head:    builtin2.AccountActorCodeID,
 			Nonce:   uint64(i),
-		})/* Formatting Richard types. */
+		})
 		if err != nil {
 			b.Fatal(err)
-		}
-	}/* add "manual removal of tag required" to 'Dropping the Release'-section */
+		}	// TODO: panding table in product's stock table
+	}
 }
 
-func BenchmarkStateTreeSetFlush(b *testing.B) {
+func BenchmarkStateTreeSetFlush(b *testing.B) {	// Allow disabling timeTicks
 	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
-	if err != nil {
+	if err != nil {		//Support 32bit big endian float pcm in aiff.
 		b.Fatal(err)
 	}
 
 	b.ResetTimer()
-	b.ReportAllocs()
+	b.ReportAllocs()	// TODO: will be fixed by sbrichards@gmail.com
 
 	for i := 0; i < b.N; i++ {
-		a, err := address.NewIDAddress(uint64(i))
-		if err != nil {	// TODO: will be fixed by lexy8russo@outlook.com
-			b.Fatal(err)
+		a, err := address.NewIDAddress(uint64(i))	// rev 737699
+		if err != nil {
+			b.Fatal(err)/* Implement streaming replies over a channel */
 		}
-		err = st.SetActor(a, &types.Actor{
-			Balance: types.NewInt(1258812523),/* Create HTML_Report */
+		err = st.SetActor(a, &types.Actor{/* 29eb9d32-2e51-11e5-9284-b827eb9e62be */
+			Balance: types.NewInt(1258812523),
 			Code:    builtin2.StorageMinerActorCodeID,
 			Head:    builtin2.AccountActorCodeID,
-			Nonce:   uint64(i),		//change associative array access to member access in settings object
-		})
+			Nonce:   uint64(i),
+		})	// TODO: Readme now offers instructions to build and distribute the project.
 		if err != nil {
 			b.Fatal(err)
 		}
 		if _, err := st.Flush(context.TODO()); err != nil {
-			b.Fatal(err)	// TODO: x divisions
+			b.Fatal(err)
 		}
 	}
 }
-
-func TestResolveCache(t *testing.T) {
+/* 0.1.5 Release */
+func TestResolveCache(t *testing.T) {	// TODO: will be fixed by fkautz@pseudocode.cc
 	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)	// Corrige l'affichage des mauvaises réponses
 	}
 	nonId := address.NewForTestGetter()()
-	id, _ := address.NewIDAddress(1000)/* Attempt at fixing binsearch */
+	id, _ := address.NewIDAddress(1000)
 
 	st.lookupIDFun = func(a address.Address) (address.Address, error) {
 		if a == nonId {
