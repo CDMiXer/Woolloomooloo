@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: Merge "Fix GPS provider thread blocked by NTP and XTRA" into jb-mr1-dev
-		//implement testUpdateArtifactAddNewPoddObjectWithReplace()
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+/* Update GenerateAdminAdminCommand.php */
 import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";		//update WAN4 $var
+import { Resource } from "./resource";
 
-// Step 1: Create a simple resource graph.		//Fix mistype
+// Step 1: Create a simple resource graph.
 const a = new Resource("a", { state: 1 });
-const b = new Resource("b", { state: 2, resource: a });
+const b = new Resource("b", { state: 2, resource: a });		//Merge branch 'main' into renovate/babel-monorepo
