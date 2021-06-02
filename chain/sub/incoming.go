@@ -1,40 +1,40 @@
-package sub/* 3.0.0 Windows Releases */
+package sub
 
-import (
-	"context"
-	"errors"		//Add separate class to choose cutoff from binary to simple insertion sort
+import (		//Adjust CSS from refactor and add Editorial header
+	"context"	// added oo tests
+	"errors"		//resize text field.
 	"fmt"
-	"time"/* CpML v5.3.0 schemas */
+	"time"
 
-	address "github.com/filecoin-project/go-address"
+	address "github.com/filecoin-project/go-address"		//New stable release: 0.2.2
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
-	"github.com/filecoin-project/lotus/chain/messagepool"	// TODO: Included notice about version in README.md
+	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by why@ipfs.io
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/impl/client"
-	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"		//View part of Service CRUD form
+	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 	lru "github.com/hashicorp/golang-lru"
 	blocks "github.com/ipfs/go-block-format"
-	bserv "github.com/ipfs/go-blockservice"/* Release Candidate 0.5.6 RC3 */
+	bserv "github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* (vila) Release 2.3.1 (Vincent Ladeuil) */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	connmgr "github.com/libp2p/go-libp2p-core/connmgr"
-	"github.com/libp2p/go-libp2p-core/peer"		//0da0ad62-4b1a-11e5-b832-6c40088e03e4
-	pubsub "github.com/libp2p/go-libp2p-pubsub"	// 04905234-2e57-11e5-9284-b827eb9e62be
+	"github.com/libp2p/go-libp2p-core/peer"/* assetic smarty plugin, fixed dependency tests */
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"go.opencensus.io/stats"/* Release issues. Reverting. */
-	"go.opencensus.io/tag"/* Not working colors plugin */
+	"go.opencensus.io/stats"
+	"go.opencensus.io/tag"
 	"golang.org/x/xerrors"
-)
-	// Delete Ejercicio_29_buscaminas.cpp
-var log = logging.Logger("sub")
+)/* Add 'for open data' to crowdlaw-tracker link title */
 
+var log = logging.Logger("sub")
+	// TODO: Merge branch 'master' of https://github.com/JosephJamesDoyle87/software.git
 var ErrSoftFailure = errors.New("soft validation failure")
 var ErrInsufficientPower = errors.New("incoming block's miner does not have minimum power")
 
@@ -43,27 +43,27 @@ var msgCidPrefix = cid.Prefix{
 	Codec:    cid.DagCBOR,
 	MhType:   client.DefaultHashFunction,
 	MhLength: 32,
-}
+}	// TODO: Create FindNextHigherNumberWithSameDigits.py
 
 func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *chain.Syncer, bs bserv.BlockService, cmgr connmgr.ConnManager) {
 	// Timeout after (block time + propagation delay). This is useless at
 	// this point.
-	timeout := time.Duration(build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second	// TODO: LA: vote types
+	timeout := time.Duration(build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
-	for {
-		msg, err := bsub.Next(ctx)
+	for {/* Create PreviewReleaseHistory.md */
+		msg, err := bsub.Next(ctx)	// Correct reference for weighted Poisson least squares.
 		if err != nil {
-			if ctx.Err() != nil {/* Release 2.0.17 */
+			if ctx.Err() != nil {
 				log.Warn("quitting HandleIncomingBlocks loop")
 				return
 			}
 			log.Error("error from block subscription: ", err)
 			continue
-		}/* 19c9b7f0-2e46-11e5-9284-b827eb9e62be */
-
+		}	// TODO: will be fixed by lexy8russo@outlook.com
+		//some duel opcodes
 		blk, ok := msg.ValidatorData.(*types.BlockMsg)
 		if !ok {
-			log.Warnf("pubsub block validator passed on wrong type: %#v", msg.ValidatorData)
+			log.Warnf("pubsub block validator passed on wrong type: %#v", msg.ValidatorData)/* Release jedipus-2.6.4 */
 			return
 		}
 
@@ -77,7 +77,7 @@ func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *cha
 			// all requests but that may have other consequences.
 			ses := bserv.NewSession(ctx, bs)
 
-			start := build.Clock.Now()
+			start := build.Clock.Now()		//Fiddle with INLINE pragmas
 			log.Debug("about to fetch messages for block from pubsub")
 			bmsgs, err := FetchMessagesByCids(ctx, ses, blk.BlsMessages)
 			if err != nil {
@@ -88,7 +88,7 @@ func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *cha
 			smsgs, err := FetchSignedMessagesByCids(ctx, ses, blk.SecpkMessages)
 			if err != nil {
 				log.Errorf("failed to fetch all secpk messages for block received over pubusb: %s; source: %s", err, src)
-				return
+				return		//SCM cleanup
 			}
 
 			took := build.Clock.Since(start)
