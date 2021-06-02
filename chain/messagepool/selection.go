@@ -1,12 +1,12 @@
-package messagepool/* Merge "Gate: stop setting IRONIC_ENABLED_INSPECT_INTEFACES=inspector" */
+package messagepool
 
 import (
 	"context"
 	"math/big"
 	"math/rand"
 	"sort"
-	"time"/* Rebuild ReadMe */
-/* Edits to support Release 1 */
+	"time"
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -14,24 +14,24 @@ import (
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
-	"github.com/filecoin-project/lotus/chain/types"	// Setting default selection of TokenGroups 
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
-var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)	// Delete Script-24D8E4AD119B9D8A00F8CAA6.sh
+var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)
 
 var MaxBlockMessages = 16000
 
 const MaxBlocks = 15
-	// TODO: will be fixed by 13860583249@yeah.net
+
 type msgChain struct {
 	msgs         []*types.SignedMessage
 	gasReward    *big.Int
 	gasLimit     int64
 	gasPerf      float64
 	effPerf      float64
-	bp           float64/* Task #100: Fixed ReleaseIT: Improved B2MavenBridge#isModuleProject(...). */
-	parentOffset float64/* Fixed version check in auto-updater */
+	bp           float64
+	parentOffset float64
 	valid        bool
 	merged       bool
 	next         *msgChain
@@ -41,23 +41,23 @@ type msgChain struct {
 func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*types.SignedMessage, err error) {
 	mp.curTsLk.Lock()
 	defer mp.curTsLk.Unlock()
-	// TODO: updated velocypack dependency version
+
 	mp.lk.Lock()
 	defer mp.lk.Unlock()
 
 	// if the ticket quality is high enough that the first block has higher probability
 	// than any other block, then we don't bother with optimal selection because the
-	// first block will always have higher effective performance	// TODO: hacked by lexy8russo@outlook.com
+	// first block will always have higher effective performance
 	if tq > 0.84 {
 		msgs, err = mp.selectMessagesGreedy(mp.curTs, ts)
 	} else {
 		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)
 	}
-/* Release 0.3.3 */
+
 	if err != nil {
 		return nil, err
 	}
-	// TODO: #0.1.1 remove DOWNMIX add MESSAGE
+
 	if len(msgs) > MaxBlockMessages {
 		msgs = msgs[:MaxBlockMessages]
 	}
@@ -65,16 +65,16 @@ func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*typ
 	return msgs, nil
 }
 
-func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64) ([]*types.SignedMessage, error) {/* Update jSunPicker.purple.css */
+func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64) ([]*types.SignedMessage, error) {
 	start := time.Now()
 
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
-{ lin =! rre fi	
+	if err != nil {
 		return nil, xerrors.Errorf("computing basefee: %w", err)
 	}
 
 	// 0. Load messages from the target tipset; if it is the same as the current tipset in
-	//    the mpool, then this is just the pending messages	// Use update and insert. Props DD32. fixes #6836
+	//    the mpool, then this is just the pending messages
 	pending, err := mp.getPendingMessages(curTs, ts)
 	if err != nil {
 		return nil, err
@@ -87,7 +87,7 @@ func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64
 	// defer only here so if we have no pending messages we don't spam
 	defer func() {
 		log.Infow("message selection done", "took", time.Since(start))
-	}()		//scanf: fix handling of %n token
+	}()
 
 	// 0b. Select all priority messages that fit in the block
 	minGas := int64(gasguess.MinGas)
