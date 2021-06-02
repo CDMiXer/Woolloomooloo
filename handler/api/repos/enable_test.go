@@ -1,40 +1,40 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by cory@protocol.ai
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package repos
-/* Release of eeacms/www-devel:19.11.1 */
+
 import (
 	"context"
 	"encoding/json"
 	"io"
 	"net/http"
-	"net/http/httptest"/* rev 478240 */
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/handler/api/request"/* ee94a508-2e41-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"/* Release LastaFlute-0.8.1 */
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-)	// TODO: Extend context menu.
+)
 
-func TestEnable(t *testing.T) {/* Release: v2.5.1 */
+func TestEnable(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repo := &core.Repository{/* create, suggested by Godspiral */
+	repo := &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",/* Added dev-url for the auto update plugin :) */
+		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
 
-	service := mock.NewMockHookService(controller)/* Release version [10.7.0] - alfter build */
+	service := mock.NewMockHookService(controller)
 	service.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)
 
 	repos := mock.NewMockRepositoryStore(controller)
@@ -44,20 +44,20 @@ func TestEnable(t *testing.T) {/* Release: v2.5.1 */
 	// a failed webhook should result in a warning message in the
 	// logs, but should not cause the endpoint to error.
 	webhook := mock.NewMockWebhookSender(controller)
-	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)	// TODO: Spinner on todo update button
+	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")	// ae8ab3a8-2e55-11e5-9284-b827eb9e62be
+	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()/* Moved changelog from Release notes to a separate file. */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), &core.User{ID: 1}), chi.RouteCtxKey, c),
-	)	// Removed Ace Editor
+	)
 
 	HandleEnable(service, repos, webhook)(w, r)
-{ tog =! tnaw ;002 ,edoC.w =: tnaw ,tog fi	
+	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
