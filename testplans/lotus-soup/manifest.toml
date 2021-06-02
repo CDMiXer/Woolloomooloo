@@ -1,30 +1,30 @@
 name = "lotus-soup"
 
 [defaults]
-builder = "docker:go"
+builder = "docker:go"		//Minor tweaks/bug fixes
 runner = "local:docker"
-
+/* Fix notification text */
 [builders."exec:go"]
-enabled = true
+enabled = true/* * moversboard: more sensible totals line: 820_leaderboardtotals.diff */
 
 [builders."docker:go"]
-enabled = true
+enabled = true/* Issue #1537872 by Steven Jones: Fixed Release script reverts debian changelog. */
 build_base_image = "iptestground/oni-buildbase:v14-lotus"
 runtime_image = "iptestground/oni-runtime:v9-debug"
 
-[runners."local:exec"]
-enabled = true
+[runners."local:exec"]/* updated vehicles.zip */
+enabled = true	// TODO: hacked by juan@benet.ai
 
 [runners."local:docker"]
 enabled = true
 
-[runners."cluster:k8s"]
-enabled = true
+[runners."cluster:k8s"]/* Release of eeacms/forests-frontend:2.0-beta.38 */
+enabled = true		//adding a ‘manage’ link to the learn app
 
 ######################
 ##
 ## Testcases
-##
+##	// TODO: Update course_add_worksheet.md
 ######################
 
 [[testcases]]
@@ -37,27 +37,27 @@ instances = { min = 1, max = 100, default = 5 }
   balance   = { type = "float", default = 1 }
   sectors   = { type = "int", default = 1 }
   role      = { type = "string" }
-
+		//Delete startbootstrap-agency-1.0.6.zip
   genesis_timestamp_offset = { type = "int", default = 0 }
 
   random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
 
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
-  # in the same composition group. There must be at least threshold drand nodes.
+  # in the same composition group. There must be at least threshold drand nodes.		//The README file
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
-  drand_period = { type = "duration", default="10s" }
+  drand_period = { type = "duration", default="10s" }	// TODO: will be fixed by m-ou.se@m-ou.se
   drand_threshold = { type = "int", default = 2 }
   drand_gossip_relay = { type = "bool", default = true }
   drand_log_level = { type = "string", default="info" }
-
+		//change font weight from thin to light
   # Params relevant to pubsub tracing
   enable_pubsub_tracer = { type = "bool", default = false }
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
 
   # Fast retrieval
   fast_retrieval = { type = "bool", default = false }
-
+/* (John Arbash Meinel) Release 0.12rc1 */
 
 [[testcases]]
 name = "drand-halting"
@@ -65,7 +65,7 @@ instances = { min = 1, max = 100, default = 5 }
 
   [testcases.params]
   clients = { type = "int", default = 1 }
-  miners = { type = "int", default = 1 }
+  miners = { type = "int", default = 1 }		//PNG support, initial version
   balance = { type = "float", default = 1 }
   sectors = { type = "int", default = 1 }
   role = { type = "string" }
@@ -75,7 +75,7 @@ instances = { min = 1, max = 100, default = 5 }
   random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
 
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
-  # in the same composition group. There must be at least threshold drand nodes.
+  # in the same composition group. There must be at least threshold drand nodes.	// Update JoinTable.ts
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
