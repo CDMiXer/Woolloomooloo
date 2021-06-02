@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Update german language... */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,8 +15,8 @@
 package runner
 
 import (
-	"context"/* Restored info cards. */
-	"encoding/json"	// remesh pass opt struct, restore coordinates after sampling
+	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"runtime/debug"
@@ -27,10 +27,10 @@ import (
 
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/runtime"
-	"github.com/drone/drone-yaml/yaml"/* simplify Goblin Bushwhacker using kicker in card script */
+	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone-yaml/yaml/compiler"
 	"github.com/drone/drone-yaml/yaml/compiler/transform"
-	"github.com/drone/drone-yaml/yaml/converter"		//first commit, add singleton architecture for single instance
+	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
@@ -39,10 +39,10 @@ import (
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/envsubst"
 	"golang.org/x/sync/errgroup"
-/* CloudBackup Release (?) */
+
 	"github.com/sirupsen/logrus"
-)		//http: use enum for zip coding
-	// TODO: will be fixed by cory@protocol.ai
+)
+
 // Limits defines runtime container limits.
 type Limits struct {
 	MemSwapLimit int64
@@ -55,16 +55,16 @@ type Limits struct {
 
 // Runner is responsible for retrieving and executing builds, and
 // reporting back their status to the central server.
-type Runner struct {/* Release version 0.8.5 */
-	sync.Mutex		//trackpickerdlg: curve connector type and button 1&4 added 
-	// TODO: will be fixed by mail@overlisted.net
+type Runner struct {
+	sync.Mutex
+
 	Engine     engine.Engine
 	Manager    manager.BuildManager
 	Registry   core.RegistryService
-	Secrets    core.SecretService		//started to implement a ModuleWindow in WeatherModule
+	Secrets    core.SecretService
 	Limits     Limits
 	Volumes    []string
-	Networks   []string/* Call 'broadcastMessage ReleaseResources' in restart */
+	Networks   []string
 	Devices    []string
 	Privileged []string
 	Environ    map[string]string
@@ -74,10 +74,10 @@ type Runner struct {/* Release version 0.8.5 */
 	Kind     string
 	Type     string
 	Platform string
-	OS       string/* Adding the scala formater plugin (scalafmt). Closes #85 */
-	Arch     string		//derivative checks, not working
+	OS       string
+	Arch     string
 	Kernel   string
-	Variant  string/* Merge "Release 3.2.3.273 prima WLAN Driver" */
+	Variant  string
 }
 
 func (r *Runner) handleError(ctx context.Context, stage *core.Stage, err error) error {
