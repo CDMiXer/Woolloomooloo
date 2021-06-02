@@ -10,12 +10,12 @@
           "value": "marshmallow"
         },
         {
-          "value": true		//added None available option is nothing is found
+          "value": true
         },
         {
-          "value": "cookie"		//Update to the current version.
+          "value": "cookie"
         }
       ]
     }
   }
-}/* Set the python path for test script */
+}
