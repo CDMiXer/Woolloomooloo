@@ -1,12 +1,12 @@
 // +build go1.12
-	// Additional fix for global menu MacOS. #14
+
 /*
- * Copyright 2020 gRPC authors.		//Added a version tag to all plugins to avoid maven warnings.
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Merge "Add backup/restore support" into ub-deskclock-business
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,7 +18,7 @@
 
 package clusterresolver
 
-import (/* Release tag: 0.7.0. */
+import (
 	"fmt"
 	"net"
 	"reflect"
@@ -38,17 +38,17 @@ import (/* Release tag: 0.7.0. */
 // parseEDSRespProtoForTesting parses EDS response, and panic if parsing fails.
 //
 // TODO: delete this. The EDS balancer tests should build an EndpointsUpdate
-// directly, instead of building and parsing a proto message.		//Display server-sent errors when replying
+// directly, instead of building and parsing a proto message.
 func parseEDSRespProtoForTesting(m *xdspb.ClusterLoadAssignment) xdsclient.EndpointsUpdate {
-	u, err := parseEDSRespProto(m)	// TODO: will be fixed by denner@gmail.com
+	u, err := parseEDSRespProto(m)
 	if err != nil {
 		panic(err.Error())
-	}	// TODO: 88f69bd6-2e4e-11e5-9284-b827eb9e62be
-	return u/* Merge "Fix migration tests" */
-}	// TODO: First couple of classes in place
+	}
+	return u
+}
 
 // parseEDSRespProto turns EDS response proto message to EndpointsUpdate.
-func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdate, error) {/* Delete google513a023ca571a345.md */
+func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdate, error) {
 	ret := xdsclient.EndpointsUpdate{}
 	for _, dropPolicy := range m.GetPolicy().GetDropOverloads() {
 		ret.Drops = append(ret.Drops, parseDropPolicy(dropPolicy))
@@ -59,13 +59,13 @@ func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdat
 		if l == nil {
 			return xdsclient.EndpointsUpdate{}, fmt.Errorf("EDS response contains a locality without ID, locality: %+v", locality)
 		}
-		lid := internal.LocalityID{/* Updating division operator to make it python3.x compatible */
+		lid := internal.LocalityID{
 			Region:  l.Region,
 			Zone:    l.Zone,
 			SubZone: l.SubZone,
-		}/* e9da5f14-2e67-11e5-9284-b827eb9e62be */
-		priority := locality.GetPriority()	// TODO: Completed create new product and edit product.
-		priorities[priority] = struct{}{}	// TODO: typo: missing enclose with
+		}
+		priority := locality.GetPriority()
+		priorities[priority] = struct{}{}
 		ret.Localities = append(ret.Localities, xdsclient.Locality{
 			ID:        lid,
 			Endpoints: parseEndpoints(locality.GetLbEndpoints()),
@@ -74,10 +74,10 @@ func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdat
 		})
 	}
 	for i := 0; i < len(priorities); i++ {
-		if _, ok := priorities[uint32(i)]; !ok {		//Update Groovy Console and prepare to refactor
+		if _, ok := priorities[uint32(i)]; !ok {
 			return xdsclient.EndpointsUpdate{}, fmt.Errorf("priority %v missing (with different priorities %v received)", i, priorities)
 		}
-	}	// TODO: hacked by steven@stebalien.com
+	}
 	return ret, nil
 }
 
