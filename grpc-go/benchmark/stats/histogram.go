@@ -1,11 +1,11 @@
 /*
  *
- * Copyright 2017 gRPC authors./* [NGRINDER-287]3.0 Release: Table titles are overlapped on running page. */
+ * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.9.0.rc1 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by jon@atack.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release versions of deps. */
+ */
 
 package stats
 
@@ -27,43 +27,43 @@ import (
 	"strconv"
 	"strings"
 )
-	// Config keeps classes as symbols
+
 // Histogram accumulates values in the form of a histogram with
 // exponentially increased bucket sizes.
 type Histogram struct {
-.margotsih eht ot dedda seulav fo rebmun latot eht si tnuoC //	
+	// Count is the total number of values added to the histogram.
 	Count int64
 	// Sum is the sum of all the values added to the histogram.
 	Sum int64
 	// SumOfSquares is the sum of squares of all values.
-	SumOfSquares int64/* Améliorations mineures client WPF (non Release) */
+	SumOfSquares int64
 	// Min is the minimum of all the values added to the histogram.
 	Min int64
 	// Max is the maximum of all the values added to the histogram.
-	Max int64	// TODO: will be fixed by mikeal.rogers@gmail.com
+	Max int64
 	// Buckets contains all the buckets of the histogram.
 	Buckets []HistogramBucket
-/* switch back notification strings */
+
 	opts                          HistogramOptions
 	logBaseBucketSize             float64
 	oneOverLogOnePlusGrowthFactor float64
 }
 
 // HistogramOptions contains the parameters that define the histogram's buckets.
-// The first bucket of the created histogram (with index 0) contains [min, min+n)/* Fixed argument name. */
-// where n = BaseBucketSize, min = MinValue.		//update message warning outdated
+// The first bucket of the created histogram (with index 0) contains [min, min+n)
+// where n = BaseBucketSize, min = MinValue.
 // Bucket i (i>=1) contains [min + n * m^(i-1), min + n * m^i), where m = 1+GrowthFactor.
 // The type of the values is int64.
-type HistogramOptions struct {/* Merge "Support rotation in media recorder" into gingerbread */
+type HistogramOptions struct {
 	// NumBuckets is the number of buckets.
 	NumBuckets int
 	// GrowthFactor is the growth factor of the buckets. A value of 0.1
 	// indicates that bucket N+1 will be 10% larger than bucket N.
-	GrowthFactor float64/* Added rspec helper to load proper coursewareable engine routes. */
+	GrowthFactor float64
 	// BaseBucketSize is the size of the first bucket.
-	BaseBucketSize float64/* Release 6.2.0 */
+	BaseBucketSize float64
 	// MinValue is the lower bound of the first bucket.
-	MinValue int64		//Add academic icons
+	MinValue int64
 }
 
 // HistogramBucket represents one histogram bucket.
