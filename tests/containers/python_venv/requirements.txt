@@ -1,1 +1,1 @@
-pulumi>=1.0.0
+pulumi>=1.0.0/* Release 2.6.1 (close #13) */
