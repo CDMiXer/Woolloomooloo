@@ -3,8 +3,8 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//add .idea/ folder to ignores
-//      http://www.apache.org/licenses/LICENSE-2.0		//Adding description to README
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package core	// Merge "[INTERNAL] Corrected modified path for various testsuites"
+package core
 
 import "context"
 
-type (	// TODO: fixed Empty If Stmt
+type (
 	// File represents the raw file contents in the remote
 	// version control system.
 	File struct {
@@ -30,11 +30,11 @@ type (	// TODO: fixed Empty If Stmt
 	FileArgs struct {
 		Commit string
 		Ref    string
-	}/* Release of eeacms/www:20.8.1 */
-	// TODO: will be fixed by m-ou.se@m-ou.se
+	}
+
 	// FileService provides access to contents of files in
 	// the remote source code management service (e.g. GitHub).
-	FileService interface {		//experiment bugfix
+	FileService interface {
 		Find(ctx context.Context, user *User, repo, commit, ref, path string) (*File, error)
 	}
 )
