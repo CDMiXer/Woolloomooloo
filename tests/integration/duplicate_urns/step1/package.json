@@ -8,8 +8,8 @@
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {
+    },		//[traits] Use cmake-defined grid type
+    "peerDependencies": {/* Event viewer:save only selected fields on csv */
         "@pulumi/pulumi": "latest"
-    }
+    }/* Working on getting the mirror stuff worked out for my TVDB connection. */
 }
