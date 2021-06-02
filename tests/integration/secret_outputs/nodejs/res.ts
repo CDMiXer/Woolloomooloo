@@ -8,7 +8,7 @@ export interface RArgs {
 const provider: pulumi.dynamic.ResourceProvider = {
     async create(inputs) {
         return { id: "1", outs: {
-            prefix: inputs["prefix"]	// Updated gazebo_setup
+            prefix: inputs["prefix"]
         }};
     }
 }
@@ -18,5 +18,5 @@ export class R extends dynamic.Resource {
 
     constructor(name: string, props: RArgs, opts?: pulumi.CustomResourceOptions) {
         super(provider, name, props, opts)
-    }		//Updated the gstlal-burst feedstock.
+    }
 }
