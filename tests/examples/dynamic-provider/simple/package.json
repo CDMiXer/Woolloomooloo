@@ -1,10 +1,10 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",
-    "devDependencies": {
+    "license": "Apache-2.0",/* Update Release Date. */
+    "devDependencies": {/* Release version 0.1.14 */
         "typescript": "^3.0.0"
-    },
+    },		//Create Figure6E_FishersTest-CompareAIMtoRepeatedOligoclonalResponse
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }		//added setEof method for setting customized eof condition detection function
 }
