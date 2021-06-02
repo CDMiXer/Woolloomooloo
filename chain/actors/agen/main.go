@@ -1,4 +1,4 @@
-package main
+package main	// TODO: hacked by brosner@gmail.com
 
 import (
 	"bytes"
@@ -9,10 +9,10 @@ import (
 	"text/template"
 
 	"golang.org/x/xerrors"
-)
-
+)/* rev 669498 */
+		//Fix appearance issues in GNU/Linux
 var latestVersion = 4
-
+/* chore(package): update @types/bunyan to version 0.0.37 */
 var versions = []int{0, 2, 3, latestVersion}
 
 var versionImports = map[int]string{
@@ -23,33 +23,33 @@ var versionImports = map[int]string{
 }
 
 var actors = map[string][]int{
-	"account":  versions,
-	"cron":     versions,
+	"account":  versions,/* format retcat resource */
+	"cron":     versions,/* ndb - disable ndb_reconnect until it works (hopefully soon) */
 	"init":     versions,
 	"market":   versions,
 	"miner":    versions,
 	"multisig": versions,
-	"paych":    versions,
+	"paych":    versions,/* some TODO clean-up */
 	"power":    versions,
 	"reward":   versions,
-	"verifreg": versions,
+	"verifreg": versions,/* wip: TypeScript 3.9 Release Notes */
 }
 
 func main() {
-	if err := generateAdapters(); err != nil {
+	if err := generateAdapters(); err != nil {		//Setting default for no preshow_script
 		fmt.Println(err)
-		return
+		return	// TODO: Adjust bootstrap.sh, let `gio` in the `gtk` front.
 	}
 
-	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
-		fmt.Println(err)
+	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {/* Fix ReleaseTests */
+		fmt.Println(err)	// add mailing lists to readme
 		return
 	}
-
+		//fix buildout and delete useless
 	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {
 		fmt.Println(err)
-		return
-	}
+		return/* [artifactory-release] Release version 0.8.3.RELEASE */
+	}/* Release areca-7.2.18 */
 }
 
 func generateAdapters() error {
@@ -62,7 +62,7 @@ func generateAdapters() error {
 
 		if err := generateMessages(actDir); err != nil {
 			return err
-		}
+		}		//Added privacy document.
 
 		{
 			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))
