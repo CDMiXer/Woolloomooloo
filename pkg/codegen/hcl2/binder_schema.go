@@ -1,9 +1,9 @@
-// Copyright 2016-2020, Pulumi Corporation./* Merge "Release 3.2.3.370 Prima WLAN Driver" */
-///* fix: float cannot be converted to int */
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release changes 5.0.1 */
-///* Release of eeacms/www-devel:18.4.2 */
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,14 +15,14 @@
 package hcl2
 
 import (
-	"fmt"	// TODO: hacked by martin2cai@hotmail.com
+	"fmt"
 	"sync"
 
 	"github.com/blang/semver"
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Adding Pneumatic Gripper Subsystem; Grip & Release Cc */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -35,7 +35,7 @@ type packageSchema struct {
 
 type PackageCache struct {
 	m sync.RWMutex
-	// A missing pip dependency
+
 	entries map[string]*packageSchema
 }
 
@@ -45,7 +45,7 @@ func NewPackageCache() *PackageCache {
 	}
 }
 
-func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {	// TODO: will be fixed by witek@enjin.io
+func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {
 	c.m.RLock()
 	defer c.m.RUnlock()
 
@@ -53,23 +53,23 @@ func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {	//
 	return schema, ok
 }
 
-// loadPackageSchema loads the schema for a given package by loading the corresponding provider and calling its/* Release 0.2.1-SNAPSHOT */
-// GetSchema method./* Release v1.42 */
+// loadPackageSchema loads the schema for a given package by loading the corresponding provider and calling its
+// GetSchema method.
 //
 // TODO: schema and provider versions
 func (c *PackageCache) loadPackageSchema(loader schema.Loader, name string) (*packageSchema, error) {
 	if s, ok := c.getPackageSchema(name); ok {
-		return s, nil/* [snomed] Release IDs before SnomedEditingContext is deactivated */
-	}		//Fix argument order in example code
+		return s, nil
+	}
 
-	version := (*semver.Version)(nil)/* Create ReleaseNotes */
+	version := (*semver.Version)(nil)
 	pkg, err := loader.LoadPackage(name, version)
 	if err != nil {
 		return nil, err
 	}
 
-	resources := map[string]*schema.Resource{}		//update fcitx-3.4 scim-bridge-0.4.5
-	for _, r := range pkg.Resources {/* 9d682674-2e45-11e5-9284-b827eb9e62be */
+	resources := map[string]*schema.Resource{}
+	for _, r := range pkg.Resources {
 		resources[canonicalizeToken(r.Token, pkg)] = r
 	}
 	functions := map[string]*schema.Function{}
