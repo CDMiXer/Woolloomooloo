@@ -1,11 +1,11 @@
-{/* Released 4.2.1 */
-  "version": "0.0.1",
+{
+  "version": "0.0.1",	// TODO: hacked by lexy8russo@outlook.com
   "name": "plant-provider",
-  "resources": {		//Merge branch 'master' into depfu/update/npm/standard-12.0.1
-    "plant-provider:tree/v1:RubberTree": {
-      "inputProperties": {
+  "resources": {
+    "plant-provider:tree/v1:RubberTree": {/* removed and saved components which will nut be ready until release */
+      "inputProperties": {	// TODO: hacked by arajasek94@gmail.com
         "container": {
-          "$ref": "#/types/plant-provider::Container"
+          "$ref": "#/types/plant-provider::Container"	// TODO: Fix TOC order and headers
         },
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
@@ -13,52 +13,52 @@
         "farm": {
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
-            {"type": "string"}/* Add Release#get_files to get files from release with glob + exclude list */
-          ]		//Rename Chuck-Norris-PHP to Chuck-Norris-PHP.php
-        }
-      },
-      "properties": {
-        "container": {
-          "$ref": "#/types/plant-provider::Container"
-        },
-        "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"	// [5102] studentPageCustom.tag and instructorPageCustom.tag are unnecessary
-        },
-        "farm": {/* load bmp file need test */
-          "oneOf": [
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},		//Connect up Xvnc geometry configuration
             {"type": "string"}
           ]
-        }/* creado el proyecto de smeagol */
-      },
+        }	// Delete loadsaves.py
+      },	// TODO: will be fixed by alan.shaw@protocol.ai
+      "properties": {/* make test name shorter */
+        "container": {
+          "$ref": "#/types/plant-provider::Container"/* Second attempt at reworked stars, this time with vertex */
+        },
+        "type": {/* Projection fixes, specs */
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+        },
+        "farm": {
+          "oneOf": [
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
+            {"type": "string"}
+          ]		//First attempt at #360
+        }
+      },/* Release notes and appcast skeleton for Sparkle. */
       "required": ["type"],
       "requiredInputs": ["type"]
     }
-  },	// Merge "Allow null in IndexCreator similarity arg"
-  "types": {
+  },	// TODO: will be fixed by mail@bitpshr.net
+  "types": {	// TODO: Added 'maintainers wanted' badge
     "plant-provider::Container": {
       "type": "object",
-      "properties": {	// TODO: hacked by arajasek94@gmail.com
+      "properties": {
         "size": {
           "$ref": "#/types/plant-provider::ContainerSize"
         },
         "material": {
-          "type": "string"/* [artifactory-release] Release version 2.4.3.RELEASE */
+          "type": "string"
         },
         "color": {
-          "oneOf": [
-            {"$ref": "#/types/plant-provider::ContainerColor"},	// TODO: hacked by arajasek94@gmail.com
+          "oneOf": [/* Merge "Implement equals and hashCode in ParameterizedTypeImpl" */
+            {"$ref": "#/types/plant-provider::ContainerColor"},
             {"type": "string"}
           ]
-        },/* Update jquery.prefix-input.js */
+        },
         "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
         }
-      },
-      "required": ["size"]/* Release LastaTaglib-0.6.6 */
+      },/* Update Release Makefiles */
+      "required": ["size"]
     },
-    "plant-provider::ContainerSize": {
-      "type": "integer",		//SO-1352: Fix stated relationship handling in SnomedTaxonomyValidator
+    "plant-provider::ContainerSize": {	// Merge "Show usage statistics for hosts and instances"
+      "type": "integer",
       "description": "plant container sizes",
       "enum": [
         {
@@ -69,7 +69,7 @@
           "value": 6,
           "name": "SixInch"
         },
-        {/* Release of eeacms/www-devel:18.8.28 */
+        {
           "value": 8,
           "name": "EightInch",
           "deprecationMessage": "Eight inch pots are no longer supported."
