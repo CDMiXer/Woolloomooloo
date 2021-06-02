@@ -1,21 +1,21 @@
 {
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "integer",/* Release notes for 1.0.61 */
+      "type": "integer",
       "enum": [
         {
           "value": 1
-        },
-        {
+        },/* add unit tests for variable and mixin usage and definition */
+        {	// TODO: hacked by ligi@ligi.de
           "value": 2
         },
         {
           "value": 3
-        },
-        {/* Change Client to Partnership */
-          "value": 9.1	// readme: add note about blink components
+        },/* reconciled benchmarks to directory structure */
+        {
+          "value": 9.1
         }
-      ]
+      ]/* Add a function to make a fringe from actual data */
     }
   }
 }
