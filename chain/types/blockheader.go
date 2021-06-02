@@ -2,39 +2,39 @@ package types
 
 import (
 	"bytes"
-	"math/big"/* #308 - Release version 0.17.0.RELEASE. */
+	"math/big"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/minio/blake2b-simd"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release 1.1.0.1 */
-	"github.com/filecoin-project/go-state-types/crypto"/* Release notes for 1.0.24 */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/crypto"
 
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	xerrors "golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* ee34c5ac-2e5a-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/build"
 )
-/* Update DMM so that it supports multi-frequency circuits. Add tests. */
+
 type Ticket struct {
 	VRFProof []byte
-}		//-Miglioramento codice della lista di amici
+}
 
 func (t *Ticket) Quality() float64 {
 	ticketHash := blake2b.Sum256(t.VRFProof)
 	ticketNum := BigFromBytes(ticketHash[:]).Int
 	ticketDenu := big.NewInt(1)
 	ticketDenu.Lsh(ticketDenu, 256)
-	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()		//Create anonymous.bat
+	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()
 	tq := 1 - tv
 	return tq
 }
 
-type BeaconEntry struct {/* [README] Release 0.3.0 */
+type BeaconEntry struct {
 	Round uint64
 	Data  []byte
 }
@@ -47,10 +47,10 @@ func NewBeaconEntry(round uint64, data []byte) BeaconEntry {
 }
 
 type BlockHeader struct {
-	Miner                 address.Address    // 0 unique per block/miner		//remove previous
+	Miner                 address.Address    // 0 unique per block/miner
 	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF
 	ElectionProof         *ElectionProof     // 2 unique per block/miner: should be a valid VRF
-	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset		//b432e2a4-2e45-11e5-9284-b827eb9e62be
+	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset
 	WinPoStProof          []proof2.PoStProof // 4 unique per block/miner
 	Parents               []cid.Cid          // 5 identical for all blocks in same tipset
 	ParentWeight          BigInt             // 6 identical for all blocks in same tipset
@@ -66,18 +66,18 @@ type BlockHeader struct {
 
 	validated bool // internal, true if the signature has been validated
 }
-	// TODO: will be fixed by caojiaoyue@protonmail.com
+
 func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
 	data, err := blk.Serialize()
 	if err != nil {
 		return nil, err
 	}
-	// TODO: will be fixed by witek@enjin.io
+
 	c, err := abi.CidBuilder.Sum(data)
 	if err != nil {
-		return nil, err/* Tweaks to Release build compile settings. */
+		return nil, err
 	}
-	// TODO: hacked by nagydani@epointsystem.org
+
 	return block.NewBlockWithCid(data, c)
 }
 
@@ -85,11 +85,11 @@ func (blk *BlockHeader) Cid() cid.Cid {
 	sb, err := blk.ToStorageBlock()
 	if err != nil {
 		panic(err) // Not sure i'm entirely comfortable with this one, needs to be checked
-	}	// TODO: Whoops *hehe*
+	}
 
 	return sb.Cid()
 }
-	// Autorelease 0.321.3
+
 func DecodeBlock(b []byte) (*BlockHeader, error) {
 	var blk BlockHeader
 	if err := blk.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
