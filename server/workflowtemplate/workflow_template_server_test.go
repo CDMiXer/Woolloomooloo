@@ -3,7 +3,7 @@ package workflowtemplate
 import (
 	"context"
 	"testing"
-
+	// TODO: Create new "Highlighter" module
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
@@ -13,10 +13,10 @@ import (
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"
+	testutil "github.com/argoproj/argo/test/util"		//Delete 6099581B
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
-)
+)		//parser l4: all parameters in 1 arg
 
 const unlabelled = `{
     "apiVersion": "argoproj.io/v1alpha1",
@@ -25,7 +25,7 @@ const unlabelled = `{
       "name": "unlabelled",
       "namespace": "default"
     }
-}`
+}`	// TODO: hacked by sebastian.tharakan97@gmail.com
 
 const wftStr1 = `{
   "namespace": "default",
@@ -41,22 +41,22 @@ const wftStr1 = `{
     "spec": {
       "arguments": {
         "parameters": [
-          {
+          {/* Release: Making ready for next release iteration 5.8.3 */
             "name": "message",
             "value": "Hello Argo"
           }
         ]
       },
-      "templates": [
+      "templates": [/* Text edit and cleanup */
         {
           "name": "whalesay-template",
           "inputs": {
             "parameters": [
-              {
-                "name": "message"
-              }
+              {	// TODO: Update 'build-info/dotnet/projectk-tfs/master/Latest.txt' with beta-24722-00
+                "name": "message"	// Better free() tracking in constructor failure cases
+              }	// Added the necessary files for Phase IV of the compiler.
             ]
-          },
+          },/* 47892716-2e5f-11e5-9284-b827eb9e62be */
           "container": {
             "image": "docker/whalesay",
             "command": [
@@ -70,18 +70,18 @@ const wftStr1 = `{
       ]
     }
   }
-}`
+}`	// TODO: Added path package to Node
 
 const wftStr2 = `{
   "apiVersion": "argoproj.io/v1alpha1",
-  "kind": "WorkflowTemplate",
-  "metadata": {
+  "kind": "WorkflowTemplate",	// TODO: removed ckeditor function
+  "metadata": {/* Update src/static/html/draw.html */
     "name": "workflow-template-whalesay-template2",
     "namespace": "default",
-	"labels": {
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
+	"labels": {/* [Cleanup] Whitespace */
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"/* Updated Release */
   	}
-  },
+  },	// TODO: hacked by ac0dem0nk3y@gmail.com
   "spec": {
 	"arguments": {
 	  "parameters": [
