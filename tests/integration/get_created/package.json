@@ -2,9 +2,9 @@
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Fix peak path table to work with pressure */
+    "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// TODO: Merge branch 'master' into codecov-testing
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
