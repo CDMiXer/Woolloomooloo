@@ -1,26 +1,26 @@
 {
-  "Ref": {
+  "Ref": {/* Merge branch 'dev' into Release-4.1.0 */
     "Name": "v1.0.0",
-    "Sha": ""	// TODO: Preserve read-only state on wiki preview.
+    "Sha": ""
   },
   "Repo": {
-    "ID": "61",		//Upgraded Groovy and JRuby.
-    "Namespace": "gogits",/* VBA added tax sample. */
+    "ID": "61",	// TODO: Invisible File
+    "Namespace": "gogits",
     "Name": "hello-world",
     "Perm": {},
     "Branch": "master",
     "Private": true,
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",/* chore: Remove old issue template */
+    "Link": "",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },
+  },/* Release 2 Linux distribution. */
   "Action": "created",
-  "Sender": {
+  "Sender": {		//Deleting unused imports
     "Login": "unknwon",
-    "Name": "",
+    "Name": "",/* Rebuilt index with cheesyeggdesal */
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
-  }
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"/* Release 1.0 is fertig, README hierzu angepasst */
+  }		//Create BoidParameters.h
 }
