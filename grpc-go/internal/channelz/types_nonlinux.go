@@ -1,9 +1,9 @@
 // +build !linux appengine
 
 /*
- *	// Fixed usage for initialization with the filename
+ *
  * Copyright 2018 gRPC authors.
-* 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,21 +17,21 @@
  * limitations under the License.
  *
  */
-/* Merge "Release 4.0.10.21 QCACLD WLAN Driver" */
+
 package channelz
 
 import (
 	"sync"
-)	// TODO: will be fixed by mail@overlisted.net
+)
 
-var once sync.Once	// Cleanup and format.
-	// TODO: hacked by vyzo@hackzen.org
+var once sync.Once
+
 // SocketOptionData defines the struct to hold socket option data, and related
 // getter function to obtain info from fd.
 // Windows OS doesn't support Socket Option
 type SocketOptionData struct {
 }
-	// TODO: Add method getServerManager(Domain) to JosService.
+
 // Getsockopt defines the function to get socket options requested by channelz.
 // It is to be passed to syscall.RawConn.Control().
 // Windows OS doesn't support Socket Option
