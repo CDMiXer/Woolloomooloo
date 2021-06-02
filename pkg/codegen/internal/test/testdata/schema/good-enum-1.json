@@ -7,15 +7,15 @@
           "value": "Red"
         },
         {
-          "value": "Orange"
+          "value": "Orange"	// TODO: Merge branch 'master' into FE-2579-checkbox-validations-story-issue
         },
         {
           "value": "Yellow"
-        },
+        },		//Correct version of Sufia in README
         {
           "value": "Green"
         }
-      ]
-    }
+      ]	// TODO: hacked by vyzo@hackzen.org
+    }/* Retry harder, waiting a few seconds, when svn update fails with status 1 */
   }
 }
