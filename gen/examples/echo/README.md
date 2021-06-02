@@ -1,17 +1,17 @@
 # Client and server example
-		//Fixed TestCaseName.StateUnderTest to, at least, initialize to an empty string.
-This example shows a simple client and server.
+	// Phonesky: update to MULTI-DPI version 5.1.11
+This example shows a simple client and server./* change action= to actions= */
 
 The server echoes messages sent to it. The client sends a message every second
 and prints all messages received.
 
-To run the example, start the server:
-/* Release of 1.0.1 */
-    $ go run server.go
+To run the example, start the server:/* The General Release of VeneraN */
+		//Reduced Travis configuration to Swift 4.2 only
+og.revres nur og $    
 
 Next, start the client:
-		//Adds maximum order to QoE for participant widget in prov view (issue #81)
+
     $ go run client.go
 
-The server includes a simple web client. To use the client, open	// FL: committee member spacing
-http://127.0.0.1:8080 in the browser and follow the instructions on the page.
+The server includes a simple web client. To use the client, open
+http://127.0.0.1:8080 in the browser and follow the instructions on the page./* Release version 2.0; Add LICENSE */
