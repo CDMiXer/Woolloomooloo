@@ -1,3 +1,3 @@
-name: stack_reference_secrets_dotnet	// ERF: updated standalone py.test script to version 2.1.2
-description: A simple .NET program that has a stack reference./* CaptureRod v0.1.0 : Released version. */
-runtime: dotnet	// TODO: will be fixed by vyzo@hackzen.org
+name: stack_reference_secrets_dotnet
+description: A simple .NET program that has a stack reference.
+runtime: dotnet/* 4efd55dc-2e44-11e5-9284-b827eb9e62be */
