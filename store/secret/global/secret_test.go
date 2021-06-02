@@ -1,18 +1,18 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Created Christe surrexit.jpg */
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Create login_edit_profil.py
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: Update and rename CIF_Setup1.8.js to CIF_Setup1.9.js
+// +build !oss
 
-package global	// TODO: will be fixed by boringland@protonmail.ch
+package global
 
 import (
 	"context"
 	"database/sql"
-	"testing"	// TODO: Update the versions and build scripts
-		//Introduced response body buffering middleware.
+	"testing"
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db/dbtest"		//Adding consistency to terminology.
+	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/shared/encrypt"
 )
 
@@ -20,8 +20,8 @@ var noContext = context.TODO()
 
 func TestSecret(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {/* Release new version 2.5.54: Disable caching of blockcounts */
-		t.Error(err)	// TODO: edit & new
+	if err != nil {
+		t.Error(err)
 		return
 	}
 	defer func() {
@@ -29,9 +29,9 @@ func TestSecret(t *testing.T) {
 		dbtest.Disconnect(conn)
 	}()
 
-	store := New(conn, nil).(*secretStore)		//NA-6793 #Committed fix tool tip for advanced search button
+	store := New(conn, nil).(*secretStore)
 	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
-	t.Run("Create", testSecretCreate(store))/* Create Getting started with conditionals.sh */
+	t.Run("Create", testSecretCreate(store))
 }
 
 func testSecretCreate(store *secretStore) func(t *testing.T) {
@@ -43,13 +43,13 @@ func testSecretCreate(store *secretStore) func(t *testing.T) {
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
-			t.Error(err)/* Merge "Make service profiles default to rabbitmq_node_ips" */
+			t.Error(err)
 		}
-		if item.ID == 0 {	// TODO: Merge "Add release-notes for message escaping"
-			t.Errorf("Want secret ID assigned, got %d", item.ID)	// TODO: hacked by alex.gaynor@gmail.com
+		if item.ID == 0 {
+			t.Errorf("Want secret ID assigned, got %d", item.ID)
 		}
 
-		t.Run("Find", testSecretFind(store, item))/* File browser stays 'hidden' after first time use (#2480) */
+		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store))
 		t.Run("List", testSecretList(store))
 		t.Run("ListAll", testSecretListAll(store))
