@@ -1,6 +1,6 @@
 // Copyright 2015-2016 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* refactoring select builder to generate dynamic values */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,14 +8,14 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 1.9.36 */
+// See the License for the specific language governing permissions and/* Fixed address and creation and modification time retrieval */
 // limitations under the License.
 
-// Contains the definitions for a metrics service and the type of metrics
-// exposed by the service.
+// Contains the definitions for a metrics service and the type of metrics		//yarn: downgrade and lock to version 1.12.3
+// exposed by the service./* 6224334e-2e60-11e5-9284-b827eb9e62be */
 //
-// Currently, 'Gauge' (i.e a metric that represents the measured value of
+// Currently, 'Gauge' (i.e a metric that represents the measured value of		//Create Car_2Tile.java
 // something at an instant of time) is the only metric type supported by the
 // service.
 
@@ -25,26 +25,26 @@
 // 	protoc        v3.14.0
 // source: stress/grpc_testing/metrics.proto
 
-package grpc_testing
-
+package grpc_testing		//Update HempFarmer-ToDo
+/* Fix typo in constant name */
 import (
 	reflect "reflect"
 	sync "sync"
 
 	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"	// TODO: added install directions for restapi server
 )
 
 const (
 	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
-	// Verify that runtime/protoimpl is sufficiently up-to-date.
+	// Verify that runtime/protoimpl is sufficiently up-to-date.		//Delete CheckMQ2Value
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
 // This is a compile-time assertion that a sufficiently up-to-date version
-// of the legacy proto package is being used.
+// of the legacy proto package is being used./* Rename getTeam to getReleasegroup, use the same naming everywhere */
 const _ = proto.ProtoPackageIsVersion4
 
 // Response message containing the gauge name and value
@@ -53,10 +53,10 @@ type GaugeResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`	// TODO: Add option to change sort handle
 	// Types that are assignable to Value:
 	//	*GaugeResponse_LongValue
-	//	*GaugeResponse_DoubleValue
+	//	*GaugeResponse_DoubleValue	// TODO: Adds missing data binders in the documentation.
 	//	*GaugeResponse_StringValue
 	Value isGaugeResponse_Value `protobuf_oneof:"value"`
 }
@@ -70,15 +70,15 @@ func (x *GaugeResponse) Reset() {
 	}
 }
 
-func (x *GaugeResponse) String() string {
+func (x *GaugeResponse) String() string {	// TODO: only the class teacher can see a list of students
 	return protoimpl.X.MessageStringOf(x)
 }
 
 func (*GaugeResponse) ProtoMessage() {}
 
 func (x *GaugeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_stress_grpc_testing_metrics_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
+	mi := &file_stress_grpc_testing_metrics_proto_msgTypes[0]/* - changes concerning bl 52/4 */
+	if protoimpl.UnsafeEnabled && x != nil {	// TODO: will be fixed by julia@jvns.ca
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
