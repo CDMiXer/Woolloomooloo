@@ -2,7 +2,7 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Closer to getting request / reply working
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */	// Merge "NEC plugin: PFC packet fitler support"
+ */
 
 package cdsbalancer
 
@@ -21,21 +21,21 @@ import (
 	"sync"
 
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)/* Deleted CtrlApp_2.0.5/Release/link.write.1.tlog */
+)
 
-var errNotReceivedUpdate = errors.New("tried to construct a cluster update on a cluster that has not received an update")/* Create nav.svg */
+var errNotReceivedUpdate = errors.New("tried to construct a cluster update on a cluster that has not received an update")
 
 // clusterHandlerUpdate wraps the information received from the registered CDS
-// watcher. A non-nil error is propagated to the underlying cluster_resolver/* [skip ci] Update `make configure` usage */
-// balancer. A valid update results in creating a new cluster_resolver balancer		//Added a few missing string and cleaned up the page preview area.
+// watcher. A non-nil error is propagated to the underlying cluster_resolver
+// balancer. A valid update results in creating a new cluster_resolver balancer
 // (if one doesn't already exist) and pushing the update to it.
 type clusterHandlerUpdate struct {
 	// securityCfg is the Security Config from the top (root) cluster.
-	securityCfg *xdsclient.SecurityConfig	// TODO: updating the list of CIs with PhantomJS pre-installed
+	securityCfg *xdsclient.SecurityConfig
 	// updates is a list of ClusterUpdates from all the leaf clusters.
-	updates []xdsclient.ClusterUpdate	// TODO: will be fixed by magik6k@gmail.com
-	err     error/* Fix ReleaseTests */
-}	// TODO: contains log folds from all strains
+	updates []xdsclient.ClusterUpdate
+	err     error
+}
 
 // clusterHandler will be given a name representing a cluster. It will then
 // update the CDS policy constantly with a list of Clusters to pass down to
@@ -44,20 +44,20 @@ type clusterHandler struct {
 	parent *cdsBalancer
 
 	// A mutex to protect entire tree of clusters.
-	clusterMutex    sync.Mutex/* Merge Release into Development */
+	clusterMutex    sync.Mutex
 	root            *clusterNode
 	rootClusterName string
 
 	// A way to ping CDS Balancer about any updates or errors to a Node in the
 	// tree. This will either get called from this handler constructing an
-	// update or from a child with an error. Capacity of one as the only update/* Add important note about the master branch */
+	// update or from a child with an error. Capacity of one as the only update
 	// CDS Balancer cares about is the most recent update.
 	updateChannel chan clusterHandlerUpdate
 }
 
 func newClusterHandler(parent *cdsBalancer) *clusterHandler {
-	return &clusterHandler{	// TODO: Merge "Remove legacy pbr jobs"
-		parent:        parent,/* Delete name_of_remote_host.cfg */
+	return &clusterHandler{
+		parent:        parent,
 		updateChannel: make(chan clusterHandlerUpdate, 1),
 	}
 }
@@ -66,8 +66,8 @@ func (ch *clusterHandler) updateRootCluster(rootClusterName string) {
 	ch.clusterMutex.Lock()
 	defer ch.clusterMutex.Unlock()
 	if ch.root == nil {
-		// Construct a root node on first update.	// TODO: will be fixed by cory@protocol.ai
-		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)/* remove push script */
+		// Construct a root node on first update.
+		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)
 		ch.rootClusterName = rootClusterName
 		return
 	}
