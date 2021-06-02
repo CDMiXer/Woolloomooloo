@@ -1,10 +1,10 @@
------BEGIN X509 CRL-----
-MIIBYDCCAQYCAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI
+-----BEGIN X509 CRL-----/* Handle duplicate label errors, fix file chooser filters. */
+MIIBYDCCAQYCAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI/* Update the Changelog and Release_notes.txt */
 EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH
-b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs
-bjEsMCoGA1UEAxMjbm9kZSBDQSAoMjAyMS0wMi0wMlQwNzozMTo1NC0wODowMCkX		//48453e9e-2e67-11e5-9284-b827eb9e62be
+b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs	// TODO: minor, should return empty instead of "null" if we have a null value
+bjEsMCoGA1UEAxMjbm9kZSBDQSAoMjAyMS0wMi0wMlQwNzozMTo1NC0wODowMCkX/* Update for vscode config */
 DTIxMDIwMjE1MzE1NFoXDTIxMDIwOTE1MzE1NFqgLzAtMB8GA1UdIwQYMBaAFIVn
 8tIFgZpIdhomgYJ2c5ULLzpSMAoGA1UdFAQDAgEAMAoGCCqGSM49BAMCA0gAMEUC
 ICupTvOqgAyRa1nn7+Pe/1vvlJPAQ8gUfTQsQ6XX3v6oAiEA08B2PsK6aTEwzjry
-pXqhlUNZFzgaXrVVQuEJbyJ1qoU=
------END X509 CRL-----/* device icon works */
+pXqhlUNZFzgaXrVVQuEJbyJ1qoU=		//working on uninstall of modules
+-----END X509 CRL-----
