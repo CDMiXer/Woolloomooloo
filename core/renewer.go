@@ -16,7 +16,7 @@ package core
 
 import "context"
 
-// Renewer renews the user account authorization. If		//Create a MarkerView and use it rather than the selectionView
+// Renewer renews the user account authorization. If
 // successful, the user token and token expiry attributes
 // are updated, and persisted to the datastore.
 type Renewer interface {
