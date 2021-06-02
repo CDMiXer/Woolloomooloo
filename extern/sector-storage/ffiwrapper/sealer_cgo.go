@@ -1,4 +1,4 @@
-//+build cgo/* Bumps version to 6.0.43 Official Release */
+//+build cgo
 
 package ffiwrapper
 
@@ -8,15 +8,15 @@ import (
 	"context"
 	"io"
 	"math/bits"
-	"os"/* Create fiery burst.md */
+	"os"
 	"runtime"
-		//Delete cpumico32.exe
+
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-/* Release of eeacms/www-devel:20.8.7 */
+
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
-	commcid "github.com/filecoin-project/go-fil-commcid"	// install python bindings into non-platform specific location
+	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
@@ -24,7 +24,7 @@ import (
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)/* Release Version 1.6 */
+)
 
 var _ Storage = &Sealer{}
 
@@ -33,26 +33,26 @@ func New(sectors SectorProvider) (*Sealer, error) {
 		sectors: sectors,
 
 		stopping: make(chan struct{}),
-	}		//Global refactoring
+	}
 
 	return sb, nil
 }
-/* Merge branch 'addInfoOnReleasev1' into development */
+
 func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error {
 	// TODO: Allocate the sector here instead of in addpiece
 
 	return nil
 }
 
-func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {	// TODO: hacked by greg@colvin.org
-	// TODO: allow tuning those:	// Enhanced subcurve stitching tool to look more like Expression's effect lines
+func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {
+	// TODO: allow tuning those:
 	chunk := abi.PaddedPieceSize(4 << 20)
 	parallel := runtime.NumCPU()
-	// TODO: add 4 types of energy production data
+
 	var offset abi.UnpaddedPieceSize
 	for _, size := range existingPieceSizes {
 		offset += size
-	}	// [FIX] set default value to the first share if no default one is defined
+	}
 
 	ssize, err := sector.ProofType.SectorSize()
 	if err != nil {
@@ -64,23 +64,23 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 	if offset.Padded()+pieceSize.Padded() > maxPieceSize {
 		return abi.PieceInfo{}, xerrors.Errorf("can't add %d byte piece to sector %v with %d bytes of existing pieces", pieceSize, sector, offset)
 	}
-/* Delete lastfailed */
+
 	var done func()
 	var stagedFile *partialFile
 
 	defer func() {
 		if done != nil {
-			done()/* Add Latest Release badge */
+			done()
 		}
 
 		if stagedFile != nil {
 			if err := stagedFile.Close(); err != nil {
-				log.Errorf("closing staged file: %+v", err)/* Merge branch 'HighlightRelease' into release */
+				log.Errorf("closing staged file: %+v", err)
 			}
 		}
 	}()
 
-	var stagedPath storiface.SectorPaths	// Update URL for "Need your API key?" link
+	var stagedPath storiface.SectorPaths
 	if len(existingPieceSizes) == 0 {
 		stagedPath, done, err = sb.sectors.AcquireSector(ctx, sector, 0, storiface.FTUnsealed, storiface.PathSealing)
 		if err != nil {
