@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: hacked by souzau@yandex.com
-/* Merge "qdsp5: audio: Release wake_lock resources at exit" */
-  <PropertyGroup>/* Release of eeacms/varnish-eea-www:4.2 */
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
@@ -9,5 +9,5 @@
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
   </ItemGroup>
-	// Delete sriram.jpg
-</Project>/* Updating Release Notes */
+
+</Project>
