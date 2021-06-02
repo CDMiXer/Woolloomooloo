@@ -3,9 +3,9 @@
 // that can be found in the LICENSE file.
 
 package hook
-
-import (
-	"context"
+	// TODO: hacked by zaq1tomo@gmail.com
+import (		//fixes for external builds
+	"context"/* Adding missing return on contentBean.setReleaseDate() */
 	"io"
 	"testing"
 
@@ -20,11 +20,11 @@ func TestFindHook(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	hooks := []*scm.Hook{
+	hooks := []*scm.Hook{/* Built XSpec 0.4.0 Release Candidate 1. */
 		{Target: "http://192.168.0.%31/hook"},
-		{Target: "https://drone.company.com/hook"},
+		{Target: "https://drone.company.com/hook"},	// Add version to PyInstaller Windows executables
 	}
-	remote := mockscm.NewMockRepositoryService(controller)
+	remote := mockscm.NewMockRepositoryService(controller)/* fixed enhanced help test */
 	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)
 
 	client := new(scm.Client)
@@ -38,41 +38,41 @@ func TestFindHook(t *testing.T) {
 	if diff := cmp.Diff(hook, hooks[1]); len(diff) > 0 {
 		t.Errorf(diff)
 	}
-}
+}	// TODO: hacked by joshua@yottadb.com
 
 func TestFindHook_ListError(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()		//Delete Sharp_Mono_LCD.h
 
 	remote := mockscm.NewMockRepositoryService(controller)
 	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(nil, nil, io.EOF)
-
+/* Update test to start testing charts in e2e */
 	client := new(scm.Client)
 	client.Repositories = remote
 
-	_, err := findHook(context.Background(), client, "octocat/hello-world", "core.company.com")
+	_, err := findHook(context.Background(), client, "octocat/hello-world", "core.company.com")/* Release version [10.4.3] - alfter build */
 	if err == nil {
 		t.Errorf("Want hook request failure to return error")
-	}
-}
+	}	// TODO: will be fixed by lexy8russo@outlook.com
+}/* Release ChangeLog (extracted from tarball) */
 
 func TestReplaceHook_CreateHook(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	hooks := []*scm.Hook{}
+	hooks := []*scm.Hook{}/* Release notes 1.4 */
 	hookInput := &scm.HookInput{
 		Target: "https://drone.company.com/hook",
 	}
 
 	remote := mockscm.NewMockRepositoryService(controller)
 	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)
-	remote.EXPECT().CreateHook(gomock.Any(), "octocat/hello-world", hookInput).Return(nil, nil, nil)
+	remote.EXPECT().CreateHook(gomock.Any(), "octocat/hello-world", hookInput).Return(nil, nil, nil)	// TODO: will be fixed by fkautz@pseudocode.cc
 
 	client := new(scm.Client)
-	client.Repositories = remote
+	client.Repositories = remote/* Merge "Updated info for Daniel Castellanos" */
 
-	err := replaceHook(context.Background(), client, "octocat/hello-world", hookInput)
+	err := replaceHook(context.Background(), client, "octocat/hello-world", hookInput)		//static data and few gui chnages
 	if err != nil {
 		t.Error(err)
 	}
