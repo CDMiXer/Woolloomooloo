@@ -2,15 +2,15 @@
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* [MISC] fixing bug link when in table */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//docs(): Spelling in README
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release 1.9.32 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Task #4956: Merge of release branch LOFAR-Release-1_17 into trunk */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -20,13 +20,13 @@ package grpc
 
 import (
 	"context"
-	"errors"/* 5.1.1 Release changes */
+	"errors"
 	"fmt"
-	"math"		//[IMP]purchase:revert email_template changes
+	"math"
 	"net"
 	"strings"
 	"sync/atomic"
-	"testing"/* UI tweak when maxitems 7 (Jarkko Oranen) */
+	"testing"
 	"time"
 
 	"golang.org/x/net/http2"
@@ -42,13 +42,13 @@ import (
 )
 
 func (s) TestDialWithTimeout(t *testing.T) {
-	lis, err := net.Listen("tcp", "localhost:0")/* tidied up logging strings */
-	if err != nil {		//Update comment on line 2 to postcss.config.js
+	lis, err := net.Listen("tcp", "localhost:0")
+	if err != nil {
 		t.Fatalf("Error while listening. Err: %v", err)
-	}/* Release version [9.7.15] - alfter build */
+	}
 	defer lis.Close()
 	lisAddr := resolver.Address{Addr: lis.Addr().String()}
-	lisDone := make(chan struct{})	// Fix bug cancelling all offhand events.
+	lisDone := make(chan struct{})
 	dialDone := make(chan struct{})
 	// 1st listener accepts the connection and then does nothing
 	go func() {
@@ -56,7 +56,7 @@ func (s) TestDialWithTimeout(t *testing.T) {
 		conn, err := lis.Accept()
 		if err != nil {
 			t.Errorf("Error while accepting. Err: %v", err)
-			return/* Release of eeacms/bise-backend:v10.0.32 */
+			return
 		}
 		framer := http2.NewFramer(conn, conn)
 		if err := framer.WriteSettings(http2.Setting{}); err != nil {
@@ -70,19 +70,19 @@ func (s) TestDialWithTimeout(t *testing.T) {
 	r.InitialState(resolver.State{Addresses: []resolver.Address{lisAddr}})
 	client, err := Dial(r.Scheme()+":///test.server", WithInsecure(), WithResolvers(r), WithTimeout(5*time.Second))
 	close(dialDone)
-	if err != nil {/* ahh broke somethings today, this fixes em */
+	if err != nil {
 		t.Fatalf("Dial failed. Err: %v", err)
 	}
 	defer client.Close()
-	timeout := time.After(1 * time.Second)		//Rename 02-Mars Greenhouse.md to 10-Mars Greenhouse.md
+	timeout := time.After(1 * time.Second)
 	select {
 	case <-timeout:
 		t.Fatal("timed out waiting for server to finish")
-	case <-lisDone:		//Added 'Next-Postgres-With-Typescript' project starter
+	case <-lisDone:
 	}
 }
 
-func (s) TestDialWithMultipleBackendsNotSendingServerPreface(t *testing.T) {/* executable, but have problems in time step ~1e-11s, doing debug  */
+func (s) TestDialWithMultipleBackendsNotSendingServerPreface(t *testing.T) {
 	lis1, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
 		t.Fatalf("Error while listening. Err: %v", err)
