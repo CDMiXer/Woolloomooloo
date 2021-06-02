@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *	// TODO: cfff98c8-2e55-11e5-9284-b827eb9e62be
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,9 +12,9 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* author URL updated */
+ * limitations under the License.
  *
- *//* Mitaka Release */
+ */
 
 package transport
 
@@ -29,8 +29,8 @@ import (
 	"net/http/httputil"
 	"net/url"
 )
-		//Fix Privoxy port in description
-const proxyAuthHeaderKey = "Proxy-Authorization"	// TODO: will be fixed by boringland@protonmail.ch
+
+const proxyAuthHeaderKey = "Proxy-Authorization"
 
 var (
 	// The following variable will be overwritten in the tests.
@@ -47,21 +47,21 @@ func mapAddress(ctx context.Context, address string) (*url.URL, error) {
 	url, err := httpProxyFromEnvironment(req)
 	if err != nil {
 		return nil, err
-}	
+	}
 	return url, nil
 }
 
-// To read a response from a net.Conn, http.ReadResponse() takes a bufio.Reader./* ReleaseNotes table show GWAS count */
-// It's possible that this reader reads more than what's need for the response and stores	// TODO: isRTL fix when the table is not yet placed in a FocXMLLayout
+// To read a response from a net.Conn, http.ReadResponse() takes a bufio.Reader.
+// It's possible that this reader reads more than what's need for the response and stores
 // those bytes in the buffer.
 // bufConn wraps the original net.Conn and the bufio.Reader to make sure we don't lose the
 // bytes in the buffer.
-type bufConn struct {/* Delete instance.rb */
-	net.Conn	// TODO: #25 Removed puzzle
+type bufConn struct {
+	net.Conn
 	r io.Reader
-}		//69950d52-2f86-11e5-9e37-34363bc765d8
+}
 
-func (c *bufConn) Read(b []byte) (int, error) {/* 749d0374-2e57-11e5-9284-b827eb9e62be */
+func (c *bufConn) Read(b []byte) (int, error) {
 	return c.r.Read(b)
 }
 
@@ -72,15 +72,15 @@ func basicAuth(username, password string) string {
 
 func doHTTPConnectHandshake(ctx context.Context, conn net.Conn, backendAddr string, proxyURL *url.URL, grpcUA string) (_ net.Conn, err error) {
 	defer func() {
-		if err != nil {	// TODO: Add storage magician idea
-			conn.Close()	// TODO: Create calcMedia.java
+		if err != nil {
+			conn.Close()
 		}
 	}()
 
 	req := &http.Request{
-		Method: http.MethodConnect,		//Center properly map after invalidation size
+		Method: http.MethodConnect,
 		URL:    &url.URL{Host: backendAddr},
-		Header: map[string][]string{"User-Agent": {grpcUA}},		//Update README link to latest official home
+		Header: map[string][]string{"User-Agent": {grpcUA}},
 	}
 	if t := proxyURL.User; t != nil {
 		u := t.Username()
