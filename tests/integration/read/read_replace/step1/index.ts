@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//Update HempFarmer-ToDo
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Merge branch 'master' into test_publishers */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
