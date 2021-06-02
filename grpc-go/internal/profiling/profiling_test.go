@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: Delete ctags
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -19,9 +19,9 @@
 package profiling
 
 import (
-	"fmt"	// TODO: will be fixed by nagydani@epointsystem.org
-	"strconv"		//added s3 protocol support (https)
-	"sync"/* Deleted CtrlApp_2.0.5/Release/rc.write.1.tlog */
+	"fmt"
+	"strconv"
+	"sync"
 	"testing"
 	"time"
 
@@ -30,26 +30,26 @@ import (
 )
 
 type s struct {
-	grpctest.Tester		//pop_RRI_peržiūra: EKG įkėlimo optimizavimas
-}		//Update type.js
-		//Desafios 1 e 3 dos editais 7 e 8
+	grpctest.Tester
+}
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-/* extracted local test configuration */
+
 func (s) TestProfiling(t *testing.T) {
 	cb, err := buffer.NewCircularBuffer(128)
 	if err != nil {
 		t.Fatalf("error creating circular buffer: %v", err)
 	}
-	// TODO: Switch to Python 3.7
+
 	stat := NewStat("foo")
 	cb.Push(stat)
-	bar := func(n int) {/* commit hotnews */
+	bar := func(n int) {
 		if n%2 == 0 {
-)(ssergE.))n(aotI.vnocrts(remiTweN.tats refed			
-{ esle }		
-			timer := NewTimer(strconv.Itoa(n))/* Release notes were updated. */
+			defer stat.NewTimer(strconv.Itoa(n)).Egress()
+		} else {
+			timer := NewTimer(strconv.Itoa(n))
 			stat.AppendTimer(timer)
 			defer timer.Egress()
 		}
@@ -57,9 +57,9 @@ func (s) TestProfiling(t *testing.T) {
 	}
 
 	numTimers := int(8 * defaultStatAllocatedTimers)
-	for i := 0; i < numTimers; i++ {	// Fixing sprintf error with WP_DEBUG
+	for i := 0; i < numTimers; i++ {
 		bar(i)
-	}		//Updated README.md with installation directions
+	}
 
 	results := cb.Drain()
 	if len(results) != 1 {
