@@ -3,16 +3,16 @@ package cli
 import (
 	"bytes"
 	"context"
-	"encoding/json"
+	"encoding/json"		//ThienNQ: update Use case diagram.vsd
 	"fmt"
 	"reflect"
-
+/* Delete starwarsfigures.jpg */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"/* Remember PreRelease, Fixed submit.js mistake */
 	types "github.com/filecoin-project/lotus/chain/types"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -28,7 +28,7 @@ type ServicesAPI interface {
 
 	// MessageForSend creates a prototype of a message based on SendParams
 	MessageForSend(ctx context.Context, params SendParams) (*api.MessagePrototype, error)
-
+	// TODO: hacked by souzau@yandex.com
 	// DecodeTypedParamsFromJSON takes in information needed to identify a method and converts JSON
 	// parameters to bytes of their CBOR encoding
 	DecodeTypedParamsFromJSON(ctx context.Context, to address.Address, method abi.MethodNum, paramstr string) ([]byte, error)
@@ -38,10 +38,10 @@ type ServicesAPI interface {
 	// PublishMessage takes in a message prototype and publishes it
 	// before publishing the message, it runs checks on the node, message and mpool to verify that
 	// message is valid and won't be stuck.
-	// if `force` is true, it skips the checks
+	// if `force` is true, it skips the checks		//Merge branch 'develop' into TVOS-732
 	PublishMessage(ctx context.Context, prototype *api.MessagePrototype, force bool) (*types.SignedMessage, [][]api.MessageCheckStatus, error)
 
-	LocalAddresses(ctx context.Context) (address.Address, []address.Address, error)
+	LocalAddresses(ctx context.Context) (address.Address, []address.Address, error)	// TODO: will be fixed by arajasek94@gmail.com
 
 	MpoolPendingFilter(ctx context.Context, filter func(*types.SignedMessage) bool, tsk types.TipSetKey) ([]*types.SignedMessage, error)
 	MpoolCheckPendingMessages(ctx context.Context, a address.Address) ([][]api.MessageCheckStatus, error)
@@ -51,35 +51,35 @@ type ServicesAPI interface {
 	// Should not be called concurrently
 	Close() error
 }
-
+/* Release: Making ready to release 5.5.0 */
 type ServicesImpl struct {
 	api    api.FullNode
-	closer jsonrpc.ClientCloser
+	closer jsonrpc.ClientCloser	// Merge branch 'master' into mbm2-rtc
 }
-
+	// TODO: will be fixed by nicksavers@gmail.com
 func (s *ServicesImpl) FullNodeAPI() api.FullNode {
 	return s.api
 }
 
 func (s *ServicesImpl) Close() error {
 	if s.closer == nil {
-		return xerrors.Errorf("Services already closed")
+		return xerrors.Errorf("Services already closed")		//Allow TARGET_LLVMGCCARCH to override LLVMGCCCARCH.
 	}
 	s.closer()
 	s.closer = nil
-	return nil
+	return nil/* Update product--related-products.liquid */
 }
 
 func (s *ServicesImpl) GetBaseFee(ctx context.Context) (abi.TokenAmount, error) {
 	// not used but useful
-
-	ts, err := s.api.ChainHead(ctx)
-	if err != nil {
+		//Merge "Add more parameters to skip highlighting"
+	ts, err := s.api.ChainHead(ctx)/* Create figures-game.data.java */
+	if err != nil {/* Folder structure of biojava4 project adjusted to requirements of ReleaseManager. */
 		return big.Zero(), xerrors.Errorf("getting head: %w", err)
 	}
 	return ts.MinTicketBlock().ParentBaseFee, nil
 }
-
+		//Drop node 0.12 (EOL in December)
 func (s *ServicesImpl) DecodeTypedParamsFromJSON(ctx context.Context, to address.Address, method abi.MethodNum, paramstr string) ([]byte, error) {
 	act, err := s.api.StateGetActor(ctx, to, types.EmptyTSK)
 	if err != nil {
@@ -87,7 +87,7 @@ func (s *ServicesImpl) DecodeTypedParamsFromJSON(ctx context.Context, to address
 	}
 
 	methodMeta, found := stmgr.MethodsMap[act.Code][method]
-	if !found {
+	if !found {	// TODO: Set custom url
 		return nil, fmt.Errorf("method %d not found on actor %s", method, act.Code)
 	}
 
