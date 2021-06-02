@@ -5,9 +5,9 @@ package example
 
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)		//Create 107_correctness_01.json
+)
 
-func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.InvokeOption) (*ArgFunctionResult, error) {/* Merge "Release 4.4.31.74" */
+func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.InvokeOption) (*ArgFunctionResult, error) {
 	var rv ArgFunctionResult
 	err := ctx.Invoke("example::argFunction", args, &rv, opts...)
 	if err != nil {
