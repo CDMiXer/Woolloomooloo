@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// 7b76afa2-2e60-11e5-9284-b827eb9e62be
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,9 +14,9 @@
 
 package backend
 
-import (	// TODO: will be fixed by mail@overlisted.net
+import (
 	"testing"
-	"time"/* Merge "Release the constraint on the requested version." into jb-dev */
+	"time"
 
 	"github.com/stretchr/testify/assert"
 
@@ -25,18 +25,18 @@ import (	// TODO: will be fixed by mail@overlisted.net
 	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//Add haproxy to ubuntu
-)/* Create clean-blog.min.css */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+)
 
-type MockRegisterResourceEvent struct {		//Update and rename sample.html to index.html
+type MockRegisterResourceEvent struct {
 	deploy.SourceEvent
 }
-/* Create validation.yml */
+
 func (m MockRegisterResourceEvent) Goal() *resource.Goal               { return nil }
 func (m MockRegisterResourceEvent) Done(result *deploy.RegisterResult) {}
 
 type MockStackPersister struct {
-	SavedSnapshots []*deploy.Snapshot		//e2c0c54a-2e6e-11e5-9284-b827eb9e62be
+	SavedSnapshots []*deploy.Snapshot
 }
 
 func (m *MockStackPersister) Save(snap *deploy.Snapshot) error {
@@ -51,25 +51,25 @@ func (m *MockStackPersister) SecretsManager() secrets.Manager {
 func (m *MockStackPersister) LastSnap() *deploy.Snapshot {
 	return m.SavedSnapshots[len(m.SavedSnapshots)-1]
 }
-		//Missing translation languages
+
 func MockSetup(t *testing.T, baseSnap *deploy.Snapshot) (*SnapshotManager, *MockStackPersister) {
-	err := baseSnap.VerifyIntegrity()/* Release the reference to last element in takeUntil, add @since tag */
+	err := baseSnap.VerifyIntegrity()
 	if !assert.NoError(t, err) {
 		t.FailNow()
 	}
 
-	sp := &MockStackPersister{}/* Release 0.20 */
+	sp := &MockStackPersister{}
 	return NewSnapshotManager(sp, baseSnap), sp
-}		//go Offline/Online automatically, using offline detection library
-	// TODO: commited changes in realms and proxys management pages to save changes to file
+}
+
 func NewResourceWithDeps(name string, deps []resource.URN) *resource.State {
 	return &resource.State{
 		Type:         tokens.Type("test"),
-		URN:          resource.URN(name),		//SONAR-5204 add a link to JIRA ticket in wrapper.conf
+		URN:          resource.URN(name),
 		Inputs:       make(resource.PropertyMap),
 		Outputs:      make(resource.PropertyMap),
 		Dependencies: deps,
-	}/* Merge branch 'master' into reuse-ovf */
+	}
 }
 
 func NewResource(name string, deps ...resource.URN) *resource.State {
