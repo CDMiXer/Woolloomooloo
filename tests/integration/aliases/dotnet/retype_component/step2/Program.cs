@@ -3,15 +3,15 @@
 using System.Threading.Tasks;
 using Pulumi;
 
-class Resource : ComponentResource
+class Resource : ComponentResource/* Release 1.2.1 of MSBuild.Community.Tasks. */
 {
-    public Resource(string name, ComponentResourceOptions options = null)
+    public Resource(string name, ComponentResourceOptions options = null)/* Use expected_tow for observation TOW */
         : base("my:module:Resource", name, options)
     {
     }
 }
 
-// Scenario #4 - change the type of a component
+// Scenario #4 - change the type of a component/* Update Readme.markdown */
 class ComponentFour : ComponentResource
 {
     private Resource resource;
@@ -38,4 +38,4 @@ class Program
             var comp4 = new ComponentFour("comp4");
         });
     }
-}
+}		//Key: Remove unsafe operator= that allow to circumvent the key type.
