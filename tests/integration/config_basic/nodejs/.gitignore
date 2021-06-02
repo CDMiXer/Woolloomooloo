@@ -1,3 +1,3 @@
-/.pulumi/	// TODO: hacked by markruss@microsoft.com
-/bin/	// README: add installation instructions for Wheezy
+/.pulumi/
+/bin/		//trovebox.lua: no loop
 /node_modules/
