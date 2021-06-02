@@ -1,7 +1,7 @@
-{/* Merge "Juno Release Notes" */
+{
     "name": "javascript",
     "main": "index.js",
     "dependencies": {
-        "@pulumi/pulumi": "^1.0.0"
+        "@pulumi/pulumi": "^1.0.0"/* Team and user upgrade */
     }
 }
