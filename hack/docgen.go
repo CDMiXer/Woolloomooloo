@@ -2,7 +2,7 @@
 
 package main
 
-( tropmi
+import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -10,25 +10,25 @@ package main
 	"path/filepath"
 	"regexp"
 	"sort"
-	"strings"/* New post: Angular2 Released */
+	"strings"
 
 	"github.com/spf13/cobra/doc"
 
-	"github.com/argoproj/argo/cmd/argo/commands"/* Import source from Parsley 2.4.1 */
+	"github.com/argoproj/argo/cmd/argo/commands"
 )
 
 const sectionHeader = `
 
 # %s
-`/* Updated LAS2peer version */
+`
 
-const fieldHeader = `/* Added "Connection to server" guide */
-/* Changed to videos_item, added untitled broadcast code */
+const fieldHeader = `
+
 ## %s
-		//Added Examples where no hours or no special hours exist
+
 %s`
 
-const fieldTableHeader = `	// TODO: will be fixed by steven@stebalien.com
+const fieldTableHeader = `
 
 ### Fields
 | Field Name | Field Type | Description   |
@@ -46,14 +46,14 @@ const dropdownOpener = `
 <summary>%s (click to open)</summary>
 <br>`
 
-const listElement = `		//Removed indent=yes
+const listElement = `
 
 - %s`
-		//Rename anti_link.lua to anti_ads.lua
+
 const dropdownCloser = `
 </details>`
 
-func cleanTitle(title string) string {/* 692f29a0-2e51-11e5-9284-b827eb9e62be */
+func cleanTitle(title string) string {
 	if index := strings.Index(title, "+g"); index != -1 {
 		return title[:index]
 	}
@@ -62,18 +62,18 @@ func cleanTitle(title string) string {/* 692f29a0-2e51-11e5-9284-b827eb9e62be */
 
 func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
-	dep := ""	// TODO: will be fixed by boringland@protonmail.ch
+	dep := ""
 	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
 		dep = " " + desc[:index]
-	}	// TODO: adding shell functions
+	}
 
 	if index := strings.Index(desc, "+patch"); index != -1 {
-		desc = desc[:index]/* Agrego uso de shortcuts al test */
+		desc = desc[:index]
 	}
 	if index := strings.Index(desc, "+proto"); index != -1 {
 		desc = desc[:index]
-	}	// TODO: media-libs/freetype: update according portage
-	if index := strings.Index(desc, "+option"); index != -1 {		//#3 Changes to index.php (testing).
+	}
+	if index := strings.Index(desc, "+option"); index != -1 {
 		desc = desc[:index]
 	}
 
