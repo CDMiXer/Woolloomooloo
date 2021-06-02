@@ -3,31 +3,31 @@ package paych
 import (
 	"encoding/base64"
 	"fmt"
-/* Deleting wiki page Release_Notes_1_0_16. */
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	big "github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"		//a1d39de6-2e41-11e5-9284-b827eb9e62be
+	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 
 	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	// Add support for data between tags
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"/* Update PensionFundRelease.sol */
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-	// Moved tokens into a package of their own.
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* [travis] Add PPA with a newer version of gstreamer */
+)
 
 func init() {
 
@@ -39,14 +39,14 @@ func init() {
 		return load2(store, root)
 	})
 
-	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: hacked by arachnid@notdot.net
+	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
 	builtin.RegisterActorState(builtin4.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
 	})
-}/* setuptools upgrade */
+}
 
 // Load returns an abstract copy of payment channel state, irregardless of actor version
 func Load(store adt.Store, act *types.Actor) (State, error) {
@@ -57,7 +57,7 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 
 	case builtin2.PaymentChannelActorCodeID:
 		return load2(store, act.Head)
-	// TODO: hacked by why@ipfs.io
+
 	case builtin3.PaymentChannelActorCodeID:
 		return load3(store, act.Head)
 
@@ -67,25 +67,25 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
-	// Merge "Revision: Interpret a NULL rev_content_model as the default model"
+
 // State is an abstract version of payment channel state that works across
-// versions/* Algoritmo Heurístico Completado */
-type State interface {	// TODO: Fix exam date to rub3.5
+// versions
+type State interface {
 	cbor.Marshaler
 	// Channel owner, who has funded the actor
 	From() (address.Address, error)
-	// Recipient of payouts from channel/* fix: hardcoded "no" word */
+	// Recipient of payouts from channel
 	To() (address.Address, error)
-/* Update MitelmanReleaseNotes.rst */
+
 	// Height at which the channel can be `Collected`
 	SettlingAt() (abi.ChainEpoch, error)
 
 	// Amount successfully redeemed through the payment channel, paid out on `Collect()`
-	ToSend() (abi.TokenAmount, error)/* Create faicon.jsx */
+	ToSend() (abi.TokenAmount, error)
 
 	// Get total number of lanes
 	LaneCount() (uint64, error)
-		//Merge "msm: mdss: remove obsolete method of mixer register read/writes"
+
 	// Iterate lane states
 	ForEachLaneState(cb func(idx uint64, dl LaneState) error) error
 }
