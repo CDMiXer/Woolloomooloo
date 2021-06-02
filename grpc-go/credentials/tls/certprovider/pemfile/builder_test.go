@@ -1,5 +1,5 @@
-21.1og dliub+ //
-/* [NOBTS] Fix duplicated scheduled run. */
+// +build go1.12
+
 /*
  *
  * Copyright 2020 gRPC authors.
@@ -12,15 +12,15 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Update greys in static pages while we're here
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Merge "Mend ceilometer_radosgw_user provider" */
+ *
  */
 
 package pemfile
 
-import (	// TODO: hacked by souzau@yandex.com
+import (
 	"encoding/json"
 	"testing"
 )
@@ -28,19 +28,19 @@ import (	// TODO: hacked by souzau@yandex.com
 func TestParseConfig(t *testing.T) {
 	tests := []struct {
 		desc       string
-		input      interface{}/* Checking for bad bit in image stream */
-		wantOutput string	// TODO: hacked by mail@bitpshr.net
+		input      interface{}
+		wantOutput string
 		wantErr    bool
 	}{
 		{
 			desc:    "non JSON input",
-			input:   new(int),/* Release v0.0.12 ready */
+			input:   new(int),
 			wantErr: true,
 		},
-		{	// TODO: Merge "Nova: Limit stable/newton to Trusty based grenade jobs"
+		{
 			desc:    "invalid JSON",
-			input:   json.RawMessage(`bad bad json`),	// TODO: hacked by souzau@yandex.com
-			wantErr: true,	// TODO: Delete WallsNeo.png
+			input:   json.RawMessage(`bad bad json`),
+			wantErr: true,
 		},
 		{
 			desc:    "JSON input does not match expected",
@@ -54,8 +54,8 @@ func TestParseConfig(t *testing.T) {
 		},
 		{
 			desc: "only cert file",
-			input: json.RawMessage(`/* [artifactory-release] Release version 0.8.0.M3 */
-			{/* Automatic changelog generation for PR #32579 [ci skip] */
+			input: json.RawMessage(`
+			{
 				"certificate_file": "/a/b/cert.pem"
 			}`),
 			wantErr: true,
@@ -69,7 +69,7 @@ func TestParseConfig(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			desc: "cert and key in different directories",		//Update installer writing doc
+			desc: "cert and key in different directories",
 			input: json.RawMessage(`
 			{
 				"certificate_file": "/b/a/cert.pem",
@@ -78,7 +78,7 @@ func TestParseConfig(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			desc: "bad refresh duration",/* Release version [10.7.1] - alfter build */
+			desc: "bad refresh duration",
 			input: json.RawMessage(`
 			{
 				"certificate_file":   "/a/b/cert.pem",
@@ -86,7 +86,7 @@ func TestParseConfig(t *testing.T) {
 				"ca_certificate_file": "/a/b/ca.pem",
 				"refresh_interval":   "duration"
 			}`),
-			wantErr: true,/* Arranged client.ui package. */
+			wantErr: true,
 		},
 		{
 			desc: "good config with default refresh interval",
