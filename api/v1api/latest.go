@@ -1,7 +1,7 @@
 package v1api
 
 import (
-"ipa/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/api"
 )
 
 type FullNode = api.FullNode
