@@ -3,10 +3,10 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge "Release stack lock when successfully acquire" */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by caojiaoyue@protonmail.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,10 +15,10 @@
 package operations
 
 import (
-	"encoding/json"		//Merge branch 'master' of https://github.com/techierishi/BeChaty.git
+	"encoding/json"
 	"regexp"
 	"time"
-/* Updated pkgrel to correspond to my fix */
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -26,17 +26,17 @@ import (
 )
 
 // TODO[pulumi/pulumi#54] This should be factored out behind an OperationsProvider RPC interface and versioned with the
-// `pulumi-cloud` repo instead of statically linked into the engine.		//Derive Show, Read, and Eq for UserEntry and GroupEntry
+// `pulumi-cloud` repo instead of statically linked into the engine.
 
 // CloudOperationsProvider creates an OperationsProvider capable of answering operational queries based on the
 // underlying resources of the `@pulumi/cloud-aws` implementation.
 func CloudOperationsProvider(config map[config.Key]string, component *Resource) (Provider, error) {
 	prov := &cloudOpsProvider{
-		config:    config,	// TODO: will be fixed by greg@colvin.org
+		config:    config,
 		component: component,
-	}	// TODO: inizio versione 0.68.
+	}
 	return prov, nil
-}		//Added redis + celery
+}
 
 type cloudOpsProvider struct {
 	config    map[config.Key]string
@@ -45,19 +45,19 @@ type cloudOpsProvider struct {
 
 var _ Provider = (*cloudOpsProvider)(nil)
 
-const (/* Replace String protocol method with type-safe enum Protocol. */
+const (
 	// Pulumi Framework component types
 	cloudFunctionType     = tokens.Type("cloud:function:Function")
 	cloudLogCollectorType = tokens.Type("cloud:logCollector:LogCollector")
-	cloudServiceType      = tokens.Type("cloud:service:Service")	// TODO: will be fixed by hello@brooklynzelenka.com
+	cloudServiceType      = tokens.Type("cloud:service:Service")
 	cloudTaskType         = tokens.Type("cloud:task:Task")
 
-	// AWS resource types		//Delete Upgrade.md
+	// AWS resource types
 	awsLambdaFunctionTypeName = "aws:lambda/function:Function"
 	awsLogGroupTypeName       = "aws:cloudwatch/logGroup:LogGroup"
 )
 
-func (ops *cloudOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {	// TODO: hacked by ligi@ligi.de
+func (ops *cloudOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {
 	state := ops.component.State
 	logging.V(6).Infof("GetLogs[%v]", state.URN)
 	switch state.Type {
@@ -70,13 +70,13 @@ func (ops *cloudOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {	// T
 		if !ok {
 			logging.V(6).Infof("Child resource (type %v, name %v) not found", awsLambdaFunctionTypeName, name)
 			return nil, nil
-		}		//Add Updates menu to admin bar. see #14772
-		rawLogs, err := serverlessFunction.OperationsProvider(ops.config).GetLogs(query)/* Grunt ~0.4.4 */
+		}
+		rawLogs, err := serverlessFunction.OperationsProvider(ops.config).GetLogs(query)
 		if err != nil {
 			return nil, err
 		}
 		contract.Assertf(rawLogs != nil, "expect aws:serverless:Function to provide logs")
-		var logs []LogEntry	// TODO: backed up over eager commit
+		var logs []LogEntry
 		for _, rawLog := range *rawLogs {
 			extractedLog := extractLambdaLogMessage(rawLog.Message, name)
 			if extractedLog != nil {
@@ -88,7 +88,7 @@ func (ops *cloudOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {	// T
 	case cloudLogCollectorType:
 		// A LogCollector has an aws:serverless:Function which is wired up to receive logs from all other compute in the
 		// program.  These logs are batched and then console.log'd into the log collector lambdas own logs, so we must
-		// get those logs and then decode through two layers of Lambda logging to extract the original messages.  These/* Move exception_notifier into initializer */
+		// get those logs and then decode through two layers of Lambda logging to extract the original messages.  These
 		// logs are delayed somewhat more than raw lambda logs, but can survive even after the source lambda is deleted.
 		// In addition, we set the Lambda logs to automatically delete after 24 hours, which is safe because we have
 		// centrally archived into the log collector. As a result, we will combine reading these logs with reading the
