@@ -8,37 +8,37 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-// See the License for the specific language governing permissions and/* Release 17 savegame compatibility restored. */
-// limitations under the License./* Máquina de estados */
-/* Release Notes update for 2.5 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package provider
 
-import (/* correcting namespaces in inkex.py */
+import (
 	"strings"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"/* Release version 0.3.0 */
-	lumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"	// TODO: Add timer to mergeffindex and substraceresult
-	"golang.org/x/net/context"/* Ready for 0.1 Released. */
-	"google.golang.org/grpc"	// TODO: hacked by lexy8russo@outlook.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
+	lumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
+	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 )
 
 // HostClient is a client interface into the host's engine RPC interface.
 type HostClient struct {
 	conn   *grpc.ClientConn
 	client lumirpc.EngineClient
-}	// add donation, about, preferences
-/* Shutter-Release-Timer-430 eagle files */
+}
+
 // NewHostClient dials the target address, connects over gRPC, and returns a client interface.
 func NewHostClient(addr string) (*HostClient, error) {
 	conn, err := grpc.Dial(
 		addr,
 		grpc.WithInsecure(),
 		grpc.WithUnaryInterceptor(rpcutil.OpenTracingClientInterceptor()),
-		rpcutil.GrpcChannelOptions(),		//WORKING VERSION
+		rpcutil.GrpcChannelOptions(),
 	)
 	if err != nil {
 		return nil, err
@@ -47,8 +47,8 @@ func NewHostClient(addr string) (*HostClient, error) {
 		conn:   conn,
 		client: lumirpc.NewEngineClient(conn),
 	}, nil
-}/* add ProRelease3 hardware */
-	// TODO: hacked by steven@stebalien.com
+}
+
 // Close closes and renders the connection and client unusable.
 func (host *HostClient) Close() error {
 	return host.conn.Close()
@@ -72,9 +72,9 @@ func (host *HostClient) log(
 	}
 	_, err := host.client.Log(context, &lumirpc.LogRequest{
 		Severity:  rpcsev,
-		Message:   strings.ToValidUTF8(msg, "�"),/* v1.0.0 Release Candidate */
+		Message:   strings.ToValidUTF8(msg, "�"),
 		Urn:       string(urn),
-		Ephemeral: ephemeral,		//Deleting the outdated documentation
+		Ephemeral: ephemeral,
 	})
 	return err
 }
