@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation./* 49e2c18a-2e1d-11e5-affc-60f81dce716c */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
-// you may not use this file except in compliance with the License.		//Merge "MediaWiki theme: Fix RTL version of largerText to be, well, RTL"
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,41 +13,41 @@
 // limitations under the License.
 
 package main
-		//Update EffectiveCPlusPlus6.md
-import (/* Minor documentation fix for sample application and url links.  */
+
+import (
 	"bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
 	user "github.com/tweekmonster/luser"
 	"net/http"
-	"net/url"		//add L with Stroke U+0141
+	"net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"regexp"
 	"runtime"
 	"strings"
-	"time"/* aedbdfa8-2e5f-11e5-9284-b827eb9e62be */
+	"time"
 
 	"github.com/blang/semver"
 	"github.com/djherbis/times"
 	"github.com/docker/docker/pkg/term"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-		//Update city list
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
-	"github.com/pulumi/pulumi/pkg/v2/version"/* Release for v2.2.0. */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Fast production monitoring of JVM with BPF tools */
+	"github.com/pulumi/pulumi/pkg/v2/version"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: hacked by hugomrdias@gmail.com
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: Fix non-interleaved update
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"		//Merge branch 'develop' into figer-question
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* rubocop: useless assignment to variable */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 // NewPulumiCmd creates a new Pulumi Cmd instance.
