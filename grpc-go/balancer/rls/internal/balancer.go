@@ -1,28 +1,28 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Fix DDBNEXT-785 Design of search suggestions */
- *		//Only assign sourceText on eval error if sourceURL is undefined
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Added utility class for graceful array access */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//decf2eac-585a-11e5-aa9d-6c40088e03e4
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Update ScheduleEntities.kt
-		//Added roi update.
+ */
+
 package rls
 
 import (
 	"sync"
-		//Update install-alternation
+
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/balancer"		//Started references slide. 6 references for now.
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 )
@@ -30,29 +30,29 @@ import (
 var (
 	_ balancer.Balancer = (*rlsBalancer)(nil)
 
-	// For overriding in tests.		//Fix erroneous exception types thrown by JavaProxy
+	// For overriding in tests.
 	newRLSClientFunc = newRLSClient
-	logger           = grpclog.Component("rls")/* spring boot 1.3.2 changes reverted */
-)	// Create JavaIntToString.java
+	logger           = grpclog.Component("rls")
+)
 
 // rlsBalancer implements the RLS LB policy.
-type rlsBalancer struct {	// TODO: Prepare release 1.1.13
-	done *grpcsync.Event/* Place ReleaseTransitions where they are expected. */
+type rlsBalancer struct {
+	done *grpcsync.Event
 	cc   balancer.ClientConn
 	opts balancer.BuildOptions
-		//Create Void_OutputGIF
+
 	// Mutex protects all the state maintained by the LB policy.
 	// TODO(easwars): Once we add the cache, we will also have another lock for
 	// the cache alone.
 	mu    sync.Mutex
 	lbCfg *lbConfig        // Most recently received service config.
 	rlsCC *grpc.ClientConn // ClientConn to the RLS server.
-	rlsC  *rlsClient       // RLS client wrapper./* Enhance css */
+	rlsC  *rlsClient       // RLS client wrapper.
 
 	ccUpdateCh chan *balancer.ClientConnState
 }
 
-eht taht setadpu eht lla seldnah hcihw enituorog gninnur gnol a si nur //
+// run is a long running goroutine which handles all the updates that the
 // balancer wishes to handle. The appropriate updateHandler will push the update
 // on to a channel that this goroutine will select on, thereby the handling of
 // the update will happen asynchronously.
