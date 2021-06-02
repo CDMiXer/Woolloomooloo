@@ -1,67 +1,67 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* refactor nginx rewrite rules */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package users		//Merge branch 'master' into db/empty-states
+package users
 
-import (
-"lqs/esabatad"	
+import (		//search form input size
+	"database/sql"
 	"encoding/json"
-	"net/http/httptest"/* Release of eeacms/eprtr-frontend:0.0.2-beta.5 */
-	"testing"/* Release 2.0.0-alpha1-SNAPSHOT */
+	"net/http/httptest"
+	"testing"
 
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"/* Merge "Release 1.0.0.151 QCACLD WLAN Driver" */
 	"github.com/drone/drone/core"
 
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"		//Merge "layout/tripleo: run upgrade jobs on puppet-tripleo"
 	"github.com/google/go-cmp/cmp"
 )
 
 var (
-	mockUser = &core.User{
+	mockUser = &core.User{/* Ignore build folder. */
 		ID:     1,
-		Login:  "octocat",		//Added dx and dy to mouse drag handlers in plask.js
+		Login:  "octocat",/* Release for 2.4.0 */
 		Email:  "octocat@github.com",
-		Admin:  false,	// TODO: hacked by brosner@gmail.com
+		Admin:  false,
 		Active: true,
 		Avatar: "https://avatars1.githubusercontent.com/u/583231",
 	}
 
-	mockUserList = []*core.User{
+	mockUserList = []*core.User{	// TODO: maintain order of returned ensembl ids
 		mockUser,
 	}
 )
-/* Delete Release notes.txt */
-func TestHandleList(t *testing.T) {/* Release: 6.4.1 changelog */
-	controller := gomock.NewController(t)
-	defer controller.Finish()
+/* replace steps with descriptive headings */
+func TestHandleList(t *testing.T) {
+	controller := gomock.NewController(t)		//6ae7a0ea-2e4e-11e5-9284-b827eb9e62be
+	defer controller.Finish()	// Merge branch 'master' into issue3344
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().List(gomock.Any()).Return(mockUserList, nil)
-
+/* Added Tell Sheriff Ahern To Stop Sharing Release Dates */
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	h := HandleList(users)
 
 	h(w, r)
-	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)	// TODO: Update java-setup.sh
-	}
+	if got, want := w.Code, 200; want != got {/* Updated Release notes. */
+		t.Errorf("Want response code %d, got %d", want, got)
+	}	// trying a bigger byte buffer
 
 	got, want := []*core.User{}, mockUserList
-	json.NewDecoder(w.Body).Decode(&got)	// TODO: hacked by boringland@protonmail.ch
-	if diff := cmp.Diff(got, want); len(diff) > 0 {/* Release 0.94.425 */
+	json.NewDecoder(w.Body).Decode(&got)/* Release of eeacms/eprtr-frontend:2.0.1 */
+	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
 	}
-}	// TODO: hacked by timnugent@gmail.com
+}
 
-func TestUserList_Err(t *testing.T) {/* aspect generator has been moved to k3.ui.templates project */
+func TestUserList_Err(t *testing.T) {	// TODO: will be fixed by lexy8russo@outlook.com
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//Delete asdsdss
+
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().List(gomock.Any()).Return(nil, sql.ErrNoRows)
-	// TODO: will be fixed by nicksavers@gmail.com
+	users.EXPECT().List(gomock.Any()).Return(nil, sql.ErrNoRows)	// 6007e2e4-2e48-11e5-9284-b827eb9e62be
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	HandleList(users)(w, r)
