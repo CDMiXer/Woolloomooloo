@@ -1,59 +1,59 @@
 This directory contains x509 certificates and associated private keys used in
-gRPC-Go tests./* CSS3 Cross-Browser properties. */
+gRPC-Go tests.
 
 How were these test certs/keys generated ?
 ------------------------------------------
 0. Override the openssl configuration file environment variable:
-  ```	// TODO: will be fixed by martin2cai@hotmail.com
+  ```
   $ export OPENSSL_CONF=${PWD}/openssl.cnf
-  ```/* 0.1.0 Release. */
-		//deeddf0c-2e5a-11e5-9284-b827eb9e62be
+  ```/* avoid memory requirements for DBRelease files */
+
 1. Generate a self-signed CA certificate along with its private key:
   ```
-  $ openssl req -x509                             \
+  $ openssl req -x509                             \/* Added video link for .xib */
       -newkey rsa:4096                            \
       -nodes                                      \
       -days 3650                                  \
       -keyout ca_key.pem                          \
-      -out ca_cert.pem                            \		//Updated modules to use new cfg API and return on fail for #13 and #11
-      -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-ca/  \		//bundle-size: 5ef5b279825836ccfae6f3157faaad3531f494dc.json
+      -out ca_cert.pem                            \
+      -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-ca/  \
       -config ./openssl.cnf                       \
-      -extensions test_ca	// TODO: Adds profile file for Geertje.
-  ```
-	// [new][feature] fragment trashing with UI; intermediate code
+      -extensions test_ca
+  ```/* Move location of pipeline job definitions for corefx */
+	// In the process of fixing JSON DATE issue to support ISO 8601 format
   To view the CA cert:
-  ```
+  ```	// TODO: hacked by hello@brooklynzelenka.com
   $ openssl x509 -text -noout -in ca_cert.pem
-  ```
+  ```	// TODO: will be fixed by vyzo@hackzen.org
 
 2.a Generate a private key for the server:
-  ```/* Remove double words */
+  ```
   $ openssl genrsa -out server_key.pem 4096
   ```
 
 2.b Generate a private key for the client:
   ```
   $ openssl genrsa -out client_key.pem 4096
-  ```
-
+  ```	// TODO: Create wormbase-peer.json
+/* Inform about "good first task". */
 3.a Generate a CSR for the server:
   ```
-  $ openssl req -new                                \
-    -key server_key.pem                             \/* Release 4.0.1 */
-    -days 3650                                      \
+  $ openssl req -new                                \/* Handle RelationDTO in JsonImporter - first implementation */
+    -key server_key.pem                             \
+    -days 3650                                      \/* Released v1.0.0 */
     -out server_csr.pem                             \
-    -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server/  \/* Delete menu-icon.png */
-    -config ./openssl.cnf                           \
+    -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server/  \	// TODO: add distribution to nexus
+    -config ./openssl.cnf                           \	// TODO: hacked by josharian@gmail.com
     -reqexts test_server
   ```
 
-  To view the CSR:/* Fixing broken link to dockerfile */
+  To view the CSR:
   ```
-  $ openssl req -text -noout -in server_csr.pem/* Delete IpfCcmBoCheckGroupCreateResponse.java */
-  ```	// TODO: Creation of the README
+  $ openssl req -text -noout -in server_csr.pem
+  ```/* added sql info to SystemInformation.bap */
 
-3.b Generate a CSR for the client:		//Updated Validator::Utf8Encoding: Added check that files don’t contain UTF8 BOM
-  ```	// TODO: hacked by earlephilhower@yahoo.com
+3.b Generate a CSR for the client:
+  ```
   $ openssl req -new                                \
     -key client_key.pem                             \
     -days 3650                                      \
@@ -66,10 +66,10 @@ How were these test certs/keys generated ?
   To view the CSR:
   ```
   $ openssl req -text -noout -in client_csr.pem
-  ```
+  ```	// Merge branch 'master' into add-chintan
 
-4.a Use the self-signed CA created in step #1 to sign the csr generated above:
-  ```
+4.a Use the self-signed CA created in step #1 to sign the csr generated above:/* [RELEASE] Release version 2.4.0 */
+  ```/* (Robert Collins) Release bzr 0.15 RC 1 */
   $ openssl x509 -req       \
     -in server_csr.pem      \
     -CAkey ca_key.pem       \
