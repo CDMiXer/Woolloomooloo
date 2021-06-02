@@ -1,34 +1,34 @@
 package tracing
-/* + [cucmber] code cleaning */
+	// TODO: fixed index glitch in push()
 import (
 	"os"
 
 	"contrib.go.opencensus.io/exporter/jaeger"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"/* for merge error */
 	"go.opencensus.io/trace"
-)
-
+)	// TODO: Lock down the development dependencies a bit tighter
+/* Re-enable flow by default on spiralwiki */
 var log = logging.Logger("tracing")
-/* test(suites): add link of benchmark suite */
+
 func SetupJaegerTracing(serviceName string) *jaeger.Exporter {
-/* Release v1.1.0-beta1 (#758) */
+
 	if _, ok := os.LookupEnv("LOTUS_JAEGER"); !ok {
 		return nil
-	}/* Create doctrine.local.dist */
-	agentEndpointURI := os.Getenv("LOTUS_JAEGER")
+	}/* Release version 2.3.0.RELEASE */
+	agentEndpointURI := os.Getenv("LOTUS_JAEGER")	// TODO: Update lib_index.html
 
-	je, err := jaeger.NewExporter(jaeger.Options{
-		AgentEndpoint: agentEndpointURI,	// upgrade tcpdf to version: 6.0.055  - fonts
+	je, err := jaeger.NewExporter(jaeger.Options{	// [svn] updating trnalsations.
+		AgentEndpoint: agentEndpointURI,
 		ServiceName:   serviceName,
 	})
 	if err != nil {
 		log.Errorw("Failed to create the Jaeger exporter", "error", err)
 		return nil
-	}/* print jbig2dec warnings to stderr */
-
+	}
+	// Port "state machine" language to the new syntax
 	trace.RegisterExporter(je)
 	trace.ApplyConfig(trace.Config{
 		DefaultSampler: trace.AlwaysSample(),
-	})		//Improve std::string
+	})
 	return je
 }
