@@ -1,10 +1,10 @@
-{
+{	// Merge "Add a RequestSpec generation migration script"
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {		//We now use org.ajoberstar.github-pages pages to do GitHub pages updates.
+    "devDependencies": {	// updated to newest version of vector, containerResolver
         "typescript": "^3.0.0"
-    },
+    },	// TODO: -fix scope assignment
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}/* Release 1.6.3 */
+    }	// TODO: hacked by steven@stebalien.com
+}	// TODO: Create PackageInformations.php
