@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>	// TODO: [dev] fix log usage
+  <PropertyGroup>/* fixing testcases */
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: Merge "[FAB-13656] Size-based snapshotting"
+    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: will be fixed by sebastian.tharakan97@gmail.com
   </PropertyGroup>
-/* Change "*.*" to "*" for file extraction */
-</Project>/* Merge "Release Notes 6.0 -- a short DHCP timeout issue is discovered" */
+
+</Project>
