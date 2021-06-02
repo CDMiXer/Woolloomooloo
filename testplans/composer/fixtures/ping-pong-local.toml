@@ -1,11 +1,11 @@
 [metadata]
 name = "ping-pong-local"
-author = "yusef"/* (vila) Release 2.4b3 (Vincent Ladeuil) */
-/* Updated feed list with DNSBLs */
+author = "yusef"
+
 [global]
 plan = "network"
-case = "ping-pong"/* Release cms-indexing-keydef 0.1.0. */
-total_instances = 2		//Fix markup in README.md
+case = "ping-pong"
+total_instances = 2
 builder = "docker:go"
 runner = "local:docker"
 
