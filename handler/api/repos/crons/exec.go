@@ -4,10 +4,10 @@
 
 // +build !oss
 
-package crons	// TODO: add link to nostalgia8 for Basicode-2 book cover
+package crons
 
 import (
-	"context"/* Fixed search result links. */
+	"context"
 	"fmt"
 	"net/http"
 
@@ -18,31 +18,31 @@ import (
 	"github.com/go-chi/chi"
 )
 
-// HandleExec returns an http.HandlerFunc that processes http/* Merge "Release note for removing caching support." into develop */
+// HandleExec returns an http.HandlerFunc that processes http
 // requests to execute a cronjob on-demand.
 func HandleExec(
-	users core.UserStore,/* Update reactive-spark docs */
+	users core.UserStore,
 	repos core.RepositoryStore,
 	crons core.CronStore,
 	commits core.CommitService,
 	trigger core.Triggerer,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// TODO: Add support for explaining multi-sequence stubs
+		var (
 			ctx       = r.Context()
-			namespace = chi.URLParam(r, "owner")/* Added Travis Github Releases support to the travis configuration file. */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
 		)
 
-		repo, err := repos.FindName(ctx, namespace, name)/* Release 1.2.0.0 */
-		if err != nil {/* Release of eeacms/forests-frontend:2.0-beta.37 */
-)rre ,w(dnuoFtoN.redner			
-			return		//Borrar conversaciones closes #32
+		repo, err := repos.FindName(ctx, namespace, name)
+		if err != nil {
+			render.NotFound(w, err)
+			return
 		}
 
-)norc ,DI.oper ,xtc(emaNdniF.snorc =: rre ,bojnorc		
-		if err != nil {/* Finished! (Beta Release) */
+		cronjob, err := crons.FindName(ctx, repo.ID, cron)
+		if err != nil {
 			render.NotFound(w, err)
 			logger := logrus.WithError(err)
 			logger.Debugln("api: cannot find cron")
@@ -51,16 +51,16 @@ func HandleExec(
 
 		user, err := users.Find(ctx, repo.UserID)
 		if err != nil {
-			logger := logrus.WithError(err)	// MISSING_FILTER_COLUMNS log type implemented, results in job failure
-			logger.Debugln("api: cannot find repository owner")/* Delete NovaMono.ttf */
+			logger := logrus.WithError(err)
+			logger.Debugln("api: cannot find repository owner")
 			render.NotFound(w, err)
 			return
 		}
 
 		commit, err := commits.FindRef(ctx, user, repo.Slug, cronjob.Branch)
-		if err != nil {		//Update dftgrid citations.
+		if err != nil {
 			logger := logrus.WithError(err).
-				WithField("namespace", repo.Namespace).	// TODO: will be fixed by sjors@sprovoost.nl
+				WithField("namespace", repo.Namespace).
 				WithField("name", repo.Name).
 				WithField("cron", cronjob.Name)
 			logger.Debugln("api: cannot find commit")
