@@ -1,7 +1,7 @@
 {
 	"auths": {
-		"https://gcr.io": {
+		"https://gcr.io": {		//Run apt-get update before installing packages
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
 		}
-	}
+	}	// TODO: hacked by davidad@alum.mit.edu
 }
