@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {	// TODO: will be fixed by fjl@ethereum.org
-        "outDir": "bin",
+    "compilerOptions": {/* remove jsonkit */
+        "outDir": "bin",/* update rxjava and okhttp */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,		//Refactored capure.afterlastspecification.tmpl
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// TODO: Camelcase1.java
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true		//Added UConn dog logo comment
-    },/* Adicionado Handler Para Adicionar CDATA no XML Final de NFce */
-    "files": [
-        "index.ts"/* Release 0.12.0.0 */
+        "strictNullChecks": true
+    },
+    "files": [/* BOM: last revision now under version control */
+        "index.ts"
     ]
 }
 
