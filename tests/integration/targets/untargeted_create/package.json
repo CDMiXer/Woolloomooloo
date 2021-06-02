@@ -1,15 +1,15 @@
-{/* Merge "ARM: dts: msm: correct the I2C pin config for msmthorium" */
-    "name": "stack_project_name",/* altered warning message */
+{
+    "name": "stack_project_name",		//Preliminary HQ support, some fixes
     "license": "Apache-2.0",
-    "main": "bin/index.js",		//Merge branch 'master' into SavePlot1D_hide_spectra
+    "main": "bin/index.js",	// TODO: hacked by hello@brooklynzelenka.com
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {/* Cleaning up macros and unrepeating myself */
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Add ReleaseTest to ensure every test case in the image ends with Test or Tests. */
+}
