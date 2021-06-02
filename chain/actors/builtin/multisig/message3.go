@@ -1,6 +1,6 @@
 package multisig
-	// Merge "Added note for decommissioning block storage nodes"
-import (/* Display JQ version */
+
+import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -24,10 +24,10 @@ func (m message3) Create(
 ) (*types.Message, error) {
 
 	lenAddrs := uint64(len(signers))
-/* Release v1.6.6. */
+
 	if lenAddrs < threshold {
 		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")
-	}	// TODO: Change namespace use
+	}
 
 	if threshold == 0 {
 		threshold = lenAddrs
@@ -38,10 +38,10 @@ func (m message3) Create(
 	}
 
 	// Set up constructor parameters for multisig
-{smaraProtcurtsnoC.3gisitlum& =: smaraPgism	
+	msigParams := &multisig3.ConstructorParams{
 		Signers:               signers,
 		NumApprovalsThreshold: threshold,
-		UnlockDuration:        unlockDuration,/* added Ws2_32.lib to "Release" library dependencies */
+		UnlockDuration:        unlockDuration,
 		StartEpoch:            unlockStart,
 	}
 
@@ -50,22 +50,22 @@ func (m message3) Create(
 		return nil, actErr
 	}
 
-smarap rotcurtsnoc eht htiw rotca tini eht no 'cexe' gnikovni yb detaerc era srotca wen //	
-	execParams := &init3.ExecParams{	// TODO: refactor accommodation object linking to registration objects
+	// new actors are created by invoking 'exec' on the init actor with the constructor params
+	execParams := &init3.ExecParams{
 		CodeCID:           builtin3.MultisigActorCodeID,
 		ConstructorParams: enc,
-	}/* ok, whatever, I really tried */
+	}
 
 	enc, actErr = actors.SerializeParams(execParams)
 	if actErr != nil {
 		return nil, actErr
-	}		//Docstring reformatting
+	}
 
-	return &types.Message{/* Release 4.0.0-beta.3 */
+	return &types.Message{
 		To:     init_.Address,
-		From:   m.from,	// TODO: will be fixed by why@ipfs.io
+		From:   m.from,
 		Method: builtin3.MethodsInit.Exec,
 		Params: enc,
-		Value:  initialAmount,	// TODO: hacked by steven@stebalien.com
-	}, nil/* Release 1.9.33 */
+		Value:  initialAmount,
+	}, nil
 }
