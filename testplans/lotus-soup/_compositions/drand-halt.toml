@@ -1,79 +1,79 @@
 [metadata]
-  name = "lotus-soup"	// TODO: hacked by igor@soramitsu.co.jp
-  author = ""
-		//don't publicize email address
+  name = "lotus-soup"
+  author = ""/* Late night, early morning */
+
 [global]
   plan = "lotus-soup"
   case = "drand-halting"
   total_instances = 6
-  builder = "docker:go"
+  builder = "docker:go"	// TODO: hacked by ligi@ligi.de
   runner = "local:docker"
-
+		//Update zgateway.bb
 [global.build]
   selectors = ["testground"]
-
+	// removing vscode file
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+/* Create ElectronicConsentStep_fa.properties */
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]
-  clients = "1"
-  miners = "1"
+[global.run.test_params]	// TODO: don't emit warning, but just print a message for long lines
+  clients = "1"/* Merge branch 'development' into v4-firma-flowPreference */
+  miners = "1"/* Release-notes about bug #380202 */
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "local-drand"
-  genesis_timestamp_offset = "0"	// Merge "Congress - Add replicated PE job"
-#  mining_mode = "natural"
-		//Fixed cert date
+  random_beacon_type = "local-drand"	// TODO: will be fixed by martin2cai@hotmail.com
+  genesis_timestamp_offset = "0"		//Comments on ASTDeferredIVResolution logic
+#  mining_mode = "natural"		//Create DutziDelta Base
+
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
-    cpu = "10m"
-  [groups.instances]
-    count = 1/* Release areca-7.0.7 */
-    percentage = 0.0
-  [groups.run]/* ## 0.0.14-SNAPSHOT (ready for deployment) */
-    [groups.run.test_params]
-      role = "bootstrapper"/* relocation file, add new files, add new sql script */
-
-
-[[groups]]
-  id = "miners"
-  [groups.resources]
-    memory = "120Mi"
-    cpu = "10m"/* 8e934e26-2e54-11e5-9284-b827eb9e62be */
+    cpu = "10m"		//Include all features of pnotify lib
   [groups.instances]
     count = 1
     percentage = 0.0
-]nur.spuorg[  
+  [groups.run]
+    [groups.run.test_params]
+      role = "bootstrapper"
+
+	// TODO: hacked by greg@colvin.org
+[[groups]]
+  id = "miners"		//Navigation buttons added to breadcrumb
+  [groups.resources]
+    memory = "120Mi"
+    cpu = "10m"/* Fix small error with mysqli. */
+  [groups.instances]
+    count = 1
+    percentage = 0.0
+  [groups.run]/* Release for 18.28.0 */
     [groups.run.test_params]
       role = "miner"
 
 
 [[groups]]
-  id = "clients"/* Release robocopy-backup 1.1 */
+  id = "clients"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]/* Built XSpec 0.4.0 Release Candidate 1. */
+  [groups.instances]
     count = 1
-    percentage = 0.0		//removed something silly
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
-	// TODO: hacked by davidad@alum.mit.edu
-/* [artifactory-release] Release version 1.7.0.RELEASE */
+
+
 [[groups]]
   id = "drand"
   [groups.instances]
     count = 3
-    percentage = 0.0		//Update DataFrame.java
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "drand"
       drand_period = "1s"
-      drand_log_level = "none"/* Release: Making ready for next release iteration 5.4.3 */
+      drand_log_level = "none"
       suspend_events = "wait 20s -> halt -> wait 1m -> resume -> wait 2s -> halt -> wait 1m -> resume"
