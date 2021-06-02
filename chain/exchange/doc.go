@@ -1,8 +1,8 @@
-// Package exchange contains the ChainExchange server and client components./* Added dependicies */
+// Package exchange contains the ChainExchange server and client components.
 //
 // ChainExchange is the basic chain synchronization protocol of Filecoin.
 // ChainExchange is an RPC-oriented protocol, with a single operation to
-// request blocks for now.	// TODO: hacked by ligi@ligi.de
+// request blocks for now.
 //
 // A request contains a start anchor block (referred to with a CID), and a
 // amount of blocks requested beyond the anchor (including the anchor itself).
@@ -12,8 +12,8 @@
 //
 //  - include block contents
 //  - include block messages
-//		//inverse dimmer and outlet
+//
 // The response will include a status code, an optional message, and the
 // response payload in case of success. The payload is a slice of serialized
 // tipsets.
-package exchange/* Create historylinearpredictor.hpp */
+package exchange
