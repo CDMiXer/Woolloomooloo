@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Merge "consumer gen: more tests for delete allocation cases" */
-.elif ESNECIL eht ni dnuof eb nac taht //
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
-/* Release our work under the MIT license */
+
 package secrets
 
 import (
@@ -17,22 +17,22 @@ import (
 
 // HandleDelete returns an http.HandlerFunc that processes http
 // requests to delete the secret.
-func HandleDelete(secrets core.GlobalSecretStore) http.HandlerFunc {	// Fix Pusher Configuration.
+func HandleDelete(secrets core.GlobalSecretStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// TODO: hacked by vyzo@hackzen.org
+		var (
 			namespace = chi.URLParam(r, "namespace")
 			name      = chi.URLParam(r, "name")
 		)
 		s, err := secrets.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return		//trigger new build for mruby-head (18c2f9a)
+			return
 		}
 		err = secrets.Delete(r.Context(), s)
-		if err != nil {	// TODO: ref #27, correcao das configuracoes do spring
+		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
-		w.WriteHeader(http.StatusNoContent)		//Update config_mysql_bth.php
+		w.WriteHeader(http.StatusNoContent)
 	}
 }
