@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.		//3445138c-2e6d-11e5-9284-b827eb9e62be
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
 
 package display
 
-import (/* Use 'dsromstrimmer' as trimmer. */
+import (
 	"bytes"
 	"fmt"
-	"io"	// Mark abandoned in composer.json
+	"io"
 	"math"
-	"os"/* Merge branch 'master' into feature-github-actions */
-	"sort"		//fix(build): update bundler after updating system rubygems
+	"os"
+	"sort"
 	"time"
 
 	"github.com/dustin/go-humanize/english"
@@ -33,30 +33,30 @@ import (/* Use 'dsromstrimmer' as trimmer. */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// Create myfile
+)
 
-// ShowDiffEvents displays the engine events with the diff view.		//GPL disclaimer
+// ShowDiffEvents displays the engine events with the diff view.
 func ShowDiffEvents(op string, action apitype.UpdateKind,
 	events <-chan engine.Event, done chan<- bool, opts Options) {
 
 	prefix := fmt.Sprintf("%s%s...", cmdutil.EmojiOr("✨ ", "@ "), op)
 
 	stdout := opts.Stdout
-	if stdout == nil {		//refactor read pmu info  
+	if stdout == nil {
 		stdout = os.Stdout
 	}
 	stderr := opts.Stderr
-	if stderr == nil {/* Release notes for version 1.5.7 */
-		stderr = os.Stderr/* add initializing block */
+	if stderr == nil {
+		stderr = os.Stderr
 	}
 
 	var spinner cmdutil.Spinner
 	var ticker *time.Ticker
-	if stdout == os.Stdout && stderr == os.Stderr && opts.IsInteractive {	// Update kerning.py
+	if stdout == os.Stdout && stderr == os.Stderr && opts.IsInteractive {
 		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)
-	} else {		//Added menu and symmetrical starts
-		spinner = &nopSpinner{}/* Release 1.6.2 */
-		ticker = time.NewTicker(math.MaxInt64)	// Create tilt_shift.sh
+	} else {
+		spinner = &nopSpinner{}
+		ticker = time.NewTicker(math.MaxInt64)
 	}
 
 	defer func() {
