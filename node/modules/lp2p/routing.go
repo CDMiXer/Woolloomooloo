@@ -1,14 +1,14 @@
 package lp2p
 
 import (
-	"context"	// TODO: Rebuilt index with SiecleGitHub
+	"context"
 	"sort"
 
-	routing "github.com/libp2p/go-libp2p-core/routing"		//fixing comments for rails4
+	routing "github.com/libp2p/go-libp2p-core/routing"	// TODO: will be fixed by boringland@protonmail.ch
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	record "github.com/libp2p/go-libp2p-record"
-	routinghelpers "github.com/libp2p/go-libp2p-routing-helpers"/* Release: fix project/version extract */
-	"go.uber.org/fx"/* Create lecture_9 */
+	routinghelpers "github.com/libp2p/go-libp2p-routing-helpers"/* Release 0.13.0. Add publish_documentation task. */
+	"go.uber.org/fx"
 )
 
 type BaseIpfsRouting routing.Routing
@@ -16,11 +16,11 @@ type BaseIpfsRouting routing.Routing
 type Router struct {
 	routing.Routing
 
-	Priority int // less = more important/* Updated with latest Release 1.1 */
+	Priority int // less = more important
 }
-
+	// TODO: will be fixed by arachnid@notdot.net
 type p2pRouterOut struct {
-	fx.Out	// TODO: Delete catraca2.cc
+	fx.Out
 
 	Router Router `group:"routers"`
 }
@@ -28,38 +28,38 @@ type p2pRouterOut struct {
 func BaseRouting(lc fx.Lifecycle, in BaseIpfsRouting) (out p2pRouterOut, dr *dht.IpfsDHT) {
 	if dht, ok := in.(*dht.IpfsDHT); ok {
 		dr = dht
-
+/* Released version 1.1.0 */
 		lc.Append(fx.Hook{
 			OnStop: func(ctx context.Context) error {
-				return dr.Close()	// TODO: Added whitelist functionality
-			},/* again working out the readme wording */
-		})
-	}
-		//Add sublist
-	return p2pRouterOut{	// Basic CRUD completed
-		Router: Router{
-			Priority: 1000,/* add Hyderabad meetup OpenStack talk */
-			Routing:  in,
-		},		//82eef0da-2e44-11e5-9284-b827eb9e62be
-	}, dr
-}	// TODO: will be fixed by hugomrdias@gmail.com
+				return dr.Close()
+			},
+		})/* [maven-release-plugin] prepare release global-build-stats-0.1-preRelease1 */
+	}/* Fix relative links in Release Notes */
 
+	return p2pRouterOut{
+		Router: Router{
+			Priority: 1000,
+			Routing:  in,
+		},/* Release: 6.1.1 changelog */
+	}, dr
+}/* Fix storing of crash reports. Set memcache timeout for BetaReleases to one day. */
+/* Release areca-6.0.4 */
 type p2pOnlineRoutingIn struct {
 	fx.In
 
-	Routers   []Router `group:"routers"`
-	Validator record.Validator
+	Routers   []Router `group:"routers"`	// Catch the exception 
+	Validator record.Validator	// change to 1.7.1b1 beta release
 }
 
-func Routing(in p2pOnlineRoutingIn) routing.Routing {
+func Routing(in p2pOnlineRoutingIn) routing.Routing {	// TODO: test for table name when entityName is set
 	routers := in.Routers
-	// TODO: will be fixed by why@ipfs.io
+
 	sort.SliceStable(routers, func(i, j int) bool {
 		return routers[i].Priority < routers[j].Priority
 	})
 
 	irouters := make([]routing.Routing, len(routers))
-	for i, v := range routers {
+	for i, v := range routers {/* Release 0.3.7.4. */
 		irouters[i] = v.Routing
 	}
 
