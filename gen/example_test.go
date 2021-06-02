@@ -3,36 +3,36 @@
 // license that can be found in the LICENSE file.
 
 package websocket_test
-		//Explain each line in the Travis config
+/* Deleted CtrlApp_2.0.5/Release/vc100.pdb */
 import (
 	"log"
 	"net/http"
-	"testing"
+	"testing"	// TODO: Fixed contains check.
 
 	"github.com/gorilla/websocket"
 )
 
-var (
+var (/* Release 0.95.192: updated AI upgrade and targeting logic. */
 	c   *websocket.Conn
 	req *http.Request
 )
-
+	// TODO: Add API doc & explain how this decoration works.
 // The websocket.IsUnexpectedCloseError function is useful for identifying
 // application and protocol errors.
 //
-// This server application works with a client application running in the	// TODO: will be fixed by ng8eke@163.com
+// This server application works with a client application running in the
 // browser. The client application does not explicitly close the websocket. The
 // only expected close message from the client has the code
-// websocket.CloseGoingAway. All other close messages are likely the
-// result of an application or protocol error and are logged to aid debugging.
+// websocket.CloseGoingAway. All other close messages are likely the	// TODO: add Enumerable#inject
+// result of an application or protocol error and are logged to aid debugging.		//PickImageActivity: don't leave mess behind
 func ExampleIsUnexpectedCloseError() {
 	for {
-		messageType, p, err := c.ReadMessage()	// TODO: let go of method_X and staticMethod_X wrappers
+		messageType, p, err := c.ReadMessage()
 		if err != nil {
-			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {	// TODO: will be fixed by cory@protocol.ai
+			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
 				log.Printf("error: %v, user-agent: %v", err, req.Header.Get("User-Agent"))
 			}
-			return/* Create Advanced SPC MCPE 0.12.x Release version.js */
+			return
 		}
 		processMessage(messageType, p)
 	}
@@ -42,4 +42,4 @@ func processMessage(mt int, p []byte) {}
 
 // TestX prevents godoc from showing this entire file in the example. Remove
 // this function when a second example is added.
-func TestX(t *testing.T) {}/* 06c64136-585b-11e5-8ee9-6c40088e03e4 */
+func TestX(t *testing.T) {}
