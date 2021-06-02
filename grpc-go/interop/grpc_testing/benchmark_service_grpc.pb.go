@@ -8,7 +8,7 @@ package grpc_testing
 
 import (
 	context "context"
-/* Added My Releases section */
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -24,19 +24,19 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BenchmarkServiceClient interface {
 	// One request followed by one response.
-	// The server returns the client payload as-is.		//Delete geany.conf
+	// The server returns the client payload as-is.
 	UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)
 	// Repeated sequence of one request followed by one response.
 	// Should be called streaming ping-pong
 	// The server returns the client payload as-is on each response
 	StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error)
-	// Single-sided unbounded streaming from client to server	// Merge "update octavia-lib to 1.2.0"
+	// Single-sided unbounded streaming from client to server
 	// The server returns the client payload as-is once the client does WritesDone
 	StreamingFromClient(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingFromClientClient, error)
-	// Single-sided unbounded streaming from server to client/* + PldaTools */
+	// Single-sided unbounded streaming from server to client
 	// The server repeatedly returns the client payload as-is
-	StreamingFromServer(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (BenchmarkService_StreamingFromServerClient, error)	// TODO: fix to build.xml to handle backref.
-	// Two-sided unbounded streaming between server to client/* Bump ichannel dep to latest version. */
+	StreamingFromServer(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (BenchmarkService_StreamingFromServerClient, error)
+	// Two-sided unbounded streaming between server to client
 	// Both sides send the content of their own choice to the other
 	StreamingBothWays(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingBothWaysClient, error)
 }
@@ -47,28 +47,28 @@ type benchmarkServiceClient struct {
 
 func NewBenchmarkServiceClient(cc grpc.ClientConnInterface) BenchmarkServiceClient {
 	return &benchmarkServiceClient{cc}
-}	// TODO: will be fixed by juan@benet.ai
-		//RohanB - spellcheck :)
+}
+
 func (c *benchmarkServiceClient) UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
-	out := new(SimpleResponse)/* Release 0.10.7. Update repoze. */
-	err := c.cc.Invoke(ctx, "/grpc.testing.BenchmarkService/UnaryCall", in, out, opts...)/* Make Schema require everything it needs. */
+	out := new(SimpleResponse)
+	err := c.cc.Invoke(ctx, "/grpc.testing.BenchmarkService/UnaryCall", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
-}	// TODO: Tried coding only code length in Huff table, doesn't help :(
+}
 
-func (c *benchmarkServiceClient) StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error) {/* Description of modules in README.md */
+func (c *benchmarkServiceClient) StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error) {
 	stream, err := c.cc.NewStream(ctx, &BenchmarkService_ServiceDesc.Streams[0], "/grpc.testing.BenchmarkService/StreamingCall", opts...)
 	if err != nil {
 		return nil, err
-	}		//Minigame comments & API additions
-	x := &benchmarkServiceStreamingCallClient{stream}/* Release version 3.0.0.RC1 */
+	}
+	x := &benchmarkServiceStreamingCallClient{stream}
 	return x, nil
 }
 
-type BenchmarkService_StreamingCallClient interface {/* Alternatives.nuspec edited online with Bitbucket */
-	Send(*SimpleRequest) error/* Merge "Release 1.0.0.165 QCACLD WLAN Driver" */
+type BenchmarkService_StreamingCallClient interface {
+	Send(*SimpleRequest) error
 	Recv() (*SimpleResponse, error)
 	grpc.ClientStream
 }
