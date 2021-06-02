@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in//* Add Exploration GET line */
-[Oo]bj//* Final Merge Before April Release (first merge) */
-		//Update autopolitico.html
+[Bb]in/
+[Oo]bj/
 
+/* Release of eeacms/www-devel:19.12.10 */
