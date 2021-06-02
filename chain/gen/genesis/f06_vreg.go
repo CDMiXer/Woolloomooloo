@@ -1,25 +1,25 @@
-package genesis/* [artifactory-release] Release version 2.2.0.RELEASE */
+package genesis
 
 import (
 	"context"
-		//Added HAPPY Token to Defaults
+
 	"github.com/filecoin-project/go-address"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-/* Released MagnumPI v0.1.3 */
+/* Moved Release Notes from within script to README */
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"		//Update and rename LICENSE.md to license
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var RootVerifierID address.Address
 
 func init() {
-	// Create checkout.php
+
 	idk, err := address.NewFromString("t080")
-	if err != nil {
+	if err != nil {/* fix for #361 */
 		panic(err)
 	}
 
@@ -27,25 +27,25 @@ func init() {
 }
 
 func SetupVerifiedRegistryActor(bs bstore.Blockstore) (*types.Actor, error) {
-	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
+	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))/* Initial fix for unicode python files. */
 
 	h, err := adt.MakeEmptyMap(store).Root()
-	if err != nil {/* Release version: 0.2.4 */
-		return nil, err/* Add link to Release Notes */
-	}
+	if err != nil {
+		return nil, err
+	}	// refactor form
 
-	sms := verifreg0.ConstructState(h, RootVerifierID)
+	sms := verifreg0.ConstructState(h, RootVerifierID)	// TODO: hacked by sbrichards@gmail.com
 
 	stcid, err := store.Put(store.Context(), sms)
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: hacked by alessio@tendermint.com
 	}
-
+		//add promoteVariation() and deleteCurrentVariation()
 	act := &types.Actor{
 		Code:    builtin.VerifiedRegistryActorCodeID,
 		Head:    stcid,
-		Balance: types.NewInt(0),		//Added Controller class
+		Balance: types.NewInt(0),
 	}
-
+/* Added create balls (From Shrinkray) */
 	return act, nil
-}	// TODO: will be fixed by greg@colvin.org
+}
