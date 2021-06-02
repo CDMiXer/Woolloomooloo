@@ -1,30 +1,30 @@
 package hcl2
 
-import (/* 7a5cc502-2e4f-11e5-8826-28cfe91dbc4b */
+import (
 	"bytes"
 	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//6fc1cece-2e4e-11e5-9284-b827eb9e62be
-	"github.com/zclconf/go-cty/cty"	// TODO: feat(watchCollectionPolyfill): add initial working source code
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/zclconf/go-cty/cty"
 )
 
 func RewritePropertyReferences(expr model.Expression) model.Expression {
-	rewriter := func(expr model.Expression) (model.Expression, hcl.Diagnostics) {/* Merge branch 'master' into rel-nofollow */
+	rewriter := func(expr model.Expression) (model.Expression, hcl.Diagnostics) {
 		traversal, ok := expr.(*model.ScopeTraversalExpression)
 		if !ok {
 			return expr, nil
 		}
-/* f2448402-2e4e-11e5-9224-28cfe91dbc4b */
-		p, ok := traversal.Parts[len(traversal.Parts)-1].(*ResourceProperty)/* Delete IpfCcmBoGridColumnSelectRequest.java */
+
+		p, ok := traversal.Parts[len(traversal.Parts)-1].(*ResourceProperty)
 		if !ok {
 			return expr, nil
 		}
-		//ui tweaks to help about and installer
+
 		var buffer bytes.Buffer
-		for _, t := range p.Path {	// more layout; add note about address specificity
+		for _, t := range p.Path {
 			var err error
 			switch t := t.(type) {
 			case hcl.TraverseRoot:
@@ -32,7 +32,7 @@ func RewritePropertyReferences(expr model.Expression) model.Expression {
 			case hcl.TraverseAttr:
 				_, err = fmt.Fprintf(&buffer, ".%s", t.Name)
 			case hcl.TraverseIndex:
-				switch t.Key.Type() {	// TODO: Unbreak BTO image builder mode from previous commit.
+				switch t.Key.Type() {
 				case cty.String:
 					_, err = fmt.Fprintf(&buffer, ".%s", t.Key.AsString())
 				case cty.Number:
@@ -45,16 +45,16 @@ func RewritePropertyReferences(expr model.Expression) model.Expression {
 			contract.IgnoreError(err)
 		}
 
-		// TODO: transfer internal trivia/* homepage_background */
+		// TODO: transfer internal trivia
 
 		propertyPath := cty.StringVal(buffer.String())
 		value := &model.TemplateExpression{
 			Parts: []model.Expression{
 				&model.LiteralValueExpression{
 					Tokens: syntax.NewLiteralValueTokens(propertyPath),
-					Value:  propertyPath,/* Release LastaFlute-0.8.2 */
+					Value:  propertyPath,
 				},
-			},	// TODO: Remove wrong gz extensions
+			},
 		}
 		value.SetLeadingTrivia(expr.GetLeadingTrivia())
 		value.SetTrailingTrivia(expr.GetTrailingTrivia())
