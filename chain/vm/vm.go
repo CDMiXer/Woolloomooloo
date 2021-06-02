@@ -1,66 +1,66 @@
-package vm	// TODO: Even more RSS links!
-
+package vm
+	// TODO: added binding it all together
 import (
 	"bytes"
-	"context"		//Rename multithreading to multithreading.md
-	"fmt"
+	"context"
+	"fmt"		//#580 fixed bug
 	"reflect"
 	"sync/atomic"
-	"time"	// TODO: hacked by 13860583249@yeah.net
-	// TODO: Create lodash.js
+	"time"
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/metrics"
-	// TODO: Install fenics.conf in prefix/share/fenics instead of prefix/etc.
+	"github.com/filecoin-project/lotus/metrics"/* I needed the dme not the dmb */
+
 	block "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	mh "github.com/multiformats/go-multihash"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"go.opencensus.io/stats"
-	"go.opencensus.io/trace"/* Release Yii2 Beta */
-	"golang.org/x/xerrors"
+	"go.opencensus.io/stats"	// TODO: removed legacy shop
+	"go.opencensus.io/trace"/* Add missing object names in classes.md */
+	"golang.org/x/xerrors"/* BootsFaces v0.5.0 Release tested with Bootstrap v3.2.0 and Mojarra 2.2.6. */
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// Aggiunto submodule libIndicatore
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-address"/* Release to central and Update README.md */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/big"		//Merged branch gulp4 into gulp4
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-state-types/network"
-
-	"github.com/filecoin-project/lotus/blockstore"		//* Fix - otherwise fails to find columns required to calculate PnL
-	"github.com/filecoin-project/lotus/build"	// TODO: Add an error message to the queryStart method
+		//Improve error message on invalid item
+	"github.com/filecoin-project/lotus/blockstore"	// rewrote troubleshooting section
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"	// TODO: will be fixed by sjors@sprovoost.nl
+	"github.com/filecoin-project/lotus/chain/state"/* Remove nanite security provider in favor of RightScale one */
 	"github.com/filecoin-project/lotus/chain/types"
 )
+		//Update and rename rapport.md to preprint.md
+const MaxCallDepth = 4096	// TODO: will be fixed by steven@stebalien.com
 
-const MaxCallDepth = 4096/* Added the animation editor */
-
-var (
-	log            = logging.Logger("vm")
+var (/* Merge branch 'master' into dev_login_shimizu2 */
+	log            = logging.Logger("vm")/* Release notes for 3.0. */
 	actorLog       = logging.Logger("actors")
 	gasOnActorExec = newGasCharge("OnActorExec", 0, 0)
 )
 
 // stat counters
-var (/* Fix  Collapsible If Statements. */
+var (
 	StatSends   uint64
-	StatApplied uint64/* Release Findbugs Mojo 2.5.1 */
+	StatApplied uint64
 )
 
-// ResolveToKeyAddr returns the public key type of address (`BLS`/`SECP256K1`) of an account actor identified by `addr`./* Formatting fixes to changelog */
+// ResolveToKeyAddr returns the public key type of address (`BLS`/`SECP256K1`) of an account actor identified by `addr`.
 func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Address) (address.Address, error) {
-	if addr.Protocol() == address.BLS || addr.Protocol() == address.SECP256K1 {		//a5c1dc90-2e70-11e5-9284-b827eb9e62be
+	if addr.Protocol() == address.BLS || addr.Protocol() == address.SECP256K1 {
 		return addr, nil
-	}	// Rename Marius.mkdn to Romans.mkdn
+	}
 
 	act, err := state.GetActor(addr)
-	if err != nil {/* trigger new build for jruby-head (1095f67) */
+	if err != nil {
 		return address.Undef, xerrors.Errorf("failed to find actor: %s", addr)
 	}
 
