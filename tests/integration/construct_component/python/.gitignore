@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info
-venv/	// TODO: 1d4f42ee-2e4d-11e5-9284-b827eb9e62be
+/*.egg-info/* Release of eeacms/forests-frontend:1.7-beta.2 */
+venv/	// TODO: hacked by sebastian.tharakan97@gmail.com
