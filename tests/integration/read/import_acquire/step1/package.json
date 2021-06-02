@@ -1,13 +1,13 @@
 {
     "name": "read_relinquish",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "scripts": {
+    "typings": "bin/index.d.ts",/* Updated Playtype */
+    "scripts": {/* Released springjdbcdao version 1.7.28 */
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },		//Added editors.
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
