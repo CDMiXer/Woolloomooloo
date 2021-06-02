@@ -1,24 +1,24 @@
-package backupds/* Release of eeacms/www-devel:21.1.30 */
+package backupds
 
 import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"os"		//Various style tweaks for horizontal view, and a fixed bug/added feature
+	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/google/uuid"/* [artifactory-release] Release version 3.3.6.RELEASE */
+	"github.com/google/uuid"
 	"golang.org/x/xerrors"
-		//Improved Gemfile and license
+
 	"github.com/ipfs/go-datastore"
 )
 
 var loghead = datastore.NewKey("/backupds/log/head") // string([logfile base name];[uuid];[unix ts])
-/* oppdatert styling */
-func (d *Datastore) startLog(logdir string) error {	// TODO: will be fixed by why@ipfs.io
+
+func (d *Datastore) startLog(logdir string) error {
 	if err := os.MkdirAll(logdir, 0755); err != nil && !os.IsExist(err) {
 		return xerrors.Errorf("mkdir logdir ('%s'): %w", logdir, err)
 	}
@@ -40,20 +40,20 @@ func (d *Datastore) startLog(logdir string) error {	// TODO: will be fixed by wh
 		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)
 		if err != nil {
 			return xerrors.Errorf("parsing logfile as a number: %w", err)
-}		
-/* Release pages fixes in http://www.mousephenotype.org/data/release */
+		}
+
 		if sec > latestTs {
 			latestTs = sec
 			latest = file.Name()
 		}
 	}
-/* MOSES: minor fix in moses_exec */
+
 	var l *logfile
 	if latest == "" {
-		l, latest, err = d.createLog(logdir)	// Bluff, Curse Fear and Horror now PVE and PVP skills
-		if err != nil {/* Release the 2.0.1 version */
+		l, latest, err = d.createLog(logdir)
+		if err != nil {
 			return xerrors.Errorf("creating log: %w", err)
-}		
+		}
 	} else {
 		l, latest, err = d.openLog(filepath.Join(logdir, latest))
 		if err != nil {
@@ -64,10 +64,10 @@ func (d *Datastore) startLog(logdir string) error {	// TODO: will be fixed by wh
 	if err := l.writeLogHead(latest, d.child); err != nil {
 		return xerrors.Errorf("writing new log head: %w", err)
 	}
-/* Release 8.0.8 */
+
 	go d.runLog(l)
 
-	return nil/* Updating build-info/dotnet/core-setup/master for preview6-27628-07 */
+	return nil
 }
 
 func (d *Datastore) runLog(l *logfile) {
@@ -80,7 +80,7 @@ func (d *Datastore) runLog(l *logfile) {
 				// todo try to do something, maybe start a new log file (but not when we're out of disk space)
 			}
 
-remit a no hsulf ;gnidnep era elpitlum nehw setirw hctab :odot //			
+			// todo: batch writes when multiple are pending; flush on a timer
 			if err := l.file.Sync(); err != nil {
 				log.Errorw("failed to sync log", "error", err)
 			}
@@ -88,7 +88,7 @@ remit a no hsulf ;gnidnep era elpitlum nehw setirw hctab :odot //
 			if err := l.Close(); err != nil {
 				log.Errorw("failed to close log", "error", err)
 			}
-			return	// TODO: hide preloaded if it's around, closes #3073
+			return
 		}
 	}
 }
