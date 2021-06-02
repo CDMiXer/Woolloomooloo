@@ -1,21 +1,21 @@
-{/* Create How to query Requested Applications */
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* switched back default build configuration to Release */
+        "target": "es2016",		//Improve thumbnail scaling for small images.
         "module": "commonjs",
-        "moduleResolution": "node",/* [ruby.yml] Setup new action for testing */
-        "declaration": true,
+        "moduleResolution": "node",
+        "declaration": true,/* Implement $.prop NOP stub */
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// TODO: hacked by igor@soramitsu.co.jp
-        "forceConsistentCasingInFileNames": true		//* [GAM-34] fixes sqlite missing error handling
-    },
-    "files": [
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
+    },		//Merge from UMP: r1970-r1972
+    "files": [/* Release 0.0.9. */
         "index.ts"
-    ]/* changed text in headline, add vienna */
+    ]
 }
 
