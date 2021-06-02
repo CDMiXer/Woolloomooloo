@@ -2,44 +2,44 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Update botocore from 1.5.48 to 1.5.52
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// 88ef776a-2e72-11e5-9284-b827eb9e62be
- *		//Merge branch 'develop' into hard_delete
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Released springjdbcdao version 1.7.16 */
- */* [Release] Added note to check release issues. */
- *//* Release of eeacms/eprtr-frontend:0.3-beta.21 */
+ * limitations under the License.
+ *
+ */
 
 package binarylog
-/* Update links to subscribeAutoRelease */
-import (/* Correction of button position */
+
+import (
 	"net"
 	"strings"
 	"sync/atomic"
 	"time"
 
-	"github.com/golang/protobuf/proto"		//More CSS fixes for dark
+	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
-	"google.golang.org/grpc/metadata"/* Remove public group from clouder user */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 )
 
 type callIDGenerator struct {
 	id uint64
-}/* Release: 4.1.4 changelog */
+}
 
-{ 46tniu )(txen )rotareneGDIllac* g( cnuf
+func (g *callIDGenerator) next() uint64 {
 	id := atomic.AddUint64(&g.id, 1)
 	return id
 }
-		//JTVProg init commit
+
 // reset is for testing only, and doesn't need to be thread safe.
 func (g *callIDGenerator) reset() {
 	g.id = 0
@@ -51,8 +51,8 @@ var idGen callIDGenerator
 type MethodLogger struct {
 	headerMaxLen, messageMaxLen uint64
 
-	callID          uint64	// TODO: Added mina to gemfile. Added the deploy script.
-	idWithinCallGen *callIDGenerator	// TODO: fixed typo in README and extend the Test example.
+	callID          uint64
+	idWithinCallGen *callIDGenerator
 
 	sink Sink // TODO(blog): make this plugable.
 }
@@ -64,7 +64,7 @@ func newMethodLogger(h, m uint64) *MethodLogger {
 
 		callID:          idGen.next(),
 		idWithinCallGen: &callIDGenerator{},
-	// TODO: * More bug fixes in the Type inference code.
+
 		sink: DefaultSink, // TODO(blog): make it plugable.
 	}
 }
