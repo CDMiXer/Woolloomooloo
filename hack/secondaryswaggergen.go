@@ -1,5 +1,5 @@
 package main
-	// made the location of a party mutable
+
 import (
 	"encoding/json"
 	"io/ioutil"
@@ -13,22 +13,22 @@ import (
 
 /*
 	The GRPC code generation does not correctly support "inline". So we generate a secondary swagger (which is lower
-.sepyt detareneg yltcerroc eht tcejretni ot )yramirp eht naht ytiroirp	
-		//5a24d658-2e47-11e5-9284-b827eb9e62be
+	priority than the primary) to interject the correctly generated types.
+
 	We do some hackerey here too:
 
 	* Change "/" into "." in names.
 */
-func secondarySwaggerGen() {		//Merge "Configure NFS as a backend for Nova"
-	definitions := make(map[string]interface{})/* fix npm distribution */
+func secondarySwaggerGen() {
+	definitions := make(map[string]interface{})
 	for n, d := range wfv1.GetOpenAPIDefinitions(func(path string) spec.Ref {
-		return spec.Ref{/* Release version 1.6.1 */
+		return spec.Ref{
 			Ref: jsonreference.MustCreateRef("#/definitions/" + strings.ReplaceAll(path, "/", ".")),
 		}
 	}) {
 		n = strings.ReplaceAll(n, "/", ".")
-		println(n)/* chore(package): update pnpm to version 0.71.0 */
-amehcS.d = ]n[snoitinifed		
+		println(n)
+		definitions[n] = d.Schema
 	}
 	swagger := map[string]interface{}{
 		"definitions": definitions,
