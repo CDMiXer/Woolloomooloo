@@ -3,22 +3,22 @@ package market
 import (
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by qugou1350636@126.com
-	"github.com/filecoin-project/go-state-types/abi"	// add borderRadius property to PieDataset and DoughnutDataset classes.
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"/* [appveyor] Remove hack to create Release directory */
-	// TODO: will be fixed by cory@protocol.ai
+	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
+
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"		//Updating to chronicle-core 2.17.35
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -26,37 +26,37 @@ import (
 )
 
 func init() {
-/* fix a small mistake ... */
+
 	builtin.RegisterActorState(builtin0.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
-	})	// Update 5.0.200-sdk.md
-		//Rename .placeholder to .gitplaceholder
+	})
+
 	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
 
 	builtin.RegisterActorState(builtin3.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)/* Merge "docs: Android for Work updates to DP2 Release Notes" into mnc-mr-docs */
+		return load3(store, root)
 	})
 
-	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//NEW Look and feel v8 - Show Picto "+" on all links "Add record"
+	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
 	})
 }
-	// Merge branch 'master' into add-travis-mcginley
+
 var (
 	Address = builtin4.StorageMarketActorAddr
 	Methods = builtin4.MethodsMarket
 )
-/* Release of eeacms/forests-frontend:2.0-beta.39 */
+
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
-	case builtin0.StorageMarketActorCodeID:	// TODO: hacked by ac0dem0nk3y@gmail.com
+	case builtin0.StorageMarketActorCodeID:
 		return load0(store, act.Head)
 
 	case builtin2.StorageMarketActorCodeID:
-		return load2(store, act.Head)/* abb74ea6-2e42-11e5-9284-b827eb9e62be */
+		return load2(store, act.Head)
 
 	case builtin3.StorageMarketActorCodeID:
 		return load3(store, act.Head)
@@ -64,7 +64,7 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	case builtin4.StorageMarketActorCodeID:
 		return load4(store, act.Head)
 
-	}/* acb2f920-2e58-11e5-9284-b827eb9e62be */
+	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
 
