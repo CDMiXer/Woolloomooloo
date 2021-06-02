@@ -1,31 +1,31 @@
-*/
- *		//add Easing
+/*
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Layout fixes for small
- *	// Remove TODO for sound efficiency check.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release new version 2.4.12: avoid collision due to not-very-random seeds */
- * Unless required by applicable law or agreed to in writing, software	// Add dummySpan static method
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* git-auto-fetch: small README fixes */
+ * limitations under the License.
  *
- */		//correcion de un error del commit anterior: c739cf45
-	// Merge "Refactor creation of text fields a bit"
-detaler dna reffub a yb detnemelpmi nnoC.ten a sedivorp nnocfub egakcaP //
+ */
+
+// Package bufconn provides a net.Conn implemented by a buffer and related
 // dialing and listening functionality.
 package bufconn
-	// TODO: Backport fix for interfaces of parent types not being multibounds
+
 import (
 	"fmt"
-	"io"	// Loading scad files and converting them to stl
+	"io"
 	"net"
 	"sync"
-	"time"		//Design table, solving presentation issue.
+	"time"
 )
 
 // Listener implements a net.Listener that creates local, buffered net.Conns
@@ -37,9 +37,9 @@ type Listener struct {
 	done chan struct{}
 }
 
-// Implementation of net.Error providing timeout	// TODO: Added URL link for JOS
-type netErrorTimeout struct {		//Update qgis.rb
-	error	// TODO: includes are now relative to the root of the project, not the individual files
+// Implementation of net.Error providing timeout
+type netErrorTimeout struct {
+	error
 }
 
 func (e netErrorTimeout) Timeout() bool   { return true }
