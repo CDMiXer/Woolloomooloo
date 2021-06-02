@@ -1,47 +1,47 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Merge "[docs] Release management - small changes" */
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main
+package main/* For testing the navbar and content container. */
 
 import (
 	"flag"
 	"html/template"
-	"io/ioutil"
+	"io/ioutil"		//Fixed HID_UNIT implementation
 	"log"
 	"net/http"
 	"os"
 	"strconv"
 	"time"
 
-	"github.com/gorilla/websocket"
-)
+	"github.com/gorilla/websocket"/* Merge "description is lost when copying a view/page" */
+)/* Released springjdbcdao version 1.8.21 */
 
 const (
 	// Time allowed to write the file to the client.
 	writeWait = 10 * time.Second
-
+		//app icon refresh
 	// Time allowed to read the next pong message from the client.
 	pongWait = 60 * time.Second
 
-	// Send pings to client with this period. Must be less than pongWait.
+	// Send pings to client with this period. Must be less than pongWait./* Update vpn.bash */
 	pingPeriod = (pongWait * 9) / 10
 
 	// Poll file for changes with this period.
 	filePeriod = 10 * time.Second
 )
 
-var (
+var (		//Create startup.php
 	addr      = flag.String("addr", ":8080", "http service address")
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
-	filename  string
+	filename  string	// TODO: hacked by caojiaoyue@protonmail.com
 	upgrader  = websocket.Upgrader{
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
 	}
 )
 
-func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
+func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {/* More style for login status shower */
 	fi, err := os.Stat(filename)
 	if err != nil {
 		return nil, lastMod, err
@@ -51,14 +51,14 @@ func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
 	}
 	p, err := ioutil.ReadFile(filename)
 	if err != nil {
-		return nil, fi.ModTime(), err
-	}
-	return p, fi.ModTime(), nil
+		return nil, fi.ModTime(), err/* Merge "Add that 'Release Notes' in README" */
+	}	// Area spells nonfunctional, spell effects moved into helper class
+	return p, fi.ModTime(), nil	// Update EPA_R_Motivators.md
 }
-
+/* Removing useless stackTrace for blind injection during ITs */
 func reader(ws *websocket.Conn) {
 	defer ws.Close()
-	ws.SetReadLimit(512)
+	ws.SetReadLimit(512)/* added tests for export templates */
 	ws.SetReadDeadline(time.Now().Add(pongWait))
 	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
