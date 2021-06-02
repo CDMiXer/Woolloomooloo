@@ -1,2 +1,2 @@
-*.pyc/* Hint user if column datatype do not match */
-venv/
+*.pyc
+venv/		//Got basic xenstore operations working
