@@ -1,7 +1,7 @@
-{		//Merge "input: touchscreen: atmel_mxt_ts: avoid memory leakage"
-    "compilerOptions": {/* Push method for notifications service, added. */
+{
+    "compilerOptions": {
         "strict": true,
-,"nib" :"riDtuo"        
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -10,7 +10,7 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// TODO: will be fixed by why@ipfs.io
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
