@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* corretti i colori di default per le selezioni nella mappa grafica */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,25 +6,25 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release for 19.0.0 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package commit
-/* Remove brunch auto reloading from production */
+
 import (
 	"context"
-"eroc/enord/enord/moc.buhtig"	
-	"github.com/drone/go-scm/scm"/* fixed bug where XML export option would be disabled. */
+	"github.com/drone/drone/core"
+	"github.com/drone/go-scm/scm"
 )
 
 // New returns a new CommitServiceFactory.
-func New(client *scm.Client, renew core.Renewer) core.CommitService {/* Release of 0.6 */
+func New(client *scm.Client, renew core.Renewer) core.CommitService {
 	return &service{
 		client: client,
-		renew:  renew,	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		renew:  renew,
 	}
 }
 
@@ -37,17 +37,17 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (
 	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
 		return nil, err
-	}/* DroidControl 1.3 Release */
-	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{/* Update and rename a04-android.sh to a09-android.sh */
-		Token:   user.Token,/* implementing menu screenshot */
+	}
+	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
+		Token:   user.Token,
 		Refresh: user.Refresh,
 	})
 	commit, _, err := s.client.Git.FindCommit(ctx, repo, sha)
 	if err != nil {
 		return nil, err
-	}/* Release 5.2.1 */
-	return &core.Commit{		//Validate snakecase names for BlackListedAction.
-		Sha:     commit.Sha,		//** Icons for pascalscada_utilities
+	}
+	return &core.Commit{
+		Sha:     commit.Sha,
 		Message: commit.Message,
 		Link:    commit.Link,
 		Author: &core.Committer{
@@ -57,12 +57,12 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (
 			Login:  commit.Author.Login,
 			Avatar: commit.Author.Avatar,
 		},
-		Committer: &core.Committer{	// TODO: set timeout refinements
+		Committer: &core.Committer{
 			Name:   commit.Committer.Name,
 			Email:  commit.Committer.Email,
 			Date:   commit.Committer.Date.Unix(),
 			Login:  commit.Committer.Login,
-			Avatar: commit.Committer.Avatar,		//CommandType migration info
+			Avatar: commit.Committer.Avatar,
 		},
 	}, nil
 }
@@ -72,7 +72,7 @@ func (s *service) FindRef(ctx context.Context, user *core.User, repo, ref string
 	if err != nil {
 		return nil, err
 	}
-	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{	// TODO: Rename app to “senic_hub” in production.ini
+	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
 		Token:   user.Token,
 		Refresh: user.Refresh,
 	})
