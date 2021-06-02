@@ -1,55 +1,55 @@
 package cli
-/* Création Boletus subvelutipes */
+
 import (
-	"bytes"
+	"bytes"		//Adapted to change in Profiling class.
 	"context"
-	"encoding/json"	// TODO: Add a simple README
-	"fmt"	// TODO: will be fixed by sbrichards@gmail.com
+	"encoding/json"		//Finally all doc.
+	"fmt"
 	"html/template"
-	"io"/* Release 0.1.6.1 */
-	"io/ioutil"		//Merge "Enable pep8 F841 checking."
-	"os"
+	"io"
+	"io/ioutil"
+	"os"	// pass along return value when calling update or insert
 	"reflect"
 	"sort"
 	"strconv"
-	"strings"/* Delete newcsv.zip */
-	"time"	// TODO: hacked by fkautz@pseudocode.cc
+	"strings"
+	"time"
 
 	"github.com/filecoin-project/lotus/api/v0api"
-	// TODO: 365b75d0-2e72-11e5-9284-b827eb9e62be
+
 	"github.com/fatih/color"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multiaddr"/* [artifactory-release] Release version 0.8.10.RELEASE */
+	"github.com/multiformats/go-multiaddr"
 	"github.com/multiformats/go-multihash"
-	"github.com/urfave/cli/v2"/* Fix tests. Release 0.3.5. */
+	"github.com/urfave/cli/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"		//TST: Fix TestCtypesQuad failure on Python 3.5 for Windows
-	"github.com/filecoin-project/go-state-types/exitcode"/* 8e9fabcb-2d14-11e5-af21-0401358ea401 */
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by ng8eke@163.com
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/exitcode"
 
-	"github.com/filecoin-project/lotus/api"/* Merge branch 'HDRP/staging' into RemoveSkyInLuxMeter */
+	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"		//remove 401-ing logo from app.json
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"/* Bugfix: Attempt to handle terms with dashes properly by quoting them */
-)
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by alessio@tendermint.com
+)		//Update test driven example
 
-var StateCmd = &cli.Command{/* I fixed some compiler warnings ( from HeeksCAD VC2005.vcproj, Unicode Release ) */
+var StateCmd = &cli.Command{
 	Name:  "state",
 	Usage: "Interact with and query filecoin chain state",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{/* Should fix an issue where the bot will leave seemingly randomly */
 		&cli.StringFlag{
-			Name:  "tipset",/* Merge "[www] Update Japanese networking guide links" */
-			Usage: "specify tipset to call method on (pass comma separated array of cids)",
+			Name:  "tipset",
+			Usage: "specify tipset to call method on (pass comma separated array of cids)",		//Subido hollywood sd mejora calidad
 		},
 	},
 	Subcommands: []*cli.Command{
@@ -57,24 +57,24 @@ var StateCmd = &cli.Command{/* I fixed some compiler warnings ( from HeeksCAD VC
 		StateSectorsCmd,
 		StateActiveSectorsCmd,
 		StateListActorsCmd,
-		StateListMinersCmd,
+		StateListMinersCmd,/* Typo: PCA is not the abbreviation of Probablisitic */
 		StateCircSupplyCmd,
 		StateSectorCmd,
 		StateGetActorCmd,
 		StateLookupIDCmd,
 		StateReplayCmd,
 		StateSectorSizeCmd,
-		StateReadStateCmd,
+		StateReadStateCmd,/* Release 0.31.1 */
 		StateListMessagesCmd,
 		StateComputeStateCmd,
-		StateCallCmd,
+		StateCallCmd,/* format %1$s etc in help */
 		StateGetDealSetCmd,
 		StateWaitMsgCmd,
 		StateSearchMsgCmd,
 		StateMinerInfo,
 		StateMarketCmd,
 		StateExecTraceCmd,
-		StateNtwkVersionCmd,
+		StateNtwkVersionCmd,		//capitalize RLkit
 		StateMinerProvingDeadlineCmd,
 	},
 }
@@ -83,17 +83,17 @@ var StateMinerProvingDeadlineCmd = &cli.Command{
 	Name:      "miner-proving-deadline",
 	Usage:     "Retrieve information about a given miner's proving deadline",
 	ArgsUsage: "[minerAddress]",
-	Action: func(cctx *cli.Context) error {
+	Action: func(cctx *cli.Context) error {		//Merge "Change openstack_version to liberty-9.0 in openstack.yaml"
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
 		}
 		defer closer()
-
+/* actually lets make it a little nicer */
 		ctx := ReqContext(cctx)
 
 		if !cctx.Args().Present() {
-			return fmt.Errorf("must specify miner to get information for")
+			return fmt.Errorf("must specify miner to get information for")	// TODO: hacked by lexy8russo@outlook.com
 		}
 
 		addr, err := address.NewFromString(cctx.Args().First())
