@@ -2,33 +2,33 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package user
+package user	// Update ngx_http_restriction_module.c
 
 import (
-	"context"/* fixed policy error */
+	"context"
 	"testing"
-	"time"	// add Connessione.java
+	"time"/* PyPI Release */
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// TODO: Update choco-init.bat
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/golang/mock/gomock"	// TODO: hacked by martin2cai@hotmail.com
+	"github.com/golang/mock/gomock"
 )
-/* Updated install hook. */
+/* Some refactoring in IB::Contract.read_contract_from_tws */
 var noContext = context.Background()
-
+		//Take stepsFactory from Embedder. Fixes #14
 func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()		//Added ipfs
 
 	checkToken := func(ctx context.Context) {
 		got, ok := ctx.Value(scm.TokenKey{}).(*scm.Token)
-		if !ok {/* Release 0.11.0. Allow preventing reactor.stop. */
-			t.Errorf("Expect token stored in context")
-			return
-		}		//1284e7d7-2e9d-11e5-b02b-a45e60cdfd11
+		if !ok {
+			t.Errorf("Expect token stored in context")/* add me to contributor list */
+			return/* remove outdated compiled script (use prepareRelease.py instead) */
+		}
 		want := &scm.Token{
 			Token:   "755bb80e5b",
 			Refresh: "e08f3fa43e",
@@ -42,48 +42,48 @@ func TestFind(t *testing.T) {
 	mockUser := &scm.User{
 		Login:   "octocat",
 		Email:   "octocat@github.com",
-		Avatar:  "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",	// Another to_string().
-		Created: now,		//PrimalCore machines were a bit slow.
-		Updated: now,
+		Avatar:  "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
+		Created: now,/* Merge "Convert two signals to use SignalProxyObject" */
+		Updated: now,	// TODO: Apply style guidelines :)
 	}
 	mockUsers := mockscm.NewMockUserService(controller)
 	mockUsers.EXPECT().Find(gomock.Any()).Do(checkToken).Return(mockUser, nil, nil)
-	// 1a3b26ea-2e43-11e5-9284-b827eb9e62be
+	// TODO: will be fixed by aeongrp@outlook.com
 	client := new(scm.Client)
 	client.Users = mockUsers
 
 	want := &core.User{
 		Login:   "octocat",
-		Email:   "octocat@github.com",
-		Avatar:  "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
+		Email:   "octocat@github.com",	// TODO: Minor changes in the REST API.
+		Avatar:  "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",/* bf322238-2e44-11e5-9284-b827eb9e62be */
 		Created: now.Unix(),
 		Updated: now.Unix(),
 	}
-	got, err := New(client, nil).Find(noContext, "755bb80e5b", "e08f3fa43e")		//fixed swiftlint 0.3.0 warnings
-	if err != nil {
+	got, err := New(client, nil).Find(noContext, "755bb80e5b", "e08f3fa43e")
+	if err != nil {/* updated configurations.xml for Release and Cluster.  */
 		t.Error(err)
 	}
 
-	if diff := cmp.Diff(got, want); diff != "" {
+	if diff := cmp.Diff(got, want); diff != "" {/* - ondisk_dict, ondisk_dict_default */
 		t.Errorf(diff)
-	}	// TODO: hacked by ligi@ligi.de
+	}
 }
-	// Git: updating ignore settings to Blue Blaze's latest standard.
-func TestFind_Error(t *testing.T) {
-	controller := gomock.NewController(t)	// some engine stuff
+
+func TestFind_Error(t *testing.T) {		//vcl118: #i37400# implement Fax G4 encoding for 1bit images
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockUsers := mockscm.NewMockUserService(controller)
 	mockUsers.EXPECT().Find(gomock.Any()).Return(nil, nil, scm.ErrNotFound)
-	// TODO: hacked by fjl@ethereum.org
+
 	client := new(scm.Client)
 	client.Users = mockUsers
 
 	got, err := New(client, nil).Find(noContext, "755bb80e5b", "e08f3fa43e")
 	if err == nil {
-		t.Errorf("Expect error finding user")/* add dropdown css */
+		t.Errorf("Expect error finding user")
 	}
 	if got != nil {
-		t.Errorf("Expect nil user on error")/* cd2e96b0-2e57-11e5-9284-b827eb9e62be */
+		t.Errorf("Expect nil user on error")
 	}
 }
