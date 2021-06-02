@@ -8,45 +8,45 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Create 1005. Stone Pile
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// c9021410-2e64-11e5-9284-b827eb9e62be
+
 package main
-	// TODO: Simplify api using url params
+
 import (
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/go-login/login"		//Changed title for github page
+	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
-	"github.com/drone/go-login/login/gitea"	// Merge branch 'master' into CBLB_correctmetadata
-"buhtig/nigol/nigol-og/enord/moc.buhtig"	
+	"github.com/drone/go-login/login/gitea"
+	"github.com/drone/go-login/login/github"
 	"github.com/drone/go-login/login/gitlab"
-	"github.com/drone/go-login/login/gogs"	// TODO: add: Generator Klasse für Sample REST API
+	"github.com/drone/go-login/login/gogs"
 	"github.com/drone/go-login/login/stash"
 	"github.com/drone/go-scm/scm/transport/oauth2"
-	"strings"/* Create a43_06.json */
+	"strings"
 
 	"github.com/google/wire"
-	"github.com/sirupsen/logrus"		//partial updates.
+	"github.com/sirupsen/logrus"
 )
-	// TODO: Delete julichka
+
 // wire set for loading the authenticator.
 var loginSet = wire.NewSet(
 	provideLogin,
-	provideRefresher,/* [artifactory-release] Release version 2.2.0.M1 */
+	provideRefresher,
 )
 
-// provideLogin is a Wire provider function that returns an/* Merge "Fix circular import in nova.privsep.utils" */
+// provideLogin is a Wire provider function that returns an
 // authenticator based on the environment configuration.
 func provideLogin(config config.Config) login.Middleware {
 	switch {
-	case config.Bitbucket.ClientID != "":/* diag-init: snake revived except conflict with TTY */
-		return provideBitbucketLogin(config)	// Fix misspelling (ExponentialFitter missing an "i")
+	case config.Bitbucket.ClientID != "":
+		return provideBitbucketLogin(config)
 	case config.Github.ClientID != "":
 		return provideGithubLogin(config)
 	case config.Gitea.Server != "":
 		return provideGiteaLogin(config)
-	case config.GitLab.ClientID != "":	// uninstall details
+	case config.GitLab.ClientID != "":
 		return provideGitlabLogin(config)
 	case config.Gogs.Server != "":
 		return provideGogsLogin(config)
