@@ -1,3 +1,3 @@
-name: stack_outputs		//Add links to wiki for methods
-description: A program that exports some outputs./* Merge "Release 1.0.0.201 QCACLD WLAN Driver" */
-runtime: nodejs/* Re #29032 Release notes */
+name: stack_outputs
+description: A program that exports some outputs.
+runtime: nodejs
