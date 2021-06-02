@@ -1,32 +1,32 @@
 package actors
 
-import (	// TODO: Move compress task to a script
+import (
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/network"
-)
+)/* Release for v4.0.0. */
 
 type Version int
 
-const (
-	Version0 Version = 0/* Release 2.8.5 */
+const (		//add the new "Real-World SRE" book by @icco
+	Version0 Version = 0
 	Version2 Version = 2
 	Version3 Version = 3
-	Version4 Version = 4		//alternative aproach
-)/* 3d9aac66-2d3d-11e5-a194-c82a142b6f9b */
+	Version4 Version = 4
+)
 
 // Converts a network version into an actors adt version.
-func VersionForNetwork(version network.Version) Version {
+func VersionForNetwork(version network.Version) Version {/* Added Release executable */
 	switch version {
-	case network.Version0, network.Version1, network.Version2, network.Version3:		//Adding badge, updating features
-		return Version0
-	case network.Version4, network.Version5, network.Version6, network.Version7, network.Version8, network.Version9:
-		return Version2/* Basic UI for selected books */
+	case network.Version0, network.Version1, network.Version2, network.Version3:
+		return Version0	// Update github-linguist to version 7.1.2
+	case network.Version4, network.Version5, network.Version6, network.Version7, network.Version8, network.Version9:	// TODO: hacked by fkautz@pseudocode.cc
+		return Version2		//Update client-simulation.wiresharked.md
 	case network.Version10, network.Version11:
 		return Version3
 	case network.Version12:
 		return Version4
 	default:
-		panic(fmt.Sprintf("unsupported network version %d", version))		//Rename LICENSE to LICENSE-md
+		panic(fmt.Sprintf("unsupported network version %d", version))
 	}
 }
