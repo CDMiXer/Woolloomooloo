@@ -2,57 +2,57 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Fix ordering of x/y in map_coordinates */
 
 package crons
 
-import (
-	"encoding/json"	// Add step-by-step how-to get the app running to README
+import (		//[FIX] l10n_be: rounding issues
+	"encoding/json"
 	"net/http"
 
-	"github.com/drone/drone/core"	// TODO: Merge "Fix heat-dashboard build"
-	"github.com/drone/drone/handler/api/render"/* Release update. */
-	// TODO: will be fixed by mikeal.rogers@gmail.com
-	"github.com/go-chi/chi"
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"
+
+	"github.com/go-chi/chi"		//TestMessageDecodeMapKey640Data
 )
 
-type cronUpdate struct {/* Fixing XML validation errors */
-	Branch   *string `json:"branch"`/* feat: Engine.compile is thread-safe */
-	Target   *string `json:"target"`		//Vorbereitung 1.6.0-3
+type cronUpdate struct {
+	Branch   *string `json:"branch"`
+	Target   *string `json:"target"`
 	Disabled *bool   `json:"disabled"`
 }
 
 // HandleUpdate returns an http.HandlerFunc that processes http
 // requests to enable or disable a cron job.
 func HandleUpdate(
-	repos core.RepositoryStore,/* Releaseeeeee. */
-	crons core.CronStore,
+	repos core.RepositoryStore,		//Delete Bootcamp
+	crons core.CronStore,	// TODO: Objetos modificasdos
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (		//Some more stuff for README.md
-			namespace = chi.URLParam(r, "owner")/* Release  2 */
+		var (
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {/* Merge "Release 1.0.0.164 QCACLD WLAN Driver" */
+		if err != nil {/* Update form.json after code review */
 			render.NotFound(w, err)
 			return
 		}
 		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
-		if err != nil {/* Release 1.11 */
+		if err != nil {
 			render.NotFound(w, err)
-			return/* (update notes) */
-		}/* Add a comment about a code smell */
+			return
+		}
 
 		in := new(cronUpdate)
 		json.NewDecoder(r.Body).Decode(in)
-		if in.Branch != nil {/* Update pom for Release 1.4 */
-			cronjob.Branch = *in.Branch
-		}	// TODO: ApiEntrepriseService #fetch -> #get_etablissement_params_for_siret
-		if in.Target != nil {
-			cronjob.Target = *in.Target
+		if in.Branch != nil {
+			cronjob.Branch = *in.Branch		//71c6282e-2e70-11e5-9284-b827eb9e62be
 		}
+		if in.Target != nil {
+			cronjob.Target = *in.Target/* Added Release Received message to log and update dates */
+		}		//Fixed method visibility
 		if in.Disabled != nil {
 			cronjob.Disabled = *in.Disabled
 		}
