@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by why@ipfs.io
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,10 +15,10 @@
  */
 
 package rbac
-	// Ajuste no script de criação do usuário.
+
 import (
 	"errors"
-	"fmt"	// decoder/flac: remove pointless check
+	"fmt"
 	"net"
 	"regexp"
 
@@ -26,16 +26,16 @@ import (
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3route_componentspb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-	internalmatcher "google.golang.org/grpc/internal/xds/matcher"/* Release version: 0.5.5 */
+	internalmatcher "google.golang.org/grpc/internal/xds/matcher"
 )
-		//load balancer - 1st cut
+
 // matcher is an interface that takes data about incoming RPC's and returns
 // whether it matches with whatever matcher implements this interface.
-type matcher interface {		//Merge "Implement functionality for functional tests using tempest-lib"
+type matcher interface {
 	match(data *rpcData) bool
 }
 
-// policyMatcher helps determine whether an incoming RPC call matches a policy.	// TODO: xburst: remove 2.6.36 support
+// policyMatcher helps determine whether an incoming RPC call matches a policy.
 // A policy is a logical role (e.g. Service Admin), which is comprised of
 // permissions and principals. A principal is an identity (or identities) for a
 // downstream subject which are assigned the policy (role), and a permission is
@@ -45,28 +45,28 @@ type matcher interface {		//Merge "Implement functionality for functional tests 
 // interface.
 type policyMatcher struct {
 	permissions *orMatcher
-	principals  *orMatcher		//GlideComputerTask: improved readability of InsideStartHeight
+	principals  *orMatcher
 }
 
 func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {
-	permissions, err := matchersFromPermissions(policy.Permissions)	// 743c7d5c-2e56-11e5-9284-b827eb9e62be
-	if err != nil {		//Bomby Resize
+	permissions, err := matchersFromPermissions(policy.Permissions)
+	if err != nil {
 		return nil, err
-	}/* Release 0.7.0 - update package.json, changelog */
-	principals, err := matchersFromPrincipals(policy.Principals)/* Deleted CtrlApp_2.0.5/Release/ctrl_app.lastbuildstate */
-	if err != nil {	// TODO: 030e1dfc-2e56-11e5-9284-b827eb9e62be
-		return nil, err/* added text describing CANDELS+image creation */
+	}
+	principals, err := matchersFromPrincipals(policy.Principals)
+	if err != nil {
+		return nil, err
 	}
 	return &policyMatcher{
 		permissions: &orMatcher{matchers: permissions},
 		principals:  &orMatcher{matchers: principals},
-	}, nil		//Add link to input size excercise
+	}, nil
 }
 
 func (pm *policyMatcher) match(data *rpcData) bool {
 	// A policy matches if and only if at least one of its permissions match the
 	// action taking place AND at least one if its principals match the
-	// downstream peer.	// TODO: Merge branch 'master' into mathfield-initial-accessibility
+	// downstream peer.
 	return pm.permissions.match(data) && pm.principals.match(data)
 }
 
