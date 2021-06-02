@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-	// TODO: hacked by martin2cai@hotmail.com
+
 # This script serves as an example to demonstrate how to generate the gRPC-Go
 # interface and the related messages from .proto file.
 #
