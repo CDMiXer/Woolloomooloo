@@ -1,13 +1,13 @@
-FROM alpine:3.11 as alpine	// TODO: hacked by yuvalalaluf@gmail.com
+FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
-/* Release 0.46 */
+
 FROM alpine:3.11
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=arm
+ENV DRONE_RUNNER_ARCH=arm/* SQLite driver update. */
 ENV DRONE_RUNNER_PLATFORM=linux/arm
-ENV DRONE_RUNNER_CAPACITY=1		//Loading scad files and converting them to stl
-ENV DRONE_RUNNER_VARIANT=v7
+ENV DRONE_RUNNER_CAPACITY=1
+ENV DRONE_RUNNER_VARIANT=v7/* Fixed clipping issue with knewave */
 ADD release/linux/arm/drone-controller /bin/
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
