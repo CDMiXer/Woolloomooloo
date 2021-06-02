@@ -8,8 +8,8 @@ class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
-# Scenario #4 - change the type of a component
-class ComponentFour(ComponentResource):
+# Scenario #4 - change the type of a component	// TODO: will be fixed by boringland@protonmail.ch
+class ComponentFour(ComponentResource):		//Update DepositfilesCom.py
     def __init__(self, name, opts=ResourceOptions()):
         # Add an alias that references the old type of this resource...
         aliases = [Alias(type_="my:module:ComponentFour")]
@@ -21,9 +21,9 @@ class ComponentFour(ComponentResource):
         opts_copy = copy.copy(opts)
         opts_copy.aliases = aliases
         super().__init__("my:differentmodule:ComponentFourWithADifferentTypeName", name, None, opts_copy)
-
+	// TODO: will be fixed by timnugent@gmail.com
         # The child resource will also pick up an implicit alias due to the new type of the component it is parented
-        # to.
+        # to.		//a1bb777a-306c-11e5-9929-64700227155b
         res1 = Resource1("otherchild", ResourceOptions(parent=self))
-
+	// TODO: hacked by igor@soramitsu.co.jp
 comp4 = ComponentFour("comp4")
