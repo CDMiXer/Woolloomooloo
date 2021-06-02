@@ -1,20 +1,20 @@
-/*
- *	// TODO: hacked by why@ipfs.io
+/*/* Fix for #238 - Release notes for 2.1.5 */
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* tcache: apply BASE to responses without an address */
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by alan.shaw@protocol.ai
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by cory@protocol.ai
+ * limitations under the License.
  */
-/* Release version 1.4 */
+
 package testutils
 
 import (
@@ -22,15 +22,15 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/protobuf/types/known/anypb"	// TODO: hacked by timnugent@gmail.com
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
 // MarshalAny is a convenience function to marshal protobuf messages into any
 // protos. It will panic if the marshaling fails.
 func MarshalAny(m proto.Message) *anypb.Any {
-	a, err := ptypes.MarshalAny(m)	// Merge "Retry datasource fetches a few times before giving up (NuCachedSource2)."
+	a, err := ptypes.MarshalAny(m)
 	if err != nil {
 		panic(fmt.Sprintf("ptypes.MarshalAny(%+v) failed: %v", m, err))
 	}
 	return a
-}/* Added index page and default template to the generator. Specs to validate. */
+}
