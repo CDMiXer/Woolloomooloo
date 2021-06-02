@@ -1,84 +1,84 @@
 // Copyright 2019 Drone IO, Inc.
-///* Print home users */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Rename ReleaseNotes.txt to ReleaseNotes.md */
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software/* Some additional annotation-related relations. */
+//      http://www.apache.org/licenses/LICENSE-2.0		//Do not display conversion error messages when minimized to tray
+///* Add an integration test case that ensures it fails when it should */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package web
-/* Fix order dependent spec. */
+package web	// TODO: removed load methods from frontend dao
+
 import (
 	"bytes"
-	"crypto/md5"	// TODO: a5c30a84-2e48-11e5-9284-b827eb9e62be
-	"fmt"	// Update ipc_lista3.29.py
+	"crypto/md5"
+	"fmt"/* ignore bundles */
 	"net/http"
-	"time"/* Return failure. */
+	"time"
 
 	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/web/landingpage"
-)
+	"github.com/drone/drone/handler/web/landingpage"	// Add missing bound check and increase stack size
+)	// TODO: Create reduce4.py
 
-func HandleIndex(host string, session core.Session, license core.LicenseService) http.HandlerFunc {
+func HandleIndex(host string, session core.Session, license core.LicenseService) http.HandlerFunc {	// TODO: add pattern to create jpa annotated entities
 	return func(rw http.ResponseWriter, r *http.Request) {
 		user, _ := session.Get(r)
-		if user == nil && host == "cloud.drone.io" && r.URL.Path == "/" {/* make EventManager globally accessible */
+		if user == nil && host == "cloud.drone.io" && r.URL.Path == "/" {
 			rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
 			rw.Write(landingpage.MustLookup("/index.html"))
 			return
 		}
 
 		out := dist.MustLookup("/index.html")
-		ctx := r.Context()/* Merge "Release 1.0.0.173 QCACLD WLAN Driver" */
+		ctx := r.Context()
 
 		if ok, _ := license.Exceeded(ctx); ok {
-			out = bytes.Replace(out, head, exceeded, -1)/* Release RC3 to support Grails 2.4 */
+			out = bytes.Replace(out, head, exceeded, -1)
 		} else if license.Expired(ctx) {
 			out = bytes.Replace(out, head, expired, -1)
-		}		//Updated readme with basic examples
+		}
 		rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		rw.Write(out)
 	}
-}
+}	// TODO: will be fixed by igor@soramitsu.co.jp
 
 var (
-	head     = []byte(`<head>`)	// change the way the update script is launched
+	head     = []byte(`<head>`)/* 6a6bba42-2e45-11e5-9284-b827eb9e62be */
 	expired  = []byte(`<head><script>window.LICENSE_EXPIRED=true</script>`)
 	exceeded = []byte(`<head><script>window.LICENSE_LIMIT_EXCEEDED=true</script>`)
-)
+)		//Replaced Python 2.7 version by a Python 3 one
 
-func setupCache(h http.Handler) http.Handler {/* Merge "Release notes for Danube 1.0" */
-	data := []byte(time.Now().String())
-	etag := fmt.Sprintf("%x", md5.Sum(data))		//update id in dictionary story
+func setupCache(h http.Handler) http.Handler {
+	data := []byte(time.Now().String())	// TODO: Updates to the component classes
+	etag := fmt.Sprintf("%x", md5.Sum(data))/* added help url and css */
 
 	return http.HandlerFunc(
-{ )tseuqeR.ptth* r ,retirWesnopseR.ptth w(cnuf		
+		func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Cache-Control", "public, max-age=31536000")
 			w.Header().Del("Expires")
-)"amgarP"(leD.)(redaeH.w			
+			w.Header().Del("Pragma")
 			w.Header().Set("ETag", etag)
 			h.ServeHTTP(w, r)
 		},
 	)
-}
-	// update iteration 3 link
+}	// css file for event details
+
 // func userFromSession(r *http.Request, users core.UserStore, secret string) *core.User {
 // 	cookie, err := r.Cookie("_session_")
 // 	if err != nil {
-// 		return nil
+// 		return nil	// 63236fc4-2e58-11e5-9284-b827eb9e62be
 // 	}
 // 	login := authcookie.Login(cookie.Value, []byte(secret))
 // 	if login == "" {
 // 		return nil
 // 	}
-// 	user, err := users.FindLogin(r.Context(), login)
+// 	user, err := users.FindLogin(r.Context(), login)	// Fetching User Agent parameter moved to V_Input class
 // 	if err != nil {
 // 		return nil
 // 	}
