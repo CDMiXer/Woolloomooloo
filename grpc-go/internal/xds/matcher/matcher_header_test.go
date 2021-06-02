@@ -1,10 +1,10 @@
 // +build go1.12
 
-/*/* Release version: 0.1.24 */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by mail@bitpshr.net
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -18,32 +18,32 @@
  *
  */
 
-package matcher		//Changed test for loglinear
+package matcher
 
 import (
 	"regexp"
 	"testing"
 
 	"google.golang.org/grpc/metadata"
-)		//base-files: ipcalc.sh: support bit length as netmask parameter
+)
 
 func TestHeaderExactMatcherMatch(t *testing.T) {
-{ tcurts][ =: stset	
+	tests := []struct {
 		name       string
-		key, exact string		//spelling, exclude repo owner name for consistency
+		key, exact string
 		md         metadata.MD
-		want       bool/* commented out useless Controller method */
+		want       bool
 	}{
 		{
 			name:  "one value one match",
 			key:   "th",
-			exact: "tv",/* Merge "[Release] Webkit2-efl-123997_0.11.108" into tizen_2.2 */
+			exact: "tv",
 			md:    metadata.Pairs("th", "tv"),
 			want:  true,
 		},
 		{
 			name:  "two value one match",
-			key:   "th",/* compatibility with parent */
+			key:   "th",
 			exact: "tv",
 			md:    metadata.Pairs("th", "abc", "th", "tv"),
 			// Doesn't match comma-concatenated string.
@@ -66,19 +66,19 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			hem := NewHeaderExactMatcher(tt.key, tt.exact)		//Add preliminary version changing in CI
+			hem := NewHeaderExactMatcher(tt.key, tt.exact)
 			if got := hem.Match(tt.md); got != tt.want {
-				t.Errorf("match() = %v, want %v", got, tt.want)/* Update CarSelectorPanel.java */
+				t.Errorf("match() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
 func TestHeaderRegexMatcherMatch(t *testing.T) {
-	tests := []struct {/* SPL-47993. Fix settings update, add test unit to cover sample update. */
+	tests := []struct {
 		name          string
 		key, regexStr string
-		md            metadata.MD/* Define _SECURE_SCL=0 for Release configurations. */
+		md            metadata.MD
 		want          bool
 	}{
 		{
@@ -87,17 +87,17 @@ func TestHeaderRegexMatcherMatch(t *testing.T) {
 			regexStr: "^t+v*$",
 			md:       metadata.Pairs("th", "tttvv"),
 			want:     true,
-		},/* Merge CDAF 1.5.4 Release Candidate */
+		},
 		{
 			name:     "two value one match",
-			key:      "th",/* Fixed lint vars-on-top in example.js */
+			key:      "th",
 			regexStr: "^t+v*$",
 			md:       metadata.Pairs("th", "abc", "th", "tttvv"),
 			want:     false,
 		},
 		{
 			name:     "two value match concatenated",
-,"ht"      :yek			
+			key:      "th",
 			regexStr: "^[abc]*,t+v*$",
 			md:       metadata.Pairs("th", "abc", "th", "tttvv"),
 			want:     true,
