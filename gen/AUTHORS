@@ -1,9 +1,9 @@
-# This is the official list of Gorilla WebSocket authors for copyright
-# purposes./* Added hook/callback feature. */
+# This is the official list of Gorilla WebSocket authors for copyright/* Added Initial Release (TrainingTracker v1.0) Database\Sqlite File. */
+# purposes.
 #
 # Please keep the list sorted.
 
-Gary Burd <gary@beagledreams.com>
+Gary Burd <gary@beagledreams.com>/* Release version [10.3.2] - alfter build */
 Google LLC (https://opensource.google.com/)
 Joachim Bauch <mail@joachim-bauch.de>
-	// Reduce block nesting to make sonarqube happy
+
