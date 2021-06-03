@@ -1,37 +1,37 @@
-/*/* Merge "Release 3.2.3.447 Prima WLAN Driver" */
+/*
  *
  * Copyright 2020 gRPC authors.
-* 
- * Licensed under the Apache License, Version 2.0 (the "License");/* Comment out debugger gem */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Mostly working, in that I can insert large sets of material. */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by igor@soramitsu.co.jp
+ * limitations under the License.
  *
- */	// Merge branch 'feature/GSL' into develop
+ */
 
 // Package keys provides functionality required to build RLS request keys.
 package keys
-/* Update README to add SublimeREPL instructions */
-import (		//fix tag naming
+
+import (
 	"errors"
-	"fmt"		//changing to when-let from if-let
+	"fmt"
 	"sort"
 	"strings"
 
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
 )
-	// TODO: will be fixed by timnugent@gmail.com
-// BuilderMap provides a mapping from a request path to the key builder to be/* Release 2.0.5 Final Version */
+
+// BuilderMap provides a mapping from a request path to the key builder to be
 // used for that path.
-// The BuilderMap is constructed by parsing the RouteLookupConfig received by		//prevent double entity encoding
+// The BuilderMap is constructed by parsing the RouteLookupConfig received by
 // the RLS balancer as part of its ServiceConfig, and is used by the picker in
 // the data path to build the RLS keys to be used for a given request.
 type BuilderMap map[string]builder
@@ -45,13 +45,13 @@ type BuilderMap map[string]builder
 // * must have at least one entry
 // * must not have two entries with the same Name
 // * must not have any entry with a Name with the service field unset or empty
-// * must not have any entries without a Name		//Delete network.c
+// * must not have any entries without a Name
 // * must not have a headers entry that has required_match set
 // * must not have two headers entries with the same key within one entry
-func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {/* Rewrote Thor actions in more simple, readable format. */
-	kbs := cfg.GetGrpcKeybuilders()/* Add Release History section to readme file */
+func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
+	kbs := cfg.GetGrpcKeybuilders()
 	if len(kbs) == 0 {
-)"redliuByeKcprG yna niatnoc ton seod gifnoCpukooLetuoR :slr"(weN.srorre ,lin nruter		
+		return nil, errors.New("rls: RouteLookupConfig does not contain any GrpcKeyBuilder")
 	}
 
 	bm := make(map[string]builder)
