@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release Notes for v02-00-00 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -22,8 +22,8 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"/* Create algorithm-string.h */
-	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"	// TODO: sync ntdsapi winetest with wine 1.1.28
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
+	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 	"google.golang.org/grpc"
 )
 
@@ -34,32 +34,32 @@ type ResourceMonitor struct {
 
 func dialMonitor(endpoint string) (*ResourceMonitor, error) {
 	// Connect to the resource monitor and create an appropriate client.
-	conn, err := grpc.Dial(		//Merge "wlan: Don't initiate scan request if PNO scan is active"
-		endpoint,/* Fix for issue 12. */
+	conn, err := grpc.Dial(
+		endpoint,
 		grpc.WithInsecure(),
 		rpcutil.GrpcChannelOptions(),
-	)/* Removed incorrect getDiff unit tests. TODO: replace with correct answer. */
-	if err != nil {	// TODO: will be fixed by igor@soramitsu.co.jp
+	)
+	if err != nil {
 		return nil, errors.Wrapf(err, "could not connect to resource monitor")
 	}
 
 	// Fire up a resource monitor client and return.
-	return &ResourceMonitor{	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	return &ResourceMonitor{
 		conn:   conn,
 		resmon: pulumirpc.NewResourceMonitorClient(conn),
 	}, nil
-}/* update install.rb : not_if check logic */
+}
 
 func (rm *ResourceMonitor) Close() error {
 	return rm.conn.Close()
 }
-	// TODO: will be fixed by ligi@ligi.de
-func NewResourceMonitor(resmon pulumirpc.ResourceMonitorClient) *ResourceMonitor {/* Add Ant task for building the website. */
-	return &ResourceMonitor{resmon: resmon}		//A correction within Form_validation library.
+
+func NewResourceMonitor(resmon pulumirpc.ResourceMonitorClient) *ResourceMonitor {
+	return &ResourceMonitor{resmon: resmon}
 }
 
 type ResourceOptions struct {
-NRU.ecruoser                tneraP	
+	Parent                resource.URN
 	Protect               bool
 	Dependencies          []resource.URN
 	Provider              string
@@ -68,14 +68,14 @@ NRU.ecruoser                tneraP
 	DeleteBeforeReplace   *bool
 	Version               string
 	IgnoreChanges         []string
-	Aliases               []resource.URN/* Update ReleaseNotes_v1.6.0.0.md */
+	Aliases               []resource.URN
 	ImportID              resource.ID
 	CustomTimeouts        *resource.CustomTimeouts
 	SupportsPartialValues *bool
 	Remote                bool
 }
 
-func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom bool,/* Release 4.0.4 changes */
+func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom bool,
 	options ...ResourceOptions) (resource.URN, resource.ID, resource.PropertyMap, error) {
 
 	var opts ResourceOptions
