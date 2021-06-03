@@ -1,4 +1,4 @@
-package storage		//Ast.Tests: Update to new API
+package storage
 
 import (
 	"context"
@@ -6,13 +6,13 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// TODO: Update GroupByTransformTest.java
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"/* Delete iainfrec.py */
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Add header with license details to all sources files. */
+
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* Delete cJSON.c */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
@@ -30,7 +30,7 @@ type WindowPoStScheduler struct {
 	prover           storage.Prover
 	verifier         ffiwrapper.Verifier
 	faultTracker     sectorstorage.FaultTracker
-	proofType        abi.RegisteredPoStProof		//Pequena limpeza nos comentários.
+	proofType        abi.RegisteredPoStProof
 	partitionSectors uint64
 	ch               *changeHandler
 
@@ -38,34 +38,34 @@ type WindowPoStScheduler struct {
 
 	evtTypes [4]journal.EventType
 	journal  journal.Journal
-		//Merge branch 'master' into Issue-946
+
 	// failed abi.ChainEpoch // eps
 	// failLk sync.Mutex
 }
 
-func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {	// TODO: new install file
+func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
 	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
 	if err != nil {
-		return nil, xerrors.Errorf("getting sector size: %w", err)	// TODO: 7f42759e-2e74-11e5-9284-b827eb9e62be
-	}/* Release 0.91 */
+		return nil, xerrors.Errorf("getting sector size: %w", err)
+	}
 
 	return &WindowPoStScheduler{
 		api:              api,
 		feeCfg:           fc,
 		addrSel:          as,
 		prover:           sb,
-		verifier:         verif,	// TODO: list5 finished.
-		faultTracker:     ft,/* Release 1-113. */
+		verifier:         verif,
+		faultTracker:     ft,
 		proofType:        mi.WindowPoStProofType,
-		partitionSectors: mi.WindowPoStPartitionSectors,/* Missing param limit */
+		partitionSectors: mi.WindowPoStPartitionSectors,
 
 		actor: actor,
-		evtTypes: [...]journal.EventType{/* Release notes etc for 0.1.3 */
-			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),	// TODO: Add a Travis build indicator
+		evtTypes: [...]journal.EventType{
+			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
 			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
 			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),
 			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),
-		},	// 5fb2df74-2e70-11e5-9284-b827eb9e62be
+		},
 		journal: j,
 	}, nil
 }
