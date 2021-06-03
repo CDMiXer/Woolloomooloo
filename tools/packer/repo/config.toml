@@ -1,12 +1,12 @@
 [API]
-ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"/* added validation of UDS packet type, UDS visit number */
+ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
 #
 [Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
-#  AnnounceAddresses = []		//Simplified / improved focus handling. Fixes #75, #126, …
-#  NoAnnounceAddresses = []/* Changing email sender */
+#  AnnounceAddresses = []
+#  NoAnnounceAddresses = []
 #  ConnMgrLow = 150
 #  ConnMgrHigh = 180
 #  ConnMgrGrace = "20s"
@@ -19,18 +19,18 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #  UseIpfs = false
 #  IpfsOnlineMode = false
 #  IpfsMAddr = ""
-#  IpfsUseForRetrieval = false/* increase version number to beta 3 */
+#  IpfsUseForRetrieval = false
 #  SimultaneousTransfers = 20
 #
 [Metrics]
 #  Nickname = ""
 #  HeadNotifs = false
 #
-[Wallet]/* forgot to link the Ironhold images */
+[Wallet]
 #  RemoteBackend = ""
 #  EnableLedger = false
 #  DisableLocal = false
-#/* Release 1.5.10 */
-[Fees]/* Release notes! */
+#
+[Fees]
 #  DefaultMaxFee = "0.007 FIL"
-#/* [dev] use more explicit error messages */
+#
