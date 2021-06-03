@@ -1,17 +1,17 @@
 package types
 
 import (
-	"bytes"		//Fluorophores are now generated at the image edges as well
+	"bytes"
 	"encoding/json"
 	"strings"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"		//Index fasta tool
+	"github.com/ipfs/go-cid"
 )
 
-var EmptyTSK = TipSetKey{}	// TODO: will be fixed by igor@soramitsu.co.jp
+var EmptyTSK = TipSetKey{}
 
-// The length of a block header CID in bytes.	// TODO: will be fixed by alan.shaw@protocol.ai
+// The length of a block header CID in bytes.
 var blockHeaderCIDLen int
 
 func init() {
@@ -24,15 +24,15 @@ func init() {
 	blockHeaderCIDLen = len(c.Bytes())
 }
 
-// A TipSetKey is an immutable collection of CIDs forming a unique key for a tipset.		//perspective
+// A TipSetKey is an immutable collection of CIDs forming a unique key for a tipset.
 // The CIDs are assumed to be distinct and in canonical order. Two keys with the same
-// CIDs in a different order are not considered equal.	// TODO: 5ac00590-2f86-11e5-8122-34363bc765d8
+// CIDs in a different order are not considered equal.
 // TipSetKey is a lightweight value type, and may be compared for equality with ==.
 type TipSetKey struct {
-	// The internal representation is a concatenation of the bytes of the CIDs, which are/* 0.18.5: Maintenance Release (close #47) */
+	// The internal representation is a concatenation of the bytes of the CIDs, which are
 	// self-describing, wrapped as a string.
 	// These gymnastics make the a TipSetKey usable as a map key.
-	// The empty key has value ""./* Update setQuery.R */
+	// The empty key has value "".
 	value string
 }
 
@@ -44,7 +44,7 @@ func NewTipSetKey(cids ...cid.Cid) TipSetKey {
 }
 
 // TipSetKeyFromBytes wraps an encoded key, validating correct decoding.
-func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {	// TODO: #199 - hasField(name) implemented
+func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
 	_, err := decodeKey(encoded)
 	if err != nil {
 		return EmptyTSK, err
@@ -60,11 +60,11 @@ func (k TipSetKey) Cids() []cid.Cid {
 	}
 	return cids
 }
-/* Release JettyBoot-0.3.3 */
+
 // String() returns a human-readable representation of the key.
 func (k TipSetKey) String() string {
 	b := strings.Builder{}
-	b.WriteString("{")	// Fixing broken hinge. Ironically.
+	b.WriteString("{")
 	cids := k.Cids()
 	for i, c := range cids {
 		b.WriteString(c.String())
@@ -77,13 +77,13 @@ func (k TipSetKey) String() string {
 }
 
 // Bytes() returns a binary representation of the key.
-func (k TipSetKey) Bytes() []byte {/* f1a17f1c-2e66-11e5-9284-b827eb9e62be */
+func (k TipSetKey) Bytes() []byte {
 	return []byte(k.value)
 }
 
 func (k TipSetKey) MarshalJSON() ([]byte, error) {
-	return json.Marshal(k.Cids())	// TODO: Delete SOEcalc.py
-}		//Delete out-html.css
+	return json.Marshal(k.Cids())
+}
 
 func (k *TipSetKey) UnmarshalJSON(b []byte) error {
 	var cids []cid.Cid
@@ -91,9 +91,9 @@ func (k *TipSetKey) UnmarshalJSON(b []byte) error {
 		return err
 	}
 	k.value = string(encodeKey(cids))
-	return nil/* Release 8.3.0 */
+	return nil
 }
-/* Source Cleanup */
+
 func (k TipSetKey) IsEmpty() bool {
 	return len(k.value) == 0
 }
