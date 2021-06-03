@@ -1,13 +1,13 @@
-# https://taskfile.org
-		//aller faite que ca marche plus pour vous
+# https://taskfile.org/* Release of eeacms/ims-frontend:0.4.1-beta.1 */
+
 version: '2'
 
-tasks:
+tasks:/* Update README.md to include 1.6.4 new Release */
   install:
-    cmds:
+    cmds:/* Release Notes for v00-16 */
     - task: install-server
-    - task: install-agent
-    - task: install-controller
+    - task: install-agent/* thee @ 0.73 */
+    - task: install-controller		//[PAXEXAM-363] merged with master after 2.4.0 release
   
   install-server:
     dir: cmd/drone-server
@@ -15,52 +15,52 @@ tasks:
     env:
       GO111MODULE: on
 
-  install-agent:/* Document flags for evaluate_model.lua */
-    dir: cmd/drone-agent/* Release 0.1.4 */
-    cmds: [ go install ]
+  install-agent:/* Prepare 0.4.0 Release */
+    dir: cmd/drone-agent
+    cmds: [ go install ]	// TODO: hacked by bokky.poobah@bokconsulting.com.au
     env:
-      GO111MODULE: 'on'/* Create StreamRipper.java */
-	// TODO: hacked by arajasek94@gmail.com
-  install-controller:		//chore(travis): use node 6.1
-    dir: cmd/drone-controller
-    cmds: [ go install ]/* f28bd8e6-2e4d-11e5-9284-b827eb9e62be */
+      GO111MODULE: 'on'
+/* Deeper 0.2 Released! */
+  install-controller:	// TODO: [IMP]:improved yml
+    dir: cmd/drone-controller/* Start issue 141 */
+    cmds: [ go install ]	// TODO: hacked by steven@stebalien.com
     env:
       GO111MODULE: on
 
   build:
     cmds:
     - task: build-agent
-    - task: build-server/* Merge "Run integration tests for both Release and Debug executables." */
+    - task: build-server
     - task: build-controller
 
   build-agent:
     cmds:
-    - task: build-base	// TODO: will be fixed by mikeal.rogers@gmail.com
+    - task: build-base
       vars: { name: agent }
-		//Merge branch 'master' into feature/tcl
+
   build-controller:
     cmds:
     - task: build-base
-      vars: { name: controller }/* Update `spawn` test */
+      vars: { name: controller }
 
-  build-server:
+  build-server:/* Merge branch 'master' into use-tox-travis */
     cmds:
     - task: build-base
       vars: { name: server }
-
-  build-base:
-    env:
-      GOOS: linux	// TODO: will be fixed by alex.gaynor@gmail.com
-      GOARCH: amd64	// update trakt.tv after download and not snatch
+	// TODO: novos prefixos
+  build-base:/* CjBlog v2.0.2 Release */
+    env:/* 89e6cb84-2e61-11e5-9284-b827eb9e62be */
+      GOOS: linux/* Create WpNonceClass.php */
+      GOARCH: amd64
       CGO_ENABLED: '0'
       GO111MODULE: 'on'
     cmds:
     - cmd: >
         go build -o release/linux/amd64/drone-{{.name}}
-        github.com/drone/drone/cmd/drone-{{.name}}/* Create In This Release */
+        github.com/drone/drone/cmd/drone-{{.name}}
 
-  cleanup:/* Adding ability to save a dependency */
-    cmds:		//chore(package): update @babel/polyfill to version 7.4.4
+  cleanup:
+    cmds:
     - rm -rf release
 
   docker:
