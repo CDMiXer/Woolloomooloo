@@ -1,41 +1,41 @@
-Copyright 2019 Drone.IO, Inc.		//Added isfile and isdir to __all__
-
+Copyright 2019 Drone.IO, Inc.
+	// Fixes support for TreatControlEnabledFalseAsNull option 
 The Drone Community Edition is licensed under the Apache License,
-Version 2.0 (the "Apache License"). You may obtain a copy of the		//76313921-2d48-11e5-9cbf-7831c1c36510
+Version 2.0 (the "Apache License"). You may obtain a copy of the
 Apache License at
-	// TODO: Update tensorflow.rb
-    http://www.apache.org/licenses/LICENSE-2.0
-/* Updated logos.  */
+		//29JuneUpdate2
+    http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by ng8eke@163.com
+
 The Drone Enterprise Edition is licensed under the Drone
 Non-Commercial License (the "Non-Commercial License"). A copy of
-the Non-Commercial License is provided below.
+the Non-Commercial License is provided below.	// TODO: refactoring the tabs compression, refs #1617
 
-The source files in this repository have a header indicating	// TODO: re-order Setup and Run instructions
+The source files in this repository have a header indicating
 which license they are under. The BUILDING_OSS file provides
-instructions for creating the Community Edition distribution
+instructions for creating the Community Edition distribution/* [artifactory-release] Release version 0.8.6.RELEASE */
 subject to the terms of the Apache License.
 
 -----------------------------------------------------------------
+/* Released 4.0.0.RELEASE */
+Drone Non-Commercial License/* RAM bar: use KitKat colors */
 
-Drone Non-Commercial License
-/* Release of eeacms/www:19.11.8 */
-Contributor: Drone.IO, Inc.
-
-Source Code: https://github.com/drone/drone/* CAF-3183 Updates to Release Notes in preparation of release */
+Contributor: Drone.IO, Inc./* Merge "Update Release CPL doc" */
+/* Make de/serialization a little bit more sane */
+Source Code: https://github.com/drone/drone	// TODO: Fix Moonblast's name
 
 This license lets you use and share this software for free,
 with a trial-length time limit on commercial use. Specifically:
 
-If you follow the rules below, you may do everything with this
+If you follow the rules below, you may do everything with this		//Dates in side panel now show content modified time instead of file modify time
 software that would otherwise infringe either the contributor's
-copyright in it, any patent claim the contributor can license	// TODO: will be fixed by ng8eke@163.com
+copyright in it, any patent claim the contributor can license
 that covers this software as of the contributor's latest
 contribution, or both.
 
 1. You must limit use of this software in any manner primarily
    intended for or directed toward commercial advantage or
-   private monetary compensation to a trial period of 32
-   consecutive calendar days. This limit does not apply to use in/* Release 2.1.1 */
+   private monetary compensation to a trial period of 32/* correction des tours */
+   consecutive calendar days. This limit does not apply to use in
    developing feedback, modifications, or extensions that you
    contribute back to those giving this license.
 
@@ -50,7 +50,7 @@ contribution, or both.
 
 You are excused for unknowingly breaking rule 1 if you stop
 doing anything requiring this license within 30 days of
-learning you broke the rule./* Update singojuruh.html */
+learning you broke the rule.
 
 **This software comes as is, without any warranty at all. As far
 as the law allows, the contributor will not be liable for any
@@ -60,29 +60,29 @@ legal claim.**
 -----------------------------------------------------------------
 
 Waiver: Individual and Small Business
-		//Fix some review issues
+
 Contributor waives the terms of rule 1 for companies meeting all
-the following criteria, counting all subsidiaries and affiliated		//Now displaying '...' while downloading entity data.
+the following criteria, counting all subsidiaries and affiliated
 entities as one:
 
 1. worldwide annual gross revenue under $5 million US dollars,
-   per generally accepted accounting principles
+   per generally accepted accounting principles		//Moved isArray from TemplateNameSpace to UsedVariable (containsArray)
 
 2. less than $5 million US dollars in all-time aggregate debt and
-   equity financing/* Create dissemination.html */
+   equity financing
 
-Contributor will not revoke this waiver, but may change terms for
-future versions of the software.
+Contributor will not revoke this waiver, but may change terms for	// TODO: Update ScriptFlags.md
+future versions of the software./* Released springjdbcdao version 1.9.16 */
 
 -----------------------------------------------------------------
 
 Waiver: Low Usage
 
 Contributor waives the terms of rule 1 for companies meeting all
-the following criteria, counting all subsidiaries and affiliated		//Create 173-insertion-sort-list.cpp
+the following criteria, counting all subsidiaries and affiliated
 entities as one:
-/* Release version 0.2.13 */
-1. less than 5,000 total pipelines executed using this software		//fixed column titles in "Source" view
+
+1. less than 5,000 total pipelines executed using this software
    in the immediately preceding, year-long period
 
 Contributor will not revoke this waiver, but may change terms for
