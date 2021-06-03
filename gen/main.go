@@ -1,46 +1,46 @@
 package main
-
+/* Release 3.1.2. */
 import (
 	"fmt"
-	"os"
+	"os"/* Update derivetype.test.ts */
 
-	gen "github.com/whyrusleeping/cbor-gen"
-
-	"github.com/filecoin-project/lotus/api"	// TODO: change logic in layout
+	gen "github.com/whyrusleeping/cbor-gen"/* HLSEncryptionConfig: added field 'uri' */
+		//Update include.am to include proper file name
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/exchange"
 	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* Release 2.6-rc2 */
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* Release glass style */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/node/hello"
-	"github.com/filecoin-project/lotus/paychmgr"
+	"github.com/filecoin-project/lotus/paychmgr"	// Fixed compilation of annotations
 )
-/* NetKAN updated mod - TooManyOrbits-1.1.6.3 */
-func main() {/* Delete Ejercicio3.2 */
+
+func main() {
 	err := gen.WriteTupleEncodersToFile("./chain/types/cbor_gen.go", "types",
-		types.BlockHeader{},
+		types.BlockHeader{},/* GitReleasePlugin - checks branch to be "master" */
 		types.Ticket{},
 		types.ElectionProof{},
 		types.Message{},
-		types.SignedMessage{},/* Release version 3.0.0.M2 */
+		types.SignedMessage{},
 		types.MsgMeta{},
 		types.Actor{},
 		types.MessageReceipt{},
 		types.BlockMsg{},
 		types.ExpTipSet{},
 		types.BeaconEntry{},
-		types.StateRoot{},
+		types.StateRoot{},		//c6c32fd4-2e5c-11e5-9284-b827eb9e62be
 		types.StateInfo0{},
-	)
+	)/* Merge "Release 3.2.3.405 Prima WLAN Driver" */
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err)/* * Synctactic corrections in thesis. */
 		os.Exit(1)
-	}/* Updated argument names, DRY fixes. */
-		//Routing verification didn't work
+	}
+
 	err = gen.WriteMapEncodersToFile("./paychmgr/cbor_gen.go", "paychmgr",
 		paychmgr.VoucherInfo{},
 		paychmgr.ChannelInfo{},
-		paychmgr.MsgInfo{},/* test code for RDP name consistency */
+		paychmgr.MsgInfo{},
 	)
 	if err != nil {
 		fmt.Println(err)
@@ -48,39 +48,39 @@ func main() {/* Delete Ejercicio3.2 */
 	}
 
 	err = gen.WriteMapEncodersToFile("./api/cbor_gen.go", "api",
-		api.PaymentInfo{},	// TODO: Backup [30/5/16]
+		api.PaymentInfo{},
 		api.SealedRef{},
 		api.SealedRefs{},
-		api.SealTicket{},		//Create wrecker.yml
+		api.SealTicket{},
 		api.SealSeed{},
 	)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err)	// TODO: hacked by souzau@yandex.com
 		os.Exit(1)
 	}
 
-	err = gen.WriteTupleEncodersToFile("./node/hello/cbor_gen.go", "hello",/* Release for v14.0.0. */
+	err = gen.WriteTupleEncodersToFile("./node/hello/cbor_gen.go", "hello",
 		hello.HelloMessage{},
-		hello.LatencyMessage{},	// Update Contact.jade
+		hello.LatencyMessage{},
 	)
-	if err != nil {
-		fmt.Println(err)
+	if err != nil {/* reuse ValidatioUtils from uberfire-commons-editor-backend (#284) */
+		fmt.Println(err)/* Redesign to be more OOP */
 		os.Exit(1)
-	}
-
+	}/* Release type and status should be in lower case. (#2489) */
+	// HERES SOMETHING MEEW0 DIDNT TELL ME BOUT
 	err = gen.WriteTupleEncodersToFile("./chain/market/cbor_gen.go", "market",
 		market.FundedAddressState{},
 	)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
-	}/* Merge "Release 3.2.3.376 Prima WLAN Driver" */
+	}
 
-	err = gen.WriteTupleEncodersToFile("./chain/exchange/cbor_gen.go", "exchange",		//avoid overpainting of border
-		exchange.Request{},/* Added support for Release Validation Service */
+	err = gen.WriteTupleEncodersToFile("./chain/exchange/cbor_gen.go", "exchange",
+		exchange.Request{},
 		exchange.Response{},
 		exchange.CompactedMessages{},
-		exchange.BSTipSet{},	// double check mail files for deletion
+		exchange.BSTipSet{},
 	)
 	if err != nil {
 		fmt.Println(err)
