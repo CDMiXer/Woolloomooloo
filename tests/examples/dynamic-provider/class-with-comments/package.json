@@ -1,10 +1,10 @@
-{
+{/* mui: shorten prop allocation code and don't use ALLOC_BODY macro anymore */
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// TODO: af69f082-2e72-11e5-9284-b827eb9e62be
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }	// TODO: Delete boostrap.css
 }
