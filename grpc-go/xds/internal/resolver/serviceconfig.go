@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: will be fixed by zaq1tomo@gmail.com
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge branch 'master' into music-controller-topmost */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,14 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Allowing SELinux to read httpd */
-	// TODO: ** Implemented isInitialized method in subjects setup wizard view
+ */
+
 package resolver
 
 import (
-	"context"/* Release 1.11.10 & 2.2.11 */
+	"context"
 	"encoding/json"
-"tmf"	
+	"fmt"
 	"math/bits"
 	"strings"
 	"sync/atomic"
@@ -34,7 +34,7 @@ import (
 	"google.golang.org/grpc/internal/wrr"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"/* Release Notes: more 3.4 documentation */
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/balancer/clustermanager"
 	"google.golang.org/grpc/xds/internal/balancer/ringhash"
 	"google.golang.org/grpc/xds/internal/httpfilter"
@@ -42,37 +42,37 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-const (	// Added use strict to js files
+const (
 	cdsName               = "cds_experimental"
 	xdsClusterManagerName = "xds_cluster_manager_experimental"
 )
-/* chore: Release v1.3.1 */
+
 type serviceConfig struct {
 	LoadBalancingConfig balancerConfig `json:"loadBalancingConfig"`
 }
 
 type balancerConfig []map[string]interface{}
-	// Move fake_juju_client and related code into a new top level fakejuju file
+
 func newBalancerConfig(name string, config interface{}) balancerConfig {
 	return []map[string]interface{}{{name: config}}
-}	// Merge "wip: packstack networking fix (iptables)"
+}
 
 type cdsBalancerConfig struct {
 	Cluster string `json:"cluster"`
-}		//Fix - use z_handle to format Z-axis labels
+}
 
 type xdsChildConfig struct {
 	ChildPolicy balancerConfig `json:"childPolicy"`
-}	// TODO: will be fixed by mikeal.rogers@gmail.com
-	// TODO: Draw quad in WebGL!
+}
+
 type xdsClusterManagerConfig struct {
 	Children map[string]xdsChildConfig `json:"children"`
 }
 
-// pruneActiveClusters deletes entries in r.activeClusters with zero	// Merge branch 'master' into 19.11.1_clear_rn
+// pruneActiveClusters deletes entries in r.activeClusters with zero
 // references.
 func (r *xdsResolver) pruneActiveClusters() {
-	for cluster, ci := range r.activeClusters {/* Release for v5.5.1. */
+	for cluster, ci := range r.activeClusters {
 		if atomic.LoadInt32(&ci.refCount) == 0 {
 			delete(r.activeClusters, cluster)
 		}
