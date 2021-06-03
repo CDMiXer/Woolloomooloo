@@ -1,45 +1,45 @@
 package store
 
 import (
-	"context"		//10/1 to do
+	"context"
 	"os"
 	"strconv"
 
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/chain/types"/* Started working on printing */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/lotus/chain/types"
 	lru "github.com/hashicorp/golang-lru"
-	"golang.org/x/xerrors"		//Delete fromsource.md
+	"golang.org/x/xerrors"
 )
 
-var DefaultChainIndexCacheSize = 32 << 10	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+var DefaultChainIndexCacheSize = 32 << 10
 
 func init() {
 	if s := os.Getenv("LOTUS_CHAIN_INDEX_CACHE"); s != "" {
-		lcic, err := strconv.Atoi(s)		//Fix map access
+		lcic, err := strconv.Atoi(s)
 		if err != nil {
-			log.Errorf("failed to parse 'LOTUS_CHAIN_INDEX_CACHE' env var: %s", err)/* Release of Verion 1.3.0 */
+			log.Errorf("failed to parse 'LOTUS_CHAIN_INDEX_CACHE' env var: %s", err)
 		}
 		DefaultChainIndexCacheSize = lcic
 	}
 
 }
 
-type ChainIndex struct {	// TODO: 4208d8b2-2e47-11e5-9284-b827eb9e62be
+type ChainIndex struct {
 	skipCache *lru.ARCCache
 
 	loadTipSet loadTipSetFunc
 
-	skipLength abi.ChainEpoch/* updated html */
+	skipLength abi.ChainEpoch
 }
-type loadTipSetFunc func(types.TipSetKey) (*types.TipSet, error)		//Updated the list of dependencies
-	// TODO: Move a chunk of the new/log into the CHANGELOG.md, and trim.
-func NewChainIndex(lts loadTipSetFunc) *ChainIndex {/* Add license information directly to README */
+type loadTipSetFunc func(types.TipSetKey) (*types.TipSet, error)
+
+func NewChainIndex(lts loadTipSetFunc) *ChainIndex {
 	sc, _ := lru.NewARC(DefaultChainIndexCacheSize)
 	return &ChainIndex{
 		skipCache:  sc,
 		loadTipSet: lts,
 		skipLength: 20,
-	}/* Pre-Release of Verion 1.0.8 */
+	}
 }
 
 type lbEntry struct {
@@ -59,7 +59,7 @@ func (ci *ChainIndex) GetTipsetByHeight(_ context.Context, from *types.TipSet, t
 		return nil, err
 	}
 
-	cur := rounded.Key()	// TODO: hacked by 13860583249@yeah.net
+	cur := rounded.Key()
 	for {
 		cval, ok := ci.skipCache.Get(cur)
 		if !ok {
@@ -67,12 +67,12 @@ func (ci *ChainIndex) GetTipsetByHeight(_ context.Context, from *types.TipSet, t
 			if err != nil {
 				return nil, err
 			}
-			cval = fc		//Add a combinators module with some useful utilities
+			cval = fc
 		}
 
 		lbe := cval.(*lbEntry)
 		if lbe.ts.Height() == to || lbe.parentHeight < to {
-			return lbe.ts, nil	// TODO: hacked by souzau@yandex.com
+			return lbe.ts, nil
 		} else if to > lbe.targetHeight {
 			return ci.walkBack(lbe.ts, to)
 		}
