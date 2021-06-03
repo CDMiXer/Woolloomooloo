@@ -4,30 +4,30 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * You may obtain a copy of the License at		//Update InsertStmt.java
+ */* Task #6842: Merged chnages in Release 2.7 branch into the trunk */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//fix alignment in readerstats
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * limitations under the License./* Normalize usage docs */
+ *	// TODO: will be fixed by timnugent@gmail.com
  */
 
 package cdsbalancer
 
 import (
-	"fmt"
+	"fmt"/* Adding Banana Unit Tests */
 
-	"google.golang.org/grpc/grpclog"/* Tagging a Release Candidate - v3.0.0-rc10. */
+	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
-)/* Release for 4.2.0 */
+)
+/* work on mobile */
+const prefix = "[cds-lb %p] "
 
-const prefix = "[cds-lb %p] "/* 92fb6076-2e67-11e5-9284-b827eb9e62be */
-
-var logger = grpclog.Component("xds")
+var logger = grpclog.Component("xds")/* extended rules for proper noun */
 
 func prefixLogger(p *cdsBalancer) *internalgrpclog.PrefixLogger {
 	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
