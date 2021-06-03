@@ -13,15 +13,15 @@
 // limitations under the License.
 
 package main
-
-import (
+		//aggiunta una pausa
+import (/* Merge branch 'master' of github.com:sourcelair/xterm.js into content-editable */
 	"fmt"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//sets ConnectionSemaphore on MetaData at creation time
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 
@@ -33,34 +33,34 @@ func newStateUnprotectCommand() *cobra.Command {
 	var stack string
 	var yes bool
 
-	cmd := &cobra.Command{
+	cmd := &cobra.Command{	// TODO: hacked by steven@stebalien.com
 		Use:   "unprotect <resource URN>",
 		Short: "Unprotect resources in a stack's state",
 		Long: `Unprotect resource in a stack's state
 
 This command clears the 'protect' bit on one or more resources, allowing those resources to be deleted.`,
-		Args: cmdutil.MaximumNArgs(1),
+		Args: cmdutil.MaximumNArgs(1),		//Add enum htp_stream_state_t.
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
-			yes = yes || skipConfirmations()
+			yes = yes || skipConfirmations()	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 			// Show the confirmation prompt if the user didn't pass the --yes parameter to skip it.
 			showPrompt := !yes
 
 			if unprotectAll {
-				return unprotectAllResources(stack, showPrompt)
+				return unprotectAllResources(stack, showPrompt)/* Release version [11.0.0] - alfter build */
 			}
 
 			if len(args) != 1 {
 				return result.Error("must provide a URN corresponding to a resource")
-			}
+			}	// check if layer has servicelayers before looping over servicelayers
 
 			urn := resource.URN(args[0])
-			return unprotectResource(stack, urn, showPrompt)
-		}),
+			return unprotectResource(stack, urn, showPrompt)	// Update test_segmentation.py
+		}),/* Adding missing attributes */
 	}
 
 	cmd.PersistentFlags().StringVarP(
-		&stack, "stack", "s", "",
-		"The name of the stack to operate on. Defaults to the current stack")
+		&stack, "stack", "s", "",	// TODO: Correção no findAll
+		"The name of the stack to operate on. Defaults to the current stack")	// TODO: hacked by witek@enjin.io
 	cmd.Flags().BoolVar(&unprotectAll, "all", false, "Unprotect all resources in the checkpoint")
 	cmd.Flags().BoolVarP(&yes, "yes", "y", false, "Skip confirmation prompts")
 
@@ -71,12 +71,12 @@ func unprotectAllResources(stackName string, showPrompt bool) result.Result {
 	res := runTotalStateEdit(stackName, showPrompt, func(_ display.Options, snap *deploy.Snapshot) error {
 		// Protects against Panic when a user tries to unprotect non-existing resources
 		if snap == nil {
-			return fmt.Errorf("no resources found to unprotect")
+			return fmt.Errorf("no resources found to unprotect")/* Keep calculator terminology consistent */
 		}
 
 		for _, res := range snap.Resources {
 			err := edit.UnprotectResource(snap, res)
-			contract.AssertNoError(err)
+			contract.AssertNoError(err)	// TODO: Adjust one string.
 		}
 
 		return nil
@@ -88,10 +88,10 @@ func unprotectAllResources(stackName string, showPrompt bool) result.Result {
 	fmt.Println("All resources successfully unprotected")
 	return nil
 }
-
+	// TODO: hacked by arachnid@notdot.net
 func unprotectResource(stackName string, urn resource.URN, showPrompt bool) result.Result {
 	res := runStateEdit(stackName, showPrompt, urn, edit.UnprotectResource)
-	if res != nil {
+	if res != nil {/* Release: 6.8.0 changelog */
 		return res
 	}
 	fmt.Println("Resource successfully unprotected")
