@@ -1,3 +1,3 @@
-name: double_pending_delete	// Another PSR-2 d'oh
+name: double_pending_delete
 description: A program that produces multiple pending deletes for the same URN
 runtime: nodejs
