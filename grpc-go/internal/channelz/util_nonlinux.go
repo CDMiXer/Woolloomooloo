@@ -8,15 +8,15 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Initiate testing for puppet-openstack-cookiecutter" */
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// changed cucumber-chef knife.rb template to only look at the current user
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Release 0.7.0 - update package.json, changelog */
  * limitations under the License.
  *
- */
+ */		//small doks update
 
 package channelz
 
