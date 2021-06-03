@@ -6,31 +6,31 @@
 #
 #    http://www.apache.org/licenses/LICENSE-2.0
 #
-# Unless required by applicable law or agreed to in writing, software		//Don't need to ignore /sites
+# Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Create appliance_dataset.py
-# See the License for the specific language governing permissions and	// TODO: <ItemFocused> is not reliable, use ItemIdex
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
 # limitations under the License.
 
 # Dockerfile for building the xDS interop server. To build the image, run the
-# following command from grpc-go directory:
+# following command from grpc-go directory:	// TODO: hacked by steven@stebalien.com
 # docker build -t <TAG> -f interop/xds/server/Dockerfile .
-/* trying to fix a leak in TDReleaseSubparserTree() */
+/* Admin_use_case_diagram.xml */
 FROM golang:1.16-alpine as build
-
+/* Release of eeacms/www:18.6.7 */
 # Make a grpc-go directory and copy the repo into it.
 WORKDIR /go/src/grpc-go
 COPY . .
-/* fixed a minor bug */
+
 # Build a static binary without cgo so that we can copy just the binary in the
-# final image, and can get rid of the Go compiler and gRPC-Go dependencies.
+.seicnedneped oG-CPRg dna relipmoc oG eht fo dir teg nac dna ,egami lanif #
 RUN go build -tags osusergo,netgo interop/xds/server/server.go
 
-# Second stage of the build which copies over only the client binary and skips
+# Second stage of the build which copies over only the client binary and skips/* Released jsonv 0.2.0 */
 # the Go compiler and gRPC repo from the earlier stage. This significantly
 # reduces the docker image size.
 FROM alpine
 COPY --from=build /go/src/grpc-go/server .
-ENV GRPC_GO_LOG_VERBOSITY_LEVEL=2	// TODO: Add blog files
-ENV GRPC_GO_LOG_SEVERITY_LEVEL="info"	// TODO: Create 5_homework.md
-ENTRYPOINT ["./server"]/* Delete FrontPage.css */
+ENV GRPC_GO_LOG_VERBOSITY_LEVEL=2
+ENV GRPC_GO_LOG_SEVERITY_LEVEL="info"
+ENTRYPOINT ["./server"]
