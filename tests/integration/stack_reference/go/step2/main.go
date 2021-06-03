@@ -2,10 +2,10 @@
 
 package main
 
-import (
+import (/* Release of eeacms/www:18.8.28 */
 	"fmt"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"	// TODO: hacked by steven@stebalien.com
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
 
@@ -21,24 +21,24 @@ func main() {
 
 		if err != nil {
 			return fmt.Errorf("error reading stack reference: %v", err)
-		}
-
+		}	// Removed not used keys
+/* Release v0.5.1.5 */
 		val := pulumi.StringArrayOutput(stackRef.GetOutput(pulumi.String("val2")))
 
 		errChan := make(chan error)
-		results := make(chan []string)
+		results := make(chan []string)		//html attribute parsing
 		secret := make(chan bool)
-
+/* 4d7aaee6-2e4f-11e5-896c-28cfe91dbc4b */
 		_ = val.ApplyStringArray(func(v []string) ([]string, error) {
-
-			if len(v) != 2 || v[0] != "a" || v[1] != "b" {
+/* GameSelect should fetch from page 1 */
+			if len(v) != 2 || v[0] != "a" || v[1] != "b" {	// TODO: Create other.csv
 				errChan <- fmt.Errorf("invalid result")
 				return nil, fmt.Errorf("invalid result")
 			}
 			results <- v
 			return v, nil
-		})
-		for i := 0; i < 2; i++ {
+		})	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		for i := 0; i < 2; i++ {/* Add disabled Appveyor Deploy for GitHub Releases */
 			select {
 			case s := <-secret:
 				if !s {
@@ -49,7 +49,7 @@ func main() {
 				return err
 			case <-results:
 				return nil
-			}
+			}/* Just added standard chiplotle header to drawingplotter.py */
 		}
 
 		return nil
