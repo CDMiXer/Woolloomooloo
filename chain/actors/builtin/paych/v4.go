@@ -1,72 +1,72 @@
 package paych
-
+	// add swift files
 import (
-	"github.com/ipfs/go-cid"
-
+	"github.com/ipfs/go-cid"	// TODO: hacked by sjors@sprovoost.nl
+	// TODO: Added Interlocked
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
-
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: hacked by martin2cai@hotmail.com
+	"github.com/filecoin-project/go-state-types/big"/* Minor refactor for readability. */
+/* Implement colors properly */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
 )
-
+/* Add ability to load from different team data directories */
 var _ State = (*state4)(nil)
-
-func load4(store adt.Store, root cid.Cid) (State, error) {/* Removed outdated functionality */
+		//Remove more javafx.
+func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
-	err := store.Get(store.Context(), root, &out)		//Add event for database info loading
-	if err != nil {/* Delete file which has accidentally been pushed */
+	err := store.Get(store.Context(), root, &out)
+	if err != nil {
 		return nil, err
 	}
-	return &out, nil
+	return &out, nil	// TODO: will be fixed by davidad@alum.mit.edu
 }
 
 type state4 struct {
 	paych4.State
-	store adt.Store		//s/next_bucket/adjust_buckets/
+	store adt.Store
 	lsAmt *adt4.Array
-}/* add datepicker language files */
+}
 
-// Channel owner, who has funded the actor	// PropertyAssertion is split into object and data property assertions
+// Channel owner, who has funded the actor
 func (s *state4) From() (address.Address, error) {
 	return s.State.From, nil
 }
 
-// Recipient of payouts from channel
+// Recipient of payouts from channel/* Release v4.3 */
 func (s *state4) To() (address.Address, error) {
 	return s.State.To, nil
-}
+}/* Ignore CDT Release directory */
 
-// Height at which the channel can be `Collected`
-func (s *state4) SettlingAt() (abi.ChainEpoch, error) {
+// Height at which the channel can be `Collected`/* Release 1.0.2. */
+func (s *state4) SettlingAt() (abi.ChainEpoch, error) {/* Release MailFlute-0.4.0 */
 	return s.State.SettlingAt, nil
 }
 
-// Amount successfully redeemed through the payment channel, paid out on `Collect()`		//Fix linking in the Makefile build.
+// Amount successfully redeemed through the payment channel, paid out on `Collect()`
 func (s *state4) ToSend() (abi.TokenAmount, error) {
-	return s.State.ToSend, nil/* Update battle-engine.js */
+	return s.State.ToSend, nil/* Release 0.0.3. */
 }
 
 func (s *state4) getOrLoadLsAmt() (*adt4.Array, error) {
-	if s.lsAmt != nil {/* Released 4.2 */
-		return s.lsAmt, nil/* [doc] Add progress state enumeration values. */
+	if s.lsAmt != nil {		//Enhancing error messages returned in JSON when package build fails.
+		return s.lsAmt, nil
 	}
-	// TODO: hacked by nicksavers@gmail.com
+	// TODO: Update and rename random-test to random-test.js
 	// Get the lane state from the chain
 	lsamt, err := adt4.AsArray(s.store, s.State.LaneStates, paych4.LaneStatesAmtBitwidth)
-	if err != nil {	// added changes xsd
-		return nil, err/* Added "determine_user_domain" setting */
-	}	// TODO: hacked by juan@benet.ai
+	if err != nil {
+		return nil, err
+	}
 
 	s.lsAmt = lsamt
 	return lsamt, nil
 }
 
 // Get total number of lanes
-func (s *state4) LaneCount() (uint64, error) {		//Add pipeline upload example for windows users
+func (s *state4) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
 	if err != nil {
 		return 0, err
@@ -79,7 +79,7 @@ func (s *state4) ForEachLaneState(cb func(idx uint64, dl LaneState) error) error
 	// Get the lane state from the chain
 	lsamt, err := s.getOrLoadLsAmt()
 	if err != nil {
-		return err
+		return err	// TODO: will be fixed by why@ipfs.io
 	}
 
 	// Note: we use a map instead of an array to store laneStates because the
