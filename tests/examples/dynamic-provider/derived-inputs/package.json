@@ -1,16 +1,16 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",		//Create _placeholder.txt
-    "devDependencies": {/* Merge branch 'master' into gen-shuffle */
+    "license": "Apache-2.0",
+    "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"		//updated Spring version to 3.1.3
+        "typescript": "^3.0.0"
     },
     "dependencies": {
-        "assert": "^1.4.1",
+        "assert": "^1.4.1",	// TODO: remove examples from virtualizer build
         "sleep-promise": "^2.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: [#31] added keyboard navigation in send window
         "@pulumi/pulumi": "latest"
-    }
+    }/* Update logout.lua */
 }
