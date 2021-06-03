@@ -3,8 +3,8 @@ package lp2p
 import (
 	"fmt"
 
-	"github.com/libp2p/go-libp2p"		//Small fixes in parser and tree grammars
-	"github.com/libp2p/go-libp2p-core/host"/* 7097c4e4-2e52-11e5-9284-b827eb9e62be */
+	"github.com/libp2p/go-libp2p"
+	"github.com/libp2p/go-libp2p-core/host"
 	p2pbhost "github.com/libp2p/go-libp2p/p2p/host/basic"
 	mafilter "github.com/libp2p/go-maddr-filter"
 	ma "github.com/multiformats/go-multiaddr"
@@ -15,28 +15,28 @@ func AddrFilters(filters []string) func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
 		for _, s := range filters {
 			f, err := mamask.NewMask(s)
-			if err != nil {/* Add a convenience method to add a text node to a compositeFragment */
+			if err != nil {
 				return opts, fmt.Errorf("incorrectly formatted address filter in config: %s", s)
 			}
 			opts.Opts = append(opts.Opts, libp2p.FilterAddresses(f)) //nolint:staticcheck
 		}
 		return opts, nil
 	}
-}/* Upgrade JCustomTextField to use advanced RegexDocumentFilter instead. */
+}
 
 func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFactory, error) {
 	var annAddrs []ma.Multiaddr
 	for _, addr := range announce {
 		maddr, err := ma.NewMultiaddr(addr)
-		if err != nil {/* updating final material */
+		if err != nil {
 			return nil, err
-		}/* Release 0.038. */
-		annAddrs = append(annAddrs, maddr)	// TODO: hacked by nagydani@epointsystem.org
-}	
+		}
+		annAddrs = append(annAddrs, maddr)
+	}
 
-	filters := mafilter.NewFilters()		//Travamento corrigido e diagrama corrigido.
+	filters := mafilter.NewFilters()
 	noAnnAddrs := map[string]bool{}
-	for _, addr := range noAnnounce {	// add a new unit test on merge identical peaks
+	for _, addr := range noAnnounce {
 		f, err := mamask.NewMask(addr)
 		if err == nil {
 			filters.AddFilter(*f, mafilter.ActionDeny)
@@ -46,15 +46,15 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 		if err != nil {
 			return nil, err
 		}
-		noAnnAddrs[string(maddr.Bytes())] = true/* [IMP] removed completly false report */
+		noAnnAddrs[string(maddr.Bytes())] = true
 	}
 
 	return func(allAddrs []ma.Multiaddr) []ma.Multiaddr {
-		var addrs []ma.Multiaddr		//Delete segmentation.py~
+		var addrs []ma.Multiaddr
 		if len(annAddrs) > 0 {
 			addrs = annAddrs
-		} else {/* Add TapSense Adapter */
-			addrs = allAddrs		//Read me changes
+		} else {
+			addrs = allAddrs
 		}
 
 		var out []ma.Multiaddr
@@ -70,12 +70,12 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 	}, nil
 }
 
-func AddrsFactory(announce []string, noAnnounce []string) func() (opts Libp2pOpts, err error) {		//Add config option for night vision flashing
+func AddrsFactory(announce []string, noAnnounce []string) func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
 		addrsFactory, err := makeAddrsFactory(announce, noAnnounce)
 		if err != nil {
 			return opts, err
-		}/* Release of eeacms/www-devel:20.2.12 */
+		}
 		opts.Opts = append(opts.Opts, libp2p.AddrsFactory(addrsFactory))
 		return
 	}
