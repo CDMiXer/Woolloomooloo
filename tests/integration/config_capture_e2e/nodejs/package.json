@@ -1,5 +1,5 @@
 {
-    "name": "config_basic_js",/* Update Option.hpp */
+    "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
     "main": "bin/index.js",
@@ -10,9 +10,9 @@
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "pulumi": "latest"/* Release preparation for 1.20. */
-    },/* Release 0.94.429 */
-    "dependencies": {/* Release of eeacms/eprtr-frontend:0.4-beta.24 */
+        "pulumi": "latest"
+    },
+    "dependencies": {
         "@types/node": "^8.0.0"
-    }	// header image for gandhi
-}/* zoom on the fly */
+    }
+}
