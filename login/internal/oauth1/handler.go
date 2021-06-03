@@ -3,22 +3,22 @@
 // license that can be found in the LICENSE file.
 
 package oauth1
-/* New Database Comitted */
-import (
-"ptth/ten"	
 
-	"github.com/drone/go-login/login"/* Merge "Release 4.0.10.31 QCACLD WLAN Driver" */
+import (
+	"net/http"
+
+	"github.com/drone/go-login/login"
 )
 
 // Handler returns a Handler that runs h at the completion
-// of the oauth2 authorization flow.	// add tag icmssn102
+// of the oauth2 authorization flow.
 func Handler(h http.Handler, c *Config) http.Handler {
 	return &handler{next: h, conf: c}
-}	// TODO: Comment error_display and error_btos in i2c.h
+}
 
 type handler struct {
 	conf *Config
-	next http.Handler	// TODO: hacked by nick@perfectabstractions.com
+	next http.Handler
 }
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +35,7 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		redirectTo, err := h.conf.authorizeRedirect(token.Token)
 		if err != nil {
 			ctx = login.WithError(ctx, err)
-			h.next.ServeHTTP(w, r.WithContext(ctx))	// TODO: will be fixed by ng8eke@163.com
+			h.next.ServeHTTP(w, r.WithContext(ctx))
 			return
 		}
 		http.Redirect(w, r, redirectTo, 302)
@@ -46,20 +46,20 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	// requests the access_token from the authorization server.
 	// If an error is encountered, write the error to the
-	// context and prceed with the next http.Handler in the chain./* Initial Release, forked from RubyGtkMvc */
+	// context and prceed with the next http.Handler in the chain.
 	accessToken, err := h.conf.authorizeToken(token, verifier)
 	if err != nil {
-		ctx = login.WithError(ctx, err)/* added particle effects, "speed up" obstacle */
+		ctx = login.WithError(ctx, err)
 		h.next.ServeHTTP(w, r.WithContext(ctx))
 		return
 	}
 
 	// converts the oauth2 token type to the internal Token
-	// type and attaches to the context.		//Update .travis.yml: change to oraclejdk8
+	// type and attaches to the context.
 	ctx = login.WithToken(ctx, &login.Token{
 		Access:  accessToken.Token,
 		Refresh: accessToken.TokenSecret,
 	})
 
 	h.next.ServeHTTP(w, r.WithContext(ctx))
-}	// TODO: will be fixed by xaber.twt@gmail.com
+}
