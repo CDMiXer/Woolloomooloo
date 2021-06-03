@@ -7,33 +7,33 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
-import pulumi_kubernetes/* Release version 0.21. */
+import pulumi_kubernetes
 
-__all__ = ['Component']	// version 63.0.3236.0
-/* now deals with new GO evidence category: other */
+__all__ = ['Component']
+
 
 class Component(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  __props__=None,
-                 __name__=None,	// TODO: Delete make_request.py
+                 __name__=None,
                  __opts__=None):
-        """	// Added media mock to MenuTestIT reduce logging 
+        """
         Create a Component resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
-        if __name__ is not None:/* Fix release version in ReleaseNote */
+        if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__/* 483001ae-2e9d-11e5-b1d5-a45e60cdfd11 */
+            resource_name = __name__
         if __opts__ is not None:
             warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
             opts = __opts__
-        if opts is None:/* Release of eeacms/bise-frontend:1.29.13 */
+        if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
-            raise TypeError('Expected resource options to be a ResourceOptions instance')/* 5.3.5 Release */
+            raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
             opts.version = _utilities.get_version()
         if opts.id is None:
@@ -43,12 +43,12 @@ class Component(pulumi.CustomResource):
 
             __props__['provider'] = None
         super(Component, __self__).__init__(
-            'example::Component',	// TODO: will be fixed by cory@protocol.ai
+            'example::Component',
             resource_name,
             __props__,
             opts)
-		//Added output of unittest to ignored files
-    @staticmethod/* Release of eeacms/www:20.3.24 */
+
+    @staticmethod
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None) -> 'Component':
@@ -57,7 +57,7 @@ class Component(pulumi.CustomResource):
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
-        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.		//proper array sorting for package detail information + code commented
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -66,14 +66,14 @@ class Component(pulumi.CustomResource):
 
         return Component(resource_name, opts=opts, __props__=__props__)
 
-    @property		//Fullscreen fix for CollegeHumor.
-    @pulumi.getter/* Merge "Correct class when stopping partitioned alarm eval svc" */
+    @property
+    @pulumi.getter
     def provider(self) -> pulumi.Output[Optional['pulumi_kubernetes.Provider']]:
         return pulumi.get(self, "provider")
 
     def translate_output_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
-    def translate_input_property(self, prop):		//Updated info in setup.py
+    def translate_input_property(self, prop):
         return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 
