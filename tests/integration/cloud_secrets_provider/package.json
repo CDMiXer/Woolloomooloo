@@ -1,9 +1,9 @@
-{		//Modified caffeine/__init__.py to use the xdg module.
+{
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {/* Update Introduction-to-SQL-7956.md */
-        "@pulumi/pulumi": "latest"
-    }	// Create testgenerator
+    "peerDependencies": {	// TODO: [package] put the 4 ssl libraries into a ssl submenu (#5156)
+        "@pulumi/pulumi": "latest"	// TODO: Merge "arm/dt: msm8610: Add SMP2P devices"
+    }
 }
