@@ -1,16 +1,16 @@
 [metadata]
   name = "lotus-soup"
-"" = rohtua  
-	// TODO: Move regex check to check_bc_valid (refactor later)
+  author = ""
+
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"	// :rocket::tram: Updated in browser at strd6.github.io/editor
+  case = "deals-e2e"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]		//Create custom_grok_patterns.yml
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
@@ -21,13 +21,13 @@
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "100000"/* +theme adjustments2 */
+  genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"/* Merge "Release green threads properly" */
+  random_beacon_type = "mock"
 
-[[groups]]	// TODO: New post: BlocSpot
-  id = "bootstrapper"	// TODO: index worker defers references to not yet loaded files until db update
+[[groups]]
+  id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -35,21 +35,21 @@
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]		//Fix an incorrect checks for empty feed
+[[groups]]
   id = "miners"
   [groups.instances]
     count = 2
-    percentage = 0.0/* Released springjdbcdao version 1.8.4 */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-      mining_mode = "natural"	// TODO: Problema com criação de usuário resolvido.
+      mining_mode = "natural"
 
 [[groups]]
   id = "clients"
-  [groups.instances]		//Added sorcery generated user model.
+  [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Merge "No-op Puppet for upgrades/migrations according to composable roles" */
+    [groups.run.test_params]
       role = "client"
