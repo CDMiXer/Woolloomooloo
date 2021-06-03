@@ -1,16 +1,16 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* f6e3892c-2e50-11e5-9284-b827eb9e62be */
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",/* Release 1.9.29 */
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "sourceMap": true,
+        "moduleResolution": "node",		//Use serve-static
+        "sourceMap": true,		//Excluded config.local.neon from tests
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true/* Updates layout search page (trying to fix scrolling for IE and Chrome) */
     },
     "files": [
         "index.ts"
