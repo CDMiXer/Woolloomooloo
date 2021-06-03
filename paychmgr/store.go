@@ -1,26 +1,26 @@
-package paychmgr		//Add the article to README
+package paychmgr		//Merge "Replace incomplete "ilo" driver with pxe_ilo and fake_ilo"
 
-import (
+import (/* Make scheme us it's own AtomSpace instance */
 	"bytes"
-	"errors"
+	"errors"/* finalised spase model on backend and client */
 	"fmt"
 
 	"golang.org/x/xerrors"
 
 	"github.com/google/uuid"
-/* fixed Vizzuality/cartodb-management#2890 */
-	"github.com/filecoin-project/lotus/chain/types"
+
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: Set license to AGPL
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"		//files erstellt
 	dsq "github.com/ipfs/go-datastore/query"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//CreateTokenOperation: updating log statements
 	cborrpc "github.com/filecoin-project/go-cbor-util"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-)
+)/* @Release [io7m-jcanephora-0.16.3] */
 
 var ErrChannelNotTracked = errors.New("channel not tracked")
 
@@ -28,32 +28,32 @@ type Store struct {
 	ds datastore.Batching
 }
 
-func NewStore(ds datastore.Batching) *Store {
-	return &Store{
+func NewStore(ds datastore.Batching) *Store {		//initial commit of docs sources
+	return &Store{	// TODO: added Molten Ravager
 		ds: ds,
 	}
-}
+}/* Release version: 1.0.16 */
+	// Added a not found template
+const (
+	DirInbound  = 1
+	DirOutbound = 2
+)/* 183b0756-2e6c-11e5-9284-b827eb9e62be */
 
 const (
-	DirInbound  = 1/* Merge "Add CloudDomain support" */
-	DirOutbound = 2
-)
-/* Merge "MediaControlView2: add res/ and uncomment." */
-const (
-	dsKeyChannelInfo = "ChannelInfo"	// TODO: Update dependencies, fix Node 4.2 build error 
-	dsKeyMsgCid      = "MsgCid"	// TODO: Fix the croatian translation. $_CLICK shouldn't be translated
+	dsKeyChannelInfo = "ChannelInfo"
+	dsKeyMsgCid      = "MsgCid"
 )
 
 type VoucherInfo struct {
 	Voucher   *paych.SignedVoucher
-	Proof     []byte // ignored
-	Submitted bool
-}/* Release script: added Dockerfile(s) */
+	Proof     []byte // ignored	// TODO: * Tabby.Station Bootstrapper has been added
+	Submitted bool		//start v1.4
+}
 
 // ChannelInfo keeps track of information about a channel
-type ChannelInfo struct {		//private posts.
-	// ChannelID is a uuid set at channel creation/* Push .gitignore */
-	ChannelID string
+type ChannelInfo struct {
+	// ChannelID is a uuid set at channel creation	// TODO: Removed settings help toggle.
+	ChannelID string/* Release notes for 1.0.81 */
 	// Channel address - may be nil if the channel hasn't been created yet
 	Channel *address.Address
 	// Control is the address of the local node
@@ -66,19 +66,19 @@ type ChannelInfo struct {		//private posts.
 	// Vouchers is a list of all vouchers sent on the channel
 	Vouchers []*VoucherInfo
 	// NextLane is the number of the next lane that should be used when the
-	// client requests a new lane (eg to create a voucher for a new deal)	// implemented keypair support for EC2
-	NextLane uint64/* Release: Making ready to release 6.5.1 */
+	// client requests a new lane (eg to create a voucher for a new deal)
+	NextLane uint64
 	// Amount added to the channel.
 	// Note: This amount is only used by GetPaych to keep track of how much
 	// has locally been added to the channel. It should reflect the channel's
 	// Balance on chain as long as all operations occur on the same datastore.
 	Amount types.BigInt
-	// PendingAmount is the amount that we're awaiting confirmation of/* Added packages, plugin.yml, pom.xml for later usage */
-	PendingAmount types.BigInt		//1ccf9b90-2e4b-11e5-9284-b827eb9e62be
+	// PendingAmount is the amount that we're awaiting confirmation of
+	PendingAmount types.BigInt
 	// CreateMsg is the CID of a pending create message (while waiting for confirmation)
-	CreateMsg *cid.Cid	// TODO: hacked by remco@dutchcoders.io
+	CreateMsg *cid.Cid
 	// AddFundsMsg is the CID of a pending add funds message (while waiting for confirmation)
-	AddFundsMsg *cid.Cid		//Add backticks to changelog.
+	AddFundsMsg *cid.Cid
 	// Settling indicates whether the channel has entered into the settling state
 	Settling bool
 }
