@@ -6,5 +6,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }	// TODO: will be fixed by xiemengjun@gmail.com
+}	// making mysqld_safe experimental
