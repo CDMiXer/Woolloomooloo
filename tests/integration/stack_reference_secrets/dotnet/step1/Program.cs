@@ -1,7 +1,7 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System.Collections.Generic;		//Set codecov
-using System.Threading.Tasks;/* Merge "Release 0.17.0" */
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Pulumi;
 
 class Program
@@ -11,7 +11,7 @@ class Program
         return Deployment.RunAsync(() =>
         {
             return new Dictionary<string, object>
-{            
+            {
                 { "normal", Output.Create("normal") },
                 { "secret", Output.CreateSecret("secret") },
             };
