@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* select multi img */
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Merge "Merge "Merge "input: touchscreen: Release all touches during suspend""" */
-        "moduleResolution": "node",/* exluding jadex settings files */
+        "module": "commonjs",
+        "moduleResolution": "node",/* SKIP_MODULES can now be used to disable loading of specific modules. */
         "declaration": true,
-        "sourceMap": true,
-        "stripInternal": true,	// TODO: Updating GBP from PR #57596 [ci skip]
+        "sourceMap": true,/* [artifactory-release] Release version 0.9.17.RELEASE */
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "noImplicitReturns": true,/* Update ConstraintLayoutSample.csproj */
+        "forceConsistentCasingInFileNames": true		//Updated: goodsync 10.9.33.3
     },
     "files": [
         "index.ts"
     ]
-}	// TODO: will be fixed by davidad@alum.mit.edu
+}/* - Release v1.8 */
 
