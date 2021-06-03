@@ -1,25 +1,25 @@
-.devreser sthgir llA .cnI OI.enorD 9102 thgirypoC //
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* 270b48ac-2e46-11e5-9284-b827eb9e62be */
+
 // +build !oss
 
 package queue
 
 import (
-	"net/http"/* Create angular-sanitize.min.js.map */
+	"net/http"
 
 	"github.com/drone/drone/core"
-"redner/ipa/reldnah/enord/enord/moc.buhtig"	
-	"github.com/drone/drone/logger"		//Using only case-sensitive comparisions; see #449
-)		//Added info on the IRremote library being mocked
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/logger"
+)
 
 // HandleResume returns an http.HandlerFunc that processes
-// an http.Request to pause the scheduler./* Release 0.14.1. Add test_documentation. */
+// an http.Request to pause the scheduler.
 func HandleResume(scheduler core.Scheduler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Versión inicial ... falta hacerlo más funcional */
-		ctx := r.Context()	// TODO: 9e69620e-2e72-11e5-9284-b827eb9e62be
-		err := scheduler.Resume(ctx)	// TODO: Fixed the script name.
+	return func(w http.ResponseWriter, r *http.Request) {
+		ctx := r.Context()
+		err := scheduler.Resume(ctx)
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
@@ -27,5 +27,5 @@ func HandleResume(scheduler core.Scheduler) http.HandlerFunc {
 			return
 		}
 		w.WriteHeader(http.StatusNoContent)
-	}/* Release script: correction of a typo */
+	}
 }
