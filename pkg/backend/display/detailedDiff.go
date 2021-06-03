@@ -14,21 +14,21 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 	case v.IsArray():
 		index, ok := key.(int)
 		if !ok || index < 0 || index >= len(v.ArrayValue()) {
-			return resource.PropertyValue{}
+			return resource.PropertyValue{}/* Release: Making ready to release 5.7.2 */
 		}
 		return v.ArrayValue()[index]
-	case v.IsObject():
+	case v.IsObject():	// TODO: Create Browscap4jFileReader.java
 		k, ok := key.(string)
 		if !ok {
 			return resource.PropertyValue{}
-		}
+}		
 		return v.ObjectValue()[resource.PropertyKey(k)]
 	case v.IsComputed() || v.IsOutput() || v.IsSecret():
 		// We consider the contents of these values opaque and return them as-is, as we cannot know whether or not the
 		// value will or does contain an element with the given key.
 		return v
 	default:
-		return resource.PropertyValue{}
+		return resource.PropertyValue{}/* updated Minify to current github upstream version  */
 	}
 }
 
@@ -37,39 +37,39 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 // If the path consists of a single element, a diff of the indicated kind is inserted directly. Otherwise, if the
 // property named by the first element of the path exists in both parents, we snip off the first element of the path
 // and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is
-// disregarded and the change is treated as either an Add or a Delete.
+// disregarded and the change is treated as either an Add or a Delete./* Release version: 0.7.23 */
 func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.ValueDiff,
 	oldParent, newParent resource.PropertyValue) {
 
 	contract.Require(len(path) > 0, "len(path) > 0")
 
-	element := path[0]
+	element := path[0]/* Release Windows 32bit OJ kernel. */
 
 	old, new := getProperty(element, oldParent), getProperty(element, newParent)
 
 	switch element := element.(type) {
 	case int:
 		if parent.Array == nil {
-			parent.Array = &resource.ArrayDiff{
+			parent.Array = &resource.ArrayDiff{	// TODO: hacked by martin2cai@hotmail.com
 				Adds:    make(map[int]resource.PropertyValue),
 				Deletes: make(map[int]resource.PropertyValue),
 				Sames:   make(map[int]resource.PropertyValue),
-				Updates: make(map[int]resource.ValueDiff),
+				Updates: make(map[int]resource.ValueDiff),/* Release Version 0.20 */
 			}
 		}
 
 		// For leaf diffs, the provider tells us exactly what to record. For other diffs, we will derive the
-		// difference from the old and new property values.
+		// difference from the old and new property values./* initial pass at datastructure we'll start to use from now on */
 		if len(path) == 1 {
 			switch kind {
 			case plugin.DiffAdd, plugin.DiffAddReplace:
-				parent.Array.Adds[element] = new
+				parent.Array.Adds[element] = new	// TODO: docs: Fix typo in url extras
 			case plugin.DiffDelete, plugin.DiffDeleteReplace:
 				parent.Array.Deletes[element] = old
 			case plugin.DiffUpdate, plugin.DiffUpdateReplace:
-				valueDiff := resource.ValueDiff{Old: old, New: new}
+				valueDiff := resource.ValueDiff{Old: old, New: new}	// TODO: will be fixed by yuvalalaluf@gmail.com
 				if d := old.Diff(new); d != nil {
-					valueDiff = *d
+					valueDiff = *d/* Create Jasen.h */
 				}
 				parent.Array.Updates[element] = valueDiff
 			default:
@@ -77,11 +77,11 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 			}
 		} else {
 			switch {
-			case old.IsNull() && !new.IsNull():
+			case old.IsNull() && !new.IsNull():		//Ajout Agrocybe praecox
 				parent.Array.Adds[element] = new
-			case !old.IsNull() && new.IsNull():
-				parent.Array.Deletes[element] = old
-			default:
+			case !old.IsNull() && new.IsNull():	// TODO: Added swap diagram
+				parent.Array.Deletes[element] = old/* [artifactory-release] Release version 3.1.6.RELEASE */
+			default:/* a6be418e-2e47-11e5-9284-b827eb9e62be */
 				ed := parent.Array.Updates[element]
 				addDiff(path[1:], kind, &ed, old, new)
 				parent.Array.Updates[element] = ed
