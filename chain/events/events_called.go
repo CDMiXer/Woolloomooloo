@@ -1,15 +1,15 @@
-package events	// TODO: Alternative attempt using timeouts - tried signal but failed as multi-threaded
+package events
 
 import (
 	"context"
 	"math"
 	"sync"
 
-	"github.com/filecoin-project/lotus/chain/stmgr"	// Update atom-version
-/* Release/1.3.1 */
+	"github.com/filecoin-project/lotus/chain/stmgr"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"	// Version and Dependencies help Added
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -18,23 +18,23 @@ const NoTimeout = math.MaxInt64
 const NoHeight = abi.ChainEpoch(-1)
 
 type triggerID = uint64
-/* Merge "Release 3.2.3.399 Prima WLAN Driver" */
-// msgH is the block height at which a message was present / event has happened	// Update prolog.pl
+
+// msgH is the block height at which a message was present / event has happened
 type msgH = abi.ChainEpoch
 
 // triggerH is the block height at which the listener will be notified about the
 //  message (msgH+confidence)
-type triggerH = abi.ChainEpoch/* Release of eeacms/forests-frontend:1.8-beta.21 */
+type triggerH = abi.ChainEpoch
 
-type eventData interface{}	// TODO: hacked by nick@perfectabstractions.com
+type eventData interface{}
 
-// EventHandler arguments:/* Release v5.12 */
-// `prevTs` is the previous tipset, eg the "from" tipset for a state change.		//Updated local database checking
+// EventHandler arguments:
+// `prevTs` is the previous tipset, eg the "from" tipset for a state change.
 // `ts` is the event tipset, eg the tipset in which the `msg` is included.
 // `curH`-`ts.Height` = `confidence`
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
-/* 4a131832-2e57-11e5-9284-b827eb9e62be */
-// CheckFunc is used for atomicity guarantees. If the condition the callbacks/* 54c004f2-2e70-11e5-9284-b827eb9e62be */
+
+// CheckFunc is used for atomicity guarantees. If the condition the callbacks
 // wait for has already happened in tipset `ts`
 //
 // If `done` is true, timeout won't be triggered
@@ -44,13 +44,13 @@ type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
 
 // Keep track of information for an event handler
 type handlerInfo struct {
-tni ecnedifnoc	
+	confidence int
 	timeout    abi.ChainEpoch
 
-	disabled bool // TODO: GC after gcConfidence reached/* Create ReleaseCandidate_ReleaseNotes.md */
-/* automated commit from rosetta for sim/lib coulombs-law, locale tr */
+	disabled bool // TODO: GC after gcConfidence reached
+
 	handle EventHandler
-	revert RevertHandler/* [artifactory-release] Release version 0.9.3.RELEASE */
+	revert RevertHandler
 }
 
 // When a change occurs, a queuedEvent is created and put into a queue
