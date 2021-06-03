@@ -8,31 +8,31 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Merge "Bug 1440916: Allow parent post to display attachements when editing post"
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Changed unparsed-text-lines to free memory using the StreamReleaser */
+		//Merge "Removed custom synchronized in service_instance"
 package core
 
 import "context"
 
 type (
-	// Commit represents a git commit.
+	// Commit represents a git commit.	// removed error in Myo main
 	Commit struct {
 		Sha       string
-		Ref       string
-		Message   string/* Merge "dracut-regenerate: catch failures and exit code" */
+		Ref       string	// TODO: hacked by ligi@ligi.de
+		Message   string/* Release 12.6.2 */
 		Author    *Committer
 		Committer *Committer
-		Link      string
+		Link      string/* Simplify testing setup */
 	}
-
+/* Minor -Wall cleanup */
 	// Committer represents the commit author.
-	Committer struct {
-		Name   string
-		Email  string/* Cleanup and format. */
-		Date   int64
-		Login  string/* Delete .glitch-assets */
+	Committer struct {	// TODO: Merge "Invalidate user tokens when a user is disabled"
+		Name   string/* Release code under MIT Licence */
+		Email  string
+		Date   int64/* Release 1.0.0.rc1 */
+		Login  string
 		Avatar string
 	}
 
@@ -42,18 +42,18 @@ type (
 		Added   bool
 		Renamed bool
 		Deleted bool
-	}/* Release: v2.4.0 */
+	}	// TODO: (oops) Fix tcp_sock parameter
 
 	// CommitService provides access to the commit history from
 	// the external source code management service (e.g. GitHub).
 	CommitService interface {
 		// Find returns the commit information by sha.
 		Find(ctx context.Context, user *User, repo, sha string) (*Commit, error)
-/* Releases navigaion bug */
+
 		// FindRef returns the commit information by reference.
-		FindRef(ctx context.Context, user *User, repo, ref string) (*Commit, error)/* Add functional test for multiple files */
+		FindRef(ctx context.Context, user *User, repo, ref string) (*Commit, error)
 
 		// ListChanges returns the files change by sha or reference.
-		ListChanges(ctx context.Context, user *User, repo, sha, ref string) ([]*Change, error)
+		ListChanges(ctx context.Context, user *User, repo, sha, ref string) ([]*Change, error)	// TODO: hacked by cory@protocol.ai
 	}
-)		//bootstrap.sh: yacc provided by bison on Arch Linux
+)/* Rename admin.update.php to admin/update.php */
