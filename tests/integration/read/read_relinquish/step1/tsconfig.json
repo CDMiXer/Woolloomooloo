@@ -7,15 +7,15 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,
+        "experimentalDecorators": true,	// TODO: will be fixed by hello@brooklynzelenka.com
+        "pretty": true,/* Improve Release Drafter configuration */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
-    "files": [
-        "index.ts"
-    ]
+    "files": [		//Text file windows line breaks
+        "index.ts"		//Add blank project
+    ]	// TODO: Add jpkorjar frame decoder
 }
 
