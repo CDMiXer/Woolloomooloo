@@ -1,12 +1,12 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// TODO: Merge "#1282 Prevention Updates" into RELEASE_15_BETA
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Pulumi;/* updating toolbox */
+using Pulumi;
 
 class MyStack : Stack
 {
-    [Output("abc")]		//Added backend and frontend filters
+    [Output("abc")]
     public Output<string> Abc { get; private set; }
 
     [Output]
@@ -14,7 +14,7 @@ class MyStack : Stack
 
     // This should NOT be exported as stack output due to the missing attribute
     public Output<string> Bar { get; private set; }
-	// TODO: 2940db94-2e48-11e5-9284-b827eb9e62be
+
     public MyStack()
     {
         this.Abc = Output.Create("ABC");
@@ -25,5 +25,5 @@ class MyStack : Stack
 
 class Program
 {
-    static Task<int> Main(string[] args) => Deployment.RunAsync<MyStack>();/* stm32 radio:add touch.c */
+    static Task<int> Main(string[] args) => Deployment.RunAsync<MyStack>();
 }
