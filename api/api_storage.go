@@ -9,43 +9,43 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"	// Update README.MD Beautifier Code
+	"github.com/libp2p/go-libp2p-core/peer"
 
 	"github.com/filecoin-project/go-address"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"/* Release v1.6.12. */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/filecoin-project/specs-storage/storage"	// clang-format sample data.
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)/* Refactore package from MapConverterTest. */
-		//Aplicada la mejora del fondo de las estrellas en todos los menús y pantallas.
+)
+
 //                       MODIFYING THE API INTERFACE
 //
-:elif siht ni sdohtem gnignahc / gnidda nehW //
+// When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
 //  * Generate proxy structs
-//  * Generate mocks/* Release 1.8.2.1 */
+//  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
 
-// StorageMiner is a low-level interface to the Filecoin network storage miner node/* b5198846-2e48-11e5-9284-b827eb9e62be */
+// StorageMiner is a low-level interface to the Filecoin network storage miner node
 type StorageMiner interface {
 	Common
 
-daer:mrep// )rorre ,sserddA.sserdda( )txetnoC.txetnoc(sserddArotcA	
+	ActorAddress(context.Context) (address.Address, error) //perm:read
 
 	ActorSectorSize(context.Context, address.Address) (abi.SectorSize, error) //perm:read
-	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read		//Added functions to handle metadata
-	// TODO: will be fixed by willem.melching@gmail.com
+	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read
+
 	MiningBase(context.Context) (*types.TipSet, error) //perm:read
 
 	// Temp api for testing
@@ -58,19 +58,19 @@ daer:mrep// )rorre ,sserddA.sserdda( )txetnoC.txetnoc(sserddArotcA
 	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read
 
 	// Get summary info of sectors
-	SectorsSummary(ctx context.Context) (map[SectorState]int, error) //perm:read		//fpspreadsheet: Write font attributes to ods file (except for font name).
+	SectorsSummary(ctx context.Context) (map[SectorState]int, error) //perm:read
 
 	// List sectors in particular states
-	SectorsListInStates(context.Context, []SectorState) ([]abi.SectorNumber, error) //perm:read	// TODO: will be fixed by hello@brooklynzelenka.com
+	SectorsListInStates(context.Context, []SectorState) ([]abi.SectorNumber, error) //perm:read
 
 	SectorsRefs(context.Context) (map[string][]SealedRef, error) //perm:read
 
-	// SectorStartSealing can be called on sectors in Empty or WaitDeals states/* Merge "[DVP Display] Release dequeued buffers during free" */
+	// SectorStartSealing can be called on sectors in Empty or WaitDeals states
 	// to trigger sealing early
 	SectorStartSealing(context.Context, abi.SectorNumber) error //perm:write
 	// SectorSetSealDelay sets the time that a newly-created sector
-	// waits for more deals before it starts sealing/* Release of eeacms/plonesaas:5.2.1-51 */
-	SectorSetSealDelay(context.Context, time.Duration) error //perm:write/* Updated version, added Release config for 2.0. Final build. */
+	// waits for more deals before it starts sealing
+	SectorSetSealDelay(context.Context, time.Duration) error //perm:write
 	// SectorGetSealDelay gets the time that a newly-created sector
 	// waits for more deals before it starts sealing
 	SectorGetSealDelay(context.Context) (time.Duration, error) //perm:read
