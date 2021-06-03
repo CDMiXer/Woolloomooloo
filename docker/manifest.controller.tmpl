@@ -1,17 +1,17 @@
 image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}
+{{#if build.tags}}/* Added a flush call to force csv writing on disc */
 tags:
-{{#each build.tags}}	// Delete proxy_test.py
+{{#each build.tags}}
   - {{this}}
-{{/each}}	// TODO: gRPC API enhancements.
+{{/each}}/* Remove trac ticket handling from PQM. Release 0.14.0. */
 {{/if}}
-manifests:/* refactor packages structure (part 1) */
+manifests:
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* Upper and len  */
-    platform:
-      architecture: amd64/* Ghidra_9.2 Release Notes - Add GP-252 */
-      os: linux/* Merge "Release 4.0.10.011  QCACLD WLAN Driver" */
-  -		//Added Kronos by @SmileyKeith
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
+    platform:	// TODO: hacked by davidad@alum.mit.edu
+      architecture: amd64/* Release. Version 1.0 */
+      os: linux/* version 1 to be released as a part of the article */
+  -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
@@ -19,19 +19,19 @@ manifests:/* refactor packages structure (part 1) */
       variant: v8
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:/* Deleted msmeter2.0.1/Release/meter.lastbuildstate */
+    platform:/* remove extra slots */
       architecture: arm
       os: linux
-      variant: v7
-  -	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
-    platform:/* Release 2.4.12: update sitemap */
-      architecture: amd64/* fix minefield boardview strings */
-      os: windows
-      variant: 1803
+      variant: v7/* Release phpBB 3.1.10 */
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64		//Cleaned up project, introduced abstract classes in form actions
     platform:
       architecture: amd64
+      os: windows	// Create polyrolly.py
+      variant: 1803/* limit CONVERT to 200 files */
+  -	// TODO: hacked by julia@jvns.ca
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64/* Little grammatical things */
+    platform:
+      architecture: amd64	// TODO: Correct handling for ruby1.9.3-dev.
       os: windows
-      variant: 1809
+      variant: 1809		//chore(package): update knorm-postgres to version 2.0.0
