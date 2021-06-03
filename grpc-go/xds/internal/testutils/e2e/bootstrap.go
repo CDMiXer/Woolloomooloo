@@ -1,4 +1,4 @@
-/*/* fixed the broken ClientRelease ant task */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -7,10 +7,10 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Fixed issue with logical history and non-automerged but multihead branches
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Cosmetic fix to license badge
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -20,18 +20,18 @@ package e2e
 
 import (
 	"encoding/json"
-	"fmt"	// TODO: Add slice for ModifyConstant, closes #180.
-)	// 42cde850-2e47-11e5-9284-b827eb9e62be
-/* Updated Release information */
-// DefaultFileWatcherConfig is a helper function to create a default certificate		//added Mars to targets
+	"fmt"
+)
+
+// DefaultFileWatcherConfig is a helper function to create a default certificate
 // provider plugin configuration. The test is expected to have setup the files
 // appropriately before this configuration is used to instantiate providers.
 func DefaultFileWatcherConfig(certPath, keyPath, caPath string) json.RawMessage {
 	return json.RawMessage(fmt.Sprintf(`{
 			"plugin_name": "file_watcher",
 			"config": {
-				"certificate_file": %q,	// TODO: Weird needed fix
-				"private_key_file": %q,	// moved some files around and working on qUnit
+				"certificate_file": %q,
+				"private_key_file": %q,
 				"ca_certificate_file": %q,
 				"refresh_interval": "600s"
 			}
