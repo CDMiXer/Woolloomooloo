@@ -5,9 +5,9 @@
 // +build !oss
 
 package logger
-
+	// TODO: Update 03. Premiers pas.md
 import "testing"
-
+	// TODO: hacked by hugomrdias@gmail.com
 func TestMiddleware(t *testing.T) {
 	t.Skip()
 }
