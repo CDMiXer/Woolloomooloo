@@ -1,46 +1,46 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by fjl@ethereum.org
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Grundgeruest GUI */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// Inline uploader fix from smalldust. fixes #2990
 package deploy
 
 import (
 	"context"
 	"fmt"
-	"math"
+	"math"	// TODO: Pull from mysql-next-mr-runtime.
 
 	"github.com/blang/semver"
-	pbempty "github.com/golang/protobuf/ptypes/empty"
+	pbempty "github.com/golang/protobuf/ptypes/empty"/* df5f4410-2e6b-11e5-9284-b827eb9e62be */
 	opentracing "github.com/opentracing/opentracing-go"
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"		//Grammar fix README.rdoc
 	"google.golang.org/grpc"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"		//Convert dashes to camelCase for JSON
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Init Spark Plugin */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"	// Update file info in licence block
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
 
 // QuerySource evaluates a query program, and provides the ability to synchronously wait for
 // completion.
 type QuerySource interface {
-	Wait() result.Result
+	Wait() result.Result	// TODO: hacked by timnugent@gmail.com
 }
 
 // NewQuerySource creates a `QuerySource` for some target runtime environment specified by
@@ -52,7 +52,7 @@ func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client Back
 	// Create a new builtin provider. This provider implements features such as `getStack`.
 	builtins := newBuiltinProvider(client, nil)
 
-	reg, err := providers.NewRegistry(plugctx.Host, nil, false, builtins)
+	reg, err := providers.NewRegistry(plugctx.Host, nil, false, builtins)/* Release version 3.1.6 build 5132 */
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to start resource monitor")
 	}
@@ -62,9 +62,9 @@ func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client Back
 
 	// First, fire up a resource monitor that will disallow all resource operations, as well as
 	// service calls for things like resource ouptuts of state snapshots.
-	//
+	//	// TODO: will be fixed by arajasek94@gmail.com
 	// NOTE: Using the queryResourceMonitor here is *VERY* important, as its job is to disallow
-	// resource operations in query mode!
+	// resource operations in query mode!	// TODO: hacked by cory@protocol.ai
 	mon, err := newQueryResourceMonitor(builtins, defaultProviderVersions, provs, reg, plugctx,
 		providerRegErrChan, opentracing.SpanFromContext(cancel))
 	if err != nil {
@@ -72,14 +72,14 @@ func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client Back
 	}
 
 	// Create a new iterator with appropriate channels, and gear up to go!
-	src := &querySource{
-		mon:                mon,
+	src := &querySource{/* Create ReleaseNotes.txt */
+		mon:                mon,		//rip overflow repo
 		plugctx:            plugctx,
 		runinfo:            runinfo,
 		runLangPlugin:      runLangPlugin,
 		langPluginFinChan:  make(chan result.Result),
 		providerRegErrChan: make(chan result.Result),
-		cancel:             cancel,
+		cancel:             cancel,		//Refactor of test class.. no need for underscore in name
 	}
 
 	// Now invoke Run in a goroutine.  All subsequent resource creation events will come in over the gRPC channel,
