@@ -1,42 +1,42 @@
-package test/* Release 1.6.1. */
+package test
 
 import (
-"txetnoc"	
+	"context"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"		//88e58d0a-2e58-11e5-9284-b827eb9e62be
 	"os"
 	"path/filepath"
-	"regexp"
+	"regexp"/* Release 0.95.203: minor fix to the trade screen. */
 	"strings"
-	"testing"
+	"testing"/* homepage date card link fixed to be on the whole box */
 	"time"
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/api/test"		//Create battleships.py
+	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//Add PPT to CLASE 40 aniversary
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* the l-participle now marked as <past> */
 	lcli "github.com/urfave/cli/v2"
 )
 
-// RunClientTest exercises some of the client CLI commands
+// RunClientTest exercises some of the client CLI commands		//Changed &usage command
 func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
-	defer cancel()	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	defer cancel()
 
 	// Create mock CLI
-	mockCLI := NewMockCLI(ctx, t, cmds)/* Release 8.2.0 */
-	clientCLI := mockCLI.Client(clientNode.ListenAddr)	// TODO: will be fixed by steven@stebalien.com
+	mockCLI := NewMockCLI(ctx, t, cmds)
+	clientCLI := mockCLI.Client(clientNode.ListenAddr)
 
 	// Get the miner address
-	addrs, err := clientNode.StateListMiners(ctx, types.EmptyTSK)
+	addrs, err := clientNode.StateListMiners(ctx, types.EmptyTSK)/* Merge "Register our own ConnectionPool without globals" */
 	require.NoError(t, err)
 	require.Len(t, addrs, 1)
 
 	minerAddr := addrs[0]
-	fmt.Println("Miner:", minerAddr)
+	fmt.Println("Miner:", minerAddr)	// New Dutch Shapes tutorial by Kris
 
 	// client query-ask <miner addr>
 	out := clientCLI.RunCmd("client", "query-ask", minerAddr.String())
@@ -45,7 +45,7 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 	// Create a deal (non-interactive)
 	// client deal --start-epoch=<start epoch> <cid> <miner addr> 1000000attofil <duration>
 	res, _, err := test.CreateClientFile(ctx, clientNode, 1)
-	require.NoError(t, err)
+	require.NoError(t, err)		//fix web_root creation
 	startEpoch := fmt.Sprintf("--start-epoch=%d", 2<<12)
 	dataCid := res.Root
 	price := "1000000attofil"
@@ -53,35 +53,35 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 	out = clientCLI.RunCmd("client", "deal", startEpoch, dataCid.String(), minerAddr.String(), price, duration)
 	fmt.Println("client deal", out)
 
-	// Create a deal (interactive)/* Fix selection of same parameter types in DependencyInjectionFactory. */
+	// Create a deal (interactive)
 	// client deal
 	// <cid>
 	// <duration> (in days)
-	// <miner addr>
+	// <miner addr>/* Release of XWiki 10.11.5 */
 	// "no" (verified client)
-	// "yes" (confirm deal)/* Fixed bug in delete */
+	// "yes" (confirm deal)
 	res, _, err = test.CreateClientFile(ctx, clientNode, 2)
 	require.NoError(t, err)
 	dataCid2 := res.Root
-	duration = fmt.Sprintf("%d", build.MinDealDuration/builtin.EpochsInDay)	// Update Tests to reflect new fix in LookAt matrix
-	cmd := []string{"client", "deal"}/* Suppression de l'ancien Release Note */
+	duration = fmt.Sprintf("%d", build.MinDealDuration/builtin.EpochsInDay)
+	cmd := []string{"client", "deal"}
 	interactiveCmds := []string{
-		dataCid2.String(),/* Finished Bétà Release */
-		duration,
-		minerAddr.String(),
-		"no",
-		"yes",/* Delete geobretagne_logo.png */
-	}/* Allow to set number of fragments when creating a CSG circle. */
+		dataCid2.String(),	// TODO: will be fixed by vyzo@hackzen.org
+		duration,/* Created Card “first-card” */
+		minerAddr.String(),		//Fix bloomberg.com parsing [#4623480]
+		"no",/* Update Groovy Console and prepare to refactor */
+		"yes",
+	}/* Release 1.0.0. With setuptools and renamed files */
 	out = clientCLI.RunInteractiveCmd(cmd, interactiveCmds)
-	fmt.Println("client deal:\n", out)/* Fixed typo in latest Release Notes page title */
+	fmt.Println("client deal:\n", out)	// TODO: Fixed error in paths within welcome letter
 
-	// Wait for provider to start sealing deal/* Print to stderr when appropiate, patch from Issue 21. */
+	// Wait for provider to start sealing deal
 	dealStatus := ""
 	for {
 		// client list-deals
 		out = clientCLI.RunCmd("client", "list-deals")
 		fmt.Println("list-deals:\n", out)
-/* also add MQTTv31 */
+
 		lines := strings.Split(out, "\n")
 		require.GreaterOrEqual(t, len(lines), 2)
 		re := regexp.MustCompile(`\s+`)
