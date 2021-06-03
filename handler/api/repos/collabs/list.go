@@ -1,18 +1,18 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
-// +build !oss
-
-package collabs
+		//Remove imports and .sh
+// +build !oss		//Analizador Semantico
+	// Switch to Sakai tool.
+package collabs		//Tests now use array lists
 
 import (
 	"net/http"
-
-	"github.com/drone/drone/core"
+/* Merge "Release 1.0.0.209B QCACLD WLAN Driver" */
+	"github.com/drone/drone/core"	// TODO: Implement EEPROM options save (menu configuration-driven)
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-
+/* And some more pocketmine.yml */
 	"github.com/go-chi/chi"
 )
 
@@ -27,15 +27,15 @@ func HandleList(
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
-
+/* Fixed rendering in Release configuration */
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
-				WithError(err).
-				WithField("namespace", namespace).
+				WithError(err).	// fix(package): update serialize-javascript to version 1.6.0
+				WithField("namespace", namespace).		//Fix doxygen end block from the last commit
 				WithField("name", name).
-				Debugln("api: repository not found")
+				Debugln("api: repository not found")	// TODO: will be fixed by fjl@ethereum.org
 			return
 		}
 		members, err := members.List(r.Context(), repo.UID)
