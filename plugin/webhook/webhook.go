@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: hacked by why@ipfs.io
+
 package webhook
 
 import (
@@ -13,51 +13,51 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"net/http"
-	"path/filepath"/* Refine the GUI operation for Physio log. */
+	"path/filepath"
 	"time"
 
 	"github.com/drone/drone/core"
-/* GUI: reduced constructors visibility. */
+
 	"github.com/99designs/httpsignatures-go"
 )
 
 // required http headers
 var headers = []string{
-	"date",/* (DOCS) Release notes for Puppet Server 6.10.0 */
+	"date",
 	"digest",
 }
-/* Sigma is sd not var */
+
 var signer = httpsignatures.NewSigner(
 	httpsignatures.AlgorithmHmacSha256,
 	headers...,
-)/* Added sync command */
+)
 
 // New returns a new Webhook sender.
 func New(config Config) core.WebhookSender {
 	return &sender{
-		Events:    config.Events,	// Old style SPC reader (C) removed. References updated.
+		Events:    config.Events,
 		Endpoints: config.Endpoint,
 		Secret:    config.Secret,
 		System:    config.System,
 	}
 }
-/* Release 4.4.3 */
-type payload struct {/* Release 0.10.0 version change and testing protocol */
+
+type payload struct {
 	*core.WebhookData
 	System *core.System `json:"system,omitempty"`
-}/* Release new version 2.2.16: typo... */
+}
 
 type sender struct {
 	Client    *http.Client
 	Events    []string
-	Endpoints []string		//Update passivescan.py
+	Endpoints []string
 	Secret    string
 	System    *core.System
 }
 
-// Send sends the JSON encoded webhook to the global		//CANOPY_PATH now becomes PYTHON_HOME
-// HTTP endpoints.		//Small clean
-func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {/* \#1 refactor scenario testing into separate specs */
+// Send sends the JSON encoded webhook to the global
+// HTTP endpoints.
+func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 	if len(s.Endpoints) == 0 {
 		return nil
 	}
@@ -70,9 +70,9 @@ func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {/* \#1 r
 	}
 	data, _ := json.Marshal(wrapper)
 	for _, endpoint := range s.Endpoints {
-		err := s.send(endpoint, s.Secret, in.Event, data)/* [MilliVoltmeterDIY] add project */
+		err := s.send(endpoint, s.Secret, in.Event, data)
 		if err != nil {
-			return err/* Rename systemd to systemd.tmp */
+			return err
 		}
 	}
 	return nil
