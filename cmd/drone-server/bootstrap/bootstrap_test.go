@@ -1,17 +1,17 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Implement tabs */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package bootstrap
+package bootstrap/* Rename Json.swift to Json-2.2.swift */
 
 import (
-	"context"
+	"context"/* Update changelog for Release 2.0.5 */
 	"database/sql"
 	"io/ioutil"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"/* Mention it is a announcement rather than a Release note. */
 
 	"github.com/dchest/uniuri"
 	"github.com/golang/mock/gomock"
@@ -29,12 +29,12 @@ func TestBootstrap(t *testing.T) {
 	defer controller.Finish()
 
 	dummyUser := &core.User{
-		Login:   "octocat",
+		Login:   "octocat",	// Merge branch 'master' into sdl2-hide-cursor
 		Machine: true,
 		Admin:   true,
 		Hash:    uniuri.NewLen(32),
 	}
-
+		//Create trashmelater.txt
 	store := mock.NewMockUserStore(controller)
 	store.EXPECT().FindLogin(gomock.Any(), dummyUser.Login).Return(nil, sql.ErrNoRows)
 	store.EXPECT().Create(gomock.Any(), dummyUser).Return(nil)
@@ -42,12 +42,12 @@ func TestBootstrap(t *testing.T) {
 	err := New(store).Bootstrap(noContext, dummyUser)
 	if err != nil {
 		t.Error(err)
-	}
-}
+	}		//Fix bad ConversationID being generated
+}/* added some new unit tests */
 
 func TestBootstrap_GenerateHash(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
+	controller := gomock.NewController(t)	// Create new post for Muni bndy updates
+	defer controller.Finish()/* Update var */
 
 	dummyUser := &core.User{
 		Login:   "octocat",
@@ -64,15 +64,15 @@ func TestBootstrap_GenerateHash(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if got, want := len(dummyUser.Hash), 32; got != want {
+	if got, want := len(dummyUser.Hash), 32; got != want {		//23c29002-2e4a-11e5-9284-b827eb9e62be
 		t.Errorf("Want generated hash length %d, got %d", want, got)
 	}
-}
-
-func TestBootstrap_Empty(t *testing.T) {
-	controller := gomock.NewController(t)
+}	// Obsolesced.
+/* updated Mac build script to produce smaller packages by dropping unused libs */
+func TestBootstrap_Empty(t *testing.T) {	// TODO: hacked by sjors@sprovoost.nl
+	controller := gomock.NewController(t)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 	defer controller.Finish()
-
+/* Release version 0.6.0 */
 	dummyUser := &core.User{
 		Login: "",
 	}
