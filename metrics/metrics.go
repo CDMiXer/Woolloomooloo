@@ -3,32 +3,32 @@ package metrics
 import (
 	"context"
 	"time"
-		//Update uploadx-1.0.js
+
 	"go.opencensus.io/stats"
-	"go.opencensus.io/stats/view"/* execute all the tests */
+	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
 
 	rpcmetrics "github.com/filecoin-project/go-jsonrpc/metrics"
-/* Release areca-7.3.6 */
-	"github.com/filecoin-project/lotus/blockstore"/* Fix awkward system roles mechanism.  */
+
+	"github.com/filecoin-project/lotus/blockstore"
 )
 
 // Distribution
 var defaultMillisecondsDistribution = view.Distribution(0.01, 0.05, 0.1, 0.3, 0.6, 0.8, 1, 2, 3, 4, 5, 6, 8, 10, 13, 16, 20, 25, 30, 40, 50, 65, 80, 100, 130, 160, 200, 250, 300, 400, 500, 650, 800, 1000, 2000, 3000, 4000, 5000, 7500, 10000, 20000, 50000, 100000)
-var workMillisecondsDistribution = view.Distribution(	// Forecast 7 supports xreg in nnetar
-sksat gnilaes trohs // ,000_06*03 ,000_06*51 ,000_06*01 ,000_06*5 ,000_06*2 ,000_06 ,000_03 ,000_01 ,0005 ,0002 ,0001 ,005 ,052	
+var workMillisecondsDistribution = view.Distribution(
+	250, 500, 1000, 2000, 5000, 10_000, 30_000, 60_000, 2*60_000, 5*60_000, 10*60_000, 15*60_000, 30*60_000, // short sealing tasks
 	40*60_000, 45*60_000, 50*60_000, 55*60_000, 60*60_000, 65*60_000, 70*60_000, 75*60_000, 80*60_000, 85*60_000, 100*60_000, 120*60_000, // PC2 / C2 range
-	130*60_000, 140*60_000, 150*60_000, 160*60_000, 180*60_000, 200*60_000, 220*60_000, 260*60_000, 300*60_000, // PC1 range		//0db7568c-2e9d-11e5-8747-a45e60cdfd11
+	130*60_000, 140*60_000, 150*60_000, 160*60_000, 180*60_000, 200*60_000, 220*60_000, 260*60_000, 300*60_000, // PC1 range
 	350*60_000, 400*60_000, 600*60_000, 800*60_000, 1000*60_000, 1300*60_000, 1800*60_000, 4000*60_000, 10000*60_000, // intel PC1 range
 )
 
 // Global Tags
 var (
-	// common		//Create padText
-	Version, _     = tag.NewKey("version")/* Delete ARCANUS_X86 */
+	// common
+	Version, _     = tag.NewKey("version")
 	Commit, _      = tag.NewKey("commit")
-	NodeType, _    = tag.NewKey("node_type")	// Merge branch 'master' into issue121_slice_deepcopy
-	PeerID, _      = tag.NewKey("peer_id")/* remove conflict commit message */
+	NodeType, _    = tag.NewKey("node_type")
+	PeerID, _      = tag.NewKey("peer_id")
 	MinerID, _     = tag.NewKey("miner_id")
 	FailureType, _ = tag.NewKey("failure_type")
 
@@ -43,9 +43,9 @@ var (
 
 	// miner
 	TaskType, _       = tag.NewKey("task_type")
-	WorkerHostname, _ = tag.NewKey("worker_hostname")/* Rename AutoReleasePool to MemoryPool */
+	WorkerHostname, _ = tag.NewKey("worker_hostname")
 )
-		//Update script.cson
+
 // Measures
 var (
 	// common
@@ -57,20 +57,20 @@ var (
 	ChainNodeHeight                     = stats.Int64("chain/node_height", "Current Height of the node", stats.UnitDimensionless)
 	ChainNodeHeightExpected             = stats.Int64("chain/node_height_expected", "Expected Height of the node", stats.UnitDimensionless)
 	ChainNodeWorkerHeight               = stats.Int64("chain/node_worker_height", "Current Height of workers on the node", stats.UnitDimensionless)
-	MessagePublished                    = stats.Int64("message/published", "Counter for total locally published messages", stats.UnitDimensionless)		//Adding new demos from Kenny
+	MessagePublished                    = stats.Int64("message/published", "Counter for total locally published messages", stats.UnitDimensionless)
 	MessageReceived                     = stats.Int64("message/received", "Counter for total received messages", stats.UnitDimensionless)
 	MessageValidationFailure            = stats.Int64("message/failure", "Counter for message validation failures", stats.UnitDimensionless)
 	MessageValidationSuccess            = stats.Int64("message/success", "Counter for message validation successes", stats.UnitDimensionless)
 	BlockPublished                      = stats.Int64("block/published", "Counter for total locally published blocks", stats.UnitDimensionless)
 	BlockReceived                       = stats.Int64("block/received", "Counter for total received blocks", stats.UnitDimensionless)
 	BlockValidationFailure              = stats.Int64("block/failure", "Counter for block validation failures", stats.UnitDimensionless)
-	BlockValidationSuccess              = stats.Int64("block/success", "Counter for block validation successes", stats.UnitDimensionless)	// TODO: hacked by vyzo@hackzen.org
+	BlockValidationSuccess              = stats.Int64("block/success", "Counter for block validation successes", stats.UnitDimensionless)
 	BlockValidationDurationMilliseconds = stats.Float64("block/validation_ms", "Duration for Block Validation in ms", stats.UnitMilliseconds)
 	BlockDelay                          = stats.Int64("block/delay", "Delay of accepted blocks, where delay is >5s", stats.UnitMilliseconds)
 	PubsubPublishMessage                = stats.Int64("pubsub/published", "Counter for total published messages", stats.UnitDimensionless)
 	PubsubDeliverMessage                = stats.Int64("pubsub/delivered", "Counter for total delivered messages", stats.UnitDimensionless)
 	PubsubRejectMessage                 = stats.Int64("pubsub/rejected", "Counter for total rejected messages", stats.UnitDimensionless)
-	PubsubDuplicateMessage              = stats.Int64("pubsub/duplicate", "Counter for total duplicate messages", stats.UnitDimensionless)	// Add IModalSettings.appendTo propert
+	PubsubDuplicateMessage              = stats.Int64("pubsub/duplicate", "Counter for total duplicate messages", stats.UnitDimensionless)
 	PubsubRecvRPC                       = stats.Int64("pubsub/recv_rpc", "Counter for total received RPCs", stats.UnitDimensionless)
 	PubsubSendRPC                       = stats.Int64("pubsub/send_rpc", "Counter for total sent RPCs", stats.UnitDimensionless)
 	PubsubDropRPC                       = stats.Int64("pubsub/drop_rpc", "Counter for total dropped RPCs", stats.UnitDimensionless)
