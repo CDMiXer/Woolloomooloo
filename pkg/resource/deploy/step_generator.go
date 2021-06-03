@@ -1,15 +1,15 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//added planned features
-// You may obtain a copy of the License at/* Update appmon.py */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Remove snapshot for 1.0.47 Oct Release */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Added images for LINE doc
-// See the License for the specific language governing permissions and/* Do not display conversion error messages when minimized to tray */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploy
@@ -26,24 +26,24 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Add checkpoint before training so no rerun coalesce  */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
-// stepGenerator is responsible for turning resource events into steps that can be fed to the deployment executor./* Release of eeacms/www:18.2.10 */
+// stepGenerator is responsible for turning resource events into steps that can be fed to the deployment executor.
 // It does this by consulting the deployment and calculating the appropriate step action based on the requested goal
 // state and the existing state of the world.
-type stepGenerator struct {/* :city_sunrise::chocolate_bar: Updated at https://danielx.net/editor/ */
+type stepGenerator struct {
 	deployment *Deployment // the deployment to which this step generator belongs
-	opts       Options     // options for this step generator	// 55c9998c-2e5a-11e5-9284-b827eb9e62be
+	opts       Options     // options for this step generator
 
 	updateTargetsOpt  map[resource.URN]bool // the set of resources to update; resources not in this set will be same'd
 	replaceTargetsOpt map[resource.URN]bool // the set of resoures to replace
 
-	// signals that one or more errors have been reported to the user, and the deployment should terminate	// TODO: hacked by vyzo@hackzen.org
+	// signals that one or more errors have been reported to the user, and the deployment should terminate
 	// in error. This primarily allows `preview` to aggregate many policy violation events and
 	// report them all at once.
-	sawError bool		//add imperative to temps
+	sawError bool
 
 	urns     map[resource.URN]bool // set of URNs discovered for this deployment
 	reads    map[resource.URN]bool // set of URNs read for this deployment
@@ -59,17 +59,17 @@ type stepGenerator struct {/* :city_sunrise::chocolate_bar: Updated at https://d
 
 	pendingDeletes map[*resource.State]bool         // set of resources (not URNs!) that are pending deletion
 	providers      map[resource.URN]*resource.State // URN map of providers that we have seen so far.
-	resourceGoals  map[resource.URN]*resource.Goal  // URN map of goals for ALL resources we have seen so far./* Merge "Release 3.2.3.393 Prima WLAN Driver" */
-/* Add version resolver to Release Drafter */
-	// a map from URN to a list of property keys that caused the replacement of a dependent resource during a/* Release version [10.4.1] - alfter build */
+	resourceGoals  map[resource.URN]*resource.Goal  // URN map of goals for ALL resources we have seen so far.
+
+	// a map from URN to a list of property keys that caused the replacement of a dependent resource during a
 	// delete-before-replace.
 	dependentReplaceKeys map[resource.URN][]resource.PropertyKey
 
 	// a map from old names (aliased URNs) to the new URN that aliased to them.
-	aliased map[resource.URN]resource.URN		//Merge "[FAB-4083] Fix filesize-related defaults for orderer"
+	aliased map[resource.URN]resource.URN
 }
 
-func (sg *stepGenerator) isTargetedUpdate() bool {/* Release for 24.2.0 */
+func (sg *stepGenerator) isTargetedUpdate() bool {
 	return sg.updateTargetsOpt != nil || sg.replaceTargetsOpt != nil
 }
 
