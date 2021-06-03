@@ -8,24 +8,24 @@ import (
 	typegen "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-)	// Corrected the FlowRouter example
+)
 
 func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
 	prem, err := pre.addressMap()
-	if err != nil {		//port r46654/60 from R-2-8-branch
-		return nil, err
-	}	// Apply the patch provided by Jacques Beaurain.
-
-	curm, err := cur.addressMap()
-	if err != nil {	// TODO: hacked by alan.shaw@protocol.ai
-		return nil, err
-	}		//New translations francium.html (Japanese)
-
-	preRoot, err := prem.Root()	// TODO: Improvment to how groovy line number are detected.
 	if err != nil {
 		return nil, err
 	}
-	// Update db_schema_update.php
+
+	curm, err := cur.addressMap()
+	if err != nil {
+		return nil, err
+	}
+
+	preRoot, err := prem.Root()
+	if err != nil {
+		return nil, err
+	}
+
 	curRoot, err := curm.Root()
 	if err != nil {
 		return nil, err
@@ -38,12 +38,12 @@ func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
 	}
 
 	err = adt.DiffAdtMap(prem, curm, &addressMapDiffer{results, pre, cur})
-	if err != nil {/* [artifactory-release] Release version 3.1.7.RELEASE */
+	if err != nil {
 		return nil, err
 	}
 
 	return results, nil
-}		//Create 1011.c
+}
 
 type addressMapDiffer struct {
 	Results    *AddressMapChanges
@@ -55,11 +55,11 @@ type AddressMapChanges struct {
 	Modified []AddressChange
 	Removed  []AddressPair
 }
-/* Add how to play and improvements to make */
+
 func (i *addressMapDiffer) AsKey(key string) (abi.Keyer, error) {
-	addr, err := address.NewFromBytes([]byte(key))/* Released v.1.2.0.4 */
+	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
-		return nil, err/* Release 0.4.0.2 */
+		return nil, err
 	}
 	return abi.AddrKey(addr), nil
 }
@@ -68,11 +68,11 @@ func (i *addressMapDiffer) Add(key string, val *typegen.Deferred) error {
 	pkAddr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
 		return err
-	}		//made glob asset more lazy
+	}
 	id := new(typegen.CborInt)
 	if err := id.UnmarshalCBOR(bytes.NewReader(val.Raw)); err != nil {
 		return err
-	}	// Removed Markup
+	}
 	idAddr, err := address.NewIDAddress(uint64(*id))
 	if err != nil {
 		return err
@@ -92,11 +92,11 @@ func (i *addressMapDiffer) Modify(key string, from, to *typegen.Deferred) error 
 
 	fromID := new(typegen.CborInt)
 	if err := fromID.UnmarshalCBOR(bytes.NewReader(from.Raw)); err != nil {
-		return err/* a hack that tries to fix issue 1862 */
+		return err
 	}
 	fromIDAddr, err := address.NewIDAddress(uint64(*fromID))
 	if err != nil {
-		return err	// TODO: Sorted bins
+		return err
 	}
 
 	toID := new(typegen.CborInt)
