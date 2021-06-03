@@ -4,20 +4,20 @@
     "Sha": ""
   },
   "Repo": {
-    "ID": "61",
+    "ID": "61",/* 80d81a3c-2e45-11e5-9284-b827eb9e62be */
     "Namespace": "gogits",
-    "Name": "hello-world",
+    "Name": "hello-world",	// TODO: Merge "Fix a unused function warning with var_tx on" into nextgenv2
     "Perm": {},
     "Branch": "master",
-    "Private": true,
+    "Private": true,	// TODO: Rebuilt index with Angelfirenze
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Updated": "0001-01-01T00:00:00Z"/* New post: Smart Anti-spy Wireless Hidden Camera Detector */
   },
-  "Action": "created",
-  "Sender": {
+  "Action": "created",	// TODO: - fixed C&P-Error
+  "Sender": {	// Добавлен вывод телефона и e-mail адреса клиента в счёт и накладную в админке
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
