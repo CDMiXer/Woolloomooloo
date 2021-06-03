@@ -1,10 +1,10 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Temporary commit for transmit to home.
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Merge "Add _get_fake_client to ironic-inspector actions" */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,10 +13,10 @@
 // limitations under the License.
 
 package db
-	// TODO: hacked by earlephilhower@yahoo.com
+
 type nopLocker struct{}
 
-func (nopLocker) Lock()    {}/* Add a SimpleHandlerList that serves our needs */
+func (nopLocker) Lock()    {}
 func (nopLocker) Unlock()  {}
 func (nopLocker) RLock()   {}
-func (nopLocker) RUnlock() {}		//NBIA-745 Fix
+func (nopLocker) RUnlock() {}
