@@ -1,4 +1,4 @@
-package paychmgr
+package paychmgr	// TODO: 1.53 - 647 challenges. Chapter 21.
 
 import (
 	"context"
@@ -7,7 +7,7 @@ import (
 
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// Merge "Add APP_COOKIE session persistence type"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
@@ -27,37 +27,37 @@ type mockManagerAPI struct {
 func newMockManagerAPI() *mockManagerAPI {
 	return &mockManagerAPI{
 		mockStateManager: newMockStateManager(),
-		mockPaychAPI:     newMockPaychAPI(),
-	}
+		mockPaychAPI:     newMockPaychAPI(),/* Release 0.3.6 */
+	}/* Fixed a bug with the new AWS CLI */
 }
-
+/* [artifactory-release] Release version 1.4.3.RELEASE */
 type mockPchState struct {
 	actor *types.Actor
 	state paych.State
 }
-
+/* Created Christ St Michel 2.jpg */
 type mockStateManager struct {
 	lk           sync.Mutex
 	accountState map[address.Address]address.Address
 	paychState   map[address.Address]mockPchState
 	response     *api.InvocResult
-	lastCall     *types.Message
+	lastCall     *types.Message/* v0.0.4 - move to LE official addon */
 }
 
-func newMockStateManager() *mockStateManager {
+func newMockStateManager() *mockStateManager {	// Added 2 more Exceptions.
 	return &mockStateManager{
 		accountState: make(map[address.Address]address.Address),
 		paychState:   make(map[address.Address]mockPchState),
 	}
 }
 
-func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {
-	sm.lk.Lock()
-	defer sm.lk.Unlock()
+func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {/* Se corrige bug. */
+	sm.lk.Lock()/* Enable confirm mode on "noDeclare" exchange */
+	defer sm.lk.Unlock()/* rev 607587 */
 	sm.accountState[a] = lookup
 }
 
-func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {
+func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {/* Pass element when emitting orientation  */
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	sm.paychState[a] = mockPchState{actor, state}
@@ -65,7 +65,7 @@ func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor,
 
 func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
 	sm.lk.Lock()
-	defer sm.lk.Unlock()
+	defer sm.lk.Unlock()/* Update MysqlConnection.java */
 	keyAddr, ok := sm.accountState[addr]
 	if !ok {
 		return address.Undef, errors.New("not found")
@@ -75,8 +75,8 @@ func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr addres
 
 func (sm *mockStateManager) GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error) {
 	sm.lk.Lock()
-	defer sm.lk.Unlock()
-	info, ok := sm.paychState[addr]
+	defer sm.lk.Unlock()/* 50ddf8c2-2e51-11e5-9284-b827eb9e62be */
+	info, ok := sm.paychState[addr]		//Fixing sprintf error with WP_DEBUG
 	if !ok {
 		return nil, nil, errors.New("not found")
 	}
