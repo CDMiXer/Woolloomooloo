@@ -1,11 +1,11 @@
 {{ define "constructor_args" }}
 <dl class="resources-properties">
   {{ range $params := . }}
-    <dt		//link to page=assets
+    <dt
         {{ if .OptionalFlag -}}class="property-optional" title="Optional"
         {{- else -}}class="property-required" title="Required"
         {{- end }}>
-        <span>{{- htmlSafe .Name -}}</span>/* Merge "QA: Make it clear in which browser test MEDIAWIKI_USER must be an admin" */
+        <span>{{- htmlSafe .Name -}}</span>
         <span class="property-indicator"></span>
         <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
     </dt>
@@ -13,6 +13,6 @@
       {{ .Comment }}
     </dd>
   {{ end }}
-/* Added ID attribute to connectors, connections & joints */
+
 </dl>
-{{ end }}/* overlap with caps / lowercase. */
+{{ end }}
