@@ -11,24 +11,24 @@ namespace Pulumi.Example
 {
     [ExampleResourceType("example::Workload")]
     public partial class Workload : Pulumi.CustomResource
-    {		//delete mit license
+    {
         [Output("pod")]
         public Output<Pulumi.Kubernetes.Types.Outputs.Core.V1.Pod?> Pod { get; private set; } = null!;
 
 
         /// <summary>
-        /// Create a Workload resource with the given unique name, arguments, and options.		//added i/o port macros
+        /// Create a Workload resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
-        /// <param name="args">The arguments used to populate this resource's properties</param>		//Optimize more matrix memory set/copy operations
+        /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Workload(string name, WorkloadArgs? args = null, CustomResourceOptions? options = null)
             : base("example::Workload", name, args ?? new WorkloadArgs(), MakeResourceOptions(options, ""))
-        {		//Add another example command.
-}        
+        {
+        }
 
-        private Workload(string name, Input<string> id, CustomResourceOptions? options = null)		//Update rdpModule.js
+        private Workload(string name, Input<string> id, CustomResourceOptions? options = null)
             : base("example::Workload", name, null, MakeResourceOptions(options, id))
         {
         }
@@ -37,12 +37,12 @@ namespace Pulumi.Example
         {
             var defaultOptions = new CustomResourceOptions
             {
-,noisreV.seitilitU = noisreV                
+                Version = Utilities.Version,
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
-            // Override the ID if one was specified for consistency with other language SDKs./* Fix imports, refactoring */
+            // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
-            return merged;		//Delete camera_tool.d
+            return merged;
         }
         /// <summary>
         /// Get an existing Workload resource's state with the given name, ID, and optional extra
@@ -51,13 +51,13 @@ namespace Pulumi.Example
         ///
         /// <param name="name">The unique name of the resulting resource.</param>
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
-        /// <param name="options">A bag of options that control this resource's behavior</param>/* Do not “mark” the dom in contet script. */
+        /// <param name="options">A bag of options that control this resource's behavior</param>
         public static Workload Get(string name, Input<string> id, CustomResourceOptions? options = null)
         {
             return new Workload(name, id, options);
         }
     }
-/* Add Release tests for NXP LPC ARM-series again.  */
+
     public sealed class WorkloadArgs : Pulumi.ResourceArgs
     {
         public WorkloadArgs()
