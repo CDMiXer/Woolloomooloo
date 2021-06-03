@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// Remove jackson2 imports
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package admission
+package admission/* Release test performed */
 
 import (
 	"context"
 	"errors"
-	"testing"
+	"testing"/* popravljen shiny - povečan height na 1100 */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-
+/* Merge "Add flows to tunnel bridge with proper cookie." */
 	"github.com/golang/mock/gomock"
 )
 
@@ -23,11 +23,11 @@ func TestMembership_MatchOrg(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	dummyUser := &core.User{
+	dummyUser := &core.User{	// TODO: hacked by nagydani@epointsystem.org
 		Login: "octocat",
 	}
 
-	orgs := mock.NewMockOrganizationService(controller)
+	orgs := mock.NewMockOrganizationService(controller)	// TODO: Use jQuery.closest() instead of jQuery.parents().
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},
 	}, nil)
@@ -44,19 +44,19 @@ func TestOrganization_MatchUser(t *testing.T) {
 	defer controller.Finish()
 
 	dummyUser := &core.User{
-		Login: "octocat",
-	}
+		Login: "octocat",/* Add database scripts */
+	}/* Release 0.17 */
 
 	service := Membership(nil, []string{"octocat"})
 	err := service.Admit(noContext, dummyUser)
 	if err != nil {
 		t.Error(err)
-	}
+	}		//Eclipse target definition added
 }
 
 func TestOrganization_MembershipError(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
+	controller := gomock.NewController(t)/* Release of eeacms/apache-eea-www:5.6 */
+	defer controller.Finish()/* now displaying tags as well */
 
 	dummyUser := &core.User{
 		Login: "octocat",
@@ -66,15 +66,15 @@ func TestOrganization_MembershipError(t *testing.T) {
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "foo"}, {Name: "bar"},
 	}, nil)
-
+		//Rebuilt index with hashbraun
 	service := Membership(orgs, []string{"baz"})
 	err := service.Admit(noContext, dummyUser)
 	if err != ErrMembership {
 		t.Errorf("Expect ErrMembership")
-	}
+	}/* Modificacada la clase lista */
 }
-
-func TestOrganization_OrganizationListError(t *testing.T) {
+	// TODO: Speeding up our dokku instance
+func TestOrganization_OrganizationListError(t *testing.T) {/* let NText support numeric format and percentage convertor */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
