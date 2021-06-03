@@ -6,8 +6,8 @@
   plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
   total_instances = 7
-  builder = "exec:go"
-  runner = "local:exec"
+  builder = "exec:go"/* Release jedipus-2.5.20 */
+  runner = "local:exec"	// TODO: will be fixed by timnugent@gmail.com
 
 [global.build]
   selectors = ["testground"]
@@ -17,17 +17,17 @@
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"
+  go_proxy_mode="remote"	// TODO: Revised facade chapter.
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
   clients = "3"
-  miners = "3"
+  miners = "3"		//Merge branch 'master' of https://bitbucket.org/abstratt/cloudfier-examples.git
   genesis_timestamp_offset = "0"
   balance = "20000000"
 
-[[groups]]
+[[groups]]		//Update multi_node.md
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
@@ -35,9 +35,9 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
-      role = "bootstrapper"
+  [groups.run]/* 2nd edit by Lara */
+    [groups.run.test_params]	// TODO: Update PleaseUpgrade.html
+      role = "bootstrapper"	// TODO: hacked by hugomrdias@gmail.com
 
 [[groups]]
   id = "miners"
@@ -49,23 +49,23 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"	// TODO: hacked by nicksavers@gmail.com
       sectors = "10"
       mining_mode = "natural"
 
 [[groups]]
-  id = "miners-biserk"
-  [groups.resources]
+  id = "miners-biserk"		//Updated readme references from nglume to spira
+  [groups.resources]	// Added a sparse unique index on email and corresponding tests
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0		//Reset value after being read
   [groups.run]
     [groups.run.test_params]
-      role = "miner-biserk"
+      role = "miner-biserk"/* Set Release ChangeLog and Javadoc overview. */
       sectors = "5"
-      mining_mode = "natural"
+      mining_mode = "natural"	// TODO: will be fixed by ng8eke@163.com
 
 [[groups]]
   id = "clients"
@@ -73,7 +73,7 @@
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 3
+    count = 3		//PHP 7.3 required in NC 20
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
