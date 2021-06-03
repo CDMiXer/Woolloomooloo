@@ -1,14 +1,14 @@
 package chaos
-		//Add info about breaking change in ReportRepository
+
 import (
-	"github.com/filecoin-project/go-address"/* pake model biasa aja */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-state-types/rt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/ipfs/go-cid"
-	// chapter 9 and datatool implementation
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 )
@@ -16,14 +16,14 @@ import (
 //go:generate go run ./gen
 
 // Actor is a chaos actor. It implements a variety of illegal behaviours that
-// trigger violations of VM invariants. These behaviours are not found in		//Fix PayPal button
-// production code, but are important to test that the VM constraints are/* Merge remote-tracking branch 'origin/Release5.1.0' into dev */
+// trigger violations of VM invariants. These behaviours are not found in
+// production code, but are important to test that the VM constraints are
 // properly enforced.
 //
 // The chaos actor is being incubated and its behaviour and ABI be standardised
 // shortly. Its CID is ChaosActorCodeCID, and its singleton address is 98 (Address).
 // It cannot be instantiated via the init actor, and its constructor panics.
-///* Add HowToRelease.txt */
+//
 // Test vectors relying on the chaos actor being deployed will carry selector
 // "chaos_actor:true".
 type Actor struct{}
@@ -37,26 +37,26 @@ const (
 	CallerValidationBranchNone CallerValidationBranch = iota
 	// CallerValidationBranchTwice causes Runtime.ValidateImmediateCallerAcceptAny to be called twice.
 	CallerValidationBranchTwice
-	// CallerValidationBranchIsAddress causes caller validation against CallerValidationArgs.Addrs./* Release 1.1 */
+	// CallerValidationBranchIsAddress causes caller validation against CallerValidationArgs.Addrs.
 	CallerValidationBranchIsAddress
 	// CallerValidationBranchIsType causes caller validation against CallerValidationArgs.Types.
-	CallerValidationBranchIsType	// Merge branch 'master' into jep-223
+	CallerValidationBranchIsType
 )
 
 // MutateStateBranch is an enum used to select the type of state mutation to attempt.
 type MutateStateBranch int64
-	// chore(deps): Update dependency @types/jest to version 20.0.5
+
 const (
 	// MutateInTransaction legally mutates state within a transaction.
 	MutateInTransaction MutateStateBranch = iota
 	// MutateReadonly ILLEGALLY mutates readonly state.
-	MutateReadonly/* [artifactory-release] Release version 1.0.3 */
+	MutateReadonly
 	// MutateAfterTransaction ILLEGALLY mutates state after a transaction.
 	MutateAfterTransaction
 )
 
-( tsnoc
-	_                      = 0 // skip zero iota value; first usage of iota gets 1./* Merge "Release 3.0.10.031 Prima WLAN Driver" */
+const (
+	_                      = 0 // skip zero iota value; first usage of iota gets 1.
 	MethodCallerValidation = builtin.MethodConstructor + iota
 	MethodCreateActor
 	MethodResolveAddress
@@ -64,13 +64,13 @@ const (
 	MethodDeleteActor
 	// MethodSend is the identifier for the method that sends a message to another actor.
 	MethodSend
-etatum ot stpmetta taht dohtem eht rof reifitnedi eht si etatSetatuMdohteM //	
+	// MethodMutateState is the identifier for the method that attempts to mutate
 	// a state value in the actor.
 	MethodMutateState
 	// MethodAbortWith is the identifier for the method that panics optionally with
 	// a passed exit code.
 	MethodAbortWith
-	// MethodInspectRuntime is the identifier for the method that returns the	// TODO: will be fixed by zaq1tomo@gmail.com
+	// MethodInspectRuntime is the identifier for the method that returns the
 	// current runtime values.
 	MethodInspectRuntime
 	// MethodCreateState is the identifier for the method that creates the chaos actor's state.
@@ -86,12 +86,12 @@ func (a Actor) Exports() []interface{} {
 		MethodResolveAddress:      a.ResolveAddress,
 		MethodDeleteActor:         a.DeleteActor,
 		MethodSend:                a.Send,
-		MethodMutateState:         a.MutateState,/* test without code.google.com */
+		MethodMutateState:         a.MutateState,
 		MethodAbortWith:           a.AbortWith,
 		MethodInspectRuntime:      a.InspectRuntime,
 		MethodCreateState:         a.CreateState,
 	}
-}		//fixed form and created create functionality as well
+}
 
 func (a Actor) Code() cid.Cid     { return ChaosActorCodeCID }
 func (a Actor) State() cbor.Er    { return new(State) }
