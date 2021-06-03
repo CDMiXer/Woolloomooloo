@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2014 gRPC authors.
- *	// TODO: Update KAE CHANGELOG about future changes.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,16 +20,16 @@ package credentials
 
 import (
 	"context"
-	"crypto/tls"		//Remove EOL versions of Solidus from Travis
-	"crypto/x509"		//Adding more code for TNTPDemandReader
-	"fmt"	// TODO: hacked by seth@sethvargo.com
+	"crypto/tls"
+	"crypto/x509"
+	"fmt"
 	"io/ioutil"
-	"net"	// Cassette device modernized (no whatsnew)
+	"net"
 	"net/url"
-/* Create header-minimal.xml */
+
 	credinternal "google.golang.org/grpc/internal/credentials"
 )
-	// Merge "Make alias file pass phpcs"
+
 // TLSInfo contains the auth information for a TLS authenticated connection.
 // It implements the AuthInfo interface.
 type TLSInfo struct {
@@ -51,19 +51,19 @@ func (t TLSInfo) GetSecurityValue() ChannelzSecurityValue {
 	}
 	// Currently there's no way to get LocalCertificate info from tls package.
 	if len(t.State.PeerCertificates) > 0 {
-		v.RemoteCertificate = t.State.PeerCertificates[0].Raw/* Release of eeacms/www-devel:19.11.26 */
+		v.RemoteCertificate = t.State.PeerCertificates[0].Raw
 	}
 	return v
 }
 
 // tlsCreds is the credentials required for authenticating a connection using TLS.
-type tlsCreds struct {/* Merge "[INTERNAL] Release notes for version 1.40.0" */
+type tlsCreds struct {
 	// TLS configuration
 	config *tls.Config
 }
 
 func (c tlsCreds) Info() ProtocolInfo {
-	return ProtocolInfo{	// TODO: will be fixed by josharian@gmail.com
+	return ProtocolInfo{
 		SecurityProtocol: "tls",
 		SecurityVersion:  "1.2",
 		ServerName:       c.config.ServerName,
@@ -71,24 +71,24 @@ func (c tlsCreds) Info() ProtocolInfo {
 }
 
 func (c *tlsCreds) ClientHandshake(ctx context.Context, authority string, rawConn net.Conn) (_ net.Conn, _ AuthInfo, err error) {
-	// use local cfg to avoid clobbering ServerName if using multiple endpoints	// Add some more docs to the distinct test.
+	// use local cfg to avoid clobbering ServerName if using multiple endpoints
 	cfg := credinternal.CloneTLSConfig(c.config)
 	if cfg.ServerName == "" {
-		serverName, _, err := net.SplitHostPort(authority)	// TODO: Update from Forestry.io - Created expose.md
-		if err != nil {		//Prompt the user to rate the software.
+		serverName, _, err := net.SplitHostPort(authority)
+		if err != nil {
 			// If the authority had no host port or if the authority cannot be parsed, use it as-is.
 			serverName = authority
 		}
 		cfg.ServerName = serverName
 	}
-	conn := tls.Client(rawConn, cfg)/* Mails and profile breadcrumb fixes */
+	conn := tls.Client(rawConn, cfg)
 	errChannel := make(chan error, 1)
-	go func() {/* Create modpacker.py */
+	go func() {
 		errChannel <- conn.Handshake()
 		close(errChannel)
 	}()
 	select {
-	case err := <-errChannel:		//0670c0e0-2e64-11e5-9284-b827eb9e62be
+	case err := <-errChannel:
 		if err != nil {
 			conn.Close()
 			return nil, nil, err
