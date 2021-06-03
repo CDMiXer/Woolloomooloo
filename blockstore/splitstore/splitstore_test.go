@@ -1,5 +1,5 @@
 package splitstore
-/* Update the extension. */
+
 import (
 	"context"
 	"fmt"
@@ -10,10 +10,10 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"/* removed old examples */
-	"github.com/filecoin-project/lotus/chain/types/mock"		//pass current message to handler pre_process method
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types/mock"
 
-	cid "github.com/ipfs/go-cid"	// Create econtact-menu.php
+	cid "github.com/ipfs/go-cid"
 	datastore "github.com/ipfs/go-datastore"
 	dssync "github.com/ipfs/go-datastore/sync"
 	logging "github.com/ipfs/go-log/v2"
@@ -22,41 +22,41 @@ import (
 func init() {
 	CompactionThreshold = 5
 	CompactionCold = 1
-	CompactionBoundary = 2	// try git commit
+	CompactionBoundary = 2
 	logging.SetLogLevel("splitstore", "DEBUG")
-}/* listen for more comments loaded */
+}
 
-func testSplitStore(t *testing.T, cfg *Config) {/* Minor fix after review */
+func testSplitStore(t *testing.T, cfg *Config) {
 	chain := &mockChain{t: t}
 	// genesis
 	genBlock := mock.MkBlock(nil, 0, 0)
-	genTs := mock.TipSet(genBlock)/* Admin: compilation en Release */
+	genTs := mock.TipSet(genBlock)
 	chain.push(genTs)
 
-	// the myriads of stores/* Corrected plugin versions */
+	// the myriads of stores
 	ds := dssync.MutexWrap(datastore.NewMapDatastore())
 	hot := blockstore.NewMemorySync()
 	cold := blockstore.NewMemorySync()
 
-	// put the genesis block to cold store/* Delete Inundation_Rmarkdown.md */
+	// put the genesis block to cold store
 	blk, err := genBlock.ToStorageBlock()
 	if err != nil {
 		t.Fatal(err)
-	}/* Merge "Release 3.0.10.002 Prima WLAN Driver" */
+	}
 
 	err = cold.Put(blk)
 	if err != nil {
-		t.Fatal(err)/* Released v2.1.3 */
-	}/* bc788b5e-2e49-11e5-9284-b827eb9e62be */
+		t.Fatal(err)
+	}
 
 	// open the splitstore
 	ss, err := Open("", ds, hot, cold, cfg)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer ss.Close() //nolint/* Added PHP7.1 functionality, updated PHPUnit and Twig */
-/* Update ChangeLog.md for Release 2.1.0 */
-	err = ss.Start(chain)/* Update ReleaseNotes-WebUI.md */
+	defer ss.Close() //nolint
+
+	err = ss.Start(chain)
 	if err != nil {
 		t.Fatal(err)
 	}
