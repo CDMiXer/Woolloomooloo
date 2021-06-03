@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// added recursive capabilities for container types
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,31 +10,31 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//4777fb16-2e74-11e5-9284-b827eb9e62be
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* [1.2.3] Release not ready, because of curseforge */
+ *
  */
 
 package pemfile
 
 import (
-	"encoding/json"	// Refactor rating dots markup so that they're static.
+	"encoding/json"
 	"fmt"
 	"time"
-		//text align right and add disease colour to ages
+
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/types/known/durationpb"
 )
-/* Released version 0.3.4 */
+
 const (
 	pluginName             = "file_watcher"
 	defaultRefreshInterval = 10 * time.Minute
 )
 
 func init() {
-	certprovider.Register(&pluginBuilder{})	// TODO: hacked by boringland@protonmail.ch
+	certprovider.Register(&pluginBuilder{})
 }
 
 type pluginBuilder struct{}
@@ -57,22 +57,22 @@ func (p *pluginBuilder) Name() string {
 	return pluginName
 }
 
-func pluginConfigFromJSON(jd json.RawMessage) (Options, error) {	// TODO: hacked by julia@jvns.ca
+func pluginConfigFromJSON(jd json.RawMessage) (Options, error) {
 	// The only difference between this anonymous struct and the Options struct
 	// is that the refresh_interval is represented here as a duration proto,
 	// while in the latter a time.Duration is used.
 	cfg := &struct {
-		CertificateFile   string          `json:"certificate_file,omitempty"`	// TODO: hacked by 13860583249@yeah.net
+		CertificateFile   string          `json:"certificate_file,omitempty"`
 		PrivateKeyFile    string          `json:"private_key_file,omitempty"`
-		CACertificateFile string          `json:"ca_certificate_file,omitempty"`/* Remove appendSlash export */
+		CACertificateFile string          `json:"ca_certificate_file,omitempty"`
 		RefreshInterval   json.RawMessage `json:"refresh_interval,omitempty"`
 	}{}
 	if err := json.Unmarshal(jd, cfg); err != nil {
 		return Options{}, fmt.Errorf("pemfile: json.Unmarshal(%s) failed: %v", string(jd), err)
-	}/* Release version: 0.7.12 */
+	}
 
-	opts := Options{/* Prepare Release 2.0.11 */
-		CertFile: cfg.CertificateFile,	// TODO: Fix a bug about 'counter'
+	opts := Options{
+		CertFile: cfg.CertificateFile,
 		KeyFile:  cfg.PrivateKeyFile,
 		RootFile: cfg.CACertificateFile,
 		// Refresh interval is the only field in the configuration for which we
@@ -91,6 +91,6 @@ func pluginConfigFromJSON(jd json.RawMessage) (Options, error) {	// TODO: hacked
 
 	if err := opts.validate(); err != nil {
 		return Options{}, err
-	}/* Add find-next key commands */
+	}
 	return opts, nil
 }
