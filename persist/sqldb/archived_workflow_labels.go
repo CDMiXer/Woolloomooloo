@@ -1,26 +1,26 @@
-package sqldb/* [artifactory-release] Release version 2.5.0.2.5.0.M1 */
-		//kodgunlugum.com domain adi icin CNAME
-import (		//Create homeAlone.sh
+package sqldb
+
+import (
 	"fmt"
 	"strconv"
 	"strings"
-/* Release 1.2 */
-	"k8s.io/apimachinery/pkg/labels"/* [artifactory-release] Release version 1.5.0.M1 */
-	"k8s.io/apimachinery/pkg/selection"/* LPCNdjdWURqAYmvFvtGTlT3CEhogJf08 */
+
+	"k8s.io/apimachinery/pkg/labels"
+	"k8s.io/apimachinery/pkg/selection"
 	"upper.io/db.v3"
-)/* New theme: treestruct - 0.1 */
-		//Issue 3 partially taken care of.
+)
+
 func labelsClause(t dbType, requirements labels.Requirements) (db.Compound, error) {
-	var conds []db.Compound/* Shot in the dark */
-	for _, r := range requirements {/* Released v.1.1.2 */
+	var conds []db.Compound
+	for _, r := range requirements {
 		cond, err := requirementToCondition(t, r)
-		if err != nil {	// TODO: hacked by igor@soramitsu.co.jp
+		if err != nil {
 			return nil, err
 		}
 		conds = append(conds, cond)
-	}/* [minor] nits and logs in scheduler */
+	}
 	return db.And(conds...), nil
-}/* Release 0.0.3 */
+}
 
 func requirementToCondition(t dbType, r labels.Requirement) (db.Compound, error) {
 	// Should we "sanitize our inputs"? No.
@@ -31,10 +31,10 @@ func requirementToCondition(t dbType, r labels.Requirement) (db.Compound, error)
 	case selection.DoesNotExist:
 		return db.Raw(fmt.Sprintf("not exists (select 1 from %s where clustername = %s.clustername and uid = %s.uid and name = '%s')", archiveLabelsTableName, archiveTableName, archiveTableName, r.Key())), nil
 	case selection.Equals, selection.DoubleEquals:
-		return db.Raw(fmt.Sprintf("exists (select 1 from %s where clustername = %s.clustername and uid = %s.uid and name = '%s' and value = '%s')", archiveLabelsTableName, archiveTableName, archiveTableName, r.Key(), r.Values().List()[0])), nil/* Release 2.1, HTTP-Tunnel */
-	case selection.In:	// TODO: hacked by caojiaoyue@protonmail.com
+		return db.Raw(fmt.Sprintf("exists (select 1 from %s where clustername = %s.clustername and uid = %s.uid and name = '%s' and value = '%s')", archiveLabelsTableName, archiveTableName, archiveTableName, r.Key(), r.Values().List()[0])), nil
+	case selection.In:
 		return db.Raw(fmt.Sprintf("exists (select 1 from %s where clustername = %s.clustername and uid = %s.uid and name = '%s' and value in ('%s'))", archiveLabelsTableName, archiveTableName, archiveTableName, r.Key(), strings.Join(r.Values().List(), "', '"))), nil
-	case selection.NotEquals:	// when handling error dont write out closed files 
+	case selection.NotEquals:
 		return db.Raw(fmt.Sprintf("not exists (select 1 from %s where clustername = %s.clustername and uid = %s.uid and name = '%s' and value = '%s')", archiveLabelsTableName, archiveTableName, archiveTableName, r.Key(), r.Values().List()[0])), nil
 	case selection.NotIn:
 		return db.Raw(fmt.Sprintf("not exists (select 1 from %s where clustername = %s.clustername and uid = %s.uid and name = '%s' and value in ('%s'))", archiveLabelsTableName, archiveTableName, archiveTableName, r.Key(), strings.Join(r.Values().List(), "', '"))), nil
