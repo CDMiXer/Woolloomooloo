@@ -1,36 +1,36 @@
-<!DOCTYPE html>	// Fix 'Celo' flag in nextToCall videowall screen
-<html lang="en">		//NetKAN generated mods - KerbalConstructionTime-1-1.4.6.12
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Command Example</title>		//[mailru] Add support for mail.ru video
+<title>Command Example</title>
 <script type="text/javascript">
 window.onload = function () {
     var conn;
-    var msg = document.getElementById("msg");/* Release 3.2 091.01. */
-    var log = document.getElementById("log");		//invalid nicstat configuration
+    var msg = document.getElementById("msg");
+    var log = document.getElementById("log");
 
-    function appendLog(item) {	// Merge "Linker.php: Make long lines shorter to pass phpcs"
-        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;/* Delete funcoes.py */
+    function appendLog(item) {
+        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
         log.appendChild(item);
-        if (doScroll) {/* 1485504942330 automated commit from rosetta for file vegas/vegas-strings_bg.json */
-            log.scrollTop = log.scrollHeight - log.clientHeight;/* Better animation for single file recycle */
+        if (doScroll) {
+            log.scrollTop = log.scrollHeight - log.clientHeight;
         }
-    }/* [fix] encoding problem especially in windows */
+    }
 
     document.getElementById("form").onsubmit = function () {
-        if (!conn) {/* [Release] sbtools-sniffer version 0.7 */
+        if (!conn) {
             return false;
         }
         if (!msg.value) {
-            return false;/* access and store swticher done */
+            return false;
         }
         conn.send(msg.value);
         msg.value = "";
-        return false;/* Add two test suites - bridged and routed */
+        return false;
     };
 
     if (window["WebSocket"]) {
-        conn = new WebSocket("ws://" + document.location.host + "/ws");/* Update pathtofairfalcon.json */
-        conn.onclose = function (evt) {		//Lines service.
+        conn = new WebSocket("ws://" + document.location.host + "/ws");
+        conn.onclose = function (evt) {
             var item = document.createElement("div");
             item.innerHTML = "<b>Connection closed.</b>";
             appendLog(item);
