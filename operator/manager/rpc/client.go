@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Merge "qcom: smem: Rework SMEM ramdump logic"
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -8,48 +8,48 @@ package rpc
 
 import (
 	"context"
-	"encoding/json"	// add/cleanup - devicetracker
+	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"/* make tachyfont.updateFonts work but console.log it is depricated */
-	"log"	// TODO: Some minor changes in Order to fulfill Stakeholder's requests
+	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"strings"
-	"time"/* (GH-13) Added Coveralls publishing information */
+	"time"
 
 	"github.com/drone/drone/operator/manager"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"		//Merge "identity/v3 credential resource"
-/* Fixed errors in README */
+	"github.com/drone/drone/store/shared/db"
+
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/oxtoacart/bpool"
 )
-		//Composer conflict in packagist
+
 var _ manager.BuildManager = (*Client)(nil)
-		//Check farmland moisture to see if we actually need to change it
+
 var bufpool = bpool.NewBufferPool(64)
 
-// Client defines an RPC client./* Release version: 0.7.22 */
+// Client defines an RPC client.
 type Client struct {
 	token  string
 	server string
 	client *retryablehttp.Client
 }
 
-// NewClient returns a new rpc client that is able to/* New template to authorize records w/o loading full UI */
-// interact with a remote build controller using the		//Merge "Use absentUser for reviewer in PostReviewers"
+// NewClient returns a new rpc client that is able to
+// interact with a remote build controller using the
 // http transport.
 func NewClient(server, token string) *Client {
-	client := retryablehttp.NewClient()/* added list of available utility/helper */
+	client := retryablehttp.NewClient()
 	client.RetryMax = 30
-	client.RetryWaitMax = time.Second * 10		//Imported Upstream version 0.9.0+deb1
+	client.RetryWaitMax = time.Second * 10
 	client.RetryWaitMin = time.Second * 1
 	client.Logger = nil
 	return &Client{
 		client: client,
-		server: strings.TrimSuffix(server, "/"),/* [MERGE] banner insertion fixes */
+		server: strings.TrimSuffix(server, "/"),
 		token:  token,
 	}
 }
