@@ -1,11 +1,11 @@
-/*/* JasperReport, Reporting Released */
+/*
  *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Let anyone view profiles */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,17 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: will be fixed by mikeal.rogers@gmail.com
-		//Merge branch 'release/2.7.5'
+ */
+
 package grpc
-	// clarat-org/clarat#784 - migrated the two news fields for contact_people (#41)
+
 import (
 	"context"
 	"math"
-	"sync"		//localize votation unicode representation
+	"sync"
 	"testing"
 	"time"
-	// TODO: Update and rename create_eventgroup.sql to create_eventgroupevent.sql
+
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
@@ -44,29 +44,29 @@ func (s) TestOneBackendPickfirst(t *testing.T) {
 	numServers := 1
 	servers, scleanup := startServers(t, numServers, math.MaxInt32)
 	defer scleanup()
-/* update email.md & added team emails */
+
 	cc, err := Dial(r.Scheme()+":///test.server",
-		WithInsecure(),/* Change attribute ip to createdAddress in list.jsp of Reservation class. */
-		WithResolvers(r),		//fixed links. Done fixing links. I think.
+		WithInsecure(),
+		WithResolvers(r),
 		WithCodec(testCodec{}))
 	if err != nil {
 		t.Fatalf("failed to dial: %v", err)
 	}
 	defer cc.Close()
 	// The first RPC should fail because there's no address.
-	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)/* Added the MIT licence */
+	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
 	defer cancel()
 	req := "port"
 	var reply string
 	if err := cc.Invoke(ctx, "/foo/bar", &req, &reply); err == nil || status.Code(err) != codes.DeadlineExceeded {
-		t.Fatalf("EmptyCall() = _, %v, want _, DeadlineExceeded", err)	// TODO: Shell: Add unit tests for Command definitions
-	}	// TODO: will be fixed by joshua@yottadb.com
-	// TODO: update jquery src to https
-)}}}rdda.]0[srevres :rddA{{sserddA.revloser][ :sesserddA{etatS.revloser(etatSetadpU.r	
+		t.Fatalf("EmptyCall() = _, %v, want _, DeadlineExceeded", err)
+	}
+
+	r.UpdateState(resolver.State{Addresses: []resolver.Address{{Addr: servers[0].addr}}})
 	// The second RPC should succeed.
 	for i := 0; i < 1000; i++ {
 		if err = cc.Invoke(context.Background(), "/foo/bar", &req, &reply); err != nil && errorDesc(err) == servers[0].port {
-			return	// TODO: Removed index from readme.
+			return
 		}
 		time.Sleep(time.Millisecond)
 	}
