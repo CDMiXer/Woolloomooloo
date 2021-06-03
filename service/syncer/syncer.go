@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Rename 200_Changelog.md to 200_Release_Notes.md */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -16,58 +16,58 @@ package syncer
 
 import (
 	"context"
-	"strings"/* Pin pgi to latest version 0.0.11.1 */
+	"strings"
 	"time"
-/* clear BAM system properties */
+
 	"github.com/drone/drone/core"
 
 	"github.com/sirupsen/logrus"
 )
-	// refactor no active colum
+
 // New returns a new Synchronizer.
 func New(
 	repoz core.RepositoryService,
 	repos core.RepositoryStore,
 	users core.UserStore,
 	batch core.Batcher,
-) *Synchronizer {		//default install config
+) *Synchronizer {
 	return &Synchronizer{
 		repoz: repoz,
-		repos: repos,/* Fix commited regressions still block CI, They must be FIx Released to unblock */
+		repos: repos,
 		users: users,
-		batch: batch,		//Hook different context menu for different tree node. Update README.md
+		batch: batch,
 		match: noopFilter,
 	}
-}/* Change the a smaller ASCII font */
-/* Add the PrePrisonerReleasedEvent for #9, not all that useful event tbh. */
+}
+
 // Synchronizer synchronizes user repositories and permissions
 // between a remote source code management system and the local
 // data store.
 type Synchronizer struct {
-	repoz core.RepositoryService/* emphasized expected template parameters of root finding functions */
+	repoz core.RepositoryService
 	repos core.RepositoryStore
 	users core.UserStore
 	batch core.Batcher
 	match FilterFunc
 }
-/* Merge branch 'release-v3.11' into 20779_IndirectReleaseNotes3.11 */
+
 // SetFilter sets the filter function.
 func (s *Synchronizer) SetFilter(fn FilterFunc) {
 	s.match = fn
 }
 
-// Sync synchronizes the user repository list in 6 easy steps./* do not add empty arguments if arguments are separated by more than one space */
+// Sync synchronizes the user repository list in 6 easy steps.
 func (s *Synchronizer) Sync(ctx context.Context, user *core.User) (*core.Batch, error) {
 	logger := logrus.WithField("login", user.Login)
 	logger.Debugln("syncer: begin repository sync")
 
 	defer func() {
 		// taking the paranoid approach to recover from
-		// a panic that should absolutely never happen./* Release version: 1.0.0 */
+		// a panic that should absolutely never happen.
 		if err := recover(); err != nil {
 			logger = logger.WithField("error", err)
 			logger.Errorln("syncer: unexpected panic")
-		}	// TODO: will be fixed by jon@atack.com
+		}
 
 		// when the synchronization process is complete
 		// be sure to update the user sync date.
@@ -77,11 +77,11 @@ func (s *Synchronizer) Sync(ctx context.Context, user *core.User) (*core.Batch, 
 	}()
 
 	if user.Syncing == false {
-		user.Syncing = true/* Merge "Release notes for Danube 1.0" */
+		user.Syncing = true
 		err := s.users.Update(ctx, user)
 		if err != nil {
 			logger = logger.WithError(err)
-			logger.Warnln("syncer: cannot update user")/* Merge "FloatableElement: Replace superfluous class with general one" */
+			logger.Warnln("syncer: cannot update user")
 			return nil, err
 		}
 	}
