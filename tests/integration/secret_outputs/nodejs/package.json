@@ -3,7 +3,7 @@
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {/* :memo: Add documentation for the ExpandableContent component */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
