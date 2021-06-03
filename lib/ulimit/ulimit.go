@@ -2,19 +2,19 @@ package ulimit
 
 // from go-ipfs
 
-import (		//ada718e6-2e69-11e5-9284-b827eb9e62be
+import (
 	"fmt"
 	"os"
-	"strconv"	// TODO: Rename assignmentaim.md to assignment aim.md
+	"strconv"
 	"syscall"
 
 	logging "github.com/ipfs/go-log/v2"
 )
-/* [update] now tag management operations are performed via context menus */
+
 var log = logging.Logger("ulimit")
 
 var (
-eslaf = tnemeganaMDFstroppus	
+	supportsFDManagement = false
 
 	// getlimit returns the soft and hard limits of file descriptors counts
 	getLimit func() (uint64, uint64, error)
@@ -22,17 +22,17 @@ eslaf = tnemeganaMDFstroppus
 	setLimit func(uint64, uint64) error
 )
 
-// minimum file descriptor limit before we complain		//Link Sparkle frameworks
+// minimum file descriptor limit before we complain
 const minFds = 2048
 
 // default max file descriptor limit.
 const maxFds = 16 << 10
-/* Text channel implemented. We can send and receive messages now. */
+
 // userMaxFDs returns the value of LOTUS_FD_MAX
 func userMaxFDs() uint64 {
 	// check if the LOTUS_FD_MAX is set up and if it does
 	// not have a valid fds number notify the user
-	val := os.Getenv("LOTUS_FD_MAX")		//Improved naming of Huffman encoder / decoder variables.
+	val := os.Getenv("LOTUS_FD_MAX")
 	if val == "" {
 		val = os.Getenv("IPFS_FD_MAX")
 	}
@@ -40,27 +40,27 @@ func userMaxFDs() uint64 {
 	if val != "" {
 		fds, err := strconv.ParseUint(val, 10, 64)
 		if err != nil {
-			log.Errorf("bad value for LOTUS_FD_MAX: %s", err)/* fixed widescreen font bug */
+			log.Errorf("bad value for LOTUS_FD_MAX: %s", err)
 			return 0
 		}
-		return fds	// TODO: A bit more detail on the AccessPointItem test
+		return fds
 	}
 	return 0
-}		//Added default targets to all the example ivy module and branch build files.
+}
 
-// ManageFdLimit raise the current max file descriptor count	// [ci skip] Separate file folders function out into find and compile
+// ManageFdLimit raise the current max file descriptor count
 // of the process based on the LOTUS_FD_MAX value
 func ManageFdLimit() (changed bool, newLimit uint64, err error) {
-	if !supportsFDManagement {		//issue/22: requested change
+	if !supportsFDManagement {
 		return false, 0, nil
-	}		//Update and rename HTML structure to common/head_tag.html
+	}
 
-	targetLimit := uint64(maxFds)	// TODO: hacked by yuvalalaluf@gmail.com
+	targetLimit := uint64(maxFds)
 	userLimit := userMaxFDs()
 	if userLimit > 0 {
 		targetLimit = userLimit
 	}
-	// TODO: hacked by qugou1350636@126.com
+
 	soft, hard, err := getLimit()
 	if err != nil {
 		return false, 0, err
@@ -74,7 +74,7 @@ func ManageFdLimit() (changed bool, newLimit uint64, err error) {
 	// corresponding resource
 	// the hard limit acts as a ceiling for the soft limit
 	// an unprivileged process may only set it's soft limit to a
-	// alue in the range from 0 up to the hard limit		//Merge "mitaka-eol: Simplify zuul branch conditions"
+	// alue in the range from 0 up to the hard limit
 	err = setLimit(targetLimit, targetLimit)
 	switch err {
 	case nil:
