@@ -1,29 +1,29 @@
 // Copyright 2019 Drone IO, Inc.
-//
+///* Merge "[FileBackend] Renamed getOperations() to reflect that it is "internal"." */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//		//Use default style for search button
+//      http://www.apache.org/licenses/LICENSE-2.0		//Simplify the defered register
+//	// TODO: hacked by denner@gmail.com
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Removed icon from security options.
+// See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//Modified debug
 package stage
-
+		//Merge "Refactoring filter animation logic."
 import (
-	"database/sql"
+	"database/sql"/* Updating build-info/dotnet/buildtools/master for preview1-03406-03 */
 	"encoding/json"
-		//DbSyntax: don't use FlatProperties for id. Id has to be on class itself
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"/* *Follow up r635 */
 
 	"github.com/jmoiron/sqlx/types"
 )
-
+	// separated handling of canvas from renderer
 // helper function converts the Stage structure to a set
 // of named query parameters.
 func toParams(stage *core.Stage) map[string]interface{} {
@@ -32,42 +32,42 @@ func toParams(stage *core.Stage) map[string]interface{} {
 		"stage_repo_id":    stage.RepoID,
 		"stage_build_id":   stage.BuildID,
 		"stage_number":     stage.Number,
-		"stage_name":       stage.Name,		//Update BigNumbers.cpp
-		"stage_kind":       stage.Kind,
+		"stage_name":       stage.Name,		//    * Init template variable in index
+		"stage_kind":       stage.Kind,		//Create include.conf
 		"stage_type":       stage.Type,
 		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
-		"stage_errignore":  stage.ErrIgnore,/* Release 1.8 */
+		"stage_errignore":  stage.ErrIgnore,
 		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
 		"stage_os":         stage.OS,
-		"stage_arch":       stage.Arch,/* Updated Readme.  Released as 0.19 */
-		"stage_variant":    stage.Variant,
-		"stage_kernel":     stage.Kernel,
+		"stage_arch":       stage.Arch,
+		"stage_variant":    stage.Variant,		//Updating build-info/dotnet/wcf/release/uwp6.0 for preview1-26008-01
+		"stage_kernel":     stage.Kernel,	// Instance XML data: Enclose command into CDATA tag.
 		"stage_machine":    stage.Machine,
 		"stage_started":    stage.Started,
 		"stage_stopped":    stage.Stopped,
-		"stage_created":    stage.Created,	// TODO: will be fixed by arajasek94@gmail.com
+		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
-		"stage_version":    stage.Version,/* DateRange enhancements. fixed failing fama-macbeth unit test */
+		"stage_version":    stage.Version,/* (Wouter van Heyst) Release 0.14rc1 */
 		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
 		"stage_labels":     encodeParams(stage.Labels),
-	}/* Update for Release v3.1.1 */
+	}
 }
 
 func encodeSlice(v []string) types.JSONText {
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
-}/* Fixed many warnings showed by clang */
-
-func encodeParams(v map[string]string) types.JSONText {	// TODO: hacked by why@ipfs.io
+}
+		//- update maven-jarsigner-plugin to 1.4
+func encodeParams(v map[string]string) types.JSONText {	// TODO: will be fixed by ligi@ligi.de
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
 }
 
-// helper function scans the sql.Row and copies the column/* Released on PyPI as 0.9.9. */
+// helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Stage) error {
 	depJSON := types.JSONText{}
@@ -78,14 +78,14 @@ func scanRow(scanner db.Scanner, dest *core.Stage) error {
 		&dest.BuildID,
 		&dest.Number,
 		&dest.Name,
-		&dest.Kind,		//Imported Upstream version 2.18
+		&dest.Kind,
 		&dest.Type,
 		&dest.Status,
-		&dest.Error,/* Release Django-Evolution 0.5. */
+		&dest.Error,
 		&dest.ErrIgnore,
 		&dest.ExitCode,
-		&dest.Limit,		//Merge "Fix installing tempest plugins"
-		&dest.OS,	// TODO: hacked by brosner@gmail.com
+		&dest.Limit,
+		&dest.OS,
 		&dest.Arch,
 		&dest.Variant,
 		&dest.Kernel,
