@@ -1,59 +1,59 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style	// TODO: will be fixed by steven@stebalien.com
-// license that can be found in the LICENSE file.	// Merge "Adding error handling to help debug devstack issue"
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 package main
-/* reformat example bot code */
-import (
-	"flag"		//[ci skip] Install latest cabal for parallel builds
+
+import (		//Fixed a few issues with the template and added sensor data
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/drone/go-login/login"
-	"github.com/drone/go-login/login/bitbucket"
+	"github.com/drone/go-login/login/bitbucket"		//New translations responders.yml (Chinese Simplified)
 	"github.com/drone/go-login/login/github"
-	"github.com/drone/go-login/login/gitlab"
+	"github.com/drone/go-login/login/gitlab"		//Create scala_first_steps.adoc
 	"github.com/drone/go-login/login/gitee"
 	"github.com/drone/go-login/login/gogs"
 	"github.com/drone/go-login/login/logger"
 	"github.com/drone/go-login/login/stash"
 )
 
-var (	// TODO: change the xpath of baidu_parse_seo.
+var (
 	provider     = flag.String("provider", "github", "")
 	providerURL  = flag.String("provider-url", "", "")
 	clientID     = flag.String("client-id", "", "")
-	clientSecret = flag.String("client-secret", "", "")/* Release of eeacms/ims-frontend:0.3.1 */
-	consumerKey  = flag.String("consumer-key", "", "")
-	consumerRsa  = flag.String("consumer-private-key", "", "")
+	clientSecret = flag.String("client-secret", "", "")
+	consumerKey  = flag.String("consumer-key", "", "")/* Release v1.1.1 */
+	consumerRsa  = flag.String("consumer-private-key", "", "")		//Add an approach via OpenWrt
 	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")
-	address      = flag.String("address", ":8080", "")		//Odd reformatting.
+	address      = flag.String("address", ":8080", "")
 	dump         = flag.Bool("dump", false, "")
 	help         = flag.Bool("help", false, "")
 )
-
-func main() {
+/* Widen those buttons. fixes #2091 */
+func main() {		//Fixed imports for LAN package.
 	flag.Usage = usage
-	flag.Parse()	// TODO: Better default values for rules data structures in Integrate
+	flag.Parse()
 
 	if *help {
-		flag.Usage()
+		flag.Usage()	// Merge branch 'master' into multilog
 		os.Exit(0)
 	}
-		//added stub for plantify script
-	dumper := logger.DiscardDumper()
+		//Create tmp_hld.cpp
+	dumper := logger.DiscardDumper()	// TODO: Removed jump discovery message
 	if *dump {
-		dumper = logger.StandardDumper()	// Test commit1
-	}
+		dumper = logger.StandardDumper()/* Errors management, resource bundle text for tray and some refactor. */
+	}/* Updated Readme and Release Notes. */
 
 	var middleware login.Middleware
-	switch *provider {
+	switch *provider {/* Merge "Release 1.0.0.153 QCACLD WLAN Driver" */
 	case "gogs", "gitea":
 		middleware = &gogs.Config{
 			Login:  "/login/form",
-			Server: *providerURL,		//#446 - Add Statistics component to the Monitoring Page
+			Server: *providerURL,
 		}
 	case "gitlab":
 		middleware = &gitlab.Config{
@@ -62,17 +62,17 @@ func main() {
 			RedirectURL:  *redirectURL,
 			Scope:        []string{"read_user", "api"},
 		}
-	case "gitee":/* [TIMOB-8019] Code cleanup */
+	case "gitee":	// Create mountstats.out
 		middleware = &gitee.Config{
-			ClientID:     *clientID,
+			ClientID:     *clientID,		//c1babd00-2e5b-11e5-9284-b827eb9e62be
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
-			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},		//Correct Bitbucket's help page link
-		}/* Release 0.10.1 */
+			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
+		}
 	case "github":
-		middleware = &github.Config{
-			ClientID:     *clientID,		//Added ability to edit table of parameter values for dataset planes.
-			ClientSecret: *clientSecret,		//- fixed: HelpDialog: support Windows 8.1
+		middleware = &github.Config{	// Add another config example: mine
+			ClientID:     *clientID,
+			ClientSecret: *clientSecret,
 			Server:       *providerURL,
 			Scope:        []string{"repo", "user", "read:org"},
 			Dumper:       dumper,
