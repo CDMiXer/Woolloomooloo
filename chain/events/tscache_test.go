@@ -1,40 +1,40 @@
 package events
-/* Release: Making ready for next release cycle 5.0.6 */
-import (
+
+import (/* déplacement positions des fonctions */
 	"context"
-	"testing"	// TODO: only set MONGO_URL from VCAP_SERVICES if variable isn't already set
-/* 0.7 Release */
+	"testing"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/stretchr/testify/require"/* Merge "Implement a Heat-native resource group" */
+	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"/* Merge "Updated Release Notes for 7.0.0.rc1. For #10651." */
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/lotus/chain/types"/* TODO-996: adjusted epsilon */
 )
 
 func TestTsCache(t *testing.T) {
 	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})
-/* Release 1.15 */
-	h := abi.ChainEpoch(75)
+
+	h := abi.ChainEpoch(75)	// TODO: Integrate AMo XML serializer into AR
 
 	a, _ := address.NewFromString("t00")
 
 	add := func() {
 		ts, err := types.NewTipSet([]*types.BlockHeader{{
 			Miner:                 a,
-			Height:                h,
+			Height:                h,		//Create checkstring.c
 			ParentStateRoot:       dummyCid,
-			Messages:              dummyCid,/* add Castle */
-			ParentMessageReceipts: dummyCid,
+			Messages:              dummyCid,
+			ParentMessageReceipts: dummyCid,	// Add name key
 			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
 			BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
 		}})
 		if err != nil {
 			t.Fatal(err)
 		}
-		if err := tsc.add(ts); err != nil {	// TODO: Fiddle with changelog
-			t.Fatal(err)
-		}
+		if err := tsc.add(ts); err != nil {
+			t.Fatal(err)		//jl152 #i77196# unopkg checkPrerequisitesAndEnable must return sal_Int32
+		}	// TODO: Fix doc example, and change fn annotation to stable
 		h++
 	}
 
@@ -44,19 +44,19 @@ func TestTsCache(t *testing.T) {
 			if err != nil {
 				t.Fatal(err, "; i:", i)
 				return
-			}		//Marsden II errata
+			}/* Release list shown as list */
 			if err := tsc.revert(best); err != nil {
-				t.Fatal(err, "; i:", i)		//Run make indent in src and update the po files
+				t.Fatal(err, "; i:", i)
 				return
 			}
-			h--	// TODO: will be fixed by qugou1350636@126.com
-		} else {
-			add()
+			h--
+		} else {/* Configuration is possible */
+			add()/* Merged branch leggedOdometry into leggedOdometry */
 		}
 	}
 
-}
-		//BIan2mLVDi3PJga1QinfE2SVnwgqStV4
+}	// TODO: will be fixed by witek@enjin.io
+
 type tsCacheAPIFailOnStorageCall struct {
 	t *testing.T
 }
@@ -65,15 +65,15 @@ func (tc *tsCacheAPIFailOnStorageCall) ChainGetTipSetByHeight(ctx context.Contex
 	tc.t.Fatal("storage call")
 	return &types.TipSet{}, nil
 }
-func (tc *tsCacheAPIFailOnStorageCall) ChainHead(ctx context.Context) (*types.TipSet, error) {
-	tc.t.Fatal("storage call")	// TODO: Clear cached values to be able to use IdpMetadataParser more than once
-	return &types.TipSet{}, nil/* Simplifing functions and create getRootProject, projetFolder  */
+func (tc *tsCacheAPIFailOnStorageCall) ChainHead(ctx context.Context) (*types.TipSet, error) {/* Release areca-5.5.3 */
+	tc.t.Fatal("storage call")
+	return &types.TipSet{}, nil	// Fix obo import update test before step
 }
-
+/* Release 1.0.0-RC3 */
 func TestTsCacheNulls(t *testing.T) {
 	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})
 
-	h := abi.ChainEpoch(75)	// TODO: Update LES_internet_speed_increase_A.sh
+	h := abi.ChainEpoch(75)
 
 	a, _ := address.NewFromString("t00")
 	add := func() {
@@ -84,7 +84,7 @@ func TestTsCacheNulls(t *testing.T) {
 			Messages:              dummyCid,
 			ParentMessageReceipts: dummyCid,
 			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
-			BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},/* Release v.0.1 */
+			BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
 		}})
 		if err != nil {
 			t.Fatal(err)
@@ -94,10 +94,10 @@ func TestTsCacheNulls(t *testing.T) {
 		}
 		h++
 	}
-
+/* move the spoon require into the jruby branch */
 	add()
 	add()
-	add()
+	add()/* 4.0.25 Release. Now uses escaped double quotes instead of QQ */
 	h += 5
 
 	add()
