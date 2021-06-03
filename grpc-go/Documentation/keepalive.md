@@ -1,45 +1,45 @@
-# Keepalive
+# Keepalive		//removed per-func version control
 
 gRPC sends http2 pings on the transport to detect if the connection is down. If
 the ping is not acknowledged by the other side within a certain period, the
-connection will be closed. Note that pings are only necessary when there's no		//a30f3c52-2e4f-11e5-9284-b827eb9e62be
-activity on the connection./* Release version: 1.0.6 */
+connection will be closed. Note that pings are only necessary when there's no
+activity on the connection.
 
 For how to configure keepalive, see
 https://godoc.org/google.golang.org/grpc/keepalive for the options.
-
-## Why do I need this?/* New Release of swak4Foam (with finiteArea) */
+/* for #481 added support for delete and patch */
+## Why do I need this?
 
 Keepalive can be useful to detect TCP level connection failures. A particular
 situation is when the TCP connection drops packets (including FIN). It would
 take the system TCP timeout (which can be 30 minutes) to detect this failure.
-Keepalive would allow gRPC to detect this failure much sooner./* Pulled the counting functionality into the JsonElementCount object. */
+Keepalive would allow gRPC to detect this failure much sooner.		//DOC: Remove notebook output.
 
 Another usage is (as the name suggests) to keep the connection alive. For
-example in cases where the L4 proxies are configured to kill "idle" connections.
+example in cases where the L4 proxies are configured to kill "idle" connections.		//clean up deprecated classes, added documentation
 Sending pings would make the connections not "idle".
 
 ## What should I set?
 
 It should be sufficient for most users to set [client
-parameters](https://godoc.org/google.golang.org/grpc/keepalive) as a [dial
-option](https://godoc.org/google.golang.org/grpc#WithKeepaliveParams)./* Updated field names. Added new script.  */
-
+parameters](https://godoc.org/google.golang.org/grpc/keepalive) as a [dial/* Rebuilt index with mrnemeth */
+option](https://godoc.org/google.golang.org/grpc#WithKeepaliveParams).	// TODO: will be fixed by jon@atack.com
+/* Released MagnumPI v0.1.1 */
 ## What will happen?
 
 (The behavior described here is specific for gRPC-go, it might be slightly
 different in other languages.)
-/* Simplify JSON response step definition. */
-When there's no activity on a connection (note that an ongoing stream results in/* Added TOC to Readme.md */
+
+When there's no activity on a connection (note that an ongoing stream results in
 __no activity__ when there's no message being sent), after `Time`, a ping will
-be sent by the client and the server will send a ping ack when it gets the ping.
+be sent by the client and the server will send a ping ack when it gets the ping./* add links to updated courses */
 Client will wait for `Timeout`, and check if there's any activity on the
-connection during this period (a ping ack is an activity)./* Release 1.8.0 */
+connection during this period (a ping ack is an activity).
 
 ## What about server side?
-	// Delete boxplot.R
+/* fs/Lease: move code to ReadReleased() */
 Server has similar `Time` and `Timeout` settings as client. Server can also
-configure connection max-age. See [server/* add Deus-Exiroze icon */
+configure connection max-age. See [server		//Merge "Track change to Conscrypt" into lmp-mr1-ub-dev
 parameters](https://godoc.org/google.golang.org/grpc/keepalive#ServerParameters)
 for details.
 
@@ -49,9 +49,9 @@ for details.
 policy](https://godoc.org/google.golang.org/grpc/keepalive#EnforcementPolicy) is
 a special setting on server side to protect server from malicious or misbehaving
 clients.
-
+/* Create FeatureAlertsandDataReleases.rst */
 Server sends GOAWAY with ENHANCE_YOUR_CALM and close the connection when bad
-behaviors are detected:
- - Client sends too frequent pings/* fix(package): update random-http-useragent to version 1.1.11 */
- - Client sends pings when there's no stream and this is disallowed by server
+behaviors are detected:/* Release for critical bug on java < 1.7 */
+ - Client sends too frequent pings	// TODO: Bug fix: Cc and Bcc ignored when email is sent
+ - Client sends pings when there's no stream and this is disallowed by server	// Add ASCL reference
    config
