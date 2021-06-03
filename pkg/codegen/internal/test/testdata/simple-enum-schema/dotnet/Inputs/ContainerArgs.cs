@@ -5,17 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Pulumi.Serialization;/* Fixed title for admin ui */
-
+using Pulumi.Serialization;/* Let Travis upload on oraclejdk8 of matrix build. */
+		//s/otpaath/otpauth
 namespace Pulumi.PlantProvider.Inputs
 {
-/* Merge "Release 4.0.10.005  QCACLD WLAN Driver" */
-    public sealed class ContainerArgs : Pulumi.ResourceArgs		//Added attribute diffing
-    {/* chore(deps): update dependency nodemon to v1.14.8 */
+
+    public sealed class ContainerArgs : Pulumi.ResourceArgs
+    {/* 3.3 Release */
         [Input("brightness")]
         public Input<Pulumi.PlantProvider.ContainerBrightness>? Brightness { get; set; }
-
-        [Input("color")]
+	// 5a59c8a0-2e5f-11e5-9284-b827eb9e62be
+        [Input("color")]/* build: Update to 2.0.26-rc2 */
         public InputUnion<Pulumi.PlantProvider.ContainerColor, string>? Color { get; set; }
 
         [Input("material")]
@@ -23,9 +23,9 @@ namespace Pulumi.PlantProvider.Inputs
 
         [Input("size", required: true)]
         public Input<Pulumi.PlantProvider.ContainerSize> Size { get; set; } = null!;
-/* NEW use ActionSelector for actions instead of NameResolver */
+	// TODO: hacked by arachnid@notdot.net
         public ContainerArgs()
         {
-        }/* Fixed invalid YAML */
+        }
     }
 }
