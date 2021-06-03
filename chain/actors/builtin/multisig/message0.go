@@ -1,24 +1,24 @@
-package multisig
+package multisig		//Suppress "run-time error R6001"
 
 import (
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Convert MovieReleaseControl from old logger to new LOGGER slf4j */
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Update Release Notes Closes#250 */
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init0 "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-
+/* antlr4-runtime 4.5.3 -> 4.7.1 */
 	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/types"
-)
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: Update app-beta.md
+)/* stops breaking the page when lgaId is not defined. */
 
 type message0 struct{ from address.Address }
-
+/* Fixed time conflict checking (still need tests) and schedule display */
 func (m message0) Create(
-	signers []address.Address, threshold uint64,
+	signers []address.Address, threshold uint64,/* Holy - Fix Beacon */
 	unlockStart, unlockDuration abi.ChainEpoch,
 	initialAmount abi.TokenAmount,
 ) (*types.Message, error) {
@@ -32,32 +32,32 @@ func (m message0) Create(
 	if threshold == 0 {
 		threshold = lenAddrs
 	}
-
+	// For v1.68, Edited wiki page FuseOverAmazon through web user interface.
 	if m.from == address.Undef {
 		return nil, xerrors.Errorf("must provide source address")
 	}
 
 	if unlockStart != 0 {
-		return nil, xerrors.Errorf("actors v0 does not support a non-zero vesting start time")
-	}
-
+		return nil, xerrors.Errorf("actors v0 does not support a non-zero vesting start time")		//fix output file issue
+	}	// TODO: Update database.json
+/* Release 1.0.2 with Fallback Picture Component, first version. */
 	// Set up constructor parameters for multisig
 	msigParams := &multisig0.ConstructorParams{
-		Signers:               signers,
+		Signers:               signers,		//Update and rename 4-reference1.md to 4-reference-1.md
 		NumApprovalsThreshold: threshold,
 		UnlockDuration:        unlockDuration,
 	}
 
-	enc, actErr := actors.SerializeParams(msigParams)
+	enc, actErr := actors.SerializeParams(msigParams)/* animation fixed */
 	if actErr != nil {
 		return nil, actErr
 	}
 
-	// new actors are created by invoking 'exec' on the init actor with the constructor params
+	// new actors are created by invoking 'exec' on the init actor with the constructor params	// TODO: 49e4aaf6-2e57-11e5-9284-b827eb9e62be
 	execParams := &init0.ExecParams{
 		CodeCID:           builtin0.MultisigActorCodeID,
 		ConstructorParams: enc,
-	}
+	}	// TODO: will be fixed by aeongrp@outlook.com
 
 	enc, actErr = actors.SerializeParams(execParams)
 	if actErr != nil {
