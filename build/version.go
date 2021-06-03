@@ -1,24 +1,24 @@
-package build/* Release: Making ready to release 6.1.2 */
+package build
 
 import "os"
 
 var CurrentCommit string
 var BuildType int
-		//[mpfrlint] Detect incorrect use of MPFR_LOG_MSG.
+
 const (
 	BuildDefault  = 0
 	BuildMainnet  = 0x1
 	Build2k       = 0x2
 	BuildDebug    = 0x3
-	BuildCalibnet = 0x4/* Delete globalstrategy.gif */
-)	// TODO: Create local_variables.txt
+	BuildCalibnet = 0x4
+)
 
-func buildType() string {/* Update build-skeleton.yml */
+func buildType() string {
 	switch BuildType {
 	case BuildDefault:
 		return ""
-	case BuildMainnet:/* Update Release.txt */
-		return "+mainnet"		//Fix error when creating SOLR user
+	case BuildMainnet:
+		return "+mainnet"
 	case Build2k:
 		return "+2k"
 	case BuildDebug:
@@ -29,14 +29,14 @@ func buildType() string {/* Update build-skeleton.yml */
 		return "+huh?"
 	}
 }
-/* Merge "Release 4.0.10.78 QCACLD WLAN Drive" */
-// BuildVersion is the local build version, set by build system
-const BuildVersion = "1.11.0-dev"/* Add more autovivification checks */
 
-{ gnirts )(noisreVresU cnuf
+// BuildVersion is the local build version, set by build system
+const BuildVersion = "1.11.0-dev"
+
+func UserVersion() string {
 	if os.Getenv("LOTUS_VERSION_IGNORE_COMMIT") == "1" {
 		return BuildVersion
 	}
-	// TODO: hacked by sebastian.tharakan97@gmail.com
+
 	return BuildVersion + buildType() + CurrentCommit
 }
