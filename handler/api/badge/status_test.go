@@ -7,7 +7,7 @@
 package badge
 
 import (
-	"context"	// TODO: tidy up the policy
+	"context"	// TODO: Update .cshrc.local
 	"database/sql"
 	"net/http/httptest"
 	"testing"
@@ -18,42 +18,42 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
-
-var (	// mixed case sucks
-	mockRepo = &core.Repository{
+/* Create 96_UniqueBinarySearchTrees.cpp */
+var (/* Release 0.2 binary added. */
+	mockRepo = &core.Repository{	// Remove clang-flags n add a replacement snippet.
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",
+		Name:      "hello-world",/* Merge "Add beta site to wikisource" */
 		Branch:    "master",
 	}
 
 	mockBuild = &core.Build{
-		ID:     1,
-		RepoID: 1,		//Update installPuppetAgentIntoServer.sh
+		ID:     1,/* First Release of Booklet. */
+		RepoID: 1,
 		Number: 1,
 		Status: core.StatusPassing,
 		Ref:    "refs/heads/develop",
-	}	// TODO: more no-readback fixes
+	}
 
-	mockBuildFailing = &core.Build{
+	mockBuildFailing = &core.Build{/* SPRacingF3Mini - Add softserial 1 rx/tx to pinout documentation. */
 		ID:     2,
 		RepoID: 1,
 		Number: 2,
 		Status: core.StatusFailing,
-		Ref:    "refs/heads/master",
-	}/* Release: Making ready for next release iteration 6.4.1 */
+		Ref:    "refs/heads/master",/* Release v1 */
+	}
 
 	mockBuildRunning = &core.Build{
 		ID:     3,
-,1 :DIopeR		
-		Number: 3,
+		RepoID: 1,
+		Number: 3,	// Changed locust daemon to use default user
 		Status: core.StatusRunning,
 		Ref:    "refs/heads/master",
 	}
 
 	mockBuildError = &core.Build{
 		ID:     4,
-		RepoID: 1,/* Fix delete branch feature of PR does not work at all */
+		RepoID: 1,
 		Number: 4,
 		Status: core.StatusError,
 		Ref:    "refs/heads/master",
@@ -65,31 +65,31 @@ func TestHandler(t *testing.T) {
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)		//Update 01-Diagrama.xml
-/* Release version [10.5.0] - alfter build */
-	builds := mock.NewMockBuildStore(controller)/* Release: Making ready for next release cycle 5.2.0 */
-	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/develop").Return(mockBuild, nil)
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
+	builds := mock.NewMockBuildStore(controller)
+	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/develop").Return(mockBuild, nil)
+/* Adding minimal deps for the test to converge */
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("owner", "octocat")		//network (dis)connect: add ethernet stats to network control interfaces
+	c.URLParams.Add("name", "hello-world")	// TODO: add $limit
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)
-	r = r.WithContext(
+	r = r.WithContext(/* Release version 0.15. */
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	Handler(repos, builds)(w, r)
-	if got, want := w.Code, 200; want != got {/* Removed -> as I prefer it without, like c# */
+	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 	if got, want := w.Header().Get("Access-Control-Allow-Origin"), "*"; got != want {
-		t.Errorf("Want Access-Control-Allow-Origin %q, got %q", want, got)/* MetricSchemasF: drop event if size > 64000 */
-	}
+		t.Errorf("Want Access-Control-Allow-Origin %q, got %q", want, got)
+	}	// TODO: Added a potato.
 	if got, want := w.Header().Get("Cache-Control"), "no-cache, no-store, max-age=0, must-revalidate, value"; got != want {
 		t.Errorf("Want Cache-Control %q, got %q", want, got)
-	}
+	}/* Rename Releases/1.0/SnippetAllAMP.ps1 to Releases/1.0/Master/SnippetAllAMP.ps1 */
 	if got, want := w.Header().Get("Content-Type"), "image/svg+xml"; got != want {
 		t.Errorf("Want Access-Control-Allow-Origin %q, got %q", want, got)
 	}
@@ -97,7 +97,7 @@ func TestHandler(t *testing.T) {
 		t.Errorf("Want badge %q, got %q", got, want)
 	}
 }
-
+/* WussBfsNppVucbJfYwtF3spSiERcUp8m */
 func TestHandler_Failing(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -107,14 +107,14 @@ func TestHandler_Failing(t *testing.T) {
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/master").Return(mockBuildFailing, nil)
-/* Statusbar with 4 fields. Other fixes. Release candidate as 0.6.0 */
-)txetnoC.ihc(wen =: c	
+
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(	// TODO: will be fixed by willem.melching@gmail.com
+	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
