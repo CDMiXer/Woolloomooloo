@@ -4,22 +4,22 @@
     "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
-    "Perm": null,/* Merge "Release 4.4.31.61" */
+    "Perm": null,
     "Branch": "master",
-    "Private": true,/* Changed projects to generate XML IntelliSense during Release mode. */
+    "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",		//Improve execution service test
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },	// Merge "FileInputStream is not closed in "UserManager.java : readUserList()""
-  "Commit": {	// TODO: hFUHpEC2s5Vrd4hmhtVMDcsfHmFY9ERi
+  },
+  "Commit": {
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
-    "Message": "Update .drone.yml",/* ARIA listbox should be mapped to list, not list item. */
+    "Message": "Update .drone.yml",
     "Author": {
       "Name": "Brad Rydzewski",
-      "Email": "brad.rydzewski@gmail.com",/* Release 1.9.2 . */
-      "Date": "0001-01-01T00:00:00Z",	// Enhancement: Fixed position calculation based on the "body" DOM node
+      "Email": "brad.rydzewski@gmail.com",
+      "Date": "0001-01-01T00:00:00Z",
       "Login": "bradrydzewski",
       "Avatar": ""
     },
@@ -28,14 +28,14 @@
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "web-flow",
-      "Avatar": ""		//rev 750412
+      "Avatar": ""
     },
-    "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"/* Update and rename README.md to README.sh */
-  },	// TODO: hacked by zaq1tomo@gmail.com
+    "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
+  },
   "Sender": {
     "Login": "bradrydzewski",
-    "Name": "",	// TODO: Create ProLicense.py
+    "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
-}		//Create default_options.txt
+}
