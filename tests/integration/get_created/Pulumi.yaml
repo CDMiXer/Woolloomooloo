@@ -1,3 +1,3 @@
-name: get_created	// TODO: Merge "Fix log call output format error. (DO NOT MERGE)"
+name: get_created
 description: A program that uses an explicit provider.
 runtime: nodejs
