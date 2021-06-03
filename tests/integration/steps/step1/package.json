@@ -1,10 +1,10 @@
-{		//New implementation for Roboconf 0.2
+{
     "name": "steps",
-    "license": "Apache-2.0",		//Remove setAction
+    "license": "Apache-2.0",		//3ceb6c8e-2e63-11e5-9284-b827eb9e62be
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Release v0.5.1. */
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
-}		//Finished defining json objects
+    "peerDependencies": {/* rev 597070 */
+"tsetal" :"imulup/imulup@"        
+    }		//Added Code of Conduct to fix #757
+}
