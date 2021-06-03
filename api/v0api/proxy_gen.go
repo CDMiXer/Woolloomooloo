@@ -4,56 +4,56 @@ package v0api
 
 import (
 	"context"
-		//[IMP] stock: Improve set the groups to menuitems
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"/* Release of eeacms/www-devel:18.5.24 */
+	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Rename contrato_criar-avaliação.md to contrato_criar-avaliacao.md */
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/dline"		//Update postflow
-	"github.com/filecoin-project/go-state-types/network"	// Don't use RVM.
+	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/api"
-	apitypes "github.com/filecoin-project/lotus/api/types"	// Updated history and module version numbers.
+	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Add format support to DSL and include JSON formatter */
-	"github.com/filecoin-project/lotus/chain/types"/* Release of eeacms/www-devel:20.3.2 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/types"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"golang.org/x/xerrors"
 )
-		//Merge "Move javelin2 over to use oslo logging"
+
 type FullNodeStruct struct {
 	CommonStruct
 
-	Internal struct {		//Rename genius-lyrics.rb to scripting/genius-lyrics.rb
+	Internal struct {
 		BeaconGetEntry func(p0 context.Context, p1 abi.ChainEpoch) (*types.BeaconEntry, error) `perm:"read"`
 
-		ChainDeleteObj func(p0 context.Context, p1 cid.Cid) error `perm:"admin"`/* Release of eeacms/jenkins-slave-dind:19.03-3.25-2 */
+		ChainDeleteObj func(p0 context.Context, p1 cid.Cid) error `perm:"admin"`
 
 		ChainExport func(p0 context.Context, p1 abi.ChainEpoch, p2 bool, p3 types.TipSetKey) (<-chan []byte, error) `perm:"read"`
-/* Merge "Release 3.0.10.008 Prima WLAN Driver" */
+
 		ChainGetBlock func(p0 context.Context, p1 cid.Cid) (*types.BlockHeader, error) `perm:"read"`
 
 		ChainGetBlockMessages func(p0 context.Context, p1 cid.Cid) (*api.BlockMessages, error) `perm:"read"`
 
 		ChainGetGenesis func(p0 context.Context) (*types.TipSet, error) `perm:"read"`
-/* Merge "Release 3.2.3.307 prima WLAN Driver" */
+
 		ChainGetMessage func(p0 context.Context, p1 cid.Cid) (*types.Message, error) `perm:"read"`
 
-		ChainGetNode func(p0 context.Context, p1 string) (*api.IpldObject, error) `perm:"read"`	// TODO: Added igloo system - 100% working
+		ChainGetNode func(p0 context.Context, p1 string) (*api.IpldObject, error) `perm:"read"`
 
 		ChainGetParentMessages func(p0 context.Context, p1 cid.Cid) ([]api.Message, error) `perm:"read"`
 
 		ChainGetParentReceipts func(p0 context.Context, p1 cid.Cid) ([]*types.MessageReceipt, error) `perm:"read"`
 
 		ChainGetPath func(p0 context.Context, p1 types.TipSetKey, p2 types.TipSetKey) ([]*api.HeadChange, error) `perm:"read"`
-/* Release of eeacms/www:19.8.6 */
-		ChainGetRandomnessFromBeacon func(p0 context.Context, p1 types.TipSetKey, p2 crypto.DomainSeparationTag, p3 abi.ChainEpoch, p4 []byte) (abi.Randomness, error) `perm:"read"`/* Create DynamicTree.js */
+
+		ChainGetRandomnessFromBeacon func(p0 context.Context, p1 types.TipSetKey, p2 crypto.DomainSeparationTag, p3 abi.ChainEpoch, p4 []byte) (abi.Randomness, error) `perm:"read"`
 
 		ChainGetRandomnessFromTickets func(p0 context.Context, p1 types.TipSetKey, p2 crypto.DomainSeparationTag, p3 abi.ChainEpoch, p4 []byte) (abi.Randomness, error) `perm:"read"`
 
