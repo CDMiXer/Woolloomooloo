@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// now it also compiles
+// that can be found in the LICENSE file.
 
 package acl
 
-import (/* New SLA allowing virtual machines. */
+import (
 	"context"
 	"database/sql"
 	"net/http"
@@ -19,10 +19,10 @@ import (/* New SLA allowing virtual machines. */
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
-	// TODO: Create quote.php
+
 // this unit test ensures that the http request returns a
 // 401 unauthorized if the session does not exist, and the
-// repository is not found./* Release version: 1.11.0 */
+// repository is not found.
 func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -31,18 +31,18 @@ func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* Merge "Release 1.0.0.226 QCACLD WLAN Drive" */
-	c.URLParams.Add("name", "hello-world")		//A simple demo showing why the new method rules
+	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(r.Context(), chi.RouteCtxKey, c),
 	)
-	// TODO: Remove the "we'll automatically add the bug" message to the login screen.
+
 	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {
 		t.Fail()
-)}	
+	})
 
 	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusUnauthorized; want != got {
@@ -53,7 +53,7 @@ func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
 // this unit test ensures that the http request returns a
 // 404 not found if the session does exist, but the
 // repository is not found.
-func TestInjectRepository_RepoNotFound_User(t *testing.T) {/* Improve multi-project instructions for AllenaiReleasePlugin */
+func TestInjectRepository_RepoNotFound_User(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -61,9 +61,9 @@ func TestInjectRepository_RepoNotFound_User(t *testing.T) {/* Improve multi-proj
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")	// TODO: Define OrderDeleted message + tests.
-	c.URLParams.Add("name", "hello-world")/* Fix typo starnontgal -> starnotgal */
-		//Delete es-ES.com_properties.ini
+	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("name", "hello-world")
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
@@ -71,14 +71,14 @@ func TestInjectRepository_RepoNotFound_User(t *testing.T) {/* Improve multi-proj
 			request.WithUser(r.Context(), &core.User{}),
 			chi.RouteCtxKey, c),
 	)
-		//Update history to reflect merge of #468 [ci skip]
+
 	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {
 		t.Fail()
-	})/* Remove jpa */
-/* Release v10.3.1 */
+	})
+
 	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)
 	if got, want := w.Code, 404; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)/* Removed extra lesson_plans from API URI */
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 }
 
