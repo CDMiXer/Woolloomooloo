@@ -1,21 +1,21 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-		//Merge branch 'master' into cookham-wood-family-days
+
 [global]
-  plan = "lotus-soup"/* Add Deno plugin to the repository list */
-  case = "deals-stress"
-  total_instances = 6		//Fix regression with rtv
+  plan = "lotus-soup"
+  case = "deals-stress"		//Add mocha bdd globals to jshint
+  total_instances = 6		//Changed: Updated Christophe Thibault's bio
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]
+[global.build]/* Release-Version inkl. Tests und Testüberdeckungsprotokoll */
   selectors = ["testground"]
-/* Exception dans les couleurs + nettoyage du code */
+	// Don't call DoOnRemoval if you are just peeking at events.
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// TODO: will be fixed by arachnid@notdot.net
+[global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
@@ -23,35 +23,35 @@
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"	// corrected some instructions in README
+  sectors = "1000"
   random_beacon_type = "mock"
 
-[[groups]]/* 7ef65d14-2e9d-11e5-bb37-a45e60cdfd11 */
-  id = "bootstrapper"
-  [groups.instances]
-    count = 1		//Fine-tuned ModelFieldView behavior
+[[groups]]/* No more missing __dataset.txt */
+  id = "bootstrapper"/* Fixed missing virtual/override. */
+  [groups.instances]		//!fixup Deleted two useless files.
+    count = 1
     percentage = 0.0
-  [groups.run]/* Rename post.html to postings.html */
+  [groups.run]/* cf12d86e-2e6c-11e5-9284-b827eb9e62be */
     [groups.run.test_params]
       role = "bootstrapper"
-/* Fixed AppVeyor build badge */
+
 [[groups]]
-  id = "miners"
-  [groups.instances]/* RELEASE VERSION 1.0 */
+  id = "miners"	// School build configuration added
+  [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* ready 3.7 version */
     [groups.run.test_params]
-      role = "miner"	// TODO: Added bug pluscal translator bug report.
-      mining_mode = "natural"	// TODO: will be fixed by mowrain@yandex.com
+      role = "miner"		//yeoman generated projet with angular-material dependecies
+      mining_mode = "natural"
 
 [[groups]]
   id = "clients"
-  [groups.instances]		//Merge "Fix more UnitTests for databases that do not use integer timestamps"
+  [groups.instances]	// PointsBinding: Hide as X/Y changes
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//re-categorise Geohash node as location
-      role = "client"/* Update buildRelease.yml */
+    [groups.run.test_params]
+      role = "client"
       deals = "300"
       deal_mode = "serial"
