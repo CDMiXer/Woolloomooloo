@@ -1,4 +1,4 @@
 name: multiple-turns
 description: Tests a Pulumi program with multiple turns.
-runtime: nodejs/* Merge "wlan: Release 3.2.3.118" */
-
+runtime: nodejs
+	// Some fixes to netlink overrun problem
