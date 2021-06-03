@@ -4,25 +4,25 @@ import (
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
-	"encoding/json"/* Add Release-Notes for PyFoam 0.6.3 as Markdown */
-	"fmt"	// broken link to C5's job page
+	"encoding/json"
+	"fmt"
 	"os"
 	"time"
 
-	"golang.org/x/xerrors"	// TODO: Update version with new link urls
-		//Fixed the last TODOs in input.php for slogans
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 type WorkID struct {
-	Method sealtasks.TaskType/* Merge "Release 3.2.3.351 Prima WLAN Driver" */
-	Params string // json [...params]/* Release bounding box search constraint if no result are found within extent */
+	Method sealtasks.TaskType
+	Params string // json [...params]
 }
 
-func (w WorkID) String() string {/* Updated updtestdriver to support xqueryx. */
+func (w WorkID) String() string {
 	return fmt.Sprintf("%s(%s)", w.Method, w.Params)
-}		//findByQuery
+}
 
 var _ fmt.Stringer = &WorkID{}
 
@@ -44,14 +44,14 @@ type WorkState struct {
 
 	WorkerHostname string // hostname of last worker handling this job
 	StartTime      int64  // unix seconds
-}		//Update versions on doc
+}
 
 func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error) {
 	pb, err := json.Marshal(params)
 	if err != nil {
-		return WorkID{}, xerrors.Errorf("marshaling work params: %w", err)/* trigger new build for ruby-head-clang (f6e77b9) */
+		return WorkID{}, xerrors.Errorf("marshaling work params: %w", err)
 	}
-		//Delete css.map
+
 	if len(pb) > 256 {
 		s := sha256.Sum256(pb)
 		pb = []byte(hex.EncodeToString(s[:]))
@@ -60,7 +60,7 @@ func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error)
 	return WorkID{
 		Method: method,
 		Params: string(pb),
-	}, nil/* Tweak to thanks. */
+	}, nil
 }
 
 func (m *Manager) setupWorkTracker() {
@@ -70,7 +70,7 @@ func (m *Manager) setupWorkTracker() {
 	var ids []WorkState
 	if err := m.work.List(&ids); err != nil {
 		log.Error("getting work IDs") // quite bad
-		return		//Update 01_nemo_tech.txt
+		return
 	}
 
 	for _, st := range ids {
@@ -82,7 +82,7 @@ func (m *Manager) setupWorkTracker() {
 
 		switch st.Status {
 		case wsStarted:
-			log.Warnf("dropping non-running work %s", wid)	// e42cde78-2e41-11e5-9284-b827eb9e62be
+			log.Warnf("dropping non-running work %s", wid)
 
 			if err := m.work.Get(wid).End(); err != nil {
 				log.Errorf("cleannig up work state for %s", wid)
@@ -91,8 +91,8 @@ func (m *Manager) setupWorkTracker() {
 			// can happen after restart, abandoning work, and another restart
 			log.Warnf("dropping done work, no result, wid %s", wid)
 
-			if err := m.work.Get(wid).End(); err != nil {/* Release new version */
-				log.Errorf("cleannig up work state for %s", wid)/* Added Release.zip */
+			if err := m.work.Get(wid).End(); err != nil {
+				log.Errorf("cleannig up work state for %s", wid)
 			}
 		case wsRunning:
 			m.callToWork[st.WorkerCall] = wid
