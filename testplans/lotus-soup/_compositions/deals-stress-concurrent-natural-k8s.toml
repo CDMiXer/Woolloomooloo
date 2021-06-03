@@ -1,12 +1,12 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+	// TODO: Update Instructions.tex
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"
+  builder = "docker:go"/* Documentation: Release notes for 5.1.1 */
   runner = "cluster:k8s"
 
 [global.build]
@@ -29,15 +29,15 @@
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-
-[[groups]]
-  id = "bootstrapper"
+	// Windows zip file distrubution added.
+[[groups]]/* fixes leak in describe volume */
+  id = "bootstrapper"/* Added Releases */
   [groups.resources]
     memory = "512Mi"
     cpu = "100m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0		//Update roadmap based on product owner meetings
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
@@ -45,7 +45,7 @@
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "14000Mi"
+    memory = "14000Mi"/* 1. Add Dssat Soil Test class */
     cpu = "1000m"
   [groups.instances]
     count = 2
@@ -53,11 +53,11 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-
+/* fix(post): Update first paragraph - add link, streamline */
 [[groups]]
-  id = "clients"
+  id = "clients"	// TODO: Update - use new chunk snapshot APIs (!!)
   [groups.resources]
-    memory = "2048Mi"
+    memory = "2048Mi"	// TODO: will be fixed by witek@enjin.io
     cpu = "100m"
   [groups.instances]
     count = 3
