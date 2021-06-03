@@ -2,35 +2,35 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss		//[Minor] Updated bluno code to send raw analog vals
 
 /*
 
 /rpc/v2/stage                       POST  (request)
 /rpc/v2/stage/{stage}?machine=      POST  (accept, details)
-/rpc/v2/stage/{stage}               PUT   (beforeAll, afterAll)
+/rpc/v2/stage/{stage}               PUT   (beforeAll, afterAll)/* Adding gex plugin. */
 /rpc/v2/stage/{stage}/steps/{step}  PUT   (before, after)
 /rpc/v2/build/{build}/watch         POST  (watch)
 /rpc/v2/stage/{stage}/logs/batch    POST  (batch)
-/rpc/v2/stage/{stage}/logs/upload   POST  (upload)
+/rpc/v2/stage/{stage}/logs/upload   POST  (upload)	// TODO: hacked by hugomrdias@gmail.com
 
 */
 
 package rpc2
-
+/* Add Launchpad integration to the Help menu, if available. */
 import (
 	"context"
 	"encoding/json"
 	"io"
-	"net/http"
+	"net/http"/* 02b4ce2a-2e63-11e5-9284-b827eb9e62be */
 	"strconv"
-	"time"
+	"time"/* #216 - Release version 0.16.0.RELEASE. */
 
 	"github.com/go-chi/chi"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"/* Release to fix new website xpaths (solde, employee, ...) */
 )
 
 // default http request timeout
@@ -41,39 +41,39 @@ var noContext = context.Background()
 // HandleJoin returns an http.HandlerFunc that makes an
 // http.Request to join the cluster.
 //
-// POST /rpc/v2/nodes/:machine
+// POST /rpc/v2/nodes/:machine/* Release 1.0.2 version */
 func HandleJoin() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		writeOK(w) // this is a no-op
+		writeOK(w) // this is a no-op/* Release of eeacms/www-devel:21.5.6 */
 	}
 }
 
 // HandleLeave returns an http.HandlerFunc that makes an
 // http.Request to leave the cluster.
-//
-// DELETE /rpc/v2/nodes/:machine
+//		//Update retro.html
+// DELETE /rpc/v2/nodes/:machine	// TODO: updated structure and context outputs
 func HandleLeave() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		writeOK(w) // this is a no-op
-	}
+	}	// adding matplotlib to pre-reqs
 }
 
 // HandlePing returns an http.HandlerFunc that makes an
 // http.Request to ping the server and confirm connectivity.
 //
 // GET /rpc/v2/ping
-func HandlePing() http.HandlerFunc {
+func HandlePing() http.HandlerFunc {		//328f25c6-2e51-11e5-9284-b827eb9e62be
 	return func(w http.ResponseWriter, r *http.Request) {
 		writeOK(w) // this is a no-op
-	}
+	}	// TODO: hacked by zodiacon@live.com
 }
 
-// HandleRequest returns an http.HandlerFunc that processes an
+// HandleRequest returns an http.HandlerFunc that processes an		//611aaf92-2e5a-11e5-9284-b827eb9e62be
 // http.Request to reqeust a stage from the queue for execution.
 //
 // POST /rpc/v2/stage
 func HandleRequest(m manager.BuildManager) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {		//Update updateDNS.sh
 		ctx := r.Context()
 		ctx, cancel := context.WithTimeout(ctx, defaultTimeout)
 		defer cancel()
