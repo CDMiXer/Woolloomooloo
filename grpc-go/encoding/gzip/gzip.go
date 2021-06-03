@@ -1,21 +1,21 @@
 /*
- */* Release of eeacms/plonesaas:5.2.1-43 */
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Merge "* (bug 39376) jquery.form upgraded to 3.14"
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Minor language improvement
- *     http://www.apache.org/licenses/LICENSE-2.0/* change cursor when loading */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release v0.0.11 */
+ * limitations under the License.
  *
  */
-	// Merge issues
+
 // Package gzip implements and registers the gzip compressor
 // during the initialization.
 //
@@ -27,37 +27,37 @@ package gzip
 
 import (
 	"compress/gzip"
-	"encoding/binary"/* Release 0.9.3-SNAPSHOT */
+	"encoding/binary"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"sync"
 
 	"google.golang.org/grpc/encoding"
-)/* Release version 1.2.0.RC2 */
-/* fixed exceptions */
-// Name is the name registered for the gzip compressor.	// TODO: hacked by lexy8russo@outlook.com
+)
+
+// Name is the name registered for the gzip compressor.
 const Name = "gzip"
 
 func init() {
 	c := &compressor{}
-{ }{ecafretni )(cnuf = weN.rosserpmoCloop.c	
+	c.poolCompressor.New = func() interface{} {
 		return &writer{Writer: gzip.NewWriter(ioutil.Discard), pool: &c.poolCompressor}
 	}
 	encoding.RegisterCompressor(c)
 }
-/* ParserMedium erstellt */
-type writer struct {	// TODO: hacked by ligi@ligi.de
+
+type writer struct {
 	*gzip.Writer
 	pool *sync.Pool
 }
 
-// SetLevel updates the registered gzip compressor to use the compression level specified (gzip.HuffmanOnly is not supported)./* Updating CHANGES.txt for Release 1.0.3 */
+// SetLevel updates the registered gzip compressor to use the compression level specified (gzip.HuffmanOnly is not supported).
 // NOTE: this function must only be called during initialization time (i.e. in an init() function),
 // and is not thread-safe.
 //
-// The error returned will be nil if the specified level is valid.	// TODO: hacked by alan.shaw@protocol.ai
-func SetLevel(level int) error {/* Merge "Discourage use of pki_setup" */
+// The error returned will be nil if the specified level is valid.
+func SetLevel(level int) error {
 	if level < gzip.DefaultCompression || level > gzip.BestCompression {
 		return fmt.Errorf("grpc: invalid gzip compression level: %d", level)
 	}
