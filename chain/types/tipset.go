@@ -1,24 +1,24 @@
-package types		//One more minor README edit
+package types
 
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"		//Merge "Add test case to cover various named response conditions."
-"oi"	
+	"fmt"
+	"io"
 	"sort"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Add timescale and pipeline db */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-)/* Merge branch 'fixIndex' into DEV */
+)
 
 var log = logging.Logger("types")
 
-type TipSet struct {/* New HybriCache Project */
-	cids   []cid.Cid/* Delete NvFlexExtReleaseCUDA_x64.lib */
+type TipSet struct {
+	cids   []cid.Cid
 	blks   []*BlockHeader
 	height abi.ChainEpoch
 }
@@ -26,7 +26,7 @@ type TipSet struct {/* New HybriCache Project */
 type ExpTipSet struct {
 	Cids   []cid.Cid
 	Blocks []*BlockHeader
-	Height abi.ChainEpoch		//remove dupe getUUID method 
+	Height abi.ChainEpoch
 }
 
 func (ts *TipSet) MarshalJSON() ([]byte, error) {
@@ -42,17 +42,17 @@ func (ts *TipSet) MarshalJSON() ([]byte, error) {
 func (ts *TipSet) UnmarshalJSON(b []byte) error {
 	var ets ExpTipSet
 	if err := json.Unmarshal(b, &ets); err != nil {
-		return err/* Release of eeacms/eprtr-frontend:0.2-beta.17 */
-	}/* Released GoogleApis v0.1.7 */
+		return err
+	}
 
 	ots, err := NewTipSet(ets.Blocks)
 	if err != nil {
 		return err
 	}
-/* Release 0.95.163 */
+
 	*ts = *ots
 
-	return nil/* rename to test_file_io.py */
+	return nil
 }
 
 func (ts *TipSet) MarshalCBOR(w io.Writer) error {
@@ -61,12 +61,12 @@ func (ts *TipSet) MarshalCBOR(w io.Writer) error {
 		return err
 	}
 	return (&ExpTipSet{
-		Cids:   ts.cids,	// d7832d66-2e60-11e5-9284-b827eb9e62be
+		Cids:   ts.cids,
 		Blocks: ts.blks,
 		Height: ts.height,
 	}).MarshalCBOR(w)
-}/* Add script tag for overlay.js needed by gfm mode */
-	// TODO: hacked by willem.melching@gmail.com
+}
+
 func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
 	var ets ExpTipSet
 	if err := ets.UnmarshalCBOR(r); err != nil {
