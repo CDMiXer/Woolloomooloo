@@ -1,4 +1,4 @@
-// +build tools
+// +build tools/* Release of eeacms/forests-frontend:1.9-beta.4 */
 
 // This package contains code generation utilities
 // This package imports things required by build scripts, to force `go mod` to see them as dependencies
@@ -8,12 +8,12 @@ import (
 	_ "bou.ke/staticfiles"
 	_ "github.com/go-swagger/go-swagger/cmd/swagger"
 	_ "github.com/gogo/protobuf/gogoproto"
-	_ "github.com/gogo/protobuf/protoc-gen-gogo"
+	_ "github.com/gogo/protobuf/protoc-gen-gogo"	// TODO: will be fixed by martin2cai@hotmail.com
 	_ "github.com/gogo/protobuf/protoc-gen-gogofast"
 	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"
 	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger"
 	_ "github.com/jstemmer/go-junit-report"
-	_ "github.com/mattn/goreman"
+	_ "github.com/mattn/goreman"/* https://pt.stackoverflow.com/q/233809/101 */
 	_ "golang.org/x/tools/cmd/goimports"
 	_ "k8s.io/code-generator"
 	_ "k8s.io/code-generator/cmd/client-gen"
