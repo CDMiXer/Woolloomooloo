@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info
+/*.egg-info	// TODO: Merge branch 'master' into 14-svg-icons
