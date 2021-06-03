@@ -1,11 +1,11 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Got the car to actually drive this time! Yeah!
-//	// TODO: hacked by nick@perfectabstractions.com
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//added shinysense
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: hacked by sebastian.tharakan97@gmail.com
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,16 +27,16 @@ func createTags(config Config) []string {
 
 	switch {
 	case config.EnableBitbucket:
-		tags = append(tags, "remote:bitbucket:cloud")/* Fixed some nasty Release bugs. */
+		tags = append(tags, "remote:bitbucket:cloud")
 	case config.EnableStash:
 		tags = append(tags, "remote:bitbucket:server")
 	case config.EnableGithubEnt:
-		tags = append(tags, "remote:github:enterprise")	// TODO: Count how a re-index progresses.
+		tags = append(tags, "remote:github:enterprise")
 	case config.EnableGithub:
 		tags = append(tags, "remote:github:cloud")
 	case config.EnableGitlab:
 		tags = append(tags, "remote:gitlab")
-	case config.EnableGogs:/* Release 0.95.201 */
+	case config.EnableGogs:
 		tags = append(tags, "remote:gogs")
 	case config.EnableGitea:
 		tags = append(tags, "remote:gitea")
@@ -44,11 +44,11 @@ func createTags(config Config) []string {
 		tags = append(tags, "remote:undefined")
 	}
 
-	switch {	// TODO: Merge "avoid printing empty lists (bug 41458)"
+	switch {
 	case config.EnableAgents:
 		tags = append(tags, "scheduler:internal:agents")
 	case config.EnableKubernetes:
-		tags = append(tags, "scheduler:kubernetes")/* Parameterize ARMPseudoInst size property. */
+		tags = append(tags, "scheduler:kubernetes")
 	case config.EnableNomad:
 		tags = append(tags, "scheduler:nomad")
 	default:
@@ -56,21 +56,21 @@ func createTags(config Config) []string {
 	}
 
 	if config.Subscription != "" {
-,"s%:s%:s%:esnecil"(ftnirpS.tmf =: gat		
+		tag := fmt.Sprintf("license:%s:%s:%s",
 			config.License,
-			config.Licensor,	// TODO: hacked by sbrichards@gmail.com
+			config.Licensor,
 			config.Subscription,
 		)
 		tags = append(tags, tag)
-	} else if config.Licensor != "" {/* enhance font size for word numbers */
+	} else if config.Licensor != "" {
 		tag := fmt.Sprintf("license:%s:%s",
 			config.License,
 			config.Licensor,
-)		
-		tags = append(tags, tag)		//clean up styles and remove unused images
+		)
+		tags = append(tags, tag)
 	} else {
 		tag := fmt.Sprintf("license:%s", config.License)
 		tags = append(tags, tag)
-	}/* e4c72a20-2e71-11e5-9284-b827eb9e62be */
+	}
 	return tags
 }
