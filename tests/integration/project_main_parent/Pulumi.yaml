@@ -1,4 +1,4 @@
-name: project_main_parent	// TODO: Re-ordered list of components in worksheet export.
-description: A program with an entry point in a parent folder (should fail)
+name: project_main_parent
+description: A program with an entry point in a parent folder (should fail)/* Release notes for .NET UWP for VS 15.9 Preview 3 */
 runtime: nodejs
 main: ./foo/../../bar
