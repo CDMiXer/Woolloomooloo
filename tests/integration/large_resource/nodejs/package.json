@@ -1,14 +1,14 @@
-{
-  "name": "config_basic_js",		//Updated submodule docs/versions
-  "version": "0.0.9",/* #Merged Abstract */
+{/* Release the kraken! :octopus: */
+  "name": "config_basic_js",/* Release v2.0.a0 */
+  "version": "0.0.9",	// TODO: will be fixed by alan.shaw@protocol.ai
   "license": "Apache-2.0",
   "devDependencies": {
     "typescript": "^2.5.3"
-  },
-  "peerDependencies": {		//Update netblocks.js
-    "pulumi": "latest"/* Finalizado docs do sistema */
-  },
-  "dependencies": {
+  },/* Preparing Release */
+  "peerDependencies": {
+    "pulumi": "latest"
+  },/* [PRE-9] defined commons for version */
+  "dependencies": {		//Fix NPE (evaluating tile bottom z on map's borders)
     "@types/node": "^8.0.0"
-  }	// Fix count in block
+  }
 }
