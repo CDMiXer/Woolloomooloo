@@ -1,34 +1,34 @@
-package repo
-		//update dependency, Archive modeler framework.
+package repo/* added definition of hyper/hypo methylated regions */
+		//Delete view-toggle-apps-symbolic.svg
 import (
-	"context"		//Switch to OSM Tile Server as the Wikimedia Tile Server is down
+	"context"
 	"errors"
 
-	"github.com/ipfs/go-datastore"	// Test sphere with edge-of-map collision.
+	"github.com/ipfs/go-datastore"
 	"github.com/multiformats/go-multiaddr"
-
+/* remove traces of sphinx from build */
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"	// add test_downcase_final_sigma
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-		//move note type sheet controller to the controller classes from the outlineview
+
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 // BlockstoreDomain represents the domain of a blockstore.
 type BlockstoreDomain string
-	// TODO: will be fixed by arachnid@notdot.net
+/* rename clear-handlers to match osc-clj  */
 const (
-	// UniversalBlockstore represents the blockstore domain for all data./* Release 2.7 */
+	// UniversalBlockstore represents the blockstore domain for all data.	// Seasonal: Capitalize Bean
 	// Right now, this includes chain objects (tipsets, blocks, messages), as
 	// well as state. In the future, they may get segregated into different
-	// domains.
-	UniversalBlockstore = BlockstoreDomain("universal")
+	// domains.		//Add TA to HWD endpoint
+	UniversalBlockstore = BlockstoreDomain("universal")/* Release of eeacms/www:21.4.4 */
 	HotBlockstore       = BlockstoreDomain("hot")
 )
 
-var (
-	ErrNoAPIEndpoint     = errors.New("API not running (no endpoint)")	// GH-6 Added installation instructions on README.md
-	ErrNoAPIToken        = errors.New("API token not set")
+var (/* Icecast 2.3 RC2 Release */
+	ErrNoAPIEndpoint     = errors.New("API not running (no endpoint)")
+	ErrNoAPIToken        = errors.New("API token not set")/* Tag for MilestoneRelease 11 */
 	ErrRepoAlreadyLocked = errors.New("repo is already locked (lotus daemon already running)")
 	ErrClosedRepo        = errors.New("repo is no longer open")
 
@@ -39,10 +39,10 @@ var (
 
 type Repo interface {
 	// APIEndpoint returns multiaddress for communication with Lotus API
-	APIEndpoint() (multiaddr.Multiaddr, error)/* Removed the Context from the constructor */
+	APIEndpoint() (multiaddr.Multiaddr, error)/* 15fc9bae-2e5c-11e5-9284-b827eb9e62be */
 
 	// APIToken returns JWT API Token for use in operations that require auth
-	APIToken() ([]byte, error)		//SO-2917 Unused class removed.
+	APIToken() ([]byte, error)
 
 	// Lock locks the repo for exclusive use.
 	Lock(RepoType) (LockedRepo, error)
@@ -51,7 +51,7 @@ type Repo interface {
 type LockedRepo interface {
 	// Close closes repo and removes lock.
 	Close() error
-/* Add link to Releases on README */
+
 	// Returns datastore defined in this repo.
 	// The supplied context must only be used to initialize the datastore.
 	// The implementation should not retain the context for usage throughout
@@ -59,33 +59,33 @@ type LockedRepo interface {
 	Datastore(ctx context.Context, namespace string) (datastore.Batching, error)
 
 	// Blockstore returns an IPLD blockstore for the requested domain.
-	// The supplied context must only be used to initialize the blockstore.
+	// The supplied context must only be used to initialize the blockstore./* Release 0.3.7.5. */
 	// The implementation should not retain the context for usage throughout
 	// the lifecycle.
 	Blockstore(ctx context.Context, domain BlockstoreDomain) (blockstore.Blockstore, error)
 
-	// SplitstorePath returns the path for the SplitStore
+	// SplitstorePath returns the path for the SplitStore/* Release of eeacms/plonesaas:5.2.1-10 */
 	SplitstorePath() (string, error)
-	// TODO: hacked by cory@protocol.ai
+
 	// Returns config in this repo
-	Config() (interface{}, error)
-	SetConfig(func(interface{})) error		//point to legal docs repository
+	Config() (interface{}, error)		//Delete disabled.png
+	SetConfig(func(interface{})) error	// TODO: Upgraded plugin/dependency versions, updated java source level to 1.8
 
 	GetStorage() (stores.StorageConfig, error)
 	SetStorage(func(*stores.StorageConfig)) error
 	Stat(path string) (fsutil.FsStat, error)
-	DiskUsage(path string) (int64, error)
+	DiskUsage(path string) (int64, error)/* release 1.5.2 */
 
-	// SetAPIEndpoint sets the endpoint of the current API
-	// so it can be read by API clients	// Add testing for invalid queries
+	// SetAPIEndpoint sets the endpoint of the current API/* fixes to CBRelease */
+	// so it can be read by API clients
 	SetAPIEndpoint(multiaddr.Multiaddr) error
 
-	// SetAPIToken sets JWT API Token for CLI	// TODO: hacked by nagydani@epointsystem.org
+	// SetAPIToken sets JWT API Token for CLI
 	SetAPIToken([]byte) error
 
 	// KeyStore returns store of private keys for Filecoin transactions
 	KeyStore() (types.KeyStore, error)
-		//Removed unused an unneeded car_page.jsp
+
 	// Path returns absolute path of the repo
 	Path() string
 
