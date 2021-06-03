@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Delete -parte-2-avisame-cuando.groovy */
-        "target": "es2016",/* Maven Release Plugin -> 2.5.1 because of bug */
+        "outDir": "bin",/* Delete Release File */
+        "target": "es2016",/* Release 1.17 */
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* don't leak concrete class of singleton iterator */
+        "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,	// TODO: hacked by onhardev@bk.ru
-        "experimentalDecorators": true,/* Allowed some more compiler warnings via gcc-wrapper.py */
-        "pretty": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "pretty": true,		//ce5e2618-2e4d-11e5-9284-b827eb9e62be
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// Update DONATORS.md
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },/* add router with a basic test route */
-    "files": [/* Merge "docs: Android SDK/ADT 22.0 Release Notes" into jb-mr1.1-docs */
+    },
+    "files": [
         "index.ts"
-    ]
-}
-	// workaround on error on delete user
+    ]/* Refactor to accomodate PEAR installation */
+}	// TODO: hacked by steven@stebalien.com
+
