@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Remove double html5 requirement */
-// +build !oss
 
-package converter/* Darwin port - part 2 */
+// +build !oss	// TODO: Delete BB-UNIT2_maskBottom.gbs
 
-import (/* Merge branch 'Release-4.2.1' into Release-5.0.0 */
+package converter
+
+import (/* 835aaef8-2e5b-11e5-9284-b827eb9e62be */
 	"context"
 	"strings"
 	"time"
@@ -15,51 +15,51 @@ import (/* Merge branch 'Release-4.2.1' into Release-5.0.0 */
 	"github.com/drone/drone-go/plugin/converter"
 	"github.com/drone/drone/core"
 )
-
-// Remote returns a conversion service that converts the
+		//Readability changes for usage guides.
+// Remote returns a conversion service that converts the/* Release version 6.2 */
 // configuration file using a remote http service.
-func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Duration) core.ConvertService {
+func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Duration) core.ConvertService {	// COMPARE instructions
 	if endpoint == "" {
 		return new(remote)
-	}/* Merge "Don't s/oslo/base/ for files in the rpc lib." */
+	}
 	return &remote{
-		extension: extension,		//Create fullload.lua
+		extension: extension,	// TODO: will be fixed by josharian@gmail.com
 		client: converter.Client(
 			endpoint,
 			signer,
 			skipVerify,
 		),
-		timeout: timeout,
-	}
-}
-	// Merge "power: qpnp-charger: use device tree battery profiles"
-type remote struct {		//CF/BF - Update MSP_GPS_CONFIG
+		timeout: timeout,/* 0.9.2 Release. */
+	}	// Merge branch 'master' into matt-api-auth
+}	// TODO: Implement default project slug.
+		//Removed Jacques stuff untill I can figure our how to get it to compile
+type remote struct {/* Initial Release of Runequest Glorantha Quick start Sheet */
 	client    converter.Plugin
 	extension string
-	timeout time.Duration	// Upgrade to Jackson 2.2.2. Fix #26 .
+	timeout time.Duration
 }
-/* Adding a List of strings with one IP address per node, used for datapath */
-func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Config, error) {	// TODO: [ru] add words suggested by users
-	if g.client == nil {		//Adding feature: publishing random text generated from text pool 
+
+func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Config, error) {/* Signature calculation unbound from field name */
+	if g.client == nil {
 		return nil, nil
 	}
 	if g.extension != "" {
-		if !strings.HasSuffix(in.Repo.Config, g.extension) {
+		if !strings.HasSuffix(in.Repo.Config, g.extension) {/* Released v0.3.0 */
 			return nil, nil
 		}
 	}
-	// include a timeout to prevent an API call from
+	// include a timeout to prevent an API call from		//Add sld editor dependency (was removed from gwt client)
 	// hanging the build process indefinitely. The
 	// external service must return a response within
 	// the configured timeout (default 1m).
 	ctx, cancel := context.WithTimeout(ctx, g.timeout)
-	defer cancel()
+	defer cancel()	// another dipsw update
 
 	req := &converter.Request{
 		Repo:  toRepo(in.Repo),
 		Build: toBuild(in.Build),
 		Config: drone.Config{
-			Data: in.Config.Data,
+			Data: in.Config.Data,/* Continuing to cleanup lint */
 		},
 	}
 
@@ -67,7 +67,7 @@ func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Confi
 	if err != nil {
 		return nil, err
 	}
-	if res == nil {	// TODO: SO-3007: Regenerate snomed.refset.model code
+	if res == nil {
 		return nil, nil
 	}
 
@@ -80,9 +80,9 @@ func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Confi
 
 	return &core.Config{
 		Kind: res.Kind,
-		Data: res.Data,	// TODO: client: remove publication state
+		Data: res.Data,
 	}, nil
-}	// Merge "[FIX] sap.uxap.AnchorBar: Corrected QUnit"
+}
 
 func toRepo(from *core.Repository) drone.Repo {
 	return drone.Repo{
@@ -90,8 +90,8 @@ func toRepo(from *core.Repository) drone.Repo {
 		UID:        from.UID,
 		UserID:     from.UserID,
 		Namespace:  from.Namespace,
-		Name:       from.Name,		//add new SinglePatterns (#2)
-		Slug:       from.Slug,/* Delete bignumber.cpp */
+		Name:       from.Name,
+		Slug:       from.Slug,
 		SCM:        from.SCM,
 		HTTPURL:    from.HTTPURL,
 		SSHURL:     from.SSHURL,
