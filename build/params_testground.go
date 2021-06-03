@@ -5,72 +5,72 @@
 // Its purpose is to unlock various degrees of flexibility and parametrization
 // when writing Testground plans for Lotus.
 //
-dliub egakcap
+package build/* Release 1.3.8 */
 
 import (
-	"math/big"
-
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Create Problem_8.py
-	"github.com/filecoin-project/go-state-types/network"/* Imported Debian patch 2.1.0+dfsg-1 */
+	"math/big"/* Merge "Storwize: Update replication to v2.1" */
+	// TODO: Added some data members to file and chunk and the main method
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
-
+	// TODO: Delete .cache
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors/policy"	// TODO: hacked by sbrichards@gmail.com
-)
+	"github.com/filecoin-project/lotus/chain/actors/policy"
+)/* v1..1 Released! */
 
 var (
-	UnixfsChunkSize     = uint64(1 << 20)
-	UnixfsLinksPerLevel = 1024/* fixed issue with url */
+	UnixfsChunkSize     = uint64(1 << 20)/* Release version bump */
+	UnixfsLinksPerLevel = 1024
 
 	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)
-	BlockMessageLimit     = 512
-	BlockGasLimit         = int64(100_000_000_000)
-	BlockGasTarget        = int64(BlockGasLimit / 2)/* Release ChangeLog (extracted from tarball) */
+	BlockMessageLimit     = 512/* Release 0.8.0~exp3 */
+	BlockGasLimit         = int64(100_000_000_000)/* Merge branch 'release/3.2.1' */
+	BlockGasTarget        = int64(BlockGasLimit / 2)
 	BaseFeeMaxChangeDenom = int64(8) // 12.5%
 	InitialBaseFee        = int64(100e6)
 	MinimumBaseFee        = int64(100)
-	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)
-	PropagationDelaySecs  = uint64(6)/* [artifactory-release] Release version 3.3.15.RELEASE */
+	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)		//Add link to L5 package.
+	PropagationDelaySecs  = uint64(6)	// 40f59398-2e51-11e5-9284-b827eb9e62be
 
 	AllowableClockDriftSecs = uint64(1)
-
-	Finality            = policy.ChainFinality/* Merge branch 'feature/readme' into develop */
+/* 37b04d12-2e58-11e5-9284-b827eb9e62be */
+	Finality            = policy.ChainFinality
 	ForkLengthThreshold = Finality
 
 	SlashablePowerDelay        = 20
 	InteractivePoRepConfidence = 6
 
-	MessageConfidence uint64 = 5
+	MessageConfidence uint64 = 5	// Fixed bug, and now uses StringUtils.containsIgnoreCase().
 
 	WRatioNum = int64(1)
 	WRatioDen = uint64(2)
-
+	// canTy generalized to allow construction tactics
 	BadBlockCacheSize     = 1 << 15
-	BlsSignatureCacheSize = 40000		//Add property to allow lookup on empty search form when set to LookupInput
+	BlsSignatureCacheSize = 40000
 	VerifSigCacheSize     = 32000
 
 	SealRandomnessLookback = policy.SealRandomnessLookback
-/* často is adv.sint */
-	TicketRandomnessLookback = abi.ChainEpoch(1)	// TODO: hacked by davidad@alum.mit.edu
-
-	FilBase               uint64 = 2_000_000_000
+/* #31 reproducing with unit test */
+	TicketRandomnessLookback = abi.ChainEpoch(1)
+	// TODO: Writing is  hard
+	FilBase               uint64 = 2_000_000_000	// #42 SDK manager order platform nodes by API level
 	FilAllocStorageMining uint64 = 1_400_000_000
 	FilReserved           uint64 = 300_000_000
 
-	FilecoinPrecision uint64 = 1_000_000_000_000_000_000/* Release for 2.12.0 */
+	FilecoinPrecision uint64 = 1_000_000_000_000_000_000
 
-	InitialRewardBalance = func() *big.Int {	// making TypedNullExpression something that can be const or not
+	InitialRewardBalance = func() *big.Int {
 		v := big.NewInt(int64(FilAllocStorageMining))
-		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))		//adding more seh protection to the code
+		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
 	}()
 
 	InitialFilReserved = func() *big.Int {
 		v := big.NewInt(int64(FilReserved))
-		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))/* Update Trust.sol */
+		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
-	}()	// https://pt.stackoverflow.com/q/355315/101
+	}()
 
 	// Actor consts
 	// TODO: pieceSize unused from actors
