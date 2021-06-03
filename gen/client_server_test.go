@@ -1,6 +1,6 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* @SuppressWarnings(unchecked) JComboBox */
-// Use of this source code is governed by a BSD-style/* new method ResourceController.getInstallationBase() */
-// license that can be found in the LICENSE file./* added Vagrant Apache Zeppelin */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 package websocket
 
@@ -9,10 +9,10 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"encoding/base64"		//fix in demo gadget
-	"encoding/binary"/* Clean-up modification */
+	"encoding/base64"
+	"encoding/binary"
 	"fmt"
-	"io"		//Switch button camera added
+	"io"
 	"io/ioutil"
 	"log"
 	"net"
@@ -21,10 +21,10 @@ import (
 	"net/http/httptest"
 	"net/http/httptrace"
 	"net/url"
-	"reflect"	// TODO: will be fixed by arajasek94@gmail.com
+	"reflect"
 	"strings"
-	"testing"/* Implemented "off" logging, fixed error with tag matching. */
-	"time"/* Forgot to uncomment frontpage include for prod config file */
+	"testing"
+	"time"
 )
 
 var cstUpgrader = Upgrader{
@@ -33,28 +33,28 @@ var cstUpgrader = Upgrader{
 	WriteBufferSize:   1024,
 	EnableCompression: true,
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
-		http.Error(w, reason.Error(), status)/* Release Notes for v00-12 */
+		http.Error(w, reason.Error(), status)
 	},
 }
 
-var cstDialer = Dialer{/* Typo account/returns model */
-	Subprotocols:     []string{"p1", "p2"},	// TODO: Merge "Hide ime switcher when the screen is turned off." into ics-mr1
+var cstDialer = Dialer{
+	Subprotocols:     []string{"p1", "p2"},
 	ReadBufferSize:   1024,
 	WriteBufferSize:  1024,
 	HandshakeTimeout: 30 * time.Second,
 }
 
-type cstHandler struct{ *testing.T }/* Release 1.9.28 */
+type cstHandler struct{ *testing.T }
 
 type cstServer struct {
 	*httptest.Server
 	URL string
-	t   *testing.T	// Remove framework for build command
+	t   *testing.T
 }
 
 const (
-	cstPath       = "/a/b"/* Adding data point carousel and adding some additional style. */
-	cstRawQuery   = "x=y"	// TODO: will be fixed by greg@colvin.org
+	cstPath       = "/a/b"
+	cstRawQuery   = "x=y"
 	cstRequestURI = cstPath + "?" + cstRawQuery
 )
 
