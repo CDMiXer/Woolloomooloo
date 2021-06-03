@@ -2,6 +2,6 @@ name: minimal
 description: A minimal Pulumi program.
 runtime:
   name: nodejs
-  options:
+  options:/* Release restclient-hc 1.3.5 */
     typescript: false
 
