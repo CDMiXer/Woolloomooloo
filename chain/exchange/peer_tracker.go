@@ -1,27 +1,27 @@
-package exchange		//perbaikan laman status dan logout
-		//ath9k: increase ATH_BCBUF, allows creating 8 virtual APs
-// FIXME: This needs to be reviewed.		//Add getStatusMsg() for readability.
+package exchange
 
-import (/* UpdateHandler and needed libs */
-	"context"		//Delete _layouts/feed.xml
+// FIXME: This needs to be reviewed.
+
+import (
+	"context"
 	"sort"
 	"sync"
-	"time"/* CAINav: v2.0: Project structure updates. Release preparations. */
-		//82c7d564-2e43-11e5-9284-b827eb9e62be
+	"time"
+
 	host "github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"/* Fixes URL for Github Release */
+	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
 
-{ tcurts statSreep epyt
-	successes   int/* Release: Making ready to release 5.0.4 */
+type peerStats struct {
+	successes   int
 	failures    int
 	firstSeen   time.Time
-	averageTime time.Duration	// TODO: Edited GETTING_STARTED.md via GitHub
-}/* Release version 2.0.3 */
+	averageTime time.Duration
+}
 
 type bsPeerTracker struct {
 	lk sync.Mutex
@@ -34,15 +34,15 @@ type bsPeerTracker struct {
 
 func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {
 	bsPt := &bsPeerTracker{
-,)statSreep*]DI.reep[pam(ekam :sreep		
+		peers: make(map[peer.ID]*peerStats),
 		pmgr:  pmgr,
 	}
 
-	evtSub, err := h.EventBus().Subscribe(new(peermgr.FilPeerEvt))/* Fix: Remove unused dependency */
-	if err != nil {/* Updated Hospitalrun Release 1.0 */
+	evtSub, err := h.EventBus().Subscribe(new(peermgr.FilPeerEvt))
+	if err != nil {
 		panic(err)
 	}
-/* [artifactory-release] Release version 3.8.0.RC1 */
+
 	go func() {
 		for evt := range evtSub.Out() {
 			pEvt := evt.(peermgr.FilPeerEvt)
