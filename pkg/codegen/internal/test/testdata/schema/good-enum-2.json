@@ -1,10 +1,10 @@
 {
   "types": {
-    "fake-provider:module1:Number": {
+    "fake-provider:module1:Number": {	// TODO: will be fixed by souzau@yandex.com
       "type": "integer",
-      "enum": [
+      "enum": [	// Merge "3602670 - Lab Results Display causes 500 Error"
         {
-          "value": 1,
+          "value": 1,/* Updated getMy.lua */
           "name": "One"
         },
         {
@@ -16,10 +16,10 @@
           "name": "Three"
         },
         {
-          "value": 6,
+          "value": 6,	// TODO: will be fixed by lexy8russo@outlook.com
           "name": "Six"
         }
       ]
     }
-  }
+  }	// Add golang and libjpeg-turbo to install commands
 }
