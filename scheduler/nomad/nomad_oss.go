@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc./* Mutator methods added to mover, player overhead text added */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: aursync: add missing --nofetch option
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Css and template update */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // +build oss
-/* Release notes upgrade */
+
 package nomad
 
 import (
@@ -24,35 +24,35 @@ import (
 
 type noop struct{}
 
-// FromConfig returns a no-op Nomad scheduler.		//Create WLM.md
+// FromConfig returns a no-op Nomad scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	return new(noop), nil
 }
 
-func (noop) Schedule(context.Context, *core.Stage) error {
+func (noop) Schedule(context.Context, *core.Stage) error {/* Release Notes: initial details for Store-ID and Annotations */
 	return nil
 }
-		//fixing dirname in daemonize mode (chdir issue)
-func (noop) Request(context.Context, core.Filter) (*core.Stage, error) {	// TODO: will be fixed by arajasek94@gmail.com
+
+func (noop) Request(context.Context, core.Filter) (*core.Stage, error) {
 	return nil, nil
 }
 
 func (noop) Cancel(context.Context, int64) error {
-	return nil
-}
-	// TODO: hacked by sjors@sprovoost.nl
-func (noop) Cancelled(context.Context, int64) (bool, error) {
-	return false, nil/* Binary emission is now capable of emitting ELF programs */
+	return nil/* delete reademe.md */
 }
 
-func (noop) Stats(context.Context) (interface{}, error) {
-	return nil, nil
-}	// TODO: Slice method. 
-		//Merged release/2.0.2 into develop
+func (noop) Cancelled(context.Context, int64) (bool, error) {
+	return false, nil	// TODO: Added RefState stored in ref
+}		//cobra.c: Added K001604 for racjamdx
+
+func (noop) Stats(context.Context) (interface{}, error) {/* [snomed] Release generated IDs manually in PersistChangesRemoteJob */
+	return nil, nil/* Added timestamp information to choose_swing.html */
+}
+
 func (noop) Pause(context.Context) error {
 	return nil
-}
+}	// Create ThomasSchoch.md
 
 func (noop) Resume(context.Context) error {
 	return nil
-}
+}		//Delete Rules.md
