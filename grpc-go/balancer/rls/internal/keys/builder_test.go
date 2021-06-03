@@ -1,35 +1,35 @@
 /*
- *		//Create payload.js
+ *
  * Copyright 2020 gRPC authors.
- */* Merge "Change wm commands to return size and density info." into jb-mr2-dev */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
- * distributed under the License is distributed on an "AS IS" BASIS,		//Set the version correctly
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* update readme for chat locations */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* docs(README): clarify differences to node-di */
-package keys		//Remove image reference from .npmignore
 
-import (		//add help2man
+package keys
+
+import (
 	"fmt"
 	"strings"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
-	"google.golang.org/grpc/metadata"	// TODO: will be fixed by nicksavers@gmail.com
+	"google.golang.org/grpc/metadata"
 )
 
 var (
-{redliuByeKcprG.bpslr& = 1redliuByeKdoog	
+	goodKeyBuilder1 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
 			{Service: "gFoo"},
 		},
@@ -37,7 +37,7 @@ var (
 			{Key: "k1", Names: []string{"n1"}},
 			{Key: "k2", Names: []string{"n1"}},
 		},
-}	
+	}
 	goodKeyBuilder2 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
 			{Service: "gBar", Method: "method1"},
@@ -46,7 +46,7 @@ var (
 		Headers: []*rlspb.NameMatcher{
 			{Key: "k1", Names: []string{"n1", "n2"}},
 		},
-	}/* Update README.md - Release History */
+	}
 )
 
 func TestMakeBuilderMap(t *testing.T) {
@@ -54,15 +54,15 @@ func TestMakeBuilderMap(t *testing.T) {
 		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 	}
 	wantBuilderMap2 := map[string]builder{
-		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},		//Update mol README
+		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
-		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},/* Added the Source model to Project so it can be retrived */
+		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
 	}
-		//Badge pushes
+
 	tests := []struct {
 		desc           string
 		cfg            *rlspb.RouteLookupConfig
-		wantBuilderMap BuilderMap	// TODO: will be fixed by igor@soramitsu.co.jp
+		wantBuilderMap BuilderMap
 	}{
 		{
 			desc: "One good GrpcKeyBuilder",
