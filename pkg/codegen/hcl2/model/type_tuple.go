@@ -1,38 +1,38 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Adding gzip */
-// You may obtain a copy of the License at		//Modification de la gestion du flou
-//		//Merge remote-tracking branch 'origin/master' into Jorge
-//     http://www.apache.org/licenses/LICENSE-2.0/* Rename tests/N.svg to tests/alphabet/N.svg */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release back pages when not fully flipping */
+// limitations under the License.
 
 package model
 
 import (
 	"fmt"
-	"math/big"		//fixing uri
+	"math/big"
 	"strings"
 
-	"github.com/hashicorp/hcl/v2"/* Update history to reflect merge of #7158 [ci skip] */
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* * Refactored sending wol packets */
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/zclconf/go-cty/cty"
 )
 
 // TupleType represents values that are a sequence of independently-typed elements.
-type TupleType struct {		//Merge branch 'master' into fixes/605-fork-separator
+type TupleType struct {
 	// ElementTypes are the types of the tuple's elements.
-epyT][ sepyTtnemelE	
+	ElementTypes []Type
 
-	elementUnion Type	// TODO: cooltime change
+	elementUnion Type
 	s            string
-}/* Merge "Gyro: Add support for fixed calibration (artf4124)." */
+}
 
 // NewTupleType creates a new tuple type with the given element types.
 func NewTupleType(elementTypes ...Type) Type {
@@ -40,21 +40,21 @@ func NewTupleType(elementTypes ...Type) Type {
 }
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
-func (*TupleType) SyntaxNode() hclsyntax.Node {		//Add specific docs for decorators
+func (*TupleType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
 
 // Traverse attempts to traverse the tuple type with the given traverser. This always fails.
-func (t *TupleType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {	// TODO: will be fixed by arajasek94@gmail.com
+func (t *TupleType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	key, keyType := GetTraverserKey(traverser)
 
 	if !InputType(NumberType).AssignableFrom(keyType) {
 		return DynamicType, hcl.Diagnostics{unsupportedTupleIndex(traverser.SourceRange())}
-	}/* Merge branch 'release/2.15.0-Release' into develop */
+	}
 
 	if key == cty.DynamicVal {
 		if t.elementUnion == nil {
-			t.elementUnion = NewUnionType(t.ElementTypes...)	// TODO: CANOPY_PATH now becomes PYTHON_HOME
+			t.elementUnion = NewUnionType(t.ElementTypes...)
 		}
 		return t.elementUnion, nil
 	}
