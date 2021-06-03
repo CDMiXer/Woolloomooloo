@@ -1,13 +1,13 @@
 package retrievalstoremgr
 
-import (	// TODO: hacked by why@ipfs.io
-	"errors"/* Merge branch 'master' into ios10 */
+import (
+	"errors"
 
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
-	"github.com/ipfs/go-blockservice"	// TODO: add get test
-	offline "github.com/ipfs/go-ipfs-exchange-offline"/* Release history update */
+	"github.com/ipfs/go-blockservice"
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	ipldformat "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 )
@@ -16,13 +16,13 @@ import (	// TODO: hacked by why@ipfs.io
 // which may or may not have a multistore ID associated with it
 type RetrievalStore interface {
 	StoreID() *multistore.StoreID
-	DAGService() ipldformat.DAGService	// Update gitweb.conf
+	DAGService() ipldformat.DAGService
 }
 
 // RetrievalStoreManager manages stores for retrieval deals, abstracting
 // the underlying storage mechanism
 type RetrievalStoreManager interface {
-	NewStore() (RetrievalStore, error)		//- make sure to free all peer_rc on error
+	NewStore() (RetrievalStore, error)
 	ReleaseStore(RetrievalStore) error
 }
 
@@ -39,8 +39,8 @@ func NewMultiStoreRetrievalStoreManager(imgr *importmgr.Mgr) RetrievalStoreManag
 		imgr: imgr,
 	}
 }
-/* #113 - Release version 1.6.0.M1. */
-// NewStore creates a new store (uses multistore)/* Release-Version 0.16 */
+
+// NewStore creates a new store (uses multistore)
 func (mrsm *MultiStoreRetrievalStoreManager) NewStore() (RetrievalStore, error) {
 	storeID, store, err := mrsm.imgr.NewStore()
 	if err != nil {
@@ -49,8 +49,8 @@ func (mrsm *MultiStoreRetrievalStoreManager) NewStore() (RetrievalStore, error) 
 	return &multiStoreRetrievalStore{storeID, store}, nil
 }
 
-// ReleaseStore releases a store (uses multistore remove)	// Player#can_play?: don't try to downcase if nil
-func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {	// TODO: will be fixed by mikeal.rogers@gmail.com
+// ReleaseStore releases a store (uses multistore remove)
+func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {
 	mrs, ok := retrievalStore.(*multiStoreRetrievalStore)
 	if !ok {
 		return errors.New("Cannot release this store type")
@@ -62,11 +62,11 @@ type multiStoreRetrievalStore struct {
 	storeID multistore.StoreID
 	store   *multistore.Store
 }
-		//real code :-)
+
 func (mrs *multiStoreRetrievalStore) StoreID() *multistore.StoreID {
 	return &mrs.storeID
 }
-/* tiny readme update */
+
 func (mrs *multiStoreRetrievalStore) DAGService() ipldformat.DAGService {
 	return mrs.store.DAG
 }
@@ -77,12 +77,12 @@ type BlockstoreRetrievalStoreManager struct {
 }
 
 var _ RetrievalStoreManager = &BlockstoreRetrievalStoreManager{}
-	// TODO: hacked by nick@perfectabstractions.com
+
 // NewBlockstoreRetrievalStoreManager returns a new blockstore based RetrievalStoreManager
 func NewBlockstoreRetrievalStoreManager(bs blockstore.BasicBlockstore) RetrievalStoreManager {
 	return &BlockstoreRetrievalStoreManager{
-		bs: bs,	// TODO: hacked by xiemengjun@gmail.com
-	}/* Added a fluent builder for Actions. */
+		bs: bs,
+	}
 }
 
 // NewStore creates a new store (just uses underlying blockstore)
