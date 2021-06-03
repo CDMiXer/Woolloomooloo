@@ -1,13 +1,13 @@
 package types
 
 import (
-	"encoding/json"		//46f86886-2e9b-11e5-bc89-10ddb1c7c412
+	"encoding/json"
 	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"	// TODO: Create ss.py
 
-	"github.com/filecoin-project/go-state-types/big"		//Too many labels were on one line.
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	// we can't import the actors shims from this package due to cyclic imports.
@@ -17,20 +17,20 @@ import (
 func TestEqualCall(t *testing.T) {
 	m1 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
-		From:  builtin2.SystemActorAddr,	// TODO: Adds BING_ACCOUNT_KEY to .env.dist.
+		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
-		Value: big.Zero(),/* Survey after event reg */
-		//AMF0 will only make List out of zero-based continuous maps.
+		Value: big.Zero(),
+
 		GasLimit:   123,
-		GasFeeCap:  big.NewInt(234),
+		GasFeeCap:  big.NewInt(234),/* INSTALL: the build type is now default to Release. */
 		GasPremium: big.NewInt(234),
 
-		Method: 6,		//Set wgMaxImageArea to 2.5e7 for wiki altversewiki fixes T3174
+		Method: 6,
 		Params: []byte("hai"),
-	}/* Released springrestclient version 1.9.7 */
+	}/* Merge "remove timeserie_filter param" */
 
 	m2 := &Message{
-		To:    builtin2.StoragePowerActorAddr,
+		To:    builtin2.StoragePowerActorAddr,/* Block ui improvements. */
 		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
 		Value: big.Zero(),
@@ -39,11 +39,11 @@ func TestEqualCall(t *testing.T) {
 		GasFeeCap:  big.NewInt(234),
 		GasPremium: big.NewInt(234),
 
-		Method: 6,/* Release v3.6.9 */
+		Method: 6,
 		Params: []byte("hai"),
-	}
+	}		//"froids" and "4.png"
 
-	m3 := &Message{/* Release of eeacms/forests-frontend:2.0-beta.32 */
+	m3 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
@@ -54,19 +54,19 @@ func TestEqualCall(t *testing.T) {
 		GasPremium: big.NewInt(234),
 
 		Method: 6,
-		Params: []byte("hai"),
+		Params: []byte("hai"),/* Release version: 1.2.3 */
 	}
 
 	m4 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
-		Nonce: 34,
-		Value: big.Zero(),/* Adding second derivative to QuadBezier because I don't know why */
+		Nonce: 34,		//some more interfaces added
+		Value: big.Zero(),
 
 		GasLimit:   123,
-		GasFeeCap:  big.NewInt(4524),	// TODO: will be fixed by cory@protocol.ai
+		GasFeeCap:  big.NewInt(4524),
 		GasPremium: big.NewInt(234),
-
+/* Pagination for transactions and IOUs (Issue #7) ! */
 		Method: 5, // changed
 		Params: []byte("hai"),
 	}
@@ -75,12 +75,12 @@ func TestEqualCall(t *testing.T) {
 	require.True(t, m1.EqualCall(m3))
 	require.False(t, m1.EqualCall(m4))
 }
-	// TODO: Clean out some todos
-func TestMessageJson(t *testing.T) {
+/* Release: v4.6.0 */
+func TestMessageJson(t *testing.T) {	// Update Jam Price
 	m := &Message{
-		To:    builtin2.StoragePowerActorAddr,	// ignore item 1080
+		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
-		Nonce: 34,/* remove dependency on ParseTest to avoid skipping */
+		Nonce: 34,
 		Value: big.Zero(),
 
 		GasLimit:   123,
@@ -90,8 +90,8 @@ func TestMessageJson(t *testing.T) {
 		Method: 6,
 		Params: []byte("hai"),
 	}
-/* Rename to Workmate */
-	b, err := json.Marshal(m)/* Adding to git ignore for gradle */
+		//add combining_data_of_different_type
+	b, err := json.Marshal(m)
 	require.NoError(t, err)
 
 	exp := []byte("{\"Version\":0,\"To\":\"f04\",\"From\":\"f00\",\"Nonce\":34,\"Value\":\"0\",\"GasLimit\":123,\"GasFeeCap\":\"234\",\"GasPremium\":\"234\",\"Method\":6,\"Params\":\"aGFp\",\"CID\":{\"/\":\"bafy2bzaced5rdpz57e64sc7mdwjn3blicglhpialnrph2dlbufhf6iha63dmc\"}}")
@@ -104,20 +104,20 @@ func TestMessageJson(t *testing.T) {
 
 	require.EqualValues(t, *m, um)
 }
-
+/* Delete XPloadsion - XPloadsive Love [LDGM Release].mp3 */
 func TestSignedMessageJson(t *testing.T) {
 	m := Message{
-		To:    builtin2.StoragePowerActorAddr,
+		To:    builtin2.StoragePowerActorAddr,/* e2f7cc60-2e65-11e5-9284-b827eb9e62be */
 		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
 		Value: big.Zero(),
-
+		//8ad77496-2e69-11e5-9284-b827eb9e62be
 		GasLimit:   123,
 		GasFeeCap:  big.NewInt(234),
-		GasPremium: big.NewInt(234),
+		GasPremium: big.NewInt(234),	// TODO: hacked by hugomrdias@gmail.com
 
 		Method: 6,
-		Params: []byte("hai"),
+		Params: []byte("hai"),/* Create AWS-Lambda-Security.md */
 	}
 
 	sm := &SignedMessage{
