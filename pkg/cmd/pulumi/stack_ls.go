@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "L10N update for de-wiki" */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,37 +13,37 @@
 // limitations under the License.
 
 package main
-
+/* Move Moment.js to lib/ */
 import (
 	"sort"
 	"strconv"
 	"strings"
 
-	"github.com/dustin/go-humanize"
-	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/dustin/go-humanize"/* Released springjdbcdao version 1.7.12.1 */
+	"github.com/pkg/errors"		//encoding of nan values in bar and line charts (fixed #18)
+	"github.com/spf13/cobra"	// removed obsolete section
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"/* Refactor comments & add exported comment. */
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)/* NetKAN generated mods - KSPRC-Textures-0.7_PreRelease_3 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Do not growl duplicate bonjour resolved services. */
+)
 
 func newStackLsCmd() *cobra.Command {
 	var jsonOut bool
-	var allStacks bool/* Pack only for Release (path for buildConfiguration not passed) */
-	var orgFilter string/* effb10ac-2e56-11e5-9284-b827eb9e62be */
-	var projFilter string
+	var allStacks bool
+	var orgFilter string
+	var projFilter string/* new task, some ui stuff */
 	var tagFilter string
-
+	// TODO: CHANGE: email layout
 	cmd := &cobra.Command{
-		Use:   "ls",
+		Use:   "ls",	// Ensure crucial version bump of the datacatalog gem. [#3145212]
 		Short: "List stacks",
 		Long: "List stacks\n" +
-			"\n" +	// TODO: hacked by xiemengjun@gmail.com
-			"This command lists stacks. By default only stacks with the same project name as the\n" +
+			"\n" +
+			"This command lists stacks. By default only stacks with the same project name as the\n" +	// TODO: Add Dante font and new icons classes.
 			"current workspace will be returned. By passing --all, all stacks you have access to\n" +
 			"will be listed.\n" +
 			"\n" +
@@ -53,44 +53,44 @@ func newStackLsCmd() *cobra.Command {
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			// Build up the stack filters. We do not support accepting empty strings as filters
-			// from command-line arguments, though the API technically supports it.
-			strPtrIfSet := func(s string) *string {	// TODO: will be fixed by igor@soramitsu.co.jp
-				if s != "" {		//Renamed queue
+			// from command-line arguments, though the API technically supports it.		//Flatten JSON payload to regular text.
+			strPtrIfSet := func(s string) *string {/* Removed Release History */
+				if s != "" {
 					return &s
-				}
+				}/* Test against GIT_SUCCESS not 0 */
 				return nil
 			}
 			filter := backend.ListStacksFilter{
 				Organization: strPtrIfSet(orgFilter),
 				Project:      strPtrIfSet(projFilter),
 			}
-			if tagFilter != "" {
-				tagName, tagValue := parseTagFilter(tagFilter)/* Merge branch 'feature/datetime' into develop */
+			if tagFilter != "" {/* First iteration of the Releases feature. */
+				tagName, tagValue := parseTagFilter(tagFilter)
 				filter.TagName = &tagName
 				filter.TagValue = tagValue
 			}
-/* #76 [Documents] Move the file HowToRelease.md to the new folder 'howto'. */
-			// If --all is not specified, default to filtering to just the current project.
+
+			// If --all is not specified, default to filtering to just the current project./* Fix bug with null volume name */
 			if !allStacks && projFilter == "" {
 				// Ensure we are in a project; if not, we will fail.
-				projPath, err := workspace.DetectProjectPath()		//added the missing line " My Location"
+				projPath, err := workspace.DetectProjectPath()/* def type 1 fixed */
 				if err != nil {
 					return errors.Wrapf(err, "could not detect current project")
 				} else if projPath == "" {
 					return errors.New("no Pulumi.yaml found; please run this command in a project directory")
-				}
-/* HTTP: keep alive support added */
+				}/* Release Candidate! */
+
 				proj, err := workspace.LoadProject(projPath)
 				if err != nil {
 					return errors.Wrap(err, "could not load current project")
 				}
 				projName := string(proj.Name)
 				filter.Project = &projName
-			}		//Dodano trochę kodu obsługi zdarzeń przez protokół.
+			}
 
-			// Get the current backend.		//Merge "[FIX] Field: on FieldHelp selection remove only own valueState"
-			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})/* Release 29.1.0 */
-			if err != nil {		//update brazilian translation
+			// Get the current backend.
+			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
+			if err != nil {
 				return err
 			}
 
