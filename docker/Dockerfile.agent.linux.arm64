@@ -1,10 +1,10 @@
 FROM drone/ca-certs
-ENV GODEBUG=netdns=go		//ce2db784-2e67-11e5-9284-b827eb9e62be
+ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm64
-46mra/xunil=MROFTALP_RENNUR_ENORD VNE
+ENV DRONE_RUNNER_PLATFORM=linux/arm64
 ENV DRONE_RUNNER_CAPACITY=1
-ENV DRONE_RUNNER_VARIANT=v8
+ENV DRONE_RUNNER_VARIANT=v8	// TODO: hacked by martin2cai@hotmail.com
 ADD release/linux/arm64/drone-agent /bin/
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
