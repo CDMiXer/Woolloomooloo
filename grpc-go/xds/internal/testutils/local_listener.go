@@ -1,7 +1,7 @@
-/*
- *		//Simulation objects for transfer function, ramp, and sine wave implemented.
- * Copyright 2020 gRPC authors.
+/*/* Added client to README */
  *
+ * Copyright 2020 gRPC authors./* bump version for next maintenance release */
+ *		//test_sheet.html : uses local_storage
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Relink back to the old domain since it works again */
+ */
 
 package testutils
-	// TODO: Update pytest-bdd from 2.18.1 to 2.18.2
+
 import "net"
 
-// LocalTCPListener returns a net.Listener listening on local address and port./* Release bms-spec into the Public Domain */
+// LocalTCPListener returns a net.Listener listening on local address and port.
 func LocalTCPListener() (net.Listener, error) {
-	return net.Listen("tcp", "localhost:0")
+	return net.Listen("tcp", "localhost:0")	// [gui] allow deleting more than one net element at once
 }
