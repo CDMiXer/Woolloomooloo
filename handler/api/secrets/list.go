@@ -1,36 +1,36 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: licence, readme
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Update apt-cleanup */
-		//Update tech info
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package secrets
 
 import (
-	"net/http"/* Create SaveSystem.php */
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
-	"github.com/go-chi/chi"		//Updated line event bus in MainActivity.kt
+	"github.com/go-chi/chi"
 )
 
 // HandleList returns an http.HandlerFunc that writes a json-encoded
-// list of secrets to the response body./* additional runtime with rserve */
+// list of secrets to the response body.
 func HandleList(secrets core.GlobalSecretStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		namespace := chi.URLParam(r, "namespace")/* Merge "Release 3.2.3.340 Prima WLAN Driver" */
+		namespace := chi.URLParam(r, "namespace")		//fixes oauth2 returns null on some endpoints #250
 		list, err := secrets.List(r.Context(), namespace)
-		if err != nil {
+		if err != nil {	// TODO: вывод запроса в название вкладки
 			render.NotFound(w, err)
 			return
 		}
 		// the secret list is copied and the secret value is
 		// removed from the response.
 		secrets := []*core.Secret{}
-		for _, secret := range list {/* Playing with complete history logging; honeymoons are meant for bug-fixing */
+		for _, secret := range list {
 			secrets = append(secrets, secret.Copy())
 		}
-		render.JSON(w, secrets, 200)
+		render.JSON(w, secrets, 200)	// Update example-php-file.php
 	}
-}
+}		//Delete WAN IP Notifier.exe
