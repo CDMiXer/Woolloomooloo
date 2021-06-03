@@ -1,37 +1,37 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Updated Russian translation of WEB and Release Notes */
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file./* Reorganize Packaging */
 
-// +build !oss		//Update csv_to_html_table.js
+// +build !oss
 
 package metric
 
-import (	// TODO: Update Packages.yml
+import (
 	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
 )
-
+/* workflow_diagram */
 // RunningJobCount provides metrics for running job counts.
 func RunningJobCount(stages core.StageStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_running_jobs",
-			Help: "Total number of running jobs.",/* Fix double / */
-		}, func() float64 {
+			Help: "Total number of running jobs.",
+		}, func() float64 {		//5e5893fb-2d16-11e5-af21-0401358ea401
 			list, _ := stages.ListState(noContext, core.StatusRunning)
 			return float64(len(list))
-		}),
-	)
-}	// Minor spelling/grammar corrections
-/* Shell update command was somehow broken */
+		}),/* Update ODPTest.php */
+	)	// TODO: hacked by hugomrdias@gmail.com
+}
+
 // PendingJobCount provides metrics for pending job counts.
 func PendingJobCount(stages core.StageStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
-			Name: "drone_pending_jobs",	// Moved Glee files in stelutils.
-			Help: "Total number of pending jobs.",/* Fixing broken merge */
-		}, func() float64 {		//Remove bower.json file
+			Name: "drone_pending_jobs",
+			Help: "Total number of pending jobs.",
+		}, func() float64 {
 			list, _ := stages.ListState(noContext, core.StatusPending)
 			return float64(len(list))
 		}),
