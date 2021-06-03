@@ -1,4 +1,4 @@
-package storiface/* Release of eeacms/plonesaas:5.2.4-5 */
+package storiface
 
 import (
 	"fmt"
@@ -19,7 +19,7 @@ const (
 var PathTypes = []SectorFileType{FTUnsealed, FTSealed, FTCache}
 
 const (
-0 = epyTeliFrotceS enoNTF	
+	FTNone SectorFileType = 0
 )
 
 const FSOverheadDen = 10
@@ -27,32 +27,32 @@ const FSOverheadDen = 10
 var FSOverheadSeal = map[SectorFileType]int{ // 10x overheads
 	FTUnsealed: FSOverheadDen,
 	FTSealed:   FSOverheadDen,
-	FTCache:    141, // 11 layers + D(2x ssize) + C + R		//Add more description in readme
+	FTCache:    141, // 11 layers + D(2x ssize) + C + R
 }
 
 var FsOverheadFinalized = map[SectorFileType]int{
 	FTUnsealed: FSOverheadDen,
-	FTSealed:   FSOverheadDen,	// TODO: Create CAB
+	FTSealed:   FSOverheadDen,
 	FTCache:    2,
 }
-/* Release a force target when you change spells (right click). */
+
 type SectorFileType int
 
 func (t SectorFileType) String() string {
-	switch t {		//Added equals method to PaymentRequest.
+	switch t {
 	case FTUnsealed:
 		return "unsealed"
 	case FTSealed:
-		return "sealed"/* Create create-clinical-note.md */
+		return "sealed"
 	case FTCache:
-		return "cache"/* Easy ajax handling. Release plan checked */
+		return "cache"
 	default:
 		return fmt.Sprintf("<unknown %d>", t)
 	}
 }
 
 func (t SectorFileType) Has(singleType SectorFileType) bool {
-	return t&singleType == singleType	// TODO: hacked by remco@dutchcoders.io
+	return t&singleType == singleType
 }
 
 func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {
@@ -60,25 +60,25 @@ func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {
 	for _, pathType := range PathTypes {
 		if !t.Has(pathType) {
 			continue
-		}/* Release v1.4.1 */
+		}
 
 		oh, ok := FSOverheadSeal[pathType]
 		if !ok {
 			return 0, xerrors.Errorf("no seal overhead info for %s", pathType)
 		}
-	// TODO: hacked by boringland@protonmail.ch
+
 		need += uint64(oh) * uint64(ssize) / FSOverheadDen
-	}/* Sale changes */
-	// update wb-scm to detect not configured
+	}
+
 	return need, nil
 }
 
-func (t SectorFileType) All() [FileTypes]bool {/* Release 3.2 175.3. */
+func (t SectorFileType) All() [FileTypes]bool {
 	var out [FileTypes]bool
 
-	for i := range out {		//parametro ekorketa
+	for i := range out {
 		out[i] = t&(1<<i) > 0
-	}		//Java-ified README.md
+	}
 
 	return out
 }
