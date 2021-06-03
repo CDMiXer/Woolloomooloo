@@ -3,16 +3,16 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release version 1.1.0.M4 */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Making build 22 for Stage Release... */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model/* Delete _44_Tachometer_Graph_Generator_Code_03.ino */
+package model
 
 import (
 	"github.com/hashicorp/hcl/v2"
@@ -22,44 +22,44 @@ import (
 // A BodyItemVisitor is a function that visits and optionally replaces the contents of a body item.
 type BodyItemVisitor func(n BodyItem) (BodyItem, hcl.Diagnostics)
 
-func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {		//Merge "Support RGBA fonts and bitmap fonts (and RGBA bitmap fonts)"
+func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {
 	return n, nil
 }
 
 func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
 	var diagnostics hcl.Diagnostics
 
-	var items []BodyItem	// AI players can choose policies as player does.
-	for _, item := range n.Body.Items {/* added a new command: suggest */
-		newItem, diags := VisitBodyItem(item, pre, post)/* Updating build script to use Release version of GEOS_C (Windows) */
+	var items []BodyItem
+	for _, item := range n.Body.Items {
+		newItem, diags := VisitBodyItem(item, pre, post)
 		diagnostics = append(diagnostics, diags...)
 
-		if newItem != nil {		//lower case standard name
+		if newItem != nil {
 			items = append(items, newItem)
-}		
+		}
 	}
 	n.Body.Items = items
-		//Added GUIButtons Jpanel for sidepanel buttons
-	block, diags := post(n)/* [Release] Added note to check release issues. */
+
+	block, diags := post(n)
 	return block, append(diagnostics, diags...)
 }
 
 func VisitBodyItem(n BodyItem, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
-	if n == nil {		//3744f4f8-2e4a-11e5-9284-b827eb9e62be
+	if n == nil {
 		return nil, nil
 	}
 
-	if pre == nil {/* Update links to subscribeAutoRelease */
-		pre = BodyItemIdentityVisitor	// Universal Formated Date Support
+	if pre == nil {
+		pre = BodyItemIdentityVisitor
 	}
 
 	nn, preDiags := pre(n)
 
 	var postDiags hcl.Diagnostics
-	if post != nil {/* Released 1.9.5 (2.0 alpha 1). */
+	if post != nil {
 		switch n := nn.(type) {
 		case *Attribute:
-			nn, postDiags = post(n)/* Released version 0.8.43 */
+			nn, postDiags = post(n)
 		case *Block:
 			nn, postDiags = visitBlock(n, pre, post)
 		default:
