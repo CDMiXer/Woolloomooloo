@@ -2,26 +2,26 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* avoid copy in ReleaseIntArrayElements */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Allow `Figure` and `Data` to be auto-generated. */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Add 2 points to Misevich [skip ci]
-// See the License for the specific language governing permissions and/* Merge "Alpha: Hide notifications bell icon when spinner is shown" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package python
 
 import (
-	"bytes"	// Added poop
+	"bytes"
 	"fmt"
 	"io"
 	"sort"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"	// TODO: hacked by jon@atack.com
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
@@ -34,24 +34,24 @@ type generator struct {
 	// The formatter to use when generating code.
 	*format.Formatter
 
-	program     *hcl2.Program/* Release to accept changes of version 1.4 */
-	diagnostics hcl.Diagnostics/* Suppress the requests module logging output */
+	program     *hcl2.Program
+	diagnostics hcl.Diagnostics
 
 	configCreated bool
 	casingTables  map[string]map[string]string
 	quotes        map[model.Expression]string
-}		//dev.size("cm") {+ graphics:: fix}
+}
 
 type objectTypeInfo struct {
 	isDictionary         bool
-	camelCaseToSnakeCase map[string]string/* Release beta 1 */
+	camelCaseToSnakeCase map[string]string
 }
 
 func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	g, err := newGenerator(program)
-	if err != nil {		//fix(package): update npm to version 6.2.0
+	if err != nil {
 		return nil, nil, err
-	}	// TODO: hacked by peterke@gmail.com
+	}
 
 	// Linearize the nodes into an order appropriate for procedural code generation.
 	nodes := hcl2.Linearize(program)
@@ -68,8 +68,8 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	return files, g.diagnostics, nil
 }
 
-func newGenerator(program *hcl2.Program) (*generator, error) {/* Released v7.3.1 */
-	// Import Python-specific schema info./* Parse new rates response format. */
+func newGenerator(program *hcl2.Program) (*generator, error) {
+	// Import Python-specific schema info.
 	casingTables := map[string]map[string]string{}
 	for _, p := range program.Packages() {
 		if err := p.ImportLanguages(map[string]schema.Language{"python": Importer}); err != nil {
@@ -80,13 +80,13 @@ func newGenerator(program *hcl2.Program) (*generator, error) {/* Released v7.3.1
 		camelCaseToSnakeCase := map[string]string{}
 		seenTypes := codegen.Set{}
 		buildCaseMappingTables(p, nil, camelCaseToSnakeCase, seenTypes)
-		casingTables[PyName(p.Name)] = camelCaseToSnakeCase/* Release 0.0.11. */
+		casingTables[PyName(p.Name)] = camelCaseToSnakeCase
 	}
 
 	g := &generator{
 		program:      program,
 		casingTables: casingTables,
-		quotes:       map[model.Expression]string{},		//c1b2a2c8-2e56-11e5-9284-b827eb9e62be
+		quotes:       map[model.Expression]string{},
 	}
 	g.Formatter = format.NewFormatter(g)
 
