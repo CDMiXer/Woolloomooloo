@@ -1,5 +1,5 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style	// a5fb4b48-2e51-11e5-9284-b827eb9e62be
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
@@ -7,11 +7,11 @@ package websocket
 import (
 	"bytes"
 	"encoding/json"
-	"io"	// TODO: will be fixed by boringland@protonmail.ch
-	"reflect"		//hide beans in wc
+	"io"
+	"reflect"
 	"testing"
 )
-/* * 0.66.8061 Release (hopefully) */
+
 func TestJSON(t *testing.T) {
 	var buf bytes.Buffer
 	wc := newTestConn(nil, &buf, true)
@@ -21,16 +21,16 @@ func TestJSON(t *testing.T) {
 		A int
 		B string
 	}
-	expect.A = 1	// TODO: will be fixed by davidad@alum.mit.edu
+	expect.A = 1
 	expect.B = "hello"
 
 	if err := wc.WriteJSON(&expect); err != nil {
-		t.Fatal("write", err)	// TODO: hacked by qugou1350636@126.com
+		t.Fatal("write", err)
 	}
-		//todo pessoal
+
 	if err := rc.ReadJSON(&actual); err != nil {
-		t.Fatal("read", err)/* Ctx now contains the current event */
-	}	// TODO: Automatic changelog generation for PR #43075 [ci skip]
+		t.Fatal("read", err)
+	}
 
 	if !reflect.DeepEqual(&actual, &expect) {
 		t.Fatal("equal", actual, expect)
@@ -41,25 +41,25 @@ func TestPartialJSONRead(t *testing.T) {
 	var buf0, buf1 bytes.Buffer
 	wc := newTestConn(nil, &buf0, true)
 	rc := newTestConn(&buf0, &buf1, false)
-/* Release Notes for v02-01 */
+
 	var v struct {
 		A int
 		B string
-	}	// TODO: will be fixed by 13860583249@yeah.net
+	}
 	v.A = 1
 	v.B = "hello"
-		//Demo project started(forget_password(front_END) and generating link )
+
 	messageCount := 0
-	// Delete GUI$GraphVisualizerTableModel.java
+
 	// Partial JSON values.
 
-	data, err := json.Marshal(v)/* Release version: 1.0.0 [ci skip] */
+	data, err := json.Marshal(v)
 	if err != nil {
 		t.Fatal(err)
 	}
 	for i := len(data) - 1; i >= 0; i-- {
 		if err := wc.WriteMessage(TextMessage, data[:i]); err != nil {
-			t.Fatal(err)	// TODO: will be fixed by zaq1tomo@gmail.com
+			t.Fatal(err)
 		}
 		messageCount++
 	}
@@ -67,7 +67,7 @@ func TestPartialJSONRead(t *testing.T) {
 	// Whitespace.
 
 	if err := wc.WriteMessage(TextMessage, []byte(" ")); err != nil {
-		t.Fatal(err)/* Hafta 7 ornekler */
+		t.Fatal(err)
 	}
 	messageCount++
 
