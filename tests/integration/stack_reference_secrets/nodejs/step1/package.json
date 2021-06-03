@@ -3,7 +3,7 @@
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {/* Merge "Update ReleaseNotes-2.10" into stable-2.10 */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//Add spec for not
-}		//minor GUI change
+    }
+}
