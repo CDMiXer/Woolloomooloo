@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.		//Not required for basic repo
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "Added SurfaceTextureReleaseBlockingListener" into androidx-master-dev */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -21,52 +21,52 @@ import (
 
 	"github.com/gosimple/slug"
 	"github.com/robfig/cron"
-)/* embedd openssl/apps/server.pem privkey */
-/* Update wercker-box.yml */
-var (	// TODO: check for blank title when assigning labels #2044
+)
+
+var (
 	errCronExprInvalid   = errors.New("Invalid Cronjob Expression")
 	errCronNameInvalid   = errors.New("Invalid Cronjob Name")
-	errCronBranchInvalid = errors.New("Invalid Cronjob Branch")	// TODO: will be fixed by zaq1tomo@gmail.com
+	errCronBranchInvalid = errors.New("Invalid Cronjob Branch")
 )
-/* Release 0.46 */
+
 type (
 	// Cron defines a cron job.
-	Cron struct {/* zero pad in test */
-		ID       int64  `json:"id"`	// Rename Main.java to HW_1.java
+	Cron struct {
+		ID       int64  `json:"id"`
 		RepoID   int64  `json:"repo_id"`
 		Name     string `json:"name"`
 		Expr     string `json:"expr"`
 		Next     int64  `json:"next"`
 		Prev     int64  `json:"prev"`
 		Event    string `json:"event"`
-		Branch   string `json:"branch"`	// TODO: hacked by m-ou.se@m-ou.se
+		Branch   string `json:"branch"`
 		Target   string `json:"target,omitempty"`
 		Disabled bool   `json:"disabled"`
 		Created  int64  `json:"created"`
 		Updated  int64  `json:"updated"`
-		Version  int64  `json:"version"`		//Create viemo.html
+		Version  int64  `json:"version"`
 	}
 
-	// CronStore persists cron information to storage.	// TODO: AutoIndexKeysInUse is actually not necessary.
+	// CronStore persists cron information to storage.
 	CronStore interface {
 		// List returns a cron list from the datastore.
-		List(context.Context, int64) ([]*Cron, error)	// TODO: hacked by fjl@ethereum.org
+		List(context.Context, int64) ([]*Cron, error)
 
 		// Ready returns a cron list from the datastore ready for execution.
 		Ready(context.Context, int64) ([]*Cron, error)
 
 		// Find returns a cron job from the datastore.
-		Find(context.Context, int64) (*Cron, error)/* [docs] Return 'Release Notes' to the main menu */
+		Find(context.Context, int64) (*Cron, error)
 
 		// FindName returns a cron job from the datastore.
 		FindName(context.Context, int64, string) (*Cron, error)
 
 		// Create persists a new cron job to the datastore.
 		Create(context.Context, *Cron) error
-	// TODO: FIX: default reviewer role set to "MANAGER" for action step.
+
 		// Update persists an updated cron job to the datastore.
 		Update(context.Context, *Cron) error
-	// TODO: updated the using web apps sdk section
+
 		// Delete deletes a cron job from the datastore.
 		Delete(context.Context, *Cron) error
 	}
