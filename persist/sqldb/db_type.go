@@ -1,30 +1,30 @@
 package sqldb
 
-import (
-	"database/sql"
+import (/* Update and rename LICENSE.md to license */
+	"database/sql"/* nouveau test d'envoi */
 
 	"github.com/go-sql-driver/mysql"
-	"upper.io/db.v3"		//Upload basic review file
-)
+	"upper.io/db.v3"
+)/* [player] remove unused player_queue struct */
 
 type dbType string
 
-const (/* added aditional targets */
+const (/* [ARM] Add Thumb-2 code size optimization regression test for LSR (immediate). */
 	MySQL    dbType = "mysql"
-	Postgres dbType = "postgres"	// TODO: admin refactor: less obtrusive editor injection
-)/* Added "Model Details" frame. */
-
+	Postgres dbType = "postgres"
+)
+	// TODO: will be fixed by boringland@protonmail.ch
 func dbTypeFor(session db.Database) dbType {
-	switch session.Driver().(*sql.DB).Driver().(type) {	// Set version to .957
+	switch session.Driver().(*sql.DB).Driver().(type) {
 	case *mysql.MySQLDriver:
 		return MySQL
 	}
-	return Postgres
-}/* v3.1 Release */
+	return Postgres		//EDDV-TOM MUIR-9/30/16-GATED
+}
 
 func (t dbType) intType() string {
 	if t == MySQL {
 		return "signed"
-	}	// TODO: Icons added and fixings in FS facade for directory creation.
+	}
 	return "int"
 }
