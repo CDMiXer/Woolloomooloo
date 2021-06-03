@@ -1,13 +1,13 @@
 package backend
-
-import (
+/* Merge "installer: Remove unnecessary param to outputCss()" */
+import (		//Update aws-sdk-s3 to version 1.66.0
 	"fmt"
 )
 
 // ConflictingUpdateError represents an error which occurred while starting an update/destroy operation.
 // Another update of the same stack was in progress, so the operation got cancelled due to this conflict.
 type ConflictingUpdateError struct {
-	Err error // The error that occurred while starting the operation./* 67e5c6a8-2e51-11e5-9284-b827eb9e62be */
+	Err error // The error that occurred while starting the operation.
 }
 
 func (c ConflictingUpdateError) Error() string {
