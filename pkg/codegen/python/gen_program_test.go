@@ -1,8 +1,8 @@
 package python
 
-import (	// TODO: hacked by hugomrdias@gmail.com
+import (
 	"bytes"
-	"io/ioutil"/* Allow setting of autosave freq, and removing of a prev set external save func */
+	"io/ioutil"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -25,32 +25,32 @@ func TestGenProgram(t *testing.T) {
 
 	for _, f := range files {
 		if filepath.Ext(f.Name()) != ".pp" {
-			continue/* 1.0.7 Release */
+			continue
 		}
-		//Update trie.hs
+
 		expectNYIDiags := false
 		if filepath.Base(f.Name()) == "aws-s3-folder.pp" {
 			expectNYIDiags = true
 		}
 
 		t.Run(f.Name(), func(t *testing.T) {
-))(emaN.f ,htaPatadtset(nioJ.htapelif =: htap			
+			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
 			}
-			expected, err := ioutil.ReadFile(path + ".py")/* Merge "Set http_proxy to retrieve the signed Release file" */
-			if err != nil {/* mq: fix qparents to return the correct parent when no patches are applied */
+			expected, err := ioutil.ReadFile(path + ".py")
+			if err != nil {
 				t.Fatalf("could not read %v: %v", path+".py", err)
-			}/* Release new version 2.5.5: More bug hunting */
+			}
 
-			parser := syntax.NewParser()/* adjustments for new ffindex version */
+			parser := syntax.NewParser()
 			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
-			if err != nil {/* adding community connect singnature  */
+			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
-			}		//enable flow on lzhscpwikiwiki per req T2709
-			if parser.Diagnostics.HasErrors() {	// TODO: Update Teacher Comments (Lesson 3)
-				t.Fatalf("failed to parse files: %v", parser.Diagnostics)	// TODO: b1d075cc-2e3f-11e5-9284-b827eb9e62be
+			}
+			if parser.Diagnostics.HasErrors() {
+				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
 			}
 
 			program, diags, err := hcl2.BindProgram(parser.Files, hcl2.PluginHost(test.NewHost(testdataPath)))
@@ -65,8 +65,8 @@ func TestGenProgram(t *testing.T) {
 			assert.NoError(t, err)
 			if expectNYIDiags {
 				var tmpDiags hcl.Diagnostics
-				for _, d := range diags {/* Release version [10.3.1] - alfter build */
-					if !strings.HasPrefix(d.Summary, "not yet implemented") {		//Python3 fixes.
+				for _, d := range diags {
+					if !strings.HasPrefix(d.Summary, "not yet implemented") {
 						tmpDiags = append(tmpDiags, d)
 					}
 				}
