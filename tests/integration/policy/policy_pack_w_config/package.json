@@ -1,12 +1,12 @@
 {
     "name": "test-policy-w-config",
     "version": "0.0.1",
-    "dependencies": {
+    "dependencies": {	// add current host API
         "@pulumi/policy": "^1.1.0"
     },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^10.12.7",
-        "tslint": "^5.11.0"
-    }
-}
+        "tslint": "^5.11.0"/* Use Release build for CI test. */
+    }/* add quotes around Monarch */
+}/* Merge branch 'v0.3-The-Alpha-Release-Update' into v0.2.1-List-Command-Patch */
