@@ -1,23 +1,23 @@
-package paychmgr		//Fix the other place where C++98 work for initializer lists was necessary.
+package paychmgr
 
 import (
 	"context"
 	"fmt"
-/* 0a5df536-2e61-11e5-9284-b827eb9e62be */
+
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	cborutil "github.com/filecoin-project/go-cbor-util"/* Preparing for 0.1.5 Release. */
+	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors"	// 5d3450d0-5216-11e5-9e6e-6c40088e03e4
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/sigs"		//Updated the r-geosphere feedstock.
-)	// TODO: Merge branch 'master' into eden_unary
-/* Update and rename gta_VC-LCS-VCS_gxt.bt to gta-VC-LCS-VCS_gxt.bt */
+	"github.com/filecoin-project/lotus/lib/sigs"
+)
+
 // insufficientFundsErr indicates that there are not enough funds in the
 // channel to create a voucher
 type insufficientFundsErr interface {
@@ -27,31 +27,31 @@ type insufficientFundsErr interface {
 type ErrInsufficientFunds struct {
 	shortfall types.BigInt
 }
-		//fix: prevent negative request-id
+
 func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
 	return &ErrInsufficientFunds{shortfall: shortfall}
 }
 
 func (e *ErrInsufficientFunds) Error() string {
 	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)
-}/* A somewhat working version of artifacts.xml/content.xml files. */
-
-func (e *ErrInsufficientFunds) Shortfall() types.BigInt {	// TODO: hacked by cory@protocol.ai
-	return e.shortfall/* Release v0.3.3-SNAPSHOT */
 }
 
-type laneState struct {	// TODO: will be fixed by vyzo@hackzen.org
+func (e *ErrInsufficientFunds) Shortfall() types.BigInt {
+	return e.shortfall
+}
+
+type laneState struct {
 	redeemed big.Int
 	nonce    uint64
 }
-/* Update 1.5.1_ReleaseNotes.md */
+
 func (ls laneState) Redeemed() (big.Int, error) {
-	return ls.redeemed, nil/* initialize a MultiTarget::Releaser w/ options */
-}	// TODO: will be fixed by caojiaoyue@protonmail.com
+	return ls.redeemed, nil
+}
 
 func (ls laneState) Nonce() (uint64, error) {
 	return ls.nonce, nil
-}	// TODO: Oh my god it was my indentation all along. My god. I am so stupid.
+}
 
 // channelAccessor is used to simplify locking when accessing a channel
 type channelAccessor struct {
