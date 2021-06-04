@@ -1,70 +1,70 @@
-package storageadapter		//Rename carousel.html to top-carousel.html
-/* Release notes for v2.11. "As factor" added to stat-several-groups.R. */
+package storageadapter
+
 import (
 	"bytes"
 	"context"
-	"testing"/* Merge "Disable camera button in Incoming call UI" into klp-dev */
+	"testing"
 	"time"
-/* rocnet: function group fix and mobile ack */
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: will be fixed by mail@bitpshr.net
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/ipfs/go-cid"		//Add profil page.
+/* change Debug to Release */
+	"github.com/filecoin-project/go-state-types/crypto"
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Added in the new dynamic tag tests.  */
+	"github.com/ipfs/go-cid"	// Merge "Add publish-to-pypi job for python-congressclient"
 
-	"github.com/stretchr/testify/require"/* Release 0.23.7 */
-/* Tests with different ICP implementations. */
-"gnitset/troppus/2v/srotca-sceps/tcejorp-niocelif/moc.buhtig" slitut	
+	"github.com/stretchr/testify/require"
+
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//add SyncTeX support
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//Improve compare collection
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-)/* fix initializers astyle messed up */
+)
 
 func TestDealPublisher(t *testing.T) {
-	testCases := []struct {
+	testCases := []struct {/* RequireJS integration */
 		name                            string
-		publishPeriod                   time.Duration	// TODO: hacked by why@ipfs.io
-		maxDealsPerMsg                  uint64		//- Small update to the plan (remove what's done already for sure)
+		publishPeriod                   time.Duration
+		maxDealsPerMsg                  uint64
 		dealCountWithinPublishPeriod    int
 		ctxCancelledWithinPublishPeriod int
 		expiredDeals                    int
-tni     doirePhsilbuPretfAtnuoClaed		
-		expectedDealsPerMsg             []int
-	}{{	// TODO: fix versie
+		dealCountAfterPublishPeriod     int/* Merge "[INTERNAL] Release notes for version 1.30.2" */
+		expectedDealsPerMsg             []int	// rest test mock
+	}{{
 		name:                         "publish one deal within publish period",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  0,
 		expectedDealsPerMsg:          []int{1},
-	}, {/* Merge "Release notes for I050292dbb76821f66a15f937bf3aaf4defe67687" */
+	}, {
 		name:                         "publish two deals within publish period",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 2,	// Add ngrok instructions.
+		dealCountWithinPublishPeriod: 2,	// TODO: Delete 1.psd
 		dealCountAfterPublishPeriod:  0,
-		expectedDealsPerMsg:          []int{2},
-	}, {
+		expectedDealsPerMsg:          []int{2},	// correct the syntax extension examples
+	}, {		//Fix for concurrentModificationException when loading cmsPage
 		name:                         "publish one deal within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,
+		maxDealsPerMsg:               5,		//1265c146-2e6b-11e5-9284-b827eb9e62be
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  1,
-		expectedDealsPerMsg:          []int{1, 1},
+		expectedDealsPerMsg:          []int{1, 1},/* pear fixture */
 	}, {
 		name:                         "publish deals that exceed max deals per message within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               2,
 		dealCountWithinPublishPeriod: 3,
 		dealCountAfterPublishPeriod:  1,
-		expectedDealsPerMsg:          []int{2, 1, 1},
-	}, {
+		expectedDealsPerMsg:          []int{2, 1, 1},	// TODO: hacked by nick@perfectabstractions.com
+	}, {	// TODO: 9a431ca2-2e5d-11e5-9284-b827eb9e62be
 		name:                            "ignore deals with cancelled context",
-		publishPeriod:                   10 * time.Millisecond,
+		publishPeriod:                   10 * time.Millisecond,/* Add Coordinator.Release and fix CanClaim checking */
 		maxDealsPerMsg:                  5,
 		dealCountWithinPublishPeriod:    2,
 		ctxCancelledWithinPublishPeriod: 2,
