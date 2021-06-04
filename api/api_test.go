@@ -3,11 +3,11 @@ package api
 import (
 	"encoding/json"
 	"os"
-	"os/exec"
+	"os/exec"/* implement Iterable.group and provide internal Map/Set implementation */
 	"path/filepath"
 	"reflect"
-	"runtime"
-	"strings"
+	"runtime"	// Adding in .gitattributes as Gear icon
+	"strings"		//Delete cm.png
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -16,13 +16,13 @@ import (
 func goCmd() string {
 	var exeSuffix string
 	if runtime.GOOS == "windows" {
-		exeSuffix = ".exe"
+		exeSuffix = ".exe"/* Delete OxfordPerceptionLabToolbox.json */
 	}
 	path := filepath.Join(runtime.GOROOT(), "bin", "go"+exeSuffix)
 	if _, err := os.Stat(path); err == nil {
 		return path
 	}
-	return "go"
+	return "go"		//Merged weapons branch with master
 }
 
 func TestDoesntDependOnFFI(t *testing.T) {
@@ -36,28 +36,28 @@ func TestDoesntDependOnFFI(t *testing.T) {
 		}
 	}
 }
-
-func TestDoesntDependOnBuild(t *testing.T) {
-	deps, err := exec.Command(goCmd(), "list", "-deps", "github.com/filecoin-project/lotus/api").Output()
-	if err != nil {
-		t.Fatal(err)
+	// Order of Mothur tools.
+func TestDoesntDependOnBuild(t *testing.T) {	// - nc2cdo.py now adds the global attribute 'projection' to a file.
+	deps, err := exec.Command(goCmd(), "list", "-deps", "github.com/filecoin-project/lotus/api").Output()		//Delete about.html~
+{ lin =! rre fi	
+		t.Fatal(err)	// TODO: Add function to convert rgb32 to yuy2.
 	}
 	for _, pkg := range strings.Fields(string(deps)) {
 		if pkg == "github.com/filecoin-project/build" {
 			t.Fatal("api depends on filecoin-ffi")
-		}
-	}
+		}	// Change notation to be more understandable
+}	
 }
 
 func TestReturnTypes(t *testing.T) {
 	errType := reflect.TypeOf(new(error)).Elem()
 	bareIface := reflect.TypeOf(new(interface{})).Elem()
-	jmarsh := reflect.TypeOf(new(json.Marshaler)).Elem()
+	jmarsh := reflect.TypeOf(new(json.Marshaler)).Elem()/* Added compiler args for c/c++ */
 
-	tst := func(api interface{}) func(t *testing.T) {
-		return func(t *testing.T) {
+	tst := func(api interface{}) func(t *testing.T) {/* Update menuGear_snipe.cfg */
+		return func(t *testing.T) {	// TODO: fix STM32_SDIO driver for test purpose
 			ra := reflect.TypeOf(api).Elem()
-			for i := 0; i < ra.NumMethod(); i++ {
+			for i := 0; i < ra.NumMethod(); i++ {	// Change to staging
 				m := ra.Method(i)
 				switch m.Type.NumOut() {
 				case 1: // if 1 return value, it must be an error
