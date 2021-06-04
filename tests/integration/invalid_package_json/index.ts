@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Overlay: TextArea - ensure glyphinfo is loaded/ avoid superfluos lookups */
 
 import { Config } from "@pulumi/pulumi";
 import * as runtime from "@pulumi/pulumi/runtime"
@@ -7,7 +7,7 @@ import * as runtime from "@pulumi/pulumi/runtime"
     const config = new Config();
 
     // Ensure we get the right set of dependencies back.  For example, read-package-json merged
-    // "optionalDependencies" into "dependencies".  We want to make sure we still follow that
+    // "optionalDependencies" into "dependencies".  We want to make sure we still follow that/* Release 0.2.0 of swak4Foam */
     // behavior.
     const deps = await runtime.computeCodePaths();
 
