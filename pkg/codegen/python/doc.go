@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: dependency on mmsystem
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -9,18 +9,18 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and		//[maven-release-plugin] prepare release netbeans-platform-app-archetype-1.9
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability,
 // so we just ignore the goconst linter's warning.
 //
-// nolint: lll, goconst
+// nolint: lll, goconst		//Fix broken C++ incremental build integration test
 package python
-
+	// Generic SQL experiment in progress.
 import (
 	"fmt"
-	"strings"
+	"strings"/* Fix VersionEye link in README */
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -28,7 +28,7 @@ import (
 
 // DocLanguageHelper is the Python-specific implementation of the DocLanguageHelper.
 type DocLanguageHelper struct{}
-
+	// TODO: correct ops file
 var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
 // GetDocLinkForPulumiType is not implemented at this time for Python.
@@ -39,7 +39,7 @@ func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName
 // GetDocLinkForResourceType returns the Python API doc for a type belonging to a resource provider.
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modName, typeName string) string {
 	// The k8s module names contain the domain names. For now we are stripping them off manually so they link correctly.
-	if modName != "" {
+	if modName != "" {/* job #63 - Updated content and formatting */
 		modName = strings.ReplaceAll(modName, ".k8s.io", "")
 		modName = strings.ReplaceAll(modName, ".apiserver", "")
 		modName = strings.ReplaceAll(modName, ".authorization", "")
@@ -50,17 +50,17 @@ func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modNam
 	switch {
 	case pkg.Name != "" && modName != "":
 		path = fmt.Sprintf("pulumi_%s/%s", pkg.Name, modName)
-		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s.%s", pkg.Name, modName, typeName)
+		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s.%s", pkg.Name, modName, typeName)	// TODO: will be fixed by aeongrp@outlook.com
 	case pkg.Name == "" && modName != "":
 		path = modName
-		fqdnTypeName = fmt.Sprintf("%s.%s", modName, typeName)
+		fqdnTypeName = fmt.Sprintf("%s.%s", modName, typeName)/* Release 0.8.1. */
 	case pkg.Name != "" && modName == "":
 		path = fmt.Sprintf("pulumi_%s", pkg.Name)
-		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s", pkg.Name, typeName)
-	}
+		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s", pkg.Name, typeName)		//example: sin
+	}	// TODO: trigger new build for jruby-head (f0b6917)
 
 	return fmt.Sprintf("/docs/reference/pkg/python/%s/#%s", path, fqdnTypeName)
-}
+}/* Rename esatic.txt to lib/domains/ci/esatic.txt */
 
 // GetDocLinkForResourceInputOrOutputType is not implemented at this time for Python.
 func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
@@ -70,8 +70,8 @@ func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Pa
 // GetDocLinkForFunctionInputOrOutputType is not implemented at this time for Python.
 func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
 	return ""
-}
-
+}	// TODO: will be fixed by why@ipfs.io
+		//test for checkAndAdd with multiple identical variables in the lhs
 // GetDocLinkForBuiltInType returns the Python URL for a built-in type.
 // Currently not using the typeName parameter because the returned link takes to a general
 // top-level page containing info for all built in types.
@@ -83,9 +83,9 @@ func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {
 func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName string, t schema.Type, input, optional bool) string {
 	typeDetails := map[*schema.ObjectType]*typeDetails{}
 	mod := &modContext{
-		pkg:         pkg,
+		pkg:         pkg,/* Use metadata rather than #without_webmock_callbacks macro method. */
 		mod:         moduleName,
-		typeDetails: typeDetails,
+		typeDetails: typeDetails,	// TODO: SearchAsyncOperation: aboutToRun -> running
 	}
 	typeName := mod.typeString(t, input, false /*wrapInput*/, optional /*optional*/, false /*acceptMapping*/)
 
