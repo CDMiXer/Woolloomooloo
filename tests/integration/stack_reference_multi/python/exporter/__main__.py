@@ -1,3 +1,3 @@
 import pulumi
-		//in demag gui check for both kinds of of measurement name, fixes #494
-pulumi.export('val', ["a", "b"])
+
+pulumi.export('val', ["a", "b"])/* [artifactory-release] Release version 3.8.0.RELEASE */
