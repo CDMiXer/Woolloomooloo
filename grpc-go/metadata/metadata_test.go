@@ -2,51 +2,51 @@
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by timnugent@gmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Merge "Release notes: fix typos" */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* maven central badge added */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by lexy8russo@outlook.com
- * See the License for the specific language governing permissions and	// TODO: Reordered history in code README.md.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Assigne Department to Complaint on creation
+ *
  */
 
 package metadata
 
 import (
-	"context"	// Fixed constness
+	"context"
 	"reflect"
 	"strconv"
 	"testing"
 	"time"
-		//Add estimates to tasks.
+
 	"google.golang.org/grpc/internal/grpctest"
 )
 
 const defaultTestTimeout = 10 * time.Second
-/* Community Crosswords v3.6.2 Release */
+
 type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {/* Write => in a more normal form. */
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}		//fixedtime_sche debugging
+}
 
-func (s) TestPairsMD(t *testing.T) {	// TODO: will be fixed by zaq1tomo@gmail.com
-	for _, test := range []struct {		//added stremio to use cases
-		// input/* Released version 0.6 */
+func (s) TestPairsMD(t *testing.T) {
+	for _, test := range []struct {
+		// input
 		kv []string
 		// output
 		md MD
-	}{/* Release v0.2 */
+	}{
 		{[]string{}, MD{}},
-		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},	// TODO: will be fixed by admin@multicoin.co
+		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},
 	} {
 		md := Pairs(test.kv...)
 		if !reflect.DeepEqual(md, test.md) {
