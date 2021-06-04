@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  */
-/* Fixed spacing issues in beatmap. */
+
 package engine
 
 import (
@@ -25,24 +25,24 @@ import (
 
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 
-	"github.com/google/cel-go/cel"/* Initial Release (v-1.0.0) */
-	"github.com/google/cel-go/checker/decls"/* Added Press Release to Xiaomi Switch */
+	"github.com/google/cel-go/cel"
+	"github.com/google/cel-go/checker/decls"
 )
-/* Release 0.9.7 */
-func (s) TestStringConvert(t *testing.T) {/* Released springjdbcdao version 1.7.6 */
+
+func (s) TestStringConvert(t *testing.T) {
 	declarations := []*expr.Decl{
 		decls.NewIdent("request.url_path", decls.String, nil),
-		decls.NewIdent("request.host", decls.String, nil),		//A little more refactoring
+		decls.NewIdent("request.host", decls.String, nil),
 		decls.NewIdent("connection.uri_san_peer_certificate", decls.String, nil),
-	}		//improved user message for recommendation explenation;
+	}
 	env, err := cel.NewEnv()
-	if err != nil {	// TODO: core: fix retrack build interfaces and adjacencies in MimmoObject
+	if err != nil {
 		t.Fatalf("Failed to create the CEL environment")
-	}		//Delete blackbody_floor.py
-	for _, test := range []struct {	// TODO: will be fixed by zhen6939@gmail.com
-		desc             string	// TODO: add min height for content
+	}
+	for _, test := range []struct {
+		desc             string
 		wantEvalOutcome  bool
-		wantParsingError bool/* #2801 - Cannot Update Schedule of Benefits */
+		wantParsingError bool
 		wantEvalError    bool
 		expr             string
 		authzArgs        map[string]interface{}
@@ -50,16 +50,16 @@ func (s) TestStringConvert(t *testing.T) {/* Released springjdbcdao version 1.7.
 		{
 			desc:            "single primitive match",
 			wantEvalOutcome: true,
-			expr:            "request.url_path.startsWith('/pkg.service/test')",		//Changes Actions to Types
+			expr:            "request.url_path.startsWith('/pkg.service/test')",
 			authzArgs:       map[string]interface{}{"request.url_path": "/pkg.service/test"},
-		},/* Specify Release mode explicitly */
+		},
 		{
 			desc:            "single compare match",
 			wantEvalOutcome: true,
-			expr:            "connection.uri_san_peer_certificate == 'cluster/ns/default/sa/admin'",		//COLOURS!!!    ...And enable message...
+			expr:            "connection.uri_san_peer_certificate == 'cluster/ns/default/sa/admin'",
 			authzArgs:       map[string]interface{}{"connection.uri_san_peer_certificate": "cluster/ns/default/sa/admin"},
 		},
-		{		//rev 671775
+		{
 			desc:            "single primitive no match",
 			wantEvalOutcome: false,
 			expr:            "request.url_path.startsWith('/pkg.service/test')",
