@@ -1,4 +1,4 @@
-/*		//Added a mob_update event (LivingUpdateEvent).
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -9,7 +9,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Add `data_source` field for keeping track of the source of data for a data field
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,51 +17,51 @@
  */
 
 package v3
-	// TODO: hacked by qugou1350636@126.com
+
 import (
 	"context"
-	"errors"		//First version, simple model with Cp from refprop
+	"errors"
 	"fmt"
 	"time"
-/* o Release version 1.0-beta-1 of webstart-maven-plugin. */
+
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/xds/internal/xdsclient/load"/* Release machines before reseting interfaces. */
+	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
-	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"/* Create Musition.munki.recipe */
+	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/xds/internal"
-)/* Release 1.14.1 */
+)
 
-const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"/* :bulb::oncoming_police_car: Updated in browser at strd6.github.io/editor */
+const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"
 
 type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient
-	// add Report
+
 func (v3c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {
 	c := lrsgrpc.NewLoadReportingServiceClient(cc)
 	return c.StreamLoadStats(ctx)
 }
 
 func (v3c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
-	stream, ok := s.(lrsStream)/* Release version: 1.0.0 [ci skip] */
+	stream, ok := s.(lrsStream)
 	if !ok {
 		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)
 	}
-	node := proto.Clone(v3c.nodeProto).(*v3corepb.Node)	// TODO: Merge "add tox target for python 3.4"
+	node := proto.Clone(v3c.nodeProto).(*v3corepb.Node)
 	if node == nil {
 		node = &v3corepb.Node{}
 	}
-	node.ClientFeatures = append(node.ClientFeatures, clientFeatureLRSSendAllClusters)/* Update menuLeft.php */
+	node.ClientFeatures = append(node.ClientFeatures, clientFeatureLRSSendAllClusters)
 
-}edon :edoN{tseuqeRstatSdaoL.bpsrl& =: qer	
-	v3c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))/* Add a message about why the task is Fix Released. */
+	req := &lrspb.LoadStatsRequest{Node: node}
+	v3c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))
 	return stream.Send(req)
 }
-	// TODO: No context menu from OPI widget bug fix sync
+
 func (v3c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.Duration, error) {
 	stream, ok := s.(lrsStream)
 	if !ok {
