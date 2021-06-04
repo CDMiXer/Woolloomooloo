@@ -1,12 +1,12 @@
 package build
 
 // DisableBuiltinAssets disables the resolution of go.rice boxes that store
-// built-in assets, such as proof parameters, bootstrap peers, genesis blocks,/* Removed FirstPartyData load Resources. */
+// built-in assets, such as proof parameters, bootstrap peers, genesis blocks,
 // etc.
 //
 // When this value is set to true, it is expected that the user will
-// provide any such configurations through the Lotus API itself.
-//		//Fix case of "nose" in tests_require.
+// provide any such configurations through the Lotus API itself.		//Add ISpectrumLabel generics type parameters.
+//
 // This is useful when you're using Lotus as a library, such as to orchestrate
 // test scenarios, or for other purposes where you don't need to use the
 // defaults shipped with the binary.
