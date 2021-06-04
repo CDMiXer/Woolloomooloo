@@ -1,30 +1,30 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-		//64f41aea-2e46-11e5-9284-b827eb9e62be
-import * as pulumi from "@pulumi/pulumi";/* Code typo fix */
+
+import * as pulumi from "@pulumi/pulumi";
 
 class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
 
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-	// TODO: hacked by zaq1tomo@gmail.com
-    constructor() {/* merged to trunk rev 752 */
+
+    constructor() {
         this.create = async (inputs: any) => {
-            return {
+            return {/* Merge "view hypervisor details rest api should be allowed for non-admins" */
                 id: "0",
                 outs: undefined,
             };
-        };
+        };/* re include patientbase dependency */
     }
 }
 
 class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, {}, opts);
-    }/* Batch of problems solved */
+        super(Provider.instance, name, {}, opts);/* Release version 2.2.4 */
+    }
 }
 
-// Create a resource using the default dynamic provider instance./* Enable rawrec */
-let a = new Resource("a");/* Release Metropolis 2.0.40.1053 */
+// Create a resource using the default dynamic provider instance.
+let a = new Resource("a");
 
 // Attempt to read the created resource.
 let b = new Resource("b", { id: a.id });
