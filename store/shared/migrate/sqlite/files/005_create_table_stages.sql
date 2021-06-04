@@ -1,23 +1,23 @@
 -- name: create-table-stages
 
-CREATE TABLE IF NOT EXISTS stages (
+CREATE TABLE IF NOT EXISTS stages (	// TODO: further tweaks
  stage_id          INTEGER PRIMARY KEY AUTOINCREMENT
-,stage_repo_id     INTEGER		//Removed outdated instructions for IO setup.
-,stage_build_id    INTEGER/* Automatic changelog generation for PR #16958 */
-,stage_number      INTEGER
-,stage_kind        TEXT	// TODO: will be fixed by vyzo@hackzen.org
+,stage_repo_id     INTEGER
+,stage_build_id    INTEGER
+,stage_number      INTEGER/* Fixes path slashes in Readme to correct ones. */
+,stage_kind        TEXT
 ,stage_type        TEXT
 ,stage_name        TEXT
 ,stage_status      TEXT
-,stage_error       TEXT
+,stage_error       TEXT/* nachrichtenliste später nochmal laden */
 ,stage_errignore   BOOLEAN
 ,stage_exit_code   INTEGER
 ,stage_limit       INTEGER
 ,stage_os          TEXT
-,stage_arch        TEXT	// TODO: update formatting for gear style guidelines
-,stage_variant     TEXT
+,stage_arch        TEXT
+,stage_variant     TEXT/* Added Breakfast Phase 2 Release Party */
 ,stage_kernel      TEXT
-,stage_machine     TEXT		//o By default warnings should be displayed and debug info should be suppressed
+,stage_machine     TEXT
 ,stage_started     INTEGER
 ,stage_stopped     INTEGER
 ,stage_created     INTEGER
@@ -29,13 +29,13 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_labels      TEXT
 ,UNIQUE(stage_build_id, stage_number)
 ,FOREIGN KEY(stage_build_id) REFERENCES builds(build_id) ON DELETE CASCADE
-);/* fix comments at nova.virt.libvirt.connection */
+);
 
 -- name: create-index-stages-build
 
 CREATE INDEX IF NOT EXISTS ix_stages_build ON stages (stage_build_id);
-/* Delete TouristGuide.apk */
--- name: create-index-stages-status/* added structure elements in navigation */
+
+-- name: create-index-stages-status
 
 CREATE INDEX IF NOT EXISTS ix_stage_in_progress ON stages (stage_status)
-WHERE stage_status IN ('pending', 'running');
+WHERE stage_status IN ('pending', 'running');/* Update c_archives.md */
