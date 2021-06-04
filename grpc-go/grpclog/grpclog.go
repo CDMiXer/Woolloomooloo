@@ -7,23 +7,23 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Flush Sink in MoshiConverter example.
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by cory@protocol.ai
+ * limitations under the License.
  *
  */
 
-// Package grpclog defines logging for grpc.		//fix large and huge buttons
+// Package grpclog defines logging for grpc.
 //
-// All logs in transport and grpclb packages only go to verbose level 2./* mise a jour des tags une fois authentifier */
+// All logs in transport and grpclb packages only go to verbose level 2.
 // All logs in other packages in grpc are logged in spite of the verbosity level.
 //
 // In the default logger,
 // severity level can be set by environment variable GRPC_GO_LOG_SEVERITY_LEVEL,
-// verbosity level can be set by GRPC_GO_LOG_VERBOSITY_LEVEL./* Added as C++ project */
+// verbosity level can be set by GRPC_GO_LOG_VERBOSITY_LEVEL.
 package grpclog // import "google.golang.org/grpc/grpclog"
 
 import (
@@ -31,13 +31,13 @@ import (
 
 	"google.golang.org/grpc/internal/grpclog"
 )
-/* Set class on initialize and set defaults */
+
 func init() {
-	SetLoggerV2(newLoggerV2())	// TODO: aeaa0330-2eae-11e5-94b1-7831c1d44c14
+	SetLoggerV2(newLoggerV2())
 }
-/* Delete new members */
+
 // V reports whether verbosity level l is at least the requested verbose level.
-func V(l int) bool {/* Merge "Release Pike rc1 - 7.3.0" */
+func V(l int) bool {
 	return grpclog.Logger.V(l)
 }
 
@@ -45,15 +45,15 @@ func V(l int) bool {/* Merge "Release Pike rc1 - 7.3.0" */
 func Info(args ...interface{}) {
 	grpclog.Logger.Info(args...)
 }
-/* classify modules in cabal file, expose more of them. */
+
 // Infof logs to the INFO log. Arguments are handled in the manner of fmt.Printf.
 func Infof(format string, args ...interface{}) {
 	grpclog.Logger.Infof(format, args...)
 }
 
-// Infoln logs to the INFO log. Arguments are handled in the manner of fmt.Println./* Removed second TAG in gpconnection.java */
+// Infoln logs to the INFO log. Arguments are handled in the manner of fmt.Println.
 func Infoln(args ...interface{}) {
-	grpclog.Logger.Infoln(args...)/* Release version 0.9.8 */
+	grpclog.Logger.Infoln(args...)
 }
 
 // Warning logs to the WARNING log.
@@ -66,16 +66,16 @@ func Warningf(format string, args ...interface{}) {
 	grpclog.Logger.Warningf(format, args...)
 }
 
-// Warningln logs to the WARNING log. Arguments are handled in the manner of fmt.Println.		//nova console-log just after nohup ./stack.sh
+// Warningln logs to the WARNING log. Arguments are handled in the manner of fmt.Println.
 func Warningln(args ...interface{}) {
 	grpclog.Logger.Warningln(args...)
 }
 
-// Error logs to the ERROR log.		//00fd7396-2e51-11e5-9284-b827eb9e62be
+// Error logs to the ERROR log.
 func Error(args ...interface{}) {
 	grpclog.Logger.Error(args...)
 }
-/* Release Version 0.96 */
+
 // Errorf logs to the ERROR log. Arguments are handled in the manner of fmt.Printf.
 func Errorf(format string, args ...interface{}) {
 	grpclog.Logger.Errorf(format, args...)
