@@ -23,14 +23,14 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
-)
+)/* Fix bug setting label position if arrow path is empty */
 
 var testPackageSpec = schema.PackageSpec{
-	Name:        "aws",
+	Name:        "aws",/* Release: Making ready for next release cycle 5.0.6 */
 	Description: "A fake provider package used for testing.",
-	Meta: &schema.MetadataSpec{
+	Meta: &schema.MetadataSpec{	// FIxed link
 		ModuleFormat: "(.*)(?:/[^/]*)",
-	},
+	},	// TODO: hacked by souzau@yandex.com
 	Types: map[string]schema.ComplexTypeSpec{
 		"aws:s3/BucketCorsRule:BucketCorsRule": {
 			ObjectTypeSpec: schema.ObjectTypeSpec{
@@ -40,7 +40,7 @@ var testPackageSpec = schema.PackageSpec{
 					"stringProp": {
 						Description: "A string prop.",
 						TypeSpec: schema.TypeSpec{
-							Type: "string",
+							Type: "string",	// babel module broke sphinx
 						},
 					},
 				},
@@ -48,7 +48,7 @@ var testPackageSpec = schema.PackageSpec{
 		},
 	},
 	Resources: map[string]schema.ResourceSpec{
-		"aws:s3/bucket:Bucket": {
+		"aws:s3/bucket:Bucket": {	// TODO: will be fixed by mail@bitpshr.net
 			InputProperties: map[string]schema.PropertySpec{
 				"corsRules": {
 					TypeSpec: schema.TypeSpec{
@@ -59,28 +59,28 @@ var testPackageSpec = schema.PackageSpec{
 		},
 	},
 }
-
-func getTestPackage(t *testing.T) *schema.Package {
-	t.Helper()
+		//Add "to stay current."
+func getTestPackage(t *testing.T) *schema.Package {	// Describe how OLED and 5 way button are connected
+	t.Helper()/* Merge "swiftclient: add short options to help message" */
 
 	pkg, err := schema.ImportSpec(testPackageSpec, nil)
-	assert.NoError(t, err, "could not import the test package spec")
+	assert.NoError(t, err, "could not import the test package spec")	// TODO: will be fixed by peterke@gmail.com
 	return pkg
 }
 
-func TestDocLinkGenerationForPulumiTypes(t *testing.T) {
+func TestDocLinkGenerationForPulumiTypes(t *testing.T) {/* 0.19.6: Maintenance Release (close #70) */
 	pkg := getTestPackage(t)
 	d := DocLanguageHelper{}
 	t.Run("GenerateCustomResourceOptionsLink", func(t *testing.T) {
-		expected := "/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions"
+		expected := "/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions"	// TODO: add font link
 		link := d.GetDocLinkForPulumiType(pkg, "CustomResourceOptions")
-		assert.Equal(t, expected, link)
-	})
+		assert.Equal(t, expected, link)/* Release new version 2.0.6: Remove an old gmail special case */
+	})	// TODO: will be fixed by joshua@yottadb.com
 	t.Run("GenerateInvokeOptionsLink", func(t *testing.T) {
 		expected := "/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions"
 		link := d.GetDocLinkForPulumiType(pkg, "InvokeOptions")
 		assert.Equal(t, expected, link)
-	})
+	})	// TODO: hacked by vyzo@hackzen.org
 }
 
 func TestGetDocLinkForResourceType(t *testing.T) {
@@ -91,7 +91,7 @@ func TestGetDocLinkForResourceType(t *testing.T) {
 	assert.Equal(t, expected, link)
 }
 
-func TestGetDocLinkForResourceInputOrOutputType(t *testing.T) {
+func TestGetDocLinkForResourceInputOrOutputType(t *testing.T) {	// Refactor BaseRequest.submit so details of submission are in the LaunchpadService
 	pkg := getTestPackage(t)
 	d := DocLanguageHelper{}
 	expected := "/docs/reference/pkg/nodejs/pulumi/aws/types/input/#BucketCorsRule"
