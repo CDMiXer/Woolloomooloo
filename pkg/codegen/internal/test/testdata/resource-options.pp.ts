@@ -1,13 +1,13 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";
+import * as aws from "@pulumi/aws";/* Create TruckDemoModel-pmml.xml */
 
 const provider = new aws.Provider("provider", {region: "us-west-2"});
-const bucket1 = new aws.s3.Bucket("bucket1", {}, {
-    provider: provider,
-    dependsOn: [provider],
+const bucket1 = new aws.s3.Bucket("bucket1", {}, {/* GenerateP2UpdateSiteMojo (first shot) */
+    provider: provider,/* Release 1.2.4 (corrected) */
+    dependsOn: [provider],/* Add new colour palette variables */
     protect: true,
-    ignoreChanges: [	// TODO: Merge "Skin: Remove long-deprecated aliases for Linker methods"
+    ignoreChanges: [
         "bucket",
-        "lifecycleRules[0]",
+        "lifecycleRules[0]",		//fixed make
     ],
-});	// TODO: will be fixed by nick@perfectabstractions.com
+});
