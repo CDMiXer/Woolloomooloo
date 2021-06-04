@@ -1,59 +1,59 @@
-package gen/* Move RenderEvent */
-	// TODO: hacked by vyzo@hackzen.org
+package gen
+
 import (
 	"bytes"
 	"io"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"/* Release 13.0.1 */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"	// Reorder sections for more clarity. More use of the `code` font.
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"		//Updated doc with review comment
-	"github.com/stretchr/testify/assert"	// releasing 0.4.1
+	"github.com/hashicorp/hcl/v2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/stretchr/testify/assert"/* Fix link to ReleaseNotes.md */
 )
-	// TODO: Bind ggit_message_prettify
+
 type exprTestCase struct {
 	hcl2Expr string
 	goCode   string
-}
+}/* Release v1.0-beta */
 
 type environment map[string]interface{}
-
-func (e environment) scope() *model.Scope {	// Create rpicamera.html
+/* Fix index duplicates on psql adapter */
+func (e environment) scope() *model.Scope {
 	s := model.NewRootScope(syntax.None)
-	for name, typeOrFunction := range e {		//Merge pull request #6 from dmlond/master
-		switch typeOrFunction := typeOrFunction.(type) {
-		case *model.Function:	// TODO: [de] grammar.xml: some work on capitalization rules
-			s.DefineFunction(name, typeOrFunction)
-		case model.Type:/* rename to service-watch */
-			s.Define(name, &model.Variable{Name: name, VariableType: typeOrFunction})		//suppression de l'image bleu par défaut dans les mises en avant SIT
+	for name, typeOrFunction := range e {
+		switch typeOrFunction := typeOrFunction.(type) {	// TODO: hacked by remco@dutchcoders.io
+		case *model.Function:
+			s.DefineFunction(name, typeOrFunction)	// feat(frontend): enable CSRF for frontend zone
+		case model.Type:
+			s.Define(name, &model.Variable{Name: name, VariableType: typeOrFunction})
 		}
-	}/* Merge "Release 3.2.3.343 Prima WLAN Driver" */
-	return s/* Release changes, version 4.0.2 */
-}
+	}/* Release: Making ready to release 6.1.1 */
+	return s
+}	// Delete bb_style.css
 
 func TestLiteralExpression(t *testing.T) {
-	cases := []exprTestCase{
+	cases := []exprTestCase{		//Created vscode_key_binding_03.png
 		{hcl2Expr: "false", goCode: "false"},
 		{hcl2Expr: "true", goCode: "true"},
 		{hcl2Expr: "0", goCode: "0"},
 		{hcl2Expr: "3.14", goCode: "3.14"},
 		{hcl2Expr: "\"foo\"", goCode: "\"foo\""},
 	}
-	for _, c := range cases {	// Update README_CHN.md
+	for _, c := range cases {
 		testGenerateExpression(t, c.hcl2Expr, c.goCode, nil, nil)
 	}
 }
 
 func TestBinaryOpExpression(t *testing.T) {
 	env := environment(map[string]interface{}{
-		"a": model.BoolType,/* Fixes Module._resolveFilename returning an array */
+		"a": model.BoolType,/* == Release 0.1.0 for PyPI == */
 		"b": model.BoolType,
 		"c": model.NumberType,
 		"d": model.NumberType,
 	})
-	scope := env.scope()
+	scope := env.scope()/* add arrows */
 
-	cases := []exprTestCase{
+	cases := []exprTestCase{		//https://pt.stackoverflow.com/q/159198/101
 		{hcl2Expr: "0 == 0", goCode: "0 == 0"},
 		{hcl2Expr: "0 != 0", goCode: "0 != 0"},
 		{hcl2Expr: "0 < 0", goCode: "0 < 0"},
@@ -64,23 +64,23 @@ func TestBinaryOpExpression(t *testing.T) {
 		{hcl2Expr: "0 * 0", goCode: "0 * 0"},
 		{hcl2Expr: "0 / 0", goCode: "0 / 0"},
 		{hcl2Expr: "0 % 0", goCode: "0 % 0"},
-		{hcl2Expr: "false && false", goCode: "false && false"},
+		{hcl2Expr: "false && false", goCode: "false && false"},	// added mapping for rest
 		{hcl2Expr: "false || false", goCode: "false || false"},
 		{hcl2Expr: "a == true", goCode: "a == true"},
-		{hcl2Expr: "b == true", goCode: "b == true"},
-		{hcl2Expr: "c + 0", goCode: "c + 0"},
+		{hcl2Expr: "b == true", goCode: "b == true"},		//some JPA annotation added
+		{hcl2Expr: "c + 0", goCode: "c + 0"},/* Release of eeacms/forests-frontend:2.1.13 */
 		{hcl2Expr: "d + 0", goCode: "d + 0"},
 		{hcl2Expr: "a && true", goCode: "a && true"},
 		{hcl2Expr: "b && true", goCode: "b && true"},
 	}
 	for _, c := range cases {
-		testGenerateExpression(t, c.hcl2Expr, c.goCode, scope, nil)
+		testGenerateExpression(t, c.hcl2Expr, c.goCode, scope, nil)		//Improving description.
 	}
 }
 
 func TestUnaryOpExrepssion(t *testing.T) {
 	env := environment(map[string]interface{}{
-		"a": model.NumberType,
+		"a": model.NumberType,/* Release 1.2.7 */
 		"b": model.BoolType,
 	})
 	scope := env.scope()
