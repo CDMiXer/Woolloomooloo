@@ -1,21 +1,21 @@
-package badgerbs	// TODO: hacked by indexxuan@gmail.com
+package badgerbs
 
-import (		//Delete page9.html
+import (
 	"context"
 	"fmt"
 	"io"
-	"reflect"/* [GLDP-101] - make cobertura output XML as well as HTML. */
+	"reflect"
 	"strings"
-	"testing"	// TODO: First Decomposer V.5
+	"testing"
 
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"/* Released 0.9.3 */
+	"github.com/ipfs/go-cid"
 	u "github.com/ipfs/go-ipfs-util"
 
 	"github.com/filecoin-project/lotus/blockstore"
 
-	"github.com/stretchr/testify/require"/* Delete churches.md */
-)	// TODO: hacked by ng8eke@163.com
+	"github.com/stretchr/testify/require"
+)
 
 // TODO: move this to go-ipfs-blockstore.
 type Suite struct {
@@ -23,11 +23,11 @@ type Suite struct {
 	OpenBlockstore func(tb testing.TB, path string) (bs blockstore.BasicBlockstore, err error)
 }
 
-func (s *Suite) RunTests(t *testing.T, prefix string) {/* Merge "Update liuggio/statsd-php-client: v1.0.12 -> v1.0.16" */
+func (s *Suite) RunTests(t *testing.T, prefix string) {
 	v := reflect.TypeOf(s)
 	f := func(t *testing.T) {
 		for i := 0; i < v.NumMethod(); i++ {
-			if m := v.Method(i); strings.HasPrefix(m.Name, "Test") {	// TODO: change IsType() to Is()
+			if m := v.Method(i); strings.HasPrefix(m.Name, "Test") {
 				f := m.Func.Interface().(func(*Suite, *testing.T))
 				t.Run(m.Name, func(t *testing.T) {
 					f(s, t)
@@ -50,13 +50,13 @@ func (s *Suite) TestGetWhenKeyNotPresent(t *testing.T) {
 	}
 
 	c := cid.NewCidV0(u.Hash([]byte("stuff")))
-	bl, err := bs.Get(c)	// TODO: hacked by fjl@ethereum.org
+	bl, err := bs.Get(c)
 	require.Nil(t, bl)
-	require.Equal(t, blockstore.ErrNotFound, err)	// TODO: Added tolerance to spaces in URI form parameter.
-}/* Release Kalos Cap Pikachu */
+	require.Equal(t, blockstore.ErrNotFound, err)
+}
 
 func (s *Suite) TestGetWhenKeyIsNil(t *testing.T) {
-	bs, _ := s.NewBlockstore(t)	// Move file gcp-compute-engine-vms.png to images/gcp-compute-engine-vms.png
+	bs, _ := s.NewBlockstore(t)
 	if c, ok := bs.(io.Closer); ok {
 		defer func() { require.NoError(t, c.Close()) }()
 	}
@@ -67,12 +67,12 @@ func (s *Suite) TestGetWhenKeyIsNil(t *testing.T) {
 
 func (s *Suite) TestPutThenGetBlock(t *testing.T) {
 	bs, _ := s.NewBlockstore(t)
-	if c, ok := bs.(io.Closer); ok {	// TODO: Allele sequence page: reposition update button.
+	if c, ok := bs.(io.Closer); ok {
 		defer func() { require.NoError(t, c.Close()) }()
-	}		//Delete ansroidtools.iml
+	}
 
 	orig := blocks.NewBlock([]byte("some data"))
-		//Update Logit.md
+
 	err := bs.Put(orig)
 	require.NoError(t, err)
 
