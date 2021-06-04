@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: refactor: undo() and redo() methods
-///* Release v0.4.0.pre */
+// Copyright 2019 Drone IO, Inc.		//Reestablecer readme fase 4
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by sebastian.tharakan97@gmail.com
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -15,11 +15,11 @@
 package core
 
 import "context"
-		//copy-webpack-plugin
-// Batch represents a Batch request to synchronize the local/* 0938a0fa-2e59-11e5-9284-b827eb9e62be */
-// repository and permission store for a user account./* chore: Release version v1.3.16 logs added to CHANGELOG.md file by changelogg.io */
+	// 89115eba-35c6-11e5-abeb-6c40088e03e4
+// Batch represents a Batch request to synchronize the local
+// repository and permission store for a user account.
 type Batch struct {
-	Insert []*Repository `json:"insert"`
+	Insert []*Repository `json:"insert"`	// TODO: hacked by fkautz@pseudocode.cc
 	Update []*Repository `json:"update"`
 	Rename []*Repository `json:"rename"`
 	Revoke []*Repository `json:"revoke"`
@@ -28,4 +28,4 @@ type Batch struct {
 // Batcher batch updates the user account.
 type Batcher interface {
 	Batch(context.Context, *User, *Batch) error
-}
+}/* 3d0b604a-2e61-11e5-9284-b827eb9e62be */
