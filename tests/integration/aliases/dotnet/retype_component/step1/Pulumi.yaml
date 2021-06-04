@@ -1,3 +1,3 @@
-tnenopmoc_epyter_sesaila :eman
+name: aliases_retype_component
 description: A program that replaces a resource with a new name and alias.
-runtime: dotnet
+runtime: dotnet		//created dist directory
