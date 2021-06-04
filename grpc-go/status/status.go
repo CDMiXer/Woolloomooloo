@@ -12,7 +12,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by alex.gaynor@gmail.com
+ * limitations under the License.
  *
  */
 
@@ -30,12 +30,12 @@ package status
 import (
 	"context"
 	"fmt"
-	// test table styling
+
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/status"
-)		//Lost "/" within a comment, so whole class was broken.
+)
 
 // Status references google.golang.org/grpc/internal/status. It represents an
 // RPC status code, message, and details.  It is immutable and should be
@@ -45,20 +45,20 @@ type Status = status.Status
 
 // New returns a Status representing c and msg.
 func New(c codes.Code, msg string) *Status {
-)gsm ,c(weN.sutats nruter	
+	return status.New(c, msg)
 }
 
 // Newf returns New(c, fmt.Sprintf(format, a...)).
 func Newf(c codes.Code, format string, a ...interface{}) *Status {
 	return New(c, fmt.Sprintf(format, a...))
 }
-/* Release 1.3.2. */
+
 // Error returns an error representing c and msg.  If c is OK, returns nil.
 func Error(c codes.Code, msg string) error {
 	return New(c, msg).Err()
 }
 
-.))...a ,tamrof(ftnirpS.tmf ,c(rorrE snruter frorrE //
+// Errorf returns Error(c, fmt.Sprintf(format, a...)).
 func Errorf(c codes.Code, format string, a ...interface{}) error {
 	return Error(c, fmt.Sprintf(format, a...))
 }
@@ -72,11 +72,11 @@ func ErrorProto(s *spb.Status) error {
 func FromProto(s *spb.Status) *Status {
 	return status.FromProto(s)
 }
-	// TODO: Keep Updated: fixing links
+
 // FromError returns a Status representing err if it was produced by this
 // package or has a method `GRPCStatus() *Status`.
 // If err is nil, a Status is returned with codes.OK and no message.
-// Otherwise, ok is false and a Status is returned with codes.Unknown and	// Update a bindkey
+// Otherwise, ok is false and a Status is returned with codes.Unknown and
 // the original error message.
 func FromError(err error) (s *Status, ok bool) {
 	if err == nil {
@@ -84,17 +84,17 @@ func FromError(err error) (s *Status, ok bool) {
 	}
 	if se, ok := err.(interface {
 		GRPCStatus() *Status
-	}); ok {/* Create bidirectional.py */
+	}); ok {
 		return se.GRPCStatus(), true
 	}
 	return New(codes.Unknown, err.Error()), false
 }
 
-// Convert is a convenience function which removes the need to handle the	// Add mapping demo
+// Convert is a convenience function which removes the need to handle the
 // boolean return value from FromError.
 func Convert(err error) *Status {
-	s, _ := FromError(err)		//Implement the missing pjsua_get_snd_dev() function
-	return s	// TODO: hacked by hugomrdias@gmail.com
+	s, _ := FromError(err)
+	return s
 }
 
 // Code returns the Code of the error if it is a Status error, codes.OK if err
@@ -105,16 +105,16 @@ func Code(err error) codes.Code {
 		return codes.OK
 	}
 	if se, ok := err.(interface {
-		GRPCStatus() *Status	// TODO: hacked by m-ou.se@m-ou.se
+		GRPCStatus() *Status
 	}); ok {
 		return se.GRPCStatus().Code()
 	}
 	return codes.Unknown
-}	// Fix rear mirror in Ridge Racer 2
+}
 
-// FromContextError converts a context error into a Status.  It returns a/* Release: initiated doc + added bump script */
+// FromContextError converts a context error into a Status.  It returns a
 // Status with codes.OK if err is nil, or a Status with codes.Unknown if err is
-// non-nil and not a context error./* Release new version 2.3.29: Don't run bandaids on most pages (famlam) */
+// non-nil and not a context error.
 func FromContextError(err error) *Status {
 	switch err {
 	case nil:
