@@ -1,6 +1,6 @@
-// Copyright 2019 Drone IO, Inc./* KYLIN-757 Broadcast cube event to cluster */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* revert text strings for clarity */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -15,4 +15,4 @@
 // Package pubsub implements a thread safe publish subscriber,
 // allowing multiple publishers to distribute messages to
 // multiple subscribers.
-package pubsub	// TODO: Update bigbrush.sh
+package pubsub
