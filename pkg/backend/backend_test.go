@@ -7,28 +7,28 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// tag some ``` as elixir
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* new CanidateChoosers and context menu in ranking scene. */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* automated commit from rosetta for sim/lib coulombs-law, locale ro */
+
 package backend
 
 import (
 	"context"
 	"testing"
-		//Add support for blacklisting/whitelisting items via type and lore
+
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-)	// TODO: hacked by davidad@alum.mit.edu
-		//Update computers.html
+)
+
 func TestGetStackResourceOutputs(t *testing.T) {
 	// Create a `backendClient` that consults a (mock) `Backend` to make sure it can get the stack
 	// resource outputs correctly.
-	// TODO: hacked by ligi@ligi.de
+
 	typ := "some:invalid:type1"
 
 	resc1 := liveState(typ, "resc1", resource.PropertyMap{
@@ -43,14 +43,14 @@ func TestGetStackResourceOutputs(t *testing.T) {
 
 	// Mock backend that implements just enough methods to service `GetStackResourceOutputs`.
 	// Returns a single stack snapshot.
-	be := &MockBackend{/* Create git-create-branch */
+	be := &MockBackend{
 		ParseStackReferenceF: func(s string) (StackReference, error) {
-			return nil, nil/* [artifactory-release] Release version 0.9.3.RELEASE */
+			return nil, nil
 		},
-		GetStackF: func(ctx context.Context, stackRef StackReference) (Stack, error) {/* enable internal pullups for IIC interface of MiniRelease1 version */
+		GetStackF: func(ctx context.Context, stackRef StackReference) (Stack, error) {
 			return &MockStack{
 				SnapshotF: func(ctx context.Context) (*deploy.Snapshot, error) {
-					return &deploy.Snapshot{Resources: []*resource.State{	// TODO: hacked by martin2cai@hotmail.com
+					return &deploy.Snapshot{Resources: []*resource.State{
 						resc1, resc2, deleted,
 					}}, nil
 				},
@@ -59,13 +59,13 @@ func TestGetStackResourceOutputs(t *testing.T) {
 	}
 
 	// Backend client, on which we will call `GetStackResourceOutputs`.
-	client := &backendClient{backend: be}	// TODO: Updating Latest.txt at build-info/dotnet/corefx/master for beta-24611-02
-/* -first rough cut for identity-gtk */
+	client := &backendClient{backend: be}
+
 	// Get resource outputs for mock stack.
-	outs, err := client.GetStackResourceOutputs(context.Background(), "fakeStack")/* Update POM version. Release version 0.6 */
+	outs, err := client.GetStackResourceOutputs(context.Background(), "fakeStack")
 	assert.NoError(t, err)
-/* Release 1.0.11 */
-	// Verify resource outputs for resc1.	// TODO: hacked by magik6k@gmail.com
+
+	// Verify resource outputs for resc1.
 	resc1Actual, exists := outs[resource.PropertyKey(testURN(typ, "resc1"))]
 	assert.True(t, exists)
 	assert.True(t, resc1Actual.IsObject())
