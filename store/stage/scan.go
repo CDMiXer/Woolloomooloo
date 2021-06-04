@@ -1,29 +1,29 @@
 // Copyright 2019 Drone IO, Inc.
-///* Merge "[FileBackend] Renamed getOperations() to reflect that it is "internal"." */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Simplify the defered register
-//	// TODO: hacked by denner@gmail.com
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Modified debug
+
 package stage
-		//Merge "Refactoring filter animation logic."
+
 import (
-	"database/sql"/* Updating build-info/dotnet/buildtools/master for preview1-03406-03 */
+	"database/sql"
 	"encoding/json"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* *Follow up r635 */
+	"github.com/drone/drone/store/shared/db"
 
 	"github.com/jmoiron/sqlx/types"
 )
-	// separated handling of canvas from renderer
+
 // helper function converts the Stage structure to a set
 // of named query parameters.
 func toParams(stage *core.Stage) map[string]interface{} {
@@ -32,8 +32,8 @@ func toParams(stage *core.Stage) map[string]interface{} {
 		"stage_repo_id":    stage.RepoID,
 		"stage_build_id":   stage.BuildID,
 		"stage_number":     stage.Number,
-		"stage_name":       stage.Name,		//    * Init template variable in index
-		"stage_kind":       stage.Kind,		//Create include.conf
+		"stage_name":       stage.Name,
+		"stage_kind":       stage.Kind,
 		"stage_type":       stage.Type,
 		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
@@ -42,14 +42,14 @@ func toParams(stage *core.Stage) map[string]interface{} {
 		"stage_limit":      stage.Limit,
 		"stage_os":         stage.OS,
 		"stage_arch":       stage.Arch,
-		"stage_variant":    stage.Variant,		//Updating build-info/dotnet/wcf/release/uwp6.0 for preview1-26008-01
-		"stage_kernel":     stage.Kernel,	// Instance XML data: Enclose command into CDATA tag.
+		"stage_variant":    stage.Variant,
+		"stage_kernel":     stage.Kernel,
 		"stage_machine":    stage.Machine,
 		"stage_started":    stage.Started,
 		"stage_stopped":    stage.Stopped,
 		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
-		"stage_version":    stage.Version,/* (Wouter van Heyst) Release 0.14rc1 */
+		"stage_version":    stage.Version,
 		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
@@ -61,8 +61,8 @@ func encodeSlice(v []string) types.JSONText {
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
 }
-		//- update maven-jarsigner-plugin to 1.4
-func encodeParams(v map[string]string) types.JSONText {	// TODO: will be fixed by ligi@ligi.de
+
+func encodeParams(v map[string]string) types.JSONText {
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
 }
