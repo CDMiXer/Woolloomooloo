@@ -4,12 +4,12 @@
 	<dt>Repository</dt>
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
 	<dt>License</dt>
-	<dd>{{ htmlSafe .License }}</dd>
+	<dd>{{ htmlSafe .License }}</dd>/* 5898c072-2e5d-11e5-9284-b827eb9e62be */
     {{- if ne .Notes "" }}
 	<dt>Notes</dt>
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
-	{{- if ne .Version "" }}
+	{{- if ne .Version "" }}	// TODO: hacked by yuvalalaluf@gmail.com
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
