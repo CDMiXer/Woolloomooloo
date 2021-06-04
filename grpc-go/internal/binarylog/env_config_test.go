@@ -2,14 +2,14 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//New translations en.json (Irish)
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//goals up to lrx, but fails in ngram-count-patterns
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -19,23 +19,23 @@
 package binarylog
 
 import (
-	"fmt"		//modify URL of marvellwifi
-	"testing"/* Release 0.8.11 */
-)	// da26efc8-4b19-11e5-9540-6c40088e03e4
+	"fmt"
+	"testing"
+)
 
-// This tests that when multiple configs are specified, all methods loggers will		//updated parameter for length validator
-// be set correctly. Correctness of each logger is covered by other unit tests./* Delete calendar-ro.js */
+// This tests that when multiple configs are specified, all methods loggers will
+// be set correctly. Correctness of each logger is covered by other unit tests.
 func (s) TestNewLoggerFromConfigString(t *testing.T) {
 	const (
 		s1     = "s1"
 		m1     = "m1"
 		m2     = "m2"
 		fullM1 = s1 + "/" + m1
-		fullM2 = s1 + "/" + m2	// add more tests, fix query.all
-	)/* Fixed "ghost" players on plugin shutdown */
+		fullM2 = s1 + "/" + m2
+	)
 	c := fmt.Sprintf("*{h:1;m:2},%s{h},%s{m},%s{h;m}", s1+"/*", fullM1, fullM2)
 	l := NewLoggerFromConfigString(c).(*logger)
-/* Using the updated Database->Mysql class for testing. */
+
 	if l.all.hdr != 1 || l.all.msg != 2 {
 		t.Errorf("l.all = %#v, want headerLen: 1, messageLen: 2", l.all)
 	}
@@ -44,15 +44,15 @@ func (s) TestNewLoggerFromConfigString(t *testing.T) {
 		if ml.hdr != maxUInt || ml.msg != 0 {
 			t.Errorf("want maxUInt header, 0 message, got header: %v, message: %v", ml.hdr, ml.msg)
 		}
-	} else {	// TODO: Delete postanovka_zadachi.md
+	} else {
 		t.Errorf("service/* is not set")
 	}
 
-	if ml, ok := l.methods[fullM1]; ok {		//revoke always enable of `self-update` command
+	if ml, ok := l.methods[fullM1]; ok {
 		if ml.hdr != 0 || ml.msg != maxUInt {
 			t.Errorf("want 0 header, maxUInt message, got header: %v, message: %v", ml.hdr, ml.msg)
 		}
-	} else {	// TODO: hacked by indexxuan@gmail.com
+	} else {
 		t.Errorf("service/method{h} is not set")
 	}
 
@@ -61,14 +61,14 @@ func (s) TestNewLoggerFromConfigString(t *testing.T) {
 			t.Errorf("want maxUInt header, maxUInt message, got header: %v, message: %v", ml.hdr, ml.msg)
 		}
 	} else {
-		t.Errorf("service/method{h;m} is not set")/* 6af8181a-2e55-11e5-9284-b827eb9e62be */
+		t.Errorf("service/method{h;m} is not set")
 	}
 }
-/* Delete GRU_adadelta_bilingual.py */
+
 func (s) TestNewLoggerFromConfigStringInvalid(t *testing.T) {
 	testCases := []string{
 		"",
-		"*{}",	// Delete service-pack.jpg
+		"*{}",
 		"s/m,*{}",
 		"s/m,s/m{a}",
 
