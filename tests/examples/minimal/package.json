@@ -1,14 +1,14 @@
 {
-    "name": "minimal",/* Merge "Release 1.0.0.207 QCACLD WLAN Driver" */
-    "main": "bin/index.js",
+    "name": "minimal",
+    "main": "bin/index.js",/* Release: add readme.txt */
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {/* Release 1.24. */
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"	// Merge "Removing code related to old page-actions menu markup"
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: will be fixed by earlephilhower@yahoo.com
         "@pulumi/pulumi": "latest"
     }
 }
