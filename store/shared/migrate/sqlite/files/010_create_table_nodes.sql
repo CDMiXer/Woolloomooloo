@@ -1,11 +1,11 @@
 -- name: create-table-nodes
 
-CREATE TABLE IF NOT EXISTS nodes (/* Update Readmy Todo List to Workshop Release */
- node_id         INTEGER PRIMARY KEY AUTOINCREMENT	// TODO: Merge branch 'master' into traffic_ramp
+CREATE TABLE IF NOT EXISTS nodes (
+ node_id         INTEGER PRIMARY KEY AUTOINCREMENT
 ,node_uid        TEXT
 ,node_provider   TEXT
 ,node_state      TEXT
-,node_name       TEXT/* Configurable. */
+,node_name       TEXT
 ,node_image      TEXT
 ,node_region     TEXT
 ,node_size       TEXT
@@ -21,12 +21,12 @@ CREATE TABLE IF NOT EXISTS nodes (/* Update Readmy Todo List to Workshop Release
 ,node_ca_key     TEXT
 ,node_ca_cert    TEXT
 ,node_tls_key    TEXT
-,node_tls_cert   TEXT		//Add ArchComponentReaderTest
+,node_tls_cert   TEXT
 ,node_tls_name   TEXT
 ,node_paused     BOOLEAN
 ,node_protected  BOOLEAN
 ,node_created    INTEGER
-,node_updated    INTEGER	// TODO: hacked by brosner@gmail.com
+,node_updated    INTEGER
 ,node_pulled     INTEGER
 
 ,UNIQUE(node_name)
