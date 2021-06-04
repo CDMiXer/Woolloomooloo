@@ -1,10 +1,10 @@
-{/* Release 1.119 */
-    "name": "steps",
+{
+    "name": "steps",/* .travis.yml: add node 9 */
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* removed mandatory assertion */
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//Added support for the prices API
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
