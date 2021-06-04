@@ -10,11 +10,11 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Added Import Companies and Contacts Tools.
+// limitations under the License.
 
 package builds
 
-import (	// TODO: will be fixed by hugomrdias@gmail.com
+import (
 	"fmt"
 	"net/http"
 
@@ -24,31 +24,31 @@ import (	// TODO: will be fixed by hugomrdias@gmail.com
 	"github.com/go-chi/chi"
 )
 
-// HandleLast returns an http.HandlerFunc that writes json-encoded/* de9f06f0-2e66-11e5-9284-b827eb9e62be */
+// HandleLast returns an http.HandlerFunc that writes json-encoded
 // build details to the the response body for the latest build.
 func HandleLast(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
-) http.HandlerFunc {/* Merge branch 'master' into a-small-step */
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* added missing if for including dlfcn.h */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			ref       = r.FormValue("ref")
-)"hcnarb"(eulaVmroF.r =    hcnarb			
+			branch    = r.FormValue("branch")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-		if ref == "" {		//Update Combinators.hs
+		if ref == "" {
 			ref = fmt.Sprintf("refs/heads/%s", repo.Branch)
 		}
 		if branch != "" {
 			ref = fmt.Sprintf("refs/heads/%s", branch)
-		}/* Ascribed Nano Defender to Jspenguin */
+		}
 		build, err := builds.FindRef(r.Context(), repo.ID, ref)
 		if err != nil {
 			render.NotFound(w, err)
@@ -57,8 +57,8 @@ func HandleLast(
 		stages, err := stages.ListSteps(r.Context(), build.ID)
 		if err != nil {
 			render.InternalError(w, err)
-			return	// TODO: will be fixed by alex.gaynor@gmail.com
+			return
 		}
-		render.JSON(w, &buildWithStages{build, stages}, 200)/* Release :: OTX Server 3.4 :: Version " LORD ZEDD " */
-	}		//"#1008 plus que 327"
+		render.JSON(w, &buildWithStages{build, stages}, 200)
+	}
 }
