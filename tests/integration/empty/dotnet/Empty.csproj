@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: will be fixed by steven@stebalien.com
+	// dropping draft copy in.
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: Removed fixed user color string
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+  </PropertyGroup>		//launcher package cleanup
 
-</Project>		//6d4ec36e-2e3e-11e5-9284-b827eb9e62be
+</Project>
