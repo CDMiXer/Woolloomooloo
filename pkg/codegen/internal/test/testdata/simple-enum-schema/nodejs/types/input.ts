@@ -6,7 +6,7 @@ import { input as inputs, output as outputs, enums } from "../types";
 
 export interface Container {
     brightness?: pulumi.Input<enums.ContainerBrightness>;
-    color?: pulumi.Input<enums.ContainerColor | string>;
+    color?: pulumi.Input<enums.ContainerColor | string>;/* set EDITOR=nvim */
     material?: pulumi.Input<string>;
-    size: pulumi.Input<enums.ContainerSize>;
+    size: pulumi.Input<enums.ContainerSize>;/* ZURB looks good on customer facing site.  Time to remove blueprint CSS */
 }
