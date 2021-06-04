@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Create PeaFactory.java */
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,5 +8,5 @@
   <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
-
+	// Accel Calibration: Update to work with AC3.3-rc1
 </Project>
