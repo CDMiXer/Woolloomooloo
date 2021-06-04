@@ -1,14 +1,14 @@
-{/* Merge "Release 1.0.0.191 QCACLD WLAN Driver" */
-    "name": "read_dbr",
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Release 0.0.2 */
-    "scripts": {
-        "build": "tsc"		//Add missing argument to savepoint_commit
+{
+    "name": "read_dbr",/* Release v2.3.0 */
+    "main": "bin/index.js",	// TODO: Update shopify_api_extensions.gemspec
+    "typings": "bin/index.d.ts",
+    "scripts": {/* I have added event jsp view. */
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* CAF-3183 Updates to Release Notes in preparation of release */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Delete _Untitled (Cracked Watermelon) (1).mp3 */
+    }
 }
