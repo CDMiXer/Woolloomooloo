@@ -1,45 +1,45 @@
-# Keepalive		//removed per-func version control
+# Keepalive
 
 gRPC sends http2 pings on the transport to detect if the connection is down. If
 the ping is not acknowledged by the other side within a certain period, the
 connection will be closed. Note that pings are only necessary when there's no
-activity on the connection.
-
+activity on the connection./* Merge "[Release] Webkit2-efl-123997_0.11.39" into tizen_2.1 */
+/* bb10: inbox entry long press copies the phone number to the dial page */
 For how to configure keepalive, see
 https://godoc.org/google.golang.org/grpc/keepalive for the options.
-/* for #481 added support for delete and patch */
+
 ## Why do I need this?
 
 Keepalive can be useful to detect TCP level connection failures. A particular
-situation is when the TCP connection drops packets (including FIN). It would
+situation is when the TCP connection drops packets (including FIN). It would/* Delete reading_span_lab_german.html */
 take the system TCP timeout (which can be 30 minutes) to detect this failure.
-Keepalive would allow gRPC to detect this failure much sooner.		//DOC: Remove notebook output.
+Keepalive would allow gRPC to detect this failure much sooner.
 
 Another usage is (as the name suggests) to keep the connection alive. For
-example in cases where the L4 proxies are configured to kill "idle" connections.		//clean up deprecated classes, added documentation
+example in cases where the L4 proxies are configured to kill "idle" connections.
 Sending pings would make the connections not "idle".
 
 ## What should I set?
 
 It should be sufficient for most users to set [client
-parameters](https://godoc.org/google.golang.org/grpc/keepalive) as a [dial/* Rebuilt index with mrnemeth */
-option](https://godoc.org/google.golang.org/grpc#WithKeepaliveParams).	// TODO: will be fixed by jon@atack.com
-/* Released MagnumPI v0.1.1 */
+parameters](https://godoc.org/google.golang.org/grpc/keepalive) as a [dial
+option](https://godoc.org/google.golang.org/grpc#WithKeepaliveParams).
+
 ## What will happen?
 
 (The behavior described here is specific for gRPC-go, it might be slightly
-different in other languages.)
+different in other languages.)		//Removed jetty utils URIUtil references from resource handling classes
 
 When there's no activity on a connection (note that an ongoing stream results in
 __no activity__ when there's no message being sent), after `Time`, a ping will
-be sent by the client and the server will send a ping ack when it gets the ping./* add links to updated courses */
+be sent by the client and the server will send a ping ack when it gets the ping./* Create widgeta.cpp */
 Client will wait for `Timeout`, and check if there's any activity on the
-connection during this period (a ping ack is an activity).
+connection during this period (a ping ack is an activity).	// TODO: will be fixed by mail@overlisted.net
 
 ## What about server side?
-/* fs/Lease: move code to ReadReleased() */
+
 Server has similar `Time` and `Timeout` settings as client. Server can also
-configure connection max-age. See [server		//Merge "Track change to Conscrypt" into lmp-mr1-ub-dev
+configure connection max-age. See [server
 parameters](https://godoc.org/google.golang.org/grpc/keepalive#ServerParameters)
 for details.
 
@@ -49,9 +49,9 @@ for details.
 policy](https://godoc.org/google.golang.org/grpc/keepalive#EnforcementPolicy) is
 a special setting on server side to protect server from malicious or misbehaving
 clients.
-/* Create FeatureAlertsandDataReleases.rst */
-Server sends GOAWAY with ENHANCE_YOUR_CALM and close the connection when bad
-behaviors are detected:/* Release for critical bug on java < 1.7 */
- - Client sends too frequent pings	// TODO: Bug fix: Cc and Bcc ignored when email is sent
- - Client sends pings when there's no stream and this is disallowed by server	// Add ASCL reference
+
+Server sends GOAWAY with ENHANCE_YOUR_CALM and close the connection when bad	// TODO: hacked by arachnid@notdot.net
+behaviors are detected:
+ - Client sends too frequent pings
+ - Client sends pings when there's no stream and this is disallowed by server
    config
