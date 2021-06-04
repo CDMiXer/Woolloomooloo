@@ -2,7 +2,7 @@
 
 /*
  *
- * Copyright 2018 gRPC authors./* README Updated for Release V0.0.3.2 */
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,12 @@
  */
 
 package credentials
-/* Update usingSvn.md */
-import (/* [tools/raw processing] removed unnecessary equal sign in expression */
-	"net"/* jwm_config: tray: show corresponding tab when clicking list item */
+
+import (
+	"net"
 )
 
 // WrapSyscallConn returns newConn on appengine.
-func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {/* Changes to the paper, substantial reorganisation */
+func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {
 	return newConn
 }
