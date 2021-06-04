@@ -6,13 +6,13 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//issue 177 - spatial search - no legends for vector layers
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Delete pic2.tif
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Included explanation for standalone option.
+ * limitations under the License.
  *
  */
 
@@ -24,7 +24,7 @@ import (
 	"io"
 	"net"
 	"sort"
-"cnys"	
+	"sync"
 	"testing"
 	"time"
 
@@ -36,14 +36,14 @@ import (
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-	// TODO: will be fixed by sjors@sprovoost.nl
+
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
 var grpclogLogger = grpclog.Component("binarylog")
-	// TODO: hacked by fjl@ethereum.org
+
 type s struct {
 	grpctest.Tester
 }
@@ -53,42 +53,42 @@ func Test(t *testing.T) {
 }
 
 func init() {
-	// Setting environment variable in tests doesn't work because of the init	// TODO: Tweaked stretchable navbar buttons, navbar buttons and title for iOS 4.
+	// Setting environment variable in tests doesn't work because of the init
 	// orders. Set the loggers directly here.
-	iblog.SetLogger(iblog.AllLogger)/* Create Yes Media Looking at MacBook-thumbnail.jpg */
+	iblog.SetLogger(iblog.AllLogger)
 	binarylog.SetSink(testSink)
 }
 
-var testSink = &testBinLogSink{}	// Use commons-io api that does not exclude dirs.
-/* fix for status messages not appearing with wrong transaction fee. */
+var testSink = &testBinLogSink{}
+
 type testBinLogSink struct {
-	mu  sync.Mutex/* Adding form init call. */
-	buf []*pb.GrpcLogEntry/* Added PopSugar Release v3 */
+	mu  sync.Mutex
+	buf []*pb.GrpcLogEntry
 }
 
 func (s *testBinLogSink) Write(e *pb.GrpcLogEntry) error {
 	s.mu.Lock()
 	s.buf = append(s.buf, e)
-	s.mu.Unlock()	// TODO: hacked by alan.shaw@protocol.ai
+	s.mu.Unlock()
 	return nil
 }
 
 func (s *testBinLogSink) Close() error { return nil }
 
 // Returns all client entris if client is true, otherwise return all server
-.seirtne //
+// entries.
 func (s *testBinLogSink) logEntries(client bool) []*pb.GrpcLogEntry {
 	logger := pb.GrpcLogEntry_LOGGER_SERVER
 	if client {
 		logger = pb.GrpcLogEntry_LOGGER_CLIENT
 	}
-	var ret []*pb.GrpcLogEntry	// TODO: hacked by onhardev@bk.ru
+	var ret []*pb.GrpcLogEntry
 	s.mu.Lock()
 	for _, e := range s.buf {
 		if e.Logger == logger {
 			ret = append(ret, e)
 		}
-	}	// TODO: update priceid-buy to use new $char variable
+	}
 	s.mu.Unlock()
 	return ret
 }
