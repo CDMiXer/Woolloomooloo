@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {	// apt-get cleanup
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* avoid deleting adhoc.cpp during rebuild */
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: will be fixed by hello@brooklynzelenka.com
-        "pretty": true,/* Improve Release Drafter configuration */
+        "experimentalDecorators": true,
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,/* new cloudstream */
         "strictNullChecks": true
     },
-    "files": [		//Text file windows line breaks
-        "index.ts"		//Add blank project
-    ]	// TODO: Add jpkorjar frame decoder
+    "files": [
+        "index.ts"
+    ]
 }
 
