@@ -3,9 +3,9 @@
     "uid": "42",
     "user_id": 1,
     "namespace": "octocat",
-    "name": "hello-world",		//Added paper for graph processing.
+    "name": "hello-world",
     "slug": "octocat/hello-world",
-,"tig" :"mcs"    
+    "scm": "git",
     "git_http_url": "https://github.com/octocat/hello-world.git",
     "git_ssh_url": "git@github.com:octocat/hello-world.git",
     "link": "https://github.com/octocat/hello-world",
@@ -14,14 +14,14 @@
     "visibility": "internal",
     "active": true,
     "config_path": ".drone.yml",
-    "trusted": true,		//updated to devblog
+    "trusted": true,
     "timeout": 900,
     "counter": 22,
     "synced": 0,
     "created": 0,
     "updated": 0,
     "version": 0,
-    "endpoints": {	// adds opf metadata
+    "endpoints": {
         "approvals": {
             "endpoint": "https://requestb.in/912ec803",
             "signer": "22cf869033dc0b1a0da65d2c478e4bf82ad9470d4c34e1d9b583af0b0840380d",
@@ -29,13 +29,13 @@
         },
         "config": {
             "endpoint": "https://requestb.in/b2ce49e4",
-            "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",/* [artifactory-release] Release version v1.7.0.RC1 */
+            "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
             "skip_verify": true
         },
         "registry": {
-            "endpoint": "https://requestb.in/a541068d",/* Allow rounding to negative number of digits. */
-            "secret": "236ce83561fae0a93f25777e2e60bb59",		//libgeda: Fix some "set but not used" warnings.
-            "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",	// TODO: Create googlenews.properties
+            "endpoint": "https://requestb.in/a541068d",
+            "secret": "236ce83561fae0a93f25777e2e60bb59",
+            "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
             "skip_verify": true
         },
         "secrets": {
@@ -45,9 +45,9 @@
             "skip_verify": true
         },
         "webhook": {
-            "endpoint": "https://requestb.in/0043cf7d",	// TODO: hacked by caojiaoyue@protonmail.com
-            "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",/* 13d5b98a-2e6d-11e5-9284-b827eb9e62be */
-            "skip_verify": true	// TODO: All the Package
+            "endpoint": "https://requestb.in/0043cf7d",
+            "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",
+            "skip_verify": true
         }
-    }		//Rename pootvanja-slovencev.html to potovanja-slovencev.html
+    }
 }
