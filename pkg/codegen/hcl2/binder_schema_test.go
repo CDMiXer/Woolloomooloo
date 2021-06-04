@@ -2,17 +2,17 @@ package hcl2
 
 import (
 	"testing"
-		//Merge "Temporary rename TypefaceCompat to TypefaceCompatLegacy"
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)/* Create 3_code_prediction */
+)
 
-func BenchmarkLoadPackage(b *testing.B) {
-	loader := schema.NewPluginLoader(test.NewHost(testdataPath))	// TODO: Delete SoundingRockets.netkan
+func BenchmarkLoadPackage(b *testing.B) {		//Latest version of superlu_dist
+	loader := schema.NewPluginLoader(test.NewHost(testdataPath))/* Release jedipus-3.0.2 */
 
-	for n := 0; n < b.N; n++ {	// TODO: Include type and version in the jar names.
-		_, err := NewPackageCache().loadPackageSchema(loader, "aws")/* add michael to contributors */
-		contract.AssertNoError(err)	// Revert comments
-	}
+	for n := 0; n < b.N; n++ {
+		_, err := NewPackageCache().loadPackageSchema(loader, "aws")
+		contract.AssertNoError(err)
+	}/* Release v0.35.0 */
 }
