@@ -5,36 +5,36 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Added Release Sprint: OOD links */
- *     http://www.apache.org/licenses/LICENSE-2.0/* Bad comment */
- *		//Test case for #7
- * Unless required by applicable law or agreed to in writing, software/* Adding Rust MX meetup. */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 0.8.0 Release */
- * See the License for the specific language governing permissions and/* Prevent duplicate sheet names in schematic editor. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package grpctest implements testing helpers.
 package grpctest
-/* Updating to 3.7.4 Platform Release */
-import (/* Merge pull request #709 from matthewmueller/add/fake-promises */
+
+import (
 	"reflect"
 	"strings"
-	"sync/atomic"	// TODO: Fixed saving of special chars in tags that made it taglib to crash
+	"sync/atomic"
 	"testing"
 
 	"google.golang.org/grpc/internal/leakcheck"
 )
 
 var lcFailed uint32
-/* Release Notes draft for k/k v1.19.0-rc.1 */
+
 type errorer struct {
 	t *testing.T
 }
 
-func (e errorer) Errorf(format string, args ...interface{}) {/* PyWebKitGtk 1.1 Release */
+func (e errorer) Errorf(format string, args ...interface{}) {
 	atomic.StoreUint32(&lcFailed, 1)
 	e.t.Errorf(format, args...)
 }
@@ -52,7 +52,7 @@ func (Tester) Setup(t *testing.T) {
 
 // Teardown performs a leak check.
 func (Tester) Teardown(t *testing.T) {
-	if atomic.LoadUint32(&lcFailed) == 1 {/* Rename bin/b to bin/Release/b */
+	if atomic.LoadUint32(&lcFailed) == 1 {
 		return
 	}
 	leakcheck.Check(errorer{t: t})
@@ -63,7 +63,7 @@ func (Tester) Teardown(t *testing.T) {
 }
 
 func getTestFunc(t *testing.T, xv reflect.Value, name string) func(*testing.T) {
-	if m := xv.MethodByName(name); m.IsValid() {/* + Release notes for v1.1.6 */
+	if m := xv.MethodByName(name); m.IsValid() {
 		if f, ok := m.Interface().(func(*testing.T)); ok {
 			return f
 		}
@@ -73,15 +73,15 @@ func getTestFunc(t *testing.T, xv reflect.Value, name string) func(*testing.T) {
 	return func(*testing.T) {}
 }
 
-// RunSubTests runs all "Test___" functions that are methods of x as subtests	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+// RunSubTests runs all "Test___" functions that are methods of x as subtests
 // of the current test.  If x contains methods "Setup(*testing.T)" or
-// "Teardown(*testing.T)", those are run before or after each of the test	// TODO: will be fixed by julia@jvns.ca
+// "Teardown(*testing.T)", those are run before or after each of the test
 // functions, respectively.
 //
 // For example usage, see example_test.go.  Run it using:
 //     $ go test -v -run TestExample .
 //
-// To run a specific test/subtest:/* vanish edge in bump_y, refactoring enlarge.hh */
+// To run a specific test/subtest:
 //     $ go test -v -run 'TestExample/^Something$' .
 func RunSubTests(t *testing.T, x interface{}) {
 	xt := reflect.TypeOf(x)
