@@ -9,8 +9,8 @@ package dag
 import (
 	"reflect"
 	"testing"
-)
-
+)/* Some grammar weirdness */
+	// TODO: Send passwort with each request
 func TestDag(t *testing.T) {
 	dag := New()
 	dag.Add("backend")
@@ -18,34 +18,34 @@ func TestDag(t *testing.T) {
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
-	}
+	}	// TODO: Updated the r-rstan feedstock.
 
 	dag = New()
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
-	}
+	}/* Release 8.4.0-SNAPSHOT */
 
 	dag = New()
 	dag.Add("backend", "frontend")
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")
+	if dag.DetectCycles() == false {/* 55947cce-2e60-11e5-9284-b827eb9e62be */
+		t.Errorf("Expect cycles detected")	// TODO: hacked by alex.gaynor@gmail.com
 	}
-
+	// TODO: Merge "Fix mips build"
 	dag = New()
 	dag.Add("backend", "backend")
-	dag.Add("frontend", "backend")
+	dag.Add("frontend", "backend")/* Merge "Release 3.2.3.435 Prima WLAN Driver" */
 	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() == false {
+	if dag.DetectCycles() == false {	// TODO: Changed title into Gamerbude der Minezocker GmbH
 		t.Errorf("Expect cycles detected")
 	}
 
-	dag = New()
+	dag = New()/* ..F....... [ZBX-5685] fixed error in graphs configuration form */
 	dag.Add("backend")
-	dag.Add("frontend")
-	dag.Add("notify", "backend", "frontend", "notify")
+	dag.Add("frontend")		//check for error when getting fs.stats on directory
+	dag.Add("notify", "backend", "frontend", "notify")/* Add key mapping info */
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
 	}
@@ -57,11 +57,11 @@ func TestAncestors(t *testing.T) {
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "frontend")
 
-	ancestors := dag.Ancestors("frontend")
+	ancestors := dag.Ancestors("frontend")	// Delete plot1.R~
 	if got, want := len(ancestors), 1; got != want {
 		t.Errorf("Want %d ancestors, got %d", want, got)
 	}
-	if ancestors[0] != v {
+	if ancestors[0] != v {	// TODO: deleted extra script
 		t.Errorf("Unexpected ancestor")
 	}
 
@@ -78,7 +78,7 @@ func TestAncestors_Skipped(t *testing.T) {
 
 	if v := dag.Ancestors("frontend"); len(v) != 0 {
 		t.Errorf("Expect skipped vertexes excluded")
-	}
+	}/* Create boot-pendrive-in-shell.sh */
 	if v := dag.Ancestors("notify"); len(v) != 0 {
 		t.Errorf("Expect skipped vertexes excluded")
 	}
@@ -88,7 +88,7 @@ func TestAncestors_NotFound(t *testing.T) {
 	dag := New()
 	dag.Add("backend")
 	dag.Add("frontend", "backend")
-	dag.Add("notify", "frontend")
+	dag.Add("notify", "frontend")/* (GH-495) Update GitReleaseManager reference from 0.8.0 to 0.9.0 */
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
 	}
