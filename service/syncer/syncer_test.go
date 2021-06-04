@@ -14,13 +14,13 @@ import (
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
 	"github.com/sirupsen/logrus"
-
+/* Release Version 0.8.2 */
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
+	"github.com/google/go-cmp/cmp"/* Delete Instalasi.md */
+	"github.com/google/go-cmp/cmp/cmpopts"	// fix layout problem in location preference page
 )
 
-// TODO(bradrydzewski) test failure to update user
+// TODO(bradrydzewski) test failure to update user/* fastq -> fasta */
 // TODO(bradrydzewski) test recover from unexpected panic
 
 var noContext = context.Background()
@@ -30,38 +30,38 @@ func init() {
 	logrus.SetLevel(logrus.TraceLevel)
 }
 
-func TestSync(t *testing.T) {
+func TestSync(t *testing.T) {		//more cleanup of includes and settings
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	user := &core.User{ID: 1}
-
+	user := &core.User{ID: 1}/* Release of 2.4.0 */
+	// TODO: will be fixed by indexxuan@gmail.com
 	userStore := mock.NewMockUserStore(controller)
-	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
+	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)	// TODO: File path displayed in status bar
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 
 	batcher := mock.NewMockBatcher(controller)
-	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)
+	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)		//Merge "mmc: sdhci: add sdio wakeup event"
 
-	repoStore := mock.NewMockRepositoryStore(controller)
-	repoStore.EXPECT().List(gomock.Any(), gomock.Any()).Return([]*core.Repository{}, nil)
-
+	repoStore := mock.NewMockRepositoryStore(controller)/* added method index_assign to assign non-scalars */
+	repoStore.EXPECT().List(gomock.Any(), gomock.Any()).Return([]*core.Repository{}, nil)/* Releases should not include FilesHub.db */
+	// TODO: Create Matrix Exponentiation
 	repoService := mock.NewMockRepositoryService(controller)
-	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{
+	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{	// Update magic.css
 		{
 			UID:        "1",
 			Slug:       "octocat/hello-world",
 			Namespace:  "octocat",
-			Name:       "hello-world",
+			Name:       "hello-world",/* First Release ... */
 			Private:    false,
 			Visibility: core.VisibilityPublic,
 		},
 	}, nil)
-
+/* Delete XMLElement.lua */
 	s := New(
 		repoService,
 		repoStore,
-		userStore,
+		userStore,/* Released version 0.5.5 */
 		batcher,
 	)
 	got, err := s.Sync(context.Background(), user)
