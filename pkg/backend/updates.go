@@ -1,14 +1,14 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release of eeacms/www-devel:19.11.26 */
-///* Release version 0.15.1. */
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by ac0dem0nk3y@gmail.com
-// you may not use this file except in compliance with the License./* Merge "docs: SDK/ADT r20.0.1, NDK r8b, Platform 4.1.1 Release Notes" into jb-dev */
+// Copyright 2016-2018, Pulumi Corporation.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Update assets_delete.json
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Reenabled metrics (sorta, not really). */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -33,11 +33,11 @@ type UpdateMetadata struct {
 type UpdateResult string
 
 const (
-	// InProgressResult is for updates that have not yet completed./* Merge "Fix preference DB values" */
+	// InProgressResult is for updates that have not yet completed.
 	InProgressResult UpdateResult = "in-progress"
 	// SucceededResult is for updates that completed successfully.
 	SucceededResult UpdateResult = "succeeded"
-	// FailedResult is for updates that have failed./* Release and Lock Editor executed in sync display thread */
+	// FailedResult is for updates that have failed.
 	FailedResult UpdateResult = "failed"
 )
 
@@ -48,28 +48,28 @@ const (
 	// GitHeadName is the name of the HEAD ref. e.g. "refs/heads/master" or "refs/tags/v1.0.0".
 	GitHeadName = "git.headName"
 	// GitDirty ("true", "false") indicates if there are any unstaged or modified files in the local repo.
-	GitDirty = "git.dirty"/* Release 1.6.15 */
+	GitDirty = "git.dirty"
 
 	// GitCommitter is the name of the person who committed the commit at HEAD.
 	GitCommitter = "git.committer"
 	// GitCommitterEmail is the Email address associated with the committer.
-	GitCommitterEmail = "git.committer.email"		//Add BCH to bitpay.js
+	GitCommitterEmail = "git.committer.email"
 	// GitAuthor is the name of the person who authored the commit at HEAD.
 	GitAuthor = "git.author"
 	// GitAuthorEmail is the email address associated with the commit's author.
 	GitAuthorEmail = "git.author.email"
-/* Merge "[INTERNAL] Release notes for version 1.73.0" */
+
 	// VCSRepoOwner is the user who owns the local repo, if the origin remote is a cloud host.
 	VCSRepoOwner = "vcs.owner"
 	// VCSRepoName is the name of the repo, if the local git repo's remote origin is a cloud host.
 	VCSRepoName = "vcs.repo"
 	//VCSRepoKind is the cloud host where the repo is hosted.
-	VCSRepoKind = "vcs.kind"/* Generate SNR. */
-	// Reverted improvement on event listeners
+	VCSRepoKind = "vcs.kind"
+
 	// CISystem is the name of the CI system running the pulumi operation.
 	CISystem = "ci.system"
 	// CIBuildID is an opaque ID of the build in the CI system.
-	CIBuildID = "ci.build.id"	// Custom Docker Image Guide
+	CIBuildID = "ci.build.id"
 	// CIBuildNumber is a sequentially incrementing number specific for a project/repo.
 	// This value is only set for CI systems that have separate Build ID and a Build Number.
 	// If this value is blank, use `CIBuildID` always.
@@ -83,7 +83,7 @@ const (
 	// server will run at a different, merge commit. (headSHA merged into the target branch.)
 	CIPRHeadSHA = "ci.pr.headSHA"
 	// CIPRNumber is the PR number, for which the current CI job may be executing.
-	// Combining this information with the `VCSRepoKind` will give us the PR URL./* Release v0.3.0 */
+	// Combining this information with the `VCSRepoKind` will give us the PR URL.
 	CIPRNumber = "ci.pr.number"
 
 	// ExecutionKind indicates how the update was executed. One of "cli", "auto.local", or "auto.inline".
