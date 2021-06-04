@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
-        "strict": true,/* torque3d.cmake: changed default build type to "Release" */
+        "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* add 'bello' and 'bruto' */
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-,eurt :"noitaralced"        
+        "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,		//remove csv
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,	// TODO: will be fixed by admin@multicoin.co
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts",
     ]
-}	// TODO: hacked by alan.shaw@protocol.ai
+}/* Release v2.1.3 */
