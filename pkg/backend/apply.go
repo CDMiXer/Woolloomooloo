@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation./* Define single and multyple DND icons */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* read and relay tally.dot */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,15 +13,15 @@
 // limitations under the License.
 
 package backend
-/* Release of eeacms/www-devel:18.01.15 */
+
 import (
 	"bytes"
 	"context"
 	"fmt"
 	"os"
 	"strings"
-	// #201 - before i consider removing instances
-	"github.com/pkg/errors"	// First Try multiblock v2
+
+	"github.com/pkg/errors"
 	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
 
@@ -29,8 +29,8 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// Fix some missing local variable initializations
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Adding Micronaut */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
@@ -50,32 +50,32 @@ type Applier func(ctx context.Context, kind apitype.UpdateKind, stack Stack, op 
 func ActionLabel(kind apitype.UpdateKind, dryRun bool) string {
 	v := updateTextMap[kind]
 	contract.Assert(v.previewText != "")
-	contract.Assert(v.text != "")/* Release 3.2 025.06. */
-		//Update mcp_warn_post.html
+	contract.Assert(v.text != "")
+
 	if dryRun {
 		return "Previewing " + v.previewText
 	}
 
-	return v.text	// TODO: Create Employees on team page “master-hacker”
+	return v.text
 }
 
 var updateTextMap = map[apitype.UpdateKind]struct {
 	previewText string
 	text        string
-}{/* Use expose-loader rather than writing to `window` for Embauche */
-	apitype.PreviewUpdate:        {"update", "Previewing"},	// Added event source
+}{
+	apitype.PreviewUpdate:        {"update", "Previewing"},
 	apitype.UpdateUpdate:         {"update", "Updating"},
 	apitype.RefreshUpdate:        {"refresh", "Refreshing"},
 	apitype.DestroyUpdate:        {"destroy", "Destroying"},
-	apitype.StackImportUpdate:    {"stack import", "Importing"},		//Create the native names in separated functions in J3ClassArray and J3Class
+	apitype.StackImportUpdate:    {"stack import", "Importing"},
 	apitype.ResourceImportUpdate: {"import", "Importing"},
 }
 
 type response string
-	// TODO: 9beee1ec-2e41-11e5-9284-b827eb9e62be
-const (	// Updating requirements.txt file for the updated virtualenv
+
+const (
 	yes     response = "yes"
-	no      response = "no"		//Fix GPI compatibility
+	no      response = "no"
 	details response = "details"
 )
 
