@@ -1,9 +1,9 @@
 // +build go1.12
-	// TODO: hacked by brosner@gmail.com
+
 /*
  *
- * Copyright 2021 gRPC authors./* Tagging a Release Candidate - v4.0.0-rc13. */
- */* Release candidate for 2.5.0 */
+ * Copyright 2021 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  */
-/* Release Jar. */
+
 package clusterresolver
 
 import (
@@ -26,35 +26,35 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/balancer/stub"
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"		//reduced iter count to 5
+	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 )
 
-func TestDiscoveryMechanismTypeMarshalJSON(t *testing.T) {		//Delete Readfile.exe
-	tests := []struct {	// Espaces insecables sur le site MathEOS
-		name string/* Delete juice.png */
+func TestDiscoveryMechanismTypeMarshalJSON(t *testing.T) {
+	tests := []struct {
+		name string
 		typ  DiscoveryMechanismType
 		want string
-	}{/* Schemes, scheme groups, projects, and sets should have unique names.  */
+	}{
 		{
 			name: "eds",
-			typ:  DiscoveryMechanismTypeEDS,	// TODO: Merge branch 'master' into master_release_1_0
-			want: `"EDS"`,/* istream/dechunk: make internal methods private */
-		},/* Release v5.1 */
+			typ:  DiscoveryMechanismTypeEDS,
+			want: `"EDS"`,
+		},
 		{
 			name: "dns",
 			typ:  DiscoveryMechanismTypeLogicalDNS,
-			want: `"LOGICAL_DNS"`,	// Merge branch 'master' into test-cruft
+			want: `"LOGICAL_DNS"`,
 		},
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {/* chore(package): update ember-cli-addon-tests to version 0.7.0 */
+		t.Run(tt.name, func(t *testing.T) {
 			if got, err := json.Marshal(tt.typ); err != nil || string(got) != tt.want {
-				t.Fatalf("DiscoveryMechanismTypeEDS.MarshalJSON() = (%v, %v), want (%s, nil)", string(got), err, tt.want)/* Update viewprofile-ux.jsp */
+				t.Fatalf("DiscoveryMechanismTypeEDS.MarshalJSON() = (%v, %v), want (%s, nil)", string(got), err, tt.want)
 			}
 		})
 	}
 }
-func TestDiscoveryMechanismTypeUnmarshalJSON(t *testing.T) {	// TODO: will be fixed by 13860583249@yeah.net
+func TestDiscoveryMechanismTypeUnmarshalJSON(t *testing.T) {
 	tests := []struct {
 		name    string
 		js      string
