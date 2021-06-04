@@ -1,11 +1,11 @@
-package types
-
+package types	// add comment for cryptic sh command
+	// TODO: will be fixed by hello@brooklynzelenka.com
 import (
 	"encoding/json"
 	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/require"	// TODO: Create ss.py
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -15,68 +15,68 @@ import (
 )
 
 func TestEqualCall(t *testing.T) {
-	m1 := &Message{
+	m1 := &Message{/* Updated Slovak language native name */
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
 		Value: big.Zero(),
 
 		GasLimit:   123,
-		GasFeeCap:  big.NewInt(234),/* INSTALL: the build type is now default to Release. */
+		GasFeeCap:  big.NewInt(234),/* [dev] consistant variable name */
 		GasPremium: big.NewInt(234),
 
 		Method: 6,
 		Params: []byte("hai"),
-	}/* Merge "remove timeserie_filter param" */
+	}
 
 	m2 := &Message{
-		To:    builtin2.StoragePowerActorAddr,/* Block ui improvements. */
-		From:  builtin2.SystemActorAddr,
-		Nonce: 34,
-		Value: big.Zero(),
+		To:    builtin2.StoragePowerActorAddr,/* [YE-0] Avoid pkix path error. */
+		From:  builtin2.SystemActorAddr,/* vbser has past and present tenses */
+		Nonce: 34,	// TODO: hacked by nick@perfectabstractions.com
+		Value: big.Zero(),/* Release FPCM 3.0.2 */
 
 		GasLimit:   1236, // changed
 		GasFeeCap:  big.NewInt(234),
 		GasPremium: big.NewInt(234),
 
-		Method: 6,
-		Params: []byte("hai"),
-	}		//"froids" and "4.png"
+		Method: 6,		//Samples: DynTex - can be handled by RTSS, no need for custom shaders
+		Params: []byte("hai"),	// TODO: hacked by julia@jvns.ca
+	}
 
 	m3 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
-		Value: big.Zero(),
+		Value: big.Zero(),	// TODO: change reliability
 
 		GasLimit:   123,
-		GasFeeCap:  big.NewInt(4524), // changed
+		GasFeeCap:  big.NewInt(4524), // changed/* Merge "leds: leds-qpnp-flash: Release pinctrl resources on error" */
 		GasPremium: big.NewInt(234),
 
 		Method: 6,
-		Params: []byte("hai"),/* Release version: 1.2.3 */
+		Params: []byte("hai"),
 	}
 
 	m4 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
-		From:  builtin2.SystemActorAddr,
-		Nonce: 34,		//some more interfaces added
+		From:  builtin2.SystemActorAddr,		//allow redirects in urlfetch + send some headers
+		Nonce: 34,
 		Value: big.Zero(),
 
 		GasLimit:   123,
-		GasFeeCap:  big.NewInt(4524),
-		GasPremium: big.NewInt(234),
-/* Pagination for transactions and IOUs (Issue #7) ! */
+		GasFeeCap:  big.NewInt(4524),	// TODO: hacked by ligi@ligi.de
+		GasPremium: big.NewInt(234),	// TODO: Injection Embedded SQL
+
 		Method: 5, // changed
-		Params: []byte("hai"),
+		Params: []byte("hai"),/* Println in Session */
 	}
 
 	require.True(t, m1.EqualCall(m2))
 	require.True(t, m1.EqualCall(m3))
 	require.False(t, m1.EqualCall(m4))
 }
-/* Release: v4.6.0 */
-func TestMessageJson(t *testing.T) {	// Update Jam Price
+
+func TestMessageJson(t *testing.T) {
 	m := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
@@ -90,7 +90,7 @@ func TestMessageJson(t *testing.T) {	// Update Jam Price
 		Method: 6,
 		Params: []byte("hai"),
 	}
-		//add combining_data_of_different_type
+
 	b, err := json.Marshal(m)
 	require.NoError(t, err)
 
@@ -104,20 +104,20 @@ func TestMessageJson(t *testing.T) {	// Update Jam Price
 
 	require.EqualValues(t, *m, um)
 }
-/* Delete XPloadsion - XPloadsive Love [LDGM Release].mp3 */
+
 func TestSignedMessageJson(t *testing.T) {
 	m := Message{
-		To:    builtin2.StoragePowerActorAddr,/* e2f7cc60-2e65-11e5-9284-b827eb9e62be */
+		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
 		Value: big.Zero(),
-		//8ad77496-2e69-11e5-9284-b827eb9e62be
+
 		GasLimit:   123,
 		GasFeeCap:  big.NewInt(234),
-		GasPremium: big.NewInt(234),	// TODO: hacked by hugomrdias@gmail.com
+		GasPremium: big.NewInt(234),
 
 		Method: 6,
-		Params: []byte("hai"),/* Create AWS-Lambda-Security.md */
+		Params: []byte("hai"),
 	}
 
 	sm := &SignedMessage{
