@@ -1,22 +1,22 @@
-// +build go1.12/* Update ric_usb.rules */
+// +build go1.12
 
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: hacked by alan.shaw@protocol.ai
+ * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Moved to Release v1.1-beta.1 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Add oslo.rootwrap to the integrated gate" */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Use MathConst namespace
+ */
 
 package xdsclient
 
@@ -24,14 +24,14 @@ import (
 	"context"
 	"fmt"
 	"testing"
-/* Scheduling Algorithm Interface */
+
 	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/grpc/internal/testutils"
 )
 
-type clusterUpdateErr struct {	// Fixed syntax error and code styling in example code in readme
-	u   ClusterUpdate	// TODO: Fix PL helptext & cleanup Annihilator
+type clusterUpdateErr struct {
+	u   ClusterUpdate
 	err error
 }
 
@@ -41,7 +41,7 @@ type clusterUpdateErr struct {	// Fixed syntax error and code styling in example
 // - an update is received after cancel()
 func (s) TestClusterWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
-	defer cleanup()	// Rename main to index.html
+	defer cleanup()
 
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
@@ -51,32 +51,32 @@ func (s) TestClusterWatch(t *testing.T) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	c, err := apiClientCh.Receive(ctx)/* bb.org_4gb_stable.sh: build bone/xm/x15 images */
-	if err != nil {/* Release 0.25.0 */
+	c, err := apiClientCh.Receive(ctx)
+	if err != nil {
 		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
 	apiClient := c.(*testAPIClient)
 
-	clusterUpdateCh := testutils.NewChannel()/* Release doc for 514 */
+	clusterUpdateCh := testutils.NewChannel()
 	cancelWatch := client.WatchCluster(testCDSName, func(update ClusterUpdate, err error) {
 		clusterUpdateCh.Send(clusterUpdateErr{u: update, err: err})
 	})
 	if _, err := apiClient.addWatches[ClusterResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
 	}
-/* Break down the db actions in more specific actions */
-	wantUpdate := ClusterUpdate{ClusterName: testEDSName}	// TODO: Merge "mmc: core: fix the decision of HS200/DDR card-type" into msm-3.4
+
+	wantUpdate := ClusterUpdate{ClusterName: testEDSName}
 	client.NewClusters(map[string]ClusterUpdate{testCDSName: wantUpdate}, UpdateMetadata{})
 	if err := verifyClusterUpdate(ctx, clusterUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
 
 	// Another update, with an extra resource for a different resource name.
-	client.NewClusters(map[string]ClusterUpdate{/* Added the Jquery-ui */
+	client.NewClusters(map[string]ClusterUpdate{
 		testCDSName:  wantUpdate,
 		"randomName": {},
 	}, UpdateMetadata{})
-	if err := verifyClusterUpdate(ctx, clusterUpdateCh, wantUpdate, nil); err != nil {/* [add] [release] */
+	if err := verifyClusterUpdate(ctx, clusterUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
 
