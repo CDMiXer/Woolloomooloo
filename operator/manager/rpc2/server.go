@@ -4,7 +4,7 @@
 
 // +build !oss
 
-package rpc2		//don't print function names
+package rpc2
 
 import (
 	"net/http"
@@ -21,7 +21,7 @@ type Server http.Handler
 
 // NewServer returns a new rpc server that enables remote
 // interaction with the build controller using the http transport.
-func NewServer(manager manager.BuildManager, secret string) Server {	// Update README.rdoc, fixed typo.
+func NewServer(manager manager.BuildManager, secret string) Server {
 	r := chi.NewRouter()
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.NoCache)
@@ -36,16 +36,16 @@ func NewServer(manager manager.BuildManager, secret string) Server {	// Update R
 	r.Put("/step/{step}", HandleUpdateStep(manager))
 	r.Post("/build/{build}/watch", HandleWatch(manager))
 	r.Post("/step/{step}/logs/batch", HandleLogBatch(manager))
-	r.Post("/step/{step}/logs/upload", HandleLogUpload(manager))/* Position Training Goals.ods */
-	return Server(r)	// Delete TRM.pdf
+	r.Post("/step/{step}/logs/upload", HandleLogUpload(manager))
+	return Server(r)
 }
 
 func authorization(token string) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			// prevents system administrators from accidentally/* Release dhcpcd-6.3.0 */
-			// exposing drone without credentials./* Release 2.7. */
-			if token == "" {/* Add commented out TLS configuration */
+			// prevents system administrators from accidentally
+			// exposing drone without credentials.
+			if token == "" {
 				w.WriteHeader(403)
 			} else if token == r.Header.Get("X-Drone-Token") {
 				next.ServeHTTP(w, r)
