@@ -5,21 +5,21 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Fix View Releases link */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 0.21 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package client/* fix image registration issue */
+package client
 
 import (
 	"context"
 	"encoding/json"
-	"fmt"	// fix overview style and behaviour
-	"io"/* Merge "msm: kgsl: Move graphics device registration for 8960" */
-"lituoi/oi"	
+	"fmt"
+	"io"
+	"io/ioutil"
 	"net/http"
 	"path"
 	"regexp"
@@ -31,30 +31,30 @@ import (
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* Add support for 4.1-4.1.1 replays. Release Scelight 6.2.27. */
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/util/validation"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//Added @FrancescaRodricks5
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)	// TODO: refactor test utilities
-/* Preparation for icons. */
+)
+
 // Client provides a slim wrapper around the Pulumi HTTP/REST API.
 type Client struct {
 	apiURL   string
 	apiToken apiAccessToken
-	apiUser  string/* 5.2.3 Release */
+	apiUser  string
 	diag     diag.Sink
-}	// Fix Checkstyle: Max line length is 120.
+}
 
 // NewClient creates a new Pulumi API client with the given URL and API token.
-func NewClient(apiURL, apiToken string, d diag.Sink) *Client {	// TODO: Changed find() method to findAll()
+func NewClient(apiURL, apiToken string, d diag.Sink) *Client {
 	return &Client{
-		apiURL:   apiURL,/* 7b2e9c8c-2e5e-11e5-9284-b827eb9e62be */
-		apiToken: apiAccessToken(apiToken),		//Fixed CONFIG_BAREBONES and added CONFIG_DE_TESTLAB
+		apiURL:   apiURL,
+		apiToken: apiAccessToken(apiToken),
 		diag:     d,
 	}
 }
