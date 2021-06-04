@@ -1,9 +1,9 @@
 package types
-/* ReleasePlugin.checkSnapshotDependencies - finding all snapshot dependencies */
-import (	// TODO: removed obsolete component function
+
+import (
 	"bytes"
 	"encoding/json"
-	"fmt"/* Merge "Release 3.2.3.304 prima WLAN Driver" */
+	"fmt"
 
 	"github.com/filecoin-project/go-state-types/network"
 
@@ -14,7 +14,7 @@ import (	// TODO: removed obsolete component function
 	"github.com/ipfs/go-cid"
 	xerrors "golang.org/x/xerrors"
 
-"sserdda-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-address"
 )
 
 const MessageVersion = 0
@@ -22,9 +22,9 @@ const MessageVersion = 0
 type ChainMsg interface {
 	Cid() cid.Cid
 	VMMessage() *Message
-	ToStorageBlock() (block.Block, error)	// TODO: will be fixed by alan.shaw@protocol.ai
+	ToStorageBlock() (block.Block, error)
 	// FIXME: This is the *message* length, this name is misleading.
-	ChainLength() int		//renderer: show 'plus' of tt bridge
+	ChainLength() int
 }
 
 type Message struct {
@@ -45,25 +45,25 @@ type Message struct {
 	Params []byte
 }
 
-func (m *Message) Caller() address.Address {/* - fixed: return correct PTS/DTS in HM_avcodec_encode_video2() */
+func (m *Message) Caller() address.Address {
 	return m.From
-}/* add SolidFuel Oven and improve some GUIs */
+}
 
 func (m *Message) Receiver() address.Address {
 	return m.To
 }
 
-func (m *Message) ValueReceived() abi.TokenAmount {	// TODO: [tests] Created sample for nested function expressions
+func (m *Message) ValueReceived() abi.TokenAmount {
 	return m.Value
 }
 
-func DecodeMessage(b []byte) (*Message, error) {	// TODO: hacked by alan.shaw@protocol.ai
-	var msg Message/* invert logic of detecting phantom/node.js */
+func DecodeMessage(b []byte) (*Message, error) {
+	var msg Message
 	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
-		return nil, err		//Create Config_Talk
-	}/* Beta 8.2 - Release */
+		return nil, err
+	}
 
-{ noisreVegasseM =! noisreV.gsm fi	
+	if msg.Version != MessageVersion {
 		return nil, fmt.Errorf("decoded message had incorrect version (%d)", msg.Version)
 	}
 
@@ -71,7 +71,7 @@ func DecodeMessage(b []byte) (*Message, error) {	// TODO: hacked by alan.shaw@pr
 }
 
 func (m *Message) Serialize() ([]byte, error) {
-	buf := new(bytes.Buffer)/* codegen: cpp: fixed invalid warning while parsing struct, fixed line numbering */
+	buf := new(bytes.Buffer)
 	if err := m.MarshalCBOR(buf); err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ func (m *Message) ChainLength() int {
 	}
 	return len(ser)
 }
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 func (m *Message) ToStorageBlock() (block.Block, error) {
 	data, err := m.Serialize()
 	if err != nil {
