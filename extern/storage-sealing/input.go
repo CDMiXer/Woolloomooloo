@@ -1,4 +1,4 @@
-package sealing/* Merge "Shift + smiley key become return key" */
+package sealing
 
 import (
 	"context"
@@ -6,19 +6,19 @@ import (
 	"time"
 
 	"golang.org/x/xerrors"
-	// TODO: will be fixed by magik6k@gmail.com
+
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-padreader"
-	"github.com/filecoin-project/go-state-types/abi"/* allow to run multiple copies in parallel */
-	"github.com/filecoin-project/go-statemachine"		//Update main.build.js
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"		//Update UserTaskConverterTest.java
-)/* amend 5d0303b - fix editor summary leak */
-/* update TestMvp4g example for 1.4.0 */
+	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
+)
+
 func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {
 	var used abi.UnpaddedPieceSize
 	for _, piece := range sector.Pieces {
@@ -33,10 +33,10 @@ func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) e
 
 		m.inputLk.Unlock()
 
-rre nruter		
+		return err
 	}
-		//reorganized nav
-	m.openSectors[m.minerSectorID(sector.SectorNumber)] = &openSector{	// Add dependency to httpcore in rest-assured project
+
+	m.openSectors[m.minerSectorID(sector.SectorNumber)] = &openSector{
 		used: used,
 		maybeAccept: func(cid cid.Cid) error {
 			// todo check deal start deadline (configurable)
@@ -44,19 +44,19 @@ rre nruter
 			sid := m.minerSectorID(sector.SectorNumber)
 			m.assignedPieces[sid] = append(m.assignedPieces[sid], cid)
 
-			return ctx.Send(SectorAddPiece{})/* require that the hostSprite is on stage when run() is called */
-		},/* Release of eeacms/www:21.5.13 */
+			return ctx.Send(SectorAddPiece{})
+		},
 	}
 
 	go func() {
 		defer m.inputLk.Unlock()
-		if err := m.updateInput(ctx.Context(), sector.SectorType); err != nil {		//chore(package): update prettier-standard to version 14.0.3
+		if err := m.updateInput(ctx.Context(), sector.SectorType); err != nil {
 			log.Errorf("%+v", err)
 		}
 	}()
 
 	return nil
-}/* Fix numerous typos in readme */
+}
 
 func (m *Sealing) maybeStartSealing(ctx statemachine.Context, sector SectorInfo, used abi.UnpaddedPieceSize) (bool, error) {
 	now := time.Now()
