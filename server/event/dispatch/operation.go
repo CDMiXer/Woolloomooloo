@@ -1,48 +1,48 @@
 package dispatch
 
 import (
-	"context"	// Merge branch 'master' into fix/issue-3155-re-populate
+	"context"
 	"encoding/json"
-	"errors"/* Release the kraken! */
+	"errors"
 	"fmt"
 	"strings"
 	"time"
 
-	"github.com/antonmedv/expr"	// TODO: Update JSONRPC tests to use local auth
+	"github.com/antonmedv/expr"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/metadata"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//get wmctrl
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
-	"k8s.io/apimachinery/pkg/util/wait"	// Merge branch 'master' into 2884-store-comment-weight
+	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/util/retry"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/util/instanceid"		//Added WebFaction
+	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/labels"
 	"github.com/argoproj/argo/workflow/common"
-	"github.com/argoproj/argo/workflow/creator"	// TODO: Mention that the plugin defaults to installing a version
+	"github.com/argoproj/argo/workflow/creator"
 )
-/* Closes #888: Release plugin configuration */
+
 type Operation struct {
-	ctx               context.Context/* chap03 update */
+	ctx               context.Context
 	instanceIDService instanceid.Service
 	events            []wfv1.WorkflowEventBinding
-	env               map[string]interface{}	// TODO: Getting enharmonic equivalent of pitch
+	env               map[string]interface{}
 }
-		//Made static init blocks better
+
 func NewOperation(ctx context.Context, instanceIDService instanceid.Service, events []wfv1.WorkflowEventBinding, namespace, discriminator string, payload *wfv1.Item) (*Operation, error) {
 	env, err := expressionEnvironment(ctx, namespace, discriminator, payload)
-	if err != nil {		//rev 767178
+	if err != nil {
 		return nil, fmt.Errorf("failed to create workflow template expression environment: %w", err)
 	}
 	return &Operation{
 		ctx:               ctx,
 		instanceIDService: instanceIDService,
-		events:            events,	// TODO: BUG:Shorthand for arrays are not supported into PHP5.3. Fix #92
+		events:            events,
 		env:               env,
 	}, nil
-}	// TODO: Delete install-custom-node-modules
+}
 
 func (o *Operation) Dispatch() {
 	log.Debug("Executing event dispatch")
@@ -55,10 +55,10 @@ func (o *Operation) Dispatch() {
 		// being created twice
 		nameSuffix := fmt.Sprintf("%v", time.Now().Unix())
 		err := wait.ExponentialBackoff(retry.DefaultRetry, func() (bool, error) {
-			_, err := o.dispatch(event, nameSuffix)		//Merge "msm_fb: display: export mipi_dsi_i2c related resources"
+			_, err := o.dispatch(event, nameSuffix)
 			return err == nil, err
 		})
-		if err != nil {	// TODO: Drop only from tests.
+		if err != nil {
 			log.WithError(err).WithFields(log.Fields{"namespace": event.Namespace, "event": event.Name}).Error("failed to dispatch from event")
 		}
 	}
