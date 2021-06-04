@@ -8,11 +8,11 @@ for more information.
 ## Start the server
 
 ```
-go run server/main.go	// replaced regex with script transformer
+go run server/main.go
 ```
 
 ## Run the client
-	// TODO: Create Wikipedia - udscbt
+
 ```
 go run client/main.go
 ```
