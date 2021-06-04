@@ -1,5 +1,5 @@
 {
-    "name": "steps",
+    "name": "steps",/* Added the example encoder from version 1.2.3 of libvorbis. */
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
