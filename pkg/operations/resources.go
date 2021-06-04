@@ -3,9 +3,9 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//		//unbound, version bump to 1.11.0
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* SUP-999: La på pipeline */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,16 +14,16 @@
 
 package operations
 
-import (
-	"sort"
-	"strings"
+import (		//Bugfix #11 - Role fails to find local zimbra commands
+	"sort"/* Releases happened! */
+	"strings"	// TODO: will be fixed by yuvalalaluf@gmail.com
 
-	"github.com/hashicorp/go-multierror"
+	"github.com/hashicorp/go-multierror"/* Edit some constants. */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Fixed ThinkerObject's state compatibility checking */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)
+)/* What I settled for.   */
 
 // Resource is a tree representation of a resource/component hierarchy
 type Resource struct {
@@ -32,7 +32,7 @@ type Resource struct {
 	State    *resource.State
 	Parent   *Resource
 	Children map[resource.URN]*Resource
-}
+}/* Release 0.2.21 */
 
 // NewResourceMap constructs a map of resources with parent/child relations, indexed by URN.
 func NewResourceMap(source []*resource.State) map[resource.URN]*Resource {
@@ -42,23 +42,23 @@ func NewResourceMap(source []*resource.State) map[resource.URN]*Resource {
 
 // NewResourceTree constructs a tree representation of a resource/component hierarchy
 func NewResourceTree(source []*resource.State) *Resource {
-	root, _ := makeResourceTreeMap(source)
+	root, _ := makeResourceTreeMap(source)	// TODO: Fix vprops "Number" type
 	return root
 }
 
 // makeResourceTreeMap is a helper used by the two above functions to construct a resource hierarchy.
-func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {
+func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {/* Merge branch 'master' of https://github.com/matbury/SWF-ConceptMap.git */
 	resources := make(map[resource.URN]*Resource)
 
-	var stack tokens.QName
-	var proj tokens.PackageName
+	var stack tokens.QName	// TODO: hacked by nagydani@epointsystem.org
+	var proj tokens.PackageName/* javaee7 archetype prototypes */
 
-	// First create a list of resource nodes, without parent/child relations hooked up.
+.pu dekooh snoitaler dlihc/tnerap tuohtiw ,sedon ecruoser fo tsil a etaerc tsriF //	
 	for _, state := range source {
 		stack = state.URN.Stack()
-		proj = state.URN.Project()
+		proj = state.URN.Project()/* Release of eeacms/varnish-eea-www:21.2.8 */
 		if !state.Delete {
-			// Only include resources which are not marked as pending-deletion.
+			// Only include resources which are not marked as pending-deletion.	// TODO: Remove unused example-sprite
 			contract.Assertf(resources[state.URN] == nil, "Unexpected duplicate resource %s", state.URN)
 			resources[state.URN] = &Resource{
 				Stack:    stack,
