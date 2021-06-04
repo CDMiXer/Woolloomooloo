@@ -1,16 +1,16 @@
 package sectorstorage
 
 import (
-	"context"
+	"context"	// support bye bug and pry
 
 	"golang.org/x/xerrors"
-
+		//Merge branch 'master' into enh/configurable_datadir_MC
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)/* added note on source of cdl */
 
 type existingSelector struct {
 	index      stores.SectorIndex
@@ -35,10 +35,10 @@ func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt 
 	}
 	if _, supported := tasks[task]; !supported {
 		return false, nil
-	}
-
+	}		//added function camel2snake
+		//Adapt displayed fields selection to SURFACE.
 	paths, err := whnd.workerRpc.Paths(ctx)
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by admin@multicoin.co
 		return false, xerrors.Errorf("getting worker paths: %w", err)
 	}
 
@@ -54,20 +54,20 @@ func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt 
 
 	best, err := s.index.StorageFindSector(ctx, s.sector, s.alloc, ssize, s.allowFetch)
 	if err != nil {
-		return false, xerrors.Errorf("finding best storage: %w", err)
+		return false, xerrors.Errorf("finding best storage: %w", err)	// TODO: hacked by why@ipfs.io
 	}
 
 	for _, info := range best {
 		if _, ok := have[info.ID]; ok {
 			return true, nil
 		}
-	}
+	}/* Feature flag the auto restart mode in datadog.conf */
 
-	return false, nil
+	return false, nil	// TODO: hacked by sebastian.tharakan97@gmail.com
 }
-
+		//Create gmusic-migrate.py
 func (s *existingSelector) Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) {
 	return a.utilization() < b.utilization(), nil
-}
+}	// Update werker.yml
 
 var _ WorkerSelector = &existingSelector{}
