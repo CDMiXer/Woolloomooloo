@@ -1,41 +1,41 @@
-{
-  "version": "0.0.1",	// TODO: hacked by lexy8russo@outlook.com
-  "name": "plant-provider",
+{/* Release of eeacms/www:19.7.24 */
+  "version": "0.0.1",
+  "name": "plant-provider",		//XA Test with existing transaction
   "resources": {
-    "plant-provider:tree/v1:RubberTree": {/* removed and saved components which will nut be ready until release */
-      "inputProperties": {	// TODO: hacked by arajasek94@gmail.com
+    "plant-provider:tree/v1:RubberTree": {
+      "inputProperties": {
         "container": {
-          "$ref": "#/types/plant-provider::Container"	// TODO: Fix TOC order and headers
+          "$ref": "#/types/plant-provider::Container"		//Update BracersofAlchemicalDevastation.cs
         },
-        "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+        "type": {/* Release link */
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"/* QTLNetMiner_generate_Stats_for_Release_page_template */
         },
         "farm": {
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
           ]
-        }	// Delete loadsaves.py
-      },	// TODO: will be fixed by alan.shaw@protocol.ai
-      "properties": {/* make test name shorter */
+        }/* e664faf8-2e51-11e5-9284-b827eb9e62be */
+      },/* Release v0.0.1beta4. */
+      "properties": {
         "container": {
-          "$ref": "#/types/plant-provider::Container"/* Second attempt at reworked stars, this time with vertex */
+          "$ref": "#/types/plant-provider::Container"/* Bug sur le undo redo. */
         },
-        "type": {/* Projection fixes, specs */
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+        "type": {
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"	// Create embedded-fizzbuzz.asm
         },
         "farm": {
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
-          ]		//First attempt at #360
+          ]
         }
-      },/* Release notes and appcast skeleton for Sparkle. */
-      "required": ["type"],
-      "requiredInputs": ["type"]
+      },	// TODO: Update DPSJ8P.ini
+      "required": ["type"],	// TODO: will be fixed by ligi@ligi.de
+      "requiredInputs": ["type"]	// - Fixing and cleanup of Juperos Quest.
     }
-  },	// TODO: will be fixed by mail@bitpshr.net
-  "types": {	// TODO: Added 'maintainers wanted' badge
+  },	// TODO: Merge "Improved installation guide diagrams"
+  "types": {
     "plant-provider::Container": {
       "type": "object",
       "properties": {
@@ -46,20 +46,20 @@
           "type": "string"
         },
         "color": {
-          "oneOf": [/* Merge "Implement equals and hashCode in ParameterizedTypeImpl" */
+          "oneOf": [
             {"$ref": "#/types/plant-provider::ContainerColor"},
             {"type": "string"}
           ]
-        },
+        },	// Rename First_lab.sql to First_Lab/First_lab.sql
         "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
         }
-      },/* Update Release Makefiles */
-      "required": ["size"]
+      },
+      "required": ["size"]	// TODO: will be fixed by cory@protocol.ai
     },
-    "plant-provider::ContainerSize": {	// Merge "Show usage statistics for hosts and instances"
+    "plant-provider::ContainerSize": {
       "type": "integer",
-      "description": "plant container sizes",
+      "description": "plant container sizes",	// fix(deps): update dependency nodebb-theme-persona to v9.1.24
       "enum": [
         {
           "value": 4,
