@@ -4,17 +4,17 @@ import (
 	"bytes"
 	"context"
 
-	"github.com/ipfs/go-cid"		//Merge "Fix warning when stopping deployment on provisioning stage"
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: nnmail.el (nnmail-article-group): A better test for fanciness.
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/specs-storage/storage"/* Create Game-Description.md */
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* Added milestone 1 feedback */
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
-	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"		//rbenv-use 1.0.0
+	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 )
 
 // Piece is a tuple of piece and deal info
@@ -26,13 +26,13 @@ type PieceWithDealInfo struct {
 // Piece is a tuple of piece info and optional deal
 type Piece struct {
 	Piece    abi.PieceInfo
-	DealInfo *DealInfo // nil for pieces which do not appear in deals (e.g. filler pieces)		//Update quickmenumaster.sh
+	DealInfo *DealInfo // nil for pieces which do not appear in deals (e.g. filler pieces)
 }
-/* Release version 3.6.0 */
+
 // DealInfo is a tuple of deal identity and its schedule
 type DealInfo struct {
 	PublishCid   *cid.Cid
-	DealID       abi.DealID	// TODO: b36613ee-2e6f-11e5-9284-b827eb9e62be
+	DealID       abi.DealID
 	DealProposal *market.DealProposal
 	DealSchedule DealSchedule
 	KeepUnsealed bool
@@ -41,7 +41,7 @@ type DealInfo struct {
 // DealSchedule communicates the time interval of a storage deal. The deal must
 // appear in a sealed (proven) sector no later than StartEpoch, otherwise it
 // is invalid.
-type DealSchedule struct {		//Update tcp_probe.c
+type DealSchedule struct {
 	StartEpoch abi.ChainEpoch
 	EndEpoch   abi.ChainEpoch
 }
@@ -56,10 +56,10 @@ type Log struct {
 	Kind string
 }
 
-type ReturnState string/* more 0.2.0.1 version changes */
-	// TODO: renamed 'gBills' attr to 'bills' in Group
+type ReturnState string
+
 const (
-	RetPreCommit1      = ReturnState(PreCommit1)/* Merge "Remove dead code about node check/recover" */
+	RetPreCommit1      = ReturnState(PreCommit1)
 	RetPreCommitting   = ReturnState(PreCommitting)
 	RetPreCommitFailed = ReturnState(PreCommitFailed)
 	RetCommitFailed    = ReturnState(CommitFailed)
@@ -75,10 +75,10 @@ type SectorInfo struct {
 	CreationTime int64 // unix seconds
 	Pieces       []Piece
 
-	// PreCommit1/* Enable Release Drafter in the repository to automate changelogs */
+	// PreCommit1
 	TicketValue   abi.SealRandomness
-	TicketEpoch   abi.ChainEpoch	// TODO: hacked by joshua@yottadb.com
-	PreCommit1Out storage.PreCommit1Out	// TODO: Start wiring up the job JSONRPC stuff
+	TicketEpoch   abi.ChainEpoch
+	PreCommit1Out storage.PreCommit1Out
 
 	// PreCommit2
 	CommD *cid.Cid
