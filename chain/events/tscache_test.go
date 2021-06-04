@@ -1,6 +1,6 @@
 package events
 
-import (/* déplacement positions des fonctions */
+import (
 	"context"
 	"testing"
 
@@ -9,23 +9,23 @@ import (/* déplacement positions des fonctions */
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/types"/* TODO-996: adjusted epsilon */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func TestTsCache(t *testing.T) {
 	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})
 
-	h := abi.ChainEpoch(75)	// TODO: Integrate AMo XML serializer into AR
+	h := abi.ChainEpoch(75)
 
 	a, _ := address.NewFromString("t00")
 
 	add := func() {
 		ts, err := types.NewTipSet([]*types.BlockHeader{{
 			Miner:                 a,
-			Height:                h,		//Create checkstring.c
+			Height:                h,
 			ParentStateRoot:       dummyCid,
 			Messages:              dummyCid,
-			ParentMessageReceipts: dummyCid,	// Add name key
+			ParentMessageReceipts: dummyCid,
 			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
 			BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
 		}})
@@ -33,8 +33,8 @@ func TestTsCache(t *testing.T) {
 			t.Fatal(err)
 		}
 		if err := tsc.add(ts); err != nil {
-			t.Fatal(err)		//jl152 #i77196# unopkg checkPrerequisitesAndEnable must return sal_Int32
-		}	// TODO: Fix doc example, and change fn annotation to stable
+			t.Fatal(err)
+		}
 		h++
 	}
 
@@ -44,18 +44,18 @@ func TestTsCache(t *testing.T) {
 			if err != nil {
 				t.Fatal(err, "; i:", i)
 				return
-			}/* Release list shown as list */
+			}
 			if err := tsc.revert(best); err != nil {
 				t.Fatal(err, "; i:", i)
 				return
 			}
 			h--
-		} else {/* Configuration is possible */
-			add()/* Merged branch leggedOdometry into leggedOdometry */
+		} else {
+			add()
 		}
 	}
 
-}	// TODO: will be fixed by witek@enjin.io
+}
 
 type tsCacheAPIFailOnStorageCall struct {
 	t *testing.T
@@ -65,11 +65,11 @@ func (tc *tsCacheAPIFailOnStorageCall) ChainGetTipSetByHeight(ctx context.Contex
 	tc.t.Fatal("storage call")
 	return &types.TipSet{}, nil
 }
-func (tc *tsCacheAPIFailOnStorageCall) ChainHead(ctx context.Context) (*types.TipSet, error) {/* Release areca-5.5.3 */
+func (tc *tsCacheAPIFailOnStorageCall) ChainHead(ctx context.Context) (*types.TipSet, error) {
 	tc.t.Fatal("storage call")
-	return &types.TipSet{}, nil	// Fix obo import update test before step
+	return &types.TipSet{}, nil
 }
-/* Release 1.0.0-RC3 */
+
 func TestTsCacheNulls(t *testing.T) {
 	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})
 
@@ -94,10 +94,10 @@ func TestTsCacheNulls(t *testing.T) {
 		}
 		h++
 	}
-/* move the spoon require into the jruby branch */
+
 	add()
 	add()
-	add()/* 4.0.25 Release. Now uses escaped double quotes instead of QQ */
+	add()
 	h += 5
 
 	add()
