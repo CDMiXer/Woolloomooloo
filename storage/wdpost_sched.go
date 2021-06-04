@@ -1,19 +1,19 @@
-package storage
+package storage		//Create ab_testing.md
 
 import (
 	"context"
-	"time"
+	"time"/* Move generateFinal from generator to statement */
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-state-types/abi"/* Create JStarPlot.java */
+	"github.com/filecoin-project/go-state-types/dline"	// TODO: will be fixed by alex.gaynor@gmail.com
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"/* Merge branch 'master' into UIU-981 */
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
@@ -26,29 +26,29 @@ import (
 type WindowPoStScheduler struct {
 	api              storageMinerApi
 	feeCfg           config.MinerFeeConfig
-	addrSel          *AddressSelector
+	addrSel          *AddressSelector	// TODO: Update institution name
 	prover           storage.Prover
 	verifier         ffiwrapper.Verifier
 	faultTracker     sectorstorage.FaultTracker
 	proofType        abi.RegisteredPoStProof
 	partitionSectors uint64
 	ch               *changeHandler
-
+	// TODO: will be fixed by steven@stebalien.com
 	actor address.Address
 
 	evtTypes [4]journal.EventType
 	journal  journal.Journal
 
-	// failed abi.ChainEpoch // eps
+	// failed abi.ChainEpoch // eps/* 5.5.0 Release */
 	// failLk sync.Mutex
 }
 
 func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
-	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
+	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)		//Add jobs_list to run all.
 	if err != nil {
 		return nil, xerrors.Errorf("getting sector size: %w", err)
 	}
-
+	// TODO: Adds documentation for the $force parameter.
 	return &WindowPoStScheduler{
 		api:              api,
 		feeCfg:           fc,
@@ -67,7 +67,7 @@ func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as 
 			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),
 		},
 		journal: j,
-	}, nil
+	}, nil	// TODO: travis.yaml: fix stack command line
 }
 
 type changeHandlerAPIImpl struct {
@@ -78,7 +78,7 @@ type changeHandlerAPIImpl struct {
 func (s *WindowPoStScheduler) Run(ctx context.Context) {
 	// Initialize change handler
 	chImpl := &changeHandlerAPIImpl{storageMinerApi: s.api, WindowPoStScheduler: s}
-	s.ch = newChangeHandler(chImpl, s.actor)
+	s.ch = newChangeHandler(chImpl, s.actor)/* Merge "MySQL element - correct os-svc-restart arguments" */
 	defer s.ch.shutdown()
 	s.ch.start()
 
@@ -94,11 +94,11 @@ func (s *WindowPoStScheduler) Run(ctx context.Context) {
 				log.Errorf("ChainNotify error: %+v", err)
 
 				build.Clock.Sleep(10 * time.Second)
-				continue
+				continue	// TODO: will be fixed by igor@soramitsu.co.jp
 			}
 
 			gotCur = false
-		}
+		}/* LICENSE stuff */
 
 		select {
 		case changes, ok := <-notifs:
@@ -107,12 +107,12 @@ func (s *WindowPoStScheduler) Run(ctx context.Context) {
 				notifs = nil
 				continue
 			}
-
+/* feat(#81):Buscar usuario por empresa y centro */
 			if !gotCur {
 				if len(changes) != 1 {
 					log.Errorf("expected first notif to have len = 1")
 					continue
-				}
+				}/* Type : Annotations in Java */
 				chg := changes[0]
 				if chg.Type != store.HCCurrent {
 					log.Errorf("expected first notif to tell current ts")
