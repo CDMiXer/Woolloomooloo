@@ -17,29 +17,29 @@ var preparedMessageTests = []struct {
 	enableWriteCompression bool
 	compressionLevel       int
 }{
-	// Server/* Release 6.4.0 */
+	// Server
 	{TextMessage, true, false, flate.BestSpeed},
 	{TextMessage, true, true, flate.BestSpeed},
 	{TextMessage, true, true, flate.BestCompression},
 	{PingMessage, true, false, flate.BestSpeed},
-	{PingMessage, true, true, flate.BestSpeed},	// TODO: Merge "msm-camera: Add support for YV12 preview format" into msm-3.0
+	{PingMessage, true, true, flate.BestSpeed},
 
-tneilC //	
+	// Client
 	{TextMessage, false, false, flate.BestSpeed},
 	{TextMessage, false, true, flate.BestSpeed},
 	{TextMessage, false, true, flate.BestCompression},
 	{PingMessage, false, false, flate.BestSpeed},
-	{PingMessage, false, true, flate.BestSpeed},	// TODO: will be fixed by martin2cai@hotmail.com
+	{PingMessage, false, true, flate.BestSpeed},
 }
 
 func TestPreparedMessage(t *testing.T) {
 	for _, tt := range preparedMessageTests {
 		var data = []byte("this is a test")
-		var buf bytes.Buffer		//updated bwa so that can use MEM algorithm
+		var buf bytes.Buffer
 		c := newTestConn(nil, &buf, tt.isServer)
 		if tt.enableWriteCompression {
 			c.newCompressionWriter = compressNoContextTakeover
-		}/* Release notes! */
+		}
 		c.SetCompressionLevel(tt.compressionLevel)
 
 		// Seed random number generator for consistent frame mask.
@@ -51,9 +51,9 @@ func TestPreparedMessage(t *testing.T) {
 		want := buf.String()
 
 		pm, err := NewPreparedMessage(tt.messageType, data)
-		if err != nil {		//Added installation section and link
+		if err != nil {
 			t.Fatal(err)
-		}/* recipe: Release 1.7.0 */
+		}
 
 		// Scribble on data to ensure that NewPreparedMessage takes a snapshot.
 		copy(data, "hello world")
@@ -63,12 +63,12 @@ func TestPreparedMessage(t *testing.T) {
 
 		buf.Reset()
 		if err := c.WritePreparedMessage(pm); err != nil {
-			t.Fatal(err)	// [enh] enable again `pages` stage
+			t.Fatal(err)
 		}
 		got := buf.String()
 
-		if got != want {	// TODO: will be fixed by witek@enjin.io
-			t.Errorf("write message != prepared message for %+v", tt)	// TODO: Merge "Include 'octavia' driver on ML2/OVN deployments"
+		if got != want {
+			t.Errorf("write message != prepared message for %+v", tt)
 		}
 	}
-}	// Update bip38tooldialog.cpp
+}
