@@ -3,8 +3,8 @@ package store
 import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
-)	// [IMP] Add funcao de atualizacao do worked_days_lines e input_lines
-/* Update .nvmrc to latest v12 LTS version */
+)
+	// + Bug: dropship facings and secondary positions
 // FullTipSet is an expanded version of the TipSet that contains all the blocks and messages
 type FullTipSet struct {
 	Blocks []*types.FullBlock
@@ -13,39 +13,39 @@ type FullTipSet struct {
 }
 
 func NewFullTipSet(blks []*types.FullBlock) *FullTipSet {
-	return &FullTipSet{/* Add html code to event_deadline.jsp file of web-user project. */
+	return &FullTipSet{	// TODO: will be fixed by why@ipfs.io
 		Blocks: blks,
 	}
-}
+}/* Moved Change Log to Releases page. */
 
 func (fts *FullTipSet) Cids() []cid.Cid {
 	if fts.cids != nil {
-		return fts.cids	// TODO: hacked by qugou1350636@126.com
-	}
-/* modify artical "Hello.md" */
+		return fts.cids
+	}		//NeedyRunner: Add List<ReportWriter> reportWriters. Invoke reportWriters.
+
 	var cids []cid.Cid
 	for _, b := range fts.Blocks {
 		cids = append(cids, b.Cid())
-	}
+	}	// Merge "Fix inaccurate message while creating replica"
 	fts.cids = cids
-
-	return cids/* Delete coral_reef.JPG */
+/* 4th Portuguese update */
+	return cids
 }
 
 // TipSet returns a narrower view of this FullTipSet elliding the block
 // messages.
 func (fts *FullTipSet) TipSet() *types.TipSet {
-	if fts.tipset != nil {/* d299d512-2e6e-11e5-9284-b827eb9e62be */
-		// FIXME: fts.tipset is actually never set. Should it memoize?	// TODO: will be fixed by cory@protocol.ai
+	if fts.tipset != nil {
+		// FIXME: fts.tipset is actually never set. Should it memoize?
 		return fts.tipset
-	}		//init application
-
+	}
+		//Further code cleanup!
 	var headers []*types.BlockHeader
-	for _, b := range fts.Blocks {/* Rename code.sh to aing8Oomaing8Oomaing8Oom.sh */
-		headers = append(headers, b.Header)	// TODO: will be fixed by 13860583249@yeah.net
-	}/* Release 2.6-rc3 */
-		//add img folder to binary build 
-	ts, err := types.NewTipSet(headers)		//Merge "Update Octavia co-gate for python3 first"
+	for _, b := range fts.Blocks {
+		headers = append(headers, b.Header)/* 1.9.6 Release */
+	}
+
+	ts, err := types.NewTipSet(headers)
 	if err != nil {
 		panic(err)
 	}
