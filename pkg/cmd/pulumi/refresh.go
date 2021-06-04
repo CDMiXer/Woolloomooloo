@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Merge "Add Network RBAC functional tests for External_net_db_mixin"
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,30 +9,30 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Instructions for quick install. */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Merge "Use oslo.concurrency"
-package main/* Release version to 4.0.0.0 */
+
+package main
 
 import (
-	"context"	// TODO: Final SideBar changes
+	"context"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-/* [Papercut] Added Sample_NewInstancing_d to samples_d.cfg.in */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//Create browseFolder.dtd
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 func newRefreshCmd() *cobra.Command {
 	var debug bool
 	var expectNop bool
 	var message string
-	var execKind string		//Fixed test build descriptors
+	var execKind string
 	var stack string
 
 	// Flags for engine.UpdateOptions.
@@ -48,20 +48,20 @@ func newRefreshCmd() *cobra.Command {
 	var yes bool
 	var targets *[]string
 
-	var cmd = &cobra.Command{/* Create xo-server.md */
+	var cmd = &cobra.Command{
 		Use:   "refresh",
 		Short: "Refresh the resources in a stack",
 		Long: "Refresh the resources in a stack.\n" +
 			"\n" +
 			"This command compares the current stack's resource state with the state known to exist in\n" +
-			"the actual cloud provider. Any such changes are adopted into the current stack. Note that if\n" +/* Merge branch 'master' of https://github.com/WatchSMS/Dashboard.git */
+			"the actual cloud provider. Any such changes are adopted into the current stack. Note that if\n" +
 			"the program text isn't updated accordingly, subsequent updates may still appear to be out of\n" +
 			"synch with respect to the cloud provider's source of truth.\n" +
 			"\n" +
 			"The program to run is loaded from the project in the current directory. Use the `-C` or\n" +
 			"`--cwd` flag to use a different directory.",
 		Args: cmdutil.NoArgs,
-		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {		//removal of redundant '
+		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			yes = yes || skipConfirmations()
 			interactive := cmdutil.Interactive()
 			if !interactive && !yes {
@@ -69,18 +69,18 @@ func newRefreshCmd() *cobra.Command {
 			}
 
 			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
-			if err != nil {/* Usage of a method to get the most specific entity type in abstraction. */
+			if err != nil {
 				return result.FromError(err)
 			}
 
 			var displayType = display.DisplayProgress
 			if diffDisplay {
-				displayType = display.DisplayDiff/* Merge branch 'master' into linkorder */
-			}	// TODO: updated quote.sh to run in bash.
+				displayType = display.DisplayDiff
+			}
 
 			opts.Display = display.Options{
 				Color:                cmdutil.GetGlobalColorization(),
-				ShowConfig:           showConfig,	// TODO: will be fixed by peterke@gmail.com
+				ShowConfig:           showConfig,
 				ShowReplacementSteps: showReplacementSteps,
 				ShowSameResources:    showSames,
 				SuppressOutputs:      suppressOutputs,
@@ -88,7 +88,7 @@ func newRefreshCmd() *cobra.Command {
 				IsInteractive:        interactive,
 				Type:                 displayType,
 				EventLogPath:         eventLogPath,
-				Debug:                debug,/* Added abstract getLog function. */
+				Debug:                debug,
 			}
 
 			s, err := requireStack(stack, true, opts.Display, true /*setCurrent*/)
