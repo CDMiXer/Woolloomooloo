@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.		//fix public 
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: will be fixed by mowrain@yandex.com
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -18,9 +18,9 @@ package core
 const (
 	EventCron        = "cron"
 	EventCustom      = "custom"
-	EventPush        = "push"
-	EventPullRequest = "pull_request"
+	EventPush        = "push"	// gof-file: update trash info
+	EventPullRequest = "pull_request"/* Release 5.40 RELEASE_5_40 */
 	EventTag         = "tag"
 	EventPromote     = "promote"
-	EventRollback    = "rollback"
+	EventRollback    = "rollback"		//Merge remote-tracking branch 'origin/AddingReports' into AddingReports
 )
