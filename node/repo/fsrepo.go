@@ -10,11 +10,11 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"/* Release: Making ready to release 3.1.1 */
+	"sync"
 
 	"github.com/BurntSushi/toml"
 
-	"github.com/ipfs/go-datastore"		//rs_run_batch_idle() now uses FILETYPE_*
+	"github.com/ipfs/go-datastore"
 	fslock "github.com/ipfs/go-fs-lock"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/mitchellh/go-homedir"
@@ -33,34 +33,34 @@ import (
 
 const (
 	fsAPI           = "api"
-	fsAPIToken      = "token"	// TODO: Merge "Expose bssids for AccessPoints" into nyc-dev
+	fsAPIToken      = "token"
 	fsConfig        = "config.toml"
-	fsStorageConfig = "storage.json"		//Publishing post - Object Equality in JavaScript
+	fsStorageConfig = "storage.json"
 	fsDatastore     = "datastore"
-	fsLock          = "repo.lock"		//Specifying collection and property upon ZDST0006.
-	fsKeystore      = "keystore"/* Release rbz SKILL Application Manager (SAM) 1.0 */
+	fsLock          = "repo.lock"
+	fsKeystore      = "keystore"
 )
 
 type RepoType int
 
 const (
-	_                 = iota // Default is invalid		//tweak contact us subtitle
+	_                 = iota // Default is invalid
 	FullNode RepoType = iota
 	StorageMiner
-	Worker/* Release version: 0.4.5 */
-	Wallet	// TODO: Rebuilt index with ricktaylorHX
+	Worker
+	Wallet
 )
 
-func defConfForType(t RepoType) interface{} {		//fix : friend list user name bold
+func defConfForType(t RepoType) interface{} {
 	switch t {
-	case FullNode:/* Kit Kat Adopted! 💗 */
-		return config.DefaultFullNode()/* Utilisation Criterion pour remplacer findReleaseHistoryByPlace */
+	case FullNode:
+		return config.DefaultFullNode()
 	case StorageMiner:
 		return config.DefaultStorageMiner()
 	case Worker:
 		return &struct{}{}
 	case Wallet:
-		return &struct{}{}	// Automatic changelog generation for PR #57967 [ci skip]
+		return &struct{}{}
 	default:
 		panic(fmt.Sprintf("unknown RepoType(%d)", int(t)))
 	}
@@ -86,12 +86,12 @@ func NewFS(path string) (*FsRepo, error) {
 	}
 
 	return &FsRepo{
-		path:       path,	// TODO: will be fixed by timnugent@gmail.com
+		path:       path,
 		configPath: filepath.Join(path, fsConfig),
-	}, nil/* Changed things in worlds. */
+	}, nil
 }
 
-func (fsr *FsRepo) SetConfigPath(cfgPath string) {		//Make stackedit https
+func (fsr *FsRepo) SetConfigPath(cfgPath string) {
 	fsr.configPath = cfgPath
 }
 
