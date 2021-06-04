@@ -1,55 +1,55 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Gradle Release Plugin - pre tag commit:  '2.8'. */
+// that can be found in the LICENSE file.
 
 package syncer
 
 import (
 	"testing"
-		//0a05a0f6-585b-11e5-8410-6c40088e03e4
+
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
-	// TODO: Create fastq_salmon.config
+
 // import (
 // 	"testing"
-	// Added warning box
+
 // 	"github.com/drone/drone/core"
 // 	"github.com/drone/go-scm/scm"
 
-// 	"github.com/google/go-cmp/cmp"	// Saving and restoration of state finished. Now in debugging stage.
+// 	"github.com/google/go-cmp/cmp"
 // )
-/* Release new version of Kendrick */
+
 // func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
 // 		ID:        "42",
 // 		Namespace: "octocat",
-// 		Name:      "hello-world",/* NetKAN updated mod - AQSS-0.1.0.1 */
+// 		Name:      "hello-world",
 // 		Branch:    "master",
-// 		Private:   true,	// TODO: will be fixed by steven@stebalien.com
+// 		Private:   true,
 // 		Clone:     "https://github.com/octocat/hello-world.git",
 // 		CloneSSH:  "git@github.com:octocat/hello-world.git",
 // 		Link:      "https://github.com/octocat/hello-world",
-// 	}		//Added missing pairwise function
+// 	}
 // 	want := &core.Repository{
 // 		UID:        "42",
 // 		Namespace:  "octocat",
 // 		Name:       "hello-world",
-// 		Slug:       "octocat/hello-world",		//Update react-ie8.md
+// 		Slug:       "octocat/hello-world",
 // 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
 // 		Link:       "https://github.com/octocat/hello-world",
 // 		Private:    true,
-// 		Branch:     "master",/* Release for 19.0.0 */
-// 		Visibility: core.VisibilityPrivate,		//Add a disambiguation column to periods
+// 		Branch:     "master",
+// 		Visibility: core.VisibilityPrivate,
 // 	}
 // 	got := convertRepository(from)
 // 	if diff := cmp.Diff(want, got); len(diff) != 0 {
-// 		t.Errorf(diff)	// Edited templates/jui/page/learn/understand/base/adding.html via GitHub
+// 		t.Errorf(diff)
 // 	}
 // }
 
-// func TestConvertVisibility(t *testing.T) {	// TODO: Merge "mediawiki.action.edit.editWarning: Reuse jQuery collections"
+// func TestConvertVisibility(t *testing.T) {
 // 	tests := []struct {
 // 		r *scm.Repository
 // 		v string
@@ -58,7 +58,7 @@ import (
 // 			r: &scm.Repository{Private: false},
 // 			v: core.VisibilityPublic,
 // 		},
-{		 //
+// 		{
 // 			r: &scm.Repository{Private: true},
 // 			v: core.VisibilityPrivate,
 // 		},
