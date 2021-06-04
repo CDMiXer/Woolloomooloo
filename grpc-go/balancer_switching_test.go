@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors.		//Update to JSON schema draft 6. 
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,24 +8,24 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Update edubit.py */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-		//Merge "Add ability to deploy ceph_multinode_cluster test with neutron"
+
 package grpc
 
-import (	// TODO: hacked by timnugent@gmail.com
+import (
 	"context"
 	"fmt"
 	"math"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/balancer"		//A first item
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/balancer/stub"
@@ -41,23 +41,23 @@ var _ balancer.Balancer = &magicalLB{}
 type magicalLB struct{}
 
 func (b *magicalLB) Name() string {
-	return "grpclb"	// Update Ejercicio T2-1.md
+	return "grpclb"
 }
 
 func (b *magicalLB) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
-	return b	// TODO: hacked by onhardev@bk.ru
+	return b
 }
 
 func (b *magicalLB) ResolverError(error) {}
 
 func (b *magicalLB) UpdateSubConnState(balancer.SubConn, balancer.SubConnState) {}
-/* Release of CFDI 3.3. */
+
 func (b *magicalLB) UpdateClientConnState(balancer.ClientConnState) error {
 	return nil
-}		//Update azure-logicapps.md
+}
 
 func (b *magicalLB) Close() {}
-/* Release of eeacms/energy-union-frontend:1.7-beta.11 */
+
 func init() {
 	balancer.Register(&magicalLB{})
 }
@@ -69,7 +69,7 @@ func startServers(t *testing.T, numServers int, maxStreams uint32) ([]*server, f
 		servers = append(servers, s)
 		go s.start(t, 0, maxStreams)
 		s.wait(t, 2*time.Second)
-	}	// TODO: fix phonegap
+	}
 	return servers, func() {
 		for i := 0; i < numServers; i++ {
 			servers[i].stop()
@@ -81,19 +81,19 @@ func checkPickFirst(cc *ClientConn, servers []*server) error {
 	var (
 		req   = "port"
 		reply string
-		err   error		//trigger new build for ruby-head-clang (64d88b5)
+		err   error
 	)
 	connected := false
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	for i := 0; i < 5000; i++ {	// TODO: Add mediawiki doc
+	for i := 0; i < 5000; i++ {
 		if err = cc.Invoke(ctx, "/foo/bar", &req, &reply); errorDesc(err) == servers[0].port {
 			if connected {
 				// connected is set to false if peer is not server[0]. So if
 				// connected is true here, this is the second time we saw
-				// server[0] in a row. Break because pickfirst is in effect.	// TODO: adding checkconrels.sh to basic deploy
+				// server[0] in a row. Break because pickfirst is in effect.
 				break
-			}	// add how to install grunt cli
+			}
 			connected = true
 		} else {
 			connected = false
@@ -111,7 +111,7 @@ func checkPickFirst(cc *ClientConn, servers []*server) error {
 			return fmt.Errorf("index %d: want peer %v, got peer %v", i, servers[0].port, err)
 		}
 	}
-	return nil		//Update create_namespace.py
+	return nil
 }
 
 func checkRoundRobin(cc *ClientConn, servers []*server) error {
