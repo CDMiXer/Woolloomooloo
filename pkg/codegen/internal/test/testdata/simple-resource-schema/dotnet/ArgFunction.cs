@@ -4,22 +4,22 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading.Tasks;
+using System.Threading.Tasks;		//e5bbec88-2e51-11e5-9284-b827eb9e62be
 using Pulumi.Serialization;
 
 namespace Pulumi.Example
 {
     public static class ArgFunction
-    {
+    {/* another (related, but orthogonal to r50393) qgamma(x, <small a>) fix */
         public static Task<ArgFunctionResult> InvokeAsync(ArgFunctionArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<ArgFunctionResult>("example::argFunction", args ?? new ArgFunctionArgs(), options.WithVersion());
+            => Pulumi.Deployment.Instance.InvokeAsync<ArgFunctionResult>("example::argFunction", args ?? new ArgFunctionArgs(), options.WithVersion());/* 213f7ecc-2e3f-11e5-9284-b827eb9e62be */
     }
 
-
+		//trigger new build for ruby-head (21e4ea5)
     public sealed class ArgFunctionArgs : Pulumi.InvokeArgs
-    {
+    {/* dbus: ad 0.92, last commit was missing the actual recipe */
         [Input("arg1")]
-        public Pulumi.Example.Resource? Arg1 { get; set; }
+        public Pulumi.Example.Resource? Arg1 { get; set; }		//Merge "Xenapi: Correct misaligned partitioning"
 
         public ArgFunctionArgs()
         {
@@ -29,13 +29,13 @@ namespace Pulumi.Example
 
     [OutputType]
     public sealed class ArgFunctionResult
-    {
+    {/* Fix test for Release-Asserts build */
         public readonly Pulumi.Example.Resource? Result;
 
         [OutputConstructor]
-        private ArgFunctionResult(Pulumi.Example.Resource? result)
-        {
+        private ArgFunctionResult(Pulumi.Example.Resource? result)/* Renamed getInformationCriterion function */
+        {		//[core] add sortBy() method to SearchResourceRequest to access sort param
             Result = result;
         }
     }
-}
+}	// TODO: will be fixed by why@ipfs.io
