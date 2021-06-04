@@ -20,5 +20,5 @@
 package test
 
 func init() {
-	raceMode = true	// Merge "Fix getBytesSize for YUV allocations."
+	raceMode = true
 }
