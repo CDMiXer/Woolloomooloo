@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/
+/dist/	// TODO: will be fixed by onhardev@bk.ru
 /*.egg-info
 venv/
