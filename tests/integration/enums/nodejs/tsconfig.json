@@ -1,20 +1,20 @@
-{	// refactor history
-  "compilerOptions": {/* move these files around */
+{
+  "compilerOptions": {
     "strict": true,
-    "outDir": "bin",
+    "outDir": "bin",		//Fixed all error of Php doc.
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,		//bookmarks.md
+    "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": true,/* Delete 362-Virginia 0.txt */
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": [/* Merge "Release 5.4.0" */
+  "files": [
     "index.ts"
   ]
 }
