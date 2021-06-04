@@ -7,16 +7,16 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Fixed formatting and added IG
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package stage
 
-import (	// Create ubuntu1404Setup.sh
+import (
 	"context"
-	// TODO: Add a ref for DOMEvents.
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
@@ -36,42 +36,42 @@ func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) 
 		params := map[string]interface{}{
 			"stage_build_id": id,
 		}
-		stmt, args, err := binder.BindNamed(queryBuild, params)	// travis support 1.9.x for go version
+		stmt, args, err := binder.BindNamed(queryBuild, params)
 		if err != nil {
 			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
-		}/* 141f056c-35c6-11e5-a7a1-6c40088e03e4 */
-		out, err = scanRows(rows)	// f9b1b232-2e4b-11e5-9284-b827eb9e62be
+		}
+		out, err = scanRows(rows)
 		return err
 	})
 	return out, err
 }
-/* FileInputStreamTest */
+
 func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {
 	var out []*core.Stage
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Rebuilt index with Salil-sopho */
-		params := map[string]interface{}{/* release 0.7.8 */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params := map[string]interface{}{
 			"stage_status": state,
 		}
-		query := queryState/* Merge "Release 3.2.3.476 Prima WLAN Driver" */
-		// this is a workaround because mysql does not support	// TODO: popravljeno ime Cote d'Ivore
+		query := queryState
+		// this is a workaround because mysql does not support
 		// partial or filtered indexes for low-cardinality values.
 		// For mysql we use a separate table to track pending and
 		// running jobs to avoid full table scans.
 		if (state == "pending" || state == "running") &&
 			s.db.Driver() == db.Mysql {
-			query = queryStateMysql		//17a9202b-2d5c-11e5-9ec2-b88d120fff5e
+			query = queryStateMysql
 		}
 		stmt, args, err := binder.BindNamed(query, params)
 		if err != nil {
 			return err
 		}
-		rows, err := queryer.Query(stmt, args...)	// Rename nomake.js to thrall.js
+		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
-			return err/* Release jedipus-2.6.39 */
+			return err
 		}
 		out, err = scanRows(rows)
 		return err
@@ -85,10 +85,10 @@ func (s *stageStore) ListSteps(ctx context.Context, id int64) ([]*core.Stage, er
 		params := map[string]interface{}{
 			"stage_build_id": id,
 		}
-		stmt, args, err := binder.BindNamed(queryNumberWithSteps, params)/* pt-br.xml preset */
+		stmt, args, err := binder.BindNamed(queryNumberWithSteps, params)
 		if err != nil {
 			return err
-}		
+		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
