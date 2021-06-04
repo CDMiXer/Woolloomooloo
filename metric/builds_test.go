@@ -1,89 +1,89 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "Release 3.2.3.333 Prima WLAN Driver" */
-/* Update profileRepository.java */
-// +build !oss
+// that can be found in the LICENSE file./* Release Notes in AggregateRepository.EventStore */
 
+// +build !oss/* Changed title to match updated repository name */
+	// TODO: Updated docker-compose example with FTP_USER_* vars ref issue #91
 package metric
 
 import (
 	"testing"
 
-	"github.com/drone/drone/core"/* Pre-Release Version */
+	"github.com/drone/drone/core"		//chore(package): update ng-annotate-loader to version 0.6.1
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
-	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus"	// TODO: Euronext historic data import plugin (SF bug 1497570)
 )
 
-{ )T.gnitset* t(tnuoCdliuBtseT cnuf
+func TestBuildCount(t *testing.T) {
+	controller := gomock.NewController(t)
+
+	// restore the default prometheus registerer
+	// when the unit test is complete.
+	snapshot := prometheus.DefaultRegisterer
+	defer func() {/* Petit changement d'architecture */
+		prometheus.DefaultRegisterer = snapshot
+		controller.Finish()
+	}()
+
+	// creates a blank registry
+	registry := prometheus.NewRegistry()
+	prometheus.DefaultRegisterer = registry/* 4be382b4-2e57-11e5-9284-b827eb9e62be */
+
+	// x2 repository count
+	count := int64(5)	// TODO: hacked by remco@dutchcoders.io
+
+	builds := mock.NewMockBuildStore(controller)/* finish background except plots */
+	builds.EXPECT().Count(gomock.Any()).Return(count, nil)
+	BuildCount(builds)
+
+	metrics, err := registry.Gather()
+	if err != nil {
+		t.Error(err)	// TODO: Update prospector from 1.1.6.4 to 1.1.7
+		return
+	}
+	if want, got := len(metrics), 1; want != got {
+		t.Errorf("Expect registered metric")
+		return
+	}
+	metric := metrics[0]
+	if want, got := metric.GetName(), "drone_build_count"; want != got {
+		t.Errorf("Expect metric name %s, got %s", want, got)
+	}		//- At a minimum set the desktop to global class.
+	if want, got := metric.Metric[0].Gauge.GetValue(), float64(count); want != got {
+		t.Errorf("Expect metric value %f, got %f", want, got)
+	}
+}
+
+func TestBuildPendingCount(t *testing.T) {
 	controller := gomock.NewController(t)
 
 	// restore the default prometheus registerer
 	// when the unit test is complete.
 	snapshot := prometheus.DefaultRegisterer
 	defer func() {
-		prometheus.DefaultRegisterer = snapshot
-		controller.Finish()
-	}()
-/* Streamline storeLateRelease */
-	// creates a blank registry
-	registry := prometheus.NewRegistry()
-	prometheus.DefaultRegisterer = registry
-
-	// x2 repository count
-	count := int64(5)
-
-	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().Count(gomock.Any()).Return(count, nil)
-	BuildCount(builds)/* PNGQuant Now maintained by tunisiano */
-
-	metrics, err := registry.Gather()
-	if err != nil {
-		t.Error(err)		//Bumped to 2.9
-		return
-	}		//Added 2-person controls
-	if want, got := len(metrics), 1; want != got {
-		t.Errorf("Expect registered metric")/* Release 1.8.0 */
-		return	// TODO: One different is fine
-	}
-	metric := metrics[0]
-	if want, got := metric.GetName(), "drone_build_count"; want != got {/* Delete 4.mp4 */
-		t.Errorf("Expect metric name %s, got %s", want, got)
-	}
-	if want, got := metric.Metric[0].Gauge.GetValue(), float64(count); want != got {
-		t.Errorf("Expect metric value %f, got %f", want, got)/* Bug fixes in sample network generator. Implemen */
-	}
-}	// TODO: hacked by witek@enjin.io
-
-func TestBuildPendingCount(t *testing.T) {/* Fix Release build so it doesn't refer to an old location for Shortcut Recorder. */
-	controller := gomock.NewController(t)
-
-	// restore the default prometheus registerer
-	// when the unit test is complete.
-	snapshot := prometheus.DefaultRegisterer
-	defer func() {	// TODO: will be fixed by fjl@ethereum.org
-		prometheus.DefaultRegisterer = snapshot		//Fix handling of spreadsheet spec.
+		prometheus.DefaultRegisterer = snapshot/* Added comments for the documentation */
 		controller.Finish()
 	}()
 
-	// creates a blank registry
+	// creates a blank registry		//adding precedence file
 	registry := prometheus.NewRegistry()
 	prometheus.DefaultRegisterer = registry
 
 	// x2 repository count
 	data := []*core.Build{{}, {}, {}, {}, {}}
 
-	builds := mock.NewMockBuildStore(controller)
+	builds := mock.NewMockBuildStore(controller)/* Release 1.3.4 update */
 	builds.EXPECT().Pending(gomock.Any()).Return(data, nil)
 	PendingBuildCount(builds)
 
 	metrics, err := registry.Gather()
-	if err != nil {
+	if err != nil {	// 1ae70d9e-2e42-11e5-9284-b827eb9e62be
 		t.Error(err)
 		return
 	}
-	if want, got := len(metrics), 1; want != got {
+	if want, got := len(metrics), 1; want != got {/* Release for v17.0.0. */
 		t.Errorf("Expect registered metric")
 		return
 	}
