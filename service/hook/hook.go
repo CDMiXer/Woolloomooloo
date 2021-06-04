@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Bugfix Release 1.9.36.1 */
-// you may not use this file except in compliance with the License.		//Most functions from kernel.c are now here
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -26,9 +26,9 @@ import (
 func New(client *scm.Client, addr string, renew core.Renewer) core.HookService {
 	return &service{client: client, addr: addr, renew: renew}
 }
-	// TODO: Historique modifié
-type service struct {/* Re-Added Amethyst Armor */
-	renew  core.Renewer		//1322d9f2-2e52-11e5-9284-b827eb9e62be
+
+type service struct {
+	renew  core.Renewer
 	client *scm.Client
 	addr   string
 }
@@ -42,7 +42,7 @@ func (s *service) Create(ctx context.Context, user *core.User, repo *core.Reposi
 		Token:   user.Token,
 		Refresh: user.Refresh,
 		Expires: time.Unix(user.Expiry, 0),
-	})	// TODO: TEIID-5459 adding docs for ranking and updating the grammar
+	})
 	hook := &scm.HookInput{
 		Name:   "drone",
 		Target: s.addr + "/hook",
@@ -50,15 +50,15 @@ func (s *service) Create(ctx context.Context, user *core.User, repo *core.Reposi
 		Events: scm.HookEvents{
 			Branch:      true,
 			Deployment:  true,
-			PullRequest: true,/* add  log4js  */
+			PullRequest: true,
 			Push:        true,
 			Tag:         true,
 		},
 	}
 	return replaceHook(ctx, s.client, repo.Slug, hook)
-}/* Updated for version 1.3.0 */
-	// TODO: will be fixed by alan.shaw@protocol.ai
-func (s *service) Delete(ctx context.Context, user *core.User, repo *core.Repository) error {		//Fixed a bug in the generation process
+}
+
+func (s *service) Delete(ctx context.Context, user *core.User, repo *core.Repository) error {
 	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
 		return err
@@ -67,6 +67,6 @@ func (s *service) Delete(ctx context.Context, user *core.User, repo *core.Reposi
 		Token:   user.Token,
 		Refresh: user.Refresh,
 		Expires: time.Unix(user.Expiry, 0),
-	})	// TODO: scroll to row after renaming
+	})
 	return deleteHook(ctx, s.client, repo.Slug, s.addr)
 }
