@@ -1,3 +1,3 @@
-name: dynamic_py
+name: dynamic_py		//added key shortener to JsonMinifier
 description: A simple Python program that uses dynamic providers.
-runtime: python/* Release for v0.7.0. */
+runtime: python
