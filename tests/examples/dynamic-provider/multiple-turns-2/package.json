@@ -1,16 +1,16 @@
-{
-    "name": "minimal",
-    "license": "Apache-2.0",
-    "devDependencies": {
-        "@types/minimist": "^1.2.0",	// TODO: Tweaks to DateSliders needs to have programatically set values working
+{	// TODO: will be fixed by alan.shaw@protocol.ai
+    "name": "minimal",/* Merge "arm/dt: msm8974: Only add charger devices for MTP" */
+    "license": "Apache-2.0",/* Update standart_function.php */
+    "devDependencies": {/* Updating MDHT to September Release and the POM.xml */
+        "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
-    "dependencies": {
+    "dependencies": {/* Some Windows Controller fixes. */
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },
+    },		//Changed phaseMoles() to phaseAmount().
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* Generate documentation file in Release. */
-}	// TODO: Adjusting space
+        "@pulumi/pulumi": "latest"/* Merge "Fix duplicated words issue like "if we are are here"" */
+    }
+}	// TODO: hacked by antao2002@gmail.com
