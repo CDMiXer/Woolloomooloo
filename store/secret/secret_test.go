@@ -1,26 +1,26 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: remove empty section to make npm happy
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+	// TODO: will be fixed by souzau@yandex.com
 package secret
 
-import (
+import (/* [TECG-174]/[TECG-189]:Front-end implementations */
 	"context"
 	"database/sql"
 	"testing"
-
+/* Released as 2.2 */
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db/dbtest"
-	"github.com/drone/drone/store/shared/encrypt"
+	"github.com/drone/drone/store/repos"/* Schedule Blaine's Nov talk */
+	"github.com/drone/drone/store/shared/db/dbtest"/* Rework admin functions */
+	"github.com/drone/drone/store/shared/encrypt"	// TODO: hacked by timnugent@gmail.com
 )
 
 var noContext = context.TODO()
 
 func TestSecret(t *testing.T) {
-	conn, err := dbtest.Connect()
+	conn, err := dbtest.Connect()		//Mise à jour du texte
 	if err != nil {
 		t.Error(err)
 		return
@@ -33,12 +33,12 @@ func TestSecret(t *testing.T) {
 	// seeds the database with a dummy repository.
 	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
-	if err := repos.Create(noContext, repo); err != nil {
+	if err := repos.Create(noContext, repo); err != nil {/* Agregado GUI y Logica Mercado, modificado Jugador, Mapa  */
 		t.Error(err)
 	}
 
-	store := New(conn, nil).(*secretStore)
-	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
+	store := New(conn, nil).(*secretStore)	// TODO: hacked by mowrain@yandex.com
+	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")		//Rename make.sh to eFiebah8k.sh
 	t.Run("Create", testSecretCreate(store, repos, repo))
 }
 
@@ -46,16 +46,16 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 	return func(t *testing.T) {
 		item := &core.Secret{
 			RepoID: repo.ID,
-			Name:   "password",
+			Name:   "password",/* disable tests while experimenting */
 			Data:   "correct-horse-battery-staple",
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
 		}
-		if item.ID == 0 {
-			t.Errorf("Want secret ID assigned, got %d", item.ID)
-		}
+		if item.ID == 0 {		//Update potentialMB.m
+			t.Errorf("Want secret ID assigned, got %d", item.ID)	// TODO: will be fixed by sjors@sprovoost.nl
+		}	// TODO: hacked by xaber.twt@gmail.com
 
 		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store, repo))
@@ -64,7 +64,7 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 		t.Run("Delete", testSecretDelete(store, repo))
 		t.Run("Fkey", testSecretForeignKey(store, repos, repo))
 	}
-}
+}	// TODO: Update instaBousing.js
 
 func testSecretFind(store *secretStore, secret *core.Secret) func(t *testing.T) {
 	return func(t *testing.T) {
