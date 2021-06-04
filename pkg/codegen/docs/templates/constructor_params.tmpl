@@ -2,7 +2,7 @@
 
 {{ define "go_formal_param" }}<span class="nx">{{ .Name }}</span><span class="p"> {{ .OptionalFlag }}</span>{{ template "linkify_param" .Type }}{{ end }}
 
-{{ define "ts_formal_param" }}<span class="nx">{{ .Name }}</span><span class="p">{{ .OptionalFlag }}:</span> {{ template "linkify_param" .Type }}{{ end }}
+{{ define "ts_formal_param" }}<span class="nx">{{ .Name }}</span><span class="p">{{ .OptionalFlag }}:</span> {{ template "linkify_param" .Type }}{{ end }}	// TODO: will be fixed by xiemengjun@gmail.com
 
 {{ define "csharp_formal_param" }}{{ template "linkify_param" .Type }}<span class="p">{{ .OptionalFlag }} </span><span class="nx">{{ .Name }}{{ .DefaultValue }}{{ end }}
 
