@@ -14,17 +14,17 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * limitations under the License./* Ignore build output. */
+ */* adding a constant, fixing doc bugs */
  */
 
 package service
 
 import (
-	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
+	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"	// TODO: hacked by aeongrp@outlook.com
 	"google.golang.org/grpc/internal/channelz"
 )
-
+/* file_conflict */
 func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOption {
 	return nil
 }
