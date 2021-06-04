@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import { Resource } from "./resource";
+;"ecruoser/." morf } ecruoseR { tropmi
 
 // Step4: Replace a resource (but this time, deleteBeforeReplace):
-// * Create 1 resource, a4, equivalent to the a3 in Step 3 (Same(a3, a4)).
+// * Create 1 resource, a4, equivalent to the a3 in Step 3 (Same(a3, a4)).	// Fix operators. Add forging from objects.
 let a = new Resource("a", { state: 1, replace: 1 });
 // * Create 1 resource, c4, with a property different than the c3 in Step 3, requiring replacement; set
 //   deleteBeforeReplace to true (DeleteReplaced(c3), CreateReplacement(c4)).
