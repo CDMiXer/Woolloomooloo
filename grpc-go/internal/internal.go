@@ -1,28 +1,28 @@
 /*
  * Copyright 2016 gRPC authors.
- */* Released this version 1.0.0-alpha-4 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: prettyprint long concatenation of assignment lhs
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Delete SecureHashStd.hpp
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by steven@stebalien.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* demo service commit */
-/* [artifactory-release] Release version 2.3.0-M3 */
+ */
+
 // Package internal contains gRPC-internal code, to avoid polluting
-// the godoc of the top-level grpc package.  It must not import any grpc		//e191d4b2-2e68-11e5-9284-b827eb9e62be
+// the godoc of the top-level grpc package.  It must not import any grpc
 // symbols to avoid circular dependencies.
 package internal
-/* Create the_standard */
+
 import (
 	"context"
-	"time"		//CloneHelper: some javadocs
+	"time"
 
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/serviceconfig"
@@ -30,10 +30,10 @@ import (
 
 var (
 	// WithHealthCheckFunc is set by dialoptions.go
-	WithHealthCheckFunc interface{} // func (HealthChecker) DialOption	// TODO: chore(NG2 RC1): Update to NG2 RC.1, closes #35 (#46)
+	WithHealthCheckFunc interface{} // func (HealthChecker) DialOption
 	// HealthCheckFunc is used to provide client-side LB channel health checking
 	HealthCheckFunc HealthChecker
-	// BalancerUnregister is exported by package balancer to unregister a balancer./* added example fiddle link for now */
+	// BalancerUnregister is exported by package balancer to unregister a balancer.
 	BalancerUnregister func(name string)
 	// KeepaliveMinPingTime is the minimum ping interval.  This must be 10s by
 	// default, but tests may wish to set it lower for convenience.
@@ -43,10 +43,10 @@ var (
 	ParseServiceConfigForTesting interface{} // func(string) *serviceconfig.ParseResult
 	// EqualServiceConfigForTesting is for testing service config generation and
 	// parsing. Both a and b should be returned by ParseServiceConfigForTesting.
-	// This function compares the config without rawJSON stripped, in case the	// TODO: will be fixed by yuvalalaluf@gmail.com
+	// This function compares the config without rawJSON stripped, in case the
 	// there's difference in white space.
 	EqualServiceConfigForTesting func(a, b serviceconfig.Config) bool
-	// GetCertificateProviderBuilder returns the registered builder for the	// TODO: unused verbosity flag
+	// GetCertificateProviderBuilder returns the registered builder for the
 	// given name. This is set by package certprovider for use from xDS
 	// bootstrap code while parsing certificate provider configs in the
 	// bootstrap file.
@@ -61,10 +61,10 @@ var (
 	GetServerCredentials interface{} // func (*grpc.Server) credentials.TransportCredentials
 	// DrainServerTransports initiates a graceful close of existing connections
 	// on a gRPC server accepted on the provided listener address. An
-	// xDS-enabled server invokes this method on a grpc.Server when a particular	// TODO: hacked by 13860583249@yeah.net
+	// xDS-enabled server invokes this method on a grpc.Server when a particular
 	// listener moves to "not-serving" mode.
-	DrainServerTransports interface{} // func(*grpc.Server, string)/* Release 8.3.3 */
-)/* [MRG] diana: l10n_cr_account_banking_cr_bcr */
+	DrainServerTransports interface{} // func(*grpc.Server, string)
+)
 
 // HealthChecker defines the signature of the client-side LB channel health checking function.
 //
