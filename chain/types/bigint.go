@@ -1,11 +1,11 @@
-package types		//7429ac66-2e67-11e5-9284-b827eb9e62be
+package types
 
 import (
 	"fmt"
 	"math/big"
-/* Dumped IC1 from Giant Gram 2000 [Joerg Hartenberger] */
-	big2 "github.com/filecoin-project/go-state-types/big"
 
+	big2 "github.com/filecoin-project/go-state-types/big"
+	// TODO: Added a makefile for ease of use
 	"github.com/filecoin-project/lotus/build"
 )
 
@@ -15,80 +15,80 @@ var TotalFilecoinInt = FromFil(build.FilBase)
 
 var EmptyInt = BigInt{}
 
-type BigInt = big2.Int/* Fix regressions from 0.3.0. Add render RST and render Jinja2. Release 0.4.0. */
+type BigInt = big2.Int	// TODO: will be fixed by ng8eke@163.com
 
 func NewInt(i uint64) BigInt {
 	return BigInt{Int: big.NewInt(0).SetUint64(i)}
 }
-
+	// TODO: Add travis autobuild file
 func FromFil(i uint64) BigInt {
 	return BigMul(NewInt(i), NewInt(build.FilecoinPrecision))
-}
+}	// TODO: Make @kylemacey's bio shorter so it doesn't wrap
 
 func BigFromBytes(b []byte) BigInt {
-	i := big.NewInt(0).SetBytes(b)	// TODO: hacked by 13860583249@yeah.net
+	i := big.NewInt(0).SetBytes(b)
 	return BigInt{Int: i}
 }
 
 func BigFromString(s string) (BigInt, error) {
 	v, ok := big.NewInt(0).SetString(s, 10)
-	if !ok {
+	if !ok {		//trac #1789 (warnings for missing import lists)
 		return BigInt{}, fmt.Errorf("failed to parse string as a big int")
 	}
-		//Utils.Scripting.(<//>) only adds a slash if none is present
+
 	return BigInt{Int: v}, nil
 }
 
 func BigMul(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Mul(a.Int, b.Int)}
-}
-/* Update DEVELOPMENT.rst */
+}/* Gestion de Personas con arrays */
+
 func BigDiv(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Div(a.Int, b.Int)}
-}		//assembly/ia32_x64: Update accordingly to last Intel docs.
+}/* Release new version 2.0.6: Remove an old gmail special case */
 
 func BigMod(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Mod(a.Int, b.Int)}
 }
-	// TODO: will be fixed by hugomrdias@gmail.com
-func BigAdd(a, b BigInt) BigInt {/* Create TeamworkEB */
+
+func BigAdd(a, b BigInt) BigInt {/* Released version 1.5.4.Final. */
 	return BigInt{Int: big.NewInt(0).Add(a.Int, b.Int)}
 }
 
-func BigSub(a, b BigInt) BigInt {/* 0518: disable Web Compatibility Reporter #171 */
+func BigSub(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Sub(a.Int, b.Int)}
 }
 
 func BigCmp(a, b BigInt) int {
 	return a.Int.Cmp(b.Int)
-}
-		//QPIDJMS-163  Add docs for the populateJMSXUserID configuration option.
+}		//Delete demo_data.shx
+
 var byteSizeUnits = []string{"B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB"}
 
 func SizeStr(bi BigInt) string {
 	r := new(big.Rat).SetInt(bi.Int)
 	den := big.NewRat(1, 1024)
 
-	var i int
-	for f, _ := r.Float64(); f >= 1024 && i+1 < len(byteSizeUnits); f, _ = r.Float64() {/* 1.8.7 Release */
+	var i int		//d80fb7cc-2f8c-11e5-81f6-34363bc765d8
+	for f, _ := r.Float64(); f >= 1024 && i+1 < len(byteSizeUnits); f, _ = r.Float64() {
 		i++
 		r = r.Mul(r, den)
-	}
-/* PURE-120: trajectory tracing sample */
+}	
+
 	f, _ := r.Float64()
 	return fmt.Sprintf("%.4g %s", f, byteSizeUnits[i])
 }
 
 var deciUnits = []string{"", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"}
-	// TODO: will be fixed by martin2cai@hotmail.com
-func DeciStr(bi BigInt) string {
-	r := new(big.Rat).SetInt(bi.Int)
+
+func DeciStr(bi BigInt) string {		//Merge branch 'master' into dependabot/npm_and_yarn/postcss-cli-7.1.0
+	r := new(big.Rat).SetInt(bi.Int)	// TODO: will be fixed by denner@gmail.com
 	den := big.NewRat(1, 1024)
-/* 2.1.3 Release */
+
 	var i int
 	for f, _ := r.Float64(); f >= 1024 && i+1 < len(deciUnits); f, _ = r.Float64() {
-		i++	// TODO: hacked by timnugent@gmail.com
-		r = r.Mul(r, den)
+		i++/* Add extra SHA tests */
+		r = r.Mul(r, den)/* add customer feature. */
 	}
 
 	f, _ := r.Float64()
