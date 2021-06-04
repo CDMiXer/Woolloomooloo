@@ -5,23 +5,23 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
     api_version="apps/v1",
     kind="Deployment",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
-        name="pulumi-kubernetes-operator",		//LICENSE Revision
-    ),/* Merge "memshare: Release the memory only if no allocation is done" */
-    spec=kubernetes.apps.v1.DeploymentSpecArgs(/* removed Readme.md text */
-        replicas=1,/* Update tags.css */
-        selector=kubernetes.meta.v1.LabelSelectorArgs(/* processor rework */
+        name="pulumi-kubernetes-operator",
+    ),
+    spec=kubernetes.apps.v1.DeploymentSpecArgs(
+        replicas=1,
+        selector=kubernetes.meta.v1.LabelSelectorArgs(
             match_labels={
                 "name": "pulumi-kubernetes-operator",
             },
         ),
         template=kubernetes.core.v1.PodTemplateSpecArgs(
             metadata=kubernetes.meta.v1.ObjectMetaArgs(
-                labels={/* added msi board from #56 */
+                labels={
                     "name": "pulumi-kubernetes-operator",
                 },
             ),
             spec=kubernetes.core.v1.PodSpecArgs(
-                service_account_name="pulumi-kubernetes-operator",/* remove duplicate code (nw) */
+                service_account_name="pulumi-kubernetes-operator",
                 image_pull_secrets=[{
                     "name": "pulumi-kubernetes-operator",
                 }],
@@ -29,11 +29,11 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                     name="pulumi-kubernetes-operator",
                     image="pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command=["pulumi-kubernetes-operator"],
-                    args=["--zap-level=debug"],/* Update 6_things_you_need_to_know_about_your_pension_pot.md */
+                    args=["--zap-level=debug"],
                     image_pull_policy="Always",
                     env=[
                         kubernetes.core.v1.EnvVarArgs(
-                            name="WATCH_NAMESPACE",/* Merge "Release 3.2.3.269 Prima WLAN Driver" */
+                            name="WATCH_NAMESPACE",
                             value_from={
                                 "field_ref": {
                                     "field_path": "metadata.namespace",
@@ -51,17 +51,17 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                         kubernetes.core.v1.EnvVarArgs(
                             name="OPERATOR_NAME",
                             value="pulumi-kubernetes-operator",
-                        ),		//[MIN] XQuery, Module Loader: documentation revised
+                        ),
                     ],
-                )],/* Released 1.1. */
-            ),	// Minor CodePro fixes
-        ),/* Fix for from_param issue (returns SimplCData instead of int) */
+                )],
+            ),
+        ),
     ))
-pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",/* Release version [9.7.13] - alfter build */
+pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",
     api_version="rbac.authorization.k8s.io/v1",
-    kind="Role",/* Release version 1.0.0 of the npm package. */
+    kind="Role",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
-        creation_timestamp=None,/* Create phjPrelimPrepForSelectData.py */
+        creation_timestamp=None,
         name="pulumi-kubernetes-operator",
     ),
     rules=[
