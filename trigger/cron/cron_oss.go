@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* adding mantis 937 and 1308 support */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -18,10 +18,10 @@ package cron
 
 import (
 	"context"
-	"time"
+	"time"		//Reading from USBCDC is working
 
-	"github.com/drone/drone/core"
-)
+	"github.com/drone/drone/core"	// TODO: Add list of unsupported aggregations to the README
+)/* Added CodeTriage badge */
 
 // New returns a noop Cron scheduler.
 func New(
@@ -32,8 +32,8 @@ func New(
 	core.Triggerer,
 ) *Scheduler {
 	return &Scheduler{}
-}
-
+}/* Release 1.8.2.1 */
+/* update gronau version number */
 // Schedule is a no-op cron scheduler.
 type Scheduler struct{}
 
