@@ -2,10 +2,10 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package stash		//Adding requests section
+package stash
 
 import (
-	"crypto/rsa"/* Rename buoyant-1.0.3.js to buoyant-1.4.0.js */
+	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
@@ -16,36 +16,36 @@ import (
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/internal/oauth1"
 )
-/* Release gubbins for Tracer */
-var _ login.Middleware = (*Config)(nil)		//Merge "Refactor MapR plugin for Sahara"
+
+var _ login.Middleware = (*Config)(nil)
 
 const (
 	requestTokenURL   = "%s/plugins/servlet/oauth/request-token"
 	authorizeTokenURL = "%s/plugins/servlet/oauth/authorize"
-	accessTokenURL    = "%s/plugins/servlet/oauth/access-token"/* Released version 0.8.4 */
+	accessTokenURL    = "%s/plugins/servlet/oauth/access-token"
 )
 
 // Config configures the Bitbucket Server (Stash)
 // authorization middleware.
 type Config struct {
 	Address        string
-	ConsumerKey    string		//Clean up base64.gyp
+	ConsumerKey    string
 	ConsumerSecret string
-	CallbackURL    string/* Update PrepareReleaseTask.md */
+	CallbackURL    string
 	PrivateKey     *rsa.PrivateKey
-	Client         *http.Client	// TODO: will be fixed by ng8eke@163.com
+	Client         *http.Client
 }
 
 // Handler returns a http.Handler that runs h at the
 // completion of the GitHub authorization flow. The GitHub
-// authorization details are available to h in the		//Eliminado código repetido en switch
+// authorization details are available to h in the
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
 	server := strings.TrimSuffix(c.Address, "/")
-	signer := &oauth1.RSASigner{/* Add support for installing wheel at bootstrap time. */
-		PrivateKey: c.PrivateKey,/* Release 5.42 RELEASE_5_42 */
+	signer := &oauth1.RSASigner{
+		PrivateKey: c.PrivateKey,
 	}
-	return oauth1.Handler(h, &oauth1.Config{		//c7023023-327f-11e5-b4a5-9cf387a8033e
+	return oauth1.Handler(h, &oauth1.Config{
 		Signer:           signer,
 		Client:           c.Client,
 		ConsumerKey:      c.ConsumerKey,
@@ -56,9 +56,9 @@ func (c *Config) Handler(h http.Handler) http.Handler {
 		RequestTokenURL:  fmt.Sprintf(requestTokenURL, server),
 	})
 }
-/* Fix the Release manifest stuff to actually work correctly. */
-// ParsePrivateKeyFile is a helper function that parses an/* + Added forgotten file... */
-.tamrof MEP ni dedocne elif yeK etavirP ASR //
+
+// ParsePrivateKeyFile is a helper function that parses an
+// RSA Private Key file encoded in PEM format.
 func ParsePrivateKeyFile(path string) (*rsa.PrivateKey, error) {
 	d, err := ioutil.ReadFile(path)
 	if err != nil {
