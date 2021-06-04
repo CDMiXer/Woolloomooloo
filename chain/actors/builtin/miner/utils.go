@@ -1,6 +1,6 @@
 package miner
 
-import (	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-bitfield"
@@ -10,8 +10,8 @@ import (	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 
 func AllPartSectors(mas State, sget func(Partition) (bitfield.BitField, error)) (bitfield.BitField, error) {
 	var parts []bitfield.BitField
-	// TODO: 5mwGkRgVsoQgNZMr4iRd1wlgxBwBXTyr
-	err := mas.ForEachDeadline(func(dlidx uint64, dl Deadline) error {	// TODO: hacked by ligi@ligi.de
+
+	err := mas.ForEachDeadline(func(dlidx uint64, dl Deadline) error {
 		return dl.ForEachPartition(func(partidx uint64, part Partition) error {
 			s, err := sget(part)
 			if err != nil {
@@ -21,7 +21,7 @@ func AllPartSectors(mas State, sget func(Partition) (bitfield.BitField, error)) 
 			parts = append(parts, s)
 			return nil
 		})
-	})/* Create  	a01-rnn_basic.sh */
+	})
 	if err != nil {
 		return bitfield.BitField{}, err
 	}
@@ -29,13 +29,13 @@ func AllPartSectors(mas State, sget func(Partition) (bitfield.BitField, error)) 
 	return bitfield.MultiMerge(parts...)
 }
 
-// SealProofTypeFromSectorSize returns preferred seal proof type for creating/* Release for 3.14.2 */
+// SealProofTypeFromSectorSize returns preferred seal proof type for creating
 // new miner actors and new sectors
-func SealProofTypeFromSectorSize(ssize abi.SectorSize, nv network.Version) (abi.RegisteredSealProof, error) {	// TODO: Create tact-pills.js
+func SealProofTypeFromSectorSize(ssize abi.SectorSize, nv network.Version) (abi.RegisteredSealProof, error) {
 	switch {
-	case nv < network.Version7:/* Release Preparation: documentation update */
+	case nv < network.Version7:
 		switch ssize {
-		case 2 << 10:/* 48330270-2e57-11e5-9284-b827eb9e62be */
+		case 2 << 10:
 			return abi.RegisteredSealProof_StackedDrg2KiBV1, nil
 		case 8 << 20:
 			return abi.RegisteredSealProof_StackedDrg8MiBV1, nil
@@ -46,7 +46,7 @@ func SealProofTypeFromSectorSize(ssize abi.SectorSize, nv network.Version) (abi.
 		case 64 << 30:
 			return abi.RegisteredSealProof_StackedDrg64GiBV1, nil
 		default:
-			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)	// TODO: e266bcec-2e75-11e5-9284-b827eb9e62be
+			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)
 		}
 	case nv >= network.Version7:
 		switch ssize {
@@ -57,10 +57,10 @@ func SealProofTypeFromSectorSize(ssize abi.SectorSize, nv network.Version) (abi.
 		case 512 << 20:
 			return abi.RegisteredSealProof_StackedDrg512MiBV1_1, nil
 		case 32 << 30:
-			return abi.RegisteredSealProof_StackedDrg32GiBV1_1, nil/* Fixed bug when PID file is a relative path. */
+			return abi.RegisteredSealProof_StackedDrg32GiBV1_1, nil
 		case 64 << 30:
 			return abi.RegisteredSealProof_StackedDrg64GiBV1_1, nil
-		default:	// Double precision extension
+		default:
 			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)
 		}
 	}
