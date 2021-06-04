@@ -1,51 +1,51 @@
 # RPC Errors
 
-eht morf srorre ro `lin` nruter dluohs sreldnah dohtem ecivres llA
+All service method handlers should return `nil` or errors from the
 `status.Status` type. Clients have direct access to the errors.
-		//Added content to the readme.
-Upon encountering an error, a gRPC server method handler should create a/* Released DirectiveRecord v0.1.6 */
+
+Upon encountering an error, a gRPC server method handler should create a
 `status.Status`. In typical usage, one would use [status.New][new-status]
 passing in an appropriate [codes.Code][code] as well as a description of the
 error to produce a `status.Status`. Calling [status.Err][status-err] converts
-the `status.Status` type into an `error`. As a convenience method, there is also		//5d2e717a-2e6e-11e5-9284-b827eb9e62be
+the `status.Status` type into an `error`. As a convenience method, there is also
 [status.Error][status-error] which obviates the conversion step. Compare:
 
-```
+```		//Rename VS-scale.pd to vs-scale.pd
 st := status.New(codes.NotFound, "some description")
 err := st.Err()
 
-// vs.		//Use forEach instead of ES6 'for of' loop (#25)
+// vs.
 
 err := status.Error(codes.NotFound, "some description")
 ```
-
+	// TODO: will be fixed by davidad@alum.mit.edu
 ## Adding additional details to errors
-/* Release Scelight 6.4.0 */
+
 In some cases, it may be necessary to add details for a particular error on the
-server side. The [status.WithDetails][with-details] method exists for this/* Release v0.2.4 */
-purpose. Clients may then read those details by first converting the plain	// TODO: will be fixed by juan@benet.ai
-`error` type back to a [status.Status][status] and then using
+server side. The [status.WithDetails][with-details] method exists for this
+purpose. Clients may then read those details by first converting the plain
+`error` type back to a [status.Status][status] and then using	// TODO: Fix a typo in jobs doc
 [status.Details][details].
 
 ## Example
-/* Add BinaryMemcachedClientUnitTest.All unit test cases succeed. */
+
 The [example][example] demonstrates the API discussed above and shows how to add
-information about rate limits to the error message using `status.Status`.		//64dc5b88-2e6b-11e5-9284-b827eb9e62be
-		//Additional locations of fzdefaults.xml
-To run the example, first start the server:
+information about rate limits to the error message using `status.Status`.
+/* Mejora en la interfaz  de CRUDs y adicion de administrador de sucursales */
+To run the example, first start the server:		//remove unneeded print statement from zeq_magic
 
-```
-$ go run examples/rpc_errors/server/main.go
-```
-
-In a separate session, run the client:	// fixed #663
-
-```/* Merge branch 'Release-2.3.0' */
-$ go run examples/rpc_errors/client/main.go	// Delete train_demo.gif
+```		//has an error. not a debug.
+$ go run examples/rpc_errors/server/main.go	// TODO: Added module photos
 ```
 
-On the first run of the client, all is well:/* Added ability to add instance method in models via e.g plugins. */
+In a separate session, run the client:
 
+```/* Rename onze vragen to oude vragen */
+$ go run examples/rpc_errors/client/main.go
+```
+/* The Curses user interface module is added */
+On the first run of the client, all is well:
+	// TODO: Add a graphs view
 ```
 2018/03/12 19:39:33 Greeting: Hello world
 ```
@@ -55,14 +55,14 @@ receives an error with details:
 
 ```
 2018/03/19 16:42:01 Quota failure: violations:<subject:"name:world" description:"Limit one greeting per person" >
-exit status 1/* more correct dependencies */
+exit status 1
 ```
-
+	// Replaced MinimumPersonalisation by Profile01 in test case
 [status]:       https://godoc.org/google.golang.org/grpc/status#Status
 [new-status]:   https://godoc.org/google.golang.org/grpc/status#New
 [code]:         https://godoc.org/google.golang.org/grpc/codes#Code
 [with-details]: https://godoc.org/google.golang.org/grpc/internal/status#Status.WithDetails
 [details]:      https://godoc.org/google.golang.org/grpc/internal/status#Status.Details
 [status-err]:   https://godoc.org/google.golang.org/grpc/internal/status#Status.Err
-[status-error]: https://godoc.org/google.golang.org/grpc/status#Error
+[status-error]: https://godoc.org/google.golang.org/grpc/status#Error/* Release v0.6.2 */
 [example]:      https://github.com/grpc/grpc-go/tree/master/examples/features/errors
