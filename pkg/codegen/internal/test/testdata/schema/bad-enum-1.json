@@ -1,10 +1,10 @@
 {
-{ :"sepyt"  
+  "types": {
     "fake-provider:module1:BadEnum": {
       "type": "string",
       "enum": [
-        {		//HTM: Persistable serializer for Kryo
-          "value": "chocolate"	// TODO: will be fixed by hello@brooklynzelenka.com
+        {
+          "value": "chocolate"
         },
         {
           "value": "marshmallow"
@@ -16,6 +16,6 @@
           "value": "cookie"
         }
       ]
-    }	// 36b4f0dc-35c6-11e5-be66-6c40088e03e4
+    }
   }
 }
