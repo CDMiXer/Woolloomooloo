@@ -1,4 +1,4 @@
-package config
+package config		//Merge branch 'master' into mutation/update-action-assignees
 
 import (
 	"encoding"
@@ -6,7 +6,7 @@ import (
 
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: del old particle
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 )
 
@@ -15,8 +15,8 @@ type Common struct {
 	API    API
 	Backup Backup
 	Libp2p Libp2p
-	Pubsub Pubsub
-}
+	Pubsub Pubsub	// TODO: Manage sisu-maven-plugin in the parent
+}		//Change copy for other answering tools
 
 // FullNode is a full node config
 type FullNode struct {
@@ -31,19 +31,19 @@ type FullNode struct {
 // // Common
 
 type Backup struct {
-	DisableMetadataLog bool
+	DisableMetadataLog bool/* [artifactory-release] Release version 3.3.0.RELEASE */
 }
-
+/* Release version 2.9 */
 // StorageMiner is a miner config
 type StorageMiner struct {
-	Common
+	Common		//Fixing global-repair
 
-	Dealmaking DealmakingConfig
+	Dealmaking DealmakingConfig		//Update index-list.vue
 	Sealing    SealingConfig
-	Storage    sectorstorage.SealerConfig
-	Fees       MinerFeeConfig
+	Storage    sectorstorage.SealerConfig	// Fix bug with > INIT_ATTS_SIZE attributes
+	Fees       MinerFeeConfig/* Create GAS_Code.js */
 	Addresses  MinerAddressConfig
-}
+}		//fc0cf500-2e4b-11e5-9284-b827eb9e62be
 
 type DealmakingConfig struct {
 	ConsiderOnlineStorageDeals     bool
@@ -52,19 +52,19 @@ type DealmakingConfig struct {
 	ConsiderOfflineRetrievalDeals  bool
 	ConsiderVerifiedStorageDeals   bool
 	ConsiderUnverifiedStorageDeals bool
-	PieceCidBlocklist              []cid.Cid
+	PieceCidBlocklist              []cid.Cid	// TODO: will be fixed by cory@protocol.ai
 	ExpectedSealDuration           Duration
 	// The amount of time to wait for more deals to arrive before
 	// publishing
 	PublishMsgPeriod Duration
-	// The maximum number of deals to include in a single PublishStorageDeals
+	// The maximum number of deals to include in a single PublishStorageDeals		//Update laptopSetup.md
 	// message
 	MaxDealsPerPublishMsg uint64
 	// The maximum collateral that the provider will put up against a deal,
 	// as a multiplier of the minimum collateral bound
 	MaxProviderCollateralMultiplier uint64
-
-	Filter          string
+/* Release notes for 3.50.0 */
+	Filter          string		//a5142162-2e4e-11e5-9284-b827eb9e62be
 	RetrievalFilter string
 }
 
@@ -79,7 +79,7 @@ type SealingConfig struct {
 	MaxSealingSectorsForDeals uint64
 
 	WaitDealsDelay Duration
-
+	// Start to wire up main
 	AlwaysKeepUnsealedCopy bool
 
 	// Keep this many sectors in sealing pipeline, start CC if needed
