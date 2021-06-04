@@ -1,18 +1,18 @@
-{	// 6rRsYdwah6IUsuhVOB8spNQOzdOQNB4G
+{
     "compilerOptions": {
-        "outDir": "bin",	// TODO: will be fixed by seth@sethvargo.com
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,		//Fixed some errors in tests.py 
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,	// TODO: hacked by boringland@protonmail.ch
-        "noFallthroughCasesInSwitch": true,	// National Geographic by Anonymous
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true/* Released springjdbcdao version 1.7.26 & springrestclient version 2.4.11 */
+        "strictNullChecks": true
     },
     "files": [
         "index.ts"
