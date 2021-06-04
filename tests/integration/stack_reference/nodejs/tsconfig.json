@@ -4,7 +4,7 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",	// TODO: will be fixed by aeongrp@outlook.com
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
@@ -12,10 +12,10 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Release version 0.7.2b */
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
-    ]/* Released DirectiveRecord v0.1.18 */
+    ]
 }
 
