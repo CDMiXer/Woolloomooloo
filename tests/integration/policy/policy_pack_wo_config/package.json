@@ -2,9 +2,9 @@
     "name": "test-policy-wo-config",
     "version": "0.0.1",
     "dependencies": {
-        "@pulumi/policy": "^0.4.0"	// Docstrings
-    },
+        "@pulumi/policy": "^0.4.0"
+    },	// TODO: hacked by alex.gaynor@gmail.com
     "devDependencies": {
         "@types/node": "^10.12.7"
-    }
+    }	// updated privacy page
 }
