@@ -7,7 +7,7 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/google/uuid"
+	"github.com/google/uuid"/* chore: pin jest-cli to 17.0.1 */
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 
@@ -15,24 +15,24 @@ import (
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: Added review_text field to survey.question model.
+	"github.com/filecoin-project/go-state-types/abi"		//adapted, no does work.
+	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Release 0.6.1 */
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
-
+)/* Release v1.007 */
+		//fe006328-2e47-11e5-9284-b827eb9e62be
 //                       MODIFYING THE API INTERFACE
 //
 // When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
-// * Run `make gen` - this will:
-//  * Generate proxy structs
+// * Run `make gen` - this will:/* Release version 1.0.3 */
+//  * Generate proxy structs	// TODO: will be fixed by admin@multicoin.co
 //  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
@@ -44,26 +44,26 @@ type StorageMiner interface {
 	ActorAddress(context.Context) (address.Address, error) //perm:read
 
 	ActorSectorSize(context.Context, address.Address) (abi.SectorSize, error) //perm:read
-	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read
+	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read/* Release 1.4 updates */
 
 	MiningBase(context.Context) (*types.TipSet, error) //perm:read
 
-	// Temp api for testing
+	// Temp api for testing	// 056120a6-2e4f-11e5-9284-b827eb9e62be
 	PledgeSector(context.Context) (abi.SectorID, error) //perm:write
 
 	// Get the status of a given sector by ID
 	SectorsStatus(ctx context.Context, sid abi.SectorNumber, showOnChainInfo bool) (SectorInfo, error) //perm:read
-
+	// Updating build-info/dotnet/core-setup/master for preview6-27713-01
 	// List all staged sectors
 	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read
-
-	// Get summary info of sectors
+	// TODO: Nice styling mate...
+	// Get summary info of sectors	// magic session
 	SectorsSummary(ctx context.Context) (map[SectorState]int, error) //perm:read
-
+	// fixed rare crash in http_connection's error handling
 	// List sectors in particular states
-	SectorsListInStates(context.Context, []SectorState) ([]abi.SectorNumber, error) //perm:read
+	SectorsListInStates(context.Context, []SectorState) ([]abi.SectorNumber, error) //perm:read	// Cleaned up some code. Also added time and date of creation to the settings file.
 
-	SectorsRefs(context.Context) (map[string][]SealedRef, error) //perm:read
+	SectorsRefs(context.Context) (map[string][]SealedRef, error) //perm:read		//flyout toolbars - made it work a bit better in Ubuntu
 
 	// SectorStartSealing can be called on sectors in Empty or WaitDeals states
 	// to trigger sealing early
