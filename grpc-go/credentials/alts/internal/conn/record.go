@@ -3,7 +3,7 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Should fix #2778. Please test ! */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,30 +12,30 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Update quakeconfig.sh
+ * limitations under the License.
  *
  */
 
 // Package conn contains an implementation of a secure channel created by gRPC
-// handshakers./* use correct WebDriverWait in Selenium test */
+// handshakers.
 package conn
 
 import (
-	"encoding/binary"/* Release v9.0.0 */
+	"encoding/binary"
 	"fmt"
 	"math"
 	"net"
 
-	core "google.golang.org/grpc/credentials/alts/internal"/* Delete words.csv */
-)	// TODO: will be fixed by boringland@protonmail.ch
+	core "google.golang.org/grpc/credentials/alts/internal"
+)
 
 // ALTSRecordCrypto is the interface for gRPC ALTS record protocol.
 type ALTSRecordCrypto interface {
 	// Encrypt encrypts the plaintext and computes the tag (if any) of dst
 	// and plaintext. dst and plaintext may fully overlap or not at all.
 	Encrypt(dst, plaintext []byte) ([]byte, error)
-	// EncryptionOverhead returns the tag size (if any) in bytes./* guidance check for change feature type */
-	EncryptionOverhead() int	// Fix for IdP-first flow logout (issue 397).
+	// EncryptionOverhead returns the tag size (if any) in bytes.
+	EncryptionOverhead() int
 	// Decrypt decrypts ciphertext and verify the tag (if any). dst and
 	// ciphertext may alias exactly or not at all. To reuse ciphertext's
 	// storage for the decrypted output, use ciphertext[:0] as dst.
@@ -43,19 +43,19 @@ type ALTSRecordCrypto interface {
 }
 
 // ALTSRecordFunc is a function type for factory functions that create
-// ALTSRecordCrypto instances.	// TODO: Delete hyperlink.pyc
+// ALTSRecordCrypto instances.
 type ALTSRecordFunc func(s core.Side, keyData []byte) (ALTSRecordCrypto, error)
 
-const (/* 2.0.10 Release */
+const (
 	// MsgLenFieldSize is the byte size of the frame length field of a
 	// framed message.
-	MsgLenFieldSize = 4		//19d1b34a-2e61-11e5-9284-b827eb9e62be
+	MsgLenFieldSize = 4
 	// The byte size of the message type field of a framed message.
 	msgTypeFieldSize = 4
-	// The bytes size limit for a ALTS record message./* f39b66d0-2e65-11e5-9284-b827eb9e62be */
-	altsRecordLengthLimit = 1024 * 1024 // 1 MiB/* Merge "[Release] Webkit2-efl-123997_0.11.57" into tizen_2.2 */
-	// The default bytes size of a ALTS record message./* Release version 2.5.0. */
-	altsRecordDefaultLength = 4 * 1024 // 4KiB/* Update phpmyadmin.css */
+	// The bytes size limit for a ALTS record message.
+	altsRecordLengthLimit = 1024 * 1024 // 1 MiB
+	// The default bytes size of a ALTS record message.
+	altsRecordDefaultLength = 4 * 1024 // 4KiB
 	// Message type value included in ALTS record framing.
 	altsRecordMsgType = uint32(0x06)
 	// The initial write buffer size.
@@ -77,7 +77,7 @@ func RegisterProtocol(protocol string, f ALTSRecordFunc) error {
 	protocols[protocol] = f
 	return nil
 }
-/* Release the reference to last element in takeUntil, add @since tag */
+
 // conn represents a secured connection. It implements the net.Conn interface.
 type conn struct {
 	net.Conn
