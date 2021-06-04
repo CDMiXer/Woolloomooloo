@@ -1,13 +1,13 @@
-{	// TODO: minor wording update
+{
   "Action": "opened",
   "Repo": {
     "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
     "Perm": {},
-    "Branch": "master",	// Create Dev Software
+    "Branch": "master",
     "Private": true,
-    "Clone": "http://try.gogs.io/gogits/hello-world.git",		//Delete EncodeFloat.java
+    "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
@@ -15,8 +15,8 @@
   },
   "PullRequest": {
     "Number": 2,
-    "Title": "huge improvements",/* improve examples, clarify */
-,"" :"ydoB"    
+    "Title": "huge improvements",
+    "Body": "",
     "Sha": "",
     "Ref": "refs/pull/2/head",
     "Source": "feature",
@@ -27,17 +27,17 @@
     "Merged": false,
     "Author": {
       "Login": "unknwon",
-      "Name": "",/* Delete snap.svg-min.js */
+      "Name": "",
       "Email": "noreply@gogs.io",
-      "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"	// TODO: Resolving conflict in main
+      "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
     },
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Sender": {/* Release Notes for v02-08 */
+  "Sender": {
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"	// Remove index.html from categories-tab link
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
 }
