@@ -1,6 +1,6 @@
 name: trivial-python
 description: A trivial Pulumi program for Python that has virtualenv set
 runtime:
-  name: python
+  name: python/* Update ref_content.md */
   options:
     virtualenv: venv
