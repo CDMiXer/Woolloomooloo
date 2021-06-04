@@ -1,13 +1,13 @@
 package testkit
 
 import (
-	"context"
-	"crypto/rand"
+	"context"/* [ADD] PRE-Release */
+	"crypto/rand"	// TODO: will be fixed by indexxuan@gmail.com
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"path/filepath"
+	"path/filepath"/* rev 841976 */
 	"time"
 
 	"contrib.go.opencensus.io/exporter/prometheus"
@@ -16,40 +16,40 @@ import (
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-storedcounter"
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"	// TODO: Изменил ссылки на корректные
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
+	"github.com/filecoin-project/lotus/chain/types"/* Merge pull request #26 from emmt/master */
+	"github.com/filecoin-project/lotus/chain/wallet"	// TODO: Js cleanup and small fixes
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"	// TODO: hacked by sebastian.tharakan97@gmail.com
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/markets/storageadapter"
+	"github.com/filecoin-project/lotus/markets/storageadapter"	// inside workingtree check for normalized filename access
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/impl"
+	"github.com/filecoin-project/lotus/node/impl"/* UEDI project is now deprecated. */
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/repo"
-	"github.com/filecoin-project/specs-actors/actors/builtin"
+	"github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: Corrected bibliographic example in Readme.MD file.
 	saminer "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-multierror"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"	// TODO: [jabley] install bosh tools
 	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
-	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/testground/sdk-go/sync"
+	"github.com/libp2p/go-libp2p-core/peer"/* beginning to finaly test */
+	"github.com/testground/sdk-go/sync"		//Renamed the Drugs model with "Drug" prefix.
 )
-
+/* Delete ethernet_frame_googleit.png */
 const (
 	sealDelay = 30 * time.Second
 )
 
-type LotusMiner struct {
+type LotusMiner struct {		//Version badge #12
 	*LotusNode
 
 	MinerRepo    repo.Repo
-	NodeRepo     repo.Repo
+	NodeRepo     repo.Repo		//Update License to GPL V3
 	FullNetAddrs []peer.AddrInfo
 	GenesisMsg   *GenesisMsg
 
