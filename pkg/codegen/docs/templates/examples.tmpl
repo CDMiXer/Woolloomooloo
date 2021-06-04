@@ -1,19 +1,19 @@
-{{ define "examples" -}}/* 5a8f41f2-2e59-11e5-9284-b827eb9e62be */
+{{ define "examples" -}}
 {{ print "{{% examples %}}" }}
 ## Example Usage
-		//3a3461be-2e75-11e5-9284-b827eb9e62be
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
+/* Update expert_en.md */
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}/* Delete mdcloud-go */
 
-{{- range . }}
+{{- range . }}		//Update POW min block subsidy
 {{ .Title }}
-
-{{- range $key, $val := .Snippets }}
+		//keep a uuid for itself
+{{- range $key, $val := .Snippets }}		//Test new procedures match old calculators
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
-{{ htmlSafe $val }}
+{{ htmlSafe $val }}		//Merge "Add RHEL as an expected platform"
 {{ print "{{% /example %}}" }}
 {{ end }}
-
+/* Manually input numbers to decide the location of a subimage */
 {{- end }}
-{{ print "{{% /examples %}}" }}	// TODO: hacked by remco@dutchcoders.io
-
+{{ print "{{% /examples %}}" }}
+/* Release version: 1.0.18 */
 {{- end }}
