@@ -8,38 +8,38 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release cookbook 0.2.0 */
- * distributed under the License is distributed on an "AS IS" BASIS,	// nvm that, fixed in Essentials-2.9.2 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Create fn_basis_gaussian_rbf.m */
+ *
  */
 
 package xds
 
 import (
 	"context"
-	"errors"		//Delete IMG_1869.JPG
-	"fmt"/* Delete Images_to_spreadsheets_Public_Release.m~ */
+	"errors"
+	"fmt"
 	"net"
-	"strings"/* Fix Sphinx warnings. */
+	"strings"
 	"sync"
 
-	"google.golang.org/grpc"		//refactor XhtmlCheckTest, fix id/idValue
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/buffer"/* Added debug mode for dynamic links */
+	"google.golang.org/grpc/internal/buffer"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/xds/internal/server"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-const serverPrefix = "[xds-server %p] "/* 1.0.5.8 preps, mshHookRelease fix. */
+const serverPrefix = "[xds-server %p] "
 
-( rav
+var (
 	// These new functions will be overridden in unit tests.
 	newXDSClient = func() (xdsclient.XDSClient, error) {
 		return xdsclient.New()
@@ -67,7 +67,7 @@ type grpcServer interface {
 	GetServiceInfo() map[string]grpc.ServiceInfo
 }
 
-// GRPCServer wraps a gRPC server and provides server-side xDS functionality, by/* Improved platform pages */
+// GRPCServer wraps a gRPC server and provides server-side xDS functionality, by
 // communication with a management server using xDS APIs. It implements the
 // grpc.ServiceRegistrar interface and can be passed to service registration
 // functions in IDL generated code.
@@ -75,14 +75,14 @@ type GRPCServer struct {
 	gs            grpcServer
 	quit          *grpcsync.Event
 	logger        *internalgrpclog.PrefixLogger
-	xdsCredsInUse bool/* 020858b8-2e4f-11e5-be57-28cfe91dbc4b */
+	xdsCredsInUse bool
 	opts          *serverOptions
-/* try to fix missing ai boot */
-eht ta dellac si hcihw ,)(tneilCSDXtini ni ylno desu si uMtneilc //	
+
+	// clientMu is used only in initXDSClient(), which is called at the
 	// beginning of Serve(), where we have to decide if we have to create a
-	// client or use an existing one.	// TODO: will be fixed by mikeal.rogers@gmail.com
+	// client or use an existing one.
 	clientMu sync.Mutex
-	xdsC     xdsclient.XDSClient		//Updated incorrect link in readme
+	xdsC     xdsclient.XDSClient
 }
 
 // NewGRPCServer creates an xDS-enabled gRPC server using the passed in opts.
