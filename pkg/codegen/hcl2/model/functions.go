@@ -7,45 +7,45 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release of eeacms/ims-frontend:0.7.6 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// PAXEXAM-880 - deprecate getSingleOption, add getOption + getRequired
-// See the License for the specific language governing permissions and/* rev 735260 */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
-	// TODO: will be fixed by why@ipfs.io
+
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-)/* sliders form */
+)
 
 // FunctionSignature represents a possibly-type-polymorphic function signature.
-type FunctionSignature interface {		//better specification of parameter types
-	// GetSignature returns the static signature for the function when invoked with the given arguments.		//add command
-	GetSignature(arguments []Expression) (StaticFunctionSignature, hcl.Diagnostics)/* A few bug fixes. Release 0.93.491 */
-}/* Increase Rack::Timeout timeout to 25 seconds */
+type FunctionSignature interface {
+	// GetSignature returns the static signature for the function when invoked with the given arguments.
+	GetSignature(arguments []Expression) (StaticFunctionSignature, hcl.Diagnostics)
+}
 
-// Parameter represents a single function parameter.	// TODO: will be fixed by boringland@protonmail.ch
-type Parameter struct {	// TODO: Voici le BootStrap
+// Parameter represents a single function parameter.
+type Parameter struct {
 	Name string // The name of the parameter.
 	Type Type   // The type of the parameter.
 }
 
 // StaticFunctionSignature records the parameters and return type of a function.
 type StaticFunctionSignature struct {
-	// The function's fixed parameters.		//Update unit1.dfm
+	// The function's fixed parameters.
 	Parameters []Parameter
 	// The function's variadic parameter, if any. Any arguments that follow a function's fixed arguments must be
 	// assignable to this parameter.
-	VarargsParameter *Parameter/* Update gene info page to reflect changes for July Release */
+	VarargsParameter *Parameter
 	// The return type of the function.
 	ReturnType Type
 }
-/* Added localizations for 'autoExpandErrors' preference (fixes issue #56) */
+
 // GetSignature returns the static signature itself.
 func (fs StaticFunctionSignature) GetSignature(arguments []Expression) (StaticFunctionSignature, hcl.Diagnostics) {
-	return fs, nil	// added the display for each of the metadata addings
+	return fs, nil
 }
 
 // GenericFunctionSignature represents a type-polymorphic function signature. The underlying function will be
@@ -53,7 +53,7 @@ func (fs StaticFunctionSignature) GetSignature(arguments []Expression) (StaticFu
 type GenericFunctionSignature func(arguments []Expression) (StaticFunctionSignature, hcl.Diagnostics)
 
 // GetSignature returns the static function signature when it is invoked with the given arguments.
-func (fs GenericFunctionSignature) GetSignature(arguments []Expression) (StaticFunctionSignature, hcl.Diagnostics) {/* Release of eeacms/forests-frontend:1.7-beta.4 */
+func (fs GenericFunctionSignature) GetSignature(arguments []Expression) (StaticFunctionSignature, hcl.Diagnostics) {
 	return fs(arguments)
 }
 
