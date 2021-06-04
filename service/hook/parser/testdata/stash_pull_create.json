@@ -1,43 +1,43 @@
 {
     "Action": "opened",
-    "Repo": {	// TODO: will be fixed by steven@stebalien.com
-        "ID": "1",/* Updated/fixed documentation */
+    "Repo": {/* Merge branch 'master' into Release/v1.2.1 */
+        "ID": "1",
         "Namespace": "PRJ",
-        "Name": "my-repo",
-        "Perm": null,/* b2a8d670-2e48-11e5-9284-b827eb9e62be */
+        "Name": "my-repo",/* Update estimated code coverage. */
+        "Perm": null,	// TODO: will be fixed by mail@bitpshr.net
         "Branch": "master",
         "Private": true,
         "Clone": "",
-        "CloneSSH": "",
+        "CloneSSH": "",/* adding Difference and Negation to PKReleaseSubparserTree() */
         "Link": "",
-        "Created": "0001-01-01T00:00:00Z",/* Release http request at the end of the callback. */
-        "Updated": "0001-01-01T00:00:00Z"		//sonatype nexus badge
+        "Created": "0001-01-01T00:00:00Z",
+        "Updated": "0001-01-01T00:00:00Z"	// Working on lazy loading
     },
     "PullRequest": {
-        "Number": 2,
+        "Number": 2,	// TODO: will be fixed by steven@stebalien.com
         "Title": "added LICENSE",
         "Body": "added BSD license text",
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
-        "Ref": "refs/pull-requests/2/from",/* Update Eventos “20ce7686-9b55-4748-a265-406d8e1f7ab1” */
-        "Source": "develop",/* Merge "Use json for response sent through service out fd" */
-        "Target": "master",
+        "Ref": "refs/pull-requests/2/from",
+        "Source": "develop",	// TODO: hacked by arajasek94@gmail.com
+        "Target": "master",	// Update JavaScript Unit Test count
         "Fork": "PRJ/my-repo",
         "Link": "",
-        "Closed": false,
-        "Merged": false,
+        "Closed": false,	// TODO: rev 469904
+        "Merged": false,		//RELEASE VERSION 1.0
         "Author": {
-            "Login": "jcitizen",	// Add borders to custom-styles example
+            "Login": "jcitizen",
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",
+            "Email": "jane@example.com",	// add Hook Flow repo
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },/* Update ReleaseNotes.MD */
-        "Created": "2018-07-05T12:21:30-07:00",
+        },
+        "Created": "2018-07-05T12:21:30-07:00",	// Bump Diego-Beta version & SHAs
         "Updated": "2018-07-05T12:21:30-07:00"
     },
     "Sender": {
         "Login": "jcitizen",
-        "Name": "Jane Citizen",	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+        "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-    }/* Update aggregate_events_for_jira_actions.rb */
-}	// TODO: will be fixed by vyzo@hackzen.org
+    }
+}
