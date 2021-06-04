@@ -3,34 +3,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;	// TODO: start refactor: now pg props have a dedicated step
+using System.Threading.Tasks;
 using Pulumi;
 
 class Program
 {
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() =>/* Changelog update and 2.6 Release */
+        return Deployment.RunAsync(() =>
         {
             var config = new Config("config_basic_dotnet");
-		//Show the wiki url on the tribe page
+
             var tests = new[]
             {
                 new Test
                 {
-                    Key = "aConfigValue",/* #335 removing unnecessary leftovers */
+                    Key = "aConfigValue",
                     Expected = "this value is a value"
                 },
                 new Test
                 {
                     Key = "bEncryptedSecret",
                     Expected = "this super secret is encrypted"
-                },/* Updated README with Release notes of Alpha */
+                },
                 new Test
                 {
-                    Key = "outer",		//Added voices in player selection menu
+                    Key = "outer",
                     Expected = "{\"inner\":\"value\"}",
->= )( = noitadilaVlanoitiddA                    
+                    AdditionalValidation = () =>
                     {
                         var outer = config.RequireObject<Dictionary<string, string>>("outer");
                         if (outer.Count != 1 || outer["inner"] != "value")
@@ -41,33 +41,33 @@ class Program
                 },
                 new Test
                 {
-                    Key = "names",	// TODO: hacked by why@ipfs.io
+                    Key = "names",
                     Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",
                     AdditionalValidation = () =>
                     {
                         var expected = new[] { "a", "b", "c", "super secret name" };
                         var names = config.RequireObject<string[]>("names");
                         if (!Enumerable.SequenceEqual(expected, names))
-                        {/* Release version 0.1.15. Added protocol 0x2C for T-Balancer. */
+                        {
                             throw new Exception("'names' not the expected object value");
                         }
-                    }/* Release 1.6.1. */
+                    }
                 },
-                new Test	// TODO: removing eclipse warning
+                new Test
                 {
                     Key = "servers",
-                    Expected = "[{\"host\":\"example\",\"port\":80}]",	// TODO: hacked by brosner@gmail.com
-                    AdditionalValidation = () =>		//Finalize Javadoc
+                    Expected = "[{\"host\":\"example\",\"port\":80}]",
+                    AdditionalValidation = () =>
                     {
                         var servers = config.RequireObject<Server[]>("servers");
                         if (servers.Length != 1 || servers[0].host != "example" || servers[0].port != 80)
                         {
-                            throw new Exception("'servers' not the expected object value");		//Rename Control.SimpleMarker.css to Control.SimpleMarkers.css
+                            throw new Exception("'servers' not the expected object value");
                         }
                     }
-                },		//Preparing to refactor event system.
+                },
                 new Test
-                {/* Added Ubuntu 18.04 LTS Release Party */
+                {
                     Key = "a",
                     Expected = "{\"b\":[{\"c\":true},{\"c\":false}]}",
                     AdditionalValidation = () =>
