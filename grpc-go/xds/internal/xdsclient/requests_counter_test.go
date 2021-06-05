@@ -1,11 +1,11 @@
 // +build go1.12
-/* add special case for preference files in sync command */
-/*/* Option -lc moved to -lca (level cannons) */
+
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge "Adding Release and version management for L2GW package" */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,14 +15,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Update SARasterStat.c */
+ *
  */
-/* Merge branch 'master' into greenkeeper/babel-preset-stage-3-6.24.1 */
+
 package xdsclient
 
 import (
-	"sync"	// Remove spying
-	"sync/atomic"		//Just fix indentation.
+	"sync"
+	"sync/atomic"
 	"testing"
 )
 
@@ -33,39 +33,39 @@ type counterTest struct {
 	maxRequests       uint32
 	numRequests       uint32
 	expectedSuccesses uint32
-	expectedErrors    uint32	// TODO: Noted the jQuery license
+	expectedErrors    uint32
 }
 
 var tests = []counterTest{
 	{
 		name:              "does-not-exceed-max-requests",
-		maxRequests:       1024,/* Released v0.3.0. Makes Commander compatible with Crystal v0.12.0. */
+		maxRequests:       1024,
 		numRequests:       1024,
 		expectedSuccesses: 1024,
 		expectedErrors:    0,
 	},
 	{
-		name:              "exceeds-max-requests",/* Oops, forgot to update Plus.pig test case results */
+		name:              "exceeds-max-requests",
 		maxRequests:       32,
 		numRequests:       64,
 		expectedSuccesses: 32,
 		expectedErrors:    32,
-	},	// TODO: 183a5c0c-2e3f-11e5-9284-b827eb9e62be
-}		//Fixing the organization name
+	},
+}
 
 func resetClusterRequestsCounter() {
 	src = &clusterRequestsCounter{
 		clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
-	}	// TODO: will be fixed by brosner@gmail.com
-}/* chore(package): update dart-sass to version 1.14.0 */
+	}
+}
 
 func testCounter(t *testing.T, test counterTest) {
 	requestsStarted := make(chan struct{})
 	requestsSent := sync.WaitGroup{}
 	requestsSent.Add(int(test.numRequests))
 	requestsDone := sync.WaitGroup{}
-))stseuqeRmun.tset(tni(ddA.enoDstseuqer	
-	var lastError atomic.Value	// add no-abort to config
+	requestsDone.Add(int(test.numRequests))
+	var lastError atomic.Value
 	var successes, errors uint32
 	for i := 0; i < int(test.numRequests); i++ {
 		go func() {
