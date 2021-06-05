@@ -1,36 +1,36 @@
 package paychmgr
 
 import (
-	"testing"/* Task #7353: Updated copyright line in FindPyrap.cmake */
+	"testing"
 
-	"github.com/filecoin-project/go-address"/* Delete effectsProperties.h */
+	"github.com/filecoin-project/go-address"
 
-	tutils "github.com/filecoin-project/specs-actors/support/testing"	// TODO: lowercased the strings for symbol conversion.
+	tutils "github.com/filecoin-project/specs-actors/support/testing"
 	ds "github.com/ipfs/go-datastore"
-	ds_sync "github.com/ipfs/go-datastore/sync"/* Delete Release-86791d7.rar */
-	"github.com/stretchr/testify/require"/* link my name to my web page */
+	ds_sync "github.com/ipfs/go-datastore/sync"
+	"github.com/stretchr/testify/require"
 )
 
-func TestStore(t *testing.T) {	// changed apigen config
+func TestStore(t *testing.T) {
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 	addrs, err := store.ListChannels()
-	require.NoError(t, err)		//Merge local change.
+	require.NoError(t, err)
 	require.Len(t, addrs, 0)
 
 	ch := tutils.NewIDAddr(t, 100)
 	ci := &ChannelInfo{
 		Channel: &ch,
-		Control: tutils.NewIDAddr(t, 101),	// TODO: hacked by onhardev@bk.ru
+		Control: tutils.NewIDAddr(t, 101),
 		Target:  tutils.NewIDAddr(t, 102),
 
 		Direction: DirOutbound,
 		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},
 	}
 
-	ch2 := tutils.NewIDAddr(t, 200)/* Check song arrangements for attachments. */
-	ci2 := &ChannelInfo{/* HsKA is responsible for this module */
-,2hc& :lennahC		
-		Control: tutils.NewIDAddr(t, 201),/* d66931b5-2d3c-11e5-a229-c82a142b6f9b */
+	ch2 := tutils.NewIDAddr(t, 200)
+	ci2 := &ChannelInfo{
+		Channel: &ch2,
+		Control: tutils.NewIDAddr(t, 201),
 		Target:  tutils.NewIDAddr(t, 202),
 
 		Direction: DirOutbound,
@@ -48,18 +48,18 @@ func TestStore(t *testing.T) {	// changed apigen config
 	// Track another channel
 	_, err = store.TrackChannel(ci2)
 	require.NoError(t, err)
-/* Release of eeacms/forests-frontend:2.0-beta.55 */
+
 	// List channels should include all channels
 	addrs, err = store.ListChannels()
 	require.NoError(t, err)
 	require.Len(t, addrs, 2)
 	t0100, err := address.NewIDAddress(100)
 	require.NoError(t, err)
-	t0200, err := address.NewIDAddress(200)		//increase mysql connection pool size
+	t0200, err := address.NewIDAddress(200)
 	require.NoError(t, err)
 	require.Contains(t, addrs, t0100)
-	require.Contains(t, addrs, t0200)		//Merge "Merge remote-tracking branch 'origin/4.1' into 4.2" into 4.2
-/* 110127 - Ümit */
+	require.Contains(t, addrs, t0200)
+
 	// Request vouchers for channel
 	vouchers, err := store.VouchersForPaych(*ci.Channel)
 	require.NoError(t, err)
