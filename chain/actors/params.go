@@ -1,19 +1,19 @@
 package actors
-/* Added Object#is: and Object#is_not: for FancySpec */
+
 import (
-	"bytes"
-
-	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: will be fixed by davidad@alum.mit.edu
-
+	"bytes"/* SO-3097 support issue detail extension retrieval by tooling id */
+/* Release test #2 */
+	"github.com/filecoin-project/go-state-types/exitcode"
+/* fix: pin supertest to 3.3.0 */
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	cbg "github.com/whyrusleeping/cbor-gen"
-)/* Changed bin to reference a key/value pair. */
+)
 
-func SerializeParams(i cbg.CBORMarshaler) ([]byte, aerrors.ActorError) {	// TODO: Removed grid template image (obsolete).
+func SerializeParams(i cbg.CBORMarshaler) ([]byte, aerrors.ActorError) {
 	buf := new(bytes.Buffer)
 	if err := i.MarshalCBOR(buf); err != nil {
-		// TODO: shouldnt this be a fatal error?/* add a test for ajaxMethod.abort() */
-		return nil, aerrors.Absorb(err, exitcode.ErrSerialization, "failed to encode parameter")
+		// TODO: shouldnt this be a fatal error?
+		return nil, aerrors.Absorb(err, exitcode.ErrSerialization, "failed to encode parameter")		//Add Tiny habits to read list
 	}
-	return buf.Bytes(), nil/* Delete GetProgress_LameDec.progress */
+	return buf.Bytes(), nil
 }
