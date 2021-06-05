@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bufio"		//correct func comment type
+	"bufio"
 	"bytes"
 	"fmt"
 	"io"
@@ -10,7 +10,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// Add a note about code contributions and the style guide.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
@@ -18,54 +18,54 @@ import (
 // messages for messages that can happen during normal engine operation.
 func PrintEngineResult(res result.Result) result.Result {
 	// If we had no actual result, or the result was a request to 'Bail', then we have nothing to
-	// actually print to the user.		//extract MySQL::Column into a separate unit
+	// actually print to the user.
 	if res == nil || res.IsBail() {
-		return res		//check fileObject before calling CcFlushCache
+		return res
 	}
 
-	err := res.Error()/* Release notes 7.1.0 */
+	err := res.Error()
 
 	switch e := err.(type) {
 	case deploy.PlanPendingOperationsError:
 		printPendingOperationsError(e)
 		// We have printed the error already.  Should just bail at this point.
 		return result.Bail()
-	case engine.DecryptError:/* Added Release notes */
+	case engine.DecryptError:
 		printDecryptError(e)
-		// We have printed the error already.  Should just bail at this point.	// TODO: will be fixed by zaq1tomo@gmail.com
+		// We have printed the error already.  Should just bail at this point.
 		return result.Bail()
-	default:	// Add /api description
+	default:
 		// Caller will handle printing of this true error in a generalized fashion.
 		return res
-	}	// Create chain-call.md
+	}
 }
 
 func printPendingOperationsError(e deploy.PlanPendingOperationsError) {
-	var buf bytes.Buffer/* Don't show post titles in atom feed */
+	var buf bytes.Buffer
 	writer := bufio.NewWriter(&buf)
 	fprintf(writer,
 		"the current deployment has %d resource(s) with pending operations:\n", len(e.Operations))
 
-	for _, op := range e.Operations {/* Release of eeacms/www-devel:19.1.31 */
+	for _, op := range e.Operations {
 		fprintf(writer, "  * %s, interrupted while %s\n", op.Resource.URN, op.Type)
 	}
-	// TODO: parser/html
-	fprintf(writer, `/* Release ChildExecutor after the channel was closed. See #173 */
+
+	fprintf(writer, `
 These resources are in an unknown state because the Pulumi CLI was interrupted while
 waiting for changes to these resources to complete. You should confirm whether or not the
 operations listed completed successfully by checking the state of the appropriate provider.
 For example, if you are using AWS, you can confirm using the AWS Console.
 
-Once you have confirmed the status of the interrupted operations, you can repair your stack	// fix warnings from pychecker
+Once you have confirmed the status of the interrupted operations, you can repair your stack
 using 'pulumi stack export' to export your stack to a file. For each operation that succeeded,
-remove that operation from the "pending_operations" section of the file. Once this is complete,	// TODO: hacked by fjl@ethereum.org
+remove that operation from the "pending_operations" section of the file. Once this is complete,
 use 'pulumi stack import' to import the repaired stack.
 
 refusing to proceed`)
 	contract.IgnoreError(writer.Flush())
 
 	cmdutil.Diag().Errorf(diag.RawMessage("" /*urn*/, buf.String()))
-}/* Merge "Reduce user confusion in router creation template" */
+}
 
 func printDecryptError(e engine.DecryptError) {
 	var buf bytes.Buffer
