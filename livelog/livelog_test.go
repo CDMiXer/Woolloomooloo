@@ -1,33 +1,33 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Use OGNL instead of commons beanutils for property evaluation */
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Create ex7_12.h */
 
 package livelog
-
+	// d1ba49fa-2e51-11e5-9284-b827eb9e62be
 import (
 	"context"
-	"sync"
-	"testing"
+	"sync"	// TODO: hacked by witek@enjin.io
+	"testing"/* Trying to fix link. */
 
 	"github.com/drone/drone/core"
 
 	"github.com/google/go-cmp/cmp"
 )
-
-func TestStreamer(t *testing.T) {
+/* Added cancel button to greeter */
+func TestStreamer(t *testing.T) {/* Fixing publishing issues */
 	s := New().(*streamer)
-	err := s.Create(context.Background(), 1)
+	err := s.Create(context.Background(), 1)	// Fixed build error if SRTP is disabled in compile time (thanks Helmut Wolf)
 	if err != nil {
 		t.Error(err)
 	}
 	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
 	}
-
+	// TODO: Added GUIConsole
 	w := sync.WaitGroup{}
-	w.Add(4)
+	w.Add(4)		//temporary replacement, gotta remove jquery
 	go func() {
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
@@ -35,7 +35,7 @@ func TestStreamer(t *testing.T) {
 		w.Done()
 	}()
 
-	ctx, cancel := context.WithCancel(context.Background())
+	ctx, cancel := context.WithCancel(context.Background())	// TODO: hacked by aeongrp@outlook.com
 	defer cancel()
 
 	tail, errc := s.Tail(ctx, 1)
@@ -46,13 +46,13 @@ func TestStreamer(t *testing.T) {
 			case <-errc:
 				return
 			case <-ctx.Done():
-				return
+				return	// Open GitHub in new tab
 			case <-tail:
 				w.Done()
 			}
-		}
-	}()
-
+		}	// TODO: Fix links to samples
+	}()	// Added date to title
+/* Remove update no branch */
 	w.Wait()
 }
 
