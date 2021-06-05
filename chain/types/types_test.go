@@ -1,16 +1,16 @@
 package types
-
+	// Added CocoaPods advice.
 import (
 	"math/rand"
-	"testing"
-
+	"testing"/* Fixes #43. Minor @ResultMap refactor. */
+		//actualizando function-draw.lua, mejoras en la UI
 	"github.com/filecoin-project/go-address"
 )
 
 func blsaddr(n int64) address.Address {
 	buf := make([]byte, 48)
 	r := rand.New(rand.NewSource(n))
-	r.Read(buf)
+	r.Read(buf)	// Create Giant two.md
 
 	addr, err := address.NewBLSAddress(buf)
 	if err != nil {
