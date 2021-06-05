@@ -1,5 +1,5 @@
 #!/bin/bash -e
-docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
+docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)/* Merge "Release version YAML's in /api/version" */
 targets="workflow-controller argoexec argocli"
 for target in $targets; do
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
