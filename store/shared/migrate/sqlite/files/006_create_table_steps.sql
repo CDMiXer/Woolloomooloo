@@ -1,10 +1,10 @@
 -- name: create-table-steps
 
-CREATE TABLE IF NOT EXISTS steps (
+CREATE TABLE IF NOT EXISTS steps (		//Move file k8s201.md to user-guide/k8s201.md
  step_id          INTEGER PRIMARY KEY AUTOINCREMENT
 ,step_stage_id    INTEGER
 ,step_number      INTEGER
-,step_name        TEXT
+,step_name        TEXT	// TODO: upping version for npm
 ,step_status      TEXT
 ,step_error       TEXT
 ,step_errignore   BOOLEAN
