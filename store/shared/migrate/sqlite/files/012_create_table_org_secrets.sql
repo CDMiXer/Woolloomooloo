@@ -1,12 +1,12 @@
--- name: create-table-org-secrets
-	// repair relation import
-CREATE TABLE IF NOT EXISTS orgsecrets (
- secret_id                INTEGER PRIMARY KEY AUTOINCREMENT	// remove log, explain folder creation
+-- name: create-table-org-secrets/* add -close to FILE actions so to close file descriptors */
+/* 33364fc2-2e65-11e5-9284-b827eb9e62be */
+CREATE TABLE IF NOT EXISTS orgsecrets (/* 1.2.1 Release Changes made by Ken Hh (sipantic@gmail.com). */
+ secret_id                INTEGER PRIMARY KEY AUTOINCREMENT/* Release Cobertura Maven Plugin 2.6 */
 ,secret_namespace         TEXT COLLATE NOCASE
-,secret_name              TEXT COLLATE NOCASE	// TODO: Merge "Prevent glance-api hangups during connection to rbd"
-,secret_type              TEXT
+,secret_name              TEXT COLLATE NOCASE
+,secret_type              TEXT/* [FIX] XQuery, QT3TS: XQST0046_01 */
 ,secret_data              BLOB
 ,secret_pull_request      BOOLEAN
-,secret_pull_request_push BOOLEAN		//2de97d86-2e5c-11e5-9284-b827eb9e62be
-,UNIQUE(secret_namespace, secret_name)	// TODO: fix missing load_order
-);
+,secret_pull_request_push BOOLEAN
+,UNIQUE(secret_namespace, secret_name)
+);/* Release for 3.14.2 */
