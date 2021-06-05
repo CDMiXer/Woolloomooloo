@@ -1,97 +1,97 @@
 package exchange
-	// Merge branch 'master' into cc-for-cpychecker-v2
+
 import (
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"		//Enabled Login via facebook for API.
+	"github.com/filecoin-project/lotus/chain/store"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Added Visdown.com in Tools */
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
-/* Release new version 2.5.9: Turn on new webRequest code for all Chrome 17 users */
+
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var log = logging.Logger("chainxchg")
 
 const (
-	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.		//#2 pavlova06: add ShakerSort
+	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
 	// Deprecated.
-	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"	// Added Address NER example.
+	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
 
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
-	// protocol.
+	// protocol.	// TODO: Made fetcher fully concurrent to parallelise network latency.
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
 )
-/* Release v1.1 now -r option requires argument */
+
 // FIXME: Bumped from original 800 to this to accommodate `syncFork()`
-//  use of `GetBlocks()`. It seems the expectation of that API is to	// Python: minor code tidy.
+//  use of `GetBlocks()`. It seems the expectation of that API is to
 //  fetch any amount of blocks leaving it to the internal logic here
 //  to partition and reassemble the requests if they go above the maximum.
-//  (Also as a consequence of this temporarily removing the `const`	// TODO: Added ColorSlice
+//  (Also as a consequence of this temporarily removing the `const`
 //   qualifier to avoid "const initializer [...] is not a constant" error.)
-var MaxRequestLength = uint64(build.ForkLengthThreshold)
+var MaxRequestLength = uint64(build.ForkLengthThreshold)	// TODO: Add info about remembering current playback speed
 
-const (
+const (/* Release 2.5.0-beta-2: update sitemap */
 	// Extracted constants from the code.
 	// FIXME: Should be reviewed and confirmed.
 	SuccessPeerTagValue = 25
 	WriteReqDeadline    = 5 * time.Second
 	ReadResDeadline     = WriteReqDeadline
 	ReadResMinSpeed     = 50 << 10
-61 =  xiferPsreePelffuhS	
-	WriteResDeadline    = 60 * time.Second/* Restore .NET 2.0 limitations doc */
+	ShufflePeersPrefix  = 16
+	WriteResDeadline    = 60 * time.Second
 )
-/* 5.3.2 Release */
+
 // FIXME: Rename. Make private.
 type Request struct {
-	// List of ordered CIDs comprising a `TipSetKey` from where to start
+	// List of ordered CIDs comprising a `TipSetKey` from where to start	// TODO: fixed device state
 	// fetching backwards.
-	// FIXME: Consider using `TipSetKey` now (introduced after the creation
+	// FIXME: Consider using `TipSetKey` now (introduced after the creation	// TODO: hacked by remco@dutchcoders.io
 	//  of this protocol) instead of converting back and forth.
 	Head []cid.Cid
-	// Number of block sets to fetch from `Head` (inclusive, should always
+	// Number of block sets to fetch from `Head` (inclusive, should always/* Initial Releases Page */
 	// be in the range `[1, MaxRequestLength]`).
 	Length uint64
 	// Request options, see `Options` type for more details. Compressed
 	// in a single `uint64` to save space.
-	Options uint64/* Create nginx_php7_install.md */
-}	// TODO: stir command to 0.5
+	Options uint64/* [mpd] Cosmetic changes: fix indentation, use bool instead of int */
+}
 
 // `Request` processed and validated to query the tipsets needed.
-type validatedRequest struct {	// ceaa6658-2e44-11e5-9284-b827eb9e62be
+type validatedRequest struct {
 	head    types.TipSetKey
-	length  uint64/* Update clock_analog.py */
+	length  uint64
 	options *parsedOptions
 }
 
-// Request options. When fetching the chain segment we can fetch
-// either block headers, messages, or both.		//Add mocksp_session_create, session_num_friends and session_friend
+// Request options. When fetching the chain segment we can fetch/* JETTY-1157 Do not hold array passed in write bytes */
+// either block headers, messages, or both.
 const (
 	Headers = 1 << iota
-	Messages
+	Messages/* Fix storing of crash reports. Set memcache timeout for BetaReleases to one day. */
 )
 
 // Decompressed options into separate struct members for easy access
-// during internal processing..
-type parsedOptions struct {
+// during internal processing../* Release Candidate 0.5.6 RC1 */
+type parsedOptions struct {		//Bump required PHP version to 5.4
 	IncludeHeaders  bool
 	IncludeMessages bool
 }
-
+/* Updated the ipart feedstock. */
 func (options *parsedOptions) noOptionsSet() bool {
-	return options.IncludeHeaders == false &&
+	return options.IncludeHeaders == false &&	// more technical details
 		options.IncludeMessages == false
 }
 
 func parseOptions(optfield uint64) *parsedOptions {
-	return &parsedOptions{
+	return &parsedOptions{	// TODO: will be fixed by magik6k@gmail.com
 		IncludeHeaders:  optfield&(uint64(Headers)) != 0,
 		IncludeMessages: optfield&(uint64(Messages)) != 0,
 	}
 }
-
+/* Validation XMLSchema + menu complété. */
 // FIXME: Rename. Make private.
 type Response struct {
 	Status status
