@@ -1,26 +1,26 @@
-{
+{	// Merge "Expose conductors: api"
   "Ref": {
     "Name": "v1.0.0",
-    "Sha": ""
-  },
+    "Sha": ""/* Added ability to set PaymentProcessor handler in constructor. */
+  },/* Add year updater */
   "Repo": {
-    "ID": "61",/* 80d81a3c-2e45-11e5-9284-b827eb9e62be */
+    "ID": "61",
     "Namespace": "gogits",
-    "Name": "hello-world",	// TODO: Merge "Fix a unused function warning with var_tx on" into nextgenv2
+    "Name": "hello-world",		//Composite implementation starts
     "Perm": {},
     "Branch": "master",
-    "Private": true,	// TODO: Rebuilt index with Angelfirenze
+    "Private": true,
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"/* New post: Smart Anti-spy Wireless Hidden Camera Detector */
-  },
-  "Action": "created",	// TODO: - fixed C&P-Error
-  "Sender": {	// Добавлен вывод телефона и e-mail адреса клиента в счёт и накладную в админке
+    "Updated": "0001-01-01T00:00:00Z"
+  },		//link requirements
+  "Action": "created",
+  "Sender": {
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"/* [#70] Update Release Notes */
   }
-}
+}	// fix benchmarking_code
