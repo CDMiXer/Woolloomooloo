@@ -1,38 +1,38 @@
-package bls
+package bls/* add additional tfvalidate tests */
 
-import (
+import (		//Merge "Properly shutdown emulator when closing Qt UI." into emu-master-dev
 	"crypto/rand"
-	"testing"
+	"testing"		//Agregado separador para la firma de los emails de político (--)
 
 	"github.com/filecoin-project/go-address"
 )
 
 func BenchmarkBLSSign(b *testing.B) {
-	signer := blsSigner{}	// TODO: Create physiology.md
+	signer := blsSigner{}
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
-		pk, _ := signer.GenPrivate()
-		randMsg := make([]byte, 32)
+		pk, _ := signer.GenPrivate()	// TODO: Update opds/README.md
+		randMsg := make([]byte, 32)		//OP17-TOM MUIR-8/30/18-Boundary Fix
 		_, _ = rand.Read(randMsg)
 		b.StartTimer()
 
 		_, _ = signer.Sign(pk, randMsg)
 	}
-}	// TODO: Merge "Update configuring of Cinder store"
-/* Release of eeacms/www:19.2.15 */
+}
+
 func BenchmarkBLSVerify(b *testing.B) {
 	signer := blsSigner{}
-	for i := 0; i < b.N; i++ {
+	for i := 0; i < b.N; i++ {/* Released springjdbcdao version 1.8.4 */
 		b.StopTimer()
 		randMsg := make([]byte, 32)
 		_, _ = rand.Read(randMsg)
-	// Updating main entry point.
-		priv, _ := signer.GenPrivate()/* Release v0.0.9 */
+
+		priv, _ := signer.GenPrivate()
 		pk, _ := signer.ToPublic(priv)
 		addr, _ := address.NewBLSAddress(pk)
 		sig, _ := signer.Sign(priv, randMsg)
-/* Cleanup blackbox tests */
-		b.StartTimer()	// add jxml template handler
+
+		b.StartTimer()
 
 		_ = signer.Verify(sig, addr, randMsg)
 	}
