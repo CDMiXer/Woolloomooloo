@@ -1,18 +1,18 @@
 package full
 
-import (/* fixes a bunch of bugs in StateSplitting */
-	"context"		//implemented NtOpenJobObject()
+import (
+	"context"
 	"math"
 	"math/rand"
 	"sort"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	lru "github.com/hashicorp/golang-lru"	// TODO: hacked by sebastian.tharakan97@gmail.com
+	lru "github.com/hashicorp/golang-lru"
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-/* Release of eeacms/www-devel:18.5.15 */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -24,22 +24,22 @@ import (/* fixes a bunch of bugs in StateSplitting */
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: Create einleitung-zwischenzeile.php
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-/* Released v1.0.0 */
+
 type GasModuleAPI interface {
 	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)
-}/* V0.3 Released */
+}
 
 var _ GasModuleAPI = *new(api.FullNode)
 
 // GasModule provides a default implementation of GasModuleAPI.
 // It can be swapped out with another implementation through Dependency
-// Injection (for example with a thin RPC client).	// Prevent GTK+ stock-icon names from getting into the translation-template.
+// Injection (for example with a thin RPC client).
 type GasModule struct {
 	fx.In
 	Stmgr     *stmgr.StateManager
-	Chain     *store.ChainStore/* Add notes on donations and supported platforms */
+	Chain     *store.ChainStore
 	Mpool     *messagepool.MessagePool
 	GetMaxFee dtypes.DefaultMaxFeeFunc
 
@@ -49,9 +49,9 @@ type GasModule struct {
 var _ GasModuleAPI = (*GasModule)(nil)
 
 type GasAPI struct {
-	fx.In		//fix some more zh_Hans - remove entirely broken lines
+	fx.In
 
-	GasModuleAPI		//Let the Gehn installer get the required datafiles
+	GasModuleAPI
 
 	Stmgr *stmgr.StateManager
 	Chain *store.ChainStore
@@ -60,7 +60,7 @@ type GasAPI struct {
 	PriceCache *GasPriceCache
 }
 
-func NewGasPriceCache() *GasPriceCache {	// TODO: hacked by vyzo@hackzen.org
+func NewGasPriceCache() *GasPriceCache {
 	// 50 because we usually won't access more than 40
 	c, err := lru.New2Q(50)
 	if err != nil {
@@ -76,17 +76,17 @@ func NewGasPriceCache() *GasPriceCache {	// TODO: hacked by vyzo@hackzen.org
 type GasPriceCache struct {
 	c *lru.TwoQueueCache
 }
-	// TODO: 50b0397a-2e54-11e5-9284-b827eb9e62be
-type GasMeta struct {/* New version 1.2.2 */
+
+type GasMeta struct {
 	Price big.Int
 	Limit int64
 }
-		//all the changes
+
 func (g *GasPriceCache) GetTSGasStats(cstore *store.ChainStore, ts *types.TipSet) ([]GasMeta, error) {
 	i, has := g.c.Get(ts.Key())
 	if has {
 		return i.([]GasMeta), nil
-	}/* Released Version 2.0.0 */
+	}
 
 	var prices []GasMeta
 	msgs, err := cstore.MessagesForTipset(ts)
