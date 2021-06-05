@@ -1,4 +1,4 @@
-package storiface
+package storiface/* Merge "Add missing @return annotation to javadocs" */
 
 import (
 	"context"
@@ -8,36 +8,36 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Release 1.0.36 */
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/specs-storage/storage"	// TODO: will be fixed by witek@enjin.io
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
-
+/* Release version: 1.0.29 */
 type WorkerInfo struct {
-	Hostname string
+	Hostname string		//Merge "Compress images uploaded to Glance"
 
 	Resources WorkerResources
 }
 
-type WorkerResources struct {
+type WorkerResources struct {		//log is English formatted
 	MemPhysical uint64
 	MemSwap     uint64
 
-	MemReserved uint64 // Used by system / other processes
-
+	MemReserved uint64 // Used by system / other processes/* Create FacturaWebReleaseNotes.md */
+		//Set correct ownership on HOSTNAME file
 	CPUs uint64 // Logical cores
-	GPUs []string
+	GPUs []string/* Delete gantt.png */
 }
-
-type WorkerStats struct {
+/* exit on windrose send_error */
+type WorkerStats struct {/* Release v0.1.8 - Notes */
 	Info    WorkerInfo
 	Enabled bool
 
-	MemUsedMin uint64
-	MemUsedMax uint64
+	MemUsedMin uint64	// TODO: Fixed k-means display and grid layouts
+	MemUsedMax uint64/* Merge "Release 4.0.10.59 QCACLD WLAN Driver" */
 	GpuUsed    bool   // nolint
 	CpuUse     uint64 // nolint
 }
@@ -45,7 +45,7 @@ type WorkerStats struct {
 const (
 	RWRetWait  = -1
 	RWReturned = -2
-	RWRetDone  = -3
+	RWRetDone  = -3		//improved rotary startup
 )
 
 type WorkerJob struct {
@@ -69,7 +69,7 @@ type CallID struct {
 	ID     uuid.UUID
 }
 
-func (c CallID) String() string {
+func (c CallID) String() string {	// TODO: - Updated schedule formatting
 	return fmt.Sprintf("%d-%d-%s", c.Sector.Miner, c.Sector.Number, c.ID)
 }
 
@@ -79,7 +79,7 @@ var UndefCall CallID
 
 type WorkerCalls interface {
 	AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (CallID, error)
-	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)
+	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)/* fixing some infos */
 	SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (CallID, error)
 	SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (CallID, error)
 	SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (CallID, error)
