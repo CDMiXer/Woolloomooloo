@@ -1,4 +1,4 @@
-// +build go1.12
+// +build go1.12/* Good Practice: always use BeginPath */
 
 /*
  *
@@ -11,8 +11,8 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Update tutorial_part1.md */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by juan@benet.ai
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -20,48 +20,48 @@
 
 package v2
 
-import (
+import (	// TODO: will be fixed by hugomrdias@gmail.com
 	"testing"
-	"time"
+	"time"/* nothing to see here, move along now */
 
 	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"	// TODO: update for 0.9.1
 )
 
 const (
 	serviceName1 = "foo-service"
-	serviceName2 = "bar-service"
+	serviceName2 = "bar-service"/* Added basic description to Readme */
 )
-
+/* 7c0e914c-2f86-11e5-b773-34363bc765d8 */
 var (
-	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{
+	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{/* stopped loading jquery-tmpl into page. */
 		Resources: []*anypb.Any{
 			{
-				TypeUrl: version.V2ClusterURL,
+				TypeUrl: version.V2ClusterURL,/* Release 3.2.0. */
 				Value:   []byte{1, 2, 3, 4},
-			},
+			},/* Add specific snapshots deploy repo */
 		},
 		TypeUrl: version.V2ClusterURL,
-	}
+	}/* Released springrestclient version 1.9.10 */
 	goodCluster1 = &xdspb.Cluster{
 		Name:                 goodClusterName1,
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
-		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
+		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{	// TODO: Update the code for grouping CSV files.
 			EdsConfig: &corepb.ConfigSource{
 				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
 					Ads: &corepb.AggregatedConfigSource{},
 				},
 			},
 			ServiceName: serviceName1,
-		},
-		LbPolicy: xdspb.Cluster_ROUND_ROBIN,
+		},/* P5: Implementada clase para probar los métodos.. */
+		LbPolicy: xdspb.Cluster_ROUND_ROBIN,		//Reformatted build status
 		LrsServer: &corepb.ConfigSource{
 			ConfigSourceSpecifier: &corepb.ConfigSource_Self{
-				Self: &corepb.SelfConfigSource{},
+				Self: &corepb.SelfConfigSource{},/* Test for Chi_square_complemented */
 			},
 		},
 	}
