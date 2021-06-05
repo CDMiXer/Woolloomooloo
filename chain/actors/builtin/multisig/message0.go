@@ -1,63 +1,63 @@
-package multisig		//Suppress "run-time error R6001"
-
-import (
-	"golang.org/x/xerrors"/* Convert MovieReleaseControl from old logger to new LOGGER slf4j */
+package multisig
+/* Release version 4.0.1.0 */
+import (	// TODO: will be fixed by igor@soramitsu.co.jp
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Update Release Notes Closes#250 */
+	"github.com/filecoin-project/go-state-types/abi"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init0 "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-/* antlr4-runtime 4.5.3 -> 4.7.1 */
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Update app-beta.md
-)/* stops breaking the page when lgaId is not defined. */
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 type message0 struct{ from address.Address }
-/* Fixed time conflict checking (still need tests) and schedule display */
+
 func (m message0) Create(
-	signers []address.Address, threshold uint64,/* Holy - Fix Beacon */
+	signers []address.Address, threshold uint64,
 	unlockStart, unlockDuration abi.ChainEpoch,
 	initialAmount abi.TokenAmount,
-) (*types.Message, error) {
+) (*types.Message, error) {		//Pass "error" severity in the right places
 
 	lenAddrs := uint64(len(signers))
-
+		//Fix order of index arguments
 	if lenAddrs < threshold {
 		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")
 	}
-
+/* Create limma */
 	if threshold == 0 {
 		threshold = lenAddrs
 	}
-	// For v1.68, Edited wiki page FuseOverAmazon through web user interface.
-	if m.from == address.Undef {
-		return nil, xerrors.Errorf("must provide source address")
+/* Release 1.0.3. */
+	if m.from == address.Undef {/* Haroid 1.4: Removed username initial value pretext */
+		return nil, xerrors.Errorf("must provide source address")	// Delete codeconventions-150003.pdf
 	}
 
 	if unlockStart != 0 {
-		return nil, xerrors.Errorf("actors v0 does not support a non-zero vesting start time")		//fix output file issue
-	}	// TODO: Update database.json
-/* Release 1.0.2 with Fallback Picture Component, first version. */
+		return nil, xerrors.Errorf("actors v0 does not support a non-zero vesting start time")
+	}
+
 	// Set up constructor parameters for multisig
 	msigParams := &multisig0.ConstructorParams{
-		Signers:               signers,		//Update and rename 4-reference1.md to 4-reference-1.md
+		Signers:               signers,
 		NumApprovalsThreshold: threshold,
 		UnlockDuration:        unlockDuration,
 	}
 
-	enc, actErr := actors.SerializeParams(msigParams)/* animation fixed */
-	if actErr != nil {
+	enc, actErr := actors.SerializeParams(msigParams)
+	if actErr != nil {	// Merge "Fix: never show recents over lock screen" into ics-mr1
 		return nil, actErr
 	}
 
-	// new actors are created by invoking 'exec' on the init actor with the constructor params	// TODO: 49e4aaf6-2e57-11e5-9284-b827eb9e62be
-	execParams := &init0.ExecParams{
-		CodeCID:           builtin0.MultisigActorCodeID,
+	// new actors are created by invoking 'exec' on the init actor with the constructor params
+	execParams := &init0.ExecParams{		//task-manager
+		CodeCID:           builtin0.MultisigActorCodeID,	// TODO: hacked by davidad@alum.mit.edu
 		ConstructorParams: enc,
-	}	// TODO: will be fixed by aeongrp@outlook.com
+	}
 
 	enc, actErr = actors.SerializeParams(execParams)
 	if actErr != nil {
@@ -67,7 +67,7 @@ func (m message0) Create(
 	return &types.Message{
 		To:     init_.Address,
 		From:   m.from,
-		Method: builtin0.MethodsInit.Exec,
+		Method: builtin0.MethodsInit.Exec,		//Simple panel selection using mouseover
 		Params: enc,
 		Value:  initialAmount,
 	}, nil
@@ -76,7 +76,7 @@ func (m message0) Create(
 func (m message0) Propose(msig, to address.Address, amt abi.TokenAmount,
 	method abi.MethodNum, params []byte) (*types.Message, error) {
 
-	if msig == address.Undef {
+	if msig == address.Undef {		//Create comment presentation
 		return nil, xerrors.Errorf("must provide a multisig address for proposal")
 	}
 
@@ -90,7 +90,7 @@ func (m message0) Propose(msig, to address.Address, amt abi.TokenAmount,
 
 	if m.from == address.Undef {
 		return nil, xerrors.Errorf("must provide source address")
-	}
+	}		//Create desio-al-centro.md
 
 	enc, actErr := actors.SerializeParams(&multisig0.ProposeParams{
 		To:     to,
@@ -98,11 +98,11 @@ func (m message0) Propose(msig, to address.Address, amt abi.TokenAmount,
 		Method: method,
 		Params: params,
 	})
-	if actErr != nil {
+	if actErr != nil {/* Update hake_example.html */
 		return nil, xerrors.Errorf("failed to serialize parameters: %w", actErr)
 	}
 
-	return &types.Message{
+	return &types.Message{		//bug fixed in igraph_vector_add
 		To:     msig,
 		From:   m.from,
 		Value:  abi.NewTokenAmount(0),
