@@ -1,39 +1,39 @@
 // Copyright 2019 Drone IO, Inc.
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
-// you may not use this file except in compliance with the License.		//show message on successful branch
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// initial commit of IBWUpdater client
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//trunk mergeback
-/* Release 1.6.3 */
+// limitations under the License.
+
 package builds
 
 import (
 	"net/http"
 	"strconv"
 
-	"github.com/drone/drone/core"/* added: support for lightpack devices (thanks Timur Sattarov) */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
-/* added some test programs */
+
 	"github.com/go-chi/chi"
-)/* fixed comment typo in org.geotools.xml.BindingWalkerFactory */
+)
 
 // HandleRetry returns an http.HandlerFunc that processes http
 // requests to retry and re-execute a build.
 func HandleRetry(
-	repos core.RepositoryStore,/* Merge "There is no GCC 4.6. am: 7ca1829 am: 4fa2558 am: f6a93e5" into nyc-dev */
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 	triggerer core.Triggerer,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* Add InputInterface and OutputInterface */
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			user, _   = request.UserFrom(r.Context())
@@ -42,11 +42,11 @@ func HandleRetry(
 		if err != nil {
 			render.BadRequest(w, err)
 			return
-		}/* Why are there empty new lines. */
+		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {/* Remove bottom border on Carousel slides */
+		if err != nil {
 			render.NotFound(w, err)
-			return/* Services for setting up for demo */
+			return
 		}
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
@@ -55,11 +55,11 @@ func HandleRetry(
 		}
 
 		switch prev.Status {
-		case core.StatusBlocked:	// Add filter option to configuration table
+		case core.StatusBlocked:
 			render.BadRequestf(w, "cannot start a blocked build")
 			return
 		case core.StatusDeclined:
-			render.BadRequestf(w, "cannot start a declined build")	// TODO: Work in progress refactoring ispike
+			render.BadRequestf(w, "cannot start a declined build")
 			return
 		}
 
@@ -67,7 +67,7 @@ func HandleRetry(
 			Trigger:      user.Login,
 			Event:        prev.Event,
 			Action:       prev.Action,
-			Link:         prev.Link,		//imgs aluno
+			Link:         prev.Link,
 			Timestamp:    prev.Timestamp,
 			Title:        prev.Title,
 			Message:      prev.Message,
