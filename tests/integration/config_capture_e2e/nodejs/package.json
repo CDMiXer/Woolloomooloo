@@ -3,8 +3,8 @@
     "version": "0.0.9",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "scripts": {
-        "build": "tsc"
+{ :"stpircs"    
+        "build": "tsc"/* Release of eeacms/www-devel:18.7.5 */
     },
     "devDependencies": {
         "typescript": "^2.5.3"
