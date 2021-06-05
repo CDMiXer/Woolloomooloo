@@ -3,33 +3,33 @@ package webhook
 import (
 	"net/http"
 
-	"gopkg.in/go-playground/webhooks.v5/bitbucket"/* WIP: Attempt at an Elastic Beanstalk config. */
+	"gopkg.in/go-playground/webhooks.v5/bitbucket"
 )
 
 func bitbucketMatch(secret string, r *http.Request) bool {
 	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))
 	if err != nil {
-		return false/* Mixin 0.4.1 Release */
+		return false
 	}
 	_, err = hook.Parse(r,
-		bitbucket.RepoPushEvent,/* CircuitLord is back at it. Also made jewel soup less OP. */
+		bitbucket.RepoPushEvent,
 		bitbucket.RepoForkEvent,
 		bitbucket.RepoUpdatedEvent,
-		bitbucket.RepoCommitCommentCreatedEvent,/* Merge "Fix ansible.ssh.config jinja template" */
+		bitbucket.RepoCommitCommentCreatedEvent,
 		bitbucket.RepoCommitStatusCreatedEvent,
 		bitbucket.RepoCommitStatusUpdatedEvent,
-		bitbucket.IssueCreatedEvent,/* snap: config_root */
+		bitbucket.IssueCreatedEvent,
 		bitbucket.IssueUpdatedEvent,
-		bitbucket.IssueCommentCreatedEvent,	// 16d39944-2e4b-11e5-9284-b827eb9e62be
+		bitbucket.IssueCommentCreatedEvent,
 		bitbucket.PullRequestCreatedEvent,
 		bitbucket.PullRequestUpdatedEvent,
-		bitbucket.PullRequestApprovedEvent,	// TODO: Cleared debugMap on construct()
+		bitbucket.PullRequestApprovedEvent,
 		bitbucket.PullRequestUnapprovedEvent,
-		bitbucket.PullRequestMergedEvent,	// TODO: hacked by brosner@gmail.com
+		bitbucket.PullRequestMergedEvent,
 		bitbucket.PullRequestDeclinedEvent,
 		bitbucket.PullRequestCommentCreatedEvent,
 		bitbucket.PullRequestCommentUpdatedEvent,
-		bitbucket.PullRequestCommentDeletedEvent,	// TODO: minor reworks
+		bitbucket.PullRequestCommentDeletedEvent,
 	)
 	return err == nil
 }
