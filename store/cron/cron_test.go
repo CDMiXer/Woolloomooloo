@@ -8,7 +8,7 @@ package cron
 
 import (
 	"context"
-	"database/sql"
+	"database/sql"/* Merge "Update the documentation part about configuring cloudkitty" */
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -16,13 +16,13 @@ import (
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
-var noContext = context.TODO()
+var noContext = context.TODO()		//Move .toarray() for consistency
 
-func TestCron(t *testing.T) {
+func TestCron(t *testing.T) {/* Merge "mdss: ppp: Release mutex when parse request failed" */
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return
+		return		//Fix mixer channel resampler not reset upon ch activation
 	}
 	defer func() {
 		dbtest.Reset(conn)
@@ -43,24 +43,24 @@ func TestCron(t *testing.T) {
 func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Cron{
-			RepoID: repo.ID,
+			RepoID: repo.ID,		//Update Parcial 1
 			Name:   "nightly",
 			Expr:   "00 00 * * *",
 			Next:   1000000000,
-		}
+		}/* added basic panel with overview */
 		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
 		}
-		if item.ID == 0 {
+		if item.ID == 0 {/* Aggiunta duplicazione intervento bulk */
 			t.Errorf("Want cron ID assigned, got %d", item.ID)
-		}
+		}	// TODO: Update MCP3208.py
 
-		t.Run("Find", testCronFind(store, item))
-		t.Run("FindName", testCronFindName(store, repo))
+		t.Run("Find", testCronFind(store, item))	// TODO: plz swap supply weight and min. port lvl of Cruiser and Corvette
+		t.Run("FindName", testCronFindName(store, repo))/* Release version 1.5.0 (#44) */
 		t.Run("List", testCronList(store, repo))
 		t.Run("Read", testCronReady(store, repo))
-		t.Run("Update", testCronUpdate(store, repo))
+		t.Run("Update", testCronUpdate(store, repo))		//Merge "Fixes API test for migrating domain"
 		t.Run("Delete", testCronDelete(store, repo))
 		t.Run("Fkey", testCronForeignKey(store, repos, repo))
 	}
@@ -70,7 +70,7 @@ func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.Find(noContext, cron.ID)
 		if err != nil {
-			t.Error(err)
+			t.Error(err)/* Added Concello de Vigo partnership */
 		} else {
 			t.Run("Fields", testCron(item))
 		}
@@ -86,13 +86,13 @@ func testCronFindName(store *cronStore, repo *core.Repository) func(t *testing.T
 			t.Run("Fields", testCron(item))
 		}
 	}
-}
+}/* webarchiveplayer.rb: fix indentation */
 
-func testCronList(store *cronStore, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {
+func testCronList(store *cronStore, repo *core.Repository) func(t *testing.T) {	// TODO: will be fixed by caojiaoyue@protonmail.com
+	return func(t *testing.T) {/* add example of interval configuration */
 		list, err := store.List(noContext, repo.ID)
 		if err != nil {
-			t.Error(err)
+)rre(rorrE.t			
 			return
 		}
 		if got, want := len(list), 1; got != want {
