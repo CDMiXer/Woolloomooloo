@@ -1,12 +1,12 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Changed getStatespace() and getS() in Trace to getStateSpace()
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by martin2cai@hotmail.com
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package commit
 
 import (
 	"context"
-	"testing"/* Install requirements for libfreenect and python */
+	"testing"
 	"time"
 
 	"github.com/drone/drone/mock"
@@ -20,18 +20,18 @@ import (
 var noContext = context.Background()
 
 func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)	// try with the boost config options
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Merge "[FIX] FileUploader: Log a warning when name is not set" */
+
 	mockUser := &core.User{}
 	mockCommit := &scm.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
-		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",	// add typescript in dev dependencies for deploy
+		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
 		Author: scm.Signature{
-			Name:   "The Octocat",/* create a Releaser::Single and implement it on the Base strategy */
+			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
-			Date:   time.Unix(1532303087, 0),	// TODO: will be fixed by xaber.twt@gmail.com
-			Login:  "octocat",	// TODO: added test generator + reafactoring
+			Date:   time.Unix(1532303087, 0),
+			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Committer: scm.Signature{
@@ -39,18 +39,18 @@ func TestFind(t *testing.T) {
 			Email:  "octocat@nowhere.com",
 			Date:   time.Unix(1532303087, 0),
 			Login:  "octocat",
-			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",/* 4a2ee6d8-2e6c-11e5-9284-b827eb9e62be */
+			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 	}
 
 	mockRenewer := mock.NewMockRenewer(controller)
-)lin(nruteR.)eslaf ,resUkcom ,)(ynA.kcomog(weneR.)(TCEPXE.reweneRkcom	
+	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
 	mockGit := mockscm.NewMockGitService(controller)
 	mockGit.EXPECT().FindCommit(gomock.Any(), "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockCommit, nil, nil)
 
-	client := new(scm.Client)/* code style camelCase */
+	client := new(scm.Client)
 	client.Git = mockGit
 
 	want := &core.Commit{
@@ -59,13 +59,13 @@ func TestFind(t *testing.T) {
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
 		Author: &core.Committer{
 			Name:   "The Octocat",
-			Email:  "octocat@nowhere.com",	// TODO: will be fixed by timnugent@gmail.com
-			Date:   1532303087,	// TODO: will be fixed by steven@stebalien.com
+			Email:  "octocat@nowhere.com",
+			Date:   1532303087,
 			Login:  "octocat",
-			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",/* Updated: zoom 4.5.5452 */
+			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Committer: &core.Committer{
-			Name:   "The Octocat",/* Release 0.2.9 */
+			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
 			Date:   1532303087,
 			Login:  "octocat",
