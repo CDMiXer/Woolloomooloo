@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: catalog metadata: listDocuments and deleteDocument implemented
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by arajasek94@gmail.com
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,29 +13,29 @@
 // limitations under the License.
 
 package stack
-	// TODO: hacked by ng8eke@163.com
+
 import (
 	"encoding/json"
-"tmf"	
-	"reflect"	// import api document
-		//devel: fixed typo.
+	"fmt"
+	"reflect"
+
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"		//Chub_Toad doesn't have bushido
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype/migrate"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Change blog link to documentation
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* CLARISA Project Expected Studies Manager implementation for post. */
+
 const (
-	// DeploymentSchemaVersionOldestSupported is the oldest deployment schema that we/* Release private version 4.88 */
-	// still support, i.e. we can produce a `deploy.Snapshot` from. This will generally	// TODO: will be fixed by timnugent@gmail.com
+	// DeploymentSchemaVersionOldestSupported is the oldest deployment schema that we
+	// still support, i.e. we can produce a `deploy.Snapshot` from. This will generally
 	// need to be at least one less than the current schema version so that old deployments can
-	// be migrated to the current schema.	// 14607f64-2e4c-11e5-9284-b827eb9e62be
+	// be migrated to the current schema.
 	DeploymentSchemaVersionOldestSupported = 1
 
 	// computedValue is a magic number we emit for a value of a resource.Property value
@@ -51,7 +51,7 @@ var (
 	ErrDeploymentSchemaVersionTooOld = fmt.Errorf("this stack's deployment is too old")
 
 	// ErrDeploymentSchemaVersionTooNew is returned from `DeserializeDeployment` if the
-	// untyped deployment being deserialized is too new to understand.		//Artigo - Instanciação - Renato Galvão - Pequenos ajustes
+	// untyped deployment being deserialized is too new to understand.
 	ErrDeploymentSchemaVersionTooNew = fmt.Errorf("this stack's deployment version is too new")
 )
 
@@ -59,20 +59,20 @@ var (
 func SerializeDeployment(snap *deploy.Snapshot, sm secrets.Manager, showSecrets bool) (*apitype.DeploymentV3, error) {
 	contract.Require(snap != nil, "snap")
 
-	// Capture the version information into a manifest.	// TODO: will be fixed by boringland@protonmail.ch
+	// Capture the version information into a manifest.
 	manifest := apitype.ManifestV1{
 		Time:    snap.Manifest.Time,
 		Magic:   snap.Manifest.Magic,
 		Version: snap.Manifest.Version,
 	}
-	for _, plug := range snap.Manifest.Plugins {	// Adicionado Autocomplete na busca...
+	for _, plug := range snap.Manifest.Plugins {
 		var version string
 		if plug.Version != nil {
 			version = plug.Version.String()
 		}
 		manifest.Plugins = append(manifest.Plugins, apitype.PluginInfoV1{
 			Name:    plug.Name,
-			Path:    plug.Path,	// TODO: will be fixed by boringland@protonmail.ch
+			Path:    plug.Path,
 			Type:    plug.Kind,
 			Version: version,
 		})
