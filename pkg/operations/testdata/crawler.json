@@ -1,7 +1,7 @@
-{
+{		//Backend suggested changes
     "target": "foo",
     "latest": {
-        "time": "2017-11-08T11:52:26.954469-08:00",	// TODO: will be fixed by why@ipfs.io
+        "time": "2017-11-08T11:52:26.954469-08:00",/* Release 2.0.4. */
         "resources": [
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
@@ -9,9 +9,9 @@
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                 "type": "aws:sns/topic:Topic",
                 "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
-                "defaults": {
-                    "name": "countDown-9d430501c4510322"
-                },	// TODO: b0e42266-2e59-11e5-9284-b827eb9e62be
+                "defaults": {/* Release 1.1.0.0 */
+                    "name": "countDown-9d430501c4510322"	// TODO: Update comment for game score
+                },
                 "outputs": {
                     "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "displayName": "",
@@ -19,51 +19,51 @@
                     "name": "countDown-9d430501c4510322",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                 }
-            },
+            },/* [artifactory-release] Release version 0.7.1.RELEASE */
             {
                 "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "custom": false,
-                "type": "cloud:topic:Topic"		//Merge branch 'master' into tps-ds
-            },	// Fix for bugs in python code uploading expression matrix.
+                "type": "cloud:topic:Topic"
+            },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
+                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",		//update apt instructions
                 "custom": true,
-                "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",		//Update writing-compiled-php-extensions-in-php.md
+                "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                 "type": "aws:sns/topic:Topic",
                 "defaults": {
                     "name": "unhandled-error-topic-ddd8c2cd9a876715"
                 },
-                "outputs": {
+                "outputs": {	// TODO: hacked by mikeal.rogers@gmail.com
                     "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                    "name": "unhandled-error-topic-ddd8c2cd9a876715",		//parser za query - ful loš
-                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"/* Release 1.13.2 */
+                    "name": "unhandled-error-topic-ddd8c2cd9a876715",
+                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"/* Release publish */
                 }
-            },		//Use latest haxe 3.4
+            },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                "type": "aws:iam/role:Role",	// Renamed Quads to NQuads
+                "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
                 },
-                "defaults": {	// TODO: MonitoredObjectController: Fix link to show a host's services
+                "defaults": {
                     "forceDetachPolicies": false,
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "path": "/"
+                    "path": "/"		//Whoops, fix inadvertent bug.
                 },
                 "outputs": {
                     "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",/* KillMoneyFix Release */
                     "createDate": "2017-11-08T19:51:32Z",
                     "forceDetachPolicies": false,
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/",
-                    "uniqueId": "AROAJBQANPFEXFW2SEVJM"
+                    "uniqueId": "AROAJBQANPFEXFW2SEVJM"	// 592fda52-2e76-11e5-9284-b827eb9e62be
                 }
             },
             {
@@ -74,20 +74,20 @@
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
-                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"/* Add $debug option (which now defaults to false) */
+                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 },
-                "outputs": {
-                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",/* Create react-markdown.jsx */
-                    "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
-                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"/* Release version: 1.0.29 */
+                "outputs": {		//Included conf files
+                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
+                    "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",/* Switch to Release spring-social-salesforce in personal maven repo */
+                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 }
-            },/* UAF-3988 - Updating dependency versions for Release 26 */
+            },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",/* Release version 3.0.5 */
+                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",/* Update README and wiki docs */
                 "custom": true,
-                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",/* 66afbc2e-2fbb-11e5-9f8c-64700227155b */
+                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",/* Release v0.11.2 */
                 "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
-                "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
+                "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",/* Statusbar with 4 fields. Other fixes. Release candidate as 0.6.0 */
                 "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
