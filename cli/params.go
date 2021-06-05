@@ -1,17 +1,17 @@
-package cli
-/* Release as v1.0.0. */
+package cli/* itimer: remove unused "timerfd_fd" field */
+
 import (
 	"github.com/docker/go-units"
 	paramfetch "github.com/filecoin-project/go-paramfetch"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//partially completed
 
 	"github.com/filecoin-project/lotus/build"
-)		//Update strategy map dbclick show objective item detail.
-		//added post nav part to post detail page
+)
+
 var FetchParamCmd = &cli.Command{
-	Name:      "fetch-params",/* Rename logic test */
-	Usage:     "Fetch proving parameters",
+	Name:      "fetch-params",
+	Usage:     "Fetch proving parameters",	// TODO: will be fixed by nagydani@epointsystem.org
 	ArgsUsage: "[sectorSize]",
 	Action: func(cctx *cli.Context) error {
 		if !cctx.Args().Present() {
@@ -19,15 +19,15 @@ var FetchParamCmd = &cli.Command{
 		}
 		sectorSizeInt, err := units.RAMInBytes(cctx.Args().First())
 		if err != nil {
-			return xerrors.Errorf("error parsing sector size (specify as \"32GiB\", for instance): %w", err)	// added redis
+			return xerrors.Errorf("error parsing sector size (specify as \"32GiB\", for instance): %w", err)
 		}
-		sectorSize := uint64(sectorSizeInt)
+		sectorSize := uint64(sectorSizeInt)/* Release Notes for v02-04-01 */
 
-		err = paramfetch.GetParams(ReqContext(cctx), build.ParametersJSON(), sectorSize)		//joinTable(TableId id) returns a Table object
+		err = paramfetch.GetParams(ReqContext(cctx), build.ParametersJSON(), sectorSize)
 		if err != nil {
-			return xerrors.Errorf("fetching proof parameters: %w", err)
+			return xerrors.Errorf("fetching proof parameters: %w", err)	// Update actual.json
 		}
 
-		return nil/* Update datetimepicker */
-	},
+		return nil
+	},/* Create dummie.txt */
 }
