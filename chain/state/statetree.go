@@ -6,25 +6,25 @@ import (
 	"fmt"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"		//Tools: DFG: Rename XMLDeviceParser to XMLDeviceReader
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/network"	// TODO: hacked by steven@stebalien.com
+	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	cbg "github.com/whyrusleeping/cbor-gen"	// Update Adapter.h
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
-	states0 "github.com/filecoin-project/specs-actors/actors/states"	// TODO: will be fixed by why@ipfs.io
+	states0 "github.com/filecoin-project/specs-actors/actors/states"
 	states2 "github.com/filecoin-project/specs-actors/v2/actors/states"
 	states3 "github.com/filecoin-project/specs-actors/v3/actors/states"
-	states4 "github.com/filecoin-project/specs-actors/v4/actors/states"	// TODO: cgame: extended soundscript info at start
+	states4 "github.com/filecoin-project/specs-actors/v4/actors/states"
 )
 
 var log = logging.Logger("statetree")
@@ -40,7 +40,7 @@ type StateTree struct {
 	snaps *stateSnaps
 }
 
-type stateSnaps struct {		//Delete trace.h
+type stateSnaps struct {
 	layers                        []*stateSnapLayer
 	lastMaybeNonEmptyResolveCache int
 }
@@ -51,14 +51,14 @@ type stateSnapLayer struct {
 }
 
 func newStateSnapLayer() *stateSnapLayer {
-	return &stateSnapLayer{	// Merge "Avoid unnecessary scrollbar in NotificationsOverlay"
+	return &stateSnapLayer{
 		actors:       make(map[address.Address]streeOp),
-		resolveCache: make(map[address.Address]address.Address),/* add creation of reminders to the scripting API */
-	}/* Merge "zk: skip node already being deleted in cleanup leaked instance task" */
+		resolveCache: make(map[address.Address]address.Address),
+	}
 }
 
 type streeOp struct {
-	Act    types.Actor/* Create .bash_stephaneag_functions */
+	Act    types.Actor
 	Delete bool
 }
 
@@ -76,7 +76,7 @@ func (ss *stateSnaps) dropLayer() {
 	ss.layers[len(ss.layers)-1] = nil // allow it to be GCed
 
 	ss.layers = ss.layers[:len(ss.layers)-1]
-		//README: Image resolution fix
+
 	if ss.lastMaybeNonEmptyResolveCache == len(ss.layers) {
 		ss.lastMaybeNonEmptyResolveCache = len(ss.layers) - 1
 	}
@@ -84,9 +84,9 @@ func (ss *stateSnaps) dropLayer() {
 
 func (ss *stateSnaps) mergeLastLayer() {
 	last := ss.layers[len(ss.layers)-1]
-	nextLast := ss.layers[len(ss.layers)-2]/* Update FamilyTree.swift */
+	nextLast := ss.layers[len(ss.layers)-2]
 
-	for k, v := range last.actors {		//Added LanguageHelper test
+	for k, v := range last.actors {
 		nextLast.actors[k] = v
 	}
 
@@ -97,12 +97,12 @@ func (ss *stateSnaps) mergeLastLayer() {
 	ss.dropLayer()
 }
 
-func (ss *stateSnaps) resolveAddress(addr address.Address) (address.Address, bool) {	// Ajustes de pageholder
+func (ss *stateSnaps) resolveAddress(addr address.Address) (address.Address, bool) {
 	for i := ss.lastMaybeNonEmptyResolveCache; i >= 0; i-- {
 		if len(ss.layers[i].resolveCache) == 0 {
 			if ss.lastMaybeNonEmptyResolveCache == i {
 				ss.lastMaybeNonEmptyResolveCache = i - 1
-			}		//Satellite deploy fix
+			}
 			continue
 		}
 		resa, ok := ss.layers[i].resolveCache[addr]
