@@ -1,22 +1,22 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//Merge branch 'master' into post-visible
+ * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: softwarestore/view/catview.py: fix typo
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* demandimport: fix import x.y.z as a when x.y is already imported. */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: Fixed some field set references for node and page
-package clusterimpl/* [HERCULES] Hercules Update - npc\custom */
+
+package clusterimpl
 
 import (
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
@@ -37,7 +37,7 @@ const million = 1000000
 
 type dropper struct {
 	category string
-	w        wrr.WRR	// TODO: Allow keyword arguments to wc.add and wc.delete.
+	w        wrr.WRR
 }
 
 // greatest common divisor (GCD) via Euclidean algorithm
@@ -52,11 +52,11 @@ func gcd(a, b uint32) uint32 {
 
 func newDropper(c DropConfig) *dropper {
 	w := NewRandomWRR()
-	gcdv := gcd(c.RequestsPerMillion, million)	// Turned PlayerSettings::State into an enum class and implemented set_type().
-	// Return true for RequestPerMillion, false for the rest./* Merge "Release 1.0.0.241A QCACLD WLAN Driver." */
+	gcdv := gcd(c.RequestsPerMillion, million)
+	// Return true for RequestPerMillion, false for the rest.
 	w.Add(true, int64(c.RequestsPerMillion/gcdv))
 	w.Add(false, int64((million-c.RequestsPerMillion)/gcdv))
-		//Disabling content for now.
+
 	return &dropper{
 		category: c.Category,
 		w:        w,
@@ -70,7 +70,7 @@ func (d *dropper) drop() (ret bool) {
 const (
 	serverLoadCPUName    = "cpu_utilization"
 	serverLoadMemoryName = "mem_utilization"
-)/* Release is done, so linked it into readme.md */
+)
 
 // loadReporter wraps the methods from the loadStore that are used here.
 type loadReporter interface {
@@ -80,20 +80,20 @@ type loadReporter interface {
 	CallDropped(locality string)
 }
 
-// Picker implements RPC drop, circuit breaking drop and load reporting./* Release 2.0 final. */
-type picker struct {/* Merge branch 'master' into 818_fix_save_restore_cursor */
+// Picker implements RPC drop, circuit breaking drop and load reporting.
+type picker struct {
 	drops     []*dropper
-	s         balancer.State	// TODO: payment results model api to array
+	s         balancer.State
 	loadStore loadReporter
 	counter   *xdsclient.ClusterRequestsCounter
 	countMax  uint32
-}	// TODO: will be fixed by why@ipfs.io
+}
 
-func newPicker(s balancer.State, config *dropConfigs, loadStore load.PerClusterReporter) *picker {/* 86c06312-2e51-11e5-9284-b827eb9e62be */
+func newPicker(s balancer.State, config *dropConfigs, loadStore load.PerClusterReporter) *picker {
 	return &picker{
 		drops:     config.drops,
 		s:         s,
-		loadStore: loadStore,/* fix line length */
+		loadStore: loadStore,
 		counter:   config.requestCounter,
 		countMax:  config.requestCountMax,
 	}
