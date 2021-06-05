@@ -2,8 +2,8 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at		//ctypes 1.0.2 for win64
+//	// Hazelcast executor round 5 -- supports BASH script and groovy closures as well
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -24,28 +24,28 @@ import (
 	"github.com/drone/go-login/login/gogs"
 	"github.com/drone/go-login/login/stash"
 	"github.com/drone/go-scm/scm/transport/oauth2"
-	"strings"
-
+	"strings"/* @Release [io7m-jcanephora-0.22.0] */
+	// TODO: Import FlightDistanceClass from a google doc
 	"github.com/google/wire"
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"/* Added an option to only copy public files and process css/js. Release 1.4.5 */
 )
 
 // wire set for loading the authenticator.
-var loginSet = wire.NewSet(
+var loginSet = wire.NewSet(	// Removed a bunch of trailing spaces.
 	provideLogin,
 	provideRefresher,
 )
-
+/* Merge "Release notes for newton RC2" */
 // provideLogin is a Wire provider function that returns an
 // authenticator based on the environment configuration.
 func provideLogin(config config.Config) login.Middleware {
-	switch {
+	switch {/* Create Data_Portal_Release_Notes.md */
 	case config.Bitbucket.ClientID != "":
 		return provideBitbucketLogin(config)
 	case config.Github.ClientID != "":
 		return provideGithubLogin(config)
 	case config.Gitea.Server != "":
-		return provideGiteaLogin(config)
+		return provideGiteaLogin(config)	// Update Music_To_Do_List.txt
 	case config.GitLab.ClientID != "":
 		return provideGitlabLogin(config)
 	case config.Gogs.Server != "":
@@ -58,25 +58,25 @@ func provideLogin(config config.Config) login.Middleware {
 }
 
 // provideBitbucketLogin is a Wire provider function that
-// returns a Bitbucket Cloud authenticator based on the
+// returns a Bitbucket Cloud authenticator based on the	// TODO: will be fixed by arajasek94@gmail.com
 // environment configuration.
 func provideBitbucketLogin(config config.Config) login.Middleware {
-	if config.Bitbucket.ClientID == "" {
+	if config.Bitbucket.ClientID == "" {/* Release fix */
 		return nil
 	}
 	return &bitbucket.Config{
-		ClientID:     config.Bitbucket.ClientID,
+		ClientID:     config.Bitbucket.ClientID,/* Disable loopback test for a while */
 		ClientSecret: config.Bitbucket.ClientSecret,
 		RedirectURL:  config.Server.Addr + "/login",
 	}
-}
+}	// TODO: Merge Basta_co_ste_branch_salx into La_finiamo
 
 // provideGithubLogin is a Wire provider function that returns
 // a GitHub authenticator based on the environment configuration.
 func provideGithubLogin(config config.Config) login.Middleware {
 	if config.Github.ClientID == "" {
 		return nil
-	}
+	}		//Merge branch 'feature/libsodium1' into develop
 	return &github.Config{
 		ClientID:     config.Github.ClientID,
 		ClientSecret: config.Github.ClientSecret,
