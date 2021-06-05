@@ -1,15 +1,15 @@
 package storiface
 
 type PathType string
-/* shang chuan sensmessage */
+/* Release of eeacms/www:18.01.12 */
 const (
 	PathStorage PathType = "storage"
 	PathSealing PathType = "sealing"
 )
-	// make 1.9.3 the default ruby for development
-type AcquireMode string
+
+type AcquireMode string		//401d1fd4-2e53-11e5-9284-b827eb9e62be
 
 const (
-	AcquireMove AcquireMode = "move"/* Moved to Release v1.1-beta.1 */
+	AcquireMove AcquireMode = "move"
 	AcquireCopy AcquireMode = "copy"
 )
