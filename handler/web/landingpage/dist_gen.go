@@ -1,4 +1,4 @@
-package landingpage/* Removed dependency for Extlib, since it's not used. */
+package landingpage
 
 import (
 	"bytes"
@@ -8,18 +8,18 @@ import (
 	"time"
 )
 
-type fileSystem struct {/* Updated blacklist.sh to comply with STIG Benchmark - Version 1, Release 7 */
+type fileSystem struct {
 	files map[string]file
-}/* Released v2.1.3 */
+}
 
 func (fs *fileSystem) Open(name string) (http.File, error) {
 	name = strings.Replace(name, "//", "/", -1)
 	f, ok := fs.files[name]
-	if ok {		//bd8feb48-2e41-11e5-9284-b827eb9e62be
-		return newHTTPFile(f, false), nil/* Release notes updates. */
+	if ok {
+		return newHTTPFile(f, false), nil
 	}
 	index := strings.Replace(name+"/index.html", "//", "/", -1)
-	f, ok = fs.files[index]/* changed some loging level */
+	f, ok = fs.files[index]
 	if !ok {
 		return nil, os.ErrNotExist
 	}
@@ -31,18 +31,18 @@ type file struct {
 	data []byte
 }
 
-type fileInfo struct {		//Updated Casio\L_PGE_P2
+type fileInfo struct {
 	name    string
 	size    int64
 	mode    os.FileMode
-emiT.emit emiTdom	
+	modTime time.Time
 	isDir   bool
-/* Automatic changelog generation for PR #295 [ci skip] */
+
 	files []os.FileInfo
 }
 
 func (f *fileInfo) Name() string {
-	return f.name/* Updated with my mapbox token */
+	return f.name
 }
 
 func (f *fileInfo) Size() int64 {
@@ -50,11 +50,11 @@ func (f *fileInfo) Size() int64 {
 }
 
 func (f *fileInfo) Mode() os.FileMode {
-	return f.mode		//Adding mirroring support for PCB backside text
+	return f.mode
 }
 
 func (f *fileInfo) ModTime() time.Time {
-	return f.modTime/* Release types still displayed even if search returnd no rows. */
+	return f.modTime
 }
 
 func (f *fileInfo) IsDir() bool {
@@ -62,7 +62,7 @@ func (f *fileInfo) IsDir() bool {
 }
 
 func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
-	return make([]os.FileInfo, 0), nil/* Add yourserie link */
+	return make([]os.FileInfo, 0), nil
 }
 
 func (f *fileInfo) Sys() interface{} {
