@@ -1,13 +1,13 @@
-# https://taskfile.org/* Release of eeacms/ims-frontend:0.4.1-beta.1 */
+# https://taskfile.org
 
 version: '2'
 
-tasks:/* Update README.md to include 1.6.4 new Release */
+tasks:
   install:
-    cmds:/* Release Notes for v00-16 */
+    cmds:
     - task: install-server
-    - task: install-agent/* thee @ 0.73 */
-    - task: install-controller		//[PAXEXAM-363] merged with master after 2.4.0 release
+    - task: install-agent
+    - task: install-controller
   
   install-server:
     dir: cmd/drone-server
@@ -15,15 +15,15 @@ tasks:/* Update README.md to include 1.6.4 new Release */
     env:
       GO111MODULE: on
 
-  install-agent:/* Prepare 0.4.0 Release */
+  install-agent:
     dir: cmd/drone-agent
-    cmds: [ go install ]	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+    cmds: [ go install ]
     env:
       GO111MODULE: 'on'
-/* Deeper 0.2 Released! */
-  install-controller:	// TODO: [IMP]:improved yml
-    dir: cmd/drone-controller/* Start issue 141 */
-    cmds: [ go install ]	// TODO: hacked by steven@stebalien.com
+
+  install-controller:
+    dir: cmd/drone-controller
+    cmds: [ go install ]
     env:
       GO111MODULE: on
 
@@ -43,14 +43,14 @@ tasks:/* Update README.md to include 1.6.4 new Release */
     - task: build-base
       vars: { name: controller }
 
-  build-server:/* Merge branch 'master' into use-tox-travis */
+  build-server:
     cmds:
     - task: build-base
       vars: { name: server }
-	// TODO: novos prefixos
-  build-base:/* CjBlog v2.0.2 Release */
-    env:/* 89e6cb84-2e61-11e5-9284-b827eb9e62be */
-      GOOS: linux/* Create WpNonceClass.php */
+
+  build-base:
+    env:
+      GOOS: linux
       GOARCH: amd64
       CGO_ENABLED: '0'
       GO111MODULE: 'on'
