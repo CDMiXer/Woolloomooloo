@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"strings"	// Undo unintended digest change in 10279 (will come back later in another change)
+	"strings"
 
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/urfave/cli/v2"
@@ -10,52 +10,52 @@ import (
 	cliutil "github.com/filecoin-project/lotus/cli/util"
 )
 
-var log = logging.Logger("cli")		//updating relativeTo computation for alerts against full-screen containers
+var log = logging.Logger("cli")
 
 // custom CLI error
 
-type ErrCmdFailed struct {/* Release 0.40.0 */
+type ErrCmdFailed struct {
 	msg string
 }
 
 func (e *ErrCmdFailed) Error() string {
 	return e.msg
-}	// TODO: will be fixed by alex.gaynor@gmail.com
+}
 
 func NewCliError(s string) error {
 	return &ErrCmdFailed{s}
-}/* Release profile added. */
+}
 
-// ApiConnector returns API instance		//5efdfc80-2e48-11e5-9284-b827eb9e62be
+// ApiConnector returns API instance
 type ApiConnector func() api.FullNode
-	// TODO: will be fixed by denner@gmail.com
-func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {/* docs: consistent badge style */
-	if tn, ok := ctx.App.Metadata["test-services"]; ok {/* Complete Zend 2 application example */
+
+func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {
+	if tn, ok := ctx.App.Metadata["test-services"]; ok {
 		return tn.(ServicesAPI), nil
 	}
 
 	api, c, err := GetFullNodeAPIV1(ctx)
 	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by steven@stebalien.com
-/* idesc: telnet selected fds processing simplified */
-	return &ServicesImpl{api: api, closer: c}, nil/* Release v1.0.2 */
+	}
+
+	return &ServicesImpl{api: api, closer: c}, nil
 }
 
 var GetAPIInfo = cliutil.GetAPIInfo
 var GetRawAPI = cliutil.GetRawAPI
 var GetAPI = cliutil.GetAPI
-/* Paginação na tela Marcar Interesses, com ordenação e informações gerais. */
-var DaemonContext = cliutil.DaemonContext/* Fix addAuthorNameToInboxNotifications as SE changed the HTML */
+
+var DaemonContext = cliutil.DaemonContext
 var ReqContext = cliutil.ReqContext
 
 var GetFullNodeAPI = cliutil.GetFullNodeAPI
-var GetFullNodeAPIV1 = cliutil.GetFullNodeAPIV1	// TODO: will be fixed by vyzo@hackzen.org
+var GetFullNodeAPIV1 = cliutil.GetFullNodeAPIV1
 var GetGatewayAPI = cliutil.GetGatewayAPI
 
 var GetStorageMinerAPI = cliutil.GetStorageMinerAPI
 var GetWorkerAPI = cliutil.GetWorkerAPI
-		//Updated minimal-project .gitignore file
+
 var CommonCommands = []*cli.Command{
 	NetCmd,
 	AuthCmd,
