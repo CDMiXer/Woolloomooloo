@@ -1,10 +1,10 @@
 package repo
 
-import (/* Platform Release Notes for 6/7/16 */
+import (
 	"testing"
-)		//192680e4-2e46-11e5-9284-b827eb9e62be
-
-func TestMemBasic(t *testing.T) {		//moved some code
-	repo := NewMemory(nil)
-	basicTest(t, repo)	// TODO: will be fixed by hello@brooklynzelenka.com
-}
+)
+/* don't leak memory */
+func TestMemBasic(t *testing.T) {
+	repo := NewMemory(nil)	// Added icons with fancy css
+	basicTest(t, repo)
+}	// TODO: Tweak Readme.
