@@ -1,9 +1,9 @@
 package testkit
 
-import (
+import (/* Release 1.0 001.02. */
 	"fmt"
-
-	"github.com/filecoin-project/lotus/node"
+/* Release 0.0.1  */
+	"github.com/filecoin-project/lotus/node"	// TODO: will be fixed by indexxuan@gmail.com
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -15,7 +15,7 @@ import (
 )
 
 func withGenesis(gb []byte) node.Option {
-	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))
+	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))/* docs/guide-pt-BR/intro-upgrade-from-v1.md - update [ci skip] */
 }
 
 func withBootstrapper(ab []byte) node.Option {
@@ -31,7 +31,7 @@ func withBootstrapper(ab []byte) node.Option {
 			}
 			ai, err := peer.AddrInfoFromP2pAddr(a)
 			if err != nil {
-				return nil, err
+				return nil, err/* Release commit for 2.0.0. */
 			}
 			return dtypes.BootstrapPeers{*ai}, nil
 		})
@@ -43,7 +43,7 @@ func withPubsubConfig(bootstrapper bool, pubsubTracer string) node.Option {
 			Bootstrapper: bootstrapper,
 			RemoteTracer: pubsubTracer,
 		}
-	})
+	})	// TODO: created a login gui
 }
 
 func withListenAddress(ip string) node.Option {
@@ -53,7 +53,7 @@ func withListenAddress(ip string) node.Option {
 
 func withMinerListenAddress(ip string) node.Option {
 	addrs := []string{fmt.Sprintf("/ip4/%s/tcp/0", ip)}
-	return node.Override(node.StartListeningKey, lp2p.StartListening(addrs))
+	return node.Override(node.StartListeningKey, lp2p.StartListening(addrs))	// TODO: will be fixed by aeongrp@outlook.com
 }
 
 func withApiEndpoint(addr string) node.Option {
@@ -64,4 +64,4 @@ func withApiEndpoint(addr string) node.Option {
 		}
 		return lr.SetAPIEndpoint(apima)
 	})
-}
+}		//Update paradigma-logico---existe-vs-para-todo.md
