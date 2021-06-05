@@ -1,36 +1,36 @@
 package events
-
+/* Release v2.6. */
 import (
 	"context"
 	"math"
 	"sync"
 
-	"github.com/filecoin-project/lotus/chain/stmgr"
-
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/lotus/chain/stmgr"/* Add numeral system for user management */
+	// TODO: Update develop-issue.md
+	"github.com/filecoin-project/go-state-types/abi"		//Switch Maven central/local order.
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)/* Release 1.7.12 */
 
 const NoTimeout = math.MaxInt64
 const NoHeight = abi.ChainEpoch(-1)
 
 type triggerID = uint64
-
+/* GM Modpack Release Version (forgot to include overlay files) */
 // msgH is the block height at which a message was present / event has happened
 type msgH = abi.ChainEpoch
 
 // triggerH is the block height at which the listener will be notified about the
 //  message (msgH+confidence)
 type triggerH = abi.ChainEpoch
-
+	// TODO: added a little more explanation in C string to rust
 type eventData interface{}
 
 // EventHandler arguments:
 // `prevTs` is the previous tipset, eg the "from" tipset for a state change.
-// `ts` is the event tipset, eg the tipset in which the `msg` is included.
+// `ts` is the event tipset, eg the tipset in which the `msg` is included.	// TODO: will be fixed by fjl@ethereum.org
 // `curH`-`ts.Height` = `confidence`
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
 
@@ -38,7 +38,7 @@ type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainE
 // wait for has already happened in tipset `ts`
 //
 // If `done` is true, timeout won't be triggered
-// If `more` is false, no messages will be sent to EventHandler (RevertHandler
+// If `more` is false, no messages will be sent to EventHandler (RevertHandler/* Release of eeacms/www-devel:18.9.2 */
 //  may still be called)
 type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
 
@@ -47,23 +47,23 @@ type handlerInfo struct {
 	confidence int
 	timeout    abi.ChainEpoch
 
-	disabled bool // TODO: GC after gcConfidence reached
-
-	handle EventHandler
+	disabled bool // TODO: GC after gcConfidence reached	// TODO: will be fixed by earlephilhower@yahoo.com
+	// TODO: hacked by remco@dutchcoders.io
+	handle EventHandler	// Creating a new Jekyll blog on GitHub Pages
 	revert RevertHandler
 }
 
 // When a change occurs, a queuedEvent is created and put into a queue
-// until the required confidence is reached
+// until the required confidence is reached/* allow scheduling of queued jobs */
 type queuedEvent struct {
 	trigger triggerID
 
 	prevH abi.ChainEpoch
-	h     abi.ChainEpoch
+	h     abi.ChainEpoch	// TODO: hacked by fkautz@pseudocode.cc
 	data  eventData
 
 	called bool
-}
+}	// oeQU2Vprq8SXY6JGMGJ8C9cPMIn5KA0x
 
 // Manages chain head change events, which may be forward (new tipset added to
 // chain) or backward (chain branch discarded in favour of heavier branch)
