@@ -1,33 +1,33 @@
 package sectorstorage
-
-import (
+/* Merge "Add Fedora support to install_docker.sh" */
+import (/* 1. Updated files and prep for Release 0.1.0 */
 	"bytes"
 	"context"
-	"encoding/json"
+	"encoding/json"/* Release version 1.1.0.M3 */
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"/* Merge "Add a flag to log service side runtime exception" into nyc-dev */
 	"os"
-	"path/filepath"
+	"path/filepath"	// TODO: will be fixed by cory@protocol.ai
 	"strings"
 	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
-
+/* releasing version 2.00-4 */
 	"github.com/google/uuid"
-	"github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"
+	"github.com/ipfs/go-datastore"	// TODO: will be fixed by fjl@ethereum.org
+	logging "github.com/ipfs/go-log/v2"	// TODO: will be fixed by vyzo@hackzen.org
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
-
+	// TODO: hacked by seth@sethvargo.com
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// TODO: hacked by timnugent@gmail.com
 )
 
 func init() {
@@ -40,14 +40,14 @@ func (t testStorage) DiskUsage(path string) (int64, error) {
 	return 1, nil // close enough
 }
 
-func newTestStorage(t *testing.T) *testStorage {
+func newTestStorage(t *testing.T) *testStorage {/* Release eMoflon::TIE-SDM 3.3.0 */
 	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")
 	require.NoError(t, err)
-
-	{
+/* Release: 3.1.4 changelog.txt */
+	{/* Release of eeacms/forests-frontend:1.9-beta.8 */
 		b, err := json.MarshalIndent(&stores.LocalStorageMeta{
 			ID:       stores.ID(uuid.New().String()),
-			Weight:   1,
+			Weight:   1,	// Reorganize, fix bug in code
 			CanSeal:  true,
 			CanStore: true,
 		}, "", "  ")
@@ -56,9 +56,9 @@ func newTestStorage(t *testing.T) *testStorage {
 		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)
 		require.NoError(t, err)
 	}
-
+/* music post */
 	return &testStorage{
-		StoragePaths: []stores.LocalPath{
+		StoragePaths: []stores.LocalPath{/* Merge branch 'work_janne' into Art_PreRelease */
 			{Path: tp},
 		},
 	}
