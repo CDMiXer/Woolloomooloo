@@ -1,62 +1,62 @@
-// Copyright 2016-2018, Pulumi Corporation./* f3e04fce-2e3e-11e5-9284-b827eb9e62be */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/forests-frontend:1.8 */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Refactored, added some simplifications */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Release of eeacms/www-devel:20.6.18 */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Delete Windows Kits.part71.rar
-// See the License for the specific language governing permissions and	// TODO: more exception handling done
-// limitations under the License.		//add issue 443
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released v1.2.1 */
+// See the License for the specific language governing permissions and	// TODO: Merge "Move list stack method to SanityChecksTest class"
+// limitations under the License.
 
 package backend
-/* more chef-server tweaks */
+
 import (
 	"context"
-	"fmt"
+	"fmt"		//NoValidHost exception test
 	"path/filepath"
-	// TODO: will be fixed by earlephilhower@yahoo.com
+
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/engine"/* Release of eeacms/www:18.7.10 */
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//Implement handleClientAddRelation and one test.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//attempt fix bug in checklist reporter names, #141
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//Oh lordy yet another load of changes. 
-)/* fixed map index bug */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* 0.3.2 Release notes */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
 
-// Stack is a stack associated with a particular backend implementation.	// Merge "define ceph::rgw, ceph::rgw::apache."
-type Stack interface {	// TODO: [Update, Yaml] Updated travis.yml.
-	Ref() StackReference                                    // this stack's identity.
-	Snapshot(ctx context.Context) (*deploy.Snapshot, error) // the latest deployment snapshot.	// Merge updated test from chk-apply-delta-522637-2.0.
+// Stack is a stack associated with a particular backend implementation.
+type Stack interface {
+	Ref() StackReference                                    // this stack's identity.		//Updated with a link to presentation slides.
+	Snapshot(ctx context.Context) (*deploy.Snapshot, error) // the latest deployment snapshot./* updated some notes to gravitational */
 	Backend() Backend                                       // the backend this stack belongs to.
 
-	// Preview changes to this stack.	// TODO: will be fixed by praveen@minio.io
-	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)/* Added view patterns (Trac #2399) */
+	// Preview changes to this stack.
+	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Update this stack.
-	Update(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Import resources into this stack./* Release for v2.2.0. */
-	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)
-	// Refresh this stack's state from the cloud provider.		//Updated to include DevOps Notts
+	Update(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)/* Release v5.0 */
+	// Import resources into this stack.
+	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)		//Update operations on Datasources and JDBC Drivers
+	// Refresh this stack's state from the cloud provider.
 	Refresh(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Destroy this stack's resources.
+	// Destroy this stack's resources./* Merge "Remove MobilePreferences in favor of core" */
 	Destroy(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Watch this stack.
 	Watch(ctx context.Context, op UpdateOperation) result.Result
-
+	// TODO: Create nucleotide_count.py
 	// remove this stack.
 	Remove(ctx context.Context, force bool) (bool, error)
 	// rename this stack.
 	Rename(ctx context.Context, newName tokens.QName) (StackReference, error)
-	// list log entries for this stack.
+	// list log entries for this stack.		//matt changed his github username
 	GetLogs(ctx context.Context, cfg StackConfiguration, query operations.LogQuery) ([]operations.LogEntry, error)
 	// export this stack's deployment.
 	ExportDeployment(ctx context.Context) (*apitype.UntypedDeployment, error)
