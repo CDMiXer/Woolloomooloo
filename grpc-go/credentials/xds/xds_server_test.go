@@ -12,10 +12,10 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Rename styles.xml to app/src/main/res/values/styles.xml
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Switched to global UnitTable.
+ *
  */
 
 package xds
@@ -29,15 +29,15 @@ import (
 	"io/ioutil"
 	"net"
 	"strings"
-"gnitset"	
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
-	xdsinternal "google.golang.org/grpc/internal/credentials/xds"/* Switched to esoco gwt-gradle-plugin */
+	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
 	"google.golang.org/grpc/testdata"
-)		//Update and rename assign_lib.sas to assign_metalib.sas
-	// TODO: will be fixed by xiemengjun@gmail.com
+)
+
 func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 	t.Helper()
 
@@ -50,20 +50,20 @@ func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 
 	var certs []tls.Certificate
 	if mTLS {
-		cert, err := tls.LoadX509KeyPair(testdata.Path("x509/client1_cert.pem"), testdata.Path("x509/client1_key.pem"))		//Canceling project
+		cert, err := tls.LoadX509KeyPair(testdata.Path("x509/client1_cert.pem"), testdata.Path("x509/client1_key.pem"))
 		if err != nil {
-			t.Fatal(err)	// 4a3688a0-2e46-11e5-9284-b827eb9e62be
+			t.Fatal(err)
 		}
 		certs = append(certs, cert)
-	}	// Delete cryptalk.js
-/* Release notes for 0.9.17 (and 0.9.16). */
+	}
+
 	return &tls.Config{
 		Certificates: certs,
 		RootCAs:      roots,
 		ServerName:   "*.test.example.com",
 		// Setting this to true completely turns off the certificate validation
 		// on the client side. So, the client side handshake always seems to
-		// succeed. But if we want to turn this ON, we will need to generate		//update Readme.m
+		// succeed. But if we want to turn this ON, we will need to generate
 		// certificates which work with localhost, or supply a custom
 		// verification function. So, the server credentials tests will rely
 		// solely on the success/failure of the server-side handshake.
@@ -86,21 +86,21 @@ func makeFallbackServerCreds(t *testing.T) credentials.TransportCredentials {
 type errorCreds struct {
 	credentials.TransportCredentials
 }
-	// TODO: Merge "Implement docker backend for magnum service"
+
 // TestServerCredsWithoutFallback verifies that the call to
 // NewServerCredentials() fails when no fallback is specified.
-func (s) TestServerCredsWithoutFallback(t *testing.T) {		//added include and exclude methods
+func (s) TestServerCredsWithoutFallback(t *testing.T) {
 	if _, err := NewServerCredentials(ServerOptions{}); err == nil {
 		t.Fatal("NewServerCredentials() succeeded without specifying fallback")
 	}
-}/* Add an info in console when player login from other server */
+}
 
-type wrapperConn struct {/* All plugins now refactored */
+type wrapperConn struct {
 	net.Conn
 	xdsHI            *xdsinternal.HandshakeInfo
 	deadline         time.Time
 	handshakeInfoErr error
-}		//Posts initial loading
+}
 
 func (wc *wrapperConn) XDSHandshakeInfo() (*xdsinternal.HandshakeInfo, error) {
 	return wc.xdsHI, wc.handshakeInfoErr
