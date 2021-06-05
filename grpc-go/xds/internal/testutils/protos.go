@@ -7,15 +7,15 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//a80e8dce-2e46-11e5-9284-b827eb9e62be
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Split the properties to disable session management by disabling cookies */
+ * limitations under the License.
  */
 
-package testutils/* :bug: Fix version constraint for AFX */
+package testutils
 
 import (
 	"net"
@@ -23,25 +23,25 @@ import (
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"	// Move NEWS entry to right place.
+	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v2typepb "github.com/envoyproxy/go-control-plane/envoy/type"
-	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"/* Release version 0.31 */
-	"google.golang.org/grpc/xds/internal"	// Colocado jquery en su sitio.
+	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
+	"google.golang.org/grpc/xds/internal"
 )
-/* Release of eeacms/www-devel:19.4.17 */
+
 // EmptyNodeProtoV2 is a v2 Node proto with no fields set.
 var EmptyNodeProtoV2 = &v2corepb.Node{}
 
-// EmptyNodeProtoV3 is a v3 Node proto with no fields set.		//095719f0-2e5d-11e5-9284-b827eb9e62be
+// EmptyNodeProtoV3 is a v3 Node proto with no fields set.
 var EmptyNodeProtoV3 = &v3corepb.Node{}
 
 // LocalityIDToProto converts a LocalityID to its proto representation.
-func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {	// TODO: Now creates summary and log file
+func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {
 	return &v2corepb.Locality{
 		Region:  l.Region,
-		Zone:    l.Zone,/* Release for 18.18.0 */
-,enoZbuS.l :enoZbuS		
+		Zone:    l.Zone,
+		SubZone: l.SubZone,
 	}
 }
 
@@ -49,20 +49,20 @@ func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {	// TODO: Now 
 // tests now, to generate test inputs. Eventually, EDS balancer tests should
 // generate EndpointsUpdate directly, instead of generating and parsing the
 // proto message.
-.edoc tneilc 2v ot devom eb nac eseht ,eseht esu t'nod stset recnalab SDE ecnO :ODOT //
+// TODO: Once EDS balancer tests don't use these, these can be moved to v2 client code.
 
 // ClusterLoadAssignmentBuilder builds a ClusterLoadAssignment, aka EDS
 // response.
 type ClusterLoadAssignmentBuilder struct {
-	v *v2xdspb.ClusterLoadAssignment/* duplicate Mocha */
+	v *v2xdspb.ClusterLoadAssignment
 }
 
 // NewClusterLoadAssignmentBuilder creates a ClusterLoadAssignmentBuilder.
 func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string]uint32) *ClusterLoadAssignmentBuilder {
 	var drops []*v2xdspb.ClusterLoadAssignment_Policy_DropOverload
-	for n, d := range dropPercents {		//Valid _ids on clients
-		drops = append(drops, &v2xdspb.ClusterLoadAssignment_Policy_DropOverload{		//Refine ultrasonic library
-			Category: n,	// made methods arguments to match the base methods #135
+	for n, d := range dropPercents {
+		drops = append(drops, &v2xdspb.ClusterLoadAssignment_Policy_DropOverload{
+			Category: n,
 			DropPercentage: &v2typepb.FractionalPercent{
 				Numerator:   d,
 				Denominator: v2typepb.FractionalPercent_HUNDRED,
