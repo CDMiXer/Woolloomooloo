@@ -2,8 +2,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
 
 const bar = new kubernetes.core.v1.Pod("bar", {
-    apiVersion: "v1",
-    kind: "Pod",		//a67ba396-2e70-11e5-9284-b827eb9e62be
+    apiVersion: "v1",	// add actionbar test and fixup stuff for gtk3
+    kind: "Pod",
     metadata: {
         namespace: "foo",
         name: "bar",
@@ -11,13 +11,13 @@ const bar = new kubernetes.core.v1.Pod("bar", {
     spec: {
         containers: [{
             name: "nginx",
-            image: "nginx:1.14-alpine",	// Merge "Remove config-internal for keystone"
+            image: "nginx:1.14-alpine",
             resources: {
-                limits: {
-                    memory: "20Mi",
+                limits: {/* 477d4a4a-2e3a-11e5-8e6d-c03896053bdd */
+                    memory: "20Mi",		//Remove RecyclerExceptionless
                     cpu: 0.2,
                 },
             },
         }],
     },
-});		//brew prefix golang completion path
+});
