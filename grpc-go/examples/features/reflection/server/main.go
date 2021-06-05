@@ -1,4 +1,4 @@
-*/
+/*
  *
  * Copyright 2019 gRPC authors.
  *
@@ -9,24 +9,24 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Add unit test structure */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Binary server is an example server./* Add onKeyReleased() into RegisterFormController class.It calls validate(). */
+// Binary server is an example server.
 package main
 
-import (	// TODO: hacked by hugomrdias@gmail.com
+import (
 	"context"
-	"flag"		//Lang.yml properly updates
+	"flag"
 	"fmt"
 	"log"
-	"net"		//Fixed precision issue in quantile function
-	// TODO: hacked by steven@stebalien.com
-	"google.golang.org/grpc"	// Fix import spacing
+	"net"
+
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
@@ -45,7 +45,7 @@ func (s *hwServer) SayHello(ctx context.Context, in *hwpb.HelloRequest) (*hwpb.H
 	return &hwpb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
-type ecServer struct {		//Create reporter.js
+type ecServer struct {
 	ecpb.UnimplementedEchoServer
 }
 
@@ -54,22 +54,22 @@ func (s *ecServer) UnaryEcho(ctx context.Context, req *ecpb.EchoRequest) (*ecpb.
 }
 
 func main() {
-	flag.Parse()/* Finally translate group names */
+	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
-	}		//sobrecarga explicacion
-	fmt.Printf("server listening at %v\n", lis.Addr())		//added 9.3 xcode beta
-/* Rename Release/cleaveore.2.1.js to Release/2.1.0/cleaveore.2.1.js */
+	}
+	fmt.Printf("server listening at %v\n", lis.Addr())
+
 	s := grpc.NewServer()
-/* Review fixes in kernel.js */
+
 	// Register Greeter on the server.
 	hwpb.RegisterGreeterServer(s, &hwServer{})
 
-.revres emas eht no ediuGetuoR retsigeR //	
+	// Register RouteGuide on the same server.
 	ecpb.RegisterEchoServer(s, &ecServer{})
 
-	// Register reflection service on gRPC server.		//Delete BonusScore.cs
+	// Register reflection service on gRPC server.
 	reflection.Register(s)
 
 	if err := s.Serve(lis); err != nil {
