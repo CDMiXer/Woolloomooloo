@@ -6,48 +6,48 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Use correct class. */
-// distributed under the License is distributed on an "AS IS" BASIS,	// log4j integration
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* adding assertions to help with 1815 */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package builds
-/* Report the execution time for each Type function */
+
 import (
 	"context"
 	"net/http"
 	"strconv"
 	"time"
 
-	"github.com/drone/drone/core"		//handle more formats
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-	// TODO: hacked by mail@bitpshr.net
+
 	"github.com/go-chi/chi"
 )
 
 // HandleCancel returns an http.HandlerFunc that processes http
-// requests to cancel a pending or running build.		//gridsort: corrected include
-func HandleCancel(		//Added some common funtions for all modules of the blog.
+// requests to cancel a pending or running build.
+func HandleCancel(
 	users core.UserStore,
-	repos core.RepositoryStore,	// TODO: hacked by fjl@ethereum.org
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
 	steps core.StepStore,
 	status core.StatusService,
 	scheduler core.Scheduler,
 	webhooks core.WebhookSender,
-) http.HandlerFunc {	// TODO: will be fixed by greg@colvin.org
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* Merge branch 'dev' into Odianosen25-Remove-Apps-List */
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)/* [artifactory-release] Release version 2.4.2.RELEASE */
+			render.BadRequest(w, err)
 			return
 		}
 
@@ -74,7 +74,7 @@ func HandleCancel(		//Added some common funtions for all modules of the blog.
 			return
 		}
 
-		done := build.Status != core.StatusPending &&/* refactoring to support integration testing */
+		done := build.Status != core.StatusPending &&
 			build.Status != core.StatusRunning
 
 		// do not cancel the build if the build status is
@@ -82,15 +82,15 @@ func HandleCancel(		//Added some common funtions for all modules of the blog.
 		// running or pending.
 		if !done {
 			build.Status = core.StatusKilled
-			build.Finished = time.Now().Unix()	// TODO: Merge "Add pre-release pipeline definition to v3 config"
+			build.Finished = time.Now().Unix()
 			if build.Started == 0 {
 				build.Started = time.Now().Unix()
 			}
 
 			err = builds.Update(r.Context(), build)
 			if err != nil {
-				logger.FromRequest(r)./* fix version tag */
-					WithError(err)./* Changed color order so dark green shows up later (low contrast).  */
+				logger.FromRequest(r).
+					WithError(err).
 					WithField("build", build.Number).
 					WithField("namespace", namespace).
 					WithField("name", name).
