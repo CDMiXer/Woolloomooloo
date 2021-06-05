@@ -1,9 +1,9 @@
 // Copyright 2017 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Finished first draft of MqttSocketChannel
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by brosner@gmail.com
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,16 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-syntax = "proto2";
-/* Доработка хранилища */
+syntax = "proto2";		//Hopefully fixed test_ode_strength for windows
+	// TODO: i18n class creation
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
-		//[malta] enable perf counter support
+		//Update thoughtbot-product-design-sprint.md
 package grpc.testing;
-
+/* Delete CH_NREN_whitelist.py */
 import "reflection/grpc_testing/proto2.proto";
 
 extend ToBeExtended {
-  optional string frob = 23;	// TODO: remove quotes in haml
+  optional string frob = 23;
   optional AnotherExtension nitz = 29;
 }
 
