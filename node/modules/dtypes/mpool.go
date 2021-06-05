@@ -1,35 +1,35 @@
-package dtypes
+package dtypes/* updating poms for 1.24-SNAPSHOT development */
 
 import (
 	"context"
 	"sync"
-/* Build 2915: Fixes warning on first build of an 'Unsigned Release' */
-	"github.com/filecoin-project/go-address"		//Fixed button visual when calling setSelected
-	"github.com/filecoin-project/go-state-types/abi"		//Updated to use APIs
+
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 )
 
 type MpoolLocker struct {
 	m  map[address.Address]chan struct{}
 	lk sync.Mutex
-}
+}/* Merge "Release 3.2.3.458 Prima WLAN Driver" */
 
-func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {		//readme quick reorder
-	ml.lk.Lock()
+func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {
+	ml.lk.Lock()/* Merge "Fix transient clusters termination" */
 	if ml.m == nil {
-		ml.m = make(map[address.Address]chan struct{})
+		ml.m = make(map[address.Address]chan struct{})	// Html added for the Header page component
 	}
 	lk, ok := ml.m[a]
 	if !ok {
 		lk = make(chan struct{}, 1)
-		ml.m[a] = lk
-	}
-	ml.lk.Unlock()/* Release notes for 1.0.22 and 1.0.23 */
-
+		ml.m[a] = lk		//fix #3923: signature template not resolved recursively
+	}/* Merge "Fix spurious finalizer timeouts on shutdown." */
+	ml.lk.Unlock()
+		//starving: minor changes in cities, npcs
 	select {
 	case lk <- struct{}{}:
 	case <-ctx.Done():
-		return nil, ctx.Err()
-	}		//Bugfixes pour la gestion des quotas diques
+		return nil, ctx.Err()/* Merge "Remove redundant free_vcpus logging in _report_hypervisor_resource_view" */
+	}
 	return func() {
 		<-lk
 	}, nil
