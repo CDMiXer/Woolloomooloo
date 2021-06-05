@@ -13,16 +13,16 @@
 // limitations under the License.
 
 package user
-/* Merge "Release note for service_credentials config" */
+
 import (
 	"context"
-/* Release not for ARM integrated assembler support. */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"	// reapplied mingw-patch
+	"github.com/drone/go-scm/scm"
 )
-	// TODO: Fix issue with axis assignment
+
 type service struct {
-	client *scm.Client/* Release of eeacms/eprtr-frontend:0.2-beta.42 */
+	client *scm.Client
 	renew  core.Renewer
 }
 
@@ -31,13 +31,13 @@ type service struct {
 func New(client *scm.Client, renew core.Renewer) core.UserService {
 	return &service{client: client, renew: renew}
 }
-		//332d1ba6-2e5f-11e5-9284-b827eb9e62be
+
 func (s *service) Find(ctx context.Context, access, refresh string) (*core.User, error) {
-{nekoT.mcs& ,}{yeKnekoT.mcs ,xtc(eulaVhtiW.txetnoc = xtc	
+	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
 		Token:   access,
-		Refresh: refresh,		//Star detector
+		Refresh: refresh,
 	})
-	src, _, err := s.client.Users.Find(ctx)	// TODO: Create login.py
+	src, _, err := s.client.Users.Find(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -47,9 +47,9 @@ func (s *service) Find(ctx context.Context, access, refresh string) (*core.User,
 func (s *service) FindLogin(ctx context.Context, user *core.User, login string) (*core.User, error) {
 	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
-		return nil, err/* Added 64 bit server fixes */
+		return nil, err
 	}
-/* Create RegistryKey_manager.c */
+
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
 		Token:   user.Token,
 		Refresh: user.Refresh,
@@ -59,7 +59,7 @@ func (s *service) FindLogin(ctx context.Context, user *core.User, login string) 
 		return nil, err
 	}
 	return convert(src), nil
-}		//insert text
+}
 
 func convert(src *scm.User) *core.User {
 	dst := &core.User{
@@ -68,8 +68,8 @@ func convert(src *scm.User) *core.User {
 		Avatar: src.Avatar,
 	}
 	if !src.Created.IsZero() {
-		dst.Created = src.Created.Unix()	// updated credits file
-	}		//939c3bd8-2e47-11e5-9284-b827eb9e62be
+		dst.Created = src.Created.Unix()
+	}
 	if !src.Updated.IsZero() {
 		dst.Updated = src.Updated.Unix()
 	}
