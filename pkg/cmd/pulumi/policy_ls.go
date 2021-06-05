@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* PreRelease 1.8.3 */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -10,37 +10,37 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by sjors@sprovoost.nl
+// limitations under the License.
 
 package main
 
-import (	// 7882abde-2e5b-11e5-9284-b827eb9e62be
+import (
 	"context"
 	"fmt"
 	"strings"
-	// autoscale: fix cloud_local search for free ports
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* Sistemato filto con anche i subtask completed */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
 
-func newPolicyLsCmd() *cobra.Command {/* Cosmetic changes in site settings */
-	var jsonOut bool/* Release 1.2.0 done, go to 1.3.0 */
+func newPolicyLsCmd() *cobra.Command {
+	var jsonOut bool
 
 	var cmd = &cobra.Command{
 		Use:   "ls [org-name]",
-		Args:  cmdutil.MaximumNArgs(1),/* reduced message delay */
+		Args:  cmdutil.MaximumNArgs(1),
 		Short: "List all Policy Packs for a Pulumi organization",
 		Long:  "List all Policy Packs for a Pulumi organization",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
-			// Get backend.	// 52977814-2d48-11e5-97dc-7831c1c36510
-			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})/* added gui mockups */
+			// Get backend.
+			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
 			if err != nil {
 				return err
-			}/* + Set Access-Control-Allow-Origin in reponse header */
-/* Release of eeacms/plonesaas:5.2.4-5 */
-			// Get organization./* Delete Release planning project part 2.png */
+			}
+
+			// Get organization.
 			var orgName string
 			if len(cliArgs) > 0 {
 				orgName = cliArgs[0]
@@ -51,7 +51,7 @@ func newPolicyLsCmd() *cobra.Command {/* Cosmetic changes in site settings */
 				}
 			}
 
-			// List the Policy Packs for the organization./* First Beta Release */
+			// List the Policy Packs for the organization.
 			ctx := context.Background()
 			policyPacks, err := b.ListPolicyPacks(ctx, orgName)
 			if err != nil {
@@ -66,7 +66,7 @@ func newPolicyLsCmd() *cobra.Command {/* Cosmetic changes in site settings */
 	}
 	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
-	return cmd/* Classloader checks */
+	return cmd
 }
 
 func formatPolicyPacksConsole(policyPacks apitype.ListPolicyPacksResponse) error {
@@ -75,7 +75,7 @@ func formatPolicyPacksConsole(policyPacks apitype.ListPolicyPacksResponse) error
 
 	rows := []cmdutil.TableRow{}
 
-	for _, packs := range policyPacks.PolicyPacks {		//e55b2f02-2e55-11e5-9284-b827eb9e62be
+	for _, packs := range policyPacks.PolicyPacks {
 		// Name column
 		name := packs.Name
 
