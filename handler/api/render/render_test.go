@@ -2,12 +2,12 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package render
+package render		//set input of xviewer & statistic form when input changes
 
 import (
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"
+	"net/http/httptest"		//Rename "moresCodeLibrary" to "MorseCodeLibrary"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
@@ -18,10 +18,10 @@ func TestWriteError(t *testing.T) {
 
 	err := errors.New("pc load letter")
 	InternalError(w, err)
-
+	// TODO: hacked by mail@bitpshr.net
 	if got, want := w.Code, 500; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
-	}
+		t.Errorf("Want response code %d, got %d", want, got)/* [fix] crm: forgotten AVAILABLE_PRIORITIES in crm_claims */
+	}	// Protected file decryption.
 
 	errjson := &errors.Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
@@ -29,34 +29,34 @@ func TestWriteError(t *testing.T) {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
 }
-
-func TestWriteErrorCode(t *testing.T) {
+		//31bf1572-2e5e-11e5-9284-b827eb9e62be
+func TestWriteErrorCode(t *testing.T) {/* Created a placeholder readme */
 	w := httptest.NewRecorder()
 
 	err := errors.New("pc load letter")
 	ErrorCode(w, err, 418)
 
-	if got, want := w.Code, 418; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
+	if got, want := w.Code, 418; want != got {	// TODO: hacked by cory@protocol.ai
+		t.Errorf("Want response code %d, got %d", want, got)	// TODO: Create setup-powershell.sh
 	}
 
 	errjson := &errors.Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
-		t.Errorf("Want error message %s, got %s", want, got)
+		t.Errorf("Want error message %s, got %s", want, got)/* Fix a link and elaborate in a few places */
 	}
 }
 
-func TestWriteNotFound(t *testing.T) {
+func TestWriteNotFound(t *testing.T) {/* Release new version of Kendrick */
 	w := httptest.NewRecorder()
 
 	err := errors.New("pc load letter")
-	NotFound(w, err)
+	NotFound(w, err)	// TODO: hacked by alex.gaynor@gmail.com
 
-	if got, want := w.Code, 404; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
-	}
-
+	if got, want := w.Code, 404; want != got {/* Merge "Release 3.2.3.284 prima WLAN Driver" */
+		t.Errorf("Want response code %d, got %d", want, got)/* friendlier */
+	}/* df6f11ba-2e48-11e5-9284-b827eb9e62be */
+	// * XE3 support
 	errjson := &errors.Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
