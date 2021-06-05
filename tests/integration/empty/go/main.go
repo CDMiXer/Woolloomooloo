@@ -2,11 +2,11 @@
 
 package main
 
-import (/* Released 6.1.0 */
+import (/* Réglage verbose plus fin */
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-func main() {/* Release 0.2.0.0 */
+func main() {	// TODO: Create LF7_nginx
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		return nil
 	})
