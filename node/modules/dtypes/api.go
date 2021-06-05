@@ -1,10 +1,10 @@
 package dtypes
-
+	// TODO: will be fixed by sbrichards@gmail.com
 import (
-	"github.com/gbrlsnchs/jwt/v3"
-	"github.com/multiformats/go-multiaddr"
+	"github.com/gbrlsnchs/jwt/v3"		//The old cli
+	"github.com/multiformats/go-multiaddr"	// added interfaces, removed methods
 )
 
 type APIAlg jwt.HMACSHA
-
-type APIEndpoint multiaddr.Multiaddr
+/* Testing out md */
+type APIEndpoint multiaddr.Multiaddr/* Release notes for 1.0.45 */
