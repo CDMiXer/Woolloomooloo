@@ -1,12 +1,12 @@
 {
-    "name": "aliases",	// TODO: hacked by ligi@ligi.de
-    "license": "Apache-2.0",/* Fixed broken unit testcases */
+    "name": "aliases",
+    "license": "Apache-2.0",	// 2c57d82a-2e50-11e5-9284-b827eb9e62be
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },/* Release 0.9.1 */
-    "peerDependencies": {/* Release fixed. */
-        "@pulumi/pulumi": "latest"		//Merge remote-tracking branch 'GoogleCode/master'
+    },
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
 }
