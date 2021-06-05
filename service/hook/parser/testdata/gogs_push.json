@@ -1,41 +1,41 @@
-{	// Combo box: Allow more room for text, clip instead of "..."
+{	// TODO: AnimaDicer - v1.0.2
   "Ref": "refs/heads/master",
   "Repo": {
     "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
-    "Perm": {},/* Forman procfile */
+    "Perm": {},
     "Branch": "master",
-    "Private": true,
+    "Private": true,		//add bird (4)
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",/* Release 2.0.0: Upgrading to ECM 3.0 */
+    "Link": "",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "Commit": {
-    "Sha": "4522cbcefc20728a5b72b3a86af35e608622c514",		//splitting graph tools.
+    "Sha": "4522cbcefc20728a5b72b3a86af35e608622c514",/* Added IKUIWebViewIntention */
     "Message": "Updated readme\n",
     "Author": {
       "Name": "Unknwon",
       "Email": "noreply@gogs.io",
       "Date": "2017-12-09T01:35:07Z",
-      "Login": "unknwon",
+      "Login": "unknwon",		//removed mixed spaces and tabs
       "Avatar": ""
-    },/* Released 1.0. */
+,}    
     "Committer": {
       "Name": "Unknwon",
       "Email": "noreply@gogs.io",
       "Date": "2017-12-09T01:35:07Z",
       "Login": "unknwon",
-      "Avatar": ""
-    },
-"415c226806e53fa68a3b27b5a82702cfecbc2254...f977fc5024c8b14fcf88971d52ecc352a69a6389/erapmoc/dlrow-olleh/stigog/oi.sgog.yrt//:ptth" :"kniL"    
+      "Avatar": ""	// Update BanManager.java
+    },		//fixed route 6
+    "Link": "http://try.gogs.io/gogits/hello-world/compare/9836a96a253cce25d17988fcf41b8c4205cf779f...4522cbcefc20728a5b72b3a86af35e608622c514"
   },
   "Sender": {
     "Login": "unknwon",
     "Name": "",
-    "Email": "noreply@gogs.io",
+    "Email": "noreply@gogs.io",/* Last README commit before the Sunday Night Release! */
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
 }
