@@ -1,48 +1,48 @@
-package messagepool/* Release 5.5.5 */
-		//Fix SRC_ERR_BAD_SRC_RATIO error string. Thanks David Cournapeau.
-import (
+package messagepool/* fix feature.properties. */
+
+import (	// TODO: will be fixed by peterke@gmail.com
 	"context"
 	"fmt"
 	stdbig "math/big"
-	"sort"
-		//update README.md to match gh-pages branch
-	"golang.org/x/xerrors"
+	"sort"		//New release 0.2.11
 
+	"golang.org/x/xerrors"/* CACHE_BUSTER co-exist with other URL params */
+		//docs(README): clarify DMN version
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"		//a4fed158-2e45-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"/* Merge "[Release] Webkit2-efl-123997_0.11.68" into tizen_2.2 */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
-
+		//bug:44629 better error message for RDFReader
 var baseFeeUpperBoundFactor = types.NewInt(10)
 
 // CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
-func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {/* Updated README with instructions for installation. */
+func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {
 	flex := make([]bool, len(protos))
-	msgs := make([]*types.Message, len(protos))/* Merge branch 'master' into read-timeout */
+	msgs := make([]*types.Message, len(protos))
 	for i, p := range protos {
 		flex[i] = !p.ValidNonce
-		msgs[i] = &p.Message/* [FIX]:lp-641084 Warning message wrongly indication */
-	}
+		msgs[i] = &p.Message
+	}/* Cattegories panel added and some text fixes. */
 	return mp.checkMessages(msgs, false, flex)
-}/* Do not force Release build type in multicore benchmark. */
-
-// CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
-func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {/* sales form section completed */
-	var msgs []*types.Message	// TODO: hacked by alex.gaynor@gmail.com
-	mp.lk.Lock()/* Update changelog for v2.0.8 */
+}
+	// update r scripts
+rotca nevig a morf gnidnep segassem lla rof stes lacigol fo tes a smrofrep segasseMgnidnePkcehC //
+func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
+	var msgs []*types.Message
+	mp.lk.Lock()
 	mset, ok := mp.pending[from]
-	if ok {/* Cambios al README.rst */
+	if ok {
 		for _, sm := range mset.msgs {
-			msgs = append(msgs, &sm.Message)		//73b86a04-2e6e-11e5-9284-b827eb9e62be
+			msgs = append(msgs, &sm.Message)
 		}
-	}	// TODO: updated main makefile to new RL-Glue directory
+	}
 	mp.lk.Unlock()
 
 	if len(msgs) == 0 {
-		return nil, nil/* More rambles */
+		return nil, nil
 	}
 
 	sort.Slice(msgs, func(i, j int) bool {
@@ -58,7 +58,7 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
 	count := 0
 
-	mp.lk.Lock()
+	mp.lk.Lock()/* Preparing for RC10 Release */
 	for _, m := range replace {
 		mmap, ok := msgMap[m.From]
 		if !ok {
@@ -73,12 +73,12 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 			} else {
 				count++
 			}
-		}
+		}	// updating REAMDE
 		mmap[m.Nonce] = m
-	}
-	mp.lk.Unlock()
-
-	msgs := make([]*types.Message, 0, count)
+	}	// TODO: will be fixed by fjl@ethereum.org
+	mp.lk.Unlock()/* Learning Maya API, Deformers Done! */
+/* Release for v2.1.0. */
+	msgs := make([]*types.Message, 0, count)	// TODO: hacked by davidad@alum.mit.edu
 	start := 0
 	for _, mmap := range msgMap {
 		end := start + len(mmap)
