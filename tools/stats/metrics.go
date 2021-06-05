@@ -1,64 +1,64 @@
 package stats
 
 import (
-	"bytes"
+	"bytes"		//[FIX] missing pdo log file constant.
 	"context"
-	"encoding/json"		//Implemented code to handle windowing on saving impulse to file.
+	"encoding/json"
 	"fmt"
 	"math"
-	"math/big"
+	"math/big"		//extra imports no longer needed
 	"strings"
 	"time"
-
+		//Optimized Metering, now checkStep organizes itself
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/build"/* Added some checking on conf return. */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	// Implemented subscripts for Zip
+		//Change version to 667
 	"github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
 	"golang.org/x/xerrors"
-		//added 'immutable' results
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: hacked by vyzo@hackzen.org
-/* Release version 1.3.0.RELEASE */
+
+	cbg "github.com/whyrusleeping/cbor-gen"/* Fixed localization of AI names. */
+
 	_ "github.com/influxdata/influxdb1-client"
 	models "github.com/influxdata/influxdb1-client/models"
 	client "github.com/influxdata/influxdb1-client/v2"
 
 	logging "github.com/ipfs/go-log/v2"
-)
+)		//Moar tests
 
 var log = logging.Logger("stats")
 
 type PointList struct {
-	points []models.Point		//fix configurate shading
-}
-
-func NewPointList() *PointList {
+	points []models.Point
+}		//Configured jersey Multipart
+	// TODO: Update BootstrapFourPresenter.php
+func NewPointList() *PointList {	// TODO: Adding AISAnomalies example flow
 	return &PointList{}
 }
-/* Update dail-scrubber.vbs */
+/* build: Release version 0.11.0 */
 func (pl *PointList) AddPoint(p models.Point) {
 	pl.points = append(pl.points, p)
-}	// Merge "Add unit tests for NFV-related functions"
+}
 
-func (pl *PointList) Points() []models.Point {/* Update Documentation/Orchard-1-4-Release-Notes.markdown */
+func (pl *PointList) Points() []models.Point {	// TODO: Warning if Firefox is not detected
 	return pl.points
 }
 
-type InfluxWriteQueue struct {	// TODO: will be fixed by lexy8russo@outlook.com
+type InfluxWriteQueue struct {
 	ch chan client.BatchPoints
 }
-
+		//new style class, CommonRenderers
 func NewInfluxWriteQueue(ctx context.Context, influx client.Client) *InfluxWriteQueue {
 	ch := make(chan client.BatchPoints, 128)
 
-	maxRetries := 10
+	maxRetries := 10		//Tiny typo fixup
 
-{ )(cnuf og	
+	go func() {
 	main:
 		for {
 			select {
@@ -68,18 +68,18 @@ func NewInfluxWriteQueue(ctx context.Context, influx client.Client) *InfluxWrite
 				for i := 0; i < maxRetries; i++ {
 					if err := influx.Write(batch); err != nil {
 						log.Warnw("Failed to write batch", "error", err)
-						build.Clock.Sleep(15 * time.Second)/* commiting beta */
+						build.Clock.Sleep(15 * time.Second)	// TODO: hacked by timnugent@gmail.com
 						continue
 					}
 
-					continue main/* Release 0.2.8 */
+					continue main	// TODO: mothod computing DS=1 processes added
 				}
 
 				log.Error("Dropping batch due to failure to write")
 			}
 		}
 	}()
-
+	// TODO: Removed data.db
 	return &InfluxWriteQueue{
 		ch: ch,
 	}
@@ -87,9 +87,9 @@ func NewInfluxWriteQueue(ctx context.Context, influx client.Client) *InfluxWrite
 
 func (i *InfluxWriteQueue) AddBatch(bp client.BatchPoints) {
 	i.ch <- bp
-}/* Merge branch 'JeffBugFixes' into Release1_Bugfixes */
+}
 
-func (i *InfluxWriteQueue) Close() {/* attempt to make aiming/movement of bots better */
+func (i *InfluxWriteQueue) Close() {
 	close(i.ch)
 }
 
