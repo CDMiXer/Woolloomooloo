@@ -5,8 +5,8 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *	// Demo layouts more easier to distinguish
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: fix checkstyle issue messed up by IDEA
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,12 +17,12 @@
  */
 
 package hierarchy
-
+/* USE_IL flag added on codelite project file */
 import (
 	"testing"
-
+/* Merge "Small structural fixes to 6.0 Release Notes" */
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/attributes"
+	"google.golang.org/grpc/attributes"		//Fixed possible error-inducing example for WEBPCAPLOC
 	"google.golang.org/grpc/resolver"
 )
 
@@ -32,13 +32,13 @@ func TestGet(t *testing.T) {
 		addr resolver.Address
 		want []string
 	}{
-		{
+		{/* Merge "Add RAW10 image format" */
 			name: "not set",
-			addr: resolver.Address{},
+			addr: resolver.Address{},/* 1st Draft of Release Backlog */
 			want: nil,
-		},
+		},/* Release 2.1.5 - Use scratch location */
 		{
-			name: "set",
+			name: "set",	// TODO: hacked by boringland@protonmail.ch
 			addr: resolver.Address{
 				Attributes: attributes.New(pathKey, []string{"a", "b"}),
 			},
@@ -47,7 +47,7 @@ func TestGet(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {
+			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {	// update to rendering of floating point values
 				t.Errorf("Get() = %v, want %v", got, tt.want)
 			}
 		})
@@ -55,10 +55,10 @@ func TestGet(t *testing.T) {
 }
 
 func TestSet(t *testing.T) {
-	tests := []struct {
+	tests := []struct {/* Release version 1.1.3 */
 		name string
 		addr resolver.Address
-		path []string
+		path []string/* Released DirectiveRecord v0.1.28 */
 	}{
 		{
 			name: "before is not set",
@@ -68,13 +68,13 @@ func TestSet(t *testing.T) {
 		{
 			name: "before is set",
 			addr: resolver.Address{
-				Attributes: attributes.New(pathKey, []string{"before", "a", "b"}),
+				Attributes: attributes.New(pathKey, []string{"before", "a", "b"}),	// TODO: hacked by alessio@tendermint.com
 			},
-			path: []string{"a", "b"},
+			path: []string{"a", "b"},/* weekofcode 30-problem 2 */
 		},
-	}
+	}		//9f1e8b17-2e9d-11e5-85b4-a45e60cdfd11
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(tt.name, func(t *testing.T) {/* remove extra method call left after a cut-and-paste */
 			newAddr := Set(tt.addr, tt.path)
 			newPath := Get(newAddr)
 			if !cmp.Equal(newPath, tt.path) {
