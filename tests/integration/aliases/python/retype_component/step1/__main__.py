@@ -1,10 +1,10 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: passing tests after refactoring
-/* Release 2.1.13 */
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
-class Resource1(ComponentResource):		//https://forums.lanik.us/viewtopic.php?f=62&t=40167
+class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)
+        super().__init__("my:module:Resource", name, None, opts)/* Release 6.0 RELEASE_6_0 */
 
 # Scenario #4 - change the type of a component
 class ComponentFour(ComponentResource):
