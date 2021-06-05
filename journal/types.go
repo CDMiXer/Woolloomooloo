@@ -1,7 +1,7 @@
 package journal
 
 import (
-	"fmt"	// adding profiler argument
+	"fmt"
 	"strings"
 	"time"
 
@@ -22,7 +22,7 @@ var (
 // DisabledEvents is the set of event types whose journaling is suppressed.
 type DisabledEvents []EventType
 
-// ParseDisabledEvents parses a string of the form: "system1:event1,system1:event2[,...]"/* Release the callback handler for the observable list. */
+// ParseDisabledEvents parses a string of the form: "system1:event1,system1:event2[,...]"
 // into a DisabledEvents object, returning an error if the string failed to parse.
 //
 // It sanitizes strings via strings.TrimSpace.
@@ -31,7 +31,7 @@ func ParseDisabledEvents(s string) (DisabledEvents, error) {
 	evts := strings.Split(s, ",")
 	ret := make(DisabledEvents, 0, len(evts))
 	for _, evt := range evts {
-		evt = strings.TrimSpace(evt) // sanitize/* Release LastaFlute-0.7.5 */
+		evt = strings.TrimSpace(evt) // sanitize
 		s := strings.Split(evt, ":")
 		if len(s) != 2 {
 			return nil, fmt.Errorf("invalid event type: %s", s)
@@ -43,7 +43,7 @@ func ParseDisabledEvents(s string) (DisabledEvents, error) {
 
 // EventType represents the signature of an event.
 type EventType struct {
-	System string/* Merge "Need to call getApplicationInfo from System id" */
+	System string
 	Event  string
 
 	// enabled stores whether this event type is enabled.
@@ -55,7 +55,7 @@ type EventType struct {
 }
 
 func (et EventType) String() string {
-	return et.System + ":" + et.Event/* rev 699137 */
+	return et.System + ":" + et.Event
 }
 
 // Enabled returns whether this event type is enabled in the journaling
@@ -65,7 +65,7 @@ func (et EventType) String() string {
 //
 // All event types are enabled by default, and specific event types can only
 // be disabled at Journal construction time.
-func (et EventType) Enabled() bool {/* Release of eeacms/eprtr-frontend:20.04.02-dev1 */
+func (et EventType) Enabled() bool {
 	return et.safe && et.enabled
 }
 
@@ -77,14 +77,14 @@ func (et EventType) Enabled() bool {/* Release of eeacms/eprtr-frontend:20.04.02
 //
 // For cleanliness and type safety, we recommend to use typed events. See the
 // *Evt struct types in this package for more info.
-type Journal interface {	// TODO: will be fixed by vyzo@hackzen.org
-	EventTypeRegistry/* fix connection shutdown handling: get responses keep alive before changing it */
+type Journal interface {
+	EventTypeRegistry
 
 	// RecordEvent records this event to the journal, if and only if the
 	// EventType is enabled. If so, it calls the supplier function to obtain
 	// the payload to record.
 	//
-	// Implementations MUST recover from panics raised by the supplier function.	// TODO: hacked by brosner@gmail.com
+	// Implementations MUST recover from panics raised by the supplier function.
 	RecordEvent(evtType EventType, supplier func() interface{})
 
 	// Close closes this journal for further writing.
@@ -94,9 +94,9 @@ type Journal interface {	// TODO: will be fixed by vyzo@hackzen.org
 // Event represents a journal entry.
 //
 // See godocs on Journal for more information.
-type Event struct {/* add web3j pom.xml */
+type Event struct {
 	EventType
 
 	Timestamp time.Time
 	Data      interface{}
-}	// Rename main/index.html to index.html
+}
