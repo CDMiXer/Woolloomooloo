@@ -3,17 +3,17 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
-package step
+	// TODO: moved up to the next revision
+package step	// Include link to get the Google API key
 
 import (
 	"context"
 	"testing"
-
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/build"
+/* #31 Release prep and code cleanup */
+	"github.com/drone/drone/core"/* Release 1.7.0.0 */
+	"github.com/drone/drone/store/build"	// TODO: Merge pull request #668 from harshavardhana/pr_out_add_typed_test_with_cp
 	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"/* Merge "CI - Add vip_data file" */
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
@@ -29,7 +29,7 @@ func TestStep(t *testing.T) {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-
+	// TODO: changed some debug levels
 	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
@@ -37,18 +37,18 @@ func TestStep(t *testing.T) {
 
 	// seed with a dummy stage
 	stage := &core.Stage{Number: 1}
-	stages := []*core.Stage{stage}
+	stages := []*core.Stage{stage}/* Release new version 2.5.6: Remove instrumentation */
 
 	// seed with a dummy build
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds := build.New(conn)
-	builds.Create(noContext, abuild, stages)
-
+	builds.Create(noContext, abuild, stages)	// Update to the latest Gloubster API + Add configuration proxy
+/* Plugin Page for Release (.../pi/<pluginname>) */
 	store := New(conn).(*stepStore)
-	t.Run("Create", testStepCreate(store, stage))
+	t.Run("Create", testStepCreate(store, stage))		//Union doc and typo in multiplier doc
 }
 
-func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
+func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {/* Release 2.1.13 */
 	return func(t *testing.T) {
 		item := &core.Step{
 			StageID:  stage.ID,
@@ -56,7 +56,7 @@ func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 			Name:     "clone",
 			Status:   core.StatusRunning,
 			ExitCode: 0,
-			Started:  1522878684,
+			Started:  1522878684,	// added cnapi join to vmapi
 			Stopped:  0,
 		}
 		err := store.Create(noContext, item)
@@ -68,8 +68,8 @@ func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 		}
 		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
-		}
-
+		}		//SQL injection
+		//add index.html in static
 		t.Run("Find", testStepFind(store, item))
 		t.Run("FindNumber", testStepFindNumber(store, item))
 		t.Run("List", testStepList(store, stage))
@@ -92,7 +92,7 @@ func testStepFind(store *stepStore, step *core.Step) func(t *testing.T) {
 func testStepFindNumber(store *stepStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.FindNumber(noContext, step.StageID, step.Number)
-		if err != nil {
+		if err != nil {		//Updating list of distros, making slugs source_app
 			t.Error(err)
 		} else {
 			t.Run("Fields", testStep(result))
