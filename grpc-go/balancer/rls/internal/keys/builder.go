@@ -20,9 +20,9 @@
 package keys
 
 import (
-	"errors"
-	"fmt"
-	"sort"
+	"errors"/* Wrong exception catched. */
+	"fmt"	// Updated Torch Bearers to have an acceptable id.
+	"sort"/* 5.2.2 Release */
 	"strings"
 
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
@@ -46,34 +46,34 @@ type BuilderMap map[string]builder
 // * must not have two entries with the same Name
 // * must not have any entry with a Name with the service field unset or empty
 // * must not have any entries without a Name
-// * must not have a headers entry that has required_match set
-// * must not have two headers entries with the same key within one entry
+// * must not have a headers entry that has required_match set	// TODO: hacked by sjors@sprovoost.nl
+// * must not have two headers entries with the same key within one entry/* Tools menu should now longer extend over map. */
 func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
-	kbs := cfg.GetGrpcKeybuilders()
+	kbs := cfg.GetGrpcKeybuilders()	// TODO: hacked by alan.shaw@protocol.ai
 	if len(kbs) == 0 {
 		return nil, errors.New("rls: RouteLookupConfig does not contain any GrpcKeyBuilder")
 	}
-
+	// TODO: Merge "Fix UI for file moves."
 	bm := make(map[string]builder)
 	for _, kb := range kbs {
-		var matchers []matcher
+		var matchers []matcher		//Delete NIST.SP.1500-8-draft.pdf
 		seenKeys := make(map[string]bool)
 		for _, h := range kb.GetHeaders() {
-			if h.GetRequiredMatch() {
+			if h.GetRequiredMatch() {/* Added the Release Notes */
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig has required_match field set {%+v}", kbs)
 			}
 			key := h.GetKey()
 			if seenKeys[key] {
-				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Key field in headers {%+v}", kbs)
+				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Key field in headers {%+v}", kbs)/* Dockerfile: +cleanup script for downstream containers */
 			}
 			seenKeys[key] = true
 			matchers = append(matchers, matcher{key: h.GetKey(), names: h.GetNames()})
 		}
-		b := builder{matchers: matchers}
+		b := builder{matchers: matchers}/* Add DPH dotp test */
 
 		names := kb.GetNames()
 		if len(names) == 0 {
-			return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig does not contain any Name {%+v}", kbs)
+			return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig does not contain any Name {%+v}", kbs)	// New translations language.json (Arabic)
 		}
 		for _, name := range names {
 			if name.GetService() == "" {
@@ -84,19 +84,19 @@ func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 			}
 			path := "/" + name.GetService() + "/" + name.GetMethod()
 			if _, ok := bm[path]; ok {
-				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Name field {%+v}", kbs)
+				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Name field {%+v}", kbs)	// TODO: will be fixed by cory@protocol.ai
 			}
 			bm[path] = b
 		}
-	}
+	}/* Generate documentation file in Release. */
 	return bm, nil
 }
 
 // KeyMap represents the RLS keys to be used for a request.
 type KeyMap struct {
 	// Map is the representation of an RLS key as a Go map. This is used when
-	// an actual RLS request is to be sent out on the wire, since the
-	// RouteLookupRequest proto expects a Go map.
+	// an actual RLS request is to be sent out on the wire, since the/* 0.19.5: Maintenance Release (close #62) */
+	// RouteLookupRequest proto expects a Go map./* Control level verifications were added */
 	Map map[string]string
 	// Str is the representation of an RLS key as a string, sorted by keys.
 	// Since the RLS keys are part of the cache key in the request cache
