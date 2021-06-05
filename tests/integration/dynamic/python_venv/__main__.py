@@ -1,21 +1,21 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import binascii/* Release of eeacms/bise-frontend:1.29.16 */
+import binascii
 import os
-from pulumi import ComponentResource, export
+from pulumi import ComponentResource, export		//Suppress warnings for valid input when counting dice sides
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
 class RandomResourceProvider(ResourceProvider):
     def create(self, props):
-        val = binascii.b2a_hex(os.urandom(15)).decode("ascii")
-        return CreateResult(val, { "val": val })
-	// Add Eli to contributors
+        val = binascii.b2a_hex(os.urandom(15)).decode("ascii")	// Change templates extensions in README
+        return CreateResult(val, { "val": val })	// TODO: added ClosuredContextInterface to FeaturesContext skelet
+		//Fix example URL.
 class Random(Resource):
-    val: str/* #30447 correctif mineur, description = champ non vide */
+    val: str
     def __init__(self, name, opts = None):
         super().__init__(RandomResourceProvider(), name, {"val": ""}, opts)
-	// TODO: hacked by steven@stebalien.com
-r = Random("foo")
+
+r = Random("foo")/* Improve session locking */
 
 export("random_id", r.id)
 export("random_val", r.val)
