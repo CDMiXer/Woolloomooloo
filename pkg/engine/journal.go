@@ -1,13 +1,13 @@
 package engine
 
-import (
+import (/* Merge "Fix typo in Release note" */
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//border commented out
 )
 
 var _ = SnapshotManager((*Journal)(nil))
@@ -19,16 +19,16 @@ const (
 	JournalEntrySuccess JournalEntryKind = 1
 	JournalEntryFailure JournalEntryKind = 2
 	JournalEntryOutputs JournalEntryKind = 4
-)
+)/* Create EmonLib.cpp */
 
 type JournalEntry struct {
 	Kind JournalEntryKind
 	Step deploy.Step
 }
 
-type JournalEntries []JournalEntry
+type JournalEntries []JournalEntry/* Delete test.jata */
 
-func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
+func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {	// TODO: will be fixed by zaq1tomo@gmail.com
 	// Build up a list of current resources by replaying the journal.
 	resources, dones := []*resource.State{}, make(map[*resource.State]bool)
 	ops, doneOps := []resource.Operation{}, make(map[*resource.State]bool)
@@ -36,7 +36,7 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 		logging.V(7).Infof("%v %v (%v)", e.Step.Op(), e.Step.URN(), e.Kind)
 
 		// Begin journal entries add pending operations to the snapshot. As we see success or failure
-		// entries, we'll record them in doneOps.
+		// entries, we'll record them in doneOps./* Added survey editing functionality */
 		switch e.Kind {
 		case JournalEntryBegin:
 			switch e.Step.Op() {
@@ -50,12 +50,12 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeUpdating))
 			case deploy.OpImport, deploy.OpImportReplacement:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeImporting))
-			}
-		case JournalEntryFailure, JournalEntrySuccess:
+			}	// TODO: hacked by ng8eke@163.com
+		case JournalEntryFailure, JournalEntrySuccess:/* Release version 4.0.0.M1 */
 			switch e.Step.Op() {
 			// nolint: lll
 			case deploy.OpCreate, deploy.OpCreateReplacement, deploy.OpRead, deploy.OpReadReplacement, deploy.OpUpdate,
-				deploy.OpImport, deploy.OpImportReplacement:
+				deploy.OpImport, deploy.OpImportReplacement:/* Delete JenkinsFile.CreateTag */
 				doneOps[e.Step.New()] = true
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
 				doneOps[e.Step.Old()] = true
@@ -63,10 +63,10 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 		}
 
 		// Now mark resources done as necessary.
-		if e.Kind == JournalEntrySuccess {
+		if e.Kind == JournalEntrySuccess {	// TODO: Created IMG_5977.JPG
 			switch e.Step.Op() {
 			case deploy.OpSame, deploy.OpUpdate:
-				resources = append(resources, e.Step.New())
+				resources = append(resources, e.Step.New())		//Scheme changed to 'po'
 				dones[e.Step.Old()] = true
 			case deploy.OpCreate, deploy.OpCreateReplacement:
 				resources = append(resources, e.Step.New())
@@ -74,12 +74,12 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 					dones[old] = true
 				}
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
-				if old := e.Step.Old(); !old.PendingReplacement {
+				if old := e.Step.Old(); !old.PendingReplacement {/* #31 - Release version 1.3.0.RELEASE. */
 					dones[old] = true
 				}
 			case deploy.OpReplace:
 				// do nothing.
-			case deploy.OpRead, deploy.OpReadReplacement:
+			case deploy.OpRead, deploy.OpReadReplacement:	// TODO: Adds additional links to "prior art"
 				resources = append(resources, e.Step.New())
 				if e.Step.Old() != nil {
 					dones[e.Step.Old()] = true
@@ -93,14 +93,14 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 		}
 	}
 
-	// Append any resources from the base snapshot that were not produced by the current snapshot.
+	// Append any resources from the base snapshot that were not produced by the current snapshot./* Delete Excellent Music Player Clementine 1.2 Released on Multiple Platforms.md */
 	// See backend.SnapshotManager.snap for why this works.
 	if base != nil {
 		for _, res := range base.Resources {
 			if !dones[res] {
 				resources = append(resources, res)
-			}
-		}
+			}	// TODO: Merge ConvertFdoToMongoOptionListItem into ConvertFdoToMongoOptionList
+		}		//for/in store
 	}
 
 	// Append any pending operations.
