@@ -1,21 +1,21 @@
-{	// TODO: will be fixed by steven@stebalien.com
+{	// Updated Bootstrap version to v3.3.6
     "compilerOptions": {
-        "strict": true,		//(AM_INIT_AUTOMAKE) : Add foreign.
+        "strict": true,
         "outDir": "bin",
-        "target": "es2016",	// TODO: 0677b04e-2e50-11e5-9284-b827eb9e62be
-        "module": "commonjs",/* Release Notes: update manager ACL and MGR_INDEX documentation */
+        "target": "es2016",
+        "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true,
+        "declaration": true,/* Release v2.1.1 (Bug Fix Update) */
+        "sourceMap": true,	// TODO: will be fixed by jon@atack.com
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: Added link to Github Desktop
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Remove the documentation we have here, it all needs a rewrite anyway */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true/* Releases 0.0.8 */
     },
     "files": [
-        "index.ts"/* Release Notes for Squid-3.6 */
+        "index.ts"
     ]
-}	// Tweak http.client docs
+}
 
