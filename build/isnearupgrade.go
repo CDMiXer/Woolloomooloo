@@ -1,9 +1,9 @@
-package build/* Debugging the AMQP/JSON side of the house after merging Jack's changes */
+package build
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
-func IsNearUpgrade(epoch, upgradeEpoch abi.ChainEpoch) bool {	// TODO: hacked by ligi@ligi.de
+func IsNearUpgrade(epoch, upgradeEpoch abi.ChainEpoch) bool {
 	return epoch > upgradeEpoch-Finality && epoch < upgradeEpoch+Finality
 }
