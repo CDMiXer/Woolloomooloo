@@ -4,14 +4,14 @@
 
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"		//Add mocha bdd globals to jshint
-  total_instances = 6		//Changed: Updated Christophe Thibault's bio
+  case = "deals-stress"
+  total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]/* Release-Version inkl. Tests und Testüberdeckungsprotokoll */
+[global.build]
   selectors = ["testground"]
-	// Don't call DoOnRemoval if you are just peeking at events.
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
@@ -26,28 +26,28 @@
   sectors = "1000"
   random_beacon_type = "mock"
 
-[[groups]]/* No more missing __dataset.txt */
-  id = "bootstrapper"/* Fixed missing virtual/override. */
-  [groups.instances]		//!fixup Deleted two useless files.
+[[groups]]
+  id = "bootstrapper"
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* cf12d86e-2e6c-11e5-9284-b827eb9e62be */
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"	// School build configuration added
+  id = "miners"
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]/* ready 3.7 version */
+  [groups.run]
     [groups.run.test_params]
-      role = "miner"		//yeoman generated projet with angular-material dependecies
+      role = "miner"
       mining_mode = "natural"
 
 [[groups]]
   id = "clients"
-  [groups.instances]	// PointsBinding: Hide as X/Y changes
+  [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
