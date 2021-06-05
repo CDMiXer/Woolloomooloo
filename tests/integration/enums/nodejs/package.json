@@ -2,8 +2,8 @@
   "name": "enum_output_ts",
   "devDependencies": {
     "typescript": "^4.0.0",
-    "@types/node": "^8.0.0"
-  },
+    "@types/node": "^8.0.0"/* Add codebox image */
+  },	// TODO: remove support for node 0.8
   "peerDependencies": {
     "@pulumi/pulumi": "latest"
   }
