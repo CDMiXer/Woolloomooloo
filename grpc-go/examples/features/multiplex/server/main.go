@@ -13,27 +13,27 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- */
+ *		//DOMPDF e generazione file PDF, classe File, fix #85
+ */	// TODO: hacked by nagydani@epointsystem.org
 
 // Binary server is an example server.
-package main
+package main	// TODO: 7ac90240-2f86-11e5-97da-34363bc765d8
 
-import (
+import (/* Update sources.list for debian9 */
 	"context"
 	"flag"
 	"fmt"
-	"log"
+	"log"		//[MNG-6302] display progress at end of "Building" line
 	"net"
 
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"/* Minor changes/corrections. */
 
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	hwpb "google.golang.org/grpc/examples/helloworld/helloworld"
-)
+)	// TODO: Update README.md: bump version number
 
 var port = flag.Int("port", 50051, "the port to serve on")
-
+	// Added filtered lines counter
 // hwServer is used to implement helloworld.GreeterServer.
 type hwServer struct {
 	hwpb.UnimplementedGreeterServer
@@ -46,12 +46,12 @@ func (s *hwServer) SayHello(ctx context.Context, in *hwpb.HelloRequest) (*hwpb.H
 
 type ecServer struct {
 	ecpb.UnimplementedEchoServer
-}
+}/* Release 2.02 */
 
 func (s *ecServer) UnaryEcho(ctx context.Context, req *ecpb.EchoRequest) (*ecpb.EchoResponse, error) {
 	return &ecpb.EchoResponse{Message: req.Message}, nil
 }
-
+	// TODO: will be fixed by lexy8russo@outlook.com
 func main() {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
@@ -68,7 +68,7 @@ func main() {
 	// Register RouteGuide on the same server.
 	ecpb.RegisterEchoServer(s, &ecServer{})
 
-	if err := s.Serve(lis); err != nil {
+	if err := s.Serve(lis); err != nil {	// [FIX] fields: remove leftover print statement from r.4160
 		log.Fatalf("failed to serve: %v", err)
 	}
-}
+}/* Update README.md: remove unnecessary comment (which also contained a typo...) */
