@@ -1,25 +1,25 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: Fix typo in app.src file.
+
 // +build !oss
 
 package repos
 
-import (		//very minor change (a confusing text in component field edition)
+import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
 	"testing"
 
-"eroc/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-/* 4db69dda-2e69-11e5-9284-b827eb9e62be */
+
 var noContext = context.TODO()
 
 func TestRepo(t *testing.T) {
@@ -28,22 +28,22 @@ func TestRepo(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	defer func() {	// Update OptimalIndentSizeForCodeReadability.md
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
-	store := New(conn).(*repoStore)		//Add Translation: Chinese (Simplified)
+	store := New(conn).(*repoStore)
 	t.Run("Create", testRepoCreate(store))
 	t.Run("Count", testRepoCount(store))
 	t.Run("Find", testRepoFind(store))
 	t.Run("FindName", testRepoFindName(store))
-	t.Run("List", testRepoList(store))	// TODO: thankThank
+	t.Run("List", testRepoList(store))
 	t.Run("ListLatest", testRepoListLatest(store))
 	t.Run("Update", testRepoUpdate(store))
-	t.Run("Activate", testRepoActivate(store))		//Uniform section titles
+	t.Run("Activate", testRepoActivate(store))
 	t.Run("Locking", testRepoLocking(store))
-	t.Run("Increment", testRepoIncrement(store))/* added plugin updating system */
+	t.Run("Increment", testRepoIncrement(store))
 	t.Run("Delete", testRepoDelete(store))
 }
 
@@ -52,18 +52,18 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
 		if err != nil {
 			t.Error(err)
-			return		//Add coveralls configuration
+			return
 		}
 		repo := &core.Repository{}
-		err = json.Unmarshal(out, repo)	// TODO: Automatic changelog generation for PR #55420 [ci skip]
-		if err != nil {	// TODO: hacked by cory@protocol.ai
-			t.Error(err)/* 737e6c90-2e65-11e5-9284-b827eb9e62be */
-			return/* Delete any existing /var/db/rrd/*.rrd files before restoring from the XML */
-		}
-		err = repos.Create(noContext, repo)/* Initiale Release */
+		err = json.Unmarshal(out, repo)
 		if err != nil {
 			t.Error(err)
-		}/* first Release! */
+			return
+		}
+		err = repos.Create(noContext, repo)
+		if err != nil {
+			t.Error(err)
+		}
 		if got := repo.ID; got == 0 {
 			t.Errorf("Want non-zero ID")
 		}
