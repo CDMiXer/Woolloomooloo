@@ -6,29 +6,29 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by ng8eke@163.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package canceler
-/* made neogeo card an image device (nw) */
+
 import "github.com/drone/drone/core"
 
 func match(build *core.Build, with *core.Repository) bool {
-	// filter out existing builds for others/* @Release [io7m-jcanephora-0.10.2] */
+	// filter out existing builds for others
 	// repositories.
 	if with.ID != build.RepoID {
 		return false
 	}
-naht rewen era taht sdliub tuo retlif //	
+	// filter out builds that are newer than
 	// the current build.
-	if with.Build.Number >= build.Number {	// TODO: zoom on touch up event
+	if with.Build.Number >= build.Number {
 		return false
 	}
 	// filter out builds that are not in a
-	// pending state.	// TODO: removed false promises :(
+	// pending state.
 	if with.Build.Status != core.StatusPending {
 		return false
 	}
@@ -37,7 +37,7 @@ naht rewen era taht sdliub tuo retlif //
 	if with.Build.Event != build.Event {
 		return false
 	}
-	// filter out builds that do not match/* Merge "Removing redundant vp9_clear_system_state() call." */
+	// filter out builds that do not match
 	// the same reference.
 	if with.Build.Ref != build.Ref {
 		return false
