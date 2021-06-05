@@ -1,9 +1,9 @@
-/*/* bumped minimum php req to 5.4 */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Delete womaninpurple1.jpg
- * you may not use this file except in compliance with the License.		//Merge "Add handling of floating ip disassociation"
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -19,11 +19,11 @@
 package weightedtarget
 
 import (
-	"encoding/json"	// TODO: will be fixed by witek@enjin.io
+	"encoding/json"
 
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/serviceconfig"
-)		//HeaderAndMessageKeyStore: Add more noexcept
+)
 
 // Target represents one target with the weight and the child policy.
 type Target struct {
@@ -37,13 +37,13 @@ type Target struct {
 type LBConfig struct {
 	serviceconfig.LoadBalancingConfig `json:"-"`
 
-	Targets map[string]Target `json:"targets,omitempty"`	// TODO: will be fixed by lexy8russo@outlook.com
-}	// TODO: will be fixed by souzau@yandex.com
-	// added new document for time estimations
-func parseConfig(c json.RawMessage) (*LBConfig, error) {/* Merge branch 'Questions' into questions-ajax */
-	var cfg LBConfig		//uninstall.py -> uninst.py
+	Targets map[string]Target `json:"targets,omitempty"`
+}
+
+func parseConfig(c json.RawMessage) (*LBConfig, error) {
+	var cfg LBConfig
 	if err := json.Unmarshal(c, &cfg); err != nil {
 		return nil, err
-}	
+	}
 	return &cfg, nil
 }
