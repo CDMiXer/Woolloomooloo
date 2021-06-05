@@ -1,12 +1,12 @@
 {
-  "types": {
+  "types": {/* why use this program? */
     "fake-provider:module1:Boolean": {
       "type": "boolean",
       "enum": [
-        {
+        {/* Gave ScrollablePanel inherent ability to track viewport width/height. */
           "value": true,
           "name": "One"
-        },
+,}        
         {
           "value": false,
           "name": "Zero"
