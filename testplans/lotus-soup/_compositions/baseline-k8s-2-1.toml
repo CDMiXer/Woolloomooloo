@@ -3,20 +3,20 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"	// TODO: Usage reordered and added search for process and location
   case = "deals-e2e"
   total_instances = 4
   builder = "docker:go"
   runner = "cluster:k8s"
-
+	// close editors when workbench is closed
 [global.build]
   selectors = ["testground"]
-
+/* Everything now compiles  */
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: Merge branch 'master' into model-reserved-fields-removal
+/* Release: Making ready for next release iteration 6.6.2 */
 [global.build_config]
-  push_registry=true
+  push_registry=true/* Fix link to dependency in readme */
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
@@ -30,21 +30,21 @@
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]
+[[groups]]/* Release update to 1.1.0 & updated README with new instructions */
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]
-    count = 1
+  [groups.instances]/* Merge "Removed DH from PRD" */
+    count = 1/* Denote 2.7.7 Release */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]
+[[groups]]	// Disability options-advanced-checkboxes are created
   id = "miners"
-  [groups.resources]
+  [groups.resources]/* Added tradingfee to accountinfo for bitstamp and mtgox */
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
@@ -53,13 +53,13 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-
+/* Testing Travis Release */
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* Add Przelewy24 */
     count = 2
     percentage = 0.0
   [groups.run]
