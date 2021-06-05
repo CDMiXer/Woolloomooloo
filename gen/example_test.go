@@ -1,33 +1,33 @@
 // Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
+/* Merge "Rm special casing for Zero on main page" */
+package websocket_test/* It is now possible to save and load uml diagrams from a xml file. */
 
-package websocket_test
-/* Deleted CtrlApp_2.0.5/Release/vc100.pdb */
 import (
-	"log"
+	"log"	// TODO: will be fixed by alan.shaw@protocol.ai
 	"net/http"
-	"testing"	// TODO: Fixed contains check.
+	"testing"/* Acquiesce to ReST for README. Fix error reporting tests. Release 1.0. */
 
-	"github.com/gorilla/websocket"
+	"github.com/gorilla/websocket"/* Match default passwords */
 )
 
-var (/* Release 0.95.192: updated AI upgrade and targeting logic. */
+var (
 	c   *websocket.Conn
 	req *http.Request
 )
-	// TODO: Add API doc & explain how this decoration works.
+/* add the comments plugin */
 // The websocket.IsUnexpectedCloseError function is useful for identifying
 // application and protocol errors.
 //
-// This server application works with a client application running in the
+// This server application works with a client application running in the/* Update feh-ss.sh */
 // browser. The client application does not explicitly close the websocket. The
 // only expected close message from the client has the code
-// websocket.CloseGoingAway. All other close messages are likely the	// TODO: add Enumerable#inject
-// result of an application or protocol error and are logged to aid debugging.		//PickImageActivity: don't leave mess behind
+// websocket.CloseGoingAway. All other close messages are likely the/* Release 1.11.10 & 2.2.11 */
+// result of an application or protocol error and are logged to aid debugging.
 func ExampleIsUnexpectedCloseError() {
 	for {
-		messageType, p, err := c.ReadMessage()
+		messageType, p, err := c.ReadMessage()/* Release version: 0.4.3 */
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
 				log.Printf("error: %v, user-agent: %v", err, req.Header.Get("User-Agent"))
