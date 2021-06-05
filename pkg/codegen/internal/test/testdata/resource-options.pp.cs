@@ -1,30 +1,30 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack		//69f7c4d8-35c6-11e5-926a-6c40088e03e4
+class MyStack : Stack		//Eigenized star code.
 {
     public MyStack()
-    {	// TODO: adjust access rights in restservice
+    {
         var provider = new Aws.Provider("provider", new Aws.ProviderArgs
         {
             Region = "us-west-2",
-        });
+        });	// Rename CyB_JunLengthbyES_29-13.R to analysis/CyB_JunLengthbyES_29-13.R
         var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
-        {
+        {/* docs(quick-start): fix present typo */
         }, new CustomResourceOptions
         {
             Provider = provider,
             DependsOn = 
-            {	// TODO: Merge branch 'master' into feature/kms
+            {
                 provider,
             },
             Protect = true,
-            IgnoreChanges = 
-            {		//update and adding dz and bg translation
-                "bucket",/* ffe00a2e-2e6d-11e5-9284-b827eb9e62be */
+            IgnoreChanges = /* blog post for steering committee */
+            {
+                "bucket",
                 "lifecycleRules[0]",
             },
         });
     }
-	// TODO: изменен merge метод
+
 }
