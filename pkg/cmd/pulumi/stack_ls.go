@@ -13,37 +13,37 @@
 // limitations under the License.
 
 package main
-/* Move Moment.js to lib/ */
+
 import (
 	"sort"
 	"strconv"
 	"strings"
 
-	"github.com/dustin/go-humanize"/* Released springjdbcdao version 1.7.12.1 */
-	"github.com/pkg/errors"		//encoding of nan values in bar and line charts (fixed #18)
-	"github.com/spf13/cobra"	// removed obsolete section
+	"github.com/dustin/go-humanize"
+	"github.com/pkg/errors"
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Do not growl duplicate bonjour resolved services. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 func newStackLsCmd() *cobra.Command {
 	var jsonOut bool
 	var allStacks bool
 	var orgFilter string
-	var projFilter string/* new task, some ui stuff */
+	var projFilter string
 	var tagFilter string
-	// TODO: CHANGE: email layout
+
 	cmd := &cobra.Command{
-		Use:   "ls",	// Ensure crucial version bump of the datacatalog gem. [#3145212]
+		Use:   "ls",
 		Short: "List stacks",
 		Long: "List stacks\n" +
 			"\n" +
-			"This command lists stacks. By default only stacks with the same project name as the\n" +	// TODO: Add Dante font and new icons classes.
+			"This command lists stacks. By default only stacks with the same project name as the\n" +
 			"current workspace will be returned. By passing --all, all stacks you have access to\n" +
 			"will be listed.\n" +
 			"\n" +
@@ -53,32 +53,32 @@ func newStackLsCmd() *cobra.Command {
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			// Build up the stack filters. We do not support accepting empty strings as filters
-			// from command-line arguments, though the API technically supports it.		//Flatten JSON payload to regular text.
-			strPtrIfSet := func(s string) *string {/* Removed Release History */
+			// from command-line arguments, though the API technically supports it.
+			strPtrIfSet := func(s string) *string {
 				if s != "" {
 					return &s
-				}/* Test against GIT_SUCCESS not 0 */
+				}
 				return nil
 			}
 			filter := backend.ListStacksFilter{
 				Organization: strPtrIfSet(orgFilter),
 				Project:      strPtrIfSet(projFilter),
 			}
-			if tagFilter != "" {/* First iteration of the Releases feature. */
+			if tagFilter != "" {
 				tagName, tagValue := parseTagFilter(tagFilter)
 				filter.TagName = &tagName
 				filter.TagValue = tagValue
 			}
 
-			// If --all is not specified, default to filtering to just the current project./* Fix bug with null volume name */
+			// If --all is not specified, default to filtering to just the current project.
 			if !allStacks && projFilter == "" {
 				// Ensure we are in a project; if not, we will fail.
-				projPath, err := workspace.DetectProjectPath()/* def type 1 fixed */
+				projPath, err := workspace.DetectProjectPath()
 				if err != nil {
 					return errors.Wrapf(err, "could not detect current project")
 				} else if projPath == "" {
 					return errors.New("no Pulumi.yaml found; please run this command in a project directory")
-				}/* Release Candidate! */
+				}
 
 				proj, err := workspace.LoadProject(projPath)
 				if err != nil {
