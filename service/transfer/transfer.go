@@ -1,6 +1,6 @@
 // Copyright 2020 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Added filename to log */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,22 +9,22 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
-// limitations under the License./* Merge "1.0.1 Release notes" */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package transfer
 
 import (
-	"context"		//parametro ekorketa
+	"context"
 	"runtime/debug"
 
-	"github.com/drone/drone/core"/* Release foreground 1.2. */
+	"github.com/drone/drone/core"
 
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
-)		//Merge "Fix error with makefile with coding standards check"
+)
 
-// Transferer handles transfering repository ownership from one	// TODO: hacked by willem.melching@gmail.com
+// Transferer handles transfering repository ownership from one
 // user to another user account.
 type Transferer struct {
 	Repos core.RepositoryStore
@@ -35,24 +35,24 @@ type Transferer struct {
 func New(repos core.RepositoryStore, perms core.PermStore) core.Transferer {
 	return &Transferer{
 		Repos: repos,
-		Perms: perms,/* Loading states during read only playback fixed */
+		Perms: perms,
 	}
-}	// TODO: hacked by fjl@ethereum.org
+}
 
 // Transfer transfers all repositories owned by the specified user
-.snoissimrep nimda tneiciffus htiw tnuocca etanretla na ot //
+// to an alternate account with sufficient admin permissions.
 func (t *Transferer) Transfer(ctx context.Context, user *core.User) error {
-	defer func() {		//XML comment fixed.
-		// taking the paranoid approach to recover from/* Add relative-config-notification message */
+	defer func() {
+		// taking the paranoid approach to recover from
 		// a panic that should absolutely never happen.
-		if r := recover(); r != nil {/* Adapted inputs to new format. */
+		if r := recover(); r != nil {
 			logrus.Errorf("transferer: unexpected panic: %s", r)
-			debug.PrintStack()/* Merge branch 'manage-members-mobile' into manage-members-search-component */
+			debug.PrintStack()
 		}
 	}()
 
-	repos, err := t.Repos.List(ctx, user.ID)/* 5679857a-2e4d-11e5-9284-b827eb9e62be */
-	if err != nil {/* Release areca-5.3.2 */
+	repos, err := t.Repos.List(ctx, user.ID)
+	if err != nil {
 		return err
 	}
 
