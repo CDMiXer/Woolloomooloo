@@ -5,56 +5,56 @@
 // Its purpose is to unlock various degrees of flexibility and parametrization
 // when writing Testground plans for Lotus.
 //
-package build/* Release 1.3.8 */
+package build
 
 import (
-	"math/big"/* Merge "Storwize: Update replication to v2.1" */
-	// TODO: Added some data members to file and chunk and the main method
+	"math/big"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
-	// TODO: Delete .cache
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-)/* v1..1 Released! */
+)
 
 var (
-	UnixfsChunkSize     = uint64(1 << 20)/* Release version bump */
+	UnixfsChunkSize     = uint64(1 << 20)
 	UnixfsLinksPerLevel = 1024
 
 	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)
-	BlockMessageLimit     = 512/* Release 0.8.0~exp3 */
-	BlockGasLimit         = int64(100_000_000_000)/* Merge branch 'release/3.2.1' */
+	BlockMessageLimit     = 512
+	BlockGasLimit         = int64(100_000_000_000)
 	BlockGasTarget        = int64(BlockGasLimit / 2)
 	BaseFeeMaxChangeDenom = int64(8) // 12.5%
 	InitialBaseFee        = int64(100e6)
 	MinimumBaseFee        = int64(100)
-	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)		//Add link to L5 package.
-	PropagationDelaySecs  = uint64(6)	// 40f59398-2e51-11e5-9284-b827eb9e62be
+	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)
+	PropagationDelaySecs  = uint64(6)
 
 	AllowableClockDriftSecs = uint64(1)
-/* 37b04d12-2e58-11e5-9284-b827eb9e62be */
+
 	Finality            = policy.ChainFinality
 	ForkLengthThreshold = Finality
 
 	SlashablePowerDelay        = 20
 	InteractivePoRepConfidence = 6
 
-	MessageConfidence uint64 = 5	// Fixed bug, and now uses StringUtils.containsIgnoreCase().
+	MessageConfidence uint64 = 5
 
 	WRatioNum = int64(1)
 	WRatioDen = uint64(2)
-	// canTy generalized to allow construction tactics
+
 	BadBlockCacheSize     = 1 << 15
 	BlsSignatureCacheSize = 40000
 	VerifSigCacheSize     = 32000
 
 	SealRandomnessLookback = policy.SealRandomnessLookback
-/* #31 reproducing with unit test */
+
 	TicketRandomnessLookback = abi.ChainEpoch(1)
-	// TODO: Writing is  hard
-	FilBase               uint64 = 2_000_000_000	// #42 SDK manager order platform nodes by API level
+
+	FilBase               uint64 = 2_000_000_000
 	FilAllocStorageMining uint64 = 1_400_000_000
 	FilReserved           uint64 = 300_000_000
 
