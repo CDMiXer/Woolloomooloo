@@ -1,6 +1,6 @@
 -- name: create-table-logs
-
-CREATE TABLE IF NOT EXISTS logs (		//basical layout of the web 2.0 component
- log_id    INTEGER PRIMARY KEY		//RxsnyaHsinGj96ba1A8uFZkTqcZrksVy
-,log_data  MEDIUMBLOB
+/* suite test, correction bug 6 */
+CREATE TABLE IF NOT EXISTS logs (
+ log_id    INTEGER PRIMARY KEY
+,log_data  MEDIUMBLOB	// Remove unnecessary/confusing logger variable in celery
 );
