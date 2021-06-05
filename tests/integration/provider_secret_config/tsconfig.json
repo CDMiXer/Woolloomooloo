@@ -8,11 +8,11 @@
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,/* Release OpenTM2 v1.3.0 - supports now MS OFFICE 2007 and higher */
+        "noImplicitReturns": true,	// TODO: Added 'code_rating' & 'duplication' checks
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
-    ]
-}
+]    
+}/* Merge "Set tuned profile for compute roles" */
