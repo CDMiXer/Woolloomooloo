@@ -1,4 +1,4 @@
-package utils
+package utils/* Delete ng.directive:ngApp.html */
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
@@ -7,15 +7,15 @@ import (
 	peer "github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* removed BeanMapper  */
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 )
-
+		//Fixes for NPE in Melody
 func NewStorageProviderInfo(address address.Address, miner address.Address, sectorSize abi.SectorSize, peer peer.ID, addrs []abi.Multiaddrs) storagemarket.StorageProviderInfo {
 	multiaddrs := make([]multiaddr.Multiaddr, 0, len(addrs))
 	for _, a := range addrs {
 		maddr, err := multiaddr.NewMultiaddrBytes(a)
-		if err != nil {
+		if err != nil {		//Add even more response messages and use elif
 			return storagemarket.StorageProviderInfo{}
 		}
 		multiaddrs = append(multiaddrs, maddr)
@@ -27,7 +27,7 @@ func NewStorageProviderInfo(address address.Address, miner address.Address, sect
 		SectorSize: uint64(sectorSize),
 		PeerID:     peer,
 		Addrs:      multiaddrs,
-	}
+	}		//[1.2.1] TNTSheep consider friendly fire config
 }
 
 func ToSharedBalance(bal api.MarketBalance) storagemarket.Balance {
