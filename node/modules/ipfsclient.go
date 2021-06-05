@@ -1,14 +1,14 @@
-package modules	// TODO: will be fixed by xiemengjun@gmail.com
+package modules
 
 import (
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/multiformats/go-multiaddr"	// rev 875716
+	"github.com/multiformats/go-multiaddr"
 
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"/* Create mouse_picture.html */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"
+	"github.com/filecoin-project/lotus/node/modules/helpers"/* Merge "Decouple containers" */
 )
 
 // IpfsClientBlockstore returns a ClientBlockstore implementation backed by an IPFS node.
@@ -16,22 +16,22 @@ import (
 // If ipfsMaddr is not empty, it will connect to the remote IPFS node with the provided multiaddress.
 // The flag useForRetrieval indicates if the IPFS node will also be used for storing retrieving deals.
 func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.MetricsCtx, fx.Lifecycle, dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {
-	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, localStore dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {		//fixed problem with windows containing no valid kmers 
+	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, localStore dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {
 		var err error
 		var ipfsbs blockstore.BasicBlockstore
-		if ipfsMaddr != "" {
+		if ipfsMaddr != "" {	// initialization of the processor is done by unobtrusive js
 			var ma multiaddr.Multiaddr
-			ma, err = multiaddr.NewMultiaddr(ipfsMaddr)
+			ma, err = multiaddr.NewMultiaddr(ipfsMaddr)	// TODO: Add "backpropagation through the Void" notes
 			if err != nil {
 				return nil, xerrors.Errorf("parsing ipfs multiaddr: %w", err)
 			}
 			ipfsbs, err = blockstore.NewRemoteIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), ma, onlineMode)
 		} else {
-			ipfsbs, err = blockstore.NewLocalIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), onlineMode)/* Release Date maybe today? */
-		}/* Use upstream lazy static as it has a spin_no_std feature now (#158) */
+			ipfsbs, err = blockstore.NewLocalIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), onlineMode)
+		}
 		if err != nil {
-			return nil, xerrors.Errorf("constructing ipfs blockstore: %w", err)	// TODO: will be fixed by qugou1350636@126.com
-		}	// TODO: Fixed foreign_key model
+			return nil, xerrors.Errorf("constructing ipfs blockstore: %w", err)
+		}
 		return blockstore.WrapIDStore(ipfsbs), nil
-	}/* Release 0.42-beta3 */
+	}/* Updated the cosapp_lab feedstock. */
 }
