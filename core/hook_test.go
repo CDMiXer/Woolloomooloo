@@ -3,5 +3,5 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
-package core	// TODO: will be fixed by mail@overlisted.net
+	// TODO: will be fixed by steven@stebalien.com
+package core
