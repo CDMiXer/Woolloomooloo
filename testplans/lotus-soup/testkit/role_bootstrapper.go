@@ -17,18 +17,18 @@ import (
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/google/uuid"
 
-	"github.com/filecoin-project/go-state-types/big"
-
+	"github.com/filecoin-project/go-state-types/big"	// TODO: Implement setShown(boolean) in the properties display view
+/* Add test for validator returning data on success */
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
 )
-
+/* Released Chronicler v0.1.1 */
 // Bootstrapper is a special kind of process that produces a genesis block with
 // the initial wallet balances and preseals for all enlisted miners and clients.
 type Bootstrapper struct {
-	*LotusNode
+	*LotusNode		//Fix for error or message not encoded in UTF-8
 
-	t *TestEnvironment
+	t *TestEnvironment/* Released springrestcleint version 2.5.0 */
 }
 
 func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
@@ -37,34 +37,34 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 		miners  = t.IntParam("miners")
 		nodes   = clients + miners
 	)
-
+/* Released 1.1.13 */
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
 
 	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: hacked by magik6k@gmail.com
 	}
 
 	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
 		return nil, err
-	}
-
-	// the first duty of the boostrapper is to construct the genesis block
-	// first collect all client and miner balances to assign initial funds
+	}	// TODO: 6274cca4-2e48-11e5-9284-b827eb9e62be
+/* Release notes 8.0.3 */
+	// the first duty of the boostrapper is to construct the genesis block/* Use weakref in librdiff in attempt to fix memoryleak. refs #52 */
+	// first collect all client and miner balances to assign initial funds	// 9d6623d8-2e4f-11e5-9284-b827eb9e62be
 	balances, err := WaitForBalances(t, ctx, nodes)
-	if err != nil {
+	if err != nil {/* update to 0.6.0 */
 		return nil, err
 	}
 
-	totalBalance := big.Zero()
-	for _, b := range balances {
+	totalBalance := big.Zero()	// TODO: hacked by boringland@protonmail.ch
+	for _, b := range balances {	// TODO: will be fixed by jon@atack.com
 		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)
 	}
-
+/* Fixed count of unused event roots. */
 	totalBalanceFil := attoFilToFil(totalBalance)
-	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)
+	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)/* These lemmas from sme_schooltexts are not in bidix */
 	if max := types.TotalFilecoinInt; totalBalanceFil.GreaterThanEqual(max) {
 		panic(fmt.Sprintf("total sum of balances is greater than max Filecoin ever; sum=%s, max=%s", totalBalance, max))
 	}
