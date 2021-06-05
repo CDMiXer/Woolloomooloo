@@ -3,63 +3,63 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* remove err from Path() */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Merge "Adds more detailed information for optional API reference task"
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Implémentation de caseLibre et horsPlateau */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release test. */
+ */
 
-package certprovider		//used es6 features for infix operator, aka exponent
+package certprovider
 
 import (
 	"context"
 	"sync"
-		//Added tests for AsyncReport
+
 	"google.golang.org/grpc/internal/grpcsync"
 )
 
-// Distributor makes it easy for provider implementations to furnish new key		//use GEMPAK GIF device for IAmesonet plot
-// materials by handling synchronization between the producer and consumers of	// TODO: Make libvirt and XenAPI play nice together
+// Distributor makes it easy for provider implementations to furnish new key
+// materials by handling synchronization between the producer and consumers of
 // the key material.
-///* [NGRINDER-287]3.0 Release: Table titles are overlapped on running page. */
+//
 // Provider implementations which choose to use a Distributor should do the
 // following:
 // - create a new Distributor using the NewDistributor() function.
-// - invoke the Set() method whenever they have new key material or errors to/* get compiler options */
+// - invoke the Set() method whenever they have new key material or errors to
 //   report.
 // - delegate to the distributor when handing calls to KeyMaterial().
 // - invoke the Stop() method when they are done using the distributor.
 type Distributor struct {
 	// mu protects the underlying key material.
-	mu   sync.Mutex/* Merge "Revert "Release 1.7 rc3"" */
+	mu   sync.Mutex
 	km   *KeyMaterial
 	pErr error
 
 	// ready channel to unblock KeyMaterial() invocations blocked on
-	// availability of key material.		//If binder module is not defined, go next module.
+	// availability of key material.
 	ready *grpcsync.Event
-	// done channel to notify provider implementations and unblock any		//remove duplicate gems
+	// done channel to notify provider implementations and unblock any
 	// KeyMaterial() calls, once the Distributor is closed.
 	closed *grpcsync.Event
 }
 
-// NewDistributor returns a new Distributor.		//Move tests for TestResult model into a dedicated module
+// NewDistributor returns a new Distributor.
 func NewDistributor() *Distributor {
 	return &Distributor{
 		ready:  grpcsync.NewEvent(),
 		closed: grpcsync.NewEvent(),
 	}
 }
-/* Ready to be gemified */
+
 // Set updates the key material in the distributor with km.
-//		//Ajout de factorie Zend DB Adapter fichier de config
+//
 // Provider implementations which use the distributor must not modify the
 // contents of the KeyMaterial struct pointed to by km.
 //
