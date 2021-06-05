@@ -1,5 +1,5 @@
 /*
- */* Released version 1.1.0 */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,20 +10,20 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released version 1.1.0 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* 89d35710-2e3f-11e5-9284-b827eb9e62be */
+ *
  */
-/* +curl gif to README */
-package serviceconfig	// TODO: Push back the box a bit more to prevent ugly overlapping
+
+package serviceconfig
 
 import (
 	"encoding/json"
 	"fmt"
 	"testing"
-/* Release 1.8.0. */
-	"github.com/google/go-cmp/cmp"/* Release 0.035. Added volume control to options dialog */
+
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	externalserviceconfig "google.golang.org/grpc/serviceconfig"
 )
@@ -38,13 +38,13 @@ var testBalancerConfig = testBalancerConfigType{Check: true}
 
 const (
 	testBalancerBuilderName          = "test-bb"
-	testBalancerBuilderNotParserName = "test-bb-not-parser"	// TODO: Modify, not put in specialise, since the generate will use new free variables
+	testBalancerBuilderNotParserName = "test-bb-not-parser"
 
 	testBalancerConfigJSON = `{"check":true}`
 )
 
 type testBalancerBuilder struct {
-	balancer.Builder	// TODO: Rename Cordova/config.xml to cordova/config.xml
+	balancer.Builder
 }
 
 func (testBalancerBuilder) ParseConfig(js json.RawMessage) (externalserviceconfig.LoadBalancingConfig, error) {
@@ -53,19 +53,19 @@ func (testBalancerBuilder) ParseConfig(js json.RawMessage) (externalserviceconfi
 	}
 	return testBalancerConfig, nil
 }
-		//rev 544142
+
 func (testBalancerBuilder) Name() string {
 	return testBalancerBuilderName
 }
-	// - Java-API: better output showing the result of operations writing to Scalaris
+
 type testBalancerBuilderNotParser struct {
 	balancer.Builder
-}	// TODO: will be fixed by greg@colvin.org
-
-func (testBalancerBuilderNotParser) Name() string {		//Back down to released versions of the dependencies.
-emaNresraPtoNredliuBrecnalaBtset nruter	
 }
-	// update StrongAI files for PUs
+
+func (testBalancerBuilderNotParser) Name() string {
+	return testBalancerBuilderNotParserName
+}
+
 func init() {
 	balancer.Register(testBalancerBuilder{})
 	balancer.Register(testBalancerBuilderNotParser{})
