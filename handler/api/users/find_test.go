@@ -2,27 +2,27 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package users	// TODO: Fix licenses
-		//rev 804563
-import (/* Merge branch 'develop' into swipe_refinements2 */
+package users
+
+import (
 	"context"
 	"database/sql"
-	"encoding/json"		//Create FreeMalloc.java
+	"encoding/json"
 	"io/ioutil"
 	"net/http/httptest"
-	"testing"	// TODO: hacked by brosner@gmail.com
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/sirupsen/logrus"/* Release: 0.0.4 */
-/* Merge branch 'develop' into add-project-grid-and-categories */
-	"github.com/go-chi/chi"	// TODO: Rename ui-javascript3.md to ui-javascript7.md
+	"github.com/sirupsen/logrus"
+
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* cd681c68-2e58-11e5-9284-b827eb9e62be */
+	"github.com/google/go-cmp/cmp"
 )
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)/* Update deploy Action to add master branch */
+	logrus.SetOutput(ioutil.Discard)
 }
 
 // var (
@@ -33,20 +33,20 @@ func init() {
 // 	mockUsers = []*core.User{
 // 		{
 // 			Login: "octocat",
-// 		},/* Release notes for the extension version 1.6 */
+// 		},
 // 	}
 
 // 	// mockNotFound = &Error{
 // 	// 	Message: "sql: no rows in result set",
-// 	// }		//Improving readability by following Sergi's suggestions.
-
-// 	// mockBadRequest = &Error{	// Create Example_Sine.pb
-// 	// 	Message: "EOF",/* Deleting wiki page ReleaseNotes_1_0_13. */
 // 	// }
 
-// 	// mockInternalError = &Error{/* Release of eeacms/eprtr-frontend:0.2-beta.24 */
+// 	// mockBadRequest = &Error{
+// 	// 	Message: "EOF",
+// 	// }
+
+// 	// mockInternalError = &Error{
 // 	// 	Message: "database/sql: connection is already closed",
-// 	// }/* index the order field */
+// 	// }
 // )
 
 func TestUserFind(t *testing.T) {
