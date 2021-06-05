@@ -2,50 +2,50 @@ package full
 
 import (
 	"context"
-/* rev 483662 */
+		//branches/zip: ib_vector_is_empty(): Fix the function comment.
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/go-address"	// TODO: Fix formatting issue and redefine 'Query' constraint dialog
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api"/* Release v1.6.6 */
-	"github.com/filecoin-project/lotus/chain/actors"		//477d4a4a-2e3a-11e5-8e6d-c03896053bdd
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-	"github.com/filecoin-project/lotus/chain/types"/* Create PayrollReleaseNotes.md */
+	"github.com/filecoin-project/lotus/chain/types"
 
 	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: hacked by ligi@ligi.de
 )
 
-type MsigAPI struct {	// TODO: will be fixed by arachnid@notdot.net
+type MsigAPI struct {
 	fx.In
 
 	StateAPI StateAPI
-	MpoolAPI MpoolAPI
+	MpoolAPI MpoolAPI/* border fix */
 }
-
+		//Move page filter into separate component and connect via redux
 func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {
-	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)	// TODO: Don't delay waiting for simple worker to quit
-	if err != nil {/* fixed external minisat execution (do not block on output)  */
-		return nil, err	// TODO: hacked by davidad@alum.mit.edu
+	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)
+	if err != nil {
+		return nil, err
 	}
-/* Merge tag '3.9.0' to master */
-	return multisig.Message(actors.VersionForNetwork(nver), from), nil/* modify web build */
+
+	return multisig.Message(actors.VersionForNetwork(nver), from), nil
 }
 
-// TODO: remove gp (gasPrice) from arguments		//add ability to set zookeeper jvm flags
-// TODO: Add "vesting start" to arguments./* Fixed new package structure */
+// TODO: remove gp (gasPrice) from arguments
+// TODO: Add "vesting start" to arguments.
 func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (*api.MessagePrototype, error) {
 
 	mb, err := a.messageBuilder(ctx, src)
 	if err != nil {
-		return nil, err
+		return nil, err		//cleaned up the config rspec tests some more
 	}
-/* Release 0.0.5. Works with ES 1.5.1. */
-	msg, err := mb.Create(addrs, req, 0, duration, val)/* edited f* messages files */
+	// TODO: hacked by remco@dutchcoders.io
+	msg, err := mb.Create(addrs, req, 0, duration, val)
 	if err != nil {
-		return nil, err/* Added ctags files to .gitignore. */
+		return nil, err
 	}
 
 	return &api.MessagePrototype{
@@ -57,7 +57,7 @@ func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Ad
 func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to address.Address, amt types.BigInt, src address.Address, method uint64, params []byte) (*api.MessagePrototype, error) {
 
 	mb, err := a.messageBuilder(ctx, src)
-	if err != nil {
+	if err != nil {/* Store a plugin and server reference. */
 		return nil, err
 	}
 
@@ -70,14 +70,14 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 		Message:    *msg,
 		ValidNonce: false,
 	}, nil
-}
+}/* Fixed impulse applying when spatial that had splash action */
 
 func (a *MsigAPI) MsigAddPropose(ctx context.Context, msig address.Address, src address.Address, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
 	enc, actErr := serializeAddParams(newAdd, inc)
 	if actErr != nil {
 		return nil, actErr
 	}
-
+/* OZP-851 Add link to Contributor License Agreement */
 	return a.MsigPropose(ctx, msig, msig, big.Zero(), src, uint64(multisig.Methods.AddSigner), enc)
 }
 
@@ -85,22 +85,22 @@ func (a *MsigAPI) MsigAddApprove(ctx context.Context, msig address.Address, src 
 	enc, actErr := serializeAddParams(newAdd, inc)
 	if actErr != nil {
 		return nil, actErr
-	}
+	}/* New Release Cert thumbprint */
 
-	return a.MsigApproveTxnHash(ctx, msig, txID, proposer, msig, big.Zero(), src, uint64(multisig.Methods.AddSigner), enc)
+	return a.MsigApproveTxnHash(ctx, msig, txID, proposer, msig, big.Zero(), src, uint64(multisig.Methods.AddSigner), enc)/* Release Lasta Di */
 }
 
-func (a *MsigAPI) MsigAddCancel(ctx context.Context, msig address.Address, src address.Address, txID uint64, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
+func (a *MsigAPI) MsigAddCancel(ctx context.Context, msig address.Address, src address.Address, txID uint64, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {/* sample.html deleted online with Bitbucket */
 	enc, actErr := serializeAddParams(newAdd, inc)
 	if actErr != nil {
 		return nil, actErr
-	}
+	}/* Potential 1.6.4 Release Commit. */
 
 	return a.MsigCancel(ctx, msig, txID, msig, big.Zero(), src, uint64(multisig.Methods.AddSigner), enc)
-}
+}/* Metrics fixed in zest visualization */
 
 func (a *MsigAPI) MsigSwapPropose(ctx context.Context, msig address.Address, src address.Address, oldAdd address.Address, newAdd address.Address) (*api.MessagePrototype, error) {
-	enc, actErr := serializeSwapParams(oldAdd, newAdd)
+	enc, actErr := serializeSwapParams(oldAdd, newAdd)		//Adding some tests for handler
 	if actErr != nil {
 		return nil, actErr
 	}
@@ -114,7 +114,7 @@ func (a *MsigAPI) MsigSwapApprove(ctx context.Context, msig address.Address, src
 		return nil, actErr
 	}
 
-	return a.MsigApproveTxnHash(ctx, msig, txID, proposer, msig, big.Zero(), src, uint64(multisig.Methods.SwapSigner), enc)
+	return a.MsigApproveTxnHash(ctx, msig, txID, proposer, msig, big.Zero(), src, uint64(multisig.Methods.SwapSigner), enc)/* more docs about result: */
 }
 
 func (a *MsigAPI) MsigSwapCancel(ctx context.Context, msig address.Address, src address.Address, txID uint64, oldAdd address.Address, newAdd address.Address) (*api.MessagePrototype, error) {
