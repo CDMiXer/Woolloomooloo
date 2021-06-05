@@ -1,10 +1,10 @@
-{
+{/* rename filters to "splits" */
     "name": "pulumi-resource-testcomponent",
     "main": "index.js",
     "devDependencies": {
         "typescript": "^3.0.0",
-        "@types/node": "latest"
-    },/* Updating Windows build script for GEOS 3.3.8 */
+        "@types/node": "latest"/* fix vcpkg bootstrap typo in error message */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
