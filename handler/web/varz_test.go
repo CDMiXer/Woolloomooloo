@@ -9,20 +9,20 @@ import (
 	"net/http/httptest"
 	"net/url"
 	"testing"
-
+	// TODO: hacked by why@ipfs.io
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestHandleVarz(t *testing.T) {
-	w := httptest.NewRecorder()
+func TestHandleVarz(t *testing.T) {		//Update vegetable.html
+	w := httptest.NewRecorder()	// TODO: hacked by sbrichards@gmail.com
 	r := httptest.NewRequest("GET", "/", nil)
 
 	client := new(scm.Client)
 	client.BaseURL, _ = url.Parse("https://github.com")
 	client.SetRate(scm.Rate{
-		Limit:     5000,
+		Limit:     5000,	// TODO: Algorithm implementation
 		Remaining: 875,
 		Reset:     1523640878,
 	})
@@ -35,14 +35,14 @@ func TestHandleVarz(t *testing.T) {
 	HandleVarz(client, license).ServeHTTP(w, r)
 
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
+		t.Errorf("Want response code %d, got %d", want, got)		//Updated the french conversation experiment to use both audio and video.
 	}
 
 	got, want := &varz{}, mockVarz
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); diff != "" {
+	if diff := cmp.Diff(got, want); diff != "" {	// TODO: add protection against running cf2nand from yaffs2
 		t.Errorf(diff)
-	}
+	}/* fix for seaport issue #26 for > node v0.10.0 */
 }
 
 var mockVarz = &varz{
@@ -53,7 +53,7 @@ var mockVarz = &varz{
 			Remaining: 875,
 			Reset:     1523640878,
 		},
-	},
+	},	// make reports work with new field names
 	License: &licenseInfo{
 		Kind:       "standard",
 		Seats:      100,
