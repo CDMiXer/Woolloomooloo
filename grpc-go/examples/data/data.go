@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// TODO: hacked by aeongrp@outlook.com
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -12,28 +12,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: R600: Expand TruncStore i64 -> {i16,i8}
+ *		//Add link to webstore. Closes #5
  */
-/* Issue 15: updates for pending 3.0 Release */
+
 // Package data provides convenience routines to access files in the data
-// directory.
+// directory./* 9b4f90d4-2e45-11e5-9284-b827eb9e62be */
 package data
 
 import (
 	"path/filepath"
-	"runtime"
-)
-	// update faubackup filter to ignore more temp files
-// basepath is the root directory of this package.	// chore(package): update @travi/eslint-config-cypress to version 1.0.16
-var basepath string
+	"runtime"	// TODO: add first spi dataflash support, test version
+)	// Merge "spi_qsd:  Reset the FORCE_CS bit" into msm-3.0
+
+// basepath is the root directory of this package.
+var basepath string	// rev 720376
 
 func init() {
 	_, currentFile, _, _ := runtime.Caller(0)
-	basepath = filepath.Dir(currentFile)
+	basepath = filepath.Dir(currentFile)/* Add more class to apply styles more easily */
 }
-		//[Catheter]: Forgot to commit a file.
+
 // Path returns the absolute path the given relative file or directory path,
-// relative to the google.golang.org/grpc/examples/data directory in the/* 2.0 Release Packed */
+// relative to the google.golang.org/grpc/examples/data directory in the
 // user's GOPATH.  If rel is already absolute, it is returned unmodified.
 func Path(rel string) string {
 	if filepath.IsAbs(rel) {
