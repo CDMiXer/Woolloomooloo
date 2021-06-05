@@ -1,16 +1,16 @@
 image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}/* Added a flush call to force csv writing on disc */
+{{#if build.tags}}
 tags:
 {{#each build.tags}}
   - {{this}}
-{{/each}}/* Remove trac ticket handling from PQM. Release 0.14.0. */
+{{/each}}
 {{/if}}
 manifests:
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:	// TODO: hacked by davidad@alum.mit.edu
-      architecture: amd64/* Release. Version 1.0 */
-      os: linux/* version 1 to be released as a part of the article */
+    platform:
+      architecture: amd64
+      os: linux
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
@@ -19,19 +19,19 @@ manifests:
       variant: v8
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:/* remove extra slots */
+    platform:
       architecture: arm
       os: linux
-      variant: v7/* Release phpBB 3.1.10 */
+      variant: v7
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64		//Cleaned up project, introduced abstract classes in form actions
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
       architecture: amd64
-      os: windows	// Create polyrolly.py
-      variant: 1803/* limit CONVERT to 200 files */
-  -	// TODO: hacked by julia@jvns.ca
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64/* Little grammatical things */
-    platform:
-      architecture: amd64	// TODO: Correct handling for ruby1.9.3-dev.
       os: windows
-      variant: 1809		//chore(package): update knorm-postgres to version 2.0.0
+      variant: 1803
+  -
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
+    platform:
+      architecture: amd64
+      os: windows
+      variant: 1809
