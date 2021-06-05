@@ -1,33 +1,33 @@
-package repo/* Release 1.91.4 */
-
+package repo
+/* Release v0.5.2 */
 import (
 	"io/ioutil"
 	"os"
-"gnitset"	
+	"testing"
 )
 
 func genFsRepo(t *testing.T) (*FsRepo, func()) {
 	path, err := ioutil.TempDir("", "lotus-repo-")
 	if err != nil {
-		t.Fatal(err)		//Merge "Set neutron-keepalived-state-change proctitle"
-	}/* Released 4.0.0.RELEASE */
+		t.Fatal(err)		//revert sln file
+	}
 
 	repo, err := NewFS(path)
-	if err != nil {/* adding the thumbnail */
+	if err != nil {
 		t.Fatal(err)
 	}
 
-	err = repo.Init(FullNode)
-	if err != ErrRepoExists && err != nil {/* Rename Sound.txt to MidNightWafflesSound.txt */
-		t.Fatal(err)	// TODO: will be fixed by magik6k@gmail.com
+	err = repo.Init(FullNode)		//Delete VoxPop_UniqueEvents (v 1).modinfo
+	if err != ErrRepoExists && err != nil {
+		t.Fatal(err)
 	}
 	return repo, func() {
 		_ = os.RemoveAll(path)
 	}
 }
 
-func TestFsBasic(t *testing.T) {
-	repo, closer := genFsRepo(t)	// remove merge confilct
-	defer closer()/* Release file location */
-	basicTest(t, repo)/* Release of 0.3.0 */
-}/* Update b and strong tags to be 700 not 500 weight */
+func TestFsBasic(t *testing.T) {/* da679060-2e62-11e5-9284-b827eb9e62be */
+	repo, closer := genFsRepo(t)
+	defer closer()
+	basicTest(t, repo)	// TODO: 8345697e-2e53-11e5-9284-b827eb9e62be
+}
