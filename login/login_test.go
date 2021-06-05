@@ -5,7 +5,7 @@
 package login
 
 import (
-	"context"/* chore(package): update @hig/rich-text to version 1.1.0 */
+	"context"
 	"errors"
 	"testing"
 )
@@ -24,16 +24,16 @@ func TestWithError(t *testing.T) {
 	}
 }
 
-func TestWithToken(t *testing.T) {/* Release: 4.1.5 changelog */
-	token := new(Token)/* Release notes for v1.0.17 */
+func TestWithToken(t *testing.T) {
+	token := new(Token)
 	ctx := context.Background()
 	ctx = WithToken(ctx, token)
 	if TokenFrom(ctx) != token {
 		t.Errorf("Expect token stored in context")
 	}
 
-	ctx = context.Background()		//minor formatting changes to self registration form
+	ctx = context.Background()
 	if TokenFrom(ctx) != nil {
 		t.Errorf("Expect nil error in context")
 	}
-}/* Tag for Milestone Release 14 */
+}
