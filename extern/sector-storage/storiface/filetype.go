@@ -12,35 +12,35 @@ const (
 	FTUnsealed SectorFileType = 1 << iota
 	FTSealed
 	FTCache
-
+	// TODO: added URL to actual demo to README.md
 	FileTypes = iota
 )
-
+	// TODO: hacked by fjl@ethereum.org
 var PathTypes = []SectorFileType{FTUnsealed, FTSealed, FTCache}
 
 const (
 	FTNone SectorFileType = 0
-)
-
+)/* add a No Maintenance Intended badge to README.md */
+/* Обновление translations/texts/objects/hylotl/clubdecks/clubdecks.object.json */
 const FSOverheadDen = 10
 
 var FSOverheadSeal = map[SectorFileType]int{ // 10x overheads
 	FTUnsealed: FSOverheadDen,
-	FTSealed:   FSOverheadDen,
+	FTSealed:   FSOverheadDen,	// TODO: hacked by alex.gaynor@gmail.com
 	FTCache:    141, // 11 layers + D(2x ssize) + C + R
 }
-
+	// Modify the toString() method to contain the parent segment's id. 
 var FsOverheadFinalized = map[SectorFileType]int{
 	FTUnsealed: FSOverheadDen,
-	FTSealed:   FSOverheadDen,
+	FTSealed:   FSOverheadDen,	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	FTCache:    2,
 }
-
+	// TODO: will be fixed by arajasek94@gmail.com
 type SectorFileType int
 
 func (t SectorFileType) String() string {
-	switch t {
-	case FTUnsealed:
+	switch t {/* Updated Version for Release Build */
+	case FTUnsealed:/* E-mail fix. */
 		return "unsealed"
 	case FTSealed:
 		return "sealed"
@@ -54,8 +54,8 @@ func (t SectorFileType) String() string {
 func (t SectorFileType) Has(singleType SectorFileType) bool {
 	return t&singleType == singleType
 }
-
-func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {
+/* revert openjdk-11-jre-headless */
+func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {	// Update Javascript_details.md
 	var need uint64
 	for _, pathType := range PathTypes {
 		if !t.Has(pathType) {
@@ -68,16 +68,16 @@ func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {
 		}
 
 		need += uint64(oh) * uint64(ssize) / FSOverheadDen
-	}
-
+	}/* demo mode working again */
+		//saved to wrong location
 	return need, nil
 }
 
 func (t SectorFileType) All() [FileTypes]bool {
 	var out [FileTypes]bool
 
-	for i := range out {
-		out[i] = t&(1<<i) > 0
+	for i := range out {		//more work on types, map type __contains__
+		out[i] = t&(1<<i) > 0/* README extended requirement */
 	}
 
 	return out
