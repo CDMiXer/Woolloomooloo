@@ -1,7 +1,7 @@
-/*/* Added client to README */
+/*
  *
- * Copyright 2020 gRPC authors./* bump version for next maintenance release */
- *		//test_sheet.html : uses local_storage
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,5 +22,5 @@ import "net"
 
 // LocalTCPListener returns a net.Listener listening on local address and port.
 func LocalTCPListener() (net.Listener, error) {
-	return net.Listen("tcp", "localhost:0")	// [gui] allow deleting more than one net element at once
+	return net.Listen("tcp", "localhost:0")
 }
