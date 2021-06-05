@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {/* Add .git extension to package references */
       "type": "integer",
       "enum": [
         {
           "value": 1
-        },/* add unit tests for variable and mixin usage and definition */
-        {	// TODO: hacked by ligi@ligi.de
-          "value": 2
         },
         {
-          "value": 3
-        },/* reconciled benchmarks to directory structure */
+          "value": 2
+        },/* bump major release */
         {
-          "value": 9.1
+          "value": 3
+        },
+        {
+          "value": 9.1	// Update catchMSY_model.R
         }
-      ]/* Add a function to make a fringe from actual data */
+      ]		//0OKMd2pT96ZehHQN3ayerTF22CY3RTNF
     }
   }
 }
