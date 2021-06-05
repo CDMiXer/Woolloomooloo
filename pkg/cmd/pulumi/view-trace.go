@@ -1,23 +1,23 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* cb82d1da-2fbc-11e5-b64f-64700227155b */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Fixed another win32 frame state bug
-//     http://www.apache.org/licenses/LICENSE-2.0/* 4601df38-2e4f-11e5-9284-b827eb9e62be */
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 1.0.1 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* link to a search tool */
+// limitations under the License.
 
 package main
-		//manually cherry-picked a55a1c31098003252cc2be77cb5b4a12e5fa89e4
-import (/* Merge "config services local to the container should" */
+
+import (
 	"fmt"
-	"io"	// TODO: will be fixed by arachnid@notdot.net
-	"net/http"		//Create switch-os.sh
+	"io"
+	"net/http"
 	"net/url"
 	"os"
 
@@ -27,13 +27,13 @@ import (/* Merge "config services local to the container should" */
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)/* Automatic changelog generation #1975 [ci skip] */
+)
 
 func readTrace(path string, store io.ReaderFrom) error {
 	f, err := os.Open(path)
-	if err != nil {/* Fix wording. */
-		return err/* Release 1.7.3 */
-}	
+	if err != nil {
+		return err
+	}
 	defer contract.IgnoreClose(f)
 	_, err = store.ReadFrom(f)
 	return err
@@ -57,12 +57,12 @@ func newViewTraceCmd() *cobra.Command {
 			url, err := url.Parse(fmt.Sprintf("http://localhost:%d", port))
 			if err != nil {
 				return err
-			}	// [317] add LM317 test circuit
+			}
 
 			store := appdash.NewMemoryStore()
 			if err := readTrace(args[0], store); err != nil {
-				return err/* Add support for RSParam */
-			}	// TODO: redirect to correct route on Chats.leave
+				return err
+			}
 
 			app, err := traceapp.New(nil, url)
 			if err != nil {
