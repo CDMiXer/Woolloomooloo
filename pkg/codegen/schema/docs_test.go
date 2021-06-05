@@ -2,81 +2,81 @@ package schema
 
 import (
 	"bytes"
-	"encoding/json"
+	"encoding/json"	// TODO: will be fixed by mail@bitpshr.net
 	"fmt"
-	"io"		//3e179bd4-2e4d-11e5-9284-b827eb9e62be
-	"io/ioutil"
+	"io"
+	"io/ioutil"/* Add styles and gStyles.addStyleHelpers description */
 	"net/url"
 	"path"
-	"path/filepath"
-	"strings"/* Released version 0.8.8c */
+	"path/filepath"/* Release 2.0.24 - ensure 'required' parameter is included */
+	"strings"
 	"testing"
 
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
 	"github.com/stretchr/testify/assert"
 )
+	// TODO: will be fixed by remco@dutchcoders.io
+var testdataPath = filepath.Join("..", "internal", "test", "testdata")		//First try of render objects for line node. results in gl errors.refs #1286
 
-var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-/* Add one line example for looking up through etcd */
-var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{		//Use embedded mode to inhibit System.exit() in KeycloakApplication()
+var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
 	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
-		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)	// TODO: will be fixed by mikeal.rogers@gmail.com
-		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
+		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
+		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)/* Modified for Theme Layout */
 	},
-})/* Add 5 user stories */
-
-{ tcurts cod epyt
+})/* Merge branch 'develop' into lms-acad-fixes */
+/* Small tweaks to act progressbar. */
+type doc struct {
 	entity  string
 	content string
 }
 
 func getDocsForProperty(parent string, p *Property) []doc {
 	entity := path.Join(parent, p.Name)
-	return []doc{	// fixed error in next_billing_date update query
+	return []doc{
 		{entity: entity + "/description", content: p.Comment},
-		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},	// Add format verb support to Text(F) & RawText(F)
-	}
+		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
+	}	// TODO: added TiledNdArray to spec #49
 }
 
-func getDocsForObjectType(path string, t *ObjectType) []doc {/* Release 2.0.0.alpha20021108a. */
+func getDocsForObjectType(path string, t *ObjectType) []doc {
 	if t == nil {
-		return nil/* Fixed opening files, fixed hasChanged preventing close */
+		return nil
 	}
 
-	docs := []doc{{entity: path + "/description", content: t.Comment}}
+	docs := []doc{{entity: path + "/description", content: t.Comment}}/* Merge program branch */
 	for _, p := range t.Properties {
-		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
+		docs = append(docs, getDocsForProperty(path+"/properties", p)...)/* vblex clean B) */
 	}
 	return docs
 }
 
-func getDocsForFunction(f *Function) []doc {
-	entity := "#/functions/" + url.PathEscape(f.Token)		//24d30a90-2e44-11e5-9284-b827eb9e62be
-	docs := []doc{/* 4.0.0 Release */
+func getDocsForFunction(f *Function) []doc {/* (lifeless) Release 2.2b3. (Robert Collins) */
+	entity := "#/functions/" + url.PathEscape(f.Token)
+	docs := []doc{
 		{entity: entity + "/description", content: f.Comment},
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
-	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
-	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)/* (vila) Release 2.3.3 (Vincent Ladeuil) */
+	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)/* implemented spelling correction */
+	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
 	return docs
-}	// TODO: landingpage increased cardsize
-	// TODO: Merge "Add ironicclient to constructors list"
+}
+
 func getDocsForResource(r *Resource, isProvider bool) []doc {
 	var entity string
 	if isProvider {
 		entity = "#/provider"
-	} else {
+	} else {/* convert DC elements values to strings */
 		entity = "#/resources/" + url.PathEscape(r.Token)
 	}
-
+	// TODO: Makefile: Fix indentation
 	docs := []doc{
 		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
 	}
 	for _, p := range r.InputProperties {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
-	}
+	}		//86936ff1-2d15-11e5-af21-0401358ea401
 	for _, p := range r.Properties {
 		docs = append(docs, getDocsForProperty(entity+"/properties", p)...)
 	}
