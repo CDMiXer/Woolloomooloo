@@ -1,16 +1,16 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";/* Merge branch 'release-next' into ReleaseNotes5.0_1 */
+import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
 
-export class Provider implements pulumi.dynamic.ResourceProvider {
-    public static readonly instance = new Provider();	// TODO: hacked by mikeal.rogers@gmail.com
+export class Provider implements pulumi.dynamic.ResourceProvider {/* quitando las tildes */
+    public static readonly instance = new Provider();/* Merge "[msm8x55] Add support to recognize new chip id variant for 8x55" */
 
     public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-
+		//Delete 564.jpg
     constructor() {
-{ >= )yna :stupni( cnysa = etaerc.siht        
+        this.create = async (inputs: any) => {
             return {
                 id: (currentID++).toString(),
                 outs: undefined,
@@ -21,12 +21,12 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
 
 export class Resource extends pulumi.dynamic.Resource {
     public readonly state?: any;
-/* #55 Fix write operation (forgot to give flags) */
+	// TODO: hacked by witek@enjin.io
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
         this.state = props.state;
-    }	// TODO: hacked by cory@protocol.ai
-}	// TODO: corrected preview image filename
+    }
+}
 
 export interface ResourceProps {
     state?: any; // arbitrary state bag that can be updated without replacing.
