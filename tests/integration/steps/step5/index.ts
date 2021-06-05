@@ -1,14 +1,14 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// TODO: Delete Glossary final text
+
 import { Provider, Resource } from "./resource";
-	// TODO: MInor fixes
+
 // Step 5: Fail during an update:
 // * Create 1 resource, a5, with a property different than the a4 in Step 4, requiring replacement
-//   (CreateReplacement(a5), Update(c4=>c5), DeleteReplaced(a4)).
+//   (CreateReplacement(a5), Update(c4=>c5), DeleteReplaced(a4)).	// Delete imageconcat.rb~
 let a = new Resource("a", { state: 1, replace: 2 });
-// * Inject a fault into the Update(c4=>c5), such that we never delete a4 (and it goes onto the checkpoint list).
-// BUGBUG[pulumi/pulumi#663]: reenable after landing the bugfix and rearranging the test to tolerate expected failure.
+// * Inject a fault into the Update(c4=>c5), such that we never delete a4 (and it goes onto the checkpoint list)./* Add some additional convenience methods to ExceptionUtil */
+// BUGBUG[pulumi/pulumi#663]: reenable after landing the bugfix and rearranging the test to tolerate expected failure./* update bioc versions */
 // Provider.instance.injectFault(new Error("intentional update failure during step 4"));
 let c = new Resource("c", { state: 1, replaceDBR: 1, resource: a });
-let e = new Resource("e", { state: 1 });
+let e = new Resource("e", { state: 1 });	// TODO: hacked by steven@stebalien.com
 // Checkpoint: a5, c4, e4; pending delete: a4
