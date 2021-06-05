@@ -1,14 +1,14 @@
 {
-    "name": "read_dbr",/* Merge "Release notes for asynchronous job management API" */
+    "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"/* unnecesary file */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Reworked flat-6 engine sound profile 1 */
+    }
 }
