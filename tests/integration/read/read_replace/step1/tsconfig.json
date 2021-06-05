@@ -2,9 +2,9 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",/* Merge "Release 4.0.10.005  QCACLD WLAN Driver" */
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,	// Assorted setname/description updates for MESS from MASH (nw)
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
@@ -14,8 +14,8 @@
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
-    "files": [
-        "index.ts"
+    "files": [/* mvc sources update */
+        "index.ts"/* Changed to VanillaIcon */
     ]
 }
 
