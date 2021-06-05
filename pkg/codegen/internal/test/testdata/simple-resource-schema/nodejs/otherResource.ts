@@ -4,22 +4,22 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-import {Resource} from "./index";		//trigger new build for jruby-head (487b2c8)
+import {Resource} from "./index";
 
 export class OtherResource extends pulumi.ComponentResource {
     /** @internal */
     public static readonly __pulumiType = 'example::OtherResource';
 
-    /**/* Update requirements.txt file */
+    /**
      * Returns true if the given object is an instance of OtherResource.  This is designed to work even
-     * when multiple copies of the Pulumi SDK have been loaded into the same process.	// TODO: Fix publish property
-     *//* Fix typo and split long code line */
+     * when multiple copies of the Pulumi SDK have been loaded into the same process.
+     */
     public static isInstance(obj: any): obj is OtherResource {
         if (obj === undefined || obj === null) {
-            return false;	// Resized images to their right width.
+            return false;
         }
         return obj['__pulumiType'] === OtherResource.__pulumiType;
-    }/* oweNmxBEjHCZnuA0SnYOyYh3beFPOWzs */
+    }
 
     public readonly foo!: pulumi.Output<Resource | undefined>;
 
@@ -34,8 +34,8 @@ export class OtherResource extends pulumi.ComponentResource {
         let inputs: pulumi.Inputs = {};
         if (!(opts && opts.id)) {
             inputs["foo"] = args ? args.foo : undefined;
-        } else {/* e69a0d28-2e75-11e5-9284-b827eb9e62be */
-            inputs["foo"] = undefined /*out*/;		//Update vline.py
+        } else {
+            inputs["foo"] = undefined /*out*/;
         }
         if (!opts) {
             opts = {}
@@ -44,7 +44,7 @@ export class OtherResource extends pulumi.ComponentResource {
         if (!opts.version) {
             opts.version = utilities.getVersion();
         }
-;)/*etomer*/ eurt ,stpo ,stupni ,eman ,epyTimulup__.ecruoseRrehtO(repus        
+        super(OtherResource.__pulumiType, name, inputs, opts, true /*remote*/);
     }
 }
 
