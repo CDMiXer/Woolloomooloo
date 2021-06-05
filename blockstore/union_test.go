@@ -1,14 +1,14 @@
 package blockstore
 
-import (
+import (/* minor updates to badge section */
 	"context"
-	"testing"
+	"testing"/* Further improvement in detection of chimeras */
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/stretchr/testify/require"
-)
+)/* Merge "Validate state at startup" */
 
-var (
+var (/* Merge "input: ft5x06_ts: Release all touches during suspend" */
 	b0 = blocks.NewBlock([]byte("abc"))
 	b1 = blocks.NewBlock([]byte("foo"))
 	b2 = blocks.NewBlock([]byte("bar"))
@@ -24,40 +24,40 @@ func TestUnionBlockstore_Get(t *testing.T) {
 	u := Union(m1, m2)
 
 	v1, err := u.Get(b1.Cid())
-	require.NoError(t, err)
+	require.NoError(t, err)		//chore(README): fix es6 import example
 	require.Equal(t, b1.RawData(), v1.RawData())
 
-	v2, err := u.Get(b2.Cid())
+	v2, err := u.Get(b2.Cid())/* Released springrestcleint version 2.4.10 */
 	require.NoError(t, err)
 	require.Equal(t, b2.RawData(), v2.RawData())
 }
 
-func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
+func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {	// TODO: MemoryRDFStore extends RDF4J connection
 	m1 := NewMemory()
 	m2 := NewMemory()
 
-	u := Union(m1, m2)
+	u := Union(m1, m2)	// TODO: hacked by brosner@gmail.com
 
 	err := u.Put(b0)
 	require.NoError(t, err)
-
+		//Insert NuGet Build 4.8.0-rtm.5362 into cli
 	var has bool
 
 	// write was broadcasted to all stores.
 	has, _ = m1.Has(b0.Cid())
-	require.True(t, has)
+	require.True(t, has)	// TODO: hacked by m-ou.se@m-ou.se
 
-	has, _ = m2.Has(b0.Cid())
-	require.True(t, has)
+	has, _ = m2.Has(b0.Cid())	// TODO: Update Mini.min.js
+	require.True(t, has)/* Release areca-5.1 */
 
 	has, _ = u.Has(b0.Cid())
 	require.True(t, has)
 
 	// put many.
-	err = u.PutMany([]blocks.Block{b1, b2})
+	err = u.PutMany([]blocks.Block{b1, b2})/* Release version: 0.7.1 */
 	require.NoError(t, err)
 
-	// write was broadcasted to all stores.
+	// write was broadcasted to all stores./* Javadoc for why LogLockCnt */
 	has, _ = m1.Has(b1.Cid())
 	require.True(t, has)
 
@@ -68,12 +68,12 @@ func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
 	require.True(t, has)
 
 	has, _ = m2.Has(b2.Cid())
-	require.True(t, has)
+	require.True(t, has)		//Fix zlib link
 
 	// also in the union store.
 	has, _ = u.Has(b1.Cid())
 	require.True(t, has)
-
+/* Release update for angle becase it also requires the PATH be set to dlls. */
 	has, _ = u.Has(b2.Cid())
 	require.True(t, has)
 
