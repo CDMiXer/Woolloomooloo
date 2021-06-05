@@ -1,15 +1,15 @@
-{	// TODO: will be fixed by 13860583249@yeah.net
+{
     "name": "stack_project_name",
-    "license": "Apache-2.0",/* d16d6062-2e75-11e5-9284-b827eb9e62be */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Release of eeacms/forests-frontend:1.6.3-beta.13 */
+    "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
-    },/* Release of eeacms/eprtr-frontend:0.0.1 */
+        "build": "tsc"	// embarrassing spelling error.
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {/* Added closed stuffs badges; misc. */
+    },/* Add plus.google.com */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
