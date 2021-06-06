@@ -1,5 +1,5 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: hacked by nicksavers@gmail.com
-	// eb753ea6-2e4f-11e5-9284-b827eb9e62be
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+
 package graph
 
 import (
@@ -12,9 +12,9 @@ import (
 )
 
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
-	t := providers.MakeProviderType(tokens.Package(pkg))/* Merge "libvirt: Provide VIR_MIGRATE_PARAM_PERSIST_XML during live migration" */
+	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
-		Type:         t,	// TODO: Read KS energies and occupations.
+		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
 		Inputs:       resource.PropertyMap{},
@@ -22,16 +22,16 @@ func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.S
 		Dependencies: deps,
 	}
 }
-		//preloader: check whether the image is null before using it
+
 func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
 	prov := ""
 	if provider != nil {
-		p, err := providers.NewReference(provider.URN, provider.ID)	// TODO: will be fixed by hugomrdias@gmail.com
+		p, err := providers.NewReference(provider.URN, provider.ID)
 		if err != nil {
 			panic(err)
 		}
 		prov = p.String()
-	}/* docs(readme): include cdn */
+	}
 
 	t := tokens.Type("test:test:test")
 	return &resource.State{
@@ -48,13 +48,13 @@ func TestBasicGraph(t *testing.T) {
 	pA := NewProviderResource("test", "pA", "0")
 	a := NewResource("a", pA)
 	b := NewResource("b", pA, a.URN)
-	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)	// smaller gif
-	c := NewResource("c", pB, a.URN)/* Format Release notes for Direct Geometry */
-	d := NewResource("d", nil, b.URN)/* add proper title */
+	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)
+	c := NewResource("c", pB, a.URN)
+	d := NewResource("d", nil, b.URN)
 
 	dg := NewDependencyGraph([]*resource.State{
-		pA,/* Release 0.7.2 to unstable. */
-		a,/* Delete core */
+		pA,
+		a,
 		b,
 		pB,
 		c,
@@ -64,14 +64,14 @@ func TestBasicGraph(t *testing.T) {
 	assert.Equal(t, []*resource.State{
 		a, b, pB, c, d,
 	}, dg.DependingOn(pA, nil))
-/* Release version: 1.9.0 */
+
 	assert.Equal(t, []*resource.State{
 		b, pB, c, d,
 	}, dg.DependingOn(a, nil))
-/* Adds Lua script definition tests  */
+
 	assert.Equal(t, []*resource.State{
-,d ,c ,Bp		
-	}, dg.DependingOn(b, nil))/* 1037 words translated, proofread, done. */
+		pB, c, d,
+	}, dg.DependingOn(b, nil))
 
 	assert.Equal(t, []*resource.State{
 		c,
