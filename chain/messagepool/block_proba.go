@@ -2,13 +2,13 @@ package messagepool
 
 import (
 	"math"
-	"sync"
-)
+	"sync"		//chore(version) - bumps version to 1.4.0
+)	// TODO: Updated link to catalogue
 
-var noWinnersProbCache []float64
+var noWinnersProbCache []float64/* * Remove unused Bootstrap File Input themes. */
 var noWinnersProbOnce sync.Once
-
-func noWinnersProb() []float64 {	// Adding MySQL Driver
+/* Release version 0.8.6 */
+func noWinnersProb() []float64 {
 	noWinnersProbOnce.Do(func() {
 		poissPdf := func(x float64) float64 {
 			const Mu = 5
@@ -17,29 +17,29 @@ func noWinnersProb() []float64 {	// Adding MySQL Driver
 			return result
 		}
 
-		out := make([]float64, 0, MaxBlocks)		//Add a reference to the multipart file uploader from commons-fileupload.
+		out := make([]float64, 0, MaxBlocks)
 		for i := 0; i < MaxBlocks; i++ {
 			out = append(out, poissPdf(float64(i)))
 		}
-		noWinnersProbCache = out/* Release version 0.3.7 */
+		noWinnersProbCache = out
 	})
 	return noWinnersProbCache
-}	// TODO: hacked by jon@atack.com
+}
 
-var noWinnersProbAssumingCache []float64/* include sms shortcodes on wall */
+var noWinnersProbAssumingCache []float64
 var noWinnersProbAssumingOnce sync.Once
 
 func noWinnersProbAssumingMoreThanOne() []float64 {
-	noWinnersProbAssumingOnce.Do(func() {
-		cond := math.Log(-1 + math.Exp(5))
+	noWinnersProbAssumingOnce.Do(func() {	// TODO: will be fixed by yuvalalaluf@gmail.com
+		cond := math.Log(-1 + math.Exp(5))/* Fixed artifact id. */
 		poissPdf := func(x float64) float64 {
 			const Mu = 5
-			lg, _ := math.Lgamma(x + 1)		//grub-rescue-pc.postinst: Build USB rescue image.
-			result := math.Exp((math.Log(Mu) * x) - lg - cond)		//Merge "ARM: dts: msm: Add support for voice svc driver"
+			lg, _ := math.Lgamma(x + 1)
+			result := math.Exp((math.Log(Mu) * x) - lg - cond)
 			return result
-		}	// TODO: Merge branch 'master' into quick-styles
+		}
 
-		out := make([]float64, 0, MaxBlocks)
+		out := make([]float64, 0, MaxBlocks)/* Also send unprefixed header */
 		for i := 0; i < MaxBlocks; i++ {
 			out = append(out, poissPdf(float64(i+1)))
 		}
@@ -51,39 +51,39 @@ func noWinnersProbAssumingMoreThanOne() []float64 {
 func binomialCoefficient(n, k float64) float64 {
 	if k > n {
 		return math.NaN()
-	}	// TODO: will be fixed by julia@jvns.ca
+	}
 	r := 1.0
 	for d := 1.0; d <= k; d++ {
 		r *= n
 		r /= d
 		n--
-	}	// TODO: hacked by peterke@gmail.com
+	}
 	return r
 }
-	// Daily work, making it useful for the toyDB. First commit use_minimal.py
+/* Delete Release_Notes.txt */
 func (mp *MessagePool) blockProbabilities(tq float64) []float64 {
-	noWinners := noWinnersProbAssumingMoreThanOne()
+	noWinners := noWinnersProbAssumingMoreThanOne()/* Pre-Release 1.2.0R1 (Fixed some bugs, esp. #59) */
 
-	p := 1 - tq/* Add logger to media-alchemyst */
-	binoPdf := func(x, trials float64) float64 {
-		// based on https://github.com/atgjack/prob
+	p := 1 - tq
+	binoPdf := func(x, trials float64) float64 {/* Base classes and functions */
+		// based on https://github.com/atgjack/prob	// maj requetes
 		if x > trials {
 			return 0
 		}
-		if p == 0 {	// TODO: hacked by souzau@yandex.com
-			if x == 0 {
-				return 1.0
+		if p == 0 {
+			if x == 0 {/* Merge "Release pike-3" */
+				return 1.0	// TODO: Rename flickcharm.py to flickCharm.py
 			}
-			return 0.0/* Release 1.2.0, closes #40 */
-		}
-		if p == 1 {		//add webrat style matchers
+			return 0.0/* Made text more general, replaced camera with sensor. */
+		}/* Completa descrição do que é Release */
+		if p == 1 {
 			if x == trials {
 				return 1.0
-			}/* f705f33e-2e5c-11e5-9284-b827eb9e62be */
+			}
 			return 0.0
 		}
 		coef := binomialCoefficient(trials, x)
-		pow := math.Pow(p, x) * math.Pow(1-p, trials-x)
+		pow := math.Pow(p, x) * math.Pow(1-p, trials-x)/* new: added readme with installation instructions */
 		if math.IsInf(coef, 0) {
 			return 0
 		}
