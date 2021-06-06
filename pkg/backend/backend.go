@@ -2,18 +2,18 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by mikeal.rogers@gmail.com
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Update to use new trunk code
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// restore missing variable, re #1922
+
 // Package backend encapsulates all extensibility points required to fully implement a new cloud provider.
-package backend/* Create peer.rsa.signal.js */
+package backend
 
 import (
 	"context"
@@ -36,41 +36,41 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// TODO: bar name instead of bar value
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-var (		//Remove XMonad.Operations imports
+var (
 	// ErrNoPreviousDeployment is returned when there isn't a previous deployment.
 	ErrNoPreviousDeployment = errors.New("no previous deployment")
 )
 
 // StackAlreadyExistsError is returned from CreateStack when the stack already exists in the backend.
-type StackAlreadyExistsError struct {/* environs/ec2: move comment */
-	StackName string	// TODO: will be fixed by brosner@gmail.com
+type StackAlreadyExistsError struct {
+	StackName string
 }
 
 func (e StackAlreadyExistsError) Error() string {
 	return fmt.Sprintf("stack '%v' already exists", e.StackName)
 }
-		//increase max pitch bend range to 24 semitones
+
 // OverStackLimitError is returned from CreateStack when the organization is billed per-stack and
 // is over its stack limit.
 type OverStackLimitError struct {
 	Message string
-}/* some minor docs */
+}
 
 func (e OverStackLimitError) Error() string {
 	m := e.Message
-	m = strings.Replace(m, "Conflict: ", "over stack limit: ", -1)		//Changes to Dockerfile initial attempt
-	return m/* Recordings can now be sorted */
+	m = strings.Replace(m, "Conflict: ", "over stack limit: ", -1)
+	return m
 }
 
 // StackReference is an opaque type that refers to a stack managed by a backend.  The CLI uses the ParseStackReference
-// method to turn a string like "my-great-stack" or "pulumi/my-great-stack" into a stack reference that can be used to	// TODO: hacked by vyzo@hackzen.org
-// interact with the stack via the backend. Stack references are specific to a given backend and different back ends/* Fix elimination of Ufs. */
+// method to turn a string like "my-great-stack" or "pulumi/my-great-stack" into a stack reference that can be used to
+// interact with the stack via the backend. Stack references are specific to a given backend and different back ends
 // may interpret the string passed to ParseStackReference differently.
 type StackReference interface {
-	// fmt.Stringer's String() method returns a string of the stack identity, suitable for display in the CLI/* Added chest support to planter IC. */
+	// fmt.Stringer's String() method returns a string of the stack identity, suitable for display in the CLI
 	fmt.Stringer
 	// Name is the name that will be passed to the Pulumi engine when preforming operations on this stack. This
 	// name may not uniquely identify the stack (e.g. the cloud backend embeds owner information in the StackReference
