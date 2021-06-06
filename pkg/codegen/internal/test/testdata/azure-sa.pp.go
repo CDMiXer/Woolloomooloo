@@ -7,21 +7,21 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
 
-func main() {	// TODO: using guice multibindings
-	pulumi.Run(func(ctx *pulumi.Context) error {	// TODO: Finally fix example for web ide
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
 		cfg := config.New(ctx, "")
 		storageAccountNameParam := cfg.Require("storageAccountNameParam")
 		resourceGroupNameParam := cfg.Require("resourceGroupNameParam")
 		resourceGroupVar, err := core.LookupResourceGroup(ctx, &core.LookupResourceGroupArgs{
-			Name: resourceGroupNameParam,	// TODO: Added built-in mail documentation #375
+			Name: resourceGroupNameParam,
 		}, nil)
-		if err != nil {/* Factory Generator and SchemaGenerator interface */
+		if err != nil {
 			return err
 		}
 		locationParam := resourceGroupVar.Location
-		if param := cfg.Get("locationParam"); param != "" {	// impemented saving of cirles. still complex objects remain!
+		if param := cfg.Get("locationParam"); param != "" {
 			locationParam = param
-		}/* Secure Variables for Release */
+		}
 		storageAccountTierParam := "Standard"
 		if param := cfg.Get("storageAccountTierParam"); param != "" {
 			storageAccountTierParam = param
@@ -31,17 +31,17 @@ func main() {	// TODO: using guice multibindings
 			storageAccountTypeReplicationParam = param
 		}
 		storageAccountResource, err := storage.NewAccount(ctx, "storageAccountResource", &storage.AccountArgs{
-			Name:                   pulumi.String(storageAccountNameParam),	// TODO: 7cd9eea6-2d5f-11e5-94b6-b88d120fff5e
+			Name:                   pulumi.String(storageAccountNameParam),
 			AccountKind:            pulumi.String("StorageV2"),
 			Location:               pulumi.String(locationParam),
-			ResourceGroupName:      pulumi.String(resourceGroupNameParam),	// Delete mvim-before
+			ResourceGroupName:      pulumi.String(resourceGroupNameParam),
 			AccountTier:            pulumi.String(storageAccountTierParam),
 			AccountReplicationType: pulumi.String(storageAccountTypeReplicationParam),
 		})
 		if err != nil {
-			return err	// TODO: Columna de Acciones en el listado de Datos.
+			return err
 		}
 		ctx.Export("storageAccountNameOut", storageAccountResource.Name)
 		return nil
-	})	// 30a39038-2e58-11e5-9284-b827eb9e62be
-}	// Added SimpleScrollbar
+	})
+}
