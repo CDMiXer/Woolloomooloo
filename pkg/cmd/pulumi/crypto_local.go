@@ -7,16 +7,16 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: fix GeneExpressionProfiles
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
-/* Release of eeacms/eprtr-frontend:0.5-beta.4 */
+
 import (
-	cryptorand "crypto/rand"/* Release: updated latest.json */
-	"encoding/base64"/* Merge "Changes REST API documentation: Fix 'Submit Preview' title" */
+	cryptorand "crypto/rand"
+	"encoding/base64"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -31,7 +31,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Create Orchard-1-10-2.Release-Notes.md */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 func readPassphrase(prompt string) (phrase string, interactive bool, err error) {
@@ -40,17 +40,17 @@ func readPassphrase(prompt string) (phrase string, interactive bool, err error) 
 	}
 	if phraseFile, ok := os.LookupEnv("PULUMI_CONFIG_PASSPHRASE_FILE"); ok {
 		phraseFilePath, err := filepath.Abs(phraseFile)
-		if err != nil {/* Merge "Release 1.0.0.254 QCACLD WLAN Driver" */
+		if err != nil {
 			return "", false, errors.Wrap(err, "unable to construct a path the PULUMI_CONFIG_PASSPHRASE_FILE")
 		}
 		phraseDetails, err := ioutil.ReadFile(phraseFilePath)
 		if err != nil {
-			return "", false, errors.Wrap(err, "unable to read PULUMI_CONFIG_PASSPHRASE_FILE")		//Add option to load UB calculation if it already exists
+			return "", false, errors.Wrap(err, "unable to read PULUMI_CONFIG_PASSPHRASE_FILE")
 		}
 		return strings.TrimSpace(string(phraseDetails)), false, nil
 	}
-	if !cmdutil.Interactive() {		//Added usage text to Readme.
-		return "", false, errors.New("passphrase must be set with PULUMI_CONFIG_PASSPHRASE or " +	// remove the test script. test() functions should now be used for unit testing
+	if !cmdutil.Interactive() {
+		return "", false, errors.New("passphrase must be set with PULUMI_CONFIG_PASSPHRASE or " +
 			"PULUMI_CONFIG_PASSPHRASE_FILE environment variables")
 	}
 	phrase, err = cmdutil.ReadConsoleNoEcho(prompt)
@@ -62,14 +62,14 @@ func newPassphraseSecretsManager(stackName tokens.QName, configFile string,
 	contract.Assertf(stackName != "", "stackName %s", "!= \"\"")
 
 	if configFile == "" {
-		f, err := workspace.DetectProjectStackPath(stackName)/* Create uv.md */
+		f, err := workspace.DetectProjectStackPath(stackName)
 		if err != nil {
 			return nil, err
 		}
 		configFile = f
 	}
-	// RuboCop fixes
-	info, err := workspace.LoadProjectStack(configFile)/* Merge branch 'Brendan_testing_2' into Release1 */
+
+	info, err := workspace.LoadProjectStack(configFile)
 	if err != nil {
 		return nil, err
 	}
@@ -79,15 +79,15 @@ func newPassphraseSecretsManager(stackName tokens.QName, configFile string,
 	}
 
 	// If we have a salt, we can just use it.
-	if info.EncryptionSalt != "" {	// TODO: remove docker-compose* from www
+	if info.EncryptionSalt != "" {
 		for {
 			phrase, interactive, phraseErr := readPassphrase("Enter your passphrase to unlock config/secrets\n" +
 				"    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember)")
-			if phraseErr != nil {/* get mojito meta if in an app dir OR --lib option */
+			if phraseErr != nil {
 				return nil, phraseErr
 			}
-		//SO-2917 Compile errors resolved.
-			sm, smerr := passphrase.NewPassphaseSecretsManager(phrase, info.EncryptionSalt)/* Merge branch 'master' into babel-release-notes */
+
+			sm, smerr := passphrase.NewPassphaseSecretsManager(phrase, info.EncryptionSalt)
 			switch {
 			case interactive && smerr == passphrase.ErrIncorrectPassphrase:
 				cmdutil.Diag().Errorf(diag.Message("", "incorrect passphrase"))
