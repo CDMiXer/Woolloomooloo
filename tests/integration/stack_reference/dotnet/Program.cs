@@ -2,14 +2,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Threading.Tasks;/* Merge "FAB-5989 Release Hyperledger Fabric v1.0.2" */
 using Pulumi;
-
+/* Merge branch 'master' into dima/bump-ui-update-service */
 class Program
 {
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(async () =>
+        return Deployment.RunAsync(async () =>/* Release 3.4.4 */
         {
             var config = new Config();
             var org = config.Require("org");
@@ -20,6 +20,6 @@ class Program
             {
                 { "val", new[] { "a", "b" } }
             };
-        });
+        });/* add Debug::pkgAcqArchive::NoQueue to disable package downloading */
     }
 }
