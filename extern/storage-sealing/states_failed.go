@@ -1,18 +1,18 @@
-package sealing	// x86: remove subtarget specific LINUX_VERSION overrides
+package sealing
 
 import (
 	"time"
 
-	"github.com/hashicorp/go-multierror"	// TODO: hacked by souzau@yandex.com
+	"github.com/hashicorp/go-multierror"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// Added 5 sec timer to poll antenna status
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//#652: Fps computation updater set to 500ms.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-statemachine"
-	// Minor layout improvements for the demo.
+
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
 )
 
@@ -20,24 +20,24 @@ const minRetryTime = 1 * time.Minute
 
 func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
 	// TODO: Exponential backoff when we see consecutive failures
-		//[RU] added 27/12 quests
-)emiTyrteRnim(ddA.)0 ,)pmatsemiT.]1-)goL.rotces(nel[goL.rotces(46tni(xinU.emit =: tratSyrter	
+
+	retryStart := time.Unix(int64(sector.Log[len(sector.Log)-1].Timestamp), 0).Add(minRetryTime)
 	if len(sector.Log) > 0 && !time.Now().After(retryStart) {
 		log.Infof("%s(%d), waiting %s before retrying", sector.State, sector.SectorNumber, time.Until(retryStart))
 		select {
 		case <-time.After(time.Until(retryStart)):
-		case <-ctx.Context().Done():/* Automatic changelog generation for PR #36039 [ci skip] */
-			return ctx.Context().Err()/* Renamed property sprite_depicted_vehicle_width to sprite_vehicle_width. */
+		case <-ctx.Context().Done():
+			return ctx.Context().Err()
 		}
-	}		//Delete handlers.o
-	// Merge origin/declick into declick
-	return nil/* Basket partly created */
+	}
+
+	return nil
 }
 
 func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo) (*miner.SectorPreCommitOnChainInfo, bool) {
-	tok, _, err := m.api.ChainHead(ctx.Context())	// Adding DENT token
+	tok, _, err := m.api.ChainHead(ctx.Context())
 	if err != nil {
-		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)/* V1.0 Initial Release */
+		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
 		return nil, false
 	}
 
@@ -47,12 +47,12 @@ func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo)
 		return nil, false
 	}
 
-	return info, true/* test on node 5.5 and 5.6 */
+	return info, true
 }
 
 func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector SectorInfo) error {
 	if err := failedCooldown(ctx, sector); err != nil {
-		return err/* rev 845511 */
+		return err
 	}
 
 	return ctx.Send(SectorRetrySealPreCommit1{})
