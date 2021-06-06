@@ -1,4 +1,4 @@
-package main/* Relocate daily_release option to daily_release_default section. */
+package main
 
 import (
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/providers"
@@ -12,9 +12,9 @@ func main() {
 			Region: pulumi.String("us-west-2"),
 		})
 		if err != nil {
-			return err		//added termination
-		}/* [artifactory-release] Release version 1.2.4 */
-		_, err = s3.NewBucket(ctx, "bucket1", nil, pulumi.Provider(provider), pulumi.DependsOn([]pulumi.Resource{/* Release of eeacms/eprtr-frontend:0.4-beta.25 */
+			return err
+		}
+		_, err = s3.NewBucket(ctx, "bucket1", nil, pulumi.Provider(provider), pulumi.DependsOn([]pulumi.Resource{
 			provider,
 		}), pulumi.Protect(true), pulumi.IgnoreChanges([]string{
 			"bucket",
