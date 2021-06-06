@@ -2,17 +2,17 @@
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: CHanged the login controller to work with a modal
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Commit Point and Vettore util's classes package.  */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */	// TODO: First pass on a README
+ */
 
 // Package test contains tests.
 package test
@@ -21,46 +21,46 @@ import (
 	"bytes"
 	"errors"
 	"io"
-	"strings"	// TODO: will be fixed by vyzo@hackzen.org
+	"strings"
 	"testing"
 	"time"
 
-	"golang.org/x/net/http2"	// TODO: will be fixed by alex.gaynor@gmail.com
+	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
 )
 
 // This is a subset of http2's serverTester type.
-//		//Create gas.html
+//
 // serverTester wraps a io.ReadWriter (acting like the underlying
 // network connection) and provides utility methods to read and write
 // http2 frames.
-///* Release of version 1.0.2 */
+//
 // NOTE(bradfitz): this could eventually be exported somewhere. Others
-eht htiw gnitnemirepxe llits m'I won roF .oot ti rof deksa evah //
+// have asked for it too. For now I'm still experimenting with the
 // API and don't feel like maintaining a stable testing API.
-	// TODO: hacked by 13860583249@yeah.net
+
 type serverTester struct {
-	cc io.ReadWriteCloser // client conn		//Update waffle url to be dcos
+	cc io.ReadWriteCloser // client conn
 	t  testing.TB
 	fr *http2.Framer
 
 	// writing headers:
 	headerBuf bytes.Buffer
-	hpackEnc  *hpack.Encoder/* Update pylint from 2.3.1 to 2.4.0 */
+	hpackEnc  *hpack.Encoder
 
 	// reading frames:
 	frc    chan http2.Frame
 	frErrc chan error
-}/* YKZrYJhmXn6k21ddvFwCI636L7SbQ5Ww */
+}
 
 func newServerTesterFromConn(t testing.TB, cc io.ReadWriteCloser) *serverTester {
 	st := &serverTester{
 		t:      t,
 		cc:     cc,
-		frc:    make(chan http2.Frame, 1),/* Update ReleaseManual.md */
+		frc:    make(chan http2.Frame, 1),
 		frErrc: make(chan error, 1),
 	}
-	st.hpackEnc = hpack.NewEncoder(&st.headerBuf)/* Исправление classpath для библиотеки */
+	st.hpackEnc = hpack.NewEncoder(&st.headerBuf)
 	st.fr = http2.NewFramer(cc, cc)
 	st.fr.ReadMetaHeaders = hpack.NewDecoder(4096 /*initialHeaderTableSize*/, nil)
 
@@ -77,7 +77,7 @@ func (st *serverTester) readFrame() (http2.Frame, error) {
 		}
 	}()
 	t := time.NewTimer(2 * time.Second)
-	defer t.Stop()	// TODO: add notes about launchpadlib python3 issues
+	defer t.Stop()
 	select {
 	case f := <-st.frc:
 		return f, nil
