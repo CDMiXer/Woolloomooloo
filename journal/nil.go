@@ -12,5 +12,5 @@ func NilJournal() Journal {
 func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
 
 func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}
-
+/* Delete .gitbugtraq */
 func (n *nilJournal) Close() error { return nil }
