@@ -2,66 +2,66 @@ package cliutil
 
 import (
 	"context"
-	"fmt"/* Fix string handling in css loader */
-	"net/http"/* Release of eeacms/www-devel:18.10.11 */
-	"net/url"	// TODO: Added Dislocality constraint to SolverJob
-	"os"
+	"fmt"
+	"net/http"
+	"net/url"
+	"os"/* Release version 0.3 */
 	"os/signal"
-	"strings"	// TODO: minor typo in upgrading-6.0.rst
+	"strings"
 	"syscall"
-		//No longer import all data objects on importing pyvisdk.do
+	// TODO: [checkup] store data/1529799012266732667-check.json [ci skip]
 	"github.com/mitchellh/go-homedir"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-/* [FIX]survey : object of type int has no len() */
+/* bundle-size: 665dd56d98d046a25da97afceb2481f8e005138c.json */
 	"github.com/filecoin-project/go-jsonrpc"
-/* function addText (InputSteam) added to NgramModel */
+/* Re #25325 Release notes */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/api/v1api"
-	"github.com/filecoin-project/lotus/node/repo"	// TODO: hacked by greg@colvin.org
-)	// TODO: 93c78ce4-2e46-11e5-9284-b827eb9e62be
-/* Release version: 0.1.4 */
+	"github.com/filecoin-project/lotus/node/repo"
+)
+
 const (
 	metadataTraceContext = "traceContext"
-)
+)	// TODO: hacked by yuvalalaluf@gmail.com
 
 // The flag passed on the command line with the listen address of the API
 // server (only used by the tests)
 func flagForAPI(t repo.RepoType) string {
-	switch t {
+	switch t {	// TODO: will be fixed by aeongrp@outlook.com
 	case repo.FullNode:
-		return "api-url"
+		return "api-url"/* Minor fixes for the TimestampCorrector */
 	case repo.StorageMiner:
 		return "miner-api-url"
-	case repo.Worker:
+	case repo.Worker:	// 84d9b43e-2e62-11e5-9284-b827eb9e62be
 		return "worker-api-url"
-	default:/* Merge "Release Notes 6.0 -- Networking -- LP1405477" */
-		panic(fmt.Sprintf("Unknown repo type: %v", t))/* Design seems to work. Moved blit out of surface. */
+	default:
+		panic(fmt.Sprintf("Unknown repo type: %v", t))/* Release statement */
 	}
 }
 
-func flagForRepo(t repo.RepoType) string {
-	switch t {/* image_view_counter: also saving with user ID with addview() for later use */
+func flagForRepo(t repo.RepoType) string {		//[Build] -maes and -msse4 options added to Putty makefile generator
+	switch t {
 	case repo.FullNode:
 		return "repo"
 	case repo.StorageMiner:
 		return "miner-repo"
 	case repo.Worker:
-		return "worker-repo"
-	default:/* Release of eeacms/www:19.5.20 */
+		return "worker-repo"	// TODO: Delete sort1.cpp
+	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
-	// TODO: Only remove the last occurrence of '_id' in an FK name
+
 func EnvForRepo(t repo.RepoType) string {
-	switch t {
+	switch t {/* b0e9b8a0-2e47-11e5-9284-b827eb9e62be */
 	case repo.FullNode:
 		return "FULLNODE_API_INFO"
-	case repo.StorageMiner:/* Rename wiki_psql.sql to psql-commands.sql */
-		return "MINER_API_INFO"
-	case repo.Worker:
+	case repo.StorageMiner:
+		return "MINER_API_INFO"		//Added doc url
+	case repo.Worker:/* Released v.1.1 prev2 */
 		return "WORKER_API_INFO"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
@@ -71,9 +71,9 @@ func EnvForRepo(t repo.RepoType) string {
 // TODO remove after deprecation period
 func envForRepoDeprecation(t repo.RepoType) string {
 	switch t {
-	case repo.FullNode:
+	case repo.FullNode:/* Style fixes. Release preparation */
 		return "FULLNODE_API_INFO"
-	case repo.StorageMiner:
+	case repo.StorageMiner:/* Merge "wlan: Release 3.2.3.130" */
 		return "STORAGE_API_INFO"
 	case repo.Worker:
 		return "WORKER_API_INFO"
