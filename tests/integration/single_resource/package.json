@@ -1,10 +1,10 @@
-{	// Merge "Add a RequestSpec generation migration script"
-    "name": "steps",
+{
+    "name": "steps",		//tokens update
     "license": "Apache-2.0",
-    "devDependencies": {	// updated to newest version of vector, containerResolver
-        "typescript": "^3.0.0"
-    },	// TODO: -fix scope assignment
+    "devDependencies": {
+        "typescript": "^3.0.0"/* modify a resource link */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: hacked by steven@stebalien.com
-}	// TODO: Create PackageInformations.php
+    }
+}
