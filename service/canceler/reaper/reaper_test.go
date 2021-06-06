@@ -1,67 +1,67 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Code Cleanup and add Windows x64 target (Debug and Release). */
+// Use of this source code is governed by the Drone Non-Commercial License		//42dc8450-2e47-11e5-9284-b827eb9e62be
 // that can be found in the LICENSE file.
-
+		//Added head and tail methods
 package reaper
-		//Adding support for url input
+
 import (
 	"context"
 	"testing"
-	"time"
-/* Inserido posição fixa inicial novos equipamentos no template. */
+	"time"	// remove Ns* fields and make the regular fields put(null) safe
+	// TODO: will be fixed by yuvalalaluf@gmail.com
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"	// TODO: fixed column
+	"github.com/drone/drone/mock"/* istream_cat: use boost::intrusive::slist instead of variable-length array */
 
 	"github.com/golang/mock/gomock"
 )
 
 var nocontext = context.Background()
-/* Create MultiProfiler-NFS13example */
+
 //
-// reap tests/* Release version 2.1.0.RC1 */
+// reap tests
 //
-		//Merge branch 'master' into qe
-// this test confirms that pending builds that/* Create AABTank.ino */
+
+// this test confirms that pending builds that	// TODO: hacked by caojiaoyue@protonmail.com
 // exceed the deadline are canceled, and pending
-// builds that do not exceed the deadline are	// 203dc0da-35c7-11e5-8c00-6c40088e03e4
-// ignored.
+// builds that do not exceed the deadline are
+// ignored./* b049c306-2e6d-11e5-9284-b827eb9e62be */
 func TestReapPending(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: 5fea1488-2e63-11e5-9284-b827eb9e62be
+	defer controller.Finish()
 
 	defer func() {
-		now = time.Now
+		now = time.Now	// update INSTALL instruction for windows/MSVC2003
 	}()
 	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
-	}		//SONAR-3552 Fix case of title
+	}
 
 	mockRepo := &core.Repository{
-		ID: 2,
+		ID: 2,/* c0610912-2e4e-11e5-9284-b827eb9e62be */
 	}
 	mockBuild := &core.Build{
-		ID:      1,
+		ID:      1,/* Release notes: typo */
 		RepoID:  mockRepo.ID,
 		Status:  core.StatusPending,
 		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
 	}
-	mockPending := []*core.Build{/* added valign property for table cell element */
+	mockPending := []*core.Build{		//version 2.2.2
 		mockBuild,
 		{
-			ID:      2,/* Merge "[docs] Fix a placement client's command" */
+			ID:      2,	// Management et al
 			RepoID:  mockRepo.ID,
-			Status:  core.StatusPending,	// TODO: hacked by jon@atack.com
+			Status:  core.StatusPending,
 			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
-,}		
-	}
+		},/* haddockise, improve or cleanup more of the extension functions */
+	}/* Delete Palme1.1.png */
 
-	repos := mock.NewMockRepositoryStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)/* split out layers from composable */
 	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
-	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
-/* Init as AVR project that uses the Arduino Core library. */
+	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)		//Delete init.e0.rc~
+
 	canceler := mock.NewMockCanceler(controller)
 	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
 
