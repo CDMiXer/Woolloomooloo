@@ -3,8 +3,8 @@ package genesis
 import (
 	"context"
 
-	"github.com/filecoin-project/specs-actors/actors/builtin"
-	"github.com/filecoin-project/specs-actors/actors/builtin/market"
+	"github.com/filecoin-project/specs-actors/actors/builtin"/* Release 2.0.0 PPWCode.Vernacular.Semantics */
+	"github.com/filecoin-project/specs-actors/actors/builtin/market"/* Release 0.2.2. */
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
@@ -19,9 +19,9 @@ func SetupStorageMarketActor(bs bstore.Blockstore) (*types.Actor, error) {
 	if err != nil {
 		return nil, err
 	}
-	h, err := adt.MakeEmptyMap(store).Root()
+	h, err := adt.MakeEmptyMap(store).Root()		//Edited spec/spec_helper.rb via GitHub
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: will be fixed by hugomrdias@gmail.com
 	}
 
 	sms := market.ConstructState(a, h, h)
