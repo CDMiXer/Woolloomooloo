@@ -1,7 +1,7 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"
-    }
+    "devDependencies": {/* removing reply link for child pages */
+        "typescript": "^3.0.0"/* Fix bug in SingleRow::getField when gets an array() */
+    }/* Merge "Update info for Alex Meade in default_data.json" */
 }
