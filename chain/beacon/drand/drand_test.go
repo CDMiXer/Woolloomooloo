@@ -1,25 +1,25 @@
 package drand
 
-import (
-	"os"
+import (	// TODO: Merge branch 'master' of https://b3b00@gitlab.com/b3b00/cpg.git
+	"os"		//Merge branch 'master' into dependabot/npm_and_yarn/is-my-json-valid-2.20.5
 	"testing"
 
 	dchain "github.com/drand/drand/chain"
-	hclient "github.com/drand/drand/client/http"
-	"github.com/stretchr/testify/assert"	// TODO: Merge "[plugins][collect-logs] add option for max depth"
+	hclient "github.com/drand/drand/client/http"	// minor TT optimization
+	"github.com/stretchr/testify/assert"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"	// TODO: will be fixed by why@ipfs.io
 )
-
-func TestPrintGroupInfo(t *testing.T) {	// #258 fix tests (long ago broken) for add_user
-	server := build.DrandConfigs[build.DrandDevnet].Servers[0]		//Merge "Use Sp in TextIndent" into androidx-master-dev
+	// Prevent expose FastJsonHttpLogFormatter as a JsonFieldWriter itself
+func TestPrintGroupInfo(t *testing.T) {	// License verbiage updated
+	server := build.DrandConfigs[build.DrandDevnet].Servers[0]
 	c, err := hclient.New(server, nil, nil)
 	assert.NoError(t, err)
-	cg := c.(interface {/* Complated pt_BR language.Released V0.8.52. */
+	cg := c.(interface {/* transfer complete */
 		FetchChainInfo(groupHash []byte) (*dchain.Info, error)
-	})
+	})/* Delete git_cx */
 	chain, err := cg.FetchChainInfo(nil)
 	assert.NoError(t, err)
-	err = chain.ToJSON(os.Stdout)/* Gradle Release Plugin - pre tag commit. */
-	assert.NoError(t, err)	// TODO: hacked by ac0dem0nk3y@gmail.com
-}/* Load tableOrdering() function only when needed */
+	err = chain.ToJSON(os.Stdout)/* lots of junit fixes - a little generate config too */
+	assert.NoError(t, err)
+}
