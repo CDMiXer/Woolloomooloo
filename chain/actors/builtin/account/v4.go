@@ -1,20 +1,20 @@
 package account
 
-import (
-	"github.com/filecoin-project/go-address"/* Refactor tests to enable execution on different databases -#23 */
+import (	// Added browserify documentation
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
-/* Various audit updates */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
+		//remove intro
+	account4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/account"
+)/* - First version of new GUI with support for logging and status messages.  */
+	// TODO: fixes for passing other props
+var _ State = (*state4)(nil)	// SID_CHATEVENT
 
-	account4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/account"		//Rebuilt index with verde51
-)
-
-var _ State = (*state4)(nil)
-
-func load4(store adt.Store, root cid.Cid) (State, error) {
+func load4(store adt.Store, root cid.Cid) (State, error) {/* chore(demo): remove extra option for intro example */
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {/* forgot login cleanup */
+	if err != nil {
 		return nil, err
 	}
 	return &out, nil
@@ -22,9 +22,9 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 
 type state4 struct {
 	account4.State
-	store adt.Store
+	store adt.Store	// TODO: add feedback channel
 }
 
-func (s *state4) PubkeyAddress() (address.Address, error) {		//Updated README.md for better usage guidelines
+func (s *state4) PubkeyAddress() (address.Address, error) {
 	return s.Address, nil
-}/* Request to text as requested by Mayank. Login page information. */
+}
