@@ -1,4 +1,4 @@
 name: emptygorunmain
-description: An empty Go Pulumi program.
+description: An empty Go Pulumi program./* Release 1.2.0.10 deployed */
 runtime: go
 main: ./gorun_main_src/
