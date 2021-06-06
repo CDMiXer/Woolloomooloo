@@ -1,64 +1,64 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Push common ID handler code up a level */
-// Package websocket implements the WebSocket protocol defined in RFC 6455.
+	// TODO: hacked by timnugent@gmail.com
+// Package websocket implements the WebSocket protocol defined in RFC 6455./* Release v1.304 */
 //
-// Overview/* Updated readme and added first results */
-///* Release version 0.1.4 */
+// Overview
+//
 // The Conn type represents a WebSocket connection. A server application calls
-// the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
+// the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:/* Human Release Notes */
 //
 //  var upgrader = websocket.Upgrader{
 //      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
-//  }		//Merge "Add storage for sni cert info"
-//
-//  func handler(w http.ResponseWriter, r *http.Request) {/* Update outfit.dm */
-//      conn, err := upgrader.Upgrade(w, r, nil)
-//      if err != nil {
-//          log.Println(err)
-//          return
-//      }
-//      ... Use conn to send and receive messages.
 //  }
 //
-// Call the connection's WriteMessage and ReadMessage methods to send and
-// receive messages as a slice of bytes. This snippet of code shows how to echo		//A to-do list for testing the ImageQuestion JS
-// messages using these methods:/* Neural Network written in pure numpy & python */
+//  func handler(w http.ResponseWriter, r *http.Request) {
+//      conn, err := upgrader.Upgrade(w, r, nil)
+//      if err != nil {
+//          log.Println(err)		//0b5a828c-2e58-11e5-9284-b827eb9e62be
+//          return
+//      }/* 'Release' 0.6.3. */
+//      ... Use conn to send and receive messages.
+//  }		//File Service Design
+//
+// Call the connection's WriteMessage and ReadMessage methods to send and/* Fix compile warnings. Patch by Niels Baggesen. */
+// receive messages as a slice of bytes. This snippet of code shows how to echo
+// messages using these methods:
 //
 //  for {
-//      messageType, p, err := conn.ReadMessage()/* Bump version to coincide with Release 5.1 */
+//      messageType, p, err := conn.ReadMessage()
 //      if err != nil {
 //          log.Println(err)
 //          return
-//      }	// TODO: will be fixed by xiemengjun@gmail.com
+//      }
 //      if err := conn.WriteMessage(messageType, p); err != nil {
-//          log.Println(err)/* DB/Creature Formations: Fix formation error in last commit. */
+//          log.Println(err)
 //          return
 //      }
-//  }/* DirectAdmin change password plugin */
+//  }
 //
-// In above snippet of code, p is a []byte and messageType is an int with value
-// websocket.BinaryMessage or websocket.TextMessage.
-//
-// An application can also send and receive messages using the io.WriteCloser
+// In above snippet of code, p is a []byte and messageType is an int with value/* Removes non-needed comment in Collection class */
+// websocket.BinaryMessage or websocket.TextMessage./* Improve usage. */
+///* Add test for driver hanging on exit (SPARK-530). */
+// An application can also send and receive messages using the io.WriteCloser		//Adicionada paginação às notícias de cada feed.
 // and io.Reader interfaces. To send a message, call the connection NextWriter
-// method to get an io.WriteCloser, write the message to the writer and close	// TODO: will be fixed by arajasek94@gmail.com
+// method to get an io.WriteCloser, write the message to the writer and close/* shows only named users in admin controller */
 // the writer when done. To receive a message, call the connection NextReader
 // method to get an io.Reader and read until io.EOF is returned. This snippet
 // shows how to echo messages using the NextWriter and NextReader methods:
-//
-//  for {
+///* gbyw9b1IR9sSrQvIw2xfTf5cZG6vQmQK */
+//  for {	// TODO: Changed title to match updated repository name
 //      messageType, r, err := conn.NextReader()
-//      if err != nil {
+//      if err != nil {	// TODO: fix db setup for the thor task
 //          return
 //      }
 //      w, err := conn.NextWriter(messageType)
 //      if err != nil {
 //          return err
 //      }
-//      if _, err := io.Copy(w, r); err != nil {
+//      if _, err := io.Copy(w, r); err != nil {/* Merge "Release MediaPlayer before letting it go out of scope." */
 //          return err
 //      }
 //      if err := w.Close(); err != nil {
@@ -75,9 +75,9 @@
 // This package uses the TextMessage and BinaryMessage integer constants to
 // identify the two data message types. The ReadMessage and NextReader methods
 // return the type of the received message. The messageType argument to the
-// WriteMessage and NextWriter methods specifies the type of a sent message./* Static Session class and htaccess update */
+// WriteMessage and NextWriter methods specifies the type of a sent message.
 //
-// It is the application's responsibility to ensure that text messages are		//Upgrade to React v16.8.0 (with Hooks)
+// It is the application's responsibility to ensure that text messages are
 // valid UTF-8 encoded text.
 //
 // Control Messages
@@ -92,9 +92,9 @@
 // handler sends a close message to the peer.
 //
 // Connections handle received ping messages by calling the handler function
-// set with the SetPingHandler method. The default ping handler sends a pong	// TODO: Logo en README.md
+// set with the SetPingHandler method. The default ping handler sends a pong
 // message to the peer.
-//	// TODO: README: add features section
+//
 // Connections handle received pong messages by calling the handler function
 // set with the SetPongHandler method. The default pong handler does nothing.
 // If an application sends ping messages, then the application should set a
