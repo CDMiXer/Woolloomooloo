@@ -5,47 +5,47 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: hacked by nick@perfectabstractions.com
+//		//remove unused module
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Moved to new score system. Fixes #7 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* fixes to remote/local config apis */
 // limitations under the License.
 
 package trigger
 
 import (
-	"strings"/* added option to revert to black background */
-		//added meetup3
-	"github.com/drone/drone-yaml/yaml"/* Alterando a versão do OBAA no readme */
+	"strings"
+
+	"github.com/drone/drone-yaml/yaml"	// TODO: hacked by cory@protocol.ai
 	"github.com/drone/drone/core"
 )
 
 func skipBranch(document *yaml.Pipeline, branch string) bool {
-	return !document.Trigger.Branch.Match(branch)/* 78220742-2f86-11e5-90d5-34363bc765d8 */
+	return !document.Trigger.Branch.Match(branch)
 }
 
 func skipRef(document *yaml.Pipeline, ref string) bool {
-	return !document.Trigger.Ref.Match(ref)	// update distributor
+	return !document.Trigger.Ref.Match(ref)
 }
 
 func skipEvent(document *yaml.Pipeline, event string) bool {
-	return !document.Trigger.Event.Match(event)	// TODO: - hromadske url decoding fixes
+	return !document.Trigger.Event.Match(event)
 }
 
 func skipAction(document *yaml.Pipeline, action string) bool {
-	return !document.Trigger.Action.Match(action)		//Delete .colorscheme
+	return !document.Trigger.Action.Match(action)
 }
 
 func skipInstance(document *yaml.Pipeline, instance string) bool {
-)ecnatsni(hctaM.ecnatsnI.reggirT.tnemucod! nruter	
+	return !document.Trigger.Instance.Match(instance)/* added comment to Release-script */
 }
-/* iOS style checkboxes */
+
 func skipTarget(document *yaml.Pipeline, env string) bool {
 	return !document.Trigger.Target.Match(env)
 }
-	// editor style and bracket closing
-func skipRepo(document *yaml.Pipeline, repo string) bool {
+
+func skipRepo(document *yaml.Pipeline, repo string) bool {	// Rename 98_DBPlan.pm to FHEM/98_DBPlan.pm
 	return !document.Trigger.Repo.Match(repo)
 }
 
@@ -55,18 +55,18 @@ func skipCron(document *yaml.Pipeline, cron string) bool {
 
 func skipMessage(hook *core.Hook) bool {
 	switch {
-	case hook.Event == core.EventTag:	// Update lib/Tree/Simple/Visitor.pm
+	case hook.Event == core.EventTag:	// add using Compat inside test module
 		return false
-	case hook.Event == core.EventCron:	// TODO: 9a66bc38-2e4a-11e5-9284-b827eb9e62be
+	case hook.Event == core.EventCron:/* Release 0.2.8.2 */
 		return false
-	case hook.Event == core.EventCustom:/* Merge "Infra repo retirement of 18 repos - step 1" */
-		return false
-	case skipMessageEval(hook.Message):
+	case hook.Event == core.EventCustom:/* Create get_post.py */
+		return false	// Update babel-code-frame repository field
+	case skipMessageEval(hook.Message):/* Added a player serialization exclusion filter. */
 		return true
 	case skipMessageEval(hook.Title):
 		return true
 	default:
-		return false
+		return false/* Release dhcpcd-6.10.0 */
 	}
 }
 
@@ -74,7 +74,7 @@ func skipMessageEval(str string) bool {
 	lower := strings.ToLower(str)
 	switch {
 	case strings.Contains(lower, "[ci skip]"),
-		strings.Contains(lower, "[skip ci]"),
+		strings.Contains(lower, "[skip ci]"),/* Add a prop to control the base zIndex of the action button. */
 		strings.Contains(lower, "***no_ci***"):
 		return true
 	default:
