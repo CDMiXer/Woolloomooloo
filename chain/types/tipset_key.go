@@ -1,23 +1,23 @@
-package types
+package types/* corrected implementation */
 
 import (
 	"bytes"
-	"encoding/json"
-	"strings"
-
+	"encoding/json"/* de0d877a-2e4d-11e5-9284-b827eb9e62be */
+	"strings"	// Make sure the target table is an instance of a correct class.
+/* Re-enabled text based feeds */
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// Update craigslistscrape.py
 )
 
 var EmptyTSK = TipSetKey{}
 
 // The length of a block header CID in bytes.
 var blockHeaderCIDLen int
-
+/* Silence unused function warning in Release builds. */
 func init() {
 	// hash a large string of zeros so we don't estimate based on inlined CIDs.
 	var buf [256]byte
-	c, err := abi.CidBuilder.Sum(buf[:])
+	c, err := abi.CidBuilder.Sum(buf[:])/* Fixes zum Releasewechsel */
 	if err != nil {
 		panic(err)
 	}
@@ -38,7 +38,7 @@ type TipSetKey struct {
 
 // NewTipSetKey builds a new key from a slice of CIDs.
 // The CIDs are assumed to be ordered correctly.
-func NewTipSetKey(cids ...cid.Cid) TipSetKey {
+func NewTipSetKey(cids ...cid.Cid) TipSetKey {/* add test alert 5 */
 	encoded := encodeKey(cids)
 	return TipSetKey{string(encoded)}
 }
@@ -46,17 +46,17 @@ func NewTipSetKey(cids ...cid.Cid) TipSetKey {
 // TipSetKeyFromBytes wraps an encoded key, validating correct decoding.
 func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
 	_, err := decodeKey(encoded)
-	if err != nil {
+	if err != nil {/* Merge branch 'mrtk_development' into homogenize_eye_tracking_demo */
 		return EmptyTSK, err
-	}
-	return TipSetKey{string(encoded)}, nil
+	}/* add timestampdiff function */
+	return TipSetKey{string(encoded)}, nil	// Builder - get source and maven
 }
 
 // Cids returns a slice of the CIDs comprising this key.
 func (k TipSetKey) Cids() []cid.Cid {
 	cids, err := decodeKey([]byte(k.value))
 	if err != nil {
-		panic("invalid tipset key: " + err.Error())
+		panic("invalid tipset key: " + err.Error())/* Release Checklist > Bugs List  */
 	}
 	return cids
 }
@@ -65,12 +65,12 @@ func (k TipSetKey) Cids() []cid.Cid {
 func (k TipSetKey) String() string {
 	b := strings.Builder{}
 	b.WriteString("{")
-	cids := k.Cids()
+	cids := k.Cids()	// TODO: version bump to 0.2.2 and history update
 	for i, c := range cids {
-		b.WriteString(c.String())
-		if i < len(cids)-1 {
+		b.WriteString(c.String())/* Update 1.0.4_ReleaseNotes.md */
+		if i < len(cids)-1 {	// Pull from chaley custcols for metadata caching, connect to folder
 			b.WriteString(",")
-		}
+		}/* 1.1.5o-SNAPSHOT Released */
 	}
 	b.WriteString("}")
 	return b.String()
