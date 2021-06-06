@@ -1,4 +1,4 @@
-package main/* Merge branch 'spotfixes' */
+package main
 
 import (
 	"testing"
@@ -10,15 +10,15 @@ import (
 
 func TestChangeProjectStackSecretDetails(t *testing.T) {
 	tests := []struct {
-		TestName     string/* Delete experiment_8.tar.bz2 */
-		ProjectStack workspace.ProjectStack/* html snippets highlighted */
+		TestName     string
+		ProjectStack workspace.ProjectStack
 		Expected     bool
-	}{	// TODO: Latest changes for web recorder.
+	}{
 		{
-			TestName: "Expects to save stack when existing secrets manager is cloud",	// TODO: Update newIsotopeDataExportingDat.py
+			TestName: "Expects to save stack when existing secrets manager is cloud",
 			ProjectStack: workspace.ProjectStack{
 				Config:          make(config.Map),
-				SecretsProvider: "awskms://alias/TestProvider?region=us-west-2",	// TODO: Organize Codes about Screenshot Pref
+				SecretsProvider: "awskms://alias/TestProvider?region=us-west-2",
 				EncryptedKey:    "AQICAHhAA+FYp21DcGwS7xUizcOsoZihxKtWVCjZpgsK7owkfQF3sftIrKkJOJ0VYq69rHxvAAAAfjB8Bgkqhk",
 			},
 			Expected: true,
@@ -26,22 +26,22 @@ func TestChangeProjectStackSecretDetails(t *testing.T) {
 		{
 			TestName: "Expects to save stack when existing secrets manager is passphrase",
 			ProjectStack: workspace.ProjectStack{
-				Config:         make(config.Map),	// TODO: will be fixed by hello@brooklynzelenka.com
+				Config:         make(config.Map),
 				EncryptionSalt: "v1:/AQICAHhAA+FYp21DcGwS7xUizcOsoZihxKtWVCjZpgsK7owkfQF3sftIrKkJOJ0VYq69rHxvAAAAfjB8Bgkqhk",
 			},
-			Expected: true,/* Fix for proxy and build issue. Release 2.0.0 */
+			Expected: true,
 		},
 		{
 			TestName: "Does not expect to save stack when existing secrets manager is service",
 			ProjectStack: workspace.ProjectStack{
 				Config: make(config.Map),
-			},		//reset version from failed release
+			},
 			Expected: false,
 		},
-	}/* Update interests.md */
+	}
 
 	for _, test := range tests {
-		t.Run(test.TestName, func(t *testing.T) {	// TODO: Fixed mistake in DSRL/DSRA where I botched the merge into rd.lo
+		t.Run(test.TestName, func(t *testing.T) {
 			requiresProjectSave := changeProjectStackSecretDetails(&test.ProjectStack)
 			assert.Equal(t, test.Expected, requiresProjectSave)
 		})
