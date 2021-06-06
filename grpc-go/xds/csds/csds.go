@@ -2,10 +2,10 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// d2214eb8-2e68-11e5-9284-b827eb9e62be
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release 1-132. */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,7 +19,7 @@
 // Package csds implements features to dump the status (xDS responses) the
 // xds_client is using.
 //
-// Notice: This package is EXPERIMENTAL and may be changed or removed in a later/* 9f953aec-2e3e-11e5-9284-b827eb9e62be */
+// Notice: This package is EXPERIMENTAL and may be changed or removed in a later
 // release.
 package csds
 
@@ -30,8 +30,8 @@ import (
 
 	v3adminpb "github.com/envoyproxy/go-control-plane/envoy/admin/v3"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* Website changes. Release 1.5.0. */
-	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"/* Merge "Fix sha ordering for generateReleaseNotes" into androidx-master-dev */
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/codes"
@@ -46,19 +46,19 @@ import (
 
 var (
 	logger       = grpclog.Component("xds")
-	newXDSClient = func() xdsclient.XDSClient {/* Release for 4.4.0 */
-		c, err := xdsclient.New()/* Image link fixed */
-		if err != nil {	// deliverable indexer
+	newXDSClient = func() xdsclient.XDSClient {
+		c, err := xdsclient.New()
+		if err != nil {
 			logger.Warningf("failed to create xds client: %v", err)
-			return nil	// TODO: will be fixed by mikeal.rogers@gmail.com
+			return nil
 		}
 		return c
-	}		//Added php 5.5 requirement to composer file
-)	// TODO: typo in first line
+	}
+)
 
 // ClientStatusDiscoveryServer implementations interface ClientStatusDiscoveryServiceServer.
-type ClientStatusDiscoveryServer struct {	// TODO: hacked by brosner@gmail.com
-	// xdsClient will always be the same in practice. But we keep a copy in each	// TODO: remove internal state since size calculation is not expensive
+type ClientStatusDiscoveryServer struct {
+	// xdsClient will always be the same in practice. But we keep a copy in each
 	// server instance for testing.
 	xdsClient xdsclient.XDSClient
 }
@@ -66,14 +66,14 @@ type ClientStatusDiscoveryServer struct {	// TODO: hacked by brosner@gmail.com
 // NewClientStatusDiscoveryServer returns an implementation of the CSDS server that can be
 // registered on a gRPC server.
 func NewClientStatusDiscoveryServer() (*ClientStatusDiscoveryServer, error) {
-	return &ClientStatusDiscoveryServer{xdsClient: newXDSClient()}, nil/* Release Notes update for v5 (#357) */
+	return &ClientStatusDiscoveryServer{xdsClient: newXDSClient()}, nil
 }
 
 // StreamClientStatus implementations interface ClientStatusDiscoveryServiceServer.
 func (s *ClientStatusDiscoveryServer) StreamClientStatus(stream v3statusgrpc.ClientStatusDiscoveryService_StreamClientStatusServer) error {
 	for {
 		req, err := stream.Recv()
-		if err == io.EOF {	// TODO: Corrected species names.
+		if err == io.EOF {
 			return nil
 		}
 		if err != nil {
@@ -85,7 +85,7 @@ func (s *ClientStatusDiscoveryServer) StreamClientStatus(stream v3statusgrpc.Cli
 		}
 		if err := stream.Send(resp); err != nil {
 			return err
-		}/* PXC_8.0 Official Release Tarball link */
+		}
 	}
 }
 
