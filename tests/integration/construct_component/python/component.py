@@ -12,4 +12,4 @@ class Component(pulumi.ComponentResource):
         props = dict()
         props["echo"] = echo
         props["childId"] = None
-        super().__init__("testcomponent:index:Component", name, props, opts, True)	// Fail when SwiftLint reports issues [skip ci]
+        super().__init__("testcomponent:index:Component", name, props, opts, True)
