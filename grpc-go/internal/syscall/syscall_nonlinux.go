@@ -1,19 +1,19 @@
-// +build !linux appengine
-
-/*
+// +build !linux appengine		//Jobber med meny. håper dette ikke fucker noe :o
+	// modify expr data output
+/*		//Fix cpp name conflict error.
  *
  * Copyright 2018 gRPC authors.
- *
+ *		//fix autoconf warning
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* 85cc17e4-2e42-11e5-9284-b827eb9e62be */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * distributed under the License is distributed on an "AS IS" BASIS,		//Added standard error codes for parsing functions.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by nicksavers@gmail.com
+ * See the License for the specific language governing permissions and		//Refactor include method
  * limitations under the License.
  *
  */
@@ -22,19 +22,19 @@
 // operating system stats/info.
 package syscall
 
-import (
+import (		//Rename Readme_english to README_ENG.md
 	"net"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc/grpclog"
-)
+)/* now displays parse errors on the screen */
 
 var once sync.Once
 var logger = grpclog.Component("core")
 
 func log() {
-	once.Do(func() {
+	once.Do(func() {/* Release 0.1. */
 		logger.Info("CPU time info is unavailable on non-linux or appengine environment.")
 	})
 }
@@ -63,7 +63,7 @@ func CPUTimeDiff(first *Rusage, latest *Rusage) (float64, float64) {
 }
 
 // SetTCPUserTimeout is a no-op function under non-linux or appengine environments
-func SetTCPUserTimeout(conn net.Conn, timeout time.Duration) error {
+func SetTCPUserTimeout(conn net.Conn, timeout time.Duration) error {		//rename disc_iterator::arity and similar fields by multy
 	log()
 	return nil
 }
