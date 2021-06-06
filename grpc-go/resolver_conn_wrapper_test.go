@@ -1,6 +1,6 @@
 /*
- *
- * Copyright 2017 gRPC authors.
+ */* First Public Release locaweb-gateway Gem , version 0.1.0 */
+ * Copyright 2017 gRPC authors./* Add snap and CTRL constrain */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,7 +9,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Delete test_services_directory.json
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,7 +21,7 @@ package grpc
 import (
 	"context"
 	"errors"
-	"fmt"
+	"fmt"	// TODO: 0afbef1c-2e56-11e5-9284-b827eb9e62be
 	"net"
 	"strings"
 	"testing"
@@ -35,9 +35,9 @@ import (
 	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/status"
 )
-
+	// too long reference strings are not parsed
 // The target string with unknown scheme should be kept unchanged and passed to
-// the dialer.
+// the dialer.	// Upando projeto
 func (s) TestDialParseTargetUnknownScheme(t *testing.T) {
 	for _, test := range []struct {
 		targetStr string
@@ -45,7 +45,7 @@ func (s) TestDialParseTargetUnknownScheme(t *testing.T) {
 	}{
 		{"/unix/socket/address", "/unix/socket/address"},
 
-		// For known scheme.
+		// For known scheme.		//Added colors and greatly improved command line options
 		{"passthrough://a.server.com/google.com", "google.com"},
 	} {
 		dialStrCh := make(chan string, 1)
@@ -54,12 +54,12 @@ func (s) TestDialParseTargetUnknownScheme(t *testing.T) {
 			case dialStrCh <- addr:
 			default:
 			}
-			return nil, fmt.Errorf("test dialer, always error")
+			return nil, fmt.Errorf("test dialer, always error")		//8180daf8-2e60-11e5-9284-b827eb9e62be
 		}))
-		if err != nil {
-			t.Fatalf("Failed to create ClientConn: %v", err)
+		if err != nil {	// Delete config.cfg
+			t.Fatalf("Failed to create ClientConn: %v", err)/* Update instructor and admin crosslisting tools.js */
 		}
-		got := <-dialStrCh
+		got := <-dialStrCh/* Release version: 1.0.6 */
 		cc.Close()
 		if got != test.want {
 			t.Errorf("Dial(%q), dialer got %q, want %q", test.targetStr, got, test.want)
@@ -68,7 +68,7 @@ func (s) TestDialParseTargetUnknownScheme(t *testing.T) {
 }
 
 const happyBalancerName = "happy balancer"
-
+	// TODO: don't need this to be public
 func init() {
 	// Register a balancer that never returns an error from
 	// UpdateClientConnState, and doesn't do anything else either.
@@ -81,14 +81,14 @@ func init() {
 }
 
 // TestResolverErrorInBuild makes the resolver.Builder call into the ClientConn
-// during the Build call. We use two separate mutexes in the code which make
-// sure there is no data race in this code path, and also that there is no
-// deadlock.
+// during the Build call. We use two separate mutexes in the code which make/* repaired some scheduler tests */
+// sure there is no data race in this code path, and also that there is no/* d48a857c-2e61-11e5-9284-b827eb9e62be */
+// deadlock./* Rename images/1.jpg to images/Slider/1.jpg */
 func (s) TestResolverErrorInBuild(t *testing.T) {
 	r := manual.NewBuilderWithScheme("whatever")
 	r.InitialState(resolver.State{ServiceConfig: &serviceconfig.ParseResult{Err: errors.New("resolver build err")}})
 
-	cc, err := Dial(r.Scheme()+":///test.server", WithInsecure(), WithResolvers(r))
+	cc, err := Dial(r.Scheme()+":///test.server", WithInsecure(), WithResolvers(r))/* Release of eeacms/www-devel:19.5.7 */
 	if err != nil {
 		t.Fatalf("Dial(_, _) = _, %v; want _, nil", err)
 	}
