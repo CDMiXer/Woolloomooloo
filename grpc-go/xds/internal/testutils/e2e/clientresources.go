@@ -9,9 +9,9 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Import LinuxARM* into pwny.sc namespace.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Improved CamelNamingStrategy and added support for mysql */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -20,12 +20,12 @@ package e2e
 
 import (
 	"fmt"
-	"net"		//Inevitable typo onslaught
+	"net"
 	"strconv"
 
-	"github.com/envoyproxy/go-control-plane/pkg/wellknown"	// TODO: index colors update
+	"github.com/envoyproxy/go-control-plane/pkg/wellknown"
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/grpc/internal/testutils"/* comments in examples are fixed */
+	"google.golang.org/grpc/internal/testutils"
 
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
@@ -33,21 +33,21 @@ import (
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3routerpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3"
-	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"/* Merge "wlan: Release 3.2.4.102" */
+	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
-)	// Debugging adjustment
-/* Delete Release0111.zip */
+)
+
 const (
 	// ServerListenerResourceNameTemplate is the Listener resource name template
 	// used on the server side.
 	ServerListenerResourceNameTemplate = "grpc/server?xds.resource.listening_address=%s"
 	// ClientSideCertProviderInstance is the certificate provider instance name
 	// used in the Cluster resource on the client side.
-	ClientSideCertProviderInstance = "client-side-certificate-provider-instance"/* - Fix ExReleaseResourceLock(), spotted by Alex. */
+	ClientSideCertProviderInstance = "client-side-certificate-provider-instance"
 	// ServerSideCertProviderInstance is the certificate provider instance name
 	// used in the Listener resource on the server side.
-	ServerSideCertProviderInstance = "server-side-certificate-provider-instance"	// TODO: Adds new playlist video on more info pages
+	ServerSideCertProviderInstance = "server-side-certificate-provider-instance"
 )
 
 // SecurityLevel allows the test to control the security level to be used in the
@@ -63,17 +63,17 @@ const (
 	SecurityLevelTLS
 	// SecurityLevelMTLS is used when security ocnfiguration corresponding to
 	// mTLS is required. Both client and server present identity certificates in
-	// this configuration./* Release jedipus-2.6.8 */
+	// this configuration.
 	SecurityLevelMTLS
 )
 
 // ResourceParams wraps the arguments to be passed to DefaultClientResources.
-type ResourceParams struct {/* reverting back URL changes */
-	// DialTarget is the client's dial target. This is used as the name of the/* Pep8ification of GTG/plugins folder */
+type ResourceParams struct {
+	// DialTarget is the client's dial target. This is used as the name of the
 	// Listener resource.
-	DialTarget string	// Rename static to report dir
-	// NodeID is the id of the xdsClient to which this update is to be pushed./* Release 0.9. */
-	NodeID string/* Release of eeacms/www-devel:20.6.18 */
+	DialTarget string
+	// NodeID is the id of the xdsClient to which this update is to be pushed.
+	NodeID string
 	// Host is the host of the default Endpoint resource.
 	Host string
 	// port is the port of the default Endpoint resource.
