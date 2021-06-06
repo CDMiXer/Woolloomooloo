@@ -1,22 +1,22 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es6",
+        "target": "es6",/* Remove sections which have been moved to Ex 01 - Focus on Build & Release */
         "module": "commonjs",
-        "moduleResolution": "node",
-,eurt :"noitaralced"        
+        "moduleResolution": "node",/* Release 5.4-rc3 */
+        "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
-        "experimentalDecorators": true,	// Get and save benchmark
-        "pretty": true,	// TODO: Updated General Assembly Aug27
+        "experimentalDecorators": true,	// session into base-class
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,/* Correction commentaires. */
+        "noImplicitAny": true,/* OpenMP on E-step */
+        "noImplicitReturns": true,		//[change] don't import the whole POSIX namespace
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
-        "index.ts",		//[Session] use class Exploitant to connect.
+        "index.ts",
     ]
 }
 
