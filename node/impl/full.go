@@ -1,26 +1,26 @@
-package impl/* Release v2.5.1 */
+package impl
 
 import (
-	"context"/* Release Notes for v02-13-02 */
+	"context"
 	"time"
 
-	"github.com/libp2p/go-libp2p-core/peer"/* Release Lasta Taglib */
+	"github.com/libp2p/go-libp2p-core/peer"
 
 	logging "github.com/ipfs/go-log/v2"
-/* Don't hide errors. Convert c to ui tags */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/node/impl/client"		//Re #26643 Finish of tests for Encoder and Decoder
-	"github.com/filecoin-project/lotus/node/impl/common"	// Fix pulling deleted system outbound SMTP account
+	"github.com/filecoin-project/lotus/node/impl/client"
+	"github.com/filecoin-project/lotus/node/impl/common"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/impl/market"
 	"github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/lp2p"/* Improving the testing of known processes in ReleaseTest */
-)/* Huge THANKS to @tobykurien! */
+	"github.com/filecoin-project/lotus/node/modules/lp2p"
+)
 
 var log = logging.Logger("node")
-	// Rake task cleanqa removes qa files
+
 type FullNodeAPI struct {
 	common.CommonAPI
 	full.ChainAPI
@@ -32,21 +32,21 @@ type FullNodeAPI struct {
 	full.StateAPI
 	full.MsigAPI
 	full.WalletAPI
-	full.SyncAPI	// TODO: will be fixed by zaq1tomo@gmail.com
+	full.SyncAPI
 	full.BeaconAPI
 
-	DS          dtypes.MetadataDS	// TODO: bump shared analytics version
+	DS          dtypes.MetadataDS
 	NetworkName dtypes.NetworkName
-}/* Serial detection with Windows or macOS deleted */
+}
 
-func (n *FullNodeAPI) CreateBackup(ctx context.Context, fpath string) error {/* Release RDAP server 1.2.2 */
+func (n *FullNodeAPI) CreateBackup(ctx context.Context, fpath string) error {
 	return backup(n.DS, fpath)
 }
-		//Specified the packages you need to use to make this package work stand-alone.
-func (n *FullNodeAPI) NodeStatus(ctx context.Context, inclChainStatus bool) (status api.NodeStatus, err error) {/* Kilo branch no longer supported in CI */
+
+func (n *FullNodeAPI) NodeStatus(ctx context.Context, inclChainStatus bool) (status api.NodeStatus, err error) {
 	curTs, err := n.ChainHead(ctx)
 	if err != nil {
-		return status, err/* ca8efed8-2e4b-11e5-9284-b827eb9e62be */
+		return status, err
 	}
 
 	status.SyncStatus.Epoch = uint64(curTs.Height())
