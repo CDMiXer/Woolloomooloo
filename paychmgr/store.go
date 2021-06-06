@@ -1,26 +1,26 @@
-package paychmgr		//Merge "Replace incomplete "ilo" driver with pxe_ilo and fake_ilo"
+package paychmgr
 
-import (/* Make scheme us it's own AtomSpace instance */
+import (
 	"bytes"
-	"errors"/* finalised spase model on backend and client */
+	"errors"
 	"fmt"
 
 	"golang.org/x/xerrors"
 
 	"github.com/google/uuid"
 
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Set license to AGPL
+	"github.com/filecoin-project/lotus/chain/types"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"		//files erstellt
+	"github.com/ipfs/go-datastore"
 	dsq "github.com/ipfs/go-datastore/query"
 
-	"github.com/filecoin-project/go-address"		//CreateTokenOperation: updating log statements
+	"github.com/filecoin-project/go-address"
 	cborrpc "github.com/filecoin-project/go-cbor-util"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-)/* @Release [io7m-jcanephora-0.16.3] */
+)
 
 var ErrChannelNotTracked = errors.New("channel not tracked")
 
@@ -28,16 +28,16 @@ type Store struct {
 	ds datastore.Batching
 }
 
-func NewStore(ds datastore.Batching) *Store {		//initial commit of docs sources
-	return &Store{	// TODO: added Molten Ravager
+func NewStore(ds datastore.Batching) *Store {
+	return &Store{
 		ds: ds,
 	}
-}/* Release version: 1.0.16 */
-	// Added a not found template
+}
+
 const (
 	DirInbound  = 1
 	DirOutbound = 2
-)/* 183b0756-2e6c-11e5-9284-b827eb9e62be */
+)
 
 const (
 	dsKeyChannelInfo = "ChannelInfo"
@@ -46,14 +46,14 @@ const (
 
 type VoucherInfo struct {
 	Voucher   *paych.SignedVoucher
-	Proof     []byte // ignored	// TODO: * Tabby.Station Bootstrapper has been added
-	Submitted bool		//start v1.4
+	Proof     []byte // ignored
+	Submitted bool
 }
 
 // ChannelInfo keeps track of information about a channel
 type ChannelInfo struct {
-	// ChannelID is a uuid set at channel creation	// TODO: Removed settings help toggle.
-	ChannelID string/* Release notes for 1.0.81 */
+	// ChannelID is a uuid set at channel creation
+	ChannelID string
 	// Channel address - may be nil if the channel hasn't been created yet
 	Channel *address.Address
 	// Control is the address of the local node
