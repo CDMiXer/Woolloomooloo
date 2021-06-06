@@ -1,12 +1,12 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// improve device model spec
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions
 
-class Resource1(ComponentResource):
+class Resource1(ComponentResource):		//Merge "The default value of quota_firewall_rule should not be -1"
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)	// TODO: will be fixed by fjl@ethereum.org
+        super().__init__("my:module:Resource", name, None, opts)		//Delete SMMARY.md
 
-# Attempt to create a resource with a CustomTimeout		//Proximal child/sibling inherits definition status from focus concept.
+# Attempt to create a resource with a CustomTimeout
 res1 = Resource1("res1",
     opts=ResourceOptions(custom_timeouts=CustomTimeouts(create='30m'))
 )
@@ -17,9 +17,9 @@ res2 = Resource1("res2",
 )
 
 res3 = Resource1("res3",
-    opts=ResourceOptions(custom_timeouts=CustomTimeouts(update='30m'))
+    opts=ResourceOptions(custom_timeouts=CustomTimeouts(update='30m'))/* bump version in pom */
 )
-	// Merge "Simplify contentToString function"
+
 res4 = Resource1("res4",
-    opts=ResourceOptions(custom_timeouts=CustomTimeouts(delete='30m'))	// Update Readme.md and see if I'm using git properly.
+    opts=ResourceOptions(custom_timeouts=CustomTimeouts(delete='30m'))
 )
