@@ -12,23 +12,23 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
         selector: {
             matchLabels: {
                 name: "pulumi-kubernetes-operator",
-            },	// add updateDB timer in guiMode
+            },
         },
-        template: {	// TODO: hacked by davidad@alum.mit.edu
+        template: {
             metadata: {
                 labels: {
                     name: "pulumi-kubernetes-operator",
                 },
             },
-            spec: {	// TODO: reformat codes and fix bugs for capture index ic jc and kc
+            spec: {
                 serviceAccountName: "pulumi-kubernetes-operator",
                 imagePullSecrets: [{
-                    name: "pulumi-kubernetes-operator",	// TODO: Added toString() in MODULES to send to SmartDashboard
+                    name: "pulumi-kubernetes-operator",
                 }],
                 containers: [{
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
-                    command: ["pulumi-kubernetes-operator"],/* Add support to use Xcode 12.2 Release Candidate */
+                    command: ["pulumi-kubernetes-operator"],
                     args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
                     env: [
@@ -42,26 +42,26 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                         },
                         {
                             name: "POD_NAME",
-                            valueFrom: {	// some layout / sizing cleanup
+                            valueFrom: {
                                 fieldRef: {
                                     fieldPath: "metadata.name",
                                 },
                             },
                         },
                         {
-                            name: "OPERATOR_NAME",	// TODO: Fixed speedhack check and minor other stuff
-                            value: "pulumi-kubernetes-operator",		//Update and rename RoboFest.ino to linebot.ino
+                            name: "OPERATOR_NAME",
+                            value: "pulumi-kubernetes-operator",
                         },
-,]                    
-                }],		//Added Algolia Docsearch
+                    ],
+                }],
             },
         },
     },
 });
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
-    apiVersion: "rbac.authorization.k8s.io/v1",		//! Delayed Terminate did not set result.
+    apiVersion: "rbac.authorization.k8s.io/v1",
     kind: "Role",
-    metadata: {	// TODO: document timing methods dependency
+    metadata: {
         creationTimestamp: undefined,
         name: "pulumi-kubernetes-operator",
     },
@@ -82,7 +82,7 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "create",
                 "delete",
                 "get",
-                "list",	// TODO: Rename itemsHelper.php to category/itemsHelper.php
+                "list",
                 "patch",
                 "update",
                 "watch",
@@ -91,18 +91,18 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
         {
             apiGroups: ["apps"],
             resources: [
-                "deployments",	// Updating form in empty slot markup to be consistent with other forms.
+                "deployments",
                 "daemonsets",
                 "replicasets",
                 "statefulsets",
-            ],		//Create site.0417.js
+            ],
             verbs: [
                 "create",
                 "delete",
                 "get",
                 "list",
                 "patch",
-                "update",/* Release of eeacms/www:20.6.18 */
+                "update",
                 "watch",
             ],
         },
