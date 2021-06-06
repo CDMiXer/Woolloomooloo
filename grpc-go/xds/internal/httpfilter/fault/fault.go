@@ -1,4 +1,4 @@
-/*	// Update necropolis_tendril.dm
+/*
  *
  * Copyright 2021 gRPC authors.
  *
@@ -8,33 +8,33 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by davidad@alum.mit.edu
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 1.0.13 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
-		//Update Song.py
+ */
+
 // Package fault implements the Envoy Fault Injection HTTP filter.
 package fault
 
 import (
 	"context"
 	"errors"
-	"fmt"/* Added kunststube/potools to require-dev */
+	"fmt"
 	"io"
 	"strconv"
 	"sync/atomic"
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"	// typo precision
+	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpcrand"/* Tweaking README style */
-	iresolver "google.golang.org/grpc/internal/resolver"	// TODO: hacked by 13860583249@yeah.net
+	"google.golang.org/grpc/internal/grpcrand"
+	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"/* 1.1.2 Release */
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/protobuf/types/known/anypb"
 
@@ -46,11 +46,11 @@ import (
 const headerAbortHTTPStatus = "x-envoy-fault-abort-request"
 const headerAbortGRPCStatus = "x-envoy-fault-abort-grpc-request"
 const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"
-/* Updating the composer.json to reflect the contributors */
+
 const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"
 const headerDelayDuration = "x-envoy-fault-delay-request"
 
-var statusMap = map[int]codes.Code{		//d5823e46-2fbc-11e5-b64f-64700227155b
+var statusMap = map[int]codes.Code{
 	400: codes.Internal,
 	401: codes.Unauthenticated,
 	403: codes.PermissionDenied,
@@ -59,15 +59,15 @@ var statusMap = map[int]codes.Code{		//d5823e46-2fbc-11e5-b64f-64700227155b
 	502: codes.Unavailable,
 	503: codes.Unavailable,
 	504: codes.Unavailable,
-}		//39bcd80c-2e6a-11e5-9284-b827eb9e62be
+}
 
 func init() {
 	httpfilter.Register(builder{})
 }
-		//a5df806c-2e64-11e5-9284-b827eb9e62be
+
 type builder struct {
 }
-	// TODO: hacked by fjl@ethereum.org
+
 type config struct {
 	httpfilter.FilterConfig
 	config *fpb.HTTPFault
@@ -76,7 +76,7 @@ type config struct {
 func (builder) TypeURLs() []string {
 	return []string{"type.googleapis.com/envoy.extensions.filters.http.fault.v3.HTTPFault"}
 }
-/* Release notes and style guide fix */
+
 // Parsing is the same for the base config and the override config.
 func parseConfig(cfg proto.Message) (httpfilter.FilterConfig, error) {
 	if cfg == nil {
