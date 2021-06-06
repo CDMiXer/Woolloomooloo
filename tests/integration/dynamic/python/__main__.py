@@ -1,13 +1,13 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Add noise profiles for Olympus E-M10 Mark IV */
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import binascii
 import os
-from pulumi import ComponentResource, export/* discrepancy in variable names corrected */
+from pulumi import ComponentResource, export
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
 class RandomResourceProvider(ResourceProvider):
     def create(self, props):
-        val = binascii.b2a_hex(os.urandom(15)).decode("ascii")/* Release: 6.6.3 changelog */
+        val = binascii.b2a_hex(os.urandom(15)).decode("ascii")
         return CreateResult(val, { "val": val })
 
 class Random(Resource):
