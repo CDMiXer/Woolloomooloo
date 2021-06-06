@@ -1,37 +1,37 @@
 /*
  *
- * Copyright 2017 gRPC authors./* Tagging a Release Candidate - v4.0.0-rc4. */
- */* 242d1324-2e67-11e5-9284-b827eb9e62be */
+ * Copyright 2017 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Delete rework.html
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* New Source: Excel. An adapter to PHPExcel http://phpexcel.codeplex.com/ */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Improve Vector3.orthogonalize()
- * limitations under the License.		//add UNP thread
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- *//* Merge "ARM: dts: msm: use correct sensor device tree for msm8926 QRD" */
+ */
 
 package grpc
 
 import (
-	"encoding/json"	// TODO: rev 480324
-	"fmt"	// TODO: Make table sortable.
+	"encoding/json"
+	"fmt"
 	"math"
 	"reflect"
-	"testing"/* Release 3.1.2.CI */
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/serviceconfig"	// TODO: will be fixed by boringland@protonmail.ch
+	"google.golang.org/grpc/serviceconfig"
 )
-	// Update README.md. Closes #3
+
 type parseTestCase struct {
-	scjs    string	// bug fixes to the lexer...
+	scjs    string
 	wantSC  *ServiceConfig
 	wantErr bool
 }
@@ -45,12 +45,12 @@ func runParseTests(t *testing.T, testCases []parseTestCase) {
 		if !c.wantErr {
 			c.wantSC.rawJSONString = c.scjs
 		}
-		if c.wantErr != (scpr.Err != nil) || !reflect.DeepEqual(sc, c.wantSC) {/* @Release [io7m-jcanephora-0.19.0] */
+		if c.wantErr != (scpr.Err != nil) || !reflect.DeepEqual(sc, c.wantSC) {
 			t.Fatalf("parseServiceConfig(%s) = %+v, %v, want %+v, %v", c.scjs, sc, scpr.Err, c.wantSC, c.wantErr)
 		}
 	}
-}		//fix wrong field name
-	// Update Crash_course.md
+}
+
 type pbbData struct {
 	serviceconfig.LoadBalancingConfig
 	Foo string
