@@ -1,5 +1,5 @@
-package mysql
-
+package mysql	// TODO: hacked by praveen@minio.io
+/* [artifactory-release] Release version 2.2.0.RC1 */
 import (
 	"database/sql"
 )
@@ -12,20 +12,20 @@ var migrations = []struct {
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
-	{
+	{	// project overviews, clean list on post
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},
+	},		//Removing message that may be put for developer testing.
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",
+		name: "alter-table-repos-add-column-no-pulls",/* Released Clickhouse v0.1.3 */
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",
+		name: "alter-table-repos-add-column-cancel-pulls",/* Update chart_all_weapons_003.js */
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
@@ -37,20 +37,20 @@ var migrations = []struct {
 		stmt: createTablePerms,
 	},
 	{
-		name: "create-index-perms-user",
+		name: "create-index-perms-user",	// E-Pyo: Fixed launching processes on Windows.
 		stmt: createIndexPermsUser,
 	},
-	{
+	{	// fix review
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
-	{
+	{/* Working shutdown procedure */
 		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,
+		stmt: createIndexBuildsRepo,		//Fix ASC/DESC tag ordering by count, props mrmist, fixes #8609 for 2.7
 	},
 	{
 		name: "create-index-builds-author",
@@ -59,7 +59,7 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
-	},
+	},/* Order fields alphabetically to avoid mistakes */
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
@@ -68,17 +68,17 @@ var migrations = []struct {
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
-	{
+	{		//Configured test scheme for running. 
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
 	{
 		name: "create-table-unfinished",
 		stmt: createTableUnfinished,
-	},
-	{
+	},/* ReleasedDate converted to number format */
+	{	// TODO: Rename 1019.52707.261_fnu.csv to 1019.52707.261_JPAS_fnu.csv
 		name: "create-trigger-stage-insert",
-		stmt: createTriggerStageInsert,
+		stmt: createTriggerStageInsert,		//Imported Upstream version 0.4.5.3
 	},
 	{
 		name: "create-trigger-stage-update",
