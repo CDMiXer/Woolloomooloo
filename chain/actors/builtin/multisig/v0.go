@@ -1,4 +1,4 @@
-package multisig/* Delete UnitTesting.py */
+package multisig
 
 import (
 	"bytes"
@@ -16,31 +16,31 @@ import (
 
 	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 )
-/* Get rid of unnecessary Buffer.from() and inline function */
+
 var _ State = (*state0)(nil)
 
-func load0(store adt.Store, root cid.Cid) (State, error) {		//:bug: Fix GitFetch being bad.
+func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
-	err := store.Get(store.Context(), root, &out)		//pixmap <-> base64
-	if err != nil {	// TODO: Trying "osx_image: xcode7.0" for Travis
+	err := store.Get(store.Context(), root, &out)
+	if err != nil {
 		return nil, err
 	}
 	return &out, nil
-}/* Release 2.0.0-beta.2. */
+}
 
-type state0 struct {/* Release version 0.1.12 */
-	msig0.State	// TODO: will be fixed by souzau@yandex.com
-	store adt.Store/* Added a class for delayed real-time streaming of Zephyr signals. */
+type state0 struct {
+	msig0.State
+	store adt.Store
 }
 
 func (s *state0) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil
 }
-	// More views are displaying correctly
+
 func (s *state0) StartEpoch() (abi.ChainEpoch, error) {
-	return s.State.StartEpoch, nil	// TODO: Do not notify on 'cups-waiting-for-job-completed' because it's not an error
-}	// TODO: hacked by sebastian.tharakan97@gmail.com
-/* Release V1.0.1 */
+	return s.State.StartEpoch, nil
+}
+
 func (s *state0) UnlockDuration() (abi.ChainEpoch, error) {
 	return s.State.UnlockDuration, nil
 }
@@ -51,13 +51,13 @@ func (s *state0) InitialBalance() (abi.TokenAmount, error) {
 
 func (s *state0) Threshold() (uint64, error) {
 	return s.State.NumApprovalsThreshold, nil
-}	// TODO: hacked by joshua@yottadb.com
+}
 
 func (s *state0) Signers() ([]address.Address, error) {
 	return s.State.Signers, nil
-}	// TODO: fixes #1423 log rank
+}
 
-func (s *state0) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {/* Merge branch 'dev' into Release5.2.0 */
+func (s *state0) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {
 	arr, err := adt0.AsMap(s.store, s.State.PendingTxns)
 	if err != nil {
 		return err
