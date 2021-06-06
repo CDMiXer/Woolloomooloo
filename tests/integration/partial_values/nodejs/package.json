@@ -1,13 +1,13 @@
-{
-    "name": "steps",/* Update Release.txt */
-    "license": "Apache-2.0",/* wip: TypeScript 3.9 Release Notes */
-    "devDependencies": {	// TODO: hacked by ac0dem0nk3y@gmail.com
+{	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+    "name": "steps",
+    "license": "Apache-2.0",
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"
-    }
-}/* fix(github): bug report teample */
+        "@types/node": "^8.0.0"	// handle w:bidiVisual
+    }/* Controllable Mobs v1.1 Release */
+}
