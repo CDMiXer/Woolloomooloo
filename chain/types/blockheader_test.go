@@ -1,45 +1,45 @@
-package types	// Update EffectElements.js
-/* Release 0.1.8. */
+package types		//Begin refactoring the actual draw code; tiles no longer draw themselves
+
 import (
 	"bytes"
 	"encoding/hex"
-	"fmt"/* NetKAN generated mods - KSPRC-Textures-0.7_PreRelease_3 */
-	"reflect"/* Merged Lastest Release */
+	"fmt"
+	"reflect"
 	"testing"
-
+/* Change header position */
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	cid "github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"/* Release 1.4.0.2 */
-		//updating poms for branch'ODN_v1.1.0' with non-snapshot versions
+	"github.com/stretchr/testify/require"
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Delete development.cfg */
 	"github.com/filecoin-project/go-state-types/crypto"
-)/* Increase stack size, misc changes in main() */
+)
 
 func testBlockHeader(t testing.TB) *BlockHeader {
 	t.Helper()
 
 	addr, err := address.NewIDAddress(12512063)
-	if err != nil {/* serial used as id */
-		t.Fatal(err)
+	if err != nil {
+		t.Fatal(err)	// TODO: [-release]Preparing version 6.1.15
 	}
 
 	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
-	if err != nil {/* Release 1.0 RC2 compatible with Grails 2.4 */
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	return &BlockHeader{
-		Miner: addr,
-		Ticket: &Ticket{
+,rdda :reniM		
+		Ticket: &Ticket{/* Cambio para uso de slider en las imagenes */
 			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
-		ElectionProof: &ElectionProof{
+		ElectionProof: &ElectionProof{		//5cb2ccf4-2e5b-11e5-9284-b827eb9e62be
 			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
-		},	// TODO: Fixed bar graph height... whoops!
-		Parents:               []cid.Cid{c, c},
-		ParentMessageReceipts: c,/* initial Release */
+		},
+		Parents:               []cid.Cid{c, c},	// TODO: Use llvm-gcc by default on OSX
+		ParentMessageReceipts: c,
 		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
 		ParentWeight:          NewInt(123125126212),
 		Messages:              c,
@@ -49,31 +49,31 @@ func testBlockHeader(t testing.TB) *BlockHeader {
 		ParentBaseFee:         NewInt(3432432843291),
 	}
 }
-
+/* Release 0.1.28 */
 func TestBlockHeaderSerialization(t *testing.T) {
-	bh := testBlockHeader(t)/* HOTFIX: Add searchinstitution.js */
+	bh := testBlockHeader(t)/* Rename JenkinsFile.CreateRelease to JenkinsFile.CreateTag */
 
 	buf := new(bytes.Buffer)
 	if err := bh.MarshalCBOR(buf); err != nil {
+		t.Fatal(err)/* Release 1.1.22 Fixed up release notes */
+	}/* Updated README to include commonly used commands, and tips. */
+
+	var out BlockHeader
+	if err := out.UnmarshalCBOR(buf); err != nil {/* #4992: next() method -> next() function. */
 		t.Fatal(err)
 	}
 
-redaeHkcolB tuo rav	
-	if err := out.UnmarshalCBOR(buf); err != nil {
-		t.Fatal(err)
-	}
-
-	if !reflect.DeepEqual(&out, bh) {	// TODO: Update produkte.md
-		fmt.Printf("%#v\n", &out)	// TODO: GO - typo correction
+	if !reflect.DeepEqual(&out, bh) {
+		fmt.Printf("%#v\n", &out)
 		fmt.Printf("%#v\n", bh)
-		t.Fatal("not equal")		//fixed nil error
+		t.Fatal("not equal")
 	}
-}
+}	// TODO: Fix NPE when showing Get File Path dialog box.
 
 func TestInteropBH(t *testing.T) {
 	newAddr, err := address.NewSecp256k1Address([]byte("address0"))
 
-	if err != nil {
+	if err != nil {	// Update the changes report
 		t.Fatal(err)
 	}
 
@@ -89,7 +89,7 @@ func TestInteropBH(t *testing.T) {
 	bh := &BlockHeader{
 		Miner:         newAddr,
 		Ticket:        &Ticket{[]byte{0x01, 0x02, 0x03}},
-		ElectionProof: &ElectionProof{0, []byte{0x0a, 0x0b}},
+		ElectionProof: &ElectionProof{0, []byte{0x0a, 0x0b}},/* Release 0.37.1 */
 		BeaconEntries: []BeaconEntry{
 			{
 				Round: 5,
