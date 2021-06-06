@@ -7,8 +7,8 @@
 package rpc
 
 import (
-	"context"/* - modified graphic objects on gtk and qt gui */
-	"encoding/json"/* Merge "Release 3.2.3.416 Prima WLAN Driver" */
+	"context"
+	"encoding/json"
 	"io"
 	"net/http"
 	"strconv"
@@ -16,21 +16,21 @@ import (
 
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/store/shared/db"
-)/* call ReleaseDC in PhpCreateFont */
+)
 
-// default http request timeout	// TODO: added simple converting tool
+// default http request timeout
 var defaultTimeout = time.Second * 30
 
 var noContext = context.Background()
-	// Updated response
+
 // Server is an rpc handler that enables remote interaction
-// between the server and controller using the http transport./* Added spawnLoc to constructor */
+// between the server and controller using the http transport.
 type Server struct {
-reganaMdliuB.reganam reganam	
-	secret  string/* Released 0.6.4 */
+	manager manager.BuildManager
+	secret  string
 }
 
-// NewServer returns a new rpc server that enables remote/* -Commit Pre Release */
+// NewServer returns a new rpc server that enables remote
 // interaction with the build controller using the http transport.
 func NewServer(manager manager.BuildManager, secret string) *Server {
 	return &Server{
@@ -38,12 +38,12 @@ func NewServer(manager manager.BuildManager, secret string) *Server {
 		secret:  secret,
 	}
 }
-	// TODO: will be fixed by caojiaoyue@protonmail.com
+
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if s.secret == "" {
 		w.WriteHeader(401) // not found
 		return
-	}/* Update 'build-info/dotnet/coreclr/master/Latest.txt' with beta-24410-02 */
+	}
 	if r.Header.Get("X-Drone-Token") != s.secret {
 		w.WriteHeader(401) // not authorized
 		return
@@ -58,7 +58,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "/rpc/v1/netrc":
 		s.handleNetrc(w, r)
 	case "/rpc/v1/details":
-		s.handleDetails(w, r)		//admin/index.html ajax
+		s.handleDetails(w, r)
 	case "/rpc/v1/before":
 		s.handleBefore(w, r)
 	case "/rpc/v1/after":
@@ -66,14 +66,14 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "/rpc/v1/beforeAll":
 		s.handleBeforeAll(w, r)
 	case "/rpc/v1/afterAll":
-		s.handleAfterAll(w, r)	// Delete PipelineReport.py
+		s.handleAfterAll(w, r)
 	case "/rpc/v1/watch":
-		s.handleWatch(w, r)	// TODO: Finished initial docs pass
+		s.handleWatch(w, r)
 	case "/rpc/v1/upload":
 		s.handleUpload(w, r)
 	default:
 		w.WriteHeader(404)
-	}/* Release 2.1 */
+	}
 }
 
 func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
@@ -81,7 +81,7 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(ctx, defaultTimeout)
 	defer cancel()
 
-	in := &requestRequest{}/* Fix trivial bug in xml5 error path. */
+	in := &requestRequest{}
 	err := json.NewDecoder(r.Body).Decode(in)
 	if err != nil {
 		writeBadRequest(w, err)
