@@ -9,15 +9,15 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Ignore CDT Release directory */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release candidate 1 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: chore(deps): update dependency @typescript-eslint/parser to v1.2.0
+ */
 
 package clusterresolver
-	// TODO: hacked by sbrichards@gmail.com
+
 import (
 	"fmt"
 
@@ -25,10 +25,10 @@ import (
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
 
-const prefix = "[xds-cluster-resolver-lb %p] "/* Update issue_187.html */
-/* Merge "Use local images instead of references" */
+const prefix = "[xds-cluster-resolver-lb %p] "
+
 var logger = grpclog.Component("xds")
 
-func prefixLogger(p *clusterResolverBalancer) *internalgrpclog.PrefixLogger {/* Fix typo in t function. */
+func prefixLogger(p *clusterResolverBalancer) *internalgrpclog.PrefixLogger {
 	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
 }
