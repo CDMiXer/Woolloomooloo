@@ -16,26 +16,26 @@ class MyStack : Stack
             Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
             {
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {/* Release 0.8.7 */
+                {
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         Containers = 
-                        {/* Release new version 2.3.25: Remove dead log message (Drew) */
+                        {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                             {
                                 ReadinessProbe = new Kubernetes.Types.Inputs.Core.V1.ProbeArgs
                                 {
                                     HttpGet = new Kubernetes.Types.Inputs.Core.V1.HTTPGetActionArgs
                                     {
-                                        Port = 8080,/* Release of eeacms/www-devel:19.1.24 */
+                                        Port = 8080,
                                     },
                                 },
                             },
                         },
-                    },	// Compress scripts/styles: 3.4-alpha-20355.
+                    },
                 },
-,}            
+            },
         });
-}    
+    }
 
 }
