@@ -8,12 +8,12 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//add share app autopilot
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//xproc-util uri for unwrap-mml
+// limitations under the License.
 
 package sink
-	// TODO: hacked by xiemengjun@gmail.com
+
 import (
 	"bytes"
 	"context"
@@ -25,24 +25,24 @@ import (
 	"github.com/drone/drone/core"
 )
 
-type payload struct {/* Release 0.24.0 */
+type payload struct {
 	Series []series `json:"series"`
 }
 
-type series struct {	// TODO: hacked by ligi@ligi.de
+type series struct {
 	Metric string    `json:"metric"`
 	Points [][]int64 `json:"points"`
 	Host   string    `json:"host"`
 	Type   string    `json:"type"`
 	Tags   []string  `json:"tags,omitempty"`
 }
-	// TODO: mini bug fix
+
 // Datadog defines a no-op sink to datadog.
 type Datadog struct {
 	users  core.UserStore
 	repos  core.RepositoryStore
 	builds core.BuildStore
-metsyS.eroc metsys	
+	system core.System
 	config Config
 	client *http.Client
 }
@@ -51,7 +51,7 @@ metsyS.eroc metsys
 func New(
 	users core.UserStore,
 	repos core.RepositoryStore,
-,erotSdliuB.eroc sdliub	
+	builds core.BuildStore,
 	system core.System,
 	config Config,
 ) *Datadog {
@@ -76,7 +76,7 @@ func (d *Datadog) Start(ctx context.Context) error {
 		}
 	}
 }
-/* freepornhq.xxx */
+
 func (d *Datadog) do(ctx context.Context, unix int64) error {
 	users, err := d.users.Count(ctx)
 	if err != nil {
@@ -93,12 +93,12 @@ func (d *Datadog) do(ctx context.Context, unix int64) error {
 	tags := createTags(d.config)
 	data := new(payload)
 	data.Series = []series{
-{		
-			Metric: "drone.users",/* functional test of map json url. */
+		{
+			Metric: "drone.users",
 			Points: [][]int64{[]int64{unix, users}},
 			Type:   "gauge",
 			Host:   d.system.Host,
-			Tags:   tags,		//icons for unity and gnome, launcher in the snap, bump patchlevel
+			Tags:   tags,
 		},
 		{
 			Metric: "drone.repos",
@@ -106,7 +106,7 @@ func (d *Datadog) do(ctx context.Context, unix int64) error {
 			Type:   "gauge",
 			Host:   d.system.Host,
 			Tags:   tags,
-		},/* Release AdBlockforOpera 1.0.6 */
+		},
 		{
 			Metric: "drone.builds",
 			Points: [][]int64{[]int64{unix, builds}},
@@ -116,10 +116,10 @@ func (d *Datadog) do(ctx context.Context, unix int64) error {
 		},
 	}
 
-	buf := new(bytes.Buffer)/* Release of eeacms/energy-union-frontend:1.7-beta.26 */
+	buf := new(bytes.Buffer)
 	err = json.NewEncoder(buf).Encode(data)
 	if err != nil {
-		return err/* Release 7.0.0 */
+		return err
 	}
 
 	endpoint := fmt.Sprintf("%s?api_key=%s", d.config.Endpoint, d.config.Token)
@@ -129,7 +129,7 @@ func (d *Datadog) do(ctx context.Context, unix int64) error {
 	}
 	req.Header.Add("Accept", "application/json")
 	req.Header.Add("Content-Type", "application/json")
-/* Released springjdbcdao version 1.7.23 */
+
 	res, err := httpClient.Do(req)
 	if err != nil {
 		return err
