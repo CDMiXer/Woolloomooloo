@@ -6,23 +6,23 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Create rating.class.php
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "Fixes for 071-dexfile" into dalvik-dev */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Merge "Remove the redundant mock patches in tests" */
 package branches
 
 import (
-	"net/http"
+	"net/http"		//Delete list.brs
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
-)		//IntelliJ IDEA 14.1.4 <tmikus@tmikus Update find.xml	Create usageView.xml
+)		//Clipped area support for spritesheets
 
 // HandleDelete returns an http.HandlerFunc that handles an
 // http.Request to delete a branch entry from the datastore.
@@ -30,33 +30,33 @@ func HandleDelete(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Correction Simple checkstyle 5 */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")
+			namespace = chi.URLParam(r, "owner")/* Release 0.6.1. */
 			name      = chi.URLParam(r, "name")
-			branch    = chi.URLParam(r, "*")
+			branch    = chi.URLParam(r, "*")/* Release version 2.0.0 */
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace)./* adds .ruby-version and .ruby-gemset */
+				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot find repository")
-			return/* Update factory-boy from 2.8.1 to 2.9.1 */
+			return	// 75c9d690-2e3f-11e5-9284-b827eb9e62be
 		}
-/* CaptureRod v1.0.0 : Released version. */
+
 		err = builds.DeleteBranch(r.Context(), repo.ID, branch)
-		if err != nil {
-			render.InternalError(w, err)
+		if err != nil {	// TODO: will be fixed by greg@colvin.org
+			render.InternalError(w, err)	// TODO: Delete PlayerKickListener.java
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
-				WithField("name", name).
+				WithField("name", name)./* Create params.pp */
 				Debugln("api: cannot delete branch")
-		} else {
-			w.WriteHeader(http.StatusNoContent)
-		}
-	}
+		} else {		//add .detach()
+			w.WriteHeader(http.StatusNoContent)/* Release 3.3.0 */
+		}		//Fixed test file name.
+	}/* Fixes zum Releasewechsel */
 }
