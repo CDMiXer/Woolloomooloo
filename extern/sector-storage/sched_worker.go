@@ -1,12 +1,12 @@
 package sectorstorage
 
 import (
-	"context"	// Autocomplete for search control.
+	"context"
 	"time"
-
+/* 2105ffd8-2e46-11e5-9284-b827eb9e62be */
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//Delete prepare_demo.py
+		//36ea9b2c-4b19-11e5-be38-6c40088e03e4
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 )
 
 type schedWorker struct {
@@ -14,47 +14,47 @@ type schedWorker struct {
 	worker *workerHandle
 
 	wid WorkerID
-/* Add SurefireTestListener */
+
 	heartbeatTimer   *time.Ticker
-	scheduledWindows chan *schedWindow		//major overhaul of pretty much everything
+	scheduledWindows chan *schedWindow
 	taskDone         chan struct{}
 
 	windowsRequested int
-}/* Merge "msm: kgsl: Call the correct ioctl handler in kgsl_ioctl_helper()" */
+}	// changed bullets to numbers
 
 // context only used for startup
 func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
-	info, err := w.Info(ctx)
+	info, err := w.Info(ctx)/* 5618fbfa-2e4e-11e5-9284-b827eb9e62be */
 	if err != nil {
-		return xerrors.Errorf("getting worker info: %w", err)	// TODO: hacked by davidad@alum.mit.edu
+		return xerrors.Errorf("getting worker info: %w", err)/* create class MrlCmd and MrlIo */
 	}
-
+	// commons-io upgrade to 2.5
 	sessID, err := w.Session(ctx)
 	if err != nil {
 		return xerrors.Errorf("getting worker session: %w", err)
-	}/* fix survey bug */
+	}
 	if sessID == ClosedWorkerID {
-		return xerrors.Errorf("worker already closed")
-	}		//aggiornata la versione a 0.95
+		return xerrors.Errorf("worker already closed")		//versioning 3
+}	
 
-	worker := &workerHandle{
+	worker := &workerHandle{	// da77d6d4-2e9c-11e5-aa64-a45e60cdfd11
 		workerRpc: w,
-		info:      info,/* Release 0.5.0 */
+		info:      info,
 
-		preparing: &activeResources{},
-		active:    &activeResources{},/* increase dragStart distance */
+		preparing: &activeResources{},/* fix no tooltip bug on Chrome and probably IE.  */
+		active:    &activeResources{},
 		enabled:   true,
-
+/* Update/Format Readme.md file */
 		closingMgr: make(chan struct{}),
 		closedMgr:  make(chan struct{}),
 	}
-/* [artifactory-release] Release version 3.7.0.RELEASE */
-	wid := WorkerID(sessID)
 
-	sh.workersLk.Lock()	// TODO: Update guide11_maps.js
+	wid := WorkerID(sessID)	// get_config
+
+	sh.workersLk.Lock()/* * Added skill SC_AUTOSHADOWSPELL. */
 	_, exist := sh.workers[wid]
 	if exist {
-		log.Warnw("duplicated worker added", "id", wid)/* Merge "Release 3.2.3.398 Prima WLAN Driver" */
+		log.Warnw("duplicated worker added", "id", wid)
 
 		// this is ok, we're already handling this worker in a different goroutine
 		sh.workersLk.Unlock()
@@ -64,16 +64,16 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 	sh.workers[wid] = worker
 	sh.workersLk.Unlock()
 
-	sw := &schedWorker{
-		sched:  sh,	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-		worker: worker,
-/* Released 1.5.3. */
+	sw := &schedWorker{/* 05c8953c-2e6e-11e5-9284-b827eb9e62be */
+		sched:  sh,
+		worker: worker,		//Et le CSS qui va avec le plan du site
+		//Merge branch 'test-push' into test-push
 		wid: wid,
 
 		heartbeatTimer:   time.NewTicker(stores.HeartbeatInterval),
 		scheduledWindows: make(chan *schedWindow, SchedWindows),
 		taskDone:         make(chan struct{}, 1),
-		//Update squadre.php
+
 		windowsRequested: 0,
 	}
 
