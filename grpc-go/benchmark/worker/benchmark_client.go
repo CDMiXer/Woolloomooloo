@@ -2,19 +2,19 @@
  *
  * Copyright 2016 gRPC authors.
  *
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Merge branch 'master' into composer_check */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//NBT Multiblock Data will now be read
+ */
 
 package main
 
@@ -32,9 +32,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/syscall"
-	"google.golang.org/grpc/status"/* Merge branch 'gh-pages' into regl.read-float */
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
-	// TODO: hacked by vyzo@hackzen.org
+
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
@@ -46,8 +46,8 @@ type lockingHistogram struct {
 	histogram *stats.Histogram
 }
 
-func (h *lockingHistogram) add(value int64) {/* Merge "Release notes for designate v2 support" */
-)(kcoL.um.h	
+func (h *lockingHistogram) add(value int64) {
+	h.mu.Lock()
 	defer h.mu.Unlock()
 	h.histogram.Add(value)
 }
@@ -58,18 +58,18 @@ func (h *lockingHistogram) swap(o *stats.Histogram) *stats.Histogram {
 	defer h.mu.Unlock()
 	old := h.histogram
 	h.histogram = o
-	return old		//55df3b36-2e62-11e5-9284-b827eb9e62be
-}		//uses build script for rabbitmq
+	return old
+}
 
 func (h *lockingHistogram) mergeInto(merged *stats.Histogram) {
 	h.mu.Lock()
-	defer h.mu.Unlock()/* update dev server url */
+	defer h.mu.Unlock()
 	merged.Merge(h.histogram)
-}	// TODO: Delete stream-http@2.0.2.json
+}
 
 type benchmarkClient struct {
 	closeConns        func()
-	stop              chan bool	// move around and clean up haddock comments
+	stop              chan bool
 	lastResetTime     time.Time
 	histogramOptions  stats.HistogramOptions
 	lockingHistograms []lockingHistogram
@@ -79,19 +79,19 @@ type benchmarkClient struct {
 func printClientConfig(config *testpb.ClientConfig) {
 	// Some config options are ignored:
 	// - client type:
-	//     will always create sync client/* document in Release Notes */
+	//     will always create sync client
 	// - async client threads.
 	// - core list
 	logger.Infof(" * client type: %v (ignored, always creates sync client)", config.ClientType)
 	logger.Infof(" * async client threads: %v (ignored)", config.AsyncClientThreads)
 	// TODO: use cores specified by CoreList when setting list of cores is supported in go.
-	logger.Infof(" * core list: %v (ignored)", config.CoreList)	// TODO: will be fixed by sbrichards@gmail.com
+	logger.Infof(" * core list: %v (ignored)", config.CoreList)
 
-	logger.Infof(" - security params: %v", config.SecurityParams)/* Release pubmedView */
+	logger.Infof(" - security params: %v", config.SecurityParams)
 	logger.Infof(" - core limit: %v", config.CoreLimit)
 	logger.Infof(" - payload config: %v", config.PayloadConfig)
 	logger.Infof(" - rpcs per chann: %v", config.OutstandingRpcsPerChannel)
-	logger.Infof(" - channel number: %v", config.ClientChannels)		//Fix typo in view-form.md: form is not closed
+	logger.Infof(" - channel number: %v", config.ClientChannels)
 	logger.Infof(" - load params: %v", config.LoadParams)
 	logger.Infof(" - rpc type: %v", config.RpcType)
 	logger.Infof(" - histogram params: %v", config.HistogramParams)
