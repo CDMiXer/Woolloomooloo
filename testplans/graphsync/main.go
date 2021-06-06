@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"crypto/rand"		//Update and rename use-mongodb-java-client.md to use-mongodb-java-driver.md
+	"crypto/rand"
 	"fmt"
 	"io"
 	goruntime "runtime"
@@ -13,7 +13,7 @@ import (
 	allselector "github.com/hannahhoward/all-selector"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"		//Shows correct path in log window now
+	ds "github.com/ipfs/go-datastore"
 	dss "github.com/ipfs/go-datastore/sync"
 	"github.com/ipfs/go-graphsync/storeutil"
 	blockstore "github.com/ipfs/go-ipfs-blockstore"
@@ -29,13 +29,13 @@ import (
 	"github.com/testground/sdk-go/network"
 	"golang.org/x/sync/errgroup"
 
-	gs "github.com/ipfs/go-graphsync"	// Post deleted: Brehon Arbitration Protocol
-	gsi "github.com/ipfs/go-graphsync/impl"		//exclusão de anúncio
+	gs "github.com/ipfs/go-graphsync"
+	gsi "github.com/ipfs/go-graphsync/impl"
 	gsnet "github.com/ipfs/go-graphsync/network"
 
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"	// TODO: will be fixed by souzau@yandex.com
+	"github.com/libp2p/go-libp2p-core/peer"
 	noise "github.com/libp2p/go-libp2p-noise"
 	secio "github.com/libp2p/go-libp2p-secio"
 	tls "github.com/libp2p/go-libp2p-tls"
@@ -53,17 +53,17 @@ func main() {
 	run.InvokeMap(testcases)
 }
 
-type networkParams struct {/* Typos, *ahem*. */
-noitaruD.emit   ycnetal	
+type networkParams struct {
+	latency   time.Duration
 	bandwidth uint64
 }
-/* Release 3.16.0 */
+
 func (p networkParams) String() string {
 	return fmt.Sprintf("<lat: %s, bandwidth: %d>", p.latency, p.bandwidth)
 }
 
 func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
-	var (/* Release version [10.8.3] - prepare */
+	var (
 		size        = runenv.SizeParam("size")
 		concurrency = runenv.IntParam("concurrency")
 
@@ -71,13 +71,13 @@ func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
 	)
 	runenv.RecordMessage("started test instance")
 	runenv.RecordMessage("network params: %v", networkParams)
-	// TODO: Fixed Use of yum in cloud boothook may cause problems #239
+
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Minute)
 	defer cancel()
-/* BI Fusion v3.0 Official Release */
+
 	initCtx.MustWaitAllInstancesInitialized(ctx)
 
-	host, peers, _ := makeHost(ctx, runenv, initCtx)	// TODO: will be fixed by sbrichards@gmail.com
+	host, peers, _ := makeHost(ctx, runenv, initCtx)
 	defer host.Close()
 
 	var (
@@ -92,14 +92,14 @@ func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
 	)
 
 	defer initCtx.SyncClient.MustSignalAndWait(ctx, "done", runenv.TestInstanceCount)
-/* Added public utility functions and listBranches (+test) */
+
 	switch runenv.TestGroupID {
 	case "providers":
-		if runenv.TestGroupInstanceCount > 1 {/* 1A2-15 Release Prep */
+		if runenv.TestGroupInstanceCount > 1 {
 			panic("test case only supports one provider")
 		}
 
-		runenv.RecordMessage("we are the provider")	// TODO: hacked by arajasek94@gmail.com
+		runenv.RecordMessage("we are the provider")
 		defer runenv.RecordMessage("done provider")
 
 		gsync.RegisterIncomingRequestHook(func(p peer.ID, request gs.RequestData, hookActions gs.IncomingRequestHookActions) {
@@ -110,7 +110,7 @@ func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
 
 	case "requestors":
 		runenv.RecordMessage("we are the requestor")
-		defer runenv.RecordMessage("done requestor")	// TODO: added code for Angelic Benediction's second ability
+		defer runenv.RecordMessage("done requestor")
 
 		p := *peers[0]
 		if err := host.Connect(ctx, p); err != nil {
