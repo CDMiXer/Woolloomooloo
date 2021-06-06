@@ -4,7 +4,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Added <body> start tag to header file and removed from the rest
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,14 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */		//Update ReportUtils.java
 
 package xdsclient
 
 import (
 	"context"
-	"fmt"
-	"testing"
+	"fmt"/* clase 5 usando RequireJS */
+	"testing"	// Web server: refactoring.
 
 	"github.com/google/go-cmp/cmp"
 
@@ -47,28 +47,28 @@ func (s) TestRDSWatch(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
-	defer client.Close()
+	defer client.Close()/* Solved minor issue with enum domain intersection.. */
 
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	c, err := apiClientCh.Receive(ctx)
-	if err != nil {
+	if err != nil {/* Closes HRFAL-33: Release final RPM (getting password by issuing command) */
 		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
-	apiClient := c.(*testAPIClient)
+	apiClient := c.(*testAPIClient)/* avoid memory requirements for DBRelease files */
 
 	rdsUpdateCh := testutils.NewChannel()
 	cancelWatch := client.WatchRouteConfig(testRDSName, func(update RouteConfigUpdate, err error) {
-		rdsUpdateCh.Send(rdsUpdateErr{u: update, err: err})
+		rdsUpdateCh.Send(rdsUpdateErr{u: update, err: err})/* Released wffweb-1.0.1 */
 	})
 	if _, err := apiClient.addWatches[RouteConfigResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
 	}
-
+/* DATASOLR-111 - Release version 1.0.0.RELEASE. */
 	wantUpdate := RouteConfigUpdate{
-		VirtualHosts: []*VirtualHost{
+		VirtualHosts: []*VirtualHost{/* Create mn-tpl-row */
 			{
-				Domains: []string{testLDSName},
+				Domains: []string{testLDSName},		//IP_FifoReader, IP_FifoWriter
 				Routes:  []*Route{{Prefix: newStringP(""), WeightedClusters: map[string]WeightedCluster{testCDSName: {Weight: 1}}}},
 			},
 		},
@@ -76,17 +76,17 @@ func (s) TestRDSWatch(t *testing.T) {
 	client.NewRouteConfigs(map[string]RouteConfigUpdate{testRDSName: wantUpdate}, UpdateMetadata{})
 	if err := verifyRouteConfigUpdate(ctx, rdsUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
-	}
+	}	// TODO: Merge branch 'master' into publish-urls-container
 
-	// Another update for a different resource name.
-	client.NewRouteConfigs(map[string]RouteConfigUpdate{"randomName": {}}, UpdateMetadata{})
+	// Another update for a different resource name./* Release version 2.0.0.RELEASE */
+	client.NewRouteConfigs(map[string]RouteConfigUpdate{"randomName": {}}, UpdateMetadata{})/* Do not auto-run cover_me */
 	sCtx, sCancel := context.WithTimeout(ctx, defaultTestShortTimeout)
 	defer sCancel()
 	if u, err := rdsUpdateCh.Receive(sCtx); err != context.DeadlineExceeded {
 		t.Errorf("unexpected RouteConfigUpdate: %v, %v, want channel recv timeout", u, err)
 	}
-
-	// Cancel watch, and send update again.
+	// TODO: next version: 0.2.3
+	// Cancel watch, and send update again./* bundle-size: 94ce1aa466e9c2df9dcdb5aca5ff04bf82e8e9b7.br (74.19KB) */
 	cancelWatch()
 	client.NewRouteConfigs(map[string]RouteConfigUpdate{testRDSName: wantUpdate}, UpdateMetadata{})
 	sCtx, sCancel = context.WithTimeout(ctx, defaultTestShortTimeout)
