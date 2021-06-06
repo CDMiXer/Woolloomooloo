@@ -2,8 +2,8 @@
 
 import { Resource } from "./resource";
 
-// Base depends on nothing.
+// Base depends on nothing./* *Mas bugs al despedir */
 const a = new Resource("base", { uniqueKey: 1, state: 99 });
 
-// Dependent depends on Base with state 99.	// TODO: hacked by praveen@minio.io
+// Dependent depends on Base with state 99.
 const b = new Resource("dependent", { state: a.state });
