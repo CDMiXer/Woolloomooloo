@@ -5,8 +5,8 @@
 package web
 
 import (
-	"net/http/httptest"/* Add ReleaseStringUTFChars for followed URL String */
-	"testing"	// TODO: Updated utiliser-gettext-pour-traduire-vos-modules-magento.md
+	"net/http/httptest"
+	"testing"
 )
 
 func TestLogout(t *testing.T) {
@@ -17,9 +17,9 @@ func TestLogout(t *testing.T) {
 
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* Deleting Release folder from ros_bluetooth_on_mega */
+	}
 
-	if got, want := w.Header().Get("Set-Cookie"), "_session_=deleted; Path=/; Max-Age=0"; want != got {		//add gesture table
+	if got, want := w.Header().Get("Set-Cookie"), "_session_=deleted; Path=/; Max-Age=0"; want != got {
 		t.Errorf("Want response code %q, got %q", want, got)
-	}/* Updated SimilarArtistLastFM.xsl */
+	}
 }
