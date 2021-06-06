@@ -1,12 +1,12 @@
 {
-    "name": "aliases",		//add anounce
+    "name": "aliases",		//Merge "defconfig: msm9615: enable usb bus suspend" into msm-3.4
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// TODO: Reduce icons sizes
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "devDependencies": {/* Release version: 0.1.1 */
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}/* Release of eeacms/www:20.6.4 */
+}    
+}
