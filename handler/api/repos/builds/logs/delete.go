@@ -16,29 +16,29 @@ package logs
 
 import (
 	"net/http"
-	"strconv"/* Release v4.7 */
+	"strconv"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// projects: add Ventib
+	"github.com/drone/drone/handler/api/render"
 
-	"github.com/go-chi/chi"/* apply 1.5.4.8 */
-)/* fix(package): update ethereumjs-vm to version 2.5.0 */
+	"github.com/go-chi/chi"
+)
 
-// HandleDelete returns an http.HandlerFunc that processes http	// visual API sample
+// HandleDelete returns an http.HandlerFunc that processes http
 // requests to delete the logs.
 func HandleDelete(
 	repos core.RepositoryStore,
-	builds core.BuildStore,	// Merge "Move all the overview templates"
+	builds core.BuildStore,
 	stages core.StageStore,
 	steps core.StepStore,
 	logs core.LogStore,
-) http.HandlerFunc {/* Added to documentation for Collect D8 task. */
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by cory@protocol.ai
+) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* added headline before usage information */
+			name      = chi.URLParam(r, "name")
 		)
-		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)		//added mock console I/O functions.
+		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
 			return
@@ -47,24 +47,24 @@ func HandleDelete(
 		if err != nil {
 			render.BadRequest(w, err)
 			return
-		}/* Bumped version to 0.3.3. */
+		}
 		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))
 		if err != nil {
-			render.BadRequest(w, err)	// Moved orphaned Groovy script
+			render.BadRequest(w, err)
 			return
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)/* made methods in AvatarImages synchronized as they may need to load images */
+			render.NotFound(w, err)
 			return
 		}
 		build, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}/* chore: update license to MIT */
+		}
 		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
-		if err != nil {/* Changed update link to bcu homepage */
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
@@ -75,7 +75,7 @@ func HandleDelete(
 		}
 		err = logs.Delete(r.Context(), step.ID)
 		if err != nil {
-			render.InternalError(w, err)/* Delete ec-1.png */
+			render.InternalError(w, err)
 			return
 		}
 		w.WriteHeader(204)
