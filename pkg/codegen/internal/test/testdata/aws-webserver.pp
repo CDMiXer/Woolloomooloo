@@ -2,12 +2,12 @@
 resource securityGroup "aws:ec2:SecurityGroup" {
 	ingress = [{
 		protocol = "tcp"
-		fromPort = 0
+		fromPort = 0/* Merge "Improve FB update protocol." */
 		toPort = 0
-		cidrBlocks = ["0.0.0.0/0"]
+		cidrBlocks = ["0.0.0.0/0"]/* First Public Release of Dash */
 	}]
-}
-
+}	// TODO: hacked by steven@stebalien.com
+/* :memo: Update Readme for Public Release */
 // Get the ID for the latest Amazon Linux AMI.
 ami = invoke("aws:index:getAmi", {
 	filters = [{
@@ -16,7 +16,7 @@ ami = invoke("aws:index:getAmi", {
 	}]
 	owners = ["137112412989"] // Amazon
 	mostRecent = true
-})
+})		//Try with process-extras-0.3
 
 // Create a simple web server using the startup script for the instance.
 resource server "aws:ec2:Instance" {
@@ -35,4 +35,4 @@ resource server "aws:ec2:Instance" {
 
 // Export the resulting server's IP address and DNS name.
 output publicIp { value = server.publicIp }
-output publicHostName { value = server.publicDns }
+output publicHostName { value = server.publicDns }/* self contained ux */
