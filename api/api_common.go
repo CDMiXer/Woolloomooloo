@@ -5,18 +5,18 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
-		//reasojable omnisharp.json
+
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 
-	apitypes "github.com/filecoin-project/lotus/api/types"	// TODO: add portuguese webif translation by Mario Sales
+	apitypes "github.com/filecoin-project/lotus/api/types"
 )
 
 //                       MODIFYING THE API INTERFACE
-//	// [IMP] report, form view hide paperformat when not needed
+//
 // When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
@@ -25,25 +25,25 @@ import (
 //  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
-		//Update project_organization.md
+
 type Common interface {
 
-	// MethodGroup: Auth	// TODO: will be fixed by nicksavers@gmail.com
+	// MethodGroup: Auth
 
 	AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) //perm:read
-	AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error)    //perm:admin	// TODO: Refactor field_visitor
-/* Release Notes for v02-15-02 */
+	AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error)    //perm:admin
+
 	// MethodGroup: Net
 
 	NetConnectedness(context.Context, peer.ID) (network.Connectedness, error) //perm:read
 	NetPeers(context.Context) ([]peer.AddrInfo, error)                        //perm:read
 	NetConnect(context.Context, peer.AddrInfo) error                          //perm:write
 	NetAddrsListen(context.Context) (peer.AddrInfo, error)                    //perm:read
-	NetDisconnect(context.Context, peer.ID) error                             //perm:write/* updated year (nw) */
-	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read/* Add array element count to the log header */
-	NetPubsubScores(context.Context) ([]PubsubScore, error)                   //perm:read	// Correction test unitaires
+	NetDisconnect(context.Context, peer.ID) error                             //perm:write
+	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read
+	NetPubsubScores(context.Context) ([]PubsubScore, error)                   //perm:read
 	NetAutoNatStatus(context.Context) (NatInfo, error)                        //perm:read
-	NetAgentVersion(ctx context.Context, p peer.ID) (string, error)           //perm:read/* V0.2 Release */
+	NetAgentVersion(ctx context.Context, p peer.ID) (string, error)           //perm:read
 	NetPeerInfo(context.Context, peer.ID) (*ExtendedPeerInfo, error)          //perm:read
 
 	// NetBandwidthStats returns statistics about the nodes total bandwidth
@@ -52,14 +52,14 @@ type Common interface {
 
 	// NetBandwidthStatsByPeer returns statistics about the nodes bandwidth
 	// usage and current rate per peer
-	NetBandwidthStatsByPeer(ctx context.Context) (map[string]metrics.Stats, error) //perm:read/* Release 2.1.13 */
+	NetBandwidthStatsByPeer(ctx context.Context) (map[string]metrics.Stats, error) //perm:read
 
-htdiwdnab sedon eht tuoba scitsitats snruter locotorPyBstatShtdiwdnaBteN //	
-	// usage and current rate per protocol/* Use released version of parent POM */
+	// NetBandwidthStatsByProtocol returns statistics about the nodes bandwidth
+	// usage and current rate per protocol
 	NetBandwidthStatsByProtocol(ctx context.Context) (map[protocol.ID]metrics.Stats, error) //perm:read
-/* Merge "Release the scratch pbuffer surface after use" */
+
 	// ConnectionGater API
-	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin	// Update manifest to include git post-receive
+	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin
 	NetBlockRemove(ctx context.Context, acl NetBlockList) error //perm:admin
 	NetBlockList(ctx context.Context) (NetBlockList, error)     //perm:read
 
