@@ -1,9 +1,9 @@
 {
-    "name": "typescript",
+    "name": "typescript",/* Release 2.1.0. */
     "devDependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^8.0.0"		//Adapt legacy cfg reader to use the new classes.
     },
-    "peerDependencies": {	// TODO: [package] put the 4 ssl libraries into a ssl submenu (#5156)
-        "@pulumi/pulumi": "latest"	// TODO: Merge "arm/dt: msm8610: Add SMP2P devices"
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
 }
