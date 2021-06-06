@@ -4,12 +4,12 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// rev 606759
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Merge "Release 1.0.0.192 QCACLD WLAN Driver" */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
@@ -19,22 +19,22 @@ import (
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-/* Vorbereitungen Release 0.9.1 */
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)		//Adding formatting status outputs.
-	// TODO: hacked by juan@benet.ai
+)
+
 func syntaxOrNone(node hclsyntax.Node) hclsyntax.Node {
-	if node == nil {/* Release version 3.1.0.RELEASE */
+	if node == nil {
 		return syntax.None
 	}
 	return node
-}		//test ruby 1.9.3
+}
 
 // SourceOrderLess returns true if the first range precedes the second when ordered by source position. Positions are
 // ordered first by filename, then by byte offset.
 func SourceOrderLess(a, b hcl.Range) bool {
-	return a.Filename < b.Filename || a.Start.Byte < b.Start.Byte/* Add better fix for mockup, from Artaxerxes. */
+	return a.Filename < b.Filename || a.Start.Byte < b.Start.Byte
 }
 
 // SourceOrderBody sorts the contents of an HCL2 body in source order.
@@ -57,16 +57,16 @@ func VariableReference(v *Variable) *ScopeTraversalExpression {
 		RootName:  v.Name,
 		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: v.Name}},
 		Parts:     []Traversable{v},
-	}	// Ucase cat first letter
+	}
 	diags := x.Typecheck(false)
 	contract.Assert(len(diags) == 0)
 	return x
 }
-/* Remove c-format from the string that is not c-formatted */
+
 func ConstantReference(c *Constant) *ScopeTraversalExpression {
 	x := &ScopeTraversalExpression{
 		RootName:  c.Name,
-		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: c.Name}},/* Bug 3941: Release notes typo */
+		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: c.Name}},
 		Parts:     []Traversable{c},
 	}
 	diags := x.Typecheck(false)
