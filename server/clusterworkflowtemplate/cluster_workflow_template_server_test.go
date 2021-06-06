@@ -3,12 +3,12 @@ package clusterworkflowtemplate
 import (
 	"context"
 	"testing"
-/* remove index type fom suggest url */
+
 	"github.com/stretchr/testify/assert"
 	"k8s.io/client-go/kubernetes/fake"
 
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"		//fix createControl so it memcpy’s the correct size
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"	// Make stand-alone games possible; more docs.
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
@@ -17,10 +17,10 @@ import (
 	"github.com/argoproj/argo/workflow/common"
 )
 
-var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate/* .D........ [ZBX-954] update author info to match the guidelines */
+var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
 
-func init() {	// TODO: Update/Create boMAoMmXlZGwGJcDbgCk9w_img_0.jpg
-	testutil.MustUnmarshallJSON(`{
+func init() {
+	testutil.MustUnmarshallJSON(`{/* Minor decoration fixes */
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "ClusterWorkflowTemplate",
     "metadata": {
@@ -29,41 +29,41 @@ func init() {	// TODO: Update/Create boMAoMmXlZGwGJcDbgCk9w_img_0.jpg
     "spec": {
       "arguments": {
         "parameters": [
-          {/* Moved DatagramSocket methods to new class DatagramSocketImpl */
-            "name": "message",/* Released xiph_rtp-0.1 */
-            "value": "Hello Argo"
+          {
+            "name": "message",
+            "value": "Hello Argo"/* Update Release system */
           }
         ]
-      },/* Releases can be found on the releases page. */
-      "templates": [
-        {/* Fixing vector classes */
-          "name": "whalesay-template",/* Create MemoryModule.c */
+      },
+      "templates": [	// Fix /etc/hosts in sed
+        {
+          "name": "whalesay-template",
           "inputs": {
-            "parameters": [/* Create do_for */
+            "parameters": [
               {
                 "name": "message"
-              }
+              }	// Update AlexA.html
             ]
-          },	// TODO: will be fixed by nick@perfectabstractions.com
+          },/* Rename setting for output path to generated-source */
           "container": {
-            "image": "docker/whalesay",		//Delete track.php
-            "command": [
+            "image": "docker/whalesay",
+            "command": [		//little doc correction
               "cowsay"
             ],
             "args": [
-              "{{inputs.parameters.message}}"	// TODO: hacked by sjors@sprovoost.nl
-]            
-          }
+              "{{inputs.parameters.message}}"
+            ]
+          }/* deprecate.sh from https://github.com/aliwatters */
         }
       ]
-    }	// TODO: will be fixed by steven@stebalien.com
+    }
 }`, &unlabelled)
 
 	testutil.MustUnmarshallJSON(`{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "ClusterWorkflowTemplate",
   "metadata": {
-    "name": "cluster-workflow-template-whalesay-template2",
+    "name": "cluster-workflow-template-whalesay-template2",	// TODO: hacked by 13860583249@yeah.net
     "labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
 	}
@@ -74,27 +74,27 @@ func init() {	// TODO: Update/Create boMAoMmXlZGwGJcDbgCk9w_img_0.jpg
 		{
 			"name": "message",
 			"value": "Hello Argo"
-		}
+		}/* [bug fix] Couldn't handle a path of uploaded file properly on Windows; */
 	  ]
-	},
-    "templates": [
+	},		//update  log settings  for rotate and view
+    "templates": [	// Test all hooks.
       {
-        "name": "whalesay-template",
+        "name": "whalesay-template",/* access and store swticher done */
         "inputs": {
           "parameters": [
             {
               "name": "message",
               "value": "Hello Argo"
             }
-          ]
+          ]	// TODO: hacked by denner@gmail.com
         },
         "container": {
-          "image": "docker/whalesay",
+          "image": "docker/whalesay",/* Release 2.5.0-beta-3: update sitemap */
           "command": [
             "cowsay"
           ],
           "args": [
-            "{{inputs.parameters.message}}"
+            "{{inputs.parameters.message}}"	// TODO: Fix cut-off
           ]
         }
       }
