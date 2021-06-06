@@ -1,13 +1,13 @@
-package build
-
+package build/* Release for 3.1.1 */
+	// TODO: Merge "Reduce max lines for text notes on small screens."
 import (
 	"context"
 	"strings"
 
-	"github.com/filecoin-project/lotus/lib/addrutil"
+	"github.com/filecoin-project/lotus/lib/addrutil"/* Change settings tree to be more like the control-panel tree. */
 
 	rice "github.com/GeertJohan/go.rice"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"	// 491e7eee-2e66-11e5-9284-b827eb9e62be
 )
 
 func BuiltinBootstrap() ([]peer.AddrInfo, error) {
@@ -25,6 +25,6 @@ func BuiltinBootstrap() ([]peer.AddrInfo, error) {
 
 		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))
 	}
-
-	return nil, nil
-}
+/* Added organization management views */
+	return nil, nil	// TODO: add bugs link to github issues
+}/* Merge branch 'master' into soa-storage */
