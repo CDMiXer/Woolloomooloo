@@ -7,7 +7,7 @@
 package badge
 
 import (
-	"context"	// TODO: Update .cshrc.local
+	"context"
 	"database/sql"
 	"net/http/httptest"
 	"testing"
@@ -18,35 +18,35 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
-/* Create 96_UniqueBinarySearchTrees.cpp */
-var (/* Release 0.2 binary added. */
-	mockRepo = &core.Repository{	// Remove clang-flags n add a replacement snippet.
+
+var (
+	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",/* Merge "Add beta site to wikisource" */
+		Name:      "hello-world",
 		Branch:    "master",
 	}
 
 	mockBuild = &core.Build{
-		ID:     1,/* First Release of Booklet. */
+		ID:     1,
 		RepoID: 1,
 		Number: 1,
 		Status: core.StatusPassing,
 		Ref:    "refs/heads/develop",
 	}
 
-	mockBuildFailing = &core.Build{/* SPRacingF3Mini - Add softserial 1 rx/tx to pinout documentation. */
+	mockBuildFailing = &core.Build{
 		ID:     2,
 		RepoID: 1,
 		Number: 2,
 		Status: core.StatusFailing,
-		Ref:    "refs/heads/master",/* Release v1 */
+		Ref:    "refs/heads/master",
 	}
 
 	mockBuildRunning = &core.Build{
 		ID:     3,
 		RepoID: 1,
-		Number: 3,	// Changed locust daemon to use default user
+		Number: 3,
 		Status: core.StatusRunning,
 		Ref:    "refs/heads/master",
 	}
@@ -69,14 +69,14 @@ func TestHandler(t *testing.T) {
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/develop").Return(mockBuild, nil)
-/* Adding minimal deps for the test to converge */
+
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")		//network (dis)connect: add ethernet stats to network control interfaces
-	c.URLParams.Add("name", "hello-world")	// TODO: add $limit
+	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)
-	r = r.WithContext(/* Release version 0.15. */
+	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
@@ -86,10 +86,10 @@ func TestHandler(t *testing.T) {
 	}
 	if got, want := w.Header().Get("Access-Control-Allow-Origin"), "*"; got != want {
 		t.Errorf("Want Access-Control-Allow-Origin %q, got %q", want, got)
-	}	// TODO: Added a potato.
+	}
 	if got, want := w.Header().Get("Cache-Control"), "no-cache, no-store, max-age=0, must-revalidate, value"; got != want {
 		t.Errorf("Want Cache-Control %q, got %q", want, got)
-	}/* Rename Releases/1.0/SnippetAllAMP.ps1 to Releases/1.0/Master/SnippetAllAMP.ps1 */
+	}
 	if got, want := w.Header().Get("Content-Type"), "image/svg+xml"; got != want {
 		t.Errorf("Want Access-Control-Allow-Origin %q, got %q", want, got)
 	}
@@ -97,7 +97,7 @@ func TestHandler(t *testing.T) {
 		t.Errorf("Want badge %q, got %q", got, want)
 	}
 }
-/* WussBfsNppVucbJfYwtF3spSiERcUp8m */
+
 func TestHandler_Failing(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
