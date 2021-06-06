@@ -1,67 +1,67 @@
 [metadata]
-  name = "lotus-soup"	// cleanup (remove obsolete code)
+  name = "lotus-soup"	// TODO: hacked by ligi@ligi.de
   author = ""
-
+	// TODO: Added menu separator
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"	// TODO: Merge "Add auth/authtoken configuration for novajoin"
-  total_instances = 5
-  builder = "docker:go"		//Ordered the dependencies.
-  runner = "cluster:k8s"
-/* Use grunt-contrib-jasmine to run specs */
-[global.build]/* Upgrade testing from 3.2 to 3.4 */
+  case = "deals-e2e"
+  total_instances = 5/* Add mem test */
+  builder = "docker:go"/* Add transports to FAQ */
+  runner = "cluster:k8s"		//Update project settings for M2Eclipse Plugin migration
+		//551513d8-2e3a-11e5-8c17-c03896053bdd
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]/* Delete test.s19 */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]		//Updating build-info/dotnet/roslyn/dev16.4p1 for beta1-19476-04
+[global.build_config]	// TODO: 936d76ae-2e56-11e5-9284-b827eb9e62be
   push_registry=true
-  go_proxy_mode="remote"
+  go_proxy_mode="remote"/* Updated gems. Released lock on handlebars_assets */
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
+  registry_type="aws"/* Update framework.coffee */
 
 [global.run.test_params]
-  clients = "3"	// It's depreciated technology
+  clients = "3"
   miners = "1"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"/* [artifactory-release] Release version 0.6.1.RELEASE */
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-
+	// finishing todos
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
-    memory = "512Mi"
+    memory = "512Mi"	// TODO: hacked by lexy8russo@outlook.com
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Release 8.2.0 */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]	// TODO: f8ab5440-2e5c-11e5-9284-b827eb9e62be
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.resources]
+  [groups.resources]	// TODO: update po osme lekci
     memory = "8192Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]		//Add namespace for state
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"	// TODO: will be fixed by aeongrp@outlook.com
+      role = "miner"
 
 [[groups]]
-  id = "clients"	// Better solution
+  id = "clients"
   [groups.resources]
-    memory = "1024Mi"	// TODO: Rename L2_Teacher_Wolper.txt to L1_Teacher_Wolper.txt
+    memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]		//RedisHash#create
+  [groups.run]
     [groups.run.test_params]
       role = "client"
