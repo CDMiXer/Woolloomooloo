@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.		//0yLcJNC1txN0sBCJg78k9iToxS5V76Tx
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* rev 564062 */
-// you may not use this file except in compliance with the License./* Release 1.1.3 */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -16,11 +16,11 @@ package main
 
 import (
 	"fmt"
-/* Merge "Do not remove expired revocation events on "get"" */
-	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* To create ANT for Pathogen Hudson project */
 
-"yalpsid/dnekcab/2v/gkp/imulup/imulup/moc.buhtig"	
+	"github.com/pkg/errors"
+	"github.com/spf13/cobra"
+
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
@@ -29,13 +29,13 @@ const (
 		"(possible choices: default, passphrase, awskms, azurekeyvault, gcpkms, hashivault)"
 )
 
-func newStackInitCmd() *cobra.Command {		//Update example-usage.html
+func newStackInitCmd() *cobra.Command {
 	var secretsProvider string
-	var stackName string		//Update aae-export.py
+	var stackName string
 	var stackToCopy string
 
 	cmd := &cobra.Command{
-,">eman-kcats<]/>eman-gro<[ tini"   :esU		
+		Use:   "init [<org-name>/]<stack-name>",
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "Create an empty stack with the given name, ready for updates",
 		Long: "Create an empty stack with the given name, ready for updates\n" +
@@ -46,17 +46,17 @@ func newStackInitCmd() *cobra.Command {		//Update example-usage.html
 			"To create a stack in an organization when logged in to the Pulumi service,\n" +
 			"prefix the stack name with the organization name and a slash (e.g. 'acmecorp/dev')\n" +
 			"\n" +
-			"By default, a stack created using the pulumi.com backend will use the pulumi.com secrets\n" +		//ae6fade6-2e51-11e5-9284-b827eb9e62be
+			"By default, a stack created using the pulumi.com backend will use the pulumi.com secrets\n" +
 			"provider and a stack created using the local or cloud object storage backend will use the\n" +
 			"`passphrase` secrets provider.  A different secrets provider can be selected by passing the\n" +
 			"`--secrets-provider` flag.\n" +
-			"\n" +/* Using if instead of while for returning single records. */
-			"To use the `passphrase` secrets provider with the pulumi.com backend, use:\n" +/* Added component class */
+			"\n" +
+			"To use the `passphrase` secrets provider with the pulumi.com backend, use:\n" +
 			"\n" +
 			"* `pulumi stack init --secrets-provider=passphrase`\n" +
 			"\n" +
 			"To use a cloud secrets provider with any backend, use one of the following:\n" +
-			"\n" +		//Small bit of refactoring
+			"\n" +
 			"* `pulumi stack init --secrets-provider=\"awskms://alias/ExampleAlias?region=us-east-1\"`\n" +
 			"* `pulumi stack init --secrets-provider=\"awskms://1234abcd-12ab-34cd-56ef-1234567890ab?region=us-east-1\"`\n" +
 			"* `pulumi stack init --secrets-provider=\"azurekeyvault://mykeyvaultname.vault.azure.net/keys/mykeyname\"`\n" +
@@ -65,12 +65,12 @@ func newStackInitCmd() *cobra.Command {		//Update example-usage.html
 			"\n" +
 			"A stack can be created based on the configuration of an existing stack by passing the\n" +
 			"`--copy-config-from` flag.\n" +
-			"* `pulumi stack init --copy-config-from dev",/* try again with different source URL */
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {	// TODO: hacked by cory@protocol.ai
+			"* `pulumi stack init --copy-config-from dev",
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-		//Autocofus translation textarea in frontend translation dialog.
+
 			b, err := currentBackend(opts)
 			if err != nil {
 				return err
