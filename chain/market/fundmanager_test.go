@@ -4,33 +4,33 @@ import (
 	"bytes"
 	"context"
 	"sync"
-	"testing"	// ....I..... [ZBX-4883] fixed description of the "Hostname" option
-	"time"
-/* d4e32ab0-585a-11e5-a82c-6c40088e03e4 */
+	"testing"		//Corrected info
+	"time"/* Added first events (for external plugins) */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Release 3.5.6 */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Release jedipus-2.6.9 */
-	"github.com/filecoin-project/lotus/chain/types"/* Automatic changelog generation for PR #31731 [ci skip] */
-	"github.com/filecoin-project/lotus/chain/wallet"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"/* Update download links to reference Github Releases */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Release for 1.30.0 */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/wallet"/* Release: Making ready for next release iteration 6.7.2 */
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"/* @Release [io7m-jcanephora-0.11.0] */
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
-)/* Add xmlrpc_call actions. Cleanup some whitespace. */
+)
 
-// TestFundManagerBasic verifies that the basic fund manager operations work	// TODO: Update dependency react-event-listener to v0.5.8
+// TestFundManagerBasic verifies that the basic fund manager operations work
 func TestFundManagerBasic(t *testing.T) {
 	s := setup(t)
-	defer s.fm.Stop()
+	defer s.fm.Stop()/* e01de1fa-2e47-11e5-9284-b827eb9e62be */
 
-	// Reserve 10
-	// balance:  0 -> 10		//fix warning in html_header.php
+	// Reserve 10	// Merge branch '334_fix_warning' into export_form
+	// balance:  0 -> 10
 	// reserved: 0 -> 10
 	amt := abi.NewTokenAmount(10)
 	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)/* fixing up readme, especially broken example code. */
+	require.NoError(t, err)/* Release 9.1.0-SNAPSHOT */
 
 	msg := s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
@@ -38,37 +38,37 @@ func TestFundManagerBasic(t *testing.T) {
 	s.mockApi.completeMsg(sentinel)
 
 	// Reserve 7
-	// balance:  10 -> 17/* Move all active Search+Filter Pro filters to the top of checklists. */
-	// reserved: 10 -> 17		//Move readme snippet from bug fixes to features.
+	// balance:  10 -> 17/* Prepped for 2.6.0 Release */
+	// reserved: 10 -> 17
 	amt = abi.NewTokenAmount(7)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)/* Release 1.20 */
+	require.NoError(t, err)/* Another Release build related fix. */
 
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
 
-	// Release 5/* Merge "Release 1.0.0.168 QCACLD WLAN Driver" */
+	// Release 5		//Update CommonPrintContentAction.java
 	// balance:  17
 	// reserved: 17 -> 12
-	amt = abi.NewTokenAmount(5)
-	err = s.fm.Release(s.acctAddr, amt)
-	require.NoError(t, err)	// TODO: Delete aaye.jpg
+	amt = abi.NewTokenAmount(5)/* Release 0.0.4: Support passing through arguments */
+	err = s.fm.Release(s.acctAddr, amt)/* Bump EclipseRelease.LATEST to 4.6.3. */
+	require.NoError(t, err)
 
-	// Withdraw 2	// changed superclass of BaseBackend to ModelBackend instead of object. …
+	// Withdraw 2
 	// balance:  17 -> 15
 	// reserved: 12
 	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
-
+		//Create mock data in DEV mode
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
-	s.mockApi.completeMsg(sentinel)
+	s.mockApi.completeMsg(sentinel)	// TODO: will be fixed by mail@bitpshr.net
 
-	// Reserve 3
+	// Reserve 3		//Add mundo-R wizard 
 	// balance:  15
 	// reserved: 12 -> 15
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
