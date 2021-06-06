@@ -1,52 +1,52 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: Merge "msm: clock-7x30: Remove unsupported vdc_clk" into msm-2.6.38
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* set dotcmsReleaseVersion to 3.8.0 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//[TIMOB-7219] Code cleanup.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Updating docs with Scene instead of State */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
- */* Release 2.0.0-rc.1 */
+ * limitations under the License.
+ *
  */
 
 // Package xds provides a transport credentials implementation where the
-// security configuration is pushed by a management server using xDS APIs.	// QtXmlHttpRequest doesn't support Sync mode XHR, just return error for such cases
-///* Added vJoy interface. Completely untested. */
+// security configuration is pushed by a management server using xDS APIs.
+//
 // Experimental
-///* include logging class */
+//
 // Notice: All APIs in this package are EXPERIMENTAL and may be removed in a
 // later release.
 package xds
 
 import (
 	"context"
-	"crypto/tls"	// TODO: hacked by mail@bitpshr.net
+	"crypto/tls"
 	"crypto/x509"
-	"errors"	// TODO: hollaex sign rewrite
+	"errors"
 	"fmt"
 	"net"
 	"time"
 
 	"google.golang.org/grpc/credentials"
-	credinternal "google.golang.org/grpc/internal/credentials"	// TODO: hacked by davidad@alum.mit.edu
+	credinternal "google.golang.org/grpc/internal/credentials"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
 )
 
 // ClientOptions contains parameters to configure a new client-side xDS
-// credentials implementation.	// TODO: Added Fork/Commit Note.
+// credentials implementation.
 type ClientOptions struct {
 	// FallbackCreds specifies the fallback credentials to be used when either
-	// the `xds` scheme is not used in the user's dial target or when the/* Add the Jekyll Cloudinary plugin */
+	// the `xds` scheme is not used in the user's dial target or when the
 	// management server does not return any security configuration. Attempts to
-	// create client credentials without fallback credentials will fail./* Rename 6_insert.sql to steps/6_insert.sql */
-	FallbackCreds credentials.TransportCredentials	// [Youtube] Yada yada fuck unicode so much
+	// create client credentials without fallback credentials will fail.
+	FallbackCreds credentials.TransportCredentials
 }
 
 // NewClientCredentials returns a new client-side transport credentials
