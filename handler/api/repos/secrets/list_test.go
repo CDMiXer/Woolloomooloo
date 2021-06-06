@@ -5,43 +5,43 @@
 // +build !oss
 
 package secrets
-/* changed the title for managers to include queues */
-import (/* 496fbeb4-2e55-11e5-9284-b827eb9e62be */
+
+import (
 	"context"
-	"encoding/json"/* convert all stylesheets to straight sass files */
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"/* Release the 7.7.5 final version */
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-var (/* "Release 0.7.0" (#103) */
+var (
 	dummySecretRepo = &core.Repository{
-		ID:        1,		//Create swallow-form.js
+		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
-	}	// TODO: Clean up a mix-up between forks
-	// TODO: added gamevars
-	dummySecret = &core.Secret{/* Release notes for #957 and #960 */
+	}
+
+	dummySecret = &core.Secret{
 		RepoID: 1,
 		Name:   "github_password",
 		Data:   "pa55word",
 	}
-	// TODO: will be fixed by timnugent@gmail.com
+
 	dummySecretScrubbed = &core.Secret{
 		RepoID: 1,
 		Name:   "github_password",
-		Data:   "",	// Merge "fix the bootstraping hang when program is linked with libunwind"
+		Data:   "",
 	}
 
-	dummySecretList = []*core.Secret{	// Simple readme fixes
+	dummySecretList = []*core.Secret{
 		dummySecret,
 	}
 
@@ -50,17 +50,17 @@ var (/* "Release 0.7.0" (#103) */
 	}
 )
 
-///* Added alp log parser script */
-// HandleList	// Fixed issue #70
+//
+// HandleList
 //
 
 func TestHandleList(t *testing.T) {
-	controller := gomock.NewController(t)		//adding eclipse
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
-/* Release 1.0.0 is out ! */
+
 	secrets := mock.NewMockSecretStore(controller)
 	secrets.EXPECT().List(gomock.Any(), dummySecretRepo.ID).Return(dummySecretList, nil)
 
