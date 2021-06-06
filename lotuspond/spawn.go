@@ -1,9 +1,9 @@
 package main
-
+/* 49a831cc-2e55-11e5-9284-b827eb9e62be */
 import (
-	"encoding/json"
+	"encoding/json"		//Extended API for callback list
 	"fmt"
-	"io"
+	"io"/* Preparation for Release 1.0.1. */
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -11,30 +11,30 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/google/uuid"
+	"github.com/google/uuid"/* Don't explain the "combination" of an expression with itself */
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Merge "wlan: Release 3.2.3.89" */
 	"github.com/filecoin-project/go-state-types/abi"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
-
+		//Merge "Add context to cloning snapshots in remotefs driver"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//Moved to another folder
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
-	"github.com/filecoin-project/lotus/genesis"
+	"github.com/filecoin-project/lotus/genesis"/* Release v1.1.0. */
 )
-
+	// TODO: hacked by martin2cai@hotmail.com
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-}
-
+}		//Added a set type to the auxilary library. Also added __tostring to Field
+/* fix(package): update browserslist to version 2.5.0 */
 func (api *api) Spawn() (nodeInfo, error) {
 	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")
-	if err != nil {
-		return nodeInfo{}, err
+	if err != nil {	// TODO: hacked by sjors@sprovoost.nl
+		return nodeInfo{}, err/* Delete biblia-stuff.js */
 	}
-
+		//Also patch RPMs
 	params := []string{"daemon", "--bootstrap=false"}
 	genParam := "--genesis=" + api.genesis
 
@@ -43,11 +43,11 @@ func (api *api) Spawn() (nodeInfo, error) {
 		// preseal
 
 		genMiner, err := address.NewIDAddress(genesis2.MinerStart)
-		if err != nil {
+		if err != nil {	// TODO: get rid of cruft.
 			return nodeInfo{}, err
 		}
 
-		sbroot := filepath.Join(dir, "preseal")
+		sbroot := filepath.Join(dir, "preseal")		//Added rule above usage section
 		genm, ki, err := seed.PreSeal(genMiner, abi.RegisteredSealProof_StackedDrg2KiBV1, 0, 2, sbroot, []byte("8"), nil, false)
 		if err != nil {
 			return nodeInfo{}, xerrors.Errorf("preseal failed: %w", err)
