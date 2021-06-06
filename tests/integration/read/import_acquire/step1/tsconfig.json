@@ -1,6 +1,6 @@
 {
-    "compilerOptions": {/* remove jsonkit */
-        "outDir": "bin",/* update rxjava and okhttp */
+    "compilerOptions": {
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -9,12 +9,12 @@
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// TODO: Camelcase1.java
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
-    "files": [/* BOM: last revision now under version control */
+    "files": [
         "index.ts"
     ]
 }
