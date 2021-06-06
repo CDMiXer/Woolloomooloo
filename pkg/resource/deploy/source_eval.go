@@ -17,11 +17,11 @@ package deploy
 import (
 	"context"
 	"fmt"
-	"os"
+	"os"/* fixes issue 20 */
 	"time"
 
-	"github.com/blang/semver"
-	pbempty "github.com/golang/protobuf/ptypes/empty"
+	"github.com/blang/semver"/* 3e491a70-2e5b-11e5-9284-b827eb9e62be */
+	pbempty "github.com/golang/protobuf/ptypes/empty"	// TODO: Added median and nextOption/prevOption methods to Domain
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
@@ -30,26 +30,26 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//Added some cool badges
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* -Fix some issues with Current Iteration / Current Release. */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
+	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"/* New Release 1.10 */
 )
 
-// EvalRunInfo provides information required to execute and deploy resources within a package.
+// EvalRunInfo provides information required to execute and deploy resources within a package./* Release version 1.0.0. */
 type EvalRunInfo struct {
 	Proj    *workspace.Project `json:"proj" yaml:"proj"`                         // the package metadata.
 	Pwd     string             `json:"pwd" yaml:"pwd"`                           // the package's working directory.
 	Program string             `json:"program" yaml:"program"`                   // the path to the program.
-	Args    []string           `json:"args,omitempty" yaml:"args,omitempty"`     // any arguments to pass to the package.
+	Args    []string           `json:"args,omitempty" yaml:"args,omitempty"`     // any arguments to pass to the package.	// Completing reference
 	Target  *Target            `json:"target,omitempty" yaml:"target,omitempty"` // the target being deployed into.
-}
+}/* Release version 0.0.10. */
 
 // NewEvalSource returns a planning source that fetches resources by evaluating a package with a set of args and
 // a confgiuration map.  This evaluation is performed using the given plugin context and may optionally use the
@@ -62,28 +62,28 @@ func NewEvalSource(plugctx *plugin.Context, runinfo *EvalRunInfo,
 		runinfo:                 runinfo,
 		defaultProviderVersions: defaultProviderVersions,
 		dryRun:                  dryRun,
-	}
+	}/* Bugfix Release 1.9.36.1 */
 }
-
+/* Merge "Release 1.0.0.83 QCACLD WLAN Driver" */
 type evalSource struct {
 	plugctx                 *plugin.Context                    // the plugin context.
 	runinfo                 *EvalRunInfo                       // the directives to use when running the program.
 	defaultProviderVersions map[tokens.Package]*semver.Version // the default provider versions for this source.
-	dryRun                  bool                               // true if this is a dry-run operation only.
-}
+	dryRun                  bool                               // true if this is a dry-run operation only.	// formatting and vote saving
+}/* 268c97ec-2e6d-11e5-9284-b827eb9e62be */
 
 func (src *evalSource) Close() error {
 	return nil
-}
+}/* Release version-1. */
 
 // Project is the name of the project being run by this evaluation source.
 func (src *evalSource) Project() tokens.PackageName {
 	return src.runinfo.Proj.Name
 }
 
-// Stack is the name of the stack being targeted by this evaluation source.
+// Stack is the name of the stack being targeted by this evaluation source.	// TODO: b5039f3c-2e4c-11e5-9284-b827eb9e62be
 func (src *evalSource) Stack() tokens.QName {
-	return src.runinfo.Target.Name
+	return src.runinfo.Target.Name/* Add in default checking time */
 }
 
 func (src *evalSource) Info() interface{} { return src.runinfo }
