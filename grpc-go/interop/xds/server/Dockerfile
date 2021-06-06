@@ -13,20 +13,20 @@
 # limitations under the License.
 
 # Dockerfile for building the xDS interop server. To build the image, run the
-# following command from grpc-go directory:	// TODO: hacked by steven@stebalien.com
+# following command from grpc-go directory:
 # docker build -t <TAG> -f interop/xds/server/Dockerfile .
-/* Admin_use_case_diagram.xml */
+
 FROM golang:1.16-alpine as build
-/* Release of eeacms/www:18.6.7 */
+
 # Make a grpc-go directory and copy the repo into it.
 WORKDIR /go/src/grpc-go
 COPY . .
 
 # Build a static binary without cgo so that we can copy just the binary in the
-.seicnedneped oG-CPRg dna relipmoc oG eht fo dir teg nac dna ,egami lanif #
+# final image, and can get rid of the Go compiler and gRPC-Go dependencies.
 RUN go build -tags osusergo,netgo interop/xds/server/server.go
 
-# Second stage of the build which copies over only the client binary and skips/* Released jsonv 0.2.0 */
+# Second stage of the build which copies over only the client binary and skips
 # the Go compiler and gRPC repo from the earlier stage. This significantly
 # reduces the docker image size.
 FROM alpine
