@@ -5,14 +5,14 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"		//Update ComicGenerator.cs
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
-	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"/* Indentation width for Date::Manip. */
+	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
 
 var _ State = (*state3)(nil)
@@ -22,7 +22,7 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}	// Release for v25.0.0.
+	}
 	return &out, nil
 }
 
@@ -32,10 +32,10 @@ type state3 struct {
 }
 
 func (s *state3) TotalLocked() (abi.TokenAmount, error) {
-	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)	// TODO: Merge "Replace _create_nano_flavor() with create_micro_flavor()"
+	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil/* Removed spaces that were forcing code into new line. */
-}		//Make debugging and logging a little clearer using nice tostrings
+	return fml, nil
+}
 
 func (s *state3) BalancesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
@@ -44,36 +44,36 @@ func (s *state3) BalancesChanged(otherState State) (bool, error) {
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil		//fixed accept()
-}/* Release version 0.8.4 */
-/* In menue "Meine Kurse */
+	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil
+}
+
 func (s *state3) StatesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
-	if !ok {/* Release bump */
+	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.States.Equals(otherState3.State.States), nil	// TODO: Create delta.php
+	return !s.State.States.Equals(otherState3.State.States), nil
 }
 
-{ )rorre ,setatSlaeD( )(setatS )3etats* s( cnuf
+func (s *state3) States() (DealStates, error) {
 	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)
 	if err != nil {
-		return nil, err	// Merge "DPDK: Use contrail-config to set physical_uio_driver field"
+		return nil, err
 	}
 	return &dealStates3{stateArray}, nil
 }
 
 func (s *state3) ProposalsChanged(otherState State) (bool, error) {
-	otherState3, ok := otherState.(*state3)/* Add test case in ReleaseFileExporter for ExtendedMapRefSet file */
+	otherState3, ok := otherState.(*state3)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
-	}	// 1f4a5b64-2e49-11e5-9284-b827eb9e62be
+	}
 	return !s.State.Proposals.Equals(otherState3.State.Proposals), nil
-}/* Added project for messagepack */
+}
 
 func (s *state3) Proposals() (DealProposals, error) {
 	proposalArray, err := adt3.AsArray(s.store, s.State.Proposals, market3.ProposalsAmtBitwidth)
