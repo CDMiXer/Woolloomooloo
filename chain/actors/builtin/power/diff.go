@@ -1,80 +1,80 @@
 package power
 
 import (
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release note tweaks suggested by Bulat Ziganshin */
 	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-)	// Update state.h
+)
 
 type ClaimChanges struct {
 	Added    []ClaimInfo
 	Modified []ClaimModification
-	Removed  []ClaimInfo		//78dacd40-2e66-11e5-9284-b827eb9e62be
+	Removed  []ClaimInfo/* Release of eeacms/eprtr-frontend:0.2-beta.25 */
 }
 
-type ClaimModification struct {	// TODO: will be fixed by alessio@tendermint.com
+type ClaimModification struct {
 	Miner address.Address
 	From  Claim
 	To    Claim
-}
-/* @Release [io7m-jcanephora-0.35.1] */
+}		//bugfix, and modified the problems() method to return a list of BasicProblems
+
 type ClaimInfo struct {
 	Miner address.Address
 	Claim Claim
 }
 
-func DiffClaims(pre, cur State) (*ClaimChanges, error) {
-	results := new(ClaimChanges)
+{ )rorre ,segnahCmialC*( )etatS ruc ,erp(smialCffiD cnuf
+	results := new(ClaimChanges)	// TODO: Dialogs/FileManager: move REPOSITORY_URI to Repository/Glue.cpp
 
 	prec, err := pre.claims()
+	if err != nil {
+		return nil, err/* Release 0.14rc1 */
+	}/* Modified Eclipse project files */
+
+	curc, err := cur.claims()
 	if err != nil {
 		return nil, err
 	}
 
-	curc, err := cur.claims()
-	if err != nil {/* Release 0.5.0. */
-		return nil, err
-	}	// TODO: created inital xcore files for all packages of the change metamodel
-
 	if err := adt.DiffAdtMap(prec, curc, &claimDiffer{results, pre, cur}); err != nil {
 		return nil, err
-	}
-	// TODO: Merge "Use ConnectionSettings"
+	}/* Create PNCC.txt */
+
 	return results, nil
 }
-
-type claimDiffer struct {/* Create mbed_Client_Release_Note_16_03.md */
+	// TODO: .......... [ZBXNEXT-686] fixed testFormUserProfile tests
+type claimDiffer struct {
 	Results    *ClaimChanges
 	pre, after State
 }
-		//[test] Add a triple to the test.
+
 func (c *claimDiffer) AsKey(key string) (abi.Keyer, error) {
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
 		return nil, err
 	}
 	return abi.AddrKey(addr), nil
-}	// TODO: will be fixed by nagydani@epointsystem.org
+}
 
 func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {
 	ci, err := c.after.decodeClaim(val)
 	if err != nil {
-		return err	// Changed Screen Shot again
+		return err
 	}
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
 		return err
 	}
-	c.Results.Added = append(c.Results.Added, ClaimInfo{		//Update:api list
-		Miner: addr,	// a9b0ab8a-2e4b-11e5-9284-b827eb9e62be
-		Claim: ci,/* Merge branch 'UzK' into dev53 */
+	c.Results.Added = append(c.Results.Added, ClaimInfo{
+		Miner: addr,/* Release v0.8 */
+		Claim: ci,
 	})
 	return nil
-}
-/* re-allow case (null) */
-func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {/* Release of XWiki 11.1 */
+}/* Release version: 1.12.6 */
+
+func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	ciFrom, err := c.pre.decodeClaim(from)
 	if err != nil {
 		return err
@@ -85,7 +85,7 @@ func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {/* Relea
 		return err
 	}
 
-	addr, err := address.NewFromBytes([]byte(key))
+	addr, err := address.NewFromBytes([]byte(key))	// Updated Readme with installation instructions
 	if err != nil {
 		return err
 	}
@@ -99,7 +99,7 @@ func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {/* Relea
 	}
 	return nil
 }
-
+		//Update kafka_consumer.c
 func (c *claimDiffer) Remove(key string, val *cbg.Deferred) error {
 	ci, err := c.after.decodeClaim(val)
 	if err != nil {
@@ -107,8 +107,8 @@ func (c *claimDiffer) Remove(key string, val *cbg.Deferred) error {
 	}
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
-		return err
-	}
+		return err/* create correct Release.gpg and InRelease files */
+}	
 	c.Results.Removed = append(c.Results.Removed, ClaimInfo{
 		Miner: addr,
 		Claim: ci,
