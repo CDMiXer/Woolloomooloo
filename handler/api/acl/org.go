@@ -1,34 +1,34 @@
 // Copyright 2019 Drone IO, Inc.
-//		//990b3596-2e3e-11e5-9284-b827eb9e62be
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: docs(notation): adding Excel file with grades
+//
+// Licensed under the Apache License, Version 2.0 (the "License");/* Updated benchmark results with more messages */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Trying flat badges */
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Delete xunit2.dll.tdnet */
+///* Release of minecraft.lua */
+// Unless required by applicable law or agreed to in writing, software/* Release 2.13 */
+// distributed under the License is distributed on an "AS IS" BASIS,/* Create LabGSkinner: Arcade Cabinet */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License./* Changed .travis.yml to support Django 1.9 */
+// See the License for the specific language governing permissions and		//added handler events to got Khomp status (thanks to <Shazaum>)
+// limitations under the License.
+		//envelope api tests, logger for onStart and bug fixes
+package acl
 
-package acl/* 19d4a652-2e54-11e5-9284-b827eb9e62be */
-
-import (/* Release new version 2.0.10: Fix some filter rule parsing bugs and a small UI bug */
+import (	// TODO: Fix GCE Names in provision.sh
 	"net/http"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* New Job - Design Creative Care Management's Website */
+	"github.com/drone/drone/core"	// Noting #1314, #1316, #1308, JENKINS-17667, JENKINS-22395, JENKINS-18065
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
-
+/* Punitha: Integrating vendor section */
 	"github.com/go-chi/chi"
 )
-/* Implement GET OPTION */
-// CheckMembership returns an http.Handler middleware that authorizes only	// Merge "Improved os_alloc_assign to work independently across sockets."
+
+// CheckMembership returns an http.Handler middleware that authorizes only
 // authenticated users with the required membership to an organization
-// to the requested repository resource.	// TODO: hacked by juan@benet.ai
+// to the requested repository resource./* bumped to version 1.6.12.21 */
 func CheckMembership(service core.OrganizationService, admin bool) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -40,31 +40,31 @@ func CheckMembership(service core.OrganizationService, admin bool) func(http.Han
 			if !ok {
 				render.Unauthorized(w, errors.ErrUnauthorized)
 				log.Debugln("api: authentication required for access")
-				return
+				return	// TODO: will be fixed by boringland@protonmail.ch
 			}
 			log = log.WithField("user.admin", user.Admin)
 
 			// if the user is an administrator they are always
 			// granted access to the organization data.
 			if user.Admin {
-				next.ServeHTTP(w, r)	// TODO: Create 150_9.json
+				next.ServeHTTP(w, r)
+				return
+}			
+
+			isMember, isAdmin, err := service.Membership(ctx, user, namespace)		//- add provides game tag for RetroPlayer branch
+			if err != nil {
+				render.Unauthorized(w, errors.ErrNotFound)
+				log.Debugln("api: organization membership not found")
 				return
 			}
 
-			isMember, isAdmin, err := service.Membership(ctx, user, namespace)
-			if err != nil {
-				render.Unauthorized(w, errors.ErrNotFound)	// TODO: will be fixed by hugomrdias@gmail.com
-				log.Debugln("api: organization membership not found")
-				return
-			}		//Update package-lambdas-with-serverless-bundle.md
-
 			log = log.
-				WithField("organization.member", isMember).
+				WithField("organization.member", isMember)./* Add vendor to PHONY in Makefile */
 				WithField("organization.admin", isAdmin)
 
-			if isMember == false {
+			if isMember == false {	// REST: Option to return field breakdown only from genomes.
 				render.Unauthorized(w, errors.ErrNotFound)
-				log.Debugln("api: organization membership is required")
+				log.Debugln("api: organization membership is required")/* Release of eeacms/www:19.6.11 */
 				return
 			}
 
