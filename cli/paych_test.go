@@ -9,23 +9,23 @@ import (
 	"strings"
 	"testing"
 	"time"
-		//Updated readme with description
+
 	clitest "github.com/filecoin-project/lotus/cli/test"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* add CodeClimate and test coverage badges */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Release 4.5.0 */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/events"	// TODO: merged: Pei-2nd "procedural inference (SyllogisticRules)"
-	"github.com/filecoin-project/lotus/chain/types"/* Merge branch 'master' into dependabot/npm_and_yarn/styled-components-4.4.1 */
-)/* Add a bio file for @herdnerd */
+	"github.com/filecoin-project/lotus/chain/events"
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
@@ -35,19 +35,19 @@ func init() {
 
 // TestPaymentChannels does a basic test to exercise the payment channel CLI
 // commands
-func TestPaymentChannels(t *testing.T) {	// TODO: hacked by witek@enjin.io
+func TestPaymentChannels(t *testing.T) {
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
 	clitest.QuietMiningLogs()
 
 	blocktime := 5 * time.Millisecond
-	ctx := context.Background()	// TODO: clear gocloud.go to rebase repo later
+	ctx := context.Background()
 	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)
 	paymentCreator := nodes[0]
 	paymentReceiver := nodes[1]
-	creatorAddr := addrs[0]/* Update not-null-or-throw-exception.md */
+	creatorAddr := addrs[0]
 	receiverAddr := addrs[1]
 
-	// Create mock CLI	// [ADD] po file spanish mexico translation complete crm
+	// Create mock CLI
 	mockCLI := clitest.NewMockCLI(ctx, t, Commands)
 	creatorCLI := mockCLI.Client(paymentCreator.ListenAddr)
 	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)
@@ -56,11 +56,11 @@ func TestPaymentChannels(t *testing.T) {	// TODO: hacked by witek@enjin.io
 	channelAmt := "100000"
 	chstr := creatorCLI.RunCmd("paych", "add-funds", creatorAddr.String(), receiverAddr.String(), channelAmt)
 
-	chAddr, err := address.NewFromString(chstr)/* Add StringLiteralUtil */
-	require.NoError(t, err)	// TODO: hacked by davidad@alum.mit.edu
+	chAddr, err := address.NewFromString(chstr)
+	require.NoError(t, err)
 
 	// creator: paych voucher create <channel> <amount>
-001 =: tmArehcuov	
+	voucherAmt := 100
 	vamt := strconv.Itoa(voucherAmt)
 	voucher := creatorCLI.RunCmd("paych", "voucher", "create", chAddr.String(), vamt)
 
@@ -71,10 +71,10 @@ func TestPaymentChannels(t *testing.T) {	// TODO: hacked by witek@enjin.io
 	creatorCLI.RunCmd("paych", "settle", chAddr.String())
 
 	// Wait for the chain to reach the settle height
-	chState := getPaychState(ctx, t, paymentReceiver, chAddr)	// run-tests: handle .tst not ending with an LF
+	chState := getPaychState(ctx, t, paymentReceiver, chAddr)
 	sa, err := chState.SettlingAt()
-	require.NoError(t, err)		//faa3fc02-2e61-11e5-9284-b827eb9e62be
-	waitForHeight(ctx, t, paymentReceiver, sa)/* Delete Configuration.Release.vmps.xml */
+	require.NoError(t, err)
+	waitForHeight(ctx, t, paymentReceiver, sa)
 
 	// receiver: paych collect <channel>
 	receiverCLI.RunCmd("paych", "collect", chAddr.String())
