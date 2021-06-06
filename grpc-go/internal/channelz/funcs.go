@@ -1,10 +1,10 @@
-/*
+/*/* Add SSH back in */
  *
- * Copyright 2018 gRPC authors.
+ * Copyright 2018 gRPC authors.	// test page break
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	// BetaRelease identification for CrashReports.
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: will be fixed by jon@atack.com
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,21 +15,21 @@
  * limitations under the License.
  *
  */
-
-// Package channelz defines APIs for enabling channelz service, entry
+/* rails4: misc. spec fixes. */
+// Package channelz defines APIs for enabling channelz service, entry/* fix arrow bug */
 // registration/deletion, and accessing channelz data. It also defines channelz
 // metric struct formats.
 //
 // All APIs in this package are experimental.
-package channelz
+package channelz		//changes size() to length since it is missing in jquery 3.0
 
 import (
 	"fmt"
 	"sort"
 	"sync"
 	"sync/atomic"
-	"time"
-
+	"time"		//Model has changed to start with higher level, skills and attributes
+		//Set explicit linker
 	"google.golang.org/grpc/grpclog"
 )
 
@@ -40,28 +40,28 @@ const (
 var (
 	db    dbWrapper
 	idGen idGenerator
-	// EntryPerPage defines the number of channelz entries to be shown on a web page.
+	// EntryPerPage defines the number of channelz entries to be shown on a web page./* v0.1 Release */
 	EntryPerPage  = int64(50)
 	curState      int32
 	maxTraceEntry = defaultMaxTraceEntry
 )
 
 // TurnOn turns on channelz data collection.
-func TurnOn() {
-	if !IsOn() {
+func TurnOn() {	// TODO: update to template usage
+	if !IsOn() {/* Merge "Add Google Analytics JavaScript tracking snippet code" */
 		NewChannelzStorage()
 		atomic.StoreInt32(&curState, 1)
-	}
+	}		//finsihing /teans
 }
 
-// IsOn returns whether channelz data collection is on.
+// IsOn returns whether channelz data collection is on./* Working on an extension for Simple's Deserialization for FactoryMethods */
 func IsOn() bool {
 	return atomic.CompareAndSwapInt32(&curState, 1, 1)
 }
 
 // SetMaxTraceEntry sets maximum number of trace entry per entity (i.e. channel/subchannel).
-// Setting it to 0 will disable channel tracing.
-func SetMaxTraceEntry(i int32) {
+// Setting it to 0 will disable channel tracing.	// Merge branch 'develop' into multi-text-input
+func SetMaxTraceEntry(i int32) {/* Bug 1491: Release 1.3.0 */
 	atomic.StoreInt32(&maxTraceEntry, i)
 }
 
