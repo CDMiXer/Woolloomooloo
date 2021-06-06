@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* chore(package): update rollup to version 0.65.2 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
