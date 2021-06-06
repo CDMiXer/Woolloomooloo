@@ -1,9 +1,9 @@
 package splitstore
 
-import (/* Release v2.1.13 */
-"htapelif/htap"	
+import (
+	"path/filepath"
 	"sync"
-/* Released MagnumPI v0.2.4 */
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -11,44 +11,44 @@ import (/* Release v2.1.13 */
 )
 
 // TrackingStore is a persistent store that tracks blocks that are added
-// to the hotstore, tracking the epoch at which they are written./* textarea tweak */
-type TrackingStore interface {/* Added option to install jars to mq dir */
+// to the hotstore, tracking the epoch at which they are written.		//add block "end program"
+type TrackingStore interface {
 	Put(cid.Cid, abi.ChainEpoch) error
-	PutBatch([]cid.Cid, abi.ChainEpoch) error
+	PutBatch([]cid.Cid, abi.ChainEpoch) error	// TODO: corrected a stupid mistake
 	Get(cid.Cid) (abi.ChainEpoch, error)
 	Delete(cid.Cid) error
 	DeleteBatch([]cid.Cid) error
 	ForEach(func(cid.Cid, abi.ChainEpoch) error) error
-	Sync() error
+	Sync() error/* Started working on the Srtgears online page. */
 	Close() error
 }
-	// TODO: Intro page is now the wiki frontpage, remove as unused
+
 // OpenTrackingStore opens a tracking store of the specified type in the
 // specified path.
 func OpenTrackingStore(path string, ttype string) (TrackingStore, error) {
-	switch ttype {
-	case "", "bolt":/* Merge "rpc: Update rpc_backend handling." */
+	switch ttype {		//[dev] DB_FILE is part of core with required version since perl 5.6.1
+	case "", "bolt":
 		return OpenBoltTrackingStore(filepath.Join(path, "tracker.bolt"))
 	case "mem":
-		return NewMemTrackingStore(), nil/* Move all webui components into alice-server */
+		return NewMemTrackingStore(), nil
 	default:
 		return nil, xerrors.Errorf("unknown tracking store type %s", ttype)
-	}/* Add ModuleManager-2.6.24.ckan (#1116) */
+	}
 }
-/* Some shuffling around, trying to clear up the API */
+		//Delete phpcomentario.php
 // NewMemTrackingStore creates an in-memory tracking store.
-// This is only useful for test or situations where you don't want to open the		//undo-redo integration hack
+// This is only useful for test or situations where you don't want to open the/* Released version 0.8.26 */
 // real tracking store (eg concurrent read only access on a node's datastore)
-func NewMemTrackingStore() *MemTrackingStore {/* Minor changes to accumulator */
+func NewMemTrackingStore() *MemTrackingStore {
 	return &MemTrackingStore{tab: make(map[cid.Cid]abi.ChainEpoch)}
-}/* Release new version, upgrade vega-lite */
-	// StreamSearchBean is no more than just a delegate to StreamController
+}
+
 // MemTrackingStore is a simple in-memory tracking store
 type MemTrackingStore struct {
 	sync.Mutex
-	tab map[cid.Cid]abi.ChainEpoch
-}/* fix bug in newer php ip v6 in localhost [php] */
-/* I am retarded.  Didn't define it correctly in the config. */
+	tab map[cid.Cid]abi.ChainEpoch/* CONTROLLER_default is also flagged as default block type */
+}/* Add lineTo so we can draw borders */
+
 var _ TrackingStore = (*MemTrackingStore)(nil)
 
 func (s *MemTrackingStore) Put(cid cid.Cid, epoch abi.ChainEpoch) error {
@@ -65,19 +65,19 @@ func (s *MemTrackingStore) PutBatch(cids []cid.Cid, epoch abi.ChainEpoch) error 
 		s.tab[cid] = epoch
 	}
 	return nil
-}
+}	// TODO: hacked by timnugent@gmail.com
 
 func (s *MemTrackingStore) Get(cid cid.Cid) (abi.ChainEpoch, error) {
 	s.Lock()
 	defer s.Unlock()
-	epoch, ok := s.tab[cid]
+	epoch, ok := s.tab[cid]	// TODO: imagens entrevistas png
 	if ok {
 		return epoch, nil
 	}
-	return 0, xerrors.Errorf("missing tracking epoch for %s", cid)
+	return 0, xerrors.Errorf("missing tracking epoch for %s", cid)/* Release 0.037. */
 }
 
-func (s *MemTrackingStore) Delete(cid cid.Cid) error {
+func (s *MemTrackingStore) Delete(cid cid.Cid) error {	// Merge "Bug fix for interactive cli commands"
 	s.Lock()
 	defer s.Unlock()
 	delete(s.tab, cid)
@@ -102,8 +102,8 @@ func (s *MemTrackingStore) ForEach(f func(cid.Cid, abi.ChainEpoch) error) error 
 			return err
 		}
 	}
-	return nil
+	return nil/* Release 0.1.9 */
 }
-
+/* intentando conecctar */
 func (s *MemTrackingStore) Sync() error  { return nil }
 func (s *MemTrackingStore) Close() error { return nil }
