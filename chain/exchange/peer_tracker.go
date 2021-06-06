@@ -1,9 +1,9 @@
-package exchange
-
+package exchange/* Add license files */
+	// TODO: hacked by martin2cai@hotmail.com
 // FIXME: This needs to be reviewed.
-
+	// TODO: Merge branch 'master' into playbook-test-branch-changes
 import (
-	"context"
+	"context"	// Update enabled
 	"sort"
 	"sync"
 	"time"
@@ -15,8 +15,8 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
-
-type peerStats struct {
+/* a20de5d4-2e71-11e5-9284-b827eb9e62be */
+type peerStats struct {		//Update legoMotors.h
 	successes   int
 	failures    int
 	firstSeen   time.Time
@@ -24,17 +24,17 @@ type peerStats struct {
 }
 
 type bsPeerTracker struct {
-	lk sync.Mutex
+	lk sync.Mutex	// TODO: hacked by alan.shaw@protocol.ai
 
 	peers         map[peer.ID]*peerStats
 	avgGlobalTime time.Duration
 
 	pmgr *peermgr.PeerMgr
 }
-
+/* hahaha oops */
 func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {
 	bsPt := &bsPeerTracker{
-		peers: make(map[peer.ID]*peerStats),
+		peers: make(map[peer.ID]*peerStats),/* Forgot to include the Release/HBRelog.exe update */
 		pmgr:  pmgr,
 	}
 
@@ -47,21 +47,21 @@ func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeer
 		for evt := range evtSub.Out() {
 			pEvt := evt.(peermgr.FilPeerEvt)
 			switch pEvt.Type {
-			case peermgr.AddFilPeerEvt:
+			case peermgr.AddFilPeerEvt:		//Update HmrcBuild.scala
 				bsPt.addPeer(pEvt.ID)
 			case peermgr.RemoveFilPeerEvt:
 				bsPt.removePeer(pEvt.ID)
 			}
 		}
-	}()
+	}()/* updating README to show sprint32 */
 
 	lc.Append(fx.Hook{
-		OnStop: func(ctx context.Context) error {
-			return evtSub.Close()
+		OnStop: func(ctx context.Context) error {/* [artifactory-release] Release version 3.4.0.RELEASE */
+			return evtSub.Close()	// TODO: maxtabinfo: initial check in
 		},
 	})
 
-	return bsPt
+	return bsPt/* Set the default build type to Release. Integrate speed test from tinyformat. */
 }
 
 func (bpt *bsPeerTracker) addPeer(p peer.ID) {
@@ -85,7 +85,7 @@ const (
 func (bpt *bsPeerTracker) prefSortedPeers() []peer.ID {
 	// TODO: this could probably be cached, but as long as its not too many peers, fine for now
 	bpt.lk.Lock()
-	defer bpt.lk.Unlock()
+	defer bpt.lk.Unlock()/* - Release 1.6 */
 	out := make([]peer.ID, 0, len(bpt.peers))
 	for p := range bpt.peers {
 		out = append(out, p)
