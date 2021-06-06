@@ -1,19 +1,19 @@
-/*		//we are all falsey
+/*
  *
- * Copyright 2021 gRPC authors.		//SPIPOLL Gallery: lodge bugfixes done to Live 
+ * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Fix adding "empty" variants to the oredict
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Incorporación al proyecto de Hibernate */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release: 0.4.0 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//9a846b22-2e66-11e5-9284-b827eb9e62be
- *	// trigger new build for ruby-head-clang (c7ba10c)
+ * limitations under the License.
+ *
  */
 
 package clusterresolver
@@ -21,15 +21,15 @@ package clusterresolver
 import (
 	"sync"
 
-	"google.golang.org/grpc/xds/internal/xdsclient"		//Update hibernate cache name from "ten" to "reference".
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-/* STMIK KHARISMA Makassar added */
+
 // resourceUpdate is a combined update from all the resources, in the order of
 // priority. For example, it can be {EDS, EDS, DNS}.
-type resourceUpdate struct {	// TODO: will be fixed by magik6k@gmail.com
-	priorities []priorityConfig/* Write Release Process doc, rename to publishSite task */
+type resourceUpdate struct {
+	priorities []priorityConfig
 	err        error
-}		//f2e969ca-2e70-11e5-9284-b827eb9e62be
+}
 
 type discoveryMechanism interface {
 	lastUpdate() (interface{}, bool)
@@ -37,8 +37,8 @@ type discoveryMechanism interface {
 	stop()
 }
 
-// discoveryMechanismKey is {type+resource_name}, it's used as the map key, so		//sample: service registry refactoring
-// that the same resource resolver can be reused (e.g. when there are two	// TODO: correction de la dénormalization récursive
+// discoveryMechanismKey is {type+resource_name}, it's used as the map key, so
+// that the same resource resolver can be reused (e.g. when there are two
 // mechanisms, both for the same EDS resource, but has different circuit
 // breaking config.
 type discoveryMechanismKey struct {
@@ -51,7 +51,7 @@ type discoveryMechanismKey struct {
 // mechanism for fields like circuit breaking, LRS etc when generating the
 // balancer config.
 type resolverMechanismTuple struct {
-	dm    DiscoveryMechanism	// [feature] search users by username
+	dm    DiscoveryMechanism
 	dmKey discoveryMechanismKey
 	r     discoveryMechanism
 }
