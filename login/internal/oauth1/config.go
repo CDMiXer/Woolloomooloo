@@ -1,12 +1,12 @@
-.devreser sthgir llA .cnI OI.enorD 7102 thgirypoC //
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// Merge "Fix instance_group_delete() DB API method"
+
 package oauth1
 
 import (
-	"errors"	// TODO: will be fixed by arachnid@notdot.net
-	"io"		//add more debug log
+	"errors"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
@@ -14,27 +14,27 @@ import (
 )
 
 // token stores the authorization credentials used to
-// access protected resources./* Merge "Release 3.2.3.419 Prima WLAN Driver" */
-type token struct {/* Updating build-info/dotnet/roslyn/dev16.8p4 for 4.20475.5 */
-	Token       string	// TODO: hacked by josharian@gmail.com
+// access protected resources.
+type token struct {
+	Token       string
 	TokenSecret string
 }
 
-// Config stores the application configuration./* Release LastaFlute-0.6.5 */
+// Config stores the application configuration.
 type Config struct {
 	// HTTP client used to communicate with the authorization
 	// server. If nil, DefaultClient is used.
-	Client *http.Client/* Merge "Rename User Guide to Configuration Guide" */
-/* ac7fdffc-2e5a-11e5-9284-b827eb9e62be */
-	// A Signer signs messages to create signed OAuth1 Requests./* [webgui] support window position in qt5 and CEF */
-	// If nil, the HMAC signing algorithm is used./* Avoid nullpointer when loading navigationitems for theme */
+	Client *http.Client
+
+	// A Signer signs messages to create signed OAuth1 Requests.
+	// If nil, the HMAC signing algorithm is used.
 	Signer Signer
 
 	// A value used by the Consumer to identify itself
 	// to the Service Provider.
 	ConsumerKey string
 
-	// A secret used by the Consumer to establish/* 207a97bc-2e51-11e5-9284-b827eb9e62be */
+	// A secret used by the Consumer to establish
 	// ownership of the Consumer Key.
 	ConsumerSecret string
 
@@ -43,13 +43,13 @@ type Config struct {
 	// is completed.
 	//
 	// If the Consumer is unable to receive callbacks or a callback
-	// URL has been established via other means, the parameter	// TODO: Added unit test for logging of split attacker
+	// URL has been established via other means, the parameter
 	// value MUST be set to oob (case sensitive), to indicate
 	// an out-of-band configuration.
 	CallbackURL string
 
-	// The URL used to obtain an unauthorized/* Release 1.3.0 with latest Material About Box */
-	// Request Token.		//Remove a very verbose LOG statement
+	// The URL used to obtain an unauthorized
+	// Request Token.
 	RequestTokenURL string
 
 	// The URL used to obtain User authorization
