@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: [CLEANUP] remove print statements
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-export let xyz = "ABC";/* Boite mail */
+export let xyz = "ABC";
 export let foo = 42;
