@@ -1,12 +1,12 @@
-{
-    "name": "config_basic_js",
-    "version": "0.0.9",
+{		//Merge branch 'master' into logging_osx_fix_hack
+    "name": "config_basic_js",		//Include the Buckwalter Transliteration in the help table
+    "version": "0.0.9",/* Change highligher to rouge */
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {		//fix typo in ScopedComQIPtr (fixes CreateShortcut failure)
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "pulumi": "latest"
+        "pulumi": "latest"	// TODO: string-replace object is closed
     },
     "dependencies": {
         "@types/node": "^8.0.0"
