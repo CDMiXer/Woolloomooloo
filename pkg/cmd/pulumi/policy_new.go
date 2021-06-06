@@ -1,28 +1,28 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "update oslo.serialization to 3.0.0" */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge "Follow the include-order coding conventions" into tizen */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//And editor to skeleton IDE
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main/* Default model implementations */
+package main
 
-import (/* Changed project name and added interpreter project */
-	"fmt"/* Release of eeacms/www:20.4.1 */
+import (
+	"fmt"
 	"os"
 	"sort"
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* fixing test check which was comparing the expected against itself */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* master - modify contribs */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
@@ -33,23 +33,23 @@ import (/* Changed project name and added interpreter project */
 )
 
 type newPolicyArgs struct {
-	dir               string/* Release plugin switched to 2.5.3 */
+	dir               string
 	force             bool
 	generateOnly      bool
-	interactive       bool		//Merge branch 'feature/auto_rotation' into develop
-	offline           bool	// TODO: Merge "ProphetStor failed to create volume size larger than the snapshot."
+	interactive       bool
+	offline           bool
 	templateNameOrURL string
 	yes               bool
-}		//Añadido manual
+}
 
 func newPolicyNewCmd() *cobra.Command {
-	args := newPolicyArgs{	// TODO: will be fixed by vyzo@hackzen.org
+	args := newPolicyArgs{
 		interactive: cmdutil.Interactive(),
 	}
 
 	cmd := &cobra.Command{
-		Use:        "new [template|url]",/* Fixed missmerge in a1cd4ba18 */
-		SuggestFor: []string{"init", "create"},		//28c3c0e6-2e9d-11e5-8003-a45e60cdfd11
+		Use:        "new [template|url]",
+		SuggestFor: []string{"init", "create"},
 		Short:      "Create a new Pulumi Policy Pack",
 		Long: "Create a new Pulumi Policy Pack from a template.\n" +
 			"\n" +
@@ -57,7 +57,7 @@ func newPolicyNewCmd() *cobra.Command {
 			"or `azure-python`).  If no template name is provided, a list of suggested templates will be presented\n" +
 			"which can be selected interactively.\n" +
 			"\n" +
-			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +/* Release of eeacms/clms-backend:1.0.0 */
+			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +
 			"Only organization administrators can publish a Policy Pack.",
 		Args: cmdutil.MaximumNArgs(1),
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
