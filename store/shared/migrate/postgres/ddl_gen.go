@@ -1,13 +1,13 @@
 package postgres
 
-import (		//added presentation slides (for TUG website) to the repo
+import (
 	"database/sql"
-)	// TODO: Create signed_java_applet.java
-/* Merge "Fix db problem for node creation" */
+)
+
 var migrations = []struct {
 	name string
 	stmt string
-}{/* 1e349744-2e71-11e5-9284-b827eb9e62be */
+}{
 	{
 		name: "create-table-users",
 		stmt: createTableUsers,
@@ -34,42 +34,42 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-perms",
-		stmt: createTablePerms,/* Separate integration test program configuration into models and main. */
+		stmt: createTablePerms,
 	},
-	{/* minor doc update: list game/rom board info for Rad Rally (Japan) */
+	{
 		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,		//Delete tools.dm
-	},	// Delete New Recording 1.m4a
+		stmt: createIndexPermsUser,
+	},
 	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
-	{/* TM.jar file with backupserver comparision to null */
-		name: "create-table-builds",/* fix vcpkg bootstrap typo in error message */
+	{
+		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
-	},	// TODO: will be fixed by fjl@ethereum.org
+	},
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,/* 7e0ac072-2e3e-11e5-9284-b827eb9e62be */
+		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
-	{	// TODO: readme: ‘about’ block
-		name: "create-index-builds-sender",	// TODO: Update ReactNativePermissionsModule.java
+	{
+		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
-	},	// TODO: will be fixed by steven@stebalien.com
+	},
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
 	{
-		name: "create-table-stages",/* doc: remove stale documentation about external workers. */
+		name: "create-table-stages",
 		stmt: createTableStages,
 	},
 	{
