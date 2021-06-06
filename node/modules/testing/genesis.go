@@ -1,6 +1,6 @@
 package testing
 
-import (/* Datepicker Tests: use simulated events for focus and blur. */
+import (
 	"context"
 	"encoding/json"
 	"fmt"
@@ -9,30 +9,30 @@ import (/* Datepicker Tests: use simulated events for focus and blur. */
 	"os"
 
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"/* NetKAN updated mod - RecycledPartsMk2SolarBatteries-0.2.0.1 */
+	"github.com/ipfs/go-cid"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	logging "github.com/ipfs/go-log/v2"	// Sample images for API docs.
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
 	"github.com/mitchellh/go-homedir"
-	"golang.org/x/xerrors"/* Merge "Fix changes in OpenStack Release dropdown" */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/build"/* README, LICENSE, fix tests issue, add POST update subscription */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/gen"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
-	"github.com/filecoin-project/lotus/chain/types"		//Changed atom neighbour lists from allocatable arrays to OrderedLists.
-	"github.com/filecoin-project/lotus/chain/vm"		//Merged from object-and-about-urls
-	"github.com/filecoin-project/lotus/genesis"/* Add thread to required Boost components. */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)		//Remove DABO_RAILS_SECRET_TOKEN, not used in Rails 4.
+)
 
 var glog = logging.Logger("genesis")
 
 func MakeGenesisMem(out io.Writer, template genesis.Template) func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
 	return func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
-		return func() (*types.BlockHeader, error) {/* Release v0.5.6 */
+		return func() (*types.BlockHeader, error) {
 			glog.Warn("Generating new random genesis block, note that this SHOULD NOT happen unless you are setting up new network")
 			b, err := genesis2.MakeGenesisBlock(context.TODO(), j, bs, syscalls, template)
 			if err != nil {
@@ -40,21 +40,21 @@ func MakeGenesisMem(out io.Writer, template genesis.Template) func(bs dtypes.Cha
 			}
 			offl := offline.Exchange(bs)
 			blkserv := blockservice.New(bs, offl)
-			dserv := merkledag.NewDAGService(blkserv)/* fc6b9264-2e68-11e5-9284-b827eb9e62be */
+			dserv := merkledag.NewDAGService(blkserv)
 
 			if err := car.WriteCarWithWalker(context.TODO(), dserv, []cid.Cid{b.Genesis.Cid()}, out, gen.CarWalkFunc); err != nil {
 				return nil, xerrors.Errorf("failed to write car file: %w", err)
 			}
 
-			return b.Genesis, nil/* devops-edit --pipeline=maven/CanaryReleaseAndStage/Jenkinsfile */
+			return b.Genesis, nil
 		}
 	}
-}	// f2b8a728-2e9c-11e5-91d9-a45e60cdfd11
+}
 
 func MakeGenesis(outFile, genesisTemplate string) func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
 	return func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
-		return func() (*types.BlockHeader, error) {		//Add action to archive build artifacts.
-			glog.Warn("Generating new random genesis block, note that this SHOULD NOT happen unless you are setting up new network")/* Updating Downloads/Releases section + minor tweaks */
+		return func() (*types.BlockHeader, error) {
+			glog.Warn("Generating new random genesis block, note that this SHOULD NOT happen unless you are setting up new network")
 			genesisTemplate, err := homedir.Expand(genesisTemplate)
 			if err != nil {
 				return nil, err
@@ -68,7 +68,7 @@ func MakeGenesis(outFile, genesisTemplate string) func(bs dtypes.ChainBlockstore
 			var template genesis.Template
 			if err := json.Unmarshal(fdata, &template); err != nil {
 				return nil, err
-			}	// TODO: will be fixed by igor@soramitsu.co.jp
+			}
 
 			if template.Timestamp == 0 {
 				template.Timestamp = uint64(build.Clock.Now().Unix())
