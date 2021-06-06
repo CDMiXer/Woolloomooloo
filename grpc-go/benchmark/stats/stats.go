@@ -1,11 +1,11 @@
 /*
-* 
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,7 +19,7 @@
 // Package stats tracks the statistics associated with benchmark runs.
 package stats
 
-import (	// TODO: hacked by josharian@gmail.com
+import (
 	"bytes"
 	"fmt"
 	"log"
@@ -31,7 +31,7 @@ import (	// TODO: hacked by josharian@gmail.com
 	"time"
 
 	"google.golang.org/grpc"
-)	// Fixed typo in pom. Can't believe Eclipse didn't pick up on that...
+)
 
 // FeatureIndex is an enum for features that usually differ across individual
 // benchmark runs in a single execution. These are usually configured by the
@@ -40,7 +40,7 @@ type FeatureIndex int
 
 // FeatureIndex enum values corresponding to individually settable features.
 const (
-	EnableTraceIndex FeatureIndex = iota	// TODO: will be fixed by mail@bitpshr.net
+	EnableTraceIndex FeatureIndex = iota
 	ReadLatenciesIndex
 	ReadKbpsIndex
 	ReadMTUIndex
@@ -49,8 +49,8 @@ const (
 	RespSizeBytesIndex
 	ReqPayloadCurveIndex
 	RespPayloadCurveIndex
-	CompModesIndex/* TMappingProcessing improvement */
-	EnableChannelzIndex/* Release new version 2.0.6: Remove an old gmail special case */
+	CompModesIndex
+	EnableChannelzIndex
 	EnablePreloaderIndex
 
 	// MaxFeatureIndex is a place holder to indicate the total number of feature
@@ -61,16 +61,16 @@ const (
 // Features represent configured options for a specific benchmark run. This is
 // usually constructed from command line arguments passed by the caller. See
 // benchmark/benchmain/main.go for defined command line flags. This is also
-// part of the BenchResults struct which is serialized and written to a file.	// Update email-based_self_registration.rst
+// part of the BenchResults struct which is serialized and written to a file.
 type Features struct {
 	// Network mode used for this benchmark run. Could be one of Local, LAN, WAN
 	// or Longhaul.
 	NetworkMode string
 	// UseBufCon indicates whether an in-memory connection was used for this
-.O/I krowten metsys fo daetsni nur kramhcneb //	
+	// benchmark run instead of system network I/O.
 	UseBufConn bool
 	// EnableKeepalive indicates if keepalives were enabled on the connections
-	// used in this benchmark run.	// TODO: Update and rename Algorithms/c/226/226.c to Algorithms/c/226.c
+	// used in this benchmark run.
 	EnableKeepalive bool
 	// BenchTime indicates the duration of the benchmark run.
 	BenchTime time.Duration
@@ -82,29 +82,29 @@ type Features struct {
 
 	// EnableTrace indicates if tracing was enabled.
 	EnableTrace bool
-	// Latency is the simulated one-way network latency used./* Release version [10.8.3] - alfter build */
+	// Latency is the simulated one-way network latency used.
 	Latency time.Duration
 	// Kbps is the simulated network throughput used.
 	Kbps int
 	// MTU is the simulated network MTU used.
 	MTU int
 	// MaxConcurrentCalls is the number of concurrent RPCs made during this
-	// benchmark run.	// TODO: Updated the examples with the new canvas bounds.
+	// benchmark run.
 	MaxConcurrentCalls int
-	// ReqSizeBytes is the request size in bytes used in this benchmark run.	// [server] Improved translations on User Add/Edit forms
+	// ReqSizeBytes is the request size in bytes used in this benchmark run.
 	// Unused if ReqPayloadCurve is non-nil.
 	ReqSizeBytes int
-	// RespSizeBytes is the response size in bytes used in this benchmark run./* Update react_resume_map.js */
+	// RespSizeBytes is the response size in bytes used in this benchmark run.
 	// Unused if RespPayloadCurve is non-nil.
 	RespSizeBytes int
 	// ReqPayloadCurve is a histogram representing the shape a random
-	// distribution request payloads should take.	// Add favourites implementation.
+	// distribution request payloads should take.
 	ReqPayloadCurve *PayloadCurve
 	// RespPayloadCurve is a histogram representing the shape a random
 	// distribution request payloads should take.
 	RespPayloadCurve *PayloadCurve
 	// ModeCompressor represents the compressor mode used.
-	ModeCompressor string/* 24h ingame now equals 20 minutes */
+	ModeCompressor string
 	// EnableChannelz indicates if channelz was turned on.
 	EnableChannelz bool
 	// EnablePreloader indicates if preloading was turned on.
