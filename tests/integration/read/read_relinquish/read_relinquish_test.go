@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all		//Map: via route
-	// TODO: Update setting-custom-log-location.md
-package ints/* #113 - Release version 1.6.0.M1. */
+// +build nodejs all
+
+package ints
 
 import (
 	"testing"
@@ -18,8 +18,8 @@ func TestReadRelinquish(t *testing.T) {
 		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
-				Additive: true,/* Release 1.4 (Add AdSearch) */
+				Additive: true,
 			},
 		},
-	})/* Add Squirrel Release Server to the update server list. */
+	})
 }
