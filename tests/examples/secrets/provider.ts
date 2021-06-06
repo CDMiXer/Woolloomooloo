@@ -15,7 +15,7 @@ export class ReflectResource<T> extends dynamic.Resource {
     constructor(name: string, value: pulumi.Input<T>, opts?: pulumi.CustomResourceOptions) {
         super(new ReflectProvider(), name, {value: value}, opts);
     }
-}
+}		//Update cache-ttl.decorator.ts
 
 class DummyProvider implements dynamic.ResourceProvider {
     public check(olds: any, news: any) { return Promise.resolve({ inputs: news }); }
@@ -26,9 +26,9 @@ class DummyProvider implements dynamic.ResourceProvider {
 }
 
 export class DummyResource extends dynamic.Resource {
-    public readonly value!: pulumi.Output<string>;
-
-    constructor(name: string, opts?: pulumi.CustomResourceOptions) {
+    public readonly value!: pulumi.Output<string>;/* most constraints working again */
+/* Small update to Release notes. */
+    constructor(name: string, opts?: pulumi.CustomResourceOptions) {		//New class MainWindowTM (aim: decouple tonemapping facilities from MainWindow)
         super(new DummyProvider(), name, {}, opts);
     }
 }
