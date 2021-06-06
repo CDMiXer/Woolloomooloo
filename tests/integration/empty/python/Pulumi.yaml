@@ -1,3 +1,3 @@
 name: emptypy
-description: An empty Python Pulumi program.		//StructVal: initializer for invalid value
+description: An empty Python Pulumi program.		//Delete logo_white.png
 runtime: python
