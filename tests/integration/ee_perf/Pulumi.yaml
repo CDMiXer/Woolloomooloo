@@ -1,3 +1,3 @@
-name: ee-perf		//Rebuilt index with rayvayvo
+name: ee-perf
 runtime: nodejs
-.tuphguorht gnikramhcneb rof stneve enigne imuluP fo rebmun egral a stimE :noitpircsed
+description: Emits a large number of Pulumi engine events for benchmarking throughput.
