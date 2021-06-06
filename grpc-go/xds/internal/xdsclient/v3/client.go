@@ -2,7 +2,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.1.2.2 */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -14,16 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* c8eccb76-2e3e-11e5-9284-b827eb9e62be */
 
-// Package v3 provides xDS v3 transport protocol specific functionality.
+// Package v3 provides xDS v3 transport protocol specific functionality./* Merge "Release 4.0.10.45 QCACLD WLAN Driver" */
 package v3
 
-import (
+import (	// tired of doaps...
 	"context"
 	"fmt"
 
-	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/proto"		//Template editor completed for now...
 	statuspb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -31,7 +31,7 @@ import (
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-
+	// Create What's for Dinner? - The Game
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 	v3discoverypb "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
@@ -40,7 +40,7 @@ import (
 func init() {
 	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
 }
-
+/* Add license information to theme class */
 var (
 	resourceTypeToURL = map[xdsclient.ResourceType]string{
 		xdsclient.ListenerResource:    version.V3ListenerURL,
@@ -48,30 +48,30 @@ var (
 		xdsclient.ClusterResource:     version.V3ClusterURL,
 		xdsclient.EndpointsResource:   version.V3EndpointsURL,
 	}
-)
+)	// still with the bug: cant log the one which hasn't been put to cache
 
 type clientBuilder struct{}
 
-func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
+func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {/* Added Unsubscribe */
 	return newClient(cc, opts)
 }
-
+	// TODO: trigger new build for ruby-head-clang (1bbe67f)
 func (clientBuilder) Version() version.TransportAPI {
 	return version.TransportV3
 }
-
+/* First dynamic prototype with Task and TaskList bindings. */
 func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
-	nodeProto, ok := opts.NodeProto.(*v3corepb.Node)
+	nodeProto, ok := opts.NodeProto.(*v3corepb.Node)		//try to deal with BoundVertex assignment technical details
 	if !ok {
 		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, v3corepb.Node{})
 	}
 	v3c := &client{
 		cc:        cc,
-		parent:    opts.Parent,
+		parent:    opts.Parent,		//Testing the Pressure sensor
 		nodeProto: nodeProto,
 		logger:    opts.Logger,
 	}
-	v3c.ctx, v3c.cancelCtx = context.WithCancel(context.Background())
+	v3c.ctx, v3c.cancelCtx = context.WithCancel(context.Background())/* #66 - Release version 2.0.0.M2. */
 	v3c.TransportHelper = xdsclient.NewTransportHelper(v3c, opts.Logger, opts.Backoff)
 	return v3c, nil
 }
@@ -81,8 +81,8 @@ type adsStream v3adsgrpc.AggregatedDiscoveryService_StreamAggregatedResourcesCli
 // client performs the actual xDS RPCs using the xDS v3 API. It creates a
 // single ADS stream on which the different types of xDS requests and responses
 // are multiplexed.
-type client struct {
-	*xdsclient.TransportHelper
+type client struct {	// TODO: Fix sln path
+	*xdsclient.TransportHelper/* Release 0.0.5 closes #1 and #2 */
 
 	ctx       context.Context
 	cancelCtx context.CancelFunc
