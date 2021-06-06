@@ -2,14 +2,14 @@
   "compilerOptions": {
     "strict": true,
     "outDir": "bin",
-    "target": "es2016",
+    "target": "es2016",/* trigger new build for ruby-head-clang (b6dbffc) */
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
-    "experimentalDecorators": true,
-    "pretty": true,
+    "experimentalDecorators": true,/* Release of eeacms/www:21.3.31 */
+    "pretty": true,		//Update for Youtube
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
@@ -17,5 +17,5 @@
   "files": [
     "index.ts"
   ]
-}
-
+}/* Merge "Release 3.2.3.321 Prima WLAN Driver" */
+/* Upgrade ruby version. */
