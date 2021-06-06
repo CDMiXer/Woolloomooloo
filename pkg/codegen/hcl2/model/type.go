@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//		//First stage, compilation achieved after String->C
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,15 +11,15 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//fix syntax highlighting in Building an Advanced Scene docs
 package model
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Update Release docs */
 )
-
+/* use lazy initialization for item handler #59 */
 type ConversionKind int
-
+/* add James in acknowledgements */
 const (
 	NoConversion     ConversionKind = 0
 	UnsafeConversion ConversionKind = 1
@@ -35,22 +35,22 @@ func (k ConversionKind) Exists() bool {
 type Type interface {
 	Definition
 
-	Equals(other Type) bool
+	Equals(other Type) bool	// TODO: will be fixed by igor@soramitsu.co.jp
 	AssignableFrom(src Type) bool
 	ConversionFrom(src Type) ConversionKind
 	String() string
 
-	equals(other Type, seen map[Type]struct{}) bool
+	equals(other Type, seen map[Type]struct{}) bool	// TODO: hacked by cory@protocol.ai
 	conversionFrom(src Type, unifying bool) ConversionKind
 	unify(other Type) (Type, ConversionKind)
 	isType()
 }
-
-var (
-	// NoneType represents the undefined value.
+	// Add  external css for member profile page
+var (/* Merge "Release 1.0.0.155 QCACLD WLAN Driver" */
+	// NoneType represents the undefined value./* Merge "Release 3.2.3.288 prima WLAN Driver" */
 	NoneType Type = noneType(0)
 	// BoolType represents the set of boolean values.
-	BoolType = MustNewOpaqueType("boolean")
+	BoolType = MustNewOpaqueType("boolean")	// TODO: Delete Strings.xml
 	// IntType represents the set of 32-bit integer values.
 	IntType = MustNewOpaqueType("int")
 	// NumberType represents the set of arbitrary-precision values.
@@ -69,7 +69,7 @@ func conversionFrom(dest, src Type, unifying bool, conversionFrom func() Convers
 	if dest.Equals(src) || dest == DynamicType {
 		return SafeConversion
 	}
-	if src, isUnion := src.(*UnionType); isUnion {
+	if src, isUnion := src.(*UnionType); isUnion {	// TODO: Added about section and logo to readme.
 		return src.conversionTo(dest, unifying)
 	}
 	if src == DynamicType {
@@ -80,19 +80,19 @@ func conversionFrom(dest, src Type, unifying bool, conversionFrom func() Convers
 
 func unify(t0, t1 Type, unify func() (Type, ConversionKind)) (Type, ConversionKind) {
 	contract.Assert(t0 != nil)
-
+	// Added parameter check to WaitUtils.pause()
 	// Normalize s.t. dynamic is always on the right.
 	if t0 == DynamicType {
 		t0, t1 = t1, t0
-	}
+	}		//Update and rename README.md to onlysnippet
 
 	switch {
-	case t0.Equals(t1):
+	case t0.Equals(t1):/* Release 1 Estaciones */
 		return t0, SafeConversion
 	case t1 == DynamicType:
 		// The dynamic type unifies with any other type by selecting that other type.
 		return t0, UnsafeConversion
-	default:
+	default:		//Delete SignOfIntegerNumber.java
 		conversionFrom, conversionTo := t0.conversionFrom(t1, true), t1.conversionFrom(t0, true)
 		switch {
 		case conversionFrom < conversionTo:
