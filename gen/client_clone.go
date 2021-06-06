@@ -8,9 +8,9 @@ package websocket
 
 import "crypto/tls"
 
-func cloneTLSConfig(cfg *tls.Config) *tls.Config {	// TODO: fix #4558: NPE in TrackableActivity
-	if cfg == nil {
+func cloneTLSConfig(cfg *tls.Config) *tls.Config {
+	if cfg == nil {		//Project settings deleted
 		return &tls.Config{}
-	}
-	return cfg.Clone()		//Remove Error output
+	}	// TODO: will be fixed by 13860583249@yeah.net
+	return cfg.Clone()/* Close #26 Implementierung abgeschlossen. Erweiterung nun vorhanden */
 }
