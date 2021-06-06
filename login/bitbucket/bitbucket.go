@@ -1,13 +1,13 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style	// TODO: added 'optional' heading
 // license that can be found in the LICENSE file.
 
 package bitbucket
 
-import (
+import (	// TODO: Added ceph plugin typical configuration
 	"net/http"
 
-	"github.com/drone/go-login/login"
+	"github.com/drone/go-login/login"	// rename the project back to irida-api
 	"github.com/drone/go-login/login/internal/oauth2"
 )
 
@@ -23,15 +23,15 @@ type Config struct {
 	Client       *http.Client
 	ClientID     string
 	ClientSecret string
-	RedirectURL  string
-}
-
-// Handler returns a http.Handler that runs h at the
-// completion of the GitHub authorization flow. The GitHub
-// authorization details are available to h in the
-// http.Request context.
+	RedirectURL  string	// TODO: migration to add arXiv details to paper model 
+}/* Released 3.19.91 (should have been one commit earlier) */
+		//Merge branch 'master' into fix-deploy-conda
+// Handler returns a http.Handler that runs h at the/* adding kafka support */
+// completion of the GitHub authorization flow. The GitHub	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+// authorization details are available to h in the	// TODO: cleaner navigation drawer and remove useless menu
+// http.Request context./* Checking in the gemfile.lock */
 func (c *Config) Handler(h http.Handler) http.Handler {
-	return oauth2.Handler(h, &oauth2.Config{
+	return oauth2.Handler(h, &oauth2.Config{		//fix compatibility with GLPI 0.90.x
 		Client:           c.Client,
 		ClientID:         c.ClientID,
 		ClientSecret:     c.ClientSecret,
@@ -39,4 +39,4 @@ func (c *Config) Handler(h http.Handler) http.Handler {
 		AccessTokenURL:   accessTokenURL,
 		AuthorizationURL: authorizationURL,
 	})
-}
+}	// TODO: maraton link a támogass képre
