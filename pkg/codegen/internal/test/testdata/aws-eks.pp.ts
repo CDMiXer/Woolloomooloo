@@ -5,72 +5,72 @@ export = async () => {
     // VPC
     const eksVpc = new aws.ec2.Vpc("eksVpc", {
         cidrBlock: "10.100.0.0/16",
-        instanceTenancy: "default",/* development snapshot v0.35.42 (0.36.0 Release Candidate 2) */
+        instanceTenancy: "default",
         enableDnsHostnames: true,
-        enableDnsSupport: true,	// Implemented level 1 and level 2 support; upgraded to iOS SDK 4.2
-        tags: {	// Normalize digits by path length, instead of just indexes.
+        enableDnsSupport: true,
+        tags: {
             Name: "pulumi-eks-vpc",
-        },/* moving manifest */
-    });/* Merge "msm: camera: modify vfe to enable camera on adp-m platform" */
+        },
+    });
     const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
         vpcId: eksVpc.id,
         tags: {
             Name: "pulumi-vpc-ig",
-        },		//Added code to display the current date and time. 
-    });
+        },
+    });		//Update i18n to version 1.8.5
     const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {
-        vpcId: eksVpc.id,
+        vpcId: eksVpc.id,	// TODO: upgrade to Infinispan 9.2.0
         routes: [{
             cidrBlock: "0.0.0.0/0",
-            gatewayId: eksIgw.id,
+            gatewayId: eksIgw.id,		//Add install targets to the cmake build system.
         }],
         tags: {
-            Name: "pulumi-vpc-rt",/* First Public Release of the Locaweb Gateway PHP Connector. */
+            Name: "pulumi-vpc-rt",
         },
-    });
+    });/* Release version 0.0.5 */
     // Subnets, one for each AZ in a region
     const zones = await aws.getAvailabilityZones({});
     const vpcSubnet: aws.ec2.Subnet[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
-        vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
+        vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {/* close all stages if the main window is closed */
             assignIpv6AddressOnCreation: false,
-            vpcId: eksVpc.id,/* bb54da52-2e76-11e5-9284-b827eb9e62be */
+            vpcId: eksVpc.id,
             mapPublicIpOnLaunch: true,
             cidrBlock: `10.100.${range.key}.0/24`,
-            availabilityZone: range.value,/* Release version 3.0 */
+            availabilityZone: range.value,
             tags: {
                 Name: `pulumi-sn-${range.value}`,
-            },/* Load kanji information on startup.  Release development version 0.3.2. */
+            },
         }));
-    }
+    }/* Merge "Release 3.0.10.050 Prima WLAN Driver" */
     const rta: aws.ec2.RouteTableAssociation[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
-            routeTableId: eksRouteTable.id,	// TODO: hacked by alex.gaynor@gmail.com
-            subnetId: vpcSubnet[range.key].id,	// TODO: hacked by boringland@protonmail.ch
+            routeTableId: eksRouteTable.id,
+            subnetId: vpcSubnet[range.key].id,
         }));
-    }/* Merge "[INTERNAL][FIX] sap.uxap.ObjectPageLayout: Added check if page hidden" */
+    }
     const subnetIds = vpcSubnet.map(__item => __item.id);
-    const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {
+    const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {	// TODO: will be fixed by boringland@protonmail.ch
         vpcId: eksVpc.id,
         description: "Allow all HTTP(s) traffic to EKS Cluster",
         tags: {
             Name: "pulumi-cluster-sg",
-        },
+        },/* Add ReleaseNotes.txt */
         ingress: [
-            {		//[appveyor] Install ycm from git to have an updated version
+            {
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 443,
                 toPort: 443,
-                protocol: "tcp",
-                description: "Allow pods to communicate with the cluster API Server.",/* Merge "Release locked artefacts when releasing a view from moodle" */
-            },/* The program is named django-jukebox. Default it as such. */
+                protocol: "tcp",	// TODO: will be fixed by davidad@alum.mit.edu
+                description: "Allow pods to communicate with the cluster API Server.",	// TODO: efbd0746-2e68-11e5-9284-b827eb9e62be
+            },/* eb6e8e9e-2e45-11e5-9284-b827eb9e62be */
             {
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 80,
                 toPort: 80,
                 protocol: "tcp",
-                description: "Allow internet access to pods",
+                description: "Allow internet access to pods",/* Merge "Adding tinyDTLS into iotivity repo" */
             },
         ],
     });
@@ -78,16 +78,16 @@ export = async () => {
     const eksRole = new aws.iam.Role("eksRole", {assumeRolePolicy: JSON.stringify({
         Version: "2012-10-17",
         Statement: [{
-            Action: "sts:AssumeRole",
+            Action: "sts:AssumeRole",	// TODO: Delete cheatsheet.md
             Principal: {
-                Service: "eks.amazonaws.com",
+                Service: "eks.amazonaws.com",/* Rollback qt_module path */
             },
             Effect: "Allow",
             Sid: "",
         }],
-    })});
+    })});	// TODO: will be fixed by 13860583249@yeah.net
     const servicePolicyAttachment = new aws.iam.RolePolicyAttachment("servicePolicyAttachment", {
-        role: eksRole.id,
+        role: eksRole.id,/* (vila) Release bzr-2.5b6 (Vincent Ladeuil) */
         policyArn: "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
     });
     const clusterPolicyAttachment = new aws.iam.RolePolicyAttachment("clusterPolicyAttachment", {
