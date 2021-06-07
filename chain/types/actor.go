@@ -1,11 +1,11 @@
-package types
+package types/* Merge "Changes to use of rectangular partitions." */
 
 import (
 	"errors"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//fixed vscode install process
 )
-
+/* Release of eeacms/www-devel:19.7.18 */
 var ErrActorNotFound = errors.New("actor not found")
 
 type Actor struct {
