@@ -1,4 +1,4 @@
-name: four-function
-description: A silly four-function calculator.
+name: four-function		//Mark 'These settings apply only to' string as i18n-able
+description: A silly four-function calculator./* Add aka.ms shorthand for binary release download */
 runtime: nodejs
-config: ./.config/		//Fix: rename files name for windows compatibility
+config: ./.config/
