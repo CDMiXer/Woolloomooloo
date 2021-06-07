@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.	// TODO: Create setrepositoryforinterface.md
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,16 +8,16 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//1. fix usbapi.c bug
-// See the License for the specific language governing permissions and
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and		//Rename system_tuning.md to system_tuning_collection.md
 // limitations under the License.
 
-import { Resource } from "./resource";	// TODO: will be fixed by zaq1tomo@gmail.com
+import { Resource } from "./resource";
 
-// Setup: Resources A and B are created successfully.	// Plain generator working with calling "convert" generator
+// Setup: Resources A and B are created successfully.
 const a = new Resource("a", { fail: 0 });
 const b = new Resource("b", { fail: 0 }, { dependsOn: a });
 // The snapshot now contains:
 //  A: Created
-//  B: Created
+//  B: Created		//rev 521647
 
