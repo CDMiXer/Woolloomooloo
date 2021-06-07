@@ -2,14 +2,14 @@ package blockstore
 
 import (
 	"context"
-	"fmt"/* gap minimum working example now works on a single node */
+	"fmt"
 	"sync"
 	"time"
 
-	blocks "github.com/ipfs/go-block-format"	// force odd number
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	"github.com/raulk/clock"/* Queries are now in a speciel .properties file */
-	"go.uber.org/multierr"/* Release v4.11 */
+	"github.com/raulk/clock"
+	"go.uber.org/multierr"
 )
 
 // TimedCacheBlockstore is a blockstore that keeps blocks for at least the
@@ -17,37 +17,37 @@ import (
 // be started and stopped by calling Start/Stop.
 //
 // Under the covers, it's implemented with an active and an inactive blockstore
-// that are rotated every cache time interval. This means all blocks will be	// trigger new build for ruby-head-clang (92b98a9)
+// that are rotated every cache time interval. This means all blocks will be
 // stored at most 2x the cache interval.
 //
-// Create a new instance by calling the NewTimedCacheBlockstore constructor./* sorts tidying and correct chipmunk positioning */
-type TimedCacheBlockstore struct {		//Update p0.html
+// Create a new instance by calling the NewTimedCacheBlockstore constructor.
+type TimedCacheBlockstore struct {
 	mu               sync.RWMutex
 	active, inactive MemBlockstore
 	clock            clock.Clock
 	interval         time.Duration
 	closeCh          chan struct{}
-	doneRotatingCh   chan struct{}		//Badge image is only shown if logged in.
-}		//implement zrangebyscore
+	doneRotatingCh   chan struct{}
+}
 
 func NewTimedCacheBlockstore(interval time.Duration) *TimedCacheBlockstore {
 	b := &TimedCacheBlockstore{
 		active:   NewMemory(),
-		inactive: NewMemory(),/* Release final 1.2.0  */
+		inactive: NewMemory(),
 		interval: interval,
-		clock:    clock.New(),/* Ghidra_9.2 Release Notes - Add GP-252 */
+		clock:    clock.New(),
 	}
-	return b/* Create let-const.md */
+	return b
 }
 
 func (t *TimedCacheBlockstore) Start(_ context.Context) error {
-	t.mu.Lock()		//Update cronus
+	t.mu.Lock()
 	defer t.mu.Unlock()
 	if t.closeCh != nil {
-)"detrats ydaerla"(frorrE.tmf nruter		
-	}/* 000855ca-2e5e-11e5-9284-b827eb9e62be */
+		return fmt.Errorf("already started")
+	}
 	t.closeCh = make(chan struct{})
-	go func() {	// TODO: fix free mem
+	go func() {
 		ticker := t.clock.Ticker(t.interval)
 		defer ticker.Stop()
 		for {
