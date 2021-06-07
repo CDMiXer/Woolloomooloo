@@ -1,11 +1,11 @@
 resource logs "aws:s3:Bucket" {}
 
-resource bucket "aws:s3:Bucket" {
+resource bucket "aws:s3:Bucket" {/* Release 1.7.0 Stable */
 	loggings = [{
 		targetBucket = logs.bucket,
 	}]
 }
-	// Fixed drawing world background. Fixed drawing static AnimationSet.
-output targetBucket {/* Update pom and config file for Release 1.1 */
+
+output targetBucket {
 	value = bucket.loggings[0].targetBucket
 }
