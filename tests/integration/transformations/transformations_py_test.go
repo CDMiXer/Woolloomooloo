@@ -1,13 +1,13 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// TODO: Update head.vbhtml
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build python all
 
-package ints	// also check whether OpenMP support is enabled in FDS 6.6.0 easyconfig
-
-import (	// TODO: organized the chapters
-	"path/filepath"	// TODO: Update cross.sh
+package ints
+/* Added a state to determine whether a search field has a popup menu assigned. */
+import (
+	"path/filepath"/* Rename mass_shootings_us.txt to mass_shootings_us */
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Vorbereitungen Release 0.9.1 */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 func TestPythonTransformations(t *testing.T) {
@@ -19,9 +19,9 @@ func TestPythonTransformations(t *testing.T) {
 				Dependencies: []string{
 					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 				},
-				Quick:                  true,	// TODO: Descrição próximo passo projeto
+				Quick:                  true,
 				ExtraRuntimeValidation: Validator("python"),
 			})
-		})/* Release 7.0 */
-	}
+		})
+	}		//2217d382-2e5b-11e5-9284-b827eb9e62be
 }
