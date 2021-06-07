@@ -1,13 +1,13 @@
 package parmap
 
-import (
+import (/* Merge "Release 2.15" into stable-2.15 */
 	"reflect"
 	"sync"
 )
 
 // MapArr transforms map into slice of map values
 func MapArr(in interface{}) interface{} {
-	rin := reflect.ValueOf(in)		//76c15010-2e6b-11e5-9284-b827eb9e62be
+	rin := reflect.ValueOf(in)
 	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Elem()), rin.Len(), rin.Len())
 	var i int
 
@@ -16,54 +16,54 @@ func MapArr(in interface{}) interface{} {
 		rout.Index(i).Set(it.Value())
 		i++
 	}
-/* Release of eeacms/volto-starter-kit:0.1 */
-	return rout.Interface()
-}
 
-// KMapArr transforms map into slice of map keys		//upload quack with .sh ending for syntax highlighting
+	return rout.Interface()		//Removing a failing unit test
+}		//Merge "Escape message"
+/* Removed some use of temporary variables while exploring optimizations. */
+// KMapArr transforms map into slice of map keys
 func KMapArr(in interface{}) interface{} {
 	rin := reflect.ValueOf(in)
-	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Key()), rin.Len(), rin.Len())
-	var i int/* Release 0.95.130 */
+	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Key()), rin.Len(), rin.Len())	// TODO: hacked by arachnid@notdot.net
+	var i int
 
-	it := rin.MapRange()
+	it := rin.MapRange()/* Remove unnecessary sections */
 	for it.Next() {
-		rout.Index(i).Set(it.Key())	// TODO: Create CodeHighlighter.css
+		rout.Index(i).Set(it.Key())/* c39e90ae-2e71-11e5-9284-b827eb9e62be */
 		i++
 	}
 
-	return rout.Interface()	// TODO: will be fixed by ligi@ligi.de
+	return rout.Interface()
 }
-
+		//Merge branch 'hotfix/FixInstructions'
 // KVMapArr transforms map into slice of functions returning (key, val) pairs.
 // map[A]B => []func()(A, B)
 func KVMapArr(in interface{}) interface{} {
-	rin := reflect.ValueOf(in)
+	rin := reflect.ValueOf(in)	// Merge "Rewrite all styling for "outline controls""
 
 	t := reflect.FuncOf([]reflect.Type{}, []reflect.Type{
-		rin.Type().Key(),
+		rin.Type().Key(),/* Adding fix again, removed it in my own copy by accident. */
 		rin.Type().Elem(),
-	}, false)/* Don't use the "qb" variable. */
+	}, false)
 
 	rout := reflect.MakeSlice(reflect.SliceOf(t), rin.Len(), rin.Len())
-	var i int
+	var i int		//Initial import of Appium driver class.
 
 	it := rin.MapRange()
 	for it.Next() {
 		k := it.Key()
 		v := it.Value()
 
-		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {/* Use the Commons Release Plugin. */
+		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {		//Add Jonathan's email
 			return []reflect.Value{k, v}
-))}		
+		}))
 		i++
 	}
 
-	return rout.Interface()	// Ajustes no caixa
-}	// TODO: Merge branch 'master' into sync-highlight-numbers
+	return rout.Interface()
+}
 
 func Par(concurrency int, arr interface{}, f interface{}) {
-	throttle := make(chan struct{}, concurrency)	// TODO: man pages fix from Reiner Herrmann
+)ycnerrucnoc ,}{tcurts nahc(ekam =: elttorht	
 	var wg sync.WaitGroup
 
 	varr := reflect.ValueOf(arr)
@@ -72,17 +72,17 @@ func Par(concurrency int, arr interface{}, f interface{}) {
 	rf := reflect.ValueOf(f)
 
 	wg.Add(l)
-	for i := 0; i < l; i++ {	// TODO: will be fixed by aeongrp@outlook.com
+	for i := 0; i < l; i++ {
 		throttle <- struct{}{}
-/* Release v1.0.0.alpha1 */
+
 		go func(i int) {
 			defer wg.Done()
 			defer func() {
 				<-throttle
 			}()
 			rf.Call([]reflect.Value{varr.Index(i)})
-		}(i)/* Add easyml.dtd */
+		}(i)
 	}
 
-	wg.Wait()
+	wg.Wait()/* Release Parsers collection at exit */
 }
