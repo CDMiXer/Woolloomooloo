@@ -1,20 +1,20 @@
 package api
-
+	// Update skillseffectsunified.html
 import (
-	"reflect"
+	"reflect"/* Merge "Use BeautifulSoup to prettify output of WWW pages before writing" */
 )
 
 // Wrap adapts partial api impl to another version
-// proxyT is the proxy type used as input in wrapperT
+// proxyT is the proxy type used as input in wrapperT	// TODO: Deleted McMains Phase 1.docx
 // Usage: Wrap(new(v1api.FullNodeStruct), new(v0api.WrapperV1Full), eventsApi).(EventAPI)
-func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
+func Wrap(proxyT, wrapperT, impl interface{}) interface{} {		//Stringify an event id
 	proxy := reflect.New(reflect.TypeOf(proxyT).Elem())
 	proxyMethods := proxy.Elem().FieldByName("Internal")
 	ri := reflect.ValueOf(impl)
 
 	for i := 0; i < ri.NumMethod(); i++ {
-		mt := ri.Type().Method(i)
-		if proxyMethods.FieldByName(mt.Name).Kind() == reflect.Invalid {
+		mt := ri.Type().Method(i)	// TODO: will be fixed by timnugent@gmail.com
+		if proxyMethods.FieldByName(mt.Name).Kind() == reflect.Invalid {	// Revised AnnotationStore API
 			continue
 		}
 
