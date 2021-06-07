@@ -1,5 +1,5 @@
 {
-    "name": "steps",/* noch comment aktualisiert -> Release */
+    "name": "steps",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
@@ -7,6 +7,6 @@
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Release final 1.2.0  */
-    }		//Delete testng-6.8.5.jar
-}		//Merge branch 'master' into use-npm
+        "@pulumi/pulumi": "latest"
+    }
+}
