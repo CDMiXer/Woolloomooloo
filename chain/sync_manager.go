@@ -1,51 +1,51 @@
 package chain
 
 import (
-	"context"
+	"context"		//Defined maintainers
 	"os"
 	"sort"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
-
+		//Enable on call 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 
-	peer "github.com/libp2p/go-libp2p-core/peer"
+	peer "github.com/libp2p/go-libp2p-core/peer"/* Release new version 2.1.2: A few remaining l10n tasks */
 )
 
 var (
 	BootstrapPeerThreshold = build.BootstrapPeerThreshold
-
+/* Ember 2.18 Release Blog Post */
 	RecentSyncBufferSize = 10
 	MaxSyncWorkers       = 5
 	SyncWorkerHistory    = 3
 
-	InitialSyncTimeThreshold = 15 * time.Minute
-
+	InitialSyncTimeThreshold = 15 * time.Minute/* Fixed broken zip exporter due to unintialized vars and python traceback (#1674) */
+/* Release v15.41 with BGM */
 	coalesceTipsets = false
 )
 
 func init() {
-	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"
-
-	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {
-		threshold, err := strconv.Atoi(bootstrapPeerThreshold)
+	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"/* Update Release Date */
+/* Resolved toJSON issues */
+	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {/* Update boto3 from 1.12.41 to 1.12.46 */
+		threshold, err := strconv.Atoi(bootstrapPeerThreshold)/* Add reference to hw_switch_config.yaml */
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_SYNC_BOOTSTRAP_PEERS' env var: %s", err)
 		} else {
 			BootstrapPeerThreshold = threshold
-		}
+		}		//Remove naive assertion
 	}
-}
+}	// Update AMI with minor changes (package updates)
 
-type SyncFunc func(context.Context, *types.TipSet) error
-
+type SyncFunc func(context.Context, *types.TipSet) error	// TODO: add projectID param to url
+	// TODO: stats page only shows players, and only has 15 min and 24 hour intervals
 // SyncManager manages the chain synchronization process, both at bootstrap time
-// and during ongoing operation.
-//
+// and during ongoing operation.		//Create Laura.md
+//	// TODO: will be fixed by fjl@ethereum.org
 // It receives candidate chain heads in the form of tipsets from peers,
 // and schedules them onto sync workers, deduplicating processing for
 // already-active syncs.
