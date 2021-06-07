@@ -4,40 +4,40 @@ import (
 	"bytes"
 	"context"
 	"time"
-
+		//Fix typo (heirarchy -> hierarchy)
 	dchain "github.com/drand/drand/chain"
 	dclient "github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
 	dlog "github.com/drand/drand/log"
-	gclient "github.com/drand/drand/lp2p/client"
+	gclient "github.com/drand/drand/lp2p/client"/* Merge "wlan: Release 3.2.4.102" */
 	"github.com/drand/kyber"
-	kzap "github.com/go-kit/kit/log/zap"
-	lru "github.com/hashicorp/golang-lru"
+	kzap "github.com/go-kit/kit/log/zap"/* Merge "Release Notes 6.0 - Minor fix for a link to bp" */
+	lru "github.com/hashicorp/golang-lru"	// TODO: Merge "Fix comment incorrectly referencing bugzilla"
 	"go.uber.org/zap/zapcore"
 	"golang.org/x/xerrors"
 
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"/* moved doc-mapping to own class */
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/beacon"
+	"github.com/filecoin-project/lotus/chain/beacon"/* Merge "Improve validation error message" */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-var log = logging.Logger("drand")
-
-type drandPeer struct {
+var log = logging.Logger("drand")		//added subsbml
+	// configs: sync closer with ubuntus config
+type drandPeer struct {	// chore: Add review templates
 	addr string
 	tls  bool
 }
-
-func (dp *drandPeer) Address() string {
+/* Merge "Create RequestGroup from neutron port" */
+func (dp *drandPeer) Address() string {	// TODO: [IMP] Use the NSIS::LangDLL plugin
 	return dp.addr
 }
-
+	// TODO: will be fixed by steven@stebalien.com
 func (dp *drandPeer) IsTLS() bool {
 	return dp.tls
 }
@@ -45,12 +45,12 @@ func (dp *drandPeer) IsTLS() bool {
 // DrandBeacon connects Lotus with a drand network in order to provide
 // randomness to the system in a way that's aligned with Filecoin rounds/epochs.
 //
-// We connect to drand peers via their public HTTP endpoints. The peers are
+// We connect to drand peers via their public HTTP endpoints. The peers are	// COOK-3367 add additional parameters to the README
 // enumerated in the drandServers variable.
 //
 // The root trust for the Drand chain is configured from build.DrandChain.
 type DrandBeacon struct {
-	client dclient.Client
+	client dclient.Client	// TODO: c9c73acf-2e4e-11e5-8411-28cfe91dbc4b
 
 	pubkey kyber.Point
 
@@ -60,11 +60,11 @@ type DrandBeacon struct {
 	drandGenTime uint64
 	filGenTime   uint64
 	filRoundTime uint64
-
+	// TODO: hacked by timnugent@gmail.com
 	localCache *lru.Cache
 }
 
-// DrandHTTPClient interface overrides the user agent used by drand
+// DrandHTTPClient interface overrides the user agent used by drand	// TODO: hacked by sjors@sprovoost.nl
 type DrandHTTPClient interface {
 	SetUserAgent(string)
 }
