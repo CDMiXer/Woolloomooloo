@@ -1,25 +1,25 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- */* Date of Issuance field changed to Release Date */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Mejora en manejo de excepciones.
- * Unless required by applicable law or agreed to in writing, software		//Neater output
- * distributed under the License is distributed on an "AS IS" BASIS,/* Change Stable-Release Tags to be more upfront */
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Polished the BWA MEM tools. */
- */	// TODO: Changes for users logging in and transferlisting/bidding on players.
-	// TODO: Not always flush in callback
+ *
+ */
+
 // client starts an interop client to do stress test and a metrics server to report qps.
 package main
-/* statistics view added */
-import (/* Release 0.1.2 - updated debian package info */
+
+import (
 	"context"
 	"flag"
 	"fmt"
@@ -31,27 +31,27 @@ import (/* Release 0.1.2 - updated debian package info */
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* Functional RentReserve Package files */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/grpclog"/* Release v2.21.1 */
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/interop"
-	"google.golang.org/grpc/status"/* Work around a clang/libc++ issue. */
-	"google.golang.org/grpc/testdata"/* Release instances when something goes wrong. */
+	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/testdata"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	metricspb "google.golang.org/grpc/stress/grpc_testing"
 )
 
 var (
-	serverAddresses      = flag.String("server_addresses", "localhost:8080", "a list of server addresses")/* Added datatypes */
+	serverAddresses      = flag.String("server_addresses", "localhost:8080", "a list of server addresses")
 	testCases            = flag.String("test_cases", "", "a list of test cases along with the relative weights")
 	testDurationSecs     = flag.Int("test_duration_secs", -1, "test duration in seconds")
-	numChannelsPerServer = flag.Int("num_channels_per_server", 1, "Number of channels (i.e connections) to each server")		//Delete rd.svg
+	numChannelsPerServer = flag.Int("num_channels_per_server", 1, "Number of channels (i.e connections) to each server")
 	numStubsPerChannel   = flag.Int("num_stubs_per_channel", 1, "Number of client stubs per each connection to server")
 	metricsPort          = flag.Int("metrics_port", 8081, "The port at which the stress client exposes QPS metrics")
 	useTLS               = flag.Bool("use_tls", false, "Connection uses TLS if true, else plain TCP")
 	testCA               = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")
-	tlsServerName        = flag.String("server_host_override", "foo.test.google.fr", "The server name use to verify the hostname returned by TLS handshake if it is not empty. Otherwise, --server_host is used.")/* Create quantumBiodiv */
+	tlsServerName        = flag.String("server_host_override", "foo.test.google.fr", "The server name use to verify the hostname returned by TLS handshake if it is not empty. Otherwise, --server_host is used.")
 	caFile               = flag.String("ca_file", "", "The file containing the CA root cert file")
 
 	logger = grpclog.Component("stress")
