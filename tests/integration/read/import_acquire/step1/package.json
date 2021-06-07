@@ -1,14 +1,14 @@
 {
     "name": "read_relinquish",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Updated Playtype */
-    "scripts": {/* Released springjdbcdao version 1.7.28 */
+    "typings": "bin/index.d.ts",
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//Added editors.
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }/* Show selector for @page rules if it is defined (related to issue 6283) */
+}/* Rename getTeam to getReleasegroup, use the same naming everywhere */
