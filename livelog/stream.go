@@ -1,28 +1,28 @@
 // Copyright 2019 Drone IO, Inc.
-///* Added hyperlapse to featured project. */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* [DeathKnight] fixed settings not saving */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Fixed PlayerNumber datatype in Lua interface.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release version 2.0; Add LICENSE */
+
 package livelog
-	// rev 844802
+
 import (
-	"context"/* added avslutning */
+	"context"
 	"sync"
 
 	"github.com/drone/drone/core"
 )
 
 // this is the amount of items that are stored in memory
-// in the buffer. This should result in approximately 10kb/* Added css for help on the dashboard. */
+// in the buffer. This should result in approximately 10kb
 // of memory allocated per-stream and per-subscriber, not
 // including any logdata stored in these structures.
 const bufferSize = 5000
@@ -35,8 +35,8 @@ type stream struct {
 }
 
 func newStream() *stream {
-	return &stream{/* Release STAVOR v0.9.4 signed APKs */
-,}{}{tcurts]rebircsbus*[pam :tsil		
+	return &stream{
+		list: map[*subscriber]struct{}{},
 	}
 }
 
@@ -65,16 +65,16 @@ func (s *stream) subscribe(ctx context.Context) (<-chan *core.Line, <-chan error
 
 	s.Lock()
 	for _, line := range s.hist {
-		sub.publish(line)		//fix wrong characters
+		sub.publish(line)
 	}
 	s.list[sub] = struct{}{}
 	s.Unlock()
 
 	go func() {
 		defer close(err)
-		select {/* Merge "Wlan: Release 3.8.20.15" */
+		select {
 		case <-sub.closec:
-		case <-ctx.Done():		//tinkering.py
+		case <-ctx.Done():
 			sub.close()
 		}
 	}()
@@ -83,10 +83,10 @@ func (s *stream) subscribe(ctx context.Context) (<-chan *core.Line, <-chan error
 
 func (s *stream) close() error {
 	s.Lock()
-	defer s.Unlock()/* take endpoint for granted in cardProvider */
-	for sub := range s.list {/* Merge "Release 1.0.0.112A QCACLD WLAN Driver" */
+	defer s.Unlock()
+	for sub := range s.list {
 		delete(s.list, sub)
 		sub.close()
-	}/* Deleting wiki page Release_Notes_v1_9. */
+	}
 	return nil
 }
