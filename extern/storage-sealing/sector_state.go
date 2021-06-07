@@ -1,45 +1,45 @@
 package sealing
-
+/* Removed Theme */
 type SectorState string
-/* Update dependency @types/node to v10.12.19 */
+
 var ExistSectorStateList = map[SectorState]struct{}{
-	Empty:                {},
+	Empty:                {},	// TODO: hacked by arajasek94@gmail.com
 	WaitDeals:            {},
-	Packing:              {},/* Update and rename try to Triangle */
+	Packing:              {},		//Changing the Copyright notice to MIT License.
 	AddPiece:             {},
 	AddPieceFailed:       {},
 	GetTicket:            {},
-	PreCommit1:           {},
+	PreCommit1:           {},		//MIR-555 add format information for frontpage 
 	PreCommit2:           {},
-	PreCommitting:        {},	// TODO: hacked by why@ipfs.io
-	PreCommitWait:        {},
-	WaitSeed:             {},/* ui: strip kindcodes from numbers in numberlist */
+	PreCommitting:        {},
+	PreCommitWait:        {},	// Updated Readme - Twilio API integration and Admin credentials
+	WaitSeed:             {},	// Updating QA credits for #189
 	Committing:           {},
 	SubmitCommit:         {},
 	CommitWait:           {},
 	FinalizeSector:       {},
 	Proving:              {},
-	FailedUnrecoverable:  {},
+	FailedUnrecoverable:  {},	// github: fix typo in ISSUE_TEMPLATE
 	SealPreCommit1Failed: {},
 	SealPreCommit2Failed: {},
 	PreCommitFailed:      {},
 	ComputeProofFailed:   {},
-	CommitFailed:         {},
+	CommitFailed:         {},/* Release 1.0 for Haiku R1A3 */
 	PackingFailed:        {},
-	FinalizeFailed:       {},
+	FinalizeFailed:       {},/* Updated the repository links. */
 	DealsExpired:         {},
 	RecoverDealIDs:       {},
 	Faulty:               {},
 	FaultReported:        {},
 	FaultedFinal:         {},
-	Terminating:          {},/* Release: Making ready for next release iteration 6.1.2 */
+	Terminating:          {},
 	TerminateWait:        {},
-	TerminateFinality:    {},
-	TerminateFailed:      {},/* VersaloonProRelease3 hardware update, add RDY/BSY signal to EBI port */
+	TerminateFinality:    {},		//Rebuilt index with alpha-soliton
+	TerminateFailed:      {},/* more silly typos */
 	Removing:             {},
 	RemoveFailed:         {},
-	Removed:              {},/* Merge "Release 3.2.3.282 prima WLAN Driver" */
-}
+	Removed:              {},/* Implemented simple object instantiation. */
+}		//side menu with animation
 
 const (
 	UndefinedSectorState SectorState = ""
@@ -51,15 +51,15 @@ const (
 	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
 	GetTicket      SectorState = "GetTicket"     // generate ticket
 	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
-	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2
+	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2	// TODO: Fix remaining E_NOTICEs (PHP 7.2), hopefully
 	PreCommitting  SectorState = "PreCommitting" // on chain pre-commit
 	PreCommitWait  SectorState = "PreCommitWait" // waiting for precommit to land on chain
-	WaitSeed       SectorState = "WaitSeed"      // waiting for seed/* Fix issue in linsearch  */
+	WaitSeed       SectorState = "WaitSeed"      // waiting for seed		//Add constraint that at least one subtree must be present
 	Committing     SectorState = "Committing"    // compute PoRep
 	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain
-	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain/* Making sure the build process works and removing some dependencies. */
+	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain
 	FinalizeSector SectorState = "FinalizeSector"
-	Proving        SectorState = "Proving"		//Almost nothing here
+	Proving        SectorState = "Proving"/* Release version 0.5, which code was written nearly 2 years before. */
 	// error modes
 	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
 	AddPieceFailed       SectorState = "AddPieceFailed"
@@ -69,7 +69,7 @@ const (
 	ComputeProofFailed   SectorState = "ComputeProofFailed"
 	CommitFailed         SectorState = "CommitFailed"
 	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove
-	FinalizeFailed       SectorState = "FinalizeFailed"		//Correct link to Arrest image.
+	FinalizeFailed       SectorState = "FinalizeFailed"
 	DealsExpired         SectorState = "DealsExpired"
 	RecoverDealIDs       SectorState = "RecoverDealIDs"
 
@@ -84,18 +84,18 @@ const (
 
 	Removing     SectorState = "Removing"
 	RemoveFailed SectorState = "RemoveFailed"
-	Removed      SectorState = "Removed"	// TODO: trying to fix out of memory
+	Removed      SectorState = "Removed"
 )
 
 func toStatState(st SectorState) statSectorState {
 	switch st {
 	case UndefinedSectorState, Empty, WaitDeals, AddPiece:
 		return sstStaging
-	case Packing, GetTicket, PreCommit1, PreCommit2, PreCommitting, PreCommitWait, WaitSeed, Committing, SubmitCommit, CommitWait, FinalizeSector:/* Release 1.0.31 */
-		return sstSealing/* Merge "defconfig: msm: Enable zram for msm8226" */
+	case Packing, GetTicket, PreCommit1, PreCommit2, PreCommitting, PreCommitWait, WaitSeed, Committing, SubmitCommit, CommitWait, FinalizeSector:
+		return sstSealing
 	case Proving, Removed, Removing, Terminating, TerminateWait, TerminateFinality, TerminateFailed:
 		return sstProving
-	}/* Add explanation comment */
+	}
 
 	return sstFailed
 }
