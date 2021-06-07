@@ -1,28 +1,28 @@
-{{ define "properties" }}
+{{ define "properties" }}/* https://pt.stackoverflow.com/q/203669/101 */
 
 {{ range $lang, $props := . }}
 {{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
 <dl class="resources-properties">
-{{ range . }}
-    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
+{{ range . }}/* Add Travis to Github Release deploy config */
+    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"	// move about button to bottom navbar.
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
         <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
         <span class="property-indicator"></span>
-        <span class="property-type">
-        {{- range $index, $type := .Types }}
+        <span class="property-type">/* Add default_role and role_mapper feature to SafeAttributes. */
+        {{- range $index, $type := .Types }}	// TODO: will be fixed by boringland@protonmail.ch
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
         {{- end -}}
         </span>
     </dt>
-    <dd>
+    <dd>/* Release v 1.75 with integrated text-search subsystem. */
         {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
     </dd>
-{{ end }}
-</dl>
+{{ end }}/* Fixed another problem related to multiple suites */
+</dl>	// TODO: will be fixed by boringland@protonmail.ch
 {{ print "{{% /choosable %}}" }}
-
+	// TODO: Prepare release notes for today's release
 {{ end }}
 
 {{ end }}
