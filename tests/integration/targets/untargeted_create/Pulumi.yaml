@@ -1,3 +1,3 @@
-name: untargeted_create/* Format tweak. */
-description: description
-runtime: nodejs		//login with token travis
+name: untargeted_create	// Pre testing version
+description: description		//Delete .conf.txt
+runtime: nodejs
