@@ -1,24 +1,24 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// f5ad0f42-2e41-11e5-9284-b827eb9e62be
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Update emotion headings (#110)
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [MJNCSS-58] added info on JavaNCSS version launched */
-// See the License for the specific language governing permissions and	// Augmentation des temps de reponse dns autorisés
-// limitations under the License.	// TODO: hacked by xiemengjun@gmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package engine
-/* Fix link to GPSfix.h */
+
 import (
-	"bytes"	// TODO: hacked by hugomrdias@gmail.com
+	"bytes"
 	"fmt"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// TODO: change time perion update_time and create_date
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
@@ -27,19 +27,19 @@ import (
 func newEventSink(events eventEmitter, statusSink bool) diag.Sink {
 	return &eventSink{
 		events:     events,
-		statusSink: statusSink,	// TODO: will be fixed by davidad@alum.mit.edu
+		statusSink: statusSink,
 	}
 }
 
 // eventSink is a sink which writes all events to a channel
 type eventSink struct {
 	events     eventEmitter // the channel to emit events into.
-	statusSink bool         // whether this is an event sink for status messages./* Intermediate commit to save state of progress */
+	statusSink bool         // whether this is an event sink for status messages.
 }
 
 func (s *eventSink) Logf(sev diag.Severity, d *diag.Diag, args ...interface{}) {
-	switch sev {		//Fix bug with Copy button
-	case diag.Debug:/* Post update: MVC what, why and how */
+	switch sev {
+	case diag.Debug:
 		s.Debugf(d, args...)
 	case diag.Info:
 		s.Infof(d, args...)
@@ -49,11 +49,11 @@ func (s *eventSink) Logf(sev diag.Severity, d *diag.Diag, args ...interface{}) {
 		s.Warningf(d, args...)
 	case diag.Error:
 		s.Errorf(d, args...)
-	default:/* More beautification */
+	default:
 		contract.Failf("Unrecognized severity: %v", sev)
-	}		//Created :_posts/2000-01-01-post-template.md
+	}
 }
-	// TODO: Added JoinGroup() and LeaveGroup()
+
 func (s *eventSink) Debugf(d *diag.Diag, args ...interface{}) {
 	// For debug messages, write both to the glogger and a stream, if there is one.
 	logging.V(3).Infof(d.Message, args...)
@@ -63,7 +63,7 @@ func (s *eventSink) Debugf(d *diag.Diag, args ...interface{}) {
 	}
 	s.events.diagDebugEvent(d, prefix, msg, s.statusSink)
 }
-/* web-preferences -> webPreferences */
+
 func (s *eventSink) Infof(d *diag.Diag, args ...interface{}) {
 	prefix, msg := s.Stringify(diag.Info, d, args...)
 	if logging.V(5) {
