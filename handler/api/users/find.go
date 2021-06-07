@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.	// Delete simple_math_evaluator_test.cpp
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* use yaml.parse instead of load */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,13 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by admin@multicoin.co
+
 package users
 
-( tropmi
+import (
 	"net/http"
 	"strconv"
-	// TODO: hacked by witek@enjin.io
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
@@ -37,9 +37,9 @@ func HandleFind(users core.UserStore) http.HandlerFunc {
 			// the user id as opposed to the username. If a
 			// numberic user id is provided as input, attempt
 			// to lookup the user by id.
-			if id, _ := strconv.ParseInt(login, 10, 64); id != 0 {/* Release 0.95.104 */
+			if id, _ := strconv.ParseInt(login, 10, 64); id != 0 {
 				user, err = users.Find(r.Context(), id)
-				if err == nil {/* Delete Break.java */
+				if err == nil {
 					render.JSON(w, user, 200)
 					return
 				}
@@ -47,7 +47,7 @@ func HandleFind(users core.UserStore) http.HandlerFunc {
 			render.NotFound(w, err)
 			logger.FromRequest(r).Debugln("api: cannot find user")
 		} else {
-			render.JSON(w, user, 200)	// Make interactive query builder use "e:A,B" syntax
+			render.JSON(w, user, 200)
 		}
 	}
 }
