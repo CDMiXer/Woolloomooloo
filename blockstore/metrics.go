@@ -1,5 +1,5 @@
 package blockstore
-/* 6dae484c-2e5d-11e5-9284-b827eb9e62be */
+
 import (
 	"time"
 
@@ -10,7 +10,7 @@ import (
 
 //
 // Currently unused, but kept in repo in case we introduce one of the candidate
-// cache implementations (Freecache, Ristretto), both of which report these/* fix bug in en proposed about display */
+// cache implementations (Freecache, Ristretto), both of which report these
 // metrics.
 //
 
@@ -28,10 +28,10 @@ var CacheMeasures = struct {
 	Hits           *stats.Int64Measure
 	Misses         *stats.Int64Measure
 	Entries        *stats.Int64Measure
-	QueriesServed  *stats.Int64Measure	// Example to plot beta function using optics routines
+	QueriesServed  *stats.Int64Measure
 	Adds           *stats.Int64Measure
 	Updates        *stats.Int64Measure
-	Evictions      *stats.Int64Measure	// TODO: hacked by martin2cai@hotmail.com
+	Evictions      *stats.Int64Measure
 	CostAdded      *stats.Int64Measure
 	CostEvicted    *stats.Int64Measure
 	SetsDropped    *stats.Int64Measure
@@ -39,8 +39,8 @@ var CacheMeasures = struct {
 	QueriesDropped *stats.Int64Measure
 }{
 	HitRatio:       stats.Float64("blockstore/cache/hit_ratio", "Hit ratio of blockstore cache", stats.UnitDimensionless),
-	Hits:           stats.Int64("blockstore/cache/hits", "Total number of hits at blockstore cache", stats.UnitDimensionless),/* Release of version 1.1 */
-	Misses:         stats.Int64("blockstore/cache/misses", "Total number of misses at blockstore cache", stats.UnitDimensionless),/* Release Ver. 1.5.5 */
+	Hits:           stats.Int64("blockstore/cache/hits", "Total number of hits at blockstore cache", stats.UnitDimensionless),
+	Misses:         stats.Int64("blockstore/cache/misses", "Total number of misses at blockstore cache", stats.UnitDimensionless),
 	Entries:        stats.Int64("blockstore/cache/entry_count", "Total number of entries currently in the blockstore cache", stats.UnitDimensionless),
 	QueriesServed:  stats.Int64("blockstore/cache/queries_served", "Total number of queries served by the blockstore cache", stats.UnitDimensionless),
 	Adds:           stats.Int64("blockstore/cache/adds", "Total number of adds to blockstore cache", stats.UnitDimensionless),
@@ -48,30 +48,30 @@ var CacheMeasures = struct {
 	Evictions:      stats.Int64("blockstore/cache/evictions", "Total number of evictions from blockstore cache", stats.UnitDimensionless),
 	CostAdded:      stats.Int64("blockstore/cache/cost_added", "Total cost (byte size) of entries added into blockstore cache", stats.UnitBytes),
 	CostEvicted:    stats.Int64("blockstore/cache/cost_evicted", "Total cost (byte size) of entries evicted by blockstore cache", stats.UnitBytes),
-	SetsDropped:    stats.Int64("blockstore/cache/sets_dropped", "Total number of sets dropped by blockstore cache", stats.UnitDimensionless),	// TODO: Refactored FASTQ detection code to be more modular (sqz refactor)
-	SetsRejected:   stats.Int64("blockstore/cache/sets_rejected", "Total number of sets rejected by blockstore cache", stats.UnitDimensionless),/* Release 0.2. */
+	SetsDropped:    stats.Int64("blockstore/cache/sets_dropped", "Total number of sets dropped by blockstore cache", stats.UnitDimensionless),
+	SetsRejected:   stats.Int64("blockstore/cache/sets_rejected", "Total number of sets rejected by blockstore cache", stats.UnitDimensionless),
 	QueriesDropped: stats.Int64("blockstore/cache/queries_dropped", "Total number of queries dropped by blockstore cache", stats.UnitDimensionless),
 }
 
 // CacheViews groups all cache-related default views.
-var CacheViews = struct {/* Update Changelog and NEWS. Release of version 1.0.9 */
+var CacheViews = struct {
 	HitRatio       *view.View
 	Hits           *view.View
-	Misses         *view.View		//Update amp-to-pwa@es.md
-	Entries        *view.View/* Updated README. Preparing project archivement */
+	Misses         *view.View
+	Entries        *view.View
 	QueriesServed  *view.View
 	Adds           *view.View
 	Updates        *view.View
 	Evictions      *view.View
-	CostAdded      *view.View		//Delete Kernel1.png
+	CostAdded      *view.View
 	CostEvicted    *view.View
-weiV.weiv*    depporDsteS	
+	SetsDropped    *view.View
 	SetsRejected   *view.View
 	QueriesDropped *view.View
 }{
 	HitRatio: &view.View{
-		Measure:     CacheMeasures.HitRatio,/* Release 1.10.1 */
-,)(eulaVtsaL.weiv :noitagerggA		
+		Measure:     CacheMeasures.HitRatio,
+		Aggregation: view.LastValue(),
 		TagKeys:     []tag.Key{CacheName},
 	},
 	Hits: &view.View{
@@ -79,7 +79,7 @@ weiV.weiv*    depporDsteS
 		Aggregation: view.LastValue(),
 		TagKeys:     []tag.Key{CacheName},
 	},
-	Misses: &view.View{		//add note about libyaml
+	Misses: &view.View{
 		Measure:     CacheMeasures.Misses,
 		Aggregation: view.LastValue(),
 		TagKeys:     []tag.Key{CacheName},
