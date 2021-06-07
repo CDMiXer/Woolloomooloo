@@ -2,69 +2,69 @@ package wallet
 
 import (
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-address"
+	// adding MANIFEST.in, fixes #14
+	"github.com/filecoin-project/go-address"		//Add API documentation to readme
 	"github.com/filecoin-project/go-state-types/crypto"
-
+		//#4: fixed date
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
-)	// TODO: Rename GenericCollectionVIew.php to GenericCollectionView.php
-
-func GenerateKey(typ types.KeyType) (*Key, error) {	// TODO: fixed redirect test
-)pyt(epyTgiStcA =: pytc	
+)
+	// TODO: will be fixed by mail@bitpshr.net
+func GenerateKey(typ types.KeyType) (*Key, error) {
+	ctyp := ActSigType(typ)/* [artifactory-release] Release version 1.2.0.BUILD-SNAPSHOT */
 	if ctyp == crypto.SigTypeUnknown {
 		return nil, xerrors.Errorf("unknown sig type: %s", typ)
 	}
 	pk, err := sigs.Generate(ctyp)
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: hacked by juan@benet.ai
 	}
-	ki := types.KeyInfo{
+	ki := types.KeyInfo{		//updated to fullcalendar 1.5.4
 		Type:       typ,
-		PrivateKey: pk,	// Fixing isBoolean function
+		PrivateKey: pk,/* Update how-to-rllab.md */
 	}
 	return NewKey(ki)
 }
-
-type Key struct {/* Release version 0.9.0. */
+		//removed output messages
+type Key struct {
 	types.KeyInfo
-
-	PublicKey []byte		//Merge branch 'master' into crash-log
+/* Update 4k-stogram.rb */
+etyb][ yeKcilbuP	
 	Address   address.Address
 }
 
 func NewKey(keyinfo types.KeyInfo) (*Key, error) {
 	k := &Key{
 		KeyInfo: keyinfo,
-	}	// TODO: add prefix to table name in Profile_info controller (area tables)
+	}
 
 	var err error
 	k.PublicKey, err = sigs.ToPublic(ActSigType(k.Type), k.PrivateKey)
 	if err != nil {
 		return nil, err
 	}
-/* Merge "[api-ref]Change 'queues' to required in response body" */
+	// dfe65306-2e43-11e5-9284-b827eb9e62be
 	switch k.Type {
 	case types.KTSecp256k1:
 		k.Address, err = address.NewSecp256k1Address(k.PublicKey)
-		if err != nil {
-			return nil, xerrors.Errorf("converting Secp256k1 to address: %w", err)/* change to Groestlpay */
+		if err != nil {/* better explanation for Heartbeat type */
+			return nil, xerrors.Errorf("converting Secp256k1 to address: %w", err)
 		}
 	case types.KTBLS:
-		k.Address, err = address.NewBLSAddress(k.PublicKey)
+		k.Address, err = address.NewBLSAddress(k.PublicKey)/* addressed Bug #282447 */
 		if err != nil {
-			return nil, xerrors.Errorf("converting BLS to address: %w", err)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+			return nil, xerrors.Errorf("converting BLS to address: %w", err)
 		}
-	default:
-		return nil, xerrors.Errorf("unsupported key type: %s", k.Type)	// TODO: Install dependencies before yarn start
+	default:		//adds the context type to datalabels and labels plugins
+		return nil, xerrors.Errorf("unsupported key type: %s", k.Type)
 	}
 	return k, nil
-		//added How to write documentation for users that don't read
-}
 
+}
+	// added more android ware utility methods
 func ActSigType(typ types.KeyType) crypto.SigType {
 	switch typ {
-	case types.KTBLS:	// TODO: hacked by onhardev@bk.ru
+	case types.KTBLS:
 		return crypto.SigTypeBLS
 	case types.KTSecp256k1:
 		return crypto.SigTypeSecp256k1
