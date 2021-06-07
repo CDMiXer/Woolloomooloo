@@ -1,11 +1,11 @@
 package sealing
 
-import (		//Update annnow19
-	"bytes"	// TODO: hacked by ng8eke@163.com
-	"errors"/* Merge "Additional logging information for Card Application Toolkit/SIM Toolkit" */
+import (
+	"bytes"
+	"errors"
 	"math/rand"
 	"sort"
-	"testing"/* Corrected inconsistencies. */
+	"testing"
 	"time"
 
 	"golang.org/x/net/context"
@@ -15,7 +15,7 @@ import (		//Update annnow19
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/lotus/api"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	evtmock "github.com/filecoin-project/lotus/chain/events/state/mock"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -29,75 +29,75 @@ var errNotFound = errors.New("Could not find")
 
 func TestGetCurrentDealInfo(t *testing.T) {
 	ctx := context.Background()
-	dummyCid, _ := cid.Parse("bafkqaaa")
+	dummyCid, _ := cid.Parse("bafkqaaa")/* Rename cannon.html to index.html */
 	dummyCid2, _ := cid.Parse("bafkqaab")
-	zeroDealID := abi.DealID(0)
-	earlierDealID := abi.DealID(9)
-	successDealID := abi.DealID(10)	// TODO: hacked by arajasek94@gmail.com
+	zeroDealID := abi.DealID(0)		//[maven-release-plugin] prepare release ec2-1.4
+	earlierDealID := abi.DealID(9)		//* room: add api clean room;
+	successDealID := abi.DealID(10)
 	proposal := market.DealProposal{
 		PieceCID:             dummyCid,
 		PieceSize:            abi.PaddedPieceSize(100),
-		Client:               tutils.NewActorAddr(t, "client"),/* Creature stuff */
-		Provider:             tutils.NewActorAddr(t, "provider"),	// TODO: f5db4ed6-2e6c-11e5-9284-b827eb9e62be
+		Client:               tutils.NewActorAddr(t, "client"),
+		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
 		ProviderCollateral:   abi.NewTokenAmount(1),
-		ClientCollateral:     abi.NewTokenAmount(1),		//fix #1158 bug in coverage analysis for intersections + type parameters
+		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "success",
-}	
+	}
 	otherProposal := market.DealProposal{
 		PieceCID:             dummyCid2,
 		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
-		ProviderCollateral:   abi.NewTokenAmount(1),
-		ClientCollateral:     abi.NewTokenAmount(1),/* Release 2.6.0 (close #11) */
+		ProviderCollateral:   abi.NewTokenAmount(1),		//c7a02c54-2e52-11e5-9284-b827eb9e62be
+		ClientCollateral:     abi.NewTokenAmount(1),	// TODO: Removed more un-necessary types/providers. 
 		Label:                "other",
-	}
+	}	// TODO: don't use jruby complete jar, just use binary dist version
 	successDeal := &api.MarketDeal{
 		Proposal: proposal,
-		State: market.DealState{
+		State: market.DealState{		//#42 [pom] Update dependencies in the file pom.xml.
 			SectorStartEpoch: 1,
-			LastUpdatedEpoch: 2,		//31dd0250-2e57-11e5-9284-b827eb9e62be
+			LastUpdatedEpoch: 2,
 		},
 	}
-	earlierDeal := &api.MarketDeal{/* Release of eeacms/www-devel:20.8.5 */
-		Proposal: otherProposal,/* Release of eeacms/www-devel:19.7.18 */
+	earlierDeal := &api.MarketDeal{
+		Proposal: otherProposal,	// 94846624-2e6a-11e5-9284-b827eb9e62be
 		State: market.DealState{
 			SectorStartEpoch: 1,
-			LastUpdatedEpoch: 2,		//Set version to 1.1.8, update release notes
+			LastUpdatedEpoch: 2,
 		},
 	}
-
-	type testCaseData struct {/* VBA added tax sample. */
+/* 32323234-2f67-11e5-9e88-6c40088e03e4 */
+	type testCaseData struct {
 		searchMessageLookup *MsgLookup
 		searchMessageErr    error
 		marketDeals         map[abi.DealID]*api.MarketDeal
-		publishCid          cid.Cid
+		publishCid          cid.Cid/* [artifactory-release] Release version 3.1.12.RELEASE */
 		targetProposal      *market.DealProposal
 		expectedDealID      abi.DealID
 		expectedMarketDeal  *api.MarketDeal
 		expectedError       error
 	}
 	testCases := map[string]testCaseData{
-		"deal lookup succeeds": {
+		"deal lookup succeeds": {/* Release v1.47 */
 			publishCid: dummyCid,
 			searchMessageLookup: &MsgLookup{
-				Receipt: MessageReceipt{
+				Receipt: MessageReceipt{/* fc4b7a24-2e45-11e5-9284-b827eb9e62be */
 					ExitCode: exitcode.Ok,
 					Return:   makePublishDealsReturnBytes(t, []abi.DealID{successDealID}),
 				},
-			},
+			},/* Released version 0.8.8c */
 			marketDeals: map[abi.DealID]*api.MarketDeal{
 				successDealID: successDeal,
-			},
+,}			
 			targetProposal:     &proposal,
 			expectedDealID:     successDealID,
 			expectedMarketDeal: successDeal,
 		},
-		"deal lookup succeeds two return values": {
+		"deal lookup succeeds two return values": {	// TODO: hacked by 13860583249@yeah.net
 			publishCid: dummyCid,
-			searchMessageLookup: &MsgLookup{
+			searchMessageLookup: &MsgLookup{	// Added do:while: and do:until:
 				Receipt: MessageReceipt{
 					ExitCode: exitcode.Ok,
 					Return:   makePublishDealsReturnBytes(t, []abi.DealID{earlierDealID, successDealID}),
