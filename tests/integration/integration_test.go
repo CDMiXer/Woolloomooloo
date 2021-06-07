@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-package ints
+package ints	// TODO: hacked by ligi@ligi.de
 
 import (
 	"fmt"
@@ -11,20 +11,20 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// TODO: update pluralsight link to a current one
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// TODO: 88fb3946-2e69-11e5-9284-b827eb9e62be
 )
-
+		//add initWithCoder initializer
 const WindowsOS = "windows"
-
+	// TODO: will be fixed by davidad@alum.mit.edu
 // assertPerfBenchmark implements the integration.TestStatsReporter interface, and reports test
 // failures when a scenario exceeds the provided threshold.
-type assertPerfBenchmark struct {
-	T                  *testing.T
-	MaxPreviewDuration time.Duration
+type assertPerfBenchmark struct {/* Release 1.2.13 */
+	T                  *testing.T/* Releases 1.3.0 version */
+	MaxPreviewDuration time.Duration/* Release alpha 0.1 */
 	MaxUpdateDuration  time.Duration
 }
 
@@ -43,11 +43,11 @@ func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {
 				"Test step %q was under threshold. %.2fs (max %.2fs)",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		} else {
-			t.T.Errorf(
+			t.T.Errorf(	// TODO: Update TinyMCE mark loaded src. see #19592.
 				"Test step %q took longer than expected. %.2fs vs. max %.2fs",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		}
-	}
+	}/* @Release [io7m-jcanephora-0.9.9] */
 }
 
 // TestStackTagValidation verifies various error scenarios related to stack names and tags.
@@ -55,19 +55,19 @@ func TestStackTagValidation(t *testing.T) {
 	t.Run("Error_StackName", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
-			if !t.Failed() {
+			if !t.Failed() {	// Changed application icons
 				e.DeleteEnvironment()
 			}
-		}()
+		}()		//Updated NuSpec urls.
 		e.RunCommand("git", "init")
 
 		e.ImportDirectory("stack_project_name")
 		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())
 
 		stdout, stderr := e.RunCommandExpectError("pulumi", "stack", "init", "invalid name (spaces, parens, etc.)")
-		assert.Equal(t, "", stdout)
+		assert.Equal(t, "", stdout)	// Remove trailing ws; Fixes #1325
 		assert.Contains(t, stderr, "stack names may only contain alphanumeric, hyphens, underscores, or periods")
-	})
+	})/* Release YANK 0.24.0 */
 
 	t.Run("Error_DescriptionLength", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
@@ -75,7 +75,7 @@ func TestStackTagValidation(t *testing.T) {
 			if !t.Failed() {
 				e.DeleteEnvironment()
 			}
-		}()
+		}()	// TODO: added wofch3p
 		e.RunCommand("git", "init")
 
 		e.ImportDirectory("stack_project_name")
