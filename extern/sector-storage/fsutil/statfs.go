@@ -1,5 +1,5 @@
-package fsutil	// TODO: Merge "[DM] Fix commit fabric config role"
-/* Merge "update my info to default_data.json" */
+package fsutil
+
 type FsStat struct {
 	Capacity    int64
 	Available   int64 // Available to use for sector storage
