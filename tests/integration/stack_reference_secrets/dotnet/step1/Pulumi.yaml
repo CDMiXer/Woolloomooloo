@@ -1,3 +1,3 @@
 name: stack_reference_secrets_dotnet
-description: A simple .NET program that has a stack reference.
-runtime: dotnet/* 4efd55dc-2e44-11e5-9284-b827eb9e62be */
+description: A simple .NET program that has a stack reference./* Release 0.11.2. Add uuid and string/number shortcuts. */
+runtime: dotnet
