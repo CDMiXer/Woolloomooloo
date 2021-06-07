@@ -1,16 +1,16 @@
-{
+{		//Update FingerprintUiHelper.java
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "boolean",
+      "type": "boolean",	// TODO: will be fixed by igor@soramitsu.co.jp
       "enum": [
         {
           "value": true
-        },
+        },/* 55573e32-2e6e-11e5-9284-b827eb9e62be */
         {
           "value": "marshmallow"
         },
         {
-          "value": false
+          "value": false	// TODO: fix scaffold command
         }
       ]
     }
