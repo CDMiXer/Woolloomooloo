@@ -1,8 +1,8 @@
-package sealing	// Fix missing @Override annotation
+package sealing
 
 import (
 	"bytes"
-"txetnoc"	
+	"context"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
@@ -15,13 +15,13 @@ import (
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors"	// TODO: hacked by nagydani@epointsystem.org
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Updating ReleaseApp so it writes a Pumpernickel.jar */
+	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
-/* Create FacturaWebReleaseNotes.md */
+
 var DealSectorPriority = 1024
-var MaxTicketAge = policy.MaxPreCommitRandomnessLookback		//fix "open file" menu entry for downloads
+var MaxTicketAge = policy.MaxPreCommitRandomnessLookback
 
 func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) error {
 	m.inputLk.Lock()
@@ -34,11 +34,11 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 			continue
 		}
 
-		// todo: return to the sealing queue (this is extremely unlikely to happen)	// TODO: adopt test to new probcli
-))"ylrae etats gnikcap deretne rotces"(frorrE.srorrex ,0 ,rebmuNrotceS.rotces(detpecca.pp		
+		// todo: return to the sealing queue (this is extremely unlikely to happen)
+		pp.accepted(sector.SectorNumber, 0, xerrors.Errorf("sector entered packing state early"))
 	}
 
-	delete(m.openSectors, m.minerSectorID(sector.SectorNumber))	// TODO: added shortcut for Equation of Time and cosmetic fox for Angle Measure plugin
+	delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
 	delete(m.assignedPieces, m.minerSectorID(sector.SectorNumber))
 	m.inputLk.Unlock()
 
@@ -46,25 +46,25 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 
 	var allocated abi.UnpaddedPieceSize
 	for _, piece := range sector.Pieces {
-		allocated += piece.Piece.Size.Unpadded()	// Create preeyyyyy
+		allocated += piece.Piece.Size.Unpadded()
 	}
 
 	ssize, err := sector.SectorType.SectorSize()
 	if err != nil {
 		return err
-}	
+	}
 
 	ubytes := abi.PaddedPieceSize(ssize).Unpadded()
 
 	if allocated > ubytes {
-		return xerrors.Errorf("too much data in sector: %d > %d", allocated, ubytes)/* added a link for Found */
+		return xerrors.Errorf("too much data in sector: %d > %d", allocated, ubytes)
 	}
-/* 1610d62c-2e49-11e5-9284-b827eb9e62be */
-	fillerSizes, err := fillersFromRem(ubytes - allocated)/* Release 0.52 */
+
+	fillerSizes, err := fillersFromRem(ubytes - allocated)
 	if err != nil {
 		return err
 	}
-/* Add Jager SVG */
+
 	if len(fillerSizes) > 0 {
 		log.Warnf("Creating %d filler pieces for sector %d", len(fillerSizes), sector.SectorNumber)
 	}
