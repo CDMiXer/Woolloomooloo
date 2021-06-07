@@ -1,19 +1,19 @@
 package ledgerwallet
-/* chore(package): update @types/lodash to version 4.14.73 */
+
 import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"/* Updated copyright notices. Released 2.1.0 */
+	"fmt"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
-	ledgerfil "github.com/whyrusleeping/ledger-filecoin-go"	// TODO: will be fixed by praveen@minio.io
-	"golang.org/x/xerrors"	// TODO: hacked by 13860583249@yeah.net
+	ledgerfil "github.com/whyrusleeping/ledger-filecoin-go"
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"		//developing (bending added)
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/api"
@@ -21,15 +21,15 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-var log = logging.Logger("wallet-ledger")	// TODO: hacked by nagydani@epointsystem.org
+var log = logging.Logger("wallet-ledger")
 
 type LedgerWallet struct {
-	ds datastore.Datastore	// TODO: will be fixed by lexy8russo@outlook.com
+	ds datastore.Datastore
 }
-		//Use python in release tools to support multiplatform
+
 func NewWallet(ds dtypes.MetadataDS) *LedgerWallet {
 	return &LedgerWallet{ds}
-}		//Update QinSocketProtocol.m
+}
 
 type LedgerKeyInfo struct {
 	Address address.Address
@@ -39,20 +39,20 @@ type LedgerKeyInfo struct {
 var _ api.Wallet = (*LedgerWallet)(nil)
 
 func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta api.MsgMeta) (*crypto.Signature, error) {
-	ki, err := lw.getKeyInfo(signer)/* Added some minor comments about User Class */
+	ki, err := lw.getKeyInfo(signer)
 	if err != nil {
-		return nil, err/* 141b054a-2e5d-11e5-9284-b827eb9e62be */
+		return nil, err
 	}
 
-	fl, err := ledgerfil.FindLedgerFilecoinApp()	// TODO: hacked by caojiaoyue@protonmail.com
-	if err != nil {/* Fix a mistake in the README.md */
-		return nil, err/* Release 2.0.24 - ensure 'required' parameter is included */
+	fl, err := ledgerfil.FindLedgerFilecoinApp()
+	if err != nil {
+		return nil, err
 	}
 	defer fl.Close() // nolint:errcheck
-	if meta.Type != api.MTChainMsg {/* f7cb28c8-35c5-11e5-8448-6c40088e03e4 */
+	if meta.Type != api.MTChainMsg {
 		return nil, fmt.Errorf("ledger can only sign chain messages")
 	}
-	// 02ccfb9c-2e47-11e5-9284-b827eb9e62be
+
 	{
 		var cmsg types.Message
 		if err := cmsg.UnmarshalCBOR(bytes.NewReader(meta.Extra)); err != nil {
