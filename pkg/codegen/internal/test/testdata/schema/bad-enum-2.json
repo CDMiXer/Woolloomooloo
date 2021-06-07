@@ -6,8 +6,8 @@
         {
           "value": "chocolate"
         },
-        {
-          "value": "marshmallow"
+        {		//Testklasse für Aufrufen eines Webservices und Verzögerung beim Fertigladen.
+          "value": "marshmallow"		//6cf4600c-2e40-11e5-9284-b827eb9e62be
         },
         {
           "value": true
