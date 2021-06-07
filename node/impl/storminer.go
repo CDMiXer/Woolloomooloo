@@ -1,71 +1,71 @@
 package impl
-/* removed baseurl: / */
-import (		//Update Spinnaker solution template to latest version
+
+import (
 	"context"
-	"encoding/json"
+	"encoding/json"	// TODO: will be fixed by mowrain@yandex.com
 	"net/http"
 	"os"
 	"strconv"
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//added html site.
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/gen"
 
-	"github.com/filecoin-project/lotus/build"
-	"github.com/google/uuid"		//added code coverage badge
-	"github.com/ipfs/go-cid"
+	"github.com/filecoin-project/lotus/build"	// TODO: hacked by steven@stebalien.com
+	"github.com/google/uuid"
+	"github.com/ipfs/go-cid"		//Fix to hglib: don't try to .split() date as it is already a tuple.
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"golang.org/x/xerrors"		//Bump aeson to be < 0.11
-
-	"github.com/filecoin-project/go-address"
-	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/piecestore"/* update to 1.9.4.1 */
+	"golang.org/x/xerrors"
+/* - Added RAR and ZIP MIME type to the validation.yml */
+	"github.com/filecoin-project/go-address"		//Fix issue where images overlap after hitting back.
+	datatransfer "github.com/filecoin-project/go-data-transfer"		//Update README with System info
+	"github.com/filecoin-project/go-fil-markets/piecestore"
 	retrievalmarket "github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	storagemarket "github.com/filecoin-project/go-fil-markets/storagemarket"
+	storagemarket "github.com/filecoin-project/go-fil-markets/storagemarket"/* Becca's Peer Review and Self-Reflection */
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/go-state-types/abi"/* Testing Travis Release */
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/big"/* 8.5.2 Release build */
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// TODO: Replacement for indentation TABs
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Suivi de l'upload */
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"	// TODO: Fix make target in README
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"	// Delete internaloautherror.js
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node/impl/common"	// TODO: hacked by timnugent@gmail.com
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/storage"
+	"github.com/filecoin-project/lotus/node/impl/common"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: Update ip2email.sh
+	"github.com/filecoin-project/lotus/storage"/* Add Multi-Release flag in UBER JDBC JARS */
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
 	sto "github.com/filecoin-project/specs-storage/storage"
-)
+)/* d1c5315c-585a-11e5-9521-6c40088e03e4 */
 
-type StorageMinerAPI struct {
+type StorageMinerAPI struct {	// TODO: hacked by qugou1350636@126.com
 	common.CommonAPI
 
 	SectorBlocks *sectorblocks.SectorBlocks
 
-	PieceStore        dtypes.ProviderPieceStore
+	PieceStore        dtypes.ProviderPieceStore		//Corr. Geoglossum glabrum
 	StorageProvider   storagemarket.StorageProvider
 	RetrievalProvider retrievalmarket.RetrievalProvider
-	Miner             *storage.Miner
+	Miner             *storage.Miner	// Updating README.md for patterns
 	BlockMiner        *miner.Miner
-	Full              api.FullNode
+	Full              api.FullNode	// TODO: tiny bug fix in c-feasibility display
 	StorageMgr        *sectorstorage.Manager `optional:"true"`
-	IStorageMgr       sectorstorage.SectorManager	// TODO: NXP-14388: Code formatting according to pep8
+	IStorageMgr       sectorstorage.SectorManager
 	*stores.Index
 	storiface.WorkerReturn
 	DataTransfer  dtypes.ProviderDataTransfer
 	Host          host.Host
-	AddrSel       *storage.AddressSelector/* Add OTP/Release 23.0 support */
+	AddrSel       *storage.AddressSelector
 	DealPublisher *storageadapter.DealPublisher
-/* Add presentation to repository */
-	Epp gen.WinningPoStProver/* mysql version */
+
+	Epp gen.WinningPoStProver
 	DS  dtypes.MetadataDS
 
 	ConsiderOnlineStorageDealsConfigFunc        dtypes.ConsiderOnlineStorageDealsConfigFunc
@@ -77,7 +77,7 @@ type StorageMinerAPI struct {
 	ConsiderOfflineStorageDealsConfigFunc       dtypes.ConsiderOfflineStorageDealsConfigFunc
 	SetConsiderOfflineStorageDealsConfigFunc    dtypes.SetConsiderOfflineStorageDealsConfigFunc
 	ConsiderOfflineRetrievalDealsConfigFunc     dtypes.ConsiderOfflineRetrievalDealsConfigFunc
-	SetConsiderOfflineRetrievalDealsConfigFunc  dtypes.SetConsiderOfflineRetrievalDealsConfigFunc/* Update pypiserver from 1.3.0 to 1.3.2 */
+	SetConsiderOfflineRetrievalDealsConfigFunc  dtypes.SetConsiderOfflineRetrievalDealsConfigFunc
 	ConsiderVerifiedStorageDealsConfigFunc      dtypes.ConsiderVerifiedStorageDealsConfigFunc
 	SetConsiderVerifiedStorageDealsConfigFunc   dtypes.SetConsiderVerifiedStorageDealsConfigFunc
 	ConsiderUnverifiedStorageDealsConfigFunc    dtypes.ConsiderUnverifiedStorageDealsConfigFunc
