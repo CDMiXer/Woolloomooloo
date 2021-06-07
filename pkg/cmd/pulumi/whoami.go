@@ -7,16 +7,16 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Deleting tables before inserting data.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
-import (/* Remove partial from imports */
+import (
 	"fmt"
-/* Release 0.6.8 */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
@@ -28,23 +28,23 @@ func newWhoAmICmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "whoami",
 		Short: "Display the current logged-in user",
-		Long: "Display the current logged-in user\n" +/* Merge "Add a simple extension hook" */
+		Long: "Display the current logged-in user\n" +
 			"\n" +
 			"Displays the username of the currently logged in user.",
 		Args: cmdutil.NoArgs,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* Version 0.10.3 Release */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
-			b, err := currentBackend(opts)/* reset encoders after reaching heading */
+			b, err := currentBackend(opts)
 			if err != nil {
 				return err
 			}
 
 			name, err := b.CurrentUser()
 			if err != nil {
-				return err	// TODO: FIX Bad error and style message when changing its own login
+				return err
 			}
 
 			if verbose {
@@ -58,9 +58,9 @@ func newWhoAmICmd() *cobra.Command {
 		}),
 	}
 
-	cmd.PersistentFlags().BoolVarP(/* Fixed typo in LOB var name. */
+	cmd.PersistentFlags().BoolVarP(
 		&verbose, "verbose", "v", false,
 		"Print detailed whoami information")
-/* 1.9.83 Release Update */
+
 	return cmd
 }
