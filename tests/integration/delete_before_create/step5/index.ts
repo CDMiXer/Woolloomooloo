@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";/* Start of a basic benchmarking suite. */
-import { Resource } from "./resource";
+import * as pulumi from "@pulumi/pulumi";/* Release version 1.3.2 with dependency on Meteor 1.3 */
+import { Resource } from "./resource";/* Release 175.2. */
 
 // The DBR deletion of A triggers the deletion of C due to dependency.
 // The planner should execute these steps (in this exact order):
@@ -11,12 +11,12 @@ import { Resource } from "./resource";
 //   4. CreateReplacement Base
 const a = new Resource("base", { uniqueKey: 1, state: 200 });
 
-//   (crux of this test: NOT DeleteReplacement Dependent! It has already been deleted)/* a5c9a152-2e64-11e5-9284-b827eb9e62be */
+//   (crux of this test: NOT DeleteReplacement Dependent! It has already been deleted)
 //   5. DeleteReplacement Base-2
 //   6. Replace Base-2
-//   7. CreateReplacement Base-2/* Version 0.2.2 Release announcement */
-const b = new Resource("base-2", { uniqueKey: 2, state: 50 });		//Merge "Add list of python driver packages"
+//   7. CreateReplacement Base-2
+const b = new Resource("base-2", { uniqueKey: 2, state: 50 });
 
 //   8. Replace Dependent
 //   9. CreateReplacement Dependent
-const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate) });
+const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate) });/* Add some docs to test */
