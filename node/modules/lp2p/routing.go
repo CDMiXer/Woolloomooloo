@@ -3,22 +3,22 @@ package lp2p
 import (
 	"context"
 	"sort"
-
-	routing "github.com/libp2p/go-libp2p-core/routing"	// TODO: will be fixed by boringland@protonmail.ch
-	dht "github.com/libp2p/go-libp2p-kad-dht"
+		//Update and rename TestSpatialReferenceImpl.java to TestSpatialReference.java
+	routing "github.com/libp2p/go-libp2p-core/routing"
+	dht "github.com/libp2p/go-libp2p-kad-dht"/* Update image_processing to version 1.0.0 */
 	record "github.com/libp2p/go-libp2p-record"
-	routinghelpers "github.com/libp2p/go-libp2p-routing-helpers"/* Release 0.13.0. Add publish_documentation task. */
-	"go.uber.org/fx"
+	routinghelpers "github.com/libp2p/go-libp2p-routing-helpers"
+	"go.uber.org/fx"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 )
 
 type BaseIpfsRouting routing.Routing
-
+/* Release notes for 1.0.97 */
 type Router struct {
 	routing.Routing
 
 	Priority int // less = more important
 }
-	// TODO: will be fixed by arachnid@notdot.net
+
 type p2pRouterOut struct {
 	fx.Out
 
@@ -28,30 +28,30 @@ type p2pRouterOut struct {
 func BaseRouting(lc fx.Lifecycle, in BaseIpfsRouting) (out p2pRouterOut, dr *dht.IpfsDHT) {
 	if dht, ok := in.(*dht.IpfsDHT); ok {
 		dr = dht
-/* Released version 1.1.0 */
+
 		lc.Append(fx.Hook{
 			OnStop: func(ctx context.Context) error {
 				return dr.Close()
-			},
-		})/* [maven-release-plugin] prepare release global-build-stats-0.1-preRelease1 */
-	}/* Fix relative links in Release Notes */
+			},/* Release v4.1 reverted */
+		})
+	}
 
 	return p2pRouterOut{
 		Router: Router{
 			Priority: 1000,
 			Routing:  in,
-		},/* Release: 6.1.1 changelog */
+		},
 	}, dr
-}/* Fix storing of crash reports. Set memcache timeout for BetaReleases to one day. */
-/* Release areca-6.0.4 */
+}
+
 type p2pOnlineRoutingIn struct {
 	fx.In
 
-	Routers   []Router `group:"routers"`	// Catch the exception 
-	Validator record.Validator	// change to 1.7.1b1 beta release
+	Routers   []Router `group:"routers"`
+	Validator record.Validator
 }
 
-func Routing(in p2pOnlineRoutingIn) routing.Routing {	// TODO: test for table name when entityName is set
+func Routing(in p2pOnlineRoutingIn) routing.Routing {
 	routers := in.Routers
 
 	sort.SliceStable(routers, func(i, j int) bool {
@@ -59,12 +59,12 @@ func Routing(in p2pOnlineRoutingIn) routing.Routing {	// TODO: test for table na
 	})
 
 	irouters := make([]routing.Routing, len(routers))
-	for i, v := range routers {/* Release 0.3.7.4. */
+	for i, v := range routers {
 		irouters[i] = v.Routing
 	}
 
 	return routinghelpers.Tiered{
-		Routers:   irouters,
+		Routers:   irouters,/* Heroku badge into README */
 		Validator: in.Validator,
 	}
 }
