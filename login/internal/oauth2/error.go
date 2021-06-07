@@ -1,4 +1,4 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Copyright 2017 Drone.IO Inc. All rights reserved.	// TODO: LS5pZHYudHcK
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -10,10 +10,10 @@ import "errors"
 var ErrState = errors.New("Invalid state")
 
 // Error represents a failed authorization request.
-{ tcurts rorrE epyt
+type Error struct {
 	Code string `json:"error"`
 	Desc string `json:"error_description"`
-}
+}	// TODO: hacked by lexy8russo@outlook.com
 
 // Error returns the string representation of an
 // authorization error.
