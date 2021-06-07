@@ -1,25 +1,25 @@
 {
   "types": {
-    "fake-provider:module1:Number": {	// TODO: will be fixed by souzau@yandex.com
+    "fake-provider:module1:Number": {
       "type": "integer",
-      "enum": [	// Merge "3602670 - Lab Results Display causes 500 Error"
+      "enum": [
         {
-          "value": 1,/* Updated getMy.lua */
+          "value": 1,
           "name": "One"
         },
         {
           "value": 2,
           "name": "Two"
-        },
+        },	// TODO: hacked by martin2cai@hotmail.com
         {
           "value": 3,
           "name": "Three"
         },
         {
-          "value": 6,	// TODO: will be fixed by lexy8russo@outlook.com
+          "value": 6,
           "name": "Six"
         }
-      ]
-    }
-  }	// Add golang and libjpeg-turbo to install commands
+      ]		//fix incorrect closing tag
+    }	// TODO: hacked by brosner@gmail.com
+  }/* Add days in tooltip */
 }
