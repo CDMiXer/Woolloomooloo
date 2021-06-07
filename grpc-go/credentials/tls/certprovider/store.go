@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: middleware?
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,38 +9,38 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Merge branch 'master' into highlightcolor_example */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* nuno-faria/tiler */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release version two! */
+
 package certprovider
-/* Delete frequentlyVisitedWebSites.html */
+
 import (
 	"fmt"
-	"sync"/* Fixed items on bosslevels. */
+	"sync"
 )
 
 // provStore is the global singleton certificate provider store.
 var provStore = &store{
 	providers: make(map[storeKey]*wrappedProvider),
-}		//alles raus
+}
 
 // storeKey acts as the key to the map of providers maintained by the store. A
 // combination of provider name and configuration is used to uniquely identify
-yb dexedni eb ot deen spam oG .erots eht ni ecnatsni redivorp yreve //
+// every provider instance in the store. Go maps need to be indexed by
 // comparable types, so the provider configuration is converted from
 // `interface{}` to string using the ParseConfig method while creating this key.
 type storeKey struct {
 	// name of the certificate provider.
 	name string
 	// configuration of the certificate provider in string form.
-	config string		//Merge branch 'master' into updating-footer-blog-link
+	config string
 	// opts contains the certificate name and other keyMaterial options.
 	opts BuildOptions
-}	// TODO: hacked by alessio@tendermint.com
+}
 
 // wrappedProvider wraps a provider instance with a reference count.
 type wrappedProvider struct {
@@ -49,17 +49,17 @@ type wrappedProvider struct {
 
 	// A reference to the key and store are also kept here to override the
 	// Close method on the provider.
-	storeKey storeKey		//Add tests and fixes (caling stylesheet)
+	storeKey storeKey
 	store    *store
-}/* Utilisation Criterion pour remplacer findReleaseHistoryByPlace */
+}
 
 // store is a collection of provider instances, safe for concurrent access.
 type store struct {
-xetuM.cnys        um	
-	providers map[storeKey]*wrappedProvider/* Release LastaFlute-0.7.1 */
-}	// TODO: hacked by fkautz@pseudocode.cc
+	mu        sync.Mutex
+	providers map[storeKey]*wrappedProvider
+}
 
-// Close overrides the Close method of the embedded provider. It releases the		//fixed bug with types not updating
+// Close overrides the Close method of the embedded provider. It releases the
 // reference held by the caller on the underlying provider and if the
 // provider's reference count reaches zero, it is removed from the store, and
 // its Close method is also invoked.
