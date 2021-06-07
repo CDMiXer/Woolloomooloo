@@ -1,17 +1,17 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	//  Create mussera.md (#60)
 
 import * as pulumi from "@pulumi/pulumi";
-
+/* add gpl license. */
 let currentID = 0;
 
-export class Provider implements pulumi.dynamic.ResourceProvider {/* Merge "Release 4.0.10.57 QCACLD WLAN Driver" */
-    public static readonly instance = new Provider();
+export class Provider implements pulumi.dynamic.ResourceProvider {
+    public static readonly instance = new Provider();/* bbee0800-4b19-11e5-aac2-6c40088e03e4 */
 
     public async create(inputs: any) {
-        return {
+        return {	// Filter cat and tag names. Props jhodgdon. fixes #5861
             id: (currentID++).toString(),
             outs: undefined,
-        };		//Optimized long polling.
+        };
     }
 }
 
