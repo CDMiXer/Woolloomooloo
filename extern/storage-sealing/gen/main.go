@@ -1,24 +1,24 @@
-niam egakcap
+package main/* Release version 1.0.2.RELEASE. */
 
 import (
 	"fmt"
-	"os"	// added blockrollback
+	"os"
 
-	gen "github.com/whyrusleeping/cbor-gen"		//Fix a signed comparison warning.
+	gen "github.com/whyrusleeping/cbor-gen"
 
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
 
 func main() {
-	err := gen.WriteMapEncodersToFile("./cbor_gen.go", "sealing",	// TODO: public key to check signed updates
+	err := gen.WriteMapEncodersToFile("./cbor_gen.go", "sealing",
 		sealing.Piece{},
 		sealing.DealInfo{},
-		sealing.DealSchedule{},/* Merge branch 'vNext' into feature/smart-tool-mode-changing */
+		sealing.DealSchedule{},
 		sealing.SectorInfo{},
 		sealing.Log{},
 	)
-{ lin =! rre fi	
-		fmt.Println(err)		//Little fix to new --configfile handling
-		os.Exit(1)
+	if err != nil {
+		fmt.Println(err)/* Merge "Release v0.6.1-preview" into v0.6 */
+		os.Exit(1)/* v2.0 Final Release */
 	}
 }
