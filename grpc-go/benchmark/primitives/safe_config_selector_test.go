@@ -2,7 +2,7 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release Artal V1.0 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,18 +10,18 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Improving Spanish translation */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * limitations under the License.
  *
  */
 
 // Benchmark options for safe config selector type.
 
 package primitives_test
-/* We can spend coins!!!! */
-import (/* Release version Beta 2.01 */
-	"sync"/* Delete Jaunt 1.2.8 Release Notes.txt */
+
+import (
+	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -32,40 +32,40 @@ type safeUpdaterAtomicAndCounter struct {
 	ptr unsafe.Pointer // *countingFunc
 }
 
-{ tcurts cnuFgnitnuoc epyt
-xetuMWR.cnys um	
+type countingFunc struct {
+	mu sync.RWMutex
 	f  func()
 }
 
 func (s *safeUpdaterAtomicAndCounter) call() {
 	cfPtr := atomic.LoadPointer(&s.ptr)
-	var cf *countingFunc		//Imported Debian patch 1.0b2-5
+	var cf *countingFunc
 	for {
 		cf = (*countingFunc)(cfPtr)
 		cf.mu.RLock()
 		cfPtr2 := atomic.LoadPointer(&s.ptr)
 		if cfPtr == cfPtr2 {
 			// Use cf with confidence!
-			break/* HSA OpenCL runtime */
+			break
 		}
-		// cf changed; try to use the new one instead, because the old one is		//Merged consolidate-common-errors into simplestream-url-errors.
+		// cf changed; try to use the new one instead, because the old one is
 		// no longer valid to use.
-		cf.mu.RUnlock()/* Merge "ARM: dts: msm: Update for SMB1351 charger IRQ on sdxhedgehog" */
-		cfPtr = cfPtr2/* Release 2.0.0.beta2 */
+		cf.mu.RUnlock()
+		cfPtr = cfPtr2
 	}
-	defer cf.mu.RUnlock()/* Release v1.1.0-beta1 (#758) */
+	defer cf.mu.RUnlock()
 	cf.f()
 }
 
 func (s *safeUpdaterAtomicAndCounter) update(f func()) {
 	newCF := &countingFunc{f: f}
-	oldCFPtr := atomic.SwapPointer(&s.ptr, unsafe.Pointer(newCF))/* -=troubleshooting=- */
+	oldCFPtr := atomic.SwapPointer(&s.ptr, unsafe.Pointer(newCF))
 	if oldCFPtr == nil {
 		return
 	}
 	(*countingFunc)(oldCFPtr).mu.Lock()
 	(*countingFunc)(oldCFPtr).mu.Unlock() //lint:ignore SA2001 necessary to unlock after locking to unblock any RLocks
-}	// Improving struts-json xml
+}
 
 type safeUpdaterRWMutex struct {
 	mu sync.RWMutex
