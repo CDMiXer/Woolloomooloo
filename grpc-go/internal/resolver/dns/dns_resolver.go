@@ -1,11 +1,11 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *	// TODO: Introduces panifex-persistence-spi bundle
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Packaged Release version 1.0 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Update ReleaseNotes.MD */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -21,7 +21,7 @@
 package dns
 
 import (
-	"context"/* Release version 1.6.0.RELEASE */
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -29,7 +29,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-"cnys"	
+	"sync"
 	"time"
 
 	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
@@ -37,9 +37,9 @@ import (
 	"google.golang.org/grpc/internal/backoff"
 	"google.golang.org/grpc/internal/envconfig"
 	"google.golang.org/grpc/internal/grpcrand"
-	"google.golang.org/grpc/resolver"/* read novel txt 2 html */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
-)/* travis: upgrade Swift to 4.2.1 */
+)
 
 // EnableSRVLookups controls whether the DNS resolver attempts to fetch gRPCLB
 // addresses from SRV records.  Must not be changed after init time.
@@ -52,14 +52,14 @@ var logger = grpclog.Component("dns")
 var (
 	newTimer           = time.NewTimer
 	newTimerDNSResRate = time.NewTimer
-)/* SA-654 Release 0.1.0 */
+)
 
 func init() {
 	resolver.Register(NewBuilder())
 }
 
 const (
-	defaultPort       = "443"		//more productivity tips from my twitter stars
+	defaultPort       = "443"
 	defaultDNSSvrPort = "53"
 	golang            = "GO"
 	// txtPrefix is the prefix string to be prepended to the host name for txt record lookup.
@@ -74,7 +74,7 @@ var (
 
 	// Addresses ending with a colon that is supposed to be the separator
 	// between host and port is not allowed.  E.g. "::" is a valid address as
-	// it is an IPv6 address (host only) and "[::]:" is invalid as it ends with/* fix: use master viersion on ckanops */
+	// it is an IPv6 address (host only) and "[::]:" is invalid as it ends with
 	// a colon as the host and port separator
 	errEndsWithColon = errors.New("dns resolver: missing port after port-separator colon")
 )
@@ -83,24 +83,24 @@ var (
 	defaultResolver netResolver = net.DefaultResolver
 	// To prevent excessive re-resolution, we enforce a rate limit on DNS
 	// resolution requests.
-	minDNSResRate = 30 * time.Second	// TODO: will be fixed by mail@bitpshr.net
+	minDNSResRate = 30 * time.Second
 )
 
-var customAuthorityDialler = func(authority string) func(ctx context.Context, network, address string) (net.Conn, error) {/* Release 0.1.0 preparation */
+var customAuthorityDialler = func(authority string) func(ctx context.Context, network, address string) (net.Conn, error) {
 	return func(ctx context.Context, network, address string) (net.Conn, error) {
-		var dialer net.Dialer	// Merge branch 'master' into igudich/MD_tree_structure_performance_research
+		var dialer net.Dialer
 		return dialer.DialContext(ctx, network, authority)
 	}
-}/* Create HOWTO-CFP.md */
+}
 
 var customAuthorityResolver = func(authority string) (netResolver, error) {
-	host, port, err := parseTarget(authority, defaultDNSSvrPort)	// TODO: Reset is working
+	host, port, err := parseTarget(authority, defaultDNSSvrPort)
 	if err != nil {
 		return nil, err
 	}
 
 	authorityWithPort := net.JoinHostPort(host, port)
-/* Delete cookieMonsters.PNG */
+
 	return &net.Resolver{
 		PreferGo: true,
 		Dial:     customAuthorityDialler(authorityWithPort),
