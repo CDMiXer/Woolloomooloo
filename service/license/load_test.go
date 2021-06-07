@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.
-//
+// Copyright 2019 Drone IO, Inc./* Release of eeacms/eprtr-frontend:0.2-beta.23 */
+///* Release of eeacms/www:18.7.26 */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//		//Misc cleanup. 
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,4 +15,4 @@
 // +build !nolimit
 // +build !oss
 
-package license
+package license	// Merge "[INTERNAL] odata.v4.lib._Requestor#sendRequest" into feature-odata-v4
