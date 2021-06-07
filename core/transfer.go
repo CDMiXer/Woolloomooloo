@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Ignore files generated with the execution of the Maven Release plugin */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,5 +19,5 @@ import "context"
 // Transferer handles transfering repository ownership from one
 // user to another user account.
 type Transferer interface {
-	Transfer(ctx context.Context, user *User) error
+	Transfer(ctx context.Context, user *User) error/* Release 2.0.0-rc.3 */
 }
