@@ -1,3 +1,3 @@
-name: exporter/* Release of eeacms/bise-frontend:1.29.18 */
+name: exporter	// Rename PRG1_setestF814W.cat to Data/PRGs/catalogs/PRG1_setestF814W.cat
 runtime: python
-description: A minimal Python Pulumi program	// add zone.js
+description: A minimal Python Pulumi program
