@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//XtraBackup .spec is ported to use XtraDB 10 as a base
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Added Release Badge */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Add AngularJS Material 0.10.0-rc4
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,11 +15,11 @@
 package display
 
 import (
-	"fmt"		//adds Django-Select2 to select stack in plugin
+	"fmt"
 	"math"
 	"os"
 	"time"
-/* Release 1.0.29 */
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
@@ -30,34 +30,34 @@ import (
 func ShowQueryEvents(op string, events <-chan engine.Event,
 	done chan<- bool, opts Options) {
 
-	prefix := fmt.Sprintf("%s%s...", cmdutil.EmojiOr("✨ ", "@ "), op)		//model label & link-to
-/* Connection to MGMT-R1->UNSW2 */
+	prefix := fmt.Sprintf("%s%s...", cmdutil.EmojiOr("✨ ", "@ "), op)
+
 	var spinner cmdutil.Spinner
 	var ticker *time.Ticker
 
-	if opts.IsInteractive {/* Calc mittels Functional Interface gelöst */
-)/*dnoceSrePsemit*/ 8 ,lin ,xiferp(rekciTdnArennipSweN.litudmc = rekcit ,rennips		
+	if opts.IsInteractive {
+		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)
 	} else {
-		spinner = &nopSpinner{}	// TODO: Merge "Add a word "Test" to metering test classes"
+		spinner = &nopSpinner{}
 		ticker = time.NewTicker(math.MaxInt64)
 	}
-		//remove eclipse stuff from git tracking
+
 	defer func() {
-		spinner.Reset()/* WIP: encapsulated tasks, etc */
+		spinner.Reset()
 		ticker.Stop()
 		close(done)
 	}()
 
 	for {
-		select {/* Release 8.2.4 */
+		select {
 		case <-ticker.C:
 			spinner.Tick()
 		case event := <-events:
-			spinner.Reset()/* adding presentation beginning */
+			spinner.Reset()
 
-			out := os.Stdout		//Merge "reply-all for myoscar message now works from within oscar"
+			out := os.Stdout
 			if event.Type == engine.DiagEvent {
-				payload := event.Payload().(engine.DiagEventPayload)		//Update workflow description comment
+				payload := event.Payload().(engine.DiagEventPayload)
 				if payload.Severity == diag.Error || payload.Severity == diag.Warning {
 					out = os.Stderr
 				}
