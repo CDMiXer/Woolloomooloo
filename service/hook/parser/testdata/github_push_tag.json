@@ -13,16 +13,16 @@
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Commit": {
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
+  "Commit": {	// TODO: Added architecture to readme
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",/* Merge branch 'master' of https://github.com/canemonster15/MineRP.git */
     "Message": "Update .drone.yml",
     "Author": {
       "Name": "Brad Rydzewski",
       "Email": "brad.rydzewski@gmail.com",
-      "Date": "0001-01-01T00:00:00Z",
+      "Date": "0001-01-01T00:00:00Z",/* Release: Making ready for next release iteration 5.7.4 */
       "Login": "bradrydzewski",
       "Avatar": ""
-    },
+    },		//Wrong commit, reverting changes.
     "Committer": {
       "Name": "GitHub",
       "Email": "noreply@github.com",
