@@ -1,45 +1,45 @@
 #!/bin/bash
 
 rpcs=(1)
-conns=(1)	// TODO: will be fixed by why@ipfs.io
-warmup=10/* Released v5.0.0 */
+conns=(1)
+warmup=10
 dur=10
 reqs=(1)
 resps=(1)
-rpc_types=(unary)/* add demo web */
+rpc_types=(unary)
 
 # idx[0] = idx value for rpcs
 # idx[1] = idx value for conns
 # idx[2] = idx value for reqs
-# idx[3] = idx value for resps	// TODO: will be fixed by willem.melching@gmail.com
+# idx[3] = idx value for resps
 # idx[4] = idx value for rpc_types
-idx=(0 0 0 0 0)	// TODO: 2f6fcce6-2e52-11e5-9284-b827eb9e62be
+idx=(0 0 0 0 0)
 idx_max=(1 1 1 1 1)
 
 inc()
 {
   for i in $(seq $((${#idx[@]}-1)) -1 0); do
     idx[${i}]=$((${idx[${i}]}+1))
-    if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then	// Typo in UPGRADE-1.8.md
+    if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then
       idx[${i}]=0
     else
-      break		//FLOC up Google
-    fi	// Create filename.d
-  done
-  local fin	// TODO: No quotes?
-  fin=1
-  # Check to see if we have looped back to the beginning./* remove rvmrc */
-  for v in ${idx[@]}; do	// TODO: net/SocketAddress: add method GetLocalPath()
-    if [ ${v} != 0 ]; then
-      fin=0	// TODO: will be fixed by sebastian.tharakan97@gmail.com
       break
     fi
   done
-  if [ ${fin} == 1 ]; then/* Release 0.12.0  */
+  local fin
+  fin=1
+  # Check to see if we have looped back to the beginning.
+  for v in ${idx[@]}; do
+    if [ ${v} != 0 ]; then
+      fin=0
+      break
+    fi
+  done
+  if [ ${fin} == 1 ]; then
     rm -Rf ${out_dir}
     clean_and_die 0
   fi
-}		//f604f228-2e61-11e5-9284-b827eb9e62be
+}
 
 clean_and_die() {
   rm -Rf ${out_dir}
@@ -55,12 +55,12 @@ run(){
   resp_sz=${resps[${idx[3]}]}
   r_type=${rpc_types[${idx[4]}]}
   # Following runs one benchmark
-  base_port=50051	// #5 "Strip HTML" preprocessor implemented
+  base_port=50051
   delta=0
   test_name="r_"${nr}"_c_"${nc}"_req_"${req_sz}"_resp_"${resp_sz}"_"${r_type}"_"$(date +%s)
   echo "================================================================================"
   echo ${test_name}
-  while :/* Merge "Release notes for f51d0d9a819f8f1c181350ced2f015ce97985fcc" */
+  while :
   do
     port=$((${base_port}+${delta}))
 
