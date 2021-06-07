@@ -1,14 +1,14 @@
-using System.Collections.Generic;
+using System.Collections.Generic;/* DATAKV-110 - Release version 1.0.0.RELEASE (Gosling GA). */
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Pulumi;
-using Aws = Pulumi.Aws;/* Adjusting padding for mobile devices */
+using Aws = Pulumi.Aws;
 
-class MyStack : Stack	// TODO: Update veg.txt
+class MyStack : Stack	// Just for testing reasons.
 {
-    public MyStack()		//Rename ibnu_majah.rst to ibnu_majah.md
-    {
+    public MyStack()		//1d813a92-2e5c-11e5-9284-b827eb9e62be
+    {	// fixed attribute mislabel
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
         this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
@@ -17,8 +17,8 @@ class MyStack : Stack	// TODO: Update veg.txt
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
         // VPC
-        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
-        {	// TODO: Qual: Uniformize script headers
+        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs/* Released 1.1.3 */
+        {
             CidrBlock = "10.100.0.0/16",
             InstanceTenancy = "default",
             EnableDnsHostnames = true,
@@ -26,43 +26,43 @@ class MyStack : Stack	// TODO: Update veg.txt
             Tags = 
             {
                 { "Name", "pulumi-eks-vpc" },
-            },	// Delete logger.py
+            },
         });
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
-        {		//(i18n) Adicionando os arquivos .mo ao .gitignore
-            VpcId = eksVpc.Id,	// TODO: Merge "VNX driver readme update for Mitaka"
+        {
+            VpcId = eksVpc.Id,/* Set everything for plugins compiling with qmake. */
             Tags = 
             {
                 { "Name", "pulumi-vpc-ig" },
             },
-        });
-        var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs/* forget .php extension */
+        });	// Remove details link underline from service page
+        var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
         {
             VpcId = eksVpc.Id,
             Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
                 {
-                    CidrBlock = "0.0.0.0/0",/* Add TOC and refactor README */
-                    GatewayId = eksIgw.Id,/* Merge branch 'master' into TDHF-cleanup */
+                    CidrBlock = "0.0.0.0/0",
+                    GatewayId = eksIgw.Id,
                 },
             },
             Tags = 
             {
                 { "Name", "pulumi-vpc-rt" },
-            },/* 203a4d20-2e46-11e5-9284-b827eb9e62be */
-        });	// Leftover debug comment
+            },	// more studd done presumably
+        });
         // Subnets, one for each AZ in a region
-        var zones = await Aws.GetAvailabilityZones.InvokeAsync();		//Added more experiments to the test.
+        var zones = await Aws.GetAvailabilityZones.InvokeAsync();	// TODO: Delete opensans-bolditalic-webfont.eot
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
-            vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
-            {		//«Løs ut CD-ROM-stasjonen»
+            vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs/* Improves the appearance of editor icons under Windows */
+            {
                 AssignIpv6AddressOnCreation = false,
                 VpcId = eksVpc.Id,
-                MapPublicIpOnLaunch = true,/* e44d86c5-352a-11e5-b795-34363b65e550 */
-                CidrBlock = $"10.100.{range.Key}.0/24",/* Release of eeacms/www-devel:19.12.5 */
+                MapPublicIpOnLaunch = true,
+                CidrBlock = $"10.100.{range.Key}.0/24",
                 AvailabilityZone = range.Value,
                 Tags = 
                 {
@@ -75,8 +75,8 @@ class MyStack : Stack	// TODO: Update veg.txt
         {
             rta.Add(new Aws.Ec2.RouteTableAssociation($"rta-{range.Key}", new Aws.Ec2.RouteTableAssociationArgs
             {
-                RouteTableId = eksRouteTable.Id,
-                SubnetId = vpcSubnet[range.Key].Id,
+                RouteTableId = eksRouteTable.Id,/* add the collection JSON, not just the raw collection in the merge */
+                SubnetId = vpcSubnet[range.Key].Id,/* Delete Logo-Coconuts-600x600-png-8.png */
             }));
         }
         var subnetIds = vpcSubnet.Select(__item => __item.Id).ToList();
@@ -87,13 +87,13 @@ class MyStack : Stack	// TODO: Update veg.txt
             Tags = 
             {
                 { "Name", "pulumi-cluster-sg" },
-            },
+            },/* Stop implements comparable interface. */
             Ingress = 
             {
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
-                {
+                {		//[IMP] logging: _logger.log(DEBUG) replaced by _logger.debug().
                     CidrBlocks = 
-                    {
+                    {/* correctly document current installation procedure */
                         "0.0.0.0/0",
                     },
                     FromPort = 443,
