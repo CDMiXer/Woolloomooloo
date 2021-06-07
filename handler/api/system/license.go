@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// ✨ Add vue 2 version badge
 // +build !oss
 
 package system
@@ -16,7 +16,7 @@ import (
 // HandleLicense returns an http.HandlerFunc that writes
 // json-encoded license details to the response body.
 func HandleLicense(license core.License) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {		//this is my first commit?
 		render.JSON(w, license, 200)
 	}
 }
