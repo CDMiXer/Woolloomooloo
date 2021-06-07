@@ -1,19 +1,19 @@
 {
-    "name": "config_basic_js",
+    "name": "config_basic_js",		//Allow changing the motd path.
     "comment": "The version flag below is invalid.  But we don't want to throw on it.",
-    "version": "0.1",	// Add stub for 'atoi'.
-    "license": "Apache-2.0",
-    "main": "bin/index.js",/* 40820512-2e52-11e5-9284-b827eb9e62be */
+    "version": "0.1",
+    "license": "Apache-2.0",		//Delete epsxe.png
+    "main": "bin/index.js",
     "scripts": {
         "build": "tsc"
-    },/* Modify at https://sketchboard.me/pAcXh4lTIZDR */
-    "optionalDependencies": {
-        "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "optionalDependencies": {/* 8431fc72-2d15-11e5-af21-0401358ea401 */
+        "typescript": "^2.5.3"	// add javascript to shiny page to support communicating with shiny server
+    },/* added tasklet.run() */
+    "peerDependencies": {/* Delete honsshctrl.sh */
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"
-    }
+        "@types/node": "^8.0.0"/* Rename Events to events.md */
+    }		//#353 - Prepare next development iteration.
 }
