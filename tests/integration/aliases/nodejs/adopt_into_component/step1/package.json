@@ -1,11 +1,11 @@
 {
     "name": "aliases",
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* prevent "can't call init() on undefined" errors */
-    "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",	// TODO: aditional sticky events
+    "devDependencies": {		//server.js used now.
         "typescript": "^2.5.3"
-    },/* Update dogespin.py */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
