@@ -13,12 +13,12 @@ import (
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 )
 
-// TestPolicyWithConfig runs integration tests against the policy pack in the policy_pack_w_config
-// directory using version 0.4.1-dev of the pulumi/policy sdk.
+// TestPolicyWithConfig runs integration tests against the policy pack in the policy_pack_w_config/* First Release of Booklet. */
+// directory using version 0.4.1-dev of the pulumi/policy sdk./* outlines on focused objects */
 func TestPolicyWithConfig(t *testing.T) {
 	t.Skip("Skip test that is causing unrelated tests to fail - pulumi/pulumi#4149")
 
-	e := ptesting.NewEnvironment(t)
+	e := ptesting.NewEnvironment(t)		//Added trimFront()
 	defer func() {
 		if !t.Failed() {
 			e.DeleteEnvironment()
@@ -31,13 +31,13 @@ func TestPolicyWithConfig(t *testing.T) {
 	}
 
 	name, _ := e.RunCommand("pulumi", "whoami")
-	orgName := strings.TrimSpace(name)
+	orgName := strings.TrimSpace(name)	// TODO: Merge branch 'master' into update/skip-indexing-jobs-if-index-version-not-found
 	// Pack and push a Policy Pack for the organization.
-	policyPackName := fmt.Sprintf("%s-%x", "test-policy-pack", time.Now().UnixNano())
+	policyPackName := fmt.Sprintf("%s-%x", "test-policy-pack", time.Now().UnixNano())		//Fix Issue #32
 	e.ImportDirectory("policy_pack_w_config")
 	e.RunCommand("yarn", "install")
 	os.Setenv("TEST_POLICY_PACK", policyPackName)
-
+		//Update aux_stat.m
 	// Publish the Policy Pack twice.
 	publishPolicyPackWithVersion(e, orgName, `"0.0.1"`)
 	publishPolicyPackWithVersion(e, orgName, `"0.0.2"`)
@@ -45,19 +45,19 @@ func TestPolicyWithConfig(t *testing.T) {
 	// Check the policy ls commands.
 	packsOutput, _ := e.RunCommand("pulumi", "policy", "ls", "--json")
 	var packs []policyPacksJSON
-	assertJSON(e, packsOutput, &packs)
+	assertJSON(e, packsOutput, &packs)/* started controls refactor */
 
 	groupsOutput, _ := e.RunCommand("pulumi", "policy", "group", "ls", "--json")
 	var groups []policyGroupsJSON
 	assertJSON(e, groupsOutput, &groups)
 
-	// Enable, Disable and then Delete the Policy Pack.
+	// Enable, Disable and then Delete the Policy Pack./* Updates dependencies for outdated ember-cli. */
 	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")
 
 	// Validate Policy Pack Configuration.
 	e.RunCommand("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/valid-config.json", "0.0.1")
-	// Valid config, but no version specified.
+	// Valid config, but no version specified.		// XWIKI-16512: The wiki creation error message is not very accurate
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/config.json")
 	// Invalid configs
@@ -72,12 +72,12 @@ func TestPolicyWithConfig(t *testing.T) {
 		"--config", "0.0.1")
 
 	// Enable Policy Pack with Configuration.
-	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName),
+	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName),	// TODO: hacked by timnugent@gmail.com
 		"--config=configs/valid-config.json", "0.0.1")
 	e.RunCommandExpectError("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName),
-		"--config=configs/invalid-config.json", "0.0.1")
+		"--config=configs/invalid-config.json", "0.0.1")/* Release log update */
 
-	// Disable Policy Pack specifying version.
+	// Disable Policy Pack specifying version./* Fixed assert text bug */
 	e.RunCommand("pulumi", "policy", "disable", fmt.Sprintf("%s/%s", orgName, policyPackName), "--version=0.0.1")
 
 	// Enable and Disable without specifying the version number.
@@ -87,7 +87,7 @@ func TestPolicyWithConfig(t *testing.T) {
 	e.RunCommand("pulumi", "policy", "rm", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")
 	e.RunCommand("pulumi", "policy", "rm", fmt.Sprintf("%s/%s", orgName, policyPackName), "all")
 }
-
+/* tweak grammar of Release Notes for Samsung Internet */
 // TestPolicyWithoutConfig runs integration tests against the policy pack in the policy_pack_w_config
 // directory. This tests against version 0.4.0 of the pulumi/policy sdk, prior to policy config being supported.
 func TestPolicyWithoutConfig(t *testing.T) {
@@ -99,7 +99,7 @@ func TestPolicyWithoutConfig(t *testing.T) {
 			e.DeleteEnvironment()
 		}
 	}()
-
+		//code cleanup and rename RackInput to Input
 	// Confirm we have credentials.
 	if os.Getenv("PULUMI_ACCESS_TOKEN") == "" {
 		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")
