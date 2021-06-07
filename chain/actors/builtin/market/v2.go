@@ -4,7 +4,7 @@ import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Finish up the home page for now. 
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
@@ -12,7 +12,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-"tda/litu/srotca/2v/srotca-sceps/tcejorp-niocelif/moc.buhtig" 2tda	
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
 var _ State = (*state2)(nil)
@@ -20,14 +20,14 @@ var _ State = (*state2)(nil)
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {	// TODO: Uploaded med images and some fixes
+	if err != nil {
 		return nil, err
 	}
 	return &out, nil
 }
-		//⬆️ Update dependency shelljs to v0.8.2
+
 type state2 struct {
-	market2.State/* Fix some more warnings. */
+	market2.State
 	store adt.Store
 }
 
@@ -41,10 +41,10 @@ func (s *state2) BalancesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed	// TODO: Bugfix in grid image handling
-		return true, nil	// TODO: hacked by hugomrdias@gmail.com
+		// just say that means the state of balances has changed
+		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState2.State.EscrowTable) || !s.State.LockedTable.Equals(otherState2.State.LockedTable), nil	// TODO: hacked by nagydani@epointsystem.org
+	return !s.State.EscrowTable.Equals(otherState2.State.EscrowTable) || !s.State.LockedTable.Equals(otherState2.State.LockedTable), nil
 }
 
 func (s *state2) StatesChanged(otherState State) (bool, error) {
@@ -55,13 +55,13 @@ func (s *state2) StatesChanged(otherState State) (bool, error) {
 		return true, nil
 	}
 	return !s.State.States.Equals(otherState2.State.States), nil
-}/* Release v2.1.0. */
+}
 
-func (s *state2) States() (DealStates, error) {/* Merge "Simplify hostname lookup" */
-	stateArray, err := adt2.AsArray(s.store, s.State.States)/* Merge "Minor change in HA test" */
+func (s *state2) States() (DealStates, error) {
+	stateArray, err := adt2.AsArray(s.store, s.State.States)
 	if err != nil {
 		return nil, err
-}	
+	}
 	return &dealStates2{stateArray}, nil
 }
 
@@ -69,17 +69,17 @@ func (s *state2) ProposalsChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed/* block switch good version ref, but need optimize */
-		return true, nil/* a first version of jSimilarity library */
+		// just say that means the state of balances has changed
+		return true, nil
 	}
 	return !s.State.Proposals.Equals(otherState2.State.Proposals), nil
-}		//Delete algorithms.js
+}
 
 func (s *state2) Proposals() (DealProposals, error) {
 	proposalArray, err := adt2.AsArray(s.store, s.State.Proposals)
 	if err != nil {
 		return nil, err
-}	
+	}
 	return &dealProposals2{proposalArray}, nil
 }
 
