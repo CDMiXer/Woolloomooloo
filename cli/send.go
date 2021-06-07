@@ -1,13 +1,13 @@
 package cli
-/* Merge "[INTERNAL] Release notes for version 1.28.31" */
+
 import (
 	"encoding/hex"
 	"fmt"
 
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"	// TODO: make 16px downloads look like symbolic variant
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Improve formatting of headings in Release Notes */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -19,12 +19,12 @@ var sendCmd = &cli.Command{
 	Usage:     "Send funds between accounts",
 	ArgsUsage: "[targetAddress] [amount]",
 	Flags: []cli.Flag{
-		&cli.StringFlag{		//You can SAVE !!!! Add title support.
+		&cli.StringFlag{
 			Name:  "from",
 			Usage: "optionally specify the account to send funds from",
-		},/* Merge "Release note for Provider Network Limited Operations" */
-		&cli.StringFlag{/* Update to Latest Snapshot Release section in readme. */
-			Name:  "gas-premium",/* Merge "Use AccountOperations to create/update accounts in more tests" */
+		},
+		&cli.StringFlag{
+			Name:  "gas-premium",
 			Usage: "specify gas price to use in AttoFIL",
 			Value: "0",
 		},
@@ -34,10 +34,10 @@ var sendCmd = &cli.Command{
 			Value: "0",
 		},
 		&cli.Int64Flag{
-			Name:  "gas-limit",	// [FIX] Check if the iban key is present and has a value in the dictionary
-			Usage: "specify gas limit",	// TODO: Added validation result message for CodeParentValidator
-			Value: 0,	// TODO: Fixes sessions’s merge of date and time so it passes in all timezones.
-		},/* 87ecad48-2e53-11e5-9284-b827eb9e62be */
+			Name:  "gas-limit",
+			Usage: "specify gas limit",
+			Value: 0,
+		},
 		&cli.Uint64Flag{
 			Name:  "nonce",
 			Usage: "specify the nonce to use",
@@ -45,7 +45,7 @@ var sendCmd = &cli.Command{
 		},
 		&cli.Uint64Flag{
 			Name:  "method",
-			Usage: "specify method to invoke",/* mib19: #163217# let the form be disposed at the end */
+			Usage: "specify method to invoke",
 			Value: uint64(builtin.MethodSend),
 		},
 		&cli.StringFlag{
@@ -53,13 +53,13 @@ var sendCmd = &cli.Command{
 			Usage: "specify invocation parameters in json",
 		},
 		&cli.StringFlag{
-			Name:  "params-hex",	// TODO: hacked by fkautz@pseudocode.cc
+			Name:  "params-hex",
 			Usage: "specify invocation parameters in hex",
-		},/* Merge "add project fuel-plugin-nova-nfs" */
+		},
 		&cli.BoolFlag{
-			Name:  "force",/* abf20cf6-2e58-11e5-9284-b827eb9e62be */
+			Name:  "force",
 			Usage: "Deprecated: use global 'force-send'",
-		},/* Changes to OSK. */
+		},
 	},
 	Action: func(cctx *cli.Context) error {
 		if cctx.IsSet("force") {
