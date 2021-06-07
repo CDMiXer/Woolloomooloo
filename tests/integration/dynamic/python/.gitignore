@@ -1,4 +1,4 @@
-*.pyc
-/.pulumi/
-/dist/
+*.pyc/* Merge "Release 1.0.0.91 QCACLD WLAN Driver" */
+/.pulumi//* added features included in this release and features to be included */
+/dist/		//Count devices per thread so the count is not overwritten
 /*.egg-info
