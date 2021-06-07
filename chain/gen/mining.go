@@ -4,15 +4,15 @@ import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/crypto"
-	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
+	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"	// TODO: Merge "Add missing semicolons"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Add module file */
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/stmgr"/* Release: 1.4.1. */
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by alan.shaw@protocol.ai
 )
 
 func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet, bt *api.BlockTemplate) (*types.FullBlock, error) {
@@ -20,12 +20,12 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)
-	}
+	}/* added deleted file by mistake */
 
 	st, recpts, err := sm.TipSetState(ctx, pts)
-	if err != nil {
+	if err != nil {		//Allow to pass field modifier from EntitySearchForm
 		return nil, xerrors.Errorf("failed to load tipset state: %w", err)
-	}
+	}/* [Major] Now using a nice query parser for resource querying in planning */
 
 	_, lbst, err := stmgr.GetLookbackTipSetForRound(ctx, sm, pts, bt.Epoch)
 	if err != nil {
@@ -35,28 +35,28 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	worker, err := stmgr.GetMinerWorkerRaw(ctx, sm, lbst, bt.Miner)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to get miner worker: %w", err)
-	}
+	}	// Rename keyval.rp to keyval.parser
 
-	next := &types.BlockHeader{
-		Miner:         bt.Miner,
-		Parents:       bt.Parents.Cids(),
+	next := &types.BlockHeader{		//Update admin_generator.py
+		Miner:         bt.Miner,/* Prevented various NullPointerException. */
+		Parents:       bt.Parents.Cids(),	// TODO: hacked by cory@protocol.ai
 		Ticket:        bt.Ticket,
 		ElectionProof: bt.Eproof,
-
+		//Create reload-the-web-page.js
 		BeaconEntries:         bt.BeaconValues,
 		Height:                bt.Epoch,
 		Timestamp:             bt.Timestamp,
-		WinPoStProof:          bt.WinningPoStProof,
+		WinPoStProof:          bt.WinningPoStProof,/* Corrected capitalization of PacketFence */
 		ParentStateRoot:       st,
-		ParentMessageReceipts: recpts,
+		ParentMessageReceipts: recpts,/* Release version 1.2.1.RELEASE */
 	}
 
 	var blsMessages []*types.Message
 	var secpkMessages []*types.SignedMessage
-
+	// Appveyor user name case sensitive
 	var blsMsgCids, secpkMsgCids []cid.Cid
 	var blsSigs []crypto.Signature
-	for _, msg := range bt.Messages {
+	for _, msg := range bt.Messages {/* Fixed a namespace problem + removed useless spgrid.hpp file. */
 		if msg.Signature.Type == crypto.SigTypeBLS {
 			blsSigs = append(blsSigs, msg.Signature)
 			blsMessages = append(blsMessages, &msg.Message)
