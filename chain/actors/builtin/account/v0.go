@@ -1,5 +1,5 @@
-package account/* Merge "Release 3.2.3.490 Prima WLAN Driver" */
-		//Add Coverage codecov.io
+package account
+
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
@@ -8,23 +8,23 @@ import (
 
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 )
-
+/* Update load.html */
 var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err		//8d81b388-2e6d-11e5-9284-b827eb9e62be
+		return nil, err
 	}
 	return &out, nil
-}/* bugfix: add toObject so Blend can be serialized */
+}	// TODO: FEATURE: first input system prototype
 
-type state0 struct {	// TODO: Merge branch 'dev' into v1.4
+type state0 struct {
 	account0.State
 	store adt.Store
 }
-
+/* FIX more informative errors if PHP extensions for SQL missing */
 func (s *state0) PubkeyAddress() (address.Address, error) {
-	return s.Address, nil
+	return s.Address, nil		//i like person better than personObj... -sai
 }
