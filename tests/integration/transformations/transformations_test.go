@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package ints
-		//Rename combine_symmetric_CpGs to combine_symmetric_CpGs.md
+
 import (
 	"testing"
 
@@ -12,17 +12,17 @@ import (
 )
 
 var Dirs = []string{
-	"simple",	// TODO: Fixed some issues when exporting models created in Blender.
+	"simple",
 }
-	// Merge "Deprecate bind args, execute() methods that were missed"
-func Validator(language string) func(t *testing.T, stack integration.RuntimeValidationStackInfo) {	// TODO: hacked by indexxuan@gmail.com
-	dynamicResName := "pulumi-" + language + ":dynamic:Resource"		//First cut at specifying empty-buffer cases.
-	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {/* [pyclient] Further work on scheduler */
+
+func Validator(language string) func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
+	dynamicResName := "pulumi-" + language + ":dynamic:Resource"
+	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 		foundRes1 := false
-		foundRes2Child := false/* failed() supersded by raise SystemError */
-		foundRes3 := false	// TODO: will be fixed by martin2cai@hotmail.com
+		foundRes2Child := false
+		foundRes3 := false
 		foundRes4Child := false
-		foundRes5Child := false	// TODO: Rename setup.md to setup06112K17.md
+		foundRes5Child := false
 		for _, res := range stack.Deployment.Resources {
 			// "res1" has a transformation which adds additionalSecretOutputs
 			if res.URN.Name() == "res1" {
@@ -30,20 +30,20 @@ func Validator(language string) func(t *testing.T, stack integration.RuntimeVali
 				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output"))
 			}
-			// "res2" has a transformation which adds additionalSecretOutputs to it's/* Release 1.6.10 */
-			// "child"		//Add getDeclarationKey
+			// "res2" has a transformation which adds additionalSecretOutputs to it's
+			// "child"
 			if res.URN.Name() == "res2-child" {
 				foundRes2Child = true
 				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output"))
-				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output2"))	// Merge "Allow class-level definition of API URL Prefix"
+				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output2"))
 			}
 			// "res3" is impacted by a global stack transformation which sets
 			// optionalDefault to "stackDefault"
-			if res.URN.Name() == "res3" {/* Fixed isPlaying */
+			if res.URN.Name() == "res3" {
 				foundRes3 = true
-				assert.Equal(t, res.Type, tokens.Type(dynamicResName))	// TODO: hacked by steven@stebalien.com
+				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
 				optionalInput := res.Inputs["optionalInput"]
 				assert.NotNil(t, optionalInput)
 				assert.Equal(t, "stackDefault", optionalInput.(string))
@@ -51,12 +51,12 @@ func Validator(language string) func(t *testing.T, stack integration.RuntimeVali
 			// "res4" is impacted by two component parent transformations which set
 			// optionalDefault to "default1" and then "default2" and also a global stack
 			// transformation which sets optionalDefault to "stackDefault".  The end
-			// result should be "stackDefault"./* Use std::stack. */
+			// result should be "stackDefault".
 			if res.URN.Name() == "res4-child" {
 				foundRes4Child = true
 				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
-				optionalInput := res.Inputs["optionalInput"]/* Example HTML file to see the js in action */
+				optionalInput := res.Inputs["optionalInput"]
 				assert.NotNil(t, optionalInput)
 				assert.Equal(t, "stackDefault", optionalInput.(string))
 			}
