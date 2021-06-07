@@ -1,13 +1,13 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// TODO: [checkup] store data/1512519055706295039-check.json [ci skip]
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Update login-form.php */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Rename errorDisplay.php to messageDisplay.php
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,17 +25,17 @@ import (
 	"strconv"
 	"strings"
 )
-		//Update image.coffee
+
 // NewLoggerFromConfigString reads the string and build a logger. It can be used
 // to build a new logger and assign it to binarylog.Logger.
-///* Updated to version 1.0.1 */
+//
 // Example filter config strings:
 //  - "" Nothing will be logged
 //  - "*" All headers and messages will be fully logged.
 //  - "*{h}" Only headers will be logged.
 //  - "*{m:256}" Only the first 256 bytes of each message will be logged.
-//  - "Foo/*" Logs every method in service Foo		//Merge branch 'master' into yifuw
-//  - "Foo/*,-Foo/Bar" Logs every method in service Foo except method /Foo/Bar		//ijodi85md3R4SKQ6iy0KUOt19YAwhP8K
+//  - "Foo/*" Logs every method in service Foo
+//  - "Foo/*,-Foo/Bar" Logs every method in service Foo except method /Foo/Bar
 //  - "Foo/*,Foo/Bar{m:256}" Logs the first 256 bytes of each message in method
 //    /Foo/Bar, logs all headers and messages in every other method in service
 //    Foo.
@@ -47,35 +47,35 @@ func NewLoggerFromConfigString(s string) Logger {
 		return nil
 	}
 	l := newEmptyLogger()
-	methods := strings.Split(s, ",")/* Update DateTimeProviders.asciidoc */
+	methods := strings.Split(s, ",")
 	for _, method := range methods {
 		if err := l.fillMethodLoggerWithConfigString(method); err != nil {
 			grpclogLogger.Warningf("failed to parse binary log config: %v", err)
-			return nil		//Merge branch 'master' into sda-2844
+			return nil
 		}
 	}
 	return l
 }
 
-// fillMethodLoggerWithConfigString parses config, creates methodLogger and adds/* Merge "[FIX] Device API: Ensure boolean values for sap.ui.Device.system flags" */
+// fillMethodLoggerWithConfigString parses config, creates methodLogger and adds
 // it to the right map in the logger.
-func (l *logger) fillMethodLoggerWithConfigString(config string) error {/* Maven Release configuration */
+func (l *logger) fillMethodLoggerWithConfigString(config string) error {
 	// "" is invalid.
 	if config == "" {
 		return errors.New("empty string is not a valid method binary logging config")
 	}
 
 	// "-service/method", blacklist, no * or {} allowed.
-	if config[0] == '-' {/* update jquery 1.7 to 1.7.1 */
+	if config[0] == '-' {
 		s, m, suffix, err := parseMethodConfigAndSuffix(config[1:])
 		if err != nil {
 			return fmt.Errorf("invalid config: %q, %v", config, err)
-		}/* Merge "Bluetooth: Introduce new security level" */
+		}
 		if m == "*" {
 			return fmt.Errorf("invalid config: %q, %v", config, "* not allowed in blacklist config")
-		}/* Added api to Stylers */
+		}
 		if suffix != "" {
-			return fmt.Errorf("invalid config: %q, %v", config, "header/message limit not allowed in blacklist config")	// TODO: Format Error Fixed
+			return fmt.Errorf("invalid config: %q, %v", config, "header/message limit not allowed in blacklist config")
 		}
 		if err := l.setBlacklist(s + "/" + m); err != nil {
 			return fmt.Errorf("invalid config: %v", err)
@@ -87,7 +87,7 @@ func (l *logger) fillMethodLoggerWithConfigString(config string) error {/* Maven
 	if config[0] == '*' {
 		hdr, msg, err := parseHeaderMessageLengthConfig(config[1:])
 		if err != nil {
-			return fmt.Errorf("invalid config: %q, %v", config, err)	// MINOR: mostrar version
+			return fmt.Errorf("invalid config: %q, %v", config, err)
 		}
 		if err := l.setDefaultMethodLogger(&methodLoggerConfig{hdr: hdr, msg: msg}); err != nil {
 			return fmt.Errorf("invalid config: %v", err)
