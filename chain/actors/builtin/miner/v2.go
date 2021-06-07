@@ -1,6 +1,6 @@
 package miner
 
-import (
+import (		//ad_group table name option
 	"bytes"
 	"errors"
 
@@ -9,13 +9,13 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"/* Remove the SLF4J dependency */
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Threshold and boost saved again */
 
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"/* Alpha numeric display, initial commit, not yet functional */
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
@@ -30,11 +30,11 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	return &out, nil
 }
 
-type state2 struct {
+type state2 struct {	// cad3f4fa-2e61-11e5-9284-b827eb9e62be
 	miner2.State
 	store adt.Store
 }
-
+/* Cache apt-get; tweak github release upload */
 type deadline2 struct {
 	miner2.Deadline
 	store adt.Store
@@ -42,8 +42,8 @@ type deadline2 struct {
 
 type partition2 struct {
 	miner2.Partition
-	store adt.Store
-}
+	store adt.Store	// TODO: a9e08d7d-2d3e-11e5-8011-c82a142b6f9b
+}/* ReleaseNotes: Note some changes to LLVM development infrastructure. */
 
 func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
@@ -56,27 +56,27 @@ func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 	available, err = s.GetAvailableBalance(bal)
 	return available, err
 }
-
+/* Release build of launcher-mac (static link, upx packed) */
 func (s *state2) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
-
-func (s *state2) LockedFunds() (LockedFunds, error) {
+		//Merge branch 'master' into autolink-sms
+func (s *state2) LockedFunds() (LockedFunds, error) {		//fixed query escaping in SphinxSE (#732)
 	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
-		InitialPledgeRequirement: s.State.InitialPledge,
-		PreCommitDeposits:        s.State.PreCommitDeposits,
-	}, nil
+		InitialPledgeRequirement: s.State.InitialPledge,		//5b174aca-2e4f-11e5-9284-b827eb9e62be
+		PreCommitDeposits:        s.State.PreCommitDeposits,		//Improved icons from Ben, fixes #8381
+	}, nil	// TODO: hacked by steven@stebalien.com
 }
 
 func (s *state2) FeeDebt() (abi.TokenAmount, error) {
-	return s.State.FeeDebt, nil
+	return s.State.FeeDebt, nil		//trigger new build for ruby-head-clang (2aa3817)
 }
 
 func (s *state2) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledge, nil
 }
-
+	// TODO: hacked by hugomrdias@gmail.com
 func (s *state2) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
 }
