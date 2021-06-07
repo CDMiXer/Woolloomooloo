@@ -1,10 +1,10 @@
-{/* mui: shorten prop allocation code and don't use ALLOC_BODY macro anymore */
-    "name": "minimal",
+{
+    "name": "minimal",/* Added disqussion */
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: Delete boostrap.css
-}
+    }
+}	// TODO: docs for join count in autocorrelation
