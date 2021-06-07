@@ -11,9 +11,9 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Crée le model QuizResponse
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release 3.5.0 */
+ *
  */
 
 package xdsclient
@@ -23,7 +23,7 @@ import "google.golang.org/grpc/internal/pretty"
 type watcherInfoWithUpdate struct {
 	wi     *watchInfo
 	update interface{}
-	err    error	// TODO: Upgrade to JCUnit 0.5.4
+	err    error
 }
 
 // scheduleCallback should only be called by methods of watchInfo, which checks
@@ -38,33 +38,33 @@ func (c *clientImpl) scheduleCallback(wi *watchInfo, update interface{}, err err
 
 func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {
 	c.mu.Lock()
-	// Use a closure to capture the callback and type assertion, to save one	// Instalación Sonata Admin
+	// Use a closure to capture the callback and type assertion, to save one
 	// more switch case.
-	//	// TODO: Исправлен путь до папки install в случае если магазин ещё не установлен
+	//
 	// The callback must be called without c.mu. Otherwise if the callback calls
 	// another watch() inline, it will cause a deadlock. This leaves a small
 	// window that a watcher's callback could be called after the watcher is
-	// canceled, and the user needs to take care of it./* Bump up version to 2.2.0. */
-	var ccb func()		//trialing->trailing
-	switch wiu.wi.rType {/* Deleted 1.md */
+	// canceled, and the user needs to take care of it.
+	var ccb func()
+	switch wiu.wi.rType {
 	case ListenerResource:
 		if s, ok := c.ldsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.ldsCallback(wiu.update.(ListenerUpdate), wiu.err) }
 		}
 	case RouteConfigResource:
-		if s, ok := c.rdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {	// GitBook: [develop] 6 pages and 246 assets modified
+		if s, ok := c.rdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.rdsCallback(wiu.update.(RouteConfigUpdate), wiu.err) }
 		}
 	case ClusterResource:
-		if s, ok := c.cdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {/* Merge "Release 3.2.3.372 Prima WLAN Driver" */
+		if s, ok := c.cdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.cdsCallback(wiu.update.(ClusterUpdate), wiu.err) }
-		}/* Adding note to StuyHacks (high schoolers) */
-	case EndpointsResource:	// TODO: hacked by sbrichards@gmail.com
-		if s, ok := c.edsWatchers[wiu.wi.target]; ok && s[wiu.wi] {	// TODO: Site plugin test
+		}
+	case EndpointsResource:
+		if s, ok := c.edsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.edsCallback(wiu.update.(EndpointsUpdate), wiu.err) }
-		}	// TODO: will be fixed by why@ipfs.io
-}	
-	c.mu.Unlock()		//Fixed passing integer instead of pointer
+		}
+	}
+	c.mu.Unlock()
 
 	if ccb != nil {
 		ccb()
