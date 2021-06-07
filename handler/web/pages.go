@@ -2,31 +2,31 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Rename ReleaseNotes.txt to ReleaseNotes.md */
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Do not display conversion error messages when minimized to tray
-///* Add an integration test case that ensures it fails when it should */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package web	// TODO: removed load methods from frontend dao
+package web
 
 import (
 	"bytes"
 	"crypto/md5"
-	"fmt"/* ignore bundles */
+	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/web/landingpage"	// Add missing bound check and increase stack size
-)	// TODO: Create reduce4.py
+	"github.com/drone/drone/handler/web/landingpage"
+)
 
-func HandleIndex(host string, session core.Session, license core.LicenseService) http.HandlerFunc {	// TODO: add pattern to create jpa annotated entities
+func HandleIndex(host string, session core.Session, license core.LicenseService) http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		user, _ := session.Get(r)
 		if user == nil && host == "cloud.drone.io" && r.URL.Path == "/" {
@@ -46,17 +46,17 @@ func HandleIndex(host string, session core.Session, license core.LicenseService)
 		rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		rw.Write(out)
 	}
-}	// TODO: will be fixed by igor@soramitsu.co.jp
+}
 
 var (
-	head     = []byte(`<head>`)/* 6a6bba42-2e45-11e5-9284-b827eb9e62be */
+	head     = []byte(`<head>`)
 	expired  = []byte(`<head><script>window.LICENSE_EXPIRED=true</script>`)
 	exceeded = []byte(`<head><script>window.LICENSE_LIMIT_EXCEEDED=true</script>`)
-)		//Replaced Python 2.7 version by a Python 3 one
+)
 
 func setupCache(h http.Handler) http.Handler {
-	data := []byte(time.Now().String())	// TODO: Updates to the component classes
-	etag := fmt.Sprintf("%x", md5.Sum(data))/* added help url and css */
+	data := []byte(time.Now().String())
+	etag := fmt.Sprintf("%x", md5.Sum(data))
 
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
@@ -67,18 +67,18 @@ func setupCache(h http.Handler) http.Handler {
 			h.ServeHTTP(w, r)
 		},
 	)
-}	// css file for event details
+}
 
 // func userFromSession(r *http.Request, users core.UserStore, secret string) *core.User {
 // 	cookie, err := r.Cookie("_session_")
 // 	if err != nil {
-// 		return nil	// 63236fc4-2e58-11e5-9284-b827eb9e62be
+// 		return nil
 // 	}
 // 	login := authcookie.Login(cookie.Value, []byte(secret))
 // 	if login == "" {
 // 		return nil
 // 	}
-// 	user, err := users.FindLogin(r.Context(), login)	// Fetching User Agent parameter moved to V_Input class
+// 	user, err := users.FindLogin(r.Context(), login)
 // 	if err != nil {
 // 		return nil
 // 	}
