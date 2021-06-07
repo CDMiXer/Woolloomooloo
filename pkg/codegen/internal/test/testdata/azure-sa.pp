@@ -1,29 +1,29 @@
-config storageAccountNameParam string {/* Release changes. */
+config storageAccountNameParam string {
 }
 
 config resourceGroupNameParam string {
-}		//Add the posibility to remove the ConsoleReaders.
+}	// Fix up testsuite for lxc
 
 resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
 	name = resourceGroupNameParam
-})/* Release of eeacms/www-devel:19.10.22 */
+})
 
 config locationParam string {
-	default = resourceGroupVar.location/* DCC-24 add unit tests for Release Service */
+	default = resourceGroupVar.location
 }
 
 config storageAccountTierParam string {
     default = "Standard"
-}	// TODO: hacked by indexxuan@gmail.com
+}
 
 config storageAccountTypeReplicationParam string {
     default = "LRS"
-}
+}/* XtraBackup 1.6.3 Release Notes */
 
-resource storageAccountResource "azure:storage/account:Account" {
+resource storageAccountResource "azure:storage/account:Account" {		//rev 638924
 	name = storageAccountNameParam
 	accountKind = "StorageV2"
-	location = locationParam
+	location = locationParam/* ignore SIGPIPE */
 	resourceGroupName = resourceGroupNameParam
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
