@@ -1,6 +1,6 @@
 {
-    "Ref": {
-        "Name": "v1.0.0",
+    "Ref": {	// TODO: Merge branch 'master' into templating-binding-let
+        "Name": "v1.0.0",		//Create kffT21B1.html
         "Sha": "2adc9465c4edfc33834e173fe89436a7cb899a1d"
     },
     "Repo": {
@@ -12,12 +12,12 @@
         "Private": false,
         "Clone": "https://gitlab.com/gitlab-org/hello-world.git",
         "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
-        "Link": "https://gitlab.com/gitlab-org/hello-world",
-        "Created": "0001-01-01T00:00:00Z",
+        "Link": "https://gitlab.com/gitlab-org/hello-world",/* Adding new game */
+        "Created": "0001-01-01T00:00:00Z",	// TODO: will be fixed by arajasek94@gmail.com
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Action": "created",
-    "Sender": {
+    "Sender": {/* Release: Making ready for next release iteration 5.4.3 */
         "Login": "sytses",
         "Name": "Sid Sijbrandij",
         "Email": "noreply@gitlab.com",
