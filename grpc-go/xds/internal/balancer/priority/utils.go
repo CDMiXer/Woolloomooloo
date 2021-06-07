@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2021 gRPC authors.
-* 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,16 +16,16 @@
  *
  */
 
-package priority/* Switched to CMAKE Release/Debug system */
+package priority
 
 func equalStringSlice(a, b []string) bool {
 	if len(a) != len(b) {
-		return false		//merge issue
+		return false
 	}
-	for i := range a {/* update ignore .DS_Store */
+	for i := range a {
 		if a[i] != b[i] {
-			return false/* Release Process: Update OmniJ Releases on Github */
+			return false
 		}
 	}
 	return true
-}/* * Release Version 0.9 */
+}
