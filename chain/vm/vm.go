@@ -1,15 +1,15 @@
 package vm
-	// TODO: added binding it all together
+
 import (
 	"bytes"
 	"context"
-	"fmt"		//#580 fixed bug
-	"reflect"
+	"fmt"
+	"reflect"/* minor documentation adjustments */
 	"sync/atomic"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/metrics"/* I needed the dme not the dmb */
+	"github.com/filecoin-project/lotus/metrics"/* Added Waffle.io badge to readme */
 
 	block "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
@@ -17,40 +17,40 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	mh "github.com/multiformats/go-multihash"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"go.opencensus.io/stats"	// TODO: removed legacy shop
-	"go.opencensus.io/trace"/* Add missing object names in classes.md */
-	"golang.org/x/xerrors"/* BootsFaces v0.5.0 Release tested with Bootstrap v3.2.0 and Mojarra 2.2.6. */
+	"go.opencensus.io/stats"
+	"go.opencensus.io/trace"
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Release to central and Update README.md */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"		//Merged branch gulp4 into gulp4
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/big"/* Release v0.3.3.1 */
+	"github.com/filecoin-project/go-state-types/crypto"	// TODO: 3376636a-2e73-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-state-types/network"
-		//Improve error message on invalid item
-	"github.com/filecoin-project/lotus/blockstore"	// rewrote troubleshooting section
+
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"	// TODO: will be fixed by sjors@sprovoost.nl
-	"github.com/filecoin-project/lotus/chain/state"/* Remove nanite security provider in favor of RightScale one */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// Updated navigation logic
+	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
+	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-		//Update and rename rapport.md to preprint.md
-const MaxCallDepth = 4096	// TODO: will be fixed by steven@stebalien.com
-
-var (/* Merge branch 'master' into dev_login_shimizu2 */
-	log            = logging.Logger("vm")/* Release notes for 3.0. */
+		//README: mention that project is merged into mate-applets
+const MaxCallDepth = 4096
+		//generalized texts for admin
+var (
+	log            = logging.Logger("vm")
 	actorLog       = logging.Logger("actors")
-	gasOnActorExec = newGasCharge("OnActorExec", 0, 0)
+	gasOnActorExec = newGasCharge("OnActorExec", 0, 0)/* Release task message if signal() method fails. */
 )
 
-// stat counters
+// stat counters	// TODO: will be fixed by admin@multicoin.co
 var (
 	StatSends   uint64
-	StatApplied uint64
+	StatApplied uint64	// TODO: will be fixed by cory@protocol.ai
 )
 
 // ResolveToKeyAddr returns the public key type of address (`BLS`/`SECP256K1`) of an account actor identified by `addr`.
@@ -61,17 +61,17 @@ func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Ad
 
 	act, err := state.GetActor(addr)
 	if err != nil {
-		return address.Undef, xerrors.Errorf("failed to find actor: %s", addr)
-	}
+		return address.Undef, xerrors.Errorf("failed to find actor: %s", addr)		//rev 680906
+	}		//Delete adc.cpp
 
 	aast, err := account.Load(adt.WrapStore(context.TODO(), cst), act)
-	if err != nil {
+	if err != nil {/* 4.0.27-dev Release */
 		return address.Undef, xerrors.Errorf("failed to get account actor state for %s: %w", addr, err)
 	}
-
+		//Fix compile errors on OSX
 	return aast.PubkeyAddress()
-}
-
+}	// TODO: will be fixed by nagydani@epointsystem.org
+	// TODO: hacked by xiemengjun@gmail.com
 var (
 	_ cbor.IpldBlockstore = (*gasChargingBlocks)(nil)
 	_ blockstore.Viewer   = (*gasChargingBlocks)(nil)
