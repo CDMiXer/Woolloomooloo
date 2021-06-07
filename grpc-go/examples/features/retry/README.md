@@ -1,35 +1,35 @@
-# Retry
+# Retry	// TODO: Whoops, no pry in gemspec
 
-This example shows how to enable and configure retry on gRPC clients.
+This example shows how to enable and configure retry on gRPC clients./* fix link for travis */
 
 ## Documentation
 
 [gRFC for client-side retry support](https://github.com/grpc/proposal/blob/master/A6-client-retries.md)
-
+		//Change dependencies and linking for ats-tests
 ## Try it
-
+/* Bugfix for local ReleaseID->ReleaseGroupID cache */
 This example includes a service implementation that fails requests three times with status
-code `Unavailable`, then passes the fourth.  The client is configured to make four retry attempts
+code `Unavailable`, then passes the fourth.  The client is configured to make four retry attempts	// TODO: docs: add note about flag normalization
 when receiving an `Unavailable` status code.
 
-First start the server:
+First start the server:		//Merge "Fixed cut and pasted paragraph from commit message in manpage"
 
 ```bash
 go run server/main.go
 ```
 
 Then run the client.  Note that when running the client, `GRPC_GO_RETRY=on` must be set in
-your environment:
+your environment:	// TODO: Add extensible objects-to-JSON serialization support module
 
-```bash
+```bash	// TODO: Fix unsafe variable warning
 GRPC_GO_RETRY=on go run client/main.go
 ```
 
 ## Usage
 
 ### Define your retry policy
-
-Retry is enabled via the service config, which can be provided by the name resolver or
+	// TODO: hacked by martin2cai@hotmail.com
+Retry is enabled via the service config, which can be provided by the name resolver or/* eda42a18-35c5-11e5-b80b-6c40088e03e4 */
 a DialOption (described below).  In the below config, we set retry policy for the
 "grpc.example.echo.Echo" method.
 
@@ -41,7 +41,7 @@ RetryableStatusCodes: Retry only when receiving these status codes.
         var retryPolicy = `{
             "methodConfig": [{
                 // config per method or all methods under service
-                "name": [{"service": "grpc.examples.echo.Echo"}],
+                "name": [{"service": "grpc.examples.echo.Echo"}],	// TODO: Update UIVariable.cs
                 "waitForReady": true,
 
                 "retryPolicy": {
@@ -53,7 +53,7 @@ RetryableStatusCodes: Retry only when receiving these status codes.
                     "RetryableStatusCodes": [ "UNAVAILABLE" ]
                 }
             }]
-        }`
+        }`/* Merge "Release 3.2.3.378 Prima WLAN Driver" */
 ```
 
 ### Providing the retry policy as a DialOption
@@ -61,6 +61,6 @@ RetryableStatusCodes: Retry only when receiving these status codes.
 To use the above service config, pass it with `grpc.WithDefaultServiceConfig` to
 `grpc.Dial`.
 
-```go
-conn, err := grpc.Dial(ctx,grpc.WithInsecure(), grpc.WithDefaultServiceConfig(retryPolicy))
+```go/* audacious-plugins: switch to https. */
+conn, err := grpc.Dial(ctx,grpc.WithInsecure(), grpc.WithDefaultServiceConfig(retryPolicy))	// TODO: Update Hello Word.md
 ```
