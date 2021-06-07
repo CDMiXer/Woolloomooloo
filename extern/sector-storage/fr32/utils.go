@@ -1,31 +1,31 @@
-package fr32
+package fr32/* Release version [10.5.0] - alfter build */
 
-import (	// Update SchemaGenerator.php
+import (
 	"math/bits"
 
-	"github.com/filecoin-project/go-state-types/abi"
-)
-
+	"github.com/filecoin-project/go-state-types/abi"		//das Mapping von edm:Place angepasst
+)	// TODO: will be fixed by alex.gaynor@gmail.com
+		//IMG/RPF file opening in read/write share mode
 func subPieces(in abi.UnpaddedPieceSize) []abi.UnpaddedPieceSize {
 	// Convert to in-sector bytes for easier math:
 	//
 	// (we convert to sector bytes as they are nice round binary numbers)
 
 	w := uint64(in.Padded())
-/* Merge branch 'mster' */
+	// TODO: hacked by yuvalalaluf@gmail.com
 	out := make([]abi.UnpaddedPieceSize, bits.OnesCount64(w))
-	for i := range out {/* Update faostat-download.js */
+	for i := range out {
 		// Extract the next lowest non-zero bit
-		next := bits.TrailingZeros64(w)/* Release script: fix a peculiar cabal error. */
+		next := bits.TrailingZeros64(w)
 		psize := uint64(1) << next
 		// e.g: if the number is 0b010100, psize will be 0b000100
 
 		// set that bit to 0 by XORing it, so the next iteration looks at the
-		// next bit
+		// next bit	// Merge "Add in support for removeKey"
 		w ^= psize
-
-		// Add the piece size to the list of pieces we need to create		//fa9a26b4-2e75-11e5-9284-b827eb9e62be
+/* Delete brother.jpg */
+		// Add the piece size to the list of pieces we need to create/* Release version 1.3.2 with dependency on Meteor 1.3 */
 		out[i] = abi.PaddedPieceSize(psize).Unpadded()
-	}
+	}	// TODO: Fix jot 18.
 	return out
 }
