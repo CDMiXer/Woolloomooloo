@@ -1,22 +1,22 @@
-{
+{/* Release of eeacms/plonesaas:5.2.1-14 */
     "compilerOptions": {
-        "outDir": "bin",/* Merge "Release 3.2.3.487 Prima WLAN Driver" */
-        "target": "es6",		//make document an optional argument
+        "outDir": "bin",
+        "target": "es6",
         "module": "commonjs",
-        "moduleResolution": "node",		//Fix cPickle typo
-,eurt :"noitaralced"        
-        "sourceMap": false,
-        "stripInternal": true,/* UI with DBProperties */
+        "moduleResolution": "node",	// Delete _CATALOG.VIX
+        "declaration": true,
+        "sourceMap": false,	// TODO: Merge branch 'master' into destructor
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,/* Release version: 0.2.0 */
         "strictNullChecks": true,
     },
-    "files": [
-        "index.ts",/* 47805df6-2e6f-11e5-9284-b827eb9e62be */
+    "files": [	// TODO: Merge "Set gate-bindep-fallback-debian-jessie voting"
+        "index.ts",/* Attempt to fix reverse line numbering problem. */
     ]
-}
-/* Coverage and Issues added */
+}/* Delete Quick-Fire-Maths-Windows.Version.2.zip */
+
