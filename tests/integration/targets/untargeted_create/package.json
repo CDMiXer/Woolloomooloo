@@ -1,15 +1,15 @@
 {
-    "name": "stack_project_name",		//Preliminary HQ support, some fixes
+    "name": "stack_project_name",
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// TODO: hacked by hello@brooklynzelenka.com
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },
+    },/* 57618b04-2e75-11e5-9284-b827eb9e62be */
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Release version 0.12. */
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: Port 'rename' feature from beats-dashboards (#1439)
         "@pulumi/pulumi": "latest"
-    }
+    }	// TODO: Removed golang version dependency, use the latest
 }
