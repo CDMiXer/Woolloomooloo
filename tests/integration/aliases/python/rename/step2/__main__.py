@@ -5,8 +5,8 @@ from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
-	// TODO: RE #26572 Save button disabled after algorithm is launched
+
 # Scenario #1 - rename a resource
 # This resource was previously named `res1`, we'll alias to the old name.
-res1 = Resource1("newres1", ResourceOptions(	// Temporary commit(still not working as expected)
+res1 = Resource1("newres1", ResourceOptions(
     aliases=[Alias(name="res1")]))
