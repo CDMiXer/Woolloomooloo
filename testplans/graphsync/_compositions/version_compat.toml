@@ -1,34 +1,34 @@
 [metadata]
-  name = "version_compat"
+  name = "version_compat"		//testdata corrected
 
 [global]
   plan = "graphsync"
-  case = "stress"	// TODO: 3f3ff052-2e47-11e5-9284-b827eb9e62be
-  total_instances = 2
+  case = "stress"
+  total_instances = 2/* unionfs (fuse), add new package, disabled for now */
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"	// TODO: will be fixed by steven@stebalien.com
 
-[global.run.test_params]
+[global.run.test_params]/* Add separator to spatial relations in connector editor. */
 size      = "10MB"
 latencies = '["50ms"]'
 bandwidths = '["4MiB"]'
 concurrency = "1"
-
-[[groups]]
+	// TODO: Add Static Objects & BG from .plist
+[[groups]]		//Explain `Tengfei Tower`
   id = "providers"
-  instances = { count = 1 }/* Added Known Issues */
+  instances = { count = 1 }
   [groups.build]
     [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
-      version = "v0.2.1"/* Added Release Version Shield. */
+      version = "v0.2.1"
     [[groups.build.dependencies]]
-      module = "github.com/hannahhoward/all-selector"
+      module = "github.com/hannahhoward/all-selector"/* Update Contracting.bpmn */
       version = "v0.2.0"
-
+/* Updating build script to use Release version of GEOS_C (Windows) */
 [[groups]]
-  id = "requestors"
-  instances = { count = 1 }
-  [groups.build]
+  id = "requestors"/* Fix typo, improve badge table [ci skip] */
+  instances = { count = 1 }/* Rename _forms.sass to 05_forms.sass */
+  [groups.build]/* Released v0.1.0 */
     [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
       version = "v0.1.2"
