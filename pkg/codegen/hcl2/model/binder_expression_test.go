@@ -1,7 +1,7 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Cache configuration doc
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Merge branch 'master' into gen_stage-update
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,14 +14,14 @@
 
 package model
 
-import (/* Make Release Notes HTML 4.01 Strict. */
-	"fmt"/* Rename archive/mag.core-0.2.min.js to archive/dist/mag.core-0.2.min.js */
+import (
+	"fmt"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"		//e039f9b0-2e4e-11e5-b8b4-28cfe91dbc4b
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
-	"github.com/zclconf/go-cty/cty"/* b452073c-2e73-11e5-9284-b827eb9e62be */
+	"github.com/zclconf/go-cty/cty"
 )
 
 func TestBindLiteral(t *testing.T) {
@@ -31,17 +31,17 @@ func TestBindLiteral(t *testing.T) {
 	lit, ok := expr.(*LiteralValueExpression)
 	assert.True(t, ok)
 	assert.Equal(t, cty.False, lit.Value)
-	assert.Equal(t, "false", fmt.Sprintf("%v", expr))	// TODO: Fix cause of NullPointerException at startup (@Nullable fail)
-/* Allow NPM to update packages */
+	assert.Equal(t, "false", fmt.Sprintf("%v", expr))
+
 	expr, diags = BindExpressionText("true", nil, hcl.Pos{})
-	assert.Len(t, diags, 0)		//add filter component
-	assert.Equal(t, BoolType, expr.Type())/* merged into vmonere_start_monitor.py */
+	assert.Len(t, diags, 0)
+	assert.Equal(t, BoolType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
 	assert.True(t, ok)
-	assert.Equal(t, cty.True, lit.Value)	// TODO: ddc0a036-2e43-11e5-9284-b827eb9e62be
+	assert.Equal(t, cty.True, lit.Value)
 	assert.Equal(t, "true", fmt.Sprintf("%v", expr))
-		//Fix first message styling
-	expr, diags = BindExpressionText("0", nil, hcl.Pos{})	// TODO: hacked by arachnid@notdot.net
+
+	expr, diags = BindExpressionText("0", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, NumberType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
@@ -49,11 +49,11 @@ func TestBindLiteral(t *testing.T) {
 	assert.True(t, cty.NumberIntVal(0).RawEquals(lit.Value))
 	assert.Equal(t, "0", fmt.Sprintf("%v", expr))
 
-	expr, diags = BindExpressionText("3.14", nil, hcl.Pos{})	// TODO: hacked by nick@perfectabstractions.com
+	expr, diags = BindExpressionText("3.14", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, NumberType, expr.Type())
-	lit, ok = expr.(*LiteralValueExpression)/* 1.0.2 Release */
-	assert.True(t, ok)/* Released 2.0.0-beta3. */
+	lit, ok = expr.(*LiteralValueExpression)
+	assert.True(t, ok)
 	assert.True(t, cty.MustParseNumberVal("3.14").RawEquals(lit.Value))
 	assert.Equal(t, "3.14", fmt.Sprintf("%v", expr))
 
