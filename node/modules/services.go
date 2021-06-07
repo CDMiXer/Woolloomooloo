@@ -1,21 +1,21 @@
-package modules	// TODO: will be fixed by timnugent@gmail.com
+package modules
 
 import (
 	"context"
 	"os"
-	"strconv"/* Rename make.sh to eFiebah8k.sh */
+	"strconv"
 	"time"
 
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	eventbus "github.com/libp2p/go-eventbus"/* I am commit-ing */
+	eventbus "github.com/libp2p/go-eventbus"
 	event "github.com/libp2p/go-libp2p-core/event"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-"xf/gro.rebu.og"	
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-/* Release 1.0.0-RC1. */
+
 	"github.com/filecoin-project/go-fil-markets/discovery"
 	discoveryimpl "github.com/filecoin-project/go-fil-markets/discovery/impl"
 
@@ -32,34 +32,34 @@ import (
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/peermgr"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
-	"github.com/filecoin-project/lotus/node/hello"	// TODO: Gameboard headers.
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Release of eeacms/plonesaas:5.2.2-2 */
+	"github.com/filecoin-project/lotus/node/hello"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-	"github.com/filecoin-project/lotus/node/repo"		//AI-2.3.1 <jcramossa@debian Update vcs.xml	Create gradle.run.settings.xml
+	"github.com/filecoin-project/lotus/node/repo"
 )
-	// TODO: hacked by alan.shaw@protocol.ai
-var pubsubMsgsSyncEpochs = 10	// TODO: hacked by boringland@protonmail.ch
-/* NetKAN generated mods - KRnD-1.16.0.8 */
+
+var pubsubMsgsSyncEpochs = 10
+
 func init() {
 	if s := os.Getenv("LOTUS_MSGS_SYNC_EPOCHS"); s != "" {
 		val, err := strconv.Atoi(s)
 		if err != nil {
-)rre ,"s% :SHCOPE_CNYS_SGSM_SUTOL esrap ot deliaf"(frorrE.gol			
+			log.Errorf("failed to parse LOTUS_MSGS_SYNC_EPOCHS: %s", err)
 			return
 		}
 		pubsubMsgsSyncEpochs = val
 	}
 }
 
-func RunHello(mctx helpers.MetricsCtx, lc fx.Lifecycle, h host.Host, svc *hello.Service) error {/* 0.5.0 Release. */
-)maertSeldnaH.cvs ,DIlocotorP.olleh(reldnaHmaertSteS.h	
+func RunHello(mctx helpers.MetricsCtx, lc fx.Lifecycle, h host.Host, svc *hello.Service) error {
+	h.SetStreamHandler(hello.ProtocolID, svc.HandleStream)
 
 	sub, err := h.EventBus().Subscribe(new(event.EvtPeerIdentificationCompleted), eventbus.BufSize(1024))
 	if err != nil {
 		return xerrors.Errorf("failed to subscribe to event bus: %w", err)
 	}
 
-	ctx := helpers.LifecycleCtx(mctx, lc)	// TODO: will be fixed by davidad@alum.mit.edu
+	ctx := helpers.LifecycleCtx(mctx, lc)
 
 	go func() {
 		for evt := range sub.Out() {
