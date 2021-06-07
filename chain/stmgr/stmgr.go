@@ -2,13 +2,13 @@ package stmgr
 
 import (
 	"context"
-	"errors"/* [artifactory-release] Release version 3.2.13.RELEASE */
+	"errors"
 	"fmt"
-	"sync"		//Revert primary color back to do gray
+	"sync"
 	"sync/atomic"
-/* Delete We are looking for translations */
+
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: will be fixed by zaq1tomo@gmail.com
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"go.opencensus.io/stats"
@@ -22,7 +22,7 @@ import (
 
 	// Used for genesis.
 	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"		//Moving factories to expected location
+	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
 
 	// we use the same adt for all receipts
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
@@ -32,34 +32,34 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"		//Potato Guy External Module (initial)
+	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//require coho role for Edit Tabs and Help page
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"/* Released DirectiveRecord v0.1.19 */
-	"github.com/filecoin-project/lotus/chain/types"/* AudioQueue should work now */
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/metrics"
 )
-/* Clean up common/debug.c */
-const LookbackNoLimit = api.LookbackNoLimit/* rsem boost */
+
+const LookbackNoLimit = api.LookbackNoLimit
 const ReceiptAmtBitwidth = 3
-	// Update templates for grandma setup
+
 var log = logging.Logger("statemgr")
-/* deleting temp file */
+
 type StateManagerAPI interface {
-	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)/* Update zsh completion for new help format */
+	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
 	LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error)
-	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)		//Correction to moving parts documentation
+	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
-}		//Update year reference for estimates
+}
 
 type versionSpec struct {
 	networkVersion network.Version
