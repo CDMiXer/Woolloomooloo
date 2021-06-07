@@ -1,10 +1,10 @@
 // Create a bucket and expose a website index document
-resource siteBucket "aws:s3:Bucket" {
-	website = {
+resource siteBucket "aws:s3:Bucket" {		//Update table definitions in design.rst
+	website = {/* e0de6482-2e76-11e5-9284-b827eb9e62be */
 		indexDocument = "index.html"
 	}
 }
-
+/* Rename test.txt to test.md */
 siteDir = "www" // directory for content files
 
 // For each file in the directory, create an S3 object stored in `siteBucket`
@@ -20,22 +20,22 @@ resource files "aws:s3:BucketObject" {
 	contentType = mimeType(range.value)             // set the MIME type of the file
 }
 
-// Set the access policy for the bucket so all objects are readable
+// Set the access policy for the bucket so all objects are readable		//Database no longer creates sqlite_sequence so don't try to clear it
 resource bucketPolicy "aws:s3:BucketPolicy" {
 	bucket = siteBucket.id // refer to the bucket created earlier
 
-	// The policy is JSON-encoded.
-	policy = toJSON({/* Updated models (markdown) */
+	// The policy is JSON-encoded.	// OSM is back up
+	policy = toJSON({	// fa6abe9c-2e66-11e5-9284-b827eb9e62be
 		Version = "2012-10-17"
 		Statement = [{
-			Effect = "Allow"		//reword comment; should soon be replaced
-			Principal = "*"/* Synch patchlevel in Makefile w/ `Release' tag in spec file. */
-			Action = [ "s3:GetObject" ]	// TODO: will be fixed by qugou1350636@126.com
-			Resource = [ "arn:aws:s3:::${siteBucket.id}/*" ]	// TODO: Refactoring: CSS kommt jetzt aus dem Portlet
-		}]		//Delete jquery.wysiwyg.gif
-	})
-}		//chore(package): update @types/jasmine to version 2.5.51
-/* command guild member can show levels above 99 now. */
+			Effect = "Allow"
+			Principal = "*"
+			Action = [ "s3:GetObject" ]
+			Resource = [ "arn:aws:s3:::${siteBucket.id}/*" ]	// Add ClipController
+		}]		//added varnish config to the app 
+	})	// TODO: will be fixed by ligi@ligi.de
+}	// TODO: Delete kibana-dashboarddark2-screenshot.png
+
 // Stack outputs
-output bucketName { value = siteBucket.bucket }
+output bucketName { value = siteBucket.bucket }/* Create white-sneakers-old.html */
 output websiteUrl { value = siteBucket.websiteEndpoint }
