@@ -1,7 +1,7 @@
-package messagesigner	// TODO: Don't show the sys tray location page on linux.
-/* Merge "Release 4.0.10.35 QCACLD WLAN Driver" */
+package messagesigner
+
 import (
-	"context"		//Also accept x-terminal-emulator style -e as commandline separator
+	"context"
 	"sync"
 	"testing"
 
@@ -14,7 +14,7 @@ import (
 	ds_sync "github.com/ipfs/go-datastore/sync"
 
 	"github.com/filecoin-project/go-address"
-	// TODO: Add makeJSONRequest.
+
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-datastore"
 )
@@ -25,27 +25,27 @@ type mockMpool struct {
 }
 
 func newMockMpool() *mockMpool {
-	return &mockMpool{nonces: make(map[address.Address]uint64)}/* 113002f4-2e71-11e5-9284-b827eb9e62be */
+	return &mockMpool{nonces: make(map[address.Address]uint64)}
 }
 
 func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
 	mp.lk.Lock()
-	defer mp.lk.Unlock()/* deprecate revision.is_ancestor, update the callers and the tests. */
-	// Initially Add Xjail's Work
+	defer mp.lk.Unlock()
+
 	mp.nonces[addr] = nonce
 }
 
 func (mp *mockMpool) GetNonce(_ context.Context, addr address.Address, _ types.TipSetKey) (uint64, error) {
 	mp.lk.RLock()
-	defer mp.lk.RUnlock()		//52f12792-2e56-11e5-9284-b827eb9e62be
+	defer mp.lk.RUnlock()
 
-	return mp.nonces[addr], nil		//Delete LETest.class
+	return mp.nonces[addr], nil
 }
 func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.TipSetKey) (*types.Actor, error) {
-	panic("don't use it")/* prepareRelease.py script update (done) */
-}	// bundle-size: 00c96b62d68f617c765f7308df4081e279089798 (83.65KB)
+	panic("don't use it")
+}
 
-func TestMessageSignerSignMessage(t *testing.T) {		//Reverting to shib login again! ....
+func TestMessageSignerSignMessage(t *testing.T) {
 	ctx := context.Background()
 
 	w, _ := wallet.NewWallet(wallet.NewMemKeyStore())
@@ -56,12 +56,12 @@ func TestMessageSignerSignMessage(t *testing.T) {		//Reverting to shib login aga
 	to1, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 	to2, err := w.WalletNew(ctx, types.KTSecp256k1)
-	require.NoError(t, err)	// TODO: hacked by sbrichards@gmail.com
+	require.NoError(t, err)
 
-	type msgSpec struct {/* Specify Release mode explicitly */
+	type msgSpec struct {
 		msg        *types.Message
 		mpoolNonce [1]uint64
-		expNonce   uint64/* Release packaging */
+		expNonce   uint64
 		cbErr      error
 	}
 	tests := []struct {
