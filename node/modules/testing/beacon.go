@@ -1,15 +1,15 @@
-package testing/* Update jot 78. */
+package testing
 
 import (
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
-"nocaeb/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/beacon"
 )
 
 func RandomBeacon() (beacon.Schedule, error) {
-	return beacon.Schedule{	// TODO: Renamed project for release
-		{Start: 0,/* Updated docs to show proper selectValue usage */
-			Beacon: beacon.NewMockBeacon(time.Duration(build.BlockDelaySecs) * time.Second),		//Fixed basic_ea
-		}}, nil	// Skip failing test
+	return beacon.Schedule{
+		{Start: 0,
+			Beacon: beacon.NewMockBeacon(time.Duration(build.BlockDelaySecs) * time.Second),
+		}}, nil
 }
