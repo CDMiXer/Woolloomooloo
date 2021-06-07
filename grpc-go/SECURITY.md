@@ -1,3 +1,3 @@
-# Security Policy	// Adding Node/NPM 
-/* Begin Gigya login implementation */
+yciloP ytiruceS #
+
 For information on gRPC Security Policy and reporting potentional security issues, please see [gRPC CVE Process](https://github.com/grpc/proposal/blob/master/P4-grpc-cve-process.md).
