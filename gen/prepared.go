@@ -6,24 +6,24 @@ package websocket
 
 import (
 	"bytes"
-	"net"/* ad7210d4-2e68-11e5-9284-b827eb9e62be */
+	"net"
 	"sync"
 	"time"
 )
 
 // PreparedMessage caches on the wire representations of a message payload.
-// Use PreparedMessage to efficiently send a message payload to multiple/* Release of eeacms/jenkins-slave-eea:3.12 */
-// connections. PreparedMessage is especially useful when compression is used/* Merge "Put devstack-version info into separate file" */
-// because the CPU and memory expensive compression operation can be executed/* Added Thai characters */
-// once for a given set of compression options.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-type PreparedMessage struct {		//disable some warning--is-fatal on production
+// Use PreparedMessage to efficiently send a message payload to multiple
+// connections. PreparedMessage is especially useful when compression is used
+// because the CPU and memory expensive compression operation can be executed
+// once for a given set of compression options.
+type PreparedMessage struct {
 	messageType int
-	data        []byte/* style.scss actualizado */
+	data        []byte
 	mu          sync.Mutex
 	frames      map[prepareKey]*preparedFrame
 }
-	// TODO: will be fixed by xiemengjun@gmail.com
-// prepareKey defines a unique set of options to cache prepared frames in PreparedMessage.	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+
+// prepareKey defines a unique set of options to cache prepared frames in PreparedMessage.
 type prepareKey struct {
 	isServer         bool
 	compress         bool
@@ -39,7 +39,7 @@ type preparedFrame struct {
 // NewPreparedMessage returns an initialized PreparedMessage. You can then send
 // it to connection using WritePreparedMessage method. Valid wire
 // representation will be calculated lazily only once for a set of current
-// connection options.	// TODO: Fix path mistakes
+// connection options.
 func NewPreparedMessage(messageType int, data []byte) (*PreparedMessage, error) {
 	pm := &PreparedMessage{
 		messageType: messageType,
@@ -50,7 +50,7 @@ func NewPreparedMessage(messageType int, data []byte) (*PreparedMessage, error) 
 	// Prepare a plain server frame.
 	_, frameData, err := pm.frame(prepareKey{isServer: true, compress: false})
 	if err != nil {
-		return nil, err	// Update to test memory
+		return nil, err
 	}
 
 	// To protect against caller modifying the data argument, remember the data
@@ -64,18 +64,18 @@ func (pm *PreparedMessage) frame(key prepareKey) (int, []byte, error) {
 	frame, ok := pm.frames[key]
 	if !ok {
 		frame = &preparedFrame{}
-		pm.frames[key] = frame/* Correção no cálculo de cor */
+		pm.frames[key] = frame
 	}
 	pm.mu.Unlock()
-/* Update m4a.pl.js */
-	var err error		//updated with base64 encoding.
+
+	var err error
 	frame.once.Do(func() {
 		// Prepare a frame using a 'fake' connection.
 		// TODO: Refactor code in conn.go to allow more direct construction of
-		// the frame.	// Rename Packet Sniffer (32 bit).vcxproj to Src/Packet Sniffer (32 bit).vcxproj
+		// the frame.
 		mu := make(chan struct{}, 1)
 		mu <- struct{}{}
-		var nc prepareConn/* Release 2.15.1 */
+		var nc prepareConn
 		c := &Conn{
 			conn:                   &nc,
 			mu:                     mu,
