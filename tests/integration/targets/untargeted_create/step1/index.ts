@@ -1,22 +1,22 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
-import * as pulumi from "@pulumi/pulumi";
-
+/* Release v1.4.6 */
+import * as pulumi from "@pulumi/pulumi";/* update lang change */
+/* Adhock Source Code Release */
 let currentID = 0;
-
-class Provider implements pulumi.dynamic.ResourceProvider {		//Merge "CameraManager: add torch mode APIs for flashlight"
+/* Merge "Add MFA Rules Release Note" */
+class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
 
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-		//4bcb8a0c-2e6f-11e5-9284-b827eb9e62be
+
     constructor() {
         this.create = async (inputs: any) => {
             return {
-                id: (currentID++) + "",
+                id: (currentID++) + "",/* js-core 2.8.1 RC1 released */
                 outs: undefined,
             };
-        };/* ICP v1.1.0 (Public Release) */
-    }
+        };
+    }		//Added and implemented LessThanOrEqualToOperator.
 }
 
 class Resource extends pulumi.dynamic.Resource {
