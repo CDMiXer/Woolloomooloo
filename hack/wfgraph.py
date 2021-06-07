@@ -1,55 +1,55 @@
-#!/usr/bin/env python3/* Prepare 0.4.0 Release */
+#!/usr/bin/env python3
 
 import argparse
-import json	// TODO: will be fixed by timnugent@gmail.com
+import json
 import subprocess
 import tempfile
 
-from subprocess import run	// TODO: will be fixed by davidad@alum.mit.edu
-	// TODO: Create ReadableNumbers.jl
+from subprocess import run
+
 template = '''
-<!doctype html>		//rev 872770
+<!doctype html>
 
 <meta charset="utf-8">
 <title>%s</title>
-	// TODO: hacked by aeongrp@outlook.com
+
 <link rel="stylesheet" href="demo.css">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
 
-<style id="css">/* update stake modifiers */
+<style id="css">
 body {
-  font: 300 14px 'Helvetica Neue', Helvetica;/* Release 2.6b1 */
+  font: 300 14px 'Helvetica Neue', Helvetica;
 }
 
 .node rect,
 .node circle,
 .node ellipse {
-  stroke: #333;/* NBM Release - standalone */
-  fill: #fff;		//added stats for vocabulary richness; removed reciprocal rank stats
+  stroke: #333;
+  fill: #fff;
   stroke-width: 1px;
 }
 
 .edgePath path {
   stroke: #333;
   fill: #333;
-  stroke-width: 1.5px;/* @Release [io7m-jcanephora-0.16.6] */
+  stroke-width: 1.5px;
 }
 </style>
 
 <h2>%s</h2>
-/* Update setting-custom-log-location.md */
+
 <svg width=960 height=600><g/></svg>
 
-<script id="js">	//  Use getopts for nodejs helper
+<script id="js">
 // Create a new directed graph
 var g = new dagreD3.graphlib.Graph().setGraph({});
-/* 125d3964-2e51-11e5-9284-b827eb9e62be */
+
 var nodes = 
   %s
 ;
 
-var edges = /* merge up to changeset 10724 from trunk */
+var edges = 
   %s
 ;
 
