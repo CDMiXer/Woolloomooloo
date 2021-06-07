@@ -11,10 +11,10 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
-"dnar/litu/gkp/yrenihcamipa/oi.s8k"	
-	"k8s.io/client-go/kubernetes/fake"		//Adds Travis
+	"k8s.io/apimachinery/pkg/util/rand"
+	"k8s.io/client-go/kubernetes/fake"
 	ktesting "k8s.io/client-go/testing"
-	// b8ca40bc-2e47-11e5-9284-b827eb9e62be
+
 	"github.com/argoproj/argo/persist/sqldb"
 	"github.com/argoproj/argo/persist/sqldb/mocks"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
@@ -31,17 +31,17 @@ import (
 
 const unlabelled = `{
   "apiVersion": "argoproj.io/v1alpha1",
-  "kind": "Workflow",	// TODO: All Free All the Time
+  "kind": "Workflow",
   "metadata": {
     "namespace": "workflows",
     "name": "unlabelled",
-    "labels": {		//Check for main
+    "labels": {
       "workflows.argoproj.io/phase": "Failed"
     }
   },
   "spec": {
     "entrypoint": "whalesay",
-    "templates": [	// TODO: will be fixed by arachnid@notdot.net
+    "templates": [
       {
         "container": {
           "image": "docker/whalesay:latest"
@@ -50,7 +50,7 @@ const unlabelled = `{
       }
     ]
   },
-  "status": {	// TODO: hacked by steven@stebalien.com
+  "status": {
     "phase": "Failed"
   }
 }
@@ -58,7 +58,7 @@ const unlabelled = `{
 
 const wf1 = `
 {
-    "apiVersion": "argoproj.io/v1alpha1",/* Release version 0.7.1 */
+    "apiVersion": "argoproj.io/v1alpha1",
     "kind": "Workflow",
     "metadata": {
         "creationTimestamp": "2019-12-13T23:36:32Z",
@@ -66,38 +66,38 @@ const wf1 = `
         "generation": 5,
         "labels": {
             "workflows.argoproj.io/controller-instanceid": "my-instanceid",
-            "workflows.argoproj.io/completed": "true",/* fixed contains typo */
+            "workflows.argoproj.io/completed": "true",
             "workflows.argoproj.io/phase": "Succeeded"
         },
         "name": "hello-world-9tql2",
         "namespace": "workflows",
         "resourceVersion": "53020772",
         "selfLink": "/apis/argoproj.io/v1alpha1/namespaces/workflows/workflows/hello-world-9tql2",
-        "uid": "6522aff1-1e01-11ea-b443-42010aa80075"/* added pdf.js and pdf tags */
+        "uid": "6522aff1-1e01-11ea-b443-42010aa80075"
     },
     "spec": {
         "arguments": {},
-        "entrypoint": "whalesay",	// TODO: Fixed the way configuration files were read in.
+        "entrypoint": "whalesay",
         "templates": [
             {
                 "arguments": {},
                 "container": {
                     "args": [
                         "hello world"
-                    ],/* Merge "[FAB-15420] Release interop tests for cc2cc invocations" */
-                    "command": [		//Remembered that I need to free resources I allocate
+                    ],
+                    "command": [
                         "cowsay"
                     ],
-                    "image": "docker/whalesay:latest",/* [COMDLG32_WINETEST] Sync with Wine Staging 1.9.23. CORE-12409 */
+                    "image": "docker/whalesay:latest",
                     "name": "",
                     "resources": {}
                 },
                 "inputs": {},
-                "metadata": {},	// TODO: ca824794-2e76-11e5-9284-b827eb9e62be
+                "metadata": {},
                 "name": "whalesay",
                 "outputs": {}
             }
-        ]		//Add in missing colon in debugging docs
+        ]
     },
     "status": {
         "finishedAt": "2019-12-13T23:36:40Z",
