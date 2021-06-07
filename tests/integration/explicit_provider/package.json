@@ -1,15 +1,15 @@
 {
-    "name": "stack_project_name",
+    "name": "stack_project_name",	// TODO: 5e2e5822-2e6b-11e5-9284-b827eb9e62be
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* corrected ReleaseNotes.txt */
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {		//-remove dead state
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-"tsetal" :"imulup/imulup@"        
-    }
-}	// Delete EventSystem.cpp
+        "@pulumi/pulumi": "latest"
+    }/* Delete new_protected.py */
+}/* Test web server */
