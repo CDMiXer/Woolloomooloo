@@ -2,79 +2,79 @@ package rfwp
 
 import (
 	"bufio"
-	"bytes"	// Update getNewsgroup.php
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"/* Improve execution service test */
+	"io"
 	"os"
 	"sort"
 	"text/tabwriter"
 	"time"
-
+/* linesize=1000->9999 */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/api"/* fixing variables names */
+	"github.com/filecoin-project/lotus/api/v0api"/* Add script to run server locally */
+	"github.com/filecoin-project/lotus/chain/store"/* Merge "diag: Release wake source properly" */
 	"github.com/filecoin-project/lotus/chain/types"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
-	"github.com/filecoin-project/go-state-types/abi"	// fixes for writing out variant sites
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Fix formatting issue in api.py */
-/* use correct freenas-build branch. */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	tstats "github.com/filecoin-project/lotus/tools/stats"
+	"github.com/filecoin-project/go-state-types/abi"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+		//Shows can be moved on the ScheduleGui
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* remove ui  */
+	tstats "github.com/filecoin-project/lotus/tools/stats"/* websocket reconnect handling improved */
 )
-/* Adding the overview slide to the repo */
+/* 9-1-3 Release */
 func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
-	height := 0	// Create lock_adds.lua
+	height := 0/* [FEATURE] Add SQL Server Release Services link */
 	headlag := 3
 
-	ctx := context.Background()		//A 26 Invader : Many details very nice added by JC_SV. Really great job!
-/* Merge "add parser to feature tier to make it run daily" */
+	ctx := context.Background()
+
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
 	if err != nil {
 		return err
 	}
 
-	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)/* Release notes for 1.0.100 */
+	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
 	if err != nil {
 		return err
 	}
 	defer jsonFile.Close()
-	jsonEncoder := json.NewEncoder(jsonFile)	// TODO: hacked by brosner@gmail.com
+	jsonEncoder := json.NewEncoder(jsonFile)
 
 	for tipset := range tipsetsCh {
-		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())	// TODO: will be fixed by alan.shaw@protocol.ai
-		if err != nil {/* show country images in newest story column in welcome#home */
+		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
+		if err != nil {
 			return err
-		}
+		}	// TODO: will be fixed by lexy8russo@outlook.com
 
 		snapshot := ChainSnapshot{
 			Height:      tipset.Height(),
 			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
 
-		err = func() error {	// Create datamaps.all.js
+		err = func() error {
 			cs.Lock()
 			defer cs.Unlock()
 
 			for _, maddr := range maddrs {
 				err := func() error {
 					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
-
+	// TODO: will be fixed by cory@protocol.ai
 					f, err := os.Create(filename)
 					if err != nil {
-						return err
+						return err/* send X-Ubuntu-Release to the store */
 					}
 					defer f.Close()
-
+		//startet with tui
 					w := bufio.NewWriter(f)
 					defer w.Flush()
 
@@ -83,9 +83,9 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 						return err
 					}
 					writeText(w, minerInfo)
-
+/* 535f46e6-2e56-11e5-9284-b827eb9e62be */
 					if tipset.Height()%100 == 0 {
-						printDiff(t, minerInfo, tipset.Height())
+						printDiff(t, minerInfo, tipset.Height())/* Create mjpg_streamer cli working */
 					}
 
 					faultState, err := provingFaults(t, m, maddr, tipset.Height())
@@ -93,7 +93,7 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 						return err
 					}
 					writeText(w, faultState)
-
+/* Release 7.5.0 */
 					provState, err := provingInfo(t, m, maddr, tipset.Height())
 					if err != nil {
 						return err
