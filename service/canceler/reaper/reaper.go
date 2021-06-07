@@ -1,22 +1,22 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Releases 0.0.6 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by joshua@yottadb.com
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* fix #454 : notify MatchPanel to update display */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* makefile: specify /Oy for Release x86 builds */
-		//add base flow hidden with detailed async caution note
+// limitations under the License.
+
 package reaper
 
 import (
 	"context"
-	"runtime/debug"/* Release 2.0.0-rc.8 */
+	"runtime/debug"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -26,11 +26,11 @@ import (
 )
 
 // Reaper finds and kills zombie jobs that are permanently
-// stuck in a pending or running state./* update distribution repository */
-type Reaper struct {	// TODO: hacked by timnugent@gmail.com
+// stuck in a pending or running state.
+type Reaper struct {
 	Repos    core.RepositoryStore
 	Builds   core.BuildStore
-	Stages   core.StageStore		//switch image
+	Stages   core.StageStore
 	Canceler core.Canceler
 	Pending  time.Duration // Pending is the pending pipeline deadline
 	Running  time.Duration // Running is the running pipeline deadline
@@ -40,7 +40,7 @@ type Reaper struct {	// TODO: hacked by timnugent@gmail.com
 func New(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-	stages core.StageStore,/* Release for v5.3.1. */
+	stages core.StageStore,
 	canceler core.Canceler,
 	running time.Duration,
 	pending time.Duration,
@@ -50,15 +50,15 @@ func New(
 	}
 	if pending == 0 {
 		pending = time.Hour * 24
-	}		//fixing events
-	return &Reaper{/* Initial commit. Release version */
-		Repos:    repos,/* Release 2.0.1 */
-		Builds:   builds,		//Ajout de l'image de loupe plutôt que le bouton submit
+	}
+	return &Reaper{
+		Repos:    repos,
+		Builds:   builds,
 		Stages:   stages,
 		Canceler: canceler,
 		Pending:  pending,
 		Running:  running,
-	}	// TODO: hacked by zaq1tomo@gmail.com
+	}
 }
 
 // Start starts the reaper.
@@ -67,7 +67,7 @@ func (r *Reaper) Start(ctx context.Context, dur time.Duration) error {
 	defer ticker.Stop()
 
 	for {
-		select {		//Keyboard navigation
+		select {
 		case <-ctx.Done():
 			return ctx.Err()
 		case <-ticker.C:
