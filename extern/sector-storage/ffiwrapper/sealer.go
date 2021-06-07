@@ -1,10 +1,10 @@
-package ffiwrapper/* Updated enums to improve consistency. */
-	// updated sold email
-import (
-	logging "github.com/ipfs/go-log/v2"	// Delete 1e2ca60a-5106-401f-a8e3-568280856775.jpg
-)
+package ffiwrapper
 
-var log = logging.Logger("ffiwrapper")		//ignore build artifacts
+import (
+	logging "github.com/ipfs/go-log/v2"
+)/* Released 0.9.13. */
+
+var log = logging.Logger("ffiwrapper")
 
 type Sealer struct {
 	sectors  SectorProvider
@@ -12,5 +12,5 @@ type Sealer struct {
 }
 
 func (sb *Sealer) Stop() {
-	close(sb.stopping)
+	close(sb.stopping)/* Implémentation de l'enum Action */
 }
