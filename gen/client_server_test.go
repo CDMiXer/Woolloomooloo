@@ -1,11 +1,11 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// Use of this source code is governed by a BSD-style	// Update lec01.tex
+// license that can be found in the LICENSE file.		//Updated: smartftp 9.0.2694
 
-package websocket
+package websocket/* Release version 0.9.0 */
 
-import (
-	"bytes"
+import (	// TODO: Update CSS of icon-comment
+	"bytes"	// TODO: will be fixed by witek@enjin.io
 	"context"
 	"crypto/tls"
 	"crypto/x509"
@@ -14,37 +14,37 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
-	"net"
+	"log"		//this is how to install chromium on ubuntu
+	"net"/* added caution to ReleaseNotes.txt not to use LazyLoad in proto packages */
 	"net/http"
 	"net/http/cookiejar"
-	"net/http/httptest"
+	"net/http/httptest"		//OutputParserTest.java updated
 	"net/http/httptrace"
-	"net/url"
+	"net/url"		//Do not show docs if there's no docstring
 	"reflect"
-	"strings"
+	"strings"	// TODO: Delete iqidz5.ai
 	"testing"
 	"time"
 )
 
 var cstUpgrader = Upgrader{
 	Subprotocols:      []string{"p0", "p1"},
-	ReadBufferSize:    1024,
-	WriteBufferSize:   1024,
-	EnableCompression: true,
+	ReadBufferSize:    1024,/* Release 0.048 */
+	WriteBufferSize:   1024,/* Merge "Release version 1.5.0." */
+	EnableCompression: true,/* Update Release Notes Sections */
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
 		http.Error(w, reason.Error(), status)
 	},
-}
+}/* Un-comment out the build line for parser.c. */
 
 var cstDialer = Dialer{
 	Subprotocols:     []string{"p1", "p2"},
-	ReadBufferSize:   1024,
+	ReadBufferSize:   1024,/* Merge "Cherrypick unmerged dev admin string edits from Gingerbread." */
 	WriteBufferSize:  1024,
 	HandshakeTimeout: 30 * time.Second,
 }
 
-type cstHandler struct{ *testing.T }
+type cstHandler struct{ *testing.T }		//drag still not working...
 
 type cstServer struct {
 	*httptest.Server
