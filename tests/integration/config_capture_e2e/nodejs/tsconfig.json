@@ -1,21 +1,21 @@
-{
-    "compilerOptions": {/* select multi img */
+{/* adding better signature documentation */
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* SKIP_MODULES can now be used to disable loading of specific modules. */
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* [artifactory-release] Release version 0.9.17.RELEASE */
-        "stripInternal": true,
+        "sourceMap": true,/* 1.2.0-FIX Release */
+        "stripInternal": true,/* fixup function naming */
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,		//fixes editor initialisation when in an inline
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Update ConstraintLayoutSample.csproj */
-        "forceConsistentCasingInFileNames": true		//Updated: goodsync 10.9.33.3
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true/* Release Roadmap */
     },
-    "files": [
-        "index.ts"
+    "files": [	// TODO: 9c0cb452-2e40-11e5-9284-b827eb9e62be
+        "index.ts"/* Merge "Revert "media: add new MediaCodec Callback onCodecReleased."" */
     ]
-}/* - Release v1.8 */
+}/* Release v5.18 */
 
