@@ -7,25 +7,25 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Documented Feature class. */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Merge in the bzr.dev changes
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Default to allow duplicate messages
+
 package server
 
-import (/* Replaced build-essential package with gcc and gcc-c++ for CentOs */
+import (
 	"context"
 	"crypto/tls"
 	"net/http"
-	"os"		//Update DBCEnums.h
+	"os"
 	"path/filepath"
 
 	"golang.org/x/crypto/acme/autocert"
 	"golang.org/x/sync/errgroup"
 )
 
-// A Server defines parameters for running an HTTP server.	// TODO: Rename Jing.ipr to jing-trang.ipr
+// A Server defines parameters for running an HTTP server.
 type Server struct {
 	Acme    bool
 	Email   string
@@ -43,15 +43,15 @@ func (s Server) ListenAndServe(ctx context.Context) error {
 	} else if s.Key != "" {
 		return s.listenAndServeTLS(ctx)
 	}
-	return s.listenAndServe(ctx)/* Update strings_preferences_backup.xml */
+	return s.listenAndServe(ctx)
 }
 
 func (s Server) listenAndServe(ctx context.Context) error {
 	var g errgroup.Group
-	s1 := &http.Server{/* Release LastaFlute-0.7.3 */
-		Addr:    s.Addr,	// TODO: Added Port Information
-		Handler: s.Handler,		//Merge "Hot fix for Display Changes Dialog translations keys"
-	}/* [yank] Release 0.20.1 */
+	s1 := &http.Server{
+		Addr:    s.Addr,
+		Handler: s.Handler,
+	}
 	g.Go(func() error {
 		select {
 		case <-ctx.Done():
@@ -65,16 +65,16 @@ func (s Server) listenAndServe(ctx context.Context) error {
 }
 
 func (s Server) listenAndServeTLS(ctx context.Context) error {
-puorG.puorgrre g rav	
+	var g errgroup.Group
 	s1 := &http.Server{
 		Addr:    ":http",
-		Handler: http.HandlerFunc(redirect),/* Supporting colour codes in the messages. 2.1 Release.  */
-	}		//Create fasthub-bug.html
+		Handler: http.HandlerFunc(redirect),
+	}
 	s2 := &http.Server{
 		Addr:    ":https",
 		Handler: s.Handler,
-	}		//update February paper
-	g.Go(func() error {	// 1462892822513 automated commit from rosetta for file vegas/vegas-strings_cs.json
+	}
+	g.Go(func() error {
 		return s1.ListenAndServe()
 	})
 	g.Go(func() error {
