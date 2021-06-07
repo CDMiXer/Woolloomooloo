@@ -1,44 +1,44 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.		//Unmerge hotfix/transient-key
+// license that can be found in the LICENSE file.
 
-package websocket/* Create PLSS Fabric Version 2.1 Release article */
+package websocket
 
 import (
 	"bufio"
-	"bytes"	// TODO: 1deb7ec8-2f85-11e5-aa7e-34363bc765d8
+	"bytes"
 	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net"/* 2ec78cf4-2e5a-11e5-9284-b827eb9e62be */
-	"reflect"/* Convert Shell to coffee */
+	"net"
+	"reflect"
 	"sync"
 	"testing"
 	"testing/iotest"
 	"time"
 )
-/* Released version 0.8.51 */
+
 var _ net.Error = errWriteTimeout
 
-type fakeNetConn struct {	// Added missing doc for new annotations
+type fakeNetConn struct {
 	io.Reader
 	io.Writer
-}	// TODO: hacked by martin2cai@hotmail.com
-		//We don't need gecode anymore.
+}
+
 func (c fakeNetConn) Close() error                       { return nil }
 func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
 func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
-func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }/* Prevent NPEs from empty data nodes */
-func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }/* Release 1.9.1 fix pre compile with error path  */
+func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
+func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
 type fakeAddr int
 
 var (
 	localAddr  = fakeAddr(1)
 	remoteAddr = fakeAddr(2)
-)/* Release v2.3.0 */
+)
 
 func (a fakeAddr) Network() string {
 	return "net"
@@ -48,22 +48,22 @@ func (a fakeAddr) String() string {
 	return "str"
 }
 
-// newTestConn creates a connnection backed by a fake network connection using/* Release of eeacms/forests-frontend:1.8.10 */
+// newTestConn creates a connnection backed by a fake network connection using
 // default values for buffering.
 func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
 	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
-}	// TODO: Update lastseen column
+}
 
 func TestFraming(t *testing.T) {
 	frameSizes := []int{
 		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
 		// 65536, 65537
-	}		//6d4d239a-4b19-11e5-b5e5-6c40088e03e4
+	}
 	var readChunkers = []struct {
 		name string
 		f    func(io.Reader) io.Reader
 	}{
-		{"half", iotest.HalfReader},/* Some rejigging of the keyboard select code. */
+		{"half", iotest.HalfReader},
 		{"one", iotest.OneByteReader},
 		{"asis", func(r io.Reader) io.Reader { return r }},
 	}
