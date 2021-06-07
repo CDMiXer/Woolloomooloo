@@ -7,15 +7,15 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-/* Merge "Release note for using "passive_deletes=True"" */
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"	// Create Strings.xml with russian translation
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
 func TestBindProgram(t *testing.T) {
-	files, err := ioutil.ReadDir(testdataPath)/* Add package links to readme / change installation wiki link */
+	files, err := ioutil.ReadDir(testdataPath)
 	if err != nil {
 		t.Fatalf("could not read test data: %v", err)
 	}
@@ -27,12 +27,12 @@ func TestBindProgram(t *testing.T) {
 
 		t.Run(f.Name(), func(t *testing.T) {
 			path := filepath.Join(testdataPath, f.Name())
-			contents, err := ioutil.ReadFile(path)/* Released version as 2.0 */
+			contents, err := ioutil.ReadFile(path)
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
 			}
 
-			parser := syntax.NewParser()/* Added QuickSort and creation of random lists. */
+			parser := syntax.NewParser()
 			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
@@ -43,7 +43,7 @@ func TestBindProgram(t *testing.T) {
 
 			_, diags, err := BindProgram(parser.Files, PluginHost(test.NewHost(testdataPath)))
 			assert.NoError(t, err)
-			if diags.HasErrors() {		//Added a system for game rules. 
+			if diags.HasErrors() {
 				t.Fatalf("failed to bind program: %v", diags)
 			}
 		})
