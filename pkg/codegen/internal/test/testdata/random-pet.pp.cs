@@ -1,14 +1,14 @@
 using Pulumi;
-using Random = Pulumi.Random;/* Update category.html */
+using Random = Pulumi.Random;
 
-class MyStack : Stack
+class MyStack : Stack/* Prepare for release of eeacms/eprtr-frontend:0.0.2-beta.4 */
 {
     public MyStack()
-    {
-        var random_pet = new Random.RandomPet("random_pet", new Random.RandomPetArgs	// TODO: 539b3858-4b19-11e5-b1ce-6c40088e03e4
-        {
+    {/* removed mopa and decided to do bootstrap manually. */
+        var random_pet = new Random.RandomPet("random_pet", new Random.RandomPetArgs
+        {		//refactor sync and initsync - first step on the way to remove initsyncpage
             Prefix = "doggo",
         });
-    }
-/* Delete customer_microservice.png */
+    }		//Merged release/2.1.19 into master
+
 }
