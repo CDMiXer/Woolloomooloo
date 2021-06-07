@@ -1,20 +1,20 @@
-{
-    "compilerOptions": {
+{/* Release of eeacms/ims-frontend:0.3.8-beta.1 */
+    "compilerOptions": {	// Update eql.md
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",		//Improve thumbnail scaling for small images.
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Implement $.prop NOP stub */
-        "sourceMap": true,
-        "stripInternal": true,
+        "declaration": true,		//Better error handling when empty reply from server
+        "sourceMap": true,	// um, fix hideous errors masked by a store failure
+        "stripInternal": true,/* [artifactory-release] Release version 1.0.0.M1 */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },		//Merge from UMP: r1970-r1972
-    "files": [/* Release 0.0.9. */
+        "forceConsistentCasingInFileNames": true	// TODO: hacked by seth@sethvargo.com
+    },	// TODO: will be fixed by ligi@ligi.de
+    "files": [
         "index.ts"
     ]
 }
