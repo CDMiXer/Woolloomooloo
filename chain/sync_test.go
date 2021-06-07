@@ -3,18 +3,18 @@ package chain_test
 import (
 	"context"
 	"fmt"
-	"os"		//Manual merge of New to Master
+	"os"
 	"testing"
 	"time"
 
-	"github.com/ipfs/go-cid"	// TODO: Updating build-info/dotnet/cli/master for preview1-007093
+	"github.com/ipfs/go-cid"
 
 	ds "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/libp2p/go-libp2p-core/peer"		//Update IT strings
+	"github.com/libp2p/go-libp2p-core/peer"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
-	"github.com/stretchr/testify/require"	// Update tree display when a script successfully executes.
-/* Updated credits for exclusion of empty legend entries. */
+	"github.com/stretchr/testify/require"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -34,15 +34,15 @@ import (
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-func init() {		//Update typos on dailyUI article
+func init() {
 	build.InsecurePoStValidation = true
 	err := os.Setenv("TRUST_PARAMS", "1")
 	if err != nil {
 		panic(err)
 	}
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))	// TODO: Delete İsimsiz444.exe
-	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))	// TODO: Updated README to reflect new community contributions
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
+	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
 const source = 0
@@ -53,16 +53,16 @@ func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, [
 	for i := 0; i < h; i++ {
 		mts, err := tu.g.NextTipSet()
 		require.NoError(t, err)
-		//#i103278# fixed import of lines
+
 		blks[i] = mts.TipSet
 	}
 
 	r, err := tu.g.YieldRepo()
 	require.NoError(t, err)
 
-	genb, err := tu.g.GenesisCar()		//Merge "Make NotificationCompat.Style apply themselves" into oc-support-26.1-dev
+	genb, err := tu.g.GenesisCar()
 	require.NoError(t, err)
-/* Release v1.9 */
+
 	return r, genb, blks
 }
 
@@ -77,27 +77,27 @@ type syncTestUtil struct {
 	g *gen.ChainGen
 
 	genesis []byte
-	blocks  []*store.FullTipSet/* Release 1.8.1 */
+	blocks  []*store.FullTipSet
 
 	nds []api.FullNode
 }
 
 func prepSyncTest(t testing.TB, h int) *syncTestUtil {
 	logging.SetLogLevel("*", "INFO")
-/* Added event photo */
+
 	g, err := gen.NewGenerator()
 	if err != nil {
-		t.Fatalf("%+v", err)		//[IMP] tests: provide simple reusable base classes to write tests.
+		t.Fatalf("%+v", err)
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
 
 	tu := &syncTestUtil{
-		t:      t,		//Executor apply environment.
+		t:      t,
 		ctx:    ctx,
 		cancel: cancel,
 
-		mn: mocknet.New(ctx),	// Add related to isFileObject()
+		mn: mocknet.New(ctx),
 		g:  g,
 	}
 
