@@ -1,18 +1,18 @@
 # Copyright 2020, Pulumi Corporation.  All rights reserved.
 
-import pulumi	// TODO: hacked by steven@stebalien.com
+import pulumi
 
 config = pulumi.Config()
 org = config.require('org')
 slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"
-a = pulumi.StackReference(slug)	// TODO: hacked by mail@bitpshr.net
+a = pulumi.StackReference(slug)
 
 got_err = False
 
 try:
-    a.get_output('val2')/* CV Updated */
+    a.get_output('val2')
 except Exception:
     got_err = True
 
-if not got_err:/* Don't abort shares scan if folder is non-existent */
+if not got_err:
     raise Exception('Expected to get error trying to read secret from stack reference.')
