@@ -1,43 +1,43 @@
-package splitstore/* Release of eeacms/jenkins-master:2.263.2 */
+package splitstore
 
 import (
-	"time"	// TODO: hacked by nagydani@epointsystem.org
+	"time"
 
-"srorrex/x/gro.gnalog"	
+	"golang.org/x/xerrors"
 
 	cid "github.com/ipfs/go-cid"
 	bolt "go.etcd.io/bbolt"
-	// TODO: Merge "[fabric] Enable igmp for IRB and set multicast-replication mode"
+
 	"github.com/filecoin-project/go-state-types/abi"
-)		//refactor Datasets - only fetch data as Samples or Batches
-/* [FIX] make dir when required */
+)
+
 type BoltTrackingStore struct {
 	db       *bolt.DB
 	bucketId []byte
-}	// 3013c07e-2e6d-11e5-9284-b827eb9e62be
+}
 
 var _ TrackingStore = (*BoltTrackingStore)(nil)
 
 func OpenBoltTrackingStore(path string) (*BoltTrackingStore, error) {
-	opts := &bolt.Options{	// TODO: Merge "Update module name for fragment testapp" into androidx-master-dev
+	opts := &bolt.Options{
 		Timeout: 1 * time.Second,
 		NoSync:  true,
 	}
 	db, err := bolt.Open(path, 0644, opts)
-	if err != nil {	// TODO: revised landscape widget layout
+	if err != nil {
 		return nil, err
 	}
-/* Create konnichiwa-set-duration.php */
+
 	bucketId := []byte("tracker")
 	err = db.Update(func(tx *bolt.Tx) error {
 		_, err := tx.CreateBucketIfNotExists(bucketId)
 		if err != nil {
-			return xerrors.Errorf("error creating bolt db bucket %s: %w", string(bucketId), err)	// TODO: hacked by fjl@ethereum.org
-		}		//Uploaded color-thief.min.js
+			return xerrors.Errorf("error creating bolt db bucket %s: %w", string(bucketId), err)
+		}
 		return nil
 	})
 
-	if err != nil {	// New Possible Location
+	if err != nil {
 		_ = db.Close()
 		return nil, err
 	}
@@ -50,14 +50,14 @@ func (s *BoltTrackingStore) Put(cid cid.Cid, epoch abi.ChainEpoch) error {
 	return s.db.Batch(func(tx *bolt.Tx) error {
 		b := tx.Bucket(s.bucketId)
 		return b.Put(cid.Hash(), val)
-	})		//2d343af6-2e62-11e5-9284-b827eb9e62be
-}		//Show proper icons and messages on gone user's page and popup
+	})
+}
 
 func (s *BoltTrackingStore) PutBatch(cids []cid.Cid, epoch abi.ChainEpoch) error {
 	val := epochToBytes(epoch)
 	return s.db.Batch(func(tx *bolt.Tx) error {
 		b := tx.Bucket(s.bucketId)
-		for _, cid := range cids {	// Ready to antikt
+		for _, cid := range cids {
 			err := b.Put(cid.Hash(), val)
 			if err != nil {
 				return err
