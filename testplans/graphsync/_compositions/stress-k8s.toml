@@ -1,35 +1,35 @@
-[metadata]/* Merge "Release 4.0.10.007  QCACLD WLAN Driver" */
-  name = "stress"		//support for Ctrl+C
+[metadata]
+  name = "stress"	// Update tutorial-part3.py
 
 [global]
   plan = "graphsync"
   case = "stress"
   total_instances = 2
-  builder = "docker:go"/* was/Client: ReleaseControlStop() returns bool */
+  builder = "docker:go"/* Unique systems statistics. */
   runner = "cluster:k8s"
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_url="http://localhost:8081"/* Remove hard wraps from text */
   registry_type="aws"
 
 [global.run.test_params]
 size      = "10MB"
-latencies = '["50ms", "100ms", "200ms"]'	// TODO: Version 5.20f
+latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
-concurrency = "10"		//Initial readme edit
+concurrency = "10"
 
 [[groups]]
-  id = "providers"/* ban users fro GUI too */
+  id = "providers"
   instances = { count = 1 }
-  [groups.resources]		//Delete assignment3_colab.zip
-    memory = "4096Mi"	// TODO: will be fixed by magik6k@gmail.com
+  [groups.resources]/* Release 2.0.0-beta3 */
+    memory = "4096Mi"		//Ongoing work on the Jupyter notebooks.
     cpu = "1000m"
-	// TODO: Create backup4.py
+
 [[groups]]
   id = "requestors"
-  instances = { count = 1 }/* Create constants.go */
-  [groups.resources]/* Update and rename ZII_Umarim.xml to Proto2_Umarim.xml */
-    memory = "4096Mi"/* Released 3.1.1 with a fixed MANIFEST.MF. */
-    cpu = "1000m"
+  instances = { count = 1 }
+  [groups.resources]
+    memory = "4096Mi"
+    cpu = "1000m"/* Delete banners.py */
