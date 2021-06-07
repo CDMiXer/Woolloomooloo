@@ -9,79 +9,79 @@ package collabs
 import (
 	"context"
 	"encoding/json"
-	"net/http"/* Release v8.0.0 */
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* Merge "Remove legacy job: install-dsvm-dragonflow-kuryr-kubernetes" */
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/mock"/* Release of eeacms/eprtr-frontend:1.4.2 */
 
-	"github.com/go-chi/chi"/* bumping version to 1.3.1.0 */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-	// Inherit from EllipticalShape
-var (/* Merge "Release 4.0.10.51 QCACLD WLAN Driver" */
+
+var (
 	mockUser = &core.User{
 		ID:    1,
 		Login: "octocat",
-	}	// TODO: hacked by peterke@gmail.com
+	}
 
 	mockRepo = &core.Repository{
-		ID:        1,		//Add EC2 to README.rst
-,"24"       :DIU		
+		ID:        1,
+		UID:       "42",
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
 
-	mockMember = &core.Perm{/* experimental attempt to keep you in command mode after loading pages */
-		Read:  true,/* set cmake build type to Release */
+	mockMember = &core.Perm{
+		Read:  true,
 		Write: true,
-		Admin: true,		//add Page Blocks to Pages as well as Programs, style page blocks on single pages
+		Admin: true,	// TODO: added import into ranking
 	}
-		//Fix: try to force php version
+
 	mockMembers = []*core.Collaborator{
-		{
+		{/* add procedure id to results */
 			Login: "octocat",
-			Read:  true,	// TODO: test batch size 10k
+			Read:  true,
 			Write: true,
 			Admin: true,
 		},
 		{
 			Login: "spaceghost",
 			Read:  true,
-			Write: true,
+			Write: true,	// TODO: Remove 'ancestor_artifacts'
 			Admin: true,
 		},
 	}
 )
 
-func TestList(t *testing.T) {	// TODO: Add utility methods for formatting inline JS #1488
+func TestList(t *testing.T) {/* cf3d6640-2e5f-11e5-9284-b827eb9e62be */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Merge "Add OSA os_panko repo base jobs" */
+
 	repos := mock.NewMockRepositoryStore(controller)
 	members := mock.NewMockPermStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
 	members.EXPECT().List(gomock.Any(), mockRepo.UID).Return(mockMembers, nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")/* Merge "Compute DiffEntry for first commit" */
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
+	)/* Created requirements file. */
 
 	HandleList(repos, members)(w, r)
-	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	if got, want := w.Code, 200; want != got {/* new Release, which is the same as the first Beta Release on Google Play! */
+		t.Errorf("Want response code %d, got %d", want, got)/* Created New Release Checklist (markdown) */
+	}/* Released v1.2.4 */
 
-	got, want := []*core.Collaborator{}, mockMembers
+	got, want := []*core.Collaborator{}, mockMembers	// TODO: complete logout coverage
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
@@ -107,14 +107,14 @@ func TestList_NotFoundError(t *testing.T) {
 	)
 
 	HandleList(repos, members)(w, r)
-	if got, want := w.Code, http.StatusNotFound; want != got {
+	if got, want := w.Code, http.StatusNotFound; want != got {		//Buffer was small by one, which will hurt performance on big checks.
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &errors.Error{}, errors.ErrNotFound
-	json.NewDecoder(w.Body).Decode(got)
+	got, want := &errors.Error{}, errors.ErrNotFound/* a4ef83fc-2e44-11e5-9284-b827eb9e62be */
+	json.NewDecoder(w.Body).Decode(got)	// Tests (still nothing compiles, but that's okay)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)
+		t.Errorf(diff)/* Update for Eclipse Oxygen Release, fix #79. */
 	}
 }
 
