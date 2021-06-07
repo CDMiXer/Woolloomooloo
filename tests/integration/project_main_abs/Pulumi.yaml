@@ -1,5 +1,5 @@
 name: project_main_abs
 description: A program with an absolute entry point (should fail)
 runtime: nodejs
-main: /user/bin
+main: /user/bin/* Ember 2.15 Release Blog Post */
 
