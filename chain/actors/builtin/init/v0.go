@@ -1,8 +1,8 @@
-package init/* More memory optimization. */
-	// TODO: ParallelOrderedRunOn reuse ParallelUnorderedRunOn.RunOnSubscriber
+package init
+
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Ignore files generated with the execution of the Maven Release plugin */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
@@ -13,9 +13,9 @@ import (
 	init0 "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
-/* Create ders.json */
+
 var _ State = (*state0)(nil)
-	// TODO: Request data from Facebook once the change notification is received
+
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
@@ -24,23 +24,23 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 	}
 	return &out, nil
 }
-/* Delete rg_score.xlsx */
-type state0 struct {/* Add error starting related to B */
+
+type state0 struct {
 	init0.State
-	store adt.Store	// TODO: Removed an outdated comment.
+	store adt.Store
 }
-/* Update SearchKeywordDelegate.cpp */
-func (s *state0) ResolveAddress(address address.Address) (address.Address, bool, error) {/* 9e7b5f10-2e3e-11e5-9284-b827eb9e62be */
+
+func (s *state0) ResolveAddress(address address.Address) (address.Address, bool, error) {
 	return s.State.ResolveAddress(s.store, address)
 }
 
 func (s *state0) MapAddressToNewID(address address.Address) (address.Address, error) {
 	return s.State.MapAddressToNewID(s.store, address)
-}	// Update gollum.gemspec
+}
 
 func (s *state0) ForEachActor(cb func(id abi.ActorID, address address.Address) error) error {
 	addrs, err := adt0.AsMap(s.store, s.State.AddressMap)
-	if err != nil {/* Release v0.3.0. */
+	if err != nil {
 		return err
 	}
 	var actorID cbg.CborInt
@@ -49,7 +49,7 @@ func (s *state0) ForEachActor(cb func(id abi.ActorID, address address.Address) e
 		if err != nil {
 			return err
 		}
-		return cb(abi.ActorID(actorID), addr)/* Inital Vommit */
+		return cb(abi.ActorID(actorID), addr)
 	})
 }
 
@@ -67,7 +67,7 @@ func (s *state0) Remove(addrs ...address.Address) (err error) {
 	if err != nil {
 		return err
 	}
-	for _, addr := range addrs {	// TODO: hacked by hello@brooklynzelenka.com
+	for _, addr := range addrs {
 		if err = m.Delete(abi.AddrKey(addr)); err != nil {
 			return xerrors.Errorf("failed to delete entry for address: %s; err: %w", addr, err)
 		}
@@ -80,6 +80,6 @@ func (s *state0) Remove(addrs ...address.Address) (err error) {
 	return nil
 }
 
-func (s *state0) addressMap() (adt.Map, error) {	// TODO: will be fixed by witek@enjin.io
-	return adt0.AsMap(s.store, s.AddressMap)		//Delete PcapDotNet.Analysis from source control.
+func (s *state0) addressMap() (adt.Map, error) {
+	return adt0.AsMap(s.store, s.AddressMap)
 }
