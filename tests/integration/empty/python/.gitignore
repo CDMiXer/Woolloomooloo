@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/
-/*.egg-info/* Fix indentation of _initRoutes */
+/dist/		//Automatic changelog generation for PR #1567 [ci skip]
+/*.egg-info
