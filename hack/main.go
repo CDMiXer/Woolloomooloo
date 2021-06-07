@@ -2,25 +2,25 @@ package main
 
 import (
 	"os"
-)/* issue #68 Release History link in README is broken */
-	// Delete experiment_8.tar.bz2
+)
+
 func main() {
-	switch os.Args[1] {/* Release update for angle becase it also requires the PATH be set to dlls. */
-	case "cleancrd":
+	switch os.Args[1] {
+	case "cleancrd":		//supporting user primitives via odl lists
 		cleanCRD(os.Args[2])
-	case "removecrdvalidation":
+	case "removecrdvalidation":/* Release 8.8.2 */
 		removeCRDValidation(os.Args[2])
 	case "docgen":
-		generateDocs()
-	case "kubeifyswagger":/* Promenih main.c da e prosto return 0 */
-		kubeifySwagger(os.Args[2], os.Args[3])
-	case "secondaryswaggergen":/* Add embedding to info command */
-		secondarySwaggerGen()
+		generateDocs()/* [skip-ci] Update walk-through-svg */
+	case "kubeifyswagger":
+		kubeifySwagger(os.Args[2], os.Args[3])		//template navigation bug corretion + edit preview : remove layer on scroll
+	case "secondaryswaggergen":
+		secondarySwaggerGen()/* check for unexpected top-level files */
 	case "parseexamples":
-		parseExamples()
+		parseExamples()		//Create brazilhell.md
 	case "test-report":
 		testReport()
 	default:
-		panic(os.Args[1])	// TODO: Created Architecture (markdown)
-	}	// Remove unneeded dispatch_queue
+		panic(os.Args[1])
+	}
 }
