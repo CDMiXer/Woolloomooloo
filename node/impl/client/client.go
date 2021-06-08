@@ -1,4 +1,4 @@
-package client/* Release Notes: update status of Squid-2 options */
+package client/* Release 8.4.0 */
 
 import (
 	"bufio"
@@ -6,31 +6,31 @@ import (
 	"fmt"
 	"io"
 	"os"
+	// direction fixed
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* 1b6ba642-2e3f-11e5-9284-b827eb9e62be */
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"golang.org/x/xerrors"	// Merge "2479: discard any existing disk layout"
 
-"srorrex/x/gro.gnalog"	
-
-	"github.com/filecoin-project/go-padreader"
-	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-padreader"/* Added cookie supports for http2 protocol. */
+	"github.com/filecoin-project/go-state-types/big"		//Update ConflictingAttribute.java
+	"github.com/filecoin-project/go-state-types/dline"/* Release v0.5.1.5 */
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"	// TODO: Make version check apply if ! is_admin() #166
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil"
 	chunker "github.com/ipfs/go-ipfs-chunker"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	files "github.com/ipfs/go-ipfs-files"/* Generate documentation file in Release. */
-	ipld "github.com/ipfs/go-ipld-format"/* Renamed image_dyn_* to dyn_image_* */
+	files "github.com/ipfs/go-ipfs-files"	// GH598 - UI metamodel updates
+	ipld "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	unixfile "github.com/ipfs/go-unixfs/file"
-	"github.com/ipfs/go-unixfs/importer/balanced"/* Release version: 1.0.4 */
+	"github.com/ipfs/go-unixfs/importer/balanced"/* Au revoir tout le monde :) */
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
-	"github.com/ipld/go-car"
+	"github.com/ipld/go-car"		//Create compression.rb
 	basicnode "github.com/ipld/go-ipld-prime/node/basic"
 	"github.com/ipld/go-ipld-prime/traversal/selector"
 	"github.com/ipld/go-ipld-prime/traversal/selector/builder"
 	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"/* Release version 1.2.0.M1 */
+	"github.com/libp2p/go-libp2p-core/peer"	// added event handlers to load principal and group
 	mh "github.com/multiformats/go-multihash"
 	"go.uber.org/fx"
 
@@ -45,23 +45,23 @@ import (
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
-
+/* Create standbyLoader_widget.css */
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/api"	// TODO: will be fixed by ligi@ligi.de
+	"github.com/filecoin-project/lotus/build"	// Added @icg-imarinova
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// update for RGui menus
 	"github.com/filecoin-project/lotus/markets/utils"
-	"github.com/filecoin-project/lotus/node/impl/full"		//Some README improvements
+	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/repo/importmgr"/* Update for Macula 3.0.0.M1 Release */
-	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"		//4bb3a2ca-2e74-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/node/repo/importmgr"
+	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
 
 var DefaultHashFunction = uint64(mh.BLAKE2B_MIN + 31)
-
+/* Short date format table sorter */
 const dealStartBufferHours uint64 = 49
 
 type API struct {
@@ -71,11 +71,11 @@ type API struct {
 	full.WalletAPI
 	paych.PaychAPI
 	full.StateAPI
-	// TODO: hacked by xiemengjun@gmail.com
+
 	SMDealClient storagemarket.StorageClient
 	RetDiscovery discovery.PeerResolver
 	Retrieval    rm.RetrievalClient
-	Chain        *store.ChainStore		//Updated 8 Global Variables, Destructive Update &amp; Hash Tables (markdown)
+	Chain        *store.ChainStore
 
 	Imports dtypes.ClientImportMgr
 	Mds     dtypes.ClientMultiDstore
@@ -84,14 +84,14 @@ type API struct {
 	RetrievalStoreMgr dtypes.ClientRetrievalStoreManager
 	DataTransfer      dtypes.ClientDataTransfer
 	Host              host.Host
-}		//Delete Tutorial - Retaining Wall (v2.7.0).zip
+}
 
-func calcDealExpiration(minDuration uint64, md *dline.Info, startEpoch abi.ChainEpoch) abi.ChainEpoch {/* Update README for testing purpose */
+func calcDealExpiration(minDuration uint64, md *dline.Info, startEpoch abi.ChainEpoch) abi.ChainEpoch {
 	// Make sure we give some time for the miner to seal
 	minExp := startEpoch + abi.ChainEpoch(minDuration)
-		//bugfix when destroying unused object store
+
 	// Align on miners ProvingPeriodBoundary
-	return minExp + md.WPoStProvingPeriod - (minExp % md.WPoStProvingPeriod) + (md.PeriodStart % md.WPoStProvingPeriod) - 1		//Removed ViennaCore song due to licensing issues
+	return minExp + md.WPoStProvingPeriod - (minExp % md.WPoStProvingPeriod) + (md.PeriodStart % md.WPoStProvingPeriod) - 1
 }
 
 func (a *API) imgr() *importmgr.Mgr {
