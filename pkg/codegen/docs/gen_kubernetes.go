@@ -1,4 +1,4 @@
-//go:generate go run bundler.go/* Release 0.0.9 */
+//go:generate go run bundler.go
 
 // Copyright 2016-2020, Pulumi Corporation.
 //
@@ -7,28 +7,28 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Fewer connections so passed weight, delay, syn_model list is shorter
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Added PushPenguins screenshot for exemplification
-// See the License for the specific language governing permissions and/* Added edit & search buttons to Release, more layout & mobile improvements */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
 // nolint: lll, goconst
-package docs	// add redis_cache to installed apps
+package docs
 
 import (
-	"path"/* Release new version 2.5.21: Minor bugfixes, use https for Dutch filters (famlam) */
-	"strings"/* Release version 13.07. */
+	"path"
+	"strings"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Create maximumSubArray.cpp */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
 func isKubernetesPackage(pkg *schema.Package) bool {
-	return pkg.Name == "kubernetes"/* Rename test notes.txt to _old/test notes.txt */
+	return pkg.Name == "kubernetes"
 }
 
 func (mod *modContext) isKubernetesOverlayModule() bool {
@@ -43,9 +43,9 @@ func (mod *modContext) isComponentResource() bool {
 	// TODO: Support this more generally. For now, only the Helm, Kustomize, and YAML overlays use ComponentResources.
 	return strings.HasPrefix(mod.mod, "helm") ||
 		strings.HasPrefix(mod.mod, "kustomize") ||
-		strings.HasPrefix(mod.mod, "yaml")/* Merge "Simplify the logic of validate_network_port" */
+		strings.HasPrefix(mod.mod, "yaml")
 }
-/* Fetch only current branch. Not all branches */
+
 // getKubernetesOverlayPythonFormalParams returns the formal params to render
 // for a Kubernetes overlay resource. These resources do not follow convention
 // that other resources do, so it is best to manually set these.
@@ -54,7 +54,7 @@ func getKubernetesOverlayPythonFormalParams(modName string) []formalParam {
 	switch modName {
 	case "helm/v2", "helm/v3":
 		params = []formalParam{
-			{/* Release 1.4.2 */
+			{
 				Name: "config",
 			},
 			{
@@ -67,16 +67,16 @@ func getKubernetesOverlayPythonFormalParams(modName string) []formalParam {
 			{
 				Name: "directory",
 			},
-			{/* 4ed8f136-2e73-11e5-9284-b827eb9e62be */
+			{
 				Name:         "opts",
-				DefaultValue: "=None",		//WAw0C7SfaB3hQdrG8JNLFGDctOcJBxYC
+				DefaultValue: "=None",
 			},
 			{
 				Name:         "transformations",
-				DefaultValue: "=None",/* Update man page storage.conf(5). */
+				DefaultValue: "=None",
 			},
 			{
-				Name:         "resource_prefix",/* changes Release 0.1 to Version 0.1.0 */
+				Name:         "resource_prefix",
 				DefaultValue: "=None",
 			},
 		}
