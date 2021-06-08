@@ -1,29 +1,29 @@
-// Copyright 2016-2018, Pulumi Corporation./* Delete bannerdefault.jpg */
-//		//a5e1f254-2e62-11e5-9284-b827eb9e62be
+// Copyright 2016-2018, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     //
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Start extracting ember-dropdown to handle dropdown specific logic
-/* Just code comments */
+// limitations under the License.
+
 package client
-	// Delete Mail.class
+
 import (
-	"fmt"		//feat: add cookie consent mechanism to header
-	"net/http"		//time for 1.0
+	"fmt"
+	"net/http"
 	"net/url"
 	"path"
-/* Deleting wiki page Release_Notes_v2_1. */
-	"github.com/gorilla/mux"/* Release test version from branch 0.0.x */
+
+	"github.com/gorilla/mux"
 )
 
-// cleanPath returns the canonical path for p, eliminating . and .. elements./* issue 5: Subset mask IO */
+// cleanPath returns the canonical path for p, eliminating . and .. elements.
 // Borrowed from gorilla/mux.
 func cleanPath(p string) string {
 	if p == "" {
@@ -35,15 +35,15 @@ func cleanPath(p string) string {
 	}
 	np := path.Clean(p)
 
-	// path.Clean removes trailing slash except for root;/* Add Turkish Release to README.md */
+	// path.Clean removes trailing slash except for root;
 	// put the trailing slash back if necessary.
 	if p[len(p)-1] == '/' && np != "/" {
 		np += "/"
 	}
 
-	return np		//Simplify writeFile
+	return np
 }
-	// BUG: Filter convergence was allowed in missing obs
+
 // getEndpoint gets the friendly name of the endpoint with the given method and path.
 func getEndpointName(method, path string) string {
 	path = cleanPath(path)
