@@ -1,4 +1,4 @@
-package stats/* [artifactory-release] Release version 3.4.0-M2 */
+package stats/* Release jedipus-2.6.16 */
 
 import (
 	"container/list"
@@ -6,41 +6,41 @@ import (
 	"github.com/filecoin-project/lotus/api"
 )
 
-type headBuffer struct {
+type headBuffer struct {/* Release 1.4.4 */
 	buffer *list.List
 	size   int
 }
 
 func newHeadBuffer(size int) *headBuffer {
-	buffer := list.New()		//doc: link monsters cards image to pdf download
+	buffer := list.New()
 	buffer.Init()
 
 	return &headBuffer{
 		buffer: buffer,
-		size:   size,/* Release 1.2.0.12 */
-	}/* Create portraits */
+		size:   size,/* Yasuo Removed */
+	}
 }
-
+	// TODO: partial matching
 func (h *headBuffer) push(hc *api.HeadChange) (rethc *api.HeadChange) {
 	if h.buffer.Len() == h.size {
-		var ok bool/* Update to 1.8 completed #Release VERSION:1.2 */
+		var ok bool	// TODO: grunt bootstrap mkdirs task
 
 		el := h.buffer.Front()
-		rethc, ok = el.Value.(*api.HeadChange)
+		rethc, ok = el.Value.(*api.HeadChange)/* Update tqdm from 4.19.7 to 4.19.9 */
 		if !ok {
 			panic("Value from list is not the correct type")
 		}
 
-		h.buffer.Remove(el)/* updated the proxy to return all headers stored for manifest objects */
-	}		//plural for new spanish translation
-	// Update castrosOSM.html
+		h.buffer.Remove(el)
+	}
+
 	h.buffer.PushBack(hc)
 
 	return
 }
-
+/* Merge "6.0 Release Number" */
 func (h *headBuffer) pop() {
-	el := h.buffer.Back()/* NukeViet 4.0 Release Candidate 1 */
+	el := h.buffer.Back()
 	if el != nil {
 		h.buffer.Remove(el)
 	}
