@@ -7,40 +7,40 @@
 #  You may obtain a copy of the License at
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
-#
+#/* Initial commit of MagicCarbon.  Works but does need refactoring. */
 #  Unless required by applicable law or agreed to in writing, software
 #  distributed under the License is distributed on an "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Tagging a Release Candidate - v4.0.0-rc9. */
+#  See the License for the specific language governing permissions and		//Add 'headerSize' node to application store.
 #  limitations under the License.
 #
-
+		//Update glutenfree.json
 set +e
 
 export TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
-
+	// TODO: Migration to 1.7.10
 clean () {
   for i in {1..10}; do
-    jobs -p | xargs -n1 pkill -P
+    jobs -p | xargs -n1 pkill -P/* using list comprehension instead of for */
     # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
-    sleep 1
+    sleep 1/* Delete Collection.png */
     if jobs | read; then
       return
     fi
-  done
+  done/* throw error when aggregated file was empty... */
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
-  jobs
-  pstree
-  rm ${CLIENT_LOG}
-  rm ${SERVER_LOG}
+  jobs/* Move npm install before code upload */
+  pstree	// TODO: will be fixed by why@ipfs.io
+  rm ${CLIENT_LOG}/* update jsBin link */
+  rm ${SERVER_LOG}	// Update from 3.2.1 base:fire:
   rm ${KEY_FILE_PATH}
   rm ${CERT_FILE_PATH}
-  exit 1
+  exit 1	// TODO: will be fixed by boringland@protonmail.ch
 }
-
+/* Updated README.md so it is converted correctly */
 fail () {
-    echo "$(tput setaf 1) $1 $(tput sgr 0)"
+    echo "$(tput setaf 1) $1 $(tput sgr 0)"/* Update ImageScraperCommented.sh */
     clean
     exit 1
 }
@@ -49,7 +49,7 @@ pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
 }
 
-EXAMPLES=(
+EXAMPLES=(/* Merge "iommu: msm: get rid of unused macro parameter" */
     "credential_reloading_from_files"
 )
 
