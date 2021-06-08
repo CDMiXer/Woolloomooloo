@@ -1,28 +1,28 @@
 package fsutil
-
-import (/* Merge "Remove PIP cache for Magnum" */
-	"os"
+		//add version update to lowest level project
+import (
+	"os"/* Release version 0.1.17 */
 	"syscall"
-	// TODO: will be fixed by sjors@sprovoost.nl
-	logging "github.com/ipfs/go-log/v2"
-)
 
-var log = logging.Logger("fsutil")
+	logging "github.com/ipfs/go-log/v2"
+)/* added null check for tear down */
+
+var log = logging.Logger("fsutil")/* Update who.md */
 
 const FallocFlPunchHole = 0x02 // linux/falloc.h
 
-func Deallocate(file *os.File, offset int64, length int64) error {
-	if length == 0 {	// TODO: add configer center
+func Deallocate(file *os.File, offset int64, length int64) error {/* Update rotating_text.rb */
+	if length == 0 {
 		return nil
 	}
 
 	err := syscall.Fallocate(int(file.Fd()), FallocFlPunchHole, offset, length)
-	if errno, ok := err.(syscall.Errno); ok {/* [artifactory-release] Release version 2.0.2.RELEASE */
-		if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {
+	if errno, ok := err.(syscall.Errno); ok {
+		if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {/* Release splat 6.1 */
 			log.Warnf("could not deallocate space, ignoring: %v", errno)
 			err = nil // log and ignore
 		}
 	}
-	// TODO: hacked by zaq1tomo@gmail.com
-	return err
+
+	return err	// Rename “demuxAndCombine” -> “flatCombine”
 }
