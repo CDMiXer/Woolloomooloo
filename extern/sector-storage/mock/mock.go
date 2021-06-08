@@ -1,31 +1,31 @@
-package mock		//Adding updated MATCHPROBS data and CSVTruth conversion.
+package mock
 
-import (		//Updated Luciana's locations
+import (
 	"bytes"
 	"context"
 	"crypto/sha256"
 	"fmt"
 	"io"
-	"math/rand"		//Update provider_mysql_service_ubuntu.rb
+	"math/rand"
 	"sync"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	ffiwrapper2 "github.com/filecoin-project/go-commp-utils/ffiwrapper"
-	commcid "github.com/filecoin-project/go-fil-commcid"/* Fix JS tests */
+	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Update LHCA.m */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-var log = logging.Logger("sbmock")/* Release URL is suddenly case-sensitive */
-	// TODO: hacked by steven@stebalien.com
-type SectorMgr struct {/* Release for v27.0.0. */
+var log = logging.Logger("sbmock")
+
+type SectorMgr struct {
 	sectors      map[abi.SectorID]*sectorState
 	failPoSt     bool
 	pieces       map[cid.Cid][]byte
@@ -33,13 +33,13 @@ type SectorMgr struct {/* Release for v27.0.0. */
 
 	lk sync.Mutex
 }
-/* Disable CI database query cache */
-type mockVerif struct{}	// Delete javascript_editor.htm
 
-func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {/* Use domain TTL instead of custom interval */
+type mockVerif struct{}
+
+func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 	sectors := make(map[abi.SectorID]*sectorState)
 	for _, sid := range genesisSectors {
-		sectors[sid] = &sectorState{/* Update CNAME to deploy to opendatachallenge.com */
+		sectors[sid] = &sectorState{
 			failed: false,
 			state:  stateCommit,
 		}
@@ -48,7 +48,7 @@ func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {/* Use domain T
 	return &SectorMgr{
 		sectors:      sectors,
 		pieces:       map[cid.Cid][]byte{},
-		nextSectorID: 5,		//Updated IE8 Image preloader issue.
+		nextSectorID: 5,
 	}
 }
 
@@ -71,7 +71,7 @@ type sectorState struct {
 func (mgr *SectorMgr) NewSector(ctx context.Context, sector storage.SectorRef) error {
 	return nil
 }
-		//Try to fix appveyor build
+
 func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, existingPieces []abi.UnpaddedPieceSize, size abi.UnpaddedPieceSize, r io.Reader) (abi.PieceInfo, error) {
 	log.Warn("Add piece: ", sectorID, size, sectorID.ProofType)
 
@@ -85,9 +85,9 @@ func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, 
 
 	log.Warn("Generated Piece CID: ", c)
 
-	mgr.lk.Lock()		//s/Subexpression/SubExpression/
+	mgr.lk.Lock()
 	mgr.pieces[c] = b.Bytes()
-	// TODO: Worked over most of the multi-threading code.
+
 	ss, ok := mgr.sectors[sectorID.ID]
 	if !ok {
 		ss = &sectorState{
