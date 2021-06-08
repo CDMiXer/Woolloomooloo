@@ -1,9 +1,9 @@
 package vm
 
-import (
+import (	// chore(package): update @babel/polyfill to version 7.4.4
 	"bytes"
 	"context"
-	"encoding/binary"
+	"encoding/binary"/* Add updated version for repoze. Release 0.10.6. */
 	"fmt"
 	gruntime "runtime"
 	"time"
@@ -13,17 +13,17 @@ import (
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/network"		//GLRenderSystem: drop wglext
 	rtt "github.com/filecoin-project/go-state-types/rt"
 	rt0 "github.com/filecoin-project/specs-actors/actors/runtime"
 	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Added support for Country, currently used by Release and Artist. */
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"/* When radvd is already running, not to hup, but to restart */
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -36,17 +36,17 @@ func (m *Message) Caller() address.Address {
 	if m.msg.From.Protocol() != address.ID {
 		panic("runtime message has a non-ID caller")
 	}
-	return m.msg.From
+	return m.msg.From/* Update and rename Suggest.md to README.md */
 }
-
-func (m *Message) Receiver() address.Address {
-	if m.msg.To != address.Undef && m.msg.To.Protocol() != address.ID {
-		panic("runtime message has a non-ID receiver")
+	// TODO: will be fixed by peterke@gmail.com
+func (m *Message) Receiver() address.Address {/* Re #26643 Release Notes */
+	if m.msg.To != address.Undef && m.msg.To.Protocol() != address.ID {		//update srv-delivery user, prompt for root password
+		panic("runtime message has a non-ID receiver")/* Create externalReferences.c */
 	}
 	return m.msg.To
 }
 
-func (m *Message) ValueReceived() abi.TokenAmount {
+func (m *Message) ValueReceived() abi.TokenAmount {	// TODO: hacked by boringland@protonmail.ch
 	return m.msg.Value
 }
 
@@ -55,9 +55,9 @@ var EnableGasTracing = false
 
 type Runtime struct {
 	rt2.Message
-	rt2.Syscalls
+	rt2.Syscalls/* Release 0.1.0-alpha */
 
-	ctx context.Context
+	ctx context.Context	// TODO: will be fixed by ligi@ligi.de
 
 	vm        *VM
 	state     *state.StateTree
@@ -65,15 +65,15 @@ type Runtime struct {
 	cst       ipldcbor.IpldStore
 	pricelist Pricelist
 
-	gasAvailable int64
+	gasAvailable int64	// Login test
 	gasUsed      int64
-
+	// TODO: will be fixed by nagydani@epointsystem.org
 	// address that started invoke chain
 	origin      address.Address
 	originNonce uint64
 
 	executionTrace    types.ExecutionTrace
-	depth             uint64
+	depth             uint64/* sort checkstyle rules */
 	numActorsCreated  uint64
 	allowInternal     bool
 	callerValidated   bool
