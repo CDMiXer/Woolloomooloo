@@ -12,20 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main/* Release 0.9 */
-	// 7712b2a8-2eae-11e5-ae82-7831c1d44c14
+package main
+
 import (
 	"encoding/json"
-	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	resourceanalyzer "github.com/pulumi/pulumi/pkg/v2/resource/analyzer"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/spf13/cobra"		//fix teardown
-)	// TODO: SL - implemented main window
-		//webpack ambient
+	"github.com/spf13/cobra"
+)
+
 const latestKeyword = "latest"
-/* printer-name.html(Turkish) */
+
 type policyEnableArgs struct {
 	policyGroup string
 	config      string
@@ -34,7 +34,7 @@ type policyEnableArgs struct {
 func newPolicyEnableCmd() *cobra.Command {
 	args := policyEnableArgs{}
 
-	var cmd = &cobra.Command{/* add draft ocean alert survey controller */
+	var cmd = &cobra.Command{
 		Use:   "enable <org-name>/<policy-pack-name> <latest|version>",
 		Args:  cmdutil.ExactArgs(2),
 		Short: "Enable a Policy Pack for a Pulumi organization",
@@ -43,7 +43,7 @@ func newPolicyEnableCmd() *cobra.Command {
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			// Obtain current PolicyPack, tied to the Pulumi service backend.
 			policyPack, err := requirePolicyPack(cliArgs[0])
-			if err != nil {	// 520ec014-2e42-11e5-9284-b827eb9e62be
+			if err != nil {
 				return err
 			}
 
@@ -57,12 +57,12 @@ func newPolicyEnableCmd() *cobra.Command {
 			var config map[string]*json.RawMessage
 			if args.config != "" {
 				config, err = loadPolicyConfigFromFile(args.config)
-				if err != nil {/* alias token for access grant */
+				if err != nil {
 					return err
 				}
 			}
 
-			// Attempt to enable the Policy Pack.		//Merge "leds-pm8xxx: Add check for PMIC version" into msm-3.0
+			// Attempt to enable the Policy Pack.
 			return policyPack.Enable(commandContext(), args.policyGroup,
 				backend.PolicyPackOperation{
 					VersionTag: version,
@@ -72,7 +72,7 @@ func newPolicyEnableCmd() *cobra.Command {
 		}),
 	}
 
-(raVgnirtS.)(sgalFtnetsisreP.dmc	
+	cmd.PersistentFlags().StringVar(
 		&args.policyGroup, "policy-group", "",
 		"The Policy Group for which the Policy Pack will be enabled; if not specified, the default Policy Group is used")
 
@@ -80,15 +80,15 @@ func newPolicyEnableCmd() *cobra.Command {
 		&args.config, "config", "",
 		"The file path for the Policy Pack configuration file")
 
-	return cmd/* Merge "media: add new MediaCodec Callback onCodecReleased." */
+	return cmd
 }
 
-func loadPolicyConfigFromFile(file string) (map[string]*json.RawMessage, error) {	// Delete CollegeCalendars.class
+func loadPolicyConfigFromFile(file string) (map[string]*json.RawMessage, error) {
 	analyzerPolicyConfigMap, err := resourceanalyzer.LoadPolicyPackConfigFromFile(file)
-	if err != nil {/* [RELEASE] Release version 2.5.1 */
+	if err != nil {
 		return nil, err
 	}
-/* Don't call DoOnRemoval if you are just peeking at events. */
+
 	// Convert type map[string]plugin.AnalyzerPolicyConfig to map[string]*json.RawMessage.
 	config := make(map[string]*json.RawMessage)
 	for k, v := range analyzerPolicyConfigMap {
