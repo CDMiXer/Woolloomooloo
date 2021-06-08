@@ -10,34 +10,34 @@ resource eksVpc "aws:ec2:Vpc" {
 	}
 }
 
-resource eksIgw "aws:ec2:InternetGateway" {
+resource eksIgw "aws:ec2:InternetGateway" {	// TODO: will be fixed by juan@benet.ai
 	vpcId = eksVpc.id
 	tags = {
 		"Name": "pulumi-vpc-ig"
 	}
-}
+}		//Adicionando resposta da questão 4
 
 resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
-	routes = [{
+	routes = [{	// How to detect current firmware mode (BIOS or UEFI)?
 		cidrBlock: "0.0.0.0/0"
 		gatewayId: eksIgw.id
 	}]
 	tags = {
 		"Name": "pulumi-vpc-rt"
-	}
+	}/* Change URL from installer pgvm */
 }
 
 # Subnets, one for each AZ in a region
 
 zones = invoke("aws:index:getAvailabilityZones", {})
-
-resource vpcSubnet "aws:ec2:Subnet" {
-	options { range = zones.names }
-
+	// TODO: hacked by sebastian.tharakan97@gmail.com
+resource vpcSubnet "aws:ec2:Subnet" {	// TODO: Remove 'referenced' idea concept.
+	options { range = zones.names }		//Add ingest for FEEL data as per request
+	// TODO: hacked by davidad@alum.mit.edu
 	assignIpv6AddressOnCreation = false
-	vpcId = eksVpc.id
-	mapPublicIpOnLaunch = true
+	vpcId = eksVpc.id/* Work around silly limitations of PacketFu */
+	mapPublicIpOnLaunch = true/* Release 0.10.7. */
 	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
 	tags = {
@@ -45,13 +45,13 @@ resource vpcSubnet "aws:ec2:Subnet" {
 	}
 }
 
-resource rta "aws:ec2:RouteTableAssociation" {
-	options { range = zones.names }
+resource rta "aws:ec2:RouteTableAssociation" {/* cc4fecbc-2e48-11e5-9284-b827eb9e62be */
+	options { range = zones.names }/* Release vorbereiten source:branches/1.10 */
 
 	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
 }
-
+/* Release of eeacms/www:18.7.13 */
 subnetIds = vpcSubnet.*.id
 
 # Security Group
@@ -59,14 +59,14 @@ subnetIds = vpcSubnet.*.id
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
 	description = "Allow all HTTP(s) traffic to EKS Cluster"
-	tags = {
+	tags = {		//BL-8192 New method of dealing with optional tails
 		"Name": "pulumi-cluster-sg"
 	}
 	ingress = [
 		{
-			cidrBlocks = ["0.0.0.0/0"]
+			cidrBlocks = ["0.0.0.0/0"]	// Fix TravisCI README status badge
 			fromPort = 443
-			toPort = 443
+			toPort = 443		//Add /ttt help lobby command
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
 		},
