@@ -1,20 +1,20 @@
-{
+{/* Kconfig: add CONFIG_ARCHITECTURE_FLAGS hidden option */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",
+        "module": "commonjs",	// TODO: Focusing on simplifying (refactoring) canonical Operators, and join(..)
+        "moduleResolution": "node",	// TODO: hacked by nicksavers@gmail.com
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// TODO: will be fixed by admin@multicoin.co
-        "forceConsistentCasingInFileNames": true
+        "noFallthroughCasesInSwitch": true,/* [Issue 5]Introduced region.js, responding to Geography */
+        "noImplicitReturns": true,/* Add created date to Release boxes */
+        "forceConsistentCasingInFileNames": true		//Merge "Move ironic-dsvm-full to nova experimental queue"
     },
     "files": [
         "index.ts",
-    ]
-}/* Release v2.1.3 */
+    ]	// TODO: `nvm alias`: slightly speed up alias resolution.
+}
