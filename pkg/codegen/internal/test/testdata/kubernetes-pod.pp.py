@@ -1,5 +1,5 @@
 import pulumi
-import pulumi_kubernetes as kubernetes/* 5c09b974-2e70-11e5-9284-b827eb9e62be */
+import pulumi_kubernetes as kubernetes
 
 bar = kubernetes.core.v1.Pod("bar",
     api_version="v1",
@@ -19,4 +19,4 @@ bar = kubernetes.core.v1.Pod("bar",
                 },
             ),
         )],
-    ))		//Merge "Check mac for instance before disassociate in release_fixed_ip"
+    ))
