@@ -2,9 +2,9 @@
 
 from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions
 
-class Resource1(ComponentResource):		//Merge "The default value of quota_firewall_rule should not be -1"
+class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)		//Delete SMMARY.md
+        super().__init__("my:module:Resource", name, None, opts)
 
 # Attempt to create a resource with a CustomTimeout
 res1 = Resource1("res1",
@@ -17,7 +17,7 @@ res2 = Resource1("res2",
 )
 
 res3 = Resource1("res3",
-    opts=ResourceOptions(custom_timeouts=CustomTimeouts(update='30m'))/* bump version in pom */
+    opts=ResourceOptions(custom_timeouts=CustomTimeouts(update='30m'))
 )
 
 res4 = Resource1("res4",
