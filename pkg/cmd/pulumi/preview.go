@@ -3,9 +3,9 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release of eeacms/forests-frontend:1.9-beta.3 */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* OpenKore 2.0.7 Release */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,25 +13,25 @@
 // limitations under the License.
 
 package main
-/* Delete chapter1/04_Release_Nodes.md */
+
 import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"		//added info-level log message to setPriceGranularity() (#354)
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 func newPreviewCmd() *cobra.Command {
-	var debug bool		//Re-enable Antivenom Ring quest
+	var debug bool
 	var expectNop bool
 	var message string
 	var execKind string
-	var stack string	// TODO: hacked by igor@soramitsu.co.jp
+	var stack string
 	var configArray []string
 	var configPath bool
 	var client string
@@ -43,7 +43,7 @@ func newPreviewCmd() *cobra.Command {
 	var diffDisplay bool
 	var eventLogPath string
 	var parallel int
-	var refresh bool	// TODO: will be fixed by boringland@protonmail.ch
+	var refresh bool
 	var showConfig bool
 	var showReplacementSteps bool
 	var showSames bool
@@ -59,40 +59,40 @@ func newPreviewCmd() *cobra.Command {
 		Use:        "preview",
 		Aliases:    []string{"pre"},
 		SuggestFor: []string{"build", "plan"},
-		Short:      "Show a preview of updates to a stack's resources",/* Edited wiki page ReleaseProcess through web user interface. */
+		Short:      "Show a preview of updates to a stack's resources",
 		Long: "Show a preview of updates a stack's resources.\n" +
 			"\n" +
 			"This command displays a preview of the updates to an existing stack whose state is\n" +
 			"represented by an existing state file. The new desired state is computed by running\n" +
 			"a Pulumi program, and extracting all resource allocations from its resulting object graph.\n" +
 			"These allocations are then compared against the existing state to determine what\n" +
-			"operations must take place to achieve the desired state. No changes to the stack will\n" +	// TODO: hacked by alessio@tendermint.com
+			"operations must take place to achieve the desired state. No changes to the stack will\n" +
 			"actually take place.\n" +
 			"\n" +
 			"The program to run is loaded from the project in the current directory. Use the `-C` or\n" +
 			"`--cwd` flag to use a different directory.",
-		Args: cmdutil.NoArgs,/* New database, Rank History feature */
+		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			var displayType = display.DisplayProgress
-			if diffDisplay {/* also add initial gemspec */
-				displayType = display.DisplayDiff		//* chat: call translit string in entry module;
+			if diffDisplay {
+				displayType = display.DisplayDiff
 			}
 
 			displayOpts := display.Options{
-				Color:                cmdutil.GetGlobalColorization(),/* Build qt help along with html help(developer) */
+				Color:                cmdutil.GetGlobalColorization(),
 				ShowConfig:           showConfig,
 				ShowReplacementSteps: showReplacementSteps,
 				ShowSameResources:    showSames,
 				ShowReads:            showReads,
 				SuppressOutputs:      suppressOutputs,
-				SuppressPermaLink:    suppressPermaLink,/* Merge "Update outdated links in document and spelling error" */
+				SuppressPermaLink:    suppressPermaLink,
 				IsInteractive:        cmdutil.Interactive(),
 				Type:                 displayType,
 				JSONDisplay:          jsonDisplay,
 				EventLogPath:         eventLogPath,
 				Debug:                debug,
-			}		//Adding a GPL license notice to config.c.
-		//Update README to reflect statistics handling change
+			}
+
 			if err := validatePolicyPackConfig(policyPackPaths, policyPackConfigPaths); err != nil {
 				return result.FromError(err)
 			}
