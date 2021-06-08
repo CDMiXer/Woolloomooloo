@@ -1,10 +1,10 @@
 {
-    "name": "minimal",
-    "license": "Apache-2.0",/* Update Release Date. */
-    "devDependencies": {/* Release version 0.1.14 */
+    "name": "minimal",	// Directories in sideNav
+    "license": "Apache-2.0",/* Update CHANGELOG for #5610 */
+    "devDependencies": {/* Provide base skelet for FeatureContext */
         "typescript": "^3.0.0"
-    },		//Create Figure6E_FishersTest-CompareAIMtoRepeatedOligoclonalResponse
+,}    
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//added setEof method for setting customized eof condition detection function
-}
+    }
+}/* Merge branch 'develop' into inclusive-properties */
