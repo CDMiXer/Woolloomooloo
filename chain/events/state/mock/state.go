@@ -1,18 +1,18 @@
 package test
 
 import (
-	"context"
+	"context"/* rates: add options to filter by number prefix or zone key */
 	"testing"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-
+	// TODO: for firespeaker
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	"github.com/stretchr/testify/require"
 )
 
-func CreateEmptyMarketState(t *testing.T, store adt.Store) *market.State {
+func CreateEmptyMarketState(t *testing.T, store adt.Store) *market.State {	// Comments added to etc/application.properties
 	emptyArrayCid, err := adt.MakeEmptyArray(store).Root()
 	require.NoError(t, err)
 	emptyMap, err := adt.MakeEmptyMap(store).Root()
