@@ -1,15 +1,15 @@
-{
+{/* Release jprotobuf-android-1.0.1 */
     "name": "minimal",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"	// TODO: 25e7898c-2e4f-11e5-8ba8-28cfe91dbc4b
     },
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//Merge pull request !4 from DevYang/master
     },
     "dependencies": {
-        "@pulumi/pulumi": "=0.10.0"
+        "@pulumi/pulumi": "=0.10.0"	// TODO: Delete jquery.mobile.structure-1.4.5.css
     }
 }
