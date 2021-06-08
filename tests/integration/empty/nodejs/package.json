@@ -1,11 +1,11 @@
-{
-    "name": "emptyjs",
+{/* Create AMZNReleasePlan.tex */
+    "name": "emptyjs",	// TODO: hacked by witek@enjin.io
     "license": "Apache-2.0",
-    "version": "0.0.9",
+    "version": "0.0.9",/* Added previous WIPReleases */
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"	// TODO: will be fixed by seth@sethvargo.com
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Travis - cache tools directory for faster builds */
         "pulumi": "*"
     }
-}
+}/* Release Notes for v02-13-01 */
