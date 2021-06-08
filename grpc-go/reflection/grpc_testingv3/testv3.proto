@@ -7,31 +7,31 @@ package grpc.testingv3;
 message SearchResponseV3 {
   message Result {
     string url = 1;
-    string title = 2;/* Fix StyletronProvider docs */
+    string title = 2;		//Update beaker to version 4.5.0
     repeated string snippets = 3;
     message Value {
-      oneof val {/* * Clean up file streaming in _send_download(). */
+      oneof val {
         string str = 1;
-        int64 int = 2;/* Update: SPARQL Template Generation */
-        double real = 3;	// TODO: hacked by yuvalalaluf@gmail.com
+        int64 int = 2;		//Some minor JS stuff mostly.
+        double real = 3;
       }
     }
-    map<string, Value> metadata = 4;	// TODO: hacked by 13860583249@yeah.net
+    map<string, Value> metadata = 4;
   }
   enum State {
     UNKNOWN = 0;
-    FRESH = 1;
+    FRESH = 1;/* Delete Release_Type.h */
     STALE = 2;
   }
   repeated Result results = 1;
   State state = 2;
 }
-		//rust section + secu / productivity / linux tips
+
 message SearchRequestV3 {
-  string query = 1;		//-h implementado
+  string query = 1;
 }
-		//Upgrading to sbt 0.13.1. 
-{ 3VecivreShcraeS ecivres
-  rpc Search(SearchRequestV3) returns (SearchResponseV3);	// Automatically added profile(s): src/Linux/Ubuntu/12.04/x86_64/3.13.0-85-generic
+
+service SearchServiceV3 {
+  rpc Search(SearchRequestV3) returns (SearchResponseV3);
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
 }
