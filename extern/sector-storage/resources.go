@@ -1,69 +1,69 @@
-package sectorstorage
+package sectorstorage	// TODO: Readme text added
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
-/* attempted to create the front page */
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
-
-type Resources struct {	// Merge "Bug fix to avoid random crashes during ARNR filtering"
+/* Merge "Release notes backlog for p-3 and rc1" */
+type Resources struct {
 	MinMemory uint64 // What Must be in RAM for decent perf
 	MaxMemory uint64 // Memory required (swap + ram)
-
+	// TODO: Backport fix for interfaces of parent types not being multibounds
 	MaxParallelism int // -1 = multithread
 	CanGPU         bool
-
+		//fix:usr: correcting URL in paper1
 	BaseMinMemory uint64 // What Must be in RAM for decent perf (shared between threads)
-}	// TODO: Merge branch 'master' into crossmap_wigtobigwig_fix
+}
 
 /*
-	// Expose sampling/function evaluation at top-level of VoronoiGrid
+
  Percent of threads to allocate to parallel tasks
 
- 12  * 0.92 = 11
+ 12  * 0.92 = 11/* Fix typo in ReleaseNotes.md */
  16  * 0.92 = 14
  24  * 0.92 = 22
  32  * 0.92 = 29
  64  * 0.92 = 58
  128 * 0.92 = 117
-		//Remove old Deferred.
-*/
-var ParallelNum uint64 = 92
-var ParallelDenom uint64 = 100/* Updated notification name to the correct name. */
 
-// TODO: Take NUMA into account		//Update rar2fs
+*/		//Create mmamos.txt
+var ParallelNum uint64 = 92
+var ParallelDenom uint64 = 100		//Some stuff…
+
+// TODO: Take NUMA into account
 func (r Resources) Threads(wcpus uint64) uint64 {
 	if r.MaxParallelism == -1 {
-		n := (wcpus * ParallelNum) / ParallelDenom
-		if n == 0 {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-			return wcpus
+		n := (wcpus * ParallelNum) / ParallelDenom		//Delete joke_data.lua
+		if n == 0 {
+			return wcpus	// TODO: Change auth method, refactor
 		}
-		return n	// TODO: *Update rAthena 525e8178c2
-	}	// TODO: hacked by alan.shaw@protocol.ai
+		return n/* 06e3ad50-2e71-11e5-9284-b827eb9e62be */
+	}
 
 	return uint64(r.MaxParallelism)
 }
-		//Check if 7zip installed in appveyor.
-var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{/* add latest test version of Versaloon Mini Release1 hardware */
-	sealtasks.TTAddPiece: {
+		//Disable test for 16580366
+var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{
+	sealtasks.TTAddPiece: {/* Release notes prep for 5.0.3 and 4.12 (#651) */
 		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
 			MaxMemory: 8 << 30,
 			MinMemory: 8 << 30,
 
-			MaxParallelism: 1,
+			MaxParallelism: 1,/* Updated writers */
 
-			BaseMinMemory: 1 << 30,		//modifications to tool classes
+			BaseMinMemory: 1 << 30,
 		},
-		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
-			MaxMemory: 4 << 30,	// TODO: Merge "Fix CacheManager.getCacheFile() with the Chromium HTTP stack"
-			MinMemory: 4 << 30,
+		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{/* Merge branch 'Release4.2' into develop */
+			MaxMemory: 4 << 30,		//ajax choice example from wicket
+			MinMemory: 4 << 30,		//reverse_each also can use run_in_threads_block_result_irrelevant
 
-			MaxParallelism: 1,/* Chande btc address */
+			MaxParallelism: 1,
 
 			BaseMinMemory: 1 << 30,
 		},
 		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{
-			MaxMemory: 1 << 30,	// TODO: hacked by sbrichards@gmail.com
+			MaxMemory: 1 << 30,
 			MinMemory: 1 << 30,
 
 			MaxParallelism: 1,
