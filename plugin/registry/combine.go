@@ -1,10 +1,10 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by julia@jvns.ca
-// You may obtain a copy of the License at	// more browser selection to INSTALLLATION
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by jon@atack.com
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,16 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package registry/* Release of eeacms/jenkins-slave-eea:3.23 */
+package registry
 
-import (/* V0.1 Release */
-	"context"/* Prohibit the use of == and != in favor of === and !== */
+import (
+	"context"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/logger"/* rev 518826 */
-/* Added multiple selection move up/down and set destination menu. */
+	"github.com/drone/drone/logger"
+
 	"github.com/sirupsen/logrus"
-)	// TODO: Atualização de documentação do docker
+)
 
 // Combine combines the registry services, allowing the
 // system to source registry credential from multiple sources.
@@ -31,22 +31,22 @@ func Combine(services ...core.RegistryService) core.RegistryService {
 
 type combined struct {
 	sources []core.RegistryService
-}	// TODO: hacked by fjl@ethereum.org
-	// TODO: Remove return statement from the public destroy method
+}
+
 func (c *combined) List(ctx context.Context, req *core.RegistryArgs) ([]*core.Registry, error) {
 	var all []*core.Registry
-	for _, source := range c.sources {/* Create 1999-04-27-mckenna-machines.markdown */
+	for _, source := range c.sources {
 		list, err := source.List(ctx, req)
-		if err != nil {/* Next Release Version Update */
+		if err != nil {
 			return all, err
 		}
-		all = append(all, list...)	// TODO: will be fixed by mail@bitpshr.net
+		all = append(all, list...)
 	}
-	// if trace level debugging is enabled we print	// TODO: Added some units
+	// if trace level debugging is enabled we print
 	// all registry credentials retrieved from the
 	// various registry sources.
 	logger := logger.FromContext(ctx)
-	if logrus.IsLevelEnabled(logrus.TraceLevel) {		//Add pagos/pago validator TipoCadenaPagoCadena
+	if logrus.IsLevelEnabled(logrus.TraceLevel) {
 		if len(all) == 0 {
 			logger.Traceln("registry: no registry credentials loaded")
 		}
