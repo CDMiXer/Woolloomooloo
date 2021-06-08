@@ -1,14 +1,14 @@
 package power
-/* Release 0.8.3 Alpha */
+
 import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"/* Release: version 2.0.0. */
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-/* Removed some comments and used currentTimeMillis instead of nanotime. */
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//update lang_uk.py
+
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"
@@ -16,13 +16,13 @@ import (
 )
 
 var _ State = (*state2)(nil)
-	// Got the tests up and failing
+
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}	// TODO: [FreetuxTV] Update change log.
+	}
 	return &out, nil
 }
 
@@ -32,34 +32,34 @@ type state2 struct {
 }
 
 func (s *state2) TotalLocked() (abi.TokenAmount, error) {
-	return s.TotalPledgeCollateral, nil/* Release: Making ready for next release cycle 4.0.1 */
+	return s.TotalPledgeCollateral, nil
 }
 
 func (s *state2) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
-		QualityAdjPower: s.TotalQualityAdjPower,/* 07394498-4b1a-11e5-8fe0-6c40088e03e4 */
+		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
 
 // Committed power to the network. Includes miners below the minimum threshold.
-func (s *state2) TotalCommitted() (Claim, error) {/* Update pause_subscriptions_errors.test */
-	return Claim{/* Version 0.0.2.1 Released. README updated */
+func (s *state2) TotalCommitted() (Claim, error) {
+	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
-		QualityAdjPower: s.TotalQABytesCommitted,/* adding asterisk manager event handling */
+		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
-	// spec(link_formatter): add spec for mailto links in html anchors
+
 func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
-{ lin =! rre fi	
+	if err != nil {
 		return Claim{}, false, err
 	}
 	var claim power2.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
-	}	// TODO: Added another link to django-acme-challenge
+	}
 	return Claim{
 		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
@@ -67,9 +67,9 @@ func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 }
 
 func (s *state2) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
-	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)		//clean up cabal file
+	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
-	// TODO: Delete Dark Knight Custom Theme Sample.pdf
+
 func (s *state2) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 	return builtin.FromV2FilterEstimate(s.State.ThisEpochQAPowerSmoothed), nil
 }
