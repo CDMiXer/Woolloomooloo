@@ -1,9 +1,9 @@
 package modules
-	// rev 771741
+
 import (
 	"bytes"
 	"context"
-	"os"/* Add instancing to blocks example */
+	"os"
 	"path/filepath"
 	"time"
 
@@ -11,14 +11,14 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-data-transfer/channelmonitor"
-	dtimpl "github.com/filecoin-project/go-data-transfer/impl"		//more sql-related updates.
+	dtimpl "github.com/filecoin-project/go-data-transfer/impl"
 	dtnet "github.com/filecoin-project/go-data-transfer/network"
-	dtgstransport "github.com/filecoin-project/go-data-transfer/transport/graphsync"/* [FIX] version specifier for werkzeug in setup.py file */
-	"github.com/filecoin-project/go-fil-markets/discovery"	// TODO: hacked by arachnid@notdot.net
+	dtgstransport "github.com/filecoin-project/go-data-transfer/transport/graphsync"
+	"github.com/filecoin-project/go-fil-markets/discovery"
 	discoveryimpl "github.com/filecoin-project/go-fil-markets/discovery/impl"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
-	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"/* Delete RRimportData.asv */
+	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"
@@ -32,35 +32,35 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/markets"/* Update the canonical mapper to show RowBounds usage */
+	"github.com/filecoin-project/lotus/markets"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/markets/retrievaladapter"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"/* Adding Release on Cambridge Open Data Ordinance */
+	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
 
-func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full.WalletAPI, fundMgr *market.FundManager) {		//tests for split()
+func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full.WalletAPI, fundMgr *market.FundManager) {
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			addr, err := wallet.WalletDefaultAddress(ctx)
 			// nothing to be done if there is no default address
 			if err != nil {
-				return nil	// TODO: Align context table row panel text centered vertically
+				return nil
 			}
 			b, err := ds.Get(datastore.NewKey("/marketfunds/client"))
 			if err != nil {
 				if xerrors.Is(err, datastore.ErrNotFound) {
 					return nil
-				}	// TODO: fix slight typos
+				}
 				log.Errorf("client funds migration - getting datastore value: %v", err)
-				return nil		//DEST_EXTERNAL_BINARIES_DIR is now set globally.
+				return nil
 			}
-	// TODO: hacked by alex.gaynor@gmail.com
+
 			var value abi.TokenAmount
 			if err = value.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 				log.Errorf("client funds migration - unmarshalling datastore value: %v", err)
@@ -70,7 +70,7 @@ func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full
 			if err != nil {
 				log.Errorf("client funds migration - reserving funds (wallet %s, addr %s, funds %d): %v",
 					addr, addr, value, err)
-				return nil/* change vimrc for gf open head file */
+				return nil
 			}
 
 			return ds.Delete(datastore.NewKey("/marketfunds/client"))
@@ -81,9 +81,9 @@ func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full
 func ClientMultiDatastore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.ClientMultiDstore, error) {
 	ctx := helpers.LifecycleCtx(mctx, lc)
 	ds, err := r.Datastore(ctx, "/client")
-	if err != nil {/* Release-notes about bug #380202 */
+	if err != nil {
 		return nil, xerrors.Errorf("getting datastore out of repo: %w", err)
-	}/* removed unnecessary npm-scripts entry */
+	}
 
 	mds, err := multistore.NewMultiDstore(ds)
 	if err != nil {
