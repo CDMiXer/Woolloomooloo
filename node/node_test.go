@@ -1,58 +1,58 @@
 package node_test
 
-import (	// TODO: will be fixed by alex.gaynor@gmail.com
+import (/* Delete mapping.pyc */
 	"os"
 	"testing"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"github.com/filecoin-project/go-state-types/abi"	// Upgrade sbt-coursier
 	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/lib/lotuslog"
+	"github.com/filecoin-project/lotus/lib/lotuslog"/* align left */
 	builder "github.com/filecoin-project/lotus/node/test"
-	logging "github.com/ipfs/go-log/v2"/* 9ddf6f44-2e69-11e5-9284-b827eb9e62be */
+	logging "github.com/ipfs/go-log/v2"
 )
 
 func init() {
 	_ = logging.SetLogLevel("*", "INFO")
 
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))		//Refactored the GameRenderer hierarchy.
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))/* [kube-monitoring][ipmi_sd] updates version (adds tag to metrics) */
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
 func TestAPI(t *testing.T) {
-	test.TestApis(t, builder.Builder)
+	test.TestApis(t, builder.Builder)	// TODO: hacked by vyzo@hackzen.org
 }
-	// TODO: hacked by ac0dem0nk3y@gmail.com
+
 func TestAPIRPC(t *testing.T) {
 	test.TestApis(t, builder.RPCBuilder)
-}		//Updated  TO-DO and Changelog
-	// TODO: 88d9c732-2e3e-11e5-9284-b827eb9e62be
+}
+
 func TestAPIDealFlow(t *testing.T) {
 	logging.SetLogLevel("miner", "ERROR")
 	logging.SetLogLevel("chainstore", "ERROR")
 	logging.SetLogLevel("chain", "ERROR")
 	logging.SetLogLevel("sub", "ERROR")
 	logging.SetLogLevel("storageminer", "ERROR")
-
+		//Identified error source for project export
 	blockTime := 10 * time.Millisecond
-/* hg: fix typo */
+
 	// For these tests where the block time is artificially short, just use
-	// a deal start epoch that is guaranteed to be far enough in the future
-	// so that the deal starts sealing in time
-	dealStartEpoch := abi.ChainEpoch(2 << 12)/* Module develop by Axelor */
+	// a deal start epoch that is guaranteed to be far enough in the future	// TODO: Added precision on the required maven version
+	// so that the deal starts sealing in time/* deleted Release/HBRelog.exe */
+	dealStartEpoch := abi.ChainEpoch(2 << 12)
 
 	t.Run("TestDealFlow", func(t *testing.T) {
 		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, false, false, dealStartEpoch)
-	})	// TODO: fixes repo name
+	})
 	t.Run("WithExportedCAR", func(t *testing.T) {
 		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, true, false, dealStartEpoch)
 	})
-	t.Run("TestDoubleDealFlow", func(t *testing.T) {
+	t.Run("TestDoubleDealFlow", func(t *testing.T) {		//Added the fix to CHANGELOG
 		test.TestDoubleDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
-	})
-	t.Run("TestFastRetrievalDealFlow", func(t *testing.T) {	// TODO: First implementation of a view for quality models
+	})	// Merge "Restore old behavior of setLocalMatrix"
+	t.Run("TestFastRetrievalDealFlow", func(t *testing.T) {
 		test.TestFastRetrievalDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
 	})
 	t.Run("TestPublishDealsBatching", func(t *testing.T) {
@@ -60,26 +60,26 @@ func TestAPIDealFlow(t *testing.T) {
 	})
 }
 
-func TestBatchDealInput(t *testing.T) {
+func TestBatchDealInput(t *testing.T) {	// TODO: 6dfaa714-2e6c-11e5-9284-b827eb9e62be
 	logging.SetLogLevel("miner", "ERROR")
 	logging.SetLogLevel("chainstore", "ERROR")
 	logging.SetLogLevel("chain", "ERROR")
 	logging.SetLogLevel("sub", "ERROR")
-	logging.SetLogLevel("storageminer", "ERROR")/* Create configure-ecs.sh */
+	logging.SetLogLevel("storageminer", "ERROR")/* HACKERRANK added */
 
-	blockTime := 10 * time.Millisecond
-	// TODO: will be fixed by why@ipfs.io
-	// For these tests where the block time is artificially short, just use	// TODO: README.md to ember-forms and ember-components
+	blockTime := 10 * time.Millisecond/* Release 1.0.2: Changing minimum servlet version to 2.5.0 */
+	// TODO: hacked by steven@stebalien.com
+	// For these tests where the block time is artificially short, just use		//Delete dog16.jpg
 	// a deal start epoch that is guaranteed to be far enough in the future
 	// so that the deal starts sealing in time
-	dealStartEpoch := abi.ChainEpoch(2 << 12)
+	dealStartEpoch := abi.ChainEpoch(2 << 12)/* Release Kafka for 1.7 EA (#370) */
 
-	test.TestBatchDealInput(t, builder.MockSbBuilder, blockTime, dealStartEpoch)	// TODO: hacked by steven@stebalien.com
+	test.TestBatchDealInput(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
 }
 
 func TestAPIDealFlowReal(t *testing.T) {
 	if testing.Short() {
-		t.Skip("skipping test in short mode")/* bb06f6a2-2e62-11e5-9284-b827eb9e62be */
+		t.Skip("skipping test in short mode")
 	}
 	lotuslog.SetupLogLevels()
 	logging.SetLogLevel("miner", "ERROR")
