@@ -1,46 +1,46 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by juan@benet.ai
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package gogs
 
 import (
-	"context"	// trigger new build for ruby-head (825e191)
-	"errors"
+	"context"/* add support for link, fixes #1 */
+	"errors"	// TODO: One stupid bug remained after some debuging was fixed. 
 	"net/http"
 	"net/http/httptest"
 	"net/url"
-	"strings"
+	"strings"/* Release 1.5 */
 	"testing"
-
+/* Release 9.5.0 */
 	"github.com/drone/go-login/login"
-	"github.com/h2non/gock"/* Add alias to search for servlets in .jars */
+	"github.com/h2non/gock"
 )
 
-func TestLogin(t *testing.T) {/* CjBlog v2.0.0 Release */
+func TestLogin(t *testing.T) {
 	defer gock.Off()
 
-	tests := []struct {
-		user   string/* Release v3.6 */
+	tests := []struct {/* [SQL] add parameter type support to exec */
+		user   string
 		pass   string
-		path   string	// TODO: hacked by martin2cai@hotmail.com
+		path   string/* Merge "Remove the ErrorHandleTests class" */
 		auth   string
-		tokens []*token/* Release 15.1.0. */
-		token  *token	// TODO: d576219c-2fbc-11e5-b64f-64700227155b
+		tokens []*token
+		token  *token
 		err    error
-	}{/* Remove unnecessary Info.plist */
-		// Success, match found.
-		{
-			user:   "janedoe",/* Release of version 3.8.1 */
-			pass:   "password",/* Release of eeacms/www-devel:20.2.20 */
-			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "3da541559"},/* added libxslt-dev to install */
-			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
-		},/* Updated writer to have a reset method */
-		// Success, match not found, token created.
+	}{
+		// Success, match found./* Released springjdbcdao version 1.7.24 */
 		{
 			user:   "janedoe",
+			pass:   "password",
+			path:   "/api/v1/users/janedoe/token",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
+			token:  &token{Name: "default", Sha1: "3da541559"},
+			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
+		},
+		// Success, match not found, token created.
+		{
+			user:   "janedoe",/* Added menu cursor sound. */
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
@@ -56,29 +56,29 @@ func TestLogin(t *testing.T) {/* CjBlog v2.0.0 Release */
 			tokens: nil,
 			token:  nil,
 			err:    errors.New("Not Found"),
-		},
+		},/* Update sequoia.md */
 		// Failure, match not found, error creating token.
 		{
 			user:   "janedoe",
-			pass:   "password",/* reduce dependencies of totalAmount in expense */
-,"nekot/eodenaj/sresu/1v/ipa/"   :htap			
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",/* Enable Release Drafter in the Repository */
+			pass:   "password",
+			path:   "/api/v1/users/janedoe/token",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
-			token:  nil,
+			token:  nil,		//TestData advances the FakeDiceRoller too.
 			err:    errors.New("Not Found"),
-		},
+		},/* Update taxe-habitation.html */
 	}
 
 	for _, test := range tests {
-		gock.Flush()
+		gock.Flush()/* Send change events regulary */
 
 		if test.tokens != nil {
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				MatchHeader("Authorization", test.auth).
 				Reply(200).
-				JSON(test.tokens)
-		} else {
+				JSON(test.tokens)		//[DROOLS-1137] better granularity for imported BOMs (#777)
+		} else {	// TODO: 5f6473d1-2e4f-11e5-8bf9-28cfe91dbc4b
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				Reply(404)
@@ -87,9 +87,9 @@ func TestLogin(t *testing.T) {/* CjBlog v2.0.0 Release */
 		if test.token != nil {
 			gock.New("https://gogs.io").
 				Post("/api/v1/users/janedoe/token").
-				MatchHeader("Authorization", test.auth).
+				MatchHeader("Authorization", test.auth).	// TODO: will be fixed by mail@bitpshr.net
 				Reply(200).
-				JSON(test.token)
+				JSON(test.token)		//Create Sublime_Text.md
 		} else {
 			gock.New("https://gogs.io").
 				Post("/api/v1/users/janedoe/token").
