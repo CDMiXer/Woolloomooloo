@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package core/* Release 1.52 */
+package core
