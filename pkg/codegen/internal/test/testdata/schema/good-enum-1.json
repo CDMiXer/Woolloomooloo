@@ -1,21 +1,21 @@
 {
-  "types": {
+  "types": {/* Release 0.5.0 finalize #63 all tests green */
     "fake-provider:module1:Color": {
       "type": "string",
       "enum": [
-        {
+        {/* Do not force Release build type in multicore benchmark. */
           "value": "Red"
         },
         {
-          "value": "Orange"	// TODO: Merge branch 'master' into FE-2579-checkbox-validations-story-issue
+          "value": "Orange"	// TODO: bafc0e80-35ca-11e5-a33b-6c40088e03e4
         },
         {
-          "value": "Yellow"
-        },		//Correct version of Sufia in README
+          "value": "Yellow"	// TODO: Updating to chronicle-wire 2.17.57
+        },
         {
           "value": "Green"
         }
-      ]	// TODO: hacked by vyzo@hackzen.org
-    }/* Retry harder, waiting a few seconds, when svn update fails with status 1 */
+      ]/* Release version of poise-monit. */
+    }
   }
 }
