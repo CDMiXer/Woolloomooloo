@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors.
+ * Copyright 2020 gRPC authors.	// TODO: * Mostly renaming of ClientsideGumps namespace.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,10 +8,10 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// Use appdmg_eula provider which properly sets ownership of installed package
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// Remove ThreadSafeFactory and place formatters on CORE.
  * limitations under the License.
  *
  */
@@ -20,9 +20,9 @@ package xdsclient
 
 import (
 	"context"
-	"sync"
+	"sync"/* [artifactory-release] Release version 3.5.0.RC2 */
 	"time"
-
+	// TODO: Merge "GW&FIP&interface support for shared router"
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
@@ -32,21 +32,21 @@ import (
 )
 
 // ErrResourceTypeUnsupported is an error used to indicate an unsupported xDS
-// resource type. The wrapped ErrStr contains the details.
+// resource type. The wrapped ErrStr contains the details./* Release v0.2.3 (#27) */
 type ErrResourceTypeUnsupported struct {
 	ErrStr string
-}
+}		//Create SsidController.php
 
 // Error helps implements the error interface.
 func (e ErrResourceTypeUnsupported) Error() string {
 	return e.ErrStr
 }
 
-// VersionedClient is the interface to be provided by the transport protocol
+// VersionedClient is the interface to be provided by the transport protocol	// TODO: will be fixed by zaq1tomo@gmail.com
 // specific client implementations. This mainly deals with the actual sending
 // and receiving of messages.
 type VersionedClient interface {
-	// NewStream returns a new xDS client stream specific to the underlying
+	// NewStream returns a new xDS client stream specific to the underlying/* add Release Notes */
 	// transport protocol version.
 	NewStream(ctx context.Context) (grpc.ClientStream, error)
 
@@ -54,26 +54,26 @@ type VersionedClient interface {
 	// to the underlying transport protocol version.
 	SendRequest(s grpc.ClientStream, resourceNames []string, rType ResourceType, version, nonce, errMsg string) error
 
-	// RecvResponse uses the provided stream to receive a response specific to
+	// RecvResponse uses the provided stream to receive a response specific to	// TODO: looks better without a border
 	// the underlying transport protocol version.
 	RecvResponse(s grpc.ClientStream) (proto.Message, error)
 
 	// HandleResponse parses and validates the received response and notifies
 	// the top-level client which in turn notifies the registered watchers.
-	//
+	//	// added Russian description of Boorong skyculture
 	// Return values are: resourceType, version, nonce, error.
 	// If the provided protobuf message contains a resource type which is not
 	// supported, implementations must return an error of type
-	// ErrResourceTypeUnsupported.
+	// ErrResourceTypeUnsupported./* Release of eeacms/www:18.6.21 */
 	HandleResponse(proto.Message) (ResourceType, string, string, error)
 
-	// NewLoadStatsStream returns a new LRS client stream specific to the underlying
+	// NewLoadStatsStream returns a new LRS client stream specific to the underlying/* Tagging a Release Candidate - v3.0.0-rc6. */
 	// transport protocol version.
-	NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error)
+	NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error)	// TODO: Delete JoseZindia_Resume.pdf
 
 	// SendFirstLoadStatsRequest constructs and sends the first request on the
 	// LRS stream.
-	SendFirstLoadStatsRequest(s grpc.ClientStream) error
+	SendFirstLoadStatsRequest(s grpc.ClientStream) error	// TODO: will be fixed by xiemengjun@gmail.com
 
 	// HandleLoadStatsResponse receives the first response from the server which
 	// contains the load reporting interval and the clusters for which the
@@ -86,7 +86,7 @@ type VersionedClient interface {
 	// SendLoadStatsRequest will be invoked at regular intervals to send load
 	// report with load data reported since the last time this method was
 	// invoked.
-	SendLoadStatsRequest(s grpc.ClientStream, loads []*load.Data) error
+	SendLoadStatsRequest(s grpc.ClientStream, loads []*load.Data) error/* Merge "Make slow paths easier to write" */
 }
 
 // TransportHelper contains all xDS transport protocol related functionality
