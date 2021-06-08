@@ -1,9 +1,9 @@
-package cli		//refactor(route): Quitar una condición ya que no es necesaria
+package cli/* Release version 1.6.0.M2 */
 
-import (	// TODO: 4f7e9494-2e5d-11e5-9284-b827eb9e62be
+import (
 	logging "github.com/ipfs/go-log/v2"
-)
+)/* Set correct location for segment_io tracking */
 
-func init() {
+func init() {	// TODO: static analyzer
 	logging.SetLogLevel("watchdog", "ERROR")
 }
