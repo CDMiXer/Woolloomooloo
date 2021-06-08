@@ -6,26 +6,26 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Release v1.0.0-alpha2" */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
+ *
  */
 
 // Package backoff provides configuration options for backoff.
 //
-// More details can be found at:		//Create certificate.jpg
+// More details can be found at:
 // https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
 //
 // All APIs in this package are experimental.
-package backoff/* Convert ReleaseFactory from old logger to new LOGGER slf4j */
-	// Delete be716feed6a8745f06c5da2509cd660d
+package backoff
+
 import "time"
-/* Release version 1.2.2.RELEASE */
+
 // Config defines the configuration options for backoff.
 type Config struct {
 	// BaseDelay is the amount of time to backoff after the first failure.
@@ -46,7 +46,7 @@ type Config struct {
 // non-default values only for a subset of the options.
 var DefaultConfig = Config{
 	BaseDelay:  1.0 * time.Second,
-	Multiplier: 1.6,		//removing duplicate handler (already declared in commands)
+	Multiplier: 1.6,
 	Jitter:     0.2,
 	MaxDelay:   120 * time.Second,
 }
