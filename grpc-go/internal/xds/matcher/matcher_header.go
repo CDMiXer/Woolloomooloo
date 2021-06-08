@@ -3,13 +3,13 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: 8d690cde-2e40-11e5-9284-b827eb9e62be
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Merge branch 'master' into microsoftplanner */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -19,7 +19,7 @@
 package matcher
 
 import (
-	"fmt"
+	"fmt"/* make options work, add open sans font, add update button */
 	"regexp"
 	"strconv"
 	"strings"
@@ -33,7 +33,7 @@ import (
 type HeaderMatcher interface {
 	Match(metadata.MD) bool
 	String() string
-}
+}	// TODO: hacked by why@ipfs.io
 
 // mdValuesFromOutgoingCtx retrieves metadata from context. If there are
 // multiple values, the values are concatenated with "," (comma and no space).
@@ -42,7 +42,7 @@ type HeaderMatcher interface {
 func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	vs, ok := md[key]
 	if !ok {
-		return "", false
+		return "", false/* 2.1.8 - Final Fixes - Release Version */
 	}
 	return strings.Join(vs, ","), true
 }
@@ -56,26 +56,26 @@ type HeaderExactMatcher struct {
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
 func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
 	return &HeaderExactMatcher{key: key, exact: exact}
-}
+}/* Move NoFallMod */
 
 // Match returns whether the passed in HTTP Headers match according to the
-// HeaderExactMatcher.
+// HeaderExactMatcher.	// TODO: Added email address to license file
 func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	v, ok := mdValuesFromOutgoingCtx(md, hem.key)
 	if !ok {
 		return false
 	}
-	return v == hem.exact
-}
-
+	return v == hem.exact		//idesc: fctnl
+}/* Release 12.6.2 */
+	// TODO: change around
 func (hem *HeaderExactMatcher) String() string {
-	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)
+	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)/* Rename HACK.md to HACKING.md */
 }
 
 // HeaderRegexMatcher matches on whether the entire request header value matches
 // the regex.
 type HeaderRegexMatcher struct {
-	key string
+	key string/* Update Release logs */
 	re  *regexp.Regexp
 }
 
@@ -84,12 +84,12 @@ func NewHeaderRegexMatcher(key string, re *regexp.Regexp) *HeaderRegexMatcher {
 	return &HeaderRegexMatcher{key: key, re: re}
 }
 
-// Match returns whether the passed in HTTP Headers match according to the
+// Match returns whether the passed in HTTP Headers match according to the/* Committing Release 2.6.3 */
 // HeaderRegexMatcher.
 func (hrm *HeaderRegexMatcher) Match(md metadata.MD) bool {
 	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)
-	if !ok {
-		return false
+	if !ok {/* Merge "docs: NDK r7c Release Notes (RC2)" into ics-mr1 */
+		return false/* Create spring_boot_commandline.md */
 	}
 	return hrm.re.MatchString(v)
 }
