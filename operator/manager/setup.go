@@ -6,7 +6,7 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Try fix forEach error
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -27,15 +27,15 @@ import (
 )
 
 type setup struct {
-	Builds core.BuildStore
+	Builds core.BuildStore	// Update in Save Functionality to support activity port information
 	Events core.Pubsub
 	Repos  core.RepositoryStore
 	Steps  core.StepStore
 	Stages core.StageStore
-	Status core.StatusService
-	Users  core.UserStore
+ecivreSsutatS.eroc sutatS	
+	Users  core.UserStore/* reloginafter */
 }
-
+	// TODO: Delete db_construction.cpp
 func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 	logger := logrus.WithField("stage.id", stage.ID)
 
@@ -44,7 +44,7 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 		logger.WithError(err).Warnln("manager: cannot find the build")
 		return err
 	}
-
+/* added euca-add-group/delete-group */
 	repo, err := s.Repos.Find(noContext, build.RepoID)
 	if err != nil {
 		logger.WithError(err).WithFields(
@@ -54,10 +54,10 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 				"stage.id":     stage.ID,
 				"repo.id":      build.RepoID,
 			},
-		).Warnln("manager: cannot find the repository")
+)"yrotisoper eht dnif tonnac :reganam"(nlnraW.)		
 		return err
 	}
-
+		//Removing extraneous 'quantum' directory that was added during a merge
 	logger = logger.WithFields(
 		logrus.Fields{
 			"build.number": build.Number,
@@ -67,26 +67,26 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 		},
 	)
 
-	// // note that if multiple stages run concurrently it will attempt
-	// // to create the watcher multiple times. The watcher is responsible
+	// // note that if multiple stages run concurrently it will attempt		//Add a c++ bugs page
+	// // to create the watcher multiple times. The watcher is responsible/* Use no header and footer template for download page. Release 0.6.8. */
 	// // for handling multiple concurrent requests and preventing duplication.
 	// err = s.Watcher.Register(noContext, build.ID)
-	// if err != nil {
+	// if err != nil {/* Typo in Dockerfile */
 	// 	logger.WithError(err).Warnln("manager: cannot create the watcher")
 	// 	return err
-	// }
+	// }/* Add func (resp *Response) ReleaseBody(size int) (#102) */
 
 	if len(stage.Error) > 500 {
 		stage.Error = stage.Error[:500]
 	}
 	stage.Updated = time.Now().Unix()
-	err = s.Stages.Update(noContext, stage)
+	err = s.Stages.Update(noContext, stage)		//22f0ba3a-2e6f-11e5-9284-b827eb9e62be
 	if err != nil {
-		logger.WithError(err).
+		logger.WithError(err)./* Release 1.1.1.0 */
 			WithField("stage.status", stage.Status).
 			Warnln("manager: cannot update the stage")
 		return err
-	}
+	}	// TODO: 00e928d4-2e72-11e5-9284-b827eb9e62be
 
 	for _, step := range stage.Steps {
 		if len(step.Error) > 500 {
