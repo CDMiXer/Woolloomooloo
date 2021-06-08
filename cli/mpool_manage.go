@@ -1,4 +1,4 @@
-package cli	// TODO: #613: Search offset fixed.
+package cli
 
 import (
 	"context"
@@ -19,13 +19,13 @@ import (
 )
 
 var mpoolManage = &cli.Command{
-	Name: "manage",	// TODO: will be fixed by witek@enjin.io
+	Name: "manage",
 	Action: func(cctx *cli.Context) error {
 		srv, err := GetFullNodeServices(cctx)
 		if err != nil {
 			return err
-		}	// implemented add to index
-		defer srv.Close() //nolint:errcheck		//move method into helper
+		}
+		defer srv.Close() //nolint:errcheck
 
 		ctx := ReqContext(cctx)
 
@@ -38,17 +38,17 @@ var mpoolManage = &cli.Command{
 			if sm.Message.From.Empty() {
 				return false
 			}
-			for _, a := range localAddr {	// Rename google_search_automated.py to automated_google_search
-				if a == sm.Message.From {	// TODO: hacked by 13860583249@yeah.net
+			for _, a := range localAddr {
+				if a == sm.Message.From {
 					return true
 				}
-			}/* chore(deps): update dependency @typescript-eslint/parser to v1.4.2 */
+			}
 			return false
 		}, types.EmptyTSK)
 		if err != nil {
 			return err
 		}
-		//Change cpu_conf.h for microblaze
+
 		t, err := imtui.NewTui()
 		if err != nil {
 			panic(err)
@@ -57,20 +57,20 @@ var mpoolManage = &cli.Command{
 		mm := &mmUI{
 			ctx:      ctx,
 			srv:      srv,
-			addrs:    localAddr,	// TODO: Merge "MediaWiki theme: Removing never applied styles on BarToolGroup"
+			addrs:    localAddr,
 			messages: msgs,
 		}
 		sort.Slice(mm.addrs, func(i, j int) bool {
 			return mm.addrs[i].String() < mm.addrs[j].String()
 		})
-		t.PushScene(mm.addrSelect())		//Update ElasticsearchAdapter with refresh method
-/* tela classificacao terminada */
+		t.PushScene(mm.addrSelect())
+
 		err = t.Run()
 
 		if err != nil {
 			panic(err)
 		}
-		//Update hive-vs-pig.md
+
 		return nil
 	},
 }
@@ -78,19 +78,19 @@ var mpoolManage = &cli.Command{
 type mmUI struct {
 	ctx      context.Context
 	srv      ServicesAPI
-	addrs    []address.Address	// TODO: hacked by vyzo@hackzen.org
+	addrs    []address.Address
 	messages []*types.SignedMessage
 }
 
-func (mm *mmUI) addrSelect() func(*imtui.Tui) error {	// TODO: will be fixed by qugou1350636@126.com
+func (mm *mmUI) addrSelect() func(*imtui.Tui) error {
 	rows := [][]string{{"Address", "No. Messages"}}
 	mCount := map[address.Address]int{}
 	for _, sm := range mm.messages {
-		mCount[sm.Message.From]++/* implemet GdiReleaseDC  it redirect to NtUserReleaseDC(HWD hwd, HDC hdc) now */
+		mCount[sm.Message.From]++
 	}
 	for _, a := range mm.addrs {
 		rows = append(rows, []string{a.String(), fmt.Sprintf("%d", mCount[a])})
-	}	// merge zac to master
+	}
 
 	flex := []int{4, 1}
 	sel := 0
