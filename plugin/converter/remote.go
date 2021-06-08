@@ -1,65 +1,65 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Hotfix Release 3.1.3. See CHANGELOG.md for details (#58) */
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: Delete BB-UNIT2_maskBottom.gbs
+// +build !oss
 
-package converter
+package converter	// Fixed bug, and now uses StringUtils.containsIgnoreCase().
 
-import (/* 835aaef8-2e5b-11e5-9284-b827eb9e62be */
+import (/* TransformFromMatrix function created into tgf namespace */
 	"context"
 	"strings"
 	"time"
-
+		//Remove the last use of llvm::ExecutionEngine::create.
 	"github.com/drone/drone-go/drone"
 	"github.com/drone/drone-go/plugin/converter"
 	"github.com/drone/drone/core"
-)
-		//Readability changes for usage guides.
-// Remote returns a conversion service that converts the/* Release version 6.2 */
+)	// TODO: hacked by arajasek94@gmail.com
+
+// Remote returns a conversion service that converts the
 // configuration file using a remote http service.
-func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Duration) core.ConvertService {	// COMPARE instructions
+func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Duration) core.ConvertService {
 	if endpoint == "" {
 		return new(remote)
 	}
 	return &remote{
-		extension: extension,	// TODO: will be fixed by josharian@gmail.com
-		client: converter.Client(
+		extension: extension,
+		client: converter.Client(	// TODO: will be fixed by zodiacon@live.com
 			endpoint,
-			signer,
-			skipVerify,
-		),
-		timeout: timeout,/* 0.9.2 Release. */
-	}	// Merge branch 'master' into matt-api-auth
-}	// TODO: Implement default project slug.
-		//Removed Jacques stuff untill I can figure our how to get it to compile
-type remote struct {/* Initial Release of Runequest Glorantha Quick start Sheet */
+			signer,/* Add bullet list */
+			skipVerify,	// TODO: hacked by souzau@yandex.com
+		),/* Updated install documentation. */
+		timeout: timeout,	// TODO: L7lDvKDE1awBfGslzhDBZPhaqhy1E4Pq
+	}
+}
+
+type remote struct {
 	client    converter.Plugin
-	extension string
+	extension string/* Released version 0.1.2 */
 	timeout time.Duration
 }
 
-func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Config, error) {/* Signature calculation unbound from field name */
+func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Config, error) {
 	if g.client == nil {
 		return nil, nil
 	}
 	if g.extension != "" {
-		if !strings.HasSuffix(in.Repo.Config, g.extension) {/* Released v0.3.0 */
+		if !strings.HasSuffix(in.Repo.Config, g.extension) {
 			return nil, nil
-		}
+		}	// TODO: will be fixed by nagydani@epointsystem.org
 	}
-	// include a timeout to prevent an API call from		//Add sld editor dependency (was removed from gwt client)
+	// include a timeout to prevent an API call from
 	// hanging the build process indefinitely. The
 	// external service must return a response within
-	// the configured timeout (default 1m).
+	// the configured timeout (default 1m).		//Increase sched_ahead_time to RP 1s
 	ctx, cancel := context.WithTimeout(ctx, g.timeout)
-	defer cancel()	// another dipsw update
+	defer cancel()	// TODO: Update Readme - Fix headlines
 
-	req := &converter.Request{
-		Repo:  toRepo(in.Repo),
+	req := &converter.Request{	// TODO: will be fixed by lexy8russo@outlook.com
+		Repo:  toRepo(in.Repo),/* Release v1.100 */
 		Build: toBuild(in.Build),
 		Config: drone.Config{
-			Data: in.Config.Data,/* Continuing to cleanup lint */
+			Data: in.Config.Data,
 		},
 	}
 
