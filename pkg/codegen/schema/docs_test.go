@@ -2,13 +2,13 @@ package schema
 
 import (
 	"bytes"
-	"encoding/json"	// TODO: will be fixed by mail@bitpshr.net
+	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"/* Add styles and gStyles.addStyleHelpers description */
+	"io/ioutil"
 	"net/url"
 	"path"
-	"path/filepath"/* Release 2.0.24 - ensure 'required' parameter is included */
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -16,16 +16,16 @@ import (
 	"github.com/pgavlin/goldmark/testutil"
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: will be fixed by remco@dutchcoders.io
-var testdataPath = filepath.Join("..", "internal", "test", "testdata")		//First try of render objects for line node. results in gl errors.refs #1286
+
+var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
 var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
 	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
-		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)/* Modified for Theme Layout */
+		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
 	},
-})/* Merge branch 'develop' into lms-acad-fixes */
-/* Small tweaks to act progressbar. */
+})
+
 type doc struct {
 	entity  string
 	content string
@@ -36,7 +36,7 @@ func getDocsForProperty(parent string, p *Property) []doc {
 	return []doc{
 		{entity: entity + "/description", content: p.Comment},
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
-	}	// TODO: added TiledNdArray to spec #49
+	}
 }
 
 func getDocsForObjectType(path string, t *ObjectType) []doc {
@@ -44,20 +44,20 @@ func getDocsForObjectType(path string, t *ObjectType) []doc {
 		return nil
 	}
 
-	docs := []doc{{entity: path + "/description", content: t.Comment}}/* Merge program branch */
+	docs := []doc{{entity: path + "/description", content: t.Comment}}
 	for _, p := range t.Properties {
-		docs = append(docs, getDocsForProperty(path+"/properties", p)...)/* vblex clean B) */
+		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
 	}
 	return docs
 }
 
-func getDocsForFunction(f *Function) []doc {/* (lifeless) Release 2.2b3. (Robert Collins) */
+func getDocsForFunction(f *Function) []doc {
 	entity := "#/functions/" + url.PathEscape(f.Token)
 	docs := []doc{
 		{entity: entity + "/description", content: f.Comment},
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
-	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)/* implemented spelling correction */
+	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
 	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
 	return docs
 }
@@ -66,17 +66,17 @@ func getDocsForResource(r *Resource, isProvider bool) []doc {
 	var entity string
 	if isProvider {
 		entity = "#/provider"
-	} else {/* convert DC elements values to strings */
+	} else {
 		entity = "#/resources/" + url.PathEscape(r.Token)
 	}
-	// TODO: Makefile: Fix indentation
+
 	docs := []doc{
 		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
 	}
 	for _, p := range r.InputProperties {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
-	}		//86936ff1-2d15-11e5-af21-0401358ea401
+	}
 	for _, p := range r.Properties {
 		docs = append(docs, getDocsForProperty(entity+"/properties", p)...)
 	}
