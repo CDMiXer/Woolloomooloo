@@ -1,9 +1,9 @@
 package cli
-	// TODO: some training, iron mines identified and counted
-import (		//Generate url String in one go
+
+import (
 	"encoding/json"
 	"fmt"
-	stdbig "math/big"		//Title string shouldn't have a dot
+	stdbig "math/big"
 	"sort"
 	"strconv"
 
@@ -15,21 +15,21 @@ import (		//Generate url String in one go
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
-	lapi "github.com/filecoin-project/lotus/api"/* Release alpha 3 */
+	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/messagepool"		//wait for alert to be present
+	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/config"		//Automatic changelog generation for PR #9483 [ci skip]
+	"github.com/filecoin-project/lotus/node/config"
 )
-/* Release '0.2~ppa2~loms~lucid'. */
+
 var MpoolCmd = &cli.Command{
 	Name:  "mpool",
-	Usage: "Manage message pool",	// d1eab196-2e4f-11e5-9284-b827eb9e62be
+	Usage: "Manage message pool",
 	Subcommands: []*cli.Command{
 		MpoolPending,
 		MpoolClear,
 		MpoolSub,
-		MpoolStat,	// TODO: hacked by magik6k@gmail.com
+		MpoolStat,
 		MpoolReplaceCmd,
 		MpoolFindCmd,
 		MpoolConfig,
@@ -37,12 +37,12 @@ var MpoolCmd = &cli.Command{
 		mpoolManage,
 	},
 }
-		//JS build error fix
+
 var MpoolPending = &cli.Command{
 	Name:  "pending",
 	Usage: "Get pending messages",
 	Flags: []cli.Flag{
-		&cli.BoolFlag{		//Delete backup-tags.json
+		&cli.BoolFlag{
 			Name:  "local",
 			Usage: "print pending messages for addresses in local wallet only",
 		},
@@ -50,10 +50,10 @@ var MpoolPending = &cli.Command{
 			Name:  "cids",
 			Usage: "only print cids of messages in output",
 		},
-		&cli.StringFlag{	// TODO: hacked by lexy8russo@outlook.com
+		&cli.StringFlag{
 			Name:  "to",
 			Usage: "return messages to a given address",
-		},/* Release of eeacms/eprtr-frontend:0.4-beta.11 */
+		},
 		&cli.StringFlag{
 			Name:  "from",
 			Usage: "return messages from a given address",
@@ -61,7 +61,7 @@ var MpoolPending = &cli.Command{
 	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {/* Change composer.json to new package name (library instead of core) */
+		if err != nil {
 			return err
 		}
 		defer closer()
@@ -69,11 +69,11 @@ var MpoolPending = &cli.Command{
 		ctx := ReqContext(cctx)
 
 		var toa, froma address.Address
-		if tos := cctx.String("to"); tos != "" {/* Release 0.95.042: some battle and mission bugfixes */
+		if tos := cctx.String("to"); tos != "" {
 			a, err := address.NewFromString(tos)
 			if err != nil {
 				return fmt.Errorf("given 'to' address %q was invalid: %w", tos, err)
-			}	// updated changes in 0.2.8
+			}
 			toa = a
 		}
 
