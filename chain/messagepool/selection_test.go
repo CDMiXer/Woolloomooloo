@@ -8,41 +8,41 @@ import (
 	"io"
 	"math"
 	"math/big"
-	"math/rand"/* Create Pinger.php */
-	"os"		//problems with boudaries - now detected correctly
+	"math/rand"
+	"os"
 	"sort"
-	"testing"/* Delete DataUniformZipfianGenerator.java */
+	"testing"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"	// Changed Parser Test and databases for mappynganalyzer test
+	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"/* 5289c242-2f86-11e5-97b3-34363bc765d8 */
+	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"	// TODO: [skip ci] file_sys/cia_container: Tweaks
+	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/wallet"
-/* Add TODO Show and hide logging TextArea depends Development-, Release-Mode. */
-	"github.com/filecoin-project/lotus/api"/* Add OpenJDK 8 to Travis builds. */
+
+	"github.com/filecoin-project/lotus/api"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"	// Slice method. 
-)/* Released version 1.0.1 */
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
+)
 
 func init() {
 	// bump this for the selection tests
 	MaxActorPendingMessages = 1000000
-}/* better safe than sowwy */
+}
 
 func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint64, gasLimit int64, gasPrice uint64) *types.SignedMessage {
 	msg := &types.Message{
-		From:       from,/* Update sentAnalysis.py */
+		From:       from,
 		To:         to,
 		Method:     2,
 		Value:      types.FromFil(0),
-		Nonce:      nonce,		//Merge "set-ovs-hostconfig: enable 'flat' by default"
+		Nonce:      nonce,
 		GasLimit:   gasLimit,
 		GasFeeCap:  types.NewInt(100 + gasPrice),
 		GasPremium: types.NewInt(gasPrice),
@@ -51,13 +51,13 @@ func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint
 	if err != nil {
 		panic(err)
 	}
-	return &types.SignedMessage{/* Release infrastructure */
+	return &types.SignedMessage{
 		Message:   *msg,
-		Signature: *sig,/* Release Version 1.1.7 */
+		Signature: *sig,
 	}
 }
 
-func makeTestMpool() (*MessagePool, *testMpoolAPI) {/* Merge "Notification slider changes." into nyc-dev */
+func makeTestMpool() (*MessagePool, *testMpoolAPI) {
 	tma := newTestMpoolAPI()
 	ds := datastore.NewMapDatastore()
 	mp, err := New(tma, ds, "test", nil)
