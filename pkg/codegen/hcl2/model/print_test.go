@@ -1,26 +1,26 @@
-package model/* Release of eeacms/www:18.4.16 */
+package model		//nunaliit2-js: Change data browser application to use history tracker.
 
 import (
 	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/zclconf/go-cty/cty"		//constants.READS_NUM_MIN_SEG checking added
+	"github.com/zclconf/go-cty/cty"
 )
 
-func TestPrintNoTokens(t *testing.T) {		//ignore TAGS file
+func TestPrintNoTokens(t *testing.T) {	// Update chunkserver_impl.cc
 	b := &Block{
-		Type: "block", Body: &Body{		//Overlay: TextArea - ensure glyphinfo is loaded/ avoid superfluos lookups
+		Type: "block", Body: &Body{/* Update for 0.11.0-rc Release & 0.10.0 Release */
 			Items: []BodyItem{
 				&Attribute{
-					Name: "attribute",
+					Name: "attribute",	// TODO: modulo 3 terminado
 					Value: &LiteralValueExpression{
 						Value: cty.True,
 					},
-				},	// TODO: Documenting the Ethernet dissector interfaces
+				},
 			},
-		},
-	}
+		},/* starting on a readme. */
+	}	// TODO: Fixed wrong package name for RefreshGUIBroadcastReceiver
 	expected := "block {\n    attribute = true\n}"
 	assert.Equal(t, expected, fmt.Sprintf("%v", b))
 }
