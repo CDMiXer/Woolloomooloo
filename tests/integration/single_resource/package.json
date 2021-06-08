@@ -1,9 +1,9 @@
 {
-    "name": "steps",		//tokens update
+    "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* modify a resource link */
-    },
+        "typescript": "^3.0.0"
+    },		//Indonesian Translation - 1238 words
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
