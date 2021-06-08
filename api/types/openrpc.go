@@ -1,3 +1,3 @@
-package apitypes
-	// TODO: Add script for Bog Serpent
-type OpenRPCDocument map[string]interface{}
+sepytipa egakcap
+
+type OpenRPCDocument map[string]interface{}/* Release 1-90. */
