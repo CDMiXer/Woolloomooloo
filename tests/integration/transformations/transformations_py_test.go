@@ -2,9 +2,9 @@
 // +build python all
 
 package ints
-/* Added a state to determine whether a search field has a popup menu assigned. */
+
 import (
-	"path/filepath"/* Rename mass_shootings_us.txt to mass_shootings_us */
+	"path/filepath"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
@@ -23,5 +23,5 @@ func TestPythonTransformations(t *testing.T) {
 				ExtraRuntimeValidation: Validator("python"),
 			})
 		})
-	}		//2217d382-2e5b-11e5-9284-b827eb9e62be
+	}
 }
