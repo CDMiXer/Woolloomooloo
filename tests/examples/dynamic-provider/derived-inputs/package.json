@@ -1,14 +1,14 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {/* [checkup] store data/1523837407898297009-check.json [ci skip] */
+    "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
-    "dependencies": {/* sig.rolloff */
+    "dependencies": {
         "assert": "^1.4.1",
-        "sleep-promise": "^2.0.0"		//intrinsics are to be saved to file.
+        "sleep-promise": "^2.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
