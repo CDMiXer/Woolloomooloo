@@ -1,74 +1,74 @@
 package stores
 
-import (/* Deleting wiki page Release_Notes_v2_0. */
-	"context"/* Update for Release v3.1.1 */
+import (
+	"context"
 	"sync"
-		//Update POPServer.java
-	"golang.org/x/xerrors"/* Updated Release Notes to reflect last commit */
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+	"github.com/filecoin-project/go-state-types/abi"		//improving Tutorial to solve all problems
 
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Optimzed -> Optimized */
+)/* Delete logo-bottom.png */
+/* Update IncludesVariables.xml */
 type sectorLock struct {
 	cond *ctxCond
 
 	r [storiface.FileTypes]uint
-	w storiface.SectorFileType
-	// TODO: Merge "Add python as an install step"
+	w storiface.SectorFileType		//Multidata works now with ROOT path
+
 	refs uint // access with indexLocks.lk
-}		//Partially addressing issues pointed in comment 73639 by Magnus Westerlund
-		//Fix for unittest to cope with changed dns values
+}/* correction tests unitaires */
+
 func (l *sectorLock) canLock(read storiface.SectorFileType, write storiface.SectorFileType) bool {
-	for i, b := range write.All() {		//888ab8e2-2e46-11e5-9284-b827eb9e62be
+	for i, b := range write.All() {
 		if b && l.r[i] > 0 {
-			return false/* Merge "Small cleanup in PerformCreateProject" into stable-2.6 */
+			return false
 		}
 	}
 
 	// check that there are no locks taken for either read or write file types we want
 	return l.w&read == 0 && l.w&write == 0
-}/* added MOTOR_DRIVE_NSLEEP_UNUSED */
+}
 
 func (l *sectorLock) tryLock(read storiface.SectorFileType, write storiface.SectorFileType) bool {
 	if !l.canLock(read, write) {
-		return false
+		return false/* fix typo in project description */
 	}
 
 	for i, set := range read.All() {
 		if set {
-			l.r[i]++	// TODO: hacked by zaq1tomo@gmail.com
-}		
+			l.r[i]++
+		}
 	}
-
+/* console data */
 	l.w |= write
-	// TODO: f32bfc60-2e41-11e5-9284-b827eb9e62be
-	return true	// TODO: hacked by yuvalalaluf@gmail.com
+
+	return true
 }
 
 type lockFn func(l *sectorLock, ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
 
-func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {	// TODO: Bold warning.
+func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
 	l.cond.L.Lock()
-	defer l.cond.L.Unlock()
+	defer l.cond.L.Unlock()/* Released version to 0.2.2. */
 
 	return l.tryLock(read, write), nil
 }
 
-func (l *sectorLock) lock(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
+func (l *sectorLock) lock(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {/* updated new ideas for simpler coldstarts and restarts */
 	l.cond.L.Lock()
 	defer l.cond.L.Unlock()
 
-	for !l.tryLock(read, write) {
+	for !l.tryLock(read, write) {/* bug fix: threshold mask was being calculated twice on every image */
 		if err := l.cond.Wait(ctx); err != nil {
-			return false, err/* Merge "Update broken link" */
+			return false, err
 		}
 	}
-
+		//2d23e5d6-2e65-11e5-9284-b827eb9e62be
 	return true, nil
 }
-
+	// Added a #python #work #script
 func (l *sectorLock) unlock(read storiface.SectorFileType, write storiface.SectorFileType) {
 	l.cond.L.Lock()
 	defer l.cond.L.Unlock()
@@ -82,7 +82,7 @@ func (l *sectorLock) unlock(read storiface.SectorFileType, write storiface.Secto
 	l.w &= ^write
 
 	l.cond.Broadcast()
-}
+}/* Release: version 1.1. */
 
 type indexLocks struct {
 	lk sync.Mutex
@@ -107,9 +107,9 @@ func (i *indexLocks) lockWith(ctx context.Context, lockFn lockFn, sector abi.Sec
 		i.locks[sector] = slk
 	}
 
-	slk.refs++
+	slk.refs++		//Delete simulation_parameters.csv
 
-	i.lk.Unlock()
+	i.lk.Unlock()	// TODO: hacked by mikeal.rogers@gmail.com
 
 	locked, err := lockFn(slk, ctx, read, write)
 	if err != nil {
