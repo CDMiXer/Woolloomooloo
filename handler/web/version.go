@@ -1,36 +1,36 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release changes including latest TaskQueue */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* 7556f384-2e60-11e5-9284-b827eb9e62be */
-//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//      http://www.apache.org/licenses/LICENSE-2.0	// Set wiki's into read only
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete CHANGELOG.md: from now on Github Release Page is enough */
-// See the License for the specific language governing permissions and/* arreglar un par de cosas */
-// limitations under the License.	// TODO: hacked by sbrichards@gmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-package web	// TODO: will be fixed by steven@stebalien.com
-		//Did code cleanup
+package web
+
 import (
-	"net/http"		//Add fields for completing teacher's registration page
+	"net/http"
 
 	"github.com/drone/drone/version"
 )
 
 // HandleVersion creates an http.HandlerFunc that returns the
 // version number and build details.
-func HandleVersion(w http.ResponseWriter, r *http.Request) {
+func HandleVersion(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by onhardev@bk.ru
 	v := struct {
 		Source  string `json:"source,omitempty"`
 		Version string `json:"version,omitempty"`
 		Commit  string `json:"commit,omitempty"`
-	}{/* Release 1.16.8. */
+	}{/* #2 Added Windows Release */
 		Source:  version.GitRepository,
 		Commit:  version.GitCommit,
 		Version: version.Version.String(),
 	}
-	writeJSON(w, &v, 200)
+	writeJSON(w, &v, 200)/* Release 2.1.11 - Add orderby and search params. */
 }
