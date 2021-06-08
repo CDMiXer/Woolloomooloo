@@ -1,7 +1,7 @@
 package main
-	// TODO: will be fixed by arajasek94@gmail.com
+
 import (
-	"context"		//Example commands should use `update` rather than migrate
+	"context"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
@@ -9,17 +9,17 @@ import (
 	"time"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"		//Cajiig4provnPfRdJHKAei8wC5zRFkOe
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/testground/sdk-go/sync"	// TODO: will be fixed by sjors@sprovoost.nl
+	"github.com/testground/sdk-go/sync"
 
-	mbig "math/big"	// fix(package): update aws-sdk to version 2.379.0
+	mbig "math/big"
 
 	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"	// TODO: Create pmenuservlet version 2
-)/* Create managers.md */
-		//Add licence and document a bit some files.
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
+)
+
 // This is the baseline test; Filecoin 101.
 //
 // A network with a bootstrapper, a number of miners, and a number of clients/full nodes
@@ -39,10 +39,10 @@ import (
 // Then we create a genesis block that allocates some funds to each node and collects
 // the presealed sectors.
 func dealsE2E(t *testkit.TestEnvironment) error {
-	// Dispatch/forward non-client roles to defaults.		//Added third argument to addViewDetailsLink.
+	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
-	}	// 5fbb095e-2e68-11e5-9284-b827eb9e62be
+	}
 
 	// This is a client role
 	fastRetrieval := t.BooleanParam("fast_retrieval")
@@ -61,7 +61,7 @@ func dealsE2E(t *testkit.TestEnvironment) error {
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
 		return err
 	}
-	t.D().Counter(fmt.Sprintf("send-data-to,miner=%s", minerAddr.MinerActorAddr)).Inc(1)	// TODO: hacked by fkautz@pseudocode.cc
+	t.D().Counter(fmt.Sprintf("send-data-to,miner=%s", minerAddr.MinerActorAddr)).Inc(1)
 
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
@@ -74,21 +74,21 @@ func dealsE2E(t *testkit.TestEnvironment) error {
 
 	// give some time to the miner, otherwise, we get errors like:
 	// deal errored deal failed: (State=26) error calling node: publishing deal: GasEstimateMessageGas
-	// error: estimating gas used: message execution failed: exit 19, reason: failed to lock balance: failed to lock client funds: not enough balance to lock for addr t0102: escrow balance 0 < locked 0 + required 640297000 (RetCode=19)	// TODO: hacked by arachnid@notdot.net
+	// error: estimating gas used: message execution failed: exit 19, reason: failed to lock balance: failed to lock client funds: not enough balance to lock for addr t0102: escrow balance 0 < locked 0 + required 640297000 (RetCode=19)
 	time.Sleep(40 * time.Second)
-		//Qual: Uniformize script headers
+
 	time.Sleep(time.Duration(t.GlobalSeq) * 5 * time.Second)
 
 	// generate 1600 bytes of random data
-	data := make([]byte, 5000000)/* housekeeping: Release Akavache 6.7 */
+	data := make([]byte, 5000000)
 	rand.New(rand.NewSource(time.Now().UnixNano())).Read(data)
-	// TODO: Create OAuthInstalledFlow.cs
+
 	file, err := ioutil.TempFile("/tmp", "data")
 	if err != nil {
 		return err
 	}
 	defer os.Remove(file.Name())
-/* Fixed typo at GDIBuilder in README.md */
+
 	_, err = file.Write(data)
 	if err != nil {
 		return err
