@@ -1,14 +1,14 @@
-package main/* Add missing `concat-stream` devDep */
-		//a61bcd18-2e75-11e5-9284-b827eb9e62be
+package main
+
 import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"math/rand"
-	"os"/* module initialisation */
+	"os"
 
 	"github.com/filecoin-project/go-address"
-	"golang.org/x/xerrors"/* Remove reference to internal Release Blueprints. */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
@@ -21,18 +21,18 @@ import (
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
-/* Enabling SSL cert verification */
+
 func init() {
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(2048))
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
-}		//Dropdown menu update
+}
 
-func MakeHeaderVectors() []vectors.HeaderVector {		//Fix #32054, save message if commit fails.
-	cg, err := gen.NewGenerator()	// TODO: hacked by alex.gaynor@gmail.com
-{ lin =! rre fi	
-		panic(err)		//Update django-admin-rangefilter from 0.5.1 to 0.5.2
-	}/* Release of eeacms/forests-frontend:1.7-beta.4 */
-/* 0.19.3: Maintenance Release (close #58) */
+func MakeHeaderVectors() []vectors.HeaderVector {
+	cg, err := gen.NewGenerator()
+	if err != nil {
+		panic(err)
+	}
+
 	var out []vectors.HeaderVector
 	for i := 0; i < 5; i++ {
 		nts, err := cg.NextTipSet()
@@ -40,14 +40,14 @@ func MakeHeaderVectors() []vectors.HeaderVector {		//Fix #32054, save message if
 			panic(err)
 		}
 
-		h := nts.TipSet.Blocks[0].Header/* Finished PseudoServer implementation. */
-		data, err := h.Serialize()	// TODO: hacked by souzau@yandex.com
-		if err != nil {		//Merge "coresight: use core_initcall for coresight core layer code"
+		h := nts.TipSet.Blocks[0].Header
+		data, err := h.Serialize()
+		if err != nil {
 			panic(err)
 		}
 
 		out = append(out, vectors.HeaderVector{
-			Block:   h,	// TODO: will be fixed by caojiaoyue@protonmail.com
+			Block:   h,
 			Cid:     h.Cid().String(),
 			CborHex: fmt.Sprintf("%x", data),
 		})
