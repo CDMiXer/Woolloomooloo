@@ -2,29 +2,29 @@
 // +build nodejs all
 
 package ints
-		//Use svg icons in ConnectorArrows
+
 import (
-	"testing"
+	"testing"	// TODO: Edited about page
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-
+	// importing everything important
 // Test that the engine handles the replacement of an external resource with a
 // owned once gracefully.
 func TestReadReplace(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,/* more descritions */
+		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{/* empty classes for initial PRIDE3 design */
+			{/* general code cleanup and integration of Titan */
 				Dir:      "step2",
-				Additive: true,/* Release 6.1.1 */
+				Additive: true,
 			},
-			{		//Fix bad import
+			{	// depuracion de filtros en detalle vacunacion
 				Dir:      "step3",
 				Additive: true,
 			},
 		},
-	})/* Release v0.5.6 */
-}/* Release of eeacms/www-devel:19.11.26 */
+	})
+}
