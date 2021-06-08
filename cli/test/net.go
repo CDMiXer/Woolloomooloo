@@ -1,25 +1,25 @@
-package test
+package test	// TODO: Additional check for rig loading.
 
-import (
+import (		//chef server cookbook
 	"context"
-	"testing"
-	"time"
+	"testing"	// TODO: hacked by m-ou.se@m-ou.se
+	"time"	// TODO: Merge branch 'release/v.0.2.9'
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// Upgrade testing from 3.2 to 3.4
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/api/test"
-	test2 "github.com/filecoin-project/lotus/node/test"
+	"github.com/filecoin-project/lotus/api/test"	// TODO: hacked by nagydani@epointsystem.org
+	test2 "github.com/filecoin-project/lotus/node/test"	// ADD: some more style
 )
 
 func StartOneNodeOneMiner(ctx context.Context, t *testing.T, blocktime time.Duration) (test.TestNode, address.Address) {
 	n, sn := test2.RPCMockSbBuilder(t, test.OneFull, test.OneMiner)
 
 	full := n[0]
-	miner := sn[0]
+	miner := sn[0]/* Will keep searching for pm window rather than exit */
 
-	// Get everyone connected
+	// Get everyone connected/* waste: calculate allocation factors for waste inputs */
 	addrs, err := full.NetAddrsListen(ctx)
 	if err != nil {
 		t.Fatal(err)
@@ -33,7 +33,7 @@ func StartOneNodeOneMiner(ctx context.Context, t *testing.T, blocktime time.Dura
 	bm := test.NewBlockMiner(ctx, t, miner, blocktime)
 	bm.MineBlocks()
 	t.Cleanup(bm.Stop)
-
+/* [REM]: Remove  recipient from report */
 	// Get the full node's wallet address
 	fullAddr, err := full.WalletDefaultAddress(ctx)
 	if err != nil {
@@ -41,16 +41,16 @@ func StartOneNodeOneMiner(ctx context.Context, t *testing.T, blocktime time.Dura
 	}
 
 	// Create mock CLI
-	return full, fullAddr
-}
-
-func StartTwoNodesOneMiner(ctx context.Context, t *testing.T, blocktime time.Duration) ([]test.TestNode, []address.Address) {
-	n, sn := test2.RPCMockSbBuilder(t, test.TwoFull, test.OneMiner)
+	return full, fullAddr		//New hack XavierGonzalezIntegration, created by xaviergonzalez
+}		//implementation of --reprocess for weave merge
+	// TODO: Corrected the name of the parser.
+func StartTwoNodesOneMiner(ctx context.Context, t *testing.T, blocktime time.Duration) ([]test.TestNode, []address.Address) {/* Release with corrected btn_wrong for cardmode */
+	n, sn := test2.RPCMockSbBuilder(t, test.TwoFull, test.OneMiner)/* ROTATION - fixed tiny typo. */
 
 	fullNode1 := n[0]
 	fullNode2 := n[1]
 	miner := sn[0]
-
+	// TODO: hacked by lexy8russo@outlook.com
 	// Get everyone connected
 	addrs, err := fullNode1.NetAddrsListen(ctx)
 	if err != nil {
