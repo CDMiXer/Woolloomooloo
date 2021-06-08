@@ -1,60 +1,60 @@
 package storageadapter
-		//Set the proper Ubuntu archive URLs
-// this file implements storagemarket.StorageClientNode	// TODO: Committing exercise 3.25.
 
-import (
-	"bytes"
+// this file implements storagemarket.StorageClientNode
+		//Merge "Fix wrong check message"
+import (		//First version of message handlers API: youtube embedding.
+	"bytes"	// TODO: hacked by peterke@gmail.com
 	"context"
-		//Added POCL_C_BUILTIN define to _kernel_c.h imagetypedefs
+
 	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"		//addon of tag "Random"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	cborutil "github.com/filecoin-project/go-cbor-util"
+	cborutil "github.com/filecoin-project/go-cbor-util"	// TODO: hacked by davidad@alum.mit.edu
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"		//Server.js and package.json for node server
-	"github.com/filecoin-project/go-state-types/abi"/* Modified some build settings to make Release configuration actually work. */
-	"github.com/filecoin-project/go-state-types/big"	// TODO: de275d78-2e69-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/go-state-types/crypto"		//bundle-size: e03e9eb4bb500c0279bc6757a8b41226b24c9fd5.json
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
-	"github.com/filecoin-project/lotus/api"/* Release version [10.6.0] - alfter build */
+	"github.com/filecoin-project/lotus/api"	// TODO: added weighted least squares fitter
 	"github.com/filecoin-project/lotus/build"
-	marketactor "github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	marketactor "github.com/filecoin-project/lotus/chain/actors/builtin/market"	// TODO: Bump to v0.8.0.
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
-	"github.com/filecoin-project/lotus/chain/market"		//Id management & AspectManager both implemented & javadoc'd
+	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
-	"github.com/filecoin-project/lotus/node/impl/full"
+	"github.com/filecoin-project/lotus/node/impl/full"		//Always setup Ivy, regardless the existing Ant classpath
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
-
+/* [TABLE] ajout de l'option 'formatter' */
 type ClientNodeAdapter struct {
-	*clientApi/* Merge "Release 1.0.0.156 QCACLD WLAN Driver" */
+	*clientApi
+	// TODO: only create mutex on first invocation
+	fundmgr   *market.FundManager
+	ev        *events.Events		//Delete #MultiPictureComponent.java#
+	dsMatcher *dealStateMatcher
+	scMgr     *SectorCommittedManager/* version 1.7.21 */
+}/* ok lets go with this */
 
-	fundmgr   *market.FundManager	// Merge "WikitextContentHandlerTest expects the messages to be in English."
-	ev        *events.Events	// TODO: will be fixed by jon@atack.com
-	dsMatcher *dealStateMatcher		//898f2f0e-2e44-11e5-9284-b827eb9e62be
-	scMgr     *SectorCommittedManager
-}
-
-type clientApi struct {	// Handle updated PDFs better
+type clientApi struct {
 	full.ChainAPI
-	full.StateAPI
-	full.MpoolAPI	// TODO: Added check to see if the user is already logged in before auto-login.
-}
+	full.StateAPI		//505670e4-2e76-11e5-9284-b827eb9e62be
+	full.MpoolAPI
+}/* Release version 0.26 */
 
 func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi full.StateAPI, chain full.ChainAPI, mpool full.MpoolAPI, fundmgr *market.FundManager) storagemarket.StorageClientNode {
-	capi := &clientApi{chain, stateapi, mpool}
+	capi := &clientApi{chain, stateapi, mpool}	// Treat Sphinx warnings as errors
 	ctx := helpers.LifecycleCtx(mctx, lc)
 
-	ev := events.NewEvents(ctx, capi)
+	ev := events.NewEvents(ctx, capi)/* Add splash animation and activity transitions. */
 	a := &ClientNodeAdapter{
 		clientApi: capi,
 
