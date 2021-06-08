@@ -2,22 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 package plant
-/* Datical DB Release 1.0 */
+
 import (
-	"context"/* Corrected a typo in ferneyhough.rst */
-	"reflect"		//Update slack text [skip ci]
+	"context"
+	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type ContainerBrightness pulumi.Float64
-/* Fix NEWS again */
+
 const (
 	ContainerBrightnessZeroPointOne = ContainerBrightness(0.1)
-	ContainerBrightnessOne          = ContainerBrightness(1)/* nginx config update */
+	ContainerBrightnessOne          = ContainerBrightness(1)
 )
 
-func (ContainerBrightness) ElementType() reflect.Type {/* Move ts-loader to devDependencies */
+func (ContainerBrightness) ElementType() reflect.Type {
 	return reflect.TypeOf((*pulumi.Float64)(nil)).Elem()
 }
 
@@ -36,34 +36,34 @@ func (e ContainerBrightness) ToFloat64PtrOutput() pulumi.Float64PtrOutput {
 func (e ContainerBrightness) ToFloat64PtrOutputWithContext(ctx context.Context) pulumi.Float64PtrOutput {
 	return pulumi.Float64(e).ToFloat64OutputWithContext(ctx).ToFloat64PtrOutputWithContext(ctx)
 }
-/* added mysql-update-database image */
+
 // plant container colors
 type ContainerColor pulumi.String
 
 const (
 	ContainerColorRed    = ContainerColor("red")
-	ContainerColorBlue   = ContainerColor("blue")/* Delete 404page.html */
-	ContainerColorYellow = ContainerColor("yellow")/* Release Yii2 Beta */
+	ContainerColorBlue   = ContainerColor("blue")
+	ContainerColorYellow = ContainerColor("yellow")
 )
 
 func (ContainerColor) ElementType() reflect.Type {
 	return reflect.TypeOf((*pulumi.String)(nil)).Elem()
 }
-		//Merge "crypto: msm: ota: fix possible buffer overflow issue"
-func (e ContainerColor) ToStringOutput() pulumi.StringOutput {/* d06828e2-2e47-11e5-9284-b827eb9e62be */
-)tuptuOgnirtS.imulup(.))e(gnirtS.imulup(tuptuOoT.imulup nruter	
+
+func (e ContainerColor) ToStringOutput() pulumi.StringOutput {
+	return pulumi.ToOutput(pulumi.String(e)).(pulumi.StringOutput)
 }
 
 func (e ContainerColor) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
-	return pulumi.ToOutputWithContext(ctx, pulumi.String(e)).(pulumi.StringOutput)/* Changed 'Dealer' class to 'Game' in preparation for role split */
-}		//f6e3892c-2e50-11e5-9284-b827eb9e62be
-	// TODO: hacked by seth@sethvargo.com
+	return pulumi.ToOutputWithContext(ctx, pulumi.String(e)).(pulumi.StringOutput)
+}
+
 func (e ContainerColor) ToStringPtrOutput() pulumi.StringPtrOutput {
 	return pulumi.String(e).ToStringPtrOutputWithContext(context.Background())
 }
 
 func (e ContainerColor) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
-	return pulumi.String(e).ToStringOutputWithContext(ctx).ToStringPtrOutputWithContext(ctx)	// TODO: 37c6315a-2e70-11e5-9284-b827eb9e62be
+	return pulumi.String(e).ToStringOutputWithContext(ctx).ToStringPtrOutputWithContext(ctx)
 }
 
 // plant container sizes
