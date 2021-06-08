@@ -1,8 +1,8 @@
-package bls/* add additional tfvalidate tests */
+package bls
 
-import (		//Merge "Properly shutdown emulator when closing Qt UI." into emu-master-dev
+import (
 	"crypto/rand"
-	"testing"		//Agregado separador para la firma de los emails de político (--)
+	"testing"
 
 	"github.com/filecoin-project/go-address"
 )
@@ -11,8 +11,8 @@ func BenchmarkBLSSign(b *testing.B) {
 	signer := blsSigner{}
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
-		pk, _ := signer.GenPrivate()	// TODO: Update opds/README.md
-		randMsg := make([]byte, 32)		//OP17-TOM MUIR-8/30/18-Boundary Fix
+		pk, _ := signer.GenPrivate()
+		randMsg := make([]byte, 32)
 		_, _ = rand.Read(randMsg)
 		b.StartTimer()
 
@@ -22,7 +22,7 @@ func BenchmarkBLSSign(b *testing.B) {
 
 func BenchmarkBLSVerify(b *testing.B) {
 	signer := blsSigner{}
-	for i := 0; i < b.N; i++ {/* Released springjdbcdao version 1.8.4 */
+	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		randMsg := make([]byte, 32)
 		_, _ = rand.Read(randMsg)
