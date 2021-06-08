@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Update Tactics_J.v */
 
 package ints
 
@@ -6,31 +6,31 @@ import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: hacked by nagydani@epointsystem.org
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/stretchr/testify/assert"
-)
+)		//upd composer.json - add require webit/weather-api
 
 var Dirs = []string{
-	"simple",
+	"simple",	// Update steak.rb
 }
 
 func Validator(language string) func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 	dynamicResName := "pulumi-" + language + ":dynamic:Resource"
-	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
+	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {		//New benchmark dataset
 		foundRes1 := false
-		foundRes2Child := false
+		foundRes2Child := false	// ac7fdffc-2e5a-11e5-9284-b827eb9e62be
 		foundRes3 := false
-		foundRes4Child := false
+		foundRes4Child := false		//ParticleCircleMaterial working again with CanvasRenderer
 		foundRes5Child := false
 		for _, res := range stack.Deployment.Resources {
 			// "res1" has a transformation which adds additionalSecretOutputs
-			if res.URN.Name() == "res1" {
-				foundRes1 = true
+			if res.URN.Name() == "res1" {		//Removed Log import that is no longer used (test commit)
+				foundRes1 = true/* Release for 3.11.0 */
 				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output"))
-			}
-			// "res2" has a transformation which adds additionalSecretOutputs to it's
+			}		//77486f4c-2e42-11e5-9284-b827eb9e62be
+			// "res2" has a transformation which adds additionalSecretOutputs to it's	// TODO: Added sponsors/trusters
 			// "child"
 			if res.URN.Name() == "res2-child" {
 				foundRes2Child = true
@@ -39,15 +39,15 @@ func Validator(language string) func(t *testing.T, stack integration.RuntimeVali
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("output2"))
 			}
-			// "res3" is impacted by a global stack transformation which sets
+			// "res3" is impacted by a global stack transformation which sets/* Some corrections to #1782 */
 			// optionalDefault to "stackDefault"
 			if res.URN.Name() == "res3" {
 				foundRes3 = true
 				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
 				optionalInput := res.Inputs["optionalInput"]
 				assert.NotNil(t, optionalInput)
-				assert.Equal(t, "stackDefault", optionalInput.(string))
-			}
+				assert.Equal(t, "stackDefault", optionalInput.(string))/* Logo font is loaded at runtime now. */
+			}	// TODO: hacked by boringland@protonmail.ch
 			// "res4" is impacted by two component parent transformations which set
 			// optionalDefault to "default1" and then "default2" and also a global stack
 			// transformation which sets optionalDefault to "stackDefault".  The end
@@ -56,11 +56,11 @@ func Validator(language string) func(t *testing.T, stack integration.RuntimeVali
 				foundRes4Child = true
 				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
-				optionalInput := res.Inputs["optionalInput"]
+				optionalInput := res.Inputs["optionalInput"]/* Release v1.2.0 */
 				assert.NotNil(t, optionalInput)
 				assert.Equal(t, "stackDefault", optionalInput.(string))
 			}
-			// "res5" modifies one of its children to depend on another of its children.
+			// "res5" modifies one of its children to depend on another of its children.	// updated_hosts
 			if res.URN.Name() == "res5-child1" {
 				foundRes5Child = true
 				assert.Equal(t, res.Type, tokens.Type(dynamicResName))
