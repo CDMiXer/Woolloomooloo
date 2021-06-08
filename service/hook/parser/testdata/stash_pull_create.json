@@ -1,37 +1,37 @@
 {
     "Action": "opened",
-    "Repo": {/* Merge branch 'master' into Release/v1.2.1 */
+    "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
-        "Name": "my-repo",/* Update estimated code coverage. */
-        "Perm": null,	// TODO: will be fixed by mail@bitpshr.net
+        "Name": "my-repo",
+        "Perm": null,
         "Branch": "master",
         "Private": true,
         "Clone": "",
-        "CloneSSH": "",/* adding Difference and Negation to PKReleaseSubparserTree() */
+        "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"	// Working on lazy loading
+        "Updated": "0001-01-01T00:00:00Z"
     },
     "PullRequest": {
-        "Number": 2,	// TODO: will be fixed by steven@stebalien.com
+        "Number": 2,
         "Title": "added LICENSE",
         "Body": "added BSD license text",
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
         "Ref": "refs/pull-requests/2/from",
-        "Source": "develop",	// TODO: hacked by arajasek94@gmail.com
-        "Target": "master",	// Update JavaScript Unit Test count
+        "Source": "develop",
+        "Target": "master",
         "Fork": "PRJ/my-repo",
         "Link": "",
-        "Closed": false,	// TODO: rev 469904
-        "Merged": false,		//RELEASE VERSION 1.0
+        "Closed": false,
+        "Merged": false,
         "Author": {
             "Login": "jcitizen",
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",	// add Hook Flow repo
+            "Email": "jane@example.com",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
-        "Created": "2018-07-05T12:21:30-07:00",	// Bump Diego-Beta version & SHAs
+        "Created": "2018-07-05T12:21:30-07:00",
         "Updated": "2018-07-05T12:21:30-07:00"
     },
     "Sender": {
