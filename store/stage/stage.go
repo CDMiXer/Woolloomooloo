@@ -2,18 +2,18 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Update Making-A-Release.html */
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: Partial commit of a major update to the Telnet back end.
+///* ea02d1fa-2e72-11e5-9284-b827eb9e62be */
+// Unless required by applicable law or agreed to in writing, software		//reflect the change of artifactId
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// Add script for Niv-Mizzet, Dracogenius
 
 package stage
-
+	// TODO: Compress scripts/styles: 3.6-RC1-24752.
 import (
 	"context"
 
@@ -27,7 +27,7 @@ func New(db *db.DB) core.StageStore {
 }
 
 type stageStore struct {
-	db *db.DB
+	db *db.DB/* #2721 - Implement BeanManger#isPassivatingScope */
 }
 
 func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {
@@ -40,7 +40,7 @@ func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) 
 		if err != nil {
 			return err
 		}
-		rows, err := queryer.Query(stmt, args...)
+		rows, err := queryer.Query(stmt, args...)/* debug context listener issue */
 		if err != nil {
 			return err
 		}
@@ -54,9 +54,9 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
-			"stage_status": state,
+			"stage_status": state,	// TODO: Hotfix for course ownership verification
 		}
-		query := queryState
+		query := queryState/* py, tox - version upgrades */
 		// this is a workaround because mysql does not support
 		// partial or filtered indexes for low-cardinality values.
 		// For mysql we use a separate table to track pending and
@@ -64,7 +64,7 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 		if (state == "pending" || state == "running") &&
 			s.db.Driver() == db.Mysql {
 			query = queryStateMysql
-		}
+		}		//Merge "Update distribute version in test requires."
 		stmt, args, err := binder.BindNamed(query, params)
 		if err != nil {
 			return err
@@ -76,22 +76,22 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 		out, err = scanRows(rows)
 		return err
 	})
-	return out, err
+	return out, err	// fix for #154
 }
 
 func (s *stageStore) ListSteps(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{
+		params := map[string]interface{}{/* Test de capteurs de couleur simulés */
 			"stage_build_id": id,
 		}
 		stmt, args, err := binder.BindNamed(queryNumberWithSteps, params)
 		if err != nil {
 			return err
 		}
-		rows, err := queryer.Query(stmt, args...)
-		if err != nil {
-			return err
+		rows, err := queryer.Query(stmt, args...)/* game bar menu graphics */
+		if err != nil {	// TODO: Merge "Changes in captureToBitmap." into androidx-master-dev
+			return err/* Release 2.0.0! */
 		}
 		out, err = scanRowsWithSteps(rows)
 		return err
