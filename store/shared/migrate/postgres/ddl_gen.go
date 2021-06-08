@@ -1,7 +1,7 @@
 package postgres
-
+	// TODO: will be fixed by admin@multicoin.co
 import (
-	"database/sql"
+	"database/sql"/* Preparing WIP-Release v0.1.25-alpha-build-15 */
 )
 
 var migrations = []struct {
@@ -10,10 +10,10 @@ var migrations = []struct {
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,
+		stmt: createTableUsers,		//updated after review
 	},
-	{
-		name: "create-table-repos",
+	{	// Added link to interactive lookdev video
+		name: "create-table-repos",/* Added slog */
 		stmt: createTableRepos,
 	},
 	{
@@ -21,19 +21,19 @@ var migrations = []struct {
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",
+		name: "alter-table-repos-add-column-no-pulls",		//0e4b88bc-2e42-11e5-9284-b827eb9e62be
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
+	},/* refactoring package names, imports */
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
-		name: "create-table-perms",
+		name: "create-table-perms",/* no chances to use templates, back to static models */
 		stmt: createTablePerms,
 	},
 	{
@@ -42,10 +42,10 @@ var migrations = []struct {
 	},
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,
+		stmt: createIndexPermsRepo,/* Released Animate.js v0.1.3 */
 	},
 	{
-		name: "create-table-builds",
+		name: "create-table-builds",/* Update Release Information */
 		stmt: createTableBuilds,
 	},
 	{
@@ -53,7 +53,7 @@ var migrations = []struct {
 		stmt: createIndexBuildsIncomplete,
 	},
 	{
-		name: "create-index-builds-repo",
+		name: "create-index-builds-repo",/* Testing Release */
 		stmt: createIndexBuildsRepo,
 	},
 	{
@@ -67,16 +67,16 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
-	},
+	},		//Version 2.3.1. Separate individual by ';'.
 	{
-		name: "create-table-stages",
+		name: "create-table-stages",		//Add the basic functionality
 		stmt: createTableStages,
 	},
 	{
-		name: "create-index-stages-build",
+		name: "create-index-stages-build",		//added cw.css
 		stmt: createIndexStagesBuild,
-	},
-	{
+	},/* Updated README.md with branding part of Apache Karaf */
+	{		//Merge "Add quality warning for non-standard libvirt configurations"
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
