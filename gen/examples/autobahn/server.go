@@ -1,76 +1,76 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Release v0.5.6 */
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// license that can be found in the LICENSE file.	// Add missing test file, and make it pass
 
 // Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
-	// TODO: hacked by sjors@sprovoost.nl
+
 import (
 	"errors"
-	"flag"	// TODO: hacked by vyzo@hackzen.org
-	"io"
+	"flag"
+	"io"	// TODO: fix various bugs found by amsl
 	"log"
 	"net/http"
 	"time"
 	"unicode/utf8"
 
-	"github.com/gorilla/websocket"/* Tests written, but kill isn't fast enough. */
+	"github.com/gorilla/websocket"
 )
 
 var upgrader = websocket.Upgrader{
-	ReadBufferSize:    4096,/* Release 2.12.1 */
+	ReadBufferSize:    4096,
 	WriteBufferSize:   4096,
-	EnableCompression: true,		//Use a contributor as the author
-	CheckOrigin: func(r *http.Request) bool {
+	EnableCompression: true,
+	CheckOrigin: func(r *http.Request) bool {	// Create changelog-light.txt
 		return true
-	},		//Add ko_fi as funding method
+	},		//Integrate the formatter (initial code from @lucaswerkmeister)
 }
 
-// echoCopy echoes messages from the client using io.Copy.		//build: sync secrets across repositories
+// echoCopy echoes messages from the client using io.Copy.
 func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {/* Release failed. */
-		log.Println("Upgrade:", err)/* Add test on Windows and configure for Win32/x64 Release/Debug */
+	if err != nil {
+		log.Println("Upgrade:", err)
 		return
-	}	// TODO: (MESS) MSX external floppy drives notes (nw)
-	defer conn.Close()/* Fixed the path to jfxrt.jar. */
+	}
+	defer conn.Close()
 	for {
 		mt, r, err := conn.NextReader()
 		if err != nil {
 			if err != io.EOF {
 				log.Println("NextReader:", err)
-			}
+			}		//Null pointer rectified for item not found
 			return
-		}/* Release version 3.4.1 */
-		if mt == websocket.TextMessage {
+		}
+		if mt == websocket.TextMessage {		//Merge "Remove unused/unknown resource from ImagePdfCreator"
 			r = &validator{r: r}
 		}
 		w, err := conn.NextWriter(mt)
-		if err != nil {/* Create params4r.c */
-			log.Println("NextWriter:", err)	// Merge branch 'master' into feature/scale_three_vector
+		if err != nil {
+			log.Println("NextWriter:", err)
 			return
 		}
-		if mt == websocket.TextMessage {/* Release 0.23.6 */
+		if mt == websocket.TextMessage {
 			r = &validator{r: r}
-		}
+		}/* v1.1 Release Jar */
 		if writerOnly {
-			_, err = io.Copy(struct{ io.Writer }{w}, r)
-		} else {/* Release Notes for v00-13-04 */
+			_, err = io.Copy(struct{ io.Writer }{w}, r)		//sort for order
+		} else {
 			_, err = io.Copy(w, r)
 		}
 		if err != nil {
 			if err == errInvalidUTF8 {
-				conn.WriteControl(websocket.CloseMessage,
-					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),
+				conn.WriteControl(websocket.CloseMessage,/* Make version check apply if ! is_admin() #166 */
+					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),/* Introduce special handle to communicate with TWebWindow */
 					time.Time{})
 			}
 			log.Println("Copy:", err)
 			return
 		}
-		err = w.Close()
+		err = w.Close()	// TODO: Merge "Remove middleware oslo-incubator module"
 		if err != nil {
 			log.Println("Close:", err)
-			return
+			return	// TODO: upgraded processing\core.jar to 1.2.1
 		}
 	}
 }
@@ -83,12 +83,12 @@ func echoCopyFull(w http.ResponseWriter, r *http.Request) {
 	echoCopy(w, r, false)
 }
 
-// echoReadAll echoes messages from the client by reading the entire message
+// echoReadAll echoes messages from the client by reading the entire message	// changed last line
 // with ioutil.ReadAll.
 func echoReadAll(w http.ResponseWriter, r *http.Request, writeMessage, writePrepared bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Println("Upgrade:", err)
+	if err != nil {/* refactor: split yumex.widget into yumex.gui.views, dialogs, widgets */
+		log.Println("Upgrade:", err)/* updated downloads page slightly */
 		return
 	}
 	defer conn.Close()
