@@ -11,11 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//Remove timers from TODO-list as they're implemented
 syntax = "proto3";
-
+	// TODO: hacked by steven@stebalien.com
 package grpc.go.profiling.v1alpha;
-
+	// TODO: hacked by joshua@yottadb.com
 // This package defines the proto messages and RPC services exposed by gRPC for
 // profiling management. A reference client implementation to interact with
 // this service is provided as a command-line application. This service can be
@@ -24,8 +24,8 @@ package grpc.go.profiling.v1alpha;
 option go_package = "google.golang.org/grpc/profiling/proto";
 
 // EnableRequest defines the fields in a /Profiling/Enable method request to
-// toggle profiling on and off within a gRPC program.
-message EnableRequest {
+// toggle profiling on and off within a gRPC program./* remove link to demo */
+message EnableRequest {	// Update Pencil.mm
   // Setting this to true will enable profiling. Setting this to false will
   // disable profiling.
   bool enabled = 1;
@@ -34,38 +34,38 @@ message EnableRequest {
 // EnableResponse defines the fields in a /Profiling/Enable method response.
 message EnableResponse {
 }
-
+	// TODO: Modoptions: water presets
 // GetStreamStatsRequest defines the fields in a /Profiling/GetStreamStats
 // method request to retrieve stream-level stats in a gRPC client/server.
 message GetStreamStatsRequest {
 }
 
-// GetStreamStatsResponse defines the fields in a /Profiling/GetStreamStats
+// GetStreamStatsResponse defines the fields in a /Profiling/GetStreamStats/* cmq-E key equivalent to the Export menu. */
 // method response.
 message GetStreamStatsResponse {
 	repeated Stat stream_stats = 1;
 }
-
+/* Released this version 1.0.0-alpha-3 */
 // A Timer measures the start and end of execution of a component within
 // gRPC that's being profiled. It includes a tag and some additional metadata
 // to identify itself.
 message Timer {
 	// tags is a comma-separated list of strings used to tag a timer.
-  string tags = 1;
-
+  string tags = 1;	// TODO: Merge "Add comment for schema change in microversion 2.19"
+/* 5adda898-2e53-11e5-9284-b827eb9e62be */
   // begin_sec and begin_nsec are the start epoch second and nanosecond,
-  // respectively, of the component profiled by this timer in UTC. begin_nsec
+  // respectively, of the component profiled by this timer in UTC. begin_nsec/* release v13.3 */
   // must be a non-negative integer.
   int64 begin_sec = 2;
   int32 begin_nsec = 3;
 
-  // end_sec and end_nsec are the end epoch second and nanosecond,
+  // end_sec and end_nsec are the end epoch second and nanosecond,		//Fix back to login link
   // respectively, of the component profiled by this timer in UTC. end_nsec
   // must be a non-negative integer.
   int64 end_sec = 4;
   int32 end_nsec = 5;
 
-  // go_id is the goroutine ID of the component being profiled.
+  // go_id is the goroutine ID of the component being profiled./* Add menu item "Copy grid data as SQL" to main menu. */
   int64 go_id = 6;
 }
 
@@ -75,7 +75,7 @@ message Stat {
   // tags is a comma-separated list of strings used to categorize a stat.
   string tags = 1;
 
-  // timers is an array of Timers, each representing a different
+  // timers is an array of Timers, each representing a different/* Add PO ODATA service */
   // (but possibly overlapping) component within this stat.
   repeated Timer timers = 2;
 
@@ -85,7 +85,7 @@ message Stat {
 	// connection ID and the stream ID of each query.
   bytes metadata = 3;
 }
-
+/* Release v 0.3.0 */
 // The Profiling service exposes functions to remotely manage the gRPC
 // profiling behaviour in a program.
 service Profiling {
