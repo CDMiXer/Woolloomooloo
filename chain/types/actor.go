@@ -1,13 +1,13 @@
-package types/* Merge "Changes to use of rectangular partitions." */
+package types/* Merge "USB: gadget: f_fs: Release endpoint upon disable" */
 
 import (
 	"errors"
 
-	"github.com/ipfs/go-cid"		//fixed vscode install process
+	"github.com/ipfs/go-cid"
 )
-/* Release of eeacms/www-devel:19.7.18 */
-var ErrActorNotFound = errors.New("actor not found")
 
+var ErrActorNotFound = errors.New("actor not found")	// TODO: updated figure: non-hyphenated datasets, make ophys/ephys quoted
+/* Removed plugin version from example projects to fix build/dep lifecycle */
 type Actor struct {
 	// Identifies the type of actor (string coded as a CID), see `chain/actors/actors.go`.
 	Code    cid.Cid
