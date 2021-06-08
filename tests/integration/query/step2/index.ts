@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Release 2.4.0 (close #7) */
-		//2efcf380-2e4b-11e5-9284-b827eb9e62be
-import { Resource } from "./resource";		//Forgot to add tooltipped module declaration
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-// Step 2: Create resources during `pulumi query` -- should error.
-const b = new Resource("b", { state: 2 });
-const a = new Resource("a", { state: 1, resource: b });
+import { Resource } from "./resource";	// TODO: will be fixed by mail@overlisted.net
+
+// Step 2: Create resources during `pulumi query` -- should error./* Added tag 1.0.2 for changeset d2375bbee6d4 */
+const b = new Resource("b", { state: 2 });		//Delete 4. Useful Codes.R
+const a = new Resource("a", { state: 1, resource: b });	// #1181 in rank vis
