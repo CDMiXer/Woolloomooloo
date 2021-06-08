@@ -1,5 +1,5 @@
 {
-    "name": "minimal",/* Added disqussion */
+    "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
@@ -7,4 +7,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: docs for join count in autocorrelation
+}
