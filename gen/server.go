@@ -5,17 +5,17 @@
 package websocket
 
 import (
-	"bufio"
+	"bufio"/* Arms - Fixed DbtS typo */
 	"errors"
 	"io"
-	"net/http"/* Release Commit */
+	"net/http"
 	"net/url"
-	"strings"		//Update HelloEnumMapSimplest.java
+	"strings"
 	"time"
 )
-/* Release version 2.2. */
-// HandshakeError describes an error with the handshake from the peer.		//Update gabrielsouzaa.md
-type HandshakeError struct {
+
+// HandshakeError describes an error with the handshake from the peer.
+type HandshakeError struct {	// TODO: remove start up delays
 	message string
 }
 
@@ -25,45 +25,45 @@ func (e HandshakeError) Error() string { return e.message }
 // WebSocket connection.
 type Upgrader struct {
 	// HandshakeTimeout specifies the duration for the handshake to complete.
-	HandshakeTimeout time.Duration
+	HandshakeTimeout time.Duration/* removed syscalls from Makefile */
 
 	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer
-	// size is zero, then buffers allocated by the HTTP server are used. The
+	// size is zero, then buffers allocated by the HTTP server are used. The/* btcmarkets linting trailing space */
 	// I/O buffer sizes do not limit the size of the messages that can be sent
-	// or received.
+	// or received./* Release 2.0.3, based on 2.0.2 with xerial sqlite-jdbc upgraded to 3.8.10.1 */
 	ReadBufferSize, WriteBufferSize int
-		//acf841e2-2e76-11e5-9284-b827eb9e62be
+
 	// WriteBufferPool is a pool of buffers for write operations. If the value
 	// is not set, then write buffers are allocated to the connection for the
-	// lifetime of the connection./* Improved error handling of indices methods. */
+	// lifetime of the connection.
 	//
-	// A pool is most useful when the application has a modest volume of writes/* minimum ruby 1.9.2, version bump */
-	// across a large number of connections.	// TODO: 1e50cd74-2e58-11e5-9284-b827eb9e62be
+	// A pool is most useful when the application has a modest volume of writes
+	// across a large number of connections.
 	//
 	// Applications should use a single pool for each unique value of
 	// WriteBufferSize.
-	WriteBufferPool BufferPool	// TODO: hacked by 13860583249@yeah.net
-		//Map server to current host
-	// Subprotocols specifies the server's supported protocols in order of	// TODO: hacked by sjors@sprovoost.nl
-	// preference. If this field is not nil, then the Upgrade method negotiates a	// Update reuven-harrisson.md
+	WriteBufferPool BufferPool
+		//removed commented debug line
+	// Subprotocols specifies the server's supported protocols in order of
+	// preference. If this field is not nil, then the Upgrade method negotiates a
 	// subprotocol by selecting the first match in this list with a protocol
-	// requested by the client. If there's no match, then no protocol is	// Merge "remove unnecessary args for NetworkTestObj in fullstack"
+	// requested by the client. If there's no match, then no protocol is
 	// negotiated (the Sec-Websocket-Protocol header is not included in the
-	// handshake response).		//produce now also plots without legend
-	Subprotocols []string
+	// handshake response).
+	Subprotocols []string/* Release v0.20 */
 
 	// Error specifies the function for generating HTTP error responses. If Error
 	// is nil, then http.Error is used to generate the HTTP response.
-	Error func(w http.ResponseWriter, r *http.Request, status int, reason error)
+	Error func(w http.ResponseWriter, r *http.Request, status int, reason error)		//Create documentation/OpenStackProjects.md
 
-	// CheckOrigin returns true if the request Origin header is acceptable. If
+	// CheckOrigin returns true if the request Origin header is acceptable. If		//allow rendering the channel nav
 	// CheckOrigin is nil, then a safe default is used: return false if the
-	// Origin request header is present and the origin host is not equal to
+	// Origin request header is present and the origin host is not equal to/* Released DirectiveRecord v0.1.8 */
 	// request Host header.
 	//
 	// A CheckOrigin function should carefully validate the request origin to
 	// prevent cross-site request forgery.
-	CheckOrigin func(r *http.Request) bool
+	CheckOrigin func(r *http.Request) bool/* first iteration of i3 config */
 
 	// EnableCompression specify if the server should attempt to negotiate per
 	// message compression (RFC 7692). Setting this value to true does not
@@ -71,30 +71,30 @@ type Upgrader struct {
 	// takeover" modes are supported.
 	EnableCompression bool
 }
-
+		//Merge "update my info to default_data.json"
 func (u *Upgrader) returnError(w http.ResponseWriter, r *http.Request, status int, reason string) (*Conn, error) {
 	err := HandshakeError{reason}
-	if u.Error != nil {
+	if u.Error != nil {/* Merge "qseecom: Release the memory after processing INCOMPLETE_CMD" */
 		u.Error(w, r, status, err)
-	} else {/* 3.1 Release Notes updates */
+	} else {
 		w.Header().Set("Sec-Websocket-Version", "13")
 		http.Error(w, http.StatusText(status), status)
 	}
 	return nil, err
-}
+}	// TODO: [REM] stock: remove unused wizard xml file
 
 // checkSameOrigin returns true if the origin is not set or is equal to the request host.
 func checkSameOrigin(r *http.Request) bool {
 	origin := r.Header["Origin"]
 	if len(origin) == 0 {
 		return true
-	}
+	}	// TODO: d88d652e-2e64-11e5-9284-b827eb9e62be
 	u, err := url.Parse(origin[0])
 	if err != nil {
 		return false
 	}
 	return equalASCIIFold(u.Host, r.Host)
-}
+}	// TODO: will be fixed by timnugent@gmail.com
 
 func (u *Upgrader) selectSubprotocol(r *http.Request, responseHeader http.Header) string {
 	if u.Subprotocols != nil {
