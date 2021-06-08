@@ -1,9 +1,9 @@
 {
-    "name": "aliases",		//Add creation and update of the coursehomepage_portlet table.
+    "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {		//Merge "Fix minor memory leak in bgp_bgpaas_test by using boost::scoped_ptr"
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
