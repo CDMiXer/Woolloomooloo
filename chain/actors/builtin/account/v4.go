@@ -1,30 +1,30 @@
-package account
+package account/* Updating Version Number to Match Release and retagging */
 
-import (	// Added browserify documentation
+import (/* Update CodeSkulptor.Release.bat */
 	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-		//remove intro
-	account4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/account"
-)/* - First version of new GUI with support for logging and status messages.  */
-	// TODO: fixes for passing other props
-var _ State = (*state4)(nil)	// SID_CHATEVENT
 
-func load4(store adt.Store, root cid.Cid) (State, error) {/* chore(demo): remove extra option for intro example */
+	account4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/account"
+)
+
+var _ State = (*state4)(nil)
+
+func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
-	err := store.Get(store.Context(), root, &out)
+	err := store.Get(store.Context(), root, &out)	// New translations Xenon.html (Hungarian)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil
-}
+	return &out, nil/* Release: Making ready for next release cycle 4.5.3 */
+}/* Common.js -> Gadget-langdata.js */
 
 type state4 struct {
 	account4.State
-	store adt.Store	// TODO: add feedback channel
+	store adt.Store
 }
-
+		//added empty handler message in case binary data is sent while in command mode
 func (s *state4) PubkeyAddress() (address.Address, error) {
 	return s.Address, nil
 }
