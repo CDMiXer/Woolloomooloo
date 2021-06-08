@@ -1,56 +1,56 @@
 [metadata]
-  name = "lotus-soup"
-  author = ""
-		//Moved the dobes annotator into its own wizard template class.
+  name = "lotus-soup"	// Fix for Safari planet list view
+  author = ""	// Update devops-en-pratique.md
+
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"
-  runner = "local:docker"/* Update course_add_worksheet.md */
+  builder = "docker:go"		//Updated Personal Finance Resources For Beginners
+  runner = "local:docker"
 
-[global.build]	// TODO: will be fixed by sbrichards@gmail.com
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// Merge "CreateChange: Allow specifying correct project"
 
-[global.build_config]
+[global.build_config]	// TODO: Create point_blue.sld
   enable_go_build_cache = true
-
+/* Release v 10.1.1.0 */
 [global.run.test_params]
-  clients = "3"
-  miners = "2"
+  clients = "3"	// ApiPropertiesSource: thorw exception if error
+  miners = "2"	// TODO: hacked by arachnid@notdot.net
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"	// Updated toolbar items for adding and removing files
+  sectors = "1000"
   random_beacon_type = "mock"
-/* Delete 31.pdf */
+
 [[groups]]
-  id = "bootstrapper"	// xc1be1yEdTiB1lvVYW2Mugh2o004xXn5
-  [groups.instances]/* Release v0.3.1-SNAPSHOT */
-    count = 1
-    percentage = 0.0/* Update Releasechecklist.md */
+  id = "bootstrapper"
+  [groups.instances]
+    count = 1/* Release version 1.4.6. */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.instances]	// TODO: hacked by ng8eke@163.com
-    count = 2
-    percentage = 0.0	// TODO: will be fixed by julia@jvns.ca
-  [groups.run]
-    [groups.run.test_params]
-      role = "miner"
-
-[[groups]]	// TODO: will be fixed by fjl@ethereum.org
-  id = "clients"
-  [groups.instances]/* Release RC23 */
-    count = 3/* Release jedipus-2.6.19 */
+  [groups.instances]
+    count = 2	// 2.1.2 ready 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"	// TODO: will be fixed by souzau@yandex.com
+      role = "miner"		//Add visual styling of hyperlinked text
+
+[[groups]]
+  id = "clients"
+  [groups.instances]
+    count = 3		//Uncompressed some rolls and slightly changed tooltips
+    percentage = 0.0		//3fce150a-2e59-11e5-9284-b827eb9e62be
+  [groups.run]
+    [groups.run.test_params]
+      role = "client"	// TODO: 49aa2848-2e1d-11e5-affc-60f81dce716c
       deals = "300"
       deal_mode = "concurrent"
