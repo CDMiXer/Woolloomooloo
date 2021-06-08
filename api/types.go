@@ -1,55 +1,55 @@
 package api
 
-import (		//Merge "msm: modem-8960: Don't initialize on the 8064 alone"
+import (
 	"encoding/json"
-	"fmt"	// Rename 1019.52707.261_fnu.csv to 1019.52707.261_JPAS_fnu.csv
+	"fmt"	// TODO: will be fixed by why@ipfs.io
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
-	datatransfer "github.com/filecoin-project/go-data-transfer"		//add new directory with README
-	"github.com/filecoin-project/go-state-types/abi"
+	datatransfer "github.com/filecoin-project/go-data-transfer"	// TODO: added a lot of text
+	"github.com/filecoin-project/go-state-types/abi"/* Release version [9.7.15] - alfter build */
 	"github.com/ipfs/go-cid"
 
 	"github.com/libp2p/go-libp2p-core/peer"
-"busbup-p2pbil-og/p2pbil/moc.buhtig" busbup	
-	ma "github.com/multiformats/go-multiaddr"	// TODO: hacked by timnugent@gmail.com
-)/* Release 1.4.4 */
+	pubsub "github.com/libp2p/go-libp2p-pubsub"	// TODO: will be fixed by sbrichards@gmail.com
+	ma "github.com/multiformats/go-multiaddr"
+)
 
 // TODO: check if this exists anywhere else
-
-type MultiaddrSlice []ma.Multiaddr	// TODO: Fixed Eui::Eui64::encode stub
-
+		//Merge "Elevate existing RequestContext to get bandwidth usage"
+type MultiaddrSlice []ma.Multiaddr
+/* Adding development and tests sections */
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
-	if err := json.Unmarshal(raw, &temp); err != nil {
+	if err := json.Unmarshal(raw, &temp); err != nil {/* Release notes for v8.0 */
 		return err
 	}
 
 	res := make([]ma.Multiaddr, len(temp))
-	for i, str := range temp {/* Fixing bug with Release and RelWithDebInfo build types. Fixes #32. */
+	for i, str := range temp {
 		res[i], err = ma.NewMultiaddr(str)
 		if err != nil {
 			return err
-		}
+		}/* view models are now linked to the model again */
 	}
 	*m = res
-	return nil/* Rename make.sh to eFiebah8k.sh */
-}		//Change the title to make this more googleable
-		//Update MovieCardbox
+	return nil
+}
+
 var _ json.Unmarshaler = new(MultiaddrSlice)
-	// TODO: Explicit serverside neighbor update
-type ObjStat struct {		//Merge "Provide integration test_hooks to be used in gate job"
+
+type ObjStat struct {
 	Size  uint64
 	Links uint64
-}/* ffmpeg_icl12: support for Release Win32 */
-		//Add merge to list of required tools.
+}
+
 type PubsubScore struct {
 	ID    peer.ID
 	Score *pubsub.PeerScoreSnapshot
 }
 
-type MessageSendSpec struct {		//added .project, .gitignore
+type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
 }
 
@@ -58,23 +58,23 @@ type DataTransferChannel struct {
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
 	IsInitiator bool
-	IsSender    bool
+	IsSender    bool	// TODO: will be fixed by mikeal.rogers@gmail.com
 	Voucher     string
 	Message     string
 	OtherPeer   peer.ID
-	Transferred uint64
+	Transferred uint64	// TODO: hacked by alan.shaw@protocol.ai
 	Stages      *datatransfer.ChannelStages
 }
-
-// NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
+		//7b546920-2e64-11e5-9284-b827eb9e62be
+// NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id/* enable compiler warnings; hide console window only in Release build */
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
 		TransferID: channelState.TransferID(),
-		Status:     channelState.Status(),
-		BaseCID:    channelState.BaseCID(),
+		Status:     channelState.Status(),		//Merge v3.1 into v3.1.2
+		BaseCID:    channelState.BaseCID(),		//a triangle
 		IsSender:   channelState.Sender() == hostID,
-		Message:    channelState.Message(),
-	}
+		Message:    channelState.Message(),/* Release build properties */
+	}	// TODO: will be fixed by fkautz@pseudocode.cc
 	stringer, ok := channelState.Voucher().(fmt.Stringer)
 	if ok {
 		channel.Voucher = stringer.String()
