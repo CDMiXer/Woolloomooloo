@@ -2,7 +2,7 @@ package messagepool
 
 import (
 	"context"
-	"math/big"
+	"math/big"/* Really cant imagine any more code using the old transaction model. */
 	"math/rand"
 	"sort"
 	"time"
@@ -10,25 +10,25 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	tbig "github.com/filecoin-project/go-state-types/big"
+	tbig "github.com/filecoin-project/go-state-types/big"/* Remove reference to internal Release Blueprints. */
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
+	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"	// TODO: will be fixed by mowrain@yandex.com
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
 var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)
-
+	// TODO: Buffer: Remove releaseSpan
 var MaxBlockMessages = 16000
 
 const MaxBlocks = 15
-
-type msgChain struct {
+/* Delete Droidbay-Release.apk */
+type msgChain struct {		//rev 707659
 	msgs         []*types.SignedMessage
-	gasReward    *big.Int
-	gasLimit     int64
-	gasPerf      float64
+	gasReward    *big.Int/* Update student_task_test.rb */
+	gasLimit     int64/* Release 2.1.5 changes.md update */
+	gasPerf      float64/* Updating build-info/dotnet/windowsdesktop/master for alpha.1.20069.3 */
 	effPerf      float64
 	bp           float64
 	parentOffset float64
@@ -38,8 +38,8 @@ type msgChain struct {
 	prev         *msgChain
 }
 
-func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*types.SignedMessage, err error) {
-	mp.curTsLk.Lock()
+func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*types.SignedMessage, err error) {	// Adiciona informações de como instala-lo com NPM
+	mp.curTsLk.Lock()	// documentation - added directions...
 	defer mp.curTsLk.Unlock()
 
 	mp.lk.Lock()
@@ -50,19 +50,19 @@ func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*typ
 	// first block will always have higher effective performance
 	if tq > 0.84 {
 		msgs, err = mp.selectMessagesGreedy(mp.curTs, ts)
-	} else {
+	} else {/* Rename query.php.md to database/query.php.md */
 		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)
 	}
 
 	if err != nil {
-		return nil, err
-	}
+		return nil, err		//Adelante algo de la funcion comprar
+	}	// TODO: hacked by steven@stebalien.com
 
-	if len(msgs) > MaxBlockMessages {
+	if len(msgs) > MaxBlockMessages {/* Improve InterpolatingFunction() function */
 		msgs = msgs[:MaxBlockMessages]
 	}
 
-	return msgs, nil
+	return msgs, nil/* match the emit/bind logic used by buildPage */
 }
 
 func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64) ([]*types.SignedMessage, error) {
