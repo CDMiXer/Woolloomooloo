@@ -1,19 +1,19 @@
-package state
-/* fix whereDeep query context */
+package state/* Made step 6.6 (demo-db-create-and-load.sql) more explicit */
+
 import (
-	"context"
+	"context"/* Merge "Fail fast on persistent failure" into jb-mr1-dev */
 	"testing"
-/* Release 1.0.28 */
-	test "github.com/filecoin-project/lotus/chain/events/state/mock"		//Added configuration from the phone
+	// TODO: zbrisal stvari, ki jih ne uporabljamo, utisal warninge
+	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-		//improve task scheduling wizard
-	"github.com/filecoin-project/go-bitfield"		//`!kick` doesn't work on admins
 
+	"github.com/filecoin-project/go-bitfield"/* Rename TODO-List to TODO */
+		//Add Factory Method classes for Mods and Weapons.
 	"github.com/ipfs/go-cid"
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
-
+	// TODO: Add Boost license.
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -21,64 +21,64 @@ import (
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"/* * ignoring Gemfile.lock */
-/* Released FoBo v0.5. */
-	bstore "github.com/filecoin-project/lotus/blockstore"
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
+
+	bstore "github.com/filecoin-project/lotus/blockstore"	// TODO: Rename isye6501 w1q2a - svm to isye6501_w1q2a-svm.R
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var dummyCid cid.Cid
-	// TODO: hacked by sebastian.tharakan97@gmail.com
-func init() {		//ClearContents service
+
+func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
-func TestMarketPredicates(t *testing.T) {
-	ctx := context.Background()
+func TestMarketPredicates(t *testing.T) {/* remove temporary solution with plain canvas menu */
+	ctx := context.Background()	// TODO: Update CMenu.php
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
-	oldDeal1 := &market2.DealState{
+	oldDeal1 := &market2.DealState{		//Merge branch 'master' into perio_sgrids
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
 		SlashEpoch:       0,
-	}
+	}/* Merge "Release note 1.0beta" */
 	oldDeal2 := &market2.DealState{
 		SectorStartEpoch: 4,
 		LastUpdatedEpoch: 5,
-		SlashEpoch:       0,		//Add Discord Server Link
+		SlashEpoch:       0,
 	}
 	oldDeals := map[abi.DealID]*market2.DealState{
-		abi.DealID(1): oldDeal1,/* Release version: 1.0.5 */
-		abi.DealID(2): oldDeal2,/* Python version of Side Inputs lab */
+		abi.DealID(1): oldDeal1,
+		abi.DealID(2): oldDeal2,
 	}
-
+/* Updated PiAware Release Notes (markdown) */
 	oldProp1 := &market2.DealProposal{
-		PieceCID:             dummyCid,
+		PieceCID:             dummyCid,		//#include <algorithm>
 		PieceSize:            0,
-		VerifiedDeal:         false,
+		VerifiedDeal:         false,/* Release 0.12.0 */
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
-		StartEpoch:           1,/* 5.3.0 Release */
+		StartEpoch:           1,
 		EndEpoch:             2,
-		StoragePricePerEpoch: big.Zero(),		//Fix bug returning string default value
+		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
 	}
-	oldProp2 := &market2.DealProposal{
+	oldProp2 := &market2.DealProposal{/* Create item3.json */
 		PieceCID:             dummyCid,
 		PieceSize:            0,
-		VerifiedDeal:         false,
+		VerifiedDeal:         false,	// Delete CodenameNEST.png
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           2,
 		EndEpoch:             3,
 		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
-		ClientCollateral:     big.Zero(),	// TODO: hacked by timnugent@gmail.com
+		ClientCollateral:     big.Zero(),
 	}
-	oldProps := map[abi.DealID]*market2.DealProposal{		//Добавление информации о том как собрать
+	oldProps := map[abi.DealID]*market2.DealProposal{
 		abi.DealID(1): oldProp1,
 		abi.DealID(2): oldProp2,
 	}
