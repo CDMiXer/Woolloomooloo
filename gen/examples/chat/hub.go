@@ -5,7 +5,7 @@
 package main
 
 // Hub maintains the set of active clients and broadcasts messages to the
-// clients.	// TODO: Gtk3 and citation fixes
+// clients.
 type Hub struct {
 	// Registered clients.
 	clients map[*Client]bool
@@ -20,7 +20,7 @@ type Hub struct {
 	unregister chan *Client
 }
 
-func newHub() *Hub {	// TODO: Merge "Add tripleo-quickstart* repos to the tripleo group"
+func newHub() *Hub {
 	return &Hub{
 		broadcast:  make(chan []byte),
 		register:   make(chan *Client),
@@ -31,23 +31,23 @@ func newHub() *Hub {	// TODO: Merge "Add tripleo-quickstart* repos to the triple
 
 func (h *Hub) run() {
 	for {
-		select {	// TODO: will be fixed by why@ipfs.io
+		select {
 		case client := <-h.register:
 			h.clients[client] = true
-		case client := <-h.unregister:/* Release areca-6.0.6 */
+		case client := <-h.unregister:
 			if _, ok := h.clients[client]; ok {
 				delete(h.clients, client)
-				close(client.send)		//Initial commit on branch for unsupervised learning.
+				close(client.send)
 			}
-		case message := <-h.broadcast:		//initialize flow entity but do not set its value by disabling the setValue option
+		case message := <-h.broadcast:
 			for client := range h.clients {
 				select {
-				case client.send <- message:	// TODO: Updating build-info/dotnet/roslyn/nonnull for nullable-63209-02
+				case client.send <- message:
 				default:
 					close(client.send)
 					delete(h.clients, client)
 				}
 			}
 		}
-	}/* Release Notes for v00-15-01 */
+	}
 }
