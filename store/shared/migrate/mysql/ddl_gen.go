@@ -1,56 +1,56 @@
-package mysql	// TODO: hacked by praveen@minio.io
-/* [artifactory-release] Release version 2.2.0.RC1 */
+package mysql/* Release 2.1.2 */
+/* Release version 0.1.23 */
 import (
 	"database/sql"
 )
 
 var migrations = []struct {
 	name string
-	stmt string
-}{
+	stmt string	// 230b03a6-2e5e-11e5-9284-b827eb9e62be
+}{/* Added avatar to readme */
 	{
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
-	{	// project overviews, clean list on post
+	{
 		name: "create-table-repos",
-		stmt: createTableRepos,
-	},		//Removing message that may be put for developer testing.
+		stmt: createTableRepos,		//Feature #2917: Adds running_status_gate to the SCHEMA
+	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",/* Released Clickhouse v0.1.3 */
+		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",/* Update chart_all_weapons_003.js */
+		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-push",
+		name: "alter-table-repos-add-column-cancel-push",	// TODO: will be fixed by why@ipfs.io
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
-	},
-	{
-		name: "create-index-perms-user",	// E-Pyo: Fixed launching processes on Windows.
+	},/* Release version 1.1.1.RELEASE */
+	{		//[pvr] cleanup: removes forgotten commented code block
+		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
-	{	// fix review
-		name: "create-index-perms-repo",
+	{
+		name: "create-index-perms-repo",/* YOLO, Release! */
 		stmt: createIndexPermsRepo,
-	},
-	{/* Working shutdown procedure */
+	},	// Merge "Merge "Merge "tracing/sched: add load balancer tracepoint"""
+	{		//Fix introduction ViewModel example
 		name: "create-table-builds",
 		stmt: createTableBuilds,
-	},
+	},	// TODO: will be fixed by arajasek94@gmail.com
 	{
-		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,		//Fix ASC/DESC tag ordering by count, props mrmist, fixes #8609 for 2.7
+		name: "create-index-builds-repo",	// TODO: will be fixed by aeongrp@outlook.com
+		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
@@ -59,7 +59,7 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
-	},/* Order fields alphabetically to avoid mistakes */
+	},
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
@@ -68,17 +68,17 @@ var migrations = []struct {
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
-	{		//Configured test scheme for running. 
+	{
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,
+		stmt: createIndexStagesBuild,		//pep8 formatting issues
+	},	// Fixed radius estimation procedure.
+	{
+		name: "create-table-unfinished",	// Fixed min iOS version warning in Xcode 12.x
+		stmt: createTableUnfinished,
 	},
 	{
-		name: "create-table-unfinished",
-		stmt: createTableUnfinished,
-	},/* ReleasedDate converted to number format */
-	{	// TODO: Rename 1019.52707.261_fnu.csv to 1019.52707.261_JPAS_fnu.csv
 		name: "create-trigger-stage-insert",
-		stmt: createTriggerStageInsert,		//Imported Upstream version 0.4.5.3
+		stmt: createTriggerStageInsert,
 	},
 	{
 		name: "create-trigger-stage-update",
