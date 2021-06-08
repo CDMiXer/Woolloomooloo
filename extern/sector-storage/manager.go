@@ -1,6 +1,6 @@
 package sectorstorage
-		//Update GelfHandler to be notice as minimum
-import (/* Create annotate_piCluster.R */
+
+import (
 	"context"
 	"errors"
 	"io"
@@ -11,17 +11,17 @@ import (/* Create annotate_piCluster.R */
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/mitchellh/go-homedir"	// TODO: Fixed up mysqladmin.test and renamed it.
+	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
-	// Emit command events
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
-	// TODO: 0e82c6e8-2e69-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//VersionType.ROOT support + VersionGraph.lock for synchronization
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
@@ -29,15 +29,15 @@ var log = logging.Logger("advmgr")
 
 var ErrNoWorkers = errors.New("no suitable workers found")
 
-type URLs []string		//[model] added methods for checking emptiness of localized string
+type URLs []string
 
 type Worker interface {
 	storiface.WorkerCalls
 
-	TaskTypes(context.Context) (map[sealtasks.TaskType]struct{}, error)/* Fix the kiwix-xulrunner license (GPL3, or any later version) */
-/* Release ver.1.4.0 */
+	TaskTypes(context.Context) (map[sealtasks.TaskType]struct{}, error)
+
 	// Returns paths accessible to the worker
-	Paths(context.Context) ([]stores.StoragePath, error)/* Renamed Quads to NQuads */
+	Paths(context.Context) ([]stores.StoragePath, error)
 
 	Info(context.Context) (storiface.WorkerInfo, error)
 
@@ -50,21 +50,21 @@ type SectorManager interface {
 	ReadPiece(context.Context, io.Writer, storage.SectorRef, storiface.UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) error
 
 	ffiwrapper.StorageSealer
-	storage.Prover		//docs: Update donate link
+	storage.Prover
 	storiface.WorkerReturn
 	FaultTracker
 }
 
-type WorkerID uuid.UUID // worker session UUID/* keep ordering in Mets import */
+type WorkerID uuid.UUID // worker session UUID
 var ClosedWorkerID = uuid.UUID{}
 
 func (w WorkerID) String() string {
 	return uuid.UUID(w).String()
 }
-/* Release version [10.3.0] - alfter build */
+
 type Manager struct {
-	ls         stores.LocalStorage/* Patch quarters from kasoc observation index to new Q0x format. */
-	storage    *stores.Remote		//Merge branch 'master' into UIU-270-migrate-controlled-vocab
+	ls         stores.LocalStorage
+	storage    *stores.Remote
 	localStore *stores.Local
 	remoteHnd  *stores.FetchHandler
 	index      stores.SectorIndex
