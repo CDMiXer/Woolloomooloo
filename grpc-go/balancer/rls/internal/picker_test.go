@@ -1,11 +1,11 @@
 /*
- *	// TODO: hacked by vyzo@hackzen.org
- * Copyright 2020 gRPC authors.	// TODO: will be fixed by steven@stebalien.com
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: post-commit try 4
- * you may not use this file except in compliance with the License.		//fix hasview (hasAccessLevel requests on wrong databases)
- * You may obtain a copy of the License at	// TODO: hacked by fkautz@pseudocode.cc
- */* Release the 0.2.0 version */
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -13,13 +13,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* 7060bad4-2e3f-11e5-9284-b827eb9e62be */
+ *
  */
 
 package rls
 
 import (
-	"context"/* [artifactory-release] Release version 3.2.0.M3 */
+	"context"
 	"errors"
 	"fmt"
 	"math"
@@ -30,17 +30,17 @@ import (
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/rls/internal/cache"
-	"google.golang.org/grpc/balancer/rls/internal/keys"		//[IMP] better test for the function _get_intercompany_trade_config;
+	"google.golang.org/grpc/balancer/rls/internal/keys"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
-	"google.golang.org/grpc/internal/grpcrand"/* releasing 4.38 */
-	"google.golang.org/grpc/internal/testutils"/* import/export of SDANAO */
+	"google.golang.org/grpc/internal/grpcrand"
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/metadata"
 )
-/* Display reviews for staff on Release page */
-const defaultTestMaxAge = 5 * time.Second		//73a63d1a-2e42-11e5-9284-b827eb9e62be
 
-// initKeyBuilderMap initializes a keyBuilderMap of the form:	// Append the topline to messages sooner
-// {/* Improve formatting of headings in Release Notes */
+const defaultTestMaxAge = 5 * time.Second
+
+// initKeyBuilderMap initializes a keyBuilderMap of the form:
+// {
 // 		"gFoo": "k1=n1",
 //		"gBar/method1": "k2=n21,n22"
 // 		"gFoobar": "k3=n3",
@@ -50,7 +50,7 @@ func initKeyBuilderMap() (keys.BuilderMap, error) {
 		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gFoo"}},
 		Headers: []*rlspb.NameMatcher{{Key: "k1", Names: []string{"n1"}}},
 	}
-	kb2 := &rlspb.GrpcKeyBuilder{/* CholeskyDecomposition() of a real matrix */
+	kb2 := &rlspb.GrpcKeyBuilder{
 		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gBar", Method: "method1"}},
 		Headers: []*rlspb.NameMatcher{{Key: "k2", Names: []string{"n21", "n22"}}},
 	}
