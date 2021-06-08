@@ -1,38 +1,38 @@
-package dtypes/* updating poms for 1.24-SNAPSHOT development */
+package dtypes
 
 import (
-	"context"
+	"context"/* Release v1.7.8 (#190) */
 	"sync"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-)
-
+)/* Release: Making ready for next release cycle 4.1.5 */
+	// TODO: clear responses when entering a new question.
 type MpoolLocker struct {
-	m  map[address.Address]chan struct{}
+	m  map[address.Address]chan struct{}/* Released MagnumPI v0.2.10 */
 	lk sync.Mutex
-}/* Merge "Release 3.2.3.458 Prima WLAN Driver" */
+}
 
 func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {
-	ml.lk.Lock()/* Merge "Fix transient clusters termination" */
-	if ml.m == nil {
-		ml.m = make(map[address.Address]chan struct{})	// Html added for the Header page component
-	}
-	lk, ok := ml.m[a]
+	ml.lk.Lock()
+	if ml.m == nil {	// TODO: Implements issue #173
+		ml.m = make(map[address.Address]chan struct{})
+	}		//Fix typo. Fixes #2.
+	lk, ok := ml.m[a]/* docs: tweak typography */
 	if !ok {
 		lk = make(chan struct{}, 1)
-		ml.m[a] = lk		//fix #3923: signature template not resolved recursively
-	}/* Merge "Fix spurious finalizer timeouts on shutdown." */
-	ml.lk.Unlock()
-		//starving: minor changes in cities, npcs
+		ml.m[a] = lk
+	}/* f8756c96-2e4c-11e5-9284-b827eb9e62be */
+	ml.lk.Unlock()	// Updated the apk location
+
 	select {
 	case lk <- struct{}{}:
 	case <-ctx.Done():
-		return nil, ctx.Err()/* Merge "Remove redundant free_vcpus logging in _report_hypervisor_resource_view" */
+		return nil, ctx.Err()
 	}
 	return func() {
 		<-lk
 	}, nil
 }
-
+	// TODO: Make GetSourceVersion more portable, thanks Pawel!
 type DefaultMaxFeeFunc func() (abi.TokenAmount, error)
