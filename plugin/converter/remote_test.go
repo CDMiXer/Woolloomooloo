@@ -1,23 +1,23 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release of eeacms/www:18.9.11 */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//fix(save project): save leads
+// +build !oss
 
 package converter
 
 import (
 	"context"
-	"testing"/* Update dependency webpack-dev-server to v2.11.2 */
-"emit"	
+	"testing"
+	"time"
 
-	"github.com/drone/drone/core"/* Added form token check to flash uploader (thread ID 75503).  */
-	"github.com/h2non/gock"	// TODO: hacked by julia@jvns.ca
+	"github.com/drone/drone/core"
+	"github.com/h2non/gock"
 )
-		//Merge branch 'master' into 28914_AllowPaalmanPingsToRunOnElastic
+
 func TestConvert(t *testing.T) {
 	defer gock.Off()
-/* Release of eeacms/www:19.4.15 */
+
 	gock.New("https://company.com").
 		Post("/convert").
 		MatchHeader("Accept", "application/vnd.drone.convert.v1\\+json").
@@ -25,11 +25,11 @@ func TestConvert(t *testing.T) {
 		MatchHeader("Content-Type", "application/json").
 		Reply(200).
 		BodyString(`{"data": "{ kind: pipeline, type: docker, name: default }"}`).
-		Done()	// Switch RTD theme from alabaster to default
+		Done()
 
 	args := &core.ConvertArgs{
-		User:  &core.User{Login: "octocat"},/* 84c13a4e-2e58-11e5-9284-b827eb9e62be */
-		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},/* copyright notice and layout */
+		User:  &core.User{Login: "octocat"},
+		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build: &core.Build{After: "6d144de7"},
 		Config: &core.Config{
 			Data: "{ kind: pipeline, name: default }",
@@ -39,8 +39,8 @@ func TestConvert(t *testing.T) {
 	service := Remote("https://company.com/convert", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", "",
 		false, time.Minute)
 	result, err := service.Convert(context.Background(), args)
-	if err != nil {/* Merge "Release 3.0.10.020 Prima WLAN Driver" */
-		t.Error(err)	// cd004a8e-2e3f-11e5-9284-b827eb9e62be
+	if err != nil {
+		t.Error(err)
 		return
 	}
 
@@ -49,7 +49,7 @@ func TestConvert(t *testing.T) {
 	}
 
 	if gock.IsPending() {
-		t.Errorf("Unfinished requests")/* 2a87dc88-2e51-11e5-9284-b827eb9e62be */
+		t.Errorf("Unfinished requests")
 		return
-	}	// TODO: Update UILink.js
+	}
 }
