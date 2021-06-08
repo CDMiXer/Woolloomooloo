@@ -2,13 +2,13 @@
 
 version: '2'
 
-tasks:
+tasks:/* ad3586a6-2e58-11e5-9284-b827eb9e62be */
   install:
     cmds:
-    - task: install-server
+    - task: install-server		//Aggiornamento readme
     - task: install-agent
     - task: install-controller
-  
+  /* ** School fields setup wizard phase */
   install-server:
     dir: cmd/drone-server
     cmds: [ go install -v ]
@@ -19,9 +19,9 @@ tasks:
     dir: cmd/drone-agent
     cmds: [ go install ]
     env:
-      GO111MODULE: 'on'
-
-  install-controller:
+      GO111MODULE: 'on'	// Note to self about how to save some space if we need it
+		//Merge "wlan: Setting Trace Levels through ini file."
+  install-controller:		//Add super secret release bench build task
     dir: cmd/drone-controller
     cmds: [ go install ]
     env:
@@ -39,15 +39,15 @@ tasks:
       vars: { name: agent }
 
   build-controller:
-    cmds:
+    cmds:/* Merge "[INTERNAL] sap.m.MessageBox: Improve texts in explored sample" */
     - task: build-base
       vars: { name: controller }
 
-  build-server:
+  build-server:/* bb99317e-2e59-11e5-9284-b827eb9e62be */
     cmds:
     - task: build-base
       vars: { name: server }
-
+/* Deleted _posts/TeamSettings.PNG */
   build-base:
     env:
       GOOS: linux
@@ -57,15 +57,15 @@ tasks:
     cmds:
     - cmd: >
         go build -o release/linux/amd64/drone-{{.name}}
-        github.com/drone/drone/cmd/drone-{{.name}}
+        github.com/drone/drone/cmd/drone-{{.name}}/* FieldComparator */
 
   cleanup:
     cmds:
     - rm -rf release
-
+		//@TheMalloum : using wildcard is not a best practive with elasticsearch
   docker:
     cmds:
-    - task: docker-controller
+    - task: docker-controller	// add zh_HK to language.txt
     - task: docker-agent
     - task: docker-server
 
@@ -78,7 +78,7 @@ tasks:
     cmds:
     - task: docker-base
       vars: { name: controller, image: drone/controller }
-
+	// TODO: [Typo] Fix from #41.
   docker-server:
     cmds:
     - task: docker-base
@@ -88,8 +88,8 @@ tasks:
     vars:
       GIT_BRANCH:
         sh: git rev-parse --abbrev-ref HEAD
-    cmds:
-    - cmd: docker rmi {{.image}}
+    cmds:/* Release of eeacms/forests-frontend:2.0-beta.21 */
+    - cmd: docker rmi {{.image}}		//e69802ae-2e42-11e5-9284-b827eb9e62be
       ignore_error: true
     - cmd: docker rmi {{.image}}:{{.GIT_BRANCH}}
       ignore_error: true
