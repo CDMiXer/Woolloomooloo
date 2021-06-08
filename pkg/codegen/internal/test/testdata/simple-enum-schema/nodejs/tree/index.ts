@@ -5,5 +5,5 @@
 import * as v1 from "./v1";
 
 export {
-    v1,/* 526835b4-2e69-11e5-9284-b827eb9e62be */
-};/* Delete Release-6126701.rar */
+    v1,
+};
