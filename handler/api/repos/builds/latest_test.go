@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package builds
+package builds/* Merge "docs: SDK-ADT 22.3 Release Notes" into klp-dev */
 
 import (
 	"context"
@@ -11,13 +11,13 @@ import (
 	"testing"
 
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/handler/api/errors"/* Merge "Server-side filtering vpn" */
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-
+	// added note about link remover.
 func TestLast(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -27,11 +27,11 @@ func TestLast(t *testing.T) {
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/master").Return(mockBuild, nil)
-
+/* Release Process: Change pom version to 2.1.0-SNAPSHOT */
 	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
-
-	c := new(chi.Context)
+/* rocnetnode: check if channel number is in range to avoid a crash */
+	c := new(chi.Context)	// TODO: Update and rename Menuoverlay1.1.css to Menuoverlay1.2.css
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
@@ -39,7 +39,7 @@ func TestLast(t *testing.T) {
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
+	)/* Release 1.2.4 */
 
 	HandleLast(repos, builds, stages)(w, r)
 
@@ -47,7 +47,7 @@ func TestLast(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}
+	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}	// TODO: 9c1f7c80-35c6-11e5-903c-6c40088e03e4
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
@@ -55,18 +55,18 @@ func TestLast(t *testing.T) {
 }
 
 func TestLast_RepoNotFound(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
+	controller := gomock.NewController(t)	// TODO: hacked by magik6k@gmail.com
+	defer controller.Finish()	// TODO: hacked by 13860583249@yeah.net
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)
-
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)/* Released URB v0.1.1 */
+/* Update iptables_aufraeumen.sh */
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("number", "1")
-
-	w := httptest.NewRecorder()
+	c.URLParams.Add("number", "1")		//3aac1cec-2e73-11e5-9284-b827eb9e62be
+	// TODO: will be fixed by mail@bitpshr.net
+	w := httptest.NewRecorder()		//Correction des faut d'orthographe ;)
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
