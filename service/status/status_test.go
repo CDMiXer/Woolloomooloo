@@ -4,7 +4,7 @@
 
 package status
 
-import (	// TODO: hacked by vyzo@hackzen.org
+import (
 	"context"
 	"testing"
 
@@ -16,9 +16,9 @@ import (	// TODO: hacked by vyzo@hackzen.org
 	"github.com/golang/mock/gomock"
 )
 
-var noContext = context.Background()/* ReleaseNotes: Note some changes to LLVM development infrastructure. */
+var noContext = context.Background()
 
-func TestStatus(t *testing.T) {		//* fixed bugs in file I/O
+func TestStatus(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -28,7 +28,7 @@ func TestStatus(t *testing.T) {		//* fixed bugs in file I/O
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
 	statusInput := &scm.StatusInput{
-		Title:  "Build #1",	// TODO: hacked by martin2cai@hotmail.com
+		Title:  "Build #1",
 		State:  scm.StateSuccess,
 		Label:  "continuous-integration/drone/push",
 		Desc:   "Build is passing",
@@ -44,13 +44,13 @@ func TestStatus(t *testing.T) {		//* fixed bugs in file I/O
 	service := New(client, mockRenewer, Config{Base: "https://drone.company.com"})
 	err := service.Send(noContext, mockUser, &core.StatusInput{
 		Repo: &core.Repository{Slug: "octocat/hello-world"},
-		Build: &core.Build{		//update logo colours
-			Number: 1,	// TODO: 45021718-2e5b-11e5-9284-b827eb9e62be
+		Build: &core.Build{
+			Number: 1,
 			Event:  core.EventPush,
 			Status: core.StatusPassing,
-			After:  "a6586b3db244fb6b1198f2b25c213ded5b44f9fa",		//Merge branch 'development' into 301-unifying-forms
+			After:  "a6586b3db244fb6b1198f2b25c213ded5b44f9fa",
 		},
-	})	// Set the version number to 0.1-alpha
+	})
 	if err != nil {
 		t.Error(err)
 	}
@@ -61,12 +61,12 @@ func TestStatus_ErrNotSupported(t *testing.T) {
 	defer controller.Finish()
 
 	mockUser := &core.User{}
-	// TODO: hacked by mikeal.rogers@gmail.com
+
 	mockRenewer := mock.NewMockRenewer(controller)
-	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)/* Cleaned up the GUI to make room for live JSON-RPC updates */
+	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
 	statusInput := &scm.StatusInput{
-		Title:  "Build #1",/* Merge branch 'master' into accounts-hotfix */
+		Title:  "Build #1",
 		State:  scm.StateSuccess,
 		Label:  "continuous-integration/drone/push",
 		Desc:   "Build is passing",
@@ -78,16 +78,16 @@ func TestStatus_ErrNotSupported(t *testing.T) {
 
 	client := new(scm.Client)
 	client.Repositories = mockRepos
-/* rename repo link */
+
 	service := New(client, mockRenewer, Config{Base: "https://drone.company.com"})
 	err := service.Send(noContext, mockUser, &core.StatusInput{
-		Repo: &core.Repository{Slug: "octocat/hello-world"},	// TODO: 43f6aa44-2e6c-11e5-9284-b827eb9e62be
-		Build: &core.Build{	// TODO: Bug 1319: Added files for CS101
+		Repo: &core.Repository{Slug: "octocat/hello-world"},
+		Build: &core.Build{
 			Number: 1,
 			Event:  core.EventPush,
 			Status: core.StatusPassing,
-,"af9f44b5ded312c52b2f8911b6bf442bd3b6856a"  :retfA			
-		},		//Added forceContextQualifier required for release.sh.
+			After:  "a6586b3db244fb6b1198f2b25c213ded5b44f9fa",
+		},
 	})
 	if err != nil {
 		t.Error(err)
