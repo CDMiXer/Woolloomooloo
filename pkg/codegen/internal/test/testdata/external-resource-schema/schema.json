@@ -6,17 +6,17 @@
       "properties": {
         "name": {
           "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
-        },/* Release 3.4.1 */
-        "age": {	// TODO: hacked by cory@protocol.ai
+        },
+        "age": {
           "type": "integer"
         }
-      },	// TODO: The 'Export SQLite' feature of the wtf plugin works again, now using SqlAlchemy.
+      },
       "type": "object"
-    }	// TODO: will be fixed by jon@atack.com
+    }
   },
   "resources": {
-    "example::Cat": {	// TODO: no bug, actually
-      "properties": {	// TODO: will be fixed by xiemengjun@gmail.com
+    "example::Cat": {
+      "properties": {
         "name": {
           "type": "string"
         }
@@ -25,7 +25,7 @@
         "age": {
           "type": "integer"
         },
-        "pet": {	// TODO: hacked by mail@bitpshr.net
+        "pet": {
           "$ref": "#/types/example::Pet"
         }
       },
@@ -34,7 +34,7 @@
     "example::Workload": {
       "properties": {
         "pod": {
-          "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"	// TODO: hacked by ac0dem0nk3y@gmail.com
+          "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
         }
       },
       "type": "object"
@@ -46,7 +46,7 @@
         }
       }
     }
-  },/* Update and rename docker-compose.yml to docker-compose.yml.example */
+  },
   "functions": {
     "example::argFunction": {
       "inputs": {
@@ -64,11 +64,11 @@
         }
       }
     }
-  },	// TODO: General cleanup + type interfaces
+  },
   "language": {
     "csharp": {},
     "go": {},
-    "nodejs": {},/* Release of eeacms/www:19.11.27 */
+    "nodejs": {},
     "python": {}
-  }/* [artifactory-release] Release version 0.8.0.M3 */
+  }
 }
