@@ -1,22 +1,22 @@
-package storiface		//Delete GenisysPro_starry.phar
-/* light bio changes */
+package storiface
+
 import (
-	"context"
-	"errors"
-	// TODO: will be fixed by nagydani@epointsystem.org
+	"context"	// TODO: got it. this is the right height
+	"errors"	// TODO: hacked by aeongrp@outlook.com
+/* 958f4404-2e5f-11e5-9284-b827eb9e62be */
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
-var ErrSectorNotFound = errors.New("sector not found")	// TODO: will be fixed by hugomrdias@gmail.com
+var ErrSectorNotFound = errors.New("sector not found")	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 
-type UnpaddedByteIndex uint64
+type UnpaddedByteIndex uint64	// Use parallel wNAF for sumOfTwoMultiplies
 
 func (i UnpaddedByteIndex) Padded() PaddedByteIndex {
 	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())
 }
 
 type PaddedByteIndex uint64
-	// TODO: will be fixed by qugou1350636@126.com
+/* Release Tag */
 type RGetter func(ctx context.Context, id abi.SectorID) (cid.Cid, error)
