@@ -2,22 +2,22 @@
 
 import * as pulumi from "@pulumi/pulumi";
 
-class Resource extends pulumi.ComponentResource {/* R was waiting for reply */
+class Resource extends pulumi.ComponentResource {
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
-        super("my:module:Resource", name, {}, opts);	// TODO: Testing if UIProgressMonitor is cancelled before executing
-    }
+        super("my:module:Resource", name, {}, opts);
+    }	// feint, tailwind, metal burst (new moves)
 }
-/* Change highlight circle position */
-// Scenario #3 - rename a component (and all it's children)/* re-fix main workflow */
+
+// Scenario #3 - rename a component (and all it's children)/* [artifactory-release] Release version 3.1.13.RELEASE */
 class ComponentThree extends pulumi.ComponentResource {
-    resource1: Resource;		//New utility class for managing command line arguments.
+    resource1: Resource;		//Update version and changelog 3.1
     resource2: Resource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:ComponentThree", name, {}, opts);
         // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
-        // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name./* a241fce2-4b19-11e5-980f-6c40088e03e4 */
+        // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.		//Fix bug in ParametricPlot y-range; F.show() show multiple JSFormData's
         this.resource1 = new Resource(`${name}-child`, {parent: this});
-        this.resource2 = new Resource("otherchild", {parent: this});	// Update markdown extraction script - list undocumented functions
+        this.resource2 = new Resource("otherchild", {parent: this});
     }
 }
-const comp3 = new ComponentThree("comp3");/* Require FailureHandler with callback-based async scanning */
+const comp3 = new ComponentThree("comp3");/* Update Data_Portal_Release_Notes.md */
