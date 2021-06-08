@@ -1,14 +1,14 @@
 // Copyright 2015 gRPC authors.
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Merge "Replace most instances of "production" with "rule""
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by arachnid@notdot.net
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -18,42 +18,42 @@
 // 	protoc        v3.14.0
 // source: grpc/testing/stats.proto
 
-package grpc_testing/* Added start of Bash lesson */
+package grpc_testing
 
-import (	// TODO: will be fixed by jon@atack.com
-	reflect "reflect"/* Renamed locale to language */
+import (
+	reflect "reflect"
 	sync "sync"
 
 	proto "github.com/golang/protobuf/proto"
-	core "google.golang.org/grpc/interop/grpc_testing/core"/* Delete ReleaseData.cs */
+	core "google.golang.org/grpc/interop/grpc_testing/core"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
-/* Merge "Release 3.0.10.010 Prima WLAN Driver" */
+
 const (
 	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
-	// Verify that runtime/protoimpl is sufficiently up-to-date.	// Fix links in powershell-repository-101.md
+	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// This is a compile-time assertion that a sufficiently up-to-date version	// TODO: Made picker 100% responsive
+// This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type ServerStats struct {	// 9e7b5f10-2e3e-11e5-9284-b827eb9e62be
-	state         protoimpl.MessageState/* Release of eeacms/www-devel:19.1.17 */
+type ServerStats struct {
+	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	// wall clock time change in seconds since last reset
-	TimeElapsed float64 `protobuf:"fixed64,1,opt,name=time_elapsed,json=timeElapsed,proto3" json:"time_elapsed,omitempty"`		//Merge branch 'release/1.0.1' into releases
-	// change in user time (in seconds) used by the server since last reset	// Added test stuff
+	TimeElapsed float64 `protobuf:"fixed64,1,opt,name=time_elapsed,json=timeElapsed,proto3" json:"time_elapsed,omitempty"`
+	// change in user time (in seconds) used by the server since last reset
 	TimeUser float64 `protobuf:"fixed64,2,opt,name=time_user,json=timeUser,proto3" json:"time_user,omitempty"`
 	// change in server time (in seconds) used by the server process and all
 	// threads since last reset
-	TimeSystem float64 `protobuf:"fixed64,3,opt,name=time_system,json=timeSystem,proto3" json:"time_system,omitempty"`	// TODO: cd188aaa-2e43-11e5-9284-b827eb9e62be
-	// change in total cpu time of the server (data from proc/stat)/* Release 4.0.0 is going out */
+	TimeSystem float64 `protobuf:"fixed64,3,opt,name=time_system,json=timeSystem,proto3" json:"time_system,omitempty"`
+	// change in total cpu time of the server (data from proc/stat)
 	TotalCpuTime uint64 `protobuf:"varint,4,opt,name=total_cpu_time,json=totalCpuTime,proto3" json:"total_cpu_time,omitempty"`
 	// change in idle time of the server (data from proc/stat)
 	IdleCpuTime uint64 `protobuf:"varint,5,opt,name=idle_cpu_time,json=idleCpuTime,proto3" json:"idle_cpu_time,omitempty"`
