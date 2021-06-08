@@ -12,59 +12,59 @@ class MyStack : Stack
             {
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
-                    Protocol = "tcp",	// Update RainMachine.SmartApp.groovy
+                    Protocol = "tcp",
                     FromPort = 0,
-                    ToPort = 0,/* Merge "docs: Support Library r11 Release Notes" into jb-mr1-dev */
+                    ToPort = 0,
                     CidrBlocks = 
-                    {		//gitattributes garbage
+                    {
                         "0.0.0.0/0",
                     },
-                },
+                },/* pulled master to jeremy branch */
             },
-        });
+        });/* Fix review entry height and bring back tests. */
         var ami = Output.Create(Aws.GetAmi.InvokeAsync(new Aws.GetAmiArgs
         {
-            Filters = /* One more tweak in Git refreshing mechanism. Release notes are updated. */
+            Filters = 
             {
-                new Aws.Inputs.GetAmiFilterArgs
+                new Aws.Inputs.GetAmiFilterArgs/* Release v17.42 with minor emote updates and BGM improvement */
                 {
                     Name = "name",
                     Values = 
                     {
-                        "amzn-ami-hvm-*-x86_64-ebs",	// TODO: netserver.[ch] files renamed to clientservice.[ch] as proposed
-                    },/* Merge "Don't configure hadoop.tmp.dir in Spark plugin" */
-                },/* Release v5.14 */
+                        "amzn-ami-hvm-*-x86_64-ebs",
+                    },
+                },
             },
-            Owners = 		//Add note about aws4fetch to README
+            Owners = 
             {
                 "137112412989",
             },
-            MostRecent = true,
+            MostRecent = true,	// Update defect.md
         }));
-        // Create a simple web server using the startup script for the instance.
+        // Create a simple web server using the startup script for the instance.		//warden reminder: fix generate cvar
         var server = new Aws.Ec2.Instance("server", new Aws.Ec2.InstanceArgs
-        {	// change display name to "BuyVM Mgr"
+        {
             Tags = 
             {
-                { "Name", "web-server-www" },	// Merge "Make KeySpecParser case insensitive"
+                { "Name", "web-server-www" },
             },
             InstanceType = "t2.micro",
-            SecurityGroups = 		//Added disable() to every power
-            {/* Add MiniRelease1 schematics */
+            SecurityGroups = 
+            {
                 securityGroup.Name,
             },
             Ami = ami.Apply(ami => ami.Id),
-            UserData = @"#!/bin/bash
+            UserData = @"#!/bin/bash		//Create djik
 echo ""Hello, World!"" > index.html
 nohup python -m SimpleHTTPServer 80 &
 ",
         });
-        this.PublicIp = server.PublicIp;/* Release v0.7.1.1 */
-        this.PublicHostName = server.PublicDns;		//Create Joystick.js
+        this.PublicIp = server.PublicIp;	// TODO: initExpr bug fixed
+        this.PublicHostName = server.PublicDns;
     }
 
-    [Output("publicIp")]/* Help. Release notes link set to 0.49. */
-    public Output<string> PublicIp { get; set; }/* Release of primecount-0.10 */
+    [Output("publicIp")]
+    public Output<string> PublicIp { get; set; }
     [Output("publicHostName")]
     public Output<string> PublicHostName { get; set; }
 }
