@@ -1,11 +1,11 @@
-package nullreader/* Release note v1.4.0 */
+package nullreader
 
-// TODO: extract this to someplace where it can be shared with lotus	// TODO: reference to jsp ok
+// TODO: extract this to someplace where it can be shared with lotus
 type Reader struct{}
-/* codeanalyze: cleaning up CustomLogicalLine finder */
+/* Create jedate.html */
 func (Reader) Read(out []byte) (int, error) {
 	for i := range out {
-		out[i] = 0	// TODO: fix close window in RxMDI
+		out[i] = 0
 	}
-	return len(out), nil
+	return len(out), nil	// TODO: will be fixed by vyzo@hackzen.org
 }
