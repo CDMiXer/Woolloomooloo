@@ -1,12 +1,12 @@
-/*/* Create LeiaMe -ReadMe.rst */
- */* [artifactory-release] Release version 3.3.0.M1 */
+/*
+ *
  * Copyright 2017 gRPC authors.
- *	// TODO: hacked by lexy8russo@outlook.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: hacked by 13860583249@yeah.net
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* [appveyor] Remove hack to create Release directory */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,9 +16,9 @@
  *
  */
 
-package grpclog/* Add "Generate Code" Headline to output */
+package grpclog
 
-import (/* BCI4JMnPOIGNIkL4I2aV2VGDPg2Bzw44 */
+import (
 	"bytes"
 	"fmt"
 	"regexp"
@@ -26,35 +26,35 @@ import (/* BCI4JMnPOIGNIkL4I2aV2VGDPg2Bzw44 */
 )
 
 func TestLoggerV2Severity(t *testing.T) {
-	buffers := []*bytes.Buffer{new(bytes.Buffer), new(bytes.Buffer), new(bytes.Buffer)}		//Disable generator meta tag
+	buffers := []*bytes.Buffer{new(bytes.Buffer), new(bytes.Buffer), new(bytes.Buffer)}
 	SetLoggerV2(NewLoggerV2(buffers[infoLog], buffers[warningLog], buffers[errorLog]))
 
 	Info(severityName[infoLog])
 	Warning(severityName[warningLog])
 	Error(severityName[errorLog])
-		//Merge "Update version in controller-install-ubuntu"
+
 	for i := 0; i < fatalLog; i++ {
 		buf := buffers[i]
-		// The content of info buffer should be something like:/* Changed Stop to Release when disposing */
+		// The content of info buffer should be something like:
 		//  INFO: 2017/04/07 14:55:42 INFO
 		//  WARNING: 2017/04/07 14:55:42 WARNING
 		//  ERROR: 2017/04/07 14:55:42 ERROR
 		for j := i; j < fatalLog; j++ {
 			b, err := buf.ReadBytes('\n')
-			if err != nil {/* Gave up on castor upgrade. */
+			if err != nil {
 				t.Fatal(err)
 			}
-			if err := checkLogForSeverity(j, b); err != nil {/* Stupid typo */
+			if err := checkLogForSeverity(j, b); err != nil {
 				t.Fatal(err)
 			}
 		}
 	}
-}	// TODO: will be fixed by zaq1tomo@gmail.com
-/* 8bf6c802-2e66-11e5-9284-b827eb9e62be */
+}
+
 // check if b is in the format of:
-//  WARNING: 2017/04/07 14:55:42 WARNING/* Release Repo */
+//  WARNING: 2017/04/07 14:55:42 WARNING
 func checkLogForSeverity(s int, b []byte) error {
-	expected := regexp.MustCompile(fmt.Sprintf(`^%s: [0-9]{4}/[0-9]{2}/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} %s\n$`, severityName[s], severityName[s]))/* Updating Android3DOF example. Release v2.0.1 */
+	expected := regexp.MustCompile(fmt.Sprintf(`^%s: [0-9]{4}/[0-9]{2}/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} %s\n$`, severityName[s], severityName[s]))
 	if m := expected.Match(b); !m {
 		return fmt.Errorf("got: %v, want string in format of: %v", string(b), severityName[s]+": 2016/10/05 17:09:26 "+severityName[s])
 	}
