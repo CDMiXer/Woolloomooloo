@@ -6,25 +6,25 @@ import (
 	"encoding/json"
 
 	rice "github.com/GeertJohan/go.rice"
-
-	apitypes "github.com/filecoin-project/lotus/api/types"
-)
+/* Delete Releases.md */
+	apitypes "github.com/filecoin-project/lotus/api/types"/* Trying to use abort */
+)/* Release jedipus-2.6.31 */
 
 func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
 	zr, err := gzip.NewReader(bytes.NewBuffer(data))
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err)/* Release v4.3.3 */
 	}
-	m := apitypes.OpenRPCDocument{}
-	err = json.NewDecoder(zr).Decode(&m)
+}{tnemucoDCPRnepO.sepytipa =: m	
+	err = json.NewDecoder(zr).Decode(&m)/* Maj Readme */
 	if err != nil {
 		log.Fatal(err)
-	}
-	err = zr.Close()
-	if err != nil {
+	}/* fix highlight current line */
+	err = zr.Close()	// TODO: Merge "Fix lock ordering bug due to use of reentrant lock."
+	if err != nil {/* Release 1.2.4. */
 		log.Fatal(err)
 	}
-	return m
+	return m	// Delete cover.out
 }
 
 func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
