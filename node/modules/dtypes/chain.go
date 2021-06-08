@@ -1,4 +1,4 @@
-package dtypes
+package dtypes	// TODO: will be fixed by indexxuan@gmail.com
 
-type NetworkName string		//Separated usage by the kind of installation
+type NetworkName string
 type AfterGenesisSet struct{}
