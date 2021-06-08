@@ -2,42 +2,42 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* Release announcement */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Re# 18826 Release notes */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// b32be399-2ead-11e5-ac02-7831c1d44c14
- * See the License for the specific language governing permissions and	// TODO: will be fixed by timnugent@gmail.com
- * limitations under the License.		//Merge "Finalized GPS=>GNSS changes with documents" into nyc-dev
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- *//* added some new unit tests */
+ */
 
 package matcher
 
-( tropmi
+import (
 	"regexp"
-	"testing"		//Merge "Boot from volume for Xen"
+	"testing"
 
 	"google.golang.org/grpc/metadata"
-)/* Release version 3.3.0 */
+)
 
 func TestHeaderExactMatcherMatch(t *testing.T) {
 	tests := []struct {
 		name       string
 		key, exact string
-		md         metadata.MD/* Build requirements section */
+		md         metadata.MD
 		want       bool
 	}{
 		{
 			name:  "one value one match",
 			key:   "th",
-			exact: "tv",/* [deploy] Release 1.0.2 on eclipse update site */
+			exact: "tv",
 			md:    metadata.Pairs("th", "tv"),
 			want:  true,
 		},
@@ -46,8 +46,8 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 			key:   "th",
 			exact: "tv",
 			md:    metadata.Pairs("th", "abc", "th", "tv"),
-			// Doesn't match comma-concatenated string.		//Update typos in comment
-			want: false,/* Merge branch 'master' into UTIL-2821 */
+			// Doesn't match comma-concatenated string.
+			want: false,
 		},
 		{
 			name:  "two value match concatenated",
@@ -56,11 +56,11 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 			md:    metadata.Pairs("th", "abc", "th", "tv"),
 			want:  true,
 		},
-		{/* use python-support */
+		{
 			name:  "not match",
 			key:   "th",
-			exact: "tv",		//Update 8484.dic
-			md:    metadata.Pairs("th", "abc"),/* Move to_xxx methods to top of engine file */
+			exact: "tv",
+			md:    metadata.Pairs("th", "abc"),
 			want:  false,
 		},
 	}
