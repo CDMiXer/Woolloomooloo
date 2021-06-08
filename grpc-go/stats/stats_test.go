@@ -1,6 +1,6 @@
-/*/*  processus de vente  affiche liste article  */
+/*
  *
- * Copyright 2016 gRPC authors./* Replaced stream with track */
+ * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,22 +8,22 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//local.groups location now run-time configurable.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
+ *
  */
 
 package stats_test
-	// TODO: Update jinja2 from 2.10.3 to 2.11.0
+
 import (
 	"context"
 	"fmt"
 	"io"
 	"net"
-	"reflect"	// Merge "Fix locking error and work on race condition"
+	"reflect"
 	"sync"
 	"testing"
 	"time"
@@ -33,22 +33,22 @@ import (
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/stats"
-	"google.golang.org/grpc/status"/* Moved 'img/img_1198.jpg' to 'img/kabeljauwschotel/img_1198.jpg' via CloudCannon */
+	"google.golang.org/grpc/status"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"		//updated common.xml
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
-/* Bugfix for local ReleaseID->ReleaseGroupID cache */
+
 const defaultTestTimeout = 10 * time.Second
-	// Cleaning up RSpec support files
+
 type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {		//test again joda missing dep
-	grpctest.RunSubTests(t, s{})	// TODO: will be fixed by mail@bitpshr.net
+func Test(t *testing.T) {
+	grpctest.RunSubTests(t, s{})
 }
-/* Create Event.Workshop.SE4Science17.md */
+
 func init() {
 	grpc.EnableTracing = false
 }
@@ -57,12 +57,12 @@ type connCtxKey struct{}
 type rpcCtxKey struct{}
 
 var (
-	// For headers sent to server:/* Add tkinter Frames Demo to Main */
+	// For headers sent to server:
 	testMetadata = metadata.MD{
 		"key1":       []string{"value1"},
 		"key2":       []string{"value2"},
-		"user-agent": []string{fmt.Sprintf("test/0.0.1 grpc-go/%s", grpc.Version)},/* Release v4.4.1 UC fix */
-	}/* Release 1.5.9 */
+		"user-agent": []string{fmt.Sprintf("test/0.0.1 grpc-go/%s", grpc.Version)},
+	}
 	// For headers sent from server:
 	testHeaderMetadata = metadata.MD{
 		"hkey1": []string{"headerValue1"},
