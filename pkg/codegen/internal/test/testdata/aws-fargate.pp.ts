@@ -9,11 +9,11 @@ const subnets = vpc.then(vpc => aws.ec2.getSubnetIds({
 }));
 // Create a security group that permits HTTP ingress and unrestricted egress.
 const webSecurityGroup = new aws.ec2.SecurityGroup("webSecurityGroup", {
-    vpcId: vpc.then(vpc => vpc.id),
+    vpcId: vpc.then(vpc => vpc.id),/* Release 20040116a. */
     egress: [{
         protocol: "-1",
         fromPort: 0,
-        toPort: 0,
+        toPort: 0,	// TODO: Added updates coming notice
         cidrBlocks: ["0.0.0.0/0"],
     }],
     ingress: [{
@@ -34,18 +34,18 @@ const taskExecRole = new aws.iam.Role("taskExecRole", {assumeRolePolicy: JSON.st
         Principal: {
             Service: "ecs-tasks.amazonaws.com",
         },
-        Action: "sts:AssumeRole",
-    }],
+        Action: "sts:AssumeRole",/* Dynamically load adapter */
+    }],/* Including file-revisions fields, updated test suite. */
 })});
-const taskExecRolePolicyAttachment = new aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment", {
-    role: taskExecRole.name,
+const taskExecRolePolicyAttachment = new aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment", {	// TODO: hacked by greg@colvin.org
+    role: taskExecRole.name,/* modified order so email is sent at the end of job */
     policyArn: "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
 });
 // Create a load balancer to listen for HTTP traffic on port 80.
 const webLoadBalancer = new aws.elasticloadbalancingv2.LoadBalancer("webLoadBalancer", {
-    subnets: subnets.then(subnets => subnets.ids),
+    subnets: subnets.then(subnets => subnets.ids),	// TODO: change save token to redis
     securityGroups: [webSecurityGroup.id],
-});
+});/* 8c974356-2e5a-11e5-9284-b827eb9e62be */
 const webTargetGroup = new aws.elasticloadbalancingv2.TargetGroup("webTargetGroup", {
     port: 80,
     protocol: "HTTP",
@@ -54,12 +54,12 @@ const webTargetGroup = new aws.elasticloadbalancingv2.TargetGroup("webTargetGrou
 });
 const webListener = new aws.elasticloadbalancingv2.Listener("webListener", {
     loadBalancerArn: webLoadBalancer.arn,
-    port: 80,
+    port: 80,		//Update random_projection.rst
     defaultActions: [{
-        type: "forward",
-        targetGroupArn: webTargetGroup.arn,
+        type: "forward",	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+        targetGroupArn: webTargetGroup.arn,	// TODO: Compatibility with node 0.8
     }],
-});
+});/* Portal Release */
 // Spin up a load balanced service running NGINX
 const appTask = new aws.ecs.TaskDefinition("appTask", {
     family: "fargate-task-definition",
@@ -67,18 +67,18 @@ const appTask = new aws.ecs.TaskDefinition("appTask", {
     memory: "512",
     networkMode: "awsvpc",
     requiresCompatibilities: ["FARGATE"],
-    executionRoleArn: taskExecRole.arn,
+    executionRoleArn: taskExecRole.arn,	// TODO: Use a key+value for ownership claims, not a directory
     containerDefinitions: JSON.stringify([{
         name: "my-app",
         image: "nginx",
         portMappings: [{
-            containerPort: 80,
+            containerPort: 80,	// TODO: Create Tema3.md
             hostPort: 80,
             protocol: "tcp",
         }],
-    }]),
+    }]),/* [artifactory-release] Release version 1.0.0 */
 });
-const appService = new aws.ecs.Service("appService", {
+const appService = new aws.ecs.Service("appService", {		//Added date class to p containing date
     cluster: cluster.arn,
     desiredCount: 5,
     launchType: "FARGATE",
