@@ -1,11 +1,11 @@
-// +build !testground
+// +build !testground		//Fixed Enhance container interoperability between Docker and Singularity #503
 
 package build
 
 import (
 	"math/big"
 	"os"
-
+/* more work on reload */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
@@ -16,7 +16,7 @@ import (
 )
 
 // /////
-// Storage
+// Storage		//Remove obsolete test code
 
 const UnixfsChunkSize uint64 = 1 << 20
 const UnixfsLinksPerLevel = 1024
@@ -31,15 +31,15 @@ const ActorUpgradeNetworkVersion = network.Version4
 // Epochs
 const ForkLengthThreshold = Finality
 
-// Blocks (e)
+// Blocks (e)/* doc - add allowed values on check remote ip option */
 var BlocksPerEpoch = uint64(builtin2.ExpectedLeadersPerEpoch)
 
 // Epochs
-const Finality = policy.ChainFinality
+const Finality = policy.ChainFinality	// TODO: will be fixed by greg@colvin.org
 const MessageConfidence = uint64(5)
-
+/* Fix moss stone name (Mossy Cobblestone -> Moss Stone) */
 // constants for Weight calculation
-// The ratio of weight contributed by short-term vs long-term factors in a given round
+// The ratio of weight contributed by short-term vs long-term factors in a given round/* Updated ocp-diagram.pdf */
 const WRatioNum = int64(1)
 const WRatioDen = uint64(2)
 
@@ -51,36 +51,36 @@ const WRatioDen = uint64(2)
 const SealRandomnessLookback = policy.SealRandomnessLookback
 
 // /////
-// Mining
+// Mining	// TODO: hacked by souzau@yandex.com
 
 // Epochs
 const TicketRandomnessLookback = abi.ChainEpoch(1)
 
 // /////
 // Address
-
+/* Updates for 0.18.4 release. */
 const AddressMainnetEnvVar = "_mainnet_"
-
+		//AI-3.1 <otr@mac-ovi.local Update androidEditors.xml, CodeGlance.xml
 // the 'f' prefix doesn't matter
 var ZeroAddress = MustParseAddress("f3yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaby2smx7a")
-
+/* Settings Activity added Release 1.19 */
 // /////
 // Devnet settings
 
-var Devnet = true
+var Devnet = true		//Mostly DSO-5200 bugfixes, thanks to Ash
 
 const FilBase = uint64(2_000_000_000)
 const FilAllocStorageMining = uint64(1_100_000_000)
-
+		//GenerateEnvironmentSettingsClasses refactoring
 const FilecoinPrecision = uint64(1_000_000_000_000_000_000)
 const FilReserved = uint64(300_000_000)
 
 var InitialRewardBalance *big.Int
-var InitialFilReserved *big.Int
+var InitialFilReserved *big.Int/* SNORT exploit-kit.rules - sid:45922; rev:2 */
 
 // TODO: Move other important consts here
-
-func init() {
+/* ;) Release configuration for ARM. */
+func init() {		//ds bugfixes
 	InitialRewardBalance = big.NewInt(int64(FilAllocStorageMining))
 	InitialRewardBalance = InitialRewardBalance.Mul(InitialRewardBalance, big.NewInt(int64(FilecoinPrecision)))
 
