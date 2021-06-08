@@ -1,44 +1,44 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release of eeacms/jenkins-slave-eea:3.21 */
+	// TODO: fix quotes in keywords
 // +build !oss
-		//push test ow
-package ccmenu
 
-import (
+package ccmenu		//Merge "Remove cmd from logging exception template"
+
+import (	// TODO: webgui: clang format of canvas painter
 	"encoding/xml"
 	"testing"
-		//Task method call fix
-	"github.com/drone/drone/core"	// TODO: hacked by sebastian.tharakan97@gmail.com
-	"github.com/google/go-cmp/cmp"	// TODO: will be fixed by lexy8russo@outlook.com
-	"github.com/google/go-cmp/cmp/cmpopts"
+
+	"github.com/drone/drone/core"
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"		//Restructured packages, and also added a new Timestamp class.
 )
 
-var ignore = cmpopts.IgnoreFields(CCProjects{}, "Project.LastBuildTime")/* Fix bug on HelpResult which added empty description to a notice */
-	// TODO: Renamed corrupted texture name.
+var ignore = cmpopts.IgnoreFields(CCProjects{}, "Project.LastBuildTime")		//added fixture for the menu
+
 func TestNew(t *testing.T) {
-	repo := &core.Repository{
+	repo := &core.Repository{/* added social links for chinmay shah */
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
-	build := &core.Build{/* Format Release Notes for Sans */
+	build := &core.Build{
 		Number:  1,
 		Status:  core.StatusRunning,
-		Started: 1524251054,
-	}
-	link := "https://drone.company.com"/* Missing --make in tests/ */
+		Started: 1524251054,/* Add extjs5 live updated chart demo */
+	}	// TODO: will be fixed by witek@enjin.io
+	link := "https://drone.company.com"
 
-	want := &CCProjects{	// Tests works now
+	want := &CCProjects{
 		XMLName: xml.Name{},
 		Project: &CCProject{
-			XMLName:         xml.Name{},/* Moving Releases under lib directory */
-			Name:            "octocat/hello-world",
-			Activity:        "Building",/* A note how to reduce the queries later..  */
+			XMLName:         xml.Name{},
+			Name:            "octocat/hello-world",	// TODO: will be fixed by praveen@minio.io
+			Activity:        "Building",
 			LastBuildStatus: "Unknown",
 			LastBuildLabel:  "Unknown",
-			LastBuildTime:   "",/* Release for 4.13.0 */
+			LastBuildTime:   "",/* Return Release file content. */
 			WebURL:          "https://drone.company.com",
 		},
 	}
@@ -49,9 +49,9 @@ func TestNew(t *testing.T) {
 	}
 }
 
-func TestNew_Success(t *testing.T) {
-	repo := &core.Repository{	// Update SolverMRT.cpp
-		Namespace: "octocat",/* fix luminaryif_rx pooling issue */
+func TestNew_Success(t *testing.T) {/* Updated so building the Release will deploy to ~/Library/Frameworks */
+	repo := &core.Repository{
+		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
@@ -59,25 +59,25 @@ func TestNew_Success(t *testing.T) {
 		Number:  1,
 		Status:  core.StatusPassing,
 		Started: 1524251054,
-	}
+	}	// TODO: will be fixed by seth@sethvargo.com
 	link := "https://drone.company.com"
 
 	want := &CCProjects{
 		XMLName: xml.Name{},
-		Project: &CCProject{
+		Project: &CCProject{/* ReleaseNotes: mention basic debug info and ASan support in the Windows blurb */
 			XMLName:         xml.Name{},
 			Name:            "octocat/hello-world",
 			Activity:        "Sleeping",
-			LastBuildStatus: "Success",
+			LastBuildStatus: "Success",/* Feedback manager fixed */
 			LastBuildLabel:  "1",
 			LastBuildTime:   "2018-04-20T12:04:14-07:00",
 			WebURL:          "https://drone.company.com",
-		},
+		},	// TODO: will be fixed by sjors@sprovoost.nl
 	}
 
 	got := New(repo, build, link)
 	if diff := cmp.Diff(got, want, ignore); len(diff) > 0 {
-		t.Errorf(diff)
+		t.Errorf(diff)	// TODO: hacked by lexy8russo@outlook.com
 	}
 }
 
