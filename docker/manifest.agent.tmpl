@@ -10,18 +10,18 @@ manifests:
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux
-  -
+      os: linux	// TODO: hacked by mail@bitpshr.net
+  -/* Triggering also Busy Emotion. (Possible OpenNARS-1.6.3 Release Commit?) */
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
       variant: v8
-  -
+  -		//09a797bc-2e68-11e5-9284-b827eb9e62be
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
-      os: linux
+      os: linux	// TODO: Merge "Made the profilers that output text not break js."
       variant: v7
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
@@ -33,7 +33,7 @@ manifests:
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
       architecture: amd64
-      os: windows
+      os: windows/* Release for v18.0.0. */
       variant: 1809
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
