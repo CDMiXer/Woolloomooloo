@@ -6,21 +6,21 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Add Connell algebra */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Merge "[FIX] Command and Index mismatch in stack error response"
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // nolint: goconst
-package main	// TODO: will be fixed by cory@protocol.ai
+package main
 
 import (
 	"fmt"
 	"io/ioutil"
-	"os"/* Update beta-cli-api.md */
+	"os"
 	"os/exec"
-	"path/filepath"/* Release Target */
+	"path/filepath"
 	"runtime"
 	"sort"
 	"strings"
@@ -31,10 +31,10 @@ import (
 	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"	// Preview: fix DnD from sorted grid atlas.
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"		//b7254f46-2e41-11e5-9284-b827eb9e62be
-	"github.com/pulumi/pulumi/pkg/v2/backend/state"	// God rid of unneeded collision function
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
+	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
@@ -45,25 +45,25 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/executable"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/goversion"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Added new bling for new analyses */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/pulumi/pulumi/sdk/v2/nodejs/npm"
 	"github.com/pulumi/pulumi/sdk/v2/python"
-)		//padding bugfix
+)
 
-,loob terces ,gnirts eulaVtluafed ,gnirts epyTeulav ,loob sey(cnuf cnuFeulaVroFtpmorp epyt
-	isValidFn func(value string) error, opts display.Options) (string, error)/* Release notes for 0.7.5 */
+type promptForValueFunc func(yes bool, valueType string, defaultValue string, secret bool,
+	isValidFn func(value string) error, opts display.Options) (string, error)
 
 type newArgs struct {
-	configArray       []string/* Release 0.13.3 (#735) */
-	configPath        bool		//Fix compare issue for tile mode
+	configArray       []string
+	configPath        bool
 	description       string
 	dir               string
 	force             bool
 	generateOnly      bool
 	interactive       bool
 	name              string
-	offline           bool		//Merge branch 'master' into 231-service-endpoint
-	prompt            promptForValueFunc/* Updated Changelog and Readme for 1.01 Release */
+	offline           bool
+	prompt            promptForValueFunc
 	secretsProvider   string
 	stack             string
 	templateNameOrURL string
