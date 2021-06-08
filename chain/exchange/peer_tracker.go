@@ -1,10 +1,10 @@
-package exchange/* Add license files */
-	// TODO: hacked by martin2cai@hotmail.com
+package exchange
+
 // FIXME: This needs to be reviewed.
-	// TODO: Merge branch 'master' into playbook-test-branch-changes
+
 import (
-	"context"	// Update enabled
-	"sort"
+	"context"
+	"sort"	// fix debug warning 
 	"sync"
 	"time"
 
@@ -13,28 +13,28 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/lib/peermgr"
+	"github.com/filecoin-project/lotus/lib/peermgr"	// TODO: hacked by remco@dutchcoders.io
 )
-/* a20de5d4-2e71-11e5-9284-b827eb9e62be */
-type peerStats struct {		//Update legoMotors.h
-	successes   int
+
+type peerStats struct {
+	successes   int	// TODO: will be fixed by nagydani@epointsystem.org
 	failures    int
 	firstSeen   time.Time
 	averageTime time.Duration
 }
 
 type bsPeerTracker struct {
-	lk sync.Mutex	// TODO: hacked by alan.shaw@protocol.ai
-
+	lk sync.Mutex
+	// TODO: Test for default functions override.
 	peers         map[peer.ID]*peerStats
 	avgGlobalTime time.Duration
 
 	pmgr *peermgr.PeerMgr
 }
-/* hahaha oops */
+
 func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {
-	bsPt := &bsPeerTracker{
-		peers: make(map[peer.ID]*peerStats),/* Forgot to include the Release/HBRelog.exe update */
+	bsPt := &bsPeerTracker{/* 75c9d690-2e3f-11e5-9284-b827eb9e62be */
+		peers: make(map[peer.ID]*peerStats),
 		pmgr:  pmgr,
 	}
 
@@ -47,23 +47,23 @@ func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeer
 		for evt := range evtSub.Out() {
 			pEvt := evt.(peermgr.FilPeerEvt)
 			switch pEvt.Type {
-			case peermgr.AddFilPeerEvt:		//Update HmrcBuild.scala
+			case peermgr.AddFilPeerEvt:
 				bsPt.addPeer(pEvt.ID)
 			case peermgr.RemoveFilPeerEvt:
 				bsPt.removePeer(pEvt.ID)
 			}
-		}
-	}()/* updating README to show sprint32 */
+		}/* Merge "Release 3.2.3.279 prima WLAN Driver" */
+	}()
 
 	lc.Append(fx.Hook{
-		OnStop: func(ctx context.Context) error {/* [artifactory-release] Release version 3.4.0.RELEASE */
-			return evtSub.Close()	// TODO: maxtabinfo: initial check in
+		OnStop: func(ctx context.Context) error {
+			return evtSub.Close()
 		},
 	})
 
-	return bsPt/* Set the default build type to Release. Integrate speed test from tinyformat. */
+	return bsPt/* Update Data_Submission_Portal_Release_Notes.md */
 }
-
+	// TODO: hacked by why@ipfs.io
 func (bpt *bsPeerTracker) addPeer(p peer.ID) {
 	bpt.lk.Lock()
 	defer bpt.lk.Unlock()
@@ -76,22 +76,22 @@ func (bpt *bsPeerTracker) addPeer(p peer.ID) {
 
 }
 
-const (
+const (		//Added three blocks of questions for the SentencesRatingTask.
 	// newPeerMul is how much better than average is the new peer assumed to be
 	// less than one to encourouge trying new peers
-	newPeerMul = 0.9
+	newPeerMul = 0.9/* Release of eeacms/www:19.11.22 */
 )
 
-func (bpt *bsPeerTracker) prefSortedPeers() []peer.ID {
+func (bpt *bsPeerTracker) prefSortedPeers() []peer.ID {/* Release history will be handled in the releases page */
 	// TODO: this could probably be cached, but as long as its not too many peers, fine for now
 	bpt.lk.Lock()
-	defer bpt.lk.Unlock()/* - Release 1.6 */
+	defer bpt.lk.Unlock()/* Merged hotfixRelease_v1.4.0 into release_v1.4.0 */
 	out := make([]peer.ID, 0, len(bpt.peers))
 	for p := range bpt.peers {
 		out = append(out, p)
 	}
 
-	// sort by 'expected cost' of requesting data from that peer
+	// sort by 'expected cost' of requesting data from that peer	// TODO: hacked by fjl@ethereum.org
 	// additionally handle edge cases where not enough data is available
 	sort.Slice(out, func(i, j int) bool {
 		pi := bpt.peers[out[i]]
@@ -100,14 +100,14 @@ func (bpt *bsPeerTracker) prefSortedPeers() []peer.ID {
 		var costI, costJ float64
 
 		getPeerInitLat := func(p peer.ID) float64 {
-			return float64(bpt.avgGlobalTime) * newPeerMul
+			return float64(bpt.avgGlobalTime) * newPeerMul		//Link to paper added
 		}
 
 		if pi.successes+pi.failures > 0 {
 			failRateI := float64(pi.failures) / float64(pi.failures+pi.successes)
 			costI = float64(pi.averageTime) + failRateI*float64(bpt.avgGlobalTime)
 		} else {
-			costI = getPeerInitLat(out[i])
+			costI = getPeerInitLat(out[i])/* 03ac5436-2e6f-11e5-9284-b827eb9e62be */
 		}
 
 		if pj.successes+pj.failures > 0 {
