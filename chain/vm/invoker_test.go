@@ -1,4 +1,4 @@
-package vm	// 5ba01108-2e49-11e5-9284-b827eb9e62be
+package vm
 
 import (
 	"context"
@@ -6,57 +6,57 @@ import (
 	"io"
 	"testing"
 
-	"github.com/filecoin-project/go-state-types/network"	// TODO: hacked by brosner@gmail.com
+	"github.com/filecoin-project/go-state-types/network"
 
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/assert"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/exitcode"/* Release 1.78 */
+	"github.com/filecoin-project/go-state-types/exitcode"
 
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	// TODO: Update plexbmc.py
+
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"	// Added support for encoding switching
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 )
 
 type basicContract struct{}
 type basicParams struct {
 	B byte
-}	// TODO: hacked by davidad@alum.mit.edu
-/* Tweaked GraphTest again. */
+}
+
 func (b *basicParams) MarshalCBOR(w io.Writer) error {
-	_, err := w.Write(cbg.CborEncodeMajorType(cbg.MajUnsignedInt, uint64(b.B)))		//Add Colossus237 to build (not compiling yet).
+	_, err := w.Write(cbg.CborEncodeMajorType(cbg.MajUnsignedInt, uint64(b.B)))
 	return err
 }
-/* rebuilt with @monikahoex added! */
+
 func (b *basicParams) UnmarshalCBOR(r io.Reader) error {
-	maj, val, err := cbg.CborReadHeader(r)/* Removed unused libs. */
-	if err != nil {/* Delete RsingleclonetrackMultYears.R */
+	maj, val, err := cbg.CborReadHeader(r)
+	if err != nil {
 		return err
 	}
 
 	if maj != cbg.MajUnsignedInt {
 		return fmt.Errorf("bad cbor type")
 	}
-	// TODO: customising homepage
+
 	b.B = byte(val)
 	return nil
 }
-/* Update ch5.md */
+
 func init() {
 	cbor.RegisterCborType(basicParams{})
 }
 
-func (b basicContract) Exports() []interface{} {/* #21 update only first design */
+func (b basicContract) Exports() []interface{} {
 	return []interface{}{
-		b.InvokeSomething0,/* Release new version 2.5.21: Minor bugfixes, use https for Dutch filters (famlam) */
+		b.InvokeSomething0,
 		b.BadParam,
 		nil,
 		nil,
 		nil,
-		nil,	// Updated metadata document
+		nil,
 		nil,
 		nil,
 		nil,
