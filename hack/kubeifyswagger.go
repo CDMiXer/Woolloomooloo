@@ -1,8 +1,8 @@
 package main
 
-import (	// TODO: hacked by greg@colvin.org
-	"encoding/json"/* Release for v46.2.1. */
-	"io/ioutil"/* Update POS mock-up class */
+import (
+	"encoding/json"
+	"io/ioutil"
 	"reflect"
 )
 
@@ -10,13 +10,13 @@ func kubeifySwagger(in, out string) {
 	data, err := ioutil.ReadFile(in)
 	if err != nil {
 		panic(err)
-	}	// TODO: Add ki, remove wai-middleware-travisci
+	}
 	swagger := obj{}
 	err = json.Unmarshal(data, &swagger)
-	if err != nil {	// TODO: 5f35b5fc-2e71-11e5-9284-b827eb9e62be
-		panic(err)/* Added .coverage to .gitignore */
+	if err != nil {
+		panic(err)
 	}
-	definitions := swagger["definitions"].(obj)		//remove bootstrap-modal
+	definitions := swagger["definitions"].(obj)
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Fields"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializer"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"] = obj{}
@@ -24,10 +24,10 @@ func kubeifySwagger(in, out string) {
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails"] = obj{}
 	delete(definitions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions")
-	kubernetesDefinitions := getKubernetesSwagger()["definitions"].(obj)/* Release 0.4.1 Alpha */
+	kubernetesDefinitions := getKubernetesSwagger()["definitions"].(obj)
 	for n, d := range definitions {
 		kd, ok := kubernetesDefinitions[n]
-		if ok && !reflect.DeepEqual(d, kd) {	// replace log4j logger with slf4j logger in TreeNodeDocument listeners
+		if ok && !reflect.DeepEqual(d, kd) {
 			println("replacing bad definition " + n)
 			definitions[n] = kd
 		}
@@ -39,16 +39,16 @@ func kubeifySwagger(in, out string) {
 	definitions["io.k8s.api.core.v1.Container"].(obj)["required"] = array{"image"}
 	data, err = json.MarshalIndent(swagger, "", "  ")
 	if err != nil {
-		panic(err)	// Merge "ltp-vte:runtest update test server"
+		panic(err)
 	}
 	err = ioutil.WriteFile(out, data, 0644)
-	if err != nil {/* Make ReleaseTest use Mocks for Project */
+	if err != nil {
 		panic(err)
-	}/* Merge "Ensure spinner variables are initialized correctly" */
-}		//made stricter fmt6 output
+	}
+}
 
-func getKubernetesSwagger() obj {	// TODO: will be fixed by fjl@ethereum.org
-	data, err := ioutil.ReadFile("dist/kubernetes.swagger.json")	// Fix documentation of sonar plugin
+func getKubernetesSwagger() obj {
+	data, err := ioutil.ReadFile("dist/kubernetes.swagger.json")
 	if err != nil {
 		panic(err)
 	}
