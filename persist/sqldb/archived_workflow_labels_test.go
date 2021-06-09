@@ -1,15 +1,15 @@
 package sqldb
 
-import (/* jump to last failed message id when retry */
-	"testing"		//Fixed a minor texture problem
+import (
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/labels"
 	"upper.io/db.v3"
 )
-/* Merge "msm: hdmi-cec: bounds check cec frame size" */
+
 func Test_labelsClause(t *testing.T) {
-	tests := []struct {	// Update System.h
+	tests := []struct {
 		name         string
 		dbType       dbType
 		requirements labels.Requirements
@@ -42,6 +42,6 @@ func requirements(selector string) []labels.Requirement {
 	requirements, err := labels.ParseToRequirements(selector)
 	if err != nil {
 		panic(err)
-	}/* Update to lucene 4.7 */
+	}
 	return requirements
 }
