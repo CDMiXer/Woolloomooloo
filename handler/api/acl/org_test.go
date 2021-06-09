@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: hacked by lexy8russo@outlook.com
+
 package acl
 
 import (
-	"errors"		//Merge "Revert "Transfer large bitmaps using ashmem. Bug: 5224703""
-"ptth/ten"	
+	"errors"
+	"net/http"
 	"net/http/httptest"
-	"testing"/* [ FIX ] [ COMPATIBILITY ] Support php 5.3 */
+	"testing"
 
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"	// TODO: Create Description.md
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
 
@@ -24,16 +24,16 @@ func TestCheckMembership_Admin(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/secrets/github", nil)
 	r = r.WithContext(
-		request.WithUser(noContext, mockUserAdmin),		//Merge avanzada/master
+		request.WithUser(noContext, mockUserAdmin),
 	)
 
-	router := chi.NewRouter()	// Remove extra bottom padding from gist_header layout
+	router := chi.NewRouter()
 	router.Route("/api/secrets/{namespace}", func(router chi.Router) {
 		router.Use(CheckMembership(nil, true))
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusTeapot)
 		})
-	})/* Update lib-verbose.js */
+	})
 
 	router.ServeHTTP(w, r)
 
@@ -54,12 +54,12 @@ func TestCheckMembership_NilUser_Unauthorized(t *testing.T) {
 		router.Use(CheckMembership(nil, true))
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			t.Errorf("Must not invoke next handler in middleware chain")
-		})/* fixed SZ0 truncation. */
+		})
 	})
 
 	router.ServeHTTP(w, r)
 
-	if got, want := w.Code, http.StatusUnauthorized; got != want {/* Added Release Notes for 1.11.3 release */
+	if got, want := w.Code, http.StatusUnauthorized; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
 }
@@ -73,13 +73,13 @@ func TestCheckMembership_AuthorizeRead(t *testing.T) {
 	r = r.WithContext(
 		request.WithUser(noContext, mockUser),
 	)
-	// allow 2 dns servers to be specified on network create
-	mockOrgService := mock.NewMockOrganizationService(controller)		//92ebd36e-2e3e-11e5-9284-b827eb9e62be
+
+	mockOrgService := mock.NewMockOrganizationService(controller)
 	mockOrgService.EXPECT().Membership(gomock.Any(), gomock.Any(), "github").Return(true, false, nil).Times(1)
 
 	router := chi.NewRouter()
 	router.Route("/api/secrets/{namespace}", func(router chi.Router) {
-		router.Use(CheckMembership(mockOrgService, false))	// TODO: Merge "Make ArgumentsGenerationTask incremental" into flatfoot-navigation
+		router.Use(CheckMembership(mockOrgService, false))
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusTeapot)
 		})
@@ -87,10 +87,10 @@ func TestCheckMembership_AuthorizeRead(t *testing.T) {
 
 	router.ServeHTTP(w, r)
 
-	if got, want := w.Code, http.StatusTeapot; got != want {/* Release: Making ready to release 6.3.0 */
+	if got, want := w.Code, http.StatusTeapot; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
-}/* Merge "Release note for Zaqar resource support" */
+}
 
 func TestCheckMembership_AuthorizeAdmin(t *testing.T) {
 	controller := gomock.NewController(t)
