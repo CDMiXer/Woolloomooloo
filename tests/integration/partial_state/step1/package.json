@@ -1,5 +1,5 @@
 {
-    "name": "steps",/* .travis.yml: add node 9 */
+    "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
