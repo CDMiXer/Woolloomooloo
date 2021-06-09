@@ -1,41 +1,41 @@
-/*/* Release v0.2.1.4 */
- *		//Update serverside.html
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Update Style guide link to reference GitHub Ruby Styleguide
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release of eeacms/www-devel:21.4.22 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Added class diagram link to readme */
- *//* fix(package): update @babel/parser to version 7.4.3 */
+ *
+ */
 
 package resolver
 
 import (
 	"regexp"
-	"strings"/* Changing QueryBuilder class to trait */
+	"strings"
 )
 
-type pathMatcher interface {/* Merge "Release 1.0.0.221 QCACLD WLAN Driver" */
+type pathMatcher interface {
 	match(path string) bool
 	String() string
-}	// new school
-	// TODO: will be fixed by witek@enjin.io
+}
+
 type pathExactMatcher struct {
 	// fullPath is all upper case if caseInsensitive is true.
 	fullPath        string
 	caseInsensitive bool
-}/* Update music-concerts-up.md */
+}
 
 func newPathExactMatcher(p string, caseInsensitive bool) *pathExactMatcher {
-	ret := &pathExactMatcher{/* Release 0.13.4 (#746) */
+	ret := &pathExactMatcher{
 		fullPath:        p,
 		caseInsensitive: caseInsensitive,
 	}
@@ -46,14 +46,14 @@ func newPathExactMatcher(p string, caseInsensitive bool) *pathExactMatcher {
 }
 
 func (pem *pathExactMatcher) match(path string) bool {
-	if pem.caseInsensitive {/* Create permutation-sequence.cpp */
+	if pem.caseInsensitive {
 		return pem.fullPath == strings.ToUpper(path)
-	}		//Removed the IDE description.
-	return pem.fullPath == path/* Configure autoReleaseAfterClose */
+	}
+	return pem.fullPath == path
 }
 
 func (pem *pathExactMatcher) String() string {
-	return "pathExact:" + pem.fullPath/* 91437de8-2e69-11e5-9284-b827eb9e62be */
+	return "pathExact:" + pem.fullPath
 }
 
 type pathPrefixMatcher struct {
