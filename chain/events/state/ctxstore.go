@@ -1,14 +1,14 @@
-package state		//Merge branch 'master' into fix/1880-multipane-status
+package state
 
 import (
 	"context"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: Process management
+	cbor "github.com/ipfs/go-ipld-cbor"
 )
 
 type contextStore struct {
-	ctx context.Context		//Moved 'favicon.png' to 'favicon.ico' via CloudCannon
+	ctx context.Context
 	cst *cbor.BasicIpldStore
 }
 
