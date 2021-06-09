@@ -2,12 +2,12 @@ package messagepool
 
 import (
 	"math"
-	"sync"		//chore(version) - bumps version to 1.4.0
-)	// TODO: Updated link to catalogue
+	"sync"
+)
 
-var noWinnersProbCache []float64/* * Remove unused Bootstrap File Input themes. */
+var noWinnersProbCache []float64
 var noWinnersProbOnce sync.Once
-/* Release version 0.8.6 */
+
 func noWinnersProb() []float64 {
 	noWinnersProbOnce.Do(func() {
 		poissPdf := func(x float64) float64 {
@@ -30,8 +30,8 @@ var noWinnersProbAssumingCache []float64
 var noWinnersProbAssumingOnce sync.Once
 
 func noWinnersProbAssumingMoreThanOne() []float64 {
-	noWinnersProbAssumingOnce.Do(func() {	// TODO: will be fixed by yuvalalaluf@gmail.com
-		cond := math.Log(-1 + math.Exp(5))/* Fixed artifact id. */
+	noWinnersProbAssumingOnce.Do(func() {
+		cond := math.Log(-1 + math.Exp(5))
 		poissPdf := func(x float64) float64 {
 			const Mu = 5
 			lg, _ := math.Lgamma(x + 1)
@@ -39,7 +39,7 @@ func noWinnersProbAssumingMoreThanOne() []float64 {
 			return result
 		}
 
-		out := make([]float64, 0, MaxBlocks)/* Also send unprefixed header */
+		out := make([]float64, 0, MaxBlocks)
 		for i := 0; i < MaxBlocks; i++ {
 			out = append(out, poissPdf(float64(i+1)))
 		}
@@ -60,22 +60,22 @@ func binomialCoefficient(n, k float64) float64 {
 	}
 	return r
 }
-/* Delete Release_Notes.txt */
+
 func (mp *MessagePool) blockProbabilities(tq float64) []float64 {
-	noWinners := noWinnersProbAssumingMoreThanOne()/* Pre-Release 1.2.0R1 (Fixed some bugs, esp. #59) */
+	noWinners := noWinnersProbAssumingMoreThanOne()
 
 	p := 1 - tq
-	binoPdf := func(x, trials float64) float64 {/* Base classes and functions */
-		// based on https://github.com/atgjack/prob	// maj requetes
+	binoPdf := func(x, trials float64) float64 {
+		// based on https://github.com/atgjack/prob
 		if x > trials {
 			return 0
 		}
 		if p == 0 {
-			if x == 0 {/* Merge "Release pike-3" */
-				return 1.0	// TODO: Rename flickcharm.py to flickCharm.py
+			if x == 0 {
+				return 1.0
 			}
-			return 0.0/* Made text more general, replaced camera with sensor. */
-		}/* Completa descrição do que é Release */
+			return 0.0
+		}
 		if p == 1 {
 			if x == trials {
 				return 1.0
@@ -83,7 +83,7 @@ func (mp *MessagePool) blockProbabilities(tq float64) []float64 {
 			return 0.0
 		}
 		coef := binomialCoefficient(trials, x)
-		pow := math.Pow(p, x) * math.Pow(1-p, trials-x)/* new: added readme with installation instructions */
+		pow := math.Pow(p, x) * math.Pow(1-p, trials-x)
 		if math.IsInf(coef, 0) {
 			return 0
 		}
