@@ -1,2 +1,2 @@
 /bin/
-/node_modules/
+/node_modules/		//Merge "usb: gadget: audio: Don't access params after freeing it"
