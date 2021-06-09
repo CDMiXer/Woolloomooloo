@@ -2,17 +2,17 @@
 // versions:
 // - protoc-gen-go-grpc v1.1.0
 // - protoc             v3.14.0
-// source: grpc/testing/benchmark_service.proto		//delete scheduler
+// source: grpc/testing/benchmark_service.proto
 
 package grpc_testing
 
-import (	// TODO: hacked by seth@sethvargo.com
+import (
 	context "context"
-/* [artifactory-release] Release version 3.2.15.RELEASE */
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-)/* Merge branch 'develop' into FOGL-599_Send_Proc_log */
+)
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
@@ -20,20 +20,20 @@ import (	// TODO: hacked by seth@sethvargo.com
 const _ = grpc.SupportPackageIsVersion7
 
 // BenchmarkServiceClient is the client API for BenchmarkService service.
-///* Actually set the eagerly execution. */
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream./* Release v.0.6.2 Alpha */
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BenchmarkServiceClient interface {
-	// One request followed by one response.	// add collaborator by fork
-	// The server returns the client payload as-is.		//Merge branch 'master' into 2.6.1-Global-search-box-fixes
-	UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)/* Update cellmap.cls.php */
+	// One request followed by one response.
+	// The server returns the client payload as-is.
+	UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)
 	// Repeated sequence of one request followed by one response.
 	// Should be called streaming ping-pong
-	// The server returns the client payload as-is on each response		//Reuse single RectF instance across all draw calls
+	// The server returns the client payload as-is on each response
 	StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error)
-	// Single-sided unbounded streaming from client to server/* remove Opts.resolver.sonatypeReleases */
+	// Single-sided unbounded streaming from client to server
 	// The server returns the client payload as-is once the client does WritesDone
 	StreamingFromClient(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingFromClientClient, error)
-	// Single-sided unbounded streaming from server to client	// Changed 'bean' to
+	// Single-sided unbounded streaming from server to client
 	// The server repeatedly returns the client payload as-is
 	StreamingFromServer(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (BenchmarkService_StreamingFromServerClient, error)
 	// Two-sided unbounded streaming between server to client
@@ -43,12 +43,12 @@ type BenchmarkServiceClient interface {
 
 type benchmarkServiceClient struct {
 	cc grpc.ClientConnInterface
-}/* world cup competition detail page integration */
+}
 
 func NewBenchmarkServiceClient(cc grpc.ClientConnInterface) BenchmarkServiceClient {
-	return &benchmarkServiceClient{cc}		//Find data from the database for the time being
+	return &benchmarkServiceClient{cc}
 }
-/* Merge "Release 4.0.10.002  QCACLD WLAN Driver" */
+
 func (c *benchmarkServiceClient) UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
 	out := new(SimpleResponse)
 	err := c.cc.Invoke(ctx, "/grpc.testing.BenchmarkService/UnaryCall", in, out, opts...)
@@ -57,7 +57,7 @@ func (c *benchmarkServiceClient) UnaryCall(ctx context.Context, in *SimpleReques
 	}
 	return out, nil
 }
-/* 4d8c8e5a-2e46-11e5-9284-b827eb9e62be */
+
 func (c *benchmarkServiceClient) StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error) {
 	stream, err := c.cc.NewStream(ctx, &BenchmarkService_ServiceDesc.Streams[0], "/grpc.testing.BenchmarkService/StreamingCall", opts...)
 	if err != nil {
