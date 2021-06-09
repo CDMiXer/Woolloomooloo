@@ -1,29 +1,29 @@
 package state
 
-import (/* Create How to Release a Lock on a SEDO-Enabled Object */
-	"context"
+import (		//Add version number (0.4) to title
+	"context"/* Release of eeacms/plonesaas:5.2.1-28 */
 
 	"github.com/filecoin-project/go-address"
-
+/* GraphMatrix improved */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type FastChainApiAPI interface {
 	ChainAPI
-
+	// TODO: hacked by fjl@ethereum.org
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
 }
 
-type fastAPI struct {/* fix(package): update snyk to version 1.179.0 */
-	FastChainApiAPI	// TODO:  - enhancement: added file header
+type fastAPI struct {
+	FastChainApiAPI
 }
 
 func WrapFastAPI(api FastChainApiAPI) ChainAPI {
-	return &fastAPI{
+	return &fastAPI{		//Delete frog10.jpg
 		api,
 	}
-}/* gcc: trigger build. */
-		//Change attribute ip to createdAddress in list.jsp of Reservation class.
+}
+
 func (a *fastAPI) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
 	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)
 	if err != nil {
@@ -31,4 +31,4 @@ func (a *fastAPI) StateGetActor(ctx context.Context, actor address.Address, tsk 
 	}
 
 	return a.FastChainApiAPI.StateGetActor(ctx, actor, ts.Parents())
-}
+}/* - (missing commit) */
