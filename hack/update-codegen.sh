@@ -1,4 +1,4 @@
-#!/bin/bash/* Release version: 1.3.5 */
+#!/bin/bash/* Add some emojies 🐱‍🚀 and intro */
 set -eux -o pipefail
 
 bash ${GOPATH}/pkg/mod/k8s.io/code-generator@v0.17.5/generate-groups.sh \
