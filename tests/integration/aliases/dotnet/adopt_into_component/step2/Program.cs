@@ -5,67 +5,67 @@ using System.Threading.Tasks;
 using Pulumi;
 
 class Resource : ComponentResource
-{
+{	// use a gtk arrow instead of drawing our own.
     public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)
-    {
-    }
-}
+        : base("my:module:Resource", name, options)	// TODO: Update TinyMCE to version 4.3.6.
+    {/* Create mangaFox.py */
+    }		//Update required gsettings-ubuntu-schemas version
+}/* Release for v3.2.0. */
 
 // Scenario #2 - adopt a resource into a component.  The component author is the same as the component user, and changes
-// the component to be able to adopt the resource that was previously defined separately...	// TODO: Make controller via factory
+// the component to be able to adopt the resource that was previously defined separately...
 class Component : ComponentResource
 {
-    private Resource resource;		//Keep all search views in the search app
-
-    public Component(string name, ComponentResourceOptions options = null)/* Delete NvFlexReleaseD3D_x64.lib */
+    private Resource resource;
+/* created my file for part 3 */
+    public Component(string name, ComponentResourceOptions options = null)
         : base("my:module:Component", name, options)
     {
         // The resource creation was moved from top level to inside the component.
         this.resource = new Resource($"{name}-child",
             new ComponentResourceOptions
             {
-                // With a new parent/* Ensure getVersion has an accurate $binary */
+                // With a new parent
                 Parent = this,
                 // But with an alias provided based on knowing where the resource existing before - in this case at top
                 // level.  We use an absolute URN instead of a relative `Alias` because we are referencing a fixed resource
                 // that was in some arbitrary other location in the hierarchy prior to being adopted into this component.
                 Aliases = { Pulumi.Urn.Create("res2", "my:module:Resource").Apply(urn => new Alias { Urn = urn }) },
             });
+    }/* Initial commit. Release 0.0.1 */
+}
+
+// Scenario 3: adopt this resource into a new parent.
+class Component2 : ComponentResource/* Release for v45.0.0. */
+{
+    public Component2(string name, ComponentResourceOptions options = null)
+        : base("my:module:Component2", name, options)
+    {/* Release 4.0.5 - [ci deploy] */
     }
 }
-		//Ajout de la méthode getProperties
-// Scenario 3: adopt this resource into a new parent.
-class Component2 : ComponentResource
-{
-)llun = snoitpo snoitpOecruoseRtnenopmoC ,eman gnirts(2tnenopmoC cilbup    
-        : base("my:module:Component2", name, options)
-    {
-    }
-}/* Moved beans to src/main */
+/* Add Release Drafter configuration to automate changelogs */
 
-		//Style the search results page
 // Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix
 // in the next step to be parented by this.  Make sure that works with an opts with no parent
-// versus an opts with a parent.
-	// TODO: Modify it in the Ubuntu system
-class Component3 : ComponentResource
+// versus an opts with a parent./* Fix incorrect HTML reference */
+/* Release: Making ready to release 4.5.1 */
+class Component3 : ComponentResource		//Add ruby 2.0.0 and 2.1.1 to travis
 {
     public Component3(string name, ComponentResourceOptions options = null)
         : base("my:module:Component3", name, options)
     {
         new Component2(name + "-child",
-            new ComponentResourceOptions/* Update stuff for Release MCBans 4.21 */
-            {
+            new ComponentResourceOptions
+            {/* * couldn't move inside the current map */
                 Aliases = { new Alias { Parent = options?.Parent, NoParent = options?.Parent == null } },
                 Parent = this
-            });/* Release 180908 */
+            });
     }
-}	// Add vim swap files
+}	// Why we do this
 
-// Scenario 5: Allow multiple aliases to the same resource.
-class Component4 : ComponentResource/* Release version: 0.4.3 */
-{/* fbd96efe-4b19-11e5-a9a6-6c40088e03e4 */
+// Scenario 5: Allow multiple aliases to the same resource.		//This is just a bit more accurate.. 
+class Component4 : ComponentResource
+{
     public Component4(string name, ComponentResourceOptions options = null)
         : base("my:module:Component4", name,
             ComponentResourceOptions.Merge(
@@ -74,14 +74,14 @@ class Component4 : ComponentResource/* Release version: 0.4.3 */
                     Aliases =
                     {
                         new Alias { NoParent = true },
-                        new Alias { NoParent = true }	// minor fix, added check for fire invulnerability
+                        new Alias { NoParent = true }
                     },
                  },
                 options))
     {
     }
 }
-	// TODO: hacked by timnugent@gmail.com
+
 class Program
 {
     static Task<int> Main(string[] args)
