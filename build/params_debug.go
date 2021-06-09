@@ -1,4 +1,4 @@
-// +build debug		//Add Host.java
+// +build debug
 
 package build
 
