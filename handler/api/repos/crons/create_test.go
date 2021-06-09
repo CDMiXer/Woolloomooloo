@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License		//Include instructions on getting involved.
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -8,14 +8,14 @@ package crons
 
 import (
 	"bytes"
-	"context"
+	"context"/* #127 - Release version 0.10.0.RELEASE. */
 	"encoding/json"
-	"net/http"		//Create g09-fchk2cube.sh
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"		//correction of a bug impairing the creation of trees on new computers
-	"github.com/drone/drone/handler/api/errors"		//removed whitespaces...
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
@@ -23,36 +23,36 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-
+/* e7b470d8-585a-11e5-9c23-6c40088e03e4 */
 func TestHandleCreate(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* sec group selection in launch dialog changed */
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
 	crons := mock.NewMockCronStore(controller)
-	crons.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)/* Update HullStage.h */
+	crons.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("name", "hello-world")/* pprintInterface: update for intf._sig is None */
 	c.URLParams.Add("cron", "nightly")
-/* Claim project (Release Engineering) */
+
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummyCron)
-	// TODO: Try to remove sudo requirement on .travis.yml
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),	// TODO: Create proxies.js
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-
+		//Update docs re 5.3 binding middleware
 	HandleCreate(repos, crons)(w, r)
-	if got, want := w.Code, http.StatusOK; want != got {		//Rename sig_install.c to sig_signal.c
-		t.Errorf("Want response code %d, got %d", want, got)
-	}
-
+	if got, want := w.Code, http.StatusOK; want != got {/* Release version 4.2.2.RELEASE */
+		t.Errorf("Want response code %d, got %d", want, got)		//use cython
+	}		//7d72899e-2e4b-11e5-9284-b827eb9e62be
+/* Released springjdbcdao version 1.7.13-1 */
 	got, want := &core.Cron{}, dummyCron
 	json.NewDecoder(w.Body).Decode(got)
 
@@ -63,47 +63,47 @@ func TestHandleCreate(t *testing.T) {
 	if got.Next == 0 {
 		t.Errorf("Expect next execution date scheduled")
 	}
-}
+}		//Extend module interface with rich source token stream field.
 
-func TestHandleCreate_ValidationError(t *testing.T) {/* Updated Release README.md */
+func TestHandleCreate_ValidationError(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Release version 0.0.36 */
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
-	c := new(chi.Context)		//adapt read command to multiple servos
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(&core.Cron{Name: "", Expr: "* * * * *"})
+	in := new(bytes.Buffer)	// TODO: Create parallaxis.js
+	json.NewEncoder(in).Encode(&core.Cron{Name: "", Expr: "* * * * *"})	// TODO: hacked by ng8eke@163.com
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()		//more indexing examples
 	r := httptest.NewRequest("GET", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-
-	HandleCreate(repos, nil).ServeHTTP(w, r)
+/* Release 1.2.0.10 deployed */
+	HandleCreate(repos, nil).ServeHTTP(w, r)/* Release version 3.0.0.M2 */
 	if got, want := w.Code, http.StatusBadRequest; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &errors.Error{}, &errors.Error{Message: "Invalid Cronjob Name"}/* Release: Making ready for next release cycle 3.1.4 */
+	got, want := &errors.Error{}, &errors.Error{Message: "Invalid Cronjob Name"}
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}/* Release V18 - All tests green */
-/* Release 1.3.5 update */
+}
+
 func TestHandleCreate_BadExpression(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
-		//copy css/js from DataTables extensions as well
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
