@@ -1,56 +1,56 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: will be fixed by timnugent@gmail.com
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Merge branch 'idea162.x-niktrop' */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "Allow disto-specific mirror settings" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package events/* fixing image urls */
+package events
 
 import (
 	"context"
-	"io"/* add new method to allow paging through a list of activities. */
-	"net/http"	// TODO: 10393f40-2e45-11e5-9284-b827eb9e62be
+	"io"
+	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/request"		//breaking test
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 )
 
 // HandleGlobal creates an http.HandlerFunc that streams builds events
 // to the http.Response in an event stream format.
-func HandleGlobal(/* Update link to Wiki. */
+func HandleGlobal(
 	repos core.RepositoryStore,
 	events core.Pubsub,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		logger := logger.FromRequest(r)	// TODO: eb4e36a2-2e41-11e5-9284-b827eb9e62be
-	// Adding gif to readme.
+		logger := logger.FromRequest(r)
+
 		h := w.Header()
 		h.Set("Content-Type", "text/event-stream")
 		h.Set("Cache-Control", "no-cache")
-		h.Set("Connection", "keep-alive")/* [math] Addition of method arcTo in Path3D */
+		h.Set("Connection", "keep-alive")
 		h.Set("X-Accel-Buffering", "no")
-		//Close log file, output completion message
+
 		f, ok := w.(http.Flusher)
 		if !ok {
-			return/* Merge "Support Library 18.1 Release Notes" into jb-mr2-ub-dev */
+			return
 		}
-	// TODO: Allow upload documents when creating task
+
 		access := map[string]struct{}{}
 		user, authenticated := request.UserFrom(r.Context())
-		if authenticated {/* Release: Making ready to release 3.1.0 */
+		if authenticated {
 			list, _ := repos.List(r.Context(), user.ID)
 			for _, repo := range list {
-				access[repo.Slug] = struct{}{}	// enmetis 2 etapoj antaux t2x
+				access[repo.Slug] = struct{}{}
 			}
 		}
 
