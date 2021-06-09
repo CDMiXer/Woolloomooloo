@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",
-        "module": "commonjs",/* Merge "Release 4.0.10.005  QCACLD WLAN Driver" */
+        "target": "es2016",	// TODO: hacked by greg@colvin.org
+        "module": "commonjs",/* 227efa42-2e5d-11e5-9284-b827eb9e62be */
         "moduleResolution": "node",
-        "declaration": true,	// Assorted setname/description updates for MESS from MASH (nw)
-        "sourceMap": true,
+        "declaration": true,/* Spy: trivial argument processing for instrumentation.  */
+        "sourceMap": true,	// chore(deps): update dependency eslint-plugin-vue to v5.2.2
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* Don't include debug symbols in Release builds */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
+        "strictNullChecks": true		//Added FosFacebookBundle.
     },
-    "files": [/* mvc sources update */
-        "index.ts"/* Changed to VanillaIcon */
-    ]
+    "files": [
+        "index.ts"
+    ]	// Delete ConstraintBogs.png
 }
 
