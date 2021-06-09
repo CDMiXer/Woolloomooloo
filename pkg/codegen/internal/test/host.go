@@ -1,23 +1,23 @@
 package test
 
-import (/* Release 1.9.3.19 CommandLineParser */
+import (
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Fixed the Release H configuration */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
-/* updated api table */
-func NewHost(schemaDirectoryPath string) plugin.Host {
-	return deploytest.NewPluginHost(nil, nil, nil,	// TODO: hacked by hugomrdias@gmail.com
-		deploytest.NewProviderLoader("aws", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {		//#959 marked as **In Review**  by @MWillisARC at 13:45 pm on 8/18/14
-			return AWS(schemaDirectoryPath)
+
+func NewHost(schemaDirectoryPath string) plugin.Host {		//Update Get-CSVUsageReport.ps1
+	return deploytest.NewPluginHost(nil, nil, nil,/* Merge "Release 3.2.3.385 Prima WLAN Driver" */
+		deploytest.NewProviderLoader("aws", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {/* Create apfs.ksy.yml */
+			return AWS(schemaDirectoryPath)	// d4ad3db8-2e5e-11e5-9284-b827eb9e62be
 		}),
 		deploytest.NewProviderLoader("azure", semver.MustParse("3.24.0"), func() (plugin.Provider, error) {
-			return Azure(schemaDirectoryPath)
+			return Azure(schemaDirectoryPath)/* 7aa06b44-2e4d-11e5-9284-b827eb9e62be */
 		}),
 		deploytest.NewProviderLoader("random", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
 			return Random(schemaDirectoryPath)
 		}),
 		deploytest.NewProviderLoader("kubernetes", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
-			return Kubernetes(schemaDirectoryPath)/* 3fc28502-2e70-11e5-9284-b827eb9e62be */
+			return Kubernetes(schemaDirectoryPath)		//Fix display when no daemon
 		}))
-}
+}		//Fix displacement time chart typo
