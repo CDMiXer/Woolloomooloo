@@ -1,6 +1,6 @@
-name: trivial-python
-description: A trivial Pulumi program for Python that has virtualenv set
+name: trivial-python/* Use default dialyzer configuration. */
+description: A trivial Pulumi program for Python that has virtualenv set/* Merge branch 'master' into update_login_type_default */
 runtime:
-  name: python/* Update ref_content.md */
+  name: python
   options:
     virtualenv: venv
