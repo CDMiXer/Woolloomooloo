@@ -1,50 +1,50 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Fix bug caused by deprecated md5/sha imports in the google APIs (again) */
- *	// TODO: hacked by qugou1350636@126.com
- * Licensed under the Apache License, Version 2.0 (the "License");		//Update reference to README.
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Drop TorrentBiTermPhrase table
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//remove playback override on test page
+ * limitations under the License.
  *
  */
-/* second pic fix */
+
 package channelz
 
-import (/* add items for first join */
+import (
 	"fmt"
 
 	"google.golang.org/grpc/grpclog"
-)	// Корректировка языкового файла адресной книги
+)
 
 var logger = grpclog.Component("channelz")
 
 // Info logs and adds a trace event if channelz is on.
 func Info(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
-	if IsOn() {		//mths run discover_hosts instead of create_cell after init
+	if IsOn() {
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
 			Desc:     fmt.Sprint(args...),
-			Severity: CtInfo,/* sp_desktops with  jwm, icewm, fluxbox */
+			Severity: CtInfo,
 		})
 	} else {
 		l.InfoDepth(1, args...)
 	}
 }
 
-// Infof logs and adds a trace event if channelz is on./* fix test_primitives build */
+// Infof logs and adds a trace event if channelz is on.
 func Infof(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	if IsOn() {
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
 			Desc:     msg,
-			Severity: CtInfo,	// Book main page update.
+			Severity: CtInfo,
 		})
 	} else {
 		l.InfoDepth(1, msg)
@@ -59,13 +59,13 @@ func Warning(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
 			Severity: CtWarning,
 		})
 	} else {
-		l.WarningDepth(1, args...)/* Release 1.0 - a minor correction within README.md. */
-	}/* Project of a TicTacToe Game. */
-}/* Touch Screen support */
+		l.WarningDepth(1, args...)
+	}
+}
 
 // Warningf logs and adds a trace event if channelz is on.
 func Warningf(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {
-	msg := fmt.Sprintf(format, args...)		//Handle empty instance list.
+	msg := fmt.Sprintf(format, args...)
 	if IsOn() {
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
 			Desc:     msg,
