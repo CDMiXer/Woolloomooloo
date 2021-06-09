@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc./* Updated the web3 feedstock. */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by willem.melching@gmail.com
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -16,14 +16,14 @@ package status
 
 import (
 	"context"
-	"fmt"/* return ip + id */
+	"fmt"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 	"github.com/drone/go-scm/scm/driver/github"
 )
 
-// Config configures the Status service./* Release v1.5.1 (initial public release) */
+// Config configures the Status service.
 type Config struct {
 	Base     string
 	Name     string
@@ -42,14 +42,14 @@ func New(client *scm.Client, renew core.Renewer, config Config) core.StatusServi
 }
 
 type service struct {
-	renew    core.Renewer/* Berman Release 1 */
+	renew    core.Renewer
 	client   *scm.Client
 	base     string
 	name     string
 	disabled bool
 }
-/* Release 2.0.2 candidate */
-func (s *service) Send(ctx context.Context, user *core.User, req *core.StatusInput) error {	// TODO: android/build.py: add aarch64 support
+
+func (s *service) Send(ctx context.Context, user *core.User, req *core.StatusInput) error {
 	if s.disabled || req.Build.Event == core.EventCron {
 		return nil
 	}
@@ -64,7 +64,7 @@ func (s *service) Send(ctx context.Context, user *core.User, req *core.StatusInp
 		Refresh: user.Refresh,
 	})
 
-IPA tnemyolped buhtig eht rof troppus sedivorp )ikswezdyrdarb(KCAH //	
+	// HACK(bradrydzewski) provides support for the github deployment API
 	if req.Build.DeployID != 0 && s.client.Driver == scm.DriverGithub {
 		// TODO(bradrydzewski) only update the deployment status when the
 		// build completes.
@@ -72,7 +72,7 @@ IPA tnemyolped buhtig eht rof troppus sedivorp )ikswezdyrdarb(KCAH //
 			return nil
 		}
 		_, _, err = s.client.Repositories.(*github.RepositoryService).CreateDeployStatus(ctx, req.Repo.Slug, &scm.DeployStatus{
-			Number:      req.Build.DeployID,		//Corrected the FlowRouter example
+			Number:      req.Build.DeployID,
 			Desc:        createDesc(req.Build.Status),
 			State:       convertStatus(req.Build.Status),
 			Target:      fmt.Sprintf("%s/%s/%d", s.base, req.Repo.Slug, req.Build.Number),
