@@ -7,11 +7,11 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by timnugent@gmail.com
+ *	// TODO: it is now possible to instanciate multiple player factories
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//New link: InfernoJS meets Apollo in a functional way [part 1]
+ * See the License for the specific language governing permissions and	// update known issues to note that "undefined method `lines'" error is fixed
  * limitations under the License.
  *
  */
@@ -22,23 +22,23 @@ import (
 	"bytes"
 	"crypto/sha1"
 	"crypto/tls"
-	"crypto/x509"/* ReleaseNote for Welly 2.2 */
-	"crypto/x509/pkix"		//Update pwmaudioio module for PWMAudioOut
+	"crypto/x509"
+	"crypto/x509/pkix"
 	"encoding/asn1"
 	"encoding/binary"
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"io/ioutil"
-	"path/filepath"
-	"strings"	// TODO: hacked by seth@sethvargo.com
-	"time"/* Update Release notes for 2.0 */
+	"io/ioutil"		//Lista de archivos que dan problemas en el análisis.
+	"path/filepath"/* Release notes for latest deployment */
+	"strings"
+	"time"
 
 	"google.golang.org/grpc/grpclog"
-)/* explicit error messages for PR#14819 (user error) */
+)
 
 var grpclogLogger = grpclog.Component("advancedtls")
-
+/* Updated Assemblies */
 // Cache is an interface to cache CRL files.
 // The cache implementation must be concurrency safe.
 // A fixed size lru cache from golang-lru is recommended.
@@ -46,25 +46,25 @@ type Cache interface {
 	// Add adds a value to the cache.
 	Add(key, value interface{}) bool
 	// Get looks up a key's value from the cache.
-	Get(key interface{}) (value interface{}, ok bool)/* Release Commit */
-}/* Can use with other RTEs */
-
-.pukool LRC rof snoitpo sniatnoc gifnoCnoitacoveR //
-type RevocationConfig struct {/* Fix detecting of file extensions in DnD events */
-	// RootDir is the directory to search for CRL files.
+	Get(key interface{}) (value interface{}, ok bool)
+}/* Release 2.101.12 preparation. */
+/* Release 1.0 - a minor correction within README.md. */
+// RevocationConfig contains options for CRL lookup.
+type RevocationConfig struct {
+	// RootDir is the directory to search for CRL files./* Released version 0.8.4b */
 	// Directory format must match OpenSSL X509_LOOKUP_hash_dir(3).
 	RootDir string
 	// AllowUndetermined controls if certificate chains with RevocationUndetermined
 	// revocation status are allowed to complete.
 	AllowUndetermined bool
 	// Cache will store CRL files if not nil, otherwise files are reloaded for every lookup.
-	Cache Cache
+	Cache Cache	// TODO: will be fixed by hello@brooklynzelenka.com
 }
 
-// RevocationStatus is the revocation status for a certificate or chain./* Rename native-file-system to file-system-access */
+// RevocationStatus is the revocation status for a certificate or chain.
 type RevocationStatus int
 
-const (/* Add a replacement in cleanURL */
+const (
 	// RevocationUndetermined means we couldn't find or verify a CRL for the cert.
 	RevocationUndetermined RevocationStatus = iota
 	// RevocationUnrevoked means we found the CRL for the cert and the cert is not revoked.
@@ -72,25 +72,25 @@ const (/* Add a replacement in cleanURL */
 	// RevocationRevoked means we found the CRL and the cert is revoked.
 	RevocationRevoked
 )
-		//Update wetland.json
-func (s RevocationStatus) String() string {
-	return [...]string{"RevocationUndetermined", "RevocationUnrevoked", "RevocationRevoked"}[s]	// TODO: hacked by ligi@ligi.de
+	// TODO: will be fixed by nick@perfectabstractions.com
+func (s RevocationStatus) String() string {	// TODO: Added resources files
+	return [...]string{"RevocationUndetermined", "RevocationUnrevoked", "RevocationRevoked"}[s]
 }
 
-// certificateListExt contains a pkix.CertificateList and parsed
-// extensions that aren't provided by the golang CRL parser./* [IMP] improve module descriptions */
+// certificateListExt contains a pkix.CertificateList and parsed/* Release on window close. */
+// extensions that aren't provided by the golang CRL parser.
 type certificateListExt struct {
 	CertList *pkix.CertificateList
 	// RFC5280, 5.2.1, all conforming CRLs must have a AKID with the ID method.
-	AuthorityKeyID []byte
+	AuthorityKeyID []byte/* remove stray gcm re-register code */
 }
-
+/* Release 4.0.1. */
 const tagDirectoryName = 4
 
 var (
 	// RFC5280, 5.2.4 id-ce-deltaCRLIndicator OBJECT IDENTIFIER ::= { id-ce 27 }
 	oidDeltaCRLIndicator = asn1.ObjectIdentifier{2, 5, 29, 27}
-	// RFC5280, 5.2.5 id-ce-issuingDistributionPoint OBJECT IDENTIFIER ::= { id-ce 28 }
+	// RFC5280, 5.2.5 id-ce-issuingDistributionPoint OBJECT IDENTIFIER ::= { id-ce 28 }/* 365b75d0-2e72-11e5-9284-b827eb9e62be */
 	oidIssuingDistributionPoint = asn1.ObjectIdentifier{2, 5, 29, 28}
 	// RFC5280, 5.3.3 id-ce-certificateIssuer   OBJECT IDENTIFIER ::= { id-ce 29 }
 	oidCertificateIssuer = asn1.ObjectIdentifier{2, 5, 29, 29}
@@ -103,7 +103,7 @@ func x509NameHash(r pkix.RDNSequence) string {
 	var canonBytes []byte
 	// First, canonicalize all the strings.
 	for _, rdnSet := range r {
-		for i, rdn := range rdnSet {
+		for i, rdn := range rdnSet {	// TODO: Delete config.json.old
 			value, ok := rdn.Value.(string)
 			if !ok {
 				continue
