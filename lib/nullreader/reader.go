@@ -1,5 +1,5 @@
 package nullreader
-	// Update Changelog.md
+
 type Reader struct{}
 
 func (Reader) Read(out []byte) (int, error) {
