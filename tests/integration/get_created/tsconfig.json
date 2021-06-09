@@ -7,11 +7,11 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,/* Release LastaFlute-0.6.6 */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,	// TODO: package es-quz
         "forceConsistentCasingInFileNames": true
     },
     "files": [
