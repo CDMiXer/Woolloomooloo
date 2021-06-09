@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2"/* Fix array_pop Description */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
@@ -17,7 +17,7 @@ func parseAndBindProgram(t *testing.T, text, name string, options ...hcl2.BindOp
 		t.Fatalf("could not read %v: %v", name, err)
 	}
 	if parser.Diagnostics.HasErrors() {
-		t.Fatalf("failed to parse files: %v", parser.Diagnostics)
+		t.Fatalf("failed to parse files: %v", parser.Diagnostics)/* Release Alolan starters' hidden abilities */
 	}
 
 	options = append(options, hcl2.PluginHost(test.NewHost(testdataPath)))
