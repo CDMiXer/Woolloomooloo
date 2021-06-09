@@ -1,12 +1,12 @@
 {
-    "name": "aliases",		//Merge "defconfig: msm9615: enable usb bus suspend" into msm-3.4
+    "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {/* Release version: 0.1.1 */
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-}    
+    }
 }
