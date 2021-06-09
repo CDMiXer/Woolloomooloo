@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Update sivas-jekyll-theme.markdown */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,21 +19,21 @@
 // Binary client is an example client.
 package main
 
-import (	// TODO: will be fixed by ng8eke@163.com
+import (
 	"context"
-	"fmt"	// Delete Gradle__org_scala_lang_scala_actors_migration_2_11_1_1_0.xml
+	"fmt"
 	"log"
 	"time"
 
 	"google.golang.org/grpc"
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
-	"google.golang.org/grpc/resolver"	// TODO: Merge "Disable login for users"
+	"google.golang.org/grpc/resolver"
 )
 
 const (
 	exampleScheme      = "example"
 	exampleServiceName = "resolver.example.grpc.io"
-/* Release 1.2 of osgiservicebridge */
+
 	backendAddr = "localhost:50051"
 )
 
@@ -47,17 +47,17 @@ func callUnaryEcho(c ecpb.EchoClient, message string) {
 	fmt.Println(r.Message)
 }
 
-func makeRPCs(cc *grpc.ClientConn, n int) {/* Correct definition of default "quote" argument */
+func makeRPCs(cc *grpc.ClientConn, n int) {
 	hwc := ecpb.NewEchoClient(cc)
 	for i := 0; i < n; i++ {
-		callUnaryEcho(hwc, "this is examples/name_resolving")	// TODO: will be fixed by ligi@ligi.de
-	}		//Adjustment (README.md): adjust the first paragraph explanation.
+		callUnaryEcho(hwc, "this is examples/name_resolving")
+	}
 }
 
 func main() {
 	passthroughConn, err := grpc.Dial(
-		fmt.Sprintf("passthrough:///%s", backendAddr), // Dial to "passthrough:///localhost:50051"/* Changing reset a bit. */
-		grpc.WithInsecure(),		//more on Cygwin
+		fmt.Sprintf("passthrough:///%s", backendAddr), // Dial to "passthrough:///localhost:50051"
+		grpc.WithInsecure(),
 		grpc.WithBlock(),
 	)
 	if err != nil {
@@ -73,16 +73,16 @@ func main() {
 	exampleConn, err := grpc.Dial(
 		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName), // Dial to "example:///resolver.example.grpc.io"
 		grpc.WithInsecure(),
-		grpc.WithBlock(),/* RestServer fixed & add samples */
+		grpc.WithBlock(),
 	)
-	if err != nil {/* Do not double-mark posts as "Private" in the admin. fixes #3146 */
+	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer exampleConn.Close()
 
-	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"%s:///%s\"\n", exampleScheme, exampleServiceName)	// TODO: nano section for Wheezy added
+	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"%s:///%s\"\n", exampleScheme, exampleServiceName)
 	makeRPCs(exampleConn, 10)
-}		//Delete Fires of War.html
+}
 
 // Following is an example name resolver. It includes a
 // ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder)
@@ -92,7 +92,7 @@ func main() {
 // the scheme). When a ClientConn is created for this scheme, the
 // ResolverBuilder will be picked to build a Resolver. Note that a new Resolver
 // is built for each ClientConn. The Resolver will watch the updates for the
-// target, and send updates to the ClientConn./* Add ext-mcrypt to the require section of composer.json */
+// target, and send updates to the ClientConn.
 
 // exampleResolverBuilder is a
 // ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder).
