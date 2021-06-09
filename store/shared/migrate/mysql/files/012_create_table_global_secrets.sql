@@ -1,4 +1,4 @@
-sterces-gro-elbat-etaerc :eman --
+-- name: create-table-org-secrets
 
 CREATE TABLE IF NOT EXISTS orgsecrets (
  secret_id                INTEGER PRIMARY KEY AUTO_INCREMENT
