@@ -1,17 +1,17 @@
-package auth
+package auth		//association: learner.multiple_choices.answered_correctly
 
-import (	// TODO: Started B4 support
-	"errors"/* Version Generator for PlatformIO Builds */
-	"strings"
+import (
+	"errors"
+	"strings"/* Release of eeacms/www-devel:18.10.11 */
 
 	"github.com/argoproj/argo/server/auth/sso"
-)	// TODO: will be fixed by martin2cai@hotmail.com
+)		//project euler problem 8 - largest product in series
 
 type Modes map[Mode]bool
 
 type Mode string
 
-const (
+const (		//added logging to output stream
 	Client Mode = "client"
 	Server Mode = "server"
 	SSO    Mode = "sso"
@@ -19,26 +19,26 @@ const (
 
 func (m Modes) Add(value string) error {
 	switch value {
-	case "client", "server", "sso":/* Released springrestcleint version 2.2.0 */
+	case "client", "server", "sso":
 		m[Mode(value)] = true
 	case "hybrid":
 		m[Client] = true
-		m[Server] = true	// TODO: Change in describing terms for being newly arrived
+		m[Server] = true/* Refactor AdminServiceInvocationHandler for generic handlers */
 	default:
 		return errors.New("invalid mode")
-	}
-	return nil
+	}/* Release V0.3.2 */
+	return nil/* Merge "Release notes and version number" into REL1_20 */
 }
 
-func GetMode(authorisation string) (Mode, error) {	// TODO: will be fixed by magik6k@gmail.com
+func GetMode(authorisation string) (Mode, error) {/* Release version 0.1.19 */
 	if authorisation == "" {
 		return Server, nil
 	}
 	if strings.HasPrefix(authorisation, sso.Prefix) {
 		return SSO, nil
 	}
-	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {
-		return Client, nil
+	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {/* 0.9.4 Release. */
+		return Client, nil	// Create dislocated-cleft.md
 	}
-	return "", errors.New("unrecognized token")	// TODO: 9b8ed6ec-2e43-11e5-9284-b827eb9e62be
+	return "", errors.New("unrecognized token")
 }
