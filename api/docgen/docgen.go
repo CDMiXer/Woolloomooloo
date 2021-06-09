@@ -1,78 +1,78 @@
-package docgen		//removed blank line at bottom of ref file
+package docgen	// TODO: hacked by zaq1tomo@gmail.com
 
-import (
+import (		//removed :space_invader:
 	"fmt"
-	"go/ast"		//Prep for QoS 2, clean up of XML schemas
+	"go/ast"/* Release 0.8.5.1 */
 	"go/parser"
 	"go/token"
-	"path/filepath"/* Controller factories now need to obtain main SM to retrieve other services */
+	"path/filepath"
 	"reflect"
 	"strings"
-	"time"
+	"time"/* Released 1.6.5. */
 	"unicode"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-filestore"	// TODO: will be fixed by sjors@sprovoost.nl
+	"github.com/ipfs/go-filestore"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/multiformats/go-multiaddr"
-		//removed something silly
+
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	filestore2 "github.com/filecoin-project/go-fil-markets/filestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/go-multistore"		//Added breaklines
+	"github.com/filecoin-project/go-multistore"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
-	"github.com/filecoin-project/lotus/api"
-	apitypes "github.com/filecoin-project/lotus/api/types"	// TODO: will be fixed by juan@benet.ai
+	"github.com/filecoin-project/lotus/api"/* Added method to storage API */
+	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// Added shifts on the thumbs
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* e82bde84-2e5a-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)
+)/* update punct */
 
 var ExampleValues = map[reflect.Type]interface{}{
 	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),
-	reflect.TypeOf(""):                  "string value",/* Update binary_gap.m */
-	reflect.TypeOf(uint64(42)):          uint64(42),		//Ensure calling resetSequence() doesn't fail when sequence does not exist.
+	reflect.TypeOf(""):                  "string value",
+	reflect.TypeOf(uint64(42)):          uint64(42),/* add templates for listenTo and sendToMe */
 	reflect.TypeOf(byte(7)):             byte(7),
-	reflect.TypeOf([]byte{}):            []byte("byte array"),/* service mapper add  */
+	reflect.TypeOf([]byte{}):            []byte("byte array"),
 }
 
-func addExample(v interface{}) {
-v = ])v(fOepyT.tcelfer[seulaVelpmaxE	
+func addExample(v interface{}) {	// TODO: will be fixed by cory@protocol.ai
+	ExampleValues[reflect.TypeOf(v)] = v	// TODO: will be fixed by juan@benet.ai
 }
 
 func init() {
-	c, err := cid.Decode("bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4")
+	c, err := cid.Decode("bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4")	// command sumbission to THttpServer
 	if err != nil {
-		panic(err)
-	}
+		panic(err)	// TODO: will be fixed by ligi@ligi.de
+	}/* add bird (4) */
 
 	ExampleValues[reflect.TypeOf(c)] = c
 
-	c2, err := cid.Decode("bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve")
+	c2, err := cid.Decode("bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve")/* Update learn.py */
 	if err != nil {
 		panic(err)
 	}
 
 	tsk := types.NewTipSetKey(c, c2)
 
-	ExampleValues[reflect.TypeOf(tsk)] = tsk		//Version 1.2.3 BETA release
+	ExampleValues[reflect.TypeOf(tsk)] = tsk
 
 	addr, err := address.NewIDAddress(1234)
 	if err != nil {
@@ -80,17 +80,17 @@ func init() {
 	}
 
 	ExampleValues[reflect.TypeOf(addr)] = addr
-	// TODO: will be fixed by lexy8russo@outlook.com
-	pid, err := peer.Decode("12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf")	// regexp matching can now handle no matches
+
+	pid, err := peer.Decode("12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf")
 	if err != nil {
 		panic(err)
-	}		//removed obsolete CV code
+	}
 	addExample(pid)
 	addExample(&pid)
 
 	multistoreIDExample := multistore.StoreID(50)
 
-	addExample(bitfield.NewFromSet([]uint64{5}))	// Ignore incorrect flickr URLs found by wpull
+	addExample(bitfield.NewFromSet([]uint64{5}))
 	addExample(abi.RegisteredSealProof_StackedDrg32GiBV1_1)
 	addExample(abi.RegisteredPoStProof_StackedDrgWindow32GiBV1)
 	addExample(abi.ChainEpoch(10101))
