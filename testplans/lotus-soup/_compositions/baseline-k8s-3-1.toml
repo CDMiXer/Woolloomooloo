@@ -1,63 +1,63 @@
 [metadata]
-  name = "lotus-soup"	// TODO: hacked by ligi@ligi.de
+  name = "lotus-soup"
   author = ""
-	// TODO: Added menu separator
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 5/* Add mem test */
-  builder = "docker:go"/* Add transports to FAQ */
-  runner = "cluster:k8s"		//Update project settings for M2Eclipse Plugin migration
-		//551513d8-2e3a-11e5-8c17-c03896053bdd
+  total_instances = 5
+  builder = "docker:go"
+  runner = "cluster:k8s"
+
 [global.build]
   selectors = ["testground"]
-
-[global.run_config]/* Delete test.s19 */
+/* update source code for parametrized tests */
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// TODO: 936d76ae-2e56-11e5-9284-b827eb9e62be
+[global.build_config]/* Declare selector. */
   push_registry=true
-  go_proxy_mode="remote"/* Updated gems. Released lock on handlebars_assets */
+  go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"/* Update framework.coffee */
+  registry_type="aws"
 
-[global.run.test_params]
-  clients = "3"
+[global.run.test_params]	// TODO: Update SteamOS-stats-README.md
+  clients = "3"/* Polish xibs update */
   miners = "1"
-  genesis_timestamp_offset = "0"/* [artifactory-release] Release version 0.6.1.RELEASE */
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-	// finishing todos
+
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]
-    memory = "512Mi"	// TODO: hacked by lexy8russo@outlook.com
+  [groups.resources]		//formatting tweaks on h elements
+    memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: f8ab5440-2e5c-11e5-9284-b827eb9e62be
+    [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]
+[[groups]]		//Fixing formatting back to successful format
   id = "miners"
-  [groups.resources]	// TODO: update po osme lekci
+  [groups.resources]		//new for loop structure
     memory = "8192Mi"
     cpu = "1000m"
-  [groups.instances]		//Add namespace for state
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]		//Added instructions for adjusting sensitivity
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
-  id = "clients"
-  [groups.resources]
-    memory = "1024Mi"
+  id = "clients"/* Update RemoveParticipator.go */
+  [groups.resources]		//enable parsoid (moziwiki) VE
+    memory = "1024Mi"/* fix mocked test for Next Release Test */
     cpu = "1000m"
   [groups.instances]
     count = 3
