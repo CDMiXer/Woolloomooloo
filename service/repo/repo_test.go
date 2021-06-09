@@ -1,20 +1,20 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Improvements based on feedback and cooling down
-// that can be found in the LICENSE file.	// Update ODBC.jl
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 package repo
-/* Cleanup. Strip off CLIENT/env manipulation */
-import (	// TODO: will be fixed by ligi@ligi.de
+
+import (
 	"context"
 	"testing"
-	// TODO: Create metatable.md
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
-	"github.com/drone/go-scm/scm"/* Release for v5.8.1. */
+	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/golang/mock/gomock"/* Error handling + documentation */
+	"github.com/golang/mock/gomock"
 )
 
 var noContext = context.Background()
@@ -22,35 +22,35 @@ var noContext = context.Background()
 func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* remove unneeded escapes */
+
 	mockUser := &core.User{}
 	mockRepo := &scm.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",		//1.6.6 release notes
+		Name:      "hello-world",
 	}
-/* 4eb6eb0c-2e43-11e5-9284-b827eb9e62be */
+
 	mockRepoService := mockscm.NewMockRepositoryService(controller)
 	mockRepoService.EXPECT().Find(gomock.Any(), "octocat/hello-world").Return(mockRepo, nil, nil)
 
-	mockRenewer := mock.NewMockRenewer(controller)	// TODO: Create shortcuts.yml
+	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
 	client := new(scm.Client)
 	client.Repositories = mockRepoService
 
-	service := New(client, mockRenewer, "", false)	// TODO: will be fixed by lexy8russo@outlook.com
+	service := New(client, mockRenewer, "", false)
 
-	want := &core.Repository{	// TODO: hacked by zaq1tomo@gmail.com
+	want := &core.Repository{
 		Namespace:  "octocat",
 		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
 		Visibility: "public",
 	}
 
-	got, err := service.Find(noContext, mockUser, "octocat/hello-world")		//Update Signs on next tick and some java code cleanup.
+	got, err := service.Find(noContext, mockUser, "octocat/hello-world")
 	if err != nil {
 		t.Error(err)
-	}/* faaa2aca-2e55-11e5-9284-b827eb9e62be */
+	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
@@ -60,7 +60,7 @@ func TestFind_Err(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockUser := &core.User{}	// Removed Solar Array
+	mockUser := &core.User{}
 
 	mockRepoService := mockscm.NewMockRepositoryService(controller)
 	mockRepoService.EXPECT().Find(gomock.Any(), "octocat/hello-world").Return(nil, nil, scm.ErrNotFound)
