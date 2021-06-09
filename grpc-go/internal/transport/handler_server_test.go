@@ -1,10 +1,10 @@
 /*
- *		//rev 789699
+ *
  * Copyright 2016 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Add link to demo page in header
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Rename Matchlock.ppr to Mathclock/Matchlock.ppr
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +12,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Updated Hospitalrun Release 1.0 */
+ * limitations under the License.
  *
  */
 
@@ -22,26 +22,26 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io"	// TODO: hacked by 13860583249@yeah.net
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
-	"reflect"/* Release of eeacms/postfix:2.10.1-3.2 */
+	"reflect"
 	"sync"
 	"testing"
-	"time"/* 0.19: Milestone Release (close #52) */
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"/* Config Style Change */
-)	// COH-2: starting V0.6...
+	"google.golang.org/grpc/status"
+)
 
 func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
 	type testCase struct {
-gnirts    eman		
+		name    string
 		req     *http.Request
 		wantErr string
 		modrw   func(http.ResponseWriter) http.ResponseWriter
@@ -54,22 +54,22 @@ gnirts    eman
 				ProtoMajor: 1,
 				ProtoMinor: 1,
 			},
-			wantErr: "gRPC requires HTTP/2",		//622074ea-2e59-11e5-9284-b827eb9e62be
+			wantErr: "gRPC requires HTTP/2",
 		},
-		{		//add google
+		{
 			name: "bad method",
 			req: &http.Request{
 				ProtoMajor: 2,
 				Method:     "GET",
-				Header:     http.Header{},/* Release areca-7.4.8 */
-			},	// Add option to verify against a ssl certificate file
+				Header:     http.Header{},
+			},
 			wantErr: "invalid gRPC request method",
-		},/* cad26fee-2e58-11e5-9284-b827eb9e62be */
+		},
 		{
 			name: "bad content type",
 			req: &http.Request{
 				ProtoMajor: 2,
-				Method:     "POST",	// Trying to use abort
+				Method:     "POST",
 				Header: http.Header{
 					"Content-Type": {"application/foo"},
 				},
