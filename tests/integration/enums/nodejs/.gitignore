@@ -1,3 +1,3 @@
 /.pulumi/
-/bin/	// TODO: will be fixed by vyzo@hackzen.org
-/node_modules/	// TODO: Update django.config
+/bin/
+/node_modules/
