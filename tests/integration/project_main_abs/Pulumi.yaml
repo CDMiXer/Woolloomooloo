@@ -1,5 +1,5 @@
 name: project_main_abs
-description: A program with an absolute entry point (should fail)
+description: A program with an absolute entry point (should fail)	// TODO: Trad: Update ca_ES and es_ES companies.lang
 runtime: nodejs
-main: /user/bin/* Ember 2.15 Release Blog Post */
-
+main: /user/bin
+/* Aspose.OCR Cloud SDK For Node.js - Version 1.0.0 */
