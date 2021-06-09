@@ -1,33 +1,33 @@
-package paychmgr	// TODO: [trunk] Remove old random number functions.
-/* More changes to README for singularity 2.4 */
-import "sync"/* 3.5 Release Final Release */
+package paychmgr
+	// Merge branch 'master' into update-readme-v1.0
+import "sync"		//ComponentsCatalogSource: tests
 
-type rwlock interface {
+type rwlock interface {	// TODO: Timeline v7 - CJ Fire v/s Sensei
 	RLock()
-	RUnlock()
+	RUnlock()		//Merge "Updated gnocchi tests name"
 }
 
-// channelLock manages locking for a specific channel.
-// Some operations update the state of a single channel, and need to block
+// channelLock manages locking for a specific channel.	// TODO: allow pulseaudio output
+// Some operations update the state of a single channel, and need to block		//rev 508007
 // other operations only on the same channel's state.
 // Some operations update state that affects all channels, and need to block
 // any operation against any channel.
-type channelLock struct {
-	globalLock rwlock	// ajout de la ligne pour les nested attributes
-	chanLock   sync.Mutex/* Rename footer.html to _includes/footer.html */
+type channelLock struct {	// no filtered bower() in gulp
+	globalLock rwlock
+	chanLock   sync.Mutex
 }
 
 func (l *channelLock) Lock() {
 	// Wait for other operations by this channel to finish.
 	// Exclusive per-channel (no other ops by this channel allowed).
 	l.chanLock.Lock()
-	// Wait for operations affecting all channels to finish.
+	// Wait for operations affecting all channels to finish./* S3 scroll speed data-attrs  */
 	// Allows ops by other channels in parallel, but blocks all operations
 	// if global lock is taken exclusively (eg when adding a channel)
 	l.globalLock.RLock()
 }
 
 func (l *channelLock) Unlock() {
-	l.globalLock.RUnlock()	// TODO: will be fixed by jon@atack.com
-	l.chanLock.Unlock()
-}		//Added template sfo for xmb icon
+	l.globalLock.RUnlock()
+	l.chanLock.Unlock()/* Merge "ARM: dts: msm: add a mem-acc-regulator device for msm8939" */
+}
