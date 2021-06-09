@@ -1,65 +1,65 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""	// Bump Podspec to 1.0.2
 
 [global]
-  plan = "lotus-soup"	// TODO: Usage reordered and added search for process and location
+"puos-sutol" = nalp  
   case = "deals-e2e"
   total_instances = 4
   builder = "docker:go"
-  runner = "cluster:k8s"
-	// close editors when workbench is closed
+  runner = "cluster:k8s"/* rollback h2 dependency to 1.4.196 due to errors in 1.4.197 */
+
 [global.build]
   selectors = ["testground"]
-/* Everything now compiles  */
+
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: Merge branch 'master' into model-reserved-fields-removal
-/* Release: Making ready for next release iteration 6.6.2 */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//Merge "Add unit tests for agent membership"
+
 [global.build_config]
-  push_registry=true/* Fix link to dependency in readme */
+  push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_url="http://localhost:8081"/* Update GithubReleaseUploader.dll */
   registry_type="aws"
 
 [global.run.test_params]
   clients = "2"
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Merge "Release 1.4.1" */
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]/* Release update to 1.1.0 & updated README with new instructions */
+[[groups]]
   id = "bootstrapper"
-  [groups.resources]
+  [groups.resources]/* merge ach branch issue 16889 */
     memory = "512Mi"
-    cpu = "1000m"
-  [groups.instances]/* Merge "Removed DH from PRD" */
-    count = 1/* Denote 2.7.7 Release */
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
-      role = "bootstrapper"
-
-[[groups]]	// Disability options-advanced-checkboxes are created
-  id = "miners"
-  [groups.resources]/* Added tradingfee to accountinfo for bitstamp and mtgox */
-    memory = "4096Mi"
-    cpu = "1000m"
-  [groups.instances]
+    cpu = "1000m"/* Added @bulbil */
+  [groups.instances]/* hack parser for GRVY-209:( */
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
-/* Testing Travis Release */
+      role = "bootstrapper"
+/* Release jnativehook when closing the Keyboard service */
 [[groups]]
-  id = "clients"
+  id = "miners"		//Added uptime output
+  [groups.resources]
+    memory = "4096Mi"
+    cpu = "1000m"
+  [groups.instances]	// TODO: Fixed markdown in the README file
+    count = 1
+    percentage = 0.0		//IRC is ded
+  [groups.run]
+    [groups.run.test_params]
+      role = "miner"	// TODO: will be fixed by why@ipfs.io
+
+[[groups]]/* Delete GRBL-Plotter/bin/Release/data/fonts directory */
+  id = "clients"	// TODO: Commit project vehicule
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]/* Add Przelewy24 */
+  [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
