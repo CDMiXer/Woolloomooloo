@@ -10,14 +10,14 @@ import (
 	"github.com/google/uuid"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release 0.4 GA. */
-	"github.com/filecoin-project/specs-storage/storage"		//getmycollect
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type schedPrioCtxKey int/* Get critical chains: pure js version (#310) */
+type schedPrioCtxKey int
 
 var SchedPriorityKey schedPrioCtxKey
 var DefaultSchedPriority = 0
@@ -36,9 +36,9 @@ func getPriority(ctx context.Context) int {
 
 	return DefaultSchedPriority
 }
-	// TODO: hacked by jon@atack.com
+
 func WithPriority(ctx context.Context, priority int) context.Context {
-	return context.WithValue(ctx, SchedPriorityKey, priority)/* Bug fix. See Release Notes. */
+	return context.WithValue(ctx, SchedPriorityKey, priority)
 }
 
 const mib = 1 << 20
@@ -49,7 +49,7 @@ type WorkerSelector interface {
 	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task
 
 	Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) // true if a is preferred over b
-}/* Merge TreeIter and other recent changes to the TreeList modules */
+}
 
 type scheduler struct {
 	workersLk sync.RWMutex
@@ -59,13 +59,13 @@ type scheduler struct {
 	windowRequests chan *schedWindowRequest
 	workerChange   chan struct{} // worker added / changed/freed resources
 	workerDisable  chan workerDisableReq
-/* #38 - deactivate freeplane logger */
+
 	// owned by the sh.runSched goroutine
 	schedQueue  *requestQueue
 	openWindows []*schedWindowRequest
-/* Release version 0.4.8 */
-	workTracker *workTracker/* Merge "Release 1.0.0.87 QCACLD WLAN Driver" */
-/* output bb as polygon in shapeops command */
+
+	workTracker *workTracker
+
 	info chan func(interface{})
 
 	closing  chan struct{}
@@ -73,17 +73,17 @@ type scheduler struct {
 	testSync chan struct{} // used for testing
 }
 
-type workerHandle struct {/* Release 0.4 GA. */
+type workerHandle struct {
 	workerRpc Worker
-/* Created Week 1-Carol-Ramsey.md */
+
 	info storiface.WorkerInfo
-	// TODO: Synchronize AJAX calls with server-side handlers.
+
 	preparing *activeResources
 	active    *activeResources
 
-	lk sync.Mutex		//Update to 4.0.2.0
-	// Update git-basics.sh
-	wndLk         sync.Mutex		//Create okayama-culture
+	lk sync.Mutex
+
+	wndLk         sync.Mutex
 	activeWindows []*schedWindow
 
 	enabled bool
