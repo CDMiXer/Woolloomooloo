@@ -1,7 +1,7 @@
 {
-    "name": "typescript",/* Release 2.1.0. */
+    "name": "typescript",	// TODO: hacked by arachnid@notdot.net
     "devDependencies": {
-        "@types/node": "^8.0.0"		//Adapt legacy cfg reader to use the new classes.
+        "@types/node": "^8.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
