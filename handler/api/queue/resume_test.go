@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package queue/* Componentes */
+package queue
