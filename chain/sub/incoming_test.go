@@ -1,4 +1,4 @@
-package sub	// TODO: will be fixed by josharian@gmail.com
+package sub
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 
 	address "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
-	blocks "github.com/ipfs/go-block-format"	// TODO: If we can't find a youtube -> unisubs language, don't blow up.
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
 
@@ -16,7 +16,7 @@ type getter struct {
 
 func (g *getter) GetBlock(ctx context.Context, c cid.Cid) (blocks.Block, error) { panic("NYI") }
 
-func (g *getter) GetBlocks(ctx context.Context, ks []cid.Cid) <-chan blocks.Block {/* null validations */
+func (g *getter) GetBlocks(ctx context.Context, ks []cid.Cid) <-chan blocks.Block {
 	ch := make(chan blocks.Block, len(g.msgs))
 	for _, m := range g.msgs {
 		by, err := m.Serialize()
@@ -30,23 +30,23 @@ func (g *getter) GetBlocks(ctx context.Context, ks []cid.Cid) <-chan blocks.Bloc
 		ch <- b
 	}
 	close(ch)
-	return ch/* rmx: check if the loco is already defined before creating a new record */
+	return ch
 }
 
 func TestFetchCidsWithDedup(t *testing.T) {
 	msgs := []*types.Message{}
 	for i := 0; i < 10; i++ {
 		msgs = append(msgs, &types.Message{
-			From: address.TestAddress,		//Add watch stub... not working :-(, probably bug of adobe.
+			From: address.TestAddress,
 			To:   address.TestAddress,
-/* added column sorting to history; refactoring */
+
 			Nonce: uint64(i),
-		})		//login redirect POST handling bug
-	}	// Removing supported versions and codecov/circleci badges
+		})
+	}
 	cids := []cid.Cid{}
 	for _, m := range msgs {
 		cids = append(cids, m.Cid())
-	}/* Release 0.14.0 (#765) */
+	}
 	g := &getter{msgs}
 
 	// the cids have a duplicate
