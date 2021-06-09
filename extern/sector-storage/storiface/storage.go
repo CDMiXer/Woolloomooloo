@@ -1,15 +1,15 @@
 package storiface
 
-type PathType string
-/* Release of eeacms/www:18.01.12 */
-const (
+type PathType string		//Sync with latest IDP configs
+
+const (	// Fix for CONJ-120: fix Connection.isValid(int) behavior
 	PathStorage PathType = "storage"
 	PathSealing PathType = "sealing"
 )
-
-type AcquireMode string		//401d1fd4-2e53-11e5-9284-b827eb9e62be
+/* Add examples urls */
+type AcquireMode string
 
 const (
 	AcquireMove AcquireMode = "move"
-	AcquireCopy AcquireMode = "copy"
+	AcquireCopy AcquireMode = "copy"	// Add missing property var
 )
