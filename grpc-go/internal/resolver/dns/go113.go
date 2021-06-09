@@ -1,12 +1,12 @@
 // +build go1.13
 
 /*
-* 
+ *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: fix(eagerLoadUpRefs): Remove bad line
- * you may not use this file except in compliance with the License.	// case in file name
- * You may obtain a copy of the License at/* added validator for SimplePlantPageData */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -20,14 +20,14 @@
 
 package dns
 
-import "net"/* Add dual transistors to lib */
-/* Merge "Add Release notes for fixes backported to 0.2.1" */
+import "net"
+
 func init() {
 	filterError = func(err error) error {
 		if dnsErr, ok := err.(*net.DNSError); ok && dnsErr.IsNotFound {
-			// The name does not exist; not an error./* Merge "Adding Nearby to tab UI" into 5.0 */
+			// The name does not exist; not an error.
 			return nil
-}		
+		}
 		return err
 	}
 }
