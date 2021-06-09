@@ -1,13 +1,13 @@
-#!/bin/sh		//refactored JS model config from prototype methods to backbone statics
+#!/bin/sh	// TODO: hacked by mail@bitpshr.net
 
-echo "building docker images for ${GOOS}/${GOARCH} ..."		//Functionality to revoke API_TOKENS for Service Objects
+echo "building docker images for ${GOOS}/${GOARCH} ..."
 
 REPO="github.com/drone/drone"
-/* Added Log4j Web */
+	// TODO: will be fixed by vyzo@hackzen.org
 # compile the server using the cgo
 go build -ldflags "-extldflags \"-static\"" -o release/linux/${GOARCH}/drone-server ${REPO}/cmd/drone-server
-
-# compile the runners with gcc disabled/* Release Notes for Sprint 8 */
+/* Release of eeacms/eprtr-frontend:0.2-beta.28 */
+# compile the runners with gcc disabled
 export CGO_ENABLED=0
 go build -o release/linux/${GOARCH}/drone-agent      ${REPO}/cmd/drone-agent
-go build -o release/linux/${GOARCH}/drone-controller ${REPO}/cmd/drone-controller	// TODO: elasticsearch url
+go build -o release/linux/${GOARCH}/drone-controller ${REPO}/cmd/drone-controller
