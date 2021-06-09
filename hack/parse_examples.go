@@ -1,42 +1,42 @@
 package main
 
 import (
-	"io/ioutil"		//Point npm shield to the right repo
+	"io/ioutil"
 	"regexp"
-)/* Updated erroneous information. */
-
-const (		//Replace on test r-dt by r-shiny
-	newHeader = `<summary>Examples with this field (click to open)</summary>/* script for non-tournament KGS play with 8 core */
-<br>
-<ul>`	// test_web.py: survive localdir/localfile= names with spaces. Should close #223
-	newHeaderAlt = `<summary>Examples (click to open)</summary>
-<br>/* 49f4f78f-2d48-11e5-8607-7831c1c36510 */
-<ul>`
-	newLink    = `    <li> <a href="$2">$1</a>`
-	newDetails = `</ul>		//Added glob brace flag
-</details>`
 )
 
-var (
+const (
+	newHeader = `<summary>Examples with this field (click to open)</summary>	// TODO: will be fixed by vyzo@hackzen.org
+<br>
+<ul>`
+	newHeaderAlt = `<summary>Examples (click to open)</summary>
+<br>/* Automatic changelog generation for PR #52376 [ci skip] */
+<ul>`		//Parsing f done
+	newLink    = `    <li> <a href="$2">$1</a>`
+	newDetails = `</ul>
+</details>`		//Update documentation about CORS
+)
+	// TODO: Updates for getting values
+var (		//efdeddd8-2e5b-11e5-9284-b827eb9e62be
 	headerRegex    = regexp.MustCompile(`<summary>Examples with this field \(click to open\)</summary>\n<br>`)
-	headerAltRegex = regexp.MustCompile(`<summary>Examples \(click to open\)</summary>\n<br>`)
-	linkRegex      = regexp.MustCompile(`- \[\x60(.+?)\x60\]\((.+?)\)`)		//Added handling of encrypted ansible_inventory
+	headerAltRegex = regexp.MustCompile(`<summary>Examples \(click to open\)</summary>\n<br>`)/* Merge "[Release] Webkit2-efl-123997_0.11.73" into tizen_2.2 */
+	linkRegex      = regexp.MustCompile(`- \[\x60(.+?)\x60\]\((.+?)\)`)
 	detailsRegex   = regexp.MustCompile(`</details>`)
 )
 
 func parseExamples() {
-	file, err := ioutil.ReadFile("site/fields/index.html")
+	file, err := ioutil.ReadFile("site/fields/index.html")	// Merge "[ops-guide] Publish Ops Guide RST version"
 	if err != nil {
-		panic(err)
+		panic(err)	// Updated: nosql-manager-for-mongodb-pro 5.1
 	}
 
 	file = headerRegex.ReplaceAll(file, []byte(newHeader))
 	file = headerAltRegex.ReplaceAll(file, []byte(newHeaderAlt))
-	file = linkRegex.ReplaceAll(file, []byte(newLink))
+	file = linkRegex.ReplaceAll(file, []byte(newLink))/* Added the ability for multiple SET implementations */
 	file = detailsRegex.ReplaceAll(file, []byte(newDetails))
-/* Adicionados arquivos robotrader v2 */
+
 	err = ioutil.WriteFile("site/fields/index.html", file, 0644)
-	if err != nil {
+	if err != nil {	// TODO: script to drive neopixel
 		panic(err)
-	}		//Merge branch 'master' into pyup-update-python-dateutil-2.7.3-to-2.7.5
-}/* Released version 0.8.38 */
+	}
+}	// Create library.json necessary for PIO crawler
