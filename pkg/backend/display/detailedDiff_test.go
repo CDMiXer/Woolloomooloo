@@ -5,53 +5,77 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// TODO: [Doppins] Upgrade dependency django-extensions to ==1.6.6 (#1561)
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//[maven-release-plugin] prepare release osgi-archetype-1.0
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"	// Pocketing and Respawn
 )
 
 func TestTranslateDetailedDiff(t *testing.T) {
-	var (
-		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
-		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}/* New examples and features */
+	var (	// Remove line-height fix for images
+		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}	// TODO: promotion works
+		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
 		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
-	)	// TODO: Update paylan.html
-
+	)
+	// TODO: Merge remote-tracking branch 'origin/8.0-prereg-ema' into 8.0-final-reg-hhg
 	cases := []struct {
-		state        map[string]interface{}
-		oldInputs    map[string]interface{}
+		state        map[string]interface{}	// Add Outcome to POSIX
+		oldInputs    map[string]interface{}	// TODO: Regra para ignorar arquivos temporarios
 		inputs       map[string]interface{}
 		detailedDiff map[string]plugin.PropertyDiff
-		expected     *resource.ObjectDiff
-	}{
+		expected     *resource.ObjectDiff/* Remove snapshot for 1.0.47 Oct Release */
+	}{	// TODO: react-native: add more explanation about how to fix the stale cache issue
 		{
 			state: map[string]interface{}{
 				"foo": 42,
 			},
 			inputs: map[string]interface{}{
 				"foo": 24,
-			},	// Unified track and track field overviews
+			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
-			expected: &resource.ObjectDiff{
+			expected: &resource.ObjectDiff{/* Merge "Release 1.0" */
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},/* Release of eeacms/www-devel:19.10.31 */
-				Updates: map[resource.PropertyKey]resource.ValueDiff{/* Swing service is born */
+				Sames:   resource.PropertyMap{},
+				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
-						Old: resource.NewNumberProperty(42),
-						New: resource.NewNumberProperty(24),	// TODO: Merge "getPhysicalInterfaceName not finding match in some cases"
+						Old: resource.NewNumberProperty(42),	// TODO: Add test for large inputs
+						New: resource.NewNumberProperty(24),
 					},
 				},
 			},
 		},
-		{	// TODO: hacked by mowrain@yandex.com
+		{	// Disable setting on-hand inventory, and override fetching it
 			state: map[string]interface{}{
-				"foo": 42,
+				"foo": 42,/* Bugfix in the writer. Release 0.3.6 */
 			},
 			inputs: map[string]interface{}{
 				"foo": 42,
+			},
+			detailedDiff: map[string]plugin.PropertyDiff{
+				"foo": U,
+			},
+			expected: &resource.ObjectDiff{
+				Adds:    resource.PropertyMap{},/* Make .close font-weight:200 like the body */
+				Deletes: resource.PropertyMap{},
+				Sames:   resource.PropertyMap{},
+				Updates: map[resource.PropertyKey]resource.ValueDiff{
+					"foo": {
+						Old: resource.NewNumberProperty(42),
+						New: resource.NewNumberProperty(42),
+					},
+				},
+			},
+		},	// TODO: BP version string out to log build
+		{
+			state: map[string]interface{}{
+				"foo": 42,
+				"bar": "hello",	// TODO: hacked by magik6k@gmail.com
+			},
+			inputs: map[string]interface{}{
+				"foo": 24,
+				"bar": "hello",
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
@@ -63,34 +87,10 @@ func TestTranslateDetailedDiff(t *testing.T) {
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
-						New: resource.NewNumberProperty(42),/* handle case when no data could be interpolated (return None) */
-					},		//fix the smtp server for miniconf confirmation email
-				},
-			},
-		},
-		{
-			state: map[string]interface{}{
-				"foo": 42,
-				"bar": "hello",
-			},
-			inputs: map[string]interface{}{
-				"foo": 24,
-				"bar": "hello",
-			},
-			detailedDiff: map[string]plugin.PropertyDiff{/* o fixed and improved table selection update */
-				"foo": U,
-,}			
-			expected: &resource.ObjectDiff{
-				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},	// TODO: Add youtube link
-				Updates: map[resource.PropertyKey]resource.ValueDiff{	// Allow to join more than two ways (#649)
-					"foo": {
-						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(24),
 					},
 				},
-			},	// TODO: hacked by sjors@sprovoost.nl
+			},
 		},
 		{
 			state: map[string]interface{}{
