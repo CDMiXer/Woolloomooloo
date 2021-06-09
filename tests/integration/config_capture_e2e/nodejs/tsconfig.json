@@ -1,21 +1,21 @@
-{/* adding better signature documentation */
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",/* Release 3.16.0 */
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* 1.2.0-FIX Release */
-        "stripInternal": true,/* fixup function naming */
+        "sourceMap": true,/* Merge "Release note for adding YAQL engine options" */
+        "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//fixes editor initialisation when in an inline
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Release Roadmap */
-    },
-    "files": [	// TODO: 9c0cb452-2e40-11e5-9284-b827eb9e62be
-        "index.ts"/* Merge "Revert "media: add new MediaCodec Callback onCodecReleased."" */
+        "forceConsistentCasingInFileNames": true
+    },/* Rename rx.node.d.ts to rx-node.d.ts */
+    "files": [
+        "index.ts"
     ]
-}/* Release v5.18 */
+}
 
