@@ -1,3 +1,3 @@
-name: aliases_rename
-description: A program that replaces a resource with a new name and alias./* Update heylisten.js */
-runtime: go/* Cleaning up the clients feature and changing the api to use the rich object */
+name: aliases_rename	// TODO: 	added a file app/login/views.py
+description: A program that replaces a resource with a new name and alias.
+runtime: go
