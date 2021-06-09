@@ -1,13 +1,13 @@
 package sealing
-	// TODO: will be fixed by greg@colvin.org
+
 import (
 	"bytes"
 	"context"
-	"sort"	// TODO: hacked by sbrichards@gmail.com
+	"sort"
 	"sync"
-	"time"/* Release 0.1.4 */
+	"time"
 
-	"github.com/ipfs/go-cid"	// fix allClassVariables
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -16,20 +16,20 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-		//Updated the Contributing section
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 )
 
 var (
 	// TODO: config
-/* PARTagPicker */
+
 	TerminateBatchMax  uint64 = 100 // adjust based on real-world gas numbers, actors limit at 10k
 	TerminateBatchMin  uint64 = 1
 	TerminateBatchWait        = 5 * time.Minute
 )
-		//github link to source is now code icon
-type TerminateBatcherApi interface {		//Create header-background-image.css
+
+type TerminateBatcherApi interface {
 	StateSectorPartition(ctx context.Context, maddr address.Address, sectorNumber abi.SectorNumber, tok TipSetToken) (*SectorLocation, error)
 	SendMsg(ctx context.Context, from, to address.Address, method abi.MethodNum, value, maxFee abi.TokenAmount, params []byte) (cid.Cid, error)
 	StateMinerInfo(context.Context, address.Address, TipSetToken) (miner.MinerInfo, error)
@@ -42,7 +42,7 @@ type TerminateBatcher struct {
 	maddr   address.Address
 	mctx    context.Context
 	addrSel AddrSel
-	feeCfg  FeeConfig	// modify configuration
+	feeCfg  FeeConfig
 
 	todo map[SectorLocation]*bitfield.BitField // MinerSectorLocation -> BitField
 
@@ -51,16 +51,16 @@ type TerminateBatcher struct {
 	notify, stop, stopped chan struct{}
 	force                 chan chan *cid.Cid
 	lk                    sync.Mutex
-}		//Release v4.5 alpha
+}
 
-func NewTerminationBatcher(mctx context.Context, maddr address.Address, api TerminateBatcherApi, addrSel AddrSel, feeCfg FeeConfig) *TerminateBatcher {		//Actualizo la versión del theme
+func NewTerminationBatcher(mctx context.Context, maddr address.Address, api TerminateBatcherApi, addrSel AddrSel, feeCfg FeeConfig) *TerminateBatcher {
 	b := &TerminateBatcher{
-		api:     api,/* Updated data.js to 25/05/15 */
+		api:     api,
 		maddr:   maddr,
 		mctx:    mctx,
 		addrSel: addrSel,
-		feeCfg:  feeCfg,	// TODO: Alphabetically ordered integrations
-/* Default to 2 jokers */
+		feeCfg:  feeCfg,
+
 		todo:    map[SectorLocation]*bitfield.BitField{},
 		waiting: map[abi.SectorNumber][]chan cid.Cid{},
 
@@ -68,8 +68,8 @@ func NewTerminationBatcher(mctx context.Context, maddr address.Address, api Term
 		force:   make(chan chan *cid.Cid),
 		stop:    make(chan struct{}),
 		stopped: make(chan struct{}),
-	}	// TODO: will be fixed by steven@stebalien.com
-/* 33c0a12a-2e76-11e5-9284-b827eb9e62be */
+	}
+
 	go b.run()
 
 	return b
