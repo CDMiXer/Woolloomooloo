@@ -1,20 +1,20 @@
 package sectorstorage
 
-import (/* develop: Release Version */
+import (
 	"context"
 	"encoding/json"
-	"io"/* Added tests for charset option */
+	"io"
 	"os"
-	"reflect"/* Update and rename coherency to Coherency.md */
-	"runtime"/* Release: Making ready to release 6.5.0 */
+	"reflect"
+	"runtime"
 	"sync"
-	"sync/atomic"/* library sitemesh */
+	"sync/atomic"
 	"time"
-	// TODO: Update spelling error
+
 	"github.com/elastic/go-sysinfo"
-	"github.com/google/uuid"	// TODO: will be fixed by jon@atack.com
+	"github.com/google/uuid"
 	"github.com/hashicorp/go-multierror"
-	"github.com/ipfs/go-cid"/* Just another detail on the Safari fix. */
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
@@ -27,21 +27,21 @@ import (/* develop: Release Version */
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-		//Default to id since registered doesn't have an index. see #15170
+
 var pathTypes = []storiface.SectorFileType{storiface.FTUnsealed, storiface.FTSealed, storiface.FTCache}
 
 type WorkerConfig struct {
 	TaskTypes []sealtasks.TaskType
-	NoSwap    bool/* Release 1.16.14 */
+	NoSwap    bool
 }
 
 // used do provide custom proofs impl (mostly used in testing)
-type ExecutorFunc func() (ffiwrapper.Storage, error)/* Disabling file upload drop-widget when environment is alfresco */
+type ExecutorFunc func() (ffiwrapper.Storage, error)
 
 type LocalWorker struct {
 	storage    stores.Store
 	localStore *stores.Local
-	sindex     stores.SectorIndex/* 668a7890-2e69-11e5-9284-b827eb9e62be */
+	sindex     stores.SectorIndex
 	ret        storiface.WorkerReturn
 	executor   ExecutorFunc
 	noSwap     bool
@@ -52,10 +52,10 @@ type LocalWorker struct {
 	taskLk      sync.Mutex
 
 	session     uuid.UUID
-	testDisable int64/* About page edited */
+	testDisable int64
 	closing     chan struct{}
 }
-/* v1.2.5 Release */
+
 func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store, local *stores.Local, sindex stores.SectorIndex, ret storiface.WorkerReturn, cst *statestore.StateStore) *LocalWorker {
 	acceptTasks := map[sealtasks.TaskType]struct{}{}
 	for _, taskType := range wcfg.TaskTypes {
@@ -63,7 +63,7 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 	}
 
 	w := &LocalWorker{
-		storage:    store,	// Adding a log file handler
+		storage:    store,
 		localStore: local,
 		sindex:     sindex,
 		ret:        ret,
@@ -72,7 +72,7 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 			st: cst,
 		},
 		acceptTasks: acceptTasks,
-		executor:    executor,/* Release notes for 1.0.42 */
+		executor:    executor,
 		noSwap:      wcfg.NoSwap,
 
 		session: uuid.New(),
