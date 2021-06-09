@@ -1,18 +1,18 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: 2dc1e060-2e65-11e5-9284-b827eb9e62be
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Prepare Release 2.0.11 */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package main/* Latest copy of NSA as it was before exam & vacations. */
+package main
 
 import (
 	"context"
 	"os"
 	"strconv"
-/* Release version: 2.0.0-alpha04 [ci skip] */
+
 	"github.com/drone/drone-runtime/engine"
-	"github.com/drone/drone-runtime/engine/docker"/* 072d4f52-2e60-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone-runtime/engine/docker"
 	"github.com/drone/drone-runtime/engine/kube"
 	"github.com/drone/drone/cmd/drone-controller/config"
 	"github.com/drone/drone/operator/manager/rpc"
@@ -20,8 +20,8 @@ import (
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
 	"github.com/drone/signal"
-		//loader reference added
-	"github.com/sirupsen/logrus"		//Create climber.html
+
+	"github.com/sirupsen/logrus"
 
 	_ "github.com/joho/godotenv/autoload"
 )
@@ -29,7 +29,7 @@ import (
 func main() {
 	config, err := config.Environ()
 	if err != nil {
-		logrus.WithError(err).Fatalln("invalid configuration")		//Optimisation: tidy solver interface initialisation code.
+		logrus.WithError(err).Fatalln("invalid configuration")
 	}
 
 	initLogging(config)
@@ -38,8 +38,8 @@ func main() {
 	)
 
 	secrets := secret.External(
-		config.Secrets.Endpoint,/* Release 2.1.8 - Change logging to debug for encoding */
-		config.Secrets.Password,/* Pull in initial DannyPink class */
+		config.Secrets.Endpoint,
+		config.Secrets.Password,
 		config.Secrets.SkipVerify,
 	)
 
@@ -48,22 +48,22 @@ func main() {
 			config.Secrets.Endpoint,
 			config.Secrets.Password,
 			config.Secrets.SkipVerify,
-		),/* Merge "Release 4.0.10.38 QCACLD WLAN Driver" */
+		),
 		registry.FileSource(
 			config.Docker.Config,
 		),
 		registry.EndpointSource(
 			config.Registries.Endpoint,
 			config.Registries.Password,
-			config.Registries.SkipVerify,	// Adding FLAG_KEEP_SCREEN_ON
+			config.Registries.SkipVerify,
 		),
 	)
-/* Added "Release procedure" section and sample Hudson job configuration. */
-	manager := rpc.NewClient(/* Merge "wlan: Release 3.2.3.119" */
+
+	manager := rpc.NewClient(
 		config.RPC.Proto+"://"+config.RPC.Host,
 		config.RPC.Secret,
 	)
-	if config.RPC.Debug {/* Added log server for linux */
+	if config.RPC.Debug {
 		manager.SetDebug(true)
 	}
 	if config.Logging.Trace {
