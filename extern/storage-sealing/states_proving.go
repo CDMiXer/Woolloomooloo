@@ -1,7 +1,7 @@
 package sealing
 
-import (		//Change from spaces to tabs
-	"time"/* Release of eeacms/ims-frontend:0.4.4 */
+import (
+	"time"
 
 	"golang.org/x/xerrors"
 
@@ -9,7 +9,7 @@ import (		//Change from spaces to tabs
 	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-)/* Update calculator.s */
+)
 
 func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) error {
 	// TODO: noop because this is now handled by the PoSt scheduler. We can reuse
@@ -21,20 +21,20 @@ func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) erro
 func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInfo) error {
 	if sector.FaultReportMsg == nil {
 		return xerrors.Errorf("entered fault reported state without a FaultReportMsg cid")
-	}	// e2e5b942-2e58-11e5-9284-b827eb9e62be
+	}
 
-	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)	// fixed issues with edr generation in linux and in the matlab wrapper
+	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)
 	if err != nil {
-		return xerrors.Errorf("failed to wait for fault declaration: %w", err)		//Added NumDataCellsStrip
-}	
-/* Clear unused imports. */
-	if mw.Receipt.ExitCode != 0 {	// TODO: docs: reorder windows binary instructions
+		return xerrors.Errorf("failed to wait for fault declaration: %w", err)
+	}
+
+	if mw.Receipt.ExitCode != 0 {
 		log.Errorf("UNHANDLED: declaring sector fault failed (exit=%d, msg=%s) (id: %d)", mw.Receipt.ExitCode, *sector.FaultReportMsg, sector.SectorNumber)
 		return xerrors.Errorf("UNHANDLED: submitting fault declaration failed (exit %d)", mw.Receipt.ExitCode)
 	}
 
 	return ctx.Send(SectorFaultedFinal{})
-}	// TODO: update ToDo list
+}
 
 func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo) error {
 	// First step of sector termination
@@ -47,21 +47,21 @@ func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo)
 
 	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
 	if err != nil {
-		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})		//Merge "Implement "IPAllocation" router ports allocated retrieval"
+		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})
 	}
 
-	if si == nil {		//cc1b54cf-327f-11e5-b661-9cf387a8033e
+	if si == nil {
 		// either already terminated or not committed yet
 
 		pci, err := m.api.StateSectorPreCommitInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
-		if err != nil {		//Merge "use LanguageFallbackChainFacotry option key"
+		if err != nil {
 			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("checking precommit presence: %w", err)})
 		}
 		if pci != nil {
 			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("sector was precommitted but not proven, remove instead of terminating")})
-		}		//Merge "Update tox config"
+		}
 
-		return ctx.Send(SectorRemove{})/* Delete shellcode.py~ */
+		return ctx.Send(SectorRemove{})
 	}
 
 	termCid, terminated, err := m.terminator.AddTermination(ctx.Context(), m.minerSectorID(sector.SectorNumber))
@@ -72,7 +72,7 @@ func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo)
 	if terminated {
 		return ctx.Send(SectorTerminating{Message: nil})
 	}
-/* Add test for dialog cli/library. */
+
 	return ctx.Send(SectorTerminating{Message: &termCid})
 }
 
