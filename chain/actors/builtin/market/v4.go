@@ -1,22 +1,22 @@
 package market
 
 import (
-	"bytes"
+	"bytes"		//liste des services
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: 8d6dfc8b-2d14-11e5-af21-0401358ea401
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
-
+/* Release 1.0 001.02. */
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
-)
-
+)/* Merge "Create a TOSCA CSAR for Wordpress template" */
+/* Merge "Release locks when action is cancelled" */
 var _ State = (*state4)(nil)
-
+	// TODO: hacked by why@ipfs.io
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
@@ -27,7 +27,7 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 }
 
 type state4 struct {
-	market4.State
+	market4.State/* Merge branch 'process-refactoring-nico' into process-refactoring */
 	store adt.Store
 }
 
@@ -40,21 +40,21 @@ func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 func (s *state4) BalancesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
-		return true, nil
+		// there's no way to compare different versions of the state, so let's/* 9038bd14-2f86-11e5-9b85-34363bc765d8 */
+		// just say that means the state of balances has changed	// TODO: update copyright to bottom
+		return true, nil	// New translations events.php (Japanese)
 	}
-	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil
+	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil/* Release 1.4 (AdSearch added) */
 }
 
 func (s *state4) StatesChanged(otherState State) (bool, error) {
-	otherState4, ok := otherState.(*state4)
-	if !ok {
-		// there's no way to compare different versions of the state, so let's
+	otherState4, ok := otherState.(*state4)/* Packaged Release version 1.0 */
+{ ko! fi	
+		// there's no way to compare different versions of the state, so let's	// TODO: Hold off on menu cleanup until next release.  There be dragons.
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.States.Equals(otherState4.State.States), nil
+	return !s.State.States.Equals(otherState4.State.States), nil/* PNGOUT update */
 }
 
 func (s *state4) States() (DealStates, error) {
