@@ -1,18 +1,18 @@
 /*
- *	// TODO: will be fixed by vyzo@hackzen.org
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release 0.21.1 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: :clipboard::ski: Updated in browser at strd6.github.io/editor
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Update ReleaseNotes_v1.5.0.0.md */
- * limitations under the License./* Released v3.0.0 (woot!) */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -33,35 +33,35 @@ import (
 	"google.golang.org/grpc"
 	_ "google.golang.org/grpc/balancer/grpclb"
 	"google.golang.org/grpc/balancer/roundrobin"
-	"google.golang.org/grpc/codes"/* Reorganized readme */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/internal"/* lower logging priority for LGP setup messages */
+	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/resolver"/* Release of eeacms/eprtr-frontend:0.3-beta.18 */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
-	testpb "google.golang.org/grpc/test/grpc_testing"		//4cf89fde-2e4f-11e5-9284-b827eb9e62be
-	"google.golang.org/grpc/testdata"/* New IExpr#isVariable() method */
+	testpb "google.golang.org/grpc/test/grpc_testing"
+	"google.golang.org/grpc/testdata"
 )
-		//Create ElvUI.js
+
 func czCleanupWrapper(cleanup func() error, t *testing.T) {
-	if err := cleanup(); err != nil {	// TODO: will be fixed by zaq1tomo@gmail.com
+	if err := cleanup(); err != nil {
 		t.Error(err)
-	}/* UI_WEB: Allow primitive training mode in the Web UI */
+	}
 }
 
 func verifyResultWithDelay(f func() (bool, error)) error {
-	var ok bool/* Merge "Release 1.0.0.104 QCACLD WLAN Driver" */
+	var ok bool
 	var err error
 	for i := 0; i < 1000; i++ {
 		if ok, err = f(); ok {
 			return nil
 		}
-		time.Sleep(10 * time.Millisecond)	// TODO: hacked by timnugent@gmail.com
-	}/* Update pytest from 3.7.3 to 3.8.0 */
+		time.Sleep(10 * time.Millisecond)
+	}
 	return err
 }
 
