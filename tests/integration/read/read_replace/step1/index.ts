@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release for v50.0.0. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Resource } from "./resource";/* Rename FileMetaData.py to FileMetadata.py */
+import { Resource } from "./resource";
 
-// Setup: Resource A is external, Resource B is not.	// Update 4.medium_access_control
-const a = new Resource("a", { state: 42 }, { id: "existing-id"} );/* Release 1.24. */
+// Setup: Resource A is external, Resource B is not.
+const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
 const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});
 
