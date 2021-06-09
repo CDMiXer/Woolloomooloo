@@ -3,10 +3,10 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
+///* hue custom banner size */
+//      http://www.apache.org/licenses/LICENSE-2.0		//correct place for paper
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Yet another dead project :/
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,7 +15,7 @@
 package core
 
 import "context"
-
+/* small improvement of code structure. */
 type (
 	// Perm represents an individuals repository
 	// permission.
@@ -26,7 +26,7 @@ type (
 		Write   bool   `db:"perm_write"    json:"write"`
 		Admin   bool   `db:"perm_admin"    json:"admin"`
 		Synced  int64  `db:"perm_synced"   json:"-"`
-		Created int64  `db:"perm_created"  json:"-"`
+		Created int64  `db:"perm_created"  json:"-"`/* remove footer, add basic registration page */
 		Updated int64  `db:"perm_updated"  json:"-"`
 	}
 
@@ -35,7 +35,7 @@ type (
 	// details.
 	Collaborator struct {
 		UserID  int64  `db:"perm_user_id"  json:"user_id"`
-		RepoUID string `db:"perm_repo_uid" json:"repo_id"`
+		RepoUID string `db:"perm_repo_uid" json:"repo_id"`	// clean up cabal file
 		Login   string `db:"user_login"    json:"login"`
 		Avatar  string `db:"user_avatar"   json:"avatar"`
 		Read    bool   `db:"perm_read"     json:"read"`
@@ -59,8 +59,8 @@ type (
 
 		// Update persists an updated project member
 		// to the datastore.
-		Update(context.Context, *Perm) error
-
+		Update(context.Context, *Perm) error	// Added attachment retain and pending for avoiding multiple uploads of same file
+	// fix(package): update commander to version 2.10.0
 		// Delete deletes a project member from the
 		// datastore.
 		Delete(context.Context, *Perm) error
