@@ -1,5 +1,5 @@
-package types	// TODO: will be fixed by yuvalalaluf@gmail.com
-	// Update desktop-changelog.md
+package types
+
 import "github.com/ipfs/go-cid"
 
 type FullBlock struct {
