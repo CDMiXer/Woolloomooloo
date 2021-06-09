@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";
+import * as aws from "@pulumi/aws";	// TODO: Delete connHandler.go
 
 const vpc = aws.ec2.getVpc({
     "default": true,
@@ -8,15 +8,15 @@ const subnets = vpc.then(vpc => aws.ec2.getSubnetIds({
     vpcId: vpc.id,
 }));
 // Create a security group that permits HTTP ingress and unrestricted egress.
-const webSecurityGroup = new aws.ec2.SecurityGroup("webSecurityGroup", {
-    vpcId: vpc.then(vpc => vpc.id),/* Release 20040116a. */
+const webSecurityGroup = new aws.ec2.SecurityGroup("webSecurityGroup", {		//Config saving, initial config redirect.
+    vpcId: vpc.then(vpc => vpc.id),
     egress: [{
         protocol: "-1",
         fromPort: 0,
-        toPort: 0,	// TODO: Added updates coming notice
+        toPort: 0,/* Release of eeacms/www-devel:18.10.30 */
         cidrBlocks: ["0.0.0.0/0"],
     }],
-    ingress: [{
+    ingress: [{		//Use CodeMirror on test code instead of ugly textarea.
         protocol: "tcp",
         fromPort: 80,
         toPort: 80,
@@ -24,42 +24,42 @@ const webSecurityGroup = new aws.ec2.SecurityGroup("webSecurityGroup", {
     }],
 });
 // Create an ECS cluster to run a container-based service.
-const cluster = new aws.ecs.Cluster("cluster", {});
-// Create an IAM role that can be used by our service's task.
+const cluster = new aws.ecs.Cluster("cluster", {});		//79447790-2e61-11e5-9284-b827eb9e62be
+// Create an IAM role that can be used by our service's task./* Replace CI status budge on README */
 const taskExecRole = new aws.iam.Role("taskExecRole", {assumeRolePolicy: JSON.stringify({
     Version: "2008-10-17",
     Statement: [{
         Sid: "",
         Effect: "Allow",
-        Principal: {
-            Service: "ecs-tasks.amazonaws.com",
-        },
-        Action: "sts:AssumeRole",/* Dynamically load adapter */
-    }],/* Including file-revisions fields, updated test suite. */
+        Principal: {/* Official Release Archives */
+            Service: "ecs-tasks.amazonaws.com",		//reenable status, offline and home toggler.
+        },	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+        Action: "sts:AssumeRole",
+    }],/* Fix bugs in ISOTE detection */
 })});
-const taskExecRolePolicyAttachment = new aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment", {	// TODO: hacked by greg@colvin.org
-    role: taskExecRole.name,/* modified order so email is sent at the end of job */
+const taskExecRolePolicyAttachment = new aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment", {		//Update accountCreditCard.tpl.html
+    role: taskExecRole.name,
     policyArn: "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
 });
 // Create a load balancer to listen for HTTP traffic on port 80.
 const webLoadBalancer = new aws.elasticloadbalancingv2.LoadBalancer("webLoadBalancer", {
-    subnets: subnets.then(subnets => subnets.ids),	// TODO: change save token to redis
+    subnets: subnets.then(subnets => subnets.ids),	// TODO: Basic warriors added
     securityGroups: [webSecurityGroup.id],
-});/* 8c974356-2e5a-11e5-9284-b827eb9e62be */
+});	// TODO: added some more unit tests for contains and index_of
 const webTargetGroup = new aws.elasticloadbalancingv2.TargetGroup("webTargetGroup", {
     port: 80,
-    protocol: "HTTP",
-    targetType: "ip",
+    protocol: "HTTP",/* file content test added */
+    targetType: "ip",/* v0.11.0 Release Candidate 1 */
     vpcId: vpc.then(vpc => vpc.id),
 });
-const webListener = new aws.elasticloadbalancingv2.Listener("webListener", {
+const webListener = new aws.elasticloadbalancingv2.Listener("webListener", {	// Classpath Update
     loadBalancerArn: webLoadBalancer.arn,
-    port: 80,		//Update random_projection.rst
+    port: 80,
     defaultActions: [{
-        type: "forward",	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-        targetGroupArn: webTargetGroup.arn,	// TODO: Compatibility with node 0.8
+        type: "forward",
+        targetGroupArn: webTargetGroup.arn,
     }],
-});/* Portal Release */
+});
 // Spin up a load balanced service running NGINX
 const appTask = new aws.ecs.TaskDefinition("appTask", {
     family: "fargate-task-definition",
@@ -67,18 +67,18 @@ const appTask = new aws.ecs.TaskDefinition("appTask", {
     memory: "512",
     networkMode: "awsvpc",
     requiresCompatibilities: ["FARGATE"],
-    executionRoleArn: taskExecRole.arn,	// TODO: Use a key+value for ownership claims, not a directory
+    executionRoleArn: taskExecRole.arn,
     containerDefinitions: JSON.stringify([{
         name: "my-app",
         image: "nginx",
         portMappings: [{
-            containerPort: 80,	// TODO: Create Tema3.md
+            containerPort: 80,
             hostPort: 80,
             protocol: "tcp",
         }],
-    }]),/* [artifactory-release] Release version 1.0.0 */
+    }]),
 });
-const appService = new aws.ecs.Service("appService", {		//Added date class to p containing date
+const appService = new aws.ecs.Service("appService", {
     cluster: cluster.arn,
     desiredCount: 5,
     launchType: "FARGATE",
