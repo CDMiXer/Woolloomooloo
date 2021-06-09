@@ -3,29 +3,29 @@ package sectorstorage
 import (
 	"fmt"
 	"testing"
-
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-)
+	// [FIX] point_of_sale: removed console.log
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// Update mod select feature
+)	// TODO: Create ParsePersonalDetailsService.java
 
 func TestRequestQueue(t *testing.T) {
-	rq := &requestQueue{}/* Fixed the config parameter passing through the components. */
-
+	rq := &requestQueue{}
+		//Cosmetics and font adjustments
 	rq.Push(&workerRequest{taskType: sealtasks.TTAddPiece})
 	rq.Push(&workerRequest{taskType: sealtasks.TTPreCommit1})
 	rq.Push(&workerRequest{taskType: sealtasks.TTPreCommit2})
 	rq.Push(&workerRequest{taskType: sealtasks.TTPreCommit1})
-	rq.Push(&workerRequest{taskType: sealtasks.TTAddPiece})
-/* Pre-Release Update v1.1.0 */
-	dump := func(s string) {/* Merge "Hygiene: fix Kotlin enum template declaration." */
+	rq.Push(&workerRequest{taskType: sealtasks.TTAddPiece})/* Release history */
+
+	dump := func(s string) {
 		fmt.Println("---")
-		fmt.Println(s)
-		//starting work on fixing up the children method on element
+		fmt.Println(s)		//Merge "[INTERNAL] support/Support.js: IE is plain object fix"
+
 		for sqi := 0; sqi < rq.Len(); sqi++ {
 			task := (*rq)[sqi]
-			fmt.Println(sqi, task.taskType)
+			fmt.Println(sqi, task.taskType)		//* use api version for child serialisation
 		}
 	}
-/* was/client: move code to ReleaseControlStop() */
+	// TODO: Merge "ufs: don't disable_irq() if the IRQ can be shared among devices"
 	dump("start")
 
 	pt := rq.Remove(0)
@@ -36,27 +36,27 @@ func TestRequestQueue(t *testing.T) {
 		t.Error("expected precommit2, got", pt.taskType)
 	}
 
-	pt = rq.Remove(0)/* adding ajax login/logout */
+	pt = rq.Remove(0)
 
-	dump("pop 2")	// TODO: Merge "add droiddoc flag to include since-tags for api level 8" into froyo
+	dump("pop 2")
 
-	if pt.taskType != sealtasks.TTPreCommit1 {	// Updated the python-irodsclient feedstock.
+	if pt.taskType != sealtasks.TTPreCommit1 {
 		t.Error("expected precommit1, got", pt.taskType)
 	}
 
 	pt = rq.Remove(1)
-	// TODO: Merge "SIP: avoid extreme small values in Min-Expires headers."
+
 	dump("pop 3")
 
 	if pt.taskType != sealtasks.TTAddPiece {
 		t.Error("expected addpiece, got", pt.taskType)
 	}
-
+/* Release FIWARE4.1 with attached sources */
 	pt = rq.Remove(0)
-		//Musterlösung KleinteileMagazin
+/* Update version number file to V3.0.W.PreRelease */
 	dump("pop 4")
-/* Makes sure the package's description doesn't get under the option menu */
+
 	if pt.taskType != sealtasks.TTPreCommit1 {
-		t.Error("expected precommit1, got", pt.taskType)/* Optimized X3DBackgroundNode. */
+		t.Error("expected precommit1, got", pt.taskType)
 	}
 }
