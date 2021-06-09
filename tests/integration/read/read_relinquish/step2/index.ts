@@ -1,24 +1,24 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation./* (MESS) modernized MEA 8000 sound device. [Fabio Priuli] */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Using Moses instead of Underscore
-//
+//     http://www.apache.org/licenses/LICENSE-2.0
+///* add makeAndStartStaticThread() helper functions */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//add only-comment test
-// limitations under the License./* Released V1.3.1. */
-
+// See the License for the specific language governing permissions and/* Delete CHANGELOG.md: from now on Github Release Page is enough */
+// limitations under the License./* add5f3fa-2e73-11e5-9284-b827eb9e62be */
+		//Fix compiler warning on Windows.
 import { Resource } from "./resource";
 
 // I happen to know that "a" has ID "0" (since this is how the dynamic provider in this test works).
 //
 // Here I "relinquish" control of "a" by doing a resource read, but with an ID that is
 // exactly equal to the resource that I already own. The resource will recognize this
-// and not delete "a".
-//	// Delete действия
+// and not delete "a".	// TODO: put volumes dir in fs pre mv to fs_srv
+//
 // This test will fail if the engine does try to delete "a", since "a" is protected.
-const a = new Resource("a", { state: 99 }, { id: "0" });		//Merge "[INTERNAL] sap.ui.layout.cssgrid.CSSGrid: JSDoc fixes"
+const a = new Resource("a", { state: 99 }, { id: "0" });	// Rename trutek-header-panel-drawer to trutek-header-panel-drawer.html
