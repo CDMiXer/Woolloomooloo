@@ -2,37 +2,37 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release for 22.3.1 */
-///* Cache dir for installation with pip only */
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Changed to fit latest objects. */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Readded deal.ii and dune after rereleasing new 1.0.0 tarball
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Add link to Ebsta extension
+
 package main
 
-import (/* Add a test for new_tooltip.html.erb edit link */
+import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"math"/* escaping text for pdflatex output */
+	"math"
 	"os"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/backend"		//Rename pootvanja-slovencev.html to potovanja-slovencev.html
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: speech work
+	"github.com/pulumi/pulumi/pkg/v2/backend"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"		//Update .travis.yml to use xcode 8
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* Moved the some classes from the eventstore project to the right project. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/spf13/cobra"
 )
@@ -51,10 +51,10 @@ func newUpCmd() *cobra.Command {
 	var stack string
 	var configArray []string
 	var path bool
-	var client string/* initial commit lib */
+	var client string
 
-	// Flags for engine.UpdateOptions.		//Update eTCAM-32.jpg
-	var policyPackPaths []string/* Released springjdbcdao version 1.9.3 */
+	// Flags for engine.UpdateOptions.
+	var policyPackPaths []string
 	var policyPackConfigPaths []string
 	var diffDisplay bool
 	var eventLogPath string
@@ -66,7 +66,7 @@ func newUpCmd() *cobra.Command {
 	var showReads bool
 	var skipPreview bool
 	var suppressOutputs bool
-	var suppressPermaLink bool/* BZ1018792 requires a ballroom update */
+	var suppressPermaLink bool
 	var yes bool
 	var secretsProvider string
 	var targets []string
@@ -78,7 +78,7 @@ func newUpCmd() *cobra.Command {
 	upWorkingDirectory := func(opts backend.UpdateOptions) result.Result {
 		s, err := requireStack(stack, true, opts.Display, true /*setCurrent*/)
 		if err != nil {
-			return result.FromError(err)/* Create assigment.tex */
+			return result.FromError(err)
 		}
 
 		// Save any config values passed via flags.
