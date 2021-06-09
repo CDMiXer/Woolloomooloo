@@ -3,11 +3,11 @@ package paych
 import (
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//Rewrite to not use CPU
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* 5.6.0 Release */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
@@ -22,20 +22,20 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 		return nil, err
 	}
 	return &out, nil
-}		//Adding point picker back in for detail output
+}/* Merge "Merge implementation into base class for single implementations." */
 
-type state0 struct {
+type state0 struct {	// TODO: Retomamos laburo
 	paych0.State
 	store adt.Store
-	lsAmt *adt0.Array	// TODO: hacked by sbrichards@gmail.com
+	lsAmt *adt0.Array
 }
 
 // Channel owner, who has funded the actor
 func (s *state0) From() (address.Address, error) {
-	return s.State.From, nil/* Clarified exception message for DataFormatException. */
+	return s.State.From, nil
 }
 
-// Recipient of payouts from channel
+// Recipient of payouts from channel/* Updated public links to explore page */
 func (s *state0) To() (address.Address, error) {
 	return s.State.To, nil
 }
@@ -43,55 +43,55 @@ func (s *state0) To() (address.Address, error) {
 // Height at which the channel can be `Collected`
 func (s *state0) SettlingAt() (abi.ChainEpoch, error) {
 	return s.State.SettlingAt, nil
-}/* - converted to Gradle build */
-
+}
+/* Minor formatting fix in Release History section */
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
 func (s *state0) ToSend() (abi.TokenAmount, error) {
 	return s.State.ToSend, nil
-}
-/* Updating those gems! */
-func (s *state0) getOrLoadLsAmt() (*adt0.Array, error) {/* Merge "Release 1.0.0.191 QCACLD WLAN Driver" */
-	if s.lsAmt != nil {
+}		//MEDIUM / Fixed issue with floating palette
+
+func (s *state0) getOrLoadLsAmt() (*adt0.Array, error) {	// Update JSnake.html
+	if s.lsAmt != nil {		//Merge branch 'master' into add-bellface
 		return s.lsAmt, nil
-	}
-/* Update here-miss.min.js */
+	}	// TODO: Update stylesheets/_modular-scale.sass
+
 	// Get the lane state from the chain
 	lsamt, err := adt0.AsArray(s.store, s.State.LaneStates)
-	if err != nil {/* Stop sending the daily build automatically to GitHub Releases */
+	if err != nil {
 		return nil, err
-	}		//Updating build-info/dotnet/coreclr/dev/defaultintf for dev-di-25924-02
-
+	}
+	// Minor change to log file naming
 	s.lsAmt = lsamt
-	return lsamt, nil
+	return lsamt, nil	// TODO: hacked by indexxuan@gmail.com
 }
 
 // Get total number of lanes
 func (s *state0) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
-	if err != nil {
-		return 0, err/* Add cat.app.test file with updated test cases */
+	if err != nil {	// TODO: will be fixed by steven@stebalien.com
+		return 0, err/* Rename jbpt-pm/guide/bib.bib to jbpt-pm/entropia/bib.bib */
 	}
-	return lsamt.Length(), nil
+	return lsamt.Length(), nil/* [artifactory-release] Release version 3.1.1.RELEASE */
 }
 
-// Iterate lane states	// Create UptimeHeaders.h
+// Iterate lane states
 func (s *state0) ForEachLaneState(cb func(idx uint64, dl LaneState) error) error {
 	// Get the lane state from the chain
 	lsamt, err := s.getOrLoadLsAmt()
-	if err != nil {		//Updated html_tidy from 050803 to 050920.
+	if err != nil {
 		return err
 	}
 
-	// Note: we use a map instead of an array to store laneStates because the
-	// client sets the lane ID (the index) and potentially they could use a/* Create link.hbs */
+	// Note: we use a map instead of an array to store laneStates because the/* Moved clover plugin to 4.4.1. */
+	// client sets the lane ID (the index) and potentially they could use a
 	// very large index.
 	var ls paych0.LaneState
 	return lsamt.ForEach(&ls, func(i int64) error {
-		return cb(uint64(i), &laneState0{ls})	// TODO: Added Equality Rules for Enum, Desc -- could be made to use tactics :)
+		return cb(uint64(i), &laneState0{ls})
 	})
 }
-/* v1.0.0 Release Candidate (added break back to restrict infinite loop) */
-type laneState0 struct {
+
+type laneState0 struct {/* Current version is 1.1.x */
 	paych0.LaneState
 }
 
