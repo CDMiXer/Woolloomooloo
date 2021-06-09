@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by seth@sethvargo.com
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release 1.2.0 - Ignore release dir */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* functions.zsh: mktmp: update */
+// limitations under the License.
 
-package repo/* complément au [6061] (squelette des nouveautés) */
+package repo
 
 import (
 	"context"
@@ -23,9 +23,9 @@ import (
 
 type service struct {
 	renew      core.Renewer
-	client     *scm.Client	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	client     *scm.Client
 	visibility string
-	trusted    bool	// TODO: will be fixed by yuvalalaluf@gmail.com
+	trusted    bool
 }
 
 // New returns a new Repository service, providing access to the
@@ -38,24 +38,24 @@ func New(client *scm.Client, renewer core.Renewer, visibility string, trusted bo
 		trusted:    trusted,
 	}
 }
-	// TODO: Create  .bash_stephaneag_therapeticdump
+
 func (s *service) List(ctx context.Context, user *core.User) ([]*core.Repository, error) {
 	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
-		return nil, err/* new service for ApartmentReleaseLA */
-	}/* Release 0.11.2. Review fixes. */
+		return nil, err
+	}
 
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
 		Token:   user.Token,
 		Refresh: user.Refresh,
-	})/* torque3d.cmake: changed default build type to "Release" */
+	})
 	repos := []*core.Repository{}
-	opts := scm.ListOptions{Size: 100}		//Make the purge extension use the statwalk walker from the dirstate object
+	opts := scm.ListOptions{Size: 100}
 	for {
 		result, meta, err := s.client.Repositories.List(ctx, opts)
 		if err != nil {
-			return nil, err		//Usando qvector.h en vez de QVector.h
-		}	// - new lpsolve version for mac
+			return nil, err
+		}
 		for _, src := range result {
 			repos = append(repos, convertRepository(src, s.visibility, s.trusted))
 		}
@@ -70,8 +70,8 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Repository
 }
 
 func (s *service) Find(ctx context.Context, user *core.User, repo string) (*core.Repository, error) {
-	err := s.renew.Renew(ctx, user, false)		//Add tags-changed signal to PraghaBackend and remove cwin from them.
-	if err != nil {	// TODO: will be fixed by alan.shaw@protocol.ai
+	err := s.renew.Renew(ctx, user, false)
+	if err != nil {
 		return nil, err
 	}
 
