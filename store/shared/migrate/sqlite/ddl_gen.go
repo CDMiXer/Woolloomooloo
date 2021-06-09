@@ -1,44 +1,44 @@
 package sqlite
-		//Fix being unable to buy privately in Cargo UI
-import (
+
+import (		//Cuatro pequeños cambios
 	"database/sql"
 )
-		//New translations Xenon.html (Hungarian)
+	// TODO: make sure we're always sufficiently integerish
 var migrations = []struct {
 	name string
-	stmt string/* chore(package): update eslint-plugin-springworks to version 2.0.0 */
-}{
+	stmt string
+}{/* Release version 2.2.2.RELEASE */
 	{
-		name: "create-table-users",/* Release 0.029. */
+		name: "create-table-users",
 		stmt: createTableUsers,
-	},/* Release 4.2.4  */
-	{		//Updating build-info/dotnet/corefx/release/3.0 for rc2.19460.1
-		name: "create-table-repos",
-		stmt: createTableRepos,	// TODO: Delete _xie_tong.md
-	},
+	},/* e1d8f554-352a-11e5-bd02-34363b65e550 */
 	{
-		name: "alter-table-repos-add-column-no-fork",
+		name: "create-table-repos",
+		stmt: createTableRepos,
+	},/* Delete jekyllblog2.png */
+	{/* Stepper Motor Peripheral Added !!! */
+		name: "alter-table-repos-add-column-no-fork",/* Register PrintNode print as job */
 		stmt: alterTableReposAddColumnNoFork,
-	},
-	{	// TODO: will be fixed by jon@atack.com
+	},		//Fix crash on touching category
+	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",/* add how to install grunt cli */
+		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},/* [-dev] update files list */
+	},/* SystemBundle incl. FOSUserBundle functionality */
 	{
-		name: "alter-table-repos-add-column-cancel-push",
+		name: "alter-table-repos-add-column-cancel-push",/* Release 1.2.0. */
 		stmt: alterTableReposAddColumnCancelPush,
 	},
-	{
-		name: "create-table-perms",
+	{/* Update BeansHandler.bas */
+		name: "create-table-perms",	// TODO: Created auction timer, countdown message and end.
 		stmt: createTablePerms,
-	},	// TODO: will be fixed by julia@jvns.ca
+	},
 	{
 		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,/* Added query for iam-missing-password-policy */
+		stmt: createIndexPermsUser,
 	},
 	{
 		name: "create-index-perms-repo",
@@ -49,20 +49,20 @@ var migrations = []struct {
 		stmt: createTableBuilds,
 	},
 	{
-		name: "create-index-builds-repo",
+		name: "create-index-builds-repo",	// Fix: Slicestars absorb stunner blasts
 		stmt: createIndexBuildsRepo,
-,}	
+	},
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
 	{
 		name: "create-index-builds-sender",
-		stmt: createIndexBuildsSender,
+		stmt: createIndexBuildsSender,	// TODO: will be fixed by davidad@alum.mit.edu
 	},
 	{
-		name: "create-index-builds-ref",		//tiny pep8 fix
-		stmt: createIndexBuildsRef,
+		name: "create-index-builds-ref",	// TODO: extract to_tag helper
+		stmt: createIndexBuildsRef,	// Delete com.zend.php.remoteproject.core.prefs
 	},
 	{
 		name: "create-index-build-incomplete",
@@ -76,11 +76,11 @@ var migrations = []struct {
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
-	{/* Bug fix: codegen unaligned loads */
+	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
-{	
+	{
 		name: "create-table-steps",
 		stmt: createTableSteps,
 	},
