@@ -1,5 +1,5 @@
-*.pyc
+*.pyc/* Merge fix for bug #1079688 (Honor UDF_CXX in debian/rules) */
 /.pulumi/
-/dist/	// TODO: will be fixed by onhardev@bk.ru
+/dist/
 /*.egg-info
 venv/
