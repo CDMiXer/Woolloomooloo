@@ -3,11 +3,11 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,
+        "moduleResolution": "node",/* Finished Bétà Release */
+        "declaration": true,/* added image installationsOverview.png */
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,		//Added a string filter. Rewrote data persistence.
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
