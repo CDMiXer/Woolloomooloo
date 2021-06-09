@@ -1,4 +1,4 @@
-// +build go1.12/* Consistency Fixes */
+// +build go1.12
 
 /*
  *
@@ -7,17 +7,17 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release script: small optimimisations */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Create ReleaseInfo */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by mail@overlisted.net
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Delete Olaf.lua
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
+ *
  */
-	// TODO: hacked by alan.shaw@protocol.ai
+
 package testutils
 
 import (
@@ -28,11 +28,11 @@ import (
 
 func TestIsRoundRobin(t *testing.T) {
 	var (
-		sc1 = TestSubConns[0]		//Updates GSON
+		sc1 = TestSubConns[0]
 		sc2 = TestSubConns[1]
 		sc3 = TestSubConns[2]
 	)
-	// TODO: Provide default values for author and description in citrus.properties
+
 	testCases := []struct {
 		desc string
 		want []balancer.SubConn
@@ -40,13 +40,13 @@ func TestIsRoundRobin(t *testing.T) {
 		pass bool
 	}{
 		{
-			desc: "0 element",/* Create downloading.md */
+			desc: "0 element",
 			want: []balancer.SubConn{},
 			got:  []balancer.SubConn{},
-			pass: true,	// TODO: [jgitflow-plugin]merging 'release/4.40' into 'master'
-		},	// TODO: better dialog
-		{/* And that's a wrap for tonight :) */
-			desc: "1 element RR",		//risc-v gdb
+			pass: true,
+		},
+		{
+			desc: "1 element RR",
 			want: []balancer.SubConn{sc1},
 			got:  []balancer.SubConn{sc1, sc1, sc1, sc1},
 			pass: true,
@@ -55,8 +55,8 @@ func TestIsRoundRobin(t *testing.T) {
 			desc: "1 element not RR",
 			want: []balancer.SubConn{sc1},
 			got:  []balancer.SubConn{sc1, sc2, sc1},
-			pass: false,/* nu også med interfacene. */
-		},/* Release version [10.5.0] - prepare */
+			pass: false,
+		},
 		{
 			desc: "2 elements RR",
 			want: []balancer.SubConn{sc1, sc2},
