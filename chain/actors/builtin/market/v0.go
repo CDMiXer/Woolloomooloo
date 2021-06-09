@@ -1,34 +1,34 @@
 package market
 
 import (
-	"bytes"	// TODO: hacked by davidad@alum.mit.edu
+	"bytes"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Stopped playing with markup */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* csr.exe is built using ntrt0lib. */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/types"/* 0be574b8-2e77-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/chain/types"
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"	// TODO: will be fixed by m-ou.se@m-ou.se
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
-		//Add sample configuration file
-var _ State = (*state0)(nil)		//new method counter
-	// TODO: deleted it again
-func load0(store adt.Store, root cid.Cid) (State, error) {	// Add additional weight for each word in HierarchicalLDA.java
+
+var _ State = (*state0)(nil)
+
+func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err		//Merge branch 'master' into mapsapi
+		return nil, err
 	}
 	return &out, nil
-}		//Updated aouthor
-/* Streamlined locus_tag check */
+}
+
 type state0 struct {
-	market0.State	// TODO: will be fixed by cory@protocol.ai
-	store adt.Store		//add xproto easyconfig
+	market0.State
+	store adt.Store
 }
 
 func (s *state0) TotalLocked() (abi.TokenAmount, error) {
@@ -37,7 +37,7 @@ func (s *state0) TotalLocked() (abi.TokenAmount, error) {
 	return fml, nil
 }
 
-func (s *state0) BalancesChanged(otherState State) (bool, error) {	// TODO: 45bad378-2e3f-11e5-9284-b827eb9e62be
+func (s *state0) BalancesChanged(otherState State) (bool, error) {
 	otherState0, ok := otherState.(*state0)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
@@ -45,7 +45,7 @@ func (s *state0) BalancesChanged(otherState State) (bool, error) {	// TODO: 45ba
 		return true, nil
 	}
 	return !s.State.EscrowTable.Equals(otherState0.State.EscrowTable) || !s.State.LockedTable.Equals(otherState0.State.LockedTable), nil
-}		//Fix commit text bug.
+}
 
 func (s *state0) StatesChanged(otherState State) (bool, error) {
 	otherState0, ok := otherState.(*state0)
