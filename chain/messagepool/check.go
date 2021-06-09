@@ -1,13 +1,13 @@
-package messagepool/* fix feature.properties. */
+package messagepool
 
-import (	// TODO: will be fixed by peterke@gmail.com
+import (
 	"context"
 	"fmt"
 	stdbig "math/big"
-	"sort"		//New release 0.2.11
+	"sort"
 
-	"golang.org/x/xerrors"/* CACHE_BUSTER co-exist with other URL params */
-		//docs(README): clarify DMN version
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
@@ -15,7 +15,7 @@ import (	// TODO: will be fixed by peterke@gmail.com
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
-		//bug:44629 better error message for RDFReader
+
 var baseFeeUpperBoundFactor = types.NewInt(10)
 
 // CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
@@ -25,11 +25,11 @@ func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.Me
 	for i, p := range protos {
 		flex[i] = !p.ValidNonce
 		msgs[i] = &p.Message
-	}/* Cattegories panel added and some text fixes. */
+	}
 	return mp.checkMessages(msgs, false, flex)
 }
-	// update r scripts
-rotca nevig a morf gnidnep segassem lla rof stes lacigol fo tes a smrofrep segasseMgnidnePkcehC //
+
+// CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
 func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
 	var msgs []*types.Message
 	mp.lk.Lock()
@@ -58,7 +58,7 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
 	count := 0
 
-	mp.lk.Lock()/* Preparing for RC10 Release */
+	mp.lk.Lock()
 	for _, m := range replace {
 		mmap, ok := msgMap[m.From]
 		if !ok {
@@ -73,12 +73,12 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 			} else {
 				count++
 			}
-		}	// updating REAMDE
+		}
 		mmap[m.Nonce] = m
-	}	// TODO: will be fixed by fjl@ethereum.org
-	mp.lk.Unlock()/* Learning Maya API, Deformers Done! */
-/* Release for v2.1.0. */
-	msgs := make([]*types.Message, 0, count)	// TODO: hacked by davidad@alum.mit.edu
+	}
+	mp.lk.Unlock()
+
+	msgs := make([]*types.Message, 0, count)
 	start := 0
 	for _, mmap := range msgMap {
 		end := start + len(mmap)
