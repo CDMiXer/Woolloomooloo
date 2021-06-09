@@ -7,12 +7,12 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Release OpenTM2 v1.3.0 - supports now MS OFFICE 2007 and higher */
-        "noImplicitReturns": true,	// TODO: Added 'code_rating' & 'duplication' checks
+        "pretty": true,/* eb0e6ad8-2e4e-11e5-9284-b827eb9e62be */
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
-]    
-}/* Merge "Set tuned profile for compute roles" */
+        "index.ts"/* Fixing some typos in the tutorial text */
+    ]
+}
