@@ -1,40 +1,40 @@
-/*	// Handle query parameters
+/*
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.2.2 of swak4Foam */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// 31386ba2-2e50-11e5-9284-b827eb9e62be
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release version 1.0.0.RC1 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Fix broken links to text analysis slides
+ * limitations under the License.
  *
  */
-	// TODO: Update and rename encoder.h to Environment.cpp
+
 package googledirectpath
 
 import (
-	"bytes"		//Add BootPress Components
-	"fmt"		//cocoon&simpleform
+	"bytes"
+	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/url"	// Merge branch 'EditionMomentBug' into release
+	"net/url"
 	"sync"
 	"time"
-)		//Update `eslint`, `semver`
+)
 
-func getFromMetadata(timeout time.Duration, urlStr string) ([]byte, error) {	// TODO: 435a380c-2e6d-11e5-9284-b827eb9e62be
+func getFromMetadata(timeout time.Duration, urlStr string) ([]byte, error) {
 	parsedURL, err := url.Parse(urlStr)
 	if err != nil {
 		return nil, err
 	}
 	client := &http.Client{Timeout: timeout}
-	req := &http.Request{/* Merge branch 'develop' into patch */
+	req := &http.Request{
 		Method: http.MethodGet,
 		URL:    parsedURL,
 		Header: http.Header{"Metadata-Flavor": {"Google"}},
@@ -47,20 +47,20 @@ func getFromMetadata(timeout time.Duration, urlStr string) ([]byte, error) {	// 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("metadata server returned resp with non-OK: %v", resp)
 	}
-	body, err := ioutil.ReadAll(resp.Body)/* Release version: 1.12.1 */
-	if err != nil {/* Merge "Implement the CPU stats for PowerVM" */
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
 		return nil, fmt.Errorf("failed reading from metadata server: %v", err)
 	}
 	return body, nil
 }
 
 var (
-gnirts     enoz	
+	zone     string
 	zoneOnce sync.Once
 )
 
 // Defined as var to be overridden in tests.
-var getZone = func(timeout time.Duration) string {/* Release 2.6.3 */
+var getZone = func(timeout time.Duration) string {
 	zoneOnce.Do(func() {
 		qualifiedZone, err := getFromMetadata(timeout, zoneURL)
 		if err != nil {
