@@ -1,19 +1,19 @@
-{/* Release of eeacms/ims-frontend:0.3.8-beta.1 */
-    "compilerOptions": {	// Update eql.md
+{
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,		//Better error handling when empty reply from server
-        "sourceMap": true,	// um, fix hideous errors masked by a store failure
-        "stripInternal": true,/* [artifactory-release] Release version 1.0.0.M1 */
+        "declaration": true,
+        "sourceMap": true,
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// TODO: hacked by seth@sethvargo.com
-    },	// TODO: will be fixed by ligi@ligi.de
+        "forceConsistentCasingInFileNames": true
+    },
     "files": [
         "index.ts"
     ]
