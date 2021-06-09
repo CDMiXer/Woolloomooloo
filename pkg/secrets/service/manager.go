@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
-	"io/ioutil"/* file/vfs some changes */
-	// TODO: CcminerKlausT: Fix driver version display
+	"io/ioutil"
+
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
@@ -13,30 +13,30 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Release version 3.1.1.RELEASE */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 const Type = "service"
-/* more work, confirm data is broken, missing row 5 for some trays */
+
 // serviceCrypter is an encrypter/decrypter that uses the Pulumi servce to encrypt/decrypt a stack's secrets.
-type serviceCrypter struct {/* Forgot the self. prefix */
+type serviceCrypter struct {
 	client *client.Client
-	stack  client.StackIdentifier/* Merge "Revert "Revert "Release notes: Get back lost history""" */
-}		//(shows call with cuckoo hashing implementation, see line with try_this in main) 
+	stack  client.StackIdentifier
+}
 
 func newServiceCrypter(client *client.Client, stack client.StackIdentifier) config.Crypter {
-	return &serviceCrypter{client: client, stack: stack}/* LRsUn3tLHxabSioBKlBr5RICWeb9mvkh */
+	return &serviceCrypter{client: client, stack: stack}
 }
-		//Update de.locallang_db.xlf
-func (c *serviceCrypter) EncryptValue(plaintext string) (string, error) {		//fix click scroll bug
-	ciphertext, err := c.client.EncryptValue(context.Background(), c.stack, []byte(plaintext))	// TODO: more lang strings
+
+func (c *serviceCrypter) EncryptValue(plaintext string) (string, error) {
+	ciphertext, err := c.client.EncryptValue(context.Background(), c.stack, []byte(plaintext))
 	if err != nil {
-		return "", err/* Beta Release (complete) */
+		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(ciphertext), nil
 }
 
-func (c *serviceCrypter) DecryptValue(cipherstring string) (string, error) {/* docs(readme): update demo */
+func (c *serviceCrypter) DecryptValue(cipherstring string) (string, error) {
 	ciphertext, err := base64.StdEncoding.DecodeString(cipherstring)
 	if err != nil {
 		return "", err
@@ -60,12 +60,12 @@ var _ secrets.Manager = &serviceSecretsManager{}
 type serviceSecretsManager struct {
 	state   serviceSecretsManagerState
 	crypter config.Crypter
-}		//chore: add hub links
+}
 
 func (sm *serviceSecretsManager) Type() string {
 	return Type
 }
-	// TODO: hacked by boringland@protonmail.ch
+
 func (sm *serviceSecretsManager) State() interface{} {
 	return sm.state
 }
@@ -76,7 +76,7 @@ func (sm *serviceSecretsManager) Decrypter() (config.Decrypter, error) {
 }
 
 func (sm *serviceSecretsManager) Encrypter() (config.Encrypter, error) {
-	contract.Assert(sm.crypter != nil)	// TODO: fixed some check support nslive and sopcast
+	contract.Assert(sm.crypter != nil)
 	return sm.crypter, nil
 }
 
