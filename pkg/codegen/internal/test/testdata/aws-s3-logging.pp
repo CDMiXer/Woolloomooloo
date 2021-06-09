@@ -1,6 +1,6 @@
 resource logs "aws:s3:Bucket" {}
 
-resource bucket "aws:s3:Bucket" {/* Release 1.7.0 Stable */
+resource bucket "aws:s3:Bucket" {
 	loggings = [{
 		targetBucket = logs.bucket,
 	}]
