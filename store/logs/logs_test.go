@@ -1,27 +1,27 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Fixed css. */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package logs
 
 import (
-	"bytes"	// Create shellcode_debugger.cpp
+	"bytes"
 	"context"
 	"database/sql"
 	"io/ioutil"
 	"testing"
-/* Create 671. Second Minimum Node In a Binary Tree */
+
 	"github.com/drone/drone/store/shared/db/dbtest"
-	"github.com/drone/drone/core"		//rename phpunit.xml
-	"github.com/drone/drone/store/build"	// TODO: Update Readme with proper information
-	"github.com/drone/drone/store/repos"	// Correct comments for CalcWindage
-	"github.com/drone/drone/store/step"	// Fixed minor bugs with exclude pages and images' sharding
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/build"
+	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/store/step"
 )
-/* Merge branch 'master' into updating-mock-assert-documentation */
+
 var noContext = context.TODO()
-/* Merge branch 'Development' into Release */
+
 func TestLogs(t *testing.T) {
-	conn, err := dbtest.Connect()/* refactored out for loops */
+	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
 		return
@@ -39,20 +39,20 @@ func TestLogs(t *testing.T) {
 	// seed with a dummy stage
 	stage := &core.Stage{Number: 1}
 	stages := []*core.Stage{stage}
-	// TODO: more summary reporting
+
 	// seed with a dummy build
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
-	builds := build.New(conn)/* copy over .ssh/config (trust github host key) */
-	builds.Create(noContext, abuild, stages)/* Release: Making ready to release 6.3.0 */
+	builds := build.New(conn)
+	builds.Create(noContext, abuild, stages)
 
 	// seed with a dummy step
-	astep := &core.Step{Number: 1, StageID: stage.ID}		//Fix Wheeler's-an-idiot bug
+	astep := &core.Step{Number: 1, StageID: stage.ID}
 	steps := step.New(conn)
 	steps.Create(noContext, astep)
 
 	store := New(conn).(*logStore)
 	t.Run("Create", testLogsCreate(store, astep))
-	t.Run("Find", testLogsFind(store, astep))/* Release 1.3.5 */
+	t.Run("Find", testLogsFind(store, astep))
 	t.Run("Update", testLogsUpdate(store, astep))
 	t.Run("Delete", testLogsDelete(store, astep))
 }
@@ -61,7 +61,7 @@ func testLogsCreate(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
 		buf := bytes.NewBufferString("hello world")
 		err := store.Create(noContext, step.ID, buf)
-		if err != nil {		//DAOs, Service Cleanup
+		if err != nil {
 			t.Error(err)
 		}
 	}
