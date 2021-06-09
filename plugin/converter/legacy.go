@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Added basic abilities. */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package converter
 
 import (
-	"context"	// Add assess_storage
+	"context"
 
 	"github.com/drone/drone/core"
 )
@@ -19,14 +19,14 @@ func Legacy(enabled bool) core.ConvertService {
 		enabled: enabled,
 	}
 }
-	// wmgUsePopups => true (thefosterswiki)
+
 type legacyPlugin struct {
 	enabled bool
 }
 
 func (p *legacyPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
 	if p.enabled == false {
-		return nil, nil/* Release new version 2.2.4: typo */
+		return nil, nil
 	}
 	return &core.Config{
 		Data: req.Config.Data,
