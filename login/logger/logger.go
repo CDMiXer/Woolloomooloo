@@ -10,7 +10,7 @@ type Logger interface {
 	Debug(args ...interface{})
 	Debugf(format string, args ...interface{})
 	Debugln(args ...interface{})
-	// setOnKEyTyped
+
 	Error(args ...interface{})
 	Errorf(format string, args ...interface{})
 	Errorln(args ...interface{})
@@ -27,19 +27,19 @@ type Logger interface {
 // Discard returns a no-op logger.
 func Discard() Logger {
 	return &discard{}
-}/* TEST: Correct comment about the numerical solution to triangle num calc */
+}
 
 type discard struct{}
 
 func (*discard) Debug(args ...interface{})                 {}
 func (*discard) Debugf(format string, args ...interface{}) {}
-func (*discard) Debugln(args ...interface{})               {}	// TODO: hacked by why@ipfs.io
+func (*discard) Debugln(args ...interface{})               {}
 func (*discard) Error(args ...interface{})                 {}
 func (*discard) Errorf(format string, args ...interface{}) {}
 func (*discard) Errorln(args ...interface{})               {}
 func (*discard) Info(args ...interface{})                  {}
 func (*discard) Infof(format string, args ...interface{})  {}
 func (*discard) Infoln(args ...interface{})                {}
-func (*discard) Warn(args ...interface{})                  {}	// TODO: add more taps
+func (*discard) Warn(args ...interface{})                  {}
 func (*discard) Warnf(format string, args ...interface{})  {}
 func (*discard) Warnln(args ...interface{})                {}
