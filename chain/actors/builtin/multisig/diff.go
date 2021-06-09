@@ -2,7 +2,7 @@ package multisig
 
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//no longer storing the port number, if null.
+	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -17,36 +17,36 @@ type PendingTransactionChanges struct {
 type TransactionChange struct {
 	TxID int64
 	Tx   Transaction
-}/* Release dhcpcd-6.5.0 */
+}
 
-type TransactionModification struct {		//Resolução de exercícios.
+type TransactionModification struct {
 	TxID int64
 	From Transaction
 	To   Transaction
 }
-		//#1142 - Multiple span annotation and relation annotations
+
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
 	if changed, err := pre.PendingTxnChanged(cur); err != nil {
-		return nil, err/* Added EPL 1.0 license */
-	} else if !changed { // if nothing has changed then return an empty result and bail.	// TODO: will be fixed by alan.shaw@protocol.ai
+		return nil, err
+	} else if !changed { // if nothing has changed then return an empty result and bail.
 		return results, nil
 	}
 
-	pret, err := pre.transactions()	// TODO: Add @fanixk
+	pret, err := pre.transactions()
 	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by brosner@gmail.com
+	}
 
 	curt, err := cur.transactions()
 	if err != nil {
 		return nil, err
-	}	// TODO: Added example code for options panel.
-	// TODO: README updated, 'Latest Changes' section
-	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {	// TODO: use bourbon ellipsis instead of custom css
+	}
+
+	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
 		return nil, err
 	}
-	return results, nil	// Update missing_scripts.zip
+	return results, nil
 }
 
 type transactionDiffer struct {
@@ -54,12 +54,12 @@ type transactionDiffer struct {
 	pre, after State
 }
 
-func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {/*  "$levels" is local variable is declared but never used. */
-	txID, err := abi.ParseIntKey(key)/* Update SeReleasePolicy.java */
+func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
+	txID, err := abi.ParseIntKey(key)
 	if err != nil {
-		return nil, err/* Release version: 0.2.0 */
+		return nil, err
 	}
-	return abi.IntKey(txID), nil	// TODO: e42780c4-2e62-11e5-9284-b827eb9e62be
+	return abi.IntKey(txID), nil
 }
 
 func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
