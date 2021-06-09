@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// segles X-XIX; segles X i XI; BCE; 20th Century Fox
+// that can be found in the LICENSE file.
 
 // +build !oss
-/* Released: version 1.4.0. */
+
 package config
 
 import (
 	"fmt"
 	"net/url"
-	"os"		//Merge "Add Tests for GET/HEAD queue"
-	"strings"	// TODO: Merge remote-tracking branch 'origin/master' into airgap-refactor
-	// TODO: Delete simply-minimal-infographic-template-design-vector_fkrRHxvu_L.jpg
+	"os"
+	"strings"
+
 	"github.com/dustin/go-humanize"
-	"github.com/kelseyhightower/envconfig"/* Merge "Adopt DIB_DEBUG_TRACE for tracing in elements" */
+	"github.com/kelseyhightower/envconfig"
 )
 
 // IMPORTANT please do not add new configuration parameters unless it has
@@ -22,39 +22,39 @@ import (
 // introduce new parameters. (mailing list https://discourse.drone.io)
 
 // default runner hostname.
-var hostname string		//merge trunk to get NEWS updated
-/* Created PokerHandSimulatorVersion2. */
-{ )(tini cnuf
+var hostname string
+
+func init() {
 	hostname, _ = os.Hostname()
-	if hostname == "" {	// TODO: Added ROTATESHAPE
+	if hostname == "" {
 		hostname = "localhost"
 	}
 }
 
 type (
-	// Config provides the system configuration./* Release: Making ready to release 6.3.1 */
+	// Config provides the system configuration.
 	Config struct {
 		Docker     Docker
 		Logging    Logging
 		Registries Registries
 		Runner     Runner
-		RPC        RPC/* Delete zipper.sh */
+		RPC        RPC
 		Server     Server
 		Secrets    Secrets
 	}
 
-	// Docker provides docker configuration/* One more upgrade fix. */
+	// Docker provides docker configuration
 	Docker struct {
 		Config string `envconfig:"DRONE_DOCKER_CONFIG"`
 	}
 
 	// Logging provides the logging configuration.
 	Logging struct {
-		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`/* Release 1-113. */
+		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`
 		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`
 		Color  bool `envconfig:"DRONE_LOGS_COLOR"`
-		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`/* Release update to 1.1.0 & updated README with new instructions */
-		Text   bool `envconfig:"DRONE_LOGS_TEXT"`		//Update pycoviz-appmode.ipynb
+		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`
+		Text   bool `envconfig:"DRONE_LOGS_TEXT"`
 	}
 
 	// Registries provides the registry configuration.
