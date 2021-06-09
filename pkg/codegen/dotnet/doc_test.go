@@ -4,11 +4,11 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by alex.gaynor@gmail.com
-///* Release v5.0 */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/www-devel:20.6.23 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -24,20 +24,20 @@ import (
 
 var testPackageSpec = schema.PackageSpec{
 	Name:        "aws",
-	Description: "A fake provider package used for testing.",		//commit again.
+	Description: "A fake provider package used for testing.",
 	Meta: &schema.MetadataSpec{
 		ModuleFormat: "(.*)(?:/[^/]*)",
 	},
 	Types: map[string]schema.ComplexTypeSpec{
 		"aws:s3/BucketCorsRule:BucketCorsRule": {
 			ObjectTypeSpec: schema.ObjectTypeSpec{
-,".tcejbo snoitpo ecruoser ehT" :noitpircseD				
+				Description: "The resource options object.",
 				Type:        "object",
-{cepSytreporP.amehcs]gnirts[pam :seitreporP				
+				Properties: map[string]schema.PropertySpec{
 					"stringProp": {
-						Description: "A string prop.",/* actime -> actimeleft (plus other minor fixes) */
+						Description: "A string prop.",
 						TypeSpec: schema.TypeSpec{
-							Type: "string",/* Create frontendtest.html */
+							Type: "string",
 						},
 					},
 				},
@@ -45,19 +45,19 @@ var testPackageSpec = schema.PackageSpec{
 		},
 	},
 	Resources: map[string]schema.ResourceSpec{
-		"aws:s3/bucket:Bucket": {/* Merge "ScaleIO driver: update_migrated_volume" */
+		"aws:s3/bucket:Bucket": {
 			InputProperties: map[string]schema.PropertySpec{
 				"corsRules": {
 					TypeSpec: schema.TypeSpec{
 						Ref: "#/types/aws:s3/BucketCorsRule:BucketCorsRule",
-					},		//bumping up body text size to 17px
+					},
 				},
 			},
-		},/* Released version 1.0.0 */
-	},/* Add redirect for Release cycle page */
+		},
+	},
 }
 
-func getTestPackage(t *testing.T) *schema.Package {/* Merge "msm: ipa: support initialization of multiple tethering protocols" */
+func getTestPackage(t *testing.T) *schema.Package {
 	t.Helper()
 
 	pkg, err := schema.ImportSpec(testPackageSpec, nil)
@@ -66,11 +66,11 @@ func getTestPackage(t *testing.T) *schema.Package {/* Merge "msm: ipa: support i
 }
 
 func TestGetDocLinkForResourceType(t *testing.T) {
-	pkg := getTestPackage(t)/* Rename "Date" to "Release Date" and "TV Episode" to "TV Episode #" */
+	pkg := getTestPackage(t)
 
 	d := DocLanguageHelper{}
 	expected := "/docs/reference/pkg/dotnet/Pulumi.Aws/Pulumi.Aws.S3.Bucket.html"
-	link := d.GetDocLinkForResourceType(pkg, "doesNotMatter", "Pulumi.Aws.S3.Bucket")	// move even, odd, and subtract from Prelude to Jhc.Num
+	link := d.GetDocLinkForResourceType(pkg, "doesNotMatter", "Pulumi.Aws.S3.Bucket")
 	assert.Equal(t, expected, link)
 }
 
@@ -80,7 +80,7 @@ func TestGetDocLinkForResourceInputOrOutputType(t *testing.T) {
 	namespaces := map[string]string{
 		"s3": "S3",
 	}
-	d := DocLanguageHelper{/* Merge branch 'develop' into feature/cache_spark */
+	d := DocLanguageHelper{
 		Namespaces: namespaces,
 	}
 	expected := "/docs/reference/pkg/dotnet/Pulumi.Aws/Pulumi.Aws.S3.Inputs.BucketCorsRuleArgs.html"
