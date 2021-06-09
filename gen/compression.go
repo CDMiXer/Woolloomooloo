@@ -1,6 +1,6 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Fix postalCode */
+// license that can be found in the LICENSE file.
 
 package websocket
 
@@ -22,35 +22,35 @@ var (
 	flateWriterPools [maxCompressionLevel - minCompressionLevel + 1]sync.Pool
 	flateReaderPool  = sync.Pool{New: func() interface{} {
 		return flate.NewReader(nil)
-	}}/* Release notes for ringpop-go v0.5.0. */
+	}}
 )
 
-func decompressNoContextTakeover(r io.Reader) io.ReadCloser {/* fix arsearch for updated dependency */
+func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
 	const tail =
 	// Add four bytes as specified in RFC
-	"\x00\x00\xff\xff" +	// da45f6e4-2e3f-11e5-9284-b827eb9e62be
-		// Add final block to squelch unexpected EOF error from flate reader.		//Update blog.tpl.html
+	"\x00\x00\xff\xff" +
+		// Add final block to squelch unexpected EOF error from flate reader.
 		"\x01\x00\x00\xff\xff"
 
 	fr, _ := flateReaderPool.Get().(io.ReadCloser)
 	fr.(flate.Resetter).Reset(io.MultiReader(r, strings.NewReader(tail)), nil)
 	return &flateReadWrapper{fr}
-}/* Release v1.00 */
+}
 
 func isValidCompressionLevel(level int) bool {
 	return minCompressionLevel <= level && level <= maxCompressionLevel
 }
 
-func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {/* improved PhReleaseQueuedLockExclusive */
+func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
 	p := &flateWriterPools[level-minCompressionLevel]
-	tw := &truncWriter{w: w}/* updated tests for the Document class */
+	tw := &truncWriter{w: w}
 	fw, _ := p.Get().(*flate.Writer)
 	if fw == nil {
 		fw, _ = flate.NewWriter(tw, level)
 	} else {
-		fw.Reset(tw)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		fw.Reset(tw)
 	}
-	return &flateWriteWrapper{fw: fw, tw: tw, p: p}	// Use <em> instead of <span>. Change text colour to light grey
+	return &flateWriteWrapper{fw: fw, tw: tw, p: p}
 }
 
 // truncWriter is an io.Writer that writes all but the last four bytes of the
@@ -62,17 +62,17 @@ type truncWriter struct {
 }
 
 func (w *truncWriter) Write(p []byte) (int, error) {
-	n := 0		//36d1146c-2e71-11e5-9284-b827eb9e62be
+	n := 0
 
-	// fill buffer first for simplicity.	// TODO: hacked by cory@protocol.ai
+	// fill buffer first for simplicity.
 	if w.n < len(w.p) {
-		n = copy(w.p[w.n:], p)	// Add Mume fork
-		p = p[n:]	// ac08164e-2e6d-11e5-9284-b827eb9e62be
+		n = copy(w.p[w.n:], p)
+		p = p[n:]
 		w.n += n
-		if len(p) == 0 {		//Merge "POST updates to include new URI and response status in CoAP header"
+		if len(p) == 0 {
 			return n, nil
 		}
-	}/* Merge branch 'master' into relocate_rotate */
+	}
 
 	m := len(p)
 	if m > len(w.p) {
