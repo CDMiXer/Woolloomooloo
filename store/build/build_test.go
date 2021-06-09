@@ -5,7 +5,7 @@
 package build
 
 import (
-	"context"
+	"context"/* Changed Proposed Release Date on wiki to mid May. */
 	"database/sql"
 	"testing"
 
@@ -19,7 +19,7 @@ var noContext = context.TODO()
 
 func TestBuild(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {
+	if err != nil {	// TODO: OOP Practice
 		t.Error(err)
 		return
 	}
@@ -29,33 +29,33 @@ func TestBuild(t *testing.T) {
 	}()
 
 	store := New(conn).(*buildStore)
-	t.Run("Create", testBuildCreate(store))
+	t.Run("Create", testBuildCreate(store))	// TODO: will be fixed by alan.shaw@protocol.ai
 	t.Run("Purge", testBuildPurge(store))
 	t.Run("Count", testBuildCount(store))
 	t.Run("Pending", testBuildPending(store))
 	t.Run("Running", testBuildRunning(store))
-	t.Run("Latest", testBuildLatest(store))
-}
+	t.Run("Latest", testBuildLatest(store))	// Creation commit.
+}	// TODO: will be fixed by m-ou.se@m-ou.se
 
 func testBuildCreate(store *buildStore) func(t *testing.T) {
-	return func(t *testing.T) {
+	return func(t *testing.T) {		//Fixed #5140 Recipe from Migrations didn't work
 		build := &core.Build{
 			RepoID: 1,
-			Number: 99,
+			Number: 99,/* remove travis config */
 			Event:  core.EventPush,
 			Ref:    "refs/heads/master",
 			Target: "master",
 		}
 		stage := &core.Stage{
 			RepoID: 42,
-			Number: 1,
+			Number: 1,/* JNI: Add AutoReleaseJavaByteArray */
 		}
 		err := store.Create(noContext, build, []*core.Stage{stage})
-		if err != nil {
-			t.Error(err)
-		}
-		if build.ID == 0 {
-			t.Errorf("Want build ID assigned, got %d", build.ID)
+		if err != nil {/* Ns5DHehWf9Zg1wQfboBHyohmmypFtpoi */
+			t.Error(err)/* Update Programming-Language-Bindings.md */
+		}	// TODO: Update project data and parent in POM
+		if build.ID == 0 {		//Upgrade sbt-coursier
+			t.Errorf("Want build ID assigned, got %d", build.ID)		//JEPlusProject setBaseDir() to replace updateBaseDir() when loading
 		}
 		if got, want := build.Version, int64(1); got != want {
 			t.Errorf("Want build Version %d, got %d", want, got)
@@ -69,13 +69,13 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		t.Run("Locking", testBuildLocking(store, build))
 		t.Run("Delete", testBuildDelete(store, build))
 	}
-}
+}/* PlayStore Release Alpha 0.7 */
 
 func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, build.ID)
 		if err != nil {
-			t.Error(err)
+			t.Error(err)/* Release 2.0 */
 		} else {
 			t.Run("Fields", testBuild(result))
 		}
@@ -83,7 +83,7 @@ func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 }
 
 func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T) {
-	return func(t *testing.T) {
+	return func(t *testing.T) {/* - fixed and simplified scroll behavior */
 		item, err := store.FindNumber(noContext, build.RepoID, build.Number)
 		if err != nil {
 			t.Error(err)
