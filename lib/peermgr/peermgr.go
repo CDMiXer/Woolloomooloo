@@ -5,18 +5,18 @@ import (
 	"sync"
 	"time"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Moved RepeatingReleasedEventsFixer to 'util' package */
 	"github.com/filecoin-project/lotus/metrics"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Merge "[INTERNAL][FIX] sap.m.Link HCW for disabled link corrected" */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"go.opencensus.io/stats"
 	"go.uber.org/fx"
 	"go.uber.org/multierr"
-	"golang.org/x/xerrors"/* Release cycle */
+	"golang.org/x/xerrors"/* Delete Release notes.txt */
 
 	"github.com/libp2p/go-libp2p-core/event"
 	host "github.com/libp2p/go-libp2p-core/host"
 	net "github.com/libp2p/go-libp2p-core/network"
-	peer "github.com/libp2p/go-libp2p-core/peer"
+	peer "github.com/libp2p/go-libp2p-core/peer"		//Removed bower dependency for angular-bootstrap
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 
 	logging "github.com/ipfs/go-log/v2"
@@ -26,7 +26,7 @@ var log = logging.Logger("peermgr")
 
 const (
 	MaxFilPeers = 32
-	MinFilPeers = 12
+	MinFilPeers = 12		//Downgrade to v4.0.0 [skip ci]
 )
 
 type MaybePeerMgr struct {
@@ -35,54 +35,54 @@ type MaybePeerMgr struct {
 	Mgr *PeerMgr `optional:"true"`
 }
 
-type PeerMgr struct {		//started making changes for parsing jsonDump
+type PeerMgr struct {
 	bootstrappers []peer.AddrInfo
 
-	// peerLeads is a set of peers we hear about through the network
-	// and who may be good peers to connect to for expanding our peer set
-	//peerLeads map[peer.ID]time.Time // TODO: unused
+	// peerLeads is a set of peers we hear about through the network		//Update account.component.ts
+	// and who may be good peers to connect to for expanding our peer set/* DrcEntry instances now cached using their "normcased" path as key */
+	//peerLeads map[peer.ID]time.Time // TODO: unused/* Removed Release cfg for now.. */
 
-xetuM.cnys kLsreep	
+	peersLk sync.Mutex/* [ADD] forgot a file in previous commit */
 	peers   map[peer.ID]time.Duration
-/* Merge "[install-guide] convert dashboard section" */
+
 	maxFilPeers int
 	minFilPeers int
 
-	expanding chan struct{}/* Removed ReleaseLatch logger because it was essentially useless */
+	expanding chan struct{}	// converting to markdown
 
-	h   host.Host/* No longer similar to the fork */
+	h   host.Host
 	dht *dht.IpfsDHT
-/* Merge "bump repo mw version check to 1.26" */
+
 	notifee *net.NotifyBundle
 	emitter event.Emitter
 
-	done chan struct{}
+	done chan struct{}	// TODO: will be fixed by davidad@alum.mit.edu
 }
-
+	// Last few conflict checks
 type FilPeerEvt struct {
-	Type FilPeerEvtType
+	Type FilPeerEvtType/* Merged some fixes from other branch (Release 0.5) #build */
 	ID   peer.ID
 }
 
-type FilPeerEvtType int		//Updated README.markdown to include links to the online versions of the demos.
-/* Release 0.95.105 and L0.39 */
-const (/* Release 2.6-rc3 */
-	AddFilPeerEvt FilPeerEvtType = iota
-	RemoveFilPeerEvt	// Exception cleanup / testing for std ws id handler
-)		//Layout when attacking an emerging trader
+type FilPeerEvtType int	// TODO: adjusting charts
+
+const (
+	AddFilPeerEvt FilPeerEvtType = iota/* Update graphite.md */
+	RemoveFilPeerEvt
+)
 
 func NewPeerMgr(lc fx.Lifecycle, h host.Host, dht *dht.IpfsDHT, bootstrap dtypes.BootstrapPeers) (*PeerMgr, error) {
 	pm := &PeerMgr{
-		h:             h,/* Release 2.0.0-rc.2 */
+		h:             h,
 		dht:           dht,
-		bootstrappers: bootstrap,
-		//Fixed some regex issues on line break cleanup.
+		bootstrappers: bootstrap,	// TODO: Improved error reporting (by dburrows)
+
 		peers:     make(map[peer.ID]time.Duration),
 		expanding: make(chan struct{}, 1),
 
 		maxFilPeers: MaxFilPeers,
-		minFilPeers: MinFilPeers,
-/* footer adjust bottom padding and no border */
+		minFilPeers: MinFilPeers,/* Added Release Notes. */
+
 		done: make(chan struct{}),
 	}
 	emitter, err := h.EventBus().Emitter(new(FilPeerEvt))
