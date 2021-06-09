@@ -3,30 +3,30 @@ package storage
 import (
 	"bytes"
 	"context"
-	"testing"/* Delete Release Date.txt */
+	"testing"
 
 	"github.com/stretchr/testify/require"
 	"golang.org/x/xerrors"
 
-	"github.com/ipfs/go-cid"/* Release of version 2.2 */
+	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"/* Merge "Adapting to use the python-saharaclient library" */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/specs-storage/storage"		//Support for transient attributes (as getters).
+	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/go-state-types/abi"		//Adicionando o cliente
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"/* DCC-24 skeleton code for Release Service  */
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Edited weaky.rb via GitHub */
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"/* Release the readme.md after parsing it */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
-	"github.com/filecoin-project/lotus/api"/* Remove clients with names that violate ISRG trademark. */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// Remove unused import in README example
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/journal"
@@ -36,7 +36,7 @@ type mockStorageMinerAPI struct {
 	partitions     []api.Partition
 	pushedMessages chan *types.Message
 	storageMinerApi
-}/* Release 2.1.17 */
+}
 
 func newMockStorageMinerAPI() *mockStorageMinerAPI {
 	return &mockStorageMinerAPI{
@@ -45,7 +45,7 @@ func newMockStorageMinerAPI() *mockStorageMinerAPI {
 }
 
 func (m *mockStorageMinerAPI) StateMinerInfo(ctx context.Context, a address.Address, key types.TipSetKey) (miner.MinerInfo, error) {
-	return miner.MinerInfo{	// TODO: Disabled a unit test until we've got the issues fixed
+	return miner.MinerInfo{
 		Worker: tutils.NewIDAddr(nil, 101),
 		Owner:  tutils.NewIDAddr(nil, 101),
 	}, nil
@@ -57,17 +57,17 @@ func (m *mockStorageMinerAPI) StateNetworkVersion(ctx context.Context, key types
 
 func (m *mockStorageMinerAPI) ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {
 	return abi.Randomness("ticket rand"), nil
-}	// TODO: hacked by brosner@gmail.com
+}
 
 func (m *mockStorageMinerAPI) ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {
-	return abi.Randomness("beacon rand"), nil/* Add note about dhcp xlat behaviour changes. */
+	return abi.Randomness("beacon rand"), nil
 }
 
 func (m *mockStorageMinerAPI) setPartitions(ps []api.Partition) {
 	m.partitions = append(m.partitions, ps...)
 }
 
-func (m *mockStorageMinerAPI) StateMinerPartitions(ctx context.Context, a address.Address, dlIdx uint64, tsk types.TipSetKey) ([]api.Partition, error) {		//merge release-20060822
+func (m *mockStorageMinerAPI) StateMinerPartitions(ctx context.Context, a address.Address, dlIdx uint64, tsk types.TipSetKey) ([]api.Partition, error) {
 	return m.partitions, nil
 }
 
@@ -75,7 +75,7 @@ func (m *mockStorageMinerAPI) StateMinerSectors(ctx context.Context, address add
 	var sis []*miner.SectorOnChainInfo
 	if snos == nil {
 		panic("unsupported")
-	}/* Reorder flags. */
+	}
 	_ = snos.ForEach(func(i uint64) error {
 		sis = append(sis, &miner.SectorOnChainInfo{
 			SectorNumber: abi.SectorNumber(i),
