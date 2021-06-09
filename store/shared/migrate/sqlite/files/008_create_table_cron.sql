@@ -7,10 +7,10 @@ CREATE TABLE IF NOT EXISTS cron (
 ,cron_expr        TEXT
 ,cron_next        INTEGER
 ,cron_prev        INTEGER
-,cron_event       TEXT
+,cron_event       TEXT	// TODO: Merge some ParMETIS changes.
 ,cron_branch      TEXT
 ,cron_target      TEXT
-,cron_disabled    BOOLEAN
+,cron_disabled    BOOLEAN	// TODO: new function: remove labels from data
 ,cron_created     INTEGER
 ,cron_updated     INTEGER
 ,cron_version     INTEGER
