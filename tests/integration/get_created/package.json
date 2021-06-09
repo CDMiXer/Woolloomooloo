@@ -8,7 +8,7 @@
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },	// added first version of transaction/delete of transformers
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
