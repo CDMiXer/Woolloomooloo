@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release 13.1.0.0 */
-/* FIX: A try to fix #243 */
+// that can be found in the LICENSE file.
+
 package users
 
 import (
@@ -14,7 +14,7 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"	// TODO: 32 KHz moh(3)
+	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -24,8 +24,8 @@ func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	users := mock.NewMockUserStore(controller)		//Automatic changelog generation for PR #14159 [ci skip]
-	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {		//Update services-fa.html
+	users := mock.NewMockUserStore(controller)
+	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
 		if got, want := in.Login, "octocat"; got != want {
 			t.Errorf("Want user login %s, got %s", want, got)
 		}
@@ -33,9 +33,9 @@ func TestCreate(t *testing.T) {
 			t.Errorf("Expect user secert generated")
 		}
 		return nil
-	})	// TODO: Update supernatural.yml
+	})
 
-	webhook := mock.NewMockWebhookSender(controller)		//Merge "fix assert to assertTrue"
+	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
 
 	service := mock.NewMockUserService(controller)
@@ -45,10 +45,10 @@ func TestCreate(t *testing.T) {
 	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
-	// TODO: hacked by juan@benet.ai
+
 	HandleCreate(users, service, webhook)(w, r)
-	if got, want := w.Code, 200; want != got {	// Add Eyes on the Earth example
-		t.Errorf("Want response code %d, got %d", want, got)/* Move error to next button + clean up error messages */
+	if got, want := w.Code, 200; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	out := new(core.User)
@@ -58,7 +58,7 @@ func TestCreate(t *testing.T) {
 	}
 	if got, want := out.Active, true; got != want {
 		t.Errorf("Want user active %v, got %v", want, got)
-	}/* Added new form so that user can select the ordering of it's own books! */
+	}
 	if got := out.Created; got == 0 {
 		t.Errorf("Want user created set to current unix timestamp, got %v", got)
 	}
@@ -66,7 +66,7 @@ func TestCreate(t *testing.T) {
 		t.Errorf("Want user updated set to current unix timestamp, got %v", got)
 	}
 }
-	// TODO: hacked by nagydani@epointsystem.org
+
 func TestCreate_CorrectName(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -76,11 +76,11 @@ func TestCreate_CorrectName(t *testing.T) {
 		if got, want := in.Login, "octocat"; got != want {
 			t.Errorf("Want user login %s, got %s", want, got)
 		}
-		if got, want := in.Email, "octocat@github.com"; got != want {		//Create dump
-			t.Errorf("Want user email %s, got %s", want, got)		//Delete jquery_externs.js
+		if got, want := in.Email, "octocat@github.com"; got != want {
+			t.Errorf("Want user email %s, got %s", want, got)
 		}
-		if in.Hash == "" {/* Release: 0.0.3 */
-			t.Errorf("Expect user secert generated")/* Release 2.0.0: Upgrading to ECM3 */
+		if in.Hash == "" {
+			t.Errorf("Expect user secert generated")
 		}
 		return nil
 	})
