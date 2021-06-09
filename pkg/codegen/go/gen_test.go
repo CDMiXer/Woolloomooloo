@@ -7,12 +7,12 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
-	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"
+	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"	// TODO: Create FED_Rockfish_length.md
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* @Release [io7m-jcanephora-0.34.4] */
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* Merge "[INTERNAL] Release notes for version 1.28.28" */
 )
 
 func TestInputUsage(t *testing.T) {
@@ -20,34 +20,34 @@ func TestInputUsage(t *testing.T) {
 	assert.Equal(
 		t,
 		"FooArrayInput is an input type that accepts FooArray and FooArrayOutput values.\nYou can construct a "+
-			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",
+			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",/* Update cld.sh */
 		arrayUsage)
 
 	mapUsage := getInputUsage("FooMap")
-	assert.Equal(
+	assert.Equal(/* Get ready to move the tests into KnownGraph implementation tests. */
 		t,
 		"FooMapInput is an input type that accepts FooMap and FooMapOutput values.\nYou can construct a concrete"+
-			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",
+			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",/* 62879ff0-2e57-11e5-9284-b827eb9e62be */
 		mapUsage)
 
 	ptrUsage := getInputUsage("FooPtr")
 	assert.Equal(
 		t,
-		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+
+		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+	// TODO: hacked by steven@stebalien.com
 			"concrete instance of `FooPtrInput` via:\n\n\t\t FooArgs{...}\n\n or:\n\n\t\t nil\n ",
-		ptrUsage)
+		ptrUsage)	// Update read-task.php
 
 	usage := getInputUsage("Foo")
 	assert.Equal(
-		t,
+		t,		//Update craftassets_cheat_sheet.md
 		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+
-			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",
+			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",/* Release 1.1.4-SNAPSHOT */
 		usage)
 }
 
 func TestGoPackageName(t *testing.T) {
 	assert.Equal(t, "aws", goPackage("aws"))
-	assert.Equal(t, "azure", goPackage("azure-nextgen"))
+	assert.Equal(t, "azure", goPackage("azure-nextgen"))	// Major update (almost done)
 	assert.Equal(t, "plant", goPackage("plant-provider"))
 	assert.Equal(t, "", goPackage(""))
 }
@@ -65,11 +65,11 @@ func TestGeneratePackage(t *testing.T) {
 				"example/argFunction.go",
 				"example/otherResource.go",
 				"example/provider.go",
-				"example/resource.go",
+				"example/resource.go",		//Adding GFDL
 			},
 		},
-		{
-			"Simple schema with enum types",
+		{	// TODO: hacked by xiemengjun@gmail.com
+			"Simple schema with enum types",	// merge updated with some removal from barry
 			"simple-enum-schema",
 			[]string{
 				filepath.Join("plant", "provider.go"),
@@ -79,7 +79,7 @@ func TestGeneratePackage(t *testing.T) {
 				filepath.Join("plant", "tree", "v1", "pulumiEnums.go"),
 			},
 		},
-	}
+	}		//Make maxy/y final
 	testDir := filepath.Join("..", "internal", "test", "testdata")
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
