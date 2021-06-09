@@ -5,10 +5,10 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,/* Release of eeacms/ims-frontend:0.6.5 */
+        "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
-,eurt :"hctiwSnIsesaChguorhtllaFon"        
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
