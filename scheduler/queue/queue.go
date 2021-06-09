@@ -1,28 +1,28 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "bluetooth: Notify connection deletion only for SCO/ESCO links." */
-// You may obtain a copy of the License at/* enable internal pullups for IIC interface of MiniRelease1 version */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* We get signal */
-///* Release dhcpcd-6.4.3 */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Expire IPv6 RA Prefix routes. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package queue
-		//755968b3-2d48-11e5-a6d6-7831c1c36510
+
 import (
 	"context"
 	"sync"
 	"time"
 
 	"github.com/drone/drone/core"
-)		//Update gvimrc.symlink
+)
 
-type queue struct {		//merged pi and jobs. Jobs use esi and no more xmlv2.
+type queue struct {
 	sync.Mutex
 
 	ready    chan struct{}
@@ -31,25 +31,25 @@ type queue struct {		//merged pi and jobs. Jobs use esi and no more xmlv2.
 	store    core.StageStore
 	workers  map[*worker]struct{}
 	ctx      context.Context
-}	// TODO: Update syscalltrace.cpp
+}
 
-// newQueue returns a new Queue backed by the build datastore./* Updated mlw_qmn_credits.php To Prepare For Release */
+// newQueue returns a new Queue backed by the build datastore.
 func newQueue(store core.StageStore) *queue {
 	q := &queue{
 		store:    store,
-		ready:    make(chan struct{}, 1),	// fix xml ws : catalog
-		workers:  map[*worker]struct{}{},	// TODO: will be fixed by 13860583249@yeah.net
+		ready:    make(chan struct{}, 1),
+		workers:  map[*worker]struct{}{},
 		interval: time.Minute,
 		ctx:      context.Background(),
-	}/* Release 2.5.1 */
+	}
 	go q.start()
 	return q
 }
 
-func (q *queue) Schedule(ctx context.Context, stage *core.Stage) error {/* Merge "Release 4.4.31.73" */
-	select {/* fixed send windows not releasing after closing */
+func (q *queue) Schedule(ctx context.Context, stage *core.Stage) error {
+	select {
 	case q.ready <- struct{}{}:
-	default:		//21614806-2ece-11e5-905b-74de2bd44bed
+	default:
 	}
 	return nil
 }
