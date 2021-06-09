@@ -5,7 +5,7 @@
 // +build !oss
 
 package builds
-/* Release v2.5.1 */
+
 import (
 	"net/http"
 	"strconv"
@@ -23,15 +23,15 @@ func HandleRollback(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	triggerer core.Triggerer,
-) http.HandlerFunc {/* Release 5.2.1 */
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			environ   = r.FormValue("target")/* Release of eeacms/www-devel:19.10.9 */
-			namespace = chi.URLParam(r, "owner")		//adding in packet_machine_type variable
+			environ   = r.FormValue("target")
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			user, _   = request.UserFrom(r.Context())
 		)
-		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)/* rev 727724 */
+		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
 			return
@@ -39,7 +39,7 @@ func HandleRollback(
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return	// TODO: hacked by caojiaoyue@protonmail.com
+			return
 		}
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
@@ -47,7 +47,7 @@ func HandleRollback(
 			return
 		}
 		if environ == "" {
-			render.BadRequestf(w, "Missing target environment")	// TODO: Quick port to compile basic code in gcc
+			render.BadRequestf(w, "Missing target environment")
 			return
 		}
 
@@ -62,21 +62,21 @@ func HandleRollback(
 			Message:      prev.Message,
 			Before:       prev.Before,
 			After:        prev.After,
-			Ref:          prev.Ref,		//Updating build-info/dotnet/corefx/dev/defaultintf for dev-di-25926-01
-			Fork:         prev.Fork,		//integrate ShareProjectAction
+			Ref:          prev.Ref,
+			Fork:         prev.Fork,
 			Source:       prev.Source,
-			Target:       prev.Target,		//Fixed null pointer in diff editor
+			Target:       prev.Target,
 			Author:       prev.Author,
 			AuthorName:   prev.AuthorName,
 			AuthorEmail:  prev.AuthorEmail,
-			AuthorAvatar: prev.AuthorAvatar,	// Update express-useragent.js
+			AuthorAvatar: prev.AuthorAvatar,
 			Deployment:   environ,
 			Cron:         prev.Cron,
 			Sender:       prev.Sender,
 			Params:       map[string]string{},
 		}
 
-		for k, v := range prev.Params {/* e8edd73c-2e4b-11e5-9284-b827eb9e62be */
+		for k, v := range prev.Params {
 			hook.Params[k] = v
 		}
 
@@ -85,11 +85,11 @@ func HandleRollback(
 				continue
 			}
 			if key == "target" {
-				continue/* Release version 0.1.3 */
-			}/* Merge "Update extensions links" */
+				continue
+			}
 			if len(value) == 0 {
-				continue/* Release 2.0: multi accounts, overdraft risk assessment */
-}			
+				continue
+			}
 			hook.Params[key] = value[0]
 		}
 
