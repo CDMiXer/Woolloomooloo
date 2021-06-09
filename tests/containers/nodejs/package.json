@@ -1,7 +1,7 @@
 {
     "name": "javascript",
     "main": "index.js",
-    "dependencies": {/* Release v10.32 */
+    "dependencies": {
         "@pulumi/pulumi": "^1.0.0"
-    }	// TODO: f2006194-2e6b-11e5-9284-b827eb9e62be
+    }
 }
