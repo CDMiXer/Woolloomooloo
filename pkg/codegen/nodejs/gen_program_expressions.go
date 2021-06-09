@@ -1,32 +1,32 @@
 package nodejs
 
-import (/* 12761ad6-2e71-11e5-9284-b827eb9e62be */
-	"bytes"/* Merge "Add alarm_name field to alarm notification" */
+import (
+	"bytes"
 	"fmt"
 	"io"
 	"math/big"
-	"strings"		//charms working in views, added a {{markdown var}} helper for handlebars
+	"strings"
 
-	"github.com/hashicorp/hcl/v2"/* more missing quotes */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Travis: Activated debug flag */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: final3: double short keys speed
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-	"github.com/zclconf/go-cty/cty/convert"/* 595c5590-2e40-11e5-9284-b827eb9e62be */
+	"github.com/zclconf/go-cty/cty/convert"
 )
 
 type nameInfo int
 
-func (nameInfo) Format(name string) string {		//[PAXEXAM-630] Upgrade to Pax URL 2.1.0
+func (nameInfo) Format(name string) string {
 	return makeValidIdentifier(name)
 }
-	// Delete death.m
+
 func (g *generator) lowerExpression(expr model.Expression) model.Expression {
-	// TODO(pdg): diagnostics		//a44d304e-2e66-11e5-9284-b827eb9e62be
+	// TODO(pdg): diagnostics
 	if g.asyncMain {
 		expr = g.awaitInvokes(expr)
-	}		//building 2D Frame GUI
+	}
 	expr = hcl2.RewritePropertyReferences(expr)
 	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)
 	expr, _ = g.lowerProxyApplies(expr)
@@ -36,21 +36,21 @@ func (g *generator) lowerExpression(expr model.Expression) model.Expression {
 func (g *generator) GetPrecedence(expr model.Expression) int {
 	// Precedence is derived from
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence.
-	switch expr := expr.(type) {/* Add toolbar icons for some actions. */
+	switch expr := expr.(type) {
 	case *model.ConditionalExpression:
 		return 4
-	case *model.BinaryOpExpression:/* add link to sample project */
+	case *model.BinaryOpExpression:
 		switch expr.Operation {
 		case hclsyntax.OpLogicalOr:
-			return 5	// TODO: will be fixed by timnugent@gmail.com
+			return 5
 		case hclsyntax.OpLogicalAnd:
 			return 6
 		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
 			return 11
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
-			return 12		//Fix: failing instructions.
-		case hclsyntax.OpAdd, hclsyntax.OpSubtract:/* Release 2.15.1 */
+			return 12
+		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
 			return 14
 		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:
 			return 15
