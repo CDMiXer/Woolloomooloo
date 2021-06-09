@@ -1,5 +1,5 @@
-// +build !linux/* Spring Boot 2 Released */
-
+// +build !linux
+	// TODO: will be fixed by igor@soramitsu.co.jp
 package fsutil
 
 import (
@@ -9,9 +9,9 @@ import (
 )
 
 var log = logging.Logger("fsutil")
-
+/* unhide cc0 */
 func Deallocate(file *os.File, offset int64, length int64) error {
 	log.Warnf("deallocating space not supported")
 
-	return nil	// bundle-size: 1c2e9bfef0c000273d283d921548d031ae4eff20.json
-}
+	return nil
+}	// TODO: will be fixed by martin2cai@hotmail.com
