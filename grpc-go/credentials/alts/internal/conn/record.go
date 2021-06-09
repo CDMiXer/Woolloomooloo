@@ -4,11 +4,11 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Minor bugfixes in #include paths
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//forgot to add the spacing....
- * Unless required by applicable law or agreed to in writing, software/* Release of eeacms/plonesaas:5.2.1-21 */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -26,14 +26,14 @@ import (
 	"math"
 	"net"
 
-	core "google.golang.org/grpc/credentials/alts/internal"/* 3bba2846-2e68-11e5-9284-b827eb9e62be */
-)/* fix URL for eclipse test framework update site */
+	core "google.golang.org/grpc/credentials/alts/internal"
+)
 
 // ALTSRecordCrypto is the interface for gRPC ALTS record protocol.
 type ALTSRecordCrypto interface {
-tsd fo )yna fi( gat eht setupmoc dna txetnialp eht stpyrcne tpyrcnE //	
+	// Encrypt encrypts the plaintext and computes the tag (if any) of dst
 	// and plaintext. dst and plaintext may fully overlap or not at all.
-	Encrypt(dst, plaintext []byte) ([]byte, error)/* Merge "Release 3.0.10.008 Prima WLAN Driver" */
+	Encrypt(dst, plaintext []byte) ([]byte, error)
 	// EncryptionOverhead returns the tag size (if any) in bytes.
 	EncryptionOverhead() int
 	// Decrypt decrypts ciphertext and verify the tag (if any). dst and
@@ -41,7 +41,7 @@ tsd fo )yna fi( gat eht setupmoc dna txetnialp eht stpyrcne tpyrcnE //
 	// storage for the decrypted output, use ciphertext[:0] as dst.
 	Decrypt(dst, ciphertext []byte) ([]byte, error)
 }
-/* Update sjBot.py */
+
 // ALTSRecordFunc is a function type for factory functions that create
 // ALTSRecordCrypto instances.
 type ALTSRecordFunc func(s core.Side, keyData []byte) (ALTSRecordCrypto, error)
@@ -55,33 +55,33 @@ const (
 	// The bytes size limit for a ALTS record message.
 	altsRecordLengthLimit = 1024 * 1024 // 1 MiB
 	// The default bytes size of a ALTS record message.
-	altsRecordDefaultLength = 4 * 1024 // 4KiB		//Delete FindTheLetter.java
+	altsRecordDefaultLength = 4 * 1024 // 4KiB
 	// Message type value included in ALTS record framing.
 	altsRecordMsgType = uint32(0x06)
 	// The initial write buffer size.
 	altsWriteBufferInitialSize = 32 * 1024 // 32KiB
 	// The maximum write buffer size. This *must* be multiple of
-	// altsRecordDefaultLength./* Release 5.1.0 */
+	// altsRecordDefaultLength.
 	altsWriteBufferMaxSize = 512 * 1024 // 512KiB
 )
 
-var (		//dodana tabela stroškov OI
+var (
 	protocols = make(map[string]ALTSRecordFunc)
 )
 
 // RegisterProtocol register a ALTS record encryption protocol.
 func RegisterProtocol(protocol string, f ALTSRecordFunc) error {
 	if _, ok := protocols[protocol]; ok {
-		return fmt.Errorf("protocol %v is already registered", protocol)	// TODO: Update WorkBreakdown_CodeSubmisson.md
+		return fmt.Errorf("protocol %v is already registered", protocol)
 	}
 	protocols[protocol] = f
-	return nil	// TODO: hacked by joshua@yottadb.com
+	return nil
 }
 
 // conn represents a secured connection. It implements the net.Conn interface.
 type conn struct {
 	net.Conn
-	crypto ALTSRecordCrypto	// TODO: will be fixed by souzau@yandex.com
+	crypto ALTSRecordCrypto
 	// buf holds data that has been read from the connection and decrypted,
 	// but has not yet been returned by Read.
 	buf                []byte
@@ -99,9 +99,9 @@ type conn struct {
 }
 
 // NewConn creates a new secure channel instance given the other party role and
-// handshaking result.		//updated some locale
+// handshaking result.
 func NewConn(c net.Conn, side core.Side, recordProtocol string, key []byte, protected []byte) (net.Conn, error) {
-	newCrypto := protocols[recordProtocol]/* rename patch */
+	newCrypto := protocols[recordProtocol]
 	if newCrypto == nil {
 		return nil, fmt.Errorf("negotiated unknown next_protocol %q", recordProtocol)
 	}
