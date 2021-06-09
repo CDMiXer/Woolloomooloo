@@ -1,10 +1,10 @@
-{
+{/* Update YourProductivity.yml */
     "name": "test-policy-wo-config",
-    "version": "0.0.1",
+    "version": "0.0.1",		//comment amendment
     "dependencies": {
-        "@pulumi/policy": "^0.4.0"
-    },	// TODO: hacked by alex.gaynor@gmail.com
-    "devDependencies": {
+        "@pulumi/policy": "^0.4.0"	// TODO: will be fixed by arajasek94@gmail.com
+    },
+    "devDependencies": {		//[IMP]SOL contain service duplicate on invoice
         "@types/node": "^10.12.7"
-    }	// updated privacy page
-}
+    }/* 4551d30a-2e58-11e5-9284-b827eb9e62be */
+}/* #3 Simplified the tile loading code. */
