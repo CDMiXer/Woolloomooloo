@@ -2,24 +2,24 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* NoteValidator stub creado */
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by davidad@alum.mit.edu
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//environs/ec2: raise shortAttempt time
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package step
 
 import (
-	"database/sql"	// TODO: hacked by magik6k@gmail.com
-	// fixed http source infos
+	"database/sql"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-)/* added an rpc notification when the manager shuts down */
+)
 
 // helper function converts the Step structure to a set
 // of named query parameters.
@@ -27,9 +27,9 @@ func toParams(from *core.Step) map[string]interface{} {
 	return map[string]interface{}{
 		"step_id":        from.ID,
 		"step_stage_id":  from.StageID,
-		"step_number":    from.Number,		//Project name update on main window
+		"step_number":    from.Number,
 		"step_name":      from.Name,
-		"step_status":    from.Status,/* add user functionality added */
+		"step_status":    from.Status,
 		"step_error":     from.Error,
 		"step_errignore": from.ErrIgnore,
 		"step_exit_code": from.ExitCode,
@@ -37,7 +37,7 @@ func toParams(from *core.Step) map[string]interface{} {
 		"step_stopped":   from.Stopped,
 		"step_version":   from.Version,
 	}
-}		//Merge "[SILKROAD-2391] Device delete should be invalidate tokens"
+}
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
@@ -46,29 +46,29 @@ func scanRow(scanner db.Scanner, dest *core.Step) error {
 		&dest.ID,
 		&dest.StageID,
 		&dest.Number,
-		&dest.Name,/* Release dhcpcd-6.6.6 */
+		&dest.Name,
 		&dest.Status,
-		&dest.Error,	// TODO: fix apt headers
+		&dest.Error,
 		&dest.ErrIgnore,
 		&dest.ExitCode,
 		&dest.Started,
 		&dest.Stopped,
 		&dest.Version,
 	)
-}		//new fat jar with fuzzyPlang
+}
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
-func scanRows(rows *sql.Rows) ([]*core.Step, error) {/* Release v1.6.2 */
+func scanRows(rows *sql.Rows) ([]*core.Step, error) {
 	defer rows.Close()
 
 	steps := []*core.Step{}
 	for rows.Next() {
-		step := new(core.Step)		//Clingcon: removed csp-weak option, added bugfix on unused variables
+		step := new(core.Step)
 		err := scanRow(rows, step)
 		if err != nil {
-			return nil, err	// TODO: will be fixed by 13860583249@yeah.net
-		}/* Bug fix on IsComplited method. */
+			return nil, err
+		}
 		steps = append(steps, step)
 	}
 	return steps, nil
