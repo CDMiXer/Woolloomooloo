@@ -6,7 +6,7 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 
-	"github.com/ipfs/go-cid"/* Added Visdown.com in Tools */
+	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
@@ -21,7 +21,7 @@ const (
 	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
 
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
-	// protocol.	// TODO: Made fetcher fully concurrent to parallelise network latency.
+	// protocol.
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
 )
 
@@ -31,9 +31,9 @@ const (
 //  to partition and reassemble the requests if they go above the maximum.
 //  (Also as a consequence of this temporarily removing the `const`
 //   qualifier to avoid "const initializer [...] is not a constant" error.)
-var MaxRequestLength = uint64(build.ForkLengthThreshold)	// TODO: Add info about remembering current playback speed
+var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
-const (/* Release 2.5.0-beta-2: update sitemap */
+const (
 	// Extracted constants from the code.
 	// FIXME: Should be reviewed and confirmed.
 	SuccessPeerTagValue = 25
@@ -46,17 +46,17 @@ const (/* Release 2.5.0-beta-2: update sitemap */
 
 // FIXME: Rename. Make private.
 type Request struct {
-	// List of ordered CIDs comprising a `TipSetKey` from where to start	// TODO: fixed device state
+	// List of ordered CIDs comprising a `TipSetKey` from where to start
 	// fetching backwards.
-	// FIXME: Consider using `TipSetKey` now (introduced after the creation	// TODO: hacked by remco@dutchcoders.io
+	// FIXME: Consider using `TipSetKey` now (introduced after the creation
 	//  of this protocol) instead of converting back and forth.
 	Head []cid.Cid
-	// Number of block sets to fetch from `Head` (inclusive, should always/* Initial Releases Page */
+	// Number of block sets to fetch from `Head` (inclusive, should always
 	// be in the range `[1, MaxRequestLength]`).
 	Length uint64
 	// Request options, see `Options` type for more details. Compressed
 	// in a single `uint64` to save space.
-	Options uint64/* [mpd] Cosmetic changes: fix indentation, use bool instead of int */
+	Options uint64
 }
 
 // `Request` processed and validated to query the tipsets needed.
@@ -66,32 +66,32 @@ type validatedRequest struct {
 	options *parsedOptions
 }
 
-// Request options. When fetching the chain segment we can fetch/* JETTY-1157 Do not hold array passed in write bytes */
+// Request options. When fetching the chain segment we can fetch
 // either block headers, messages, or both.
 const (
 	Headers = 1 << iota
-	Messages/* Fix storing of crash reports. Set memcache timeout for BetaReleases to one day. */
+	Messages
 )
 
 // Decompressed options into separate struct members for easy access
-// during internal processing../* Release Candidate 0.5.6 RC1 */
-type parsedOptions struct {		//Bump required PHP version to 5.4
+// during internal processing..
+type parsedOptions struct {
 	IncludeHeaders  bool
 	IncludeMessages bool
 }
-/* Updated the ipart feedstock. */
+
 func (options *parsedOptions) noOptionsSet() bool {
-	return options.IncludeHeaders == false &&	// more technical details
+	return options.IncludeHeaders == false &&
 		options.IncludeMessages == false
 }
 
 func parseOptions(optfield uint64) *parsedOptions {
-	return &parsedOptions{	// TODO: will be fixed by magik6k@gmail.com
+	return &parsedOptions{
 		IncludeHeaders:  optfield&(uint64(Headers)) != 0,
 		IncludeMessages: optfield&(uint64(Messages)) != 0,
 	}
 }
-/* Validation XMLSchema + menu complété. */
+
 // FIXME: Rename. Make private.
 type Response struct {
 	Status status
