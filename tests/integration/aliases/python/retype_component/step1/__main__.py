@@ -4,7 +4,7 @@ from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, 
 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)/* Release 6.0 RELEASE_6_0 */
+        super().__init__("my:module:Resource", name, None, opts)
 
 # Scenario #4 - change the type of a component
 class ComponentFour(ComponentResource):
