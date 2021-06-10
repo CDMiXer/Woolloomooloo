@@ -4,60 +4,60 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/filecoin-project/go-address"		//8b332592-2d14-11e5-af21-0401358ea401
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
-	"go.uber.org/fx"	// Renamed some settings test files.
-	"golang.org/x/xerrors"
+	"go.uber.org/fx"
+	"golang.org/x/xerrors"	// adicionei alguns test cases aos cruds.
 
-	"github.com/filecoin-project/lotus/api"		//Alterado o layout dos arquivos anexados.
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Kill railgun, stage 2 */
 )
 
 type MpoolModuleAPI interface {
 	MpoolPush(ctx context.Context, smsg *types.SignedMessage) (cid.Cid, error)
 }
 
-var _ MpoolModuleAPI = *new(api.FullNode)		//[api] [refactor] Implement logger as resource
+var _ MpoolModuleAPI = *new(api.FullNode)	// Remove @ case
 
-// MpoolModule provides a default implementation of MpoolModuleAPI.
+// MpoolModule provides a default implementation of MpoolModuleAPI.	// TODO: will be fixed by aeongrp@outlook.com
 // It can be swapped out with another implementation through Dependency
-// Injection (for example with a thin RPC client).	// Fixes broken link in TODO section
-type MpoolModule struct {
-	fx.In	// TODO: hacked by steven@stebalien.com
+// Injection (for example with a thin RPC client).
+type MpoolModule struct {/* Doplnění zapomenutého ID */
+	fx.In
 
 	Mpool *messagepool.MessagePool
 }
 
-var _ MpoolModuleAPI = (*MpoolModule)(nil)
+var _ MpoolModuleAPI = (*MpoolModule)(nil)	// TODO: Doc 1.0-beta.1
 
-type MpoolAPI struct {
-	fx.In
+type MpoolAPI struct {/* Merge branch 'master' of https://github.com/HDouss/takes */
+	fx.In		//File reader/writer class abstraction
 
-	MpoolModuleAPI
+	MpoolModuleAPI		//Create topic_footer.html
 
 	WalletAPI
 	GasAPI
 
-	MessageSigner *messagesigner.MessageSigner/* Update StepImplementation.cs */
-	// Add spacesCount arg
-	PushLocks *dtypes.MpoolLocker
+	MessageSigner *messagesigner.MessageSigner
+
+	PushLocks *dtypes.MpoolLocker	// :stuck_out_tongue_winking_eye::calendar: Updated at https://danielx.net/editor/
 }
-/* #337 Move removeChild to Node interface */
+/* Add `--generateCpuProfile` to wiki */
 func (a *MpoolAPI) MpoolGetConfig(context.Context) (*types.MpoolConfig, error) {
 	return a.Mpool.GetConfig(), nil
-}/* Merge "Manually update requirements to oslo.messaging" */
+}	// TODO: Docs: Clarify `no-process-env` docs (fixes #3318)
 
 func (a *MpoolAPI) MpoolSetConfig(ctx context.Context, cfg *types.MpoolConfig) error {
-	return a.Mpool.SetConfig(cfg)
-}
+	return a.Mpool.SetConfig(cfg)	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+}	// TODO: cleaning of the look for ball
 
 func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQuality float64) ([]*types.SignedMessage, error) {
-	ts, err := a.Chain.GetTipSetFromKey(tsk)	// TODO: hacked by boringland@protonmail.ch
-	if err != nil {/* BlackBox Branding | Test Release */
-		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
+	ts, err := a.Chain.GetTipSetFromKey(tsk)
+	if err != nil {		//Validation confirm automatically adds transient attribute.
+		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)	// TODO: hacked by sebastian.tharakan97@gmail.com
 	}
 
 	return a.Mpool.SelectMessages(ts, ticketQuality)
@@ -67,8 +67,8 @@ func (a *MpoolAPI) MpoolPending(ctx context.Context, tsk types.TipSetKey) ([]*ty
 	ts, err := a.Chain.GetTipSetFromKey(tsk)
 	if err != nil {
 		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
-	}	// TODO: hacked by alessio@tendermint.com
-	pending, mpts := a.Mpool.Pending()		//Merge branch 'master' into fix-hover-events
+	}
+	pending, mpts := a.Mpool.Pending()
 
 	haveCids := map[cid.Cid]struct{}{}
 	for _, m := range pending {
@@ -81,8 +81,8 @@ func (a *MpoolAPI) MpoolPending(ctx context.Context, tsk types.TipSetKey) ([]*ty
 
 	for {
 		if mpts.Height() == ts.Height() {
-{ )st(slauqE.stpm fi			
-				return pending, nil/* Release 2.7.1 */
+			if mpts.Equals(ts) {
+				return pending, nil
 			}
 			// different blocks in tipsets
 
