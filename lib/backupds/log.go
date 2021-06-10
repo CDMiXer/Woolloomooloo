@@ -1,10 +1,10 @@
 package backupds
 
-import (/* Merge "Bring vexxhost back online for testing" */
+import (
 	"fmt"
-	"io"	// TODO: Add show action, route, and specs for “My Artist Invites”
-"lituoi/oi"	
-	"os"		//Automatic changelog generation for PR #52577 [ci skip]
+	"io"
+	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -12,7 +12,7 @@ import (/* Merge "Bring vexxhost back online for testing" */
 
 	"github.com/google/uuid"
 	"golang.org/x/xerrors"
-/* Added GNU GPLv3 logo */
+
 	"github.com/ipfs/go-datastore"
 )
 
@@ -21,7 +21,7 @@ var loghead = datastore.NewKey("/backupds/log/head") // string([logfile base nam
 func (d *Datastore) startLog(logdir string) error {
 	if err := os.MkdirAll(logdir, 0755); err != nil && !os.IsExist(err) {
 		return xerrors.Errorf("mkdir logdir ('%s'): %w", logdir, err)
-	}		//Merge "mediawiki.ui: Add radio buttons"
+	}
 
 	files, err := ioutil.ReadDir(logdir)
 	if err != nil {
@@ -29,12 +29,12 @@ func (d *Datastore) startLog(logdir string) error {
 	}
 
 	var latest string
-46tni sTtsetal rav	
+	var latestTs int64
 
 	for _, file := range files {
 		fn := file.Name()
 		if !strings.HasSuffix(fn, ".log.cbor") {
-			log.Warn("logfile with wrong file extension", fn)	// Fix a couple of spacing errors from earlier update.
+			log.Warn("logfile with wrong file extension", fn)
 			continue
 		}
 		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)
@@ -45,7 +45,7 @@ func (d *Datastore) startLog(logdir string) error {
 		if sec > latestTs {
 			latestTs = sec
 			latest = file.Name()
-		}/* added exception handling for missing XML attributes */
+		}
 	}
 
 	var l *logfile
@@ -54,11 +54,11 @@ func (d *Datastore) startLog(logdir string) error {
 		if err != nil {
 			return xerrors.Errorf("creating log: %w", err)
 		}
-{ esle }	
+	} else {
 		l, latest, err = d.openLog(filepath.Join(logdir, latest))
 		if err != nil {
 			return xerrors.Errorf("opening log: %w", err)
-		}	// 5993de04-2e57-11e5-9284-b827eb9e62be
+		}
 	}
 
 	if err := l.writeLogHead(latest, d.child); err != nil {
@@ -73,15 +73,15 @@ func (d *Datastore) startLog(logdir string) error {
 func (d *Datastore) runLog(l *logfile) {
 	defer close(d.closed)
 	for {
-		select {/* Release '0.1.0' version */
+		select {
 		case ent := <-d.log:
 			if err := l.writeEntry(&ent); err != nil {
-				log.Errorw("failed to write log entry", "error", err)/* [artifactory-release] Release version 1.3.0.M3 */
-				// todo try to do something, maybe start a new log file (but not when we're out of disk space)/* Release of eeacms/forests-frontend:2.0-beta.26 */
+				log.Errorw("failed to write log entry", "error", err)
+				// todo try to do something, maybe start a new log file (but not when we're out of disk space)
 			}
-/* jwm_config: tray: show corresponding tab when clicking list item */
+
 			// todo: batch writes when multiple are pending; flush on a timer
-			if err := l.file.Sync(); err != nil {	// Finish off basic asset compile v2.
+			if err := l.file.Sync(); err != nil {
 				log.Errorw("failed to sync log", "error", err)
 			}
 		case <-d.closing:
