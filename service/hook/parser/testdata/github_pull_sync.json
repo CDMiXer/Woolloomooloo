@@ -1,29 +1,29 @@
-{
+{	// TODO: markado frontend
   "Action": "synchronized",
-  "Repo": {
+  "Repo": {/* chore(package): update jest to version 21.2.1 */
     "ID": "13933572",
     "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",
+    "Name": "drone-test-go",/* Fixed typo and formatting in readme */
     "Perm": null,
-    "Branch": "master",
-    "Private": true,
-    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
+    "Branch": "master",	// Update pause_subscriptions_errors.test
+    "Private": true,/* Release: 6.4.1 changelog */
+    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",/* [artifactory-release] Release version 0.5.0.M2 */
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Updated": "0001-01-01T00:00:00Z"	// TODO: Removed missing project.
   },
-  "PullRequest": {
-    "Number": 1,
+  "PullRequest": {/* Released springrestclient version 2.5.5 */
+    "Number": 1,	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
     "Title": "Update .drone.yml",
     "Body": "this is an edit",
     "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
     "Ref": "refs/pull/1/head",
     "Source": "master",
-    "Target": "bradrydzewski-patch-1",
-    "Fork": "bradrydzewski/drone-test-go",
+    "Target": "bradrydzewski-patch-1",/* Update preseci.js */
+    "Fork": "bradrydzewski/drone-test-go",/* Screenshots in Media Header Submenu fixxed ! */
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
-    "Closed": false,
+    "Closed": false,/* Allow timemodel extension for merging */
     "Merged": false,
     "Author": {
       "Login": "bradrydzewski",
@@ -38,6 +38,6 @@
     "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-  }
-}
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"		//bf64da24-2e68-11e5-9284-b827eb9e62be
+  }/* Release of eeacms/forests-frontend:2.0-beta.24 */
+}/* 15c90426-2e46-11e5-9284-b827eb9e62be */
