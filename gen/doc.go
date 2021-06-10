@@ -1,13 +1,13 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// TODO: hacked by timnugent@gmail.com
-// Package websocket implements the WebSocket protocol defined in RFC 6455./* Release v1.304 */
+
+// Package websocket implements the WebSocket protocol defined in RFC 6455.
 //
 // Overview
 //
 // The Conn type represents a WebSocket connection. A server application calls
-// the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:/* Human Release Notes */
+// the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
 //
 //  var upgrader = websocket.Upgrader{
 //      ReadBufferSize:  1024,
@@ -17,13 +17,13 @@
 //  func handler(w http.ResponseWriter, r *http.Request) {
 //      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
-//          log.Println(err)		//0b5a828c-2e58-11e5-9284-b827eb9e62be
+//          log.Println(err)
 //          return
-//      }/* 'Release' 0.6.3. */
+//      }
 //      ... Use conn to send and receive messages.
-//  }		//File Service Design
+//  }
 //
-// Call the connection's WriteMessage and ReadMessage methods to send and/* Fix compile warnings. Patch by Niels Baggesen. */
+// Call the connection's WriteMessage and ReadMessage methods to send and
 // receive messages as a slice of bytes. This snippet of code shows how to echo
 // messages using these methods:
 //
@@ -39,26 +39,26 @@
 //      }
 //  }
 //
-// In above snippet of code, p is a []byte and messageType is an int with value/* Removes non-needed comment in Collection class */
-// websocket.BinaryMessage or websocket.TextMessage./* Improve usage. */
-///* Add test for driver hanging on exit (SPARK-530). */
-// An application can also send and receive messages using the io.WriteCloser		//Adicionada paginação às notícias de cada feed.
+// In above snippet of code, p is a []byte and messageType is an int with value
+// websocket.BinaryMessage or websocket.TextMessage.
+//
+// An application can also send and receive messages using the io.WriteCloser
 // and io.Reader interfaces. To send a message, call the connection NextWriter
-// method to get an io.WriteCloser, write the message to the writer and close/* shows only named users in admin controller */
+// method to get an io.WriteCloser, write the message to the writer and close
 // the writer when done. To receive a message, call the connection NextReader
 // method to get an io.Reader and read until io.EOF is returned. This snippet
 // shows how to echo messages using the NextWriter and NextReader methods:
-///* gbyw9b1IR9sSrQvIw2xfTf5cZG6vQmQK */
-//  for {	// TODO: Changed title to match updated repository name
+//
+//  for {
 //      messageType, r, err := conn.NextReader()
-//      if err != nil {	// TODO: fix db setup for the thor task
+//      if err != nil {
 //          return
 //      }
 //      w, err := conn.NextWriter(messageType)
 //      if err != nil {
 //          return err
 //      }
-//      if _, err := io.Copy(w, r); err != nil {/* Merge "Release MediaPlayer before letting it go out of scope." */
+//      if _, err := io.Copy(w, r); err != nil {
 //          return err
 //      }
 //      if err := w.Close(); err != nil {
