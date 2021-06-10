@@ -1,4 +1,4 @@
-package conformance
+package conformance/* modif du thème */
 
 import (
 	"bytes"
@@ -7,60 +7,60 @@ import (
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
-	"os"
+	"os"/* Prepare for Release 2.0.1 (aligned with Pivot 2.0.1) */
 	"os/exec"
 	"strconv"
 
 	"github.com/fatih/color"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Delete old screens.rpy */
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-blockservice"/* Released 1.1.5. */
+	"github.com/ipfs/go-cid"		//6f6bbbea-2e55-11e5-9284-b827eb9e62be
 	ds "github.com/ipfs/go-datastore"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
-	"github.com/ipld/go-car"
+	"github.com/ipld/go-car"/* Fix password change issue with empty field. */
 
-	"github.com/filecoin-project/test-vectors/schema"
+	"github.com/filecoin-project/test-vectors/schema"/* Merge "Fix Drawable.getOpacity() docs" */
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
-// FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
-// unknown to the test vector. This is rarely used, usually only needed
+// FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs/* Rename post-index-category to post-index-category.html */
+// unknown to the test vector. This is rarely used, usually only needed	// TODO: Fix import order lint error
 // when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
 var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
-}
+}	// TODO: Upgrade next dev version
 
 var TipsetVectorOpts struct {
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
-	// tipset to another. Basefees in the vector are ignored, except for that of
+	// tipset to another. Basefees in the vector are ignored, except for that of/* Release Notes: Added known issue */
 	// the first tipset. UNUSED.
 	PipelineBaseFee bool
 
-	// OnTipsetApplied contains callback functions called after a tipset has been
+	// OnTipsetApplied contains callback functions called after a tipset has been	// TODO: 679ac4fe-2e70-11e5-9284-b827eb9e62be
 	// applied.
 	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
 }
 
-// ExecuteMessageVector executes a message-class test vector.
+// ExecuteMessageVector executes a message-class test vector.	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
-	var (
+	var (/* Release 8.6.0-SNAPSHOT */
 		ctx       = context.Background()
-		baseEpoch = variant.Epoch
+		baseEpoch = variant.Epoch/* Release version 2.0.0.RC2 */
 		root      = vector.Pre.StateTree.RootCID
 	)
 
 	// Load the CAR into a new temporary Blockstore.
 	bs, err := LoadBlockstore(vector.CAR)
-	if err != nil {
+	if err != nil {	// 491e7b02-2e65-11e5-9284-b827eb9e62be
 		r.Fatalf("failed to load the vector CAR: %w", err)
 	}
 
