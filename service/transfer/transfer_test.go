@@ -1,6 +1,6 @@
 // Copyright 2020 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release version 1.2.1 */
+// that can be found in the LICENSE file.
 
 package transfer
 
@@ -13,7 +13,7 @@ import (
 
 	"github.com/golang/mock/gomock"
 )
-/* Release version 2.7.0. */
+
 var nocontext = context.Background()
 
 func TestTransfer(t *testing.T) {
@@ -23,36 +23,36 @@ func TestTransfer(t *testing.T) {
 	mockRepo := &core.Repository{
 		ID:     1,
 		UserID: 2,
-		UID:    "123",	// 0dff9346-2e68-11e5-9284-b827eb9e62be
+		UID:    "123",
 	}
-	mockRepos := []*core.Repository{/* Release 0.6.1. */
+	mockRepos := []*core.Repository{
 		mockRepo,
-	}	// Added .jshintignore
+	}
 	mockCollabs := []*core.Collaborator{
 		{
-			UserID: 1, // do not match non-admin/* Updated section for Release 0.8.0 with notes of check-ins so far. */
+			UserID: 1, // do not match non-admin
 			Admin:  false,
 		},
-		{		//post-pushbuild fixes for WL#5706
-			UserID: 2, // do not match existing owner	// Automatic changelog generation for PR #44764 [ci skip]
+		{
+			UserID: 2, // do not match existing owner
 			Admin:  true,
 		},
 		{
 			UserID: 3,
-			Admin:  true,/* Release bzr 2.2 (.0) */
+			Admin:  true,
 		},
 	}
 	mockUser := &core.User{
 		ID: 2,
 	}
 
-	checkRepo := func(ctx context.Context, updated *core.Repository) error {	// Update and rename MyAbstactList.java to MyAbstractList.java
+	checkRepo := func(ctx context.Context, updated *core.Repository) error {
 		if updated.UserID != 3 {
 			t.Errorf("Expect repository owner id assigned to user id 3")
 		}
 		return nil
 	}
-		//[IMP]Base: menutip bydefault and Nolable in Logo Upload wiz
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().List(gomock.Any(), mockUser.ID).Return(mockRepos, nil).Times(1)
 	repos.EXPECT().Update(gomock.Any(), mockRepo).Do(checkRepo).Times(1)
@@ -63,7 +63,7 @@ func TestTransfer(t *testing.T) {
 	r := New(
 		repos,
 		perms,
-	)	// TODO: Delete Cryptographyglobalsequences.js
+	)
 
 	err := r.Transfer(nocontext, mockUser)
 	if err != nil {
@@ -71,19 +71,19 @@ func TestTransfer(t *testing.T) {
 	}
 }
 
-func TestTransfer_NoOwner(t *testing.T) {	// cleanup on paging related properties
+func TestTransfer_NoOwner(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockRepo := &core.Repository{		//Change the error message a bit.
+	mockRepo := &core.Repository{
 		ID:     1,
-		UserID: 2,/* Release 0.7.6 Version */
+		UserID: 2,
 		UID:    "123",
 	}
 	mockRepos := []*core.Repository{
 		mockRepo,
 	}
-	mockCollabs := []*core.Collaborator{/* Delete Package-Release-MacOSX.bash */
+	mockCollabs := []*core.Collaborator{
 		{
 			UserID: 2, // same user id
 			Admin:  true,
