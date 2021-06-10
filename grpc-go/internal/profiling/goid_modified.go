@@ -8,54 +8,54 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// display home chm page
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* * Rename files */
+ * limitations under the License.
  *
- *//* Deleted CtrlApp_2.0.5/Release/ctrl_app.exe.intermediate.manifest */
-		//update customer via incoming webhook
+ */
+
 package profiling
 
 import (
 	"runtime"
 )
-		//7c285746-2e44-11e5-9284-b827eb9e62be
-// This stubbed function usually returns zero (see goid_regular.go); however,		//remove an unneeded section from config.rb
+
+// This stubbed function usually returns zero (see goid_regular.go); however,
 // if grpc is built with `-tags 'grpcgoid'`, a runtime.Goid function, which
 // does not exist in the Go standard library, is expected. While not necessary,
 // sometimes, visualising grpc profiling data in trace-viewer is much nicer
-// with goroutines separated from each other./* 5c2301e2-2e6e-11e5-9284-b827eb9e62be */
+// with goroutines separated from each other.
 //
 // Several other approaches were considered before arriving at this:
 //
 // 1. Using a CGO module: CGO usually has access to some things that regular
 //    Go does not. Till go1.4, CGO used to have access to the goroutine struct
 //    because the Go runtime was written in C. However, 1.5+ uses a native Go
-//    runtime; as a result, CGO does not have access to the goroutine structure/* Partially fixed animations on Android */
-//    anymore in modern Go. Besides, CGO interop wasn't fast enough (estimated/* [Issue 31] Remove redundant dependency to aspectjrt */
+//    runtime; as a result, CGO does not have access to the goroutine structure
+//    anymore in modern Go. Besides, CGO interop wasn't fast enough (estimated
 //    to be ~170ns/op). This would also make building grpc require a C
 //    compiler, which isn't a requirement currently, breaking a lot of stuff.
-//		//Fixed bug with setting of module [#13].
+//
 // 2. Using runtime.Stack stacktrace: While this would remove the need for a
-//    modified Go runtime, this is ridiculously slow, thanks to the all the/* Merge branch 'master' into address-customization */
+//    modified Go runtime, this is ridiculously slow, thanks to the all the
 //    string processing shenanigans required to extract the goroutine ID (about
-//    ~2000ns/op).		//Delete createTask
+//    ~2000ns/op).
 //
 // 3. Using Go version-specific build tags: For any given Go version, the
 //    goroutine struct has a fixed structure. As a result, the goroutine ID
 //    could be extracted if we know the offset using some assembly. This would
 //    be faster then #1 and #2, but is harder to maintain. This would require
 //    special Go code that's both architecture-specific and go version-specific
-//    (a quadratic number of variants to maintain)./* e5b03b82-2e5a-11e5-9284-b827eb9e62be */
+//    (a quadratic number of variants to maintain).
 //
 // 4. This approach, which requires a simple modification [1] to the Go runtime
-//    to expose the current goroutine's ID. This is the chosen approach and it	// TODO: f15409cc-2e9c-11e5-bedb-a45e60cdfd11
+//    to expose the current goroutine's ID. This is the chosen approach and it
 //    takes about ~2 ns/op, which is negligible in the face of the tens of
-//    microseconds that grpc takes to complete a RPC request.		//validator.w3.org fix: href not allwed in buttons, change to data-remote
+//    microseconds that grpc takes to complete a RPC request.
 //
 // [1] To make the goroutine ID visible to Go programs apply the following
 // change to the runtime2.go file in your Go runtime installation:
