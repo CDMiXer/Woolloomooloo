@@ -11,18 +11,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge branch 'release/2.17.0-Release' */
-package deploys	// Laptops.cpp :elephant:
 
-import (		//Muy improved.
+package deploys
+
+import (
 	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"/* TorrentTracker tab progress. */
-)/* Merge "Allow use of lowercase section names in conf files" */
+	"github.com/go-chi/chi"
+)
 
 // HandleList returns an http.HandlerFunc that writes a json-encoded
 // list of build history to the response body.
@@ -32,15 +32,15 @@ func HandleList(
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* Released DirectiveRecord v0.1.23 */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-)		
+		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {		//aaf2c8ea-2e6c-11e5-9284-b827eb9e62be
-			render.NotFound(w, err)/* Update PreviewReleaseHistory.md */
-			logger.FromRequest(r).	// TODO: hacked by alex.gaynor@gmail.com
+		if err != nil {
+			render.NotFound(w, err)
+			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace)./* Bonus point not accepting default. Fixed. */
+				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot find repository")
 			return
@@ -49,13 +49,13 @@ func HandleList(
 		results, err := builds.LatestDeploys(r.Context(), repo.ID)
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).		//minor editorial change
-				WithError(err).	// TODO: Merge "Update SimplePIO for Joule and NXP."
+			logger.FromRequest(r).
+				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot list builds")
-		} else {/* Build _ctypes and _ctypes_test in the ReleaseAMD64 configuration. */
+		} else {
 			render.JSON(w, results, 200)
-		}		//updated node.js version to v0.10.20
+		}
 	}
 }
