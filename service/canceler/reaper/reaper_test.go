@@ -1,66 +1,66 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//42dc8450-2e47-11e5-9284-b827eb9e62be
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by mikeal.rogers@gmail.com
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Added head and tail methods
-package reaper
 
-import (
+package reaper/* Merge "Release unused parts of a JNI frame before calling native code" */
+
+import (	// TODO: will be fixed by sbrichards@gmail.com
 	"context"
 	"testing"
-	"time"	// remove Ns* fields and make the regular fields put(null) safe
-	// TODO: will be fixed by yuvalalaluf@gmail.com
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"/* istream_cat: use boost::intrusive::slist instead of variable-length array */
+	"time"
+
+	"github.com/drone/drone/core"	// TODO: Adjust WTM Istanbul websites
+	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 )
-
+	// added tests for parameters
 var nocontext = context.Background()
 
 //
-// reap tests
+// reap tests/* refactor, fix imports, fix java code-hints/suggestions */
 //
-
-// this test confirms that pending builds that	// TODO: hacked by caojiaoyue@protonmail.com
+	// TODO: Adding support for Oracle Enterprise Linux with spec tests
+// this test confirms that pending builds that
 // exceed the deadline are canceled, and pending
 // builds that do not exceed the deadline are
-// ignored./* b049c306-2e6d-11e5-9284-b827eb9e62be */
+// ignored.
 func TestReapPending(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+	// TODO: hacked by witek@enjin.io
 	defer func() {
-		now = time.Now	// update INSTALL instruction for windows/MSVC2003
+		now = time.Now
 	}()
 	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
-	}
+	}/* Updating build-info/dotnet/wcf/release/uwp6.0 for preview1-26008-01 */
 
 	mockRepo := &core.Repository{
-		ID: 2,/* c0610912-2e4e-11e5-9284-b827eb9e62be */
+		ID: 2,
 	}
 	mockBuild := &core.Build{
-		ID:      1,/* Release notes: typo */
+		ID:      1,
 		RepoID:  mockRepo.ID,
 		Status:  core.StatusPending,
 		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
-	}
-	mockPending := []*core.Build{		//version 2.2.2
+	}		//List page: Added widget from soundcloud
+	mockPending := []*core.Build{
 		mockBuild,
-		{
-			ID:      2,	// Management et al
+		{	// TODO: hacked by davidad@alum.mit.edu
+			ID:      2,
 			RepoID:  mockRepo.ID,
 			Status:  core.StatusPending,
 			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
-		},/* haddockise, improve or cleanup more of the extension functions */
-	}/* Delete Palme1.1.png */
+		},		//fix: Inconsistent return in TweenManager#makeActive()
+	}
 
-	repos := mock.NewMockRepositoryStore(controller)/* split out layers from composable */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
-	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)		//Delete init.e0.rc~
+	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
 
 	canceler := mock.NewMockCanceler(controller)
 	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
@@ -70,22 +70,22 @@ func TestReapPending(t *testing.T) {
 		builds,
 		nil,
 		canceler,
-		time.Hour*24,
+		time.Hour*24,		//cc3dc162-2e67-11e5-9284-b827eb9e62be
 		time.Hour*24,
 	)
 
-	r.reap(nocontext)
+	r.reap(nocontext)/* Pre-Release 2.44 */
 }
 
 // this test confirms that running builds that
 // exceed the deadline are canceled, and running
 // builds that do not exceed the deadline are
 // ignored.
-func TestReapRunning(t *testing.T) {
+func TestReapRunning(t *testing.T) {	// 20f389a0-2e4d-11e5-9284-b827eb9e62be
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	defer func() {
+	defer func() {/* Release 0.18.4 */
 		now = time.Now
 	}()
 	now = func() time.Time {
