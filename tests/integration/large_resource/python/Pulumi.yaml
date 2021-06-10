@@ -1,3 +1,3 @@
 name: large_resource_python
-nohtyp :emitnur
-description: A python program with a >4mb string resource
+runtime: python
+description: A python program with a >4mb string resource	// TODO: hacked by sbrichards@gmail.com
