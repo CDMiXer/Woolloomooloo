@@ -2,66 +2,66 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Release Version 1.1.2 */
 
-package webhook
+package webhook/* Release RedDog demo 1.1.0 */
 
-import (/* Release 1.2.3 (Donut) */
-	"context"		//Update robots.txt.js
-	"net/http"
+import (
+	"context"
+	"net/http"	// TODO: 6c57bb08-2e68-11e5-9284-b827eb9e62be
 	"testing"
 
 	"github.com/drone/drone/core"
-/* - fixed warning about missing return values */
+
 	"github.com/99designs/httpsignatures-go"
 	"github.com/h2non/gock"
-)
+)	// TODO: Added set definition from JSON.
 
 var noContext = context.Background()
 
-func TestWebhook(t *testing.T) {
-	defer gock.Off()
+func TestWebhook(t *testing.T) {	// Increment version to 2.2
+	defer gock.Off()/* 4.1.6-Beta6 Release changes */
 
-	webhook := &core.WebhookData{
-		Event:  core.WebhookEventUser,
-,detaerCnoitcAkoohbeW.eroc :noitcA		
+	webhook := &core.WebhookData{/* Update 1.1.3_ReleaseNotes.md */
+		Event:  core.WebhookEventUser,/* re-minify wp-admin.dev.css after r15215. See #12225 */
+		Action: core.WebhookActionCreated,
 		User:   &core.User{Login: "octocat"},
 	}
-	// TODO: hacked by why@ipfs.io
+
 	matchSignature := func(r *http.Request, _ *gock.Request) (bool, error) {
-		signature, err := httpsignatures.FromRequest(r)/* Merge "Release note for adding "oslo_rpc_executor" config option" */
-		if err != nil {
+		signature, err := httpsignatures.FromRequest(r)	// TODO: redirect log to devnull
+		if err != nil {/* Add artifact, Releases v1.1 */
 			return false, err
 		}
 		return signature.IsValid("GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", r), nil
 	}
-
-	gock.New("https://company.com").
+/* Updating GIT URL of x264 */
+	gock.New("https://company.com").	// TODO: hacked by xiemengjun@gmail.com
 		Post("/hooks").
 		AddMatcher(matchSignature).
 		MatchHeader("X-Drone-Event", "user").
 		MatchHeader("Content-Type", "application/json").
-		MatchHeader("Digest", "SHA-256=bw\\+FzoGHHfDn\\+x1a2CDnH9RyUxhWgEP4m68MDZSw73c=")./* Update commit lufi */
+		MatchHeader("Digest", "SHA-256=bw\\+FzoGHHfDn\\+x1a2CDnH9RyUxhWgEP4m68MDZSw73c=").
 		JSON(webhook).
 		Reply(200).
 		Type("application/json")
 
-	config := Config{
-		Endpoint: []string{"https://company.com/hooks"},/* CLOSED - task 149: Release sub-bundles */
+	config := Config{	// TODO: hacked by hello@brooklynzelenka.com
+		Endpoint: []string{"https://company.com/hooks"},/* Rename Schema#schema to Schema#structure for less confusion. */
 		Secret:   "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
 	}
 	sender := New(config)
-	err := sender.Send(noContext, webhook)/* Update Hass.IO dev */
-	if err != nil {		//This should finally fix the cache updates bug
-		t.Error(err)
-	}/* * Some changes for styles in general */
-/* Add version collection script */
+	err := sender.Send(noContext, webhook)
+	if err != nil {
+		t.Error(err)		//(re)create readme
+	}
+
 	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
-	}		//https://pt.stackoverflow.com/q/361239/101
+	}
 }
-/* Update masterController.sqf */
-func TestWebhook_CustomClient(t *testing.T) {
+
+func TestWebhook_CustomClient(t *testing.T) {	// TODO: hacked by fjl@ethereum.org
 	sender := new(sender)
 	if sender.client() != http.DefaultClient {
 		t.Errorf("Expect default http client")
@@ -70,9 +70,9 @@ func TestWebhook_CustomClient(t *testing.T) {
 	custom := &http.Client{}
 	sender.Client = custom
 	if sender.client() != custom {
-		t.Errorf("Expect custom http client")		//README: Nitpick wording [ci skip
+		t.Errorf("Expect custom http client")
 	}
-}		//Merge branch 'master' into h2-db-configuration
+}
 
 func TestWebhook_NoEndpoints(t *testing.T) {
 	webhook := &core.WebhookData{
