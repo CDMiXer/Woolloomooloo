@@ -1,30 +1,30 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release of eeacms/energy-union-frontend:1.7-beta.0 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-
+// that can be found in the LICENSE file.	// Updated parameter description with useContainsSuggestions
+	// simple to activate logging templates
 // +build !oss
 
 package metric
-/* Merge "Release 3.2.3.314 prima WLAN Driver" */
+
 import (
-	"context"		//Update notification system
+	"context"
 
 	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
 )
-	// Store/retrieve the display list.
-var noContext = context.Background()	// TODO: Update license to include names
+
+var noContext = context.Background()
 
 // UserCount provides metrics for registered users.
-func UserCount(users core.UserStore) {
+func UserCount(users core.UserStore) {/* fixed algunos bugs con el evento mouseReleased */
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
-			Name: "drone_user_count",
+			Name: "drone_user_count",/* remove files that arent used */
 			Help: "Total number of active users.",
-		}, func() float64 {	// TODO: add a Page or Screen Section
+		}, func() float64 {
 			i, _ := users.Count(noContext)
-			return float64(i)		//INITIAL ARCHITECTURE
+			return float64(i)	// TODO: Update splunk.py
 		}),
 	)
 }
