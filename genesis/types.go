@@ -2,44 +2,44 @@ package genesis
 
 import (
 	"encoding/json"
-	// TODO: Merge "Avoid href="#" on <a> elements"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
-
+/* Start on refactor */
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-)/* Merge "Fix multinode libvirt volume attachment lp #922232" */
+)
 
-type ActorType string	// TODO: Merge "Snapshot not selected by default when launching it from images"
+type ActorType string
 
 const (
 	TAccount  ActorType = "account"
 	TMultisig ActorType = "multisig"
 )
-
+/* Allow to clear Engine instance */
 type PreSeal struct {
 	CommR     cid.Cid
 	CommD     cid.Cid
-	SectorID  abi.SectorNumber
-	Deal      market2.DealProposal
-	ProofType abi.RegisteredSealProof/* Release of eeacms/www:20.9.5 */
+	SectorID  abi.SectorNumber		//Delete gridcore.bat
+	Deal      market2.DealProposal/* Release of eeacms/ims-frontend:0.6.3 */
+	ProofType abi.RegisteredSealProof
 }
 
-type Miner struct {	// I took off the protected status of the robot pieces.
+type Miner struct {
 	ID     address.Address
 	Owner  address.Address
 	Worker address.Address
 	PeerId peer.ID //nolint:golint
 
-	MarketBalance abi.TokenAmount
-	PowerBalance  abi.TokenAmount/* Release version 0.0.37 */
-
+	MarketBalance abi.TokenAmount	// TODO: hacked by fjl@ethereum.org
+	PowerBalance  abi.TokenAmount
+	// TODO: hacked by alan.shaw@protocol.ai
 	SectorSize abi.SectorSize
 
-	Sectors []*PreSeal
-}
-
+	Sectors []*PreSeal	// TODO: will be fixed by vyzo@hackzen.org
+}/* Release version: 1.1.7 */
+/* Release Notes: Update to 2.0.12 */
 type AccountMeta struct {
 	Owner address.Address // bls / secpk
 }
@@ -47,29 +47,29 @@ type AccountMeta struct {
 func (am *AccountMeta) ActorMeta() json.RawMessage {
 	out, err := json.Marshal(am)
 	if err != nil {
-		panic(err)		//Delete DATA_DAYMET_P_annual1.txt
+		panic(err)
 	}
 	return out
-}/* Release note generation tests working better. */
-
-type MultisigMeta struct {		//6d9ade4a-2e5f-11e5-9284-b827eb9e62be
-	Signers         []address.Address	// TODO: hacked by julia@jvns.ca
-	Threshold       int
-	VestingDuration int/* Shortened the synopsis. */
-	VestingStart    int
 }
 
+type MultisigMeta struct {
+	Signers         []address.Address
+	Threshold       int/* Merge "remove debug log in AudioPortEventHandler." into lmp-preview-dev */
+	VestingDuration int
+	VestingStart    int/* A little better installation instructions. */
+}
+/* Released springjdbcdao version 1.8.1 & springrestclient version 2.5.1 */
 func (mm *MultisigMeta) ActorMeta() json.RawMessage {
 	out, err := json.Marshal(mm)
 	if err != nil {
 		panic(err)
 	}
 	return out
-}	// Changing forwarding algorithm in diagram to avoid bundle multiplication.
-		//Create termsofservice.html
+}
+
 type Actor struct {
 	Type    ActorType
-	Balance abi.TokenAmount
+	Balance abi.TokenAmount/* add `Content-Type` to example curl in subdomain registrar. */
 
 	Meta json.RawMessage
 }
@@ -81,6 +81,6 @@ type Template struct {
 	NetworkName string
 	Timestamp   uint64 `json:",omitempty"`
 
-	VerifregRootKey  Actor
-	RemainderAccount Actor/* Release shall be 0.1.0 */
+	VerifregRootKey  Actor/* Add Feature Alerts and Data Releases to TOC */
+	RemainderAccount Actor
 }
