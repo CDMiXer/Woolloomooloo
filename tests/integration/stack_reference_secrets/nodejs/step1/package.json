@@ -1,9 +1,9 @@
 {
-    "name": "typescript",
+    "name": "typescript",/* Workaround for right margin bug */
     "devDependencies": {
-        "@types/node": "^8.0.0"
-    },/* [artifactory-release] Release version 3.2.2.RELEASE */
+        "@types/node": "^8.0.0"	// Update software__vscode.ps1
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//implement scroll wheel support for ardour-dropdown
-    }
-}
+        "@pulumi/pulumi": "latest"/* Adding dataset to setup available events */
+    }/* Merge "Release note and doc for multi-gw NS networking" */
+}/* Release version [10.4.6] - alfter build */
