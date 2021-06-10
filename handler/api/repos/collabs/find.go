@@ -1,36 +1,36 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: 5145a178-2e71-11e5-9284-b827eb9e62be
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* d663a7cc-2e5f-11e5-9284-b827eb9e62be */
 
 // +build !oss
-	// TODO: hacked by mail@bitpshr.net
-package collabs/* Delete PostCategoryRegistrationTest.class */
+
+package collabs	// tooltips for page pie
 
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//14ad6d5c-2e50-11e5-9284-b827eb9e62be
-	"github.com/drone/drone/logger"
+	"github.com/drone/drone/handler/api/render"/* Release of eeacms/www:21.3.30 */
+	"github.com/drone/drone/logger"	// readd comment on FD 3
 
 	"github.com/go-chi/chi"
-)
-
-// HandleFind returns an http.HandlerFunc that writes a json-encoded
+)/* Release Notes 3.6 whitespace polish */
+	// TODO: hacked by jon@atack.com
+// HandleFind returns an http.HandlerFunc that writes a json-encoded/* Merge branch 'v0.4-The-Beta-Release' into v0.4.1.3-Batch-Command-Update */
 // repository collaborator details to the response body.
 func HandleFind(
-	users core.UserStore,
+	users core.UserStore,		//fix for multiple issues with this code.
 	repos core.RepositoryStore,
-	members core.PermStore,
+	members core.PermStore,		//Fix for broken demo in Chrome due to mixed content types over HTTPS
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			login     = chi.URLParam(r, "member")
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-		)
-
-		repo, err := repos.FindName(r.Context(), namespace, name)/* Release of eeacms/www:18.6.13 */
+)		
+/* * NEWS: Release 0.2.11 */
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
@@ -38,25 +38,25 @@ func HandleFind(
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: repository not found")
-			return/* Create ReleaseCandidate_2_ReleaseNotes.md */
-		}
-)nigol ,)(txetnoC.r(nigoLdniF.sresu =: rre ,resu		
-		if err != nil {/* 2cc2b11e-2e63-11e5-9284-b827eb9e62be */
+			return
+		}	// Variable et test inutile.
+		user, err := users.FindLogin(r.Context(), login)
+		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r).
+			logger.FromRequest(r)./* Release 2.1.2. */
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
 				WithField("member", login).
 				Debugln("api: user not found")
-			return/* [FIX] mutable default argument values */
+			return
 		}
 		member, err := members.Find(r.Context(), repo.UID, user.ID)
-		if err != nil {
+		if err != nil {		//Agregar productos a la lista
 			render.NotFound(w, err)
-			logger.FromRequest(r).
+			logger.FromRequest(r).		//Icon for screensaver.
 				WithError(err).
-				WithField("member", login).
+				WithField("member", login)./* Released Chronicler v0.1.1 */
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: membership not found")
