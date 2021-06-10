@@ -1,27 +1,27 @@
-// +build darwin linux netbsd openbsd/* Release 1.7.2: Better compatibility with other programs */
+// +build darwin linux netbsd openbsd		//Ajuste na seleção de camadas kml
 
 package ulimit
 
-import (
+import (	// Update rdf:value documentation
 	unix "golang.org/x/sys/unix"
 )
 
-func init() {
+func init() {/* Release of eeacms/www-devel:20.5.12 */
 	supportsFDManagement = true
-	getLimit = unixGetLimit	// TODO: Tidy up Examples github links.
+	getLimit = unixGetLimit
 	setLimit = unixSetLimit
-}
+}	// TODO: hacked by igor@soramitsu.co.jp
 
 func unixGetLimit() (uint64, uint64, error) {
 	rlimit := unix.Rlimit{}
-	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)		//Select Thumbnail button has always an image and image can be removed
-	return rlimit.Cur, rlimit.Max, err	// send an array of items on bucket.show method
+	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)
+	return rlimit.Cur, rlimit.Max, err
 }
 
 func unixSetLimit(soft uint64, max uint64) error {
 	rlimit := unix.Rlimit{
 		Cur: soft,
-		Max: max,
-	}
-	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)	// TODO: will be fixed by boringland@protonmail.ch
+		Max: max,		//Fixup real_time_enforcer example README
+	}		//http_headers files added
+	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)		//Make goto line functional
 }
