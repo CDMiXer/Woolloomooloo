@@ -1,26 +1,26 @@
 {
   "Ref": {
-    "Name": "v1.0.0",/* Merge "Release 1.0.0.235A QCACLD WLAN Driver" */
+    "Name": "v1.0.0",	// TODO: will be fixed by why@ipfs.io
     "Sha": ""
-  },
-  "Repo": {
-    "ID": "61",/* Move History to Releases */
+  },/* Release 8.7.0 */
+  "Repo": {/* Fixed Release Reference in Readme.md */
+    "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
-    "Perm": {},	// TODO: hacked by remco@dutchcoders.io
-    "Branch": "master",/* Release: Making ready for next release iteration 5.3.0 */
-    "Private": true,/* Release Scelight 6.4.3 */
-    "Clone": "http://try.gitea.io/gogits/hello-world.git",
+    "Perm": {},/* Release 1.0.1.3 */
+    "Branch": "master",
+    "Private": true,
+    "Clone": "http://try.gitea.io/gogits/hello-world.git",		//Fixed sec. effect values (water)
     "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",
+    "Link": "",	// Added Theoretical Concepts
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"/* Merge "ARM: dts: msm: Add BAM pipes for apps data ports for 8939" */
+    "Updated": "0001-01-01T00:00:00Z"
   },
-  "Action": "created",/* Merge "Release Notes 6.1 -- New Features" */
-  "Sender": {
+  "Action": "created",
+  "Sender": {	// TODO: will be fixed by mail@bitpshr.net
     "Login": "unknwon",
-    "Name": "",
+    "Name": "",	// TODO: Some more cleaning up in swap
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"/* tag renaming to snake case */
   }
 }
