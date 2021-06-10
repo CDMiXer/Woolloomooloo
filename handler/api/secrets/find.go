@@ -2,14 +2,14 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Update backupcmds.php */
 
-package secrets
+package secrets	// TODO: hacked by why@ipfs.io
 
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* add direct attribute map. see #2 */
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
