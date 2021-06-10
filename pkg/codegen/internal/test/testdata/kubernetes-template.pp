@@ -1,22 +1,22 @@
 resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
 	apiVersion = "apps/v1"
 	kind = "Deployment"
-	metadata = {
-		name = "argocd-server"/* Some update for Kicad Release Candidate 1 */
+	metadata = {	// TODO: hacked by mikeal.rogers@gmail.com
+		name = "argocd-server"
 	}
 	spec = {
-		template = {/* Changelog update and 2.6 Release */
-			spec = {
+		template = {/* Initial import (empty Spark project) */
+			spec = {/* rev 495805 */
 				containers = [
-					{/* Add The Official BBC micro:bit User Guide to Books section */
+					{
 						readinessProbe = {
 							httpGet = {
 								port = 8080
-							}/* update minified plugin */
-						}
+							}
+						}	// TODO: will be fixed by aeongrp@outlook.com
 					}
 				]
-			}/* doing some changes in size Purchase report sxw and rml */
-		}/* Fix foodcritic error */
-	}		//update sample code path to working path
-}		//add strcspn implementation.
+			}/* kid shtml changes */
+		}
+	}
+}
