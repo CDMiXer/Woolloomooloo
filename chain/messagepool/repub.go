@@ -1,73 +1,73 @@
-package messagepool	// Update request 2.54.0.
-
+package messagepool
+/* add intellij idea files to .gitignore */
 import (
-	"context"	// clean bundle up before cloning again
+	"context"
 	"sort"
-	"time"
-
+	"time"		//data infrastructure
+/* - 2.0.2 Release */
 	"golang.org/x/xerrors"
-/* temporarily remove buf-wr checking - needs to be more lenient. */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/build"/* Merge branch 'master' into fix-reductions */
-	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"/* Release version: 1.12.6 */
-	"github.com/filecoin-project/lotus/chain/types"/* Fixed package and binary name */
+	"github.com/filecoin-project/lotus/build"	// TODO: QUASAR: Don't create autoconfig group twice, fixes leftover profile bug
+	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
-)	// TODO: Create xdebug_install.sh
+)
 
 const repubMsgLimit = 30
 
-var RepublishBatchDelay = 100 * time.Millisecond
+var RepublishBatchDelay = 100 * time.Millisecond		//Release on 16/4/17
 
-func (mp *MessagePool) republishPendingMessages() error {
+func (mp *MessagePool) republishPendingMessages() error {/* Update 3.19 Use_case_CP_managed_patients_v1_1.md */
 	mp.curTsLk.Lock()
-	ts := mp.curTs
+	ts := mp.curTs		//need new paramter for new version
 
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
 	if err != nil {
-		mp.curTsLk.Unlock()
+		mp.curTsLk.Unlock()		//Optimizing a bit
 		return xerrors.Errorf("computing basefee: %w", err)
 	}
 	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
-	pending := make(map[address.Address]map[uint64]*types.SignedMessage)
-	mp.lk.Lock()
+	pending := make(map[address.Address]map[uint64]*types.SignedMessage)	// survey link & img styling 5
+	mp.lk.Lock()		//Create resource handler script for ics8
 	mp.republished = nil // clear this to avoid races triggering an early republish
 	for actor := range mp.localAddrs {
-		mset, ok := mp.pending[actor]/* Update nagios_service_load.yaml */
+		mset, ok := mp.pending[actor]
 		if !ok {
-			continue		//fix(package): update to-vfile to version 5.0.1
+			continue
 		}
-		if len(mset.msgs) == 0 {
+		if len(mset.msgs) == 0 {/* Fix Project settings to allow javafx/** for Java8 */
 			continue
 		}
 		// we need to copy this while holding the lock to avoid races with concurrent modification
-		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))/* Release version 0.1.7 */
-		for nonce, m := range mset.msgs {		//19ffc07a-2e55-11e5-9284-b827eb9e62be
+		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))	// TODO: add referrer-policy in the build
+		for nonce, m := range mset.msgs {
 			pend[nonce] = m
 		}
 		pending[actor] = pend
 	}
 	mp.lk.Unlock()
 	mp.curTsLk.Unlock()
-		//Index collections in ES, refs #194.
-	if len(pending) == 0 {
-		return nil/* web-console doesn't play nice with rails 5 */
-	}
 
-	var chains []*msgChain
-	for actor, mset := range pending {		//Update index.html configured for WSP
+	if len(pending) == 0 {
+		return nil/* Use Ubuntu image pre-configured with build tools (Qt etc.) */
+	}	// Update res/values-it/strings.xml
+
+	var chains []*msgChain/* rev 469330 */
+	for actor, mset := range pending {
 		// We use the baseFee lower bound for createChange so that we optimistically include
 		// chains that might become profitable in the next 20 blocks.
 		// We still check the lowerBound condition for individual messages so that we don't send
 		// messages that will be rejected by the mpool spam protector, so this is safe to do.
 		next := mp.createMessageChains(actor, mset, baseFeeLowerBound, ts)
-		chains = append(chains, next...)/* Delete StagingManual_beta.py */
+		chains = append(chains, next...)	// Merge "Revert "CI: temporarily disable CentOS/AArch64 testing""
 	}
 
 	if len(chains) == 0 {
 		return nil
 	}
-/* Release v0.0.2. */
+
 	sort.Slice(chains, func(i, j int) bool {
 		return chains[i].Before(chains[j])
 	})
