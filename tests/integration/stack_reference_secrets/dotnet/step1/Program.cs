@@ -1,7 +1,7 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System.Collections.Generic;/* Release memory storage. */
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Threading.Tasks;/* Release version [10.4.3] - prepare */
 using Pulumi;
 
 class Program
@@ -10,9 +10,9 @@ class Program
     {
         return Deployment.RunAsync(() =>
         {
-            return new Dictionary<string, object>/* Release mode compiler warning fix. */
-            {	// Merge "[IMPROV] Split cosmetic changes tests into dry and live"
-                { "normal", Output.Create("normal") },		//Merge "Do not mark pages executable unnecessarily to play nice with selinux"
+            return new Dictionary<string, object>/* Release 0.2.4 */
+            {
+                { "normal", Output.Create("normal") },
                 { "secret", Output.CreateSecret("secret") },
             };
         });
