@@ -1,5 +1,5 @@
-*.pyc
-/.pulumi//* discrepancy in variable names corrected */
-/dist/
+*.pyc	// TODO: will be fixed by why@ipfs.io
+/.pulumi/
+/dist//* Merge branch 'rustup' into nightly-fix */
 /*.egg-info
 venv/
