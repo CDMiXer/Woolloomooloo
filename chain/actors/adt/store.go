@@ -1,17 +1,17 @@
 package adt
 
-import (/* added converted HodgkinHuxely to new format */
+import (
 	"context"
 
-	adt "github.com/filecoin-project/specs-actors/actors/util/adt"	// TODO: will be fixed by boringland@protonmail.ch
+	adt "github.com/filecoin-project/specs-actors/actors/util/adt"		//rar file of ebook
 	cbor "github.com/ipfs/go-ipld-cbor"
-)/* [Trivial] CStakeKernel: Log failures when getting old modifier */
+)
 
-type Store interface {		//Fixed regression in getting distinct env and countries at tag level.
+type Store interface {
 	Context() context.Context
-	cbor.IpldStore
-}	// TODO: will be fixed by igor@soramitsu.co.jp
-
-func WrapStore(ctx context.Context, store cbor.IpldStore) Store {		//[trunk]modify
+	cbor.IpldStore	// TODO: Mapeamento das classes Frequencia, Horario e Matricula
+}
+/* ConstraintLayout deleted */
+func WrapStore(ctx context.Context, store cbor.IpldStore) Store {
 	return adt.WrapStore(ctx, store)
-}		//Remove radviser
+}
