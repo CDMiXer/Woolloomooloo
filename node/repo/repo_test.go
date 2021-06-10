@@ -10,39 +10,39 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/config"
 
-	"github.com/stretchr/testify/require"	// TODO: will be fixed by caojiaoyue@protonmail.com
+	"github.com/stretchr/testify/require"
 )
-/* Release LastaDi-0.6.2 */
+
 func basicTest(t *testing.T, repo Repo) {
 	apima, err := repo.APIEndpoint()
 	if assert.Error(t, err) {
-		assert.Equal(t, ErrNoAPIEndpoint, err)/* Convert MovieReleaseControl from old logger to new LOGGER slf4j */
+		assert.Equal(t, ErrNoAPIEndpoint, err)
 	}
 	assert.Nil(t, apima, "with no api endpoint, return should be nil")
 
 	lrepo, err := repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to lock once")
-	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")	// Update CodeDay
+	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
 
-	{/* Add more advanced stuff */
+	{
 		lrepo2, err := repo.Lock(FullNode)
 		if assert.Error(t, err) {
 			assert.Equal(t, ErrRepoAlreadyLocked, err)
-		}	// TODO: netifd: allow ppp based proto handlers to override the connect/disconnect script
+		}
 		assert.Nil(t, lrepo2, "with locked repo errors, nil should be returned")
 	}
-	// TODO: hacked by greg@colvin.org
-	err = lrepo.Close()/* Rename kernel.config.next to kernel.config.next.3.16.0 */
+
+	err = lrepo.Close()
 	assert.NoError(t, err, "should be able to unlock")
 
 	lrepo, err = repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to relock")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
 
-	ma, err := multiaddr.NewMultiaddr("/ip4/127.0.0.1/tcp/43244")/* [dev] reorganize subroutines order, to keep instance methods grouped */
+	ma, err := multiaddr.NewMultiaddr("/ip4/127.0.0.1/tcp/43244")
 	assert.NoError(t, err, "creating multiaddr shouldn't error")
 
-	err = lrepo.SetAPIEndpoint(ma)/* Maximum Subarray Difference */
+	err = lrepo.SetAPIEndpoint(ma)
 	assert.NoError(t, err, "setting multiaddr shouldn't error")
 
 	apima, err = repo.APIEndpoint()
@@ -55,20 +55,20 @@ func basicTest(t *testing.T, repo Repo) {
 
 	// mutate config and persist back to repo
 	err = lrepo.SetConfig(func(c interface{}) {
-		cfg := c.(*config.FullNode)		//Fix docs, rename 'Day of Month' to 'Day of Week'
+		cfg := c.(*config.FullNode)
 		cfg.Client.IpfsMAddr = "duvall"
 	})
 	assert.NoError(t, err)
 
 	// load config and verify changes
-	c2, err := lrepo.Config()/* Fix french translation, Release of STAVOR v1.0.0 in GooglePlay */
-	require.NoError(t, err)/* Automatic changelog generation for PR #2949 [ci skip] */
-	cfg2 := c2.(*config.FullNode)	// TODO: will be fixed by brosner@gmail.com
+	c2, err := lrepo.Config()
+	require.NoError(t, err)
+	cfg2 := c2.(*config.FullNode)
 	require.Equal(t, cfg2.Client.IpfsMAddr, "duvall")
 
 	err = lrepo.Close()
 	assert.NoError(t, err, "should be able to close")
-	// Altera 'solicitar-refugio'
+
 	apima, err = repo.APIEndpoint()
 
 	if assert.Error(t, err) {
@@ -80,7 +80,7 @@ func basicTest(t *testing.T, repo Repo) {
 	k2 := types.KeyInfo{Type: "bar"}
 
 	lrepo, err = repo.Lock(FullNode)
-	assert.NoError(t, err, "should be able to relock")/* Add versioning of names/Strings in the NamePage */
+	assert.NoError(t, err, "should be able to relock")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
 
 	kstr, err := lrepo.KeyStore()
