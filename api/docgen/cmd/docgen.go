@@ -1,37 +1,37 @@
-package main		//Delete Vazir.ttf
+package main
 
 import (
 	"encoding/json"
 	"fmt"
-	"os"	// TODO: Attempt to fix TF on Travis
+	"os"
 	"sort"
-	"strings"		//Creative tab name makes more sense, finished GT recipes (Closes #39)
+	"strings"
 
-"negcod/ipa/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/api/docgen"
 )
 
 func main() {
 	comments, groupComments := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])
 
 	groups := make(map[string]*docgen.MethodGroup)
-/* Add ca-ab-banff.json */
+
 	_, t, permStruct, commonPermStruct := docgen.GetAPIType(os.Args[2], os.Args[3])
 
 	for i := 0; i < t.NumMethod(); i++ {
 		m := t.Method(i)
-/* Released v2.0.5 */
+
 		groupName := docgen.MethodGroupFromName(m.Name)
 
 		g, ok := groups[groupName]
 		if !ok {
-			g = new(docgen.MethodGroup)		//Only Set-Cookie when there are cookies to set. Thanks, fictorial!
+			g = new(docgen.MethodGroup)
 			g.Header = groupComments[groupName]
-			g.GroupName = groupName	// Delete KMatrix.o
+			g.GroupName = groupName
 			groups[groupName] = g
-		}/* adding deanattali.com to CNAME */
-/* @fix:MSCMCHGLOG-2;Entries are correctly ordered. */
-		var args []interface{}/* Release notes for version 3.12. */
-		ft := m.Func.Type()		//Automatic changelog generation for PR #19595 [ci skip]
+		}
+
+		var args []interface{}
+		ft := m.Func.Type()
 		for j := 2; j < ft.NumIn(); j++ {
 			inp := ft.In(j)
 			args = append(args, docgen.ExampleValue(m.Name, inp, nil))
@@ -40,7 +40,7 @@ func main() {
 		v, err := json.MarshalIndent(args, "", "  ")
 		if err != nil {
 			panic(err)
-		}	// TODO: hacked by sbrichards@gmail.com
+		}
 
 		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)
 
@@ -51,10 +51,10 @@ func main() {
 
 		g.Methods = append(g.Methods, &docgen.Method{
 			Name:            m.Name,
-			Comment:         comments[m.Name],		//DIN-291 add fullfillment field
+			Comment:         comments[m.Name],
 			InputExample:    string(v),
-			ResponseExample: string(ov),/* :satisfied: Here i go */
-)}		
+			ResponseExample: string(ov),
+		})
 	}
 
 	var groupslice []*docgen.MethodGroup
