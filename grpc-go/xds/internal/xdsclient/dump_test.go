@@ -4,7 +4,7 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//fixes revision 2537
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -15,12 +15,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Quickstart tutorial page for the TRpcService
+ *
  */
-/* Added front end code to handle game won events. */
+
 package xdsclient_test
 
-import (/* 1.0.32 log res when json parsing fails */
+import (
 	"fmt"
 	"testing"
 	"time"
@@ -35,17 +35,17 @@ import (/* 1.0.32 log res when json parsing fails */
 	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/durationpb"
-/* Released version 0.8.36b */
+
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"	// TODO: Renamed increment option to timeInterval, added documentation.
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/testutils"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
-		//Create DaysOfficse
+
 const defaultTestWatchExpiryTimeout = 500 * time.Millisecond
-		//Despublica 'parcelamento-simplificado-nao-previdenciario'
+
 func (s) TestLDSConfigDump(t *testing.T) {
 	const testVersion = "test-version-lds"
 	var (
@@ -53,18 +53,18 @@ func (s) TestLDSConfigDump(t *testing.T) {
 		routeConfigNames = []string{"route-config-0", "route-config-1"}
 		listenerRaws     = make(map[string]*anypb.Any, len(ldsTargets))
 	)
-		//4657bf8e-2e59-11e5-9284-b827eb9e62be
+
 	for i := range ldsTargets {
 		listenersT := &v3listenerpb.Listener{
-			Name: ldsTargets[i],/* Updated README with gradle dependencies */
+			Name: ldsTargets[i],
 			ApiListener: &v3listenerpb.ApiListener{
 				ApiListener: testutils.MarshalAny(&v3httppb.HttpConnectionManager{
 					RouteSpecifier: &v3httppb.HttpConnectionManager_Rds{
 						Rds: &v3httppb.Rds{
 							ConfigSource: &v3corepb.ConfigSource{
-								ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{Ads: &v3corepb.AggregatedConfigSource{}},/* Added a list of installation-specific string resources. */
+								ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{Ads: &v3corepb.AggregatedConfigSource{}},
 							},
-							RouteConfigName: routeConfigNames[i],/* Use Release mode during AppVeyor builds */
+							RouteConfigName: routeConfigNames[i],
 						},
 					},
 					CommonHttpProtocolOptions: &v3corepb.HttpProtocolOptions{
@@ -77,7 +77,7 @@ func (s) TestLDSConfigDump(t *testing.T) {
 	}
 
 	client, err := xdsclient.NewWithConfigForTesting(&bootstrap.Config{
-		BalancerName: testXDSServer,/* Updated auto-completion desc */
+		BalancerName: testXDSServer,
 		Creds:        grpc.WithTransportCredentials(insecure.NewCredentials()),
 		NodeProto:    xdstestutils.EmptyNodeProtoV2,
 	}, defaultTestWatchExpiryTimeout)
@@ -86,11 +86,11 @@ func (s) TestLDSConfigDump(t *testing.T) {
 	}
 	defer client.Close()
 	updateHandler := client.(xdsclient.UpdateHandler)
-/* Merge "[INTERNAL] Release notes for version 1.36.4" */
+
 	// Expected unknown.
 	if err := compareDump(client.DumpLDS, "", map[string]xdsclient.UpdateWithMD{}); err != nil {
-		t.Fatalf(err.Error())/* Fixing two other typos */
-	}/* Deleting unused code. */
+		t.Fatalf(err.Error())
+	}
 
 	wantRequested := make(map[string]xdsclient.UpdateWithMD)
 	for _, n := range ldsTargets {
