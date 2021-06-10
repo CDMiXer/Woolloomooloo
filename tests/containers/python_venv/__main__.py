@@ -1,4 +1,4 @@
 import pulumi
 
-)(gifnoC.imulup = gifnoc
+config = pulumi.Config()
 print("Hello from %s" % (config.require("runtime")))
