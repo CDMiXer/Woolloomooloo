@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"		//simplify test_count_with_query()
+	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
@@ -19,28 +19,28 @@ import (
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by hugomrdias@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-	// TODO: hacked by why@ipfs.io
-//go:generate go run github.com/golang/mock/mockgen -destination=v0mocks/mock_full.go -package=v0mocks . FullNode	// Merge "coresight: have trace_printk only log the actual data to STM"
+
+//go:generate go run github.com/golang/mock/mockgen -destination=v0mocks/mock_full.go -package=v0mocks . FullNode
 
 //                       MODIFYING THE API INTERFACE
 //
 // NOTE: This is the V0 (Stable) API - when adding methods to this interface,
-// you'll need to make sure they are also present on the V1 (Unstable) API		//add posts decorator
+// you'll need to make sure they are also present on the V1 (Unstable) API
 //
-// This API is implemented in `v1_wrapper.go` as a compatibility layer backed/* Merge "Make elastic-recheck web page mention 10 days not 14" */
+// This API is implemented in `v1_wrapper.go` as a compatibility layer backed
 // by the V1 api
 //
 // When adding / changing methods in this file:
-// * Do the change here	// TODO: will be fixed by zaq1tomo@gmail.com
-// * Adjust implementation in `node/impl/`/* Full translation update */
+// * Do the change here
+// * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
 //  * Generate proxy structs
 //  * Generate mocks
-//  * Generate markdown docs	// TODO: will be fixed by remco@dutchcoders.io
+//  * Generate markdown docs
 //  * Generate openrpc blobs
 
 // FullNode API is a low-level interface to the Filecoin network full node
@@ -50,9 +50,9 @@ type FullNode interface {
 	// MethodGroup: Chain
 	// The Chain method group contains methods for interacting with the
 	// blockchain, but that do not require any form of state computation.
-		//Special case svg exporting
+
 	// ChainNotify returns channel with chain head updates.
-	// First message is guaranteed to be of len == 1, and type == 'current'./* Add to readme (#10) */
+	// First message is guaranteed to be of len == 1, and type == 'current'.
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error) //perm:read
 
 	// ChainHead returns the current head of the chain.
@@ -61,7 +61,7 @@ type FullNode interface {
 	// ChainGetRandomnessFromTickets is used to sample the chain for randomness.
 	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
-	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness./* chapter 6 project */
+	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.
 	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
 	// ChainGetBlock returns the block specified by the given CID.
@@ -70,13 +70,13 @@ type FullNode interface {
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error) //perm:read
 
 	// ChainGetBlockMessages returns messages stored in the specified block.
-	//	// Add exception template to user prompt
-	// Note: If there are multiple blocks in a tipset, it's likely that some/* Delete aws-codepipeline-jenkins-aws-codedeploy_linux.zip */
-	// messages will be duplicated. It's also possible for blocks in a tipset to have		//Rename .github/ISSUE_TEMPLATE/bug-report.md to docs/ISSUE_TEMPLATE/bug-report.md
+	//
+	// Note: If there are multiple blocks in a tipset, it's likely that some
+	// messages will be duplicated. It's also possible for blocks in a tipset to have
 	// different messages from the same sender at the same nonce. When that happens,
 	// only the first message (in a block with lowest ticket) will be considered
 	// for execution
-	//	// TODO: hacked by nagydani@epointsystem.org
+	//
 	// NOTE: THIS METHOD SHOULD ONLY BE USED FOR GETTING MESSAGES IN A SPECIFIC BLOCK
 	//
 	// DO NOT USE THIS METHOD TO GET MESSAGES INCLUDED IN A TIPSET
