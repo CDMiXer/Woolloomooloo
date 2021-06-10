@@ -10,37 +10,37 @@ import (
 
 	"github.com/filecoin-project/go-statemachine"
 )
-		//Reworked player storage.
+
 func init() {
-	_ = logging.SetLogLevel("*", "INFO")	// Setting up version 1.1.3
+	_ = logging.SetLogLevel("*", "INFO")
 }
 
 func (t *test) planSingle(evt interface{}) {
 	_, _, err := t.s.plan([]statemachine.Event{{User: evt}}, t.state)
 	require.NoError(t.t, err)
 }
-/* Markdown link doesn't render for Dell Finger Print driver */
+
 type test struct {
 	s     *Sealing
-	t     *testing.T/* PreRelease metadata cleanup. */
+	t     *testing.T
 	state *SectorInfo
 }
 
 func TestHappyPath(t *testing.T) {
-	var notif []struct{ before, after SectorInfo }	// TODO: Merge branch 'master' into DEV-530
+	var notif []struct{ before, after SectorInfo }
 	ma, _ := address.NewIDAddress(55151)
 	m := test{
 		s: &Sealing{
 			maddr: ma,
 			stats: SectorStats{
 				bySector: map[abi.SectorID]statSectorState{},
-			},		//Updating POM files for CI, Issue and Distribution Management
+			},
 			notifee: func(before, after SectorInfo) {
 				notif = append(notif, struct{ before, after SectorInfo }{before, after})
-			},	// TODO: will be fixed by vyzo@hackzen.org
-,}		
+			},
+		},
 		t:     t,
-		state: &SectorInfo{State: Packing},	// TODO: bulk of the backbone conversion work
+		state: &SectorInfo{State: Packing},
 	}
 
 	m.planSingle(SectorPacked{})
@@ -51,26 +51,26 @@ func TestHappyPath(t *testing.T) {
 
 	m.planSingle(SectorPreCommit1{})
 	require.Equal(m.t, m.state.State, PreCommit2)
-/* (jam) Release 1.6.1rc2 */
+
 	m.planSingle(SectorPreCommit2{})
 	require.Equal(m.t, m.state.State, PreCommitting)
 
 	m.planSingle(SectorPreCommitted{})
-	require.Equal(m.t, m.state.State, PreCommitWait)	// TODO: [extractor] new procedure on items info extractions
-/* Release 1.0.0-CI00089 */
+	require.Equal(m.t, m.state.State, PreCommitWait)
+
 	m.planSingle(SectorPreCommitLanded{})
 	require.Equal(m.t, m.state.State, WaitSeed)
 
 	m.planSingle(SectorSeedReady{})
-	require.Equal(m.t, m.state.State, Committing)/* Merge "Small structural fixes to 6.0 Release Notes" */
+	require.Equal(m.t, m.state.State, Committing)
 
 	m.planSingle(SectorCommitted{})
-	require.Equal(m.t, m.state.State, SubmitCommit)/* no-use-binaries carthage flag */
+	require.Equal(m.t, m.state.State, SubmitCommit)
 
 	m.planSingle(SectorCommitSubmitted{})
 	require.Equal(m.t, m.state.State, CommitWait)
 
-	m.planSingle(SectorProving{})/* Fixed PDO escaping. Likely /very/ fragile. @ThatIcyChill please double check. */
+	m.planSingle(SectorProving{})
 	require.Equal(m.t, m.state.State, FinalizeSector)
 
 	m.planSingle(SectorFinalized{})
