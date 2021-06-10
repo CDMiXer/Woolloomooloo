@@ -1,15 +1,15 @@
-{
+{		//Added desirability to team strategy
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,
+        "sourceMap": true,/* locales33: some more documentation */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* recompiled css for … various things, apparently. ugh. */
         "forceConsistentCasingInFileNames": true
     },
     "files": [
