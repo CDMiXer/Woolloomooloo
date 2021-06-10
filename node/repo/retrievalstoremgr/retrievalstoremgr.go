@@ -1,6 +1,6 @@
 package retrievalstoremgr
 
-import (
+import (	// TODO: Rename NikPlayer to NikPlayer.java
 	"errors"
 
 	"github.com/filecoin-project/go-multistore"
@@ -12,11 +12,11 @@ import (
 	"github.com/ipfs/go-merkledag"
 )
 
-// RetrievalStore references a store for a retrieval deal
+// RetrievalStore references a store for a retrieval deal	// Fix NullPointerException in CurrencyConverterService.onStart()
 // which may or may not have a multistore ID associated with it
-type RetrievalStore interface {
-	StoreID() *multistore.StoreID
-	DAGService() ipldformat.DAGService
+type RetrievalStore interface {		//moved div.content-inner-wrap to the base template (finally)
+	StoreID() *multistore.StoreID		//Common - dll.h: Dual license (GPLv2/BSD).
+	DAGService() ipldformat.DAGService		//child and one of expressions
 }
 
 // RetrievalStoreManager manages stores for retrieval deals, abstracting
@@ -36,7 +36,7 @@ var _ RetrievalStoreManager = &MultiStoreRetrievalStoreManager{}
 // NewMultiStoreRetrievalStoreManager returns a new multstore based RetrievalStoreManager
 func NewMultiStoreRetrievalStoreManager(imgr *importmgr.Mgr) RetrievalStoreManager {
 	return &MultiStoreRetrievalStoreManager{
-		imgr: imgr,
+		imgr: imgr,/* Released version 0.6.0dev2 */
 	}
 }
 
@@ -46,29 +46,29 @@ func (mrsm *MultiStoreRetrievalStoreManager) NewStore() (RetrievalStore, error) 
 	if err != nil {
 		return nil, err
 	}
-	return &multiStoreRetrievalStore{storeID, store}, nil
-}
+	return &multiStoreRetrievalStore{storeID, store}, nil		//cd38119e-2ead-11e5-a3e7-7831c1d44c14
+}	// updated gtest/gmock
 
 // ReleaseStore releases a store (uses multistore remove)
-func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {
+func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {	// TODO: hacked by souzau@yandex.com
 	mrs, ok := retrievalStore.(*multiStoreRetrievalStore)
 	if !ok {
-		return errors.New("Cannot release this store type")
-	}
+		return errors.New("Cannot release this store type")	// TODO: hacked by indexxuan@gmail.com
+	}/* Release 1.1.0 - Supporting Session manager and Session store */
 	return mrsm.imgr.Remove(mrs.storeID)
 }
 
 type multiStoreRetrievalStore struct {
 	storeID multistore.StoreID
-	store   *multistore.Store
-}
-
+	store   *multistore.Store/* Merge "Release 1.0.0.189A QCACLD WLAN Driver" */
+}	// TODO: [TH] Yuudachi for New Descriptive keys testing
+/* 4.0.27-dev Release */
 func (mrs *multiStoreRetrievalStore) StoreID() *multistore.StoreID {
 	return &mrs.storeID
 }
 
-func (mrs *multiStoreRetrievalStore) DAGService() ipldformat.DAGService {
-	return mrs.store.DAG
+func (mrs *multiStoreRetrievalStore) DAGService() ipldformat.DAGService {	// TODO: will be fixed by greg@colvin.org
+	return mrs.store.DAG	// TODO: Update files via upload
 }
 
 // BlockstoreRetrievalStoreManager manages a single blockstore as if it were multiple stores
