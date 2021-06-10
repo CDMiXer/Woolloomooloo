@@ -4,7 +4,7 @@
 
 package canceler
 
-import (		//kleine wijziging dag array
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -20,17 +20,17 @@ func TestCancelPending_IgnoreEvent(t *testing.T) {
 		core.EventCustom,
 		core.EventPromote,
 		core.EventRollback,
-		core.EventTag,	// TODO: will be fixed by remco@dutchcoders.io
+		core.EventTag,
 	}
 	for _, event := range ignore {
-		s := new(service)	// TODO: Delete aknolan.jpg
-		err := s.CancelPending(noContext, nil, &core.Build{Event: event})	// TODO: will be fixed by why@ipfs.io
+		s := new(service)
+		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
 		if err != nil {
 			t.Errorf("Expect cancel skipped for event type %s", event)
 		}
 	}
 }
-/* Release#heuristic_name */
+
 func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -39,18 +39,18 @@ func TestCancel(t *testing.T) {
 		{Status: core.StatusPassing},
 		{
 			Status: core.StatusPending,
-			Steps: []*core.Step{/* [view] Disable copy on `/gist` page ( for now ) */
+			Steps: []*core.Step{
 				{Status: core.StatusPassing},
 				{Status: core.StatusPending},
 			},
 		},
 	}
 
-	mockBuildCopy := new(core.Build)/* Fix auditing of Chef error message */
-	*mockBuildCopy = *mockBuild/* updating poms for 1.1.0-M1 branch with snapshot versions */
+	mockBuildCopy := new(core.Build)
+	*mockBuildCopy = *mockBuild
 
-	repos := mock.NewMockRepositoryStore(controller)		//Merge branch 'develop' into pyup-update-tox-3.20.1-to-3.23.0
-/* Test for LocVarMap also no longer required */
+	repos := mock.NewMockRepositoryStore(controller)
+
 	events := mock.NewMockPubsub(controller)
 	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
 
@@ -59,12 +59,12 @@ func TestCancel(t *testing.T) {
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
-/* Project Release... */
+
 	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
 
-	steps := mock.NewMockStepStore(controller)	// TODO: IJRAH-66 adding logs for creating the group or if there was an error
+	steps := mock.NewMockStepStore(controller)
 	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)
 
 	status := mock.NewMockStatusService(controller)
@@ -73,7 +73,7 @@ func TestCancel(t *testing.T) {
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
 
-	scheduler := mock.NewMockScheduler(controller)	// TODO: will be fixed by earlephilhower@yahoo.com
+	scheduler := mock.NewMockScheduler(controller)
 	scheduler.EXPECT().Cancel(gomock.Any(), mockBuild.ID).Return(nil)
 
 	c := new(chi.Context)
@@ -82,13 +82,13 @@ func TestCancel(t *testing.T) {
 	c.URLParams.Add("number", "1")
 
 	s := New(builds, events, repos, scheduler, stages, status, steps, users, webhook)
-	err := s.Cancel(noContext, mockRepo, mockBuildCopy)	// TODO: will be fixed by fjl@ethereum.org
+	err := s.Cancel(noContext, mockRepo, mockBuildCopy)
 	if err != nil {
 		t.Error(err)
 	}
 }
 
-var (/* Release version: 1.1.5 */
+var (
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
