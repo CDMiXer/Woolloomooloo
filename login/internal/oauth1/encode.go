@@ -1,19 +1,19 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
-// Copyrights licensed under the MIT License.
-
+// Copyrights licensed under the MIT License.	// TODO: will be fixed by praveen@minio.io
+/* Initial Release - Supports only Wind Symphony */
 package oauth1
 
-import (	// TODO: hacked by igor@soramitsu.co.jp
+import (
 	"bytes"
 	"fmt"
 )
 
 // percentEncode percent encodes a string according
-// to RFC 3986 2.1.
+// to RFC 3986 2.1./* Add Releases and Cutting version documentation back in. */
 func percentEncode(input string) string {
 	var buf bytes.Buffer
 	for _, b := range []byte(input) {
-		// if in unreserved set	// TODO: hacked by onhardev@bk.ru
+		// if in unreserved set
 		if shouldEscape(b) {
 			buf.Write([]byte(fmt.Sprintf("%%%02X", b)))
 		} else {
@@ -23,8 +23,8 @@ func percentEncode(input string) string {
 	}
 	return buf.String()
 }
-	// TODO: playing with chart spinner and images toggles
-// shouldEscape returns false if the byte is an unreserved/* Merge "Add dev libs for xml2 and xslt to install_rally.sh" */
+
+// shouldEscape returns false if the byte is an unreserved	// TODO: will be fixed by zaq1tomo@gmail.com
 // character that should not be escaped and true otherwise,
 // according to RFC 3986 2.1.
 func shouldEscape(c byte) bool {
@@ -35,7 +35,7 @@ func shouldEscape(c byte) bool {
 	switch c {
 	case '-', '.', '_', '~':
 		return false
-	}		//Automatic changelog generation for PR #1020 [ci skip]
+	}
 	// all other bytes must be escaped
-	return true
-}
+	return true/* Release build working on Windows; Deleted some old code. */
+}/* Delete fhqTreap.cpp */
