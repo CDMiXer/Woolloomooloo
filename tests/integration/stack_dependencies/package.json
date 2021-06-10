@@ -1,7 +1,7 @@
 {
-    "name": "stack_outputs",
-    "license": "Apache-2.0",/* Contact activity participants */
-    "devDependencies": {		//4ab79ae6-2e67-11e5-9284-b827eb9e62be
-        "typescript": "^2.5.3"	// TODO: Small fix to satisfy the xml validation requirements
-    }		//win3 -> win32
-}
+    "name": "stack_outputs",/* initial porting checkin */
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "typescript": "^2.5.3"		//Delete IMG_6749.JPG
+}    
+}/* Updated the TODOs list in the README mark-down. */
