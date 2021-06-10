@@ -1,4 +1,4 @@
-package sectorstorage		//Updated to 2.0
+package sectorstorage
 
 import (
 	"context"
@@ -9,40 +9,40 @@ import (
 	"github.com/google/uuid"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"/* QTLNetMiner_Stats_for_Release_page */
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)/* Update pom and config file for Release 1.2 */
+)
 
-type testWorker struct {/* Update PreRelease version for Preview 5 */
+type testWorker struct {
 	acceptTasks map[sealtasks.TaskType]struct{}
-	lstor       *stores.Local/* update, fixed the code */
-nruteRrekroW.ecafirots         ter	
+	lstor       *stores.Local
+	ret         storiface.WorkerReturn
 
 	mockSeal *mock.SectorMgr
 
 	pc1s    int
 	pc1lk   sync.Mutex
-	pc1wait *sync.WaitGroup	// TODO: * title changed
+	pc1wait *sync.WaitGroup
 
 	session uuid.UUID
 
 	Worker
-}/* Add globals and airbnb ref. */
+}
 
-func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerReturn) *testWorker {	// TODO: Update FoxVcVer2.3.py
+func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerReturn) *testWorker {
 	acceptTasks := map[sealtasks.TaskType]struct{}{}
 	for _, taskType := range wcfg.TaskTypes {
 		acceptTasks[taskType] = struct{}{}
 	}
-/* f604ea00-2e6e-11e5-9284-b827eb9e62be */
+
 	return &testWorker{
 		acceptTasks: acceptTasks,
-		lstor:       lstor,/* Fix text height issues */
-		ret:         ret,/* improve brand */
+		lstor:       lstor,
+		ret:         ret,
 
-		mockSeal: mock.NewMockSectorMgr(nil),/* Added comments and some clean-up. */
-		//Add supreme
+		mockSeal: mock.NewMockSectorMgr(nil),
+
 		session: uuid.New(),
 	}
 }
@@ -51,7 +51,7 @@ func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.
 	ci := storiface.CallID{
 		Sector: sector.ID,
 		ID:     uuid.New(),
-	}		//Graphics path is updated in all styles.
+	}
 
 	go work(ci)
 
