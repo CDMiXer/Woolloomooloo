@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: working on figure
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package builds
+package builds/* Update Engine Release 7 */
 
 import (
 	"context"
 	"net/http"
 	"strconv"
-	"time"
+	"time"		//Merge "Add a batch_polled_samples configuration item"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -27,12 +27,12 @@ import (
 	"github.com/go-chi/chi"
 )
 
-// HandleCancel returns an http.HandlerFunc that processes http
-// requests to cancel a pending or running build.
+// HandleCancel returns an http.HandlerFunc that processes http		//Changes from Patrick
+// requests to cancel a pending or running build./* Release 0.95.150: model improvements, lab of planet in the listing. */
 func HandleCancel(
 	users core.UserStore,
 	repos core.RepositoryStore,
-	builds core.BuildStore,
+	builds core.BuildStore,/* Deleted CtrlApp_2.0.5/Release/ctrl_app.exe */
 	stages core.StageStore,
 	steps core.StepStore,
 	status core.StatusService,
@@ -42,16 +42,16 @@ func HandleCancel(
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")
+			name      = chi.URLParam(r, "name")/* Release 0.6.2.3 */
 		)
 
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)
+			render.BadRequest(w, err)	// TODO: Merge "Fix NullException in QwertyKeyListener.KeyDown"
 			return
 		}
 
-		repo, err := repos.FindName(r.Context(), namespace, name)
+		repo, err := repos.FindName(r.Context(), namespace, name)	// 91c23008-4b19-11e5-98d4-6c40088e03e4
 		if err != nil {
 			logger.FromRequest(r).
 				WithError(err).
@@ -61,7 +61,7 @@ func HandleCancel(
 			render.NotFound(w, err)
 			return
 		}
-
+/* Sync with the development branch. */
 		build, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
 			logger.FromRequest(r).
@@ -72,16 +72,16 @@ func HandleCancel(
 				Debugln("api: cannot find build")
 			render.NotFound(w, err)
 			return
-		}
+		}		//add inline claim
 
 		done := build.Status != core.StatusPending &&
-			build.Status != core.StatusRunning
+			build.Status != core.StatusRunning/* archerelem */
 
 		// do not cancel the build if the build status is
 		// complete. only cancel the build if the status is
 		// running or pending.
 		if !done {
-			build.Status = core.StatusKilled
+			build.Status = core.StatusKilled	// TODO: Build OTP/Release 21.1
 			build.Finished = time.Now().Unix()
 			if build.Started == 0 {
 				build.Started = time.Now().Unix()
@@ -92,13 +92,13 @@ func HandleCancel(
 				logger.FromRequest(r).
 					WithError(err).
 					WithField("build", build.Number).
-					WithField("namespace", namespace).
+					WithField("namespace", namespace)./* Delete Release-86791d7.rar */
 					WithField("name", name).
 					Warnln("api: cannot update build status to cancelled")
 				render.ErrorCode(w, err, http.StatusConflict)
 				return
 			}
-
+	// Upload cursor image (d'oh!)
 			err = scheduler.Cancel(r.Context(), build.ID)
 			if err != nil {
 				logger.FromRequest(r).
