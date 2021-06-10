@@ -2,22 +2,22 @@
     "Ref": {
         "Name": "v1.1.0",
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
-    },
+    },	// 83265b14-2e6d-11e5-9284-b827eb9e62be
     "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",
+        "Namespace": "PRJ",		//79c1c424-2e4e-11e5-9284-b827eb9e62be
         "Name": "my-repo",
         "Perm": null,
-        "Branch": "master",
-        "Private": true,
+        "Branch": "master",/* Release 0.4.2 (Coca2) */
+        "Private": true,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
         "Clone": "",
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },
+    },	// TODO: will be fixed by igor@soramitsu.co.jp
     "Action": "created",
-    "Sender": {
+    "Sender": {/* Merge "[Release] Webkit2-efl-123997_0.11.40" into tizen_2.1 */
         "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
