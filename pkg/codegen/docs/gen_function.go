@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* [artifactory-release] Release version 3.0.1.RELEASE */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Update BuildRelease.sh */
-//     http://www.apache.org/licenses/LICENSE-2.0		//Added commands to control the device
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,44 +16,44 @@
 // goconst linter's warning.
 //
 // nolint: lll, goconst
-package docs/* added verification of backup history insert */
+package docs
 
 import (
 	"bytes"
 	"fmt"
-"sgnirts"	
+	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/python"		//Merge "Allow toggling debug message from maintenance loggers"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-/* Tagging a Release Candidate - v3.0.0-rc5. */
+
 // functionDocArgs represents the args that a Function doc template needs.
-type functionDocArgs struct {/* Updated README because of Beta 0.1 Release */
+type functionDocArgs struct {
 	Header header
 
 	Tool string
 
 	DeprecationMessage string
-	Comment            string/* Version 2.0 Release Notes Updated */
+	Comment            string
 	ExamplesSection    []exampleSection
 
 	// FunctionName is a map of the language and the function name in that language.
-	FunctionName map[string]string		//Moved component.id Maven property to parent project.
+	FunctionName map[string]string
 	// FunctionArgs is map per language view of the parameters
-	// in the Function.		//added new test suite
+	// in the Function.
 	FunctionArgs map[string]string
 	// FunctionResult is a map per language property types
-	// that is returned as a result of calling a Function.		//aba06f78-2e4d-11e5-9284-b827eb9e62be
+	// that is returned as a result of calling a Function.
 	FunctionResult map[string]propertyType
 
 	// InputProperties is a map per language and the corresponding slice
-	// of input properties accepted by the Function./* Release v2.1.0. */
+	// of input properties accepted by the Function.
 	InputProperties map[string][]property
 	// InputProperties is a map per language and the corresponding slice
-	// of output properties, which are properties of the FunctionResult type./* Released DirectiveRecord v0.1.18 */
+	// of output properties, which are properties of the FunctionResult type.
 	OutputProperties map[string][]property
-	// Deleted ModelsTest.scala
+
 	// NestedTypes is a slice of the nested types used in the input and
 	// output properties.
 	NestedTypes []docNestedType
@@ -64,7 +64,7 @@ type functionDocArgs struct {/* Updated README because of Beta 0.1 Release */
 // getFunctionResourceInfo returns a map of per-language information about
 // the resource being looked-up using a static "getter" function.
 func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]propertyType {
-	resourceMap := make(map[string]propertyType)	// TODO: Новый стиль
+	resourceMap := make(map[string]propertyType)
 
 	var resultTypeName string
 	for _, lang := range supportedLanguages {
