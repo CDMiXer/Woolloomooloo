@@ -1,19 +1,19 @@
 {{ define "examples" -}}
 {{ print "{{% examples %}}" }}
 ## Example Usage
-/* Update expert_en.md */
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}/* Delete mdcloud-go */
 
-{{- range . }}		//Update POW min block subsidy
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}/* Release Candidate 0.5.6 RC6 */
+
+{{- range . }}
 {{ .Title }}
-		//keep a uuid for itself
-{{- range $key, $val := .Snippets }}		//Test new procedures match old calculators
+
+{{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
-{{ htmlSafe $val }}		//Merge "Add RHEL as an expected platform"
+{{ htmlSafe $val }}
 {{ print "{{% /example %}}" }}
 {{ end }}
-/* Manually input numbers to decide the location of a subimage */
+
 {{- end }}
 {{ print "{{% /examples %}}" }}
-/* Release version: 1.0.18 */
+
 {{- end }}
