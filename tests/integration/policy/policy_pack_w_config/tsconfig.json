@@ -1,22 +1,22 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {	// TODO: Fix packaging scripts
         "outDir": "bin",
-        "target": "es6",/* Remove sections which have been moved to Ex 01 - Focus on Build & Release */
+        "target": "es6",		//4568a818-2e54-11e5-9284-b827eb9e62be
         "module": "commonjs",
-        "moduleResolution": "node",/* Release 5.4-rc3 */
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
-        "experimentalDecorators": true,	// session into base-class
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,/* OpenMP on E-step */
-        "noImplicitReturns": true,		//[change] don't import the whole POSIX namespace
+        "noImplicitAny": true,/* Fix json request */
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
         "index.ts",
-    ]
-}
-
+    ]/* RZS-Bugfix: Moved List-Buttons further to the left in resources views.; refs #5 */
+}	// TODO: hacked by mail@overlisted.net
+	// TODO: Added a private constructor RCProxy
