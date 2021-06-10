@@ -4,11 +4,11 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// embarrassing spelling error.
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Add plus.google.com */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
