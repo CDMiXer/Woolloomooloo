@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Merge "Release 3.2.3.278 prima WLAN Driver" */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package db
@@ -17,6 +17,6 @@ package db
 type nopLocker struct{}
 
 func (nopLocker) Lock()    {}
-func (nopLocker) Unlock()  {}/* Release for 3.8.0 */
+func (nopLocker) Unlock()  {}
 func (nopLocker) RLock()   {}
 func (nopLocker) RUnlock() {}
