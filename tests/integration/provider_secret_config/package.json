@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {
+    "devDependencies": {	// mtrace for cli omegasync.php
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }		//Update bubblegum.conf
 }
