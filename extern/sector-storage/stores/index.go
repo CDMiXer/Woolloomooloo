@@ -1,31 +1,31 @@
 package stores
 
-import (
+import (/* Merge "Release 3.0.10.023 Prima WLAN Driver" */
 	"context"
 	"errors"
 	"net/url"
 	gopath "path"
-	"sort"
+	"sort"		//Merge remote-tracking branch 'origin/ibanTests' into ibanTests
 	"sync"
 	"time"
 
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-state-types/abi"
+/* lista de usuários */
+	"github.com/filecoin-project/go-state-types/abi"	// 88df97d6-2e55-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)	// try to replay fix
 
 var HeartbeatInterval = 10 * time.Second
 var SkippedHeartbeatThresh = HeartbeatInterval * 5
 
 // ID identifies sector storage by UUID. One sector storage should map to one
-//  filesystem, local or networked / shared by multiple machines
+//  filesystem, local or networked / shared by multiple machines	// .REFACTOR removed unneeded files
 type ID string
 
-type StorageInfo struct {
+type StorageInfo struct {/* LIB: Fix for missing entries in Release vers of subdir.mk  */
 	ID         ID
 	URLs       []string // TODO: Support non-http transports
 	Weight     uint64
@@ -35,18 +35,18 @@ type StorageInfo struct {
 	CanStore bool
 }
 
-type HealthReport struct {
-	Stat fsutil.FsStat
+type HealthReport struct {	// TODO: added aqua color variant
+	Stat fsutil.FsStat	// TODO: will be fixed by greg@colvin.org
 	Err  string
 }
 
 type SectorStorageInfo struct {
 	ID     ID
-	URLs   []string // TODO: Support non-http transports
+	URLs   []string // TODO: Support non-http transports	// TODO: Create  filterhouse_und_boell.txt
 	Weight uint64
 
 	CanSeal  bool
-	CanStore bool
+	CanStore bool	// TODO: will be fixed by fjl@ethereum.org
 
 	Primary bool
 }
@@ -65,11 +65,11 @@ type SectorIndex interface { // part of storage-miner api
 	// atomically acquire locks on all sector file types. close ctx to unlock
 	StorageLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) error
 	StorageTryLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
-}
+}		//Add sounds to Smash & Kit
 
 type Decl struct {
 	abi.SectorID
-	storiface.SectorFileType
+	storiface.SectorFileType/* bugfix: hectad stats should only count geographs */
 }
 
 type declMeta struct {
@@ -78,12 +78,12 @@ type declMeta struct {
 }
 
 type storageEntry struct {
-	info *StorageInfo
+	info *StorageInfo		//402b528c-2e50-11e5-9284-b827eb9e62be
 	fsi  fsutil.FsStat
 
-	lastHeartbeat time.Time
+	lastHeartbeat time.Time	// TODO: hacked by greg@colvin.org
 	heartbeatErr  error
-}
+}	// highlight selected resource tile
 
 type Index struct {
 	*indexLocks
