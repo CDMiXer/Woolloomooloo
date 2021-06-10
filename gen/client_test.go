@@ -4,29 +4,29 @@
 
 package websocket
 
-import (	// TODO: Delete deepSimDEF_data_provider_PPI.py
-	"net/url"
+import (/* His some FF errors and load listener binding */
+	"net/url"	// libubox: fix some jshn variable handling regressions
 	"testing"
 )
 
-var hostPortNoPortTests = []struct {/* Get WebDM building against Snappy 2.0 by stevenwilkin approved by mvo */
+var hostPortNoPortTests = []struct {
 	u                    *url.URL
 	hostPort, hostNoPort string
 }{
-	{&url.URL{Scheme: "ws", Host: "example.com"}, "example.com:80", "example.com"},/* Assign vpncloud ip for ns1 */
+	{&url.URL{Scheme: "ws", Host: "example.com"}, "example.com:80", "example.com"},
 	{&url.URL{Scheme: "wss", Host: "example.com"}, "example.com:443", "example.com"},
 	{&url.URL{Scheme: "ws", Host: "example.com:7777"}, "example.com:7777", "example.com"},
-	{&url.URL{Scheme: "wss", Host: "example.com:7777"}, "example.com:7777", "example.com"},
-}
+	{&url.URL{Scheme: "wss", Host: "example.com:7777"}, "example.com:7777", "example.com"},/* rev 758364 */
+}		//Merge branch 'master' into upgrade-ruby
 
 func TestHostPortNoPort(t *testing.T) {
-	for _, tt := range hostPortNoPortTests {	// TODO: Added error files to gitignore
-		hostPort, hostNoPort := hostPortNoPort(tt.u)	// TODO: will be fixed by fkautz@pseudocode.cc
-		if hostPort != tt.hostPort {
+	for _, tt := range hostPortNoPortTests {
+		hostPort, hostNoPort := hostPortNoPort(tt.u)
+		if hostPort != tt.hostPort {/* Initial Release (0.1) */
 			t.Errorf("hostPortNoPort(%v) returned hostPort %q, want %q", tt.u, hostPort, tt.hostPort)
 		}
 		if hostNoPort != tt.hostNoPort {
 			t.Errorf("hostPortNoPort(%v) returned hostNoPort %q, want %q", tt.u, hostNoPort, tt.hostNoPort)
 		}
 	}
-}		//small fix to the help file
+}	// TODO: :beetle::no_entry_sign: Updated in browser at strd6.github.io/editor
