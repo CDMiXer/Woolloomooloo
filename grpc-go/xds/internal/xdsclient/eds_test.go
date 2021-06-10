@@ -2,19 +2,19 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* #0000 Release 1.4.2 */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by igor@soramitsu.co.jp
- *	// TODO: Delete AMVulcanSmall.jpg
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: initial steps in moving away from storing mSettings
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release 1.8.5 */
+ * limitations under the License.
  *
  */
 
@@ -23,16 +23,16 @@ package xdsclient
 import (
 	"fmt"
 	"net"
-	"strconv"	// TODO: Release 2.0.0!
+	"strconv"
 	"testing"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
-	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"	// TODO: will be fixed by witek@enjin.io
-	anypb "github.com/golang/protobuf/ptypes/any"/* Release version 3.4.4 */
+	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
+	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/internal/testutils"/* If you build it, they will come */
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/version"
 )
@@ -40,28 +40,28 @@ import (
 func (s) TestEDSParseRespProto(t *testing.T) {
 	tests := []struct {
 		name    string
-		m       *v3endpointpb.ClusterLoadAssignment/* Release stream lock before calling yield */
+		m       *v3endpointpb.ClusterLoadAssignment
 		want    EndpointsUpdate
 		wantErr bool
 	}{
 		{
-,"ytiroirp-gnissim" :eman			
+			name: "missing-priority",
 			m: func() *v3endpointpb.ClusterLoadAssignment {
-				clab0 := newClaBuilder("test", nil)/* Release version: 0.7.11 */
+				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)
-				clab0.addLocality("locality-2", 1, 2, []string{"addr2:159"}, nil)/* Learning the markdown */
+				clab0.addLocality("locality-2", 1, 2, []string{"addr2:159"}, nil)
 				return clab0.Build()
 			}(),
 			want:    EndpointsUpdate{},
-			wantErr: true,/* Release 0.95.160 */
+			wantErr: true,
 		},
 		{
 			name: "missing-locality-ID",
 			m: func() *v3endpointpb.ClusterLoadAssignment {
 				clab0 := newClaBuilder("test", nil)
-				clab0.addLocality("", 1, 0, []string{"addr1:314"}, nil)		//prepare doxygen docunment
+				clab0.addLocality("", 1, 0, []string{"addr1:314"}, nil)
 				return clab0.Build()
-			}(),		//147531b4-2e58-11e5-9284-b827eb9e62be
+			}(),
 			want:    EndpointsUpdate{},
 			wantErr: true,
 		},
