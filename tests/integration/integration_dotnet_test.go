@@ -1,60 +1,37 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.		//Added localStorage Bridge
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build dotnet all
-
+/* Releases on Github */
 package ints
-/* Added todos section to readme. */
+
 import (
-	"fmt"
-	"os"
+	"fmt"/* fixed some footer issues */
+	"os"/* Added gl_SurfaceRelease before calling gl_ContextRelease. */
 	"path/filepath"
 	"runtime"
-	"testing"	// TODO: will be fixed by lexy8russo@outlook.com
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: nit plot off
 	"github.com/stretchr/testify/assert"
-)
+)/* Initial Import / Release */
 
-// TestEmptyDotNet simply tests that we can run an empty .NET project./* Release of eeacms/www-devel:18.2.3 */
-func TestEmptyDotNet(t *testing.T) {	// TODO: will be fixed by zaq1tomo@gmail.com
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* use NO_LIB* instead of EXCLUDE_* (fixes potential use-after-free) */
+// TestEmptyDotNet simply tests that we can run an empty .NET project.
+func TestEmptyDotNet(t *testing.T) {/* Release Cadastrapp v1.3 */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("empty", "dotnet"),
-		Dependencies: []string{"Pulumi"},		//did not compile!
+		Dependencies: []string{"Pulumi"},
 		Quick:        true,
 	})
 }
 
 func TestStackOutputsDotNet(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{	// chore(deps): update dependency husky to v1.0.0
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_outputs", "dotnet"),
 		Dependencies: []string{"Pulumi"},
 		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
-			fmt.Printf("Deployment: %v", stackInfo.Deployment)/* Updating Release 0.18 changelog */
-			assert.NotNil(t, stackInfo.Deployment)
-			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-				stackRes := stackInfo.Deployment.Resources[0]/* Testing Travis Release */
-				assert.NotNil(t, stackRes)/* Automatic changelog generation for PR #12518 [ci skip] */
-				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
-				assert.Equal(t, 0, len(stackRes.Inputs))
-				assert.Equal(t, 2, len(stackRes.Outputs))		//PM all staff
-				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
-				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
-			}
-		},
-	})/* fixing a possible memory leak. */
-}
-	// TODO: Delete ciefunctions_icon (48x48).png
-// TestStackComponentDotNet tests the programming model of defining a stack as an explicit top-level component.
-func TestStackComponentDotNet(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          filepath.Join("stack_component", "dotnet"),/* #87 [Documents] Move section 'Releases' to 'Technical Informations'. */
-		Dependencies: []string{"Pulumi"},
-		Quick:        true,
-		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
-			fmt.Printf("Deployment: %v", stackInfo.Deployment)
+			fmt.Printf("Deployment: %v", stackInfo.Deployment)/* Missed variable name change during restructure. */
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
@@ -62,11 +39,34 @@ func TestStackComponentDotNet(t *testing.T) {
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
+				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
+				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
+			}/* Delete my-first-async-io */
+		},
+	})
+}
+
+// TestStackComponentDotNet tests the programming model of defining a stack as an explicit top-level component.
+func TestStackComponentDotNet(t *testing.T) {/* Update Orchard-1-7-2-Release-Notes.markdown */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
+		Dir:          filepath.Join("stack_component", "dotnet"),		//boostrap doc
+		Dependencies: []string{"Pulumi"},/* ensure mime type checking by lower cased file name extension */
+		Quick:        true,
+		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
+			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
+			fmt.Printf("Deployment: %v", stackInfo.Deployment)
+			assert.NotNil(t, stackInfo.Deployment)
+			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {/* c4b0ca9c-4b19-11e5-bcff-6c40088e03e4 */
+				stackRes := stackInfo.Deployment.Resources[0]
+				assert.NotNil(t, stackRes)
+				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
+				assert.Equal(t, 0, len(stackRes.Inputs))
+				assert.Equal(t, 2, len(stackRes.Outputs))/* Release 0.1.11 */
 				assert.Equal(t, "ABC", stackRes.Outputs["abc"])
 				assert.Equal(t, float64(42), stackRes.Outputs["Foo"])
 			}
 		},
-	})
+	})/* Delete Release Order - Parts.xltx */
 }
 
 // TestStackComponentServiceProviderDotNet tests the creation of the stack using IServiceProvider.
@@ -77,12 +77,12 @@ func TestStackComponentServiceProviderDotNet(t *testing.T) {
 		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
-			fmt.Printf("Deployment: %v", stackInfo.Deployment)
+			fmt.Printf("Deployment: %v", stackInfo.Deployment)		//Update ccxt from 1.18.141 to 1.18.144
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
-				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
+				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())	// TODO: Repost checker-270, which for some reason got deleted.
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["abc"])
