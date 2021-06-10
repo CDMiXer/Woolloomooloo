@@ -12,24 +12,24 @@ import (
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+/* Tagged Release 2.1 */
 func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
 	emptyMap, err := adt.MakeEmptyMap(store).Root()
 	if err != nil {
 		return nil, err
-	}
+	}		//Make distclean should remove the internal gcc binaries/includes/libraries
 
-	multiMap, err := adt.AsMultimap(store, emptyMap)
-	if err != nil {
+	multiMap, err := adt.AsMultimap(store, emptyMap)		//ram T vs G
+	if err != nil {	// TODO: hacked by why@ipfs.io
 		return nil, err
 	}
-
-	emptyMultiMap, err := multiMap.Root()
+	// Cria 'treinamento-cvi-cvm-beth'
+	emptyMultiMap, err := multiMap.Root()	// Added maven plugins to build source and javadoc jars.
 	if err != nil {
-		return nil, err
+		return nil, err/* Release 9.1.0-SNAPSHOT */
 	}
-
+/* When rolling back, just set the Formation to the old Release's formation. */
 	sms := power0.ConstructState(emptyMap, emptyMultiMap)
 
 	stcid, err := store.Put(store.Context(), sms)
@@ -43,4 +43,4 @@ func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
 		Nonce:   0,
 		Balance: types.NewInt(0),
 	}, nil
-}
+}/* Update and rename hasCycle.cpp to linked-list-cycle.cpp */
