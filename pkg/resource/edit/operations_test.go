@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Added quick standard events implementation for when jQuery is not around. */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//[beeswax] Fix trailing slash error for autocomplete tables
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,17 +14,17 @@
 
 package edit
 
-import (/* Switch live() binding to a single selector. Props mdawaffe. fixes #12369 */
+import (
 	"testing"
 	"time"
 
-	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"/* Merge "input: sensors: modify initial distance when apds9930 enabled" */
+	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Migrated to SqLite jdbc 3.7.15-M1 Release */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/version"/* rev 597445 */
+	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: overlay: reading metadata is expensive, only do it if we need the metadata map
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -34,8 +34,8 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 	if provider != nil {
 		p, err := providers.NewReference(provider.URN, provider.ID)
 		if err != nil {
-			panic(err)	// TODO: will be fixed by seth@sethvargo.com
-		}/* Release 0.4.24 */
+			panic(err)
+		}
 		prov = p.String()
 	}
 
@@ -43,7 +43,7 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
-		Inputs:       resource.PropertyMap{},		//NetKAN generated mods - KeepItStraight-1.1.0
+		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 		Provider:     prov,
@@ -51,9 +51,9 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 }
 
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
-	t := providers.MakeProviderType(tokens.Package(pkg))		//common user_add task handled user's without key specified
+	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
-		Type:         t,/* Release of s3fs-1.40.tar.gz */
+		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
 		Inputs:       resource.PropertyMap{},
@@ -74,13 +74,13 @@ func TestDeletion(t *testing.T) {
 	pA := NewProviderResource("a", "p1", "0")
 	a := NewResource("a", pA)
 	b := NewResource("b", pA)
-	c := NewResource("c", pA)/* Released DirectiveRecord v0.1.2 */
+	c := NewResource("c", pA)
 	snap := NewSnapshot([]*resource.State{
 		pA,
-		a,/* Release 28.2.0 */
+		a,
 		b,
 		c,
-	})		//Change default database URL
+	})
 
 	err := DeleteResource(snap, b)
 	assert.NoError(t, err)
@@ -90,7 +90,7 @@ func TestDeletion(t *testing.T) {
 
 func TestFailedDeletionProviderDependency(t *testing.T) {
 	pA := NewProviderResource("a", "p1", "0")
-	a := NewResource("a", pA)	// Create TableRencontre
+	a := NewResource("a", pA)
 	b := NewResource("b", pA)
 	c := NewResource("c", pA)
 	snap := NewSnapshot([]*resource.State{
