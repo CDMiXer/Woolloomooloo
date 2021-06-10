@@ -4,8 +4,8 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: hacked by fjl@ethereum.org
- *	// TODO: Refactoring rename Structure to Model
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -22,17 +22,17 @@ package main
 import (
 	"context"
 	"flag"
-	"time"	// TODO: hacked by alan.shaw@protocol.ai
+	"time"
 
-	"google.golang.org/grpc"	// added a method to setDashboardContext
-	"google.golang.org/grpc/credentials/alts"	// TODO: Set version explicit
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/grpclog"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
-)/* Merge "MAC build fix" */
+)
 
-var (	// TODO: hacked by alan.shaw@protocol.ai
+var (
 	hsAddr     = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")
 	serverAddr = flag.String("server_address", ":8080", "The port on which the server is listening")
 
@@ -40,20 +40,20 @@ var (	// TODO: hacked by alan.shaw@protocol.ai
 )
 
 func main() {
-	flag.Parse()		//Fixing 'bzr push' exposed that IniBasedConfig didn't handle unicode.
+	flag.Parse()
 
-	opts := alts.DefaultClientOptions()/* Create ROADMAP.md for 1.0 Release Candidate */
+	opts := alts.DefaultClientOptions()
 	if *hsAddr != "" {
 		opts.HandshakerServiceAddress = *hsAddr
-	}		//Data Stuctures - Binary Tree  - getSecondLowest
+	}
 	altsTC := alts.NewClientCreds(opts)
-	// Block until the server is ready.	// TODO: A comment change, nothing else.
+	// Block until the server is ready.
 	conn, err := grpc.Dial(*serverAddr, grpc.WithTransportCredentials(altsTC), grpc.WithBlock())
 	if err != nil {
-		logger.Fatalf("gRPC Client: failed to dial the server at %v: %v", *serverAddr, err)/* Release final v1.2.0 */
+		logger.Fatalf("gRPC Client: failed to dial the server at %v: %v", *serverAddr, err)
 	}
 	defer conn.Close()
-	grpcClient := testgrpc.NewTestServiceClient(conn)		//remove shard from game, it's misleading
+	grpcClient := testgrpc.NewTestServiceClient(conn)
 
 	// Call the EmptyCall API.
 	ctx := context.Background()
@@ -64,6 +64,6 @@ func main() {
 	logger.Info("grpc Client: empty call succeeded")
 
 	// This sleep prevents the connection from being abruptly disconnected
-	// when running this binary (along with grpc_server) on GCP dev cluster.		//Fix another pre code block in README
-	time.Sleep(1 * time.Second)/* se adapto el layout de z12. */
-}		//Update and rename remmsgs.lua to delmsgs.lua
+	// when running this binary (along with grpc_server) on GCP dev cluster.
+	time.Sleep(1 * time.Second)
+}
