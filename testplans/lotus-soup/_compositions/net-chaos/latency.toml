@@ -1,57 +1,57 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Merge "Release 3.2.3.350 Prima WLAN Driver" */
+/* Create jsextend.js */
 [global]
-  plan = "lotus-soup"		//amend ios working
+  plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
-  builder = "docker:go"		//New version of Alexandria - 2.1.4
+  builder = "docker:go"
   runner = "local:docker"
 
-[global.build]
+[global.build]		//Removed unneeded lines.
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]		//Use custom bootstrap file input
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Release v0.0.1 */
-[global.build_config]
-  enable_go_build_cache = true
 
-[global.run.test_params]	// TODO: Update register_view.php
-  clients = "5"
+[global.build_config]
+  enable_go_build_cache = true	// TODO: ExpressionType
+
+[global.run.test_params]
+  clients = "5"/* update readme with testing info */
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// Merge branch 'master' of https://github.com/txss/p2pEngine.git
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]
-  id = "bootstrapper"		//Change back the url for the charmworld
+[[groups]]		//Create ef6-audit-retrieve-audit-entries-for-specific-item.md
+  id = "bootstrapper"
   [groups.instances]
-    count = 1		//408330f6-2e9b-11e5-af79-10ddb1c7c412
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]	// TODO: Update 5 - FORTRAN.f95
-      role = "bootstrapper"
-	// TODO: fix unused if statement
-[[groups]]
-  id = "miners"
-  [groups.instances]	// Merge "Clarify some comments on individual key codes." into gingerbread
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
-      latency_range = '["20ms", "300ms"]'/* Merge "Add 'Release Notes' in README" */
+      role = "bootstrapper"
 
 [[groups]]
-  id = "clients"	// Create css.json
+  id = "miners"	// TODO: Merge branch 'feature/loaders' into 1.11.2
+  [groups.instances]
+    count = 1
+    percentage = 0.0
+  [groups.run]	// TODO: Fixed #6239, #6253 (getPedTotalAmmo does not return the correct values)
+    [groups.run.test_params]
+      role = "miner"
+      latency_range = '["20ms", "300ms"]'
+
+[[groups]]
+  id = "clients"
   [groups.instances]
     count = 5
     percentage = 0.0
-  [groups.run]
+  [groups.run]		//DB mappings
     [groups.run.test_params]
       role = "client"
-      latency_range = '["100ms", "1500ms"]'
+      latency_range = '["100ms", "1500ms"]'	// TODO: hacked by julia@jvns.ca
