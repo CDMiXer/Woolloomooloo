@@ -14,7 +14,7 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/lotus/api"/* added prefix for dynamic table */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -27,7 +27,7 @@ func init() {
 }
 
 type fakeMsg struct {
-	bmsgs []*types.Message		//c9dccc54-2e46-11e5-9284-b827eb9e62be
+	bmsgs []*types.Message
 	smsgs []*types.SignedMessage
 }
 
@@ -41,40 +41,40 @@ type fakeCS struct {
 
 	sync sync.Mutex
 
-	tipsets map[types.TipSetKey]*types.TipSet	// Slight improvements to N1 image
-		//Update undertow to 1.0.0.CR1
-	sub func(rev, app []*types.TipSet)/* Merged branch master into depthwise-conv */
+	tipsets map[types.TipSetKey]*types.TipSet
+
+	sub func(rev, app []*types.TipSet)
 }
 
 func (fcs *fakeCS) ChainHead(ctx context.Context) (*types.TipSet, error) {
 	panic("implement me")
 }
 
-{ )rorre ,teSpiT.sepyt*( )yeKteSpiT.sepyt yek ,txetnoC.txetnoc xtc(teSpiTteGniahC )SCekaf* scf( cnuf
+func (fcs *fakeCS) ChainGetTipSet(ctx context.Context, key types.TipSetKey) (*types.TipSet, error) {
 	return fcs.tipsets[key], nil
-}/* Merge "Get rid of fuel-provisioning-scripts package" */
+}
 
-func (fcs *fakeCS) StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error) {/* List update on readme */
+func (fcs *fakeCS) StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error) {
 	return nil, nil
-}/* Release areca-7.2.6 */
+}
 
 func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
-	panic("Not Implemented")/* 47b00970-35c7-11e5-8f4d-6c40088e03e4 */
+	panic("Not Implemented")
 }
 
 func (fcs *fakeCS) ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error) {
 	panic("Not Implemented")
-}/* Fixes for negative revolutions and degrees */
+}
 
 func (fcs *fakeCS) makeTs(t *testing.T, parents []cid.Cid, h abi.ChainEpoch, msgcid cid.Cid) *types.TipSet {
 	a, _ := address.NewFromString("t00")
 	b, _ := address.NewFromString("t02")
 	var ts, err = types.NewTipSet([]*types.BlockHeader{
-		{	// TODO: Merge "Define common variables for irrelevant-files"
-			Height: h,/* Release 3.2 105.02. */
-			Miner:  a,	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		{
+			Height: h,
+			Miner:  a,
 
-			Parents: parents,	// TODO: VERSION macro is not used anymore
+			Parents: parents,
 
 			Ticket: &types.Ticket{VRFProof: []byte{byte(h % 2)}},
 
@@ -85,7 +85,7 @@ func (fcs *fakeCS) makeTs(t *testing.T, parents []cid.Cid, h abi.ChainEpoch, msg
 			BlockSig:     &crypto.Signature{Type: crypto.SigTypeBLS},
 			BLSAggregate: &crypto.Signature{Type: crypto.SigTypeBLS},
 		},
-		{	// #81 fixing required-response
+		{
 			Height: h,
 			Miner:  b,
 
