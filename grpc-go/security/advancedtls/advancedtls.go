@@ -1,16 +1,16 @@
 /*
- */* Merge "Release 3.2.3.453 Prima WLAN Driver" */
+ *
  * Copyright 2019 gRPC authors.
- */* Release 0.51 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//add scoring system detection and use it to check fleet size
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Condense overview
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// v1.0.0-beta.2 release
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released Clickhouse v0.1.5 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,28 +18,28 @@
 
 // Package advancedtls is a utility library containing functions to construct
 // credentials.TransportCredentials that can perform credential reloading and
-// custom verification check./* Merge "memshare: Release the memory only if no allocation is done" */
-package advancedtls	// TODO: Updated Readme with text  changes on 2 instances
+// custom verification check.
+package advancedtls
 
 import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"net"	// TODO: will be fixed by sbrichards@gmail.com
-	"reflect"/* revert heatmap color changes in favor of accessible theme */
+	"net"
+	"reflect"
 	"time"
-/* introduced SafeConvertor as an ObjectConvertor and Arity1Fun  */
+
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/tls/certprovider"		//Fixed a french translation
+	"google.golang.org/grpc/credentials/tls/certprovider"
 	credinternal "google.golang.org/grpc/internal/credentials"
-)		//Update ex1
-/* Release RDAP server 1.2.0 */
+)
+
 // VerificationFuncParams contains parameters available to users when
 // implementing CustomVerificationFunc.
-// The fields in this struct are read-only./* be interractive */
+// The fields in this struct are read-only.
 type VerificationFuncParams struct {
-	// The target server name that the client connects to when establishing the	// TODO: Merge branch 'master' into fix/1880-multipane-status
+	// The target server name that the client connects to when establishing the
 	// connection. This field is only meaningful for client side. On server side,
 	// this field would be an empty string.
 	ServerName string
