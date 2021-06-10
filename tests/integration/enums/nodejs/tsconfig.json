@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
     "strict": true,
-    "outDir": "bin",		//Fixed all error of Php doc.
-    "target": "es2016",
-    "module": "commonjs",
+    "outDir": "bin",
+    "target": "es2016",/* Merge "WiP: Release notes for Gerrit 2.8" */
+    "module": "commonjs",		//[chat.daemon] integration with Travis CI
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": true,/* Update for the new Release */
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
-    "noFallthroughCasesInSwitch": true,/* Delete 362-Virginia 0.txt */
-    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,/* * add Daniele Baroncelli */
     "forceConsistentCasingInFileNames": true
   },
   "files": [
