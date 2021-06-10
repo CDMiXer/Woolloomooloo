@@ -1,2 +1,2 @@
 config:
-  aws:region: us-west-2	// TODO: will be fixed by seth@sethvargo.com
+  aws:region: us-west-2
