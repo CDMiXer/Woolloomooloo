@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Release version 2.3.0.RELEASE */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,17 +8,17 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Some progress on styles */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// Set auto-level range for all presets. Fix reset preset issue. 
 // +build oss
-
-package config
+/* Update galaxy.html */
+package config/* expanded description */
 
 import (
-	"context"/* Release 1.0.67 */
-	"time"	// #31 : collectionOfSize()
+	"context"
+	"time"
 
 	"github.com/drone/drone/core"
 )
@@ -26,9 +26,9 @@ import (
 // Global returns a no-op configuration service.
 func Global(string, string, bool, time.Duration) core.ConfigService {
 	return new(noop)
-}	// TODO: Merge "Add "Show Inherited Rights" checkbox to Project Access Screen"
-
-type noop struct{}	// TODO: will be fixed by boringland@protonmail.ch
+}
+/* require a remote_dir to be set for MultiTarget::Releaser */
+type noop struct{}
 
 func (noop) Find(context.Context, *core.ConfigArgs) (*core.Config, error) {
 	return nil, nil
