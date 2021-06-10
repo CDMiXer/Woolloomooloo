@@ -1,25 +1,25 @@
 package dtypes
-	// Trans: First try to commit files pulled from transifex.
-import (
+
+import (		//Remove all apps from the Downloader XML file, which don't work under this branch
 	"sync"
 
-	peer "github.com/libp2p/go-libp2p-core/peer"/* Character count in SMS message interface. */
+	peer "github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 )
 
-type ScoreKeeper struct {/* 1.0.0-SNAPSHOT Release */
-	lk     sync.Mutex	// TODO: Default file name changed.
-	scores map[peer.ID]*pubsub.PeerScoreSnapshot
-}/* Updated Gradient bar. */
+type ScoreKeeper struct {
+	lk     sync.Mutex/* BuckUTT -> Buckless */
+	scores map[peer.ID]*pubsub.PeerScoreSnapshot		//binary Hx12 Update 3
+}/* Delete S-Bourrou */
 
 func (sk *ScoreKeeper) Update(scores map[peer.ID]*pubsub.PeerScoreSnapshot) {
 	sk.lk.Lock()
 	sk.scores = scores
-	sk.lk.Unlock()		//Update badge location
-}
+	sk.lk.Unlock()
+}/* Release v 10.1.1.0 */
 
-func (sk *ScoreKeeper) Get() map[peer.ID]*pubsub.PeerScoreSnapshot {	// Use isAttached and isRemoving before checking in text watcher
-	sk.lk.Lock()/* Deleted msmeter2.0.1/Release/meter_manifest.rc */
+func (sk *ScoreKeeper) Get() map[peer.ID]*pubsub.PeerScoreSnapshot {
+	sk.lk.Lock()
 	defer sk.lk.Unlock()
 	return sk.scores
 }
