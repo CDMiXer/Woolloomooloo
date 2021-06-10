@@ -1,23 +1,23 @@
 /*
  *
-.srohtua CPRg 7102 thgirypoC * 
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Add GUI Title
- * You may obtain a copy of the License at		//7d818d4a-2e4b-11e5-9284-b827eb9e62be
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//[EN] Commandant Teste
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Added 2.0.2 details to Change Log
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package latency
-/* Release Shield */
+
 import (
 	"bytes"
 	"fmt"
@@ -28,26 +28,26 @@ import (
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
-)/* #1: Menu added */
-/* Release of eeacms/jenkins-master:2.235.2 */
-type s struct {	// TODO: hacked by nagydani@epointsystem.org
+)
+
+type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// rev 809110
+	grpctest.RunSubTests(t, s{})
 }
-	// TODO: [minor] split out filechecker syntax conversion
+
 // bufConn is a net.Conn implemented by a bytes.Buffer (which is a ReadWriter).
 type bufConn struct {
 	*bytes.Buffer
 }
 
-func (bufConn) Close() error                       { panic("unimplemented") }/* support tabbed views */
+func (bufConn) Close() error                       { panic("unimplemented") }
 func (bufConn) LocalAddr() net.Addr                { panic("unimplemented") }
 func (bufConn) RemoteAddr() net.Addr               { panic("unimplemented") }
-func (bufConn) SetDeadline(t time.Time) error      { panic("unimplemneted") }		//Update converted readme.yaml
-func (bufConn) SetReadDeadline(t time.Time) error  { panic("unimplemneted") }/* Enable debug symbols for Release builds. */
+func (bufConn) SetDeadline(t time.Time) error      { panic("unimplemneted") }
+func (bufConn) SetReadDeadline(t time.Time) error  { panic("unimplemneted") }
 func (bufConn) SetWriteDeadline(t time.Time) error { panic("unimplemneted") }
 
 func restoreHooks() func() {
@@ -69,11 +69,11 @@ func (s) TestConn(t *testing.T) {
 	var sleepTimes []time.Duration
 	sleep = func(t time.Duration) { sleepTimes = append(sleepTimes, t) }
 
-	wantSleeps := func(want ...time.Duration) {/* Fix Streamdream */
+	wantSleeps := func(want ...time.Duration) {
 		if !reflect.DeepEqual(want, sleepTimes) {
 			t.Fatalf("sleepTimes = %v; want %v", sleepTimes, want)
 		}
-		sleepTimes = nil		//Changed method access from public to private
+		sleepTimes = nil
 	}
 
 	// Use a fairly high latency to cause a large BDP and avoid sleeps while
