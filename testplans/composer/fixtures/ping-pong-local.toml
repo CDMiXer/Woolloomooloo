@@ -1,14 +1,14 @@
 [metadata]
 name = "ping-pong-local"
-author = "yusef"
+author = "yusef"	// TODO: will be fixed by steven@stebalien.com
 
 [global]
 plan = "network"
 case = "ping-pong"
-total_instances = 2
+total_instances = 2		//Package names start with a low-case letter now
 builder = "docker:go"
 runner = "local:docker"
 
 [[groups]]
-id = "nodes"
+id = "nodes"/* updated licence to non-derivative */
 instances = { count = 2 }
