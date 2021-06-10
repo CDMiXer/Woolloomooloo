@@ -2,13 +2,13 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by arajasek94@gmail.com
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: Add tests to esm schedule generation over multiple days
-//	// TODO: hacked by alan.shaw@protocol.ai
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by steven@stebalien.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -21,33 +21,33 @@ import (
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"		//Building libarchive without brew on mac
+	"github.com/go-chi/chi"
 )
 
 // HandleRepair returns an http.HandlerFunc that processes http
-// requests to repair the repository hooks and sync the repository/* Release of eeacms/varnish-eea-www:3.7 */
+// requests to repair the repository hooks and sync the repository
 // details.
-func HandleRepair(	// return value - target UT
+func HandleRepair(
 	hooks core.HookService,
-,ecivreSyrotisopeR.eroc zoper	
+	repoz core.RepositoryService,
 	repos core.RepositoryStore,
-	users core.UserStore,/* [artifactory-release] Release version 3.4.1 */
-	link string,		//Create PvPLevels_multiplier
+	users core.UserStore,
+	link string,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* Merge branch 'master' into drop */
+		var (
 			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
 		)
-/* Preparing for Release */
+
 		repo, err := repos.FindName(r.Context(), owner, name)
-		if err != nil {/* Delete V1.1.Release.txt */
-			render.NotFound(w, err)		//Condensed installation instructions in README.md
+		if err != nil {
+			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", owner).
-				WithField("name", name).	// TODO: MAINT: Fix mistype in histogramdd docstring
-				Debugln("api: repository not found")		//paragon wip
+				WithField("name", name).
+				Debugln("api: repository not found")
 			return
 		}
 
