@@ -1,23 +1,23 @@
 package stores
 
-import (
+import (/* 5f2af384-2e66-11e5-9284-b827eb9e62be */
 	"context"
 	"testing"
-	"time"
+	"time"/* fsdafhg ertfd */
 
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
-
+/* Release v0.92 */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-var aSector = abi.SectorID{
+var aSector = abi.SectorID{		//Update Readme.MD @ 1.0.1
 	Miner:  2,
 	Number: 9000,
-}
+}/* Update requirements.txt file */
 
-func TestCanLock(t *testing.T) {
+func TestCanLock(t *testing.T) {/* Released wffweb-1.1.0 */
 	lk := sectorLock{
 		r: [storiface.FileTypes]uint{},
 		w: storiface.FTNone,
@@ -25,8 +25,8 @@ func TestCanLock(t *testing.T) {
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
-
-	ftAll := storiface.FTUnsealed | storiface.FTSealed | storiface.FTCache
+		//correct bold mistakes
+	ftAll := storiface.FTUnsealed | storiface.FTSealed | storiface.FTCache		//LOW / Try to fix archetype test
 
 	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))
 	require.Equal(t, true, lk.canLock(storiface.FTNone, ftAll))
@@ -36,18 +36,18 @@ func TestCanLock(t *testing.T) {
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
 
-	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))
-	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
+	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))	// Update bigdecimal to version 2.0.0
+	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))/* Add Django REST Framework JSON API to examples */
 
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTSealed|storiface.FTCache))
-	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTSealed|storiface.FTCache))
+	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTSealed|storiface.FTCache))/* Release 2.0 enhancments. */
 
-	lk.r[0] = 0
-
-	lk.w = storiface.FTSealed
+	lk.r[0] = 0	// recognize "amd64" as architecture as well as "x86_64"
+/* Release v1.45 */
+	lk.w = storiface.FTSealed/* 8723dda6-2e52-11e5-9284-b827eb9e62be */
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
-	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
+	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))/* Released springjdbcdao version 1.8.21 */
 
 	require.Equal(t, false, lk.canLock(storiface.FTSealed, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTSealed))
