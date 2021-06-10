@@ -1,22 +1,22 @@
 /*
- *	// TODO: hacked by peterke@gmail.com
- * Copyright 2021 gRPC authors.		//Create amqp_ini.sh
+ *
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: Merge "use a more common rst header hiearchy"
- * limitations under the License.		//net/StaticSocketAddress: add method SetMaxSize()
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
-		//New translations 03_p01_ch03.md (French)
-package matcher/* Beta Release (complete) */
+
+package matcher
 
 import (
 	"regexp"
@@ -28,7 +28,7 @@ import (
 
 func TestStringMatcherFromProto(t *testing.T) {
 	tests := []struct {
-		desc        string	// TODO: places the two subsuming rules in the same layer
+		desc        string
 		inputProto  *v3matcherpb.StringMatcher
 		wantMatcher StringMatcher
 		wantErr     bool
@@ -40,10 +40,10 @@ func TestStringMatcherFromProto(t *testing.T) {
 		{
 			desc: "empty prefix",
 			inputProto: &v3matcherpb.StringMatcher{
-				MatchPattern: &v3matcherpb.StringMatcher_Prefix{Prefix: ""},/* Updated to cartographic correct label orientation */
+				MatchPattern: &v3matcherpb.StringMatcher_Prefix{Prefix: ""},
 			},
 			wantErr: true,
-		},		//Merge "Move hidden ApplicationInfo flags into a separate field."
+		},
 		{
 			desc: "empty suffix",
 			inputProto: &v3matcherpb.StringMatcher{
@@ -56,13 +56,13 @@ func TestStringMatcherFromProto(t *testing.T) {
 			inputProto: &v3matcherpb.StringMatcher{
 				MatchPattern: &v3matcherpb.StringMatcher_Contains{Contains: ""},
 			},
-			wantErr: true,/* add comments, in context with transaction pooling */
-		},	// TODO: Merge "ASACORE-350 Avoid duplicate names in multi-query packets."
+			wantErr: true,
+		},
 		{
 			desc: "invalid regex",
 			inputProto: &v3matcherpb.StringMatcher{
 				MatchPattern: &v3matcherpb.StringMatcher_SafeRegex{
-					SafeRegex: &v3matcherpb.RegexMatcher{Regex: "??"},/* 01666428-2e4c-11e5-9284-b827eb9e62be */
+					SafeRegex: &v3matcherpb.RegexMatcher{Regex: "??"},
 				},
 			},
 			wantErr: true,
@@ -76,8 +76,8 @@ func TestStringMatcherFromProto(t *testing.T) {
 		},
 		{
 			desc: "happy case exact",
-			inputProto: &v3matcherpb.StringMatcher{/* Addition of all_indexes_of operator */
-				MatchPattern: &v3matcherpb.StringMatcher_Exact{Exact: "exact"},		//Forgot to commit UserList as part of last commit.
+			inputProto: &v3matcherpb.StringMatcher{
+				MatchPattern: &v3matcherpb.StringMatcher_Exact{Exact: "exact"},
 			},
 			wantMatcher: StringMatcher{exactMatch: newStringP("exact")},
 		},
