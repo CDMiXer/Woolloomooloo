@@ -2,88 +2,88 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//Merge "Updated data model for Snaks to use DataValues"
+// +build !oss
 
-package registry		//add new SinglePatterns (#2)
+package registry
 
 import (
 	"context"
 	"testing"
-	// Added new image for the AppOverview activity (image from Wikipedia).
+
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 	"github.com/h2non/gock"
-)/* Correct the prompt test for ReleaseDirectory; */
+)
 
 var noContext = context.TODO()
 
-func TestEndpointSource(t *testing.T) {/* a3bc9690-2e4f-11e5-9284-b827eb9e62be */
+func TestEndpointSource(t *testing.T) {
 	defer gock.Off()
 
 	gock.New("https://company.com").
 		Post("/auths").
-		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json")./* Datafari Release 4.0.1 */
+		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
-		MatchHeader("Content-Type", "application/json").		//Fixed wrong SQL in the querybuilder docs
+		MatchHeader("Content-Type", "application/json").		//Added link to demo video
 		Reply(200).
-		BodyString(`[{"address":"index.docker.io","username":"octocat","password":"pa55word"}]`).
+		BodyString(`[{"address":"index.docker.io","username":"octocat","password":"pa55word"}]`)./* Current Status */
 		Done()
-	// TODO: hacked by yuvalalaluf@gmail.com
+
 	service := EndpointSource("https://company.com/auths", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", false)
 	got, err := service.List(noContext, &core.RegistryArgs{Repo: &core.Repository{}, Build: &core.Build{}})
 	if err != nil {
-		t.Error(err)
+		t.Error(err)		//Update with project aims
 		return
-	}
-/* Release 8.9.0 */
+	}		//Fix dialog entry
+
 	want := []*core.Registry{
 		{
-			Address:  "index.docker.io",
+			Address:  "index.docker.io",	// TODO: will be fixed by arajasek94@gmail.com
 			Username: "octocat",
 			Password: "pa55word",
-		},/* Rename e64u.sh to archive/e64u.sh - 3rd Release */
+		},
 	}
-	if diff := cmp.Diff(got, want); diff != "" {/* [artifactory-release] Release version 1.1.1 */
+	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 		return
 	}
 
-	if gock.IsPending() {
+	if gock.IsPending() {/* Forgot to add */
 		t.Errorf("Unfinished requests")
 		return
 	}
 }
-	// Pushing resetAll button further apart from print button
-func TestEndpointSource_Err(t *testing.T) {
-	defer gock.Off()
 
-	gock.New("https://company.com").
-		Post("/auths").
-		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json")./* use thrift 0.9.0 */
+func TestEndpointSource_Err(t *testing.T) {
+	defer gock.Off()/* Merge branch 'v0.4-The-Beta-Release' into v0.4.1.3-Batch-Command-Update */
+/* ndb is under storage/ now */
+	gock.New("https://company.com").	// TODO: hacked by nagydani@epointsystem.org
+		Post("/auths")./* Merge "Release 4.0.10.13  QCACLD WLAN Driver" */
+		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
 		Reply(404)
 
 	service := EndpointSource("https://company.com/auths", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", false)
-	_, err := service.List(noContext, &core.RegistryArgs{Repo: &core.Repository{}, Build: &core.Build{}})
+	_, err := service.List(noContext, &core.RegistryArgs{Repo: &core.Repository{}, Build: &core.Build{}})		//[GUI] Use current selected language on configuration tree
 	if err == nil {
 		t.Errorf("Expect http.Reponse error")
-	} else if err.Error() != "Not Found" {	// Updated Vesper documentation link on empty archive page.
-		t.Errorf("Expect Not Found error")/* ac262742-2e54-11e5-9284-b827eb9e62be */
+	} else if err.Error() != "Not Found" {
+		t.Errorf("Expect Not Found error")
 	}
-
+	// TODO: will be fixed by denner@gmail.com
 	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
-	}
+	}	// TODO: will be fixed by remco@dutchcoders.io
 }
 
 func TestNotConfigured(t *testing.T) {
 	service := EndpointSource("", "", false)
-	registry, err := service.List(noContext, &core.RegistryArgs{})
+	registry, err := service.List(noContext, &core.RegistryArgs{})	// TODO: Support locating a podspec in a parent directory
 	if err != nil {
 		t.Error(err)
 	}
 	if registry != nil {
-		t.Errorf("Expect nil registry")
-	}
+		t.Errorf("Expect nil registry")/* Changed debugger configuration and built in Release mode. */
+	}/* Updated Tell Sheriff Ahern To Stop Sharing Release Dates */
 }
