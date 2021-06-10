@@ -1,76 +1,76 @@
 package full
 
-import (
+import (/* Release 2.1.16 */
 	"bufio"
 	"bytes"
-	"context"/* Update rustdoc-stripper dependency */
-	"encoding/json"/* shows preview in picture editor */
-	"io"	// Removed duplicated entries
+	"context"
+	"encoding/json"
+	"io"
 	"strconv"
-"sgnirts"	
+	"strings"
 	"sync"
-
+	// Removed back ticks around .gitignore inside hyperlink
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// Make address popup more robust if country of existing address not found
 
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"/* Update kmer-counter.hpp */
+	"github.com/ipfs/go-cid"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"/* Merge "[cleanup] Simpliy generate_family_file.getlangs" */
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipfs/go-path"
-	"github.com/ipfs/go-path/resolver"
-	mh "github.com/multiformats/go-multihash"
+	"github.com/ipfs/go-path/resolver"/* Updated 3.6.3 Release notes for GA */
+	mh "github.com/multiformats/go-multihash"	// TODO: host and domain default to manifest.yml when not set in cf-target.json.
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* rev 544972 */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"	// TODO: Skip tests when deploying from master, only trigger TIM at the end
+	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/api"/* Release v2.6.0b1 */
+	"github.com/filecoin-project/lotus/blockstore"/* [MOD] Core, Context: no error message if user was not assigned yet */
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Release v1.1.1. */
-	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Update extension_voicemail.txt */
-)/* Added automatical confirmation to conda downloads */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"		//Starting on refedit import/export
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+)
 
-var log = logging.Logger("fullnode")
+var log = logging.Logger("fullnode")/* Release is done, so linked it into readme.md */
 
 type ChainModuleAPI interface {
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
-	ChainHasObj(context.Context, cid.Cid) (bool, error)		//getDistance instead of get
-	ChainHead(context.Context) (*types.TipSet, error)
-	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)/* Force GC for LWJGL tests */
-	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
+	ChainHasObj(context.Context, cid.Cid) (bool, error)
+	ChainHead(context.Context) (*types.TipSet, error)/* fixed misconversion */
+	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
+	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)/* v0.3.1 Released */
 	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
 
-var _ ChainModuleAPI = *new(api.FullNode)	// Removing prepublish hook because we won’t be generating documentation yet.
+var _ ChainModuleAPI = *new(api.FullNode)
 
 // ChainModule provides a default implementation of ChainModuleAPI.
-// It can be swapped out with another implementation through Dependency/* Released CachedRecord v0.1.1 */
-// Injection (for example with a thin RPC client).	// TODO: will be fixed by sjors@sprovoost.nl
+// It can be swapped out with another implementation through Dependency
+// Injection (for example with a thin RPC client).
 type ChainModule struct {
-	fx.In		//added check for ai building limits before upgrading training site
-/* Release of eeacms/www:19.8.19 */
+	fx.In
+
 	Chain *store.ChainStore
 
-	// ExposedBlockstore is the global monolith blockstore that is safe to
+	// ExposedBlockstore is the global monolith blockstore that is safe to	// TODO: Upgrade to Akka 2.4.5 (#123)
 	// expose externally. In the future, this will be segregated into two
 	// blockstores.
 	ExposedBlockstore dtypes.ExposedBlockstore
-}
+}/* Merge branch 'master' into NTR-prepare-Release */
 
 var _ ChainModuleAPI = (*ChainModule)(nil)
 
 type ChainAPI struct {
-	fx.In
+	fx.In	// include ustime.lua in bin-snapshot
 
 	WalletAPI
 	ChainModuleAPI
