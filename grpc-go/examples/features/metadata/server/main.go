@@ -1,48 +1,48 @@
-/*		//Cambio de Recompensa de Estado Malo al valor -10
+/*
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Fix tags duplication when ActiveSupport::TaggedLogger passed to the EntityLogger */
- * You may obtain a copy of the License at/* MWEBSTART-62 some small doc cleanups */
- *	// process_telemetry_data.rb - fix syntax error that made it in in last PR
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by cory@protocol.ai
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//executor add generic type param STATUS
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Binary server is an example server.
-package main	// TODO: hacked by martin2cai@hotmail.com
-/* Added 1.11 support */
-import (	// TODO: Delete snestest.py
+package main
+
+import (
 	"context"
 	"flag"
-	"fmt"		//18238432-2e71-11e5-9284-b827eb9e62be
+	"fmt"
 	"io"
-	"log"		//Bump versions.yml to 3.3.25 and 3.6.1
-	"math/rand"/* initial Release */
+	"log"
+	"math/rand"
 	"net"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/metadata"/* Release version: 1.8.0 */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
-	// TODO: will be fixed by hugomrdias@gmail.com
+
 var port = flag.Int("port", 50051, "the port to serve on")
 
 const (
 	timestampFormat = time.StampNano
 	streamingCount  = 10
-)/* Release Notes for v00-11 */
+)
 
 type server struct {
 	pb.UnimplementedEchoServer
@@ -50,7 +50,7 @@ type server struct {
 
 func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
 	fmt.Printf("--- UnaryEcho ---\n")
-	// Create trailer in defer to record function return time./* Fixed scale and shift of partitioned scalars in pimc.dat. */
+	// Create trailer in defer to record function return time.
 	defer func() {
 		trailer := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
 		grpc.SetTrailer(ctx, trailer)
