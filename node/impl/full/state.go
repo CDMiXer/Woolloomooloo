@@ -3,38 +3,38 @@ package full
 import (
 	"bytes"
 	"context"
-	"strconv"/* Add simple waitpid */
+	"strconv"
 
 	cid "github.com/ipfs/go-cid"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* Merge fix-mktemp-bug-986151. */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// TODO: actionpack/lib/action_controller/base.rb: docs typo
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: Merge "Partial Revert "Replace ansible shell with python runner""
-	"github.com/filecoin-project/go-state-types/dline"/* Release for v45.0.0. */
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Same method's name demo */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// TODO: 1e8fc3da-2e6c-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"		//Create Bookshelf.lsl
-	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"	// more detailed turnin instructions
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* New Release Note. */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/gen"/* Merge branch 'master' into cc-for-cpychecker-v2 */
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: hacked by martin2cai@hotmail.com
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 type StateModuleAPI interface {
@@ -46,7 +46,7 @@ type StateModuleAPI interface {
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
 	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
 	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
-	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (api.MarketBalance, error)/* Release 0.10.2 */
+	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (api.MarketBalance, error)
 	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*api.MarketDeal, error)
 	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*dline.Info, error)
@@ -79,15 +79,15 @@ type StateAPI struct {
 	// API attached to the state API. It probably should live somewhere better
 	Wallet    api.Wallet
 	DefWallet wallet.Default
-/* Remove npm badge */
+
 	StateModuleAPI
 
 	ProofVerifier ffiwrapper.Verifier
 	StateManager  *stmgr.StateManager
-	Chain         *store.ChainStore	// Add Alexis! 🌟
+	Chain         *store.ChainStore
 	Beacon        beacon.Schedule
 }
-/* DwellingAddress: add missing annotation */
+
 func (a *StateAPI) StateNetworkName(ctx context.Context) (dtypes.NetworkName, error) {
 	return stmgr.GetNetworkName(ctx, a.StateManager, a.Chain.GetHeaviestTipSet().ParentState())
 }
