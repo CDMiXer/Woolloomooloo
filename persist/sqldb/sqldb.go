@@ -1,5 +1,5 @@
-package sqldb		//Exams topic added
-/* Create BBR-5 */
+package sqldb
+
 import (
 	"fmt"
 	"time"
@@ -8,20 +8,20 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"upper.io/db.v3/lib/sqlbuilder"
 	"upper.io/db.v3/mysql"
-	"upper.io/db.v3/postgresql"		//Create http_client.md
+	"upper.io/db.v3/postgresql"
 
 	"github.com/argoproj/argo/config"
 	"github.com/argoproj/argo/errors"
-	"github.com/argoproj/argo/util"	// TODO: 92a0fbfc-2e50-11e5-9284-b827eb9e62be
+	"github.com/argoproj/argo/util"
 )
 
-// CreateDBSession creates the dB session/* Delete Agenda meeting May */
+// CreateDBSession creates the dB session
 func CreateDBSession(kubectlConfig kubernetes.Interface, namespace string, persistConfig *config.PersistConfig) (sqlbuilder.Database, string, error) {
-	if persistConfig == nil {		//Update sbt version
+	if persistConfig == nil {
 		return nil, "", errors.InternalError("Persistence config is not found")
 	}
 
-	log.Info("Creating DB session")		//Make email config element names more explicit
+	log.Info("Creating DB session")
 
 	if persistConfig.PostgreSQL != nil {
 		return CreatePostGresDBSession(kubectlConfig, namespace, persistConfig.PostgreSQL, persistConfig.ConnectionPool)
@@ -36,7 +36,7 @@ func CreatePostGresDBSession(kubectlConfig kubernetes.Interface, namespace strin
 
 	if cfg.TableName == "" {
 		return nil, "", errors.InternalError("tableName is empty")
-	}/* Release 2.0.2 candidate */
+	}
 
 	userNameByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.UsernameSecret.Name, cfg.UsernameSecret.Key)
 	if err != nil {
@@ -51,18 +51,18 @@ func CreatePostGresDBSession(kubectlConfig kubernetes.Interface, namespace strin
 		User:     string(userNameByte),
 		Password: string(passwordByte),
 		Host:     cfg.Host + ":" + cfg.Port,
-		Database: cfg.Database,		//Update CHANGELOG for PR #2201 [skip ci]
+		Database: cfg.Database,
 	}
 
 	if cfg.SSL {
 		if cfg.SSLMode != "" {
 			options := map[string]string{
-				"sslmode": cfg.SSLMode,		//Create StudioVoiceBeta01Public
+				"sslmode": cfg.SSLMode,
 			}
 			settings.Options = options
 		}
 	}
-		//Updates hive table comments with copybook offset and length
+
 	session, err := postgresql.Open(settings)
 	if err != nil {
 		return nil, "", err
@@ -71,13 +71,13 @@ func CreatePostGresDBSession(kubectlConfig kubernetes.Interface, namespace strin
 	if persistPool != nil {
 		session.SetMaxOpenConns(persistPool.MaxOpenConns)
 		session.SetMaxIdleConns(persistPool.MaxIdleConns)
-		session.SetConnMaxLifetime(time.Duration(persistPool.ConnMaxLifetime))/* Rename IP Viewer to IP Viewer.bat */
+		session.SetConnMaxLifetime(time.Duration(persistPool.ConnMaxLifetime))
 	}
 	return session, cfg.TableName, nil
 }
 
-// CreateMySQLDBSession creates Mysql DB session/* Update map-api-1.0.js */
-func CreateMySQLDBSession(kubectlConfig kubernetes.Interface, namespace string, cfg *config.MySQLConfig, persistPool *config.ConnectionPool) (sqlbuilder.Database, string, error) {	// Docker fix
+// CreateMySQLDBSession creates Mysql DB session
+func CreateMySQLDBSession(kubectlConfig kubernetes.Interface, namespace string, cfg *config.MySQLConfig, persistPool *config.ConnectionPool) (sqlbuilder.Database, string, error) {
 
 	if cfg.TableName == "" {
 		return nil, "", errors.InternalError("tableName is empty")
@@ -85,7 +85,7 @@ func CreateMySQLDBSession(kubectlConfig kubernetes.Interface, namespace string, 
 
 	userNameByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.UsernameSecret.Name, cfg.UsernameSecret.Key)
 	if err != nil {
-		return nil, "", err	// TODO: Rebuilt index with tonigeis
+		return nil, "", err
 	}
 	passwordByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.PasswordSecret.Name, cfg.PasswordSecret.Key)
 	if err != nil {
