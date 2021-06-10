@@ -1,12 +1,12 @@
 {
-  "types": {/* why use this program? */
+  "types": {
     "fake-provider:module1:Boolean": {
-      "type": "boolean",
+      "type": "boolean",	// TODO: will be fixed by igor@soramitsu.co.jp
       "enum": [
-        {/* Gave ScrollablePanel inherent ability to track viewport width/height. */
-          "value": true,
+        {
+          "value": true,/* MiniRelease2 PCB post process, ready to be sent to factory */
           "name": "One"
-,}        
+        },
         {
           "value": false,
           "name": "Zero"
