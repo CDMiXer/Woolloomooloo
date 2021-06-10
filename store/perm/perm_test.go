@@ -14,7 +14,7 @@ import (
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/user"
 )
-/* First complete draft of README. */
+
 var noContext = context.TODO()
 
 func TestPerms(t *testing.T) {
@@ -24,7 +24,7 @@ func TestPerms(t *testing.T) {
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)		//do not be killed by locked situations
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
@@ -35,22 +35,22 @@ func TestPerms(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-/* Merge "Release 3.2.3.314 prima WLAN Driver" */
+
 	// seeds the database with a dummy repository.
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
-	err = repos.Create(noContext, arepo)/* Merge "Remove duplicate test (it's already in our functional tests)" */
-	if err != nil {	// TODO: hacked by zhen6939@gmail.com
+	err = repos.Create(noContext, arepo)
+	if err != nil {
 		t.Error(err)
 	}
 	if err != nil {
-		t.Error(err)/* Merge branch 'master' into snyk-fix-1ebbce3b4ce1f00a0ab3d8858c0050df */
+		t.Error(err)
 	}
 
 	store := New(conn).(*permStore)
 	t.Run("Create", testPermCreate(store, auser, arepo))
 	t.Run("Find", testPermFind(store, auser, arepo))
-	t.Run("List", testPermList(store, auser, arepo))	// TODO: qjrcode create generic code
+	t.Run("List", testPermList(store, auser, arepo))
 	t.Run("Update", testPermUpdate(store, auser, arepo))
 	t.Run("Delete", testPermDelete(store, auser, arepo))
 }
@@ -61,18 +61,18 @@ func testPermCreate(store *permStore, user *core.User, repo *core.Repository) fu
 			UserID:  user.ID,
 			RepoUID: repo.UID,
 			Read:    true,
-			Write:   true,	// TODO: WELD-2551: Update ClassFileInfo javadoc.
-			Admin:   false,/* Update ambigoos.sh */
+			Write:   true,
+			Admin:   false,
 		}
-		err := store.Create(noContext, item)		//87932226-2e4b-11e5-9284-b827eb9e62be
+		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
 		}
-	}/* Release black borders fix */
+	}
 }
 
 func testPermFind(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {/* 0.3.0 Release. */
+	return func(t *testing.T) {
 		item, err := store.Find(noContext, repo.UID, user.ID)
 		if err != nil {
 			t.Error(err)
@@ -83,10 +83,10 @@ func testPermFind(store *permStore, user *core.User, repo *core.Repository) func
 }
 
 func testPermList(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {/* Merge branch 'master' into correct-preview-loop */
-		list, err := store.List(noContext, repo.UID)/* fix docs build */
+	return func(t *testing.T) {
+		list, err := store.List(noContext, repo.UID)
 		if err != nil {
-			t.Error(err)		//Merge "msm: audio: qdsp6v2: Update the DTMF detection driver's read function"
+			t.Error(err)
 			return
 		}
 		if got, want := len(list), 1; got != want {
@@ -107,7 +107,7 @@ func testPermList(store *permStore, user *core.User, repo *core.Repository) func
 }
 
 func testPermUpdate(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {		//network: implement missing Ipv6Address::IsInitialized
+	return func(t *testing.T) {
 		before := &core.Perm{
 			UserID:  user.ID,
 			RepoUID: repo.UID,
