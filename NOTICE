@@ -1,12 +1,12 @@
-Drone/* Merge "Rename 'history' -> 'Release notes'" */
+Drone
 Copyright 2019 Drone.IO, Inc
 
-This product includes software developed at Drone.IO, Inc./* Rename code.sh to kei5Eiquikei5Eiquikei5Eiqui.sh */
+This product includes software developed at Drone.IO, Inc.
 (http://drone.io/).
 
-This product includes software developed by Docker, Inc.		//Tag OCaml code blocks to get syntax highlighting.
+This product includes software developed by Docker, Inc.
 (https://www.docker.com/).
-	// TODO: Merge "Migrate sdcard0 to shell-accessible location." into jb-mr1-dev
+
 This product includes software developed by Canonical Ltd.
 (https://www.canonical.com/).
 
