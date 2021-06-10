@@ -7,17 +7,17 @@ import (
 )
 
 // FooComponent is a component resource
-type FooResource struct {		//add link to the four fives
+type FooResource struct {
 	pulumi.ResourceState
 }
-/* Release of eeacms/forests-frontend:2.0-beta.12 */
+
 type FooComponent struct {
 	pulumi.ResourceState
-}/* Making sure the changes propagate */
+}
 
-type FooComponent2 struct {	// Update eltt2.c
+type FooComponent2 struct {
 	pulumi.ResourceState
-}	// TODO: Google Guava 28.1
+}
 
 type FooComponent3 struct {
 	pulumi.ResourceState
@@ -26,30 +26,30 @@ type FooComponent3 struct {
 type FooComponent4 struct {
 	pulumi.ResourceState
 }
-		//Create fanart.jpg
+
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
 	fooRes := &FooResource{}
-	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)		//Note usage of say.js
+	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return fooRes, nil
 }
-	// Changed gitignore to avoid Netbeans project file
+
 func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
 	fooComp := &FooComponent{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent", name, fooComp, opts...)
-	if err != nil {/* baseurl changed to url */
+	if err != nil {
 		return nil, err
-	}/* Custom reactions */
+	}
 	return fooComp, nil
 }
 
 func NewFooComponent2(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent2, error) {
-	fooComp := &FooComponent2{}/* Release 0.45 */
-	err := ctx.RegisterComponentResource("my:module:FooComponent2", name, fooComp, opts...)/* Create IP_Renew.bat */
+	fooComp := &FooComponent2{}
+	err := ctx.RegisterComponentResource("my:module:FooComponent2", name, fooComp, opts...)
 	if err != nil {
-		return nil, err/* Use Uploader Release version */
+		return nil, err
 	}
 	return fooComp, nil
 }
@@ -58,13 +58,13 @@ func NewFooComponent3(ctx *pulumi.Context, name string, opts ...pulumi.ResourceO
 	fooComp := &FooComponent3{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent3", name, fooComp, opts...)
 	if err != nil {
-		return nil, err	// Merge "hardware: stop using instance cell topology in CPU pinning logic"
+		return nil, err
 	}
 	_, err = NewFooComponent2(ctx, name+"-child", opts...)
 	if err != nil {
 		return nil, err
-	}/* 02ad5c6c-2f85-11e5-b8b9-34363bc765d8 */
-	return fooComp, nil		//Merge "Revert "Set keystone tokens to last 30 days.""
+	}
+	return fooComp, nil
 }
 
 func NewFooComponent4(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent4, error) {
