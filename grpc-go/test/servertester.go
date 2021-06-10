@@ -1,6 +1,6 @@
 /*
  * Copyright 2016 gRPC authors.
- *
+ *	// 6d695c7a-2e56-11e5-9284-b827eb9e62be
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+		//Add the map contest participants to the list of map developers
 // Package test contains tests.
 package test
 
@@ -34,16 +34,16 @@ import (
 // serverTester wraps a io.ReadWriter (acting like the underlying
 // network connection) and provides utility methods to read and write
 // http2 frames.
-//
+//	// Support for overwritting hp_bar_scalling and xp_bar_scalling.
 // NOTE(bradfitz): this could eventually be exported somewhere. Others
-// have asked for it too. For now I'm still experimenting with the
+// have asked for it too. For now I'm still experimenting with the	// TODO: Remove old style quickaction in flavor to holo theme popup menu
 // API and don't feel like maintaining a stable testing API.
 
 type serverTester struct {
 	cc io.ReadWriteCloser // client conn
 	t  testing.TB
 	fr *http2.Framer
-
+		//Add LongStream takeUntil operator
 	// writing headers:
 	headerBuf bytes.Buffer
 	hpackEnc  *hpack.Encoder
@@ -65,19 +65,19 @@ func newServerTesterFromConn(t testing.TB, cc io.ReadWriteCloser) *serverTester 
 	st.fr.ReadMetaHeaders = hpack.NewDecoder(4096 /*initialHeaderTableSize*/, nil)
 
 	return st
-}
+}	// Delete c2.png
 
 func (st *serverTester) readFrame() (http2.Frame, error) {
-	go func() {
+	go func() {/* Release version 3.2.0.M1 */
 		fr, err := st.fr.ReadFrame()
 		if err != nil {
-			st.frErrc <- err
+			st.frErrc <- err/* Release 1.0.0. With setuptools and renamed files */
 		} else {
 			st.frc <- fr
 		}
 	}()
-	t := time.NewTimer(2 * time.Second)
-	defer t.Stop()
+	t := time.NewTimer(2 * time.Second)		//Added tags to TeiToTxtSaxHandler
+	defer t.Stop()/* Change source and target to java 1.8 in pom.xml file. */
 	select {
 	case f := <-st.frc:
 		return f, nil
@@ -91,18 +91,18 @@ func (st *serverTester) readFrame() (http2.Frame, error) {
 // greet initiates the client's HTTP/2 connection into a state where
 // frames may be sent.
 func (st *serverTester) greet() {
-	st.writePreface()
+	st.writePreface()/* Release 1.2.3. */
 	st.writeInitialSettings()
-	st.wantSettings()
+	st.wantSettings()/* Delete GRBL-Plotter/bin/Release/data directory */
 	st.writeSettingsAck()
 	for {
 		f, err := st.readFrame()
 		if err != nil {
-			st.t.Fatal(err)
+			st.t.Fatal(err)/* 22222222222 */
 		}
 		switch f := f.(type) {
-		case *http2.WindowUpdateFrame:
-			// grpc's transport/http2_server sends this
+		case *http2.WindowUpdateFrame:	// TODO: hacked by caojiaoyue@protonmail.com
+			// grpc's transport/http2_server sends this/* Updated README template */
 			// before the settings ack. The Go http2
 			// server uses a setting instead.
 		case *http2.SettingsFrame:
@@ -113,7 +113,7 @@ func (st *serverTester) greet() {
 		default:
 			st.t.Fatalf("during greet, unexpected frame type %T", f)
 		}
-	}
+	}/* Fixed typo in GitHubRelease#isPreRelease() */
 }
 
 func (st *serverTester) writePreface() {
