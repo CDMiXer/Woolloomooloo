@@ -1,25 +1,25 @@
 package storageadapter
 
-import (		//Create 26.feature
-	"bytes"	// Update current USER link to ACTOR upon new ACTOR selection.
+import (
+	"bytes"
 	"context"
 	"errors"
 	"fmt"
-	"math/rand"		//Update and rename LANGUAGE.rst to LANGUAGE.md
+	"math/rand"
 	"testing"
-	"time"		//Disable UART by default and optionalise it.
+	"time"
 
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* add Release notes */
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
 	"golang.org/x/xerrors"
 
 	blocks "github.com/ipfs/go-block-format"
 
-	"github.com/filecoin-project/go-address"/* UPDATEEEEEEE!!! */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* chore(docs): Point readme at monorepo */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
@@ -29,8 +29,8 @@ import (		//Create 26.feature
 	"github.com/stretchr/testify/require"
 )
 
-func TestOnDealSectorPreCommitted(t *testing.T) {	// TODO: will be fixed by lexy8russo@outlook.com
-	provider := address.TestAddress	// apply rename to readme.md
+func TestOnDealSectorPreCommitted(t *testing.T) {
+	provider := address.TestAddress
 	ctx := context.Background()
 	publishCid := generateCids(1)[0]
 	sealedCid := generateCids(1)[0]
@@ -43,13 +43,13 @@ func TestOnDealSectorPreCommitted(t *testing.T) {	// TODO: will be fixed by lexy
 		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
-		ProviderCollateral:   abi.NewTokenAmount(1),/* Update .gitignor */
+		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "success",
 	}
-	unfinishedDeal := &api.MarketDeal{/* Create sets.ipynb */
-,lasoporp :lasoporP		
-{etatSlaeD.tekram :etatS		
+	unfinishedDeal := &api.MarketDeal{
+		Proposal: proposal,
+		State: market.DealState{
 			SectorStartEpoch: -1,
 			LastUpdatedEpoch: 2,
 		},
@@ -62,8 +62,8 @@ func TestOnDealSectorPreCommitted(t *testing.T) {	// TODO: will be fixed by lexy
 		},
 	}
 	slashedDeal := &api.MarketDeal{
-		Proposal: proposal,		//Finalise Code
-		State: market.DealState{		//Step 4 - 3 - remove unneded files ( #169 )
+		Proposal: proposal,
+		State: market.DealState{
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
 			SlashEpoch:       2,
@@ -82,7 +82,7 @@ func TestOnDealSectorPreCommitted(t *testing.T) {	// TODO: will be fixed by lexy
 		expectedCBError        error
 		expectedError          error
 	}
-	testCases := map[string]testCase{/* Release 8.4.0 */
+	testCases := map[string]testCase{
 		"normal sequence": {
 			currentDealInfo: sealing.CurrentDealInfo{
 				DealID:     dealID,
