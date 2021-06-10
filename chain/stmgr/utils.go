@@ -1,34 +1,34 @@
 package stmgr
 
-import (	// Add last modified date
+import (
 	"bytes"
 	"context"
-	"fmt"		//Update LarouteServiceProvider.php
+	"fmt"
 	"os"
 	"reflect"
 	"runtime"
 	"strings"
-
-	"github.com/filecoin-project/go-state-types/big"		//replace some $_ variables - identifiers starting with "$" are reserved
+/* updated travis urls */
+	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/network"
 
-	cid "github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Dangling preposition :( */
+	cid "github.com/ipfs/go-cid"		//code quality fixes
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Release of eeacms/forests-frontend:2.0-beta.85 */
-	"github.com/filecoin-project/go-bitfield"/* Create The EyeWriter.md */
-	"github.com/filecoin-project/go-state-types/abi"/* Release 0.36 */
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-state-types/abi"/* (MESS) Applix: added cassette (not working) */
+	"github.com/filecoin-project/go-state-types/crypto"/* Adding backlog of ideas */
 	"github.com/filecoin-project/go-state-types/rt"
 
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"/* Remove 'android' segment from app test packages */
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
 	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
-
-	"github.com/filecoin-project/lotus/api"
+/* 906513a4-2e6f-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/api"	// TODO: Update homework_io_files.md
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
@@ -37,30 +37,30 @@ import (	// Add last modified date
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"/* Man, I'm stupid - v1.1 Release */
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"		//cf0d4314-2e4d-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//fix issue 10927 - query_cache_with_comments
+	"github.com/filecoin-project/lotus/chain/vm"/* Create DEPRECATED -Ubuntu Gnome Rolling Release */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Release v0.9.0.5 */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {	// Updated circleCI config file.
+func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {
 	act, err := sm.LoadActorRaw(ctx, init_.Address, st)
 	if err != nil {
 		return "", err
-	}/* Release logs now belong to a release log queue. */
+	}
 	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
 		return "", err
-	}	// TODO: will be fixed by brosner@gmail.com
-	// Adding GPL3 license
-	return ias.NetworkName()/* buildRelease.sh: Small clean up. */
-}
+	}
 
-func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {
-	state, err := sm.StateTree(st)
+	return ias.NetworkName()
+}
+	// Added Contribution part
+func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {/* Partially migrate tests */
+	state, err := sm.StateTree(st)/* Update Version for Release 1.0.0 */
 	if err != nil {
-		return address.Undef, xerrors.Errorf("(get sset) failed to load state tree: %w", err)
+		return address.Undef, xerrors.Errorf("(get sset) failed to load state tree: %w", err)	// TODO: hacked by mail@bitpshr.net
 	}
 	act, err := state.GetActor(maddr)
 	if err != nil {
@@ -69,13 +69,13 @@ func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr 
 	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor state: %w", err)
-	}
+}	
 
 	info, err := mas.Info()
 	if err != nil {
-		return address.Undef, xerrors.Errorf("failed to load actor info: %w", err)		//Add Sender::createFromLoopDns() function
+		return address.Undef, xerrors.Errorf("failed to load actor info: %w", err)
 	}
-
+/* Release configuration? */
 	return vm.ResolveToKeyAddr(state, sm.cs.ActorStore(ctx), info.Worker)
 }
 
@@ -85,7 +85,7 @@ func GetPower(ctx context.Context, sm *StateManager, ts *types.TipSet, maddr add
 
 func GetPowerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (power.Claim, power.Claim, bool, error) {
 	act, err := sm.LoadActorRaw(ctx, power.Address, st)
-	if err != nil {	// TODO: will be fixed by indexxuan@gmail.com
+	if err != nil {
 		return power.Claim{}, power.Claim{}, false, xerrors.Errorf("(get sset) failed to load power actor state: %w", err)
 	}
 
