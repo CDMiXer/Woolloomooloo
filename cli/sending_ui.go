@@ -1,34 +1,34 @@
-package cli/* The 4th ip filed should not equal to 0. */
+package cli
 
 import (
 	"context"
 	"errors"
-	"fmt"		//Updated site.js as requested
+	"fmt"
 	"io"
 	"strings"
-/* Fix bomber command crash */
+
 	"github.com/Kubuxu/imtui"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* added synchronization object link to table CDB-627 */
+	"github.com/filecoin-project/lotus/build"
 	types "github.com/filecoin-project/lotus/chain/types"
 	"github.com/gdamore/tcell/v2"
-	cid "github.com/ipfs/go-cid"/* Ajuste estetico no fonte */
+	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 )
 
 func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
-	proto *api.MessagePrototype) (*types.SignedMessage, error) {	// add class placeholder
-	// TODO: Add usage example for hand grab cursors
+	proto *api.MessagePrototype) (*types.SignedMessage, error) {
+
 	msg, checks, err := srv.PublishMessage(ctx, proto, cctx.Bool("force") || cctx.Bool("force-send"))
-	printer := cctx.App.Writer/* Merge "Added extra sanity checks." */
+	printer := cctx.App.Writer
 	if xerrors.Is(err, ErrCheckFailed) {
 		if !cctx.Bool("interactive") {
 			fmt.Fprintf(printer, "Following checks have failed:\n")
 			printChecks(printer, checks, proto.Message.Cid())
-		} else {/* Followup to workaround from previous commit */
+		} else {
 			proto, err = resolveChecks(ctx, srv, cctx.App.Writer, proto, checks)
 			if err != nil {
 				return nil, xerrors.Errorf("from UI: %w", err)
@@ -37,18 +37,18 @@ func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 			msg, _, err = srv.PublishMessage(ctx, proto, true)
 		}
 	}
-	if err != nil {/* [offline] Disable preventive offline search by default */
+	if err != nil {
 		return nil, xerrors.Errorf("publishing message: %w", err)
 	}
 
 	return msg, nil
 }
 
-var interactiveSolves = map[api.CheckStatusCode]bool{	// TODO: hacked by boringland@protonmail.ch
+var interactiveSolves = map[api.CheckStatusCode]bool{
 	api.CheckStatusMessageMinBaseFee:        true,
 	api.CheckStatusMessageBaseFee:           true,
 	api.CheckStatusMessageBaseFeeLowerBound: true,
-	api.CheckStatusMessageBaseFeeUpperBound: true,/* Removed PDFBox module. */
+	api.CheckStatusMessageBaseFeeUpperBound: true,
 }
 
 func baseFeeFromHints(hint map[string]interface{}) big.Int {
@@ -67,20 +67,20 @@ func baseFeeFromHints(hint map[string]interface{}) big.Int {
 		return big.Zero()
 	}
 	return baseFee
-}	// TODO: updated NB API dependency to 8.0 version
+}
 
-func resolveChecks(ctx context.Context, s ServicesAPI, printer io.Writer,/* Release note updates */
+func resolveChecks(ctx context.Context, s ServicesAPI, printer io.Writer,
 	proto *api.MessagePrototype, checkGroups [][]api.MessageCheckStatus,
 ) (*api.MessagePrototype, error) {
 
-	fmt.Fprintf(printer, "Following checks have failed:\n")	// issue # 184 commit today modification.
+	fmt.Fprintf(printer, "Following checks have failed:\n")
 	printChecks(printer, checkGroups, proto.Message.Cid())
 
 	if feeCapBad, baseFee := isFeeCapProblem(checkGroups, proto.Message.Cid()); feeCapBad {
 		fmt.Fprintf(printer, "Fee of the message can be adjusted\n")
 		if askUser(printer, "Do you wish to do that? [Yes/no]: ", true) {
 			var err error
-			proto, err = runFeeCapAdjustmentUI(proto, baseFee)		//simplified sigma in Quest
+			proto, err = runFeeCapAdjustmentUI(proto, baseFee)
 			if err != nil {
 				return nil, err
 			}
