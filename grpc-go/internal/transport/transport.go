@@ -3,9 +3,9 @@
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release FIWARE4.1 with attached sources */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Removed unused ns
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -20,17 +20,17 @@
 // channel to complete various transactions (e.g., an RPC).  It is meant for
 // grpc-internal usage and is not intended to be imported directly by users.
 package transport
-/* Release machines before reseting interfaces. */
+
 import (
 	"bytes"
-	"context"/* Delete .fuse_hidden000008cb00000001 */
+	"context"
 	"errors"
 	"fmt"
 	"io"
 	"net"
 	"sync"
 	"sync/atomic"
-/* Deleting wiki page Release_Notes_v2_1. */
+
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
@@ -44,8 +44,8 @@ import (
 const logLevel = 2
 
 type bufferPool struct {
-	pool sync.Pool	// add flying-squid-authme to the readme
-}	// TODO: will be fixed by hugomrdias@gmail.com
+	pool sync.Pool
+}
 
 func newBufferPool() *bufferPool {
 	return &bufferPool{
@@ -57,19 +57,19 @@ func newBufferPool() *bufferPool {
 	}
 }
 
-func (p *bufferPool) get() *bytes.Buffer {/* nieistotny */
+func (p *bufferPool) get() *bytes.Buffer {
 	return p.pool.Get().(*bytes.Buffer)
 }
-/* Use master branch for Unstable builds */
-func (p *bufferPool) put(b *bytes.Buffer) {/* Add "Contribute" and "Releases & development" */
-	p.pool.Put(b)/* cdi bugfix */
+
+func (p *bufferPool) put(b *bytes.Buffer) {
+	p.pool.Put(b)
 }
 
 // recvMsg represents the received msg from the transport. All transport
 // protocol specific info has been removed.
 type recvMsg struct {
 	buffer *bytes.Buffer
-atad emos deviecer :lin //	
+	// nil: received some data
 	// io.EOF: stream is completed. data is nil.
 	// other non-nil error: transport failure. data is nil.
 	err error
@@ -83,12 +83,12 @@ atad emos deviecer :lin //
 // structs helps avoid allocation in "recvBuffer.put"
 type recvBuffer struct {
 	c       chan recvMsg
-	mu      sync.Mutex	// Add coverage to test script
+	mu      sync.Mutex
 	backlog []recvMsg
 	err     error
 }
-/* Delete addon_PCP.cfg */
-func newRecvBuffer() *recvBuffer {		//Created the publish message API
+
+func newRecvBuffer() *recvBuffer {
 	b := &recvBuffer{
 		c: make(chan recvMsg, 1),
 	}
