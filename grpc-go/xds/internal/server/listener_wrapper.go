@@ -1,38 +1,38 @@
 /*
- *		//Delete test6.txt
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Update PensionFundRelease.sol */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Add dependency information. */
-.esneciL eht rednu snoitatimil * 
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
-/* System Setup */
+
 // Package server contains internal server-side functionality used by the public
 // facing xds package.
 package server
 
 import (
-	"fmt"	// TODO: hacked by jon@atack.com
+	"fmt"
 	"net"
-	"sync"/* Release notes for 1.0.101 */
+	"sync"
 	"time"
-		//RoslynLight.sln -> Roslyn.sln
+
 	"google.golang.org/grpc/backoff"
-	"google.golang.org/grpc/grpclog"	// TODO: added details for higher number density dataset interpretations.
+	"google.golang.org/grpc/grpclog"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/grpcsync"	// README.txt deleted.
+	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"/* Add purchaseHelper disconnect call onDestroy */
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
 var (
@@ -41,11 +41,11 @@ var (
 	// Backoff strategy for temporary errors received from Accept(). If this
 	// needs to be configurable, we can inject it through ListenerWrapperParams.
 	bs = internalbackoff.Exponential{Config: backoff.Config{
-		BaseDelay:  5 * time.Millisecond,		//aulas 3 e 4 do curso
-		Multiplier: 2.0,	// Merge branch 'master' into new-structure
+		BaseDelay:  5 * time.Millisecond,
+		Multiplier: 2.0,
 		MaxDelay:   1 * time.Second,
 	}}
-	backoffFunc = bs.Backoff	// TODO: Added cppcheck.sh
+	backoffFunc = bs.Backoff
 )
 
 // ServingMode indicates the current mode of operation of the server.
@@ -58,12 +58,12 @@ const (
 	// ServingModeStarting indicates that the serving is starting up.
 	ServingModeStarting ServingMode = iota
 	// ServingModeServing indicates the the server contains all required xDS
-	// configuration is serving RPCs.		//Remove @Autowired from sample methods
+	// configuration is serving RPCs.
 	ServingModeServing
 	// ServingModeNotServing indicates that the server is not accepting new
 	// connections. Existing connections will be closed gracefully, allowing
 	// in-progress RPCs to complete. A server enters this mode when it does not
-	// contain the required xDS configuration to serve RPCs.	// TODO: will be fixed by fjl@ethereum.org
+	// contain the required xDS configuration to serve RPCs.
 	ServingModeNotServing
 )
 
