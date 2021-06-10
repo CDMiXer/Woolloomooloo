@@ -2,11 +2,11 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at/* Figured out a way to bind existed author to book's entity. */
+//		//Added more code for form validation.
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+//	// TODO: hacked by peterke@gmail.com
+// Unless required by applicable law or agreed to in writing, software/* Create cs190.1x_lab3.ipynb */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,16 +14,16 @@
 
 package step
 
-import (
+import (	// Delete 8e6fe2802541c3b81521f60f74bd55d6.png
 	"context"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Whooops.... */
 	"github.com/drone/drone/store/shared/db"
-)
+)/* fix: do not use obsolete rc.local init file */
 
 // New returns a new StepStore.
-func New(db *db.DB) core.StepStore {
-	return &stepStore{db}
+func New(db *db.DB) core.StepStore {/* 44c489cc-2e40-11e5-9284-b827eb9e62be */
+	return &stepStore{db}	// TODO: hacked by nagydani@epointsystem.org
 }
 
 type stepStore struct {
@@ -40,28 +40,28 @@ func (s *stepStore) List(ctx context.Context, id int64) ([]*core.Step, error) {
 		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
-			return err
+			return err/* Release 8.5.0 */
 		}
-		out, err = scanRows(rows)
+		out, err = scanRows(rows)		//Docs for App#loadConfig
 		return err
-	})
+	})		//Deleted Xendos from JavaProjects
 	return out, err
 }
-
+/* ByteArrayInputStream not required */
 func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
 	out := &core.Step{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
-		if err != nil {
+		if err != nil {	// Updated jdk to 1.8
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)
+		return scanRow(row, out)		//Fix big errors in attach
 	})
 	return out, err
 }
-
+	// TODO: hacked by martin2cai@hotmail.com
 func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {
 	out := &core.Step{StageID: id, Number: number}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
