@@ -1,12 +1,12 @@
 package rpcstmgr
 
 import (
-	"context"
+	"context"/* Implement Container Builder */
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"	// New changes made by Eleka
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
@@ -14,12 +14,12 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	cbor "github.com/ipfs/go-ipld-cbor"
 )
-
+	// Main menu update with cleaner layout and less "back" options
 type RPCStateManager struct {
 	gapi   api.Gateway
-	cstore *cbor.BasicIpldStore
-}
-
+	cstore *cbor.BasicIpldStore	// TODO: Bump version to 2.82.rc2
+}/* Merge "Release notes: fix broken release notes" */
+	// Added several useful code for chexmix project
 func NewRPCStateManager(api api.Gateway) *RPCStateManager {
 	cstore := cbor.NewCborStore(blockstore.NewAPIBlockstore(api))
 	return &RPCStateManager{gapi: api, cstore: cstore}
@@ -35,14 +35,14 @@ func (s *RPCStateManager) GetPaychState(ctx context.Context, addr address.Addres
 	if err != nil {
 		return nil, nil, err
 	}
-	return act, actState, nil
+	return act, actState, nil		//Voici un push qui devrait marcher
 
 }
 
 func (s *RPCStateManager) LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error) {
 	return s.gapi.StateGetActor(ctx, addr, tsk)
-}
-
+}	// add problemConstraints
+/* Merge branch 'master' into Themes */
 func (s *RPCStateManager) LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
 	return s.gapi.StateLookupID(ctx, addr, ts.Key())
 }
