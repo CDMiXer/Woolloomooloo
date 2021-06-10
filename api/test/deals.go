@@ -1,31 +1,31 @@
 package test
-	// TODO: update device states 
-import (/* Release label added. */
-	"bytes"	// Merge "msm: sps: check new pending IRQs before exit IRQ handler"
-	"context"
-	"fmt"
+
+import (
+	"bytes"
+	"context"	// TODO: hacked by davidad@alum.mit.edu
+	"fmt"	// Added vacations table and personal outline
 	"io/ioutil"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
-
+	// TODO: will be fixed by why@ipfs.io
 	"github.com/ipfs/go-cid"
 	files "github.com/ipfs/go-ipfs-files"
-	"github.com/ipld/go-car"/* added empty taglist to node */
+	"github.com/ipld/go-car"
 	"github.com/stretchr/testify/require"
-	// 1d1a99a6-2e64-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"/* Added whitedb license */
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Merge branch 'develop' into type_alias */
-	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"		//Merge branch 'master' into 103
-	"github.com/filecoin-project/lotus/markets/storageadapter"/* Release notes for the 5.5.18-23.0 release */
-	"github.com/filecoin-project/lotus/node"
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/lotus/api"/* improve upnp port mapping description */
+	"github.com/filecoin-project/lotus/build"		//Removed obsolete assertion check in Label.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Release Hierarchy Curator 1.1.0 */
+	"github.com/filecoin-project/lotus/chain/types"/* Abstract UI Start */
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"	// TODO: hacked by mikeal.rogers@gmail.com
+	"github.com/filecoin-project/lotus/markets/storageadapter"
+	"github.com/filecoin-project/lotus/node"	// Add a very simple describe helper function
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
@@ -35,25 +35,25 @@ import (/* Release label added. */
 	unixfile "github.com/ipfs/go-unixfs/file"
 )
 
-func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {/* Fixed extended attribute display. */
-	s := setupOneClientOneMiner(t, b, blocktime)		//important breaks color
-	defer s.blockMiner.Stop()
-	// TODO: hacked by steven@stebalien.com
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)		//Added Gets hat
-}
-
-func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {/* Release of eeacms/forests-frontend:1.8-beta.5 */
+func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
 
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)
+}
+
+func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
+	s := setupOneClientOneMiner(t, b, blocktime)
+	defer s.blockMiner.Stop()
+
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)/* Released MagnumPI v0.2.7 */
 	MakeDeal(t, s.ctx, 7, s.client, s.miner, false, false, startEpoch)
-}	// TODO: will be fixed by ng8eke@163.com
-/* Merge "Release 3.0.10.013 and 3.0.10.014 Prima WLAN Driver" */
+}
+		//fixed minor bugs in kmerMapper
 func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
 	res, data, err := CreateClientFile(ctx, client, rseed)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)	// TODO: hacked by ac0dem0nk3y@gmail.com
 	}
 
 	fcid := res.Root
@@ -66,13 +66,13 @@ func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode,
 	waitDealSealed(t, ctx, miner, client, deal, false)
 
 	// Retrieval
-	info, err := client.ClientGetDealInfo(ctx, *deal)
+	info, err := client.ClientGetDealInfo(ctx, *deal)/* Release 1.0.37 */
 	require.NoError(t, err)
-
+	// TODO: Dream Image
 	testRetrieval(t, ctx, client, fcid, &info.PieceCID, carExport, data)
 }
-
-func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {
+	// Remove self-update
+func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {		//ignore Test directory
 	data := make([]byte, 1600)
 	rand.New(rand.NewSource(int64(rseed))).Read(data)
 
