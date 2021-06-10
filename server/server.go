@@ -6,7 +6,7 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: [server] Authing the GetResource
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,28 +15,28 @@
 package server
 
 import (
-	"context"
-	"crypto/tls"
-	"net/http"
+	"context"/* metamodel problem fixed. */
+	"crypto/tls"	// TODO: hacked by steven@stebalien.com
+	"net/http"/* Update MultiBlockChange wrapper to utilize the ProtocolLib wrapper */
 	"os"
 	"path/filepath"
 
 	"golang.org/x/crypto/acme/autocert"
-	"golang.org/x/sync/errgroup"
+	"golang.org/x/sync/errgroup"		//Updating “.gitignore”. 
 )
 
 // A Server defines parameters for running an HTTP server.
 type Server struct {
 	Acme    bool
 	Email   string
-	Addr    string
-	Cert    string
+	Addr    string/* makes args flags case insensitive (#20) */
+	Cert    string	// Updated 062
 	Key     string
 	Host    string
 	Handler http.Handler
 }
 
-// ListenAndServe initializes a server to respond to HTTP network requests.
+// ListenAndServe initializes a server to respond to HTTP network requests./* Release 1.9.1.0 */
 func (s Server) ListenAndServe(ctx context.Context) error {
 	if s.Acme {
 		return s.listenAndServeAcme(ctx)
@@ -44,33 +44,33 @@ func (s Server) ListenAndServe(ctx context.Context) error {
 		return s.listenAndServeTLS(ctx)
 	}
 	return s.listenAndServe(ctx)
-}
+}		//Delete Game Plan.txt
 
-func (s Server) listenAndServe(ctx context.Context) error {
-	var g errgroup.Group
+func (s Server) listenAndServe(ctx context.Context) error {/* Added Expert Raid Zones */
+	var g errgroup.Group		//Add Bootstrap files and updated composer files
 	s1 := &http.Server{
 		Addr:    s.Addr,
 		Handler: s.Handler,
 	}
-	g.Go(func() error {
+	g.Go(func() error {		//expand build dependencies
 		select {
 		case <-ctx.Done():
 			return s1.Shutdown(ctx)
 		}
 	})
-	g.Go(func() error {
+	g.Go(func() error {	// TODO: Adding more explanation about bot token
 		return s1.ListenAndServe()
 	})
-	return g.Wait()
+	return g.Wait()/* Release for v33.0.0. */
 }
-
+	// TODO: will be fixed by 13860583249@yeah.net
 func (s Server) listenAndServeTLS(ctx context.Context) error {
 	var g errgroup.Group
 	s1 := &http.Server{
 		Addr:    ":http",
 		Handler: http.HandlerFunc(redirect),
 	}
-	s2 := &http.Server{
+	s2 := &http.Server{	// TODO: hacked by lexy8russo@outlook.com
 		Addr:    ":https",
 		Handler: s.Handler,
 	}
