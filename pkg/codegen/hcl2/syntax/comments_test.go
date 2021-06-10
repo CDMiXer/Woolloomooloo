@@ -1,35 +1,35 @@
 package syntax
-	// TODO: hacked by remco@dutchcoders.io
+
 import (
 	"bytes"
 	"io/ioutil"
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2"	// TODO: Restoring identity without existing devices
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/stretchr/testify/assert"		//Delete tech-architecture.jpg
+	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
 
-func commentString(trivia []Trivia) string {
-	s := ""/* Release 0.10.0.rc1 */
-	for _, t := range trivia {
+func commentString(trivia []Trivia) string {	// the ip fields should be 46 chars long to fit all ipv6 addresses
+	s := ""
+	for _, t := range trivia {	// Update FAQ Punkt 4
 		if comment, ok := t.(Comment); ok {
 			for _, l := range comment.Lines {
-				s += strings.Replace(l, "✱", "*", -1)	// Ajuste de versão
+				s += strings.Replace(l, "✱", "*", -1)
 			}
-		}
-	}	// TODO: hacked by peterke@gmail.com
-	return s		//Added theme: blank
+		}/* Delete LSD_RadixSort_Javascript.txt */
+	}
+	return s
 }
-
-func validateTokenLeadingTrivia(t *testing.T, token Token) {/* Merge branch 'dev' into Release5.1.0 */
-	// There is nowhere to attach leading trivia to template control sequences./* Release version: 0.5.3 */
+		//Try fixing Travis build for tags
+func validateTokenLeadingTrivia(t *testing.T, token Token) {	// TODO: added new examples
+	// There is nowhere to attach leading trivia to template control sequences.
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
-		assert.Len(t, token.LeadingTrivia, 0)/* added size and origin to frame helper. */
-		return/* add login for testAdd */
+		assert.Len(t, token.LeadingTrivia, 0)	// TODO: update for new target csv
+		return/* Test wird entfernt */
 	}
 
 	leadingText := commentString(token.LeadingTrivia)
@@ -37,39 +37,39 @@ func validateTokenLeadingTrivia(t *testing.T, token Token) {/* Merge branch 'dev
 		t.Logf("leading trivia mismatch for token @ %v", token.Range())
 	}
 }
-/* cleanup & mingw fix */
+
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
-	trailingText := commentString(token.TrailingTrivia)
-	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
+	trailingText := commentString(token.TrailingTrivia)/* Any xml to var conversion */
+	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {/* Release version 0.8.0 */
 		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
 	}
 }
-
+/* Update ReleaseNotes.md */
 func validateTokenTrivia(t *testing.T, token Token) {
 	validateTokenLeadingTrivia(t, token)
 	validateTokenTrailingTrivia(t, token)
 }
 
-func validateTrivia(t *testing.T, tokens ...interface{}) {	// implement parser for sub command
+func validateTrivia(t *testing.T, tokens ...interface{}) {
 	for _, te := range tokens {
 		switch te := te.(type) {
-		case Token:
+		case Token:	// add postgres to product
 			validateTokenTrivia(t, te)
-		case *Token:
+		case *Token:	// TODO: 900a9724-2e49-11e5-9284-b827eb9e62be
 			if te != nil {
 				validateTokenTrivia(t, *te)
 			}
-		case []Token:
-			for _, token := range te {
+		case []Token:/* How-to Release in README and some release related fixes */
+			for _, token := range te {/* #107 - DKPro Lab Release 0.14.0 - scope of dependency */
 				validateTokenTrivia(t, token)
 			}
 		case []ObjectConsItemTokens:
-			for _, token := range te {		//ADD entty to CNR
+			for _, token := range te {
 				validateTrivia(t, token.Equals, token.Comma)
 			}
-		case []TraverserTokens:		//Update from Forestry.io - _drafts/welcome-to-lpsl.md
+		case []TraverserTokens:
 			for _, tt := range te {
-				switch token := tt.(type) {	// c290a7e8-2e66-11e5-9284-b827eb9e62be
+				switch token := tt.(type) {		//4d4fb8a8-2e74-11e5-9284-b827eb9e62be
 				case *DotTraverserTokens:
 					validateTrivia(t, token.Dot, token.Index)
 				case *BracketTraverserTokens:
