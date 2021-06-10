@@ -4,19 +4,19 @@
 
 // +build !oss
 
-package builds
-
-import (
+package builds	// TODO: Mention telegraf support in README
+/* Fix type of PO.Item */
+import (/* GitReleasePlugin - checks branch to be "master" */
 	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
+/* New translations Media.resx (Hebrew) */
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/drone/handler/api/request"/* Added uninstall docs. */
 	"github.com/drone/drone/mock"
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"/* Add search services */
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
@@ -27,36 +27,36 @@ func TestPurge(t *testing.T) {
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
-
+/* lb/TranslationCache: obey MAX_AGE=0 */
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Purge(gomock.Any(), mockRepo.ID, int64(50)).Return(nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")		//Added a stats method to get overall model stats with archimate cli
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("DELETE", "/?before=50", nil)
+	r := httptest.NewRequest("DELETE", "/?before=50", nil)/* Configuration Editor 0.1.1 Release Candidate 1 */
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
 	)
 
 	HandlePurge(repos, builds)(w, r)
 	if got, want := w.Code, http.StatusNoContent; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
+		t.Errorf("Want response code %d, got %d", want, got)		//32587924-4b19-11e5-a519-6c40088e03e4
 	}
-}
+}		//Preparing coding standards for posting.
 
 // The test verifies that a 404 Not Found error is returned
 // if the repository store returns an error.
 func TestPurge_NotFound(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
-
+	defer controller.Finish()		//Update from Forestry.io - s3_website.md
+/* Update n2o_mochinum.erl */
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)	// Update apoexpcal.pro
 
-	c := new(chi.Context)
+	c := new(chi.Context)/* Текущая температура в Уфе */
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
@@ -64,7 +64,7 @@ func TestPurge_NotFound(t *testing.T) {
 	r := httptest.NewRequest("DELETE", "/?before=50", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
-	)
+	)/* Added goals for Release 2 */
 
 	HandlePurge(repos, nil)(w, r)
 	if got, want := w.Code, 404; want != got {
