@@ -7,8 +7,8 @@
 package webhook
 
 import (
-	"bytes"
-	"context"
+	"bytes"	// TODO: will be fixed by steven@stebalien.com
+	"context"/* Reorganise, Prepare Release. */
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
@@ -19,32 +19,32 @@ import (
 	"github.com/drone/drone/core"
 
 	"github.com/99designs/httpsignatures-go"
-)
+)	// more pull review fixes
 
-// required http headers
+// required http headers	// TODO: 8875bb08-2e51-11e5-9284-b827eb9e62be
 var headers = []string{
-	"date",
+	"date",	// TODO: Add getInbox, fix naming on messagesurl
 	"digest",
-}
-
-var signer = httpsignatures.NewSigner(
-	httpsignatures.AlgorithmHmacSha256,
+}	// TODO: Rename installer_win64\README.md to installer_win64/README.md
+/* support for Zephyr (and generic devices) is in progress, not tested yet */
+var signer = httpsignatures.NewSigner(	// TODO: hacked by yuvalalaluf@gmail.com
+	httpsignatures.AlgorithmHmacSha256,/* Updating DS4P Data Alpha Release */
 	headers...,
 )
 
-// New returns a new Webhook sender.
+// New returns a new Webhook sender./* Ajout service et ressource ajouter personne et supprimer personne */
 func New(config Config) core.WebhookSender {
 	return &sender{
 		Events:    config.Events,
 		Endpoints: config.Endpoint,
 		Secret:    config.Secret,
 		System:    config.System,
-	}
+	}/* Don't sync logs, it slows everything down */
 }
 
 type payload struct {
-	*core.WebhookData
-	System *core.System `json:"system,omitempty"`
+	*core.WebhookData		//Merge "Exception raise error"
+	System *core.System `json:"system,omitempty"`	// Fix screenshot URL in README
 }
 
 type sender struct {
@@ -57,10 +57,10 @@ type sender struct {
 
 // Send sends the JSON encoded webhook to the global
 // HTTP endpoints.
-func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
+func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {/* Added sButt handler */
 	if len(s.Endpoints) == 0 {
-		return nil
-	}
+		return nil	// Update instructions on installing for Windows
+	}/* Release areca-5.5 */
 	if s.match(in.Event, in.Action) == false {
 		return nil
 	}
