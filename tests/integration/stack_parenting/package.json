@@ -1,10 +1,10 @@
-{	// TODO: hacked by davidad@alum.mit.edu
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* make control-proxy default to :kr rate */
+        "@pulumi/pulumi": "latest"
     }
-}	// TODO: Increases javac maximum heap size.
+}		//added ui images
