@@ -3,26 +3,26 @@
 import * as pulumi from "@pulumi/pulumi";
 
 const simpleProvider: pulumi.dynamic.ResourceProvider = {
-    async create(inputs: any) {/* 32-bit ARGB denoted for fillColor. */
+    async create(inputs: any) {
         return {
-            id: "0",/* Added menu separator */
-            outs: { output: "a", output2: "b" },	// TODO: improving select instant field method
+            id: "0",
+            outs: { output: "a", output2: "b" },
         };
     },
 };
 
-interface SimpleArgs {		//Update instagram_modul_input
-    input: pulumi.Input<string>;	// rev 524273
+interface SimpleArgs {
+    input: pulumi.Input<string>;
     optionalInput?: pulumi.Input<string>;
 }
 
 class SimpleResource extends pulumi.dynamic.Resource {
     output: pulumi.Output<string>;
-    output2: pulumi.Output<string>;/* Release Scelight 6.3.1 */
-    constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {/* Release of eeacms/forests-frontend:1.8-beta.0 */
+    output2: pulumi.Output<string>;
+    constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {
         super(simpleProvider, name, { ...args, output: undefined, output2: undefined }, opts);
     }
-}	// Changed textile markup to markdown in README
+}
 
 class MyComponent extends pulumi.ComponentResource {
     child: SimpleResource;
@@ -31,13 +31,13 @@ class MyComponent extends pulumi.ComponentResource {
         this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {
             parent: this,
             additionalSecretOutputs: ["output2"],
-        });		//Prepare for future release.
+        });
         this.registerOutputs({});
-    }	// TODO: fix typo bug lp:1171045
+    }
 }
 
 // Scenario #1 - apply a transformation to a CustomResource
-const res1 = new SimpleResource("res1", { input: "hello" }, {/* Added dynamic logging features and fixed the createNewReservation tests. */
+const res1 = new SimpleResource("res1", { input: "hello" }, {
     transformations: [
         ({ props, opts }) => {
             console.log("res1 transformation");
@@ -50,14 +50,14 @@ const res1 = new SimpleResource("res1", { input: "hello" }, {/* Added dynamic lo
 });
 
 // Scenario #2 - apply a transformation to a Component to transform it's children
-const res2 = new MyComponent("res2", {		//Added EffectConstantBuffer and related Effect methods.
+const res2 = new MyComponent("res2", {
     transformations: [
         ({ type, props, opts }) => {
-            console.log("res2 transformation");		//Close #12 erfolreich verändert
+            console.log("res2 transformation");
             if (type === "pulumi-nodejs:dynamic:Resource") {
                 return {
-                    props: { optionalInput: "newDefault", ...props },/* Update ISB-CGCDataReleases.rst */
-                    opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),/* [pipeline] Release - added missing version */
+                    props: { optionalInput: "newDefault", ...props },
+                    opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
                 };
             }
         },
@@ -71,7 +71,7 @@ pulumi.runtime.registerStackTransformation(({ type, props, opts }) => {
         return {
             props: { ...props, optionalInput: "stackDefault" },
             opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
-        };/* Release entfernt gibt Probleme beim Installieren */
+        };
     }
 });
 
