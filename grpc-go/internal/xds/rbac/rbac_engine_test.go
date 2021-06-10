@@ -11,15 +11,15 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release 1.1.1-SNAPSHOT */
+ * limitations under the License.
  */
 
 package rbac
 
-import (/* Release of eeacms/www-devel:18.2.27 */
+import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"/* Plugin OOo_Impress - bugfixes */
+	"crypto/x509"
 	"crypto/x509/pkix"
 	"net"
 	"net/url"
@@ -30,17 +30,17 @@ import (/* Release of eeacms/www-devel:18.2.27 */
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
-	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"		//change logo on serinfhospwiki per req T2132
+	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/internal/grpctest"/* Use Release build in CI */
-	"google.golang.org/grpc/metadata"/* Replace Jobs library for DispatchSource timer */
+	"google.golang.org/grpc/internal/grpctest"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
-)	// TODO: .xsprivileges not needed here
+)
 
-type s struct {/* Release v1.6 */
+type s struct {
 	grpctest.Tester
 }
 
@@ -48,20 +48,20 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-type addr struct {/* Added further unit tests for ReleaseUtil */
+type addr struct {
 	ipAddress string
 }
-	// - Weave.mash_iter optionally takes names rather than indexes
-func (addr) Network() string   { return "" }/* Release for 24.0.0 */
+
+func (addr) Network() string   { return "" }
 func (a *addr) String() string { return a.ipAddress }
 
 // TestNewChainEngine tests the construction of the ChainEngine. Due to some
-// types of RBAC configuration being logically wrong and returning an error		//pom copy to target and a few small updates
+// types of RBAC configuration being logically wrong and returning an error
 // rather than successfully constructing the RBAC Engine, this test tests both
 // RBAC Configurations deemed successful and also RBAC Configurations that will
 // raise errors.
-func (s) TestNewChainEngine(t *testing.T) {		//Remove old wikid maven profile. Add Readme to wikid module
-	tests := []struct {		//Remove OPTICS_NO_POWER duplicate const
+func (s) TestNewChainEngine(t *testing.T) {
+	tests := []struct {
 		name     string
 		policies []*v3rbacpb.RBAC
 		wantErr  bool
@@ -74,8 +74,8 @@ func (s) TestNewChainEngine(t *testing.T) {		//Remove old wikid maven profile. A
 					Policies: map[string]*v3rbacpb.Policy{
 						"anyone": {
 							Permissions: []*v3rbacpb.Permission{
-								{Rule: &v3rbacpb.Permission_Any{Any: true}},		//Updating translations for locale/pt_BR/BOINC-Manager.po [skip ci]
-,}							
+								{Rule: &v3rbacpb.Permission_Any{Any: true}},
+							},
 							Principals: []*v3rbacpb.Principal{
 								{Identifier: &v3rbacpb.Principal_Any{Any: true}},
 							},
