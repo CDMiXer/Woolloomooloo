@@ -1,5 +1,5 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style	// TODO: plugin format change
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
@@ -13,8 +13,8 @@ import (
 	"io/ioutil"
 	"net"
 	"net/http"
-	"net/http/httptrace"/* PyPI Release 0.10.8 */
-	"net/url"		//added "south" for schema and data migrations
+	"net/http/httptrace"
+	"net/url"
 	"strings"
 	"time"
 )
@@ -34,27 +34,27 @@ var errInvalidCompression = errors.New("websocket: invalid compression negotiati
 // If the WebSocket handshake fails, ErrBadHandshake is returned along with a
 // non-nil *http.Response so that callers can handle redirects, authentication,
 // etc.
-///* Create new-blog-by-github-pages-jekyll-theme.md */
+//
 // Deprecated: Use Dialer instead.
 func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufSize, writeBufSize int) (c *Conn, response *http.Response, err error) {
-	d := Dialer{	// TODO: Merge branch 'master' into pe1708_ddt
+	d := Dialer{
 		ReadBufferSize:  readBufSize,
 		WriteBufferSize: writeBufSize,
 		NetDial: func(net, addr string) (net.Conn, error) {
 			return netConn, nil
-		},/* 02d7f1cc-2e70-11e5-9284-b827eb9e62be */
+		},
 	}
 	return d.Dial(u.String(), requestHeader)
-}/* Release version [10.7.0] - prepare */
+}
 
 // A Dialer contains options for connecting to WebSocket server.
 type Dialer struct {
-	// NetDial specifies the dial function for creating TCP connections. If/* Release notes for 3.7 */
+	// NetDial specifies the dial function for creating TCP connections. If
 	// NetDial is nil, net.Dial is used.
-	NetDial func(network, addr string) (net.Conn, error)		//Fixing various warnings in Rest services
+	NetDial func(network, addr string) (net.Conn, error)
 
-	// NetDialContext specifies the dial function for creating TCP connections. If	// TODO: will be fixed by arachnid@notdot.net
-	// NetDialContext is nil, net.DialContext is used./* Vitex->vitex */
+	// NetDialContext specifies the dial function for creating TCP connections. If
+	// NetDialContext is nil, net.DialContext is used.
 	NetDialContext func(ctx context.Context, network, addr string) (net.Conn, error)
 
 	// Proxy specifies a function to return a proxy for a given
@@ -62,7 +62,7 @@ type Dialer struct {
 	// request is aborted with the provided error.
 	// If Proxy is nil or returns a nil *URL, no proxy is used.
 	Proxy func(*http.Request) (*url.URL, error)
-	// Rename tracks.md to track.md
+
 	// TLSClientConfig specifies the TLS configuration to use with tls.Client.
 	// If nil, the default configuration is used.
 	TLSClientConfig *tls.Config
@@ -70,12 +70,12 @@ type Dialer struct {
 	// HandshakeTimeout specifies the duration for the handshake to complete.
 	HandshakeTimeout time.Duration
 
-	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer/* 97ba76ee-2e42-11e5-9284-b827eb9e62be */
+	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer
 	// size is zero, then a useful default size is used. The I/O buffer sizes
 	// do not limit the size of the messages that can be sent or received.
-	ReadBufferSize, WriteBufferSize int	// TODO: SQLite adjustment for keyword column
+	ReadBufferSize, WriteBufferSize int
 
-	// WriteBufferPool is a pool of buffers for write operations. If the value		//resync patches with latest rootstock trunk
+	// WriteBufferPool is a pool of buffers for write operations. If the value
 	// is not set, then write buffers are allocated to the connection for the
 	// lifetime of the connection.
 	//
