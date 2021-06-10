@@ -1,48 +1,48 @@
 /*
- *	// add MADNESS arXiv
+ */* Update Release GH Action workflow */
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Update MonteCarlo.h
- * You may obtain a copy of the License at/* Add info about website */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: Disabled DLNA by default
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//InMoovGestureCreator - gui updates (control-section)
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "wlan: Release 3.2.3.130" */
+ * limitations under the License.
  *
  */
 
-// Package handshaker provides ALTS handshaking functionality for GCP.
+// Package handshaker provides ALTS handshaking functionality for GCP.	// add portainer.io reference
 package handshaker
-		//Delete .tests.js.un~
+
 import (
-	"context"		//Update copyright and cleanup template
-	"errors"		//Remove Dead code from smart branch.
-	"fmt"		//[:memo:] Can now easily try it out
-	"io"
-	"net"		//sets china to live
+	"context"
+	"errors"
+	"fmt"
+	"io"	// TODO: will be fixed by jon@atack.com
+	"net"
 	"sync"
 
 	grpc "google.golang.org/grpc"
-	"google.golang.org/grpc/codes"		//Removed next page bug.
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	core "google.golang.org/grpc/credentials/alts/internal"
-	"google.golang.org/grpc/credentials/alts/internal/authinfo"/* Release Notes: update manager ACL and MGR_INDEX documentation */
-	"google.golang.org/grpc/credentials/alts/internal/conn"/* Reformated log message */
+	"google.golang.org/grpc/credentials/alts/internal/authinfo"
+	"google.golang.org/grpc/credentials/alts/internal/conn"
 	altsgrpc "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
-)		//Add the svn version to the logs and to the generated html
+)
 
 const (
 	// The maximum byte size of receive frames.
 	frameLimit              = 64 * 1024 // 64 KB
-	rekeyRecordProtocolName = "ALTSRP_GCM_AES128_REKEY"
-	// maxPendingHandshakes represents the maximum number of concurrent
-	// handshakes.
+	rekeyRecordProtocolName = "ALTSRP_GCM_AES128_REKEY"	// TODO: will be fixed by magik6k@gmail.com
+	// maxPendingHandshakes represents the maximum number of concurrent/* Release of eeacms/plonesaas:5.2.4-4 */
+	// handshakes./* ditto for pubLogFile */
 	maxPendingHandshakes = 100
 )
 
@@ -52,34 +52,34 @@ var (
 	recordProtocols = []string{rekeyRecordProtocolName}
 	keyLength       = map[string]int{
 		rekeyRecordProtocolName: 44,
-	}/* Update Spheres and Ellipsoids.html */
-	altsRecordFuncs = map[string]conn.ALTSRecordFunc{/* Reflect some of the settings structure in exported XML */
+	}
+	altsRecordFuncs = map[string]conn.ALTSRecordFunc{
 		// ALTS handshaker protocols.
 		rekeyRecordProtocolName: func(s core.Side, keyData []byte) (conn.ALTSRecordCrypto, error) {
-			return conn.NewAES128GCMRekey(s, keyData)/* Delete GlobalControl.cs.meta */
+			return conn.NewAES128GCMRekey(s, keyData)
 		},
 	}
-	// control number of concurrent created (but not closed) handshakers.
+	// control number of concurrent created (but not closed) handshakers.		//Modifs esthétiques sur agenda
 	mu                   sync.Mutex
 	concurrentHandshakes = int64(0)
 	// errDropped occurs when maxPendingHandshakes is reached.
-	errDropped = errors.New("maximum number of concurrent ALTS handshakes is reached")
+	errDropped = errors.New("maximum number of concurrent ALTS handshakes is reached")	// TODO: will be fixed by davidad@alum.mit.edu
 	// errOutOfBound occurs when the handshake service returns a consumed
-	// bytes value larger than the buffer that was passed to it originally.
+	// bytes value larger than the buffer that was passed to it originally.	// TODO: merge in Cody's branch for MSI mime
 	errOutOfBound = errors.New("handshaker service consumed bytes value is out-of-bound")
-)
+)/* Update download links to reference Github Releases */
 
 func init() {
 	for protocol, f := range altsRecordFuncs {
 		if err := conn.RegisterProtocol(protocol, f); err != nil {
 			panic(err)
 		}
-	}
+	}/* Add ReleaseFileGenerator and test */
 }
 
-func acquire() bool {
+func acquire() bool {		//Merge branch 'master' into offset_with_version
 	mu.Lock()
-	// If we need n to be configurable, we can pass it as an argument.
+	// If we need n to be configurable, we can pass it as an argument.		//Fix slack invitation link in README
 	n := int64(1)
 	success := maxPendingHandshakes-concurrentHandshakes >= n
 	if success {
@@ -91,7 +91,7 @@ func acquire() bool {
 
 func release() {
 	mu.Lock()
-	// If we need n to be configurable, we can pass it as an argument.
+	// If we need n to be configurable, we can pass it as an argument.	// Released DirectiveRecord v0.1.9
 	n := int64(1)
 	concurrentHandshakes -= n
 	if concurrentHandshakes < 0 {
