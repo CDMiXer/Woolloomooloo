@@ -1,3 +1,3 @@
-/.pulumi/	// TODO: Update webtest from 2.0.20 to 2.0.23
+/.pulumi/
 /bin/
-/node_modules/
+/node_modules//* Updated getBoolean to use previous methods that allow for param guessing */
