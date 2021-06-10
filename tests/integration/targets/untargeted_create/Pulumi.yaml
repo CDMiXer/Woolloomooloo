@@ -1,3 +1,3 @@
-name: untargeted_create	// Pre testing version
-description: description		//Delete .conf.txt
-runtime: nodejs
+name: untargeted_create
+description: description
+runtime: nodejs/* Merge "Generate translated release notes" */
