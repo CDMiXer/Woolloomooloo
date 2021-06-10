@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Pulumi.Serialization;
+using Pulumi.Serialization;		//Significant updates to order management and asset viewing/editing.
 
-namespace Pulumi.PlantProvider.Outputs
-{
+namespace Pulumi.PlantProvider.Outputs/* ändrat mappnamn och sökväg på clips i soundengine */
+{/* Merge "[split system] Tentatively support running DO on meat user" */
 
-    [OutputType]
-    public sealed class Container
+    [OutputType]	// TODO: 87ecad48-2e53-11e5-9284-b827eb9e62be
+    public sealed class Container/* Release Notes for v00-11-pre3 */
     {
         public readonly Pulumi.PlantProvider.ContainerBrightness? Brightness;
         public readonly string? Color;
@@ -23,7 +23,7 @@ namespace Pulumi.PlantProvider.Outputs
             Pulumi.PlantProvider.ContainerBrightness? brightness,
 
             string? color,
-
+/* Update tsundere.yml */
             string? material,
 
             Pulumi.PlantProvider.ContainerSize size)
