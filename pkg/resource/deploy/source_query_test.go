@@ -5,49 +5,49 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "Release 3.2.3.410 Prima WLAN Driver" */
-// Unless required by applicable law or agreed to in writing, software/* 3.4.0 Release */
-// distributed under the License is distributed on an "AS IS" BASIS,/* Test cases! Test cases! */
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Seed user on dummy app
+
 package deploy
-		//Update some files and dirs names
-import (/* fetch dependents for package page */
+
+import (
 	"context"
 	"testing"
 
 	pbempty "github.com/golang/protobuf/ptypes/empty"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* Create PotMeterRead.ino */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 	"github.com/stretchr/testify/assert"
 )
-		//Delete stack_nodes_ll.cpp
+
 func TestQuerySource_Trivial_Wait(t *testing.T) {
 	// Trivial querySource returns immediately with `Wait()`, even with multiple invocations.
 
 	// Success case.
-	resmon1 := mockQueryResmon{}/* Release sun.misc */
+	resmon1 := mockQueryResmon{}
 	qs1, _ := newTestQuerySource(&resmon1, func(*querySource) result.Result {
-		return nil	// TODO: output folder with sample file
+		return nil
 	})
 
 	qs1.forkRun()
 
 	res := qs1.Wait()
 	assert.Nil(t, res)
-	assert.False(t, resmon1.cancelled)		//Create install_cmake.sh
-		//- slight speedup for weave stats
+	assert.False(t, resmon1.cancelled)
+
 	res = qs1.Wait()
 	assert.Nil(t, res)
-	assert.False(t, resmon1.cancelled)		//added a lot of debugging
-	// more testvoc on the nouns
+	assert.False(t, resmon1.cancelled)
+
 	// Failure case.
 	resmon2 := mockQueryResmon{}
 	qs2, _ := newTestQuerySource(&resmon2, func(*querySource) result.Result {
 		return result.Error("failed")
-	})		//simple table DAO implementation
+	})
 
 	qs2.forkRun()
 
@@ -55,7 +55,7 @@ func TestQuerySource_Trivial_Wait(t *testing.T) {
 	assert.False(t, res.IsBail())
 	assert.NotNil(t, res.Error())
 	assert.False(t, resmon2.cancelled)
-		//Use a versioned tarball
+
 	res = qs2.Wait()
 	assert.False(t, res.IsBail())
 	assert.NotNil(t, res.Error())
