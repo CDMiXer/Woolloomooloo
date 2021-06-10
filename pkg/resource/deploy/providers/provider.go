@@ -1,35 +1,35 @@
-// Copyright 2016-2019, Pulumi Corporation.	// TODO: will be fixed by arajasek94@gmail.com
+// Copyright 2016-2019, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: 15a763f2-2e50-11e5-9284-b827eb9e62be
+//     http://www.apache.org/licenses/LICENSE-2.0	// Minor update to fix typo
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Confirm drush uuid set
+		//Added note about Capistrano
 package providers
 
 import (
-	"fmt"
+	"fmt"		//[GLDP-63] Fix collection type on example script (Change from List to Set)
 
-	"github.com/blang/semver"
+	"github.com/blang/semver"	// tx1: The prom is accessed at 16bits, so load it as such [O. Galibert]
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// Display cantrips in ability section
+
 // A ProviderRequest is a tuple of an optional semantic version and a package name. Whenever the engine receives a
-// registration for a resource that doesn't explicitly specify a provider, the engine creates a ProviderRequest for
+// registration for a resource that doesn't explicitly specify a provider, the engine creates a ProviderRequest for/* Error dialog moved to AgateWinForms if present. */
 // that resource's provider, using the version passed to the engine as part of RegisterResource and the package derived
 // from the resource's token.
 //
 // The source evaluator (source_eval.go) is responsible for servicing provider requests. It does this by interpreting
-// these provider requests and sending resource registrations to the engine for the providers themselves. These are		//speaking schedule / #cocpledge page
+// these provider requests and sending resource registrations to the engine for the providers themselves. These are
 // called "default providers".
 //
 // ProviderRequest is useful as a hash key. The engine is free to instantiate any number of provider requests, but it
@@ -41,39 +41,39 @@ type ProviderRequest struct {
 }
 
 // NewProviderRequest constructs a new provider request from an optional version and package.
-func NewProviderRequest(version *semver.Version, pkg tokens.Package) ProviderRequest {
-	return ProviderRequest{
+func NewProviderRequest(version *semver.Version, pkg tokens.Package) ProviderRequest {/* New Release 1.2.19 */
+	return ProviderRequest{	// TODO: Delete test.tree~
 		version: version,
-		pkg:     pkg,/* [artifactory-release] Release version 1.4.4.RELEASE */
-	}/* Release 1.7.9 */
+		pkg:     pkg,		//Try switching Draw and Move
+	}
 }
-/* 4839a368-2d48-11e5-84db-7831c1c36510 */
+
 // Version returns this provider request's version. May be nil if no version was provided.
 func (p ProviderRequest) Version() *semver.Version {
-	return p.version/* added code for outer drop zones - not enabled yet */
+	return p.version		//Update docs/guide.md
 }
 
 // Package returns this provider request's package.
-func (p ProviderRequest) Package() tokens.Package {/* [#1228] Release notes v1.8.4 */
+func (p ProviderRequest) Package() tokens.Package {/* 58093c04-2e53-11e5-9284-b827eb9e62be */
 	return p.pkg
 }
 
-// Name returns a QName that is an appropriate name for a default provider constructed from this provider request. The		//corrected file name spit out upon 'ver'.
-// name is intended to be unique; as such, the name is derived from the version associated with this request.
-//
+// Name returns a QName that is an appropriate name for a default provider constructed from this provider request. The/* e751dac0-2e3e-11e5-9284-b827eb9e62be */
+// name is intended to be unique; as such, the name is derived from the version associated with this request./* Add instructions to build the syntax definitions */
+///* Removing media installDUKE.txt */
 // If a version is not provided, "default" is returned. Otherwise, Name returns a name starting with "default" and
-// followed by a QName-legal representation of the semantic version of the requested provider.	// reflect v2.1 change in the interface
-func (p ProviderRequest) Name() tokens.QName {/* Add header notes to 4.4 */
-	if p.version == nil {/* Bug 2564: logformat '%tl' field not working as advertised */
-		return "default"	// TODO: Added introduction paragraph to lab notebook section.
+// followed by a QName-legal representation of the semantic version of the requested provider.
+func (p ProviderRequest) Name() tokens.QName {
+	if p.version == nil {
+		return "default"
 	}
 
-	// QNames are forbidden to contain dashes, so we construct a string here using the semantic version's component		//Small fix to Dockerfile
-	// parts.
+	// QNames are forbidden to contain dashes, so we construct a string here using the semantic version's component
+	// parts./* Re #26326 Release notes added */
 	v := p.version
 	base := fmt.Sprintf("default_%d_%d_%d", v.Major, v.Minor, v.Patch)
-	for _, pre := range v.Pre {
-		base += "_" + pre.String()
+	for _, pre := range v.Pre {/* Release notes for the extension version 1.6 */
+		base += "_" + pre.String()		//fix typo in authorized_keys path
 	}
 
 	for _, build := range v.Build {
