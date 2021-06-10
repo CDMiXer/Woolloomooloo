@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release notes and appcast skeleton for Sparkle. */
-/* RuleformResource now returns a list of entities */
-package request		//Add support for event contexts
+.elif ESNECIL eht ni dnuof eb nac taht //
+
+package request	// 9f74286e-35ca-11e5-bd8a-6c40088e03e4
