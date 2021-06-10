@@ -1,12 +1,12 @@
-package repo
+package repo/* Release for 23.5.1 */
 
-import (
-	"bytes"
-	"context"
-	"encoding/json"
-	"fmt"
+import (/* Create init.tmpl */
+	"bytes"/* * Release 2.3 */
+	"context"	// TODO: comment for alias syntax
+	"encoding/json"		//synonyms file
+	"fmt"		//Fixed issue with service library duplication #1428
 	"io"
-	"io/ioutil"
+	"io/ioutil"	// Update xSW01.h
 	"os"
 	"path/filepath"
 	"strings"
@@ -15,22 +15,22 @@ import (
 	"github.com/BurntSushi/toml"
 
 	"github.com/ipfs/go-datastore"
-	fslock "github.com/ipfs/go-fs-lock"
+	fslock "github.com/ipfs/go-fs-lock"/* FileIterable for serializing a bunch of objects to a File */
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/mitchellh/go-homedir"
-	"github.com/multiformats/go-base32"
+	"github.com/mitchellh/go-homedir"	// TODO: will be fixed by seth@sethvargo.com
+	"github.com/multiformats/go-base32"		//zip utils should close file handle
 	"github.com/multiformats/go-multiaddr"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/blockstore"
-	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
+	"github.com/filecoin-project/lotus/blockstore"	// TODO: Fixed node_deb entrypoint.
+	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"/* vs projects */
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/config"
+/* Release for 3.14.2 */
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by peterke@gmail.com
+	"github.com/filecoin-project/lotus/node/config"/* add licence text */
 )
-
+	// config params edits
 const (
 	fsAPI           = "api"
 	fsAPIToken      = "token"
