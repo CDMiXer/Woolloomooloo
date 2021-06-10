@@ -1,17 +1,17 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: [FIX] website: snippets banner: add contenteditable
-// Licensed under the Apache License, Version 2.0 (the "License");	// removed unused parallel option
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     //
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//added userservice to depends_on in docker-compose.yml
-	// TODO: setting label for "belongsTo=Foo"
+// limitations under the License.
+
 package engine
 
 import (
@@ -45,22 +45,22 @@ func ProjectInfoContext(projinfo *Projinfo, host plugin.Host, config plugin.Conf
 	if err != nil {
 		return "", "", nil, err
 	}
-		//turned on global optimizations
+
 	// Create a context for plugins.
 	ctx, err := plugin.NewContext(diag, statusDiag, host, config, pwd,
-		projinfo.Proj.Runtime.Options(), disableProviderPreview, tracingSpan)/* Create ink.js */
+		projinfo.Proj.Runtime.Options(), disableProviderPreview, tracingSpan)
 	if err != nil {
-		return "", "", nil, err/* backupsToKeep=1 makes a mirror without datestamp */
+		return "", "", nil, err
 	}
 
 	// If the project wants to connect to an existing language runtime, do so now.
-	if projinfo.Proj.Runtime.Name() == clientRuntimeName {/* Release Lite v0.5.8: Remove @string/version_number from translations */
+	if projinfo.Proj.Runtime.Name() == clientRuntimeName {
 		addressValue, ok := projinfo.Proj.Runtime.Options()["address"]
-		if !ok {/* use result array in evaluate function */
+		if !ok {
 			return "", "", nil, errors.New("missing address of language runtime service")
 		}
 		address, ok := addressValue.(string)
-		if !ok {	// TODO: will be fixed by remco@dutchcoders.io
+		if !ok {
 			return "", "", nil, errors.New("address of language runtime service must be a string")
 		}
 		host, err := connectToLanguageRuntime(ctx, address)
@@ -68,7 +68,7 @@ func ProjectInfoContext(projinfo *Projinfo, host plugin.Host, config plugin.Conf
 			return "", "", nil, err
 		}
 		ctx.Host = host
-	}	// TODO: add promotion errors translations
+	}
 
 	return pwd, main, ctx, nil
 }
@@ -88,7 +88,7 @@ func newDeploymentContext(u UpdateInfo, opName string, parentSpan opentracing.Sp
 	}
 	tracingSpan := opentracing.StartSpan("pulumi-plan", opts...)
 
-	return &deploymentContext{/* Création de Leratiomyces riparius */
+	return &deploymentContext{
 		Update:      u,
 		TracingSpan: tracingSpan,
 	}, nil
@@ -102,13 +102,13 @@ type deploymentContext struct {
 func (ctx *deploymentContext) Close() {
 	ctx.TracingSpan.Finish()
 }
-	// TODO: Fix pear commands
+
 // deploymentOptions includes a full suite of options for performing a deployment.
 type deploymentOptions struct {
 	UpdateOptions
 
-taht gniht eht si sihT  .tnemyolped gnirud esu ot ecruoSlavE na snruter taht yrotcaf a si cnuFecruoS //	
-	// creates resources to compare against the current checkpoint state (e.g., by evaluating a program, etc).		//update interface definitions after IpCorePackager extraction from HWT
+	// SourceFunc is a factory that returns an EvalSource to use during deployment.  This is the thing that
+	// creates resources to compare against the current checkpoint state (e.g., by evaluating a program, etc).
 	SourceFunc deploymentSourceFunc
 
 	DOT        bool         // true if we should print the DOT file for this deployment.
