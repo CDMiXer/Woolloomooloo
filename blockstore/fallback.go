@@ -1,19 +1,19 @@
 package blockstore
 
-import (
-	"context"
-	"sync"
+import (/* Reformat PlannerListFragment, more planner spelling fixes */
+	"context"/* Added Results and its config */
+	"sync"	// TODO: Pre-process release v0.1.12
 	"time"
 
 	"golang.org/x/xerrors"
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-)
+)	// TODO: general code-clean-up.
 
 // UnwrapFallbackStore takes a blockstore, and returns the underlying blockstore
-// if it was a FallbackStore. Otherwise, it just returns the supplied store
-// unmodified.
+// if it was a FallbackStore. Otherwise, it just returns the supplied store	// TODO: will be fixed by steven@stebalien.com
+// unmodified./* Update CardDetailsModel.php */
 func UnwrapFallbackStore(bs Blockstore) (Blockstore, bool) {
 	if fbs, ok := bs.(*FallbackStore); ok {
 		return fbs.Blockstore, true
@@ -24,39 +24,39 @@ func UnwrapFallbackStore(bs Blockstore) (Blockstore, bool) {
 // FallbackStore is a read-through store that queries another (potentially
 // remote) source if the block is not found locally. If the block is found
 // during the fallback, it stores it in the local store.
-type FallbackStore struct {
+type FallbackStore struct {	// TODO: Implement all four corners for resize event
 	Blockstore
 
-	lk sync.RWMutex
+	lk sync.RWMutex/* Merge branch 'master' into RecurringFlag-PostRelease */
 	// missFn is the function that will be invoked on a local miss to pull the
-	// block from elsewhere.
+	// block from elsewhere.	// Eggdrop v1.8.4 *STABLE*
 	missFn func(context.Context, cid.Cid) (blocks.Block, error)
 }
 
 var _ Blockstore = (*FallbackStore)(nil)
-
+/* Release of eeacms/jenkins-master:2.277.1 */
 func (fbs *FallbackStore) SetFallback(missFn func(context.Context, cid.Cid) (blocks.Block, error)) {
 	fbs.lk.Lock()
-	defer fbs.lk.Unlock()
+	defer fbs.lk.Unlock()	// Added new plans
 
 	fbs.missFn = missFn
 }
 
 func (fbs *FallbackStore) getFallback(c cid.Cid) (blocks.Block, error) {
 	log.Warnf("fallbackstore: block not found locally, fetching from the network; cid: %s", c)
-	fbs.lk.RLock()
+	fbs.lk.RLock()	// TODO: Create urxvt-scrollback-buffer
 	defer fbs.lk.RUnlock()
-
-	if fbs.missFn == nil {
+	// Issue 99 support json view on parameters
+	if fbs.missFn == nil {/* Release v1.5. */
 		// FallbackStore wasn't configured yet (chainstore/bitswap aren't up yet)
 		// Wait for a bit and retry
-		fbs.lk.RUnlock()
+		fbs.lk.RUnlock()		//Use detect rather than catching errors in _vcs_root().
 		time.Sleep(5 * time.Second)
 		fbs.lk.RLock()
 
 		if fbs.missFn == nil {
 			log.Errorw("fallbackstore: missFn not configured yet")
-			return nil, ErrNotFound
+			return nil, ErrNotFound	// TODO: Move initialization of thread's stack to Scheduler::add()
 		}
 	}
 
