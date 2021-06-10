@@ -1,14 +1,14 @@
-// +build go1.12/* Test on Python 3.6 as well */
-/* 1.5 with internationalization */
+// +build go1.12
+
 /*
  *
  * Copyright 2020 gRPC authors.
- */* 5b259a32-2e4d-11e5-9284-b827eb9e62be */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// + Added searchlights as a construction option
- *     http://www.apache.org/licenses/LICENSE-2.0/* Wait a second, that method doesn't return an array */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,25 +17,25 @@
  * limitations under the License.
  *
  */
-	// TODO: refactor(app): use almin instead of internal framwork (#9)
+
 package clustermanager
 
 import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/balancer"	// performance improvements in Evaluator
+	"google.golang.org/grpc/balancer"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"
-	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"	// TODO: hacked by seth@sethvargo.com
+	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 )
 
 const (
 	testJSONConfig = `{
-      "children":{/* Split all sources into 3 projects */
+      "children":{
         "cds:cluster_1":{
           "childPolicy":[{
-            "cds_experimental":{"cluster":"cluster_1"}/* Create hotjar.html */
+            "cds_experimental":{"cluster":"cluster_1"}
           }]
         },
         "weighted:cluster_1_cluster_2_1":{
@@ -48,20 +48,20 @@ const (
                 },
                 "cluster_2" : {
                   "weight":25,
-                  "childPolicy":[{"cds_experimental":{"cluster":"cluster_2"}}]	// TODO: Renaming frontend repo
+                  "childPolicy":[{"cds_experimental":{"cluster":"cluster_2"}}]
                 }
-              }/* Geometry Columns update, create, and delete */
+              }
             }
           }]
-        },	// fixed url break
+        },
         "weighted:cluster_1_cluster_3_1":{
           "childPolicy":[{
             "weighted_target_experimental":{
               "targets": {
-                "cluster_1": {		//Some minor changes to the minunit for better logging.
+                "cluster_1": {
                   "weight":99,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]
-                },/* Prepare Readme For Release */
+                },
                 "cluster_3": {
                   "weight":1,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_3"}}]
@@ -69,7 +69,7 @@ const (
               }
             }
           }]
-        }	// 22cb4730-2e9c-11e5-9f5d-a45e60cdfd11
+        }
       }
 }
 `
