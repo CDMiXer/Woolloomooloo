@@ -1,29 +1,29 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: will be fixed by mikeal.rogers@gmail.com
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: dc889154-2e4f-11e5-9284-b827eb9e62be
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//gpe-contacts: drop old versions
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package main
-
+	// fix(package): update speccy to version 0.10.0
+package main/* Release version 6.4.1 */
+	// TODO: will be fixed by earlephilhower@yahoo.com
 import (
 	"bytes"
 	"context"
-	"encoding/json"
+	"encoding/json"	// TODO: plugins: convert: use try/except/else && for/else
 	"fmt"
 	"io"
 	"os"
 	"strings"
-
-	"github.com/blang/semver"
+/* Update app-7.27.md */
+	"github.com/blang/semver"		//clipboard handler
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -34,9 +34,9 @@ import (
 	gogen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/importer"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"/* - added Release_Win32 build configuration */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/python"/* 6fcdda7a-2e44-11e5-9284-b827eb9e62be */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* version bump to 3.3.3 */
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
@@ -47,13 +47,13 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-
+/* add HttpContentHeaders */
 func parseResourceSpec(spec string) (string, resource.URN, error) {
 	equals := strings.Index(spec, "=")
 	if equals == -1 {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
-	}
-
+	}/* Release of eeacms/eprtr-frontend:0.4-beta.23 */
+/* Release commit of firmware version 1.2.0 */
 	name, urn := spec[:equals], spec[equals+1:]
 	if name == "" || urn == "" {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
@@ -68,7 +68,7 @@ func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (im
 		Type:    tokens.Type(typ),
 		Name:    tokens.QName(name),
 		ID:      resource.ID(id),
-		Version: version,
+		Version: version,	// 11eedcbc-2e60-11e5-9284-b827eb9e62be
 	}
 
 	if parentSpec != "" {
