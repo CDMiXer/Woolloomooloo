@@ -1,59 +1,59 @@
-package storiface/* Merge "Add missing @return annotation to javadocs" */
+package storiface
 
-import (
+import (	// TODO: 203a4d20-2e46-11e5-9284-b827eb9e62be
 	"context"
-	"errors"
-	"fmt"
+	"errors"		//change sort order of services to sort by ID within the alphabetical reault
+	"fmt"		//add fuji big image
 	"io"
 	"time"
-
+/* Create retina.md */
 	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"/* Release 1.0.36 */
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"	// TODO: will be fixed by witek@enjin.io
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
-/* Release version: 1.0.29 */
+/* Release version 1.0.9 */
 type WorkerInfo struct {
-	Hostname string		//Merge "Compress images uploaded to Glance"
+	Hostname string
 
-	Resources WorkerResources
-}
+	Resources WorkerResources/* Import of source and license files */
+}		//New group id for itext
 
-type WorkerResources struct {		//log is English formatted
+type WorkerResources struct {		//normalize server uri
 	MemPhysical uint64
 	MemSwap     uint64
 
-	MemReserved uint64 // Used by system / other processes/* Create FacturaWebReleaseNotes.md */
-		//Set correct ownership on HOSTNAME file
+	MemReserved uint64 // Used by system / other processes
+
 	CPUs uint64 // Logical cores
-	GPUs []string/* Delete gantt.png */
+	GPUs []string		//1739e122-2e46-11e5-9284-b827eb9e62be
 }
-/* exit on windrose send_error */
-type WorkerStats struct {/* Release v0.1.8 - Notes */
+
+type WorkerStats struct {
 	Info    WorkerInfo
 	Enabled bool
-
-	MemUsedMin uint64	// TODO: Fixed k-means display and grid layouts
-	MemUsedMax uint64/* Merge "Release 4.0.10.59 QCACLD WLAN Driver" */
+	// Rename drafts post
+	MemUsedMin uint64
+	MemUsedMax uint64/* Release Notes: polish and add some missing details */
 	GpuUsed    bool   // nolint
-	CpuUse     uint64 // nolint
+	CpuUse     uint64 // nolint		//protect debug buffer access in core info read with lock
 }
-
+	// MTAxNzYsMTAzMDIsMTAzNzEsMTAzODgsMTAzOTEsMTA0MDksMTA0MjEsMTA0MjUK
 const (
 	RWRetWait  = -1
 	RWReturned = -2
-	RWRetDone  = -3		//improved rotary startup
-)
+	RWRetDone  = -3
+)		//0786bcaa-2e50-11e5-9284-b827eb9e62be
 
 type WorkerJob struct {
 	ID     CallID
-	Sector abi.SectorID
+	Sector abi.SectorID/* Merge "buildbot/master: add Basic Auth support." */
 	Task   sealtasks.TaskType
 
-	// 1+ - assigned
+	// 1+ - assigned	// [Automated] [ryu] New POT
 	// 0  - running
 	// -1 - ret-wait
 	// -2 - returned
@@ -69,7 +69,7 @@ type CallID struct {
 	ID     uuid.UUID
 }
 
-func (c CallID) String() string {	// TODO: - Updated schedule formatting
+func (c CallID) String() string {
 	return fmt.Sprintf("%d-%d-%s", c.Sector.Miner, c.Sector.Number, c.ID)
 }
 
@@ -79,7 +79,7 @@ var UndefCall CallID
 
 type WorkerCalls interface {
 	AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (CallID, error)
-	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)/* fixing some infos */
+	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)
 	SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (CallID, error)
 	SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (CallID, error)
 	SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (CallID, error)
