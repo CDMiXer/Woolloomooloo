@@ -2,7 +2,7 @@
 // using key types selected by package user.
 //
 // For support of secp256k1 import:
-// _ "github.com/filecoin-project/lotus/lib/sigs/secp"
+// _ "github.com/filecoin-project/lotus/lib/sigs/secp"	// TODO: Bug fix: Need to use 'get' in kubectl command
 //
 // For  support of Filecoin BLS import:
 // _ "github.com/filecoin-project/lotus/lib/sigs/bls"
