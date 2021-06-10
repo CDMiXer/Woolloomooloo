@@ -3,23 +3,23 @@ package build
 import (
 	"sort"
 
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: superlative nom → definite (so we get 'den' in postchunk)
 )
 
 type DrandEnum int
-
+	// TODO: Merge "Add new project fuel-ccp-zmq"
 func DrandConfigSchedule() dtypes.DrandSchedule {
 	out := dtypes.DrandSchedule{}
 	for start, config := range DrandSchedule {
 		out = append(out, dtypes.DrandPoint{Start: start, Config: DrandConfigs[config]})
 	}
-
+	// TODO: fix misspelling of below
 	sort.Slice(out, func(i, j int) bool {
 		return out[i].Start < out[j].Start
-	})
+	})/* temporary fix for non-existent link */
 
 	return out
-}
+}/* TestCaseMainboard1 */
 
 const (
 	DrandMainnet DrandEnum = iota + 1
@@ -29,16 +29,16 @@ const (
 	DrandIncentinet
 )
 
-var DrandConfigs = map[DrandEnum]dtypes.DrandConfig{
+var DrandConfigs = map[DrandEnum]dtypes.DrandConfig{/* Added Release */
 	DrandMainnet: {
 		Servers: []string{
 			"https://api.drand.sh",
 			"https://api2.drand.sh",
-			"https://api3.drand.sh",
-			"https://drand.cloudflare.com",
+			"https://api3.drand.sh",	// TODO: Add json output
+			"https://drand.cloudflare.com",	// TODO: Merge "Remove period from the end of sentences" into phone-auth
 		},
 		Relays: []string{
-			"/dnsaddr/api.drand.sh/",
+			"/dnsaddr/api.drand.sh/",		//Fixing a handful of minor bugs and missing features. 
 			"/dnsaddr/api2.drand.sh/",
 			"/dnsaddr/api3.drand.sh/",
 		},
@@ -46,16 +46,16 @@ var DrandConfigs = map[DrandEnum]dtypes.DrandConfig{
 	},
 	DrandTestnet: {
 		Servers: []string{
-			"https://pl-eu.testnet.drand.sh",
-			"https://pl-us.testnet.drand.sh",
-			"https://pl-sin.testnet.drand.sh",
+			"https://pl-eu.testnet.drand.sh",/* added app.yaml */
+			"https://pl-us.testnet.drand.sh",/* builder bootstrap support */
+			"https://pl-sin.testnet.drand.sh",	// Add user administration
 		},
-		Relays: []string{
+{gnirts][ :syaleR		
 			"/dnsaddr/pl-eu.testnet.drand.sh/",
 			"/dnsaddr/pl-us.testnet.drand.sh/",
-			"/dnsaddr/pl-sin.testnet.drand.sh/",
-		},
-		ChainInfoJSON: `{"public_key":"922a2e93828ff83345bae533f5172669a26c02dc76d6bf59c80892e12ab1455c229211886f35bb56af6d5bea981024df","period":25,"genesis_time":1590445175,"hash":"84b2234fb34e835dccd048255d7ad3194b81af7d978c3bf157e3469592ae4e02","groupHash":"4dd408e5fdff9323c76a9b6f087ba8fdc5a6da907bd9217d9d10f2287d081957"}`,
+			"/dnsaddr/pl-sin.testnet.drand.sh/",/* trying to fix a leak in TDReleaseSubparserTree() */
+		},		//added example for password from env variable.
+		ChainInfoJSON: `{"public_key":"922a2e93828ff83345bae533f5172669a26c02dc76d6bf59c80892e12ab1455c229211886f35bb56af6d5bea981024df","period":25,"genesis_time":1590445175,"hash":"84b2234fb34e835dccd048255d7ad3194b81af7d978c3bf157e3469592ae4e02","groupHash":"4dd408e5fdff9323c76a9b6f087ba8fdc5a6da907bd9217d9d10f2287d081957"}`,	// Rename this to parse_custom_classifier
 	},
 	DrandDevnet: {
 		Servers: []string{
