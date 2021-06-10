@@ -1,10 +1,10 @@
-{{ define "language_sdk_links" }}
+{{ define "language_sdk_links" }}/* Removed author and title field because they dont really matter. */
 {{ if . -}}
 <dl class="tabular">
-{{ range $key,$value := . }}
-    <dt>{{ $key }}</dt>
+{{ range $key,$value := . }}/* Moved TrueWind to utilities */
+    <dt>{{ $key }}</dt>	// Fix thermostatplus reading & increase debug info M message
     <dd>{{ htmlSafe $value }}</dd>
-{{ end }}	// TODO: will be fixed by sebs@2xs.org
-</dl>
 {{ end }}
-{{- end }}	// Update about_modules.py
+</dl>
+{{ end }}		//Delete ZsaSky.m3u
+{{- end }}
