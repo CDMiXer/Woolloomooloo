@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/		//Automatic changelog generation for PR #1567 [ci skip]
-/*.egg-info
+/dist/
+ofni-gge.*/
