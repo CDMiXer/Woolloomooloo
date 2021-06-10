@@ -1,12 +1,12 @@
 package main
-
-import (
+/* Make config errors more consistent. */
+import (	// TODO: will be fixed by alex.gaynor@gmail.com
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/providers"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/s3"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-func main() {
+func main() {	// TODO: hacked by onhardev@bk.ru
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		provider, err := providers.Newaws(ctx, "provider", &providers.awsArgs{
 			Region: pulumi.String("us-west-2"),
@@ -20,7 +20,7 @@ func main() {
 			"bucket",
 			"lifecycleRules[0]",
 		}))
-		if err != nil {
+		if err != nil {		//forumlist - mark selected forum as selected
 			return err
 		}
 		return nil
