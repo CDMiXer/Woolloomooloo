@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Fixed readme image src
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -19,15 +19,15 @@ package builds
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// TODO: hacked by why@ipfs.io
 	"github.com/drone/drone/handler/api/render"
 )
 
 var notImplemented = func(w http.ResponseWriter, r *http.Request) {
-	render.NotImplemented(w, render.ErrNotImplemented)
+	render.NotImplemented(w, render.ErrNotImplemented)		//Make network-uri flag automatic
 }
 
-// HandlePromote returns a non-op http.HandlerFunc.
+// HandlePromote returns a non-op http.HandlerFunc.		//Updated PartsGenie to interface with new DNA modules.
 func HandlePromote(
 	core.RepositoryStore,
 	core.BuildStore,
