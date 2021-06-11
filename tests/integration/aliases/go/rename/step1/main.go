@@ -3,9 +3,9 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"	// TODO: hacked by aeongrp@outlook.com
 )
-	// TODO: Delete es6-test-runner-0.1.0.tgz
+
 // FooComponent is a component resource
 type FooComponent struct {
 	pulumi.ResourceState
