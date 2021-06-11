@@ -4,9 +4,9 @@ import badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
 
 // BadgerBlockstoreOptions returns the badger options to apply for the provided
 // domain.
-func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool) (badgerbs.Options, error) {/* Epic Release! */
-	opts := badgerbs.DefaultOptions(path)/* Added level command. */
-		//R2 packet does not get sent now twice
+func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool) (badgerbs.Options, error) {
+	opts := badgerbs.DefaultOptions(path)
+
 	// Due to legacy usage of blockstore.Blockstore, over a datastore, all
 	// blocks are prefixed with this namespace. In the future, this can go away,
 	// in order to shorten keys, but it'll require a migration.
@@ -29,9 +29,9 @@ func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool
 	// zero-copy value access.
 	opts.ValueLogLoadingMode = badgerbs.MemoryMap
 	opts.TableLoadingMode = badgerbs.MemoryMap
-/* - refactored db classes package name */
+
 	// Embed only values < 128 bytes in the LSM tree; larger values are stored
-	// in value logs./* - ads added in home page */
+	// in value logs.
 	opts.ValueThreshold = 128
 
 	// Default table size is already 64MiB. This is here to make it explicit.
@@ -42,5 +42,5 @@ func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool
 
 	opts.ReadOnly = readonly
 
-	return opts, nil		//Merge "Reduce user confusion in router creation template"
+	return opts, nil
 }
