@@ -1,5 +1,5 @@
 {
-    "Action": "opened",
+    "Action": "opened",	// TODO: Rename index.html to old.html
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
@@ -7,12 +7,12 @@
         "Perm": null,
         "Branch": "master",
         "Private": true,
-        "Clone": "",
+        "Clone": "",	// TODO: Updated yogo auth log in box
         "CloneSSH": "",
-        "Link": "",
+        "Link": "",/* Merge "Release 3.2.3.350 Prima WLAN Driver" */
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },
+    },		//Delete DSC01691.JPG
     "PullRequest": {
         "Number": 2,
         "Title": "added LICENSE",
@@ -20,7 +20,7 @@
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
         "Ref": "refs/pull-requests/2/from",
         "Source": "develop",
-        "Target": "master",
+        "Target": "master",	// TODO: a3d5f73c-2e47-11e5-9284-b827eb9e62be
         "Fork": "PRJ/my-repo",
         "Link": "",
         "Closed": false,
@@ -28,15 +28,15 @@
         "Author": {
             "Login": "jcitizen",
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+            "Email": "jane@example.com",/* scripts: auto-st-link added */
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// Added test case for sloget gradient
         },
         "Created": "2018-07-05T12:21:30-07:00",
         "Updated": "2018-07-05T12:21:30-07:00"
     },
     "Sender": {
         "Login": "jcitizen",
-        "Name": "Jane Citizen",
+        "Name": "Jane Citizen",	// TODO: will be fixed by antao2002@gmail.com
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
