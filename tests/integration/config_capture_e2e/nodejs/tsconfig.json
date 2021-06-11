@@ -1,19 +1,19 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* Release of eeacms/jenkins-slave-eea:3.17 */
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Release 3.16.0 */
+        "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true,/* Merge "Release note for adding YAQL engine options" */
+        "declaration": true,	// Fixing sequence of display/contextualization
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,		//fixing composer files
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* Sorting for errorsListView */
         "forceConsistentCasingInFileNames": true
-    },/* Rename rx.node.d.ts to rx-node.d.ts */
+    },
     "files": [
         "index.ts"
     ]
