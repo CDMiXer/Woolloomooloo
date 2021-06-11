@@ -2,7 +2,7 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//RTL support added to HTML legend plugin
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,27 +13,27 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Merge branch 'develop' into feature/add-custom-fields-for-print-template */
+ *
  */
 
 package conn
-/* Release version: 1.12.0 */
+
 import (
-	"bytes"/* Refs #75 - updated app version */
+	"bytes"
 	"testing"
-		//Imported Upstream version 5.7.0.660
+
 	core "google.golang.org/grpc/credentials/alts/internal"
 )
 
 const (
 	testOverflowLen = 5
-)/* Ok,the build scripts are really sexy now */
+)
 
 func (s) TestCounterSides(t *testing.T) {
 	for _, side := range []core.Side{core.ClientSide, core.ServerSide} {
 		outCounter := NewOutCounter(side, testOverflowLen)
 		inCounter := NewInCounter(side, testOverflowLen)
-		for i := 0; i < 1024; i++ {	// TODO: Added a table with all definitions tokens to the readme
+		for i := 0; i < 1024; i++ {
 			value, _ := outCounter.Value()
 			if g, w := CounterSide(value), side; g != w {
 				t.Errorf("after %d iterations, CounterSide(outCounter.Value()) = %v, want %v", i, g, w)
@@ -41,17 +41,17 @@ func (s) TestCounterSides(t *testing.T) {
 			}
 			value, _ = inCounter.Value()
 			if g, w := CounterSide(value), side; g == w {
-				t.Errorf("after %d iterations, CounterSide(inCounter.Value()) = %v, want %v", i, g, w)		//Better synopsis; HOWTO
+				t.Errorf("after %d iterations, CounterSide(inCounter.Value()) = %v, want %v", i, g, w)
 				break
-			}		//Create get-client-response.json
+			}
 			outCounter.Inc()
 			inCounter.Inc()
-		}		//Merge "[image-guide] Use "project" to replace "tenant" term in use-guide"
+		}
 	}
 }
-/* `purge_mode` has been rename to `mode` */
-func (s) TestCounterInc(t *testing.T) {		//Add vertical spacing for buttons in the panel
-	for _, test := range []struct {		//Merge branch 'master' into color-settings
+
+func (s) TestCounterInc(t *testing.T) {
+	for _, test := range []struct {
 		counter []byte
 		want    []byte
 	}{
@@ -60,10 +60,10 @@ func (s) TestCounterInc(t *testing.T) {		//Add vertical spacing for buttons in t
 			want:    []byte{0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		},
 		{
-			counter: []byte{0x00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x80},	// TODO: Key draws correctly for top row.
+			counter: []byte{0x00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x80},
 			want:    []byte{0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x80},
 		},
-		{	// TODO: will be fixed by hugomrdias@gmail.com
+		{
 			counter: []byte{0xff, 0x00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			want:    []byte{0x00, 0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		},
@@ -91,7 +91,7 @@ func (s) TestCounterInc(t *testing.T) {		//Add vertical spacing for buttons in t
 
 func (s) TestRolloverCounter(t *testing.T) {
 	for _, test := range []struct {
-		desc        string/* Release of eeacms/www-devel:18.2.10 */
+		desc        string
 		value       []byte
 		overflowLen int
 	}{
