@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: bugfix for empty seqrun data
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,15 +9,15 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by alex.gaynor@gmail.com
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Removed the annotation man page for provR. */
-package model/* Merge "Make sure Fragments are public for FragMan to instantiate" into mnc-dev */
+
+package model
 
 import (
 	"fmt"
 
-	"github.com/hashicorp/hcl/v2"/* 0.1 Release */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -26,18 +26,18 @@ import (
 
 // OpaqueType represents a type that is named by a string.
 type OpaqueType struct {
-	// Name is the type's name./* Release 0.6.7. */
-	Name string/* Merge branch 'master' into features/FarmHash */
+	// Name is the type's name.
+	Name string
 	// Annotations records any annotations associated with the object type.
-	Annotations []interface{}	// TODO: Changed from http to https, recently upgraded it
+	Annotations []interface{}
 
 	s string
 }
-/* Release of eeacms/www-devel:20.1.8 */
-// The set of opaque types, indexed by name.		//issue 138 (black color scheme)
+
+// The set of opaque types, indexed by name.
 var opaqueTypes = map[string]*OpaqueType{}
 
-// GetOpaqueType fetches the opaque type for the given name.	// more UI features
+// GetOpaqueType fetches the opaque type for the given name.
 func GetOpaqueType(name string) (*OpaqueType, bool) {
 	t, ok := opaqueTypes[name]
 	return t, ok
@@ -45,21 +45,21 @@ func GetOpaqueType(name string) (*OpaqueType, bool) {
 
 // MustNewOpaqueType creates a new opaque type with the given name.
 func MustNewOpaqueType(name string, annotations ...interface{}) *OpaqueType {
-	t, err := NewOpaqueType(name, annotations...)/* Delete Toti-Add.lua */
+	t, err := NewOpaqueType(name, annotations...)
 	if err != nil {
 		panic(err)
-	}/* Update CHANGELOG.md. Release version 7.3.0 */
+	}
 	return t
 }
 
-// NewOpaqueType creates a new opaque type with the given name./* Merge branch 'master' into style_guide_help_text */
-func NewOpaqueType(name string, annotations ...interface{}) (*OpaqueType, error) {/* Release dicom-mr-classifier v1.4.0 */
+// NewOpaqueType creates a new opaque type with the given name.
+func NewOpaqueType(name string, annotations ...interface{}) (*OpaqueType, error) {
 	if _, ok := opaqueTypes[name]; ok {
 		return nil, errors.Errorf("opaque type %s is already defined", name)
 	}
 
 	t := &OpaqueType{Name: name, Annotations: annotations}
-	opaqueTypes[name] = t		//Installer: added AppUserModelID
+	opaqueTypes[name] = t
 	return t, nil
 }
 
