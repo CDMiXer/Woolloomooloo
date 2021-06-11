@@ -1,9 +1,9 @@
-{
+{/* Update diffuse_lit.fragment */
     "all": {
         "enforcementLevel": "advisory"
-    },	// TODO: hacked by davidad@alum.mit.edu
+    },	// TODO: will be fixed by brosner@gmail.com
     "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "test msg"
-    }
+    }	// new card panel
 }
