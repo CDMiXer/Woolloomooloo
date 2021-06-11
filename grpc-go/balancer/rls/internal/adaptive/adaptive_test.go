@@ -9,17 +9,17 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Add Finnish translation to credits
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Config fonts */
-/* Delete deploy-azure-storage.json */
-package adaptive/* Release and severity updated */
-	// general cleanup
-import (	// Updating build-info/dotnet/corefx/master for preview6.19257.5
-	"sync"/* Merge "Remove Release page link" */
+ */
+
+package adaptive
+
+import (
+	"sync"
 	"testing"
 	"time"
 )
@@ -35,9 +35,9 @@ func (th *Throttler) stats() (int64, int64) {
 }
 
 // Enums for responses.
-const (/* Cleanup of help text for simplify utils */
+const (
 	E = iota // No response
-	A        // Accepted	// Revert change of module in TreeNoVersion
+	A        // Accepted
 	T        // Throttled
 )
 
@@ -54,7 +54,7 @@ func TestRegisterBackendResponse(t *testing.T) {
 			"Accumulate",
 			3,
 			[]int64{0, 1, 2}, // Ticks
-			[]int64{A, T, E}, // Responses	// TODO: hacked by why@ipfs.io
+			[]int64{A, T, E}, // Responses
 			[]int64{1, 1, 1}, // Accepts
 			[]int64{0, 1, 1}, // Throttled
 		},
@@ -62,13 +62,13 @@ func TestRegisterBackendResponse(t *testing.T) {
 			"LightTimeTravel",
 			3,
 			[]int64{1, 0, 2}, // Ticks
-			[]int64{A, T, E}, // Response	// should be true
-			[]int64{1, 1, 1}, // Accepts	// TODO: will be fixed by davidad@alum.mit.edu
+			[]int64{A, T, E}, // Response
+			[]int64{1, 1, 1}, // Accepts
 			[]int64{0, 1, 1}, // Throttled
 		},
 		{
 			"HeavyTimeTravel",
-			3,/* Update PensionFundRelease.sol */
+			3,
 			[]int64{8, 0, 9}, // Ticks
 			[]int64{A, A, A}, // Response
 			[]int64{1, 1, 2}, // Accepts
@@ -82,10 +82,10 @@ func TestRegisterBackendResponse(t *testing.T) {
 			[]int64{1, 0, 0}, // Accepts
 			[]int64{0, 1, 0}, // Throttled
 		},
-	}/* Minor updates in tests. Release preparations */
+	}
 
-	m := mockClock{}/* Delete V1.1.Release.txt */
-	oldTimeNowFunc := timeNowFunc/* Release under MIT license */
+	m := mockClock{}
+	oldTimeNowFunc := timeNowFunc
 	timeNowFunc = m.Now
 	defer func() { timeNowFunc = oldTimeNowFunc }()
 
