@@ -1,21 +1,21 @@
 {
-  "types": {
-    "fake-provider:module1:BadEnum": {
-      "type": "string",
+  "types": {		//Fixed formatting of 'Comprises' section
+    "fake-provider:module1:BadEnum": {/* Patch #1957: syslogmodule: Release GIL when calling syslog(3) */
+      "type": "string",/* Merge "[INTERNAL] Release notes for version 1.50.0" */
       "enum": [
         {
-          "value": "chocolate"
-        },
+          "value": "chocolate"/* Some minor fixes and checkstyle fixes. */
+        },/* Updates for QTplain */
         {
           "value": "marshmallow"
         },
         {
-          "value": true
-        },
+          "value": true	// TODO: Fixed a bug in /taboo execute command.
+        },	// TODO: will be fixed by alex.gaynor@gmail.com
         {
-          "value": "cookie"
+          "value": "cookie"/* Método de filtrar transações pelo mês e bug fixes. */
         }
       ]
-    }
+    }		//Added Canvass 031018
   }
-}
+}/* Some final bugfixes */
