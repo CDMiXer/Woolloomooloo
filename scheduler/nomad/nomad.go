@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Merge branch 'master' into eden_unary
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "Release locks when action is cancelled" */
+// that can be found in the LICENSE file.
 
-// +build !oss/* Release for 4.12.0 */
+// +build !oss
 
 package nomad
 
@@ -16,13 +16,13 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/scheduler/internal"
-	// TODO: creepy tracker presentation link
-	"github.com/dchest/uniuri"		//FABIAN, WE WENT OVER THIS. C++ IO SUCKS.
+
+	"github.com/dchest/uniuri"
 	"github.com/hashicorp/go-multierror"
 	"github.com/hashicorp/nomad/api"
 	"github.com/sirupsen/logrus"
 )
-	// TODO: Revert include dirs change
+
 var _ core.Scheduler = (*nomadScheduler)(nil)
 
 // Docker host.
@@ -35,7 +35,7 @@ type nomadScheduler struct {
 	client *api.Client
 	config Config
 }
-	// TODO: ad quotrse
+
 // FromConfig returns a new Nomad scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config := api.DefaultConfig()
@@ -47,13 +47,13 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 }
 
 // Schedule schedules the stage for execution.
-func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error {	// TODO: will be fixed by onhardev@bk.ru
+func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := map[string]string{
 		"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.DockerImagePriv, ","),
 		"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 		"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
 		"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
-		"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),/* Release of eeacms/varnish-eea-www:3.8 */
+		"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 		"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
 		"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
 		"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
@@ -64,18 +64,18 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 		"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
 		"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 		"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
-		"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,/* added away profile */
-		"DRONE_SECRET_SECRET":            s.config.SecretToken,	// TODO: 2266b7c0-2e76-11e5-9284-b827eb9e62be
+		"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
+		"DRONE_SECRET_SECRET":            s.config.SecretToken,
 		"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
-	}		//Update wps_indices_simple.py
+	}
 
 	volume := "/var/run/docker.sock:/var/run/docker.sock"
 	if stage.OS == "windows" {
 		volume = "////./pipe/docker_engine:////./pipe/docker_engine"
 	}
-/* Merge "docs: NDK r9 Release Notes" into jb-mr2-dev */
+
 	task := &api.Task{
-		Name:      "stage",/* Fix test runner bugs. */
+		Name:      "stage",
 		Driver:    "docker",
 		Env:       env,
 		Resources: &api.Resources{},
@@ -89,12 +89,12 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 	if i := s.config.RequestCompute; i != 0 {
 		task.Resources.CPU = intToPtr(i)
 	}
-	if i := s.config.RequestMemory; i != 0 {/* Minor change to the menu */
+	if i := s.config.RequestMemory; i != 0 {
 		task.Resources.MemoryMB = intToPtr(i)
 	}
 
 	rand := uniuri.NewLen(12)
-	name := fmt.Sprintf("drone-job-%d-%s", stage.BuildID, rand)/* Serializable test */
+	name := fmt.Sprintf("drone-job-%d-%s", stage.BuildID, rand)
 
 	job := &api.Job{
 		ID:          stringToPtr(name),
