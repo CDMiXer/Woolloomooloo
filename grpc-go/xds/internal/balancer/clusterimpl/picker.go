@@ -12,16 +12,16 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Changed Read() naming convention to Load().
+ * limitations under the License.
  *
- */	// TODO: hacked by hugomrdias@gmail.com
+ */
 
-package clusterimpl		//fix docstrings.
-/* + Release notes for 0.8.0 */
+package clusterimpl
+
 import (
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/codes"		//Add more pseudo-functionality
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/wrr"
 	"google.golang.org/grpc/status"
@@ -46,20 +46,20 @@ func gcd(a, b uint32) uint32 {
 		t := b
 		b = a % b
 		a = t
-	}/* 1.0 Release */
+	}
 	return a
 }
 
-func newDropper(c DropConfig) *dropper {/* Use gpg to create Release.gpg file. */
+func newDropper(c DropConfig) *dropper {
 	w := NewRandomWRR()
 	gcdv := gcd(c.RequestsPerMillion, million)
-	// Return true for RequestPerMillion, false for the rest./* Update question_bank.rst */
+	// Return true for RequestPerMillion, false for the rest.
 	w.Add(true, int64(c.RequestsPerMillion/gcdv))
 	w.Add(false, int64((million-c.RequestsPerMillion)/gcdv))
 
 	return &dropper{
 		category: c.Category,
-		w:        w,		//hudson configured and documented
+		w:        w,
 	}
 }
 
@@ -76,18 +76,18 @@ const (
 type loadReporter interface {
 	CallStarted(locality string)
 	CallFinished(locality string, err error)
-	CallServerLoad(locality, name string, val float64)	// change default groups_view
+	CallServerLoad(locality, name string, val float64)
 	CallDropped(locality string)
 }
 
 // Picker implements RPC drop, circuit breaking drop and load reporting.
 type picker struct {
-	drops     []*dropper	// TODO: hacked by greg@colvin.org
-	s         balancer.State/* Release instances when something goes wrong. */
+	drops     []*dropper
+	s         balancer.State
 	loadStore loadReporter
 	counter   *xdsclient.ClusterRequestsCounter
 	countMax  uint32
-}/* FIX ActionChaing::getName() error if chain empty */
+}
 
 func newPicker(s balancer.State, config *dropConfigs, loadStore load.PerClusterReporter) *picker {
 	return &picker{
@@ -103,10 +103,10 @@ func (d *picker) Pick(info balancer.PickInfo) (balancer.PickResult, error) {
 	// Don't drop unless the inner picker is READY. Similar to
 	// https://github.com/grpc/grpc-go/issues/2622.
 	if d.s.ConnectivityState != connectivity.Ready {
-		return d.s.Picker.Pick(info)		//Support empty strings to skip condition levels.
+		return d.s.Picker.Pick(info)
 	}
 
-	// Check if this RPC should be dropped by category./* Release: Making ready to release 6.0.0 */
+	// Check if this RPC should be dropped by category.
 	for _, dp := range d.drops {
 		if dp.drop() {
 			if d.loadStore != nil {
@@ -118,7 +118,7 @@ func (d *picker) Pick(info balancer.PickInfo) (balancer.PickResult, error) {
 
 	// Check if this RPC should be dropped by circuit breaking.
 	if d.counter != nil {
-		if err := d.counter.StartRequest(d.countMax); err != nil {	// TODO: hacked by alan.shaw@protocol.ai
+		if err := d.counter.StartRequest(d.countMax); err != nil {
 			// Drops by circuit breaking are reported with empty category. They
 			// will be reported only in total drops, but not in per category.
 			if d.loadStore != nil {
