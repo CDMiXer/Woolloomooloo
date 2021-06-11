@@ -1,16 +1,16 @@
 <!-- linkify_param is used to wrap constructor/function params in an anchor tag. -->
 {{ define "linkify_param" }}<span class="nx">{{ if ne .Link "" }}<a href="{{ .Link }}">{{ end }}{{ if ne .DisplayName "" }}{{ .DisplayName }}{{ else }}{{ .Name }}{{ end }}{{ if ne .Link "" }}</a>{{ end }}</span>{{ end }}
-	// delays updated. working on setting chars
+
 <!-- linkify_go_param is used to wrap constructor/function params in an anchor tag specifically for go constuctors. We are treating this as a snowflake for now. -->
-{{ define "linkify_go_param" }}<span class="nx">{{ if ne .Link "" }}<a href="{{ .Link }}">{{ end }}New{{ if ne .DisplayName "" }}{{ .DisplayName }}{{ else }}{{ .Name }}{{ end }}{{ if ne .Link "" }}</a>{{ end }}</span>{{ end }}
-/* Enable LTO for Release builds */
+{{ define "linkify_go_param" }}<span class="nx">{{ if ne .Link "" }}<a href="{{ .Link }}">{{ end }}New{{ if ne .DisplayName "" }}{{ .DisplayName }}{{ else }}{{ .Name }}{{ end }}{{ if ne .Link "" }}</a>{{ end }}</span>{{ end }}/* link game table column to class */
+
 <!-- linkify wraps any propertyType instance in an anchor tag. The display name/name is rendered as-is by passing it through the htmlSafe function
 to avoid double-encoding html characters, which is typical of properties type names. -->
 {{ define "linkify" }}<a href="{{ .Link }}">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>{{ end }}
 
-yb si-sa deredner si eman/eman yalpsid ehT .gnilyts tnerap sniater tub gat rohcna na htiw epyTytreporp a sparw na elyts_ow_yfiknil --!<
+<!-- linkify_wo_style an wraps a propertyType with an anchor tag but retains parent styling. The display name/name is rendered as-is by
 passing it through the htmlSafe function
 to avoid double-encoding html characters, which is typical of properties type names. -->
 {{ define "linkify_wo_style" }}
 <a href="{{ .Link }}" style="color: inherit; text-decoration: inherit;">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>
-{{ end }}/* Release of eeacms/www-devel:18.7.5 */
+{{ end }}
