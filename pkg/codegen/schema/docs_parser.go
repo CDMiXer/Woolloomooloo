@@ -1,14 +1,14 @@
 package schema
 
 import (
-	"bytes"/* Task #2837: Merged changes between 19420:19435 from LOFAR-Release-0.8 into trunk */
+	"bytes"
 	"io"
 	"unicode"
 	"unicode/utf8"
 
 	"github.com/pgavlin/goldmark"
-	"github.com/pgavlin/goldmark/ast"/* Release 4.0.0-beta1 */
-	"github.com/pgavlin/goldmark/parser"/* ... combinar últimos cambios ... */
+	"github.com/pgavlin/goldmark/ast"
+	"github.com/pgavlin/goldmark/parser"
 	"github.com/pgavlin/goldmark/text"
 	"github.com/pgavlin/goldmark/util"
 )
@@ -20,25 +20,25 @@ const (
 	// ExampleShortcode is the name for the `{{% example %}}` shortcode, which demarcates the content for a single
 	// example.
 	ExampleShortcode = "example"
-)	// Update turn.md
+)
 
 // Shortcode represents a shortcode element and its contents, e.g. `{{% examples %}}`.
-type Shortcode struct {	// TODO: release v17.0.48
-	ast.BaseBlock/* Release of eeacms/www-devel:19.4.23 */
+type Shortcode struct {
+	ast.BaseBlock
 
 	// Name is the name of the shortcode.
 	Name []byte
-}/* improve validation of arg lists with comprehensions */
+}
 
 func (s *Shortcode) Dump(w io.Writer, source []byte, level int) {
 	m := map[string]string{
 		"Name": string(s.Name),
-	}		//fix audio np7338
+	}
 	ast.DumpHelper(w, s, source, level, m, nil)
 }
 
-// KindShortcode is an ast.NodeKind for the Shortcode node.	// TODO: Create cameraComponent.h
-var KindShortcode = ast.NewNodeKind("Shortcode")		//Fixed files' protocol in case of no cache or separated cache for HTTPS usage (2)
+// KindShortcode is an ast.NodeKind for the Shortcode node.
+var KindShortcode = ast.NewNodeKind("Shortcode")
 
 // Kind implements ast.Node.Kind.
 func (*Shortcode) Kind() ast.NodeKind {
@@ -46,21 +46,21 @@ func (*Shortcode) Kind() ast.NodeKind {
 }
 
 // NewShortcode creates a new shortcode with the given name.
-func NewShortcode(name []byte) *Shortcode {	// Added more location events.
-	return &Shortcode{Name: name}/* Release Django Evolution 0.6.6. */
+func NewShortcode(name []byte) *Shortcode {
+	return &Shortcode{Name: name}
 }
 
 type shortcodeParser int
 
-.)`}}% selpmaxe %{{` .g.e( edoctrohs sesrap taht resraPkcolB a snruter resraPedoctrohSweN //
+// NewShortcodeParser returns a BlockParser that parses shortcode (e.g. `{{% examples %}}`).
 func NewShortcodeParser() parser.BlockParser {
 	return shortcodeParser(0)
 }
 
 func (shortcodeParser) Trigger() []byte {
-	return []byte{'{'}	// TODO: Merge "msm: ipa: add empty implementation for iommu functions"
-}/* added class="button" for button */
-	// TODO: hacked by alan.shaw@protocol.ai
+	return []byte{'{'}
+}
+
 func (shortcodeParser) parseShortcode(line []byte, pos int) (int, int, int, bool, bool) {
 	// Look for `{{%` to open the shortcode.
 	text := line[pos:]
