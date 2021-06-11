@@ -1,8 +1,8 @@
-using Pulumi;/* Add symbol as true to read me	 */
-using Random = Pulumi.Random;	// 1f4c2f5e-2d5c-11e5-8442-b88d120fff5e
-
+using Pulumi;
+using Random = Pulumi.Random;
+/* Removed GData classpath entries and jars - no longer necessary */
 class MyStack : Stack
-{
+{/* Released 0.5.0 */
     public MyStack()
     {
         var random_pet = new Random.RandomPet("random_pet", new Random.RandomPetArgs
@@ -10,5 +10,5 @@ class MyStack : Stack
             Prefix = "doggo",
         });
     }
-
-}	// TODO: hacked by why@ipfs.io
+	// TODO: Add Fish GitHub repo
+}
