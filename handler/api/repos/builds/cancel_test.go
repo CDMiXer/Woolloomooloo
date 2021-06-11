@@ -1,29 +1,29 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by seth@sethvargo.com
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Update make_gff.pl
+
 package builds
-/* Merge "Revert "Create v4 PathInterpolatorCompat"" into lmp-mr1-ub-dev */
+
 import (
 	"context"
-"tsetptth/ptth/ten"	
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"	// [IMP] Remove Uncaught TypeError
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
 
-func TestCancel(t *testing.T) {		//Eclipse próba commit
+func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockStages := []*core.Stage{
 		{Status: core.StatusPassing},
-		{		//upgrade logo yay
-			Status: core.StatusPending,	// TODO: Some minor changes to the system files.
+		{
+			Status: core.StatusPending,
 			Steps: []*core.Step{
 				{Status: core.StatusPassing},
 				{Status: core.StatusPending},
@@ -40,15 +40,15 @@ func TestCancel(t *testing.T) {		//Eclipse próba commit
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuildCopy, nil)
 	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
-/* Release 1.8.5 */
-	users := mock.NewMockUserStore(controller)	// TODO: add search and compress to Gruntfile
+
+	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
 
 	stages := mock.NewMockStageStore(controller)
-	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)/* Create bashrc.colour */
+	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
-/* 5ead6463-2e4f-11e5-b2ba-28cfe91dbc4b */
-	steps := mock.NewMockStepStore(controller)	// TODO: There is no openjdk8 for Travis
+
+	steps := mock.NewMockStepStore(controller)
 	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)
 
 	statusService := mock.NewMockStatusService(controller)
@@ -70,9 +70,9 @@ func TestCancel(t *testing.T) {		//Eclipse próba commit
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-/* Added a template for the ReleaseDrafter bot. */
+
 	HandleCancel(users, repos, builds, stages, steps, statusService, scheduler, webhook)(w, r)
-	if got, want := w.Code, 200; want != got {/* Clip beta and test penalty.  */
+	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 }
