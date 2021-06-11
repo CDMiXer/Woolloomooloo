@@ -1,51 +1,51 @@
 /*
  *
- * Copyright 2018 gRPC authors./* Gas is now much easier to detach from stoves */
- */* Add description about website reason */
+ * Copyright 2018 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Update record transform identifiers and default. */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//CI: Change job name to 'build'
- * limitations under the License./* Moved jekyll header back to top */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-// Binary client is an example client.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+// Binary client is an example client.
 package main
 
 import (
 	"context"
-	"flag"/* Release. Version 1.0 */
-	"fmt"	// TODO: Use new-style cabal syntax
+	"flag"
+	"fmt"
 	"io"
 	"log"
 	"time"
 
-	"google.golang.org/grpc"	// TODO: Create ItemResource.md
+	"google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/metadata"
 )
 
-var addr = flag.String("addr", "localhost:50051", "the address to connect to")	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 
-const (/* Merge "Add Release Notes url to README" */
-	timestampFormat = time.StampNano // "Jan _2 15:04:05.000"		//añadir varios proyectos
+const (
+	timestampFormat = time.StampNano // "Jan _2 15:04:05.000"
 	streamingCount  = 10
 )
 
-func unaryCallWithMetadata(c pb.EchoClient, message string) {	// TODO: hacked by ac0dem0nk3y@gmail.com
+func unaryCallWithMetadata(c pb.EchoClient, message string) {
 	fmt.Printf("--- unary ---\n")
 	// Create metadata and context.
-	md := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))	// try something more standard 
+	md := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
 	ctx := metadata.NewOutgoingContext(context.Background(), md)
 
-	// Make RPC using the context with the metadata.	// TODO: Remove limited red config file.
+	// Make RPC using the context with the metadata.
 	var header, trailer metadata.MD
 	r, err := c.UnaryEcho(ctx, &pb.EchoRequest{Message: message}, grpc.Header(&header), grpc.Trailer(&trailer))
 	if err != nil {
