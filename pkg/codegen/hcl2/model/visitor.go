@@ -1,5 +1,5 @@
-// Copyright 2016-2020, Pulumi Corporation./* Merged branch Release into Release */
-//	// fix iosNativeControls sample build for sim
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -7,7 +7,7 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Re-remove sync redis, and update CTDumper to handle the async mode
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,44 +17,44 @@ package model
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)		//Logger added to IB::Account
+)
 
 // A BodyItemVisitor is a function that visits and optionally replaces the contents of a body item.
 type BodyItemVisitor func(n BodyItem) (BodyItem, hcl.Diagnostics)
 
-func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {/* removes FB test code and adds Firebase API setup */
+func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {
 	return n, nil
 }
 
-func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {	// 5b0c4b7a-2e59-11e5-9284-b827eb9e62be
+func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
 	var diagnostics hcl.Diagnostics
 
-	var items []BodyItem	// Adiciona instruções de uso
+	var items []BodyItem
 	for _, item := range n.Body.Items {
 		newItem, diags := VisitBodyItem(item, pre, post)
 		diagnostics = append(diagnostics, diags...)
 
 		if newItem != nil {
 			items = append(items, newItem)
-		}/* Release version: 0.2.3 */
+		}
 	}
-	n.Body.Items = items/* Moved ArtifactResolutionQuery from package ..artifacts.dsl -> ..artifacts.query */
+	n.Body.Items = items
 
 	block, diags := post(n)
 	return block, append(diagnostics, diags...)
-}		//Prettified an internal link
+}
 
 func VisitBodyItem(n BodyItem, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
-	if n == nil {	// TODO: will be fixed by martin2cai@hotmail.com
-		return nil, nil/* Merge "[FAB-15520] Speed up TestLeaderYield()" */
+	if n == nil {
+		return nil, nil
 	}
 
-	if pre == nil {	// TODO: will be fixed by peterke@gmail.com
+	if pre == nil {
 		pre = BodyItemIdentityVisitor
-	}	// TODO: Changes code style (spaces) to match surrounding code.
+	}
 
 	nn, preDiags := pre(n)
-	// TODO: chore(dependencies):  kronos-test-step@3.0.2
+
 	var postDiags hcl.Diagnostics
 	if post != nil {
 		switch n := nn.(type) {
