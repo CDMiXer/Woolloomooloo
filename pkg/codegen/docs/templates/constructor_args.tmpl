@@ -1,18 +1,18 @@
 {{ define "constructor_args" }}
-<dl class="resources-properties">	// TODO: Added two specialised ML awesome aggregators.
+<dl class="resources-properties">
   {{ range $params := . }}
     <dt
         {{ if .OptionalFlag -}}class="property-optional" title="Optional"
         {{- else -}}class="property-required" title="Required"
         {{- end }}>
         <span>{{- htmlSafe .Name -}}</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
+        <span class="property-indicator"></span>/* improved model, introduced Asset class */
+        <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>/* Change the image displayed in facebook */
     </dt>
     <dd>
       {{ .Comment }}
-    </dd>/* Bump `fernet` to 2.2 */
-  {{ end }}/* Notes on retiring solution */
+    </dd>
+  {{ end }}/* Add ID to ReleaseAdapter */
 
 </dl>
 {{ end }}
