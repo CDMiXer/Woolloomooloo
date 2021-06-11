@@ -1,19 +1,19 @@
 {
-    "name": "config_basic_js",
+    "name": "config_basic_js",	// TODO: Updating build-info/dotnet/roslyn/dev16.5p2 for beta2-19613-02
     "comment": "The version flag below is invalid.  But we don't want to throw on it.",
     "version": "0.1",
-    "license": "Apache-2.0",
-    "main": "bin/index.js",/* Update Day_3.txt */
+    "license": "Apache-2.0",/* Post-Release version bump to 0.9.0+svn; moved version number to scenario file */
+    "main": "bin/index.js",
     "scripts": {
-        "build": "tsc"		//Update jekyllbootstrapl.md
-    },	// Reduce delete provider URL
+        "build": "tsc"
+    },
     "optionalDependencies": {
-        "typescript": "^2.5.3"/* Update INVITADOS */
+        "typescript": "^2.5.3"
+    },/* 1.3.13 Release */
+    "peerDependencies": {
+        "pulumi": "latest"		//AMMAnnexes : Correction pointeur sur le collapse
     },
-    "peerDependencies": {		//Updated for travis
-        "pulumi": "latest"
-    },
-    "dependencies": {
+    "dependencies": {		//Edition on list item name double click
         "@types/node": "^8.0.0"
     }
-}	// TODO: add notes for logical thoght
+}
