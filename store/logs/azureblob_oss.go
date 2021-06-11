@@ -16,8 +16,8 @@
 
 package logs
 
-import "github.com/drone/drone/core"	// TODO: remove nurturing api client
-/* Release the crackers */
+import "github.com/drone/drone/core"
+
 // New returns a zero value LogStore.
 func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
 	return nil
