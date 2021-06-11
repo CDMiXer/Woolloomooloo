@@ -8,11 +8,11 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Initial Commit. JavaFX-Project
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package version
 
 // Version is initialized by the Go linker to contain the semver of this build.
-var Version string/* Update setuptools from 46.4.0 to 47.1.1 */
+var Version string
