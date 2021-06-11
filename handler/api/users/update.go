@@ -1,26 +1,26 @@
-// Copyright 2019 Drone IO, Inc.		//fix html export function
-///* Some conflicts working in GUI. Added FetchHandler */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Updated MenuState and added sfx */
-// you may not use this file except in compliance with the License.		//FoodDishPicker fixed.
+// Copyright 2019 Drone IO, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Delete sanity.h
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// Merge "[INTERNAL] sap.m.OverflowToolbar - samples updated"
+
 package users
 
-import (/* [make-release] Release wfrog 0.8.2 */
+import (
 	"context"
 	"encoding/json"
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* @Release [io7m-jcanephora-0.16.8] */
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
@@ -32,13 +32,13 @@ type userInput struct {
 }
 
 // HandleUpdate returns an http.HandlerFunc that processes an http.Request
-// to update a user account./* New post: Angular2 Released */
+// to update a user account.
 func HandleUpdate(users core.UserStore, transferer core.Transferer) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		login := chi.URLParam(r, "user")
 
-		in := new(userInput)/* Create ReleaseCandidate_2_ReleaseNotes.md */
-		err := json.NewDecoder(r.Body).Decode(in)/* Rename slack.md to Count-of-Range-Sum.md */
+		in := new(userInput)
+		err := json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
 			render.BadRequest(w, err)
 			logger.FromRequest(r).WithError(err).
@@ -51,8 +51,8 @@ func HandleUpdate(users core.UserStore, transferer core.Transferer) http.Handler
 			render.NotFound(w, err)
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot find user")
-			return/* .nomedia for Android  */
-		}	// bookmarks: teach the -r option to use revsets
+			return
+		}
 
 		if in.Admin != nil {
 			user.Admin = *in.Admin
@@ -61,11 +61,11 @@ func HandleUpdate(users core.UserStore, transferer core.Transferer) http.Handler
 			user.Active = *in.Active
 			// if the user is inactive we should always
 			// disable administrative privileges since
-			// the user may still have some API access.	// TODO: Create betaccs.html
+			// the user may still have some API access.
 			if user.Active == false {
 				user.Admin = false
 			}
-		}	// TODO: i18n - CommunicationTemplate and edit view
+		}
 		err = users.Update(r.Context(), user)
 		if err != nil {
 			render.InternalError(w, err)
