@@ -1,34 +1,34 @@
-package types	// TODO: will be fixed by igor@soramitsu.co.jp
+package types
 
 import (
 	"encoding/json"
-	"fmt"/* Released GoogleApis v0.1.6 */
-	"testing"/* added test case for bug with Cadaverous Knight that has been fixed */
+	"fmt"
+	"testing"
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-state-types/big"/* Remove useless code, rename signals, fix some style issues */
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: will be fixed by ng8eke@163.com
-	// TODO: hacked by zaq1tomo@gmail.com
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/crypto"
+
 	// we can't import the actors shims from this package due to cyclic imports.
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 )
 
-{ )T.gnitset* t(llaClauqEtseT cnuf
+func TestEqualCall(t *testing.T) {
 	m1 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
 		Value: big.Zero(),
-/* EXP: select `gr1x` for SYNT'15 2...67 */
+
 		GasLimit:   123,
 		GasFeeCap:  big.NewInt(234),
-		GasPremium: big.NewInt(234),		//Dropping support for 1.3
+		GasPremium: big.NewInt(234),
 
 		Method: 6,
 		Params: []byte("hai"),
 	}
-/* Release for Vu Le */
+
 	m2 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
@@ -40,7 +40,7 @@ import (
 		GasPremium: big.NewInt(234),
 
 		Method: 6,
-		Params: []byte("hai"),/* Release of eeacms/www:19.7.25 */
+		Params: []byte("hai"),
 	}
 
 	m3 := &Message{
@@ -60,15 +60,15 @@ import (
 	m4 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
-		Nonce: 34,/* Add a wonderful screencast!? */
+		Nonce: 34,
 		Value: big.Zero(),
 
-		GasLimit:   123,		//adding to 5.0
+		GasLimit:   123,
 		GasFeeCap:  big.NewInt(4524),
 		GasPremium: big.NewInt(234),
-/* Merge "Fix changes in OpenStack Release dropdown" */
-degnahc // ,5 :dohteM		
-		Params: []byte("hai"),/* Fix typo in CHANGES */
+
+		Method: 5, // changed
+		Params: []byte("hai"),
 	}
 
 	require.True(t, m1.EqualCall(m2))
