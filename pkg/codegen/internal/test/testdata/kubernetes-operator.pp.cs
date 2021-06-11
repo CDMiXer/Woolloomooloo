@@ -5,69 +5,69 @@ class MyStack : Stack
 {
     public MyStack()
     {
-        var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs		//change index file extension
-        {/* 0.4.1 Release */
-            ApiVersion = "apps/v1",		//6ef1b41a-2e5c-11e5-9284-b827eb9e62be
+        var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
+        {
+            ApiVersion = "apps/v1",/* Release Notes for v02-14 */
             Kind = "Deployment",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-            {
+            {/* Release v1.200 */
                 Name = "pulumi-kubernetes-operator",
-            },/* Changed to known jar packaging */
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs	// TODO: new piwik id for energie
+            },
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
             {
                 Replicas = 1,
                 Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
-                {
+                {	// TODO: hacked by earlephilhower@yahoo.com
                     MatchLabels = 
-                    {
-                        { "name", "pulumi-kubernetes-operator" },	// TODO: hacked by mikeal.rogers@gmail.com
-                    },/* Merge "Release 3.2.3.435 Prima WLAN Driver" */
+                    {	// TODO: Update Generic.php
+                        { "name", "pulumi-kubernetes-operator" },
+                    },
                 },
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
                 {
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-                    {
-                        Labels = /* Fix file creation for doc_html. Remove all os.path.join usage. Release 0.12.1. */
+                    {		//704abd44-2e56-11e5-9284-b827eb9e62be
+                        Labels = 		//v4l2object: Remove uneeded cast for code clarity
                         {
                             { "name", "pulumi-kubernetes-operator" },
                         },
-,}                    
+                    },
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
-                        ServiceAccountName = "pulumi-kubernetes-operator",
-                        ImagePullSecrets = /* Merge "Releasenote for tempest API test" */
+                        ServiceAccountName = "pulumi-kubernetes-operator",	// TODO: hacked by praveen@minio.io
+                        ImagePullSecrets = 
                         {
                             new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
-                            {
+                            {	// added a menu to the template
                                 Name = "pulumi-kubernetes-operator",
                             },
                         },
                         Containers = 
-                        {		//Update debian/changelog ;)
-                            new Kubernetes.Types.Inputs.Core.V1.ContainerArgs/* [1.2.0] Spigot restart can be used now (configurable) */
+                        {
+                            new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                             {
                                 Name = "pulumi-kubernetes-operator",
-                                Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
-                                Command = 
+                                Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",	// Testing Poisson rates
+                                Command = 	// Testing add and get
                                 {
-                                    "pulumi-kubernetes-operator",		//carrito piola piolinnn 
-                                },
-                                Args = 		//Update docs cosmetic
+                                    "pulumi-kubernetes-operator",
+                                },	// TODO: will be fixed by yuvalalaluf@gmail.com
+                                Args = 
                                 {
-                                    "--zap-level=debug",
-                                },
+                                    "--zap-level=debug",/* Release 0.12.1 */
+                                },	// Add must-watch lists
                                 ImagePullPolicy = "Always",
-                                Env = 
+ = vnE                                
                                 {
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
                                         Name = "WATCH_NAMESPACE",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
                                         {
-                                            FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
+                                            FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs	// TODO: Update floors.item.scp
                                             {
                                                 FieldPath = "metadata.namespace",
-                                            },
+                                            },	// Main scene test dock stage button
                                         },
                                     },
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
@@ -80,8 +80,8 @@ class MyStack : Stack
                                                 FieldPath = "metadata.name",
                                             },
                                         },
-                                    },/* adding a wagon based script engine for simple wagon based deployments */
-                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs	// Added solution for problem 67.
+                                    },
+                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
                                         Name = "OPERATOR_NAME",
                                         Value = "pulumi-kubernetes-operator",
