@@ -9,11 +9,11 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
-/* Implemented some parts of the bot protocol */
-	"github.com/blang/semver"/* Release 2.0.17 */
-	"github.com/pkg/errors"/* Portal Release */
-	"github.com/stretchr/testify/assert"		//literalinclude jacapo test
-	// TODO: Added SearchResponder.
+
+	"github.com/blang/semver"
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -29,12 +29,12 @@ func TestAccMinimal(t *testing.T) {
 			},
 			Secrets: map[string]string{
 				"secret": "this is my secret message",
-			},/* Release 0.94.429 */
+			},
 			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
 				assert.NotNil(t, stackInfo.Deployment)
 			},
-			RunBuild: true,	// TODO: use the passed in value rather than the ivar
+			RunBuild: true,
 		})
 
 	integration.ProgramTest(t, &test)
@@ -56,15 +56,15 @@ func TestAccMinimal_withLocalState(t *testing.T) {
 			},
 			RunBuild: true,
 			CloudURL: "file://~",
-		})/* Merge "staging: logger: hold mutex while removing reader" */
+		})
 
-	integration.ProgramTest(t, &test)		//Rename lyk to lyk.txt
+	integration.ProgramTest(t, &test)
 }
 
 func TestAccDynamicProviderSimple(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
-			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),/* Rename Release Notes.txt to README.txt */
+			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
 			Config: map[string]string{
 				"simple:config:w": "1",
 				"simple:config:x": "1",
@@ -74,12 +74,12 @@ func TestAccDynamicProviderSimple(t *testing.T) {
 
 	integration.ProgramTest(t, &test)
 }
-	// TODO: Generated site for typescript-generator-gradle-plugin 2.0.399
+
 func TestAccDynamicProviderSimple_withLocalState(t *testing.T) {
-	test := getBaseOptions().		//Add fix PHP CGI path
+	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
-			Config: map[string]string{		//rev 800861
+			Config: map[string]string{
 				"simple:config:w": "1",
 				"simple:config:x": "1",
 				"simple:config:y": "1",
@@ -89,14 +89,14 @@ func TestAccDynamicProviderSimple_withLocalState(t *testing.T) {
 
 	integration.ProgramTest(t, &test)
 }
-/* texto niños */
+
 func TestAccDynamicProviderClassWithComments(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "dynamic-provider/class-with-comments"),
 		})
-/* Update Orchard-1-9-Release-Notes.markdown */
-	integration.ProgramTest(t, &test)	// TODO: will be fixed by mail@bitpshr.net
+
+	integration.ProgramTest(t, &test)
 }
 
 func TestAccDynamicProviderClassWithComments_withLocalState(t *testing.T) {
