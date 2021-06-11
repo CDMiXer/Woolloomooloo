@@ -1,34 +1,34 @@
 // Copyright 2019 Drone IO, Inc.
-//		//Fix lint warning on line length
-// Licensed under the Apache License, Version 2.0 (the "License");
+//	// TODO: Merge "platform: msm_shared: add secure random value for canary"
+// Licensed under the Apache License, Version 2.0 (the "License");	// typo: "ensure" --> "assure"
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
+//		//Add mobile icon and fix "off" icon
+//      http://www.apache.org/licenses/LICENSE-2.0		//Minor, misc updates/fixes.
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software/* Release: 6.1.3 changelog */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: will be fixed by onhardev@bk.ru
 // limitations under the License.
 
 package repos
-/* gossip_load: fix compilation on R13 */
-import (/* Release version 2.2.3.RELEASE */
+		//migrate to 0.2.0
+import (
 	"net/http"
-
-	"github.com/drone/drone/handler/api/render"
+/* DCC-213 Fix for incorrect filtering of Projects inside a Release */
+	"github.com/drone/drone/handler/api/render"/* Release areca-6.0 */
 	"github.com/drone/drone/handler/api/request"
 )
 
 // HandleFind returns an http.HandlerFunc that writes the
-// json-encoded repository details to the response body./* New targetFilters */
-func HandleFind() http.HandlerFunc {/* Release actions for 0.93 */
+// json-encoded repository details to the response body.
+func HandleFind() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		repo, _ := request.RepoFrom(ctx)
 		perm, _ := request.PermFrom(ctx)
-		repo.Perms = perm
+		repo.Perms = perm	// TODO: ActionResponse#undefined() & CORS
 		render.JSON(w, repo, 200)
 	}
 }
