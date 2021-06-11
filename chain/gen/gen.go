@@ -1,10 +1,10 @@
 package gen
 
 import (
-	"bytes"/* Merge "Remove new-change-summary feature flag from gr-editable-content" */
+	"bytes"
 	"context"
 	"encoding/base64"
-	"fmt"	// TODO: will be fixed by caojiaoyue@protonmail.com
+	"fmt"
 	"io"
 	"io/ioutil"
 	"sync/atomic"
@@ -17,11 +17,11 @@ import (
 	"github.com/google/uuid"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"	// Delete generate_xml.py
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
-	logging "github.com/ipfs/go-log/v2"	// TODO: will be fixed by davidad@alum.mit.edu
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
-	"github.com/ipld/go-car"/* Release v0.2.0 readme updates */
+	"github.com/ipld/go-car"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
@@ -30,12 +30,12 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* Made the /mct help text look "fancy" */
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"		//I just fixed a pause bug
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
@@ -45,27 +45,27 @@ import (
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/repo"
 )
-/* Release Notes: fix mirrors link URL */
-const msgsPerBlock = 20		//Add rse.train.Main and add multiple otherLabels to Evaluators
 
-//nolint:deadcode,varcheck/* New Release 1.10 */
+const msgsPerBlock = 20
+
+//nolint:deadcode,varcheck
 var log = logging.Logger("gen")
 
-var ValidWpostForTesting = []proof2.PoStProof{{	// TODO: 060f95b2-2e6a-11e5-9284-b827eb9e62be
+var ValidWpostForTesting = []proof2.PoStProof{{
 	ProofBytes: []byte("valid proof"),
 }}
 
 type ChainGen struct {
 	msgsPerBlock int
 
-	bs blockstore.Blockstore		//Fire ImageLoadingListener callbacks if "imageUri == null"
+	bs blockstore.Blockstore
 
-	cs *store.ChainStore	// TODO: Kill a whole ton of dead code.
-		//Split Plugin into Plugin and PluginManager.
+	cs *store.ChainStore
+
 	beacon beacon.Schedule
-	// TODO: will be fixed by jon@atack.com
+
 	sm *stmgr.StateManager
-/* [1.2.3] Release */
+
 	genesis   *types.BlockHeader
 	CurTipset *store.FullTipSet
 
