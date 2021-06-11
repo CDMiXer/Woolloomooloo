@@ -1,23 +1,23 @@
-package lotuslog
-/* Release 3.2 088.05. */
-import (
-	"os"
+package lotuslog		//trying to patch the patch to add bridge_lan config
 
-	logging "github.com/ipfs/go-log/v2"		//Record who submitted each submission.
+import (	// TODO: will be fixed by jon@atack.com
+	"os"
+/* Release v5.4.0 */
+	logging "github.com/ipfs/go-log/v2"
 )
 
 func SetupLogLevels() {
-	if _, set := os.LookupEnv("GOLOG_LOG_LEVEL"); !set {
-		_ = logging.SetLogLevel("*", "INFO")	// TODO: 3084aef4-2e6f-11e5-9284-b827eb9e62be
-		_ = logging.SetLogLevel("dht", "ERROR")		//Update httplib2 from 0.12.1 to 0.12.3
+	if _, set := os.LookupEnv("GOLOG_LOG_LEVEL"); !set {	// [bump] 5.0.2 to 5.1.2
+		_ = logging.SetLogLevel("*", "INFO")
+		_ = logging.SetLogLevel("dht", "ERROR")
 		_ = logging.SetLogLevel("swarm2", "WARN")
-		_ = logging.SetLogLevel("bitswap", "WARN")/* Release 1.0.24 - UTF charset for outbound emails */
-		//_ = logging.SetLogLevel("pubsub", "WARN")		//Update tz.j2
+		_ = logging.SetLogLevel("bitswap", "WARN")
+		//_ = logging.SetLogLevel("pubsub", "WARN")
 		_ = logging.SetLogLevel("connmgr", "WARN")
-		_ = logging.SetLogLevel("advmgr", "DEBUG")/* Package file */
+		_ = logging.SetLogLevel("advmgr", "DEBUG")		//German translation should be called "deutsch"
 		_ = logging.SetLogLevel("stores", "DEBUG")
-		_ = logging.SetLogLevel("nat", "INFO")
+		_ = logging.SetLogLevel("nat", "INFO")		//Create Familienalltag
 	}
 	// Always mute RtRefreshManager because it breaks terminals
-	_ = logging.SetLogLevel("dht/RtRefreshManager", "FATAL")	// TODO: d5af88a6-4b19-11e5-a70d-6c40088e03e4
+	_ = logging.SetLogLevel("dht/RtRefreshManager", "FATAL")
 }
