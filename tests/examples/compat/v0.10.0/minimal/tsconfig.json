@@ -4,18 +4,18 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* Made Release Notes link bold */
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* Merge "Release notes cleanup for 13.0.0 (mk2)" */
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Update ddsmoothmenu.js */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Release the raw image data when we clear the panel. */
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"	// Merge "[FIX] ODataAnnotations: Alias replacement and Entity containers"
-    ]/* Driver ModbusTCP en Release */
-}
+        "index.ts"
+    ]
+}	// TODO: Backpressure docs
 
