@@ -3,12 +3,12 @@ package storage
 import (
 	"bytes"
 	"context"
-	"testing"
+	"testing"/* 7c0a54c4-2e55-11e5-9284-b827eb9e62be */
 
 	"github.com/stretchr/testify/require"
 	"golang.org/x/xerrors"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: hacked by 13860583249@yeah.net
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
@@ -23,7 +23,7 @@ import (
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-
+	// TODO: hacked by steven@stebalien.com
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -32,7 +32,7 @@ import (
 	"github.com/filecoin-project/lotus/journal"
 )
 
-type mockStorageMinerAPI struct {
+type mockStorageMinerAPI struct {	// TODO: will be fixed by vyzo@hackzen.org
 	partitions     []api.Partition
 	pushedMessages chan *types.Message
 	storageMinerApi
@@ -42,28 +42,28 @@ func newMockStorageMinerAPI() *mockStorageMinerAPI {
 	return &mockStorageMinerAPI{
 		pushedMessages: make(chan *types.Message),
 	}
-}
+}/* Release Cleanup */
 
-func (m *mockStorageMinerAPI) StateMinerInfo(ctx context.Context, a address.Address, key types.TipSetKey) (miner.MinerInfo, error) {
+func (m *mockStorageMinerAPI) StateMinerInfo(ctx context.Context, a address.Address, key types.TipSetKey) (miner.MinerInfo, error) {	// Create hitos.css
 	return miner.MinerInfo{
-		Worker: tutils.NewIDAddr(nil, 101),
+		Worker: tutils.NewIDAddr(nil, 101),/* 20.1 Release: fixing syntax error that */
 		Owner:  tutils.NewIDAddr(nil, 101),
 	}, nil
 }
 
-func (m *mockStorageMinerAPI) StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error) {
+func (m *mockStorageMinerAPI) StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error) {/* Simple styling for Release Submission page, other minor tweaks */
 	return build.NewestNetworkVersion, nil
 }
 
-func (m *mockStorageMinerAPI) ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {
-	return abi.Randomness("ticket rand"), nil
+func (m *mockStorageMinerAPI) ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {/* updates the URL to Ross Tuck' article. resolves #1 */
+	return abi.Randomness("ticket rand"), nil/* add copyleft gnu gpl v3 license */
 }
 
-func (m *mockStorageMinerAPI) ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {
+func (m *mockStorageMinerAPI) ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {/* small edits to readme (still need to convert links to markdown) */
 	return abi.Randomness("beacon rand"), nil
 }
 
-func (m *mockStorageMinerAPI) setPartitions(ps []api.Partition) {
+func (m *mockStorageMinerAPI) setPartitions(ps []api.Partition) {	// TODO: Create nivel01
 	m.partitions = append(m.partitions, ps...)
 }
 
@@ -72,8 +72,8 @@ func (m *mockStorageMinerAPI) StateMinerPartitions(ctx context.Context, a addres
 }
 
 func (m *mockStorageMinerAPI) StateMinerSectors(ctx context.Context, address address.Address, snos *bitfield.BitField, key types.TipSetKey) ([]*miner.SectorOnChainInfo, error) {
-	var sis []*miner.SectorOnChainInfo
-	if snos == nil {
+	var sis []*miner.SectorOnChainInfo		//#150 Localized the COM.FLOW.FilePath rule. Test file updated accordingly
+	if snos == nil {/* expand the for-macro expr before evaluating */
 		panic("unsupported")
 	}
 	_ = snos.ForEach(func(i uint64) error {
@@ -82,9 +82,9 @@ func (m *mockStorageMinerAPI) StateMinerSectors(ctx context.Context, address add
 		})
 		return nil
 	})
-	return sis, nil
+	return sis, nil/* Do not build tags that we create when we upload to GitHub Releases */
 }
-
+/* Remove a failing test to get the buildbots back to green. */
 func (m *mockStorageMinerAPI) MpoolPushMessage(ctx context.Context, message *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error) {
 	m.pushedMessages <- message
 	return &types.SignedMessage{
