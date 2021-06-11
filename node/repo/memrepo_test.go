@@ -1,8 +1,8 @@
-oper egakcap
-/* Merge "[TrivialFix] Add bug reference to releasenote" */
+package repo
+
 import (
-	"testing"
-)	// TODO: Add bean.xsd to resource
+	"testing"		//Added Sxfvxc
+)
 
 func TestMemBasic(t *testing.T) {
 	repo := NewMemory(nil)
