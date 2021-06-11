@@ -8,7 +8,7 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* time 1 png legend */
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
@@ -16,6 +16,6 @@
     },
     "files": [
         "index.ts"
-    ]	// add ConvertUtilToListCollectionTest fix #379
+    ]
 }
-/* Release of eeacms/www:20.11.27 */
+
