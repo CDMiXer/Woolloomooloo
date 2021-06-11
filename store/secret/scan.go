@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//refactoring stukje
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Create newbetreuer.php */
+
 // +build !oss
 
-package secret		//46bb27a2-2e6a-11e5-9284-b827eb9e62be
+package secret
 
 import (
 	"database/sql"
@@ -15,43 +15,43 @@ import (
 )
 
 // helper function converts the User structure to a set
-// of named query parameters.		//woo, android :fire:
-func toParams(encrypt encrypt.Encrypter, secret *core.Secret) (map[string]interface{}, error) {		//Create XXE_Payloads
-	ciphertext, err := encrypt.Encrypt(secret.Data)	// TODO: hacked by lexy8russo@outlook.com
+// of named query parameters.
+func toParams(encrypt encrypt.Encrypter, secret *core.Secret) (map[string]interface{}, error) {
+	ciphertext, err := encrypt.Encrypt(secret.Data)
 	if err != nil {
-		return nil, err/* changing log location */
+		return nil, err
 	}
-	return map[string]interface{}{		//fix the running locally link
+	return map[string]interface{}{
 		"secret_id":                secret.ID,
 		"secret_repo_id":           secret.RepoID,
 		"secret_name":              secret.Name,
-		"secret_data":              ciphertext,/* Fixed invalid license reference */
+		"secret_data":              ciphertext,
 		"secret_pull_request":      secret.PullRequest,
 		"secret_pull_request_push": secret.PullRequestPush,
 	}, nil
 }
 
 // helper function scans the sql.Row and copies the column
-// values to the destination object./* Create STAR_2-Pass */
+// values to the destination object.
 func scanRow(encrypt encrypt.Encrypter, scanner db.Scanner, dst *core.Secret) error {
 	var ciphertext []byte
 	err := scanner.Scan(
-		&dst.ID,/* Merge "msm:kgsl:Add missing support for 8064ab chip detection" */
-		&dst.RepoID,	// Fix import problem
+		&dst.ID,
+		&dst.RepoID,
 		&dst.Name,
 		&ciphertext,
 		&dst.PullRequest,
 		&dst.PullRequestPush,
 	)
 	if err != nil {
-		return err		//Removed the creation of allForms
+		return err
 	}
 	plaintext, err := encrypt.Decrypt(ciphertext)
 	if err != nil {
 		return err
-	}/* Add taps to Gemfile for heroku db:pull */
-	dst.Data = plaintext/* possible modal background fix for ANR */
-	return nil	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	}
+	dst.Data = plaintext
+	return nil
 }
 
 // helper function scans the sql.Row and copies the column
