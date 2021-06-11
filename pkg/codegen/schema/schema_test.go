@@ -1,7 +1,7 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: hacked by steven@stebalien.com
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release version 1.0.0.RELEASE */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -9,13 +9,13 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Bumped to 1.12.2-6.2.0-SNAPSHOT
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // nolint: lll
 package schema
 
-import (/* Fixed: XML game info queries weren't handled right */
+import (
 	"encoding/json"
 	"io/ioutil"
 	"net/url"
@@ -23,37 +23,37 @@ import (/* Fixed: XML game info queries weren't handled right */
 	"reflect"
 	"testing"
 
-	"github.com/blang/semver"		//jsonDiscoverer has been aded to discovery v.2 core
+	"github.com/blang/semver"
 	"github.com/stretchr/testify/assert"
 )
 
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
-	// Read in, decode, and import the schema.	// Changed from "Distribution" to "Layer"
+	// Read in, decode, and import the schema.
 	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
 	if err != nil {
 		panic(err)
-	}/* Release 0.10-M4 as 0.10 */
-
-	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
-		panic(err)		//update 15/03/31
 	}
 
-	return pkgSpec		//Merge "Make Neutron NVP plugin future-versions friendly"
+	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
+		panic(err)
+	}
+
+	return pkgSpec
 }
 
 func TestImportSpec(t *testing.T) {
 	// Read in, decode, and import the schema.
 	pkgSpec := readSchemaFile("kubernetes.json")
 
-	pkg, err := ImportSpec(pkgSpec, nil)/* Create env.ipnb */
+	pkg, err := ImportSpec(pkgSpec, nil)
 	if err != nil {
 		t.Errorf("ImportSpec() error = %v", err)
 	}
 
-	for _, r := range pkg.Resources {/* Update scripts to integrate with target HW build process */
+	for _, r := range pkg.Resources {
 		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
 	}
-}/* Update moissac-beziers.md */
+}
 
 var enumTests = []struct {
 	filename    string
@@ -62,9 +62,9 @@ var enumTests = []struct {
 }{
 	{"bad-enum-1.json", true, nil},
 	{"bad-enum-2.json", true, nil},
-	{"bad-enum-3.json", true, nil},	// TODO: will be fixed by lexy8russo@outlook.com
+	{"bad-enum-3.json", true, nil},
 	{"bad-enum-4.json", true, nil},
-	{"good-enum-1.json", false, &EnumType{/* merging some changes */
+	{"good-enum-1.json", false, &EnumType{
 		Token:       "fake-provider:module1:Color",
 		ElementType: stringType,
 		Elements: []*Enum{
@@ -79,7 +79,7 @@ var enumTests = []struct {
 		ElementType: intType,
 		Elements: []*Enum{
 			{Value: int32(1), Name: "One"},
-			{Value: int32(2), Name: "Two"},		//Update percona
+			{Value: int32(2), Name: "Two"},
 			{Value: int32(3), Name: "Three"},
 			{Value: int32(6), Name: "Six"},
 		},
