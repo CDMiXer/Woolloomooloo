@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// forgot name for isl
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: Updated manifest, come strings and about
+    <TargetFramework>netcoreapp3.1</TargetFramework>		//Updated the mv_regex feedstock.
   </PropertyGroup>
 
 </Project>
