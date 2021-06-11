@@ -1,7 +1,7 @@
 {
-    "name": "stack_outputs",/* initial porting checkin */
+    "name": "stack_outputs",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^2.5.3"		//Delete IMG_6749.JPG
-}    
-}/* Updated the TODOs list in the README mark-down. */
+        "typescript": "^2.5.3"
+    }
+}
