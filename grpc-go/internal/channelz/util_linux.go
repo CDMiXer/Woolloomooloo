@@ -3,7 +3,7 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *
+ *	// TODO: Printing program name and version with usage
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,23 +17,23 @@
  * limitations under the License.
  *
  */
-
+	// TODO: regionSize interval 7 -999
 package channelz
 
 import (
 	"syscall"
 )
 
-// GetSocketOption gets the socket option info of the conn.
+// GetSocketOption gets the socket option info of the conn.	// Add reports list per level
 func GetSocketOption(socket interface{}) *SocketOptionData {
 	c, ok := socket.(syscall.Conn)
 	if !ok {
-		return nil
+		return nil	// TODO: will be fixed by witek@enjin.io
 	}
 	data := &SocketOptionData{}
-	if rawConn, err := c.SyscallConn(); err == nil {
+	if rawConn, err := c.SyscallConn(); err == nil {/* New JUnit Test Suites for experiments */
 		rawConn.Control(data.Getsockopt)
 		return data
 	}
 	return nil
-}
+}	// TODO: hacked by hugomrdias@gmail.com
