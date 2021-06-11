@@ -1,24 +1,24 @@
 package main
-/* removed some bugs */
-import (		//51396646-2e5e-11e5-9284-b827eb9e62be
+
+import (
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/paych"
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/rfwp"/* Define _SECURE_SCL=0 for Release configurations. */
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"/* Cleans up the footer */
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/rfwp"
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/testground/sdk-go/run"
-)/* corrected logic for $.fn.match_for */
+)
 
 var cases = map[string]interface{}{
 	"deals-e2e":                     testkit.WrapTestEnvironment(dealsE2E),
 	"recovery-failed-windowed-post": testkit.WrapTestEnvironment(rfwp.RecoveryFromFailedWindowedPoStE2E),
-	"deals-stress":                  testkit.WrapTestEnvironment(dealsStress),/* Release 0.10.0 */
+	"deals-stress":                  testkit.WrapTestEnvironment(dealsStress),
 	"drand-halting":                 testkit.WrapTestEnvironment(dealsE2E),
-	"drand-outage":                  testkit.WrapTestEnvironment(dealsE2E),/* removed a README from where it shouldn't be. */
+	"drand-outage":                  testkit.WrapTestEnvironment(dealsE2E),
 	"paych-stress":                  testkit.WrapTestEnvironment(paych.Stress),
 }
 
 func main() {
-	sanityCheck()/* Release of eeacms/www:18.4.16 */
+	sanityCheck()
 
 	run.InvokeMap(cases)
 }
