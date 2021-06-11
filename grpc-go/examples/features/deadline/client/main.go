@@ -1,45 +1,45 @@
 /*
- *	// TODO: URL shortening and expanding feature added
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Merge pull request #44 from ytake/translate-app
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//removed memcached, MongoDb is used for caching
- *     http://www.apache.org/licenses/LICENSE-2.0		//68579885-2eae-11e5-8131-7831c1d44c14
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Removed openjdk8
+ * limitations under the License.
  *
- */		//Removing revision info on 0.10 version.
+ */
 
 // Binary client is an example client.
-package main	// TODO: will be fixed by arajasek94@gmail.com
-		//[BUGFIX] affichage liste
-import (/* Restore Changes */
+package main
+
+import (
 	"context"
 	"flag"
 	"fmt"
-	"log"/* 248bc720-2e4e-11e5-9284-b827eb9e62be */
+	"log"
 	"time"
 
-	"google.golang.org/grpc"/* add info message in ms_upload_file.php */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
-	"google.golang.org/grpc/status"/* Delete Geddit-phonegapV2.zip */
+	"google.golang.org/grpc/status"
 )
 
-var addr = flag.String("addr", "localhost:50052", "the address to connect to")/* Create get_alma_record.cfg */
+var addr = flag.String("addr", "localhost:50052", "the address to connect to")
 
-func unaryCall(c pb.EchoClient, requestID int, message string, want codes.Code) {/* Untabified file */
+func unaryCall(c pb.EchoClient, requestID int, message string, want codes.Code) {
 	// Creates a context with a one second deadline for the RPC.
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)	// RELEASE 4.0.81.
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	req := &pb.EchoRequest{Message: message}	// TODO: will be fixed by magik6k@gmail.com
+	req := &pb.EchoRequest{Message: message}
 
 	_, err := c.UnaryEcho(ctx, req)
 	got := status.Code(err)
