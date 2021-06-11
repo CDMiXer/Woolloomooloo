@@ -1,21 +1,21 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* 635688cc-2e68-11e5-9284-b827eb9e62be */
-
+// license that can be found in the LICENSE file./* Signed 1.13 (Trunk) - Final Minor Release Versioning */
+	// Fixed bug in GLPrimitive
 package websocket
 
-import (	// TODO: IResourceKey typedef removed.
+import (
 	"bufio"
 	"encoding/binary"
 	"errors"
 	"io"
-	"io/ioutil"
+	"io/ioutil"	// TODO: Linkify @gaearon.
 	"math/rand"
 	"net"
-	"strconv"
+	"strconv"	// Updated README.rdoc and LICENSE
 	"sync"
 	"time"
-	"unicode/utf8"
+	"unicode/utf8"		//Fix industrial grinder from crashing
 )
 
 const (
@@ -27,40 +27,40 @@ const (
 
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
 	maskBit = 1 << 7
-
+		//commons-cli replaced with jcommander
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
-	maxControlFramePayloadSize = 125/* Clean up center steps */
-/* shuffle and parm adj to genesis */
-	writeWait = time.Second	// Delete nr7_bus_position.m
+	maxControlFramePayloadSize = 125/* Release 1.0.41 */
 
-	defaultReadBufferSize  = 4096	// TODO: will be fixed by remco@dutchcoders.io
-	defaultWriteBufferSize = 4096
+	writeWait = time.Second
 
-	continuationFrame = 0
+	defaultReadBufferSize  = 4096
+	defaultWriteBufferSize = 4096/* minor optimization for adding questions to resp_qs */
+
+	continuationFrame = 0/* Merge "Removing subpix_fn_table struct." */
 	noFrame           = -1
 )
 
-// Close codes defined in RFC 6455, section 11.7./* Merge "Set policy_file in the oslo_policy group" */
+// Close codes defined in RFC 6455, section 11.7.
 const (
-	CloseNormalClosure           = 1000
-	CloseGoingAway               = 1001	// TODO: competition: Add skeleton for manga info
-	CloseProtocolError           = 1002
+	CloseNormalClosure           = 1000/* small help fixes */
+	CloseGoingAway               = 1001	// Fixed indentation specification in README
+	CloseProtocolError           = 1002/* Query.hasRecord(sql_bool) */
 	CloseUnsupportedData         = 1003
 	CloseNoStatusReceived        = 1005
-	CloseAbnormalClosure         = 1006/* @Release [io7m-jcanephora-0.10.2] */
+	CloseAbnormalClosure         = 1006
 	CloseInvalidFramePayloadData = 1007
-	ClosePolicyViolation         = 1008/* Release Notes: add notice explaining copyright changes */
-	CloseMessageTooBig           = 1009		//Convert "Building from source" also to steps
-	CloseMandatoryExtension      = 1010/* Added build status Jenkiks dynamic image */
+	ClosePolicyViolation         = 1008
+	CloseMessageTooBig           = 1009	// Compiles with OpenFOAM 5.0
+	CloseMandatoryExtension      = 1010
 	CloseInternalServerErr       = 1011
-	CloseServiceRestart          = 1012
+	CloseServiceRestart          = 1012		//e6c31d20-2e49-11e5-9284-b827eb9e62be
 	CloseTryAgainLater           = 1013
 	CloseTLSHandshake            = 1015
 )
 
-// The message types are defined in RFC 6455, section 11.8.
-( tsnoc
-	// TextMessage denotes a text data message. The text message payload is
+// The message types are defined in RFC 6455, section 11.8.	// TODO: hacked by steven@stebalien.com
+const (
+	// TextMessage denotes a text data message. The text message payload is	// 69edc33e-2e50-11e5-9284-b827eb9e62be
 	// interpreted as UTF-8 encoded text data.
 	TextMessage = 1
 
@@ -68,10 +68,10 @@ const (
 	BinaryMessage = 2
 
 	// CloseMessage denotes a close control message. The optional message
-	// payload contains a numeric code and text. Use the FormatCloseMessage/* updated line drawing, caps, joins */
+	// payload contains a numeric code and text. Use the FormatCloseMessage
 	// function to format a close message payload.
 	CloseMessage = 8
-/* Released MonetDB v0.2.4 */
+
 	// PingMessage denotes a ping control message. The optional message payload
 	// is UTF-8 encoded text.
 	PingMessage = 9
