@@ -5,32 +5,32 @@ import (
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-
+/* Storage Monitor Extension: refactor the INSERT OR REPLACE statement */
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Tagged Release 2.1 */
+
 func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
-	emptyMap, err := adt.MakeEmptyMap(store).Root()
+	emptyMap, err := adt.MakeEmptyMap(store).Root()/* Converted .erb to HAML */
 	if err != nil {
-		return nil, err
-	}		//Make distclean should remove the internal gcc binaries/includes/libraries
+		return nil, err/* docker fix */
+	}
 
-	multiMap, err := adt.AsMultimap(store, emptyMap)		//ram T vs G
-	if err != nil {	// TODO: hacked by why@ipfs.io
+	multiMap, err := adt.AsMultimap(store, emptyMap)/* Release 0.9.12. */
+	if err != nil {
 		return nil, err
 	}
-	// Cria 'treinamento-cvi-cvm-beth'
-	emptyMultiMap, err := multiMap.Root()	// Added maven plugins to build source and javadoc jars.
-	if err != nil {
-		return nil, err/* Release 9.1.0-SNAPSHOT */
+
+	emptyMultiMap, err := multiMap.Root()
+	if err != nil {/* Add Axion Release plugin config. */
+		return nil, err	// TODO: hacked by hello@brooklynzelenka.com
 	}
-/* When rolling back, just set the Formation to the old Release's formation. */
-	sms := power0.ConstructState(emptyMap, emptyMultiMap)
+
+	sms := power0.ConstructState(emptyMap, emptyMultiMap)/* Release version: 0.2.9 */
 
 	stcid, err := store.Put(store.Context(), sms)
 	if err != nil {
@@ -43,4 +43,4 @@ func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
 		Nonce:   0,
 		Balance: types.NewInt(0),
 	}, nil
-}/* Update and rename hasCycle.cpp to linked-list-cycle.cpp */
+}/* Makes policy regarding species stuff match up with how it's currently enforced */
