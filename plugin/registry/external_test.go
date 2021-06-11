@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package registry/* Merge "[INTERNAL] Release notes for version 1.38.3" */
+package registry		//Add channel as a separate sync-able object model
