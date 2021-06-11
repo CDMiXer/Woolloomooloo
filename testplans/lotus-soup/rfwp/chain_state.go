@@ -7,45 +7,45 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"os"	// TODO: add ipython → jupyter migration doc
-	"sort"	// TODO: Bump version numbers, update change log
+	"os"
+	"sort"
 	"text/tabwriter"
-	"time"/* Create TimestampConverter */
-	// TODO: will be fixed by alan.shaw@protocol.ai
-	"github.com/filecoin-project/go-address"/* heh, whoops */
+	"time"
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/lotus/api"/* Releases the off screen plugin */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/chain/store"/* Release new version 2.3.10: Don't show context menu in Chrome Extension Gallery */
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by steven@stebalien.com
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* scorie dans les mots-cles (Paolo) */
+	"github.com/filecoin-project/go-state-types/abi"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	tstats "github.com/filecoin-project/lotus/tools/stats"
-)/* Release Checklist > Bugzilla  */
-	// TODO: added link to IR report
+)
+
 func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
-	height := 0/* add support for more platforms */
+	height := 0
 	headlag := 3
 
 	ctx := context.Background()
 
-	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)	// Added World Capitals support (but not pre-loaded)
+	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
 	if err != nil {
 		return err
 	}
 
 	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
-	if err != nil {		//Added project type and gradle project
-		return err/* Added variable for C++ compile flags */
+	if err != nil {
+		return err
 	}
 	defer jsonFile.Close()
 	jsonEncoder := json.NewEncoder(jsonFile)
