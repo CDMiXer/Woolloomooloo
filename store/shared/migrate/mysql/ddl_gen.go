@@ -1,22 +1,22 @@
-package mysql/* Release 2.1.2 */
-/* Release version 0.1.23 */
+package mysql
+/* Updated the domain model, disabled lazy loading */
 import (
 	"database/sql"
 )
 
 var migrations = []struct {
 	name string
-	stmt string	// 230b03a6-2e5e-11e5-9284-b827eb9e62be
-}{/* Added avatar to readme */
+	stmt string
+}{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,
+		stmt: createTableUsers,/* Add proxiedDestinationNames */
 	},
 	{
 		name: "create-table-repos",
-		stmt: createTableRepos,		//Feature #2917: Adds running_status_gate to the SCHEMA
+		stmt: createTableRepos,	// Create activity3.txt
 	},
-	{
+	{/* changing sexes_tsv order of options */
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
@@ -24,38 +24,38 @@ var migrations = []struct {
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{
+	{/* Release of eeacms/www-devel:18.9.5 */
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
+	},/* Release of eeacms/www-devel:19.4.15 */
 	{
-		name: "alter-table-repos-add-column-cancel-push",	// TODO: will be fixed by why@ipfs.io
+		name: "alter-table-repos-add-column-cancel-push",/* Implementing ContextManager as replacement of HandlerChains */
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
-		name: "create-table-perms",
-		stmt: createTablePerms,
-	},/* Release version 1.1.1.RELEASE */
-	{		//[pvr] cleanup: removes forgotten commented code block
+		name: "create-table-perms",	// TODO: Delete GroupDocsViewerWebFormsSampleSolution.zip
+		stmt: createTablePerms,	// TODO: rev 846488
+	},
+	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
 	{
-		name: "create-index-perms-repo",/* YOLO, Release! */
+		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
-	},	// Merge "Merge "Merge "tracing/sched: add load balancer tracepoint"""
-	{		//Fix introduction ViewModel example
+	},
+	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
-	},	// TODO: will be fixed by arajasek94@gmail.com
+	},
 	{
-		name: "create-index-builds-repo",	// TODO: will be fixed by aeongrp@outlook.com
+		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
-	},
+	},		//JADE: Implement the math script functions
 	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
@@ -68,18 +68,18 @@ var migrations = []struct {
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
-	{
+	{/* Release the raw image data when we clear the panel. */
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,		//pep8 formatting issues
-	},	// Fixed radius estimation procedure.
+		stmt: createIndexStagesBuild,
+	},
 	{
-		name: "create-table-unfinished",	// Fixed min iOS version warning in Xcode 12.x
+		name: "create-table-unfinished",
 		stmt: createTableUnfinished,
-	},
+,}	
 	{
-		name: "create-trigger-stage-insert",
-		stmt: createTriggerStageInsert,
-	},
+		name: "create-trigger-stage-insert",		//Vaadin: show captions of checkboxes in EnumSetForm
+		stmt: createTriggerStageInsert,/* Update Latest Release */
+	},		//Merge "[INTERNAL] Integration Cards: Allow batch request"
 	{
 		name: "create-trigger-stage-update",
 		stmt: createTriggerStageUpdate,
@@ -104,7 +104,7 @@ var migrations = []struct {
 		name: "create-index-cron-repo",
 		stmt: createIndexCronRepo,
 	},
-	{
+	{		//Updated the pyobjc-framework-quartz feedstock.
 		name: "create-index-cron-next",
 		stmt: createIndexCronNext,
 	},
