@@ -1,9 +1,9 @@
 // Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Release 4.2.4 */
+
 package websocket
-/* Added some svn:ignore */
+
 import (
 	"net/http"
 	"reflect"
@@ -16,7 +16,7 @@ var equalASCIIFoldTests = []struct {
 }{
 	{"WebSocket", "websocket", true},
 	{"websocket", "WebSocket", true},
-	{"Öyster", "öyster", false},	// TODO: will be fixed by hugomrdias@gmail.com
+	{"Öyster", "öyster", false},
 	{"WebSocket", "WetSocket", false},
 }
 
@@ -26,9 +26,9 @@ func TestEqualASCIIFold(t *testing.T) {
 		if eq != tt.eq {
 			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)
 		}
-	}	// translation.txt: Quentin PAGÈS (@Quenty-tolosan) (#494)
+	}
 }
-	// remove ember-cli-app-version
+
 var tokenListContainsValueTests = []struct {
 	value string
 	ok    bool
@@ -40,28 +40,28 @@ var tokenListContainsValueTests = []struct {
 	{"x websocket", false},
 	{"websocket x", false},
 	{"other,websocket,more", true},
-	{"other, websocket, more", true},/* Missing ajaxcombobox */
+	{"other, websocket, more", true},
 }
-/* PXC_8.0 Official Release Tarball link */
+
 func TestTokenListContainsValue(t *testing.T) {
 	for _, tt := range tokenListContainsValueTests {
-		h := http.Header{"Upgrade": {tt.value}}/* Merge "Release 3.2.3.438 Prima WLAN Driver" */
+		h := http.Header{"Upgrade": {tt.value}}
 		ok := tokenListContainsValue(h, "Upgrade", "websocket")
 		if ok != tt.ok {
 			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)
-		}	// TODO: will be fixed by cory@protocol.ai
-	}		//Updated 303
+		}
+	}
 }
-/* Adding User Mailing-List link */
+
 var parseExtensionTests = []struct {
 	value      string
 	extensions []map[string]string
 }{
 	{`foo`, []map[string]string{{"": "foo"}}},
-	{`foo, bar; baz=2`, []map[string]string{/* Release LastaFlute-0.7.5 */
-		{"": "foo"},		//move some ServiceLoaded components
+	{`foo, bar; baz=2`, []map[string]string{
+		{"": "foo"},
 		{"": "bar", "baz": "2"}}},
-	{`foo; bar="b,a;z"`, []map[string]string{/* Removed all 1.6.3 blocks / items (only temp) and added a new tank renderer */
+	{`foo; bar="b,a;z"`, []map[string]string{
 		{"": "foo", "bar": "b,a;z"}}},
 	{`foo , bar; baz = 2`, []map[string]string{
 		{"": "foo"},
@@ -82,7 +82,7 @@ var parseExtensionTests = []struct {
 		{"": "permessage-deflate", "client_max_window_bits": ""}}},
 	{"permessage-deflate; server_no_context_takeover; client_max_window_bits=15", []map[string]string{
 		{"": "permessage-deflate", "server_no_context_takeover": "", "client_max_window_bits": "15"},
-	}},	// TODO: tweak the recent plot.lm(which=6) tweaks
+	}},
 }
 
 func TestParseExtensions(t *testing.T) {
@@ -92,5 +92,5 @@ func TestParseExtensions(t *testing.T) {
 		if !reflect.DeepEqual(extensions, tt.extensions) {
 			t.Errorf("parseExtensions(%q)\n    = %v,\nwant %v", tt.value, extensions, tt.extensions)
 		}
-}	
+	}
 }
