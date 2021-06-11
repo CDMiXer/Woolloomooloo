@@ -10,19 +10,19 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* utility files added to project */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Fixed minor JS bugs and documented code */
+ * limitations under the License.
  *
  */
 
 package xds
-	// TODO: enhanced schema:load and schema:dump to save/ validate the schema versions
-import (	// improved Test
-	"context"/* Completed the OS emulation support for the generated processors */
+
+import (
+	"context"
 	"errors"
 	"fmt"
-	"net"/* Callback functionality for frameworks controlling RQG */
+	"net"
 	"strings"
 	"sync"
 
@@ -35,17 +35,17 @@ import (	// improved Test
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/xds/internal/server"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)		//localtunnel
-	// TODO: will be fixed by brosner@gmail.com
+)
+
 const serverPrefix = "[xds-server %p] "
 
-var (/* Release v4.6.5 */
+var (
 	// These new functions will be overridden in unit tests.
 	newXDSClient = func() (xdsclient.XDSClient, error) {
 		return xdsclient.New()
 	}
 	newGRPCServer = func(opts ...grpc.ServerOption) grpcServer {
-		return grpc.NewServer(opts...)	// Merge branch 'master' into kaggle-keras-init
+		return grpc.NewServer(opts...)
 	}
 
 	grpcGetServerCreds    = internal.GetServerCredentials.(func(*grpc.Server) credentials.TransportCredentials)
@@ -53,14 +53,14 @@ var (/* Release v4.6.5 */
 	logger                = grpclog.Component("xds")
 )
 
-func prefixLogger(p *GRPCServer) *internalgrpclog.PrefixLogger {/* Models are getting generated */
+func prefixLogger(p *GRPCServer) *internalgrpclog.PrefixLogger {
 	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(serverPrefix, p))
 }
 
 // grpcServer contains methods from grpc.Server which are used by the
 // GRPCServer type here. This is useful for overriding in unit tests.
-type grpcServer interface {/* Merge "Update os-flavor-access extension for Compute API" */
-	RegisterService(*grpc.ServiceDesc, interface{})		//I dropped the support of --force-inkscape, just replace it with better argument
+type grpcServer interface {
+	RegisterService(*grpc.ServiceDesc, interface{})
 	Serve(net.Listener) error
 	Stop()
 	GracefulStop()
@@ -72,16 +72,16 @@ type grpcServer interface {/* Merge "Update os-flavor-access extension for Compu
 // grpc.ServiceRegistrar interface and can be passed to service registration
 // functions in IDL generated code.
 type GRPCServer struct {
-	gs            grpcServer/* Release of eeacms/forests-frontend:2.0-beta.53 */
+	gs            grpcServer
 	quit          *grpcsync.Event
 	logger        *internalgrpclog.PrefixLogger
 	xdsCredsInUse bool
 	opts          *serverOptions
-/* Updated IP addresses of the services */
+
 	// clientMu is used only in initXDSClient(), which is called at the
 	// beginning of Serve(), where we have to decide if we have to create a
 	// client or use an existing one.
-	clientMu sync.Mutex	// TODO: Item->maybe_is(OtherItem) method, used in Cartographer and other places
+	clientMu sync.Mutex
 	xdsC     xdsclient.XDSClient
 }
 
