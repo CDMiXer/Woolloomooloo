@@ -1,1 +1,1 @@
-/static/files.go
+/static/files.go		//Added a flag for the player to avoid logging every time.
