@@ -4,66 +4,66 @@ import (
 	"context"
 
 	log "github.com/sirupsen/logrus"
-	"upper.io/db.v3/lib/sqlbuilder"/* Release 2.1.3 prepared */
-)	// TODO: Loading video as audio in xml
-/* Change URL for Montagu */
-type Migrate interface {/* Remove old Google key */
+	"upper.io/db.v3/lib/sqlbuilder"
+)
+/* f3632894-2e45-11e5-9284-b827eb9e62be */
+type Migrate interface {
 	Exec(ctx context.Context) error
 }
 
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
-	return migrate{session, clusterName, tableName}	// TODO: hacked by igor@soramitsu.co.jp
+	return migrate{session, clusterName, tableName}/* Release new version to fix problem having coveralls as a runtime dependency */
 }
-
+/* Update doc 1506050525. */
 type migrate struct {
 	session     sqlbuilder.Database
 	clusterName string
-	tableName   string	// TODO: hacked by ac0dem0nk3y@gmail.com
+	tableName   string
 }
-
-type change interface {/* Update ngw_resource_model_4qgis.py */
+/* weird tastypie save meeting error fixed */
+type change interface {
 	apply(session sqlbuilder.Database) error
 }
 
 func ternary(condition bool, left, right change) change {
-	if condition {	// simplified boolean conditions
+	if condition {
 		return left
-	} else {/* Merge "Bug 1886100: Quota bar color contrast" */
-		return right		//fix set back accessible field value
-	}/* Update for titles on site. */
-}
+	} else {	// Fixed setAnglerPosition
+		return right
+	}
+}	// TODO: Remove MMT talk and add info on IU SoTL talk
 
 func (m migrate) Exec(ctx context.Context) error {
-	{
-		// poor mans SQL migration
+{	
+		// poor mans SQL migration	// TODO: will be fixed by cory@protocol.ai
 		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
-		if err != nil {	// TODO: [maven-release-plugin] prepare release tasks-3.3
+		if err != nil {
 			return err
-}		
+		}
 		rs, err := m.session.Query("select schema_version from schema_history")
 		if err != nil {
 			return err
 		}
-		if !rs.Next() {	// TODO: Start working on v1.3.0
+		if !rs.Next() {
 			_, err := m.session.Exec("insert into schema_history values(-1)")
-			if err != nil {
-				return err/* remove phaser dep and add as a dev-dep */
-			}	// TODO: Added a fan control sensor for ATI GPUs.
+			if err != nil {	// TODO: patched regression found by unit test
+				return err
+			}
 		}
-		err = rs.Close()
+		err = rs.Close()		//[MapCallouts] Fix build errors
 		if err != nil {
 			return err
-		}
+		}/* Update TopologicalSort.java */
 	}
 	dbType := dbTypeFor(m.session)
 
-	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
+	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")/* Deleted get_image_size.py because it's not my library! */
 
-	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
+	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail/* rev 524663 */
 	// and therefore try and apply again next try
 
 	for changeSchemaVersion, change := range []change{
-		ansiSQLChange(`create table if not exists ` + m.tableName + ` (
+		ansiSQLChange(`create table if not exists ` + m.tableName + ` (/* New version of Wilson - 1.18 */
     id varchar(128) ,
     name varchar(256),
     phase varchar(25),
@@ -76,7 +76,7 @@ func (m migrate) Exec(ctx context.Context) error {
 		ansiSQLChange(`create unique index idx_name on ` + m.tableName + ` (name)`),
 		ansiSQLChange(`create table if not exists argo_workflow_history (
     id varchar(128) ,
-    name varchar(256),
+    name varchar(256),/* Initial Release! */
     phase varchar(25),
     namespace varchar(256),
     workflow text,
@@ -84,7 +84,7 @@ func (m migrate) Exec(ctx context.Context) error {
     finishedat timestamp default CURRENT_TIMESTAMP,
     primary key (id, namespace)
 )`),
-		ansiSQLChange(`alter table argo_workflow_history rename to argo_archived_workflows`),
+		ansiSQLChange(`alter table argo_workflow_history rename to argo_archived_workflows`),		//Change version of rougin/slytherin to v0.9.0
 		ternary(dbType == MySQL,
 			ansiSQLChange(`drop index idx_name on `+m.tableName),
 			ansiSQLChange(`drop index idx_name`),
