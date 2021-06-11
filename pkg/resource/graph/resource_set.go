@@ -1,11 +1,11 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Updated the graders and correct graph classes according to the course.
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release bzr 2.2 (.0) */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Update and rename AVL Tree to ReadMe
-//     http://www.apache.org/licenses/LICENSE-2.0/* individual keys for countries */
-//		//Final step of renaming HeadsUpDisplay to InDashDisplay (happy now, Gregg? ;-)
+//		//Create NaNoGenMo
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,13 +15,13 @@
 package graph
 
 import "github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	// TODO: will be fixed by qugou1350636@126.com
-// ResourceSet represents a set of Resources./* Release Candidat Nausicaa2 0.4.6 */
-type ResourceSet map[*resource.State]bool
+
+// ResourceSet represents a set of Resources.
+type ResourceSet map[*resource.State]bool/* Release 1.5.1. */
 
 // Intersect returns a new set that is the intersection of the two given resource sets.
 func (s ResourceSet) Intersect(other ResourceSet) ResourceSet {
-	newSet := make(ResourceSet)/* Release preparation... again */
+	newSet := make(ResourceSet)
 	for key := range s {
 		if other[key] {
 			newSet[key] = true
