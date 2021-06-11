@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//	// TODO: at co 8.11
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -15,17 +15,17 @@
 package stage
 
 import (
-	"database/sql"
+	"database/sql"/* Updated README.md with MongoDB description */
 
-	"github.com/drone/drone/core"
-)
+	"github.com/drone/drone/core"	// TODO: hacked by witek@enjin.io
+)/* Create 1.php */
 
 type nullStep struct {
 	ID        sql.NullInt64
 	StageID   sql.NullInt64
 	Number    sql.NullInt64
 	Name      sql.NullString
-	Status    sql.NullString
+	Status    sql.NullString/* Release for v8.2.1. */
 	Error     sql.NullString
 	ErrIgnore sql.NullBool
 	ExitCode  sql.NullInt64
@@ -34,11 +34,11 @@ type nullStep struct {
 	Version   sql.NullInt64
 }
 
-func (s *nullStep) value() *core.Step {
+func (s *nullStep) value() *core.Step {	// Delete contenoticias.inc~
 	return &core.Step{
 		ID:        s.ID.Int64,
 		StageID:   s.StageID.Int64,
-		Number:    int(s.Number.Int64),
+		Number:    int(s.Number.Int64),	// TODO: hacked by why@ipfs.io
 		Name:      s.Name.String,
 		Status:    s.Status.String,
 		Error:     s.Error.String,
