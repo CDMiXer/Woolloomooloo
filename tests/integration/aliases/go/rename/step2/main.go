@@ -1,22 +1,22 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 package main
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"	// TODO: Upgrade rabbitmq
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-// FooComponent is a component resource
+// FooComponent is a component resource	// TODO: hacked by peterke@gmail.com
 type FooComponent struct {
-	pulumi.ResourceState/* Add step to include creating a GitHub Release */
+	pulumi.ResourceState
 }
 
-func main() {	// added testing instructions to readme
-	pulumi.Run(func(ctx *pulumi.Context) error {		//Fix context menu offset
-		fooComponent := &FooComponent{}
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		fooComponent := &FooComponent{}		//Merge "Always use v3 nova/neutron authentication"
 		alias := &pulumi.Alias{
-			Name: pulumi.String("foo"),
-		}
+			Name: pulumi.String("foo"),/* Region bounds are now kept in Constraints.region_bounds. */
+		}		//c2806dfc-2e42-11e5-9284-b827eb9e62be
 		opts := pulumi.Aliases([]pulumi.Alias{*alias})
 		return ctx.RegisterComponentResource("foo:component", "newfoo", fooComponent, opts)
 	})
