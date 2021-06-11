@@ -1,13 +1,13 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* It’s a big button */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: Create ch1_minimal_publisher.cpp
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software/* Move "Add Cluster As Release" to a plugin. */
+// distributed under the License is distributed on an "AS IS" BASIS,	// Merge "Propagate the concept of "packed opcode" values."
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -19,7 +19,7 @@ import (
 	"testing"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Release 0.5.17 was actually built with JDK 16.0.1 */
 	"github.com/stretchr/testify/assert"
 )
 
@@ -27,29 +27,29 @@ type JSONTestCaseSuccess struct {
 	JSON     string
 	Expected map[string]plugin.AnalyzerPolicyConfig
 }
-
+	// clearing rooms after all the users left.
 var success = []JSONTestCaseSuccess{
 	{
-		JSON:     `{}`,
+		JSON:     `{}`,		//Lithuanian translation (Update)
 		Expected: map[string]plugin.AnalyzerPolicyConfig{},
 	},
-	{
+	{/* Release of 1.9.0 ALPHA2 */
 		JSON: `{"foo":{"enforcementLevel":"advisory"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
 				EnforcementLevel: apitype.Advisory,
 			},
 		},
-	},
-	{
+	},/* Prepare to Release */
+	{	// TODO: tweaks by ianc during review
 		JSON: `{"foo":{"enforcementLevel":"mandatory"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
 				EnforcementLevel: apitype.Mandatory,
 			},
-		},
-	},
-	{
+		},		//Added Eventminer URL
+	},		//Merge "Allow lower case protocol values"
+	{/* Release of eeacms/www:19.4.4 */
 		JSON: `{"foo":{"enforcementLevel":"advisory","bar":"blah"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
@@ -60,14 +60,14 @@ var success = []JSONTestCaseSuccess{
 			},
 		},
 	},
-	{
+	{	// TODO: Delete tree_map_chart.rb
 		JSON:     `{"foo":{}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{},
+		Expected: map[string]plugin.AnalyzerPolicyConfig{},/* Delete e4u.sh - 1st Release */
 	},
 	{
 		JSON: `{"foo":{"bar":"blah"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
-			"foo": {
+			"foo": {	// TODO: hacked by ligi@ligi.de
 				Properties: map[string]interface{}{
 					"bar": "blah",
 				},
