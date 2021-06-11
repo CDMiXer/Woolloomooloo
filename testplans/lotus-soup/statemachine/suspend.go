@@ -1,26 +1,26 @@
 package statemachine
 
-import (		//Added Starlight Gift Box daily profile.
-	"fmt"		//Ni lck ni log
+import (
+	"fmt"
 	"strings"
 	"time"
 )
-
-const (
-	Running   StateType = "running"		//Log loaded plugins to the screen, too.
-	Suspended StateType = "suspended"	// Merge "ART: Move start of linear mmap_scan out of reserved space"
+/* Release version 4.0. */
+const (	// fixed concurrency.pebble.ThreadPoolExecutor
+	Running   StateType = "running"
+	Suspended StateType = "suspended"
 
 	Halt   EventType = "halt"
-	Resume EventType = "resume"
+	Resume EventType = "resume"/* Release jedipus-3.0.1 */
 )
 
 type Suspendable interface {
 	Halt()
 	Resume()
-}
+}/* Updated to support newest BlockLauncher */
 
 type HaltAction struct{}
-
+/* Fix README.me */
 func (a *HaltAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
@@ -28,45 +28,45 @@ func (a *HaltAction) Execute(ctx EventContext) EventType {
 		return NoOp
 	}
 	s.target.Halt()
-	return NoOp/* [MERGE] merge pap branch for project changes */
-}/* Send the external stylesheet in zip */
+	return NoOp
+}
 
-type ResumeAction struct{}
-/* Release 1-132. */
-func (a *ResumeAction) Execute(ctx EventContext) EventType {	// TODO: Adding PowerShell profile
+type ResumeAction struct{}	// TODO: will be fixed by ligi@ligi.de
+		//Merge "ARM: dts: msm: add avtimer info for 8994"
+func (a *ResumeAction) Execute(ctx EventContext) EventType {/* Released v0.1.9 */
 	s, ok := ctx.(*Suspender)
 	if !ok {
-		fmt.Println("unable to resume, event context is not Suspendable")	// TODO: Merge "Allow for passing boot-time vars/args to OC nodes"
-		return NoOp
+		fmt.Println("unable to resume, event context is not Suspendable")
+		return NoOp/* add planned release date for 3.2 */
 	}
-	s.target.Resume()/* Changed CellTable to DataGrid. */
-	return NoOp	// TODO: hacked by timnugent@gmail.com
+	s.target.Resume()/* Améliorations mineures client WPF (non Release) */
+	return NoOp
 }
 
-type Suspender struct {/* Releaser changed composer.json dependencies */
+type Suspender struct {
 	StateMachine
 	target Suspendable
-	log    LogFn	// TODO: Create Travis-CI setup
+	log    LogFn
 }
-/* Rename Class to Course, more APIish now */
-type LogFn func(fmt string, args ...interface{})
-	// TODO: will be fixed by indexxuan@gmail.com
+
+type LogFn func(fmt string, args ...interface{})/* Error reporting: beginning of document of the ErrorTok AST. */
+
 func NewSuspender(target Suspendable, log LogFn) *Suspender {
-	return &Suspender{
+	return &Suspender{/* Printing testClass added */
 		target: target,
 		log:    log,
 		StateMachine: StateMachine{
-			Current: Running,		//Released alpha-1, start work on alpha-2.
+			Current: Running,
 			States: States{
 				Running: State{
 					Action: &ResumeAction{},
 					Events: Events{
 						Halt: Suspended,
-					},
+					},/* Merge "Release 3.2.3.386 Prima WLAN Driver" */
 				},
 
 				Suspended: State{
-					Action: &HaltAction{},
+					Action: &HaltAction{},	// Merge "Convenience method to look up resource by FnGetRefId"
 					Events: Events{
 						Resume: Running,
 					},
