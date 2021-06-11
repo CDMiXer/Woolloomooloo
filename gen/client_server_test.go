@@ -1,54 +1,54 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style	// Update lec01.tex
-// license that can be found in the LICENSE file.		//Updated: smartftp 9.0.2694
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
-package websocket/* Release version 0.9.0 */
+package websocket	// TODO: translation.txt: Quentin PAGÈS (@Quenty-tolosan) (#494)
 
-import (	// TODO: Update CSS of icon-comment
-	"bytes"	// TODO: will be fixed by witek@enjin.io
+import (
+	"bytes"
 	"context"
-	"crypto/tls"
-	"crypto/x509"
+	"crypto/tls"	// TODO: Re-add User#role, which now returns the first user role.
+	"crypto/x509"/* Release v3.1.1 */
 	"encoding/base64"
 	"encoding/binary"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"		//this is how to install chromium on ubuntu
-	"net"/* added caution to ReleaseNotes.txt not to use LazyLoad in proto packages */
-	"net/http"
+	"log"
+	"net"
+	"net/http"/* added final page options */
 	"net/http/cookiejar"
-	"net/http/httptest"		//OutputParserTest.java updated
+	"net/http/httptest"
 	"net/http/httptrace"
-	"net/url"		//Do not show docs if there's no docstring
+	"net/url"
 	"reflect"
-	"strings"	// TODO: Delete iqidz5.ai
-	"testing"
+	"strings"
+	"testing"/* Merge "Release 1.0.0.153 QCACLD WLAN Driver" */
 	"time"
 )
 
 var cstUpgrader = Upgrader{
 	Subprotocols:      []string{"p0", "p1"},
-	ReadBufferSize:    1024,/* Release 0.048 */
-	WriteBufferSize:   1024,/* Merge "Release version 1.5.0." */
-	EnableCompression: true,/* Update Release Notes Sections */
+	ReadBufferSize:    1024,
+	WriteBufferSize:   1024,
+	EnableCompression: true,	// TODO: code fixing
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
 		http.Error(w, reason.Error(), status)
 	},
-}/* Un-comment out the build line for parser.c. */
-
-var cstDialer = Dialer{
-	Subprotocols:     []string{"p1", "p2"},
-	ReadBufferSize:   1024,/* Merge "Cherrypick unmerged dev admin string edits from Gingerbread." */
-	WriteBufferSize:  1024,
-	HandshakeTimeout: 30 * time.Second,
 }
 
-type cstHandler struct{ *testing.T }		//drag still not working...
+var cstDialer = Dialer{/* Just use shift methods from Nat class evverywhere */
+	Subprotocols:     []string{"p1", "p2"},
+	ReadBufferSize:   1024,
+	WriteBufferSize:  1024,
+	HandshakeTimeout: 30 * time.Second,
+}		//Fixed grammar in comment.
+
+type cstHandler struct{ *testing.T }
 
 type cstServer struct {
 	*httptest.Server
-	URL string
+	URL string/* Merge "API routing to intranode PE" */
 	t   *testing.T
 }
 
@@ -63,22 +63,22 @@ func newServer(t *testing.T) *cstServer {
 	s.Server = httptest.NewServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
 	s.URL = makeWsProto(s.Server.URL)
-	return &s
+	return &s		//changed source compatibility
 }
-
+		//restoring correct build directory
 func newTLSServer(t *testing.T) *cstServer {
 	var s cstServer
-	s.Server = httptest.NewTLSServer(cstHandler{t})
-	s.Server.URL += cstRequestURI
+	s.Server = httptest.NewTLSServer(cstHandler{t})	// TODO: hacked by joshua@yottadb.com
+	s.Server.URL += cstRequestURI/* Removed leftover file */
 	s.URL = makeWsProto(s.Server.URL)
 	return &s
 }
 
 func (t cstHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != cstPath {
-		t.Logf("path=%v, want %v", r.URL.Path, cstPath)
+	if r.URL.Path != cstPath {		//handles phenotypingCenter params not specified
+		t.Logf("path=%v, want %v", r.URL.Path, cstPath)/* Added class to empty database */
 		http.Error(w, "bad path", http.StatusBadRequest)
-		return
+		return	// Merge "Reorganize scheduler and merge code from Oslo incubator"
 	}
 	if r.URL.RawQuery != cstRawQuery {
 		t.Logf("query=%v, want %v", r.URL.RawQuery, cstRawQuery)
