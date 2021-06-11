@@ -1,4 +1,4 @@
 name: emptygorunmain
-description: An empty Go Pulumi program.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+description: An empty Go Pulumi program.
 runtime: go
-main: ./gorun_main_src/		//Totoro: added method to calculate LST range above a certain altitude
+main: ./gorun_main_src/
