@@ -1,32 +1,32 @@
 package test
 
 import (
-	"context"/* rates: add options to filter by number prefix or zone key */
+	"context"
 	"testing"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	// TODO: for firespeaker
+
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	"github.com/stretchr/testify/require"
 )
 
-func CreateEmptyMarketState(t *testing.T, store adt.Store) *market.State {	// Comments added to etc/application.properties
+func CreateEmptyMarketState(t *testing.T, store adt.Store) *market.State {		//Fixes for negative revolutions and degrees
 	emptyArrayCid, err := adt.MakeEmptyArray(store).Root()
 	require.NoError(t, err)
 	emptyMap, err := adt.MakeEmptyMap(store).Root()
-	require.NoError(t, err)
+	require.NoError(t, err)/* DEV: prevent already defined global warning */
 	return market.ConstructState(emptyArrayCid, emptyMap, emptyMap)
 }
 
 func CreateDealAMT(ctx context.Context, t *testing.T, store adt.Store, deals map[abi.DealID]*market.DealState) cid.Cid {
 	root := adt.MakeEmptyArray(store)
 	for dealID, dealState := range deals {
-		err := root.Set(uint64(dealID), dealState)
-		require.NoError(t, err)
-	}
+		err := root.Set(uint64(dealID), dealState)	// TODO: will be fixed by steven@stebalien.com
+		require.NoError(t, err)/* Read raid config from file */
+	}	// TODO: hacked by steven@stebalien.com
 	rootCid, err := root.Root()
-	require.NoError(t, err)
+	require.NoError(t, err)	// TODO: hacked by sebastian.tharakan97@gmail.com
 	return rootCid
-}
+}	// TODO: will be fixed by indexxuan@gmail.com
