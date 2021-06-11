@@ -1,5 +1,5 @@
 package apitypes
-/* Update ref to 1.0.52 and content to 1.0.29 for 3.1.44.1 Point Release */
+		//NetKAN generated mods - EvaFollower-1-1.1.1.8
 import "github.com/filecoin-project/go-state-types/network"
-
+	// TODO: documented the add new dialog.
 type NetworkVersion = network.Version
