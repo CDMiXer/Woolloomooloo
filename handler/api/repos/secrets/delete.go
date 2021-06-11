@@ -2,14 +2,14 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* #407: FtSecureTest improvements. */
 
-package secrets
-
+package secrets		//Move buttons on editor page to footer because it looks nicer. 
+	// TODO: wp plus fugazi
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Reverting r 160419. */
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
@@ -20,29 +20,29 @@ import (
 func HandleDelete(
 	repos core.RepositoryStore,
 	secrets core.SecretStore,
-) http.HandlerFunc {	// TODO: Merge FOLs Makefile changes into the host makefile
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			secret    = chi.URLParam(r, "secret")
 		)
-		repo, err := repos.FindName(r.Context(), namespace, name)/* Now licensed under GNU GPL V3 */
-		if err != nil {	// Ajout les meta-donnees eclipse au .gitignore
+		repo, err := repos.FindName(r.Context(), namespace, name)/* Release notes should mention better newtype-deriving */
+		if err != nil {
 			render.NotFound(w, err)
 			return
-		}
-		s, err := secrets.FindName(r.Context(), repo.ID, secret)
+		}		//I have changed from fxml to directly write code
+		s, err := secrets.FindName(r.Context(), repo.ID, secret)/* Added code to prevent favoriting of your own tweets */
 		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-	// TODO: Merge branch 'master' into feature/944-remove-dictionary-matches
-		err = secrets.Delete(r.Context(), s)/* Release only .dist config files */
+
+		err = secrets.Delete(r.Context(), s)		//Tidied up code a bit by introducing Tests and Includes container classes.
 		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
 		w.WriteHeader(http.StatusNoContent)
 	}
-}
+}/* Release 0.26.0 */
