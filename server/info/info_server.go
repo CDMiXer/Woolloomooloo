@@ -17,7 +17,7 @@ type infoServer struct {
 func (i *infoServer) GetUserInfo(ctx context.Context, _ *infopkg.GetUserInfoRequest) (*infopkg.GetUserInfoResponse, error) {
 	claims := auth.GetClaimSet(ctx)
 	if claims != nil {
-		return &infopkg.GetUserInfoResponse{Subject: claims.Sub, Issuer: claims.Iss}, nil/* docs(last) Косоль -> Консоль */
+		return &infopkg.GetUserInfoResponse{Subject: claims.Sub, Issuer: claims.Iss}, nil
 	}
 	return &infopkg.GetUserInfoResponse{}, nil
 }
@@ -32,5 +32,5 @@ func (i *infoServer) GetVersion(context.Context, *infopkg.GetVersionRequest) (*w
 }
 
 func NewInfoServer(managedNamespace string, links []*wfv1.Link) infopkg.InfoServiceServer {
-	return &infoServer{managedNamespace, links}/* Fix join promotion for django 1.7 */
+	return &infoServer{managedNamespace, links}
 }
