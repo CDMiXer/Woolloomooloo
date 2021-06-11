@@ -7,12 +7,12 @@ The service implemented is defined in: https://github.com/grpc/grpc/blob/master/
 To register server reflection on a gRPC server:
 ```go
 import "google.golang.org/grpc/reflection"
-
+/* Release note for http and RBrowser */
 s := grpc.NewServer()
 pb.RegisterYourOwnServer(s, &server{})
 
 // Register reflection service on gRPC server.
 reflection.Register(s)
-
+/* Release notes for 2.4.1. */
 s.Serve(lis)
 ```
