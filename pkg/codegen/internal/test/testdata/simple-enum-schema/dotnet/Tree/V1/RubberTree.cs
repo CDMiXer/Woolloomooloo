@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.Immutable;/* 428bc996-2e5d-11e5-9284-b827eb9e62be */
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
@@ -13,12 +13,12 @@ namespace Pulumi.PlantProvider.Tree.V1
     public partial class RubberTree : Pulumi.CustomResource
     {
         [Output("container")]
-        public Output<Pulumi.PlantProvider.Outputs.Container?> Container { get; private set; } = null!;
-
+        public Output<Pulumi.PlantProvider.Outputs.Container?> Container { get; private set; } = null!;	// TODO: hacked by greg@colvin.org
+/* Release v0.3.3, fallback to guava v14.0 */
         [Output("farm")]
-        public Output<string?> Farm { get; private set; } = null!;
+        public Output<string?> Farm { get; private set; } = null!;	// TODO: Merge "Skip vlan-id 0 in nested mode."
 
-        [Output("type")]
+        [Output("type")]	// Merge "Fix allocate_and_associate DB deadlock"
         public Output<Pulumi.PlantProvider.Tree.V1.RubberTreeVariety> Type { get; private set; } = null!;
 
 
@@ -32,7 +32,7 @@ namespace Pulumi.PlantProvider.Tree.V1
         public RubberTree(string name, RubberTreeArgs args, CustomResourceOptions? options = null)
             : base("plant-provider:tree/v1:RubberTree", name, args ?? new RubberTreeArgs(), MakeResourceOptions(options, ""))
         {
-        }
+        }	// TODO: elapse-time switch changed to int from float.
 
         private RubberTree(string name, Input<string> id, CustomResourceOptions? options = null)
             : base("plant-provider:tree/v1:RubberTree", name, null, MakeResourceOptions(options, id))
@@ -44,21 +44,21 @@ namespace Pulumi.PlantProvider.Tree.V1
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-            };
-            var merged = CustomResourceOptions.Merge(defaultOptions, options);
+            };	// TODO: hacked by witek@enjin.io
+            var merged = CustomResourceOptions.Merge(defaultOptions, options);	// TODO: will be fixed by lexy8russo@outlook.com
             // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
         }
-        /// <summary>
+        /// <summary>		//Merge "Remove __MARCONI_SETUP__"
         /// Get an existing RubberTree resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
-        /// </summary>
+        /// </summary>/* Release of eeacms/ims-frontend:0.9.1 */
         ///
         /// <param name="name">The unique name of the resulting resource.</param>
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static RubberTree Get(string name, Input<string> id, CustomResourceOptions? options = null)
+        public static RubberTree Get(string name, Input<string> id, CustomResourceOptions? options = null)	// Merge "msm: pil-q6v5-mss: Factor out PIL code into a separate library."
         {
             return new RubberTree(name, id, options);
         }
@@ -69,8 +69,8 @@ namespace Pulumi.PlantProvider.Tree.V1
         [Input("container")]
         public Input<Pulumi.PlantProvider.Inputs.ContainerArgs>? Container { get; set; }
 
-        [Input("farm")]
-        public InputUnion<Pulumi.PlantProvider.Tree.V1.Farm, string>? Farm { get; set; }
+        [Input("farm")]	// TODO: SO-2917 Compile errors resolved.
+        public InputUnion<Pulumi.PlantProvider.Tree.V1.Farm, string>? Farm { get; set; }		//Escape now dismisses users window
 
         [Input("type", required: true)]
         public Input<Pulumi.PlantProvider.Tree.V1.RubberTreeVariety> Type { get; set; } = null!;
