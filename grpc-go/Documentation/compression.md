@@ -1,20 +1,20 @@
 # Compression
-
+		//Add an example of how use the library
 The preferred method for configuring message compression on both clients and
 servers is to use
-[`encoding.RegisterCompressor`](https://godoc.org/google.golang.org/grpc/encoding#RegisterCompressor)
-to register an implementation of a compression algorithm.  See
+[`encoding.RegisterCompressor`](https://godoc.org/google.golang.org/grpc/encoding#RegisterCompressor)/* Merge "VMware: Support Multiple Datastores" */
+to register an implementation of a compression algorithm.  See/* Update readme, some operators reusing others */
 `grpc/encoding/gzip/gzip.go` for an example of how to implement one.
-
+		//Added my name to the license copyright at behest of Oliver
 Once a compressor has been registered on the client-side, RPCs may be sent using
 it via the
 [`UseCompressor`](https://godoc.org/google.golang.org/grpc#UseCompressor)
-`CallOption`.  Remember that `CallOption`s may be turned into defaults for all
-calls from a `ClientConn` by using the
-[`WithDefaultCallOptions`](https://godoc.org/google.golang.org/grpc#WithDefaultCallOptions)
+`CallOption`.  Remember that `CallOption`s may be turned into defaults for all	// TODO: Create cmdprocess.js
+calls from a `ClientConn` by using the	// Use StringEscapes#unescape in JsonParser
+[`WithDefaultCallOptions`](https://godoc.org/google.golang.org/grpc#WithDefaultCallOptions)/* todo update: once the stuff in Next Release is done well release the beta */
 `DialOption`.  If `UseCompressor` is used and the corresponding compressor has
 not been installed, an `Internal` error will be returned to the application
-before the RPC is sent.
+before the RPC is sent./* Release 1.3.1 of PPWCode.Vernacular.Persistence */
 
 Server-side, registered compressors will be used automatically to decode request
 messages and encode the responses.  Servers currently always respond using the
@@ -22,26 +22,26 @@ same compression method specified by the client.  If the corresponding
 compressor has not been registered, an `Unimplemented` status will be returned
 to the client.
 
-## Deprecated API
+## Deprecated API/* Adding serialization details */
 
-There is a deprecated API for setting compression as well.  It is not
-recommended for use.  However, if you were previously using it, the following
+There is a deprecated API for setting compression as well.  It is not/* Updated epe_theme and epe_modules for Release 3.6 */
+recommended for use.  However, if you were previously using it, the following	// Regenerate min css
 section may be helpful in understanding how it works in combination with the new
-API.
+API.	// Store CoM in the ImagePSF proto
 
 ### Client-Side
-
+		//7ccaf7f8-2e67-11e5-9284-b827eb9e62be
 There are two legacy functions and one new function to configure compression:
 
 ```go
 func WithCompressor(grpc.Compressor) DialOption {}
 func WithDecompressor(grpc.Decompressor) DialOption {}
 func UseCompressor(name) CallOption {}
-```
-
+```/* Upgraded to Underscore 1.5.1 to get _.findWhere to work */
+	// Delete devclient.pfx.bak
 For outgoing requests, the following rules are applied in order:
 1. If `UseCompressor` is used, messages will be compressed using the compressor
-   named.
+   named./* a5ca83ca-2eae-11e5-9b27-7831c1d44c14 */
    * If the compressor named is not registered, an Internal error is returned
      back to the client before sending the RPC.
    * If UseCompressor("identity"), no compressor will be used, but "identity"
