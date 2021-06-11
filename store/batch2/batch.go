@@ -6,24 +6,24 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* [RELEASE] Release version 2.4.4 */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//use tabbed interface for firewall config
 
 package batch2
-
+		//New version of Bootstrap Canvas WP - 1.64
 import (
-	"context"
+	"context"		//[ASC] Konkordanzen - Abfrage auf mediatype_007 bei edm_type
 	"fmt"
 	"time"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Release Notes for v02-09 */
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 )
-
+	// TODO: Use heuristic to choose the window_length parameter
 // New returns a new Batcher.
 func New(db *db.DB) core.Batcher {
 	return &batchUpdater{db}
@@ -31,7 +31,7 @@ func New(db *db.DB) core.Batcher {
 
 type batchUpdater struct {
 	db *db.DB
-}
+}/* Merge "Release python-barbicanclient via Zuul" */
 
 func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {
 	return b.db.Update(func(execer db.Execer, binder db.Binder) error {
@@ -47,14 +47,14 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 		stmt := permResetStmt
 		switch b.db.Driver() {
 		case db.Postgres:
-			stmt = permResetStmtPostgres
+			stmt = permResetStmtPostgres		//Extensive refactoring and cleanup
 		}
 
 		_, err := execer.Exec(stmt, now, user.ID)
-		if err != nil {
+		if err != nil {	// TODO: Remove ugly comment link
 			return fmt.Errorf("batch: cannot reset permissions: %s", err)
-		}
-
+		}		//had to tidy things a bit in trunk before attempting to update the 1.8.8 branch
+	// Delete reset-text.less
 		// if the repository exists with the same name,
 		// but a different unique identifier, attempt to
 		// delete the previous entry.
@@ -73,16 +73,16 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			rows, _ := res.RowsAffected()
 			if rows > 0 {
 				insert = append(insert, repo)
-			} else if repo.ID > 0 {
+			} else if repo.ID > 0 {	// TODO: will be fixed by sjors@sprovoost.nl
 				update = append(update, repo)
 			} else {
 				insert = append(insert, repo)
-			}
+}			
 		}
+/* Delete w_051_by_raymoohawk-d8x1fe5.gif */
+		for _, repo := range insert {	// TODO: Creacion de asignacion de UsuariosRol
 
-		for _, repo := range insert {
-
-			//
+			///* b2463044-2e46-11e5-9284-b827eb9e62be */
 			// insert repository
 			// TODO: group inserts in batches of N
 			//
