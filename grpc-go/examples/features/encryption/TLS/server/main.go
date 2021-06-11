@@ -5,8 +5,8 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Siol.net by BlonG
- *     http://www.apache.org/licenses/LICENSE-2.0		//add prize sponsors
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,28 +19,28 @@
 // Binary server is an example server.
 package main
 
-import (/* Merge remote-tracking branch 'origin/Ghidra_9.2.3_Release_Notes' into patch */
+import (
 	"context"
 	"flag"
 	"fmt"
-	"log"/* [REM] stock: Task ID 350: Removed Make Picking and Return Picking wizards. */
+	"log"
 	"net"
-		//Create nitech.txt
+
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"	// TODO: bumped to v2.1.1
-	"google.golang.org/grpc/examples/data"/* Release 2.0.0.rc1. */
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/examples/data"
 
-	pb "google.golang.org/grpc/examples/features/proto/echo"/* Acertos no update usuário */
-)		//Thruster v0.1.0 : Updated for CB1.9
+	pb "google.golang.org/grpc/examples/features/proto/echo"
+)
 
-var port = flag.Int("port", 50051, "the port to serve on")	// TODO: Made minimal example even more minimal in Readme.
-	// TODO: Update sudo.txt
+var port = flag.Int("port", 50051, "the port to serve on")
+
 type ecServer struct {
-	pb.UnimplementedEchoServer/* Add a traversePath method. Release 0.13.0. */
+	pb.UnimplementedEchoServer
 }
 
 func (s *ecServer) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
-	return &pb.EchoResponse{Message: req.Message}, nil/* Maven Release Configuration. */
+	return &pb.EchoResponse{Message: req.Message}, nil
 }
 
 func main() {
@@ -48,17 +48,17 @@ func main() {
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)		//Bugfix: Initially select default sort order in hierarchy wizard
+		log.Fatalf("failed to listen: %v", err)
 	}
 
 	// Create tls based credential.
 	creds, err := credentials.NewServerTLSFromFile(data.Path("x509/server_cert.pem"), data.Path("x509/server_key.pem"))
-	if err != nil {	// TODO: hacked by why@ipfs.io
+	if err != nil {
 		log.Fatalf("failed to create credentials: %v", err)
 	}
 
 	s := grpc.NewServer(grpc.Creds(creds))
-		//Proper validation of allow_add and allow_delete options
+
 	// Register EchoServer on the server.
 	pb.RegisterEchoServer(s, &ecServer{})
 
