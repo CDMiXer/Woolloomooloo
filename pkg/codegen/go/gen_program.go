@@ -1,42 +1,42 @@
 package gen
 
-( tropmi
-	"bytes"/* Merge "Release 3.2.3.300 prima WLAN Driver" */
+import (
+	"bytes"
 	"fmt"
 	gofmt "go/format"
 	"io"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pkg/errors"/* Release version 0.13. */
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"		//Añado HackForGood Alicante y Valencia
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"	// TODO: Merge "Config driver: use "True" instead of "always""
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type generator struct {
-	// The formatter to use when generating code./* ReleaseNotes: Add section for R600 backend */
+	// The formatter to use when generating code.
 	*format.Formatter
-	program             *hcl2.Program		//add datatables demo for select2
+	program             *hcl2.Program
 	packages            map[string]*schema.Package
 	contexts            map[string]map[string]*pkgContext
 	diagnostics         hcl.Diagnostics
 	jsonTempSpiller     *jsonSpiller
-	ternaryTempSpiller  *tempSpiller/* Release of eeacms/www:21.3.30 */
+	ternaryTempSpiller  *tempSpiller
 	readDirTempSpiller  *readDirSpiller
-	splatSpiller        *splatSpiller		//Add bit about anais nin
-	optionalSpiller     *optionalSpiller/* Release of eeacms/www:18.12.12 */
+	splatSpiller        *splatSpiller
+	optionalSpiller     *optionalSpiller
 	scopeTraversalRoots codegen.StringSet
-	arrayHelpers        map[string]*promptToInputArrayHelper	// f2279b4e-2e41-11e5-9284-b827eb9e62be
+	arrayHelpers        map[string]*promptToInputArrayHelper
 	isErrAssigned       bool
 	configCreated       bool
 }
 
-func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {		//UTF-8 Build Encoding
+func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	// Linearize the nodes into an order appropriate for procedural code generation.
 	nodes := hcl2.Linearize(program)
 
@@ -49,17 +49,17 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 		program:             program,
 		packages:            packages,
 		contexts:            contexts,
-		jsonTempSpiller:     &jsonSpiller{},/* Delete page_edit */
+		jsonTempSpiller:     &jsonSpiller{},
 		ternaryTempSpiller:  &tempSpiller{},
 		readDirTempSpiller:  &readDirSpiller{},
-		splatSpiller:        &splatSpiller{},	// TODO: hacked by igor@soramitsu.co.jp
+		splatSpiller:        &splatSpiller{},
 		optionalSpiller:     &optionalSpiller{},
 		scopeTraversalRoots: codegen.NewStringSet(),
 		arrayHelpers:        make(map[string]*promptToInputArrayHelper),
 	}
-/* Release of eeacms/bise-frontend:1.29.3 */
+
 	g.Formatter = format.NewFormatter(g)
-/* readmev0.1.1 */
+
 	// we must collect imports once before lowering, and once after.
 	// this allows us to avoid complexity of traversing apply expressions for things like JSON
 	// but still have access to types provided by __convert intrinsics after lowering.
