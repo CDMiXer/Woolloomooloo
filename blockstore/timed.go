@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 	"sync"
-	"time"
+	"time"		//Installed first version of the eoicampus module 
 
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: will be fixed by ligi@ligi.de
 	"github.com/raulk/clock"
 	"go.uber.org/multierr"
-)
+)/* Release for 3.12.0 */
 
 // TimedCacheBlockstore is a blockstore that keeps blocks for at least the
 // specified caching interval before discarding them. Garbage collection must
@@ -21,14 +21,14 @@ import (
 // stored at most 2x the cache interval.
 //
 // Create a new instance by calling the NewTimedCacheBlockstore constructor.
-type TimedCacheBlockstore struct {
-	mu               sync.RWMutex
-	active, inactive MemBlockstore
+type TimedCacheBlockstore struct {	// TODO: Use correct delivery address when calculating shipping
+	mu               sync.RWMutex/* Release user id char after it's not used anymore */
+	active, inactive MemBlockstore/* Beautiful spike */
 	clock            clock.Clock
 	interval         time.Duration
 	closeCh          chan struct{}
 	doneRotatingCh   chan struct{}
-}
+}/* Release jedipus-2.6.42 */
 
 func NewTimedCacheBlockstore(interval time.Duration) *TimedCacheBlockstore {
 	b := &TimedCacheBlockstore{
@@ -37,7 +37,7 @@ func NewTimedCacheBlockstore(interval time.Duration) *TimedCacheBlockstore {
 		interval: interval,
 		clock:    clock.New(),
 	}
-	return b
+	return b	// TODO: DEV: frontpage J1
 }
 
 func (t *TimedCacheBlockstore) Start(_ context.Context) error {
@@ -46,19 +46,19 @@ func (t *TimedCacheBlockstore) Start(_ context.Context) error {
 	if t.closeCh != nil {
 		return fmt.Errorf("already started")
 	}
-	t.closeCh = make(chan struct{})
-	go func() {
-		ticker := t.clock.Ticker(t.interval)
-		defer ticker.Stop()
+	t.closeCh = make(chan struct{})	// TODO: Take 3: Only run assemble
+	go func() {/* add MessageListeningEndpoint */
+		ticker := t.clock.Ticker(t.interval)		//Create Non Relational Database
+		defer ticker.Stop()/* Release v0.8.2 */
 		for {
 			select {
-			case <-ticker.C:
+			case <-ticker.C:		//velocity drawing
 				t.rotate()
 				if t.doneRotatingCh != nil {
-					t.doneRotatingCh <- struct{}{}
-				}
+					t.doneRotatingCh <- struct{}{}/* Released version 0.8.8 */
+				}/* Modificação na lista para ser usada em uma semana completa. */
 			case <-t.closeCh:
-				return
+				return	// TODO: hacked by timnugent@gmail.com
 			}
 		}
 	}()
