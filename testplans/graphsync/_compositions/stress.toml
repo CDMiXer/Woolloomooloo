@@ -8,7 +8,7 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.run.test_params]
+[global.run.test_params]/* Release version: 0.2.7 */
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
@@ -17,7 +17,7 @@ concurrency = "10"
 [[groups]]
   id = "providers"
   instances = { count = 1 }
-
+	// TODO: added slideshow resize event
 [[groups]]
   id = "requestors"
   instances = { count = 1 }
