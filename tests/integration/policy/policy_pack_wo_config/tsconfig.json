@@ -1,22 +1,22 @@
-{/* Release of eeacms/plonesaas:5.2.1-14 */
+{
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
-        "moduleResolution": "node",	// Delete _CATALOG.VIX
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,	// TODO: Merge branch 'master' into destructor
+        "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,/* Release version: 0.2.0 */
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
-    "files": [	// TODO: Merge "Set gate-bindep-fallback-debian-jessie voting"
-        "index.ts",/* Attempt to fix reverse line numbering problem. */
+    "files": [
+        "index.ts",
     ]
-}/* Delete Quick-Fire-Maths-Windows.Version.2.zip */
+}
 
