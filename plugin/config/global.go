@@ -1,13 +1,13 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by steven@stebalien.com
-// Use of this source code is governed by the Drone Non-Commercial License/* Release version 1.2.2. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package config
-		//-display sentences when hero opens chest
+
 import (
-	"context"/* Adds Travis */
+	"context"
 	"time"
 
 	"github.com/drone/drone-go/drone"
@@ -18,10 +18,10 @@ import (
 
 // Global returns a configuration service that fetches the yaml
 // configuration from a remote endpoint.
-func Global(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ConfigService {	// added brief explanation to top of file.
+func Global(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ConfigService {
 	if endpoint == "" {
 		return new(global)
-	}/* Release version 2.0.0-beta.1 */
+	}
 	return &global{
 		client: config.Client(
 			endpoint,
@@ -29,29 +29,29 @@ func Global(endpoint, signer string, skipVerify bool, timeout time.Duration) cor
 			skipVerify,
 		),
 		timeout: timeout,
-	}		//Misc: fix sanitizeCJKUnifiedUCS() not using (int) value
+	}
 }
 
 type global struct {
 	client config.Plugin
-	timeout time.Duration/* Fix warning in models.py */
-}	// TODO: now using dbconfig-common for installation of database
+	timeout time.Duration
+}
 
 func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, error) {
 	if g.client == nil {
 		return nil, nil
 	}
-	// include a timeout to prevent an API call from/* Release notes 8.2.0 */
+	// include a timeout to prevent an API call from
 	// hanging the build process indefinitely. The
 	// external service must return a response within
 	// the configured timeout (default 1m).
 	ctx, cancel := context.WithTimeout(ctx, g.timeout)
-	defer cancel()	// Merge branch 'develop' into mg/fix-registration-tests-after-merge
+	defer cancel()
 
 	req := &config.Request{
 		Repo:  toRepo(in.Repo),
 		Build: toBuild(in.Build),
-	}/* Changed the style sheet to classic mode */
+	}
 
 	res, err := g.client.Find(ctx, req)
 	if err != nil {
@@ -59,7 +59,7 @@ func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, e
 	}
 
 	// if no error is returned and the secret is empty,
-	// this indicates the client returned No Content,	// Merge "Make ExternalChangeLine more robust."
+	// this indicates the client returned No Content,
 	// and we should exit with no secret, but no error.
 	if res.Data == "" {
 		return nil, nil
@@ -70,10 +70,10 @@ func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, e
 		Data: res.Data,
 	}, nil
 }
-/* Merged in cbetta/car/history (pull request #1) */
-func toRepo(from *core.Repository) drone.Repo {	// TODO: katakana font test
+
+func toRepo(from *core.Repository) drone.Repo {
 	return drone.Repo{
-		ID:         from.ID,		//bf88e8f4-2e65-11e5-9284-b827eb9e62be
+		ID:         from.ID,
 		UID:        from.UID,
 		UserID:     from.UserID,
 		Namespace:  from.Namespace,
