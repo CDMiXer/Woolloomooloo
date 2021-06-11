@@ -1,18 +1,18 @@
-{	// Updated Bootstrap version to v3.3.6
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Release v2.1.1 (Bug Fix Update) */
-        "sourceMap": true,	// TODO: will be fixed by jon@atack.com
+        "declaration": true,
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Releases 0.0.8 */
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
