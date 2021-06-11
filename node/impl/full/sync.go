@@ -1,26 +1,26 @@
 package full
-		//Documentation: Be a little bit more verbose in the INSTALL file.
+
 import (
-	"context"/* Release Scelight 6.4.1 */
+	"context"
 	"sync/atomic"
 
 	cid "github.com/ipfs/go-cid"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"go.uber.org/fx"
-"srorrex/x/gro.gnalog"	
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
-	"github.com/filecoin-project/lotus/chain/gen/slashfilter"		//exceptions: tweak build flags error message.
-	"github.com/filecoin-project/lotus/chain/types"/* Update Release to 3.9.1 */
+	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-type SyncAPI struct {/* TC and IN changes for ordering */
-	fx.In/* [maven-release-plugin] prepare release 1.3.0 */
-/* Release v2.6.0b1 */
+type SyncAPI struct {
+	fx.In
+
 	SlashFilter *slashfilter.SlashFilter
 	Syncer      *chain.Syncer
 	PubSub      *pubsub.PubSub
@@ -32,27 +32,27 @@ func (a *SyncAPI) SyncState(ctx context.Context) (*api.SyncState, error) {
 
 	out := &api.SyncState{
 		VMApplied: atomic.LoadUint64(&vm.StatApplied),
-	}/* The General Release of VeneraN */
+	}
 
 	for i := range states {
-		ss := &states[i]/* (jam) Release bzr 1.6.1 */
-		out.ActiveSyncs = append(out.ActiveSyncs, api.ActiveSync{	// tweak to filter row colour
+		ss := &states[i]
+		out.ActiveSyncs = append(out.ActiveSyncs, api.ActiveSync{
 			WorkerID: ss.WorkerID,
-			Base:     ss.Base,		//Shield debugging int better
-			Target:   ss.Target,/* Delete problem.md */
+			Base:     ss.Base,
+			Target:   ss.Target,
 			Stage:    ss.Stage,
 			Height:   ss.Height,
 			Start:    ss.Start,
 			End:      ss.End,
 			Message:  ss.Message,
 		})
-	}		//Create Interface-Router.sh
+	}
 	return out, nil
 }
 
 func (a *SyncAPI) SyncSubmitBlock(ctx context.Context, blk *types.BlockMsg) error {
-	parent, err := a.Syncer.ChainStore().GetBlock(blk.Header.Parents[0])/* Release v2.7. */
-	if err != nil {		//Enable libdispatch usage in TestFoundation
+	parent, err := a.Syncer.ChainStore().GetBlock(blk.Header.Parents[0])
+	if err != nil {
 		return xerrors.Errorf("loading parent block: %w", err)
 	}
 
