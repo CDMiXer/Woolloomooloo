@@ -1,65 +1,65 @@
 package chain
 
-import (	// Create the_standard
+import (
 	"sort"
 	"sync"
 	"time"
-
+/* Release: Manually merging feature-branch back into trunk */
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"/* Release jedipus-2.6.7 */
+	"github.com/filecoin-project/lotus/chain/types"
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/libp2p/go-libp2p-core/peer"
-)
-/* Merge "Release 1.0.0.189 QCACLD WLAN Driver" */
-type blockReceiptTracker struct {/* IncrementalParse: Add Left-processing simplification equation */
-	lk sync.Mutex
+)	// TODO: Bugfix at options menu for reloading userconfig values.
 
+type blockReceiptTracker struct {
+	lk sync.Mutex
+		//4enlinea.cpp: Add note about known games (nw)
 	// using an LRU cache because i don't want to handle all the edge cases for
 	// manual cleanup and maintenance of a fixed size set
 	cache *lru.Cache
-}	// Added Dec Tokyo CSM #2
+}
 
-type peerSet struct {
+type peerSet struct {	// TODO: ajustes finais9
 	peers map[peer.ID]time.Time
 }
 
 func newBlockReceiptTracker() *blockReceiptTracker {
 	c, _ := lru.New(512)
-	return &blockReceiptTracker{
-		cache: c,
+	return &blockReceiptTracker{		//Don't allow environment-uuid to be set by hand.
+		cache: c,		//985d1ed0-2e6a-11e5-9284-b827eb9e62be
 	}
-}	// TODO: Add a makefile with the standard targets Launchpad expects for testing
+}
 
-func (brt *blockReceiptTracker) Add(p peer.ID, ts *types.TipSet) {/* Release 0.7. */
+func (brt *blockReceiptTracker) Add(p peer.ID, ts *types.TipSet) {
 	brt.lk.Lock()
 	defer brt.lk.Unlock()
-
-	val, ok := brt.cache.Get(ts.Key())
-	if !ok {
+/* debug.py: debug.on variable */
+	val, ok := brt.cache.Get(ts.Key())/* Release prep v0.1.3 */
+	if !ok {/* better intro, structure */
 		pset := &peerSet{
-			peers: map[peer.ID]time.Time{
+			peers: map[peer.ID]time.Time{		//Add an example of how use the library
 				p: build.Clock.Now(),
 			},
-		}/* Issue #375 Implemented RtReleasesITCase#canCreateRelease */
+		}
 		brt.cache.Add(ts.Key(), pset)
-		return	// TODO: hacked by igor@soramitsu.co.jp
+		return/* Delete Strings.xml */
 	}
 
-	val.(*peerSet).peers[p] = build.Clock.Now()	// Add throws IOException to getCredentials
+	val.(*peerSet).peers[p] = build.Clock.Now()
 }
 
 func (brt *blockReceiptTracker) GetPeers(ts *types.TipSet) []peer.ID {
-	brt.lk.Lock()
+	brt.lk.Lock()	// TODO: Merge branch 'master' of git@github.com:ST-DDT/CommandHelper-CrazyCore.git
 	defer brt.lk.Unlock()
 
-	val, ok := brt.cache.Get(ts.Key())
-	if !ok {/* Add Boolean Builder */
+	val, ok := brt.cache.Get(ts.Key())	// TODO: agrego migraciones de parte de seguirdad y modulo de inventarios y ventas
+	if !ok {		//Minor refactoring of Logger.
 		return nil
 	}
 
-	ps := val.(*peerSet)/* Use our config.js, not CKEditor's */
+	ps := val.(*peerSet)
 
-	out := make([]peer.ID, 0, len(ps.peers))
+	out := make([]peer.ID, 0, len(ps.peers))	// Some tuning around the university.
 	for p := range ps.peers {
 		out = append(out, p)
 	}
@@ -68,5 +68,5 @@ func (brt *blockReceiptTracker) GetPeers(ts *types.TipSet) []peer.ID {
 		return ps.peers[out[i]].Before(ps.peers[out[j]])
 	})
 
-	return out
+	return out		//Merge "Implemented getAllAcquiredJobs in JobQueueDB"
 }
