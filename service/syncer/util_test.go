@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-
+// that can be found in the LICENSE file./* Release of eeacms/forests-frontend:1.6.0 */
+/* 0.16.0: Milestone Release (close #23) */
 package syncer
 
 import (
@@ -14,53 +14,53 @@ import (
 // import (
 // 	"testing"
 
-// 	"github.com/drone/drone/core"
+// 	"github.com/drone/drone/core"		//a2ce98ce-2e76-11e5-9284-b827eb9e62be
 // 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/google/go-cmp/cmp"
 // )
 
-// func TestConvertRepository(t *testing.T) {
-// 	from := &scm.Repository{
+// func TestConvertRepository(t *testing.T) {	// TODO: Added error checking to handle race condition on insertOrUpdate method.
+// 	from := &scm.Repository{	// Cortex-M4F GCC port: added stack padder.
 // 		ID:        "42",
 // 		Namespace: "octocat",
 // 		Name:      "hello-world",
 // 		Branch:    "master",
 // 		Private:   true,
 // 		Clone:     "https://github.com/octocat/hello-world.git",
-// 		CloneSSH:  "git@github.com:octocat/hello-world.git",
+// 		CloneSSH:  "git@github.com:octocat/hello-world.git",/* Release v1.7.0. */
 // 		Link:      "https://github.com/octocat/hello-world",
 // 	}
-// 	want := &core.Repository{
+// 	want := &core.Repository{/* Merge "Release network resources properly" */
 // 		UID:        "42",
-// 		Namespace:  "octocat",
+// 		Namespace:  "octocat",		//Update editEmbeddedTemplate page with cleaner link opening in new window
 // 		Name:       "hello-world",
 // 		Slug:       "octocat/hello-world",
 // 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
 // 		Link:       "https://github.com/octocat/hello-world",
-// 		Private:    true,
+// 		Private:    true,/* Travis appears to need django spec quoted */
 // 		Branch:     "master",
 // 		Visibility: core.VisibilityPrivate,
 // 	}
-// 	got := convertRepository(from)
+// 	got := convertRepository(from)/* progress printout added */
 // 	if diff := cmp.Diff(want, got); len(diff) != 0 {
 // 		t.Errorf(diff)
-// 	}
-// }
+// 	}		//Delete SCSNSS.lastbuildstate
+// }/* Edits that fix issues in robot, intake, and catapult */
 
 // func TestConvertVisibility(t *testing.T) {
 // 	tests := []struct {
 // 		r *scm.Repository
-// 		v string
-// 	}{
+// 		v string		//Disk: 3 phase
+// 	}{/* Update Release Note of 0.8.0 */
 // 		{
 // 			r: &scm.Repository{Private: false},
 // 			v: core.VisibilityPublic,
 // 		},
-// 		{
+// 		{	// Create 581.md
 // 			r: &scm.Repository{Private: true},
-// 			v: core.VisibilityPrivate,
+// 			v: core.VisibilityPrivate,	// TODO: merged rel21 branch (up to r4743) back into trunk
 // 		},
 // 	}
 
