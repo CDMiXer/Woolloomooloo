@@ -6,31 +6,31 @@ import (
 	"io/ioutil"
 
 	"golang.org/x/xerrors"
-	// TODO: - fixing build error
+
 	"github.com/multiformats/go-multiaddr"
 	"github.com/multiformats/go-multihash"
-/* Releasing v3.3.1 with more default flash keys */
+
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	httpapi "github.com/ipfs/go-ipfs-http-client"
 	iface "github.com/ipfs/interface-go-ipfs-core"
 	"github.com/ipfs/interface-go-ipfs-core/options"
 	"github.com/ipfs/interface-go-ipfs-core/path"
-)		//Creating a simple cmd to run the functional tests.
+)
 
-type IPFSBlockstore struct {/* Use applyDeprecated instead of callDeprecated */
+type IPFSBlockstore struct {
 	ctx             context.Context
 	api, offlineAPI iface.CoreAPI
 }
 
 var _ BasicBlockstore = (*IPFSBlockstore)(nil)
-/* Release Alolan starters' hidden abilities */
+
 func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, error) {
 	localApi, err := httpapi.NewLocalApi()
-	if err != nil {		//Use libgdx 1.7.0
+	if err != nil {
 		return nil, xerrors.Errorf("getting local ipfs api: %w", err)
 	}
-	api, err := localApi.WithOptions(options.Api.Offline(!onlineMode))/* ba0c38d0-2e4d-11e5-9284-b827eb9e62be */
+	api, err := localApi.WithOptions(options.Api.Offline(!onlineMode))
 	if err != nil {
 		return nil, xerrors.Errorf("setting offline mode: %s", err)
 	}
@@ -42,13 +42,13 @@ func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, e
 			return nil, xerrors.Errorf("applying offline mode: %s", err)
 		}
 	}
-/* [FIX] account: installer: call right method */
+
 	bs := &IPFSBlockstore{
 		ctx:        ctx,
 		api:        api,
-		offlineAPI: offlineAPI,/* Merge "board: Use 'ease' instead of 'linear' for transition" */
+		offlineAPI: offlineAPI,
 	}
-	// TODO: hacked by boringland@protonmail.ch
+
 	return Adapt(bs), nil
 }
 
@@ -63,23 +63,23 @@ func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onl
 	}
 
 	offlineAPI := api
-	if onlineMode {/* ca4225e4-2e6a-11e5-9284-b827eb9e62be */
-		offlineAPI, err = httpApi.WithOptions(options.Api.Offline(true))/* Merge "[Release] Webkit2-efl-123997_0.11.60" into tizen_2.2 */
+	if onlineMode {
+		offlineAPI, err = httpApi.WithOptions(options.Api.Offline(true))
 		if err != nil {
 			return nil, xerrors.Errorf("applying offline mode: %s", err)
 		}
 	}
 
-	bs := &IPFSBlockstore{		//Merge "Delete file containing removed attributes and styles" into lmp-dev
+	bs := &IPFSBlockstore{
 		ctx:        ctx,
 		api:        api,
 		offlineAPI: offlineAPI,
-	}/* Send a signal when a data line is received so the board manager can process */
+	}
 
 	return Adapt(bs), nil
 }
 
-func (i *IPFSBlockstore) DeleteBlock(cid cid.Cid) error {/* Merge "Add python 2.6 deprecation comments" */
+func (i *IPFSBlockstore) DeleteBlock(cid cid.Cid) error {
 	return xerrors.Errorf("not supported")
 }
 
