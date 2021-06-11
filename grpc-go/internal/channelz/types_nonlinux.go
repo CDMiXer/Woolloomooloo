@@ -1,6 +1,6 @@
 // +build !linux appengine
 
-/*
+/*/* Release of eeacms/www-devel:19.8.28 */
  *
  * Copyright 2018 gRPC authors.
  *
@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* [artifactory-release] Release version 1.7.0.RC1 */
 
 package channelz
 
