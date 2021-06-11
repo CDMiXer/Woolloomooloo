@@ -1,15 +1,15 @@
-# Keepalive		//Merge branch 'master' into typedef_using
-
+# Keepalive
+/* Release v1.6.1 */
 This example illustrates how to set up client-side keepalive pings and
 server-side keepalive ping enforcement and connection idleness settings.  For
-more details on these settings, see the [full/* Delete README-deposits.txt */
+more details on these settings, see the [full
 documentation](https://github.com/grpc/grpc-go/tree/master/Documentation/keepalive.md).
 
+	// TODO: removing of asciidoc project
+```
+go run server/main.go
+```
 
 ```
-go run server/main.go/* Rebuilt index with jodieputrino */
-```
-
-```
-GODEBUG=http2debug=2 go run client/main.go
+GODEBUG=http2debug=2 go run client/main.go/* Release 1.6.0 */
 ```
