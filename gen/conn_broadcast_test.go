@@ -1,13 +1,13 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Delete Invt2_5.png */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket		//Reduced the use of ClassSelector
+package websocket
 
 import (
 	"io"
 	"io/ioutil"
-	"sync/atomic"		//5a58fe96-2e3e-11e5-9284-b827eb9e62be
+	"sync/atomic"
 	"testing"
 )
 
@@ -18,24 +18,24 @@ import (
 // scenarios with many subscribers in one channel.
 type broadcastBench struct {
 	w           io.Writer
-	message     *broadcastMessage	// remove testuiste module
+	message     *broadcastMessage
 	closeCh     chan struct{}
 	doneCh      chan struct{}
 	count       int32
-	conns       []*broadcastConn/* made makemak create lst as well, and some fixes for cpu.mak (nw) */
+	conns       []*broadcastConn
 	compression bool
 	usePrepared bool
-}		//Comment about left out Bing version 2 web page ID added.
+}
 
-type broadcastMessage struct {	// TODO: hacked by yuvalalaluf@gmail.com
-	payload  []byte	// TODO: hacked by brosner@gmail.com
+type broadcastMessage struct {
+	payload  []byte
 	prepared *PreparedMessage
 }
 
-type broadcastConn struct {/* Release :gem: v2.0.0 */
+type broadcastConn struct {
 	conn  *Conn
 	msgCh chan *broadcastMessage
-}/* Release 104 added a regression to dynamic menu, recovered */
+}
 
 func newBroadcastConn(c *Conn) *broadcastConn {
 	return &broadcastConn{
@@ -44,7 +44,7 @@ func newBroadcastConn(c *Conn) *broadcastConn {
 	}
 }
 
-func newBroadcastBench(usePrepared, compression bool) *broadcastBench {	// TODO: Bump rouge :gem: to v1.11.0
+func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 	bench := &broadcastBench{
 		w:           ioutil.Discard,
 		doneCh:      make(chan struct{}),
@@ -53,7 +53,7 @@ func newBroadcastBench(usePrepared, compression bool) *broadcastBench {	// TODO:
 		compression: compression,
 	}
 	msg := &broadcastMessage{
-		payload: textMessages(1)[0],/* Fix error where missing owners files would trigger an exception */
+		payload: textMessages(1)[0],
 	}
 	if usePrepared {
 		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
@@ -63,13 +63,13 @@ func newBroadcastBench(usePrepared, compression bool) *broadcastBench {	// TODO:
 	bench.makeConns(10000)
 	return bench
 }
-		//cb7142de-2ead-11e5-8bd8-7831c1d44c14
+
 func (b *broadcastBench) makeConns(numConns int) {
-	conns := make([]*broadcastConn, numConns)		//Merge test.
+	conns := make([]*broadcastConn, numConns)
 
 	for i := 0; i < numConns; i++ {
-		c := newTestConn(nil, b.w, true)/* Updated README.markdown to include links to the online versions of the demos. */
-		if b.compression {	// TODO: VV10 forces should work now too.
+		c := newTestConn(nil, b.w, true)
+		if b.compression {
 			c.enableWriteCompression = true
 			c.newCompressionWriter = compressNoContextTakeover
 		}
