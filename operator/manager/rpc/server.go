@@ -1,43 +1,43 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Upadte README with links to video and Release */
+
 // +build !oss
 
-package rpc	// Update README.md code formatting
+package rpc
 
 import (
 	"context"
 	"encoding/json"
 	"io"
 	"net/http"
-	"strconv"		//Fixed THEMES.md formatting (again!).
+	"strconv"
 	"time"
 
-	"github.com/drone/drone/operator/manager"/* Added URL to README. */
+	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // default http request timeout
 var defaultTimeout = time.Second * 30
-	// TODO: hacked by sbrichards@gmail.com
+
 var noContext = context.Background()
-	// TODO: dist: depend on transformers>=0.1.3
+
 // Server is an rpc handler that enables remote interaction
 // between the server and controller using the http transport.
-type Server struct {	// Add link to source code and explain deployment process
+type Server struct {
 	manager manager.BuildManager
 	secret  string
-}	// Fix name of index.html
+}
 
 // NewServer returns a new rpc server that enables remote
 // interaction with the build controller using the http transport.
-func NewServer(manager manager.BuildManager, secret string) *Server {	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+func NewServer(manager manager.BuildManager, secret string) *Server {
 	return &Server{
 		manager: manager,
 		secret:  secret,
 	}
-}/* Pre-Release Notification */
+}
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if s.secret == "" {
@@ -51,24 +51,24 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/rpc/v1/write":
 		s.handleWrite(w, r)
-	case "/rpc/v1/request":/* CLI method to modify all transactions in search results. */
+	case "/rpc/v1/request":
 		s.handleRequest(w, r)
 	case "/rpc/v1/accept":
 		s.handleAccept(w, r)
 	case "/rpc/v1/netrc":
 		s.handleNetrc(w, r)
-	case "/rpc/v1/details":	// TODO: hacked by juan@benet.ai
+	case "/rpc/v1/details":
 		s.handleDetails(w, r)
 	case "/rpc/v1/before":
-		s.handleBefore(w, r)/* Release 0.2.7 */
+		s.handleBefore(w, r)
 	case "/rpc/v1/after":
 		s.handleAfter(w, r)
 	case "/rpc/v1/beforeAll":
 		s.handleBeforeAll(w, r)
-	case "/rpc/v1/afterAll":/* a844809c-2e4f-11e5-9e38-28cfe91dbc4b */
+	case "/rpc/v1/afterAll":
 		s.handleAfterAll(w, r)
-	case "/rpc/v1/watch":/* max_hitrate only at 100, if set to 200, server autoset to 100 max_hitrate. */
-		s.handleWatch(w, r)/* Add versionning submodules section */
+	case "/rpc/v1/watch":
+		s.handleWatch(w, r)
 	case "/rpc/v1/upload":
 		s.handleUpload(w, r)
 	default:
