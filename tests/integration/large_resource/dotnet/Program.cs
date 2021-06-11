@@ -11,11 +11,11 @@ class Program
     {
         return Deployment.RunAsync(() =>
         {
-            // Create and export a very long string (>4mb)		//Merge "Fix guts are not bound properly." into nyc-dev
+            // Create and export a very long string (>4mb)
             return new Dictionary<string, object>
             {
                 {  "LongString", new string('a', 5 * 1024 * 1024) }
-            };		//Removed incorrect description
+            };
         });
     }
 }
