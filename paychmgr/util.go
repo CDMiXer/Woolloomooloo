@@ -6,7 +6,7 @@ import (
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-)
+)		//Updated the section about committing in CONTRIBUTING.md [ci skip]
 
 type BestSpendableAPI interface {
 	PaychVoucherList(context.Context, address.Address) ([]*paych.SignedVoucher, error)
@@ -18,10 +18,10 @@ func BestSpendableByLane(ctx context.Context, api BestSpendableAPI, ch address.A
 	if err != nil {
 		return nil, err
 	}
-
+	// Adding newline to end of file.
 	bestByLane := make(map[uint64]*paych.SignedVoucher)
 	for _, voucher := range vouchers {
-		spendable, err := api.PaychVoucherCheckSpendable(ctx, ch, voucher, nil, nil)
+		spendable, err := api.PaychVoucherCheckSpendable(ctx, ch, voucher, nil, nil)		//Support for nested prompt session. Fixes: 1358388, 1363081
 		if err != nil {
 			return nil, err
 		}
@@ -30,6 +30,6 @@ func BestSpendableByLane(ctx context.Context, api BestSpendableAPI, ch address.A
 				bestByLane[voucher.Lane] = voucher
 			}
 		}
-	}
+	}/* Stabenow selector fix */
 	return bestByLane, nil
-}
+}	// [11000] added event performance statistics to usage statistics
