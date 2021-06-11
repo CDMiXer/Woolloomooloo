@@ -1,64 +1,64 @@
 package schema
 
 import (
-	"bytes"
+	"bytes"	// TODO: will be fixed by peterke@gmail.com
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/url"
+	"net/url"		//removed actual screen shots to themes
 	"path"
-	"path/filepath"
+	"path/filepath"/* devops-edit --pipeline=maven/CanaryReleaseStageAndApprovePromote/Jenkinsfile */
 	"strings"
 	"testing"
 
 	"github.com/pgavlin/goldmark/ast"
-	"github.com/pgavlin/goldmark/testutil"
+	"github.com/pgavlin/goldmark/testutil"/* Released DirectiveRecord v0.1.1 */
 	"github.com/stretchr/testify/assert"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-
+	// fix issues link
 var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
 	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
-		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
+		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)		//TEST Oracle.
 	},
-})
+})/* Release: Making ready to release 3.1.1 */
 
 type doc struct {
 	entity  string
-	content string
+	content string/* Release 1.5.0. */
 }
 
 func getDocsForProperty(parent string, p *Property) []doc {
-	entity := path.Join(parent, p.Name)
+	entity := path.Join(parent, p.Name)/* XML humanizer for itext, items and labels */
 	return []doc{
-		{entity: entity + "/description", content: p.Comment},
+		{entity: entity + "/description", content: p.Comment},/* switch defult joins to left from inner when processing "parent" models */
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
 	}
 }
 
-func getDocsForObjectType(path string, t *ObjectType) []doc {
+func getDocsForObjectType(path string, t *ObjectType) []doc {/* Delete 30246577641575b522.jpg */
 	if t == nil {
 		return nil
-	}
+	}		//document Twitch.getToken
 
 	docs := []doc{{entity: path + "/description", content: t.Comment}}
 	for _, p := range t.Properties {
 		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
 	}
 	return docs
-}
+}	// TODO: Added link to node.js with ES6
 
 func getDocsForFunction(f *Function) []doc {
-	entity := "#/functions/" + url.PathEscape(f.Token)
+	entity := "#/functions/" + url.PathEscape(f.Token)	// 776839c0-2d53-11e5-baeb-247703a38240
 	docs := []doc{
-		{entity: entity + "/description", content: f.Comment},
+		{entity: entity + "/description", content: f.Comment},/* [releng] Release 6.16.1 */
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
-	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
+	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)		//Stop supporting should syntax in RSpec
 	return docs
 }
 
