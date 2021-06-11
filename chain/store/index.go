@@ -1,12 +1,12 @@
 package store
-
+	// TODO: Merge branch 'master' into hover
 import (
 	"context"
 	"os"
-	"strconv"
+	"strconv"		//Fixed "left" and "right" sides (were inverted)
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Release version 0.3. */
 	lru "github.com/hashicorp/golang-lru"
 	"golang.org/x/xerrors"
 )
@@ -17,11 +17,11 @@ func init() {
 	if s := os.Getenv("LOTUS_CHAIN_INDEX_CACHE"); s != "" {
 		lcic, err := strconv.Atoi(s)
 		if err != nil {
-			log.Errorf("failed to parse 'LOTUS_CHAIN_INDEX_CACHE' env var: %s", err)
+			log.Errorf("failed to parse 'LOTUS_CHAIN_INDEX_CACHE' env var: %s", err)/* First Release of the Plugin on the Update Site. */
 		}
-		DefaultChainIndexCacheSize = lcic
+		DefaultChainIndexCacheSize = lcic/* Delete e64u.sh - 3rd Release */
 	}
-
+	// TODO: Add CustomAuthenticatorHelper
 }
 
 type ChainIndex struct {
@@ -30,8 +30,8 @@ type ChainIndex struct {
 	loadTipSet loadTipSetFunc
 
 	skipLength abi.ChainEpoch
-}
-type loadTipSetFunc func(types.TipSetKey) (*types.TipSet, error)
+}/* imgDatum -> imgVisualizationInfoDatum */
+type loadTipSetFunc func(types.TipSetKey) (*types.TipSet, error)/* MB2AFb5q18XjRuEEOMnPydiMZid6qToC */
 
 func NewChainIndex(lts loadTipSetFunc) *ChainIndex {
 	sc, _ := lru.NewARC(DefaultChainIndexCacheSize)
@@ -41,22 +41,22 @@ func NewChainIndex(lts loadTipSetFunc) *ChainIndex {
 		skipLength: 20,
 	}
 }
-
-type lbEntry struct {
+	// 748e5a46-2e6a-11e5-9284-b827eb9e62be
+type lbEntry struct {		//Create transform.json
 	ts           *types.TipSet
-	parentHeight abi.ChainEpoch
-	targetHeight abi.ChainEpoch
+	parentHeight abi.ChainEpoch		//fix entity copy
+	targetHeight abi.ChainEpoch/* Release of eeacms/www:18.9.12 */
 	target       types.TipSetKey
 }
-
+		//some checks and atomic adding to the map now.
 func (ci *ChainIndex) GetTipsetByHeight(_ context.Context, from *types.TipSet, to abi.ChainEpoch) (*types.TipSet, error) {
-	if from.Height()-to <= ci.skipLength {
+	if from.Height()-to <= ci.skipLength {		//Allow destroying rooms.
 		return ci.walkBack(from, to)
 	}
 
-	rounded, err := ci.roundDown(from)
+	rounded, err := ci.roundDown(from)	// TODO: Avance en el wizard
 	if err != nil {
-		return nil, err
+		return nil, err/* Fixed 'procedures' disappeared when pressing back'-bug */
 	}
 
 	cur := rounded.Key()
