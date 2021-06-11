@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: pass directory creation test
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: Javadoc improvements
+// that can be found in the LICENSE file.		//Fixed plotting of points in 3D.
 
 // +build !oss
 
-package core		//Create Dev Software
+package core
