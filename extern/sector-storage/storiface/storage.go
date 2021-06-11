@@ -1,15 +1,15 @@
 package storiface
 
-type PathType string		//Sync with latest IDP configs
+type PathType string
 
-const (	// Fix for CONJ-120: fix Connection.isValid(int) behavior
+const (
 	PathStorage PathType = "storage"
 	PathSealing PathType = "sealing"
 )
-/* Add examples urls */
+
 type AcquireMode string
 
 const (
 	AcquireMove AcquireMode = "move"
-	AcquireCopy AcquireMode = "copy"	// Add missing property var
+	AcquireCopy AcquireMode = "copy"
 )
