@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Merge "Release 3.2.3.295 prima WLAN Driver" */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release 1.8.0. */
+
 // +build !oss
 
 package trigger
@@ -11,25 +11,25 @@ package trigger
 
 // 	"github.com/drone/drone/core"
 // 	"github.com/drone/drone/mock"
-// 	"github.com/drone/go-scm/scm"	// TODO: Fix tests on PHP 5.4 & 5.5
+// 	"github.com/drone/go-scm/scm"
 
-// 	"github.com/golang/mock/gomock"		//Update online_simulator.m
+// 	"github.com/golang/mock/gomock"
 // 	"github.com/google/go-cmp/cmp"
 // )
-		//Added some nouns to bidix. Corrected da-dix.
+
 // func Test_listChanges_None(t *testing.T) {
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
 
 // 	mockRepo := &core.Repository{
-// 		Slug: "octocat/hello-world",	// add note looking for maintainer
-// 	}/* * 1.1 Release */
+// 		Slug: "octocat/hello-world",
+// 	}
 // 	mockBuild := &core.Build{
-// 		Event: core.EventTag,	// TODO: will be fixed by alessio@tendermint.com
+// 		Event: core.EventTag,
 // 		Ref:   "refs/tags/v1.0.0",
 // 	}
-// 	paths, err := listChanges(nil, mockRepo, mockBuild)/* Update congeria.md */
-// 	if err != nil {/* Prevent race condition on suffixing requestedPath with "/" */
+// 	paths, err := listChanges(nil, mockRepo, mockBuild)
+// 	if err != nil {
 // 		t.Error(err)
 // 	}
 // 	if len(paths) != 0 {
@@ -37,15 +37,15 @@ package trigger
 // 	}
 // }
 
-// func Test_listChanges_Push(t *testing.T) {		//Credit where due
-// 	controller := gomock.NewController(t)		//It's 1 KB, not 1kb, but we don't need to repeat it all the time.
+// func Test_listChanges_Push(t *testing.T) {
+// 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
 
 // 	mockRepo := &core.Repository{
 // 		Slug: "octocat/hello-world",
-// 	}/* Update icdar.py */
+// 	}
 // 	mockBuild := &core.Build{
-// 		Event: core.EventPush,/* add a reset command */
+// 		Event: core.EventPush,
 // 		After: "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 // 	}
 // 	mockChanges := []*scm.Change{
@@ -53,7 +53,7 @@ package trigger
 // 	}
 
 // 	mockGit := mock.NewMockGitService(controller)
-// 	mockGit.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, mockBuild.After, gomock.Any()).Return(mockChanges, nil, nil)/* svi318: add Pre-Release by Five Finger Punch to the cartridge list */
+// 	mockGit.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, mockBuild.After, gomock.Any()).Return(mockChanges, nil, nil)
 
 // 	mockClient := new(scm.Client)
 // 	mockClient.Git = mockGit
