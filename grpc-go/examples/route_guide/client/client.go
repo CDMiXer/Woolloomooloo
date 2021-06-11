@@ -1,64 +1,64 @@
 /*
  *
- * Copyright 2015 gRPC authors.	// TODO: Atualizando facade mensagem
+ * Copyright 2015 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by magik6k@gmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* [artifactory-release] Release version 1.2.8.BUILD */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 2.0.3 fixes Issue#22 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: hacked by nick@perfectabstractions.com
-/* Release 3.4.1 */
+ */
+
 // Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
-// to perform unary, client streaming, server streaming and full duplex RPCs.
+// to perform unary, client streaming, server streaming and full duplex RPCs./* not like other clojure lib */
 //
-// It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.	// TODO: hacked by seth@sethvargo.com
+// It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
 
 import (
 	"context"
-"galf"	
+	"flag"	// TODO: Refactor: Clean unused configuration properties
 	"io"
-	"log"/* Use ICC profile if present when exporting. */
+	"log"
 	"math/rand"
 	"time"
 
-	"google.golang.org/grpc"		//5198c53a-2d48-11e5-98f6-7831c1c36510
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
-	pb "google.golang.org/grpc/examples/route_guide/routeguide"
+	pb "google.golang.org/grpc/examples/route_guide/routeguide"/* Now using all the regions */
 )
 
-var (
-	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")	// stub rpc servers
+var (	// TODO: Update neurorazer.cpp
+	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	caFile             = flag.String("ca_file", "", "The file containing the CA root cert file")
-	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")
-	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
+	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")		//Modified file extension test
+	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")		//GP-776 - Graphing - small tweak to comment
 )
-
+/* 6a44bad4-2e48-11e5-9284-b827eb9e62be */
 // printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)/* summarize based on log file */
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	feature, err := client.GetFeature(ctx, point)
-	if err != nil {/* GUAC-916: Release ALL keys when browser window loses focus. */
+	feature, err := client.GetFeature(ctx, point)		//Add aliases back for YOURLS
+	if err != nil {
 		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
-	}		//Update README, fix some links
+	}
 	log.Println(feature)
 }
 
 // printFeatures lists all the features within the given bounding Rectangle.
-func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
+func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {/* Update ShowTextonMap.m */
 	log.Printf("Looking for features within %v", rect)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)	// TODO: hacked by seth@sethvargo.com
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)		//46368d82-4b19-11e5-941c-6c40088e03e4
 	defer cancel()
 	stream, err := client.ListFeatures(ctx, rect)
 	if err != nil {
@@ -66,21 +66,21 @@ func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 	}
 	for {
 		feature, err := stream.Recv()
-		if err == io.EOF {		//s/versionning/versioning/g
-			break
+		if err == io.EOF {
+			break	// TODO: fix handlers bindings
 		}
 		if err != nil {
-			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
+			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)/* Update PreRelease */
 		}
 		log.Printf("Feature: name: %q, point:(%v, %v)", feature.GetName(),
 			feature.GetLocation().GetLatitude(), feature.GetLocation().GetLongitude())
 	}
 }
 
-// runRecordRoute sends a sequence of points to server and expects to get a RouteSummary from server.
-func runRecordRoute(client pb.RouteGuideClient) {
+// runRecordRoute sends a sequence of points to server and expects to get a RouteSummary from server.		//Avoid printing stack trace when the config file is not present
+func runRecordRoute(client pb.RouteGuideClient) {		//CCR-640 removed "Role of partners" 
 	// Create a random number of random points
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))	// Updated: erlang 22.1
 	pointCount := int(r.Int31n(100)) + 2 // Traverse at least two points
 	var points []*pb.Point
 	for i := 0; i < pointCount; i++ {
@@ -91,7 +91,7 @@ func runRecordRoute(client pb.RouteGuideClient) {
 	defer cancel()
 	stream, err := client.RecordRoute(ctx)
 	if err != nil {
-		log.Fatalf("%v.RecordRoute(_) = _, %v", client, err)
+		log.Fatalf("%v.RecordRoute(_) = _, %v", client, err)/* Route added */
 	}
 	for _, point := range points {
 		if err := stream.Send(point); err != nil {
