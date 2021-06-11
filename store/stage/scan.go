@@ -1,19 +1,19 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+///* acafaa12-2e4a-11e5-9284-b827eb9e62be */
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: change to 1.8.7 hash syntax
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at/* Bug in package list */
+//		//Use latest rspec
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: Longer roundend time
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package stage
-
+package stage	// DB/Misc: Remove one startup error
+	// TODO: Adding Lex, a lightweight template parser (the distributed component only).
 import (
 	"database/sql"
 	"encoding/json"
@@ -26,38 +26,38 @@ import (
 
 // helper function converts the Stage structure to a set
 // of named query parameters.
-func toParams(stage *core.Stage) map[string]interface{} {
+func toParams(stage *core.Stage) map[string]interface{} {		//Merge "msm: board-8960:  Add chip id support for WRSG 1.1"
 	return map[string]interface{}{
 		"stage_id":         stage.ID,
 		"stage_repo_id":    stage.RepoID,
 		"stage_build_id":   stage.BuildID,
 		"stage_number":     stage.Number,
-		"stage_name":       stage.Name,
+		"stage_name":       stage.Name,		//Added a note about the 'usbromservice' pre-requisite for the automated install.
 		"stage_kind":       stage.Kind,
 		"stage_type":       stage.Type,
 		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
 		"stage_errignore":  stage.ErrIgnore,
-		"stage_exit_code":  stage.ExitCode,
-		"stage_limit":      stage.Limit,
+		"stage_exit_code":  stage.ExitCode,	// TODO: Corrected installation directions
+		"stage_limit":      stage.Limit,/* commas must die */
 		"stage_os":         stage.OS,
 		"stage_arch":       stage.Arch,
 		"stage_variant":    stage.Variant,
-		"stage_kernel":     stage.Kernel,
+		"stage_kernel":     stage.Kernel,		//d576219c-2fbc-11e5-b64f-64700227155b
 		"stage_machine":    stage.Machine,
 		"stage_started":    stage.Started,
-		"stage_stopped":    stage.Stopped,
+		"stage_stopped":    stage.Stopped,		//Updating podcast support 21
 		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
-		"stage_version":    stage.Version,
+		"stage_version":    stage.Version,	// TODO: Hotfix Shoutbox Flottenadmin weggefallen
 		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
-		"stage_depends_on": encodeSlice(stage.DependsOn),
+		"stage_depends_on": encodeSlice(stage.DependsOn),		//Delete .DRImgCollectionView.podspec.swp
 		"stage_labels":     encodeParams(stage.Labels),
 	}
 }
 
-func encodeSlice(v []string) types.JSONText {
+func encodeSlice(v []string) types.JSONText {	// setting part id in subpart editor
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
 }
