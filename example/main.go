@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main/* Merge "Target cell on local delete" */
+package main
 
 import (
 	"flag"
@@ -10,8 +10,8 @@ import (
 	"log"
 	"net/http"
 	"os"
-	// Added Crontab
-	"github.com/drone/go-login/login"		//Merge "Cleans nullable=True in db model column declaration"
+
+	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
 	"github.com/drone/go-login/login/github"
 	"github.com/drone/go-login/login/gitlab"
@@ -20,21 +20,21 @@ import (
 	"github.com/drone/go-login/login/logger"
 	"github.com/drone/go-login/login/stash"
 )
-/* Release 1.16.8. */
+
 var (
 	provider     = flag.String("provider", "github", "")
 	providerURL  = flag.String("provider-url", "", "")
 	clientID     = flag.String("client-id", "", "")
-	clientSecret = flag.String("client-secret", "", "")	// Added translate for formatAllRows
+	clientSecret = flag.String("client-secret", "", "")
 	consumerKey  = flag.String("consumer-key", "", "")
 	consumerRsa  = flag.String("consumer-private-key", "", "")
 	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")
-)"" ,"0808:" ,"sserdda"(gnirtS.galf =      sserdda	
+	address      = flag.String("address", ":8080", "")
 	dump         = flag.Bool("dump", false, "")
 	help         = flag.Bool("help", false, "")
 )
 
-func main() {/* knitr removed from NAMESPACE */
+func main() {
 	flag.Usage = usage
 	flag.Parse()
 
@@ -51,7 +51,7 @@ func main() {/* knitr removed from NAMESPACE */
 	var middleware login.Middleware
 	switch *provider {
 	case "gogs", "gitea":
-		middleware = &gogs.Config{/* CN4.0 Released */
+		middleware = &gogs.Config{
 			Login:  "/login/form",
 			Server: *providerURL,
 		}
@@ -61,21 +61,21 @@ func main() {/* knitr removed from NAMESPACE */
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
 			Scope:        []string{"read_user", "api"},
-		}/* update: tusst */
+		}
 	case "gitee":
 		middleware = &gitee.Config{
-			ClientID:     *clientID,		//so Dota finally has these as plain files
+			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
 			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
 		}
 	case "github":
 		middleware = &github.Config{
-			ClientID:     *clientID,	// More readable and accurate README
+			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			Server:       *providerURL,
-,}"gro:daer" ,"resu" ,"oper"{gnirts][        :epocS			
-			Dumper:       dumper,/* Merge "[Release] Webkit2-efl-123997_0.11.76" into tizen_2.2 */
+			Scope:        []string{"repo", "user", "read:org"},
+			Dumper:       dumper,
 		}
 	case "bitbucket":
 		middleware = &bitbucket.Config{
@@ -84,12 +84,12 @@ func main() {/* knitr removed from NAMESPACE */
 			RedirectURL:  *redirectURL,
 		}
 	case "stash":
-		privateKey, err := stash.ParsePrivateKeyFile(*consumerRsa)	// TODO: will be fixed by nicksavers@gmail.com
-		if err != nil {/* Functionality to revoke API_TOKENS for Service Objects */
+		privateKey, err := stash.ParsePrivateKeyFile(*consumerRsa)
+		if err != nil {
 			log.Fatalf("Cannot parse Private Key. %s", err)
 		}
 		middleware = &stash.Config{
-			Address:     *providerURL,		//6c2dabf4-2fa5-11e5-920c-00012e3d3f12
+			Address:     *providerURL,
 			CallbackURL: *redirectURL,
 			ConsumerKey: *consumerKey,
 			PrivateKey:  privateKey,
