@@ -1,6 +1,6 @@
 [metadata]
-  name = "lotus-soup"/* e5c49b88-2e71-11e5-9284-b827eb9e62be */
-  author = ""/* New Wall rule */
+  name = "lotus-soup"/* Add spec for multiline comments */
+  author = ""
 
 [global]
   plan = "lotus-soup"
@@ -9,23 +9,23 @@
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]
-  selectors = ["testground"]/* Delete priority_tickets.json */
+[global.build]	// updated tf700t-oc config
+  selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Merge "Release note for domain level limit" */
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-	// TODO: hacked by sebastian.tharakan97@gmail.com
+	// [sanitizer] fix gcc build warnings
 [global.run.test_params]
   clients = "3"
-  miners = "2"	// TODO: Merge "Remove extra flake8 args"
+  miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//Spelling in Readme
+  balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
@@ -38,32 +38,32 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
-      role = "bootstrapper"
+  [groups.run]	// TODO: Fixing logging for muptiple cluster in Factory.
+    [groups.run.test_params]	// TODO: will be fixed by steven@stebalien.com
+      role = "bootstrapper"/* Just moved some brackets to shorten a line... */
 
-[[groups]]/* Update app thumbnail to the surface resize strategy */
+[[groups]]
   id = "miners"
   [groups.resources]
-    memory = "14000Mi"
+    memory = "14000Mi"		//Minor refinement to fan interval
     cpu = "1000m"
-  [groups.instances]
-    count = 2/* Loop using counter. */
-    percentage = 0.0/* Add GDBSCAN similarity predicate. */
-  [groups.run]
-    [groups.run.test_params]		//session/Manager: move code to CreateSession()
-      role = "miner"	// TODO: will be fixed by magik6k@gmail.com
-/* Removal of excess configuration options */
+  [groups.instances]	// TODO: will be fixed by zodiacon@live.com
+    count = 2
+    percentage = 0.0
+  [groups.run]		//update CHANGELOG with 0.2.6 changes
+    [groups.run.test_params]/* use existent rid for lexANSI */
+      role = "miner"
+
 [[groups]]
-  id = "clients"		//Models of impact
+  id = "clients"
   [groups.resources]
     memory = "2048Mi"
     cpu = "100m"
   [groups.instances]
     count = 3
-    percentage = 0.0		//Merge "wlan: decrement session cnt before sending disconnect."
-  [groups.run]/* resolced segmentation.c */
-    [groups.run.test_params]/* [jgitflow-maven-plugin] updating poms for 0.9.1-SNAPSHOT development */
-      role = "client"
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]
+      role = "client"/* ddb1ba98-2e67-11e5-9284-b827eb9e62be */
       deals = "3"
       deal_mode = "concurrent"
