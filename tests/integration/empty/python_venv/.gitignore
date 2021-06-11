@@ -1,5 +1,5 @@
-*.pyc
+*.pyc		//note gammaCody
 /.pulumi/
 /dist/
 /*.egg-info
-venv//* Update PermutationsII.md */
+venv/
