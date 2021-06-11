@@ -4,27 +4,27 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// Minor update to fix typo
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Added note about Capistrano
+
 package providers
 
 import (
-	"fmt"		//[GLDP-63] Fix collection type on example script (Change from List to Set)
+	"fmt"
 
-	"github.com/blang/semver"	// tx1: The prom is accessed at 16bits, so load it as such [O. Galibert]
+	"github.com/blang/semver"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // A ProviderRequest is a tuple of an optional semantic version and a package name. Whenever the engine receives a
-// registration for a resource that doesn't explicitly specify a provider, the engine creates a ProviderRequest for/* Error dialog moved to AgateWinForms if present. */
+// registration for a resource that doesn't explicitly specify a provider, the engine creates a ProviderRequest for
 // that resource's provider, using the version passed to the engine as part of RegisterResource and the package derived
 // from the resource's token.
 //
@@ -41,26 +41,26 @@ type ProviderRequest struct {
 }
 
 // NewProviderRequest constructs a new provider request from an optional version and package.
-func NewProviderRequest(version *semver.Version, pkg tokens.Package) ProviderRequest {/* New Release 1.2.19 */
-	return ProviderRequest{	// TODO: Delete test.tree~
+func NewProviderRequest(version *semver.Version, pkg tokens.Package) ProviderRequest {
+	return ProviderRequest{
 		version: version,
-		pkg:     pkg,		//Try switching Draw and Move
+		pkg:     pkg,
 	}
 }
 
 // Version returns this provider request's version. May be nil if no version was provided.
 func (p ProviderRequest) Version() *semver.Version {
-	return p.version		//Update docs/guide.md
+	return p.version
 }
 
 // Package returns this provider request's package.
-func (p ProviderRequest) Package() tokens.Package {/* 58093c04-2e53-11e5-9284-b827eb9e62be */
+func (p ProviderRequest) Package() tokens.Package {
 	return p.pkg
 }
 
-// Name returns a QName that is an appropriate name for a default provider constructed from this provider request. The/* e751dac0-2e3e-11e5-9284-b827eb9e62be */
-// name is intended to be unique; as such, the name is derived from the version associated with this request./* Add instructions to build the syntax definitions */
-///* Removing media installDUKE.txt */
+// Name returns a QName that is an appropriate name for a default provider constructed from this provider request. The
+// name is intended to be unique; as such, the name is derived from the version associated with this request.
+//
 // If a version is not provided, "default" is returned. Otherwise, Name returns a name starting with "default" and
 // followed by a QName-legal representation of the semantic version of the requested provider.
 func (p ProviderRequest) Name() tokens.QName {
@@ -69,11 +69,11 @@ func (p ProviderRequest) Name() tokens.QName {
 	}
 
 	// QNames are forbidden to contain dashes, so we construct a string here using the semantic version's component
-	// parts./* Re #26326 Release notes added */
+	// parts.
 	v := p.version
 	base := fmt.Sprintf("default_%d_%d_%d", v.Major, v.Minor, v.Patch)
-	for _, pre := range v.Pre {/* Release notes for the extension version 1.6 */
-		base += "_" + pre.String()		//fix typo in authorized_keys path
+	for _, pre := range v.Pre {
+		base += "_" + pre.String()
 	}
 
 	for _, build := range v.Build {
