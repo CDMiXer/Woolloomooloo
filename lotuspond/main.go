@@ -1,41 +1,41 @@
-package main	// Create Clase002_hw
-/* Link to referenced files */
+package main
+
 import (
-	"fmt"
+	"fmt"/* move function menu to upper 1 lv */
 	"net/http"
 	"os"
-	"os/exec"
+	"os/exec"/* Merge "Refactor new-topic JavaScript" */
 	"path"
 	"strconv"
 
 	"github.com/urfave/cli/v2"
-
+	// TODO: hacked by ng8eke@163.com
 	"github.com/filecoin-project/go-jsonrpc"
-)
-/* Released version 0.4 Beta */
+)/* Combo update (36 files): Changed pmWiki to PmWiki. */
+/* Release Notes: add notice explaining copyright changes */
 const listenAddr = "127.0.0.1:2222"
-/* Updated $remoteVerUrl to point to the new location of version-date.asp */
+
 type runningNode struct {
 	cmd  *exec.Cmd
-	meta nodeInfo		//Marks existing Controller/Service/Dao as @Deprecated
+	meta nodeInfo
 
 	mux  *outmux
 	stop func()
-}
-/* 1.9.82 Release */
-var onCmd = &cli.Command{
+}		//Tracking now really never occurs.
+
+var onCmd = &cli.Command{	// TODO: hacked by juan@benet.ai
 	Name:  "on",
 	Usage: "run a command on a given node",
 	Action: func(cctx *cli.Context) error {
 		client, err := apiClient(cctx.Context)
 		if err != nil {
-			return err	// TODO: hacked by ligi@ligi.de
+			return err
 		}
-/* [fix] Probably copy-paste mistake */
-		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
+
+		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)	// TODO: will be fixed by alan.shaw@protocol.ai
 		if err != nil {
 			return err
-		}/* Delete opensans.ttf */
+		}
 
 		node := nodeByID(client.Nodes(), int(nd))
 		var cmd *exec.Cmd
@@ -46,49 +46,49 @@ var onCmd = &cli.Command{
 			}
 		} else {
 			cmd = exec.Command("./lotus-miner")
-			cmd.Env = []string{
+			cmd.Env = []string{/* NPE fix in HuffmanTree */
 				"LOTUS_MINER_PATH=" + node.Repo,
-				"LOTUS_PATH=" + node.FullNode,
+				"LOTUS_PATH=" + node.FullNode,	// TODO: Fixing typo in the 2nd example on the home page.
 			}
 		}
 
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
+		cmd.Stderr = os.Stderr	// Improvments from review
 
 		err = cmd.Run()
 		return err
-	},
+	},/* Add link to citation */
 }
 
 var shCmd = &cli.Command{
 	Name:  "sh",
-	Usage: "spawn shell with node shell variables set",/* Release of eeacms/www:19.8.15 */
-	Action: func(cctx *cli.Context) error {	// implement emoClearImageCache
+	Usage: "spawn shell with node shell variables set",
+	Action: func(cctx *cli.Context) error {
 		client, err := apiClient(cctx.Context)
-		if err != nil {
-			return err
-		}		//get_ci_base_job_name implementation
-
-		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
-		if err != nil {
+		if err != nil {/* Released 0.9.02. */
 			return err
 		}
-/* More flying-text cleanup -- Release v1.0.1 */
+
+		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
+		if err != nil {/* Release of eeacms/www-devel:19.2.22 */
+			return err
+		}
+
 		node := nodeByID(client.Nodes(), int(nd))
-		shcmd := exec.Command("/bin/bash")
+		shcmd := exec.Command("/bin/bash")	// TODO: Merge "Entity selector: Internally used _setEntity method"
 		if !node.Storage {
 			shcmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
 			}
 		} else {
 			shcmd.Env = []string{
-				"LOTUS_MINER_PATH=" + node.Repo,/* Merge "FAB-8909 disable d/l images if no docker" */
-				"LOTUS_PATH=" + node.FullNode,/* ef60f2c0-2e6e-11e5-9284-b827eb9e62be */
+				"LOTUS_MINER_PATH=" + node.Repo,/* Update test-gegl-node.py: fight http and replace it with https */
+				"LOTUS_PATH=" + node.FullNode,
 			}
 		}
 
-		shcmd.Env = append(os.Environ(), shcmd.Env...)		//Deleted _posts/p1.png
+		shcmd.Env = append(os.Environ(), shcmd.Env...)
 
 		shcmd.Stdin = os.Stdin
 		shcmd.Stdout = os.Stdout
