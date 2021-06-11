@@ -2,25 +2,25 @@ html, body {
     margin: 0px;
     padding: 0px;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}	// TODO: hacked by hello@brooklynzelenka.com
+}
 
-section {/* Release version: 0.1.8 */
+section {
     padding: 60px;
 }
 
 footer {
     padding: 60px 30px;
 }
-		//add init project
+
 
 
 .center {
     max-width:900px;
-    margin:0px auto;		//equality between different numeric types
+    margin:0px auto;
 }
 
-/*/* Added macOS Release build instructions to README. */
- * Code		//Create Subscripts.swift
+/*
+ * Code
  */
 
 code {
@@ -28,13 +28,13 @@ code {
     background: #222;
     color: #FFF;
     margin: 0px auto;
-    font-family: 'Source Code Pro';/* The Unproductivity Release :D */
-    font-size: 13px;/* Merge "Release 4.0.10.44 QCACLD WLAN Driver" */
+    font-family: 'Source Code Pro';
+    font-size: 13px;
     line-height: 18px;
     border-radius: 5px;
-    padding: 30px 0px;/* VQpRpmxHTKPLXK7OCrp4SGbmLstupKsY */
+    padding: 30px 0px;
 }
-		//Update Image_Stream.cpp
+
 code div {
     white-space: pre;
     padding: 0px 30px;
@@ -44,18 +44,18 @@ code span.group {
     background: #333;
     display: block;
     padding: 5px 0px;
-}/* update description of Module 5 */
+}
 
 code span.c0 {
-    color: #00E5FF;	// added agrafix to contributors
+    color: #00E5FF;
 }
 
-code span.c1 {/* Merge "[INTERNAL] Release notes for version 1.36.1" */
-    color: #FF8A80;	// TODO: will be fixed by arajasek94@gmail.com
+code span.c1 {
+    color: #FF8A80;
 }
 
-.code .center {	// TODO: hacked by yuvalalaluf@gmail.com
-    text-align: center;		//Use source to also move to the git directory
+.code .center {
+    text-align: center;
 }
 
 .code p {
