@@ -3,24 +3,24 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Merge "Add simple script to help testing image membership" */
+
 package metric
 
-import (/* Merge branch 'master' into create-access-key-fix */
+import (
 	"github.com/drone/drone/core"
-	// TODO: Merge "Move resource doc generation to doc/source/ext"
-	"github.com/prometheus/client_golang/prometheus"
-)
-/* Deleted CtrlApp_2.0.5/Release/TestClient.obj */
+
+	"github.com/prometheus/client_golang/prometheus"/* feat(zsh): add sysupdate alias for macOS */
+)	// Fix for Uploading plugin.
+
 // RepoCount registers the repository metrics.
-func RepoCount(repos core.RepositoryStore) {/* Release: Making ready for next release cycle 4.5.3 */
+func RepoCount(repos core.RepositoryStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
-			Name: "drone_repo_count",	// TODO: content tweaks.
+			Name: "drone_repo_count",		//Include Services & Price Plans into Offering Payload [APIAry]
 			Help: "Total number of registered repositories.",
 		}, func() float64 {
-			i, _ := repos.Count(noContext)
+			i, _ := repos.Count(noContext)/* version bump to v0.4.1 */
 			return float64(i)
-		}),/* Release Checklist > Bugs List  */
-	)
+		}),
+	)/* Added files to project. */
 }
