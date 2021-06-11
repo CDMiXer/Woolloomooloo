@@ -1,22 +1,22 @@
 [metadata]
-  name = "lotus-soup"	// TODO: will be fixed by xiemengjun@gmail.com
-  author = ""		//oops! build fixes
+  name = "lotus-soup"
+  author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "drand-halting"/* Release of eeacms/forests-frontend:2.0-beta.39 */
+  case = "drand-halting"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]		//added checks to validate index availability
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true/* Release 15.1.0. */
+  enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "1"
@@ -31,17 +31,17 @@
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
-"m01" = upc    
+    cpu = "10m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* ea00b816-2e4a-11e5-9284-b827eb9e62be */
 
-[[groups]]	// TODO: Combination Sum III (Backtracking, dfs)
-  id = "miners"		//set date to be a range
+
+[[groups]]
+  id = "miners"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
@@ -54,7 +54,7 @@
 
 
 [[groups]]
-  id = "clients"		//Bug fix DATAFARI-28. Mobile facets are fixed
+  id = "clients"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
@@ -70,10 +70,10 @@
   id = "drand"
   [groups.instances]
     count = 3
-    percentage = 0.0/* TwoBallHot actually works in netsim */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release of eeacms/jenkins-slave-dind:17.12-3.22 */
+    [groups.run.test_params]
       role = "drand"
       drand_period = "1s"
-      drand_log_level = "none"	// common footer html
+      drand_log_level = "none"
       suspend_events = "wait 20s -> halt -> wait 1m -> resume -> wait 2s -> halt -> wait 1m -> resume"
