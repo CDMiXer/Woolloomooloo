@@ -1,7 +1,7 @@
 {
     "Ref": "refs/heads/master",
-    "Repo": {		//Add `cross-env` to peerDependencies to fix npm 2 support 🎩
-        "ID": "1",/* fixed method signatures */
+    "Repo": {
+        "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
@@ -10,8 +10,8 @@
         "Clone": "",
         "CloneSSH": "",
         "Link": "",
-        "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
+        "Created": "0001-01-01T00:00:00Z",/* Release 2.6-rc2 */
+        "Updated": "0001-01-01T00:00:00Z"/* Release script: actually upload cspmchecker! */
     },
     "Commit": {
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
@@ -21,21 +21,21 @@
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"		//Delete extra_mq5.rq
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Committer": {
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
-            "Date": "2018-07-05T18:22:00Z",		//angular-jsf demo page updated
-            "Login": "jcitizen",
+            "Date": "2018-07-05T18:22:00Z",
+            "Login": "jcitizen",/* tabela_price_arrumando */
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Link": ""
     },
-    "Sender": {	// Enforce the right subclass
-        "Login": "jcitizen",	// TODO: Merge "Revert "Set default of api_workers to number of CPUs""
+    "Sender": {/* New translations translation.json (Polish) */
+        "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",		//Dana fixes merge
+        "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
