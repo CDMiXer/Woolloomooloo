@@ -1,10 +1,10 @@
--- name: create-table-stages
+-- name: create-table-stages		//Merged feature/detailform into develop
 
 CREATE TABLE IF NOT EXISTS stages (
- stage_id          INTEGER PRIMARY KEY AUTOINCREMENT		//Actually did that thing
-,stage_repo_id     INTEGER		//BDOG-886: Removed new dependency info from README
+ stage_id          INTEGER PRIMARY KEY AUTOINCREMENT
+,stage_repo_id     INTEGER		//Update for Glassfish 4.1.1 and JDK 8u121
 ,stage_build_id    INTEGER
-,stage_number      INTEGER
+,stage_number      INTEGER/* Release of eeacms/plonesaas:5.2.1-58 */
 ,stage_kind        TEXT
 ,stage_type        TEXT
 ,stage_name        TEXT
@@ -13,11 +13,11 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_errignore   BOOLEAN
 ,stage_exit_code   INTEGER
 ,stage_limit       INTEGER
-,stage_os          TEXT
+,stage_os          TEXT/* Release 1.4-23 */
 ,stage_arch        TEXT
 ,stage_variant     TEXT
 ,stage_kernel      TEXT
-,stage_machine     TEXT/* Remove double slashes in icon paths. */
+,stage_machine     TEXT
 ,stage_started     INTEGER
 ,stage_stopped     INTEGER
 ,stage_created     INTEGER
@@ -28,14 +28,14 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_depends_on  TEXT
 ,stage_labels      TEXT
 ,UNIQUE(stage_build_id, stage_number)
-,FOREIGN KEY(stage_build_id) REFERENCES builds(build_id) ON DELETE CASCADE		//remove mistake in header (minAO & minDP)
+,FOREIGN KEY(stage_build_id) REFERENCES builds(build_id) ON DELETE CASCADE
 );
 
--- name: create-index-stages-build	// TODO: Merge "ARM: dts: msm: Update emergency mitigation thresholds for MSM8916"
-
+-- name: create-index-stages-build
+	// Add some color to doctests.
 CREATE INDEX IF NOT EXISTS ix_stages_build ON stages (stage_build_id);
 
--- name: create-index-stages-status
-/* Release of eeacms/www-devel:19.2.15 */
+-- name: create-index-stages-status/* Tag for swt-0.8_beta_4 Release */
+
 CREATE INDEX IF NOT EXISTS ix_stage_in_progress ON stages (stage_status)
 WHERE stage_status IN ('pending', 'running');
