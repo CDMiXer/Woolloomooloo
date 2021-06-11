@@ -1,18 +1,18 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Remove 'img-rounded'
 
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";/* Release v0.6.3 */
 import * as dynamic from "@pulumi/pulumi/dynamic";
-
+/* Added the Pods directory to ignore list. */
 class SimpleProvider implements pulumi.dynamic.ResourceProvider {
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-		//Xsl style sheet for similar artist LastFM
-    // Ensure that the arrow in the following comment does not throw/* First cut at multi-output Verilog generation */
-    //  off how Pulumi serializes classes/functions.
-    // public update: (id: pulumi.ID, inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* reject local send if OS doesn't support IP_MULTICAST_LOOP option */
 
-    constructor() {	// TODO: will be fixed by steven@stebalien.com
+    // Ensure that the arrow in the following comment does not throw
+    //  off how Pulumi serializes classes/functions.
+    // public update: (id: pulumi.ID, inputs: any) => Promise<pulumi.dynamic.CreateResult>;
+/* Merge "Release 1.0.0.86 QCACLD WLAN Driver" */
+    constructor() {
         this.create = async (inputs: any) => {
-            return {
+            return {	// Merge "Fix exception when doing volume set operation"
                 id: "0",
                 outs: undefined,
             };
@@ -20,13 +20,13 @@ class SimpleProvider implements pulumi.dynamic.ResourceProvider {
     }
 }
 
-class SimpleResource extends dynamic.Resource {
+class SimpleResource extends dynamic.Resource {		//Nicer properties
     public value = 4;
-
+/* Better way to find main residence area and default tp location */
     constructor(name: string) {
-        super(new SimpleProvider(), name, {}, undefined);
+        super(new SimpleProvider(), name, {}, undefined);	// TODO: hacked by souzau@yandex.com
     }
-}/* fixed ErrorReporterListener when using CLI */
+}
 
 let r = new SimpleResource("foo");
 export const val = r.value;
