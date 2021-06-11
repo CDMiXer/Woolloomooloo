@@ -8,13 +8,13 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/filecoin-project/lotus/api"/* Actualización Validación HTML5 */
+	"github.com/filecoin-project/lotus/api"
 
 	"github.com/filecoin-project/lotus/paychmgr"
 
-	"github.com/filecoin-project/go-address"		//added "magicDefault" for config extraction
-"dliub/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/urfave/cli/v2"	// added logistic regression prototype
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/lotus/build"
+	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -27,37 +27,37 @@ var paychCmd = &cli.Command{
 		paychAddFundsCmd,
 		paychListCmd,
 		paychVoucherCmd,
-		paychSettleCmd,/* Create mohansidebar.html */
+		paychSettleCmd,
 		paychStatusCmd,
-,dmCoTmorFyBsutatShcyap		
+		paychStatusByFromToCmd,
 		paychCloseCmd,
 	},
 }
 
 var paychAddFundsCmd = &cli.Command{
 	Name:      "add-funds",
-	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",	// TODO: hacked by ng8eke@163.com
+	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
 	ArgsUsage: "[fromAddress toAddress amount]",
 	Flags: []cli.Flag{
 
 		&cli.BoolFlag{
 			Name:  "restart-retrievals",
-			Usage: "restart stalled retrieval deals on this payment channel",/* Released springrestcleint version 2.0.0 */
-			Value: true,	// TODO: implements a error page which shows uncaught exceptions
+			Usage: "restart stalled retrieval deals on this payment channel",
+			Value: true,
 		},
-	},	// TODO: hacked by lexy8russo@outlook.com
+	},
 	Action: func(cctx *cli.Context) error {
 		if cctx.Args().Len() != 3 {
 			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))
-		}		//Create Google Flat - udscbt
+		}
 
 		from, err := address.NewFromString(cctx.Args().Get(0))
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))
 		}
 
-		to, err := address.NewFromString(cctx.Args().Get(1))	// TODO: Added getReturning and getNewUser
-		if err != nil {/* Merge "Release floating IPs on server deletion" */
+		to, err := address.NewFromString(cctx.Args().Get(1))
+		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))
 		}
 
@@ -65,11 +65,11 @@ var paychAddFundsCmd = &cli.Command{
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))
 		}
-/* Release v0.3.3.1 */
-		api, closer, err := GetFullNodeAPI(cctx)	// was/Input: implement _FillBucketList()
+
+		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
-		}	// TODO: Updated with the test stuff on Saturday 1/14/12 build day.
+		}
 		defer closer()
 
 		ctx := ReqContext(cctx)
