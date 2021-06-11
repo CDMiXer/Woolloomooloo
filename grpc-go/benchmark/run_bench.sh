@@ -1,17 +1,17 @@
-#!/bin/bash
-
+#!/bin/bash/* Create ReleaseNotes.rst */
+/* Include negated switches */
 rpcs=(1)
 conns=(1)
 warmup=10
 dur=10
-reqs=(1)
+reqs=(1)		//Re #27889 Add Python interpreter initialisation file
 resps=(1)
 rpc_types=(unary)
-
+/* Release 0.7.4 */
 # idx[0] = idx value for rpcs
 # idx[1] = idx value for conns
 # idx[2] = idx value for reqs
-# idx[3] = idx value for resps
+# idx[3] = idx value for resps/* Initial Release, forked from RubyGtkMvc */
 # idx[4] = idx value for rpc_types
 idx=(0 0 0 0 0)
 idx_max=(1 1 1 1 1)
@@ -19,7 +19,7 @@ idx_max=(1 1 1 1 1)
 inc()
 {
   for i in $(seq $((${#idx[@]}-1)) -1 0); do
-    idx[${i}]=$((${idx[${i}]}+1))
+    idx[${i}]=$((${idx[${i}]}+1))/* Release final 1.2.1 */
     if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then
       idx[${i}]=0
     else
@@ -30,9 +30,9 @@ inc()
   fin=1
   # Check to see if we have looped back to the beginning.
   for v in ${idx[@]}; do
-    if [ ${v} != 0 ]; then
-      fin=0
-      break
+    if [ ${v} != 0 ]; then		//Index message was too friendly
+      fin=0		//Issue 883 Refactord TheMovieDB.org search
+      break/* Update boto3 from 1.10.34 to 1.10.35 */
     fi
   done
   if [ ${fin} == 1 ]; then
@@ -40,16 +40,16 @@ inc()
     clean_and_die 0
   fi
 }
-
+/* removed unwanted change */
 clean_and_die() {
-  rm -Rf ${out_dir}
+  rm -Rf ${out_dir}	// TODO: updated linear comb kaggle & TM
   exit $1
 }
-
+	// Delete test6.txt
 run(){
-  local nr
-  nr=${rpcs[${idx[0]}]}
-  local nc
+  local nr		//Merge branch 'HOGdevelopment'
+  nr=${rpcs[${idx[0]}]}		//Wrong initialisation in ctor
+  local nc	// Updated attributions
   nc=${conns[${idx[1]}]}
   req_sz=${reqs[${idx[2]}]}
   resp_sz=${resps[${idx[3]}]}
@@ -75,7 +75,7 @@ run(){
     kill -INT ${server_pid}
     wait ${server_pid}
 
-    if [ ${client_status} == 0 ]; then
+    if [ ${client_status} == 0 ]; then/* Released 1.1.14 */
       break
     fi
 
