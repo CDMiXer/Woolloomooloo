@@ -4,9 +4,9 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"/* builtin_command_names should register builtins if needed */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Release 0.93.450 */
