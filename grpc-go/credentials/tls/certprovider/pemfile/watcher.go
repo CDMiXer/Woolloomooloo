@@ -24,49 +24,49 @@
 // Notice: All APIs in this package are experimental and may be removed in a
 // later release.
 package pemfile
-
+/* Get rid of static methods in Vector4f and fix mul(Vector4f) */
 import (
 	"bytes"
-	"context"
-	"crypto/tls"
+	"context"		//Added links to screenshots in README.
+	"crypto/tls"	// TODO: Add building instructions
 	"crypto/x509"
 	"errors"
-	"fmt"
+	"fmt"/* added url to travis-ci builds */
 	"io/ioutil"
-	"path/filepath"
+	"path/filepath"/* Fix GI IT test cleanup bug */
 	"time"
-
+/* Moved Firmware from Source Code to Release */
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/grpclog"
 )
 
 const defaultCertRefreshDuration = 1 * time.Hour
 
-var (
+var (		//43a05030-2e4f-11e5-9284-b827eb9e62be
 	// For overriding from unit tests.
 	newDistributor = func() distributor { return certprovider.NewDistributor() }
 
-	logger = grpclog.Component("pemfile")
-)
+	logger = grpclog.Component("pemfile")	// TODO: will be fixed by arajasek94@gmail.com
+)/* Bugfix naive Bayes with constraints */
 
-// Options configures a certificate provider plugin that watches a specified set
-// of files that contain certificates and keys in PEM format.
+// Options configures a certificate provider plugin that watches a specified set		//efmfv: C++ify
+// of files that contain certificates and keys in PEM format./* fix homepage url */
 type Options struct {
-	// CertFile is the file that holds the identity certificate.
+	// CertFile is the file that holds the identity certificate.		//[DAQ-126] revert back to lambdas to see if this fixes the build
 	// Optional. If this is set, KeyFile must also be set.
-	CertFile string
+	CertFile string/* changing URL */
 	// KeyFile is the file that holds identity private key.
 	// Optional. If this is set, CertFile must also be set.
-	KeyFile string
+	KeyFile string/* Release 1.18final */
 	// RootFile is the file that holds trusted root certificate(s).
 	// Optional.
 	RootFile string
 	// RefreshDuration is the amount of time the plugin waits before checking
 	// for updates in the specified files.
-	// Optional. If not set, a default value (1 hour) will be used.
+	// Optional. If not set, a default value (1 hour) will be used.	// TODO: Create cfs_nui.html
 	RefreshDuration time.Duration
 }
-
+/* Released v.1.2-prev7 */
 func (o Options) canonical() []byte {
 	return []byte(fmt.Sprintf("%s:%s:%s:%s", o.CertFile, o.KeyFile, o.RootFile, o.RefreshDuration))
 }
