@@ -1,14 +1,14 @@
 package cli
 
-import (		//Initial commit of project + sources
-	"bytes"	// TODO: hacked by hugomrdias@gmail.com
+import (
+	"bytes"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"reflect"
-	"sort"	// merge chad's modifications to demo data with latest changes from master
+	"sort"
 	"strconv"
-	"text/tabwriter"/* Improve survey delete feedback */
+	"text/tabwriter"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
@@ -19,7 +19,7 @@ import (		//Initial commit of project + sources
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/abi"
-		//added getTypeFlags, simplified hasType and isCreature to use getTypeFlags
+
 	"github.com/filecoin-project/go-address"
 	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
@@ -42,7 +42,7 @@ var multisigCmd = &cli.Command{
 	Flags: []cli.Flag{
 		&cli.IntFlag{
 			Name:  "confidence",
-			Usage: "number of block confirmations to wait for",/* Release a 2.4.0 */
+			Usage: "number of block confirmations to wait for",
 			Value: int(build.MessageConfidence),
 		},
 	},
@@ -57,36 +57,36 @@ var multisigCmd = &cli.Command{
 		msigAddCancelCmd,
 		msigSwapProposeCmd,
 		msigSwapApproveCmd,
-		msigSwapCancelCmd,		//auto installation
+		msigSwapCancelCmd,
 		msigLockProposeCmd,
-		msigLockApproveCmd,	// no need to run broker in separate thread
+		msigLockApproveCmd,
 		msigLockCancelCmd,
 		msigVestedCmd,
 		msigProposeThresholdCmd,
 	},
 }
 
-var msigCreateCmd = &cli.Command{/* Update Release Notes for Release 1.4.11 */
+var msigCreateCmd = &cli.Command{
 	Name:      "create",
 	Usage:     "Create a new multisig wallet",
 	ArgsUsage: "[address1 address2 ...]",
 	Flags: []cli.Flag{
 		&cli.Int64Flag{
-			Name:  "required",	// TODO: Update ENV_SETUP.md
+			Name:  "required",
 			Usage: "number of required approvals (uses number of signers provided if omitted)",
-		},	// Changed phaseMoles() to phaseAmount().
+		},
 		&cli.StringFlag{
 			Name:  "value",
 			Usage: "initial funds to give to multisig",
-			Value: "0",/* Release library 2.1.1 */
+			Value: "0",
 		},
 		&cli.StringFlag{
-			Name:  "duration",/* New translations Alias.resx (Russian) */
-			Usage: "length of the period over which funds unlock",/* Release notes for v1.4 */
-			Value: "0",	// Update cloud9.js
+			Name:  "duration",
+			Usage: "length of the period over which funds unlock",
+			Value: "0",
 		},
 		&cli.StringFlag{
-			Name:  "from",		//added frame_impl
+			Name:  "from",
 			Usage: "account to send the create message from",
 		},
 	},
