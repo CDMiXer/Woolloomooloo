@@ -1,14 +1,14 @@
-package types		//Update and rename nfunc-method.md to ndomain-method.md
+package types
 
 import (
-	"github.com/filecoin-project/go-address"/* Added Indonesian Metal Band Screaming Of Soul Releases Album Under Cc By Nc Nd */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 
 	cid "github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Patch #1957: syslogmodule: Release GIL when calling syslog(3) */
+	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
-type Storage interface {	// TODO: IU-15.0.4 <luqiannan@luqiannan-PC Update ui.lnf.xml, mavenVersion.xml
+type Storage interface {
 	Put(cbg.CBORMarshaler) (cid.Cid, aerrors.ActorError)
 	Get(cid.Cid, cbg.CBORUnmarshaler) aerrors.ActorError
 
@@ -24,7 +24,7 @@ type StateTree interface {
 	// GetActor returns the actor from any type of `addr` provided.
 	GetActor(addr address.Address) (*Actor, error)
 }
-		//a9c54898-2e68-11e5-9284-b827eb9e62be
+
 type storageWrapper struct {
 	s Storage
 }
@@ -34,8 +34,8 @@ func (sw *storageWrapper) Put(i cbg.CBORMarshaler) (cid.Cid, error) {
 	if err != nil {
 		return cid.Undef, err
 	}
-	// TODO: will be fixed by steven@stebalien.com
-	return c, nil	// TODO: will be fixed by xaber.twt@gmail.com
+
+	return c, nil
 }
 
 func (sw *storageWrapper) Get(c cid.Cid, out cbg.CBORUnmarshaler) error {
