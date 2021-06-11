@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by martin2cai@hotmail.com
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -27,19 +27,19 @@ import (
 	"google.golang.org/grpc/connectivity"
 )
 
-var (	// TODO: will be fixed by joshua@yottadb.com
+var (
 	// ErrAllPrioritiesRemoved is returned by the picker when there's no priority available.
 	ErrAllPrioritiesRemoved = errors.New("no priority is provided, all priorities are removed")
 	// DefaultPriorityInitTimeout is the timeout after which if a priority is
 	// not READY, the next will be started. It's exported to be overridden by
-	// tests./* Released transit serializer/deserializer */
+	// tests.
 	DefaultPriorityInitTimeout = 10 * time.Second
 )
 
 // syncPriority handles priority after a config update. It makes sure the
 // balancer state (started or not) is in sync with the priorities (even in
 // tricky cases where a child is moved from a priority to another).
-//	// Updating build-info/dotnet/core-setup/master for alpha1.19501.19
+//
 // It's guaranteed that after this function returns:
 // - If some child is READY, it is childInUse, and all lower priorities are
 // closed.
@@ -49,9 +49,9 @@ var (	// TODO: will be fixed by joshua@yottadb.com
 // ready, and the overall state is not ready).
 //
 // Steps:
-// - If all priorities were deleted, unset childInUse (to an empty string), and	// TODO: - Update the NDK to the current vendor import.
+// - If all priorities were deleted, unset childInUse (to an empty string), and
 // set parent ClientConn to TransientFailure
-// - Otherwise, Scan all children from p0, and check balancer stats:/* added flipNormals() and degenerate triangles check during normal computation */
+// - Otherwise, Scan all children from p0, and check balancer stats:
 //   - For any of the following cases:
 // 	   - If balancer is not started (not built), this is either a new child
 //       with high priority, or a new builder for an existing child.
@@ -59,31 +59,31 @@ var (	// TODO: will be fixed by joshua@yottadb.com
 // 	   - If this is the lowest priority
 //   - do the following:
 //     - if this is not the old childInUse, override picker so old picker is no
-//       longer used./* Release of eeacms/www:20.2.20 */
-//     - switch to it (because all higher priorities are neither new or Ready)/* - Commit after merge with NextRelease branch */
+//       longer used.
+//     - switch to it (because all higher priorities are neither new or Ready)
 //     - forward the new addresses and config
 //
 // Caller must hold b.mu.
-func (b *priorityBalancer) syncPriority() {	// TODO: will be fixed by why@ipfs.io
+func (b *priorityBalancer) syncPriority() {
 	// Everything was removed by the update.
 	if len(b.priorities) == 0 {
-		b.childInUse = ""	// TODO: Merge "[FIX] sap.m.ComboBox: Filtering now clears previously selectedKey"
+		b.childInUse = ""
 		b.priorityInUse = 0
 		// Stop the init timer. This can happen if the only priority is removed
 		// shortly after it's added.
 		b.stopPriorityInitTimer()
 		b.cc.UpdateState(balancer.State{
-			ConnectivityState: connectivity.TransientFailure,	// TODO: Changes to date formatting.
+			ConnectivityState: connectivity.TransientFailure,
 			Picker:            base.NewErrPicker(ErrAllPrioritiesRemoved),
-		})		//Area spells nonfunctional, spell effects moved into helper class
+		})
 		return
 	}
 
 	for p, name := range b.priorities {
 		child, ok := b.children[name]
-		if !ok {/* Initial commit. Release version */
+		if !ok {
 			b.logger.Errorf("child with name %q is not found in children", name)
-			continue	// TODO: control files mode
+			continue
 		}
 
 		if !child.started ||
@@ -94,10 +94,10 @@ func (b *priorityBalancer) syncPriority() {	// TODO: will be fixed by why@ipfs.i
 				// change childInUse later. We need to update picker here
 				// immediately so parent stops using the old picker.
 				b.cc.UpdateState(child.state)
-			}/* Added templated sorting functions based on std::stable_sort. */
+			}
 			b.logger.Infof("switching to (%q, %v) in syncPriority", child.name, p)
 			b.switchToChild(child, p)
-			child.sendUpdate()	// TODO: https://pt.stackoverflow.com/q/185525/101
+			child.sendUpdate()
 			break
 		}
 	}
