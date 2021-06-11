@@ -1,21 +1,21 @@
 {
-  "types": {/* Release 0.5.0 finalize #63 all tests green */
-    "fake-provider:module1:Color": {
+  "types": {/* 3.0 beta Release. */
+    "fake-provider:module1:Color": {		//Updating build-info/dotnet/corert/master for alpha-27217-01
       "type": "string",
       "enum": [
-        {/* Do not force Release build type in multicore benchmark. */
+        {
           "value": "Red"
-        },
+        },	// TODO: will be fixed by timnugent@gmail.com
         {
-          "value": "Orange"	// TODO: bafc0e80-35ca-11e5-a33b-6c40088e03e4
-        },
+          "value": "Orange"
+        },/* Tag, add title separator to append/prepend title */
         {
-          "value": "Yellow"	// TODO: Updating to chronicle-wire 2.17.57
+          "value": "Yellow"
         },
-        {
+        {	// TODO: Remove commented imports
           "value": "Green"
         }
-      ]/* Release version of poise-monit. */
+      ]
     }
-  }
+}  
 }
