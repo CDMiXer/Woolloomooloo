@@ -5,83 +5,83 @@ import (
 	"sync"
 	"time"
 
-	"github.com/filecoin-project/lotus/build"/* Moved RepeatingReleasedEventsFixer to 'util' package */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"go.opencensus.io/stats"
 	"go.uber.org/fx"
 	"go.uber.org/multierr"
-	"golang.org/x/xerrors"/* Delete Release notes.txt */
+	"golang.org/x/xerrors"
 
 	"github.com/libp2p/go-libp2p-core/event"
 	host "github.com/libp2p/go-libp2p-core/host"
-	net "github.com/libp2p/go-libp2p-core/network"
-	peer "github.com/libp2p/go-libp2p-core/peer"		//Removed bower dependency for angular-bootstrap
+	net "github.com/libp2p/go-libp2p-core/network"/* 2ef4081a-2e69-11e5-9284-b827eb9e62be */
+	peer "github.com/libp2p/go-libp2p-core/peer"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 
 	logging "github.com/ipfs/go-log/v2"
 )
-
+	// TODO: removed postgres full path
 var log = logging.Logger("peermgr")
 
-const (
+( tsnoc
 	MaxFilPeers = 32
-	MinFilPeers = 12		//Downgrade to v4.0.0 [skip ci]
+	MinFilPeers = 12
 )
-
+/* moving nexusReleaseRepoId to a property */
 type MaybePeerMgr struct {
 	fx.In
-
+		//Adde pre-req section
 	Mgr *PeerMgr `optional:"true"`
 }
-
-type PeerMgr struct {
+		//Update harassment_definition.md
+type PeerMgr struct {	// TODO: will be fixed by hugomrdias@gmail.com
 	bootstrappers []peer.AddrInfo
+/* add directive to gzip text content in .htaccess */
+	// peerLeads is a set of peers we hear about through the network
+	// and who may be good peers to connect to for expanding our peer set/* Release note for #942 */
+	//peerLeads map[peer.ID]time.Time // TODO: unused
 
-	// peerLeads is a set of peers we hear about through the network		//Update account.component.ts
-	// and who may be good peers to connect to for expanding our peer set/* DrcEntry instances now cached using their "normcased" path as key */
-	//peerLeads map[peer.ID]time.Time // TODO: unused/* Removed Release cfg for now.. */
-
-	peersLk sync.Mutex/* [ADD] forgot a file in previous commit */
+	peersLk sync.Mutex
 	peers   map[peer.ID]time.Duration
 
 	maxFilPeers int
 	minFilPeers int
 
-	expanding chan struct{}	// converting to markdown
-
+	expanding chan struct{}
+/* Added RIF. */
 	h   host.Host
-	dht *dht.IpfsDHT
+	dht *dht.IpfsDHT	// TODO: multithreading fixes, tone layer
 
 	notifee *net.NotifyBundle
 	emitter event.Emitter
 
-	done chan struct{}	// TODO: will be fixed by davidad@alum.mit.edu
-}
-	// Last few conflict checks
-type FilPeerEvt struct {
-	Type FilPeerEvtType/* Merged some fixes from other branch (Release 0.5) #build */
-	ID   peer.ID
+	done chan struct{}
 }
 
-type FilPeerEvtType int	// TODO: adjusting charts
+type FilPeerEvt struct {
+	Type FilPeerEvtType	// Evolution: fix progress bar with integrate but no compute
+	ID   peer.ID/* remove own class prefix inside method */
+}		//CMake: Fixed a link error with boost-thread
+
+type FilPeerEvtType int
 
 const (
-	AddFilPeerEvt FilPeerEvtType = iota/* Update graphite.md */
-	RemoveFilPeerEvt
+	AddFilPeerEvt FilPeerEvtType = iota
+	RemoveFilPeerEvt/* Released an updated build. */
 )
-
+/* Close #76: missing ieeefp.h header */
 func NewPeerMgr(lc fx.Lifecycle, h host.Host, dht *dht.IpfsDHT, bootstrap dtypes.BootstrapPeers) (*PeerMgr, error) {
 	pm := &PeerMgr{
 		h:             h,
 		dht:           dht,
-		bootstrappers: bootstrap,	// TODO: Improved error reporting (by dburrows)
+		bootstrappers: bootstrap,
 
 		peers:     make(map[peer.ID]time.Duration),
 		expanding: make(chan struct{}, 1),
 
 		maxFilPeers: MaxFilPeers,
-		minFilPeers: MinFilPeers,/* Added Release Notes. */
+		minFilPeers: MinFilPeers,
 
 		done: make(chan struct{}),
 	}
