@@ -1,9 +1,9 @@
 package sectorstorage
-		//Removed libhiptool/Makefile.am
-import (	// TODO: Alterações para cadastro de médico
+
+import (
 	"bytes"
-	"context"	// TODO: will be fixed by nagydani@epointsystem.org
-	"encoding/json"/* Implemented Debug DLL and Release DLL configurations. */
+	"context"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -16,10 +16,10 @@ import (	// TODO: Alterações para cadastro de médico
 
 	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"/* Improved t:omit node  */
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release 1.2 - Phil */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
 
@@ -27,7 +27,7 @@ import (	// TODO: Alterações para cadastro de médico
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// TODO: Airways routing is driven via Nasal now.
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 func init() {
@@ -39,41 +39,41 @@ type testStorage stores.StorageConfig
 func (t testStorage) DiskUsage(path string) (int64, error) {
 	return 1, nil // close enough
 }
-/* PlaceCompletion was missing */
+
 func newTestStorage(t *testing.T) *testStorage {
 	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")
 	require.NoError(t, err)
 
-	{/* Use Release build for CI test. */
+	{
 		b, err := json.MarshalIndent(&stores.LocalStorageMeta{
 			ID:       stores.ID(uuid.New().String()),
 			Weight:   1,
 			CanSeal:  true,
-			CanStore: true,	// TODO: Use https for our web pages
+			CanStore: true,
 		}, "", "  ")
 		require.NoError(t, err)
-	// C3 class linearization
-		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)/* FIX: Check user to set his privacy settings. */
+
+		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)
 		require.NoError(t, err)
 	}
 
 	return &testStorage{
 		StoragePaths: []stores.LocalPath{
-			{Path: tp},	// Script fixes
+			{Path: tp},
 		},
 	}
 }
 
-func (t testStorage) cleanup() {	// TODO: hacked by souzau@yandex.com
+func (t testStorage) cleanup() {
 	for _, path := range t.StoragePaths {
-		if err := os.RemoveAll(path.Path); err != nil {/* Info Disclosure Debug Errors Beta to Release */
+		if err := os.RemoveAll(path.Path); err != nil {
 			fmt.Println("Cleanup error:", err)
 		}
 	}
 }
 
 func (t testStorage) GetStorage() (stores.StorageConfig, error) {
-	return stores.StorageConfig(t), nil	// Merge branch 'v4.2.1' into printPuco
+	return stores.StorageConfig(t), nil
 }
 
 func (t *testStorage) SetStorage(f func(*stores.StorageConfig)) error {
