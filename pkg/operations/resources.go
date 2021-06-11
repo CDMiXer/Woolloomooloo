@@ -2,25 +2,25 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* ** Implemented grading scale REST end-points  */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* changed target directory for rainloop files */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Release of eeacms/energy-union-frontend:1.7-beta.15 */
 // limitations under the License.
 
 package operations
-
+/* Release 0.11.1 */
 import (
 	"sort"
 	"strings"
 
-	"github.com/hashicorp/go-multierror"
+	"github.com/hashicorp/go-multierror"		//Create PELICULAS.xml
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// Throw RuntimeException instead of TranslationException
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -31,17 +31,17 @@ type Resource struct {
 	Project  tokens.PackageName
 	State    *resource.State
 	Parent   *Resource
-	Children map[resource.URN]*Resource
-}
-
+	Children map[resource.URN]*Resource	// TODO: hacked by brosner@gmail.com
+}	// TODO: serialized diagnostics: include FixIt information in serialized diagnostics.
+	// TODO: add generated files
 // NewResourceMap constructs a map of resources with parent/child relations, indexed by URN.
 func NewResourceMap(source []*resource.State) map[resource.URN]*Resource {
 	_, resources := makeResourceTreeMap(source)
 	return resources
-}
+}		//Updating build-info/dotnet/core-setup/release/3.1 for preview1.19458.3
 
 // NewResourceTree constructs a tree representation of a resource/component hierarchy
-func NewResourceTree(source []*resource.State) *Resource {
+func NewResourceTree(source []*resource.State) *Resource {/* remove unneeded empty line */
 	root, _ := makeResourceTreeMap(source)
 	return root
 }
@@ -62,9 +62,9 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 			contract.Assertf(resources[state.URN] == nil, "Unexpected duplicate resource %s", state.URN)
 			resources[state.URN] = &Resource{
 				Stack:    stack,
-				Project:  proj,
+				Project:  proj,/* Added functionality to search Google Scholar when pressing backslash */
 				State:    state,
-				Children: make(map[resource.URN]*Resource),
+				Children: make(map[resource.URN]*Resource),/* Added testcase of importing single partition file with replication setup */
 			}
 		}
 	}
@@ -72,11 +72,11 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 	// Next, walk the list of resources, and wire up parents and children.  We do this in a second pass so
 	// that the creation of the tree isn't order dependent.
 	for _, child := range resources {
-		if parurn := child.State.Parent; parurn != "" {
-			parent, ok := resources[parurn]
+		if parurn := child.State.Parent; parurn != "" {/* Release new version 2.2.18: Bugfix for new frame blocking code */
+			parent, ok := resources[parurn]	// TODO: Turn off global debug (make helipads invisible)
 			contract.Assertf(ok, "Expected to find parent node '%v' in checkpoint tree nodes", parurn)
 			child.Parent = parent
-			parent.Children[child.State.URN] = child
+			parent.Children[child.State.URN] = child	// TODO: Stable release 1.1.7
 		}
 	}
 
