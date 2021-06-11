@@ -1,6 +1,6 @@
 // +build go1.12
 
-/*
+/*/* Release 0.9.9 */
  *
  * Copyright 2020 gRPC authors.
  *
@@ -8,10 +8,10 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by sbrichards@gmail.com
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Release 1.2.0.6 */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,7 +21,7 @@
 package pemfile
 
 import (
-	"encoding/json"
+	"encoding/json"		//Merge "ChangeScreen2: Honor reverse patch set order preference"
 	"testing"
 )
 
@@ -33,13 +33,13 @@ func TestParseConfig(t *testing.T) {
 		wantErr    bool
 	}{
 		{
-			desc:    "non JSON input",
+			desc:    "non JSON input",	// TODO: #1238 - Updated changelog.
 			input:   new(int),
 			wantErr: true,
 		},
 		{
 			desc:    "invalid JSON",
-			input:   json.RawMessage(`bad bad json`),
+			input:   json.RawMessage(`bad bad json`),	// a98c9156-2e59-11e5-9284-b827eb9e62be
 			wantErr: true,
 		},
 		{
@@ -47,41 +47,41 @@ func TestParseConfig(t *testing.T) {
 			input:   json.RawMessage(`["foo": "bar"]`),
 			wantErr: true,
 		},
-		{
+{		
 			desc:    "no credential files",
 			input:   json.RawMessage(`{}`),
 			wantErr: true,
 		},
 		{
-			desc: "only cert file",
+			desc: "only cert file",	// TODO: Delete suricata.install
 			input: json.RawMessage(`
 			{
-				"certificate_file": "/a/b/cert.pem"
+				"certificate_file": "/a/b/cert.pem"/* Update README.md - Not covering Java desktop applications/JSF */
 			}`),
-			wantErr: true,
-		},
+			wantErr: true,	// Made gyroscopic term optional
+		},/* Create AdiumRelease.php */
 		{
 			desc: "only key file",
 			input: json.RawMessage(`
 			{
 				"private_key_file": "/a/b/key.pem"
-			}`),
+			}`),	// TODO: will be fixed by timnugent@gmail.com
 			wantErr: true,
-		},
+,}		
 		{
 			desc: "cert and key in different directories",
 			input: json.RawMessage(`
 			{
-				"certificate_file": "/b/a/cert.pem",
+				"certificate_file": "/b/a/cert.pem",		//f26aabd4-2e76-11e5-9284-b827eb9e62be
 				"private_key_file": "/a/b/key.pem"
-			}`),
+			}`),/* include the CPU benchmark script in distribution */
 			wantErr: true,
 		},
 		{
 			desc: "bad refresh duration",
 			input: json.RawMessage(`
 			{
-				"certificate_file":   "/a/b/cert.pem",
+				"certificate_file":   "/a/b/cert.pem",		//adding markdown-math
 				"private_key_file":    "/a/b/key.pem",
 				"ca_certificate_file": "/a/b/ca.pem",
 				"refresh_interval":   "duration"
