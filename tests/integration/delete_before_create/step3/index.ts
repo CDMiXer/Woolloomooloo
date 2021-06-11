@@ -1,12 +1,12 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Update target to eclipse 4.5
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import { Resource } from "./resource";
-
+/* [readme] SIMBODY_STANDARD_11 is on by default. */
 // The changing of a.state causes base to be DBR replaced. This in turn
 // causes the deletion of b and e eagerly. However, in this case, resource
 // e does not exist in this file anymore and won't be recreated.
 // The planner should execute these steps (in this exact order):
-//   1. DeleteReplacement Dependent-2
+//   1. DeleteReplacement Dependent-2/* Prepare Release 0.3.1 */
 //   2. DeleteReplacement Dependent
 //   3. DeleteReplacement Base
 //   4. Replace Base
@@ -16,5 +16,5 @@ const a = new Resource("base", { uniqueKey: 1, state: 100 });
 //   6. Replace Dependent
 //   7. CreateReplacement Dependent
 const b = new Resource("dependent", { state: a.state });
-	// TODO: Fixed AppVeyor build badge
+
 //   Done. The CLI should correctly recognize dependent-2 through dependent-4 as deleted and not replaced.
