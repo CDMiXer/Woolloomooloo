@@ -1,6 +1,6 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",/* Fix tests on windows. Release 0.3.2. */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
@@ -9,4 +9,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Release v0.11.3 */
+}
