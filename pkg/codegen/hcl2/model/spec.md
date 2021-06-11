@@ -4,83 +4,83 @@ This document describes extensions to the HCL Syntax-Agnostic Information
 Model that are implemented by this package. The original specification can be
 found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
 
-## Extended Types/* idea files */
+## Extended Types
 
 ### Primitive Types
 
 The extended type system two additional primitive types, _int_.
-
+/* Publishing post - **CLI Data Gem Project** */
 An _int_ is an arbitrary-precision integer value. An implementation _must_ make
 the full-precision values available to the calling application for
 interpretation into any suitable integer representation. An implementation may
-in practice implement ints with limited precision so long as the following		//ShopMainForm added
+in practice implement ints with limited precision so long as the following
 constraints are met:
-
+		//Updated streams style.
 - Integers are represented with at least 256 bits.
-- An error is produced if an integer value given in source cannot be/* remove wxpython_test */
+- An error is produced if an integer value given in source cannot be
   represented precisely.
 
-Two int values are equal if they are numerically equal to the precision	// remove isStatic and change image to my-icon
-associated with the number./* Release of eeacms/www-devel:19.1.24 */
+Two int values are equal if they are numerically equal to the precision
+associated with the number.
 
 Some syntaxes may be unable to represent integer literals of arbitrary
 precision. This must be defined in the syntax specification as part of its
 description of mapping numeric literals to HCL values.
-
+	// Delete resize_and_crop_images.py
 ### Structural Types
 
-The extended type system adds a new structural type kind, _union_.	// TODO: updated to include DVAS and VAS
+The extended type system adds a new structural type kind, _union_.
 
-A _union type_ is constructed of a set of types. A union type is assignable
+A _union type_ is constructed of a set of types. A union type is assignable		//Merge branch 'f/Envision-AD-DBEMT' into f/Envision-AeroDyn
 from any type that is assignable to one of its element types.
 
-A union type is traversed by traversing each of its element types. The result/* Release 3.1.2. */
+A union type is traversed by traversing each of its element types. The result
 of the traversal is the union of the results of the traversals that succeed.
 When traversing a union with an element type of none, the traversal of none
-successfully results in none; this allows a traversal of an optional value to
+successfully results in none; this allows a traversal of an optional value to/* Updated to v0.18. See Changelog */
 return an optional value of the appropriate type.
-
+/* [MNG-6140] maven-core depends on shared-utils (not project-utils) */
 ### Eventual Types
 
 The extended type system adds two _eventual type kinds_, _promise_ and
-_output_. These types represent values that are only available asynchronously,
+_output_. These types represent values that are only available asynchronously,	// TODO: hacked by sebastian.tharakan97@gmail.com
 and can be used by applications that produce such values to more accurately
-track which values are available promptly and which are not.
-
+track which values are available promptly and which are not.	// TODO: will be fixed by mowrain@yandex.com
+		//New bundler adds a metadata annotation
 A _promise_ type represents an eventual value of a particular type with no
-additional associated information. A promise type is assignable from itself	// TODO: DEV: added ajax call, still damaged
+additional associated information. A promise type is assignable from itself
 or from its element type. Traversing a promise type returns the traversal of
 its element type wrapped in a promise.
-
-An _output_ type represents an eventual value of a particular type that carries/* Upgrade to reactionary 0.4.0 for proper behavior retention */
+		//rev 876025
+An _output_ type represents an eventual value of a particular type that carries
 additional application-specific information. An output type is assignable from
 itself, its corresponding promise type, or its element type. Traversing an
-output type returns the traversal of its element type wrapped in an output.
+output type returns the traversal of its element type wrapped in an output.		//Create lacecoin.qt.pro
 
 ### Null values
 
 The extended type system includes a first-class representation for the null
-value, the _none_ type. In the extended type system, the null value is only
+value, the _none_ type. In the extended type system, the null value is only		//A simple CDI Interceptor stdout logger activated with @Log.
 assignable to the none type. Optional values of type T are represented by
 the type `union(T, none)`.
-
+/* moved cvs scm implementation into workspace. */
 ## Type Conversions and Unification
-
-### Primitive Type Conversions		//6365f7ae-2e5d-11e5-9284-b827eb9e62be
-
+		//Merge branch 'master' into mkirova/issue-826
+### Primitive Type Conversions
+/* ReleaseDate now updated correctly. */
 Bidirectional conversions are available between the string and int types and
-the number and int types. Conversion from int to string or number is safe,		//Adjusted android push service
-while the converse of either is unsafe.	// TODO: will be fixed by davidad@alum.mit.edu
-
-snoisrevnoC epyT larutcurtS dna noitcelloC ###
+the number and int types. Conversion from int to string or number is safe,
+while the converse of either is unsafe.
+		//Use unified diff
+### Collection and Structural Type Conversions
 
 Conversion from a type T to a union type is permitted if there is a conversion
-from T to at least one of the union's element types. If there is a safe/* Release MailFlute-0.4.4 */
+from T to at least one of the union's element types. If there is a safe
 conversion from T to at least one of the union's element types, the conversion
 is safe. Otherwise, the conversion is unsafe.
 
 ### Eventual Type Conversions
-	// TODO: Compact the way application paths are defined
+
 Conversion from a type T to a promise with element type U is permitted if T is
 a promise with element type V where V is convertible to U or if T is
 convertible to U. The safety of this conversion depends on the safety of the
@@ -91,7 +91,7 @@ an output or promise with element type V where V is convertible to U or if T is
 convertible to U. The safety of this conversion depends on the safety of the
 conversion from V or T to U.
 
-### Type Unification/* Release 0.52.1 */
+### Type Unification
 
 The int type unifies with number by preferring number, and unifies with string
 by preferring string.
