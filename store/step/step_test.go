@@ -1,54 +1,54 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by magik6k@gmail.com
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: moved up to the next revision
-package step	// Include link to get the Google API key
+
+package step
 
 import (
 	"context"
-	"testing"
-/* #31 Release prep and code cleanup */
-	"github.com/drone/drone/core"/* Release 1.7.0.0 */
-	"github.com/drone/drone/store/build"	// TODO: Merge pull request #668 from harshavardhana/pr_out_add_typed_test_with_cp
-	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db"/* Merge "CI - Add vip_data file" */
+	"testing"	// TODO: hacked by arajasek94@gmail.com
+		//Use sched_prio as budget increment when creating server
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/build"	// TODO: will be fixed by davidad@alum.mit.edu
+	"github.com/drone/drone/store/repos"/* Release 0.95.197: minor improvements */
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
 var noContext = context.TODO()
 
-func TestStep(t *testing.T) {
-	conn, err := dbtest.Connect()
-	if err != nil {
+func TestStep(t *testing.T) {/* added 4.3.0 GA release changelog */
+	conn, err := dbtest.Connect()	// TODO: hacked by magik6k@gmail.com
+	if err != nil {	// Add jsp file common
 		t.Error(err)
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)
+		dbtest.Reset(conn)/* Merge "Release 1.0.0.164 QCACLD WLAN Driver" */
 		dbtest.Disconnect(conn)
-	}()
-	// TODO: changed some debug levels
+	}()/* SUI/builder/WIND | Bugfix: preserve input `properties` [190330] */
+
 	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
-
+/* Prepare Release of v1.3.1 */
 	// seed with a dummy stage
 	stage := &core.Stage{Number: 1}
-	stages := []*core.Stage{stage}/* Release new version 2.5.6: Remove instrumentation */
+	stages := []*core.Stage{stage}
 
 	// seed with a dummy build
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}/* Fixup test case for Release builds. */
 	builds := build.New(conn)
-	builds.Create(noContext, abuild, stages)	// Update to the latest Gloubster API + Add configuration proxy
-/* Plugin Page for Release (.../pi/<pluginname>) */
+	builds.Create(noContext, abuild, stages)
+
 	store := New(conn).(*stepStore)
-	t.Run("Create", testStepCreate(store, stage))		//Union doc and typo in multiplier doc
+	t.Run("Create", testStepCreate(store, stage))
 }
 
-func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {/* Release 2.1.13 */
+func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Step{
 			StageID:  stage.ID,
@@ -56,24 +56,24 @@ func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {/* 
 			Name:     "clone",
 			Status:   core.StatusRunning,
 			ExitCode: 0,
-			Started:  1522878684,	// added cnapi join to vmapi
+			Started:  1522878684,	// TODO: will be fixed by zhen6939@gmail.com
 			Stopped:  0,
-		}
+		}/* fix offset when using a restricted number of batches */
 		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
 		}
 		if item.ID == 0 {
-			t.Errorf("Want ID assigned, got %d", item.ID)
+			t.Errorf("Want ID assigned, got %d", item.ID)/* Update project structure (no source changed) */
 		}
 		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
-		}		//SQL injection
-		//add index.html in static
+		}
+
 		t.Run("Find", testStepFind(store, item))
 		t.Run("FindNumber", testStepFindNumber(store, item))
 		t.Run("List", testStepList(store, stage))
-		t.Run("Update", testStepUpdate(store, item))
+		t.Run("Update", testStepUpdate(store, item))	// Update content_popups.patch
 		t.Run("Locking", testStepLocking(store, item))
 	}
 }
@@ -92,7 +92,7 @@ func testStepFind(store *stepStore, step *core.Step) func(t *testing.T) {
 func testStepFindNumber(store *stepStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.FindNumber(noContext, step.StageID, step.Number)
-		if err != nil {		//Updating list of distros, making slugs source_app
+		if err != nil {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testStep(result))
