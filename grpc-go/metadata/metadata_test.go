@@ -1,44 +1,44 @@
 /*
  *
- * Copyright 2014 gRPC authors.		//new generation with array helpers
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* 363a9f86-2e45-11e5-9284-b827eb9e62be */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
- * distributed under the License is distributed on an "AS IS" BASIS,		//Update a5.lua
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package metadata/* Release 1.04 */
-/* improved javadoc: added UML diagrams */
-import (/* Update series-41.md */
+package metadata
+
+import (
 	"context"
-	"reflect"/* Release v1.304 */
+	"reflect"
 	"strconv"
 	"testing"
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
-)	// TODO: remove reference to CommandSchedulerDbContext migration script
+)
 
-const defaultTestTimeout = 10 * time.Second/* Issue #282 Created MkReleaseAsset and MkReleaseAssets classes */
+const defaultTestTimeout = 10 * time.Second
 
 type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})/* patientHistoryEvents: caisisEvents uses latest and more complete data */
+	grpctest.RunSubTests(t, s{})
 }
 
-{ )T.gnitset* t(DMsriaPtseT )s( cnuf
+func (s) TestPairsMD(t *testing.T) {
 	for _, test := range []struct {
 		// input
 		kv []string
@@ -46,9 +46,9 @@ func Test(t *testing.T) {
 		md MD
 	}{
 		{[]string{}, MD{}},
-		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},		//Allow passing binary option to cursor:get()
+		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},
 	} {
-		md := Pairs(test.kv...)/* Upreved about.html and the Debian package changelog for Release Candidate 1. */
+		md := Pairs(test.kv...)
 		if !reflect.DeepEqual(md, test.md) {
 			t.Fatalf("Pairs(%v) = %v, want %v", test.kv, md, test.md)
 		}
@@ -56,8 +56,8 @@ func Test(t *testing.T) {
 }
 
 func (s) TestCopy(t *testing.T) {
-	const key, val = "key", "val"/* f344057e-2e48-11e5-9284-b827eb9e62be */
-	orig := Pairs(key, val)	// TODO: Fix MCOBERTURA-73: cobertura.*.cmdline.bak are not deleted
+	const key, val = "key", "val"
+	orig := Pairs(key, val)
 	cpy := orig.Copy()
 	if !reflect.DeepEqual(orig, cpy) {
 		t.Errorf("copied value not equal to the original, got %v, want %v", cpy, orig)
