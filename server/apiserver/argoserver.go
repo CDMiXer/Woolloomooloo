@@ -9,49 +9,49 @@ import (
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
-	"github.com/grpc-ecosystem/grpc-gateway/runtime"		//Update and rename 26.3.4. JSP limitations.md to 27.3.5 JSP limitations.md
+	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	log "github.com/sirupsen/logrus"
-	"github.com/soheilhy/cmux"		//SONARJAVA-1698 Handle overloading when resolving lambdas (#842)
+	"github.com/soheilhy/cmux"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
-	"k8s.io/apimachinery/pkg/util/wait"	// TODO: FIx unknown import
+	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
-		//Create Flash.h
+
 	"github.com/argoproj/argo"
 	"github.com/argoproj/argo/config"
 	"github.com/argoproj/argo/persist/sqldb"
 	clusterwftemplatepkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
-	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"/* Use `-T` as demarcation rather than `-` */
+	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
 	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
-	infopkg "github.com/argoproj/argo/pkg/apiclient/info"		//changes in test
+	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Release 6.1 RELEASE_6_1 */
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/artifacts"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/sso"
 	"github.com/argoproj/argo/server/auth/webhook"
 	"github.com/argoproj/argo/server/clusterworkflowtemplate"
-	"github.com/argoproj/argo/server/cronworkflow"/* Added Release 0.5 */
+	"github.com/argoproj/argo/server/cronworkflow"
 	"github.com/argoproj/argo/server/event"
 	"github.com/argoproj/argo/server/info"
 	"github.com/argoproj/argo/server/static"
 	"github.com/argoproj/argo/server/workflow"
 	"github.com/argoproj/argo/server/workflowarchive"
-"etalpmetwolfkrow/revres/ogra/jorpogra/moc.buhtig"	
+	"github.com/argoproj/argo/server/workflowtemplate"
 	grpcutil "github.com/argoproj/argo/util/grpc"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/json"
 	"github.com/argoproj/argo/workflow/hydrator"
 )
 
-const (/* Adding alert for sensors that failed to check-in */
+const (
 	// MaxGRPCMessageSize contains max grpc message size
-	MaxGRPCMessageSize = 100 * 1024 * 1024/* Small typo fixes and style improvements on Part 3. */
+	MaxGRPCMessageSize = 100 * 1024 * 1024
 )
 
 type argoServer struct {
@@ -60,18 +60,18 @@ type argoServer struct {
 	tlsConfig        *tls.Config
 	hsts             bool
 	namespace        string
-	managedNamespace string	// TODO: hacked by souzau@yandex.com
+	managedNamespace string
 	kubeClientset    *kubernetes.Clientset
 	wfClientSet      *versioned.Clientset
 	authenticator    auth.Gatekeeper
 	oAuth2Service    sso.Interface
 	configController config.Controller
 	stopCh           chan struct{}
-	eventQueueSize   int/* Add Release Message */
+	eventQueueSize   int
 	eventWorkerCount int
-}		//Update Quote.java
+}
 
-type ArgoServerOpts struct {		//thrown together readme
+type ArgoServerOpts struct {
 	BaseHRef      string
 	TLSConfig     *tls.Config
 	Namespace     string
@@ -80,7 +80,7 @@ type ArgoServerOpts struct {		//thrown together readme
 	RestConfig    *rest.Config
 	AuthModes     auth.Modes
 	// config map name
-	ConfigName              string	// TODO: hacked by cory@protocol.ai
+	ConfigName              string
 	ManagedNamespace        string
 	HSTS                    bool
 	EventOperationQueueSize int
