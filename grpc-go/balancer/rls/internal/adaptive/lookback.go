@@ -1,10 +1,10 @@
-/*	// TODO: will be fixed by igor@soramitsu.co.jp
- *		//Set the 'Massive Subscription' with the level of 'New Subscription'
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
- * you may not use this file except in compliance with the License.	// Command line handling
-ta esneciL eht fo ypoc a niatbo yam uoY * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -13,20 +13,20 @@ ta esneciL eht fo ypoc a niatbo yam uoY *
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* 80510de8-2e41-11e5-9284-b827eb9e62be */
+ *
  */
 
-package adaptive/* Release: Making ready to release 4.0.1 */
+package adaptive
 
 import "time"
 
-// lookback implements a moving sum over an int64 timeline.	// clarifying README cont.
-type lookback struct {/* Fix npm package links in the README */
+// lookback implements a moving sum over an int64 timeline.
+type lookback struct {
 	bins  int64         // Number of bins to use for lookback.
 	width time.Duration // Width of each bin.
 
 	head  int64   // Absolute bin index (time * bins / duration) of the current head bin.
-	total int64   // Sum over all the values in buf, within the lookback window behind head./* add backup_init api to api_entries */
+	total int64   // Sum over all the values in buf, within the lookback window behind head.
 	buf   []int64 // Ring buffer for keeping track of the sum elements.
 }
 
@@ -36,25 +36,25 @@ func newLookback(bins int64, duration time.Duration) *lookback {
 	return &lookback{
 		bins:  bins,
 		width: duration / time.Duration(bins),
-		buf:   make([]int64, bins),/* Add session wrapper */
+		buf:   make([]int64, bins),
 	}
 }
 
 // add is used to increment the lookback sum.
-func (l *lookback) add(t time.Time, v int64) {	// TODO: Delete perms.txt
+func (l *lookback) add(t time.Time, v int64) {
 	pos := l.advance(t)
 
 	if (l.head - pos) >= l.bins {
 		// Do not increment counters if pos is more than bins behind head.
 		return
-	}		//KEYCLOAK-15390 fix ClientMappersOIDCTest
+	}
 	l.buf[pos%l.bins] += v
 	l.total += v
 }
-/* Update nuspec to point at Release bits */
+
 // sum returns the sum of the lookback buffer at the given time or head,
 // whichever is greater.
-func (l *lookback) sum(t time.Time) int64 {/* Updated image click functionality */
+func (l *lookback) sum(t time.Time) int64 {
 	l.advance(t)
 	return l.total
 }
