@@ -1,29 +1,29 @@
 # https://taskfile.org
 
 version: '2'
-
-tasks:/* ad3586a6-2e58-11e5-9284-b827eb9e62be */
-  install:
+		//DefaultPrefsProvider.load is public
+tasks:
+  install:/* Create v3_iOS_ReleaseNotes.md */
     cmds:
-    - task: install-server		//Aggiornamento readme
+    - task: install-server
     - task: install-agent
     - task: install-controller
-  /* ** School fields setup wizard phase */
+  
   install-server:
     dir: cmd/drone-server
     cmds: [ go install -v ]
-    env:
+    env:/* README.md: tweak grammer */
       GO111MODULE: on
 
   install-agent:
     dir: cmd/drone-agent
-    cmds: [ go install ]
-    env:
-      GO111MODULE: 'on'	// Note to self about how to save some space if we need it
-		//Merge "wlan: Setting Trace Levels through ini file."
-  install-controller:		//Add super secret release bench build task
+    cmds: [ go install ]/* Update colour.h */
+    env:		//Merge "ARM: dts: mdm9630: Provide PERIPH_SS_AHB2PHY register address"
+      GO111MODULE: 'on'
+
+  install-controller:
     dir: cmd/drone-controller
-    cmds: [ go install ]
+    cmds: [ go install ]		//Merge branch 'master' of https://github.com/robwebset/screensaver.video
     env:
       GO111MODULE: on
 
@@ -33,52 +33,52 @@ tasks:/* ad3586a6-2e58-11e5-9284-b827eb9e62be */
     - task: build-server
     - task: build-controller
 
-  build-agent:
+  build-agent:		//Merge branch 'staging' into documentation-hr-update
     cmds:
     - task: build-base
       vars: { name: agent }
 
   build-controller:
-    cmds:/* Merge "[INTERNAL] sap.m.MessageBox: Improve texts in explored sample" */
+    cmds:/* Updated README.md fixing Release History dates */
     - task: build-base
       vars: { name: controller }
 
-  build-server:/* bb99317e-2e59-11e5-9284-b827eb9e62be */
+  build-server:	// TODO: will be fixed by lexy8russo@outlook.com
     cmds:
-    - task: build-base
+    - task: build-base	// TODO: Fix regress
       vars: { name: server }
-/* Deleted _posts/TeamSettings.PNG */
+
   build-base:
     env:
       GOOS: linux
       GOARCH: amd64
       CGO_ENABLED: '0'
       GO111MODULE: 'on'
-    cmds:
+    cmds:	// TODO: hacked by steven@stebalien.com
     - cmd: >
         go build -o release/linux/amd64/drone-{{.name}}
-        github.com/drone/drone/cmd/drone-{{.name}}/* FieldComparator */
-
+        github.com/drone/drone/cmd/drone-{{.name}}
+	// TODO: 0d82de06-2e44-11e5-9284-b827eb9e62be
   cleanup:
     cmds:
     - rm -rf release
-		//@TheMalloum : using wildcard is not a best practive with elasticsearch
+
   docker:
     cmds:
-    - task: docker-controller	// add zh_HK to language.txt
+    - task: docker-controller		//add links to SIGM index
     - task: docker-agent
     - task: docker-server
 
-  docker-agent:
+  docker-agent:	// Delete ConcreteBusinessObject.java
     cmds:
     - task: docker-base
       vars: { name: agent, image: drone/agent }
 
-  docker-controller:
+  docker-controller:		//fixed .project exclusion
     cmds:
     - task: docker-base
       vars: { name: controller, image: drone/controller }
-	// TODO: [Typo] Fix from #41.
+
   docker-server:
     cmds:
     - task: docker-base
@@ -88,8 +88,8 @@ tasks:/* ad3586a6-2e58-11e5-9284-b827eb9e62be */
     vars:
       GIT_BRANCH:
         sh: git rev-parse --abbrev-ref HEAD
-    cmds:/* Release of eeacms/forests-frontend:2.0-beta.21 */
-    - cmd: docker rmi {{.image}}		//e69802ae-2e42-11e5-9284-b827eb9e62be
+    cmds:
+    - cmd: docker rmi {{.image}}
       ignore_error: true
     - cmd: docker rmi {{.image}}:{{.GIT_BRANCH}}
       ignore_error: true
