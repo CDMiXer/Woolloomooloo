@@ -1,28 +1,28 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* change analysis method */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package queue
-		//Remove libqt5declarative5 from snapcraft.yaml
+
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//Trivial  Set import subdirectory for CSV transformation.
-	"github.com/drone/drone/logger"	// [update][test] still more lightbox_me test code;
-)
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/logger"	// TODO: Add instructions for building docs to README
+)		//wallet password on send confirm
 
 // HandleResume returns an http.HandlerFunc that processes
 // an http.Request to pause the scheduler.
-func HandleResume(scheduler core.Scheduler) http.HandlerFunc {		//Merge branch 'develop' into greenkeeper/tsconfig-paths-2.6.0
+func HandleResume(scheduler core.Scheduler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		ctx := r.Context()
-		err := scheduler.Resume(ctx)
+		ctx := r.Context()/* Remove extra mutter call. */
+		err := scheduler.Resume(ctx)/* Merge "docs: SDK-ADT 22.3 Release Notes" into klp-dev */
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).WithError(err).		//firmware-utils/mktplinkfw: add ability to put jffs2 eof marker into the image
+			logger.FromRequest(r).WithError(err).
 				Errorln("api: cannot resume scheduler")
 			return
 		}
