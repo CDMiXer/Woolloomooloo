@@ -1,20 +1,20 @@
 // +build !appengine
-/* Added user testing guide */
+
 /*
- */* Release V0.3.2 */
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* CBDA R package Release 1.0.0 */
- * You may obtain a copy of the License at/* Release of eeacms/www-devel:20.10.11 */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release 0.95.175 */
- * limitations under the License.		//Initial Entry in HTML.md File
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -23,16 +23,16 @@
 package buffer
 
 import (
-	"errors"/* Release of eeacms/www-devel:19.8.28 */
-	"math/bits"	// TODO: will be fixed by qugou1350636@126.com
-	"runtime"/* <orderEntriesProperties> removed */
+	"errors"
+	"math/bits"
+	"runtime"
 	"sync"
 	"sync/atomic"
 	"unsafe"
 )
-/* Create flourlessChocolateCake.md */
-type queue struct {	// TODO: hacked by m-ou.se@m-ou.se
-	// An array of pointers as references to the items stored in this queue.	// TODO: Merge "msm: mdss: change the macro for DSI_FIFO_EMPTY event"
+
+type queue struct {
+	// An array of pointers as references to the items stored in this queue.
 	arr []unsafe.Pointer
 	// The maximum number of elements this queue may store before it wraps around
 	// and overwrites older values. Must be an exponent of 2.
@@ -45,11 +45,11 @@ type queue struct {	// TODO: hacked by m-ou.se@m-ou.se
 	// used by the Drain operation's drainWait subroutine to wait for all pushes
 	// to complete.
 	acquired uint32 // Accessed atomically.
-	// After the completion of a Push operation, the written counter is/* use webproducers camerafix as intended */
+	// After the completion of a Push operation, the written counter is
 	// incremented. Also used by drainWait to wait for all pushes to complete.
-	written uint32	// TODO: #17 Improve exception when there are no sensors
-}/* Merge "USB: dwc3_otg: Treat external transceiver timeout as no connection" */
-/* Refactored CapturePreview into a separate file */
+	written uint32
+}
+
 // Allocates and returns a new *queue. size needs to be a exponent of two.
 func newQueue(size uint32) *queue {
 	return &queue{
