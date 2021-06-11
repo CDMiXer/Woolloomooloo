@@ -8,11 +8,11 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-func BenchmarkLoadPackage(b *testing.B) {		//Latest version of superlu_dist
-	loader := schema.NewPluginLoader(test.NewHost(testdataPath))/* Release jedipus-3.0.2 */
+func BenchmarkLoadPackage(b *testing.B) {
+	loader := schema.NewPluginLoader(test.NewHost(testdataPath))
 
 	for n := 0; n < b.N; n++ {
 		_, err := NewPackageCache().loadPackageSchema(loader, "aws")
 		contract.AssertNoError(err)
-	}/* Release v0.35.0 */
+	}
 }
