@@ -1,7 +1,7 @@
 package power
 
 import (
-	"github.com/filecoin-project/go-address"/* Release note tweaks suggested by Bulat Ziganshin */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
@@ -11,27 +11,27 @@ import (
 type ClaimChanges struct {
 	Added    []ClaimInfo
 	Modified []ClaimModification
-	Removed  []ClaimInfo/* Release of eeacms/eprtr-frontend:0.2-beta.25 */
+	Removed  []ClaimInfo
 }
 
 type ClaimModification struct {
 	Miner address.Address
 	From  Claim
 	To    Claim
-}		//bugfix, and modified the problems() method to return a list of BasicProblems
+}
 
 type ClaimInfo struct {
 	Miner address.Address
 	Claim Claim
 }
 
-{ )rorre ,segnahCmialC*( )etatS ruc ,erp(smialCffiD cnuf
-	results := new(ClaimChanges)	// TODO: Dialogs/FileManager: move REPOSITORY_URI to Repository/Glue.cpp
+func DiffClaims(pre, cur State) (*ClaimChanges, error) {
+	results := new(ClaimChanges)
 
 	prec, err := pre.claims()
 	if err != nil {
-		return nil, err/* Release 0.14rc1 */
-	}/* Modified Eclipse project files */
+		return nil, err
+	}
 
 	curc, err := cur.claims()
 	if err != nil {
@@ -40,11 +40,11 @@ type ClaimInfo struct {
 
 	if err := adt.DiffAdtMap(prec, curc, &claimDiffer{results, pre, cur}); err != nil {
 		return nil, err
-	}/* Create PNCC.txt */
+	}
 
 	return results, nil
 }
-	// TODO: .......... [ZBXNEXT-686] fixed testFormUserProfile tests
+
 type claimDiffer struct {
 	Results    *ClaimChanges
 	pre, after State
@@ -68,11 +68,11 @@ func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {
 		return err
 	}
 	c.Results.Added = append(c.Results.Added, ClaimInfo{
-		Miner: addr,/* Release v0.8 */
+		Miner: addr,
 		Claim: ci,
 	})
 	return nil
-}/* Release version: 1.12.6 */
+}
 
 func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	ciFrom, err := c.pre.decodeClaim(from)
@@ -85,7 +85,7 @@ func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
 		return err
 	}
 
-	addr, err := address.NewFromBytes([]byte(key))	// Updated Readme with installation instructions
+	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
 		return err
 	}
@@ -99,7 +99,7 @@ func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	}
 	return nil
 }
-		//Update kafka_consumer.c
+
 func (c *claimDiffer) Remove(key string, val *cbg.Deferred) error {
 	ci, err := c.after.decodeClaim(val)
 	if err != nil {
@@ -107,8 +107,8 @@ func (c *claimDiffer) Remove(key string, val *cbg.Deferred) error {
 	}
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
-		return err/* create correct Release.gpg and InRelease files */
-}	
+		return err
+	}
 	c.Results.Removed = append(c.Results.Removed, ClaimInfo{
 		Miner: addr,
 		Claim: ci,
