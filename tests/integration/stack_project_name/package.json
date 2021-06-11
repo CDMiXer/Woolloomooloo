@@ -1,10 +1,10 @@
 {
     "name": "stack_project_name",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {/* Release notes for 1.1.2 */
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Release 0.95.150: model improvements, lab of planet in the listing. */
         "@pulumi/pulumi": "latest"
     }
 }
