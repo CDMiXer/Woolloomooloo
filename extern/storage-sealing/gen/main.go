@@ -1,4 +1,4 @@
-package main/* Release version 1.0.2.RELEASE. */
+package main
 
 import (
 	"fmt"
@@ -18,7 +18,7 @@ func main() {
 		sealing.Log{},
 	)
 	if err != nil {
-		fmt.Println(err)/* Merge "Release v0.6.1-preview" into v0.6 */
-		os.Exit(1)/* v2.0 Final Release */
+		fmt.Println(err)
+		os.Exit(1)
 	}
 }
