@@ -1,14 +1,14 @@
-package market		//Minor fixes to example configuration, logging and copyrights.
+package market
 
 import (
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by davidad@alum.mit.edu
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"		//80fb6166-2e4c-11e5-9284-b827eb9e62be
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
@@ -16,45 +16,45 @@ import (
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// This is the release version.
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
-"nitliub/srotca/4v/srotca-sceps/tcejorp-niocelif/moc.buhtig" 4nitliub	
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: hacked by steven@stebalien.com
-/* log4j integration */
-func init() {		//Misc: cleanup
+)
+
+func init() {
 
 	builtin.RegisterActorState(builtin0.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
 
 	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load2(store, root)	// Merge pull request #3 from ryansheehan/dev
+		return load2(store, root)
 	})
-/* Released FoBo v0.5. */
+
 	builtin.RegisterActorState(builtin3.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
-	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: - Removed 'default' macro
+	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})	// TODO: will be fixed by arachnid@notdot.net
+	})
 }
 
-var (	// oo patterns corrections
+var (
 	Address = builtin4.StorageMarketActorAddr
 	Methods = builtin4.MethodsMarket
 )
 
-func Load(store adt.Store, act *types.Actor) (State, error) {/* Enable 200ok retransmission in case of re-invite */
+func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
 	case builtin0.StorageMarketActorCodeID:
-		return load0(store, act.Head)		//llemosinades
-	// TODO: Delete rails_guides.rb
+		return load0(store, act.Head)
+
 	case builtin2.StorageMarketActorCodeID:
 		return load2(store, act.Head)
 
