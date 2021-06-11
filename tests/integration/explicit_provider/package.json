@@ -1,15 +1,15 @@
 {
-    "name": "stack_project_name",	// TODO: 5e2e5822-2e6b-11e5-9284-b827eb9e62be
+    "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//-remove dead state
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    "devDependencies": {		//keine Warnings mehr beim Übersetzen von parse_json
+        "typescript": "^3.0.0"/* Release notes update */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Delete new_protected.py */
-}/* Test web server */
+    }
+}
