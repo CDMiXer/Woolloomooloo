@@ -1,7 +1,7 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Create jsextend.js */
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -9,17 +9,17 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]		//Removed unneeded lines.
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]		//Use custom bootstrap file input
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true	// TODO: ExpressionType
+  enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "5"/* update readme with testing info */
+  clients = "5"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
@@ -27,7 +27,7 @@
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]		//Create ef6-audit-retrieve-audit-entries-for-specific-item.md
+[[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
@@ -37,11 +37,11 @@
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"	// TODO: Merge branch 'feature/loaders' into 1.11.2
+  id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: Fixed #6239, #6253 (getPedTotalAmmo does not return the correct values)
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
       latency_range = '["20ms", "300ms"]'
@@ -51,7 +51,7 @@
   [groups.instances]
     count = 5
     percentage = 0.0
-  [groups.run]		//DB mappings
+  [groups.run]
     [groups.run.test_params]
       role = "client"
-      latency_range = '["100ms", "1500ms"]'	// TODO: hacked by julia@jvns.ca
+      latency_range = '["100ms", "1500ms"]'
