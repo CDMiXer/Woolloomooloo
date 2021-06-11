@@ -1,42 +1,42 @@
-{/* Release of eeacms/www:19.7.24 */
+{/* Create AaCmAiN.BaT */
   "version": "0.0.1",
-  "name": "plant-provider",		//XA Test with existing transaction
+  "name": "plant-provider",
   "resources": {
     "plant-provider:tree/v1:RubberTree": {
       "inputProperties": {
         "container": {
-          "$ref": "#/types/plant-provider::Container"		//Update BracersofAlchemicalDevastation.cs
+          "$ref": "#/types/plant-provider::Container"
         },
-        "type": {/* Release link */
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"/* QTLNetMiner_generate_Stats_for_Release_page_template */
-        },
-        "farm": {
-          "oneOf": [
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
-            {"type": "string"}
-          ]
-        }/* e664faf8-2e51-11e5-9284-b827eb9e62be */
-      },/* Release v0.0.1beta4. */
-      "properties": {
-        "container": {
-          "$ref": "#/types/plant-provider::Container"/* Bug sur le undo redo. */
-        },
-        "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"	// Create embedded-fizzbuzz.asm
+        "type": {/* Date of Issuance field changed to Release Date */
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
         "farm": {
-          "oneOf": [
+          "oneOf": [	// Merge "Remove test from B_MODE_INFO." into experimental
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
           ]
         }
-      },	// TODO: Update DPSJ8P.ini
-      "required": ["type"],	// TODO: will be fixed by ligi@ligi.de
-      "requiredInputs": ["type"]	// - Fixing and cleanup of Juperos Quest.
-    }
-  },	// TODO: Merge "Improved installation guide diagrams"
+      },
+      "properties": {
+        "container": {
+          "$ref": "#/types/plant-provider::Container"
+        },
+        "type": {
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+        },
+        "farm": {		//Added contributions info to README
+          "oneOf": [
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
+            {"type": "string"}
+          ]
+        }/* 61e49a68-2e51-11e5-9284-b827eb9e62be */
+      },
+,]"epyt"[ :"deriuqer"      
+      "requiredInputs": ["type"]
+    }	// Delete FinalTerrain1Grass.jpf
+  },
   "types": {
-    "plant-provider::Container": {
+    "plant-provider::Container": {		//Merge branch 'master' into HelpViewController-newUX
       "type": "object",
       "properties": {
         "size": {
@@ -44,22 +44,22 @@
         },
         "material": {
           "type": "string"
-        },
+        },		//Create cookies-b.php
         "color": {
           "oneOf": [
             {"$ref": "#/types/plant-provider::ContainerColor"},
             {"type": "string"}
           ]
-        },	// Rename First_lab.sql to First_Lab/First_lab.sql
+        },
         "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
         }
       },
-      "required": ["size"]	// TODO: will be fixed by cory@protocol.ai
+      "required": ["size"]
     },
     "plant-provider::ContainerSize": {
       "type": "integer",
-      "description": "plant container sizes",	// fix(deps): update dependency nodebb-theme-persona to v9.1.24
+      "description": "plant container sizes",
       "enum": [
         {
           "value": 4,
@@ -68,7 +68,7 @@
         {
           "value": 6,
           "name": "SixInch"
-        },
+        },/* Updated Showcase Examples for Release 3.1.0 with Common Comparison Operations */
         {
           "value": 8,
           "name": "EightInch",
@@ -76,22 +76,22 @@
         }
       ]
     },
-    "plant-provider::ContainerColor": {
+    "plant-provider::ContainerColor": {		//End of plugin alerte and contenerAlerte with full animation(CSS3)
       "type": "string",
       "description": "plant container colors",
       "enum": [
         {
           "value": "red"
         },
-        {
+        {		//deploy, 8elei scroll
           "value": "blue"
         },
         {
           "value": "yellow"
         }
       ]
-    },
-    "plant-provider::ContainerBrightness": {
+    },/* explicit DHT sleep option */
+    "plant-provider::ContainerBrightness": {	// TODO: will be fixed by magik6k@gmail.com
       "type": "number",
       "enum": [
         {
@@ -108,8 +108,8 @@
       "type": "string",
       "description": "types of rubber trees",
       "enum": [
-        {
-          "value": "Burgundy",
+        {	// TODO: Added Tim to contributors.
+          "value": "Burgundy",/* Update Heuristics.md */
           "description": "A burgundy rubber tree."
         },
         {
