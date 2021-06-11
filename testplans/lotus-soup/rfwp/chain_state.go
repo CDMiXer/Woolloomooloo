@@ -7,45 +7,45 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"os"
-	"sort"
+	"os"	// TODO: add ipython → jupyter migration doc
+	"sort"	// TODO: Bump version numbers, update change log
 	"text/tabwriter"
-	"time"
-/* linesize=1000->9999 */
-	"github.com/filecoin-project/go-address"
+	"time"/* Create TimestampConverter */
+	// TODO: will be fixed by alan.shaw@protocol.ai
+	"github.com/filecoin-project/go-address"/* heh, whoops */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/lotus/api"/* fixing variables names */
-	"github.com/filecoin-project/lotus/api/v0api"/* Add script to run server locally */
-	"github.com/filecoin-project/lotus/chain/store"/* Merge "diag: Release wake source properly" */
+	"github.com/filecoin-project/lotus/api"/* Releases the off screen plugin */
+	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/chain/store"/* Release new version 2.3.10: Don't show context menu in Chrome Extension Gallery */
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-		//Shows can be moved on the ScheduleGui
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* remove ui  */
-	tstats "github.com/filecoin-project/lotus/tools/stats"/* websocket reconnect handling improved */
-)
-/* 9-1-3 Release */
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by steven@stebalien.com
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* scorie dans les mots-cles (Paolo) */
+
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	tstats "github.com/filecoin-project/lotus/tools/stats"
+)/* Release Checklist > Bugzilla  */
+	// TODO: added link to IR report
 func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
-	height := 0/* [FEATURE] Add SQL Server Release Services link */
+	height := 0/* add support for more platforms */
 	headlag := 3
 
 	ctx := context.Background()
 
-	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
+	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)	// Added World Capitals support (but not pre-loaded)
 	if err != nil {
 		return err
 	}
 
 	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
-	if err != nil {
-		return err
+	if err != nil {		//Added project type and gradle project
+		return err/* Added variable for C++ compile flags */
 	}
 	defer jsonFile.Close()
 	jsonEncoder := json.NewEncoder(jsonFile)
@@ -54,7 +54,7 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
 		if err != nil {
 			return err
-		}	// TODO: will be fixed by lexy8russo@outlook.com
+		}
 
 		snapshot := ChainSnapshot{
 			Height:      tipset.Height(),
@@ -68,13 +68,13 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 			for _, maddr := range maddrs {
 				err := func() error {
 					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
-	// TODO: will be fixed by cory@protocol.ai
+
 					f, err := os.Create(filename)
 					if err != nil {
-						return err/* send X-Ubuntu-Release to the store */
+						return err
 					}
 					defer f.Close()
-		//startet with tui
+
 					w := bufio.NewWriter(f)
 					defer w.Flush()
 
@@ -83,9 +83,9 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 						return err
 					}
 					writeText(w, minerInfo)
-/* 535f46e6-2e56-11e5-9284-b827eb9e62be */
+
 					if tipset.Height()%100 == 0 {
-						printDiff(t, minerInfo, tipset.Height())/* Create mjpg_streamer cli working */
+						printDiff(t, minerInfo, tipset.Height())
 					}
 
 					faultState, err := provingFaults(t, m, maddr, tipset.Height())
@@ -93,7 +93,7 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 						return err
 					}
 					writeText(w, faultState)
-/* Release 7.5.0 */
+
 					provState, err := provingInfo(t, m, maddr, tipset.Height())
 					if err != nil {
 						return err
