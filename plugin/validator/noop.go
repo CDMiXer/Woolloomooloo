@@ -1,27 +1,27 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release AppIntro 5.0.0 */
+///* Release of eeacms/jenkins-slave-dind:17.12-3.17 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//Responsive layout for location
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//[Sanitizer] move unit test for Printf from tsan to sanitizer_common
-//
-// Unless required by applicable law or agreed to in writing, software		//Fixes for Cortex-M0 compilation. Add missing ElemCreate*_P() functions
-// distributed under the License is distributed on an "AS IS" BASIS,/* We can now add more lines to left lines, and continue to track the right info. */
+//      http://www.apache.org/licenses/LICENSE-2.0
+///* Release automation support */
+// Unless required by applicable law or agreed to in writing, software		//Add note about passing additional parameter via the command line.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release v3.0.0 */
+// limitations under the License.
 
 // +build oss
 
 package validator
 
-import (	// Add comments where they are missing.
+import (
 	"context"
-
+		//Merge "Add set_power_state to node api"
 	"github.com/drone/drone/core"
 )
 
 type noop struct{}
 
-func (noop) Validate(context.Context, *core.ValidateArgs) error { return nil }
+func (noop) Validate(context.Context, *core.ValidateArgs) error { return nil }	// Merge "Add expected_errors for extension deferred_delete v3"
