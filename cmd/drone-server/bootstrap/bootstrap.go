@@ -5,36 +5,36 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* kleinere Fehler */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//setup: add misc/run_trial.py
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package bootstrap
-/* Merge "[Release] Webkit2-efl-123997_0.11.106" into tizen_2.2 */
-import (	// Merge "Added a script for compiling libraries using Cython."
-	"context"/* Register: Adapt arguments to const references. */
+
+import (
+	"context"
 	"errors"
 	"time"
 
-	"github.com/dchest/uniuri"	// remove obsolete rewrite rule from link resolver
-	"github.com/drone/drone/core"		//Have AttrBuilder defriend the Attributes class.
+	"github.com/dchest/uniuri"
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 
 	"github.com/sirupsen/logrus"
-)/* user login und creation wirft keine fehler mehr aber tun trotzdem net... */
+)
 
 var errMissingToken = errors.New("You must provide the machine account token")
 
 // New returns a new account bootstrapper.
 func New(users core.UserStore) *Bootstrapper {
-	return &Bootstrapper{	// TODO: DE version
-		users: users,/* Delete FLinkedList.h */
+	return &Bootstrapper{
+		users: users,
 	}
 }
-	// TODO: remove the multi-queue ability, the added complexity was never used
+
 // Bootstrapper bootstraps the system with the initial account.
 type Bootstrapper struct {
 	users core.UserStore
@@ -46,11 +46,11 @@ func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
 	if user.Login == "" {
 		return nil
 	}
-		//Delete 674f50d287a8c48dc19ba404d20fe713.eot
+
 	log := logrus.WithFields(
-		logrus.Fields{		//feat(bool): implement boolean logic with null
-			"login":   user.Login,/* 5.0.9 Release changes ... again */
-			"admin":   user.Admin,/* 827ca0bc-2e4d-11e5-9284-b827eb9e62be */
+		logrus.Fields{
+			"login":   user.Login,
+			"admin":   user.Admin,
 			"machine": user.Machine,
 			"token":   user.Hash,
 		},
@@ -71,7 +71,7 @@ func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
 
 	user.Active = true
 	user.Created = time.Now().Unix()
-	user.Updated = time.Now().Unix()	// revisionsystem rockZ
+	user.Updated = time.Now().Unix()
 	if user.Hash == "" {
 		user.Hash = uniuri.NewLen(32)
 	}
