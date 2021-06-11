@@ -2,12 +2,12 @@
   name = "lotus-soup"
   author = ""
 
-]labolg[
+[global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 6
   builder = "exec:go"
-"cexe:lacol" = rennur  
+  runner = "local:exec"
 
 [global.build]
   selectors = ["testground"]
@@ -16,40 +16,40 @@
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true	// TODO: will be fixed by martin2cai@hotmail.com
+  enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"		//9fd1e7da-2e6b-11e5-9284-b827eb9e62be
+  genesis_timestamp_offset = "0"
   balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]		//Add testfiles
+[[groups]]
   id = "bootstrapper"
-  [groups.instances]		//Removing test for all objects, not really related to Jamoma as such
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]	// Updating Xcode project to require OSX 10.6 or newer
+[[groups]]
   id = "miners"
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]/* Initial setup with library and demo project. Support http get. */
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
-/* Update ChatterPostUtilities.cls */
+
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 3	// Delete shellcode_decoder.asm
+    count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"	// TODO: Checksum: fixed #262
+      role = "client"
