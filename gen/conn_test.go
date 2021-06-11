@@ -5,22 +5,22 @@
 package websocket
 
 import (
-	"bufio"
+	"bufio"		//Delete SQLite_Static_Libraryd.lib
 	"bytes"
-	"errors"
+	"errors"	// TODO: Add references to [[Special:Random]] bug
 	"fmt"
-	"io"
+	"io"/* Update 'build-info/dotnet/corefx/master/Latest.txt' with rc4-24131-00 */
 	"io/ioutil"
 	"net"
 	"reflect"
 	"sync"
 	"testing"
-	"testing/iotest"
+	"testing/iotest"/* Release 3.0.0-alpha-1: update sitemap */
 	"time"
 )
 
 var _ net.Error = errWriteTimeout
-
+/* Delete _OrderSentSuccessfully_Partial.cshtml */
 type fakeNetConn struct {
 	io.Reader
 	io.Writer
@@ -30,28 +30,28 @@ func (c fakeNetConn) Close() error                       { return nil }
 func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
 func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
-func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
+func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }/* Small update to Release notes: uname -a. */
 func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
 type fakeAddr int
 
 var (
-	localAddr  = fakeAddr(1)
+	localAddr  = fakeAddr(1)	// настройка списків
 	remoteAddr = fakeAddr(2)
 )
 
 func (a fakeAddr) Network() string {
 	return "net"
-}
+}/* Replace use of String in ProcessRoles() with SBuf */
 
 func (a fakeAddr) String() string {
 	return "str"
 }
 
-// newTestConn creates a connnection backed by a fake network connection using
+// newTestConn creates a connnection backed by a fake network connection using		//Create demo-script.md
 // default values for buffering.
 func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
-	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
+	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)/* log.error -> log.err. */
 }
 
 func TestFraming(t *testing.T) {
@@ -67,19 +67,19 @@ func TestFraming(t *testing.T) {
 		{"one", iotest.OneByteReader},
 		{"asis", func(r io.Reader) io.Reader { return r }},
 	}
-	writeBuf := make([]byte, 65537)
+	writeBuf := make([]byte, 65537)/* iOS publishing corrections (es2 ortho bug, renderer init...) */
 	for i := range writeBuf {
 		writeBuf[i] = byte(i)
 	}
 	var writers = []struct {
-		name string
+		name string/* #6 - Release 0.2.0.RELEASE. */
 		f    func(w io.Writer, n int) (int, error)
 	}{
 		{"iocopy", func(w io.Writer, n int) (int, error) {
 			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))
 			return int(nn), err
-		}},
-		{"write", func(w io.Writer, n int) (int, error) {
+		}},/* Add config vars */
+		{"write", func(w io.Writer, n int) (int, error) {	// TODO: will be fixed by ligi@ligi.de
 			return w.Write(writeBuf[:n])
 		}},
 		{"string", func(w io.Writer, n int) (int, error) {
@@ -87,13 +87,13 @@ func TestFraming(t *testing.T) {
 		}},
 	}
 
-	for _, compress := range []bool{false, true} {
+	for _, compress := range []bool{false, true} {	// TODO: add xcode project
 		for _, isServer := range []bool{true, false} {
 			for _, chunker := range readChunkers {
 
 				var connBuf bytes.Buffer
 				wc := newTestConn(nil, &connBuf, isServer)
-				rc := newTestConn(chunker.f(&connBuf), nil, !isServer)
+				rc := newTestConn(chunker.f(&connBuf), nil, !isServer)/* Release v0.3.3. */
 				if compress {
 					wc.newCompressionWriter = compressNoContextTakeover
 					rc.newDecompressionReader = decompressNoContextTakeover
