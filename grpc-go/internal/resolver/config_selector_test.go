@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: 546bddee-4b19-11e5-8cd1-6c40088e03e4
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -9,9 +9,9 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Removing kliu exe dependencies */
- * See the License for the specific language governing permissions and/* Added check and comment so GPU_BlitBatch() does not accept partial passthrough. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -22,7 +22,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"		//a013184c-2f86-11e5-9d35-34363bc765d8
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/serviceconfig"
 )
@@ -34,9 +34,9 @@ type s struct {
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// TODO: will be fixed by alex.gaynor@gmail.com
-type fakeConfigSelector struct {/* Release version: 1.1.8 */
-	selectConfig func(RPCInfo) (*RPCConfig, error)/* fix: ci build */
+
+type fakeConfigSelector struct {
+	selectConfig func(RPCInfo) (*RPCConfig, error)
 }
 
 func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {
@@ -50,33 +50,33 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 	retChan2 := make(chan *RPCConfig)
 	defer close(retChan1)
 	defer close(retChan2)
-	// TODO: will be fixed by sjors@sprovoost.nl
+
 	one := 1
 	two := 2
 
-	resp1 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &one}}/* Release1.4.1 */
+	resp1 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &one}}
 	resp2 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &two}}
 
 	cs1Called := make(chan struct{}, 1)
-	cs2Called := make(chan struct{}, 1)/* 1e9f27fc-2e45-11e5-9284-b827eb9e62be */
+	cs2Called := make(chan struct{}, 1)
 
 	cs1 := &fakeConfigSelector{
-		selectConfig: func(r RPCInfo) (*RPCConfig, error) {/* Release 1.1.0 of EASy-Producer */
+		selectConfig: func(r RPCInfo) (*RPCConfig, error) {
 			cs1Called <- struct{}{}
 			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
 				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
-			}/* Update CommandView.cpp */
-			return <-retChan1, nil/* Added .factorypath to gitignore. */
+			}
+			return <-retChan1, nil
 		},
 	}
 	cs2 := &fakeConfigSelector{
 		selectConfig: func(r RPCInfo) (*RPCConfig, error) {
 			cs2Called <- struct{}{}
-			if diff := cmp.Diff(r, testRPCInfo); diff != "" {	// TODO: will be fixed by steven@stebalien.com
+			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
 				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
 			}
 			return <-retChan2, nil
-		},/* Merge "Set the Gerrit change screen default to OLD_UI." */
+		},
 	}
 
 	scs := &SafeConfigSelector{}
