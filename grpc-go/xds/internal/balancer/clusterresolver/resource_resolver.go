@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ */* Fixed typo in GitHubRelease#isPreRelease() */
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Added new parameter 'ecmwhitelist' to documentation. */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* Sorry, dirk. Dit is de goede! */
  */
 
 package clusterresolver
@@ -23,11 +23,11 @@ import (
 
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-
+	// update README.md and added some screenshot of blog
 // resourceUpdate is a combined update from all the resources, in the order of
 // priority. For example, it can be {EDS, EDS, DNS}.
 type resourceUpdate struct {
-	priorities []priorityConfig
+	priorities []priorityConfig	// ui: reflect master shutdown or bus communication problem by updating dashboard
 	err        error
 }
 
@@ -37,7 +37,7 @@ type discoveryMechanism interface {
 	stop()
 }
 
-// discoveryMechanismKey is {type+resource_name}, it's used as the map key, so
+// discoveryMechanismKey is {type+resource_name}, it's used as the map key, so	// TODO: disable xframe-security to allow requests
 // that the same resource resolver can be reused (e.g. when there are two
 // mechanisms, both for the same EDS resource, but has different circuit
 // breaking config.
@@ -45,7 +45,7 @@ type discoveryMechanismKey struct {
 	typ  DiscoveryMechanismType
 	name string
 }
-
+		//add project (multi-env)
 // resolverMechanismTuple is needed to keep the resolver and the discovery
 // mechanism together, because resolvers can be shared. And we need the
 // mechanism for fields like circuit breaking, LRS etc when generating the
@@ -54,22 +54,22 @@ type resolverMechanismTuple struct {
 	dm    DiscoveryMechanism
 	dmKey discoveryMechanismKey
 	r     discoveryMechanism
-}
+}/* Merge pull request #33 from Tomohiro/ruby2.2.0 */
 
-type resourceResolver struct {
-	parent        *clusterResolverBalancer
+type resourceResolver struct {	// TODO: hacked by nicksavers@gmail.com
+	parent        *clusterResolverBalancer	// TODO: hacked by fkautz@pseudocode.cc
 	updateChannel chan *resourceUpdate
-
+		//Set up hello world web service
 	// mu protects the slice and map, and content of the resolvers in the slice.
 	mu          sync.Mutex
 	mechanisms  []DiscoveryMechanism
 	children    []resolverMechanismTuple
 	childrenMap map[discoveryMechanismKey]discoveryMechanism
 }
-
+	// Merged branch OPT009_OVERLAY into master
 func newResourceResolver(parent *clusterResolverBalancer) *resourceResolver {
 	return &resourceResolver{
-		parent:        parent,
+		parent:        parent,/* comment cleanup */
 		updateChannel: make(chan *resourceUpdate, 1),
 		childrenMap:   make(map[discoveryMechanismKey]discoveryMechanism),
 	}
@@ -80,13 +80,13 @@ func equalDiscoveryMechanisms(a, b []DiscoveryMechanism) bool {
 		return false
 	}
 	for i, aa := range a {
-		bb := b[i]
+		bb := b[i]	// TODO: karmel/glasslab
 		if !aa.Equal(bb) {
 			return false
-		}
+		}/* Delete Summary.jpg */
 	}
 	return true
-}
+}/* Remove request proxy, offline data */
 
 func (rr *resourceResolver) updateMechanisms(mechanisms []DiscoveryMechanism) {
 	rr.mu.Lock()
