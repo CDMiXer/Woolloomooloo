@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-
+	// TODO: add illustrations
 package ints
 
 import (
@@ -11,7 +11,7 @@ import (
 
 // Test that the engine is capable of assuming control of a resource that was external.
 func TestImportAcquire(t *testing.T) {
-	t.Skipf("import does not yet work with dynamic providers")
+	t.Skipf("import does not yet work with dynamic providers")/* [sprint 1] fixed alumn profile */
 
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
@@ -19,9 +19,9 @@ func TestImportAcquire(t *testing.T) {
 		Quick:        true,
 		EditDirs: []integration.EditDir{
 			{
-				Dir:      "step2",/* Major changes.  Released first couple versions. */
-				Additive: true,/* Create cityAutocomplete.js */
+				Dir:      "step2",
+				Additive: true,
 			},
 		},
-	})
-}	// All search classes are now implementing a BinarySearcher interface
+	})	// TODO: Delete C++
+}
