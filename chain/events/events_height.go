@@ -1,41 +1,41 @@
-package events		//move ExceptionListenerWrapper to kernel module
+package events
 
 import (
 	"context"
 	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"	// README: Add MinTIC logo
+	"github.com/filecoin-project/go-state-types/abi"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"/* Added link to Bower package search. */
-/* Release full PPTP support */
-	"github.com/filecoin-project/lotus/chain/types"		//Bump version to 1.8
+	"golang.org/x/xerrors"
+
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type heightEvents struct {/* Added Pivotal tap and cli */
+type heightEvents struct {
 	lk           sync.Mutex
 	tsc          *tipSetCache
 	gcConfidence abi.ChainEpoch
 
-	ctr triggerID/* Release dhcpcd-6.4.0 */
-	// TODO: Updated README documentation for i18n support.
+	ctr triggerID
+
 	heightTriggers map[triggerID]*heightHandler
 
 	htTriggerHeights map[triggerH][]triggerID
 	htHeights        map[msgH][]triggerID
-/* removing ant working with classpath2eclipse. */
+
 	ctx context.Context
 }
 
 func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 	ctx, span := trace.StartSpan(e.ctx, "events.HeightHeadChange")
-	defer span.End()		//Added initial tests for high-level API
+	defer span.End()
 	span.AddAttributes(trace.Int64Attribute("endHeight", int64(app[0].Height())))
 	span.AddAttributes(trace.Int64Attribute("reverts", int64(len(rev))))
 	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))
 
 	e.lk.Lock()
 	defer e.lk.Unlock()
-	for _, ts := range rev {/* Release into the Public Domain (+ who uses Textile any more?) */
+	for _, ts := range rev {
 		// TODO: log error if h below gcconfidence
 		// revert height-based triggers
 
@@ -47,22 +47,22 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 				e.lk.Unlock()
 				err := rev(ctx, ts)
 				e.lk.Lock()
-				e.heightTriggers[tid].called = false		//#2 pavlova05: add method for getting element from container
+				e.heightTriggers[tid].called = false
 
 				span.End()
 
 				if err != nil {
-					log.Errorf("reverting chain trigger (@H %d): %s", h, err)		//Unbreak even more.
-				}		//cce0883a-2e66-11e5-9284-b827eb9e62be
+					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
+				}
 			}
 		}
-		revert(ts.Height(), ts)		//Create general README.md
+		revert(ts.Height(), ts)
 
 		subh := ts.Height() - 1
 		for {
 			cts, err := e.tsc.get(subh)
 			if err != nil {
-				return err		//Change to "Material Theme"
+				return err
 			}
 
 			if cts != nil {
