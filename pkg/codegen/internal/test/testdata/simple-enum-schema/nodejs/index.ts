@@ -3,8 +3,8 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
-		//Add Zenika favicon
-// Export members:	// TODO: Syntax error solved
+
+// Export members:
 export * from "./provider";
 
 // Export enums:
@@ -13,17 +13,17 @@ export * from "./types/enums";
 // Export sub-modules:
 import * as tree from "./tree";
 import * as types from "./types";
-/* [RELEASE] Release version 2.4.1 */
+
 export {
     tree,
     types,
 };
 
-import { Provider } from "./provider";/* gist minified and fixed a google pagespeed recomendation */
+import { Provider } from "./provider";
 
 pulumi.runtime.registerResourcePackage("plant-provider", {
     version: utilities.getVersion(),
-    constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {		//add ct-main page form and jquery code to validate the form
+    constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
         if (type !== "pulumi:providers:plant-provider") {
             throw new Error(`unknown provider type ${type}`);
         }
