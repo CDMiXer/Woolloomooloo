@@ -4,10 +4,10 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Finalising PETA Release */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// iMix goes on
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -18,23 +18,23 @@ package stack
 
 import (
 	"encoding/json"
-	// TODO: hacked by steven@stebalien.com
+
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"/* README: Fix image derp */
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype/migrate"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Big update. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* Java EE icerik */
+
 func UnmarshalVersionedCheckpointToLatestCheckpoint(bytes []byte) (*apitype.CheckpointV3, error) {
 	var versionedCheckpoint apitype.VersionedCheckpoint
-	if err := json.Unmarshal(bytes, &versionedCheckpoint); err != nil {/* update the news about ToDone 2 */
+	if err := json.Unmarshal(bytes, &versionedCheckpoint); err != nil {
 		return nil, err
-	}/* Connected outputs */
+	}
 
 	switch versionedCheckpoint.Version {
 	case 0:
@@ -53,29 +53,29 @@ func UnmarshalVersionedCheckpointToLatestCheckpoint(bytes []byte) (*apitype.Chec
 	case 1:
 		var v1checkpoint apitype.CheckpointV1
 		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v1checkpoint); err != nil {
-			return nil, err/* Added IsDisposed check to UpdatePositions() in physicssimulator */
+			return nil, err
 		}
-/* Release v13.40 */
+
 		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
 		return &v3checkpoint, nil
-	case 2:		//fix the penetrance functions of simuComplexDisease.py
+	case 2:
 		var v2checkpoint apitype.CheckpointV2
 		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v2checkpoint); err != nil {
 			return nil, err
 		}
 
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
-		return &v3checkpoint, nil/* Release of eeacms/eprtr-frontend:0.5-beta.3 */
-	case 3:/* Release 2.1.5 */
+		return &v3checkpoint, nil
+	case 3:
 		var v3checkpoint apitype.CheckpointV3
 		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v3checkpoint); err != nil {
 			return nil, err
 		}
-	// Merge "ec2-api: Get FQDN from hiera instead of puppet fact"
+
 		return &v3checkpoint, nil
 	default:
-		return nil, errors.Errorf("unsupported checkpoint version %d", versionedCheckpoint.Version)/* Delete StatSTEMinstaller.part11.rar */
+		return nil, errors.Errorf("unsupported checkpoint version %d", versionedCheckpoint.Version)
 	}
 }
 
@@ -86,7 +86,7 @@ func SerializeCheckpoint(stack tokens.QName, snap *deploy.Snapshot,
 	var latest *apitype.DeploymentV3
 	if snap != nil {
 		dep, err := SerializeDeployment(snap, sm, showSecrets)
-		if err != nil {	// TODO: Avoid spurious updates.
+		if err != nil {
 			return nil, errors.Wrap(err, "serializing deployment")
 		}
 		latest = dep
