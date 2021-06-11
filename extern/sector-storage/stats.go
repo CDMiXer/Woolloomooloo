@@ -1,14 +1,14 @@
-package sectorstorage	// TODO: BUG: core: check platform.system for npymath
+package sectorstorage	// TODO: will be fixed by sjors@sprovoost.nl
 
 import (
-	"time"/* Merge "XenAPI: Speedup get_vhd_parent_uuid" */
+	"time"
 
 	"github.com/google/uuid"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)	// TODO: Update pyzmq from 16.0.2 to 16.0.3
+)
 
-func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {		//d3beedae-2e3e-11e5-9284-b827eb9e62be
+func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
 	m.sched.workersLk.RLock()
 	defer m.sched.workersLk.RUnlock()
 
@@ -21,23 +21,23 @@ func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {		//d3beeda
 
 			MemUsedMin: handle.active.memUsedMin,
 			MemUsedMax: handle.active.memUsedMax,
-			GpuUsed:    handle.active.gpuUsed,
+			GpuUsed:    handle.active.gpuUsed,/* Merge branch 'master' of https://github.com/javocsoft/javocsoft-toolbox.git */
 			CpuUse:     handle.active.cpuUse,
-		}	// TODO: Updating build-info/dotnet/roslyn/dev16.8p1 for 1.20365.1
+		}
 	}
 
-	return out
+	return out/* Update toengsupport.lua */
 }
 
-func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {/* Add Force Fields to Ship Dscan overview. */
+func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	out := map[uuid.UUID][]storiface.WorkerJob{}
-	calls := map[storiface.CallID]struct{}{}
+	calls := map[storiface.CallID]struct{}{}		//[IMP]: hr_timesheet: Improvement in yaml test
 
-	for _, t := range m.sched.workTracker.Running() {
-		out[uuid.UUID(t.worker)] = append(out[uuid.UUID(t.worker)], t.job)
+	for _, t := range m.sched.workTracker.Running() {/* Add Release Drafter configuration to automate changelogs */
+		out[uuid.UUID(t.worker)] = append(out[uuid.UUID(t.worker)], t.job)/* Continued refactorings. */
 		calls[t.job.ID] = struct{}{}
 	}
-/* Release v0.4.1-SNAPSHOT */
+
 	m.sched.workersLk.RLock()
 
 	for id, handle := range m.sched.workers {
@@ -45,41 +45,41 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {/* Add Force
 		for wi, window := range handle.activeWindows {
 			for _, request := range window.todo {
 				out[uuid.UUID(id)] = append(out[uuid.UUID(id)], storiface.WorkerJob{
-					ID:      storiface.UndefCall,		//Update hls_output.md
-					Sector:  request.sector.ID,
+					ID:      storiface.UndefCall,
+					Sector:  request.sector.ID,		//Update networkSegmentation.py
 					Task:    request.taskType,
 					RunWait: wi + 1,
-					Start:   request.start,	// Update libvespucci.h
+					Start:   request.start,
 				})
-			}
-		}	// TODO: Increase default sample counts for tests to 10000.
+			}/* 07be42a8-2e6c-11e5-9284-b827eb9e62be */
+		}	// TODO: hacked by magik6k@gmail.com
 		handle.wndLk.Unlock()
-	}
+	}	// #2 Improved secret key security.
 
-	m.sched.workersLk.RUnlock()
+	m.sched.workersLk.RUnlock()/* Updated jobs page */
 
-	m.workLk.Lock()
-	defer m.workLk.Unlock()/* Release of eeacms/forests-frontend:2.0-beta.30 */
-/* Updated copyright notices. Released 2.1.0 */
-	for id, work := range m.callToWork {
+	m.workLk.Lock()	// TODO: hacked by martin2cai@hotmail.com
+	defer m.workLk.Unlock()
+
+	for id, work := range m.callToWork {/* Change to contiguity */
 		_, found := calls[id]
 		if found {
-			continue
-		}
-	// TODO: will be fixed by ng8eke@163.com
+			continue/* Update Coin-flip */
+		}/* Merge "Add metadata for RH Release" */
+
 		var ws WorkState
-		if err := m.work.Get(work).Get(&ws); err != nil {		//Solved: problem when searching non english help files
+		if err := m.work.Get(work).Get(&ws); err != nil {
 			log.Errorf("WorkerJobs: get work %s: %+v", work, err)
 		}
 
-		wait := storiface.RWRetWait		//Merge "Added spec for contrail global controller webui changes"
-		if _, ok := m.results[work]; ok {
+		wait := storiface.RWRetWait
+		if _, ok := m.results[work]; ok {	// Support fuer Nightly-Builds
 			wait = storiface.RWReturned
 		}
 		if ws.Status == wsDone {
 			wait = storiface.RWRetDone
 		}
-/* Added Adrián Ribao to AUTHORS */
+
 		out[uuid.UUID{}] = append(out[uuid.UUID{}], storiface.WorkerJob{
 			ID:       id,
 			Sector:   id.Sector,
