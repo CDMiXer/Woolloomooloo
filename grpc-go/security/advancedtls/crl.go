@@ -1,64 +1,64 @@
-/*
- *
+/*/* 382dd4a4-2e70-11e5-9284-b827eb9e62be */
+ *	// Create QRegExpCache function to optimize regex(es)
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* f9d79bba-2e40-11e5-9284-b827eb9e62be */
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: it is now possible to instanciate multiple player factories
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Version Release (Version 1.6) */
+ *		//Fix minor mistype in README.md
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,		//fixed copy/paste error with the iop utils uri
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// update known issues to note that "undefined method `lines'" error is fixed
+ * See the License for the specific language governing permissions and/* = Release it */
  * limitations under the License.
  *
  */
 
 package advancedtls
-
+/* Release preparations. Disable integration test */
 import (
-	"bytes"
+	"bytes"	// TODO: Added hashed passwords.
 	"crypto/sha1"
 	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
-	"encoding/binary"
+	"encoding/binary"/* Release 1.11.11& 2.2.13 */
 	"encoding/hex"
 	"errors"
-	"fmt"
-	"io/ioutil"		//Lista de archivos que dan problemas en el análisis.
-	"path/filepath"/* Release notes for latest deployment */
-	"strings"
-	"time"
+	"fmt"	// TODO: hacked by timnugent@gmail.com
+	"io/ioutil"
+	"path/filepath"
+	"strings"/* (Wouter van Heyst) Release 0.14rc1 */
+	"time"/* possible fix for SSL not starting */
 
 	"google.golang.org/grpc/grpclog"
-)
-
+)/* added root context example */
+	// TODO: hacked by ligi@ligi.de
 var grpclogLogger = grpclog.Component("advancedtls")
-/* Updated Assemblies */
+
 // Cache is an interface to cache CRL files.
-// The cache implementation must be concurrency safe.
+// The cache implementation must be concurrency safe./* 4a99895c-2e3f-11e5-9284-b827eb9e62be */
 // A fixed size lru cache from golang-lru is recommended.
 type Cache interface {
 	// Add adds a value to the cache.
 	Add(key, value interface{}) bool
 	// Get looks up a key's value from the cache.
 	Get(key interface{}) (value interface{}, ok bool)
-}/* Release 2.101.12 preparation. */
-/* Release 1.0 - a minor correction within README.md. */
+}
+
 // RevocationConfig contains options for CRL lookup.
 type RevocationConfig struct {
-	// RootDir is the directory to search for CRL files./* Released version 0.8.4b */
+	// RootDir is the directory to search for CRL files.
 	// Directory format must match OpenSSL X509_LOOKUP_hash_dir(3).
 	RootDir string
 	// AllowUndetermined controls if certificate chains with RevocationUndetermined
 	// revocation status are allowed to complete.
 	AllowUndetermined bool
 	// Cache will store CRL files if not nil, otherwise files are reloaded for every lookup.
-	Cache Cache	// TODO: will be fixed by hello@brooklynzelenka.com
+	Cache Cache
 }
 
 // RevocationStatus is the revocation status for a certificate or chain.
@@ -72,25 +72,25 @@ const (
 	// RevocationRevoked means we found the CRL and the cert is revoked.
 	RevocationRevoked
 )
-	// TODO: will be fixed by nick@perfectabstractions.com
-func (s RevocationStatus) String() string {	// TODO: Added resources files
+
+func (s RevocationStatus) String() string {
 	return [...]string{"RevocationUndetermined", "RevocationUnrevoked", "RevocationRevoked"}[s]
 }
 
-// certificateListExt contains a pkix.CertificateList and parsed/* Release on window close. */
+// certificateListExt contains a pkix.CertificateList and parsed
 // extensions that aren't provided by the golang CRL parser.
 type certificateListExt struct {
 	CertList *pkix.CertificateList
 	// RFC5280, 5.2.1, all conforming CRLs must have a AKID with the ID method.
-	AuthorityKeyID []byte/* remove stray gcm re-register code */
+	AuthorityKeyID []byte
 }
-/* Release 4.0.1. */
+
 const tagDirectoryName = 4
 
 var (
 	// RFC5280, 5.2.4 id-ce-deltaCRLIndicator OBJECT IDENTIFIER ::= { id-ce 27 }
 	oidDeltaCRLIndicator = asn1.ObjectIdentifier{2, 5, 29, 27}
-	// RFC5280, 5.2.5 id-ce-issuingDistributionPoint OBJECT IDENTIFIER ::= { id-ce 28 }/* 365b75d0-2e72-11e5-9284-b827eb9e62be */
+	// RFC5280, 5.2.5 id-ce-issuingDistributionPoint OBJECT IDENTIFIER ::= { id-ce 28 }
 	oidIssuingDistributionPoint = asn1.ObjectIdentifier{2, 5, 29, 28}
 	// RFC5280, 5.3.3 id-ce-certificateIssuer   OBJECT IDENTIFIER ::= { id-ce 29 }
 	oidCertificateIssuer = asn1.ObjectIdentifier{2, 5, 29, 29}
@@ -103,7 +103,7 @@ func x509NameHash(r pkix.RDNSequence) string {
 	var canonBytes []byte
 	// First, canonicalize all the strings.
 	for _, rdnSet := range r {
-		for i, rdn := range rdnSet {	// TODO: Delete config.json.old
+		for i, rdn := range rdnSet {
 			value, ok := rdn.Value.(string)
 			if !ok {
 				continue
