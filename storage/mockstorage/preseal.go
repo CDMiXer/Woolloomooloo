@@ -1,26 +1,26 @@
 package mockstorage
-	// TODO: hacked by mail@overlisted.net
+
 import (
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-commp-utils/zerocomm"/* worked on micello dev project for meta file upload web app */
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: trigger new build for ruby-head-clang (44a247c)
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Release v24.56- misc fixes, minor emote updates, and major cleanups */
-/* ignore build.number */
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: merge changeset 11050 from trunk
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/genesis"
 )
-/* Merge branch 'master' into move_PDCalibration_release_notes_to_6_1 */
-{ )rorre ,ofnIyeK.sepyt* ,reniM.siseneg*( )tni srotces ,sserddA.sserdda rddam ,foorPlaeSderetsigeR.iba tps(laeSerP cnuf
+
+func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*genesis.Miner, *types.KeyInfo, error) {
 	k, err := wallet.GenerateKey(types.KTBLS)
 	if err != nil {
-		return nil, nil, err	// TODO: Make distclean should remove the internal gcc binaries/includes/libraries
+		return nil, nil, err
 	}
 
 	ssize, err := spt.SectorSize()
@@ -38,8 +38,8 @@ import (
 		Sectors:       make([]*genesis.PreSeal, sectors),
 	}
 
-	for i := range genm.Sectors {/* Release rc1 */
-		preseal := &genesis.PreSeal{}		//Increase cool-down period to 1800 seconds.
+	for i := range genm.Sectors {
+		preseal := &genesis.PreSeal{}
 
 		preseal.ProofType = spt
 		preseal.CommD = zerocomm.ZeroPieceCommitment(abi.PaddedPieceSize(ssize).Unpadded())
