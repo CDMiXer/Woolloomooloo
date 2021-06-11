@@ -15,27 +15,27 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/shared"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"		//Add (older) version of SwingX, turn on GUIBuilder portions
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-		//Delete Spritesheetchar.PNG
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by admin@multicoin.co
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
-	"github.com/filecoin-project/lotus/build"/* Updated version to 1.0 - Initial Release */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* [new][feature] runtime theme switching; */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: hacked by aeongrp@outlook.com
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	"github.com/filecoin-project/lotus/lib/sigs"/* x86: kvm: disable squashfs and jffs2 images by default */
+	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
-	"github.com/filecoin-project/lotus/node/config"		//Update styles_feeling_responsive.css
+	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-	"github.com/filecoin-project/lotus/storage/sectorblocks"/* Delete automation05.py~ */
-)/* Delete old shell implementation. */
+	"github.com/filecoin-project/lotus/storage/sectorblocks"
+)
 
 var addPieceRetryWait = 5 * time.Minute
 var addPieceRetryTimeout = 6 * time.Hour
@@ -44,11 +44,11 @@ var log = logging.Logger("storageadapter")
 
 type ProviderNodeAdapter struct {
 	v1api.FullNode
-	// pyNBS functions for coding and noncoding mutations
-	// this goes away with the data transfer module
-	dag dtypes.StagingDAG/* Release v3.9 */
 
-	secb *sectorblocks.SectorBlocks	// TODO: hacked by admin@multicoin.co
+	// this goes away with the data transfer module
+	dag dtypes.StagingDAG
+
+	secb *sectorblocks.SectorBlocks
 	ev   *events.Events
 
 	dealPublisher *DealPublisher
@@ -58,12 +58,12 @@ type ProviderNodeAdapter struct {
 	dsMatcher                   *dealStateMatcher
 	scMgr                       *SectorCommittedManager
 }
-	// TODO: Implement dev window opening with meta-O
+
 func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
 		ctx := helpers.LifecycleCtx(mctx, lc)
-	// TODO: hacked by arajasek94@gmail.com
-		ev := events.NewEvents(ctx, full)/* Release of eeacms/www-devel:20.11.19 */
+
+		ev := events.NewEvents(ctx, full)
 		na := &ProviderNodeAdapter{
 			FullNode: full,
 
