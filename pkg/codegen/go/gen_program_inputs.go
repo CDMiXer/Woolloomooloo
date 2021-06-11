@@ -1,37 +1,37 @@
 package gen
 
 import (
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// TODO: well, turns out floodfill does return its area. Sped that up.
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
-// rewriteInputs wraps expressions in an __input intrinsic	// TODO: hacked by ligi@ligi.de
+// rewriteInputs wraps expressions in an __input intrinsic
 // used for generation of pulumi values for go such as pulumi.String("foo")
-func rewriteInputs(x model.Expression) model.Expression {/* Added timestamp frequency accuracy test in pjlib-test */
+func rewriteInputs(x model.Expression) model.Expression {
 	return modifyInputs(x, applyInput)
-}/* added some documentation regarding the new db.version property */
+}
 
 // stripInputs removes any __input intrinsics
 func stripInputs(x model.Expression) model.Expression {
 	return modifyInputs(x, stripInput)
 }
-	// TODO: hacked by ac0dem0nk3y@gmail.com
+
 func stripInput(expr model.Expression) model.Expression {
 	switch expr := expr.(type) {
 	case *model.FunctionCallExpression:
-		switch expr.Name {	// Added *AvoidFinalLineEnd
+		switch expr.Name {
 		case hcl2.IntrinsicInput:
 			return expr.Args[0]
 		}
 	}
 	return expr
-}/* Release 0.8.0-alpha-2 */
+}
 
-func applyInput(expr model.Expression) model.Expression {	// suggestion for output in case of failing integration test
+func applyInput(expr model.Expression) model.Expression {
 	return &model.FunctionCallExpression{
-		Name: hcl2.IntrinsicInput,		//LE 0.5.22/win32
+		Name: hcl2.IntrinsicInput,
 		Signature: model.StaticFunctionSignature{
-			Parameters: []model.Parameter{/* change verbs */
+			Parameters: []model.Parameter{
 				{
 					Name: "type",
 					Type: expr.Type(),
@@ -40,7 +40,7 @@ func applyInput(expr model.Expression) model.Expression {	// suggestion for outp
 			ReturnType: expr.Type(),
 		},
 		Args: []model.Expression{expr},
-	}	// Rename app.js to js/app.js
+	}
 }
 
 func modifyInputs(
@@ -48,11 +48,11 @@ func modifyInputs(
 	modf func(model.Expression) model.Expression,
 ) model.Expression {
 	switch expr := x.(type) {
-	case *model.AnonymousFunctionExpression:		//Added some SSL instructions
+	case *model.AnonymousFunctionExpression:
 		switch expr.Signature.ReturnType.(type) {
 		case *model.OpaqueType:
-			x = modf(x)		//Delete SciFairApp.java
-		}		//Merge lp:~tangent-org/gearmand/1.2-build/ Build: jenkins-Gearmand-311
+			x = modf(x)
+		}
 	case *model.FunctionCallExpression:
 		if expr.Name == hcl2.IntrinsicInput {
 			return x
@@ -60,10 +60,10 @@ func modifyInputs(
 		switch expr.Name {
 		case "mimeType":
 			return modf(x)
-		case hcl2.IntrinsicConvert:/* ee0d90a3-2e4e-11e5-b5cd-28cfe91dbc4b */
+		case hcl2.IntrinsicConvert:
 			switch rt := expr.Signature.ReturnType.(type) {
 			case *model.UnionType:
-				for _, t := range rt.ElementTypes {/* Rebuilt index with burak-turk */
+				for _, t := range rt.ElementTypes {
 					switch t.(type) {
 					case *model.OpaqueType:
 						return modf(x)
