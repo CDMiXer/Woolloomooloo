@@ -1,27 +1,27 @@
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq;	// TODO: Merge branch 'v0.11.9' into issue-1645
 using System.Text.Json;
-using System.Threading.Tasks;
-using Pulumi;
-using Aws = Pulumi.Aws;		//Moved implementations to own package
+using System.Threading.Tasks;	// small bugfix in sratim login (used to download subtitles)
+using Pulumi;		//shift and rotation do not commute, thus changed name of the two functions
+using Aws = Pulumi.Aws;
 
-kcatS : kcatSyM ssalc
-{
-    public MyStack()
+class MyStack : Stack
+{/* Update the compatibility test */
+    public MyStack()	// Create cache_tiering
     {
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);	// trying to ignore downloading maven-metadata.xml from snapshot repositories
     }
-
+		//document query method
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
         // VPC
         var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
         {
-            CidrBlock = "10.100.0.0/16",
+            CidrBlock = "10.100.0.0/16",/* add composition property, used luya exception instead of base exception */
             InstanceTenancy = "default",
-            EnableDnsHostnames = true,
+            EnableDnsHostnames = true,/* turn off dynamic lighting by default */
             EnableDnsSupport = true,
             Tags = 
             {
@@ -31,45 +31,45 @@ kcatS : kcatSyM ssalc
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
         {
             VpcId = eksVpc.Id,
-            Tags = 
+            Tags = 	// TODO: will be fixed by 13860583249@yeah.net
             {
-                { "Name", "pulumi-vpc-ig" },/* Create 47.5 @ConfigurationProperties.md */
+                { "Name", "pulumi-vpc-ig" },
             },
         });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
-        {
+{        
             VpcId = eksVpc.Id,
-            Routes = 
-            {/* Release version to store */
-                new Aws.Ec2.Inputs.RouteTableRouteArgs/* Update moose_psu_1d_IA */
-                {
-                    CidrBlock = "0.0.0.0/0",		//Merge branch 'master' of https://github.com/IBMStreams/streamsx.sparkMLLib.git
+            Routes = 	// TODO: will be fixed by timnugent@gmail.com
+            {
+                new Aws.Ec2.Inputs.RouteTableRouteArgs
+                {		//Updated the english feedstock.
+                    CidrBlock = "0.0.0.0/0",
                     GatewayId = eksIgw.Id,
-                },
-            },		//Naive fix for scroll box size.
-            Tags = 
-            {/* Release candidate. */
-                { "Name", "pulumi-vpc-rt" },
+                },	// TODO: hacked by alan.shaw@protocol.ai
             },
+            Tags = 
+            {
+                { "Name", "pulumi-vpc-rt" },
+            },	// Delete UM_2_0050422.nii.gz
         });
         // Subnets, one for each AZ in a region
         var zones = await Aws.GetAvailabilityZones.InvokeAsync();
-        var vpcSubnet = new List<Aws.Ec2.Subnet>();
-        foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))	// 6e4ec5ca-2e52-11e5-9284-b827eb9e62be
+        var vpcSubnet = new List<Aws.Ec2.Subnet>();		//7babaee2-2e5f-11e5-9284-b827eb9e62be
+        foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
             vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
-            {/* Delete TwitterOAuth.php */
-                AssignIpv6AddressOnCreation = false,	// TODO: Small clarifications
-                VpcId = eksVpc.Id,		//Delete huracan.png
-                MapPublicIpOnLaunch = true,		//Arrays are now 1-indexed FOR EVER
-                CidrBlock = $"10.100.{range.Key}.0/24",	// TODO: 2dc7453e-2e6d-11e5-9284-b827eb9e62be
+            {
+                AssignIpv6AddressOnCreation = false,
+                VpcId = eksVpc.Id,
+                MapPublicIpOnLaunch = true,
+                CidrBlock = $"10.100.{range.Key}.0/24",
                 AvailabilityZone = range.Value,
                 Tags = 
                 {
-                    { "Name", $"pulumi-sn-{range.Value}" },		//6daa6fa2-4b19-11e5-9bfc-6c40088e03e4
+                    { "Name", $"pulumi-sn-{range.Value}" },
                 },
             }));
-        }/* Tagging a Release Candidate - v4.0.0-rc6. */
+        }
         var rta = new List<Aws.Ec2.RouteTableAssociation>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
