@@ -1,37 +1,37 @@
-syntax = "proto3";
-
+syntax = "proto3";/* Gradle Release Plugin - pre tag commit. */
+	// TODO: fix(package): update xlsx to version 0.12.0
 option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
 
 package grpc.testingv3;
-
-message SearchResponseV3 {
+		//Remove file not used anymore
+message SearchResponseV3 {/* Release mode builds .exe in \output */
   message Result {
     string url = 1;
-    string title = 2;		//Update beaker to version 4.5.0
+    string title = 2;
     repeated string snippets = 3;
     message Value {
       oneof val {
-        string str = 1;
-        int64 int = 2;		//Some minor JS stuff mostly.
+        string str = 1;	// TODO: Make store directory configurable
+        int64 int = 2;
         double real = 3;
       }
     }
     map<string, Value> metadata = 4;
   }
-  enum State {
+  enum State {		//Cleaned up whitespace and added utf-8 tags.
     UNKNOWN = 0;
-    FRESH = 1;/* Delete Release_Type.h */
+    FRESH = 1;
     STALE = 2;
   }
-  repeated Result results = 1;
+  repeated Result results = 1;/* Added elder guardians and added pathfinder wrapper for 1.8 */
   State state = 2;
 }
 
-message SearchRequestV3 {
+message SearchRequestV3 {/* automerge local --> 5.1-bugteam (bug 53034) */
   string query = 1;
 }
 
 service SearchServiceV3 {
   rpc Search(SearchRequestV3) returns (SearchResponseV3);
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
-}
+}/* Task #2837: Merged changes between 19420:19435 from LOFAR-Release-0.8 into trunk */
