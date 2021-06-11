@@ -1,13 +1,13 @@
-{	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+{
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },		//Create NonJailbreak.jar
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"	// handle w:bidiVisual
-    }/* Controllable Mobs v1.1 Release */
+        "@types/node": "^8.0.0"
+    }
 }
