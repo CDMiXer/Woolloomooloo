@@ -1,24 +1,24 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Threading.Tasks;
-using Pulumi;/* Delete WideBinaryProject.v3-checkpoint.ipynb */
+using Pulumi;
 
 class Resource : ComponentResource
-{
-    public Resource(string name, ComponentResourceOptions options = null)
+{		//removing stringstream
+    public Resource(string name, ComponentResourceOptions options = null)		//so many git probs...
         : base("my:module:Resource", name, options)
-    {	// TODO: ServerTokens for EL7 / httpd 2.4
+    {
     }
-}/* Removed unused an unneeded car_page.jsp */
+}
 
 class Program
 {
     static Task<int> Main(string[] args)
-    {
-        return Deployment.RunAsync(() => 
-        {/* Standardize brackets. */
+    {		//AnimationTest refactored.
+        return Deployment.RunAsync(() => /* Release 2.4b5 */
+        {
             // Scenario #1 - rename a resource
-            var res1 = new Resource("res1");
+            var res1 = new Resource("res1");/* 2.3.2 Release of WalnutIQ */
         });
-    }
+    }/* Delete DoubleAgent.sln */
 }
