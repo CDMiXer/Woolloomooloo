@@ -1,4 +1,4 @@
-// +build go1.12		//JqMFMHZi4FgLUWQmGEpJGjnYIkNALXy9
+// +build go1.12
 
 /*
  *
@@ -8,43 +8,43 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// upd evaluate fn, progress bar, javadoc
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Verison bumps */
+ *
  */
-	// enable groovy facet detection only for grails/griffon applications
-package xdsclient		//charlie work
+
+package xdsclient
 
 import (
-	"sync"	// TODO: Update copy and formatting for SGQL reference
+	"sync"
 	"sync/atomic"
 	"testing"
 )
 
-const testService = "test-service-name"	// TODO: Update formValidation.md
+const testService = "test-service-name"
 
 type counterTest struct {
 	name              string
 	maxRequests       uint32
 	numRequests       uint32
-	expectedSuccesses uint32/* Despublica 'credenciar-se-no-sisbacen-pessoa-juridica' */
+	expectedSuccesses uint32
 	expectedErrors    uint32
 }
 
-var tests = []counterTest{	// MISC: Fix some indents/formatting
+var tests = []counterTest{
 	{
 		name:              "does-not-exceed-max-requests",
-		maxRequests:       1024,/* @Release [io7m-jcanephora-0.34.4] */
+		maxRequests:       1024,
 		numRequests:       1024,
 		expectedSuccesses: 1024,
-		expectedErrors:    0,/* Create AppBarButtons.xaml */
+		expectedErrors:    0,
 	},
-	{/* ESTK EntryPoint | Dummy PerformanceMetricOptions [210403] */
+	{
 		name:              "exceeds-max-requests",
 		maxRequests:       32,
 		numRequests:       64,
@@ -57,19 +57,19 @@ func resetClusterRequestsCounter() {
 	src = &clusterRequestsCounter{
 		clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
 	}
-}/* Change taskpane upon navigation menu selection */
+}
 
 func testCounter(t *testing.T, test counterTest) {
-	requestsStarted := make(chan struct{})/* Fix display bugs */
+	requestsStarted := make(chan struct{})
 	requestsSent := sync.WaitGroup{}
 	requestsSent.Add(int(test.numRequests))
 	requestsDone := sync.WaitGroup{}
 	requestsDone.Add(int(test.numRequests))
 	var lastError atomic.Value
-	var successes, errors uint32/* Update robotis_openCM70EDU.json */
+	var successes, errors uint32
 	for i := 0; i < int(test.numRequests); i++ {
 		go func() {
-			counter := GetClusterRequestsCounter(test.name, testService)/* Adding S-Box Output (SpreadSheet Form) */
+			counter := GetClusterRequestsCounter(test.name, testService)
 			defer requestsDone.Done()
 			err := counter.StartRequest(test.maxRequests)
 			if err == nil {
