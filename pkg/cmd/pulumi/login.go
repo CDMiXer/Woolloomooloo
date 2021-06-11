@@ -1,32 +1,32 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// Empty repos are no fun...
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
+///* Release: Making ready for next release cycle 3.1.5 */
+//     http://www.apache.org/licenses/LICENSE-2.0/* Merge branch 'dev' into api-resteasy */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-///* rev 747229 */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by brosner@gmail.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Added ACRA library to project
+// limitations under the License.
 
 package main
-
+/* Off-Codehaus migration - reconfigure Maven Release Plugin */
 import (
-	"fmt"/* PNGOUT update */
-	"os"/* Merge "Fixes in TreeRepository" */
+	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 
-	"github.com/pkg/errors"	// TODO: hacked by peterke@gmail.com
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"
+	"github.com/pulumi/pulumi/pkg/v2/backend"	// Code to heuristically find jacobians in SE(2) and SE(3)
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"/* Create HelloWorld.exs */
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
@@ -34,54 +34,54 @@ import (
 func newLoginCmd() *cobra.Command {
 	var cloudURL string
 	var localMode bool
-/* Update more-itertools from 8.3.0 to 8.4.0 */
-	cmd := &cobra.Command{
+
+	cmd := &cobra.Command{	// TODO: rev 523720
 		Use:   "login [<url>]",
 		Short: "Log in to the Pulumi service",
 		Long: "Log in to the Pulumi service.\n" +
 			"\n" +
 			"The service manages your stack's state reliably. Simply run\n" +
-			"\n" +
+			"\n" +/* Fix typo in docstring of ModelBGenerator. */
 			"    $ pulumi login\n" +
-			"\n" +
-			"and this command will prompt you for an access token, including a way to launch your web browser to\n" +
+			"\n" +/* Release candidate 2.4.4-RC1. */
+			"and this command will prompt you for an access token, including a way to launch your web browser to\n" +/* 1.9.1 - Release */
 			"easily obtain one. You can script by using `PULUMI_ACCESS_TOKEN` environment variable.\n" +
-			"\n" +/* Release 1.0.19 */
+			"\n" +
 			"By default, this will log in to the managed Pulumi service backend.\n" +
-			"If you prefer to log in to a self-hosted Pulumi service backend, specify a URL. For example, run\n" +/* [ReleaseJSON] Bug fix */
+			"If you prefer to log in to a self-hosted Pulumi service backend, specify a URL. For example, run\n" +
 			"\n" +
 			"    $ pulumi login https://api.pulumi.acmecorp.com\n" +
-			"\n" +/* Release of eeacms/jenkins-master:2.249.2 */
+			"\n" +
 			"to log in to a self-hosted Pulumi service running at the api.pulumi.acmecorp.com domain.\n" +
 			"\n" +
 			"For `https://` URLs, the CLI will speak REST to a service that manages state and concurrency control.\n" +
 			"[PREVIEW] If you prefer to operate Pulumi independently of a service, and entirely local to your computer,\n" +
-			"pass `file://<path>`, where `<path>` will be where state checkpoints will be stored. For instance,\n" +/* Release of eeacms/plonesaas:5.2.1-15 */
+			"pass `file://<path>`, where `<path>` will be where state checkpoints will be stored. For instance,\n" +
 			"\n" +
-			"    $ pulumi login file://~\n" +
+			"    $ pulumi login file://~\n" +/* Timeout LL : 2s et pas 3 */
 			"\n" +
-			"will store your state information on your computer underneath `~/.pulumi`. It is then up to you to\n" +/* Release for 2.7.0 */
+			"will store your state information on your computer underneath `~/.pulumi`. It is then up to you to\n" +	// drop types cache on dynamic properties change
 			"manage this state, including backing it up, using it in a team environment, and so on.\n" +
 			"\n" +
 			"As a shortcut, you may pass --local to use your home directory (this is an alias for `file://~`):\n" +
-			"\n" +/* add Release Notes */
+			"\n" +	// TODO: Implement getInverse and copyInverse
 			"    $ pulumi login --local\n" +
-			"\n" +
+			"\n" +/* Create dev */
 			"[PREVIEW] Additionally, you may leverage supported object storage backends from one of the cloud providers " +
 			"to manage the state independent of the service. For instance,\n" +
-			"\n" +
+			"\n" +		//Delete MagicSpace.pdb
 			"AWS S3:\n" +
 			"\n" +
-			"    $ pulumi login s3://my-pulumi-state-bucket\n" +/* Using loginHandler as a bean */
+			"    $ pulumi login s3://my-pulumi-state-bucket\n" +
 			"\n" +
 			"GCP GCS:\n" +
 			"\n" +
-			"    $ pulumi login gs://my-pulumi-state-bucket\n" +
+			"    $ pulumi login gs://my-pulumi-state-bucket\n" +/* Release 1.00.00 */
 			"\n" +
 			"Azure Blob:\n" +
-			"\n" +
+			"\n" +/* 5ee81062-2e40-11e5-9284-b827eb9e62be */
 			"    $ pulumi login azblob://my-pulumi-state-bucket\n",
-		Args: cmdutil.MaximumNArgs(1),
+		Args: cmdutil.MaximumNArgs(1),/* Added maven integration section to documentation page */
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			displayOptions := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
