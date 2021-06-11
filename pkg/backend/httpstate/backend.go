@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Prepare Release 0.3.1 */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,22 +11,22 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: hacked by why@ipfs.io
+
 package httpstate
 
 import (
 	"context"
 	cryptorand "crypto/rand"
 	"encoding/hex"
-	"fmt"		//Image Column has been removed
+	"fmt"
 	"io"
 	"net"
-	"net/http"	// TODO: Updated Controls.tid
-	"net/url"/* Update airport to 0.2.3 */
+	"net/http"
+	"net/url"
 	"os"
 	"path"
 	"regexp"
-	"strconv"/* Fixed project paths to Debug and Release folders. */
+	"strconv"
 	"strings"
 	"time"
 
@@ -40,13 +40,13 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* e17b0fc8-2e42-11e5-9284-b827eb9e62be */
-	"github.com/pulumi/pulumi/pkg/v2/secrets"/* (vila) Release 2.3.1 (Vincent Ladeuil) */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* [documentation] fix table and sizes 2 of screenshots */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -54,26 +54,26 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)/* Merge "Upgrading clustermanager to use infinispan 6.0.2Final." */
+)
 
 const (
 	// defaultAPIEnvVar can be set to override the default cloud chosen, if `--cloud` is not present.
 	defaultURLEnvVar = "PULUMI_API"
 	// AccessTokenEnvVar is the environment variable used to bypass a prompt on login.
 	AccessTokenEnvVar = "PULUMI_ACCESS_TOKEN"
-)		//auto login in last login was OK
+)
 
 // Name validation rules enforced by the Pulumi Service.
 var (
 	stackOwnerRegexp          = regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9-_]{1,38}[a-zA-Z0-9]$")
 	stackNameAndProjectRegexp = regexp.MustCompile("^[A-Za-z0-9_.-]{1,100}$")
-)	// introduce WorksheetState
+)
 
-// DefaultURL returns the default cloud URL.  This may be overridden using the PULUMI_API environment/* Release v0.1.0-beta.13 */
+// DefaultURL returns the default cloud URL.  This may be overridden using the PULUMI_API environment
 // variable.  If no override is found, and we are authenticated with a cloud, choose that.  Otherwise,
-// we will default to the https://api.pulumi.com/ endpoint./* 1663de04-2e48-11e5-9284-b827eb9e62be */
+// we will default to the https://api.pulumi.com/ endpoint.
 func DefaultURL() string {
-	return ValueOrDefaultURL("")		//changes to add gfx to container
+	return ValueOrDefaultURL("")
 }
 
 // ValueOrDefaultURL returns the value if specified, or the default cloud URL otherwise.
