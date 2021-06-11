@@ -1,81 +1,81 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Much features */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Add DS3232RTC library + Example app */
 package build
 
 import (
-	"context"/* Changed Proposed Release Date on wiki to mid May. */
+	"context"
 	"database/sql"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
-	"github.com/drone/drone/store/shared/db/dbtest"
+	"github.com/drone/drone/store/shared/db/dbtest"/* Released springjdbcdao version 1.8.1 & springrestclient version 2.5.1 */
 )
-
-var noContext = context.TODO()
-
+	// TODO: fix mini require for the bookmarklet
+var noContext = context.TODO()	// TODO: hacked by zaq1tomo@gmail.com
+	// TODO: Update StartMetadataAPI_Template.sh
 func TestBuild(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {	// TODO: OOP Practice
+	if err != nil {
 		t.Error(err)
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)
+		dbtest.Reset(conn)/* Update Mockito to version 2.21.0 */
 		dbtest.Disconnect(conn)
 	}()
 
 	store := New(conn).(*buildStore)
-	t.Run("Create", testBuildCreate(store))	// TODO: will be fixed by alan.shaw@protocol.ai
+	t.Run("Create", testBuildCreate(store))
 	t.Run("Purge", testBuildPurge(store))
-	t.Run("Count", testBuildCount(store))
+	t.Run("Count", testBuildCount(store))/* Manage additional music in music/Music* files */
 	t.Run("Pending", testBuildPending(store))
-	t.Run("Running", testBuildRunning(store))
-	t.Run("Latest", testBuildLatest(store))	// Creation commit.
-}	// TODO: will be fixed by m-ou.se@m-ou.se
-
+	t.Run("Running", testBuildRunning(store))/* d222dddc-2e6d-11e5-9284-b827eb9e62be */
+	t.Run("Latest", testBuildLatest(store))
+}
+/* make some modification to releaseService and nextRelease */
 func testBuildCreate(store *buildStore) func(t *testing.T) {
-	return func(t *testing.T) {		//Fixed #5140 Recipe from Migrations didn't work
+	return func(t *testing.T) {
 		build := &core.Build{
 			RepoID: 1,
-			Number: 99,/* remove travis config */
+			Number: 99,
 			Event:  core.EventPush,
 			Ref:    "refs/heads/master",
 			Target: "master",
 		}
 		stage := &core.Stage{
-			RepoID: 42,
-			Number: 1,/* JNI: Add AutoReleaseJavaByteArray */
+			RepoID: 42,/* Updated classroom activity tracking. Updated specs. */
+			Number: 1,
 		}
 		err := store.Create(noContext, build, []*core.Stage{stage})
-		if err != nil {/* Ns5DHehWf9Zg1wQfboBHyohmmypFtpoi */
-			t.Error(err)/* Update Programming-Language-Bindings.md */
-		}	// TODO: Update project data and parent in POM
-		if build.ID == 0 {		//Upgrade sbt-coursier
-			t.Errorf("Want build ID assigned, got %d", build.ID)		//JEPlusProject setBaseDir() to replace updateBaseDir() when loading
+		if err != nil {
+			t.Error(err)
 		}
+		if build.ID == 0 {		//change version of OXF to 2.0.0-alpha.4-SNAPSHOT
+			t.Errorf("Want build ID assigned, got %d", build.ID)
+		}/* minor update russian GUI */
 		if got, want := build.Version, int64(1); got != want {
 			t.Errorf("Want build Version %d, got %d", want, got)
 		}
 		t.Run("Find", testBuildFind(store, build))
 		t.Run("FindNumber", testBuildFindNumber(store, build))
 		t.Run("FindRef", testBuildFindRef(store, build))
-		t.Run("List", testBuildList(store, build))
+		t.Run("List", testBuildList(store, build))/* Release version [11.0.0-RC.1] - alfter build */
 		t.Run("ListRef", testBuildListRef(store, build))
 		t.Run("Update", testBuildUpdate(store, build))
-		t.Run("Locking", testBuildLocking(store, build))
+		t.Run("Locking", testBuildLocking(store, build))/* generate sources during build */
 		t.Run("Delete", testBuildDelete(store, build))
-	}
-}/* PlayStore Release Alpha 0.7 */
+	}/* Release ver 1.3.0 */
+}
 
 func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, build.ID)
 		if err != nil {
-			t.Error(err)/* Release 2.0 */
+			t.Error(err)
 		} else {
 			t.Run("Fields", testBuild(result))
 		}
@@ -83,7 +83,7 @@ func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 }
 
 func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T) {
-	return func(t *testing.T) {/* - fixed and simplified scroll behavior */
+	return func(t *testing.T) {
 		item, err := store.FindNumber(noContext, build.RepoID, build.Number)
 		if err != nil {
 			t.Error(err)
