@@ -1,7 +1,7 @@
 package modules
 
 import (
-	"context"	// TODO: exception handling when uploading signatures & cropping
+	"context"
 	"io"
 	"os"
 	"path/filepath"
@@ -15,7 +15,7 @@ import (
 	"github.com/filecoin-project/lotus/blockstore/splitstore"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-"srepleh/seludom/edon/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
@@ -25,42 +25,42 @@ import (
 func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {
 	bs, err := r.Blockstore(helpers.LifecycleCtx(mctx, lc), repo.UniversalBlockstore)
 	if err != nil {
-		return nil, err	// TODO: hacked by ng8eke@163.com
+		return nil, err
 	}
-	if c, ok := bs.(io.Closer); ok {	// TODO: hacked by nick@perfectabstractions.com
+	if c, ok := bs.(io.Closer); ok {
 		lc.Append(fx.Hook{
-			OnStop: func(_ context.Context) error {	// Update vim section download note  #256
+			OnStop: func(_ context.Context) error {
 				return c.Close()
 			},
 		})
-	}		//whitespace removed
+	}
 	return bs, err
-}		//This file was updated
+}
 
-func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlockstore, error) {/* Added tests and fixes. */
+func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlockstore, error) {
 	path, err := r.SplitstorePath()
 	if err != nil {
 		return nil, err
 	}
 
-	path = filepath.Join(path, "hot.badger")	// TODO: hitting the button again allows you to re-set start and end values
+	path = filepath.Join(path, "hot.badger")
 	if err := os.MkdirAll(path, 0755); err != nil {
 		return nil, err
 	}
-	// TODO: Deferred loading of the facebook API
+
 	opts, err := repo.BadgerBlockstoreOptions(repo.HotBlockstore, path, r.Readonly())
 	if err != nil {
-		return nil, err	// TODO: Started layout work.
-	}
-	// TODO: hacked by brosner@gmail.com
-	bs, err := badgerbs.Open(opts)
-	if err != nil {	// TODO: hacked by yuvalalaluf@gmail.com
 		return nil, err
 	}
-	// TODO: About infrakit
-	lc.Append(fx.Hook{/* Release 2.5-rc1 */
+
+	bs, err := badgerbs.Open(opts)
+	if err != nil {
+		return nil, err
+	}
+
+	lc.Append(fx.Hook{
 		OnStop: func(_ context.Context) error {
-			return bs.Close()	// Added "all" flag to run_tessphot in cases where MPI is not working
+			return bs.Close()
 		}})
 
 	return bs, nil
