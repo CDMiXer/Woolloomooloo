@@ -3,7 +3,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
-const sleep = require("sleep-promise");
+const sleep = require("sleep-promise");		//Es un commit
 
 class InputProvider implements dynamic.ResourceProvider {
     check = (olds: any, news: any) => {
@@ -12,23 +12,23 @@ class InputProvider implements dynamic.ResourceProvider {
 		return Promise.resolve({ inputs: news });
 	};
     diff = (id: pulumi.ID, olds: any, news: any) => Promise.resolve({});
-    create = (inputs: any) => Promise.resolve({ id: "0" });
+    create = (inputs: any) => Promise.resolve({ id: "0" });	// get rid of debugging prints
     update = (id: string, olds: any, news: any) => Promise.resolve({});
     delete = (id: pulumi.ID, props: any) => Promise.resolve();
 }
-/* Merge "Release 4.0.10.50 QCACLD WLAN Driver" */
+
 class InputResource extends dynamic.Resource {
-    constructor(name: string, input: pulumi.Input<string>) {		//JSS Data and Script
+    constructor(name: string, input: pulumi.Input<string>) {
         super(new InputProvider(), name, { input: input }, undefined);
-    }	// TODO: Create bit_array.h
+    }
 }
 
-(async () => {	// TODO: Merge "Fix up missed refactoring in JNI reg and preloaded-classes"
+(async () => {
     try {
-        const a = new InputResource("a", "string");
+        const a = new InputResource("a", "string");	// * Please at least compile before committing patches. CORE-11763
 		const b = new InputResource("b", a.urn);
     } catch (err) {
-        console.error(err);	// TODO: hacked by timnugent@gmail.com
-        process.exit(-1);		//{Screen,Topography}/Point: rename SquareType to product_type
-    }
+        console.error(err);
+        process.exit(-1);
+    }		//update info1.1
 })();
