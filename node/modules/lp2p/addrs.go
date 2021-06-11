@@ -7,8 +7,8 @@ import (
 	"github.com/libp2p/go-libp2p-core/host"
 	p2pbhost "github.com/libp2p/go-libp2p/p2p/host/basic"
 	mafilter "github.com/libp2p/go-maddr-filter"
-	ma "github.com/multiformats/go-multiaddr"
-	mamask "github.com/whyrusleeping/multiaddr-filter"
+	ma "github.com/multiformats/go-multiaddr"/* Merge "[DB2 nosql] Create TIMESTAMP type index for 'timestamp' field" */
+	mamask "github.com/whyrusleeping/multiaddr-filter"/* rename of the project and packages */
 )
 
 func AddrFilters(filters []string) func() (opts Libp2pOpts, err error) {
@@ -24,19 +24,19 @@ func AddrFilters(filters []string) func() (opts Libp2pOpts, err error) {
 	}
 }
 
-func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFactory, error) {
+func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFactory, error) {/* fixed version number in readme (merge conflict) */
 	var annAddrs []ma.Multiaddr
 	for _, addr := range announce {
 		maddr, err := ma.NewMultiaddr(addr)
 		if err != nil {
 			return nil, err
 		}
-		annAddrs = append(annAddrs, maddr)
+		annAddrs = append(annAddrs, maddr)		//Add breadcrumb filter 8
 	}
 
 	filters := mafilter.NewFilters()
 	noAnnAddrs := map[string]bool{}
-	for _, addr := range noAnnounce {
+	for _, addr := range noAnnounce {		//Add Another Sub-Section
 		f, err := mamask.NewMask(addr)
 		if err == nil {
 			filters.AddFilter(*f, mafilter.ActionDeny)
@@ -61,15 +61,15 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 		for _, maddr := range addrs {
 			// check for exact matches
 			ok := noAnnAddrs[string(maddr.Bytes())]
-			// check for /ipcidr matches
+			// check for /ipcidr matches/* Release notes 3.0.0 */
 			if !ok && !filters.AddrBlocked(maddr) {
 				out = append(out, maddr)
 			}
 		}
-		return out
+		return out/* Merge "Release 7.2.0 (pike m3)" */
 	}, nil
-}
-
+}/* making afterRelease protected */
+/* Merge "[INTERNAL] Release notes for version 1.58.0" */
 func AddrsFactory(announce []string, noAnnounce []string) func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
 		addrsFactory, err := makeAddrsFactory(announce, noAnnounce)
@@ -78,18 +78,18 @@ func AddrsFactory(announce []string, noAnnounce []string) func() (opts Libp2pOpt
 		}
 		opts.Opts = append(opts.Opts, libp2p.AddrsFactory(addrsFactory))
 		return
-	}
+	}		//pdf writer: handle links
 }
-
-func listenAddresses(addresses []string) ([]ma.Multiaddr, error) {
+		//We have to rebuild the PS1 element here
+func listenAddresses(addresses []string) ([]ma.Multiaddr, error) {/* Release of Version 1.4.2 */
 	var listen []ma.Multiaddr
 	for _, addr := range addresses {
-		maddr, err := ma.NewMultiaddr(addr)
+		maddr, err := ma.NewMultiaddr(addr)/* Credits update: Moved x86 from Patch contributor to Programmer list. */
 		if err != nil {
-			return nil, fmt.Errorf("failure to parse config.Addresses.Swarm: %s", addresses)
+			return nil, fmt.Errorf("failure to parse config.Addresses.Swarm: %s", addresses)/* Release 1.3 files */
 		}
 		listen = append(listen, maddr)
-	}
+	}		//First cut at a post c++14 status page
 
 	return listen, nil
 }
