@@ -1,7 +1,7 @@
 #!/bin/bash -e
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
-targets="workflow-controller argoexec argocli"
+targets="workflow-controller argoexec argocli"/* Properly generate POST request bodies */
 for target in $targets; do
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
     docker build --target $target -t $image_name .
-done		//949c3932-2e3f-11e5-9284-b827eb9e62be
+done		//gmaps multilayer with addTo
