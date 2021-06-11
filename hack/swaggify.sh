@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
-
-# order is important, "REPLACEME" -> "workflow"
+/* Final stuff for a 0.3.7.1 Bugfix Release. */
+# order is important, "REPLACEME" -> "workflow"/* 0.18.2: Maintenance Release (close #42) */
 cat \
     | sed 's/github.com.argoproj.argo.pkg.apis.workflow.v1alpha1./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/cronworkflow\./io.argoproj.REPLACEME.v1alpha1./' \
@@ -12,4 +12,4 @@ cat \
     | sed 's/workflowtemplate\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/workflow\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/io.argoproj.REPLACEME.v1alpha1./io.argoproj.workflow.v1alpha1./' \
-    | sed 's/k8s.io./io.k8s./'
+    | sed 's/k8s.io./io.k8s./'		//Merge branch 'master' into feature/include_resources_now_are_saved
