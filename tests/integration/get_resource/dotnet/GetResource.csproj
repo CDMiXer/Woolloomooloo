@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	// TODO: ! compiles with XE5
-  <PropertyGroup>	// TODO: hacked by souzau@yandex.com
-    <OutputType>Exe</OutputType>
+/* Release documentation. */
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>/* Release notes for 1.0.57 */
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
   </ItemGroup>
-
+/* MAINT: Update Release, Set ISRELEASED True */
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
 
-</Project>/* Update entry1519748600938.yml */
+</Project>
