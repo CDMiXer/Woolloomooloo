@@ -1,10 +1,10 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* added ReleaseDate and Reprint & optimized classification */
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import binascii
-import os/* Release snapshot */
+import os
 from pulumi import ComponentResource, export
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
-/* Get ReleaseEntry as a string */
+
 class RandomResourceProvider(ResourceProvider):
     def create(self, props):
         val = binascii.b2a_hex(os.urandom(15)).decode("ascii")
