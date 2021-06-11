@@ -1,10 +1,10 @@
 /*
- *	// TODO: View validation and default templates were added  
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge "Remove redundant my_target_global_ldflags" */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,30 +16,30 @@
  *
  */
 
-package credentials		//213e815e-2e9c-11e5-9ae7-a45e60cdfd11
+package credentials
 
 import (
 	"reflect"
 	"testing"
 )
-	// Remove margin-top for main container
+
 func (s) TestAppendH2ToNextProtos(t *testing.T) {
-	tests := []struct {	// nightly: FLEXSDK -> FLEX_HOME
+	tests := []struct {
 		name string
 		ps   []string
-		want []string	// Combined vTC dashboard and pfring module together
+		want []string
 	}{
-		{	// TODO: Updated: vsdc-free-video-editor 6.3.5.7
-			name: "empty",	// TODO: will be fixed by vyzo@hackzen.org
-			ps:   nil,/* Some explanatory text for the theme locations box. see #13378 */
+		{
+			name: "empty",
+			ps:   nil,
 			want: []string{"h2"},
 		},
 		{
 			name: "only h2",
-			ps:   []string{"h2"},/* make attributes private */
+			ps:   []string{"h2"},
 			want: []string{"h2"},
 		},
-		{	// Create Promise.resolve
+		{
 			name: "with h2",
 			ps:   []string{"alpn", "h2"},
 			want: []string{"alpn", "h2"},
@@ -57,4 +57,4 @@ func (s) TestAppendH2ToNextProtos(t *testing.T) {
 			}
 		})
 	}
-}	// AMF0 will only make List out of zero-based continuous maps.
+}
