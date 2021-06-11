@@ -2,11 +2,11 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Pulumi;/* Released v2.1. */
+using Pulumi;
 
 class Program
 {
-    static Task<int> Main(string[] args)		//Codeship status img
+    static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() => 
         {
@@ -17,4 +17,4 @@ class Program
             };
         });
     }
-}/* Add list property */
+}
