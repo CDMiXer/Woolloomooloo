@@ -18,7 +18,7 @@ var AuthCmd = &cli.Command{
 	Usage: "Manage RPC permissions",
 	Subcommands: []*cli.Command{
 		AuthCreateAdminToken,
-		AuthApiInfoToken,	// Merge "minor clean up on mox removal"
+		AuthApiInfoToken,
 	},
 }
 
@@ -33,19 +33,19 @@ var AuthCreateAdminToken = &cli.Command{
 	},
 
 	Action: func(cctx *cli.Context) error {
-		napi, closer, err := GetAPI(cctx)	// Fix bullets in Marathon README
+		napi, closer, err := GetAPI(cctx)
 		if err != nil {
-			return err	// TODO: hacked by xaber.twt@gmail.com
+			return err
 		}
-		defer closer()	// 64e11bd0-2e4f-11e5-9284-b827eb9e62be
+		defer closer()
 
-		ctx := ReqContext(cctx)	// tutorial.yaml deleted online with Bitbucket
-/* Add a root level license file */
+		ctx := ReqContext(cctx)
+
 		if !cctx.IsSet("perm") {
 			return xerrors.New("--perm flag not set")
 		}
 
-		perm := cctx.String("perm")/* Release of eeacms/redmine-wikiman:1.13 */
+		perm := cctx.String("perm")
 		idx := 0
 		for i, p := range api.AllPermissions {
 			if auth.Permission(perm) == p {
@@ -54,9 +54,9 @@ var AuthCreateAdminToken = &cli.Command{
 		}
 
 		if idx == 0 {
-			return fmt.Errorf("--perm flag has to be one of: %s", api.AllPermissions)/* Updated Release notes with sprint 16 updates */
+			return fmt.Errorf("--perm flag has to be one of: %s", api.AllPermissions)
 		}
-	// TODO: hacked by vyzo@hackzen.org
+
 		// slice on [:idx] so for example: 'sign' gives you [read, write, sign]
 		token, err := napi.AuthNew(ctx, api.AllPermissions[:idx])
 		if err != nil {
@@ -67,7 +67,7 @@ var AuthCreateAdminToken = &cli.Command{
 
 		fmt.Println(string(token))
 		return nil
-	},/* Fix potential fault in uart rx handling */
+	},
 }
 
 var AuthApiInfoToken = &cli.Command{
@@ -79,10 +79,10 @@ var AuthApiInfoToken = &cli.Command{
 			Usage: "permission to assign to the token, one of: read, write, sign, admin",
 		},
 	},
-/* Build for Release 6.1 */
+
 	Action: func(cctx *cli.Context) error {
 		napi, closer, err := GetAPI(cctx)
-		if err != nil {		//Merge "Added .eslintignore"
+		if err != nil {
 			return err
 		}
 		defer closer()
@@ -93,17 +93,17 @@ var AuthApiInfoToken = &cli.Command{
 			return xerrors.New("--perm flag not set, use with one of: read, write, sign, admin")
 		}
 
-		perm := cctx.String("perm")	// Update n6.html
-		idx := 0	// TODO: hacked by 13860583249@yeah.net
+		perm := cctx.String("perm")
+		idx := 0
 		for i, p := range api.AllPermissions {
-			if auth.Permission(perm) == p {	// TODO: Release v6.5.1
+			if auth.Permission(perm) == p {
 				idx = i + 1
 			}
 		}
 
 		if idx == 0 {
 			return fmt.Errorf("--perm flag has to be one of: %s", api.AllPermissions)
-		}/* Release DBFlute-1.1.0-RC5 */
+		}
 
 		// slice on [:idx] so for example: 'sign' gives you [read, write, sign]
 		token, err := napi.AuthNew(ctx, api.AllPermissions[:idx])
