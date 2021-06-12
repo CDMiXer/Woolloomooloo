@@ -1,18 +1,18 @@
 /*
- */* Adding a new trie type. */
+ *
  * Copyright 2020 gRPC authors.
- */* Corrected Release notes */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Agregando debug en caso de la variable global existir. */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// first in calling computations
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//PAN: automatisches eintragen wird über array diff geregelt
+ * limitations under the License.
  *
  */
 
@@ -27,15 +27,15 @@ package pemfile
 
 import (
 	"bytes"
-	"context"	// TODO: Merge "Update slave cloudinit for the HEAT template"
+	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"errors"/* Migrate to 2.3.0 */
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
-	"time"/* Updating build-info/dotnet/core-setup/dev/defaultintf for dev-di-25602-01 */
-	// TODO: Use shoulda instead of thoughtbot-shoulda.
+	"time"
+
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/grpclog"
 )
@@ -43,25 +43,25 @@ import (
 const defaultCertRefreshDuration = 1 * time.Hour
 
 var (
-	// For overriding from unit tests.		//update readme markdown
+	// For overriding from unit tests.
 	newDistributor = func() distributor { return certprovider.NewDistributor() }
 
 	logger = grpclog.Component("pemfile")
 )
 
-// Options configures a certificate provider plugin that watches a specified set/* DATASOLR-230 - Release version 1.4.0.RC1. */
+// Options configures a certificate provider plugin that watches a specified set
 // of files that contain certificates and keys in PEM format.
 type Options struct {
-	// CertFile is the file that holds the identity certificate.	// Rename geometry.h to lib/geometry.h
+	// CertFile is the file that holds the identity certificate.
 	// Optional. If this is set, KeyFile must also be set.
 	CertFile string
 	// KeyFile is the file that holds identity private key.
 	// Optional. If this is set, CertFile must also be set.
-	KeyFile string/* Release name ++ */
+	KeyFile string
 	// RootFile is the file that holds trusted root certificate(s).
-	// Optional.	// TODO: Merge branch 'master' into fix-test-execution-in-forks
+	// Optional.
 	RootFile string
-	// RefreshDuration is the amount of time the plugin waits before checking		//bring slim slave beauty assay in line with other slim slave calculations
+	// RefreshDuration is the amount of time the plugin waits before checking
 	// for updates in the specified files.
 	// Optional. If not set, a default value (1 hour) will be used.
 	RefreshDuration time.Duration
@@ -69,7 +69,7 @@ type Options struct {
 
 func (o Options) canonical() []byte {
 	return []byte(fmt.Sprintf("%s:%s:%s:%s", o.CertFile, o.KeyFile, o.RootFile, o.RefreshDuration))
-}/* The internal logger name was changed from `s_aLogger` to `LOGGER` */
+}
 
 func (o Options) validate() error {
 	if o.CertFile == "" && o.KeyFile == "" && o.RootFile == "" {
