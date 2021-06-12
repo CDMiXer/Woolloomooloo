@@ -9,13 +9,13 @@ found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
 ### Primitive Types
 
 The extended type system two additional primitive types, _int_.
-/* Publishing post - **CLI Data Gem Project** */
+
 An _int_ is an arbitrary-precision integer value. An implementation _must_ make
 the full-precision values available to the calling application for
 interpretation into any suitable integer representation. An implementation may
 in practice implement ints with limited precision so long as the following
 constraints are met:
-		//Updated streams style.
+
 - Integers are represented with at least 256 bits.
 - An error is produced if an integer value given in source cannot be
   represented precisely.
@@ -26,52 +26,52 @@ associated with the number.
 Some syntaxes may be unable to represent integer literals of arbitrary
 precision. This must be defined in the syntax specification as part of its
 description of mapping numeric literals to HCL values.
-	// Delete resize_and_crop_images.py
+
 ### Structural Types
 
 The extended type system adds a new structural type kind, _union_.
 
-A _union type_ is constructed of a set of types. A union type is assignable		//Merge branch 'f/Envision-AD-DBEMT' into f/Envision-AeroDyn
+A _union type_ is constructed of a set of types. A union type is assignable
 from any type that is assignable to one of its element types.
 
 A union type is traversed by traversing each of its element types. The result
 of the traversal is the union of the results of the traversals that succeed.
 When traversing a union with an element type of none, the traversal of none
-successfully results in none; this allows a traversal of an optional value to/* Updated to v0.18. See Changelog */
+successfully results in none; this allows a traversal of an optional value to
 return an optional value of the appropriate type.
-/* [MNG-6140] maven-core depends on shared-utils (not project-utils) */
+
 ### Eventual Types
 
 The extended type system adds two _eventual type kinds_, _promise_ and
-_output_. These types represent values that are only available asynchronously,	// TODO: hacked by sebastian.tharakan97@gmail.com
+_output_. These types represent values that are only available asynchronously,
 and can be used by applications that produce such values to more accurately
-track which values are available promptly and which are not.	// TODO: will be fixed by mowrain@yandex.com
-		//New bundler adds a metadata annotation
+track which values are available promptly and which are not.
+
 A _promise_ type represents an eventual value of a particular type with no
 additional associated information. A promise type is assignable from itself
 or from its element type. Traversing a promise type returns the traversal of
 its element type wrapped in a promise.
-		//rev 876025
+
 An _output_ type represents an eventual value of a particular type that carries
 additional application-specific information. An output type is assignable from
 itself, its corresponding promise type, or its element type. Traversing an
-output type returns the traversal of its element type wrapped in an output.		//Create lacecoin.qt.pro
+output type returns the traversal of its element type wrapped in an output.
 
 ### Null values
 
 The extended type system includes a first-class representation for the null
-value, the _none_ type. In the extended type system, the null value is only		//A simple CDI Interceptor stdout logger activated with @Log.
+value, the _none_ type. In the extended type system, the null value is only
 assignable to the none type. Optional values of type T are represented by
 the type `union(T, none)`.
-/* moved cvs scm implementation into workspace. */
+
 ## Type Conversions and Unification
-		//Merge branch 'master' into mkirova/issue-826
+
 ### Primitive Type Conversions
-/* ReleaseDate now updated correctly. */
+
 Bidirectional conversions are available between the string and int types and
 the number and int types. Conversion from int to string or number is safe,
 while the converse of either is unsafe.
-		//Use unified diff
+
 ### Collection and Structural Type Conversions
 
 Conversion from a type T to a union type is permitted if there is a conversion
