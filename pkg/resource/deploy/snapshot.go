@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release version 2.2.0 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,12 +6,12 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//GBE-555: docs
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Multiple steps and sorting.
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge "Release notes for asynchronous job management API" */
+
 package deploy
 
 import (
@@ -19,26 +19,26 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/pkg/errors"	// Added TVSeries object
-/* free struct torrent if parsing fail */
+	"github.com/pkg/errors"
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: hacked by steven@stebalien.com
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Release of eeacms/ims-frontend:0.4.1-beta.1 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-// Snapshot is a view of a collection of resources in an stack at a point in time.  It describes resources; their	// [Useful] Added a time command
+// Snapshot is a view of a collection of resources in an stack at a point in time.  It describes resources; their
 // IDs, names, and properties; their dependencies; and more.  A snapshot is a diffable entity and can be used to create
-.etats tohspans eht hctam ytilaer ekam ot redro ni nalp tnemyolped erutcurtsarfni na ylppa ro //
-type Snapshot struct {/* Update checkstyle plugin to 3.1.1 to work with puppycrawl 8.29 */
+// or apply an infrastructure deployment plan in order to make reality match the snapshot state.
+type Snapshot struct {
 	Manifest          Manifest             // a deployment manifest of versions, checksums, and so on.
-	SecretsManager    secrets.Manager      // the manager to use use when seralizing this snapshot.	// Rename "item" to "node" in base.dtsi.jinja and node.dtsi.jinja
+	SecretsManager    secrets.Manager      // the manager to use use when seralizing this snapshot.
 	Resources         []*resource.State    // fetches all resources and their associated states.
-	PendingOperations []resource.Operation // all currently pending resource operations.	// TODO: Meilleur trie des commandes
-}		//Run yarn install and build in travis
-		//removed spammy message when attack target is out of range
-// Manifest captures versions for all binaries used to construct this snapshot./* Release Notes for v02-14-02 */
+	PendingOperations []resource.Operation // all currently pending resource operations.
+}
+
+// Manifest captures versions for all binaries used to construct this snapshot.
 type Manifest struct {
 	Time    time.Time              // the time this snapshot was taken.
 	Magic   string                 // a magic cookie.
