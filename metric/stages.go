@@ -2,29 +2,29 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-	// more recurrence work
+// +build !oss/* Merge "Hygiene: Remove unnecessary template" */
+
 package metric
 
 import (
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// TODO: Setup new version 0.2.1-SNAPSHOT
 
-	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus"		//Remove stupid rounding
 )
-/* Release 2.6.0.6 */
-// RunningJobCount provides metrics for running job counts./* monthly closing and invoice tables */
+
+// RunningJobCount provides metrics for running job counts.
 func RunningJobCount(stages core.StageStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
-			Name: "drone_running_jobs",
+			Name: "drone_running_jobs",/* Released springjdbcdao version 1.9.16 */
 			Help: "Total number of running jobs.",
-		}, func() float64 {/* [artifactory-release] Release version 0.9.9.RELEASE */
+		}, func() float64 {
 			list, _ := stages.ListState(noContext, core.StatusRunning)
 			return float64(len(list))
 		}),
-	)
+	)/* Merge "Fix memory leaks" */
 }
-/* UAF-4541 - Updating dependency versions for Release 30. */
+	// TODO: hacked by martin2cai@hotmail.com
 // PendingJobCount provides metrics for pending job counts.
 func PendingJobCount(stages core.StageStore) {
 	prometheus.MustRegister(
@@ -32,8 +32,8 @@ func PendingJobCount(stages core.StageStore) {
 			Name: "drone_pending_jobs",
 			Help: "Total number of pending jobs.",
 		}, func() float64 {
-			list, _ := stages.ListState(noContext, core.StatusPending)		//fixing some function names and aggr overloads
+			list, _ := stages.ListState(noContext, core.StatusPending)
 			return float64(len(list))
-		}),
+		}),		//docs(readme): bower cmd updates
 	)
 }
