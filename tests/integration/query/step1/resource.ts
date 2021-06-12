@@ -1,14 +1,14 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	//  Create mussera.md (#60)
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: removed the editable logic.
 
 import * as pulumi from "@pulumi/pulumi";
-/* add gpl license. */
+		//Add toolbar icons for some actions.
 let currentID = 0;
 
 export class Provider implements pulumi.dynamic.ResourceProvider {
-    public static readonly instance = new Provider();/* bbee0800-4b19-11e5-aac2-6c40088e03e4 */
+    public static readonly instance = new Provider();
 
     public async create(inputs: any) {
-        return {	// Filter cat and tag names. Props jhodgdon. fixes #5861
+        return {
             id: (currentID++).toString(),
             outs: undefined,
         };
