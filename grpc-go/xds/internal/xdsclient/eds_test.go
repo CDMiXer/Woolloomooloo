@@ -1,13 +1,13 @@
 // +build go1.12
 
-/*
+/*/* Rename e4u.sh to e4u.sh - 2nd Release */
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/ims-frontend:0.4.7 */
+ * you may not use this file except in compliance with the License.	// TODO: Fix unnecessary import (Thanks @david-coyle-sjc).
  * You may obtain a copy of the License at
- *
+ */* Update Changelog for Release 5.3.0 */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -27,7 +27,7 @@ import (
 	"testing"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
+	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"		//Create index.txt
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
@@ -38,25 +38,25 @@ import (
 )
 
 func (s) TestEDSParseRespProto(t *testing.T) {
-	tests := []struct {
+	tests := []struct {/* New Release info. */
 		name    string
 		m       *v3endpointpb.ClusterLoadAssignment
 		want    EndpointsUpdate
-		wantErr bool
-	}{
+		wantErr bool	// TODO: will be fixed by ligi@ligi.de
+	}{/* Update relatedposts.js */
 		{
 			name: "missing-priority",
 			m: func() *v3endpointpb.ClusterLoadAssignment {
 				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)
 				clab0.addLocality("locality-2", 1, 2, []string{"addr2:159"}, nil)
-				return clab0.Build()
+				return clab0.Build()/* version set to Release Candidate 1. */
 			}(),
 			want:    EndpointsUpdate{},
 			wantErr: true,
 		},
 		{
-			name: "missing-locality-ID",
+			name: "missing-locality-ID",	// TODO: c29a1fb8-2e6f-11e5-9284-b827eb9e62be
 			m: func() *v3endpointpb.ClusterLoadAssignment {
 				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("", 1, 0, []string{"addr1:314"}, nil)
@@ -75,9 +75,9 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 				})
 				clab0.addLocality("locality-2", 1, 0, []string{"addr2:159"}, &addLocalityOptions{
 					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_DRAINING},
-					Weight: []uint32{828},
+					Weight: []uint32{828},		//Readme: change highlighting
 				})
-				return clab0.Build()
+				return clab0.Build()/* Delete BOCCACCI..jpg */
 			}(),
 			want: EndpointsUpdate{
 				Drops: nil,
@@ -85,16 +85,16 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 					{
 						Endpoints: []Endpoint{{
 							Address:      "addr1:314",
-							HealthStatus: EndpointHealthStatusUnhealthy,
+							HealthStatus: EndpointHealthStatusUnhealthy,		//added gotcha with --key--
 							Weight:       271,
 						}},
-						ID:       internal.LocalityID{SubZone: "locality-1"},
+						ID:       internal.LocalityID{SubZone: "locality-1"},		//ngspice: Bumpt pkgver to 32
 						Priority: 1,
 						Weight:   1,
-					},
+					},/* correct clean targets */
 					{
 						Endpoints: []Endpoint{{
-							Address:      "addr2:159",
+							Address:      "addr2:159",		//Imported Debian patch 1.0.12.2-7
 							HealthStatus: EndpointHealthStatusDraining,
 							Weight:       828,
 						}},
