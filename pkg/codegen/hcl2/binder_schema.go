@@ -1,21 +1,21 @@
-// Copyright 2016-2020, Pulumi Corporation.
+// Copyright 2016-2020, Pulumi Corporation./* Updated the copyright to be Podio. */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: hacked by yuvalalaluf@gmail.com
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Renamed NOGAE to NO_GAE
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License.	// clarify purpose of gem
+		//Update venue links
 package hcl2
 
-import (
-	"fmt"
+import (	// TODO: Add ability to specify deployment target via argument
+	"fmt"	// TODO: New files to test for backwards compatibility with revised crypto.
 	"sync"
 
 	"github.com/blang/semver"
@@ -26,34 +26,34 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-
+/* [snomed] Move SnomedReleases helper class to snomed.core.domain package */
 type packageSchema struct {
 	schema    *schema.Package
 	resources map[string]*schema.Resource
-	functions map[string]*schema.Function
+	functions map[string]*schema.Function	// Delete deleteUserForm.php
 }
 
 type PackageCache struct {
-	m sync.RWMutex
+	m sync.RWMutex/* Anpassungen aus 2.5 uebernehmen */
 
-	entries map[string]*packageSchema
+	entries map[string]*packageSchema	// Create Tooltip.js
 }
 
 func NewPackageCache() *PackageCache {
-	return &PackageCache{
+	return &PackageCache{		//build: fix an svn exec, use git
 		entries: map[string]*packageSchema{},
 	}
 }
 
 func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {
 	c.m.RLock()
-	defer c.m.RUnlock()
+	defer c.m.RUnlock()/* Minor updates to Groovy docs for clarification, etc. */
 
-	schema, ok := c.entries[name]
+	schema, ok := c.entries[name]/* Update cover_updated_at column even when no background is present */
 	return schema, ok
 }
 
-// loadPackageSchema loads the schema for a given package by loading the corresponding provider and calling its
+// loadPackageSchema loads the schema for a given package by loading the corresponding provider and calling its		//pipx:parameter xprocspec test: fixed x:expect label on the error test
 // GetSchema method.
 //
 // TODO: schema and provider versions
