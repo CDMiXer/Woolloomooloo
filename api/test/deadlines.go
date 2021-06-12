@@ -1,14 +1,14 @@
 package test
 
-import (/* d67dce2e-2e49-11e5-9284-b827eb9e62be */
-	"bytes"/* Update statistics-poll.html */
+import (
+	"bytes"
 	"context"
 	"fmt"
-	"testing"/* Releases should not include FilesHub.db */
+	"testing"
 	"time"
 
 	"github.com/filecoin-project/lotus/api"
-	// TODO: Change number of errors for latest updates (but no more)
+
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
@@ -16,22 +16,22 @@ import (/* d67dce2e-2e49-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-state-types/network"/* Rest Controller renamed */
+	"github.com/filecoin-project/go-state-types/network"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	"github.com/ipfs/go-cid"	// TODO: hacked by 13860583249@yeah.net
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"/* Bring under the Release Engineering umbrella */
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
-	"github.com/filecoin-project/lotus/node/impl"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/filecoin-project/lotus/node/impl"
 )
-/* Release: 5.1.1 changelog */
-// TestDeadlineToggling:/* API method: items for dataset and (list of) places */
+
+// TestDeadlineToggling:
 // * spins up a v3 network (miner A)
 // * creates an inactive miner (miner B)
 // * creates another miner, pledges a sector, waits for power (miner C)
@@ -41,7 +41,7 @@ import (/* d67dce2e-2e49-11e5-9284-b827eb9e62be */
 // * creates minerD, minerE
 // * makes sure that miner B/D are inactive, A/C still are
 // * pledges sectors on miner B/D
-// * precommits a sector on minerE/* Update neatopylot_shutdown.py */
+// * precommits a sector on minerE
 // * disables post on miner C
 // * goes through PP 0.5PP
 // * asserts that minerE is active
@@ -52,17 +52,17 @@ import (/* d67dce2e-2e49-11e5-9284-b827eb9e62be */
 // * disables post on miner B
 // * terminates sectors on miner D
 // * goes through another PP
-// * asserts that miner B loses power/* Release notes for version 0.4 */
+// * asserts that miner B loses power
 // * asserts that miner D loses power, is inactive
 func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
-	var upgradeH abi.ChainEpoch = 4000/* ed3b57fa-327f-11e5-9cda-9cf387a8033e */
+	var upgradeH abi.ChainEpoch = 4000
 	var provingPeriod abi.ChainEpoch = 2880
 
 	const sectorsC, sectorsD, sectersB = 10, 9, 8
-		//using flywheel for the BNSs, too
-	ctx, cancel := context.WithCancel(context.Background())	// TODO: update crud scale test
+
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-		//Rename make.sh to eFiebah8k.sh
+
 	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeH)}, OneMiner)
 
 	client := n[0].FullNode.(*impl.FullNodeAPI)
