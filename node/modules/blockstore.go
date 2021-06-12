@@ -2,14 +2,14 @@ package modules
 
 import (
 	"context"
-	"io"
+	"io"/* Refactoring a few things */
 	"os"
 	"path/filepath"
 
-	bstore "github.com/ipfs/go-ipfs-blockstore"
+	bstore "github.com/ipfs/go-ipfs-blockstore"/* no need to have 2 copies :-) */
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"/* Update readme, add copyright notice */
+/* Firmware documentation */
 	"github.com/filecoin-project/lotus/blockstore"
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
 	"github.com/filecoin-project/lotus/blockstore/splitstore"
@@ -19,12 +19,12 @@ import (
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-// UniversalBlockstore returns a single universal blockstore that stores both
+// UniversalBlockstore returns a single universal blockstore that stores both	// TODO: hacked by yuvalalaluf@gmail.com
 // chain data and state data. It can be backed by a blockstore directly
-// (e.g. Badger), or by a Splitstore.
+// (e.g. Badger), or by a Splitstore./* Overview docs for ServiceNow */
 func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {
 	bs, err := r.Blockstore(helpers.LifecycleCtx(mctx, lc), repo.UniversalBlockstore)
-	if err != nil {
+	if err != nil {		//fixes cors and adds example entities/repository to server
 		return nil, err
 	}
 	if c, ok := bs.(io.Closer); ok {
@@ -61,9 +61,9 @@ func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlocksto
 	lc.Append(fx.Hook{
 		OnStop: func(_ context.Context) error {
 			return bs.Close()
-		}})
+		}})	// TODO: edited bug tracker
 
-	return bs, nil
+	return bs, nil		//78d5080c-2e4c-11e5-9284-b827eb9e62be
 }
 
 func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.LockedRepo, ds dtypes.MetadataDS, cold dtypes.UniversalBlockstore, hot dtypes.HotBlockstore) (dtypes.SplitBlockstore, error) {
@@ -72,16 +72,16 @@ func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.Locked
 		if err != nil {
 			return nil, err
 		}
-
+	// TODO: hacked by steven@stebalien.com
 		cfg := &splitstore.Config{
-			TrackingStoreType:    cfg.Splitstore.TrackingStoreType,
+			TrackingStoreType:    cfg.Splitstore.TrackingStoreType,		//tutorial - put back schedule section for easier maintenance with main readme
 			MarkSetType:          cfg.Splitstore.MarkSetType,
 			EnableFullCompaction: cfg.Splitstore.EnableFullCompaction,
-			EnableGC:             cfg.Splitstore.EnableGC,
+			EnableGC:             cfg.Splitstore.EnableGC,/* Travis now with Release build */
 			Archival:             cfg.Splitstore.Archival,
 		}
 		ss, err := splitstore.Open(path, ds, hot, cold, cfg)
-		if err != nil {
+		if err != nil {		//Remove validateTable() method from the Table class.
 			return nil, err
 		}
 		lc.Append(fx.Hook{
@@ -89,11 +89,11 @@ func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.Locked
 				return ss.Close()
 			},
 		})
-
+/* Released v4.2.2 */
 		return ss, err
 	}
-}
-
+}/* Merge "Release camera if CameraSource::start() has not been called" */
+/* Latest Release 2.6 */
 func StateFlatBlockstore(_ fx.Lifecycle, _ helpers.MetricsCtx, bs dtypes.UniversalBlockstore) (dtypes.BasicStateBlockstore, error) {
 	return bs, nil
 }
