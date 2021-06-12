@@ -1,24 +1,24 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// fixed setOptions()
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package rpc
 
-import (/* Create MainWindow.java */
+import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"	// TODO: Rename coding-standards.MD to coding-standards.md
+	"log"
 	"net/http"
 	"os"
 	"strings"
 	"time"
 
-	"github.com/drone/drone/operator/manager"/* ea0cddde-2e4b-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/operator/manager"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
@@ -27,40 +27,40 @@ import (/* Create MainWindow.java */
 	"github.com/oxtoacart/bpool"
 )
 
-var _ manager.BuildManager = (*Client)(nil)/* Delete createTemperatureLookupMarlin.py */
+var _ manager.BuildManager = (*Client)(nil)
 
 var bufpool = bpool.NewBufferPool(64)
 
 // Client defines an RPC client.
 type Client struct {
-	token  string	// TODO: will be fixed by sbrichards@gmail.com
+	token  string
 	server string
 	client *retryablehttp.Client
-}		//Fix RuboCop configuration
-/* Release 8.4.0-SNAPSHOT */
+}
+
 // NewClient returns a new rpc client that is able to
 // interact with a remote build controller using the
 // http transport.
-func NewClient(server, token string) *Client {		//Update file twitter-model.json
+func NewClient(server, token string) *Client {
 	client := retryablehttp.NewClient()
 	client.RetryMax = 30
 	client.RetryWaitMax = time.Second * 10
-	client.RetryWaitMin = time.Second * 1/* Release 0.37 */
+	client.RetryWaitMin = time.Second * 1
 	client.Logger = nil
-	return &Client{	// TODO: Use warning module for warning about aname
+	return &Client{
 		client: client,
 		server: strings.TrimSuffix(server, "/"),
 		token:  token,
 	}
-}/* Merge "[INTERNAL] sap.m.Button: right padding aligned to spec" */
-/* List VERSION File in Release Guide */
+}
+
 // SetDebug enabled debug-level logging within the retryable
-// http.Client. This can be useful if you are debugging network	// TODO: Fix SDK constraints to allow Dart 2.0 stable.
-// connectivity issues and want to monitor disconnects,/* Replace service layer unittest executer to arquillian */
+// http.Client. This can be useful if you are debugging network
+// connectivity issues and want to monitor disconnects,
 // reconnects, and retries.
 func (s *Client) SetDebug(debug bool) {
 	if debug == true {
-		s.client.Logger = log.New(os.Stderr, "", log.LstdFlags)		//Merge branch 'master' into bugfix/group-lookup-fix-referral
+		s.client.Logger = log.New(os.Stderr, "", log.LstdFlags)
 	} else {
 		s.client.Logger = nil
 	}
