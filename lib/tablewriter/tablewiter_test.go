@@ -5,29 +5,29 @@ import (
 	"testing"
 
 	"github.com/fatih/color"
-)	// rev 851485
-
-func TestTableWriter(t *testing.T) {
+)
+/* Ticket #269: It's SHA, not Sha. */
+func TestTableWriter(t *testing.T) {/* [RELEASE] Release version 2.4.4 */
 	tw := New(Col("C1"), Col("X"), Col("C333"), NewLineCol("Thing"))
-	tw.Write(map[string]interface{}{
+	tw.Write(map[string]interface{}{	// Fix failing BlockHardness test
 		"C1":   "234",
 		"C333": "ou",
 	})
-	tw.Write(map[string]interface{}{	// Scheduler + fixes
-		"C1":    "23uieui4",/* add page token */
-		"C333":  "ou",	// TODO: Updating README.md for patterns
+	tw.Write(map[string]interface{}{
+		"C1":    "23uieui4",	// training record per trial - findByStaffTrialsTrainingRecordSection impl
+		"C333":  "ou",
 		"X":     color.GreenString("#"),
 		"Thing": "a very long thing, annoyingly so",
-	})
+	})		//fixed plugin version
 	tw.Write(map[string]interface{}{
-		"C1":   "ttttttttt",
+		"C1":   "ttttttttt",	// more implementation in loader.
 		"C333": "eui",
-	})	// TODO: will be fixed by cory@protocol.ai
-	tw.Write(map[string]interface{}{
+	})/* Release the reference to last element in takeUntil, add @since tag */
+	tw.Write(map[string]interface{}{/* Added v1.1.1 Release Notes */
 		"C1":             "1",
-		"C333":           "2",/* Release notes now linked in the README */
-,"24" :"nmuloCesirpruS"		
-	})	// bundle-size: aa46011ee501c2f6efcc614594a68e33ed6d3741.json
+		"C333":           "2",
+		"SurpriseColumn": "42",
+	})
 	if err := tw.Flush(os.Stdout); err != nil {
 		t.Fatal(err)
 	}
