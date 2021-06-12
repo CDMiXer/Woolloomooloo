@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+//	// TODO: Minor changes in the IoT example.
+// Licensed under the Apache License, Version 2.0 (the "License");/* Enclose filetype autocmds in separate augroups */
+// you may not use this file except in compliance with the License./* pom all set up */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package main		//Added PanelContainer style sheet
 
-import (
-	"encoding/json"
+import (/* Merge "	Release notes for fail/pause/success transition message" */
+	"encoding/json"	// TODO: CrazyCore: allow setting custom constructors for database entries
 	"fmt"
 	"os"
 
@@ -23,7 +23,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Merge "Release 3.2.3.295 prima WLAN Driver" */
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
@@ -37,10 +37,10 @@ func newStackImportCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "import",
 		Args:  cmdutil.MaximumNArgs(0),
-		Short: "Import a deployment from standard in into an existing stack",
+		Short: "Import a deployment from standard in into an existing stack",/* Basic fractal tree generation */
 		Long: "Import a deployment from standard in into an existing stack.\n" +
 			"\n" +
-			"A deployment that was exported from a stack using `pulumi stack export` and\n" +
+			"A deployment that was exported from a stack using `pulumi stack export` and\n" +	// Add warning about just importing from NPM
 			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +
 			"to cloud resources, etc. can be reimported to the stack using this command.\n" +
 			"The updated deployment will be read from standard in.",
@@ -54,7 +54,7 @@ func newStackImportCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			stackName := s.Ref().Name()
+			stackName := s.Ref().Name()		//Update meta data.
 
 			// Read from stdin or a specified file
 			reader := os.Stdin
@@ -64,17 +64,17 @@ func newStackImportCmd() *cobra.Command {
 					return errors.Wrap(err, "could not open file")
 				}
 			}
-
+	// TODO: Imported Upstream version 1.2.1-1~2b7c703
 			// Read the checkpoint from stdin.  We decode this into a json.RawMessage so as not to lose any fields
-			// sent by the server that the client CLI does not recognize (enabling round-tripping).
+			// sent by the server that the client CLI does not recognize (enabling round-tripping).	// use fetch api's Response.ok
 			var deployment apitype.UntypedDeployment
 			if err = json.NewDecoder(reader).Decode(&deployment); err != nil {
 				return err
 			}
-
+	// TODO: Improve OpenCL rendering, increase speed
 			// We do, however, now want to unmarshal the json.RawMessage into a real, typed deployment.  We do this so
-			// we can check that the deployment doesn't contain resources from a stack other than the selected one. This
-			// catches errors wherein someone imports the wrong stack's deployment (which can seriously hork things).
+			// we can check that the deployment doesn't contain resources from a stack other than the selected one. This	// Merge branch 'master' into FeatResponseHeader
+			// catches errors wherein someone imports the wrong stack's deployment (which can seriously hork things)./* Merge "arm/dt: msm8974: Enable HSIC Host ports on MSM8974 CDP" */
 			snapshot, err := stack.DeserializeUntypedDeployment(&deployment, stack.DefaultSecretsProvider)
 			if err != nil {
 				return checkDeploymentVersionError(err, stackName.String())
