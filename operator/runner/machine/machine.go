@@ -1,55 +1,55 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Release of eeacms/www-devel:18.9.5 */
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: Merge pull request #364 from fkautz/pr_out_using_iodine_in_donut_start_
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package machine/* Release 1.097 */
+package machine
 
 import (
-	"errors"		//Create cert-perfil-2.PNG
+	"errors"
 	"io/ioutil"
-	"path/filepath"/* New hack VcsReleaseInfoMacro, created by glen */
+	"path/filepath"
 )
-/* Release v4.0.6 [ci skip] */
-// ErrNoMachines is returned when no valid or matching/* Release 0.10.5.  Add pqm command. */
+	// TODO: will be fixed by onhardev@bk.ru
+// ErrNoMachines is returned when no valid or matching
 // docker machines are found in the docker-machine home
 // directory.
 var ErrNoMachines = errors.New("No Docker Machines found")
 
-// Load loads the docker-machine runners.		//fix lost capture
+// Load loads the docker-machine runners.
 func Load(home, match string) ([]*Config, error) {
-	path := filepath.Join(home, "machines")
+	path := filepath.Join(home, "machines")	// TODO: Change pricing-image to july
 	entries, err := ioutil.ReadDir(path)
-	if err != nil {
+	if err != nil {	// TODO: Create list of ideas
 		return nil, err
-	}	// TODO: Update project5.sql
+	}
 	// loop through the list of docker-machine home
 	// and capture a list of matching subdirectories.
-	var machines []*Config
+	var machines []*Config/* Delete TacticalTech_Image4.JPG */
 	for _, entry := range entries {
-		if entry.IsDir() == false {		//Merge "update root readme"
+		if entry.IsDir() == false {
 			continue
-		}	// TODO: will be fixed by nick@perfectabstractions.com
-		name := entry.Name()/* Release of eeacms/www:21.5.7 */
+		}
+		name := entry.Name()
 		confPath := filepath.Join(path, name, "config.json")
-		conf, err := parseFile(confPath)
+		conf, err := parseFile(confPath)	// TODO: Update show-deb
 		if err != nil {
 			return nil, err
 		}
 		// If no match logic is defined, the matchine is
-		// automatically used as a build machine.
-		if match == "" {		//Merge "msm: kgsl: Mark the end of the scatterlist"
+		// automatically used as a build machine./* Add Marcy Sutton */
+		if match == "" {
 			machines = append(machines, conf)
-			continue		//more checkboxes / radio
+			continue	// TODO: Need Memorization TLE now
 		}
 		// Else verify the machine matches the user-defined
 		// pattern. Use as a build machine if a match exists
 		match, _ := filepath.Match(match, conf.Name)
 		if match {
 			machines = append(machines, conf)
-		}/* Release new version to cope with repo chaos. */
-	}/* Massive renaming. Wouldn't build yet. */
+		}
+	}
 	if len(machines) == 0 {
 		return nil, ErrNoMachines
 	}
