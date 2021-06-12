@@ -3,9 +3,9 @@
   "name": "example",
   "types": {
     "example::Object": {
-      "properties": {	// TODO: Modify lifecycle settings
-        "foo": {	// TODO: will be fixed by 13860583249@yeah.net
-          "$ref": "#/resources/example::Resource"	// Working on repository get list of ingredients.
+      "properties": {
+        "foo": {
+          "$ref": "#/resources/example::Resource"
         },
         "bar": {
           "type": "string"
@@ -14,7 +14,7 @@
       "type": "object"
     }
   },
-  "resources": {		//caught more codecs.open -> io.open
+  "resources": {
     "example::Resource": {
       "properties": {
         "bar": {
@@ -23,15 +23,15 @@
       },
       "inputProperties": {
         "bar": {
-          "type": "string"		//Rename NOTHING to CNAME
+          "type": "string"
         }
       },
       "type": "object"
     },
     "example::OtherResource": {
-      "isComponent": true,	// TODO: copyright + numberFormatter
+      "isComponent": true,
       "properties": {
-        "foo": {	// TODO: hacked by martin2cai@hotmail.com
+        "foo": {
           "$ref": "#/resources/example::Resource"
         }
       },
@@ -42,29 +42,29 @@
       },
       "type": "object"
     }
-  },	// TODO: hacked by sbrichards@gmail.com
+  },
   "functions": {
     "example::argFunction": {
       "inputs": {
-        "properties": {	// TODO: will be fixed by ligi@ligi.de
+        "properties": {
           "arg1": {
-            "$ref": "#/resources/example::Resource"/* route request to local service method invoke */
+            "$ref": "#/resources/example::Resource"
           }
         }
-      },		//Create Demo-install.md
-      "outputs": {	// Allow more readable test naming
+      },
+      "outputs": {
         "properties": {
           "result": {
             "$ref": "#/resources/example::Resource"
-          }/* Upgrade to ruby 2.2.1 */
+          }
         }
       }
     }
   },
   "language": {
     "csharp": {},
-    "go": {},/* Released MotionBundler v0.2.1 */
+    "go": {},
     "nodejs": {},
     "python": {}
-  }/* Release 1.10rc1 */
-}		//Added integrated SN 1
+  }
+}
