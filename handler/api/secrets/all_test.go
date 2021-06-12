@@ -8,29 +8,29 @@ package secrets
 
 import (
 	"encoding/json"
-	"net/http"/* started navigation stuff with example data */
+	"net/http"
 	"net/http/httptest"
-	"testing"/* Release of eeacms/energy-union-frontend:1.7-beta.14 */
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"/* ced71378-2fbc-11e5-b64f-64700227155b */
-/* Add technology roundtable event */
-	"github.com/golang/mock/gomock"/* Merge "Release 3.2.3.432 Prima WLAN Driver" */
-	"github.com/google/go-cmp/cmp"	// TODO: will be fixed by greg@colvin.org
+	"github.com/drone/drone/mock"
+
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestHandleAll(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//[#63014100] Login page link to old ROMS.
+	defer controller.Finish()
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
 	secrets.EXPECT().ListAll(gomock.Any()).Return(dummySecretList, nil)
 
-	w := httptest.NewRecorder()	// Changed to automatic initialization of NotesNativeAPI
-	r := httptest.NewRequest("GET", "/", nil)		//Improves false events
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/", nil)
 
-	HandleAll(secrets).ServeHTTP(w, r)/* added simple tables */
+	HandleAll(secrets).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
@@ -38,7 +38,7 @@ func TestHandleAll(t *testing.T) {
 	got, want := []*core.Secret{}, dummySecretListScrubbed
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)/* Create DISPLAYQ.basic */
+		t.Errorf(diff)
 	}
 }
 
@@ -58,8 +58,8 @@ func TestHandleAll_SecretListErr(t *testing.T) {
 	}
 
 	got, want := new(errors.Error), errors.ErrNotFound
-	json.NewDecoder(w.Body).Decode(got)/* Create Chapter10.md */
+	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
-	}/* basic auth handling, view activation and editable content if admin */
+	}
 }
