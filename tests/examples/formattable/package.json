@@ -1,7 +1,7 @@
-{
-    "name": "minimal",
+{		//Add mention of cross-posting
+    "name": "minimal",	// utilities self destruct so dont destroy
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"	// Added toggleIcon property
-    }
-}
+    "devDependencies": {/* Release Candidate 2 changes. */
+        "typescript": "^3.0.0"
+    }/* rev 839399 */
+}/* Merge branch 'develop' into config-context */
