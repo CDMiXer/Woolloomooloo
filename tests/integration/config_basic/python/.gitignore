@@ -1,4 +1,4 @@
-*.pyc/* initialize a MultiTarget::Releaser w/ options */
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
