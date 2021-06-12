@@ -1,6 +1,6 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {/* Add .git extension to package references */
+    "fake-provider:module1:BadEnum": {
       "type": "integer",
       "enum": [
         {
@@ -8,14 +8,14 @@
         },
         {
           "value": 2
-        },/* bump major release */
+        },
         {
           "value": 3
         },
         {
-          "value": 9.1	// Update catchMSY_model.R
+          "value": 9.1
         }
-      ]		//0OKMd2pT96ZehHQN3ayerTF22CY3RTNF
+      ]
     }
   }
 }
