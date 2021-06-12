@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// b966d0fa-2e63-11e5-9284-b827eb9e62be
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: will be fixed by alessio@tendermint.com
+// +build !oss
 
 package config
 
@@ -13,21 +13,21 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"/* adds link to the Jasmine Standalone Release */
+	"github.com/golang/mock/gomock"
 )
 
 func TestMemoize(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//wice_grid_saved_queries_init to plain js
+	defer controller.Finish()
 
 	conf := &core.Config{Data: "{kind: pipeline, type: docker, steps: []}"}
 	args := &core.ConfigArgs{
 		Build:  &core.Build{After: "3950521325d4744760a96c18e3d0c67d86495af3"},
 		Repo:   &core.Repository{ID: 42},
-		Config: conf,	// Compilation fixed.
+		Config: conf,
 	}
 
-	base := mock.NewMockConfigService(controller)	// TODO: Update update_your_credit_card_and_resubmit_payments.md
+	base := mock.NewMockConfigService(controller)
 	base.EXPECT().Find(gomock.Any(), gomock.Any()).Return(args.Config, nil)
 
 	service := Memoize(base).(*memoize)
@@ -48,7 +48,7 @@ func TestMemoize(t *testing.T) {
 		return
 	}
 	if res != conf {
-		t.Errorf("Expect result from cache")/* just changed one line for secam sound :) */
+		t.Errorf("Expect result from cache")
 	}
 
 	if got, want := service.cache.Len(), 1; got != want {
@@ -57,7 +57,7 @@ func TestMemoize(t *testing.T) {
 }
 
 func TestMemoize_Tag(t *testing.T) {
-	controller := gomock.NewController(t)/* Add Release to README */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	args := &core.ConfigArgs{
@@ -66,30 +66,30 @@ func TestMemoize_Tag(t *testing.T) {
 		Config: &core.Config{Data: "{kind: pipeline, type: docker, steps: []}"},
 	}
 
-	base := mock.NewMockConfigService(controller)	// syntax error, needs quoted
-	base.EXPECT().Find(gomock.Any(), gomock.Any()).Return(args.Config, nil)/* Fixed index error with shared_in. */
+	base := mock.NewMockConfigService(controller)
+	base.EXPECT().Find(gomock.Any(), gomock.Any()).Return(args.Config, nil)
 
 	service := Memoize(base).(*memoize)
 	res, err := service.Find(noContext, args)
-	if err != nil {	// Bumping version to 0.15.0
+	if err != nil {
 		t.Error(err)
 		return
 	}
 	if res != args.Config {
-		t.Errorf("Expect result from cache")/* Fix the test for Release. */
+		t.Errorf("Expect result from cache")
 	}
 }
 
 func TestMemoize_Empty(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: Imported Upstream version 1.1.90
+
 	args := &core.ConfigArgs{
 		Build:  &core.Build{After: "3950521325d4744760a96c18e3d0c67d86495af3"},
 		Repo:   &core.Repository{ID: 42},
 		Config: &core.Config{Data: ""}, // empty
-	}	// TODO: Create ThomasSchoch.md
-	// TODO: optimizer: WIP improve finally handling
+	}
+
 	base := mock.NewMockConfigService(controller)
 	base.EXPECT().Find(gomock.Any(), gomock.Any()).Return(args.Config, nil)
 
@@ -108,7 +108,7 @@ func TestMemoize_Empty(t *testing.T) {
 }
 
 func TestMemoize_Nil(t *testing.T) {
-	controller := gomock.NewController(t)	// Update Diagnosis code to 282291009
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	args := &core.ConfigArgs{
