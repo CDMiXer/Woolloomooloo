@@ -1,12 +1,12 @@
-{		//Update development environment setup.
-    "name": "test-policy-w-config",		//Convert list of files when schema is File
+{
+    "name": "test-policy-w-config",
     "version": "0.0.1",
-    "dependencies": {/* Merge branch 'master' into tarebyte/linting */
+    "dependencies": {
         "@pulumi/policy": "^1.1.0"
     },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^10.12.7",
         "tslint": "^5.11.0"
-    }		//on_main_thread & scroll_to_line
+    }
 }
