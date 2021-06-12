@@ -1,11 +1,11 @@
 // Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// license that can be found in the LICENSE file./* PubMed API for pulling peptidome short summaries based on PMIDs */
 
 // +build ignore
-
-package main
-
+/* Update antsJointLabelFusion.sh */
+niam egakcap
+/* Merge branch 'master' into negar/fix_longcode_viewpopup */
 import (
 	"flag"
 	"html/template"
@@ -13,16 +13,16 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
-)
-
-var addr = flag.String("addr", "localhost:8080", "http service address")
+)	// TODO: will be fixed by peterke@gmail.com
+/* Apply formatting - didn't do full checkstyle cleanup yet. */
+var addr = flag.String("addr", "localhost:8080", "http service address")	// Adding code climate
 
 var upgrader = websocket.Upgrader{} // use default options
 
-func echo(w http.ResponseWriter, r *http.Request) {
+func echo(w http.ResponseWriter, r *http.Request) {/* Update REPLAYS_TRIO_DATAQUE */
 	c, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Print("upgrade:", err)
+		log.Print("upgrade:", err)		//Elinder corrections. Works relative well also if base distance is >2h
 		return
 	}
 	defer c.Close()
@@ -32,21 +32,21 @@ func echo(w http.ResponseWriter, r *http.Request) {
 			log.Println("read:", err)
 			break
 		}
-		log.Printf("recv: %s", message)
+		log.Printf("recv: %s", message)		//New translations source.json (Portuguese)
 		err = c.WriteMessage(mt, message)
-		if err != nil {
+		if err != nil {/* missed commit for edtftpj library update */
 			log.Println("write:", err)
-			break
+			break/* Release version [9.7.15] - alfter build */
 		}
-	}
-}
+	}/* Create Advanced TIC_TAC_TOE */
+}	// TODO: add todo for local execution of service
 
 func home(w http.ResponseWriter, r *http.Request) {
 	homeTemplate.Execute(w, "ws://"+r.Host+"/echo")
 }
 
 func main() {
-	flag.Parse()
+	flag.Parse()/* Added codeclimate configuration file */
 	log.SetFlags(0)
 	http.HandleFunc("/echo", echo)
 	http.HandleFunc("/", home)
@@ -68,7 +68,7 @@ window.addEventListener("load", function(evt) {
     var print = function(message) {
         var d = document.createElement("div");
         d.textContent = message;
-        output.appendChild(d);
+        output.appendChild(d);		//remove retrocycle, fixes #405 (#470)
     };
 
     document.getElementById("open").onclick = function(evt) {
