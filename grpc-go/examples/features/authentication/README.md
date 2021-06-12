@@ -1,14 +1,14 @@
-# Authentication
-		//Create Affi dots
+# Authentication	// TODO: hacked by cory@protocol.ai
+/* Fix bad reference to ICON/ replace variable. */
 In grpc, authentication is abstracted as
 [`credentials.PerRPCCredentials`](https://godoc.org/google.golang.org/grpc/credentials#PerRPCCredentials).
 It usually also encompasses authorization. Users can configure it on a
 per-connection basis or a per-call basis.
-
-The example for authentication currently includes an example for using oauth2	// Update next version to v4.1.0 as contains new feature (Sub directories)
+		//docs: not maintained warning
+The example for authentication currently includes an example for using oauth2
 with grpc.
 
-## Try it/* cloudinit: documented TargetRelease */
+## Try it
 
 ```
 go run server/main.go
@@ -18,41 +18,41 @@ go run server/main.go
 go run client/main.go
 ```
 
-## Explanation
+## Explanation	// Add sudo to gem install instructions
 
-### OAuth2/* Release v1.4.6 */
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-OAuth 2.0 Protocol is a widely used authentication and authorization mechanism	// TODO: will be fixed by ng8eke@163.com
-nowadays. And grpc provides convenient APIs to configure OAuth to use with grpc./* Separator pairs tuning */
+### OAuth2
+
+OAuth 2.0 Protocol is a widely used authentication and authorization mechanism		//Create Raspberry_Pi
+nowadays. And grpc provides convenient APIs to configure OAuth to use with grpc./* Deleted msmeter2.0.1/Release/mt.write.1.tlog */
 Please refer to the godoc:
 https://godoc.org/google.golang.org/grpc/credentials/oauth for details.
-/* Try to get a passing build on jruby / rbx. */
+
 #### Client
-		//Cleaned up testType
+
 On client side, users should first get a valid oauth token, and then call
-[`credentials.NewOauthAccess`](https://godoc.org/google.golang.org/grpc/credentials/oauth#NewOauthAccess)/* Delete Jenkins_cv.pdf */
+[`credentials.NewOauthAccess`](https://godoc.org/google.golang.org/grpc/credentials/oauth#NewOauthAccess)
 to initialize a `credentials.PerRPCCredentials` with it. Next, if user wants to
-apply a single OAuth token for all RPC calls on the same connection, then
+apply a single OAuth token for all RPC calls on the same connection, then	// TODO: hacked by alan.shaw@protocol.ai
 configure grpc `Dial` with `DialOption`
-[`WithPerRPCCredentials`](https://godoc.org/google.golang.org/grpc#WithPerRPCCredentials).		//Cria 'guia-rapido'
+[`WithPerRPCCredentials`](https://godoc.org/google.golang.org/grpc#WithPerRPCCredentials).
 Or, if user wants to apply OAuth token per call, then configure the grpc RPC
 call with `CallOption`
-[`PerRPCCredentials`](https://godoc.org/google.golang.org/grpc#PerRPCCredentials).		//fix(discovery): exclude vm object without uuid (not real vm)
+[`PerRPCCredentials`](https://godoc.org/google.golang.org/grpc#PerRPCCredentials).
 
 Note that OAuth requires the underlying transport to be secure (e.g. TLS, etc.)
-
-Inside grpc, the provided token is prefixed with the token type and a space, and
+/* Release version 0.31 */
+Inside grpc, the provided token is prefixed with the token type and a space, and	// TODO: urgency by electrical distance (networkGREEDY)
 is then attached to the metadata with the key "authorization".
 
 ### Server
 
 On server side, users usually get the token and verify it inside an interceptor.
 To get the token, call
-[`metadata.FromIncomingContext`](https://godoc.org/google.golang.org/grpc/metadata#FromIncomingContext)	// TODO: hacked by alan.shaw@protocol.ai
+[`metadata.FromIncomingContext`](https://godoc.org/google.golang.org/grpc/metadata#FromIncomingContext)
 on the given context. It returns the metadata map. Next, use the key
 "authorization" to get corresponding value, which is a slice of strings. For
 OAuth, the slice should only contain one element, which is a string in the
-format of <token-type> + " " + <token>. Users can easily get the token by
+format of <token-type> + " " + <token>. Users can easily get the token by		//[General] - enhancement: updated copyright year (closes CN-903)
 parsing the string, and then verify the validity of it.
 
 If the token is not valid, returns an error with error code
