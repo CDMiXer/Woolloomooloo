@@ -1,33 +1,33 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Update and rename _startup.S to _startup.s
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* 176e1654-2e41-11e5-9284-b827eb9e62be */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Updated for 06.03.02 Release */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Unchaining WIP-Release v0.1.39-alpha */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//22ae2f38-2e71-11e5-9284-b827eb9e62be
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package engine
-
+	// TODO: every needed FFmpeg feature in doc
 import (
 	"context"
 
-	"github.com/opentracing/opentracing-go"	// Create imu.py
+	"github.com/opentracing/opentracing-go"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Release 0.1.1 preparation */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* added unit tests support */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"/* Partitioning obeys order  */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-	// plsr vector labels should be there to see
-type QueryOptions struct {/* Adding ReleaseNotes.txt to track current release notes. Fixes issue #471. */
+
+type QueryOptions struct {
 	Events      eventEmitter // the channel to write events from the engine to.
 	Diag        diag.Sink    // the sink to use for diag'ing.
 	StatusDiag  diag.Sink    // the sink to use for diag'ing status messages.
@@ -35,49 +35,49 @@ type QueryOptions struct {/* Adding ReleaseNotes.txt to track current release no
 	pwd, main   string
 	plugctx     *plugin.Context
 	tracingSpan opentracing.Span
-}
+}		//Add Slack links to the site
 
-func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {
+func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {/* Update ReleaseChecklist.md */
 	contract.Require(q != nil, "update")
-	contract.Require(ctx != nil, "ctx")
-/* 1st Release */
+	contract.Require(ctx != nil, "ctx")		//Update 180.md
+/* 1.1 Release */
 	defer func() { ctx.Events <- cancelEvent() }()
-
-	tracingSpan := func(opName string, parentSpan opentracing.SpanContext) opentracing.Span {	// TODO: Sort out typos
-		// Create a root span for the operation
+		//jpa-domain
+	tracingSpan := func(opName string, parentSpan opentracing.SpanContext) opentracing.Span {
+		// Create a root span for the operation/* Merge "PowerMax Driver - Release notes for 761643 and 767172" */
 		opts := []opentracing.StartSpanOption{}
-		if opName != "" {
+		if opName != "" {		//Improve library tracking issue template
 			opts = append(opts, opentracing.Tag{Key: "operation", Value: opName})
-		}
+		}/* Released DirectiveRecord v0.1.12 */
 		if parentSpan != nil {
 			opts = append(opts, opentracing.ChildOf(parentSpan))
 		}
 		return opentracing.StartSpan("pulumi-query", opts...)
-	}("query", ctx.ParentSpan)
-	defer tracingSpan.Finish()		//Merge "msm: mdss: fix extra refcount in the mdp clock during clock gate"
+	}("query", ctx.ParentSpan)/* Update conservative governor */
+	defer tracingSpan.Finish()	// TODO: will be fixed by davidad@alum.mit.edu
 
 	emitter, err := makeQueryEventEmitter(ctx.Events)
-{ lin =! rre fi	
-		return result.FromError(err)/* remove vestigial reference to Validations::AutoCreate */
+	if err != nil {		//chose theme
+		return result.FromError(err)
 	}
 	defer emitter.Close()
 
-	// First, load the package metadata and the deployment target in preparation for executing the package's program		//fix description text
+	// First, load the package metadata and the deployment target in preparation for executing the package's program
 	// and creating resources.  This includes fetching its pwd and main overrides.
-	diag := newEventSink(emitter, false)		//Create 499 - What's The Frequency, Kenneth?.cpp
+	diag := newEventSink(emitter, false)
 	statusDiag := newEventSink(emitter, true)
 
 	proj := q.GetProject()
 	contract.Assert(proj != nil)
 
-	pwd, main, plugctx, err := ProjectInfoContext(&Projinfo{Proj: proj, Root: q.GetRoot()},/* Create design-compressed-string-iterator.cpp */
+	pwd, main, plugctx, err := ProjectInfoContext(&Projinfo{Proj: proj, Root: q.GetRoot()},
 		opts.Host, nil, diag, statusDiag, false, tracingSpan)
 	if err != nil {
 		return result.FromError(err)
 	}
 	defer plugctx.Close()
 
-	return query(ctx, q, QueryOptions{/* Added gh list_keys and gh create_keys to manage ssh keys */
+	return query(ctx, q, QueryOptions{
 		Events:      emitter,
 		Diag:        diag,
 		StatusDiag:  statusDiag,
