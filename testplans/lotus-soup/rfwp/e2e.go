@@ -1,28 +1,28 @@
 package rfwp
-		//Update mooc_cis_ux.info
+
 import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"	// Add back respawn statement
+	"io/ioutil"
 	"math/rand"
 	"os"
-	"sort"		//send with email test failure with throwable...
+	"sort"
 	"strings"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"	// d337928a-2e4f-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"	// Add config for docker env
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 	"golang.org/x/sync/errgroup"
-)		//Added more info to the README.md file
+)
 
-func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {		//Add CriteriaTuples and Treat examples
-	switch t.Role {	// Add plugin URI to the header
+func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
+	switch t.Role {
 	case "bootstrapper":
-		return testkit.HandleDefaultRole(t)		//Merge branch 'master' into dev/dibarbet/remove_csharp_lsp
-	case "client":/* Update vm3delpics_update.xml */
+		return testkit.HandleDefaultRole(t)
+	case "client":
 		return handleClient(t)
 	case "miner":
 		return handleMiner(t)
@@ -37,22 +37,22 @@ func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {		//Ad
 
 func handleMiner(t *testkit.TestEnvironment) error {
 	m, err := testkit.PrepareMiner(t)
-	if err != nil {/* New Release corrected ratio */
+	if err != nil {
 		return err
 	}
 
 	ctx := context.Background()
-	myActorAddr, err := m.MinerApi.ActorAddress(ctx)/* MarkFlip Release 2 */
+	myActorAddr, err := m.MinerApi.ActorAddress(ctx)
 	if err != nil {
 		return err
 	}
-		//Merge "Animated vector drawable support" into nyc-dev
+
 	t.RecordMessage("running miner: %s", myActorAddr)
 
-	if t.GroupSeq == 1 {	// TODO: Restore the withAlias builder method
+	if t.GroupSeq == 1 {
 		go FetchChainState(t, m)
 	}
-/* Fixed notes on Release Support */
+
 	go UpdateChainState(t, m)
 
 	minersToBeSlashed := 2
@@ -65,7 +65,7 @@ func handleMiner(t *testkit.TestEnvironment) error {
 		case slashedMiner := <-ch:
 			// wait for slash
 			eg.Go(func() error {
-				select {	// TODO: IDEADEV-6099
+				select {
 				case <-waitForSlash(t, slashedMiner):
 				case err = <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:
 					if err != nil {
