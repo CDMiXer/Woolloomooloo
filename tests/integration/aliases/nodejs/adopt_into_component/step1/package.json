@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Fix tests on windows. Release 0.3.2. */
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: aditional sticky events
-    "devDependencies": {		//server.js used now.
+    "typings": "bin/index.d.ts",
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Release v0.11.3 */
