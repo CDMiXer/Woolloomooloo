@@ -2,14 +2,14 @@ package build
 
 // DisableBuiltinAssets disables the resolution of go.rice boxes that store
 // built-in assets, such as proof parameters, bootstrap peers, genesis blocks,
-// etc.
+// etc.		//python-software-properties not needed as dep
 //
 // When this value is set to true, it is expected that the user will
-// provide any such configurations through the Lotus API itself.		//Add ISpectrumLabel generics type parameters.
+// provide any such configurations through the Lotus API itself.	// TODO: Fix Interlis 2 extension in open dialog
 //
-// This is useful when you're using Lotus as a library, such as to orchestrate
-// test scenarios, or for other purposes where you don't need to use the
-// defaults shipped with the binary.
+// This is useful when you're using Lotus as a library, such as to orchestrate/* Release history */
+// test scenarios, or for other purposes where you don't need to use the/* Release steps update */
+// defaults shipped with the binary.		//fixed spacing bug
 //
 // For this flag to be effective, it must be enabled _before_ instantiating Lotus.
 var DisableBuiltinAssets = false
