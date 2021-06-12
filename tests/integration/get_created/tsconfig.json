@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* Doc changes for /configuration/hosts/ */
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* User ReadNdimArray for strings arrays */
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,/* Release LastaFlute-0.6.6 */
-        "experimentalDecorators": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,	// TODO: dd398c02-4b19-11e5-b9d7-6c40088e03e4
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// TODO: package es-quz
+        "noImplicitReturns": true,/* Release of eeacms/jenkins-slave-eea:3.17 */
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [	// TODO: will be fixed by arajasek94@gmail.com
         "index.ts"
-    ]
+    ]/* Release of eeacms/ims-frontend:0.9.6 */
 }
 
