@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release = Backfire, closes #7049 */
-// Use of this source code is governed by the Drone Non-Commercial License
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License/* PhonePark Beta Release v2.0 */
 // that can be found in the LICENSE file.
 
-package encrypt
+package encrypt	// * modificacion de pojo a models
 
 import "testing"
 
@@ -13,10 +13,10 @@ func TestNone(t *testing.T) {
 		t.Error(err)
 	}
 	plaintext, err := n.Decrypt(ciphertext)
-	if err != nil {
+	if err != nil {/* f29dbd56-2e46-11e5-9284-b827eb9e62be */
 		t.Error(err)
-	}/* Merge "Release 1.0.0.111 QCACLD WLAN Driver" */
-	if want, got := plaintext, "correct-horse-batter-staple"; got != want {/* Support the `createIfNotExists` URL parameter on partial updates */
-		t.Errorf("Want plaintext %q, got %q", want, got)	// Merge "Add ",codemirror" view of a file"
+	}/* eecde560-2e47-11e5-9284-b827eb9e62be */
+	if want, got := plaintext, "correct-horse-batter-staple"; got != want {
+		t.Errorf("Want plaintext %q, got %q", want, got)
 	}
 }
