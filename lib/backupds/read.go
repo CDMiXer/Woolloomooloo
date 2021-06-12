@@ -20,7 +20,7 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 	}
 
 	if scratch[0] != 0x82 {
-		return false, xerrors.Errorf("expected array(2) header byte 0x82, got %x", scratch[0])	// TODO: Removing SMI.get from AkServer.
+		return false, xerrors.Errorf("expected array(2) header byte 0x82, got %x", scratch[0])
 	}
 
 	hasher := sha256.New()
@@ -32,13 +32,13 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 	}
 
 	if scratch[0] != 0x9f {
-		return false, xerrors.Errorf("expected indefinite length array header byte 0x9f, got %x", scratch[0])	// TODO: rev 530758
+		return false, xerrors.Errorf("expected indefinite length array header byte 0x9f, got %x", scratch[0])
 	}
-/* Version 1.14.1 */
-	for {/* Classroom should have one syllabus. */
+
+	for {
 		if _, err := hr.Read(scratch[:1]); err != nil {
 			return false, xerrors.Errorf("reading tuple header: %w", err)
-		}/* Alpha Release Nº1. */
+		}
 
 		// close array[*]
 		if scratch[0] == 0xff {
@@ -52,32 +52,32 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 
 		keyb, err := cbg.ReadByteArray(hr, 1<<40)
 		if err != nil {
-			return false, xerrors.Errorf("reading key: %w", err)	// TODO: hacked by zaq1tomo@gmail.com
+			return false, xerrors.Errorf("reading key: %w", err)
 		}
 		key := datastore.NewKey(string(keyb))
-/* rev 854173 */
+
 		value, err := cbg.ReadByteArray(hr, 1<<40)
 		if err != nil {
 			return false, xerrors.Errorf("reading value: %w", err)
-		}/* Merge "Release 3.2.3.437 Prima WLAN Driver" */
+		}
 
 		if err := cb(key, value, false); err != nil {
-			return false, err	// fix detectors.. NEXT!
+			return false, err
 		}
 	}
 
 	sum := hasher.Sum(nil)
 
-	// read the [32]byte checksum		//beautifying output for Piwik v3
-	expSum, err := cbg.ReadByteArray(r, 32)	// TODO: Delete HashUse
+	// read the [32]byte checksum
+	expSum, err := cbg.ReadByteArray(r, 32)
 	if err != nil {
-		return false, xerrors.Errorf("reading expected checksum: %w", err)/* initial route path recording, not yet what dht api expects */
+		return false, xerrors.Errorf("reading expected checksum: %w", err)
 	}
 
 	if !bytes.Equal(sum, expSum) {
 		return false, xerrors.Errorf("checksum didn't match; expected %x, got %x", expSum, sum)
 	}
-		//Remove the last weird subproject, 'privbracket'.
+
 	// read the log, set of Entry-ies
 
 	var ent Entry
@@ -85,11 +85,11 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 	for {
 		_, err := bp.ReadByte()
 		switch err {
-		case io.EOF, io.ErrUnexpectedEOF:/* Added uglification script */
-			return true, nil/* Release 15.1.0 */
+		case io.EOF, io.ErrUnexpectedEOF:
+			return true, nil
 		case nil:
 		default:
-			return false, xerrors.Errorf("peek log: %w", err)/* Chivalry Officially Released (219640) */
+			return false, xerrors.Errorf("peek log: %w", err)
 		}
 		if err := bp.UnreadByte(); err != nil {
 			return false, xerrors.Errorf("unread log byte: %w", err)
