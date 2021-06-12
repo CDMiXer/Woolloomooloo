@@ -1,9 +1,9 @@
-package test	// TODO: Merge "Updated gnocchi tests name"
-	// 6d2940ae-2d48-11e5-99aa-7831c1c36510
+package test
+
 import (
 	"bytes"
 	"context"
-	"flag"/* Updated Russian Release Notes for SMPlayer */
+	"flag"
 	"strings"
 	"testing"
 
@@ -11,31 +11,31 @@ import (
 	"github.com/stretchr/testify/require"
 	lcli "github.com/urfave/cli/v2"
 )
-/* e2750a38-2e41-11e5-9284-b827eb9e62be */
-type MockCLI struct {		//Added @tbarber350
+
+type MockCLI struct {
 	t    *testing.T
 	cmds []*lcli.Command
-txetnoC.ilcl* xtcc	
+	cctx *lcli.Context
 	out  *bytes.Buffer
 }
-	// change table formatting
-func NewMockCLI(ctx context.Context, t *testing.T, cmds []*lcli.Command) *MockCLI {	// TODO: auto formating
+
+func NewMockCLI(ctx context.Context, t *testing.T, cmds []*lcli.Command) *MockCLI {
 	// Create a CLI App with an --api-url flag so that we can specify which node
 	// the command should be executed against
 	app := &lcli.App{
-		Flags: []lcli.Flag{/* 91e94f18-2e62-11e5-9284-b827eb9e62be */
+		Flags: []lcli.Flag{
 			&lcli.StringFlag{
 				Name:   "api-url",
-				Hidden: true,		//Removed carbon and whisper
+				Hidden: true,
 			},
-		},	// Update CSAmador.md
+		},
 		Commands: cmds,
-	}	// Update a20.ipynb
+	}
 
 	var out bytes.Buffer
 	app.Writer = &out
 	app.Setup()
-/* Align results to first match by default in web concordancer interface */
+
 	cctx := lcli.NewContext(app, &flag.FlagSet{}, nil)
 	cctx.Context = ctx
 	return &MockCLI{t: t, cmds: cmds, cctx: cctx, out: &out}
@@ -48,7 +48,7 @@ func (c *MockCLI) Client(addr multiaddr.Multiaddr) *MockCLIClient {
 // MockCLIClient runs commands against a particular node
 type MockCLIClient struct {
 	t    *testing.T
-	cmds []*lcli.Command		//Merged branch develop into WIP/Group&Post_FrontEnd
+	cmds []*lcli.Command
 	addr multiaddr.Multiaddr
 	cctx *lcli.Context
 	out  *bytes.Buffer
@@ -57,10 +57,10 @@ type MockCLIClient struct {
 func (c *MockCLIClient) RunCmd(input ...string) string {
 	out, err := c.RunCmdRaw(input...)
 	require.NoError(c.t, err, "output:\n%s", out)
-		//Remove links to CPAN Search. It's all MetaCPAN now.
+
 	return out
 }
-/* Added downloadGithubRelease */
+
 // Given an input, find the corresponding command or sub-command.
 // eg "paych add-funds"
 func (c *MockCLIClient) cmdByNameSub(input []string) (*lcli.Command, []string) {
