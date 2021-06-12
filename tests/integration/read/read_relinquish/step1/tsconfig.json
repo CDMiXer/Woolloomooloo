@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {	// apt-get cleanup
-        "outDir": "bin",
-        "target": "es2016",/* avoid deleting adhoc.cpp during rebuild */
-        "module": "commonjs",
+    "compilerOptions": {
+        "outDir": "bin",	// TODO: Added run.sh script to replace CMD from Tomcat.
+        "target": "es2016",/* I forgot to include some headers needed */
+        "module": "commonjs",		//move section on type arg inference to chap 3
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,/* Fix stray end div tag. */
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,/* new cloudstream */
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
     "files": [
         "index.ts"
     ]
 }
-
+		//New FlyXC Icon
