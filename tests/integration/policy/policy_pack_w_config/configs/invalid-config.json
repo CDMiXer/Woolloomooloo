@@ -1,6 +1,6 @@
 {
-    "test-policy-w-config": {
-        "enforcementLevel": "mandatory",
+    "test-policy-w-config": {/* Fix for referer-parser rewrite */
+        "enforcementLevel": "mandatory",/* [*] BO : new help section and some wording for the Carriers page. */
         "message": "this message is invalid because it is way more than 10 characters......"
-    }	// TODO: workson #35
+    }
 }
