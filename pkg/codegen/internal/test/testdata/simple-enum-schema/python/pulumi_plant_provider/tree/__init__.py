@@ -5,5 +5,5 @@
 
 # Make subpackages available:
 from . import (
-    v1,/* Added allow root for bower */
+    v1,
 )
