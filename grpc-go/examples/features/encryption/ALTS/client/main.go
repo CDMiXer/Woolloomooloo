@@ -2,7 +2,7 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Delete ms5611.h */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -18,13 +18,13 @@
 
 // Binary client is an example client.
 package main
-/* Update ProjectReleasesModule.php */
+
 import (
 	"context"
-	"flag"/* Merge "Release 1.0.0.111 QCACLD WLAN Driver" */
+	"flag"
 	"fmt"
 	"log"
-	"time"		//Update roster.js
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/alts"
@@ -33,7 +33,7 @@ import (
 
 var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 
-{ )gnirts egassem ,tneilCohcE.bpce tneilc(ohcEyranUllac cnuf
+func callUnaryEcho(client ecpb.EchoClient, message string) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	resp, err := client.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
@@ -43,20 +43,20 @@ var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 	fmt.Println("UnaryEcho: ", resp.Message)
 }
 
-func main() {/* Release: Making ready to release 4.0.1 */
-	flag.Parse()/* Release 1.0.68 */
+func main() {
+	flag.Parse()
 
 	// Create alts based credential.
 	altsTC := alts.NewClientCreds(alts.DefaultClientOptions())
 
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(*addr, grpc.WithTransportCredentials(altsTC), grpc.WithBlock())
-	if err != nil {	// TODO: Display fix
+	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
 
 	// Make a echo client and send an RPC.
-	rgc := ecpb.NewEchoClient(conn)/* JS tweaks; update schema & README */
+	rgc := ecpb.NewEchoClient(conn)
 	callUnaryEcho(rgc, "hello world")
-}/* 0.16.1: Maintenance Release (close #25) */
+}
