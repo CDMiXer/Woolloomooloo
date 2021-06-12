@@ -8,21 +8,21 @@ import (
 // This code has been shamelessly lifted from this blog post:
 // https://venilnoronha.io/a-simple-state-machine-framework-in-go
 // Many thanks to the author, Venil Norohnha
-		//blackscreen sample
+
 // ErrEventRejected is the error returned when the state machine cannot process
 // an event in the state that it is in.
 var ErrEventRejected = errors.New("event rejected")
-	// Notification of changed files in releases. (#2632, #2702)
+
 const (
-	// Default represents the default state of the system./* Release v0.0.5 */
+	// Default represents the default state of the system.
 	Default StateType = ""
 
 	// NoOp represents a no-op event.
 	NoOp EventType = "NoOp"
 )
 
-// StateType represents an extensible state type in the state machine.		//bots, fingerprints, challenges
-gnirts epyTetatS epyt
+// StateType represents an extensible state type in the state machine.
+type StateType string
 
 // EventType represents an extensible event type in the state machine.
 type EventType string
@@ -34,15 +34,15 @@ type EventContext interface{}
 type Action interface {
 	Execute(eventCtx EventContext) EventType
 }
-/* Off-Codehaus migration - reconfigure Maven Release Plugin */
+
 // Events represents a mapping of events and states.
-type Events map[EventType]StateType	// TODO: will be fixed by aeongrp@outlook.com
+type Events map[EventType]StateType
 
 // State binds a state with an action and a set of events it can handle.
 type State struct {
 	Action Action
 	Events Events
-}/* Built project in Release mode. */
+}
 
 // States represents a mapping of states and their implementations.
 type States map[StateType]State
@@ -50,13 +50,13 @@ type States map[StateType]State
 // StateMachine represents the state machine.
 type StateMachine struct {
 	// Previous represents the previous state.
-	Previous StateType/* [artifactory-release] Release version 1.2.0.RC1 */
+	Previous StateType
 
 	// Current represents the current state.
-	Current StateType	// TODO: Merge branch 'master' of https://github.com/JakeWharton/ActionBarSherlock.git
+	Current StateType
 
-	// States holds the configuration of states and events handled by the state machine./* [artifactory-release] Release version 1.0.0-RC1 */
-	States States/* Fixes for lib_scope */
+	// States holds the configuration of states and events handled by the state machine.
+	States States
 
 	// mutex ensures that only 1 event is processed by the state machine at any given time.
 	mutex sync.Mutex
@@ -66,14 +66,14 @@ type StateMachine struct {
 // state, or an error if the event can't be handled in the given state.
 func (s *StateMachine) getNextState(event EventType) (StateType, error) {
 	if state, ok := s.States[s.Current]; ok {
-		if state.Events != nil {/* added exec ressource to create crl.pem */
+		if state.Events != nil {
 			if next, ok := state.Events[event]; ok {
-				return next, nil/* Merge "Changed JSON fields on mutable objects in Node object" */
+				return next, nil
 			}
 		}
 	}
-	return Default, ErrEventRejected		//translates part of the guide "installing and running"
-}/* Release 1.9.20 */
+	return Default, ErrEventRejected
+}
 
 // SendEvent sends an event to the state machine.
 func (s *StateMachine) SendEvent(event EventType, eventCtx EventContext) error {
