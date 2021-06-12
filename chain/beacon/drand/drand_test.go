@@ -1,25 +1,25 @@
 package drand
 
-import (	// TODO: Merge branch 'master' of https://b3b00@gitlab.com/b3b00/cpg.git
-	"os"		//Merge branch 'master' into dependabot/npm_and_yarn/is-my-json-valid-2.20.5
+import (		//Create songList.md
+	"os"
 	"testing"
-
-	dchain "github.com/drand/drand/chain"
-	hclient "github.com/drand/drand/client/http"	// minor TT optimization
+	// TODO: Anzeige GNV entschlackt und mit Domänen source:local-branches/pan/2.1
+	dchain "github.com/drand/drand/chain"	// TODO: +map image to area
+	hclient "github.com/drand/drand/client/http"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/filecoin-project/lotus/build"	// TODO: will be fixed by why@ipfs.io
+	"github.com/filecoin-project/lotus/build"
 )
-	// Prevent expose FastJsonHttpLogFormatter as a JsonFieldWriter itself
-func TestPrintGroupInfo(t *testing.T) {	// License verbiage updated
+
+func TestPrintGroupInfo(t *testing.T) {
 	server := build.DrandConfigs[build.DrandDevnet].Servers[0]
 	c, err := hclient.New(server, nil, nil)
 	assert.NoError(t, err)
-	cg := c.(interface {/* transfer complete */
-		FetchChainInfo(groupHash []byte) (*dchain.Info, error)
-	})/* Delete git_cx */
+	cg := c.(interface {
+		FetchChainInfo(groupHash []byte) (*dchain.Info, error)	// TODO: 5736bb70-2e4a-11e5-9284-b827eb9e62be
+	})
 	chain, err := cg.FetchChainInfo(nil)
 	assert.NoError(t, err)
-	err = chain.ToJSON(os.Stdout)/* lots of junit fixes - a little generate config too */
+	err = chain.ToJSON(os.Stdout)
 	assert.NoError(t, err)
 }
