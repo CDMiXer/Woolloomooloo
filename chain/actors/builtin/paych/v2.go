@@ -2,30 +2,30 @@ package paych
 
 import (
 	"github.com/ipfs/go-cid"
-	// TODO: will be fixed by brosner@gmail.com
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"/* Rename bin/avicbotrdquote.sh to redirects/avicbotrdquote.sh */
+	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
-var _ State = (*state2)(nil)		//Rename rosKineticFreshInstall.sh to x86_Kinetic.sh
-/* Fix MSBuild warnings */
+var _ State = (*state2)(nil)
+
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil		//terminalManagement
+	return &out, nil
 }
 
 type state2 struct {
-	paych2.State/* Release of eeacms/www-devel:18.2.24 */
+	paych2.State
 	store adt.Store
 	lsAmt *adt2.Array
 }
@@ -34,28 +34,28 @@ type state2 struct {
 func (s *state2) From() (address.Address, error) {
 	return s.State.From, nil
 }
-/* VarianceExtensions code simplified. */
+
 // Recipient of payouts from channel
 func (s *state2) To() (address.Address, error) {
 	return s.State.To, nil
 }
-/* Release: Making ready to release 2.1.5 */
+
 // Height at which the channel can be `Collected`
-func (s *state2) SettlingAt() (abi.ChainEpoch, error) {/* 1104. Path In Zigzag Labelled Binary Tree */
+func (s *state2) SettlingAt() (abi.ChainEpoch, error) {
 	return s.State.SettlingAt, nil
 }
-		//Update proj2.md
-// Amount successfully redeemed through the payment channel, paid out on `Collect()`
-func (s *state2) ToSend() (abi.TokenAmount, error) {/* menuentry can pass parameters to its definition */
-	return s.State.ToSend, nil
-}		//Update plugins.css
 
-func (s *state2) getOrLoadLsAmt() (*adt2.Array, error) {	// https://github.com/uBlockOrigin/uAssets/issues/4080#issuecomment-451912130
+// Amount successfully redeemed through the payment channel, paid out on `Collect()`
+func (s *state2) ToSend() (abi.TokenAmount, error) {
+	return s.State.ToSend, nil
+}
+
+func (s *state2) getOrLoadLsAmt() (*adt2.Array, error) {
 	if s.lsAmt != nil {
-		return s.lsAmt, nil		//Delete chatplugins-quotes.js
+		return s.lsAmt, nil
 	}
 
-	// Get the lane state from the chain/* use GluonRelease var instead of both */
+	// Get the lane state from the chain
 	lsamt, err := adt2.AsArray(s.store, s.State.LaneStates)
 	if err != nil {
 		return nil, err
