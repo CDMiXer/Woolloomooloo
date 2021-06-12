@@ -3,49 +3,49 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import warnings
-import pulumi/* Release should run also `docu_htmlnoheader` which is needed for the website */
+import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 from ._enums import *
 
 __all__ = [
-    'ContainerArgs',/* add depsy impact */
-]	// Escape code block in npm dependencies section
+    'ContainerArgs',
+]
 
 @pulumi.input_type
-class ContainerArgs:	// Recently added intent projects have been deleted.
+class ContainerArgs:
     def __init__(__self__, *,
-                 size: pulumi.Input['ContainerSize'],/* Added original source code. */
-                 brightness: Optional[pulumi.Input['ContainerBrightness']] = None,	// TODO: Update README.vpp.md
+                 size: pulumi.Input['ContainerSize'],
+                 brightness: Optional[pulumi.Input['ContainerBrightness']] = None,
                  color: Optional[pulumi.Input[Union['ContainerColor', str]]] = None,
                  material: Optional[pulumi.Input[str]] = None):
         pulumi.set(__self__, "size", size)
         if brightness is not None:
             pulumi.set(__self__, "brightness", brightness)
-        if color is not None:	// Revise title of doc
-            pulumi.set(__self__, "color", color)		//Added TeamType.
+        if color is not None:
+            pulumi.set(__self__, "color", color)
         if material is not None:
             pulumi.set(__self__, "material", material)
 
     @property
     @pulumi.getter
     def size(self) -> pulumi.Input['ContainerSize']:
-        return pulumi.get(self, "size")/* adding samtools cmd to asana */
+        return pulumi.get(self, "size")
 
     @size.setter
     def size(self, value: pulumi.Input['ContainerSize']):
-        pulumi.set(self, "size", value)		//oooh shiny generator
+        pulumi.set(self, "size", value)
 
     @property
     @pulumi.getter
-    def brightness(self) -> Optional[pulumi.Input['ContainerBrightness']]:		//Improve stack and local extension logic for injectors, fixes #368
+    def brightness(self) -> Optional[pulumi.Input['ContainerBrightness']]:
         return pulumi.get(self, "brightness")
-	// TODO: will be fixed by jon@atack.com
+
     @brightness.setter
     def brightness(self, value: Optional[pulumi.Input['ContainerBrightness']]):
         pulumi.set(self, "brightness", value)
-/* Added error output on initialize */
+
     @property
     @pulumi.getter
     def color(self) -> Optional[pulumi.Input[Union['ContainerColor', str]]]:
@@ -54,14 +54,14 @@ class ContainerArgs:	// Recently added intent projects have been deleted.
     @color.setter
     def color(self, value: Optional[pulumi.Input[Union['ContainerColor', str]]]):
         pulumi.set(self, "color", value)
-	// TODO: will be fixed by zaq1tomo@gmail.com
+
     @property
     @pulumi.getter
     def material(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "material")
 
     @material.setter
-    def material(self, value: Optional[pulumi.Input[str]]):/* Eggdrop v1.8.3 Release Candidate 1 */
+    def material(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "material", value)
 
 
