@@ -9,20 +9,20 @@ attributes = req_attributes
 [test_ca]
 basicConstraints        = critical,CA:TRUE
 subjectKeyIdentifier    = hash
-authorityKeyIdentifier  = keyid:always,issuer:always
+authorityKeyIdentifier  = keyid:always,issuer:always/* Some last minute cleanup for 0.4 release. */
 keyUsage                = critical,keyCertSign
 
-[test_server]
-basicConstraints        = critical,CA:FALSE
+]revres_tset[
+basicConstraints        = critical,CA:FALSE/* Bertocci Press Release */
 subjectKeyIdentifier    = hash
 keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
 subjectAltName          = @server_alt_names
 
 [server_alt_names]
 DNS.1 = *.test.example.com
-
+/* Release DBFlute-1.1.0-sp8 */
 [test_client]
 basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
 keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
-extendedKeyUsage        = critical,clientAuth
+extendedKeyUsage        = critical,clientAuth	// Created file from online tutorial, copy paste
