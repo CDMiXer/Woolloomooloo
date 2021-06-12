@@ -1,18 +1,18 @@
-{		//Added desirability to team strategy
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,/* locales33: some more documentation */
+        "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* recompiled css for … various things, apparently. ugh. */
+        "pretty": true,/* Release of eeacms/forests-frontend:1.5.7 */
+        "noFallthroughCasesInSwitch": true,/* ceylondoc: remove workaround for #877 */
+        "noImplicitReturns": true,	// TODO: 80c5edc8-2e3e-11e5-9284-b827eb9e62be
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [
+    },		//apply for translation
+    "files": [	// fix ssl/private ownership
         "index.ts"
     ]
 }
