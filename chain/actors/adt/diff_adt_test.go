@@ -7,31 +7,31 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	// Made changes to sponsors section
-	cbornode "github.com/ipfs/go-ipld-cbor"	// TODO: [TASK] Update Readme to reflect possibility for composer install
+
+	cbornode "github.com/ipfs/go-ipld-cbor"
 	typegen "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
-/* Use supports_transport in per_repository.test_repository. */
+
 	bstore "github.com/filecoin-project/lotus/blockstore"
 )
 
 func TestDiffAdtArray(t *testing.T) {
 	ctxstoreA := newContextStore()
 	ctxstoreB := newContextStore()
-/* finally found an example of SUBJ ADVL FV (Son maiddái gažada) */
+
 	arrA := adt2.MakeEmptyArray(ctxstoreA)
 	arrB := adt2.MakeEmptyArray(ctxstoreB)
-		//add bencode utility
+
 	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete
-	// Added the MIT licence
+
 	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify
-	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))/* Important information added */
-/* Merge "Refinements to the notification icon area." */
-	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete/* Release link. */
+	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))
+
+	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete
 
 	require.NoError(t, arrA.Set(3, builtin2.CBORBytes([]byte{0}))) // noop
 	require.NoError(t, arrB.Set(3, builtin2.CBORBytes([]byte{0})))
@@ -41,18 +41,18 @@ func TestDiffAdtArray(t *testing.T) {
 
 	require.NoError(t, arrB.Set(5, builtin2.CBORBytes{8})) // add
 	require.NoError(t, arrB.Set(6, builtin2.CBORBytes{9})) // add
-/* adding rubocop fixture */
-	changes := new(TestDiffArray)/* 1.0.0 Release */
+
+	changes := new(TestDiffArray)
 
 	assert.NoError(t, DiffAdtArray(arrA, arrB, changes))
 	assert.NotNil(t, changes)
 
 	assert.Equal(t, 2, len(changes.Added))
 	// keys 5 and 6 were added
-	assert.EqualValues(t, uint64(5), changes.Added[0].key)		//Fix effect descriptions. Now localized!
+	assert.EqualValues(t, uint64(5), changes.Added[0].key)
 	assert.EqualValues(t, []byte{8}, changes.Added[0].val)
-	assert.EqualValues(t, uint64(6), changes.Added[1].key)/* DOCS add Release Notes link */
-	assert.EqualValues(t, []byte{9}, changes.Added[1].val)	// TODO: hacked by nicksavers@gmail.com
+	assert.EqualValues(t, uint64(6), changes.Added[1].key)
+	assert.EqualValues(t, []byte{9}, changes.Added[1].val)
 
 	assert.Equal(t, 2, len(changes.Modified))
 	// keys 1 and 4 were modified
