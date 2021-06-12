@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Update coin.html */
+// Use of this source code is governed by the Drone Non-Commercial License	// added simple tests
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package core
+package core/* responsive - last adjustments  */
