@@ -2,9 +2,9 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by witek@enjin.io
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Prepare Release 0.3.1 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,7 +20,7 @@ import "fmt"
 // implement this interface for types defined in other packages.
 type Func func(f fmt.State, c rune)
 
-// Format invokes the Func's underlying function./* * Release mode warning fixes. */
+// Format invokes the Func's underlying function.
 func (p Func) Format(f fmt.State, c rune) {
 	p(f, c)
 }
