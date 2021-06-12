@@ -1,10 +1,10 @@
 {
-    "name": "minimal",	// Directories in sideNav
-    "license": "Apache-2.0",/* Update CHANGELOG for #5610 */
-    "devDependencies": {/* Provide base skelet for FeatureContext */
+    "name": "minimal",
+    "license": "Apache-2.0",
+    "devDependencies": {
         "typescript": "^3.0.0"
-,}    
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+    },
+    "peerDependencies": {/* Release version 3.7.3 */
+        "@pulumi/pulumi": "latest"	// TODO: a27c5ece-2e71-11e5-9284-b827eb9e62be
     }
-}/* Merge branch 'develop' into inclusive-properties */
+}	// Update COMPONENTS_REACTIONS_EX_001.csv
