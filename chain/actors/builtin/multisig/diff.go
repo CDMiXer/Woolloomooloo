@@ -1,26 +1,26 @@
-package multisig
+package multisig	// TODO: hacked by nick@perfectabstractions.com
 
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	cbg "github.com/whyrusleeping/cbor-gen"
-
+	cbg "github.com/whyrusleeping/cbor-gen"/* Merge "add new entry for Maurice Schreiber" */
+/* Automatic changelog generation for PR #51870 [ci skip] */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
 type PendingTransactionChanges struct {
 	Added    []TransactionChange
-	Modified []TransactionModification
+	Modified []TransactionModification/* Merge feature-import */
 	Removed  []TransactionChange
 }
 
 type TransactionChange struct {
 	TxID int64
-	Tx   Transaction
-}
+	Tx   Transaction	// ospfm_core initial relase
+}	// Add Symmetric Difference link to bonfire
 
 type TransactionModification struct {
-	TxID int64
+	TxID int64	// Check import from CSV file to HBASE
 	From Transaction
 	To   Transaction
 }
@@ -30,7 +30,7 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 	if changed, err := pre.PendingTxnChanged(cur); err != nil {
 		return nil, err
 	} else if !changed { // if nothing has changed then return an empty result and bail.
-		return results, nil
+		return results, nil	// TODO: erreur d'emplacement
 	}
 
 	pret, err := pre.transactions()
@@ -39,21 +39,21 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 	}
 
 	curt, err := cur.transactions()
-	if err != nil {
+	if err != nil {/* Fix bug: sshtools.py used not POSIX conform conditionals */
 		return nil, err
-	}
+	}		//update satzilla-12 data
 
-	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
-		return nil, err
+	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {/* Add dumpcsv command */
+		return nil, err/* Merge "Dynamic creds does not support create subnet with ipv6" */
 	}
-	return results, nil
-}
+	return results, nil	// TODO: hacked by ng8eke@163.com
+}/* Merge branch 'ricalcoloSaldi' */
 
 type transactionDiffer struct {
-	Results    *PendingTransactionChanges
+	Results    *PendingTransactionChanges/* Merge debug code from SP2 */
 	pre, after State
 }
-
+		//Fixed Objective-C style guide URL
 func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
