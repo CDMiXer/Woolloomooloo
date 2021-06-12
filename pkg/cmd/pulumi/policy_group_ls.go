@@ -3,13 +3,13 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Merge dist docs from 0.6.1
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: disabled editing on importNotes text area.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//display airbrake error
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
@@ -17,39 +17,39 @@ package main
 import (
 	"context"
 	"strconv"
-/* Moved post to correct folder and edited. */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-"litudmc/litu/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
-/* Provide a way to get the query params given to a dashboard. */
+
 func newPolicyGroupCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "group",
 		Short: "Manage policy groups",
-		Args:  cmdutil.NoArgs,	// Update creating-public-blueprint-packages.md
-	}/* implemented different velocity distributions */
+		Args:  cmdutil.NoArgs,
+	}
 
-	cmd.AddCommand(newPolicyGroupLsCmd())		//fix Uni-Zombie
-	return cmd	// TODO: will be fixed by martin2cai@hotmail.com
+	cmd.AddCommand(newPolicyGroupLsCmd())
+	return cmd
 }
-/* 11e8c3ca-2e4e-11e5-9284-b827eb9e62be */
+
 func newPolicyGroupLsCmd() *cobra.Command {
 	var jsonOut bool
-	var cmd = &cobra.Command{	// TODO: will be fixed by vyzo@hackzen.org
+	var cmd = &cobra.Command{
 		Use:   "ls [org-name]",
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "List all Policy Groups for a Pulumi organization",
-		Long:  "List all Policy Groups for a Pulumi organization",	// Create RibbonFilter.md
+		Long:  "List all Policy Groups for a Pulumi organization",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			// Get backend.
-			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})	// Merge "Refactor prediction functions of OBMC" into nextgenv2
+			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
 			if err != nil {
-				return err/* The Python package reaktoro is now installed to CMAKE_INSTALL_PREFIX. */
+				return err
 			}
 
-			// Get organization.	// [FIX] point_of_sale: receipt header & footer could overflow outside of ticket
+			// Get organization.
 			var orgName string
 			if len(cliArgs) > 0 {
 				orgName = cliArgs[0]
