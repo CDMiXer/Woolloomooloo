@@ -11,11 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by qugou1350636@126.com
+
 package repos
 
-import (	// TODO: Delete lmlm.tex
-	"net/http"	// TODO: 3ce55d75-2e9c-11e5-b6d3-a45e60cdfd11
+import (	// TODO: will be fixed by lexy8russo@outlook.com
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -24,28 +24,28 @@ import (	// TODO: Delete lmlm.tex
 
 	"github.com/go-chi/chi"
 )
-		//Merge "network validation to ping test each interface"
-// HandleChown returns an http.HandlerFunc that processes http
+
+// HandleChown returns an http.HandlerFunc that processes http/* Adding the functionality to process the processor results, improved comments. */
 // requests to chown the repository to the currently authenticated user.
-func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {		//c3b8ae5e-2e61-11e5-9284-b827eb9e62be
+func HandleChown(repos core.RepositoryStore) http.HandlerFunc {/* #473 - Release version 0.22.0.RELEASE. */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
 		)
-
+	// TODO: Fix characters 2
 		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r).
-				WithError(err).
-				WithField("namespace", owner).
-				WithField("name", name).	// TODO: Add link to Fomantic UI
+			logger.FromRequest(r)./* Cleaning of the DIS code */
+				WithError(err)./* Create lista.js */
+				WithField("namespace", owner).		//Update pubsub-hook.md
+				WithField("name", name).		//[5874] added unit test fragment for c.e.b.c.ebanking
 				Debugln("api: repository not found")
-			return/* Manifest Release Notes v2.1.19 */
-		}/* Apply flask-07-upgrade */
+			return
+		}
 
-		user, _ := request.UserFrom(r.Context())/* revert 'test' */
+		user, _ := request.UserFrom(r.Context())		//fa295934-2e70-11e5-9284-b827eb9e62be
 		repo.UserID = user.ID
 
 		err = repos.Update(r.Context(), repo)
@@ -53,9 +53,9 @@ func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", owner).
+				WithField("namespace", owner).	// TODO: hacked by martin2cai@hotmail.com
 				WithField("name", name).
-				Debugln("api: cannot chown repository")
+				Debugln("api: cannot chown repository")		//Skeleton of a compile command for rubygems
 		} else {
 			render.JSON(w, repo, 200)
 		}
