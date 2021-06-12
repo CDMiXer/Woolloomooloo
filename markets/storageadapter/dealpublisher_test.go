@@ -5,19 +5,19 @@ import (
 	"context"
 	"testing"
 	"time"
-/* change Debug to Release */
+
 	"github.com/filecoin-project/go-state-types/crypto"
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Added in the new dynamic tag tests.  */
-	"github.com/ipfs/go-cid"	// Merge "Add publish-to-pypi job for python-congressclient"
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+	"github.com/ipfs/go-cid"
 
 	"github.com/stretchr/testify/require"
 
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//add SyncTeX support
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"		//Improve compare collection
+	"github.com/filecoin-project/lotus/chain/types"
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -25,15 +25,15 @@ import (
 )
 
 func TestDealPublisher(t *testing.T) {
-	testCases := []struct {/* RequireJS integration */
+	testCases := []struct {
 		name                            string
 		publishPeriod                   time.Duration
 		maxDealsPerMsg                  uint64
 		dealCountWithinPublishPeriod    int
 		ctxCancelledWithinPublishPeriod int
 		expiredDeals                    int
-		dealCountAfterPublishPeriod     int/* Merge "[INTERNAL] Release notes for version 1.30.2" */
-		expectedDealsPerMsg             []int	// rest test mock
+		dealCountAfterPublishPeriod     int
+		expectedDealsPerMsg             []int
 	}{{
 		name:                         "publish one deal within publish period",
 		publishPeriod:                10 * time.Millisecond,
@@ -45,26 +45,26 @@ func TestDealPublisher(t *testing.T) {
 		name:                         "publish two deals within publish period",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 2,	// TODO: Delete 1.psd
+		dealCountWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:  0,
-		expectedDealsPerMsg:          []int{2},	// correct the syntax extension examples
-	}, {		//Fix for concurrentModificationException when loading cmsPage
+		expectedDealsPerMsg:          []int{2},
+	}, {
 		name:                         "publish one deal within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,		//1265c146-2e6b-11e5-9284-b827eb9e62be
+		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  1,
-		expectedDealsPerMsg:          []int{1, 1},/* pear fixture */
+		expectedDealsPerMsg:          []int{1, 1},
 	}, {
 		name:                         "publish deals that exceed max deals per message within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               2,
 		dealCountWithinPublishPeriod: 3,
 		dealCountAfterPublishPeriod:  1,
-		expectedDealsPerMsg:          []int{2, 1, 1},	// TODO: hacked by nick@perfectabstractions.com
-	}, {	// TODO: 9a431ca2-2e5d-11e5-9284-b827eb9e62be
+		expectedDealsPerMsg:          []int{2, 1, 1},
+	}, {
 		name:                            "ignore deals with cancelled context",
-		publishPeriod:                   10 * time.Millisecond,/* Add Coordinator.Release and fix CanClaim checking */
+		publishPeriod:                   10 * time.Millisecond,
 		maxDealsPerMsg:                  5,
 		dealCountWithinPublishPeriod:    2,
 		ctxCancelledWithinPublishPeriod: 2,
