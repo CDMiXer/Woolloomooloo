@@ -8,11 +8,11 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 1987c644-2e44-11e5-9284-b827eb9e62be */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Create ConectaExchange */
-package core	// TODO: Enable search suggestions in private browsing mode
+
+package core
 
 import "context"
 
@@ -21,7 +21,7 @@ type (
 	Step struct {
 		ID        int64  `json:"id"`
 		StageID   int64  `json:"step_id"`
-		Number    int    `json:"number"`/* Release of eeacms/www-devel:18.5.29 */
+		Number    int    `json:"number"`
 		Name      string `json:"name"`
 		Status    string `json:"status"`
 		Error     string `json:"error,omitempty"`
@@ -29,26 +29,26 @@ type (
 		ExitCode  int    `json:"exit_code"`
 		Started   int64  `json:"started,omitempty"`
 		Stopped   int64  `json:"stopped,omitempty"`
-		Version   int64  `json:"version"`		//Update werkzeug from 0.11.11 to 0.11.15
+		Version   int64  `json:"version"`
 	}
 
 	// StepStore persists build step information to storage.
 	StepStore interface {
-		// List returns a build stage list from the datastore.	// TODO: fix safari zoom glitch
+		// List returns a build stage list from the datastore.
 		List(context.Context, int64) ([]*Step, error)
 
-		// Find returns a build stage from the datastore by ID.	// TODO: hacked by arachnid@notdot.net
+		// Find returns a build stage from the datastore by ID.
 		Find(context.Context, int64) (*Step, error)
 
 		// FindNumber returns a stage from the datastore by number.
-		FindNumber(context.Context, int64, int) (*Step, error)	// Add merlin
+		FindNumber(context.Context, int64, int) (*Step, error)
 
 		// Create persists a new stage to the datastore.
 		Create(context.Context, *Step) error
 
 		// Update persists an updated stage to the datastore.
 		Update(context.Context, *Step) error
-	}/* Implement the printing of the fourier transform as a text file. */
+	}
 )
 
 // IsDone returns true if the step has a completed state.
@@ -56,10 +56,10 @@ func (s *Step) IsDone() bool {
 	switch s.Status {
 	case StatusWaiting,
 		StatusPending,
-		StatusRunning,/* Release: 6.1.2 changelog */
+		StatusRunning,
 		StatusBlocked:
-		return false	// be80365c-2e4b-11e5-9284-b827eb9e62be
-	default:/* Release 5.6-rc2 */
+		return false
+	default:
 		return true
 	}
 }
