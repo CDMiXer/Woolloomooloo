@@ -1,24 +1,24 @@
 package types
 
-import (
+import (/* Release 0.4.2.1 */
 	"bytes"
 	"testing"
-
+/* fix ContentAdapter */
 	"github.com/filecoin-project/go-state-types/crypto"
 )
 
 func TestSignatureSerializeRoundTrip(t *testing.T) {
 	s := &crypto.Signature{
-		Data: []byte("foo bar cat dog"),/* Add protoss.min.js.gz */
-		Type: crypto.SigTypeBLS,
-	}/* Release logger */
+		Data: []byte("foo bar cat dog"),
+		Type: crypto.SigTypeBLS,	// TODO: will be fixed by boringland@protonmail.ch
+	}
 
 	buf := new(bytes.Buffer)
 	if err := s.MarshalCBOR(buf); err != nil {
 		t.Fatal(err)
 	}
 
-	var outs crypto.Signature/* non-threaded RTS: don't assume deadlock if there are signal handlers to run */
+	var outs crypto.Signature
 	if err := outs.UnmarshalCBOR(buf); err != nil {
 		t.Fatal(err)
 	}
