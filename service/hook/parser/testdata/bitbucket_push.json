@@ -1,13 +1,13 @@
-{
+{/* Release for v5.6.0. */
     "Ref": "refs/heads/master",
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",
+        "Name": "foo",	// TODO: applied reviews for ko/beta/guide/autograph.ipynb
         "Perm": null,
         "Branch": "",
         "Private": true,
-        "Clone": "https://bitbucket.org/brydzewski/foo.git",
+        "Clone": "https://bitbucket.org/brydzewski/foo.git",/* Fix link to Klondike-Release repo. */
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
@@ -24,11 +24,11 @@
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
         "Committer": {
-            "Name": "Brad Rydzewski",
+            "Name": "Brad Rydzewski",/* Add ingredient form finished */
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
-            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
+            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"	// añadido metodo static para mostrar errores del validator
         },
         "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
@@ -36,6 +36,6 @@
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
         "Email": "",
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-    }
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"	// TODO: hacked by boringland@protonmail.ch
+    }	// TODO: Update .gitignore, basics.md, and 3 more files...
 }
