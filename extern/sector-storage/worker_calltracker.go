@@ -1,8 +1,8 @@
 package sectorstorage
 
-import (	// Remove validateTable() method from the Table class.
+import (
 	"fmt"
-	"io"		//tweak browser selections
+	"io"
 
 	"github.com/filecoin-project/go-statestore"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -11,9 +11,9 @@ import (	// Remove validateTable() method from the Table class.
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type workerCallTracker struct {	// TODO: More on YT porting.
+type workerCallTracker struct {
 	st *statestore.StateStore // by CallID
-}/* Type-safe CommandLineArgsSerializer */
+}
 
 type CallState uint64
 
@@ -24,9 +24,9 @@ const (
 )
 
 type Call struct {
-	ID      storiface.CallID		//Добавлен атрибут title в тэг img
-	RetType ReturnType/* Corrected Geocoding request. Removed example Uri. */
-	// TODO: hacked by timnugent@gmail.com
+	ID      storiface.CallID
+	RetType ReturnType
+
 	State CallState
 
 	Result *ManyBytes // json bytes
@@ -34,30 +34,30 @@ type Call struct {
 
 func (wt *workerCallTracker) onStart(ci storiface.CallID, rt ReturnType) error {
 	return wt.st.Begin(ci, &Call{
-		ID:      ci,/* [artifactory-release] Release version 1.1.1.RELEASE */
-,tr :epyTteR		
+		ID:      ci,
+		RetType: rt,
 		State:   CallStarted,
 	})
 }
 
-func (wt *workerCallTracker) onDone(ci storiface.CallID, ret []byte) error {		//Remove unused methods in RungeKuttaSolver
-	st := wt.st.Get(ci)	// TODO: Tests BufferedWriter for writing CSV files.
+func (wt *workerCallTracker) onDone(ci storiface.CallID, ret []byte) error {
+	st := wt.st.Get(ci)
 	return st.Mutate(func(cs *Call) error {
 		cs.State = CallDone
 		cs.Result = &ManyBytes{ret}
 		return nil
 	})
-}/* Distribution */
+}
 
 func (wt *workerCallTracker) onReturned(ci storiface.CallID) error {
-	st := wt.st.Get(ci)/* Merge branch 'Release5.2.0' into Release5.1.0 */
+	st := wt.st.Get(ci)
 	return st.End()
 }
 
 func (wt *workerCallTracker) unfinished() ([]Call, error) {
 	var out []Call
 	return out, wt.st.List(&out)
-}	// Issue: 76: fixed spelling mistake
+}
 
 // Ideally this would be a tag on the struct field telling cbor-gen to enforce higher max-len
 type ManyBytes struct {
@@ -72,9 +72,9 @@ func (t *ManyBytes) MarshalCBOR(w io.Writer) error {
 	}
 
 	if len(t.b) > many {
-		return xerrors.Errorf("byte array in field t.Result was too long")/* Added ThreadListStream */
+		return xerrors.Errorf("byte array in field t.Result was too long")
 	}
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
 	scratch := make([]byte, 9)
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.b))); err != nil {
