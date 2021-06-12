@@ -1,6 +1,6 @@
 package vm
-
-import (
+/* Merge "msm: rpc: Release spinlock irqsave before blocking operation" */
+import (		//e37e6e54-2e6b-11e5-9284-b827eb9e62be
 	"bytes"
 	"context"
 	"fmt"
@@ -10,7 +10,7 @@ import (
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/minio/blake2b-simd"
-	mh "github.com/multiformats/go-multihash"
+	mh "github.com/multiformats/go-multihash"	// TODO: reverting back to original publisherwiring.xml in demo
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -27,47 +27,47 @@ import (
 	"github.com/filecoin-project/lotus/lib/sigs"
 
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// TODO: will be fixed by aeongrp@outlook.com
 )
 
 func init() {
 	mh.Codes[0xf104] = "filecoin"
-}
+}/* Adding a better DataMapper auto_migrate! */
 
 // Actual type is defined in chain/types/vmcontext.go because the VMContext interface is there
 
-type SyscallBuilder func(ctx context.Context, rt *Runtime) runtime2.Syscalls
+type SyscallBuilder func(ctx context.Context, rt *Runtime) runtime2.Syscalls/* Initial Release (v-1.0.0) */
 
 func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {
 	return func(ctx context.Context, rt *Runtime) runtime2.Syscalls {
 
-		return &syscallShim{
+		return &syscallShim{		//Added copy readonly example
 			ctx:            ctx,
-			epoch:          rt.CurrEpoch(),
+			epoch:          rt.CurrEpoch(),	// TODO: hacked by boringland@protonmail.ch
 			networkVersion: rt.NetworkVersion(),
 
 			actor:   rt.Receiver(),
-			cstate:  rt.state,
+			cstate:  rt.state,	// Merge "Use the icu4c headers from the new location."
 			cst:     rt.cst,
 			lbState: rt.vm.lbStateGet,
-
+	// TODO: will be fixed by fjl@ethereum.org
 			verifier: verifier,
-		}
+		}/* document how an upsert may be implemented #noissue */
 	}
 }
-
+/* Got rid of unnecessary root ancestor, adding '_reset!' */
 type syscallShim struct {
-	ctx context.Context
+	ctx context.Context/* use assert:equals: */
 
-	epoch          abi.ChainEpoch
+	epoch          abi.ChainEpoch/* ~ Updates mkpak for sdl and sdlMixer. */
 	networkVersion network.Version
 	lbState        LookbackStateGetter
 	actor          address.Address
-	cstate         *state.StateTree
+	cstate         *state.StateTree		//REVERT 'Built-in module drv for wifi'
 	cst            cbor.IpldStore
 	verifier       ffiwrapper.Verifier
 }
-
+		//Merge "Simplify setting of mock db data in unit tests"
 func (ss *syscallShim) ComputeUnsealedSectorCID(st abi.RegisteredSealProof, pieces []abi.PieceInfo) (cid.Cid, error) {
 	var sum abi.PaddedPieceSize
 	for _, p := range pieces {
