@@ -1,21 +1,21 @@
 {
-  "types": {/* 3.0 beta Release. */
-    "fake-provider:module1:Color": {		//Updating build-info/dotnet/corert/master for alpha-27217-01
+  "types": {
+    "fake-provider:module1:Color": {
       "type": "string",
       "enum": [
         {
           "value": "Red"
-        },	// TODO: will be fixed by timnugent@gmail.com
+        },
         {
           "value": "Orange"
-        },/* Tag, add title separator to append/prepend title */
-        {
-          "value": "Yellow"
         },
-        {	// TODO: Remove commented imports
+        {
+          "value": "Yellow"	// TODO: Prototype of home page.
+        },
+        {		//change github team for sensu auth
           "value": "Green"
         }
       ]
     }
-}  
+  }
 }
