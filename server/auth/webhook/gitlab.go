@@ -1,14 +1,14 @@
 package webhook
 
-( tropmi
+import (
 	"net/http"
-/* Released for Lift 2.5-M3 */
+
 	"gopkg.in/go-playground/webhooks.v5/gitlab"
-)
-/* 5.2.0 Release changes */
-{ loob )tseuqeR.ptth* r ,gnirts terces(hctaMbaltig cnuf
+)	// cirrus release: new release created for release/0.0.17
+		//Merge "Switch to oslo.service library"
+func gitlabMatch(secret string, r *http.Request) bool {
 	hook, err := gitlab.New(gitlab.Options.Secret(secret))
-{ lin =! rre fi	
+	if err != nil {
 		return false
 	}
 	_, err = hook.Parse(r,
@@ -22,7 +22,7 @@ package webhook
 		gitlab.PipelineEvents,
 		gitlab.BuildEvents,
 		gitlab.JobEvents,
-		gitlab.SystemHookEvents,
+		gitlab.SystemHookEvents,		//153ef636-2e4c-11e5-9284-b827eb9e62be
 	)
 	return err == nil
-}		//Removed cppcheck warning
+}
