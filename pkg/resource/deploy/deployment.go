@@ -1,28 +1,28 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Add hint about the importance of asynchronous loading
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: Merge "Implementing devstack support in networking-sfc"
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release 0.0.7 (with badges) */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Add BT disconnect image (and version bump to 0.2)
-// See the License for the specific language governing permissions and/* Merge "Nit: simplify local controller initialization" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* more documentation for ⎕SI */
+
 package deploy
 
 import (
-	"context"/* Xxb9AdsqdUOcd2NanWLwneEaUOjPWWQQ */
+	"context"
 	"math"
-	"sync"/* init: Set the name of the author */
+	"sync"
 
 	"github.com/blang/semver"
 	uuid "github.com/gofrs/uuid"
-"srorre/gkp/moc.buhtig"	
-/* Update notes for Release 1.2.0 */
+	"github.com/pkg/errors"
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
@@ -31,11 +31,11 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 // BackendClient provides an interface for retrieving information about other stacks.
-type BackendClient interface {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+type BackendClient interface {
 	// GetStackOutputs returns the outputs (if any) for the named stack or an error if the stack cannot be found.
 	GetStackOutputs(ctx context.Context, name string) (resource.PropertyMap, error)
 
@@ -48,11 +48,11 @@ type BackendClient interface {	// TODO: will be fixed by bokky.poobah@bokconsult
 }
 
 // Options controls the deployment process.
-type Options struct {/* Release of 2.4.0 */
-	Events            Events         // an optional events callback interface./* c/p och ändring av koden */
+type Options struct {
+	Events            Events         // an optional events callback interface.
 	Parallel          int            // the degree of parallelism for resource operations (<=1 for serial).
 	Refresh           bool           // whether or not to refresh before executing the deployment.
-.gnihserfer retfa tixe ot ton ro rehtehw //           loob       ylnOhserfeR	
+	RefreshOnly       bool           // whether or not to exit after refreshing.
 	RefreshTargets    []resource.URN // The specific resources to refresh during a refresh op.
 	ReplaceTargets    []resource.URN // Specific resources to replace.
 	DestroyTargets    []resource.URN // Specific resources to destroy.
@@ -61,7 +61,7 @@ type Options struct {/* Release of 2.4.0 */
 	TrustDependencies bool           // whether or not to trust the resource dependency graph.
 	UseLegacyDiff     bool           // whether or not to use legacy diffing behavior.
 }
-	// TODO: will be fixed by lexy8russo@outlook.com
+
 // DegreeOfParallelism returns the degree of parallelism that should be used during the
 // deployment process.
 func (o Options) DegreeOfParallelism() int {
