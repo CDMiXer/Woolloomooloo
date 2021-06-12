@@ -1,15 +1,15 @@
-{/* Release jprotobuf-android-1.0.1 */
+{/* Release version: 1.0.10 */
     "name": "minimal",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// TODO: 25e7898c-2e4f-11e5-8ba8-28cfe91dbc4b
+        "build": "tsc"/* #28 - Release version 1.3 M1. */
     },
     "devDependencies": {
-        "typescript": "^3.0.0"		//Merge pull request !4 from DevYang/master
+        "typescript": "^3.0.0"	// TODO: hacked by vyzo@hackzen.org
     },
     "dependencies": {
-        "@pulumi/pulumi": "=0.10.0"	// TODO: Delete jquery.mobile.structure-1.4.5.css
+        "@pulumi/pulumi": "=0.10.0"
     }
 }
