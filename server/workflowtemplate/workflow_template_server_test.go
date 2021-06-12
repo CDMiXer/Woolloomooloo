@@ -1,81 +1,81 @@
-package workflowtemplate	// TODO: Removes unnecessary punctuation
+package workflowtemplate	// ui include path fix for optionswidget cmake prepare
 
-import (/* Create uneune.js */
-	"context"/* Delete styles.9847bbbed4327dcd7fb97112914359a0.css */
-	"testing"
+import (
+	"context"
+	"testing"		//#146 - github -setting focus to the first input element of the editor
 
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes/fake"		//Delete sdk-user-guide8.jpg
-
-	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Release vimperator 3.4 */
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"/* Release version 3.2.0.RC1 */
-	"github.com/argoproj/argo/server/auth"		//use NO_LIB* instead of EXCLUDE_* (fixes potential use-after-free)
-	"github.com/argoproj/argo/server/auth/jws"
+	"k8s.io/client-go/kubernetes/fake"
+/* reverted asciidoctor-maven-plugin */
+	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"/* Update en2.json */
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
+	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth/jws"		//4fee7aea-2e6f-11e5-9284-b827eb9e62be
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"/* v1.0.0 Release Candidate (javadoc params) */
+	"github.com/argoproj/argo/workflow/common"
 )
 
 const unlabelled = `{
-    "apiVersion": "argoproj.io/v1alpha1",/* Release of eeacms/eprtr-frontend:0.4-beta.9 */
+    "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
     "metadata": {
       "name": "unlabelled",
-      "namespace": "default"/* Point to Release instead of Pre-release */
+      "namespace": "default"
     }
-}`	// Improved render::GridVector class.
+}`
 
 const wftStr1 = `{
   "namespace": "default",
   "template": {
-    "apiVersion": "argoproj.io/v1alpha1",		//force to build document before closing the stream.
+    "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
-{ :"atadatem"    
+    "metadata": {
       "name": "workflow-template-whalesay-template",
       "labels": {
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"/* Merge "msm: kgsl: Release device mutex on failure" */
-	  }
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
+	  }		//start to bring MN up to date
     },
     "spec": {
       "arguments": {
-        "parameters": [
+        "parameters": [	// Update ocl_dae_handler.md
           {
             "name": "message",
             "value": "Hello Argo"
           }
         ]
       },
-      "templates": [/* Merge "Call removeOverlayView() before onRelease()" into lmp-dev */
+      "templates": [
         {
           "name": "whalesay-template",
           "inputs": {
             "parameters": [
               {
                 "name": "message"
-              }
+              }/* change version dependancy of third-party */
             ]
           },
           "container": {
             "image": "docker/whalesay",
-            "command": [
+            "command": [/* Version 1 Release */
               "cowsay"
             ],
             "args": [
-              "{{inputs.parameters.message}}"
-            ]
+              "{{inputs.parameters.message}}"/* Release 3.0.0-beta-3: update sitemap */
+            ]/* Refactor: Rename */
           }
         }
       ]
-    }
+    }/* Move templates to templates folder */
   }
 }`
 
-const wftStr2 = `{
+const wftStr2 = `{		//Change source and target to java 1.8 in pom.xml file.
   "apiVersion": "argoproj.io/v1alpha1",
-  "kind": "WorkflowTemplate",
-  "metadata": {
+  "kind": "WorkflowTemplate",/* Two styles of motif in XLQuantifier */
+  "metadata": {	// TODO: Start actually storing matches in the hash table, and testing the result.
     "name": "workflow-template-whalesay-template2",
     "namespace": "default",
 	"labels": {
@@ -84,7 +84,7 @@ const wftStr2 = `{
   },
   "spec": {
 	"arguments": {
-	  "parameters": [
+	  "parameters": [/* Add missing translation messages */
 		{
 			"name": "message",
 			"value": "Hello Argo"
