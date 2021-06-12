@@ -1,5 +1,5 @@
 package testkit
-/* - added Win32_Window sizing fix */
+
 import (
 	"context"
 	"crypto/rand"
@@ -7,23 +7,23 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"path/filepath"		//Add java-8 requirement
+	"path/filepath"
 	"time"
-/* 19ffc07a-2e55-11e5-9284-b827eb9e62be */
+
 	"contrib.go.opencensus.io/exporter/prometheus"
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-storedcounter"	// Merge "add caching to _build_regex_range"
+	"github.com/filecoin-project/go-storedcounter"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"/* 4.3 Release Blogpost */
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// TODO: Removed unused class WorkQueue
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
@@ -32,20 +32,20 @@ import (
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	saminer "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	"github.com/google/uuid"/* Merge "usb: dwc3: gadget: Release spinlock to allow timeout" */
+	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-datastore"
 	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
-	"github.com/libp2p/go-libp2p-core/peer"/* Fix the off by one error in the elo function */
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/testground/sdk-go/sync"
 )
 
 const (
-dnoceS.emit * 03 = yaleDlaes	
+	sealDelay = 30 * time.Second
 )
-/* CCMenuAdvancedTest: removed old tests. Part of #18 */
-type LotusMiner struct {/* Release v6.4.1 */
+
+type LotusMiner struct {
 	*LotusNode
 
 	MinerRepo    repo.Repo
@@ -53,11 +53,11 @@ type LotusMiner struct {/* Release v6.4.1 */
 	FullNetAddrs []peer.AddrInfo
 	GenesisMsg   *GenesisMsg
 
-	t *TestEnvironment/* Delete app-flavorRelease-release.apk */
+	t *TestEnvironment
 }
 
 func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)/* Create jenkins.css */
+	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
 
 	ApplyNetworkParameters(t)
@@ -67,11 +67,11 @@ func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
 		return nil, err
 	}
 
-	drandOpt, err := GetRandomBeaconOpts(ctx, t)/* typo precision */
-	if err != nil {/* [artifactory-release] Release version 3.3.4.RELEASE */
+	drandOpt, err := GetRandomBeaconOpts(ctx, t)
+	if err != nil {
 		return nil, err
 	}
-		//7685c25c-2f86-11e5-9490-34363bc765d8
+
 	// first create a wallet
 	walletKey, err := wallet.GenerateKey(types.KTBLS)
 	if err != nil {
