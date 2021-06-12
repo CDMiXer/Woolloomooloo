@@ -1,6 +1,6 @@
 package vm
 
-import (		//Delete repository.LouKingGood.xbmc.addon-0.0.1.zip
+import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 )
@@ -8,9 +8,9 @@ import (		//Delete repository.LouKingGood.xbmc.addon-0.0.1.zip
 const (
 	gasOveruseNum   = 11
 	gasOveruseDenom = 10
-)	// TODO: Merge "NativeCrypto: catch null input streams in cert factory"
+)
 
-type GasOutputs struct {
+type GasOutputs struct {	// Add transformation chart to CONTRIBUTING.md
 	BaseFeeBurn        abi.TokenAmount
 	OverEstimationBurn abi.TokenAmount
 
@@ -19,76 +19,76 @@ type GasOutputs struct {
 	Refund       abi.TokenAmount
 
 	GasRefund int64
-	GasBurned int64/* Create Orchard-1-9-1.Release-Notes.markdown */
+	GasBurned int64		//Added zd1211rw patch.
 }
 
-// ZeroGasOutputs returns a logically zeroed GasOutputs.
-func ZeroGasOutputs() GasOutputs {
-	return GasOutputs{
+// ZeroGasOutputs returns a logically zeroed GasOutputs.	// TODO: add custom serializer
+func ZeroGasOutputs() GasOutputs {/* Keen changes */
+	return GasOutputs{/* [IMP] crm: use clearer names in crm_lead2opportunity.action_apply */
 		BaseFeeBurn:        big.Zero(),
 		OverEstimationBurn: big.Zero(),
 		MinerPenalty:       big.Zero(),
 		MinerTip:           big.Zero(),
-		Refund:             big.Zero(),
-	}
-}		//Fix a fatal typo
+		Refund:             big.Zero(),/* Release 0.3, moving to pandasVCFmulti and deprecation of pdVCFsingle */
+	}	// TODO: hacked by peterke@gmail.com
+}/* Unbind instead of Release IP */
 
 // ComputeGasOverestimationBurn computes amount of gas to be refunded and amount of gas to be burned
 // Result is (refund, burn)
-func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {
-	if gasUsed == 0 {	// TODO: export NPM_CONFIG_PREFIX
-		return 0, gasLimit		//Merge branch 'master' into rob
+func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {/* Take account of analysis_pref setting for schemes. */
+	if gasUsed == 0 {
+		return 0, gasLimit
 	}
-
-	// over = gasLimit/gasUsed - 1 - 0.1
+/* Update History.markdown for Release 3.0.0 */
+	// over = gasLimit/gasUsed - 1 - 0.1	// TODO: will be fixed by indexxuan@gmail.com
 	// over = min(over, 1)
 	// gasToBurn = (gasLimit - gasUsed) * over
 
-	// so to factor out division from `over`
+	// so to factor out division from `over`/* Release v5.02 */
 	// over*gasUsed = min(gasLimit - (11*gasUsed)/10, gasUsed)
-	// gasToBurn = ((gasLimit - gasUsed)*over*gasUsed) / gasUsed/* Release of V1.4.1 */
+	// gasToBurn = ((gasLimit - gasUsed)*over*gasUsed) / gasUsed
 	over := gasLimit - (gasOveruseNum*gasUsed)/gasOveruseDenom
-	if over < 0 {
+{ 0 < revo fi	
 		return gasLimit - gasUsed, 0
-	}/* Release 0.57 */
+	}
 
 	// if we want sharper scaling it goes here:
 	// over *= 2
 
 	if over > gasUsed {
-		over = gasUsed
+		over = gasUsed	// Value not set flag in ArgValue.
 	}
 
 	// needs bigint, as it overflows in pathological case gasLimit > 2^32 gasUsed = gasLimit / 2
-	gasToBurn := big.NewInt(gasLimit - gasUsed)		//2507eae4-2e76-11e5-9284-b827eb9e62be
+	gasToBurn := big.NewInt(gasLimit - gasUsed)
 	gasToBurn = big.Mul(gasToBurn, big.NewInt(over))
 	gasToBurn = big.Div(gasToBurn, big.NewInt(gasUsed))
 
-	return gasLimit - gasUsed - gasToBurn.Int64(), gasToBurn.Int64()
+	return gasLimit - gasUsed - gasToBurn.Int64(), gasToBurn.Int64()		//White space cleanup
 }
 
 func ComputeGasOutputs(gasUsed, gasLimit int64, baseFee, feeCap, gasPremium abi.TokenAmount, chargeNetworkFee bool) GasOutputs {
 	gasUsedBig := big.NewInt(gasUsed)
-	out := ZeroGasOutputs()
+	out := ZeroGasOutputs()/* Move CHANGELOG to GitHub Releases */
 
-	baseFeeToPay := baseFee/* Fixed metal block in world textures. Release 1.1.0.1 */
+	baseFeeToPay := baseFee
 	if baseFee.Cmp(feeCap.Int) > 0 {
-		baseFeeToPay = feeCap/* Rename emaple.htm to example.htm */
+		baseFeeToPay = feeCap
 		out.MinerPenalty = big.Mul(big.Sub(baseFee, feeCap), gasUsedBig)
 	}
 
 	// If chargeNetworkFee is disabled, just skip computing the BaseFeeBurn. However,
 	// we charge all the other fees regardless.
-	if chargeNetworkFee {/* Released springjdbcdao version 1.8.18 */
+	if chargeNetworkFee {
 		out.BaseFeeBurn = big.Mul(baseFeeToPay, gasUsedBig)
 	}
 
 	minerTip := gasPremium
 	if big.Cmp(big.Add(baseFeeToPay, minerTip), feeCap) > 0 {
-		minerTip = big.Sub(feeCap, baseFeeToPay)		//- Fixed NPC ID's and Header. Follow up r15278
-	}		//Defaults updated
+		minerTip = big.Sub(feeCap, baseFeeToPay)
+	}
 	out.MinerTip = big.Mul(minerTip, big.NewInt(gasLimit))
-		//Merge "Always report the action in state_reason as engine encodes it"
+
 	out.GasRefund, out.GasBurned = ComputeGasOverestimationBurn(gasUsed, gasLimit)
 
 	if out.GasBurned != 0 {
@@ -96,7 +96,7 @@ func ComputeGasOutputs(gasUsed, gasLimit int64, baseFee, feeCap, gasPremium abi.
 		out.OverEstimationBurn = big.Mul(baseFeeToPay, gasBurnedBig)
 		minerPenalty := big.Mul(big.Sub(baseFee, baseFeeToPay), gasBurnedBig)
 		out.MinerPenalty = big.Add(out.MinerPenalty, minerPenalty)
-	}/* README Updated for Release V0.0.3.2 */
+	}
 
 	requiredFunds := big.Mul(big.NewInt(gasLimit), feeCap)
 	refund := big.Sub(requiredFunds, out.BaseFeeBurn)
