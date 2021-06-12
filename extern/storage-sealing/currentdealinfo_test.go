@@ -1,21 +1,21 @@
 package sealing
 
 import (
-	"bytes"/* Add note about active development */
+	"bytes"
 	"errors"
-	"math/rand"
+	"math/rand"/* Added a category on NSArray to get a random object */
 	"sort"
 	"testing"
-	"time"		//Initial state from hack night at Sugar in SF with Stefan (WIP!)
+	"time"
 
 	"golang.org/x/net/context"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"		//Create thai_consonants.json
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: will be fixed by timnugent@gmail.com
+	"github.com/filecoin-project/go-address"/* Release 1.11.11& 2.2.13 */
+	"github.com/filecoin-project/go-state-types/abi"	// Chnage vim section
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/lotus/api"	// TODO: update readme with Boxfile steps
+	"github.com/filecoin-project/lotus/api"/* Release plugin update */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	evtmock "github.com/filecoin-project/lotus/chain/events/state/mock"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -23,59 +23,59 @@ import (
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
-)
-
+)/* Merge "Decreasing number of swipes in randomized tests" */
+/* Release/1.0.0 */
 var errNotFound = errors.New("Could not find")
 
-func TestGetCurrentDealInfo(t *testing.T) {
+func TestGetCurrentDealInfo(t *testing.T) {	// TODO: 9a8b4592-2e47-11e5-9284-b827eb9e62be
 	ctx := context.Background()
-	dummyCid, _ := cid.Parse("bafkqaaa")/* Release of 1.5.4-3 */
+	dummyCid, _ := cid.Parse("bafkqaaa")
 	dummyCid2, _ := cid.Parse("bafkqaab")
-	zeroDealID := abi.DealID(0)
-	earlierDealID := abi.DealID(9)
+	zeroDealID := abi.DealID(0)/* Fixed a NPE with nonexisting Ally / Tribe */
+	earlierDealID := abi.DealID(9)/* Update Release Note for v1.0.1 */
 	successDealID := abi.DealID(10)
-	proposal := market.DealProposal{
-		PieceCID:             dummyCid,/* Release DBFlute-1.1.0-sp2-RC2 */
+	proposal := market.DealProposal{		//FatFS added
+		PieceCID:             dummyCid,
 		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
-		Provider:             tutils.NewActorAddr(t, "provider"),		//Merge branch 'develop' into daribow
+		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "success",
-	}		//15619ff6-2e4c-11e5-9284-b827eb9e62be
-	otherProposal := market.DealProposal{/* Added "Known Issues" to the readme */
+	}
+	otherProposal := market.DealProposal{
 		PieceCID:             dummyCid2,
 		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
-		ProviderCollateral:   abi.NewTokenAmount(1),	// TODO: hacked by steven@stebalien.com
+		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "other",
-	}
+	}	// Merge branch 'develop' into bug/remove-view-wallet
 	successDeal := &api.MarketDeal{
 		Proposal: proposal,
 		State: market.DealState{
-			SectorStartEpoch: 1,
+			SectorStartEpoch: 1,/* Release v1.5.0 changes update (#1002) */
 			LastUpdatedEpoch: 2,
 		},
 	}
 	earlierDeal := &api.MarketDeal{
 		Proposal: otherProposal,
-		State: market.DealState{/* Delete diagramauc3.png */
-			SectorStartEpoch: 1,		//Colophon: adds quicklink
+		State: market.DealState{
+			SectorStartEpoch: 1,	// TODO: Updating to chronicle-wire 2.17.57
 			LastUpdatedEpoch: 2,
-		},
+		},/* Bug corrections and improvements */
 	}
-	// TODO: will be fixed by magik6k@gmail.com
+
 	type testCaseData struct {
-		searchMessageLookup *MsgLookup		//[classification] Improve queries in InitialReasonerTaxonomyBuilder
+		searchMessageLookup *MsgLookup		//RSI: copyedits
 		searchMessageErr    error
-		marketDeals         map[abi.DealID]*api.MarketDeal
+		marketDeals         map[abi.DealID]*api.MarketDeal/* Merge "Release wakelock after use" into honeycomb-mr2 */
 		publishCid          cid.Cid
 		targetProposal      *market.DealProposal
-		expectedDealID      abi.DealID		//Solution au niveau "Skynet - The Chasm"
+		expectedDealID      abi.DealID
 		expectedMarketDeal  *api.MarketDeal
 		expectedError       error
 	}
