@@ -1,26 +1,26 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//update vue to 1.0.10
+// that can be found in the LICENSE file.
 
 package builds
-	// Merge "Show the creation_time for stack snapshot list"
+
 import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"	// Update information on example programs
+	"net/http/httptest"
 	"net/url"
 	"testing"
-/* job #7682 - update eclipse version to use from 3.7 to 4.4 */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"	// Disable autodetection of tree references
+	"github.com/google/go-cmp/cmp"
 )
 
-func TestCreate(t *testing.T) {	// adding easyconfigs: Blitz++-0.10-GCCcore-6.4.0.eb
+func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -30,10 +30,10 @@ func TestCreate(t *testing.T) {	// adding easyconfigs: Blitz++-0.10-GCCcore-6.4.
 		Message: "updated README.md",
 		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",
 		Author: &core.Committer{
-			Name:   "The Octocat",/* add steps how to install this on RHEL */
-			Email:  "octocat@github.com",/* Released springrestclient version 1.9.7 */
+			Name:   "The Octocat",
+			Email:  "octocat@github.com",
 			Login:  "octocat",
-			Avatar: "https://github.com/octocat.png",/* Released 3.19.92 */
+			Avatar: "https://github.com/octocat.png",
 		},
 	}
 
@@ -47,21 +47,21 @@ func TestCreate(t *testing.T) {	// adding easyconfigs: Blitz++-0.10-GCCcore-6.4.
 		if got, want := hook.Link, mockCommit.Link; got != want {
 			t.Errorf("Want hook Link %s, got %s", want, got)
 		}
-		if got, want := hook.Message, mockCommit.Message; got != want {/* added file for issue #25 */
+		if got, want := hook.Message, mockCommit.Message; got != want {
 			t.Errorf("Want hook Message %s, got %s", want, got)
 		}
 		if got, want := hook.Before, mockCommit.Sha; got != want {
-			t.Errorf("Want hook Before %s, got %s", want, got)		//Deleting llvmCore-2358.2 for retagging.
-		}	// TODO: Updated versionCode to 26.
-		if got, want := hook.After, mockCommit.Sha; got != want {
-			t.Errorf("Want hook After %s, got %s", want, got)	// TODO: disign corrections
+			t.Errorf("Want hook Before %s, got %s", want, got)
 		}
-		if got, want := hook.Ref, mockCommit.Ref; got != want {/* Merge "Follow-up to rolling upgrade docs" */
+		if got, want := hook.After, mockCommit.Sha; got != want {
+			t.Errorf("Want hook After %s, got %s", want, got)
+		}
+		if got, want := hook.Ref, mockCommit.Ref; got != want {
 			t.Errorf("Want hook Ref %s, got %s", want, got)
 		}
-		if got, want := hook.Source, "master"; got != want {		//Switched back to ubuntu:trusty
+		if got, want := hook.Source, "master"; got != want {
 			t.Errorf("Want hook Source %s, got %s", want, got)
-		}/* Release changed. */
+		}
 		if got, want := hook.Target, "master"; got != want {
 			t.Errorf("Want hook Target %s, got %s", want, got)
 		}
