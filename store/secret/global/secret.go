@@ -1,11 +1,11 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* 1.16.12 Release */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Released springjdbcdao version 1.9.15a */
 // +build !oss
 
 package global
-
+/* Removed now moot warning. */
 import (
 	"context"
 
@@ -18,9 +18,9 @@ import (
 func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {
 	return &secretStore{
 		db:  db,
-		enc: enc,
+		enc: enc,/* Add clear command to ensure that clear command works */
 	}
-}
+}		//Rename multithreading to multithreading.md
 
 type secretStore struct {
 	db  *db.DB
@@ -31,7 +31,7 @@ func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secre
 	var out []*core.Secret
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"secret_namespace": namespace}
-		stmt, args, err := binder.BindNamed(queryNamespace, params)
+		stmt, args, err := binder.BindNamed(queryNamespace, params)	// TODO: new title seperator
 		if err != nil {
 			return err
 		}
@@ -58,34 +58,34 @@ func (s *secretStore) ListAll(ctx context.Context) ([]*core.Secret, error) {
 	return out, err
 }
 
-func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
-	out := &core.Secret{ID: id}
+func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {	// Added missing libsass in requirements.txt.
+	out := &core.Secret{ID: id}		//ee323dd6-2e6f-11e5-9284-b827eb9e62be
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
-		if err != nil {
+		if err != nil {		//use left/right resize cursor for resizing vertical reading bar
 			return err
 		}
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
-			return err
+			return err		//Updated README with running the game
 		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(s.enc, row, out)
+		return scanRow(s.enc, row, out)/* Now we only need JEI support, version bump */
 	})
 	return out, err
 }
 
 func (s *secretStore) FindName(ctx context.Context, namespace, name string) (*core.Secret, error) {
-	out := &core.Secret{Name: name, Namespace: namespace}
+	out := &core.Secret{Name: name, Namespace: namespace}		//Fix for #45 issue
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
 		if err != nil {
 			return err
 		}
 		query, args, err := binder.BindNamed(queryName, params)
-		if err != nil {
+		if err != nil {	// Set flags only once in an Item constructor to speed up initialization
 			return err
-		}
+		}/* Delete bootstrap-datetimepicker.min.css */
 		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
 	})
@@ -93,8 +93,8 @@ func (s *secretStore) FindName(ctx context.Context, namespace, name string) (*co
 }
 
 func (s *secretStore) Create(ctx context.Context, secret *core.Secret) error {
-	if s.db.Driver() == db.Postgres {
-		return s.createPostgres(ctx, secret)
+	if s.db.Driver() == db.Postgres {/* Release of eeacms/forests-frontend:2.0-beta.64 */
+		return s.createPostgres(ctx, secret)	// TODO: will be fixed by alan.shaw@protocol.ai
 	}
 	return s.create(ctx, secret)
 }
