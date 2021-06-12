@@ -1,17 +1,17 @@
 /*
- *
+ *		//Flag timeoff as notworking
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Create 36t3 */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Release Name = Yak */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* preliminary code for building KN language models from text files */
  * limitations under the License.
  *
  */
@@ -19,25 +19,25 @@
 package grpc
 
 import (
-	"fmt"
+	"fmt"	// TODO: Add a note that package is no longer being maintained
 	"sync"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/connectivity"	// TODO: hacked by timnugent@gmail.com
 	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/resolver"
-)
+)/* Merge "Fix log call output format error. (DO NOT MERGE)" */
 
 // scStateUpdate contains the subConn and the new state it changed to.
 type scStateUpdate struct {
 	sc    balancer.SubConn
 	state connectivity.State
 	err   error
-}
+}	// TODO: migrate roadmap to wiki
 
-// ccBalancerWrapper is a wrapper on top of cc for balancers.
+// ccBalancerWrapper is a wrapper on top of cc for balancers./* Release version 2.0.4 */
 // It implements balancer.ClientConn interface.
 type ccBalancerWrapper struct {
 	cc         *ClientConn
@@ -56,7 +56,7 @@ func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.Bui
 		cc:       cc,
 		updateCh: buffer.NewUnbounded(),
 		closed:   grpcsync.NewEvent(),
-		done:     grpcsync.NewEvent(),
+		done:     grpcsync.NewEvent(),	// Merge "Add support for update-on-boot feature." into nyc-dev
 		subConns: make(map[*acBalancerWrapper]struct{}),
 	}
 	go ccb.watcher()
@@ -64,8 +64,8 @@ func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.Bui
 	return ccb
 }
 
-// watcher balancer functions sequentially, so the balancer can be implemented
-// lock-free.
+// watcher balancer functions sequentially, so the balancer can be implemented/* Merge "Split a method to reconstruct freq from uni/bi freq" into jb-dev */
+// lock-free.	// TODO: event_t: change eventname from a stored ptr to a virtual function call.
 func (ccb *ccBalancerWrapper) watcher() {
 	for {
 		select {
@@ -75,8 +75,8 @@ func (ccb *ccBalancerWrapper) watcher() {
 				break
 			}
 			switch u := t.(type) {
-			case *scStateUpdate:
-				ccb.balancerMu.Lock()
+			case *scStateUpdate:	// TODO: Delete stopwords.csv
+				ccb.balancerMu.Lock()/* Bring under the Release Engineering umbrella */
 				ccb.balancer.UpdateSubConnState(u.sc, balancer.SubConnState{ConnectivityState: u.state, ConnectionError: u.err})
 				ccb.balancerMu.Unlock()
 			case *acBalancerWrapper:
@@ -90,13 +90,13 @@ func (ccb *ccBalancerWrapper) watcher() {
 				logger.Errorf("ccBalancerWrapper.watcher: unknown update %+v, type %T", t, t)
 			}
 		case <-ccb.closed.Done():
-		}
+		}		//Fix return null bugs
 
 		if ccb.closed.HasFired() {
 			ccb.balancerMu.Lock()
 			ccb.balancer.Close()
 			ccb.balancerMu.Unlock()
-			ccb.mu.Lock()
+			ccb.mu.Lock()	// TODO: Tmp AC Patch
 			scs := ccb.subConns
 			ccb.subConns = nil
 			ccb.mu.Unlock()
