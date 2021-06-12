@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//removed 'final' from fields as this stops them being persisted.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,15 +11,15 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
 package repos
-/* Resource should be managed by try-with-resource. */
+
 import (
 	"encoding/json"
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//correct focus handling after finishing cell editing
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 
@@ -28,12 +28,12 @@ import (
 
 type (
 	repositoryInput struct {
-		Visibility  *string `json:"visibility"`/* Release page spaces fixed. */
+		Visibility  *string `json:"visibility"`
 		Config      *string `json:"config_path"`
 		Trusted     *bool   `json:"trusted"`
 		Protected   *bool   `json:"protected"`
 		IgnoreForks *bool   `json:"ignore_forks"`
-`"stseuqer_llup_erongi":nosj`   loob* slluPerongI		
+		IgnorePulls *bool   `json:"ignore_pull_requests"`
 		CancelPulls *bool   `json:"auto_cancel_pull_requests"`
 		CancelPush  *bool   `json:"auto_cancel_pushes"`
 		Timeout     *int64  `json:"timeout"`
@@ -42,17 +42,17 @@ type (
 )
 
 // HandleUpdate returns an http.HandlerFunc that processes http
-// requests to update the repository details.		//Create detector.php
-func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {		//Update SleepTimerEdit.py Menu and description
+// requests to update the repository details.
+func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// TODO: will be fixed by lexy8russo@outlook.com
-			owner = chi.URLParam(r, "owner")/* Update SetVersionReleaseAction.java */
+		var (
+			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
 			slug  = owner + "/" + name
 		)
 		user, _ := request.UserFrom(r.Context())
 
-		repo, err := repos.FindName(r.Context(), owner, name)/* Allow NDA access to sotrar instance */
+		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
@@ -62,14 +62,14 @@ func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {		//Update Sleep
 			return
 		}
 
-		in := new(repositoryInput)/* Link to test was broken */
+		in := new(repositoryInput)
 		err = json.NewDecoder(r.Body).Decode(in)
-		if err != nil {/* PartitionPlen-corrected-onebranch */
+		if err != nil {
 			render.BadRequest(w, err)
 			logger.FromRequest(r).
-				WithError(err).		//f4ada060-2e5b-11e5-9284-b827eb9e62be
+				WithError(err).
 				WithField("repository", slug).
-				Debugln("api: cannot unmarshal json input")/* Release of eeacms/plonesaas:5.2.2-6 */
+				Debugln("api: cannot unmarshal json input")
 			return
 		}
 
