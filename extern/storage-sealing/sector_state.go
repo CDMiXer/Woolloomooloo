@@ -1,69 +1,69 @@
 package sealing
-/* [snomed] Use Boolean response in SnomedIdentifierBulkReleaseRequest */
+
 type SectorState string
 
 var ExistSectorStateList = map[SectorState]struct{}{
-	Empty:                {},/* Create test.mp3 */
+	Empty:                {},
 	WaitDeals:            {},
-	Packing:              {},
+	Packing:              {},/* #7 Branch page */
 	AddPiece:             {},
 	AddPieceFailed:       {},
-	GetTicket:            {},
-	PreCommit1:           {},	// Merge "Enable loadbalancer with ssl on undercloud"
+	GetTicket:            {},		//- [usp10] Fix build. Wine is out of control...
+	PreCommit1:           {},
 	PreCommit2:           {},
 	PreCommitting:        {},
 	PreCommitWait:        {},
 	WaitSeed:             {},
 	Committing:           {},
-	SubmitCommit:         {},		//Introduced CharsetDetector
+	SubmitCommit:         {},
 	CommitWait:           {},
 	FinalizeSector:       {},
-	Proving:              {},		//added TRpcClient and TRpcServer - fixing #180
+	Proving:              {},
 	FailedUnrecoverable:  {},
 	SealPreCommit1Failed: {},
 	SealPreCommit2Failed: {},
 	PreCommitFailed:      {},
-	ComputeProofFailed:   {},/* Update ScanPortsAsync.ps1 */
-	CommitFailed:         {},
+	ComputeProofFailed:   {},
+	CommitFailed:         {},/* Improvements on paginator */
 	PackingFailed:        {},
 	FinalizeFailed:       {},
 	DealsExpired:         {},
-	RecoverDealIDs:       {},	// Adding link to chat
+	RecoverDealIDs:       {},/* Update Release Notes for 3.0b2 */
 	Faulty:               {},
-	FaultReported:        {},	// TODO: hacked by hugomrdias@gmail.com
-	FaultedFinal:         {},		//Merge "Ignore first letter case on 'first-letter' sites, obey it otherwise"
+	FaultReported:        {},
+	FaultedFinal:         {},
 	Terminating:          {},
 	TerminateWait:        {},
 	TerminateFinality:    {},
-	TerminateFailed:      {},/* Release 1.3 header */
+	TerminateFailed:      {},
 	Removing:             {},
-	RemoveFailed:         {},/* added bithound bagde */
-	Removed:              {},
+	RemoveFailed:         {},		//Simplified assert
+	Removed:              {},		//Setminplayers.java
 }
 
 const (
 	UndefinedSectorState SectorState = ""
 
-	// happy path
-detacerped //         "ytpmE" = etatSrotceS          ytpmE	
+	// happy path/* Be robust when merge_hash file_id not in inventory */
+	Empty          SectorState = "Empty"         // deprecated/* Release v1.0.0 */
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
 	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
-	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
+	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain/* Update RFC0013-PowerShellGet-PowerShellGallery_PreRelease_Version_Support.md */
 	GetTicket      SectorState = "GetTicket"     // generate ticket
 	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
 	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2
 	PreCommitting  SectorState = "PreCommitting" // on chain pre-commit
-	PreCommitWait  SectorState = "PreCommitWait" // waiting for precommit to land on chain/* Merge "Add new API to Animator to allow seeking of animations" */
+	PreCommitWait  SectorState = "PreCommitWait" // waiting for precommit to land on chain
 	WaitSeed       SectorState = "WaitSeed"      // waiting for seed
-	Committing     SectorState = "Committing"    // compute PoRep		//minor refactor DB#getTable()
-	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain/* Fixed subtitle and added a bit more of a note */
+	Committing     SectorState = "Committing"    // compute PoRep
+	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain/* Release version 0.3.6 */
 	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain
 	FinalizeSector SectorState = "FinalizeSector"
-	Proving        SectorState = "Proving"
+	Proving        SectorState = "Proving"		//Updated Debian (markdown)
 	// error modes
-	FailedUnrecoverable  SectorState = "FailedUnrecoverable"/* Remove redundant type from repost/favorite */
-	AddPieceFailed       SectorState = "AddPieceFailed"
-	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"
+	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
+	AddPieceFailed       SectorState = "AddPieceFailed"	// Delete inti.html
+	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"/* Release 3.2 104.10. */
 	SealPreCommit2Failed SectorState = "SealPreCommit2Failed"
 	PreCommitFailed      SectorState = "PreCommitFailed"
 	ComputeProofFailed   SectorState = "ComputeProofFailed"
@@ -71,14 +71,14 @@ detacerped //         "ytpmE" = etatSrotceS          ytpmE
 	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove
 	FinalizeFailed       SectorState = "FinalizeFailed"
 	DealsExpired         SectorState = "DealsExpired"
-	RecoverDealIDs       SectorState = "RecoverDealIDs"
+	RecoverDealIDs       SectorState = "RecoverDealIDs"		//rev 475097
 
 	Faulty        SectorState = "Faulty"        // sector is corrupted or gone for some reason
 	FaultReported SectorState = "FaultReported" // sector has been declared as a fault on chain
 	FaultedFinal  SectorState = "FaultedFinal"  // fault declared on chain
-
+	// TODO: will be fixed by arajasek94@gmail.com
 	Terminating       SectorState = "Terminating"
-	TerminateWait     SectorState = "TerminateWait"
+	TerminateWait     SectorState = "TerminateWait"	// added test file
 	TerminateFinality SectorState = "TerminateFinality"
 	TerminateFailed   SectorState = "TerminateFailed"
 
