@@ -1,48 +1,48 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Updated site key. */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* 6fb62b7e-2e4d-11e5-9284-b827eb9e62be */
+
 // +build !oss
 
 package ccmenu
-	// strong-accent maps to martellato.
+
 import (
 	"encoding/xml"
-	"fmt"	// Imported Upstream version 2.39
+	"fmt"
 	"net/http"
 
-	"github.com/drone/drone/core"	// Merge branch 'master' into more-validation-exception
-	// TODO: will be fixed by alan.shaw@protocol.ai
+	"github.com/drone/drone/core"
+		//correct for accuracy and add section heading for linking for posterity
 	"github.com/go-chi/chi"
 )
-/* docs: update copyright */
-// Handler returns an http.HandlerFunc that writes an svg status	// Delete platforms_detail.xml
+
+// Handler returns an http.HandlerFunc that writes an svg status/* Release Django Evolution 0.6.9. */
 // badge to the response.
 func Handler(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	link string,
-) http.HandlerFunc {/* 09cd6152-2e4c-11e5-9284-b827eb9e62be */
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		namespace := chi.URLParam(r, "owner")
-		name := chi.URLParam(r, "name")
-
-		repo, err := repos.FindName(r.Context(), namespace, name)/* ReleaseNotes.txt updated */
+		name := chi.URLParam(r, "name")	// TODO: Added missing closing HTML tag
+/* Baby's first linked list processor */
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			w.WriteHeader(404)
-			return
+			return/* Structure folder */
 		}
 
-		build, err := builds.FindNumber(r.Context(), repo.ID, repo.Counter)/* Release version 1.2.2.RELEASE */
-		if err != nil {/* avoid misleading warnings about unrecognized options */
+		build, err := builds.FindNumber(r.Context(), repo.ID, repo.Counter)
+		if err != nil {
 			w.WriteHeader(404)
-			return
+			return/* Now avoids the crash when moving frames */
 		}
 
-		project := New(repo, build,	// TODO: Update nina.json
+		project := New(repo, build,
 			fmt.Sprintf("%s/%s/%s/%d", link, namespace, name, build.Number),
 		)
-		//Merge "Bug 1731330: Style group edit delete buttons on"
+/* Merge "Adds option to specify secret id for github" */
 		xml.NewEncoder(w).Encode(project)
-	}/* Release Ver. 1.5.8 */
+	}
 }
