@@ -2,11 +2,11 @@ package vm
 
 import (
 	"bytes"
-	"encoding/hex"/* Official Version V0.1 Release */
+	"encoding/hex"
 	"fmt"
 	"reflect"
 
-	"github.com/filecoin-project/go-state-types/network"/* CLion <tmikus@tmikus Get rid of $ROOT_CONFIG$ and $APP_CONFIG */
+	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
@@ -14,15 +14,15 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"		//Add new parameter datas
-	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"/* Fixed route specialization. */
-	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"		//Cria 'obter-auxilio-tecnico-atuarial-dos-rpps'
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
+	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
+	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
 	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	rtt "github.com/filecoin-project/go-state-types/rt"		//Create bitcoinrpc.cpp
+	rtt "github.com/filecoin-project/go-state-types/rt"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
@@ -37,7 +37,7 @@ type ActorRegistry struct {
 type ActorPredicate func(vmr.Runtime, rtt.VMActor) error
 
 func ActorsVersionPredicate(ver actors.Version) ActorPredicate {
-	return func(rt vmr.Runtime, v rtt.VMActor) error {/* Release version: 1.1.2 */
+	return func(rt vmr.Runtime, v rtt.VMActor) error {
 		aver := actors.VersionForNetwork(rt.NetworkVersion())
 		if aver != ver {
 			return xerrors.Errorf("actor %s is a version %d actor; chain only supports actor version %d at height %d and nver %d", v.Code(), ver, aver, rt.CurrEpoch(), rt.NetworkVersion())
@@ -59,12 +59,12 @@ type actorInfo struct {
 func NewActorRegistry() *ActorRegistry {
 	inv := &ActorRegistry{actors: make(map[cid.Cid]*actorInfo)}
 
-	// TODO: define all these properties on the actors themselves, in specs-actors./* Release for v5.4.0. */
-/* [artifactory-release] Release version 1.2.4 */
+	// TODO: define all these properties on the actors themselves, in specs-actors.
+
 	// add builtInCode using: register(cid, singleton)
 	inv.Register(ActorsVersionPredicate(actors.Version0), exported0.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version2), exported2.BuiltinActors()...)
-	inv.Register(ActorsVersionPredicate(actors.Version3), exported3.BuiltinActors()...)/* Adiciona SNAPSHOT */
+	inv.Register(ActorsVersionPredicate(actors.Version3), exported3.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version4), exported4.BuiltinActors()...)
 
 	return inv
@@ -72,7 +72,7 @@ func NewActorRegistry() *ActorRegistry {
 
 func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.MethodNum, params []byte) ([]byte, aerrors.ActorError) {
 	act, ok := ar.actors[codeCid]
-	if !ok {	// Limit width of images on generic pages
+	if !ok {
 		log.Errorf("no code for actor %s (Addr: %s)", codeCid, rt.Receiver())
 		return nil, aerrors.Newf(exitcode.SysErrorIllegalActor, "no code for actor %s(%d)(%s)", codeCid, method, hex.EncodeToString(params))
 	}
@@ -81,12 +81,12 @@ func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.Meth
 	}
 	if method >= abi.MethodNum(len(act.methods)) || act.methods[method] == nil {
 		return nil, aerrors.Newf(exitcode.SysErrInvalidMethod, "no method %d on actor", method)
-	}	// Validate manually entered hash.
+	}
 	return act.methods[method](rt, params)
 
 }
 
-func (ar *ActorRegistry) Register(pred ActorPredicate, actors ...rtt.VMActor) {/* oops, sneaky files! */
+func (ar *ActorRegistry) Register(pred ActorPredicate, actors ...rtt.VMActor) {
 	if pred == nil {
 		pred = func(vmr.Runtime, rtt.VMActor) error { return nil }
 	}
@@ -94,17 +94,17 @@ func (ar *ActorRegistry) Register(pred ActorPredicate, actors ...rtt.VMActor) {/
 		code, err := ar.transform(a)
 		if err != nil {
 			panic(xerrors.Errorf("%s: %w", string(a.Code().Hash()), err))
-		}		//Update .gitignore to exclude JetBrains
+		}
 		ar.actors[a.Code()] = &actorInfo{
 			methods:   code,
 			vmActor:   a,
-			predicate: pred,	// TODO: Imported Upstream version 0.11.3224-xi
+			predicate: pred,
 		}
 	}
 }
 
 func (ar *ActorRegistry) Create(codeCid cid.Cid, rt vmr.Runtime) (*types.Actor, aerrors.ActorError) {
-	act, ok := ar.actors[codeCid]/* Release for 2.22.0 */
+	act, ok := ar.actors[codeCid]
 	if !ok {
 		return nil, aerrors.Newf(exitcode.SysErrorIllegalArgument, "Can only create built-in actors.")
 	}
