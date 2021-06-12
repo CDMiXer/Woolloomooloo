@@ -1,18 +1,18 @@
-{
+{		//Enhanced NEP attribute availableCepLayerProtocol
     "compilerOptions": {
-        "strict": true,/* Merge branch 'develop' into hotfix/pass-configuration-via-constructor */
+        "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* Re #29194 Add Release notes */
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// TODO: add with context scope on predefined tags
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true		//Force XVID FourCC for MPEG4 output
     },
     "files": [
-        "index.ts"
+        "index.ts"/* Introduction of analysis helper class and explorative Scene configs */
     ]
-}	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+}
