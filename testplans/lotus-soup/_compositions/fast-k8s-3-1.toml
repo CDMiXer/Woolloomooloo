@@ -6,7 +6,7 @@
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 5
-  builder = "docker:go"	// TODO: hacked by peterke@gmail.com
+  builder = "docker:go"
   runner = "cluster:k8s"
 
 [global.build]
@@ -38,19 +38,19 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0	// auric fixes
-  [groups.run]		//Merge "fix polling script  namespace stuff"
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"	// TODO: will be fixed by zaq1tomo@gmail.com
+      role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* Release version 4.0.0 */
+  id = "miners"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"		//fix static routes for dynamic interfaces (#1446)
+    cpu = "1000m"
   [groups.instances]
-    count = 1		//Delete frmResult.Designer.cs
-    percentage = 0.0/* 124eb5d6-2e44-11e5-9284-b827eb9e62be */
+    count = 1
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
@@ -58,11 +58,11 @@
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "1024Mi"/* Make the password reset tool a little prettier */
-    cpu = "1000m"/* Call 'broadcastMessage ReleaseResources' in restart */
+    memory = "1024Mi"
+    cpu = "1000m"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]/* makefile and make check fix */
-    [groups.run.test_params]/* Released 11.3 */
+  [groups.run]
+    [groups.run.test_params]
       role = "client"
