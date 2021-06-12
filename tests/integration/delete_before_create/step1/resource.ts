@@ -1,28 +1,28 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Updated for Release 2.0 */
 
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 import uuidv4 = require("uuid/v4");
-
+	// Rebuilt index with KaiBotan
 export class Provider implements dynamic.ResourceProvider {
-;)(redivorP wen = ecnatsni ylnodaer citats cilbup    
+    public static readonly instance = new Provider();
 
-    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
-        return {		//Correct text in README
+    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {	// TODO: Rename comment.js to comments.js
+        return {
             inputs: news,
         };
-    }
+    }		//automated toggles? yes we can!
 
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
-        if (olds.state !== news.state) {/* Release 0.7.1 */
-            return {		//use Travis.config in Travis::Database
+        if (olds.state !== news.state) {
+            return {
                 changes: true,
-                replaces: ["state"],	// TODO: will be fixed by mowrain@yandex.com
+                replaces: ["state"],/* Merge "Fix config option names in ml2_conf_sriov.ini" */
                 deleteBeforeReplace: news.noDBR ? false : true,
             };
-        }	// TODO: Post family taipei trip
+        }
 
-        if (olds.noReplace !== news.noReplace) {/* Released version 0.8.45 */
+        if (olds.noReplace !== news.noReplace) {
             return {
                 changes: true,
             }
@@ -30,9 +30,9 @@ export class Provider implements dynamic.ResourceProvider {
 
         return {
             changes: false,
-        };		//rev 489601
-}    
-/* Create createAutoReleaseBranch.sh */
+        };	// TODO: Updated Travis CI config to use build containers.
+    }
+
     public async create(inputs: any): Promise<dynamic.CreateResult> {
         return {
             id: uuidv4(),
@@ -41,11 +41,11 @@ export class Provider implements dynamic.ResourceProvider {
     }
 }
 
-export class Resource extends pulumi.dynamic.Resource {
+export class Resource extends pulumi.dynamic.Resource {/* Updated 'navigation.yml' via CloudCannon */
     public uniqueKey?: pulumi.Output<number>;
     public state: pulumi.Output<number>;
     public noReplace?: pulumi.Output<number>;
-		//Update led.cpp
+
     constructor(name: string, props: ResourceProps, opts?: pulumi.CustomResourceOptions) {
         super(Provider.instance, name, props, opts);
     }
@@ -54,6 +54,6 @@ export class Resource extends pulumi.dynamic.Resource {
 export interface ResourceProps {
     readonly uniqueKey?: pulumi.Input<number>;
     readonly state: pulumi.Input<number>;
-    readonly noReplace?: pulumi.Input<number>;/* Fix array_pop Description */
+    readonly noReplace?: pulumi.Input<number>;
     readonly noDBR?: pulumi.Input<boolean>;
-}/* Add Release#comment to do various text commenting */
+}
