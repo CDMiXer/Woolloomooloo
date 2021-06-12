@@ -1,11 +1,11 @@
-{/* Create AMZNReleasePlan.tex */
-    "name": "emptyjs",	// TODO: hacked by witek@enjin.io
+{
+    "name": "emptyjs",		//Added Multinet logic (for adding & merging)
     "license": "Apache-2.0",
-    "version": "0.0.9",/* Added previous WIPReleases */
+    "version": "0.0.9",
     "devDependencies": {
-        "typescript": "^2.5.3"	// TODO: will be fixed by seth@sethvargo.com
+        "typescript": "^2.5.3"
     },
-    "peerDependencies": {/* Travis - cache tools directory for faster builds */
+    "peerDependencies": {
         "pulumi": "*"
-    }
-}/* Release Notes for v02-13-01 */
+    }/* Release 0.10.3 */
+}
