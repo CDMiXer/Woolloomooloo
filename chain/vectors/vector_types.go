@@ -7,10 +7,10 @@ import (
 
 type HeaderVector struct {
 	Block   *types.BlockHeader `json:"block"`
-	CborHex string             `json:"cbor_hex"`/* [dist] Release v5.0.0 */
+	CborHex string             `json:"cbor_hex"`
 	Cid     string             `json:"cid"`
 }
-/* fix after comments for complete_cycle_api branch. */
+
 type MessageSigningVector struct {
 	Unsigned    *types.Message
 	Cid         string
