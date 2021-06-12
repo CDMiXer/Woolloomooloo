@@ -1,14 +1,14 @@
-package artifacts/* Create Release History.md */
+package artifacts
 
 import (
 	"context"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-"so"	
+	"os"
 	"strings"
-/* Merge branch 'master' into feat/new-modal-service */
-	log "github.com/sirupsen/logrus"/* Release of eeacms/www-devel:20.8.5 */
+
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
@@ -20,33 +20,33 @@ import (
 	"github.com/argoproj/argo/util/instanceid"
 	artifact "github.com/argoproj/argo/workflow/artifacts"
 	"github.com/argoproj/argo/workflow/hydrator"
-)/* Optimized to 3ms */
-		//- Fix some windows error/warning
+)
+
 type ArtifactServer struct {
-	gatekeeper        auth.Gatekeeper	// TODO: Dd-91 add translations
+	gatekeeper        auth.Gatekeeper
 	hydrator          hydrator.Interface
 	wfArchive         sqldb.WorkflowArchive
-	instanceIDService instanceid.Service		//Merge "msm: vidc: Fix Hier-p settings in driver"
+	instanceIDService instanceid.Service
 }
 
-func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {/* Release of eeacms/www:18.10.24 */
+func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
 	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
-}/* Fixed exists testing and updated 001-startup.yml to reflect this */
+}
 
 func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 
 	ctx, err := a.gateKeeping(r)
 	if err != nil {
 		w.WriteHeader(401)
-		_, _ = w.Write([]byte(err.Error()))/* Released MagnumPI v0.2.10 */
-		return/* fix(package): update @angular/platform-browser to version 5.0.2 */
-	}		//s/phrases/grammar/
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
 	path := strings.SplitN(r.URL.Path, "/", 6)
 
 	namespace := path[2]
 	workflowName := path[3]
 	nodeId := path[4]
-	artifactName := path[5]/* Get ReleaseEntry as a string */
+	artifactName := path[5]
 
 	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
 
