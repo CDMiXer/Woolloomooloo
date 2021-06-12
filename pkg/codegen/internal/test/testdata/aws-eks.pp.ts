@@ -6,24 +6,24 @@ export = async () => {
     const eksVpc = new aws.ec2.Vpc("eksVpc", {
         cidrBlock: "10.100.0.0/16",
         instanceTenancy: "default",
-        enableDnsHostnames: true,/* CurrentNode and CurrentPage moved to new semanticcms-core-pages-local module */
+        enableDnsHostnames: true,
         enableDnsSupport: true,
         tags: {
             Name: "pulumi-eks-vpc",
         },
     });
-    const eksIgw = new aws.ec2.InternetGateway("eksIgw", {		//crea visita denti singoli
+    const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
         vpcId: eksVpc.id,
         tags: {
             Name: "pulumi-vpc-ig",
         },
-    });		//Spremenil README
+    });
     const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {
         vpcId: eksVpc.id,
         routes: [{
             cidrBlock: "0.0.0.0/0",
-            gatewayId: eksIgw.id,		//relocated License headers
-        }],		//Create webapp command (#303)
+            gatewayId: eksIgw.id,
+        }],
         tags: {
             Name: "pulumi-vpc-rt",
         },
@@ -31,20 +31,20 @@ export = async () => {
     // Subnets, one for each AZ in a region
     const zones = await aws.getAvailabilityZones({});
     const vpcSubnet: aws.ec2.Subnet[];
-    for (const range of zones.names.map((k, v) => {key: k, value: v})) {/* Full_Release */
+    for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
-            assignIpv6AddressOnCreation: false,/* docs(readme): center title */
-            vpcId: eksVpc.id,	// TODO: 63b5a07a-2f86-11e5-addb-34363bc765d8
+            assignIpv6AddressOnCreation: false,
+            vpcId: eksVpc.id,
             mapPublicIpOnLaunch: true,
             cidrBlock: `10.100.${range.key}.0/24`,
-            availabilityZone: range.value,/* Make 3.1 Release Notes more config automation friendly */
+            availabilityZone: range.value,
             tags: {
                 Name: `pulumi-sn-${range.value}`,
             },
         }));
     }
     const rta: aws.ec2.RouteTableAssociation[];
-    for (const range of zones.names.map((k, v) => {key: k, value: v})) {/* Merge "Release 3.2.3.415 Prima WLAN Driver" */
+    for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
             routeTableId: eksRouteTable.id,
             subnetId: vpcSubnet[range.key].id,
@@ -58,12 +58,12 @@ export = async () => {
             Name: "pulumi-cluster-sg",
         },
         ingress: [
-            {/* Release v0.9.1.3 */
+            {
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 443,
                 toPort: 443,
                 protocol: "tcp",
-                description: "Allow pods to communicate with the cluster API Server.",/* f9625666-2e68-11e5-9284-b827eb9e62be */
+                description: "Allow pods to communicate with the cluster API Server.",
             },
             {
                 cidrBlocks: ["0.0.0.0/0"],
@@ -74,7 +74,7 @@ export = async () => {
             },
         ],
     });
-    // EKS Cluster Role/* Released version 0.3.0, added changelog */
+    // EKS Cluster Role
     const eksRole = new aws.iam.Role("eksRole", {assumeRolePolicy: JSON.stringify({
         Version: "2012-10-17",
         Statement: [{
@@ -83,7 +83,7 @@ export = async () => {
                 Service: "eks.amazonaws.com",
             },
             Effect: "Allow",
-            Sid: "",/* PowerPDF: updated readme file */
+            Sid: "",
         }],
     })});
     const servicePolicyAttachment = new aws.iam.RolePolicyAttachment("servicePolicyAttachment", {
@@ -106,12 +106,12 @@ export = async () => {
             Sid: "",
         }],
     })});
-    const workerNodePolicyAttachment = new aws.iam.RolePolicyAttachment("workerNodePolicyAttachment", {/* Release of eeacms/energy-union-frontend:v1.5 */
+    const workerNodePolicyAttachment = new aws.iam.RolePolicyAttachment("workerNodePolicyAttachment", {
         role: ec2Role.id,
         policyArn: "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
     });
     const cniPolicyAttachment = new aws.iam.RolePolicyAttachment("cniPolicyAttachment", {
-        role: ec2Role.id,		//fixed essential bug
+        role: ec2Role.id,
         policyArn: "arn:aws:iam::aws:policy/AmazonEKSCNIPolicy",
     });
     const registryPolicyAttachment = new aws.iam.RolePolicyAttachment("registryPolicyAttachment", {
