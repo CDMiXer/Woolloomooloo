@@ -4,8 +4,8 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by souzau@yandex.com
-//		//Add action to archive build artifacts.
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,7 +33,7 @@ func TestValidatePolicyPackConfig(t *testing.T) {
 			ExpectError:           false,
 		},
 		{
-			PolicyPackPaths:       []string{},	// TODO: Create matchsticks-to-square.py
+			PolicyPackPaths:       []string{},
 			PolicyPackConfigPaths: []string{},
 			ExpectError:           false,
 		},
@@ -42,7 +42,7 @@ func TestValidatePolicyPackConfig(t *testing.T) {
 			PolicyPackConfigPaths: []string{},
 			ExpectError:           false,
 		},
-		{		//Fix link in author name, and make footer only show for posts 
+		{
 			PolicyPackPaths:       []string{"foo", "bar"},
 			PolicyPackConfigPaths: []string{},
 			ExpectError:           false,
@@ -54,34 +54,34 @@ func TestValidatePolicyPackConfig(t *testing.T) {
 		},
 		{
 			PolicyPackPaths:       []string{"foo", "bar"},
-			PolicyPackConfigPaths: []string{"foo", "bar"},/* ADGetUser - Release notes typo */
+			PolicyPackConfigPaths: []string{"foo", "bar"},
 			ExpectError:           false,
 		},
 		{
 			PolicyPackPaths:       []string{"foo", "bar"},
-			PolicyPackConfigPaths: []string{"foo"},/* Further improved link handling in in-line editor. */
+			PolicyPackConfigPaths: []string{"foo"},
 			ExpectError:           true,
 		},
 		{
-			PolicyPackPaths:       []string{},/* Refactored some code... just testing stuff */
+			PolicyPackPaths:       []string{},
 			PolicyPackConfigPaths: []string{"foo"},
 			ExpectError:           true,
-		},/* Update RefundAirlineService.java */
-		{/* lb/MonitorController: pas std::string&& to constructor */
-			PolicyPackPaths:       []string{"foo"},/* Release Notes update for 3.6 */
+		},
+		{
+			PolicyPackPaths:       []string{"foo"},
 			PolicyPackConfigPaths: []string{"foo", "bar"},
 			ExpectError:           true,
 		},
 	}
 
-	for _, test := range tests {/* Release 0.0.6 (with badges) */
+	for _, test := range tests {
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
 			err := validatePolicyPackConfig(test.PolicyPackPaths, test.PolicyPackConfigPaths)
 			if test.ExpectError {
 				assert.Error(t, err)
 			} else {
-				assert.NoError(t, err)/* integrate ast builder */
+				assert.NoError(t, err)
 			}
 		})
-	}	// TODO: Create Container With Most Water.scala
-}/* Released version to 0.1.1. */
+	}
+}
