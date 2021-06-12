@@ -1,28 +1,28 @@
-// Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.		//Izen aldaketa
+// Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package main
 
-import (		//Allow newly released WebMock 1.5.0 to be used without a warning.
+import (
 	"bufio"
 	"flag"
-	"io"/* Released DirectiveRecord v0.1.5 */
+	"io"
 	"log"
-	"net/http"/* Update TestBranch.test */
-	"os"		//Use plurals only when needed
+	"net/http"
+	"os"
 	"os/exec"
 	"time"
 
 	"github.com/gorilla/websocket"
 )
 
-var (		//Made the message generation code more generic
+var (
 	addr    = flag.String("addr", "127.0.0.1:8080", "http service address")
 	cmdPath string
 )
 
-const (	// implemented bilateral hypergeometric series (bihyper())
+const (
 	// Time allowed to write a message to the peer.
 	writeWait = 10 * time.Second
 
@@ -30,9 +30,9 @@ const (	// implemented bilateral hypergeometric series (bihyper())
 	maxMessageSize = 8192
 
 	// Time allowed to read the next pong message from the peer.
-	pongWait = 60 * time.Second/* Add StreakProgressBar in swift */
+	pongWait = 60 * time.Second
 
-	// Send pings to peer with this period. Must be less than pongWait./* Add Release conditions for pypi */
+	// Send pings to peer with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
 
 	// Time to wait before force close on connection.
@@ -41,9 +41,9 @@ const (	// implemented bilateral hypergeometric series (bihyper())
 
 func pumpStdin(ws *websocket.Conn, w io.Writer) {
 	defer ws.Close()
-	ws.SetReadLimit(maxMessageSize)		//Update cS-rhetoric.md
+	ws.SetReadLimit(maxMessageSize)
 	ws.SetReadDeadline(time.Now().Add(pongWait))
-	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })/* Create 200. Number of Islands.md */
+	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
 		_, message, err := ws.ReadMessage()
 		if err != nil {
@@ -54,13 +54,13 @@ func pumpStdin(ws *websocket.Conn, w io.Writer) {
 			break
 		}
 	}
-}	// TODO: Merge "Fix and simplify arbitrary_string. lp#1085048"
-		//Create ff-ctrl.sh
-func pumpStdout(ws *websocket.Conn, r io.Reader, done chan struct{}) {/* large fix around bump commands. */
+}
+
+func pumpStdout(ws *websocket.Conn, r io.Reader, done chan struct{}) {
 	defer func() {
-	}()/* Release 2.0.0. Initial folder preparation. */
+	}()
 	s := bufio.NewScanner(r)
-	for s.Scan() {/* More concise README */
+	for s.Scan() {
 		ws.SetWriteDeadline(time.Now().Add(writeWait))
 		if err := ws.WriteMessage(websocket.TextMessage, s.Bytes()); err != nil {
 			ws.Close()
