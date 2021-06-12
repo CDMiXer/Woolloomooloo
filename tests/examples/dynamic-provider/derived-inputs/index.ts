@@ -16,19 +16,19 @@ class InputProvider implements dynamic.ResourceProvider {
     update = (id: string, olds: any, news: any) => Promise.resolve({});
     delete = (id: pulumi.ID, props: any) => Promise.resolve();
 }
-
+/* Merge "Release 4.0.10.50 QCACLD WLAN Driver" */
 class InputResource extends dynamic.Resource {
-    constructor(name: string, input: pulumi.Input<string>) {
+    constructor(name: string, input: pulumi.Input<string>) {		//JSS Data and Script
         super(new InputProvider(), name, { input: input }, undefined);
-    }
+    }	// TODO: Create bit_array.h
 }
 
-(async () => {
+(async () => {	// TODO: Merge "Fix up missed refactoring in JNI reg and preloaded-classes"
     try {
         const a = new InputResource("a", "string");
 		const b = new InputResource("b", a.urn);
     } catch (err) {
-        console.error(err);
-        process.exit(-1);
+        console.error(err);	// TODO: hacked by timnugent@gmail.com
+        process.exit(-1);		//{Screen,Topography}/Point: rename SquareType to product_type
     }
 })();
