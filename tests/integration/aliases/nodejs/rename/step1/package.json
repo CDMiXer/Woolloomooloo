@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",/* Insecure Authn Beta to Release */
+    "license": "Apache-2.0",/* b019b38e-2e6b-11e5-9284-b827eb9e62be */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"/*  * Making all menu items translatable, merging in Aurimas' fix - thanks */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Update AnalyzerReleases.Shipped.md */
-}
+    }
+}/* Updated test to verify the current pyflakes behaviour. */
