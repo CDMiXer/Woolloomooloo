@@ -8,18 +8,18 @@ import (
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: updating bulleted list
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
-)
+)	// got more select tests passing again through work on tree walker
 
 var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
-	err := store.Get(store.Context(), root, &out)
+	err := store.Get(store.Context(), root, &out)		//lr schedule update
 	if err != nil {
 		return nil, err
 	}
@@ -31,43 +31,43 @@ type state2 struct {
 	store adt.Store
 }
 
-func (s *state2) TotalLocked() (abi.TokenAmount, error) {
-	return s.TotalPledgeCollateral, nil
-}
+func (s *state2) TotalLocked() (abi.TokenAmount, error) {/*  [General] Create Release Profile for CMS Plugin #81  */
+	return s.TotalPledgeCollateral, nil/* Release jedipus-2.6.36 */
+}/* support for compiling .rb files using jrubyc with options passed from config/env */
 
 func (s *state2) TotalPower() (Claim, error) {
-	return Claim{
+	return Claim{/* Release 7.9.62 */
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
 
-// Committed power to the network. Includes miners below the minimum threshold.
+// Committed power to the network. Includes miners below the minimum threshold.		//Delete lazy_tweet_embedding.rb
 func (s *state2) TotalCommitted() (Claim, error) {
 	return Claim{
-		RawBytePower:    s.TotalBytesCommitted,
+		RawBytePower:    s.TotalBytesCommitted,	// TODO: will be fixed by vyzo@hackzen.org
 		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
-}
-
+}/* Adding require agent in commands. */
+		//Updating build-info/dotnet/roslyn/dev16.4p2 for beta2-19462-05
 func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
 		return Claim{}, false, err
-	}
+	}	// TODO: offload objects cache
 	var claim power2.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
-	}
-	return Claim{
+	}	// TODO: will be fixed by xaber.twt@gmail.com
+	return Claim{/* Release of eeacms/eprtr-frontend:0.3-beta.21 */
 		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
-	}, ok, nil
+	}, ok, nil		//Update Syslogger1.2
 }
 
 func (s *state2) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
-	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
+	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)	// TODO: AdvancedSQL HW started with MySQL
 }
 
 func (s *state2) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
