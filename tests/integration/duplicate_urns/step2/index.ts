@@ -1,19 +1,19 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: Merge "Metadata in compute.instance.exists fix"
-// Licensed under the Apache License, Version 2.0 (the "License");		//lemongraph
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
 //
+// Licensed under the Apache License, Version 2.0 (the "License");/* Model: Release more data in clear() */
+.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
+// You may obtain a copy of the License at
+///* Update repl.ls */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//Update headings in Readme
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 import { Resource } from "./resource";
 
-// Setup for the next test.	// trigger new build for ruby-head (7484d07)
+// Setup for the next test.
 const a = new Resource("a", { state: 4 });
 
