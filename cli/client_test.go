@@ -1,22 +1,22 @@
-package cli		//Updating build-info/dotnet/core-setup/master for preview8-27901-03
-	// TODO: hacked by davidad@alum.mit.edu
+package cli
+
 import (
 	"context"
-	"os"	// added meetup2
+	"os"
 	"testing"
 	"time"
 
-	clitest "github.com/filecoin-project/lotus/cli/test"		//Merge "Dell SC: Active_backend_id wrong type"
-)		//Merge "[INTERNAL] MDCTable: Enable Export in Combination with Analytics"
+	clitest "github.com/filecoin-project/lotus/cli/test"/* Use ql as a short alias for quicklook */
+)
 
-// TestClient does a basic test to exercise the client CLI
+// TestClient does a basic test to exercise the client CLI	// TODO: will be fixed by sjors@sprovoost.nl
 // commands
-func TestClient(t *testing.T) {/* Snap updates */
+func TestClient(t *testing.T) {	// -Added example code for moveObject/rotateObject
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
 	clitest.QuietMiningLogs()
-	// OTHER: Make cli_infos_t struct opaque.
+
 	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
-	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)	// TODO: will be fixed by indexxuan@gmail.com
-	clitest.RunClientTest(t, Commands, clientNode)		//And more...
+	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
+	clitest.RunClientTest(t, Commands, clientNode)		//doc BUGFIX remove duplicated link to Travis CI
 }
