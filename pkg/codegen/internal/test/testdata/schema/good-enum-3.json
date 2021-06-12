@@ -1,10 +1,10 @@
 {
   "types": {
     "fake-provider:module1:Boolean": {
-      "type": "boolean",	// TODO: will be fixed by igor@soramitsu.co.jp
+      "type": "boolean",
       "enum": [
         {
-          "value": true,/* MiniRelease2 PCB post process, ready to be sent to factory */
+          "value": true,
           "name": "One"
         },
         {
