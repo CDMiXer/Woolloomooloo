@@ -3,10 +3,10 @@ image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{
 tags:
 {{#each build.tags}}
   - {{this}}
-{{/each}}
-{{/if}}	// TODO: Add a option to disable auto index repository. 
+{{/each}}		//Remove deprecated method from Calendar
+{{/if}}/* Release: Making ready to release 4.1.0 */
 manifests:
-  -
+  -/* Update Release_Notes.txt */
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
@@ -20,6 +20,6 @@ manifests:
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm
-      os: linux/* Release handle will now used */
-      variant: v7/* Ver0.3 Release */
+      architecture: arm/* Merge "Adding requirements check for Bandit" */
+      os: linux
+      variant: v7
