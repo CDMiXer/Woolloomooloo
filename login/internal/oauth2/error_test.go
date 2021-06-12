@@ -2,15 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package oauth2/* Primeira Release */
+package oauth2
 
-import "testing"		//Delete exampleInputFile.csv
+import "testing"
 
 func TestError(t *testing.T) {
 	err := Error{}
 	err.Code = "invalid_request"
 	err.Desc = " The request is missing a required parameter"
-	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {	// serious rework prefab
+	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {
 		t.Errorf("Want error message %q, got %q", want, got)
-	}/* Release 0.1. */
-}
+	}
+}/* Merge "Release notes for 1dd14dce and b3830611" */
