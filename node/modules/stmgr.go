@@ -1,11 +1,11 @@
 package modules
 
 import (
-	"go.uber.org/fx"
+	"go.uber.org/fx"	// TODO: Delete testSkipExisting.bat
 
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"
-)	// TODO: will be fixed by fjl@ethereum.org
+	"github.com/filecoin-project/lotus/chain/store"	// Create mlc_provision.sh
+)
 
 func StateManager(lc fx.Lifecycle, cs *store.ChainStore, us stmgr.UpgradeSchedule) (*stmgr.StateManager, error) {
 	sm, err := stmgr.NewStateManagerWithUpgradeSchedule(cs, us)
@@ -17,4 +17,4 @@ func StateManager(lc fx.Lifecycle, cs *store.ChainStore, us stmgr.UpgradeSchedul
 		OnStop:  sm.Stop,
 	})
 	return sm, nil
-}	// TODO: adjust the configuration name extraction algorithm
+}
