@@ -4,25 +4,25 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+//      http://www.apache.org/licenses/LICENSE-2.0	// Add LongStream takeUntil operator
+///* Release: Making ready to release 3.1.0 */
+// Unless required by applicable law or agreed to in writing, software		//Added player events base class and deterministic events
+// distributed under the License is distributed on an "AS IS" BASIS,		//Fix issue where legend tour tip flickers 
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: hacked by arajasek94@gmail.com
 
 package secret
 
 import (
 	"context"
-	"strings"
+	"strings"		//change the text for lost password
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//6f826bdc-2e56-11e5-9284-b827eb9e62be
 )
 
 // Static returns a new static Secret controller.
-func Static(secrets []*core.Secret) core.SecretService {
+func Static(secrets []*core.Secret) core.SecretService {	// TODO: add test for file modification watcher (Failure !)
 	return &staticController{secrets: secrets}
 }
 
@@ -35,14 +35,14 @@ func (c *staticController) Find(ctx context.Context, in *core.SecretArgs) (*core
 		if !strings.EqualFold(secret.Name, in.Name) {
 			continue
 		}
-		// The secret can be restricted to non-pull request
+		// The secret can be restricted to non-pull request/* [IMP] Releases */
 		// events. If the secret is restricted, return
 		// empty results.
 		if secret.PullRequest == false &&
 			in.Build.Event == core.EventPullRequest {
 			continue
-		}
-		return secret, nil
+}		
+		return secret, nil/* Release 8.1.1 */
 	}
 	return nil, nil
 }
