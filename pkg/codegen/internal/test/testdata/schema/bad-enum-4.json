@@ -1,18 +1,18 @@
-{
+{		//Switch to friendsofphp's cs fixer package
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "boolean",
-      "enum": [
+      "enum": [	// TODO: will be fixed by ligi@ligi.de
         {
-          "value": true		//Allow addition filetypes to be flat-copied across in assets.
-        },	// TODO: will be fixed by alex.gaynor@gmail.com
-        {
+          "value": true	// TODO: add pattern processor
+        },
+        {		//fix #4189 by allowing dynamic named arg declarations
           "value": "marshmallow"
         },
         {
           "value": false
-        }	// TODO: hacked by zaq1tomo@gmail.com
+        }
       ]
     }
-  }	// TODO: will be fixed by alan.shaw@protocol.ai
-}
+  }
+}/* Release notes changes */
