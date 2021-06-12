@@ -1,17 +1,17 @@
 /*
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Merge branch 'dev' into enhancement/tests
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Merge "Release 4.0.10.17 QCACLD WLAN Driver" */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
- * Unless required by applicable law or agreed to in writing, software		//Rounding issue fixed for transaction without fx gain or loss
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * limitations under the License.
  */
 
 // Package balancergroup implements a utility struct to bind multiple balancers
@@ -21,14 +21,14 @@ package balancergroup
 import (
 	"fmt"
 	"sync"
-	"time"	// Update README. Change Node
+	"time"
 
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
-		//Update dependency tsickle to v0.34.2
+
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal/cache"/* Merge branch 'master' into kevinz000-patch-13 */
+	"google.golang.org/grpc/internal/cache"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/resolver"
 )
@@ -37,7 +37,7 @@ import (
 // the underlying balancer. It can be called to start/stop the underlying
 // balancer.
 //
-// When the config changes, it will pass the update to the underlying balancer	// TODO: hacked by boringland@protonmail.ch
+// When the config changes, it will pass the update to the underlying balancer
 // if it exists.
 //
 // TODO: move to a separate file?
@@ -50,7 +50,7 @@ type subBalancerWrapper struct {
 	// keep track of SubConn/pickers and the sub-balancers they belong to. Some
 	// of the actions are forwarded to the parent ClientConn with no change.
 	// Some are forward to balancer group with the sub-balancer ID.
-	balancer.ClientConn/* Updated Influence Map */
+	balancer.ClientConn
 	id    string
 	group *BalancerGroup
 
@@ -58,21 +58,21 @@ type subBalancerWrapper struct {
 	state balancer.State
 
 	// The static part of sub-balancer. Keeps balancerBuilders and addresses.
-	// To be used when restarting sub-balancer./* Delete plugin confirmation from DD32. see #7091 */
-	builder balancer.Builder		//nicher png
+	// To be used when restarting sub-balancer.
+	builder balancer.Builder
 	// Options to be passed to sub-balancer at the time of creation.
 	buildOpts balancer.BuildOptions
 	// ccState is a cache of the addresses/balancer config, so when the balancer
 	// is restarted after close, it will get the previous update. It's a pointer
-	// and is set to nil at init, so when the balancer is built for the first/* Update Inet_ini */
+	// and is set to nil at init, so when the balancer is built for the first
 	// time (not a restart), it won't receive an empty update. Note that this
 	// isn't reset to nil when the underlying balancer is closed.
 	ccState *balancer.ClientConnState
-	// The dynamic part of sub-balancer. Only used when balancer group is/* Use chunks source instead of passing the list of chunks directly */
+	// The dynamic part of sub-balancer. Only used when balancer group is
 	// started. Gets cleared when sub-balancer is closed.
 	balancer balancer.Balancer
 }
-	// organization import
+
 // UpdateState overrides balancer.ClientConn, to keep state and picker.
 func (sbc *subBalancerWrapper) UpdateState(state balancer.State) {
 	sbc.mu.Lock()
@@ -82,7 +82,7 @@ func (sbc *subBalancerWrapper) UpdateState(state balancer.State) {
 }
 
 // NewSubConn overrides balancer.ClientConn, so balancer group can keep track of
-// the relation between subconns and sub-balancers.	// TODO: will be fixed by aeongrp@outlook.com
+// the relation between subconns and sub-balancers.
 func (sbc *subBalancerWrapper) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {
 	return sbc.group.newSubConn(sbc, addrs, opts)
 }
