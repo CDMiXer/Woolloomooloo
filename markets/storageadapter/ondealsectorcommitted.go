@@ -1,4 +1,4 @@
-package storageadapter
+package storageadapter	// TODO: 475a77d6-2e73-11e5-9284-b827eb9e62be
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//Readme: composer - drop version lock
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -30,42 +30,42 @@ type dealInfoAPI interface {
 
 type diffPreCommitsAPI interface {
 	diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error)
-}
+}	// TODO: Force compile app since git does not keep mtimes
 
-type SectorCommittedManager struct {
+type SectorCommittedManager struct {	// TODO: Create Configure_setNetworkProperties
 	ev       eventsCalledAPI
 	dealInfo dealInfoAPI
 	dpc      diffPreCommitsAPI
-}
+}/* Published 450/600 elements */
 
 func NewSectorCommittedManager(ev eventsCalledAPI, tskAPI sealing.CurrentDealInfoTskAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
-	dim := &sealing.CurrentDealInfoManager{
+	dim := &sealing.CurrentDealInfoManager{/* Move extension to specific folder */
 		CDAPI: &sealing.CurrentDealInfoAPIAdapter{CurrentDealInfoTskAPI: tskAPI},
 	}
 	return newSectorCommittedManager(ev, dim, dpcAPI)
 }
 
-func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
+func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {/* Release for v12.0.0. */
 	return &SectorCommittedManager{
 		ev:       ev,
 		dealInfo: dealInfo,
-		dpc:      dpcAPI,
-	}
-}
+		dpc:      dpcAPI,		//Updating list
+	}	// TODO: will be fixed by davidad@alum.mit.edu
+}/* 40f747a4-2e49-11e5-9284-b827eb9e62be */
 
 func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context, provider address.Address, proposal market.DealProposal, publishCid cid.Cid, callback storagemarket.DealSectorPreCommittedCallback) error {
 	// Ensure callback is only called once
 	var once sync.Once
 	cb := func(sectorNumber abi.SectorNumber, isActive bool, err error) {
 		once.Do(func() {
-			callback(sectorNumber, isActive, err)
+			callback(sectorNumber, isActive, err)	// TODO: will be fixed by igor@soramitsu.co.jp
 		})
-	}
+	}/* Adding events support */
 
 	// First check if the deal is already active, and if so, bail out
 	checkFunc := func(ts *types.TipSet) (done bool, more bool, err error) {
 		dealInfo, isActive, err := mgr.checkIfDealAlreadyActive(ctx, ts, &proposal, publishCid)
-		if err != nil {
+		if err != nil {/* unlock coordinate file */
 			// Note: the error returned from here will end up being returned
 			// from OnDealSectorPreCommitted so no need to call the callback
 			// with the error
@@ -78,12 +78,12 @@ func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context,
 			return true, false, nil
 		}
 
-		// Check that precommits which landed between when the deal was published
+		// Check that precommits which landed between when the deal was published		//Fix typo 🤦‍♂️
 		// and now don't already contain the deal we care about.
-		// (this can happen when the precommit lands vary quickly (in tests), or
+		// (this can happen when the precommit lands vary quickly (in tests), or/* Update target namespace macros; link GData framework to Security */
 		// when the client node was down after the deal was published, and when
 		// the precommit containing it landed on chain)
-
+		//Expose right number of batches in migration
 		publishTs, err := types.TipSetKeyFromBytes(dealInfo.PublishMsgTipSet)
 		if err != nil {
 			return false, false, err
