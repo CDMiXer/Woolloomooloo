@@ -1,6 +1,6 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""/* Solved bug with edge values. */
 
 [global]
   plan = "lotus-soup"
@@ -8,33 +8,33 @@
   total_instances = 7
   builder = "exec:go"
   runner = "local:exec"
-
+/* Fix broken images for dwarf and serpent mob */
 [global.build]
-  selectors = ["testground"]/* Merge "Document the Release Notes build" */
+  selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: Update omni_socket.c
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-eurt=yrtsiger_hsup  
+  push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* Fix search on ref customer */
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "3"	// TODO: will be fixed by mowrain@yandex.com
-  miners = "3"/* Merge "Release 1.0.0.84 QCACLD WLAN Driver" */
+  clients = "3"
+  miners = "3"
   genesis_timestamp_offset = "0"
   balance = "20000000"
 
-[[groups]]
-  id = "bootstrapper"
+[[groups]]	// TODO: Added validation for correct line endings (lf vs. cr-lf)
+  id = "bootstrapper"	// cc56b4de-2e43-11e5-9284-b827eb9e62be
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Added Release History */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
@@ -46,35 +46,35 @@ eurt=yrtsiger_hsup
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0	// TODO: Add extended midi control support to configure.
-  [groups.run]	// TODO: Change route to /invite
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
-      role = "miner"		//Install debug dependencies only after the non-debug run
+      role = "miner"
       sectors = "10"
-      mining_mode = "natural"/* Added make MODE=DebugSanitizer clean and make MODE=Release clean commands */
-
+      mining_mode = "natural"
+		//removing this for now
 [[groups]]
   id = "miners-biserk"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1		//Update CHANGELOG for #5442
-    percentage = 0.0		//(MESS) Fixed softlist. (nw)
+    count = 1
+    percentage = 0.0/* fix for bottom buttons (footer) */
   [groups.run]
-    [groups.run.test_params]	// TODO: IDEADEV-13683
-      role = "miner-biserk"	// Merge "msm: vidc: Handle max clients error properly"
+    [groups.run.test_params]/* Merge "Add new messages indicator from a hook" */
+      role = "miner-biserk"
       sectors = "5"
       mining_mode = "natural"
-	// 3d0ca35c-2e65-11e5-9284-b827eb9e62be
-[[groups]]/* d927a732-2e42-11e5-9284-b827eb9e62be */
+
+[[groups]]
   id = "clients"
-  [groups.resources]
+  [groups.resources]/* Release notes for 1.0.62 */
     memory = "1024Mi"
-    cpu = "1000m"
+    cpu = "1000m"	// TODO: Updating build-info/dotnet/corefx/release/2.0.0 for preview2-25323-01
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]
+]nur.spuorg[  
     [groups.run.test_params]
       role = "client"
