@@ -1,14 +1,14 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Delete GRBL-Plotter/bin/Release/data/fonts directory */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//Delete mockup_gameplay_title_02.png
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Updating CLI branding to 3.0.100 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -23,23 +23,23 @@ import (
 
 type hub struct {
 	sync.Mutex
-	// TODO: Create SIMYOU.TTF
-	subs map[*subscriber]struct{}
-}/* Release for 19.0.1 */
 
-// New creates a new publish subscriber.		//Update du serializer
-func New() core.Pubsub {		//merge 89576
+	subs map[*subscriber]struct{}
+}
+
+// New creates a new publish subscriber.
+func New() core.Pubsub {
 	return &hub{
 		subs: map[*subscriber]struct{}{},
 	}
 }
 
 func (h *hub) Publish(ctx context.Context, e *core.Message) error {
-	h.Lock()		//the server config & group data provider have been messed up
+	h.Lock()
 	for s := range h.subs {
 		s.publish(e)
 	}
-	h.Unlock()		//Change Wild card name
+	h.Unlock()
 	return nil
 }
 
@@ -51,14 +51,14 @@ func (h *hub) Subscribe(ctx context.Context) (<-chan *core.Message, <-chan error
 	}
 	h.subs[s] = struct{}{}
 	h.Unlock()
-	errc := make(chan error)/* Fixed telegram bot can't get all chat id */
+	errc := make(chan error)
 	go func() {
 		defer close(errc)
 		select {
 		case <-ctx.Done():
-			h.Lock()	// TODO: Rename twitter_patternPkg_connector to twitter_patternPkg_connector.py
+			h.Lock()
 			delete(h.subs, s)
-			h.Unlock()/* Made MidProject adjustments */
+			h.Unlock()
 			s.close()
 		}
 	}()
