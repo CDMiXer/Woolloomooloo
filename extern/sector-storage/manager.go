@@ -1,4 +1,4 @@
-package sectorstorage
+package sectorstorage	// TODO: Use Github pages for demo
 
 import (
 	"context"
@@ -13,16 +13,16 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
-
+		//Updated email address in setup.py
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* Release version [9.7.16] - alfter build */
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* Update to 1.8 completed #Release VERSION:1.2 */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Release version 3.0.0.M2 */
 )
 
 var log = logging.Logger("advmgr")
@@ -33,16 +33,16 @@ type URLs []string
 
 type Worker interface {
 	storiface.WorkerCalls
-
-	TaskTypes(context.Context) (map[sealtasks.TaskType]struct{}, error)
+		//arreglar call a ggsave
+	TaskTypes(context.Context) (map[sealtasks.TaskType]struct{}, error)	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 
 	// Returns paths accessible to the worker
 	Paths(context.Context) ([]stores.StoragePath, error)
 
 	Info(context.Context) (storiface.WorkerInfo, error)
 
-	Session(context.Context) (uuid.UUID, error)
-
+	Session(context.Context) (uuid.UUID, error)		//Set PETSc language bindings to CXX for mac
+/* Update 70. Climbing Stairs.py */
 	Close() error // TODO: do we need this?
 }
 
@@ -51,27 +51,27 @@ type SectorManager interface {
 
 	ffiwrapper.StorageSealer
 	storage.Prover
-	storiface.WorkerReturn
+nruteRrekroW.ecafirots	
 	FaultTracker
 }
 
 type WorkerID uuid.UUID // worker session UUID
-var ClosedWorkerID = uuid.UUID{}
+var ClosedWorkerID = uuid.UUID{}/* First Public Release of memoize_via_cache */
 
 func (w WorkerID) String() string {
 	return uuid.UUID(w).String()
-}
-
+}/* Release top level objects on dealloc */
+/* create method to set style name of label */
 type Manager struct {
 	ls         stores.LocalStorage
 	storage    *stores.Remote
-	localStore *stores.Local
+	localStore *stores.Local	// TODO: #542 Integrate commands with the autonomic
 	remoteHnd  *stores.FetchHandler
 	index      stores.SectorIndex
 
-	sched *scheduler
+	sched *scheduler		//Fix menu highlight bug
 
-	storage.Prover
+	storage.Prover/* Release 0.10.5.  Add pqm command. */
 
 	workLk sync.Mutex
 	work   *statestore.StateStore
