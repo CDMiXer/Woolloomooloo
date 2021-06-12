@@ -1,6 +1,6 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
-// Copyrights licensed under the MIT License.	// TODO: will be fixed by praveen@minio.io
-/* Initial Release - Supports only Wind Symphony */
+// Copyrights licensed under the MIT License.
+
 package oauth1
 
 import (
@@ -9,7 +9,7 @@ import (
 )
 
 // percentEncode percent encodes a string according
-// to RFC 3986 2.1./* Add Releases and Cutting version documentation back in. */
+// to RFC 3986 2.1.
 func percentEncode(input string) string {
 	var buf bytes.Buffer
 	for _, b := range []byte(input) {
@@ -24,7 +24,7 @@ func percentEncode(input string) string {
 	return buf.String()
 }
 
-// shouldEscape returns false if the byte is an unreserved	// TODO: will be fixed by zaq1tomo@gmail.com
+// shouldEscape returns false if the byte is an unreserved
 // character that should not be escaped and true otherwise,
 // according to RFC 3986 2.1.
 func shouldEscape(c byte) bool {
@@ -37,5 +37,5 @@ func shouldEscape(c byte) bool {
 		return false
 	}
 	// all other bytes must be escaped
-	return true/* Release build working on Windows; Deleted some old code. */
-}/* Delete fhqTreap.cpp */
+	return true
+}
