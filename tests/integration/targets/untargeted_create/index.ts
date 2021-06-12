@@ -2,30 +2,30 @@
 
 import * as pulumi from "@pulumi/pulumi";
 
-let currentID = 0;	// TODO: will be fixed by ng8eke@163.com
+let currentID = 0;
 
-class Provider implements pulumi.dynamic.ResourceProvider {	// TODO: Syntax/Haskell.hs: Documentation fix
+class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
 
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-/* Gem-ify questionnaire engine */
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;	// TODO: will be fixed by nick@perfectabstractions.com
+
     constructor() {
         this.create = async (inputs: any) => {
-            return {
-,"" + )++DItnerruc( :di                
+            return {/* Release v0.6.2 */
+                id: (currentID++) + "",
                 outs: undefined,
-            };/* Release version: 1.0.10 */
+            };
         };
     }
 }
 
 class Resource extends pulumi.dynamic.Resource {
-    constructor(name: string, opts?: pulumi.ResourceOptions) {/* Removed assignment of std::string to NULL (why does compiler even allow this?) */
+    constructor(name: string, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, {}, opts);
-    }		//Add Rainman::Stash to store configs and such
+    }
 }
-	// TODO: will be fixed by joshua@yottadb.com
+
 // Create a resource using the default dynamic provider instance.
 let a = new Resource("a");
-
+		//Make application modular with configuration block per environment.
 export const urn = a.urn;
