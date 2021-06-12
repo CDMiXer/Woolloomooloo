@@ -6,10 +6,10 @@ import pulumi
 
 class Component(pulumi.ComponentResource):
     echo: pulumi.Output[Any]
-    childId: pulumi.Output[str]/* Released OpenCodecs 0.84.17325 */
+    childId: pulumi.Output[str]
 
-    def __init__(self, name: str, echo: pulumi.Input[Any], opts: Optional[pulumi.ResourceOptions] = None):	// TODO: 631f7b34-2e68-11e5-9284-b827eb9e62be
+    def __init__(self, name: str, echo: pulumi.Input[Any], opts: Optional[pulumi.ResourceOptions] = None):
         props = dict()
         props["echo"] = echo
         props["childId"] = None
-        super().__init__("testcomponent:index:Component", name, props, opts, True)		//Created tests for file request
+        super().__init__("testcomponent:index:Component", name, props, opts, True)
