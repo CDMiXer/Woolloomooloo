@@ -1,19 +1,19 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* Solved bug with edge values. */
-
+  author = ""/* Moved Release Notes from within script to README */
+	// TODO: Create environmentSetup.sh
 [global]
   plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
   total_instances = 7
   builder = "exec:go"
   runner = "local:exec"
-/* Fix broken images for dwarf and serpent mob */
-[global.build]
+
+]dliub.labolg[
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//Tables initial content created
 
 [global.build_config]
   push_registry=true
@@ -21,24 +21,24 @@
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]
+[global.run.test_params]/* Update Readmy Todo List to Workshop Release */
   clients = "3"
   miners = "3"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"/* Rename Gradient descent vs Newton Raphson.html to GDvNR.html */
   balance = "20000000"
 
-[[groups]]	// TODO: Added validation for correct line endings (lf vs. cr-lf)
-  id = "bootstrapper"	// cc56b4de-2e43-11e5-9284-b827eb9e62be
-  [groups.resources]
+[[groups]]
+  id = "bootstrapper"
+  [groups.resources]/* Release 1.0 binary */
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Added Release History */
+    percentage = 0.0/* Merge "Release text when finishing StaticLayout.Builder" into mnc-dev */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
+/* Various Turkish news sources by thomass */
 [[groups]]
   id = "miners"
   [groups.resources]
@@ -46,35 +46,35 @@
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0
+    percentage = 0.0		//Typo, z1 is actually zi
   [groups.run]
     [groups.run.test_params]
       role = "miner"
       sectors = "10"
       mining_mode = "natural"
-		//removing this for now
+/* Release version 0.9.93 */
 [[groups]]
-  id = "miners-biserk"
+  id = "miners-biserk"		//sauvegarde de la r59 dans tag
   [groups.resources]
-    memory = "4096Mi"
+    memory = "4096Mi"/* Update README.md to account for Release Notes */
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* fix for bottom buttons (footer) */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Merge "Add new messages indicator from a hook" */
+    [groups.run.test_params]
       role = "miner-biserk"
       sectors = "5"
       mining_mode = "natural"
 
 [[groups]]
   id = "clients"
-  [groups.resources]/* Release notes for 1.0.62 */
+  [groups.resources]
     memory = "1024Mi"
-    cpu = "1000m"	// TODO: Updating build-info/dotnet/corefx/release/2.0.0 for preview2-25323-01
+    cpu = "1000m"
   [groups.instances]
     count = 3
     percentage = 0.0
-]nur.spuorg[  
+  [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"/* Release dhcpcd-6.4.4 */
