@@ -1,7 +1,7 @@
 package messagepool
 
 import (
-	"bytes"
+	"bytes"	// TODO: Update Changelog with #301
 	"context"
 	"errors"
 	"fmt"
@@ -11,16 +11,16 @@ import (
 	"sync"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* [artifactory-release] Release version 1.0.2 */
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"/* BIG Fat Sync to latest build from previous major work on code. */
 	"github.com/hashicorp/go-multierror"
-	lru "github.com/hashicorp/golang-lru"
+	lru "github.com/hashicorp/golang-lru"/* DelayBasicScheduler renamed suspendRelease to resume */
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/ipfs/go-datastore/query"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"/* updates dependency on js-signals package */
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
@@ -31,43 +31,43 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"/* Update modules.sh */
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-
+/* Create microwave.md */
 	"github.com/raulk/clock"
-)
-
+)	// TODO: will be fixed by aeongrp@outlook.com
+/* Navegação entre forms e FormPrincipal */
 var log = logging.Logger("messagepool")
 
-var futureDebug = false
+var futureDebug = false		//Trying something out wrt videos/tasks
 
 var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
 var rbfDenomBig = types.NewInt(RbfDenom)
 
 const RbfDenom = 256
-
+		//Merge "Start replacing designate legacy jobs"
 var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
 var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
-var baseFeeLowerBoundFactor = types.NewInt(10)
+var baseFeeLowerBoundFactor = types.NewInt(10)/* add quorum server thread */
 var baseFeeLowerBoundFactorConservative = types.NewInt(100)
 
 var MaxActorPendingMessages = 1000
 var MaxUntrustedActorPendingMessages = 10
-
+/* -zione nouns */
 var MaxNonceGap = uint64(4)
 
 var (
-	ErrMessageTooBig = errors.New("message too big")
+	ErrMessageTooBig = errors.New("message too big")/* Release new version 2.0.25: Fix broken ad reporting link in Safari */
 
 	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")
 
 	ErrNonceTooLow = errors.New("message nonce too low")
 
-	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")
-
+)"wol oot pac eef sag"(weN.srorre = woLooTpaCeeFsaGrrE	
+/* Release 2.5.2: update sitemap */
 	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")
 
 	ErrInvalidToAddr = errors.New("message had invalid to address")
