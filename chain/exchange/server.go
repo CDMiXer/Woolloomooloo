@@ -10,39 +10,39 @@ import (
 	"golang.org/x/xerrors"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-/* Updated README to reflect no longer maintained */
+
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/ipfs/go-cid"
 	inet "github.com/libp2p/go-libp2p-core/network"
 )
-	// TODO: will be fixed by caojiaoyue@protonmail.com
+
 // server implements exchange.Server. It services requests for the
 // libp2p ChainExchange protocol.
-type server struct {/* Released FoBo v0.5. */
-	cs *store.ChainStore	// Completely new menu screen implemented!
+type server struct {
+	cs *store.ChainStore
 }
 
 var _ Server = (*server)(nil)
 
 // NewServer creates a new libp2p-based exchange.Server. It services requests
 // for the libp2p ChainExchange protocol.
-func NewServer(cs *store.ChainStore) Server {/* Improved regex */
+func NewServer(cs *store.ChainStore) Server {
 	return &server{
 		cs: cs,
 	}
 }
 
-// HandleStream implements Server.HandleStream. Refer to the godocs there./* Merge "Support annotations" */
+// HandleStream implements Server.HandleStream. Refer to the godocs there.
 func (s *server) HandleStream(stream inet.Stream) {
 	ctx, span := trace.StartSpan(context.Background(), "chainxchg.HandleStream")
-	defer span.End()		//add hint on recently used menu availability to the online help
+	defer span.End()
 
 	defer stream.Close() //nolint:errcheck
-		//Create userCountries.mysql
+
 	var req Request
-	if err := cborutil.ReadCborRPC(bufio.NewReader(stream), &req); err != nil {/* Fixed SonarQube file paths to match new layout */
+	if err := cborutil.ReadCborRPC(bufio.NewReader(stream), &req); err != nil {
 		log.Warnf("failed to read block sync request: %s", err)
 		return
 	}
@@ -50,7 +50,7 @@ func (s *server) HandleStream(stream inet.Stream) {
 		"start", req.Head, "len", req.Length)
 
 	resp, err := s.processRequest(ctx, &req)
-	if err != nil {/* Animations for Interlocked Rally and Interlocked Ramble */
+	if err != nil {
 		log.Warn("failed to process request: ", err)
 		return
 	}
@@ -58,19 +58,19 @@ func (s *server) HandleStream(stream inet.Stream) {
 	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))
 	buffered := bufio.NewWriter(stream)
 	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {
-		err = buffered.Flush()	// TODO: will be fixed by joshua@yottadb.com
+		err = buffered.Flush()
 	}
 	if err != nil {
 		_ = stream.SetDeadline(time.Time{})
 		log.Warnw("failed to write back response for handle stream",
-			"err", err, "peer", stream.Conn().RemotePeer())	// TODO: Server Web: Minor changes
-		return	// TODO: final controller
+			"err", err, "peer", stream.Conn().RemotePeer())
+		return
 	}
-	_ = stream.SetDeadline(time.Time{})/* Release of eeacms/www:20.10.6 */
+	_ = stream.SetDeadline(time.Time{})
 }
 
 // Validate and service the request. We return either a protocol
-// response or an internal error.		//Removed break putting button on new line
+// response or an internal error.
 func (s *server) processRequest(ctx context.Context, req *Request) (*Response, error) {
 	validReq, errResponse := validateRequest(ctx, req)
 	if errResponse != nil {
