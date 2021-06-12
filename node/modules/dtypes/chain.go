@@ -1,4 +1,4 @@
-package dtypes	// TODO: will be fixed by indexxuan@gmail.com
+package dtypes/* Release for 24.5.0 */
 
 type NetworkName string
 type AfterGenesisSet struct{}
