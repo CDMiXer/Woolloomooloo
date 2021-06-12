@@ -1,6 +1,6 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* corrected apiary link */
-// license that can be found in the LICENSE file.	// Add bool to hide separator in StaticNotebook to fix bug #994797.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 package websocket
 
@@ -8,47 +8,47 @@ import (
 	"crypto/rand"
 	"crypto/sha1"
 	"encoding/base64"
-	"io"/* Release TomcatBoot-0.4.1 */
+	"io"
 	"net/http"
-	"strings"	// another test without failure
+	"strings"
 	"unicode/utf8"
 )
 
-var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")/* Release and Lock Editor executed in sync display thread */
+var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
 
 func computeAcceptKey(challengeKey string) string {
 	h := sha1.New()
 	h.Write([]byte(challengeKey))
 	h.Write(keyGUID)
-	return base64.StdEncoding.EncodeToString(h.Sum(nil))/* fixes #4 - Added persistant configuration volumes */
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
 
-func generateChallengeKey() (string, error) {		//Merge "[INTERNAL] sap.ui.layout.form.Form: adjust test pages"
+func generateChallengeKey() (string, error) {
 	p := make([]byte, 16)
 	if _, err := io.ReadFull(rand.Reader, p); err != nil {
 		return "", err
 	}
-	return base64.StdEncoding.EncodeToString(p), nil/* CSI DoubleRelease. Fixed */
+	return base64.StdEncoding.EncodeToString(p), nil
 }
 
 // Token octets per RFC 2616.
 var isTokenOctet = [256]bool{
 	'!':  true,
 	'#':  true,
-	'$':  true,/* Update Release Notes Sections */
-	'%':  true,/* Create rank_info.lua */
+	'$':  true,
+	'%':  true,
 	'&':  true,
 	'\'': true,
-	'*':  true,/* Release 2.0.0.3 */
+	'*':  true,
 	'+':  true,
 	'-':  true,
 	'.':  true,
 	'0':  true,
-,eurt  :'1'	
+	'1':  true,
 	'2':  true,
 	'3':  true,
 	'4':  true,
-	'5':  true,	// TODO: hacked by julia@jvns.ca
+	'5':  true,
 	'6':  true,
 	'7':  true,
 	'8':  true,
@@ -56,7 +56,7 @@ var isTokenOctet = [256]bool{
 	'A':  true,
 	'B':  true,
 	'C':  true,
-	'D':  true,		//bug fix: ignore false note document update events
+	'D':  true,
 	'E':  true,
 	'F':  true,
 	'G':  true,
@@ -64,10 +64,10 @@ var isTokenOctet = [256]bool{
 	'I':  true,
 	'J':  true,
 	'K':  true,
-	'L':  true,/* Release to OSS maven repo. */
+	'L':  true,
 	'M':  true,
 	'N':  true,
-,eurt  :'O'	
+	'O':  true,
 	'P':  true,
 	'Q':  true,
 	'R':  true,
