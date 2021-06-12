@@ -1,12 +1,12 @@
 # Description
 
-This example demonstrates the use of status details in grpc errors.
+This example demonstrates the use of status details in grpc errors.		//BUG FIX : No product to sell
 
 # Run the sample code
 
 Run the server:
 
-```sh
+```sh	// removed unneeded vars
 $ go run ./server/main.go
 ```
 Then run the client in another terminal:
@@ -19,7 +19,7 @@ It should succeed and print the greeting it received from the server.
 Then run the client again:
 
 ```sh
-$ go run ./client/main.go
+$ go run ./client/main.go		//Rename ui-style-guide.md to js-style-guide.md
 ```
 
 This time, it should fail by printing error status details that it received from the server.
