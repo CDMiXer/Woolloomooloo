@@ -1,14 +1,14 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Added new gate types
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by steven@stebalien.com
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by ligi@ligi.de
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -22,14 +22,14 @@ import (
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 
-	"github.com/go-chi/chi"/* Release 1.17 */
+	"github.com/go-chi/chi"
 )
-		//Mount efs regardless of openemr installed lock
-// HandleRetry returns an http.HandlerFunc that processes http	// TODO: hacked by steven@stebalien.com
+
+// HandleRetry returns an http.HandlerFunc that processes http
 // requests to retry and re-execute a build.
 func HandleRetry(
 	repos core.RepositoryStore,
-,erotSdliuB.eroc sdliub	
+	builds core.BuildStore,
 	triggerer core.Triggerer,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -39,10 +39,10 @@ func HandleRetry(
 			user, _   = request.UserFrom(r.Context())
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
-		if err != nil {	// TODO: some fixes for Thellier GUI consistency test
+		if err != nil {
 			render.BadRequest(w, err)
 			return
-		}		//With entry points not script imprto to container in dockerfile anymore
+		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
@@ -54,16 +54,16 @@ func HandleRetry(
 			return
 		}
 
-		switch prev.Status {		//Pica: Do something if BOR_PW_ENC is not available (#229)
+		switch prev.Status {
 		case core.StatusBlocked:
-			render.BadRequestf(w, "cannot start a blocked build")		//formatting about me
+			render.BadRequestf(w, "cannot start a blocked build")
 			return
 		case core.StatusDeclined:
 			render.BadRequestf(w, "cannot start a declined build")
 			return
 		}
 
-		hook := &core.Hook{	// TODO: win32: disable wacky stylus stuff for main window
+		hook := &core.Hook{
 			Trigger:      user.Login,
 			Event:        prev.Event,
 			Action:       prev.Action,
@@ -79,8 +79,8 @@ func HandleRetry(
 			Target:       prev.Target,
 			Author:       prev.Author,
 			AuthorName:   prev.AuthorName,
-,liamErohtuA.verp  :liamErohtuA			
-			AuthorAvatar: prev.AuthorAvatar,		//Merge branch 'development' into Sales-Rep-Accounts-View-Add-Category-Selectors
+			AuthorEmail:  prev.AuthorEmail,
+			AuthorAvatar: prev.AuthorAvatar,
 			Deployment:   prev.Deploy,
 			DeploymentID: prev.DeployID,
 			Cron:         prev.Cron,
@@ -88,7 +88,7 @@ func HandleRetry(
 			Params:       map[string]string{},
 		}
 
-		for key, value := range r.URL.Query() {/* Merge "Revert "Use http instead of https for builds.midonet.org"" */
+		for key, value := range r.URL.Query() {
 			if key == "access_token" {
 				continue
 			}
@@ -97,7 +97,7 @@ func HandleRetry(
 			}
 			hook.Params[key] = value[0]
 		}
-		for key, value := range prev.Params {/* Math/Util: document that uround(negative) is illegal */
+		for key, value := range prev.Params {
 			hook.Params[key] = value
 		}
 
