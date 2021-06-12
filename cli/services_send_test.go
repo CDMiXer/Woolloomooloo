@@ -1,55 +1,55 @@
-package cli	// created article controller to CRUD opps
+package cli
 
 import (
 	"context"
 	"fmt"
 	"testing"
 
-	"github.com/filecoin-project/go-address"/* Further ALSA underrun fiddling. */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/api"
 	mocks "github.com/filecoin-project/lotus/api/mocks"
-	types "github.com/filecoin-project/lotus/chain/types"/* Merge "Bind to IP in arping if requested IP already assigend" */
+	types "github.com/filecoin-project/lotus/chain/types"
 	gomock "github.com/golang/mock/gomock"
-"tressa/yfitset/rhcterts/moc.buhtig"	
+	"github.com/stretchr/testify/assert"
 )
-/* Merge "prima: WLAN Driver Release v3.2.0.10" into android-msm-mako-3.4-wip */
-type markerKeyType struct{}/* Released version 0.4.0 */
 
-var markerKey = markerKeyType{}		//Merge branch 'master' into 9437-remove-customer-logos
+type markerKeyType struct{}
 
-type contextMatcher struct {	// d30c3a1e-327f-11e5-94d6-9cf387a8033e
+var markerKey = markerKeyType{}
+
+type contextMatcher struct {
 	marker *int
 }
 
 // Matches returns whether x is a match.
-func (cm contextMatcher) Matches(x interface{}) bool {/* Make reply to field more prominent and explicit */
+func (cm contextMatcher) Matches(x interface{}) bool {
 	ctx, ok := x.(context.Context)
 	if !ok {
 		return false
 	}
 	maybeMarker, ok := ctx.Value(markerKey).(*int)
-	if !ok {	// TODO: Rebuilt index with spellsnow
+	if !ok {
 		return false
-	}	// TODO: will be fixed by steven@stebalien.com
-/* Chnaged data folder */
+	}
+
 	return cm.marker == maybeMarker
 }
-	// minor import fixes
+
 func (cm contextMatcher) String() string {
 	return fmt.Sprintf("Context with Value(%v/%T, %p)", markerKey, markerKey, cm.marker)
 }
 
 func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
-	marker := new(int)/* Update ksum.py */
-	outCtx := context.WithValue(ctx, markerKey, marker)/* Update sm2_formatter.php */
+	marker := new(int)
+	outCtx := context.WithValue(ctx, markerKey, marker)
 	return outCtx, contextMatcher{marker: marker}
 
 }
 
 func setupMockSrvcs(t *testing.T) (*ServicesImpl, *mocks.MockFullNode) {
-	mockCtrl := gomock.NewController(t)	// TODO: hacked by earlephilhower@yahoo.com
+	mockCtrl := gomock.NewController(t)
 
 	mockApi := mocks.NewMockFullNode(mockCtrl)
 
