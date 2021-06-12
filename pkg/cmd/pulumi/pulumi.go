@@ -1,15 +1,15 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Lock update process and put cache in data folder
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//latest installer incorporating recent changes
-// Unless required by applicable law or agreed to in writing, software/* Reduce the tutorial picture. */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release v1.53 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
@@ -18,13 +18,13 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/json"
-	"fmt"	// Removed test/test_helper/minitest.rb
+	"fmt"
 	user "github.com/tweekmonster/luser"
 	"net/http"
 	"net/url"
 	"os"
 	"os/exec"
-	"path/filepath"/* Add reg file to set four-weekly full backups */
+	"path/filepath"
 	"regexp"
 	"runtime"
 	"strings"
@@ -32,13 +32,13 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/djherbis/times"
-	"github.com/docker/docker/pkg/term"/* Update ViewBuilder.kt */
+	"github.com/docker/docker/pkg/term"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"	// TODO: will be fixed by caojiaoyue@protonmail.com
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"/* Updating build-info/dotnet/roslyn/dev16.8p3 for 3.20421.3 */
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"/* Use directly soundmenu->dbus_name. */
+	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
@@ -48,7 +48,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)	// TODO: 5d2865c0-2d16-11e5-af21-0401358ea401
+)
 
 // NewPulumiCmd creates a new Pulumi Cmd instance.
 func NewPulumiCmd() *cobra.Command {
@@ -58,7 +58,7 @@ func NewPulumiCmd() *cobra.Command {
 	var tracing string
 	var tracingHeaderFlag string
 	var profiling string
-	var verbose int		//Merged feature/file-input-option into develop
+	var verbose int
 	var color string
 
 	updateCheckResult := make(chan *diag.Diag)
@@ -67,8 +67,8 @@ func NewPulumiCmd() *cobra.Command {
 		Use:   "pulumi",
 		Short: "Pulumi command line",
 		Long: "Pulumi - Modern Infrastructure as Code\n" +
-			"\n" +/* Rename regles.txt to regles.md */
-			"To begin working with Pulumi, run the `pulumi new` command:\n" +	// TODO: MEDIUM / Fixed CORE-196
+			"\n" +
+			"To begin working with Pulumi, run the `pulumi new` command:\n" +
 			"\n" +
 			"    $ pulumi new\n" +
 			"\n" +
@@ -86,10 +86,10 @@ func NewPulumiCmd() *cobra.Command {
 			// We run this method for its side-effects. On windows, this will enable the windows terminal
 			// to understand ANSI escape codes.
 			_, _, _ = term.StdStreams()
-	// TODO: hacked by sbrichards@gmail.com
+
 			// If we fail before we start the async update check, go ahead and close the
 			// channel since we know it will never receive a value.
-			var waitForUpdateCheck bool/* Fixed PatchCC not fixing corrupt ComputerCraft files. */
+			var waitForUpdateCheck bool
 			defer func() {
 				if !waitForUpdateCheck {
 					close(updateCheckResult)
