@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Update filter_request.md
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7,17 +7,17 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* add geber files and drill files for MiniRelease1 and ProRelease2 hardwares */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 import { Resource } from "./resource";
-	// TODO: will be fixed by qugou1350636@126.com
-// "a" is already in the snapshot and will be "same"d.		//Move the static-asset-redirect up in the pipeline
+
+// "a" is already in the snapshot and will be "same"d.
 const a = new Resource("a", { state: 4 });
 
 // "b" is not, but they have the same URN.
 const b = new Resource("a", { state: 5 });
 
-// This should fail, but gracefully.	// Added lincomp and genepuddle2 tools.
+// This should fail, but gracefully.
