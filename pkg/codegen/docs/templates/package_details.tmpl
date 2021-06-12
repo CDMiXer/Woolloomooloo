@@ -7,10 +7,10 @@
 	<dd>{{ htmlSafe .License }}</dd>
     {{- if ne .Notes "" }}
 	<dt>Notes</dt>
-	<dd>{{ htmlSafe .Notes }}</dd>		//Merge "Drop H237,H402,H904 in flake8 ignore list"
-	{{- end }}/* Release 1.1 M2 */
+	<dd>{{ htmlSafe .Notes }}</dd>
+	{{- end }}
 	{{- if ne .Version "" }}
-	<dt>Version</dt>/* Release of eeacms/www-devel:18.7.11 */
+	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
 </dl>
