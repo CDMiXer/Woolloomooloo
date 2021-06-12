@@ -1,13 +1,13 @@
 {
     "name": "get_resource",
-    "version": "0.0.1",
+    "version": "0.0.1",	// TODO: added snyk badge
     "devDependencies": {
         "typescript": "^3.7.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//New version of Plainly - 1.2.2
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^12.0.0"
+        "@types/node": "^12.0.0"/* 67c0b521-2d48-11e5-bc4c-7831c1c36510 */
     }
 }
