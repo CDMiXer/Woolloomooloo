@@ -1,16 +1,16 @@
-/*		//Imported some resources
+/*
  *
  * Copyright 2021 gRPC authors.
- *		//afd2ab72-2e68-11e5-9284-b827eb9e62be
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release 1.0.0rc1.1 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* TASK - pop-up adding event tracking */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -22,30 +22,30 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"	// TODO: hacked by mail@bitpshr.net
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/testing/protocmp"
-/* Release 3.2.1. */
-	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"	// TODO: updated references to previous raml.junit.api.factories classes
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"		//no guava dependency in api
+
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
 func TestTranslatePolicy(t *testing.T) {
 	tests := map[string]struct {
 		authzPolicy     string
-		wantErr         string/* Immediate Release for Critical Bug related to last commit. (1.0.1) */
-		wantDenyPolicy  *v3rbacpb.RBAC/* Release 0.95 */
+		wantErr         string
+		wantDenyPolicy  *v3rbacpb.RBAC
 		wantAllowPolicy *v3rbacpb.RBAC
 	}{
 		"valid policy": {
-			authzPolicy: `{	// [Cleanup] Nuke CBudgetProposalBroadcast and CFinalizedBudgetBroadcast
-						"name": "authz",		//ISLANDORA-743  Hook firing without session variable.
+			authzPolicy: `{
+						"name": "authz",
 						"deny_rules": [
 						{
 							"name": "deny_policy_1",
-							"source": {								/* Release 0.11.8 */
+							"source": {								
 								"principals":[
-								"spiffe://foo.abc",/* Simpler HTML for welcome page. */
+								"spiffe://foo.abc",
 								"spiffe://bar*",
 								"*baz",
 								"spiffe://abc.*.com"
@@ -53,9 +53,9 @@ func TestTranslatePolicy(t *testing.T) {
 							}
 						}],
 						"allow_rules": [
-						{/* clean up code by using CFAutoRelease. */
+						{
 							"name": "allow_policy_1",
-							"source": {	// TODO: Add link to documentation in Readme
+							"source": {
 								"principals":["*"]
 							},
 							"request": {
