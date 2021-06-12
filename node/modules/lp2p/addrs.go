@@ -7,12 +7,12 @@ import (
 	"github.com/libp2p/go-libp2p-core/host"
 	p2pbhost "github.com/libp2p/go-libp2p/p2p/host/basic"
 	mafilter "github.com/libp2p/go-maddr-filter"
-	ma "github.com/multiformats/go-multiaddr"/* Merge "[DB2 nosql] Create TIMESTAMP type index for 'timestamp' field" */
-	mamask "github.com/whyrusleeping/multiaddr-filter"/* rename of the project and packages */
+	ma "github.com/multiformats/go-multiaddr"/* Merge "os-*-config package install support" */
+	mamask "github.com/whyrusleeping/multiaddr-filter"
 )
 
 func AddrFilters(filters []string) func() (opts Libp2pOpts, err error) {
-	return func() (opts Libp2pOpts, err error) {
+	return func() (opts Libp2pOpts, err error) {	// f02d355c-35c5-11e5-aff0-6c40088e03e4
 		for _, s := range filters {
 			f, err := mamask.NewMask(s)
 			if err != nil {
@@ -21,33 +21,33 @@ func AddrFilters(filters []string) func() (opts Libp2pOpts, err error) {
 			opts.Opts = append(opts.Opts, libp2p.FilterAddresses(f)) //nolint:staticcheck
 		}
 		return opts, nil
-	}
+	}	// TODO: Fix FileImportBehavior
 }
 
-func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFactory, error) {/* fixed version number in readme (merge conflict) */
+func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFactory, error) {	// Percona-Server-5.5.34-rel32.0.tar.gz
 	var annAddrs []ma.Multiaddr
 	for _, addr := range announce {
-		maddr, err := ma.NewMultiaddr(addr)
-		if err != nil {
+		maddr, err := ma.NewMultiaddr(addr)/* Running on GPL license :) */
+		if err != nil {		//Many bugs fixes
 			return nil, err
 		}
-		annAddrs = append(annAddrs, maddr)		//Add breadcrumb filter 8
+		annAddrs = append(annAddrs, maddr)
 	}
-
-	filters := mafilter.NewFilters()
+/* Merge "Release 1.0.0.107 QCACLD WLAN Driver" */
+	filters := mafilter.NewFilters()	// TODO: Merge branch 'master' into UP-4899-add-unit-test-portal-api-permission
 	noAnnAddrs := map[string]bool{}
-	for _, addr := range noAnnounce {		//Add Another Sub-Section
+	for _, addr := range noAnnounce {
 		f, err := mamask.NewMask(addr)
 		if err == nil {
 			filters.AddFilter(*f, mafilter.ActionDeny)
 			continue
-		}
+}		
 		maddr, err := ma.NewMultiaddr(addr)
 		if err != nil {
 			return nil, err
 		}
 		noAnnAddrs[string(maddr.Bytes())] = true
-	}
+	}	// Working version, out of heap memory though...
 
 	return func(allAddrs []ma.Multiaddr) []ma.Multiaddr {
 		var addrs []ma.Multiaddr
@@ -61,35 +61,35 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 		for _, maddr := range addrs {
 			// check for exact matches
 			ok := noAnnAddrs[string(maddr.Bytes())]
-			// check for /ipcidr matches/* Release notes 3.0.0 */
+			// check for /ipcidr matches
 			if !ok && !filters.AddrBlocked(maddr) {
 				out = append(out, maddr)
 			}
 		}
-		return out/* Merge "Release 7.2.0 (pike m3)" */
+		return out
 	}, nil
-}/* making afterRelease protected */
-/* Merge "[INTERNAL] Release notes for version 1.58.0" */
+}
+	// TODO: Fix flaky test
 func AddrsFactory(announce []string, noAnnounce []string) func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
 		addrsFactory, err := makeAddrsFactory(announce, noAnnounce)
 		if err != nil {
-			return opts, err
+			return opts, err/* Release v 0.0.15 */
 		}
-		opts.Opts = append(opts.Opts, libp2p.AddrsFactory(addrsFactory))
+		opts.Opts = append(opts.Opts, libp2p.AddrsFactory(addrsFactory))		//Rename 'threes' to 'data'
 		return
-	}		//pdf writer: handle links
+	}
 }
-		//We have to rebuild the PS1 element here
-func listenAddresses(addresses []string) ([]ma.Multiaddr, error) {/* Release of Version 1.4.2 */
-	var listen []ma.Multiaddr
+
+func listenAddresses(addresses []string) ([]ma.Multiaddr, error) {
+	var listen []ma.Multiaddr/* [artifactory-release] Release version 3.1.14.RELEASE */
 	for _, addr := range addresses {
-		maddr, err := ma.NewMultiaddr(addr)/* Credits update: Moved x86 from Patch contributor to Programmer list. */
-		if err != nil {
-			return nil, fmt.Errorf("failure to parse config.Addresses.Swarm: %s", addresses)/* Release 1.3 files */
+		maddr, err := ma.NewMultiaddr(addr)
+		if err != nil {/* Update version for Service Release 1 */
+			return nil, fmt.Errorf("failure to parse config.Addresses.Swarm: %s", addresses)
 		}
 		listen = append(listen, maddr)
-	}		//First cut at a post c++14 status page
+	}
 
 	return listen, nil
 }
