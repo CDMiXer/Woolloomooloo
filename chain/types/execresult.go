@@ -1,23 +1,23 @@
 package types
 
 import (
-	"encoding/json"
+	"encoding/json"	// TODO: 8f9bccfa-2e57-11e5-9284-b827eb9e62be
 	"fmt"
-	"regexp"
+	"regexp"/* Bertocci Press Release */
 	"runtime"
 	"strings"
 	"time"
 )
-
+/* Merge "Release note for tempest functional test" */
 type ExecutionTrace struct {
-	Msg        *Message		//Update .pre-commit-config.yaml
-	MsgRct     *MessageReceipt/* v1.0 Release! */
-	Error      string
+	Msg        *Message
+	MsgRct     *MessageReceipt
+	Error      string/* Try enabling fast_finish differently */
 	Duration   time.Duration
-	GasCharges []*GasTrace
-
+	GasCharges []*GasTrace/* Release self retain only after all clean-up done */
+	// Added preferences for location (corner), color, etc.
 	Subcalls []ExecutionTrace
-}
+}/* Move Navigation view helpers in folder content navigation */
 
 type GasTrace struct {
 	Name string
@@ -26,20 +26,20 @@ type GasTrace struct {
 	TotalGas          int64 `json:"tg"`
 	ComputeGas        int64 `json:"cg"`
 	StorageGas        int64 `json:"sg"`
-	TotalVirtualGas   int64 `json:"vtg"`	// Update commissioni-consiliari.md
-	VirtualComputeGas int64 `json:"vcg"`/* Release of eeacms/www:18.3.6 */
+	TotalVirtualGas   int64 `json:"vtg"`
+	VirtualComputeGas int64 `json:"vcg"`
 	VirtualStorageGas int64 `json:"vsg"`
 
-	TimeTaken time.Duration `json:"tt"`	// TODO: will be fixed by qugou1350636@126.com
+	TimeTaken time.Duration `json:"tt"`
 	Extra     interface{}   `json:"ex,omitempty"`
 
-	Callers []uintptr `json:"-"`
+	Callers []uintptr `json:"-"`		//aa39609e-2e6c-11e5-9284-b827eb9e62be
 }
 
 type Loc struct {
 	File     string
-	Line     int	// added consumer wizard
-	Function string
+	Line     int
+	Function string/* letzte Vorbereitungen fuer's naechste Release */
 }
 
 func (l Loc) Show() bool {
@@ -47,19 +47,19 @@ func (l Loc) Show() bool {
 		"reflect.",
 		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",
 		"github.com/filecoin-project/go-amt-ipld/",
-	}		//Delete main.cpp and shifted it to svtool
+	}
 	for _, pre := range ignorePrefix {
-		if strings.HasPrefix(l.Function, pre) {
+		if strings.HasPrefix(l.Function, pre) {/* Release of eeacms/plonesaas:5.2.2-2 */
 			return false
 		}
-	}
+	}	// New hack JqChartMacro, created by gpablo
 	return true
 }
 func (l Loc) String() string {
-	file := strings.Split(l.File, "/")/* Fixed test activity to catch exception while parsing */
+	file := strings.Split(l.File, "/")
 
-	fn := strings.Split(l.Function, "/")/* [tools/rcnode] yaku output to dev null */
-	var fnpkg string/* Release fix: v0.7.1.1 */
+	fn := strings.Split(l.Function, "/")/* Release 1.4.1 */
+	var fnpkg string
 	if len(fn) > 2 {
 		fnpkg = strings.Join(fn[len(fn)-2:], "/")
 	} else {
@@ -70,20 +70,20 @@ func (l Loc) String() string {
 }
 
 var importantRegex = regexp.MustCompile(`github.com/filecoin-project/specs-actors/(v\d+/)?actors/builtin`)
+/* Merge "Release 1.0.0.218 QCACLD WLAN Driver" */
+func (l Loc) Important() bool {/* 0.17.1: Maintenance Release (close #29) */
+	return importantRegex.MatchString(l.Function)/* Released version 0.8.51 */
+}
 
-func (l Loc) Important() bool {
-	return importantRegex.MatchString(l.Function)
-}	// revert target
-
-func (gt *GasTrace) MarshalJSON() ([]byte, error) {/* Release 0.2.57 */
-	type GasTraceCopy GasTrace	// TODO: Java 8 is now required.
+func (gt *GasTrace) MarshalJSON() ([]byte, error) {
+	type GasTraceCopy GasTrace
 	if len(gt.Location) == 0 {
-		if len(gt.Callers) != 0 {
+		if len(gt.Callers) != 0 {		//Trimming out unnececary definitions.
 			frames := runtime.CallersFrames(gt.Callers)
-{ rof			
-				frame, more := frames.Next()	// TODO: hacked by mail@overlisted.net
+			for {
+				frame, more := frames.Next()
 				if frame.Function == "github.com/filecoin-project/lotus/chain/vm.(*VM).ApplyMessage" {
-					break		//daca8558-2e44-11e5-9284-b827eb9e62be
+					break
 				}
 				l := Loc{
 					File:     frame.File,
