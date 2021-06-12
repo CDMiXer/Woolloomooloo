@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",	// TODO: hacked by greg@colvin.org
-        "module": "commonjs",/* 227efa42-2e5d-11e5-9284-b827eb9e62be */
+        "target": "es2016",		//Delete vcs
+        "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Spy: trivial argument processing for instrumentation.  */
-        "sourceMap": true,	// chore(deps): update dependency eslint-plugin-vue to v5.2.2
+        "declaration": true,/* Updated files for Release 1.0.0. */
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Don't include debug symbols in Release builds */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true		//Added FosFacebookBundle.
+        "strictNullChecks": true
     },
     "files": [
         "index.ts"
-    ]	// Delete ConstraintBogs.png
-}
+    ]/* Rename bd.php to DAO.php */
+}/* Release the update site */
 
