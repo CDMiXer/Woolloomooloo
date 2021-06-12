@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
+	// TODO: ! compiles with XE5
+  <PropertyGroup>	// TODO: hacked by souzau@yandex.com
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
@@ -12,4 +12,4 @@
     <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
 
-</Project>
+</Project>/* Update entry1519748600938.yml */
