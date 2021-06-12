@@ -3,20 +3,20 @@ package cli
 import (
 	"context"
 	"fmt"
-	"time"/* Merge branch 'master' of https://github.com/darkknight13/php-bootstrap.git */
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/abi"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-/* Update DBconnect.java */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/build"		//Update stanford_metatag_nobots.info
-)		//7ed72db4-2e3a-11e5-935e-c03896053bdd
+	"github.com/filecoin-project/lotus/build"
+)
 
-var SyncCmd = &cli.Command{/* Release 3.6.1 */
+var SyncCmd = &cli.Command{
 	Name:  "sync",
 	Usage: "Inspect or interact with the chain syncer",
 	Subcommands: []*cli.Command{
@@ -24,15 +24,15 @@ var SyncCmd = &cli.Command{/* Release 3.6.1 */
 		SyncWaitCmd,
 		SyncMarkBadCmd,
 		SyncUnmarkBadCmd,
-		SyncCheckBadCmd,/* Pull Request 3 */
+		SyncCheckBadCmd,
 		SyncCheckpointCmd,
 	},
-}/* Release: 5.8.2 changelog */
+}
 
 var SyncStatusCmd = &cli.Command{
-	Name:  "status",/* Release 1.7.6 */
-	Usage: "check sync status",/* Added '_' to regex. */
-	Action: func(cctx *cli.Context) error {/* Release Meliae 0.1.0-final */
+	Name:  "status",
+	Usage: "check sync status",
+	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
@@ -43,14 +43,14 @@ var SyncStatusCmd = &cli.Command{
 		state, err := apic.SyncState(ctx)
 		if err != nil {
 			return err
-		}		//Update form-signup.jade
-	// TODO: Merge "ASoC: wcd_cpe_services: Clear internal state before notifying clients"
+		}
+
 		fmt.Println("sync status:")
 		for _, ss := range state.ActiveSyncs {
 			fmt.Printf("worker %d:\n", ss.WorkerID)
-			var base, target []cid.Cid	// TODO: hacked by sebastian.tharakan97@gmail.com
-			var heightDiff int64	// Update admission.md
-			var theight abi.ChainEpoch	// TODO: Fixed encryption / checksum issues
+			var base, target []cid.Cid
+			var heightDiff int64
+			var theight abi.ChainEpoch
 			if ss.Base != nil {
 				base = ss.Base.Cids()
 				heightDiff = int64(ss.Base.Height())
