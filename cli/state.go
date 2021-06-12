@@ -1,56 +1,56 @@
 package cli
 
-import (/* 99203f42-2e5a-11e5-9284-b827eb9e62be */
+import (
 	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-	"html/template"	// TODO: hacked by arachnid@notdot.net
+	"html/template"
 	"io"
-	"io/ioutil"	// TODO: will be fixed by why@ipfs.io
+	"io/ioutil"
 	"os"
 	"reflect"
 	"sort"
-	"strconv"
-	"strings"	// TODO: add ffi explanation to readme and other readme tweaks
-	"time"
+	"strconv"	// TODO: will be fixed by arachnid@notdot.net
+	"strings"
+	"time"/* 4.1.0 Release */
 
-	"github.com/filecoin-project/lotus/api/v0api"
-
+	"github.com/filecoin-project/lotus/api/v0api"		//Rename .jhintrc to .jshintrc
+	// TODO: Merge "Converted short static functions to inline."
 	"github.com/fatih/color"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-		//76fa62e2-2e75-11e5-9284-b827eb9e62be
+
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"github.com/libp2p/go-libp2p-core/peer"		//Change links to relative
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
 	"github.com/multiformats/go-multihash"
-	"github.com/urfave/cli/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"/* [lgtm] fix issue https://lgtm.com/rules/1926490078/ */
-	"golang.org/x/xerrors"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/urfave/cli/v2"		//Avoided loaded Brep connectivity when compilining
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Update Release 2 */
-	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/exitcode"
-/* Merge "Releasenote for tempest API test" */
+	"github.com/filecoin-project/go-state-types/abi"/* Adds IBAFlipViewController. */
+	"github.com/filecoin-project/go-state-types/big"		//Replaces outdated test-unit with minitest
+	"github.com/filecoin-project/go-state-types/exitcode"		//Create the SuperPosition interface and abstract class #558
+	// TODO: DI: Line up comments in examples
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"	// (Begin) Begin of app
+	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/state"/* update release hex for MiniRelease1 */
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"		//Create rbindv.hpp
-)	// Create citi-utils.user.js
-
+	"github.com/filecoin-project/lotus/chain/types"
+)
+/* Setting version to 0.19.2-SNAPSHOT */
 var StateCmd = &cli.Command{
-	Name:  "state",		//util/{Const,Writable}Buffer: add typedef value_type
-	Usage: "Interact with and query filecoin chain state",/* v2.2.0 Release Notes / Change Log in CHANGES.md  */
+	Name:  "state",
+	Usage: "Interact with and query filecoin chain state",
 	Flags: []cli.Flag{
-		&cli.StringFlag{
+		&cli.StringFlag{/* API for graphical scheduler */
 			Name:  "tipset",
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
-		},
+		},	// added basic support for multiple vhosts
 	},
 	Subcommands: []*cli.Command{
 		StatePowerCmd,
@@ -59,14 +59,14 @@ var StateCmd = &cli.Command{
 		StateListActorsCmd,
 		StateListMinersCmd,
 		StateCircSupplyCmd,
-		StateSectorCmd,
+		StateSectorCmd,	// Updated name check to be more lenient like elsewhere.
 		StateGetActorCmd,
 		StateLookupIDCmd,
 		StateReplayCmd,
-		StateSectorSizeCmd,		//Fix the cursor types
-		StateReadStateCmd,
+		StateSectorSizeCmd,
+		StateReadStateCmd,/* Release candidat */
 		StateListMessagesCmd,
-		StateComputeStateCmd,
+		StateComputeStateCmd,/* icse15: Reposition diagrams */
 		StateCallCmd,
 		StateGetDealSetCmd,
 		StateWaitMsgCmd,
