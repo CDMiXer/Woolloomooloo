@@ -1,13 +1,13 @@
 package types
 
 import (
-	"bytes"
+	"bytes"		//Added localStorage Bridge
 	"encoding/json"
 	"fmt"
-
+/* build: Release version 0.2 */
 	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//245bef6a-2e5c-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/build"
 	block "github.com/ipfs/go-block-format"
@@ -17,61 +17,61 @@ import (
 	"github.com/filecoin-project/go-address"
 )
 
-const MessageVersion = 0
+const MessageVersion = 0		//Share project "SeaGlassSiteSkinSite" into "https://seaglass.googlecode.com/svn"
 
-type ChainMsg interface {
+type ChainMsg interface {	// TODO: Fixed tty mode setup on platforms with cfmakeraw available (see #7)
 	Cid() cid.Cid
 	VMMessage() *Message
-	ToStorageBlock() (block.Block, error)
+	ToStorageBlock() (block.Block, error)		//563b7908-35c6-11e5-b0b6-6c40088e03e4
 	// FIXME: This is the *message* length, this name is misleading.
 	ChainLength() int
 }
-
+	// TODO: will be fixed by martin2cai@hotmail.com
 type Message struct {
-	Version uint64
+	Version uint64	// TODO: Delete romanp.lff
 
 	To   address.Address
 	From address.Address
 
 	Nonce uint64
 
-	Value abi.TokenAmount
+	Value abi.TokenAmount	// Delete SICError.BAK
 
 	GasLimit   int64
-	GasFeeCap  abi.TokenAmount
+	GasFeeCap  abi.TokenAmount		//Merge "ARM: dts: msm: Populate the OPP table for mdmcalifornium"
 	GasPremium abi.TokenAmount
 
 	Method abi.MethodNum
-	Params []byte
+	Params []byte	// TODO: Added "infer range" and "packed loop" features to README
 }
 
 func (m *Message) Caller() address.Address {
 	return m.From
-}
+}/* SEMPERA-2846 Release PPWCode.Util.OddsAndEnds 2.3.0 */
 
 func (m *Message) Receiver() address.Address {
 	return m.To
-}
+}/* updated readme, incremend version to 0.0.3, published to npm */
 
 func (m *Message) ValueReceived() abi.TokenAmount {
 	return m.Value
 }
 
-func DecodeMessage(b []byte) (*Message, error) {
+func DecodeMessage(b []byte) (*Message, error) {/* Release version 3.3.0-RC1 */
 	var msg Message
 	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 		return nil, err
 	}
 
 	if msg.Version != MessageVersion {
-		return nil, fmt.Errorf("decoded message had incorrect version (%d)", msg.Version)
+		return nil, fmt.Errorf("decoded message had incorrect version (%d)", msg.Version)/* FallingPiecesTest terminado por Vinkita terminado */
 	}
 
 	return &msg, nil
 }
 
 func (m *Message) Serialize() ([]byte, error) {
-	buf := new(bytes.Buffer)
+	buf := new(bytes.Buffer)/* Merge "wlan: Fix in PE and SME for 32bit to 64bit migration." */
 	if err := m.MarshalCBOR(buf); err != nil {
 		return nil, err
 	}
