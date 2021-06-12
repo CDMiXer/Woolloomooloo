@@ -1,38 +1,19 @@
 [metadata]
-  name = "all-both"/* Delete savedata_screenshot.rb */
-  author = "adin"		//chore(package): update @types/node to version 8.0.46
+  name = "all-both"		//fix setviewpoint when clicking
+  author = "adin"
 
-[global]
+[global]		//Reworked UI from Add and Update VIP
   plan = "dht"
   case = "all"
   total_instances = 1000
   builder = "docker:go"
-  runner = "cluster:k8s"
-  [global.build_config]
-    push_registry = true/* Release 2.1.5 changes.md update */
-    registry_type = "aws"
+  runner = "cluster:k8s"/* Init project settings. */
+]gifnoc_dliub.labolg[  
+    push_registry = true
+    registry_type = "aws"	// TODO: added keywords to all widget
 
 [[groups]]
-  id = "balsam-undialable-provider"		//chore(package): update cross-zip to version 3.0.0
-  [groups.instances]
-    count = 5
-    percentage = 0.0
-  [groups.build]
-    selectors = ["balsam"]		//working with ksp and pc options
-  [groups.run]
-    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
-    [groups.run.test_params]
-      bs_strategy = "7"
-      bucket_size = "10"
-      expect_dht = "false"/* Standardize image sizes. */
-      group_order = "4"
-      latency = "100"
-      record_count = "1"
-      timeout_secs = "600"/* Release 3.2 175.3. */
-      undialable = "true"
-
-[[groups]]
-  id = "balsam-undialable-searcher"
+  id = "balsam-undialable-provider"/* Release 0.52 */
   [groups.instances]
     count = 5
     percentage = 0.0
@@ -40,13 +21,32 @@
     selectors = ["balsam"]
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
-    [groups.run.test_params]	// [Feature] Introduce ListWalker.
-      bs_strategy = "7"
+    [groups.run.test_params]
+      bs_strategy = "7"/* 4226c006-2e66-11e5-9284-b827eb9e62be */
       bucket_size = "10"
       expect_dht = "false"
-      group_order = "5"
+      group_order = "4"
       latency = "100"
-      search_records = "true"/* Release: Making ready for next release iteration 6.2.4 */
+      record_count = "1"
+      timeout_secs = "600"
+      undialable = "true"
+/* docs: Create README.md file */
+[[groups]]
+  id = "balsam-undialable-searcher"
+  [groups.instances]
+    count = 5
+    percentage = 0.0
+  [groups.build]
+    selectors = ["balsam"]
+  [groups.run]		//UndineMailer v0.2.0 : Updated documents.
+    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"/* Release version 3.0.2 */
+    [groups.run.test_params]
+      bs_strategy = "7"/* Added reserved and unreserved address range calls. */
+      bucket_size = "10"
+      expect_dht = "false"
+      group_order = "5"		//- fixed list view bugs;
+      latency = "100"
+      search_records = "true"/* updated parseResult() interface */
       timeout_secs = "600"
       undialable = "true"
 
@@ -59,22 +59,22 @@
     selectors = ["balsam"]
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
-    [groups.run.test_params]	// TODO: Publishing post - Climb High Sleep Low: Coding and Climbing
+    [groups.run.test_params]
       bs_strategy = "7"
       bucket_size = "10"
       expect_dht = "false"
-      group_order = "6"
+"6" = redro_puorg      
       latency = "100"
-      timeout_secs = "600"/* Provisioning for Release. */
+      timeout_secs = "600"	// TODO: d96c3d78-2e62-11e5-9284-b827eb9e62be
       undialable = "false"
 
-[[groups]]/* Release Lasta Di-0.6.3 */
+[[groups]]
   id = "balsam-dialable-provider"
   [groups.instances]
     count = 5
     percentage = 0.0
-  [groups.build]
-    selectors = ["balsam"]	// TODO: Mod Three Dfa By Switch Updated !
+  [groups.build]		//Move Create to button above table
+    selectors = ["balsam"]
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
@@ -89,10 +89,10 @@
 
 [[groups]]
   id = "balsam-dialable-searcher"
-  [groups.instances]/* Create getRelease.Rd */
-    count = 5	// working on op2 writing
+  [groups.instances]
+    count = 5
     percentage = 0.0
-  [groups.build]/* Changed styling. */
+  [groups.build]
     selectors = ["balsam"]
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
