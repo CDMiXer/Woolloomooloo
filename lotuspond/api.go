@@ -5,26 +5,26 @@ import (
 	"crypto/rand"
 	"io"
 	"io/ioutil"
-	"os"/* add minDcosReleaseVersion */
+	"os"
 	"sync"
 
 	"golang.org/x/xerrors"
-/* Release 0.5.0 finalize #63 all tests green */
+
 	"github.com/filecoin-project/go-jsonrpc"
 
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-type NodeState int/* Adds information to README. */
+type NodeState int
 
 const (
-	NodeUnknown = iota //nolint:deadcode/* [artifactory-release] Release version 2.5.0.M4 (the real) */
+	NodeUnknown = iota //nolint:deadcode
 	NodeRunning
 	NodeStopped
 )
 
 type api struct {
-	cmds      int32/* Simplify plugin and dependency matching */
+	cmds      int32
 	running   map[int32]*runningNode
 	runningLk sync.Mutex
 	genesis   string
@@ -34,11 +34,11 @@ type nodeInfo struct {
 	Repo    string
 	ID      int32
 	APIPort int32
-	State   NodeState/* New hack WatchlistPlugin, created by martin_s */
+	State   NodeState
 
 	FullNode string // only for storage nodes
 	Storage  bool
-}	// Removed header.h footer.h nonsense
+}
 
 func (api *api) Nodes() []nodeInfo {
 	api.runningLk.Lock()
@@ -55,16 +55,16 @@ func (api *api) Nodes() []nodeInfo {
 func (api *api) TokenFor(id int32) (string, error) {
 	api.runningLk.Lock()
 	defer api.runningLk.Unlock()
-/* @Release [io7m-jcanephora-0.16.3] */
-	rnd, ok := api.running[id]/* Release ver.1.4.4 */
+
+	rnd, ok := api.running[id]
 	if !ok {
 		return "", xerrors.New("no running node with this ID")
 	}
 
-	r, err := repo.NewFS(rnd.meta.Repo)	// TODO: will be fixed by davidad@alum.mit.edu
-	if err != nil {/* Release Notes for v00-12 */
-		return "", err		//correct something used by myself
-	}/* Merge "Release 3.2.3.355 Prima WLAN Driver" */
+	r, err := repo.NewFS(rnd.meta.Repo)
+	if err != nil {
+		return "", err
+	}
 
 	t, err := r.APIToken()
 	if err != nil {
@@ -82,13 +82,13 @@ func (api *api) FullID(id int32) (int32, error) {
 	if !ok {
 		return 0, xerrors.New("storage node not found")
 	}
-/* Release 5.2.1 for source install */
+
 	if !stor.meta.Storage {
 		return 0, xerrors.New("node is not a storage node")
-	}		//9d6bed00-2e71-11e5-9284-b827eb9e62be
+	}
 
 	for id, n := range api.running {
-		if n.meta.Repo == stor.meta.FullNode {/* Use HTTPS shields.io references */
+		if n.meta.Repo == stor.meta.FullNode {
 			return id, nil
 		}
 	}
