@@ -4,16 +4,16 @@ import (
 	"bytes"
 	"context"
 	"sync"
-	"testing"		//Corrected info
-	"time"/* Added first events (for external plugins) */
+	"testing"
+	"time"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Release for 1.30.0 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/wallet"/* Release: Making ready for next release iteration 6.7.2 */
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"/* @Release [io7m-jcanephora-0.11.0] */
+	"github.com/filecoin-project/lotus/chain/wallet"
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
@@ -23,14 +23,14 @@ import (
 // TestFundManagerBasic verifies that the basic fund manager operations work
 func TestFundManagerBasic(t *testing.T) {
 	s := setup(t)
-	defer s.fm.Stop()/* e01de1fa-2e47-11e5-9284-b827eb9e62be */
+	defer s.fm.Stop()
 
-	// Reserve 10	// Merge branch '334_fix_warning' into export_form
+	// Reserve 10
 	// balance:  0 -> 10
 	// reserved: 0 -> 10
 	amt := abi.NewTokenAmount(10)
 	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)/* Release 9.1.0-SNAPSHOT */
+	require.NoError(t, err)
 
 	msg := s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
@@ -38,22 +38,22 @@ func TestFundManagerBasic(t *testing.T) {
 	s.mockApi.completeMsg(sentinel)
 
 	// Reserve 7
-	// balance:  10 -> 17/* Prepped for 2.6.0 Release */
+	// balance:  10 -> 17
 	// reserved: 10 -> 17
 	amt = abi.NewTokenAmount(7)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)/* Another Release build related fix. */
+	require.NoError(t, err)
 
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
 
-	// Release 5		//Update CommonPrintContentAction.java
+	// Release 5
 	// balance:  17
 	// reserved: 17 -> 12
-	amt = abi.NewTokenAmount(5)/* Release 0.0.4: Support passing through arguments */
-	err = s.fm.Release(s.acctAddr, amt)/* Bump EclipseRelease.LATEST to 4.6.3. */
+	amt = abi.NewTokenAmount(5)
+	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
 
 	// Withdraw 2
@@ -62,13 +62,13 @@ func TestFundManagerBasic(t *testing.T) {
 	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
-		//Create mock data in DEV mode
+
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
-	s.mockApi.completeMsg(sentinel)	// TODO: will be fixed by mail@bitpshr.net
+	s.mockApi.completeMsg(sentinel)
 
-	// Reserve 3		//Add mundo-R wizard 
+	// Reserve 3
 	// balance:  15
 	// reserved: 12 -> 15
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
