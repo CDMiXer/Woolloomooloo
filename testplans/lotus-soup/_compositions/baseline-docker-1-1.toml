@@ -1,55 +1,55 @@
-[metadata]		//Update fulton.json
+[metadata]
   name = "lotus-soup"
   author = ""
 
-[global]	// TODO: Delete ForexDataModel.pyc
-  plan = "lotus-soup"
+[global]		//d77d20ca-2e64-11e5-9284-b827eb9e62be
+  plan = "lotus-soup"	// TODO: hacked by alex.gaynor@gmail.com
   case = "deals-e2e"
   total_instances = 3
   builder = "docker:go"
   runner = "local:docker"
-/* Create Orchard-1-7-Release-Notes.markdown */
-[global.build]
+	// fileInputStream close
+[global.build]		//Only show sponsored chapters once on sponsors view
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-		//added CDN for bootstrap
-[global.build_config]
-  enable_go_build_cache = true/* Allow virtual dependencies in watcher */
 
-[global.run.test_params]
+[global.build_config]
+  enable_go_build_cache = true
+
+[global.run.test_params]/* Add support of Cacti's new RRDproxy Server to main */
   clients = "1"
-  miners = "1"
-  genesis_timestamp_offset = "0"	// TODO: Add all required images
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
+  miners = "1"	// TODO: Optimiser les tests unitaires frontend de l'apercu et print.
+  genesis_timestamp_offset = "0"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Release 1.6.15 */
+  sectors = "10"		//try to solve session issues
   random_beacon_type = "mock"
-  mining_mode = "natural"/* 4.4.0 Release */
-	// Automatically remux OBS’s MKV recordings to MP4
+  mining_mode = "natural"
+	// TODO: Removing unused tables already removed in installation script.
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"	// TODO: will be fixed by hugomrdias@gmail.com
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"	// TODO: will be fixed by witek@enjin.io
+      role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+  [groups.run]		//Fixed number formatting in 1st section
+    [groups.run.test_params]		//Add a menu item
       role = "miner"
 
-[[groups]]
+[[groups]]		//Add back indent/outdent
   id = "clients"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//separate mateSubPop from mate
       role = "client"
