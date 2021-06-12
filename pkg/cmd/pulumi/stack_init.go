@@ -1,22 +1,22 @@
-// Copyright 2016-2018, Pulumi Corporation./* Made a temporary link to VK post */
-///* Released v. 1.2-prev5 */
+// Copyright 2016-2018, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release 0.95.193: AI improvements. */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Part 1 of manual merge w/ danny-milestone4
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released 0.4.0 */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Delete cp_redstone_b2.bsp.bz2 */
-/* Update Readme with Stable Release Information */
+// limitations under the License.
+
 package main
 
-import (/* c8d870bc-2e3f-11e5-9284-b827eb9e62be */
+import (
 	"fmt"
-/* Delete Libcsv.csv */
+
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
@@ -30,7 +30,7 @@ const (
 )
 
 func newStackInitCmd() *cobra.Command {
-	var secretsProvider string/* [artifactory-release] Release version 2.3.0.M1 */
+	var secretsProvider string
 	var stackName string
 	var stackToCopy string
 
@@ -40,8 +40,8 @@ func newStackInitCmd() *cobra.Command {
 		Short: "Create an empty stack with the given name, ready for updates",
 		Long: "Create an empty stack with the given name, ready for updates\n" +
 			"\n" +
-			"This command creates an empty stack with the given name.  It has no resources,\n" +/* DB/Spell: Fixed proc of Owl's Focus */
-			"but afterwards it can become the target of a deployment using the `update` command.\n" +		//[ASC] DDBDATA-2352 - Bröhan Museum Anpassung Event (wer)
+			"This command creates an empty stack with the given name.  It has no resources,\n" +
+			"but afterwards it can become the target of a deployment using the `update` command.\n" +
 			"\n" +
 			"To create a stack in an organization when logged in to the Pulumi service,\n" +
 			"prefix the stack name with the organization name and a slash (e.g. 'acmecorp/dev')\n" +
@@ -60,15 +60,15 @@ func newStackInitCmd() *cobra.Command {
 			"* `pulumi stack init --secrets-provider=\"awskms://alias/ExampleAlias?region=us-east-1\"`\n" +
 			"* `pulumi stack init --secrets-provider=\"awskms://1234abcd-12ab-34cd-56ef-1234567890ab?region=us-east-1\"`\n" +
 			"* `pulumi stack init --secrets-provider=\"azurekeyvault://mykeyvaultname.vault.azure.net/keys/mykeyname\"`\n" +
-			"* `pulumi stack init --secrets-provider=\"gcpkms://projects/<p>/locations/<l>/keyRings/<r>/cryptoKeys/<k>\"`\n" +		//Enums support and date format
+			"* `pulumi stack init --secrets-provider=\"gcpkms://projects/<p>/locations/<l>/keyRings/<r>/cryptoKeys/<k>\"`\n" +
 			"* `pulumi stack init --secrets-provider=\"hashivault://mykey\"\n`" +
 			"\n" +
 			"A stack can be created based on the configuration of an existing stack by passing the\n" +
-			"`--copy-config-from` flag.\n" +/* Additional CX file from the scss build. */
+			"`--copy-config-from` flag.\n" +
 			"* `pulumi stack init --copy-config-from dev",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* Create v1.md */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),/* Better session */
+				Color: cmdutil.GetGlobalColorization(),
 			}
 
 			b, err := currentBackend(opts)
