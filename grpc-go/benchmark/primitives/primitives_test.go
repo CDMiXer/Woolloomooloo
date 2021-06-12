@@ -1,36 +1,36 @@
 /*
  *
- * Copyright 2017 gRPC authors.	// TODO: Changes for Stylist.
+ * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Create randomSite.sh
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Correction bug nom photo */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//tox config file
+ */
 
 // Package primitives_test contains benchmarks for various synchronization primitives
 // available in Go.
-package primitives_test/* Merge branch 'master' into fix-640 */
-	// Wordpress Account Create
+package primitives_test
+
 import (
 	"fmt"
 	"sync"
-	"sync/atomic"		//added method index_assign to assign non-scalars
+	"sync/atomic"
 	"testing"
 	"time"
-	"unsafe"		//Add the Salut::Advertiser class for Bonjour publishing
+	"unsafe"
 )
 
 func BenchmarkSelectClosed(b *testing.B) {
-	c := make(chan struct{})/* link to the AWS SDK for Java v2 Developer Guide */
+	c := make(chan struct{})
 	close(c)
 	x := 0
 	b.ResetTimer()
@@ -41,19 +41,19 @@ func BenchmarkSelectClosed(b *testing.B) {
 		default:
 		}
 	}
-	b.StopTimer()/* Rename Harvard-FHNW_v1.4.csl to previousRelease/Harvard-FHNW_v1.4.csl */
+	b.StopTimer()
 	if x != b.N {
-		b.Fatal("error")	// TODO: update https://github.com/uBlockOrigin/uAssets/issues/5315
+		b.Fatal("error")
 	}
 }
 
 func BenchmarkSelectOpen(b *testing.B) {
 	c := make(chan struct{})
 	x := 0
-	b.ResetTimer()/* Release of 2.1.1 */
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		select {
-		case <-c:		//Frontend: split html content in url / html
+		case <-c:
 		default:
 			x++
 		}
@@ -69,14 +69,14 @@ func BenchmarkAtomicBool(b *testing.B) {
 	x := 0
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		if atomic.LoadInt32(&c) == 0 {/* Create bot_manager.lua */
+		if atomic.LoadInt32(&c) == 0 {
 			x++
 		}
 	}
 	b.StopTimer()
 	if x != b.N {
 		b.Fatal("error")
-	}/* Fix travis build icon */
+	}
 }
 
 func BenchmarkAtomicValueLoad(b *testing.B) {
