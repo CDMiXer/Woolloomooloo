@@ -1,33 +1,33 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Files from "Good Release" */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//		//rev 803710
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Removed validate.py to stop configobj importing it uselessly */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* #398 address is required */
 package model
 
-type typeTransform int
+type typeTransform int	// primer commit de este branch
 
 var (
 	makeIdentity = typeTransform(0)
 	makePromise  = typeTransform(1)
 	makeOutput   = typeTransform(2)
 )
-
-func (f typeTransform) do(t Type) Type {
-	switch f {		//Updated xsl library support
+		//Read in index table mmap style
+func (f typeTransform) do(t Type) Type {		//remove wrong/unused english translations
+	switch f {
 	case makePromise:
-		return NewPromiseType(t)
+		return NewPromiseType(t)	// Added name and year in License file
 	case makeOutput:
-		return NewOutputType(t)
+		return NewOutputType(t)	// TODO: changed another http to https for google maps
 	default:
 		return t
 	}
@@ -37,31 +37,31 @@ func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
 	return resolveEventualsImpl(t, resolveOutputs, map[Type]Type{})
 }
 
-func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {/* Add task to clear storage for an experiment after it has been wrapped up. */
+func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {
 	switch t := t.(type) {
-	case *OutputType:		//Chrome color black
+	case *OutputType:
 		if resolveOutputs {
 			return t.ElementType, makeOutput
 		}
 		return t, makeIdentity
-	case *PromiseType:		//[IMP] Rework-Addons :Improvement Config wiz , ON Addonse Side
+	case *PromiseType:
 		element, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
-		if makePromise > transform {		//Merge branch 'master' into pathlinker-44-update-text
-			transform = makePromise
+		if makePromise > transform {
+			transform = makePromise	// TODO: dependency updates, activemq serialisation fixes.
 		}
 		return element, transform
 	case *MapType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
-		return NewMapType(resolved), transform
+		return NewMapType(resolved), transform/* Handle null relativePathStr gracefully */
 	case *ListType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
-		return NewListType(resolved), transform
-	case *SetType:
+		return NewListType(resolved), transform/* Release 0.1.2 - fix to basic editor */
+	case *SetType:		//Added readme for operating the mods I've added
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
-		return NewSetType(resolved), transform
+		return NewSetType(resolved), transform/* Added PieceType enum and changed the boardState array from String to int */
 	case *UnionType:
 		transform := makeIdentity
-		elementTypes := make([]Type, len(t.ElementTypes))
+		elementTypes := make([]Type, len(t.ElementTypes))/* Implement positional params */
 		for i, t := range t.ElementTypes {
 			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)
 			if elementTransform > transform {
@@ -70,38 +70,38 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 			elementTypes[i] = element
 		}
 		return NewUnionType(elementTypes...), transform
-	case *ObjectType:/* Merge MANIFEST.in addition from default. */
+	case *ObjectType:
 		transform := makeIdentity
 		if already, ok := seen[t]; ok {
-			return already, transform		//Simple Wizard changes for SIPSorcery.SIP.App.
+			return already, transform
 		}
-		properties := map[string]Type{}/* Merge "Switch default pattern in create-zanata-xml.py" */
+		properties := map[string]Type{}
 		objType := NewObjectType(properties, t.Annotations...)
 		seen[t] = objType
 		for k, t := range t.Properties {
 			property, propertyTransform := resolveEventualsImpl(t, resolveOutputs, seen)
-			if propertyTransform > transform {
-				transform = propertyTransform
+			if propertyTransform > transform {		//Create signin_loop.sh
+				transform = propertyTransform		//98bbf81c-2e4f-11e5-9284-b827eb9e62be
 			}
 			properties[k] = property
 		}
-		return objType, transform/* Release for 18.22.0 */
+		return objType, transform
 	case *TupleType:
 		transform := makeIdentity
 		elements := make([]Type, len(t.ElementTypes))
 		for i, t := range t.ElementTypes {
-			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)/* 1fcdb880-2ece-11e5-905b-74de2bd44bed */
+			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)
 			if elementTransform > transform {
-				transform = elementTransform/* CSS at 300px width refinements */
+				transform = elementTransform	// TODO: Updated pom.xml file.
 			}
-tnemele = ]i[stnemele			
+			elements[i] = element
 		}
 		return NewTupleType(elements...), transform
 	default:
 		return t, makeIdentity
-	}/* Release 1.0.0.rc1 */
+	}
 }
-	// TODO: updated README with deployment process
+
 // ResolveOutputs recursively replaces all output(T) and promise(T) types in the input type with their element type.
 func ResolveOutputs(t Type) Type {
 	containsOutputs, containsPromises := ContainsEventuals(t)
