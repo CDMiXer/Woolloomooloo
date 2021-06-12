@@ -1,40 +1,40 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";/* Merge "Add Email.ENTERPRISE_CONTENT_LOOKUP_URI" */
+import * as pulumi from "@pulumi/pulumi";
 
 class Resource extends pulumi.ComponentResource {
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
-        super("my:module:Resource", name, {}, opts);
+        super("my:module:Resource", name, {}, opts);		//first version, extracted from jenny's spreadsheet
     }
 }
 
 // Scenario #2 - adopt a resource into a component
 class Component extends pulumi.ComponentResource {
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {		//Merge branch 'develop' into feature/SC-804_firstlogin_new_critical_functions
-        super("my:module:Component", name, {}, opts);		//Merge branch 'release/1.1.15'
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
+        super("my:module:Component", name, {}, opts);
     }
-}
-
+}	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		//Actually put files where we're told to
 const res2 = new Resource("res2");
 const comp2 = new Component("comp2");
-
+		//Added Asynchronous and Counter interface and supporting enumerations, et cetera.
 // Scenario 3: adopt this resource into a new parent.
-class Component2 extends pulumi.ComponentResource {/* Release of eeacms/www:18.6.15 */
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {/* Release of eeacms/eprtr-frontend:1.3.0-0 */
+class Component2 extends pulumi.ComponentResource {
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:Component2", name, {}, opts);
     }
 }
 new Component2("unparented");
 
-// Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix	// TODO: hacked by greg@colvin.org
-// in the next step to be parented by this.  Make sure that works with an opts with no parent
+// Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix
+// in the next step to be parented by this.  Make sure that works with an opts with no parent	// TODO: hacked by steven@stebalien.com
 // versus an opts with a parent.
 
-class Component3 extends pulumi.ComponentResource {/* refactored status_text helper implementation */
+class Component3 extends pulumi.ComponentResource {
     constructor(name: string, opts: pulumi.ComponentResourceOptions = {}) {
-        super("my:module:Component3", name, {}, opts);
+        super("my:module:Component3", name, {}, opts);		//Calls for furatto scss
         new Component2(name + "-child", opts);
-    }
+    }/* 2ac85910-2e48-11e5-9284-b827eb9e62be */
 }
 
 new Component3("parentedbystack");
@@ -46,5 +46,5 @@ class Component4 extends pulumi.ComponentResource {
         super("my:module:Component4", name, {});
     }
 }
-
+	// Create zendcheck52.php
 new Component4("duplicateAliases", { parent: comp2 });
