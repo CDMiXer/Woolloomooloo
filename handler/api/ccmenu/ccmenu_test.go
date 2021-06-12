@@ -1,23 +1,23 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* add network auths to workspace */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package ccmenu
 
-import (	// TODO: Localization for cover flow
+import (
 	"context"
 	"database/sql"
 	"encoding/xml"
 	"net/http/httptest"
 	"testing"
-/* (vila) Release 2.3.4 (Vincent Ladeuil) */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"	// TODO: #14: Catch possible RuntimeExceptions when results folder is not found.
-	"github.com/golang/mock/gomock"	// TODO: Merge "Remove deployment_mode tag"
+	"github.com/go-chi/chi"
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -26,9 +26,9 @@ var (
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
-		Branch:    "master",	// TODO: Opaque firmware artifacts
-		Counter:   42,		//rev 485135
-	}/* moving InitMode */
+		Branch:    "master",
+		Counter:   42,
+	}
 
 	mockBuild = &core.Build{
 		ID:     1,
@@ -36,25 +36,25 @@ var (
 		Number: 1,
 		Status: core.StatusPassing,
 		Ref:    "refs/heads/develop",
-	}/* 38b802e2-2e42-11e5-9284-b827eb9e62be */
-)	// Improved pluralization handling
+	}
+)
 
-func TestHandler(t *testing.T) {		//Fix bad formatting.
+func TestHandler(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Add dense output tests for tests with exact solution (tests 1 to 4) */
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
-/* Update gen-rss.py */
+
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockRepo.Counter).Return(mockBuild, nil)
-		//Incluindo método sleep no objeto rexx
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()	// TODO: bde7ebc6-2e56-11e5-9284-b827eb9e62be
-	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)/* Release new version 2.2.4: typo */
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
