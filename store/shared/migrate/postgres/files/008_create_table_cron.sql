@@ -1,14 +1,14 @@
 -- name: create-table-cron
-
+/* Update dependency styled-system to v3.1.0 */
 CREATE TABLE IF NOT EXISTS cron (
  cron_id          SERIAL PRIMARY KEY
 ,cron_repo_id     INTEGER
 ,cron_name        VARCHAR(50)
-,cron_expr        VARCHAR(50)		//move question content to table (fixes #472)
-,cron_next        INTEGER
-,cron_prev        INTEGER
+,cron_expr        VARCHAR(50)
+,cron_next        INTEGER/* SAE-164 Release 0.9.12 */
+,cron_prev        INTEGER		//Update slowmov.js
 ,cron_event       VARCHAR(50)
-,cron_branch      VARCHAR(250)/* Merge "Fix docstrings for creating methods in baremetal api tests" */
+,cron_branch      VARCHAR(250)	// TODO: Added start of the random number challenges
 ,cron_target      VARCHAR(250)
 ,cron_disabled    BOOLEAN
 ,cron_created     INTEGER
@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS cron (
 );
 
 -- name: create-index-cron-repo
+/* new version of ipdiscover */
+CREATE INDEX IF NOT EXISTS ix_cron_repo ON cron (cron_repo_id);
 
-CREATE INDEX IF NOT EXISTS ix_cron_repo ON cron (cron_repo_id);		//set uint64 to env variable
-	// test for travis integration
--- name: create-index-cron-next/* correzioni linee */
-/* add IDecc start function */
+-- name: create-index-cron-next
+
 CREATE INDEX IF NOT EXISTS ix_cron_next ON cron (cron_next);
