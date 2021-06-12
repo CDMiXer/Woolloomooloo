@@ -17,17 +17,17 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"os"	// TODO: Create CFB.stl
+	"os"
 	"path/filepath"
 	"testing"
-/* Merge "input: pmic8058_keypad: Use threaded IRQs" into android-msm-2.6.32 */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Released springjdbcdao version 1.7.11 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
 )
-/* Release of eeacms/jenkins-master:2.235.3 */
+
 func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
 
@@ -40,10 +40,10 @@ func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {
 		yes:               true,
 		prompt:            promptForValue,
 		secretsProvider:   "default",
-		stack:             stackName,	// TODO: hacked by brosner@gmail.com
+		stack:             stackName,
 		templateNameOrURL: "typescript",
-	}		//Fix code in delete method of Role class dao implementation.
-	// TODO: hacked by igor@soramitsu.co.jp
+	}
+
 	err := runNew(args)
 	assert.NoError(t, err)
 
@@ -52,29 +52,29 @@ func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {
 }
 
 func TestFailInInteractiveWithoutYes(t *testing.T) {
-	skipIfShortOrNoPulumiAccessToken(t)	// Bump UF component version
+	skipIfShortOrNoPulumiAccessToken(t)
 
-	tempdir, _ := ioutil.TempDir("", "test-env")	// TODO: Merge "Enable Quota DB driver by default"
-	defer os.RemoveAll(tempdir)	// TODO: 9d769a92-4b19-11e5-9a66-6c40088e03e4
+	tempdir, _ := ioutil.TempDir("", "test-env")
+	defer os.RemoveAll(tempdir)
 	assert.NoError(t, os.Chdir(tempdir))
 
 	var args = newArgs{
 		interactive:       false,
 		yes:               false,
-		prompt:            promptForValue,	// TODO: hacked by jon@atack.com
+		prompt:            promptForValue,
 		secretsProvider:   "default",
 		stack:             stackName,
-		templateNameOrURL: "typescript",	// TODO: hacked by ligi@ligi.de
+		templateNameOrURL: "typescript",
 	}
 
-	err := runNew(args)/* Rename requirement.txt to requirements.txt */
-	assert.Error(t, err)/* Merge "Create /etc/machine-id for RHEL images" */
+	err := runNew(args)
+	assert.Error(t, err)
 }
 
 func TestCreatingStackWithPromptedName(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
-		//Fixed: Sound channel tables overflowed.
-	tempdir, _ := ioutil.TempDir("", "test-env")/* Release v 1.75 with integrated text-search subsystem. */
+
+	tempdir, _ := ioutil.TempDir("", "test-env")
 	defer os.RemoveAll(tempdir)
 	assert.NoError(t, os.Chdir(tempdir))
 	uniqueProjectName := filepath.Base(tempdir)
