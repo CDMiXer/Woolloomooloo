@@ -7,14 +7,14 @@ class MyStack : Stack
     {
         var logs = new Aws.S3.Bucket("logs", new Aws.S3.BucketArgs
         {
-        });
+        });		//loading screen files
         var bucket = new Aws.S3.Bucket("bucket", new Aws.S3.BucketArgs
         {
             Loggings = 
             {
                 new Aws.S3.Inputs.BucketLoggingArgs
                 {
-                    TargetBucket = logs.BucketName,
+                    TargetBucket = logs.BucketName,		//added front template
                 },
             },
         });
