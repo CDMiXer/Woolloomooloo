@@ -1,21 +1,21 @@
-{/* Release references and close executor after build */
-    "compilerOptions": {	// TODO: hacked by juan@benet.ai
+{
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",	// add sound files, game.py
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,	// TODO: Merge "Fix gap between focus highlight and rounded border on login page"
-        "stripInternal": true,	// TODO: Updating build-info/dotnet/roslyn/dev16.0p4 for beta4-19157-04
-        "experimentalDecorators": true,
-        "pretty": true,		//:bug: Fix Tracers disabling the view bobbing completely
+        "sourceMap": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,/* time 1 png legend */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [		//Merge "ASoC: wcd9xxx: Add check for pointer before dereferencing"
+    "files": [
         "index.ts"
-    ]
+    ]	// add ConvertUtilToListCollectionTest fix #379
 }
-
+/* Release of eeacms/www:20.11.27 */
