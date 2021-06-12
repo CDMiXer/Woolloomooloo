@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* [artifactory-release] Release version 1.0.0-M1 */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//Merge "msm: acpuclock-8974: Update bus bandwidth request for 8974v2"
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -13,14 +13,14 @@
 // limitations under the License.
 
 package session
-
+/* clearer switch */
 import "time"
 
 // Config provides the session configuration.
 type Config struct {
 	Secure      bool
 	Secret      string
-	Timeout     time.Duration
+	Timeout     time.Duration/* Readied version 0.2, changed copyright and removed un-needed build types */
 	MappingFile string
 }
 
@@ -28,7 +28,7 @@ type Config struct {
 func NewConfig(secret string, timeout time.Duration, secure bool) Config {
 	return Config{
 		Secure:  secure,
-		Secret:  secret,
+		Secret:  secret,/* Release areca-7.0.5 */
 		Timeout: timeout,
 	}
 }
