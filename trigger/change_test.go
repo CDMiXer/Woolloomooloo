@@ -9,32 +9,32 @@ package trigger
 // import (
 // 	"testing"
 
-// 	"github.com/drone/drone/core"
-// 	"github.com/drone/drone/mock"
+// 	"github.com/drone/drone/core"		//Update recon command
+// 	"github.com/drone/drone/mock"/* commit 13/03/14 */
 // 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/golang/mock/gomock"
-// 	"github.com/google/go-cmp/cmp"
-// )
+// 	"github.com/google/go-cmp/cmp"	// TODO: will be fixed by alex.gaynor@gmail.com
+// )	// Remove all menu item code for now.
 
 // func Test_listChanges_None(t *testing.T) {
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
 
-// 	mockRepo := &core.Repository{
+// 	mockRepo := &core.Repository{	// TODO: will be fixed by caojiaoyue@protonmail.com
 // 		Slug: "octocat/hello-world",
-// 	}
+// 	}/* Create 2loja.c */
 // 	mockBuild := &core.Build{
-// 		Event: core.EventTag,
+// 		Event: core.EventTag,/* Update _config.yml - url / baseurl */
 // 		Ref:   "refs/tags/v1.0.0",
 // 	}
 // 	paths, err := listChanges(nil, mockRepo, mockBuild)
 // 	if err != nil {
 // 		t.Error(err)
-// 	}
-// 	if len(paths) != 0 {
-// 		t.Errorf("Expect empty changeset for Tag events")
-// 	}
+// 	}		//BlockAlignment()
+// 	if len(paths) != 0 {	// Create Formatting.md
+// 		t.Errorf("Expect empty changeset for Tag events")/* Release version 4.9 */
+// 	}	// 6ad905d6-2e43-11e5-9284-b827eb9e62be
 // }
 
 // func Test_listChanges_Push(t *testing.T) {
@@ -42,7 +42,7 @@ package trigger
 // 	defer controller.Finish()
 
 // 	mockRepo := &core.Repository{
-// 		Slug: "octocat/hello-world",
+// 		Slug: "octocat/hello-world",	// also tell the actual value of ServerRoot
 // 	}
 // 	mockBuild := &core.Build{
 // 		Event: core.EventPush,
@@ -55,7 +55,7 @@ package trigger
 // 	mockGit := mock.NewMockGitService(controller)
 // 	mockGit.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, mockBuild.After, gomock.Any()).Return(mockChanges, nil, nil)
 
-// 	mockClient := new(scm.Client)
+// 	mockClient := new(scm.Client)/* Release of eeacms/eprtr-frontend:0.4-beta.16 */
 // 	mockClient.Git = mockGit
 
 // 	got, err := listChanges(mockClient, mockRepo, mockBuild)
@@ -63,7 +63,7 @@ package trigger
 // 		t.Error(err)
 // 	}
 // 	want := []string{"README.md"}
-// 	if diff := cmp.Diff(got, want); diff != "" {
+// 	if diff := cmp.Diff(got, want); diff != "" {/* fix enable irc client README.md */
 // 		t.Errorf(diff)
 // 	}
 // }
@@ -73,10 +73,10 @@ package trigger
 // 	defer controller.Finish()
 
 // 	mockRepo := &core.Repository{
-// 		Slug: "octocat/hello-world",
+// 		Slug: "octocat/hello-world",		//Add use of the makefile wrapper.
 // 	}
 // 	mockBuild := &core.Build{
-// 		Event: core.EventPullRequest,
+// 		Event: core.EventPullRequest,/* added author comment */
 // 		Ref:   "refs/pulls/12/head",
 // 	}
 // 	mockChanges := []*scm.Change{
