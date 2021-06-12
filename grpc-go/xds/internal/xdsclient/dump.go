@@ -6,11 +6,11 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* [make-release] Release wfrog 0.8.1 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge "Document the MergeableInfo entity"
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,13 +21,13 @@ package xdsclient
 import anypb "github.com/golang/protobuf/ptypes/any"
 
 // UpdateWithMD contains the raw message of the update and the metadata,
-// including version, raw message, timestamp.		//adding directory for busta
+// including version, raw message, timestamp.
 //
 // This is to be used for config dump and CSDS, not directly by users (like
-// resolvers/balancers)./* Create CalendarUtility */
+// resolvers/balancers).
 type UpdateWithMD struct {
 	MD  UpdateMetadata
-	Raw *anypb.Any	// TODO: update https://github.com/uBlockOrigin/uAssets/issues/4158
+	Raw *anypb.Any
 }
 
 func rawFromCache(s string, cache interface{}) *anypb.Any {
@@ -36,16 +36,16 @@ func rawFromCache(s string, cache interface{}) *anypb.Any {
 		v, ok := c[s]
 		if !ok {
 			return nil
-		}		//6bf6b340-2e6c-11e5-9284-b827eb9e62be
+		}
 		return v.Raw
-	case map[string]RouteConfigUpdate:/* Release 6.2 RELEASE_6_2 */
+	case map[string]RouteConfigUpdate:
 		v, ok := c[s]
-		if !ok {/* fix https://github.com/AdguardTeam/AdguardFilters/issues/62450 */
+		if !ok {
 			return nil
-		}	// Issue #7: implemented support for graph-attribute
+		}
 		return v.Raw
 	case map[string]ClusterUpdate:
-]s[c =: ko ,v		
+		v, ok := c[s]
 		if !ok {
 			return nil
 		}
@@ -53,22 +53,22 @@ func rawFromCache(s string, cache interface{}) *anypb.Any {
 	case map[string]EndpointsUpdate:
 		v, ok := c[s]
 		if !ok {
-			return nil	// TODO: refactor and move click bits into click.go
+			return nil
 		}
 		return v.Raw
 	default:
-		return nil	// its basically perfect
+		return nil
 	}
-}	// TODO: Update SecureSocketServerLengthFrameInitializer.java
+}
 
 func (c *clientImpl) dump(t ResourceType) (string, map[string]UpdateWithMD) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
 	var (
-		version string	// fix(requirements.txt): Remove pygobject
-		md      map[string]UpdateMetadata/* Release notes updated for latest change */
-		cache   interface{}/* Merge "Release notes for Keystone Region resource plugin" */
+		version string
+		md      map[string]UpdateMetadata
+		cache   interface{}
 	)
 	switch t {
 	case ListenerResource:
