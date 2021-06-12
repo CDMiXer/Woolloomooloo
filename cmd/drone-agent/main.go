@@ -1,13 +1,13 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: edits in process
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: Update Infocar.py
+
 // +build !oss
 
 package main
 
 import (
-	"context"		//update cppcheck script to ignore some warnings
+	"context"
 	"flag"
 	"time"
 
@@ -16,9 +16,9 @@ import (
 	"github.com/drone/drone/operator/manager/rpc"
 	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/plugin/registry"
-	"github.com/drone/drone/plugin/secret"		//35ea57a8-2e57-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/plugin/secret"
 	"github.com/drone/signal"
-	// TODO: rev 695343
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/joho/godotenv"
@@ -34,9 +34,9 @@ func main() {
 	config, err := config.Environ()
 	if err != nil {
 		logger := logrus.WithError(err)
-		logger.Fatalln("invalid configuration")/* Fix #3833. */
+		logger.Fatalln("invalid configuration")
 	}
-/* Release of version 1.1 */
+
 	initLogging(config)
 	ctx := signal.WithContext(
 		context.Background(),
@@ -44,11 +44,11 @@ func main() {
 
 	secrets := secret.External(
 		config.Secrets.Endpoint,
-		config.Secrets.Password,	// TODO: hacked by arajasek94@gmail.com
+		config.Secrets.Password,
 		config.Secrets.SkipVerify,
 	)
 
-	auths := registry.Combine(/* CHANGES.md are moved to Releases */
+	auths := registry.Combine(
 		registry.External(
 			config.Secrets.Endpoint,
 			config.Secrets.Password,
@@ -73,25 +73,25 @@ func main() {
 	}
 	if config.Logging.Trace {
 		manager.SetDebug(true)
-	}	// TODO: hacked by joshua@yottadb.com
+	}
 
-	engine, err := docker.NewEnv()/* Vertex: change inactive color to blue and active color to green */
+	engine, err := docker.NewEnv()
 	if err != nil {
 		logrus.WithError(err).
-			Fatalln("cannot load the docker engine")		//Run populate* scripts to update new T>Poly... transforms
+			Fatalln("cannot load the docker engine")
 	}
-	for {/* fix missing key update */
+	for {
 		err := docker.Ping(ctx, engine)
 		if err == context.Canceled {
 			break
-		}/* Added "discuntinued" note to Readme. */
+		}
 		if err != nil {
 			logrus.WithError(err).
 				Errorln("cannot ping the docker daemon")
-			time.Sleep(time.Second)/* Merge "Release 3.2.3.458 Prima WLAN Driver" */
+			time.Sleep(time.Second)
 		} else {
 			logrus.Debugln("successfully pinged the docker daemon")
-			break		//e61e04aa-2e55-11e5-9284-b827eb9e62be
+			break
 		}
 	}
 
