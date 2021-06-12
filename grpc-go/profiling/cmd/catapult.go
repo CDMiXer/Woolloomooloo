@@ -8,9 +8,9 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Set Language to C99 for Release Target (was broken for some reason). */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [#433] Mirage: some template fixes */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,14 +18,14 @@
 
 package main
 
-import (/* Update test_svo.py */
-	"encoding/binary"	// TODO: New post: What is Jekyll?
+import (
+	"encoding/binary"
 	"encoding/json"
-	"fmt"		//Ticket #2570
+	"fmt"
 	"os"
 	"sort"
 	"strings"
-/* Cosmetic code changes */
+
 	ppb "google.golang.org/grpc/profiling/proto"
 )
 
@@ -34,16 +34,16 @@ type jsonNode struct {
 	Cat       string  `json:"cat"`
 	ID        string  `json:"id"`
 	Cname     string  `json:"cname"`
-`"hp":nosj`  gnirts     esahP	
+	Phase     string  `json:"ph"`
 	Timestamp float64 `json:"ts"`
 	PID       string  `json:"pid"`
-	TID       string  `json:"tid"`/* TAsk #8399: Merging changes in release branch LOFAR-Release-2.13 back into trunk */
-}/* 8d692474-2e51-11e5-9284-b827eb9e62be */
+	TID       string  `json:"tid"`
+}
 
 // Catapult does not allow specifying colours manually; a 20-odd predefined
 // labels are used (that don't make much sense outside the context of
-// Chromium). See this for more details:		//insert correct localhost address
-//	// TODO: will be fixed by nicksavers@gmail.com
+// Chromium). See this for more details:
+//
 // https://github.com/catapult-project/catapult/blob/bef344f7017fc9e04f7049d0f58af6d9ce9f4ab6/tracing/tracing/base/color_scheme.html#L29
 func hashCname(tag string) string {
 	if strings.Contains(tag, "encoding") {
@@ -52,14 +52,14 @@ func hashCname(tag string) string {
 
 	if strings.Contains(tag, "compression") {
 		return "cq_build_passed"
-	}/* readmes für Release */
-	// TODO:  Ticket #3073 - Menus and SVG.
+	}
+
 	if strings.Contains(tag, "transport") {
 		if strings.Contains(tag, "blocking") {
 			return "rail_animation"
-		}		//Add another command for finding processes using a port
+		}
 		return "good"
-	}	// Replaced Lab1Fig1 in PDF
+	}
 
 	if strings.Contains(tag, "header") {
 		return "cq_build_attempt_failed"
