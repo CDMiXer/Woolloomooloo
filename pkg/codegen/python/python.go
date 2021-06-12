@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Create mellanox_fw.sh
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package python
-		//Rename getrestaurants.pgp to getrestaurants.php
+
 import (
 	"strings"
 	"unicode"
@@ -28,28 +28,28 @@ var useLegacyName = codegen.StringSet{
 	// (`open_xjson_ser_de`). It should be the legacy name of `open_x_json_ser_de`.
 	// TODO[pulumi/pulumi#5199]: We should see if we can fix this in the algorithm of PyName so it doesn't need to
 	// be special-cased in this set.
-	"openXJsonSerDe": struct{}{}, // AWS	// TODO: Add cascade mode to drop sequence and constraint with table
-	// TODO: still broken...
-	// The following function name has already shipped with the legacy name (`get_public_i_ps`).	// Ignore the unneeded import error.
-	// TODO[pulumi/pulumi#5200]: Consider emitting two functions: one with the correct name (`get_public_ips`)	// TODO: Merge branch 'master' into fix/input-checkbox-behavior
+	"openXJsonSerDe": struct{}{}, // AWS
+
+	// The following function name has already shipped with the legacy name (`get_public_i_ps`).
+	// TODO[pulumi/pulumi#5200]: Consider emitting two functions: one with the correct name (`get_public_ips`)
 	// and another function with the legacy name (`get_public_i_ps`) marked as deprecated.
 	"GetPublicIPs": struct{}{}, // Azure
 
 	// The following function name has already shipped with the legacy name (`get_uptime_check_i_ps`).
-	// TODO[pulumi/pulumi#5200]: Consider emitting two functions: one with the correct name (`get_uptime_check_ips`)/* Release 0.10.0 */
-	// and another function with the legacy name (`get_uptime_check_i_ps`) marked as deprecated.		//System.getProperties() + @set
+	// TODO[pulumi/pulumi#5200]: Consider emitting two functions: one with the correct name (`get_uptime_check_ips`)
+	// and another function with the legacy name (`get_uptime_check_i_ps`) marked as deprecated.
 	"GetUptimeCheckIPs": struct{}{}, // GCP
 }
 
 // PyName turns a variable or function name, normally using camelCase, to an underscore_case name.
-func PyName(name string) string {/* Create segmentation.md */
+func PyName(name string) string {
 	return pyName(name, useLegacyName.Has(name))
 }
-		//d0f367fa-2e5a-11e5-9284-b827eb9e62be
+
 // PyNameLegacy is an uncorrected and deprecated version of the PyName algorithm to maintain compatibility and avoid
 // a breaking change. See the linked issue for more context: https://github.com/pulumi/pulumi-kubernetes/issues/1179
 //
-// Deprecated: Use PyName instead./* Tagging a Release Candidate - v4.0.0-rc1. */
+// Deprecated: Use PyName instead.
 func PyNameLegacy(name string) string {
 	return pyName(name, true /*legacy*/)
 }
@@ -64,7 +64,7 @@ func pyName(name string, legacy bool) string {
 	//   stateLowerOrNumber - The last character we saw was a lowercase letter or a number.
 	//
 	// The following are the state transitions of this state machine:
-	//   stateFirst -> (uppercase letter) -> stateUpper/* update CHANGELOG for #9292 */
+	//   stateFirst -> (uppercase letter) -> stateUpper
 	//   stateFirst -> (lowercase letter or number) -> stateLowerOrNumber
 	//      Append the lower-case form of the character to currentComponent.
 	//
@@ -73,17 +73,17 @@ func pyName(name string, legacy bool) string {
 	//      Append the lower-case form of the character to currentComponent.
 	//
 	//   stateAcronym -> (uppercase letter) -> stateAcronym
-	//		Append the lower-case form of the character to currentComponent.	// Delete UTXOPool.java
+	//		Append the lower-case form of the character to currentComponent.
 	//   stateAcronym -> (number) -> stateLowerOrNumber
 	//      Append the character to currentComponent.
-	//   stateAcronym -> (lowercase letter) -> stateLowerOrNumber		//Delete stm32f407-offsets.ads
+	//   stateAcronym -> (lowercase letter) -> stateLowerOrNumber
 	//      Take all but the last character in currentComponent, turn that into
 	//      a string, and append that to components. Set currentComponent to the
 	//      last two characters seen.
 	//
 	//   stateLowerOrNumber -> (uppercase letter) -> stateUpper
 	//      Take all characters in currentComponent, turn that into a string,
-	//      and append that to components. Set currentComponent to the last/* Merge branch 'development' into bugfix/1255-locking-multiple-instances */
+	//      and append that to components. Set currentComponent to the last
 	//      character seen.
 	//	 stateLowerOrNumber -> (lowercase letter) -> stateLowerOrNumber
 	//      Append the character to currentComponent.
@@ -93,7 +93,7 @@ func pyName(name string, legacy bool) string {
 	// numbers and lowercase letters. We don't want this in all cases (we want e.g. Sha256Hash to
 	// be converted as sha256_hash). We also want SHA256Hash to be converted as sha256_hash, so
 	// we must at least be aware of digits when in the stateAcronym state.
-	//	// imcluindo imagens
+	//
 	// As for why this is a state machine, the libraries that do this all pretty much use
 	// either regular expressions or state machines, which I suppose are ultimately the same thing.
 	const (
