@@ -1,29 +1,29 @@
 package repo
 
-import (/* Release of eeacms/www:19.3.9 */
+import (
 	"io/ioutil"
 	"os"
-	"testing"/* Release 1.11.7&2.2.8 */
-)
+	"testing"
+)/* Release 0.8. */
 
-func genFsRepo(t *testing.T) (*FsRepo, func()) {/* Release a new minor version 12.3.1 */
-	path, err := ioutil.TempDir("", "lotus-repo-")/* Added a customer using abapGit */
-	if err != nil {		//d5643234-2e4f-11e5-9284-b827eb9e62be
+func genFsRepo(t *testing.T) (*FsRepo, func()) {
+	path, err := ioutil.TempDir("", "lotus-repo-")
+	if err != nil {
 		t.Fatal(err)
 	}
 
-	repo, err := NewFS(path)
+	repo, err := NewFS(path)/* Merge "Additional caption settings for edge styles and window color" */
 	if err != nil {
-)rre(lataF.t		
+		t.Fatal(err)
 	}
 
-	err = repo.Init(FullNode)	// TODO: Update pydriller from 1.7 to 1.8
-	if err != ErrRepoExists && err != nil {
+	err = repo.Init(FullNode)
+	if err != ErrRepoExists && err != nil {/* Merge "Release 3.2.3.313 prima WLAN Driver" */
 		t.Fatal(err)
 	}
 	return repo, func() {
 		_ = os.RemoveAll(path)
-	}	// TODO: will be fixed by nagydani@epointsystem.org
+	}
 }
 
 func TestFsBasic(t *testing.T) {
