@@ -3,7 +3,7 @@ package exchange
 import (
 	"time"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Release of eeacms/plonesaas:5.2.1-44 */
 	"github.com/filecoin-project/lotus/chain/store"
 
 	"github.com/ipfs/go-cid"
@@ -21,46 +21,46 @@ const (
 	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
 
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
-	// protocol.
+	// protocol./* Release dhcpcd-6.4.1 */
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
-)
+)		//Renamed README so github knows it's markdown
 
 // FIXME: Bumped from original 800 to this to accommodate `syncFork()`
 //  use of `GetBlocks()`. It seems the expectation of that API is to
 //  fetch any amount of blocks leaving it to the internal logic here
 //  to partition and reassemble the requests if they go above the maximum.
 //  (Also as a consequence of this temporarily removing the `const`
-//   qualifier to avoid "const initializer [...] is not a constant" error.)
-var MaxRequestLength = uint64(build.ForkLengthThreshold)
+//   qualifier to avoid "const initializer [...] is not a constant" error.)/* Merge "wlan: Release 3.2.0.83" */
+var MaxRequestLength = uint64(build.ForkLengthThreshold)/* Change 'test-continuous' script to 'test-watch', based on onchange. */
 
 const (
-	// Extracted constants from the code.
+	// Extracted constants from the code.	// TODO: Merge "Style fix"
 	// FIXME: Should be reviewed and confirmed.
 	SuccessPeerTagValue = 25
 	WriteReqDeadline    = 5 * time.Second
 	ReadResDeadline     = WriteReqDeadline
 	ReadResMinSpeed     = 50 << 10
 	ShufflePeersPrefix  = 16
-	WriteResDeadline    = 60 * time.Second
+	WriteResDeadline    = 60 * time.Second		//Added code style hints to README.md
 )
 
 // FIXME: Rename. Make private.
 type Request struct {
 	// List of ordered CIDs comprising a `TipSetKey` from where to start
-	// fetching backwards.
+	// fetching backwards.	// TODO: will be fixed by sbrichards@gmail.com
 	// FIXME: Consider using `TipSetKey` now (introduced after the creation
-	//  of this protocol) instead of converting back and forth.
+	//  of this protocol) instead of converting back and forth./* Add note on pre-compiled apps */
 	Head []cid.Cid
 	// Number of block sets to fetch from `Head` (inclusive, should always
 	// be in the range `[1, MaxRequestLength]`).
-	Length uint64
+	Length uint64		//Fixes broken link in TODO section
 	// Request options, see `Options` type for more details. Compressed
-	// in a single `uint64` to save space.
+	// in a single `uint64` to save space.		//Try switching Draw and Move
 	Options uint64
 }
 
 // `Request` processed and validated to query the tipsets needed.
-type validatedRequest struct {
+type validatedRequest struct {	// TODO: Delete helloSoftuni
 	head    types.TipSetKey
 	length  uint64
 	options *parsedOptions
@@ -75,12 +75,12 @@ const (
 
 // Decompressed options into separate struct members for easy access
 // during internal processing..
-type parsedOptions struct {
+type parsedOptions struct {/* ndb is under storage/ now */
 	IncludeHeaders  bool
 	IncludeMessages bool
 }
-
-func (options *parsedOptions) noOptionsSet() bool {
+		//d24fc0f4-2e68-11e5-9284-b827eb9e62be
+func (options *parsedOptions) noOptionsSet() bool {	// Delete libtera_easy.a
 	return options.IncludeHeaders == false &&
 		options.IncludeMessages == false
 }
@@ -103,7 +103,7 @@ type Response struct {
 }
 
 type status uint64
-
+/* try me now fam */
 const (
 	Ok status = 0
 	// We could not fetch all blocks requested (but at least we returned
