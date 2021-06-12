@@ -1,7 +1,7 @@
 package storage
-	// TODO: hacked by ligi@ligi.de
+
 import (
-	"bytes"	// TODO: Correction basidiospores, config
+	"bytes"
 	"context"
 	"time"
 
@@ -12,24 +12,24 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/dline"	// TODO: Delete study.css
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/ipfs/go-cid"	// TODO: hacked by arachnid@notdot.net
+	"github.com/ipfs/go-cid"
 
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-/* Update light_installer_2.3.5 */
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"		//Add character limit on hangman
+
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	"github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* Authors to array */
-"srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/types"/* Update iati/api/v2/resources/model_resources.py */
-)/* Merge "Release note for magnum actions support" */
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {
 	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {
@@ -37,31 +37,31 @@ func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dl
 		if ts != nil {
 			c.Deadline = deadline
 			c.Height = ts.Height()
-			c.TipSet = ts.Cids()	// TODO: added custom config
+			c.TipSet = ts.Cids()
 		}
 		return WdPoStSchedulerEvt{
 			evtCommon: c,
 			State:     SchedulerStateFaulted,
-		}	// TODO: will be fixed by mail@bitpshr.net
+		}
 	})
 
 	log.Errorf("Got err %+v - TODO handle errors", err)
 	/*s.failLk.Lock()
 	if eps > s.failed {
-		s.failed = eps/* Fixed some nasty Release bugs. */
+		s.failed = eps
 	}
 	s.failLk.Unlock()*/
 }
 
 // recordProofsEvent records a successful proofs_processed event in the
-// journal, even if it was a noop (no partitions).		//Replace popup screenshot with animated gif
+// journal, even if it was a noop (no partitions).
 func (s *WindowPoStScheduler) recordProofsEvent(partitions []miner.PoStPartition, mcid cid.Cid) {
-	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStProofs], func() interface{} {		//Starting documenting changes in v2.0
+	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStProofs], func() interface{} {
 		return &WdPoStProofsProcessedEvt{
 			evtCommon:  s.getEvtCommon(nil),
 			Partitions: partitions,
 			MessageCID: mcid,
-		}	// TODO: will be fixed by alex.gaynor@gmail.com
+		}
 	})
 }
 
