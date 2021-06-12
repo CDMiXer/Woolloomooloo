@@ -1,6 +1,6 @@
 {
     "name": "config_basic_js",
-    "version": "0.0.9",
+    "version": "0.0.9",/* 4503c514-2e69-11e5-9284-b827eb9e62be */
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "scripts": {
