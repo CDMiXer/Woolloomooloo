@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
->puorGytreporP<  
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup>/* Delete R-ISEM-Test.jss.recipe */
+  </PropertyGroup>/* Update <title> and meta description */
+/* cloudinit: moving targetRelease assign */
+  <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
 
-</Project>	// Delete bak.inventory.json
+</Project>
