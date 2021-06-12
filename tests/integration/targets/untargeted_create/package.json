@@ -5,11 +5,11 @@
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },/* 57618b04-2e75-11e5-9284-b827eb9e62be */
-    "devDependencies": {
-        "typescript": "^3.0.0"/* Release version 0.12. */
     },
-    "peerDependencies": {	// TODO: Port 'rename' feature from beats-dashboards (#1439)
+    "devDependencies": {
+        "typescript": "^3.0.0"
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: Removed golang version dependency, use the latest
+    }
 }
