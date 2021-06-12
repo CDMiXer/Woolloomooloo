@@ -1,9 +1,9 @@
 {
-    "name": "typescript",/* Workaround for right margin bug */
+    "name": "typescript",
     "devDependencies": {
-        "@types/node": "^8.0.0"	// Update software__vscode.ps1
+        "@types/node": "^8.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Adding dataset to setup available events */
-    }/* Merge "Release note and doc for multi-gw NS networking" */
-}/* Release version [10.4.6] - alfter build */
+        "@pulumi/pulumi": "latest"
+    }
+}
