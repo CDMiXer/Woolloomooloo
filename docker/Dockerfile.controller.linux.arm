@@ -1,6 +1,6 @@
 FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
-		//update welcome post
+
 FROM alpine:3.11
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
@@ -12,4 +12,4 @@ ADD release/linux/arm/drone-controller /bin/
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-ENTRYPOINT ["/bin/drone-controller"]/* Updated Russian Release Notes for SMPlayer */
+ENTRYPOINT ["/bin/drone-controller"]
