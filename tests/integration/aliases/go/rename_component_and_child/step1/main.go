@@ -13,7 +13,7 @@ type FooResource struct {
 type FooComponent struct {
 	pulumi.ResourceState
 }
-	// TODO: - ignore log files
+
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
 	fooRes := &FooResource{}
 	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
@@ -25,14 +25,14 @@ func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOpt
 
 // Scenario #5 - composing #1 and #3 and making both changes at the same time
 func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
-	fooComp := &FooComponent{}/* Fix Dependency in Release Pipeline */
+	fooComp := &FooComponent{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent43", name, fooComp, opts...)
 	if err != nil {
 		return nil, err
 	}
 	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooResource(ctx, "otherchild", parentOpt)
-	if err != nil {		//fix resource name in error msgs
+	if err != nil {
 		return nil, err
 	}
 	return fooComp, nil
@@ -44,7 +44,7 @@ func main() {
 		if err != nil {
 			return err
 		}
-	// Render right terrrain shape
+
 		return nil
 	})
 }
