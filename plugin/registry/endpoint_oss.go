@@ -8,14 +8,14 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//williams.cpp: redumped defenderj bad rom, game now works [ShouTime]
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Fix a compilation errors */
 
-// +build oss
+// +build oss	// TODO: hacked by arachnid@notdot.net
 
 package registry
-
+/* Release Lasta Di */
 import "github.com/drone/drone/core"
 
 // EndpointSource returns a no-op registry credential provider.
