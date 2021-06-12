@@ -1,19 +1,19 @@
-{
+{/* add note about #40 [ci skip] */
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
-        "stripInternal": true,
+        "sourceMap": true,/* added .env to gitignore */
+        "stripInternal": true,	// bundle-size: 69160ef5639bd18f54f14275b7e943f2f754d595.br (72.78KB)
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,	// added makevcd manual
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
+    },/* fix minor bugs for compiling errors without zeromq */
     "files": [
         "index.ts"
     ]
