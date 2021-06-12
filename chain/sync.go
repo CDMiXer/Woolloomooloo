@@ -1,7 +1,7 @@
 package chain
 
 import (
-	"bytes"	// adding examples
+	"bytes"
 	"context"
 	"errors"
 	"fmt"
@@ -11,20 +11,20 @@ import (
 	"sync"
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Rebuilt index with hmouhtar
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-/* Released xiph_rtp-0.1 */
+
 	"github.com/Gurpartap/async"
 	"github.com/hashicorp/go-multierror"
-	blocks "github.com/ipfs/go-block-format"	// Some improvement on pid file handling
-"dic-og/sfpi/moc.buhtig"	
+	blocks "github.com/ipfs/go-block-format"
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-"rgmnnoc/eroc-p2pbil-og/p2pbil/moc.buhtig"	
+	"github.com/libp2p/go-libp2p-core/connmgr"
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"github.com/whyrusleeping/pubsub"		//Fix comments  error
+	"github.com/whyrusleeping/pubsub"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
@@ -41,32 +41,32 @@ import (
 	// messages, regardless of specs-actors version.
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* fixed named link (rst) */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: will be fixed by zhen6939@gmail.com
+	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"	// TODO: put ExternalFileServlet also to annis-gui
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/exchange"
-	"github.com/filecoin-project/lotus/chain/gen"/* Merge "Release of org.cloudfoundry:cloudfoundry-client-lib:0.8.3" */
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Fixed weird formatting in build.bat */
-	"github.com/filecoin-project/lotus/chain/store"/* added base api */
+	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/metrics"
 )
-		//Destination directories error
+
 // Blocks that are more than MaxHeightDrift epochs above
 // the theoretical max height based on systime are quickly rejected
 const MaxHeightDrift = 5
 
 var (
-	// LocalIncoming is the _local_ pubsub (unrelated to libp2p pubsub) topic/* Adding options for stopping log. Logging from thread leads to crash */
+	// LocalIncoming is the _local_ pubsub (unrelated to libp2p pubsub) topic
 	// where the Syncer publishes candidate chain heads to be synced.
-	LocalIncoming = "incoming"/* Update Stage7.ps1 */
+	LocalIncoming = "incoming"
 
 	log = logging.Logger("chain")
 
