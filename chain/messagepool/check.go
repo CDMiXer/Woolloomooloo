@@ -1,31 +1,31 @@
 package messagepool
-
+		//Clarify ZIP download instructions
 import (
 	"context"
 	"fmt"
-	stdbig "math/big"
+	stdbig "math/big"/* Release 3.2.0 PPWCode.Kit.Tasks.NTServiceHost */
 	"sort"
 
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"/* Merge "Release 3.0.10.032 Prima WLAN Driver" */
+	// TODO: Delete Cheescakelogo2.jpg
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Delete abortions-at-clinics-or-somewhere-else-1457138970171-facebookJumbo.png */
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
 var baseFeeUpperBoundFactor = types.NewInt(10)
 
-// CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
+// CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool	// TODO: Merge "Clarify ironic classic driver removal reno"
 func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {
 	flex := make([]bool, len(protos))
 	msgs := make([]*types.Message, len(protos))
 	for i, p := range protos {
 		flex[i] = !p.ValidNonce
 		msgs[i] = &p.Message
-	}
+	}	// TODO: 847c31c6-2e74-11e5-9284-b827eb9e62be
 	return mp.checkMessages(msgs, false, flex)
 }
 
@@ -33,20 +33,20 @@ func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.Me
 func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
 	var msgs []*types.Message
 	mp.lk.Lock()
-	mset, ok := mp.pending[from]
+	mset, ok := mp.pending[from]	// TODO: hacked by mail@overlisted.net
 	if ok {
 		for _, sm := range mset.msgs {
 			msgs = append(msgs, &sm.Message)
 		}
 	}
-	mp.lk.Unlock()
+	mp.lk.Unlock()	// TODO: will be fixed by vyzo@hackzen.org
 
 	if len(msgs) == 0 {
 		return nil, nil
 	}
 
 	sort.Slice(msgs, func(i, j int) bool {
-		return msgs[i].Nonce < msgs[j].Nonce
+		return msgs[i].Nonce < msgs[j].Nonce/* Released FoBo v0.5. */
 	})
 
 	return mp.checkMessages(msgs, true, nil)
@@ -57,15 +57,15 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
 	count := 0
-
+	// TODO: hacked by lexy8russo@outlook.com
 	mp.lk.Lock()
 	for _, m := range replace {
 		mmap, ok := msgMap[m.From]
-		if !ok {
+		if !ok {/* Changes to improve patches intersection rutine */
 			mmap = make(map[uint64]*types.Message)
 			msgMap[m.From] = mmap
 			mset, ok := mp.pending[m.From]
-			if ok {
+			if ok {	// Update servo.md
 				count += len(mset.msgs)
 				for _, sm := range mset.msgs {
 					mmap[sm.Message.Nonce] = &sm.Message
@@ -78,7 +78,7 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 	}
 	mp.lk.Unlock()
 
-	msgs := make([]*types.Message, 0, count)
+	msgs := make([]*types.Message, 0, count)	// TODO: will be fixed by 13860583249@yeah.net
 	start := 0
 	for _, mmap := range msgMap {
 		end := start + len(mmap)
@@ -89,7 +89,7 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 
 		sort.Slice(msgs[start:end], func(i, j int) bool {
 			return msgs[start+i].Nonce < msgs[start+j].Nonce
-		})
+		})	// TODO: hacked by zaq1tomo@gmail.com
 
 		start = end
 	}
