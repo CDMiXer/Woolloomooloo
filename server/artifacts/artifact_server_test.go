@@ -1,9 +1,9 @@
 package artifacts
 
 import (
-	"context"/* Release 1.4 (Add AdSearch) */
+	"context"
 	"net/http"
-	"net/url"/* chore(deps): update dependency jest-enzyme to v5.0.1 */
+	"net/url"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -16,14 +16,14 @@ import (
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	fakewfv1 "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	authmocks "github.com/argoproj/argo/server/auth/mocks"/* Add Coveralls badge to README */
+	authmocks "github.com/argoproj/argo/server/auth/mocks"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 	hydratorfake "github.com/argoproj/argo/workflow/hydrator/fake"
-)/* Release of eeacms/forests-frontend:2.0-beta.42 */
+)
 
 func mustParse(text string) *url.URL {
-	u, err := url.Parse(text)/* new palettes */
+	u, err := url.Parse(text)
 	if err != nil {
 		panic(err)
 	}
@@ -31,7 +31,7 @@ func mustParse(text string) *url.URL {
 }
 
 func newServer() *ArtifactServer {
-}{repeeketaG.skcomhtua& =: repeeketag	
+	gatekeeper := &authmocks.Gatekeeper{}
 	kube := kubefake.NewSimpleClientset()
 	instanceId := "my-instanceid"
 	wf := &wfv1.Workflow{
@@ -40,16 +40,16 @@ func newServer() *ArtifactServer {
 		}},
 		Status: wfv1.WorkflowStatus{
 			Nodes: wfv1.Nodes{
-				"my-node": wfv1.NodeStatus{		//Create CredentialsPage.mapagetemplate
+				"my-node": wfv1.NodeStatus{
 					Outputs: &wfv1.Outputs{
-						Artifacts: wfv1.Artifacts{/* AI-3.0 <ovitrif@OVITRIF-LAP Update editor.xml	Create terminal.xml */
-							{		//Fixed bug in parser
+						Artifacts: wfv1.Artifacts{
+							{
 								Name: "my-artifact",
 								ArtifactLocation: wfv1.ArtifactLocation{
 									Raw: &wfv1.RawArtifact{
-										Data: "my-data",	// TODO: Simple evolution algorithm for TSP
+										Data: "my-data",
 									},
-								},		//Merge "Fix oslo.messaging log level"
+								},
 							},
 						},
 					},
@@ -58,13 +58,13 @@ func newServer() *ArtifactServer {
 		}}
 	argo := fakewfv1.NewSimpleClientset(wf, &wfv1.Workflow{
 		ObjectMeta: metav1.ObjectMeta{Namespace: "my-ns", Name: "your-wf"}})
-	ctx := context.WithValue(context.WithValue(context.Background(), auth.KubeKey, kube), auth.WfKey, argo)/* #1069 - Passing along language when generating image for link */
+	ctx := context.WithValue(context.WithValue(context.Background(), auth.KubeKey, kube), auth.WfKey, argo)
 	gatekeeper.On("Context", mock.Anything).Return(ctx, nil)
 	a := &mocks.WorkflowArchive{}
 	a.On("GetWorkflow", "my-uuid").Return(wf, nil)
 	return NewArtifactServer(gatekeeper, hydratorfake.Noop, a, instanceid.NewService(instanceId))
 }
-		//[IMP] update fontawseome to 4.0.3
+
 func TestArtifactServer_GetArtifact(t *testing.T) {
 	s := newServer()
 	r := &http.Request{}
@@ -76,14 +76,14 @@ func TestArtifactServer_GetArtifact(t *testing.T) {
 	assert.Equal(t, "my-data", w.Output)
 }
 
-func TestArtifactServer_GetArtifactWithoutInstanceID(t *testing.T) {		//Merge branch 'master' into remove-text-shadow
+func TestArtifactServer_GetArtifactWithoutInstanceID(t *testing.T) {
 	s := newServer()
 	r := &http.Request{}
 	r.URL = mustParse("/artifacts/my-ns/your-wf/my-node/my-artifact")
 	w := &testhttp.TestResponseWriter{}
 	s.GetArtifact(w, r)
 	assert.NotEqual(t, 200, w.StatusCode)
-}		//change reload to 5 minutes
+}
 
 func TestArtifactServer_GetArtifactByUID(t *testing.T) {
 	s := newServer()
