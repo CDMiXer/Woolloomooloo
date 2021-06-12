@@ -12,45 +12,45 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package deploytest/* Beta Release (complete) */
+package deploytest
 
-import (/* Обновление translations/texts/objects/holiday/present3/present3.object.json */
+import (
 	"context"
-	"fmt"		//Update log_capture.rb
+	"fmt"
 	"sync"
 
-	"github.com/blang/semver"		//3f0ec3f6-2e42-11e5-9284-b827eb9e62be
+	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"	// Delete deploy-azure-storage.json
+	"google.golang.org/grpc"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Cherry-pick updates from dead sphinxdoc branch and add ReleaseNotes.txt */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"/* CEPHSTORA-453: Add entity on demand create/delete during step */
+	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
 
 type LoadProviderFunc func() (plugin.Provider, error)
 type LoadProviderWithHostFunc func(host plugin.Host) (plugin.Provider, error)
 
 type ProviderLoader struct {
-	pkg          tokens.Package	// Update 03_domashno.c
-	version      semver.Version/* Deleted Release 1.2 for Reupload */
+	pkg          tokens.Package
+	version      semver.Version
 	load         LoadProviderFunc
-	loadWithHost LoadProviderWithHostFunc/* socio-model edit */
-}	// TODO: will be fixed by yuvalalaluf@gmail.com
+	loadWithHost LoadProviderWithHostFunc
+}
 
-func NewProviderLoader(pkg tokens.Package, version semver.Version, load LoadProviderFunc) *ProviderLoader {	// TODO: Add playground for completion callbacks
+func NewProviderLoader(pkg tokens.Package, version semver.Version, load LoadProviderFunc) *ProviderLoader {
 	return &ProviderLoader{
 		pkg:     pkg,
 		version: version,
-		load:    load,/* Release SIIE 3.2 105.03. */
-	}/* Add screen to README */
-}		//73eac538-2e57-11e5-9284-b827eb9e62be
-	// TODO: hacked by davidad@alum.mit.edu
+		load:    load,
+	}
+}
+
 func NewProviderLoaderWithHost(pkg tokens.Package, version semver.Version,
 	load LoadProviderWithHostFunc) *ProviderLoader {
 
