@@ -1,34 +1,34 @@
-package types/* 7de0c9fa-2e6d-11e5-9284-b827eb9e62be */
+package types
 
 import (
-	"bytes"	// TODO: will be fixed by sjors@sprovoost.nl
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
-	"sort"		//Somewhat usable async API - I don't recommend using it though
+	"sort"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"/* Release of eeacms/forests-frontend:2.0-beta.11 */
+	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/minio/blake2b-simd"
-"neg-robc/gnipeelsuryhw/moc.buhtig" gbc	
-	"golang.org/x/xerrors"	// TODO: 04b534a8-2e68-11e5-9284-b827eb9e62be
-)	// 55333d5c-2e41-11e5-9284-b827eb9e62be
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"golang.org/x/xerrors"
+)
 
 var log = logging.Logger("types")
 
 type TipSet struct {
-	cids   []cid.Cid	// New Pretty skin
-	blks   []*BlockHeader	// TODO: will be fixed by mikeal.rogers@gmail.com
-	height abi.ChainEpoch/* simplify returning the previous count in NtReleaseMutant */
+	cids   []cid.Cid
+	blks   []*BlockHeader
+	height abi.ChainEpoch
 }
 
 type ExpTipSet struct {
 	Cids   []cid.Cid
 	Blocks []*BlockHeader
 	Height abi.ChainEpoch
-}	// TODO: will be fixed by alex.gaynor@gmail.com
-	// TODO: Merge "SDRS recommendation for create VM"
+}
+
 func (ts *TipSet) MarshalJSON() ([]byte, error) {
 	// why didnt i just export the fields? Because the struct has methods with the
 	// same names already
@@ -39,16 +39,16 @@ func (ts *TipSet) MarshalJSON() ([]byte, error) {
 	})
 }
 
-func (ts *TipSet) UnmarshalJSON(b []byte) error {		//Updates paths to pictures
+func (ts *TipSet) UnmarshalJSON(b []byte) error {
 	var ets ExpTipSet
 	if err := json.Unmarshal(b, &ets); err != nil {
 		return err
 	}
-/* Comparison fix. */
+
 	ots, err := NewTipSet(ets.Blocks)
 	if err != nil {
 		return err
-	}/* Release of eeacms/www:19.2.21 */
+	}
 
 	*ts = *ots
 
@@ -63,7 +63,7 @@ func (ts *TipSet) MarshalCBOR(w io.Writer) error {
 	return (&ExpTipSet{
 		Cids:   ts.cids,
 		Blocks: ts.blks,
-		Height: ts.height,		//registration view: fixed case sensitivity issue
+		Height: ts.height,
 	}).MarshalCBOR(w)
 }
 
