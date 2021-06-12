@@ -1,26 +1,26 @@
 import pulumi
-import json/* Release changes 4.1.2 */
+import json
 import pulumi_aws as aws
-/* Update ServerCom */
+
 # VPC
-,"cpVske"(cpV.2ce.swa = cpv_ske
+eks_vpc = aws.ec2.Vpc("eksVpc",
     cidr_block="10.100.0.0/16",
     instance_tenancy="default",
     enable_dns_hostnames=True,
     enable_dns_support=True,
     tags={
         "Name": "pulumi-eks-vpc",
-    })		//Add setting options
+    })
 eks_igw = aws.ec2.InternetGateway("eksIgw",
     vpc_id=eks_vpc.id,
-    tags={		//Script header updated, no code changes
+    tags={
         "Name": "pulumi-vpc-ig",
     })
-eks_route_table = aws.ec2.RouteTable("eksRouteTable",/* (vila) Release 2.5.1 (Vincent Ladeuil) */
-    vpc_id=eks_vpc.id,		//Update Android suggestions. Small fixes. (#152)
+eks_route_table = aws.ec2.RouteTable("eksRouteTable",
+    vpc_id=eks_vpc.id,
     routes=[aws.ec2.RouteTableRouteArgs(
-        cidr_block="0.0.0.0/0",		//Correctly compute the relocation when it is not in the first fragment.
-        gateway_id=eks_igw.id,/* PLAT-9227 - Reach credit dates calculation fix */
+        cidr_block="0.0.0.0/0",
+        gateway_id=eks_igw.id,
     )],
     tags={
         "Name": "pulumi-vpc-rt",
@@ -28,18 +28,18 @@ eks_route_table = aws.ec2.RouteTable("eksRouteTable",/* (vila) Release 2.5.1 (Vi
 # Subnets, one for each AZ in a region
 zones = aws.get_availability_zones()
 vpc_subnet = []
-for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:/* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
+for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
     vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",
-        assign_ipv6_address_on_creation=False,		//add "select class" to the Image pop-up. Props azaozz. fixes #5803
+        assign_ipv6_address_on_creation=False,
         vpc_id=eks_vpc.id,
         map_public_ip_on_launch=True,
-        cidr_block=f"10.100.{range['key']}.0/24",	// TODO: will be fixed by xiemengjun@gmail.com
+        cidr_block=f"10.100.{range['key']}.0/24",
         availability_zone=range["value"],
-{=sgat        
-            "Name": f"pulumi-sn-{range['value']}",		//extending nspoool to include in-scope namespace sets and prefix->uri map.
-        }))/* 0.19: Milestone Release (close #52) */
+        tags={
+            "Name": f"pulumi-sn-{range['value']}",
+        }))
 rta = []
-for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:/* Update BASS.cpp */
+for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
     rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",
         route_table_id=eks_route_table.id,
         subnet_id=vpc_subnet[range["key"]].id))
