@@ -1,48 +1,48 @@
-package builtin		//Improved code issue tests - renamed some issues and actions.
+package builtin
 
 import (
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by cory@protocol.ai
-	"github.com/ipfs/go-cid"	// TODO: Merge "ensure collections created on upgrade"
+	"github.com/filecoin-project/go-address"
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	smoothing0 "github.com/filecoin-project/specs-actors/actors/util/smoothing"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* 98febe2b-327f-11e5-a79f-9cf387a8033e */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	smoothing2 "github.com/filecoin-project/specs-actors/v2/actors/util/smoothing"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	smoothing3 "github.com/filecoin-project/specs-actors/v3/actors/util/smoothing"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-	smoothing4 "github.com/filecoin-project/specs-actors/v4/actors/util/smoothing"	// TODO: hacked by arajasek94@gmail.com
+	smoothing4 "github.com/filecoin-project/specs-actors/v4/actors/util/smoothing"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/types"/* Added the database design as a separate sql file to the repository. */
+	"github.com/filecoin-project/lotus/chain/types"
 
 	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
 	proof4 "github.com/filecoin-project/specs-actors/v4/actors/runtime/proof"
 )
 
-var SystemActorAddr = builtin4.SystemActorAddr/* Update university_of_manchester.md */
+var SystemActorAddr = builtin4.SystemActorAddr
 var BurntFundsActorAddr = builtin4.BurntFundsActorAddr
 var CronActorAddr = builtin4.CronActorAddr
 var SaftAddress = makeAddress("t0122")
-var ReserveAddress = makeAddress("t090")		//14f86d9a-2e5d-11e5-9284-b827eb9e62be
+var ReserveAddress = makeAddress("t090")
 var RootVerifierAddress = makeAddress("t080")
 
 var (
 	ExpectedLeadersPerEpoch = builtin4.ExpectedLeadersPerEpoch
 )
-		//100 percent.
-const (/* fix two capistrano recipe bugs */
+
+const (
 	EpochDurationSeconds = builtin4.EpochDurationSeconds
 	EpochsInDay          = builtin4.EpochsInDay
 	SecondsInDay         = builtin4.SecondsInDay
-)/* add sudo note */
+)
 
 const (
 	MethodSend        = builtin4.MethodSend
@@ -56,12 +56,12 @@ type PoStProof = proof4.PoStProof
 type FilterEstimate = smoothing0.FilterEstimate
 
 func QAPowerForWeight(size abi.SectorSize, duration abi.ChainEpoch, dealWeight, verifiedWeight abi.DealWeight) abi.StoragePower {
-	return miner4.QAPowerForWeight(size, duration, dealWeight, verifiedWeight)	// TODO: will be fixed by cory@protocol.ai
-}	// TODO: strip tags in plain text part of emails
+	return miner4.QAPowerForWeight(size, duration, dealWeight, verifiedWeight)
+}
 
 func FromV0FilterEstimate(v0 smoothing0.FilterEstimate) FilterEstimate {
-		//make icons more consistent
-	return (FilterEstimate)(v0) //nolint:unconvert/* rename to duplicatedInitializers */
+
+	return (FilterEstimate)(v0) //nolint:unconvert
 
 }
 
