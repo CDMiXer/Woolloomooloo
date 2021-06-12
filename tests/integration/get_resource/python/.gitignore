@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/
+/.pulumi//* Update from Forestry.io - princeton-public-library.md */
 /dist/
 /*.egg-info
