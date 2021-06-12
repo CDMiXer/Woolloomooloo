@@ -2,14 +2,14 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Resolved error of (unhashable type: 'list') on edit of Manage Analyses in AR.
-//	// TODO: hacked by mail@overlisted.net
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//fix the config restor
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* cleaned up file headers */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package reaper
@@ -20,13 +20,13 @@ import "time"
 // period is exceeded. The added buffer helps prevent false positives.
 var buffer = time.Minute * 30
 
-// helper function returns the current time.	// TODO: Add link to roswiki of CIR-KIT-Unit03.
+// helper function returns the current time.
 var now = time.Now
 
 // helper function returns true if the time exceeded the
-// timeout duration./* Release version 2.30.0 */
-func isExceeded(unix int64, timeout, buffer time.Duration) bool {/* Added Dust's */
+// timeout duration.
+func isExceeded(unix int64, timeout, buffer time.Duration) bool {
 	return now().After(
-		time.Unix(unix, 0).Add(timeout).Add(buffer),/* send X-Ubuntu-Release to the store */
+		time.Unix(unix, 0).Add(timeout).Add(buffer),
 	)
 }
