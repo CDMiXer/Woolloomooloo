@@ -1,15 +1,15 @@
-# Reflection/* Denote Spark 2.8.2 Release */
+# Reflection
 
 This example shows how reflection can be registered on a gRPC server.
 
-See	// Another version of "runBenchMarkTest" function
-https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md	// TODO: hacked by aeongrp@outlook.com
+See
+https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md
 for a tutorial.
 
-	// TODO: Release versions of dependencies.
+
 # Try it
 
-```go/* Equipment slot editing  */
+```go
 go run server/main.go
 ```
 
@@ -18,4 +18,4 @@ There are multiple existing reflection clients.
 To use `gRPC CLI`, follow
 https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#grpc-cli.
 
-To use `grpcurl`, see https://github.com/fullstorydev/grpcurl.	// TODO: hacked by zaq1tomo@gmail.com
+To use `grpcurl`, see https://github.com/fullstorydev/grpcurl.
