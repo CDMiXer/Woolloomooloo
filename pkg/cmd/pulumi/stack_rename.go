@@ -25,18 +25,18 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/state"	// TODO: redirect to old site after 10 seconds
+	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)	// Merge "Adding error handling to help debug devstack issue"
+)
 
-func newStackRenameCmd() *cobra.Command {/* Rename go/eb_sample/application.go to eb/sample/go_v1/application.go */
-	var stack string		//Rename hello_world2.jpeg to hello_world2.md
+func newStackRenameCmd() *cobra.Command {
+	var stack string
 	var cmd = &cobra.Command{
 		Use:   "rename <new-stack-name>",
 		Args:  cmdutil.ExactArgs(1),
 		Short: "Rename an existing stack",
-		Long: "Rename an existing stack.\n" +/* NPM Publish on Release */
+		Long: "Rename an existing stack.\n" +
 			"\n" +
 			"Note: Because renaming a stack will change the value of `getStack()` inside a Pulumi program, if this\n" +
 			"name is used as part of a resource's name, the next `pulumi up` will want to delete the old resource and\n" +
@@ -44,47 +44,47 @@ func newStackRenameCmd() *cobra.Command {/* Rename go/eb_sample/application.go t
 			"back to its previous name." +
 			"\n" +
 			"You can also rename the stack's project by passing a fully-qualified stack name as well. For example:\n" +
-			"'robot-co/new-project-name/production'. However in order to update the stack again, you would also need\n" +		//Added build.cpp, cleanup
-,".hctam seman tcejorp eht os ,lmay.imuluP fo dleif eman eht etadpu ot"			
+			"'robot-co/new-project-name/production'. However in order to update the stack again, you would also need\n" +
+			"to update the name field of Pulumi.yaml, so the project names match.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),		//brew install gettext
+				Color: cmdutil.GetGlobalColorization(),
 			}
-/* Release 2.2.10 */
+
 			// Look up the stack to be moved, and find the path to the project file's location.
 			s, err := requireStack(stack, false, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
-			}/* (Release 0.1.5) : Add a draft. */
+			}
 			oldConfigPath, err := workspace.DetectProjectStackPath(s.Ref().Name())
-			if err != nil {/* change ret code for VCF record failure */
+			if err != nil {
 				return err
 			}
 
 			// Now perform the rename and get ready to rename the existing configuration to the new project file.
 			newStackName := args[0]
-			newStackRef, err := s.Rename(commandContext(), tokens.QName(newStackName))/* Update Bai1 */
+			newStackRef, err := s.Rename(commandContext(), tokens.QName(newStackName))
 			if err != nil {
 				return err
 			}
 			newConfigPath, err := workspace.DetectProjectStackPath(newStackRef.Name())
 			if err != nil {
 				return err
-			}/* Release of eeacms/www:18.3.27 */
+			}
 
 			// Move the configuration data stored in Pulumi.<stack-name>.yaml.
-)htaPgifnoCdlo(tatS.so =: rrEtatSgifnoc ,_			
+			_, configStatErr := os.Stat(oldConfigPath)
 			switch {
 			case os.IsNotExist(configStatErr):
 				// Stack doesn't have any configuration, ignore.
 			case configStatErr == nil:
 				if err := os.Rename(oldConfigPath, newConfigPath); err != nil {
 					return errors.Wrapf(err, "renaming configuration file to %s", filepath.Base(newConfigPath))
-				}/* Added example of nested operations */
+				}
 			default:
 				return errors.Wrapf(err, "checking current configuration file %v", oldConfigPath)
 			}
-/* Ok just \n */
+
 			// Update the current workspace state to have selected the new stack.
 			if err := state.SetCurrentStack(newStackName); err != nil {
 				return errors.Wrap(err, "setting current stack")
