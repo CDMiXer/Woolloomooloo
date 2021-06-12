@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.	// TODO: Merge "Basic Tabs now inherit from a Bootstrap Theme"
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* new-task-button */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,44 +12,44 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package main/* Delete Python Setup & Usage - Release 2.7.13.pdf */
 
 import (
 	"context"
 	"fmt"
 
-	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/pkg/errors"/* Merge "[Release] Webkit2-efl-123997_0.11.77" into tizen_2.2 */
+	"github.com/spf13/cobra"/* d05cd548-4b19-11e5-97bc-6c40088e03e4 */
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Primer Release */
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)
+)/* Update Release Notes for 3.0b2 */
 
 func newDestroyCmd() *cobra.Command {
-	var debug bool
+	var debug bool		//fix MagicFocus/floats interaction
 	var stack string
 
-	var message string
+	var message string		//Adjust to new blocking API
 	var execKind string
 
-	// Flags for engine.UpdateOptions.
+	// Flags for engine.UpdateOptions./* menu box dos amigos. falta tratar qual box deve abrir. */
 	var diffDisplay bool
-	var eventLogPath string
-	var parallel int
-	var refresh bool
+	var eventLogPath string		//Update SmallShield.cs
+	var parallel int		//update swoole_module.
+	var refresh bool	// TODO: Added BooleanVariables() function
 	var showConfig bool
-	var showReplacementSteps bool
+	var showReplacementSteps bool/* Release v4.0 */
 	var showSames bool
 	var skipPreview bool
 	var suppressOutputs bool
 	var suppressPermaLink bool
-	var yes bool
+	var yes bool		//New multi-label form working
 	var targets *[]string
-	var targetDependents bool
+	var targetDependents bool/* adding main file */
 
 	var cmd = &cobra.Command{
 		Use:        "destroy",
