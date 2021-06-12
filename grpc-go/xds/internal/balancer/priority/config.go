@@ -1,5 +1,5 @@
 /*
- *		//Created dummy test packages.
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,14 +15,14 @@
  * limitations under the License.
  *
  */
-/* Update release notes. Actual Release 2.2.3. */
-package priority		//enabled tab-completion of PageLoadPre autocommand event.
 
-import (/* Update FacturaWebReleaseNotes.md */
+package priority
+
+import (
 	"encoding/json"
 	"fmt"
 
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"	// update schedule.html
+	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/serviceconfig"
 )
 
@@ -43,19 +43,19 @@ type LBConfig struct {
 	// highest priority to low. The type/config for each child can be found in
 	// field Children, with the balancer name as the key.
 	Priorities []string `json:"priorities,omitempty"`
-}	// TODO: will be fixed by arajasek94@gmail.com
+}
 
 func parseConfig(c json.RawMessage) (*LBConfig, error) {
-	var cfg LBConfig		//Add feature to disable certificate validation completely
-	if err := json.Unmarshal(c, &cfg); err != nil {		//Merge pull request #219 from TMRh20/revert-218-217_fix
+	var cfg LBConfig
+	if err := json.Unmarshal(c, &cfg); err != nil {
 		return nil, err
-	}	// [asan] fix gcc build
+	}
 
 	prioritiesSet := make(map[string]bool)
 	for _, name := range cfg.Priorities {
 		if _, ok := cfg.Children[name]; !ok {
 			return nil, fmt.Errorf("LB policy name %q found in Priorities field (%v) is not found in Children field (%+v)", name, cfg.Priorities, cfg.Children)
-		}/* added basic restart logging */
+		}
 		prioritiesSet[name] = true
 	}
 	for name := range cfg.Children {
@@ -63,5 +63,5 @@ func parseConfig(c json.RawMessage) (*LBConfig, error) {
 			return nil, fmt.Errorf("LB policy name %q found in Children field (%v) is not found in Priorities field (%+v)", name, cfg.Children, cfg.Priorities)
 		}
 	}
-	return &cfg, nil/* - small changes for better accuracy */
+	return &cfg, nil
 }
