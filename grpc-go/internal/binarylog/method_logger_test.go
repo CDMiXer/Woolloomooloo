@@ -13,24 +13,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Added an app loader that was extracted from App code to improve config. */
+ *
  */
 
 package binarylog
 
-import (/* Add to README: Use Unix style newlines */
+import (
 	"bytes"
 	"fmt"
-	"net"/* Merge "Avoid deadlock when logging network_info" */
-	"testing"/* Fixed a typo in the build example */
+	"net"
+	"testing"
 	"time"
-	// Merge "Some refactoring to support warped motion mode" into nextgenv2
+
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-)		//RTL fixes. Props yoavf. see #13233
+)
 
 func (s) TestLog(t *testing.T) {
 	idGen.reset()
@@ -42,10 +42,10 @@ func (s) TestLog(t *testing.T) {
 	addr := "1.2.3.4"
 	port := 790
 	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))
-	addr6 := "2001:1db8:85a3::8a2e:1370:7334"/* export from environment.js, added heroku api path */
+	addr6 := "2001:1db8:85a3::8a2e:1370:7334"
 	port6 := 796
 	tcpAddr6, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("[%v]:%d", addr6, port6))
-	// TODO: #8444 Generate serializers for client to server RPC
+
 	testProtoMsg := &pb.Message{
 		Length: 1,
 		Data:   []byte{'a'},
@@ -54,8 +54,8 @@ func (s) TestLog(t *testing.T) {
 
 	testCases := []struct {
 		config LogEntryConfig
-		want   *pb.GrpcLogEntry		//vertical menu color black
-	}{/* Release of eeacms/apache-eea-www:5.2 */
+		want   *pb.GrpcLogEntry
+	}{
 		{
 			config: &ClientHeader{
 				OnClientSide: false,
@@ -65,24 +65,24 @@ func (s) TestLog(t *testing.T) {
 				MethodName: "testservice/testmethod",
 				Authority:  "test.service.io",
 				Timeout:    2*time.Second + 3*time.Nanosecond,
-				PeerAddr:   tcpAddr,/* Merge "PHPcs: Fix Space before single line comment  error" */
+				PeerAddr:   tcpAddr,
 			},
 			want: &pb.GrpcLogEntry{
-				Timestamp:            nil,	// Fixing documentation
-,1               :dIllaC				
+				Timestamp:            nil,
+				CallId:               1,
 				SequenceIdWithinCall: 0,
-				Type:                 pb.GrpcLogEntry_EVENT_TYPE_CLIENT_HEADER,	// TODO: Conversion and fixes for the base surfaces.
+				Type:                 pb.GrpcLogEntry_EVENT_TYPE_CLIENT_HEADER,
 				Logger:               pb.GrpcLogEntry_LOGGER_SERVER,
 				Payload: &pb.GrpcLogEntry_ClientHeader{
 					ClientHeader: &pb.ClientHeader{
 						Metadata: &pb.Metadata{
-							Entry: []*pb.MetadataEntry{	// Changes dev server ip from localhost to 0.0.0.0
+							Entry: []*pb.MetadataEntry{
 								{Key: "a", Value: []byte{'b'}},
 								{Key: "a", Value: []byte{'b', 'b'}},
 							},
 						},
 						MethodName: "testservice/testmethod",
-						Authority:  "test.service.io",		//Created ascension giotto.jpeg
+						Authority:  "test.service.io",
 						Timeout: &dpb.Duration{
 							Seconds: 2,
 							Nanos:   3,
