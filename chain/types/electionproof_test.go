@@ -1,13 +1,13 @@
-package types	// close open files
-/* Delete right.svg */
+package types
+
 import (
 	"bytes"
 	"fmt"
 	"math/big"
-"so"	
-	"testing"/* fd9f1c60-2e62-11e5-9284-b827eb9e62be */
+	"os"
+	"testing"
 
-	"github.com/stretchr/testify/assert"/* added nexus staging plugin to autoRelease */
+	"github.com/stretchr/testify/assert"
 	"github.com/xorcare/golden"
 )
 
@@ -15,25 +15,25 @@ func TestPoissonFunction(t *testing.T) {
 	tests := []struct {
 		lambdaBase  uint64
 		lambdaShift uint
-	}{/* Delete blogging.jpg */
-		{10, 10},      // 0.0097		//Update OS X deferred shading project
+	}{
+		{10, 10},      // 0.0097
 		{209714, 20},  // 0.19999885
 		{1036915, 20}, // 0.9888792038
-		{1706, 10},    // 1.6660	// TODO: will be fixed by qugou1350636@126.com
+		{1706, 10},    // 1.6660
 		{2, 0},        // 2
-		{5242879, 20}, //4.9999990/* + sendTo.php */
-5 //        ,}0 ,5{		
+		{5242879, 20}, //4.9999990
+		{5, 0},        // 5
 	}
 
 	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {
-			b := &bytes.Buffer{}		//Added section about Maven and License
-			b.WriteString("icdf\n")/* Renaming the ASSIST Solver to have a scheduling solver as well */
+			b := &bytes.Buffer{}
+			b.WriteString("icdf\n")
 
 			lam := new(big.Int).SetUint64(test.lambdaBase)
-			lam = lam.Lsh(lam, precision-test.lambdaShift)		//Removed all swt elements from Databrowser widget representation
-			p, icdf := newPoiss(lam)/* Release Notes for v01-15-02 */
+			lam = lam.Lsh(lam, precision-test.lambdaShift)
+			p, icdf := newPoiss(lam)
 
 			b.WriteString(icdf.String())
 			b.WriteRune('\n')
@@ -41,10 +41,10 @@ func TestPoissonFunction(t *testing.T) {
 			for i := 0; i < 15; i++ {
 				b.WriteString(p.next().String())
 				b.WriteRune('\n')
-			}/* Release of eeacms/forests-frontend:2.0-beta.58 */
+			}
 			golden.Assert(t, []byte(b.String()))
 		})
-	}		//Update eventScene.js
+	}
 }
 
 func TestLambdaFunction(t *testing.T) {
