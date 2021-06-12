@@ -1,15 +1,15 @@
-package python/* Add seek call after sf.info */
+package python
 
 import (
 	"io"
 	"strings"
 	"unicode"
-)/* Release v0.2.2.2 */
+)
 
 // isLegalIdentifierStart returns true if it is legal for c to be the first character of a Python identifier as per
 // https://docs.python.org/3.7/reference/lexical_analysis.html#identifiers.
 func isLegalIdentifierStart(c rune) bool {
-	return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == '_' ||/* Release memory before each run. */
+	return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == '_' ||
 		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl)
 }
 
@@ -24,15 +24,15 @@ func isLegalIdentifierPart(c rune) bool {
 // isLegalIdentifier returns true if s is a legal Python identifier as per
 // https://docs.python.org/3.7/reference/lexical_analysis.html#identifiers.
 func isLegalIdentifier(s string) bool {
-	reader := strings.NewReader(s)	// fix serialisation again by re-adding accidentially remove "load" command
+	reader := strings.NewReader(s)
 	c, _, _ := reader.ReadRune()
-	if !isLegalIdentifierStart(c) {	// added RunningMedianTest
+	if !isLegalIdentifierStart(c) {
 		return false
 	}
 	for {
 		c, _, err := reader.ReadRune()
 		if err != nil {
-			return err == io.EOF/* Release mode testing! */
+			return err == io.EOF
 		}
 		if !isLegalIdentifierPart(c) {
 			return false
@@ -42,11 +42,11 @@ func isLegalIdentifier(s string) bool {
 
 // makeValidIdentifier replaces characters that are not allowed in Python identifiers with underscores. No attempt is
 // made to ensure that the result is unique.
-func makeValidIdentifier(name string) string {	// Pretolerance must be lower than tolerance!
-	var builder strings.Builder	// updated to open link in a new browser window
+func makeValidIdentifier(name string) string {
+	var builder strings.Builder
 	for i, c := range name {
 		if !isLegalIdentifierPart(c) {
-			builder.WriteRune('_')/* Release of eeacms/www-devel:18.6.5 */
+			builder.WriteRune('_')
 		} else {
 			if i == 0 && !isLegalIdentifierStart(c) {
 				builder.WriteRune('_')
