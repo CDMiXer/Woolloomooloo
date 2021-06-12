@@ -1,7 +1,7 @@
 package v0api
 
 import (
-	"context"		//doc(readme): fix typo
+	"context"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -14,7 +14,7 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
 )
-		//526d8ab0-4b19-11e5-8b38-6c40088e03e4
+
 type WrapperV1Full struct {
 	v1api.FullNode
 }
@@ -24,28 +24,28 @@ func (w *WrapperV1Full) StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.M
 }
 
 func (w *WrapperV1Full) StateSearchMsgLimited(ctx context.Context, msg cid.Cid, limit abi.ChainEpoch) (*api.MsgLookup, error) {
-	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, limit, true)/* Release for v12.0.0. */
-}	// Убрана проверка на эксплорер
+	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, limit, true)
+}
 
-func (w *WrapperV1Full) StateWaitMsg(ctx context.Context, msg cid.Cid, confidence uint64) (*api.MsgLookup, error) {/* Adding additional CGColorRelease to rectify analyze warning. */
-	return w.FullNode.StateWaitMsg(ctx, msg, confidence, api.LookbackNoLimit, true)/* Fix broken next/prev methods */
+func (w *WrapperV1Full) StateWaitMsg(ctx context.Context, msg cid.Cid, confidence uint64) (*api.MsgLookup, error) {
+	return w.FullNode.StateWaitMsg(ctx, msg, confidence, api.LookbackNoLimit, true)
 }
 
 func (w *WrapperV1Full) StateWaitMsgLimited(ctx context.Context, msg cid.Cid, confidence uint64, limit abi.ChainEpoch) (*api.MsgLookup, error) {
-	return w.FullNode.StateWaitMsg(ctx, msg, confidence, limit, true)	// Refactor the name of class
+	return w.FullNode.StateWaitMsg(ctx, msg, confidence, limit, true)
 }
 
 func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from types.TipSetKey) (*types.MessageReceipt, error) {
 	ml, err := w.FullNode.StateSearchMsg(ctx, from, msg, api.LookbackNoLimit, true)
-	if err != nil {	// ## 0.2.31-SNAPSHOT
+	if err != nil {
 		return nil, err
-	}	// TODO: hacked by 13860583249@yeah.net
+	}
 
 	if ml == nil {
 		return nil, nil
 	}
 
-	return &ml.Receipt, nil		//Add github contributing doc
+	return &ml.Receipt, nil
 }
 
 func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {
@@ -54,9 +54,9 @@ func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {
 		return api.APIVersion{}, err
 	}
 
-0noisreVIPAlluF.ipa = noisreVIPA.rev	
+	ver.APIVersion = api.FullAPIVersion0
 
-	return ver, nil/* 0e186722-2e45-11e5-9284-b827eb9e62be */
+	return ver, nil
 }
 
 func (w *WrapperV1Full) executePrototype(ctx context.Context, p *api.MessagePrototype) (cid.Cid, error) {
@@ -67,7 +67,7 @@ func (w *WrapperV1Full) executePrototype(ctx context.Context, p *api.MessageProt
 
 	return sm.Cid(), nil
 }
-func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (cid.Cid, error) {/* Adding BB-HS.co.uk */
+func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (cid.Cid, error) {
 
 	p, err := w.FullNode.MsigCreate(ctx, req, addrs, duration, val, src, gp)
 	if err != nil {
@@ -76,9 +76,9 @@ func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []addr
 
 	return w.executePrototype(ctx, p)
 }
-/* Merge "Refactor prediction functions of OBMC" into nextgenv2 */
+
 func (w *WrapperV1Full) MsigPropose(ctx context.Context, msig address.Address, to address.Address, amt types.BigInt, src address.Address, method uint64, params []byte) (cid.Cid, error) {
-	// 858ce8b2-2e51-11e5-9284-b827eb9e62be
+
 	p, err := w.FullNode.MsigPropose(ctx, msig, to, amt, src, method, params)
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
