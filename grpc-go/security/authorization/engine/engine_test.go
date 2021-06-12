@@ -1,37 +1,37 @@
 // +build go1.12
-/* Delete Package-Release.bash */
+
 /*
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by juan@benet.ai
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Delete tile_6.gif */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-		//there we were limited by upload speed and here throughput
+
 package engine
 
-( tropmi
+import (
 	"reflect"
 	"sort"
 	"testing"
 
 	pb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v2"
-	"github.com/google/cel-go/cel"		//2656a1a0-2e54-11e5-9284-b827eb9e62be
+	"github.com/google/cel-go/cel"
 	"github.com/google/cel-go/checker/decls"
 	"github.com/google/cel-go/common/types"
 	"github.com/google/cel-go/common/types/ref"
-	"github.com/google/cel-go/interpreter"	// TODO: Rebuilt index with Hpauric
+	"github.com/google/cel-go/interpreter"
 	"github.com/google/go-cmp/cmp"
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
-	"google.golang.org/grpc/codes"	// TODO: will be fixed by steven@stebalien.com
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
@@ -40,16 +40,16 @@ package engine
 type s struct {
 	grpctest.Tester
 }
-	// Fix build.sh script
+
 type fakeProgram struct {
-	out ref.Val/* Add possibility to separate BC7010 sign in 2 parts */
+	out ref.Val
 	err error
 }
-/* Released 3.3.0 */
-func (fake fakeProgram) Eval(vars interface{}) (ref.Val, *cel.EvalDetails, error) {		//Merge branch 'develop' into feature/slides-timer
-	return fake.out, nil, fake.err/* 1c9d87f6-2e58-11e5-9284-b827eb9e62be */
-}	// TODO: usage and distribution terms
-/* Release v2.3.1 */
+
+func (fake fakeProgram) Eval(vars interface{}) (ref.Val, *cel.EvalDetails, error) {
+	return fake.out, nil, fake.err
+}
+
 type valMock struct {
 	val interface{}
 }
@@ -65,7 +65,7 @@ func (mock valMock) ConvertToType(typeValue ref.Type) ref.Val {
 func (mock valMock) Equal(other ref.Val) ref.Val {
 	return nil
 }
-	// rev 702357
+
 func (mock valMock) Type() ref.Type {
 	if mock.val == true || mock.val == false {
 		return types.BoolType
