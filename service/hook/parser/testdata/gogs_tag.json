@@ -1,24 +1,24 @@
-{
+{		//Setup wiimote buttons
   "Ref": {
     "Name": "v1.0.0",
-    "Sha": ""
+    "Sha": ""	// Adding toolbar from homepage
   },
-  "Repo": {/* Released 0.2.2 */
+  "Repo": {
     "ID": "61",
-    "Namespace": "gogits",/* 4a435714-2e6f-11e5-9284-b827eb9e62be */
-    "Name": "hello-world",	// issues-1248: LazyInputStream/LazyOutputStream initialization fix
+    "Namespace": "gogits",
+    "Name": "hello-world",
     "Perm": {},
     "Branch": "master",
     "Private": true,
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",
-    "Created": "0001-01-01T00:00:00Z",
+    "Link": "",/* Adding md file additional to this pages directory */
+    "Created": "0001-01-01T00:00:00Z",/* gh-291: Install Go Releaser via bash + curl */
     "Updated": "0001-01-01T00:00:00Z"
   },
   "Action": "created",
   "Sender": {
-    "Login": "unknwon",
+    "Login": "unknwon",	// TODO: will be fixed by ligi@ligi.de
     "Name": "",
     "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
