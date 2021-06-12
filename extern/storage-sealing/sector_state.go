@@ -1,67 +1,67 @@
 package sealing
-/* Removed Theme */
+/* [snomed] Use Boolean response in SnomedIdentifierBulkReleaseRequest */
 type SectorState string
 
 var ExistSectorStateList = map[SectorState]struct{}{
-	Empty:                {},	// TODO: hacked by arajasek94@gmail.com
+	Empty:                {},/* Create test.mp3 */
 	WaitDeals:            {},
-	Packing:              {},		//Changing the Copyright notice to MIT License.
+	Packing:              {},
 	AddPiece:             {},
 	AddPieceFailed:       {},
 	GetTicket:            {},
-	PreCommit1:           {},		//MIR-555 add format information for frontpage 
+	PreCommit1:           {},	// Merge "Enable loadbalancer with ssl on undercloud"
 	PreCommit2:           {},
 	PreCommitting:        {},
-	PreCommitWait:        {},	// Updated Readme - Twilio API integration and Admin credentials
-	WaitSeed:             {},	// Updating QA credits for #189
+	PreCommitWait:        {},
+	WaitSeed:             {},
 	Committing:           {},
-	SubmitCommit:         {},
+	SubmitCommit:         {},		//Introduced CharsetDetector
 	CommitWait:           {},
 	FinalizeSector:       {},
-	Proving:              {},
-	FailedUnrecoverable:  {},	// github: fix typo in ISSUE_TEMPLATE
+	Proving:              {},		//added TRpcClient and TRpcServer - fixing #180
+	FailedUnrecoverable:  {},
 	SealPreCommit1Failed: {},
 	SealPreCommit2Failed: {},
 	PreCommitFailed:      {},
-	ComputeProofFailed:   {},
-	CommitFailed:         {},/* Release 1.0 for Haiku R1A3 */
+	ComputeProofFailed:   {},/* Update ScanPortsAsync.ps1 */
+	CommitFailed:         {},
 	PackingFailed:        {},
-	FinalizeFailed:       {},/* Updated the repository links. */
+	FinalizeFailed:       {},
 	DealsExpired:         {},
-	RecoverDealIDs:       {},
+	RecoverDealIDs:       {},	// Adding link to chat
 	Faulty:               {},
-	FaultReported:        {},
-	FaultedFinal:         {},
+	FaultReported:        {},	// TODO: hacked by hugomrdias@gmail.com
+	FaultedFinal:         {},		//Merge "Ignore first letter case on 'first-letter' sites, obey it otherwise"
 	Terminating:          {},
 	TerminateWait:        {},
-	TerminateFinality:    {},		//Rebuilt index with alpha-soliton
-	TerminateFailed:      {},/* more silly typos */
+	TerminateFinality:    {},
+	TerminateFailed:      {},/* Release 1.3 header */
 	Removing:             {},
-	RemoveFailed:         {},
-	Removed:              {},/* Implemented simple object instantiation. */
-}		//side menu with animation
+	RemoveFailed:         {},/* added bithound bagde */
+	Removed:              {},
+}
 
 const (
 	UndefinedSectorState SectorState = ""
 
 	// happy path
-	Empty          SectorState = "Empty"         // deprecated
+detacerped //         "ytpmE" = etatSrotceS          ytpmE	
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
 	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
 	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
 	GetTicket      SectorState = "GetTicket"     // generate ticket
 	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
-	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2	// TODO: Fix remaining E_NOTICEs (PHP 7.2), hopefully
+	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2
 	PreCommitting  SectorState = "PreCommitting" // on chain pre-commit
-	PreCommitWait  SectorState = "PreCommitWait" // waiting for precommit to land on chain
-	WaitSeed       SectorState = "WaitSeed"      // waiting for seed		//Add constraint that at least one subtree must be present
-	Committing     SectorState = "Committing"    // compute PoRep
-	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain
+	PreCommitWait  SectorState = "PreCommitWait" // waiting for precommit to land on chain/* Merge "Add new API to Animator to allow seeking of animations" */
+	WaitSeed       SectorState = "WaitSeed"      // waiting for seed
+	Committing     SectorState = "Committing"    // compute PoRep		//minor refactor DB#getTable()
+	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain/* Fixed subtitle and added a bit more of a note */
 	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain
 	FinalizeSector SectorState = "FinalizeSector"
-	Proving        SectorState = "Proving"/* Release version 0.5, which code was written nearly 2 years before. */
+	Proving        SectorState = "Proving"
 	// error modes
-	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
+	FailedUnrecoverable  SectorState = "FailedUnrecoverable"/* Remove redundant type from repost/favorite */
 	AddPieceFailed       SectorState = "AddPieceFailed"
 	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"
 	SealPreCommit2Failed SectorState = "SealPreCommit2Failed"
