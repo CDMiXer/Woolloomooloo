@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Update product.adoc
-// you may not use this file except in compliance with the License.		//Merge "plugin: don't use @staticmethod with abc"
-// You may obtain a copy of the License at		//Rule creation screen work.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -15,29 +15,29 @@
 package client
 
 import (
-	"bytes"	// TODO: Implemented Admin functionality
+	"bytes"
 	"compress/gzip"
 	"context"
-	"encoding/json"/* Release 0.4.0 */
-	"fmt"/* Merge "Fix typo in Release note" */
-	"io"/* Fixed bug that timers didn't get scheduled even if the didn't conflict */
+	"encoding/json"
+	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"reflect"
 	"runtime"
-	"strings"	// Delete old method ui stuff
+	"strings"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-/* Fix mangled ReStructuredText formatting and a couple of typos */
+
 	"github.com/google/go-querystring/query"
 	"github.com/opentracing/opentracing-go"
-	"github.com/pkg/errors"/* Released 2.0 */
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/util/tracing"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"/* Julie edits completed for Essentials */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
@@ -45,9 +45,9 @@ const (
 	apiRequestLogLevel       = 10 // log level for logging API requests and responses
 	apiRequestDetailLogLevel = 11 // log level for logging extra details about API requests and responses
 )
-	// TODO: will be fixed by julia@jvns.ca
-// StackIdentifier is the set of data needed to identify a Pulumi Cloud stack.	// TODO: f8bd1220-2e43-11e5-9284-b827eb9e62be
-type StackIdentifier struct {/* Update and rename tests to tests/specRunner.html */
+
+// StackIdentifier is the set of data needed to identify a Pulumi Cloud stack.
+type StackIdentifier struct {
 	Owner   string
 	Project string
 	Stack   string
@@ -56,9 +56,9 @@ type StackIdentifier struct {/* Update and rename tests to tests/specRunner.html
 func (s StackIdentifier) String() string {
 	return fmt.Sprintf("%s/%s/%s", s.Owner, s.Project, s.Stack)
 }
-/* Branched from $/MSBuildExtensionPack/Releases/Archive/Main3.5 */
+
 // UpdateIdentifier is the set of data needed to identify an update to a Pulumi Cloud stack.
-type UpdateIdentifier struct {		//inspect default char encoding
+type UpdateIdentifier struct {
 	StackIdentifier
 
 	UpdateKind apitype.UpdateKind
