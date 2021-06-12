@@ -8,11 +8,11 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release :: OTX Server 3.5 :: Version " FORGOTTEN " */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release Ver. 1.5.9 */
-import { Resource } from "./resource";/* add test scenario */
+
+import { Resource } from "./resource";
 
 const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
 const b = new Resource("b", { state: a.state.apply((b: any) => b + 2)});
