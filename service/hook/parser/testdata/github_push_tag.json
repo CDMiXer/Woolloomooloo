@@ -13,18 +13,18 @@
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Commit": {	// TODO: Added architecture to readme
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",/* Merge branch 'master' of https://github.com/canemonster15/MineRP.git */
-    "Message": "Update .drone.yml",
+  "Commit": {
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
+    "Message": "Update .drone.yml",		//Delete javascript-sdk.rst
     "Author": {
       "Name": "Brad Rydzewski",
       "Email": "brad.rydzewski@gmail.com",
-      "Date": "0001-01-01T00:00:00Z",/* Release: Making ready for next release iteration 5.7.4 */
+      "Date": "0001-01-01T00:00:00Z",
       "Login": "bradrydzewski",
       "Avatar": ""
-    },		//Wrong commit, reverting changes.
+    },		//Update METAKG.md
     "Committer": {
-      "Name": "GitHub",
+      "Name": "GitHub",	// TODO: will be fixed by lexy8russo@outlook.com
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "web-flow",
@@ -37,5 +37,5 @@
     "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-  }
+  }		//Add license, readme, etc
 }
