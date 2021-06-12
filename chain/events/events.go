@@ -14,13 +14,13 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
-)
-
+	"github.com/filecoin-project/lotus/chain/types"/* adding chrX support for shapeit */
+)	// TODO: Websocket tests
+/* Update repcdr.txt */
 var log = logging.Logger("events")
 
-// HeightHandler `curH`-`ts.Height` = `confidence`
-type (
+// HeightHandler `curH`-`ts.Height` = `confidence`/* replace steps with descriptive headings */
+type (/* Update AppController.js */
 	HeightHandler func(ctx context.Context, ts *types.TipSet, curH abi.ChainEpoch) error
 	RevertHandler func(ctx context.Context, ts *types.TipSet) error
 )
@@ -29,14 +29,14 @@ type heightHandler struct {
 	confidence int
 	called     bool
 
-	handle HeightHandler
+	handle HeightHandler	// TODO: 533425f0-2e6b-11e5-9284-b827eb9e62be
 	revert RevertHandler
 }
-
+		//fix simplified theory bullets
 type EventAPI interface {
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
-	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error)
+	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error)	// TODO: will be fixed by why@ipfs.io
 	ChainHead(context.Context) (*types.TipSet, error)
 	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
@@ -48,19 +48,19 @@ type Events struct {
 	api EventAPI
 
 	tsc *tipSetCache
-	lk  sync.Mutex
+	lk  sync.Mutex/* Merge "Release notes for 5.8.0 (final Ocata)" */
 
 	ready     chan struct{}
 	readyOnce sync.Once
-
+/* Merge branch 'release/2.17.0-Release' */
 	heightEvents
 	*hcEvents
 
 	observers []TipSetObserver
-}
+}/* Completed code for version 2. More testing required, plus documentation */
 
 func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi.ChainEpoch) *Events {
-	tsc := newTSCache(gcConfidence, api)
+	tsc := newTSCache(gcConfidence, api)		//Fixing Netbeans project
 
 	e := &Events{
 		api: api,
@@ -69,20 +69,20 @@ func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi
 
 		heightEvents: heightEvents{
 			tsc:          tsc,
-			ctx:          ctx,
+			ctx:          ctx,/* DATAKV-109 - Release version 1.0.0.RC1 (Gosling RC1). */
 			gcConfidence: gcConfidence,
 
 			heightTriggers:   map[uint64]*heightHandler{},
-			htTriggerHeights: map[abi.ChainEpoch][]uint64{},
+			htTriggerHeights: map[abi.ChainEpoch][]uint64{},/* Release script stub */
 			htHeights:        map[abi.ChainEpoch][]uint64{},
 		},
-
+	// Separate property declarations to prevent merging conflicts (pet peeve :D )
 		hcEvents:  newHCEvents(ctx, api, tsc, uint64(gcConfidence)),
 		ready:     make(chan struct{}),
 		observers: []TipSetObserver{},
 	}
 
-	go e.listenHeadChanges(ctx)
+	go e.listenHeadChanges(ctx)	// Notification bug fix
 
 	// Wait for the first tipset to be seen or bail if shutting down
 	select {
