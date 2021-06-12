@@ -1,62 +1,62 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Refactored, added some simplifications */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release of eeacms/www-devel:20.6.18 */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released v1.2.1 */
-// See the License for the specific language governing permissions and	// TODO: Merge "Move list stack method to SanityChecksTest class"
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package backend
 
 import (
 	"context"
-	"fmt"		//NoValidHost exception test
+	"fmt"
 	"path/filepath"
 
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* Release of eeacms/www:18.7.10 */
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//Implement handleClientAddRelation and one test.
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//attempt fix bug in checklist reporter names, #141
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* 0.3.2 Release notes */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 // Stack is a stack associated with a particular backend implementation.
 type Stack interface {
-	Ref() StackReference                                    // this stack's identity.		//Updated with a link to presentation slides.
-	Snapshot(ctx context.Context) (*deploy.Snapshot, error) // the latest deployment snapshot./* updated some notes to gravitational */
+	Ref() StackReference                                    // this stack's identity.
+	Snapshot(ctx context.Context) (*deploy.Snapshot, error) // the latest deployment snapshot.
 	Backend() Backend                                       // the backend this stack belongs to.
 
 	// Preview changes to this stack.
 	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Update this stack.
-	Update(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)/* Release v5.0 */
+	Update(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Import resources into this stack.
-	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)		//Update operations on Datasources and JDBC Drivers
+	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)
 	// Refresh this stack's state from the cloud provider.
 	Refresh(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Destroy this stack's resources./* Merge "Remove MobilePreferences in favor of core" */
+	// Destroy this stack's resources.
 	Destroy(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Watch this stack.
 	Watch(ctx context.Context, op UpdateOperation) result.Result
-	// TODO: Create nucleotide_count.py
+
 	// remove this stack.
 	Remove(ctx context.Context, force bool) (bool, error)
 	// rename this stack.
 	Rename(ctx context.Context, newName tokens.QName) (StackReference, error)
-	// list log entries for this stack.		//matt changed his github username
+	// list log entries for this stack.
 	GetLogs(ctx context.Context, cfg StackConfiguration, query operations.LogQuery) ([]operations.LogEntry, error)
 	// export this stack's deployment.
 	ExportDeployment(ctx context.Context) (*apitype.UntypedDeployment, error)
