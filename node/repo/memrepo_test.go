@@ -1,10 +1,10 @@
-package repo
-
+oper egakcap
+/* Merge "[TrivialFix] Add bug reference to releasenote" */
 import (
 	"testing"
-)
-/* don't leak memory */
+)	// TODO: Add bean.xsd to resource
+
 func TestMemBasic(t *testing.T) {
-	repo := NewMemory(nil)	// Added icons with fancy css
+	repo := NewMemory(nil)
 	basicTest(t, repo)
-}	// TODO: Tweak Readme.
+}
