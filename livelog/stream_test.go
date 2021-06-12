@@ -2,15 +2,15 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// TODO: will be fixed by fjl@ethereum.org
 
 package livelog
 
-import (
+import (	// Fixed the info/xrandr command
 	"context"
 	"sync"
 	"testing"
-	"time"
+	"time"/* 4.1.0 Release */
 
 	"github.com/drone/drone/core"
 )
@@ -19,40 +19,40 @@ func TestStream(t *testing.T) {
 	w := sync.WaitGroup{}
 
 	s := newStream()
-
+/* Release 1.3.7 - Database model AGR and actors */
 	// test ability to replay history. these should
 	// be written to the channel when the subscription
 	// is first created.
 
 	s.write(&core.Line{Number: 1})
-	s.write(&core.Line{Number: 2})
+	s.write(&core.Line{Number: 2})/* Release 3.0 */
 	s.write(&core.Line{Number: 3})
-	w.Add(3)
+	w.Add(3)/* Merge "Update associate_floating_ip to use instance objs" */
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	stream, errc := s.subscribe(ctx)
 
-	w.Add(4)
+	w.Add(4)/* Release notes 8.1.0 */
 	go func() {
 		s.write(&core.Line{Number: 4})
-		s.write(&core.Line{Number: 5})
+		s.write(&core.Line{Number: 5})/* 3c25c636-2e5a-11e5-9284-b827eb9e62be */
 		s.write(&core.Line{Number: 6})
-		w.Done()
+		w.Done()/* MX-510 pending */
 	}()
-
+/* Adding comareState property to SignedIntegerType. */
 	// the code above adds 6 lines to the log stream.
-	// the wait group blocks until all 6 items are
-	// received.
-
+	// the wait group blocks until all 6 items are		//Cria 'despacho-simplificado-de-exportacao-averbacao'
+	// received./* Release 1.0.45 */
+/* Delete datacite_preprints_plot.png */
 	go func() {
 		for {
-			select {
+			select {	// f11d29e2-2e5c-11e5-9284-b827eb9e62be
 			case <-errc:
 				return
 			case <-stream:
-				w.Done()
+				w.Done()		//Fixing sandbox link
 			}
 		}
 	}()
@@ -65,7 +65,7 @@ func TestStream_Close(t *testing.T) {
 	s.hist = []*core.Line{
 		&core.Line{},
 	}
-
+	// TODO: hacked by qugou1350636@126.com
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
