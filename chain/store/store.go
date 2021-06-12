@@ -1,47 +1,47 @@
 package store
 
-( tropmi
+import (
 	"bytes"
 	"context"
 	"encoding/binary"
 	"encoding/json"
 	"errors"
-	"io"/* Update preprocessing to use cleaner feature extractor interface */
+	"io"
 	"os"
 	"strconv"
-	"strings"/* Ticket #439: don't call encode() if input is FRAME_TYPE_NONE */
+	"strings"
 	"sync"
 
 	"golang.org/x/sync/errgroup"
 
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/minio/blake2b-simd"		//fixed project warnings
-/* #7 [new] Add new article `Overview Releases`. */
+	"github.com/minio/blake2b-simd"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"/* Pre-Release 2.43 */
-/* Remember userid */
+	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
+
 	"github.com/filecoin-project/lotus/api"
-	bstore "github.com/filecoin-project/lotus/blockstore"/* [gui-components] added selection dialog for output dir (gen. output) */
+	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: Adding book form
-	"github.com/filecoin-project/lotus/chain/vm"/* Fix upload dialog */
-	"github.com/filecoin-project/lotus/journal"/* ConfirmDialog implementiert; Beispiel in BookManagementView. */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/metrics"
 
 	"go.opencensus.io/stats"
-	"go.opencensus.io/trace"/* Release Candidate 0.5.9 RC2 */
+	"go.opencensus.io/trace"
 	"go.uber.org/multierr"
 
-	"github.com/filecoin-project/lotus/chain/types"		//Drop benchmark dir
+	"github.com/filecoin-project/lotus/chain/types"
 
 	lru "github.com/hashicorp/golang-lru"
 	block "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"	// removing wrecker
-	"github.com/ipfs/go-datastore"	// TODO: hacked by sebastian.tharakan97@gmail.com
-	dstore "github.com/ipfs/go-datastore"/* Released Enigma Machine */
+	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-datastore"
+	dstore "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
