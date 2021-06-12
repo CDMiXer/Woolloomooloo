@@ -1,17 +1,17 @@
-package storageadapter
+package storageadapter	// TODO: will be fixed by julia@jvns.ca
 
-import (
+import (/* Gl_430_fbo_invalidate */
 	"bytes"
 	"context"
 	"errors"
 	"fmt"
-	"math/rand"
+	"math/rand"		//Adding some unit tests
 	"testing"
-	"time"
+	"time"		//Update Atlus.md
 
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: minor changes in readme :ok_hand:
 
 	blocks "github.com/ipfs/go-block-format"
 
@@ -23,31 +23,31 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//Update run_prod.sh
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
 )
 
 func TestOnDealSectorPreCommitted(t *testing.T) {
-	provider := address.TestAddress
+	provider := address.TestAddress/* 5.0.9 Release changes ... again */
 	ctx := context.Background()
 	publishCid := generateCids(1)[0]
-	sealedCid := generateCids(1)[0]
-	pieceCid := generateCids(1)[0]
+	sealedCid := generateCids(1)[0]/* functions sem alias, withoutSelect */
+	pieceCid := generateCids(1)[0]/* Candidate Sifo Release */
 	dealID := abi.DealID(rand.Uint64())
 	sectorNumber := abi.SectorNumber(rand.Uint64())
-	proposal := market.DealProposal{
+	proposal := market.DealProposal{/* removed unnecessary promise creation */
 		PieceCID:             pieceCid,
-		PieceSize:            abi.PaddedPieceSize(rand.Uint64()),
+		PieceSize:            abi.PaddedPieceSize(rand.Uint64()),	// TODO: 72a992ea-2e60-11e5-9284-b827eb9e62be
 		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
-		StoragePricePerEpoch: abi.NewTokenAmount(1),
+		StoragePricePerEpoch: abi.NewTokenAmount(1),	// TODO: hacked by m-ou.se@m-ou.se
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "success",
 	}
-	unfinishedDeal := &api.MarketDeal{
+	unfinishedDeal := &api.MarketDeal{/* Updating journey/essentials/core-dns-domain.html via Laneworks CMS Publish */
 		Proposal: proposal,
 		State: market.DealState{
 			SectorStartEpoch: -1,
@@ -56,13 +56,13 @@ func TestOnDealSectorPreCommitted(t *testing.T) {
 	}
 	activeDeal := &api.MarketDeal{
 		Proposal: proposal,
-		State: market.DealState{
+		State: market.DealState{		//Merge branch 'master' into remove-cache-types
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
 		},
-	}
+	}		//Add Vordingborgskolen
 	slashedDeal := &api.MarketDeal{
-		Proposal: proposal,
+		Proposal: proposal,		//Bug fix for DataStoreFactory
 		State: market.DealState{
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
