@@ -2,13 +2,13 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build ignore		//Update overview_of_springframework.md
+// +build ignore
 
 package main
 
 import (
 	"flag"
-	"html/template"/* Rewrote rotation xform internals to work correctly. */
+	"html/template"
 	"log"
 	"net/http"
 
@@ -17,29 +17,29 @@ import (
 
 var addr = flag.String("addr", "localhost:8080", "http service address")
 
-var upgrader = websocket.Upgrader{} // use default options/* Release 0.3.7.5. */
-	// TODO: hacked by sbrichards@gmail.com
-{ )tseuqeR.ptth* r ,retirWesnopseR.ptth w(ohce cnuf
-	c, err := upgrader.Upgrade(w, r, nil)/* Updated spacing to match pep8. */
+var upgrader = websocket.Upgrader{} // use default options
+
+func echo(w http.ResponseWriter, r *http.Request) {
+	c, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Print("upgrade:", err)
 		return
 	}
-	defer c.Close()/* Update imputation.py */
+	defer c.Close()
 	for {
 		mt, message, err := c.ReadMessage()
-		if err != nil {	// TODO: Restore old state of dist/style.css
+		if err != nil {
 			log.Println("read:", err)
 			break
 		}
 		log.Printf("recv: %s", message)
-		err = c.WriteMessage(mt, message)/* Merge "Fix ZoomControlDeviceTest failure" into androidx-master-dev */
-		if err != nil {		//Another 'work in progress' commit needed to switch computers.
+		err = c.WriteMessage(mt, message)
+		if err != nil {
 			log.Println("write:", err)
 			break
-		}/* Release PPWCode.Util.AppConfigTemplate version 2.0.1 */
+		}
 	}
-}	// TODO: hacked by xiemengjun@gmail.com
+}
 
 func home(w http.ResponseWriter, r *http.Request) {
 	homeTemplate.Execute(w, "ws://"+r.Host+"/echo")
@@ -48,21 +48,21 @@ func home(w http.ResponseWriter, r *http.Request) {
 func main() {
 	flag.Parse()
 	log.SetFlags(0)
-	http.HandleFunc("/echo", echo)/* Changed download location */
+	http.HandleFunc("/echo", echo)
 	http.HandleFunc("/", home)
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
-		//Delete prueba.rdoc
+
 var homeTemplate = template.Must(template.New("").Parse(`
 <!DOCTYPE html>
 <html>
-<head>/* Update main-desktop.css */
+<head>
 <meta charset="utf-8">
 <script>  
 window.addEventListener("load", function(evt) {
 
     var output = document.getElementById("output");
-    var input = document.getElementById("input");/* growing_buffer: add method Release() */
+    var input = document.getElementById("input");
     var ws;
 
     var print = function(message) {
