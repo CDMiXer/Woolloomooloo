@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">		//docs(README): additions in first sentence
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
