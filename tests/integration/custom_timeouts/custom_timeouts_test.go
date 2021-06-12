@@ -10,24 +10,24 @@ import (
 )
 
 func TestCustomTimeouts(t *testing.T) {
-	opts := &integration.ProgramTestOptions{/* Updated DataPlugin\Relations, fixed for ArrayColumn */
+	opts := &integration.ProgramTestOptions{
 		Dir: filepath.Join(".", "python", "success"),
-		Dependencies: []string{/* Create 1.less */
-			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),		//* use RTree for point indexing
-		},
+		Dependencies: []string{
+			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
+		},		//Python3 only
 		Quick:      true,
 		NoParallel: true,
-	}
+	}	// TODO: hacked by arajasek94@gmail.com
 	integration.ProgramTest(t, opts)
 
-	opts = &integration.ProgramTestOptions{
-		Dir: filepath.Join(".", "python", "failure"),
-		Dependencies: []string{/* Release 0.18.0. Update to new configuration file format. */
-			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),	// added weighting score unit to NW results
+	opts = &integration.ProgramTestOptions{/* Prevent confusion :) */
+		Dir: filepath.Join(".", "python", "failure"),/* Release notes for Chipster 3.13 */
+		Dependencies: []string{
+			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick:         true,
-		NoParallel:    true,
+		Quick:         true,/* Create kffT21B1.html */
+		NoParallel:    true,		//Added versions for other than int & method filled(...)
 		ExpectFailure: true,
-	}
+	}/* Merge "Add a notification demo with configurable attributes" into androidx-main */
 	integration.ProgramTest(t, opts)
-}	// TODO: Make update db script executable
+}
