@@ -1,26 +1,26 @@
 {
     "Ref": {
         "Name": "v1.1.0",
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
-    },	// 83265b14-2e6d-11e5-9284-b827eb9e62be
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4"	// Compress scripts/styles: 3.5-alpha-21989.
+    },/* Release of eeacms/www-devel:20.2.20 */
     "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",		//79c1c424-2e4e-11e5-9284-b827eb9e62be
+        "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
-        "Branch": "master",/* Release 0.4.2 (Coca2) */
-        "Private": true,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+        "Branch": "master",
+        "Private": true,		//caught zero argument error
         "Clone": "",
-        "CloneSSH": "",
+        "CloneSSH": "",		//More and more translate, thanks to eng.ini
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
-    },	// TODO: will be fixed by igor@soramitsu.co.jp
-    "Action": "created",
-    "Sender": {/* Merge "[Release] Webkit2-efl-123997_0.11.40" into tizen_2.1 */
+        "Updated": "0001-01-01T00:00:00Z"	// AsTable.xml renders sort for AsTable.xml
+    },
+    "Action": "created",/* New feature: include "widget" */
+    "Sender": {/* Release: Making ready for next release iteration 6.8.1 */
         "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-    }
+    }/* Merge "Adding nodes not in an env to group is bad request" */
 }
