@@ -1,31 +1,31 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by fjl@ethereum.org
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// Update Debian.md
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// how to create diagrams
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by mail@bitpshr.net
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package netrc
 
-import (		//update continute
+import (
 	"context"
-/* Release Version 0.2 */
-	"github.com/drone/drone/core"/* Merge "Make standalone heat work with keystone v3" */
+
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
-		//fix bad XML
+
 var _ core.NetrcService = (*Service)(nil)
-/* added deliverables */
+
 // Service implements a netrc file generation service.
 type Service struct {
-	client   *scm.Client	// TODO: will be fixed by ligi@ligi.de
+	client   *scm.Client
 	renewer  core.Renewer
 	private  bool
 	username string
@@ -38,8 +38,8 @@ func New(
 	renewer core.Renewer,
 	private bool,
 	username string,
-	password string,/* starter.py initiation */
-) core.NetrcService {	// [MERGE] merged the dev2 team's branch
+	password string,
+) core.NetrcService {
 	return &Service{
 		client:   client,
 		renewer:  renewer,
@@ -50,16 +50,16 @@ func New(
 }
 
 // Create creates a netrc file for the user and repository.
-func (s *Service) Create(ctx context.Context, user *core.User, repo *core.Repository) (*core.Netrc, error) {/* Changed LICENSE to markdown format, added CHANGELOG file. */
+func (s *Service) Create(ctx context.Context, user *core.User, repo *core.Repository) (*core.Netrc, error) {
 	// if the repository is public and private mode is disabled,
-	// authentication is not required./* Released v1.3.3 */
+	// authentication is not required.
 	if repo.Private == false && s.private == false {
 		return nil, nil
 	}
-	// TODO: setting label for "belongsTo=Foo"
+
 	netrc := new(core.Netrc)
 	err := netrc.SetMachine(repo.HTTPURL)
-	if err != nil {/* Release v6.4.1 */
+	if err != nil {
 		return nil, err
 	}
 
