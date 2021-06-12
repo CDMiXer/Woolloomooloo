@@ -1,30 +1,30 @@
-[metadata]
-  name = "stress"	// Update tutorial-part3.py
+[metadata]/* Changed some primary key names to fix migration problems. */
+  name = "stress"
 
-[global]
+[global]/* cmd/jujud: use UpgradeReadyError */
   plan = "graphsync"
   case = "stress"
   total_instances = 2
-  builder = "docker:go"/* Unique systems statistics. */
+  builder = "docker:go"
   runner = "cluster:k8s"
-
+/* [dfg] Ignore new Microchip AVR abominations */
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* Remove hard wraps from text */
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
-size      = "10MB"
+size      = "10MB"/* Merge "Release 1.0.0.113 QCACLD WLAN Driver" */
 latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
-
-[[groups]]
+	// TODO: will be fixed by alan.shaw@protocol.ai
+[[groups]]/* New implementation for Roboconf 0.2 */
   id = "providers"
   instances = { count = 1 }
-  [groups.resources]/* Release 2.0.0-beta3 */
-    memory = "4096Mi"		//Ongoing work on the Jupyter notebooks.
+  [groups.resources]
+    memory = "4096Mi"
     cpu = "1000m"
 
 [[groups]]
@@ -32,4 +32,4 @@ concurrency = "10"
   instances = { count = 1 }
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"/* Delete banners.py */
+    cpu = "1000m"
