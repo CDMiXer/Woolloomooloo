@@ -1,16 +1,16 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",/* Added new functions for digital input */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+,eurt :"noitaralced"        
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* Release of eeacms/www:20.11.26 */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
