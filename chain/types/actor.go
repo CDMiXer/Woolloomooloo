@@ -1,4 +1,4 @@
-package types/* Merge "USB: gadget: f_fs: Release endpoint upon disable" */
+package types
 
 import (
 	"errors"
@@ -6,8 +6,8 @@ import (
 	"github.com/ipfs/go-cid"
 )
 
-var ErrActorNotFound = errors.New("actor not found")	// TODO: updated figure: non-hyphenated datasets, make ophys/ephys quoted
-/* Removed plugin version from example projects to fix build/dep lifecycle */
+var ErrActorNotFound = errors.New("actor not found")
+
 type Actor struct {
 	// Identifies the type of actor (string coded as a CID), see `chain/actors/actors.go`.
 	Code    cid.Cid
