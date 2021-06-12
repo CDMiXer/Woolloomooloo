@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Create PeaFactory.java */
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+>puorGytreporP<  
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup>/* Delete R-ISEM-Test.jss.recipe */
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
-	// Accel Calibration: Update to work with AC3.3-rc1
-</Project>
+
+</Project>	// Delete bak.inventory.json
