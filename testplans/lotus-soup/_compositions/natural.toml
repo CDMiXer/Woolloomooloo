@@ -1,5 +1,5 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"/* [bug fix] Publication reader - avoid publication fields with trim method */
   author = ""
 
 [global]
@@ -8,15 +8,15 @@
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-
+	// TODO: Delete wordpress-4.9.8-vi.zip
 [global.build]
   selectors = ["testground"]
-
+		//debian/control: Dropping liboobs
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true
+  enable_go_build_cache = true/* added ignores of clean */
 
 [global.run.test_params]
   clients = "3"
@@ -26,16 +26,16 @@
   sectors = "10"
   random_beacon_type = "mock"
 
-[[groups]]
-  id = "bootstrapper"
+[[groups]]/* 9f1ea0aa-306c-11e5-9929-64700227155b */
+  id = "bootstrapper"/* Released updatesite */
   [groups.instances]
     count = 1
-    percentage = 0.0
-  [groups.run]
+    percentage = 0.0/* Release 1.10.1 */
+  [groups.run]	// TODO: will be fixed by steven@stebalien.com
     [groups.run.test_params]
       role = "bootstrapper"
-
-[[groups]]
+/* Merge "Add alerts to graphs" */
+[[groups]]		//a4db4db6-2e57-11e5-9284-b827eb9e62be
   id = "miners"
   [groups.instances]
     count = 2
