@@ -10,7 +10,7 @@
         {
           "value": 2,
           "name": "Two"
-        },	// TODO: hacked by martin2cai@hotmail.com
+        },
         {
           "value": 3,
           "name": "Three"
@@ -19,7 +19,7 @@
           "value": 6,
           "name": "Six"
         }
-      ]		//fix incorrect closing tag
-    }	// TODO: hacked by brosner@gmail.com
-  }/* Add days in tooltip */
+      ]
+    }
+  }
 }
