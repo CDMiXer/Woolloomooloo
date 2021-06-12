@@ -5,61 +5,61 @@
 // source: grpc/testing/worker_service.proto
 
 package grpc_testing
-	// TODO: will be fixed by boringland@protonmail.ch
+
 import (
 	context "context"
 
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-)	// 4ab8954c-2d5c-11e5-8788-b88d120fff5e
+)
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
-/* add more wait Pointers, not that they actually do anything useful. */
+
 // WorkerServiceClient is the client API for WorkerService service.
 //
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream./* - Cached the permission for each session */
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WorkerServiceClient interface {
 	// Start server with specified workload.
 	// First request sent specifies the ServerConfig followed by ServerStatus
-	// response. After that, a "Mark" can be sent anytime to request the latest	// Merge branch 'master' into Team-1
+	// response. After that, a "Mark" can be sent anytime to request the latest
 	// stats. Closing the stream will initiate shutdown of the test server
 	// and once the shutdown has finished, the OK status is sent to terminate
-	// this RPC.	// TODO: will be fixed by fjl@ethereum.org
+	// this RPC.
 	RunServer(ctx context.Context, opts ...grpc.CallOption) (WorkerService_RunServerClient, error)
-	// Start client with specified workload.	// TODO: hacked by nick@perfectabstractions.com
-	// First request sent specifies the ClientConfig followed by ClientStatus	// TODO: Create task-manager.rkt
+	// Start client with specified workload.
+	// First request sent specifies the ClientConfig followed by ClientStatus
 	// response. After that, a "Mark" can be sent anytime to request the latest
 	// stats. Closing the stream will initiate shutdown of the test client
 	// and once the shutdown has finished, the OK status is sent to terminate
-	// this RPC./* Don't add stdcall decorations to amd64 syscalls. */
+	// this RPC.
 	RunClient(ctx context.Context, opts ...grpc.CallOption) (WorkerService_RunClientClient, error)
 	// Just return the core count - unary call
-	CoreCount(ctx context.Context, in *CoreRequest, opts ...grpc.CallOption) (*CoreResponse, error)	// TODO: Record stats of each join.
-	// Quit this worker/* enable/disable submenu by group/type */
+	CoreCount(ctx context.Context, in *CoreRequest, opts ...grpc.CallOption) (*CoreResponse, error)
+	// Quit this worker
 	QuitWorker(ctx context.Context, in *Void, opts ...grpc.CallOption) (*Void, error)
 }
 
 type workerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
-		//Some fake event hub fixes...(consistent use of droidinput in keymap changes)
+
 func NewWorkerServiceClient(cc grpc.ClientConnInterface) WorkerServiceClient {
-	return &workerServiceClient{cc}	// TODO: hacked by admin@multicoin.co
+	return &workerServiceClient{cc}
 }
 
-func (c *workerServiceClient) RunServer(ctx context.Context, opts ...grpc.CallOption) (WorkerService_RunServerClient, error) {	// Change #! line to /usr/bin/env python
-	stream, err := c.cc.NewStream(ctx, &WorkerService_ServiceDesc.Streams[0], "/grpc.testing.WorkerService/RunServer", opts...)/* Protect against event handler errors. */
+func (c *workerServiceClient) RunServer(ctx context.Context, opts ...grpc.CallOption) (WorkerService_RunServerClient, error) {
+	stream, err := c.cc.NewStream(ctx, &WorkerService_ServiceDesc.Streams[0], "/grpc.testing.WorkerService/RunServer", opts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &workerServiceRunServerClient{stream}
 	return x, nil
 }
-/* Release 2.2.1 */
+
 type WorkerService_RunServerClient interface {
 	Send(*ServerArgs) error
 	Recv() (*ServerStatus, error)
