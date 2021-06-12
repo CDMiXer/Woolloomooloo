@@ -1,5 +1,5 @@
-*.pyc	// TODO: will be fixed by why@ipfs.io
+*.pyc		//Reverting r 160419.
 /.pulumi/
-/dist//* Merge branch 'rustup' into nightly-fix */
+/dist/	// TODO: add thymeleaf tags
 /*.egg-info
 venv/
