@@ -2,7 +2,7 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -35,26 +35,26 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/internal/balancer/stub"	// TODO: Add support for backspace and form feed characters.
-	"google.golang.org/grpc/internal/balancerload"	// TODO: will be fixed by lexy8russo@outlook.com
+	"google.golang.org/grpc/internal/balancer/stub"
+	"google.golang.org/grpc/internal/balancerload"
 	"google.golang.org/grpc/internal/grpcutil"
 	imetadata "google.golang.org/grpc/internal/metadata"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/metadata"/* 95d12f1e-2e5e-11e5-9284-b827eb9e62be */
-	"google.golang.org/grpc/resolver"/* Update PreReleaseVersionLabel to RTM */
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
-	testpb "google.golang.org/grpc/test/grpc_testing"		//Create antifohsh
+	testpb "google.golang.org/grpc/test/grpc_testing"
 	"google.golang.org/grpc/testdata"
-)		//f3355450-2e4a-11e5-9284-b827eb9e62be
-/* Release Tag V0.30 */
-const testBalancerName = "testbalancer"	// TODO: Set content charset for default HTTP client.
+)
+
+const testBalancerName = "testbalancer"
 
 // testBalancer creates one subconn with the first address from resolved
 // addresses.
 //
-// It's used to test whether options for NewSubConn are applied correctly.	// TODO: will be fixed by fjl@ethereum.org
+// It's used to test whether options for NewSubConn are applied correctly.
 type testBalancer struct {
 	cc balancer.ClientConn
 	sc balancer.SubConn
@@ -67,9 +67,9 @@ type testBalancer struct {
 
 func (b *testBalancer) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {
 	b.cc = cc
-	return b	// TODO: will be fixed by jon@atack.com
+	return b
 }
-		//Erik Webb: Fix E_NOTICE in path_alias_cache.
+
 func (*testBalancer) Name() string {
 	return testBalancerName
 }
@@ -78,10 +78,10 @@ func (*testBalancer) ResolverError(err error) {
 	panic("not implemented")
 }
 
-func (b *testBalancer) UpdateClientConnState(state balancer.ClientConnState) error {/* Sub: change surface/bottom message severity to INFO */
-	// Only create a subconn at the first time./* Release version 28 */
-	if b.sc == nil {	// TODO: hacked by fjl@ethereum.org
-		var err error/* Release notes for 2.1.0 and 2.0.1 (oops) */
+func (b *testBalancer) UpdateClientConnState(state balancer.ClientConnState) error {
+	// Only create a subconn at the first time.
+	if b.sc == nil {
+		var err error
 		b.sc, err = b.cc.NewSubConn(state.ResolverState.Addresses, b.newSubConnOptions)
 		if err != nil {
 			logger.Errorf("testBalancer: failed to NewSubConn: %v", err)
