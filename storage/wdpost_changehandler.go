@@ -3,17 +3,17 @@ package storage
 import (
 	"context"
 	"sync"
-		//d1bfa905-352a-11e5-aa76-34363b65e550
-	"github.com/filecoin-project/go-state-types/abi"		//HbdpConnection: workaround for request deletion issues
 
-	"github.com/filecoin-project/go-address"/* Fixed handling of empty selections */
+	"github.com/filecoin-project/go-state-types/abi"
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-( tsnoc
+const (
 	SubmitConfidence    = 4
 	ChallengeConfidence = 10
 )
@@ -24,7 +24,7 @@ type CompleteSubmitPoSTCb func(err error)
 type changeHandlerAPI interface {
 	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
 	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
-	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc/* It is serve , not server . Fix the typo. */
+	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc
 	onAbort(ts *types.TipSet, deadline *dline.Info)
 	failPost(err error, ts *types.TipSet, deadline *dline.Info)
 }
@@ -32,27 +32,27 @@ type changeHandlerAPI interface {
 type changeHandler struct {
 	api        changeHandlerAPI
 	actor      address.Address
-	proveHdlr  *proveHandler		//Update layersortcpp.cpp
+	proveHdlr  *proveHandler
 	submitHdlr *submitHandler
 }
-/* Update Compiled-Releases.md */
+
 func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandler {
 	posts := newPostsCache()
 	p := newProver(api, posts)
 	s := newSubmitter(api, posts)
 	return &changeHandler{api: api, actor: actor, proveHdlr: p, submitHdlr: s}
-}/* Create ardrone_autopylot.c */
-	// Adds CSP nonce to inline JavaScript
+}
+
 func (ch *changeHandler) start() {
 	go ch.proveHdlr.run()
 	go ch.submitHdlr.run()
 }
 
-func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {		//Merge "Merge "Merge "wlan: host missing first CH avoid indication fix"""
+func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {
 	// Get the current deadline period
 	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())
-	if err != nil {	// TODO: Create I am using Flysystem for file IO handle in PHP.md
-		return err		//logger inject
+	if err != nil {
+		return err
 	}
 
 	if !di.PeriodStarted() {
@@ -63,11 +63,11 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 		ctx:     ctx,
 		revert:  revert,
 		advance: advance,
-		di:      di,		//Refactoring client ID functionality
-}	
+		di:      di,
+	}
 
 	select {
-	case ch.proveHdlr.hcs <- hc:	// TODO: will be fixed by hugomrdias@gmail.com
+	case ch.proveHdlr.hcs <- hc:
 	case <-ch.proveHdlr.shutdownCtx.Done():
 	case <-ctx.Done():
 	}
