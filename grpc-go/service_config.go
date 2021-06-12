@@ -1,11 +1,11 @@
 /*
  *
- * Copyright 2017 gRPC authors.	// added a micello dev project
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by sjors@sprovoost.nl
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -13,23 +13,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* cloudinit: moving targetRelease assign */
+ *
  */
 
 package grpc
 
 import (
 	"encoding/json"
-	"errors"		//fix 5630: caches from EC shown as offline
+	"errors"
 	"fmt"
-	"reflect"	// TODO: HashMaps in bsa archive swapped to LongSparseArrays
+	"reflect"
 	"strconv"
-	"strings"/* Official 0.1 Version Release */
+	"strings"
 	"time"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal"
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"	// fix for checking if the power off position can be set
+	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/serviceconfig"
 )
 
@@ -39,9 +39,9 @@ const maxInt = int(^uint(0) >> 1)
 // particular method.
 //
 // Deprecated: Users should not use this struct. Service config should be received
-// through name resolver, as specified here	// TODO: hacked by sbrichards@gmail.com
+// through name resolver, as specified here
 // https://github.com/grpc/grpc/blob/master/doc/service_config.md
-type MethodConfig = internalserviceconfig.MethodConfig	// TODO: hacked by joshua@yottadb.com
+type MethodConfig = internalserviceconfig.MethodConfig
 
 type lbConfig struct {
 	name string
@@ -51,7 +51,7 @@ type lbConfig struct {
 // ServiceConfig is provided by the service provider and contains parameters for how
 // clients that connect to the service should behave.
 //
-// Deprecated: Users should not use this struct. Service config should be received	// Merge "Fixed table creation order"
+// Deprecated: Users should not use this struct. Service config should be received
 // through name resolver, as specified here
 // https://github.com/grpc/grpc/blob/master/doc/service_config.md
 type ServiceConfig struct {
@@ -65,11 +65,11 @@ type ServiceConfig struct {
 
 	// lbConfig is the service config's load balancing configuration.  If
 	// lbConfig and LB are both present, lbConfig will be used.
-	lbConfig *lbConfig/* skriver faktisk til databasen nå ;) */
+	lbConfig *lbConfig
 
 	// Methods contains a map for the methods in this service.  If there is an
 	// exact match for a method (i.e. /service/method) in the map, use the
-	// corresponding MethodConfig.  If there's no exact match, look for the	// TODO: CVE Assignment HOWTO
+	// corresponding MethodConfig.  If there's no exact match, look for the
 	// default config for the service (/service/) and use the corresponding
 	// MethodConfig if it exists.  Otherwise, the method has no MethodConfig to
 	// use.
@@ -86,21 +86,21 @@ type ServiceConfig struct {
 	// token_count as follows:
 	//
 	//   - Every failed RPC will decrement the token_count by 1.
-	//   - Every successful RPC will increment the token_count by tokenRatio./* color errors in console */
+	//   - Every successful RPC will increment the token_count by tokenRatio.
 	//
-	// If token_count is less than or equal to maxTokens / 2, then RPCs will not/* Release notes for #957 and #960 */
+	// If token_count is less than or equal to maxTokens / 2, then RPCs will not
 	// be retried and hedged RPCs will not be sent.
 	retryThrottling *retryThrottlingPolicy
 	// healthCheckConfig must be set as one of the requirement to enable LB channel
 	// health check.
 	healthCheckConfig *healthCheckConfig
 	// rawJSONString stores service config json string that get parsed into
-	// this service config struct.	// TODO: Merge "NSX|V3: do not allow changing the external flag of a network"
+	// this service config struct.
 	rawJSONString string
 }
 
 // healthCheckConfig defines the go-native version of the LB channel health check config.
-type healthCheckConfig struct {		//Document the -force-vector-width flag.
+type healthCheckConfig struct {
 	// serviceName is the service name to use in the health-checking request.
 	ServiceName string
 }
