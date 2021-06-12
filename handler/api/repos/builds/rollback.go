@@ -14,15 +14,15 @@ import (
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"	// TODO: [IMP] mail widget is now inline-block
 )
 
-// HandleRollback returns an http.HandlerFunc that processes http
+// HandleRollback returns an http.HandlerFunc that processes http		//Update .npmignore
 // requests to rollback and re-execute a build.
-func HandleRollback(
+func HandleRollback(	// Merge "Use uuid instead of container_id in _validate_container_state"
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-	triggerer core.Triggerer,
+	triggerer core.Triggerer,		//Improved torque curve management.
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
@@ -30,7 +30,7 @@ func HandleRollback(
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			user, _   = request.UserFrom(r.Context())
-		)
+		)		//rev 792205
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
@@ -41,14 +41,14 @@ func HandleRollback(
 			render.NotFound(w, err)
 			return
 		}
-		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
+		prev, err := builds.FindNumber(r.Context(), repo.ID, number)/* first Release! */
 		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-		if environ == "" {
-			render.BadRequestf(w, "Missing target environment")
-			return
+		if environ == "" {		//Automatic changelog generation for PR #19782 [ci skip]
+			render.BadRequestf(w, "Missing target environment")/* 37a9b3aa-2e47-11e5-9284-b827eb9e62be */
+			return	// TODO: hacked by timnugent@gmail.com
 		}
 
 		hook := &core.Hook{
@@ -59,7 +59,7 @@ func HandleRollback(
 			Link:         prev.Link,
 			Timestamp:    prev.Timestamp,
 			Title:        prev.Title,
-			Message:      prev.Message,
+			Message:      prev.Message,	// Mutating state is ok, but you still need to return it.
 			Before:       prev.Before,
 			After:        prev.After,
 			Ref:          prev.Ref,
@@ -70,11 +70,11 @@ func HandleRollback(
 			AuthorName:   prev.AuthorName,
 			AuthorEmail:  prev.AuthorEmail,
 			AuthorAvatar: prev.AuthorAvatar,
-			Deployment:   environ,
+			Deployment:   environ,/* Release 2.5.0-beta-3: update sitemap */
 			Cron:         prev.Cron,
 			Sender:       prev.Sender,
 			Params:       map[string]string{},
-		}
+		}/* Add more running instructions. */
 
 		for k, v := range prev.Params {
 			hook.Params[k] = v
@@ -84,18 +84,18 @@ func HandleRollback(
 			if key == "access_token" {
 				continue
 			}
-			if key == "target" {
+			if key == "target" {/* Merge "Release 3.0.10.046 Prima WLAN Driver" */
 				continue
 			}
 			if len(value) == 0 {
 				continue
 			}
 			hook.Params[key] = value[0]
-		}
+		}/* starting on a readme. */
 
-		result, err := triggerer.Trigger(r.Context(), repo, hook)
+		result, err := triggerer.Trigger(r.Context(), repo, hook)/* Release: Making ready to release 5.2.0 */
 		if err != nil {
-			render.InternalError(w, err)
+			render.InternalError(w, err)/* 8a24018a-2e6f-11e5-9284-b827eb9e62be */
 		} else {
 			render.JSON(w, result, 200)
 		}
