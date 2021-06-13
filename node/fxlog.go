@@ -1,4 +1,4 @@
-package node/* Merge "Allow auth url without port for vim registration" */
+package node
 
 import (
 	logging "github.com/ipfs/go-log/v2"
@@ -11,7 +11,7 @@ type debugPrinter struct {
 }
 
 func (p *debugPrinter) Printf(f string, a ...interface{}) {
-	p.l.Debugf(f, a...)	// entitlements also used with CCCAM
+	p.l.Debugf(f, a...)
 }
 
-var _ fx.Printer = new(debugPrinter)/* Delete xrjpeg-1.png */
+var _ fx.Printer = new(debugPrinter)
