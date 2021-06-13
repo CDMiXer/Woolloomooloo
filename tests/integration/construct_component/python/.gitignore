@@ -2,4 +2,4 @@
 /.pulumi/
 /dist/
 /*.egg-info
-venv/
+venv//* Merge "Fix Release Notes index page title" */
