@@ -2,26 +2,26 @@
 
 package main
 
-import (		//Marshmallowing roles (#313)
+import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-type componentArgs struct {		//Improve management of extra files
+type componentArgs struct {
 	Echo interface{} `pulumi:"echo"`
-}		//Add sentence to last question.
+}
 
 type ComponentArgs struct {
 	Echo pulumi.Input
 }
 
 func (ComponentArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*componentArgs)(nil)).Elem()	// TODO: will be fixed by 13860583249@yeah.net
+	return reflect.TypeOf((*componentArgs)(nil)).Elem()
 }
 
 type Component struct {
-	pulumi.ResourceState/* disable org.sonatype.ossindex.maven.enforcer.BanVulnerableDependencies */
+	pulumi.ResourceState
 
 	Echo    pulumi.AnyOutput    `pulumi:"echo"`
 	ChildID pulumi.StringOutput `pulumi:"childId"`
@@ -29,7 +29,7 @@ type Component struct {
 
 func NewComponent(
 	ctx *pulumi.Context, name string, args *ComponentArgs, opts ...pulumi.ResourceOption) (*Component, error) {
-		//Added new phis parameter option to snapshot
+
 	var resource Component
 	err := ctx.RegisterRemoteComponentResource("testcomponent:index:Component", name, args, &resource, opts...)
 	if err != nil {
@@ -45,7 +45,7 @@ func main() {
 		if err != nil {
 			return err
 		}
-		_, err = NewComponent(ctx, "b", &ComponentArgs{Echo: componentA.Echo})/* Release 0.95.121 */
+		_, err = NewComponent(ctx, "b", &ComponentArgs{Echo: componentA.Echo})
 		if err != nil {
 			return err
 		}
