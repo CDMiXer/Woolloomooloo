@@ -1,19 +1,19 @@
-// Copyright 2016-2018, Pulumi Corporation.
-///* Merge "Raise a BadRequest when no plan is provided" */
+// Copyright 2016-2018, Pulumi Corporation.		//[maven-release-plugin] rollback the release of apt-maven-plugin-1.0-alpha-4
+///* Fixed bug where writing to a priority didn't go through */
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* add ProRelease3 configuration and some stllink code(stllink is not ready now) */
-// You may obtain a copy of the License at
-//
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at		//go to 2.7.0 devel
+//	// TODO: Update toe_binding.py
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software		//Merge "#3806 Patient Record - New UI - Title empty or null"
+//	// TODO: merged miniprojects branch back to trunk
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//Linked list based stack
 
-package main/* bumped minimum php req to 5.4 */
-
+package main/* Convert MovieReleaseControl from old logger to new LOGGER slf4j */
+/* 4.1.6-beta-11 Release Changes */
 import (
 	"fmt"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
@@ -22,30 +22,30 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+/* af79c6d0-2e5c-11e5-9284-b827eb9e62be */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Task #3048: Merging all changes in release branch LOFAR-Release-0.91 to trunk */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+)/* Create getdvpgsfromhost */
 
 func newPluginRmCmd() *cobra.Command {
-	var all bool
-	var yes bool	// TODO: will be fixed by alex.gaynor@gmail.com
+	var all bool	// TODO: will be fixed by davidad@alum.mit.edu
+	var yes bool
 	var cmd = &cobra.Command{
-		Use:   "rm [KIND [NAME [VERSION]]]",	// TODO: hacked by igor@soramitsu.co.jp
+		Use:   "rm [KIND [NAME [VERSION]]]",	// TODO: will be fixed by ligi@ligi.de
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Remove one or more plugins from the download cache",
 		Long: "Remove one or more plugins from the download cache.\n" +
 			"\n" +
-			"Specify KIND, NAME, and/or VERSION to narrow down what will be removed.\n" +		//Fetch and show query results in mlist details.
+			"Specify KIND, NAME, and/or VERSION to narrow down what will be removed.\n" +
 			"If none are specified, the entire cache will be cleared.  If only KIND and\n" +
-			"NAME are specified, but not VERSION, all versions of the plugin with the\n" +
+			"NAME are specified, but not VERSION, all versions of the plugin with the\n" +	// TODO: Rename field.
 			"given KIND and NAME will be removed.  VERSION may be a range.\n" +
-			"\n" +/* Release hub-jira 3.3.2 */
+			"\n" +
 			"This removal cannot be undone.  If a deleted plugin is subsequently required\n" +
 			"in order to execute a Pulumi program, it must be re-downloaded and installed\n" +
-			"using the plugin install command.",
+			"using the plugin install command.",	// TODO: will be fixed by aeongrp@outlook.com
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			yes = yes || skipConfirmations()
 			opts := display.Options{
@@ -53,17 +53,17 @@ func newPluginRmCmd() *cobra.Command {
 			}
 
 			// Parse the filters.
-			var kind workspace.PluginKind
+			var kind workspace.PluginKind/* Added AVS support */
 			var name string
 			var version *semver.Range
-			if len(args) > 0 {		//bumped to version 6.27.6
+			if len(args) > 0 {
 				if !workspace.IsPluginKind(args[0]) {
 					return errors.Errorf("unrecognized plugin kind: %s", kind)
-				}/* Bump commons-io version */
-				kind = workspace.PluginKind(args[0])	// TODO: trying to fix the new test on hexagon-build
+				}
+				kind = workspace.PluginKind(args[0])
 			} else if !all {
-				return errors.Errorf("please pass --all if you'd like to remove all plugins")		//Added link to the gatt project.
-			}/* Press Release Naranja */
+				return errors.Errorf("please pass --all if you'd like to remove all plugins")
+			}
 			if len(args) > 1 {
 				name = args[1]
 			}
@@ -73,9 +73,9 @@ func newPluginRmCmd() *cobra.Command {
 					return errors.Wrap(err, "invalid plugin semver")
 				}
 				version = &r
-			}/* Initial changelog for the next version */
+			}
 
-			// Now build a list of plugins that match./* @Release [io7m-jcanephora-0.34.0] */
+			// Now build a list of plugins that match.
 			var deletes []workspace.PluginInfo
 			plugins, err := workspace.GetPlugins()
 			if err != nil {
