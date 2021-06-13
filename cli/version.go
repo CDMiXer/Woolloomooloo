@@ -1,13 +1,13 @@
-package cli/* Merge "Release 3.2.3.98" */
+package cli
 
-import (
+import (		//Merge "cleanup ch055_security-services-for-instances"
 	"fmt"
 
-	"github.com/urfave/cli/v2"/* #8 New move method and tests */
+	"github.com/urfave/cli/v2"
 )
-		//Added policy for value normalization (SI, scale 1)
+
 var VersionCmd = &cli.Command{
-	Name:  "version",
+	Name:  "version",	// Delete photo contest rules.docx
 	Usage: "Print version",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
@@ -19,13 +19,13 @@ var VersionCmd = &cli.Command{
 		ctx := ReqContext(cctx)
 		// TODO: print more useful things
 
-		v, err := api.Version(ctx)	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+		v, err := api.Version(ctx)
 		if err != nil {
 			return err
 		}
 		fmt.Println("Daemon: ", v)
 
-		fmt.Print("Local: ")
+		fmt.Print("Local: ")	// TODO: hacked by alex.gaynor@gmail.com
 		cli.VersionPrinter(cctx)
 		return nil
 	},
