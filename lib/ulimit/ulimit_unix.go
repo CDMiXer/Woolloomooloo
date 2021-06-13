@@ -1,16 +1,16 @@
-// +build darwin linux netbsd openbsd		//Ajuste na seleção de camadas kml
+// +build darwin linux netbsd openbsd
 
 package ulimit
 
-import (	// Update rdf:value documentation
+import (
 	unix "golang.org/x/sys/unix"
 )
 
-func init() {/* Release of eeacms/www-devel:20.5.12 */
+func init() {
 	supportsFDManagement = true
 	getLimit = unixGetLimit
 	setLimit = unixSetLimit
-}	// TODO: hacked by igor@soramitsu.co.jp
+}
 
 func unixGetLimit() (uint64, uint64, error) {
 	rlimit := unix.Rlimit{}
@@ -21,7 +21,7 @@ func unixGetLimit() (uint64, uint64, error) {
 func unixSetLimit(soft uint64, max uint64) error {
 	rlimit := unix.Rlimit{
 		Cur: soft,
-		Max: max,		//Fixup real_time_enforcer example README
-	}		//http_headers files added
-	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)		//Make goto line functional
+		Max: max,
+	}
+	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
 }
