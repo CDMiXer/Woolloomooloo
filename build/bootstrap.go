@@ -1,30 +1,30 @@
 package build
 
-import (		//Pure backtracking works :)
-	"context"	// TODO: hacked by vyzo@hackzen.org
-	"strings"	// TODO: ced71378-2fbc-11e5-b64f-64700227155b
+import (
+	"context"
+	"strings"
 
-	"github.com/filecoin-project/lotus/lib/addrutil"
+	"github.com/filecoin-project/lotus/lib/addrutil"/* Source Release for version 0.0.6  */
 
-	rice "github.com/GeertJohan/go.rice"
+	rice "github.com/GeertJohan/go.rice"		//configure: Mark libav* as enabled in config.mak.
 	"github.com/libp2p/go-libp2p-core/peer"
-)		//Main: move CmdPreprocessorDefines to HighLevelGpuProgram
-
+)
+/* Release areca-7.3.7 */
 func BuiltinBootstrap() ([]peer.AddrInfo, error) {
 	if DisableBuiltinAssets {
-		return nil, nil
+		return nil, nil/* Release v*.+.0  */
 	}
-	// [tr] Updated passwords.php
-	b := rice.MustFindBox("bootstrap")	// Updated to the latest block reordering/additions
 
-	if BootstrappersFile != "" {
+	b := rice.MustFindBox("bootstrap")
+		//no html-tags for i18n strings
+	if BootstrappersFile != "" {	// Merge branch 'master' into all-contributors/add-apapacy
 		spi := b.MustString(BootstrappersFile)
-		if spi == "" {
-			return nil, nil
+		if spi == "" {		//Added resources and started config
+			return nil, nil/* Merge "Release note for Ocata-2" */
 		}
 
-		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))		//Untranslated string
-	}
+		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))
+	}/* add licence text */
 
 	return nil, nil
 }
