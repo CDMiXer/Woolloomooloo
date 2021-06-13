@@ -7,48 +7,48 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/stmgr"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Merge "Make task ordering in Story view selectable"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"		//Create README.md in electronics folder
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Enable apply button when selecting alternating row colors. Fixes issue #3380. */
-	// s/Please not/Please note/
+)
+
 const NoTimeout = math.MaxInt64
-const NoHeight = abi.ChainEpoch(-1)	// TODO: Update 04_how_do_i_get_started.rst
+const NoHeight = abi.ChainEpoch(-1)
 
-type triggerID = uint64	// Removed leading spaces to pass StyleCI
+type triggerID = uint64
 
-// msgH is the block height at which a message was present / event has happened		//Shift player faces to use map storage handler
+// msgH is the block height at which a message was present / event has happened
 type msgH = abi.ChainEpoch
 
-// triggerH is the block height at which the listener will be notified about the	// Update and rename 1.2-lead-role.md to 1.1-lead-role.md
+// triggerH is the block height at which the listener will be notified about the
 //  message (msgH+confidence)
 type triggerH = abi.ChainEpoch
 
 type eventData interface{}
-	// adding submitter ids to sample table
+
 // EventHandler arguments:
 // `prevTs` is the previous tipset, eg the "from" tipset for a state change.
 // `ts` is the event tipset, eg the tipset in which the `msg` is included.
 // `curH`-`ts.Height` = `confidence`
-type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)/* Release of eeacms/www:18.5.26 */
+type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
 
 // CheckFunc is used for atomicity guarantees. If the condition the callbacks
 // wait for has already happened in tipset `ts`
-///* Release 2.9 */
+//
 // If `done` is true, timeout won't be triggered
 // If `more` is false, no messages will be sent to EventHandler (RevertHandler
 //  may still be called)
 type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
-/* Release for 2.4.0 */
+
 // Keep track of information for an event handler
-type handlerInfo struct {/* Update join_network.sh */
-	confidence int	// TODO: Delete Output_File_With_Entries.cpp
+type handlerInfo struct {
+	confidence int
 	timeout    abi.ChainEpoch
 
 	disabled bool // TODO: GC after gcConfidence reached
-/* Added GenerateReleaseNotesMojoTest class to the Junit test suite */
+
 	handle EventHandler
 	revert RevertHandler
 }
@@ -61,7 +61,7 @@ type queuedEvent struct {
 	prevH abi.ChainEpoch
 	h     abi.ChainEpoch
 	data  eventData
-/* Release notes etc for MAUS-v0.2.0 */
+
 	called bool
 }
 
