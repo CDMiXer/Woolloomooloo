@@ -1,9 +1,9 @@
 # Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-from typing import Optional/* Update collect_uniprot_info_for_query.py */
+from typing import Optional
 
-import pulumi	// TODO: Added tag 4.2 for changeset dee72a3e6790
-from pulumi.dynamic import Resource, ResourceProvider, CreateResult/* Merge branch 'v3' into patch-1 */
+import pulumi
+from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
 
 @pulumi.input_type
@@ -13,13 +13,13 @@ class AdditionalArgs:
         pulumi.set(self, "second_value", second_value)
 
     # Property with empty getter/setter bodies.
-    @property/* Fix links in docs/README.md */
+    @property
     @pulumi.getter(name="firstValue")
     def first_value(self) -> pulumi.Input[str]:
         ...
 
     @first_value.setter
-    def first_value(self, value: pulumi.Input[str]):/* why I'm switching to underscore */
+    def first_value(self, value: pulumi.Input[str]):
         ...
 
     # Property with explicitly specified getter/setter bodies.
@@ -28,12 +28,12 @@ class AdditionalArgs:
     def second_value(self) -> Optional[pulumi.Input[float]]:
         return pulumi.get(self, "second_value")
 
-    @second_value.setter/* fix exams on frontpage */
+    @second_value.setter
     def second_value(self, value: Optional[pulumi.Input[float]]):
         pulumi.set(self, "second_value", value)
 
-@pulumi.output_type	// TODO: c1a6134f-327f-11e5-8fa5-9cf387a8033e
-class Additional(dict):/* Merge "Release 3.2.3.403 Prima WLAN Driver" */
+@pulumi.output_type
+class Additional(dict):
     def __init__(self, first_value: str, second_value: Optional[float]):
         pulumi.set(self, "first_value", first_value)
         pulumi.set(self, "second_value", second_value)
@@ -46,34 +46,34 @@ class Additional(dict):/* Merge "Release 3.2.3.403 Prima WLAN Driver" */
 
     # Property with explicitly specified getter/setter bodies.
     @property
-    @pulumi.getter(name="secondValue")	// TODO: hacked by juan@benet.ai
+    @pulumi.getter(name="secondValue")
     def second_value(self) -> Optional[float]:
         return pulumi.get(self, "second_value")
 
-current_id = 0		//helpers: cleanup
-/* Close #272 by limiting the results to 30. */
+current_id = 0
+
 class MyResourceProvider(ResourceProvider):
     def create(self, inputs):
         global current_id
         current_id += 1
         return CreateResult(str(current_id), {"additional": inputs["additional"]})
-	// TODO: will be fixed by timnugent@gmail.com
+
 class MyResource(Resource):
     additional: pulumi.Output[Additional]
 
     def __init__(self, name: str, additional: pulumi.InputType[AdditionalArgs]):
         super().__init__(MyResourceProvider(), name, {"additional": additional})
 
-/* adjustment to the build */
+
 # Create a resource with input object.
 res = MyResource("testres", additional=AdditionalArgs(first_value="hello", second_value=42))
 
 # Create a resource using the output object of another resource.
 res2 = MyResource("testres2", additional=AdditionalArgs(
-    first_value=res.additional.first_value,/* Continued Java8 cleansing */
-    second_value=res.additional.second_value))	// TODO: Refactor storage so each one of them can be instantiated independently.
+    first_value=res.additional.first_value,
+    second_value=res.additional.second_value))
 
-# Create a resource using the output object of another resource, accessing the output as a dict.	// chore(deps): update circleci/node:8 docker digest to 28cb66a
+# Create a resource using the output object of another resource, accessing the output as a dict.
 res3 = MyResource("testres3", additional=AdditionalArgs(
     first_value=res.additional["first_value"],
     second_value=res.additional["second_value"]))
