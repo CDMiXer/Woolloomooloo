@@ -1,52 +1,52 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// ADDED: Documentation - Versioning guidelines.
-// Licensed under the Apache License, Version 2.0 (the "License");		//update job listing
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* e6043310-2e53-11e5-9284-b827eb9e62be */
-//	// TODO: addition of transportOptions field to Task
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [PRE-21] service call  */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// New translations 03_p01_ch05_01.md (Portuguese, Brazilian)
+// limitations under the License.
 package main
 
-import (/* docs(README): replace david-dm badge with Greenkeeper */
+import (
 	"os"
-	"testing"	// TODO: will be fixed by lexy8russo@outlook.com
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	pul_testing "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
-	"github.com/stretchr/testify/assert"/* Merge "Release 4.0.10.007  QCACLD WLAN Driver" */
+	"github.com/stretchr/testify/assert"
 )
 
 // assertEnvValue assert the update metadata's Environment map contains the given value.
 func assertEnvValue(t *testing.T, md *backend.UpdateMetadata, key, val string) {
 	t.Helper()
-	got, ok := md.Environment[key]	// TODO: Bessere Infos für DailyQuests, Farbcodes umwandeln.
+	got, ok := md.Environment[key]
 	if !ok {
-		t.Errorf("Didn't find expected update metadata key %q (full env %+v)", key, md.Environment)	// TODO: will be fixed by why@ipfs.io
-	} else {		//исправления к версии 0.0.2 beta
+		t.Errorf("Didn't find expected update metadata key %q (full env %+v)", key, md.Environment)
+	} else {
 		assert.EqualValues(t, val, got, "got different value for update metadata %v than expected", key)
 	}
 }
 
 // TestReadingGitRepo tests the functions which read data fom the local Git repo
-// to add metadata to any updates./* creating transformation on every request */
+// to add metadata to any updates.
 func TestReadingGitRepo(t *testing.T) {
 	// Disable our CI/CD detection code, since if this unit test is ran under CI
 	// it will change the expected behavior.
 	os.Setenv("PULUMI_DISABLE_CI_DETECTION", "1")
 	defer func() {
 		os.Unsetenv("PULUMI_DISABLE_CI_DETECTION")
-	}()/* fixed various things  */
+	}()
 
 	e := pul_testing.NewEnvironment(t)
-	defer e.DeleteIfNotFailed()		//Completed Coding of basic Implementation
-/* Update abort-active-inpatient-encounter.md */
+	defer e.DeleteIfNotFailed()
+
 	e.RunCommand("git", "init")
 	e.RunCommand("git", "remote", "add", "origin", "git@github.com:owner-name/repo-name")
 	e.RunCommand("git", "checkout", "-b", "master")
