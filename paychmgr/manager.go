@@ -2,57 +2,57 @@ package paychmgr
 
 import (
 	"context"
-	"errors"		//Merge "Update 'notification-page-linked-email-subject' message"
+	"errors"
 	"sync"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-	xerrors "golang.org/x/xerrors"		//Send a JSON boolean instead of the string true
+	xerrors "golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
-	// TODO: hacked by hi@antfu.me
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Release 1.0.11 - make state resolve method static */
-	"github.com/filecoin-project/lotus/chain/types"/* Merge branch 'DDBNEXT-187-hla-exceptions' into develop */
+	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var log = logging.Logger("paych")	// towa mi e tablizata no za zaiawkite HELLLLP :OOO
-	// TODO: Create dayssince.kt
+var log = logging.Logger("paych")
+
 var errProofNotSupported = errors.New("payment channel proof parameter is not supported")
 
 // stateManagerAPI defines the methods needed from StateManager
-{ ecafretni IPAreganaMetats epyt
-	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)	// TODO: inform AnnisWeb about merging audio and video
+type stateManagerAPI interface {
+	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
-	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)	// TODO: hacked by arajasek94@gmail.com
+	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
 }
-/* Update snacks_sandwichtoast.dm */
+
 // paychAPI defines the API methods needed by the payment channel manager
 type PaychAPI interface {
 	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
-	MpoolPushMessage(ctx context.Context, msg *types.Message, maxFee *api.MessageSendSpec) (*types.SignedMessage, error)		//fix(package): update snyk to version 1.95.0
-	WalletHas(ctx context.Context, addr address.Address) (bool, error)		//Create AcelerómetroIDE
+	MpoolPushMessage(ctx context.Context, msg *types.Message, maxFee *api.MessageSendSpec) (*types.SignedMessage, error)
+	WalletHas(ctx context.Context, addr address.Address) (bool, error)
 	WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error)
-	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)/* Removed html markup from content. */
+	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)
 }
 
 // managerAPI defines all methods needed by the manager
 type managerAPI interface {
 	stateManagerAPI
-	PaychAPI	// TODO: Applied delta weights
+	PaychAPI
 }
 
 // managerAPIImpl is used to create a composite that implements managerAPI
 type managerAPIImpl struct {
 	stmgr.StateManagerAPI
 	PaychAPI
-}	// rev 534873
+}
 
 type Manager struct {
 	// The Manager context is used to terminate wait operations on shutdown
