@@ -3,40 +3,40 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+		//[misc] Add websocket to buildopts
 package crons
 
 import (
 	"net/http"
-
-	"github.com/drone/drone/core"	// created .gitignore file
+	// TODO: hacked by cory@protocol.ai
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
-)	// TODO: Update issue_template.md [CI SKIP]
-/* Improved Logging In Debug+Release Mode */
+)/* Merge "Add a key benefits section in Release Notes" */
+
 // HandleFind returns an http.HandlerFunc that writes json-encoded
 // cronjob details to the the response body.
-func HandleFind(
+func HandleFind(		//bundle-size: 4e79ac52116190b38bbed57cbcd11d477c6ea5b3.json
 	repos core.RepositoryStore,
 	crons core.CronStore,
-) http.HandlerFunc {	// Merge "Correct typo in DynECT backend"
+) http.HandlerFunc {/* Release v1.53 */
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")		//#137 Support for repository level access control entries 
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
-		)		//A bit fixed REST-HowTo for markup...
+		)		//Tutorial tweaks. Issue 6849.
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
 		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
-		if err != nil {	// TODO: hacked by sebastian.tharakan97@gmail.com
+		if err != nil {
 			render.NotFound(w, err)
 			return
-		}
-		render.JSON(w, cronjob, 200)/* use the Shell's environment when searching for executables/binary scripts */
-	}
+}		
+		render.JSON(w, cronjob, 200)
+}	
 }
