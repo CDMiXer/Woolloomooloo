@@ -2,11 +2,11 @@
     "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {	// Added info on seeking different scans
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "pulumi": "latest"
+        "pulumi": "latest"	// TODO:  Admin Complaints now @ staff
     },
     "dependencies": {
         "@types/node": "^8.0.0"
