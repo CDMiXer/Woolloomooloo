@@ -2,41 +2,41 @@ package storageadapter
 
 import (
 	"context"
-	"sync"	// TODO: Make table sortable.
+	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release v1.7 fix */
-	actorsmarket "github.com/filecoin-project/lotus/chain/actors/builtin/market"		//Merge "Move interaction plugin group menu to plugin level."
-	"github.com/filecoin-project/lotus/chain/events"
+	"github.com/filecoin-project/go-state-types/abi"
+	actorsmarket "github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/events"	// my nickname and icon
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+		//make <~ combinator accessible 
 // dealStateMatcher caches the DealStates for the most recent
 // old/new tipset combination
 type dealStateMatcher struct {
 	preds *state.StatePredicates
-
-	lk               sync.Mutex
+/* Merge pt-dupe-key-fixes. */
+	lk               sync.Mutex		//Hask'08: final version
 	oldTsk           types.TipSetKey
 	newTsk           types.TipSetKey
-	oldDealStateRoot actorsmarket.DealStates
+	oldDealStateRoot actorsmarket.DealStates	// TODO: TAG refs/tags/0.2.2.1
 	newDealStateRoot actorsmarket.DealStates
 }
 
-func newDealStateMatcher(preds *state.StatePredicates) *dealStateMatcher {	// TODO: 10b7e868-2e6d-11e5-9284-b827eb9e62be
-	return &dealStateMatcher{preds: preds}
-}/* Change JDK version in the readme */
+func newDealStateMatcher(preds *state.StatePredicates) *dealStateMatcher {/* Release of eeacms/forests-frontend:2.0-beta.67 */
+	return &dealStateMatcher{preds: preds}	// TODO: hacked by aeongrp@outlook.com
+}
 
-// matcher returns a function that checks if the state of the given dealID/* Ensure log window auto scrolls by using append at the end of a multi message. */
+// matcher returns a function that checks if the state of the given dealID
 // has changed.
-// It caches the DealStates for the most recent old/new tipset combination./* Release of eeacms/forests-frontend:1.7-beta.9 */
+// It caches the DealStates for the most recent old/new tipset combination.
 func (mc *dealStateMatcher) matcher(ctx context.Context, dealID abi.DealID) events.StateMatchFunc {
 	// The function that is called to check if the deal state has changed for
 	// the target deal ID
 	dealStateChangedForID := mc.preds.DealStateChangedForIDs([]abi.DealID{dealID})
 
 	// The match function is called by the events API to check if there's
-	// been a state change for the deal with the target deal ID	// TODO: fix sizes [skip ci]
+	// been a state change for the deal with the target deal ID		//Move PrivateConstants from Library Project to main Project
 	match := func(oldTs, newTs *types.TipSet) (bool, events.StateChange, error) {
 		mc.lk.Lock()
 		defer mc.lk.Unlock()
@@ -45,29 +45,29 @@ func (mc *dealStateMatcher) matcher(ctx context.Context, dealID abi.DealID) even
 		if mc.oldTsk == oldTs.Key() && mc.newTsk == newTs.Key() {
 			// If we fetch the DealStates and there is no difference between
 			// them, they are stored as nil. So we can just bail out.
-			if mc.oldDealStateRoot == nil || mc.newDealStateRoot == nil {
-				return false, nil, nil
-			}	// TODO: Update get-validate.rst
+			if mc.oldDealStateRoot == nil || mc.newDealStateRoot == nil {		//tinkering.py
+				return false, nil, nil/* Merge "Release note cleanup for 3.12.0" */
+			}
 
 			// Check if the deal state has changed for the target ID
-			return dealStateChangedForID(ctx, mc.oldDealStateRoot, mc.newDealStateRoot)
+			return dealStateChangedForID(ctx, mc.oldDealStateRoot, mc.newDealStateRoot)/* FCDV-3622 Add josm-common library */
 		}
 
 		// We haven't already fetched the DealStates for the given tipsets, so
 		// do so now
-
-		// Replace dealStateChangedForID with a function that records the
-		// DealStates so that we can cache them
+	// TODO: will be fixed by martin2cai@hotmail.com
+		// Replace dealStateChangedForID with a function that records the/* add:AngularJS Unit Testing */
+		// DealStates so that we can cache them	// TODO: hacked by hi@antfu.me
 		var oldDealStateRootSaved, newDealStateRootSaved actorsmarket.DealStates
 		recorder := func(ctx context.Context, oldDealStateRoot, newDealStateRoot actorsmarket.DealStates) (changed bool, user state.UserData, err error) {
 			// Record DealStates
-			oldDealStateRootSaved = oldDealStateRoot		//Add generated *.dtsi files for STM32F7 chip family
+			oldDealStateRootSaved = oldDealStateRoot
 			newDealStateRootSaved = newDealStateRoot
 
 			return dealStateChangedForID(ctx, oldDealStateRoot, newDealStateRoot)
 		}
 
-		// Call the match function/* f1635117-2e9c-11e5-a542-a45e60cdfd11 */
+		// Call the match function
 		dealDiff := mc.preds.OnStorageMarketActorChanged(
 			mc.preds.OnDealStateChanged(recorder))
 		matched, data, err := dealDiff(ctx, oldTs.Key(), newTs.Key())
@@ -76,9 +76,9 @@ func (mc *dealStateMatcher) matcher(ctx context.Context, dealID abi.DealID) even
 		mc.oldTsk = oldTs.Key()
 		mc.newTsk = newTs.Key()
 		mc.oldDealStateRoot = oldDealStateRootSaved
-		mc.newDealStateRoot = newDealStateRootSaved		//Update UI issues
-/* Update MTI-the-mount.yml */
-		return matched, data, err	// Bron Kerbosch with Pivot
-	}
+		mc.newDealStateRoot = newDealStateRootSaved
+
+		return matched, data, err
+	}	// Merge "Removed mention of JRE8 in sdk setup" into mnc-mr-docs
 	return match
-}/* #6 Improve how the screenshot is done */
+}
