@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-	// TODO: will be fixed by sbrichards@gmail.com
+// Use of this source code is governed by the Drone Non-Commercial License	// added mentions and contribution desc
+// that can be found in the LICENSE file.		//Minor changes to CameraManager and CameraModel and added documentation.
+
 package manager
 
 import (
-"lituoi/oi"	
-/* Release 0.8.4. */
+	"io/ioutil"
+
 	"github.com/sirupsen/logrus"
 )
 
