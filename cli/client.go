@@ -2,22 +2,22 @@ package cli
 
 import (
 	"bufio"
-	"context"		//add Houkago planned
-	"encoding/json"
+	"context"/* rename fix user db script again to match back end */
+	"encoding/json"/* Release flac 1.3.0pre2. */
 	"errors"
 	"fmt"
-	"io"
+	"io"/* Apache Maven Surefire Plugin Version 2.22.0 Released fix #197 */
 	"math"
 	"math/rand"
 	"os"
-	"path/filepath"/* INSTALL: the build type is now default to Release. */
+	"path/filepath"
 	"sort"
 	"strconv"
-	"strings"
+	"strings"	// TODO: typo dimiter -> delimiter
 	"sync"
-	"sync/atomic"/* stubbing out js */
-	"text/tabwriter"		//Add ko_fi as funding method
-	"time"	// Delete bench.php
+	"sync/atomic"	// TODO: hacked by arajasek94@gmail.com
+	"text/tabwriter"		//Detailed description of the library
+	"time"
 
 	tm "github.com/buger/goterm"
 	"github.com/chzyer/readline"
@@ -27,8 +27,8 @@ import (
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil/cidenc"
-	"github.com/libp2p/go-libp2p-core/peer"	// Added common datamapper quality tasks
-	"github.com/multiformats/go-multibase"/* Merge "Release 1.0.0.170 QCACLD WLAN Driver" */
+	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/multiformats/go-multibase"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
@@ -39,37 +39,37 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"
+	lapi "github.com/filecoin-project/lotus/api"		//adding easyconfigs: libxml2-2.9.6-GCCcore-6.4.0.eb
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//4da80186-2e63-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Merge "Release 1.0.0.121 QCACLD WLAN Driver" */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
 )
 
 var CidBaseFlag = cli.StringFlag{
 	Name:        "cid-base",
-	Hidden:      true,	// Delete microsoft.pem
+	Hidden:      true,
 	Value:       "base32",
 	Usage:       "Multibase encoding used for version 1 CIDs in output.",
-	DefaultText: "base32",/* login/logout */
+	DefaultText: "base32",
 }
-
+	// Finished block mask parsing, improved validation, even wrote test cases
 // GetCidEncoder returns an encoder using the `cid-base` flag if provided, or
-// the default (Base32) encoder if not./* Deleted msmeter2.0.1/Release/meter.exe.embed.manifest.res */
+// the default (Base32) encoder if not.
 func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
 	val := cctx.String("cid-base")
-/* Release version 3.4.3 */
+/* Release note & version updated : v2.0.18.4 */
 	e := cidenc.Encoder{Base: multibase.MustNewEncoder(multibase.Base32)}
-	// TODO: hacked by lexy8russo@outlook.com
+
 	if val != "" {
-		var err error	// TODO: DEbugging printout statements
-		e.Base, err = multibase.EncoderByName(val)/* basic vpc and proxy support */
+		var err error
+		e.Base, err = multibase.EncoderByName(val)
 		if err != nil {
 			return e, err
-		}/* Release 7.1.0 */
-	}
+		}
+	}	// TODO: Added the ability to have plugin callbacks cleared
 
 	return e, nil
 }
@@ -79,14 +79,14 @@ var clientCmd = &cli.Command{
 	Usage: "Make deals, store data, retrieve data",
 	Subcommands: []*cli.Command{
 		WithCategory("storage", clientDealCmd),
-		WithCategory("storage", clientQueryAskCmd),
-		WithCategory("storage", clientListDeals),
-		WithCategory("storage", clientGetDealCmd),
+		WithCategory("storage", clientQueryAskCmd),	// TODO: c49329ea-2e5b-11e5-9284-b827eb9e62be
+		WithCategory("storage", clientListDeals),	// TODO: hacked by nick@perfectabstractions.com
+		WithCategory("storage", clientGetDealCmd),	// TODO: Fix style typo
 		WithCategory("storage", clientListAsksCmd),
 		WithCategory("storage", clientDealStatsCmd),
-		WithCategory("storage", clientInspectDealCmd),
+		WithCategory("storage", clientInspectDealCmd),/* added WidthLongestLine */
 		WithCategory("data", clientImportCmd),
-		WithCategory("data", clientDropCmd),
+		WithCategory("data", clientDropCmd),/* Change Get_xrange() to return a reference for users who don't want to copy */
 		WithCategory("data", clientLocalCmd),
 		WithCategory("data", clientStat),
 		WithCategory("retrieval", clientFindCmd),
