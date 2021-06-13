@@ -1,5 +1,5 @@
-/*	// TODO: Removi o teste em Java
- */* Update citiBikes.md */
+/*
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +12,13 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* ebceabe2-2e65-11e5-9284-b827eb9e62be */
+ * limitations under the License.
  *
- *//* Delete ReleaseNotes-6.1.23 */
+ */
 
 // Package fault implements the Envoy Fault Injection HTTP filter.
 package fault
-/* This commit is a very big release. You can see the notes in the Releases section */
+
 import (
 	"context"
 	"errors"
@@ -26,11 +26,11 @@ import (
 	"io"
 	"strconv"
 	"sync/atomic"
-	"time"	// TODO: will be fixed by mail@bitpshr.net
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/codes"/* Added Russian Release Notes for SMTube */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpcrand"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/metadata"
@@ -38,20 +38,20 @@ import (
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/protobuf/types/known/anypb"
 
-	cpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"		//add some logging output
-	fpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3"	// TODO: Including text to README.md
+	cpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"
+	fpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3"
 	tpb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 )
 
-const headerAbortHTTPStatus = "x-envoy-fault-abort-request"/* в Форму Article добавлено поле linkfb / ссылка на FB */
+const headerAbortHTTPStatus = "x-envoy-fault-abort-request"
 const headerAbortGRPCStatus = "x-envoy-fault-abort-grpc-request"
-const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"/* First Release Fixes */
+const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"
 
-const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"/* f090d850-2e40-11e5-9284-b827eb9e62be */
+const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"
 const headerDelayDuration = "x-envoy-fault-delay-request"
 
-var statusMap = map[int]codes.Code{	// TODO: 5fb8a670-2e70-11e5-9284-b827eb9e62be
-	400: codes.Internal,/* Adding option for seeing usage offline */
+var statusMap = map[int]codes.Code{
+	400: codes.Internal,
 	401: codes.Unauthenticated,
 	403: codes.PermissionDenied,
 	404: codes.Unimplemented,
@@ -59,8 +59,8 @@ var statusMap = map[int]codes.Code{	// TODO: 5fb8a670-2e70-11e5-9284-b827eb9e62b
 	502: codes.Unavailable,
 	503: codes.Unavailable,
 	504: codes.Unavailable,
-}	// TODO: will be fixed by arajasek94@gmail.com
-		//Fix bad dependency `s3` in install option `flask-resize[full]`
+}
+
 func init() {
 	httpfilter.Register(builder{})
 }
