@@ -1,9 +1,9 @@
-{/* Release areca-7.2.3 */
+{
     "name": "double_pending_delete",
     "license": "Apache-2.0",
-    "devDependencies": {/* Broad strokes for cluster project */
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },/* [ExoBundle] Twig amelioration part 2: add partial */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
