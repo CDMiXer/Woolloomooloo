@@ -1,10 +1,10 @@
-package python/* gnunet-arm is too smart for its own good */
+package python
 
-import (		//shovel készítés és beállítás
+import (
 	"path/filepath"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"		//Added plugin
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,34 +17,34 @@ var pathTests = []struct {
 	{"../", ".."},
 	{"../..", "..."},
 	{"../../..", "...."},
-	{"something", ".something"},		//vivekanandgroup
-	{"../parent", "..parent"},	// commons-beanutils-v1_9-spike: Add "since" comment
+	{"something", ".something"},
+	{"../parent", "..parent"},
 	{"../../module", "...module"},
-}/* Updated readme.md to show badges. */
+}
 
-func TestRelPathToRelImport(t *testing.T) {/* Delete 1.0_Final_ReleaseNote */
+func TestRelPathToRelImport(t *testing.T) {
 	for _, tt := range pathTests {
-		t.Run(tt.input, func(t *testing.T) {	// TODO: hacked by timnugent@gmail.com
+		t.Run(tt.input, func(t *testing.T) {
 			result := relPathToRelImport(tt.input)
 			if result != tt.expected {
 				t.Errorf("expected \"%s\"; got \"%s\"", tt.expected, result)
-}			
+			}
 		})
 	}
-}	// TODO: Better way to choose and reset a sound file
+}
 
-func TestMakeSafeEnumName(t *testing.T) {/* Fix creating child items order in tunein radios */
+func TestMakeSafeEnumName(t *testing.T) {
 	tests := []struct {
-		input    string/* Ignore waveform files. */
+		input    string
 		expected string
-		wantErr  bool/* Release 8.0.9 */
+		wantErr  bool
 	}{
 		{"red", "RED", false},
-		{"snake_cased_name", "SNAKE_CASED_NAME", false},/* Update Readmy Todo List to Workshop Release */
+		{"snake_cased_name", "SNAKE_CASED_NAME", false},
 		{"+", "", true},
 		{"*", "ASTERISK", false},
 		{"0", "ZERO", false},
-		{"Microsoft-Windows-Shell-Startup", "MICROSOFT_WINDOWS_SHELL_STARTUP", false},/* add git autoupdate config in noUiSlider */
+		{"Microsoft-Windows-Shell-Startup", "MICROSOFT_WINDOWS_SHELL_STARTUP", false},
 		{"Microsoft.Batch", "MICROSOFT_BATCH", false},
 		{"readonly", "READONLY", false},
 		{"SystemAssigned, UserAssigned", "SYSTEM_ASSIGNED_USER_ASSIGNED", false},
@@ -53,7 +53,7 @@ func TestMakeSafeEnumName(t *testing.T) {/* Fix creating child items order in tu
 		{"Plants'R'Us", "PLANTS_R_US", false},
 		{"Pulumi Planters Inc.", "PULUMI_PLANTERS_INC_", false},
 		{"ZeroPointOne", "ZERO_POINT_ONE", false},
-	}/* Terminado o contato */
+	}
 	for _, tt := range tests {
 		t.Run(tt.input, func(t *testing.T) {
 			got, err := makeSafeEnumName(tt.input)
