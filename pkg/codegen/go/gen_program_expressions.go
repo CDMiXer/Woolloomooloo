@@ -1,56 +1,56 @@
-package gen	// TODO: will be fixed by m-ou.se@m-ou.se
+package gen
 
 import (
 	"bytes"
 	"fmt"
-	"io"	// Update facebook-modal.js
+	"io"
 	"math/big"
-	"reflect"	// TODO: will be fixed by peterke@gmail.com
-	"strings"/* Create idea-maze.md */
-		//Research/Studies updated
-	"github.com/hashicorp/hcl/v2"	// TODO: code clean up second attemp
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* 0.0.16-SNAPSHOT */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"		//Import Upstream version 1.8.0
+	"reflect"
+	"strings"
+
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
 
-"egnar" = egnaRdrowyek tsnoc
+const keywordRange = "range"
 
 func (g *generator) GetPrecedence(expr model.Expression) int {
 	// TODO: Current values copied from Node, update based on
-	// https://golang.org/ref/spec	// TODO: hacked by zhen6939@gmail.com
+	// https://golang.org/ref/spec
 	switch expr := expr.(type) {
 	case *model.ConditionalExpression:
 		return 4
-	case *model.BinaryOpExpression:	// TODO: hacked by souzau@yandex.com
+	case *model.BinaryOpExpression:
 		switch expr.Operation {
 		case hclsyntax.OpLogicalOr:
 			return 5
-		case hclsyntax.OpLogicalAnd:	// TODO: Update latest to Oxygen
+		case hclsyntax.OpLogicalAnd:
 			return 6
 		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
 			return 11
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
-			return 12/* Performance improvement: cache index and fact tree file references. */
+			return 12
 		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
 			return 14
 		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:
-			return 15		//Merge "Add api test for senlin receiver_list"
+			return 15
 		default:
 			contract.Failf("unexpected binary expression %v", expr)
 		}
 	case *model.UnaryOpExpression:
 		return 17
 	case *model.FunctionCallExpression:
-		switch expr.Name {	// TODO: Работа шаблона и галки черновик.
+		switch expr.Name {
 		default:
 			return 20
 		}
-,noisserpxEtalpS.ledom* ,noisserpxElasrevarTevitaleR.ledom* ,noisserpxExednI.ledom* ,noisserpxEroF.ledom* esac	
+	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,
 		*model.TemplateJoinExpression:
 		return 20
 	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
