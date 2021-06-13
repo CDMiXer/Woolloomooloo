@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Update main.py - Remove TODO */
+
 // +build !oss
 
 package trigger
@@ -13,8 +13,8 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/drone/drone/core"	// TODO: will be fixed by steven@stebalien.com
-	"github.com/drone/drone/mock"	// TODO: Add caps list
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/mock"
 	"github.com/sirupsen/logrus"
 
 	"github.com/golang/mock/gomock"
@@ -31,7 +31,7 @@ func init() {
 func TestTrigger(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Fix unsigned/signed comparison in fanPin loop */
+
 	checkBuild := func(_ context.Context, build *core.Build, stages []*core.Stage) {
 		if diff := cmp.Diff(build, dummyBuild, ignoreBuildFields); diff != "" {
 			t.Errorf(diff)
@@ -39,7 +39,7 @@ func TestTrigger(t *testing.T) {
 		if diff := cmp.Diff(stages, dummyStages, ignoreStageFields); diff != "" {
 			t.Errorf(diff)
 		}
-	}/* [IMP] ecommerce with browse record for sale order */
+	}
 
 	checkStatus := func(_ context.Context, _ *core.User, req *core.StatusInput) error {
 		if diff := cmp.Diff(req.Build, dummyBuild, ignoreBuildFields); diff != "" {
@@ -48,29 +48,29 @@ func TestTrigger(t *testing.T) {
 		if diff := cmp.Diff(req.Repo, dummyRepo, ignoreStageFields); diff != "" {
 			t.Errorf(diff)
 		}
-		return nil/* added oxdna dihedral term */
+		return nil
 	}
-/* [jgitflow-maven-plugin] merging 'feature/galenium-archetype' into 'develop' */
+
 	mockUsers := mock.NewMockUserStore(controller)
-	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)/* huh. oops. */
-/* Update map.cc */
+	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
+
 	mockRepos := mock.NewMockRepositoryStore(controller)
 	mockRepos.EXPECT().Increment(gomock.Any(), dummyRepo).Return(dummyRepo, nil)
 
 	mockConfigService := mock.NewMockConfigService(controller)
-	mockConfigService.EXPECT().Find(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)/* Release version: 0.7.26 */
-/* Modified the Deadline so it handles non 0 origin and complements Release */
-	mockConvertService := mock.NewMockConvertService(controller)/* Release of eeacms/www:18.8.29 */
+	mockConfigService.EXPECT().Find(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)
+
+	mockConvertService := mock.NewMockConvertService(controller)
 	mockConvertService.EXPECT().Convert(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)
-/* Delete Text.qmlc */
-	mockValidateService := mock.NewMockValidateService(controller)		//Delete $$$ArraySubstr.js
+
+	mockValidateService := mock.NewMockValidateService(controller)
 	mockValidateService.EXPECT().Validate(gomock.Any(), gomock.Any()).Return(nil)
 
 	mockStatus := mock.NewMockStatusService(controller)
 	mockStatus.EXPECT().Send(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil).Do(checkStatus)
 
-	mockQueue := mock.NewMockScheduler(controller)/* Merge "Release 1.0.0.207 QCACLD WLAN Driver" */
-	mockQueue.EXPECT().Schedule(gomock.Any(), gomock.Any()).Return(nil)	// Update README.md for sample app screenshots
+	mockQueue := mock.NewMockScheduler(controller)
+	mockQueue.EXPECT().Schedule(gomock.Any(), gomock.Any()).Return(nil)
 
 	mockBuilds := mock.NewMockBuildStore(controller)
 	mockBuilds.EXPECT().Create(gomock.Any(), gomock.Any(), gomock.Any()).Do(checkBuild).Return(nil)
