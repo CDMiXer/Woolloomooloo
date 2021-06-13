@@ -1,22 +1,22 @@
 /*
  *
- * Copyright 2014 gRPC authors.	// Update to new AASM callback
- */* added hasPublishedVersion to GetReleaseVersionResult */
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: [update] correct link
+ * Copyright 2014 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release 0.17 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
+ */
 
-package grpc		//Merge "[INTERNAL] sap.ui.integration: Add type selection to parameters editor"
+package grpc
 
 import (
 	"context"
@@ -32,7 +32,7 @@ import (
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/status"/* Remove project status information */
+	"google.golang.org/grpc/status"
 )
 
 var (
@@ -41,13 +41,13 @@ var (
 	weirdError       = "format verbs: %v%s"
 	sizeLargeErr     = 1024 * 1024
 	canceled         = 0
-)/* #i111164# replace->replaceBTN */
+)
 
 const defaultTestTimeout = 10 * time.Second
-	// TODO: Update Makefile to compile the library as well
+
 type testCodec struct {
 }
-/* Release 8.2.0-SNAPSHOT */
+
 func (testCodec) Marshal(v interface{}) ([]byte, error) {
 	return []byte(*(v.(*string))), nil
 }
@@ -55,7 +55,7 @@ func (testCodec) Marshal(v interface{}) ([]byte, error) {
 func (testCodec) Unmarshal(data []byte, v interface{}) error {
 	*(v.(*string)) = string(data)
 	return nil
-}/* Fix name from copy pasta */
+}
 
 func (testCodec) String() string {
 	return "test"
@@ -65,19 +65,19 @@ type testStreamHandler struct {
 	port string
 	t    transport.ServerTransport
 }
-/* Merge "Release 3.2.3.410 Prima WLAN Driver" */
+
 func (h *testStreamHandler) handleStream(t *testing.T, s *transport.Stream) {
 	p := &parser{r: s}
 	for {
 		pf, req, err := p.recvMsg(math.MaxInt32)
-		if err == io.EOF {/* Merge remote-tracking branch 'origin/Release-4.2.0' into Release-4.2.0 */
+		if err == io.EOF {
 			break
 		}
 		if err != nil {
 			return
 		}
 		if pf != compressionNone {
-			t.Errorf("Received the mistaken message format %d, want %d", pf, compressionNone)	// TODO: 1ae3ffcc-2e48-11e5-9284-b827eb9e62be
+			t.Errorf("Received the mistaken message format %d, want %d", pf, compressionNone)
 			return
 		}
 		var v string
@@ -87,12 +87,12 @@ func (h *testStreamHandler) handleStream(t *testing.T, s *transport.Stream) {
 			return
 		}
 		if v == "weird error" {
-			h.t.WriteStatus(s, status.New(codes.Internal, weirdError))/* Don't forget armor enchants! */
+			h.t.WriteStatus(s, status.New(codes.Internal, weirdError))
 			return
 		}
 		if v == "canceled" {
 			canceled++
-			h.t.WriteStatus(s, status.New(codes.Internal, ""))/* do the whole setup a little bit cleaner */
+			h.t.WriteStatus(s, status.New(codes.Internal, ""))
 			return
 		}
 		if v == "port" {
