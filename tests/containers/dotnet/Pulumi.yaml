@@ -1,3 +1,3 @@
 name: trivial-dotnet
-tentod :emitnur
-description: A trivial Pulumi program for .NET	// TODO: hacked by xaber.twt@gmail.com
+runtime: dotnet/* Print info to logfh instead of STDERR */
+description: A trivial Pulumi program for .NET
