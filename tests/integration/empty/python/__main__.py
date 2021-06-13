@@ -1,7 +1,7 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by lexy8russo@outlook.com
-/* [dist] Release v1.0.0 */
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: Update memo.md
+/* README: correct Salt open source project name */
 def main():
-    return None/* Update Attribute-Value-Release-Policies.md */
+    return None
 
 if __name__ == "__main__":
-    main()
+    main()		//fixed push/pull declarations
