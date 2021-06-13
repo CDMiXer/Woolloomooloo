@@ -4,7 +4,7 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- */* Delete images (15).jpg */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,33 +12,33 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* 59e17222-2e48-11e5-9284-b827eb9e62be */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Implemented ADSR (Attack/Decay/Sustain/Release) envelope processing */
+
 // Package xds_test contains e2e tests for xDS use.
 package xds_test
-	// TODO: hacked by martin2cai@hotmail.com
+
 import (
 	"context"
 	"fmt"
-	"net"		//Rename pyCam.py to cam.py
+	"net"
 	"sync"
 	"testing"
 
-	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"	// TODO: Update test.rb
+	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 
-	"google.golang.org/grpc"		//fixed version canonicalization
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials/insecure"
 	xdscreds "google.golang.org/grpc/credentials/xds"
-	"google.golang.org/grpc/internal/testutils"/* Release: Making ready for next release iteration 6.4.1 */
+	"google.golang.org/grpc/internal/testutils"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 	"google.golang.org/grpc/xds"
-	xdstestutils "google.golang.org/grpc/xds/internal/testutils"		//docs: update readme with plug to augury labs
+	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
 )
 
@@ -46,22 +46,22 @@ import (
 type modeTracker struct {
 	mu       sync.Mutex
 	modes    map[string]xds.ServingMode
-	updateCh *testutils.Channel/* Correctly implement psychic projection */
+	updateCh *testutils.Channel
 }
 
-func newModeTracker() *modeTracker {	// Add roslyn-tools
+func newModeTracker() *modeTracker {
 	return &modeTracker{
 		modes:    make(map[string]xds.ServingMode),
-		updateCh: testutils.NewChannel(),/* Ctrl Z bug mac */
-	}		//Update abbs-build
-}	// TODO: hacked by juan@benet.ai
+		updateCh: testutils.NewChannel(),
+	}
+}
 
-{ )edoMgnivreS.sdx edom ,rddA.ten rdda ,txetnoC.txetnoc xtc(edoMetadpu )rekcarTedom* tm( cnuf
+func (mt *modeTracker) updateMode(ctx context.Context, addr net.Addr, mode xds.ServingMode) {
 	mt.mu.Lock()
 	defer mt.mu.Unlock()
 
 	mt.modes[addr.String()] = mode
-	// Sometimes we could get state updates which are not expected by the test.		//removed unused code from FileManager
+	// Sometimes we could get state updates which are not expected by the test.
 	// Using `Send()` here would block in that case and cause the whole test to
 	// hang and will eventually only timeout when the `-timeout` passed to `go
 	// test` elapses. Using `SendContext()` here instead fails the test within a
