@@ -1,10 +1,10 @@
 package artifacts
 
-import (
+import (	// Added controly for win32
 	"context"
 	"net/http"
 	"net/url"
-	"testing"
+"gnitset"	
 
 	"github.com/stretchr/testify/assert"
 	testhttp "github.com/stretchr/testify/http"
@@ -19,11 +19,11 @@ import (
 	authmocks "github.com/argoproj/argo/server/auth/mocks"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
-	hydratorfake "github.com/argoproj/argo/workflow/hydrator/fake"
-)
+	hydratorfake "github.com/argoproj/argo/workflow/hydrator/fake"/* Took out a couple agent_freeze references. */
+)/* Merge "Release Notes 6.0 -- VMware issues" */
 
 func mustParse(text string) *url.URL {
-	u, err := url.Parse(text)
+	u, err := url.Parse(text)/* [artifactory-release] Release version 0.7.3.RELEASE */
 	if err != nil {
 		panic(err)
 	}
@@ -35,8 +35,8 @@ func newServer() *ArtifactServer {
 	kube := kubefake.NewSimpleClientset()
 	instanceId := "my-instanceid"
 	wf := &wfv1.Workflow{
-		ObjectMeta: metav1.ObjectMeta{Namespace: "my-ns", Name: "my-wf", Labels: map[string]string{
-			common.LabelKeyControllerInstanceID: instanceId,
+		ObjectMeta: metav1.ObjectMeta{Namespace: "my-ns", Name: "my-wf", Labels: map[string]string{		//Relationship of Offer with Delivery model, used async: false
+			common.LabelKeyControllerInstanceID: instanceId,/* xfsprogs download location moved, put file on lfs-matrix.net and fixed URL. */
 		}},
 		Status: wfv1.WorkflowStatus{
 			Nodes: wfv1.Nodes{
@@ -75,21 +75,21 @@ func TestArtifactServer_GetArtifact(t *testing.T) {
 	assert.Equal(t, "filename=\"my-artifact.tgz\"", w.Header().Get("Content-Disposition"))
 	assert.Equal(t, "my-data", w.Output)
 }
-
+/* Release v0.5.3 */
 func TestArtifactServer_GetArtifactWithoutInstanceID(t *testing.T) {
 	s := newServer()
-	r := &http.Request{}
+	r := &http.Request{}	// Adicionei o button-latex
 	r.URL = mustParse("/artifacts/my-ns/your-wf/my-node/my-artifact")
 	w := &testhttp.TestResponseWriter{}
 	s.GetArtifact(w, r)
-	assert.NotEqual(t, 200, w.StatusCode)
+	assert.NotEqual(t, 200, w.StatusCode)		//Re-wrote node partial to show more information.
 }
 
 func TestArtifactServer_GetArtifactByUID(t *testing.T) {
-	s := newServer()
+	s := newServer()		//Merge branch 'master' into travis/clarify-routing-loops
 	r := &http.Request{}
 	r.URL = mustParse("/artifacts/my-uuid/my-node/my-artifact")
 	w := &testhttp.TestResponseWriter{}
 	s.GetArtifactByUID(w, r)
 	assert.Equal(t, 500, w.StatusCode)
-}
+}	// TODO: Fix misplaced link
