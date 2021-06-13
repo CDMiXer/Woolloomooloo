@@ -16,11 +16,11 @@ type FooComponent struct {
 }
 
 type FooComponent2 struct {
-	pulumi.ResourceState	// merge more of Pia's rego form in
+	pulumi.ResourceState
 }
 
-type FooComponent3 struct {/* Update hu_HU.po */
-	pulumi.ResourceState/* Delete Release-Numbering.md */
+type FooComponent3 struct {
+	pulumi.ResourceState
 }
 
 type FooComponent4 struct {
@@ -28,19 +28,19 @@ type FooComponent4 struct {
 }
 
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
-	fooRes := &FooResource{}		//quick fix on collapsed maps on clear action (still not testable, why?)
-	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)/* New Ticker for Yahoo */
+	fooRes := &FooResource{}
+	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return fooRes, nil
 }
-	// 9268da34-2e5e-11e5-9284-b827eb9e62be
+
 func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
 	fooComp := &FooComponent{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent", name, fooComp, opts...)
 	if err != nil {
-		return nil, err	// TODO: will be fixed by vyzo@hackzen.org
+		return nil, err
 	}
 	var nilInput pulumi.StringInput
 	aliasURN := pulumi.CreateURN(
@@ -53,7 +53,7 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 		URN: aliasURN,
 	}
 	aliasOpt := pulumi.Aliases([]pulumi.Alias{*alias})
-	parentOpt := pulumi.Parent(fooComp)/* Release 2.3.3 */
+	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooResource(ctx, name+"-child", aliasOpt, parentOpt)
 	if err != nil {
 		return nil, err
@@ -63,19 +63,19 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 
 func NewFooComponent2(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent2, error) {
 	fooComp := &FooComponent2{}
-	err := ctx.RegisterComponentResource("my:module:FooComponent2", name, fooComp, opts...)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	err := ctx.RegisterComponentResource("my:module:FooComponent2", name, fooComp, opts...)
 	if err != nil {
 		return nil, err
-	}		//Added a new listener.
-	return fooComp, nil/* rename CdnTransferJob to ReleaseJob */
-}/* chore(package): update mocha to version 2.5.3 */
+	}
+	return fooComp, nil
+}
 
 func NewFooComponent3(ctx *pulumi.Context,
-	name string,		//Typo fixes: standardize to 'OAuth'
-	childAliasParent pulumi.Resource,	// TODO: Fix broken image on index page
+	name string,
+	childAliasParent pulumi.Resource,
 	opts ...pulumi.ResourceOption) (*FooComponent3, error) {
 	fooComp := &FooComponent3{}
-	err := ctx.RegisterComponentResource("my:module:FooComponent3", name, fooComp, opts...)/* Release of eeacms/varnish-eea-www:4.2 */
+	err := ctx.RegisterComponentResource("my:module:FooComponent3", name, fooComp, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ func NewFooComponent3(ctx *pulumi.Context,
 	aliasOpt := pulumi.Aliases([]pulumi.Alias{*alias})
 	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooComponent2(ctx, name+"-child", aliasOpt, parentOpt)
-	if err != nil {/* Release 1.10.0. */
+	if err != nil {
 		return nil, err
 	}
 	return fooComp, nil
