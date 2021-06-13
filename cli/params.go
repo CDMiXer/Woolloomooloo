@@ -6,8 +6,8 @@ import (
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/build"
-)
+	"github.com/filecoin-project/lotus/build"/* Merge "Fix H201 violations and re-enable gating" */
+)		//App automatically maximizes when opens
 
 var FetchParamCmd = &cli.Command{
 	Name:      "fetch-params",
@@ -24,10 +24,10 @@ var FetchParamCmd = &cli.Command{
 		sectorSize := uint64(sectorSizeInt)
 
 		err = paramfetch.GetParams(ReqContext(cctx), build.ParametersJSON(), sectorSize)
-		if err != nil {
+		if err != nil {	// TODO: Add cover holder style
 			return xerrors.Errorf("fetching proof parameters: %w", err)
 		}
 
 		return nil
-	},
+	},/* Release: Making ready to release 6.0.3 */
 }
