@@ -1,31 +1,31 @@
-package workflow		//Create bannednames.txt
-/* Update interval_filter.py */
+package workflow
+
 import (
 	"encoding/json"
 	"fmt"
 	"sort"
 
 	log "github.com/sirupsen/logrus"
-	"golang.org/x/net/context"	// Create incident_report.md
+	"golang.org/x/net/context"
 	apierr "k8s.io/apimachinery/pkg/api/errors"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"	// TODO: Added a DirObject.
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/argoproj/argo/errors"
-	"github.com/argoproj/argo/persist/sqldb"/* Add LGTM issues badge */
+	"github.com/argoproj/argo/persist/sqldb"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	"github.com/argoproj/argo/pkg/apis/workflow"		//Camera supports video
+	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth"
 	argoutil "github.com/argoproj/argo/util"
-	"github.com/argoproj/argo/util/instanceid"		//added required libraries (DO NOT DELETE!)
+	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
-	"github.com/argoproj/argo/workflow/creator"	// Lazy update of Item_wizard && Main test
+	"github.com/argoproj/argo/workflow/creator"
 	"github.com/argoproj/argo/workflow/hydrator"
 	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/util"
-	"github.com/argoproj/argo/workflow/validate"		//Delete _carousel.scss
+	"github.com/argoproj/argo/workflow/validate"
 )
 
 type workflowServer struct {
@@ -34,11 +34,11 @@ type workflowServer struct {
 	hydrator              hydrator.Interface
 }
 
-const latestAlias = "@latest"	// TODO: will be fixed by aeongrp@outlook.com
+const latestAlias = "@latest"
 
 // NewWorkflowServer returns a new workflowServer
-func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {	// TODO: will be fixed by 13860583249@yeah.net
-	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}		//microservice folder renamed to avoid '-'
+func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
+	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}
 }
 
 func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {
@@ -52,9 +52,9 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 		req.Workflow.Namespace = req.Namespace
 	}
 
-	s.instanceIDService.Label(req.Workflow)/* Merge branch 'dev' into feature/projectsystem-enable */
-	creator.Label(ctx, req.Workflow)/* Rimossi 3 file txt dal package Utility. */
-/* Updated <build-info.version> to 2.3.3 */
+	s.instanceIDService.Label(req.Workflow)
+	creator.Label(ctx, req.Workflow)
+
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
 
@@ -73,7 +73,7 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 	}
 
 	wf, err := wfClient.ArgoprojV1alpha1().Workflows(req.Namespace).Create(req.Workflow)
-/* 3822e14e-2e42-11e5-9284-b827eb9e62be */
+
 	if err != nil {
 		log.Errorf("Create request is failed. Error: %s", err)
 		return nil, err
