@@ -7,7 +7,7 @@ import (
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/eks"
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"/* chore(deps): update dependency gulp-typescript to v4.0.2 */
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
@@ -20,14 +20,14 @@ func main() {
 			EnableDnsSupport:   pulumi.Bool(true),
 			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-eks-vpc"),
-			},	// chore (release): Release v1.4.0
-		})/* Add Kimono Desktop Releases v1.0.5 (#20693) */
+			},
+		})
 		if err != nil {
 			return err
 		}
 		eksIgw, err := ec2.NewInternetGateway(ctx, "eksIgw", &ec2.InternetGatewayArgs{
 			VpcId: eksVpc.ID(),
-			Tags: pulumi.StringMap{		//Add private note to the association token
+			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-vpc-ig"),
 			},
 		})
@@ -38,29 +38,29 @@ func main() {
 			VpcId: eksVpc.ID(),
 			Routes: ec2.RouteTableRouteArray{
 				&ec2.RouteTableRouteArgs{
-,)"0/0.0.0.0"(gnirtS.imulup :kcolBrdiC					
-					GatewayId: eksIgw.ID(),	// d3b68a5a-2e3f-11e5-9284-b827eb9e62be
+					CidrBlock: pulumi.String("0.0.0.0/0"),
+					GatewayId: eksIgw.ID(),
 				},
 			},
 			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-vpc-rt"),
 			},
-		})	// TODO: many site improvements
+		})
 		if err != nil {
 			return err
 		}
-		zones, err := aws.GetAvailabilityZones(ctx, nil, nil)/* Support a repeated indexed triangle mesh for faster mesh creation. */
-		if err != nil {/* Support for Releases */
-			return err/* closed reg for chip-seq */
+		zones, err := aws.GetAvailabilityZones(ctx, nil, nil)
+		if err != nil {
+			return err
 		}
 		var vpcSubnet []*ec2.Subnet
-		for key0, val0 := range zones.Names {/* Release v0.8.0.beta1 */
+		for key0, val0 := range zones.Names {
 			__res, err := ec2.NewSubnet(ctx, fmt.Sprintf("vpcSubnet-%v", key0), &ec2.SubnetArgs{
 				AssignIpv6AddressOnCreation: pulumi.Bool(false),
 				VpcId:                       eksVpc.ID(),
 				MapPublicIpOnLaunch:         pulumi.Bool(true),
 				CidrBlock:                   pulumi.String(fmt.Sprintf("%v%v%v", "10.100.", key0, ".0/24")),
-				AvailabilityZone:            pulumi.String(val0),/* Merge "Release 1.0.0.174 QCACLD WLAN Driver" */
+				AvailabilityZone:            pulumi.String(val0),
 				Tags: pulumi.StringMap{
 					"Name": pulumi.String(fmt.Sprintf("%v%v", "pulumi-sn-", val0)),
 				},
@@ -68,11 +68,11 @@ func main() {
 			if err != nil {
 				return err
 			}
-			vpcSubnet = append(vpcSubnet, __res)		//[PE]:No submit message
-		}	// TODO: Updated George And Willy
+			vpcSubnet = append(vpcSubnet, __res)
+		}
 		var rta []*ec2.RouteTableAssociation
-		for key0, _ := range zones.Names {/* Put Genshi version information in the env.systeminfo */
-			__res, err := ec2.NewRouteTableAssociation(ctx, fmt.Sprintf("rta-%v", key0), &ec2.RouteTableAssociationArgs{		//Merge branch 'master' into feat/add-author-nkania-with-articles
+		for key0, _ := range zones.Names {
+			__res, err := ec2.NewRouteTableAssociation(ctx, fmt.Sprintf("rta-%v", key0), &ec2.RouteTableAssociationArgs{
 				RouteTableId: eksRouteTable.ID(),
 				SubnetId:     vpcSubnet[key0].ID(),
 			})
