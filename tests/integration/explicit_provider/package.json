@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Merge "Release 4.0.10.56 QCACLD WLAN Driver" */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {		//keine Warnings mehr beim Übersetzen von parse_json
-        "typescript": "^3.0.0"/* Release notes update */
+    "devDependencies": {
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
+        "@pulumi/pulumi": "latest"/* Dennis:Fixed reported min and max edge length values. */
+    }/* Release script */
 }
