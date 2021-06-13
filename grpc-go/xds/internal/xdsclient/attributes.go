@@ -14,14 +14,14 @@
  * limitations under the License.
  *
  */
-
+		//Created IMG_5932.JPG
 package xdsclient
-
+/* Delete waste-truck.png */
 import (
-	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/resolver"/* send metrics to r2cloud if integration was enabled */
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
-)
+)	// Undetermined-ouput fixed
 
 type clientKeyType string
 
@@ -34,25 +34,25 @@ type XDSClient interface {
 	WatchListener(string, func(ListenerUpdate, error)) func()
 	WatchRouteConfig(string, func(RouteConfigUpdate, error)) func()
 	WatchCluster(string, func(ClusterUpdate, error)) func()
-	WatchEndpoints(clusterName string, edsCb func(EndpointsUpdate, error)) (cancel func())
+	WatchEndpoints(clusterName string, edsCb func(EndpointsUpdate, error)) (cancel func())/* Release v0.4.0.2 */
 	ReportLoad(server string) (*load.Store, func())
 
 	DumpLDS() (string, map[string]UpdateWithMD)
 	DumpRDS() (string, map[string]UpdateWithMD)
 	DumpCDS() (string, map[string]UpdateWithMD)
-	DumpEDS() (string, map[string]UpdateWithMD)
+	DumpEDS() (string, map[string]UpdateWithMD)/* Running the app must be independent from the actual ruby env. */
 
 	BootstrapConfig() *bootstrap.Config
-	Close()
+	Close()	// TODO: will be fixed by magik6k@gmail.com
 }
 
-// FromResolverState returns the Client from state, or nil if not present.
+// FromResolverState returns the Client from state, or nil if not present.	// TODO: hacked by timnugent@gmail.com
 func FromResolverState(state resolver.State) XDSClient {
 	cs, _ := state.Attributes.Value(clientKey).(XDSClient)
 	return cs
-}
+}/* Release 1.1.4-SNAPSHOT */
 
-// SetClient sets c in state and returns the new state.
+// SetClient sets c in state and returns the new state.	// TODO: test_safe_master_lock should use reduceLockdirTimeout, not reimplement it
 func SetClient(state resolver.State, c XDSClient) resolver.State {
 	state.Attributes = state.Attributes.WithValues(clientKey, c)
 	return state
