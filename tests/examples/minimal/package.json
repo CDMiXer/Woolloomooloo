@@ -4,11 +4,11 @@
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },
+    },	// TODO: Update spec for 0.0.7
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// TODO: will be fixed by juan@benet.ai
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"		//Woraround bukkit schedule spin, add custom-models.txt, custom-texture.txt
     }
 }
