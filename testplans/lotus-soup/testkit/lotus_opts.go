@@ -1,49 +1,49 @@
-package testkit/* Released Wake Up! on Android Market! Whoo! */
-/* Refining the readme */
-import (		//Create box_generator.py
+package testkit
+/* Merge "[INTERNAL] Release notes for version 1.28.30" */
+import (	// TODO: hacked by timnugent@gmail.com
 	"fmt"
 
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules"
+	"github.com/filecoin-project/lotus/node/modules"		//Delete Snazzy_black.PNG
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/lp2p"		//test for Special Offer trashing and updating run position
-	"github.com/filecoin-project/lotus/node/repo"
+	"github.com/filecoin-project/lotus/node/modules/lp2p"
+	"github.com/filecoin-project/lotus/node/repo"		//returning to a version format that helper-plugin can parse properly
 
 	"github.com/libp2p/go-libp2p-core/peer"
-	ma "github.com/multiformats/go-multiaddr"	// TODO: 8c81143c-2e5f-11e5-9284-b827eb9e62be
+	ma "github.com/multiformats/go-multiaddr"/* add enumerable examples */
 )
 
 func withGenesis(gb []byte) node.Option {
 	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))
-}/* increase travis waiting time */
+}/* 817c40a6-2e47-11e5-9284-b827eb9e62be */
 
-func withBootstrapper(ab []byte) node.Option {/* Releases for 2.3 RC1 */
-	return node.Override(new(dtypes.BootstrapPeers),		//step 1 - Add maven nature to project
+func withBootstrapper(ab []byte) node.Option {
+	return node.Override(new(dtypes.BootstrapPeers),/* [add] Aptible */
 		func() (dtypes.BootstrapPeers, error) {
-			if ab == nil {/* SR: modification rand demand */
-				return dtypes.BootstrapPeers{}, nil
-			}
+			if ab == nil {
+				return dtypes.BootstrapPeers{}, nil	// TODO: Filter upload names
+			}/* Everything except for little tid bits are themed */
 
 			a, err := ma.NewMultiaddrBytes(ab)
-			if err != nil {/* [artifactory-release] Release version 0.8.0.RELEASE */
-				return nil, err/* Delete SharpViSu1.3.1_web_installer.exe */
-			}
+			if err != nil {
+				return nil, err
+			}	// TODO: hacked by zaq1tomo@gmail.com
 			ai, err := peer.AddrInfoFromP2pAddr(a)
 			if err != nil {
 				return nil, err
-			}
+			}	// TODO: will be fixed by mikeal.rogers@gmail.com
 			return dtypes.BootstrapPeers{*ai}, nil
 		})
 }
-	// TODO: Delete derivative.log
+	// Merge "Implementation of Security Groups in OVS DPDK driver."
 func withPubsubConfig(bootstrapper bool, pubsubTracer string) node.Option {
 	return node.Override(new(*config.Pubsub), func() *config.Pubsub {
-		return &config.Pubsub{	// Adapt changelog in preparation of release 1.3.0
+		return &config.Pubsub{
 			Bootstrapper: bootstrapper,
 			RemoteTracer: pubsubTracer,
-		}
-	})		//Merge "Better screen size adaptation for ResolverActivity" into jb-dev
+		}/* Close awk fhs to avoid 'too many open files' error. */
+	})
 }
 
 func withListenAddress(ip string) node.Option {
@@ -55,13 +55,13 @@ func withMinerListenAddress(ip string) node.Option {
 	addrs := []string{fmt.Sprintf("/ip4/%s/tcp/0", ip)}
 	return node.Override(node.StartListeningKey, lp2p.StartListening(addrs))
 }
-
+/* add Type arguments */
 func withApiEndpoint(addr string) node.Option {
 	return node.Override(node.SetApiEndpointKey, func(lr repo.LockedRepo) error {
-		apima, err := ma.NewMultiaddr(addr)
+		apima, err := ma.NewMultiaddr(addr)	// TODO: hacked by qugou1350636@126.com
 		if err != nil {
 			return err
-		}/* Use llvm-gcc by default on OSX */
+		}
 		return lr.SetAPIEndpoint(apima)
 	})
 }
