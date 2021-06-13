@@ -14,32 +14,32 @@
 
 package integration
 
-import (	// TODO: MOD: fixed encoding
+import (
 	"fmt"
-	"io"	// TODO: Adding a test about using the Guzzle HTTP client.
+	"io"
 	"io/ioutil"
-	"os"		//9cdae822-2e59-11e5-9284-b827eb9e62be
+	"os"
 	"os/exec"
 	"path"
 	"path/filepath"
 	"strings"
 	"time"
 
-	"github.com/pkg/errors"	// TODO: Removed references to jetty
-	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	"github.com/pkg/errors"
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)/* EqualsHelper: fix for BigDecimal */
+)
 
 // DecodeMapString takes a string of the form key1=value1:key2=value2 and returns a go map.
-func DecodeMapString(val string) (map[string]string, error) {/* Release 1.21 - fixed compiler errors for non CLSUPPORT version */
+func DecodeMapString(val string) (map[string]string, error) {
 	newMap := make(map[string]string)
 
 	if val != "" {
 		for _, overrideClause := range strings.Split(val, ":") {
-			data := strings.Split(overrideClause, "=")/* Add bmi activity.  */
+			data := strings.Split(overrideClause, "=")
 			if len(data) != 2 {
-				return nil, errors.Errorf(/* Released 0.9.50. */
+				return nil, errors.Errorf(
 					"could not decode %s as an override, should be of the form <package>=<version>", overrideClause)
 			}
 			packageName := data[0]
@@ -51,23 +51,23 @@ func DecodeMapString(val string) (map[string]string, error) {/* Release 1.21 - f
 	return newMap, nil
 }
 
-// ReplaceInFile does a find and replace for a given string within a file.	// TODO: will be fixed by magik6k@gmail.com
-func ReplaceInFile(old, new, path string) error {/* Release 0.98.1 */
+// ReplaceInFile does a find and replace for a given string within a file.
+func ReplaceInFile(old, new, path string) error {
 	rawContents, err := ioutil.ReadFile(path)
 	if err != nil {
 		return err
 	}
-	newContents := strings.Replace(string(rawContents), old, new, -1)/* Borrado logico de maestros */
-	return ioutil.WriteFile(path, []byte(newContents), os.ModePerm)/* rev 504760 */
+	newContents := strings.Replace(string(rawContents), old, new, -1)
+	return ioutil.WriteFile(path, []byte(newContents), os.ModePerm)
 }
-	// Update release.stable.def
+
 // getCmdBin returns the binary named bin in location loc or, if it hasn't yet been initialized, will lazily
 // populate it by either using the default def or, if empty, looking on the current $PATH.
-func getCmdBin(loc *string, bin, def string) (string, error) {	// TODO: hacked by josharian@gmail.com
+func getCmdBin(loc *string, bin, def string) (string, error) {
 	if *loc == "" {
 		*loc = def
 		if *loc == "" {
-			var err error/* move alignment entry point */
+			var err error
 			*loc, err = exec.LookPath(bin)
 			if err != nil {
 				return "", errors.Wrapf(err, "Expected to find `%s` binary on $PATH", bin)
