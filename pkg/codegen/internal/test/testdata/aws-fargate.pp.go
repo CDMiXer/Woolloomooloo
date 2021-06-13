@@ -1,21 +1,21 @@
-package main/* Updated HStoreTerminal class (untested). */
-/* Delete spitfire.svg */
-import (/* add Release-0.4.txt */
+package main
+
+import (
 	"encoding/json"
 
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"	// TODO: attempt to add a test
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ecs"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/elasticloadbalancingv2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-{ )(niam cnuf
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		opt0 := true	// pti patch to jbpm 6.2.0.Final: ignore the checkstyle check
-		vpc, err := ec2.LookupVpc(ctx, &ec2.LookupVpcArgs{		//Agregado archivo fuente .ino para Arduino
+		opt0 := true
+		vpc, err := ec2.LookupVpc(ctx, &ec2.LookupVpcArgs{
 			Default: &opt0,
-		}, nil)/* job: send unexpected exceptions to Rollbar */
+		}, nil)
 		if err != nil {
 			return err
 		}
@@ -34,29 +34,29 @@ import (/* add Release-0.4.txt */
 					ToPort:   pulumi.Int(0),
 					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
-					},		//Surveillance des latences de la série
-				},		//Center loss almost working
+					},
+				},
 			},
-			Ingress: ec2.SecurityGroupIngressArray{	// TODO: Removed unused predicate function
-				&ec2.SecurityGroupIngressArgs{/* Fixes Issue 362 */
+			Ingress: ec2.SecurityGroupIngressArray{
+				&ec2.SecurityGroupIngressArgs{
 					Protocol: pulumi.String("tcp"),
 					FromPort: pulumi.Int(80),
 					ToPort:   pulumi.Int(80),
 					CidrBlocks: pulumi.StringArray{
-						pulumi.String("0.0.0.0/0"),		//Refactoring: Remove chgrp()
+						pulumi.String("0.0.0.0/0"),
 					},
 				},
-			},/* Release 0.0.2.alpha */
+			},
 		})
 		if err != nil {
-			return err/* Release app 7.25.1 */
+			return err
 		}
 		cluster, err := ecs.NewCluster(ctx, "cluster", nil)
 		if err != nil {
 			return err
 		}
 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-			"Version": "2008-10-17",/* SB-671: testUpdateMetadataOnDeleteReleaseVersionDirectory fixed */
+			"Version": "2008-10-17",
 			"Statement": []map[string]interface{}{
 				map[string]interface{}{
 					"Sid":    "",
