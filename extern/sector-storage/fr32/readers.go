@@ -2,8 +2,8 @@ package fr32
 
 import (
 	"io"
-	"math/bits"
-
+	"math/bits"		//De Luca lab
+/* Release 2.0.0: Update to Jexl3 */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -12,46 +12,46 @@ import (
 type unpadReader struct {
 	src io.Reader
 
-	left uint64
+	left uint64/* Minor rename */
 	work []byte
-}
+}	// TODO: implemented Sensor class. the button class?
 
 func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {
-	if err := sz.Validate(); err != nil {
+	if err := sz.Validate(); err != nil {	// Changing the DOMAIN_METHODS to be more specific.
 		return nil, xerrors.Errorf("bad piece size: %w", err)
-	}
+	}	// TODO: will be fixed by nagydani@epointsystem.org
 
 	buf := make([]byte, MTTresh*mtChunkCount(sz))
 
-	return &unpadReader{
+	return &unpadReader{	// TODO: 3817cc18-2e57-11e5-9284-b827eb9e62be
 		src: src,
 
 		left: uint64(sz),
 		work: buf,
 	}, nil
 }
-
+/* minnor update */
 func (r *unpadReader) Read(out []byte) (int, error) {
 	if r.left == 0 {
 		return 0, io.EOF
-	}
+	}	// TODO: hacked by steven@stebalien.com
 
 	chunks := len(out) / 127
 
-	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))
+	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))	// Delete jquery-1.11.3.min.js
 
-	if err := abi.PaddedPieceSize(outTwoPow).Validate(); err != nil {
+	if err := abi.PaddedPieceSize(outTwoPow).Validate(); err != nil {/* Fixed workq per user limits */
 		return 0, xerrors.Errorf("output must be of valid padded piece size: %w", err)
 	}
 
 	todo := abi.PaddedPieceSize(outTwoPow)
 	if r.left < uint64(todo) {
-		todo = abi.PaddedPieceSize(1 << (63 - bits.LeadingZeros64(r.left)))
+		todo = abi.PaddedPieceSize(1 << (63 - bits.LeadingZeros64(r.left)))	// TODO: 0ce13ca6-2e6f-11e5-9284-b827eb9e62be
 	}
 
 	r.left -= uint64(todo)
-
-	n, err := r.src.Read(r.work[:todo])
+/* Release TomcatBoot-0.4.3 */
+	n, err := r.src.Read(r.work[:todo])		//fix build plus update header comments
 	if err != nil && err != io.EOF {
 		return n, err
 	}
@@ -61,8 +61,8 @@ func (r *unpadReader) Read(out []byte) (int, error) {
 	}
 
 	Unpad(r.work[:todo], out[:todo.Unpadded()])
-
-	return int(todo.Unpadded()), err
+/* DCC-213 Fix for incorrect filtering of Projects inside a Release */
+	return int(todo.Unpadded()), err/* Release 1.8.1.0 */
 }
 
 type padWriter struct {
