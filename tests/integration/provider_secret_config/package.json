@@ -1,9 +1,9 @@
-{
+{/* Release for v45.0.0. */
     "name": "typescript",
-    "devDependencies": {	// mtrace for cli omegasync.php
+    "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//Update bubblegum.conf
+    }/* Release of eeacms/www:20.1.11 */
 }
