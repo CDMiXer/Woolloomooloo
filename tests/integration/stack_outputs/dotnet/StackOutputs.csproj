@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>/* Merge "Release notes for newton RC2" */
+/* 8490cd0c-2e42-11e5-9284-b827eb9e62be */
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-</Project>	// TODO: Updated: netron 2.6.1
+	// TODO: update badges and update mantained date
+</Project>
