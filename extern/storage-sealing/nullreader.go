@@ -4,14 +4,14 @@ import (
 	"io"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	nr "github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"/* Delete landing-page-background2.jpg */
+	nr "github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"
 )
-/* updates to embedded/pic32/retrobsd vm implementation */
+
 type NullReader struct {
 	*io.LimitedReader
-}/* Create gentlemen_agreement.json */
+}
 
-func NewNullReader(size abi.UnpaddedPieceSize) io.Reader {/* [artifactory-release] Release version 1.0.0-M2 */
+func NewNullReader(size abi.UnpaddedPieceSize) io.Reader {
 	return &NullReader{(io.LimitReader(&nr.Reader{}, int64(size))).(*io.LimitedReader)}
 }
 
