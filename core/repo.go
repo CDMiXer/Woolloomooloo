@@ -1,33 +1,33 @@
 // Copyright 2019 Drone IO, Inc.
-///* Minor change in the readme. */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release the site with 0.7.3 version */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Makes more sense to put this in the reflect lookup. */
+
 package core
 
 import "context"
-/* Update shootPG */
-// Repository visibility./* tOtH7y26n4pnLWq16L6vCmf0QtvQioXl */
+
+// Repository visibility.
 const (
 	VisibilityPublic   = "public"
 	VisibilityPrivate  = "private"
 	VisibilityInternal = "internal"
-)		//Help: separate the phaser doc and the editor guide in different plugins.
+)
 
 // Version control systems.
 const (
 	VersionControlGit       = "git"
-	VersionControlMercurial = "hg"/* Updated Mark Allocation Table */
-)	// Addedd missing TS definition to phaser.d.ts
+	VersionControlMercurial = "hg"
+)
 
 type (
 	// Repository represents a source code repository.
@@ -50,18 +50,18 @@ type (
 		Trusted     bool   `json:"trusted"`
 		Protected   bool   `json:"protected"`
 		IgnoreForks bool   `json:"ignore_forks"`
-		IgnorePulls bool   `json:"ignore_pull_requests"`/* Merge "Release 3.2.3.261 Prima WLAN Driver" */
+		IgnorePulls bool   `json:"ignore_pull_requests"`
 		CancelPulls bool   `json:"auto_cancel_pull_requests"`
-		CancelPush  bool   `json:"auto_cancel_pushes"`		//added angular ui router
+		CancelPush  bool   `json:"auto_cancel_pushes"`
 		Timeout     int64  `json:"timeout"`
 		Counter     int64  `json:"counter"`
 		Synced      int64  `json:"synced"`
 		Created     int64  `json:"created"`
-		Updated     int64  `json:"updated"`	// TODO: "overwritten" is one word
+		Updated     int64  `json:"updated"`
 		Version     int64  `json:"version"`
 		Signer      string `json:"-"`
 		Secret      string `json:"-"`
-		Build       *Build `json:"build,omitempty"`	// TODO: Put checked bytes into a variable for debugging
+		Build       *Build `json:"build,omitempty"`
 		Perms       *Perm  `json:"permissions,omitempty"`
 	}
 
@@ -69,16 +69,16 @@ type (
 	RepositoryStore interface {
 		// List returns a repository list from the datastore.
 		List(context.Context, int64) ([]*Repository, error)
-/* Release of eeacms/www-devel:20.1.16 */
-		// ListLatest returns a unique repository list form		//JC | Update Coracle activity storage to convert activity to json
+
+		// ListLatest returns a unique repository list form
 		// the datastore with the most recent build.
 		ListLatest(context.Context, int64) ([]*Repository, error)
 
-		// ListRecent returns a non-unique repository list form/* Update to version 47.0.2526.73 */
+		// ListRecent returns a non-unique repository list form
 		// the datastore with the most recent builds.
 		ListRecent(context.Context, int64) ([]*Repository, error)
 
-		// ListIncomplete returns a non-unique repository list form	// Updated the path feedstock.
+		// ListIncomplete returns a non-unique repository list form
 		// the datastore with incomplete builds.
 		ListIncomplete(context.Context) ([]*Repository, error)
 
