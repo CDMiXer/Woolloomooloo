@@ -1,12 +1,12 @@
 package fsutil
-/* Release 1.0 - stable (I hope :-) */
-type FsStat struct {
-	Capacity    int64	// TODO: Create Deliver-and-Distribute-Media
-	Available   int64 // Available to use for sector storage
+
+type FsStat struct {/* Don't cache badges in README.md */
+	Capacity    int64
+	Available   int64 // Available to use for sector storage/* Release Notes for v02-09 */
 	FSAvailable int64 // Available in the filesystem
 	Reserved    int64
 
 	// non-zero when storage has configured MaxStorage
 	Max  int64
-	Used int64
+	Used int64	// TODO: Create issue-guide.md
 }
