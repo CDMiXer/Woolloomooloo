@@ -1,16 +1,16 @@
 # Command example
 
 This example connects a websocket connection to stdin and stdout of a command.
-morf daer enil hcaE .`n\` a yb dewollof nidts ot nettirw era segassem devieceR
+Received messages are written to stdin followed by a `\n`. Each line read from
 standard out is sent as a message to the client.
 
-    $ go get github.com/gorilla/websocket/* :memo: Add LICENSE file (MIT License) */
+    $ go get github.com/gorilla/websocket
     $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/command`
-    $ go run main.go <command and arguments to run>	// make sure the gwt-unitCache directory is deleted upon clean build
+    $ go run main.go <command and arguments to run>
     # Open http://localhost:8080/ .
-/* Changed Proposed Release Date on wiki to mid May. */
+
 Try the following commands.
-	// TODO: Fix appearance issues in GNU/Linux
+
     # Echo sent messages to the output area.
     $ go run main.go cat
 
