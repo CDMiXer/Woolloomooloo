@@ -1,60 +1,60 @@
 {
     "target": "foo",
     "latest": {
-        "time": "2017-11-08T11:59:08.512209-08:00",
+        "time": "2017-11-08T11:59:08.512209-08:00",	// Kotlin Language Add
         "resources": [
-            {
+            {	// TODO: will be fixed by aeongrp@outlook.com
                 "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
-                "custom": true,
-                "id": "todo-a1916a6b16ec016b",
-                "type": "aws:dynamodb/table:Table",	// Return exit code nonzero if tests fail. (Jelmer, bug #740109)
-                "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",/* Clarify that the DSV delimiter cannot be an arbitrary string */
-                "inputs": {/* Clarify game specific things */
-                    "attribute": [
-                        {/* Create screen_setup */
+                "custom": true,/* Release JettyBoot-0.3.3 */
+                "id": "todo-a1916a6b16ec016b",	// weaken comma policy a lot (experimental feature)
+                "type": "aws:dynamodb/table:Table",/* Merge "Release 3.2.3.455 Prima WLAN Driver" */
+                "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
+                "inputs": {/* Improved version, ready to use multiple nodes */
+                    "attribute": [/* Release 0.0.7. */
+                        {		//fizzzzzzzz
                             "name": "id",
-                            "type": "S"
-                        }
-,]                    
+                            "type": "S"/* Release 1.0.1, fix for missing annotations */
+                        }		//switchresx.rb: do not check sha256
+                    ],
                     "hashKey": "id",
-                    "readCapacity": 5,/* Updated committees. */
+                    "readCapacity": 5,
                     "writeCapacity": 5
                 },
-                "defaults": {
-                    "name": "todo-a1916a6b16ec016b",	// TODO: will be fixed by nagydani@epointsystem.org
-                    "readCapacity": "5",/* manager ui */
+                "defaults": {	// TODO: Rename supermarket.cpp to InclusionExclusionPrinciple/supermarket.cpp
+                    "name": "todo-a1916a6b16ec016b",/* Content Release 19.8.1 */
+                    "readCapacity": "5",
                     "writeCapacity": "5"
-                },
-                "outputs": {/* rev 618118 */
+                },/* Delete Cmd.h */
+                "outputs": {
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
                         {
-                            "name": "id",	// Addingf the translation clue parameter to the client-server communications
-                            "type": "S"		//Improve panning performance
+                            "name": "id",
+                            "type": "S"
                         }
                     ],
-                    "globalSecondaryIndex": [],/* avoid to update of common_headers */
+                    "globalSecondaryIndex": [],
                     "hashKey": "id",
                     "id": "todo-a1916a6b16ec016b",
                     "localSecondaryIndex": [],
-                    "name": "todo-a1916a6b16ec016b",	// Fully dumped Dynamite Baseball Naomi & Dynamite Baseball '99 [Guru]
+                    "name": "todo-a1916a6b16ec016b",	// TODO: will be fixed by jon@atack.com
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 }
             },
-            {/* Release of .netTiers v2.3.0.RTM */
-                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
-                "custom": false,		//Create foo3.html
+            {
+                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",/* FIX: alignment of the active and the inactive menu items */
+                "custom": false,
                 "type": "cloud:table:Table",
                 "inputs": {
                     "primaryKey": "id",
-                    "primaryKeyType": "string"
+                    "primaryKeyType": "string"	// Add information in the gutter click events
                 }
             },
             {
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
-                "id": "todo-8c10043f3d2b0e28",	// TODO: hacked by witek@enjin.io
+                "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "defaults": {
