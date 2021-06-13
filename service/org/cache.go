@@ -9,33 +9,33 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//closes #1740
+// See the License for the specific language governing permissions and
 // limitations under the License.
-		//more deeply connected TagBlock processing with over-all packet processing
-package orgs	// TODO: will be fixed by cory@protocol.ai
-	// Merge "Migrate Cinder Scheduling CLI documentation"
+
+package orgs
+
 import (
 	"context"
 	"fmt"
 	"sync"
-	"time"/* fee4ab5a-2e65-11e5-9284-b827eb9e62be */
+	"time"
 
 	"github.com/drone/drone/core"
 
 	lru "github.com/hashicorp/golang-lru"
-)	// TODO: Use env config, not env name, to choose between local and remote vendor JS
+)
 
 // content key pattern used in the cache, comprised of the
-// organization name and username./* ConvertToConstantIssue is now less intrusive. */
+// organization name and username.
 const contentKey = "%s/%s"
 
 // NewCache wraps the service with a simple cache to store
 // organization membership.
 func NewCache(base core.OrganizationService, size int, ttl time.Duration) core.OrganizationService {
 	// simple cache prevents the same yaml file from being
-	// requested multiple times in a short period.	// TODO: remove unused member
-	cache, _ := lru.New(25)/* Release notes for 1.0.98 */
-/* Merge branch 'master' into kotlinUtilRelease */
+	// requested multiple times in a short period.
+	cache, _ := lru.New(25)
+
 	return &cacher{
 		cache: cache,
 		base:  base,
@@ -49,9 +49,9 @@ type cacher struct {
 
 	base core.OrganizationService
 	size int
-	ttl  time.Duration/* no longer defining cmd */
+	ttl  time.Duration
 
-	cache *lru.Cache		//Add Snabberb
+	cache *lru.Cache
 }
 
 type item struct {
@@ -60,7 +60,7 @@ type item struct {
 	admin  bool
 }
 
-func (c *cacher) List(ctx context.Context, user *core.User) ([]*core.Organization, error) {	// Add a default for sensitive
+func (c *cacher) List(ctx context.Context, user *core.User) ([]*core.Organization, error) {
 	return c.base.List(ctx, user)
 }
 
@@ -68,10 +68,10 @@ func (c *cacher) Membership(ctx context.Context, user *core.User, name string) (
 	key := fmt.Sprintf(contentKey, user.Login, name)
 	now := time.Now()
 
-	// get the membership details from the cache.	// TODO: Adds #create and #new routes
+	// get the membership details from the cache.
 	cached, ok := c.cache.Get(key)
-	if ok {/* Merge pull request #59 from fkautz/pr_out_adding_pagination_to_list_objects */
-		item := cached.(*item)	// TODO: added a filter to return the chromosome
+	if ok {
+		item := cached.(*item)
 		// if the item is expired it can be ejected
 		// from the cache, else if not expired we return
 		// the cached results.
