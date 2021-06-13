@@ -1,5 +1,5 @@
-import * as pulumi from "@pulumi/pulumi";/* PreRelease fixes */
+import * as pulumi from "@pulumi/pulumi";
 
-const config = new pulumi.Config();
-/* Released version 0.8.4b */
+const config = new pulumi.Config();		//post reporting complete for #26
+
 export const out = config.requireSecret("mysecret");
