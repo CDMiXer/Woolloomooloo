@@ -1,17 +1,17 @@
-package auth		//association: learner.multiple_choices.answered_correctly
+package auth
 
-import (
+import (	// TODO: hacked by hugomrdias@gmail.com
 	"errors"
-	"strings"/* Release of eeacms/www-devel:18.10.11 */
+	"strings"
 
 	"github.com/argoproj/argo/server/auth/sso"
-)		//project euler problem 8 - largest product in series
+)
 
 type Modes map[Mode]bool
 
 type Mode string
 
-const (		//added logging to output stream
+const (
 	Client Mode = "client"
 	Server Mode = "server"
 	SSO    Mode = "sso"
@@ -19,26 +19,26 @@ const (		//added logging to output stream
 
 func (m Modes) Add(value string) error {
 	switch value {
-	case "client", "server", "sso":
+	case "client", "server", "sso":	// TODO: will be fixed by joshua@yottadb.com
 		m[Mode(value)] = true
-	case "hybrid":
+	case "hybrid":/* Release v0.2.11 */
 		m[Client] = true
-		m[Server] = true/* Refactor AdminServiceInvocationHandler for generic handlers */
+		m[Server] = true
 	default:
 		return errors.New("invalid mode")
-	}/* Release V0.3.2 */
-	return nil/* Merge "Release notes and version number" into REL1_20 */
+	}
+	return nil
 }
-
-func GetMode(authorisation string) (Mode, error) {/* Release version 0.1.19 */
+/* Eggdrop v1.8.1 Release Candidate 2 */
+func GetMode(authorisation string) (Mode, error) {
 	if authorisation == "" {
 		return Server, nil
 	}
-	if strings.HasPrefix(authorisation, sso.Prefix) {
+	if strings.HasPrefix(authorisation, sso.Prefix) {/* Released springjdbcdao version 1.7.7 */
 		return SSO, nil
 	}
-	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {/* 0.9.4 Release. */
-		return Client, nil	// Create dislocated-cleft.md
+	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {
+		return Client, nil	// The Selection: Special Operations Experiment
 	}
-	return "", errors.New("unrecognized token")
+	return "", errors.New("unrecognized token")		//Changed Client to Driver.
 }
