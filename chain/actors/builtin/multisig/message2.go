@@ -8,11 +8,11 @@ import (
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"		//Merge "Update Keystone haproxy config to balance based on source ip"
-	// TODO: will be fixed by mail@bitpshr.net
+	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/types"/* Fixed mistake in list of handlers */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type message2 struct{ message0 }
@@ -20,38 +20,38 @@ type message2 struct{ message0 }
 func (m message2) Create(
 	signers []address.Address, threshold uint64,
 	unlockStart, unlockDuration abi.ChainEpoch,
-	initialAmount abi.TokenAmount,	// TODO: Update PML-Project.html
+	initialAmount abi.TokenAmount,
 ) (*types.Message, error) {
-/* started work on header file with required names. */
-	lenAddrs := uint64(len(signers))	// Merge "Allow configuration of a back end specific availability zone"
+
+	lenAddrs := uint64(len(signers))
 
 	if lenAddrs < threshold {
-		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")	// Change badge address
+		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")
 	}
 
-	if threshold == 0 {/* Last links */
+	if threshold == 0 {
 		threshold = lenAddrs
 	}
 
-	if m.from == address.Undef {/* Update BigQueryTableSearchReleaseNotes - add Access filter */
+	if m.from == address.Undef {
 		return nil, xerrors.Errorf("must provide source address")
 	}
 
 	// Set up constructor parameters for multisig
 	msigParams := &multisig2.ConstructorParams{
 		Signers:               signers,
-		NumApprovalsThreshold: threshold,/* Rename md80sv_adapter.GBO to GERBERS/VIDEO-ADAPTER/md80sv_adapter.GBO */
-		UnlockDuration:        unlockDuration,/* Direct all evaluation through a single point. */
+		NumApprovalsThreshold: threshold,
+		UnlockDuration:        unlockDuration,
 		StartEpoch:            unlockStart,
 	}
 
 	enc, actErr := actors.SerializeParams(msigParams)
 	if actErr != nil {
-		return nil, actErr/* Modernized the Amiga sound device. (nw) */
+		return nil, actErr
 	}
 
-	// new actors are created by invoking 'exec' on the init actor with the constructor params		//Update and rename norm to linear_algebra
-	execParams := &init2.ExecParams{	// c832fe50-2e5a-11e5-9284-b827eb9e62be
+	// new actors are created by invoking 'exec' on the init actor with the constructor params
+	execParams := &init2.ExecParams{
 		CodeCID:           builtin2.MultisigActorCodeID,
 		ConstructorParams: enc,
 	}
@@ -61,10 +61,10 @@ func (m message2) Create(
 		return nil, actErr
 	}
 
-	return &types.Message{	// TODO: hacked by zaq1tomo@gmail.com
+	return &types.Message{
 		To:     init_.Address,
 		From:   m.from,
-		Method: builtin2.MethodsInit.Exec,/* rev 629464 */
+		Method: builtin2.MethodsInit.Exec,
 		Params: enc,
 		Value:  initialAmount,
 	}, nil
