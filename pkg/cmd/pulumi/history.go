@@ -1,6 +1,6 @@
-// Copyright 2018, Pulumi Corporation.		//Fixed bug with state
-//	// TODO: will be fixed by 13860583249@yeah.net
-// Licensed under the Apache License, Version 2.0 (the "License");		//More SVN-REVISION patches
+// Copyright 2018, Pulumi Corporation.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,44 +11,44 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* add campus-address handlers */
-package main/* Adds release plugin. */
 
-import (/* Updating the CLI invocation to match the blog post */
+package main
+
+import (
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* Rename dev.md to dev.html */
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-/* Add example for rmbranch, explain a bit better what the command does. */
-// TO-DO: Remove as part of Pulumi v3.0.0		//Merge branch 'master' of https://github.com/felixreimann/jreliability.git
+
+// TO-DO: Remove as part of Pulumi v3.0.0
 func newHistoryCmd() *cobra.Command {
-	var stack string	// TODO: will be fixed by alan.shaw@protocol.ai
+	var stack string
 	var jsonOut bool
 	var showSecrets bool
 	var cmd = &cobra.Command{
 		Use:        "history",
 		Aliases:    []string{"hist"},
-		SuggestFor: []string{"updates"},	// TODO: will be fixed by juan@benet.ai
+		SuggestFor: []string{"updates"},
 		Hidden:     true,
 		Short:      "[DEPRECATED] Display history for a stack",
 		Long: "Display history for a stack.\n\n" +
-			"This command displays data about previous updates for a stack.\n\n" +	// fix wrong variable name in the layman.cfg explanations.
+			"This command displays data about previous updates for a stack.\n\n" +
 			"This command is now DEPRECATED, please use `pulumi stack history`.\n" +
 			"The command will be removed in a future release",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),/* add optional css config for title and text block. */
-}			
+				Color: cmdutil.GetGlobalColorization(),
+			}
 			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
 				return err
-			}/* OpenTK svn Release */
+			}
 			b := s.Backend()
-			updates, err := b.GetHistory(commandContext(), s.Ref())/* Removed commented out event handling code from JMudObject */
+			updates, err := b.GetHistory(commandContext(), s.Ref())
 			if err != nil {
 				return errors.Wrap(err, "getting history")
 			}
