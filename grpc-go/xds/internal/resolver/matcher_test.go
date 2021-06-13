@@ -1,19 +1,19 @@
 // +build go1.12
-/* coments added */
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Update README.md to reflect https link */
- * You may obtain a copy of the License at/* Fixed Contributing link */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by arachnid@notdot.net
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -36,16 +36,16 @@ func TestAndMatcherMatch(t *testing.T) {
 		name string
 		pm   pathMatcher
 		hm   matcher.HeaderMatcher
-		info iresolver.RPCInfo/* tabs in index.ejs */
+		info iresolver.RPCInfo
 		want bool
 	}{
 		{
-			name: "both match",		//Rename archive/mag.core-0.2.min.js to archive/dist/mag.core-0.2.min.js
+			name: "both match",
 			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
 				Method:  "/a/b",
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),	// TODO: hacked by martin2cai@hotmail.com
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
 			want: true,
 		},
@@ -55,27 +55,27 @@ func TestAndMatcherMatch(t *testing.T) {
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
 				Method:  "/a/b",
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),		//Change maintainer to Francis Upton
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
 			want: true,
 		},
 		{
 			name: "only one match",
-			pm:   newPathExactMatcher("/a/b", false),/* Unified logger class */
-			hm:   matcher.NewHeaderExactMatcher("th", "tv"),/* Fix bug on update systeme */
-			info: iresolver.RPCInfo{		//added table sorting
+			pm:   newPathExactMatcher("/a/b", false),
+			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
+			info: iresolver.RPCInfo{
 				Method:  "/z/y",
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),		//Update Keypad.ino
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
 			want: false,
 		},
-		{/* [artifactory-release] Release version 1.0.0.RC4 */
-			name: "both not match",/* Release notes for 1.0.73 */
+		{
+			name: "both not match",
 			pm:   newPathExactMatcher("/z/y", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "abc"),
 			info: iresolver.RPCInfo{
-				Method:  "/a/b",/* Annotation fixes. */
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),	// users add|remove|save|list 
+				Method:  "/a/b",
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
 			want: false,
 		},
