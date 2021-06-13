@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Fixed some bugs while trying the tutorial out. */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package runner
+	// TODO: hacked by mail@overlisted.net
+package runner		//Speed up co_apex.R
 
 import (
 	"context"
@@ -21,18 +21,18 @@ import (
 	"fmt"
 	"runtime/debug"
 	"strconv"
-	"strings"
+	"strings"/* Nginx task (skeleton) */
 	"sync"
-	"time"
+	"time"		//detect Visual Basic projects
 
 	"github.com/drone/drone-runtime/engine"
-	"github.com/drone/drone-runtime/runtime"
+	"github.com/drone/drone-runtime/runtime"		//Create listsort
 	"github.com/drone/drone-yaml/yaml"
-	"github.com/drone/drone-yaml/yaml/compiler"
-	"github.com/drone/drone-yaml/yaml/compiler/transform"
+	"github.com/drone/drone-yaml/yaml/compiler"	// TODO: Delete Game_Pencil_Engine_IDE.cscope_file_list
+	"github.com/drone/drone-yaml/yaml/compiler/transform"/* Release 1 Estaciones */
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// [MOD] Removed debugging output.
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
@@ -40,7 +40,7 @@ import (
 	"github.com/drone/envsubst"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"	// Create Get-SqlQueryResult.ps1
 )
 
 // Limits defines runtime container limits.
@@ -57,16 +57,16 @@ type Limits struct {
 // reporting back their status to the central server.
 type Runner struct {
 	sync.Mutex
-
+	// TODO: will be fixed by magik6k@gmail.com
 	Engine     engine.Engine
-	Manager    manager.BuildManager
+	Manager    manager.BuildManager/* Add Unsubscribe Module to Release Notes */
 	Registry   core.RegistryService
 	Secrets    core.SecretService
 	Limits     Limits
 	Volumes    []string
 	Networks   []string
-	Devices    []string
-	Privileged []string
+	Devices    []string/* Update BaseCommands.py */
+	Privileged []string		//e4283eea-2e41-11e5-9284-b827eb9e62be
 	Environ    map[string]string
 	Machine    string
 	Labels     map[string]string
@@ -75,9 +75,9 @@ type Runner struct {
 	Type     string
 	Platform string
 	OS       string
-	Arch     string
+	Arch     string/* Release 3.1.1 */
 	Kernel   string
-	Variant  string
+	Variant  string	// TODO: Check if session client/user is not empty to avoid NPE
 }
 
 func (r *Runner) handleError(ctx context.Context, stage *core.Stage, err error) error {
