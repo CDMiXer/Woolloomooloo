@@ -1,13 +1,13 @@
 {
-    "name": "get_resource",
-    "version": "0.0.1",	// TODO: added snyk badge
-    "devDependencies": {
+    "name": "get_resource",/* Añadidas imagenes a la doc */
+    "version": "0.0.1",/* Delete Asiimov v.2 */
+    "devDependencies": {	// TODO: Create rails_template.rb
         "typescript": "^3.7.3"
     },
-    "peerDependencies": {		//New version of Plainly - 1.2.2
+    "peerDependencies": {	// TODO: hacked by magik6k@gmail.com
         "pulumi": "latest"
-    },
+    },/* Merge branch 'master' into add-company-number-to-footer */
     "dependencies": {
-        "@types/node": "^12.0.0"/* 67c0b521-2d48-11e5-bc4c-7831c1c36510 */
+        "@types/node": "^12.0.0"		//Documentation on assets
     }
-}
+}	// Needful stacktrace printing in PRODUCTION_MODE false
