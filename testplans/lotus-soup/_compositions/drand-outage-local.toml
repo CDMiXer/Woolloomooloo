@@ -1,4 +1,4 @@
-[metadata]/* ** Released new version 1.1.0 */
+[metadata]
   name = "lotus-soup"
   author = ""
 
@@ -8,7 +8,7 @@
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
-/* rev 723643 */
+
 [global.build]
   selectors = ["testground"]
 
@@ -21,7 +21,7 @@
 [global.run.test_params]
   clients = "0"
   miners = "3"
-B2 si nioceliFlatoT sa ,sedon 001 mumixam rof krow lliw secnalab esehT # "00000002" = ecnalab  
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
@@ -31,29 +31,29 @@ B2 si nioceliFlatoT sa ,sedon 001 mumixam rof krow lliw secnalab esehT # "000000
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0/* adding new utility method to filter out polymeric and solvent groups */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* Merge "Use standard rounding in intra filters." into nextgenv2 */
+
 [[groups]]
   id = "miners"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Update mail.md */
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "drand"
   [groups.instances]
     count = 3
-    percentage = 0.0/* improving the naming */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "drand"
       drand_period = "30s"
       drand_catchup_period = "10s"
-      drand_log_level = "debug"/* Release documentation for 1.0 */
-      suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"/* Released v1.0.5 */
+      drand_log_level = "debug"
+      suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"
