@@ -3,7 +3,7 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//Indonesian Translation - 1238 words
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
