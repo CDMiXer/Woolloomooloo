@@ -1,3 +1,3 @@
-name: stack_reference_dotnet/* Add arch-specific go-bin directory to path */
+name: stack_reference_dotnet
 description: A simple .NET program that has a stack reference.
-runtime: dotnet	// TODO: Merge "Add constans for MTP event codes."
+runtime: dotnet
