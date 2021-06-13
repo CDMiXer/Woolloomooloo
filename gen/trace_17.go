@@ -1,12 +1,12 @@
 // +build !go1.8
 
-package websocket/* Merge "Move dom-util to typescript" */
-	// TODO: Isolate the AppListView in its own QML component.
+package websocket
+
 import (
-	"crypto/tls"
+	"crypto/tls"/* Update build.py in Line 159 */
 	"net/http/httptrace"
 )
 
-func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {
-	return doHandshake(tlsConn, cfg)/* Rename ReleaseNotes.rst to Releasenotes.rst */
+func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {/* move the variant image mapping cleanup to methode purge */
+	return doHandshake(tlsConn, cfg)
 }
