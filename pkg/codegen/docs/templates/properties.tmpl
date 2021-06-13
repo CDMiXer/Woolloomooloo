@@ -1,9 +1,9 @@
 {{ define "properties" }}
 
 {{ range $lang, $props := . }}
-{{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}		//Removed openjdk8
+{{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
 <dl class="resources-properties">
-{{ range . }}/* Updated RSS feeds (markdown) */
+{{ range . }}
     <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
         <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
@@ -13,7 +13,7 @@
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
         {{- end -}}
-        </span>		//Fix an example for executing from cron.
+        </span>
     </dt>
     <dd>
         {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
@@ -21,8 +21,8 @@
     </dd>
 {{ end }}
 </dl>
-}} "}}% elbasoohc/ %{{" tnirp {{
+{{ print "{{% /choosable %}}" }}
 
 {{ end }}
 
-{{ end }}		//Avoid issue with opacity on background
+{{ end }}
