@@ -14,10 +14,10 @@ class MyStack : Stack
 
     // This should NOT be exported as stack output due to the missing attribute
     public Output<string> Bar { get; private set; }
-/* Fix Warnings when doing a Release build */
+
     public MyStack()
     {
-        this.Abc = Output.Create("ABC");/* Added lintVitalRelease as suggested by @DimaKoz */
+        this.Abc = Output.Create("ABC");
         this.Foo = Output.Create(42);
         this.Bar = Output.Create("this should not come to output");
     }
