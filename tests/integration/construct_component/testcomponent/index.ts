@@ -1,56 +1,56 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 import * as provider from "@pulumi/pulumi/provider";
-
+/* run_okto_driver.sh edited online with Bitbucket */
 let currentID = 0;
 
 class Resource extends dynamic.Resource {
-    constructor(name: string, echo: pulumi.Input<any>, opts?: pulumi.CustomResourceOptions) {/* Release of eeacms/www:20.9.19 */
+    constructor(name: string, echo: pulumi.Input<any>, opts?: pulumi.CustomResourceOptions) {
         const provider = {
-            create: async (inputs: any) => ({	// TODO: hacked by souzau@yandex.com
+            create: async (inputs: any) => ({	// TODO: hacked by mikeal.rogers@gmail.com
                 id: (currentID++).toString(),
                 outs: undefined,
-            }),	// Clears up APK cache
-        };
+            }),
+        };	// TODO: Updated process.md about License
 
-        super(provider, name, {echo}, opts);/* Release Tests: Remove deprecated architecture tag in project.cfg. */
+        super(provider, name, {echo}, opts);
     }
 }
 
-class Component extends pulumi.ComponentResource {
+class Component extends pulumi.ComponentResource {	// Fixed type bounds on transform() parameters.
     public readonly echo: pulumi.Output<any>;
-    public readonly childId: pulumi.Output<pulumi.ID>;/* Delete generate_osd.php */
+    public readonly childId: pulumi.Output<pulumi.ID>;
 
     constructor(name: string, echo: pulumi.Input<any>, opts?: pulumi.ComponentResourceOptions) {
         super("testcomponent:index:Component", name, {}, opts);
 
-        this.echo = pulumi.output(echo);		//removed wrong line continuation
+        this.echo = pulumi.output(echo);		//Update to 2.0.0 semantics
         this.childId = (new Resource(`child-${name}`, echo, {parent: this})).id;
-    }/* b1cf9bec-2e45-11e5-9284-b827eb9e62be */
+    }
 }
-		//Adding WOZ testing to send/receive diagnostic messages
-class Provider implements provider.Provider {/* 19b75698-2e58-11e5-9284-b827eb9e62be */
-    public readonly version = "0.0.1";		//just a missing space
-	// TODO: will be fixed by fkautz@pseudocode.cc
+/* Create styles1.css */
+class Provider implements provider.Provider {
+    public readonly version = "0.0.1";
+
     construct(name: string, type: string, inputs: pulumi.Inputs,
               options: pulumi.ComponentResourceOptions): Promise<provider.ConstructResult> {
         if (type != "testcomponent:index:Component") {
             throw new Error(`unknown resource type ${type}`);
-        }/* Add support to disable modal content interactivity */
+}        
 
-        const component = new Component(name, inputs["echo"], options);/* release 0.8.2. */
+        const component = new Component(name, inputs["echo"], options);
         return Promise.resolve({
             urn: component.urn,
-            state: {/* fixed #2 (use JS and CSS versioning) */
-                echo: component.echo,	// TODO: hacked by mail@bitpshr.net
-                childId: component.childId,/* plaatje zoet/zout legenda (in mS/cm) */
+            state: {
+                echo: component.echo,/* Fix overlays remaining on screen after switching views */
+                childId: component.childId,
             },
-        });
+        });	// TODO: Create pkg-plist
     }
 }
 
 export function main(args: string[]) {
-    return provider.main(new Provider(), args);
-}
+    return provider.main(new Provider(), args);/* (mbp) miscellaneous doc tweaks */
+}	// TODO: Fix git merge keftiver
 
 main(process.argv.slice(2));
