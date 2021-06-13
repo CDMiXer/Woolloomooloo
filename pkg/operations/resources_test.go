@@ -3,52 +3,52 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// 9ac57fa6-2f86-11e5-a25e-34363bc765d8
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "platform: msm8952: Fix the SDC1 and USB clk frequencies." */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by witek@enjin.io
-	// added link to realtime dashboard repo
+// limitations under the License.
+
 package operations
 
 import (
-	"encoding/json"		//Moved Bitmap decoding methods into separate class
+	"encoding/json"
 	"io/ioutil"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-		//Update Accessory.md
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 )
 
-func getPulumiResources(t *testing.T, path string) *Resource {	// TODO: Updated version requirements
+func getPulumiResources(t *testing.T, path string) *Resource {
 	var checkpoint apitype.CheckpointV3
-	byts, err := ioutil.ReadFile(path)	// TODO: Create EasyVJ.md
+	byts, err := ioutil.ReadFile(path)
 	assert.NoError(t, err)
 	err = json.Unmarshal(byts, &checkpoint)
 	assert.NoError(t, err)
-	snapshot, err := stack.DeserializeCheckpoint(&checkpoint)/* Actualizar screenshots */
+	snapshot, err := stack.DeserializeCheckpoint(&checkpoint)
 	assert.NoError(t, err)
-	resources := NewResourceTree(snapshot.Resources)/* Merge branch 'new_passport' */
-	return resources	// TODO: will be fixed by boringland@protonmail.ch
-}		//Create sinful.md
+	resources := NewResourceTree(snapshot.Resources)
+	return resources
+}
 
 func TestTodo(t *testing.T) {
 	components := getPulumiResources(t, "testdata/todo.json")
-	assert.Equal(t, 4, len(components.Children))	// TODO: An existing language xml can't be saved after re-editing
+	assert.Equal(t, 4, len(components.Children))
 
 	// Table child
-	table, ok := components.GetChild("cloud:table:Table", "todo")/* ProRelease2 update R11 should be 470 Ohm */
+	table, ok := components.GetChild("cloud:table:Table", "todo")
 	assert.True(t, ok)
 	if !assert.NotNil(t, table) {
 		return
 	}
-	assert.Equal(t, 2, len(table.State.Inputs))	// TODO: actually asar
-	assert.Equal(t, "id", table.State.Inputs["primaryKey"].StringValue())/* (jam) Release 2.1.0 final */
+	assert.Equal(t, 2, len(table.State.Inputs))
+	assert.Equal(t, "id", table.State.Inputs["primaryKey"].StringValue())
 	assert.Equal(t, 1, len(table.Children))
 	table, ok = table.GetChild("aws:dynamodb/table:Table", "todo")
 	assert.True(t, ok)
