@@ -1,20 +1,20 @@
-{/* Kconfig: add CONFIG_ARCHITECTURE_FLAGS hidden option */
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",	// TODO: Focusing on simplifying (refactoring) canonical Operators, and join(..)
-        "moduleResolution": "node",	// TODO: hacked by nicksavers@gmail.com
+        "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,
+        "sourceMap": false,	// TODO: rev 819281
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* [Issue 5]Introduced region.js, responding to Geography */
-        "noImplicitReturns": true,/* Add created date to Release boxes */
-        "forceConsistentCasingInFileNames": true		//Merge "Move ironic-dsvm-full to nova experimental queue"
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true/* Load kanji information on startup.  Release development version 0.3.2. */
     },
     "files": [
-        "index.ts",
-    ]	// TODO: `nvm alias`: slightly speed up alias resolution.
-}
+        "index.ts",	// TODO: will be fixed by julia@jvns.ca
+    ]
+}	// TODO: hacked by nicksavers@gmail.com
