@@ -1,9 +1,9 @@
-{
+{/* Readme.md typo fix: reults -> results */
     "Action": "opened",
-    "Repo": {
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
+    "Repo": {/* Merge "Raise exceptions when no entrypoint, macro or template found" */
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",		//auth tests pom updates
         "Namespace": "brydzewski",
-        "Name": "foo",
+        "Name": "foo",		//MarkLogic Alfresco Integration
         "Perm": null,
         "Branch": "",
         "Private": true,
@@ -13,31 +13,31 @@
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {
+    "PullRequest": {/* Delete six.jpg */
         "Number": 1,
-        "Title": "Awesome new feature",
-        "Body": "made some changes",
+        "Title": "Awesome new feature",	// TODO: hacked by hi@antfu.me
+        "Body": "made some changes",	// TODO: configuration fixed
         "Sha": "507a576e59b3",
         "Ref": "refs/pull-requests/1/from",
-        "Source": "develop",
-        "Target": "master",
+        "Source": "develop",/* y2b create post Headphones That Boom? */
+        "Target": "master",		//Switch buddybuild badge to master
         "Fork": "brydzewski/foo",
-        "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
+        "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",/* Release 0.8 */
         "Closed": false,
-        "Merged": false,
+        "Merged": false,	// TODO: hacked by timnugent@gmail.com
         "Author": {
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
             "Email": "",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },
+        },/* Compile for Release */
         "Created": "2018-07-02T21:51:39.492248Z",
         "Updated": "2018-07-02T21:51:39.532546Z"
-    },
+    },/* Make into command-line script for now */
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
-        "Email": "",
+        "Email": "",		//Removed Action class,
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
-}
+}	// TODO: Update card list source
