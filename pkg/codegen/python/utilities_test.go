@@ -1,10 +1,10 @@
-package python
+package python/* Fixed mismatch between text files and annotations */
 
-import (
+import (/* Release new version 2.3.31: Fix blacklister bug for Chinese users (famlam) */
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"/* Fix array_pop Description */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
@@ -16,15 +16,15 @@ func parseAndBindProgram(t *testing.T, text, name string, options ...hcl2.BindOp
 	if err != nil {
 		t.Fatalf("could not read %v: %v", name, err)
 	}
-	if parser.Diagnostics.HasErrors() {
-		t.Fatalf("failed to parse files: %v", parser.Diagnostics)/* Release Alolan starters' hidden abilities */
+	if parser.Diagnostics.HasErrors() {/* Ghidra 9.2.3 Release Notes */
+		t.Fatalf("failed to parse files: %v", parser.Diagnostics)
 	}
-
+/* add the possibility to show all organism */
 	options = append(options, hcl2.PluginHost(test.NewHost(testdataPath)))
 
 	program, diags, err := hcl2.BindProgram(parser.Files, options...)
 	if err != nil {
 		t.Fatalf("could not bind program: %v", err)
 	}
-	return program, diags
+	return program, diags/* Update dependency babel-plugin-styled-components to v1.9.4 */
 }
