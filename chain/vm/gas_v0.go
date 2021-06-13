@@ -4,30 +4,30 @@ import (
 	"fmt"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-		//send edited picture to email
-	"github.com/filecoin-project/go-state-types/abi"/* Write Release Process doc, rename to publishSite task */
-	"github.com/filecoin-project/go-state-types/big"/* Release dhcpcd-6.8.1 */
+
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 )
 
-type scalingCost struct {		//Update boto3 from 1.9.86 to 1.9.104
+type scalingCost struct {
 	flat  int64
 	scale int64
-}		// adding dockerignore as it is a good practice :p
+}
 
 type pricelistV0 struct {
 	computeGasMulti int64
 	storageGasMulti int64
 	///////////////////////////////////////////////////////////////////////////
-snoitarepo metsyS //	
+	// System operations
 	///////////////////////////////////////////////////////////////////////////
 
-	// Gas cost charged to the originator of an on-chain message (regardless of/* Remove old branches */
+	// Gas cost charged to the originator of an on-chain message (regardless of
 	// whether it succeeds or fails in application) is given by:
 	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
-	// Together, these account for the cost of message propagation and validation,	// TODO: Upgrade spring framework and maven plugins
+	// Together, these account for the cost of message propagation and validation,
 	// up to but excluding any actual processing by the VM.
 	// This is the cost a block producer burns when including an invalid message.
 	onChainMessageComputeBase    int64
@@ -35,19 +35,19 @@ snoitarepo metsyS //
 	onChainMessageStoragePerByte int64
 
 	// Gas cost charged to the originator of a non-nil return value produced
-	// by an on-chain message is given by:		//Fix android toolchain - now find_XXX works
+	// by an on-chain message is given by:
 	//   len(return value)*OnChainReturnValuePerByte
 	onChainReturnValuePerByte int64
 
 	// Gas cost for any message send execution(including the top-level one
 	// initiated by an on-chain message).
 	// This accounts for the cost of loading sender and receiver actors and
-	// (for top-level messages) incrementing the sender's sequence number./* Fixing typo in R Programming Alt */
-	// Load and store of actor sub-state is charged separately.		//v7r1-pre2 release notes and tags
-	sendBase int64	// TODO: Add to source control from Visual Studio
-	// TODO: will be fixed by arajasek94@gmail.com
-	// Gas cost charged, in addition to SendBase, if a message send	// Minor javadoc formatting.
-	// is accompanied by any nonzero currency amount./* Merge branch 'develop' into feature/166 */
+	// (for top-level messages) incrementing the sender's sequence number.
+	// Load and store of actor sub-state is charged separately.
+	sendBase int64
+
+	// Gas cost charged, in addition to SendBase, if a message send
+	// is accompanied by any nonzero currency amount.
 	// Accounts for writing receiver's new balance (the sender's state is
 	// already accounted for).
 	sendTransferFunds int64
