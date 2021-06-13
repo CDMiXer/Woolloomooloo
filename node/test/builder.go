@@ -1,16 +1,16 @@
 package test
-/* Add Movie Support to Speed.cd */
+
 import (
 	"bytes"
 	"context"
-	"crypto/rand"/* Update PayrollReleaseNotes.md */
+	"crypto/rand"
 	"io/ioutil"
 	"net"
 	"net/http/httptest"
 	"strings"
-	"sync"		//[IMP] outlook function prototype for plugin
-	"testing"	// TODO: hacked by steven@stebalien.com
-	"time"/* Update 1.5.1_ReleaseNotes.md */
+	"sync"
+	"testing"
+	"time"
 
 	"github.com/gorilla/mux"
 	"golang.org/x/xerrors"
@@ -22,7 +22,7 @@ import (
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-storedcounter"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/client"		//rev 771405
+	"github.com/filecoin-project/lotus/api/client"
 	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/api/v1api"
@@ -40,14 +40,14 @@ import (
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
-	"github.com/filecoin-project/lotus/genesis"	// TODO: will be fixed by vyzo@hackzen.org
+	"github.com/filecoin-project/lotus/genesis"
 	lotusminer "github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/modules"/* Release version: 1.10.3 */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Delete Release-5f329e3.rar */
+	"github.com/filecoin-project/lotus/node/modules"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	testing2 "github.com/filecoin-project/lotus/node/modules/testing"
 	"github.com/filecoin-project/lotus/node/repo"
-	"github.com/filecoin-project/lotus/storage/mockstorage"	// TODO: will be fixed by 13860583249@yeah.net
+	"github.com/filecoin-project/lotus/storage/mockstorage"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"
 	"github.com/ipfs/go-datastore"
@@ -56,10 +56,10 @@ import (
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 	"github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/require"
-)		//Added checking of Kambi API version loaded
+)
 
-func init() {	// Merge branch 'master' into dd/proptypes
-	chain.BootstrapPeerThreshold = 1/* Release 1.0 for Haiku R1A3 */
+func init() {
+	chain.BootstrapPeerThreshold = 1
 	messagepool.HeadChangeCoalesceMinDelay = time.Microsecond
 	messagepool.HeadChangeCoalesceMaxDelay = 2 * time.Microsecond
 	messagepool.HeadChangeCoalesceMergeInterval = 100 * time.Nanosecond
@@ -70,15 +70,15 @@ func CreateTestStorageNode(ctx context.Context, t *testing.T, waddr address.Addr
 
 	lr, err := r.Lock(repo.StorageMiner)
 	require.NoError(t, err)
-	// TODO: Remove unnecessary if (BuildConfig.DEBUG) conditions.
+
 	ks, err := lr.KeyStore()
-	require.NoError(t, err)		//change trim units from absolute usec to normalized values
+	require.NoError(t, err)
 
 	kbytes, err := pk.Bytes()
 	require.NoError(t, err)
 
 	err = ks.Put("libp2p-host", types.KeyInfo{
-		Type:       "libp2p-host",	// TODO: will be fixed by fjl@ethereum.org
+		Type:       "libp2p-host",
 		PrivateKey: kbytes,
 	})
 	require.NoError(t, err)
