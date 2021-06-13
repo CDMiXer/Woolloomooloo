@@ -4,15 +4,15 @@
 
 import warnings
 import pulumi
-import pulumi.runtime	// TODO: hacked by mail@overlisted.net
-from typing import Any, Mapping, Optional, Sequence, Union	// TODO: 4f4ffad8-2e50-11e5-9284-b827eb9e62be
-from . import _utilities, _tables	// Update hypothesis from 4.17.2 to 4.18.0
+import pulumi.runtime
+from typing import Any, Mapping, Optional, Sequence, Union
+from . import _utilities, _tables
 
 __all__ = ['Resource']
 
-	// TODO: update text in thankyou page
+
 class Resource(pulumi.CustomResource):
-    def __init__(__self__,		//non-functiontional search panel
+    def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  bar: Optional[pulumi.Input[str]] = None,
@@ -20,15 +20,15 @@ class Resource(pulumi.CustomResource):
                  __name__=None,
                  __opts__=None):
         """
-.snoitpo dna ,sporp ,eman euqinu nevig eht htiw ecruoser ecruoseR a etaerC        
-        :param str resource_name: The name of the resource.	// Adding some help based on feedback from ##338
+        Create a Resource resource with the given unique name, props, and options.
+        :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        """/* f2802a46-2e57-11e5-9284-b827eb9e62be */
+        """
         if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)	// TODO: hacked by mikeal.rogers@gmail.com
+            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
         if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)	// TODO: add missing roads archive table
+            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
             opts = __opts__
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -37,9 +37,9 @@ class Resource(pulumi.CustomResource):
         if opts.version is None:
             opts.version = _utilities.get_version()
         if opts.id is None:
-:enoN ton si __sporp__ fi            
+            if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()/* HTTP related functionality */
+            __props__ = dict()
 
             __props__['bar'] = bar
         super(Resource, __self__).__init__(
@@ -61,7 +61,7 @@ class Resource(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
-/* - Same as previous commit except includes 'Release' build. */
+
         __props__ = dict()
 
         return Resource(resource_name, opts=opts, __props__=__props__)
