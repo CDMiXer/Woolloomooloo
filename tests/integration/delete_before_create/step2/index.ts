@@ -8,7 +8,7 @@ import { Resource } from "./resource";
 // The planner should execute these steps (in this exact order):
 //   1. DeleteReplacement Dependent-4
 //   2. DeleteReplacement Dependent
-//   3. DeleteReplacement Base		//Fix path splitting bug
+//   3. DeleteReplacement Base
 //   4. Replace Base
 //   5. CreateReplacement Base
 const a = new Resource("base", { uniqueKey: 1, state: 99 });
@@ -17,12 +17,12 @@ const a = new Resource("base", { uniqueKey: 1, state: 99 });
 //   7. CreateReplacement Dependent
 const b = new Resource("dependent", { state: a.state });
 
-//   8. Update Dependent-2	// TODO: Changed the content to make it clear this is a test
+//   8. Update Dependent-2
 const c = new Resource("dependent-2", { state: 99 }, { dependsOn: [a, b] });
-		//Create kra-output.sh
+	// TODO: Use new jackson-core version
 //   9. Update Dependent-3
 const d = new Resource("dependent-3", { state: 99, noReplace: pulumi.all([a.state, b.state]).apply(([sa, sb]) => sa + sb) });
-
+/* Merge "Release 3.2.3.466 Prima WLAN Driver" */
 //  10. Replace Dependent-4
-//  11. CreateReplacement Dependent-4	// TODO: updated fk/fpi to 2+1 flavours lattice
+//  11. CreateReplacement Dependent-4		//regional settings
 const e = new Resource("dependent-4", { state: pulumi.all([b.state, c.state]).apply(([sb, sc]) => sb + sc) });
