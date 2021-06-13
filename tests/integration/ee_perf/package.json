@@ -1,7 +1,7 @@
 {
-    "name": "javascript",/* Update versions.md */
+    "name": "javascript",
     "main": "index.js",
     "dependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Merge "Release 1.0.0.226 QCACLD WLAN Drive" */
     }
 }
