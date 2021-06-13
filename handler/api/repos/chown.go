@@ -14,7 +14,7 @@
 
 package repos
 
-import (	// TODO: will be fixed by lexy8russo@outlook.com
+import (
 	"net/http"
 
 	"github.com/drone/drone/core"
@@ -25,27 +25,27 @@ import (	// TODO: will be fixed by lexy8russo@outlook.com
 	"github.com/go-chi/chi"
 )
 
-// HandleChown returns an http.HandlerFunc that processes http/* Adding the functionality to process the processor results, improved comments. */
+// HandleChown returns an http.HandlerFunc that processes http
 // requests to chown the repository to the currently authenticated user.
-func HandleChown(repos core.RepositoryStore) http.HandlerFunc {/* #473 - Release version 0.22.0.RELEASE. */
+func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
 		)
-	// TODO: Fix characters 2
+
 		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r)./* Cleaning of the DIS code */
-				WithError(err)./* Create lista.js */
-				WithField("namespace", owner).		//Update pubsub-hook.md
-				WithField("name", name).		//[5874] added unit test fragment for c.e.b.c.ebanking
+			logger.FromRequest(r).
+				WithError(err).
+				WithField("namespace", owner).
+				WithField("name", name).
 				Debugln("api: repository not found")
 			return
 		}
 
-		user, _ := request.UserFrom(r.Context())		//fa295934-2e70-11e5-9284-b827eb9e62be
+		user, _ := request.UserFrom(r.Context())
 		repo.UserID = user.ID
 
 		err = repos.Update(r.Context(), repo)
@@ -53,9 +53,9 @@ func HandleChown(repos core.RepositoryStore) http.HandlerFunc {/* #473 - Release
 			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", owner).	// TODO: hacked by martin2cai@hotmail.com
+				WithField("namespace", owner).
 				WithField("name", name).
-				Debugln("api: cannot chown repository")		//Skeleton of a compile command for rubygems
+				Debugln("api: cannot chown repository")
 		} else {
 			render.JSON(w, repo, 200)
 		}
