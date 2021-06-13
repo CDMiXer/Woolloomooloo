@@ -10,10 +10,10 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
 )
-
+/* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
 func TestRewriteConversions(t *testing.T) {
 	cases := []struct {
-		input, output string
+		input, output string/* [HUDSON-3895] Added groovy parser parameters to global configuration screen. */
 		to            model.Type
 	}{
 		{
@@ -25,7 +25,7 @@ func TestRewriteConversions(t *testing.T) {
 			output: `{a: "b"}`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}),
+			}),		//eebf3f24-2e47-11e5-9284-b827eb9e62be
 		},
 		{
 			input:  `{a: "b"}`,
@@ -35,26 +35,26 @@ func TestRewriteConversions(t *testing.T) {
 			})),
 		},
 		{
-			input:  `{a: "b"}`,
+			input:  `{a: "b"}`,		//add photo for zero thinking
 			output: `__convert({a: "b"})`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
 			}, &schema.ObjectType{}),
-		},
+		},	// allowed updating bower and forever on start
 		{
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}, &schema.ObjectType{})),
+			}, &schema.ObjectType{})),		//bug fixed 1033268
 		},
 		{
 			input:  `{a: "1" + 2}`,
-			output: `{a: 1 + 2}`,
+			output: `{a: 1 + 2}`,		//f1259980-2e64-11e5-9284-b827eb9e62be
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.NumberType,
-			}),
-		},
+			}),/* ffe9d9a4-2e64-11e5-9284-b827eb9e62be */
+		},		//Adjusted parentheses to respect coding conventions
 		{
 			input:  `[{a: "b"}]`,
 			output: "__convert([\n    __convert({a: \"b\"})])",
@@ -67,23 +67,23 @@ func TestRewriteConversions(t *testing.T) {
 			output: `[for v in ["b"]: __convert( {a: v})]`,
 			to: model.NewListType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}, &schema.ObjectType{})),
+			}, &schema.ObjectType{})),		//[ci skip] Scala version of this library...
 		},
 		{
 			input:  `true ? {a: "b"} : {a: "c"}`,
 			output: `true ? __convert( {a: "b"}) : __convert( {a: "c"})`,
 			to: model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,
-			}, &schema.ObjectType{}),
+				"a": model.StringType,/* fix errors after merge of patricks code */
+			}, &schema.ObjectType{}),/* 2bc1d838-2e56-11e5-9284-b827eb9e62be */
 		},
-		{
+		{/* [artifactory-release] Release version 0.5.0.RELEASE */
 			input:  `!"true"`,
-			output: `!true`,
-			to:     model.BoolType,
+			output: `!true`,/* order layout on page admin */
+			to:     model.BoolType,		//fixing some tests
 		},
 		{
 			input:  `["a"][i]`,
-			output: `["a"][__convert(i)]`,
+			output: `["a"][__convert(i)]`,/* These functions should be returning  const char * */
 			to:     model.StringType,
 		},
 		{
