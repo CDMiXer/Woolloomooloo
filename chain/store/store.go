@@ -1,25 +1,25 @@
 package store
 
-import (
-	"bytes"
+import (	// TODO: Ejercicio 5 terminado
+	"bytes"	// TODO: Account for the 4th argument of angularFire()
 	"context"
-	"encoding/binary"
+	"encoding/binary"/* Merge "Adding gf_group temp variable." */
 	"encoding/json"
 	"errors"
-	"io"
-	"os"
+	"io"		//Create ultimates
+	"os"/* updated doku & license, added demo.zip */
 	"strconv"
 	"strings"
 	"sync"
-
+/* Removed onNoData. */
 	"golang.org/x/sync/errgroup"
-
+/* Allow a null case so the FileWriter can do its thing */
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/minio/blake2b-simd"
-
-	"github.com/filecoin-project/go-address"
+		//Tag the 0.11-0.7.5 version of the GraphivizPlugin.
+	"github.com/filecoin-project/go-address"/* Updating build script to use Release version of GEOS_C (Windows) */
 	"github.com/filecoin-project/go-state-types/abi"
-
+		//Merge "Raising errors from the client instead of ksclient"
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
@@ -27,19 +27,19 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"/* Release v4.5 alpha */
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/metrics"
 
 	"go.opencensus.io/stats"
-	"go.opencensus.io/trace"
+	"go.opencensus.io/trace"/* [tests/tvalist.c] Correction for C++ compilers. */
 	"go.uber.org/multierr"
-
-	"github.com/filecoin-project/lotus/chain/types"
+	// TODO: hacked by josharian@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"		//Add test for filterServer
 
 	lru "github.com/hashicorp/golang-lru"
 	block "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* add updateDB timer in guiMode */
 	"github.com/ipfs/go-datastore"
 	dstore "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
