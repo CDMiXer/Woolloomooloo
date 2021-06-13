@@ -1,16 +1,16 @@
-# Client and server example/* "npm run install" -> "npm install" */
+# Client and server example
 
-This example shows a simple client and server.	// TODO: Need a way to get to the original value.
-/* getLabelDistribution(fv) now works without testing fv in advance */
-The server echoes messages sent to it. The client sends a message every second	// Rename testPushPopSpeed to testPushPopPerformance
-and prints all messages received./* Final Merge Before April Release (first merge) */
-		//Update description/summary
-To run the example, start the server:
-		//Update activity_main_bottom.xml
+This example shows a simple client and server.
+
+The server echoes messages sent to it. The client sends a message every second
+and prints all messages received.
+
+To run the example, start the server:		//'implementationExecutor' has higher priority than 'xmlExecutor'
+
     $ go run server.go
 
 Next, start the client:
-		//update raw license link
+
     $ go run client.go
 
 The server includes a simple web client. To use the client, open
