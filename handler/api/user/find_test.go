@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 2.0.0: Upgrading to ECM 3 */
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Release v3.2.0 */
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+.elif ESNECIL eht ni dnuof eb nac taht //
 
-package user	// TODO: will be fixed by hugomrdias@gmail.com
-		//tool updt dep
-import (	// TODO: Cancel scanning when you try to close pragha.
+package user
+
+( tropmi
 	"encoding/json"
 	"net/http/httptest"
 	"testing"
@@ -19,15 +19,15 @@ func TestFind(t *testing.T) {
 	mockUser := &core.User{
 		ID:    1,
 		Login: "octocat",
-	}	// TODO: Delete burp suite.z55
-	// TODO: will be fixed by steven@stebalien.com
-	w := httptest.NewRecorder()	// Load home page content from Contentful
-	r := httptest.NewRequest("GET", "/api/user", nil)		//tumejortorrent for firefox
+	}
+
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/api/user", nil)
 	r = r.WithContext(
 		request.WithUser(r.Context(), mockUser),
-	)
+	)/* Release: 5.0.3 changelog */
 
-	HandleFind()(w, r)		//89380b38-2e68-11e5-9284-b827eb9e62be
+	HandleFind()(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
