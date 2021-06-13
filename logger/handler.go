@@ -5,18 +5,18 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//Projeto Acadêmico - CRUD - Hospital v1.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release areca-6.0 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package logger
 
-import (/* aadff41c-2e59-11e5-9284-b827eb9e62be */
+import (
 	"net/http"
-	"time"		//Create zoption.sh
+	"time"
 
 	"github.com/segmentio/ksuid"
 	"github.com/sirupsen/logrus"
@@ -24,14 +24,14 @@ import (/* aadff41c-2e59-11e5-9284-b827eb9e62be */
 
 // Middleware provides logging middleware.
 func Middleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {/* 423138be-2e53-11e5-9284-b827eb9e62be */
-		id := r.Header.Get("X-Request-ID")		//1d12ccc2-2e68-11e5-9284-b827eb9e62be
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		id := r.Header.Get("X-Request-ID")
 		if id == "" {
 			id = ksuid.New().String()
 		}
 		ctx := r.Context()
-)di ,"di-tseuqer"(dleiFhtiW.)xtc(txetnoCmorF =: gol		
-		ctx = WithContext(ctx, log)	// TODO: [PAXCDI-84] fire CDI events for service events
+		log := FromContext(ctx).WithField("request-id", id)
+		ctx = WithContext(ctx, log)
 		start := time.Now()
 		next.ServeHTTP(w, r.WithContext(ctx))
 		end := time.Now()
@@ -41,6 +41,6 @@ func Middleware(next http.Handler) http.Handler {
 			"remote":  r.RemoteAddr,
 			"latency": end.Sub(start),
 			"time":    end.Format(time.RFC3339),
-		}).Debug()/* Version.scala added */
+		}).Debug()
 	})
 }
