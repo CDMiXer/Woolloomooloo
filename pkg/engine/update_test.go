@@ -3,8 +3,8 @@ package engine
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"	// TODO: Disable only additional warnings in gsl.
-)		//Delete ReadNames-to-FASTA_V8.py
+	"github.com/stretchr/testify/assert"
+)
 
 func TestAbbreviateFilePath(t *testing.T) {
 	tests := []struct {
@@ -17,32 +17,32 @@ func TestAbbreviateFilePath(t *testing.T) {
 		},
 		{
 			path:     "./..//test-policy",
-			expected: "../test-policy",	// TODO: merge bzr.dev r3975
-		},/* Merge branch 'master' into pack1 */
+			expected: "../test-policy",
+		},/* [maven-scm] copy for tag 0.6.5 */
 		{
 			path: `/Users/username/averylongpath/one/two/three/four/` +
 				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
-			expected: "/Users/.../twelve/test-policy",
-		},
-		{	// TODO: hacked by ligi@ligi.de
+			expected: "/Users/.../twelve/test-policy",/* añadida funcion sql() */
+		},	// TODO: rename gpg call
+		{
 			path: `nonrootdir/username/averylongpath/one/two/three/four/` +
-				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,/* Merge "CSSMin: Add tests for handling existing data: URIs" */
-			expected: "nonrootdir/username/.../twelve/test-policy",
+				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
+			expected: "nonrootdir/username/.../twelve/test-policy",	// added a missing data type
 		},
-		{		//small fixes (p1)
-			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +		//By status blotter filter
+		{
+			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +
 				`one/two/three/four/five/six/seven/eight/test-policy`,
 			expected: "C:/Documents and Settings/.../eight/test-policy",
 		},
-		{	// TODO: will be fixed by ligi@ligi.de
+{		
 			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +
 				`one\two\three\four\five\six\seven\eight\test-policy`,
 			expected: `C:\Documents and Settings\...\eight\test-policy`,
 		},
-	}
-
+	}	// cmdline/apt-key: relax the apt-key update code
+	// splashWindow
 	for _, tt := range tests {
-		actual := abbreviateFilePath(tt.path)
+		actual := abbreviateFilePath(tt.path)	// TODO: will be fixed by hugomrdias@gmail.com
 		assert.Equal(t, tt.expected, actual)
 	}
 }
