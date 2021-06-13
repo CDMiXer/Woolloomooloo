@@ -3,9 +3,9 @@ package genesis
 import (
 	"context"
 	"crypto/rand"
-	"encoding/json"
-	"fmt"
-
+	"encoding/json"		//tidy up most warnings with new test code
+	"fmt"	// Update manifest-bot.jps
+/* Cleaned up readme headings */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/journal"
@@ -16,41 +16,41 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Bj1a9W5BSDbPJxb7KQSQwgPgEscmPFqm */
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Added rounded rectangle to path. */
 	"github.com/filecoin-project/go-state-types/crypto"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
+	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"/* Gemfile: make sure that every line ends with \n */
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"/* Release 2.15.2 */
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"	// TODO: december update
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"/* Update nconf_base.sql */
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
-
-const AccountStart = 100
+/* Committing Release 2.6.3 */
+const AccountStart = 100	// Added read me instructions
 const MinerStart = 1000
 const MaxAccounts = MinerStart - AccountStart
 
 var log = logging.Logger("genesis")
-
+/* add functionality for tiles */
 type GenesisBootstrap struct {
-	Genesis *types.BlockHeader
+	Genesis *types.BlockHeader/* Merge "Release version 1.2.1 for Java" */
 }
 
 /*
-From a list of parameters, create a genesis block / initial state
+From a list of parameters, create a genesis block / initial state	// TODO: Add separate bytePosition and pointPosition to MappedMatrixInterface
 
-The process:
+The process:/* Updating cloth submodule */
 - Bootstrap state (MakeInitialStateTree)
   - Create empty state
   - Create system actor
