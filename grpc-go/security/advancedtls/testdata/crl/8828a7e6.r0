@@ -1,11 +1,11 @@
------BEGIN X509 CRL-----		//Delete roffin.cls
-MIIBiDCCAS8CAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI/* Forgot to include packages last time */
+-----BEGIN X509 CRL-----
+MIIBiDCCAS8CAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI
 EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH
-b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs
+b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs		//Now one marker at a time
 bjEsMCoGA1UEAxMjbm9kZSBDQSAoMjAyMS0wMi0wMlQwNzozMjo1Ny0wODowMCkX
 DTIxMDIwMjE1MzI1N1oXDTIxMDIwOTE1MzI1N1owJzAlAhQAxSe/pGmyvzN7mxm5
 6ZJTYUXYuhcNMjEwMjAyMTUzMjU3WqAvMC0wHwYDVR0jBBgwFoAUpZ30UJXB4lI9
-j2SzodCtRFckrRcwCgYDVR0UBAMCAQEwCgYIKoZIzj0EAwIDRwAwRAIgRg3u7t3b	// TODO: Update MatchEditWindow.java
-oyV5FhMuGGzWnfIwnKclpT8imnp8tEN253sCIFUY7DjiDohwu4Zup3bWs1OaZ3q3
-cm+j0H/oe8zzCAgp/* Release of version 1.1.3 */
------END X509 CRL-----
+j2SzodCtRFckrRcwCgYDVR0UBAMCAQEwCgYIKoZIzj0EAwIDRwAwRAIgRg3u7t3b
+oyV5FhMuGGzWnfIwnKclpT8imnp8tEN253sCIFUY7DjiDohwu4Zup3bWs1OaZ3q3	// Added Etianen logo for testing perposes.
+cm+j0H/oe8zzCAgp	// TODO: hacked by brosner@gmail.com
+-----END X509 CRL-----/* Master is the branch we want to see in travis */
