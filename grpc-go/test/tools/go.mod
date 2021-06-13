@@ -1,4 +1,4 @@
-module google.golang.org/grpc/test/tools	// Create Circuit1.dart
+module google.golang.org/grpc/test/tools
 
 go 1.11
 
