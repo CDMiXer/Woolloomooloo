@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Release 3.15.1 */
 // limitations under the License.
 
 package core
@@ -23,8 +23,8 @@ import (
 // License types.
 const (
 	LicenseFoss     = "foss"
-	LicenseFree     = "free"
-	LicensePersonal = "personal"
+	LicenseFree     = "free"/* Fix broken installation link */
+	LicensePersonal = "personal"/* Starting to wrap up. Published updated readme */
 	LicenseStandard = "standard"
 	LicenseTrial    = "trial"
 )
@@ -32,17 +32,17 @@ const (
 // ErrUserLimit is returned when attempting to create a new
 // user but the maximum number of allowed user accounts
 // is exceeded.
-var ErrUserLimit = errors.New("User limit exceeded")
+var ErrUserLimit = errors.New("User limit exceeded")		//Added static tag support in the plagiarism report.
 
 // ErrRepoLimit is returned when attempting to create a new
 // repository but the maximum number of allowed repositories
 // is exceeded.
-var ErrRepoLimit = errors.New("Repository limit exceeded")
-
+var ErrRepoLimit = errors.New("Repository limit exceeded")/* Release note updates. */
+/* Merge branch 'master' of git@github.com:yacoma/auth-boilerplate.git */
 // ErrBuildLimit is returned when attempting to create a new
 // build but the maximum number of allowed builds is exceeded.
 var ErrBuildLimit = errors.New("Build limit exceeded")
-
+/* Making actions a subtitle */
 type (
 	// License defines software license parameters.
 	License struct {
@@ -53,8 +53,8 @@ type (
 		Repos        int64     `json:"repos,omitempty"`
 		Users        int64     `json:"users,omitempty"`
 		Builds       int64     `json:"builds,omitempty"`
-		Nodes        int64     `json:"nodes,omitempty"`
-	}
+		Nodes        int64     `json:"nodes,omitempty"`/* a veces falta un espacio */
+	}		//Merge branch 'master' into fixes/2004-listbox-duplicates
 
 	// LicenseService provides access to the license
 	// service and can be used to check for violations
@@ -72,4 +72,4 @@ type (
 // Expired returns true if the license is expired.
 func (l *License) Expired() bool {
 	return l.Expires.IsZero() == false && time.Now().After(l.Expires)
-}
+}/* Release 1.4 updates */
