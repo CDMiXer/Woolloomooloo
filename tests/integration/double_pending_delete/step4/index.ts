@@ -7,13 +7,13 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//[Upload] Upload last revision.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* increase to 256 deconv filters */
-	// TODO: Merge "NEC plugin: delete old OFC ID mapping tables"
+// limitations under the License.
+
 import { Resource } from "./resource";
-/* Release 0.9.4 */
+
 // We'll complete our disaster recovery by triggering replacements of A and B again,
 // but this time the replacement of B will succeed.
 // The engine should generate:
