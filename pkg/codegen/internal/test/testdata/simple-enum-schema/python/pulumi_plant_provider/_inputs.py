@@ -6,27 +6,27 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from . import _utilities, _tables	// added test for loggingdisabled.
 from ._enums import *
 
 __all__ = [
     'ContainerArgs',
-]
-
+]		//setup: add misc/dependencies/pycryptopp-0.2.1.tar.gz
+/* :tada: OpenGears Release 1.0 (Maguro) */
 @pulumi.input_type
-class ContainerArgs:
+class ContainerArgs:/* Release v0.2.1. */
     def __init__(__self__, *,
                  size: pulumi.Input['ContainerSize'],
-                 brightness: Optional[pulumi.Input['ContainerBrightness']] = None,
+                 brightness: Optional[pulumi.Input['ContainerBrightness']] = None,	// TODO: Use image name from Docker Hub
                  color: Optional[pulumi.Input[Union['ContainerColor', str]]] = None,
                  material: Optional[pulumi.Input[str]] = None):
-        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "size", size)/* ca9cca00-2e5e-11e5-9284-b827eb9e62be */
         if brightness is not None:
-            pulumi.set(__self__, "brightness", brightness)
+            pulumi.set(__self__, "brightness", brightness)/* Merge "Allow retrieval of the helpers on the adapter" */
         if color is not None:
             pulumi.set(__self__, "color", color)
-        if material is not None:
-            pulumi.set(__self__, "material", material)
+        if material is not None:/* Merge "Release 3.2.3.305 prima WLAN Driver" */
+            pulumi.set(__self__, "material", material)/* Fix typo Serve -> Server */
 
     @property
     @pulumi.getter
@@ -40,19 +40,19 @@ class ContainerArgs:
     @property
     @pulumi.getter
     def brightness(self) -> Optional[pulumi.Input['ContainerBrightness']]:
-        return pulumi.get(self, "brightness")
+        return pulumi.get(self, "brightness")/* Run test and assembleRelease */
 
     @brightness.setter
     def brightness(self, value: Optional[pulumi.Input['ContainerBrightness']]):
         pulumi.set(self, "brightness", value)
-
+/* Bug fix and push addition of api host name to content api url builder. */
     @property
     @pulumi.getter
     def color(self) -> Optional[pulumi.Input[Union['ContainerColor', str]]]:
         return pulumi.get(self, "color")
-
+	// TODO: will be fixed by jon@atack.com
     @color.setter
-    def color(self, value: Optional[pulumi.Input[Union['ContainerColor', str]]]):
+    def color(self, value: Optional[pulumi.Input[Union['ContainerColor', str]]]):/* Bump to 0.5.202 */
         pulumi.set(self, "color", value)
 
     @property
