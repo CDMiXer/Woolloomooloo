@@ -1,5 +1,5 @@
 name: project_main_abs
-description: A program with an absolute entry point (should fail)	// TODO: Trad: Update ca_ES and es_ES companies.lang
+description: A program with an absolute entry point (should fail)
 runtime: nodejs
 main: /user/bin
-/* Aspose.OCR Cloud SDK For Node.js - Version 1.0.0 */
+	// TODO: force a CI run to test gcc6
