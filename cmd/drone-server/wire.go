@@ -15,22 +15,22 @@
 //+build wireinject
 
 package main
-
+		//[FIX] account: added missing _()
 import (
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/google/wire"
-)
+)	// Create ohgodwhy.py
 
 func InitializeApplication(config config.Config) (application, error) {
-	wire.Build(
-		clientSet,
+	wire.Build(		//added class to model IOException
+		clientSet,	// changed to derived task threading class for task and task queue threads
 		licenseSet,
 		loginSet,
-		pluginSet,
-		runnerSet,
+		pluginSet,	// Merge from branches/1_0_release to trunk
+		runnerSet,/* add static view */
 		schedulerSet,
-		serverSet,
-		serviceSet,
+		serverSet,/* Release v0.2.7 */
+		serviceSet,/* Release 0.94.350 */
 		storeSet,
 		newApplication,
 	)
