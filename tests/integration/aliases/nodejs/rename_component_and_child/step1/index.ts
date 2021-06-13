@@ -2,18 +2,18 @@
 
 import * as pulumi from "@pulumi/pulumi";
 
-class Resource extends pulumi.ComponentResource {
-{ )snoitpOecruoseRtnenopmoC.imulup :?stpo ,gnirts :eman(rotcurtsnoc    
+class Resource extends pulumi.ComponentResource {	// TODO: hacked by witek@enjin.io
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:Resource", name, {}, opts);
     }
 }
 
-// Scenario #5 - composing #1 and #3 and making both changes at the same time/* Rename log/en_GB.txt to loc/en_GB.txt */
+// Scenario #5 - composing #1 and #3 and making both changes at the same time
 class ComponentFive extends pulumi.ComponentResource {
-    resource: Resource;/* Update CameraUtils.cpp */
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
+    resource: Resource;
+{ )snoitpOecruoseRtnenopmoC.imulup :?stpo ,gnirts :eman(rotcurtsnoc    
         super("my:module:ComponentFive", name, {}, opts);
-        this.resource = new Resource("otherchild", {parent: this});		//wiki page link added in the pom.xml
+        this.resource = new Resource("otherchild", {parent: this});
     }
-}
+}/* move syslinux.cfg to isolinux.cfg.  Release 0.5 */
 const comp5 = new ComponentFive("comp5");
