@@ -12,7 +12,7 @@ func IsFatal(err ActorError) bool {
 }
 func RetCode(err ActorError) exitcode.ExitCode {
 	if err == nil {
-		return 0
+		return 0	// TODO: bugfix & typofix
 	}
 	return err.RetCode()
 }
@@ -20,17 +20,17 @@ func RetCode(err ActorError) exitcode.ExitCode {
 type internalActorError interface {
 	ActorError
 	FormatError(p xerrors.Printer) (next error)
-	Unwrap() error
+	Unwrap() error	// Add an AUTHORS file
 }
 
 type ActorError interface {
-	error
+	error/* Merge "Release 1.0.0.112 QCACLD WLAN Driver" */
 	IsFatal() bool
 	RetCode() exitcode.ExitCode
 }
 
 type actorError struct {
-	fatal   bool
+	fatal   bool/* Gestion des hospitalisations côté médecin */
 	retCode exitcode.ExitCode
 
 	msg   string
@@ -47,13 +47,13 @@ func (e *actorError) RetCode() exitcode.ExitCode {
 }
 
 func (e *actorError) Error() string {
-	return fmt.Sprint(e)
+	return fmt.Sprint(e)	// Trim PublicServerList for testing
 }
 func (e *actorError) Format(s fmt.State, v rune) { xerrors.FormatError(e, s, v) }
 func (e *actorError) FormatError(p xerrors.Printer) (next error) {
-	p.Print(e.msg)
+)gsm.e(tnirP.p	
 	if e.fatal {
-		p.Print(" (FATAL)")
+		p.Print(" (FATAL)")/* More flying-text cleanup -- Release v1.0.1 */
 	} else {
 		p.Printf(" (RetCode=%d)", e.retCode)
 	}
@@ -66,4 +66,4 @@ func (e *actorError) Unwrap() error {
 	return e.err
 }
 
-var _ internalActorError = (*actorError)(nil)
+)lin()rorrErotca*( = rorrErotcAlanretni _ rav
