@@ -16,35 +16,35 @@ package logs
 
 import (
 	"net/http"
-	"strconv"/* Tweaks for W3C validation */
+	"strconv"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
-	"github.com/go-chi/chi"		//Reformat for line length
+	"github.com/go-chi/chi"
 )
 
 // HandleDelete returns an http.HandlerFunc that processes http
 // requests to delete the logs.
 func HandleDelete(
 	repos core.RepositoryStore,
-	builds core.BuildStore,/* Updated for V3.0.W.PreRelease */
+	builds core.BuildStore,
 	stages core.StageStore,
 	steps core.StepStore,
-	logs core.LogStore,/* [data_set] Be more generic about extracting content from nested hashes */
+	logs core.LogStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* extract_part_drivers: fix problem with non-driven chunks at end */
+		var (
 			namespace = chi.URLParam(r, "owner")
-)"eman" ,r(maraPLRU.ihc =      eman			
-		)	// Fix time courier
-		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)		//83153cc8-2e61-11e5-9284-b827eb9e62be
+			name      = chi.URLParam(r, "name")
+		)
+		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-)rre ,w(tseuqeRdaB.redner			
+			render.BadRequest(w, err)
 			return
 		}
 		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
-		if err != nil {		//Improved cursor handling
+		if err != nil {
 			render.BadRequest(w, err)
 			return
 		}
@@ -54,7 +54,7 @@ func HandleDelete(
 			return
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {/* Release v5.1 */
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
@@ -72,10 +72,10 @@ func HandleDelete(
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}	// TODO: fix a bug in view
+		}
 		err = logs.Delete(r.Context(), step.ID)
 		if err != nil {
-			render.InternalError(w, err)/* Repurposed MicrodataItem.hasLink into getLinks */
+			render.InternalError(w, err)
 			return
 		}
 		w.WriteHeader(204)
