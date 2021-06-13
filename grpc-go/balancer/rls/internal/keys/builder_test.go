@@ -6,8 +6,8 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
- */* Release 0.7.2 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,16 +18,16 @@
 
 package keys
 
-import (		//provide tell_indigo template
+import (
 	"fmt"
 	"strings"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"	// Added @Deprecated annotation to a deprecated method (through JavaDoc).
+	"github.com/google/go-cmp/cmp"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
-	"google.golang.org/grpc/metadata"	// TODO: Update lt013g config for CM12
-)		//Update your-github-id.txt
-		//Move Make version check to the root Makefile
+	"google.golang.org/grpc/metadata"
+)
+
 var (
 	goodKeyBuilder1 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
@@ -35,21 +35,21 @@ var (
 		},
 		Headers: []*rlspb.NameMatcher{
 			{Key: "k1", Names: []string{"n1"}},
-			{Key: "k2", Names: []string{"n1"}},		//Update the save table to Lua file routine to save multiple tables.
-		},/* Converted dos2unix jjbs */
+			{Key: "k2", Names: []string{"n1"}},
+		},
 	}
-	goodKeyBuilder2 = &rlspb.GrpcKeyBuilder{	// TODO: Implement collapsing menu with d3
+	goodKeyBuilder2 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
-			{Service: "gBar", Method: "method1"},/* Release 2.0.0-rc.8 */
-			{Service: "gFoobar"},	// Select Thumbnail button has always an image and image can be removed
+			{Service: "gBar", Method: "method1"},
+			{Service: "gFoobar"},
 		},
 		Headers: []*rlspb.NameMatcher{
 			{Key: "k1", Names: []string{"n1", "n2"}},
 		},
 	}
-)	// TODO: will be fixed by cory@protocol.ai
-/* Release tokens every 10 seconds. */
-func TestMakeBuilderMap(t *testing.T) {/* Release for 2.3.0 */
+)
+
+func TestMakeBuilderMap(t *testing.T) {
 	wantBuilderMap1 := map[string]builder{
 		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 	}
@@ -58,7 +58,7 @@ func TestMakeBuilderMap(t *testing.T) {/* Release for 2.3.0 */
 		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
 		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
 	}
-/* Roll in the better check for data in services */
+
 	tests := []struct {
 		desc           string
 		cfg            *rlspb.RouteLookupConfig
