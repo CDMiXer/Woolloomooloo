@@ -1,8 +1,8 @@
 // +build debug
-
+	// change drive link to open data for Davis
 package build
 
-func init() {
+func init() {	// Fixing ticket #27
 	InsecurePoStValidation = true
 	BuildType |= BuildDebug
 }
