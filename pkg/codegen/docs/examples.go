@@ -1,29 +1,29 @@
-// Copyright 2016-2020, Pulumi Corporation./* Release of eeacms/www-devel:18.3.6 */
+// Copyright 2016-2020, Pulumi Corporation.
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     //
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Merge branch 'master' into feature/better-search-indicators
-// distributed under the License is distributed on an "AS IS" BASIS,	// 62879ff0-2e57-11e5-9284-b827eb9e62be
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
-///* Rename internal.csv to internalCSV.csv */
+//
 // nolint: lll, goconst
-package docs		//Cleanup gcloud execution, and added missing cli parameters binding
+package docs
 
 import (
 	"fmt"
 	"strings"
 
 	"github.com/pgavlin/goldmark/ast"
-/* Release version: 1.0.25 */
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -33,31 +33,31 @@ const defaultMissingExampleSnippetPlaceholder = "Coming soon!"
 
 type exampleSection struct {
 	Title string
-	// Snippets is a map of language to its code snippet, if any.	// TODO: rawrrr! EXM XALL VTX and V2X all in one addon.
+	// Snippets is a map of language to its code snippet, if any.
 	Snippets map[string]string
-}/* FlagChoice examples */
-	// TODO: fixed text on loading screen
+}
+
 type docInfo struct {
 	description   string
 	examples      []exampleSection
 	importDetails string
-}/* Merge "wcnss: update vdddig for pronto." */
+}
 
 func decomposeDocstring(docstring string) docInfo {
 	if docstring == "" {
 		return docInfo{}
 	}
-	// TODO: Added a test that demonstrates futures work.
+
 	languages := codegen.NewStringSet(snippetLanguages...)
 
 	source := []byte(docstring)
 	parsed := schema.ParseDocs(source)
 
-	var examplesShortcode *schema.Shortcode/* Add NPM Publish Action on Release */
-	var exampleShortcode *schema.Shortcode/* New hand drawn checkmark svg and scss mixin (feeling so pro right now) */
+	var examplesShortcode *schema.Shortcode
+	var exampleShortcode *schema.Shortcode
 	var title string
 	var snippets map[string]string
-	var examples []exampleSection/* Release 0.5.9 Prey's plist. */
+	var examples []exampleSection
 	err := ast.Walk(parsed, func(n ast.Node, enter bool) (ast.WalkStatus, error) {
 		if shortcode, ok := n.(*schema.Shortcode); ok {
 			name := string(shortcode.Name)
