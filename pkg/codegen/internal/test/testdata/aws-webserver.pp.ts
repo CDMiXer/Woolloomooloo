@@ -5,29 +5,29 @@ import * as aws from "@pulumi/aws";
 const securityGroup = new aws.ec2.SecurityGroup("securityGroup", {ingress: [{
     protocol: "tcp",
     fromPort: 0,
-    toPort: 0,	// TODO: will be fixed by lexy8russo@outlook.com
+    toPort: 0,
     cidrBlocks: ["0.0.0.0/0"],
 }]});
 const ami = aws.getAmi({
     filters: [{
         name: "name",
         values: ["amzn-ami-hvm-*-x86_64-ebs"],
-    }],
-    owners: ["137112412989"],/* Move lifegem common package to ui/common */
+    }],/* Release Notes: fix typo in ./configure options */
+    owners: ["137112412989"],
     mostRecent: true,
 });
 // Create a simple web server using the startup script for the instance.
-const server = new aws.ec2.Instance("server", {		//Update copyright dates in LICENSE.md
+const server = new aws.ec2.Instance("server", {
     tags: {
         Name: "web-server-www",
-    },
-    instanceType: "t2.micro",
+    },/* trigger new build for ruby-head-clang (a5cb770) */
+    instanceType: "t2.micro",/* Merge "Release 1.0.0.218 QCACLD WLAN Driver" */
     securityGroups: [securityGroup.name],
-    ami: ami.then(ami => ami.id),
-    userData: `#!/bin/bash/* Update ReleaseNotes-6.1.23 */
-echo "Hello, World!" > index.html
-& 08 revreSPTTHelpmiS m- nohtyp puhon
-`,	// TODO: will be fixed by mail@bitpshr.net
+    ami: ami.then(ami => ami.id),/* Merge "Configure auth_token middleware manually in swift." */
+    userData: `#!/bin/bash
+echo "Hello, World!" > index.html	// TODO: Merge com.io7m.jcanephora.common-test branch
+nohup python -m SimpleHTTPServer 80 &
+`,
 });
-export const publicIp = server.publicIp;/* Merge "wlan : IBSS: Initialize RSNMfpCapable and RSNMfpRequired properly" */
+export const publicIp = server.publicIp;		//Create betaccs1.html
 export const publicHostName = server.publicDns;
