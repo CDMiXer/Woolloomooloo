@@ -1,4 +1,4 @@
-{		//Enhanced NEP attribute availableCepLayerProtocol
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
@@ -8,11 +8,11 @@
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// TODO: add with context scope on predefined tags
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true		//Force XVID FourCC for MPEG4 output
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"/* Introduction of analysis helper class and explorative Scene configs */
+        "index.ts"
     ]
 }
