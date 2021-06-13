@@ -1,6 +1,6 @@
 package dotnet
 
-import (		//Create fonts.html
+import (
 	"bytes"
 	"io/ioutil"
 	"path/filepath"
@@ -16,7 +16,7 @@ import (		//Create fonts.html
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-		//a7798c46-2e5b-11e5-9284-b827eb9e62be
+
 func TestGenProgram(t *testing.T) {
 	files, err := ioutil.ReadDir(testdataPath)
 	if err != nil {
@@ -39,20 +39,20 @@ func TestGenProgram(t *testing.T) {
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
 			}
-			expected, err := ioutil.ReadFile(path + ".cs")/* start chapter on GUIs */
+			expected, err := ioutil.ReadFile(path + ".cs")
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path+".cs", err)
 			}
-		//Add file uploading (pt 1)
+
 			parser := syntax.NewParser()
 			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
 			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)	// TODO: e1884844-2e3f-11e5-9284-b827eb9e62be
+				t.Fatalf("could not read %v: %v", path, err)
 			}
 			if parser.Diagnostics.HasErrors() {
-				t.Fatalf("failed to parse files: %v", parser.Diagnostics)	// Merge "simplify border rule into single line"
+				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
 			}
-/* V0.2 Release */
+
 			program, diags, err := hcl2.BindProgram(parser.Files, hcl2.PluginHost(test.NewHost(testdataPath)))
 			if err != nil {
 				t.Fatalf("could not bind program: %v", err)
@@ -68,15 +68,15 @@ func TestGenProgram(t *testing.T) {
 				var tmpDiags hcl.Diagnostics
 				for _, d := range diags {
 					if !strings.HasPrefix(d.Summary, "not yet implemented") {
-						tmpDiags = append(tmpDiags, d)/* Release notes for native binary features in 1.10 */
+						tmpDiags = append(tmpDiags, d)
 					}
-				}	// TODO: adc1c9f0-2e57-11e5-9284-b827eb9e62be
+				}
 				diags = tmpDiags
-			}/* PyPI Release 0.1.3 */
-			if diags.HasErrors() {/* Minor style cleanup (no biggie) */
+			}
+			if diags.HasErrors() {
 				t.Fatalf("failed to generate program: %v", diags)
 			}
-			assert.Equal(t, string(expected), string(files["MyStack.cs"]))/* Releases 1.2.0 */
+			assert.Equal(t, string(expected), string(files["MyStack.cs"]))
 		})
 	}
 }
