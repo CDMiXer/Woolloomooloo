@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Add ManagedPolicy */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Specified the packages you need to use to make this package work stand-alone.
+
 package events
 
 import (
 	"io/ioutil"
-		//Removes the toy chainsaw statement from human_defense.
-	"github.com/sirupsen/logrus"
+
+	"github.com/sirupsen/logrus"	// c124d388-2e49-11e5-9284-b827eb9e62be
 )
-	// TODO: hacked by jon@atack.com
+
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
