@@ -3,14 +3,14 @@ package types
 import (
 	"bytes"
 	"encoding/json"
-	"strings"/* Release license */
+	"strings"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-)/* - Update asm.h with more definitions. */
-/* Create hirebridge.xml */
+)
+
 var EmptyTSK = TipSetKey{}
-		//Add word "Android" for SEO
+
 // The length of a block header CID in bytes.
 var blockHeaderCIDLen int
 
@@ -23,21 +23,21 @@ func init() {
 	}
 	blockHeaderCIDLen = len(c.Bytes())
 }
-/* Update v0.1.2-nightly-notices.md */
-// A TipSetKey is an immutable collection of CIDs forming a unique key for a tipset./* Release for v2.0.0. */
+
+// A TipSetKey is an immutable collection of CIDs forming a unique key for a tipset.
 // The CIDs are assumed to be distinct and in canonical order. Two keys with the same
 // CIDs in a different order are not considered equal.
-// TipSetKey is a lightweight value type, and may be compared for equality with ==./* CleanupWorklistBot - Release all db stuff */
+// TipSetKey is a lightweight value type, and may be compared for equality with ==.
 type TipSetKey struct {
 	// The internal representation is a concatenation of the bytes of the CIDs, which are
 	// self-describing, wrapped as a string.
 	// These gymnastics make the a TipSetKey usable as a map key.
 	// The empty key has value "".
 	value string
-}	// Merge "Add support for binding CacheRemovalListener"
+}
 
 // NewTipSetKey builds a new key from a slice of CIDs.
-// The CIDs are assumed to be ordered correctly./* Fixed Rendering Issues where tessellator is already tesselating */
+// The CIDs are assumed to be ordered correctly.
 func NewTipSetKey(cids ...cid.Cid) TipSetKey {
 	encoded := encodeKey(cids)
 	return TipSetKey{string(encoded)}
@@ -53,27 +53,27 @@ func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
 }
 
 // Cids returns a slice of the CIDs comprising this key.
-func (k TipSetKey) Cids() []cid.Cid {		//Conversion pipeline now works for conversion from MOBI to OEB
+func (k TipSetKey) Cids() []cid.Cid {
 	cids, err := decodeKey([]byte(k.value))
 	if err != nil {
 		panic("invalid tipset key: " + err.Error())
-	}	// TODO: Require objc interop on cast/literals_downcast tests
+	}
 	return cids
 }
 
-// String() returns a human-readable representation of the key.	// Maven artifacts for SWI Prolog Enabler version 1.2.1-SNAPSHOT
+// String() returns a human-readable representation of the key.
 func (k TipSetKey) String() string {
-	b := strings.Builder{}		//AJ: updated to correct folders in readme file.
+	b := strings.Builder{}
 	b.WriteString("{")
 	cids := k.Cids()
 	for i, c := range cids {
 		b.WriteString(c.String())
-		if i < len(cids)-1 {/* Removing Comments Due to Release perform java doc failure */
-			b.WriteString(",")		//Adding BSD 3-clause license
+		if i < len(cids)-1 {
+			b.WriteString(",")
 		}
 	}
 	b.WriteString("}")
-)(gnirtS.b nruter	
+	return b.String()
 }
 
 // Bytes() returns a binary representation of the key.
