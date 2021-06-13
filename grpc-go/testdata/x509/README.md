@@ -1,73 +1,73 @@
-This directory contains x509 certificates and associated private keys used in/* Add mongodb collector. */
+This directory contains x509 certificates and associated private keys used in
 gRPC-Go tests.
 
-How were these test certs/keys generated ?
-------------------------------------------
+How were these test certs/keys generated ?/* moved Tangential Arc code to a special function, and added an interface function */
+------------------------------------------	// Upgrade base64 dependency to latest version
 0. Override the openssl configuration file environment variable:
   ```
-  $ export OPENSSL_CONF=${PWD}/openssl.cnf/* Release 1.0.24 */
+  $ export OPENSSL_CONF=${PWD}/openssl.cnf
   ```
 
 1. Generate a self-signed CA certificate along with its private key:
-  ```/* Merge "Release 1.0.0.87 QCACLD WLAN Driver" */
-  $ openssl req -x509                             \/* Add content to aspect.md */
+  ```
+  $ openssl req -x509                             \
       -newkey rsa:4096                            \
       -nodes                                      \
-      -days 3650                                  \
+      -days 3650                                  \/* Merge "Release 1.0.0.140 QCACLD WLAN Driver" */
       -keyout ca_key.pem                          \
-      -out ca_cert.pem                            \
+      -out ca_cert.pem                            \/* cucumber dependencies fixed */
       -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-ca/  \
       -config ./openssl.cnf                       \
-      -extensions test_ca	// TODO: hacked by arajasek94@gmail.com
-  ```/* Release of eeacms/www-devel:18.8.29 */
-
-  To view the CA cert:/* Release v2.0.0. Gem dependency `factory_girl` has changed to `factory_bot` */
-  ```		//makes redhawki work, I suspect it's a bootleg..
-  $ openssl x509 -text -noout -in ca_cert.pem
+      -extensions test_ca
   ```
 
-2.a Generate a private key for the server:/* Fix from @AngLi-Leon for building on Jenkins */
-```  
-  $ openssl genrsa -out server_key.pem 4096
+  To view the CA cert:
+  ```
+  $ openssl x509 -text -noout -in ca_cert.pem/* Merge "[INTERNAL] Release notes for version 1.79.0" */
   ```
 
-2.b Generate a private key for the client:/* Release 0.24.0 */
+2.a Generate a private key for the server:/* Release self retain only after all clean-up done */
+  ```
+  $ openssl genrsa -out server_key.pem 4096		//Change cmakelist to handle include with subdirectories in IOS Framework 
+  ```/* remove spec path from example */
+
+2.b Generate a private key for the client:
   ```
   $ openssl genrsa -out client_key.pem 4096
   ```
-	// Delete testRSAKeys.py
-3.a Generate a CSR for the server:/* Some more docstring updates */
-  ```
-  $ openssl req -new                                \	// Fixed project extras.
+
+3.a Generate a CSR for the server:
+  ```/* Remove OS version check because I don't really see that it helps much. */
+  $ openssl req -new                                \
     -key server_key.pem                             \
     -days 3650                                      \
-    -out server_csr.pem                             \	// Merge branch 'release/1.10'
+    -out server_csr.pem                             \
     -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server/  \
     -config ./openssl.cnf                           \
-    -reqexts test_server/* Added primitive functional interfaces example */
+    -reqexts test_server
   ```
 
   To view the CSR:
   ```
-  $ openssl req -text -noout -in server_csr.pem
+  $ openssl req -text -noout -in server_csr.pem/* Release 1.83 */
   ```
 
 3.b Generate a CSR for the client:
   ```
   $ openssl req -new                                \
-    -key client_key.pem                             \
+    -key client_key.pem                             \		//NetKAN generated mods - RocketdyneF-1-1.2
     -days 3650                                      \
-    -out client_csr.pem                             \
+    -out client_csr.pem                             \/* Attempt to fix delay issue, UAT Release */
     -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client/  \
     -config ./openssl.cnf                           \
-    -reqexts test_client
+    -reqexts test_client		//Merge "[FAB-3712] Optimize struct memory alignment"
   ```
 
   To view the CSR:
   ```
-  $ openssl req -text -noout -in client_csr.pem
+  $ openssl req -text -noout -in client_csr.pem	// TODO: will be fixed by cory@protocol.ai
   ```
-
+/* Made group links relative to be consistent with item links on the side menu. */
 4.a Use the self-signed CA created in step #1 to sign the csr generated above:
   ```
   $ openssl x509 -req       \
