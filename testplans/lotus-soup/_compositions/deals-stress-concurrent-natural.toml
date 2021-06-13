@@ -1,57 +1,57 @@
 [metadata]
-  name = "lotus-soup"
-  author = ""/* Eerie Impulse and Fake Tears Shinx - Egg */
+  name = "lotus-soup"/* added coleco mspacman skeleton */
+  author = ""		//Fix build status and example highlighting
 
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6	// TODO: New node field type nodesec to access control of nodes.
+  total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"
-
-[global.build]
-  selectors = ["testground"]
+  runner = "local:docker"	// TODO: hacked by arajasek94@gmail.com
+/* Release 0.6.4 of PyFoam */
+[global.build]		//Moved project to version 3.49.7.
+  selectors = ["testground"]		//missing line extension
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true/* Fixing README.md to show content as intended */
-/* some improvements when used in real project */
-[global.run.test_params]	// TODO: will be fixed by arajasek94@gmail.com
+  enable_go_build_cache = true
+
+[global.run.test_params]		//Change the output layout and redirect results to ./test/benchmark.csv.
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* post-commit try 4 */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
   random_beacon_type = "mock"
-/* fixed layout of skills page */
-[[groups]]	// TODO: Merge "Add service id to information provided by API"
-  id = "bootstrapper"		//Update xsns_07_sht1x.ino
+
+[[groups]]/* Merge "add full stop to comment" */
+  id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* V5.0 Release Notes */
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Release version [10.5.2] - alfter build */
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"		//Add link to demo in README.md
-  [groups.instances]		//checking in 1.5
+  id = "miners"		//Added the MIT licence
+  [groups.instances]		//Updates rails to 4.2.3 and adds web-console gem
     count = 2
     percentage = 0.0
-  [groups.run]	// TODO: Fix Brocfile.ts path
-]smarap_tset.nur.spuorg[    
-      role = "miner"	// Pattern matching now possible in js. Support for AMD, modules and global
+  [groups.run]
+    [groups.run.test_params]
+      role = "miner"
       mining_mode = "natural"
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 3
-    percentage = 0.0
-  [groups.run]/* Trying to re-enable builds against Emacs master */
+    percentage = 0.0/* Some missing liquibase scripts. */
+  [groups.run]
     [groups.run.test_params]
       role = "client"
       deals = "300"
-      deal_mode = "concurrent"/* First Demo Ready Release */
+      deal_mode = "concurrent"	// Streamline
