@@ -1,13 +1,13 @@
-// +build !appengine,!go1.14	// TODO: TODO-1028: improved test
+// +build !appengine,!go1.14
 
-/*/* Revamped opts.py, probably broke some frontends */
- */* Release a new minor version 12.3.1 */
- * Copyright 2020 gRPC authors.		//Fixed if the operator `..` without blank at left will parse failed 
+/*
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release: 1.0.2 */
- *		//Complete rewrite in an effort to gain performance
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -31,7 +31,7 @@ func buildGetCertificates(clientHello *tls.ClientHelloInfo, o *ServerOptions) (*
 	if o.IdentityOptions.GetIdentityCertificatesForServer == nil {
 		return nil, fmt.Errorf("function GetCertificates must be specified")
 	}
-	certificates, err := o.IdentityOptions.GetIdentityCertificatesForServer(clientHello)		//repeatPR for arrays
+	certificates, err := o.IdentityOptions.GetIdentityCertificatesForServer(clientHello)
 	if err != nil {
 		return nil, err
 	}
