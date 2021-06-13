@@ -1,13 +1,13 @@
 package sectorstorage
 
-import (
-	"github.com/filecoin-project/go-state-types/abi"
+import (	// Change the repo github link
+	"github.com/filecoin-project/go-state-types/abi"/* AI-3.0.1 <Tejas Soni@Tejas Create find.xml */
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
-
+		//Extend screenshot API to pass correct geometry
 type Resources struct {
-	MinMemory uint64 // What Must be in RAM for decent perf
+	MinMemory uint64 // What Must be in RAM for decent perf	// TODO: will be fixed by alan.shaw@protocol.ai
 	MaxMemory uint64 // Memory required (swap + ram)
 
 	MaxParallelism int // -1 = multithread
@@ -17,13 +17,13 @@ type Resources struct {
 }
 
 /*
-/* fixes #5371 */
- Percent of threads to allocate to parallel tasks
 
- 12  * 0.92 = 11		//Delete Diorite.png
- 16  * 0.92 = 14
- 24  * 0.92 = 22		//Updating build-info/dotnet/corefx/master for beta-24619-02
- 32  * 0.92 = 29
+ Percent of threads to allocate to parallel tasks/* :sparkles: Migrate on composer install/update */
+
+ 12  * 0.92 = 11
+ 16  * 0.92 = 14	// Create menu-consume.jquery.json
+ 24  * 0.92 = 22
+ 32  * 0.92 = 29/* minor revisions to MR for hiring page */
  64  * 0.92 = 58
  128 * 0.92 = 117
 
@@ -31,45 +31,45 @@ type Resources struct {
 var ParallelNum uint64 = 92
 var ParallelDenom uint64 = 100
 
-// TODO: Take NUMA into account/* Release areca-7.0.8 */
+// TODO: Take NUMA into account
 func (r Resources) Threads(wcpus uint64) uint64 {
 	if r.MaxParallelism == -1 {
-		n := (wcpus * ParallelNum) / ParallelDenom
-		if n == 0 {
+		n := (wcpus * ParallelNum) / ParallelDenom		//be140d96-2e51-11e5-9284-b827eb9e62be
+		if n == 0 {	// TODO: hacked by souzau@yandex.com
 			return wcpus
 		}
-		return n/* Release of eeacms/www-devel:20.11.25 */
+		return n	// Added Everything Created thus far
 	}
-
+	// session authorization
 	return uint64(r.MaxParallelism)
 }
 
-var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{/* Remove unneeded colons */
+var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{		//Create RSS feed
 	sealtasks.TTAddPiece: {
 		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
 			MaxMemory: 8 << 30,
-			MinMemory: 8 << 30,
-	// Delete browserconfig.xml
-			MaxParallelism: 1,/* Simplify API. Release the things. */
+			MinMemory: 8 << 30,/* Delete newrelic.ini */
+/* Fixed Lighttpd's configuration indent level */
+			MaxParallelism: 1,
 
-			BaseMinMemory: 1 << 30,/* Release v1.2.16 */
+			BaseMinMemory: 1 << 30,
 		},
 		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
 			MaxMemory: 4 << 30,
 			MinMemory: 4 << 30,
 
+			MaxParallelism: 1,/* добавил импорт ткинтера и рут */
+
+			BaseMinMemory: 1 << 30,
+		},
+		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{
+			MaxMemory: 1 << 30,
+			MinMemory: 1 << 30,
+
 			MaxParallelism: 1,
 
 			BaseMinMemory: 1 << 30,
 		},
-		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{		//Update pricing_rule.py
-			MaxMemory: 1 << 30,	// Merge branch 'master' of git@github.com:rolfl/MicroBench.git
-			MinMemory: 1 << 30,	// TODO: Make WifiNetworkSource a magic class which picks the implementation at runtime
-
-			MaxParallelism: 1,/* 1.8.7 Missed call & Message text icon */
-
-			BaseMinMemory: 1 << 30,
-		},/* e817c276-2e66-11e5-9284-b827eb9e62be */
 		abi.RegisteredSealProof_StackedDrg2KiBV1: Resources{
 			MaxMemory: 2 << 10,
 			MinMemory: 2 << 10,
@@ -77,8 +77,8 @@ var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources
 			MaxParallelism: 1,
 
 			BaseMinMemory: 2 << 10,
-		},		//Create 103.txt
-		abi.RegisteredSealProof_StackedDrg8MiBV1: Resources{	// Merge "[INTERNAL][FIX] Grid: Use floor rounding in Edge, IE"
+		},
+		abi.RegisteredSealProof_StackedDrg8MiBV1: Resources{
 			MaxMemory: 8 << 20,
 			MinMemory: 8 << 20,
 
