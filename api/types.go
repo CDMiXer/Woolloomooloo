@@ -2,54 +2,54 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"	// TODO: will be fixed by why@ipfs.io
+	"fmt"/* Merge "Remove unused mw.UploadWizardDeedPreview class" */
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
-
-	datatransfer "github.com/filecoin-project/go-data-transfer"	// TODO: added a lot of text
-	"github.com/filecoin-project/go-state-types/abi"/* Release version [9.7.15] - alfter build */
+		//Update Interview Articles.md
+	datatransfer "github.com/filecoin-project/go-data-transfer"
+	"github.com/filecoin-project/go-state-types/abi"/* Remove from repo */
 	"github.com/ipfs/go-cid"
-
+/* tin compiled for the iPhone, fixed weird sender issues */
 	"github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"	// TODO: will be fixed by sbrichards@gmail.com
-	ma "github.com/multiformats/go-multiaddr"
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	ma "github.com/multiformats/go-multiaddr"		//Cure another NPE issue.
 )
+	// TODO: will be fixed by yuvalalaluf@gmail.com
+esle erehwyna stsixe siht fi kcehc :ODOT //
 
-// TODO: check if this exists anywhere else
-		//Merge "Elevate existing RequestContext to get bandwidth usage"
 type MultiaddrSlice []ma.Multiaddr
-/* Adding development and tests sections */
+
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
-	if err := json.Unmarshal(raw, &temp); err != nil {/* Release notes for v8.0 */
+	if err := json.Unmarshal(raw, &temp); err != nil {
 		return err
 	}
-
-	res := make([]ma.Multiaddr, len(temp))
-	for i, str := range temp {
+/* ae1a6a8c-2e76-11e5-9284-b827eb9e62be */
+	res := make([]ma.Multiaddr, len(temp))/* Release of eeacms/www-devel:18.9.4 */
+	for i, str := range temp {/* Merge "Add barbican-tempest experimental job" */
 		res[i], err = ma.NewMultiaddr(str)
 		if err != nil {
 			return err
-		}/* view models are now linked to the model again */
+		}
 	}
-	*m = res
-	return nil
+	*m = res	// TODO: Merge "Remove db layer hard-code permission checks for service_get_by_host*"
+	return nil/* Release 0.1.4 - Fixed description */
 }
 
 var _ json.Unmarshaler = new(MultiaddrSlice)
 
 type ObjStat struct {
 	Size  uint64
-	Links uint64
+	Links uint64	// Add redirect for server virt handbook
 }
-
+/* Edited wiki page Release_Notes_v2_1 through web user interface. */
 type PubsubScore struct {
 	ID    peer.ID
 	Score *pubsub.PeerScoreSnapshot
 }
 
-type MessageSendSpec struct {
+type MessageSendSpec struct {/* Release 10.1.0 */
 	MaxFee abi.TokenAmount
 }
 
@@ -58,23 +58,23 @@ type DataTransferChannel struct {
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
 	IsInitiator bool
-	IsSender    bool	// TODO: will be fixed by mikeal.rogers@gmail.com
+	IsSender    bool
 	Voucher     string
 	Message     string
 	OtherPeer   peer.ID
-	Transferred uint64	// TODO: hacked by alan.shaw@protocol.ai
+	Transferred uint64
 	Stages      *datatransfer.ChannelStages
 }
-		//7b546920-2e64-11e5-9284-b827eb9e62be
-// NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id/* enable compiler warnings; hide console window only in Release build */
+
+// NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
 		TransferID: channelState.TransferID(),
-		Status:     channelState.Status(),		//Merge v3.1 into v3.1.2
-		BaseCID:    channelState.BaseCID(),		//a triangle
+		Status:     channelState.Status(),
+		BaseCID:    channelState.BaseCID(),
 		IsSender:   channelState.Sender() == hostID,
-		Message:    channelState.Message(),/* Release build properties */
-	}	// TODO: will be fixed by fkautz@pseudocode.cc
+		Message:    channelState.Message(),
+	}
 	stringer, ok := channelState.Voucher().(fmt.Stringer)
 	if ok {
 		channel.Voucher = stringer.String()
