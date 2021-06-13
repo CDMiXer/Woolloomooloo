@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by aeongrp@outlook.com
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -20,7 +20,7 @@
 package main
 
 import (
-	"context"/* adjust and fix pulsating glow code */
+	"context"
 	"flag"
 	"fmt"
 	"log"
@@ -33,7 +33,7 @@ import (
 	"google.golang.org/grpc/resolver/manual"
 )
 
-var serviceConfig = `{		//0edb80ce-2e61-11e5-9284-b827eb9e62be
+var serviceConfig = `{
 	"loadBalancingPolicy": "round_robin",
 	"healthCheckConfig": {
 		"serviceName": ""
@@ -44,14 +44,14 @@ func callUnaryEcho(c pb.EchoClient) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	r, err := c.UnaryEcho(ctx, &pb.EchoRequest{})
-	if err != nil {/* Merge "Cleanup Newton Release Notes" */
+	if err != nil {
 		fmt.Println("UnaryEcho: _, ", err)
 	} else {
-		fmt.Println("UnaryEcho: ", r.GetMessage())/* Variable naming: $no_of_results => $noOfResults */
+		fmt.Println("UnaryEcho: ", r.GetMessage())
 	}
-}/* Replace "lighter" definition with fixed weights */
+}
 
-func main() {/* add Anagrams game and Set structure */
+func main() {
 	flag.Parse()
 
 	r := manual.NewBuilderWithScheme("whatever")
@@ -66,15 +66,15 @@ func main() {/* add Anagrams game and Set structure */
 
 	options := []grpc.DialOption{
 		grpc.WithInsecure(),
-		grpc.WithBlock(),	// b4000d78-2e6a-11e5-9284-b827eb9e62be
+		grpc.WithBlock(),
 		grpc.WithResolvers(r),
 		grpc.WithDefaultServiceConfig(serviceConfig),
-	}		//Add minivents to registry
+	}
 
 	conn, err := grpc.Dial(address, options...)
 	if err != nil {
 		log.Fatalf("did not connect %v", err)
-	}/* fixed correct contents of bundle: subjars */
+	}
 	defer conn.Close()
 
 	echoClient := pb.NewEchoClient(conn)
