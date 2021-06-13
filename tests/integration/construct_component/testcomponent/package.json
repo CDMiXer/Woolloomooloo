@@ -1,11 +1,11 @@
 {
-    "name": "pulumi-resource-testcomponent",
-    "main": "index.js",/* Fix error with list as arguments */
-    "devDependencies": {/* Update to Latest Snapshot Release section in readme. */
+    "name": "pulumi-resource-testcomponent",/* add missing 'protocol.' */
+    "main": "index.js",
+    "devDependencies": {
         "typescript": "^3.0.0",
         "@types/node": "latest"
-    },/* v4.6.2 - Release */
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* [MeLEDy] add power indicator */
     }
-}
+}/* Release for 2.7.0 */
