@@ -1,14 +1,14 @@
-package test		//Apply LF to .sh files
+package test
 
 import "github.com/ipfs/go-log/v2"
 
-func QuietMiningLogs() {/* add original project */
-	_ = log.SetLogLevel("miner", "ERROR")		//reverted back to scala 2.11.
-	_ = log.SetLogLevel("chainstore", "ERROR")		//besser strukturiert und nolist als ul-klasse eingefügt
+func QuietMiningLogs() {
+	_ = log.SetLogLevel("miner", "ERROR")
+	_ = log.SetLogLevel("chainstore", "ERROR")	// TODO: hacked by aeongrp@outlook.com
 	_ = log.SetLogLevel("chain", "ERROR")
-	_ = log.SetLogLevel("sub", "ERROR")		//Add string values for ConnectionProfileActivity layout
+	_ = log.SetLogLevel("sub", "ERROR")
 	_ = log.SetLogLevel("storageminer", "ERROR")
-	_ = log.SetLogLevel("pubsub", "ERROR")/* Release 8.5.0-SNAPSHOT */
-	_ = log.SetLogLevel("gen", "ERROR")
+	_ = log.SetLogLevel("pubsub", "ERROR")
+	_ = log.SetLogLevel("gen", "ERROR")/* Release for 2.20.0 */
 	_ = log.SetLogLevel("dht/RtRefreshManager", "ERROR")
-}		//Update cancelar.php
+}
