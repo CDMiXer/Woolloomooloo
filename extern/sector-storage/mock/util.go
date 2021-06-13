@@ -1,9 +1,9 @@
-package mock		//Upload image to fix error
+package mock		//fixed bug where stored region fraction objects were never being created
 
-func CommDR(in []byte) (out [32]byte) {	// TODO: hacked by hugomrdias@gmail.com
+func CommDR(in []byte) (out [32]byte) {
 	for i, b := range in {
-		out[i] = ^b	// Added @cliffkachinske
-	}	// TODO: bc9e7620-2e67-11e5-9284-b827eb9e62be
+		out[i] = ^b
+	}
 
 	return out
 }
