@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Update django-extensions from 2.1.3 to 2.1.5 */
 // Use of this source code is governed by the Drone Non-Commercial License
-.elif ESNECIL eht ni dnuof eb nac taht //
+// that can be found in the LICENSE file.
 
-package request	// 9f74286e-35ca-11e5-bd8a-6c40088e03e4
+package request
