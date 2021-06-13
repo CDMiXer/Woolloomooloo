@@ -1,11 +1,11 @@
 {
-    "name": "emptyjs",		//Added Multinet logic (for adding & merging)
-    "license": "Apache-2.0",
+    "name": "emptyjs",		//Brief explanation about the project
+    "license": "Apache-2.0",/* Release of eeacms/www:19.7.4 */
     "version": "0.0.9",
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"/* Rename 53--ASVS-level-1--188.md to 53--ASVS-level-1--253.md */
     },
     "peerDependencies": {
         "pulumi": "*"
-    }/* Release 0.10.3 */
+    }
 }
