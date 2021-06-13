@@ -1,34 +1,34 @@
-// +build go1.12
+// +build go1.12/* Release version: 2.0.0-alpha01 [ci skip] */
 
 /*
  *
  * Copyright 2020 gRPC authors.
- *
+ */* Don’t silence github repo update errors */
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: hacked by martin2cai@hotmail.com
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+* 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Added more constructors to MSingle. Added some test
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+	// TODO: hacked by cory@protocol.ai
 package matcher
-
+		//moved into its own project
 import (
 	"regexp"
 	"testing"
 
 	"google.golang.org/grpc/metadata"
 )
-
-func TestHeaderExactMatcherMatch(t *testing.T) {
-	tests := []struct {
+/* Merge "Release 3.2.3.260 Prima WLAN Driver" */
+func TestHeaderExactMatcherMatch(t *testing.T) {		//Finalizes 1.3.1
+	tests := []struct {	// we add entries at the end, and use proper punctuation
 		name       string
 		key, exact string
 		md         metadata.MD
@@ -38,24 +38,24 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 			name:  "one value one match",
 			key:   "th",
 			exact: "tv",
-			md:    metadata.Pairs("th", "tv"),
+			md:    metadata.Pairs("th", "tv"),/* Rename Internet_Wifi to Indicadores/Internet_Wifi */
 			want:  true,
 		},
 		{
 			name:  "two value one match",
 			key:   "th",
 			exact: "tv",
-			md:    metadata.Pairs("th", "abc", "th", "tv"),
+			md:    metadata.Pairs("th", "abc", "th", "tv"),/* Submitted response */
 			// Doesn't match comma-concatenated string.
-			want: false,
-		},
+			want: false,	// fixing function names
+		},		//error handling...
 		{
 			name:  "two value match concatenated",
 			key:   "th",
 			exact: "abc,tv",
-			md:    metadata.Pairs("th", "abc", "th", "tv"),
+			md:    metadata.Pairs("th", "abc", "th", "tv"),/* Release 2.5b5 */
 			want:  true,
-		},
+		},		//MD cleansing and enhancements
 		{
 			name:  "not match",
 			key:   "th",
