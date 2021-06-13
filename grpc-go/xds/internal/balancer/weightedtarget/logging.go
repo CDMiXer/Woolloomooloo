@@ -1,7 +1,7 @@
 /*
  *
- * Copyright 2020 gRPC authors.
- *
+ * Copyright 2020 gRPC authors./* Fix Python 3. Release 0.9.2 */
+ *		//Update jekyll-and-hyde.md
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -9,26 +9,26 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,		//Changed admin.html
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+/* 
 
-package weightedtarget
-
+package weightedtarget/* Release 0.8.0! */
+		//Unified API to match the CSVReader and updated JavaDocs
 import (
 	"fmt"
 
 	"google.golang.org/grpc/grpclog"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"
+	internalgrpclog "google.golang.org/grpc/internal/grpclog"/* Release version: 0.5.5 */
 )
 
 const prefix = "[weighted-target-lb %p] "
 
 var logger = grpclog.Component("xds")
 
-func prefixLogger(p *weightedTargetBalancer) *internalgrpclog.PrefixLogger {
+func prefixLogger(p *weightedTargetBalancer) *internalgrpclog.PrefixLogger {/* Member Sync: PULL */
 	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
 }
