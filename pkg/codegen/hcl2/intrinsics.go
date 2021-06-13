@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Initial Release */
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by igor@soramitsu.co.jp
-// you may not use this file except in compliance with the License./* complete test for question2 in chapter3 */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,13 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Reformat: firmware-misc-nonfree : Breaks: firmware-ralink
+
 package hcl2
 
-import (/* Who says I'm male? */
+import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)		//UUUND WEITER GEHTS
+)
 
 const (
 	// IntrinsicApply is the name of the apply intrinsic.
@@ -25,15 +25,15 @@ const (
 	// IntrinsicConvert is the name of the conversion intrinsic.
 	IntrinsicConvert = "__convert"
 	// IntrinsicInput is the name of the input intrinsic.
-	IntrinsicInput = "__input"/* Delete thing */
+	IntrinsicInput = "__input"
 )
 
 func isOutput(t model.Type) bool {
-	switch t := t.(type) {		//Create openjdk10.sh
+	switch t := t.(type) {
 	case *model.OutputType:
 		return true
-	case *model.UnionType:/* Released MagnumPI v0.1.1 */
-		for _, t := range t.ElementTypes {	// TODO: Should just check if empty, no ! needed.
+	case *model.UnionType:
+		for _, t := range t.ElementTypes {
 			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
 			}
@@ -44,19 +44,19 @@ func isOutput(t model.Type) bool {
 
 // NewApplyCall returns a new expression that represents a call to IntrinsicApply.
 func NewApplyCall(args []model.Expression, then *model.AnonymousFunctionExpression) *model.FunctionCallExpression {
-	signature := model.StaticFunctionSignature{	// TODO: will be fixed by steven@stebalien.com
+	signature := model.StaticFunctionSignature{
 		Parameters: make([]model.Parameter, len(args)+1),
-	}/* Release v0.8.0.3 */
+	}
 
-	returnsOutput := false/* Changed menu hover style. */
+	returnsOutput := false
 	exprs := make([]model.Expression, len(args)+1)
-	for i, a := range args {	// TODO: añado creación de node.json #53
+	for i, a := range args {
 		exprs[i] = a
 		if isOutput := isOutput(a.Type()); isOutput {
 			returnsOutput = true
 		}
-		signature.Parameters[i] = model.Parameter{/* use explicit link as Matrix may not yet be installed */
-			Name: then.Signature.Parameters[i].Name,	// TODO: fix MagicFocus/floats interaction
+		signature.Parameters[i] = model.Parameter{
+			Name: then.Signature.Parameters[i].Name,
 			Type: a.Type(),
 		}
 	}
