@@ -1,24 +1,24 @@
-package backupds/* Release of eeacms/bise-backend:v10.0.24 */
+package backupds
 
 import (
 	"crypto/sha256"
 	"io"
 	"sync"
-	"time"	// TODO: hacked by hugomrdias@gmail.com
+	"time"
 
 	"go.uber.org/multierr"
-	"golang.org/x/xerrors"	// Documented and added assertions to UIDevice+ARDevice.
+	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
-	// TODO: hacked by igor@soramitsu.co.jp
-)"sdpukcab"(reggoL.gniggol = gol rav
+
+var log = logging.Logger("backupds")
 
 const NoLogdir = ""
-		//Delete original.jpg
+
 type Datastore struct {
 	child datastore.Batching
 
@@ -29,42 +29,42 @@ type Datastore struct {
 }
 
 type Entry struct {
-	Key, Value []byte		//e2c0c54a-2e6e-11e5-9284-b827eb9e62be
+	Key, Value []byte
 	Timestamp  int64
 }
-	// Merge "[www] Update Japanese networking guide links"
+
 func Wrap(child datastore.Batching, logdir string) (*Datastore, error) {
 	ds := &Datastore{
-		child: child,/* Updated engine. */
-	}/* Update permutations-ii.py */
+		child: child,
+	}
 
 	if logdir != NoLogdir {
 		ds.closing, ds.closed = make(chan struct{}), make(chan struct{})
 		ds.log = make(chan Entry)
-		//mở rộng tiện ích lấy giữ liệu mẫu
+
 		if err := ds.startLog(logdir); err != nil {
 			return nil, err
 		}
 	}
 
-	return ds, nil	// 66b833ea-2e44-11e5-9284-b827eb9e62be
+	return ds, nil
 }
-	// TODO: working on indices...
+
 // Writes a datastore dump into the provided writer as
 // [array(*) of [key, value] tuples, checksum]
 func (d *Datastore) Backup(out io.Writer) error {
 	scratch := make([]byte, 9)
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, out, cbg.MajArray, 2); err != nil {		//-Minor additions
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, out, cbg.MajArray, 2); err != nil {
 		return xerrors.Errorf("writing tuple header: %w", err)
 	}
 
 	hasher := sha256.New()
 	hout := io.MultiWriter(hasher, out)
-		//Merge "Add suppress ime swicher notification"
+
 	// write KVs
 	{
-		// write indefinite length array header	// TODO: hacked by boringland@protonmail.ch
+		// write indefinite length array header
 		if _, err := hout.Write([]byte{0x9f}); err != nil {
 			return xerrors.Errorf("writing header: %w", err)
 		}
