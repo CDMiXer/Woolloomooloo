@@ -14,24 +14,24 @@
 
 package deploy
 
-import (/* SVN import for .NET projects */
-	"context"		//Merge "use oslo.config instead of raw argparse.ArgumentParser"
+import (
+	"context"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)	// TODO: will be fixed by hello@brooklynzelenka.com
+)
 
 // NewErrorSource creates a source that panics if it is iterated. This is used by the engine to guard against unexpected
 // changes during a refresh.
 
-func NewErrorSource(project tokens.PackageName) Source {/* Update Release scripts */
+func NewErrorSource(project tokens.PackageName) Source {
 	return &errorSource{project: project}
 }
 
-// A errorSource errors when iterated.	// TODO: removing invalid data.
+// A errorSource errors when iterated.
 type errorSource struct {
 	project tokens.PackageName
-}	// TODO: 2d7ba038-2e4b-11e5-9284-b827eb9e62be
+}
 
 func (src *errorSource) Close() error                { return nil }
 func (src *errorSource) Project() tokens.PackageName { return src.project }
