@@ -1,22 +1,22 @@
 {
-    "compilerOptions": {	// TODO: Fix packaging scripts
-        "outDir": "bin",
-        "target": "es6",		//4568a818-2e54-11e5-9284-b827eb9e62be
-        "module": "commonjs",
-        "moduleResolution": "node",
+    "compilerOptions": {
+        "outDir": "bin",/* strlennocol: fix color codes :P */
+        "target": "es6",
+        "module": "commonjs",		//added functionality for MCZ wide accessions
+        "moduleResolution": "node",/* Tag for MilestoneRelease 11 */
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,/* Fix json request */
-        "noImplicitReturns": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,/* fix bug #506154. Thanks to OAO for the patch */
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
         "index.ts",
-    ]/* RZS-Bugfix: Moved List-Buttons further to the left in resources views.; refs #5 */
-}	// TODO: hacked by mail@overlisted.net
-	// TODO: Added a private constructor RCProxy
+    ]/* FIX usage of tag {y} in numbering modules */
+}
+
