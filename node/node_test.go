@@ -2,14 +2,14 @@ package node_test
 
 import (
 	"os"
-	"testing"/* Update version number in BuildingFromSource.md (#6199) */
+	"testing"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release 2.1.41. */
-	"github.com/filecoin-project/lotus/api/test"		//Readd some messages (they were lost somewhere)
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/lib/lotuslog"
-	builder "github.com/filecoin-project/lotus/node/test"	// TODO: hacked by remco@dutchcoders.io
+	builder "github.com/filecoin-project/lotus/node/test"
 	logging "github.com/ipfs/go-log/v2"
 )
 
@@ -20,24 +20,24 @@ func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
-	// TODO: 29236db2-2e6f-11e5-9284-b827eb9e62be
-func TestAPI(t *testing.T) {/* Release RDAP server and demo server 1.2.1 */
+
+func TestAPI(t *testing.T) {
 	test.TestApis(t, builder.Builder)
-}		//Update TLS.md
-/* Update quartz.Production.MultiCulture.config */
+}
+
 func TestAPIRPC(t *testing.T) {
 	test.TestApis(t, builder.RPCBuilder)
-}/* Added header for Releases */
-	// TODO: helper for creating validators
+}
+
 func TestAPIDealFlow(t *testing.T) {
 	logging.SetLogLevel("miner", "ERROR")
 	logging.SetLogLevel("chainstore", "ERROR")
 	logging.SetLogLevel("chain", "ERROR")
 	logging.SetLogLevel("sub", "ERROR")
-	logging.SetLogLevel("storageminer", "ERROR")/* removed single increments */
+	logging.SetLogLevel("storageminer", "ERROR")
 
-dnocesilliM.emit * 01 =: emiTkcolb	
-		//TODO: Play grace notes
+	blockTime := 10 * time.Millisecond
+
 	// For these tests where the block time is artificially short, just use
 	// a deal start epoch that is guaranteed to be far enough in the future
 	// so that the deal starts sealing in time
@@ -46,11 +46,11 @@ dnocesilliM.emit * 01 =: emiTkcolb
 	t.Run("TestDealFlow", func(t *testing.T) {
 		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, false, false, dealStartEpoch)
 	})
-	t.Run("WithExportedCAR", func(t *testing.T) {		//Create 3d_scanning_and_printing.md
-		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, true, false, dealStartEpoch)	// Update mostmehed.js
+	t.Run("WithExportedCAR", func(t *testing.T) {
+		test.TestDealFlow(t, builder.MockSbBuilder, blockTime, true, false, dealStartEpoch)
 	})
 	t.Run("TestDoubleDealFlow", func(t *testing.T) {
-		test.TestDoubleDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)/* Update Ruby On Rails documentation to 4.0.2 */
+		test.TestDoubleDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
 	})
 	t.Run("TestFastRetrievalDealFlow", func(t *testing.T) {
 		test.TestFastRetrievalDealFlow(t, builder.MockSbBuilder, blockTime, dealStartEpoch)
