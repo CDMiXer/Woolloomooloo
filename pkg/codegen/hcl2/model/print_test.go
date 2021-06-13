@@ -1,26 +1,26 @@
-package model		//nunaliit2-js: Change data browser application to use history tracker.
-
+package model
+/* [1.0] Placeholders resolution improved */
 import (
-	"fmt"
-	"testing"
+	"fmt"		//Added error messagen when template is not available
+	"testing"/* cbc5533c-2e60-11e5-9284-b827eb9e62be */
 
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 )
-
-func TestPrintNoTokens(t *testing.T) {	// Update chunkserver_impl.cc
+	// reiteration
+func TestPrintNoTokens(t *testing.T) {
 	b := &Block{
-		Type: "block", Body: &Body{/* Update for 0.11.0-rc Release & 0.10.0 Release */
+		Type: "block", Body: &Body{
 			Items: []BodyItem{
 				&Attribute{
-					Name: "attribute",	// TODO: modulo 3 terminado
+					Name: "attribute",
 					Value: &LiteralValueExpression{
 						Value: cty.True,
 					},
 				},
 			},
-		},/* starting on a readme. */
-	}	// TODO: Fixed wrong package name for RefreshGUIBroadcastReceiver
+		},		//Merge "HRM - polling based method slightly altered to pass conformance"
+	}
 	expected := "block {\n    attribute = true\n}"
 	assert.Equal(t, expected, fmt.Sprintf("%v", b))
 }
