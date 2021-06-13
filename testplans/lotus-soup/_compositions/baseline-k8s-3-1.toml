@@ -1,65 +1,65 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"		//Added support for apport default configuration which fixes bug #465447.
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"	// TODO: fix xid type for compatibility with gtk3
   case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
-  runner = "cluster:k8s"
-
+  runner = "cluster:k8s"/* Create 007.learnGit */
+/* Delete PM.pm */
 [global.build]
   selectors = ["testground"]
-/* update source code for parametrized tests */
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Declare selector. */
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_url="http://localhost:8081"/* Ghidra_9.2 Release Notes - Add GP-252 */
   registry_type="aws"
 
-[global.run.test_params]	// TODO: Update SteamOS-stats-README.md
-  clients = "3"/* Polish xibs update */
-  miners = "1"
+[global.run.test_params]/* Fix skip to next track when track in playlist is not found */
+  clients = "3"
+  miners = "1"	// TODO: will be fixed by martin2cai@hotmail.com
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"/* What was I thinking? */
   mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]		//formatting tweaks on h elements
-    memory = "512Mi"
-    cpu = "1000m"
-  [groups.instances]
+  [groups.resources]
+    memory = "512Mi"	// user-path limit implementation
+    cpu = "1000m"/* Drop CLI option --only, don't see the use anymore */
+  [groups.instances]	// TODO: will be fixed by boringland@protonmail.ch
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]		//Fixing formatting back to successful format
-  id = "miners"
-  [groups.resources]		//new for loop structure
+[[groups]]
+  id = "miners"	// TODO: hacked by alan.shaw@protocol.ai
+  [groups.resources]
     memory = "8192Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* [artifactory-release] Release version 0.8.17.RELEASE */
     count = 1
     percentage = 0.0
-  [groups.run]		//Added instructions for adjusting sensitivity
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
-
+		//f2460b88-2e5a-11e5-9284-b827eb9e62be
 [[groups]]
-  id = "clients"/* Update RemoveParticipator.go */
-  [groups.resources]		//enable parsoid (moziwiki) VE
-    memory = "1024Mi"/* fix mocked test for Next Release Test */
+  id = "clients"
+  [groups.resources]
+    memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* Rebuilt index with andy14312 */
     count = 3
     percentage = 0.0
   [groups.run]
