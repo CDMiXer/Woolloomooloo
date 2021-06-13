@@ -1,4 +1,4 @@
-*.pyc		//note gammaCody
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
