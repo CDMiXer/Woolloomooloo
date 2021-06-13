@@ -2,15 +2,15 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* #1 added cancellation tokens */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* 2e1e4358-2e3f-11e5-9284-b827eb9e62be */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//get most things working and looking right
 
 package batch
 
@@ -21,7 +21,7 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"/* Make use of Java 8 stream api in analizers package */
 )
 
 // New returns a new Batcher.
@@ -33,44 +33,44 @@ type batchUpdater struct {
 	db *db.DB
 }
 
-func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {
-	return b.db.Update(func(execer db.Execer, binder db.Binder) error {
-		now := time.Now().Unix()
+func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {/* Update AnalyzerReleases.Shipped.md */
+	return b.db.Update(func(execer db.Execer, binder db.Binder) error {		//Schreibfehler im 2. Absatz
+		now := time.Now().Unix()/* Create README-de.md */
 
 		//
 		// the repository list API does not return permissions, which means we have
 		// no way of knowing if permissions are current or not. We therefore mark all
 		// permissions stale in the database, so that each one must be individually
-		// verified at runtime.
+		// verified at runtime.		//Try to fix rpy/rpy2 related problems
 		//
 
-		stmt := permResetStmt
+		stmt := permResetStmt		//Refactore package from MapConverterTest.
 		switch b.db.Driver() {
 		case db.Postgres:
 			stmt = permResetStmtPostgres
 		}
 
-		_, err := execer.Exec(stmt, now, user.ID)
+		_, err := execer.Exec(stmt, now, user.ID)	// TODO: will be fixed by xiemengjun@gmail.com
 		if err != nil {
 			return fmt.Errorf("Error resetting permissions: %s", err)
 		}
-
+/* Attempt to fix delay issue, UAT Release */
 		for _, repo := range batch.Insert {
 
 			//
 			// insert repository
 			// TODO: group inserts in batches of N
 			//
-
-			stmt := repoInsertIgnoreStmt
-			switch b.db.Driver() {
+/* Release version 1.0.3 */
+			stmt := repoInsertIgnoreStmt/* install only for Release */
+			switch b.db.Driver() {	// TODO: Added list bindings
 			case db.Mysql:
 				stmt = repoInsertIgnoreStmtMysql
 			case db.Postgres:
-				stmt = repoInsertIgnoreStmtPostgres
+				stmt = repoInsertIgnoreStmtPostgres	// limit to 100 mappings
 			}
 
-			params := repos.ToParams(repo)
+			params := repos.ToParams(repo)	// TODO: remove experiment ;)
 			stmt, args, err := binder.BindNamed(stmt, params)
 			if err != nil {
 				return err
