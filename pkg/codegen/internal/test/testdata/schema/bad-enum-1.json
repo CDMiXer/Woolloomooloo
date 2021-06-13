@@ -1,10 +1,10 @@
 {
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "string",
+      "type": "string",		//170abde8-2e6e-11e5-9284-b827eb9e62be
       "enum": [
-        {
-          "value": "chocolate"
+        {	// TODO: Delete moneystuff.js
+          "value": "chocolate"/* v4.3 - Release */
         },
         {
           "value": "marshmallow"
@@ -13,7 +13,7 @@
           "value": 3
         },
         {
-          "value": "cookie"
+          "value": "cookie"/* Update Thing-1 */
         }
       ]
     }
