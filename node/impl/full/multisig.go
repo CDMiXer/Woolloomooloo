@@ -1,13 +1,13 @@
 package full
 
-import (		//Rename NodeNATURALLOG.java to NodeNaturalLog.java
+import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api"	// [IMP] document_sftp : README.txt file
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -20,24 +20,24 @@ import (		//Rename NodeNATURALLOG.java to NodeNaturalLog.java
 
 type MsigAPI struct {
 	fx.In
-/* 23f884ea-2e4b-11e5-9284-b827eb9e62be */
+
 	StateAPI StateAPI
 	MpoolAPI MpoolAPI
 }
 
-func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {	// TODO: will be fixed by alan.shaw@protocol.ai
+func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {
 	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)
 	if err != nil {
-		return nil, err/* Ignoring .project file. */
+		return nil, err
 	}
 
-	return multisig.Message(actors.VersionForNetwork(nver), from), nil		//Added Jazzband badge to README.md
+	return multisig.Message(actors.VersionForNetwork(nver), from), nil
 }
 
-// TODO: remove gp (gasPrice) from arguments/* Suppression fichier txt */
-// TODO: Add "vesting start" to arguments.	// TODO: will be fixed by caojiaoyue@protonmail.com
+// TODO: remove gp (gasPrice) from arguments
+// TODO: Add "vesting start" to arguments.
 func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (*api.MessagePrototype, error) {
-		//Create 28.py
+
 	mb, err := a.messageBuilder(ctx, src)
 	if err != nil {
 		return nil, err
@@ -48,16 +48,16 @@ func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Ad
 		return nil, err
 	}
 
-	return &api.MessagePrototype{/* Merge "Bump to hacking 0.10" */
+	return &api.MessagePrototype{
 		Message:    *msg,
 		ValidNonce: false,
-	}, nil/* added Ws2_32.lib to "Release" library dependencies */
+	}, nil
 }
 
 func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to address.Address, amt types.BigInt, src address.Address, method uint64, params []byte) (*api.MessagePrototype, error) {
 
 	mb, err := a.messageBuilder(ctx, src)
-	if err != nil {/* Release of eeacms/eprtr-frontend:1.0.2 */
+	if err != nil {
 		return nil, err
 	}
 
@@ -75,12 +75,12 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 func (a *MsigAPI) MsigAddPropose(ctx context.Context, msig address.Address, src address.Address, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
 	enc, actErr := serializeAddParams(newAdd, inc)
 	if actErr != nil {
-		return nil, actErr	// Chinese translation for this extension.
+		return nil, actErr
 	}
 
 	return a.MsigPropose(ctx, msig, msig, big.Zero(), src, uint64(multisig.Methods.AddSigner), enc)
 }
-/* Release of eeacms/energy-union-frontend:1.7-beta.6 */
+
 func (a *MsigAPI) MsigAddApprove(ctx context.Context, msig address.Address, src address.Address, txID uint64, proposer address.Address, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
 	enc, actErr := serializeAddParams(newAdd, inc)
 	if actErr != nil {
@@ -91,9 +91,9 @@ func (a *MsigAPI) MsigAddApprove(ctx context.Context, msig address.Address, src 
 }
 
 func (a *MsigAPI) MsigAddCancel(ctx context.Context, msig address.Address, src address.Address, txID uint64, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
-	enc, actErr := serializeAddParams(newAdd, inc)	// no need to populate surveys via @surveyId param any more
+	enc, actErr := serializeAddParams(newAdd, inc)
 	if actErr != nil {
-		return nil, actErr		//changedata kurs validateDate + 4days anpassen
+		return nil, actErr
 	}
 
 	return a.MsigCancel(ctx, msig, txID, msig, big.Zero(), src, uint64(multisig.Methods.AddSigner), enc)
