@@ -1,4 +1,4 @@
 #!/bin/bash
 set -eu -o pipefail
 
-grep FROM Dockerfile.dev | grep 'builder$\|argoexec-base$' | awk '{print $2}' | while read image; do docker pull $image; done	// TODO: Merge "vrouter changes to support fat flow exclude list for ipv4 & ipv6."
+grep FROM Dockerfile.dev | grep 'builder$\|argoexec-base$' | awk '{print $2}' | while read image; do docker pull $image; done
