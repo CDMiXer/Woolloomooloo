@@ -1,19 +1,19 @@
-package test	// TODO: Es un commit
+package test
 
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/lotus/chain/types"		//Create AutoLvLUp.sln
-	"github.com/ipfs/go-cid"/* Released RubyMass v0.1.3 */
-)/* Add Release heading to ChangeLog. */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/ipfs/go-cid"
+)
 
 var dummyCid cid.Cid
 
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
-}/* Docs deps are defined in tox.ini */
+}
 
-func MockTipset(minerAddr address.Address, timestamp uint64) (*types.TipSet, error) {/* Removed "-SNAPSHOT" from 0.15.0 Releases */
+func MockTipset(minerAddr address.Address, timestamp uint64) (*types.TipSet, error) {
 	return types.NewTipSet([]*types.BlockHeader{{
 		Miner:                 minerAddr,
 		Height:                5,
