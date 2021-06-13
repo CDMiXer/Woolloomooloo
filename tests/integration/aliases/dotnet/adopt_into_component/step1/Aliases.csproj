@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">		//Add to cascading modify account name in all tables
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
