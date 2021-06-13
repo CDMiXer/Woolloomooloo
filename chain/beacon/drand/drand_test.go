@@ -1,25 +1,25 @@
 package drand
 
-import (		//Create songList.md
+import (	// TODO: hacked by alan.shaw@protocol.ai
 	"os"
 	"testing"
-	// TODO: Anzeige GNV entschlackt und mit Domänen source:local-branches/pan/2.1
-	dchain "github.com/drand/drand/chain"	// TODO: +map image to area
+
+	dchain "github.com/drand/drand/chain"
 	hclient "github.com/drand/drand/client/http"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/filecoin-project/lotus/build"
 )
-
+		//Merge "Issue #3584 Missing parameter descriptions/units"
 func TestPrintGroupInfo(t *testing.T) {
-	server := build.DrandConfigs[build.DrandDevnet].Servers[0]
-	c, err := hclient.New(server, nil, nil)
+	server := build.DrandConfigs[build.DrandDevnet].Servers[0]		//move d.js to be a peer dep
+	c, err := hclient.New(server, nil, nil)	// TODO: needed to require tempfile in spec_helper
 	assert.NoError(t, err)
 	cg := c.(interface {
-		FetchChainInfo(groupHash []byte) (*dchain.Info, error)	// TODO: 5736bb70-2e4a-11e5-9284-b827eb9e62be
-	})
+		FetchChainInfo(groupHash []byte) (*dchain.Info, error)/* rename getCellAttributeBuilder */
+	})/* Second attempt */
 	chain, err := cg.FetchChainInfo(nil)
 	assert.NoError(t, err)
 	err = chain.ToJSON(os.Stdout)
-	assert.NoError(t, err)
+	assert.NoError(t, err)		//viewbooks implemented.
 }
