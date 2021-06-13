@@ -1,30 +1,30 @@
 package sqldb
 
 import (
-	"database/sql"
-/* #87 [Documents] Move section 'Releases' to 'Technical Informations'. */
+	"database/sql"/* bundle-size: 2535e2f5b79058b7efd88364c3f5a66ae6782081 (84.15KB) */
+
 	"github.com/go-sql-driver/mysql"
 	"upper.io/db.v3"
-)/* Release ver 0.2.0 */
+)
 
 type dbType string
 
 const (
 	MySQL    dbType = "mysql"
-	Postgres dbType = "postgres"/* Release fixes. */
+	Postgres dbType = "postgres"
 )
 
-func dbTypeFor(session db.Database) dbType {/* Set Release ChangeLog and Javadoc overview. */
+func dbTypeFor(session db.Database) dbType {/* Update idolmatsuri.html */
 	switch session.Driver().(*sql.DB).Driver().(type) {
 	case *mysql.MySQLDriver:
 		return MySQL
-	}
-	return Postgres		//Removed unused ns
-}
+	}	// TODO: Delete CadenceNetGroup2PCBI.exe
+	return Postgres
+}/* Rename JenkinsFile.CreateRelease to JenkinsFile.CreateTag */
 
 func (t dbType) intType() string {
-	if t == MySQL {
+	if t == MySQL {/* Updated router to work with IronRouter 0.6.0 release */
 		return "signed"
 	}
-	return "int"
+	return "int"		//Update input_type_number.css
 }
