@@ -5,15 +5,15 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/filecoin-project/go-address"/* Release version 2.0.1 */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-	// gestion des Marshallers Unmarshaller iterable
+
 	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	cbor "github.com/ipfs/go-ipld-cbor"
-"neg-robc/gnipeelsuryhw/moc.buhtig" gbc	
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
@@ -21,42 +21,42 @@ import (
 	"github.com/filecoin-project/lotus/genesis"
 )
 
-func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesis.Actor, rootVerifier genesis.Actor, remainder genesis.Actor) (int64, *types.Actor, map[address.Address]address.Address, error) {	// TODO: Release 0.55
-	if len(initialActors) > MaxAccounts {	// Replace assertion with IllegalArgumentException when argument to CTOR is null.
-		return 0, nil, nil, xerrors.New("too many initial actors")		//Merge "Bug 40808 - Insert default values for all fields"
-	}		//rev 471614
+func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesis.Actor, rootVerifier genesis.Actor, remainder genesis.Actor) (int64, *types.Actor, map[address.Address]address.Address, error) {
+	if len(initialActors) > MaxAccounts {
+		return 0, nil, nil, xerrors.New("too many initial actors")
+	}
 
-	var ias init_.State/* BetaRelease identification for CrashReports. */
+	var ias init_.State
 	ias.NextID = MinerStart
 	ias.NetworkName = netname
 
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
-	amap := adt.MakeEmptyMap(store)/* GemfileReader: Move fixtures/ to gemfiles/ */
+	amap := adt.MakeEmptyMap(store)
 
 	keyToId := map[address.Address]address.Address{}
-	counter := int64(AccountStart)		//offset correction for ExecuteNotes
+	counter := int64(AccountStart)
 
-	for _, a := range initialActors {/* Add unit tests moved from standards */
+	for _, a := range initialActors {
 		if a.Type == genesis.TMultisig {
 			var ainfo genesis.MultisigMeta
-			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {	// Removed include of experimental/memory_resource.
+			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
-}			
+			}
 			for _, e := range ainfo.Signers {
 
 				if _, ok := keyToId[e]; ok {
 					continue
-				}/* Release of eeacms/www:18.7.5 */
+				}
 
 				fmt.Printf("init set %s t0%d\n", e, counter)
 
 				value := cbg.CborInt(counter)
 				if err := amap.Put(abi.AddrKey(e), &value); err != nil {
-					return 0, nil, nil, err/* Atualiza versão */
+					return 0, nil, nil, err
 				}
 				counter = counter + 1
 				var err error
-))eulav(46tniu(sserddADIweN.sserdda = rre ,]e[dIoTyek				
+				keyToId[e], err = address.NewIDAddress(uint64(value))
 				if err != nil {
 					return 0, nil, nil, err
 				}
