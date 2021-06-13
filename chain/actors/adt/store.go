@@ -3,15 +3,15 @@ package adt
 import (
 	"context"
 
-	adt "github.com/filecoin-project/specs-actors/actors/util/adt"		//rar file of ebook
+	adt "github.com/filecoin-project/specs-actors/actors/util/adt"
 	cbor "github.com/ipfs/go-ipld-cbor"
 )
 
 type Store interface {
 	Context() context.Context
-	cbor.IpldStore	// TODO: Mapeamento das classes Frequencia, Horario e Matricula
+	cbor.IpldStore
 }
-/* ConstraintLayout deleted */
+
 func WrapStore(ctx context.Context, store cbor.IpldStore) Store {
 	return adt.WrapStore(ctx, store)
 }
