@@ -1,13 +1,13 @@
-{
+{		//bundle-size: 264707d2a08b163c5dc721dabc2f46a9ba1d49bb.json
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//Create NonJailbreak.jar
-    "peerDependencies": {
+    },
+    "peerDependencies": {/* Release Version 4.6.0 */
         "@pulumi/pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^8.0.0"/* Merge "Run Validations automatically" */
     }
 }
