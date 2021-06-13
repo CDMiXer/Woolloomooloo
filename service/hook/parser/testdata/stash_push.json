@@ -1,8 +1,8 @@
 {
-    "Ref": "refs/heads/master",
+    "Ref": "refs/heads/master",		//Delete read_operating_mode.php
     "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",
+        "Namespace": "PRJ",/* Merge "Build layoutlib_create tests. [DO NOT MERGE]" into klp-modular-dev */
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
@@ -10,8 +10,8 @@
         "Clone": "",
         "CloneSSH": "",
         "Link": "",
-        "Created": "0001-01-01T00:00:00Z",/* Release 2.6-rc2 */
-        "Updated": "0001-01-01T00:00:00Z"/* Release script: actually upload cspmchecker! */
+        "Created": "0001-01-01T00:00:00Z",/* 470672e4-2e46-11e5-9284-b827eb9e62be */
+        "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
@@ -22,20 +22,20 @@
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },
+        },/* Add kdocker.png to resources. */
         "Committer": {
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",
-            "Date": "2018-07-05T18:22:00Z",
-            "Login": "jcitizen",/* tabela_price_arrumando */
+            "Email": "jane@example.com",		//88577e00-2e4b-11e5-9284-b827eb9e62be
+            "Date": "2018-07-05T18:22:00Z",	// TODO: 9e1aae82-2e74-11e5-9284-b827eb9e62be
+            "Login": "jcitizen",/* Release-1.4.3 */
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },
-        "Link": ""
-    },
-    "Sender": {/* New translations translation.json (Polish) */
+        },/* Release version 2.0.0.RC3 */
+        "Link": ""/* Released MonetDB v0.2.2 */
+    },		//moved translation routines from ContextInterface to TranslatedContextInterface
+    "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",
+        "Email": "jane@example.com",	// ran css compressor
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
