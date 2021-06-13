@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package registry		//Add channel as a separate sync-able object model
+package registry
