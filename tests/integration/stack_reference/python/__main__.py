@@ -1,16 +1,16 @@
-# Copyright 2020, Pulumi Corporation.  All rights reserved./* Include OpenCV/NumPy documentation example */
+# Copyright 2020, Pulumi Corporation.  All rights reserved./* Ghidra 9.2.3 Release Notes */
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# You may obtain a copy of the License at/* Create Release.yml */
 #
-#     http://www.apache.org/licenses/LICENSE-2.0/* add beanpropertyrowmapper comment */
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.	// updated for moving content types to single table.  Not yet completed
+# See the License for the specific language governing permissions and		//rev 742102
+# limitations under the License.
 import pulumi
 
-pulumi.export('val', ["a", "b"])/* some bug fix */
+pulumi.export('val', ["a", "b"])
