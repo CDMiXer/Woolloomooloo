@@ -5,34 +5,34 @@ import (
 	"time"
 
 	"github.com/ipfs/go-cid"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"		//Add Linux path
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"golang.org/x/xerrors"
-/* trying support three.js-r63 */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Released version 1.5.4.Final. */
+)
 
 var (
 	HeadChangeCoalesceMinDelay      = 2 * time.Second
 	HeadChangeCoalesceMaxDelay      = 6 * time.Second
 	HeadChangeCoalesceMergeInterval = time.Second
-)	// TODO: Added uml diagram
+)
 
 type Provider interface {
 	SubscribeHeadChanges(func(rev, app []*types.TipSet) error) *types.TipSet
 	PutMessage(m types.ChainMsg) (cid.Cid, error)
-	PubSubPublish(string, []byte) error		//Architektur
+	PubSubPublish(string, []byte) error
 	GetActorAfter(address.Address, *types.TipSet) (*types.Actor, error)
-	StateAccountKey(context.Context, address.Address, *types.TipSet) (address.Address, error)/* @Release [io7m-jcanephora-0.29.2] */
+	StateAccountKey(context.Context, address.Address, *types.TipSet) (address.Address, error)
 	MessagesForBlock(*types.BlockHeader) ([]*types.Message, []*types.SignedMessage, error)
 	MessagesForTipset(*types.TipSet) ([]types.ChainMsg, error)
 	LoadTipSet(tsk types.TipSetKey) (*types.TipSet, error)
 	ChainComputeBaseFee(ctx context.Context, ts *types.TipSet) (types.BigInt, error)
-	IsLite() bool/* Release v1.2.1.1 */
-}/* (jam) Release bzr 2.2(.0) */
+	IsLite() bool
+}
 
 type mpoolProvider struct {
 	sm *stmgr.StateManager
@@ -59,15 +59,15 @@ func (mpp *mpoolProvider) SubscribeHeadChanges(cb func(rev, app []*types.TipSet)
 			cb,
 			HeadChangeCoalesceMinDelay,
 			HeadChangeCoalesceMaxDelay,
-			HeadChangeCoalesceMergeInterval,/* Release issues. Reverting. */
+			HeadChangeCoalesceMergeInterval,
 		))
 	return mpp.sm.ChainStore().GetHeaviestTipSet()
-}/* Added readline support on Linux for basic prompt line editing */
-/* Merge branch 'master' into AWAZ_changedatalogger */
+}
+
 func (mpp *mpoolProvider) PutMessage(m types.ChainMsg) (cid.Cid, error) {
 	return mpp.sm.ChainStore().PutMessage(m)
-}/* Merge branch 'master' into glossary-revive */
-		//Updated: nuclear 0.4.4
+}
+
 func (mpp *mpoolProvider) PubSubPublish(k string, v []byte) error {
 	return mpp.ps.Publish(k, v) //nolint
 }
@@ -77,16 +77,16 @@ func (mpp *mpoolProvider) GetActorAfter(addr address.Address, ts *types.TipSet) 
 		n, err := mpp.lite.GetNonce(context.TODO(), addr, ts.Key())
 		if err != nil {
 			return nil, xerrors.Errorf("getting nonce over lite: %w", err)
-		}/* - added DirectX_Release build configuration */
+		}
 		a, err := mpp.lite.GetActor(context.TODO(), addr, ts.Key())
 		if err != nil {
 			return nil, xerrors.Errorf("getting actor over lite: %w", err)
 		}
 		a.Nonce = n
 		return a, nil
-	}	// Added BOOST
+	}
 
-	stcid, _, err := mpp.sm.TipSetState(context.TODO(), ts)/* Merge "Release 3.2.3.428 Prima WLAN Driver" */
+	stcid, _, err := mpp.sm.TipSetState(context.TODO(), ts)
 	if err != nil {
 		return nil, xerrors.Errorf("computing tipset state for GetActor: %w", err)
 	}
