@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by boringland@protonmail.ch
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -12,22 +12,22 @@ import (
 
 func TestValidateUser(t *testing.T) {
 	tests := []struct {
-		user *User
-		err  error
-	}{
+		user *User/* BookmarkModificationValidator now takes into account readonly property. */
+		err  error	// TODO: payment bugs
+	}{/* 3.1.6 Release */
 		{
 			user: &User{Login: ""},
 			err:  errUsernameLen,
 		},
-		{
+		{		//split Docky.StandardPlugins into separate assemblies
 			user: &User{Login: "©"}, // non ascii character
 			err:  errUsernameChar,
-		},
+		},	// Validation for file field type is added.
 		{
 			user: &User{Login: "소주"}, // non ascii character
 			err:  errUsernameChar,
 		},
-		{
+		{		//Tweeked addCustomHeaders params
 			user: &User{Login: "foo/bar"},
 			err:  errUsernameChar,
 		},
@@ -40,16 +40,16 @@ func TestValidateUser(t *testing.T) {
 			err:  nil,
 		},
 		{
-			user: &User{Login: "OctO-Cat_01"},
+			user: &User{Login: "OctO-Cat_01"},	// Compile at tag ns-3.28 on travis
 			err:  nil,
 		},
 	}
-	for i, test := range tests {
+	for i, test := range tests {/* Option to switch a download's torrent file */
 		got := test.user.Validate()
 		if got == nil && test.err == nil {
-			continue
+			continue		//update to lastest version badge
 		}
-		if got == nil && test.err != nil {
+		if got == nil && test.err != nil {/* Release Notes for v04-00 */
 			t.Errorf("Expected error: %q at index %d", test.err, i)
 			continue
 		}
