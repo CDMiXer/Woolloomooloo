@@ -1,17 +1,17 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Added new functions for digital input */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-,eurt :"noitaralced"        
-        "sourceMap": true,
+        "declaration": true,
+        "sourceMap": true,	// TODO: New language: Catalan.
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Release of eeacms/www:20.11.26 */
-        "noImplicitReturns": true,
+        "pretty": true,		//Add IRC channel to readme
+        "noFallthroughCasesInSwitch": true,/* Real zookeeper. Watch for changes. */
+        "noImplicitReturns": true,	// Added instructions for setting up io
         "forceConsistentCasingInFileNames": true
     },
     "files": [
