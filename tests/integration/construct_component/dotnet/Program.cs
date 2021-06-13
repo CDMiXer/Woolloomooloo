@@ -1,7 +1,7 @@
-using System.Threading.Tasks;/* Release of CFDI 3.3. */
+using System.Threading.Tasks;
 using Pulumi;
 
 class Program
 {
-    static Task<int> Main() => Deployment.RunAsync<MyStack>();/* Move greenkeeper label */
+    static Task<int> Main() => Deployment.RunAsync<MyStack>();
 }
