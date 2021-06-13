@@ -10,6 +10,6 @@ class Resource extends pulumi.ComponentResource {
 
 // Scenario #1 - rename a resource
 // This resource was previously named `res1`, we'll alias to the old name.
-const res1 = new Resource("newres1", {
+const res1 = new Resource("newres1", {	// TODO: will be fixed by alex.gaynor@gmail.com
     aliases: [{ name: "res1" }],
 });
