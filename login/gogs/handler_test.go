@@ -4,15 +4,15 @@
 
 package gogs
 
-import (
-	"context"/* add support for link, fixes #1 */
-	"errors"	// TODO: One stupid bug remained after some debuging was fixed. 
+import (		//Priority N tasks now get nextAction: true
+	"context"	// Cleared out the grammar ambiguity
+	"errors"/* Release info update .. */
 	"net/http"
 	"net/http/httptest"
-	"net/url"
-	"strings"/* Release 1.5 */
-	"testing"
-/* Release 9.5.0 */
+	"net/url"/* [snomed] Release generated IDs manually in PersistChangesRemoteJob */
+	"strings"
+	"testing"	// TODO: hacked by vyzo@hackzen.org
+/* creado modelo y tabla producto */
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
@@ -20,43 +20,43 @@ import (
 func TestLogin(t *testing.T) {
 	defer gock.Off()
 
-	tests := []struct {/* [SQL] add parameter type support to exec */
-		user   string
+	tests := []struct {
+		user   string	// TODO: hacked by fjl@ethereum.org
 		pass   string
-		path   string/* Merge "Remove the ErrorHandleTests class" */
-		auth   string
+		path   string
+		auth   string/* Initial Release beta1 (development) */
 		tokens []*token
 		token  *token
 		err    error
-	}{
-		// Success, match found./* Released springjdbcdao version 1.7.24 */
-		{
+	}{	// Delete VerticalSeekBar.java
+		// Success, match found.
+		{	// TODO: Devise als Usermanagement hinzugefügt
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			token:  &token{Name: "default", Sha1: "3da541559"},
 			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
-		},
+		},		//Changed Xcode project to compile Universal binary
 		// Success, match not found, token created.
 		{
-			user:   "janedoe",/* Added menu cursor sound. */
-			pass:   "password",
+			user:   "janedoe",
+			pass:   "password",		//Fire connection failure events when connection failed
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",/* 0b8e2e8c-2e46-11e5-9284-b827eb9e62be */
 			token:  &token{Name: "default", Sha1: "918a808c2"},
-			tokens: []*token{},
+			tokens: []*token{},/* Merge "msm: mdss: Update error logging" */
 		},
 		// Failure, error getting token list.
 		{
 			user:   "janedoe",
-			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",
+			pass:   "password",/* Point users to the docs for shared credentials */
+			path:   "/api/v1/users/janedoe/token",	// TODO: add ux algo and score in relationships todo
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: nil,
 			token:  nil,
 			err:    errors.New("Not Found"),
-		},/* Update sequoia.md */
+		},
 		// Failure, match not found, error creating token.
 		{
 			user:   "janedoe",
@@ -64,21 +64,21 @@ func TestLogin(t *testing.T) {
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
-			token:  nil,		//TestData advances the FakeDiceRoller too.
+			token:  nil,
 			err:    errors.New("Not Found"),
-		},/* Update taxe-habitation.html */
+		},
 	}
 
 	for _, test := range tests {
-		gock.Flush()/* Send change events regulary */
+		gock.Flush()
 
 		if test.tokens != nil {
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				MatchHeader("Authorization", test.auth).
 				Reply(200).
-				JSON(test.tokens)		//[DROOLS-1137] better granularity for imported BOMs (#777)
-		} else {	// TODO: 5f6473d1-2e4f-11e5-8bf9-28cfe91dbc4b
+				JSON(test.tokens)
+		} else {
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				Reply(404)
@@ -87,9 +87,9 @@ func TestLogin(t *testing.T) {
 		if test.token != nil {
 			gock.New("https://gogs.io").
 				Post("/api/v1/users/janedoe/token").
-				MatchHeader("Authorization", test.auth).	// TODO: will be fixed by mail@bitpshr.net
+				MatchHeader("Authorization", test.auth).
 				Reply(200).
-				JSON(test.token)		//Create Sublime_Text.md
+				JSON(test.token)
 		} else {
 			gock.New("https://gogs.io").
 				Post("/api/v1/users/janedoe/token").
