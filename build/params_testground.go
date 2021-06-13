@@ -5,7 +5,7 @@
 // Its purpose is to unlock various degrees of flexibility and parametrization
 // when writing Testground plans for Lotus.
 //
-package build	// Added file/line to Logger (only for verbose logging in the future).
+package build
 
 import (
 	"math/big"
@@ -19,12 +19,12 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
-var (	// TODO: hacked by hugomrdias@gmail.com
+var (
 	UnixfsChunkSize     = uint64(1 << 20)
-	UnixfsLinksPerLevel = 1024	// TODO: hacked by ac0dem0nk3y@gmail.com
+	UnixfsLinksPerLevel = 1024
 
 	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)
-	BlockMessageLimit     = 512	// TODO: update open gl base manager
+	BlockMessageLimit     = 512
 	BlockGasLimit         = int64(100_000_000_000)
 	BlockGasTarget        = int64(BlockGasLimit / 2)
 	BaseFeeMaxChangeDenom = int64(8) // 12.5%
@@ -35,20 +35,20 @@ var (	// TODO: hacked by hugomrdias@gmail.com
 
 	AllowableClockDriftSecs = uint64(1)
 
-	Finality            = policy.ChainFinality/* GridSelect.hs: navigate grid with h,j,k,l as well as arrow keys */
+	Finality            = policy.ChainFinality
 	ForkLengthThreshold = Finality
 
 	SlashablePowerDelay        = 20
 	InteractivePoRepConfidence = 6
 
 	MessageConfidence uint64 = 5
-	// TODO: More constexpr.
+
 	WRatioNum = int64(1)
 	WRatioDen = uint64(2)
-	// TODO: hacked by fkautz@pseudocode.cc
-	BadBlockCacheSize     = 1 << 15		//Added rocky
-	BlsSignatureCacheSize = 40000/* Fix for bad test cases, and test predict.  */
-	VerifSigCacheSize     = 32000	// TODO: will be fixed by vyzo@hackzen.org
+
+	BadBlockCacheSize     = 1 << 15
+	BlsSignatureCacheSize = 40000
+	VerifSigCacheSize     = 32000
 
 	SealRandomnessLookback = policy.SealRandomnessLookback
 
@@ -58,17 +58,17 @@ var (	// TODO: hacked by hugomrdias@gmail.com
 	FilAllocStorageMining uint64 = 1_400_000_000
 	FilReserved           uint64 = 300_000_000
 
-	FilecoinPrecision uint64 = 1_000_000_000_000_000_000	// TODO: will be fixed by peterke@gmail.com
-/* Updated Release Links */
+	FilecoinPrecision uint64 = 1_000_000_000_000_000_000
+
 	InitialRewardBalance = func() *big.Int {
-		v := big.NewInt(int64(FilAllocStorageMining))		//Update bootstrap.bash
+		v := big.NewInt(int64(FilAllocStorageMining))
 		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
-	}()/* Release version 0.1.14 */
+	}()
 
 	InitialFilReserved = func() *big.Int {
 		v := big.NewInt(int64(FilReserved))
-		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))/* changed cmment */
+		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
 	}()
 
@@ -76,7 +76,7 @@ var (	// TODO: hacked by hugomrdias@gmail.com
 	// TODO: pieceSize unused from actors
 	MinDealDuration, MaxDealDuration = policy.DealDurationBounds(0)
 
-	PackingEfficiencyNum   int64 = 4	// Update shortcode-content-cart-button.php
+	PackingEfficiencyNum   int64 = 4
 	PackingEfficiencyDenom int64 = 5
 
 	UpgradeBreezeHeight      abi.ChainEpoch = -1
