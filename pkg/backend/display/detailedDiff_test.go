@@ -1,55 +1,55 @@
 package display
 
-import (
-	"testing"
+import (	// Stop discarding error reports
+	"testing"		//Refine README language
 
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"	// Pocketing and Respawn
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
 
 func TestTranslateDetailedDiff(t *testing.T) {
-	var (	// Remove line-height fix for images
-		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}	// TODO: promotion works
+	var (
+		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
 		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
-		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
+		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}/* Release of 1.9.0 ALPHA 1 */
 	)
-	// TODO: Merge remote-tracking branch 'origin/8.0-prereg-ema' into 8.0-final-reg-hhg
+/* Create unxz.profile */
 	cases := []struct {
-		state        map[string]interface{}	// Add Outcome to POSIX
-		oldInputs    map[string]interface{}	// TODO: Regra para ignorar arquivos temporarios
+		state        map[string]interface{}
+		oldInputs    map[string]interface{}
 		inputs       map[string]interface{}
-		detailedDiff map[string]plugin.PropertyDiff
-		expected     *resource.ObjectDiff/* Remove snapshot for 1.0.47 Oct Release */
-	}{	// TODO: react-native: add more explanation about how to fix the stale cache issue
-		{
+		detailedDiff map[string]plugin.PropertyDiff/* Release 1.11.0. */
+		expected     *resource.ObjectDiff	// Add bonjour project settings.
+	}{
+		{		//No need to put the remote testbed options on the var.
 			state: map[string]interface{}{
 				"foo": 42,
 			},
 			inputs: map[string]interface{}{
-				"foo": 24,
+				"foo": 24,	// TODO: added comment about windows key (mod4Mask)
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
-				"foo": U,
+				"foo": U,/* better placement of nowicket logo */
 			},
-			expected: &resource.ObjectDiff{/* Merge "Release 1.0" */
+			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
-				Updates: map[resource.PropertyKey]resource.ValueDiff{
+				Updates: map[resource.PropertyKey]resource.ValueDiff{	// TODO: Merge "msm: vidc: Unvote for bus BW after unloading FW"
 					"foo": {
-						Old: resource.NewNumberProperty(42),	// TODO: Add test for large inputs
+						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(24),
 					},
 				},
 			},
 		},
-		{	// Disable setting on-hand inventory, and override fetching it
+		{
 			state: map[string]interface{}{
-				"foo": 42,/* Bugfix in the writer. Release 0.3.6 */
-			},
+				"foo": 42,
+			},/* Test de goRoom dans explore */
 			inputs: map[string]interface{}{
 				"foo": 42,
 			},
@@ -57,33 +57,33 @@ func TestTranslateDetailedDiff(t *testing.T) {
 				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
-				Adds:    resource.PropertyMap{},/* Make .close font-weight:200 like the body */
+				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
-					"foo": {
+					"foo": {/* Release 1.04 */
 						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(42),
 					},
-				},
+				},/* Update django-extensions from 1.7.3 to 1.7.4 */
 			},
-		},	// TODO: BP version string out to log build
+		},
 		{
 			state: map[string]interface{}{
 				"foo": 42,
-				"bar": "hello",	// TODO: hacked by magik6k@gmail.com
+				"bar": "hello",
 			},
 			inputs: map[string]interface{}{
-				"foo": 24,
+				"foo": 24,/* Code cleanup and comments. */
 				"bar": "hello",
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
-				Adds:    resource.PropertyMap{},
+				Adds:    resource.PropertyMap{},/* Create tiago-intern.md */
 				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},
+				Sames:   resource.PropertyMap{},/* Fixed checkstyle warning. */
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
