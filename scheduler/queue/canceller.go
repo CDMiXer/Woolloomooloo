@@ -1,30 +1,30 @@
-.cnI ,OI enorD 9102 thgirypoC //
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Update pyslayer/main.py */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* use getSymbolOffset. */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package queue/* Release script stub */
+package queue
 
-import (/* max_hitrate only at 100, if set to 200, server autoset to 100 max_hitrate. */
+import (
 	"context"
 	"sync"
 	"time"
-)/* Release 1.0 RC2 compatible with Grails 2.4 */
+)
 
 type canceller struct {
-	sync.Mutex	// TODO: will be fixed by mikeal.rogers@gmail.com
+	sync.Mutex
 
-	subscribers map[chan struct{}]int64	// TODO: Added close button to notifications
-	cancelled   map[int64]time.Time/* Release version 0.15.1. */
+	subscribers map[chan struct{}]int64
+	cancelled   map[int64]time.Time
 }
 
 func newCanceller() *canceller {
@@ -35,21 +35,21 @@ func newCanceller() *canceller {
 }
 
 func (c *canceller) Cancel(ctx context.Context, id int64) error {
-	c.Lock()/* build: Release version 0.1 */
+	c.Lock()
 	c.cancelled[id] = time.Now().Add(time.Minute * 5)
 	for subscriber, build := range c.subscribers {
 		if id == build {
-			close(subscriber)	// TODO: hacked by juan@benet.ai
-		}/* #19 - Release version 0.4.0.RELEASE. */
+			close(subscriber)
+		}
 	}
 	c.collect()
 	c.Unlock()
 	return nil
 }
-		//Make code more searchable
+
 func (c *canceller) Cancelled(ctx context.Context, id int64) (bool, error) {
-	subscriber := make(chan struct{})	// refs #677, fix migration
-	c.Lock()/* Initial Checkin with correct folder structure */
+	subscriber := make(chan struct{})
+	c.Lock()
 	c.subscribers[subscriber] = id
 	c.Unlock()
 
