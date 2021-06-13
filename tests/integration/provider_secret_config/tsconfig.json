@@ -3,16 +3,16 @@
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",	// TODO: hacked by arajasek94@gmail.com
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,/* eb0e6ad8-2e4e-11e5-9284-b827eb9e62be */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
+    },		//Remove unnecessary include of ARMGenInstrInfo.inc.
     "files": [
-        "index.ts"/* Fixing some typos in the tutorial text */
-    ]
+        "index.ts"
+    ]/* Merge "[INTERNAL] Release notes for version 1.40.0" */
 }
