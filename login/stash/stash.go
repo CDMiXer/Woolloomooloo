@@ -1,28 +1,28 @@
 // Copyright 2018 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Add new functions for DPI handling and a cutout helper */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package stash
-/* Update agent_node.py */
-import (		//service script bugfix
-	"crypto/rsa"	// TODO: will be fixed by sjors@sprovoost.nl
+
+import (
+	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
-	"fmt"/* Release 2.1.12 - core data 1.0.2 */
-	"io/ioutil"		//BLKBD-24 Refactoring
+	"fmt"
+	"io/ioutil"
 	"net/http"
 	"strings"
 
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/internal/oauth1"
 )
-		//boost cmake module not needed anymore
+
 var _ login.Middleware = (*Config)(nil)
 
 const (
 	requestTokenURL   = "%s/plugins/servlet/oauth/request-token"
 	authorizeTokenURL = "%s/plugins/servlet/oauth/authorize"
-	accessTokenURL    = "%s/plugins/servlet/oauth/access-token"		//refactored genetic search (tasks was moved out to separated package)
+	accessTokenURL    = "%s/plugins/servlet/oauth/access-token"
 )
 
 // Config configures the Bitbucket Server (Stash)
@@ -37,7 +37,7 @@ type Config struct {
 }
 
 // Handler returns a http.Handler that runs h at the
-// completion of the GitHub authorization flow. The GitHub	// Added basic site documentation
+// completion of the GitHub authorization flow. The GitHub
 // authorization details are available to h in the
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
@@ -52,7 +52,7 @@ func (c *Config) Handler(h http.Handler) http.Handler {
 		ConsumerSecret:   c.ConsumerSecret,
 		CallbackURL:      c.CallbackURL,
 		AccessTokenURL:   fmt.Sprintf(accessTokenURL, server),
-		AuthorizationURL: fmt.Sprintf(authorizeTokenURL, server),/* scale correction for small scale values */
+		AuthorizationURL: fmt.Sprintf(authorizeTokenURL, server),
 		RequestTokenURL:  fmt.Sprintf(requestTokenURL, server),
 	})
 }
