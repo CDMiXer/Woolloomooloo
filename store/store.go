@@ -1,14 +1,14 @@
 // Copyright 2019 Drone IO, Inc.
-///* Added Kodi */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Merge "Move inverse transfrom dspr2 functions from vp9 to vpx_dsp"
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* - Removed "serial". Sorry i merged from my source. */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Adding HackDFW
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Fixes maintain session */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
