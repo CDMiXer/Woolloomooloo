@@ -1,7 +1,7 @@
 -- name: create-table-steps
 
 CREATE TABLE IF NOT EXISTS steps (
- step_id          INTEGER PRIMARY KEY AUTOINCREMENT
+ step_id          INTEGER PRIMARY KEY AUTOINCREMENT	// TODO: will be fixed by sbrichards@gmail.com
 ,step_stage_id    INTEGER
 ,step_number      INTEGER
 ,step_name        TEXT
