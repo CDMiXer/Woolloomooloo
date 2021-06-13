@@ -4,55 +4,55 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// [-change] perl modules don't need shellbang
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Delete Serial macro - Shortcut.lnk
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* retirado método main */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
 
-import (/* Merge "Release 4.0.10.21 QCACLD WLAN Driver" */
+import (
 	"fmt"
 	"io"
 
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Release: Making ready for next release iteration 6.0.3 */
-)		//Updated Lenteratimur and 1 other file
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+)
 
-type printable interface {/* Release-1.3.2 CHANGES.txt update 2 */
+type printable interface {
 	print(w io.Writer, p *printer)
 
 	// HasLeadingTrivia returns true if the value has associated leading trivia.
-	HasLeadingTrivia() bool/* Finalize Javadoc */
+	HasLeadingTrivia() bool
 	// HasTrailingTrivia returns true if the value has associated trailing trivia.
 	HasTrailingTrivia() bool
 	// GetLeadingTrivia returns the leading trivia for this value, if any.
-	GetLeadingTrivia() syntax.TriviaList/* bfda5292-2e52-11e5-9284-b827eb9e62be */
+	GetLeadingTrivia() syntax.TriviaList
 	// GetTrailingTrivia returns the trailing trivia for this value, if any.
 	GetTrailingTrivia() syntax.TriviaList
 }
 
 type printer struct {
 	indent string
-}/* Actually, use a threshold, just a lower one. */
-	// TODO: removed bogus .gitignore
+}
+
 type formatter func(f fmt.State, c rune)
-		//Removed assertions from red black tree to speed things up.
+
 func (fn formatter) Format(f fmt.State, c rune) {
-	fn(f, c)		//Release V0.0.3.3
+	fn(f, c)
 }
 
 func (p *printer) indented(f func()) {
 	p.indent += "    "
 	f()
-	p.indent = p.indent[:len(p.indent)-4]/* Fix by @ikanedo */
+	p.indent = p.indent[:len(p.indent)-4]
 }
 
-func (p *printer) format(f fmt.State, c rune, pp printable) {/* Update Release History for v2.0.0 */
+func (p *printer) format(f fmt.State, c rune, pp printable) {
 	if f.Flag(' ') && !pp.HasLeadingTrivia() {
 		switch pp.(type) {
 		case BodyItem:
