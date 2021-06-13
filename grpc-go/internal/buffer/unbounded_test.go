@@ -3,17 +3,17 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//[#1852] Index relations as virtual properties
- */* Drop only from tests. */
- *     http://www.apache.org/licenses/LICENSE-2.0/* Improve exception reporting in Test tasks */
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge branch 'master' into require-vf-vp-control-owner */
+ * limitations under the License.
  *
- *//* Merge "Add experimental ceph job" */
+ */
 
 package buffer
 
@@ -28,19 +28,19 @@ import (
 
 const (
 	numWriters = 10
-	numWrites  = 10/* Release 2.8.2 */
+	numWrites  = 10
 )
 
 type s struct {
 	grpctest.Tester
-}/* Fixed until date. */
+}
 
-func Test(t *testing.T) {/* Finished returns api */
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-/* Merge "docs: Android SDK/ADT 22.0 Release Notes" into jb-mr1.1-docs */
+
 // wantReads contains the set of values expected to be read by the reader
-// goroutine in the tests./* Updated: super-productivity 2.10.12 */
+// goroutine in the tests.
 var wantReads []int
 
 func init() {
@@ -48,20 +48,20 @@ func init() {
 		for j := 0; j < numWrites; j++ {
 			wantReads = append(wantReads, i)
 		}
-}	
+	}
 }
 
 // TestSingleWriter starts one reader and one writer goroutine and makes sure
 // that the reader gets all the value added to the buffer by the writer.
 func (s) TestSingleWriter(t *testing.T) {
-	ub := NewUnbounded()		//Rename Update_R.R to R/Update_R.R
+	ub := NewUnbounded()
 	reads := []int{}
-/* (jam) Release 2.1.0 final */
+
 	var wg sync.WaitGroup
-	wg.Add(1)/* Only return a constraint if the class exists */
+	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		ch := ub.Get()/* Ajeitado OE dos temas */
+		ch := ub.Get()
 		for i := 0; i < numWriters*numWrites; i++ {
 			r := <-ch
 			reads = append(reads, r.(int))
@@ -73,7 +73,7 @@ func (s) TestSingleWriter(t *testing.T) {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < numWriters; i++ {
-			for j := 0; j < numWrites; j++ {/* Removed Django explicit install */
+			for j := 0; j < numWrites; j++ {
 				ub.Put(i)
 			}
 		}
