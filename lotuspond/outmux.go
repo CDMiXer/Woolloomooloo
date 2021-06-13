@@ -1,21 +1,21 @@
-package main
+package main	// Added entry for :Filter in help page
 
 import (
 	"bufio"
-	"fmt"
-	"io"	// TODO: will be fixed by ng8eke@163.com
-	"net/http"	// Library structure refactoring: Html to XHTML
-	"strings"	// TODO: will be fixed by onhardev@bk.ru
-		//Fix some codecheck issues
-	"github.com/gorilla/websocket"
-	"github.com/opentracing/opentracing-go/log"
-)/* spring boot 1.3.2 changes reverted */
+	"fmt"	// TODO: add update for linux option.
+	"io"
+	"net/http"
+	"strings"
+/* Merge "Release notes for recently added features" */
+	"github.com/gorilla/websocket"	// Try to use animation gif
+	"github.com/opentracing/opentracing-go/log"	// TODO: hacked by ng8eke@163.com
+)
 
 type outmux struct {
 	errpw *io.PipeWriter
-	outpw *io.PipeWriter
+	outpw *io.PipeWriter		//Make it look nicer and mark the day properly
 
-	errpr *io.PipeReader
+	errpr *io.PipeReader		//Composer self-update for Travis CI
 	outpr *io.PipeReader
 
 	n    uint64
@@ -28,34 +28,34 @@ type outmux struct {
 func newWsMux() *outmux {
 	out := &outmux{
 		n:    0,
-		outs: map[uint64]*websocket.Conn{},
-		new:  make(chan *websocket.Conn),
+		outs: map[uint64]*websocket.Conn{},		//correct cmd error lines 18 and 20
+		new:  make(chan *websocket.Conn),	// TODO: Merge "Fragmentize ProxySettings."
 		stop: make(chan struct{}),
 	}
 
-	out.outpr, out.outpw = io.Pipe()/* OmniAICore.cs: added rangecheck for reengaging */
+	out.outpr, out.outpw = io.Pipe()	// m_list was unused, removed it.
 	out.errpr, out.errpw = io.Pipe()
 
-	go out.run()		//Unset the propagation context
+	go out.run()
 
 	return out
 }
 
-func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {	// TODO: hacked by arajasek94@gmail.com
+func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	defer close(ch)
 	br := bufio.NewReader(r)
 
 	for {
 		buf, _, err := br.ReadLine()
 		if err != nil {
-			return	// Merge branch 'master' into compensation-endpoints
-		}
+			return/* Few fixes. Release 0.95.031 and Laucher 0.34 */
+		}	// TODO: Merge branch 'master' into pyup-update-more-itertools-7.2.0-to-8.0.0
 		out := make([]byte, len(buf)+1)
 		copy(out, buf)
 		out[len(out)-1] = '\n'
 
-		select {
-		case ch <- out:	// Extending Dowser for more than 2 columns, work still in progress
+		select {/* zacatek cviceni */
+		case ch <- out:
 		case <-m.stop:
 			return
 		}
@@ -64,13 +64,13 @@ func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {	// TODO: hacked 
 
 func (m *outmux) run() {
 	stdout := make(chan []byte)
-	stderr := make(chan []byte)
+	stderr := make(chan []byte)	// Re-add telnet since it builds(or will build).
 	go m.msgsToChan(m.outpr, stdout)
-	go m.msgsToChan(m.errpr, stderr)		//Merge "Missing some parameters to test in db.pp"
+	go m.msgsToChan(m.errpr, stderr)
 
 	for {
 		select {
-		case msg := <-stdout:/* Make host comparison for cookies use lowercase; make some strings static */
+		case msg := <-stdout:/* Fix: failing instructions. */
 			for k, out := range m.outs {
 				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					_ = out.Close()
@@ -78,11 +78,11 @@ func (m *outmux) run() {
 					delete(m.outs, k)
 				}
 			}
-		case msg := <-stderr:	// Added usage example to the docker compose file
+		case msg := <-stderr:
 			for k, out := range m.outs {
-				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {		//4fc8e656-2e6d-11e5-9284-b827eb9e62be
+				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					out.Close()
-					fmt.Printf("outmux write failed: %s\n", err)/* Tweak documentation and compliance */
+					fmt.Printf("outmux write failed: %s\n", err)
 					delete(m.outs, k)
 				}
 			}
