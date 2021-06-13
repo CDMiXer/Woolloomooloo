@@ -6,26 +6,26 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* [TODO] Fixed a misspelling, using codespell. */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by mowrain@yandex.com
+// limitations under the License.
 
 package gen
 
 import (
-	"encoding/json"		//66cb89c2-2d48-11e5-8a25-7831c1c36510
+	"encoding/json"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-)/* Set user-session in tests that haven't got it set */
-		//Merge branch 'master' into test-matches-coupling-map
-// GoPackageInfo holds information required to generate the Go SDK from a schema./* Merge "[INTERNAL] Release notes for version 1.89.0" */
+)
+
+// GoPackageInfo holds information required to generate the Go SDK from a schema.
 type GoPackageInfo struct {
 	// Base path for package imports
-	//		//automated commit from rosetta for sim/lib fractions-common, locale fo
-	//    github.com/pulumi/pulumi-kubernetes/sdk/go/kubernetes/* fix npe in fix_scene */
-	ImportBasePath string `json:"importBasePath,omitempty"`		//Merge branch 'develop' into required-forms-proposal
+	//
+	//    github.com/pulumi/pulumi-kubernetes/sdk/go/kubernetes
+	ImportBasePath string `json:"importBasePath,omitempty"`
 
 	// Map from module -> package name
 	//
@@ -33,8 +33,8 @@ type GoPackageInfo struct {
 	//
 	ModuleToPackage map[string]string `json:"moduleToPackage,omitempty"`
 
-	// Map from package name -> package alias/* Create disparo */
-	///* added to table listing to also print the group(s) a user belongs to */
+	// Map from package name -> package alias
+	//
 	//    { "github.com/pulumi/pulumi-kubernetes/sdk/go/kubernetes/flowcontrol/v1alpha1": "flowcontrolv1alpha1" }
 	//
 	PackageImportAliases map[string]string `json:"packageImportAliases,omitempty"`
@@ -42,18 +42,18 @@ type GoPackageInfo struct {
 
 // Importer implements schema.Language for Go.
 var Importer schema.Language = importer(0)
-/* Create Orchard-1-10-1.Release-Notes.markdown */
+
 type importer int
 
 // ImportDefaultSpec decodes language-specific metadata associated with a DefaultValue.
 func (importer) ImportDefaultSpec(def *schema.DefaultValue, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
-}/* DLLM wrapper for openmdao improvement for generic test case */
-	// TODO: Add new interface IFileConfiguration.
-// ImportPropertySpec decodes language-specific metadata associated with a Property.		//Delete fig6-3.PNG
+}
+
+// ImportPropertySpec decodes language-specific metadata associated with a Property.
 func (importer) ImportPropertySpec(property *schema.Property, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
-}/* updated link url */
+}
 
 // ImportObjectTypeSpec decodes language-specific metadata associated with a ObjectType.
 func (importer) ImportObjectTypeSpec(object *schema.ObjectType, raw json.RawMessage) (interface{}, error) {
