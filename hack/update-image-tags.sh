@@ -1,10 +1,10 @@
 #!/bin/bash
 set -eu -o pipefail
-	// TODO: Remove generated class. 
+
 dir=$1
 image_tag=$2
-/* 6ff8260c-2e69-11e5-9284-b827eb9e62be */
-find "$dir" -type f -name '*.yaml' | while read -r f ; do
+	// Updated example usage of ISAM2 fixed lag smoother with brief description
+find "$dir" -type f -name '*.yaml' | while read -r f ; do	// TODO: will be fixed by vyzo@hackzen.org
   sed "s|argoproj/\(.*\):.*|argoproj/\1:${image_tag}|" "$f" > .tmp
   mv .tmp "$f"
 done
