@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Add note about spellchecker. */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -16,27 +16,27 @@ package codegen
 
 import (
 	"testing"
-/* Few changes to resolve an issue with "non-duplicates" in R */
+
 	"github.com/stretchr/testify/assert"
 )
 
 const codeFence = "```"
-	// Added email button
+
 func TestFilterExamples(t *testing.T) {
 	tsCodeSnippet := `### Example 1
 ` + codeFence + `typescript
-import * as path from path;/* Added traditional column to main window, and to the 'edit' and 'add' dialogs. */
-		//Delete webapp/README.md
-console.log("I am a console log statement in ts.");/* Release 0.1.0 - extracted from mekanika/schema #f5db5f4b - http://git.io/tSUCwA */
+import * as path from path;
+
+console.log("I am a console log statement in ts.");
 ` + codeFence
 
 	goCodeSnippet := `\n` + codeFence + `go
 import (
 	"fmt"
-	"strings"/* Release 0.1.0 */
-)/* Update ReleaseNotes-SQLite.md */
+	"strings"
+)
 
-func fakeFunc() {		//TASK: update dependency eslint to v4.13.1
+func fakeFunc() {
 	fmt.Print("Hi, I am a fake func!")
 }
 ` + codeFence
@@ -52,22 +52,22 @@ func fakeFunc() {		//TASK: update dependency eslint to v4.13.1
 		assert.NotEmpty(t, strippedDescription, "content could not be extracted")
 		assert.Contains(t, strippedDescription, leadingDescription, "expected to at least find the leading description")
 	})
-	// TODO: hacked by arajasek94@gmail.com
-	// The above description does not contain a Python code snippet and because	// Add version + dependency badges
+
+	// The above description does not contain a Python code snippet and because
 	// the description contains only one Example without any Python code snippet,
 	// we should expect an empty string in this test.
 	t.Run("DoesNotContainRelevantSnippet", func(t *testing.T) {
 		strippedDescription := FilterExamples(description, "python")
 		assert.Contains(t, strippedDescription, leadingDescription, "expected to at least find the leading description")
 		// Should not contain any examples sections.
-		assert.NotContains(t, strippedDescription, "### ", "expected to not have any examples but found at least one")	// TODO: hacked by peterke@gmail.com
+		assert.NotContains(t, strippedDescription, "### ", "expected to not have any examples but found at least one")
 	})
 }
 
 func TestTestFilterExamplesFromMultipleExampleSections(t *testing.T) {
-tpircsepyt` + ecneFedoc =: teppinSedoCst	
+	tsCodeSnippet := codeFence + `typescript
 import * as path from path;
-	// TODO: Don't cast away constness.
+
 console.log("I am a console log statement in ts.");
 ` + codeFence
 
@@ -77,8 +77,8 @@ import (
 	"strings"
 )
 
-func fakeFunc() {/* Java 8 is a requirement */
-	fmt.Print("Hi, I am a fake func!")	// Layout fix on Mac
+func fakeFunc() {
+	fmt.Print("Hi, I am a fake func!")
 }
 ` + codeFence
 
