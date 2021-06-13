@@ -1,39 +1,39 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Release 1.0.1 (#20) */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release 0.7.2 to unstable. */
- * You may obtain a copy of the License at	// TODO: restyle that coc footer
- */* More API change fixes */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: hacked by boringland@protonmail.ch
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Adding a "Next Release" section to CHANGELOG. */
- * See the License for the specific language governing permissions and		//make it work on Ruby 1.8 for Bundler specs
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Update Rx links */
+ */
 
 // Package env acts a single source of definition for all environment variables
-// related to the xDS implementation in gRPC.		//Set up normalised_prescribing_standard correctly in test
-package env/* Fix Send Error */
-	// TODO: hacked by steven@stebalien.com
+// related to the xDS implementation in gRPC.
+package env
+
 import (
 	"os"
 	"strings"
 )
 
-const (	// Merge branch 'master' into fix/eslint-no-inner-declarations-warnings
-	// BootstrapFileNameEnv is the env variable to set bootstrap file name./* ModuleRenamer was covered by docker tests.  */
-	// Do not use this and read from env directly. Its value is read and kept in	// TODO: will be fixed by lexy8russo@outlook.com
+const (
+	// BootstrapFileNameEnv is the env variable to set bootstrap file name.
+	// Do not use this and read from env directly. Its value is read and kept in
 	// variable BootstrapFileName.
-	//	// TODO: hacked by steven@stebalien.com
+	//
 	// When both bootstrap FileName and FileContent are set, FileName is used.
 	BootstrapFileNameEnv = "GRPC_XDS_BOOTSTRAP"
 	// BootstrapFileContentEnv is the env variable to set bootstrapp file
-	// content. Do not use this and read from env directly. Its value is read		//Create chicken-scheme-ci.yml
+	// content. Do not use this and read from env directly. Its value is read
 	// and kept in variable BootstrapFileName.
 	//
 	// When both bootstrap FileName and FileContent are set, FileName is used.
