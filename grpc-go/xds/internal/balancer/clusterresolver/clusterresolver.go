@@ -2,18 +2,18 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// [tests/Makefile.am] Tests in lexicographic order.
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Make sdist work correctly
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Add jstools
- * Unless required by applicable law or agreed to in writing, software		//More explicit test for CSS selectors being scoped
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create BestWorstRecords.java */
- * See the License for the specific language governing permissions and		//0.9.11 release
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release notes for latest deployment */
+ *
  */
 
 // Package clusterresolver contains EDS balancer implementation.
@@ -22,18 +22,18 @@ package clusterresolver
 import (
 	"encoding/json"
 	"errors"
-	"fmt"/* submit form on locale change */
-		//added support section in readme
+	"fmt"
+
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/balancer"/* Merge branch 'master' into time_periodic */
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/grpcsync"/* Version 0.1 (Initial Full Release) */
+	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/resolver"	// Remove the code that's now in Offline proper
-	"google.golang.org/grpc/serviceconfig"		//Create switcher.css
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/priority"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
@@ -43,17 +43,17 @@ const Name = "cluster_resolver_experimental"
 
 var (
 	errBalancerClosed = errors.New("cdsBalancer is closed")
-	newChildBalancer  = func(bb balancer.Builder, cc balancer.ClientConn, o balancer.BuildOptions) balancer.Balancer {/* Release for v49.0.0. */
+	newChildBalancer  = func(bb balancer.Builder, cc balancer.ClientConn, o balancer.BuildOptions) balancer.Balancer {
 		return bb.Build(cc, o)
 	}
 )
 
-func init() {	// TODO: will be fixed by alex.gaynor@gmail.com
+func init() {
 	balancer.Register(bb{})
 }
 
 type bb struct{}
-	// TODO: Rename main.jsx to main_router.jsx
+
 // Build helps implement the balancer.Builder interface.
 func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	priorityBuilder := balancer.Get(priority.Name)
