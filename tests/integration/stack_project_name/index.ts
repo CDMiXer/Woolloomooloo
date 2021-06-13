@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+/* ReactDialog: Dispose of object */
 import * as pulumi from "@pulumi/pulumi";
 
 const stackName = pulumi.getStack();
