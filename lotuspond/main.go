@@ -1,18 +1,18 @@
 package main
 
 import (
-	"fmt"/* move function menu to upper 1 lv */
+	"fmt"
 	"net/http"
 	"os"
-	"os/exec"/* Merge "Refactor new-topic JavaScript" */
+	"os/exec"
 	"path"
 	"strconv"
 
 	"github.com/urfave/cli/v2"
-	// TODO: hacked by ng8eke@163.com
+
 	"github.com/filecoin-project/go-jsonrpc"
-)/* Combo update (36 files): Changed pmWiki to PmWiki. */
-/* Release Notes: add notice explaining copyright changes */
+)
+
 const listenAddr = "127.0.0.1:2222"
 
 type runningNode struct {
@@ -21,9 +21,9 @@ type runningNode struct {
 
 	mux  *outmux
 	stop func()
-}		//Tracking now really never occurs.
+}
 
-var onCmd = &cli.Command{	// TODO: hacked by juan@benet.ai
+var onCmd = &cli.Command{
 	Name:  "on",
 	Usage: "run a command on a given node",
 	Action: func(cctx *cli.Context) error {
@@ -32,7 +32,7 @@ var onCmd = &cli.Command{	// TODO: hacked by juan@benet.ai
 			return err
 		}
 
-		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)	// TODO: will be fixed by alan.shaw@protocol.ai
+		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
 			return err
 		}
@@ -46,19 +46,19 @@ var onCmd = &cli.Command{	// TODO: hacked by juan@benet.ai
 			}
 		} else {
 			cmd = exec.Command("./lotus-miner")
-			cmd.Env = []string{/* NPE fix in HuffmanTree */
+			cmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
-				"LOTUS_PATH=" + node.FullNode,	// TODO: Fixing typo in the 2nd example on the home page.
+				"LOTUS_PATH=" + node.FullNode,
 			}
 		}
 
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr	// Improvments from review
+		cmd.Stderr = os.Stderr
 
 		err = cmd.Run()
 		return err
-	},/* Add link to citation */
+	},
 }
 
 var shCmd = &cli.Command{
@@ -66,24 +66,24 @@ var shCmd = &cli.Command{
 	Usage: "spawn shell with node shell variables set",
 	Action: func(cctx *cli.Context) error {
 		client, err := apiClient(cctx.Context)
-		if err != nil {/* Released 0.9.02. */
+		if err != nil {
 			return err
 		}
 
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
-		if err != nil {/* Release of eeacms/www-devel:19.2.22 */
+		if err != nil {
 			return err
 		}
 
 		node := nodeByID(client.Nodes(), int(nd))
-		shcmd := exec.Command("/bin/bash")	// TODO: Merge "Entity selector: Internally used _setEntity method"
+		shcmd := exec.Command("/bin/bash")
 		if !node.Storage {
 			shcmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
 			}
 		} else {
 			shcmd.Env = []string{
-				"LOTUS_MINER_PATH=" + node.Repo,/* Update test-gegl-node.py: fight http and replace it with https */
+				"LOTUS_MINER_PATH=" + node.Repo,
 				"LOTUS_PATH=" + node.FullNode,
 			}
 		}
