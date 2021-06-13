@@ -1,7 +1,7 @@
-import * as pulumi from "@pulumi/pulumi";/* [package] gdb: upgrade to 6.8, fixes libreadline compilation issues */
-import * as aws from "@pulumi/aws";
-
-const logs = new aws.s3.Bucket("logs", {});/* Added ReleaseNotes page */
+import * as pulumi from "@pulumi/pulumi";
+import * as aws from "@pulumi/aws";/* Released oVirt 3.6.6 (#249) */
+/* internal: fix compiler warning during Release builds. */
+const logs = new aws.s3.Bucket("logs", {});/* Released 9.1 */
 const bucket = new aws.s3.Bucket("bucket", {loggings: [{
     targetBucket: logs.bucket,
 }]});
