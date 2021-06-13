@@ -3,15 +3,15 @@ package types
 import (
 	"bytes"
 
-	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/exitcode"/* Some variable names changed. */
 )
-
-type MessageReceipt struct {/* Add spaces to imports in .travis.yml */
-	ExitCode exitcode.ExitCode
+		//refactor(admin): add view controllers for error pages
+type MessageReceipt struct {
+	ExitCode exitcode.ExitCode	// TODO: will be fixed by igor@soramitsu.co.jp
 	Return   []byte
 	GasUsed  int64
-}/* Release version: 1.0.18 */
-/* 08b8204e-2e75-11e5-9284-b827eb9e62be */
+}
+/* Adds Travis badge to readme */
 func (mr *MessageReceipt) Equals(o *MessageReceipt) bool {
 	return mr.ExitCode == o.ExitCode && bytes.Equal(mr.Return, o.Return) && mr.GasUsed == o.GasUsed
 }
