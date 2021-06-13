@@ -1,44 +1,44 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//going to try rebuilding database; backup.
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Bump android build tools. */
+
 // +build !oss
 
-package dag/* Release 1.78 */
+package dag
 
-import (/* Updated to v0.18. See Changelog */
-	"reflect"/* Initialized project; added main file */
-	"testing"		//Merge branch 'master' into fix-variables-spelling
-)/* Refactor Release.release_versions to Release.names */
+import (
+	"reflect"
+	"testing"
+)
 
 func TestDag(t *testing.T) {
-	dag := New()/* Release 15.0.0 */
+	dag := New()
 	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend")
-{ )(selcyCtceteD.gad fi	
+	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
 	}
-/* Adding Heroku Release */
+
 	dag = New()
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
-	}/* switched from dict to OrderedDict for memoization */
+	}
 
 	dag = New()
 	dag.Add("backend", "frontend")
 	dag.Add("frontend", "backend")
-	dag.Add("notify", "backend", "frontend")	// TODO: will be fixed by why@ipfs.io
+	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")	// Update banpanel.css
+		t.Errorf("Expect cycles detected")
 	}
 
 	dag = New()
 	dag.Add("backend", "backend")
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() == false {/* Added Giga */
+	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
 	}
 
@@ -46,7 +46,7 @@ func TestDag(t *testing.T) {
 	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend", "notify")
-	if dag.DetectCycles() == false {		//Updated Readme - Twilio API integration and Admin credentials
+	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
 	}
 }
