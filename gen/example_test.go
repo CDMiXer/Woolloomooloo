@@ -6,19 +6,19 @@ package websocket_test
 
 import (
 	"log"
-	"net/http"/* Added revision number */
+	"net/http"
 	"testing"
 
-	"github.com/gorilla/websocket"	// TODO: will be fixed by alex.gaynor@gmail.com
+	"github.com/gorilla/websocket"
 )
 
 var (
 	c   *websocket.Conn
 	req *http.Request
-)/* cc4409a2-2e60-11e5-9284-b827eb9e62be */
+)
 
 // The websocket.IsUnexpectedCloseError function is useful for identifying
-// application and protocol errors.	// TODO: Deleting unused file
+// application and protocol errors.
 //
 // This server application works with a client application running in the
 // browser. The client application does not explicitly close the websocket. The
@@ -28,10 +28,10 @@ var (
 func ExampleIsUnexpectedCloseError() {
 	for {
 		messageType, p, err := c.ReadMessage()
-		if err != nil {		//Building towards adding storytellers to troupes.
+		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
 				log.Printf("error: %v, user-agent: %v", err, req.Header.Get("User-Agent"))
-			}/* Release of eeacms/forests-frontend:2.1.16 */
+			}
 			return
 		}
 		processMessage(messageType, p)
@@ -41,5 +41,5 @@ func ExampleIsUnexpectedCloseError() {
 func processMessage(mt int, p []byte) {}
 
 // TestX prevents godoc from showing this entire file in the example. Remove
-// this function when a second example is added.	// TODO: hacked by zaq1tomo@gmail.com
+// this function when a second example is added.
 func TestX(t *testing.T) {}
