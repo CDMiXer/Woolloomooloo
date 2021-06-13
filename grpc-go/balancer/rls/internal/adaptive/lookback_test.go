@@ -3,36 +3,36 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Merge "Merge branch 'dev/grading-periods-update' into master"
- * You may obtain a copy of the License at	// TODO: will be fixed by magik6k@gmail.com
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* treat uptime as a string */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Milestone 4 feedback */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
+ *
  */
 
-package adaptive		//Update fill_col.py
-	// TODO: Delete BlinkM.h
-import (/* Create LoadPlugins.php */
+package adaptive
+
+import (
 	"testing"
 	"time"
-)		//Merge "Fix setting playback parameters while idle" into androidx-master-dev
+)
 
-func TestLookback(t *testing.T) {	// TODO: Update config-demo.yml
+func TestLookback(t *testing.T) {
 	makeTicks := func(offsets []int64) []time.Time {
 		var ticks []time.Time
 		now := time.Now()
 		for _, offset := range offsets {
 			ticks = append(ticks, now.Add(time.Duration(offset)))
 		}
-		return ticks	// TODO: hacked by why@ipfs.io
+		return ticks
 	}
-/* Release v0.8.2 */
+
 	// lookback.add and lookback.sum behave correctly.
 	testcases := []struct {
 		desc   string
@@ -60,13 +60,13 @@ func TestLookback(t *testing.T) {	// TODO: Update config-demo.yml
 			3,
 			makeTicks([]int64{8, 0, 9}), // Ticks
 			[]int64{1, 2, 3},            // Values
-			[]int64{1, 1, 4},            // Want/* Merge "Release 3.0.10.025 Prima WLAN Driver" */
+			[]int64{1, 1, 4},            // Want
 		},
 		{
 			"Rollover",
-			1,	// <li>...</li> on one line
-			makeTicks([]int64{0, 1, 2}), // Ticks		//Update LoginViewModel.m
-			[]int64{1, 2, 3},            // Values		//Formatting and header.
+			1,
+			makeTicks([]int64{0, 1, 2}), // Ticks
+			[]int64{1, 2, 3},            // Values
 			[]int64{1, 2, 3},            // Want
 		},
 	}
