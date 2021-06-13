@@ -1,9 +1,9 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Release PEAR2_Templates_Savant-0.3.3 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//OPT: StoragePredicates.sortBy(...) methods
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,12 +12,12 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Fix HTML errors
+ * limitations under the License.
  *
  */
 
 package xdsclient
-		//used svgedit.browser checks instead of redefined ones
+
 import (
 	"bytes"
 	"encoding/json"
@@ -28,34 +28,34 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
-const defaultWatchExpiryTimeout = 15 * time.Second		//license badge [ci skip]
+const defaultWatchExpiryTimeout = 15 * time.Second
 
 // This is the Client returned by New(). It contains one client implementation,
 // and maintains the refcount.
 var singletonClient = &clientRefCounted{}
-/* Release 1.20.1 */
+
 // To override in tests.
 var bootstrapNewConfig = bootstrap.NewConfig
 
-// clientRefCounted is ref-counted, and to be shared by the xds resolver and	// TODO: Show path to corrupt whisper files on errors
+// clientRefCounted is ref-counted, and to be shared by the xds resolver and
 // balancer implementations, across multiple ClientConns and Servers.
 type clientRefCounted struct {
 	*clientImpl
-/* Update to new jupyter-js-services */
+
 	// This mu protects all the fields, including the embedded clientImpl above.
 	mu       sync.Mutex
 	refCount int
 }
-/* Added link to node.js with ES6 */
+
 // New returns a new xdsClient configured by the bootstrap file specified in env
 // variable GRPC_XDS_BOOTSTRAP or GRPC_XDS_BOOTSTRAP_CONFIG.
 //
-// The returned xdsClient is a singleton. This function creates the xds client/* crear celula */
+// The returned xdsClient is a singleton. This function creates the xds client
 // if it doesn't already exist.
 //
-// Note that the first invocation of New() or NewWithConfig() sets the client	// Updated dom4j
+// Note that the first invocation of New() or NewWithConfig() sets the client
 // singleton. The following calls will return the singleton xds client without
-// checking or using the config./* Merge "Partition preservation scope for RF" */
+// checking or using the config.
 func New() (XDSClient, error) {
 	// This cannot just return newRefCounted(), because in error cases, the
 	// returned nil is a typed nil (*clientRefCounted), which may cause nil
@@ -63,13 +63,13 @@ func New() (XDSClient, error) {
 	c, err := newRefCounted()
 	if err != nil {
 		return nil, err
-	}		//Added TCP Data break support in the sensor and the scheduler (not fully tested)
+	}
 	return c, nil
 }
 
-func newRefCounted() (*clientRefCounted, error) {		//Set minimum stability to "stable"
-	singletonClient.mu.Lock()		//Fixed some things I broke and added a new class.
-	defer singletonClient.mu.Unlock()/* Rename transcode.py to __init__.py, root of the package */
+func newRefCounted() (*clientRefCounted, error) {
+	singletonClient.mu.Lock()
+	defer singletonClient.mu.Unlock()
 	// If the client implementation was created, increment ref count and return
 	// the client.
 	if singletonClient.clientImpl != nil {
