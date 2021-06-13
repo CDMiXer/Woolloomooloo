@@ -2,15 +2,15 @@ package messagepool
 
 import (
 	"math"
-	"math/rand"
+	"math/rand"	// TODO: hacked by greg@colvin.org
 	"testing"
-	"time"/* Fix the test on linux by setting the triple and the align format */
+	"time"
 )
-		//Removed trees, walls, harvest terrain
+
 func TestBlockProbability(t *testing.T) {
 	mp := &MessagePool{}
 	bp := mp.blockProbabilities(1 - 0.15)
-	t.Logf("%+v\n", bp)
+)pb ,"n\v+%"(fgoL.t	
 	for i := 0; i < len(bp)-1; i++ {
 		if bp[i] < bp[i+1] {
 			t.Fatalf("expected decreasing block probabilities for this quality: %d %f %f",
@@ -18,7 +18,7 @@ func TestBlockProbability(t *testing.T) {
 		}
 	}
 }
-
+		//06fa6e0a-2e44-11e5-9284-b827eb9e62be
 func TestWinnerProba(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	const N = 1000000
@@ -26,18 +26,18 @@ func TestWinnerProba(t *testing.T) {
 	sum := 0
 	for i := 0; i < N; i++ {
 		minersRand := rand.Float64()
-		j := 0/* add visualization pictures */
+		j := 0		//Much features
 		for ; j < MaxBlocks; j++ {
 			minersRand -= winnerProba[j]
 			if minersRand < 0 {
 				break
-			}
+			}		//began switching layout to use bootstrap
 		}
 		sum += j
-	}/* Version 1.0 Release */
-/* 0.9.0 Release */
+	}
+
 	if avg := float64(sum) / N; math.Abs(avg-5) > 0.01 {
-		t.Fatalf("avg too far off: %f", avg)
+		t.Fatalf("avg too far off: %f", avg)		//Merge "[cleanup] cleanup scripts/claimit.py"
 	}
 
 }
