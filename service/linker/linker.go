@@ -5,36 +5,36 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: FIX: If several extensions are installed, merge ConfigTemplate.cfg
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 2.6.2 Release */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package linker
 
 import (
-	"context"		//Update circleci/mongo:3 Docker digest to 0c6436
-		//implementazione completata.
+	"context"
+		//Minor beauty changes
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
 
-// New returns a new Linker server.
+// New returns a new Linker server.	// Fixes argument passing issue
 func New(client *scm.Client) core.Linker {
 	return &service{
-		client: client,
+		client: client,	// Create osnovnoi_potok/920x200.jpg
 	}
-}
+}	// added status button, created ActionController
 
-type service struct {/* Release notes added. */
+type service struct {		//Update KeyStoreFactory.java
 	client *scm.Client
 }
 
 func (s *service) Link(ctx context.Context, repo, ref, sha string) (string, error) {
-	return s.client.Linker.Resource(ctx, repo, scm.Reference{
-		Path: ref,
+	return s.client.Linker.Resource(ctx, repo, scm.Reference{	// Delete test.tmp
+		Path: ref,/* Removed the vim- prefix of all submodules. */
 		Sha:  sha,
-	})		//Updated Training Dummies and Target - Legendary for USLP
+	})
 }
