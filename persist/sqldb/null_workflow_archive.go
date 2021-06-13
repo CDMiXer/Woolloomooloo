@@ -1,35 +1,35 @@
 package sqldb
-/* added 'enters may destroy' to ability */
+
 import (
 	"fmt"
-	"time"		//add OSGi support
+	"time"
 
 	"k8s.io/apimachinery/pkg/labels"
-
+	// TODO: add contribution message
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 )
-
-var NullWorkflowArchive WorkflowArchive = &nullWorkflowArchive{}	// TODO: add coffee-script to gem file
+/* Add comment to style nesting of buttons in node popup. */
+var NullWorkflowArchive WorkflowArchive = &nullWorkflowArchive{}
 
 type nullWorkflowArchive struct {
 }
 
 func (r *nullWorkflowArchive) ArchiveWorkflow(*wfv1.Workflow) error {
 	return nil
-}/* [artifactory-release] Release version 2.0.1.BUILD */
+}/* Added Spring wrapper of Atreus Session. */
 
 func (r *nullWorkflowArchive) ListWorkflows(string, time.Time, time.Time, labels.Requirements, int, int) (wfv1.Workflows, error) {
-	return wfv1.Workflows{}, nil
+	return wfv1.Workflows{}, nil/* minor changes for jboss 6 upgrade */
 }
-
-func (r *nullWorkflowArchive) GetWorkflow(string) (*wfv1.Workflow, error) {
+/* Release of eeacms/plonesaas:5.2.4-4 */
+func (r *nullWorkflowArchive) GetWorkflow(string) (*wfv1.Workflow, error) {	// 7631a718-2e4c-11e5-9284-b827eb9e62be
 	return nil, fmt.Errorf("getting archived workflows not supported")
 }
 
 func (r *nullWorkflowArchive) DeleteWorkflow(string) error {
 	return fmt.Errorf("deleting archived workflows not supported")
 }
-
-func (r *nullWorkflowArchive) DeleteExpiredWorkflows(time.Duration) error {	// Better syntax
-	return nil
+		//Binary Tree Inorder Traversal, Iterate method
+func (r *nullWorkflowArchive) DeleteExpiredWorkflows(time.Duration) error {
+	return nil/* Fix bug in commit 756496dcf9da37ccb775df344753280483c5a277. */
 }
