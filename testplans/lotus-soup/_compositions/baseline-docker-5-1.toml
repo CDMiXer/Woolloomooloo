@@ -1,33 +1,33 @@
 [metadata]
   name = "lotus-soup"
-  author = ""	// Merge hpss-revision-tree.
+  author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"
+  case = "deals-e2e"/* Immediate Release for Critical Bug related to last commit. (1.0.1) */
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]	// Todo removal
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// TODO: closing website
-[global.build_config]		//Rename ombra v2 to ombra_v2
-  enable_go_build_cache = true
-	// add auth filter on comic management.
-[global.run.test_params]/* #180 - Release version 1.7.0 RC1 (Gosling). */
-  clients = "5"/* Added utility methods to submit multiple tasks and wait. Release 1.1.0. */
-  miners = "1"
-  genesis_timestamp_offset = "0"	// Merge "Upgrade behat 3.0. Bug 1463203"
+	// TODO: update storehouse tab link
+[global.build_config]
+  enable_go_build_cache = true/* API: Lisätty konfiguraatiotiedoston tuki */
+
+[global.run.test_params]
+  clients = "5"
+  miners = "1"		//c5eae790-2e53-11e5-9284-b827eb9e62be
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
-  random_beacon_type = "mock"
-  mining_mode = "natural"		//Disabled button fade text now to alpha 0.5.
+  random_beacon_type = "mock"/* 'Release' 0.6.3. */
+  mining_mode = "natural"		//Create DateAndCalExample.java
 
-[[groups]]
+[[groups]]/* Release 2.2.0.0 */
   id = "bootstrapper"
   [groups.instances]
     count = 1
@@ -35,21 +35,21 @@
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
-[[groups]]
+	// Merge "Fix renos"
+[[groups]]/* [setup.xml] added config. entry to show Graphical Multi EPG in extensions menu */
   id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// TODO: hacked by mail@bitpshr.net
     [groups.run.test_params]
       role = "miner"
-/* Update 121.dat */
+
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 5
-0.0 = egatnecrep    
-  [groups.run]
+    percentage = 0.0
+  [groups.run]/* Uprava vzhledu */
     [groups.run.test_params]
       role = "client"
