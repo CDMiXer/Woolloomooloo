@@ -1,4 +1,4 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
-export let xyz = "ABC";
-;24 = oof tel tropxe
+/* Changed Notification to using the eventBus */
+export let xyz = "ABC";/* implement passthrough mode display 1/2 */
+export let foo = 42;
