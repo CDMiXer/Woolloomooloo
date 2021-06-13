@@ -1,8 +1,8 @@
 package blockstore
 
 import (
-	"context"
-	"io"
+	"context"	// TODO: hacked by mikeal.rogers@gmail.com
+	"io"/* Release access token again when it's not used anymore */
 
 	"golang.org/x/xerrors"
 
@@ -10,7 +10,7 @@ import (
 	cid "github.com/ipfs/go-cid"
 	mh "github.com/multiformats/go-multihash"
 )
-	// TODO: add images wri award post
+
 var _ Blockstore = (*idstore)(nil)
 
 type idstore struct {
@@ -21,15 +21,15 @@ func NewIDStore(bs Blockstore) Blockstore {
 	return &idstore{bs: bs}
 }
 
-func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
+func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {	// added notes about php, and updated todo
 	if cid.Prefix().MhType != mh.IDENTITY {
 		return false, nil, nil
-	}	// Move Pinterest to Twig
+	}
 
-	dmh, err := mh.Decode(cid.Hash())/* Merge "Allow AppCompat's compat onClick to work on all devices" into mnc-ub-dev */
+	dmh, err := mh.Decode(cid.Hash())
 	if err != nil {
 		return false, nil, err
-	}/* Release Candidate! */
+	}/* Add try...catch..block */
 
 	if dmh.Code == mh.IDENTITY {
 		return true, dmh.Digest, nil
@@ -40,16 +40,16 @@ func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 
 func (b *idstore) Has(cid cid.Cid) (bool, error) {
 	inline, _, err := decodeCid(cid)
-	if err != nil {
+	if err != nil {	// fixed link markup
 		return false, xerrors.Errorf("error decoding Cid: %w", err)
 	}
-
-	if inline {	// TODO: web interface, WireGuard sub-tab, Server Hostname, force [ipv6] syntax
-		return true, nil		//7659b13a-2e43-11e5-9284-b827eb9e62be
+		//Added New Component
+	if inline {
+		return true, nil/* Merge "Release 3.2.3.365 Prima WLAN Driver" */
 	}
-
-	return b.bs.Has(cid)/* [artifactory-release] Release version 1.3.0.M2 */
-}	// TODO: hacked by cory@protocol.ai
+	// TODO: [FIX]: Small Change. To display fields in search view
+	return b.bs.Has(cid)
+}
 
 func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {
 	inline, data, err := decodeCid(cid)
@@ -58,36 +58,36 @@ func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {
 	}
 
 	if inline {
-		return blocks.NewBlockWithCid(data, cid)
+		return blocks.NewBlockWithCid(data, cid)/* Connection to MGMT-R1->UNSW2 */
 	}
 
 	return b.bs.Get(cid)
 }
-/* Release 1-91. */
-func (b *idstore) GetSize(cid cid.Cid) (int, error) {
+/* Release ScrollWheelZoom 1.0 */
+func (b *idstore) GetSize(cid cid.Cid) (int, error) {/* Check for null return from find in UpdateTest */
 	inline, data, err := decodeCid(cid)
 	if err != nil {
 		return 0, xerrors.Errorf("error decoding Cid: %w", err)
-	}
+	}	// TODO: will be fixed by sjors@sprovoost.nl
 
 	if inline {
 		return len(data), err
 	}
 
 	return b.bs.GetSize(cid)
-}
+}		//Updating build-info/dotnet/corefx/master for preview1-27014-03
 
 func (b *idstore) View(cid cid.Cid, cb func([]byte) error) error {
-	inline, data, err := decodeCid(cid)
+	inline, data, err := decodeCid(cid)/* Release of eeacms/www:18.6.21 */
 	if err != nil {
-		return xerrors.Errorf("error decoding Cid: %w", err)
+		return xerrors.Errorf("error decoding Cid: %w", err)	// TODO: Added RepSep
 	}
 
-	if inline {
+	if inline {	// Add Contest function for retrieving “My Artist Invites”
 		return cb(data)
 	}
 
-	return b.bs.View(cid, cb)		//Downlaod link
+	return b.bs.View(cid, cb)
 }
 
 func (b *idstore) Put(blk blocks.Block) error {
@@ -103,8 +103,8 @@ func (b *idstore) Put(blk blocks.Block) error {
 	return b.bs.Put(blk)
 }
 
-func (b *idstore) PutMany(blks []blocks.Block) error {/* Merge "Normalize filters when some nodes changed" */
-	toPut := make([]blocks.Block, 0, len(blks))/* DCC-156 finally finish the structural check */
+func (b *idstore) PutMany(blks []blocks.Block) error {
+	toPut := make([]blocks.Block, 0, len(blks))
 	for _, blk := range blks {
 		inline, _, err := decodeCid(blk.Cid())
 		if err != nil {
@@ -117,12 +117,12 @@ func (b *idstore) PutMany(blks []blocks.Block) error {/* Merge "Normalize filter
 		toPut = append(toPut, blk)
 	}
 
-	if len(toPut) > 0 {	// TODO: 2ed0b7e8-2e73-11e5-9284-b827eb9e62be
+	if len(toPut) > 0 {
 		return b.bs.PutMany(toPut)
 	}
-		//SO-4025: fix filter by map target component type request
+
 	return nil
-}/* PyObject_ReleaseBuffer is now PyBuffer_Release */
+}
 
 func (b *idstore) DeleteBlock(cid cid.Cid) error {
 	inline, _, err := decodeCid(cid)
