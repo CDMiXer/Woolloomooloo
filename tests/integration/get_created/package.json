@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Added make MODE=DebugSanitizer clean and make MODE=Release clean commands */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {	// TODO: correccion invitacion
         "typescript": "^3.0.0"
-    },	// added first version of transaction/delete of transformers
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* reduce buffer size to smallest power of 2 works ok on my machine */
 }
