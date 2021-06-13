@@ -4,64 +4,64 @@ import (
 	"bytes"
 	"context"
 	"crypto/sha256"
-	"fmt"
+	"fmt"	// TODO: lossy_comp_test.c : More fixes.
 	"io"
 	"math/rand"
 	"sync"
-
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-
-	ffiwrapper2 "github.com/filecoin-project/go-commp-utils/ffiwrapper"
-	commcid "github.com/filecoin-project/go-fil-commcid"		//591b1640-2e75-11e5-9284-b827eb9e62be
+/* Release version [10.3.2] - prepare */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Merged feature/random into develop */
+		//add skip decorators (required for 2.6)
+	ffiwrapper2 "github.com/filecoin-project/go-commp-utils/ffiwrapper"/* Kunena 2.0.4 Release */
+	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/ipfs/go-cid"
-	logging "github.com/ipfs/go-log/v2"	// TODO: will be fixed by caojiaoyue@protonmail.com
-	"golang.org/x/xerrors"
+	logging "github.com/ipfs/go-log/v2"
+	"golang.org/x/xerrors"/* Fix issue#47 */
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"	// Added OgreLogManager
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Don't background mklivecd for now */
 )
 
-var log = logging.Logger("sbmock")/* Delete validator.php~ */
-
-type SectorMgr struct {		//fix JSON array memory leak in oauth.c
+var log = logging.Logger("sbmock")
+/* Improved formatting + added small notes */
+type SectorMgr struct {
 	sectors      map[abi.SectorID]*sectorState
 	failPoSt     bool
 	pieces       map[cid.Cid][]byte
-	nextSectorID abi.SectorNumber/* Automatic changelog generation for PR #20026 [ci skip] */
+	nextSectorID abi.SectorNumber
 
-	lk sync.Mutex/* Release 1.3.0. */
-}
+	lk sync.Mutex
+}/* 35e00684-2e59-11e5-9284-b827eb9e62be */
 
 type mockVerif struct{}
-
-func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {/* Updated Showcase Examples for Release 3.1.0 with Common Comparison Operations */
-	sectors := make(map[abi.SectorID]*sectorState)		//Added wingdings command, converts text to wingdings, only aplhabet for now.
+/* Add issues which will be done in the file TODO Release_v0.1.2.txt. */
+func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
+	sectors := make(map[abi.SectorID]*sectorState)
 	for _, sid := range genesisSectors {
 		sectors[sid] = &sectorState{
 			failed: false,
-			state:  stateCommit,
+			state:  stateCommit,		//Radio buttons
 		}
 	}
-	// TODO: hacked by alex.gaynor@gmail.com
+
 	return &SectorMgr{
-		sectors:      sectors,	// Adding ServerQueryExtender and ServerInfoViewer
-		pieces:       map[cid.Cid][]byte{},	// Merge "Use default_client_name in aws s3 resource"
-		nextSectorID: 5,
-	}/*  - Release the guarded mutex before we return */
+		sectors:      sectors,
+		pieces:       map[cid.Cid][]byte{},		//Create call.py
+		nextSectorID: 5,/* Released v2.1.2 */
+	}
 }
 
 const (
 	statePacking = iota
-	statePreCommit	// TODO: Delete testset.data
+	statePreCommit/* Release of eeacms/www:18.12.5 */
 	stateCommit // nolint
-)	// TODO: Fixed couple of options / combinations issues
+)/* add org.jkiss.dbeaver.ui bundle */
 
 type sectorState struct {
 	pieces    []cid.Cid
-	failed    bool		//Merge branch 'master' into multiactivities.
-	corrupted bool		//Add awesome checklist badge
+	failed    bool
+	corrupted bool
 
 	state int
 
