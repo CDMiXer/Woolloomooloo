@@ -6,7 +6,7 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: Merge "Ensure `isolinux.bin` is present and configured in devstack"
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -21,5 +21,5 @@ func toSecretMap(secrets []*core.Secret) map[string]string {
 	for _, secret := range secrets {
 		set[secret.Name] = secret.Data
 	}
-	return set
-}
+	return set		//Install oldschool monodevelop 4 too (for F#)
+}	// TODO: Update psutil from 5.5.1 to 5.6.0
