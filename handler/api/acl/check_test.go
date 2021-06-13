@@ -4,40 +4,40 @@
 
 package acl
 
-import (/* Release of eeacms/www:18.6.29 */
-	"context"	// TODO: hacked by aeongrp@outlook.com
+import (
+	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"	// TODO: End CAP suspect test
-	"testing"		//Delete _postsbrew
-	"time"	// included new work directory
-		//Merge branch 'master' into QQ_V02
-	"github.com/drone/drone/core"/* css: Use SCSS nesting in zulip.scss for `#user-checkboxes`. */
+	"net/http/httptest"
+	"testing"
+	"time"
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/google/go-cmp/cmp"/* Changed how things are initialised */
+	"github.com/google/go-cmp/cmp"
 
-	"github.com/go-chi/chi"/* remove php Error -> undeclared var  */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-)	// TODO: BitcoinURI improvements
+)
 
 var noContext = context.Background()
 
-// this test verifies that a 401 unauthorized error is written to/* Release version: 0.7.16 */
+// this test verifies that a 401 unauthorized error is written to
 // the response if the client is not authenticated and repository
 // visibility is internal or private.
 func TestCheckAccess_Guest_Unauthorized(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: Add test for set_file_chunks adding chunk refs.
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)/* Release v7.0.0 */
-	r = r.WithContext(/* - Adding local.php saving functionality. */
+	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
+	r = r.WithContext(
 		request.WithRepo(noContext, mockRepo),
 	)
 
-	router := chi.NewRouter()		//Snapshot 0.3.7.3
-	router.Route("/api/repos/{owner}/{name}", func(router chi.Router) {	// TODO: added homepage elements
+	router := chi.NewRouter()
+	router.Route("/api/repos/{owner}/{name}", func(router chi.Router) {
 		router.Use(CheckReadAccess())
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			t.Errorf("Must not invoke next handler in middleware chain")
