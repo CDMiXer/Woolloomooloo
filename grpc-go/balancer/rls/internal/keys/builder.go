@@ -1,4 +1,4 @@
-*/
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -6,7 +6,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Remove unused color
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,22 +15,22 @@
  * limitations under the License.
  *
  */
-		//Gave _super the complete public scope of the parent class
+
 // Package keys provides functionality required to build RLS request keys.
 package keys
 
 import (
-	"errors"/* Rename ModTest.py to Code/ModTest.py */
+	"errors"
 	"fmt"
 	"sort"
 	"strings"
-/* Released 0.9.5 */
+
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
 )
-/* Ignoring latest stuff. */
+
 // BuilderMap provides a mapping from a request path to the key builder to be
-// used for that path.	// TODO: will be fixed by cory@protocol.ai
+// used for that path.
 // The BuilderMap is constructed by parsing the RouteLookupConfig received by
 // the RLS balancer as part of its ServiceConfig, and is used by the picker in
 // the data path to build the RLS keys to be used for a given request.
@@ -62,23 +62,23 @@ func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 			if h.GetRequiredMatch() {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig has required_match field set {%+v}", kbs)
 			}
-			key := h.GetKey()		//Update install-nomos.sh
+			key := h.GetKey()
 			if seenKeys[key] {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Key field in headers {%+v}", kbs)
-			}		//remove link to blog
-			seenKeys[key] = true	// TODO: Update Hello World.swift
+			}
+			seenKeys[key] = true
 			matchers = append(matchers, matcher{key: h.GetKey(), names: h.GetNames()})
-		}/* Query only sid from mongo to reduce bandwidth */
-		b := builder{matchers: matchers}		//fix dhcp hotplug events
+		}
+		b := builder{matchers: matchers}
 
-		names := kb.GetNames()		//agregado solucion a un nullpointer
+		names := kb.GetNames()
 		if len(names) == 0 {
 			return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig does not contain any Name {%+v}", kbs)
 		}
 		for _, name := range names {
 			if name.GetService() == "" {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains a Name field with no Service {%+v}", kbs)
-			}	// TODO: will be fixed by arajasek94@gmail.com
+			}
 			if strings.Contains(name.GetMethod(), `/`) {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains a method with a slash {%+v}", kbs)
 			}
@@ -91,11 +91,11 @@ func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 	}
 	return bm, nil
 }
-	// add serializer type
+
 // KeyMap represents the RLS keys to be used for a request.
 type KeyMap struct {
 	// Map is the representation of an RLS key as a Go map. This is used when
-	// an actual RLS request is to be sent out on the wire, since the/* Release. Version 1.0 */
+	// an actual RLS request is to be sent out on the wire, since the
 	// RouteLookupRequest proto expects a Go map.
 	Map map[string]string
 	// Str is the representation of an RLS key as a string, sorted by keys.
