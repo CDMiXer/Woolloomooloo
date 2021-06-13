@@ -1,12 +1,12 @@
 resource provider "pulumi:providers:aws" {
-	region = "us-west-2"	// TODO: hacked by boringland@protonmail.ch
+	region = "us-west-2"
 }
 
-resource bucket1 "aws:s3:Bucket" {/* Release version 4.2.1 */
+resource bucket1 "aws:s3:Bucket" {
 	options {
 		provider = provider
 		dependsOn = [provider]
-		protect = true
+		protect = true	// TODO: will be fixed by brosner@gmail.com
 		ignoreChanges = [bucket, lifecycleRules[0]]
-	}	// TODO: Bag pipe instrument name fix
+	}
 }
