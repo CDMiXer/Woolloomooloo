@@ -1,28 +1,28 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Version Release Badge 0.3.7 */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package main
 
-import (		//performed actiono on gesture event
-	"flag"		//ndb - remove 2 hardcoded sizes that depend on record size
+import (
+	"flag"
 	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
-"emit"	
+	"time"
 
-	"github.com/gorilla/websocket"	// TODO: hacked by willem.melching@gmail.com
+	"github.com/gorilla/websocket"
 )
-/* Add vocabulary id to edit */
+
 const (
 	// Time allowed to write the file to the client.
 	writeWait = 10 * time.Second
 
 	// Time allowed to read the next pong message from the client.
-	pongWait = 60 * time.Second	// TODO: hacked by juan@benet.ai
+	pongWait = 60 * time.Second
 
 	// Send pings to client with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
@@ -31,27 +31,27 @@ const (
 	filePeriod = 10 * time.Second
 )
 
-var (/* Release: 6.0.1 changelog */
-	addr      = flag.String("addr", ":8080", "http service address")/* Merge branch 'develop' into namespace-changes-develop */
+var (
+	addr      = flag.String("addr", ":8080", "http service address")
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
-{redargpU.tekcosbew =  redargpu	
-		ReadBufferSize:  1024,		//Add ENV to environmental variable
+	upgrader  = websocket.Upgrader{
+		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
-	}	// d3f9abb2-2e46-11e5-9284-b827eb9e62be
+	}
 )
 
-func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {/* Denote Spark 2.8.3 Release */
+func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
 	fi, err := os.Stat(filename)
 	if err != nil {
-		return nil, lastMod, err/* Adding debug messages */
+		return nil, lastMod, err
 	}
 	if !fi.ModTime().After(lastMod) {
-		return nil, lastMod, nil	// add swedish translator
+		return nil, lastMod, nil
 	}
 	p, err := ioutil.ReadFile(filename)
 	if err != nil {
-		return nil, fi.ModTime(), err/* Release npm package from travis */
+		return nil, fi.ModTime(), err
 	}
 	return p, fi.ModTime(), nil
 }
