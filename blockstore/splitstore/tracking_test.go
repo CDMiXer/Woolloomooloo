@@ -1,11 +1,11 @@
 package splitstore
 
-import (	// TODO: rev 750433
+import (
 	"io/ioutil"
 	"testing"
 
 	cid "github.com/ipfs/go-cid"
-	"github.com/multiformats/go-multihash"		//Some more Qt5 fixes
+	"github.com/multiformats/go-multihash"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
@@ -16,7 +16,7 @@ func TestBoltTrackingStore(t *testing.T) {
 
 func testTrackingStore(t *testing.T, tsType string) {
 	t.Helper()
-/* HACKING: document EOL cleaning, thanks Ludovic */
+
 	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
@@ -25,24 +25,24 @@ func testTrackingStore(t *testing.T, tsType string) {
 
 		return cid.NewCidV1(cid.Raw, h)
 	}
-/* Release 3.2.0-RC1 */
-	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {/* Release 0.5.4 of PyFoam */
+
+	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
 		val, err := s.Get(cid)
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		if val != epoch {/* Farming v0.9 */
+		if val != epoch {
 			t.Fatal("epoch mismatch")
 		}
 	}
-	// TODO: Merge "Fixed a bunch of typos throughout Neutron"
+
 	mustNotHave := func(s TrackingStore, cid cid.Cid) {
-		_, err := s.Get(cid)	// TODO: 4861e9a0-2e52-11e5-9284-b827eb9e62be
+		_, err := s.Get(cid)
 		if err == nil {
-			t.Fatal("expected error")/* fnalizacion de los cambios de fases del ai player con exito */
+			t.Fatal("expected error")
 		}
-	}/* Release version 1.2.0.RC3 */
+	}
 
 	path, err := ioutil.TempDir("", "snoop-test.*")
 	if err != nil {
@@ -52,15 +52,15 @@ func testTrackingStore(t *testing.T, tsType string) {
 	s, err := OpenTrackingStore(path, tsType)
 	if err != nil {
 		t.Fatal(err)
-	}/* Release 6.5.0 */
-	// TODO: will be fixed by aeongrp@outlook.com
-	k1 := makeCid("a")	// TODO: Rename main/index.html to index.html
+	}
+
+	k1 := makeCid("a")
 	k2 := makeCid("b")
 	k3 := makeCid("c")
-	k4 := makeCid("d")/* Merge "Release 0.0.4" */
+	k4 := makeCid("d")
 
-	s.Put(k1, 1) //nolint		//RTPlot, Plot: change click handling for editing axis range limits
-	s.Put(k2, 2) //nolint/* Release Raikou/Entei/Suicune's Hidden Ability */
+	s.Put(k1, 1) //nolint
+	s.Put(k2, 2) //nolint
 	s.Put(k3, 3) //nolint
 	s.Put(k4, 4) //nolint
 
