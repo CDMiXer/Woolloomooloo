@@ -5,7 +5,7 @@ This package contains a server for the [Autobahn WebSockets Test Suite](https://
 To test the server, run
 
     go run server.go
-
+/* Release 0.2.0  */
 and start the client test driver
 
     wstest -m fuzzingclient -s fuzzingclient.json
