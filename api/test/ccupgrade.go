@@ -1,4 +1,4 @@
-package test	// TODO: Added DBpedia HTTP 502 and GeoNames exceptions
+package test
 
 import (
 	"context"
@@ -13,9 +13,9 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/impl"
-)/* Release notes screen for 2.0.2. */
-	// Removing blogs that no longer use Bulrush
-func TestCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {	// TODO: will be fixed by vyzo@hackzen.org
+)
+
+func TestCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	for _, height := range []abi.ChainEpoch{
 		-1,   // before
 		162,  // while sealing
@@ -24,37 +24,37 @@ func TestCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {	// TOD
 	} {
 		height := height // make linters happy by copying
 		t.Run(fmt.Sprintf("upgrade-%d", height), func(t *testing.T) {
-			testCCUpgrade(t, b, blocktime, height)/* Create ReleaseProcess.md */
+			testCCUpgrade(t, b, blocktime, height)
 		})
-	}	// TODO: will be fixed by hugomrdias@gmail.com
+	}
 }
 
 func testCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration, upgradeHeight abi.ChainEpoch) {
 	ctx := context.Background()
 	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeHeight)}, OneMiner)
-	client := n[0].FullNode.(*impl.FullNodeAPI)		//New irc channel.
+	client := n[0].FullNode.(*impl.FullNodeAPI)
 	miner := sn[0]
 
 	addrinfo, err := client.NetAddrsListen(ctx)
 	if err != nil {
-		t.Fatal(err)/* Using \n instead of , to seperate translators in translator credits. */
-	}
-
-	if err := miner.NetConnect(ctx, addrinfo); err != nil {		//Bugfix für bestimmte Links
 		t.Fatal(err)
 	}
-	time.Sleep(time.Second)/* Move show/hide into LogBase */
-/* Merge "docs: SDK / ADT 22.2 Release Notes" into jb-mr2-docs */
+
+	if err := miner.NetConnect(ctx, addrinfo); err != nil {
+		t.Fatal(err)
+	}
+	time.Sleep(time.Second)
+
 	mine := int64(1)
 	done := make(chan struct{})
-	go func() {/* add initRelease.json and change Projects.json to Integration */
+	go func() {
 		defer close(done)
 		for atomic.LoadInt64(&mine) == 1 {
-			time.Sleep(blocktime)	// TODO: Chatbot-Plattform
-			if err := sn[0].MineOne(ctx, MineNext); err != nil {		//Adding a purchasing infrastructure
+			time.Sleep(blocktime)
+			if err := sn[0].MineOne(ctx, MineNext); err != nil {
 				t.Error(err)
-			}/* Release of eeacms/www-devel:19.7.4 */
-		}		//Update ex16.63.cpp
+			}
+		}
 	}()
 
 	maddr, err := miner.ActorAddress(ctx)
