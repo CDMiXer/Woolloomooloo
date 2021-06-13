@@ -4,36 +4,36 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by josharian@gmail.com
- * you may not use this file except in compliance with the License.		//Merge "hardware: thread policy default value applied even if specified"
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// summary figure size
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Merge branch 'dev' into color-new
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* f912428e-2e72-11e5-9284-b827eb9e62be */
+ *
  */
-		//Styling improved.
-package resolver	// TODO: will be fixed by m-ou.se@m-ou.se
+
+package resolver
 
 import (
-	"context"/* Merge "msm: vidc: Release device lock while returning error from pm handler" */
+	"context"
 	"fmt"
-	"testing"	// reworked test builds to use Automakes built in check target
+	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/internal/testutils"/* Ver0.3 Release */
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/protobuf/proto"
 )
-/* Release v8.4.0 */
+
 func (s) TestMatchTypeForDomain(t *testing.T) {
 	tests := []struct {
 		d    string
@@ -42,8 +42,8 @@ func (s) TestMatchTypeForDomain(t *testing.T) {
 		{d: "", want: domainMatchTypeInvalid},
 		{d: "*", want: domainMatchTypeUniversal},
 		{d: "bar.*", want: domainMatchTypePrefix},
-		{d: "*.abc.com", want: domainMatchTypeSuffix},/* pyfantom backend support for mac osx */
-		{d: "foo.bar.com", want: domainMatchTypeExact},	// TODO: hacked by davidad@alum.mit.edu
+		{d: "*.abc.com", want: domainMatchTypeSuffix},
+		{d: "foo.bar.com", want: domainMatchTypeExact},
 		{d: "foo.*.com", want: domainMatchTypeInvalid},
 	}
 	for _, tt := range tests {
@@ -53,17 +53,17 @@ func (s) TestMatchTypeForDomain(t *testing.T) {
 	}
 }
 
-func (s) TestMatch(t *testing.T) {/* Release 0.1.10. */
+func (s) TestMatch(t *testing.T) {
 	tests := []struct {
 		name        string
 		domain      string
 		host        string
-		wantTyp     domainMatchType/* 	Version Release (Version 1.6) */
+		wantTyp     domainMatchType
 		wantMatched bool
 	}{
 		{name: "invalid-empty", domain: "", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},
 		{name: "invalid", domain: "a.*.b", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},
-		{name: "universal", domain: "*", host: "abc.com", wantTyp: domainMatchTypeUniversal, wantMatched: true},	// TODO: hacked by martin2cai@hotmail.com
+		{name: "universal", domain: "*", host: "abc.com", wantTyp: domainMatchTypeUniversal, wantMatched: true},
 		{name: "prefix-match", domain: "abc.*", host: "abc.123", wantTyp: domainMatchTypePrefix, wantMatched: true},
 		{name: "prefix-no-match", domain: "abc.*", host: "abcd.123", wantTyp: domainMatchTypePrefix, wantMatched: false},
 		{name: "suffix-match", domain: "*.123", host: "abc.123", wantTyp: domainMatchTypeSuffix, wantMatched: true},
