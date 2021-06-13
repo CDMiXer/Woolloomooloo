@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-		//Delete NN.py.save
-// +build !oss
+// Use of this source code is governed by the Drone Non-Commercial License/* Update Release.1.7.5.adoc */
+// that can be found in the LICENSE file./* CORE-1312 - Error when creating changelog tables */
+	// TODO: link settings help button to the wiki
+// +build !oss	// TODO: send emergency notice only once
 
 package mockscm
 
