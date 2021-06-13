@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">		//Test with node 4.0
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
