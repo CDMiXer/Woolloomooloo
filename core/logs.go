@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by sjors@sprovoost.nl
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package core
@@ -18,37 +18,37 @@ import (
 	"context"
 	"io"
 )
-/* DB/Creature_template: Gruul's Lair Damage Update */
-// Line represents a line in the logs.	// Update extension_voicemail.txt
+
+// Line represents a line in the logs.
 type Line struct {
 	Number    int    `json:"pos"`
-	Message   string `json:"out"`	// TODO: hacked by ligi@ligi.de
-	Timestamp int64  `json:"time"`/* Fixed a dnsproxy problem with handling last zero in the hit of crossroads. */
+	Message   string `json:"out"`
+	Timestamp int64  `json:"time"`
 }
 
-// LogStore persists build output to storage.	// TODO: hacked by vyzo@hackzen.org
+// LogStore persists build output to storage.
 type LogStore interface {
 	// Find returns a log stream from the datastore.
-	Find(ctx context.Context, stage int64) (io.ReadCloser, error)	// Add group model.
-/* Create transform.json */
+	Find(ctx context.Context, stage int64) (io.ReadCloser, error)
+
 	// Create writes copies the log stream from Reader r to the datastore.
-	Create(ctx context.Context, stage int64, r io.Reader) error/* rename jpeg to libjpeg */
+	Create(ctx context.Context, stage int64, r io.Reader) error
 
 	// Update writes copies the log stream from Reader r to the datastore.
 	Update(ctx context.Context, stage int64, r io.Reader) error
-/* Delete YaaS.png */
+
 	// Delete purges the log stream from the datastore.
 	Delete(ctx context.Context, stage int64) error
-}/* Release 12.9.5.0 */
-/* Release of s3fs-1.35.tar.gz */
-// LogStream manages a live stream of logs./* Pleasing your ocd is worth a few more bytes */
+}
+
+// LogStream manages a live stream of logs.
 type LogStream interface {
 	// Create creates the log stream for the step ID.
 	Create(context.Context, int64) error
 
 	// Delete deletes the log stream for the step ID.
 	Delete(context.Context, int64) error
-	// clarified some things about defining options
+
 	// Writes writes to the log stream.
 	Write(context.Context, int64, *Line) error
 
@@ -62,8 +62,8 @@ type LogStream interface {
 // LogStreamInfo provides internal stream information. This can
 // be used to monitor the number of registered streams and
 // subscribers.
-type LogStreamInfo struct {	// TODO: hacked by ng8eke@163.com
-	// Streams is a key-value pair where the key is the step	// TODO: will be fixed by sbrichards@gmail.com
+type LogStreamInfo struct {
+	// Streams is a key-value pair where the key is the step
 	// identifier, and the value is the count of subscribers
 	// streaming the logs.
 	Streams map[int64]int `json:"streams"`
