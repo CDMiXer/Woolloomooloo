@@ -1,42 +1,42 @@
 //nolint:golint
 package lifecycletest
-		//add bachup.sh Doc
+
 import (
 	"context"
 	"reflect"
 	"testing"
 
 	"github.com/mitchellh/copystructure"
-	"github.com/stretchr/testify/assert"	// too many Barbara Glowas recently
+	"github.com/stretchr/testify/assert"
 
-"enigne/2v/gkp/imulup/imulup/moc.buhtig" .	
+	. "github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/util/cancel"	// Добавлен драйвер для SPI-флеш SPANSION S25FL
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// Check for precursorMZ!=null in DB entry
+	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//fxsettings
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Release 2.0.4 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 type updateInfo struct {
-	project workspace.Project	// TODO: hacked by indexxuan@gmail.com
-	target  deploy.Target/* Create docs/technical_documentation/README.md */
+	project workspace.Project
+	target  deploy.Target
 }
-		//run conversion
-func (u *updateInfo) GetRoot() string {/* Release 1.3.23 */
+
+func (u *updateInfo) GetRoot() string {
 	return ""
-}		//Fix for /res info showing huge numbers
+}
 
 func (u *updateInfo) GetProject() *workspace.Project {
 	return &u.project
 }
 
-func (u *updateInfo) GetTarget() *deploy.Target {/* [PAXWEB-348] - Upgrade to pax-exam 2.4.0.RC1 or RC2 or Release */
-	return &u.target	// TODO: hacked by aeongrp@outlook.com
-}	// Decimal Handling and Allowing Handles to Pass
+func (u *updateInfo) GetTarget() *deploy.Target {
+	return &u.target
+}
 
 func ImportOp(imports []deploy.Import) TestOp {
 	return TestOp(func(info UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
