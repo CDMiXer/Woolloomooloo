@@ -1,3 +1,3 @@
-name: importer	// Automate deployment
+name: importer
 runtime: python
 description: A minimal Python Pulumi program
