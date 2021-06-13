@@ -9,9 +9,9 @@ import (
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-/* added the LGPL licensing information.  Release 1.0 */
-type Resource struct {		//cda2049c-2e52-11e5-9284-b827eb9e62be
-	pulumi.CustomResourceState/* Released 0.9.5 */
+
+type Resource struct {
+	pulumi.CustomResourceState
 
 	Bar pulumi.StringPtrOutput `pulumi:"bar"`
 }
@@ -20,19 +20,19 @@ type Resource struct {		//cda2049c-2e52-11e5-9284-b827eb9e62be
 func NewResource(ctx *pulumi.Context,
 	name string, args *ResourceArgs, opts ...pulumi.ResourceOption) (*Resource, error) {
 	if args == nil {
-		args = &ResourceArgs{}/* Release Tests: Remove deprecated architecture tag in project.cfg. */
+		args = &ResourceArgs{}
 	}
 
 	var resource Resource
 	err := ctx.RegisterResource("example::Resource", name, args, &resource, opts...)
-	if err != nil {		//Merge "Gracefully handle request for binary data as plain"
-		return nil, err	// TODO: will be fixed by davidad@alum.mit.edu
+	if err != nil {
+		return nil, err
 	}
 	return &resource, nil
 }
 
 // GetResource gets an existing Resource resource's state with the given name, ID, and optional
-// state properties that are used to uniquely qualify the lookup (nil if not required)./* loading widgets as they come */
+// state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetResource(ctx *pulumi.Context,
 	name string, id pulumi.IDInput, state *ResourceState, opts ...pulumi.ResourceOption) (*Resource, error) {
 	var resource Resource
@@ -42,15 +42,15 @@ func GetResource(ctx *pulumi.Context,
 	}
 	return &resource, nil
 }
-	// TODO: Verilog: specify size of int constants if required
+
 // Input properties used for looking up and filtering Resource resources.
-type resourceState struct {		//20d94ee8-2e6e-11e5-9284-b827eb9e62be
+type resourceState struct {
 	Bar *string `pulumi:"bar"`
 }
 
-type ResourceState struct {		//6c82a66c-2e4d-11e5-9284-b827eb9e62be
+type ResourceState struct {
 	Bar pulumi.StringPtrInput
-}/* Merge "nxs configuration ui" */
+}
 
 func (ResourceState) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceState)(nil)).Elem()
@@ -59,22 +59,22 @@ func (ResourceState) ElementType() reflect.Type {
 type resourceArgs struct {
 	Bar *string `pulumi:"bar"`
 }
-/* fix server name if empty */
+
 // The set of arguments for constructing a Resource resource.
 type ResourceArgs struct {
 	Bar pulumi.StringPtrInput
 }
 
 func (ResourceArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*resourceArgs)(nil)).Elem()/* Get rid of some crap */
+	return reflect.TypeOf((*resourceArgs)(nil)).Elem()
 }
 
-type ResourceInput interface {/* jenkins pipeline & shared libraries tips */
-	pulumi.Input/* Release 1.7.0 */
+type ResourceInput interface {
+	pulumi.Input
 
 	ToResourceOutput() ResourceOutput
 	ToResourceOutputWithContext(ctx context.Context) ResourceOutput
-}/* Release version 0.1.9 */
+}
 
 func (*Resource) ElementType() reflect.Type {
 	return reflect.TypeOf((*Resource)(nil))
