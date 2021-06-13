@@ -1,55 +1,55 @@
 // Copyright 2016-2019, Pulumi Corporation.
-///* Design updating */
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by steven@stebalien.com
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Release 4.0.10.79 QCACLD WLAN Drive" */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Update clients.html
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package tests
-/* Release of eeacms/energy-union-frontend:1.7-beta.1 */
-import (/* clarify that feedback is still invited on all aspects of the prize */
+
+import (
 	cryptorand "crypto/rand"
-	"encoding/hex"		//Update radio.zapas.json
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"/* b28655b8-2e49-11e5-9284-b827eb9e62be */
+	"io/ioutil"
 	"os"
 	"path"
-	"path/filepath"	// Merge "Run online data migrations during undercloud/standalone upgrades"
-	"strconv"	// TODO: Update bozu-user-external-login-data.php
+	"path/filepath"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"/* Add text 1 phrases to rub5 */
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"/* https://pt.stackoverflow.com/q/88304/101 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Merge "Release notes: online_data_migrations nova-manage command" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestStackCommands(t *testing.T) {
-	// stack init, stack ls, stack rm, stack ls		//Merge "Bump requirements to support secure RBAC effort"
+	// stack init, stack ls, stack rm, stack ls
 	t.Run("SanityTest", func(t *testing.T) {
-		e := ptesting.NewEnvironment(t)/* Release 4-SNAPSHOT */
+		e := ptesting.NewEnvironment(t)
 		defer func() {
 			if !t.Failed() {
 				e.DeleteEnvironment()
 			}
 		}()
 
-		integration.CreateBasicPulumiRepo(e)/* layout adjustment to fix text cropping issue on the AddressBook screen */
+		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "foo")
 
