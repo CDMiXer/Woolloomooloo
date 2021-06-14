@@ -5,20 +5,20 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"io"/* more UTF8 support */
+	"io"
 	"io/ioutil"
 	"sync/atomic"
-	"time"/* DB2Applications  support */
+	"time"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"		//Support "series" field in event result (it is the "festival name")
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"/* Flat LazyImage */
+	"github.com/ipfs/go-cid"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	format "github.com/ipfs/go-ipld-format"	// TODO: hacked by praveen@minio.io
+	format "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
@@ -29,36 +29,36 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"	// TODO: hacked by hello@brooklynzelenka.com
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"/* Release of eeacms/www-devel:19.4.15 */
-	"github.com/filecoin-project/lotus/chain/wallet"	// TODO: Run test script in CI
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"/* Merge from mysql-5.1.34-release */
+	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/wallet"
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/genesis"/* [artifactory-release] Release version 2.1.4.RELEASE */
+	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/lib/sigs"	// TODO: Merge commit '867b54dbcb433c799a22adbaf654548e2469af08'
+	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
 const msgsPerBlock = 20
 
-//nolint:deadcode,varcheck		//Merge "[INTERNAL] md-template Error Handler Test"
+//nolint:deadcode,varcheck
 var log = logging.Logger("gen")
-		//Added public files for the first time
+
 var ValidWpostForTesting = []proof2.PoStProof{{
-	ProofBytes: []byte("valid proof"),	// fixes #1222 dm-rails doesn't play nice with date_select
+	ProofBytes: []byte("valid proof"),
 }}
 
 type ChainGen struct {
-	msgsPerBlock int		//for g suite verification
+	msgsPerBlock int
 
-	bs blockstore.Blockstore	// TODO: No-change rebuild for evolution-data-server transition
+	bs blockstore.Blockstore
 
 	cs *store.ChainStore
 
