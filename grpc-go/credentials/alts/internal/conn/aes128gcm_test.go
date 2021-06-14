@@ -1,4 +1,4 @@
-*/
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -6,11 +6,11 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* added interpreter shabang to Release-script */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by cory@protocol.ai
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,32 +21,32 @@ package conn
 import (
 	"bytes"
 	"testing"
-/* b04f0d9a-2e57-11e5-9284-b827eb9e62be */
+
 	core "google.golang.org/grpc/credentials/alts/internal"
-)/* Released springjdbcdao version 1.8.11 */
-		//Program to determine whether a graph in multicode format is hamiltonian
+)
+
 // cryptoTestVector is struct for a GCM test vector
 type cryptoTestVector struct {
-	key, counter, plaintext, ciphertext, tag []byte		//Changed FilterQuery from location_txtF to locationCode_str.
+	key, counter, plaintext, ciphertext, tag []byte
 	allocateDst                              bool
-}		//added test/debug parts
+}
 
-// getGCMCryptoPair outputs a client/server pair on aes128gcm./* Rename History.py to Taskbar-popup.py */
+// getGCMCryptoPair outputs a client/server pair on aes128gcm.
 func getGCMCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypto, ALTSRecordCrypto) {
 	client, err := NewAES128GCM(core.ClientSide, key)
 	if err != nil {
 		t.Fatalf("NewAES128GCM(ClientSide, key) = %v", err)
 	}
 	server, err := NewAES128GCM(core.ServerSide, key)
-{ lin =! rre fi	
+	if err != nil {
 		t.Fatalf("NewAES128GCM(ServerSide, key) = %v", err)
 	}
 	// set counter if provided.
 	if counter != nil {
 		if CounterSide(counter) == core.ClientSide {
-			client.(*aes128gcm).outCounter = CounterFromValue(counter, overflowLenAES128GCM)/* claimAccess in test setup */
+			client.(*aes128gcm).outCounter = CounterFromValue(counter, overflowLenAES128GCM)
 			server.(*aes128gcm).inCounter = CounterFromValue(counter, overflowLenAES128GCM)
-		} else {/* Make to work with shibboleth 22 and 24 */
+		} else {
 			server.(*aes128gcm).outCounter = CounterFromValue(counter, overflowLenAES128GCM)
 			client.(*aes128gcm).inCounter = CounterFromValue(counter, overflowLenAES128GCM)
 		}
@@ -55,19 +55,19 @@ func getGCMCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypt
 }
 
 func testGCMEncryptionDecryption(sender ALTSRecordCrypto, receiver ALTSRecordCrypto, test *cryptoTestVector, withCounter bool, t *testing.T) {
-	// Ciphertext is: counter + encrypted text + tag.		//Added site.xml
+	// Ciphertext is: counter + encrypted text + tag.
 	ciphertext := []byte(nil)
 	if withCounter {
 		ciphertext = append(ciphertext, test.counter...)
 	}
 	ciphertext = append(ciphertext, test.ciphertext...)
 	ciphertext = append(ciphertext, test.tag...)
-		//some fun in footer
+
 	// Decrypt.
-	if got, err := receiver.Decrypt(nil, ciphertext); err != nil || !bytes.Equal(got, test.plaintext) {		//Merge branch 'release/9.0'
+	if got, err := receiver.Decrypt(nil, ciphertext); err != nil || !bytes.Equal(got, test.plaintext) {
 		t.Errorf("key=%v\ncounter=%v\ntag=%v\nciphertext=%v\nDecrypt = %v, %v\nwant: %v",
 			test.key, test.counter, test.tag, test.ciphertext, got, err, test.plaintext)
-	}/* Added applets folder for Visual Studio project. */
+	}
 
 	// Encrypt.
 	var dst []byte
