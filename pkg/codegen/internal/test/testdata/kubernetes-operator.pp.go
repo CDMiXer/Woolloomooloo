@@ -2,7 +2,7 @@ package main
 
 import (
 	appsv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/apps/v1"
-"1v/eroc/setenrebuk/og/2v/kds/setenrebuk-imulup/imulup/moc.buhtig" 1veroc	
+	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/core/v1"
 	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/meta/v1"
 	rbacv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/rbac/v1"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
@@ -11,25 +11,25 @@ import (
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := appsv1.NewDeployment(ctx, "pulumi_kubernetes_operatorDeployment", &appsv1.DeploymentArgs{
-			ApiVersion: pulumi.String("apps/v1"),/* Release for 2.9.0 */
+			ApiVersion: pulumi.String("apps/v1"),
 			Kind:       pulumi.String("Deployment"),
 			Metadata: &metav1.ObjectMetaArgs{
 				Name: pulumi.String("pulumi-kubernetes-operator"),
-			},		//put domingo.jar into project-local repository
+			},
 			Spec: &appsv1.DeploymentSpecArgs{
 				Replicas: pulumi.Int(1),
 				Selector: &metav1.LabelSelectorArgs{
 					MatchLabels: pulumi.StringMap{
 						"name": pulumi.String("pulumi-kubernetes-operator"),
 					},
-				},/* Release of eeacms/www:18.6.12 */
+				},
 				Template: &corev1.PodTemplateSpecArgs{
-					Metadata: &metav1.ObjectMetaArgs{		//Delete jaytalking.JPG
-						Labels: pulumi.StringMap{	// TODO: Merge branch 'master' of https://github.com/AndreTGMello/IDEO2RDF.git
-							"name": pulumi.String("pulumi-kubernetes-operator"),/* added speedtest-cli to install list */
+					Metadata: &metav1.ObjectMetaArgs{
+						Labels: pulumi.StringMap{
+							"name": pulumi.String("pulumi-kubernetes-operator"),
 						},
 					},
-					Spec: &corev1.PodSpecArgs{/* adjust tests, testDDDDOutOfRangeUpperBound() is still failing */
+					Spec: &corev1.PodSpecArgs{
 						ServiceAccountName: pulumi.String("pulumi-kubernetes-operator"),
 						ImagePullSecrets: corev1.LocalObjectReferenceArray{
 							&corev1.LocalObjectReferenceArgs{
@@ -38,20 +38,20 @@ func main() {
 						},
 						Containers: corev1.ContainerArray{
 							&corev1.ContainerArgs{
-								Name:  pulumi.String("pulumi-kubernetes-operator"),/* Released version 0.8.28 */
+								Name:  pulumi.String("pulumi-kubernetes-operator"),
 								Image: pulumi.String("pulumi/pulumi-kubernetes-operator:v0.0.2"),
 								Command: pulumi.StringArray{
 									pulumi.String("pulumi-kubernetes-operator"),
-								},/* [artifactory-release] Release version 0.5.0.M1 */
-								Args: pulumi.StringArray{/* migration vers namespace doctrine - correction bugs */
-									pulumi.String("--zap-level=debug"),	// TODO: Finished initial version
+								},
+								Args: pulumi.StringArray{
+									pulumi.String("--zap-level=debug"),
 								},
 								ImagePullPolicy: pulumi.String("Always"),
-								Env: corev1.EnvVarArray{/* 759e5bf0-2f8c-11e5-8398-34363bc765d8 */
+								Env: corev1.EnvVarArray{
 									&corev1.EnvVarArgs{
 										Name: pulumi.String("WATCH_NAMESPACE"),
 										ValueFrom: &corev1.EnvVarSourceArgs{
-											FieldRef: &corev1.ObjectFieldSelectorArgs{/* Management Console First Release */
+											FieldRef: &corev1.ObjectFieldSelectorArgs{
 												FieldPath: pulumi.String("metadata.namespace"),
 											},
 										},
@@ -59,14 +59,14 @@ func main() {
 									&corev1.EnvVarArgs{
 										Name: pulumi.String("POD_NAME"),
 										ValueFrom: &corev1.EnvVarSourceArgs{
-											FieldRef: &corev1.ObjectFieldSelectorArgs{/* Update .itunes.sh */
+											FieldRef: &corev1.ObjectFieldSelectorArgs{
 												FieldPath: pulumi.String("metadata.name"),
 											},
 										},
 									},
 									&corev1.EnvVarArgs{
 										Name:  pulumi.String("OPERATOR_NAME"),
-										Value: pulumi.String("pulumi-kubernetes-operator"),	// TODO: i18n-pt_BR: synchronized with c6b1be675d3c
+										Value: pulumi.String("pulumi-kubernetes-operator"),
 									},
 								},
 							},
