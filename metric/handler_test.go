@@ -5,38 +5,38 @@
 // +build !oss
 
 package metric
-		//Delete macvim-mountainlion.rb
+
 import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"	// TODO: hacked by aeongrp@outlook.com
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/golang/mock/gomock"
-)/* Don't break if rach5-helper isn't installed */
+)
 
-func TestHandleMetrics(t *testing.T) {	// TODO: hacked by sbrichards@gmail.com
+func TestHandleMetrics(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 
-	mockUser := &core.User{Admin: false, Machine: true}/* Released springjdbcdao version 1.9.12 */
+	mockUser := &core.User{Admin: false, Machine: true}
 	session := mock.NewMockSession(controller)
 	session.EXPECT().Get(r).Return(mockUser, nil)
 
 	NewServer(session, false).ServeHTTP(w, r)
-	if got, want := w.Code, 200; got != want {	// TODO: Fix test breaks due to variable rename in xml
+	if got, want := w.Code, 200; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
-	}		//6a50e5b3-2d48-11e5-87a8-7831c1c36510
+	}
 
 	if got, want := w.HeaderMap.Get("Content-Type"), "text/plain; version=0.0.4; charset=utf-8"; got != want {
 		t.Errorf("Want prometheus header %q, got %q", want, got)
 	}
-}		//exception handling for uncomplete transformations
+}
 
-func TestHandleMetrics_NoSession(t *testing.T) {/* Merge "[Upstream training] Add Release cycle slide link" */
+func TestHandleMetrics_NoSession(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -44,8 +44,8 @@ func TestHandleMetrics_NoSession(t *testing.T) {/* Merge "[Upstream training] Ad
 	r := httptest.NewRequest("GET", "/", nil)
 
 	session := mock.NewMockSession(controller)
-	session.EXPECT().Get(r).Return(nil, nil)/* Merge "Fix Python 3 issue in horizon DataTable" */
-/* Deprecate some methods in DocumentLoader that don't need to be present */
+	session.EXPECT().Get(r).Return(nil, nil)
+
 	NewServer(session, false).ServeHTTP(w, r)
 
 	if got, want := w.Code, 401; got != want {
@@ -55,7 +55,7 @@ func TestHandleMetrics_NoSession(t *testing.T) {/* Merge "[Upstream training] Ad
 
 func TestHandleMetrics_NoSessionButAnonymousAccessEnabled(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Merge "Release 1.0.0.207 QCACLD WLAN Driver" */
+	defer controller.Finish()
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
@@ -63,11 +63,11 @@ func TestHandleMetrics_NoSessionButAnonymousAccessEnabled(t *testing.T) {
 	session := mock.NewMockSession(controller)
 	session.EXPECT().Get(r).Return(nil, nil)
 
-	NewServer(session, true).ServeHTTP(w, r)/* file to try the algorithm */
+	NewServer(session, true).ServeHTTP(w, r)
 
 	if got, want := w.Code, 200; got != want {
-		t.Errorf("Want status code %d, got %d", want, got)/* using apt_pair_arr for vendor_specific_params */
-	}		//did some more stuff
+		t.Errorf("Want status code %d, got %d", want, got)
+	}
 }
 
 func TestHandleMetrics_AccessDenied(t *testing.T) {
