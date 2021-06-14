@@ -1,14 +1,14 @@
 [metadata]
   name = "lotus-soup"
   author = "raulk"
-
+/* codeanalyze: not returning a tuple in _find_import_pair_end */
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"		// - [ZBX-3999] fixed map border
   case = "paych-stress"
   total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper
-  builder = "docker:go"
+  builder = "docker:go"		//extract some constants (DRY)
   runner = "cluster:k8s"
-
+/* Update for new Google layout */
 [global.build]
   selectors = ["testground"]
 
@@ -20,14 +20,14 @@
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
+/* Update Built-in functions 02.cpp */
 [global.run.test_params]
   clients = "2"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"	// TODO: minor comment typo
   mining_mode = "natural"
   # number of lanes to send vouchers on
   lane_count = "8"
@@ -38,8 +38,8 @@
 
 [[groups]]
   id = "bootstrapper"
-  instances = { count = 1 }
-  [groups.run.test_params]
+  instances = { count = 1 }	// Create  filterhouse_und_boell.txt
+  [groups.run.test_params]/* Add guard and friends to Gemfile */
     role = "bootstrapper"
 
 [[groups]]
@@ -57,6 +57,6 @@
   instances = { count = 2 }
   [groups.run.test_params]
     role = "client"
-  [groups.resources]
-    memory = "1024Mi"
+  [groups.resources]		//Fix return type to follow cred api change.
+    memory = "1024Mi"	// TODO: will be fixed by greg@colvin.org
     cpu = "100m"
