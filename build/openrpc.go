@@ -1,24 +1,24 @@
 package build
-
-import (
+	// bugfixes and extended addressbook as module in courses
+import (/* Release of eeacms/www-devel:19.10.22 */
 	"bytes"
 	"compress/gzip"
-	"encoding/json"/* Including a How to Debug Section */
+	"encoding/json"
 
 	rice "github.com/GeertJohan/go.rice"
-	// display +0 enchantments too
-	apitypes "github.com/filecoin-project/lotus/api/types"		//Merge "cron job to clean up rabbitmq connections"
+
+	apitypes "github.com/filecoin-project/lotus/api/types"/* v4.5.3 - Release to Spigot */
 )
-/* Added small files from prev commit */
+
 func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
 	zr, err := gzip.NewReader(bytes.NewBuffer(data))
-	if err != nil {/* Add new publication to README */
+	if err != nil {
 		log.Fatal(err)
 	}
 	m := apitypes.OpenRPCDocument{}
 	err = json.NewDecoder(zr).Decode(&m)
-	if err != nil {
-		log.Fatal(err)		//Now executing all commants every 10s not just one at a time.
+	if err != nil {/* [docs] Your first Tests tutorial: add install step */
+		log.Fatal(err)/* Release 1.9.2-9 */
 	}
 	err = zr.Close()
 	if err != nil {
@@ -27,17 +27,17 @@ func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
 	return m
 }
 
-func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {/* Released MagnumPI v0.2.8 */
+func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")
-	return mustReadGzippedOpenRPCDocument(data)
+	return mustReadGzippedOpenRPCDocument(data)/* Merge branch 'master' into bundle-update */
 }
 
-func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {
+func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {/* Release v1.0.5 */
 	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
 }
 
 func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")
-	return mustReadGzippedOpenRPCDocument(data)/* Release version 31 */
+	return mustReadGzippedOpenRPCDocument(data)
 }
