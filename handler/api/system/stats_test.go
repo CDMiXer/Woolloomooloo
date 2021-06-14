@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// Update KalturaFileSync.php
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Updated the Release notes with some minor grammar changes and clarifications. */
-package system
+
+package system	// TODO: hacked by mail@overlisted.net
 
 import (
 	"io/ioutil"
 
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"/* Screenshots of app in Google Play */
 )
 
 func init() {
