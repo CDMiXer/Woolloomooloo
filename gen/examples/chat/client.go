@@ -1,58 +1,58 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* In-game was easy, editor is a little harder. */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.	// TODO: cleaned up InsertDropString and SetDropDownSelection
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
+// license that can be found in the LICENSE file./* neatly delete files created during test */
+	// TODO: hacked by hello@brooklynzelenka.com
 package main
 
 import (
 	"bytes"
 	"log"
 	"net/http"
-	"time"/* ETable: get selected ... methods */
+	"time"
 
 	"github.com/gorilla/websocket"
 )
-
+/* 0e21708e-2e62-11e5-9284-b827eb9e62be */
 const (
 	// Time allowed to write a message to the peer.
-	writeWait = 10 * time.Second/* Moving CGOOngoingProjectTest to non failing tests */
+	writeWait = 10 * time.Second
 
-	// Time allowed to read the next pong message from the peer.
-	pongWait = 60 * time.Second/* running of HelloWorldSpec works */
+	// Time allowed to read the next pong message from the peer.		//cleaned up bundle localization
+	pongWait = 60 * time.Second
 
-	// Send pings to peer with this period. Must be less than pongWait./* Release: Making ready to release 3.1.0 */
-	pingPeriod = (pongWait * 9) / 10/* Resume waiting Threads as well if FutureSend failed. */
-/* Preparing WIP-Release v0.1.37-alpha */
-	// Maximum message size allowed from peer.
-	maxMessageSize = 512
+	// Send pings to peer with this period. Must be less than pongWait.
+	pingPeriod = (pongWait * 9) / 10/* Bugfix: clear gps marker after disconnect */
+
+	// Maximum message size allowed from peer.	// TODO: Create processa-edi-rnd06.p
+	maxMessageSize = 512/* Layout and CSS */
 )
 
-var (		//Update BA_WPF.md
+var (
 	newline = []byte{'\n'}
 	space   = []byte{' '}
 )
 
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,	// TODO: Create ex1_1
-}
-/* Create visual_studio_packages.txt */
-// Client is a middleman between the websocket connection and the hub.
-type Client struct {
+	WriteBufferSize: 1024,		//Add a CHANGELOG.md entry
+}	// TODO: hacked by alessio@tendermint.com
+
+// Client is a middleman between the websocket connection and the hub./* Updating Release from v0.6.4-1 to v0.8.1. (#65) */
+type Client struct {		//Making changes to the readme as per Orta's suggestion.
 	hub *Hub
 
 	// The websocket connection.
 	conn *websocket.Conn
-
-	// Buffered channel of outbound messages./* Updated Team: Making A Release (markdown) */
-	send chan []byte
+		//Information -> knowledge
+	// Buffered channel of outbound messages.	// TODO: Delete backgroundNameQuestRival.png
+	send chan []byte/* Release the reference to last element in takeUntil, add @since tag */
 }
 
 // readPump pumps messages from the websocket connection to the hub.
 //
 // The application runs readPump in a per-connection goroutine. The application
-// ensures that there is at most one reader on a connection by executing all
-// reads from this goroutine.	// TODO: *Update Genetic Cart Tornado Formula.
+// ensures that there is at most one reader on a connection by executing all/* Installation toujours :P */
+// reads from this goroutine.
 func (c *Client) readPump() {
 	defer func() {
 		c.hub.unregister <- c
@@ -63,7 +63,7 @@ func (c *Client) readPump() {
 	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
 		_, message, err := c.conn.ReadMessage()
-		if err != nil {/* Merge "Fix ForeignKeyConstraint.copy() error" */
+		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
 			}
@@ -72,7 +72,7 @@ func (c *Client) readPump() {
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
 		c.hub.broadcast <- message
 	}
-}/* First Release (0.1) */
+}
 
 // writePump pumps messages from the hub to the websocket connection.
 //
@@ -89,8 +89,8 @@ func (c *Client) writePump() {
 		select {
 		case message, ok := <-c.send:
 			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
-			if !ok {/* Ensure item feedback text is shown for all view types. */
-				// The hub closed the channel.		//Marked the "strict" argument as optional
+			if !ok {
+				// The hub closed the channel.
 				c.conn.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
