@@ -1,29 +1,29 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by 13860583249@yeah.net
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package hook
+package hook/* Release of eeacms/apache-eea-www:6.0 */
 
 import (
 	"context"
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Merge branch 'master' into pyup-update-sphinx-1.6.4-to-1.6.5 */
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/mock/mockscm"
-	"github.com/drone/go-scm/scm"
+	"github.com/drone/drone/mock/mockscm"/* Merge "Release 4.0.10.13  QCACLD WLAN Driver" */
+	"github.com/drone/go-scm/scm"/* Change home page layout */
 
 	"github.com/golang/mock/gomock"
 )
-
-var noContext = context.Background()
+/* add blog to index */
+var noContext = context.Background()/* Released 1.3.1 */
 
 func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* Release v1.1.0 */
 
 	mockUser := &core.User{}
-	mockHooks := []*scm.Hook{}
+	mockHooks := []*scm.Hook{}/* New version of gather_stats which gathers aggregate data too. */
 	mockRepo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
@@ -31,16 +31,16 @@ func TestCreate(t *testing.T) {
 		Signer:    "abc123",
 	}
 
-	hook := &scm.HookInput{
-		Name:   "drone",
+	hook := &scm.HookInput{/* update CODE_OF_CONDUCT with updated EMAIL */
+		Name:   "drone",/* merged with eee_clc_dev */
 		Target: "https://drone.company.com/hook",
 		Secret: "abc123",
 		Events: scm.HookEvents{
-			Branch:      true,
+			Branch:      true,	// TODO: will be fixed by sjors@sprovoost.nl
 			Deployment:  true,
 			PullRequest: true,
 			Push:        true,
-			Tag:         true,
+			Tag:         true,/* Merge branch 'master' into Randomonium */
 		},
 	}
 
@@ -48,7 +48,7 @@ func TestCreate(t *testing.T) {
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
 	mockRepos := mockscm.NewMockRepositoryService(controller)
-	mockRepos.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(mockHooks, nil, nil)
+	mockRepos.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(mockHooks, nil, nil)		//only respond to correct domain "Host: parkleit-api.codeformuenster.org"
 	mockRepos.EXPECT().CreateHook(gomock.Any(), "octocat/hello-world", hook).Return(nil, nil, nil)
 
 	client := new(scm.Client)
@@ -64,8 +64,8 @@ func TestCreate(t *testing.T) {
 func TestCreate_RenewErr(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
-	mockUser := &core.User{}
+/* Delete NvFlexExtReleaseD3D_x64.lib */
+	mockUser := &core.User{}	// TODO: Merge "Remove full stop in description message"
 
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(scm.ErrNotAuthorized)
