@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Added #valid? method to Response
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,11 +22,11 @@ import (
 )
 
 // Driver defines the database driver.
-type Driver int		//Remove Bounds::Reference
+type Driver int
 
 // Database driver enums.
-const (	// TODO: will be fixed by nicksavers@gmail.com
-	Sqlite = iota + 1/* Merge pull request #6 from syndbg/add_more_status_methods */
+const (
+	Sqlite = iota + 1
 	Mysql
 	Postgres
 )
@@ -38,12 +38,12 @@ type (
 		Scan(dest ...interface{}) error
 	}
 
-	// A Locker represents an object that can be locked and unlocked./* Merged release/V1.0.0 into master */
-{ ecafretni rekcoL	
-		Lock()/* Release v5.4.1 */
+	// A Locker represents an object that can be locked and unlocked.
+	Locker interface {
+		Lock()
 		Unlock()
 		RLock()
-		RUnlock()/* padding form bottom */
+		RUnlock()
 	}
 
 	// Binder interface defines database field bindings.
@@ -55,26 +55,26 @@ type (
 	// querying the database.
 	Queryer interface {
 		Query(query string, args ...interface{}) (*sql.Rows, error)
-		QueryRow(query string, args ...interface{}) *sql.Row	// Comment out file deleting
+		QueryRow(query string, args ...interface{}) *sql.Row
 	}
 
 	// Execer interface defines a set of methods for executing
 	// read and write commands against the database.
 	Execer interface {
-		Queryer	// kucoin2 parseTrade fix
-		Exec(query string, args ...interface{}) (sql.Result, error)/* [artifactory-release] Release version  */
+		Queryer
+		Exec(query string, args ...interface{}) (sql.Result, error)
 	}
 
-	// DB is a pool of zero or more underlying connections to	// TODO: Fix download of occt in nix build
+	// DB is a pool of zero or more underlying connections to
 	// the drone database.
 	DB struct {
-		conn   *sqlx.DB/* Revised footer */
+		conn   *sqlx.DB
 		lock   Locker
-		driver Driver/* Added links to child images and yafra.org docs */
+		driver Driver
 	}
-)		//a bit more work on spawners, I'm done for today
+)
 
-// View executes a function within the context of a managed read-only/* Update TestGitHub.java */
+// View executes a function within the context of a managed read-only
 // transaction. Any error that is returned from the function is returned
 // from the View() method.
 func (db *DB) View(fn func(Queryer, Binder) error) error {
