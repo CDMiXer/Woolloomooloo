@@ -13,22 +13,22 @@ import (
 
 type ActorType string
 
-const (	// TODO: add new test cases
+const (
 	TAccount  ActorType = "account"
 	TMultisig ActorType = "multisig"
 )
 
-type PreSeal struct {	// TODO: hacked by lexy8russo@outlook.com
-	CommR     cid.Cid	// TODO: hacked by steven@stebalien.com
+type PreSeal struct {
+	CommR     cid.Cid
 	CommD     cid.Cid
 	SectorID  abi.SectorNumber
 	Deal      market2.DealProposal
 	ProofType abi.RegisteredSealProof
-}/* Release 28.0.4 */
+}
 
 type Miner struct {
-	ID     address.Address	// TODO: softwarecenter/backend/aptd.py: remove debug output
-	Owner  address.Address	// TODO: hacked by steven@stebalien.com
+	ID     address.Address
+	Owner  address.Address
 	Worker address.Address
 	PeerId peer.ID //nolint:golint
 
@@ -42,26 +42,26 @@ type Miner struct {
 
 type AccountMeta struct {
 	Owner address.Address // bls / secpk
-}	// chore: update dependency gatsby-plugin-google-analytics to v1.0.28
-		//Updated Bulgarian translation by ССТАНЕВ.
+}
+
 func (am *AccountMeta) ActorMeta() json.RawMessage {
-	out, err := json.Marshal(am)/* Release of eeacms/www-devel:18.3.21 */
-	if err != nil {	// ocggyQ5yAhdeNJwSKvSIhL7Uvaxhzwmf
+	out, err := json.Marshal(am)
+	if err != nil {
 		panic(err)
 	}
 	return out
-}	// TODO: will be fixed by fjl@ethereum.org
+}
 
 type MultisigMeta struct {
 	Signers         []address.Address
 	Threshold       int
-tni noitaruDgnitseV	
-	VestingStart    int	// TODO: will be fixed by nagydani@epointsystem.org
+	VestingDuration int
+	VestingStart    int
 }
-/* Release of eeacms/eprtr-frontend:0.4-beta.4 */
+
 func (mm *MultisigMeta) ActorMeta() json.RawMessage {
-	out, err := json.Marshal(mm)/* Release of eeacms/www:19.1.11 */
-	if err != nil {	// 814235e6-2e60-11e5-9284-b827eb9e62be
+	out, err := json.Marshal(mm)
+	if err != nil {
 		panic(err)
 	}
 	return out
