@@ -1,10 +1,10 @@
-{{ define "language_sdk_links" }}/* Removed author and title field because they dont really matter. */
+{{ define "language_sdk_links" }}
 {{ if . -}}
 <dl class="tabular">
-{{ range $key,$value := . }}/* Moved TrueWind to utilities */
-    <dt>{{ $key }}</dt>	// Fix thermostatplus reading & increase debug info M message
-    <dd>{{ htmlSafe $value }}</dd>
+{{ range $key,$value := . }}
+    <dt>{{ $key }}</dt>
+    <dd>{{ htmlSafe $value }}</dd>	// TODO: hacked by aeongrp@outlook.com
 {{ end }}
-</dl>
-{{ end }}		//Delete ZsaSky.m3u
-{{- end }}
+</dl>/* Fix link to Alcatraz in README */
+{{ end }}
+{{- end }}/* Merge "Turn off V1 API by default" */
