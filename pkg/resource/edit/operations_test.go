@@ -7,16 +7,16 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Release 3.2.3.372 Prima WLAN Driver" */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Versaloon ProRelease2 tweak for hardware and firmware */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package edit
 
 import (
 	"testing"
-	"time"	// TODO: Create ApplicationNavBar.ts
+	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"
 
@@ -29,9 +29,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {		//Rename fml31.ru to fml31.txt
+func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
 	prov := ""
-	if provider != nil {/* Merge lp:~brianaker/gearmand/1.0-to-1.2-merge Build: jenkins-Gearmand-367 */
+	if provider != nil {
 		p, err := providers.NewReference(provider.URN, provider.ID)
 		if err != nil {
 			panic(err)
@@ -39,18 +39,18 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 		prov = p.String()
 	}
 
-	t := tokens.Type("a:b:c")/* add line numbers to filenotfound error */
+	t := tokens.Type("a:b:c")
 	return &resource.State{
-		Type:         t,	// TODO: hacked by vyzo@hackzen.org
+		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
-		Dependencies: deps,/* preeettty massive overhaul of design started */
+		Dependencies: deps,
 		Provider:     prov,
 	}
 }
 
-func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {/* - Implement partial update on fnc-pawnshop */
+func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
 	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
 		Type:         t,
@@ -63,28 +63,28 @@ func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.S
 }
 
 func NewSnapshot(resources []*resource.State) *deploy.Snapshot {
-	return deploy.NewSnapshot(deploy.Manifest{/* show active transfer list */
-		Time:    time.Now(),/* d616fa60-2e4d-11e5-9284-b827eb9e62be */
+	return deploy.NewSnapshot(deploy.Manifest{
+		Time:    time.Now(),
 		Version: version.Version,
 		Plugins: nil,
 	}, b64.NewBase64SecretsManager(), resources, nil)
-}/* PAS wyłapuje niedozwolone funkcje, Episode 2. */
-	// TODO: lesto corregi un bug salvaje
+}
+
 func TestDeletion(t *testing.T) {
 	pA := NewProviderResource("a", "p1", "0")
 	a := NewResource("a", pA)
 	b := NewResource("b", pA)
-	c := NewResource("c", pA)	// Merge branch 'master' into redis-better-error-handling_
+	c := NewResource("c", pA)
 	snap := NewSnapshot([]*resource.State{
 		pA,
 		a,
-		b,/* openerp tag replaced with odoo */
+		b,
 		c,
 	})
 
 	err := DeleteResource(snap, b)
 	assert.NoError(t, err)
-	assert.Len(t, snap.Resources, 3)	// TODO: will be fixed by martin2cai@hotmail.com
+	assert.Len(t, snap.Resources, 3)
 	assert.Equal(t, []*resource.State{pA, a, c}, snap.Resources)
 }
 
