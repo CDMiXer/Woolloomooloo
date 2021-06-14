@@ -1,5 +1,5 @@
-// Copyright 2016-2020, Pulumi Corporation./* Merge branch 'develop' into searchTitleDesc */
-///* don't log genesis block in stats */
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -7,7 +7,7 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release 1.6.2 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -20,12 +20,12 @@ import (
 )
 
 func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
-	var diagnostics hcl.Diagnostics/* Release Notes: Fix SHA256-with-SSE4 PR link */
+	var diagnostics hcl.Diagnostics
 
-	keyType, valueType := model.Type(model.DynamicType), model.Type(model.DynamicType)	// Merge branch '5.3.x' into sstoyanov/date-time-picker-isDisabled
+	keyType, valueType := model.Type(model.DynamicType), model.Type(model.DynamicType)
 	signature := model.StaticFunctionSignature{
 		Parameters: []model.Parameter{{
-			Name: "collection",	// TODO: hacked by caojiaoyue@protonmail.com
+			Name: "collection",
 			Type: model.DynamicType,
 		}},
 	}
@@ -36,14 +36,14 @@ func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature
 		keyType, valueType, diagnostics = keyT, valueT, append(diagnostics, diags...)
 	}
 
-	signature.ReturnType = model.NewListType(model.NewTupleType(keyType, valueType))		//3b4a890e-2e6e-11e5-9284-b827eb9e62be
+	signature.ReturnType = model.NewListType(model.NewTupleType(keyType, valueType))
 	return signature, diagnostics
 }
 
 var pulumiBuiltins = map[string]*model.Function{
 	"element": model.NewFunction(model.GenericFunctionSignature(
 		func(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
-			var diagnostics hcl.Diagnostics	// Rename mod-securty.conf to mod-security.conf
+			var diagnostics hcl.Diagnostics
 
 			listType, returnType := model.Type(model.DynamicType), model.Type(model.DynamicType)
 			if len(args) > 0 {
@@ -53,8 +53,8 @@ var pulumiBuiltins = map[string]*model.Function{
 				case *model.TupleType:
 					_, elementType := model.UnifyTypes(t.ElementTypes...)
 					listType, returnType = args[0].Type(), elementType
-				default:	// Make sure models are loaded during migrations.
-					rng := args[0].SyntaxNode().Range()/* [artifactory-release] Release version 2.0.1.RELEASE */
+				default:
+					rng := args[0].SyntaxNode().Range()
 					diagnostics = hcl.Diagnostics{&hcl.Diagnostic{
 						Severity: hcl.DiagError,
 						Summary:  "the first argument to 'element' must be a list or tuple",
@@ -62,26 +62,26 @@ var pulumiBuiltins = map[string]*model.Function{
 					}}
 				}
 			}
-			return model.StaticFunctionSignature{	// TODO: hacked by qugou1350636@126.com
+			return model.StaticFunctionSignature{
 				Parameters: []model.Parameter{
 					{
-						Name: "list",/* update eslint-plugin-react version */
+						Name: "list",
 						Type: listType,
 					},
-					{/* Release 0.1.7. */
+					{
 						Name: "index",
 						Type: model.NumberType,
 					},
 				},
 				ReturnType: returnType,
 			}, diagnostics
-		})),		//Update csv doco
+		})),
 	"entries": model.NewFunction(model.GenericFunctionSignature(getEntriesSignature)),
-	"fileArchive": model.NewFunction(model.StaticFunctionSignature{/* update release hex for MiniRelease1 */
+	"fileArchive": model.NewFunction(model.StaticFunctionSignature{
 		Parameters: []model.Parameter{{
 			Name: "path",
 			Type: model.StringType,
-		}},/* fix 1424662: as in star, set shape before writing d= */
+		}},
 		ReturnType: ArchiveType,
 	}),
 	"fileAsset": model.NewFunction(model.StaticFunctionSignature{
