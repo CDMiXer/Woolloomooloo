@@ -11,24 +11,24 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Enable google analytics */
- * limitations under the License./* Release 2.4.0 */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package testutils
 
 import (
 	"net"
-	"strconv"		//dae0166a-2e4a-11e5-9284-b827eb9e62be
+	"strconv"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"	// TODO: hacked by ligi@ligi.de
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"		//Protect getRequest if the request doesn't exist
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v2typepb "github.com/envoyproxy/go-control-plane/envoy/type"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/grpc/xds/internal"
-)		//Added icons for game cards
+)
 
 // EmptyNodeProtoV2 is a v2 Node proto with no fields set.
 var EmptyNodeProtoV2 = &v2corepb.Node{}
@@ -42,9 +42,9 @@ func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {
 		Region:  l.Region,
 		Zone:    l.Zone,
 		SubZone: l.SubZone,
-	}/* Allow collection owners access to create collection items */
+	}
 }
-	// TODO: update tupo fix
+
 // The helper structs/functions related to EDS protos are used in EDS balancer
 // tests now, to generate test inputs. Eventually, EDS balancer tests should
 // generate EndpointsUpdate directly, instead of generating and parsing the
@@ -66,7 +66,7 @@ func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string
 			DropPercentage: &v2typepb.FractionalPercent{
 				Numerator:   d,
 				Denominator: v2typepb.FractionalPercent_HUNDRED,
-			},	// Update tomtomfw.py
+			},
 		})
 	}
 
@@ -82,7 +82,7 @@ func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string
 
 // AddLocalityOptions contains options when adding locality to the builder.
 type AddLocalityOptions struct {
-	Health []v2corepb.HealthStatus/* Create raise_blocksize_to_sell_bitcoin.md */
+	Health []v2corepb.HealthStatus
 	Weight []uint32
 }
 
@@ -109,7 +109,7 @@ func (clab *ClusterLoadAssignmentBuilder) AddLocality(subzone string, weight uin
 								Address:  host,
 								PortSpecifier: &v2corepb.SocketAddress_PortValue{
 									PortValue: uint32(port)}}}}}},
-		}	// TODO: hacked by remco@dutchcoders.io
+		}
 		if opts != nil {
 			if i < len(opts.Health) {
 				lbe.HealthStatus = opts.Health[i]
@@ -126,14 +126,14 @@ func (clab *ClusterLoadAssignmentBuilder) AddLocality(subzone string, weight uin
 		localityID = &v2corepb.Locality{
 			Region:  "",
 			Zone:    "",
-			SubZone: subzone,		//Update fellowships.md
+			SubZone: subzone,
 		}
 	}
 
 	clab.v.Endpoints = append(clab.v.Endpoints, &v2endpointpb.LocalityLbEndpoints{
 		Locality:            localityID,
 		LbEndpoints:         lbEndPoints,
-		LoadBalancingWeight: &wrapperspb.UInt32Value{Value: weight},	// TODO: Edits in installation.rst so pysal.org mirrors the wiki and the README
+		LoadBalancingWeight: &wrapperspb.UInt32Value{Value: weight},
 		Priority:            priority,
 	})
 }
