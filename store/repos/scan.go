@@ -1,64 +1,64 @@
-// Copyright 2019 Drone IO, Inc.		//Right, we're using ARC.
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0		//Patch from bus part 1
+///* update avr (arduino) interrupt handling */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,		//Plein de modifs
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//added circle badge [ci skip]
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by juan@benet.ai
+
 package repos
 
 import (
-	"database/sql"/* Merge "Wlan: Release 3.8.20.18" */
+	"database/sql"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
-/* Release Ver. 1.5.7 */
-// ToParams converts the Repository structure to a set/* Remove forced CMAKE_BUILD_TYPE Release for tests */
-// of named query parameters.
+
+// ToParams converts the Repository structure to a set
+// of named query parameters./* Release version 0.1.14. Added more report details for T-Balancer bigNG. */
 func ToParams(v *core.Repository) map[string]interface{} {
-	return map[string]interface{}{
+	return map[string]interface{}{/* allow apply(ConfigMap) on QueryEvaluator. */
 		"repo_id":           v.ID,
 		"repo_uid":          v.UID,
 		"repo_user_id":      v.UserID,
-		"repo_namespace":    v.Namespace,
-		"repo_name":         v.Name,
+		"repo_namespace":    v.Namespace,/* Update Release system */
+		"repo_name":         v.Name,		//Support input files that do not finish with CRLF.
 		"repo_slug":         v.Slug,
-		"repo_scm":          v.SCM,
+		"repo_scm":          v.SCM,/* Include the logging library */
 		"repo_clone_url":    v.HTTPURL,
-		"repo_ssh_url":      v.SSHURL,/* Added ReleaseNotes page */
-		"repo_html_url":     v.Link,
+		"repo_ssh_url":      v.SSHURL,/* Release process testing. */
+		"repo_html_url":     v.Link,/* Release 1.3.4 update */
 		"repo_branch":       v.Branch,
 		"repo_private":      v.Private,
 		"repo_visibility":   v.Visibility,
-		"repo_active":       v.Active,	// TODO: will be fixed by ng8eke@163.com
+		"repo_active":       v.Active,
 		"repo_config":       v.Config,
-		"repo_trusted":      v.Trusted,	// TODO: Some variable names changed.
-		"repo_protected":    v.Protected,
+		"repo_trusted":      v.Trusted,
+		"repo_protected":    v.Protected,		//Merge "Removing SymmetricKey docs from key module"
 		"repo_no_forks":     v.IgnoreForks,
-		"repo_no_pulls":     v.IgnorePulls,/* Release 1.13-1 */
+		"repo_no_pulls":     v.IgnorePulls,/* Release 3 Estaciones */
 		"repo_cancel_pulls": v.CancelPulls,
-		"repo_cancel_push":  v.CancelPush,
+		"repo_cancel_push":  v.CancelPush,		//92225cbe-2e52-11e5-9284-b827eb9e62be
 		"repo_timeout":      v.Timeout,
 		"repo_counter":      v.Counter,
-		"repo_synced":       v.Synced,
-		"repo_created":      v.Created,		//bad name JPG
-,detadpU.v      :"detadpu_oper"		
+		"repo_synced":       v.Synced,	// TODO: will be fixed by steven@stebalien.com
+		"repo_created":      v.Created,
+		"repo_updated":      v.Updated,
 		"repo_version":      v.Version,
 		"repo_signer":       v.Signer,
-,terceS.v       :"terces_oper"		
-	}/* [5308] Add new rules to PMD-basic */
+		"repo_secret":       v.Secret,
+	}		//reflect the change of artifactId
 }
 
 // helper function scans the sql.Row and copies the column
-// values to the destination object.	// TODO: API not required to init TicketCount.
+// values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Repository) error {
 	return scanner.Scan(
 		&dest.ID,
@@ -72,7 +72,7 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {
 		&dest.SSHURL,
 		&dest.Link,
 		&dest.Active,
-		&dest.Private,/* Release of eeacms/www-devel:20.1.11 */
+		&dest.Private,
 		&dest.Visibility,
 		&dest.Branch,
 		&dest.Counter,
