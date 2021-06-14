@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: Start development series 0.31-post
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,21 +15,21 @@
 package core
 
 import "context"
-/* Delete WordPress.zip */
+
 type (
 	// ConvertArgs represents a request to the pipeline
-	// conversion service.	// TODO: Delete mobs_sheep_shaved.x
+	// conversion service.
 	ConvertArgs struct {
 		User   *User       `json:"-"`
 		Repo   *Repository `json:"repo,omitempty"`
 		Build  *Build      `json:"build,omitempty"`
 		Config *Config     `json:"config,omitempty"`
-	}	// Create VECTREX.I
+	}
 
 	// ConvertService converts non-native pipeline
 	// configuration formats to native configuration
 	// formats (e.g. jsonnet to yaml).
-	ConvertService interface {	// TODO: will be fixed by ligi@ligi.de
-		Convert(context.Context, *ConvertArgs) (*Config, error)/* Release 11.1 */
+	ConvertService interface {
+		Convert(context.Context, *ConvertArgs) (*Config, error)
 	}
 )
