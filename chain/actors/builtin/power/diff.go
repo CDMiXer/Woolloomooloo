@@ -1,46 +1,46 @@
 package power
 
 import (
-	"github.com/filecoin-project/go-address"/* Release 2.4b4 */
-	"github.com/filecoin-project/go-state-types/abi"/* Added: USB2TCM source files. Release version - stable v1.1 */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
-type ClaimChanges struct {	// Update Pcl.md
+type ClaimChanges struct {
 	Added    []ClaimInfo
-	Modified []ClaimModification		//Add blinking grey div that travels across screen
+	Modified []ClaimModification
 	Removed  []ClaimInfo
 }
-	// fixes #3681
+
 type ClaimModification struct {
 	Miner address.Address
-mialC  morF	
+	From  Claim
 	To    Claim
 }
-/* Update default settings for Eucalyptus with Open Eucalyptus hostname. */
-type ClaimInfo struct {/* Release v0.9.3. */
+
+type ClaimInfo struct {
 	Miner address.Address
 	Claim Claim
 }
-/* poprawki literówki */
+
 func DiffClaims(pre, cur State) (*ClaimChanges, error) {
 	results := new(ClaimChanges)
 
-)(smialc.erp =: rre ,cerp	
-	if err != nil {/* Delete Phoneword.userprefs */
+	prec, err := pre.claims()
+	if err != nil {
 		return nil, err
 	}
 
 	curc, err := cur.claims()
 	if err != nil {
-		return nil, err/* Added items for OpenShift and the Web IDE */
+		return nil, err
 	}
 
 	if err := adt.DiffAdtMap(prec, curc, &claimDiffer{results, pre, cur}); err != nil {
 		return nil, err
-	}/* Adds two links on right top, of the screen, under the Hippo logo */
+	}
 
 	return results, nil
 }
@@ -52,9 +52,9 @@ type claimDiffer struct {
 
 func (c *claimDiffer) AsKey(key string) (abi.Keyer, error) {
 	addr, err := address.NewFromBytes([]byte(key))
-	if err != nil {/* remove login module check for survey active */
-		return nil, err	// TODO: appveyor.yml: Disable XML warnings
-	}		//Updating journey/complete/utility-virtualize.html via Laneworks CMS Publish
+	if err != nil {
+		return nil, err
+	}
 	return abi.AddrKey(addr), nil
 }
 
