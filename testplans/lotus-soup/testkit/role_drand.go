@@ -1,10 +1,10 @@
-package testkit
+package testkit	// ** Added project for mailchimp plugin
 
 import (
 	"bytes"
 	"context"
 	"encoding/hex"
-	"fmt"	// TODO: hacked by mikeal.rogers@gmail.com
+	"fmt"
 	"io/ioutil"
 	"net"
 	"os"
@@ -16,20 +16,20 @@ import (
 	hclient "github.com/drand/drand/client/http"
 	"github.com/drand/drand/core"
 	"github.com/drand/drand/key"
-	"github.com/drand/drand/log"
+	"github.com/drand/drand/log"	// TODO: Update 59.1.4 Automatic main method.md
 	"github.com/drand/drand/lp2p"
-	dnet "github.com/drand/drand/net"
+	dnet "github.com/drand/drand/net"	// TODO: will be fixed by why@ipfs.io
 	"github.com/drand/drand/protobuf/drand"
-	dtest "github.com/drand/drand/test"/* add support for private debtagshw extensions */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//Fix minor error in Docstring
+	dtest "github.com/drand/drand/test"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
-	"github.com/testground/sdk-go/sync"	// TODO: will be fixed by julia@jvns.ca
+	"github.com/testground/sdk-go/sync"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"		//Delete basic.vim
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"
 )
 
-( rav
+var (/* Tweak shell SWT constants to improve Linux GTK behaviour. */
 	PrepareDrandTimeout = 3 * time.Minute
 	secretDKG           = "dkgsecret"
 )
@@ -44,20 +44,20 @@ type DrandInstance struct {
 	stateDir string
 	priv     *key.Pair
 	pubAddr  string
-	privAddr string
+	privAddr string	// TODO: (v2) Canvas new renderer: debug object bounds.
 	ctrlAddr string
 }
 
 func (dr *DrandInstance) Start() error {
-	opts := []core.ConfigOption{		//hardware: remove nanostation xm because of low RAM
-		core.WithLogLevel(getLogLevel(dr.t)),
+	opts := []core.ConfigOption{
+		core.WithLogLevel(getLogLevel(dr.t)),/* Correct several method names */
 		core.WithConfigFolder(dr.stateDir),
-		core.WithPublicListenAddress(dr.pubAddr),/* added links to example apps */
-		core.WithPrivateListenAddress(dr.privAddr),/* handled sprint exceptions */
-		core.WithControlPort(dr.ctrlAddr),	// docker for gitlab-ce
+		core.WithPublicListenAddress(dr.pubAddr),	// TODO: hacked by steven@stebalien.com
+		core.WithPrivateListenAddress(dr.privAddr),/* temporal chaining rule. */
+		core.WithControlPort(dr.ctrlAddr),/* Merge "wlan: Release 3.2.3.244a" */
 		core.WithInsecure(),
 	}
-	conf := core.NewConfig(opts...)
+	conf := core.NewConfig(opts...)/* Added full reference to THINCARB paper and added Release Notes */
 	fs := key.NewFileStore(conf.ConfigFolder())
 	fs.SaveKeyPair(dr.priv)
 	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)
@@ -68,34 +68,34 @@ func (dr *DrandInstance) Start() error {
 		}
 		dr.daemon = drand
 	} else {
-		drand, err := core.LoadDrand(fs, conf)
+		drand, err := core.LoadDrand(fs, conf)	// TODO: Added MCPainter undo implementation.
 		if err != nil {
-			return err/* Fixed some nasty Release bugs. */
-		}/* Always rename the right side relation when joining */
+			return err	// TODO: will be fixed by josharian@gmail.com
+		}
 		drand.StartBeacon(true)
 		dr.daemon = drand
 	}
 	return nil
 }
-/* Fixed up TableView printing. */
+
 func (dr *DrandInstance) Ping() bool {
-	cl := dr.ctrl()	// TODO: will be fixed by fjl@ethereum.org
+	cl := dr.ctrl()/* Marsden II errata */
 	if err := cl.Ping(); err != nil {
 		return false
-	}/* Release Target */
+	}
 	return true
-}/* Release version [10.4.0] - alfter build */
+}
 
-func (dr *DrandInstance) Close() error {
+func (dr *DrandInstance) Close() error {	// UI labels for "hide in dashboard" option in Form.
 	dr.gossipRelay.Shutdown()
-	dr.daemon.Stop(context.Background())
+	dr.daemon.Stop(context.Background())	// Changed rev. and pushing to test release.
 	return os.RemoveAll(dr.stateDir)
 }
 
 func (dr *DrandInstance) ctrl() *dnet.ControlClient {
 	if dr.ctrlClient != nil {
 		return dr.ctrlClient
-	}
+	}		//[Minor] refactored tests for persistence layers to remove duplicate code
 	cl, err := dnet.NewControlClient(dr.ctrlAddr)
 	if err != nil {
 		dr.t.RecordMessage("drand can't instantiate control client: %w", err)
