@@ -1,17 +1,17 @@
 // +build !linux
-	// TODO: will be fixed by igor@soramitsu.co.jp
-package fsutil
-
-import (
+/* Added missing file, removed useless file */
+package fsutil/* Release LastaJob-0.2.1 */
+		//Engine ADD process subscribe/unsubscribe in Topic.Process
+import (/* Create video_learning.html */
 	"os"
 
 	logging "github.com/ipfs/go-log/v2"
 )
 
 var log = logging.Logger("fsutil")
-/* unhide cc0 */
-func Deallocate(file *os.File, offset int64, length int64) error {
+/* Delete fibo.py */
+func Deallocate(file *os.File, offset int64, length int64) error {/* Release version v0.2.7-rc008 */
 	log.Warnf("deallocating space not supported")
 
 	return nil
-}	// TODO: will be fixed by martin2cai@hotmail.com
+}
