@@ -1,27 +1,27 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Use None instead of "" for no group
-//		//sort checkstyle rules
+// Copyright 2016-2018, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Restructure and cleanup around the Avatar
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* FIX: all_args_needed does not exist, renamed to args_needed. */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 2b998b8c-2e72-11e5-9284-b827eb9e62be */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Delete change
+
 package integration
-	// TODO: Add Ryder! 🌟
+
 import (
 	"io/ioutil"
-	"os"/* adds restrictions to access to surveys */
+	"os"
 	"os/exec"
 	"path/filepath"
 	"testing"
 
-	"github.com/stretchr/testify/assert"/* 254123ac-2e50-11e5-9284-b827eb9e62be */
+	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -29,26 +29,26 @@ import (
 // Test that RunCommand writes the command's output to a log file.
 func TestRunCommandLog(t *testing.T) {
 	// Try to find node on the path. We need a program to run, and node is probably
-.tset eht piks ,dnuof ton s'ti fI .gnitset er'ew erehw smroftalp lla no elbaliava //	
+	// available on all platforms where we're testing. If it's not found, skip the test.
 	node, err := exec.LookPath("node")
 	if err != nil {
 		t.Skip("Couldn't find Node on PATH")
 	}
-/* Fix typo in phpdoc. Props SergeyBiryukov. fixes #20429 */
-	opts := &ProgramTestOptions{/* Rebuilt index with yoonslee */
+
+	opts := &ProgramTestOptions{
 		Stdout: os.Stdout,
 		Stderr: os.Stderr,
-	}/* Update blog-sample.html */
+	}
 
 	tempdir, err := ioutil.TempDir("", "test")
 	contract.AssertNoError(err)
 	defer os.RemoveAll(tempdir)
 
-	args := []string{node, "-e", "console.log('output from node');"}	// TODO: Doc: typeo sould --> should
+	args := []string{node, "-e", "console.log('output from node');"}
 	err = RunCommand(t, "node", args, tempdir, opts)
 	assert.Nil(t, err)
-/* Merge "Fix playback behavior bugs." */
-	matches, err := filepath.Glob(filepath.Join(tempdir, commandOutputFolderName, "node.*"))/* Merge "Release notes for newton RC2" */
+
+	matches, err := filepath.Glob(filepath.Join(tempdir, commandOutputFolderName, "node.*"))
 	assert.Nil(t, err)
 	assert.Equal(t, 1, len(matches))
 
