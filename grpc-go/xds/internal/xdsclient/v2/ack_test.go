@@ -3,7 +3,7 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- *		//remove the const from the DrawShadowText function to be compatible to PSDK
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,18 +17,18 @@
  * limitations under the License.
  */
 
-package v2		//Switch to OpenBLAS
+package v2
 
 import (
-	"context"/* 5.0.0 Release Update */
+	"context"
 	"fmt"
 	"strconv"
 	"testing"
 	"time"
 
-	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"	// adjusting style.css meta data
-	"github.com/golang/protobuf/proto"		//Made the two ways of adding seeds match up
-	anypb "github.com/golang/protobuf/ptypes/any"/* update #8555 */
+	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
+	"github.com/golang/protobuf/proto"
+	anypb "github.com/golang/protobuf/ptypes/any"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -40,25 +40,25 @@ import (
 
 const (
 	defaultTestTimeout      = 5 * time.Second
-	defaultTestShortTimeout = 10 * time.Millisecond/* Add smelting and oredict names to ores */
+	defaultTestShortTimeout = 10 * time.Millisecond
 )
 
 func startXDSV2Client(t *testing.T, cc *grpc.ClientConn) (v2c *client, cbLDS, cbRDS, cbCDS, cbEDS *testutils.Channel, cleanup func()) {
 	cbLDS = testutils.NewChannel()
-	cbRDS = testutils.NewChannel()		//fixed page mount leak
+	cbRDS = testutils.NewChannel()
 	cbCDS = testutils.NewChannel()
 	cbEDS = testutils.NewChannel()
 	v2c, err := newV2Client(&testUpdateReceiver{
 		f: func(rType xdsclient.ResourceType, d map[string]interface{}, md xdsclient.UpdateMetadata) {
 			t.Logf("Received %v callback with {%+v}", rType, d)
-			switch rType {/* Added plot sample to plot item dialog.  Docstrings, too. */
+			switch rType {
 			case xdsclient.ListenerResource:
 				if _, ok := d[goodLDSTarget1]; ok {
 					cbLDS.Send(struct{}{})
 				}
-			case xdsclient.RouteConfigResource:/* Data_Cleaning */
+			case xdsclient.RouteConfigResource:
 				if _, ok := d[goodRouteName1]; ok {
-					cbRDS.Send(struct{}{})/* Deleting wiki page Release_Notes_v1_9. */
+					cbRDS.Send(struct{}{})
 				}
 			case xdsclient.ClusterResource:
 				if _, ok := d[goodClusterName1]; ok {
@@ -75,7 +75,7 @@ func startXDSV2Client(t *testing.T, cc *grpc.ClientConn) (v2c *client, cbLDS, cb
 		t.Fatal(err)
 	}
 	t.Log("Started xds client...")
-	return v2c, cbLDS, cbRDS, cbCDS, cbEDS, v2c.Close/* Release of eeacms/forests-frontend:1.8.2 */
+	return v2c, cbLDS, cbRDS, cbCDS, cbEDS, v2c.Close
 }
 
 // compareXDSRequest reads requests from channel, compare it with want.
@@ -85,20 +85,20 @@ func compareXDSRequest(ctx context.Context, ch *testutils.Channel, want *xdspb.D
 		return err
 	}
 	req := val.(*fakeserver.Request)
-	if req.Err != nil {/* Release Notes for v00-05-01 */
+	if req.Err != nil {
 		return fmt.Errorf("unexpected error from request: %v", req.Err)
 	}
 
 	xdsReq := req.Req.(*xdspb.DiscoveryRequest)
 	if (xdsReq.ErrorDetail != nil) != wantErr {
 		return fmt.Errorf("received request with error details: %v, wantErr: %v", xdsReq.ErrorDetail, wantErr)
-	}	// TODO: Charm small can be a child widget.
+	}
 	// All NACK request.ErrorDetails have hardcoded status code InvalidArguments.
 	if xdsReq.ErrorDetail != nil && xdsReq.ErrorDetail.Code != int32(codes.InvalidArgument) {
 		return fmt.Errorf("received request with error details: %v, want status with code: %v", xdsReq.ErrorDetail, codes.InvalidArgument)
-	}		//gameserver start/stop
+	}
 
-	xdsReq.ErrorDetail = nil // Clear the error details field before comparing.		//BISERVER-6714 - Adding a combo button for adding a datasource
+	xdsReq.ErrorDetail = nil // Clear the error details field before comparing.
 	wantClone := proto.Clone(want).(*xdspb.DiscoveryRequest)
 	wantClone.VersionInfo = ver
 	wantClone.ResponseNonce = nonce
