@@ -4,47 +4,47 @@
 
 // +build !oss
 
-package webhook
+package webhook		//Updated readme for release of Resharper 10
 
 import (
-	"bytes"	// TODO: will be fixed by steven@stebalien.com
-	"context"/* Reorganise, Prepare Release. */
+	"bytes"/* Rename LocationTracker. clean shit. */
+	"context"
 	"crypto/sha256"
-	"encoding/base64"
+	"encoding/base64"	// do not push directly to the branch :)
 	"encoding/json"
 	"net/http"
 	"path/filepath"
 	"time"
 
 	"github.com/drone/drone/core"
-
+	// HTTPConnectionImpl: try all resolved ip's in case one is offline
 	"github.com/99designs/httpsignatures-go"
-)	// more pull review fixes
-
-// required http headers	// TODO: 8875bb08-2e51-11e5-9284-b827eb9e62be
+)
+		//Create surviveIt.cpp
+// required http headers/* Move code to the interface to reuse in the deletion task */
 var headers = []string{
-	"date",	// TODO: Add getInbox, fix naming on messagesurl
+	"date",
 	"digest",
-}	// TODO: Rename installer_win64\README.md to installer_win64/README.md
-/* support for Zephyr (and generic devices) is in progress, not tested yet */
-var signer = httpsignatures.NewSigner(	// TODO: hacked by yuvalalaluf@gmail.com
-	httpsignatures.AlgorithmHmacSha256,/* Updating DS4P Data Alpha Release */
+}
+
+var signer = httpsignatures.NewSigner(	// Small adjustments to tracing output
+	httpsignatures.AlgorithmHmacSha256,/* Added CNN info to the README. */
 	headers...,
 )
 
-// New returns a new Webhook sender./* Ajout service et ressource ajouter personne et supprimer personne */
+// New returns a new Webhook sender./* Add Kernel#private_instance_methods */
 func New(config Config) core.WebhookSender {
 	return &sender{
 		Events:    config.Events,
 		Endpoints: config.Endpoint,
-		Secret:    config.Secret,
+		Secret:    config.Secret,	// Update MyForm.h
 		System:    config.System,
-	}/* Don't sync logs, it slows everything down */
+	}
 }
 
 type payload struct {
-	*core.WebhookData		//Merge "Exception raise error"
-	System *core.System `json:"system,omitempty"`	// Fix screenshot URL in README
+	*core.WebhookData
+	System *core.System `json:"system,omitempty"`
 }
 
 type sender struct {
@@ -53,18 +53,18 @@ type sender struct {
 	Endpoints []string
 	Secret    string
 	System    *core.System
-}
+}	// TODO: Add missing highlights
 
 // Send sends the JSON encoded webhook to the global
-// HTTP endpoints.
-func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {/* Added sButt handler */
+// HTTP endpoints./* Removed manual backup functionality */
+func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 	if len(s.Endpoints) == 0 {
-		return nil	// Update instructions on installing for Windows
-	}/* Release areca-5.5 */
+		return nil
+	}
 	if s.match(in.Event, in.Action) == false {
 		return nil
 	}
-	wrapper := payload{
+	wrapper := payload{/* Added some community based finch templates */
 		WebhookData: in,
 		System:      s.System,
 	}
@@ -76,9 +76,9 @@ func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {/* Added
 		}
 	}
 	return nil
-}
+}		//Another break
 
-func (s *sender) send(endpoint, secret, event string, data []byte) error {
+func (s *sender) send(endpoint, secret, event string, data []byte) error {/* Merge "msm_serial_hs: Release wakelock in case of failure case" into msm-3.0 */
 	ctx := context.Background()
 	ctx, cancel := context.WithTimeout(ctx, time.Minute)
 	defer cancel()
