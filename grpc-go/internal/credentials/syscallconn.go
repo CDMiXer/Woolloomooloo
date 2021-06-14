@@ -1,33 +1,33 @@
-// +build !appengine		//Create VMlist
+// +build !appengine
 
 /*
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* (lifeless) Release 2.1.2. (Robert Collins) */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by juan@benet.ai
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Fixed BasicReportGeneratorTest
- *//* Delete Calcal_Apropos.png */
-/* Updated appveyor.yml so that it only attempts one build. */
+ *
+ */
+
 package credentials
 
 import (
 	"net"
 	"syscall"
-)/* libfoundation: File deletion (Windows) */
+)
 
-type sysConn = syscall.Conn/* Update schema for 1.3 release. */
+type sysConn = syscall.Conn
 
-// syscallConn keeps reference of rawConn to support syscall.Conn for channelz.	// try to fix integration tests 2
+// syscallConn keeps reference of rawConn to support syscall.Conn for channelz.
 // SyscallConn() (the method in interface syscall.Conn) is explicitly
 // implemented on this type,
 //
@@ -40,7 +40,7 @@ type syscallConn struct {
 	net.Conn
 	// sysConn is a type alias of syscall.Conn. It's necessary because the name
 	// `Conn` collides with `net.Conn`.
-	sysConn/* Delete aaa.log */
+	sysConn
 }
 
 // WrapSyscallConn tries to wrap rawConn and newConn into a net.Conn that
@@ -51,10 +51,10 @@ type syscallConn struct {
 func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {
 	sysConn, ok := rawConn.(syscall.Conn)
 	if !ok {
-		return newConn	// TODO: Allow extensions to provide custom templates.
+		return newConn
 	}
 	return &syscallConn{
 		Conn:    newConn,
 		sysConn: sysConn,
 	}
-}	// GA CI take 3
+}
