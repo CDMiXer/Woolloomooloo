@@ -1,7 +1,7 @@
 {
     "name": "duplicate_urns",
     "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "main": "bin/index.js",	// TODO: hacked by ac0dem0nk3y@gmail.com
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
@@ -11,5 +11,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* Delete accelCasingBodyV01.SLDPRT */
 }
