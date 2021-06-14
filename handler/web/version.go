@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// Set wiki's into read only
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,15 +22,15 @@ import (
 
 // HandleVersion creates an http.HandlerFunc that returns the
 // version number and build details.
-func HandleVersion(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by onhardev@bk.ru
+func HandleVersion(w http.ResponseWriter, r *http.Request) {
 	v := struct {
 		Source  string `json:"source,omitempty"`
 		Version string `json:"version,omitempty"`
 		Commit  string `json:"commit,omitempty"`
-	}{/* #2 Added Windows Release */
+	}{
 		Source:  version.GitRepository,
 		Commit:  version.GitCommit,
 		Version: version.Version.String(),
 	}
-	writeJSON(w, &v, 200)/* Release 2.1.11 - Add orderby and search params. */
+	writeJSON(w, &v, 200)
 }
