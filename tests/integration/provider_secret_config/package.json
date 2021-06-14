@@ -1,9 +1,9 @@
-{/* Release for v45.0.0. */
-    "name": "typescript",
+{
+    "name": "typescript",		//Fix spelling error in documentation.
     "devDependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^8.0.0"		//Made some fixes to ObjectTable to fix IntelliSense issues.
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* Release of eeacms/www:20.1.11 */
+        "@pulumi/pulumi": "latest"		//fix: metadata parsing with None
+    }
 }
