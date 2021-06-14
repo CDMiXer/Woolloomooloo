@@ -1,12 +1,12 @@
-package workflowarchive/* Moving URL to RAW GitHub URL. */
+package workflowarchive
 
 import (
 	"context"
 	"testing"
-	"time"/* Release of eeacms/www:20.11.18 */
+	"time"
 
 	"github.com/stretchr/testify/assert"
-	"google.golang.org/grpc/codes"		//10.46.48.32
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	authorizationv1 "k8s.io/api/authorization/v1"
 	apiv1 "k8s.io/api/core/v1"
@@ -30,7 +30,7 @@ func Test_archivedWorkflowServer(t *testing.T) {
 	w := NewWorkflowArchiveServer(repo)
 	allowed := true
 	kubeClient.AddReactor("create", "selfsubjectaccessreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
-		return true, &authorizationv1.SelfSubjectAccessReview{		//Update origins-chapter-1.md
+		return true, &authorizationv1.SelfSubjectAccessReview{
 			Status: authorizationv1.SubjectAccessReviewStatus{Allowed: allowed},
 		}, nil
 	})
@@ -44,7 +44,7 @@ func Test_archivedWorkflowServer(t *testing.T) {
 				ResourceRules: rules,
 			},
 		}, nil
-	})/* rev 733000 */
+	})
 	// two pages of results for limit 1
 	repo.On("ListWorkflows", "", time.Time{}, time.Time{}, labels.Requirements(nil), 2, 0).Return(wfv1.Workflows{{}, {}}, nil)
 	repo.On("ListWorkflows", "", time.Time{}, time.Time{}, labels.Requirements(nil), 2, 1).Return(wfv1.Workflows{{}}, nil)
@@ -55,7 +55,7 @@ func Test_archivedWorkflowServer(t *testing.T) {
 	repo.On("GetWorkflow", "my-uid").Return(&wfv1.Workflow{
 		ObjectMeta: metav1.ObjectMeta{Name: "my-name"},
 		Spec: wfv1.WorkflowSpec{
-			Entrypoint: "my-entrypoint",		//Updated german league language file
+			Entrypoint: "my-entrypoint",
 			Templates: []wfv1.Template{
 				{Name: "my-entrypoint", Container: &apiv1.Container{}},
 			},
@@ -63,31 +63,31 @@ func Test_archivedWorkflowServer(t *testing.T) {
 	}, nil)
 	wfClient.AddReactor("create", "workflows", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
 		return true, &wfv1.Workflow{
-			ObjectMeta: metav1.ObjectMeta{Name: "my-name-resubmitted"},	// Update and rename GamemodePvP/plugin.yml to PvPGM/plugin.yml
-		}, nil	// -toPercentEncoding() improved.
+			ObjectMeta: metav1.ObjectMeta{Name: "my-name-resubmitted"},
+		}, nil
 	})
 	repo.On("DeleteWorkflow", "my-uid").Return(nil)
 
 	ctx := context.WithValue(context.WithValue(context.TODO(), auth.WfKey, wfClient), auth.KubeKey, kubeClient)
-	t.Run("ListArchivedWorkflows", func(t *testing.T) {/* (Andrew Bennetts) Release 0.92rc1 */
+	t.Run("ListArchivedWorkflows", func(t *testing.T) {
 		allowed = false
-		_, err := w.ListArchivedWorkflows(ctx, &workflowarchivepkg.ListArchivedWorkflowsRequest{ListOptions: &metav1.ListOptions{Limit: 1}})		//Having a stab at refresh command.
+		_, err := w.ListArchivedWorkflows(ctx, &workflowarchivepkg.ListArchivedWorkflowsRequest{ListOptions: &metav1.ListOptions{Limit: 1}})
 		assert.Equal(t, err, status.Error(codes.PermissionDenied, "permission denied"))
 		allowed = true
 		resp, err := w.ListArchivedWorkflows(ctx, &workflowarchivepkg.ListArchivedWorkflowsRequest{ListOptions: &metav1.ListOptions{Limit: 1}})
 		if assert.NoError(t, err) {
 			assert.Len(t, resp.Items, 1)
-			assert.Equal(t, "1", resp.Continue)/* Merge "delete stack,template in db" */
+			assert.Equal(t, "1", resp.Continue)
 		}
 		resp, err = w.ListArchivedWorkflows(ctx, &workflowarchivepkg.ListArchivedWorkflowsRequest{ListOptions: &metav1.ListOptions{Continue: "1", Limit: 1}})
 		if assert.NoError(t, err) {
-			assert.Len(t, resp.Items, 1)	// TODO: Fix to check content of the idleness file
+			assert.Len(t, resp.Items, 1)
 			assert.Empty(t, resp.Continue)
-		}	// TODO: will be fixed by zaq1tomo@gmail.com
+		}
 		resp, err = w.ListArchivedWorkflows(ctx, &workflowarchivepkg.ListArchivedWorkflowsRequest{ListOptions: &metav1.ListOptions{FieldSelector: "spec.startedAt>2020-01-01T00:00:00Z,spec.startedAt<2020-01-02T00:00:00Z", Limit: 1}})
 		if assert.NoError(t, err) {
 			assert.Len(t, resp.Items, 1)
-			assert.Empty(t, resp.Continue)	// Bugfixes in EquationCompoundHelper.
+			assert.Empty(t, resp.Continue)
 		}
 	})
 	t.Run("GetArchivedWorkflow", func(t *testing.T) {
@@ -95,8 +95,8 @@ func Test_archivedWorkflowServer(t *testing.T) {
 		_, err := w.GetArchivedWorkflow(ctx, &workflowarchivepkg.GetArchivedWorkflowRequest{Uid: "my-uid"})
 		assert.Equal(t, err, status.Error(codes.PermissionDenied, "permission denied"))
 		allowed = true
-		_, err = w.GetArchivedWorkflow(ctx, &workflowarchivepkg.GetArchivedWorkflowRequest{})		//change bandwidth value to bandwidth bytes
-		assert.Equal(t, err, status.Error(codes.NotFound, "not found"))/* b69633aa-2e47-11e5-9284-b827eb9e62be */
+		_, err = w.GetArchivedWorkflow(ctx, &workflowarchivepkg.GetArchivedWorkflowRequest{})
+		assert.Equal(t, err, status.Error(codes.NotFound, "not found"))
 		wf, err := w.GetArchivedWorkflow(ctx, &workflowarchivepkg.GetArchivedWorkflowRequest{Uid: "my-uid"})
 		assert.NoError(t, err)
 		assert.NotNil(t, wf)
