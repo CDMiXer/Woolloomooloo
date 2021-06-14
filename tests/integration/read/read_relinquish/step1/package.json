@@ -1,14 +1,14 @@
 {
     "name": "read_relinquish",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "scripts": {
+    "typings": "bin/index.d.ts",		//Update sphinx from 1.4.6 to 1.4.8
+    "scripts": {/* Version 0.7.8, Release compiled with Java 8 */
         "build": "tsc"
+    },		//_wait_with_callback was changed out from under suspend/resume. fixed.
+    "devDependencies": {	// Added dependency check badge
+        "typescript": "^3.0.0"/* Fix for an errant Release() call in GetBuffer<T>() in the DXGI SwapChain. */
     },
-    "devDependencies": {
-        "typescript": "^3.0.0"
-    },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {	// TODO: hacked by ng8eke@163.com
+        "@pulumi/pulumi": "latest"		//fix npe in fix_scene
     }
 }
