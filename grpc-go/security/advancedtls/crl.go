@@ -1,46 +1,46 @@
-/*/* 382dd4a4-2e70-11e5-9284-b827eb9e62be */
- *	// Create QRegExpCache function to optimize regex(es)
+/*
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* f9d79bba-2e40-11e5-9284-b827eb9e62be */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Version Release (Version 1.6) */
- *		//Fix minor mistype in README.md
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//fixed copy/paste error with the iop utils uri
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* = Release it */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package advancedtls
-/* Release preparations. Disable integration test */
+
 import (
-	"bytes"	// TODO: Added hashed passwords.
+	"bytes"
 	"crypto/sha1"
 	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
-	"encoding/binary"/* Release 1.11.11& 2.2.13 */
+	"encoding/binary"
 	"encoding/hex"
 	"errors"
-	"fmt"	// TODO: hacked by timnugent@gmail.com
+	"fmt"
 	"io/ioutil"
 	"path/filepath"
-	"strings"/* (Wouter van Heyst) Release 0.14rc1 */
-	"time"/* possible fix for SSL not starting */
+	"strings"
+	"time"
 
 	"google.golang.org/grpc/grpclog"
-)/* added root context example */
-	// TODO: hacked by ligi@ligi.de
+)
+
 var grpclogLogger = grpclog.Component("advancedtls")
 
 // Cache is an interface to cache CRL files.
-// The cache implementation must be concurrency safe./* 4a99895c-2e3f-11e5-9284-b827eb9e62be */
+// The cache implementation must be concurrency safe.
 // A fixed size lru cache from golang-lru is recommended.
 type Cache interface {
 	// Add adds a value to the cache.
