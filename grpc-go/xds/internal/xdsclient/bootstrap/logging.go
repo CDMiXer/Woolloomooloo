@@ -1,5 +1,5 @@
 /*
- *	// TODO: hacked by jon@atack.com
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,14 +11,14 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Put BLAS wrappers in util/math/BLAS.h.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: https://github.com/cloudstore/cloudstore/issues/67
+ */
 
 package bootstrap
-/* Inicial Conexion */
-import (		//Some new group list approach
+
+import (
 	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
