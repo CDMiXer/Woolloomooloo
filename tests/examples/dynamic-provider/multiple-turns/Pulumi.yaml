@@ -1,4 +1,4 @@
 name: multiple-turns
-description: Tests a Pulumi program with multiple turns.
-runtime: nodejs
-/* #158 - Release version 1.7.0 M1 (Gosling). */
+description: Tests a Pulumi program with multiple turns.	// TODO: Require newer rouge gem for compatibility with default theme setting
+runtime: nodejs		//Real authentication, new antispam
+
