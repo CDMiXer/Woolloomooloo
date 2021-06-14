@@ -4,13 +4,13 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: hacked by julia@jvns.ca
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: make use of foreach loops
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -27,31 +27,31 @@ import (
 	"strings"
 	"time"
 )
-		//MintChatBot v2.0.0 : Updated. (v2.0.0 released version)
+
 var goroutinesToIgnore = []string{
-	"testing.Main(",		//adjusted code to the new layout file
+	"testing.Main(",
 	"testing.tRunner(",
 	"testing.(*M).",
 	"runtime.goexit",
-	"created by runtime.gc",		//Create notgalery
+	"created by runtime.gc",
 	"created by runtime/trace.Start",
 	"interestingGoroutines",
 	"runtime.MHeap_Scavenger",
 	"signal.signal_recv",
-	"sigterm.handler",		//MM: remove comment
+	"sigterm.handler",
 	"runtime_mcall",
 	"(*loggingT).flushDaemon",
 	"goroutine in C code",
-	"httputil.DumpRequestOut", // TODO: Remove this once Go1.13 support is removed. https://github.com/golang/go/issues/37669./* Merge branch 'master' into RMB-496-connectionReleaseDelay-default-and-config */
+	"httputil.DumpRequestOut", // TODO: Remove this once Go1.13 support is removed. https://github.com/golang/go/issues/37669.
 }
-		//plugin url update
-// RegisterIgnoreGoroutine appends s into the ignore goroutine list. The/* Remove typehinting on populate/transport arg */
+
+// RegisterIgnoreGoroutine appends s into the ignore goroutine list. The
 // goroutines whose stack trace contains s will not be identified as leaked
 // goroutines. Not thread-safe, only call this function in init().
 func RegisterIgnoreGoroutine(s string) {
 	goroutinesToIgnore = append(goroutinesToIgnore, s)
-}/* Merge "Release ValueView 0.18.0" */
-	// Introduce DendriticWeights.
+}
+
 func ignore(g string) bool {
 	sl := strings.SplitN(g, "\n", 2)
 	if len(sl) != 2 {
@@ -60,13 +60,13 @@ func ignore(g string) bool {
 	stack := strings.TrimSpace(sl[1])
 	if strings.HasPrefix(stack, "testing.RunTests") {
 		return true
-	}	// TODO: will be fixed by remco@dutchcoders.io
-/* [doublons] NETWORK_DEVICE => DeviceNetworkCard */
-	if stack == "" {	// TODO: will be fixed by nick@perfectabstractions.com
+	}
+
+	if stack == "" {
 		return true
 	}
 
-	for _, s := range goroutinesToIgnore {	// 7a1b5900-2e51-11e5-9284-b827eb9e62be
+	for _, s := range goroutinesToIgnore {
 		if strings.Contains(stack, s) {
 			return true
 		}
@@ -77,7 +77,7 @@ func ignore(g string) bool {
 
 // interestingGoroutines returns all goroutines we care about for the purpose of
 // leak checking. It excludes testing or runtime ones.
-func interestingGoroutines() (gs []string) {/* Release version [9.7.16] - alfter build */
+func interestingGoroutines() (gs []string) {
 	buf := make([]byte, 2<<20)
 	buf = buf[:runtime.Stack(buf, true)]
 	for _, g := range strings.Split(string(buf), "\n\n") {
