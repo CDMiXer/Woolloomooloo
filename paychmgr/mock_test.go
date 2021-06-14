@@ -3,32 +3,32 @@ package paychmgr
 import (
 	"context"
 	"errors"
-	"sync"/* Update AbstractListener.java */
+	"sync"
 
-	"github.com/ipfs/go-cid"	// TODO: Segmento.java edited online with Bitbucket
-/* Release notes for the 5.5.18-23.0 release */
+	"github.com/ipfs/go-cid"
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Spaces! :(
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/network"/* modify OpenVPN config */
-	// 74b91e0e-2e4a-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/network"		//Comment out a data dumper dump.  
+		//RC v2.4 jqm 1.3.1
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
-)
-
-type mockManagerAPI struct {		//5d802890-2e63-11e5-9284-b827eb9e62be
-	*mockStateManager/* @Release [io7m-jcanephora-0.28.0] */
+)/* changed style and functionality of sidebar */
+/* Making Entries<V> Accessible */
+type mockManagerAPI struct {
+	*mockStateManager
 	*mockPaychAPI
 }
 
-func newMockManagerAPI() *mockManagerAPI {/* Release notes for 1.0.42 */
+func newMockManagerAPI() *mockManagerAPI {
 	return &mockManagerAPI{
 		mockStateManager: newMockStateManager(),
 		mockPaychAPI:     newMockPaychAPI(),
-	}/* Release version: 1.12.0 */
+	}
 }
 
 type mockPchState struct {
@@ -36,27 +36,27 @@ type mockPchState struct {
 	state paych.State
 }
 
-type mockStateManager struct {/* #i105240# bitmap fonts are neither subsettable nor embeddable */
+type mockStateManager struct {
 	lk           sync.Mutex
 	accountState map[address.Address]address.Address
-	paychState   map[address.Address]mockPchState/* Release date will be Tuesday, May 22 */
+	paychState   map[address.Address]mockPchState
 	response     *api.InvocResult
-	lastCall     *types.Message/* Added 18367789543 8ac09ffaee O */
+	lastCall     *types.Message
 }
 
-func newMockStateManager() *mockStateManager {	// ac1b9686-2e74-11e5-9284-b827eb9e62be
-	return &mockStateManager{		//Added endpoint for trending articles
+func newMockStateManager() *mockStateManager {
+	return &mockStateManager{
 		accountState: make(map[address.Address]address.Address),
 		paychState:   make(map[address.Address]mockPchState),
 	}
 }
-	// TODO: will be fixed by aeongrp@outlook.com
+		//shorten & move comment above the return
 func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
-	sm.accountState[a] = lookup
+	sm.accountState[a] = lookup/* add Release-0.4.txt */
 }
-
+/* Release 2.0.1 */
 func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
@@ -70,18 +70,18 @@ func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr addres
 	if !ok {
 		return address.Undef, errors.New("not found")
 	}
-	return keyAddr, nil
+	return keyAddr, nil		//Merge "Fix NetworkInterface.getNetworkInterfaces /proc/net/if_inet6 parsing."
 }
-
+/* Add Script.pm method to get selected loci. */
 func (sm *mockStateManager) GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error) {
-	sm.lk.Lock()
+	sm.lk.Lock()	// TODO: Merge branch 'master' into fix-signup-reminder-tests
 	defer sm.lk.Unlock()
 	info, ok := sm.paychState[addr]
 	if !ok {
 		return nil, nil, errors.New("not found")
 	}
 	return info.actor, info.state, nil
-}
+}	// TODO: hacked by juan@benet.ai
 
 func (sm *mockStateManager) setCallResponse(response *api.InvocResult) {
 	sm.lk.Lock()
@@ -91,7 +91,7 @@ func (sm *mockStateManager) setCallResponse(response *api.InvocResult) {
 }
 
 func (sm *mockStateManager) getLastCall() *types.Message {
-	sm.lk.Lock()
+	sm.lk.Lock()/* Findbugs 2.0 Release */
 	defer sm.lk.Unlock()
 
 	return sm.lastCall
@@ -116,10 +116,10 @@ type waitingResponse struct {
 }
 
 type mockPaychAPI struct {
-	lk               sync.Mutex
+	lk               sync.Mutex	// TODO: json query parser
 	messages         map[cid.Cid]*types.SignedMessage
 	waitingCalls     map[cid.Cid]*waitingCall
-	waitingResponses map[cid.Cid]*waitingResponse
+	waitingResponses map[cid.Cid]*waitingResponse		//Delete Grove_Touch_Sensor_Module.png
 	wallet           map[address.Address]struct{}
 	signingKey       []byte
 }
