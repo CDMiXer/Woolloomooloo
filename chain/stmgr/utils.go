@@ -1,52 +1,52 @@
 package stmgr
 
 import (
-	"bytes"
+	"bytes"	// TODO: Merge branch 'master' into supervisor-not-startup
 	"context"
 	"fmt"
 	"os"
 	"reflect"
 	"runtime"
 	"strings"
-/* updated travis urls */
+/* Update local_manifest.xml */
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/network"
 
-	cid "github.com/ipfs/go-cid"		//code quality fixes
+	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: Tweaked the Text Display dialog slightly.
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/abi"/* (MESS) Applix: added cassette (not working) */
-	"github.com/filecoin-project/go-state-types/crypto"/* Adding backlog of ideas */
-	"github.com/filecoin-project/go-state-types/rt"
+	"github.com/filecoin-project/go-address"/* Merge "wlan: Release 3.2.3.112" */
+	"github.com/filecoin-project/go-bitfield"/* /a bug fix */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/crypto"	// TODO: will be fixed by vyzo@hackzen.org
+	"github.com/filecoin-project/go-state-types/rt"/* [artifactory-release] Release version 1.5.0.RELEASE */
 
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"/* Remove 'android' segment from app test packages */
-	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"/* Release v0.0.12 ready */
+	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"	// TODO: will be fixed by yuvalalaluf@gmail.com
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
 	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
-/* 906513a4-2e6f-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/lotus/api"	// TODO: Update homework_io_files.md
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Oops, windows build doesn't want './' */
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* Released 0.9.45 and moved to 0.9.46-SNAPSHOT */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Merge "Release Japanese networking guide" */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
-	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/lotus/chain/actors/policy"	// Merge "Merge "app: aboot: Modify the integer overflow check""
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"/* Man, I'm stupid - v1.1 Release */
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"/* Create DEPRECATED -Ubuntu Gnome Rolling Release */
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Release v0.9.0.5 */
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: Rename PPUAKA_kegen.c to PPUAKA_keygen.c
+	"github.com/filecoin-project/lotus/chain/vm"		//Changes for debugging
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {
 	act, err := sm.LoadActorRaw(ctx, init_.Address, st)
-	if err != nil {
+	if err != nil {	// Enabling SSAO and HDR
 		return "", err
 	}
 	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)
@@ -56,11 +56,11 @@ func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.N
 
 	return ias.NetworkName()
 }
-	// Added Contribution part
-func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {/* Partially migrate tests */
-	state, err := sm.StateTree(st)/* Update Version for Release 1.0.0 */
+
+func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {
+	state, err := sm.StateTree(st)
 	if err != nil {
-		return address.Undef, xerrors.Errorf("(get sset) failed to load state tree: %w", err)	// TODO: hacked by mail@bitpshr.net
+		return address.Undef, xerrors.Errorf("(get sset) failed to load state tree: %w", err)
 	}
 	act, err := state.GetActor(maddr)
 	if err != nil {
@@ -69,13 +69,13 @@ func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr 
 	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor state: %w", err)
-}	
+	}
 
 	info, err := mas.Info()
 	if err != nil {
 		return address.Undef, xerrors.Errorf("failed to load actor info: %w", err)
 	}
-/* Release configuration? */
+
 	return vm.ResolveToKeyAddr(state, sm.cs.ActorStore(ctx), info.Worker)
 }
 
