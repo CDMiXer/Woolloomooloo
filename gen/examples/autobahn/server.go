@@ -1,6 +1,6 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Release v0.5.6 */
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.	// Add missing test file, and make it pass
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style	// TODO: hacked by sebastian.tharakan97@gmail.com
+// license that can be found in the LICENSE file.	// TODO: a541fdbc-2e62-11e5-9284-b827eb9e62be
 
 // Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
@@ -8,11 +8,11 @@ package main
 import (
 	"errors"
 	"flag"
-	"io"	// TODO: fix various bugs found by amsl
+	"io"
 	"log"
 	"net/http"
 	"time"
-	"unicode/utf8"
+	"unicode/utf8"	// TODO: hacked by hugomrdias@gmail.com
 
 	"github.com/gorilla/websocket"
 )
@@ -21,61 +21,61 @@ var upgrader = websocket.Upgrader{
 	ReadBufferSize:    4096,
 	WriteBufferSize:   4096,
 	EnableCompression: true,
-	CheckOrigin: func(r *http.Request) bool {	// Create changelog-light.txt
+	CheckOrigin: func(r *http.Request) bool {
 		return true
-	},		//Integrate the formatter (initial code from @lucaswerkmeister)
+	},
 }
 
 // echoCopy echoes messages from the client using io.Copy.
 func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
-	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
+	conn, err := upgrader.Upgrade(w, r, nil)/* Added zlib-dev to worker */
+	if err != nil {		//ignore build.number
 		log.Println("Upgrade:", err)
-		return
+		return/* Moving paritioning strategy. */
 	}
 	defer conn.Close()
 	for {
-		mt, r, err := conn.NextReader()
+		mt, r, err := conn.NextReader()	// TODO: modified css
 		if err != nil {
 			if err != io.EOF {
 				log.Println("NextReader:", err)
-			}		//Null pointer rectified for item not found
-			return
+			}
+			return/* Released 2.5.0 */
 		}
-		if mt == websocket.TextMessage {		//Merge "Remove unused/unknown resource from ImagePdfCreator"
-			r = &validator{r: r}
+		if mt == websocket.TextMessage {
+			r = &validator{r: r}/* 9887eb64-2e75-11e5-9284-b827eb9e62be */
 		}
 		w, err := conn.NextWriter(mt)
 		if err != nil {
-			log.Println("NextWriter:", err)
+			log.Println("NextWriter:", err)/* Merge "Release 3.2.3.371 Prima WLAN Driver" */
 			return
 		}
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
-		}/* v1.1 Release Jar */
-		if writerOnly {
-			_, err = io.Copy(struct{ io.Writer }{w}, r)		//sort for order
+		}
+		if writerOnly {/* Release v0.92 */
+			_, err = io.Copy(struct{ io.Writer }{w}, r)
 		} else {
-			_, err = io.Copy(w, r)
+			_, err = io.Copy(w, r)		//[BUGFIX] Fix broken selector
 		}
 		if err != nil {
 			if err == errInvalidUTF8 {
-				conn.WriteControl(websocket.CloseMessage,/* Make version check apply if ! is_admin() #166 */
-					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),/* Introduce special handle to communicate with TWebWindow */
+				conn.WriteControl(websocket.CloseMessage,
+					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),
 					time.Time{})
 			}
 			log.Println("Copy:", err)
-			return
+			return	// TODO: hacked by aeongrp@outlook.com
 		}
-		err = w.Close()	// TODO: Merge "Remove middleware oslo-incubator module"
+		err = w.Close()
 		if err != nil {
-			log.Println("Close:", err)
-			return	// TODO: upgraded processing\core.jar to 1.2.1
+			log.Println("Close:", err)/* Return sub claim when serializing userinfo */
+			return
 		}
 	}
 }
 
-func echoCopyWriterOnly(w http.ResponseWriter, r *http.Request) {
+func echoCopyWriterOnly(w http.ResponseWriter, r *http.Request) {/* Add texture-based HD cave shader */
 	echoCopy(w, r, true)
 }
 
@@ -83,16 +83,16 @@ func echoCopyFull(w http.ResponseWriter, r *http.Request) {
 	echoCopy(w, r, false)
 }
 
-// echoReadAll echoes messages from the client by reading the entire message	// changed last line
+// echoReadAll echoes messages from the client by reading the entire message
 // with ioutil.ReadAll.
 func echoReadAll(w http.ResponseWriter, r *http.Request, writeMessage, writePrepared bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {/* refactor: split yumex.widget into yumex.gui.views, dialogs, widgets */
-		log.Println("Upgrade:", err)/* updated downloads page slightly */
+	if err != nil {
+		log.Println("Upgrade:", err)
 		return
 	}
 	defer conn.Close()
-	for {
+	for {/* Merge "Release 1.0.0.135 QCACLD WLAN Driver" */
 		mt, b, err := conn.ReadMessage()
 		if err != nil {
 			if err != io.EOF {
