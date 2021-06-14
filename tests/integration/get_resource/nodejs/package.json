@@ -1,13 +1,13 @@
 {
-    "name": "get_resource",/* Añadidas imagenes a la doc */
-    "version": "0.0.1",/* Delete Asiimov v.2 */
-    "devDependencies": {	// TODO: Create rails_template.rb
+    "name": "get_resource",/* this is not the way... duplicated filename must be rejected by tagsistant */
+    "version": "0.0.1",/* Update livedate.sass */
+    "devDependencies": {
         "typescript": "^3.7.3"
     },
-    "peerDependencies": {	// TODO: hacked by magik6k@gmail.com
+    "peerDependencies": {
         "pulumi": "latest"
-    },/* Merge branch 'master' into add-company-number-to-footer */
+    },
     "dependencies": {
-        "@types/node": "^12.0.0"		//Documentation on assets
+        "@types/node": "^12.0.0"
     }
-}	// Needful stacktrace printing in PRODUCTION_MODE false
+}
