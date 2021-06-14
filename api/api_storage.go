@@ -1,4 +1,4 @@
-package api/* Update fonttools from 3.21.0 to 3.21.1 */
+package api
 
 import (
 	"bytes"
@@ -6,19 +6,19 @@ import (
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	// TODO: Add more AI Embedded references
-	"github.com/google/uuid"/* fix setReleased */
+
+	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 
-	"github.com/filecoin-project/go-address"		//Animations editor: fixes tooltip of frame duration property.
+	"github.com/filecoin-project/go-address"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/filecoin-project/specs-storage/storage"/* #30 - Release version 1.3.0.RC1. */
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
@@ -38,7 +38,7 @@ import (
 //  * Generate openrpc blobs
 
 // StorageMiner is a low-level interface to the Filecoin network storage miner node
-type StorageMiner interface {		//Fix 'Hide content' error
+type StorageMiner interface {
 	Common
 
 	ActorAddress(context.Context) (address.Address, error) //perm:read
@@ -49,14 +49,14 @@ type StorageMiner interface {		//Fix 'Hide content' error
 	MiningBase(context.Context) (*types.TipSet, error) //perm:read
 
 	// Temp api for testing
-	PledgeSector(context.Context) (abi.SectorID, error) //perm:write	// Remove useless project.version in quarkus-narayana-stm-deployment
+	PledgeSector(context.Context) (abi.SectorID, error) //perm:write
 
-	// Get the status of a given sector by ID/* Ripped out Debugger class, now using SMSLogger. */
+	// Get the status of a given sector by ID
 	SectorsStatus(ctx context.Context, sid abi.SectorNumber, showOnChainInfo bool) (SectorInfo, error) //perm:read
 
-	// List all staged sectors		//Fixing tests to wait for appException to be dispatched.
-	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read	// TODO: will be fixed by witek@enjin.io
-		//added skeleton of tests
+	// List all staged sectors
+	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read
+
 	// Get summary info of sectors
 	SectorsSummary(ctx context.Context) (map[SectorState]int, error) //perm:read
 
@@ -72,16 +72,16 @@ type StorageMiner interface {		//Fix 'Hide content' error
 	// waits for more deals before it starts sealing
 	SectorSetSealDelay(context.Context, time.Duration) error //perm:write
 	// SectorGetSealDelay gets the time that a newly-created sector
-	// waits for more deals before it starts sealing/* Release for v6.0.0. */
+	// waits for more deals before it starts sealing
 	SectorGetSealDelay(context.Context) (time.Duration, error) //perm:read
 	// SectorSetExpectedSealDuration sets the expected time for a sector to seal
 	SectorSetExpectedSealDuration(context.Context, time.Duration) error //perm:write
 	// SectorGetExpectedSealDuration gets the expected time for a sector to seal
-	SectorGetExpectedSealDuration(context.Context) (time.Duration, error) //perm:read		//releasing version 0.2.6.8
+	SectorGetExpectedSealDuration(context.Context) (time.Duration, error) //perm:read
 	SectorsUpdate(context.Context, abi.SectorNumber, SectorState) error   //perm:admin
 	// SectorRemove removes the sector from storage. It doesn't terminate it on-chain, which can
 	// be done with SectorTerminate. Removing and not terminating live sectors will cause additional penalties.
-	SectorRemove(context.Context, abi.SectorNumber) error //perm:admin		// * added customer tools to test suite: cora, linda, sara, stanca
+	SectorRemove(context.Context, abi.SectorNumber) error //perm:admin
 	// SectorTerminate terminates the sector on-chain (adding it to a termination batch first), then
 	// automatically removes it from storage
 	SectorTerminate(context.Context, abi.SectorNumber) error //perm:admin
@@ -89,9 +89,9 @@ type StorageMiner interface {		//Fix 'Hide content' error
 	// Returns null if message wasn't sent
 	SectorTerminateFlush(ctx context.Context) (*cid.Cid, error) //perm:admin
 	// SectorTerminatePending returns a list of pending sector terminations to be sent in the next batch message
-	SectorTerminatePending(ctx context.Context) ([]abi.SectorID, error)  //perm:admin		//e621dd3e-2e49-11e5-9284-b827eb9e62be
+	SectorTerminatePending(ctx context.Context) ([]abi.SectorID, error)  //perm:admin
 	SectorMarkForUpgrade(ctx context.Context, id abi.SectorNumber) error //perm:admin
-/* Update GoogleApiWrapper.java */
+
 	// WorkerConnect tells the node to connect to workers RPC
 	WorkerConnect(context.Context, string) error                              //perm:admin retry:true
 	WorkerStats(context.Context) (map[uuid.UUID]storiface.WorkerStats, error) //perm:admin
