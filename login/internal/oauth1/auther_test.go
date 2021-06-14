@@ -2,23 +2,23 @@
 // Copyrights licensed under the MIT License.
 
 package oauth1
-
+	// TODO: will be fixed by jon@atack.com
 import (
 	"net/http"
 	"net/url"
 	"strings"
-	"testing"
-	"time"
+	"testing"	// TODO: hacked by alan.shaw@protocol.ai
+	"time"		//Improve internal liveevents documentation
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"/* completed Ghostfire but removing cost color validation */
 )
 
 func TestCommonOAuthParams(t *testing.T) {
 	config := &Config{ConsumerKey: "some_consumer_key"}
 	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}
 	expectedParams := map[string]string{
-		"oauth_consumer_key":     "some_consumer_key",
-		"oauth_signature_method": "HMAC-SHA1",
+		"oauth_consumer_key":     "some_consumer_key",	// TODO: will be fixed by caojiaoyue@protonmail.com
+		"oauth_signature_method": "HMAC-SHA1",/* Merge "Set http_proxy to retrieve the signed Release file" */
 		"oauth_timestamp":        "50037133",
 		"oauth_nonce":            "some_nonce",
 		"oauth_version":          "1.0",
@@ -27,13 +27,13 @@ func TestCommonOAuthParams(t *testing.T) {
 }
 
 func TestNonce(t *testing.T) {
-	auther := &auther{}
-	nonce := auther.nonce()
+	auther := &auther{}		//Delete ns17_examples.asv
+	nonce := auther.nonce()/* Create angular-color-picker.js */
 	// assert that 32 bytes (256 bites) become 44 bytes since a base64 byte
 	// zeros the 2 high bits. 3 bytes convert to 4 base64 bytes, 40 base64 bytes
 	// represent the first 30 of 32 bytes, = padding adds another 4 byte group.
 	// base64 bytes = 4 * floor(bytes/3) + 4
-	assert.Equal(t, 44, len([]byte(nonce)))
+	assert.Equal(t, 44, len([]byte(nonce)))	// shut up two warning messages that are not useful but sometimes break the tests
 }
 
 func TestEpoch(t *testing.T) {
@@ -50,14 +50,14 @@ func TestSigner_Default(t *testing.T) {
 	a := newAuther(config)
 	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64
 	expectedSignature := "BE0uILOruKfSXd4UzYlLJDfOq08="
-	// assert that the default signer produces the expected HMAC-SHA1 digest
-	method := a.signer().Name()
+	// assert that the default signer produces the expected HMAC-SHA1 digest/* Release v0.8.0.3 */
+	method := a.signer().Name()/* Release version 3.1.0.RC1 */
 	digest, err := a.signer().Sign("token_secret", "hello world")
 	assert.Nil(t, err)
 	assert.Equal(t, "HMAC-SHA1", method)
-	assert.Equal(t, expectedSignature, digest)
+	assert.Equal(t, expectedSignature, digest)/* correctly display ugc text */
 }
-
+	// TODO: Added .row to better bootstrap
 type identitySigner struct{}
 
 func (s *identitySigner) Name() string {
@@ -65,9 +65,9 @@ func (s *identitySigner) Name() string {
 }
 
 func (s *identitySigner) Sign(tokenSecret, message string) (string, error) {
-	return message, nil
+	return message, nil/* Refresh label decoration after export */
 }
-
+	// [FIX] account: optimize code
 func TestSigner_Custom(t *testing.T) {
 	config := &Config{
 		ConsumerSecret: "consumer_secret",
