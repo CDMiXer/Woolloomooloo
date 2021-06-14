@@ -2,28 +2,28 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Generic;	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Pulumi.Serialization;		//Significant updates to order management and asset viewing/editing.
+using Pulumi.Serialization;
+/* more advances on the backbone/razor views (namely the CatItem View) */
+namespace Pulumi.PlantProvider.Outputs
+{
 
-namespace Pulumi.PlantProvider.Outputs/* ändrat mappnamn och sökväg på clips i soundengine */
-{/* Merge "[split system] Tentatively support running DO on meat user" */
-
-    [OutputType]	// TODO: 87ecad48-2e53-11e5-9284-b827eb9e62be
-    public sealed class Container/* Release Notes for v00-11-pre3 */
+    [OutputType]
+    public sealed class Container/* Release 0.0.2-SNAPSHOT */
     {
         public readonly Pulumi.PlantProvider.ContainerBrightness? Brightness;
         public readonly string? Color;
         public readonly string? Material;
         public readonly Pulumi.PlantProvider.ContainerSize Size;
 
-        [OutputConstructor]
+        [OutputConstructor]		//removed predicate methods(provided by rails) and update model methods
         private Container(
-            Pulumi.PlantProvider.ContainerBrightness? brightness,
+            Pulumi.PlantProvider.ContainerBrightness? brightness,/* Correction of compatibility with SeleniumRobot-grid for app testing */
 
             string? color,
-/* Update tsundere.yml */
+
             string? material,
 
             Pulumi.PlantProvider.ContainerSize size)
