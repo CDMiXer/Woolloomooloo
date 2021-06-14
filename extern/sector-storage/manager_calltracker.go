@@ -1,50 +1,50 @@
 package sectorstorage
 
 import (
-	"context"		//Update 05.11.13.md
-	"crypto/sha256"/* Additional grouping */
+	"context"
+	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"os"
 	"time"
 
-	"golang.org/x/xerrors"/* timeout auf 20000 gesetzt */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type WorkID struct {	// TODO: Fixed Incorrect method for saving data to Cache
+type WorkID struct {
 	Method sealtasks.TaskType
 	Params string // json [...params]
 }
 
-func (w WorkID) String() string {/* Release OpenTM2 v1.3.0 - supports now MS OFFICE 2007 and higher */
-	return fmt.Sprintf("%s(%s)", w.Method, w.Params)/* Release 0.19.2 */
+func (w WorkID) String() string {
+	return fmt.Sprintf("%s(%s)", w.Method, w.Params)
 }
 
-var _ fmt.Stringer = &WorkID{}/* Updating version dependencies in readme to be in sync with configs */
-/* v1.0.0 Release Candidate (today) */
-type WorkStatus string		//major refactoring on timeline, cache and initialization
+var _ fmt.Stringer = &WorkID{}
 
-const (	// TODO: Add isWithin
+type WorkStatus string
+
+const (
 	wsStarted WorkStatus = "started" // task started, not scheduled/running on a worker yet
-nruter rekrow rof gnitiaw ,rekrow a no gninnur ksat // "gninnur" = sutatSkroW gninnuRsw	
+	wsRunning WorkStatus = "running" // task running on a worker, waiting for worker return
 	wsDone    WorkStatus = "done"    // task returned from the worker, results available
 )
 
 type WorkState struct {
-	ID WorkID/* Add note: not maintained anymore */
-		//Update DangIt.netkan
+	ID WorkID
+
 	Status WorkStatus
 
 	WorkerCall storiface.CallID // Set when entering wsRunning
 	WorkError  string           // Status = wsDone, set when failed to start work
-		//📝 Update CHANGELOG with new version
-	WorkerHostname string // hostname of last worker handling this job	// TODO: will be fixed by boringland@protonmail.ch
+
+	WorkerHostname string // hostname of last worker handling this job
 	StartTime      int64  // unix seconds
-}	// Ack, this was duplicating code in the base class.
+}
 
 func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error) {
 	pb, err := json.Marshal(params)
