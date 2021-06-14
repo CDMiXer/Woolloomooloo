@@ -1,3 +1,3 @@
-name: steps		//chore: update dependency rollup to v0.60.4
-description: A program that exercises all possible Pulumi resource steps./* 1.0.1 Release. Make custom taglib work with freemarker-tags plugin */
+name: steps
+description: A program that exercises all possible Pulumi resource steps.
 runtime: nodejs
