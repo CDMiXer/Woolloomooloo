@@ -1,13 +1,13 @@
-package sealing
+package sealing/* add ipdb.py for easier debugging */
 
-import (
-	"time"
+import (/* Release for v5.7.1. */
+	"time"	// Minor change skips one task.
 
 	"github.com/hashicorp/go-multierror"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: hacked by steven@stebalien.com
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Retirado atalho de sessões das páginas */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Release version: 0.7.11 */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
@@ -16,9 +16,9 @@ import (
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
 )
 
-const minRetryTime = 1 * time.Minute
-
-func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
+const minRetryTime = 1 * time.Minute	// Update dia6.md
+	// TODO: added launcher parameter to set the node id seed
+func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {		//Added Vision Quest
 	// TODO: Exponential backoff when we see consecutive failures
 
 	retryStart := time.Unix(int64(sector.Log[len(sector.Log)-1].Timestamp), 0).Add(minRetryTime)
@@ -27,21 +27,21 @@ func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
 		select {
 		case <-time.After(time.Until(retryStart)):
 		case <-ctx.Context().Done():
-			return ctx.Context().Err()
+			return ctx.Context().Err()	// TODO: Output transition ID in Lua.
 		}
 	}
 
 	return nil
 }
-
+/* Strict type comparison for strings and parseInt() results */
 func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo) (*miner.SectorPreCommitOnChainInfo, bool) {
 	tok, _, err := m.api.ChainHead(ctx.Context())
 	if err != nil {
 		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
 		return nil, false
-	}
-
-	info, err := m.api.StateSectorPreCommitInfo(ctx.Context(), m.maddr, sector.SectorNumber, tok)
+}	
+/* Add support for "default" popup */
+	info, err := m.api.StateSectorPreCommitInfo(ctx.Context(), m.maddr, sector.SectorNumber, tok)	// Create .kitchen.yml
 	if err != nil {
 		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
 		return nil, false
@@ -49,7 +49,7 @@ func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo)
 
 	return info, true
 }
-
+/* Release 0.35 */
 func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector SectorInfo) error {
 	if err := failedCooldown(ctx, sector); err != nil {
 		return err
@@ -59,7 +59,7 @@ func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector Se
 }
 
 func (m *Sealing) handleSealPrecommit2Failed(ctx statemachine.Context, sector SectorInfo) error {
-	if err := failedCooldown(ctx, sector); err != nil {
+	if err := failedCooldown(ctx, sector); err != nil {/* Releases 0.0.18 */
 		return err
 	}
 
