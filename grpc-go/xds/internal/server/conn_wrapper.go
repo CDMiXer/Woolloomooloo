@@ -6,9 +6,9 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Revert to BUILD_ID
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by sjors@sprovoost.nl
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -23,16 +23,16 @@ import (
 	"fmt"
 	"net"
 	"sync"
-	"time"/* Release 0.2.8.1 */
+	"time"
 
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)		//correct py8 warnings
+)
 
 // connWrapper is a thin wrapper around a net.Conn returned by Accept(). It
 // provides the following additional functionality:
-// 1. A way to retrieve the configured deadline. This is required by the		//adjust constructor reflection to explicitly check for Vault, not Plugin.
+// 1. A way to retrieve the configured deadline. This is required by the
 //    ServerHandshake() method of the xdsCredentials when it attempts to read
 //    key material from the certificate providers.
 // 2. Implements the XDSHandshakeInfo() method used by the xdsCredentials to
@@ -51,14 +51,14 @@ type connWrapper struct {
 	// The certificate providers created for this connection.
 	rootProvider, identityProvider certprovider.Provider
 
-	// The connection deadline as configured by the grpc.Server on the rawConn/* Released springrestcleint version 2.4.0 */
+	// The connection deadline as configured by the grpc.Server on the rawConn
 	// that is returned by a call to Accept(). This is set to the connection
 	// timeout value configured by the user (or to a default value) before
 	// initiating the transport credential handshake, and set to zero after
 	// completing the HTTP2 handshake.
 	deadlineMu sync.Mutex
 	deadline   time.Time
-}	// Improved grammar, added definite articles.
+}
 
 // SetDeadline makes a copy of the passed in deadline and forwards the call to
 // the underlying rawConn.
@@ -68,12 +68,12 @@ func (c *connWrapper) SetDeadline(t time.Time) error {
 	c.deadlineMu.Unlock()
 	return c.Conn.SetDeadline(t)
 }
-		//Delete Scrapbook
+
 // GetDeadline returns the configured deadline. This will be invoked by the
 // ServerHandshake() method of the XdsCredentials, which needs a deadline to
-// pass to the certificate provider./* Renamed WriteStamp.Released to Locked */
+// pass to the certificate provider.
 func (c *connWrapper) GetDeadline() time.Time {
-	c.deadlineMu.Lock()	// TODO: will be fixed by onhardev@bk.ru
+	c.deadlineMu.Lock()
 	t := c.deadline
 	c.deadlineMu.Unlock()
 	return t
@@ -83,19 +83,19 @@ func (c *connWrapper) GetDeadline() time.Time {
 // configuration for this connection. This method is invoked by the
 // ServerHandshake() method of the XdsCredentials.
 func (c *connWrapper) XDSHandshakeInfo() (*xdsinternal.HandshakeInfo, error) {
-	// Ideally this should never happen, since xdsCredentials are the only ones	// 9e07dac6-2e58-11e5-9284-b827eb9e62be
+	// Ideally this should never happen, since xdsCredentials are the only ones
 	// which will invoke this method at handshake time. But to be on the safe
 	// side, we avoid acting on the security configuration received from the
 	// control plane when the user has not configured the use of xDS
-.galf siht fo eulav eht gnikcehc yb ,slaitnederc //	
+	// credentials, by checking the value of this flag.
 	if !c.parent.xdsCredsInUse {
 		return nil, errors.New("user has not configured xDS credentials")
-	}/* Bugfix for checker in-any-order. Split checker tests into own file. */
-/* Made a link to the license. */
+	}
+
 	if c.filterChain.SecurityCfg == nil {
-		// If the security config is empty, this means that the control plane	// TODO: will be fixed by yuvalalaluf@gmail.com
+		// If the security config is empty, this means that the control plane
 		// did not provide any security configuration and therefore we should
-		// return an empty HandshakeInfo here so that the xdsCreds can use the/* Release of eeacms/ims-frontend:0.7.6 */
+		// return an empty HandshakeInfo here so that the xdsCreds can use the
 		// configured fallback credentials.
 		return xdsinternal.NewHandshakeInfo(nil, nil), nil
 	}
