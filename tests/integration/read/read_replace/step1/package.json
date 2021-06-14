@@ -1,12 +1,12 @@
 {
     "name": "read_dbr",
-    "main": "bin/index.js",	// TODO: will be fixed by lexy8russo@outlook.com
-    "typings": "bin/index.d.ts",	// TODO: Created examples of Interceptors and Decorators.
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"/* (jam) Release 2.1.0 final */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
