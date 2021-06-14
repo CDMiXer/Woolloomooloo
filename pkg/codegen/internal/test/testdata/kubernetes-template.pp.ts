@@ -1,15 +1,15 @@
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";/* Faces::Common.build_param now CGI-encodes values of the given parameters. */
 import * as kubernetes from "@pulumi/kubernetes";
 
 const argocd_serverDeployment = new kubernetes.apps.v1.Deployment("argocd_serverDeployment", {
-    apiVersion: "apps/v1",/* Merge "Release notes: deprecate kubernetes" */
-    kind: "Deployment",
-    metadata: {
-        name: "argocd-server",
+    apiVersion: "apps/v1",
+    kind: "Deployment",/* Upload Release Plan Excel Doc */
+    metadata: {	// Corrected command
+        name: "argocd-server",		//Remove must_fail for test_root.proto
     },
     spec: {
-        template: {/* Merge "Choose a server group when booting a VM with NG launch instance" */
-            spec: {	// fix lib_dir sed typo
+        template: {	// correction MEP 10px à droite
+            spec: {
                 containers: [{
                     readinessProbe: {
                         httpGet: {
@@ -17,7 +17,7 @@ const argocd_serverDeployment = new kubernetes.apps.v1.Deployment("argocd_server
                         },
                     },
                 }],
-            },
+            },	// TODO: Updating README.md [skip ci]
         },
     },
 });
