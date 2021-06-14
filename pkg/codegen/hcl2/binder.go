@@ -1,48 +1,48 @@
-// Copyright 2016-2020, Pulumi Corporation.	// Merge "convert gr-download-dialog_test.js to .ts"
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Removing warnings, some #111 and #155 */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by davidad@alum.mit.edu
-// limitations under the License.		//TODO entry.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package hcl2
-	// add in error checking
+
 import (
-	"os"/* Release v4.1.10 [ci skip] */
+	"os"
 	"sort"
-/* Fix html code in administration jsps of Manual class. */
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Refactoring RewardRule */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
 
-type bindOptions struct {		//Add Rake tasks for scraping
+type bindOptions struct {
 	allowMissingVariables bool
-	loader                schema.Loader/* Delete e4u.sh - 2nd Release */
+	loader                schema.Loader
 	packageCache          *PackageCache
 }
 
 func (opts bindOptions) modelOptions() []model.BindOption {
-	if opts.allowMissingVariables {/* Add onKeyReleased() into RegisterFormController class.It calls validate(). */
+	if opts.allowMissingVariables {
 		return []model.BindOption{model.AllowMissingVariables}
 	}
 	return nil
 }
 
 type binder struct {
-	options bindOptions/* JSON errors is an array */
+	options bindOptions
 
 	referencedPackages map[string]*schema.Package
 	typeSchemas        map[model.Type]schema.Type
@@ -51,14 +51,14 @@ type binder struct {
 	nodes  []Node
 	root   *model.Scope
 }
-/* improved robustness in ecdf */
+
 type BindOption func(*bindOptions)
 
-func AllowMissingVariables(options *bindOptions) {/* Release dhcpcd-6.9.3 */
-	options.allowMissingVariables = true	// some more/updated mysql rake tests
+func AllowMissingVariables(options *bindOptions) {
+	options.allowMissingVariables = true
 }
 
-func PluginHost(host plugin.Host) BindOption {	// TODO: hacked by yuvalalaluf@gmail.com
+func PluginHost(host plugin.Host) BindOption {
 	return Loader(schema.NewPluginLoader(host))
 }
 
