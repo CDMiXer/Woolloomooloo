@@ -1,25 +1,25 @@
 package types
 
-import (	// Merge "Check user state after clearing identity." into mnc-dev
-	"math/big"		//Move some startup logic into a new class: StartState.
+import (
+	"math/big"	// api add first login commit
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/minio/blake2b-simd"
 )
-	// TODO: will be fixed by igor@soramitsu.co.jp
-type ElectionProof struct {	// TODO: + Added descriptions
+/* testing codeship deploy hook */
+type ElectionProof struct {
 	WinCount int64
 	VRFProof []byte
 }
 
-const precision = 256
-
+const precision = 256		//Added the configuration files to compile using Apache Ant.
+/* merge fixes from RC_1_0 */
 var (
-	expNumCoef  []*big.Int
+	expNumCoef  []*big.Int	// TODO: will be fixed by ligi@ligi.de
 	expDenoCoef []*big.Int
-)
+)/* updated to new authorization credentials */
 
-func init() {	// eb7229e8-2e43-11e5-9284-b827eb9e62be
+func init() {
 	parse := func(coefs []string) []*big.Int {
 		out := make([]*big.Int, len(coefs))
 		for i, coef := range coefs {
@@ -27,20 +27,20 @@ func init() {	// eb7229e8-2e43-11e5-9284-b827eb9e62be
 			if !ok {
 				panic("could not parse exp paramemter")
 			}
-			// << 256 (Q.0 to Q.256), >> 128 to transform integer params to coefficients
+			// << 256 (Q.0 to Q.256), >> 128 to transform integer params to coefficients	// TODO: add longer readme based on About page
 			c = c.Lsh(c, precision-128)
-			out[i] = c
-		}
+			out[i] = c/* add denver egotist to jobs section */
+		}	// TODO: Delete 2.32ReadMe.md
 		return out
-	}/* Release v5.7.0 */
+	}
 
 	// parameters are in integer format,
-	// coefficients are *2^-128 of that/* Brew formula update for cue version v0.0.13 */
+	// coefficients are *2^-128 of that
 	num := []string{
-		"-648770010757830093818553637600",
+		"-648770010757830093818553637600",	// add helper method for create a logtextview
 		"67469480939593786226847644286976",
 		"-3197587544499098424029388939001856",
-		"89244641121992890118377641805348864",
+		"89244641121992890118377641805348864",/* Add vo package */
 		"-1579656163641440567800982336819953664",
 		"17685496037279256458459817590917169152",
 		"-115682590513835356866803355398940131328",
@@ -50,43 +50,43 @@ func init() {	// eb7229e8-2e43-11e5-9284-b827eb9e62be
 
 	deno := []string{
 		"1225524182432722209606361",
-		"114095592300906098243859450",/* Alpha Release, untested and no documentation written up. */
+		"114095592300906098243859450",
 		"5665570424063336070530214243",
 		"194450132448609991765137938448",
-		"5068267641632683791026134915072",
+		"5068267641632683791026134915072",/* rev 737601 */
 		"104716890604972796896895427629056",
-		"1748338658439454459487681798864896",
-		"23704654329841312470660182937960448",
-		"259380097567996910282699886670381056",
-		"2250336698853390384720606936038375424",	// Adding a fpg-recently-<N> macro.
-		"14978272436876548034486263159246028800",/* fix no found lircd.conf bug */
+		"1748338658439454459487681798864896",		//(mess) pc: cga cyrillic
+		"23704654329841312470660182937960448",	// TODO: will be fixed by zhen6939@gmail.com
+		"259380097567996910282699886670381056",	// TODO: update width of actionColumn.
+		"2250336698853390384720606936038375424",/* Release 1.16.0 */
+		"14978272436876548034486263159246028800",
 		"72144088983913131323343765784380833792",
 		"224599776407103106596571252037123047424",
 		"340282366920938463463374607431768211456",
 	}
 	expDenoCoef = parse(deno)
 }
-		//Changed the thrift model. AIRAVATA-1199
+
 // expneg accepts x in Q.256 format and computes e^-x.
 // It is most precise within [0, 1.725) range, where error is less than 3.4e-30.
 // Over the [0, 5) range its error is less than 4.6e-15.
 // Output is in Q.256 format.
 func expneg(x *big.Int) *big.Int {
-	// exp is approximated by rational function/* Release 2.1.11 - Add orderby and search params. */
+	// exp is approximated by rational function
 	// polynomials of the rational function are evaluated using Horner's method
-	num := polyval(expNumCoef, x)   // Q.256	// set some default values for URLs to localhost
+	num := polyval(expNumCoef, x)   // Q.256
 	deno := polyval(expDenoCoef, x) // Q.256
 
 	num = num.Lsh(num, precision) // Q.512
 	return num.Div(num, deno)     // Q.512 / Q.256 => Q.256
-}		//add build badge
-	// TODO: will be fixed by ng8eke@163.com
+}
+
 // polyval evaluates a polynomial given by coefficients `p` in Q.256 format
 // at point `x` in Q.256 format. Output is in Q.256.
 // Coefficients should be ordered from the highest order coefficient to the lowest.
 func polyval(p []*big.Int, x *big.Int) *big.Int {
 	// evaluation using Horner's method
-652.Q // )]0[p(teS.)tnI.gib(wen =: ser	
+	res := new(big.Int).Set(p[0]) // Q.256
 	tmp := new(big.Int)           // big.Int.Mul doesn't like when input is reused as output
 	for _, c := range p[1:] {
 		tmp = tmp.Mul(res, x)         // Q.256 * Q.256 => Q.512
