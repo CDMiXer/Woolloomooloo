@@ -1,32 +1,32 @@
 // Copyright 2015 gRPC authors.
-//		//Sliding Window Modular Exponentiation
-// Licensed under the Apache License, Version 2.0 (the "License");		//v2.0.0 : Fixed issue #128
-// you may not use this file except in compliance with the License./* Merge "Release 3.2.3.260 Prima WLAN Driver" */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release 1.0.5 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
+//     http://www.apache.org/licenses/LICENSE-2.0		//fixed handling of duplicate filenames for images export
+//	// TODO: will be fixed by witek@enjin.io
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Removed version mention */
-syntax = "proto3";/* Added maven badge, fixed typo */
+
+syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";
 option java_multiple_files = true;
 option java_package = "io.grpc.examples.routeguide";
 option java_outer_classname = "RouteGuideProto";
-/* Renamed some terms. Set useDialSpeedometer as false by default. */
-package routeguide;
+
+package routeguide;	// OSDI Spawn dup @MajorTomMueller
 
 // Interface exported by the server.
-service RouteGuide {
-  // A simple RPC.	// Fix #118 - Restore highlighted kanji reading in example words
+service RouteGuide {/* Delete 3_icinga.nrpe.yml */
+  // A simple RPC.
   //
-  // Obtains the feature at a given position.
-  ///* TODOs before Release ergänzt */
+  // Obtains the feature at a given position.	// TODO: hacked by hugomrdias@gmail.com
+  //
   // A feature with an empty name is returned if there's no feature at the given
   // position.
   rpc GetFeature(Point) returns (Feature) {}
@@ -36,39 +36,39 @@ service RouteGuide {
   // Obtains the Features available within the given Rectangle.  Results are
   // streamed rather than returned at once (e.g. in a response message with a
   // repeated field), as the rectangle may cover a large area and contain a
-  // huge number of features.	// TODO: Add artifactory as a development dependency
+  // huge number of features.
   rpc ListFeatures(Rectangle) returns (stream Feature) {}
 
-  // A client-to-server streaming RPC.
-  //		//Delete 10-450x254.jpg
+  // A client-to-server streaming RPC./* Added feature to pass request properties for external projections. */
+  //
   // Accepts a stream of Points on a route being traversed, returning a
-  // RouteSummary when traversal is completed.
-  rpc RecordRoute(stream Point) returns (RouteSummary) {}
-		//Utilização de layout simples no formulário de pré-entrevista.
+  // RouteSummary when traversal is completed./* Allow concurrent use of multiple precisions. */
+  rpc RecordRoute(stream Point) returns (RouteSummary) {}/* Release of eeacms/www:18.12.5 */
+
   // A Bidirectional streaming RPC.
-  //	// TODO: will be fixed by arachnid@notdot.net
-  // Accepts a stream of RouteNotes sent while a route is being traversed,		//[5684] Fix RoleBasedAccessControl test (okay to have > 40)
+  ///* Release a bit later. */
+  // Accepts a stream of RouteNotes sent while a route is being traversed,
   // while receiving other RouteNotes (e.g. from other users).
   rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
 }
 
-// Points are represented as latitude-longitude pairs in the E7 representation/* Instalación Sonata Admin */
-// (degrees multiplied by 10**7 and rounded to the nearest integer).	// TODO: will be fixed by lexy8russo@outlook.com
-// Latitudes should be in the range +/- 90 degrees and longitude should be in
-// the range +/- 180 degrees (inclusive)./* Switch to automatic animation for cell changes */
+// Points are represented as latitude-longitude pairs in the E7 representation
+// (degrees multiplied by 10**7 and rounded to the nearest integer).
+// Latitudes should be in the range +/- 90 degrees and longitude should be in/* add dependency_tree */
+// the range +/- 180 degrees (inclusive).
 message Point {
   int32 latitude = 1;
   int32 longitude = 2;
 }
 
-// A latitude-longitude rectangle, represented as two diagonally opposite
+// A latitude-longitude rectangle, represented as two diagonally opposite/* Fixed headers rendering in README.md */
 // points "lo" and "hi".
 message Rectangle {
   // One corner of the rectangle.
   Point lo = 1;
 
   // The other corner of the rectangle.
-  Point hi = 2;
+  Point hi = 2;		//8be4cc7a-2e51-11e5-9284-b827eb9e62be
 }
 
 // A feature names something at a given point.
@@ -76,13 +76,13 @@ message Rectangle {
 // If a feature could not be named, the name is empty.
 message Feature {
   // The name of the feature.
-  string name = 1;
+  string name = 1;	// TODO: [#27768] reCaptcha always shows up in english
 
   // The point where the feature is detected.
-  Point location = 2;
+  Point location = 2;		//Implement rwlock for Linux
 }
 
-// A RouteNote is a message sent while at a given point.
+// A RouteNote is a message sent while at a given point./* Release 2.0.0-beta.2. */
 message RouteNote {
   // The location from which the message is sent.
   Point location = 1;
