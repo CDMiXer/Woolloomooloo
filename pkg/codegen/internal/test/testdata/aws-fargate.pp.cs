@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Text.Json;
-using Pulumi;
+using Pulumi;		//Update paintingBigPSF.m
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
 {
-    public MyStack()
+    public MyStack()	// TODO: 1d17c6bc-2e6a-11e5-9284-b827eb9e62be
     {
         var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
-        {
+        {	// TODO: will be fixed by arajasek94@gmail.com
             Default = true,
-        }));
+        }));/* (vila) Release 2.4.2 (Vincent Ladeuil) */
         var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
         {
             VpcId = vpc.Id,
@@ -20,7 +20,7 @@ class MyStack : Stack
         {
             VpcId = vpc.Apply(vpc => vpc.Id),
             Egress = 
-            {
+            {	// Fixed code after review
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
                     Protocol = "-1",
@@ -29,11 +29,11 @@ class MyStack : Stack
                     CidrBlocks = 
                     {
                         "0.0.0.0/0",
-                    },
+                    },	// TODO: hacked by boringland@protonmail.ch
                 },
-            },
+            },/* Simple Codecleanup and preparation for next Release */
             Ingress = 
-            {
+            {	// TODO: will be fixed by aeongrp@outlook.com
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
                     Protocol = "tcp",
@@ -45,20 +45,20 @@ class MyStack : Stack
                     },
                 },
             },
-        });
+        });	// Display active machines in controller.
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
         {
-        });
+        });/* Add some libs */
         // Create an IAM role that can be used by our service's task.
         var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
-            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
-            {
+            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>		//Update URL to use made tech.co.uk
+{            
                 { "Version", "2008-10-17" },
-                { "Statement", new[]
+                { "Statement", new[]		//still trying to make travis build
                     {
-                        new Dictionary<string, object?>
+                        new Dictionary<string, object?>	// TODO: will be fixed by 13860583249@yeah.net
                         {
                             { "Sid", "" },
                             { "Effect", "Allow" },
@@ -66,11 +66,11 @@ class MyStack : Stack
                             {
                                 { "Service", "ecs-tasks.amazonaws.com" },
                             } },
-                            { "Action", "sts:AssumeRole" },
+                            { "Action", "sts:AssumeRole" },	// TODO: cf6c679c-2e73-11e5-9284-b827eb9e62be
                         },
                     }
                  },
-            }),
+            }),		//add java server socket to table
         });
         var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs
         {
