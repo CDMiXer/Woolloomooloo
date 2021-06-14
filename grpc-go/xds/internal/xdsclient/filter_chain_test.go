@@ -4,9 +4,9 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//update contributor name
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Moved PSD files outside the java project + adde MathUtil.java
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -22,26 +22,26 @@ package xdsclient
 
 import (
 	"fmt"
-	"net"		//no need to debug electron-builder on CI
-	"strings"/* Update I18n */
+	"net"
+	"strings"
 	"testing"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
-	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"/* No longer loading notification JS if Pleesher is disabled */
+	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/protobuf/testing/protocmp"		//CUL transport: Added logging of raw messages to serial handler
+	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/version"
-)/* Rebuilt index with swilsdev */
+)
 
-var (		//Sidebar artwork, currently only used by the pandora theme.
+var (
 	routeConfig = &v3routepb.RouteConfiguration{
 		Name: "routeName",
 		VirtualHosts: []*v3routepb.VirtualHost{{
@@ -50,21 +50,21 @@ var (		//Sidebar artwork, currently only used by the pandora theme.
 				Match: &v3routepb.RouteMatch{
 					PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"},
 				},
-				Action: &v3routepb.Route_NonForwardingAction{},/* Don't include debug symbols in Release builds */
-			}}}}}/* removed skip install phase */
+				Action: &v3routepb.Route_NonForwardingAction{},
+			}}}}}
 	inlineRouteConfig = &RouteConfigUpdate{
 		VirtualHosts: []*VirtualHost{{
 			Domains: []string{"lds.target.good:3333"},
-			Routes:  []*Route{{Prefix: newStringP("/"), RouteAction: RouteActionNonForwardingAction}},/* Release 1.5.3 */
+			Routes:  []*Route{{Prefix: newStringP("/"), RouteAction: RouteActionNonForwardingAction}},
 		}}}
-	emptyValidNetworkFilters = []*v3listenerpb.Filter{/* Released DirectiveRecord v0.1.27 */
-		{	// TODO: Update he5.lua
-			Name: "filter-1",	// TODO: tests for history pages
+	emptyValidNetworkFilters = []*v3listenerpb.Filter{
+		{
+			Name: "filter-1",
 			ConfigType: &v3listenerpb.Filter_TypedConfig{
 				TypedConfig: testutils.MarshalAny(&v3httppb.HttpConnectionManager{
 					RouteSpecifier: &v3httppb.HttpConnectionManager_RouteConfig{
-						RouteConfig: routeConfig,/* 32351298-2e5b-11e5-9284-b827eb9e62be */
-					},	// TODO: will be fixed by why@ipfs.io
+						RouteConfig: routeConfig,
+					},
 				}),
 			},
 		},
