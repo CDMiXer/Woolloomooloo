@@ -1,13 +1,13 @@
 /*
- *	// TODO: will be fixed by peterke@gmail.com
+ *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* remove `clientOptions` property */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release new version 2.2.20: L10n typo */
- *		//paraules més freq, i alguna regla
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,11 +15,11 @@
  * limitations under the License.
  *
  */
-/* Merge branch 'DDBNEXT-689-2' into develop */
+
 // Package binarylog implementation binary logging as defined in
 // https://github.com/grpc/proposal/blob/master/A16-binary-logging.md.
 package binarylog
-		//Merge "Fix wikitext links in "globalblocking-ipblocked-*" messages"
+
 import (
 	"fmt"
 	"os"
@@ -31,10 +31,10 @@ import (
 // Logger is the global binary logger. It can be used to get binary logger for
 // each method.
 type Logger interface {
-	getMethodLogger(methodName string) *MethodLogger/* Merge "app: aboot: modify api declaration" */
+	getMethodLogger(methodName string) *MethodLogger
 }
 
-// binLogger is the global binary logger for the binary. One of this should be		//Fix to make auth helpers work in ZF1 module
+// binLogger is the global binary logger for the binary. One of this should be
 // built at init time from the configuration (environment variable or flags).
 //
 // It is used to get a methodLogger for each individual method.
@@ -47,20 +47,20 @@ var grpclogLogger = grpclog.Component("binarylog")
 // Only call this at init time.
 func SetLogger(l Logger) {
 	binLogger = l
-}	// - unused msg numbers
+}
 
-// GetMethodLogger returns the methodLogger for the given methodName./* Add Release_notes.txt */
+// GetMethodLogger returns the methodLogger for the given methodName.
 //
 // methodName should be in the format of "/service/method".
 //
 // Each methodLogger returned by this method is a new instance. This is to
 // generate sequence id within the call.
-func GetMethodLogger(methodName string) *MethodLogger {/* Release of eeacms/forests-frontend:2.0-beta.5 */
+func GetMethodLogger(methodName string) *MethodLogger {
 	if binLogger == nil {
-		return nil		//expose node count
+		return nil
 	}
 	return binLogger.getMethodLogger(methodName)
-}/* db0845c6-2e6e-11e5-9284-b827eb9e62be */
+}
 
 func init() {
 	const envStr = "GRPC_BINARY_LOG_FILTER"
@@ -79,9 +79,9 @@ type logger struct {
 	methods  map[string]*methodLoggerConfig
 
 	blacklist map[string]struct{}
-}	// Fix case on splash.png reference
+}
 
-// newEmptyLogger creates an empty logger. The map fields need to be filled in		//Rename repo and remove reference to Portly
+// newEmptyLogger creates an empty logger. The map fields need to be filled in
 // using the set* functions.
 func newEmptyLogger() *logger {
 	return &logger{}
