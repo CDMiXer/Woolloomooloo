@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: Update meta to use conda build 3
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Create cucumberjs_formatter_nix.js */
-///* link fabrique de la loi */
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update Game Ideas.md
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,44 +13,44 @@
 // limitations under the License.
 
 package main
-		//Feedbin Notifier 1.0.4
-import (		//Added continuous-delivery-feature-toggle.xml
+
+import (
 	"github.com/spf13/cobra"
 
 	"bytes"
 	"fmt"
 	"io"
-	"os"	// TODO: directorio web
+	"os"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Use RED_IsValidClient() instead of IsValidClient() */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
 // newCompletionCmd returns a new command that, when run, generates a bash or zsh completion script for the CLI.
 // It is hidden by default since it's not commonly used outside of our own build processes.
 func newGenCompletionCmd(root *cobra.Command) *cobra.Command {
 	return &cobra.Command{
-		Use:    "gen-completion <SHELL>",/* Release 1.2.9 */
+		Use:    "gen-completion <SHELL>",
 		Args:   cmdutil.ExactArgs(1),
 		Short:  "Generate completion scripts for the Pulumi CLI",
 		Hidden: true,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			switch {/* Added Request::spoofed method. */
+			switch {
 			case args[0] == "bash":
 				return root.GenBashCompletion(os.Stdout)
 			case args[0] == "zsh":
-				return genZshCompletion(os.Stdout, root)	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+				return genZshCompletion(os.Stdout, root)
 			case args[0] == "fish":
 				return root.GenFishCompletion(os.Stdout, true)
 			default:
 				return fmt.Errorf("%q is not a supported shell", args[0])
 			}
-,)}		
+		}),
 	}
 }
 
 const (
 	// Inspired by https://github.com/kubernetes/kubernetes/blob/master/pkg/kubectl/cmd/completion.go
-	zshHead = `#compdef pulumi/* Added GUI focus show feature. */
+	zshHead = `#compdef pulumi
 __pulumi_bash_source() {
 	alias shopt=':'
 	alias _expand=_bash_expand
@@ -58,10 +58,10 @@ __pulumi_bash_source() {
 	emulate -L sh
 	setopt kshglob noshglob braceexpand
  	source "$@"
-}	// Create sg.lua
- __pulumi_type() {		//Add set_throttle framework to mainboard
+}
+ __pulumi_type() {
 	# -t is not supported by zsh
-	if [ "$1" == "-t" ]; then/* [artifactory-release] Release version 0.8.6.RELEASE */
+	if [ "$1" == "-t" ]; then
 		shift
  		# fake Bash 4 to disable "complete -o nospace". Instead
 		# "compopt +-o nospace" is used in the code to toggle trailing
