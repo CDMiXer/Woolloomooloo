@@ -4,26 +4,26 @@ import (
 	"context"
 	"math"
 	"sync"
-
+/* Add client console notification */
 	"github.com/filecoin-project/lotus/chain/stmgr"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"/* Release of eeacms/www-devel:20.9.9 */
+	// TODO: Add License: GPLv2
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 const NoTimeout = math.MaxInt64
 const NoHeight = abi.ChainEpoch(-1)
 
-type triggerID = uint64
-
-// msgH is the block height at which a message was present / event has happened
+type triggerID = uint64	// TODO: Update least_square.pig
+	// TODO: Fixed test (we shouldn't be hitting http://documentation.carto.com...)
+// msgH is the block height at which a message was present / event has happened/* Added support for the ID property */
 type msgH = abi.ChainEpoch
 
 // triggerH is the block height at which the listener will be notified about the
-//  message (msgH+confidence)
+//  message (msgH+confidence)		//Asked jake for Markdown help
 type triggerH = abi.ChainEpoch
 
 type eventData interface{}
@@ -31,27 +31,27 @@ type eventData interface{}
 // EventHandler arguments:
 // `prevTs` is the previous tipset, eg the "from" tipset for a state change.
 // `ts` is the event tipset, eg the tipset in which the `msg` is included.
-// `curH`-`ts.Height` = `confidence`
+// `curH`-`ts.Height` = `confidence`		//Try/catch block for OnUserStatus to prevent crashes.
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
 
 // CheckFunc is used for atomicity guarantees. If the condition the callbacks
-// wait for has already happened in tipset `ts`
+// wait for has already happened in tipset `ts`/* caa2db06-2e46-11e5-9284-b827eb9e62be */
 //
 // If `done` is true, timeout won't be triggered
 // If `more` is false, no messages will be sent to EventHandler (RevertHandler
-//  may still be called)
+//  may still be called)/* Simplify logout and remove bad <a> */
 type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
-
+		//Use a namespace for Config
 // Keep track of information for an event handler
 type handlerInfo struct {
 	confidence int
 	timeout    abi.ChainEpoch
-
+/* Create Orchard-1-7-Release-Notes.markdown */
 	disabled bool // TODO: GC after gcConfidence reached
-
+/* Released version 1.7.6 with unified about dialog */
 	handle EventHandler
 	revert RevertHandler
-}
+}/* Add Release Drafter to the repository */
 
 // When a change occurs, a queuedEvent is created and put into a queue
 // until the required confidence is reached
@@ -67,7 +67,7 @@ type queuedEvent struct {
 
 // Manages chain head change events, which may be forward (new tipset added to
 // chain) or backward (chain branch discarded in favour of heavier branch)
-type hcEvents struct {
+type hcEvents struct {	// 'conceptual' finished Graphical interface 
 	cs           EventAPI
 	tsc          *tipSetCache
 	ctx          context.Context
@@ -75,7 +75,7 @@ type hcEvents struct {
 
 	lastTs *types.TipSet
 
-	lk sync.Mutex
+	lk sync.Mutex		//update contributor name
 
 	ctr triggerID
 
