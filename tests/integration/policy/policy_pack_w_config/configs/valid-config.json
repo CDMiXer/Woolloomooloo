@@ -1,7 +1,7 @@
-{/* Updated PiAware Release Notes (markdown) */
-    "all": {/* Update Eventos “27fbdcf5-1a74-4154-8f85-2ba95cc4a0d4” */
+{
+    "all": {
         "enforcementLevel": "advisory"
-    },	// TODO: hacked by alan.shaw@protocol.ai
+    },
     "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "test msg"
