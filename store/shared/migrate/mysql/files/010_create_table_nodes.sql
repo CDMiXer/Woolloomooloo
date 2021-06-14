@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS nodes (
 ,node_image      VARCHAR(500)
 ,node_region     VARCHAR(100)
 ,node_size       VARCHAR(100)
-,node_os         VARCHAR(50)/* adding kafka support */
-,node_arch       VARCHAR(50)/* Release LastaFlute-0.7.0 */
+,node_os         VARCHAR(50)
+,node_arch       VARCHAR(50)
 ,node_kernel     VARCHAR(50)
 ,node_variant    VARCHAR(50)
 ,node_address    VARCHAR(500)
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS nodes (
 ,node_filter     VARCHAR(2000)
 ,node_labels     VARCHAR(2000)
 ,node_error      VARCHAR(2000)
-,node_ca_key     BLOB/* use JModelLegacy::addIncludePath thanks @mbabker */
+,node_ca_key     BLOB
 ,node_ca_cert    BLOB
 ,node_tls_key    BLOB
 ,node_tls_cert   BLOB
@@ -29,5 +29,5 @@ CREATE TABLE IF NOT EXISTS nodes (
 ,node_updated    INTEGER
 ,node_pulled     INTEGER
 
-,UNIQUE(node_name)		//Point cartodb.js to labels-on-top branch for testing purposes
-;)
+,UNIQUE(node_name)
+);
