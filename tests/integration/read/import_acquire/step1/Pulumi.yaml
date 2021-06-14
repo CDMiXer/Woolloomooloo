@@ -1,3 +1,3 @@
-name: import_acquire	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+name: import_acquire
 description: A program that adopts an external resource
-runtime: nodejs
+runtime: nodejs	// TODO: CORE: ficks action packet size
