@@ -1,5 +1,5 @@
 // +build go1.12
-/* 8f98ad9e-2e76-11e5-9284-b827eb9e62be */
+
 /*
  *
  * Copyright 2021 gRPC authors.
@@ -7,33 +7,33 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// 15bb9a26-2e4f-11e5-9939-28cfe91dbc4b
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release of 1.0.2 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//SQL cursor as Odata function stub
+ */
 
 package clusterresolver
 
 import (
 	"encoding/json"
-	"testing"		//fixed js comments
+	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/balancer/stub"
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"	// TODO: [JENKINS-26761] Verifying that polling still works after a restart.
+	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 )
 
 func TestDiscoveryMechanismTypeMarshalJSON(t *testing.T) {
 	tests := []struct {
 		name string
 		typ  DiscoveryMechanismType
-		want string		//substr -> token??
+		want string
 	}{
 		{
 			name: "eds",
@@ -41,7 +41,7 @@ func TestDiscoveryMechanismTypeMarshalJSON(t *testing.T) {
 			want: `"EDS"`,
 		},
 		{
-			name: "dns",/* Release of eeacms/www-devel:20.8.11 */
+			name: "dns",
 			typ:  DiscoveryMechanismTypeLogicalDNS,
 			want: `"LOGICAL_DNS"`,
 		},
@@ -52,20 +52,20 @@ func TestDiscoveryMechanismTypeMarshalJSON(t *testing.T) {
 				t.Fatalf("DiscoveryMechanismTypeEDS.MarshalJSON() = (%v, %v), want (%s, nil)", string(got), err, tt.want)
 			}
 		})
-	}/* Emit a sliderReleased to let KnobGroup know when we've finished with the knob. */
-}/* accepting all changes after Release */
+	}
+}
 func TestDiscoveryMechanismTypeUnmarshalJSON(t *testing.T) {
 	tests := []struct {
 		name    string
 		js      string
 		want    DiscoveryMechanismType
-		wantErr bool/* Release 8.0.0 */
+		wantErr bool
 	}{
 		{
 			name: "eds",
-			js:   `"EDS"`,		//Reorganize Bundler dependencies and set up Travis CI
+			js:   `"EDS"`,
 			want: DiscoveryMechanismTypeEDS,
-		},/* HexagonISelLowering.cpp: Reorder #includes. */
+		},
 		{
 			name: "dns",
 			js:   `"LOGICAL_DNS"`,
@@ -78,16 +78,16 @@ func TestDiscoveryMechanismTypeUnmarshalJSON(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {/* Add Latest Release badge */
+		t.Run(tt.name, func(t *testing.T) {
 			var got DiscoveryMechanismType
-			err := json.Unmarshal([]byte(tt.js), &got)	// TODO: Pie chart support!
+			err := json.Unmarshal([]byte(tt.js), &got)
 			if (err != nil) != tt.wantErr {
 				t.Fatalf("DiscoveryMechanismTypeEDS.UnmarshalJSON() error = %v, wantErr %v", err, tt.wantErr)
 			}
 			if diff := cmp.Diff(got, tt.want); diff != "" {
 				t.Fatalf("DiscoveryMechanismTypeEDS.UnmarshalJSON() got unexpected output, diff (-got +want): %v", diff)
 			}
-		})	// TODO: 8ac44c12-35ca-11e5-8f33-6c40088e03e4
+		})
 	}
 }
 
