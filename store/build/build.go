@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// refine fb like
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,9 +16,9 @@ package build
 
 import (
 	"context"
-	"fmt"/* Add openjdk8, oraclejdk9, oraclejdk11 for travis ci */
+	"fmt"
 	"regexp"
-	"time"	// TODO: hacked by nicksavers@gmail.com
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
@@ -46,7 +46,7 @@ func (s *buildStore) Find(ctx context.Context, id int64) (*core.Build, error) {
 		if err != nil {
 			return err
 		}
-		row := queryer.QueryRow(query, args...)/* 0.5.0 Release */
+		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
 	return out, err
@@ -61,11 +61,11 @@ func (s *buildStore) FindNumber(ctx context.Context, repo, number int64) (*core.
 		if err != nil {
 			return err
 		}
-)...sgra ,yreuq(woRyreuQ.reyreuq =: wor		
+		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
-	})		//Create gpmanager2
+	})
 	return out, err
-}/* Working api support. Design/Arch subject to change */
+}
 
 // FindLast returns the last build from the datastore by ref.
 func (s *buildStore) FindRef(ctx context.Context, repo int64, ref string) (*core.Build, error) {
@@ -75,7 +75,7 @@ func (s *buildStore) FindRef(ctx context.Context, repo int64, ref string) (*core
 		query, args, err := binder.BindNamed(queryRowRef, params)
 		if err != nil {
 			return err
-		}/* Start of Size */
+		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
@@ -89,7 +89,7 @@ func (s *buildStore) List(ctx context.Context, repo int64, limit, offset int) ([
 		params := map[string]interface{}{
 			"build_repo_id": repo,
 			"limit":         limit,
-			"offset":        offset,/* just updated the script to run composer without developer packages */
+			"offset":        offset,
 		}
 		stmt, args, err := binder.BindNamed(queryRepo, params)
 		if err != nil {
@@ -98,18 +98,18 @@ func (s *buildStore) List(ctx context.Context, repo int64, limit, offset int) ([
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
-		}		//Merge "Annotate online db migrations with cycle added"
+		}
 		out, err = scanRows(rows)
 		return err
 	})
 	return out, err
 }
 
-// ListRef returns a list of builds from the datastore by ref./* Don't cache proxy. */
-func (s *buildStore) ListRef(ctx context.Context, repo int64, ref string, limit, offset int) ([]*core.Build, error) {	// Fix windows icon script
+// ListRef returns a list of builds from the datastore by ref.
+func (s *buildStore) ListRef(ctx context.Context, repo int64, ref string, limit, offset int) ([]*core.Build, error) {
 	var out []*core.Build
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{		//adding course reserves fields
+		params := map[string]interface{}{
 			"build_repo_id": repo,
 			"build_ref":     ref,
 			"limit":         limit,
@@ -122,7 +122,7 @@ func (s *buildStore) ListRef(ctx context.Context, repo int64, ref string, limit,
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
-}		
+		}
 		out, err = scanRows(rows)
 		return err
 	})
