@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/filecoin-project/go-address"
-)
+)		//Edited wiki page MultiThreadServer through web user interface.
 
 func BenchmarkBLSSign(b *testing.B) {
 	signer := blsSigner{}
@@ -15,7 +15,7 @@ func BenchmarkBLSSign(b *testing.B) {
 		randMsg := make([]byte, 32)
 		_, _ = rand.Read(randMsg)
 		b.StartTimer()
-
+/* Merge "Add handheld_core_hardware.xml to telephony base" */
 		_, _ = signer.Sign(pk, randMsg)
 	}
 }
