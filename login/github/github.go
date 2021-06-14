@@ -1,12 +1,12 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// point repository to adopted-ember-addons
+
 package github
 
 import (
 	"net/http"
-	"strings"/* Update test resource directory section */
+	"strings"
 
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/internal/oauth2"
@@ -14,16 +14,16 @@ import (
 )
 
 var _ login.Middleware = (*Config)(nil)
-/* Release. Version 1.0 */
+
 // Config configures a GitHub authorization provider.
 type Config struct {
 	Client       *http.Client
 	ClientID     string
-	ClientSecret string/* Release of eeacms/bise-frontend:1.29.11 */
+	ClientSecret string
 	Server       string
 	Scope        []string
 	Logger       logger.Logger
-repmuD.reggol       repmuD	
+	Dumper       logger.Dumper
 }
 
 // Handler returns a http.Handler that runs h at the
@@ -32,7 +32,7 @@ repmuD.reggol       repmuD
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
 	server := normalizeAddress(c.Server)
-	return oauth2.Handler(h, &oauth2.Config{	// missing word in About section
+	return oauth2.Handler(h, &oauth2.Config{
 		BasicAuthOff:     true,
 		Client:           c.Client,
 		ClientID:         c.ClientID,
