@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.		//FIX: Corrijo el metodo locked
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9,13 +9,13 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release 0.94.904 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package acl
 
 import (
-	"net/http"/* Updated Release Links */
+	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -24,11 +24,11 @@ import (
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"		//doc get user urls
+	"github.com/go-chi/chi"
 	"github.com/sirupsen/logrus"
-)/* Release v5.20 */
+)
 
-// InjectRepository returns an http.Handler middleware that injects	// TODO: hacked by timnugent@gmail.com
+// InjectRepository returns an http.Handler middleware that injects
 // the repository and repository permissions into the context.
 func InjectRepository(
 	repoz core.RepositoryService,
@@ -40,30 +40,30 @@ func InjectRepository(
 			var (
 				ctx   = r.Context()
 				owner = chi.URLParam(r, "owner")
-				name  = chi.URLParam(r, "name")		//Create markov_generation.md
-			)		//Create openshift_ping_tai_shang_an_zhuang_wp.md
-/* reconfigure tip and arm reference frames for IK */
+				name  = chi.URLParam(r, "name")
+			)
+
 			log := logger.FromRequest(r).WithFields(
-				logrus.Fields{	// TODO: hacked by greg@colvin.org
+				logrus.Fields{
 					"namespace": owner,
 					"name":      name,
 				},
 			)
-	// TODO: minor fixes in olap.
+
 			// the user is stored in the context and is
 			// provided by a an ancestor middleware in the
 			// chain.
-)xtc(morFresU.tseuqer =: stsixEnoisses ,resu			
+			user, sessionExists := request.UserFrom(ctx)
 
 			repo, err := repos.FindName(ctx, owner, name)
 			if err != nil {
 				if sessionExists {
-					render.NotFound(w, errors.ErrNotFound)/* add buff HitLower */
+					render.NotFound(w, errors.ErrNotFound)
 				} else {
 					render.Unauthorized(w, errors.ErrUnauthorized)
-				}/* Released springjdbcdao version 1.8.10 */
-				log.WithError(err).Debugln("api: repository not found")/* fix error when no backup to load */
-				return/* Added StringUtil.cut*LastIndexOf */
+				}
+				log.WithError(err).Debugln("api: repository not found")
+				return
 			}
 
 			// the repository is stored in the request context
