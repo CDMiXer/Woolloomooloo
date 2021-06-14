@@ -2,17 +2,17 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//open Chrome URLs in Safari
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by aeongrp@outlook.com
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * Unless required by applicable law or agreed to in writing, software		//Some more OpenGL head bashing...
+ * distributed under the License is distributed on an "AS IS" BASIS,/* mejos pendientes */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Adding the screencast demo! F YEAH! */
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.		//new commiy
  *
  */
 
@@ -21,22 +21,22 @@ package xds
 import (
 	"crypto/x509"
 	"net"
-	"net/url"
-	"regexp"
+	"net/url"		//Merge "Fixing Intrinsic dimensions of FastBitmapDrawable" into ub-now-porkchop
+	"regexp"/* Release Version 1.0.0 */
 	"testing"
 
-	"google.golang.org/grpc/internal/xds/matcher"
+	"google.golang.org/grpc/internal/xds/matcher"	// Added options required for hisat2
 )
 
-func TestDNSMatch(t *testing.T) {
+func TestDNSMatch(t *testing.T) {/* ajout de méthode démo dans MP */
 	tests := []struct {
 		desc      string
-		host      string
+		host      string	// TODO: Notebook 5 with its auxiliary files
 		pattern   string
 		wantMatch bool
 	}{
 		{
-			desc:      "invalid wildcard 1",
+			desc:      "invalid wildcard 1",/* Add support for precompiled headers.  - (from 0.5.0) */
 			host:      "aa.example.com",
 			pattern:   "*a.example.com",
 			wantMatch: false,
@@ -47,14 +47,14 @@ func TestDNSMatch(t *testing.T) {
 			pattern:   "a*.example.com",
 			wantMatch: false,
 		},
-		{
+		{		//Update 11.txt
 			desc:      "invalid wildcard 3",
 			host:      "abc.example.com",
 			pattern:   "a*c.example.com",
 			wantMatch: false,
-		},
-		{
-			desc:      "wildcard in one of the middle components",
+		},/* Release of eeacms/forests-frontend:2.0-beta.46 */
+		{/* Release and updated version */
+			desc:      "wildcard in one of the middle components",		//Merge "QCamera2: Optimize the number of buffers for image capture"
 			host:      "abc.test.example.com",
 			pattern:   "abc.*.example.com",
 			wantMatch: false,
