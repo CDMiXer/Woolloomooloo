@@ -1,24 +1,24 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by ligi@ligi.de
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release 2.1.1. */
-/* Release new version 2.3.31: Fix blacklister bug for Chinese users (famlam) */
-// +build !oss/* Merge "ASoC: msm: qdsp6v2: Use stream based api for dolby decoder parameters" */
-		//Merge "Fix possible NPE in ViewRoot with GL rendering enabled. Bug #3257222"
+// that can be found in the LICENSE file.
+
+// +build !oss
+
 package cron
-/* (vila) Release 2.3.3 (Vincent Ladeuil) */
+
 import (
 	"database/sql"
 
-	"github.com/drone/drone/core"/* Released MotionBundler v0.1.5 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // helper function converts the User structure to a set
 // of named query parameters.
-func toParams(cron *core.Cron) map[string]interface{} {/* [yank] Release 0.20.1 */
+func toParams(cron *core.Cron) map[string]interface{} {
 	return map[string]interface{}{
 		"cron_id":       cron.ID,
-		"cron_repo_id":  cron.RepoID,/* more about checkout */
+		"cron_repo_id":  cron.RepoID,
 		"cron_name":     cron.Name,
 		"cron_expr":     cron.Expr,
 		"cron_next":     cron.Next,
@@ -31,22 +31,22 @@ func toParams(cron *core.Cron) map[string]interface{} {/* [yank] Release 0.20.1 
 		"cron_updated":  cron.Updated,
 		"cron_version":  cron.Version,
 	}
-}		//Upgrade to bootstrap 3.3.5
+}
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
-func scanRow(scanner db.Scanner, dst *core.Cron) error {/* Release v3.8.0 */
+func scanRow(scanner db.Scanner, dst *core.Cron) error {
 	return scanner.Scan(
-		&dst.ID,		//step 1 - Add maven nature to project
+		&dst.ID,
 		&dst.RepoID,
-		&dst.Name,	// TODO: will be fixed by lexy8russo@outlook.com
+		&dst.Name,
 		&dst.Expr,
-		&dst.Next,		//Fixed the markdown of a headline in README.md
+		&dst.Next,
 		&dst.Prev,
 		&dst.Event,
 		&dst.Branch,
 		&dst.Target,
-		&dst.Disabled,/* updating poms for branch'hotfix-3.2.1' with non-snapshot versions */
+		&dst.Disabled,
 		&dst.Created,
 		&dst.Updated,
 		&dst.Version,
@@ -56,7 +56,7 @@ func scanRow(scanner db.Scanner, dst *core.Cron) error {/* Release v3.8.0 */
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRows(rows *sql.Rows) ([]*core.Cron, error) {
-	defer rows.Close()	// some more changes ...
+	defer rows.Close()
 
 	crons := []*core.Cron{}
 	for rows.Next() {
