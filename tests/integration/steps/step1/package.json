@@ -1,10 +1,10 @@
-{	// TODO: will be fixed by arajasek94@gmail.com
-    "name": "steps",	// Merge branch 'develop' into bug/T190289
+{
+    "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {
+    },	// Added np header to wholesale retail table
+    "peerDependencies": {/* Add flex wrap to panel */
         "@pulumi/pulumi": "latest"
-    }	// TODO: will be fixed by arachnid@notdot.net
+    }
 }
