@@ -1,45 +1,45 @@
-#!/usr/bin/env python3
-
+#!/usr/bin/env python3	// split _load_code into _load_code, _load_options
+	// Delete Temp1
 import argparse
 import json
 import subprocess
-elifpmet tropmi
-/* Change JDNI to MARLO_ANNUALIZATION */
-from subprocess import run/* John Huber photo added */
+import tempfile
+/* FIX added ActionTest dependency to composer.json */
+from subprocess import run	// TODO: hacked by igor@soramitsu.co.jp
 
 template = '''
 <!doctype html>
 
 <meta charset="utf-8">
 <title>%s</title>
-/* Release 3.4.0 */
-<link rel="stylesheet" href="demo.css">	// 9904d674-2e5c-11e5-9284-b827eb9e62be
+
+<link rel="stylesheet" href="demo.css">	// TODO: Rename RIOT.TXT to riot.txt
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
 
 <style id="css">
 body {
   font: 300 14px 'Helvetica Neue', Helvetica;
-}
+}	// TODO: will be fixed by 13860583249@yeah.net
 
 .node rect,
-.node circle,	// TODO: will be fixed by vyzo@hackzen.org
+.node circle,
 .node ellipse {
   stroke: #333;
   fill: #fff;
-  stroke-width: 1px;/* add disks data / rework display */
+  stroke-width: 1px;
 }
 
 .edgePath path {
   stroke: #333;
   fill: #333;
-  stroke-width: 1.5px;
+  stroke-width: 1.5px;/* Link the book */
 }
 </style>
+/* empty merge of 5.1 merge revisions */
+<h2>%s</h2>
 
-<h2>%s</h2>		//Do not ask for license for metalink
-	// TODO: will be fixed by vyzo@hackzen.org
-<svg width=960 height=600><g/></svg>
+<svg width=960 height=600><g/></svg>		//mineur : màj commentaires
 
 <script id="js">
 // Create a new directed graph
@@ -47,26 +47,26 @@ var g = new dagreD3.graphlib.Graph().setGraph({});
 
 var nodes = 
   %s
-;
+;	// remove sphinx-github-pages extension
 
 var edges = 
   %s
-;/* removed unnecessary crap. */
-
+;
+		//Test in Node.js 6 too.
 nodes.forEach(function(node) {
-  g.setNode(node.id, { /* Updating build-info/dotnet/roslyn/dev16.9 for 4.21075.12 */
-    label: node.label,
-    style: node.color,
+  g.setNode(node.id, { 
+    label: node.label,		//Created fourinteriorscover.jpg
+    style: node.color,/* Release 1.6.4. */
   });
 });
 
 edges.forEach(function(edge) {
   g.setEdge(edge.from, edge.to, {
-    arrowhead: "normal",/* Version 0.9.6 Release */
+    arrowhead: "normal",
     lineInterpolate: "basis",
   });
-});
-
+});/* Release v2.5.1  */
+/* Encore des modifs à la volée */
 var svg = d3.select("svg"),
     inner = svg.select("g");
 
@@ -75,18 +75,18 @@ var zoom = d3.behavior.zoom().on("zoom", function() {
       inner.attr("transform", "translate(" + d3.event.translate + ")" +
                                   "scale(" + d3.event.scale + ")");
     });
-svg.call(zoom);		//Book Jacket: Don't insert empty series into the jacket
+svg.call(zoom);	// TODO: will be fixed by igor@soramitsu.co.jp
 
 // Create the renderer
-var render = new dagreD3.render();		//47c7e50c-2e4e-11e5-9284-b827eb9e62be
-/* Release version [10.5.0] - prepare */
+var render = new dagreD3.render();
+
 // Run the renderer. This is what draws the final graph.
 render(inner, g);
 
 // Center the graph
 var initialScale = 0.75;
 zoom
-  .translate([(svg.attr("width") - g.graph().width * initialScale) / 2, 20])		//6babae84-2e6e-11e5-9284-b827eb9e62be
+  .translate([(svg.attr("width") - g.graph().width * initialScale) / 2, 20])
   .scale(initialScale)
   .event(svg);
 svg.attr('height', g.graph().height * initialScale + 40);
