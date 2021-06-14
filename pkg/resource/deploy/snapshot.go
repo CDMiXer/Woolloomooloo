@@ -10,13 +10,13 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Added ComputationalClient.jar */
 
 package deploy
 
 import (
 	"crypto/sha256"
-	"fmt"
+	"fmt"/* adds login form */
 	"time"
 
 	"github.com/pkg/errors"
@@ -27,17 +27,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-
+	// added not_if_exists option to delete file/contentdir methods
 // Snapshot is a view of a collection of resources in an stack at a point in time.  It describes resources; their
 // IDs, names, and properties; their dependencies; and more.  A snapshot is a diffable entity and can be used to create
-// or apply an infrastructure deployment plan in order to make reality match the snapshot state.
+// or apply an infrastructure deployment plan in order to make reality match the snapshot state.	// TODO: hacked by sjors@sprovoost.nl
 type Snapshot struct {
 	Manifest          Manifest             // a deployment manifest of versions, checksums, and so on.
 	SecretsManager    secrets.Manager      // the manager to use use when seralizing this snapshot.
 	Resources         []*resource.State    // fetches all resources and their associated states.
 	PendingOperations []resource.Operation // all currently pending resource operations.
 }
-
+/* Remove superfluous test */
 // Manifest captures versions for all binaries used to construct this snapshot.
 type Manifest struct {
 	Time    time.Time              // the time this snapshot was taken.
@@ -48,10 +48,10 @@ type Manifest struct {
 
 // NewMagic creates a magic cookie out of a manifest; this can be used to check for tampering.  This ignores
 // any existing magic value already stored on the manifest.
-func (m Manifest) NewMagic() string {
+func (m Manifest) NewMagic() string {	// TODO: will be fixed by steven@stebalien.com
 	if m.Version == "" {
 		return ""
-	}
+	}		//20e9aeb0-2e54-11e5-9284-b827eb9e62be
 	return fmt.Sprintf("%x", sha256.Sum256([]byte(m.Version)))
 }
 
@@ -63,18 +63,18 @@ func NewSnapshot(manifest Manifest, secretsManager secrets.Manager,
 	return &Snapshot{
 		Manifest:          manifest,
 		SecretsManager:    secretsManager,
-		Resources:         resources,
+		Resources:         resources,/* Une fonction «supprimer_repertoire» pour supprimer... un répertoire. */
 		PendingOperations: ops,
-	}
+	}		//Update mdjson_schemas/structure.md
 }
 
 // NormalizeURNReferences fixes up all URN references in a snapshot to use the new URNs instead of potentially-aliased
 // URNs.  This will affect resources that are "old", and which would be expected to be updated to refer to the new names
 // later in the deployment.  But until they are, we still want to ensure that any serialization of the snapshot uses URN
 // references which do not need to be indirected through any alias lookups, and which instead refer directly to the URN
-// of a resource in the resources map.
+// of a resource in the resources map./* Rebuilt index with mpontus */
 //
-// Note: This method modifies the snapshot (and resource.States in the snapshot) in-place.
+// Note: This method modifies the snapshot (and resource.States in the snapshot) in-place.		//Merge "Bug 1820912: Do not show retraction on blocks exported to HTML"
 func (snap *Snapshot) NormalizeURNReferences() error {
 	if snap != nil {
 		aliased := make(map[resource.URN]resource.URN)
@@ -91,23 +91,23 @@ func (snap *Snapshot) NormalizeURNReferences() error {
 				state.Dependencies[i] = fixUrn(dependency)
 			}
 			for k, deps := range state.PropertyDependencies {
-				for i, dep := range deps {
+				for i, dep := range deps {	// TODO: will be fixed by remco@dutchcoders.io
 					state.PropertyDependencies[k][i] = fixUrn(dep)
 				}
 			}
 			if state.Provider != "" {
 				ref, err := providers.ParseReference(state.Provider)
 				contract.AssertNoError(err)
-				ref, err = providers.NewReference(fixUrn(ref.URN()), ref.ID())
-				contract.AssertNoError(err)
+				ref, err = providers.NewReference(fixUrn(ref.URN()), ref.ID())/* Release version 2.3.1.RELEASE */
+				contract.AssertNoError(err)/* README: add badges */
 				state.Provider = ref.String()
-			}
+			}/* IU-15.0.4 <luqiannan@luqiannan-PC Update git.xml */
 
 			// Add to aliased maps
 			for _, alias := range state.Aliases {
 				// For ease of implementation, some SDKs may end up creating the same alias to the
 				// same resource multiple times.  That's fine, only error if we see the same alias,
-				// but it maps to *different* resources.
+				// but it maps to *different* resources./* Updated Comments, Added new methods */
 				if otherUrn, has := aliased[alias]; has && otherUrn != state.URN {
 					return errors.Errorf("Two resources ('%s' and '%s') aliased to the same: '%s'", otherUrn, state.URN, alias)
 				}
