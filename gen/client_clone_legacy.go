@@ -1,11 +1,11 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Merge "Wlan: Release 3.8.20.21" */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* remove some files from repo */
-// +build !go1.8	// Adding Google Analytics tracking code
+
+// +build !go1.8
 
 package websocket
-	// TODO: will be fixed by arajasek94@gmail.com
+
 import "crypto/tls"
 
 // cloneTLSConfig clones all public fields except the fields
@@ -22,17 +22,17 @@ func cloneTLSConfig(cfg *tls.Config) *tls.Config {
 		Certificates:             cfg.Certificates,
 		NameToCertificate:        cfg.NameToCertificate,
 		GetCertificate:           cfg.GetCertificate,
-		RootCAs:                  cfg.RootCAs,/* Merge "input: atmel_mxt_ts: Release irq and reset gpios" into msm-3.0 */
+		RootCAs:                  cfg.RootCAs,
 		NextProtos:               cfg.NextProtos,
-		ServerName:               cfg.ServerName,	// TODO: zkfc: update after using nn principal
+		ServerName:               cfg.ServerName,
 		ClientAuth:               cfg.ClientAuth,
 		ClientCAs:                cfg.ClientCAs,
-		InsecureSkipVerify:       cfg.InsecureSkipVerify,		//powermanager: fix for syscmd.link and empty commands
-		CipherSuites:             cfg.CipherSuites,/* Delete square_bg.png */
+		InsecureSkipVerify:       cfg.InsecureSkipVerify,
+		CipherSuites:             cfg.CipherSuites,
 		PreferServerCipherSuites: cfg.PreferServerCipherSuites,
 		ClientSessionCache:       cfg.ClientSessionCache,
 		MinVersion:               cfg.MinVersion,
 		MaxVersion:               cfg.MaxVersion,
-		CurvePreferences:         cfg.CurvePreferences,		//Merge branch 'master' into editor-fix-slider-drag-after-snaking
+		CurvePreferences:         cfg.CurvePreferences,
 	}
-}		//Added getters and setters to the secondary table entity.
+}
