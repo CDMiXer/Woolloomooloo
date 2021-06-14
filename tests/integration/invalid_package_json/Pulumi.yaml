@@ -1,3 +1,3 @@
-name: invalid_package_json
+name: invalid_package_json		//Merge branch 'go-rewrite' into go-mysql
 runtime: nodejs
 description: Validates codepath computation even with an invalid version in the package.json file.
