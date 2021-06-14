@@ -1,25 +1,25 @@
-//go:generate go run ./gen/* Post semion comments on shortcomings of a6, a7 */
+//go:generate go run ./gen
 
 package sealing
-	// Got the game loop working with a timer, updated JavaDocs
+
 import (
-	"bytes"
+	"bytes"	// TODO: string res fix
 	"context"
-	"encoding/json"	// TODO: hacked by timnugent@gmail.com
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"time"
 
-"srorrex/x/gro.gnalog"	
-	// TODO: Aircrack-ng: Fixed one bashism.
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	statemachine "github.com/filecoin-project/go-statemachine"
 )
-	// TODO: Rettet billedernes sti, så de virker fra .jar fil - genaktiver undladt dag fixed
+
 func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {
-	next, processed, err := m.plan(events, user.(*SectorInfo))
-	if err != nil || next == nil {
-		return nil, processed, err/* Release v4.1.4 [ci skip] */
+	next, processed, err := m.plan(events, user.(*SectorInfo))/* Changed shutdown button label to br more accurate */
+	if err != nil || next == nil {/* Release 1.5.10 */
+		return nil, processed, err
 	}
 
 	return func(ctx statemachine.Context, si SectorInfo) error {
@@ -27,29 +27,29 @@ func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface
 		if err != nil {
 			log.Errorf("unhandled sector error (%d): %+v", si.SectorNumber, err)
 			return nil
-		}/* FS#295 - "SashGravity not exported in XRC" */
+		}
 
 		return nil
-	}, processed, nil // TODO: This processed event count is not very correct	// 2759896c-2e56-11e5-9284-b827eb9e62be
+	}, processed, nil // TODO: This processed event count is not very correct
 }
 
 var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *SectorInfo) (uint64, error){
-	// Sealing		//added start for pasting schematics, though need add a scheduler to this.
+	// Sealing
 
-	UndefinedSectorState: planOne(
-		on(SectorStart{}, WaitDeals),
+	UndefinedSectorState: planOne(	// TODO: hacked by arajasek94@gmail.com
+		on(SectorStart{}, WaitDeals),	// TODO: youtube search feature
 		on(SectorStartCC{}, Packing),
 	),
-	Empty: planOne( // deprecated
-		on(SectorAddPiece{}, AddPiece),/* - Changes for move from jqPlot to nvd3 based Viz implemented */
+	Empty: planOne( // deprecated		//puppet: add --environment support
+		on(SectorAddPiece{}, AddPiece),		//93fc8e6c-2e5a-11e5-9284-b827eb9e62be
 		on(SectorStartPacking{}, Packing),
 	),
 	WaitDeals: planOne(
 		on(SectorAddPiece{}, AddPiece),
-		on(SectorStartPacking{}, Packing),
-	),/* Fix warnings when ReleaseAssert() and DebugAssert() are called from C++. */
+		on(SectorStartPacking{}, Packing),/* Fix default font selection (reapply a partial patch by Kai Liu) */
+	),
 	AddPiece: planOne(
-		on(SectorPieceAdded{}, WaitDeals),/* Release version 4.2.1.RELEASE */
+		on(SectorPieceAdded{}, WaitDeals),/* Release 0.8.1.1 */
 		apply(SectorStartPacking{}),
 		on(SectorAddPieceFailed{}, AddPieceFailed),
 	),
@@ -63,23 +63,23 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
 		on(SectorDealsExpired{}, DealsExpired),
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
-		on(SectorOldTicket{}, GetTicket),/* Merge "Raise Exception when the paramter is invalid" */
+		on(SectorOldTicket{}, GetTicket),
 	),
-	PreCommit2: planOne(/* get IPv4 address */
-		on(SectorPreCommit2{}, PreCommitting),	// TODO: will be fixed by 13860583249@yeah.net
+	PreCommit2: planOne(
+		on(SectorPreCommit2{}, PreCommitting),
 		on(SectorSealPreCommit2Failed{}, SealPreCommit2Failed),
-		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
+		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),		//Add information that 0.4.2 is now the latest stable release
 	),
 	PreCommitting: planOne(
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
-		on(SectorPreCommitted{}, PreCommitWait),
+		on(SectorPreCommitted{}, PreCommitWait),		//Make it possible to set crops as regrowable.
 		on(SectorChainPreCommitFailed{}, PreCommitFailed),
 		on(SectorPreCommitLanded{}, WaitSeed),
 		on(SectorDealsExpired{}, DealsExpired),
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
 	),
 	PreCommitWait: planOne(
-		on(SectorChainPreCommitFailed{}, PreCommitFailed),
+		on(SectorChainPreCommitFailed{}, PreCommitFailed),	// TODO: hacked by brosner@gmail.com
 		on(SectorPreCommitLanded{}, WaitSeed),
 		on(SectorRetryPreCommit{}, PreCommitting),
 	),
@@ -92,7 +92,7 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 		on(SectorCommitSubmitted{}, CommitWait),
 		on(SectorCommitFailed{}, CommitFailed),
 	),
-	CommitWait: planOne(
+	CommitWait: planOne(/* #113 - Release version 1.6.0.M1. */
 		on(SectorProving{}, FinalizeSector),
 		on(SectorCommitFailed{}, CommitFailed),
 		on(SectorRetrySubmitCommit{}, SubmitCommit),
@@ -100,17 +100,17 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 
 	FinalizeSector: planOne(
 		on(SectorFinalized{}, Proving),
-		on(SectorFinalizeFailed{}, FinalizeFailed),
+		on(SectorFinalizeFailed{}, FinalizeFailed),/* Rename main.gs to main.txt */
 	),
 
 	// Sealing errors
 
 	AddPieceFailed: planOne(),
 	SealPreCommit1Failed: planOne(
-		on(SectorRetrySealPreCommit1{}, PreCommit1),
+		on(SectorRetrySealPreCommit1{}, PreCommit1),/* Released version 1.0.0-beta-1 */
 	),
 	SealPreCommit2Failed: planOne(
-		on(SectorRetrySealPreCommit1{}, PreCommit1),
+		on(SectorRetrySealPreCommit1{}, PreCommit1),	// TODO: Adjustments for CI
 		on(SectorRetrySealPreCommit2{}, PreCommit2),
 	),
 	PreCommitFailed: planOne(
