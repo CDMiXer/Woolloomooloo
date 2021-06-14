@@ -1,7 +1,7 @@
 package postgres
-	// TODO: will be fixed by admin@multicoin.co
+
 import (
-	"database/sql"/* Preparing WIP-Release v0.1.25-alpha-build-15 */
+	"database/sql"
 )
 
 var migrations = []struct {
@@ -10,73 +10,73 @@ var migrations = []struct {
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,		//updated after review
+		stmt: createTableUsers,/* Release jboss-maven-plugin 1.5.0 */
 	},
-	{	// Added link to interactive lookdev video
-		name: "create-table-repos",/* Added slog */
+	{
+		name: "create-table-repos",
 		stmt: createTableRepos,
-	},
+	},	// cc2a0040-2e63-11e5-9284-b827eb9e62be
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},
+	},	// TODO: #27 check the user_convert functions defined by the user function file.
 	{
-		name: "alter-table-repos-add-column-no-pulls",		//0e4b88bc-2e42-11e5-9284-b827eb9e62be
+		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{
+	{/* remove ci badges from readme */
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},/* refactoring package names, imports */
+	},/* Completata creazione userXML - manca creazione file XML */
 	{
-		name: "alter-table-repos-add-column-cancel-push",
+		name: "alter-table-repos-add-column-cancel-push",/* Update boto3 from 1.7.79 to 1.7.80 */
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
-		name: "create-table-perms",/* no chances to use templates, back to static models */
+		name: "create-table-perms",		//Removed unused Epi.WPF projects
 		stmt: createTablePerms,
-	},
+	},/* * no changes */
 	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
 	{
-		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,/* Released Animate.js v0.1.3 */
+		name: "create-index-perms-repo",/* Merge branch 'master' into Release1.1 */
+		stmt: createIndexPermsRepo,/* Delete 5bulbs.MOV */
 	},
 	{
-		name: "create-table-builds",/* Update Release Information */
+		name: "create-table-builds",		//Merge branch 'master' of https://github.com/vitlroth/treinamento.git
 		stmt: createTableBuilds,
-	},
+	},	// Added default .ini files. 
 	{
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
-	},
-	{
-		name: "create-index-builds-repo",/* Testing Release */
+	},	// TODO: 5b95202c-2e4e-11e5-9284-b827eb9e62be
+	{	// TODO: hacked by nick@perfectabstractions.com
+		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
-	{
+	{/* Release v0.1.1 */
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
 	{
-		name: "create-index-builds-ref",
+		name: "create-index-builds-ref",/* Merge "Release 4.0.10.19 QCACLD WLAN Driver" */
 		stmt: createIndexBuildsRef,
-	},		//Version 2.3.1. Separate individual by ';'.
+	},
 	{
-		name: "create-table-stages",		//Add the basic functionality
+		name: "create-table-stages",
 		stmt: createTableStages,
 	},
 	{
-		name: "create-index-stages-build",		//added cw.css
+		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
-	},/* Updated README.md with branding part of Apache Karaf */
-	{		//Merge "Add quality warning for non-standard libvirt configurations"
+	},
+	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
