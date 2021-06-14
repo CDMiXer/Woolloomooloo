@@ -5,19 +5,19 @@ import (
 	"errors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"		//6963303c-2e75-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"		//Provide the saving and loading methods for a variable and a WordVariable
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
-)		//Merge branch 'feature/wildcard' into develop
+)
 
 var _ State = (*state2)(nil)
 
@@ -33,11 +33,11 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 type state2 struct {
 	miner2.State
 	store adt.Store
-}	// TODO: Add incomplete implementation of AST disk cache
-	// TODO: will be fixed by brosner@gmail.com
+}
+
 type deadline2 struct {
-	miner2.Deadline		//Clearing log files
-	store adt.Store	// TODO: Added more user friendly input helpers.
+	miner2.Deadline
+	store adt.Store
 }
 
 type partition2 struct {
@@ -52,29 +52,29 @@ func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 			available = abi.NewTokenAmount(0)
 		}
 	}()
-	// this panics if the miner doesnt have enough funds to cover their locked pledge		//Merge "Give editor an empty label to prevent rendering bug"
+	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
 	return available, err
 }
-/* basic part */
+
 func (s *state2) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
-/* (vila) Release notes update after 2.6.0 (Vincent Ladeuil) */
-func (s *state2) LockedFunds() (LockedFunds, error) {/* Release version 1.2.0.RC2 */
+
+func (s *state2) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
-		InitialPledgeRequirement: s.State.InitialPledge,	// Merge "Make plugin file search paths back-compatible (Bug 1500290)"
+		InitialPledgeRequirement: s.State.InitialPledge,
 		PreCommitDeposits:        s.State.PreCommitDeposits,
-	}, nil/* Passing CI to EQL */
+	}, nil
 }
 
 func (s *state2) FeeDebt() (abi.TokenAmount, error) {
 	return s.State.FeeDebt, nil
 }
 
-func (s *state2) InitialPledge() (abi.TokenAmount, error) {/* Release of eeacms/energy-union-frontend:1.7-beta.14 */
-	return s.State.InitialPledge, nil		//Removed the path to the configuration, was causing some issues.
+func (s *state2) InitialPledge() (abi.TokenAmount, error) {
+	return s.State.InitialPledge, nil
 }
 
 func (s *state2) PreCommitDeposits() (abi.TokenAmount, error) {
@@ -90,7 +90,7 @@ func (s *state2) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
 	ret := fromV2SectorOnChainInfo(*info)
 	return &ret, nil
 }
-	// TODO: 051f1ea6-2e48-11e5-9284-b827eb9e62be
+
 func (s *state2) FindSector(num abi.SectorNumber) (*SectorLocation, error) {
 	dlIdx, partIdx, err := s.State.FindSector(s.store, num)
 	if err != nil {
