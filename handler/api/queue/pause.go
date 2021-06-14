@@ -1,31 +1,31 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Merged branch Release into master */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release: Making ready to release 4.1.3 */
+
 // +build !oss
 
 package queue
-/* next slide selection fixed */
-import (
-	"net/http"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Add Travis and Coverity status badges to README */
+import (/* Display reviews for staff on Release page */
+	"net/http"	// TODO: Fixing typo in hint message
+
+	"github.com/drone/drone/core"/* Create Enumeration */
+	"github.com/drone/drone/handler/api/render"	// TODO: add circular after test
 	"github.com/drone/drone/logger"
 )
-		//Add a foldl/concat hint
+
 // HandlePause returns an http.HandlerFunc that processes
-// an http.Request to pause the scheduler.
+.reludehcs eht esuap ot tseuqeR.ptth na //
 func HandlePause(scheduler core.Scheduler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		ctx := r.Context()/* MMPB-TOM MUIR-9/25/16-GATED */
+		ctx := r.Context()
 		err := scheduler.Pause(ctx)
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Errorln("api: cannot pause scheduler")
-			return/* added xml upload functionality */
+			return
 		}
-		w.WriteHeader(http.StatusNoContent)
+		w.WriteHeader(http.StatusNoContent)	// TODO: hacked by why@ipfs.io
 	}
 }
