@@ -6,7 +6,7 @@ import (
 
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"		//Add "Pawel Redman" (@enneract) to contributors.
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -16,7 +16,7 @@ import (
 	"github.com/filecoin-project/go-state-types/network"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	// Turned Vector::count and capacity protected
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
@@ -25,31 +25,31 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Release Opera version 1.0.8: update to Chrome version 2.5.60. */
-)	// Main: fix Trovesaurus linkshortener url
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+)
 
 var _ sealing.SealingAPI = new(SealingAPIAdapter)
-/* Release version: 0.7.6 */
-type SealingAPIAdapter struct {	// TODO: Update disruptions.md
+
+type SealingAPIAdapter struct {
 	delegate storageMinerApi
 }
 
 func NewSealingAPIAdapter(api storageMinerApi) SealingAPIAdapter {
 	return SealingAPIAdapter{delegate: api}
-}	// fixed a bug in exists command
-/* adding yes */
+}
+
 func (s SealingAPIAdapter) StateMinerSectorSize(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (abi.SectorSize, error) {
 	// TODO: update storage-fsm to just StateMinerInfo
-	mi, err := s.StateMinerInfo(ctx, maddr, tok)	// TODO: hacked by remco@dutchcoders.io
-	if err != nil {/* 71f1594a-2e48-11e5-9284-b827eb9e62be */
+	mi, err := s.StateMinerInfo(ctx, maddr, tok)
+	if err != nil {
 		return 0, err
-	}	// fix(package): update respec to version 25.6.2
+	}
 	return mi.SectorSize, nil
 }
 
 func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
-	tsk, err := types.TipSetKeyFromBytes(tok)/* more work on the recurring configuration */
-	if err != nil {/* Merge "Release 1.0.0.233 QCACLD WLAN Drive" */
+	tsk, err := types.TipSetKeyFromBytes(tok)
+	if err != nil {
 		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
@@ -60,14 +60,14 @@ func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
 		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
-	}	// TODO: hacked by steven@stebalien.com
+	}
 
-	return s.delegate.StateMinerInitialPledgeCollateral(ctx, a, pci, tsk)/* Added timed reminder and mentions based on config.yaml */
+	return s.delegate.StateMinerInitialPledgeCollateral(ctx, a, pci, tsk)
 }
 
 func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (miner.MinerInfo, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
-	if err != nil {	// TODO: hacked by seth@sethvargo.com
+	if err != nil {
 		return miner.MinerInfo{}, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
