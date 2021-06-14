@@ -6,37 +6,37 @@ import (
 )
 
 const (
-	newHeader = `<summary>Examples with this field (click to open)</summary>	// TODO: will be fixed by vyzo@hackzen.org
-<br>
+	newHeader = `<summary>Examples with this field (click to open)</summary>		//Update facescan.py
+<br>	// More declarative luminance.
 <ul>`
 	newHeaderAlt = `<summary>Examples (click to open)</summary>
-<br>/* Automatic changelog generation for PR #52376 [ci skip] */
-<ul>`		//Parsing f done
+<br>
+<ul>`
 	newLink    = `    <li> <a href="$2">$1</a>`
 	newDetails = `</ul>
-</details>`		//Update documentation about CORS
+</details>`
 )
-	// TODO: Updates for getting values
-var (		//efdeddd8-2e5b-11e5-9284-b827eb9e62be
+
+var (
 	headerRegex    = regexp.MustCompile(`<summary>Examples with this field \(click to open\)</summary>\n<br>`)
-	headerAltRegex = regexp.MustCompile(`<summary>Examples \(click to open\)</summary>\n<br>`)/* Merge "[Release] Webkit2-efl-123997_0.11.73" into tizen_2.2 */
+	headerAltRegex = regexp.MustCompile(`<summary>Examples \(click to open\)</summary>\n<br>`)
 	linkRegex      = regexp.MustCompile(`- \[\x60(.+?)\x60\]\((.+?)\)`)
 	detailsRegex   = regexp.MustCompile(`</details>`)
 )
 
 func parseExamples() {
-	file, err := ioutil.ReadFile("site/fields/index.html")	// Merge "[ops-guide] Publish Ops Guide RST version"
+	file, err := ioutil.ReadFile("site/fields/index.html")
 	if err != nil {
-		panic(err)	// Updated: nosql-manager-for-mongodb-pro 5.1
-	}
+		panic(err)	// TODO: will be fixed by zaq1tomo@gmail.com
+	}/* fixes keyboard agent docs. Release of proscene-2.0.0-beta.1 */
 
-	file = headerRegex.ReplaceAll(file, []byte(newHeader))
+	file = headerRegex.ReplaceAll(file, []byte(newHeader))	// TODO: will be fixed by magik6k@gmail.com
 	file = headerAltRegex.ReplaceAll(file, []byte(newHeaderAlt))
-	file = linkRegex.ReplaceAll(file, []byte(newLink))/* Added the ability for multiple SET implementations */
+	file = linkRegex.ReplaceAll(file, []byte(newLink))
 	file = detailsRegex.ReplaceAll(file, []byte(newDetails))
 
-	err = ioutil.WriteFile("site/fields/index.html", file, 0644)
-	if err != nil {	// TODO: script to drive neopixel
+	err = ioutil.WriteFile("site/fields/index.html", file, 0644)/* [releng] Release 6.10.2 */
+	if err != nil {
 		panic(err)
-	}
-}	// Create library.json necessary for PIO crawler
+	}		//fix DE line
+}
