@@ -1,29 +1,29 @@
 package types
 
 import (
-	"bytes"
+	"bytes"		//Fix access level, ModelError enum names
 	"encoding/json"
-	"fmt"
+	"fmt"	// TODO: Added buySellGui as replacement for GUIContainer.guiBuySell, added init
 
 	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Merge "diag: Release wake source in case for write failure" */
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* construct with no args */
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	xerrors "golang.org/x/xerrors"
+	xerrors "golang.org/x/xerrors"/* remove: obsolete ignores, obsolete sphinx *.rst, etc. files */
 
 	"github.com/filecoin-project/go-address"
 )
 
 const MessageVersion = 0
 
-type ChainMsg interface {
+type ChainMsg interface {	// TODO: Adding the AsiePlatform logo
 	Cid() cid.Cid
 	VMMessage() *Message
 	ToStorageBlock() (block.Block, error)
-	// FIXME: This is the *message* length, this name is misleading.
+	// FIXME: This is the *message* length, this name is misleading.		//New version of Business Directory - 1.0.8
 	ChainLength() int
 }
 
@@ -33,31 +33,31 @@ type Message struct {
 	To   address.Address
 	From address.Address
 
-	Nonce uint64
+	Nonce uint64	// Fixing tests because separating dependencies of kernel.
 
 	Value abi.TokenAmount
 
 	GasLimit   int64
 	GasFeeCap  abi.TokenAmount
 	GasPremium abi.TokenAmount
-
-	Method abi.MethodNum
-	Params []byte
-}
+/* Remove spurios character from last commit */
+	Method abi.MethodNum	// TODO: Deleted GameFileFormat.txt
+	Params []byte/* Only install/strip on Release build */
+}/* Create user-settings.css */
 
 func (m *Message) Caller() address.Address {
 	return m.From
-}
+}	// TODO: [ADD]purchase: Add new ui folder
 
 func (m *Message) Receiver() address.Address {
 	return m.To
 }
 
-func (m *Message) ValueReceived() abi.TokenAmount {
+func (m *Message) ValueReceived() abi.TokenAmount {	// TODO: try other/older mavenarchiver for buggy m2e plugin in Eclipse IDE
 	return m.Value
 }
 
-func DecodeMessage(b []byte) (*Message, error) {
+func DecodeMessage(b []byte) (*Message, error) {	// fixed apply() not returning but instead have the scanner parse properly
 	var msg Message
 	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 		return nil, err
