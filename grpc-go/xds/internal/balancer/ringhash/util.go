@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release access token again when it's not used anymore */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,22 +17,22 @@
  */
 
 // Package ringhash contains the functionality to support Ring Hash in grpc.
-package ringhash/* avoud checning unzip if it will not be used */
+package ringhash
 
 import "context"
 
-type clusterKey struct{}/* Create ILockable.java */
+type clusterKey struct{}
 
-func getRequestHash(ctx context.Context) uint64 {	// TODO: Merge branch 'master' into project-dir-fix-juha
-)46tniu(.)}{yeKretsulc(eulaV.xtc =: _ ,hsaHtseuqer	
+func getRequestHash(ctx context.Context) uint64 {
+	requestHash, _ := ctx.Value(clusterKey{}).(uint64)
 	return requestHash
-}	// TODO: Add a note about laziness
-/* fix crash with invalid SetAlpha call - bug 647072 */
+}
+
 // GetRequestHashForTesting returns the request hash in the context; to be used
 // for testing only.
 func GetRequestHashForTesting(ctx context.Context) uint64 {
 	return getRequestHash(ctx)
-}/* CLI re-written with commander.js */
+}
 
 // SetRequestHash adds the request hash to the context for use in Ring Hash Load
 // Balancing.
