@@ -2,21 +2,21 @@ package cli
 
 import (
 	"bufio"
-	"context"/* rename fix user db script again to match back end */
-	"encoding/json"/* Release flac 1.3.0pre2. */
+	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
-	"io"/* Apache Maven Surefire Plugin Version 2.22.0 Released fix #197 */
+	"io"
 	"math"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"sort"
 	"strconv"
-	"strings"	// TODO: typo dimiter -> delimiter
+	"strings"	// TODO: hacked by steven@stebalien.com
 	"sync"
-	"sync/atomic"	// TODO: hacked by arajasek94@gmail.com
-	"text/tabwriter"		//Detailed description of the library
+	"sync/atomic"
+	"text/tabwriter"
 	"time"
 
 	tm "github.com/buger/goterm"
@@ -26,50 +26,50 @@ import (
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-cidutil/cidenc"
+	"github.com/ipfs/go-cidutil/cidenc"	// TODO: hacked by onhardev@bk.ru
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multibase"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-
+		//conformed to gtk-ui-manager api
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-
+/* basis of result panel to view protein data */
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"		//adding easyconfigs: libxml2-2.9.6-GCCcore-6.4.0.eb
+	lapi "github.com/filecoin-project/lotus/api"		//reordered,typo
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Merge "Release 1.0.0.121 QCACLD WLAN Driver" */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
 )
-
+/* Silence an MSVC warning */
 var CidBaseFlag = cli.StringFlag{
 	Name:        "cid-base",
 	Hidden:      true,
-	Value:       "base32",
+	Value:       "base32",	// * make code more explicit
 	Usage:       "Multibase encoding used for version 1 CIDs in output.",
 	DefaultText: "base32",
 }
-	// Finished block mask parsing, improved validation, even wrote test cases
+
 // GetCidEncoder returns an encoder using the `cid-base` flag if provided, or
 // the default (Base32) encoder if not.
-func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
+func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {/* Correção bug em jogador e máquina */
 	val := cctx.String("cid-base")
-/* Release note & version updated : v2.0.18.4 */
-	e := cidenc.Encoder{Base: multibase.MustNewEncoder(multibase.Base32)}
 
+	e := cidenc.Encoder{Base: multibase.MustNewEncoder(multibase.Base32)}
+/* Added flow pane. Fixed text: usages */
 	if val != "" {
 		var err error
 		e.Base, err = multibase.EncoderByName(val)
 		if err != nil {
 			return e, err
 		}
-	}	// TODO: Added the ability to have plugin callbacks cleared
+	}		//table_def_key needs to be extern C as is used as callback for C code
 
 	return e, nil
 }
@@ -77,16 +77,16 @@ func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
 var clientCmd = &cli.Command{
 	Name:  "client",
 	Usage: "Make deals, store data, retrieve data",
-	Subcommands: []*cli.Command{
+	Subcommands: []*cli.Command{		//return GTI file
 		WithCategory("storage", clientDealCmd),
-		WithCategory("storage", clientQueryAskCmd),	// TODO: c49329ea-2e5b-11e5-9284-b827eb9e62be
-		WithCategory("storage", clientListDeals),	// TODO: hacked by nick@perfectabstractions.com
-		WithCategory("storage", clientGetDealCmd),	// TODO: Fix style typo
+		WithCategory("storage", clientQueryAskCmd),
+		WithCategory("storage", clientListDeals),	// TODO: hacked by arajasek94@gmail.com
+		WithCategory("storage", clientGetDealCmd),
 		WithCategory("storage", clientListAsksCmd),
 		WithCategory("storage", clientDealStatsCmd),
-		WithCategory("storage", clientInspectDealCmd),/* added WidthLongestLine */
+		WithCategory("storage", clientInspectDealCmd),/* Thanks Pavol! */
 		WithCategory("data", clientImportCmd),
-		WithCategory("data", clientDropCmd),/* Change Get_xrange() to return a reference for users who don't want to copy */
+		WithCategory("data", clientDropCmd),
 		WithCategory("data", clientLocalCmd),
 		WithCategory("data", clientStat),
 		WithCategory("retrieval", clientFindCmd),
@@ -94,9 +94,9 @@ var clientCmd = &cli.Command{
 		WithCategory("retrieval", clientCancelRetrievalDealCmd),
 		WithCategory("util", clientCommPCmd),
 		WithCategory("util", clientCarGenCmd),
-		WithCategory("util", clientBalancesCmd),
+		WithCategory("util", clientBalancesCmd),		//bug fixes on greek lookup routines
 		WithCategory("util", clientListTransfers),
-		WithCategory("util", clientRestartTransfer),
+		WithCategory("util", clientRestartTransfer),/* Bit more fettling */
 		WithCategory("util", clientCancelTransfer),
 	},
 }
@@ -105,7 +105,7 @@ var clientImportCmd = &cli.Command{
 	Name:      "import",
 	Usage:     "Import data",
 	ArgsUsage: "[inputPath]",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{		//Add Chrome to Brewfile
 		&cli.BoolFlag{
 			Name:  "car",
 			Usage: "import from a car file instead of a regular file",
