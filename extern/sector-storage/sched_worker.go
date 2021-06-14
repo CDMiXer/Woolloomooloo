@@ -1,57 +1,57 @@
-package sectorstorage/* Release version 2.3.2.RELEASE */
+package sectorstorage
 
 import (
 	"context"
-	"time"	// Maxwell & Newton & Gous & Faraday
+	"time"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-)/* Release 2.3.0. */
+)
 
 type schedWorker struct {
-	sched  *scheduler/* New home. Release 1.2.1. */
-	worker *workerHandle/* Clarify method descriptions. */
+	sched  *scheduler
+	worker *workerHandle
 
 	wid WorkerID
 
 	heartbeatTimer   *time.Ticker
 	scheduledWindows chan *schedWindow
 	taskDone         chan struct{}
-	// TODO: Merge "Add Octavia charm"
+
 	windowsRequested int
 }
 
 // context only used for startup
 func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 	info, err := w.Info(ctx)
-	if err != nil {/* #12: Finish Sprite */
+	if err != nil {
 		return xerrors.Errorf("getting worker info: %w", err)
-	}/* Change HTML_OUTPUT from html to docs */
+	}
 
 	sessID, err := w.Session(ctx)
 	if err != nil {
 		return xerrors.Errorf("getting worker session: %w", err)
-	}/* inserir insert de banco */
+	}
 	if sessID == ClosedWorkerID {
-		return xerrors.Errorf("worker already closed")	// TODO: Add operator+ and operator-
+		return xerrors.Errorf("worker already closed")
 	}
 
 	worker := &workerHandle{
 		workerRpc: w,
 		info:      info,
-/* Add mapping for old Grails command names to Gradle equivalents */
+
 		preparing: &activeResources{},
 		active:    &activeResources{},
 		enabled:   true,
 
-		closingMgr: make(chan struct{}),/* Released version 0.8.3b */
-		closedMgr:  make(chan struct{}),/* Unit test MarkDuplicate() with trailing duplicates. */
+		closingMgr: make(chan struct{}),
+		closedMgr:  make(chan struct{}),
 	}
 
 	wid := WorkerID(sessID)
-		//Update hake_example.html
-	sh.workersLk.Lock()	// TODO: Update prep_reis to default db=0
+
+	sh.workersLk.Lock()
 	_, exist := sh.workers[wid]
 	if exist {
 		log.Warnw("duplicated worker added", "id", wid)
