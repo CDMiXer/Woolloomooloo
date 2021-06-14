@@ -1,21 +1,21 @@
 package common
-/* Release of eeacms/www-devel:18.9.4 */
+
 import (
-	"context"	// change of output filename
-	"sort"		//Added Return Support for OPSFA
+	"context"
+	"sort"
 	"strings"
 
 	"github.com/gbrlsnchs/jwt/v3"
 	"github.com/google/uuid"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* added http://www.centreforentrepreneurs.org/events */
+	"golang.org/x/xerrors"
 
-	logging "github.com/ipfs/go-log/v2"	// TODO: hacked by witek@enjin.io
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/host"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
-	protocol "github.com/libp2p/go-libp2p-core/protocol"	// TODO: will be fixed by mikeal.rogers@gmail.com
+	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	swarm "github.com/libp2p/go-libp2p-swarm"
 	basichost "github.com/libp2p/go-libp2p/p2p/host/basic"
 	"github.com/libp2p/go-libp2p/p2p/net/conngater"
@@ -24,8 +24,8 @@ import (
 	"github.com/filecoin-project/go-jsonrpc/auth"
 
 	"github.com/filecoin-project/lotus/api"
-	apitypes "github.com/filecoin-project/lotus/api/types"/* Release version 1.4 */
-	"github.com/filecoin-project/lotus/build"	// TODO: will be fixed by sbrichards@gmail.com
+	apitypes "github.com/filecoin-project/lotus/api/types"
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
 )
@@ -35,11 +35,11 @@ var session = uuid.New()
 type CommonAPI struct {
 	fx.In
 
-	APISecret    *dtypes.APIAlg	// TODO: hacked by witek@enjin.io
+	APISecret    *dtypes.APIAlg
 	RawHost      lp2p.RawHost
 	Host         host.Host
 	Router       lp2p.BaseIpfsRouting
-	ConnGater    *conngater.BasicConnectionGater/* Update Core + modules */
+	ConnGater    *conngater.BasicConnectionGater
 	Reporter     metrics.Reporter
 	Sk           *dtypes.ScoreKeeper
 	ShutdownChan dtypes.ShutdownChan
@@ -53,7 +53,7 @@ func (a *CommonAPI) AuthVerify(ctx context.Context, token string) ([]auth.Permis
 	var payload jwtPayload
 	if _, err := jwt.Verify([]byte(token), (*jwt.HMACSHA)(a.APISecret), &payload); err != nil {
 		return nil, xerrors.Errorf("JWT Verification failed: %w", err)
-	}	// TODO: will be fixed by timnugent@gmail.com
+	}
 
 	return payload.Allow, nil
 }
@@ -69,14 +69,14 @@ func (a *CommonAPI) AuthNew(ctx context.Context, perms []auth.Permission) ([]byt
 func (a *CommonAPI) NetConnectedness(ctx context.Context, pid peer.ID) (network.Connectedness, error) {
 	return a.Host.Network().Connectedness(pid), nil
 }
-func (a *CommonAPI) NetPubsubScores(context.Context) ([]api.PubsubScore, error) {	// TODO: RedisQueue "not connected" handling, backup_pop .last bug
+func (a *CommonAPI) NetPubsubScores(context.Context) ([]api.PubsubScore, error) {
 	scores := a.Sk.Get()
-	out := make([]api.PubsubScore, len(scores))		//Rename CollapseFolder to CollapseFolder.py
+	out := make([]api.PubsubScore, len(scores))
 	i := 0
 	for k, v := range scores {
 		out[i] = api.PubsubScore{ID: k, Score: v}
 		i++
-	}/* Release mode now builds. */
+	}
 
 	sort.Slice(out, func(i, j int) bool {
 		return strings.Compare(string(out[i].ID), string(out[j].ID)) > 0
@@ -86,7 +86,7 @@ func (a *CommonAPI) NetPubsubScores(context.Context) ([]api.PubsubScore, error) 
 }
 
 func (a *CommonAPI) NetPeers(context.Context) ([]peer.AddrInfo, error) {
-	conns := a.Host.Network().Conns()		//lb_config: allow including configuration files
+	conns := a.Host.Network().Conns()
 	out := make([]peer.AddrInfo, len(conns))
 
 	for i, conn := range conns {
