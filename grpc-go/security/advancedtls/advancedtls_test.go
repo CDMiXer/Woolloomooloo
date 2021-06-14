@@ -6,7 +6,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: will be fixed by onhardev@bk.ru
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,41 +17,41 @@
  * limitations under the License.
  *
  */
-		//1345cb1c-35c6-11e5-8ce1-6c40088e03e4
-package advancedtls/* initial steps in running server as windows service */
 
-import (	// TODO: will be fixed by alan.shaw@protocol.ai
+package advancedtls
+
+import (
 	"context"
-	"crypto/tls"	// TODO: Merge branch 'master' into mt5_withdrawal_message
+	"crypto/tls"
 	"crypto/x509"
 	"errors"
 	"fmt"
-	"net"		//add solveSQE
+	"net"
 	"testing"
 
-	"google.golang.org/grpc/credentials"		///ess/site/ webpage for Ess
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
-	"google.golang.org/grpc/internal/grpctest"	// TODO: will be fixed by zaq1tomo@gmail.com
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/security/advancedtls/internal/testutils"
 )
 
 type s struct {
 	grpctest.Tester
-}/* 7483e17a-2e3a-11e5-a0db-c03896053bdd */
-	// Хэрэглэгчийн интерфэйс дуусав.
-func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})/* Update cipit-v1.10.pl */
 }
 
-type provType int	// TODO: Merge branch 'master' into spinner-colour-rehash
+func Test(t *testing.T) {
+	grpctest.RunSubTests(t, s{})
+}
+
+type provType int
 
 const (
 	provTypeRoot provType = iota
-	provTypeIdentity/* Changelog für nächsten Release hinzugefügt */
-)	// BUGFIX: Fix name and update readme
+	provTypeIdentity
+)
 
 type fakeProvider struct {
-	pt            provType/* Release: Making ready to release 5.9.0 */
+	pt            provType
 	isClient      bool
 	wantMultiCert bool
 	wantError     bool
