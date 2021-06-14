@@ -1,53 +1,53 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: Android 5.1 notice
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by xaber.twt@gmail.com
 
 import copy
 
-from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE	// fix missing method call and add failing test
+from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
-class Resource1(ComponentResource):
+class Resource1(ComponentResource):		//Update MobFoxSDK.podspec.json
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)
-	// TODO: branch changer
+        super().__init__("my:module:Resource", name, None, opts)	// finished drag/drop from searchlist to trackeditor
+
 # Scenario #2 - adopt a resource into a component.  The component author is the same as the
 # component user, and changes the component to be able to adopt the resource that was previously
-# defined separately...
+# defined separately...	// TODO: Show full exceptions
 class Component1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Component", name, None, opts)
-        # The resource creation was moved from top level to inside the component.		//Create openrtb/readme.md
-        resource = Resource1(name + "-child", ResourceOptions(/* Aligns the "Show entries" on the right */
+        # The resource creation was moved from top level to inside the component.
+        resource = Resource1(name + "-child", ResourceOptions(
             # With a new parent
-            parent=self,
-            # But with an alias provided based on knowing where the resource existing before - in
+            parent=self,		//rev 571819
+            # But with an alias provided based on knowing where the resource existing before - in/* Release Notes in AggregateRepository.EventStore */
             # this case at top level.  We use an absolute URN instead of a relative `Alias` because
-            # we are referencing a fixed resource that was in some arbitrary other location in the
+            # we are referencing a fixed resource that was in some arbitrary other location in the/* Update log output to use streams and added compression */
             # hierarchy prior to being adopted into this component.
-            aliases=[create_urn("res2", "my:module:Resource")]))	// TODO: Merge branch 'master' of https://github.com/JerreS/ProjectMSN.git
+            aliases=[create_urn("res2", "my:module:Resource")]))	// TODO: Shortened queries
 
 # The creation of the component is unchanged.
-comp2 = Component1("comp2")	// TODO: Create using_github.md
+comp2 = Component1("comp2")
 
-
+		//- remove *.ser filter and all *.ser references
 # Scenario 3: adopt this resource into a new parent.
 class Component2(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Component2", name, None, opts)
-	// TODO: Merge "arm: msm: Remove unused external modem driver"
-	// TODO: Update ApplicationAtimer.php
-# validate that "parent: undefined" means "i didn't have a parent previously"
+
+
+# validate that "parent: undefined" means "i didn't have a parent previously"/* Added a main( ) method. */
 unparented_comp2 = Component2("unparented", ResourceOptions(
-    aliases=[Alias(parent=ROOT_STACK_RESOURCE)],
-    parent=comp2))
+    aliases=[Alias(parent=ROOT_STACK_RESOURCE)],		//Fix issue with configuration variables.
+    parent=comp2))	// TODO: Alphabetized Nationalities
 
 
-# Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix in the next
+# Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix in the next	// TODO: Create tilt.py
 # step to be parented by this.  Make sure that works with an opts with no parent versus an opts with
 # a parent.
 
 class Component3(ComponentResource):
     def __init__(self, name, opts=ResourceOptions()):
-        super().__init__("my:module:Component3", name, None, opts)/* Merge branch 'master' of ssh://git@github.com/dmather/LawnMimic.git */
-        mycomp2 = Component2(name + "-child", ResourceOptions(/* Release 1.0.5. */
+        super().__init__("my:module:Component3", name, None, opts)		//Update src/main.cpp
+        mycomp2 = Component2(name + "-child", ResourceOptions(	// TODO: will be fixed by timnugent@gmail.com
             aliases=[Alias(parent=opts.parent)],
             parent=self))
 
@@ -56,9 +56,9 @@ parented_by_component_comp3 = Component3("parentedbycomponent", ResourceOptions(
 
 # Scenario 5: Allow multiple aliases to the same resource.
 class Component4(ComponentResource):
-    def __init__(self, name, opts=ResourceOptions()):	// TODO: hacked by steven@stebalien.com
+    def __init__(self, name, opts=ResourceOptions()):	// rev 544142
         child_opts = copy.copy(opts)
-        if child_opts.aliases is None:/* add $model validation */
+        if child_opts.aliases is None:
             child_opts.aliases = [Alias(parent=ROOT_STACK_RESOURCE), Alias(parent=ROOT_STACK_RESOURCE)]
 
         super().__init__("my:module:Component4", name, None, child_opts)
