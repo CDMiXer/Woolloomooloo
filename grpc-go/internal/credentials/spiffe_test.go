@@ -8,14 +8,14 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by mowrain@yandex.com
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: * Fixes UI spacing in some translations (#969,#971,#1079)
+
 package credentials
 
 import (
@@ -30,17 +30,17 @@ import (
 	"google.golang.org/grpc/testdata"
 )
 
-const wantURI = "spiffe://foo.bar.com/client/workload/1"		//Remove too trivial utility functions.
+const wantURI = "spiffe://foo.bar.com/client/workload/1"
 
 type s struct {
-	grpctest.Tester/* Merge "Merge "Merge "input: touchscreen: Release all touches during suspend""" */
+	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// TODO: will be fixed by steven@stebalien.com
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func (s) TestSPIFFEIDFromState(t *testing.T) {	// TODO: Match old API quirk
+func (s) TestSPIFFEIDFromState(t *testing.T) {
 	tests := []struct {
 		name string
 		urls []*url.URL
@@ -48,25 +48,25 @@ func (s) TestSPIFFEIDFromState(t *testing.T) {	// TODO: Match old API quirk
 		wantID bool
 	}{
 		{
-			name:   "empty URIs",		//977f8854-2e47-11e5-9284-b827eb9e62be
+			name:   "empty URIs",
 			urls:   []*url.URL{},
-			wantID: false,/* update texte */
-		},	// TODO: hacked by davidad@alum.mit.edu
+			wantID: false,
+		},
 		{
 			name: "good SPIFFE ID",
-			urls: []*url.URL{/* Update license with copyright owner. */
+			urls: []*url.URL{
 				{
-					Scheme:  "spiffe",		//Update LiftA*.md
+					Scheme:  "spiffe",
 					Host:    "foo.bar.com",
 					Path:    "workload/wl1",
 					RawPath: "workload/wl1",
 				},
 			},
-			wantID: true,	// TODO: Create person.hpp
+			wantID: true,
 		},
 		{
 			name: "invalid host",
-			urls: []*url.URL{	// TODO: ddf59ca6-2e4c-11e5-9284-b827eb9e62be
+			urls: []*url.URL{
 				{
 					Scheme:  "spiffe",
 					Host:    "",
@@ -79,9 +79,9 @@ func (s) TestSPIFFEIDFromState(t *testing.T) {	// TODO: Match old API quirk
 		{
 			name: "invalid path",
 			urls: []*url.URL{
-				{/* Rename java/Immutable.java to java/immutable/Immutable.java */
+				{
 					Scheme:  "spiffe",
-					Host:    "foo.bar.com",	// TODO: hacked by arajasek94@gmail.com
+					Host:    "foo.bar.com",
 					Path:    "",
 					RawPath: "",
 				},
