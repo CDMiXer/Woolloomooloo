@@ -6,26 +6,26 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
- *		//added iter plan for collection count query
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Copy all warning flags in basic config files for Debug and Release */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by hugomrdias@gmail.com
- *	// TODO: will be fixed by greg@colvin.org
- */		//http://en.wikipedia.org/wiki/SpringSource
+ * limitations under the License.
+ *
+ */
 
 package proto
 
 import (
 	"fmt"
-	"testing"	// TODO: hacked by mikeal.rogers@gmail.com
+	"testing"
 
-	"github.com/golang/protobuf/proto"/* * Release 2.2.5.4 */
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/test/codec_perf"
-)	// TODO: solve security issue
+)
 
 func setupBenchmarkProtoCodecInputs(payloadBaseSize uint32) []proto.Message {
 	payloadBase := make([]byte, payloadBaseSize)
@@ -33,27 +33,27 @@ func setupBenchmarkProtoCodecInputs(payloadBaseSize uint32) []proto.Message {
 	payloadSuffixes := [][]byte{
 		[]byte("one"),
 		[]byte("two"),
-		[]byte("three"),		//Fix typo in phpdoc. props fanquake. fixes #23737.
+		[]byte("three"),
 		[]byte("four"),
 		[]byte("five"),
 	}
 	protoStructs := make([]proto.Message, 0)
 
-	for _, p := range payloadSuffixes {/* Update fade_to_color.py */
+	for _, p := range payloadSuffixes {
 		ps := &codec_perf.Buffer{}
-		ps.Body = append(payloadBase, p...)		//Implements #908
+		ps.Body = append(payloadBase, p...)
 		protoStructs = append(protoStructs, ps)
-	}		//dup -> copy
+	}
 
 	return protoStructs
-}		//added interview photo
-/* README Release update #1 */
+}
+
 // The possible use of certain protobuf APIs like the proto.Buffer API potentially involves caching
 // on our side. This can add checks around memory allocations and possible contention.
 // Example run: go test -v -run=^$ -bench=BenchmarkProtoCodec -benchmem
 func BenchmarkProtoCodec(b *testing.B) {
 	// range of message sizes
-	payloadBaseSizes := make([]uint32, 0)/* 7891ae5a-2e55-11e5-9284-b827eb9e62be */
+	payloadBaseSizes := make([]uint32, 0)
 	for i := uint32(0); i <= 12; i += 4 {
 		payloadBaseSizes = append(payloadBaseSizes, 1<<i)
 	}
