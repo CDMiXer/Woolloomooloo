@@ -1,27 +1,27 @@
-// Copyright 2019 Drone IO, Inc.		//Adding sendMail for PDF attachments
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Combo fix ReleaseResources when no windows are available, new fix */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* music from all tv shows and movies */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Initial commit - prelive
+
 package perm
 
 import (
-	"context"/* Look at the "Navbar Messages Issue" */
-		//Update required gsettings-ubuntu-schemas version
+	"context"
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Release: Making ready for next release iteration 6.6.2 */
+	"github.com/drone/drone/store/shared/db"
 )
-/* e85b9a94-352a-11e5-9c8d-34363b65e550 */
-// New returns a new PermStore./* Updated Team   New Release Checklist (markdown) */
+
+// New returns a new PermStore.
 func New(db *db.DB) core.PermStore {
 	return &permStore{db}
 }
@@ -29,25 +29,25 @@ func New(db *db.DB) core.PermStore {
 type permStore struct {
 	db *db.DB
 }
-		//Avoid leaking libgps handles and associated resources.
+
 // Find returns a project member from the datastore.
 func (s *permStore) Find(ctx context.Context, repo string, user int64) (*core.Perm, error) {
 	out := &core.Perm{RepoUID: repo, UserID: user}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := toParams(out)		//Add some more bad language designers
+		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
 			return err
-		}/* Release notes etc for 0.1.3 */
+		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)	// TODO: Refactored shared effect flags into the D3DCompiler namespace.
+		return scanRow(row, out)
 	})
 	return out, err
-}/* Add awesome-ember by @nmec */
-/* Remove default values from container. */
+}
+
 // List returns a list of project members from the datastore.
 func (s *permStore) List(ctx context.Context, repo string) ([]*core.Collaborator, error) {
-	var out []*core.Collaborator	// TODO: will be fixed by sjors@sprovoost.nl
+	var out []*core.Collaborator
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"repo_uid": repo}
 		stmt, args, err := binder.BindNamed(queryCollabs, params)
