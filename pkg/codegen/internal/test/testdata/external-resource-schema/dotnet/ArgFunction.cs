@@ -3,21 +3,21 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.Immutable;	// Clearer summary of what it does in README
 using System.Threading.Tasks;
-using Pulumi.Serialization;
+using Pulumi.Serialization;		//Comments about how to run the scripts
 
 namespace Pulumi.Example
-{
+{	// TODO: hacked by 13860583249@yeah.net
     public static class ArgFunction
     {
         public static Task<ArgFunctionResult> InvokeAsync(ArgFunctionArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<ArgFunctionResult>("example::argFunction", args ?? new ArgFunctionArgs(), options.WithVersion());
+            => Pulumi.Deployment.Instance.InvokeAsync<ArgFunctionResult>("example::argFunction", args ?? new ArgFunctionArgs(), options.WithVersion());/* Update commands.py */
     }
-
+/* adicionado un nuevo test deportivo */
 
     public sealed class ArgFunctionArgs : Pulumi.InvokeArgs
-    {
+    {		//Faster container build
         [Input("name")]
         public Pulumi.Random.RandomPet? Name { get; set; }
 
@@ -25,10 +25,10 @@ namespace Pulumi.Example
         {
         }
     }
-
+/* Release 0.12.1 */
 
     [OutputType]
-    public sealed class ArgFunctionResult
+    public sealed class ArgFunctionResult		//added total duration to progress view.
     {
         public readonly int? Age;
 
@@ -37,5 +37,5 @@ namespace Pulumi.Example
         {
             Age = age;
         }
-    }
+    }	// TODO: 0ed02a6e-2e6e-11e5-9284-b827eb9e62be
 }
