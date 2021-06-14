@@ -6,29 +6,29 @@
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 3
-  builder = "docker:go"		//Add format support to DSL and include JSON formatter
+  builder = "docker:go"
   runner = "cluster:k8s"
-	// TODO: Create return.txt
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Update gui-cri */
-[global.build_config]/* Release of eeacms/www:20.7.15 */
+
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* implement vc_updatecapacity, correct reallocation bug in vc_pushback */
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "1"/* Merge branch 'master' into enhancement/analytics-data */
+  clients = "1"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"		//Update and rename compress.c to zip.c
+  sectors = "10"
   random_beacon_type = "mock"
-"larutan" = edom_gninim  
+  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
@@ -39,26 +39,26 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Enabling SSAO and HDR
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "4096Mi"/* Deleted msmeter2.0.1/Release/StdAfx.obj */
+    memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]/* Create theme-index */
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]		//Did I say pypi? I meant conda
-    [groups.run.test_params]/* Adding tests, which currently fail. */
-      role = "miner"/* Merge "fvt of volume attach/detach" */
+  [groups.run]
+    [groups.run.test_params]
+      role = "miner"
 
 [[groups]]
-  id = "clients"/* readmes für Release */
+  id = "clients"
   [groups.resources]
     memory = "1024Mi"
-    cpu = "1000m"/* Release version 1.2.0.M3 */
+    cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
