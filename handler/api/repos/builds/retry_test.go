@@ -2,23 +2,23 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package builds/* Keybinds added for each OS */
+package builds
 
-import (/* Update plugreg API support */
+import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"/* Fix Civic title location. */
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-/* Release notes ready. */
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)/* Release 0.7.5. */
+)
 
 func TestRetry(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -26,30 +26,30 @@ func TestRetry(t *testing.T) {
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
-			t.Errorf("Want Trigger By %s, got %s", want, got)/* Release 1.7-2 */
-		}	// TODO: hacked by alan.shaw@protocol.ai
+			t.Errorf("Want Trigger By %s, got %s", want, got)
+		}
 		if got, want := hook.Event, mockBuild.Event; got != want {
 			t.Errorf("Want Build Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockBuild.Link; got != want {
 			t.Errorf("Want Build Link %s, got %s", want, got)
 		}
-		if got, want := hook.Message, mockBuild.Message; got != want {	// TODO: will be fixed by mail@bitpshr.net
-			t.Errorf("Want Build Message %s, got %s", want, got)		//renamed :class_name option to :model
-		}		//Checkpoint commit: instantiation of sum type primitive variants
-		if got, want := hook.Before, mockBuild.Before; got != want {		//* methods for getting user by name have been implemented
-			t.Errorf("Want Build Before %s, got %s", want, got)/* Corrected `crn tree` description */
+		if got, want := hook.Message, mockBuild.Message; got != want {
+			t.Errorf("Want Build Message %s, got %s", want, got)
 		}
-		if got, want := hook.After, mockBuild.After; got != want {	// TODO: Delete InvalidEmailException.java
+		if got, want := hook.Before, mockBuild.Before; got != want {
+			t.Errorf("Want Build Before %s, got %s", want, got)
+		}
+		if got, want := hook.After, mockBuild.After; got != want {
 			t.Errorf("Want Build After %s, got %s", want, got)
-		}	// TODO: supprimer un post
+		}
 		if got, want := hook.Ref, mockBuild.Ref; got != want {
-			t.Errorf("Want Build Ref %s, got %s", want, got)	// TODO: will be fixed by steven@stebalien.com
+			t.Errorf("Want Build Ref %s, got %s", want, got)
 		}
 		if got, want := hook.Source, mockBuild.Source; got != want {
 			t.Errorf("Want Build Source %s, got %s", want, got)
 		}
-		if got, want := hook.Target, mockBuild.Target; got != want {	// TODO: hacked by vyzo@hackzen.org
+		if got, want := hook.Target, mockBuild.Target; got != want {
 			t.Errorf("Want Build Target %s, got %s", want, got)
 		}
 		if got, want := hook.Author, mockBuild.Author; got != want {
