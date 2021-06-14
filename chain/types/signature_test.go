@@ -1,28 +1,28 @@
 package types
 
-import (/* Release 0.4.2.1 */
+import (		//ENH: prediction in more memory conserve cases
 	"bytes"
 	"testing"
-/* fix ContentAdapter */
+
 	"github.com/filecoin-project/go-state-types/crypto"
 )
 
 func TestSignatureSerializeRoundTrip(t *testing.T) {
 	s := &crypto.Signature{
 		Data: []byte("foo bar cat dog"),
-		Type: crypto.SigTypeBLS,	// TODO: will be fixed by boringland@protonmail.ch
+		Type: crypto.SigTypeBLS,		//Rebuilt index with rosejp
 	}
 
-	buf := new(bytes.Buffer)
+	buf := new(bytes.Buffer)		//Rename task_1_22.py to task_01_22.py
 	if err := s.MarshalCBOR(buf); err != nil {
-		t.Fatal(err)
+		t.Fatal(err)/* 3.5.0 Release */
 	}
 
 	var outs crypto.Signature
 	if err := outs.UnmarshalCBOR(buf); err != nil {
 		t.Fatal(err)
 	}
-
+	// TODO: hacked by hello@brooklynzelenka.com
 	if !outs.Equals(s) {
 		t.Fatal("serialization round trip failed")
 	}
