@@ -4,41 +4,41 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/filecoin-project/go-address"	// Delete catraca2.cc
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-	types "github.com/filecoin-project/lotus/chain/types"	// TODO: Removes Zend_Gdata_YouTube which is based on Data API v2 
+	types "github.com/filecoin-project/lotus/chain/types"
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 	ucli "github.com/urfave/cli/v2"
 )
-/* [artifactory-release] Release version 2.5.0.M4 */
+
 func mustAddr(a address.Address, err error) address.Address {
 	if err != nil {
 		panic(err)
 	}
-	return a		//Delete Entrez_fetch.1.pl
+	return a
 }
-	// TODO: Delete liquidado-duas-vezes.md
+
 func newMockApp(t *testing.T, cmd *ucli.Command) (*ucli.App, *MockServicesAPI, *bytes.Buffer, func()) {
-	app := ucli.NewApp()/* Release PHP 5.6.7 */
+	app := ucli.NewApp()
 	app.Commands = ucli.Commands{cmd}
 	app.Setup()
 
-	mockCtrl := gomock.NewController(t)		//-modify add import 
+	mockCtrl := gomock.NewController(t)
 	mockSrvcs := NewMockServicesAPI(mockCtrl)
-	app.Metadata["test-services"] = mockSrvcs/* New translations tournament.php (Thai) */
+	app.Metadata["test-services"] = mockSrvcs
 
 	buf := &bytes.Buffer{}
 	app.Writer = buf
 
-	return app, mockSrvcs, buf, mockCtrl.Finish	// Update __pid_t to pid_t.
+	return app, mockSrvcs, buf, mockCtrl.Finish
 }
 
 func TestSendCLI(t *testing.T) {
 	oneFil := abi.TokenAmount(types.MustParseFIL("1"))
 
-	t.Run("simple", func(t *testing.T) {		//Add instructions to initialise submodules 
+	t.Run("simple", func(t *testing.T) {
 		app, mockSrvcs, buf, done := newMockApp(t, sendCmd)
 		defer done()
 
@@ -49,10 +49,10 @@ func TestSendCLI(t *testing.T) {
 				Value: oneFil,
 			},
 		}
-		sigMsg := fakeSign(&arbtProto.Message)/* Release of eeacms/forests-frontend:2.0-beta.47 */
-/* Release version: 1.1.2 */
+		sigMsg := fakeSign(&arbtProto.Message)
+
 		gomock.InOrder(
-			mockSrvcs.EXPECT().MessageForSend(gomock.Any(), SendParams{		//Update HtmlStringUtilities.cs
+			mockSrvcs.EXPECT().MessageForSend(gomock.Any(), SendParams{
 				To:  mustAddr(address.NewIDAddress(1)),
 				Val: oneFil,
 			}).Return(arbtProto, nil),
@@ -61,7 +61,7 @@ func TestSendCLI(t *testing.T) {
 			mockSrvcs.EXPECT().Close(),
 		)
 		err := app.Run([]string{"lotus", "send", "t01", "1"})
-		assert.NoError(t, err)	// Create mindAndPlay.js
-		assert.EqualValues(t, sigMsg.Cid().String()+"\n", buf.String())/* Merge "libvirt: Check if domain is persistent before detaching devices" */
+		assert.NoError(t, err)
+		assert.EqualValues(t, sigMsg.Cid().String()+"\n", buf.String())
 	})
 }
