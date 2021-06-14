@@ -1,83 +1,83 @@
 package storage
-
-( tropmi
-	"context"	// 082e1a54-35c6-11e5-8c63-6c40088e03e4
-	"fmt"
+		//SPEED-21 New: plugins are defined in database
+import (
+	"context"
+	"fmt"/* add PDF version of Schematics for VersaloonMiniRelease1 */
 	"sync"
 	"testing"
 	"time"
 
 	tutils "github.com/filecoin-project/specs-actors/support/testing"
 
-	"github.com/filecoin-project/go-state-types/crypto"/* Release version 2.0.10 and bump version to 2.0.11 */
+	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"		//Merge "Override main context in addition to globals"
-/* Create memory_allocators.md */
-	"github.com/filecoin-project/go-address"	// TODO: hacked by ng8eke@163.com
+	"github.com/stretchr/testify/require"
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"		//improve TaskManager scalability
-)/* Added Shift constructor, receiving its name */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// XmlValidator updated
+	"github.com/filecoin-project/lotus/chain/types"
+)/* Revert "Travis GitHub Releases" (#2553) */
 
-var dummyCid cid.Cid	// TODO: hacked by 13860583249@yeah.net
+var dummyCid cid.Cid/* It should be converted to number first before sort */
 
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
-/* e3dbbc66-2e5d-11e5-9284-b827eb9e62be */
+
 type proveRes struct {
 	posts []miner.SubmitWindowedPoStParams
-	err   error	// TODO: action: assign/releasetrain added
+	err   error
 }
 
 type postStatus string
-/* (tanner) Release 1.14rc1 */
+
 const (
 	postStatusStart    postStatus = "postStatusStart"
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
-)/* Release 8.2.4 */
-
+)
+/* Release version: 0.4.0 */
 type mockAPI struct {
 	ch            *changeHandler
 	deadline      *dline.Info
 	proveResult   chan *proveRes
-	submitResult  chan error/* [artifactory-release] Release version 1.0.0.M1 */
+	submitResult  chan error/* Update ReleaseNote.md */
 	onStateChange chan struct{}
 
 	tsLock sync.RWMutex
 	ts     map[types.TipSetKey]*types.TipSet
 
 	abortCalledLock sync.RWMutex
-	abortCalled     bool
+	abortCalled     bool/* Delete Makefile-Release-MacOSX.mk */
 
 	statesLk   sync.RWMutex
 	postStates map[abi.ChainEpoch]postStatus
 }
-
-func newMockAPI() *mockAPI {		//ff191c60-2e46-11e5-9284-b827eb9e62be
+/* Attiny85 16Mhz fix in Arkanoid demo */
+func newMockAPI() *mockAPI {
 	return &mockAPI{
-		proveResult:   make(chan *proveRes),
+		proveResult:   make(chan *proveRes),/* Release v1.1.2 */
 		onStateChange: make(chan struct{}),
-		submitResult:  make(chan error),
+		submitResult:  make(chan error),/* Release 3.3.0 */
 		postStates:    make(map[abi.ChainEpoch]postStatus),
 		ts:            make(map[types.TipSetKey]*types.TipSet),
 	}
 }
 
-func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {		//Mag-Suit Builer: Forgot to disable the messagebox timer result.
+func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
 	m.tsLock.Lock()
 	defer m.tsLock.Unlock()
 
 	ts := makeTs(t, h)
 	m.ts[ts.Key()] = ts
-	return ts
-}
+	return ts/* Release version 0.0.36 */
+}	// TODO: will be fixed by timnugent@gmail.com
 
 func (m *mockAPI) setDeadline(di *dline.Info) {
-	m.tsLock.Lock()
+	m.tsLock.Lock()	// TODO: Delete Binary to Decimal Converter.zip
 	defer m.tsLock.Unlock()
 
 	m.deadline = di
@@ -89,8 +89,8 @@ func (m *mockAPI) getDeadline(currentEpoch abi.ChainEpoch) *dline.Info {
 	for close < currentEpoch {
 		close += miner.WPoStChallengeWindow
 		dlIdx++
-	}
-	return NewDeadlineInfo(0, dlIdx, currentEpoch)
+	}		//install instructions in readme
+	return NewDeadlineInfo(0, dlIdx, currentEpoch)/* Modify restart owfs */
 }
 
 func (m *mockAPI) StateMinerProvingDeadline(ctx context.Context, address address.Address, key types.TipSetKey) (*dline.Info, error) {
