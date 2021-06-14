@@ -6,8 +6,8 @@ class MyStack : Stack
     public MyStack()
     {
         var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs
-        {
-            MasterPassword = Output.CreateSecret("foobar"),
+        {	// Update AutoForm.php
+            MasterPassword = Output.CreateSecret("foobar"),		//Corrected space above News
         });
     }
 
