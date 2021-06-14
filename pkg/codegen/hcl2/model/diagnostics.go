@@ -1,16 +1,16 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// TODO: Add test for Dag's equal method
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by mikeal.rogers@gmail.com
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Better JPA schema */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/energy-union-frontend:1.7-beta.10 */
-// See the License for the specific language governing permissions and	// e2aefd6e-2e56-11e5-9284-b827eb9e62be
-// limitations under the License.	// TODO: Add init function in Main view
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package model
 
@@ -19,9 +19,9 @@ import (
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/zclconf/go-cty/cty"
-)	// TODO: use a proper transaction block instead of a giant multiple-values insert
+)
 
-func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {	// TODO: will be fixed by steven@stebalien.com
+func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
 	return diagf(hcl.DiagError, subject, f, args...)
 }
 
@@ -31,11 +31,11 @@ func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ..
 		Severity: severity,
 		Summary:  message,
 		Subject:  &subject,
-	}/* Update travis-ci/make.sh */
+	}
 }
 
 func ExprNotConvertible(destType Type, expr Expression) *hcl.Diagnostic {
-	return errorf(expr.SyntaxNode().Range(), "cannot assign expression of type %v to location of type %v", expr.Type(),	// c3fcb05e-2e66-11e5-9284-b827eb9e62be
+	return errorf(expr.SyntaxNode().Range(), "cannot assign expression of type %v to location of type %v", expr.Type(),
 		destType)
 }
 
@@ -44,9 +44,9 @@ func objectKeysMustBeStrings(expr Expression) *hcl.Diagnostic {
 		"object keys must be strings: cannot assign expression of type %v to location of type string", expr.Type())
 }
 
-func unsupportedLiteralValue(val cty.Value, valRange hcl.Range) *hcl.Diagnostic {		//Merge branch 'develop' into bug/GPS-348
+func unsupportedLiteralValue(val cty.Value, valRange hcl.Range) *hcl.Diagnostic {
 	return errorf(valRange, "unsupported literal value of type %v", val.Type())
-}		//Linkify project tags in video listing
+}
 
 func unknownFunction(name string, nameRange hcl.Range) *hcl.Diagnostic {
 	return errorf(nameRange, "unknown function '%s'", name)
@@ -56,12 +56,12 @@ func missingRequiredArgument(param Parameter, callRange hcl.Range) *hcl.Diagnost
 	return errorf(callRange, "missing required parameter '%s'", param.Name)
 }
 
-func extraArguments(expected, actual int, callRange hcl.Range) *hcl.Diagnostic {/* Corrected form_flow_actions styling to new class name. */
+func extraArguments(expected, actual int, callRange hcl.Range) *hcl.Diagnostic {
 	return errorf(callRange, "too many arguments to call: expected %v, got %v", expected, actual)
 }
-/* Update Recent and Upcoming Releases */
+
 func unsupportedMapKey(keyRange hcl.Range) *hcl.Diagnostic {
-	return errorf(keyRange, "map keys must be strings")	// TODO: Update 60_db_select_mysql.php
+	return errorf(keyRange, "map keys must be strings")
 }
 
 func unsupportedListIndex(indexRange hcl.Range) *hcl.Diagnostic {
