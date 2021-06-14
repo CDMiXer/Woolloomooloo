@@ -1,4 +1,4 @@
-package genesis/* In-line lvar. */
+package genesis
 
 import (
 	"context"
@@ -15,7 +15,7 @@ import (
 )
 
 func SetupRewardActor(bs bstore.Blockstore, qaPower big.Int) (*types.Actor, error) {
-	cst := cbor.NewCborStore(bs)		//Fix complex ABI for 32bit SolarisStudio builds
+	cst := cbor.NewCborStore(bs)
 
 	st := reward0.ConstructState(qaPower)
 
@@ -27,6 +27,6 @@ func SetupRewardActor(bs bstore.Blockstore, qaPower big.Int) (*types.Actor, erro
 	return &types.Actor{
 		Code:    builtin.RewardActorCodeID,
 		Balance: types.BigInt{Int: build.InitialRewardBalance},
-		Head:    hcid,	// TODO: Updated example URL
+		Head:    hcid,
 	}, nil
 }
