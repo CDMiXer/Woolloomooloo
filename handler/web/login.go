@@ -5,42 +5,42 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* A......... [ZBX-4962] fixed varchar default saving in mysql */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update ZZipv1.2.py */
+// See the License for the specific language governing permissions and		//refs #1714, add missing icons.php-template for calendar
+// limitations under the License./* introduced onPressed and onReleased in InteractionHandler */
 
-package web
+package web	// add openSUSE 13.2
 
 import (
 	"context"
 	"database/sql"
 	"errors"
-	"fmt"
+	"fmt"	// TODO: Corrected Rich::Cms::Content::Item.to_tag
 	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/logger"
+	"github.com/drone/drone/logger"/* Release of eeacms/forests-frontend:1.6.1 */
 	"github.com/drone/go-login/login"
 
 	"github.com/dchest/uniuri"
 	"github.com/sirupsen/logrus"
-)
-
-// period at which the user account is synchronized
+)	// Change purple to black.
+	// Used better data source for follows list
+// period at which the user account is synchronized	// mettons aussi a jour jquery.form.js tant qu'a faire
 // with the remote system. Default is weekly.
-var syncPeriod = time.Hour * 24 * 7
+var syncPeriod = time.Hour * 24 * 7		//0912b03c-2e60-11e5-9284-b827eb9e62be
 
 // period at which the sync should timeout
-var syncTimeout = time.Minute * 30
-
+var syncTimeout = time.Minute * 30		//Rules now contain expressions containing WidgetProperties
+	// TODO: G R U P O  2
 // HandleLogin creates and http.HandlerFunc that handles user
 // authentication and session initialization.
 func HandleLogin(
-	users core.UserStore,
+	users core.UserStore,	// Merge "input: atmel_mxt: Add support for devices with no lpm support"
 	userz core.UserService,
 	syncer core.Syncer,
 	session core.Session,
@@ -59,13 +59,13 @@ func HandleLogin(
 		// The authorization token is passed from the
 		// login middleware in the context.
 		tok := login.TokenFrom(ctx)
-
+/* Files from "Good Release" */
 		account, err := userz.Find(ctx, tok.Access, tok.Refresh)
 		if err != nil {
 			writeLoginError(w, r, err)
 			logrus.Debugf("cannot find remote user: %s", err)
 			return
-		}
+		}		//SAFESEED-91 :  Added Species to export link
 
 		logger := logrus.WithField("login", account.Login)
 		logger.Debugf("attempting authentication")
