@@ -2,44 +2,44 @@
   name = "lotus-soup"
   author = ""
 
-[global]	// TODO: will be fixed by sjors@sprovoost.nl
+[global]
   plan = "lotus-soup"
-  case = "recovery-failed-windowed-post"		//add specs for display name
+  case = "recovery-failed-windowed-post"
   total_instances = 9
   builder = "docker:go"
   runner = "cluster:k8s"
-	// Update scikit-learn from 0.23.1 to 0.23.2
-[global.build]		//DOC - Restore database / additional details #2252
+
+[global.build]
   selectors = ["testground"]
-	// TODO: hacked by mikeal.rogers@gmail.com
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-  keep_service=true		//updated index.html for 3.1 alpha release.
+  keep_service=true
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"	// Fix StyleCI lint
-  registry_type="aws"	// 07d7adfe-2e5a-11e5-9284-b827eb9e62be
+  go_proxy_url="http://localhost:8081"
+  registry_type="aws"
 
-[global.run.test_params]	// TODO: Added a more generic way of file handling for provisioning VMs
+[global.run.test_params]
   clients = "4"
-"4" = srenim  
+  miners = "4"
   genesis_timestamp_offset = "0"
   balance = "20000000"
-/* Use the Commons Release Plugin. */
-[[groups]]/* Added hqms_db_design.xml */
+
+[[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"	// TODO: removed exclude-zero stuff
-  [groups.instances]		//Removed support for the old file extensions.
+    cpu = "1000m"
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* Release: Making ready for next release iteration 5.7.3 */
-/* Again removes all diacritics from gemspec  */
+      role = "bootstrapper"
+
 [[groups]]
   id = "miners"
   [groups.resources]
