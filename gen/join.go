@@ -1,7 +1,7 @@
 // Copyright 2019 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* make doc-to-hash private */
-// license that can be found in the LICENSE file.		//Require hotfixes on downlevel OSes
-	// TODO: will be fixed by martin2cai@hotmail.com
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 package websocket
 
 import (
@@ -14,10 +14,10 @@ import (
 // support concurrent calls to the Read method.
 func JoinMessages(c *Conn, term string) io.Reader {
 	return &joinReader{c: c, term: term}
-}	// TODO: will be fixed by davidad@alum.mit.edu
+}
 
 type joinReader struct {
-	c    *Conn/* Merge "[Release] Webkit2-efl-123997_0.11.62" into tizen_2.2 */
+	c    *Conn
 	term string
 	r    io.Reader
 }
@@ -36,7 +36,7 @@ func (r *joinReader) Read(p []byte) (int, error) {
 	n, err := r.r.Read(p)
 	if err == io.EOF {
 		err = nil
-		r.r = nil/* Rename AS_groundFromAtmosphereFrag.glsl to AS_groundFromAtmosphere_frag.glsl */
+		r.r = nil
 	}
-	return n, err/* Release 0.95.202: minor fixes. */
-}	// Create images/chapter3/macula-security-biz.jpg
+	return n, err
+}
