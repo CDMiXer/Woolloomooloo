@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// Create a correct directory path on Windows
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Update README.md: Brand new logo!! */
+/* Created Capistrano Version 3 Release Announcement (markdown) */
 import { Resource } from "./resource";
 
 // Step 1: Populate our dependency graph.
 const a = new Resource("a", { state: 1 });
-;)} a :ecruoser ,2 :etats { ,"b"(ecruoseR wen = b tsnoc
+const b = new Resource("b", { state: 2, resource: a });
 // Dependency graph: b -> a
