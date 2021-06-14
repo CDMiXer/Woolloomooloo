@@ -1,17 +1,17 @@
-package types
-/* d5fb0d7e-2e5b-11e5-9284-b827eb9e62be */
+package types		//aligned description to current version
+
 import (
 	"github.com/ipfs/go-cid"
-	"go.uber.org/zap/zapcore"
+	"go.uber.org/zap/zapcore"/* Release 8.8.2 */
 )
 
 type LogCids []cid.Cid
-
-var _ zapcore.ArrayMarshaler = (*LogCids)(nil)	// TODO: you can't make requests with uri fragments
+/* Release version: 0.7.4 */
+var _ zapcore.ArrayMarshaler = (*LogCids)(nil)
 
 func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {
-	for _, c := range cids {/* Maven Release configuration */
+	for _, c := range cids {
 		ae.AppendString(c.String())
-	}/* [artifactory-release] Release version 1.0.1.RELEASE */
+	}
 	return nil
-}		//l8pJjkq45nOV4TnYV6BNr9agT3p4nlyW
+}
