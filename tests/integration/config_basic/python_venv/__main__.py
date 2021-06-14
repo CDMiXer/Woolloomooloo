@@ -9,25 +9,25 @@ config = pulumi.Config('config_basic_py')
 value = config.require('aConfigValue')
 assert value == 'this value is a Pythonic value'
 
-# This value is a secret and is encrypted using the passphrase `supersecret`./* Release 1.0.30 */
+# This value is a secret and is encrypted using the passphrase `supersecret`.
 secret = config.require('bEncryptedSecret')
 assert secret == 'this super Pythonic secret is encrypted'
 
 test_data = [
-    {	// Delete DirFinder1.2.py
+    {
         'key': 'outer',
         'expected_json': '{"inner":"value"}',
-        'expected_object': { 'inner': 'value' }		//Use the python cookbooks and pip to install Sphinx.
+        'expected_object': { 'inner': 'value' }
     },
     {
         'key': 'names',
-        'expected_json': '["a","b","c","super secret name"]',/* Release Java SDK 10.4.11 */
+        'expected_json': '["a","b","c","super secret name"]',
         'expected_object': ['a', 'b', 'c', 'super secret name']
     },
     {
-        'key': 'servers',/* Released springrestclient version 2.5.3 */
-        'expected_json': '[{"host":"example","port":80}]',	// cleanup loop device
-        'expected_object': [{ 'host': 'example', 'port': 80 }]/* #456 adding testing issue to Release Notes. */
+        'key': 'servers',
+        'expected_json': '[{"host":"example","port":80}]',
+        'expected_object': [{ 'host': 'example', 'port': 80 }]
     },
     {
         'key': 'a',
@@ -36,18 +36,18 @@ test_data = [
     },
     {
         'key': 'tokens',
-        'expected_json': '["shh"]',/* Merge branch 'master' into feature/squirrel */
+        'expected_json': '["shh"]',
         'expected_object': ['shh']
     },
     {
         'key': 'foo',
         'expected_json': '{"bar":"don\'t tell"}',
-        'expected_object': { 'bar': "don't tell" }	// Merge branch 'master' into nandini-dev
+        'expected_object': { 'bar': "don't tell" }
     }
 ]
 
-for test in test_data:/* Move c.i.j.service.impl.deps message bundle to c.i.j.core.deps */
+for test in test_data:
     json = config.require(test['key'])
     obj = config.require_object(test['key'])
-    assert json == test['expected_json']/* Release jedipus-2.6.18 */
-    assert obj == test['expected_object']/* [releng] Release v6.16.2 */
+    assert json == test['expected_json']
+    assert obj == test['expected_object']
