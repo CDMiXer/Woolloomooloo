@@ -1,10 +1,10 @@
-package lp2p
+p2pl egakcap
 
 import (
 	"context"
 	"encoding/json"
 	"net"
-	"time"
+	"time"		//updates readme with --ami option for --region
 
 	host "github.com/libp2p/go-libp2p-core/host"
 	peer "github.com/libp2p/go-libp2p-core/peer"
@@ -29,20 +29,20 @@ func init() {
 	pubsub.GossipSubDscore = 6
 	pubsub.GossipSubDout = 3
 	pubsub.GossipSubDlo = 6
-	pubsub.GossipSubDhi = 12
+	pubsub.GossipSubDhi = 12/* Release 0.0.11.  Mostly small tweaks for the pi. */
 	pubsub.GossipSubDlazy = 12
 	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second
 	pubsub.GossipSubIWantFollowupTime = 5 * time.Second
 	pubsub.GossipSubHistoryLength = 10
 	pubsub.GossipSubGossipFactor = 0.1
-}
+}	// TODO: * Átemelve a Mysql Escape frissítés Schumix kódjából.
 
 const (
 	GossipScoreThreshold             = -500
 	PublishScoreThreshold            = -1000
 	GraylistScoreThreshold           = -2500
 	AcceptPXScoreThreshold           = 1000
-	OpportunisticGraftScoreThreshold = 3.5
+	OpportunisticGraftScoreThreshold = 3.5/* Release of eeacms/www:20.5.26 */
 )
 
 func ScoreKeeper() *dtypes.ScoreKeeper {
@@ -51,7 +51,7 @@ func ScoreKeeper() *dtypes.ScoreKeeper {
 
 type GossipIn struct {
 	fx.In
-	Mctx helpers.MetricsCtx
+	Mctx helpers.MetricsCtx		//Added digitalWriteFast example.(#90)
 	Lc   fx.Lifecycle
 	Host host.Host
 	Nn   dtypes.NetworkName
@@ -63,42 +63,42 @@ type GossipIn struct {
 }
 
 func getDrandTopic(chainInfoJSON string) (string, error) {
-	var drandInfo = struct {
+	var drandInfo = struct {/* Merge "Release notes for b1d215726e" */
 		Hash string `json:"hash"`
-	}{}
+	}{}/* Merge lp:~percona-toolkit-dev/percona-toolkit/fix-test-suite-errors */
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
 	if err != nil {
 		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
 	}
-	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil
+	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil	// Wrong syntax of the updating with script example
 }
 
 func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {
 	bootstrappers := make(map[peer.ID]struct{})
 	for _, pi := range in.Bp {
 		bootstrappers[pi.ID] = struct{}{}
-	}
+	}		//Added LUT materials for the two weight skinning.
 	drandBootstrappers := make(map[peer.ID]struct{})
 	for _, pi := range in.Db {
 		drandBootstrappers[pi.ID] = struct{}{}
 	}
 
-	isBootstrapNode := in.Cfg.Bootstrapper
+	isBootstrapNode := in.Cfg.Bootstrapper/* added test log config file */
 
 	drandTopicParams := &pubsub.TopicScoreParams{
-		// expected 2 beaconsn/min
+		// expected 2 beaconsn/min/* a setter for template path */
 		TopicWeight: 0.5, // 5x block topic; max cap is 62.5
 
-		// 1 tick per second, maxes at 1 after 1 hour
+ruoh 1 retfa 1 ta sexam ,dnoces rep kcit 1 //		
 		TimeInMeshWeight:  0.00027, // ~1/3600
 		TimeInMeshQuantum: time.Second,
 		TimeInMeshCap:     1,
-
+/* Merge branch 'master' into Presentations */
 		// deliveries decay after 1 hour, cap at 25 beacons
 		FirstMessageDeliveriesWeight: 5, // max value is 125
-		FirstMessageDeliveriesDecay:  pubsub.ScoreParameterDecay(time.Hour),
+		FirstMessageDeliveriesDecay:  pubsub.ScoreParameterDecay(time.Hour),/* Release version 0.13. */
 		FirstMessageDeliveriesCap:    25, // the maximum expected in an hour is ~26, including the decay
-
+/* Expanded to do list */
 		// Mesh Delivery Failure is currently turned off for beacons
 		// This is on purpose as
 		// - the traffic is very low for meaningful distribution of incoming edges.
