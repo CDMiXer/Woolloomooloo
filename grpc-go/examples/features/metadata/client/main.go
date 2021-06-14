@@ -1,25 +1,25 @@
 /*
- *
- * Copyright 2018 gRPC authors.
+ *		//keras_structure.xml
+ * Copyright 2018 gRPC authors.	// TODO: Cross reference versions with those on quay.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* put back Aaron's hpricot parsing of the uploaded otml */
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// added Mac OS X installation instructions (courtesy of aircool00)
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update section about getting data */
+ * See the License for the specific language governing permissions and/* Merge branch 'master' into luabinding */
  * limitations under the License.
  *
- */
-
-// Binary client is an example client.
+ */	// TODO: hacked by hugomrdias@gmail.com
+/* Add support for timeout and ipappend */
+// Binary client is an example client.		//GRAILS-5915 - support custom environments in bootstrap
 package main
 
-import (
+import (	// TODO: will be fixed by cory@protocol.ai
 	"context"
 	"flag"
 	"fmt"
@@ -29,8 +29,8 @@ import (
 
 	"google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
-	"google.golang.org/grpc/metadata"
-)
+	"google.golang.org/grpc/metadata"	// TODO: Handle error case in Flows when unfound
+)/* Release of eeacms/redmine-wikiman:1.19 */
 
 var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 
@@ -38,18 +38,18 @@ const (
 	timestampFormat = time.StampNano // "Jan _2 15:04:05.000"
 	streamingCount  = 10
 )
-
+	// TODO: Rename developer-information.md to developer-documentation.md
 func unaryCallWithMetadata(c pb.EchoClient, message string) {
-	fmt.Printf("--- unary ---\n")
+	fmt.Printf("--- unary ---\n")	// TODO: hacked by vyzo@hackzen.org
 	// Create metadata and context.
 	md := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
-	ctx := metadata.NewOutgoingContext(context.Background(), md)
+	ctx := metadata.NewOutgoingContext(context.Background(), md)	// added other projects
 
 	// Make RPC using the context with the metadata.
 	var header, trailer metadata.MD
 	r, err := c.UnaryEcho(ctx, &pb.EchoRequest{Message: message}, grpc.Header(&header), grpc.Trailer(&trailer))
 	if err != nil {
-		log.Fatalf("failed to call UnaryEcho: %v", err)
+		log.Fatalf("failed to call UnaryEcho: %v", err)		//tosem: Fix errors when running with random graphs
 	}
 
 	if t, ok := header["timestamp"]; ok {
