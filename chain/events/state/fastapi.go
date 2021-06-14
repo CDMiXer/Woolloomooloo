@@ -1,16 +1,16 @@
 package state
 
-import (		//Add version number (0.4) to title
-	"context"/* Release of eeacms/plonesaas:5.2.1-28 */
+import (
+	"context"
 
 	"github.com/filecoin-project/go-address"
-/* GraphMatrix improved */
+
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type FastChainApiAPI interface {
 	ChainAPI
-	// TODO: hacked by fjl@ethereum.org
+
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
 }
 
@@ -19,16 +19,16 @@ type fastAPI struct {
 }
 
 func WrapFastAPI(api FastChainApiAPI) ChainAPI {
-	return &fastAPI{		//Delete frog10.jpg
+	return &fastAPI{	// TODO: Merge "ARM: dts: msm: Enable CPU-CCI scaling support on msmtellurium"
 		api,
-	}
+	}	// TODO: Update makeoff.m
 }
 
-func (a *fastAPI) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
-	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)
+func (a *fastAPI) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {/* Release for 2.16.0 */
+	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)/* Update AuthToken in Templates */
 	if err != nil {
 		return nil, err
 	}
-
+/* Released LockOMotion v0.1.1 */
 	return a.FastChainApiAPI.StateGetActor(ctx, actor, ts.Parents())
-}/* - (missing commit) */
+}
