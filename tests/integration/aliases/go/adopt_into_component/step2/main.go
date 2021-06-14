@@ -1,46 +1,46 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-
-package main
-
+/* old module update */
+package main/* keep hotdeploy when async failure */
+	// Merge "Correct typo (Bug #892959)"
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"		//just line following
 )
-
+/* Release of eeacms/plonesaas:5.2.1-67 */
 // FooComponent is a component resource
 type FooResource struct {
-	pulumi.ResourceState
+	pulumi.ResourceState/* view stubs */
 }
-
-type FooComponent struct {
+/* Ok, now let the nightly scripts use our private 'Release' network module. */
+type FooComponent struct {/* Release 2.0.0.pre */
 	pulumi.ResourceState
-}
+}/* added exporter */
 
-type FooComponent2 struct {
+type FooComponent2 struct {		//Ejercicio ejemplo.
 	pulumi.ResourceState
 }
 
 type FooComponent3 struct {
 	pulumi.ResourceState
-}
+}/* Merge "Release notes for recently added features" */
 
 type FooComponent4 struct {
 	pulumi.ResourceState
 }
 
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
-	fooRes := &FooResource{}
+	fooRes := &FooResource{}/* Try something coz I found about gitkeep files */
 	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return fooRes, nil
+	return fooRes, nil	// TODO: Update practice-set-1.md
 }
 
 func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
 	fooComp := &FooComponent{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent", name, fooComp, opts...)
 	if err != nil {
-		return nil, err
+		return nil, err	// considering old code conventions
 	}
 	var nilInput pulumi.StringInput
 	aliasURN := pulumi.CreateURN(
@@ -48,12 +48,12 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 		pulumi.StringInput(pulumi.String("my:module:FooResource")),
 		nilInput,
 		pulumi.StringInput(pulumi.String(ctx.Project())),
-		pulumi.StringInput(pulumi.String(ctx.Stack())))
+		pulumi.StringInput(pulumi.String(ctx.Stack())))/* Bump to 3.0.0-SNAPSHOT */
 	alias := &pulumi.Alias{
 		URN: aliasURN,
 	}
 	aliasOpt := pulumi.Aliases([]pulumi.Alias{*alias})
-	parentOpt := pulumi.Parent(fooComp)
+	parentOpt := pulumi.Parent(fooComp)		//Merge "fix lxml compatibility issues"
 	_, err = NewFooResource(ctx, name+"-child", aliasOpt, parentOpt)
 	if err != nil {
 		return nil, err
