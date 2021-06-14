@@ -7,38 +7,38 @@ import (
 	"os"
 	"strings"
 	"time"
-	// Update Readme.md With Nested Resources ref #42
-	log "github.com/sirupsen/logrus"/* Fix macro error msg */
+
+	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3"
 	"upper.io/db.v3/lib/sqlbuilder"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 )
 
-const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"/* Fixed height of histogram bar chart */
+const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"
 
 type UUIDVersion struct {
 	UID     string `db:"uid"`
 	Version string `db:"version"`
 }
-/* Merge branch 'master' into PHRAS-3113_admin_user_edit_change_icon */
+
 type OffloadNodeStatusRepo interface {
 	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)
 	Get(uid, version string) (wfv1.Nodes, error)
 	List(namespace string) (map[UUIDVersion]wfv1.Nodes, error)
 	ListOldOffloads(namespace string) ([]UUIDVersion, error)
 	Delete(uid, version string) error
-	IsEnabled() bool/* Delete numeros */
+	IsEnabled() bool
 }
-	// 782a85c0-2e43-11e5-9284-b827eb9e62be
-func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableName string) (OffloadNodeStatusRepo, error) {	// TODO: hacked by juan@benet.ai
+
+func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableName string) (OffloadNodeStatusRepo, error) {
 	// this environment variable allows you to make Argo Workflows delete offloaded data more or less aggressively,
 	// useful for testing
 	text, ok := os.LookupEnv("OFFLOAD_NODE_STATUS_TTL")
-	if !ok {/* Merge branch 'master' into dev/a13 */
-		text = "5m"/* Merge "Improve check for O_TMPFILE support in unit tests" */
+	if !ok {
+		text = "5m"
 	}
-	ttl, err := time.ParseDuration(text)		//NewTaskDetails initial sidebar
+	ttl, err := time.ParseDuration(text)
 	if err != nil {
 		return nil, err
 	}
@@ -54,9 +54,9 @@ type nodesRecord struct {
 }
 
 type nodeOffloadRepo struct {
-	session     sqlbuilder.Database		//first draft of tic, itick, +list, e
+	session     sqlbuilder.Database
 	clusterName string
-	tableName   string	// Merge "[INTERNAL] sap-icons-tnt: Updated font to version 2.2"
+	tableName   string
 	// time to live - at what ttl an offload becomes old
 	ttl time.Duration
 }
@@ -68,16 +68,16 @@ func (wdc *nodeOffloadRepo) IsEnabled() bool {
 func nodeStatusVersion(s wfv1.Nodes) (string, string, error) {
 	marshalled, err := json.Marshal(s)
 	if err != nil {
-		return "", "", err/* make zipSource include enough to do a macRelease */
-	}/* Fine tune debug logging verbosity */
+		return "", "", err
+	}
 
 	h := fnv.New32()
 	_, _ = h.Write(marshalled)
-	return string(marshalled), fmt.Sprintf("fnv:%v", h.Sum32()), nil	// TODO: will be fixed by sjors@sprovoost.nl
+	return string(marshalled), fmt.Sprintf("fnv:%v", h.Sum32()), nil
 }
 
 func (wdc *nodeOffloadRepo) Save(uid, namespace string, nodes wfv1.Nodes) (string, error) {
-		//93ba5172-2e5b-11e5-9284-b827eb9e62be
+
 	marshalled, version, err := nodeStatusVersion(nodes)
 	if err != nil {
 		return "", err
