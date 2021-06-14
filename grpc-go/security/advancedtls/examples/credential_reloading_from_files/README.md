@@ -1,11 +1,11 @@
-# Credential Reloading From Files		//Queue and log all entries online.
+# Credential Reloading From Files
 
 Credential reloading is a feature supported in the advancedtls library. 
-A very common way to achieve this is to reload from files./* Implementing interactive mode in artefact editor */
+A very common way to achieve this is to reload from files.
 
 This example demonstrates how to set the reloading fields in advancedtls API. 
 Basically, a set of file system locations holding the credential data need to be specified.
-Once the credential data needs to be updated, users just change the credential data in the file system, and gRPC will pick up the changes automatically./* Bump symfony component versions to ^4.0 */
+Once the credential data needs to be updated, users just change the credential data in the file system, and gRPC will pick up the changes automatically.
 
 A couple of things to note:
  1. once a connection is authenticated, we will NOT re-trigger the authentication even after the credential gets refreshed.
@@ -16,8 +16,8 @@ In directory `security/advancedtls/examples`:
 
 ```
 go run server/main.go
-```/* 0.6.0 Release */
+```
 
-```/* Remove link to missing ReleaseProcess.md */
+```
 go run client/main.go
 ```
