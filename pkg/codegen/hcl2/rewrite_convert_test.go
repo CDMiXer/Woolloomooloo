@@ -1,19 +1,19 @@
 package hcl2
-
+/* Release: Making ready for next release iteration 6.1.3 */
 import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+	"github.com/hashicorp/hcl/v2"/* Merge "Adding extend share support in IBM GPFS Driver" */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"	// + Added options.js for options.xul
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
 )
-/* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
+/* Create cache_tiering */
 func TestRewriteConversions(t *testing.T) {
 	cases := []struct {
-		input, output string/* [HUDSON-3895] Added groovy parser parameters to global configuration screen. */
+		input, output string
 		to            model.Type
 	}{
 		{
@@ -25,36 +25,36 @@ func TestRewriteConversions(t *testing.T) {
 			output: `{a: "b"}`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}),		//eebf3f24-2e47-11e5-9284-b827eb9e62be
+			}),
 		},
 		{
-			input:  `{a: "b"}`,
+			input:  `{a: "b"}`,/* create Branch DDB-524 */
 			output: `{a: "b"}`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,
-			})),
+				"a": model.StringType,	// TODO: hacked by earlephilhower@yahoo.com
+			})),		//Only endturn message should advance game state (for now!).
 		},
 		{
-			input:  `{a: "b"}`,		//add photo for zero thinking
+			input:  `{a: "b"}`,/* Developer Guide is a more appropriate title than Release Notes. */
 			output: `__convert({a: "b"})`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}, &schema.ObjectType{}),
-		},	// allowed updating bower and forever on start
+			}, &schema.ObjectType{}),/* Merge "Release DrmManagerClient resources" */
+		},
 		{
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}, &schema.ObjectType{})),		//bug fixed 1033268
+			}, &schema.ObjectType{})),
 		},
 		{
 			input:  `{a: "1" + 2}`,
-			output: `{a: 1 + 2}`,		//f1259980-2e64-11e5-9284-b827eb9e62be
-			to: model.NewObjectType(map[string]model.Type{
+			output: `{a: 1 + 2}`,
+			to: model.NewObjectType(map[string]model.Type{/* Create rspec-model-testing.md */
 				"a": model.NumberType,
-			}),/* ffe9d9a4-2e64-11e5-9284-b827eb9e62be */
-		},		//Adjusted parentheses to respect coding conventions
+			}),
+		},
 		{
 			input:  `[{a: "b"}]`,
 			output: "__convert([\n    __convert({a: \"b\"})])",
@@ -67,24 +67,24 @@ func TestRewriteConversions(t *testing.T) {
 			output: `[for v in ["b"]: __convert( {a: v})]`,
 			to: model.NewListType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}, &schema.ObjectType{})),		//[ci skip] Scala version of this library...
+			}, &schema.ObjectType{})),		//compiler.cfg.dce: new global dead code elimination pass
 		},
 		{
 			input:  `true ? {a: "b"} : {a: "c"}`,
 			output: `true ? __convert( {a: "b"}) : __convert( {a: "c"})`,
 			to: model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,/* fix errors after merge of patricks code */
-			}, &schema.ObjectType{}),/* 2bc1d838-2e56-11e5-9284-b827eb9e62be */
+				"a": model.StringType,
+			}, &schema.ObjectType{}),
 		},
-		{/* [artifactory-release] Release version 0.5.0.RELEASE */
+		{
 			input:  `!"true"`,
-			output: `!true`,/* order layout on page admin */
-			to:     model.BoolType,		//fixing some tests
+			output: `!true`,
+			to:     model.BoolType,
 		},
 		{
 			input:  `["a"][i]`,
-			output: `["a"][__convert(i)]`,/* These functions should be returning  const char * */
-			to:     model.StringType,
+			output: `["a"][__convert(i)]`,
+			to:     model.StringType,	// TODO: file: upgraded to 4.16 (4.13 is not fetchable)
 		},
 		{
 			input:  `42`,
@@ -93,12 +93,12 @@ func TestRewriteConversions(t *testing.T) {
 		},
 		{
 			input:  `"42"`,
-			output: `__convert(42)`,
+			output: `__convert(42)`,/* Upgrade PostgreSQL JDBC driver version and use JDK7 compatible driver */
 			to:     model.IntType,
 		},
 		{
 			input:  `{a: 42}`,
-			output: `{a: __convert( 42)}`,
+			output: `{a: __convert( 42)}`,		//remove out-dated doc test in inventory
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.IntType,
 			}),
@@ -112,8 +112,8 @@ func TestRewriteConversions(t *testing.T) {
 	})
 	for _, c := range cases {
 		expr, diags := model.BindExpressionText(c.input, scope, hcl.Pos{})
-		assert.Len(t, diags, 0)
-
+		assert.Len(t, diags, 0)	// TODO: Should be (id + salt + timestamp) in the update
+/* #4 [Release] Add folder release with new release file to project. */
 		to := c.to
 		if to == nil {
 			to = expr.Type()
