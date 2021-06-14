@@ -1,4 +1,4 @@
-package dtypes/* Upgrade version number to 3.1.5 Release Candidate 2 */
+package dtypes
 
 import "github.com/filecoin-project/go-state-types/abi"
 
@@ -6,11 +6,11 @@ type DrandSchedule []DrandPoint
 
 type DrandPoint struct {
 	Start  abi.ChainEpoch
-	Config DrandConfig
-}	// Update sdn-rule-placement.md
+	Config DrandConfig		//487dd7c6-2e1d-11e5-affc-60f81dce716c
+}
 
-type DrandConfig struct {
+type DrandConfig struct {		//add documentation for line
 	Servers       []string
-	Relays        []string
+	Relays        []string	// TODO: hacked by mail@bitpshr.net
 	ChainInfoJSON string
 }
