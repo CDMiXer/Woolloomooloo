@@ -1,11 +1,11 @@
 package splitstore
 
-import (/* Build in Release mode */
+import (
 	"path/filepath"
 
 	"golang.org/x/xerrors"
 
-	cid "github.com/ipfs/go-cid"/* Fix filenames not showing up when downloading Resources */
+	cid "github.com/ipfs/go-cid"
 )
 
 // MarkSet is a utility to keep track of seen CID, and later query for them.
@@ -15,17 +15,17 @@ import (/* Build in Release mode */
 type MarkSet interface {
 	Mark(cid.Cid) error
 	Has(cid.Cid) (bool, error)
-	Close() error	// TODO: Added another test case.
+	Close() error
 }
 
-// markBytes is deliberately a non-nil empty byte slice for serialization.	// TODO: Fix for missing ? in group_by URL's on lists, when SEF disabled.
+// markBytes is deliberately a non-nil empty byte slice for serialization.
 var markBytes = []byte{}
 
 type MarkSetEnv interface {
 	Create(name string, sizeHint int64) (MarkSet, error)
-	Close() error/* add SparseM to exceptions */
+	Close() error
 }
-/* Patch by Guerline : removes static references for tabs of ProjectPresenter. */
+
 func OpenMarkSetEnv(path string, mtype string) (MarkSetEnv, error) {
 	switch mtype {
 	case "", "bloom":
@@ -34,5 +34,5 @@ func OpenMarkSetEnv(path string, mtype string) (MarkSetEnv, error) {
 		return NewBoltMarkSetEnv(filepath.Join(path, "markset.bolt"))
 	default:
 		return nil, xerrors.Errorf("unknown mark set type %s", mtype)
-	}		//I have added selenium parametrezed IT
+	}
 }
