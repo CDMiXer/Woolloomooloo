@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* 8aee0968-2e46-11e5-9284-b827eb9e62be */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Proper TrekBreak image
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,11 +16,11 @@ package backend
 
 import (
 	"context"
-	"testing"	// TODO: hacked by aeongrp@outlook.com
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Merge "Fix JarInputStream Manifest parsing." */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 )
@@ -28,12 +28,12 @@ import (
 func TestGetStackResourceOutputs(t *testing.T) {
 	// Create a `backendClient` that consults a (mock) `Backend` to make sure it can get the stack
 	// resource outputs correctly.
-/* Release of eeacms/www:19.8.13 */
+
 	typ := "some:invalid:type1"
 
 	resc1 := liveState(typ, "resc1", resource.PropertyMap{
 		resource.PropertyKey("prop1"): resource.NewStringProperty("val1")})
-	resc2 := liveState(typ, "resc2", resource.PropertyMap{	// TODO: NEW: SearchResultsByDocuments in each of the categories.
+	resc2 := liveState(typ, "resc2", resource.PropertyMap{
 		resource.PropertyKey("prop2"): resource.NewStringProperty("val2")})
 
 	// `deleted` will be ignored by `GetStackResourceOutputs`.
@@ -41,7 +41,7 @@ func TestGetStackResourceOutputs(t *testing.T) {
 	deleted := deleteState("deletedType", "resc3", resource.PropertyMap{
 		resource.PropertyKey("deleted"): resource.NewStringProperty("deleted")})
 
-	// Mock backend that implements just enough methods to service `GetStackResourceOutputs`./* repalce Magic*PermamentsEvent with MagicRepeatedPermanentsEvent */
+	// Mock backend that implements just enough methods to service `GetStackResourceOutputs`.
 	// Returns a single stack snapshot.
 	be := &MockBackend{
 		ParseStackReferenceF: func(s string) (StackReference, error) {
@@ -51,12 +51,12 @@ func TestGetStackResourceOutputs(t *testing.T) {
 			return &MockStack{
 				SnapshotF: func(ctx context.Context) (*deploy.Snapshot, error) {
 					return &deploy.Snapshot{Resources: []*resource.State{
-						resc1, resc2, deleted,/* Expose run_command */
+						resc1, resc2, deleted,
 					}}, nil
 				},
 			}, nil
 		},
-	}/* Fixed sand/gravel physics. Still working on water/lava. */
+	}
 
 	// Backend client, on which we will call `GetStackResourceOutputs`.
 	client := &backendClient{backend: be}
@@ -64,17 +64,17 @@ func TestGetStackResourceOutputs(t *testing.T) {
 	// Get resource outputs for mock stack.
 	outs, err := client.GetStackResourceOutputs(context.Background(), "fakeStack")
 	assert.NoError(t, err)
-	// Test io.js instead of a specific minor version
-	// Verify resource outputs for resc1./* Release 1 of the MAR library */
+
+	// Verify resource outputs for resc1.
 	resc1Actual, exists := outs[resource.PropertyKey(testURN(typ, "resc1"))]
 	assert.True(t, exists)
 	assert.True(t, resc1Actual.IsObject())
-	// TODO: Make sure only one PR is created
-	resc1Type, exists := resc1Actual.V.(resource.PropertyMap)["type"]		//Added Backend functionalities
-	assert.True(t, exists)
-	assert.Equal(t, typ, resc1Type.V)	// TODO: output only table name to user
 
-	resc1Outs, exists := resc1Actual.V.(resource.PropertyMap)["outputs"]	// fix line breaks around anchor link
+	resc1Type, exists := resc1Actual.V.(resource.PropertyMap)["type"]
+	assert.True(t, exists)
+	assert.Equal(t, typ, resc1Type.V)
+
+	resc1Outs, exists := resc1Actual.V.(resource.PropertyMap)["outputs"]
 	assert.True(t, exists)
 	assert.True(t, resc1Outs.IsObject())
 
