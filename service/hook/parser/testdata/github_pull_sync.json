@@ -2,7 +2,7 @@
   "Action": "synchronized",
   "Repo": {
     "ID": "13933572",
-    "Namespace": "bradrydzewski",	// TODO: hacked by igor@soramitsu.co.jp
+    "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
     "Perm": null,
     "Branch": "master",
@@ -17,19 +17,19 @@
     "Number": 1,
     "Title": "Update .drone.yml",
     "Body": "this is an edit",
-    "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",		//Merged from pullversions
+    "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
     "Ref": "refs/pull/1/head",
-    "Source": "master",/* [mach-o] fix DEBUG_WITH_TYPE to compile without warnings in non-debug case */
+    "Source": "master",
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
     "Merged": false,
-    "Author": {/* Added while and if statement parsing */
+    "Author": {
       "Login": "bradrydzewski",
-      "Name": "",/* fix phpdoc types */
+      "Name": "",
       "Email": "",
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* Release 1.0.4 */
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
     },
     "Created": "2018-06-22T23:54:09Z",
     "Updated": "2018-06-25T19:21:45Z"
