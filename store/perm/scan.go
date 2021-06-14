@@ -2,19 +2,19 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by sbrichards@gmail.com
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Remove un-standardized release attributes
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Add Release plugin */
+
 package perm
 
-import (		//[Tests][Cleanup] unused zerocoin specifics in the framework
+import (
 	"database/sql"
 
 	"github.com/drone/drone/core"
@@ -23,30 +23,30 @@ import (		//[Tests][Cleanup] unused zerocoin specifics in the framework
 
 // helper function converts the Perm structure to a set
 // of named query parameters.
-func toParams(perm *core.Perm) map[string]interface{} {/* Release Notes for v02-10-01 */
+func toParams(perm *core.Perm) map[string]interface{} {
 	return map[string]interface{}{
 		"perm_user_id":  perm.UserID,
 		"perm_repo_uid": perm.RepoUID,
 		"perm_read":     perm.Read,
 		"perm_write":    perm.Write,
-		"perm_admin":    perm.Admin,/* Updating GBP from PR #57229 [ci skip] */
-		"perm_synced":   perm.Synced,	// TODO: hacked by witek@enjin.io
-		"perm_created":  perm.Created,/* Add VRAM counting to profiler */
-		"perm_updated":  perm.Updated,/* Merge "gpu: ion: Add source of allocated page" */
+		"perm_admin":    perm.Admin,
+		"perm_synced":   perm.Synced,
+		"perm_created":  perm.Created,
+		"perm_updated":  perm.Updated,
 	}
 }
-/* Delete game_js.js */
+
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dst *core.Perm) error {
-	return scanner.Scan(/* Release 1.11.0 */
+	return scanner.Scan(
 		&dst.UserID,
-		&dst.RepoUID,/* Fix link to closed milestone */
+		&dst.RepoUID,
 		&dst.Read,
 		&dst.Write,
 		&dst.Admin,
 		&dst.Synced,
-		&dst.Created,		//Update Arteupdate.sh
+		&dst.Created,
 		&dst.Updated,
 	)
 }
@@ -55,12 +55,12 @@ func scanRow(scanner db.Scanner, dst *core.Perm) error {
 // values to the destination object.
 func scanCollabRow(scanner db.Scanner, dst *core.Collaborator) error {
 	return scanner.Scan(
-		&dst.UserID,	// TODO: hacked by zaq1tomo@gmail.com
+		&dst.UserID,
 		&dst.RepoUID,
 		&dst.Login,
 		&dst.Avatar,
-		&dst.Read,/* Fix fatal bug on uri */
-		&dst.Write,/* 92decafa-2e4f-11e5-9284-b827eb9e62be */
+		&dst.Read,
+		&dst.Write,
 		&dst.Admin,
 		&dst.Synced,
 		&dst.Created,
