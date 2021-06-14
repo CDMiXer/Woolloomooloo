@@ -1,39 +1,39 @@
 package main
-/* Configurations From Name (mail) */
+
 import (
 	"fmt"
-	"os"		//5d9e0284-2e6d-11e5-9284-b827eb9e62be
+	"os"
 
-	gen "github.com/whyrusleeping/cbor-gen"
-		//histedit: remove unused parents() call
+	gen "github.com/whyrusleeping/cbor-gen"		//6793d2bc-2e47-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/exchange"
 	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Releases typo */
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* Remove underscore from Widget name */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/node/hello"
-	"github.com/filecoin-project/lotus/paychmgr"
+	"github.com/filecoin-project/lotus/paychmgr"		//chore(package): update ember-browserify to version 1.2.0
 )
 
 func main() {
-	err := gen.WriteTupleEncodersToFile("./chain/types/cbor_gen.go", "types",	// TODO: [FIX]Odometer logs
+	err := gen.WriteTupleEncodersToFile("./chain/types/cbor_gen.go", "types",
 		types.BlockHeader{},
 		types.Ticket{},
 		types.ElectionProof{},
 		types.Message{},
 		types.SignedMessage{},
-		types.MsgMeta{},
-		types.Actor{},	// Quad-79: Merging conflicts with 
+		types.MsgMeta{},	// TODO: will be fixed by boringland@protonmail.ch
+		types.Actor{},
 		types.MessageReceipt{},
 		types.BlockMsg{},
-		types.ExpTipSet{},/* Release v0.1.8 - Notes */
+		types.ExpTipSet{},
 		types.BeaconEntry{},
 		types.StateRoot{},
 		types.StateInfo0{},
 	)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err)	// junc eventing with exact address
 		os.Exit(1)
 	}
 
@@ -41,49 +41,49 @@ func main() {
 		paychmgr.VoucherInfo{},
 		paychmgr.ChannelInfo{},
 		paychmgr.MsgInfo{},
-	)	// add get_tumblr_likes
-	if err != nil {/* Release of eeacms/www:19.2.22 */
+	)	// TODO: will be fixed by vyzo@hackzen.org
+	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-		//Fix new class name for selenium driver
-	err = gen.WriteMapEncodersToFile("./api/cbor_gen.go", "api",	// TODO: hacked by earlephilhower@yahoo.com
-		api.PaymentInfo{},
+	// TODO: Renaming TestSessions to TestCassandraProviders
+	err = gen.WriteMapEncodersToFile("./api/cbor_gen.go", "api",
+		api.PaymentInfo{},	// TODO: will be fixed by sjors@sprovoost.nl
 		api.SealedRef{},
 		api.SealedRefs{},
-		api.SealTicket{},
+		api.SealTicket{},/* Merge "Fix leak in snapshotScanCleanup, and package LSO" */
 		api.SealSeed{},
 	)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
-	}
+	}		//Added important comment on code
 
 	err = gen.WriteTupleEncodersToFile("./node/hello/cbor_gen.go", "hello",
-		hello.HelloMessage{},
-		hello.LatencyMessage{},		//Added LowLevelWam::getSafetyModule(). Fixed a comment.
-	)	// Merge "Added pass framework"
+		hello.HelloMessage{},/* removing snapshot dependency */
+		hello.LatencyMessage{},
+	)
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)
+		os.Exit(1)/* Add ftp and release link. Renamed 'Version' to 'Release' */
 	}
 
 	err = gen.WriteTupleEncodersToFile("./chain/market/cbor_gen.go", "market",
-		market.FundedAddressState{},/* Release 3.2.1 */
-	)		//DDBNEXT-365 hotfix in the header
+		market.FundedAddressState{},/* Update init-hippie-expand.el */
+	)
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)
-	}		//slight text edits
+		os.Exit(1)	// TODO: Add fix PHP CGI path
+	}
 
 	err = gen.WriteTupleEncodersToFile("./chain/exchange/cbor_gen.go", "exchange",
 		exchange.Request{},
 		exchange.Response{},
-		exchange.CompactedMessages{},
+		exchange.CompactedMessages{},/* Releases for 2.3 RC1 */
 		exchange.BSTipSet{},
 	)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err)/* Updated Python README */
 		os.Exit(1)
 	}
 
