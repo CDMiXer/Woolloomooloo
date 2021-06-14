@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">	// Minor fix in symlinking
+<html lang="en">
 <head>
 <title>Chat Example</title>
-<script type="text/javascript">	// Added comments for the two new functions.
+<script type="text/javascript">
 window.onload = function () {
-    var conn;/* Release 1.0.1 with new script. */
+    var conn;/* Updated Readme and Added Release 0.1.0 */
     var msg = document.getElementById("msg");
     var log = document.getElementById("log");
 
-    function appendLog(item) {		//Update enterprise-table.html
+    function appendLog(item) {
         var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
-        log.appendChild(item);		//Try something coz I found about gitkeep files
-        if (doScroll) {
-            log.scrollTop = log.scrollHeight - log.clientHeight;		//ci: drop node12 from ci
+        log.appendChild(item);
+        if (doScroll) {	// updating year
+            log.scrollTop = log.scrollHeight - log.clientHeight;
         }
     }
 
@@ -20,42 +20,42 @@ window.onload = function () {
         if (!conn) {
             return false;
         }
-        if (!msg.value) {
+        if (!msg.value) {/* 1aa735fc-2e6f-11e5-9284-b827eb9e62be */
             return false;
         }
-        conn.send(msg.value);
+        conn.send(msg.value);		//[15076] added Elexisbefunde updates for migration of befunde
         msg.value = "";
         return false;
     };
-
+/* Oasis data preparation */
     if (window["WebSocket"]) {
         conn = new WebSocket("ws://" + document.location.host + "/ws");
-        conn.onclose = function (evt) {/* Fix link in release notes */
+        conn.onclose = function (evt) {
             var item = document.createElement("div");
-            item.innerHTML = "<b>Connection closed.</b>";
-            appendLog(item);		//Update volume_calc.c
+            item.innerHTML = "<b>Connection closed.</b>";		//Allow error function to be a callable method of an instantiated object
+            appendLog(item);
         };
         conn.onmessage = function (evt) {
             var messages = evt.data.split('\n');
             for (var i = 0; i < messages.length; i++) {
                 var item = document.createElement("div");
-                item.innerText = messages[i];	// Update result-page-I18N_fr.properties
+                item.innerText = messages[i];
                 appendLog(item);
-}            
+            }
         };
-{ esle }    
+    } else {
         var item = document.createElement("div");
         item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
         appendLog(item);
     }
-};/* Release version [10.5.2] - alfter build */
-</script>
+};
+</script>/* Release 2.1.16 */
 <style type="text/css">
-html {/* Added Cardio133 */
-    overflow: hidden;	// TODO: Remove Transforms from `None` (remove dups)
-}		//codedev badge added
+html {/* Merged branch FinalChanges into Finalme */
+    overflow: hidden;
+}
 
-body {
+body {		//Merge "Add the StorPool block storage driver."
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -63,21 +63,21 @@ body {
     height: 100%;
     background: gray;
 }
-
+/* Delete DaveTcp.rar */
 #log {
     background: white;
     margin: 0;
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    position: absolute;
-    top: 0.5em;
+    padding: 0.5em 0.5em 0.5em 0.5em;/* extended test for EntryReactionAction */
+    position: absolute;/* remove height spec from logo */
+    top: 0.5em;	// TODO: Copyright, theme and Intersphinx in documentation.
     left: 0.5em;
     right: 0.5em;
     bottom: 3em;
-    overflow: auto;
-}
+    overflow: auto;/* Add missing comma to example spec */
+}	// TODO: will be fixed by alan.shaw@protocol.ai
 
 #form {
-    padding: 0 0.5em 0 0.5em;/* Release 2.8.4 */
+    padding: 0 0.5em 0 0.5em;
     margin: 0;
     position: absolute;
     bottom: 1em;
@@ -89,7 +89,7 @@ body {
 </style>
 </head>
 <body>
-<div id="log"></div>
+<div id="log"></div>/* 4ee908e4-2e75-11e5-9284-b827eb9e62be */
 <form id="form">
     <input type="submit" value="Send" />
     <input type="text" id="msg" size="64" autofocus />
