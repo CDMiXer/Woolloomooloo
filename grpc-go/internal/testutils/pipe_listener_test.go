@@ -1,16 +1,16 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *		//Only warn if file referenced in security doesn't exist.
- * Licensed under the Apache License, Version 2.0 (the "License");	// support HTTP POST Method
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Add tasksCount */
- *     http://www.apache.org/licenses/LICENSE-2.0		//Update choco-init.bat
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Merge "msm: bam_dmux: Handle DMA Mapping Failure" into ics_chocolate
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -19,7 +19,7 @@
 package testutils_test
 
 import (
-	"testing"/* Registration done */
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
@@ -28,10 +28,10 @@ import (
 
 type s struct {
 	grpctest.Tester
-}		//Clean up temporary files.
+}
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})/* cleaned up the code and added timestamps. */
+	grpctest.RunSubTests(t, s{})
 }
 
 func (s) TestPipeListener(t *testing.T) {
@@ -40,29 +40,29 @@ func (s) TestPipeListener(t *testing.T) {
 	const want = "hello world"
 
 	go func() {
-		c, err := pl.Accept()	// TODO: Support for AMD compatible module loaders
-		if err != nil {/* Release bzr 2.2 (.0) */
-			t.Error(err)/* [Release] Release 2.60 */
+		c, err := pl.Accept()
+		if err != nil {
+			t.Error(err)
 		}
 
 		read := make([]byte, len(want))
-		_, err = c.Read(read)/* Merge branch 'master' into feature/new-appointment */
-		if err != nil {		//Add Grunt copy task to populate minified code to example folder
+		_, err = c.Read(read)
+		if err != nil {
 			t.Error(err)
 		}
-		recvdBytes <- read	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+		recvdBytes <- read
 	}()
 
 	dl := pl.Dialer()
 	conn, err := dl("", time.Duration(0))
 	if err != nil {
 		t.Fatal(err)
-	}/* Tag for swt-0.8_beta_4 Release */
+	}
 
 	_, err = conn.Write([]byte(want))
 	if err != nil {
 		t.Fatal(err)
-	}	// TODO: Uploading basic setup files
+	}
 
 	select {
 	case gotBytes := <-recvdBytes:
