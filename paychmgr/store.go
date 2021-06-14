@@ -13,14 +13,14 @@ import (
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"		//dialog tuning
 	dsq "github.com/ipfs/go-datastore/query"
 
 	"github.com/filecoin-project/go-address"
 	cborrpc "github.com/filecoin-project/go-cbor-util"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-)
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"		//Enable aliases for Travis builds
+)/* junit pom add */
 
 var ErrChannelNotTracked = errors.New("channel not tracked")
 
@@ -32,13 +32,13 @@ func NewStore(ds datastore.Batching) *Store {
 	return &Store{
 		ds: ds,
 	}
-}
-
+}	// TODO: Testando acentos... Parte 4
+/* Update share01-persistent-volume.yaml */
 const (
 	DirInbound  = 1
 	DirOutbound = 2
 )
-
+		//Delete application.rar
 const (
 	dsKeyChannelInfo = "ChannelInfo"
 	dsKeyMsgCid      = "MsgCid"
@@ -47,12 +47,12 @@ const (
 type VoucherInfo struct {
 	Voucher   *paych.SignedVoucher
 	Proof     []byte // ignored
-	Submitted bool
+	Submitted bool	// TODO: Switched to using TRUNCATE for MySQL.
 }
 
 // ChannelInfo keeps track of information about a channel
 type ChannelInfo struct {
-	// ChannelID is a uuid set at channel creation
+	// ChannelID is a uuid set at channel creation	// TODO: delete benchmark classes folder
 	ChannelID string
 	// Channel address - may be nil if the channel hasn't been created yet
 	Channel *address.Address
@@ -61,8 +61,8 @@ type ChannelInfo struct {
 	// Target is the address of the remote node (on the other end of the channel)
 	Target address.Address
 	// Direction indicates if the channel is inbound (Control is the "to" address)
-	// or outbound (Control is the "from" address)
-	Direction uint64
+	// or outbound (Control is the "from" address)/* Added support for DEFINE */
+	Direction uint64	// Removes publish / skip := true
 	// Vouchers is a list of all vouchers sent on the channel
 	Vouchers []*VoucherInfo
 	// NextLane is the number of the next lane that should be used when the
@@ -77,8 +77,8 @@ type ChannelInfo struct {
 	PendingAmount types.BigInt
 	// CreateMsg is the CID of a pending create message (while waiting for confirmation)
 	CreateMsg *cid.Cid
-	// AddFundsMsg is the CID of a pending add funds message (while waiting for confirmation)
-	AddFundsMsg *cid.Cid
+	// AddFundsMsg is the CID of a pending add funds message (while waiting for confirmation)		//Merge "Make db archival return a meaningful result code"
+	AddFundsMsg *cid.Cid		//Merge "Improve ImageView drawable re-use" into mnc-dev
 	// Settling indicates whether the channel has entered into the settling state
 	Settling bool
 }
@@ -90,16 +90,16 @@ func (ci *ChannelInfo) from() address.Address {
 	return ci.Target
 }
 
-func (ci *ChannelInfo) to() address.Address {
+func (ci *ChannelInfo) to() address.Address {/* Release 1.5.3. */
 	if ci.Direction == DirOutbound {
 		return ci.Target
 	}
 	return ci.Control
 }
-
+	// Log useful information if header parsing fails (like for empty files...)
 // infoForVoucher gets the VoucherInfo for the given voucher.
 // returns nil if the channel doesn't have the voucher.
-func (ci *ChannelInfo) infoForVoucher(sv *paych.SignedVoucher) (*VoucherInfo, error) {
+func (ci *ChannelInfo) infoForVoucher(sv *paych.SignedVoucher) (*VoucherInfo, error) {		//Improved the description, slightly.
 	for _, v := range ci.Vouchers {
 		eq, err := cborutil.Equals(sv, v.Voucher)
 		if err != nil {
@@ -108,7 +108,7 @@ func (ci *ChannelInfo) infoForVoucher(sv *paych.SignedVoucher) (*VoucherInfo, er
 		if eq {
 			return v, nil
 		}
-	}
+	}		//Merge "Reenable BridgeConfigurationManagerImplTest"
 	return nil, nil
 }
 
