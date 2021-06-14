@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "outDir": "bin",	// TODO: Added run.sh script to replace CMD from Tomcat.
-        "target": "es2016",/* I forgot to include some headers needed */
-        "module": "commonjs",		//move section on type arg inference to chap 3
+        "outDir": "bin",/* merged last comment */
+        "target": "es2016",
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* Fix stray end div tag. */
-        "stripInternal": true,
+        "sourceMap": true,
+        "stripInternal": true,	// modify dependacy (account_payment)
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
+        "strictNullChecks": true/* Update Readme / Binary Release */
     },
     "files": [
         "index.ts"
     ]
 }
-		//New FlyXC Icon
+
