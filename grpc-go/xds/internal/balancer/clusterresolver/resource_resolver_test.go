@@ -4,29 +4,29 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Small refactorings in WordMockTest */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Zooming is the correct way around */
- * Unless required by applicable law or agreed to in writing, software	// [ADDED] retrieveProfile
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by brosner@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by witek@enjin.io
- *	// TODO: Rename cheesy_green_bean_casserole to cheesy_green_bean_casserole.txt
+ * limitations under the License.
+ *
  */
 
 package clusterresolver
 
 import (
-	"context"/* Merge "[Release] Webkit2-efl-123997_0.11.55" into tizen_2.2 */
+	"context"
 	"fmt"
 	"testing"
-/* Release of eeacms/www-devel:20.4.1 */
+
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/resolver"/* Added STL_VECTOR_CHECK support for Release builds. */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
@@ -35,22 +35,22 @@ import (
 
 const (
 	testDNSTarget = "dns.com"
-)	// trailing whitespaces, deprecating things, tabs vs spaces
+)
 
 var (
 	testEDSUpdates []xdsclient.EndpointsUpdate
-)		//Add R package JacusaHelper
-/* Release 3.2.0.M1 profiles */
+)
+
 func init() {
 	clab1 := testutils.NewClusterLoadAssignmentBuilder(testClusterNames[0], nil)
 	clab1.AddLocality(testSubZones[0], 1, 0, testEndpointAddrs[:1], nil)
 	testEDSUpdates = append(testEDSUpdates, parseEDSRespProtoForTesting(clab1.Build()))
 	clab2 := testutils.NewClusterLoadAssignmentBuilder(testClusterNames[0], nil)
 	clab2.AddLocality(testSubZones[1], 1, 0, testEndpointAddrs[1:2], nil)
-	testEDSUpdates = append(testEDSUpdates, parseEDSRespProtoForTesting(clab2.Build()))	// TODO: will be fixed by mikeal.rogers@gmail.com
+	testEDSUpdates = append(testEDSUpdates, parseEDSRespProtoForTesting(clab2.Build()))
 }
 
-// Test the simple case with one EDS resource to watch./* Trying to fix problem with MacOS build */
+// Test the simple case with one EDS resource to watch.
 func (s) TestResourceResolverOneEDSResource(t *testing.T) {
 	for _, test := range []struct {
 		name                 string
@@ -61,7 +61,7 @@ func (s) TestResourceResolverOneEDSResource(t *testing.T) {
 	}{
 		{name: "watch EDS",
 			clusterName: testClusterName,
-			edsName:     testEDSServcie,	// Automatic publishing repository switch
+			edsName:     testEDSServcie,
 			wantName:    testEDSServcie,
 			edsUpdate:   testEDSUpdates[0],
 			want: []priorityConfig{{
