@@ -1,13 +1,13 @@
 {
     "name": "config_basic_js",
     "version": "0.0.9",
-    "license": "Apache-2.0",
-    "devDependencies": {	// Added info on seeking different scans
+    "license": "Apache-2.0",		//Better way to ignore files in var/
+    "devDependencies": {		//Fix bug in the conversion of command name to Bash function name: use replace all
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "pulumi": "latest"	// TODO:  Admin Complaints now @ staff
-    },
+        "pulumi": "latest"/* Released MonetDB v0.2.7 */
+    },/* [artifactory-release] Release version 1.2.0.BUILD-SNAPSHOT */
     "dependencies": {
         "@types/node": "^8.0.0"
     }
