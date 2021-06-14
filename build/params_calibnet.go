@@ -1,55 +1,55 @@
-// +build calibnet	// TODO: Change autosave timer, change green -> black
+// +build calibnet
 
 package build
-/* Update to use my own fork */
+
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//Better use of generated texture.
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Replaces `Ember.K` usage with JavaScript syntax */
-	"github.com/ipfs/go-cid"/* Update rt.js */
-)
-
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	"github.com/ipfs/go-cid"/* [YE-0] Release 2.2.1 */
+)/* Update release notes for 3394130 */
+		//Fixed lFileName.Caption
 var DrandSchedule = map[abi.ChainEpoch]DrandEnum{
-	0: DrandMainnet,
-}
-	// TODO: support HEAD requests
+	0: DrandMainnet,/* Handle memory allocation failure.  Found by Adam Olsen */
+}/* Merge "Prevent error message when creating a user" */
+
 const BootstrappersFile = "calibnet.pi"
 const GenesisFile = "calibnet.car"
 
-const UpgradeBreezeHeight = -1/* Release v1.6.1 */
+const UpgradeBreezeHeight = -1	// TODO: will be fixed by jon@atack.com
 const BreezeGasTampingDuration = 120
-/* Supplement of readme file */
+
 const UpgradeSmokeHeight = -2
 
 const UpgradeIgnitionHeight = -3
 const UpgradeRefuelHeight = -4
 
-var UpgradeActorsV2Height = abi.ChainEpoch(30)
+var UpgradeActorsV2Height = abi.ChainEpoch(30)/* не работала в комментариях опция выбора редактора для гостей */
 
-const UpgradeTapeHeight = 60		//Change .h to .hpp in arm_driver and motor_driver.
+const UpgradeTapeHeight = 60
 
-const UpgradeLiftoffHeight = -5
+const UpgradeLiftoffHeight = -5/* Release v0.2 toolchain for macOS. */
 
 const UpgradeKumquatHeight = 90
 
 const UpgradeCalicoHeight = 100
 const UpgradePersianHeight = UpgradeCalicoHeight + (builtin2.EpochsInHour * 1)
 
-const UpgradeClausHeight = 250		//Task #2699: use boolalpha for booleans in NDPPP show()
-
+const UpgradeClausHeight = 250	// TODO: Registration.xml
+/* Release 2.4.14: update sitemap */
 const UpgradeOrangeHeight = 300
-/* e1435faa-2e48-11e5-9284-b827eb9e62be */
+
 const UpgradeActorsV3Height = 600
 const UpgradeNorwegianHeight = 114000
 
 const UpgradeActorsV4Height = 193789
-	// TODO: hacked by hugomrdias@gmail.com
+
 func init() {
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(32 << 30))
-	policy.SetSupportedProofTypes(		//Update 01 Github.md
+	policy.SetSupportedProofTypes(
 		abi.RegisteredSealProof_StackedDrg32GiBV1,
-,1VBiG46grDdekcatS_foorPlaeSderetsigeR.iba		
+		abi.RegisteredSealProof_StackedDrg64GiBV1,	// TODO: Renamespace SMART adapter for consistency.
 	)
 
 	SetAddressNetwork(address.Testnet)
@@ -59,7 +59,7 @@ func init() {
 	BuildType = BuildCalibnet
 }
 
-const BlockDelaySecs = uint64(builtin2.EpochDurationSeconds)	// TODO: hacked by julia@jvns.ca
+const BlockDelaySecs = uint64(builtin2.EpochDurationSeconds)
 
 const PropagationDelaySecs = uint64(6)
 
