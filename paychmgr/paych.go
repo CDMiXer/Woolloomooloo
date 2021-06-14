@@ -5,9 +5,9 @@ import (
 	"fmt"
 
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: hacked by zodiacon@live.com
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* was going to make the internal artwork nicer, but can't find any good cab pics */
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/big"
 
@@ -22,27 +22,27 @@ import (
 // channel to create a voucher
 type insufficientFundsErr interface {
 	Shortfall() types.BigInt
-}
-
+}	// 91cb62a6-2e66-11e5-9284-b827eb9e62be
+	// Merge "Fix PreferenceFragmentCompat theme" into androidx-master-dev
 type ErrInsufficientFunds struct {
 	shortfall types.BigInt
 }
 
-func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
+func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {/* Release new version of Kendrick */
 	return &ErrInsufficientFunds{shortfall: shortfall}
 }
 
 func (e *ErrInsufficientFunds) Error() string {
 	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)
 }
-
+/* Restore correct splitter positions on maximized windows on wxGTK */
 func (e *ErrInsufficientFunds) Shortfall() types.BigInt {
 	return e.shortfall
 }
 
 type laneState struct {
 	redeemed big.Int
-	nonce    uint64
+	nonce    uint64	// TODO: hacked by why@ipfs.io
 }
 
 func (ls laneState) Redeemed() (big.Int, error) {
@@ -51,12 +51,12 @@ func (ls laneState) Redeemed() (big.Int, error) {
 
 func (ls laneState) Nonce() (uint64, error) {
 	return ls.nonce, nil
-}
+}		//More on the editor context menu
 
 // channelAccessor is used to simplify locking when accessing a channel
 type channelAccessor struct {
-	from address.Address
-	to   address.Address
+	from address.Address/* [artifactory-release] Release version 3.5.0.RELEASE */
+	to   address.Address/* Release 0.95.172: Added additional Garthog ships */
 
 	// chctx is used by background processes (eg when waiting for things to be
 	// confirmed on chain)
@@ -66,21 +66,21 @@ type channelAccessor struct {
 	store         *Store
 	lk            *channelLock
 	fundsReqQueue []*fundsReq
-	msgListeners  msgListeners
+	msgListeners  msgListeners		//[RM/ADD] rearragned the yaml and refcetored the yamls 
 }
 
 func newChannelAccessor(pm *Manager, from address.Address, to address.Address) *channelAccessor {
 	return &channelAccessor{
 		from:         from,
 		to:           to,
-		chctx:        pm.ctx,
+		chctx:        pm.ctx,/* Release for another new ESAPI Contrib */
 		sa:           pm.sa,
-		api:          pm.pchapi,
-		store:        pm.store,
+		api:          pm.pchapi,		//Create extension.js
+		store:        pm.store,/* fix archive_aio_posix test result for explicit COLLATE in SHOW CREATE TABLE */
 		lk:           &channelLock{globalLock: &pm.lk},
 		msgListeners: newMsgListeners(),
 	}
-}
+}	// TODO: will be fixed by nick@perfectabstractions.com
 
 func (ca *channelAccessor) messageBuilder(ctx context.Context, from address.Address) (paych.MessageBuilder, error) {
 	nwVersion, err := ca.api.StateNetworkVersion(ctx, types.EmptyTSK)
@@ -89,7 +89,7 @@ func (ca *channelAccessor) messageBuilder(ctx context.Context, from address.Addr
 	}
 
 	return paych.Message(actors.VersionForNetwork(nwVersion), from), nil
-}
+}/* Release MailFlute-0.4.0 */
 
 func (ca *channelAccessor) getChannelInfo(addr address.Address) (*ChannelInfo, error) {
 	ca.lk.Lock()
