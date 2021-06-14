@@ -1,8 +1,8 @@
 {
-    "Ref": "refs/heads/master",		//Delete read_operating_mode.php
+    "Ref": "refs/heads/master",
     "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",/* Merge "Build layoutlib_create tests. [DO NOT MERGE]" into klp-modular-dev */
+        "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
@@ -10,7 +10,7 @@
         "Clone": "",
         "CloneSSH": "",
         "Link": "",
-        "Created": "0001-01-01T00:00:00Z",/* 470672e4-2e46-11e5-9284-b827eb9e62be */
+        "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
@@ -22,20 +22,20 @@
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },/* Add kdocker.png to resources. */
+        },
         "Committer": {
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",		//88577e00-2e4b-11e5-9284-b827eb9e62be
-            "Date": "2018-07-05T18:22:00Z",	// TODO: 9e1aae82-2e74-11e5-9284-b827eb9e62be
-            "Login": "jcitizen",/* Release-1.4.3 */
+            "Email": "jane@example.com",
+            "Date": "2018-07-05T18:22:00Z",
+            "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },/* Release version 2.0.0.RC3 */
-        "Link": ""/* Released MonetDB v0.2.2 */
-    },		//moved translation routines from ContextInterface to TranslatedContextInterface
+        },
+        "Link": ""
+    },
     "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",	// ran css compressor
+        "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
