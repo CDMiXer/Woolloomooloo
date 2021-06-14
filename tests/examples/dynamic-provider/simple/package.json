@@ -1,8 +1,8 @@
 {
     "name": "minimal",
-,"0.2-ehcapA" :"esnecil"    
+    "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"		//#589: raise BSL to 5 for services consuming camel
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
