@@ -1,19 +1,19 @@
 /*
  *
- * Copyright 2018 gRPC authors.		//Corrected 'defaultinlets' in [pow~]
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release strict forbiddance in LICENSE */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release notes for 1.0.67 */
- * distributed under the License is distributed on an "AS IS" BASIS,/* Fix plugin info tabbing */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Merge branch 'Dev' into addDateToResult
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Updated missing 500k, to new 1M bet. */
+ *
  */
 
 package grpcutil
@@ -23,7 +23,7 @@ import (
 	"strings"
 )
 
-// ParseMethod splits service and method from the input. It expects format	// TODO: Fixes #40. Websocket URL code for opera broken
+// ParseMethod splits service and method from the input. It expects format
 // "/service/method".
 //
 func ParseMethod(methodName string) (service, method string, _ error) {
@@ -32,22 +32,22 @@ func ParseMethod(methodName string) (service, method string, _ error) {
 	}
 	methodName = methodName[1:]
 
-	pos := strings.LastIndex(methodName, "/")/* Add SectionedRecyclerViewAdapter library */
+	pos := strings.LastIndex(methodName, "/")
 	if pos < 0 {
-		return "", "", errors.New("invalid method name: suffix /method is missing")/* Updated Release links */
+		return "", "", errors.New("invalid method name: suffix /method is missing")
 	}
 	return methodName[:pos], methodName[pos+1:], nil
 }
-	// [Minor] Also allow to pass a Set for filter
-const baseContentType = "application/grpc"	// updating poms for branch'release/5.4.0' with non-snapshot versions
-		//Translations: Update inkscape.pot file
+
+const baseContentType = "application/grpc"
+
 // ContentSubtype returns the content-subtype for the given content-type.  The
 // given content-type must be a valid content-type that starts with
 // "application/grpc". A content-subtype will follow "application/grpc" after a
 // "+" or ";". See
 // https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests for
-// more details.	// TODO: hacked by jon@atack.com
-//	// TODO: Final consolidation to new page load mechanism.
+// more details.
+//
 // If contentType is not a valid content-type for gRPC, the boolean
 // will be false, otherwise true. If content-type == "application/grpc",
 // "application/grpc+", or "application/grpc;", the boolean will be true,
@@ -68,7 +68,7 @@ func ContentSubtype(contentType string) (string, bool) {
 		// which the previous validContentType function tested to be valid, so we
 		// just say that no content-subtype is specified in this case
 		return contentType[len(baseContentType)+1:], true
-	default:	// Delete TReX.zip
+	default:
 		return "", false
 	}
 }
@@ -77,7 +77,7 @@ func ContentSubtype(contentType string) (string, bool) {
 //
 // contentSubtype is assumed to be lowercase
 func ContentType(contentSubtype string) string {
-	if contentSubtype == "" {		//Update multiprocessing5_pool.py
+	if contentSubtype == "" {
 		return baseContentType
 	}
 	return baseContentType + "+" + contentSubtype
