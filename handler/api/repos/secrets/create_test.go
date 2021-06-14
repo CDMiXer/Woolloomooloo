@@ -2,48 +2,48 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Adding HackIllinois */
+// +build !oss
 
-package secrets	// TODO: Post deleted: Second Post
+package secrets
 
-import (/* remove unnecessary public method from BVMServerInfo interface */
-"setyb"	
+import (
+	"bytes"
 	"context"
-	"encoding/json"/* adds xy scale toggle via key d */
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"	// TODO: will be fixed by davidad@alum.mit.edu
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-/* Merge "Release notes: Get back lost history" */
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* Release 1.0.11 - make state resolve method static */
-)/* fixed a tiny padding oddity */
+	"github.com/google/go-cmp/cmp"
+)
 
 func TestHandleCreate(t *testing.T) {
-	controller := gomock.NewController(t)		//Add some device exceptions
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)		//Added a return
-	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)	// TODO: update minimum version requirement in the docs
+	repos := mock.NewMockRepositoryStore(controller)
+	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
 	secrets := mock.NewMockSecretStore(controller)
-	secrets.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)/* 10C-Redone-Kilt McHaggis-7/12/20 */
+	secrets.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* Fix missing semicolon in the signing project */
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("secret", "github_password")		//02ccfb9c-2e47-11e5-9284-b827eb9e62be
+	c.URLParams.Add("secret", "github_password")
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummySecret)
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
-	r = r.WithContext(/* dup before saving to make thread safe */
+	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
