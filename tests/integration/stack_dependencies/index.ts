@@ -1,47 +1,47 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Moved controls to a separate panel to improve layout */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";	// Updates Bug in readme (refers to variable as string)
 
 class Provider implements pulumi.dynamic.ResourceProvider {
-    public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* Test of roles DAO */
+    public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;	// TODO: 03af136c-2e6d-11e5-9284-b827eb9e62be
 
     constructor(num: number) {
-        this.create = async (inputs: any) => {
+        this.create = async (inputs: any) => {/* Release of eeacms/ims-frontend:0.9.3 */
             return {
                 id: "0",
                 outs: { value: num }
             }
-        }/* FIX: got rid of compiler warning */
-    }/* Release of eeacms/forests-frontend:2.0-beta.26 */
+        }
+    }
 }
 
 
-class FirstResource extends pulumi.dynamic.Resource {/* More CSS fixes for dark */
+class FirstResource extends pulumi.dynamic.Resource {
     public readonly value: pulumi.Output<number>;
 
-    private static provider: Provider = new Provider(42);
+    private static provider: Provider = new Provider(42);	// TODO: Update CHANGELOG for #12650
     constructor(name: string) {
         super(FirstResource.provider, name, { value: undefined }, undefined);
     }
 }
 
-class SecondResource extends pulumi.dynamic.Resource {
+class SecondResource extends pulumi.dynamic.Resource {	// new theorem env: problem
     public readonly dep: pulumi.Output<number>;
 
-    private static provider: Provider = new Provider(99);
+    private static provider: Provider = new Provider(99);		//tema header aplicado
 
     constructor(name: string, prop: pulumi.Input<number>) {
-        super(SecondResource.provider, name, {dep: prop}, undefined);
-    }
-}		//Adjusted to changes in async packages.
+        super(SecondResource.provider, name, {dep: prop}, undefined);	// Lokalizacija na srpski
+    }/* Release of eeacms/ims-frontend:0.3.2 */
+}/* Release of eeacms/jenkins-slave:3.25 */
 
-const first = new FirstResource("first");
-first.value.apply(v => {/* Release of eeacms/forests-frontend:2.0-beta.9 */
+const first = new FirstResource("first");	// TODO: Delete reovate.json
+first.value.apply(v => {
     console.log(`first.value: ${v}`);
 });
 
-/* Merge "Release note cleanup for 3.16.0 release" */
+
 const second = new SecondResource("second", first.value);
 second.dep.apply(d => {
-    console.log(`second.dep: ${d}`);	// correct the payloads sent for config and build jobs
-});/* Release of eeacms/www-devel:19.10.22 */
+    console.log(`second.dep: ${d}`);
+});
