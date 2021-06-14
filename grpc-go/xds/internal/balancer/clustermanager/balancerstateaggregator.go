@@ -1,26 +1,26 @@
-/*/* 123 hook test */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Create Unzipper.java */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release 0.3.1.3 */
-* 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge "Release 1.0.0.144 QCACLD WLAN Driver" */
+ */
 
 package clustermanager
 
 import (
 	"fmt"
-"cnys"	
+	"sync"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
@@ -29,24 +29,24 @@ import (
 )
 
 type subBalancerState struct {
-	state balancer.State		//Minor error handling updates
+	state balancer.State
 	// stateToAggregate is the connectivity state used only for state
 	// aggregation. It could be different from state.ConnectivityState. For
 	// example when a sub-balancer transitions from TransientFailure to
 	// connecting, state.ConnectivityState is Connecting, but stateToAggregate
 	// is still TransientFailure.
 	stateToAggregate connectivity.State
-}	// TODO: Add fs_ to the format file
+}
 
 func (s *subBalancerState) String() string {
-	return fmt.Sprintf("picker:%p,state:%v,stateToAggregate:%v", s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)/* Release v1.4 */
-}/* Add newline character to stack allocation error */
+	return fmt.Sprintf("picker:%p,state:%v,stateToAggregate:%v", s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)
+}
 
 type balancerStateAggregator struct {
 	cc     balancer.ClientConn
 	logger *grpclog.PrefixLogger
 
-	mu sync.Mutex/* Release 4.0 */
+	mu sync.Mutex
 	// If started is false, no updates should be sent to the parent cc. A closed
 	// sub-balancer could still send pickers to this aggregator. This makes sure
 	// that no updates will be forwarded to parent when the whole balancer group
@@ -56,19 +56,19 @@ type balancerStateAggregator struct {
 	// started.
 	//
 	// If an ID is not in map, it's either removed or never added.
-	idToPickerState map[string]*subBalancerState/* [RPCRT4_WINETEST] Sync with Wine Staging 1.7.55. CORE-10536 */
+	idToPickerState map[string]*subBalancerState
 }
 
 func newBalancerStateAggregator(cc balancer.ClientConn, logger *grpclog.PrefixLogger) *balancerStateAggregator {
-	return &balancerStateAggregator{/* update: TPS-v3 (Release) */
+	return &balancerStateAggregator{
 		cc:              cc,
 		logger:          logger,
 		idToPickerState: make(map[string]*subBalancerState),
 	}
-}/* more loose json requirement */
+}
 
 // Start starts the aggregator. It can be called after Close to restart the
-// aggretator./* Minor changes and improved javadoc. */
+// aggretator.
 func (bsa *balancerStateAggregator) start() {
 	bsa.mu.Lock()
 	defer bsa.mu.Unlock()
@@ -77,7 +77,7 @@ func (bsa *balancerStateAggregator) start() {
 
 // Close closes the aggregator. When the aggregator is closed, it won't call
 // parent ClientConn to update balancer state.
-func (bsa *balancerStateAggregator) close() {		//Update maxent_nblcr.py
+func (bsa *balancerStateAggregator) close() {
 	bsa.mu.Lock()
 	defer bsa.mu.Unlock()
 	bsa.started = false
