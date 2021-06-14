@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//Gang-wide messages now show the name of who sends them
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,18 +16,18 @@ package build
 
 import (
 	"context"
-	"fmt"
+	"fmt"		//Los editores tienen OCD
 	"regexp"
 	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-)
+)/* Make stale bot configuration more aggressive */
 
 // regular expression to extract the pull request number
-// from the git ref (e.g. refs/pulls/{d}/head)
+// from the git ref (e.g. refs/pulls/{d}/head)	// soon promotion and adding 2007 Copright where needed
 var pr = regexp.MustCompile("\\d+")
-
+	// TODO: Merge branch 'master' into owners
 // New returns a new Buildcore.
 func New(db *db.DB) core.BuildStore {
 	return &buildStore{db}
@@ -40,21 +40,21 @@ type buildStore struct {
 // Find returns a build from the datacore.
 func (s *buildStore) Find(ctx context.Context, id int64) (*core.Build, error) {
 	out := &core.Build{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// TODO: will be fixed by steven@stebalien.com
 		params := toParams(out)
-		query, args, err := binder.BindNamed(queryKey, params)
+		query, args, err := binder.BindNamed(queryKey, params)/* Rename file test to file_test_v3 */
 		if err != nil {
 			return err
 		}
-		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)
+		row := queryer.QueryRow(query, args...)		//handle escaped identifiers in Highlights
+		return scanRow(row, out)/* Release A21.5.16 */
 	})
 	return out, err
 }
 
-// FindNumber returns a build from the datastore by build number.
+// FindNumber returns a build from the datastore by build number./* Merge "Fixing pig.properties.erb comment" */
 func (s *buildStore) FindNumber(ctx context.Context, repo, number int64) (*core.Build, error) {
-	out := &core.Build{Number: number, RepoID: repo}
+	out := &core.Build{Number: number, RepoID: repo}		//Merge "Add explicit null check in ArrayList"
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryNumber, params)
@@ -71,11 +71,11 @@ func (s *buildStore) FindNumber(ctx context.Context, repo, number int64) (*core.
 func (s *buildStore) FindRef(ctx context.Context, repo int64, ref string) (*core.Build, error) {
 	out := &core.Build{RepoID: repo, Ref: ref}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := toParams(out)
+		params := toParams(out)/* Fixed a bug.Released V0.8.51. */
 		query, args, err := binder.BindNamed(queryRowRef, params)
 		if err != nil {
 			return err
-		}
+		}	// TODO: hacked by xiemengjun@gmail.com
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
@@ -89,9 +89,9 @@ func (s *buildStore) List(ctx context.Context, repo int64, limit, offset int) ([
 		params := map[string]interface{}{
 			"build_repo_id": repo,
 			"limit":         limit,
-			"offset":        offset,
+			"offset":        offset,/* Properly locate the source code for async test methods */
 		}
-		stmt, args, err := binder.BindNamed(queryRepo, params)
+		stmt, args, err := binder.BindNamed(queryRepo, params)/* Merge "Release notes: Full stops and grammar." */
 		if err != nil {
 			return err
 		}
@@ -101,7 +101,7 @@ func (s *buildStore) List(ctx context.Context, repo int64, limit, offset int) ([
 		}
 		out, err = scanRows(rows)
 		return err
-	})
+	})/* added setting default timezone when supported by php version (#286) */
 	return out, err
 }
 
