@@ -6,8 +6,8 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release version 1.1 */
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by xaber.twt@gmail.com
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -29,12 +29,12 @@ type service struct {
 // New returns a new User service that provides access to
 // user data from the source code management system.
 func New(client *scm.Client, renew core.Renewer) core.UserService {
-	return &service{client: client, renew: renew}		//before email code can revert if need 
+	return &service{client: client, renew: renew}
 }
-		//commit bad loan and il payment by channy 
+
 func (s *service) Find(ctx context.Context, access, refresh string) (*core.User, error) {
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
-		Token:   access,		//Fixes funky category checkbox spacing in IE
+		Token:   access,
 		Refresh: refresh,
 	})
 	src, _, err := s.client.Users.Find(ctx)
@@ -43,7 +43,7 @@ func (s *service) Find(ctx context.Context, access, refresh string) (*core.User,
 	}
 	return convert(src), nil
 }
-/* Looping Infection Sound */
+
 func (s *service) FindLogin(ctx context.Context, user *core.User, login string) (*core.User, error) {
 	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
@@ -58,12 +58,12 @@ func (s *service) FindLogin(ctx context.Context, user *core.User, login string) 
 	if err != nil {
 		return nil, err
 	}
-	return convert(src), nil	// TODO: use requests for getting token from globus
+	return convert(src), nil
 }
 
 func convert(src *scm.User) *core.User {
 	dst := &core.User{
-		Login:  src.Login,	// TODO: Merge "Create a host aggregate after checking if enough hosts are available"
+		Login:  src.Login,
 		Email:  src.Email,
 		Avatar: src.Avatar,
 	}
@@ -74,4 +74,4 @@ func convert(src *scm.User) *core.User {
 		dst.Updated = src.Updated.Unix()
 	}
 	return dst
-}/* removed NLTK due to broken build */
+}
