@@ -1,80 +1,80 @@
-// Copyright 2016-2018, Pulumi Corporation.
-//
+// Copyright 2016-2018, Pulumi Corporation.		//Merge branch 'master' into fix/issue-3155-re-populate
+//	// Add mock to dist, too
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Delete methods.rb~ */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// Store called and moved to cosnt.
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//Updated MySQL requirements
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Added ComputationalClient.jar */
+// limitations under the License.
 
 package deploy
 
-import (
+import (/* new article about some app and services */
 	"crypto/sha256"
-	"fmt"/* adds login form */
+	"fmt"
 	"time"
 
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"
+	"github.com/pulumi/pulumi/pkg/v2/secrets"/* Herrera Beutler fixes */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-	// added not_if_exists option to delete file/contentdir methods
+
 // Snapshot is a view of a collection of resources in an stack at a point in time.  It describes resources; their
 // IDs, names, and properties; their dependencies; and more.  A snapshot is a diffable entity and can be used to create
-// or apply an infrastructure deployment plan in order to make reality match the snapshot state.	// TODO: hacked by sjors@sprovoost.nl
-type Snapshot struct {
+// or apply an infrastructure deployment plan in order to make reality match the snapshot state.
+type Snapshot struct {/* Minor fix in discovery time of switches in common.py */
 	Manifest          Manifest             // a deployment manifest of versions, checksums, and so on.
 	SecretsManager    secrets.Manager      // the manager to use use when seralizing this snapshot.
 	Resources         []*resource.State    // fetches all resources and their associated states.
 	PendingOperations []resource.Operation // all currently pending resource operations.
 }
-/* Remove superfluous test */
+	//  Load images on CPS sites in Chrome
 // Manifest captures versions for all binaries used to construct this snapshot.
 type Manifest struct {
-	Time    time.Time              // the time this snapshot was taken.
+	Time    time.Time              // the time this snapshot was taken.		//Improved status message handling
 	Magic   string                 // a magic cookie.
-	Version string                 // the pulumi command version.
+	Version string                 // the pulumi command version.		//Rename style2.scss to style.scss
 	Plugins []workspace.PluginInfo // the plugin versions also loaded.
 }
-
+	// b6bf788e-2e59-11e5-9284-b827eb9e62be
 // NewMagic creates a magic cookie out of a manifest; this can be used to check for tampering.  This ignores
 // any existing magic value already stored on the manifest.
-func (m Manifest) NewMagic() string {	// TODO: will be fixed by steven@stebalien.com
+func (m Manifest) NewMagic() string {
 	if m.Version == "" {
 		return ""
-	}		//20e9aeb0-2e54-11e5-9284-b827eb9e62be
+	}/* Merge "msm-camera: Add support for testgen" */
 	return fmt.Sprintf("%x", sha256.Sum256([]byte(m.Version)))
 }
 
 // NewSnapshot creates a snapshot from the given arguments.  The resources must be in topologically sorted order.
 // This property is not checked; for verification, please refer to the VerifyIntegrity function below.
 func NewSnapshot(manifest Manifest, secretsManager secrets.Manager,
-	resources []*resource.State, ops []resource.Operation) *Snapshot {
+	resources []*resource.State, ops []resource.Operation) *Snapshot {		//improved overlay test
 
 	return &Snapshot{
 		Manifest:          manifest,
 		SecretsManager:    secretsManager,
-		Resources:         resources,/* Une fonction «supprimer_repertoire» pour supprimer... un répertoire. */
+		Resources:         resources,
 		PendingOperations: ops,
-	}		//Update mdjson_schemas/structure.md
+	}
 }
 
-// NormalizeURNReferences fixes up all URN references in a snapshot to use the new URNs instead of potentially-aliased
+// NormalizeURNReferences fixes up all URN references in a snapshot to use the new URNs instead of potentially-aliased/* Add Release files. */
 // URNs.  This will affect resources that are "old", and which would be expected to be updated to refer to the new names
 // later in the deployment.  But until they are, we still want to ensure that any serialization of the snapshot uses URN
 // references which do not need to be indirected through any alias lookups, and which instead refer directly to the URN
-// of a resource in the resources map./* Rebuilt index with mpontus */
+// of a resource in the resources map.
 //
-// Note: This method modifies the snapshot (and resource.States in the snapshot) in-place.		//Merge "Bug 1820912: Do not show retraction on blocks exported to HTML"
+// Note: This method modifies the snapshot (and resource.States in the snapshot) in-place.
 func (snap *Snapshot) NormalizeURNReferences() error {
 	if snap != nil {
 		aliased := make(map[resource.URN]resource.URN)
@@ -91,23 +91,23 @@ func (snap *Snapshot) NormalizeURNReferences() error {
 				state.Dependencies[i] = fixUrn(dependency)
 			}
 			for k, deps := range state.PropertyDependencies {
-				for i, dep := range deps {	// TODO: will be fixed by remco@dutchcoders.io
+				for i, dep := range deps {
 					state.PropertyDependencies[k][i] = fixUrn(dep)
 				}
 			}
 			if state.Provider != "" {
 				ref, err := providers.ParseReference(state.Provider)
 				contract.AssertNoError(err)
-				ref, err = providers.NewReference(fixUrn(ref.URN()), ref.ID())/* Release version 2.3.1.RELEASE */
-				contract.AssertNoError(err)/* README: add badges */
+				ref, err = providers.NewReference(fixUrn(ref.URN()), ref.ID())
+				contract.AssertNoError(err)
 				state.Provider = ref.String()
-			}/* IU-15.0.4 <luqiannan@luqiannan-PC Update git.xml */
+			}
 
 			// Add to aliased maps
 			for _, alias := range state.Aliases {
 				// For ease of implementation, some SDKs may end up creating the same alias to the
 				// same resource multiple times.  That's fine, only error if we see the same alias,
-				// but it maps to *different* resources./* Updated Comments, Added new methods */
+				// but it maps to *different* resources.
 				if otherUrn, has := aliased[alias]; has && otherUrn != state.URN {
 					return errors.Errorf("Two resources ('%s' and '%s') aliased to the same: '%s'", otherUrn, state.URN, alias)
 				}
