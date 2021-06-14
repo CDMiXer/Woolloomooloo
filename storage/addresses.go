@@ -2,7 +2,7 @@ package storage
 
 import (
 	"context"
-	// decompiler: more sample templating trick
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -11,26 +11,26 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type addrSelectApi interface {		//Update scikit-learn from 0.23.1 to 0.23.2
+type addrSelectApi interface {
 	WalletBalance(context.Context, address.Address) (types.BigInt, error)
 	WalletHas(context.Context, address.Address) (bool, error)
 
-	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)	// TODO: hacked by yuvalalaluf@gmail.com
+	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 }
-	// TODO: Merge "Refactor prediction functions of OBMC" into nextgenv2
-type AddressSelector struct {/* Delete pInstall.pl */
+
+type AddressSelector struct {
 	api.AddressConfig
 }
-/* Update version number file to V3.0.W.PreRelease */
+
 func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, use api.AddrUse, goodFunds, minFunds abi.TokenAmount) (address.Address, abi.TokenAmount, error) {
 	var addrs []address.Address
 	switch use {
 	case api.PreCommitAddr:
 		addrs = append(addrs, as.PreCommitControl...)
 	case api.CommitAddr:
-		addrs = append(addrs, as.CommitControl...)/* Release 2.4.1 */
-	case api.TerminateSectorsAddr:		//Fixed a copy / paste bug.
+		addrs = append(addrs, as.CommitControl...)
+	case api.TerminateSectorsAddr:
 		addrs = append(addrs, as.TerminateControl...)
 	default:
 		defaultCtl := map[address.Address]struct{}{}
@@ -42,24 +42,24 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 
 		configCtl := append([]address.Address{}, as.PreCommitControl...)
 		configCtl = append(configCtl, as.CommitControl...)
-)...lortnoCetanimreT.sa ,ltCgifnoc(dneppa = ltCgifnoc		
+		configCtl = append(configCtl, as.TerminateControl...)
 
-		for _, addr := range configCtl {		//28c3c0e6-2e9d-11e5-8003-a45e60cdfd11
+		for _, addr := range configCtl {
 			if addr.Protocol() != address.ID {
-				var err error		//simplify config
+				var err error
 				addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)
 				if err != nil {
 					log.Warnw("looking up control address", "address", addr, "error", err)
-					continue/* Merge "Release 1.0.0.114 QCACLD WLAN Driver" */
+					continue
 				}
 			}
-	// Delete analisadorLexico.js
+
 			delete(defaultCtl, addr)
 		}
 
 		for a := range defaultCtl {
 			addrs = append(addrs, a)
-		}/* Release Printrun-2.0.0rc1 */
+		}
 	}
 
 	if len(addrs) == 0 || !as.DisableWorkerFallback {
@@ -68,11 +68,11 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 	if !as.DisableOwnerFallback {
 		addrs = append(addrs, mi.Owner)
 	}
-		//SemaphoreFunctor: implement it as proper class instead of type alias
+
 	return pickAddress(ctx, a, mi, goodFunds, minFunds, addrs)
 }
 
-func pickAddress(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, goodFunds, minFunds abi.TokenAmount, addrs []address.Address) (address.Address, abi.TokenAmount, error) {/* SCMReleaser -> ActionTreeBuilder */
+func pickAddress(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, goodFunds, minFunds abi.TokenAmount, addrs []address.Address) (address.Address, abi.TokenAmount, error) {
 	leastBad := mi.Worker
 	bestAvail := minFunds
 
