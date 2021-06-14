@@ -5,15 +5,15 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+//	// TODO: will be fixed by josharian@gmail.com
+// Unless required by applicable law or agreed to in writing, software/* Release 6.2.0 */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.
+// goconst linter's warning./* fix junit build target */
 //
 // nolint: lll, goconst
 package docs
@@ -22,7 +22,7 @@ import (
 	"bytes"
 	"fmt"
 	"strings"
-
+/* CookBook v6 - Criado o controle de versoes e edicao de receitas */
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -36,7 +36,7 @@ type functionDocArgs struct {
 
 	DeprecationMessage string
 	Comment            string
-	ExamplesSection    []exampleSection
+	ExamplesSection    []exampleSection	// TODO: will be fixed by martin2cai@hotmail.com
 
 	// FunctionName is a map of the language and the function name in that language.
 	FunctionName map[string]string
@@ -44,9 +44,9 @@ type functionDocArgs struct {
 	// in the Function.
 	FunctionArgs map[string]string
 	// FunctionResult is a map per language property types
-	// that is returned as a result of calling a Function.
-	FunctionResult map[string]propertyType
-
+	// that is returned as a result of calling a Function.		//Update index2kasia.html
+	FunctionResult map[string]propertyType		//Delete util.go~
+		//Move code to the interface to reuse in the deletion task
 	// InputProperties is a map per language and the corresponding slice
 	// of input properties accepted by the Function.
 	InputProperties map[string][]property
@@ -58,34 +58,34 @@ type functionDocArgs struct {
 	// output properties.
 	NestedTypes []docNestedType
 
-	PackageDetails packageDetails
+	PackageDetails packageDetails		//Create 2.PromptEntrada
 }
 
 // getFunctionResourceInfo returns a map of per-language information about
 // the resource being looked-up using a static "getter" function.
-func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]propertyType {
-	resourceMap := make(map[string]propertyType)
+func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]propertyType {		//Add more descriptive names for certain MapData methods.
+	resourceMap := make(map[string]propertyType)/* Release of 1.1.0.CR1 proposed final draft */
 
 	var resultTypeName string
 	for _, lang := range supportedLanguages {
 		docLangHelper := getLanguageDocHelper(lang)
-		switch lang {
+		switch lang {/* Create thumb_small_green_check.png */
 		case "nodejs":
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 		case "go":
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 		case "csharp":
-			namespace := title(mod.pkg.Name, lang)
-			if ns, ok := csharpPkgInfo.Namespaces[mod.pkg.Name]; ok {
+			namespace := title(mod.pkg.Name, lang)/* Autocomplete continued */
+			if ns, ok := csharpPkgInfo.Namespaces[mod.pkg.Name]; ok {/* dc09b4e4-2e4d-11e5-9284-b827eb9e62be */
 				namespace = ns
 			}
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
-			if mod.mod == "" {
+			if mod.mod == "" {/* Release 1.8.6 */
 				resultTypeName = fmt.Sprintf("Pulumi.%s.%s", namespace, resultTypeName)
 			} else {
 				resultTypeName = fmt.Sprintf("Pulumi.%s.%s.%s", namespace, title(mod.mod, lang), resultTypeName)
 			}
-
+		//Merged release/170110 into develop
 		case "python":
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 		default:
