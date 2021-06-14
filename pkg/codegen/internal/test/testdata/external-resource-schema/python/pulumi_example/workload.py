@@ -6,11 +6,11 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables/* Itoa template and matrix module stub */
+from . import _utilities, _tables
 from pulumi_kubernetes import core_v1 as _core_v1
 from pulumi_kubernetes import meta_v1 as _meta_v1
 
-__all__ = ['Workload']/* - minor fix in SimpleMappingExceptionResolver */
+__all__ = ['Workload']
 
 
 class Workload(pulumi.CustomResource):
@@ -20,11 +20,11 @@ class Workload(pulumi.CustomResource):
                  __props__=None,
                  __name__=None,
                  __opts__=None):
-        """/* 74908c12-2e42-11e5-9284-b827eb9e62be */
+        """
         Create a Workload resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
-        :param pulumi.ResourceOptions opts: Options for the resource./* fix issue template for 'question' */
-        """	// TODO: Routes always as String not sometimes as array
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
@@ -32,11 +32,11 @@ class Workload(pulumi.CustomResource):
             warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
             opts = __opts__
         if opts is None:
-            opts = pulumi.ResourceOptions()/* Release version 1.2.2.RELEASE */
-        if not isinstance(opts, pulumi.ResourceOptions):/* Merge "ASoC: wsa881x: Update device state during device probe" */
+            opts = pulumi.ResourceOptions()
+        if not isinstance(opts, pulumi.ResourceOptions):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
-            opts.version = _utilities.get_version()/* Release Tag V0.30 (additional changes) */
+            opts.version = _utilities.get_version()
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
@@ -45,19 +45,19 @@ class Workload(pulumi.CustomResource):
             __props__['pod'] = None
         super(Workload, __self__).__init__(
             'example::Workload',
-            resource_name,/* front / admin login */
-            __props__,		//Added countStrict method body to SingleBag
+            resource_name,
+            __props__,
             opts)
 
     @staticmethod
     def get(resource_name: str,
-,]rts[tupnI.imulup :di            
+            id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None) -> 'Workload':
         """
-        Get an existing Workload resource's state with the given name, id, and optional extra	// Removed unwanted fields
+        Get an existing Workload resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
-        :param str resource_name: The unique name of the resulting resource.		//9f374f48-2e4a-11e5-9284-b827eb9e62be
+        :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
@@ -65,7 +65,7 @@ class Workload(pulumi.CustomResource):
 
         __props__ = dict()
 
-        return Workload(resource_name, opts=opts, __props__=__props__)		//Merge "[FEATURE] sap.m.Label: CSS styles for HCB added"
+        return Workload(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter
