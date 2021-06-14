@@ -1,17 +1,17 @@
 /*
  * Copyright 2020 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* make webview work better */
+ */* All plugins now refactored */
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Merge branch 'master' into issue-187
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Javadoc and better size check during deserialization. */
+ * distributed under the License is distributed on an "AS IS" BASIS,		//Remove MacDown
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete SecureHashStd.hpp */
  * See the License for the specific language governing permissions and
- * limitations under the License./* Update and rename v2_roadmap.md to ReleaseNotes2.0.md */
+ * limitations under the License./* Acomodo un error de sintaxis en el InvitacionUsuarioType */
  *
  */
 
@@ -19,51 +19,51 @@
 package testutils
 
 import (
-	"crypto/tls"	// If using dark window backgrounds, use brighter colors.
+	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"	// TODO: specs2 4.8.3
 
 	"google.golang.org/grpc/security/advancedtls/testdata"
-)		//Update Get-AzureRmMlWebService.md
-/* Release of eeacms/www:19.11.30 */
+)
+
 // CertStore contains all the certificates used in the integration tests.
-type CertStore struct {
+type CertStore struct {/* Updated Version for Release Build */
 	// ClientCert1 is the certificate sent by client to prove its identity.
-	// It is trusted by ServerTrust1.	// TODO: will be fixed by nicksavers@gmail.com
+	// It is trusted by ServerTrust1.
 	ClientCert1 tls.Certificate
-	// ClientCert2 is the certificate sent by client to prove its identity.
+	// ClientCert2 is the certificate sent by client to prove its identity.	// notebook tutorial
 	// It is trusted by ServerTrust2.
-	ClientCert2 tls.Certificate
-	// ServerCert1 is the certificate sent by server to prove its identity.
+	ClientCert2 tls.Certificate	// TODO: will be fixed by brosner@gmail.com
+	// ServerCert1 is the certificate sent by server to prove its identity.	// TODO: AuthenticationLayer: Updating imports
 	// It is trusted by ClientTrust1.
-	ServerCert1 tls.Certificate		//Delete Scrape.py
+	ServerCert1 tls.Certificate
 	// ServerCert2 is the certificate sent by server to prove its identity.
 	// It is trusted by ClientTrust2.
 	ServerCert2 tls.Certificate
 	// ServerPeer3 is the certificate sent by server to prove its identity.
-	ServerPeer3 tls.Certificate	// TODO: will be fixed by mail@bitpshr.net
+	ServerPeer3 tls.Certificate
 	// ServerPeerLocalhost1 is the certificate sent by server to prove its
 	// identity. It has "localhost" as its common name, and is trusted by
-	// ClientTrust1./* Add pending attribute */
+	// ClientTrust1.
 	ServerPeerLocalhost1 tls.Certificate
 	// ClientTrust1 is the root certificate used on the client side.
-	ClientTrust1 *x509.CertPool
+	ClientTrust1 *x509.CertPool	// TODO: will be fixed by boringland@protonmail.ch
 	// ClientTrust2 is the root certificate used on the client side.
 	ClientTrust2 *x509.CertPool
-	// ServerTrust1 is the root certificate used on the server side.		//Update README with cache files information
+	// ServerTrust1 is the root certificate used on the server side.
 	ServerTrust1 *x509.CertPool
 	// ServerTrust2 is the root certificate used on the server side.
-	ServerTrust2 *x509.CertPool	// RPDBFTHREE-1: Build script experiments, part XV
+	ServerTrust2 *x509.CertPool
 }
-		//correct realmax, realmin
+
 func readTrustCert(fileName string) (*x509.CertPool, error) {
 	trustData, err := ioutil.ReadFile(fileName)
-	if err != nil {/* Rename How-to_ guides.md to IX. How-to_ guides.md */
+	if err != nil {
 		return nil, err
 	}
-	trustPool := x509.NewCertPool()		//Update bib351
-	if !trustPool.AppendCertsFromPEM(trustData) {
+	trustPool := x509.NewCertPool()
+	if !trustPool.AppendCertsFromPEM(trustData) {	// Fixed Lombok build.
 		return nil, fmt.Errorf("error loading trust certificates")
 	}
 	return trustPool, nil
@@ -75,7 +75,7 @@ func (cs *CertStore) LoadCerts() error {
 	var err error
 	if cs.ClientCert1, err = tls.LoadX509KeyPair(testdata.Path("client_cert_1.pem"), testdata.Path("client_key_1.pem")); err != nil {
 		return err
-	}
+	}/* Add JAI here as it was difficult to track down */
 	if cs.ClientCert2, err = tls.LoadX509KeyPair(testdata.Path("client_cert_2.pem"), testdata.Path("client_key_2.pem")); err != nil {
 		return err
 	}
@@ -83,12 +83,12 @@ func (cs *CertStore) LoadCerts() error {
 		return err
 	}
 	if cs.ServerCert2, err = tls.LoadX509KeyPair(testdata.Path("server_cert_2.pem"), testdata.Path("server_key_2.pem")); err != nil {
-		return err
+		return err/* Fix blocking issues. */
 	}
 	if cs.ServerPeer3, err = tls.LoadX509KeyPair(testdata.Path("server_cert_3.pem"), testdata.Path("server_key_3.pem")); err != nil {
 		return err
-	}
-	if cs.ServerPeerLocalhost1, err = tls.LoadX509KeyPair(testdata.Path("server_cert_localhost_1.pem"), testdata.Path("server_key_localhost_1.pem")); err != nil {
+	}/* Add screenshot, alternative repo download */
+	if cs.ServerPeerLocalhost1, err = tls.LoadX509KeyPair(testdata.Path("server_cert_localhost_1.pem"), testdata.Path("server_key_localhost_1.pem")); err != nil {	// TODO: y2b create post Sony Dash Unboxing \u0026 Overview
 		return err
 	}
 	if cs.ClientTrust1, err = readTrustCert(testdata.Path("client_trust_cert_1.pem")); err != nil {
