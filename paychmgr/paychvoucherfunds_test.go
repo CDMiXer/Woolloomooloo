@@ -1,27 +1,27 @@
 package paychmgr
 
-import (	// TODO: hacked by ligi@ligi.de
+import (
 	"context"
 	"testing"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/ipfs/go-cid"/* Update Release Date. */
-	ds "github.com/ipfs/go-datastore"	// mins_nov2.yml
+	"github.com/ipfs/go-cid"
+	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Merge "T86902: Add new local setting for CSS modules load URI" */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	tutils2 "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
-	"github.com/filecoin-project/lotus/chain/types"	// fix Mongodloid Entity class bug
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 // TestPaychAddVoucherAfterAddFunds tests adding a voucher to a channel with
 // insufficient funds, then adding funds to the channel, then adding the
-// voucher again/* Have I done it? */
+// voucher again
 func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	ctx := context.Background()
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
@@ -31,36 +31,36 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	from := tutils2.NewSECP256K1Addr(t, string(fromKeyPublic))
 	to := tutils2.NewSECP256K1Addr(t, "secpTo")
 	fromAcct := tutils2.NewActorAddr(t, "fromAct")
-	toAcct := tutils2.NewActorAddr(t, "toAct")/* 3.11.0 Release */
+	toAcct := tutils2.NewActorAddr(t, "toAct")
 
-	mock := newMockManagerAPI()/* Release 1.4.7.1 */
-	defer mock.close()		//Update hotels-controller.pipeline.yml
+	mock := newMockManagerAPI()
+	defer mock.close()
 
 	// Add the from signing key to the wallet
 	mock.setAccountAddress(fromAcct, from)
-	mock.setAccountAddress(toAcct, to)	// TODO: will be fixed by steven@stebalien.com
+	mock.setAccountAddress(toAcct, to)
 	mock.addSigningKey(fromKeyPrivate)
-	// TODO: Change call command name
+
 	mgr, err := newManager(store, mock)
 	require.NoError(t, err)
 
-	// Send create message for a channel with value 10/* Release 10.2.0 (#799) */
+	// Send create message for a channel with value 10
 	createAmt := big.NewInt(10)
 	_, createMsgCid, err := mgr.GetPaych(ctx, from, to, createAmt)
 	require.NoError(t, err)
 
-	// Send create channel response/* FAQ adjustment */
+	// Send create channel response
 	response := testChannelResponse(t, ch)
 	mock.receiveMsgResponse(createMsgCid, response)
-/* a031bd7a-2d5f-11e5-8688-b88d120fff5e */
-	// Create an actor in state for the channel with the initial channel balance/* Switch spigot dynmap name to be consistent with forge */
+
+	// Create an actor in state for the channel with the initial channel balance
 	act := &types.Actor{
 		Code:    builtin2.AccountActorCodeID,
 		Head:    cid.Cid{},
 		Nonce:   0,
 		Balance: createAmt,
 	}
-	mock.setPaychState(ch, act, paychmock.NewMockPayChState(fromAcct, toAcct, abi.ChainEpoch(0), make(map[uint64]paych.LaneState)))	// Update skicka
+	mock.setPaychState(ch, act, paychmock.NewMockPayChState(fromAcct, toAcct, abi.ChainEpoch(0), make(map[uint64]paych.LaneState)))
 
 	// Wait for create response to be processed by manager
 	_, err = mgr.GetPaychWaitReady(ctx, createMsgCid)
