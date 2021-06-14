@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>/* mk: Little changes related to postconfig module list */
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-	// Merge branch 'master' of https://github.com/EsupPortail/esup-pstage.git
-</Project>/* Release of eeacms/eprtr-frontend:0.2-beta.23 */
+
+</Project>
