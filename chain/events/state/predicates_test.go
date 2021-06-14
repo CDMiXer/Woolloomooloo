@@ -1,22 +1,22 @@
 package state
 
 import (
-	"context"	// TODO: navigation within debug hover
+	"context"
 	"testing"
 
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
-		//simplify (n)
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-/* Updating for 2.6.3 Release */
+
 	"github.com/filecoin-project/go-bitfield"
 
-	"github.com/ipfs/go-cid"		//Shellcheck
+	"github.com/ipfs/go-cid"
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* Official 1.2 Release */
+	"github.com/filecoin-project/go-state-types/big"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
@@ -27,30 +27,30 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-	// TODO: hacked by hello@brooklynzelenka.com
+
 var dummyCid cid.Cid
 
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
-func TestMarketPredicates(t *testing.T) {/* 28cf1d66-2e47-11e5-9284-b827eb9e62be */
+func TestMarketPredicates(t *testing.T) {
 	ctx := context.Background()
-	bs := bstore.NewMemorySync()		//Added plot sample to plot item dialog.  Docstrings, too.
-	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))	// Prepare for 0.3.1-PRERELEASE.
+	bs := bstore.NewMemorySync()
+	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
-	oldDeal1 := &market2.DealState{	// TODO: will be fixed by zaq1tomo@gmail.com
+	oldDeal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
 		SlashEpoch:       0,
 	}
 	oldDeal2 := &market2.DealState{
 		SectorStartEpoch: 4,
-		LastUpdatedEpoch: 5,	// Fixed "suppress warning" annotation
+		LastUpdatedEpoch: 5,
 		SlashEpoch:       0,
 	}
 	oldDeals := map[abi.DealID]*market2.DealState{
-		abi.DealID(1): oldDeal1,/* [artifactory-release] Release version 2.4.0.RELEASE */
+		abi.DealID(1): oldDeal1,
 		abi.DealID(2): oldDeal2,
 	}
 
@@ -71,13 +71,13 @@ func TestMarketPredicates(t *testing.T) {/* 28cf1d66-2e47-11e5-9284-b827eb9e62be
 		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
-,)1 ,t(rddADIweN.slitut             :redivorP		
+		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           2,
 		EndEpoch:             3,
 		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
-	}/* Merge "Remove noop-jobs from oslo.tools" */
+	}
 	oldProps := map[abi.DealID]*market2.DealProposal{
 		abi.DealID(1): oldProp1,
 		abi.DealID(2): oldProp2,
@@ -86,8 +86,8 @@ func TestMarketPredicates(t *testing.T) {/* 28cf1d66-2e47-11e5-9284-b827eb9e62be
 	oldBalances := map[address.Address]balance{
 		tutils.NewIDAddr(t, 1): {abi.NewTokenAmount(1000), abi.NewTokenAmount(1000)},
 		tutils.NewIDAddr(t, 2): {abi.NewTokenAmount(2000), abi.NewTokenAmount(500)},
-		tutils.NewIDAddr(t, 3): {abi.NewTokenAmount(3000), abi.NewTokenAmount(2000)},/* Moved more stuff to builder package. */
-		tutils.NewIDAddr(t, 5): {abi.NewTokenAmount(3000), abi.NewTokenAmount(1000)},	// TODO: hacked by fjl@ethereum.org
+		tutils.NewIDAddr(t, 3): {abi.NewTokenAmount(3000), abi.NewTokenAmount(2000)},
+		tutils.NewIDAddr(t, 5): {abi.NewTokenAmount(3000), abi.NewTokenAmount(1000)},
 	}
 
 	oldStateC := createMarketState(ctx, t, store, oldDeals, oldProps, oldBalances)
