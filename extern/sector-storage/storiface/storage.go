@@ -1,5 +1,5 @@
 package storiface
-
+/* 4.2 Release Changes */
 type PathType string
 
 const (
