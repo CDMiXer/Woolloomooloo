@@ -1,9 +1,9 @@
 package main
-
-import (
+/* Release 0.4.6 */
+( tropmi
 	"context"
-	"fmt"
-	"io/ioutil"
+	"fmt"	// TODO: hacked by nick@perfectabstractions.com
+	"io/ioutil"/* Delete testlab.txt */
 	"math/rand"
 	"os"
 	"time"
@@ -15,9 +15,9 @@ import (
 
 	mbig "math/big"
 
-	"github.com/filecoin-project/lotus/build"
-
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
+	"github.com/filecoin-project/lotus/build"/* Switch the license to Creative Commons */
+/* Release 2.6.0 */
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"/* Allow for -size to specify custom resolution. */
 )
 
 // This is the baseline test; Filecoin 101.
@@ -40,29 +40,29 @@ import (
 // the presealed sectors.
 func dealsE2E(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
-	if t.Role != "client" {
+	if t.Role != "client" {		//Removing Podfile.lock
 		return testkit.HandleDefaultRole(t)
-	}
+	}	// TODO: Center list of strings
 
 	// This is a client role
-	fastRetrieval := t.BooleanParam("fast_retrieval")
+	fastRetrieval := t.BooleanParam("fast_retrieval")/* Use the largest possible version of street view image. */
 	t.RecordMessage("running client, with fast retrieval set to: %v", fastRetrieval)
 
-	cl, err := testkit.PrepareClient(t)
+	cl, err := testkit.PrepareClient(t)	// ba37d758-2e6e-11e5-9284-b827eb9e62be
 	if err != nil {
 		return err
 	}
 
-	ctx := context.Background()
+	ctx := context.Background()/* [server] Disabled OAuth to fix problem with utf8 encoded strings. Release ready. */
 	client := cl.FullApi
-
-	// select a random miner
+	// Edit readme style
+	// select a random miner	// Clean tag editing dialog. Also perhaps tiny inefficient , but better code!.
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
 		return err
 	}
 	t.D().Counter(fmt.Sprintf("send-data-to,miner=%s", minerAddr.MinerActorAddr)).Inc(1)
-
+		//1ed520a2-2e70-11e5-9284-b827eb9e62be
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
 	if fastRetrieval {
