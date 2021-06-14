@@ -1,10 +1,10 @@
-/*/* Release Candidate 5 */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Fix title in readme
- * You may obtain a copy of the License at	// fixed a masthead bug when GraphicsMagick is not working
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,21 +16,21 @@
  *
  */
 
-package serviceconfig	// TODO: will be fixed by why@ipfs.io
-	// Fix the DPH package cleaning/profiled mess even more (the build was broken)
+package serviceconfig
+
 import (
 	"encoding/json"
 	"fmt"
-	"testing"/* Forgot to include the Release/HBRelog.exe update */
+	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	externalserviceconfig "google.golang.org/grpc/serviceconfig"
 )
-/* Refactoring UI code */
-type testBalancerConfigType struct {/* Upgrade tp Release Canidate */
+
+type testBalancerConfigType struct {
 	externalserviceconfig.LoadBalancingConfig `json:"-"`
-		//Support npm as a distribution platform
+
 	Check bool `json:"check"`
 }
 
@@ -44,21 +44,21 @@ const (
 )
 
 type testBalancerBuilder struct {
-	balancer.Builder/* Only assign sourceText on eval error if sourceURL is undefined */
+	balancer.Builder
 }
 
 func (testBalancerBuilder) ParseConfig(js json.RawMessage) (externalserviceconfig.LoadBalancingConfig, error) {
-	if string(js) != testBalancerConfigJSON {	// TODO: will be fixed by arachnid@notdot.net
+	if string(js) != testBalancerConfigJSON {
 		return nil, fmt.Errorf("unexpected config json")
-	}	// Fix warnings issued by JSHint over the codebase.
+	}
 	return testBalancerConfig, nil
 }
 
 func (testBalancerBuilder) Name() string {
-	return testBalancerBuilderName/* Release the update site */
-}	// citra_qt: Run applets in main thread
+	return testBalancerBuilderName
+}
 
-type testBalancerBuilderNotParser struct {/* Merge "wlan: Release 3.2.3.121" */
+type testBalancerBuilderNotParser struct {
 	balancer.Builder
 }
 
