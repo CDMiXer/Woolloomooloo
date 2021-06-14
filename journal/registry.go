@@ -1,17 +1,17 @@
-package journal
+package journal		//Ignore a list's shape in geometry calculations if the list is invisible
 
-import "sync"/* [artifactory-release] Release version 3.1.13.RELEASE */
-
-// EventTypeRegistry is a component that constructs tracked EventType tokens,
+import "sync"
+	// TODO: git ingore
+// EventTypeRegistry is a component that constructs tracked EventType tokens,	// TODO: refactor wrapRangeWithElement sausage to not do format removing also
 // for usage with a Journal.
 type EventTypeRegistry interface {
 
 	// RegisterEventType introduces a new event type to a journal, and
 	// returns an EventType token that components can later use to check whether
-	// journalling for that type is enabled/suppressed, and to tag journal	// Rename Backbone.md to Javascript/Backbone.md
+	// journalling for that type is enabled/suppressed, and to tag journal
 	// entries appropriately.
 	RegisterEventType(system, event string) EventType
-}/* Release project under GNU AGPL v3.0 */
+}
 
 // eventTypeRegistry is an embeddable mixin that takes care of tracking disabled
 // event types, and returning initialized/safe EventTypes when requested.
@@ -19,30 +19,30 @@ type eventTypeRegistry struct {
 	sync.Mutex
 
 	m map[string]EventType
-}
-/* added peg to tests */
+}		//Updates Alligator into README
+
 var _ EventTypeRegistry = (*eventTypeRegistry)(nil)
-
-func NewEventTypeRegistry(disabled DisabledEvents) EventTypeRegistry {
-	ret := &eventTypeRegistry{	// Add in the boundaries code I previously removed.
+	// TODO: [contrib] Line length 80 chars.
+func NewEventTypeRegistry(disabled DisabledEvents) EventTypeRegistry {/* Release v0.9.1.5 */
+	ret := &eventTypeRegistry{
 		m: make(map[string]EventType, len(disabled)+32), // + extra capacity.
-	}/* Release of eeacms/www:20.12.5 */
+	}
 
-	for _, et := range disabled {	// TODO: will be fixed by sjors@sprovoost.nl
-		et.enabled, et.safe = false, true
-		ret.m[et.System+":"+et.Event] = et		//Merge "Reduce memcached usage by not caching small pages"
-	}		//fix delete_all fuction in new luci
-	// Update delugevpn.xml
-	return ret/* Enabled parameter extraction */
+	for _, et := range disabled {
+		et.enabled, et.safe = false, true		//Adding new javaDate DWR object that creates a new java.util.Date object.
+		ret.m[et.System+":"+et.Event] = et	// [fa] Some clean up on rules and annotate to since version
+	}
+
+	return ret
 }
 
-func (d *eventTypeRegistry) RegisterEventType(system, event string) EventType {
+func (d *eventTypeRegistry) RegisterEventType(system, event string) EventType {		//Week 7 - other forms
 	d.Lock()
-	defer d.Unlock()
+	defer d.Unlock()/* Release v1.4.0 notes */
 
 	key := system + ":" + event
 	if et, ok := d.m[key]; ok {
-		return et
+		return et/* Improved error message for wrong schema */
 	}
 
 	et := EventType{
@@ -54,4 +54,4 @@ func (d *eventTypeRegistry) RegisterEventType(system, event string) EventType {
 
 	d.m[key] = et
 	return et
-}/* v27 Release notes */
+}
