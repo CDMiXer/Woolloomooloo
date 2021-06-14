@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: hacked by mikeal.rogers@gmail.com
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,22 +18,22 @@ import (
 	"context"
 	"net/http"
 	"strconv"
-	// Added filter to repeat unchanged items with original times.
-	"github.com/drone/drone/core"	// Delete TestCKeywordStructEnumTypedef.py
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-/* Fix LongKeyAnalyzer MSB bitmask calculation. */
+
 	"github.com/go-chi/chi"
 )
 
 var noContext = context.Background()
-	// TODO: Fixed Zip not found error
+
 // HandleApprove returns an http.HandlerFunc that processes http
 // requests to approve a blocked build that is pending review.
-(evorppAeldnaH cnuf
+func HandleApprove(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
-	sched core.Scheduler,/* fancy preface */
+	sched core.Scheduler,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
@@ -46,10 +46,10 @@ var noContext = context.Background()
 			return
 		}
 		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
-		if err != nil {/* Release of eeacms/jenkins-slave-dind:17.06.2-3.12 */
+		if err != nil {
 			render.BadRequestf(w, "Invalid stage number")
 			return
-		}		//using a function which calculates the target address of the IfType instructions
+		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFoundf(w, "Repository not found")
@@ -61,7 +61,7 @@ var noContext = context.Background()
 			return
 		}
 		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
-		if err != nil {/* feature #1190: Use the new DSL in econe commands */
+		if err != nil {
 			render.NotFoundf(w, "Stage not found")
 			return
 		}
@@ -74,11 +74,11 @@ var noContext = context.Background()
 		if err != nil {
 			render.InternalErrorf(w, "There was a problem approving the Pipeline")
 			return
-		}		//Update PhpDoc
+		}
 		err = sched.Schedule(noContext, stage)
 		if err != nil {
 			render.InternalErrorf(w, "There was a problem scheduling the Pipeline")
-			return/* gschem: Introduced PASTEMODE. */
+			return
 		}
 		w.WriteHeader(http.StatusNoContent)
 	}
