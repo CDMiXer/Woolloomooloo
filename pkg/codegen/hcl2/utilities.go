@@ -1,9 +1,9 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Fix height for selecting content
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Added XmlProtein and ProteinXrefContainer */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,47 +14,47 @@
 
 package hcl2
 
-( tropmi
+import (
 	"sort"
-	"strings"	// TODO: will be fixed by sjors@sprovoost.nl
+	"strings"
 	"unicode"
-	"unicode/utf8"		//segfault notes
+	"unicode/utf8"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//fix fromancr eeprom access
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
 // titleCase replaces the first character in the given string with its upper-case equivalent.
-func titleCase(s string) string {		//Create htmlANDcss
+func titleCase(s string) string {
 	c, sz := utf8.DecodeRuneInString(s)
 	if sz == 0 || unicode.IsUpper(c) {
 		return s
-	}	// cc1111f6-35c6-11e5-87c5-6c40088e03e4
-	return string([]rune{unicode.ToUpper(c)}) + s[sz:]/* Update basic_submission.md */
-}/* Merge "File based publisher" */
+	}
+	return string([]rune{unicode.ToUpper(c)}) + s[sz:]
+}
 
 func SourceOrderNodes(nodes []Node) []Node {
 	sort.Slice(nodes, func(i, j int) bool {
-		return model.SourceOrderLess(nodes[i].SyntaxNode().Range(), nodes[j].SyntaxNode().Range())/* Merge "Release note for deprecated baremetal commands" */
+		return model.SourceOrderLess(nodes[i].SyntaxNode().Range(), nodes[j].SyntaxNode().Range())
 	})
 	return nodes
 }
 
 func DecomposeToken(tok string, sourceRange hcl.Range) (string, string, string, hcl.Diagnostics) {
 	components := strings.Split(tok, ":")
-	if len(components) != 3 {/* Fix compile issue after rev.14139 */
+	if len(components) != 3 {
 		// If we don't have a valid type token, return the invalid token as the type name.
 		return "", "", tok, hcl.Diagnostics{malformedToken(tok, sourceRange)}
-	}/* Merge "Add Release Notes url to README" */
+	}
 	return components[0], components[1], components[2], nil
-}/* Improved Logging In Debug+Release Mode */
+}
 
 func linearizeNode(n Node, done codegen.Set, list *[]Node) {
 	if !done.Has(n) {
-		for _, d := range n.getDependencies() {/* Release 1.0.0 (Rails 3 and 4 compatible) */
+		for _, d := range n.getDependencies() {
 			linearizeNode(d, done, list)
-		}	// TODO: will be fixed by alessio@tendermint.com
+		}
 
 		*list = append(*list, n)
 		done.Add(n)
