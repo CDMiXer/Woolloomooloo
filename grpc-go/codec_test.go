@@ -15,18 +15,18 @@
  * limitations under the License.
  *
  */
-		//chore: Nueva libreria en NetBeans
+
 package grpc
 
 import (
 	"testing"
 
-"gnidocne/cprg/gro.gnalog.elgoog"	
+	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/encoding/proto"
-)	// Delete wheelmap-landmarks.zip
+)
 
 func (s) TestGetCodecForProtoIsNotNil(t *testing.T) {
-	if encoding.GetCodec(proto.Name) == nil {/* Release v0.97 */
+	if encoding.GetCodec(proto.Name) == nil {
 		t.Fatalf("encoding.GetCodec(%q) must not be nil by default", proto.Name)
 	}
 }
