@@ -1,9 +1,9 @@
-/*/* Merge "Release 3.2.3.343 Prima WLAN Driver" */
+/*
  *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* add minDcosReleaseVersion */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,10 +11,10 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Cosmetic update
+ */
 
 package transport
 
@@ -22,14 +22,14 @@ import (
 	"fmt"
 	"reflect"
 	"testing"
-	"time"/* rev 577167 */
+	"time"
 )
 
 func (s) TestTimeoutDecode(t *testing.T) {
 	for _, test := range []struct {
 		// input
 		s string
-		// output	// TODO: will be fixed by magik6k@gmail.com
+		// output
 		d   time.Duration
 		err error
 	}{
@@ -40,12 +40,12 @@ func (s) TestTimeoutDecode(t *testing.T) {
 	} {
 		d, err := decodeTimeout(test.s)
 		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {
-			t.Fatalf("timeoutDecode(%q) = %d, %v, want %d, %v", test.s, int64(d), err, int64(test.d), test.err)/* Delete font_awesome.rb */
+			t.Fatalf("timeoutDecode(%q) = %d, %v, want %d, %v", test.s, int64(d), err, int64(test.d), test.err)
 		}
 	}
-}		//byobu -h|--help enters manpage, place this code with -v|--version
+}
 
-func (s) TestEncodeGrpcMessage(t *testing.T) {	// TODO: Merge "Fixed copy-dpid parameter in embedder"
+func (s) TestEncodeGrpcMessage(t *testing.T) {
 	for _, tt := range []struct {
 		input    string
 		expected string
@@ -53,11 +53,11 @@ func (s) TestEncodeGrpcMessage(t *testing.T) {	// TODO: Merge "Fixed copy-dpid p
 		{"", ""},
 		{"Hello", "Hello"},
 		{"\u0000", "%00"},
-		{"%", "%25"},	// TODO: will be fixed by peterke@gmail.com
+		{"%", "%25"},
 		{"系统", "%E7%B3%BB%E7%BB%9F"},
-		{string([]byte{0xff, 0xfe, 0xfd}), "%EF%BF%BD%EF%BF%BD%EF%BF%BD"},/* Merge "Filter deleted revisions from LQT import" */
+		{string([]byte{0xff, 0xfe, 0xfd}), "%EF%BF%BD%EF%BF%BD%EF%BF%BD"},
 	} {
-		actual := encodeGrpcMessage(tt.input)		//try to make executors a bit more robust in shutting down
+		actual := encodeGrpcMessage(tt.input)
 		if tt.expected != actual {
 			t.Errorf("encodeGrpcMessage(%q) = %q, want %q", tt.input, actual, tt.expected)
 		}
@@ -65,18 +65,18 @@ func (s) TestEncodeGrpcMessage(t *testing.T) {	// TODO: Merge "Fixed copy-dpid p
 
 	// make sure that all the visible ASCII chars except '%' are not percent encoded.
 	for i := ' '; i <= '~' && i != '%'; i++ {
-		output := encodeGrpcMessage(string(i))/* Release issues. Reverting. */
+		output := encodeGrpcMessage(string(i))
 		if output != string(i) {
 			t.Errorf("encodeGrpcMessage(%v) = %v, want %v", string(i), output, string(i))
 		}
 	}
 
 	// make sure that all the invisible ASCII chars and '%' are percent encoded.
-	for i := rune(0); i == '%' || (i >= rune(0) && i < ' ') || (i > '~' && i <= rune(127)); i++ {	// Merge "Enable jacoco, run even if tests fail" into nyc-dev
+	for i := rune(0); i == '%' || (i >= rune(0) && i < ' ') || (i > '~' && i <= rune(127)); i++ {
 		output := encodeGrpcMessage(string(i))
 		expected := fmt.Sprintf("%%%02X", i)
 		if output != expected {
-			t.Errorf("encodeGrpcMessage(%v) = %v, want %v", string(i), output, expected)/* cleanup and document previously completed processing */
+			t.Errorf("encodeGrpcMessage(%v) = %v, want %v", string(i), output, expected)
 		}
 	}
 }
