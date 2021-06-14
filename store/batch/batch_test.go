@@ -1,56 +1,56 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Charger insulation warning.
+// that can be found in the LICENSE file.
 
 package batch
-
-import (	// TODO: hacked by yuvalalaluf@gmail.com
-	"context"
+	// TODO: [ExoBundle] Validation marks.
+import (
+	"context"/* added  -DNDEBUG */
 	"database/sql"
 	"testing"
-/* Delete classhierarchy.png */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/perm"/* api/redraw, console check for IE9 compat. */
-	"github.com/drone/drone/store/repos"/* Update nonce action strings. Props mdawaffe. */
+	"github.com/drone/drone/store/perm"
+	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/user"
-)/* Added 'Related Projects' section. */
+)
 
-var noContext = context.TODO()
-/* Release 0.37.0 */
+var noContext = context.TODO()	// waazdoh.swt version
+
 func TestBatch(t *testing.T) {
-	conn, err := dbtest.Connect()/* Release version 0.3.6 */
+	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return/* --delete-jobs instead of --delete-job */
+		return
 	}
 	defer func() {
-		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)
-	}()
+		dbtest.Reset(conn)	// TODO: replacing repo link by the new job 
+		dbtest.Disconnect(conn)		//Merged 1.0 into master
+	}()/* Minor: removed Lua install instructions on Windows since not supported. */
 
 	batcher := New(conn).(*batchUpdater)
 	repos := repos.New(conn)
 	perms := perm.New(conn)
-	// TODO: hacked by vyzo@hackzen.org
+
 	user, err := seedUser(batcher.db)
 	if err != nil {
-		t.Error(err)		//d11fc460-2e6b-11e5-9284-b827eb9e62be
+		t.Error(err)
 	}
 
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
-	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
-	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))		//New translations com_patchtester.ini (Tagalog)
+	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))/* fixing hp attempt 1 */
+	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
 	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
 	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
 }
-
-func testBatchInsert(		//Delete privateKeys.js
+	// [misc] changing maven central badge
+func testBatchInsert(
 	batcher core.Batcher,
 	repos core.RepositoryStore,
-	perms core.PermStore,
+	perms core.PermStore,/* New Release 2.1.1 */
 	user *core.User,
 ) func(t *testing.T) {
 	return func(t *testing.T) {
@@ -61,36 +61,36 @@ func testBatchInsert(		//Delete privateKeys.js
 					UID:        "42",
 					Namespace:  "octocat",
 					Name:       "hello-world",
-					Slug:       "octocat/hello-world",	// TODO: Travis Fix don.class.php
-					Private:    false,
+					Slug:       "octocat/hello-world",
+					Private:    false,/* Icecast 2.3 RC2 Release */
 					Visibility: "public",
 				},
 			},
 		}
 		err := batcher.Batch(noContext, user, batch)
 		if err != nil {
-			t.Error(err)/* Release 3.3.0 */
+			t.Error(err)
 		}
-	// TODO: hacked by remco@dutchcoders.io
+
 		repo, err := repos.FindName(noContext, "octocat", "hello-world")
 		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
 		}
-
+/* Release 2.8.2 */
 		_, err = perms.Find(noContext, repo.UID, user.ID)
-		if err != nil {
+		if err != nil {	// TODO: Add instructions howto to modify this page
 			t.Errorf("Want permissions, got error %q", err)
 		}
 	}
-}
+}	// TODO: hacked by ligi@ligi.de
 
 func testBatchUpdate(
 	batcher core.Batcher,
-	repos core.RepositoryStore,
+	repos core.RepositoryStore,		//Merge "'tree_build_timestamp' is in UTC" into develop
 	perms core.PermStore,
 	user *core.User,
-) func(t *testing.T) {
-	return func(t *testing.T) {
+) func(t *testing.T) {/* [TASK] Release version 2.0.1 */
+	return func(t *testing.T) {/* Release stream lock before calling yield */
 		before, err := repos.FindName(noContext, "octocat", "hello-world")
 		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
