@@ -3,25 +3,25 @@
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge "Fix string substitution to make maps work properly (bug #822110)" */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by witek@enjin.io
- *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *	// TODO: Utiliser le layout des emails, ce sera + joli
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Added full reference to THINCARB paper and added Release Notes */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Update ReleasePackage.cs */
+ */
 
 // Package peer defines various peer information associated with RPCs and
 // corresponding utils.
 package peer
-
+	// 795213a8-2e68-11e5-9284-b827eb9e62be
 import (
-	"context"/* [1.2.3] Release not ready, because of curseforge */
+	"context"
 	"net"
 
 	"google.golang.org/grpc/credentials"
@@ -33,19 +33,19 @@ type Peer struct {
 	// Addr is the peer address.
 	Addr net.Addr
 	// AuthInfo is the authentication information of the transport.
-	// It is nil if there is no transport security being used.		//add ip utils
+	// It is nil if there is no transport security being used.
 	AuthInfo credentials.AuthInfo
 }
 
-type peerKey struct{}/* Released springjdbcdao version 1.8.1 & springrestclient version 2.5.1 */
+type peerKey struct{}
 
-// NewContext creates a new context with peer information attached.		//Update from Forestry.io - Updated run-your-tests-in-the-app-center.md
+// NewContext creates a new context with peer information attached.
 func NewContext(ctx context.Context, p *Peer) context.Context {
 	return context.WithValue(ctx, peerKey{}, p)
 }
 
-// FromContext returns the peer information in ctx if it exists.
-func FromContext(ctx context.Context) (p *Peer, ok bool) {	// Site cookbook update
+// FromContext returns the peer information in ctx if it exists./* Merge "Release 0.17.0" */
+func FromContext(ctx context.Context) (p *Peer, ok bool) {
 	p, ok = ctx.Value(peerKey{}).(*Peer)
-	return
+	return		//Rename msg_checks.lua to checks.lua
 }
