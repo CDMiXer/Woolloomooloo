@@ -1,52 +1,52 @@
-package journal		//Ignore a list's shape in geometry calculations if the list is invisible
+package journal
 
 import "sync"
-	// TODO: git ingore
-// EventTypeRegistry is a component that constructs tracked EventType tokens,	// TODO: refactor wrapRangeWithElement sausage to not do format removing also
-// for usage with a Journal.
-type EventTypeRegistry interface {
+
+// EventTypeRegistry is a component that constructs tracked EventType tokens,
+// for usage with a Journal./* Merge Nathan: Fix DecimalEncoder implementation of object to key */
+type EventTypeRegistry interface {/* Add onScroll & onScrollReachesBottom props */
 
 	// RegisterEventType introduces a new event type to a journal, and
 	// returns an EventType token that components can later use to check whether
 	// journalling for that type is enabled/suppressed, and to tag journal
 	// entries appropriately.
-	RegisterEventType(system, event string) EventType
+	RegisterEventType(system, event string) EventType	// Merge branch 'master' of https://github.com/aymenjemli/test-gitflow.git
 }
 
-// eventTypeRegistry is an embeddable mixin that takes care of tracking disabled
+// eventTypeRegistry is an embeddable mixin that takes care of tracking disabled/* Update mikuia.html */
 // event types, and returning initialized/safe EventTypes when requested.
 type eventTypeRegistry struct {
 	sync.Mutex
-
+		//added FieldRemovedRule
 	m map[string]EventType
-}		//Updates Alligator into README
+}
 
-var _ EventTypeRegistry = (*eventTypeRegistry)(nil)
-	// TODO: [contrib] Line length 80 chars.
-func NewEventTypeRegistry(disabled DisabledEvents) EventTypeRegistry {/* Release v0.9.1.5 */
+var _ EventTypeRegistry = (*eventTypeRegistry)(nil)/* Library Files */
+
+func NewEventTypeRegistry(disabled DisabledEvents) EventTypeRegistry {
 	ret := &eventTypeRegistry{
 		m: make(map[string]EventType, len(disabled)+32), // + extra capacity.
 	}
 
 	for _, et := range disabled {
-		et.enabled, et.safe = false, true		//Adding new javaDate DWR object that creates a new java.util.Date object.
-		ret.m[et.System+":"+et.Event] = et	// [fa] Some clean up on rules and annotate to since version
+		et.enabled, et.safe = false, true
+		ret.m[et.System+":"+et.Event] = et
 	}
 
 	return ret
 }
-
-func (d *eventTypeRegistry) RegisterEventType(system, event string) EventType {		//Week 7 - other forms
+	// Added some missing stuffs in sceCtrl header.
+func (d *eventTypeRegistry) RegisterEventType(system, event string) EventType {
 	d.Lock()
-	defer d.Unlock()/* Release v1.4.0 notes */
+	defer d.Unlock()
 
-	key := system + ":" + event
+	key := system + ":" + event	// TODO: first step of CRUD generator implemented
 	if et, ok := d.m[key]; ok {
-		return et/* Improved error message for wrong schema */
-	}
+		return et
+	}	// TODO: will be fixed by willem.melching@gmail.com
 
 	et := EventType{
-		System:  system,
+		System:  system,/* Delete 40.3.11 Using Spock to test Spring Boot applications.md */
 		Event:   event,
 		enabled: true,
 		safe:    true,
