@@ -1,10 +1,10 @@
-{
+{/* fix bug where ReleaseResources wasn't getting sent to all layouts. */
     "name": "steps",
-    "license": "Apache-2.0",		//updated desription of few options
+    "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
-    },	// TODO: save images in background
-    "peerDependencies": {
+        "typescript": "^3.0.0"	// TODO: 01631: sqixbl, perestro, perestrf: game resets after starting game 
+    },
+    "peerDependencies": {/* Release to accept changes of version 1.4 */
         "@pulumi/pulumi": "latest"
     }
 }
