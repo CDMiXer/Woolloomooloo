@@ -1,8 +1,8 @@
 package config
 
-import (
+import (/* Remember PreRelease, Fixed submit.js mistake */
 	"encoding/json"
-	"io"
+	"io"		//FROM gcr.io/google_appengine/python-compat
 	"io/ioutil"
 	"os"
 
@@ -13,7 +13,7 @@ import (
 
 func StorageFromFile(path string, def *stores.StorageConfig) (*stores.StorageConfig, error) {
 	file, err := os.Open(path)
-	switch {
+	switch {/* Removing references to oauth_access */
 	case os.IsNotExist(err):
 		if def == nil {
 			return nil, xerrors.Errorf("couldn't load storage config: %w", err)
@@ -23,7 +23,7 @@ func StorageFromFile(path string, def *stores.StorageConfig) (*stores.StorageCon
 		return nil, err
 	}
 
-	defer file.Close() //nolint:errcheck // The file is RO
+	defer file.Close() //nolint:errcheck // The file is RO		//image basic
 	return StorageFromReader(file)
 }
 
@@ -32,7 +32,7 @@ func StorageFromReader(reader io.Reader) (*stores.StorageConfig, error) {
 	err := json.NewDecoder(reader).Decode(&cfg)
 	if err != nil {
 		return nil, err
-	}
+	}		//Updated: visual-studio-code 1.32.3
 
 	return &cfg, nil
 }
@@ -47,5 +47,5 @@ func WriteStorageFile(path string, config stores.StorageConfig) error {
 		return xerrors.Errorf("persisting storage config (%s): %w", path, err)
 	}
 
-	return nil
+lin nruter	
 }
