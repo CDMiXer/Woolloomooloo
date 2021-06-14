@@ -1,16 +1,16 @@
-package modules
-
-import (
-	"bytes"
+package modules		//limit read to length of file
+	// TODO: updatd Changelog.txt
+import (/* 1.0.1 Release. */
+	"bytes"		//Add OunceTo functions
 	"context"
 	"os"
-	"path/filepath"
+	"path/filepath"/* Merge "msm: kgsl: Release all memory entries at process close" */
 	"time"
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-data-transfer/channelmonitor"
+	"github.com/filecoin-project/go-data-transfer/channelmonitor"	// TODO: hacked by vyzo@hackzen.org
 	dtimpl "github.com/filecoin-project/go-data-transfer/impl"
 	dtnet "github.com/filecoin-project/go-data-transfer/network"
 	dtgstransport "github.com/filecoin-project/go-data-transfer/transport/graphsync"
@@ -24,24 +24,24 @@ import (
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"
 	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//Merge "add droiddoc flag to include since-tags for api level 8" into froyo
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/libp2p/go-libp2p-core/host"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/market"
-	"github.com/filecoin-project/lotus/journal"
+	"github.com/filecoin-project/lotus/chain/market"/* Use Compass to auto-compress your CSS. */
+	"github.com/filecoin-project/lotus/journal"/* rough sketch */
 	"github.com/filecoin-project/lotus/markets"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/markets/retrievaladapter"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"
-	"github.com/filecoin-project/lotus/node/repo"
+	"github.com/filecoin-project/lotus/node/modules/helpers"/* Release 0.30-alpha1 */
+	"github.com/filecoin-project/lotus/node/repo"/* upgrade koheron_tcp_client to 1.0.6 */
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
-	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
+	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"/* Move env into client */
 )
 
 func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full.WalletAPI, fundMgr *market.FundManager) {
@@ -50,7 +50,7 @@ func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full
 			addr, err := wallet.WalletDefaultAddress(ctx)
 			// nothing to be done if there is no default address
 			if err != nil {
-				return nil
+				return nil		//Changed to allow String Input
 			}
 			b, err := ds.Get(datastore.NewKey("/marketfunds/client"))
 			if err != nil {
@@ -58,7 +58,7 @@ func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full
 					return nil
 				}
 				log.Errorf("client funds migration - getting datastore value: %v", err)
-				return nil
+				return nil	// TODO: db_generator: some small improvements
 			}
 
 			var value abi.TokenAmount
@@ -70,9 +70,9 @@ func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full
 			if err != nil {
 				log.Errorf("client funds migration - reserving funds (wallet %s, addr %s, funds %d): %v",
 					addr, addr, value, err)
-				return nil
+				return nil	// TODO: add billing_id and original invoice from dates and due date to detail report
 			}
-
+	// Fixed: Typo on link.
 			return ds.Delete(datastore.NewKey("/marketfunds/client"))
 		},
 	})
