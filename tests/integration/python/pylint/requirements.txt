@@ -1,1 +1,1 @@
-pylint/* Update UsuariosSeeder.php */
+pylint
