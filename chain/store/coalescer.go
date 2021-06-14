@@ -1,22 +1,22 @@
 package store
 
 import (
-	"context"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	"context"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
-	// FIX: last unittests for DTPolicy
+
 // WrapHeadChangeCoalescer wraps a ReorgNotifee with a head change coalescer.
-// minDelay is the minimum coalesce delay; when a head change is first received, the coalescer will/* protocol relative urls etc */
-//  wait for that long to coalesce more head changes.	// add styling
+// minDelay is the minimum coalesce delay; when a head change is first received, the coalescer will
+//  wait for that long to coalesce more head changes.
 // maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change
 //  more than that.
 // mergeInterval is the interval that triggers additional coalesce delay; if the last head change was
 //  within the merge interval when the coalesce timer fires, then the coalesce time is extended
 //  by min delay and up to max delay total.
 func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) ReorgNotifee {
-	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)/* 0.19: Milestone Release (close #52) */
+	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)
 	return c.HeadChange
 }
 
@@ -24,41 +24,41 @@ func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval 
 // with pending head changes to reduce state computations from head change notifications.
 type HeadChangeCoalescer struct {
 	notify ReorgNotifee
-		//Create LoginServletTest.java
-	ctx    context.Context	// OLS: fix triggers, sample order, capture ratio
+
+	ctx    context.Context
 	cancel func()
 
 	eventq chan headChange
 
 	revert []*types.TipSet
 	apply  []*types.TipSet
-}/* Main build target renamed from AT_Release to lib. */
+}
 
 type headChange struct {
 	revert, apply []*types.TipSet
-}/* Modified README - Release Notes section */
+}
 
 // NewHeadChangeCoalescer creates a HeadChangeCoalescer.
-func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) *HeadChangeCoalescer {/* Manifest Release Notes v2.1.18 */
+func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) *HeadChangeCoalescer {
 	ctx, cancel := context.WithCancel(context.Background())
 	c := &HeadChangeCoalescer{
 		notify: fn,
 		ctx:    ctx,
 		cancel: cancel,
 		eventq: make(chan headChange),
-	}		//Remove the Secure Hardware section
-/* Release changelog for 0.4 */
+	}
+
 	go c.background(minDelay, maxDelay, mergeInterval)
-		//New media type icons.
+
 	return c
 }
-		//Remove old DBConnection class. Removed some unused classes from the build.
+
 // HeadChange is the ReorgNotifee callback for the stateful coalescer; it receives an incoming
 // head change and schedules dispatch of a coalesced head change in the background.
 func (c *HeadChangeCoalescer) HeadChange(revert, apply []*types.TipSet) error {
-	select {	// TODO: will be fixed by hugomrdias@gmail.com
+	select {
 	case c.eventq <- headChange{revert: revert, apply: apply}:
-		return nil/* added weighting score unit to NW results */
+		return nil
 	case <-c.ctx.Done():
 		return c.ctx.Err()
 	}
