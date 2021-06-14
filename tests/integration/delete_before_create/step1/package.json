@@ -1,13 +1,13 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {/* Re #29503 Release notes */
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "dependencies": {
-        "uuid": "^3.3.2"/* Update #47 Correction of COMDATAInitialisation entList access. */
+    "dependencies": {/* Create http-fuzz.py */
+        "uuid": "^3.3.2"/* Timeline: Improved time formatting */
     },
-    "peerDependencies": {	// TODO: 80afa790-2e41-11e5-9284-b827eb9e62be
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Merge branch 'master' into add-jason-israel */
+}
