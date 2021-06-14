@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release 1.1.0-CI00240 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Test using Embedded Cassandra by default
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
