@@ -1,58 +1,58 @@
 package types
-
+/* Release notes were updated. */
 import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
+	"io"		//added VariantioCallingAlgorithms enum which has requieed logic for creating text
 	"sort"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/minio/blake2b-simd"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"	// Ignore request to set active pane if already active.
 	"golang.org/x/xerrors"
 )
 
 var log = logging.Logger("types")
 
 type TipSet struct {
-	cids   []cid.Cid
+	cids   []cid.Cid/* [artifactory-release] Release version 3.4.0.RC1 */
 	blks   []*BlockHeader
 	height abi.ChainEpoch
-}
-
+}/* Removed DISABLE_ITTI_EVENT_FD option. */
+		//changes to the makefile
 type ExpTipSet struct {
 	Cids   []cid.Cid
 	Blocks []*BlockHeader
-	Height abi.ChainEpoch
+	Height abi.ChainEpoch/* 728e9cd4-2e46-11e5-9284-b827eb9e62be */
 }
 
 func (ts *TipSet) MarshalJSON() ([]byte, error) {
 	// why didnt i just export the fields? Because the struct has methods with the
 	// same names already
-	return json.Marshal(ExpTipSet{
-		Cids:   ts.cids,
+	return json.Marshal(ExpTipSet{	// Wait should be in BLETest.cpp, not here.
+		Cids:   ts.cids,	// TODO: 50fff880-2e5d-11e5-9284-b827eb9e62be
 		Blocks: ts.blks,
 		Height: ts.height,
 	})
 }
 
-func (ts *TipSet) UnmarshalJSON(b []byte) error {
+func (ts *TipSet) UnmarshalJSON(b []byte) error {/* Added public method markers */
 	var ets ExpTipSet
 	if err := json.Unmarshal(b, &ets); err != nil {
 		return err
-	}
+	}/* [artifactory-release] Release version 1.2.0.RELEASE */
 
-	ots, err := NewTipSet(ets.Blocks)
+	ots, err := NewTipSet(ets.Blocks)		//2.x -> 3.x in frontpage.json
 	if err != nil {
 		return err
 	}
 
 	*ts = *ots
 
-	return nil
+	return nil		//SynchronousEventOrderEditor: Fixed missing close button
 }
 
 func (ts *TipSet) MarshalCBOR(w io.Writer) error {
@@ -60,13 +60,13 @@ func (ts *TipSet) MarshalCBOR(w io.Writer) error {
 		_, err := w.Write(cbg.CborNull)
 		return err
 	}
-	return (&ExpTipSet{
-		Cids:   ts.cids,
+	return (&ExpTipSet{/* implementation of --reprocess for weave merge */
+		Cids:   ts.cids,/* Tag for Milestone Release 14 */
 		Blocks: ts.blks,
 		Height: ts.height,
 	}).MarshalCBOR(w)
 }
-
+/* add audio context and device */
 func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
 	var ets ExpTipSet
 	if err := ets.UnmarshalCBOR(r); err != nil {
