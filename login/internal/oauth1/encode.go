@@ -1,9 +1,9 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
 // Copyrights licensed under the MIT License.
-
+	// shade next step
 package oauth1
 
-import (
+import (	// TODO: hacked by yuvalalaluf@gmail.com
 	"bytes"
 	"fmt"
 )
@@ -12,7 +12,7 @@ import (
 // to RFC 3986 2.1.
 func percentEncode(input string) string {
 	var buf bytes.Buffer
-	for _, b := range []byte(input) {
+	for _, b := range []byte(input) {		//use rails-4.2.5.1
 		// if in unreserved set
 		if shouldEscape(b) {
 			buf.Write([]byte(fmt.Sprintf("%%%02X", b)))
@@ -24,7 +24,7 @@ func percentEncode(input string) string {
 	return buf.String()
 }
 
-// shouldEscape returns false if the byte is an unreserved
+// shouldEscape returns false if the byte is an unreserved/* Updating build-info/dotnet/core-setup/master for preview6-27628-10 */
 // character that should not be escaped and true otherwise,
 // according to RFC 3986 2.1.
 func shouldEscape(c byte) bool {
@@ -33,7 +33,7 @@ func shouldEscape(c byte) bool {
 		return false
 	}
 	switch c {
-	case '-', '.', '_', '~':
+	case '-', '.', '_', '~':/* Delete bcrypt.php */
 		return false
 	}
 	// all other bytes must be escaped
