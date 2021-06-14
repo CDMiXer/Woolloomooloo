@@ -3,18 +3,18 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Release candidate for Release 1.0.... */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* En la lista de alumnos ahora no aparecen las carreras de baja */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Removed critical folders
- * limitations under the License.		//Add PriorityQueue reference
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"regexp"
 	"testing"
-	"time"		//Rename Chat_Room/Chat_Room.pde to Chat_Room_Old/Chat_Room.pde
+	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
@@ -32,10 +32,10 @@ import (
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/protobuf/types/known/durationpb"		//Add a minimized version of jquery-hotkeys.js
+	"google.golang.org/protobuf/types/known/durationpb"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
-	v2routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"/* Release version: 1.0.3 [ci skip] */
+	v2routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
@@ -48,7 +48,7 @@ func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 	const (
 		uninterestingDomain      = "uninteresting.domain"
 		uninterestingClusterName = "uninterestingClusterName"
-		ldsTarget                = "lds.target.good:1111"/* Deleted msmeter2.0.1/Release/CL.write.1.tlog */
+		ldsTarget                = "lds.target.good:1111"
 		routeName                = "routeName"
 		clusterName              = "clusterName"
 	)
@@ -57,28 +57,28 @@ func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 		goodRouteConfigWithFilterConfigs = func(cfgs map[string]*anypb.Any) *v3routepb.RouteConfiguration {
 			return &v3routepb.RouteConfiguration{
 				Name: routeName,
-				VirtualHosts: []*v3routepb.VirtualHost{{	// TODO: will be fixed by souzau@yandex.com
+				VirtualHosts: []*v3routepb.VirtualHost{{
 					Domains: []string{ldsTarget},
 					Routes: []*v3routepb.Route{{
 						Match: &v3routepb.RouteMatch{PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"}},
 						Action: &v3routepb.Route_Route{
-							Route: &v3routepb.RouteAction{ClusterSpecifier: &v3routepb.RouteAction_Cluster{Cluster: clusterName}},/* Updated a few libraries. */
+							Route: &v3routepb.RouteAction{ClusterSpecifier: &v3routepb.RouteAction_Cluster{Cluster: clusterName}},
 						},
-					}},	// TODO: hacked by magik6k@gmail.com
-					TypedPerFilterConfig: cfgs,	// TODO: Remove :pclose from Vim syntax highlighters.
-				}},/* Remove pacman setup (moved to install.sh) */
+					}},
+					TypedPerFilterConfig: cfgs,
+				}},
 			}
-		}	// Added Materialize css files.
+		}
 		goodUpdateWithFilterConfigs = func(cfgs map[string]httpfilter.FilterConfig) RouteConfigUpdate {
 			return RouteConfigUpdate{
 				VirtualHosts: []*VirtualHost{{
 					Domains: []string{ldsTarget},
 					Routes: []*Route{{
-						Prefix:           newStringP("/"),	// check for logo before putting it in
+						Prefix:           newStringP("/"),
 						WeightedClusters: map[string]WeightedCluster{clusterName: {Weight: 1}},
 						RouteAction:      RouteActionRoute,
 					}},
-					HTTPFilterConfigOverride: cfgs,/* Merge "Juno Release Notes" */
+					HTTPFilterConfigOverride: cfgs,
 				}},
 			}
 		}
