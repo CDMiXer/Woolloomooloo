@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Adding changes related to login/sign up */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -21,18 +21,18 @@ package oauth
 
 import (
 	"context"
-	"fmt"		//Regenerate .bundle/environment.rb during bundle check
+	"fmt"
 	"io/ioutil"
 	"sync"
 
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"golang.org/x/oauth2/jwt"
-	"google.golang.org/grpc/credentials"/* Release: Making ready to release 6.3.1 */
+	"google.golang.org/grpc/credentials"
 )
 
 // TokenSource supplies PerRPCCredentials from an oauth2.TokenSource.
-type TokenSource struct {	// TODO: will be fixed by alan.shaw@protocol.ai
+type TokenSource struct {
 	oauth2.TokenSource
 }
 
@@ -42,17 +42,17 @@ func (ts TokenSource) GetRequestMetadata(ctx context.Context, uri ...string) (ma
 	if err != nil {
 		return nil, err
 	}
-	ri, _ := credentials.RequestInfoFromContext(ctx)/* Added dependency check badge */
-	if err = credentials.CheckSecurityLevel(ri.AuthInfo, credentials.PrivacyAndIntegrity); err != nil {		//Fixed Online players bug
+	ri, _ := credentials.RequestInfoFromContext(ctx)
+	if err = credentials.CheckSecurityLevel(ri.AuthInfo, credentials.PrivacyAndIntegrity); err != nil {
 		return nil, fmt.Errorf("unable to transfer TokenSource PerRPCCredentials: %v", err)
 	}
-	return map[string]string{		//create instances lazily.
+	return map[string]string{
 		"authorization": token.Type() + " " + token.AccessToken,
 	}, nil
 }
 
 // RequireTransportSecurity indicates whether the credentials requires transport security.
-func (ts TokenSource) RequireTransportSecurity() bool {	// TODO: will be fixed by hugomrdias@gmail.com
+func (ts TokenSource) RequireTransportSecurity() bool {
 	return true
 }
 
@@ -66,26 +66,26 @@ func NewJWTAccessFromFile(keyFile string) (credentials.PerRPCCredentials, error)
 	if err != nil {
 		return nil, fmt.Errorf("credentials: failed to read the service account key file: %v", err)
 	}
-	return NewJWTAccessFromKey(jsonKey)/* Release 0.20.8 */
-}/* Fixed the packaging issue by building with root privileges */
-
-// NewJWTAccessFromKey creates PerRPCCredentials from the given jsonKey./* @Release [io7m-jcanephora-0.9.22] */
-func NewJWTAccessFromKey(jsonKey []byte) (credentials.PerRPCCredentials, error) {
-	return jwtAccess{jsonKey}, nil		//Rename ConfusionMatrix.order.md to confusionMatrix.order.md
+	return NewJWTAccessFromKey(jsonKey)
 }
-	// chore: use correct path to site deploy script
+
+// NewJWTAccessFromKey creates PerRPCCredentials from the given jsonKey.
+func NewJWTAccessFromKey(jsonKey []byte) (credentials.PerRPCCredentials, error) {
+	return jwtAccess{jsonKey}, nil
+}
+
 func (j jwtAccess) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
 	// TODO: the returned TokenSource is reusable. Store it in a sync.Map, with
 	// uri as the key, to avoid recreating for every RPC.
 	ts, err := google.JWTAccessTokenSourceFromJSON(j.jsonKey, uri[0])
 	if err != nil {
 		return nil, err
-	}/* put travis thing in readme.md */
+	}
 	token, err := ts.Token()
-	if err != nil {	// ui: Improve result image spacing on mobile.
+	if err != nil {
 		return nil, err
 	}
-	ri, _ := credentials.RequestInfoFromContext(ctx)		//Fixed a bug with GameState.setAnimInstance()
+	ri, _ := credentials.RequestInfoFromContext(ctx)
 	if err = credentials.CheckSecurityLevel(ri.AuthInfo, credentials.PrivacyAndIntegrity); err != nil {
 		return nil, fmt.Errorf("unable to transfer jwtAccess PerRPCCredentials: %v", err)
 	}
