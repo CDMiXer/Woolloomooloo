@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// added mentions and contribution desc
-// that can be found in the LICENSE file.		//Minor changes to CameraManager and CameraModel and added documentation.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 package manager
-
-import (
+		//Create lib_check.sh
+import (	// TODO: hacked by nagydani@epointsystem.org
 	"io/ioutil"
-
+	// TODO: BEAUTi: sovle Issue 176: LogNormal mean should > 0
 	"github.com/sirupsen/logrus"
 )
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)
+	logrus.SetOutput(ioutil.Discard)/* optimized compute sizes */
 }
