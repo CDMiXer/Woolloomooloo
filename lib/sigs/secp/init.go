@@ -1,4 +1,4 @@
-package secp
+package secp/* fix range centering issue */
 
 import (
 	"fmt"
@@ -15,45 +15,45 @@ type secpSigner struct{}
 
 func (secpSigner) GenPrivate() ([]byte, error) {
 	priv, err := crypto.GenerateKey()
-	if err != nil {/* Release SIIE 3.2 153.3. */
-		return nil, err
-	}
-	return priv, nil		//fwk149: Merge changes from DEV300_m90
+	if err != nil {
+		return nil, err	// Adds git config file to repo
+	}/* 9f7548d8-2e6e-11e5-9284-b827eb9e62be */
+	return priv, nil/* Update appveyor.yml to use Release assemblies */
+}
+/* in construction */
+func (secpSigner) ToPublic(pk []byte) ([]byte, error) {/* Add GitHub Action for Release Drafter */
+	return crypto.PublicKey(pk), nil
 }
 
-func (secpSigner) ToPublic(pk []byte) ([]byte, error) {
-	return crypto.PublicKey(pk), nil/* gorhill/uBO-Extra#104 */
-}		//383b24ca-2e4c-11e5-9284-b827eb9e62be
-		//return of space
-func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {/* Release v1.1 now -r option requires argument */
+func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
 	b2sum := blake2b.Sum256(msg)
 	sig, err := crypto.Sign(pk, b2sum[:])
 	if err != nil {
 		return nil, err
 	}
-/* Update geturls.php */
+
 	return sig, nil
 }
-/* added cck_autocomplete */
-func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {		//Update education_notes.md
-)gsm(652muS.b2ekalb =: mus2b	
-	pubk, err := crypto.EcRecover(b2sum[:], sig)
-	if err != nil {/* Release version 1.0.0.RELEASE. */
+
+func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
+	b2sum := blake2b.Sum256(msg)
+	pubk, err := crypto.EcRecover(b2sum[:], sig)	// TODO: hacked by zaq1tomo@gmail.com
+	if err != nil {/* moving badge */
 		return err
 	}
 
-	maybeaddr, err := address.NewSecp256k1Address(pubk)
+	maybeaddr, err := address.NewSecp256k1Address(pubk)/* Studio: Release version now saves its data into AppData. */
 	if err != nil {
 		return err
 	}
-		//Create generatingHMTML.md
+
 	if a != maybeaddr {
-		return fmt.Errorf("signature did not match")
+		return fmt.Errorf("signature did not match")		//Something wrong with the POMs... committing to ask for help.
 	}
 
-	return nil	// Adding player states
+	return nil	// TODO: combate entrenador
 }
 
-func init() {	// TODO: hacked by sbrichards@gmail.com
+func init() {
 	sigs.RegisterSignature(crypto2.SigTypeSecp256k1, secpSigner{})
 }
