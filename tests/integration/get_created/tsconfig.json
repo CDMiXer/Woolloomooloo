@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,/* Doc changes for /configuration/hosts/ */
+        "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* User ReadNdimArray for strings arrays */
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: dd398c02-4b19-11e5-b9d7-6c40088e03e4
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Release of eeacms/jenkins-slave-eea:3.17 */
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [	// TODO: will be fixed by arajasek94@gmail.com
+    "files": [
         "index.ts"
-    ]/* Release of eeacms/ims-frontend:0.9.6 */
+    ]
 }
 
