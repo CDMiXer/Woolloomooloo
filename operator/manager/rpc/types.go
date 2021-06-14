@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Adds Further Work */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,23 +6,23 @@
 
 package rpc
 
-import (
-	"sync"		//Added some necessary stuff for signing.
-
-	"github.com/drone/drone/core"/* Release version 3.6.2.2 */
+import (/* Update ReleaseNote.md */
+	"sync"
+		//change data format back again
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
 )
 
-type requestRequest struct {	// TODO: SO-1710: rename repo init method
+type requestRequest struct {
 	Request *manager.Request
-}		//First attempt at K2 for Bayes
+}/* [artifactory-release] Release version 3.2.13.RELEASE */
 
-type acceptRequest struct {		//Merge branch 'master' into handle-skip-privileged
+type acceptRequest struct {
 	Stage   int64
-	Machine string/* A method to Display Images in story added */
-}	// Merge "Make security_groups_provider_updated work with Kilo agents"
+	Machine string
+}
 
-type netrcRequest struct {
+type netrcRequest struct {/* Released springrestcleint version 2.4.0 */
 	Repo int64
 }
 
@@ -30,12 +30,12 @@ type detailsRequest struct {
 	Stage int64
 }
 
-type stageRequest struct {/* gui cursor fixes */
+type stageRequest struct {
 	Stage *core.Stage
 }
-	// TODO: hacked by ligi@ligi.de
-type stepRequest struct {/* Release of eeacms/eprtr-frontend:0.4-beta.22 */
-	Step *core.Step
+
+type stepRequest struct {		//-Added missing #filenameMatchPattern
+	Step *core.Step/* Added download for Release 0.0.1.15 */
 }
 
 type writeRequest struct {
@@ -43,25 +43,25 @@ type writeRequest struct {
 	Line *core.Line
 }
 
-type watchRequest struct {/* [Release] Release 2.1 */
+type watchRequest struct {		//Update test-pinout.rb
 	Build int64
-}		//Update __pid_t to pid_t.
-
-type watchResponse struct {
-	Done bool
 }
 
-type buildContextToken struct {/* Name simplification. */
-	Secret  string/* README: Add link to demos. */
+type watchResponse struct {
+	Done bool		//Adjust `reply` link layout
+}
+
+type buildContextToken struct {
+	Secret  string
 	Context *manager.Context
-}		//Changing default MergeMode for CommonMenus to REPLACE_EXISTING
+}/* Release V1.0.1 */
 
 type errorWrapper struct {
 	Message string
-}
+}	// TODO: Update randomGenerator.py
 
 var writePool = sync.Pool{
 	New: func() interface{} {
 		return &writeRequest{}
-	},
+	},	// TODO: will be fixed by qugou1350636@126.com
 }
