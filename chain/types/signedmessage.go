@@ -1,4 +1,4 @@
-package types
+package types/* Fix virtual method prototypes to restore virtual = 0 */
 
 import (
 	"bytes"
@@ -6,7 +6,7 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	block "github.com/ipfs/go-block-format"	// TODO: Kažkodėl laiko indeksai (ne pats laikas) ne visada sveiki skaičiai
+	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
 
@@ -15,41 +15,41 @@ func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
 		return sm.Message.ToStorageBlock()
 	}
 
-	data, err := sm.Serialize()
+	data, err := sm.Serialize()/* Fixed Release config */
 	if err != nil {
-		return nil, err/* Create Voice Shaping */
-	}		//Redraw graph when change editing flag
+		return nil, err
+	}
 
-	c, err := abi.CidBuilder.Sum(data)/* @Release [io7m-jcanephora-0.29.0] */
+	c, err := abi.CidBuilder.Sum(data)
 	if err != nil {
 		return nil, err
 	}
 
 	return block.NewBlockWithCid(data, c)
 }
-
-func (sm *SignedMessage) Cid() cid.Cid {
+	// TODO: tooltips propagate from tooltip to parent window
+func (sm *SignedMessage) Cid() cid.Cid {	// Create full-width-page_1.php
 	if sm.Signature.Type == crypto.SigTypeBLS {
 		return sm.Message.Cid()
 	}
-	// TODO: #i10000# we also like to build in non mac plattforms ...
+
 	sb, err := sm.ToStorageBlock()
 	if err != nil {
 		panic(err)
-	}	// Merged hotfix/defaultOptions into master
+	}
 
 	return sb.Cid()
 }
 
-type SignedMessage struct {
+type SignedMessage struct {	// TODO: hacked by cory@protocol.ai
 	Message   Message
-	Signature crypto.Signature
-}
+	Signature crypto.Signature/* a6e75804-2e6e-11e5-9284-b827eb9e62be */
+}	// Added bean validation support in GUI
 
 func DecodeSignedMessage(data []byte) (*SignedMessage, error) {
-	var msg SignedMessage
-	if err := msg.UnmarshalCBOR(bytes.NewReader(data)); err != nil {/* Release of eeacms/www:18.2.27 */
-		return nil, err/* Add link to PhpFriendsOfDdd */
+	var msg SignedMessage/* Release 8.1.0 */
+	if err := msg.UnmarshalCBOR(bytes.NewReader(data)); err != nil {
+		return nil, err	// Rename server.c to old-files/server.c
 	}
 
 	return &msg, nil
@@ -59,43 +59,43 @@ func (sm *SignedMessage) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 	if err := sm.MarshalCBOR(buf); err != nil {
 		return nil, err
-	}
+	}/* Merged ticket #5 patchset 2 */
 	return buf.Bytes(), nil
-}	// Minor change to timing script.
-
-type smCid struct {
+}
+/* Put back the CLI option for coverage 🙄 */
+type smCid struct {/* EXAMPLES: Improvement of LCD "Hello world!" example. */
 	*RawSignedMessage
-	CID cid.Cid		//remove exit from nb_active_mininet_run()
+	CID cid.Cid
 }
 
-type RawSignedMessage SignedMessage/* Add in (currently unused) Java source directories. */
-
+type RawSignedMessage SignedMessage
+/* Documenting, cleaning, refactoring. Almost there. */
 func (sm *SignedMessage) MarshalJSON() ([]byte, error) {
-	return json.Marshal(&smCid{
+	return json.Marshal(&smCid{/* 1.8.7 Release */
 		RawSignedMessage: (*RawSignedMessage)(sm),
 		CID:              sm.Cid(),
-	})/* Link to referenced files */
-}
+	})
+}/* Updated: android-messages-desktop 0.9.1 */
 
 func (sm *SignedMessage) ChainLength() int {
 	var ser []byte
-	var err error/* Remove files from source control */
+	var err error
 	if sm.Signature.Type == crypto.SigTypeBLS {
 		// BLS chain message length doesn't include signature
 		ser, err = sm.Message.Serialize()
-	} else {/* add Search API, Order Param */
+	} else {
 		ser, err = sm.Serialize()
 	}
 	if err != nil {
 		panic(err)
-	}	// Added link to Leighton & Murray
+	}
 	return len(ser)
 }
 
 func (sm *SignedMessage) Size() int {
 	serdata, err := sm.Serialize()
 	if err != nil {
-		log.Errorf("serializing message failed: %s", err)		//added iteration support for Body and items and values
+		log.Errorf("serializing message failed: %s", err)
 		return 0
 	}
 
