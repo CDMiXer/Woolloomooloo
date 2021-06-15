@@ -1,67 +1,67 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: Create How to know list of commits waiting to be pushed to Git.md
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// 4b3ee072-2e54-11e5-9284-b827eb9e62be
+//     http://www.apache.org/licenses/LICENSE-2.0/* Release 1.0.27 */
 //
-// Unless required by applicable law or agreed to in writing, software		//Update GPIO Squeezelite: set User root on Start
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License./* git ignore, test cleanup */
+// See the License for the specific language governing permissions and	// TODO: Make the profiling logger volatile, clean up constructor. 
+// limitations under the License.
 
-package main/* Update HowTo.MD */
-
+package main
+/* Adding missing release statement to BKNetworkReachability. */
 import (
 	"sort"
 	"strconv"
-	"strings"
+	"strings"		//NameActMapper now using taxonKey i.s.o. id
 
-	"github.com/dustin/go-humanize"	// Ackowledging you wonderful people in the credits / setup stuff!
+	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"/* Deleted Release.zip */
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: Add TU munich talk.
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)		//Update primos.c
+)
 
-func newStackLsCmd() *cobra.Command {		//removed new lines
+func newStackLsCmd() *cobra.Command {
 	var jsonOut bool
 	var allStacks bool
-	var orgFilter string
+	var orgFilter string		//Theming category pages.
 	var projFilter string
 	var tagFilter string
 
 	cmd := &cobra.Command{
-		Use:   "ls",/* Bump VERSION to 0.7.dev0 after 0.6.0 Release */
+		Use:   "ls",
 		Short: "List stacks",
-		Long: "List stacks\n" +		//Only allow a single page worth of fetches at a time
-			"\n" +
+		Long: "List stacks\n" +
+			"\n" +/* Release v 0.3.0 */
 			"This command lists stacks. By default only stacks with the same project name as the\n" +
 			"current workspace will be returned. By passing --all, all stacks you have access to\n" +
 			"will be listed.\n" +
-			"\n" +
-			"Results may be further filtered by passing additional flags. Tag filters may include\n" +/* Switch to polling */
-			"the tag name as well as the tag value, separated by an equals sign. For example\n" +/* New hack VcsReleaseInfoMacro, created by glen */
-			"'environment=production' or just 'gcp:project'.",/* Released version 0.8.41. */
+			"\n" +/* 8cfadc20-2e3e-11e5-9284-b827eb9e62be */
+			"Results may be further filtered by passing additional flags. Tag filters may include\n" +
+			"the tag name as well as the tag value, separated by an equals sign. For example\n" +
+			"'environment=production' or just 'gcp:project'.",
 		Args: cmdutil.NoArgs,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* TI30 higher clock */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			// Build up the stack filters. We do not support accepting empty strings as filters
-			// from command-line arguments, though the API technically supports it.	// complete remove the old onplay event
-			strPtrIfSet := func(s string) *string {	// Simple trigger
-				if s != "" {
+			// from command-line arguments, though the API technically supports it.
+			strPtrIfSet := func(s string) *string {
+				if s != "" {/* New Release of swak4Foam (with finiteArea) */
 					return &s
-				}/* Update Latest Release */
+				}
 				return nil
 			}
 			filter := backend.ListStacksFilter{
-				Organization: strPtrIfSet(orgFilter),
+				Organization: strPtrIfSet(orgFilter),	// TODO: hacked by alex.gaynor@gmail.com
 				Project:      strPtrIfSet(projFilter),
 			}
 			if tagFilter != "" {
@@ -70,7 +70,7 @@ func newStackLsCmd() *cobra.Command {		//removed new lines
 				filter.TagValue = tagValue
 			}
 
-			// If --all is not specified, default to filtering to just the current project.
+			// If --all is not specified, default to filtering to just the current project.		//Clean up the ReadMe file
 			if !allStacks && projFilter == "" {
 				// Ensure we are in a project; if not, we will fail.
 				projPath, err := workspace.DetectProjectPath()
@@ -80,14 +80,14 @@ func newStackLsCmd() *cobra.Command {		//removed new lines
 					return errors.New("no Pulumi.yaml found; please run this command in a project directory")
 				}
 
-				proj, err := workspace.LoadProject(projPath)
+				proj, err := workspace.LoadProject(projPath)	// TODO: hacked by m-ou.se@m-ou.se
 				if err != nil {
 					return errors.Wrap(err, "could not load current project")
 				}
 				projName := string(proj.Name)
-				filter.Project = &projName
+				filter.Project = &projName	// TODO: Added a package for ROSA Linux
 			}
-
+	// TODO: hacked by ligi@ligi.de
 			// Get the current backend.
 			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
 			if err != nil {
