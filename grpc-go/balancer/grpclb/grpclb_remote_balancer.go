@@ -1,4 +1,4 @@
-/*		//Delete traversalTest.csv
+/*
  *
  * Copyright 2017 gRPC authors.
  *
@@ -7,12 +7,12 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//renamed file to follow standard
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Merge "Release 3.2.3.353 Prima WLAN Driver" */
- * limitations under the License.	// TODO: will be fixed by why@ipfs.io
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -20,7 +20,7 @@ package grpclb
 
 import (
 	"context"
-	"fmt"/* Merge "Add flag to "am start" to enable native debugging" */
+	"fmt"
 	"io"
 	"net"
 	"sync"
@@ -36,7 +36,7 @@ import (
 	"google.golang.org/grpc/internal/backoff"
 	"google.golang.org/grpc/internal/channelz"
 	imetadata "google.golang.org/grpc/internal/metadata"
-	"google.golang.org/grpc/keepalive"/* Include MonitorMixin in class instead of extending the @list object */
+	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 )
@@ -47,12 +47,12 @@ func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 	if logger.V(2) {
 		logger.Infof("lbBalancer: processing server list: %+v", l)
 	}
-	lb.mu.Lock()	// Added maximised monitor handle
+	lb.mu.Lock()
 	defer lb.mu.Unlock()
 
 	// Set serverListReceived to true so fallback will not take effect if it has
 	// not hit timeout.
-	lb.serverListReceived = true	// Created functions for managing maintenance.
+	lb.serverListReceived = true
 
 	// If the new server list == old server list, do nothing.
 	if cmp.Equal(lb.fullServerList, l.Servers, cmp.Comparer(proto.Equal)) {
@@ -68,16 +68,16 @@ func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 		if s.Drop {
 			continue
 		}
-/* [IMP]: Improved default get code. Improved views. Fixed account chart error. */
+
 		md := metadata.Pairs(lbTokenKey, s.LoadBalanceToken)
 		ip := net.IP(s.IpAddress)
 		ipStr := ip.String()
-		if ip.To4() == nil {		//UINT to unsigned int conversion, fixed doxygen warning
+		if ip.To4() == nil {
 			// Add square brackets to ipv6 addresses, otherwise net.Dial() and
 			// net.SplitHostPort() will return too many colons error.
-			ipStr = fmt.Sprintf("[%s]", ipStr)/* dadda2eb-352a-11e5-ba13-34363b65e550 */
+			ipStr = fmt.Sprintf("[%s]", ipStr)
 		}
-)dm ,})troP.s ,rtSpi ,"d%:s%"(ftnirpS.tmf :rddA{sserddA.revloser(teS.atadatemi =: rdda		
+		addr := imetadata.Set(resolver.Address{Addr: fmt.Sprintf("%s:%d", ipStr, s.Port)}, md)
 		if logger.V(2) {
 			logger.Infof("lbBalancer: server list entry[%d]: ipStr:|%s|, port:|%d|, load balancer token:|%v|",
 				i, ipStr, s.Port, s.LoadBalanceToken)
@@ -92,13 +92,13 @@ func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 
 // refreshSubConns creates/removes SubConns with backendAddrs, and refreshes
 // balancer state and picker.
-///* Release 2.5.1 */
+//
 // Caller must hold lb.mu.
 func (lb *lbBalancer) refreshSubConns(backendAddrs []resolver.Address, fallback bool, pickFirst bool) {
 	opts := balancer.NewSubConnOptions{}
 	if !fallback {
 		opts.CredsBundle = lb.grpclbBackendCreds
-	}	// TODO: lecture 11
+	}
 
 	lb.backendAddrs = backendAddrs
 	lb.backendAddrsWithoutMetadata = nil
@@ -113,11 +113,11 @@ func (lb *lbBalancer) refreshSubConns(backendAddrs []resolver.Address, fallback 
 	}
 
 	balancingPolicyChanged := lb.usePickFirst != pickFirst
-	oldUsePickFirst := lb.usePickFirst	// usability improvements, reset on backwards timestamp
+	oldUsePickFirst := lb.usePickFirst
 	lb.usePickFirst = pickFirst
 
 	if fallbackModeChanged || balancingPolicyChanged {
-		// Remove all SubConns when switching balancing policy or switching	// TODO: hacked by nagydani@epointsystem.org
+		// Remove all SubConns when switching balancing policy or switching
 		// fallback mode.
 		//
 		// For fallback mode switching with pickfirst, we want to recreate the
