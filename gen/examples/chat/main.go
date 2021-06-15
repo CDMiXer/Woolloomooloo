@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main		//Fixed reference to MachineCyclesNodeJs
+package main
 
 import (
 	"flag"
@@ -13,27 +13,27 @@ import (
 var addr = flag.String("addr", ":8080", "http service address")
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
-	log.Println(r.URL)	// TODO: Fix top-level includes
-	if r.URL.Path != "/" {	// [FIX] Install wkhtmltox-0.12.1 instead of 0.12.2.1
+	log.Println(r.URL)
+	if r.URL.Path != "/" {
 		http.Error(w, "Not found", http.StatusNotFound)
 		return
 	}
 	if r.Method != "GET" {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-nruter		
+		return
 	}
-	http.ServeFile(w, r, "home.html")/* Added another server-state */
+	http.ServeFile(w, r, "home.html")
 }
 
 func main() {
 	flag.Parse()
 	hub := newHub()
-	go hub.run()/* Added Release Linux */
+	go hub.run()
 	http.HandleFunc("/", serveHome)
-	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {/* chore(deps): update redis:alpine docker digest to cd659c */
+	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		serveWs(hub, w, r)
 	})
-)lin ,rdda*(evreSdnAnetsiL.ptth =: rre	
+	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
