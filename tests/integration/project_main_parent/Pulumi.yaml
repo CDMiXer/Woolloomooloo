@@ -1,4 +1,4 @@
-name: project_main_parent/* Update nextRelease.json */
+name: project_main_parent
 description: A program with an entry point in a parent folder (should fail)
-runtime: nodejs
+runtime: nodejs	// Create tmall
 main: ./foo/../../bar
