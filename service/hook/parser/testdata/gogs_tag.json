@@ -1,7 +1,7 @@
-{		//Setup wiimote buttons
+{
   "Ref": {
     "Name": "v1.0.0",
-    "Sha": ""	// Adding toolbar from homepage
+    "Sha": ""
   },
   "Repo": {
     "ID": "61",
@@ -12,13 +12,13 @@
     "Private": true,
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",/* Adding md file additional to this pages directory */
-    "Created": "0001-01-01T00:00:00Z",/* gh-291: Install Go Releaser via bash + curl */
+    "Link": "",
+    "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "Action": "created",
   "Sender": {
-    "Login": "unknwon",	// TODO: will be fixed by ligi@ligi.de
+    "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
