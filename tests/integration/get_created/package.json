@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",/* Added make MODE=DebugSanitizer clean and make MODE=Release clean commands */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "scripts": {
+    "typings": "bin/index.d.ts",	// TODO: Add URL to breweries.
+    "scripts": {	// TODO: will be fixed by why@ipfs.io
         "build": "tsc"
     },
-    "devDependencies": {	// TODO: correccion invitacion
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: will be fixed by cory@protocol.ai
         "@pulumi/pulumi": "latest"
-    }/* reduce buffer size to smallest power of 2 works ok on my machine */
-}
+    }
+}/* Update config,yml */
