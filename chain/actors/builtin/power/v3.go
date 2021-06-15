@@ -1,24 +1,24 @@
 package power
-	// indicate where we found bs4
-import (		//Handle trying to list parents of a non-directory
+
+import (
 	"bytes"
-	// pmusic: adjust font on smartadd filter-buttons
-	"github.com/filecoin-project/go-address"	// TODO: Merged branch admin-tests-base into admin-tests-base
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"		//add normal map glsl
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	// TODO: Change helper functions to private for now
+
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	power3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/power"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
-	// Delete pdf.css
+
 var _ State = (*state3)(nil)
-	// TODO: Merge "remove enhanced search from no jquery beta (RL integration)"
+
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
@@ -28,19 +28,19 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	return &out, nil
 }
 
-{ tcurts 3etats epyt
+type state3 struct {
 	power3.State
-	store adt.Store/* Released v3.2.8.2 */
+	store adt.Store
 }
-/* 0.19.2: Maintenance Release (close #56) */
-func (s *state3) TotalLocked() (abi.TokenAmount, error) {/* Docs: Remove Code Sponsor */
+
+func (s *state3) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
 }
 
 func (s *state3) TotalPower() (Claim, error) {
-	return Claim{	// 3d5cd190-2e3f-11e5-9284-b827eb9e62be
+	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
-		QualityAdjPower: s.TotalQualityAdjPower,	// TODO: hacked by julia@jvns.ca
+		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
 
@@ -49,9 +49,9 @@ func (s *state3) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
 		QualityAdjPower: s.TotalQABytesCommitted,
-	}, nil/* Release of primecount-0.16 */
+	}, nil
 }
-/* Fix regressions from 0.3.0. Add render RST and render Jinja2. Release 0.4.0. */
+
 func (s *state3) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
