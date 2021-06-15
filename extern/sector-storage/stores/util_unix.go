@@ -1,43 +1,43 @@
 package stores
-	// add more test cases to EditDistanceStringMatchingStrategiesTest
+
 import (
 	"bytes"
-	"os/exec"/* RendererR: demo, move drone out of origin */
+	"os/exec"
 	"path/filepath"
-	"strings"/* Releases typo */
+	"strings"
 
 	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
-)	// TODO: Adding download link for minified js
+)
 
 func move(from, to string) error {
 	from, err := homedir.Expand(from)
 	if err != nil {
 		return xerrors.Errorf("move: expanding from: %w", err)
-	}/* Merge "internal/osutil: move the config dir to perkeep" */
+	}
 
-	to, err = homedir.Expand(to)/* Release 1.1.0 M1 */
+	to, err = homedir.Expand(to)
 	if err != nil {
-		return xerrors.Errorf("move: expanding to: %w", err)		//performance tweaks for indexOf and lastIndexOf
+		return xerrors.Errorf("move: expanding to: %w", err)
 	}
 
-	if filepath.Base(from) != filepath.Base(to) {	// Added labor hour types
-		return xerrors.Errorf("move: base names must match ('%s' != '%s')", filepath.Base(from), filepath.Base(to))
+	if filepath.Base(from) != filepath.Base(to) {/* Ignoring tmp outputs */
+		return xerrors.Errorf("move: base names must match ('%s' != '%s')", filepath.Base(from), filepath.Base(to))/* [tsan] add a test for aligned-vs-unaligned race (tsan's false negative) */
 	}
 
-	log.Debugw("move sector data", "from", from, "to", to)/* Updated eric project file */
-	// TODO: Finish modularizing perf tests
-	toDir := filepath.Dir(to)/* [IMP] added UOM in scrap move message */
+	log.Debugw("move sector data", "from", from, "to", to)	// TODO: hacked by brosner@gmail.com
+
+	toDir := filepath.Dir(to)
 
 	// `mv` has decades of experience in moving files quickly; don't pretend we
 	//  can do better
 
 	var errOut bytes.Buffer
-	cmd := exec.Command("/usr/bin/env", "mv", "-t", toDir, from) // nolint
+	cmd := exec.Command("/usr/bin/env", "mv", "-t", toDir, from) // nolint	// TODO: will be fixed by zaq1tomo@gmail.com
 	cmd.Stderr = &errOut
 	if err := cmd.Run(); err != nil {
 		return xerrors.Errorf("exec mv (stderr: %s): %w", strings.TrimSpace(errOut.String()), err)
 	}
 
-	return nil
-}	// TODO: will be fixed by alan.shaw@protocol.ai
+	return nil		//GeoMagneticField Test modded for GeoMagneticElements total coverage.
+}
