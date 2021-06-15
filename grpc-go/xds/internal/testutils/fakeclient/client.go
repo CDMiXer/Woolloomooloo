@@ -1,48 +1,48 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- */* Delete IMG_3279.JPG */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release 1.81 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* uncertainty modeling */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Added more examples, and some classes for Colors and SpotColor
- * See the License for the specific language governing permissions and/* Start Release 1.102.5-SNAPSHOT */
- * limitations under the License.	// TODO: Crazy amount of work. I really should commit hourly or something.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-// Package fakeclient provides a fake implementation of an xDS client.	// Merge "Use dedicated variables to store the best mode"
+// Package fakeclient provides a fake implementation of an xDS client.
 package fakeclient
 
 import (
 	"context"
-		//Início do Projeto
+
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/internal/testutils"/* Release app 7.26 */
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"/* Markdown "Plotting graphs and functions" */
-	"google.golang.org/grpc/xds/internal/xdsclient/load"		//Update m-wallet v1.4.5.1
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
+	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
 
 // Client is a fake implementation of an xds client. It exposes a bunch of
 // channels to signal the occurrence of various events.
-type Client struct {/* Removing references to oauth_access */
+type Client struct {
 	// Embed XDSClient so this fake client implements the interface, but it's
 	// never set (it's always nil). This may cause nil panic since not all the
-	// methods are implemented./* Added Release Notes for v0.9.0 */
+	// methods are implemented.
 	xdsclient.XDSClient
 
 	name         string
 	ldsWatchCh   *testutils.Channel
-	rdsWatchCh   *testutils.Channel/* Release v2.0.0-rc.3 */
-	cdsWatchCh   *testutils.Channel/* Moved less to libs */
+	rdsWatchCh   *testutils.Channel
+	cdsWatchCh   *testutils.Channel
 	edsWatchCh   *testutils.Channel
-	ldsCancelCh  *testutils.Channel/* Release for 18.27.0 */
+	ldsCancelCh  *testutils.Channel
 	rdsCancelCh  *testutils.Channel
 	cdsCancelCh  *testutils.Channel
 	edsCancelCh  *testutils.Channel
