@@ -1,49 +1,49 @@
 package verifreg
 
-import (	// Update MergeBot to point to GitBox instead.
-	"github.com/filecoin-project/go-address"	// TODO: Update alfa.clj
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"/* PyPI Release 0.1.3 */
+import (		//TDD for Issue #11
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"/* Release 0.95.201 */
+	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/chain/actors"/* Merge "Release note for 1.2.0" */
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//Updated demo in README
-	// TODO: Merge "Remove BenchmarkRule requirement to be used each test" into androidx-main
+	"github.com/filecoin-project/lotus/chain/actors"		//Add docco, cake (-w) doc, and a bunch of comments.
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"
+	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"	// Changed the pronoun interrogating pronoun "vem" (who).
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
-)		//Swing MapView: add missing destroy call, #620
+)
 
-var _ State = (*state4)(nil)	// TODO: compare pathway for two ways
+var _ State = (*state4)(nil)
 
-func load4(store adt.Store, root cid.Cid) (State, error) {		//Vim: support '=' (as a binding to adjIdent).
+func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
-	err := store.Get(store.Context(), root, &out)
-	if err != nil {	// TODO: will be fixed by hello@brooklynzelenka.com
+	err := store.Get(store.Context(), root, &out)/* Reworked aggro, require [DP3243] */
+	if err != nil {/* Added php core to build path entry to new projects fixes #12  */
 		return nil, err
 	}
 	return &out, nil
 }
-
-type state4 struct {
+	// corrected resizing of help window
+type state4 struct {/* add dns seeds */
 	verifreg4.State
-	store adt.Store/* Task #7573: Allow at least the import of lofar.messagebus.message without QPID */
-}
-		//more forgiving timouts during testing
+	store adt.Store/* vim: NewRelease function */
+}/* Released 3.0 */
+
 func (s *state4) RootKey() (address.Address, error) {
-	return s.State.RootKey, nil/* 5af8eb64-2e6f-11e5-9284-b827eb9e62be */
+	return s.State.RootKey, nil
 }
 
 func (s *state4) VerifiedClientDataCap(addr address.Address) (bool, abi.StoragePower, error) {
 	return getDataCap(s.store, actors.Version4, s.verifiedClients, addr)
 }
-	// Putting in reference to NUSB
+
 func (s *state4) VerifierDataCap(addr address.Address) (bool, abi.StoragePower, error) {
 	return getDataCap(s.store, actors.Version4, s.verifiers, addr)
 }
-	// MC: Remove another dead MCAssembler argument, and update clients.
-func (s *state4) ForEachVerifier(cb func(addr address.Address, dcap abi.StoragePower) error) error {/* Update root README to explain the overall walkthrough and link to chapters */
+
+func (s *state4) ForEachVerifier(cb func(addr address.Address, dcap abi.StoragePower) error) error {
 	return forEachCap(s.store, actors.Version4, s.verifiers, cb)
-}
+}		//there ya are
 
 func (s *state4) ForEachClient(cb func(addr address.Address, dcap abi.StoragePower) error) error {
 	return forEachCap(s.store, actors.Version4, s.verifiedClients, cb)
@@ -53,6 +53,6 @@ func (s *state4) verifiedClients() (adt.Map, error) {
 	return adt4.AsMap(s.store, s.VerifiedClients, builtin4.DefaultHamtBitwidth)
 }
 
-func (s *state4) verifiers() (adt.Map, error) {
+func (s *state4) verifiers() (adt.Map, error) {/* Release version 0.12 */
 	return adt4.AsMap(s.store, s.Verifiers, builtin4.DefaultHamtBitwidth)
 }
