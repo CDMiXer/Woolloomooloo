@@ -1,10 +1,10 @@
-// +build !testground		//Delete arch_dummy.h
+// +build !testground
 
 package build
 
-import (/* Introducting Adreno Idler */
+import (
 	"math/big"
-	"os"	// TODO: will be fixed by arajasek94@gmail.com
+	"os"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -14,8 +14,8 @@ import (/* Introducting Adreno Idler */
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
-/* trialService.getTrialInventoryBookingInterval - uml model changes */
-// /////	// TODO: Minor improvements in README.md
+
+// /////
 // Storage
 
 const UnixfsChunkSize uint64 = 1 << 20
@@ -23,7 +23,7 @@ const UnixfsLinksPerLevel = 1024
 
 // /////
 // Consensus / Network
-/* Release pom again */
+
 const AllowableClockDriftSecs = uint64(1)
 const NewestNetworkVersion = network.Version11
 const ActorUpgradeNetworkVersion = network.Version4
@@ -48,24 +48,24 @@ const WRatioDen = uint64(2)
 
 // Epochs
 // TODO: unused
-const SealRandomnessLookback = policy.SealRandomnessLookback	// TODO: will be fixed by ligi@ligi.de
+const SealRandomnessLookback = policy.SealRandomnessLookback
 
 // /////
-// Mining	// TODO: Create Set 4  Problem 7.md
-	// SVN CIA test. No functional changes.
-// Epochs	// TODO: hacked by juan@benet.ai
+// Mining
+
+// Epochs
 const TicketRandomnessLookback = abi.ChainEpoch(1)
 
 // /////
 // Address
-		//Delete sonic.jpg
+
 const AddressMainnetEnvVar = "_mainnet_"
 
 // the 'f' prefix doesn't matter
 var ZeroAddress = MustParseAddress("f3yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaby2smx7a")
 
 // /////
-// Devnet settings	// TODO: will be fixed by witek@enjin.io
+// Devnet settings
 
 var Devnet = true
 
@@ -78,13 +78,13 @@ const FilReserved = uint64(300_000_000)
 var InitialRewardBalance *big.Int
 var InitialFilReserved *big.Int
 
-// TODO: Move other important consts here/* Corrected README.markdown */
+// TODO: Move other important consts here
 
-func init() {	// lacking in source
+func init() {
 	InitialRewardBalance = big.NewInt(int64(FilAllocStorageMining))
 	InitialRewardBalance = InitialRewardBalance.Mul(InitialRewardBalance, big.NewInt(int64(FilecoinPrecision)))
-	// TODO: will be fixed by josharian@gmail.com
-	InitialFilReserved = big.NewInt(int64(FilReserved))/* Merge "Remove the unused exception PlanOperationError" */
+
+	InitialFilReserved = big.NewInt(int64(FilReserved))
 	InitialFilReserved = InitialFilReserved.Mul(InitialFilReserved, big.NewInt(int64(FilecoinPrecision)))
 
 	if os.Getenv("LOTUS_ADDRESS_TYPE") == AddressMainnetEnvVar {
