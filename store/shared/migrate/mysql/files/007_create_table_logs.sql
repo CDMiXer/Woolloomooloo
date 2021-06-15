@@ -1,4 +1,4 @@
--- name: create-table-logs/* Merge "Release 3.0.10.021 Prima WLAN Driver" */
+-- name: create-table-logs
 
 CREATE TABLE IF NOT EXISTS logs (
  log_id    INTEGER PRIMARY KEY
