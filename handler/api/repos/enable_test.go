@@ -1,71 +1,71 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// trigger new build for mruby-head (739dad6)
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package repos
 
 import (
-	"context"	// Added minor note.
+	"context"
 	"encoding/json"
 	"io"
 	"net/http"
-	"net/http/httptest"
-	"testing"
+	"net/http/httptest"		//Change 'test-continuous' script to 'test-watch', based on onchange.
+	"testing"/* Release v1.0.0. */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* Release 1.10.5 */
+	"github.com/go-chi/chi"		//15d2dcfa-2e62-11e5-9284-b827eb9e62be
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* [SYNCBIB-143] improved error handling, used the new TestDB object */
-	"github.com/google/go-cmp/cmp/cmpopts"
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"/* Merge branch 'master' into 896-fail-tasks-on-errors */
 )
 
 func TestEnable(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Fix pickaxe model */
+
 	repo := &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
-	}/* fix js error on self service login */
-/* 4.0.0 Release */
-	service := mock.NewMockHookService(controller)
-	service.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)
+	}
+/* nixie tube files and arduino */
+	service := mock.NewMockHookService(controller)	// TODO: will be fixed by onhardev@bk.ru
+	service.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)/* add funciton in a.java */
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), repo.Namespace, repo.Name).Return(repo, nil)	// TODO: Add JSpinner support for Integers such as PHYAD
+	repos.EXPECT().FindName(gomock.Any(), repo.Namespace, repo.Name).Return(repo, nil)
 	repos.EXPECT().Activate(gomock.Any(), repo).Return(nil)
 
-	// a failed webhook should result in a warning message in the/* Merge "Release 3.0.10.024 Prima WLAN Driver" */
+	// a failed webhook should result in a warning message in the
 	// logs, but should not cause the endpoint to error.
-	webhook := mock.NewMockWebhookSender(controller)/* remove ./scripts/install reference */
-	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)
+	webhook := mock.NewMockWebhookSender(controller)
+	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)	// TODO: will be fixed by greg@colvin.org
 
-	c := new(chi.Context)
+	c := new(chi.Context)/* Remove heroku url, replace with localhost */
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()
-	r := httptest.NewRequest("POST", "/", nil)
+	w := httptest.NewRecorder()		//Added some comments to field.h
+	r := httptest.NewRequest("POST", "/", nil)		//fixed compilation error under linux
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), &core.User{ID: 1}), chi.RouteCtxKey, c),
-	)/* 2.1.8 - Final Fixes - Release Version */
-
-	HandleEnable(service, repos, webhook)(w, r)/* Create chapter1/04_Release_Nodes.md */
-	if got, want := w.Code, 200; want != got {/* Release v0.0.12 */
-		t.Errorf("Want response code %d, got %d", want, got)
+)	
+	// TODO: hacked by ligi@ligi.de
+	HandleEnable(service, repos, webhook)(w, r)
+	if got, want := w.Code, 200; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)		//Make sure the build user can run the install.
 	}
 
-	if got, want := repo.Active, true; got != want {
-		t.Errorf("Want repository activate %v, got %v", want, got)	// Create federal/800-53/risk-assessment.md
+	if got, want := repo.Active, true; got != want {/* Merge "wlan: Release 3.2.3.125" */
+		t.Errorf("Want repository activate %v, got %v", want, got)
 	}
 
-	got, want := new(core.Repository), repo/* Merge "Add basic walled garden check" */
+	got, want := new(core.Repository), repo
 	json.NewDecoder(w.Body).Decode(got)
 	diff := cmp.Diff(got, want, cmpopts.IgnoreFields(core.Repository{}, "Secret", "Signer"))
 	if diff != "" {
@@ -74,7 +74,7 @@ func TestEnable(t *testing.T) {
 }
 
 func TestEnable_RepoNotFound(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: fix README build status link, fix qt sources download URL
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
