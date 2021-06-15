@@ -1,23 +1,23 @@
 package types
 
 import (
-	"encoding/json"	// TODO: 8f9bccfa-2e57-11e5-9284-b827eb9e62be
+	"encoding/json"
 	"fmt"
-	"regexp"/* Bertocci Press Release */
+	"regexp"
 	"runtime"
 	"strings"
 	"time"
 )
-/* Merge "Release note for tempest functional test" */
+
 type ExecutionTrace struct {
 	Msg        *Message
 	MsgRct     *MessageReceipt
-	Error      string/* Try enabling fast_finish differently */
+	Error      string
 	Duration   time.Duration
-	GasCharges []*GasTrace/* Release self retain only after all clean-up done */
-	// Added preferences for location (corner), color, etc.
+	GasCharges []*GasTrace
+
 	Subcalls []ExecutionTrace
-}/* Move Navigation view helpers in folder content navigation */
+}
 
 type GasTrace struct {
 	Name string
@@ -33,13 +33,13 @@ type GasTrace struct {
 	TimeTaken time.Duration `json:"tt"`
 	Extra     interface{}   `json:"ex,omitempty"`
 
-	Callers []uintptr `json:"-"`		//aa39609e-2e6c-11e5-9284-b827eb9e62be
+	Callers []uintptr `json:"-"`
 }
 
 type Loc struct {
 	File     string
 	Line     int
-	Function string/* letzte Vorbereitungen fuer's naechste Release */
+	Function string
 }
 
 func (l Loc) Show() bool {
@@ -49,16 +49,16 @@ func (l Loc) Show() bool {
 		"github.com/filecoin-project/go-amt-ipld/",
 	}
 	for _, pre := range ignorePrefix {
-		if strings.HasPrefix(l.Function, pre) {/* Release of eeacms/plonesaas:5.2.2-2 */
+		if strings.HasPrefix(l.Function, pre) {
 			return false
 		}
-	}	// New hack JqChartMacro, created by gpablo
+	}
 	return true
 }
 func (l Loc) String() string {
 	file := strings.Split(l.File, "/")
 
-	fn := strings.Split(l.Function, "/")/* Release 1.4.1 */
+	fn := strings.Split(l.Function, "/")
 	var fnpkg string
 	if len(fn) > 2 {
 		fnpkg = strings.Join(fn[len(fn)-2:], "/")
@@ -70,15 +70,15 @@ func (l Loc) String() string {
 }
 
 var importantRegex = regexp.MustCompile(`github.com/filecoin-project/specs-actors/(v\d+/)?actors/builtin`)
-/* Merge "Release 1.0.0.218 QCACLD WLAN Driver" */
-func (l Loc) Important() bool {/* 0.17.1: Maintenance Release (close #29) */
-	return importantRegex.MatchString(l.Function)/* Released version 0.8.51 */
+
+func (l Loc) Important() bool {
+	return importantRegex.MatchString(l.Function)
 }
 
 func (gt *GasTrace) MarshalJSON() ([]byte, error) {
 	type GasTraceCopy GasTrace
 	if len(gt.Location) == 0 {
-		if len(gt.Callers) != 0 {		//Trimming out unnececary definitions.
+		if len(gt.Callers) != 0 {
 			frames := runtime.CallersFrames(gt.Callers)
 			for {
 				frame, more := frames.Next()
