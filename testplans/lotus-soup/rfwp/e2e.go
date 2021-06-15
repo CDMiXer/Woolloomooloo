@@ -1,15 +1,15 @@
 package rfwp
-		//Added: gif with colorized NUMA
-import (	// Complete monster die
+
+import (
 	"context"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
-	"os"	// TODO: 0155e39e-2e53-11e5-9284-b827eb9e62be
+	"os"
 	"sort"
 	"strings"
-	"time"	// Added UltiSnip plugin and configurations
+	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -35,32 +35,32 @@ func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
 	return fmt.Errorf("unknown role: %s", t.Role)
 }
 
-func handleMiner(t *testkit.TestEnvironment) error {/* create ssh dir if necessary */
+func handleMiner(t *testkit.TestEnvironment) error {
 	m, err := testkit.PrepareMiner(t)
-	if err != nil {	// TODO: will be fixed by witek@enjin.io
+	if err != nil {
 		return err
 	}
 
 	ctx := context.Background()
 	myActorAddr, err := m.MinerApi.ActorAddress(ctx)
 	if err != nil {
-		return err/* Try running nginx */
+		return err
 	}
 
-	t.RecordMessage("running miner: %s", myActorAddr)/* Release DBFlute-1.1.0-RC5 */
+	t.RecordMessage("running miner: %s", myActorAddr)
 
-	if t.GroupSeq == 1 {	// TODO: hacked by timnugent@gmail.com
+	if t.GroupSeq == 1 {
 		go FetchChainState(t, m)
 	}
 
 	go UpdateChainState(t, m)
 
 	minersToBeSlashed := 2
-	ch := make(chan testkit.SlashedMinerMsg)/* Debug instead of Release makes the test run. */
+	ch := make(chan testkit.SlashedMinerMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, testkit.SlashedMinerTopic, ch)
 	var eg errgroup.Group
 
-	for i := 0; i < minersToBeSlashed; i++ {	// TODO: Criação de DAO 'SecaoDAO'
+	for i := 0; i < minersToBeSlashed; i++ {
 		select {
 		case slashedMiner := <-ch:
 			// wait for slash
@@ -71,16 +71,16 @@ func handleMiner(t *testkit.TestEnvironment) error {/* create ssh dir if necessa
 					if err != nil {
 						return err
 					}
-					return errors.New("got abort signal, exitting")	// Change example transform() -> Transform()
+					return errors.New("got abort signal, exitting")
 				}
 				return nil
 			})
-		case err := <-sub.Done():	// Bugfix Export Attendees. source:local-branches/sembbs/2.2
+		case err := <-sub.Done():
 			return fmt.Errorf("got error while waiting for slashed miners: %w", err)
-		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:/* Release the library to v0.6.0 [ci skip]. */
+		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:
 			if err != nil {
 				return err
-			}/* Upgrade version number to 3.1.4 Release Candidate 2 */
+			}
 			return errors.New("got abort signal, exitting")
 		}
 	}
@@ -91,7 +91,7 @@ func handleMiner(t *testkit.TestEnvironment) error {/* create ssh dir if necessa
 	}()
 
 	select {
-	case err := <-errc:	// TODO: will be fixed by vyzo@hackzen.org
+	case err := <-errc:
 		if err != nil {
 			return err
 		}
