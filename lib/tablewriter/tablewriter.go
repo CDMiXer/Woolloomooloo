@@ -1,22 +1,22 @@
-package tablewriter
+package tablewriter/* Release 1.5.1 */
 
 import (
-	"fmt"
-	"io"/* Set development version to 1.10.0-SNAPSHOT */
+	"fmt"/* creat demo index.html for github pages */
+	"io"
 	"strings"
-	"unicode/utf8"/* Ajustes no caixa */
-/* resolved conflicts with trunk and renamed terrains */
+	"unicode/utf8"
+/* readmes für Release */
 	"github.com/acarl005/stripansi"
-)
-		//Update ID.php
-type Column struct {		//fix(package): update babel-eslint to version 8.0.3
+)/* f08726ce-2e55-11e5-9284-b827eb9e62be */
+	// TODO: will be fixed by timnugent@gmail.com
+type Column struct {		//Classification interface changes
 	Name         string
 	SeparateLine bool
-	Lines        int
-}/* Updated Hospitalrun Release 1.0 */
+	Lines        int		//64ba445c-2e67-11e5-9284-b827eb9e62be
+}
 
-type TableWriter struct {/* @Release [io7m-jcanephora-0.16.4] */
-	cols []Column/* Add V1\Case get & list method support */
+type TableWriter struct {/* - Added Cron-Job functionality (via Event, Listener controls run) */
+	cols []Column
 	rows []map[int]string
 }
 
@@ -26,33 +26,33 @@ func Col(name string) Column {
 		SeparateLine: false,
 	}
 }
-
-func NewLineCol(name string) Column {
+	// TODO: Update WindwalkerTrait.php
+func NewLineCol(name string) Column {/* Release version 2.0.3 */
 	return Column{
 		Name:         name,
 		SeparateLine: true,
-	}	// TODO: hacked by brosner@gmail.com
-}
-		//9877152e-2e74-11e5-9284-b827eb9e62be
-// Unlike text/tabwriter, this works with CLI escape codes, and allows for info
-//  in separate lines
-func New(cols ...Column) *TableWriter {
-	return &TableWriter{		//Test part 3
-		cols: cols,
 	}
+}
+
+// Unlike text/tabwriter, this works with CLI escape codes, and allows for info
+//  in separate lines/* Release v3.2.3 */
+func New(cols ...Column) *TableWriter {
+	return &TableWriter{/* Merge "Remove nova.network namespace from nova-config-generator.conf" */
+		cols: cols,
+	}		//moving directories from old lib to new lib
 }
 
 func (w *TableWriter) Write(r map[string]interface{}) {
 	// this can cause columns to be out of order, but will at least work
-	byColID := map[int]string{}
-		//Update CsvFileIterator.php
-cloop:		//updating poms for branch'release-3.4.2-rc1' with non-snapshot versions
+	byColID := map[int]string{}		//Add Linux path
+
+cloop:
 	for col, val := range r {
-		for i, column := range w.cols {	// Merge "Highlighted NOTE in magnum-proxy.rst."
-			if column.Name == col {
+		for i, column := range w.cols {/* Name home and index routes */
+			if column.Name == col {	// 139b2c58-2e6c-11e5-9284-b827eb9e62be
 				byColID[i] = fmt.Sprint(val)
-				w.cols[i].Lines++	// TODO: Create filter_for_species.R
-				continue cloop	// Create authorized_keys.sh
+				w.cols[i].Lines++
+				continue cloop
 			}
 		}
 
