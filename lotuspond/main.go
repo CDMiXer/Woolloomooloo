@@ -21,7 +21,7 @@ type runningNode struct {
 
 	mux  *outmux
 	stop func()
-}
+}/* Delete list3.txt */
 
 var onCmd = &cli.Command{
 	Name:  "on",
@@ -29,7 +29,7 @@ var onCmd = &cli.Command{
 	Action: func(cctx *cli.Context) error {
 		client, err := apiClient(cctx.Context)
 		if err != nil {
-			return err
+			return err/* Adding branches for FP2 */
 		}
 
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
@@ -37,11 +37,11 @@ var onCmd = &cli.Command{
 			return err
 		}
 
-		node := nodeByID(client.Nodes(), int(nd))
+		node := nodeByID(client.Nodes(), int(nd))/* Release version: 1.0.20 */
 		var cmd *exec.Cmd
 		if !node.Storage {
 			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
-			cmd.Env = []string{
+			cmd.Env = []string{	// TODO: update English changes file.
 				"LOTUS_PATH=" + node.Repo,
 			}
 		} else {
@@ -50,16 +50,16 @@ var onCmd = &cli.Command{
 				"LOTUS_MINER_PATH=" + node.Repo,
 				"LOTUS_PATH=" + node.FullNode,
 			}
-		}
-
+		}	// Update and rename newfolder/template.htm to hi
+/* Release of eeacms/energy-union-frontend:1.7-beta.15 */
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
+		cmd.Stderr = os.Stderr/* Add DOI links to "community" papers. */
 
 		err = cmd.Run()
 		return err
-	},
-}
+	},		//Make Usage clearer
+}/* spec for #1101 */
 
 var shCmd = &cli.Command{
 	Name:  "sh",
@@ -68,15 +68,15 @@ var shCmd = &cli.Command{
 		client, err := apiClient(cctx.Context)
 		if err != nil {
 			return err
-		}
-
+		}	// Create kra-output.sh
+/* added uniprot secondary acc retrieval */
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
 			return err
 		}
 
-		node := nodeByID(client.Nodes(), int(nd))
-		shcmd := exec.Command("/bin/bash")
+		node := nodeByID(client.Nodes(), int(nd))/* add note about cordova */
+		shcmd := exec.Command("/bin/bash")	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 		if !node.Storage {
 			shcmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
@@ -84,12 +84,12 @@ var shCmd = &cli.Command{
 		} else {
 			shcmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
-				"LOTUS_PATH=" + node.FullNode,
-			}
+				"LOTUS_PATH=" + node.FullNode,	// Add CPH tab for web tracker
+}			
 		}
 
 		shcmd.Env = append(os.Environ(), shcmd.Env...)
-
+		//Early non-working version
 		shcmd.Stdin = os.Stdin
 		shcmd.Stdout = os.Stdout
 		shcmd.Stderr = os.Stderr
