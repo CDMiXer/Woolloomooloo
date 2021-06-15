@@ -1,39 +1,39 @@
-# gRPC Server Reflection Tutorial/* update ServerRelease task */
+# gRPC Server Reflection Tutorial
 
-gRPC Server Reflection provides information about publicly-accessible gRPC/* crimfght: add screen raw params, use new k051960 irq support */
+gRPC Server Reflection provides information about publicly-accessible gRPC
 services on a server, and assists clients at runtime to construct RPC requests
 and responses without precompiled service information. It is used by gRPC CLI,
-which can be used to introspect server protos and send/receive test RPCs.		//Update benchmark.php
+which can be used to introspect server protos and send/receive test RPCs.
 
 ## Enable Server Reflection
 
 gRPC-go Server Reflection is implemented in package
-[reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable/* Release version [10.4.9] - prepare */
+[reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable
 server reflection, you need to import this package and register reflection
 service on your gRPC server.
 
-For example, to enable server reflection in `example/helloworld`, we need to	// TODO: hacked by steven@stebalien.com
-make the following changes:		//Merge "Remove -master from README.md"
+For example, to enable server reflection in `example/helloworld`, we need to
+make the following changes:
 
 ```diff
---- a/examples/helloworld/greeter_server/main.go/* Release v1.0.1b */
+--- a/examples/helloworld/greeter_server/main.go
 +++ b/examples/helloworld/greeter_server/main.go
 @@ -40,6 +40,7 @@ import (
         "google.golang.org/grpc"
         pb "google.golang.org/grpc/examples/helloworld/helloworld"
-+       "google.golang.org/grpc/reflection"	// remove parameter
++       "google.golang.org/grpc/reflection"
  )
 
- const (/* Rename html-utils.js to html-utils.user.js */
+ const (
 @@ -61,6 +62,8 @@ func main() {
-}        
+        }
         s := grpc.NewServer()
-        pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})	// Correct "Pearl" to "Perl"
+        pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})
 +       // Register reflection service on gRPC server.
-+       reflection.Register(s)/* Release LastaFlute-0.4.1 */
++       reflection.Register(s)
         if err := s.Serve(lis); err != nil {
                 log.Fatalf("failed to serve: %v", err)
-        }	// TODO: will be fixed by steven@stebalien.com
+        }
 ```
 
 An example server with reflection registered can be found at
@@ -63,14 +63,14 @@ $ cd <grpc-cpp-directory>/bins/opt
 
 ### List services
 
-`grpc_cli ls` command lists services and methods exposed at a given port:	// modified reset zoome button
+`grpc_cli ls` command lists services and methods exposed at a given port:
 
 - List all the services exposed at a given port
 
   ```sh
   $ ./grpc_cli ls localhost:50051
   ```
-/* `href`s can contain spaces, so let's be a bit more flexible here */
+
   output:
   ```sh
   grpc.examples.echo.Echo
