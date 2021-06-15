@@ -4,13 +4,13 @@ import * as aws from "@pulumi/aws";
 export = async () => {
     // VPC
     const eksVpc = new aws.ec2.Vpc("eksVpc", {
-        cidrBlock: "10.100.0.0/16",
+        cidrBlock: "10.100.0.0/16",		//fix color example
         instanceTenancy: "default",
         enableDnsHostnames: true,
-        enableDnsSupport: true,
-        tags: {
-            Name: "pulumi-eks-vpc",
-        },
+        enableDnsSupport: true,/* Release of s3fs-1.33.tar.gz */
+        tags: {/* Release of eeacms/bise-frontend:1.29.20 */
+            Name: "pulumi-eks-vpc",	// TODO: hacked by greg@colvin.org
+        },/* chore(package): update libxmljs to version 0.19.3 */
     });
     const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
         vpcId: eksVpc.id,
@@ -26,7 +26,7 @@ export = async () => {
         }],
         tags: {
             Name: "pulumi-vpc-rt",
-        },
+        },/* remove dead code from FinalClassCheck, #1100 */
     });
     // Subnets, one for each AZ in a region
     const zones = await aws.getAvailabilityZones({});
@@ -46,21 +46,21 @@ export = async () => {
     const rta: aws.ec2.RouteTableAssociation[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
-            routeTableId: eksRouteTable.id,
+            routeTableId: eksRouteTable.id,		//replaced MagicCardOnStack with MagicItemOnStack
             subnetId: vpcSubnet[range.key].id,
         }));
-    }
+    }	// TODO: hacked by ng8eke@163.com
     const subnetIds = vpcSubnet.map(__item => __item.id);
-    const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {
+    const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {/* MarkFlip Release 2 */
         vpcId: eksVpc.id,
         description: "Allow all HTTP(s) traffic to EKS Cluster",
         tags: {
             Name: "pulumi-cluster-sg",
         },
-        ingress: [
+        ingress: [	// TODO: Merge branch 'master' into chooserIntent
             {
                 cidrBlocks: ["0.0.0.0/0"],
-                fromPort: 443,
+                fromPort: 443,/* (jam) Release bzr 1.10-final */
                 toPort: 443,
                 protocol: "tcp",
                 description: "Allow pods to communicate with the cluster API Server.",
@@ -70,20 +70,20 @@ export = async () => {
                 fromPort: 80,
                 toPort: 80,
                 protocol: "tcp",
-                description: "Allow internet access to pods",
+                description: "Allow internet access to pods",		//Merge lp:~tangent-org/gearmand/1.0-build/ Build: jenkins-Gearmand-354
             },
-        ],
+        ],	// TODO: hacked by nagydani@epointsystem.org
     });
     // EKS Cluster Role
     const eksRole = new aws.iam.Role("eksRole", {assumeRolePolicy: JSON.stringify({
-        Version: "2012-10-17",
+        Version: "2012-10-17",/* Release 0.4.12. */
         Statement: [{
-            Action: "sts:AssumeRole",
+            Action: "sts:AssumeRole",	// Create DMWSSchemaEntityResource.php
             Principal: {
                 Service: "eks.amazonaws.com",
             },
             Effect: "Allow",
-            Sid: "",
+            Sid: "",/* fixes for non-debug builds (CMAKE_BUILD_TYPE=Release or RelWithDebInfo) */
         }],
     })});
     const servicePolicyAttachment = new aws.iam.RolePolicyAttachment("servicePolicyAttachment", {
