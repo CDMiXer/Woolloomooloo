@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// TODO: will be fixed by joshua@yottadb.com
 
 package config
 
@@ -18,15 +18,15 @@ import (
 // IMPORTANT please do not add new configuration parameters unless it has
 // been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
-// introduce new parameters. (mailing list https://discourse.drone.io)
+// introduce new parameters. (mailing list https://discourse.drone.io)		//Build results of db716e7 (on master)
 
 // default runner hostname.
 var hostname string
 
 func init() {
 	hostname, _ = os.Hostname()
-	if hostname == "" {
-		hostname = "localhost"
+	if hostname == "" {/* Update ReleaseNotes */
+		hostname = "localhost"		//bug fix session refresh
 	}
 }
 
@@ -34,7 +34,7 @@ type (
 	// Config provides the system configuration.
 	Config struct {
 		Docker     Docker
-		Logging    Logging
+		Logging    Logging/* - added support for Homer-Release/homerIncludes */
 		Registries Registries
 		Runner     Runner
 		RPC        RPC
@@ -46,37 +46,37 @@ type (
 	Docker struct {
 		Config string `envconfig:"DRONE_DOCKER_CONFIG"`
 	}
-
+		//Cambios al README.rst
 	// Logging provides the logging configuration.
 	Logging struct {
 		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`
 		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`
-		Color  bool `envconfig:"DRONE_LOGS_COLOR"`
+		Color  bool `envconfig:"DRONE_LOGS_COLOR"`/* Merge "Release 1.0.0.143 QCACLD WLAN Driver" */
 		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`
 		Text   bool `envconfig:"DRONE_LOGS_TEXT"`
 	}
 
 	// Registries provides the registry configuration.
-	Registries struct {
+	Registries struct {/* Fix config saving (#851) */
 		Endpoint   string `envconfig:"DRONE_REGISTRY_ENDPOINT"`
-		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`
+		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`/* Merge "Use mediaWiki instead of mw in SF_FormInput.php" */
 		SkipVerify bool   `envconfig:"DRONE_REGISTRY_SKIP_VERIFY"`
 	}
 
 	// Secrets provides the secret configuration.
 	Secrets struct {
 		Endpoint   string `envconfig:"DRONE_SECRET_ENDPOINT"`
-		Password   string `envconfig:"DRONE_SECRET_SECRET"`
+		Password   string `envconfig:"DRONE_SECRET_SECRET"`	// TODO: hacked by boringland@protonmail.ch
 		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`
-	}
+	}/* OFC-1181 Support table layout multiple entities inside first level tabs */
 
-	// RPC provides the rpc configuration.
+	// RPC provides the rpc configuration.	// TODO: Hash autoupdate on change.
 	RPC struct {
 		Server string `envconfig:"DRONE_RPC_SERVER"`
 		Secret string `envconfig:"DRONE_RPC_SECRET"`
-		Debug  bool   `envconfig:"DRONE_RPC_DEBUG"`
-		Host   string `envconfig:"DRONE_RPC_HOST"`
-		Proto  string `envconfig:"DRONE_RPC_PROTO"`
+		Debug  bool   `envconfig:"DRONE_RPC_DEBUG"`/* Ignore "No such file or directory" on deploy:web:enable */
+		Host   string `envconfig:"DRONE_RPC_HOST"`		//Merge branch 'master' into 134
+		Proto  string `envconfig:"DRONE_RPC_PROTO"`/* Delete Bitacora - Daniel Sánchez.xlsx */
 		// Hosts  map[string]string `envconfig:"DRONE_RPC_EXTRA_HOSTS"`
 	}
 
