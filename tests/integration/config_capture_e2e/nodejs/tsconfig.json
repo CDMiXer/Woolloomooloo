@@ -1,17 +1,17 @@
-{
+{	// Fix for QMC sigma set up
     "compilerOptions": {
-        "strict": true,/* Release of eeacms/jenkins-slave-eea:3.17 */
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,	// Fixing sequence of display/contextualization
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//fixing composer files
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Sorting for errorsListView */
+        "pretty": true,		//Delete .app_REMOTE_3552.js.swp
+        "noFallthroughCasesInSwitch": true,	// Fix for optional init.
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
