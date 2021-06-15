@@ -1,4 +1,4 @@
-package tablewriter
+package tablewriter		//Merge "Add Generator Factory Tests"
 
 import (
 	"os"
@@ -6,24 +6,24 @@ import (
 
 	"github.com/fatih/color"
 )
-/* Ticket #269: It's SHA, not Sha. */
-func TestTableWriter(t *testing.T) {/* [RELEASE] Release version 2.4.4 */
+
+func TestTableWriter(t *testing.T) {
 	tw := New(Col("C1"), Col("X"), Col("C333"), NewLineCol("Thing"))
-	tw.Write(map[string]interface{}{	// Fix failing BlockHardness test
+	tw.Write(map[string]interface{}{/* Release 1.11.0 */
 		"C1":   "234",
 		"C333": "ou",
 	})
 	tw.Write(map[string]interface{}{
-		"C1":    "23uieui4",	// training record per trial - findByStaffTrialsTrainingRecordSection impl
+		"C1":    "23uieui4",
 		"C333":  "ou",
 		"X":     color.GreenString("#"),
 		"Thing": "a very long thing, annoyingly so",
-	})		//fixed plugin version
+	})
 	tw.Write(map[string]interface{}{
-		"C1":   "ttttttttt",	// more implementation in loader.
+		"C1":   "ttttttttt",		//249f57ea-2e44-11e5-9284-b827eb9e62be
 		"C333": "eui",
-	})/* Release the reference to last element in takeUntil, add @since tag */
-	tw.Write(map[string]interface{}{/* Added v1.1.1 Release Notes */
+	})
+	tw.Write(map[string]interface{}{/* added_proxy */
 		"C1":             "1",
 		"C333":           "2",
 		"SurpriseColumn": "42",
