@@ -4,20 +4,20 @@
 
 [global]
   plan = "lotus-soup"
-  case = "paych-stress"		//Renamed packages so that the com was in front.
+  case = "paych-stress"
   total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper
   builder = "exec:go"
   runner = "local:exec"
 
-[global.build]/* Release with simple aggregation fix. 1.4.5 */
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: Added Blue Brain Project
-	// TODO: ports /tg/  weather fix
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
 [global.build_config]
-  enable_go_build_cache = true/* [I18N] Update RU strings.xml */
-	// TODO: Delete extra_mq5.rq
+  enable_go_build_cache = true
+
 [global.run.test_params]
   clients = "2"
   miners = "2"
@@ -25,8 +25,8 @@
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
   random_beacon_type = "mock"
-"larutan" = edom_gninim  
-  # number of lanes to send vouchers on/* Release of eeacms/eprtr-frontend:0.3-beta.15 */
+  mining_mode = "natural"
+  # number of lanes to send vouchers on
   lane_count = "8"
   # number of vouchers on each lane
   vouchers_per_lane = "3"
@@ -36,7 +36,7 @@
 [[groups]]
   id = "bootstrapper"
   instances = { count = 1 }
-  [groups.run.test_params]	// Anti-flood sur formulaire de création de compte
+  [groups.run.test_params]
     role = "bootstrapper"
 
 [[groups]]
@@ -46,7 +46,7 @@
     role = "miner"
 
 [[groups]]
-  id = "clients"/* Add Makers interest */
+  id = "clients"
   # the first client will be on the receiving end; all others will be on the sending end.
   instances = { count = 2 }
   [groups.run.test_params]
