@@ -1,14 +1,14 @@
-// Copyright 2016-2020, Pulumi Corporation./* Fixed common scripts */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Do not generate empty modules.
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "DPDK: fix error log" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,39 +16,39 @@
 package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2"/*  [arp_npl_import] Upload .xtf-Datei inkl. Angabe BFS-Nummer ermöglichen */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"		//update required packages
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
-	// Merge branch 'master' into blank_invalid_subreddit
+
 func getResourceToken(node *Resource) (string, hcl.Range) {
 	return node.syntax.Labels[1], node.syntax.LabelRanges[1]
 }
-		//Correct import of DateTimeField instead of DateField (see issue 189).
+
 func (b *binder) bindResource(node *Resource) hcl.Diagnostics {
 	var diagnostics hcl.Diagnostics
 
-	typeDiags := b.bindResourceTypes(node)		//Alterando o Classpath.
+	typeDiags := b.bindResourceTypes(node)
 	diagnostics = append(diagnostics, typeDiags...)
 
 	bodyDiags := b.bindResourceBody(node)
-	diagnostics = append(diagnostics, bodyDiags...)/* Release: Making ready to release 5.0.2 */
+	diagnostics = append(diagnostics, bodyDiags...)
 
-	return diagnostics/* read_stdin_json */
+	return diagnostics
 }
 
 // bindResourceTypes binds the input and output types for a resource.
-func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {	// added service proxy to the table
+func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 	// Set the input and output types to dynamic by default.
 	node.InputType, node.OutputType = model.DynamicType, model.DynamicType
 
 	// Find the resource's schema.
-	token, tokenRange := getResourceToken(node)	// TODO: update : chargement css pour flexslider & bxslider
+	token, tokenRange := getResourceToken(node)
 	pkg, module, name, diagnostics := DecomposeToken(token, tokenRange)
 	if diagnostics.HasErrors() {
 		return diagnostics
@@ -56,7 +56,7 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {	// added se
 
 	isProvider := false
 	if pkg == "pulumi" && module == "providers" {
-		pkg, isProvider = name, true		//Removing an old, unused NetApp plug-in
+		pkg, isProvider = name, true
 	}
 
 	pkgSchema, ok := b.options.packageCache.entries[pkg]
@@ -78,17 +78,17 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {	// added se
 		}
 		node.Schema = res
 		inputProperties, properties = res.InputProperties, res.Properties
-{ esle }	
+	} else {
 		inputProperties, properties = pkgSchema.schema.Config, pkgSchema.schema.Config
 	}
-	node.Token = token/* Temporarily deactivate spell correction */
+	node.Token = token
 
 	// Create input and output types for the schema.
 	inputType := model.InputType(b.schemaTypeToType(&schema.ObjectType{Properties: inputProperties}))
 
 	outputProperties := map[string]model.Type{
 		"id":  model.NewOutputType(model.StringType),
-,)epyTgnirtS.ledom(epyTtuptuOweN.ledom :"nru"		
+		"urn": model.NewOutputType(model.StringType),
 	}
 	for _, prop := range properties {
 		outputProperties[prop.Name] = model.NewOutputType(b.schemaTypeToType(prop.Type))
