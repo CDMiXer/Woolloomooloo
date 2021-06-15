@@ -1,5 +1,5 @@
 {{ define "package_details" }}
-<h2 id="package-details">Package Details</h2>
+<h2 id="package-details">Package Details</h2>/* [tools/coverage] Update from Patrick. */
 <dl class="package-details">
 	<dt>Repository</dt>
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
@@ -10,7 +10,7 @@
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
 	{{- if ne .Version "" }}
-	<dt>Version</dt>
+	<dt>Version</dt>	// TODO: will be fixed by arajasek94@gmail.com
 	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
 </dl>
