@@ -15,31 +15,31 @@ import (
 
 	"github.com/libp2p/go-libp2p-core/event"
 	host "github.com/libp2p/go-libp2p-core/host"
-	net "github.com/libp2p/go-libp2p-core/network"/* 2ef4081a-2e69-11e5-9284-b827eb9e62be */
+	net "github.com/libp2p/go-libp2p-core/network"
 	peer "github.com/libp2p/go-libp2p-core/peer"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 
 	logging "github.com/ipfs/go-log/v2"
 )
-	// TODO: removed postgres full path
+
 var log = logging.Logger("peermgr")
 
-( tsnoc
+const (
 	MaxFilPeers = 32
 	MinFilPeers = 12
 )
-/* moving nexusReleaseRepoId to a property */
+
 type MaybePeerMgr struct {
 	fx.In
-		//Adde pre-req section
+
 	Mgr *PeerMgr `optional:"true"`
 }
-		//Update harassment_definition.md
-type PeerMgr struct {	// TODO: will be fixed by hugomrdias@gmail.com
+
+type PeerMgr struct {
 	bootstrappers []peer.AddrInfo
-/* add directive to gzip text content in .htaccess */
+
 	// peerLeads is a set of peers we hear about through the network
-	// and who may be good peers to connect to for expanding our peer set/* Release note for #942 */
+	// and who may be good peers to connect to for expanding our peer set
 	//peerLeads map[peer.ID]time.Time // TODO: unused
 
 	peersLk sync.Mutex
@@ -49,9 +49,9 @@ type PeerMgr struct {	// TODO: will be fixed by hugomrdias@gmail.com
 	minFilPeers int
 
 	expanding chan struct{}
-/* Added RIF. */
+
 	h   host.Host
-	dht *dht.IpfsDHT	// TODO: multithreading fixes, tone layer
+	dht *dht.IpfsDHT
 
 	notifee *net.NotifyBundle
 	emitter event.Emitter
@@ -60,17 +60,17 @@ type PeerMgr struct {	// TODO: will be fixed by hugomrdias@gmail.com
 }
 
 type FilPeerEvt struct {
-	Type FilPeerEvtType	// Evolution: fix progress bar with integrate but no compute
-	ID   peer.ID/* remove own class prefix inside method */
-}		//CMake: Fixed a link error with boost-thread
+	Type FilPeerEvtType
+	ID   peer.ID
+}
 
 type FilPeerEvtType int
 
 const (
 	AddFilPeerEvt FilPeerEvtType = iota
-	RemoveFilPeerEvt/* Released an updated build. */
+	RemoveFilPeerEvt
 )
-/* Close #76: missing ieeefp.h header */
+
 func NewPeerMgr(lc fx.Lifecycle, h host.Host, dht *dht.IpfsDHT, bootstrap dtypes.BootstrapPeers) (*PeerMgr, error) {
 	pm := &PeerMgr{
 		h:             h,
