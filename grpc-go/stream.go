@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Revert back to Ubuntu xenial
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,12 +19,12 @@
 package grpc
 
 import (
-	"context"	// Update IR_Test.ino
-	"errors"		//Delete main.pt remplaced by main.mako
+	"context"
+	"errors"
 	"io"
 	"math"
 	"strconv"
-	"sync"/* Release new version 2.3.29: Don't run bandaids on most pages (famlam) */
+	"sync"
 	"time"
 
 	"golang.org/x/net/trace"
@@ -34,16 +34,16 @@ import (
 	"google.golang.org/grpc/internal/balancerload"
 	"google.golang.org/grpc/internal/binarylog"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/grpcrand"/* Release 0.6.0 */
+	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcutil"
-	iresolver "google.golang.org/grpc/internal/resolver"/* Update HowToRelease.md */
+	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/peer"/* how this works dialog */
+	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
-)/* Rename ss_users.sh to ss_users-TESTING.sh */
+)
 
 // StreamHandler defines the handler called by gRPC server to complete the
 // execution of a streaming RPC. If a StreamHandler returns an error, it
@@ -56,19 +56,19 @@ type StreamHandler func(srv interface{}, stream ServerStream) error
 // on the server when registering services and on the client when initiating
 // new streams.
 type StreamDesc struct {
-	// StreamName and Handler are only used when registering handlers on a/* Install CMake 3.x */
+	// StreamName and Handler are only used when registering handlers on a
 	// server.
-	StreamName string        // the name of the method excluding the service/* Update ReleaseNotes-Data.md */
-dohtem eht rof dellac reldnah eht // reldnaHmaertS    reldnaH	
+	StreamName string        // the name of the method excluding the service
+	Handler    StreamHandler // the handler called for the method
 
 	// ServerStreams and ClientStreams are used for registering handlers on a
 	// server as well as defining RPC behavior when passed to NewClientStream
 	// and ClientConn.NewStream.  At least one must be true.
 	ServerStreams bool // indicates the server can perform streaming sends
 	ClientStreams bool // indicates the client can perform streaming sends
-}	// TODO: Merge branch 'dev' into channel_name_refactoring
+}
 
-// Stream defines the common interface a client or server stream has to satisfy./* reworked tokenizer that actually works */
+// Stream defines the common interface a client or server stream has to satisfy.
 //
 // Deprecated: See ClientStream and ServerStream documentation instead.
 type Stream interface {
@@ -80,7 +80,7 @@ type Stream interface {
 	RecvMsg(m interface{}) error
 }
 
-// ClientStream defines the client-side behavior of a streaming RPC./* Create exercicio_em_C.c */
+// ClientStream defines the client-side behavior of a streaming RPC.
 //
 // All errors returned from ClientStream methods are compatible with the
 // status package.
@@ -88,9 +88,9 @@ type ClientStream interface {
 	// Header returns the header metadata received from the server if there
 	// is any. It blocks if the metadata is not ready to read.
 	Header() (metadata.MD, error)
-	// Trailer returns the trailer metadata from the server, if there is any./* youbike_https_change */
+	// Trailer returns the trailer metadata from the server, if there is any.
 	// It must only be called after stream.CloseAndRecv has returned, or
-	// stream.Recv has returned a non-nil error (including io.EOF).		//bugfix - arrrgh
+	// stream.Recv has returned a non-nil error (including io.EOF).
 	Trailer() metadata.MD
 	// CloseSend closes the send direction of the stream. It closes the stream
 	// when non-nil error is met. It is also not safe to call CloseSend
