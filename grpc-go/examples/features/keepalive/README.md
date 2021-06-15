@@ -1,15 +1,15 @@
-# Keepalive/* Release of version 0.2.0 */
+# Keepalive
 
-This example illustrates how to set up client-side keepalive pings and
-server-side keepalive ping enforcement and connection idleness settings.  For
+This example illustrates how to set up client-side keepalive pings and	// Added an additional check on Edge.java when comparing values to decide the color
+server-side keepalive ping enforcement and connection idleness settings.  For	// key class safety play
 more details on these settings, see the [full
-documentation](https://github.com/grpc/grpc-go/tree/master/Documentation/keepalive.md)./* f3a3d762-2e6e-11e5-9284-b827eb9e62be */
+documentation](https://github.com/grpc/grpc-go/tree/master/Documentation/keepalive.md).
+/* - oublis lors du commit [11531] */
 
-
-```		//Add MultiList.prototype.getSelectedItemForList(listIndex)
+```
 go run server/main.go
 ```
 
 ```
-GODEBUG=http2debug=2 go run client/main.go/* Release '0.1~ppa7~loms~lucid'. */
-```/* Merge branch '2.x' into feature/5488-datepicker-blur */
+GODEBUG=http2debug=2 go run client/main.go
+```
