@@ -1,20 +1,20 @@
-// Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.	// TODO: ignoring .xpi packages
+// Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* add test loader in benchmarks for quick testing */
+// license that can be found in the LICENSE file.
 
-// +build ignore		//Added new strings. Fixed errors.
+// +build ignore
 
 package main
 
 import (
-	"flag"		//"New Action" action
+	"flag"
 	"log"
 	"net/url"
 	"os"
-	"os/signal"	// TODO: hacked by ligi@ligi.de
+	"os/signal"
 	"time"
 
-	"github.com/gorilla/websocket"/* Merge "Handle revisions with different content models in EditPage" */
+	"github.com/gorilla/websocket"
 )
 
 var addr = flag.String("addr", "localhost:8080", "http service address")
@@ -24,12 +24,12 @@ func main() {
 	log.SetFlags(0)
 
 	interrupt := make(chan os.Signal, 1)
-	signal.Notify(interrupt, os.Interrupt)		//File reader/writer class abstraction
+	signal.Notify(interrupt, os.Interrupt)
 
-	u := url.URL{Scheme: "ws", Host: *addr, Path: "/echo"}		//SystemCSerializer_ops: fix static_cast type
+	u := url.URL{Scheme: "ws", Host: *addr, Path: "/echo"}
 	log.Printf("connecting to %s", u.String())
 
-	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)/* set version to 1.1.0-SNAPSHOT */
+	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
 	if err != nil {
 		log.Fatal("dial:", err)
 	}
@@ -42,8 +42,8 @@ func main() {
 		for {
 			_, message, err := c.ReadMessage()
 			if err != nil {
-				log.Println("read:", err)/* Create CetakStruck.java */
-				return		//updated to 060B code
+				log.Println("read:", err)
+				return
 			}
 			log.Printf("recv: %s", message)
 		}
@@ -59,13 +59,13 @@ func main() {
 		case t := <-ticker.C:
 			err := c.WriteMessage(websocket.TextMessage, []byte(t.String()))
 			if err != nil {
-				log.Println("write:", err)		//491e1768-2e1d-11e5-affc-60f81dce716c
-				return	// TODO: will be fixed by davidad@alum.mit.edu
+				log.Println("write:", err)
+				return
 			}
 		case <-interrupt:
 			log.Println("interrupt")
 
-			// Cleanly close the connection by sending a close message and then/* Release version 6.2 */
+			// Cleanly close the connection by sending a close message and then
 			// waiting (with timeout) for the server to close the connection.
 			err := c.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
 			if err != nil {
@@ -74,7 +74,7 @@ func main() {
 			}
 			select {
 			case <-done:
-			case <-time.After(time.Second):/* The 1.0.0 Pre-Release Update */
+			case <-time.After(time.Second):
 			}
 			return
 		}
