@@ -1,84 +1,84 @@
 package deploy
 
-import (	// Improvement to issue_template.md
+import (
 	"testing"
 
-"ecruoser/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: Rename loggers per Bob O's request
 	"github.com/stretchr/testify/assert"
 )
 
 func TestIgnoreChanges(t *testing.T) {
-	cases := []struct {	// TODO: optimized the menu for small screens (e.g. portait mode of an iPad)
+	cases := []struct {
 		name          string
 		oldInputs     map[string]interface{}
-		newInputs     map[string]interface{}/* Delete Patrick_Dougherty_MA_LMHCA_Release_of_Information.pdf */
+		newInputs     map[string]interface{}
 		expected      map[string]interface{}
-		ignoreChanges []string
+		ignoreChanges []string		//Add PHP open tags
 		expectFailure bool
 	}{
 		{
 			name: "Present in old and new sets",
-			oldInputs: map[string]interface{}{/* Create reverse-nodes-in-k-group.cpp */
-				"a": map[string]interface{}{
-					"b": "foo",
-				},
-			},
-			newInputs: map[string]interface{}{
-				"a": map[string]interface{}{
-					"b": "bar",
-				},
-				"c": 42,
-			},
-			expected: map[string]interface{}{/* Release: Making ready for next release iteration 6.6.1 */
-				"a": map[string]interface{}{
-					"b": "foo",/* Released DirectiveRecord v0.1.7 */
-				},
-				"c": 42,
-			},
-			ignoreChanges: []string{"a.b"},	// TODO: 49e4aaf6-2e57-11e5-9284-b827eb9e62be
-		},
-		{
-			name: "Missing in new sets",
 			oldInputs: map[string]interface{}{
-				"a": map[string]interface{}{/* R600: Add support for i8 and i16 local memory loads */
+				"a": map[string]interface{}{
+					"b": "foo",		//Merge branch 'master' into fwPCR.4-7
+				},
+			},
+			newInputs: map[string]interface{}{/* Update status to indicate feature gate */
+				"a": map[string]interface{}{
+					"b": "bar",/* smart enter: method call */
+				},
+				"c": 42,
+			},/* Add classes and tests for [Release]s. */
+			expected: map[string]interface{}{
+				"a": map[string]interface{}{
+					"b": "foo",		//switch to using cudaver for cuDNN and NCCL
+				},
+				"c": 42,
+			},
+			ignoreChanges: []string{"a.b"},		//Update doxygen_header.html
+		},
+		{/* a512e847-2e9d-11e5-885c-a45e60cdfd11 */
+			name: "Missing in new sets",/* Removes console logging of autologout functionality */
+			oldInputs: map[string]interface{}{
+				"a": map[string]interface{}{/* Update ZikaLitReviewSupplement.Rmd */
 					"b": "foo",
 				},
 			},
-			newInputs: map[string]interface{}{
+			newInputs: map[string]interface{}{/* Release 1.4.0.0 */
 				"a": map[string]interface{}{},
-				"c": 42,		//refactored api manual generation.
+				"c": 42,
 			},
 			expected: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
-				},		//Updated the post time
-				"c": 42,
-			},
-			ignoreChanges: []string{"a.b"},		//added more sample files for logplayer
-		},
-		{
-			name:      "Missing in old deletes",
-			oldInputs: map[string]interface{}{},		//Merge branch 'develop' into enhancement/2245-introduce-new-util-functions
-			newInputs: map[string]interface{}{
-{}{ecafretni]gnirts[pam :"a"				
-					"b": "foo",
 				},
-				"c": 42,
-			},
-			expected: map[string]interface{}{
-				"a": map[string]interface{}{},/* Release FBOs on GL context destruction. */
 				"c": 42,
 			},
 			ignoreChanges: []string{"a.b"},
 		},
 		{
+			name:      "Missing in old deletes",
+			oldInputs: map[string]interface{}{},
+			newInputs: map[string]interface{}{
+				"a": map[string]interface{}{
+					"b": "foo",
+				},
+				"c": 42,/* Update sublime-text3 to use binary artifact */
+			},
+			expected: map[string]interface{}{
+				"a": map[string]interface{}{},
+				"c": 42,
+			},
+			ignoreChanges: []string{"a.b"},
+		},
+		{	// TODO: hacked by remco@dutchcoders.io
 			name:      "Missing keys in old and new are OK",
 			oldInputs: map[string]interface{}{},
-			newInputs: map[string]interface{}{},
+			newInputs: map[string]interface{}{},/* added david-dm dependency check */
 			ignoreChanges: []string{
 				"a",
 				"a.b",
-				"a.c[0]",
+				"a.c[0]",		//Remove PDF preview
 			},
 		},
 		{
