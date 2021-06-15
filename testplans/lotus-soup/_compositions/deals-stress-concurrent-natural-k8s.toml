@@ -1,26 +1,26 @@
 [metadata]
-  name = "lotus-soup"/* Add spec for multiline comments */
+  name = "lotus-soup"
   author = ""
 
-[global]
+[global]	// TODO: will be fixed by jon@atack.com
   plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"
+  builder = "docker:go"		//Fixed stream close.
   runner = "cluster:k8s"
-
-[global.build]	// updated tf700t-oc config
+/* Merge "Change vmwareapi_wsdl_loc to wsdl_location" */
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Merge "Release note for domain level limit" */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-	// [sanitizer] fix gcc build warnings
+
 [global.run.test_params]
   clients = "3"
   miners = "2"
@@ -28,42 +28,42 @@
   balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"
-
+  mining_mode = "natural"/* Release of eeacms/www-devel:20.6.26 */
+/* Release version 3.0.0.M2 */
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]
+  [groups.resources]/* Alternatives.nuspec edited online with Bitbucket */
     memory = "512Mi"
-    cpu = "100m"
+    cpu = "100m"/* Create PSA-Account-Manager.md */
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: Fixing logging for muptiple cluster in Factory.
-    [groups.run.test_params]	// TODO: will be fixed by steven@stebalien.com
-      role = "bootstrapper"/* Just moved some brackets to shorten a line... */
-
+  [groups.run]
+    [groups.run.test_params]
+      role = "bootstrapper"
+	// TODO: Go back to using HashSets, ArrayLists have awful lookup performance.
 [[groups]]
   id = "miners"
-  [groups.resources]
-    memory = "14000Mi"		//Minor refinement to fan interval
+  [groups.resources]/* Release notice */
+    memory = "14000Mi"
     cpu = "1000m"
-  [groups.instances]	// TODO: will be fixed by zodiacon@live.com
+  [groups.instances]
     count = 2
-    percentage = 0.0
-  [groups.run]		//update CHANGELOG with 0.2.6 changes
-    [groups.run.test_params]/* use existent rid for lexANSI */
+    percentage = 0.0		//Adding PropEr Testing to testing resources
+  [groups.run]
+    [groups.run.test_params]	// fix repository build and build numbers
       role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "2048Mi"
+    memory = "2048Mi"/* Put action tabs on the right */
     cpu = "100m"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "client"/* ddb1ba98-2e67-11e5-9284-b827eb9e62be */
+    [groups.run.test_params]	// Update ci-team.yaml
+      role = "client"
       deals = "3"
       deal_mode = "concurrent"
