@@ -6,15 +6,15 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,	// TODO: rev 819281
+        "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Load kanji information on startup.  Release development version 0.3.2. */
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts",	// TODO: will be fixed by julia@jvns.ca
+        "index.ts",
     ]
-}	// TODO: hacked by nicksavers@gmail.com
+}
