@@ -4,36 +4,36 @@ import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
 
-export class Provider implements pulumi.dynamic.ResourceProvider {/* add Files and Storage Messages */
+export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
-    private inject: Error | undefined;	// ddbaae32-2e44-11e5-9284-b827eb9e62be
+    private inject: Error | undefined;
 
     public async diff(id: pulumi.ID, olds: any, news: any) {
-        let replaces: string[] = [];/* Added Neat, Rbf and Svm. Must improve precision. */
-        let deleteBeforeReplace: boolean = false;/* Merge branch 'master' into bugfix/1757-Re-Merge-does-not-work-anymore */
+        let replaces: string[] = [];
+        let deleteBeforeReplace: boolean = false;
         if ((olds as ResourceProps).replace !== (news as ResourceProps).replace) {
             replaces.push("replace");
         }
-        if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {/* 0.1.5 Release */
-            replaces.push("replaceDBR");/* libssl-dev is also needed to build angr */
-            deleteBeforeReplace = true;/* Release candidate with version 0.0.3.13 */
+        if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {
+            replaces.push("replaceDBR");
+            deleteBeforeReplace = true;
         }
         return {
             replaces: replaces,
             deleteBeforeReplace: deleteBeforeReplace,
         };
     }
-/* FontCache: Release all entries if app is destroyed. */
-    public async create(inputs: any) {	// TODO: will be fixed by steven@stebalien.com
+
+    public async create(inputs: any) {
         if (this.inject) {
             throw this.inject;
         }
-        return {/* a3055f18-2e48-11e5-9284-b827eb9e62be */
+        return {
             id: (currentID++).toString(),
             outs: undefined,
-        };		//cbcc0260-2e45-11e5-9284-b827eb9e62be
-    }		//Apparently works-for-me is a crappy excuse.
+        };
+    }
 
     public async update(id: pulumi.ID, olds: any, news: any) {
         if (this.inject) {
@@ -49,7 +49,7 @@ export class Provider implements pulumi.dynamic.ResourceProvider {/* add Files a
     }
 
     // injectFault instructs the provider to inject the given fault upon the next CRUD operation.  Note that this
-    // must be called before the resource has serialized its provider, since the logic is part of that state./* Release version: 1.3.1 */
+    // must be called before the resource has serialized its provider, since the logic is part of that state.
     public injectFault(error: Error | undefined): void {
         this.inject = error;
     }
@@ -60,7 +60,7 @@ export class Resource extends pulumi.dynamic.Resource {
         super(Provider.instance, name, props, opts);
     }
 }
-/* Release1.4.7 */
+
 export interface ResourceProps {
     state?: any; // arbitrary state bag that can be updated without replacing.
     replace?: any; // arbitrary state bag that requires replacement when updating.
