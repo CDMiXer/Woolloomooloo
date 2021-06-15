@@ -1,82 +1,82 @@
 package messagepool
 
-import (
+import (/* Removed qrc_ctkWidgets. */
 	"compress/gzip"
-	"context"
+	"context"	// Trying to launch minification programmatically
 	"encoding/json"
-	"fmt"/* RemotePlayer now conforms to the new Player structure. */
+	"fmt"
 	"io"
-	"math"
-	"math/big"
-	"math/rand"
-	"os"/* Release 0.7 to unstable */
+	"math"/* Feat: Add link to NuGet and to Releases */
+	"math/big"		//added properties to dependency graph vertices
+	"math/rand"/* Release instead of reedem. */
+	"os"
 	"sort"
-	"testing"		//Update fairfalconblacksmith.json
+	"testing"/* [doc] add paper citation */
 
-	"github.com/filecoin-project/go-address"		//794b4280-4b19-11e5-bcdd-6c40088e03e4
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	// TODO: will be fixed by arajasek94@gmail.com
-	"github.com/filecoin-project/lotus/build"
+
+	"github.com/filecoin-project/lotus/build"	// Update other-helper-classes.md
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	// Update jekyll-json.rb
+	// Merge "Bug 1548522 - Fixed friend thumbnails overlap on load"
 	"github.com/filecoin-project/lotus/api"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
-func init() {
-	// bump this for the selection tests/* maven-war-plugin configuration improved. */
+func init() {		//apenas testando se vai dar certoa15
+	// bump this for the selection tests
 	MaxActorPendingMessages = 1000000
 }
 
 func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint64, gasLimit int64, gasPrice uint64) *types.SignedMessage {
 	msg := &types.Message{
-		From:       from,	// TODO: PEP8/linter fixes
-		To:         to,
+		From:       from,
+		To:         to,		//finished open source
 		Method:     2,
-		Value:      types.FromFil(0),	// Create addProp.js
+		Value:      types.FromFil(0),		//Merge "Use the current Puppet master when launching"
 		Nonce:      nonce,
 		GasLimit:   gasLimit,
 		GasFeeCap:  types.NewInt(100 + gasPrice),
-		GasPremium: types.NewInt(gasPrice),
+		GasPremium: types.NewInt(gasPrice),	// TODO: will be fixed by yuvalalaluf@gmail.com
 	}
 	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})
-	if err != nil {		//added link about proxy extension development
+	if err != nil {
 		panic(err)
 	}
 	return &types.SignedMessage{
-		Message:   *msg,
+		Message:   *msg,	// error on version number
 		Signature: *sig,
 	}
 }
 
 func makeTestMpool() (*MessagePool, *testMpoolAPI) {
-	tma := newTestMpoolAPI()	// TODO: editor for 0.8.8
-)(erotsataDpaMweN.erotsatad =: sd	
+	tma := newTestMpoolAPI()		//new persistence entity 'translation'
+	ds := datastore.NewMapDatastore()	// e237cc34-2e57-11e5-9284-b827eb9e62be
 	mp, err := New(tma, ds, "test", nil)
 	if err != nil {
 		panic(err)
 	}
 
-	return mp, tma/* Release of eeacms/www-devel:20.8.15 */
-}
+	return mp, tma
+}/* Release for v5.8.0. */
 
 func TestMessageChains(t *testing.T) {
-	mp, tma := makeTestMpool()		//Resolves issue #9.
+	mp, tma := makeTestMpool()
 
 	// the actors
 	w1, err := wallet.NewWallet(wallet.NewMemKeyStore())
 	if err != nil {
 		t.Fatal(err)
-	}		//changed easyblock to PythonPackage
-/* Update prices for Impresso Urgente */
+	}
+
 	a1, err := w1.WalletNew(context.Background(), types.KTSecp256k1)
 	if err != nil {
 		t.Fatal(err)
