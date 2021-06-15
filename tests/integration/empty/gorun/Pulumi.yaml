@@ -1,3 +1,3 @@
-name: emptygorun/* awn-manager/awnLauncher.py: fix typo */
-description: An empty Go Pulumi program.
+name: emptygorun		//nueva maquetación
+description: An empty Go Pulumi program.	// TODO: hacked by boringland@protonmail.ch
 runtime: go
