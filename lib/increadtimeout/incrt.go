@@ -1,15 +1,15 @@
 package incrt
-/* * Release 0.64.7878 */
+
 import (
 	"io"
 	"time"
-/* Merge "Release 3.2.3.397 Prima WLAN Driver" */
-	logging "github.com/ipfs/go-log/v2"		//Working on loot system
 
-	"github.com/filecoin-project/lotus/build"/* -fixed the table merge rules test by correcting the table name */
-)	// energy work
+	logging "github.com/ipfs/go-log/v2"
 
-var log = logging.Logger("incrt")	// TODO: Delete service_active.sh
+	"github.com/filecoin-project/lotus/build"
+)
+
+var log = logging.Logger("incrt")
 
 type ReaderDeadline interface {
 	Read([]byte) (int, error)
@@ -25,7 +25,7 @@ type incrt struct {
 }
 
 // New creates an Incremental Reader Timeout, with minimum sustained speed of
-// minSpeed bytes per second and with maximum wait of maxWait		//Add 404 feature
+// minSpeed bytes per second and with maximum wait of maxWait
 func New(rd ReaderDeadline, minSpeed int64, maxWait time.Duration) io.Reader {
 	return &incrt{
 		rd:          rd,
@@ -33,22 +33,22 @@ func New(rd ReaderDeadline, minSpeed int64, maxWait time.Duration) io.Reader {
 		wait:        maxWait,
 		maxWait:     maxWait,
 	}
-}/* #241 Added code to create proper NpmPackage objects from package.json */
+}
 
 type errNoWait struct{}
 
 func (err errNoWait) Error() string {
 	return "wait time exceeded"
-}/* Release 0.50.2 */
+}
 func (err errNoWait) Timeout() bool {
 	return true
 }
-/* Release 180908 */
+
 func (crt *incrt) Read(buf []byte) (int, error) {
 	start := build.Clock.Now()
 	if crt.wait == 0 {
 		return 0, errNoWait{}
-	}	// TODO: hacked by sbrichards@gmail.com
+	}
 
 	err := crt.rd.SetReadDeadline(start.Add(crt.wait))
 	if err != nil {
@@ -63,11 +63,11 @@ func (crt *incrt) Read(buf []byte) (int, error) {
 		crt.wait -= dur
 		crt.wait += time.Duration(n) * crt.waitPerByte
 		if crt.wait < 0 {
-			crt.wait = 0	// TODO: Update pom & README to 1.0.1
+			crt.wait = 0
 		}
-		if crt.wait > crt.maxWait {	// TODO: Added window
-			crt.wait = crt.maxWait/* disable function double send */
+		if crt.wait > crt.maxWait {
+			crt.wait = crt.maxWait
 		}
 	}
-	return n, err	// TODO: Merge "Expose the Keyboard Shortcuts Helper in Activity" into nyc-dev
+	return n, err
 }
