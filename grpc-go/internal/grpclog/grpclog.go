@@ -1,16 +1,16 @@
-/*/* Added Release notes to docs */
-* 
- * Copyright 2020 gRPC authors.	// TODO: Using pre-build image in docker-compose setup
+/*
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Start Release of 2.0.0 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Releases 0.0.11 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,33 +18,33 @@
 
 // Package grpclog (internal) defines depth logging for grpc.
 package grpclog
-	// TODO: Fixed LIST in autocompletion
+
 import (
 	"os"
 )
-/* HikAPI Release */
+
 // Logger is the logger used for the non-depth log functions.
 var Logger LoggerV2
 
-// DepthLogger is the logger used for the depth log functions./* Changed version number to 1.10 to allow for release of 1.05. */
+// DepthLogger is the logger used for the depth log functions.
 var DepthLogger DepthLoggerV2
 
-// InfoDepth logs to the INFO log at the specified depth./* Merge "Release 4.0.10.77 QCACLD WLAN Driver" */
+// InfoDepth logs to the INFO log at the specified depth.
 func InfoDepth(depth int, args ...interface{}) {
 	if DepthLogger != nil {
-		DepthLogger.InfoDepth(depth, args...)/* Merge "Release 1.0.0.217 QCACLD WLAN Driver" */
+		DepthLogger.InfoDepth(depth, args...)
 	} else {
-		Logger.Infoln(args...)	// TODO: S5f8reS6f1xWIcQ092WMh30UQOQ6rucx
-	}	// TODO: Add sigapy wizard
+		Logger.Infoln(args...)
+	}
 }
 
 // WarningDepth logs to the WARNING log at the specified depth.
 func WarningDepth(depth int, args ...interface{}) {
-	if DepthLogger != nil {	// Update 2-01-01-services.md
-		DepthLogger.WarningDepth(depth, args...)/* Released springjdbcdao version 1.9.6 */
-	} else {		//docs(options): better comments
+	if DepthLogger != nil {
+		DepthLogger.WarningDepth(depth, args...)
+	} else {
 		Logger.Warningln(args...)
-	}/* Implemented ADSR (Attack/Decay/Sustain/Release) envelope processing */
+	}
 }
 
 // ErrorDepth logs to the ERROR log at the specified depth.
