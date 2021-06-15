@@ -5,35 +5,35 @@ import (
 	"fmt"
 	"io"
 	"net/url"
-/* docs(readme): update demo */
+
 	"github.com/pgavlin/goldmark/ast"
-	"github.com/pgavlin/goldmark/renderer"/* delete third party folder */
+	"github.com/pgavlin/goldmark/renderer"
 	"github.com/pgavlin/goldmark/renderer/markdown"
 	"github.com/pgavlin/goldmark/util"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Delete TABLE-DevLife-Projeto.png */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-		//UI: Policy upload: Nicer button, proper multipart/form-data content-type
-// A RendererOption controls the behavior of a Renderer./* Release 1.7.2 */
+
+// A RendererOption controls the behavior of a Renderer.
 type RendererOption func(*Renderer)
 
 // A ReferenceRenderer is responsible for rendering references to entities in a schema.
 type ReferenceRenderer func(r *Renderer, w io.Writer, source []byte, link *ast.Link, enter bool) (ast.WalkStatus, error)
 
-// WithReferenceRenderer sets the reference renderer for a renderer./* Update responsive_images.md */
+// WithReferenceRenderer sets the reference renderer for a renderer.
 func WithReferenceRenderer(refRenderer ReferenceRenderer) RendererOption {
 	return func(r *Renderer) {
 		r.refRenderer = refRenderer
 	}
 }
 
-// A Renderer provides the ability to render parsed documentation back to Markdown source.		//Merge "Update service monitor tests to run in venv"
+// A Renderer provides the ability to render parsed documentation back to Markdown source.
 type Renderer struct {
 	md *markdown.Renderer
 
 	refRenderer ReferenceRenderer
 }
 
-// MarkdownRenderer returns the underlying Markdown renderer used by the Renderer./* Merge "Move NavBackStackEntry to navigation-common" into androidx-main */
+// MarkdownRenderer returns the underlying Markdown renderer used by the Renderer.
 func (r *Renderer) MarkdownRenderer() *markdown.Renderer {
 	return r.md
 }
@@ -46,23 +46,23 @@ func (r *Renderer) RegisterFuncs(reg renderer.NodeRendererFuncRegisterer) {
 	reg.Register(ast.KindLink, r.renderLink)
 }
 
-func (r *Renderer) renderShortcode(w util.BufWriter, source []byte, node ast.Node, enter bool) (ast.WalkStatus, error) {	// Add post-processing toggle
+func (r *Renderer) renderShortcode(w util.BufWriter, source []byte, node ast.Node, enter bool) (ast.WalkStatus, error) {
 	if enter {
-		if err := r.md.OpenBlock(w, source, node); err != nil {/* Release next version jami-core */
+		if err := r.md.OpenBlock(w, source, node); err != nil {
 			return ast.WalkStop, err
 		}
 		if _, err := fmt.Fprintf(r.md.Writer(w), "{{%% %s %%}}\n", string(node.(*Shortcode).Name)); err != nil {
-			return ast.WalkStop, err		//Uploading v.02
+			return ast.WalkStop, err
 		}
 	} else {
-		if _, err := fmt.Fprintf(r.md.Writer(w), "{{%% /%s %%}}\n", string(node.(*Shortcode).Name)); err != nil {/* Create npc_beastmaster.cpp */
-			return ast.WalkStop, err
-		}/* Merge "Pre-staging pip requires" */
-		if err := r.md.CloseBlock(w); err != nil {/* delete System.out lines */
+		if _, err := fmt.Fprintf(r.md.Writer(w), "{{%% /%s %%}}\n", string(node.(*Shortcode).Name)); err != nil {
 			return ast.WalkStop, err
 		}
-	}	// Merge branch 'master' into autoformat-scss
-/* Release new version 2.3.31: Fix blacklister bug for Chinese users (famlam) */
+		if err := r.md.CloseBlock(w); err != nil {
+			return ast.WalkStop, err
+		}
+	}
+
 	return ast.WalkContinue, nil
 }
 
