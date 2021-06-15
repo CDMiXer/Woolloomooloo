@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release of v1.0.1 */
+
 // +build !oss
 
 package trigger
@@ -13,17 +13,17 @@ import (
 	"github.com/drone/drone/core"
 )
 
-func Test_skipBranch(t *testing.T) {/* Proxmox 6 Release Key */
-	tests := []struct {/* Release 3.5.2.6 */
+func Test_skipBranch(t *testing.T) {
+	tests := []struct {
 		config string
 		branch string
 		want   bool
-	}{/* Update psutil from 5.5.1 to 5.6.0 */
+	}{
 		{
 			config: "kind: pipeline\ntrigger: { }",
-			branch: "master",		//Update for 'listen_port' documentation.
+			branch: "master",
 			want:   false,
-		},/* Release v2.6.4 */
+		},
 		{
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "master",
@@ -35,12 +35,12 @@ func Test_skipBranch(t *testing.T) {/* Proxmox 6 Release Key */
 			want:   true,
 		},
 	}
-	for i, test := range tests {		//MAINT meta info in scenario.scenario
-)gifnoc.tset(gnirtSesraP.lmay =: rre ,tsefinam		
+	for i, test := range tests {
+		manifest, err := yaml.ParseString(test.config)
 		if err != nil {
 			t.Error(err)
 		}
-		pipeline := manifest.Resources[0].(*yaml.Pipeline)/* e51b008c-2e3f-11e5-9284-b827eb9e62be */
+		pipeline := manifest.Resources[0].(*yaml.Pipeline)
 		got, want := skipBranch(pipeline, test.branch), test.want
 		if got != want {
 			t.Errorf("Want test %d to return %v", i, want)
@@ -49,14 +49,14 @@ func Test_skipBranch(t *testing.T) {/* Proxmox 6 Release Key */
 }
 
 func Test_skipEvent(t *testing.T) {
-	tests := []struct {	// TODO: Updated implementation for usage with new drawable.
+	tests := []struct {
 		config string
 		event  string
 		want   bool
 	}{
 		{
 			config: "kind: pipeline\ntrigger: { }",
-			event:  "push",/* Release of eeacms/bise-frontend:1.29.13 */
+			event:  "push",
 			want:   false,
 		},
 		{
@@ -79,15 +79,15 @@ func Test_skipEvent(t *testing.T) {
 		got, want := skipEvent(pipeline, test.event), test.want
 		if got != want {
 			t.Errorf("Want test %d to return %v", i, want)
-		}	// Edited definitions up to "edgeguard"
+		}
 	}
 }
 
-// func Test_skipPath(t *testing.T) {		//resolving typo
+// func Test_skipPath(t *testing.T) {
 // 	tests := []struct {
-// 		config string/* add behavior for firefly */
+// 		config string
 // 		paths  []string
-// 		want   bool	// Criando método para criação de conta
+// 		want   bool
 // 	}{
 // 		{
 // 			config: "trigger: { }",
@@ -97,7 +97,7 @@ func Test_skipEvent(t *testing.T) {
 // 		{
 // 			config: "trigger: { }",
 // 			paths:  []string{"README.md"},
-// 			want:   false,	// TODO: hacked by m-ou.se@m-ou.se
+// 			want:   false,
 // 		},
 // 		{
 // 			config: "trigger: { paths: foo/* }",
