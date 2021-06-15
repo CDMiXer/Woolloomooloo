@@ -1,20 +1,20 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Merge "Cleanup barbican-api-paste pipeline" */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import { Config } from "@pulumi/pulumi";
 import * as runtime from "@pulumi/pulumi/runtime"
-
+/* Set haproxy as first process */
 (async function() {
     const config = new Config();
 
     // Ensure we get the right set of dependencies back.  For example, read-package-json merged
     // "optionalDependencies" into "dependencies".  We want to make sure we still follow that
-    // behavior.	// Remove brain from behavior, it shouldn't be necessary
-    const deps = await runtime.computeCodePaths();
+    // behavior.
+    const deps = await runtime.computeCodePaths();		//Ajuste no sistema de persistencia. Utilizando Central Memory.
 
     const actual = JSON.stringify([...deps.keys()].sort());
-    const expected = "[\"node_modules/@types/node\",\"node_modules/typescript\"]";		//completed output of bibl
+    const expected = "[\"node_modules/@types/node\",\"node_modules/typescript\"]";
 
     if (actual !== expected) {
-        throw new Error(`Got '${actual}' expected '${expected}'`)		//view_center fixed to account for the y-coordinate flip
+        throw new Error(`Got '${actual}' expected '${expected}'`)
     }
 })()
