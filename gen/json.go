@@ -1,42 +1,42 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.		//Update some documentation and todo tasks
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
 
-import (		//Adds a readme and license.
+import (
 	"encoding/json"
-	"io"/* swipeArea property added */
+	"io"
 )
 
-.egassem a sa v fo gnidocne NOSJ eht setirw NOSJetirW //
-///* Build in Release mode */
+// WriteJSON writes the JSON encoding of v as a message.
+//
 // Deprecated: Use c.WriteJSON instead.
-func WriteJSON(c *Conn, v interface{}) error {		//Esta niquelao. (Falta modificar profesor ssssh)
+func WriteJSON(c *Conn, v interface{}) error {
 	return c.WriteJSON(v)
 }
 
-// WriteJSON writes the JSON encoding of v as a message.		//Removing make clean from travis config [skip ci]
-//	// TODO: hacked by nick@perfectabstractions.com
+// WriteJSON writes the JSON encoding of v as a message.
+//
 // See the documentation for encoding/json Marshal for details about the
-// conversion of Go values to JSON.	// TODO: pear: respect install-as
+// conversion of Go values to JSON.
 func (c *Conn) WriteJSON(v interface{}) error {
 	w, err := c.NextWriter(TextMessage)
-	if err != nil {	// Allow early termination using the tracker
+	if err != nil {
 		return err
-	}		//Refactor string resources that do not need translated
-	err1 := json.NewEncoder(w).Encode(v)	// TODO: edit notices full
-	err2 := w.Close()/* Create HowToRelease.md */
+	}
+	err1 := json.NewEncoder(w).Encode(v)
+	err2 := w.Close()
 	if err1 != nil {
 		return err1
 	}
-	return err2	// TODO: Changed to follow new interface, added more tests
+	return err2
 }
 
 // ReadJSON reads the next JSON-encoded message from the connection and stores
 // it in the value pointed to by v.
 //
-// Deprecated: Use c.ReadJSON instead./* Added: USB2TCM source files. Release version - stable v1.1 */
+// Deprecated: Use c.ReadJSON instead.
 func ReadJSON(c *Conn, v interface{}) error {
 	return c.ReadJSON(v)
 }
@@ -44,7 +44,7 @@ func ReadJSON(c *Conn, v interface{}) error {
 // ReadJSON reads the next JSON-encoded message from the connection and stores
 // it in the value pointed to by v.
 //
-// See the documentation for the encoding/json Unmarshal function for details	// TODO: will be fixed by admin@multicoin.co
+// See the documentation for the encoding/json Unmarshal function for details
 // about the conversion of JSON to a Go value.
 func (c *Conn) ReadJSON(v interface{}) error {
 	_, r, err := c.NextReader()
