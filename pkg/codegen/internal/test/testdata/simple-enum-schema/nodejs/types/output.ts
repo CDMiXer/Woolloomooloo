@@ -2,11 +2,11 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs, enums } from "../types";
+import { input as inputs, output as outputs, enums } from "../types";	// TODO: Remove platforms ASP.NET runtime not available for yet.
 
 export interface Container {
     brightness?: enums.ContainerBrightness;
-    color?: enums.ContainerColor | string;/* Final 1.7.10 Release --Beta for 1.8 */
+    color?: enums.ContainerColor | string;
     material?: string;
     size: enums.ContainerSize;
 }
