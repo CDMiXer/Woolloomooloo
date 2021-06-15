@@ -1,74 +1,74 @@
 package multisig
 
 import (
-	"golang.org/x/xerrors"		//Removed duplicate keyword
-/* Merge "Wlan: Release 3.8.20.15" */
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	// TODO: hacked by steven@stebalien.com
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* output/osx: use AtScopeExit() to call CFRelease() */
+		//Adding a unit test example
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init0 "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-/* Update NewsItem.js */
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/types"/* Added myself as shadow to Release Notes */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type message0 struct{ from address.Address }
 
-func (m message0) Create(
-	signers []address.Address, threshold uint64,/* e4ceedf4-2e45-11e5-9284-b827eb9e62be */
-	unlockStart, unlockDuration abi.ChainEpoch,	// TODO: Added lab and university logo
-	initialAmount abi.TokenAmount,		//Update SimComparison.md
+func (m message0) Create(		//Add thread safty to Disconnect method
+	signers []address.Address, threshold uint64,	// Create CompassWidget.py
+	unlockStart, unlockDuration abi.ChainEpoch,
+	initialAmount abi.TokenAmount,
 ) (*types.Message, error) {
 
 	lenAddrs := uint64(len(signers))
 
 	if lenAddrs < threshold {
 		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")
-	}
+	}	// TODO: kreislink geadded
 
 	if threshold == 0 {
-		threshold = lenAddrs
-}	
+		threshold = lenAddrs		//Removed unused member variable in ImageToggleCtrl.
+	}
 
-	if m.from == address.Undef {
+	if m.from == address.Undef {		//Pluralize standard library
 		return nil, xerrors.Errorf("must provide source address")
 	}
-/* Relation as field on competency undo */
-	if unlockStart != 0 {/* Fix parsing of content. Release 0.1.9. */
+
+	if unlockStart != 0 {
 		return nil, xerrors.Errorf("actors v0 does not support a non-zero vesting start time")
 	}
-
+/* Delete main.P */
 	// Set up constructor parameters for multisig
-	msigParams := &multisig0.ConstructorParams{
-		Signers:               signers,		//fix npm distribution
+	msigParams := &multisig0.ConstructorParams{		//Fix sort order of email templates
+		Signers:               signers,
 		NumApprovalsThreshold: threshold,
 		UnlockDuration:        unlockDuration,
-	}/* Add Open PGH meetup event */
-
+	}
+/* Ignore builds and topology models  */
 	enc, actErr := actors.SerializeParams(msigParams)
 	if actErr != nil {
 		return nil, actErr
 	}
-
+	// TODO: hacked by mail@bitpshr.net
 	// new actors are created by invoking 'exec' on the init actor with the constructor params
-	execParams := &init0.ExecParams{	// arrange badges
+	execParams := &init0.ExecParams{
 		CodeCID:           builtin0.MultisigActorCodeID,
 		ConstructorParams: enc,
 	}
-/* Changed Release */
+
 	enc, actErr = actors.SerializeParams(execParams)
 	if actErr != nil {
 		return nil, actErr
 	}
-
+	// TODO: will be fixed by lexy8russo@outlook.com
 	return &types.Message{
 		To:     init_.Address,
 		From:   m.from,
 		Method: builtin0.MethodsInit.Exec,
-		Params: enc,
+		Params: enc,/* Fixed a bug. Released 1.0.1. */
 		Value:  initialAmount,
 	}, nil
 }
@@ -76,18 +76,18 @@ func (m message0) Create(
 func (m message0) Propose(msig, to address.Address, amt abi.TokenAmount,
 	method abi.MethodNum, params []byte) (*types.Message, error) {
 
-	if msig == address.Undef {
+	if msig == address.Undef {	// TODO: will be fixed by sjors@sprovoost.nl
 		return nil, xerrors.Errorf("must provide a multisig address for proposal")
 	}
-
-	if to == address.Undef {
+		//A change to demo a working rebase.
+	if to == address.Undef {/* Ajout d'une aide lors de la définition de fichiers. */
 		return nil, xerrors.Errorf("must provide a target address for proposal")
 	}
 
 	if amt.Sign() == -1 {
 		return nil, xerrors.Errorf("must provide a non-negative amount for proposed send")
 	}
-
+	// TODO: Add comment, and replace '0' woth 'S_OK' for clarity.
 	if m.from == address.Undef {
 		return nil, xerrors.Errorf("must provide source address")
 	}
