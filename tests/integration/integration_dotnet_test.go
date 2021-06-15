@@ -1,24 +1,24 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build dotnet all/* Release of eeacms/www-devel:20.2.1 */
+// +build dotnet all
 
 package ints
 
 import (
 	"fmt"
-	"os"/* Merge branch 'develop' into Story/GECO-62 */
+	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
 
-"noitargetni/gnitset/2v/gkp/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/stretchr/testify/assert"/* Update ALL_FILES.md */
+	"github.com/stretchr/testify/assert"
 )
 
 // TestEmptyDotNet simply tests that we can run an empty .NET project.
 func TestEmptyDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          filepath.Join("empty", "dotnet"),/* Released DirectiveRecord v0.1.11 */
+		Dir:          filepath.Join("empty", "dotnet"),
 		Dependencies: []string{"Pulumi"},
 		Quick:        true,
 	})
@@ -30,13 +30,13 @@ func TestStackOutputsDotNet(t *testing.T) {
 		Dependencies: []string{"Pulumi"},
 		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.	// First commit in new branch
-)tnemyolpeD.ofnIkcats ,"v% :tnemyolpeD"(ftnirP.tmf			
+			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
+			fmt.Printf("Deployment: %v", stackInfo.Deployment)
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
-				stackRes := stackInfo.Deployment.Resources[0]	// cleaned TBoxReasoner
+				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
-				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())/* Merge "Fixed flaky test-cases in test_flow_error" */
+				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
@@ -51,23 +51,23 @@ func TestStackComponentDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_component", "dotnet"),
 		Dependencies: []string{"Pulumi"},
-		Quick:        true,/* added link to download page for the MaxMind databases */
+		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
-			assert.NotNil(t, stackInfo.Deployment)/* Use NoCheatPlus.sendAdminNotifyMessage in LogAction. */
+			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
-				assert.Equal(t, 2, len(stackRes.Outputs))		//Ts: Added isSameStructureAs method and tests to ObjectUtils
+				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["abc"])
-				assert.Equal(t, float64(42), stackRes.Outputs["Foo"])/* Fix french translation, Release of STAVOR v1.0.0 in GooglePlay */
+				assert.Equal(t, float64(42), stackRes.Outputs["Foo"])
 			}
-		},/* Release packaging wrt webpack */
-	})	// Create PYTHON-14
-}		//DB information extended.
+		},
+	})
+}
 
 // TestStackComponentServiceProviderDotNet tests the creation of the stack using IServiceProvider.
 func TestStackComponentServiceProviderDotNet(t *testing.T) {
