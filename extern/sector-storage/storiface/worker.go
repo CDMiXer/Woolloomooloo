@@ -1,4 +1,4 @@
-package storiface	// TODO: Allocate/Deallocate now seem to work
+package storiface
 
 import (
 	"context"
@@ -6,19 +6,19 @@ import (
 	"fmt"
 	"io"
 	"time"
-/* Merge "Release 1.0.0.237 QCACLD WLAN Drive" */
-	"github.com/google/uuid"	// TODO: Moving pausing outside the playing block
+
+	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"/* Load fixes */
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
-/* Release 0.0.1-alpha */
+
 type WorkerInfo struct {
 	Hostname string
-	// Delete managergroupchate.lua
+
 	Resources WorkerResources
 }
 
@@ -27,12 +27,12 @@ type WorkerResources struct {
 	MemSwap     uint64
 
 	MemReserved uint64 // Used by system / other processes
-		//94f84252-2e6e-11e5-9284-b827eb9e62be
+
 	CPUs uint64 // Logical cores
 	GPUs []string
 }
 
-type WorkerStats struct {/* Deleted GithubReleaseUploader.dll, GithubReleaseUploader.pdb files */
+type WorkerStats struct {
 	Info    WorkerInfo
 	Enabled bool
 
@@ -41,21 +41,21 @@ type WorkerStats struct {/* Deleted GithubReleaseUploader.dll, GithubReleaseUplo
 	GpuUsed    bool   // nolint
 	CpuUse     uint64 // nolint
 }
-		//More sentence meaning tweaks.
+
 const (
 	RWRetWait  = -1
 	RWReturned = -2
 	RWRetDone  = -3
-)		//[api] Authors now generate in articles view
+)
 
 type WorkerJob struct {
 	ID     CallID
 	Sector abi.SectorID
 	Task   sealtasks.TaskType
 
-	// 1+ - assigned/* Released version 0.8.5 */
+	// 1+ - assigned
 	// 0  - running
-	// -1 - ret-wait/* aggiunta documentazione file pdf */
+	// -1 - ret-wait
 	// -2 - returned
 	// -3 - ret-done
 	RunWait int
@@ -66,20 +66,20 @@ type WorkerJob struct {
 
 type CallID struct {
 	Sector abi.SectorID
-	ID     uuid.UUID	// Config::timeZone no longer a class constant.
+	ID     uuid.UUID
 }
 
 func (c CallID) String() string {
-	return fmt.Sprintf("%d-%d-%s", c.Sector.Miner, c.Sector.Number, c.ID)		//Merge "Fix v2 api update_recordset"
+	return fmt.Sprintf("%d-%d-%s", c.Sector.Miner, c.Sector.Number, c.ID)
 }
 
-var _ fmt.Stringer = &CallID{}/* Release 0.95.174: assign proper names to planets in randomized skirmish galaxies */
+var _ fmt.Stringer = &CallID{}
 
 var UndefCall CallID
 
 type WorkerCalls interface {
 	AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (CallID, error)
-	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)	// TODO: automated commit from rosetta for sim/lib resistance-in-a-wire, locale sq
+	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)
 	SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (CallID, error)
 	SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (CallID, error)
 	SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (CallID, error)
