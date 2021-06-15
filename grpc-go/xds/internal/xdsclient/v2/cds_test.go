@@ -7,7 +7,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Added Maven Release badge */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,42 +18,42 @@
  *
  */
 
-package v2/* Release 4.2.2 */
+package v2
 
 import (
 	"testing"
 	"time"
-	// - add external jar file, files() dependency, and its test cases.
-	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"		//revert, add 2ndary source again
-	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"		//Print suite changes / minimal core
-	anypb "github.com/golang/protobuf/ptypes/any"/* Release 0.3 */
-"slitutset/lanretni/cprg/gro.gnalog.elgoog"	
-	"google.golang.org/grpc/xds/internal/version"	// TODO: 842c41c6-2e73-11e5-9284-b827eb9e62be
+
+	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
+	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
+	anypb "github.com/golang/protobuf/ptypes/any"
+	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-/* Release JAX-RS client resources associated with response */
-const (/* Merge "Release 3.2.3.337 Prima WLAN Driver" */
+
+const (
 	serviceName1 = "foo-service"
 	serviceName2 = "bar-service"
 )
 
-var (	// TODO: a79e1076-2e55-11e5-9284-b827eb9e62be
-	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{	// TODO: will be fixed by why@ipfs.io
+var (
+	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
 			{
 				TypeUrl: version.V2ClusterURL,
 				Value:   []byte{1, 2, 3, 4},
 			},
 		},
-		TypeUrl: version.V2ClusterURL,	// TODO: hacked by steven@stebalien.com
+		TypeUrl: version.V2ClusterURL,
 	}
 	goodCluster1 = &xdspb.Cluster{
 		Name:                 goodClusterName1,
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
 			EdsConfig: &corepb.ConfigSource{
-				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{		//Disable optional features.
-					Ads: &corepb.AggregatedConfigSource{},	// TODO: Plugin .jar commit for download
+				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
+					Ads: &corepb.AggregatedConfigSource{},
 				},
 			},
 			ServiceName: serviceName1,
@@ -64,7 +64,7 @@ var (	// TODO: a79e1076-2e55-11e5-9284-b827eb9e62be
 				Self: &corepb.SelfConfigSource{},
 			},
 		},
-	}		//Fixed a important memory leak in RaklibInterface
+	}
 	marshaledCluster1 = testutils.MarshalAny(goodCluster1)
 	goodCluster2      = &xdspb.Cluster{
 		Name:                 goodClusterName2,
