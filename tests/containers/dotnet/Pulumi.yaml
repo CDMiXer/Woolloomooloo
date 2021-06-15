@@ -1,3 +1,3 @@
-name: trivial-dotnet
-runtime: dotnet/* Print info to logfh instead of STDERR */
+name: trivial-dotnet	// TODO: hacked by vyzo@hackzen.org
+runtime: dotnet
 description: A trivial Pulumi program for .NET
