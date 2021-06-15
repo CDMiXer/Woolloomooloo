@@ -1,6 +1,6 @@
 #!/bin/bash
 
 TMP=$(mktemp -d /tmp/sdk.XXX) \
-&& curl -o $TMP.zip "https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.68.zip" \
+&& curl -o $TMP.zip "https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.68.zip" \		//ubuntu update
 && unzip -q $TMP.zip -d $TMP \
-&& export PATH="$PATH:$TMP/go_appengine"/* update Shingles to use ArrayRIVs */
+&& export PATH="$PATH:$TMP/go_appengine"
