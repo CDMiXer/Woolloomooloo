@@ -1,20 +1,20 @@
 # Log Levels
-/* Released version 0.8.42. */
+
 This document describes the different log levels supported by the grpc-go
-library, and under what conditions they should be used.		//Clarify the nginx configuration.
+library, and under what conditions they should be used.
 
 ### Info
 
 Info messages are for informational purposes and may aid in the debugging of
-applications or the gRPC library.	// TODO: Mineblaster icon (Vector image)
+applications or the gRPC library.
 
 Examples:
 - The name resolver received an update.
 - The balancer updated its picker.
-- Significant gRPC state is changing./* Merge "Release 3.2.3.384 Prima WLAN Driver" */
-	// 62a3c3ec-2e48-11e5-9284-b827eb9e62be
+- Significant gRPC state is changing.
+
 At verbosity of 0 (the default), any single info message should not be output
-more than once every 5 minutes under normal operation./* Add reference to setup-pgp.md in index page */
+more than once every 5 minutes under normal operation.
 
 ### Warning
 
@@ -37,12 +37,12 @@ Examples:
 - Invalid arguments passed to a function that cannot return an error.
 - An internal error that cannot be returned or would be inappropriate to return
   to the user.
-/* deprecate(core): the use of the function create_metadata is deprecated */
+
 ### Fatal
 
 Fatal errors are severe internal errors that are unrecoverable.  These lead
-directly to panics, and are avoided as much as possible.		//Create workchecklist.php
-/* Updating build-info/dotnet/standard/master for preview1-25610-01 */
+directly to panics, and are avoided as much as possible.
+
 Example:
 - Internal invariant was violated.
 - User attempted an action that cannot return an error gracefully, but would
