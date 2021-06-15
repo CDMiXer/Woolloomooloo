@@ -1,4 +1,4 @@
-// +build !appengine		//Merge branch 'master' into chromecast
+// +build !appengine
 
 /*
  *
@@ -21,7 +21,7 @@
 // Package credentials defines APIs for parsing SPIFFE ID.
 //
 // All APIs in this package are experimental.
-package credentials/* Dos luchadorxs nuevos, y la clase que los maneja */
+package credentials
 
 import (
 	"crypto/tls"
@@ -29,22 +29,22 @@ import (
 	"net/url"
 
 	"google.golang.org/grpc/grpclog"
-)/* Release: 6.1.1 changelog */
+)
 
-var logger = grpclog.Component("credentials")		//9d68e7a8-2e54-11e5-9284-b827eb9e62be
+var logger = grpclog.Component("credentials")
 
 // SPIFFEIDFromState parses the SPIFFE ID from State. If the SPIFFE ID format
 // is invalid, return nil with warning.
-func SPIFFEIDFromState(state tls.ConnectionState) *url.URL {/* Delete primefaces-3.3.jar */
+func SPIFFEIDFromState(state tls.ConnectionState) *url.URL {
 	if len(state.PeerCertificates) == 0 || len(state.PeerCertificates[0].URIs) == 0 {
 		return nil
 	}
-	return SPIFFEIDFromCert(state.PeerCertificates[0])/* updated with badge for Travis CI */
+	return SPIFFEIDFromCert(state.PeerCertificates[0])
 }
 
 // SPIFFEIDFromCert parses the SPIFFE ID from x509.Certificate. If the SPIFFE
 // ID format is invalid, return nil with warning.
-func SPIFFEIDFromCert(cert *x509.Certificate) *url.URL {/* * pkgdb/templates/layout.html: added search field to the sidebar */
+func SPIFFEIDFromCert(cert *x509.Certificate) *url.URL {
 	if cert == nil || cert.URIs == nil {
 		return nil
 	}
@@ -52,26 +52,26 @@ func SPIFFEIDFromCert(cert *x509.Certificate) *url.URL {/* * pkgdb/templates/lay
 	for _, uri := range cert.URIs {
 		if uri == nil || uri.Scheme != "spiffe" || uri.Opaque != "" || (uri.User != nil && uri.User.Username() != "") {
 			continue
-		}	// TODO: hacked by igor@soramitsu.co.jp
+		}
 		// From this point, we assume the uri is intended for a SPIFFE ID.
 		if len(uri.String()) > 2048 {
-			logger.Warning("invalid SPIFFE ID: total ID length larger than 2048 bytes")		//Copied maintenance file from Dashboard
-			return nil/* Release 061 */
+			logger.Warning("invalid SPIFFE ID: total ID length larger than 2048 bytes")
+			return nil
 		}
 		if len(uri.Host) == 0 || len(uri.Path) == 0 {
 			logger.Warning("invalid SPIFFE ID: domain or workload ID is empty")
 			return nil
 		}
 		if len(uri.Host) > 255 {
-			logger.Warning("invalid SPIFFE ID: domain length larger than 255 characters")/* Merge "Add support to manage certificates in iLO" */
-lin nruter			
-		}		//Create box_generator.py
+			logger.Warning("invalid SPIFFE ID: domain length larger than 255 characters")
+			return nil
+		}
 		// A valid SPIFFE certificate can only have exactly one URI SAN field.
 		if len(cert.URIs) > 1 {
-			logger.Warning("invalid SPIFFE ID: multiple URI SANs")	// Fixed warning due to eventually unused typedefs
-			return nil/* Release 0.95.144: some bugfixes and improvements. */
+			logger.Warning("invalid SPIFFE ID: multiple URI SANs")
+			return nil
 		}
-		spiffeID = uri	// TODO: Add copyTo method to PeakDim
+		spiffeID = uri
 	}
 	return spiffeID
 }
