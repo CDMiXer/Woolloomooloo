@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>/* mk: Little changes related to postconfig module list */
+	// Implementação código Tabela Price
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+  </PropertyGroup>	// TODO: you know what? i like typing slashes into the command line.
 
 </Project>
