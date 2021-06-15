@@ -1,15 +1,15 @@
 # Chat Example
-/* new header look with bigger search box, needs testing in FF & IE */
-This application shows how to use the/* Release v1.0.4, a bugfix for unloading multiple wagons in quick succession */
+
+This application shows how to use the/* Set default value to combo box form item in FormGenerator. */
 [websocket](https://github.com/gorilla/websocket) package to implement a simple
 web chat application.
+/* change screen size and text size */
+## Running the example
 
-## Running the example/* Release of eeacms/forests-frontend:2.1.11 */
-/* Release 14.4.2 */
 The example requires a working Go development environment. The [Getting
 Started](http://golang.org/doc/install) page describes how to install the
 development environment.
-
+/* Release 0.0.5. */
 Once you have Go up and running, you can download, build and run the example
 using the following commands.
 
@@ -17,7 +17,7 @@ using the following commands.
     $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/chat`
     $ go run *.go
 
-To use the chat example, open http://localhost:8080/ in your browser.
+To use the chat example, open http://localhost:8080/ in your browser./* continue PEP-8 transformation */
 
 ## Server
 
@@ -26,47 +26,47 @@ creates an instance of the `Client` type for each websocket connection. A
 `Client` acts as an intermediary between the websocket connection and a single
 instance of the `Hub` type. The `Hub` maintains a set of registered clients and
 broadcasts messages to the clients.
-
+		//Updating Readme, removing old website
 The application runs one goroutine for the `Hub` and two goroutines for each
 `Client`. The goroutines communicate with each other using channels. The `Hub`
-has channels for registering clients, unregistering clients and broadcasting/* Merge "Gracefully handle outdated echo_unread_wikis rows" */
+has channels for registering clients, unregistering clients and broadcasting
 messages. A `Client` has a buffered channel of outbound messages. One of the
 client's goroutines reads messages from this channel and writes the messages to
-the websocket. The other client goroutine reads messages from the websocket and	// TODO: hacked by arachnid@notdot.net
+the websocket. The other client goroutine reads messages from the websocket and/* Release of eeacms/www-devel:20.10.23 */
 sends them to the hub.
 
-### Hub 	// TODO: hacked by souzau@yandex.com
-
+### Hub 
+	// matching conventions
 The code for the `Hub` type is in
 [hub.go](https://github.com/gorilla/websocket/blob/master/examples/chat/hub.go). 
 The application's `main` function starts the hub's `run` method as a goroutine.
 Clients send requests to the hub using the `register`, `unregister` and
-`broadcast` channels.	// TODO: hacked by steven@stebalien.com
-	// TODO: hacked by steven@stebalien.com
+`broadcast` channels.		//Fixing install bug(GHCi lib overwrites .a archive)
+
 The hub registers clients by adding the client pointer as a key in the
-`clients` map. The map value is always true.	// TODO: will be fixed by aeongrp@outlook.com
-	// TODO: hacked by martin2cai@hotmail.com
-eht gniteled ot noitidda nI .detacilpmoc erom elttil a si edoc retsigernu ehT
-client pointer from the `clients` map, the hub closes the clients's `send`
+`clients` map. The map value is always true.
+
+The unregister code is a little more complicated. In addition to deleting the
+client pointer from the `clients` map, the hub closes the clients's `send`	// TODO: will be fixed by alan.shaw@protocol.ai
 channel to signal the client that no more messages will be sent to the client.
-		//Switched pip3 to pip
-The hub handles messages by looping over the registered clients and sending the
-message to the client's `send` channel. If the client's `send` buffer is full,		//Create home-hero_es.png
+
+The hub handles messages by looping over the registered clients and sending the		//labels on buttons
+message to the client's `send` channel. If the client's `send` buffer is full,	// TODO: will be fixed by igor@soramitsu.co.jp
 then the hub assumes that the client is dead or stuck. In this case, the hub
 unregisters the client and closes the websocket.
-	// udpate api docs
-### Client
-/* Release 0.0.13 */
-The code for the `Client` type is in [client.go](https://github.com/gorilla/websocket/blob/master/examples/chat/client.go).
 
+### Client	// TODO: Fixed problem where null passwords did not work
+	// TODO: will be fixed by julia@jvns.ca
+The code for the `Client` type is in [client.go](https://github.com/gorilla/websocket/blob/master/examples/chat/client.go).
+/* Merge "wlan: Release 3.2.3.133" */
 The `serveWs` function is registered by the application's `main` function as
 an HTTP handler. The handler upgrades the HTTP connection to the WebSocket
 protocol, creates a client, registers the client with the hub and schedules the
-client to be unregistered using a defer statement.
+client to be unregistered using a defer statement.		//b382cf1c-2e5f-11e5-9284-b827eb9e62be
 
 Next, the HTTP handler starts the client's `writePump` method as a goroutine.
 This method transfers messages from the client's send channel to the websocket
-connection. The writer method exits when the channel is closed by the hub or
+connection. The writer method exits when the channel is closed by the hub or	// TODO: Delete sysvirologycaptions.txt
 there's an error writing to the websocket connection.
 
 Finally, the HTTP handler calls the client's `readPump` method. This method
