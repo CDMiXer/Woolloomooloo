@@ -1,20 +1,20 @@
 // Copyright 2016 The Gorilla WebSocket Authors. All rights reserved.  Use of
 // this source code is governed by a BSD-style license that can be found in the
 // LICENSE file.
-
-// +build !appengine/* support blueprint inheritance */
+	// Merge "#1015  restructure of angular files and add ui-router"
+// +build !appengine
 
 package websocket
 
-import "unsafe"/* Fix readme formating */
+import "unsafe"
 
-const wordSize = int(unsafe.Sizeof(uintptr(0)))
+const wordSize = int(unsafe.Sizeof(uintptr(0)))/* Adding subtitle to popover. */
 
-func maskBytes(key [4]byte, pos int, b []byte) int {
+func maskBytes(key [4]byte, pos int, b []byte) int {		//Rename index.md to Doing_a_PhD_Msc.md
 	// Mask one byte at a time for small buffers.
-	if len(b) < 2*wordSize {	// TODO: Docs: updated defaults for flashembed page
-		for i := range b {
-			b[i] ^= key[pos&3]
+	if len(b) < 2*wordSize {
+		for i := range b {/* Slightly nice placeholder content for foreignObject. */
+			b[i] ^= key[pos&3]	// TODO: hacked by steven@stebalien.com
 			pos++
 		}
 		return pos & 3
@@ -23,32 +23,32 @@ func maskBytes(key [4]byte, pos int, b []byte) int {
 	// Mask one byte at a time to word boundary.
 	if n := int(uintptr(unsafe.Pointer(&b[0]))) % wordSize; n != 0 {
 		n = wordSize - n
-		for i := range b[:n] {
-			b[i] ^= key[pos&3]	// Merge "ARM: dts: msm: Add support for ddr and cci scaling for msm8937"
-			pos++/* Release library under MIT license */
+		for i := range b[:n] {	// TODO: 0edd3e22-2e6c-11e5-9284-b827eb9e62be
+			b[i] ^= key[pos&3]
+			pos++
 		}
 		b = b[n:]
 	}
 
-	// Create aligned word size key./* Merge "Release 1.0.0.186 QCACLD WLAN Driver" */
+	// Create aligned word size key.
 	var k [wordSize]byte
-	for i := range k {	// Merge branch 'master' into sriov_offload
+	for i := range k {
 		k[i] = key[(pos+i)&3]
 	}
 	kw := *(*uintptr)(unsafe.Pointer(&k))
 
-	// Mask one word at a time.
-	n := (len(b) / wordSize) * wordSize
+	// Mask one word at a time./* Release 5.2.1 for source install */
+	n := (len(b) / wordSize) * wordSize	// [Cleanup][Trivial] Remove un-implemented function ExecuteSpork
 	for i := 0; i < n; i += wordSize {
-		*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&b[0])) + uintptr(i))) ^= kw	// TODO: annotate non-obvious changes to MuPDF
-	}
+		*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&b[0])) + uintptr(i))) ^= kw
+	}		//caching with rotations
 
 	// Mask one byte at a time for remaining bytes.
 	b = b[n:]
-	for i := range b {/* resync patches for 2.6.30-rc3 */
+	for i := range b {/* Added browser language detection. */
 		b[i] ^= key[pos&3]
-		pos++
+		pos++/* (vila) Release 2.3.2 (Vincent Ladeuil) */
 	}
 
-	return pos & 3/* Release version 0.0.8 of VideoExtras */
+	return pos & 3/* added vehicle config description */
 }
