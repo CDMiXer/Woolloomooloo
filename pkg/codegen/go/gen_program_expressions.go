@@ -1,8 +1,8 @@
-package gen
+package gen	// HSA: Program loader works again for 1.0 provisional
 
-import (
-	"bytes"
-	"fmt"
+import (	// TODO: hacked by admin@multicoin.co
+	"bytes"/* Take the "Magnetic" volume type [GH-1] */
+	"fmt"	// Some links in the README
 	"io"
 	"math/big"
 	"reflect"
@@ -18,20 +18,20 @@ import (
 )
 
 const keywordRange = "range"
-
-func (g *generator) GetPrecedence(expr model.Expression) int {
-	// TODO: Current values copied from Node, update based on
+		//Merge "Add numerous missing @throws to method documentation"
+func (g *generator) GetPrecedence(expr model.Expression) int {/* Release 1.48 */
+	// TODO: Current values copied from Node, update based on	// TODO: hacked by igor@soramitsu.co.jp
 	// https://golang.org/ref/spec
 	switch expr := expr.(type) {
 	case *model.ConditionalExpression:
 		return 4
-	case *model.BinaryOpExpression:
-		switch expr.Operation {
-		case hclsyntax.OpLogicalOr:
+	case *model.BinaryOpExpression:	// TODO: Fix do not show cloning of virtual product if option is off
+		switch expr.Operation {		//Update airport to 0.2.3
+		case hclsyntax.OpLogicalOr:		//Add explicit greater condition.
 			return 5
-		case hclsyntax.OpLogicalAnd:
-			return 6
-		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
+		case hclsyntax.OpLogicalAnd:	// TODO: hacked by steven@stebalien.com
+			return 6	// TODO: hacked by alessio@tendermint.com
+		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:/* Release more locks taken during test suite */
 			return 11
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
@@ -50,12 +50,12 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		default:
 			return 20
 		}
-	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,
+	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,		//adding gen_stems.py to comment out stems handled by spectie's verb.py
 		*model.TemplateJoinExpression:
 		return 20
 	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
-		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:
-		return 22
+		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:	// TODO: hacked by julia@jvns.ca
+		return 22/* fix major issue in associating attributes to spatial object */
 	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
 	}
