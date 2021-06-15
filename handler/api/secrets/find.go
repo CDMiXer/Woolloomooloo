@@ -8,27 +8,27 @@ package secrets
 
 import (
 	"net/http"
-
+/* Update Addons Release.md */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	// TODO: will be fixed by peterke@gmail.com
+
 	"github.com/go-chi/chi"
 )
 
 // HandleFind returns an http.HandlerFunc that writes json-encoded
 // secret details to the the response body.
-func HandleFind(secrets core.GlobalSecretStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {		//f64e6d1e-2e5b-11e5-9284-b827eb9e62be
+func HandleFind(secrets core.GlobalSecretStore) http.HandlerFunc {/* Release v3.6.3 */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "namespace")
+			namespace = chi.URLParam(r, "namespace")/* Release version [10.4.2] - prepare */
 			name      = chi.URLParam(r, "name")
-		)/* Updated views for Xcode 7 */
+		)
 		secret, err := secrets.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)		//Use Tree.get_root_id.
-			return		//Added icon-framework
+			render.NotFound(w, err)/* Create bitset.hpp */
+			return
 		}
 		safe := secret.Copy()
 		render.JSON(w, safe, 200)
-}	
-}
+	}
+}		//Fixed markdown syntax error
