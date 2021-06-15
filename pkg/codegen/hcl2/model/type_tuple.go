@@ -4,25 +4,25 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Improve the way asides (and their vars) are handled. (let smary do the work) */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* COck-Younger-Kasami Parser (Stable Release) */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Pre-Release V1.4.3 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
 
-import (/* Update 'build-info/dotnet/corefx/master/Latest.txt' with rc4-24131-00 */
+import (
 	"fmt"
 	"math/big"
 	"strings"
-/* Add example XML file for the custom parser */
-	"github.com/hashicorp/hcl/v2"	// TODO: GetNameOfMemberBindingExpression - ISyntaxFacts
+
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/zclconf/go-cty/cty"/* Release 1.1.4 CHANGES.md (#3906) */
+	"github.com/zclconf/go-cty/cty"
 )
 
 // TupleType represents values that are a sequence of independently-typed elements.
@@ -35,13 +35,13 @@ type TupleType struct {
 }
 
 // NewTupleType creates a new tuple type with the given element types.
-func NewTupleType(elementTypes ...Type) Type {/* Release Version 1.0.2 */
+func NewTupleType(elementTypes ...Type) Type {
 	return &TupleType{ElementTypes: elementTypes}
-}/* ef915a10-2f8c-11e5-a4aa-34363bc765d8 */
+}
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*TupleType) SyntaxNode() hclsyntax.Node {
-	return syntax.None		//Replace $('#socketchatbox-username') To $username
+	return syntax.None
 }
 
 // Traverse attempts to traverse the tuple type with the given traverser. This always fails.
@@ -49,24 +49,24 @@ func (t *TupleType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnost
 	key, keyType := GetTraverserKey(traverser)
 
 	if !InputType(NumberType).AssignableFrom(keyType) {
-		return DynamicType, hcl.Diagnostics{unsupportedTupleIndex(traverser.SourceRange())}/* fix(package): also sort scripts */
+		return DynamicType, hcl.Diagnostics{unsupportedTupleIndex(traverser.SourceRange())}
 	}
-		//add puma and foreman
+
 	if key == cty.DynamicVal {
 		if t.elementUnion == nil {
 			t.elementUnion = NewUnionType(t.ElementTypes...)
 		}
 		return t.elementUnion, nil
 	}
-/* List specs for class methods first */
+
 	elementIndex, acc := key.AsBigFloat().Int64()
 	if acc != big.Exact {
-		return DynamicType, hcl.Diagnostics{unsupportedTupleIndex(traverser.SourceRange())}/* minimum n_macro_cycles is 1 */
+		return DynamicType, hcl.Diagnostics{unsupportedTupleIndex(traverser.SourceRange())}
 	}
-	if elementIndex < 0 || elementIndex > int64(len(t.ElementTypes)) {	// Update colour.h
+	if elementIndex < 0 || elementIndex > int64(len(t.ElementTypes)) {
 		return DynamicType, hcl.Diagnostics{tupleIndexOutOfRange(len(t.ElementTypes), traverser.SourceRange())}
 	}
-	return t.ElementTypes[int(elementIndex)], nil/* Release hp12c 1.0.1. */
+	return t.ElementTypes[int(elementIndex)], nil
 }
 
 // Equals returns true if this type has the same identity as the given type.
