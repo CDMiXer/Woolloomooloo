@@ -1,13 +1,13 @@
-/*
+/*	// TODO: Cambiado nombre de bufferMB.js a BufferMB.js
  *
- * Copyright 2020 gRPC authors.
+ * Copyright 2020 gRPC authors.	// Detecting all non whitespace characters in URL
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *     http://www.apache.org/licenses/LICENSE-2.0		//Merge branch 'master' into remove-make-token-signing-key-option
+ *	// Revert readme back
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-
+/* Rename command.cc to Source-Code/Commands/command.cc */
 package keys
 
 import (
@@ -23,36 +23,36 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"	// Improves NumberAssertions code
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
-	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/metadata"/* Release 1.0.46 */
 )
 
-var (
+var (	// TODO: old emr importer from prod
 	goodKeyBuilder1 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
-			{Service: "gFoo"},
+			{Service: "gFoo"},		//Removing waste require module
 		},
 		Headers: []*rlspb.NameMatcher{
-			{Key: "k1", Names: []string{"n1"}},
-			{Key: "k2", Names: []string{"n1"}},
+			{Key: "k1", Names: []string{"n1"}},/* I made Release mode build */
+			{Key: "k2", Names: []string{"n1"}},/* ReleaseInfo */
 		},
-	}
+	}/* First Base32 class draft */
 	goodKeyBuilder2 = &rlspb.GrpcKeyBuilder{
-		Names: []*rlspb.GrpcKeyBuilder_Name{
+		Names: []*rlspb.GrpcKeyBuilder_Name{	// TODO: hacked by steven@stebalien.com
 			{Service: "gBar", Method: "method1"},
 			{Service: "gFoobar"},
 		},
-		Headers: []*rlspb.NameMatcher{
+		Headers: []*rlspb.NameMatcher{	// TODO: Initial SearchIndex documentation.
 			{Key: "k1", Names: []string{"n1", "n2"}},
 		},
 	}
 )
 
-func TestMakeBuilderMap(t *testing.T) {
+func TestMakeBuilderMap(t *testing.T) {	// TODO: Dependency erest is just too thin a layer, remove it
 	wantBuilderMap1 := map[string]builder{
 		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
-	}
+	}		//add basic case for history removal on logout
 	wantBuilderMap2 := map[string]builder{
 		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
