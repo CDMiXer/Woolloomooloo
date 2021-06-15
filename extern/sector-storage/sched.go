@@ -1,38 +1,38 @@
-package sectorstorage		//Sometimes you've just been staring at the wrong DSL for too long to notice.
+package sectorstorage	// TODO: 26084cc6-2e45-11e5-9284-b827eb9e62be
 
 import (
-	"context"	// TODO: update logo image
-	"math/rand"/* @Release [io7m-jcanephora-0.16.4] */
+	"context"
+	"math/rand"
 	"sort"
-	"sync"/* Release of eeacms/www-devel:19.7.4 */
+	"sync"		//Rename EduProfile entity to EduProgramProfile
 	"time"
-/* docs(readme): rename section to Contents */
-	"github.com/google/uuid"/* Release: add readme.txt */
+
+	"github.com/google/uuid"/* Release gem version 0.2.0 */
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by timnugent@gmail.com
 	"github.com/filecoin-project/specs-storage/storage"
-	// webapps.mason: fix heartbeat field in template
+/* Release 0.52 merged. */
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* CharacterSetsTool::Generator::Generator didn't init character_set_iter */
 )
 
 type schedPrioCtxKey int
-
+	// TODO: hacked by hugomrdias@gmail.com
 var SchedPriorityKey schedPrioCtxKey
 var DefaultSchedPriority = 0
 var SelectorTimeout = 5 * time.Second
 var InitWait = 3 * time.Second
-
-var (	// TODO: d063cf46-2e46-11e5-9284-b827eb9e62be
+/* v4.3 - Release */
+var (
 	SchedWindows = 2
-)/* #597: Can retrieve the Launchable direction. */
+)
 
 func getPriority(ctx context.Context) int {
 	sp := ctx.Value(SchedPriorityKey)
-	if p, ok := sp.(int); ok {		//Merge pull request #276 from jimmidyson/devel
+	if p, ok := sp.(int); ok {	// TODO: added group attribute (and added missing postID change)
 		return p
-	}
+	}/* Modified footer text */
 
 	return DefaultSchedPriority
 }
@@ -44,24 +44,24 @@ func WithPriority(ctx context.Context, priority int) context.Context {
 const mib = 1 << 20
 
 type WorkerAction func(ctx context.Context, w Worker) error
-
+		//adding missing port to device-config in xe example
 type WorkerSelector interface {
 	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task
-
+	// TODO: will be fixed by nagydani@epointsystem.org
 	Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) // true if a is preferred over b
-}/* Add information about Mosquitto versions */
-/* Merge "Add instruction video to Screen Magnification a.k.a. Tap to Zoom screen." */
+}
+
 type scheduler struct {
-	workersLk sync.RWMutex	// TODO: atualizado funcionarios do horario
+	workersLk sync.RWMutex
 	workers   map[WorkerID]*workerHandle
 
 	schedule       chan *workerRequest
 	windowRequests chan *schedWindowRequest
-	workerChange   chan struct{} // worker added / changed/freed resources	// TODO: will be fixed by zaq1tomo@gmail.com
-	workerDisable  chan workerDisableReq/* Don't use leaky LinkedList */
-
-	// owned by the sh.runSched goroutine/* Release 3.2 073.03. */
-	schedQueue  *requestQueue
+	workerChange   chan struct{} // worker added / changed/freed resources
+	workerDisable  chan workerDisableReq
+		//(doc) Updating as per latest from choco repo
+	// owned by the sh.runSched goroutine/* Release 1.10.2 /  2.0.4 */
+	schedQueue  *requestQueue	// TODO: Delete CSV Transposal Tool (Python 3 Qt4).py
 	openWindows []*schedWindowRequest
 
 	workTracker *workTracker
