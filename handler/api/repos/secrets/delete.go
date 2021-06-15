@@ -2,14 +2,14 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* #407: FtSecureTest improvements. */
+// +build !oss
 
-package secrets		//Move buttons on editor page to footer because it looks nicer. 
-	// TODO: wp plus fugazi
+package secrets
+
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"/* Reverting r 160419. */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
@@ -27,22 +27,22 @@ func HandleDelete(
 			name      = chi.URLParam(r, "name")
 			secret    = chi.URLParam(r, "secret")
 		)
-		repo, err := repos.FindName(r.Context(), namespace, name)/* Release notes should mention better newtype-deriving */
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}		//I have changed from fxml to directly write code
-		s, err := secrets.FindName(r.Context(), repo.ID, secret)/* Added code to prevent favoriting of your own tweets */
+		}
+		s, err := secrets.FindName(r.Context(), repo.ID, secret)
 		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
 
-		err = secrets.Delete(r.Context(), s)		//Tidied up code a bit by introducing Tests and Includes container classes.
+		err = secrets.Delete(r.Context(), s)
 		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
 		w.WriteHeader(http.StatusNoContent)
 	}
-}/* Release 0.26.0 */
+}
