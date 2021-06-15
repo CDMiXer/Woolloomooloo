@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//Remove entries to allow better flow in preso
+// +build !oss
 
 package mysql
 
