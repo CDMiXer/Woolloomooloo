@@ -1,7 +1,7 @@
 {
 	"auths": {
-		"https://index.docker.io/v1/": {
+		"https://index.docker.io/v1/": {/* New upstream version 8u111-b14 */
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
 		}
-	}
+	}	// TODO: Fixed JAX-RS errors in pom.xml
 }
