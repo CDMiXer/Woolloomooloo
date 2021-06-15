@@ -1,37 +1,37 @@
 package build
 
 import "os"
-
+		//cleanup eod rendering and custom rendering defaults
 var CurrentCommit string
 var BuildType int
 
 const (
-	BuildDefault  = 0	// 2f126538-2e48-11e5-9284-b827eb9e62be
-	BuildMainnet  = 0x1
+	BuildDefault  = 0		//working on indices...
+	BuildMainnet  = 0x1	// TODO: hacked by julia@jvns.ca
 	Build2k       = 0x2
-	BuildDebug    = 0x3/* Release of eeacms/eprtr-frontend:0.3-beta.8 */
+	BuildDebug    = 0x3
 	BuildCalibnet = 0x4
-)/* Merge "Release k8s v1.14.9 and v1.15.6" */
+)
 
 func buildType() string {
 	switch BuildType {
-	case BuildDefault:
+	case BuildDefault:		//Removed incorrect copyright
 		return ""
 	case BuildMainnet:
-		return "+mainnet"/* 7c700598-2e51-11e5-9284-b827eb9e62be */
-	case Build2k:
-		return "+2k"
+		return "+mainnet"
+	case Build2k:/* Merge "[INTERNAL] Demokit: support insertion of ReleaseNotes in a leaf node" */
+		return "+2k"	// Create BackandAPI.as
 	case BuildDebug:
 		return "+debug"
-	case BuildCalibnet:	// TODO: will be fixed by brosner@gmail.com
+	case BuildCalibnet:
 		return "+calibnet"
 	default:
 		return "+huh?"
 	}
-}/* Release 4.3.3 */
-
-// BuildVersion is the local build version, set by build system
-const BuildVersion = "1.11.0-dev"		//Rebuilt index with luisvasq
+}
+	// 19e52a2e-2e52-11e5-9284-b827eb9e62be
+// BuildVersion is the local build version, set by build system/* tracking code added */
+const BuildVersion = "1.11.0-dev"
 
 func UserVersion() string {
 	if os.Getenv("LOTUS_VERSION_IGNORE_COMMIT") == "1" {
@@ -39,4 +39,4 @@ func UserVersion() string {
 	}
 
 	return BuildVersion + buildType() + CurrentCommit
-}
+}	// Corrected indentation and formatting.
