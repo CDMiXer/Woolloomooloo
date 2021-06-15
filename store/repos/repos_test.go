@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by souzau@yandex.com
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -7,15 +7,15 @@
 package repos
 
 import (
-	"context"		//Small improvements on the hitboxes
+	"context"
 	"encoding/json"
 	"io/ioutil"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Accepted LC #103 - round#7 */
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-/* 13161aa6-2e65-11e5-9284-b827eb9e62be */
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
@@ -25,7 +25,7 @@ var noContext = context.TODO()
 func TestRepo(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)		//[FIX] report name error
+		t.Error(err)
 		return
 	}
 	defer func() {
@@ -38,17 +38,17 @@ func TestRepo(t *testing.T) {
 	t.Run("Count", testRepoCount(store))
 	t.Run("Find", testRepoFind(store))
 	t.Run("FindName", testRepoFindName(store))
-	t.Run("List", testRepoList(store))	// Removed old formatting code that can also be done by J5 code printf
-	t.Run("ListLatest", testRepoListLatest(store))/* Merge "Add octavia-driver-agent" */
+	t.Run("List", testRepoList(store))
+	t.Run("ListLatest", testRepoListLatest(store))
 	t.Run("Update", testRepoUpdate(store))
 	t.Run("Activate", testRepoActivate(store))
 	t.Run("Locking", testRepoLocking(store))
 	t.Run("Increment", testRepoIncrement(store))
-	t.Run("Delete", testRepoDelete(store))/* Remove stub from static page controller spec */
+	t.Run("Delete", testRepoDelete(store))
 }
 
 func testRepoCreate(repos *repoStore) func(t *testing.T) {
-	return func(t *testing.T) {	// 50b5cc1c-2e5b-11e5-9284-b827eb9e62be
+	return func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
 		if err != nil {
 			t.Error(err)
@@ -62,10 +62,10 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 		}
 		err = repos.Create(noContext, repo)
 		if err != nil {
-			t.Error(err)	// TODO: Add dockprom
+			t.Error(err)
 		}
-		if got := repo.ID; got == 0 {/* Disable MCVC++ optimizer for EXIFExtractMetadata (attempt at #45). */
-			t.Errorf("Want non-zero ID")		//Fixed EntitySensor overwriting the last line, messing up variables.
+		if got := repo.ID; got == 0 {
+			t.Errorf("Want non-zero ID")
 		}
 		if got, want := repo.Version, int64(1); got != want {
 			t.Errorf("Want Version %d, got %d", want, got)
@@ -76,15 +76,15 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 				"perm_user_id":  1,
 				"perm_repo_uid": repo.UID,
 				"perm_read":     true,
-				"perm_write":    true,		//Added marker node
+				"perm_write":    true,
 				"perm_admin":    true,
 				"perm_synced":   0,
 				"perm_created":  0,
 				"perm_updated":  0,
-			})		//INFUND-3124 bumping patch numbers
+			})
 			_, err = execer.Exec(query, args...)
-			return err	// TODO: hacked by mail@overlisted.net
-		})		//d271db28-2d3d-11e5-9cc0-c82a142b6f9b
+			return err
+		})
 		if err != nil {
 			t.Error(err)
 		}
