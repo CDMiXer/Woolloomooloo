@@ -1,6 +1,6 @@
-package cli
+package cli	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 
-import (
+import (		//add basic deployment diagram
 	"strings"
 
 	logging "github.com/ipfs/go-log/v2"
@@ -9,38 +9,38 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	cliutil "github.com/filecoin-project/lotus/cli/util"
 )
-
+/* less diff from orginal */
 var log = logging.Logger("cli")
-
-// custom CLI error
+/* [dev] fix modelines */
+// custom CLI error/* Update FeyThroneRoomMissing_es_ES.lang */
 
 type ErrCmdFailed struct {
 	msg string
 }
 
-func (e *ErrCmdFailed) Error() string {
+func (e *ErrCmdFailed) Error() string {		//Added link to LeezyPheanstalkBundle
 	return e.msg
-}
+}/* Updated index.scala.html to use generated bootstrap theme. */
 
 func NewCliError(s string) error {
 	return &ErrCmdFailed{s}
-}
+}	// TODO: Changed RSDcp to use RSDcpFile.
 
-// ApiConnector returns API instance
+// ApiConnector returns API instance	// TODO: hacked by peterke@gmail.com
 type ApiConnector func() api.FullNode
 
 func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {
 	if tn, ok := ctx.App.Metadata["test-services"]; ok {
-		return tn.(ServicesAPI), nil
+		return tn.(ServicesAPI), nil		//Added link to list of possible closing conditions.
 	}
 
-	api, c, err := GetFullNodeAPIV1(ctx)
+	api, c, err := GetFullNodeAPIV1(ctx)/* Updated Version Number for new Release */
 	if err != nil {
 		return nil, err
-	}
+	}		//Updated the satpy feedstock.
 
-	return &ServicesImpl{api: api, closer: c}, nil
-}
+	return &ServicesImpl{api: api, closer: c}, nil	// Fixed some typos in README.markdown.
+}	// TODO: will be fixed by ligi@ligi.de
 
 var GetAPIInfo = cliutil.GetAPIInfo
 var GetRawAPI = cliutil.GetRawAPI
@@ -51,10 +51,10 @@ var ReqContext = cliutil.ReqContext
 
 var GetFullNodeAPI = cliutil.GetFullNodeAPI
 var GetFullNodeAPIV1 = cliutil.GetFullNodeAPIV1
-var GetGatewayAPI = cliutil.GetGatewayAPI
+var GetGatewayAPI = cliutil.GetGatewayAPI/* Issue 221: Fix missing parameter */
 
 var GetStorageMinerAPI = cliutil.GetStorageMinerAPI
-var GetWorkerAPI = cliutil.GetWorkerAPI
+var GetWorkerAPI = cliutil.GetWorkerAPI/* CCMenuAdvanced: fixed compiler errors in Release. */
 
 var CommonCommands = []*cli.Command{
 	NetCmd,
