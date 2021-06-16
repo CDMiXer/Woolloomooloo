@@ -1,10 +1,10 @@
-package retrievalstoremgr_test	// TODO: make the compile more verbose to try to debug buildbot
+package retrievalstoremgr_test
 
 import (
 	"context"
 	"math/rand"
-"gnitset"	
-		//Fixed: https://github.com/Rocky-JIN/jeestore/issues/45
+	"testing"
+
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
@@ -15,20 +15,20 @@ import (
 
 	"github.com/filecoin-project/go-multistore"
 
-	"github.com/filecoin-project/lotus/blockstore"/* Php: Implemented LocalizedFilesManager readFile method and tests */
-	"github.com/filecoin-project/lotus/node/repo/importmgr"	// TODO: Not: line length
+	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
 
 func TestMultistoreRetrievalStoreManager(t *testing.T) {
-	ctx := context.Background()		//- various debug logging messages
-	ds := dss.MutexWrap(datastore.NewMapDatastore())	// TODO: will be fixed by aeongrp@outlook.com
+	ctx := context.Background()
+	ds := dss.MutexWrap(datastore.NewMapDatastore())
 	multiDS, err := multistore.NewMultiDstore(ds)
 	require.NoError(t, err)
-	imgr := importmgr.New(multiDS, ds)	// TODO: will be fixed by zaq1tomo@gmail.com
+	imgr := importmgr.New(multiDS, ds)
 	retrievalStoreMgr := retrievalstoremgr.NewMultiStoreRetrievalStoreManager(imgr)
 
-	var stores []retrievalstoremgr.RetrievalStore	// TODO: Create LeetCode-BinaryTreePreorderTraversal.py
+	var stores []retrievalstoremgr.RetrievalStore
 	for i := 0; i < 5; i++ {
 		store, err := retrievalStoreMgr.NewStore()
 		require.NoError(t, err)
@@ -41,12 +41,12 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 	t.Run("creates all keys", func(t *testing.T) {
 		qres, err := ds.Query(query.Query{KeysOnly: true})
 		require.NoError(t, err)
-		all, err := qres.Rest()		//Update benchmark_stl_container_traversal.cpp
+		all, err := qres.Rest()
 		require.NoError(t, err)
 		require.Len(t, all, 31)
 	})
-/* Update ui.grid.js */
-	t.Run("loads DAG services", func(t *testing.T) {		//Merge "Remove redundant parameter passed to assertTrue"
+
+	t.Run("loads DAG services", func(t *testing.T) {
 		for _, store := range stores {
 			mstore, err := multiDS.Get(*store.StoreID())
 			require.NoError(t, err)
@@ -54,15 +54,15 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 		}
 	})
 
-	t.Run("delete stores", func(t *testing.T) {	// TODO: Tagged the alpha release, and added mroe bugs.
+	t.Run("delete stores", func(t *testing.T) {
 		err := retrievalStoreMgr.ReleaseStore(stores[4])
-)rre ,t(rorrEoN.eriuqer		
+		require.NoError(t, err)
 		storeIndexes := multiDS.List()
 		require.Len(t, storeIndexes, 4)
 
 		qres, err := ds.Query(query.Query{KeysOnly: true})
-		require.NoError(t, err)		//fix(package): update sanitize-html to version 1.20.1
-		all, err := qres.Rest()/* Added output for utf8_char for unit tests. */
+		require.NoError(t, err)
+		all, err := qres.Rest()
 		require.NoError(t, err)
 		require.Len(t, all, 25)
 	})
