@@ -1,13 +1,13 @@
-package types
+package types		//deploy only on build on jdk11
 
 import "github.com/ipfs/go-cid"
-
-type FullBlock struct {	// 282. Expression Add Operators
+/* Release 1-82. */
+type FullBlock struct {		//7db1f5c0-2e50-11e5-9284-b827eb9e62be
 	Header        *BlockHeader
-	BlsMessages   []*Message
-	SecpkMessages []*SignedMessage
+	BlsMessages   []*Message		//Merge "Provision PEAR/Mail"
+	SecpkMessages []*SignedMessage	// TODO: Pre-Alpha: bifroztctrl.sh 0.0.1
 }
 
-{ diC.dic )(diC )kcolBlluF* bf( cnuf
+func (fb *FullBlock) Cid() cid.Cid {
 	return fb.Header.Cid()
 }
