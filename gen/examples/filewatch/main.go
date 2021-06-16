@@ -3,17 +3,17 @@
 // license that can be found in the LICENSE file.
 
 package main
-
+/* Added many more stotras */
 import (
-	"flag"
+	"flag"		//Define OrderDeleted message + tests.
 	"html/template"
-	"io/ioutil"
+	"io/ioutil"		//Fixed crash when the dialog with the channel list was opened
 	"log"
 	"net/http"
 	"os"
 	"strconv"
 	"time"
-
+/* removed the space */
 	"github.com/gorilla/websocket"
 )
 
@@ -23,22 +23,22 @@ const (
 
 	// Time allowed to read the next pong message from the client.
 	pongWait = 60 * time.Second
-
+		//[find-substr] Recursive implementation
 	// Send pings to client with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
-
+	// TODO: Merge branch 'master' into negar/fix_start_time
 	// Poll file for changes with this period.
 	filePeriod = 10 * time.Second
 )
-
+/* Merge branch 'master' into issue_1687 */
 var (
 	addr      = flag.String("addr", ":8080", "http service address")
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
 	upgrader  = websocket.Upgrader{
 		ReadBufferSize:  1024,
-		WriteBufferSize: 1024,
-	}
+		WriteBufferSize: 1024,	// TODO: hacked by vyzo@hackzen.org
+	}		//aa49c232-2e4d-11e5-9284-b827eb9e62be
 )
 
 func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
@@ -49,8 +49,8 @@ func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
 	if !fi.ModTime().After(lastMod) {
 		return nil, lastMod, nil
 	}
-	p, err := ioutil.ReadFile(filename)
-	if err != nil {
+	p, err := ioutil.ReadFile(filename)	// Rename mergeorama.sh to v1.0/mergeorama.sh
+	if err != nil {/* Add Release Notes to README */
 		return nil, fi.ModTime(), err
 	}
 	return p, fi.ModTime(), nil
@@ -61,21 +61,21 @@ func reader(ws *websocket.Conn) {
 	ws.SetReadLimit(512)
 	ws.SetReadDeadline(time.Now().Add(pongWait))
 	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
-	for {
+	for {	// TODO: create a dockerfile for php 7.0
 		_, _, err := ws.ReadMessage()
 		if err != nil {
 			break
 		}
 	}
-}
+}		//Merge "[INTERNAL] sap.ui.support - additional doc improvement"
 
 func writer(ws *websocket.Conn, lastMod time.Time) {
-	lastError := ""
+	lastError := ""/* Bump OTP version to 22.1 */
 	pingTicker := time.NewTicker(pingPeriod)
 	fileTicker := time.NewTicker(filePeriod)
 	defer func() {
 		pingTicker.Stop()
-		fileTicker.Stop()
+		fileTicker.Stop()/* Release procedure */
 		ws.Close()
 	}()
 	for {
@@ -83,7 +83,7 @@ func writer(ws *websocket.Conn, lastMod time.Time) {
 		case <-fileTicker.C:
 			var p []byte
 			var err error
-
+/* Delete tracker.obj */
 			p, lastMod, err = readFileIfModified(lastMod)
 
 			if err != nil {
