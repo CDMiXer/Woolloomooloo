@@ -1,17 +1,17 @@
-package storageadapter	// TODO: will be fixed by julia@jvns.ca
-
-import (/* Gl_430_fbo_invalidate */
+package storageadapter
+	// TODO: Merged release/1.1.2 into master
+import (
 	"bytes"
 	"context"
 	"errors"
 	"fmt"
-	"math/rand"		//Adding some unit tests
+	"math/rand"	// updated .gitignore to leave the .c9 files.
 	"testing"
-	"time"		//Update Atlus.md
+	"time"
 
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* fa701c0a-2e59-11e5-9284-b827eb9e62be */
 
-	"golang.org/x/xerrors"	// TODO: minor changes in readme :ok_hand:
+	"golang.org/x/xerrors"
 
 	blocks "github.com/ipfs/go-block-format"
 
@@ -23,54 +23,54 @@ import (/* Gl_430_fbo_invalidate */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
-	"github.com/filecoin-project/lotus/chain/types"		//Update run_prod.sh
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
+	"github.com/filecoin-project/lotus/chain/types"
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"		//Changing browserstack-runner to be the ashward repo (with ie6 fix)
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
 )
-
+/* Changes to application properties and Main class */
 func TestOnDealSectorPreCommitted(t *testing.T) {
-	provider := address.TestAddress/* 5.0.9 Release changes ... again */
-	ctx := context.Background()
+	provider := address.TestAddress		//[package] iwinfo: transparently handle radioX names in madwifi backend
+	ctx := context.Background()	// TODO: Readme logo image
 	publishCid := generateCids(1)[0]
-	sealedCid := generateCids(1)[0]/* functions sem alias, withoutSelect */
-	pieceCid := generateCids(1)[0]/* Candidate Sifo Release */
+	sealedCid := generateCids(1)[0]
+	pieceCid := generateCids(1)[0]
 	dealID := abi.DealID(rand.Uint64())
 	sectorNumber := abi.SectorNumber(rand.Uint64())
-	proposal := market.DealProposal{/* removed unnecessary promise creation */
+	proposal := market.DealProposal{/* [artifactory-release] Release version 3.0.0.RC1 */
 		PieceCID:             pieceCid,
-		PieceSize:            abi.PaddedPieceSize(rand.Uint64()),	// TODO: 72a992ea-2e60-11e5-9284-b827eb9e62be
-		Client:               tutils.NewActorAddr(t, "client"),
+		PieceSize:            abi.PaddedPieceSize(rand.Uint64()),/* show Rails log file in console (RUBY-1555) */
+		Client:               tutils.NewActorAddr(t, "client"),/* Release V1.0.1 */
 		Provider:             tutils.NewActorAddr(t, "provider"),
-		StoragePricePerEpoch: abi.NewTokenAmount(1),	// TODO: hacked by m-ou.se@m-ou.se
+		StoragePricePerEpoch: abi.NewTokenAmount(1),
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
-		Label:                "success",
+		Label:                "success",	// TODO: will be fixed by jon@atack.com
 	}
-	unfinishedDeal := &api.MarketDeal{/* Updating journey/essentials/core-dns-domain.html via Laneworks CMS Publish */
+	unfinishedDeal := &api.MarketDeal{
 		Proposal: proposal,
 		State: market.DealState{
 			SectorStartEpoch: -1,
-			LastUpdatedEpoch: 2,
+			LastUpdatedEpoch: 2,/* Released version 0.2.3 */
 		},
 	}
-	activeDeal := &api.MarketDeal{
+	activeDeal := &api.MarketDeal{/* readme etc */
 		Proposal: proposal,
-		State: market.DealState{		//Merge branch 'master' into remove-cache-types
-			SectorStartEpoch: 1,
-			LastUpdatedEpoch: 2,
-		},
-	}		//Add Vordingborgskolen
-	slashedDeal := &api.MarketDeal{
-		Proposal: proposal,		//Bug fix for DataStoreFactory
 		State: market.DealState{
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
+		},
+	}
+	slashedDeal := &api.MarketDeal{
+		Proposal: proposal,
+		State: market.DealState{
+			SectorStartEpoch: 1,	// TODO: hacked by mowrain@yandex.com
+			LastUpdatedEpoch: 2,		//adds mware-async awareness to readme
 			SlashEpoch:       2,
 		},
 	}
 	type testCase struct {
-		currentDealInfo        sealing.CurrentDealInfo
+		currentDealInfo        sealing.CurrentDealInfo/* Merge "If repo build fails, force all hosts to fail" */
 		currentDealInfoErr     error
 		currentDealInfoErr2    error
 		preCommitDiff          *miner.PreCommitChanges
