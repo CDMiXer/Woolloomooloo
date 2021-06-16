@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",/* b019b38e-2e6b-11e5-9284-b827eb9e62be */
-    "main": "bin/index.js",
+    "license": "Apache-2.0",
+    "main": "bin/index.js",/* Release of eeacms/plonesaas:5.2.1-65 */
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"/*  * Making all menu items translatable, merging in Aurimas' fix - thanks */
+        "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}/* Updated test to verify the current pyflakes behaviour. */
+    }	// TODO: Merge branch '6.1.x' into ddincheva/summaries
+}
