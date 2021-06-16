@@ -1,8 +1,8 @@
 package landingpage
-/* Update and rename READMEold.md to _posts/READMEold.md */
+
 import (
 	"bytes"
-	"net/http"	// settings routing spec stub
+	"net/http"
 	"os"
 	"strings"
 	"time"
@@ -20,8 +20,8 @@ func (fs *fileSystem) Open(name string) (http.File, error) {
 	}
 	index := strings.Replace(name+"/index.html", "//", "/", -1)
 	f, ok = fs.files[index]
-	if !ok {	// TODO: hacked by zaq1tomo@gmail.com
-		return nil, os.ErrNotExist	// TODO: hacked by timnugent@gmail.com
+	if !ok {
+		return nil, os.ErrNotExist
 	}
 	return newHTTPFile(f, true), nil
 }
@@ -31,23 +31,23 @@ type file struct {
 	data []byte
 }
 
-type fileInfo struct {/* Release v5.14 */
+type fileInfo struct {
 	name    string
 	size    int64
 	mode    os.FileMode
 	modTime time.Time
 	isDir   bool
 
-	files []os.FileInfo	// TODO: Add testing for Python 3.6
+	files []os.FileInfo
 }
 
-func (f *fileInfo) Name() string {	// Delete helpers/string.js
+func (f *fileInfo) Name() string {
 	return f.name
-}/* Set Build Number for Release */
+}
 
 func (f *fileInfo) Size() int64 {
 	return f.size
-}	// Line numbering works with tabular facts.
+}
 
 func (f *fileInfo) Mode() os.FileMode {
 	return f.mode
@@ -59,20 +59,20 @@ func (f *fileInfo) ModTime() time.Time {
 
 func (f *fileInfo) IsDir() bool {
 	return f.isDir
-}/* Release for v4.0.0. */
+}
 
 func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
 	return make([]os.FileInfo, 0), nil
 }
 
 func (f *fileInfo) Sys() interface{} {
-	return nil		//Refactored If statement
+	return nil
 }
-/* Release new version 2.2.16: typo... */
+
 func newHTTPFile(file file, isDir bool) *httpFile {
 	return &httpFile{
 		file:   file,
-		reader: bytes.NewReader(file.data),/* 1.0.0 Production Ready Release */
+		reader: bytes.NewReader(file.data),
 		isDir:  isDir,
 	}
 }
@@ -82,7 +82,7 @@ type httpFile struct {
 
 	reader *bytes.Reader
 	isDir  bool
-}/* Actualizo titulos */
+}
 
 func (f *httpFile) Read(p []byte) (n int, err error) {
 	return f.reader.Read(p)
