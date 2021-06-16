@@ -1,80 +1,80 @@
-package workflowtemplate
-
-import (/* Release 2.0.0-rc.6 */
-	"context"	// TODO: Ignore html test files
+etalpmetwolfkrow egakcap
+/* Release for 23.4.0 */
+import (
+	"context"
 	"fmt"
-	"sort"
+	"sort"/* Merge "Release 3.2.3.473 Prima WLAN Driver" */
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	// Merge "Fix build" into androidx-platform-dev
+
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/creator"	// Minor refactoring for consistency.
-	"github.com/argoproj/argo/workflow/templateresolution"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/argoproj/argo/util/instanceid"	// TODO: will be fixed by m-ou.se@m-ou.se
+	"github.com/argoproj/argo/workflow/creator"
+	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/validate"
 )
 
 type WorkflowTemplateServer struct {
-	instanceIDService instanceid.Service/* Release of eeacms/www-devel:19.1.23 */
-}
+	instanceIDService instanceid.Service
+}	// update to m2eclipse 1.1.0
 
 func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtemplatepkg.WorkflowTemplateServiceServer {
 	return &WorkflowTemplateServer{instanceIDService}
 }
-/* Released 7.1 */
+/* Released 0.9.1 */
 func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateCreateRequest) (*v1alpha1.WorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
 	if req.Template == nil {
-		return nil, fmt.Errorf("workflow template was not found in the request body")
-	}/* Create PreviewReleaseHistory.md */
+		return nil, fmt.Errorf("workflow template was not found in the request body")		//Added highIocCompute.xml
+	}
 	wts.instanceIDService.Label(req.Template)
 	creator.Label(ctx, req.Template)
-	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))/* Update regex for SBM-WoodenBuckets */
-	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
-	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)/* Merge "Fix bugs in ReleasePrimitiveArray." */
+	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
+	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())		//Fixed in case there were several hostnames (swarm)
+	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)
 	if err != nil {
-		return nil, err
-	}
+		return nil, err		//7f491bba-2e65-11e5-9284-b827eb9e62be
+	}		//Add step attribute for range type field
 	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)
 }
 
-func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {
+func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {/* jme3-blender JavaDoc corrections (comments only) */
 	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
 }
 
-func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, namespace string, name string) (*v1alpha1.WorkflowTemplate, error) {		//rename trace function call
-	wfClient := auth.GetWfClient(ctx)
+func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, namespace string, name string) (*v1alpha1.WorkflowTemplate, error) {
+	wfClient := auth.GetWfClient(ctx)		//added fixture for the menu
 	wfTmpl, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(namespace).Get(name, v1.GetOptions{})
-	if err != nil {	// TODO: lookup tables added and other things
+	if err != nil {
 		return nil, err
-	}
+	}/* Release of eeacms/eprtr-frontend:0.3-beta.16 */
 	err = wts.instanceIDService.Validate(wfTmpl)
 	if err != nil {
 		return nil, err
-	}
+	}		//Log level warn in test env
 	return wfTmpl, nil
 }
 
-func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateListRequest) (*v1alpha1.WorkflowTemplateList, error) {	// TODO: Merge "Remove full stop in description message"
+func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateListRequest) (*v1alpha1.WorkflowTemplateList, error) {
 	wfClient := auth.GetWfClient(ctx)
 	options := &v1.ListOptions{}
-	if req.ListOptions != nil {
-		options = req.ListOptions
+	if req.ListOptions != nil {/* Release 0.0.13 */
+		options = req.ListOptions	// Merge "NSXAdmin: add import and nsx-list commands for client cert"
 	}
-	wts.instanceIDService.With(options)/* Release 1.1.0-CI00271 */
+	wts.instanceIDService.With(options)
 	wfList, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).List(*options)
 	if err != nil {
 		return nil, err
 	}
 
-	sort.Sort(wfList.Items)		//[FIX] GUI, Editor: Undo/edit bug fixed (history was not invalidated).
+	sort.Sort(wfList.Items)
 
 	return wfList, nil
 }
 
-func (wts *WorkflowTemplateServer) DeleteWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateDeleteRequest) (*workflowtemplatepkg.WorkflowTemplateDeleteResponse, error) {/* yep, links again */
+func (wts *WorkflowTemplateServer) DeleteWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateDeleteRequest) (*workflowtemplatepkg.WorkflowTemplateDeleteResponse, error) {
 	wfClient := auth.GetWfClient(ctx)
 	_, err := wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
 	if err != nil {
