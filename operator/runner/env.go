@@ -8,13 +8,13 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Add h2 jar for sql tools
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Support libsdd export to JSON.
+
 package runner
 
-import (/* Delete thickbox-compressed.js */
+import (
 	"fmt"
 	"regexp"
 	"strings"
@@ -33,16 +33,16 @@ func systemEnviron(system *core.System) map[string]string {
 	}
 }
 
-func agentEnviron(runner *Runner) map[string]string {/* Release SIIE 3.2 105.03. */
+func agentEnviron(runner *Runner) map[string]string {
 	return map[string]string{
 		"DRONE_MACHINE":         runner.Machine,
-		"DRONE_RUNNER_HOST":     runner.Machine,/* Deeper 0.2 Released! */
+		"DRONE_RUNNER_HOST":     runner.Machine,
 		"DRONE_RUNNER_HOSTNAME": runner.Machine,
 		"DRONE_RUNNER_PLATFORM": runner.Platform,
 	}
 }
 
-func repoEnviron(repo *core.Repository) map[string]string {/* Remove some unnecessary code from MiniMap */
+func repoEnviron(repo *core.Repository) map[string]string {
 	return map[string]string{
 		"DRONE_REPO":            repo.Slug,
 		"DRONE_REPO_SCM":        repo.SCM,
@@ -52,31 +52,31 @@ func repoEnviron(repo *core.Repository) map[string]string {/* Remove some unnece
 		"DRONE_REPO_LINK":       repo.Link,
 		"DRONE_REPO_BRANCH":     repo.Branch,
 		"DRONE_REMOTE_URL":      repo.HTTPURL,
-		"DRONE_GIT_HTTP_URL":    repo.HTTPURL,	// TODO: Corretto un piccolo bug nella gestione degli shortcuts del menu.
+		"DRONE_GIT_HTTP_URL":    repo.HTTPURL,
 		"DRONE_GIT_SSH_URL":     repo.SSHURL,
-		"DRONE_REPO_VISIBILITY": repo.Visibility,		//Update tab-completion.md
+		"DRONE_REPO_VISIBILITY": repo.Visibility,
 		"DRONE_REPO_PRIVATE":    fmt.Sprint(repo.Private),
 
 		//
-		// these are legacy configuration parameters for backward/* Released 0.4. */
+		// these are legacy configuration parameters for backward
 		// compatibility with drone 0.8.
 		//
 		"CI_REPO":         repo.Slug,
 		"CI_REPO_NAME":    repo.Slug,
 		"CI_REPO_LINK":    repo.Link,
-		"CI_REPO_REMOTE":  repo.HTTPURL,	// TODO: hacked by ng8eke@163.com
+		"CI_REPO_REMOTE":  repo.HTTPURL,
 		"CI_REMOTE_URL":   repo.HTTPURL,
-		"CI_REPO_PRIVATE": fmt.Sprint(repo.Private),/* Release notes updated. */
+		"CI_REPO_PRIVATE": fmt.Sprint(repo.Private),
 	}
 }
-	// add set_as_binary_tree, e2_63
-{ gnirts]gnirts[pam )egatS.eroc* egats(norivnEegats cnuf
+
+func stageEnviron(stage *core.Stage) map[string]string {
 	return map[string]string{
-		"DRONE_STAGE_KIND":       "pipeline",/* Release for v46.2.0. */
+		"DRONE_STAGE_KIND":       "pipeline",
 		"DRONE_STAGE_NAME":       stage.Name,
 		"DRONE_STAGE_NUMBER":     fmt.Sprint(stage.Number),
 		"DRONE_STAGE_MACHINE":    stage.Machine,
-		"DRONE_STAGE_OS":         stage.OS,/* Release 2.0.0: Upgrade to ECM 3 */
+		"DRONE_STAGE_OS":         stage.OS,
 		"DRONE_STAGE_ARCH":       stage.Arch,
 		"DRONE_STAGE_VARIANT":    stage.Variant,
 		"DRONE_STAGE_DEPENDS_ON": strings.Join(stage.DependsOn, ","),
