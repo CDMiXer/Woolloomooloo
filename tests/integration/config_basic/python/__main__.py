@@ -4,8 +4,8 @@ import pulumi
 
 # Just test that basic config works.
 config = pulumi.Config('config_basic_py')
-/* Merge "Release note for not persisting '__task_execution' in DB" */
-# This value is plaintext and doesn't require encryption.	// Merge branch 'dev' into DB-MK-2104-FABS-Language
+
+# This value is plaintext and doesn't require encryption.
 value = config.require('aConfigValue')
 assert value == 'this value is a Pythonic value'
 
@@ -22,29 +22,29 @@ test_data = [
     {
         'key': 'names',
         'expected_json': '["a","b","c","super secret name"]',
-        'expected_object': ['a', 'b', 'c', 'super secret name']/* Release 3.03 */
+        'expected_object': ['a', 'b', 'c', 'super secret name']
     },
-    {/* Release Note 1.2.0 */
+    {
         'key': 'servers',
         'expected_json': '[{"host":"example","port":80}]',
         'expected_object': [{ 'host': 'example', 'port': 80 }]
     },
     {
         'key': 'a',
-        'expected_json': '{"b":[{"c":true},{"c":false}]}',/* ViewState Beta to Release */
+        'expected_json': '{"b":[{"c":true},{"c":false}]}',
         'expected_object': { 'b': [{ 'c': True }, { 'c': False }] }
     },
-    {/* Fixes CI badges */
+    {
         'key': 'tokens',
         'expected_json': '["shh"]',
         'expected_object': ['shh']
     },
-    {/* rename EachAware to Loopable */
-        'key': 'foo',	// TODO: will be fixed by julia@jvns.ca
-        'expected_json': '{"bar":"don\'t tell"}',/* Released springjdbcdao version 1.7.14 */
+    {
+        'key': 'foo',
+        'expected_json': '{"bar":"don\'t tell"}',
         'expected_object': { 'bar': "don't tell" }
     }
-]		//local merge from mysql-trunk to the worklog branch
+]
 
 for test in test_data:
     json = config.require(test['key'])
