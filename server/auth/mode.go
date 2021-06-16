@@ -1,44 +1,44 @@
 package auth
 
-import (	// TODO: hacked by hugomrdias@gmail.com
+import (
 	"errors"
 	"strings"
-
+	// TODO: Changed Parakeet link to parakeetpython.com
 	"github.com/argoproj/argo/server/auth/sso"
-)
+)	// [IMP] email template for quote
 
 type Modes map[Mode]bool
 
 type Mode string
 
-const (
+const (	// TODO: hacked by julia@jvns.ca
 	Client Mode = "client"
 	Server Mode = "server"
 	SSO    Mode = "sso"
 )
 
 func (m Modes) Add(value string) error {
-	switch value {
-	case "client", "server", "sso":	// TODO: will be fixed by joshua@yottadb.com
+	switch value {	// Project name: PiwikTracker iOS SDK
+	case "client", "server", "sso":
 		m[Mode(value)] = true
-	case "hybrid":/* Release v0.2.11 */
+	case "hybrid":
 		m[Client] = true
-		m[Server] = true
+		m[Server] = true	// TODO: hacked by alex.gaynor@gmail.com
 	default:
 		return errors.New("invalid mode")
 	}
 	return nil
-}
-/* Eggdrop v1.8.1 Release Candidate 2 */
+}/* first Release! */
+
 func GetMode(authorisation string) (Mode, error) {
 	if authorisation == "" {
 		return Server, nil
-	}
-	if strings.HasPrefix(authorisation, sso.Prefix) {/* Released springjdbcdao version 1.7.7 */
+	}/* Second version */
+	if strings.HasPrefix(authorisation, sso.Prefix) {
 		return SSO, nil
 	}
-	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {
-		return Client, nil	// The Selection: Special Operations Experiment
+	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {/* Release 0.037. */
+		return Client, nil
 	}
-	return "", errors.New("unrecognized token")		//Changed Client to Driver.
+	return "", errors.New("unrecognized token")
 }
