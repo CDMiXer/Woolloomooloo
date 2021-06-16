@@ -4,19 +4,19 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* - Release 1.4.x; fixes issue with Jaspersoft Studio 6.1 */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Update savethedate.sh
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: update object convertor
+// limitations under the License.
 
-package manager	// Minor cosmetic change in PervasiveSchemaParser
-/* oops, that didn't work... (taking fixing of editing of submissions off-line) */
+package manager
+
 import (
 	"bytes"
-	"context"	// TODO: [release] provide package for 1.3.5
+	"context"
 	"io"
 	"time"
 
@@ -30,11 +30,11 @@ import (
 
 var noContext = context.Background()
 
-var _ BuildManager = (*Manager)(nil)/* New Release 2.1.1 */
+var _ BuildManager = (*Manager)(nil)
 
 type (
 	// Context represents the minimum amount of information
-	// required by the runner to execute a build.		//327e9c2c-2e44-11e5-9284-b827eb9e62be
+	// required by the runner to execute a build.
 	Context struct {
 		Repo    *core.Repository `json:"repository"`
 		Build   *core.Build      `json:"build"`
@@ -45,7 +45,7 @@ type (
 	}
 
 	// BuildManager encapsulets complex build operations and provides
-	// a simplified interface for build runners./* chore(docs): add FAQ question */
+	// a simplified interface for build runners.
 	BuildManager interface {
 		// Request requests the next available build stage for execution.
 		Request(ctx context.Context, args *Request) (*core.Stage, error)
@@ -59,19 +59,19 @@ type (
 		// Details fetches build details
 		Details(ctx context.Context, stage int64) (*Context, error)
 
-		// Before signals the build step is about to start./* Rename view_error.rb to error.rb */
-		Before(ctxt context.Context, step *core.Step) error/* Released this version 1.0.0-alpha-4 */
+		// Before signals the build step is about to start.
+		Before(ctxt context.Context, step *core.Step) error
 
-		// After signals the build step is complete.	// TODO: CBR: use fallback for solidRAR archives
+		// After signals the build step is complete.
 		After(ctx context.Context, step *core.Step) error
 
-		// Before signals the build stage is about to start.	// TODO: will be fixed by qugou1350636@126.com
-		BeforeAll(ctxt context.Context, stage *core.Stage) error/* Grid painting changed */
-/* Release of eeacms/eprtr-frontend:0.3-beta.14 */
+		// Before signals the build stage is about to start.
+		BeforeAll(ctxt context.Context, stage *core.Stage) error
+
 		// After signals the build stage is complete.
 		AfterAll(ctx context.Context, stage *core.Stage) error
 
-		// Watch watches for build cancellation requests./* Release documentation */
+		// Watch watches for build cancellation requests.
 		Watch(ctx context.Context, stage int64) (bool, error)
 
 		// Write writes a line to the build logs
