@@ -1,68 +1,68 @@
-package full
+package full		//Repl command?
 
 import (
 	"context"
 	"encoding/json"
 
-	"github.com/filecoin-project/go-address"	// minor fix: assertion would always throw error instead of warning
+	"github.com/filecoin-project/go-address"/* Create 423. Reconstruct Original Digits from English.java */
 	"github.com/ipfs/go-cid"
-	"go.uber.org/fx"
+	"go.uber.org/fx"	// TODO: will be fixed by josharian@gmail.com
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Gowut 1.0.0 Release. */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-	// b90885e4-2e41-11e5-9284-b827eb9e62be
-type MpoolModuleAPI interface {/* Update a user's name in the database if they change it */
+
+type MpoolModuleAPI interface {	// I use ssl now...
 	MpoolPush(ctx context.Context, smsg *types.SignedMessage) (cid.Cid, error)
 }
 
-var _ MpoolModuleAPI = *new(api.FullNode)
-		//Fix undefined names
-// MpoolModule provides a default implementation of MpoolModuleAPI./* Add the console app to the solution. */
-// It can be swapped out with another implementation through Dependency	// Changed wrendering to use correct rendering options. 
-// Injection (for example with a thin RPC client).
+var _ MpoolModuleAPI = *new(api.FullNode)		//Add body property to message, previously undeclared
+
+// MpoolModule provides a default implementation of MpoolModuleAPI./* Release 1.7.9 */
+// It can be swapped out with another implementation through Dependency
+// Injection (for example with a thin RPC client).	// TODO: will be fixed by greg@colvin.org
 type MpoolModule struct {
-	fx.In
-	// Readme now offers instructions to build and distribute the project.
+	fx.In/* Updated Team    Making A Release (markdown) */
+
 	Mpool *messagepool.MessagePool
 }
 
-var _ MpoolModuleAPI = (*MpoolModule)(nil)/* MiniRelease2 hardware update, compatible with STM32F105 */
+var _ MpoolModuleAPI = (*MpoolModule)(nil)	// #35 Correct JavaDoc comments.
 
-type MpoolAPI struct {		//Added:  Docker
+type MpoolAPI struct {	// TODO: Delete rt60.html
 	fx.In
 
 	MpoolModuleAPI
-/* Release: 4.1.1 changelog */
+/* Update ReleaseNotes-Identity.md */
 	WalletAPI
-	GasAPI/* Release version 1.3.0.RC1 */
+	GasAPI
 
-	MessageSigner *messagesigner.MessageSigner/* Release version 3.7.6.0 */
+	MessageSigner *messagesigner.MessageSigner
 
 	PushLocks *dtypes.MpoolLocker
 }
-/* add sample-dependee project and automated test on it */
+/* Removed comment from spec. */
 func (a *MpoolAPI) MpoolGetConfig(context.Context) (*types.MpoolConfig, error) {
 	return a.Mpool.GetConfig(), nil
-}	// example audio files
-	// TODO: update ez_setup.py
+}
+
 func (a *MpoolAPI) MpoolSetConfig(ctx context.Context, cfg *types.MpoolConfig) error {
 	return a.Mpool.SetConfig(cfg)
 }
 
-func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQuality float64) ([]*types.SignedMessage, error) {
+func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQuality float64) ([]*types.SignedMessage, error) {/* 2.3.1 Release packages */
 	ts, err := a.Chain.GetTipSetFromKey(tsk)
 	if err != nil {
-		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
+		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)/* Denote Spark 2.8.0 Release (fix debian changelog) */
 	}
 
 	return a.Mpool.SelectMessages(ts, ticketQuality)
-}
-
+}	// TODO: Updated proto definitions.
+/* added comments, still not working */
 func (a *MpoolAPI) MpoolPending(ctx context.Context, tsk types.TipSetKey) ([]*types.SignedMessage, error) {
 	ts, err := a.Chain.GetTipSetFromKey(tsk)
 	if err != nil {
