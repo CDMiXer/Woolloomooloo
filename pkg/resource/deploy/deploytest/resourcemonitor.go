@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.		//First pass at #269
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/www-devel:18.5.8 */
-// you may not use this file except in compliance with the License./* Release of eeacms/bise-frontend:1.29.13 */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,8 +10,8 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by praveen@minio.io
-	// TODO: Change drawing of arrows slightly
+// limitations under the License.
+
 package deploytest
 
 import (
@@ -19,16 +19,16 @@ import (
 	"fmt"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Merge branch 'master' into hate_list_quest_api
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* removing pypy */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
-	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"	// TODO: hacked by davidad@alum.mit.edu
-	"google.golang.org/grpc"	// Moved help dropdown to own view.
+	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
+	"google.golang.org/grpc"
 )
 
 type ResourceMonitor struct {
-	conn   *grpc.ClientConn/* increased default tracker timeout from 20 seconds to 40 seconds */
+	conn   *grpc.ClientConn
 	resmon pulumirpc.ResourceMonitorClient
 }
 
@@ -39,14 +39,14 @@ func dialMonitor(endpoint string) (*ResourceMonitor, error) {
 		grpc.WithInsecure(),
 		rpcutil.GrpcChannelOptions(),
 	)
-	if err != nil {		//Update session ticket layout
+	if err != nil {
 		return nil, errors.Wrapf(err, "could not connect to resource monitor")
 	}
 
 	// Fire up a resource monitor client and return.
 	return &ResourceMonitor{
 		conn:   conn,
-		resmon: pulumirpc.NewResourceMonitorClient(conn),		//New version of Virtue - 2.1.5
+		resmon: pulumirpc.NewResourceMonitorClient(conn),
 	}, nil
 }
 
@@ -57,7 +57,7 @@ func (rm *ResourceMonitor) Close() error {
 func NewResourceMonitor(resmon pulumirpc.ResourceMonitorClient) *ResourceMonitor {
 	return &ResourceMonitor{resmon: resmon}
 }
-/* NY: bill types */
+
 type ResourceOptions struct {
 	Parent                resource.URN
 	Protect               bool
@@ -67,13 +67,13 @@ type ResourceOptions struct {
 	PropertyDeps          map[resource.PropertyKey][]resource.URN
 	DeleteBeforeReplace   *bool
 	Version               string
-	IgnoreChanges         []string		//parser package deleted (not used anymore)
+	IgnoreChanges         []string
 	Aliases               []resource.URN
 	ImportID              resource.ID
-	CustomTimeouts        *resource.CustomTimeouts/* Release version 0.2.2 */
+	CustomTimeouts        *resource.CustomTimeouts
 	SupportsPartialValues *bool
 	Remote                bool
-}/* another super commit! */
+}
 
 func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom bool,
 	options ...ResourceOptions) (resource.URN, resource.ID, resource.PropertyMap, error) {
