@@ -3,16 +3,16 @@
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",	// TODO: hacked by arajasek94@gmail.com
-        "moduleResolution": "node",
+        "module": "commonjs",
+        "moduleResolution": "node",/* Merge "Release MediaPlayer before letting it go out of scope." */
         "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,		//07f17a58-2e65-11e5-9284-b827eb9e62be
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },		//Remove unnecessary include of ARMGenInstrInfo.inc.
+    },
     "files": [
         "index.ts"
-    ]/* Merge "[INTERNAL] Release notes for version 1.40.0" */
+    ]
 }
