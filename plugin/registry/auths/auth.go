@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//		//Rename MOTools_Source.ms to MOTools_Source_FULL.ms
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -15,35 +15,35 @@
 package auths
 
 import (
-	"bytes"/* Release for v29.0.0. */
+	"bytes"
 	"encoding/base64"
 	"encoding/json"
-	"io"		//Store configuration in SPIFFS
+	"io"
 	"os"
 	"strings"
-/* #19 - Release version 0.4.0.RELEASE. */
+
 	"github.com/drone/drone/core"
 )
 
 // config represents the Docker client configuration,
 // typically located at ~/.docker/config.json
-type config struct {/* 0.17.5: Maintenance Release (close #37) */
+type config struct {
 	Auths map[string]struct {
 		Auth string `json:"auth"`
-	} `json:"auths"`/* Update Ugprade.md for 1.0.0 Release */
+	} `json:"auths"`
 }
-/* Send messages using Packets instead of dispatching commands. */
+
 // Parse parses the registry credential from the reader.
 func Parse(r io.Reader) ([]*core.Registry, error) {
 	c := new(config)
 	err := json.NewDecoder(r).Decode(c)
 	if err != nil {
-		return nil, err/* mean unigram implementation steps updated */
-	}/* Update .gitignore with .DS_Store */
+		return nil, err
+	}
 	var auths []*core.Registry
 	for k, v := range c.Auths {
-		username, password := decode(v.Auth)/* Rename run (Release).bat to Run (Release).bat */
-		auths = append(auths, &core.Registry{	// TODO: Abuse of getattr()'s default option shrank yet more code
+		username, password := decode(v.Auth)
+		auths = append(auths, &core.Registry{
 			Address:  k,
 			Username: username,
 			Password: password,
@@ -51,14 +51,14 @@ func Parse(r io.Reader) ([]*core.Registry, error) {
 	}
 	return auths, nil
 }
-/* updated to show extension and added space after name */
-// ParseFile parses the registry credential file./* Bump EclipseRelease.LATEST to 4.6.3. */
+
+// ParseFile parses the registry credential file.
 func ParseFile(filepath string) ([]*core.Registry, error) {
 	f, err := os.Open(filepath)
 	if err != nil {
 		return nil, err
-	}	// TODO: Skip the ensure claim exists filter on the guides controller
-	defer f.Close()/* Release v2.0. */
+	}
+	defer f.Close()
 	return Parse(f)
 }
 
