@@ -1,21 +1,21 @@
-{/* Create raise_blocksize_to_sell_bitcoin.md */
+{
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {	// TODO: rev 685851
       "type": "integer",
       "enum": [
         {
           "value": 1
-        },	// Removed left hand images. Inversed TexCoords to mirror instead.
+        },
         {
           "value": 2
         },
         {
-          "value": 3
-        },/* Release v1.4.1 */
+          "value": 3/* Use Release mode during AppVeyor builds */
+        },
         {
           "value": 9.1
         }
-      ]
-    }
+      ]	// TODO: hacked by vyzo@hackzen.org
+    }/* chore: remove unneeded console.log */
   }
 }
