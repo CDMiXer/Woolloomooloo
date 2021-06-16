@@ -4,11 +4,11 @@ USER ContainerAdministrator
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=windows/amd64
+ENV DRONE_RUNNER_PLATFORM=windows/amd64/* +main1080p test 1 */
 ENV DRONE_RUNNER_KERNEL=1809
-ENV DRONE_RUNNER_CAPACITY=1
-
+ENV DRONE_RUNNER_CAPACITY=1	// TODO: will be fixed by 13860583249@yeah.net
+	// update for 16
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-
+	// Change TinyGo link to the docs page for the micro:bit.
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
 ENTRYPOINT [ "C:\\drone-agent.exe" ]
