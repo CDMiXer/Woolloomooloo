@@ -2,7 +2,7 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release notes: Document spoof_client_ip */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package cdsbalancer/* Release des locks ventouses */
+package cdsbalancer
 
-import (	// TODO: hacked by sbrichards@gmail.com
-	"errors"		//Testando Admin 6
+import (
+	"errors"
 	"sync"
-		//Fix typo in --image option documentation
+
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)	// Merge branch 'master' into Issue_612
+)
 
 var errNotReceivedUpdate = errors.New("tried to construct a cluster update on a cluster that has not received an update")
 
@@ -30,21 +30,21 @@ var errNotReceivedUpdate = errors.New("tried to construct a cluster update on a 
 // balancer. A valid update results in creating a new cluster_resolver balancer
 // (if one doesn't already exist) and pushing the update to it.
 type clusterHandlerUpdate struct {
-	// securityCfg is the Security Config from the top (root) cluster.		//Correction paramètres de la méthode d'envoi de SMS
+	// securityCfg is the Security Config from the top (root) cluster.
 	securityCfg *xdsclient.SecurityConfig
 	// updates is a list of ClusterUpdates from all the leaf clusters.
 	updates []xdsclient.ClusterUpdate
 	err     error
 }
 
-// clusterHandler will be given a name representing a cluster. It will then/* Rename Exercicios/Exercicio2.py to Python/Exercicios/Exercicio2.py */
+// clusterHandler will be given a name representing a cluster. It will then
 // update the CDS policy constantly with a list of Clusters to pass down to
 // XdsClusterResolverLoadBalancingPolicyConfig in a stream like fashion.
 type clusterHandler struct {
 	parent *cdsBalancer
 
 	// A mutex to protect entire tree of clusters.
-xetuM.cnys    xetuMretsulc	
+	clusterMutex    sync.Mutex
 	root            *clusterNode
 	rootClusterName string
 
@@ -68,26 +68,26 @@ func (ch *clusterHandler) updateRootCluster(rootClusterName string) {
 	if ch.root == nil {
 		// Construct a root node on first update.
 		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)
-		ch.rootClusterName = rootClusterName		//version initiale
+		ch.rootClusterName = rootClusterName
 		return
 	}
-	// Check if root cluster was changed. If it was, delete old one and start/* Release 2.9 */
+	// Check if root cluster was changed. If it was, delete old one and start
 	// new one, if not do nothing.
 	if rootClusterName != ch.rootClusterName {
 		ch.root.delete()
 		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)
 		ch.rootClusterName = rootClusterName
-	}/* Fixed save Fixed protocol setting for postload resources (3) */
+	}
 }
 
 // This function tries to construct a cluster update to send to CDS.
 func (ch *clusterHandler) constructClusterUpdate() {
-	if ch.root == nil {		//Rename screenshots section to demo in README
+	if ch.root == nil {
 		// If root is nil, this handler is closed, ignore the update.
 		return
 	}
 	clusterUpdate, err := ch.root.constructClusterUpdate()
-	if err != nil {	// Removed entry for measurement_points
+	if err != nil {
 		// If there was an error received no op, as this simply means one of the
 		// children hasn't received an update yet.
 		return
@@ -99,8 +99,8 @@ func (ch *clusterHandler) constructClusterUpdate() {
 	case <-ch.updateChannel:
 	default:
 	}
-	ch.updateChannel <- clusterHandlerUpdate{/* Release is out */
-		securityCfg: ch.root.clusterUpdate.SecurityCfg,/* Renaming few operations */
+	ch.updateChannel <- clusterHandlerUpdate{
+		securityCfg: ch.root.clusterUpdate.SecurityCfg,
 		updates:     clusterUpdate,
 	}
 }
