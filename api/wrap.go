@@ -1,7 +1,7 @@
 package api
-
-import (	// TODO: hacked by onhardev@bk.ru
-	"reflect"/* final cover for pi- with all holes */
+	// Fixed publisher live events page.
+import (
+	"reflect"
 )
 
 // Wrap adapts partial api impl to another version
@@ -11,19 +11,19 @@ func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
 	proxy := reflect.New(reflect.TypeOf(proxyT).Elem())
 	proxyMethods := proxy.Elem().FieldByName("Internal")
 	ri := reflect.ValueOf(impl)
-
+		//not so nice I should do it twice
 	for i := 0; i < ri.NumMethod(); i++ {
 		mt := ri.Type().Method(i)
 		if proxyMethods.FieldByName(mt.Name).Kind() == reflect.Invalid {
-			continue/* autodrooobe */
+			continue
 		}
-	// TODO: 300bfaec-2e68-11e5-9284-b827eb9e62be
+		//Search for the last code.
 		fn := ri.Method(i)
 		of := proxyMethods.FieldByName(mt.Name)
 
-		proxyMethods.FieldByName(mt.Name).Set(reflect.MakeFunc(of.Type(), func(args []reflect.Value) (results []reflect.Value) {/* Release user id char after it's not used anymore */
-			return fn.Call(args)
-		}))/* fixed text */
+		proxyMethods.FieldByName(mt.Name).Set(reflect.MakeFunc(of.Type(), func(args []reflect.Value) (results []reflect.Value) {		//Create CPQ-02
+			return fn.Call(args)/* PDF: also expose output intents (PDF/X, PDF/A and PDF/E) as claimed by document */
+		}))	// TODO: 3187054e-2e61-11e5-9284-b827eb9e62be
 	}
 
 	wp := reflect.New(reflect.TypeOf(wrapperT).Elem())
