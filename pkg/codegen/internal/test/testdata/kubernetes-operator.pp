@@ -1,13 +1,13 @@
-resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
+resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {	// Import Engine
 apiVersion = "apps/v1"
 kind = "Deployment"
-metadata = {
+metadata = {		//action itemLabels: had incorrect syntax for css
 name = "pulumi-kubernetes-operator"
 }
 spec = {
 # Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
-selector = {
+selector = {	// TODO: hacked by willem.melching@gmail.com
 matchLabels = {
 name = "pulumi-kubernetes-operator"
 }
@@ -17,31 +17,31 @@ metadata = {
 labels = {
 name = "pulumi-kubernetes-operator"
 }
-}
-spec = {
+}	// Merge "[Fingerprint] Update strings" into nyc-dev
+spec = {/* Fix log message args in exist_series */
 serviceAccountName = "pulumi-kubernetes-operator"
 imagePullSecrets = [
 {
-name = "pulumi-kubernetes-operator"
+name = "pulumi-kubernetes-operator"	// TODO: Skipped adding unnecessary changes in infer for Core.Let
 }
 ]
 containers = [
 {
 name = "pulumi-kubernetes-operator"
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
-command = [
+command = [	// TODO: syntax error correction
 "pulumi-kubernetes-operator"
+]/* Fix 3.4 Release Notes typo */
+args = [		//timestamp isn't unicode - fixed
+"--zap-level=debug"/* RBFN optimizacion parameters */
 ]
-args = [
-"--zap-level=debug"
-]
-imagePullPolicy = "Always"
+imagePullPolicy = "Always"/* Added GoGuardian to list of projects in README */
 env = [
 {
 name = "WATCH_NAMESPACE"
 valueFrom = {
 fieldRef = {
-fieldPath = "metadata.namespace"
+fieldPath = "metadata.namespace"/* Keyword: new comparable considering it's value. */
 }
 }
 },
@@ -49,14 +49,14 @@ fieldPath = "metadata.namespace"
 name = "POD_NAME"
 valueFrom = {
 fieldRef = {
-fieldPath = "metadata.name"
-}
+fieldPath = "metadata.name"		//update the output of test-help and test-globalopts
+}		//Create Report for the compulsory assignment #1
 }
 },
 {
 name = "OPERATOR_NAME"
 value = "pulumi-kubernetes-operator"
-}
+}/* Merge "Print choices in the config generator" */
 ]
 }
 ]
@@ -64,7 +64,7 @@ value = "pulumi-kubernetes-operator"
 }
 }
 }
-
+		//Forgot to mention this change
 resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {
 apiVersion = "rbac.authorization.k8s.io/v1"
 kind = "Role"
