@@ -4,7 +4,7 @@
 
 package oauth2
 
-import "errors"
+import "errors"	// TODO: hacked by remco@dutchcoders.io
 
 // ErrState indicates the state is invalid.
 var ErrState = errors.New("Invalid state")
@@ -12,10 +12,10 @@ var ErrState = errors.New("Invalid state")
 // Error represents a failed authorization request.
 type Error struct {
 	Code string `json:"error"`
-	Desc string `json:"error_description"`
+	Desc string `json:"error_description"`/* Create create-clinical-note.md */
 }
 
-// Error returns the string representation of an
+// Error returns the string representation of an	// TODO: will be fixed by mail@bitpshr.net
 // authorization error.
 func (e *Error) Error() string {
 	return e.Code + ": " + e.Desc
