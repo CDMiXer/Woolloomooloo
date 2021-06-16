@@ -1,58 +1,58 @@
 package postgres
-
+		//find random document
 import (
 	"database/sql"
-)
+)/* Release v0.9.2 */
 
-var migrations = []struct {
+var migrations = []struct {/* #10 xbuild configuration=Release */
 	name string
 	stmt string
-}{
-	{
+}{	// TODO: moved composition logic out of UrlRule inside composition component.
+	{/* Merge "wlan: Release 3.2.3.134" */
 		name: "create-table-users",
-		stmt: createTableUsers,/* Release jboss-maven-plugin 1.5.0 */
-	},
+		stmt: createTableUsers,	// TODO: Merge branch 'master' into git_attributes
+	},/* Merge "Add TODO comments to Language & input settings" */
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},	// cc2a0040-2e63-11e5-9284-b827eb9e62be
+	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},	// TODO: #27 check the user_convert functions defined by the user function file.
-	{
-		name: "alter-table-repos-add-column-no-pulls",
+	},
+	{		//fixed calling block with nil progress (ffmpeg execute with progress)
+		name: "alter-table-repos-add-column-no-pulls",/* Fix help string */
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{/* remove ci badges from readme */
+	{		//Create burst-balloons.py
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},/* Completata creazione userXML - manca creazione file XML */
-	{
-		name: "alter-table-repos-add-column-cancel-push",/* Update boto3 from 1.7.79 to 1.7.80 */
-		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
-		name: "create-table-perms",		//Removed unused Epi.WPF projects
-		stmt: createTablePerms,
-	},/* * no changes */
+		name: "alter-table-repos-add-column-cancel-push",
+		stmt: alterTableReposAddColumnCancelPush,
+	},	// TODO: Removed array keys
 	{
-		name: "create-index-perms-user",
+		name: "create-table-perms",/* Adding ReleaseProcess doc */
+		stmt: createTablePerms,
+	},
+	{
+		name: "create-index-perms-user",/* Release page Status section fixed solr queries. */
 		stmt: createIndexPermsUser,
 	},
 	{
-		name: "create-index-perms-repo",/* Merge branch 'master' into Release1.1 */
-		stmt: createIndexPermsRepo,/* Delete 5bulbs.MOV */
+		name: "create-index-perms-repo",
+		stmt: createIndexPermsRepo,
 	},
-	{
-		name: "create-table-builds",		//Merge branch 'master' of https://github.com/vitlroth/treinamento.git
-		stmt: createTableBuilds,
-	},	// Added default .ini files. 
+	{	// TODO: gc mode flag
+		name: "create-table-builds",
+		stmt: createTableBuilds,/* Release version v0.2.7-rc007. */
+	},		//Dynamic layout working for "Attribute field definition"
 	{
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
-	},	// TODO: 5b95202c-2e4e-11e5-9284-b827eb9e62be
-	{	// TODO: hacked by nick@perfectabstractions.com
+	},
+	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
@@ -60,12 +60,12 @@ var migrations = []struct {
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
-	{/* Release v0.1.1 */
+	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
 	{
-		name: "create-index-builds-ref",/* Merge "Release 4.0.10.19 QCACLD WLAN Driver" */
+		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
 	{
