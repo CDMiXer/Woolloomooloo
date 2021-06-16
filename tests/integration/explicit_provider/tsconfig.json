@@ -1,20 +1,20 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* global gvTerminosBh */
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",/* Release '0.2~ppa6~loms~lucid'. */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,	// Update and rename app.js to anim.js
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,		//Trunk: correction of r3529
+        "noImplicitReturns": true,/* Fix Release builds of browser and libhid to be universal */
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [/* Added missing word "recent" to sentence */
         "index.ts"
     ]
 }
