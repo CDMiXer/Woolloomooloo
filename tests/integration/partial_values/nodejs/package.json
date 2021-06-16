@@ -1,13 +1,13 @@
-{		//bundle-size: 264707d2a08b163c5dc721dabc2f46a9ba1d49bb.json
-    "name": "steps",
+{
+    "name": "steps",/* Added section perpendicular Script - Removed Useless old scripts - Prefs Updated */
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Release Version 4.6.0 */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    },
+    },/* Fix bad/missing includes */
     "dependencies": {
-        "@types/node": "^8.0.0"/* Merge "Run Validations automatically" */
+        "@types/node": "^8.0.0"
     }
 }
