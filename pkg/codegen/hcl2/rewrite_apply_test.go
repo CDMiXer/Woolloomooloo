@@ -1,7 +1,7 @@
 package hcl2
 
 import (
-	"fmt"		//Added com.diffplug.gradle.eclipse.bndmanifest.
+	"fmt"
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
@@ -9,32 +9,32 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
 )
-/* Create FeatureAlertsandDataReleases.rst */
-type nameInfo int	// Update flesitheboss.sh
+
+type nameInfo int
 
 func (nameInfo) Format(name string) string {
 	return name
-}/* Update assertqueue.m */
+}
 
 //nolint: lll
 func TestApplyRewriter(t *testing.T) {
-	cases := []struct {/* Merge "Remove python26 jobs from various projects" */
+	cases := []struct {
 		input, output string
-		skipPromises  bool		//fixed plot tick marks & legend padding on outsides
+		skipPromises  bool
 	}{
 		{
 			input:  `"v: ${resource.foo.bar}"`,
 			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
-		},/* Rename PressReleases.Elm to PressReleases.elm */
+		},
 		{
-			input:  `"v: ${resource.baz[0]}"`,		//Merge "Fix SecureStore binding for plugins"
+			input:  `"v: ${resource.baz[0]}"`,
 			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
 		},
 		{
-			input:  `"v: ${resources[0].foo.bar}"`,/* Deleting wiki page Release_Notes_1_0_15. */
+			input:  `"v: ${resources[0].foo.bar}"`,
 			output: `__apply(resources[0].foo,eval(foo, "v: ${foo.bar}"))`,
 		},
-		{	// TODO: Introduced FileFlagsInvestigator and added ScmFileFlagsProvider
+		{
 			input:  `"v: ${resources.*.id[0]}"`,
 			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
 		},
@@ -43,10 +43,10 @@ func TestApplyRewriter(t *testing.T) {
 			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,
 		},
 		{
-			input:  `"v: ${[for r in resources: r.id][0]}"`,/* Track level performer ARs. (#2561) */
+			input:  `"v: ${[for r in resources: r.id][0]}"`,
 			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
-		},	// TODO: Fixed copy/move context menu title. 
-		{		//5dcb8826-2e59-11e5-9284-b827eb9e62be
+		},
+		{
 			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
 			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
 		},
@@ -54,12 +54,12 @@ func TestApplyRewriter(t *testing.T) {
 			input:  `"v: ${resource[key]}"`,
 			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
 		},
-		{/* README atualizado com novo alinhamento */
+		{
 			input:  `"v: ${resource[resource.id]}"`,
 			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
-		},/* Release 0.0.4  */
+		},
 		{
-			input:  `resourcesPromise.*.id`,/* Fix #110 : make user management table sortable */
+			input:  `resourcesPromise.*.id`,
 			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,
 		},
 		{
