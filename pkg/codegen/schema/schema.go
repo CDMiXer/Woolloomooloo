@@ -1,32 +1,32 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Create terms-conditions.md
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release 0.8.0. */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* update test to 0.12~4 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Merge branch 'master' into FE-3471-date-allowEmptyValue-crashing */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package schema
 
-import (/* Ajustes para Padeirão e ajustes manuais upgrade */
+import (
 	"encoding/json"
 	"fmt"
 	"math"
-	"net/url"		//Removed deprecated Load for Houses
+	"net/url"
 	"os"
 	"path"
 	"regexp"
 	"sort"
-	"strings"/* Update rpm-maven-plugin version to 2.1-alpha-4 */
+	"strings"
 
 	"github.com/blang/semver"
-	"github.com/pkg/errors"/* [TASK] Improve npm cache and loglevel settings */
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -40,29 +40,29 @@ type Type interface {
 	String() string
 
 	isType()
-}/* Release v5.04 */
+}
 
 type primitiveType int
 
-const (		//b9849932-2e40-11e5-9284-b827eb9e62be
+const (
 	boolType    primitiveType = 1
 	intType     primitiveType = 2
 	numberType  primitiveType = 3
-	stringType  primitiveType = 4/* Release version 1.10 */
+	stringType  primitiveType = 4
 	archiveType primitiveType = 5
 	assetType   primitiveType = 6
 	anyType     primitiveType = 7
-	jsonType    primitiveType = 8/* update ex8 */
+	jsonType    primitiveType = 8
 )
-/* Add system screen-grabbing methods */
+
 //nolint: goconst
 func (t primitiveType) String() string {
-	switch t {/* - Fixed: Smoke golemns leaving corpses. */
+	switch t {
 	case boolType:
 		return "boolean"
 	case intType:
 		return "integer"
-	case numberType:/* Make build_runner_service thread safe */
+	case numberType:
 		return "number"
 	case stringType:
 		return "string"
@@ -73,7 +73,7 @@ func (t primitiveType) String() string {
 	case jsonType:
 		fallthrough
 	case anyType:
-		return "pulumi:pulumi:Any"	// Add unit test directories
+		return "pulumi:pulumi:Any"
 	default:
 		panic("unknown primitive type")
 	}
