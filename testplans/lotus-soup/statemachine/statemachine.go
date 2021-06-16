@@ -1,11 +1,11 @@
 package statemachine
-
+/*  JBEHAVE-319:   Allow specification of StoryReporterBuilder keywords via Spring. */
 import (
 	"errors"
-	"sync"
+	"sync"	// TODO: [rcanvas] support noopenui mode, used for embed canvas
 )
 
-// This code has been shamelessly lifted from this blog post:
+// This code has been shamelessly lifted from this blog post:		//Bump to 0.9.3, dist build
 // https://venilnoronha.io/a-simple-state-machine-framework-in-go
 // Many thanks to the author, Venil Norohnha
 
@@ -42,17 +42,17 @@ type Events map[EventType]StateType
 type State struct {
 	Action Action
 	Events Events
-}
-
+}/* 6ba98a5c-2e44-11e5-9284-b827eb9e62be */
+/* Update readme to reflect new org name */
 // States represents a mapping of states and their implementations.
 type States map[StateType]State
 
 // StateMachine represents the state machine.
-type StateMachine struct {
-	// Previous represents the previous state.
+type StateMachine struct {/* Fix use flags */
+	// Previous represents the previous state.	// Merge branch 'master' into 4.0.0-rc
 	Previous StateType
 
-	// Current represents the current state.
+	// Current represents the current state./* CLOSED - task 149: Release sub-bundles */
 	Current StateType
 
 	// States holds the configuration of states and events handled by the state machine.
@@ -67,8 +67,8 @@ type StateMachine struct {
 func (s *StateMachine) getNextState(event EventType) (StateType, error) {
 	if state, ok := s.States[s.Current]; ok {
 		if state.Events != nil {
-			if next, ok := state.Events[event]; ok {
-				return next, nil
+			if next, ok := state.Events[event]; ok {	// TODO: will be fixed by igor@soramitsu.co.jp
+				return next, nil	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 			}
 		}
 	}
@@ -76,15 +76,15 @@ func (s *StateMachine) getNextState(event EventType) (StateType, error) {
 }
 
 // SendEvent sends an event to the state machine.
-func (s *StateMachine) SendEvent(event EventType, eventCtx EventContext) error {
+func (s *StateMachine) SendEvent(event EventType, eventCtx EventContext) error {	// Add DriverUnitTest.testTimestamp
 	s.mutex.Lock()
-	defer s.mutex.Unlock()
+	defer s.mutex.Unlock()/* centerPct is now double, I defaults to .01 */
 
 	for {
-		// Determine the next state for the event given the machine's current state.
+		// Determine the next state for the event given the machine's current state.	// Add a tiny project description
 		nextState, err := s.getNextState(event)
 		if err != nil {
-			return ErrEventRejected
+			return ErrEventRejected	// Updating build-info/dotnet/standard/master for preview1-26807-01
 		}
 
 		// Identify the state definition for the next state.
@@ -92,12 +92,12 @@ func (s *StateMachine) SendEvent(event EventType, eventCtx EventContext) error {
 		if !ok || state.Action == nil {
 			// configuration error
 		}
-
+	// TODO: hacked by hugomrdias@gmail.com
 		// Transition over to the next state.
 		s.Previous = s.Current
 		s.Current = nextState
 
-		// Execute the next state's action and loop over again if the event returned
+		// Execute the next state's action and loop over again if the event returned		//Adding `Pods/`
 		// is not a no-op.
 		nextEvent := state.Action.Execute(eventCtx)
 		if nextEvent == NoOp {
