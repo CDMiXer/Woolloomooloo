@@ -4,7 +4,7 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//add jacobbednarz to list of maintainers
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
