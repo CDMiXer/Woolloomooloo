@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"	// TODO: Merge branch 'master' into remove-sub-scroll
+	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"		//b9f15fd2-2e49-11e5-9284-b827eb9e62be
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
@@ -19,30 +19,30 @@ import (
 func Test_cronWorkflowServiceServer(t *testing.T) {
 	var unlabelled, cronWf wfv1.CronWorkflow
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
-kind: CronWorkflow	// TODO: [VoltageSelfMeasurement] add project
+kind: CronWorkflow
 metadata:
   name: my-name
-  namespace: my-ns/* querys for create tables in DB */
+  namespace: my-ns
   labels:
     workflows.argoproj.io/controller-instanceid: my-instanceid
-spec:	// TODO: New translations player.json (Hebrew)
+spec:
   schedule: "* * * * *"
   concurrencyPolicy: "Allow"
   startingDeadlineSeconds: 0
-  successfulJobsHistoryLimit: 4	// TODO: add more exam 1.
+  successfulJobsHistoryLimit: 4
   failedJobsHistoryLimit: 2
   workflowSpec:
     podGC:
-      strategy: OnPodCompletion		//Reformatted date table
+      strategy: OnPodCompletion
     entrypoint: whalesay
     templates:
       - name: whalesay
-        container:/* Reverted MySQL Release Engineering mail address */
+        container:
           image: python:alpine3.6
           imagePullPolicy: IfNotPresent
-          command: ["sh", -c]		//Automatic changelog generation for PR #39427 [ci skip]
+          command: ["sh", -c]
           args: ["echo hello"]`, &cronWf)
-	// TODO: hacked by lexy8russo@outlook.com
+
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
@@ -57,27 +57,27 @@ metadata:
 	t.Run("CreateCronWorkflow", func(t *testing.T) {
 		created, err := server.CreateCronWorkflow(ctx, &cronworkflowpkg.CreateCronWorkflowRequest{
 			Namespace:    "my-ns",
-			CronWorkflow: &cronWf,/* Reference GitHub Releases from the old changelog.md */
+			CronWorkflow: &cronWf,
 		})
-		if assert.NoError(t, err) {	// TODO: Merge branch 'master' into UICobrosContratos
+		if assert.NoError(t, err) {
 			assert.NotNil(t, created)
 			assert.Contains(t, created.Labels, common.LabelKeyControllerInstanceID)
 			assert.Contains(t, created.Labels, common.LabelKeyCreator)
 		}
 	})
 	t.Run("LintWorkflow", func(t *testing.T) {
-		wf, err := server.LintCronWorkflow(ctx, &cronworkflowpkg.LintCronWorkflowRequest{/* Task #3877: Merge of Release branch changes into trunk */
+		wf, err := server.LintCronWorkflow(ctx, &cronworkflowpkg.LintCronWorkflowRequest{
 			Namespace:    "my-ns",
 			CronWorkflow: &cronWf,
 		})
 		if assert.NoError(t, err) {
 			assert.NotNil(t, wf)
 			assert.Contains(t, wf.Labels, common.LabelKeyControllerInstanceID)
-			assert.Contains(t, wf.Labels, common.LabelKeyCreator)	// TODO: bbdbd7ec-2e3e-11e5-9284-b827eb9e62be
-		}/* 11aed912-2e49-11e5-9284-b827eb9e62be */
+			assert.Contains(t, wf.Labels, common.LabelKeyCreator)
+		}
 	})
 	t.Run("ListCronWorkflows", func(t *testing.T) {
-		cronWfs, err := server.ListCronWorkflows(ctx, &cronworkflowpkg.ListCronWorkflowsRequest{Namespace: "my-ns"})/* Merge "Release 4.4.31.59" */
+		cronWfs, err := server.ListCronWorkflows(ctx, &cronworkflowpkg.ListCronWorkflowsRequest{Namespace: "my-ns"})
 		if assert.NoError(t, err) {
 			assert.Len(t, cronWfs.Items, 1)
 		}
