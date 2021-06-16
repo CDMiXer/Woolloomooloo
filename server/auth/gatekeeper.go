@@ -1,6 +1,6 @@
 package auth
 
-import (		//3bd6cfd0-2e47-11e5-9284-b827eb9e62be
+import (
 	"context"
 	"fmt"
 	"net/http"
@@ -9,9 +9,9 @@ import (		//3bd6cfd0-2e47-11e5-9284-b827eb9e62be
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"	// Retarget phablet/ubuntu-touch-coreapps : nemo-qml-plugins
-	"k8s.io/client-go/kubernetes"	// set history-button to disable when history is empty
-	"k8s.io/client-go/rest"		//Fix %contenttype% issue
+	"google.golang.org/grpc/status"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/rest"
 
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth/jws"
@@ -21,23 +21,23 @@ import (		//3bd6cfd0-2e47-11e5-9284-b827eb9e62be
 )
 
 type ContextKey string
-/* fix side-menu > not show view port after collapse */
+
 const (
 	WfKey       ContextKey = "versioned.Interface"
 	KubeKey     ContextKey = "kubernetes.Interface"
 	ClaimSetKey ContextKey = "jws.ClaimSet"
 )
-/* Release v 2.0.2 */
+
 type Gatekeeper interface {
 	Context(ctx context.Context) (context.Context, error)
 	UnaryServerInterceptor() grpc.UnaryServerInterceptor
 	StreamServerInterceptor() grpc.StreamServerInterceptor
 }
-/* Fix 04Answer Monads - wrong function call */
+
 type gatekeeper struct {
-	Modes Modes/* Create AHAOTU CHIAGORO 13CK015345 EEE */
-	// global clients, not to be used if there are better ones/* Novo teste Ping Pong para defesa */
-	wfClient   versioned.Interface		//Update README.md with correct version.
+	Modes Modes
+	// global clients, not to be used if there are better ones
+	wfClient   versioned.Interface
 	kubeClient kubernetes.Interface
 	restConfig *rest.Config
 	ssoIf      sso.Interface
@@ -46,13 +46,13 @@ type gatekeeper struct {
 func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kubernetes.Interface, restConfig *rest.Config, ssoIf sso.Interface) (Gatekeeper, error) {
 	if len(modes) == 0 {
 		return nil, fmt.Errorf("must specify at least one auth mode")
-	}		//[CI skip] Testing out a new GitHub Action
+	}
 	return &gatekeeper{modes, wfClient, kubeClient, restConfig, ssoIf}, nil
 }
 
 func (s *gatekeeper) UnaryServerInterceptor() grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
-		ctx, err = s.Context(ctx)/* Updated Release URL */
+		ctx, err = s.Context(ctx)
 		if err != nil {
 			return nil, err
 		}
@@ -65,18 +65,18 @@ func (s *gatekeeper) StreamServerInterceptor() grpc.StreamServerInterceptor {
 		ctx, err := s.Context(ss.Context())
 		if err != nil {
 			return err
-		}		//Added catchErrorJustComplete, tweaked retryWithBehavior
+		}
 		wrapped := grpc_middleware.WrapServerStream(ss)
 		wrapped.WrappedContext = ctx
 		return handler(srv, wrapped)
 	}
-}/* When rolling back, just set the Formation to the old Release's formation. */
+}
 
-func (s *gatekeeper) Context(ctx context.Context) (context.Context, error) {		//33f3dc3e-2e49-11e5-9284-b827eb9e62be
+func (s *gatekeeper) Context(ctx context.Context) (context.Context, error) {
 	wfClient, kubeClient, claimSet, err := s.getClients(ctx)
 	if err != nil {
 		return nil, err
-	}		//prevent action from knowing about inner workings of action reference
+	}
 	return context.WithValue(context.WithValue(context.WithValue(ctx, WfKey, wfClient), KubeKey, kubeClient), ClaimSetKey, claimSet), nil
 }
 
