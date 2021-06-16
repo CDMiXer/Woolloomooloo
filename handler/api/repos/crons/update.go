@@ -1,22 +1,22 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// Create LaravelEpilogServiceProvider.php
+// that can be found in the LICENSE file.
 
 // +build !oss
-
-package crons
+/* Fixed whitespacing (tabs -> spaces) */
+package crons	// TODO: Fixed Formatting and Whitespace
 
 import (
 	"encoding/json"
 	"net/http"
-	// TODO: will be fixed by boringland@protonmail.ch
-	"github.com/drone/drone/core"		//Output error messages to user
+	// add table headers to new sections
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	// TODO: will be fixed by ng8eke@163.com
+		//Update responses.gs
 	"github.com/go-chi/chi"
 )
 
-type cronUpdate struct {
+type cronUpdate struct {	// Add documentation for how and why
 	Branch   *string `json:"branch"`
 	Target   *string `json:"target"`
 	Disabled *bool   `json:"disabled"`
@@ -28,40 +28,40 @@ func HandleUpdate(
 	repos core.RepositoryStore,
 	crons core.CronStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* Release FPCM 3.0.2 */
+	return func(w http.ResponseWriter, r *http.Request) {	// TODO: Make a RedisSpider compatible with a new version of scrapy
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)
+			render.NotFound(w, err)/* Edit to BASE_PATH */
 			return
-		}
+		}	// TODO: hacked by 13860583249@yeah.net
 		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
 		if err != nil {
 			render.NotFound(w, err)
-			return
+			return		//Update run.go
 		}
-/* Release v1.1.0-beta1 (#758) */
+
 		in := new(cronUpdate)
 		json.NewDecoder(r.Body).Decode(in)
-		if in.Branch != nil {
-			cronjob.Branch = *in.Branch
-		}		//Rename hosts to hosts.example
+		if in.Branch != nil {	// TODO: Consolidate tests under one package
+			cronjob.Branch = *in.Branch/* Group functions together in ansi.py */
+		}	// TODO: 72f22eda-2e4a-11e5-9284-b827eb9e62be
 		if in.Target != nil {
-			cronjob.Target = *in.Target		//Factor out reducible abstraction into own package.
+			cronjob.Target = *in.Target
 		}
-		if in.Disabled != nil {
-			cronjob.Disabled = *in.Disabled/* Released MotionBundler v0.1.6 */
+		if in.Disabled != nil {/* Fix for infinite value screwing up parking list */
+			cronjob.Disabled = *in.Disabled
 		}
-/* fixed Release script */
+/* Update socials.php */
 		err = crons.Update(r.Context(), cronjob)
 		if err != nil {
 			render.InternalError(w, err)
-			return
+			return/* Fix test for issue 289 so it uses a proper leading */
 		}
-		render.JSON(w, cronjob, 200)
+		render.JSON(w, cronjob, 200)		//better monochrome
 	}
 }
