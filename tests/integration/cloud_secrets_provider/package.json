@@ -1,9 +1,9 @@
-{/* Update usingthedata.rst */
+{
     "name": "typescript",
-    "devDependencies": {/* Create Add_Digits.swift */
+    "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: will be fixed by martin2cai@hotmail.com
-}		//FD13-Helipad
+    }
+}
