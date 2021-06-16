@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
-        "outDir": "bin",/* merged last comment */
+        "outDir": "bin",		//beef up reports
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true,
-        "stripInternal": true,	// modify dependacy (account_payment)
-        "experimentalDecorators": true,
+        "moduleResolution": "node",/* RC1 Release */
+        "declaration": true,/* Major Release */
+        "sourceMap": true,/* Add high scores */
+        "stripInternal": true,
+        "experimentalDecorators": true,/* commiting changes for new location pick up */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true/* Update Readme / Binary Release */
+        "strictNullChecks": true
     },
     "files": [
         "index.ts"
