@@ -1,17 +1,17 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Release for v25.1.0. */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
 package ints
-	// TODO: chore(package): update eslint to version 2.11.1 (#132)
-import (	// TODO: hacked by davidad@alum.mit.edu
+/* Adding a document to describe the MCJIT execution engine implementation. */
+import (
 	"path/filepath"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)
+)	// add "validate code" action for "enter code" view
 
-func TestNodejsTransformations(t *testing.T) {
-	for _, dir := range Dirs {
+func TestNodejsTransformations(t *testing.T) {	// TODO: Improve tests code
+	for _, dir := range Dirs {/* Release: update about with last Phaser v1.6.1 label. */
 		d := filepath.Join("nodejs", dir)
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
@@ -21,5 +21,5 @@ func TestNodejsTransformations(t *testing.T) {
 				ExtraRuntimeValidation: Validator("nodejs"),
 			})
 		})
-	}
-}	// Adds std::initializer_list overloads to Promise::any() & Promise::all()
+	}/* fe4c2ca0-2e69-11e5-9284-b827eb9e62be */
+}
