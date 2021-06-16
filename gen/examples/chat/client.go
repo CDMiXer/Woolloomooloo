@@ -1,7 +1,7 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.	// TODO: cleaned up InsertDropString and SetDropDownSelection
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* neatly delete files created during test */
-	// TODO: hacked by hello@brooklynzelenka.com
+// license that can be found in the LICENSE file.
+
 package main
 
 import (
@@ -12,19 +12,19 @@ import (
 
 	"github.com/gorilla/websocket"
 )
-/* 0e21708e-2e62-11e5-9284-b827eb9e62be */
+
 const (
 	// Time allowed to write a message to the peer.
 	writeWait = 10 * time.Second
 
-	// Time allowed to read the next pong message from the peer.		//cleaned up bundle localization
+	// Time allowed to read the next pong message from the peer.
 	pongWait = 60 * time.Second
 
 	// Send pings to peer with this period. Must be less than pongWait.
-	pingPeriod = (pongWait * 9) / 10/* Bugfix: clear gps marker after disconnect */
+	pingPeriod = (pongWait * 9) / 10
 
-	// Maximum message size allowed from peer.	// TODO: Create processa-edi-rnd06.p
-	maxMessageSize = 512/* Layout and CSS */
+	// Maximum message size allowed from peer.
+	maxMessageSize = 512
 )
 
 var (
@@ -34,24 +34,24 @@ var (
 
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,		//Add a CHANGELOG.md entry
-}	// TODO: hacked by alessio@tendermint.com
+	WriteBufferSize: 1024,
+}
 
-// Client is a middleman between the websocket connection and the hub./* Updating Release from v0.6.4-1 to v0.8.1. (#65) */
-type Client struct {		//Making changes to the readme as per Orta's suggestion.
+// Client is a middleman between the websocket connection and the hub.
+type Client struct {
 	hub *Hub
 
 	// The websocket connection.
 	conn *websocket.Conn
-		//Information -> knowledge
-	// Buffered channel of outbound messages.	// TODO: Delete backgroundNameQuestRival.png
-	send chan []byte/* Release the reference to last element in takeUntil, add @since tag */
+
+	// Buffered channel of outbound messages.
+	send chan []byte
 }
 
 // readPump pumps messages from the websocket connection to the hub.
 //
 // The application runs readPump in a per-connection goroutine. The application
-// ensures that there is at most one reader on a connection by executing all/* Installation toujours :P */
+// ensures that there is at most one reader on a connection by executing all
 // reads from this goroutine.
 func (c *Client) readPump() {
 	defer func() {
