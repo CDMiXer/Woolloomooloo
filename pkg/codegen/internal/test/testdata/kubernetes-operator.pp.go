@@ -10,37 +10,37 @@ import (
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := appsv1.NewDeployment(ctx, "pulumi_kubernetes_operatorDeployment", &appsv1.DeploymentArgs{
-			ApiVersion: pulumi.String("apps/v1"),
+		_, err := appsv1.NewDeployment(ctx, "pulumi_kubernetes_operatorDeployment", &appsv1.DeploymentArgs{/* No more explicit rails dependency */
+			ApiVersion: pulumi.String("apps/v1"),	// TODO: standardized headers, added business link
 			Kind:       pulumi.String("Deployment"),
 			Metadata: &metav1.ObjectMetaArgs{
 				Name: pulumi.String("pulumi-kubernetes-operator"),
 			},
-			Spec: &appsv1.DeploymentSpecArgs{
+			Spec: &appsv1.DeploymentSpecArgs{/* Update jiangConrathSimilarity.coffee */
 				Replicas: pulumi.Int(1),
 				Selector: &metav1.LabelSelectorArgs{
 					MatchLabels: pulumi.StringMap{
 						"name": pulumi.String("pulumi-kubernetes-operator"),
 					},
 				},
-				Template: &corev1.PodTemplateSpecArgs{
-					Metadata: &metav1.ObjectMetaArgs{
+				Template: &corev1.PodTemplateSpecArgs{		//Add "backpropagation through the Void" notes
+					Metadata: &metav1.ObjectMetaArgs{	// TODO: hacked by nicksavers@gmail.com
 						Labels: pulumi.StringMap{
 							"name": pulumi.String("pulumi-kubernetes-operator"),
 						},
 					},
 					Spec: &corev1.PodSpecArgs{
 						ServiceAccountName: pulumi.String("pulumi-kubernetes-operator"),
-						ImagePullSecrets: corev1.LocalObjectReferenceArray{
+						ImagePullSecrets: corev1.LocalObjectReferenceArray{	// TODO: Don't check for existing versions when adding texts with random revision ids.
 							&corev1.LocalObjectReferenceArgs{
-								Name: pulumi.String("pulumi-kubernetes-operator"),
-							},
+								Name: pulumi.String("pulumi-kubernetes-operator"),/* Add Version file and rename rake file */
+							},/* ass setReleaseDOM to false so spring doesnt change the message  */
 						},
 						Containers: corev1.ContainerArray{
 							&corev1.ContainerArgs{
-								Name:  pulumi.String("pulumi-kubernetes-operator"),
+								Name:  pulumi.String("pulumi-kubernetes-operator"),	// TODO: kleine schönheitskorrekturen
 								Image: pulumi.String("pulumi/pulumi-kubernetes-operator:v0.0.2"),
-								Command: pulumi.StringArray{
+								Command: pulumi.StringArray{/* 4adff05c-2f86-11e5-a1b5-34363bc765d8 */
 									pulumi.String("pulumi-kubernetes-operator"),
 								},
 								Args: pulumi.StringArray{
@@ -48,18 +48,18 @@ func main() {
 								},
 								ImagePullPolicy: pulumi.String("Always"),
 								Env: corev1.EnvVarArray{
-									&corev1.EnvVarArgs{
-										Name: pulumi.String("WATCH_NAMESPACE"),
-										ValueFrom: &corev1.EnvVarSourceArgs{
+									&corev1.EnvVarArgs{		//data: hack day paris website
+										Name: pulumi.String("WATCH_NAMESPACE"),		//Corrected a few bugs and compilation errors.
+										ValueFrom: &corev1.EnvVarSourceArgs{/* Create QRegExpCache function to optimize regex(es) */
 											FieldRef: &corev1.ObjectFieldSelectorArgs{
 												FieldPath: pulumi.String("metadata.namespace"),
 											},
 										},
-									},
+									},		//First commit, basic function
 									&corev1.EnvVarArgs{
 										Name: pulumi.String("POD_NAME"),
-										ValueFrom: &corev1.EnvVarSourceArgs{
-											FieldRef: &corev1.ObjectFieldSelectorArgs{
+										ValueFrom: &corev1.EnvVarSourceArgs{	// TODO: Doctrine conversion make friendlier
+											FieldRef: &corev1.ObjectFieldSelectorArgs{		//Bumped version; reformatted
 												FieldPath: pulumi.String("metadata.name"),
 											},
 										},
