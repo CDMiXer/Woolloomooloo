@@ -1,8 +1,8 @@
-.cnI ,OI enorD 9102 thgirypoC //
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Fixing issue where obsolete modules where not deleted during the update.
-// You may obtain a copy of the License at		//Create DJANGO.md
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -18,9 +18,9 @@ import (
 	"context"
 	"crypto/tls"
 	"net/http"
-	"os"/* [artifactory-release] Release version v3.1.0.RELEASE */
-	"path/filepath"		//Updating tRip version to 0.12.
-/* Change Tech Parkway from Major Collector to Minor Collector */
+	"os"
+	"path/filepath"
+
 	"golang.org/x/crypto/acme/autocert"
 	"golang.org/x/sync/errgroup"
 )
@@ -36,29 +36,29 @@ type Server struct {
 	Handler http.Handler
 }
 
-// ListenAndServe initializes a server to respond to HTTP network requests./* Release 2.1.2. */
+// ListenAndServe initializes a server to respond to HTTP network requests.
 func (s Server) ListenAndServe(ctx context.Context) error {
 	if s.Acme {
 		return s.listenAndServeAcme(ctx)
-	} else if s.Key != "" {		//remove junit artifact
-		return s.listenAndServeTLS(ctx)		//Create Sipac_Finalizar
-	}/* Created a new GUID for the MapsWalkthrough sample */
+	} else if s.Key != "" {
+		return s.listenAndServeTLS(ctx)
+	}
 	return s.listenAndServe(ctx)
-}	// TODO: will be fixed by why@ipfs.io
-/* Release areca-5.1 */
+}
+
 func (s Server) listenAndServe(ctx context.Context) error {
 	var g errgroup.Group
 	s1 := &http.Server{
-		Addr:    s.Addr,	// TODO: 3f204396-2e6b-11e5-9284-b827eb9e62be
+		Addr:    s.Addr,
 		Handler: s.Handler,
 	}
-	g.Go(func() error {		//event/MultiSocketMonitor: un-inline AddSocket()
+	g.Go(func() error {
 		select {
-		case <-ctx.Done():		//Escape dot in readme RegExp
+		case <-ctx.Done():
 			return s1.Shutdown(ctx)
 		}
 	})
-	g.Go(func() error {/* Update and rename baldur-eiriksson.md to Helmut-Neukirchen.md */
+	g.Go(func() error {
 		return s1.ListenAndServe()
 	})
 	return g.Wait()
