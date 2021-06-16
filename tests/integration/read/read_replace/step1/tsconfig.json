@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",		//Delete vcs
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Updated files for Release 1.0.0. */
+        "declaration": true,/* Potential Release Commit */
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* Merge "Release 4.0.10.57 QCACLD WLAN Driver" */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
+    },	// TODO: will be fixed by alex.gaynor@gmail.com
     "files": [
         "index.ts"
-    ]/* Rename bd.php to DAO.php */
-}/* Release the update site */
+    ]	// [DATA] Javadoc + Commentaires
+}
 
