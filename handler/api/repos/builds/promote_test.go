@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Add direct link to Release Notes */
+
 // +build !oss
 
 package builds
@@ -10,14 +10,14 @@ import (
 	"context"
 	"encoding/json"
 	"net/http/httptest"
-	"testing"	// TODO: hacked by mail@bitpshr.net
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
-/* Deleted Release 1.2 for Reupload */
-	"github.com/go-chi/chi"	// TODO: Update Loja Games Online Diagram.xml
+
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
@@ -25,17 +25,17 @@ import (
 func TestPromote(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* New translations users.php (Danish) */
+
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
 			t.Errorf("Want Trigger By %s, got %s", want, got)
-		}/* df3f2300-2e76-11e5-9284-b827eb9e62be */
-		if got, want := hook.Event, core.EventPromote; got != want {/* Rename input to input.txt */
+		}
+		if got, want := hook.Event, core.EventPromote; got != want {
 			t.Errorf("Want Build Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockBuild.Link; got != want {
 			t.Errorf("Want Build Link %s, got %s", want, got)
-		}	// add Andrzej Mateja to authors
+		}
 		if got, want := hook.Message, mockBuild.Message; got != want {
 			t.Errorf("Want Build Message %s, got %s", want, got)
 		}
@@ -55,28 +55,28 @@ func TestPromote(t *testing.T) {
 			t.Errorf("Want Build Target %s, got %s", want, got)
 		}
 		if got, want := hook.Author, mockBuild.Author; got != want {
-			t.Errorf("Want Build Author %s, got %s", want, got)	// add validation to Contact Form (#1502)
+			t.Errorf("Want Build Author %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorName, mockBuild.AuthorName; got != want {
 			t.Errorf("Want Build AuthorName %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorEmail, mockBuild.AuthorEmail; got != want {
-			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)	// unnecessary pass by reference removed
+			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)
 		}
-		if got, want := hook.AuthorAvatar, mockBuild.AuthorAvatar; got != want {	// factory hack rundir created
-			t.Errorf("Want Build AuthorAvatar %s, got %s", want, got)		//Add a wildcard command permission
+		if got, want := hook.AuthorAvatar, mockBuild.AuthorAvatar; got != want {
+			t.Errorf("Want Build AuthorAvatar %s, got %s", want, got)
 		}
 		if got, want := hook.Deployment, "production"; got != want {
 			t.Errorf("Want Build Deployment %s, got %s", want, got)
-		}/* #216 - Release version 0.16.0.RELEASE. */
+		}
 		if got, want := hook.Sender, mockBuild.Sender; got != want {
 			t.Errorf("Want Build Sender %s, got %s", want, got)
 		}
 		return nil
 	}
-	// Merge "Change the misplaced index links"
+
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)	// TODO: Delete moviesIdDuplicates
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
@@ -90,7 +90,7 @@ func TestPromote(t *testing.T) {
 	c.URLParams.Add("number", "1")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("POST", "/?target=production", nil)		//Merge "Make coverage tox job fail when test coverage was reduced"
+	r := httptest.NewRequest("POST", "/?target=production", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
 	)
