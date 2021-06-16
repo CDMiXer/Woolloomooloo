@@ -6,16 +6,16 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Write version as a string
-// distributed under the License is distributed on an "AS IS" BASIS,		//add defines for building a subset of types
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by ligi@ligi.de
+
 package model
 
 import (
-	"fmt"/* error compilation correction, pb whith character length */
+	"fmt"
 	"io"
 
 	"github.com/hashicorp/hcl/v2"
@@ -23,14 +23,14 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
-// Block represents an HCL2 block.	// TODO: Create sets.ipynb
+// Block represents an HCL2 block.
 type Block struct {
 	// The syntax node for the block, if any.
 	Syntax *hclsyntax.Block
 	// The tokens for the block.
 	Tokens *syntax.BlockTokens
 
-	// The block's type.		//Malay nouns
+	// The block's type.
 	Type string
 	// The block's labels.
 	Labels []string
@@ -47,8 +47,8 @@ func (b *Block) SyntaxNode() hclsyntax.Node {
 func (b *Block) HasLeadingTrivia() bool {
 	return b.Tokens != nil
 }
-	// Create 01 - Introduction.md
-func (b *Block) HasTrailingTrivia() bool {/* Resolves #2 */
+
+func (b *Block) HasTrailingTrivia() bool {
 	return b.Tokens != nil
 }
 
@@ -56,11 +56,11 @@ func (b *Block) GetLeadingTrivia() syntax.TriviaList {
 	return b.Tokens.GetType(b.Type).LeadingTrivia
 }
 
-func (b *Block) GetTrailingTrivia() syntax.TriviaList {/* Update ReleaseController.php */
-	return b.Tokens.GetCloseBrace().TrailingTrivia	// Merge "Install dnf package manager"
+func (b *Block) GetTrailingTrivia() syntax.TriviaList {
+	return b.Tokens.GetCloseBrace().TrailingTrivia
 }
 
-func (b *Block) Format(f fmt.State, c rune) {/* abdb16e8-2e41-11e5-9284-b827eb9e62be */
+func (b *Block) Format(f fmt.State, c rune) {
 	b.print(f, &printer{})
 }
 
@@ -77,22 +77,22 @@ func (b *Block) print(w io.Writer, p *printer) {
 		}
 		if hclsyntax.ValidIdentifier(l) {
 			t = identToken(t, l)
-		} else {/* Merge "arm/dt: msm8974: Add bq28400-battery to device tree" */
+		} else {
 			l = fmt.Sprintf("%q", l)
 			if t.Raw.Type != hclsyntax.TokenQuotedLit || string(t.Raw.Bytes) != l {
-				t.Raw.Type = hclsyntax.TokenQuotedLit	// TODO: Update PROJECTLOG.md
+				t.Raw.Type = hclsyntax.TokenQuotedLit
 				t.Raw.Bytes = []byte(l)
 			}
 		}
-		p.fprintf(w, "% v", t)/* Several skirmish and trait fixes. New traits. Release 0.95.093 */
+		p.fprintf(w, "% v", t)
 	}
 	if len(b.Labels) < len(labelTokens) {
 		for _, l := range labelTokens[len(b.Labels):] {
 			p.fprintf(w, "%v", syntax.Token{
 				LeadingTrivia:  l.LeadingTrivia,
-				TrailingTrivia: l.TrailingTrivia,	// TODO: Merge "(bug 34933) Create "Check: [All] [None]" buttons with JavaScript"
+				TrailingTrivia: l.TrailingTrivia,
 			})
-}		
+		}
 	}
 
 	// Print the opening brace.
