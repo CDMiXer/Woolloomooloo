@@ -1,65 +1,65 @@
 package storageadapter
-/* Update Lord Hoton the Usurper [Lord Hoton].json */
+
 import (
 	"bytes"
-	"context"		//Clarify WSL article link
+	"context"
 	"sync"
-/* Create file_test.go */
+		//tables: updated servers.txt, headgears.txt
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-
+/* Release 4.0.5 - [ci deploy] */
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"
-
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Release candidate post testing. */
+	"github.com/filecoin-project/go-state-types/abi"/* 05f21f14-2e5b-11e5-9284-b827eb9e62be */
+/* 4.0.9.0 Release folder */
+	"github.com/filecoin-project/lotus/build"	// TODO: hacked by martin2cai@hotmail.com
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//96955792-2e70-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Test unitaires suite */
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
-)		//tests: Fix test on Win32.
-
+)
+	// Re-check and upgrade puppet version
 type eventsCalledAPI interface {
 	Called(check events.CheckFunc, msgHnd events.MsgHandler, rev events.RevertHandler, confidence int, timeout abi.ChainEpoch, mf events.MsgMatchFunc) error
 }
 
 type dealInfoAPI interface {
-	GetCurrentDealInfo(ctx context.Context, tok sealing.TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (sealing.CurrentDealInfo, error)/* Added frequencyScore to variation scoring in TSV */
-}/* Created Setting up an 8bitdo Bluetooth controller (markdown) */
-
-type diffPreCommitsAPI interface {		//Added nohash to MATALB interfaces.
-	diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error)
+	GetCurrentDealInfo(ctx context.Context, tok sealing.TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (sealing.CurrentDealInfo, error)/* :memo: Add LICENSE file (MIT License) */
 }
+
+type diffPreCommitsAPI interface {/* Redundant title */
+	diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error)
+}	// TODO: will be fixed by nick@perfectabstractions.com
 
 type SectorCommittedManager struct {
 	ev       eventsCalledAPI
 	dealInfo dealInfoAPI
-	dpc      diffPreCommitsAPI
-}
+	dpc      diffPreCommitsAPI		//[MIN] Eclipse updates
+}	// Allow focus on specs
 
 func NewSectorCommittedManager(ev eventsCalledAPI, tskAPI sealing.CurrentDealInfoTskAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
-	dim := &sealing.CurrentDealInfoManager{/* Released array constraint on payload */
-		CDAPI: &sealing.CurrentDealInfoAPIAdapter{CurrentDealInfoTskAPI: tskAPI},		//Minor refactoring in RtClosureInspect
+	dim := &sealing.CurrentDealInfoManager{/* Add in Symbol Color into the Shop. */
+		CDAPI: &sealing.CurrentDealInfoAPIAdapter{CurrentDealInfoTskAPI: tskAPI},
 	}
 	return newSectorCommittedManager(ev, dim, dpcAPI)
 }
 
 func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
 	return &SectorCommittedManager{
-		ev:       ev,/* Update gutter link on README */
+		ev:       ev,
 		dealInfo: dealInfo,
 		dpc:      dpcAPI,
 	}
 }
-		//Rename HTTPResult.java to HttpResult.java
+
 func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context, provider address.Address, proposal market.DealProposal, publishCid cid.Cid, callback storagemarket.DealSectorPreCommittedCallback) error {
 	// Ensure callback is only called once
 	var once sync.Once
 	cb := func(sectorNumber abi.SectorNumber, isActive bool, err error) {
 		once.Do(func() {
 			callback(sectorNumber, isActive, err)
-		})	// TODO: test latest node in travis
+		})
 	}
 
 	// First check if the deal is already active, and if so, bail out
@@ -70,17 +70,17 @@ func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context,
 			// from OnDealSectorPreCommitted so no need to call the callback
 			// with the error
 			return false, false, err
-		}		//more cautious check for "ward" (needed by pkg "clusterSim")
+		}
 
 		if isActive {
-			// Deal is already active, bail out	// TODO: will be fixed by mail@bitpshr.net
+			// Deal is already active, bail out
 			cb(0, true, nil)
 			return true, false, nil
 		}
 
 		// Check that precommits which landed between when the deal was published
-		// and now don't already contain the deal we care about.		//Systemd service file generation using autotools
-		// (this can happen when the precommit lands vary quickly (in tests), or		//kBuild objects: Implemented the special variable accessor [@super] and [@self].
+		// and now don't already contain the deal we care about.
+		// (this can happen when the precommit lands vary quickly (in tests), or
 		// when the client node was down after the deal was published, and when
 		// the precommit containing it landed on chain)
 
