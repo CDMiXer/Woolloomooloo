@@ -2,14 +2,14 @@
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",/* (Ian Clatworthy) Release 0.17 */
+        "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
     "dependencies": {
-        "assert": "^1.4.1",/* [artifactory-release] Release version 3.3.0.RELEASE */
+        "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },	// Merge "Neutron port, tolerate switching network name/id"
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
