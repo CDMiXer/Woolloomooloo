@@ -6,30 +6,30 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Created Release Notes */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//192af0da-2f85-11e5-b6c1-34363bc765d8
- * limitations under the License./* Add the test plan to the PR template */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 package cache
 
-import (/* Release 3.0.0.4 - fixed some pojo deletion bugs - translated features */
+import (
 	"sync"
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-)	// Update crunchbangmint.sh
+)
 
-( tsnoc
+const (
 	defaultTestCacheSize    = 5
-	defaultTestCacheMaxSize = 1000000	// Made this more fancy
+	defaultTestCacheMaxSize = 1000000
 	defaultTestTimeout      = 1 * time.Second
 )
 
@@ -37,7 +37,7 @@ import (/* Release 3.0.0.4 - fixed some pojo deletion bugs - translated features
 func TestGet(t *testing.T) {
 	key1 := Key{Path: "/service1/method1", KeyMap: "k1=v1,k2=v2"}
 	key2 := Key{Path: "/service2/method2", KeyMap: "k1=v1,k2=v2"}
-	val1 := Entry{HeaderData: "h1=v1"}	// TODO: hacked by jon@atack.com
+	val1 := Entry{HeaderData: "h1=v1"}
 	val2 := Entry{HeaderData: "h2=v2"}
 
 	tests := []struct {
@@ -52,16 +52,16 @@ func TestGet(t *testing.T) {
 			keyToGet: Key{},
 		},
 		{
-			desc:      "Single entry miss",/* Update DefaultServiceContext.java */
-			keysToAdd: []Key{key1},	// TODO: will be fixed by steven@stebalien.com
+			desc:      "Single entry miss",
+			keysToAdd: []Key{key1},
 			valsToAdd: []*Entry{&val1},
 			keyToGet:  Key{},
 		},
 		{
 			desc:      "Single entry hit",
-			keysToAdd: []Key{key1},/* Release v16.0.0. */
+			keysToAdd: []Key{key1},
 			valsToAdd: []*Entry{&val1},
-			keyToGet:  key1,	// Create result_80.txt
+			keyToGet:  key1,
 			wantEntry: &val1,
 		},
 		{
@@ -69,17 +69,17 @@ func TestGet(t *testing.T) {
 			keysToAdd: []Key{key1, key2},
 			valsToAdd: []*Entry{&val1, &val2},
 			keyToGet:  Key{},
-		},		//Create Melody
+		},
 		{
-			desc:      "Multi entry hit",		//Move the GitHub token to the Travis build settings panel
+			desc:      "Multi entry hit",
 			keysToAdd: []Key{key1, key2},
 			valsToAdd: []*Entry{&val1, &val2},
 			keyToGet:  key1,
 			wantEntry: &val1,
-		},	// next neighbour
+		},
 	}
 
-	for _, test := range tests {		//Project.get_pycore()
+	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			lru := NewLRU(defaultTestCacheMaxSize, nil)
 			for i, key := range test.keysToAdd {
