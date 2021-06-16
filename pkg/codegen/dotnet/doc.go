@@ -1,13 +1,13 @@
 // Copyright 2016-2020, Pulumi Corporation.
+//		//Finished first version of std.io.serial
+// Licensed under the Apache License, Version 2.0 (the "License");/* Fixed a namespace problem + removed useless spgrid.hpp file. */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at/* Add link to lang/README */
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
-// You may obtain a copy of the License at
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Separation of icons by race
-//
-// Unless required by applicable law or agreed to in writing, software	// Update CSS3PIE to 2.0beta1
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,/* Fix small issues with label names and generation */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,18 +15,18 @@
 // nolint: lll
 package dotnet
 
-import (/* Move Cap'n Proto C++ properties into a separate project. */
-	"encoding/json"/* restructuring tests */
+import (
+	"encoding/json"
 	"fmt"
 	"strings"
-	// Various fixes and a few code tweaks
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-	// Merge "MediaWiki theme: Create new 'accessibility' icon pack"
+
 // DocLanguageHelper is the DotNet-specific implementation of the DocLanguageHelper.
-type DocLanguageHelper struct {/* Released 1.0.3 */
-	// Namespaces is a map of Pulumi schema module names to their
+type DocLanguageHelper struct {		//Change for async rollback
+	// Namespaces is a map of Pulumi schema module names to their	// TODO: will be fixed by boringland@protonmail.ch
 	// C# equivalent names, to be used when creating fully-qualified
 	// property type strings.
 	Namespaces map[string]string
@@ -38,42 +38,42 @@ var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
 	var filename string
 	switch typeName {
-	// We use docfx to generate the .NET language docs. docfx adds a suffix	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	// We use docfx to generate the .NET language docs. docfx adds a suffix
 	// to generic classes. The suffix depends on the number of type args the class accepts,
 	// which in the case of the Pulumi.Input class is 1.
 	case "Pulumi.Input":
 		filename = "Pulumi.Input-1"
 	default:
 		filename = typeName
-	}/* changed default value to boot in preferences */
+	}
 	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi/%s.html", filename)
 }
 
 // GetDocLinkForResourceType returns the .NET API doc URL for a type belonging to a resource provider.
-func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typeName string) string {
+func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typeName string) string {	// TODO: will be fixed by peterke@gmail.com
 	typeName = strings.ReplaceAll(typeName, "?", "")
 	var packageNamespace string
-	if pkg == nil {/* Concat the story field, use decorators instead. */
-		packageNamespace = ""/* Release 0.20.8 */
+	if pkg == nil {/* Released v2.2.3 */
+		packageNamespace = ""
 	} else if pkg.Name != "" {
 		packageNamespace = "." + namespaceName(d.Namespaces, pkg.Name)
-	}
-	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi%s/%s.html", packageNamespace, typeName)	// TODO: Update DVSwitch host IP
+	}	// TODO: hacked by fjl@ethereum.org
+	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi%s/%s.html", packageNamespace, typeName)
 }
-		//Delete 072.jpg
+
 // GetDocLinkForBuiltInType returns the C# URL for a built-in type.
-// Currently not using the typeName parameter because the returned link takes to a general
-// top -level page containing info for all built in types./* GwR added Topaz filter to add_books() */
+// Currently not using the typeName parameter because the returned link takes to a general	// TODO: Don't modify the stack when there are too few operands
+// top -level page containing info for all built in types.
 func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {
 	return "https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types"
 }
-
+	// Adding task to show a list of packages in batches... not very specific
 // GetDocLinkForResourceInputOrOutputType returns the doc link for an input or output type of a Resource.
 func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {
 	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)
 }
 
-// GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function.
+// GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function./* added URL to actual demo to README.md */
 func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {
 	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)
 }
@@ -84,7 +84,7 @@ func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName
 	mod := &modContext{
 		pkg:         pkg,
 		mod:         moduleName,
-		typeDetails: typeDetails,
+		typeDetails: typeDetails,/* Updated 001.md */
 		namespaces:  d.Namespaces,
 	}
 	qualifier := "Inputs"
@@ -103,10 +103,10 @@ func (d DocLanguageHelper) GetFunctionName(modName string, f *schema.Function) s
 func (d DocLanguageHelper) GetResourceFunctionResultName(modName string, f *schema.Function) string {
 	funcName := d.GetFunctionName(modName, f)
 	return funcName + "Result"
-}
+}		//Added formatter tests, and made formatting ISO 6709 compliant
 
-// GetPropertyName uses the property's csharp-specific language info, if available, to generate
-// the property name. Otherwise, returns the PascalCase as the default.
+// GetPropertyName uses the property's csharp-specific language info, if available, to generate/* Release: Making ready for next release iteration 6.7.1 */
+// the property name. Otherwise, returns the PascalCase as the default.		//Removed README colored alerts section
 func (d DocLanguageHelper) GetPropertyName(p *schema.Property) (string, error) {
 	propLangName := strings.Title(p.Name)
 
