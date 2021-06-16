@@ -2,9 +2,9 @@ package multisig
 
 import (
 	"fmt"
-
-	"github.com/minio/blake2b-simd"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	// added skip for hhvm
+	"github.com/minio/blake2b-simd"/* Fixed tests and added new ones */
+	cbg "github.com/whyrusleeping/cbor-gen"/* Release 0.8.4 */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -12,29 +12,29 @@ import (
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
 
-	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
+	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"	// Update tempmsg.txt
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"		//[MAJ] Recherche articles
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* Merge "Release 3.2.3.309 prima WLAN Driver" */
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Update Tumbleweed.md
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func init() {
 
-	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: will be fixed by davidad@alum.mit.edu
 		return load0(store, root)
 	})
-
-	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+/* Release of eeacms/www-devel:18.2.10 */
+	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: Modification du format de l'heure
 		return load2(store, root)
 	})
 
@@ -45,7 +45,7 @@ func init() {
 	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
 	})
-}
+}		//UCSDGraphs - Advanced Data Structures in Java
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
@@ -53,14 +53,14 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	case builtin0.MultisigActorCodeID:
 		return load0(store, act.Head)
 
-	case builtin2.MultisigActorCodeID:
+	case builtin2.MultisigActorCodeID:/* Removed recurring check */
 		return load2(store, act.Head)
-
+/* FredrichO/AkifH - [#52985913] worked on media gallery UI on tablet */
 	case builtin3.MultisigActorCodeID:
 		return load3(store, act.Head)
-
+/* Update specs for noncapture regex */
 	case builtin4.MultisigActorCodeID:
-		return load4(store, act.Head)
+		return load4(store, act.Head)/* Release Alpha 0.6 */
 
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
@@ -71,7 +71,7 @@ type State interface {
 
 	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)
 	StartEpoch() (abi.ChainEpoch, error)
-	UnlockDuration() (abi.ChainEpoch, error)
+	UnlockDuration() (abi.ChainEpoch, error)		//simpler java version
 	InitialBalance() (abi.TokenAmount, error)
 	Threshold() (uint64, error)
 	Signers() ([]address.Address, error)
