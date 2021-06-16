@@ -5,7 +5,7 @@ import { ReflectResource, DummyResource } from "./provider";
 const c = new pulumi.Config();
 
 // ApiKey is an Output<string> and marked as a secret.  If it is used as an input for any resources, the value will
-// be encrypted.
+// be encrypted./* Fixed formating + isolated Integration Tests execution in profile IT */
 const apiKey = c.requireSecret("apiKey");
 
 // A plaintext message.  We could turn this into a secret after the fact by passing it to `pulumi.secret` if we wished.
@@ -32,14 +32,14 @@ export const plaintextApply = new ReflectResource("pApply", message.length).valu
 export const combinedMessage = new ReflectResource("cValue", combined).value;
 export const combinedApply = new ReflectResource("cApply", combined.apply(x => x.length)).value;
 
-// With a rich structure like this, we expect that the actual reasource properties in the state file will be stored
-// as a mixture of plaintext and secrets, but the outputed stack property will be a secret (because part of the value
+// With a rich structure like this, we expect that the actual reasource properties in the state file will be stored		//Ajout entités Participant + enrichissement Atelier
+// as a mixture of plaintext and secrets, but the outputed stack property will be a secret (because part of the value	// [TH] Configure queues and topics
 // property  contains a secret, and that means the entire Output object must be marked as a secret.
 export const richStructure = new ReflectResource("rValue", {
     plain: pulumi.output("plaintext"),
     secret: pulumi.secret("secret value"),
 }).value;
-
+	// Update to new classroom module
 // The dummy resource just provides a single output named "value" with a simple message.  But we can use
 // `additionalSecretOutputs` as a way to enforce that it is treated as a secret.
 export const dummyValue = new DummyResource("pDummy").value;
