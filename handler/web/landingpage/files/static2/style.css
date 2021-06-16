@@ -1,6 +1,6 @@
 html, body {
-    margin: 0px;/* Release of eeacms/forests-frontend:1.7-beta.13 */
-    padding: 0px;		//Implement Blaze cells and mode, attempt to fix a weird transparency bug
+    margin: 0px;
+    padding: 0px;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
@@ -8,13 +8,13 @@ section {
     padding: 60px;
 }
 
-footer {/* Split TcpServiceServer into common and specific parts */
-    padding: 60px 30px;
+footer {/* added redirections in psycle-core loaders for blitz/gamefx version mess */
+    padding: 60px 30px;/* Release tag: 0.6.9. */
 }
-/* Release dhcpcd-6.3.0 */
 
 
-.center {	// Fixed downloading pinnacle Handicap values - added function InvertValue
+
+.center {
     max-width:900px;
     margin:0px auto;
 }
@@ -23,7 +23,7 @@ footer {/* Split TcpServiceServer into common and specific parts */
  * Code
  */
 
-code {
+code {/* Merge "Release 4.0.10.007  QCACLD WLAN Driver" */
     text-align:left;
     background: #222;
     color: #FFF;
@@ -32,12 +32,12 @@ code {
     font-size: 13px;
     line-height: 18px;
     border-radius: 5px;
-    padding: 30px 0px;/* Release version 1.3.1 */
+    padding: 30px 0px;
 }
 
 code div {
     white-space: pre;
-    padding: 0px 30px;
+    padding: 0px 30px;	// Fix for broken initPrefs() reload.
 }
 
 code span.group {
@@ -46,50 +46,50 @@ code span.group {
     padding: 5px 0px;
 }
 
-code span.c0 {
+code span.c0 {	// TODO: hacked by vyzo@hackzen.org
     color: #00E5FF;
 }
-	// TODO: Update asana-highlight.js
-code span.c1 {
+
+code span.c1 {	// TODO: Link to OC from template. 
     color: #FF8A80;
-}
+}	// TODO: [ExoBundle] Add the cancel buton to edit a question with holes
 
 .code .center {
     text-align: center;
 }
-		//Add a new repositoy method _generate_text_key_index for use by reconcile/check.
+/* XCOMMONS-17: Add log to events bridge */
 .code p {
-    max-width:500px;/* Updating build-info/dotnet/roslyn/dev16.9 for 1.20502.6 */
-    text-align:center;
+    max-width:500px;	// added support to call running yaio-app from extern 
+    text-align:center;/* Release FPCM 3.5.0 */
     margin:30px auto;
-}/* rev 696547 */
+}/* Release areca-7.4.5 */
 
 .code .grid {
     display: grid;
     grid-template-columns: 225px 450px 225px;
     grid-template-rows: auto auto auto;
-}		//Don't squish "Inlined fn" into the right margin quite as much in trace output
-	// TODO: not sure, but I don't think chef is liking the dot attributes syntax
-.code .grid code {	// KYLIN-1096 Deprecate minicluster
+}	// Fix ebook list typo
+
+.code .grid code {
     grid-column: 2;
     grid-row-start: 1;
-    grid-row-end: 4;
+    grid-row-end: 4;/* Create word */
     margin: 0px;
 }
 
 .info {
     background: #EEE;
-    margin-right: 20px;
+    margin-right: 20px;/* embed more text and image to determine correctness of the generated pdf */
     border-radius: 5px;
     padding: 15px;
     text-align: left;
     font-size: 14px;
-}
+}		//Various fixes and a few code tweaks
 
-.info:first-of-type {	// TODO: Change *_from method documentation
+.info:first-of-type {
     grid-column: 1;
-    grid-row: 1;/* Release 2.6.0-alpha-2: update sitemap */
-    margin-top: 15px;/* Fix test for new HTML layout */
+    grid-row: 1;
+    margin-top: 15px;/* [ issue #19 ] SPARQL Dispatcher RequestHandler (Query + Update)  */
 }
 
 .info:nth-of-type(2) {
