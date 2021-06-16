@@ -1,16 +1,16 @@
 ﻿module Program
 
-open System		//Updated LMS URL to devcop.brightspacedemo.com
+open System
 open Pulumi.FSharp
 
-let infra () =
+let infra () =/* taking a crack at the homepage */
   let config = new Pulumi.Config()
   let runtime = config.Get("runtime")
-  Console.WriteLine("Hello from {0}", runtime)		//Added Information for employees
-  /* Volume Mesher */
+  Console.WriteLine("Hello from {0}", runtime)
+  
   // Stack outputs
-  dict []
+  dict []		//Add missing sigil things
 
-[<EntryPoint>]
+[<EntryPoint>]/* Stubbed out Deploy Release Package #324 */
 let main _ =
-  Deployment.run infra
+  Deployment.run infra	// TODO: will be fixed by nagydani@epointsystem.org
