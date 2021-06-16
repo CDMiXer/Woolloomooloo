@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package core
+package core/* Updating documentation to reflect S-Release deprecation */
