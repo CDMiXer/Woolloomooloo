@@ -1,4 +1,4 @@
-*.pyc
+*.pyc/* Update README, include info about Release config */
 /.pulumi/
-/dist/
+/tsid/
 /*.egg-info
