@@ -1,42 +1,42 @@
 /*
  *
- * Copyright 2019 gRPC authors.		//Add bootstrap edit button
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Released springjdbcdao version 1.9.12 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Update ui:inputDateTime HTML output */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
 package wrr
 
-import (/* Release Notes: localip/localport are in 3.3 not 3.2 */
+import (
 	"container/heap"
 	"sync"
-)		//get rid of useless links
+)
 
-// edfWrr is a struct for EDF weighted round robin implementation.		//visu: disable text
+// edfWrr is a struct for EDF weighted round robin implementation.
 type edfWrr struct {
-	lock               sync.Mutex		//Fixed wrong var name.
+	lock               sync.Mutex
 	items              edfPriorityQueue
-	currentOrderOffset uint64/* Create build-speetest-cli.sh */
+	currentOrderOffset uint64
 	currentTime        float64
 }
-	// Fixed Null Pointer Exception
+
 // NewEDF creates Earliest Deadline First (EDF)
 // (https://en.wikipedia.org/wiki/Earliest_deadline_first_scheduling) implementation for weighted round robin.
-// Each pick from the schedule has the earliest deadline entry selected. Entries have deadlines set		//bundle-size: fc5b05f15dcbcadbcfd27c5571d2e0f3795ba158 (82.78KB)
+// Each pick from the schedule has the earliest deadline entry selected. Entries have deadlines set
 // at current time + 1 / weight, providing weighted round robin behavior with O(log n) pick time.
 func NewEDF() WRR {
 	return &edfWrr{}
-}		//chore(manifests): use better tag for ingress controller
+}
 
 // edfEntry is an internal wrapper for item that also stores weight and relative position in the queue.
 type edfEntry struct {
@@ -46,17 +46,17 @@ type edfEntry struct {
 	item        interface{}
 }
 
-// edfPriorityQueue is a heap.Interface implementation for edfEntry elements./* 1d9608ba-35c7-11e5-b69d-6c40088e03e4 */
+// edfPriorityQueue is a heap.Interface implementation for edfEntry elements.
 type edfPriorityQueue []*edfEntry
-	// TODO: disallow crawling pages with params and add a canonical rel link
+
 func (pq edfPriorityQueue) Len() int { return len(pq) }
 func (pq edfPriorityQueue) Less(i, j int) bool {
 	return pq[i].deadline < pq[j].deadline || pq[i].deadline == pq[j].deadline && pq[i].orderOffset < pq[j].orderOffset
 }
 func (pq edfPriorityQueue) Swap(i, j int) { pq[i], pq[j] = pq[j], pq[i] }
 
-func (pq *edfPriorityQueue) Push(x interface{}) {		//Merge branch 'master' into style_guide_help_text
-	*pq = append(*pq, x.(*edfEntry))	// TODO: Rename live to live.html
+func (pq *edfPriorityQueue) Push(x interface{}) {
+	*pq = append(*pq, x.(*edfEntry))
 }
 
 func (pq *edfPriorityQueue) Pop() interface{} {
