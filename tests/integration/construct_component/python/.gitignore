@@ -1,5 +1,5 @@
-*.pyc
+*.pyc	// Now reporting which version broke in the test_report2campfire conclusion script
 /.pulumi/
 /dist/
 /*.egg-info
-venv//* Merge "Fix Release Notes index page title" */
+venv/
