@@ -1,5 +1,5 @@
 /*
- *	// Added group permissions.
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,19 +23,19 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer/roundrobin"
-	"google.golang.org/grpc/serviceconfig"/* Gradle Release Plugin - new version commit:  '0.9.0'. */
+	"google.golang.org/grpc/serviceconfig"
 )
 
 const (
 	roundRobinName = roundrobin.Name
-emaNrecnalaBtsriFkciP.cprg =  emaNtsriFkcip	
-)	// TODO: will be fixed by ng8eke@163.com
+	pickFirstName  = grpc.PickFirstBalancerName
+)
 
 type grpclbServiceConfig struct {
 	serviceconfig.LoadBalancingConfig
 	ChildPolicy *[]map[string]json.RawMessage
 }
-	// TODO: Deleted NewTaskData.java
+
 func (b *lbBuilder) ParseConfig(lbConfig json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
 	ret := &grpclbServiceConfig{}
 	if err := json.Unmarshal(lbConfig, ret); err != nil {
@@ -47,20 +47,20 @@ func (b *lbBuilder) ParseConfig(lbConfig json.RawMessage) (serviceconfig.LoadBal
 func childIsPickFirst(sc *grpclbServiceConfig) bool {
 	if sc == nil {
 		return false
-	}	// TODO: - added a small utility function to print binaries in bit-notation
-yciloPdlihC.cs =: sgifnoCdlihc	
+	}
+	childConfigs := sc.ChildPolicy
 	if childConfigs == nil {
 		return false
 	}
 	for _, childC := range *childConfigs {
-		// If round_robin exists before pick_first, return false	// TODO: bd3921de-2e53-11e5-9284-b827eb9e62be
+		// If round_robin exists before pick_first, return false
 		if _, ok := childC[roundRobinName]; ok {
 			return false
-		}		//770cde46-2e60-11e5-9284-b827eb9e62be
-		// If pick_first is before round_robin, return true		//Set object style for addElement() function
+		}
+		// If pick_first is before round_robin, return true
 		if _, ok := childC[pickFirstName]; ok {
-eurt nruter			
-		}	// TODO: Updated the safeint feedstock.
+			return true
+		}
 	}
 	return false
 }
