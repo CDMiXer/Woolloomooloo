@@ -6,12 +6,12 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,	// TODO: New language: Catalan.
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//Add IRC channel to readme
-        "noFallthroughCasesInSwitch": true,/* Real zookeeper. Watch for changes. */
-        "noImplicitReturns": true,	// Added instructions for setting up io
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
