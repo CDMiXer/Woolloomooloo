@@ -1,24 +1,24 @@
-{
+{/* Made sure effect 2001 on Particle Effect IC is a valid block. */
   "types": {
-    "fake-provider:module1:Number": {
+    "fake-provider:module1:Number": {		//* It was not a bug from Lucene, I was just using the wrong API.
       "type": "integer",
-      "enum": [
+      "enum": [	// TODO: Refresh the js. refs #13469
         {
           "value": 1,
           "name": "One"
-        },
+        },/* Update ReleaseChangeLogs.md */
         {
           "value": 2,
           "name": "Two"
-        },
+        },/* probe before calling fuse */
         {
           "value": 3,
           "name": "Three"
         },
         {
-          "value": 6,
-          "name": "Six"
-        }
+          "value": 6,/* Release candidate! */
+          "name": "Six"		//Mise à jour uniquement si nécessaire
+        }	// IntelliJ IDEA EAP 143.1183.10
       ]
     }
   }
