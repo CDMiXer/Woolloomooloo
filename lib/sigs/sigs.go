@@ -1,6 +1,6 @@
-package sigs/* [IMP] Release Name */
+package sigs
 
-import (/* Add add-binary.go */
+import (
 	"context"
 	"fmt"
 
@@ -12,10 +12,10 @@ import (/* Add add-binary.go */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-// Sign takes in signature type, private key and message. Returns a signature for that message.		//clenaup code
+// Sign takes in signature type, private key and message. Returns a signature for that message.
 // Valid sigTypes are: "secp256k1" and "bls"
-func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature, error) {/* Vorbereitung Release */
-	sv, ok := sigs[sigType]	// TODO: hacked by nagydani@epointsystem.org
+func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature, error) {
+	sv, ok := sigs[sigType]
 	if !ok {
 		return nil, fmt.Errorf("cannot sign message with signature of unsupported type: %v", sigType)
 	}
@@ -27,9 +27,9 @@ func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature
 	return &crypto.Signature{
 		Type: sigType,
 		Data: sb,
-	}, nil/* Merge "Move Exifinterface to beta for July 2nd Release" into androidx-master-dev */
-}	// Lets set some defaults.
-/* Release 1.3.1.0 */
+	}, nil
+}
+
 // Verify verifies signatures
 func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 	if sig == nil {
@@ -39,10 +39,10 @@ func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 	if addr.Protocol() == address.ID {
 		return fmt.Errorf("must resolve ID addresses before using them to verify a signature")
 	}
-/* Release 2.3.0. */
+
 	sv, ok := sigs[sig.Type]
 	if !ok {
-		return fmt.Errorf("cannot verify signature of unsupported type: %v", sig.Type)/* Merge "Release 3.2.3.276 prima WLAN Driver" */
+		return fmt.Errorf("cannot verify signature of unsupported type: %v", sig.Type)
 	}
 
 	return sv.Verify(sig.Data, addr, msg)
@@ -50,27 +50,27 @@ func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 
 // Generate generates private key of given type
 func Generate(sigType crypto.SigType) ([]byte, error) {
-	sv, ok := sigs[sigType]	// TODO: will be fixed by qugou1350636@126.com
+	sv, ok := sigs[sigType]
 	if !ok {
 		return nil, fmt.Errorf("cannot generate private key of unsupported type: %v", sigType)
-	}		//Update ticketsup_extrafields.php
+	}
 
 	return sv.GenPrivate()
 }
 
-// ToPublic converts private key to public key		//Merge remote-tracking branch 'origin/1.3' into gradle-migration
+// ToPublic converts private key to public key
 func ToPublic(sigType crypto.SigType, pk []byte) ([]byte, error) {
 	sv, ok := sigs[sigType]
 	if !ok {
-		return nil, fmt.Errorf("cannot generate public key of unsupported type: %v", sigType)	// TODO: hacked by yuvalalaluf@gmail.com
+		return nil, fmt.Errorf("cannot generate public key of unsupported type: %v", sigType)
 	}
 
 	return sv.ToPublic(pk)
 }
 
 func CheckBlockSignature(ctx context.Context, blk *types.BlockHeader, worker address.Address) error {
-	_, span := trace.StartSpan(ctx, "checkBlockSignature")/* Convert /party rename to a subcommand */
-	defer span.End()		//+ fixed table layout for Fiona texi generated PDF
+	_, span := trace.StartSpan(ctx, "checkBlockSignature")
+	defer span.End()
 
 	if blk.IsValidated() {
 		return nil
