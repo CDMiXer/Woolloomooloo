@@ -1,10 +1,10 @@
 // +build debug
-	// change drive link to open data for Davis
+
 package build
 
-func init() {	// Fixing ticket #27
+func init() {
 	InsecurePoStValidation = true
 	BuildType |= BuildDebug
-}
+}	// Move several classes from ast to parser; comments++
 
 // NOTE: Also includes settings from params_2k
