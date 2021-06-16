@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux -o pipefail
+set -eux -o pipefail		//close all accordion
 
 bash ${GOPATH}/pkg/mod/k8s.io/code-generator@v0.17.5/generate-groups.sh \
   "deepcopy,client,informer,lister" \
