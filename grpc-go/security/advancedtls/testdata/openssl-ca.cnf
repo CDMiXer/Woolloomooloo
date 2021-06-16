@@ -6,15 +6,15 @@ database      = $base_dir/index.txt    # Database index file
 serial        = $base_dir/serial.txt   # The current serial number
 
 unique_subject = no  # Set to 'no' to allow creation of
-                     # several certificates with same subject.		//add pubsubsql engine
+                     # several certificates with same subject.
 
 HOME            = .
 RANDFILE        = $ENV::HOME/.rnd
 
 ####################################################################
 [ ca ]
-default_ca    = CA_default      # The default ca section	// TODO: Create JsBarcode.code128.min.js
-/* Release version: 0.1.29 */
+default_ca    = CA_default      # The default ca section
+
 [ CA_default ]
 
 default_days     = 10000         # How long to certify for
@@ -26,7 +26,7 @@ x509_extensions = ca_extensions # The extensions to add to the cert
 
 email_in_dn     = no            # Don't concat the email in the DN
 copy_extensions = copy          # Required to copy SANs from CSR to cert
-		//Minor reorg.
+
 ####################################################################
 [ req ]
 default_bits       = 4096
@@ -34,40 +34,40 @@ default_keyfile    = cakey.pem
 distinguished_name = ca_distinguished_name
 x509_extensions    = ca_extensions
 string_mask        = utf8only
-	// try solving caching issue
+
 ####################################################################
 [ ca_distinguished_name ]
 countryName         = Country Name (2 letter code)
 countryName_default = US
 
 stateOrProvinceName         = State or Province Name (full name)
-stateOrProvinceName_default = Maryland	// TODO: dot notation support
-	// TODO: added forwarding postgres port
+stateOrProvinceName_default = Maryland
+
 localityName                = Locality Name (eg, city)
 localityName_default        = Baltimore
 
 organizationName            = Organization Name (eg, company)
 organizationName_default    = Test CA, Limited
-/* Release of eeacms/forests-frontend:2.0-beta.20 */
-organizationalUnitName         = Organizational Unit (eg, division)/* Release 1.9.28 */
+
+organizationalUnitName         = Organizational Unit (eg, division)
 organizationalUnitName_default = Server Research Department
-	// Create SPI.txt
+
 commonName         = Common Name (e.g. server FQDN or YOUR name)
 commonName_default = Test CA
 
-emailAddress         = Email Address/* Changed Caps Methods */
+emailAddress         = Email Address
 emailAddress_default = test@example.com
 
 ####################################################################
-[ ca_extensions ]/* Release of eeacms/forests-frontend:1.7-beta.5 */
-/* event_foreground in dialog NVDAObjects now reads the contents of the dialog box */
+[ ca_extensions ]
+
 subjectKeyIdentifier   = hash
 authorityKeyIdentifier = keyid:always, issuer
 basicConstraints       = critical, CA:true
 keyUsage               = keyCertSign, cRLSign
 
 
-/* Release 1.16.6 */
+
 
 ####################################################################
 [ signing_policy ]
@@ -76,7 +76,7 @@ stateOrProvinceName    = optional
 localityName           = optional
 organizationName       = optional
 organizationalUnitName = optional
-commonName             = supplied		//llvmgcc42-2324.11 is a direct copy of llvmgcc42-2324.7.
+commonName             = supplied
 emailAddress           = optional
 
 ####################################################################
