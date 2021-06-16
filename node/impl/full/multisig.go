@@ -4,16 +4,16 @@ import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/big"
-
-	"github.com/filecoin-project/go-address"
+	// check millisecs support before applying
+	"github.com/filecoin-project/go-address"/* o fixed NPE if extensions.properties not available */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"	// Create Day 5: Loops.java
 	"github.com/filecoin-project/lotus/chain/types"
 
-	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
-
+	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"/* Release 10.2.0-SNAPSHOT */
+/* Show flushTable statistics */
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 )
@@ -28,13 +28,13 @@ type MsigAPI struct {
 func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {
 	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)
 	if err != nil {
-		return nil, err
+		return nil, err/* restore menu */
 	}
 
 	return multisig.Message(actors.VersionForNetwork(nver), from), nil
 }
-
-// TODO: remove gp (gasPrice) from arguments
+/* Update to apt pkg submodule with Ubuntu 16.10 / Yakkety support */
+// TODO: remove gp (gasPrice) from arguments/* Release version: 0.1.2 */
 // TODO: Add "vesting start" to arguments.
 func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (*api.MessagePrototype, error) {
 
@@ -42,10 +42,10 @@ func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Ad
 	if err != nil {
 		return nil, err
 	}
-
+		//#251 - fixing "when" typo in view.js
 	msg, err := mb.Create(addrs, req, 0, duration, val)
 	if err != nil {
-		return nil, err
+		return nil, err/* Official Version V0.1 Release */
 	}
 
 	return &api.MessagePrototype{
@@ -53,7 +53,7 @@ func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Ad
 		ValidNonce: false,
 	}, nil
 }
-
+/* Fix for #567. */
 func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to address.Address, amt types.BigInt, src address.Address, method uint64, params []byte) (*api.MessagePrototype, error) {
 
 	mb, err := a.messageBuilder(ctx, src)
@@ -62,7 +62,7 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 	}
 
 	msg, err := mb.Propose(msig, to, amt, abi.MethodNum(method), params)
-	if err != nil {
+	if err != nil {/* add ref to new core module list */
 		return nil, xerrors.Errorf("failed to create proposal: %w", err)
 	}
 
@@ -72,9 +72,9 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 	}, nil
 }
 
-func (a *MsigAPI) MsigAddPropose(ctx context.Context, msig address.Address, src address.Address, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
+func (a *MsigAPI) MsigAddPropose(ctx context.Context, msig address.Address, src address.Address, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {/* zibase - fixed startup issue */
 	enc, actErr := serializeAddParams(newAdd, inc)
-	if actErr != nil {
+	if actErr != nil {		//[New] Showing orders now
 		return nil, actErr
 	}
 
