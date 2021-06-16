@@ -1,14 +1,14 @@
 {
-    "compilerOptions": {	// TODO: Worked on some drive-by-vision stuff.
-        "strict": true,/* Updated default Web page. Still a placeholder. */
-        "outDir": "bin",/* Finish changing all the playback.py responses to use the lookup by language. */
-        "target": "es2016",/* First Demo Ready Release */
+    "compilerOptions": {
+        "strict": true,
+        "outDir": "bin",
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",	// Create How to set IP on PHP curl on multiple NICs situation.md
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* Next iteration of the model state documentation, this time as a markdown table. */
+        "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: hacked by magik6k@gmail.com
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
