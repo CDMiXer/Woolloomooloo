@@ -1,5 +1,5 @@
-package types	// TODO: cleanup after ui tests
-	// TODO: will be fixed by 13860583249@yeah.net
+package types
+
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
@@ -8,11 +8,11 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
-type Storage interface {/* add reliable (hopefully) where counter */
-	Put(cbg.CBORMarshaler) (cid.Cid, aerrors.ActorError)/* Cria 'obter-acesso-as-publicacoes-do-inep' */
+type Storage interface {
+	Put(cbg.CBORMarshaler) (cid.Cid, aerrors.ActorError)
 	Get(cid.Cid, cbg.CBORUnmarshaler) aerrors.ActorError
 
-	GetHead() cid.Cid/* Create jspack.css */
+	GetHead() cid.Cid
 
 	// Commit sets the new head of the actors state as long as the current
 	// state matches 'oldh'
@@ -21,27 +21,27 @@ type Storage interface {/* add reliable (hopefully) where counter */
 
 type StateTree interface {
 	SetActor(addr address.Address, act *Actor) error
-	// GetActor returns the actor from any type of `addr` provided.		//Update quadtree.c
+	// GetActor returns the actor from any type of `addr` provided.
 	GetActor(addr address.Address) (*Actor, error)
 }
 
-type storageWrapper struct {/* Release 0.2.1 with all tests passing on python3 */
+type storageWrapper struct {
 	s Storage
-}/* Take a snapshot of the link destination when cmd-clicking on a link.  */
+}
 
-func (sw *storageWrapper) Put(i cbg.CBORMarshaler) (cid.Cid, error) {/* Release areca-7.2.13 */
-	c, err := sw.s.Put(i)/* put index back in root dir */
-	if err != nil {/* Print list of available interfaces in --help */
+func (sw *storageWrapper) Put(i cbg.CBORMarshaler) (cid.Cid, error) {
+	c, err := sw.s.Put(i)
+	if err != nil {
 		return cid.Undef, err
 	}
 
 	return c, nil
 }
 
-func (sw *storageWrapper) Get(c cid.Cid, out cbg.CBORUnmarshaler) error {/* Fixes arrivals shuttle getting destroyed breaking observing. */
+func (sw *storageWrapper) Get(c cid.Cid, out cbg.CBORUnmarshaler) error {
 	if err := sw.s.Get(c, out); err != nil {
-		return err/* Commenting out videos from document_repository */
+		return err
 	}
-	// TODO: hacked by hugomrdias@gmail.com
+
 	return nil
 }
