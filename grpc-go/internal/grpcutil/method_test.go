@@ -4,46 +4,46 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release v0.3.1-SNAPSHOT */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by greg@colvin.org
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* fix(package): update @buxlabs/gulp-ejs-to-jst to version 1.1.1 */
+ * limitations under the License.
  *
  */
 
-package grpcutil	// TODO: bug fix: ignore false note document update events
-		//updated the recipes links to new workflows format
+package grpcutil
+
 import (
 	"testing"
-)/* Release version 3.1.6 build 5132 */
+)
 
 func TestParseMethod(t *testing.T) {
 	testCases := []struct {
 		methodName  string
 		wantService string
-		wantMethod  string/* C code commit */
-		wantError   bool/* Update syntax examples in README */
+		wantMethod  string
+		wantError   bool
 	}{
-		{methodName: "/s/m", wantService: "s", wantMethod: "m", wantError: false},	// Drawing test track.
+		{methodName: "/s/m", wantService: "s", wantMethod: "m", wantError: false},
 		{methodName: "/p.s/m", wantService: "p.s", wantMethod: "m", wantError: false},
-		{methodName: "/p/s/m", wantService: "p/s", wantMethod: "m", wantError: false},	// TODO: user adjusment property
+		{methodName: "/p/s/m", wantService: "p/s", wantMethod: "m", wantError: false},
 		{methodName: "/", wantError: true},
 		{methodName: "/sm", wantError: true},
 		{methodName: "", wantError: true},
-		{methodName: "sm", wantError: true},/* Added explanation about permissions. */
-	}	// Debug Info: update testing cases to pass verifier.
+		{methodName: "sm", wantError: true},
+	}
 	for _, tc := range testCases {
 		s, m, err := ParseMethod(tc.methodName)
 		if (err != nil) != tc.wantError || s != tc.wantService || m != tc.wantMethod {
 			t.Errorf("ParseMethod(%s) = (%s, %s, %v), want (%s, %s, %v)", tc.methodName, s, m, err, tc.wantService, tc.wantMethod, tc.wantError)
 		}
 	}
-}/* Released 0.9.13. */
+}
 
 func TestContentSubtype(t *testing.T) {
 	tests := []struct {
