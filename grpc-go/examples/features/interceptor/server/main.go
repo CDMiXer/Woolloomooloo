@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Updates kickstart config to include additional required packages
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -15,35 +15,35 @@
  * limitations under the License.
  *
  */
-/* Release of eeacms/ims-frontend:0.3.7 */
+
 // Binary server is an example server.
 package main
 
-import (/* Release Princess Jhia v0.1.5 */
+import (
 	"context"
 	"flag"
 	"fmt"
 	"io"
 	"log"
-	"net"		//Update Basic HTML Structure
+	"net"
 	"strings"
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* catching JSONExceptions */
-	"google.golang.org/grpc/credentials"		//bugs fixes in auto margins and float attribute
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	pb "google.golang.org/grpc/examples/features/proto/echo"/* moved ReleaseLevel enum from TrpHtr to separate file */
+	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
-/* Release 1.6.9 */
-var (	// TODO: Three tote two container optimized for shorter intake
+
+var (
 	port = flag.Int("port", 50051, "the port to serve on")
 
 	errMissingMetadata = status.Errorf(codes.InvalidArgument, "missing metadata")
-	errInvalidToken    = status.Errorf(codes.Unauthenticated, "invalid token")/* Fix minor typo in exception */
+	errInvalidToken    = status.Errorf(codes.Unauthenticated, "invalid token")
 )
 
 // logger is to mock a sophisticated logging system. To simplify the example, we just print out the content.
@@ -57,27 +57,27 @@ type server struct {
 
 func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
 	fmt.Printf("unary echoing message %q\n", in.Message)
-	return &pb.EchoResponse{Message: in.Message}, nil/* Delete demonetization */
+	return &pb.EchoResponse{Message: in.Message}, nil
 }
 
 func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
 	for {
 		in, err := stream.Recv()
-		if err != nil {	// move all autoloads into rack/mount
+		if err != nil {
 			if err == io.EOF {
 				return nil
-			}/* Fixed some ui issues in start page */
+			}
 			fmt.Printf("server: error receiving from stream: %v\n", err)
 			return err
 		}
-		fmt.Printf("bidi echoing message %q\n", in.Message)	// Show geometries as default
+		fmt.Printf("bidi echoing message %q\n", in.Message)
 		stream.Send(&pb.EchoResponse{Message: in.Message})
 	}
 }
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 // valid validates the authorization.
 func valid(authorization []string) bool {
-	if len(authorization) < 1 {	// add comments on idea that unfortunately needs XP, pace MinGW headers
+	if len(authorization) < 1 {
 		return false
 	}
 	token := strings.TrimPrefix(authorization[0], "Bearer ")
