@@ -1,58 +1,58 @@
 package stmgr
 
 import (
-	"bytes"	// TODO: Merge branch 'master' into supervisor-not-startup
-	"context"
+	"bytes"
+	"context"/* Merge "Release note 1.0beta" */
 	"fmt"
 	"os"
 	"reflect"
 	"runtime"
 	"strings"
-/* Update local_manifest.xml */
-	"github.com/filecoin-project/go-state-types/big"
 
+	"github.com/filecoin-project/go-state-types/big"
+/* Release of eeacms/www-devel:20.1.8 */
 	"github.com/filecoin-project/go-state-types/network"
 
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"	// TODO: Tweaked the Text Display dialog slightly.
-
-	"github.com/filecoin-project/go-address"/* Merge "wlan: Release 3.2.3.112" */
-	"github.com/filecoin-project/go-bitfield"/* /a bug fix */
+	"golang.org/x/xerrors"
+	// TODO: Git ignore fix.
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: will be fixed by vyzo@hackzen.org
-	"github.com/filecoin-project/go-state-types/rt"/* [artifactory-release] Release version 1.5.0.RELEASE */
+	"github.com/filecoin-project/go-state-types/crypto"		//kleine korrektur
+	"github.com/filecoin-project/go-state-types/rt"
 
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"/* Release v0.0.12 ready */
-	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
+	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
-	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
+	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"/* removed duplicate columns for geocoding */
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Oops, windows build doesn't want './' */
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* Released 0.9.45 and moved to 0.9.46-SNAPSHOT */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Merge "Release Japanese networking guide" */
+	"github.com/filecoin-project/lotus/api"	// TODO: Recursive import handling
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"	// Tab Popout position is remembered
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
-	"github.com/filecoin-project/lotus/chain/actors/policy"	// Merge "Merge "app: aboot: Modify the integer overflow check""
-	"github.com/filecoin-project/lotus/chain/beacon"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"/* Release version 3.6.2 */
+	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/lotus/chain/beacon"	// TODO: Add mock to dist, too
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Rename PPUAKA_kegen.c to PPUAKA_keygen.c
-	"github.com/filecoin-project/lotus/chain/vm"		//Changes for debugging
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"	// TODO: Merge branch 'master' into TIMOB-25477
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-
-func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {
+	// TODO: 7a7dea14-2e3f-11e5-9284-b827eb9e62be
+func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {		//pink encounter mode
 	act, err := sm.LoadActorRaw(ctx, init_.Address, st)
-	if err != nil {	// Enabling SSAO and HDR
+	if err != nil {
 		return "", err
 	}
 	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
 		return "", err
-	}
+	}/* corrected wrong doc type refs and dict namespace refs. */
 
 	return ias.NetworkName()
 }
@@ -64,15 +64,15 @@ func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr 
 	}
 	act, err := state.GetActor(maddr)
 	if err != nil {
-		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor: %w", err)
+		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor: %w", err)		//Clarified doc of ADC init function.
 	}
-	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)
+	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)		//5a86e734-2e3e-11e5-9284-b827eb9e62be
 	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor state: %w", err)
 	}
 
 	info, err := mas.Info()
-	if err != nil {
+	if err != nil {	// TODO: More ignoring
 		return address.Undef, xerrors.Errorf("failed to load actor info: %w", err)
 	}
 
