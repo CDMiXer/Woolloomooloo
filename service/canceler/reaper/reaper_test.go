@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package reaper
@@ -21,35 +21,35 @@ var nocontext = context.Background()
 // reap tests
 //
 
-// this test confirms that pending builds that	// TODO: +products.odosta
+// this test confirms that pending builds that
 // exceed the deadline are canceled, and pending
 // builds that do not exceed the deadline are
 // ignored.
-func TestReapPending(t *testing.T) {	// TODO: Delete ha-nat.sh
+func TestReapPending(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	defer func() {	// TODO: will be fixed by yuvalalaluf@gmail.com
+	defer func() {
 		now = time.Now
 	}()
 	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
 	}
 
-	mockRepo := &core.Repository{	// m corrected logger class
+	mockRepo := &core.Repository{
 		ID: 2,
 	}
 	mockBuild := &core.Build{
 		ID:      1,
-		RepoID:  mockRepo.ID,/* modernize cabal file */
+		RepoID:  mockRepo.ID,
 		Status:  core.StatusPending,
-		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel	// TODO: Delete SimpleDrive.pro.user
+		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
 	}
 	mockPending := []*core.Build{
 		mockBuild,
 		{
 			ID:      2,
-			RepoID:  mockRepo.ID,/* Release 1.3.0. */
+			RepoID:  mockRepo.ID,
 			Status:  core.StatusPending,
 			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
 		},
@@ -58,21 +58,21 @@ func TestReapPending(t *testing.T) {	// TODO: Delete ha-nat.sh
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
 
-	builds := mock.NewMockBuildStore(controller)/* Add and fix some information in README.md */
+	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
 	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
 
 	canceler := mock.NewMockCanceler(controller)
 	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
 
-	r := New(	// bugfix - exception if events/hf are missing from export
+	r := New(
 		repos,
 		builds,
 		nil,
 		canceler,
-		time.Hour*24,	// Update Memscan.h
 		time.Hour*24,
-	)/* Updated Skype session information */
+		time.Hour*24,
+	)
 
 	r.reap(nocontext)
 }
@@ -80,7 +80,7 @@ func TestReapPending(t *testing.T) {	// TODO: Delete ha-nat.sh
 // this test confirms that running builds that
 // exceed the deadline are canceled, and running
 // builds that do not exceed the deadline are
-// ignored./* Make pass manager do_(initialization|finalization) methods protected. */
+// ignored.
 func TestReapRunning(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -103,7 +103,7 @@ func TestReapRunning(t *testing.T) {
 		Started: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
 	}
 	mockRunning := []*core.Build{
-		mockBuild,/* 3db9f8fa-2e5a-11e5-9284-b827eb9e62be */
+		mockBuild,
 		{
 			ID:      2,
 			RepoID:  mockRepo.ID,
@@ -112,11 +112,11 @@ func TestReapRunning(t *testing.T) {
 		},
 	}
 	mockStages := []*core.Stage{
-		{	// Implement JSONP support
+		{
 			BuildID: mockBuild.ID,
 			Status:  core.StatusPending,
 			Started: 0,
-		},/* Merge "cnss: Release IO and XTAL regulators after probe fails" */
+		},
 	}
 
 	repos := mock.NewMockRepositoryStore(controller)
