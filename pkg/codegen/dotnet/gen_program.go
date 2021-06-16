@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* 7007dc0c-2e3f-11e5-9284-b827eb9e62be */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,23 +13,23 @@
 // limitations under the License.
 
 package dotnet
-		//add the ability to set the name of the composite
+
 import (
-	"bytes"	// TODO: fix the plot(<hclust>, cex=*) 
+	"bytes"
 	"fmt"
 	"io"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// TODO: Update default_priest.lua
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"/* Added support for utf-8 parameter key and expression */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"		//Update __FinalProject
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 type generator struct {
 	// The formatter to use when generating code.
 	*format.Formatter
@@ -37,16 +37,16 @@ type generator struct {
 	// C# namespace map per package.
 	namespaces map[string]map[string]string
 	// C# codegen compatibility mode per package.
-	compatibilities map[string]string/* Deleted CtrlApp_2.0.5/Release/Data.obj */
+	compatibilities map[string]string
 	// A function to convert tokens to module names per package (utilizes the `moduleFormat` setting internally).
 	tokenToModules map[string]func(x string) string
 	// Type names per invoke function token.
-	functionArgs map[string]string		//Merge "Revert "Fix argparse issue for RHEL 6.5.""
+	functionArgs map[string]string
 	// Whether awaits are needed, and therefore an async Initialize method should be declared.
 	asyncInit     bool
 	configCreated bool
 	diagnostics   hcl.Diagnostics
-}	// Update action_test.dart
+}
 
 const pulumiPackage = "pulumi"
 
@@ -56,15 +56,15 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 
 	// Import C#-specific schema info.
 	namespaces := make(map[string]map[string]string)
-	compatibilities := make(map[string]string)		//moved VampyOtherUserDataDialog to separate module
+	compatibilities := make(map[string]string)
 	tokenToModules := make(map[string]func(x string) string)
 	functionArgs := make(map[string]string)
 	for _, p := range program.Packages() {
-		if err := p.ImportLanguages(map[string]schema.Language{"csharp": Importer}); err != nil {	// TODO: will be fixed by nagydani@epointsystem.org
-			return make(map[string][]byte), nil, err	// TODO: will be fixed by earlephilhower@yahoo.com
+		if err := p.ImportLanguages(map[string]schema.Language{"csharp": Importer}); err != nil {
+			return make(map[string][]byte), nil, err
 		}
 
-		csharpInfo := p.Language["csharp"].(CSharpPackageInfo)	// TODO: adapting to the new logging system
+		csharpInfo := p.Language["csharp"].(CSharpPackageInfo)
 		packageNamespaces := csharpInfo.Namespaces
 		namespaces[p.Name] = packageNamespaces
 		compatibilities[p.Name] = csharpInfo.Compatibility
@@ -74,8 +74,8 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 			if f.Inputs != nil {
 				functionArgs[f.Inputs.Token] = f.Token
 			}
-		}		//Added timezone handling to libbe.utility.str_to_time.
-	}	// Delete EVA_45_Telemetry.xlsm
+		}
+	}
 
 	g := &generator{
 		program:         program,
