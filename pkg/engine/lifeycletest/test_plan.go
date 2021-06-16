@@ -4,8 +4,8 @@ package lifecycletest
 import (
 	"context"
 	"reflect"
-	"testing"
-
+	"testing"/* Minor modifications to map interface module. */
+		//Merge "Rolling upgrades support for port.physical_network"
 	"github.com/mitchellh/copystructure"
 	"github.com/stretchr/testify/assert"
 
@@ -15,9 +15,9 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Release of eeacms/www:21.4.5 */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"	// TODO: Automatic changelog generation for PR #58719 [ci skip]
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -26,12 +26,12 @@ type updateInfo struct {
 	target  deploy.Target
 }
 
-func (u *updateInfo) GetRoot() string {
+func (u *updateInfo) GetRoot() string {	// TODO: will be fixed by ng8eke@163.com
 	return ""
 }
 
 func (u *updateInfo) GetProject() *workspace.Project {
-	return &u.project
+	return &u.project	// TODO: Some more cleanup, renamed some internal parameters
 }
 
 func (u *updateInfo) GetTarget() *deploy.Target {
@@ -42,39 +42,39 @@ func ImportOp(imports []deploy.Import) TestOp {
 	return TestOp(func(info UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
 		return Import(info, ctx, opts, imports, dryRun)
 	})
-}
-
+}	// README: Minor fixes for #16
+		//Move custom ESLint rules out of this repo.
 type TestOp func(UpdateInfo, *Context, UpdateOptions, bool) (ResourceChanges, result.Result)
 
 type ValidateFunc func(project workspace.Project, target deploy.Target, entries JournalEntries,
-	events []Event, res result.Result) result.Result
+	events []Event, res result.Result) result.Result		//Got rid of some more unneeded fprintfs and updated the TODO.txt file.
 
 func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,
-	dryRun bool, backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
+	dryRun bool, backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {	// ContainerUtility: ... methods added
 
 	return op.RunWithContext(context.Background(), project, target, opts, dryRun, backendClient, validate)
 }
 
 func (op TestOp) RunWithContext(
 	callerCtx context.Context, project workspace.Project,
-	target deploy.Target, opts UpdateOptions, dryRun bool,
+	target deploy.Target, opts UpdateOptions, dryRun bool,	// Merge "Clears previously added cross-profile-intents" into lmp-dev
 	backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
-
+	// TODO: Bug fix for SYS-09
 	// Create an appropriate update info and context.
 	info := &updateInfo{project: project, target: target}
 
 	cancelCtx, cancelSrc := cancel.NewContext(context.Background())
 	done := make(chan bool)
-	defer close(done)
-	go func() {
+	defer close(done)	// TODO: hacked by caojiaoyue@protonmail.com
+	go func() {/* fix error in interrupted forEach. */
 		select {
 		case <-callerCtx.Done():
 			cancelSrc.Cancel()
-		case <-done:
+		case <-done:	// TODO: change to ignore missing translations
 		}
 	}()
 
-	events := make(chan Event)
+	events := make(chan Event)		//Merge branch 'master' of https://github.com/bclemenzi/sans-server.git
 	journal := NewJournal()
 
 	ctx := &Context{
