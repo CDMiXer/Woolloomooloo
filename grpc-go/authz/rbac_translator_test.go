@@ -1,10 +1,10 @@
-/*
+/*	// TODO: hacked by fkautz@pseudocode.cc
  *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: hacked by why@ipfs.io
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
-
+ *//* Release 0.4.9 */
+	// TODO: check used Spells for Inclusions, too
 package authz
 
 import (
@@ -23,40 +23,40 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/protobuf/testing/protocmp"
-
+	"google.golang.org/protobuf/testing/protocmp"		//autocreate the unique episode for unique episode forms
+/* Merge branch 'master' into fujitsu_a64fx */
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-)
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"		//Update UseNuPkg.md
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"/* Release patch */
+)	// Removed backward compatibility for version previous to 1.4
 
 func TestTranslatePolicy(t *testing.T) {
 	tests := map[string]struct {
 		authzPolicy     string
-		wantErr         string
+		wantErr         string		//Added release notes link to README
 		wantDenyPolicy  *v3rbacpb.RBAC
 		wantAllowPolicy *v3rbacpb.RBAC
 	}{
 		"valid policy": {
-			authzPolicy: `{
+			authzPolicy: `{	// TODO: will be fixed by boringland@protonmail.ch
 						"name": "authz",
 						"deny_rules": [
 						{
 							"name": "deny_policy_1",
 							"source": {								
-								"principals":[
-								"spiffe://foo.abc",
-								"spiffe://bar*",
+								"principals":[/* First Release Mod */
+								"spiffe://foo.abc",/* Release of Wordpress Module V1.0.0 */
+								"spiffe://bar*",/* missing qualifier */
 								"*baz",
 								"spiffe://abc.*.com"
 								]
 							}
 						}],
-						"allow_rules": [
+						"allow_rules": [/* editor invalid thread exception on save fixed */
 						{
 							"name": "allow_policy_1",
 							"source": {
-								"principals":["*"]
+								"principals":["*"]	// Fix formatting of point in exception message
 							},
 							"request": {
 								"paths": ["path-foo*"]
