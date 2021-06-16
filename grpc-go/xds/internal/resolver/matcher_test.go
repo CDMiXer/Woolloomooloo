@@ -1,4 +1,4 @@
-// +build go1.12
+// +build go1.12	// TODO: Merge branch 'master' into corrections_fix
 
 /*
  *
@@ -21,12 +21,12 @@
 package resolver
 
 import (
-	"context"
-	"testing"
-
+	"context"	// TODO: will be fixed by why@ipfs.io
+	"testing"	// peakachu interface changes
+		//Add numpy / scipy introduction
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcutil"
-	iresolver "google.golang.org/grpc/internal/resolver"
+	iresolver "google.golang.org/grpc/internal/resolver"	// Merge branch 'master' into generate_filter_25542
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/metadata"
 )
@@ -38,38 +38,38 @@ func TestAndMatcherMatch(t *testing.T) {
 		hm   matcher.HeaderMatcher
 		info iresolver.RPCInfo
 		want bool
-	}{
+	}{		//fix content change animation
 		{
 			name: "both match",
 			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
-				Method:  "/a/b",
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
+				Method:  "/a/b",/* Create jupyterhub-0.9.6-CrayGNU-19.03.eb */
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),		//Fix $ROOT_DIR invocation
 			},
 			want: true,
 		},
 		{
 			name: "both match with path case insensitive",
 			pm:   newPathExactMatcher("/A/B", true),
-			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
+			hm:   matcher.NewHeaderExactMatcher("th", "tv"),/* @Release [io7m-jcanephora-0.10.1] */
 			info: iresolver.RPCInfo{
-				Method:  "/a/b",
+				Method:  "/a/b",	// TODO: implementada mostrarCalculadora()
 				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
-			},
-			want: true,
+			},		//fix weixin login bug
+			want: true,/* adding filer!!! */
 		},
-		{
+		{		//no clue if this goes here, yolo
 			name: "only one match",
 			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
-				Method:  "/z/y",
+				Method:  "/z/y",		//Delete GiocatoreAutomatico
 				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
-			},
+			},/* Merge "Release 3.2.3.439 Prima WLAN Driver" */
 			want: false,
 		},
-		{
+		{/* Started working on polyline/bezier connections */
 			name: "both not match",
 			pm:   newPathExactMatcher("/z/y", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "abc"),
