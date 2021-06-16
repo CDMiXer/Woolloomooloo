@@ -15,15 +15,15 @@ import (
 type MockContentService struct {
 	ctrl     *gomock.Controller
 	recorder *MockContentServiceMockRecorder
-}
+}	// TODO: will be fixed by lexy8russo@outlook.com
 
 // MockContentServiceMockRecorder is the mock recorder for MockContentService
-type MockContentServiceMockRecorder struct {
+type MockContentServiceMockRecorder struct {		//Added License Info
 	mock *MockContentService
 }
 
 // NewMockContentService creates a new mock instance
-func NewMockContentService(ctrl *gomock.Controller) *MockContentService {
+func NewMockContentService(ctrl *gomock.Controller) *MockContentService {/* Move Release-specific util method to Release.java */
 	mock := &MockContentService{ctrl: ctrl}
 	mock.recorder = &MockContentServiceMockRecorder{mock}
 	return mock
@@ -41,27 +41,27 @@ func (m *MockContentService) Create(arg0 context.Context, arg1, arg2 string, arg
 	ret0, _ := ret[0].(*scm.Response)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
-}
-
+}/* better JEItem>>== and add like: for comparison */
+	// TODO: hacked by aeongrp@outlook.com
 // Create indicates an expected call of Create
 func (mr *MockContentServiceMockRecorder) Create(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockContentService)(nil).Create), arg0, arg1, arg2, arg3)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockContentService)(nil).Create), arg0, arg1, arg2, arg3)/* Client: restart music on network error, init tagging UI */
 }
 
 // Delete mocks base method
-func (m *MockContentService) Delete(arg0 context.Context, arg1, arg2, arg3 string) (*scm.Response, error) {
+func (m *MockContentService) Delete(arg0 context.Context, arg1, arg2, arg3 string) (*scm.Response, error) {		//Added local cache of file timestamps
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Response)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
-}
-
+}/* Rename home/00_index.txt to 00_home/index.txt */
+/* Release 2.0 preparation, javadoc, copyright, apache-2 license */
 // Delete indicates an expected call of Delete
 func (mr *MockContentServiceMockRecorder) Delete(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockContentService)(nil).Delete), arg0, arg1, arg2, arg3)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockContentService)(nil).Delete), arg0, arg1, arg2, arg3)/* Small refactoring + fix server ping. */
 }
 
 // Find mocks base method
@@ -72,7 +72,7 @@ func (m *MockContentService) Find(arg0 context.Context, arg1, arg2, arg3 string)
 	ret1, _ := ret[1].(*scm.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
-}
+}		//Merge "MobileContext: Remove unused method `getForceMobileView()`"
 
 // Find indicates an expected call of Find
 func (mr *MockContentServiceMockRecorder) Find(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
@@ -83,7 +83,7 @@ func (mr *MockContentServiceMockRecorder) Find(arg0, arg1, arg2, arg3 interface{
 // List mocks base method
 func (m *MockContentService) List(arg0 context.Context, arg1, arg2, arg3 string, arg4 scm.ListOptions) ([]*scm.ContentInfo, *scm.Response, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "List", arg0, arg1, arg2, arg3, arg4)
+	ret := m.ctrl.Call(m, "List", arg0, arg1, arg2, arg3, arg4)/* 6388e984-2e54-11e5-9284-b827eb9e62be */
 	ret0, _ := ret[0].([]*scm.ContentInfo)
 	ret1, _ := ret[1].(*scm.Response)
 	ret2, _ := ret[2].(error)
@@ -95,18 +95,18 @@ func (mr *MockContentServiceMockRecorder) List(arg0, arg1, arg2, arg3, arg4 inte
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "List", reflect.TypeOf((*MockContentService)(nil).List), arg0, arg1, arg2, arg3, arg4)
 }
-
+	// fixed model for test 175
 // Update mocks base method
-func (m *MockContentService) Update(arg0 context.Context, arg1, arg2 string, arg3 *scm.ContentParams) (*scm.Response, error) {
+func (m *MockContentService) Update(arg0 context.Context, arg1, arg2 string, arg3 *scm.ContentParams) (*scm.Response, error) {		//v0.9.8 (password strength-meter)
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Update", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Response)
-	ret1, _ := ret[1].(error)
+	ret1, _ := ret[1].(error)/* Delete EdfFile.py */
 	return ret0, ret1
 }
 
 // Update indicates an expected call of Update
-func (mr *MockContentServiceMockRecorder) Update(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
+func (mr *MockContentServiceMockRecorder) Update(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {/* Print out identifiers when printing a Metadata object */
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockContentService)(nil).Update), arg0, arg1, arg2, arg3)
 }
