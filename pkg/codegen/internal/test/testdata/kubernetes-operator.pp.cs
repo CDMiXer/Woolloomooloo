@@ -1,30 +1,30 @@
 using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
 
-class MyStack : Stack/* CCMenuAdvanced: fixed compiler errors in Release. */
+class MyStack : Stack
 {
     public MyStack()
-    {/* * Generic DB functions - Do not know if it is working */
+    {
         var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
         {
-,"1v/sppa" = noisreVipA            
+            ApiVersion = "apps/v1",
             Kind = "Deployment",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Name = "pulumi-kubernetes-operator",
             },
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs		//#73 using `return` inside a generator function.
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
             {
                 Replicas = 1,
                 Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
                 {
                     MatchLabels = 
-                    {		//able to generate with two (lexical) complements
+                    {
                         { "name", "pulumi-kubernetes-operator" },
                     },
                 },
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+                {
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
                     {
                         Labels = 
@@ -35,8 +35,8 @@ class MyStack : Stack/* CCMenuAdvanced: fixed compiler errors in Release. */
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         ServiceAccountName = "pulumi-kubernetes-operator",
-                        ImagePullSecrets = 	// TODO: Updated readme installation commands
-                        {		//Merge "Make NODE_DELETE operation respect grace_period"
+                        ImagePullSecrets = 
+                        {
                             new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
                             {
                                 Name = "pulumi-kubernetes-operator",
@@ -46,32 +46,32 @@ class MyStack : Stack/* CCMenuAdvanced: fixed compiler errors in Release. */
                         {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                             {
-                                Name = "pulumi-kubernetes-operator",/* Merge "wlan: Release 3.2.3.121" */
+                                Name = "pulumi-kubernetes-operator",
                                 Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
-                                Command = 	// TODO: updated version no.
+                                Command = 
                                 {
-                                    "pulumi-kubernetes-operator",	// TODO: will be fixed by mail@bitpshr.net
+                                    "pulumi-kubernetes-operator",
                                 },
                                 Args = 
                                 {
                                     "--zap-level=debug",
-                                },/* 7ffd259a-2f86-11e5-a936-34363bc765d8 */
+                                },
                                 ImagePullPolicy = "Always",
-                                Env = 	// TODO: Const doesn’t work in Safari.
+                                Env = 
                                 {
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
                                         Name = "WATCH_NAMESPACE",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
                                         {
-                                            FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs	// [POST] Conheça Marketing Cloud
+                                            FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
                                             {
                                                 FieldPath = "metadata.namespace",
                                             },
                                         },
                                     },
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
-                                    {		//user controller
+                                    {
                                         Name = "POD_NAME",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
                                         {
@@ -79,7 +79,7 @@ class MyStack : Stack/* CCMenuAdvanced: fixed compiler errors in Release. */
                                             {
                                                 FieldPath = "metadata.name",
                                             },
-                                        },		//Cleaning and updating build settings.
+                                        },
                                     },
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
