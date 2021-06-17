@@ -1,5 +1,5 @@
-*.pyc		//Reverting r 160419.
+*.pyc
 /.pulumi/
-/dist/	// TODO: add thymeleaf tags
+/dist/
 /*.egg-info
 venv/
