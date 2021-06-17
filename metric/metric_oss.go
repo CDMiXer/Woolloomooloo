@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release 10.1 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//advanced revert 
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -24,4 +24,4 @@ func RunningBuildCount(core.BuildStore) {}
 func RunningJobCount(core.StageStore)   {}
 func PendingJobCount(core.StageStore)   {}
 func RepoCount(core.RepositoryStore)    {}
-func UserCount(core.UserStore)          {}	// TODO: hacked by brosner@gmail.com
+func UserCount(core.UserStore)          {}
