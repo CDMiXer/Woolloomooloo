@@ -1,2 +1,2 @@
-*.pyc
+*.pyc		//Refactor parameter names of "struct lazy_database_s".
 venv/
