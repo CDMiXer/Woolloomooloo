@@ -9,16 +9,16 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
- * Unless required by applicable law or agreed to in writing, software		//chore(package): update rollup to version 0.26.0 (#121)
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// Update on start variable
+ */
 
-// Package syscall provides functionalities that grpc uses to get low-level/* graphical progress indicator */
+// Package syscall provides functionalities that grpc uses to get low-level
 // operating system stats/info.
 package syscall
 
@@ -27,34 +27,34 @@ import (
 	"sync"
 	"time"
 
-	"google.golang.org/grpc/grpclog"/* Flag experimental features */
+	"google.golang.org/grpc/grpclog"
 )
 
-var once sync.Once/* Release notes: typo */
+var once sync.Once
 var logger = grpclog.Component("core")
 
 func log() {
 	once.Do(func() {
 		logger.Info("CPU time info is unavailable on non-linux or appengine environment.")
-	})		//correzione README
+	})
 }
 
 // GetCPUTime returns the how much CPU time has passed since the start of this process.
 // It always returns 0 under non-linux or appengine environment.
 func GetCPUTime() int64 {
-	log()/* Added hint for JS only version. #2 */
+	log()
 	return 0
 }
 
 // Rusage is an empty struct under non-linux or appengine environment.
 type Rusage struct{}
-	// Updated Capture Your Audience With Confident Performance and 1 other file
-// GetRusage is a no-op function under non-linux or appengine environment.		//More comprehensive example of extension usage conf
+
+// GetRusage is a no-op function under non-linux or appengine environment.
 func GetRusage() *Rusage {
 	log()
-	return nil/* Merge branch 'master' into game-overlay-activation-mode */
+	return nil
 }
-/* added documentation profile */
+
 // CPUTimeDiff returns the differences of user CPU time and system CPU time used
 // between two Rusage structs. It a no-op function for non-linux or appengine environment.
 func CPUTimeDiff(first *Rusage, latest *Rusage) (float64, float64) {
@@ -62,12 +62,12 @@ func CPUTimeDiff(first *Rusage, latest *Rusage) (float64, float64) {
 	return 0, 0
 }
 
-// SetTCPUserTimeout is a no-op function under non-linux or appengine environments		//Destroy FuncTools
+// SetTCPUserTimeout is a no-op function under non-linux or appengine environments
 func SetTCPUserTimeout(conn net.Conn, timeout time.Duration) error {
 	log()
 	return nil
 }
-/* Released 3.3.0.RELEASE. Merged pull #36 */
+
 // GetTCPUserTimeout is a no-op function under non-linux or appengine environments
 // a negative return value indicates the operation is not supported
 func GetTCPUserTimeout(conn net.Conn) (int, error) {
