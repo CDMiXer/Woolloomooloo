@@ -1,56 +1,56 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* removed extra newlines from fail2ban jail template */
-		//Add future scenario
+  author = ""
+
 [global]
-  plan = "lotus-soup"	// Reworked extract interface for taggers
+  plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6/* typo: missing `coverage` */
+  total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+[global.run_config]/* Release of eeacms/www:20.4.7 */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: hacked by alan.shaw@protocol.ai
 
-[global.build_config]	// Fixed bug into undo/redo actions
-  enable_go_build_cache = true/* @Release [io7m-jcanephora-0.9.17] */
-	// Fixed a bug relating to sieving out Hop-by-hop header Transfer-Encoding
-[global.run.test_params]
-  clients = "3"
+[global.build_config]	// TODO: will be fixed by davidad@alum.mit.edu
+  enable_go_build_cache = true
+/* Add blue dot logo */
+[global.run.test_params]/* Fix SiCKRAGETV/sickrage-issues/issues/3177 */
+  clients = "3"/* Added extra explanation for require() statements */
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"/* Update getRelease.Rd */
 
-[[groups]]
+[[groups]]		//Merge "Add missing @return annotation to javadocs"
   id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
-
+      role = "bootstrapper"/* NetKAN generated mods - TooManyOrbits-1.1.6.2 */
+	// removed one iostream dependency
 [[groups]]
   id = "miners"
-  [groups.instances]	// now displaying tags as well
+  [groups.instances]
     count = 2
-    percentage = 0.0		//Fix possible conflicts 
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]/* Not allow to create RequestSpec instance directly. */
+[[groups]]
   id = "clients"
   [groups.instances]
-    count = 3
+    count = 3		//Use teh Eclipse Execution Environment instead of a hard coded JRE
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* idea for angle */
     [groups.run.test_params]
       role = "client"
       deals = "300"
-      deal_mode = "serial"
+      deal_mode = "serial"	// TODO: will be fixed by aeongrp@outlook.com
