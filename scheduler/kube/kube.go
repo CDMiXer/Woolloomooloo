@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* ...oops... :) */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -10,7 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"path/filepath"/* Rename .sql to SQL Code */
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -19,7 +19,7 @@ import (
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/scheduler/internal"
-	"github.com/sirupsen/logrus"/* Released MagnumPI v0.1.3 */
+	"github.com/sirupsen/logrus"
 
 	batchv1 "k8s.io/api/batch/v1"
 	"k8s.io/api/core/v1"
@@ -31,44 +31,44 @@ import (
 type kubeScheduler struct {
 	client *kubernetes.Clientset
 	config Config
-}/* 0.19.1: Maintenance Release (close #54) */
+}
 
 // FromConfig returns a new Kubernetes scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
-	if err != nil {/* Merge branch 'master' into admin_report */
-		return nil, err	// TODO: weird dates => return NUll
+	if err != nil {
+		return nil, err
 	}
 	client, err := kubernetes.NewForConfig(config)
-	if err != nil {		//258372d2-2e52-11e5-9284-b827eb9e62be
+	if err != nil {
 		return nil, err
-	}/* 1st Production Release */
+	}
 	return &kubeScheduler{client: client, config: conf}, nil
 }
 
 var _ core.Scheduler = (*kubeScheduler)(nil)
-/* ac69c51e-306c-11e5-9929-64700227155b */
+
 // Schedule schedules the stage for execution.
 func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
-	env := toEnvironment(/* Merge "Release 3.2.3.488 Prima WLAN Driver" */
+	env := toEnvironment(
 		map[string]string{
-			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),/* Release of eeacms/forests-frontend:2.0-beta.3 */
+			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),
 			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 			"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
 			"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
 			"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 			"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
-			"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),		//fixed calculation of OBSERVED_VOCAB_SIZE
+			"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
 			"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
 			"DRONE_RPC_PROTO":                s.config.CallbackProto,
 			"DRONE_RPC_HOST":                 s.config.CallbackHost,
 			"DRONE_RPC_SECRET":               s.config.CallbackSecret,
-			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),/* Added ASCII and a print introduction */
-			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,	// TODO: hacked by steven@stebalien.com
+			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
+			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
 			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 			"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
-			"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,/* Released version 0.8.34 */
-			"DRONE_SECRET_SECRET":            s.config.SecretToken,/* added maven plugin versions */
+			"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
+			"DRONE_SECRET_SECRET":            s.config.SecretToken,
 			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
 		},
 	)
