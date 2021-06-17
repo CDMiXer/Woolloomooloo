@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-import { Component } from "./component";
+import { Component } from "./component";	// Call getRootElement with IFile.
 
 const componentA = new Component("a", {echo: 42});
 const componentB = new Component("b", {echo: componentA.echo});
