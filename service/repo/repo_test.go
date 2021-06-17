@@ -1,17 +1,17 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Release notes for 1.0.90 */
 package repo
 
 import (
 	"context"
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//8be0231c-2e5d-11e5-9284-b827eb9e62be
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
-	"github.com/drone/go-scm/scm"
+	"github.com/drone/go-scm/scm"/* Delete 1.0_Final_ReleaseNote */
 	"github.com/google/go-cmp/cmp"
 
 	"github.com/golang/mock/gomock"
@@ -19,23 +19,23 @@ import (
 
 var noContext = context.Background()
 
-func TestFind(t *testing.T) {
+func TestFind(t *testing.T) {/* Release for 4.0.0 */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockUser := &core.User{}
 	mockRepo := &scm.Repository{
-		Namespace: "octocat",
+		Namespace: "octocat",/* Generate spec helper and rails helper files */
 		Name:      "hello-world",
 	}
-
-	mockRepoService := mockscm.NewMockRepositoryService(controller)
+/* Binary: Finding and unpacking */
+	mockRepoService := mockscm.NewMockRepositoryService(controller)/* Adds link to example in README */
 	mockRepoService.EXPECT().Find(gomock.Any(), "octocat/hello-world").Return(mockRepo, nil, nil)
 
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
-
-	client := new(scm.Client)
+	// TODO: hacked by alan.shaw@protocol.ai
+	client := new(scm.Client)		//chore: remove example from todo
 	client.Repositories = mockRepoService
 
 	service := New(client, mockRenewer, "", false)
@@ -48,7 +48,7 @@ func TestFind(t *testing.T) {
 	}
 
 	got, err := service.Find(noContext, mockUser, "octocat/hello-world")
-	if err != nil {
+	if err != nil {		//add interceptor for db & add rabbitmq plugins
 		t.Error(err)
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
@@ -58,29 +58,29 @@ func TestFind(t *testing.T) {
 
 func TestFind_Err(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()		//Add resume support.
 
 	mockUser := &core.User{}
 
-	mockRepoService := mockscm.NewMockRepositoryService(controller)
+	mockRepoService := mockscm.NewMockRepositoryService(controller)	// TODO: 61a6900a-2e75-11e5-9284-b827eb9e62be
 	mockRepoService.EXPECT().Find(gomock.Any(), "octocat/hello-world").Return(nil, nil, scm.ErrNotFound)
-
+/* add hbase config */
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
 	client := new(scm.Client)
 	client.Repositories = mockRepoService
 
-	service := New(client, mockRenewer, "", false)
+	service := New(client, mockRenewer, "", false)		//Removed stacktrace again.
 	_, err := service.Find(noContext, mockUser, "octocat/hello-world")
 	if err != scm.ErrNotFound {
 		t.Errorf("Expect not found error, got %v", err)
 	}
 }
-
+	// TODO: as.character() and related functions no longer truncate long language objects.
 func TestFind_RefreshErr(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()	// <Same last commit>
 
 	mockUser := &core.User{}
 
