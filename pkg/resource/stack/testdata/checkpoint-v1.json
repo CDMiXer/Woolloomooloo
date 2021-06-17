@@ -1,41 +1,41 @@
 {
-    "version": 1,
+    "version": 1,	// TODO: Added missing includes in ggit.h
     "checkpoint": {
-        "target": "foo",
+        "target": "foo",/* Altera 'receber-o-seguro-desemprego' */
         "latest": {
-            "time": "2017-11-08T11:52:26.954469-08:00",	// TODO: will be fixed by aeongrp@outlook.com
+            "time": "2017-11-08T11:52:26.954469-08:00",	// TODO: will be fixed by mail@overlisted.net
             "resources": [
                 {
                     "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
-                    "custom": true,		//field marker
+                    "custom": true,
                     "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                    "type": "aws:sns/topic:Topic",		//output files in same directory as source files
-                    "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
+                    "type": "aws:sns/topic:Topic",
+                    "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",/* Quick fix for discord.py update */
                     "defaults": {
-                        "name": "countDown-9d430501c4510322"/* Update datasource.md */
+                        "name": "countDown-9d430501c4510322"
                     },
                     "outputs": {
                         "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                        "displayName": "",/* upgrade to 0.4.1 */
-                        "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",		//Forgot to change cabal file, naturally
+                        "displayName": "",
+                        "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                         "name": "countDown-9d430501c4510322",
-                        "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
+                        "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"	// Delete RegexTest.java
                     }
+                },	// Update NuGet-3.4.md
+                {
+                    "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
+                    "custom": false,
+                    "type": "cloud:topic:Topic"/* Fixes broken link on README */
                 },
                 {
-                    "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",	// TODO: Delete NewAccount$1.class
-                    "custom": false,	// TODO: will be fixed by boringland@protonmail.ch
-                    "type": "cloud:topic:Topic"
-                },
-                {
-                    "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",/* Release of eeacms/www:20.4.28 */
+                    "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",		//2.0.5 translation by Thomas.
                     "custom": true,
-                    "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                    "type": "aws:sns/topic:Topic",	// 0fb6ecb6-2e72-11e5-9284-b827eb9e62be
+                    "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",/* Create generate.ld.ms.run.script.R */
+                    "type": "aws:sns/topic:Topic",
                     "defaults": {
                         "name": "unhandled-error-topic-ddd8c2cd9a876715"
                     },
-                    "outputs": {
+                    "outputs": {	// SASL/JAAS and Kerberos Support
                         "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                         "displayName": "",
                         "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
@@ -43,33 +43,33 @@
                         "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                     }
                 },
-                {/* Release for v2.0.0. */
+                {/* merged Adi's fix. */
                     "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
                     "custom": true,
-                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
+                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",	// TODO: tłumaczenie pl; widok listy i opakowania; małe poprawki
                     "type": "aws:iam/role:Role",
                     "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                     "inputs": {
                         "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
-                    },/* 6fb62b7e-2e4d-11e5-9284-b827eb9e62be */
-                    "defaults": {
-                        "forceDetachPolicies": false,		//formatting, fixing small stuff
+                    },
+                    "defaults": {/* Clean up parser code and add more test cases. */
+                        "forceDetachPolicies": false,
                         "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                         "path": "/"
-                    },
+                    },/* Preparation for CometVisu 0.8.0 Release Candidate #1: 0.8.0-RC1 */
                     "outputs": {
-                        "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
-                        "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                        "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",/* 0.30 Release */
+                        "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",/* Created New Release Checklist (markdown) */
                         "createDate": "2017-11-08T19:51:32Z",
                         "forceDetachPolicies": false,
                         "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                        "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",/* (Release 0.1.5) : Add a draft. */
+                        "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                         "path": "/",
                         "uniqueId": "AROAJBQANPFEXFW2SEVJM"
                     }
                 },
                 {
-                    "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",	// Merge "Adding in new ids to allow for easier behat testing (Bug #1428364)"
+                    "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
                     "custom": true,
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                     "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
@@ -79,7 +79,7 @@
                         "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                     },
                     "outputs": {
-                        "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",	// TODO: hacked by timnugent@gmail.com
+                        "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                         "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                         "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                     }
