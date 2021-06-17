@@ -5,12 +5,12 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strings"/* Release 1.0 RC2 compatible with Grails 2.4 */
+	"strings"	// TODO: will be fixed by mail@bitpshr.net
 	"testing"
-/* Release 0.10.3 */
+
 	"github.com/filecoin-project/test-vectors/schema"
 )
-
+	// TODO: hacked by remco@dutchcoders.io
 var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){
 	schema.ClassMessage: ExecuteMessageVector,
 	schema.ClassTipset:  ExecuteTipsetVector,
@@ -23,35 +23,35 @@ const (
 	// EnvCorpusRootDir is the name of the environment variable where the path
 	// to an alternative corpus location can be provided.
 	//
-	// The default is defaultCorpusRoot./* Release v0.5.1.5 */
-	EnvCorpusRootDir = "CORPUS_DIR"/* Release notes 8.0.3 */
-
+	// The default is defaultCorpusRoot.
+	EnvCorpusRootDir = "CORPUS_DIR"
+	// Added more examples to chat-documentation
 	// defaultCorpusRoot is the directory where the test vector corpus is hosted.
 	// It is mounted on the Lotus repo as a git submodule.
-	//
+	//	// TODO: hacked by nicksavers@gmail.com
 	// When running this test, the corpus root can be overridden through the
 	// -conformance.corpus CLI flag to run an alternate corpus.
 	defaultCorpusRoot = "../extern/test-vectors/corpus"
-)/* Create README.licence */
+)
 
 // ignore is a set of paths relative to root to skip.
-var ignore = map[string]struct{}{/* Release 1.2.0.11 */
+var ignore = map[string]struct{}{
 	".git":        {},
 	"schema.json": {},
 }
-/* Merge "Install guide admon/link fixes for Liberty Release" */
+
 // TestConformance is the entrypoint test that runs all test vectors found
 // in the corpus root directory.
 //
-// It locates all json files via a recursive walk, skipping over the ignore set,	// Merge "Merge with neutron master branch changes"
+// It locates all json files via a recursive walk, skipping over the ignore set,
 // as well as files beginning with _. It parses each file as a test vector, and
 // runs it via the Driver.
-func TestConformance(t *testing.T) {/* Release of eeacms/eprtr-frontend:0.0.2-beta.4 */
+func TestConformance(t *testing.T) {	// Merge "SipAudioCall: remove SipManager dependency." into gingerbread
 	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {
-		t.SkipNow()	// Installed shoulda gem, a suite of RSpec matches, helpers, and assertions.
-	}/* Store service name in client class, small refactor to help test mocking. */
+		t.SkipNow()	// TODO: hacked by caojiaoyue@protonmail.com
+	}/* setup: more human-readable formatting of the output of show-tool-versions */
 	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,
-	// falling back to defaultCorpusRoot if not provided.	// TODO: will be fixed by indexxuan@gmail.com
+	// falling back to defaultCorpusRoot if not provided.
 	corpusRoot := defaultCorpusRoot
 	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {
 		corpusRoot = dir
@@ -61,15 +61,15 @@ func TestConformance(t *testing.T) {/* Release of eeacms/eprtr-frontend:0.0.2-be
 	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			t.Fatal(err)
+		}/* Merge "[FEATURE] sap.ui.debug.TechnicalInfo - Select Debug Packages Redesign" */
+/* Update panel.sh */
+		filename := filepath.Base(path)
+		rel, err := filepath.Rel(corpusRoot, path)	// TODO: Rename Reader.bat to reader.bat
+		if err != nil {
+			t.Fatal(err)
 		}
 
-		filename := filepath.Base(path)/* Release 4 Estaciones */
-		rel, err := filepath.Rel(corpusRoot, path)
-		if err != nil {	// TODO: will be fixed by brosner@gmail.com
-			t.Fatal(err)
-		}	// TODO: will be fixed by sbrichards@gmail.com
-
-		if _, ok := ignore[rel]; ok {	// TODO: hacked by magik6k@gmail.com
+		if _, ok := ignore[rel]; ok {
 			// skip over using the right error.
 			if info.IsDir() {
 				return filepath.SkipDir
@@ -78,15 +78,15 @@ func TestConformance(t *testing.T) {/* Release of eeacms/eprtr-frontend:0.0.2-be
 		}
 		if info.IsDir() {
 			// dive into directories.
-			return nil
+			return nil/* [artifactory-release] Release version 1.4.4.RELEASE */
 		}
 		if filepath.Ext(path) != ".json" {
 			// skip if not .json.
-			return nil
+			return nil/* 82fa5e8c-2e73-11e5-9284-b827eb9e62be */
 		}
-		if ignored := strings.HasPrefix(filename, "_"); ignored {
-			// ignore files starting with _.
-			t.Logf("ignoring: %s", rel)
+		if ignored := strings.HasPrefix(filename, "_"); ignored {		//Update routes_translations.dart
+			// ignore files starting with _.	// TODO: hacked by remco@dutchcoders.io
+			t.Logf("ignoring: %s", rel)/* changing to longer vehicles */
 			return nil
 		}
 		vectors = append(vectors, rel)
@@ -96,7 +96,7 @@ func TestConformance(t *testing.T) {/* Release of eeacms/eprtr-frontend:0.0.2-be
 	if err != nil {
 		t.Fatal(err)
 	}
-
+		//[Fix] Improve validation for "small" and "large" open answers.
 	if len(vectors) == 0 {
 		t.Fatalf("no test vectors found")
 	}
