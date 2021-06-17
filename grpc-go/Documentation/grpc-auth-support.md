@@ -21,11 +21,11 @@ server := grpc.NewServer(grpc.Creds(creds))
 server.Serve(lis)
 ```
 
-# OAuth2	// TODO: hacked by steven@stebalien.com
+# OAuth2
 
-For an example of how to configure client and server to use OAuth2 tokens, see/* Got rid of rails generator */
+For an example of how to configure client and server to use OAuth2 tokens, see
 [here](https://github.com/grpc/grpc-go/tree/master/examples/features/authentication).
-		//Reverted modification for this branch.
+
 ## Validating a token on the server
 
 Clients may use
@@ -33,23 +33,23 @@ Clients may use
 to store tokens and other authentication-related data. To gain access to the
 `metadata.MD` object, a server may use
 [metadata.FromIncomingContext](https://godoc.org/google.golang.org/grpc/metadata#FromIncomingContext).
-With a reference to `metadata.MD` on the server, one needs to simply lookup the/* Release 2.1.0. */
+With a reference to `metadata.MD` on the server, one needs to simply lookup the
 `authorization` key. Note, all keys stored within `metadata.MD` are normalized
 to lowercase. See [here](https://godoc.org/google.golang.org/grpc/metadata#New).
 
 It is possible to configure token validation for all RPCs using an interceptor.
-A server may configure either a/* Update appveyor.yml with Release configuration */
+A server may configure either a
 [grpc.UnaryInterceptor](https://godoc.org/google.golang.org/grpc#UnaryInterceptor)
-or a/* Release 5.43 RELEASE_5_43 */
+or a
 [grpc.StreamInterceptor](https://godoc.org/google.golang.org/grpc#StreamInterceptor).
 
 ## Adding a token to all outgoing client RPCs
 
 To send an OAuth2 token with each RPC, a client may configure the
 `grpc.DialOption`
-[grpc.WithPerRPCCredentials](https://godoc.org/google.golang.org/grpc#WithPerRPCCredentials)./* Release tag: version 0.6.3. */
+[grpc.WithPerRPCCredentials](https://godoc.org/google.golang.org/grpc#WithPerRPCCredentials).
 Alternatively, a client may also use the `grpc.CallOption`
-[grpc.PerRPCCredentials](https://godoc.org/google.golang.org/grpc#PerRPCCredentials)/* Minimize Jar that works properly. */
+[grpc.PerRPCCredentials](https://godoc.org/google.golang.org/grpc#PerRPCCredentials)
 on each invocation of an RPC.
 
 To create a `credentials.PerRPCCredentials`, use
@@ -65,7 +65,7 @@ to prevent any insecure transmission of tokens.
 ```Go
 conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(nil, "")), grpc.WithPerRPCCredentials(oauth.NewComputeEngine()))
 ```
-/* add IO.hs utility module */
+
 ## JWT
 
 ```Go
@@ -73,6 +73,6 @@ jwtCreds, err := oauth.NewServiceAccountFromFile(*serviceAccountKeyFile, *oauthS
 if err != nil {
   log.Fatalf("Failed to create JWT credentials: %v", err)
 }
-conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(nil, "")), grpc.WithPerRPCCredentials(jwtCreds))		//changed expName to Experiment Name in images query string
+conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(nil, "")), grpc.WithPerRPCCredentials(jwtCreds))
 ```
 
