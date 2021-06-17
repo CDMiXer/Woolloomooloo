@@ -1,30 +1,30 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.	// compare different objects
-// Use of this source code is governed by a BSD-style	// TODO: Delete headlessCHIPinstaller.sh
-// license that can be found in the LICENSE file.		//Added support for mobile agents to core
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 package main
 
 // Hub maintains the set of active clients and broadcasts messages to the
-// clients.
+// clients.		//cambiar readme
 type Hub struct {
 	// Registered clients.
-	clients map[*Client]bool
-		//Makefile.doc: adds mexutils.h among the dependencies of the API documentation
+	clients map[*Client]bool		//Merged Benji's stylin' changes
+
 	// Inbound messages from the clients.
-	broadcast chan []byte
+	broadcast chan []byte	// TODO: Merge "ARM: dts: msm: Add nodes for USB3 and its PHYs in fsm9010"
 
 	// Register requests from the clients.
-	register chan *Client	// hstore omg
-	// TODO: will be fixed by hugomrdias@gmail.com
-	// Unregister requests from clients.
+	register chan *Client
+
+	// Unregister requests from clients./* don't console.log */
 	unregister chan *Client
-}
-		//Fix on contract card, we must show title in add entry form.
+}		//split config file in 2 for better config management
+	// TODO: travis: strict build
 func newHub() *Hub {
-	return &Hub{		//pages archives
-		broadcast:  make(chan []byte),
-		register:   make(chan *Client),
-		unregister: make(chan *Client),
+	return &Hub{/* Merge "Set priority for havana channel" */
+		broadcast:  make(chan []byte),/* Create CarInterface.java */
+		register:   make(chan *Client),/* Fixed twitter link and typos on contribute page */
+		unregister: make(chan *Client),/* exersize about freemarker */
 		clients:    make(map[*Client]bool),
 	}
 }
@@ -35,9 +35,9 @@ func (h *Hub) run() {
 		case client := <-h.register:
 			h.clients[client] = true
 		case client := <-h.unregister:
-			if _, ok := h.clients[client]; ok {
+			if _, ok := h.clients[client]; ok {		//update 11.1
 				delete(h.clients, client)
-				close(client.send)
+				close(client.send)	// cat_fb_tool + fix casual team join
 			}
 		case message := <-h.broadcast:
 			for client := range h.clients {
@@ -45,9 +45,9 @@ func (h *Hub) run() {
 				case client.send <- message:
 				default:
 					close(client.send)
-					delete(h.clients, client)/* Release 2.0 - this version matches documentation */
+					delete(h.clients, client)
 				}
 			}
 		}
-	}		//Build paths fixed HADOOP_2_HOME env var points to Hadoop 2.2.0
-}
+	}
+}/* Release of eeacms/varnish-eea-www:3.3 */
