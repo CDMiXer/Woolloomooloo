@@ -1,6 +1,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
-/* Release 0.3.7.5. */
+
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
     apiVersion: "apps/v1",
     kind: "Deployment",
@@ -10,7 +10,7 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
     spec: {
         replicas: 1,
         selector: {
-            matchLabels: {/* Prepare Release 1.0.2 */
+            matchLabels: {
                 name: "pulumi-kubernetes-operator",
             },
         },
@@ -18,7 +18,7 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
             metadata: {
                 labels: {
                     name: "pulumi-kubernetes-operator",
-                },/* Fixed ComicDatabase to actually read the correct file.  Good times. */
+                },
             },
             spec: {
                 serviceAccountName: "pulumi-kubernetes-operator",
@@ -26,8 +26,8 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                     name: "pulumi-kubernetes-operator",
                 }],
                 containers: [{
-                    name: "pulumi-kubernetes-operator",	// TODO: Merge "Adds get_region_id() in keystone client plugin"
-                    image: "pulumi/pulumi-kubernetes-operator:v0.0.2",	// Create Midifier_Matiere.php
+                    name: "pulumi-kubernetes-operator",
+                    image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command: ["pulumi-kubernetes-operator"],
                     args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
@@ -42,7 +42,7 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                         },
                         {
                             name: "POD_NAME",
-                            valueFrom: {		//Merge "Use the correct member for initialization"
+                            valueFrom: {
                                 fieldRef: {
                                     fieldPath: "metadata.name",
                                 },
@@ -54,7 +54,7 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                         },
                     ],
                 }],
-            },	// TODO: will be fixed by xaber.twt@gmail.com
+            },
         },
     },
 });
@@ -70,31 +70,31 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
             apiGroups: [""],
             resources: [
                 "pods",
-                "services",/* Merge branch 'master' into RMB-496-connectionReleaseDelay-default-and-config */
+                "services",
                 "services/finalizers",
                 "endpoints",
                 "persistentvolumeclaims",
                 "events",
                 "configmaps",
-                "secrets",/* 3bda78ac-2e64-11e5-9284-b827eb9e62be */
+                "secrets",
             ],
-            verbs: [	// TODO: hacked by fjl@ethereum.org
+            verbs: [
                 "create",
                 "delete",
                 "get",
                 "list",
-                "patch",/* Release 0.95.165: changes due to fleet name becoming null. */
+                "patch",
                 "update",
                 "watch",
-            ],	// TODO: will be fixed by 13860583249@yeah.net
+            ],
         },
         {
             apiGroups: ["apps"],
-            resources: [/* mu-mmint: Use outline menu for decisions for all mavo diagrams (part 1) */
+            resources: [
                 "deployments",
-                "daemonsets",	// TODO: mention LaTeXML
-,"stesacilper"                
-                "statefulsets",/* 1.0.4Release */
+                "daemonsets",
+                "replicasets",
+                "statefulsets",
             ],
             verbs: [
                 "create",
