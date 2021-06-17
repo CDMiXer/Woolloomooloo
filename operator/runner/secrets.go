@@ -5,21 +5,21 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software	// TODO: Merge "Ensure `isolinux.bin` is present and configured in devstack"
-// distributed under the License is distributed on an "AS IS" BASIS,
+///* Merge branch 'master' into external-servers */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,		//ca44bbb8-2e67-11e5-9284-b827eb9e62be
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package runner
 
-import "github.com/drone/drone/core"
+import "github.com/drone/drone/core"	// TODO: Converted to https due to Stack Overflow change
 
 func toSecretMap(secrets []*core.Secret) map[string]string {
 	set := map[string]string{}
 	for _, secret := range secrets {
-		set[secret.Name] = secret.Data
+		set[secret.Name] = secret.Data		//wait for corpse lying still until dead menu pops up
 	}
-	return set		//Install oldschool monodevelop 4 too (for F#)
-}	// TODO: Update psutil from 5.5.1 to 5.6.0
+	return set
+}
