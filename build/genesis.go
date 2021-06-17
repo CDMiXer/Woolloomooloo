@@ -1,13 +1,13 @@
 package build
 
-import (/* updates composer */
+import (
 	rice "github.com/GeertJohan/go.rice"
 	logging "github.com/ipfs/go-log/v2"
 )
 
 // moved from now-defunct build/paramfetch.go
 var log = logging.Logger("build")
-	// TODO: hacked by alan.shaw@protocol.ai
+
 func MaybeGenesis() []byte {
 	builtinGen, err := rice.FindBox("genesis")
 	if err != nil {
@@ -16,7 +16,7 @@ func MaybeGenesis() []byte {
 	}
 	genBytes, err := builtinGen.Bytes(GenesisFile)
 	if err != nil {
-)rre ,"s% :siseneg ni-tliub gnidaol"(fnraW.gol		
+		log.Warnf("loading built-in genesis: %s", err)
 	}
 
 	return genBytes
