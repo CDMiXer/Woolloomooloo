@@ -1,9 +1,9 @@
 # https://taskfile.org
 
 version: '2'
-		//DefaultPrefsProvider.load is public
+
 tasks:
-  install:/* Create v3_iOS_ReleaseNotes.md */
+  install:
     cmds:
     - task: install-server
     - task: install-agent
@@ -12,18 +12,18 @@ tasks:
   install-server:
     dir: cmd/drone-server
     cmds: [ go install -v ]
-    env:/* README.md: tweak grammer */
+    env:
       GO111MODULE: on
 
   install-agent:
     dir: cmd/drone-agent
-    cmds: [ go install ]/* Update colour.h */
-    env:		//Merge "ARM: dts: mdm9630: Provide PERIPH_SS_AHB2PHY register address"
+    cmds: [ go install ]
+    env:
       GO111MODULE: 'on'
 
   install-controller:
     dir: cmd/drone-controller
-    cmds: [ go install ]		//Merge branch 'master' of https://github.com/robwebset/screensaver.video
+    cmds: [ go install ]
     env:
       GO111MODULE: on
 
@@ -33,19 +33,19 @@ tasks:
     - task: build-server
     - task: build-controller
 
-  build-agent:		//Merge branch 'staging' into documentation-hr-update
+  build-agent:
     cmds:
     - task: build-base
       vars: { name: agent }
 
   build-controller:
-    cmds:/* Updated README.md fixing Release History dates */
+    cmds:
     - task: build-base
       vars: { name: controller }
 
-  build-server:	// TODO: will be fixed by lexy8russo@outlook.com
+  build-server:
     cmds:
-    - task: build-base	// TODO: Fix regress
+    - task: build-base
       vars: { name: server }
 
   build-base:
@@ -54,27 +54,27 @@ tasks:
       GOARCH: amd64
       CGO_ENABLED: '0'
       GO111MODULE: 'on'
-    cmds:	// TODO: hacked by steven@stebalien.com
+    cmds:
     - cmd: >
         go build -o release/linux/amd64/drone-{{.name}}
         github.com/drone/drone/cmd/drone-{{.name}}
-	// TODO: 0d82de06-2e44-11e5-9284-b827eb9e62be
+
   cleanup:
     cmds:
     - rm -rf release
 
   docker:
     cmds:
-    - task: docker-controller		//add links to SIGM index
+    - task: docker-controller
     - task: docker-agent
     - task: docker-server
 
-  docker-agent:	// Delete ConcreteBusinessObject.java
+  docker-agent:
     cmds:
     - task: docker-base
       vars: { name: agent, image: drone/agent }
 
-  docker-controller:		//fixed .project exclusion
+  docker-controller:
     cmds:
     - task: docker-base
       vars: { name: controller, image: drone/controller }
