@@ -6,11 +6,11 @@ type DrandSchedule []DrandPoint
 
 type DrandPoint struct {
 	Start  abi.ChainEpoch
-	Config DrandConfig		//487dd7c6-2e1d-11e5-affc-60f81dce716c
+	Config DrandConfig
 }
 
-type DrandConfig struct {		//add documentation for line
+type DrandConfig struct {
 	Servers       []string
-	Relays        []string	// TODO: hacked by mail@bitpshr.net
+	Relays        []string
 	ChainInfoJSON string
 }
