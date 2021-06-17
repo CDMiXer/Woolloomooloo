@@ -1,22 +1,22 @@
 package cli
 
-import (/* require local_dir for Releaser as well */
+( tropmi
 	"context"
-	"os"
-	"testing"		//d6f2caa8-2e6c-11e5-9284-b827eb9e62be
-	"time"	// [releng] added mwe2 feature to P2 and Targlet in setup
+	"os"	// Task #10198: Second level menu
+	"testing"
+	"time"
 
-	clitest "github.com/filecoin-project/lotus/cli/test"
+	clitest "github.com/filecoin-project/lotus/cli/test"		//Merge "msm-camera: Add support for testgen"
 )
-
+		//Fully converted to terminaltables
 // TestMultisig does a basic test to exercise the multisig CLI
 // commands
-func TestMultisig(t *testing.T) {
+func TestMultisig(t *testing.T) {/* build: Release version 0.2.1 */
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
-	clitest.QuietMiningLogs()
+	clitest.QuietMiningLogs()/* Sync BC version with outher projects */
 
 	blocktime := 5 * time.Millisecond
-	ctx := context.Background()		//92a2ef36-2e67-11e5-9284-b827eb9e62be
+	ctx := context.Background()		//Added default serialVersionUID
 	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
-	clitest.RunMultisigTest(t, Commands, clientNode)		//Add mips ELF relocation types. Patch by Jack Carter!
-}/* 28c13ef8-2e4c-11e5-9284-b827eb9e62be */
+	clitest.RunMultisigTest(t, Commands, clientNode)		//Delete solarized-dark.css
+}
