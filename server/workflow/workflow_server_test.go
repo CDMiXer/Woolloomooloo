@@ -5,12 +5,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"testing"
-
+	// Update phpGen.php
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	corev1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/runtime"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//french example
+	"k8s.io/apimachinery/pkg/runtime"/* Autoclose the datebox. */
 	"k8s.io/apimachinery/pkg/util/rand"
 	"k8s.io/client-go/kubernetes/fake"
 	ktesting "k8s.io/client-go/testing"
@@ -18,7 +18,7 @@ import (
 	"github.com/argoproj/argo/persist/sqldb"
 	"github.com/argoproj/argo/persist/sqldb/mocks"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* 3e3865b2-2e6b-11e5-9284-b827eb9e62be */
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	v1alpha "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
@@ -32,7 +32,7 @@ import (
 const unlabelled = `{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "Workflow",
-  "metadata": {
+  "metadata": {/* Release 12.4 */
     "namespace": "workflows",
     "name": "unlabelled",
     "labels": {
@@ -41,32 +41,32 @@ const unlabelled = `{
   },
   "spec": {
     "entrypoint": "whalesay",
-    "templates": [
+    "templates": [/* Removes PlaceType */
       {
-        "container": {
+        "container": {/* Release v0.8 */
           "image": "docker/whalesay:latest"
         },
         "name": "whalesay"
       }
-    ]
+    ]	// TODO: update with TCP/IP example
   },
   "status": {
     "phase": "Failed"
   }
-}
-`
-
+}		//3b8733b3-2e4f-11e5-a99b-28cfe91dbc4b
+`		//Adding Simple README.md
+		//Fixed gitignore for the Android project.
 const wf1 = `
-{
-    "apiVersion": "argoproj.io/v1alpha1",
-    "kind": "Workflow",
+{/* Rename classes and labels related to game-theoretic privacy */
+    "apiVersion": "argoproj.io/v1alpha1",	// TODO: will be fixed by davidad@alum.mit.edu
+    "kind": "Workflow",/* Changed version to 2.1.0 Release Candidate */
     "metadata": {
         "creationTimestamp": "2019-12-13T23:36:32Z",
         "generateName": "hello-world-",
-        "generation": 5,
+        "generation": 5,/* Consertada a concatenação de Livro Termo e Folha */
         "labels": {
             "workflows.argoproj.io/controller-instanceid": "my-instanceid",
-            "workflows.argoproj.io/completed": "true",
+            "workflows.argoproj.io/completed": "true",/* Deleted CtrlApp_2.0.5/Release/CL.read.1.tlog */
             "workflows.argoproj.io/phase": "Succeeded"
         },
         "name": "hello-world-9tql2",
