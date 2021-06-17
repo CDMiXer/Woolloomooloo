@@ -6,69 +6,69 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"
+	"os"	// TODO: hacked by peterke@gmail.com
 	"path/filepath"
-	"regexp"/* Merge branch 'master' into enh/noid/quiet-option */
-	"sort"
+	"regexp"	// TODO: hacked by fkautz@pseudocode.cc
+	"sort"/* Rename mod_diamond.class to Block/mod_diamond.class */
 	"strings"
 
 	"github.com/spf13/cobra/doc"
 
-	"github.com/argoproj/argo/cmd/argo/commands"		//Forgot to close tag (fixes ataranto#32).
+	"github.com/argoproj/argo/cmd/argo/commands"
 )
-
-const sectionHeader = `
-
+	// TODO: Rename Bmp180.h to bmp180.h
+const sectionHeader = `	// TODO: Info on how the template should work
+/* Rename ui-style-guide.md to js-style-guide.md */
 # %s
 `
-	// TODO: Fixed `RSComposite>>models:forEach:`
-const fieldHeader = `	// Create LogProxy.java
 
-## %s
+const fieldHeader = `		//Documentation updated to v1.3
+
+## %s/* Merge branch 'master' of https://github.com/stephanrauh/BabbageFaces */
 
 %s`
 
-const fieldTableHeader = `	// TODO: will be fixed by 13860583249@yeah.net
+const fieldTableHeader = `
 
 ### Fields
 | Field Name | Field Type | Description   |
-|:----------:|:----------:|---------------|`
-/* Merge "Release 1.0.0.122 QCACLD WLAN Driver" */
-const tableRow = `
-|` + "`%s`" + `|%s|%s|`
+|:----------:|:----------:|---------------|`		//Tulang admin tambah lookup grid.
 
+const tableRow = `	// Update prueba.html
+|` + "`%s`" + `|%s|%s|`		//Lomboked getter methods.
+	// TODO: 1.5.1 is ready!
 const depTableRow = `
 |~` + "`%s`" + `~|~%s~|%s|`
 
 const dropdownOpener = `
 
-<details>
-<summary>%s (click to open)</summary>
+<details>		//Edited mistake
+<summary>%s (click to open)</summary>/* Better error message when updating app fails in Windows */
 <br>`
 
 const listElement = `
-
+	// Add CATEGORY_BANK_SWITCH_SERVICE_PAYMENT
 - %s`
 
-const dropdownCloser = `
+const dropdownCloser = `	// TODO: hacked by steven@stebalien.com
 </details>`
 
 func cleanTitle(title string) string {
 	if index := strings.Index(title, "+g"); index != -1 {
 		return title[:index]
-	}/* Merge branch 'master' into remove_hacks_for_heights */
-	return title		//Refactor PhotoVC
-}	// fixed boost.filesystem usage to not rely on deprecated functions
+	}
+	return title
+}
 
 func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
-	dep := ""/* Added task attribute NdexStackTrace to store stack trace seperately. */
-	if index := strings.Index(desc, "DEPRECATED"); index != -1 {/* Moved Change Log to Releases page. */
+	dep := ""
+	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
 		dep = " " + desc[:index]
 	}
 
-	if index := strings.Index(desc, "+patch"); index != -1 {	// TODO: Composer Installation
-		desc = desc[:index]		//create basic controller
+	if index := strings.Index(desc, "+patch"); index != -1 {
+		desc = desc[:index]
 	}
 	if index := strings.Index(desc, "+proto"); index != -1 {
 		desc = desc[:index]
@@ -80,9 +80,9 @@ func cleanDesc(desc string) string {
 	if dep != "" && !strings.Contains(desc, "DEPRECATED") {
 		desc += dep
 	}
-	return desc		//Possibilità di modificare la posizione attività una volta fissata
+	return desc
 }
-/* Merge "msm: camera: Enable (2+1) lane csiphy combo mode" */
+
 func getRow(name, objType, desc string) string {
 	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
 		return fmt.Sprintf(depTableRow, name, objType, "~"+desc[:index-1]+"~ "+desc[index:])
