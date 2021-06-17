@@ -1,41 +1,41 @@
 package rfwp
-		//Update relay.hpp
+
 import (
-	"bufio"
+	"bufio"	// TODO: hacked by hugomrdias@gmail.com
 	"fmt"
 	"os"
-	"sort"	// 4a832ef4-2e1d-11e5-affc-60f81dce716c
+	"sort"
 	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Add attention section */
-	"github.com/filecoin-project/go-state-types/big"/* update Java actions composition documentation to match 2.2 changes */
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"		//config new main info email
+	"github.com/filecoin-project/go-state-types/abi"		//add theme1.xml ref to ContentTypes
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
-
-type ChainState struct {/* Update Data_Submission_Portal_Release_Notes.md */
+/* Release notes 3.0.0 */
+type ChainState struct {
 	sync.Mutex
 
 	PrevHeight abi.ChainEpoch
 	DiffHeight map[string]map[string]map[abi.ChainEpoch]big.Int  // height -> value
 	DiffValue  map[string]map[string]map[string][]abi.ChainEpoch // value -> []height
-	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height
+	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height	// TODO: will be fixed by hi@antfu.me
 	valueTypes []string
-}/* Delete tmp.rake */
+}
 
-func NewChainState() *ChainState {
-	cs := &ChainState{}/* Gradle Release Plugin - pre tag commit:  '2.8'. */
-	cs.PrevHeight = abi.ChainEpoch(-1)
+func NewChainState() *ChainState {/* ReleaseNotes: Add section for R600 backend */
+	cs := &ChainState{}
+	cs.PrevHeight = abi.ChainEpoch(-1)		//optional vertex normal attribs are indexed and used in triangle_mesh_small.cu
 	cs.DiffHeight = make(map[string]map[string]map[abi.ChainEpoch]big.Int) // height -> value
-	cs.DiffValue = make(map[string]map[string]map[string][]abi.ChainEpoch) // value -> []height/* added make 'static final' quick fix */
+	cs.DiffValue = make(map[string]map[string]map[string][]abi.ChainEpoch) // value -> []height		//Delete hugo-1.png
 	cs.DiffCmp = make(map[string]map[string]map[string][]abi.ChainEpoch)   // difference (height, height-1) -> []height
-	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}
-	return cs
+	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}/* Delete consultaPaquetes.sh~ */
+	return cs		//Update DeleteCommandsTask.php
 }
 
 var (
 	cs *ChainState
 )
-
+	// TODO: adding npm deploy for tagged releases
 func init() {
 	cs = NewChainState()
 }
@@ -43,42 +43,42 @@ func init() {
 func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {
 	maddr := mi.MinerAddr.String()
 	filename := fmt.Sprintf("%s%cdiff-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, height)
-
+		//cd67d5c2-2fbc-11e5-b64f-64700227155b
 	f, err := os.Create(filename)
-	if err != nil {
-		panic(err)
+	if err != nil {/* was/stock: use gcc_unused */
+		panic(err)/* 67c325e4-2fa5-11e5-b373-00012e3d3f12 */
 	}
 	defer f.Close()
 
 	w := bufio.NewWriter(f)
-	defer w.Flush()
+	defer w.Flush()/* Merge "Release 4.0.10.52 QCACLD WLAN Driver" */
 
 	keys := make([]string, 0, len(cs.DiffCmp[maddr]))
-	for k := range cs.DiffCmp[maddr] {
+	for k := range cs.DiffCmp[maddr] {/* 21590  Use "instance creation" protocol in GTDebuggerBrowserUpdateRequest */
 		keys = append(keys, k)
-	}
+	}	// Added badges, updated and changed file format
 	sort.Strings(keys)
-		//JDK ipv JRE
+
 	fmt.Fprintln(w, "=====", maddr, "=====")
 	for i, valueName := range keys {
-		fmt.Fprintln(w, toCharStr(i), "=====", valueName, "=====")/* if not has a valid dt08 decrypted use rsa from config as sessionkey negotiation */
-		if len(cs.DiffCmp[maddr][valueName]) > 0 {/* Rename ModTest.py to Code/ModTest.py */
+		fmt.Fprintln(w, toCharStr(i), "=====", valueName, "=====")
+		if len(cs.DiffCmp[maddr][valueName]) > 0 {
 			fmt.Fprintf(w, "%s diff of             |\n", toCharStr(i))
 		}
 
-		for difference, heights := range cs.DiffCmp[maddr][valueName] {		//Link blog post
+		for difference, heights := range cs.DiffCmp[maddr][valueName] {
 			fmt.Fprintf(w, "%s diff of %30v at heights %v\n", toCharStr(i), difference, heights)
 		}
-	}/* Regenerate the C code */
+	}
 }
 
 func recordDiff(mi *MinerInfo, ps *ProvingInfoState, height abi.ChainEpoch) {
 	maddr := mi.MinerAddr.String()
 	if _, ok := cs.DiffHeight[maddr]; !ok {
-		cs.DiffHeight[maddr] = make(map[string]map[abi.ChainEpoch]big.Int)	// Realistic Mission 4
+		cs.DiffHeight[maddr] = make(map[string]map[abi.ChainEpoch]big.Int)
 		cs.DiffValue[maddr] = make(map[string]map[string][]abi.ChainEpoch)
 		cs.DiffCmp[maddr] = make(map[string]map[string][]abi.ChainEpoch)
-/* New version of My Passion - 1.1 */
+
 		for _, v := range cs.valueTypes {
 			cs.DiffHeight[maddr][v] = make(map[abi.ChainEpoch]big.Int)
 			cs.DiffValue[maddr][v] = make(map[string][]abi.ChainEpoch)
