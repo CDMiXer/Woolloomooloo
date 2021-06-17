@@ -4,14 +4,14 @@
 
 // +build !oss
 
-package queue	// TODO: zeienko-vitalii: Added temporary folder.
+package queue
 
 import (
 	"io/ioutil"
-/* Deleted CtrlApp_2.0.5/Release/Data.obj */
+
 	"github.com/sirupsen/logrus"
-)		//That should be error_measures complete.
-		//Upload “/static/img/cict-logo.png”
+)
+
 func init() {
-	logrus.SetOutput(ioutil.Discard)/* Release page spaces fixed. */
-}/* changing irlink */
+	logrus.SetOutput(ioutil.Discard)
+}
