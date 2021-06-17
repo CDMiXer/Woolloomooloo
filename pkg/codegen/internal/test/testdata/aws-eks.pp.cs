@@ -1,27 +1,27 @@
 using System.Collections.Generic;
-using System.Linq;	// TODO: Merge branch 'v0.11.9' into issue-1645
+using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;	// small bugfix in sratim login (used to download subtitles)
-using Pulumi;		//shift and rotation do not commute, thus changed name of the two functions
+using System.Threading.Tasks;
+using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
-{/* Update the compatibility test */
-    public MyStack()	// Create cache_tiering
+{
+    public MyStack()
     {
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);	// trying to ignore downloading maven-metadata.xml from snapshot repositories
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
     }
-		//document query method
+
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
         // VPC
         var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
         {
-            CidrBlock = "10.100.0.0/16",/* add composition property, used luya exception instead of base exception */
+            CidrBlock = "10.100.0.0/16",
             InstanceTenancy = "default",
-            EnableDnsHostnames = true,/* turn off dynamic lighting by default */
+            EnableDnsHostnames = true,
             EnableDnsSupport = true,
             Tags = 
             {
@@ -31,30 +31,30 @@ class MyStack : Stack
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
         {
             VpcId = eksVpc.Id,
-            Tags = 	// TODO: will be fixed by 13860583249@yeah.net
+            Tags = 
             {
                 { "Name", "pulumi-vpc-ig" },
             },
         });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
-{        
+        {
             VpcId = eksVpc.Id,
-            Routes = 	// TODO: will be fixed by timnugent@gmail.com
+            Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
-                {		//Updated the english feedstock.
+                {
                     CidrBlock = "0.0.0.0/0",
                     GatewayId = eksIgw.Id,
-                },	// TODO: hacked by alan.shaw@protocol.ai
+                },
             },
             Tags = 
             {
                 { "Name", "pulumi-vpc-rt" },
-            },	// Delete UM_2_0050422.nii.gz
+            },
         });
         // Subnets, one for each AZ in a region
         var zones = await Aws.GetAvailabilityZones.InvokeAsync();
-        var vpcSubnet = new List<Aws.Ec2.Subnet>();		//7babaee2-2e5f-11e5-9284-b827eb9e62be
+        var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
             vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
