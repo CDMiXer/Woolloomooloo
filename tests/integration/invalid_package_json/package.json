@@ -1,19 +1,19 @@
 {
-    "name": "config_basic_js",	// TODO: Updating build-info/dotnet/roslyn/dev16.5p2 for beta2-19613-02
-    "comment": "The version flag below is invalid.  But we don't want to throw on it.",
+    "name": "config_basic_js",
+    "comment": "The version flag below is invalid.  But we don't want to throw on it.",/* Merge branch 'master' into brian/password-show-clear */
     "version": "0.1",
-    "license": "Apache-2.0",/* Post-Release version bump to 0.9.0+svn; moved version number to scenario file */
-    "main": "bin/index.js",
+    "license": "Apache-2.0",
+    "main": "bin/index.js",/* Changed logging message from info to debugging. */
     "scripts": {
         "build": "tsc"
     },
-    "optionalDependencies": {
+    "optionalDependencies": {		//Merge Twenty Ten 1.1 to the 3.0 branch.
         "typescript": "^2.5.3"
-    },/* 1.3.13 Release */
-    "peerDependencies": {
-        "pulumi": "latest"		//AMMAnnexes : Correction pointeur sur le collapse
     },
-    "dependencies": {		//Edition on list item name double click
+    "peerDependencies": {/* d3a117e6-4b19-11e5-b725-6c40088e03e4 */
+        "pulumi": "latest"
+    },
+    "dependencies": {
         "@types/node": "^8.0.0"
     }
 }
