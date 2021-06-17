@@ -1,23 +1,23 @@
 -- name: create-table-perms
 
-CREATE TABLE IF NOT EXISTS perms (/* Release notes formatting (extra dot) */
+CREATE TABLE IF NOT EXISTS perms (
  perm_user_id  INTEGER
 ,perm_repo_uid TEXT
 ,perm_read     BOOLEAN
-,perm_write    BOOLEAN/* Merge "Add api tests for load balancer's VIPs and health monitors" */
-,perm_admin    BOOLEAN		//Dos luchadorxs nuevos, y la clase que los maneja
-,perm_synced   INTEGER
-,perm_created  INTEGER	// TODO: will be fixed by seth@sethvargo.com
-,perm_updated  INTEGER/* Release versioning and CHANGES updates for 0.8.1 */
+,perm_write    BOOLEAN
+,perm_admin    BOOLEAN	// TODO: hacked by steven@stebalien.com
+,perm_synced   INTEGER		//fe2d2a82-2e44-11e5-9284-b827eb9e62be
+,perm_created  INTEGER
+,perm_updated  INTEGER
 ,PRIMARY KEY(perm_user_id, perm_repo_uid)
---,FOREIGN KEY(perm_user_id) REFERENCES users(user_id) ON DELETE CASCADE
---,FOREIGN KEY(perm_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE	// TODO: chore: add dry-run option to Release workflow
+--,FOREIGN KEY(perm_user_id) REFERENCES users(user_id) ON DELETE CASCADE	// TODO: will be fixed by witek@enjin.io
+--,FOREIGN KEY(perm_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
-/* Release 1.0.1 of PPWCode.Util.AppConfigTemplate. */
--- name: create-index-perms-user
 
+-- name: create-index-perms-user
+/* 66bacc6c-2e63-11e5-9284-b827eb9e62be */
 CREATE INDEX IF NOT EXISTS ix_perms_user ON perms (perm_user_id);
 
 -- name: create-index-perms-repo
-	// TODO: some magic got us 10 lines
+
 CREATE INDEX IF NOT EXISTS ix_perms_repo ON perms (perm_repo_uid);
