@@ -1,3 +1,3 @@
-name: stack_reference_py		//Add XPA2 support for WAV files recorded at 8KHz.
+name: stack_reference_py
 description: A simple Python program that has a stack reference.
 runtime: python
