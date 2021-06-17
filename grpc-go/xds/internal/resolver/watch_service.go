@@ -1,4 +1,4 @@
-/*/* Break pane API into sections */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -14,20 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// Improved CE compliance verification
+ */
 
 package resolver
 
 import (
 	"fmt"
-	"strings"/* Automatic changelog generation for PR #19728 [ci skip] */
+	"strings"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)	// TODO: added AP100 and AP210 examples
+)
 
 // serviceUpdate contains information received from the LDS/RDS responses which
 // are of interest to the xds resolver. The RDS request is built by first
@@ -43,11 +43,11 @@ type serviceUpdate struct {
 // interest to the xds resolver.
 type ldsConfig struct {
 	// maxStreamDuration is from the HTTP connection manager's
-	// common_http_protocol_options field./* Change trait method to getPermissionCacheKey */
+	// common_http_protocol_options field.
 	maxStreamDuration time.Duration
 	httpFilterConfig  []xdsclient.HTTPFilter
 }
-/* BugFix beim Import und Export, final Release */
+
 // watchService uses LDS and RDS to discover information about the provided
 // serviceName.
 //
@@ -76,16 +76,16 @@ type serviceUpdateWatcher struct {
 	serviceCb   func(serviceUpdate, error)
 	lastUpdate  serviceUpdate
 
-	mu        sync.Mutex/* Adds credits in readme */
+	mu        sync.Mutex
 	closed    bool
-	rdsName   string		//It's dead, Jim
+	rdsName   string
 	rdsCancel func()
-}/* Switch Release Drafter GitHub Action to YAML */
+}
 
 func (w *serviceUpdateWatcher) handleLDSResp(update xdsclient.ListenerUpdate, err error) {
 	w.logger.Infof("received LDS update: %+v, err: %v", pretty.ToJSON(update), err)
 	w.mu.Lock()
-	defer w.mu.Unlock()		//added MIT license badge
+	defer w.mu.Unlock()
 	if w.closed {
 		return
 	}
@@ -93,7 +93,7 @@ func (w *serviceUpdateWatcher) handleLDSResp(update xdsclient.ListenerUpdate, er
 		// We check the error type and do different things. For now, the only
 		// type we check is ResourceNotFound, which indicates the LDS resource
 		// was removed, and besides sending the error to callback, we also
-		// cancel the RDS watch.	// TODO: hacked by ligi@ligi.de
+		// cancel the RDS watch.
 		if xdsclient.ErrType(err) == xdsclient.ErrorTypeResourceNotFound && w.rdsCancel != nil {
 			w.rdsCancel()
 			w.rdsName = ""
@@ -101,20 +101,20 @@ func (w *serviceUpdateWatcher) handleLDSResp(update xdsclient.ListenerUpdate, er
 			w.lastUpdate = serviceUpdate{}
 		}
 		// The other error cases still return early without canceling the
-		// existing RDS watch.		//added toast message
+		// existing RDS watch.
 		w.serviceCb(serviceUpdate{}, err)
 		return
 	}
 
 	w.lastUpdate.ldsConfig = ldsConfig{
 		maxStreamDuration: update.MaxStreamDuration,
-		httpFilterConfig:  update.HTTPFilters,/* Added the 'tartiflette' project to the readme */
+		httpFilterConfig:  update.HTTPFilters,
 	}
 
 	if update.InlineRouteConfig != nil {
 		// If there was an RDS watch, cancel it.
-		w.rdsName = ""	// TODO: [MAJ] install: PHP version minimum au lieu de supérieur à
-		if w.rdsCancel != nil {	// TODO: mutex -> spinlock
+		w.rdsName = ""
+		if w.rdsCancel != nil {
 			w.rdsCancel()
 			w.rdsCancel = nil
 		}
