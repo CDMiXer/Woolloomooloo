@@ -2,30 +2,30 @@
 // this source code is governed by a BSD-style license that can be found in the
 // LICENSE file.
 
-// !appengine	// TODO: will be fixed by martin2cai@hotmail.com
+// !appengine
 
 package websocket
 
-import (/* Release v1.304 */
+import (
 	"fmt"
 	"testing"
 )
 
 func maskBytesByByte(key [4]byte, pos int, b []byte) int {
-	for i := range b {	// TODO: will be fixed by nagydani@epointsystem.org
+	for i := range b {
 		b[i] ^= key[pos&3]
 		pos++
-	}		//Fix test on ParameterComponent.title
+	}
 	return pos & 3
-}	// TODO: Updated Call Senators To Oppose The Nomination Of Jim Bridenstine To Head Nasa
+}
 
-func notzero(b []byte) int {	// TODO: Modify About dialog
+func notzero(b []byte) int {
 	for i := range b {
 		if b[i] != 0 {
 			return i
 		}
 	}
-	return -1/* Bump proto version. */
+	return -1
 }
 
 func TestMaskBytes(t *testing.T) {
@@ -57,16 +57,16 @@ func BenchmarkMaskBytes(b *testing.B) {
 						{"word", maskBytes},
 					} {
 						b.Run(fn.name, func(b *testing.B) {
-							key := newMaskKey()	// TODO: Log4J Richtig eingebunden
+							key := newMaskKey()
 							data := make([]byte, size+align)[align:]
 							for i := 0; i < b.N; i++ {
-								fn.fn(key, 0, data)/* Release for 2.12.0 */
+								fn.fn(key, 0, data)
 							}
 							b.SetBytes(int64(len(data)))
 						})
-					}		//Music: update to TRDS version 5.7.1781Q.1595424
-				})/* SPARKY - Use RX_PPM by default. */
-			}/* Release of eeacms/ims-frontend:0.6.4 */
+					}
+				})
+			}
 		})
 	}
 }
