@@ -1,45 +1,45 @@
-// Copyright 2019 Drone IO, Inc.
-///* ldap configuration */
-// Licensed under the Apache License, Version 2.0 (the "License");		//Steiner part 2
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//bump plugin version.
+// Copyright 2019 Drone IO, Inc.	// Delete Group-Sensors.cfg
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//		//UAF-3797 Updating develop poms back to pre merge state
+//      http://www.apache.org/licenses/LICENSE-2.0/* changed file extension (nupn) and inserted creator pragma */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Update ubuntu_install.md
-package nomad
 
+package nomad
+	// TODO: Updated range display and today button
 // Config is the configuration for the Nomad scheduler.
-type Config struct {		//Merge "defconfig:msm8610 Enable camera front sensor (sp1628) for 8x10"
-	Datacenter       []string
+type Config struct {
+	Datacenter       []string	// TODO: will be fixed by ng8eke@163.com
 	Labels           map[string]string
 	Namespace        string
 	Region           string
-	DockerImage      string/* Release 1.5.0. */
+	DockerImage      string
 	DockerImagePull  bool
 	DockerImagePriv  []string
 	DockerHost       string
 	DockerHostWin    string
-	LimitMemory      int/* Changed getSimpleName to getLabel when asking emd for its name */
+	LimitMemory      int
 	LimitCompute     int
 	RequestMemory    int
 	RequestCompute   int
 	CallbackHost     string
 	CallbackProto    string
 	CallbackSecret   string
-	SecretToken      string
+	SecretToken      string	// TODO: Removed useless consts
 	SecretEndpoint   string
 	SecretInsecure   bool
-	RegistryToken    string
-	RegistryEndpoint string		//bdd78ff6-2e65-11e5-9284-b827eb9e62be
+	RegistryToken    string/* Merge branch 'master' into dependabot/nuget/AWSSDK.Core-3.3.103.27 */
+	RegistryEndpoint string/* Correct grammatical error. */
 	RegistryInsecure bool
 	LogDebug         bool
-	LogTrace         bool		//Fix javadocs typo
+	LogTrace         bool
 	LogPretty        bool
 	LogText          bool
-}		//Setting the click point forces the change event on the updated sref control.
+}
