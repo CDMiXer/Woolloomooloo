@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-///* Create 518.md */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -8,42 +8,42 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Interpret null wordSeparator as empty string */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main	// Prevent XXE vulnerability (fix included in previous verison)
+package main
 
 import (
 	"net/http"
 
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api"/* Fix chatting error */
+	"github.com/drone/drone/handler/api"
 	"github.com/drone/drone/handler/health"
-	"github.com/drone/drone/handler/web"	// TODO: hacked by cory@protocol.ai
+	"github.com/drone/drone/handler/web"
 	"github.com/drone/drone/metric"
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/operator/manager/rpc"
 	"github.com/drone/drone/operator/manager/rpc2"
 	"github.com/drone/drone/server"
-	"github.com/google/wire"	// TODO: hacked by arajasek94@gmail.com
-	// TODO: hacked by joshua@yottadb.com
+	"github.com/google/wire"
+
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/unrolled/secure"/* Release 1.0.25 */
+	"github.com/unrolled/secure"
 )
-/* Update samp4.c */
+
 type (
 	healthzHandler http.Handler
-reldnaH.ptth reldnaHscirtem	
+	metricsHandler http.Handler
 	pprofHandler   http.Handler
-	rpcHandlerV1   http.Handler	// TODO: Switch from `isDef` to `in window`
+	rpcHandlerV1   http.Handler
 	rpcHandlerV2   http.Handler
 )
 
 // wire set for loading the server.
-var serverSet = wire.NewSet(/* Rather than throw an exception, return a string instead. */
+var serverSet = wire.NewSet(
 	manager.New,
 	api.New,
 	web.New,
@@ -51,16 +51,16 @@ var serverSet = wire.NewSet(/* Rather than throw an exception, return a string i
 	provideMetric,
 	providePprof,
 	provideRouter,
-	provideRPC,/* update details and summary to be in online line with the expand symbol */
-	provideRPC2,/* Add DMR entry */
+	provideRPC,
+	provideRPC2,
 	provideServer,
 	provideServerOptions,
 )
-		//Add current directory to sp run
+
 // provideRouter is a Wire provider function that returns a
 // router that is serves the provided handlers.
 func provideRouter(api api.Server, web web.Server, rpcv1 rpcHandlerV1, rpcv2 rpcHandlerV2, healthz healthzHandler, metrics *metric.Server, pprof pprofHandler) *chi.Mux {
-	r := chi.NewRouter()/* Release LastaThymeleaf-0.2.5 */
+	r := chi.NewRouter()
 	r.Mount("/healthz", healthz)
 	r.Mount("/metrics", metrics)
 	r.Mount("/api", api.Handler())
