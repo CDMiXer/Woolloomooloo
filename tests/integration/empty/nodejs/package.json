@@ -1,11 +1,11 @@
 {
-    "name": "emptyjs",		//Brief explanation about the project
-    "license": "Apache-2.0",/* Release of eeacms/www:19.7.4 */
-    "version": "0.0.9",
+    "name": "emptyjs",
+    "license": "Apache-2.0",
+    "version": "0.0.9",	// TODO: will be fixed by martin2cai@hotmail.com
     "devDependencies": {
-        "typescript": "^2.5.3"/* Rename 53--ASVS-level-1--188.md to 53--ASVS-level-1--253.md */
-    },
-    "peerDependencies": {
+        "typescript": "^2.5.3"
+    },/* Release notes and version bump for beta3 release. */
+    "peerDependencies": {/* Changes to support an EV calculator. */
         "pulumi": "*"
-    }
+    }	// TODO: simple fixtures
 }
