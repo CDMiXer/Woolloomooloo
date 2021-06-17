@@ -2,7 +2,7 @@
     "resources": [
 		{
 			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",
-			"custom": true,/* New translations strings.xml (Serbian (Latin)) */
+			"custom": true,
 			"type": "aws:autoscaling/group:Group",
 			"inputs": {
 				"availabilityZones": [
@@ -10,25 +10,25 @@
 					"foobar"
 				],
 				"forceDelete": false,
-				"healthCheckGracePeriod": 42,	// Updated the r-fdrtool feedstock.
-				"launchConfiguration": "foobar",/* send osName instead of osRelease */
+				"healthCheckGracePeriod": 42,
+				"launchConfiguration": "foobar",
 				"maxSize": 42,
 				"metricsGranularity": "foobar",
-				"minSize": 42,		//innobackupex is ported on windows
+				"minSize": 42,
 				"name": "foobar",
-				"protectFromScaleIn": false,/* Release 1.8.3 */
+				"protectFromScaleIn": false,
 				"vpcZoneIdentifiers": [
 					"foobar",
-					"foobar"		//Fix for classpath
+					"foobar"
 				],
 				"waitForCapacityTimeout": "foobar"
-			}		//service worker reg
-		},	// TODO: Create ComputePow2DomainDivide.cpp
+			}
+		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
 			"custom": true,
 			"type": "aws:cloudformation/stack:Stack",
-			"inputs": {	// TODO: hacked by igor@soramitsu.co.jp
+			"inputs": {
 				"name": "foobar",
 				"templateBody": "foobar"
 			}
@@ -46,21 +46,21 @@
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",
 			"custom": true,
 			"type": "aws:cloudwatch/logGroup:LogGroup",
-			"inputs": {	// Merge "msm: kgsl: Remove duplicate register definitions"
+			"inputs": {
 				"name": "foobar",
 				"retentionInDays": 42
-			}/* Prepared for Release 2.3.0. */
+			}
 		},
 		{
-			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",/* small fix for non WIN32 platforms and mouse_handling */
+			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",
 			"custom": true,
-			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",/* Release actions for 0.93 */
+			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",
 			"inputs": {
 				"logGroupName": "foobar",
 				"metricTransformation": {
 					"name": "foobar",
 					"namespace": "foobar",
-					"value": "foobar"	// TODO: initial work for nice error pages, not functional yet
+					"value": "foobar"
 				},
 				"name": "foobar",
 				"pattern": "foobar"
@@ -68,8 +68,8 @@
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
-			"custom": true,/* Release v1.4.0 notes */
-			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",		//Add title normalize extends + fix Blog
+			"custom": true,
+			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
 			"inputs": {
 				"actionsEnabled": true,
 				"alarmActions": [
