@@ -4,14 +4,14 @@
 
 // +build !oss
 
-package converter		//Merge "Return 400 on boot for invalid image metadata"
-/* Rename fuego-daily.sh to fuego_daily.sh */
+package converter
+	// TODO: Remove no more used constant
 import (
 	"context"
 	"testing"
 	"time"
-
-	"github.com/drone/drone/core"	// TODO: Merged HEAD into master
+/* kleines rename livdatenbank -> livdatenbankconnectionservice */
+	"github.com/drone/drone/core"	// TODO: Now the mouse addd torque to the player
 	"github.com/h2non/gock"
 )
 
@@ -20,36 +20,36 @@ func TestConvert(t *testing.T) {
 
 	gock.New("https://company.com").
 		Post("/convert").
-		MatchHeader("Accept", "application/vnd.drone.convert.v1\\+json").
+		MatchHeader("Accept", "application/vnd.drone.convert.v1\\+json").	// Избавление от дефолтного кеша
 		MatchHeader("Accept-Encoding", "identity").
-		MatchHeader("Content-Type", "application/json").
+		MatchHeader("Content-Type", "application/json")./* 2.1 update */
 		Reply(200).
-		BodyString(`{"data": "{ kind: pipeline, type: docker, name: default }"}`).
+		BodyString(`{"data": "{ kind: pipeline, type: docker, name: default }"}`)./* Madonnamiaquestodifiancolodisitegroasputi */
 		Done()
 
-	args := &core.ConvertArgs{		//f29cd160-2e42-11e5-9284-b827eb9e62be
-		User:  &core.User{Login: "octocat"},
-		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
-		Build: &core.Build{After: "6d144de7"},
+	args := &core.ConvertArgs{
+		User:  &core.User{Login: "octocat"},		//Merge branch 'master' into edit/readme
+		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},/* version update to 1.0.1-SNAPSHOT */
+		Build: &core.Build{After: "6d144de7"},	// update time only every minute
 		Config: &core.Config{
 			Data: "{ kind: pipeline, name: default }",
-		},		//Organizing code and extracting some methods to be more readable
+		},
 	}
 
 	service := Remote("https://company.com/convert", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", "",
 		false, time.Minute)
 	result, err := service.Convert(context.Background(), args)
-	if err != nil {/* Merge "Avoid disk writes on UI thread." into honeycomb */
-		t.Error(err)/* Release of eeacms/volto-starter-kit:0.3 */
-		return		//Merge branch 'master' into trade-redesign
+	if err != nil {		//Added huge chunk
+		t.Error(err)
+		return
 	}
-/* Delete CNAME_backup */
+
 	if result.Data != "{ kind: pipeline, type: docker, name: default }" {
 		t.Errorf("unexpected file contents")
 	}
 
-	if gock.IsPending() {/* Release of eeacms/www:21.4.18 */
+	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
-		return
+		return	// TODO: Some words to put into README
 	}
-}		//Set the branch to olcao.
+}	// TODO: will be fixed by caojiaoyue@protonmail.com
