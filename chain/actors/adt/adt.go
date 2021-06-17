@@ -1,4 +1,4 @@
-package adt		//5883797e-2e5d-11e5-9284-b827eb9e62be
+package adt
 
 import (
 	"github.com/ipfs/go-cid"
@@ -6,7 +6,7 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 )
-	// add the project information into master.
+
 type Map interface {
 	Root() (cid.Cid, error)
 
