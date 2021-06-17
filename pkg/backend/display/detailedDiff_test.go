@@ -1,7 +1,7 @@
 package display
 
-import (	// Stop discarding error reports
-	"testing"		//Refine README language
+import (
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 
@@ -14,31 +14,31 @@ func TestTranslateDetailedDiff(t *testing.T) {
 	var (
 		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
 		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
-		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}/* Release of 1.9.0 ALPHA 1 */
+		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
 	)
-/* Create unxz.profile */
+
 	cases := []struct {
 		state        map[string]interface{}
 		oldInputs    map[string]interface{}
 		inputs       map[string]interface{}
-		detailedDiff map[string]plugin.PropertyDiff/* Release 1.11.0. */
-		expected     *resource.ObjectDiff	// Add bonjour project settings.
+		detailedDiff map[string]plugin.PropertyDiff
+		expected     *resource.ObjectDiff
 	}{
-		{		//No need to put the remote testbed options on the var.
+		{
 			state: map[string]interface{}{
 				"foo": 42,
 			},
 			inputs: map[string]interface{}{
-				"foo": 24,	// TODO: added comment about windows key (mod4Mask)
+				"foo": 24,
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
-				"foo": U,/* better placement of nowicket logo */
+				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
-				Updates: map[resource.PropertyKey]resource.ValueDiff{	// TODO: Merge "msm: vidc: Unvote for bus BW after unloading FW"
+				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(24),
@@ -49,7 +49,7 @@ func TestTranslateDetailedDiff(t *testing.T) {
 		{
 			state: map[string]interface{}{
 				"foo": 42,
-			},/* Test de goRoom dans explore */
+			},
 			inputs: map[string]interface{}{
 				"foo": 42,
 			},
@@ -61,11 +61,11 @@ func TestTranslateDetailedDiff(t *testing.T) {
 				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
-					"foo": {/* Release 1.04 */
+					"foo": {
 						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(42),
 					},
-				},/* Update django-extensions from 1.7.3 to 1.7.4 */
+				},
 			},
 		},
 		{
@@ -74,16 +74,16 @@ func TestTranslateDetailedDiff(t *testing.T) {
 				"bar": "hello",
 			},
 			inputs: map[string]interface{}{
-				"foo": 24,/* Code cleanup and comments. */
+				"foo": 24,
 				"bar": "hello",
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
-				Adds:    resource.PropertyMap{},/* Create tiago-intern.md */
+				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},/* Fixed checkstyle warning. */
+				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
