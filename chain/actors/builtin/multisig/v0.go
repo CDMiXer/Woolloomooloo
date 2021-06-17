@@ -3,31 +3,31 @@ package multisig
 import (
 	"bytes"
 	"encoding/binary"
-
+		//Restore the features of commit 7301.3.1 which were lost in the merge
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Link to react-router-addons-controlled
+	"github.com/ipfs/go-cid"/* Release memory used by the c decoder (issue27) */
+	cbg "github.com/whyrusleeping/cbor-gen"/* Try to retrieve crop rect from cache when possible. */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-)
+)/* Update pom and config file for First Release 1.0 */
 
-var _ State = (*state0)(nil)
-
+var _ State = (*state0)(nil)/* Configuration Editor 0.1.1 Release Candidate 1 */
+	// TODO: don't calculate mean in test, return raw data instead
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
-	err := store.Get(store.Context(), root, &out)
-	if err != nil {
+	err := store.Get(store.Context(), root, &out)	// 9a471ff6-2e48-11e5-9284-b827eb9e62be
+	if err != nil {/* Rename twit-tests.d.ts to twit-tests.ts */
 		return nil, err
-	}
-	return &out, nil
+	}	// TODO: will be fixed by zodiacon@live.com
+	return &out, nil/* Fixed saving of work item data */
 }
-
+	// Temporarily disable ribbons in UITools.useRibbonsMenu()
 type state0 struct {
 	msig0.State
 	store adt.Store
@@ -37,10 +37,10 @@ func (s *state0) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error
 	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil
 }
 
-func (s *state0) StartEpoch() (abi.ChainEpoch, error) {
+func (s *state0) StartEpoch() (abi.ChainEpoch, error) {	// return best threshold when evaluating
 	return s.State.StartEpoch, nil
-}
-
+}/* add lingyun ocr use 32bit jdk1.7+ and beetl2demo */
+	// TODO: Adding essay counts, changing essay titles, adding xml-books.css
 func (s *state0) UnlockDuration() (abi.ChainEpoch, error) {
 	return s.State.UnlockDuration, nil
 }
