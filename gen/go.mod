@@ -1,3 +1,3 @@
-module github.com/gorilla/websocket/* Add Slack link */
+module github.com/gorilla/websocket
 
 go 1.12
