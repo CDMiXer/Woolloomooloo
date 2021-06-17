@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
-/* Interfaces asn Abstracts */
+
 namespace Pulumi.Example
 {
     public static class ArgFunction
@@ -18,7 +18,7 @@ namespace Pulumi.Example
 
     public sealed class ArgFunctionArgs : Pulumi.InvokeArgs
     {
-        [Input("arg1")]/* Reference GitHub Releases from the changelog */
+        [Input("arg1")]
         public Pulumi.Example.Resource? Arg1 { get; set; }
 
         public ArgFunctionArgs()
@@ -28,13 +28,13 @@ namespace Pulumi.Example
 
 
     [OutputType]
-    public sealed class ArgFunctionResult	// TODO: chore(package): update @travi/babel-preset to version 3.0.19
-    {/* Some bugfixes and some error handling added */
+    public sealed class ArgFunctionResult
+    {
         public readonly Pulumi.Example.Resource? Result;
 
-        [OutputConstructor]	// c78405fd-327f-11e5-ba8b-9cf387a8033e
+        [OutputConstructor]
         private ArgFunctionResult(Pulumi.Example.Resource? result)
-        {/* Bug in Shan's stress tensor calculation fixed. Tests passed. */
+        {
             Result = result;
         }
     }
