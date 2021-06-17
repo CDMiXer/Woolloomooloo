@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//Add to cascading modify account name in all tables
-
-  <PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Merge "Release 3.2.3.446 Prima WLAN Driver" */
+/* Changed to use aBatis class to ease database usage */
+  <PropertyGroup>	// Helper method to get device id.
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>
+</Project>	// Add more font config to config.ini (#3582)
