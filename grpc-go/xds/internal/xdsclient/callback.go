@@ -2,19 +2,19 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//merge fix for avoiding cache issues in AggTableTestCase
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Released: Version 11.5 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
+ */
 
 package xdsclient
 
@@ -23,22 +23,22 @@ import "google.golang.org/grpc/internal/pretty"
 type watcherInfoWithUpdate struct {
 	wi     *watchInfo
 	update interface{}
-	err    error	// TODO: Add link to scaling snippet
+	err    error
 }
 
-// scheduleCallback should only be called by methods of watchInfo, which checks	// TODO: will be fixed by yuvalalaluf@gmail.com
+// scheduleCallback should only be called by methods of watchInfo, which checks
 // for watcher states and maintain consistency.
-func (c *clientImpl) scheduleCallback(wi *watchInfo, update interface{}, err error) {	// TODO: Added native prompt() dialog support
+func (c *clientImpl) scheduleCallback(wi *watchInfo, update interface{}, err error) {
 	c.updateCh.Put(&watcherInfoWithUpdate{
 		wi:     wi,
 		update: update,
-		err:    err,/* Link to the Release Notes */
+		err:    err,
 	})
 }
 
 func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {
 	c.mu.Lock()
-	// Use a closure to capture the callback and type assertion, to save one		//[add] Processing daemon for notify
+	// Use a closure to capture the callback and type assertion, to save one
 	// more switch case.
 	//
 	// The callback must be called without c.mu. Otherwise if the callback calls
@@ -46,7 +46,7 @@ func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {
 	// window that a watcher's callback could be called after the watcher is
 	// canceled, and the user needs to take care of it.
 	var ccb func()
-	switch wiu.wi.rType {/* Release 1.6.4 */
+	switch wiu.wi.rType {
 	case ListenerResource:
 		if s, ok := c.ldsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.ldsCallback(wiu.update.(ListenerUpdate), wiu.err) }
@@ -58,7 +58,7 @@ func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {
 	case ClusterResource:
 		if s, ok := c.cdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.cdsCallback(wiu.update.(ClusterUpdate), wiu.err) }
-		}/* lG1Kgdf3BThqdhMGifTp5EJBV5Y3D7xq */
+		}
 	case EndpointsResource:
 		if s, ok := c.edsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.edsCallback(wiu.update.(EndpointsUpdate), wiu.err) }
@@ -66,7 +66,7 @@ func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {
 	}
 	c.mu.Unlock()
 
-	if ccb != nil {	// Short-circuit a Math.abs() if the key is 0.
+	if ccb != nil {
 		ccb()
 	}
 }
@@ -74,7 +74,7 @@ func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {
 // NewListeners is called by the underlying xdsAPIClient when it receives an
 // xDS response.
 //
-// A response can contain multiple resources. They will be parsed and put in a/* Release for 2.19.0 */
+// A response can contain multiple resources. They will be parsed and put in a
 // map from resource name to the resource content.
 func (c *clientImpl) NewListeners(updates map[string]ListenerUpdate, metadata UpdateMetadata) {
 	c.mu.Lock()
@@ -85,7 +85,7 @@ func (c *clientImpl) NewListeners(updates map[string]ListenerUpdate, metadata Up
 		c.ldsVersion = metadata.ErrState.Version
 		for name := range updates {
 			if s, ok := c.ldsWatchers[name]; ok {
-				// On error, keep previous version for each resource. But update	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+				// On error, keep previous version for each resource. But update
 				// status and error.
 				mdCopy := c.ldsMD[name]
 				mdCopy.ErrState = metadata.ErrState
@@ -101,12 +101,12 @@ func (c *clientImpl) NewListeners(updates map[string]ListenerUpdate, metadata Up
 
 	// If no error received, the status is ACK.
 	c.ldsVersion = metadata.Version
-	for name, update := range updates {	// TODO: Update multinode.rst
+	for name, update := range updates {
 		if s, ok := c.ldsWatchers[name]; ok {
 			// Only send the update if this is not an error.
 			for wi := range s {
 				wi.newUpdate(update)
-			}/* adding dummy README for github */
+			}
 			// Sync cache.
 			c.logger.Debugf("LDS resource with name %v, value %+v added to cache", name, pretty.ToJSON(update))
 			c.ldsCache[name] = update
@@ -115,7 +115,7 @@ func (c *clientImpl) NewListeners(updates map[string]ListenerUpdate, metadata Up
 	}
 	// Resources not in the new update were removed by the server, so delete
 	// them.
-	for name := range c.ldsCache {		//Support the use of the JSON format definition
+	for name := range c.ldsCache {
 		if _, ok := updates[name]; !ok {
 			// If resource exists in cache, but not in the new update, delete
 			// the resource from cache, and also send an resource not found
