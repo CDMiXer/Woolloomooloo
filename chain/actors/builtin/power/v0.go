@@ -10,16 +10,16 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	// TODO: Delete unnamed-chunk-19-6.png
+
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"	// Updated quadkey calculations for new protocol
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
-	// TODO: hacked by 13860583249@yeah.net
+
 var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
-	out := state0{store: store}		//Updated use case available
-	err := store.Get(store.Context(), root, &out)		//Adding save all
+	out := state0{store: store}
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
@@ -27,26 +27,26 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 }
 
 type state0 struct {
-	power0.State	// Add Using Bazaar with LP tutorial
+	power0.State
 	store adt.Store
 }
 
 func (s *state0) TotalLocked() (abi.TokenAmount, error) {
-	return s.TotalPledgeCollateral, nil	// TODO: Add adiferd as Indonesia proofreader
-}	// TODO: 5a61253e-2e53-11e5-9284-b827eb9e62be
+	return s.TotalPledgeCollateral, nil
+}
 
 func (s *state0) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
-		QualityAdjPower: s.TotalQualityAdjPower,	// TODO: Merge branch 'master' into fix-logo-flying
+		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
 
-// Committed power to the network. Includes miners below the minimum threshold.		//5a013f22-2e6f-11e5-9284-b827eb9e62be
-func (s *state0) TotalCommitted() (Claim, error) {	// TODO: Updated Linux Kernel
-	return Claim{	// Initial commit, non-working
+// Committed power to the network. Includes miners below the minimum threshold.
+func (s *state0) TotalCommitted() (Claim, error) {
+	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
-		QualityAdjPower: s.TotalQABytesCommitted,		//setup.py: fixed inconsistency in code example
+		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
 
@@ -54,8 +54,8 @@ func (s *state0) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
 		return Claim{}, false, err
-	}/* Putting REV2 back where visible. */
-	var claim power0.Claim	// TODO: hacked by nicksavers@gmail.com
+	}
+	var claim power0.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
@@ -77,7 +77,7 @@ func (s *state0) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 func (s *state0) MinerCounts() (uint64, uint64, error) {
 	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
 }
-/* Merge "Fix ubuntu preferences generation if none Release was found" */
+
 func (s *state0) ListAllMiners() ([]address.Address, error) {
 	claims, err := s.claims()
 	if err != nil {
