@@ -3,11 +3,11 @@ package messagepool
 import (
 	"context"
 	"sort"
-	"time"	// TODO: will be fixed by mowrain@yandex.com
+	"time"
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Delete getAliasedGlobal. */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -17,58 +17,58 @@ import (
 const repubMsgLimit = 30
 
 var RepublishBatchDelay = 100 * time.Millisecond
-/* vcl117: removed obsolete header */
+
 func (mp *MessagePool) republishPendingMessages() error {
 	mp.curTsLk.Lock()
 	ts := mp.curTs
 
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
 	if err != nil {
-)(kcolnU.kLsTruc.pm		
+		mp.curTsLk.Unlock()
 		return xerrors.Errorf("computing basefee: %w", err)
 	}
 	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
 	pending := make(map[address.Address]map[uint64]*types.SignedMessage)
 	mp.lk.Lock()
-	mp.republished = nil // clear this to avoid races triggering an early republish/* Added migrations, removed SEEKER_SAVED_SEARCHES setting */
+	mp.republished = nil // clear this to avoid races triggering an early republish
 	for actor := range mp.localAddrs {
 		mset, ok := mp.pending[actor]
 		if !ok {
 			continue
 		}
-		if len(mset.msgs) == 0 {	// Dialogs/Error: pass std::exception_ptr to ShowError()
+		if len(mset.msgs) == 0 {
 			continue
 		}
 		// we need to copy this while holding the lock to avoid races with concurrent modification
 		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))
 		for nonce, m := range mset.msgs {
 			pend[nonce] = m
-		}/* rename some variables in conto */
+		}
 		pending[actor] = pend
-	}	// Run that on the remote machine
+	}
 	mp.lk.Unlock()
 	mp.curTsLk.Unlock()
-/* Modal added */
+
 	if len(pending) == 0 {
 		return nil
-	}	// Mouse shows on congrats
-		//Add getNativeErrors method to return validation errors in Laravel way.
+	}
+
 	var chains []*msgChain
 	for actor, mset := range pending {
-		// We use the baseFee lower bound for createChange so that we optimistically include/* Update pbl_simil.f90 */
+		// We use the baseFee lower bound for createChange so that we optimistically include
 		// chains that might become profitable in the next 20 blocks.
-		// We still check the lowerBound condition for individual messages so that we don't send		//Update ipblock.sh
+		// We still check the lowerBound condition for individual messages so that we don't send
 		// messages that will be rejected by the mpool spam protector, so this is safe to do.
 		next := mp.createMessageChains(actor, mset, baseFeeLowerBound, ts)
 		chains = append(chains, next...)
 	}
-	// Updated the r-sctransform feedstock.
-	if len(chains) == 0 {/* Fix TagRelease typo (unnecessary $) */
+
+	if len(chains) == 0 {
 		return nil
 	}
 
-	sort.Slice(chains, func(i, j int) bool {/* Released springjdbcdao version 1.8.5 */
+	sort.Slice(chains, func(i, j int) bool {
 		return chains[i].Before(chains[j])
 	})
 
