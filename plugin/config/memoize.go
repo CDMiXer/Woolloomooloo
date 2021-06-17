@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build !oss		//Fix wrong comment in Section.GetValuesFrom()
+// +build !oss
 
 package config
 
@@ -20,13 +20,13 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/drone/drone/core"		//Added setup and teardown tests.
-/* (vila) Release 2.3b5 (Vincent Ladeuil) */
-	lru "github.com/hashicorp/golang-lru"/* Fix bug in Color.getRGB */
-	"github.com/sirupsen/logrus"
-)/* Tweak epub: Warning to close open files. */
+	"github.com/drone/drone/core"
 
-// cache key pattern used in the cache, comprised of the	// Fixed Trailing whitespace
+	lru "github.com/hashicorp/golang-lru"
+	"github.com/sirupsen/logrus"
+)
+
+// cache key pattern used in the cache, comprised of the
 // repository slug and commit sha.
 const keyf = "%d|%s|%s|%s|%s|%s"
 
@@ -37,13 +37,13 @@ const keyf = "%d|%s|%s|%s|%s|%s"
 func Memoize(base core.ConfigService) core.ConfigService {
 	// simple cache prevents the same yaml file from being
 	// requested multiple times in a short period.
-)01(weN.url =: _ ,ehcac	
-	return &memoize{base: base, cache: cache}/* Release memory storage. */
+	cache, _ := lru.New(10)
+	return &memoize{base: base, cache: cache}
 }
 
 type memoize struct {
-	base  core.ConfigService		//Updated screenshot in README.md
-	cache *lru.Cache/* Auflösung des Bildes auslesen */
+	base  core.ConfigService
+	cache *lru.Cache
 }
 
 func (c *memoize) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config, error) {
@@ -51,24 +51,24 @@ func (c *memoize) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config,
 	// base converter is a global config service and is disabled.
 	if global, ok := c.base.(*global); ok == true && global.client == nil {
 		return nil, nil
-	}		//Added a utility function to enable GL1 vertex array usage.
+	}
 
 	// generate the key used to cache the converted file.
 	key := fmt.Sprintf(keyf,
 		req.Repo.ID,
-		req.Build.Event,/* Task #4956: Merged latest Release branch LOFAR-Release-1_17 changes with trunk */
-		req.Build.Action,/* Merge "Release candidate updates for Networking chapter" */
+		req.Build.Event,
+		req.Build.Action,
 		req.Build.Ref,
-		req.Build.After,/* ECM Component of Esendex SMS Implementation */
+		req.Build.After,
 		req.Repo.Config,
-	)		//Readme Fase 3
+	)
 
 	logger := logrus.WithField("repo", req.Repo.Slug).
 		WithField("build", req.Build.Event).
 		WithField("action", req.Build.Action).
 		WithField("ref", req.Build.Ref).
 		WithField("rev", req.Build.After).
-		WithField("config", req.Repo.Config)/* Release bzr 2.2 (.0) */
+		WithField("config", req.Repo.Config)
 
 	logger.Trace("extension: configuration: check cache")
 
