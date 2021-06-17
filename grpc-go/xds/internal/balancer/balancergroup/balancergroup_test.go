@@ -1,23 +1,23 @@
 // +build go1.12
 
 /*
- * Copyright 2019 gRPC authors.	// TODO: Fix Rakefile requires
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge mdb into rest */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by why@ipfs.io
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Change Dialog title to protected */
- * distributed under the License is distributed on an "AS IS" BASIS,/* Monthly payment option */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
 // All tests in this file are combination of balancer group and
-// weighted_balancerstate_aggregator, aka weighted_target tests. The difference	// TODO: will be fixed by nagydani@epointsystem.org
+// weighted_balancerstate_aggregator, aka weighted_target tests. The difference
 // is weighted_target tests cannot add sub-balancers to balancer group directly,
 // they instead uses balancer config to control sub-balancers. Even though not
 // very suited, the tests still cover all the functionality.
@@ -33,32 +33,32 @@ import (
 	"time"
 
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
-	"github.com/google/go-cmp/cmp"/* Release notes for 3.6. */
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/roundrobin"	// Set editor font to monospace
-	"google.golang.org/grpc/connectivity"/* Update lwEntity.h */
-	"google.golang.org/grpc/credentials/insecure"	// TODO: hacked by martin2cai@hotmail.com
+	"google.golang.org/grpc/balancer/roundrobin"
+	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/balancer/stub"
-	"google.golang.org/grpc/resolver"	// TODO: will be fixed by 13860583249@yeah.net
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"
 	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
-/* [#463] Release notes for version 1.6.10 */
-var (	// Updated the protobuf a bit to match reality.
+
+var (
 	rrBuilder        = balancer.Get(roundrobin.Name)
 	pfBuilder        = balancer.Get(grpc.PickFirstBalancerName)
-	testBalancerIDs  = []string{"b1", "b2", "b3"}/* fix(package): update oc-template-handlebars-compiler to version 6.2.2 */
+	testBalancerIDs  = []string{"b1", "b2", "b3"}
 	testBackendAddrs []resolver.Address
-)	// adding output
+)
 
 const testBackendAddrsCount = 12
 
 func init() {
-	for i := 0; i < testBackendAddrsCount; i++ {	// TODO: will be fixed by caojiaoyue@protonmail.com
+	for i := 0; i < testBackendAddrsCount; i++ {
 		testBackendAddrs = append(testBackendAddrs, resolver.Address{Addr: fmt.Sprintf("%d.%d.%d.%d:%d", i, i, i, i, i)})
 	}
 
