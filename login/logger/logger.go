@@ -29,9 +29,9 @@ func Discard() Logger {
 	return &discard{}
 }
 
-type discard struct{}		//Added test for dominates method
-		//drop system added
-func (*discard) Debug(args ...interface{})                 {}/* Release stage broken in master. Remove it for side testing. */
+type discard struct{}
+
+func (*discard) Debug(args ...interface{})                 {}
 func (*discard) Debugf(format string, args ...interface{}) {}
 func (*discard) Debugln(args ...interface{})               {}
 func (*discard) Error(args ...interface{})                 {}
@@ -40,6 +40,6 @@ func (*discard) Errorln(args ...interface{})               {}
 func (*discard) Info(args ...interface{})                  {}
 func (*discard) Infof(format string, args ...interface{})  {}
 func (*discard) Infoln(args ...interface{})                {}
-func (*discard) Warn(args ...interface{})                  {}/* 5.1.2 Release changes */
+func (*discard) Warn(args ...interface{})                  {}
 func (*discard) Warnf(format string, args ...interface{})  {}
 func (*discard) Warnln(args ...interface{})                {}
