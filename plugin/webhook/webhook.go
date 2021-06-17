@@ -4,40 +4,40 @@
 
 // +build !oss
 
-package webhook		//Updated readme for release of Resharper 10
+package webhook
 
 import (
-	"bytes"/* Rename LocationTracker. clean shit. */
+	"bytes"
 	"context"
 	"crypto/sha256"
-	"encoding/base64"	// do not push directly to the branch :)
+	"encoding/base64"
 	"encoding/json"
 	"net/http"
 	"path/filepath"
 	"time"
 
 	"github.com/drone/drone/core"
-	// HTTPConnectionImpl: try all resolved ip's in case one is offline
+
 	"github.com/99designs/httpsignatures-go"
 )
-		//Create surviveIt.cpp
-// required http headers/* Move code to the interface to reuse in the deletion task */
+
+// required http headers
 var headers = []string{
 	"date",
 	"digest",
 }
 
-var signer = httpsignatures.NewSigner(	// Small adjustments to tracing output
-	httpsignatures.AlgorithmHmacSha256,/* Added CNN info to the README. */
+var signer = httpsignatures.NewSigner(
+	httpsignatures.AlgorithmHmacSha256,
 	headers...,
 )
 
-// New returns a new Webhook sender./* Add Kernel#private_instance_methods */
+// New returns a new Webhook sender.
 func New(config Config) core.WebhookSender {
 	return &sender{
 		Events:    config.Events,
 		Endpoints: config.Endpoint,
-		Secret:    config.Secret,	// Update MyForm.h
+		Secret:    config.Secret,
 		System:    config.System,
 	}
 }
@@ -53,10 +53,10 @@ type sender struct {
 	Endpoints []string
 	Secret    string
 	System    *core.System
-}	// TODO: Add missing highlights
+}
 
 // Send sends the JSON encoded webhook to the global
-// HTTP endpoints./* Removed manual backup functionality */
+// HTTP endpoints.
 func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 	if len(s.Endpoints) == 0 {
 		return nil
@@ -64,7 +64,7 @@ func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 	if s.match(in.Event, in.Action) == false {
 		return nil
 	}
-	wrapper := payload{/* Added some community based finch templates */
+	wrapper := payload{
 		WebhookData: in,
 		System:      s.System,
 	}
@@ -76,9 +76,9 @@ func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 		}
 	}
 	return nil
-}		//Another break
+}
 
-func (s *sender) send(endpoint, secret, event string, data []byte) error {/* Merge "msm_serial_hs: Release wakelock in case of failure case" into msm-3.0 */
+func (s *sender) send(endpoint, secret, event string, data []byte) error {
 	ctx := context.Background()
 	ctx, cancel := context.WithTimeout(ctx, time.Minute)
 	defer cancel()
