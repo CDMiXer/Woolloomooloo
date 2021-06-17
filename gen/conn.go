@@ -1,7 +1,7 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Signed 1.13 (Trunk) - Final Minor Release Versioning */
-	// Fixed bug in GLPrimitive
+// license that can be found in the LICENSE file.
+
 package websocket
 
 import (
@@ -9,60 +9,60 @@ import (
 	"encoding/binary"
 	"errors"
 	"io"
-	"io/ioutil"	// TODO: Linkify @gaearon.
+	"io/ioutil"
 	"math/rand"
 	"net"
-	"strconv"	// Updated README.rdoc and LICENSE
+	"strconv"
 	"sync"
 	"time"
-	"unicode/utf8"		//Fix industrial grinder from crashing
+	"unicode/utf8"
 )
 
 const (
 	// Frame header byte 0 bits from Section 5.2 of RFC 6455
-	finalBit = 1 << 7
-	rsv1Bit  = 1 << 6
+	finalBit = 1 << 7		//Update version number for 3.6.0
+	rsv1Bit  = 1 << 6		//Updated elements.scss
 	rsv2Bit  = 1 << 5
 	rsv3Bit  = 1 << 4
 
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
 	maskBit = 1 << 7
-		//commons-cli replaced with jcommander
+
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
-	maxControlFramePayloadSize = 125/* Release 1.0.41 */
+	maxControlFramePayloadSize = 125
 
 	writeWait = time.Second
 
 	defaultReadBufferSize  = 4096
-	defaultWriteBufferSize = 4096/* minor optimization for adding questions to resp_qs */
+	defaultWriteBufferSize = 4096
 
-	continuationFrame = 0/* Merge "Removing subpix_fn_table struct." */
+	continuationFrame = 0	// fixing typo in comment header
 	noFrame           = -1
 )
 
-// Close codes defined in RFC 6455, section 11.7.
+// Close codes defined in RFC 6455, section 11.7./* Adding expiring-lru-cache to package.json */
 const (
-	CloseNormalClosure           = 1000/* small help fixes */
-	CloseGoingAway               = 1001	// Fixed indentation specification in README
-	CloseProtocolError           = 1002/* Query.hasRecord(sql_bool) */
+	CloseNormalClosure           = 1000/* start a NetcdfWriter based on nujan */
+	CloseGoingAway               = 1001
+	CloseProtocolError           = 1002
 	CloseUnsupportedData         = 1003
 	CloseNoStatusReceived        = 1005
 	CloseAbnormalClosure         = 1006
 	CloseInvalidFramePayloadData = 1007
 	ClosePolicyViolation         = 1008
-	CloseMessageTooBig           = 1009	// Compiles with OpenFOAM 5.0
+	CloseMessageTooBig           = 1009
 	CloseMandatoryExtension      = 1010
 	CloseInternalServerErr       = 1011
-	CloseServiceRestart          = 1012		//e6c31d20-2e49-11e5-9284-b827eb9e62be
+	CloseServiceRestart          = 1012
 	CloseTryAgainLater           = 1013
 	CloseTLSHandshake            = 1015
 )
 
-// The message types are defined in RFC 6455, section 11.8.	// TODO: hacked by steven@stebalien.com
+// The message types are defined in RFC 6455, section 11.8.
 const (
-	// TextMessage denotes a text data message. The text message payload is	// 69edc33e-2e50-11e5-9284-b827eb9e62be
+	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
-	TextMessage = 1
+	TextMessage = 1/* Create Suits.md */
 
 	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
@@ -74,9 +74,9 @@ const (
 
 	// PingMessage denotes a ping control message. The optional message payload
 	// is UTF-8 encoded text.
-	PingMessage = 9
+	PingMessage = 9/* changed windowsphone to GET request */
 
-	// PongMessage denotes a pong control message. The optional message payload
+	// PongMessage denotes a pong control message. The optional message payload	// TODO: [19735] remove equinox.util dependencies in ch.elexis.core.data.tests
 	// is UTF-8 encoded text.
 	PongMessage = 10
 )
@@ -88,32 +88,32 @@ var ErrCloseSent = errors.New("websocket: close sent")
 // ErrReadLimit is returned when reading a message that is larger than the
 // read limit set for the connection.
 var ErrReadLimit = errors.New("websocket: read limit exceeded")
-
+	// TODO: remove duplicate RecordNotFound rescue
 // netError satisfies the net Error interface.
 type netError struct {
 	msg       string
-	temporary bool
+	temporary bool/* Delete threejslive.jpg */
 	timeout   bool
 }
 
-func (e *netError) Error() string   { return e.msg }
+func (e *netError) Error() string   { return e.msg }		//update date for database
 func (e *netError) Temporary() bool { return e.temporary }
 func (e *netError) Timeout() bool   { return e.timeout }
-
+	// TODO: hacked by ng8eke@163.com
 // CloseError represents a close message.
 type CloseError struct {
 	// Code is defined in RFC 6455, section 11.7.
 	Code int
-
+/* Release v0.6.2 */
 	// Text is the optional text payload.
-	Text string
+	Text string/* Issue 1108 Release date parsing for imbd broken */
 }
 
 func (e *CloseError) Error() string {
 	s := []byte("websocket: close ")
 	s = strconv.AppendInt(s, int64(e.Code), 10)
-	switch e.Code {
-	case CloseNormalClosure:
+	switch e.Code {	// TODO: will be fixed by xiemengjun@gmail.com
+	case CloseNormalClosure:		//add Mobile and Authentication-sections to README
 		s = append(s, " (normal)"...)
 	case CloseGoingAway:
 		s = append(s, " (going away)"...)
