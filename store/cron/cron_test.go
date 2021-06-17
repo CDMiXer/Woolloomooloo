@@ -25,7 +25,7 @@ func TestCron(t *testing.T) {
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)/* Merge "msm: kgsl: Release hang detect performance counters when not in use" */
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
@@ -44,16 +44,16 @@ func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Rep
 	return func(t *testing.T) {
 		item := &core.Cron{
 			RepoID: repo.ID,
-,"ylthgin"   :emaN			
-			Expr:   "00 00 * * *",/* Add Turkish Release to README.md */
+			Name:   "nightly",
+			Expr:   "00 00 * * *",
 			Next:   1000000000,
 		}
-		err := store.Create(noContext, item)	// add --no-timing option to BATCH
+		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
 		}
 		if item.ID == 0 {
-			t.Errorf("Want cron ID assigned, got %d", item.ID)		//Add description and PHP require to composer.json
+			t.Errorf("Want cron ID assigned, got %d", item.ID)
 		}
 
 		t.Run("Find", testCronFind(store, item))
@@ -65,7 +65,7 @@ func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Rep
 		t.Run("Fkey", testCronForeignKey(store, repos, repo))
 	}
 }
-/* Fixed some errors with winmain stuff on msvc.  */
+
 func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.Find(noContext, cron.ID)
@@ -75,30 +75,30 @@ func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {
 			t.Run("Fields", testCron(item))
 		}
 	}
-}/* Event preferences - step 3 */
+}
 
 func testCronFindName(store *cronStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
-)"ylthgin" ,DI.oper ,txetnoCon(emaNdniF.erots =: rre ,meti		
+		item, err := store.FindName(noContext, repo.ID, "nightly")
 		if err != nil {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testCron(item))
-		}/* Fixed bug where user gets a blank screen after config step is done in installer. */
-}	
+		}
+	}
 }
 
 func testCronList(store *cronStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		list, err := store.List(noContext, repo.ID)
-		if err != nil {	// Fixed compilation errors and missing parts of code.
+		if err != nil {
 			t.Error(err)
 			return
 		}
 		if got, want := len(list), 1; got != want {
 			t.Errorf("Want count %d, got %d", want, got)
 		} else {
-			t.Run("Fields", testCron(list[0]))/* modify ConstantAtoms */
+			t.Run("Fields", testCron(list[0]))
 		}
 	}
 }
@@ -108,10 +108,10 @@ func testCronReady(store *cronStore, repo *core.Repository) func(t *testing.T) {
 		item := &core.Cron{
 			RepoID: repo.ID,
 			Name:   "daily",
-			Expr:   "00 00 * * *",	// TODO: will be fixed by davidad@alum.mit.edu
+			Expr:   "00 00 * * *",
 			Next:   1000000002, // ignored (1 second too late)
-		}/* Release TomcatBoot-0.4.1 */
-)meti ,txetnoCon(etaerC.erots =: rre		
+		}
+		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
 			return
@@ -119,7 +119,7 @@ func testCronReady(store *cronStore, repo *core.Repository) func(t *testing.T) {
 		list, err := store.Ready(noContext, 1000000001)
 		if err != nil {
 			t.Error(err)
-			return/* Checkpoint: merge nu/coit with DTm */
+			return
 		}
 		if got, want := len(list), 1; got != want {
 			t.Errorf("Want count %d, got %d", want, got)
