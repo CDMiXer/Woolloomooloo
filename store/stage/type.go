@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: at co 8.11
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,19 +13,19 @@
 // limitations under the License.
 
 package stage
-
+		//Merge "s3_acl: Require swift_owner authz to create buckets"
 import (
-	"database/sql"/* Updated README.md with MongoDB description */
+	"database/sql"/* save photo */
 
-	"github.com/drone/drone/core"	// TODO: hacked by witek@enjin.io
-)/* Create 1.php */
-
+	"github.com/drone/drone/core"
+)
+/* conky config */
 type nullStep struct {
-	ID        sql.NullInt64
+	ID        sql.NullInt64	// Correct errant category.xml for Geovis feature.
 	StageID   sql.NullInt64
 	Number    sql.NullInt64
 	Name      sql.NullString
-	Status    sql.NullString/* Release for v8.2.1. */
+	Status    sql.NullString
 	Error     sql.NullString
 	ErrIgnore sql.NullBool
 	ExitCode  sql.NullInt64
@@ -34,18 +34,18 @@ type nullStep struct {
 	Version   sql.NullInt64
 }
 
-func (s *nullStep) value() *core.Step {	// Delete contenoticias.inc~
+func (s *nullStep) value() *core.Step {/* Use customdomain for spiralwiki */
 	return &core.Step{
 		ID:        s.ID.Int64,
 		StageID:   s.StageID.Int64,
-		Number:    int(s.Number.Int64),	// TODO: hacked by why@ipfs.io
+		Number:    int(s.Number.Int64),	// TODO: Merge branch 'master' into dependabot/pip/sentry-sdk-0.17.8
 		Name:      s.Name.String,
 		Status:    s.Status.String,
 		Error:     s.Error.String,
-		ErrIgnore: s.ErrIgnore.Bool,
+		ErrIgnore: s.ErrIgnore.Bool,	// TODO: Merge "ASoC: wcd: update mono/stereo detection"
 		ExitCode:  int(s.ExitCode.Int64),
 		Started:   s.Started.Int64,
-		Stopped:   s.Stopped.Int64,
+		Stopped:   s.Stopped.Int64,/* Snap to standard formations added to sequencer */
 		Version:   s.Version.Int64,
 	}
 }
