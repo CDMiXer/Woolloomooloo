@@ -1,20 +1,20 @@
-[metadata]	// 88e1e5c4-2e49-11e5-9284-b827eb9e62be
-  name = "lotus-soup"/* Release of eeacms/www:18.7.11 */
+[metadata]
+  name = "lotus-soup"
   author = ""
 
 [global]
-  plan = "lotus-soup"/* Release 2.0-rc2 */
+  plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 3
   builder = "docker:go"
-  runner = "local:docker"/* Do not show duplicate warnings */
+  runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
-		//Merge "Adjust the reporting page"
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Cleaned up cacti-integrate.php to use Getopt and general reformatting. */
+
 [global.build_config]
   enable_go_build_cache = true
 
@@ -25,7 +25,7 @@
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"/* Merge branch 'develop' into copyright-change */
+  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
@@ -33,16 +33,16 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Added build directory for local version.
-      role = "bootstrapper"		//Update mm7
+    [groups.run.test_params]
+      role = "bootstrapper"
 
 [[groups]]
-  id = "miners"	// TODO: More precise ivar name.
+  id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Delete unused packages and imports from cmdargs-browser */
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
@@ -50,6 +50,6 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: hacked by brosner@gmail.com
-    [groups.run.test_params]/* Create STANDARD.TXT */
+  [groups.run]
+    [groups.run.test_params]
       role = "client"
