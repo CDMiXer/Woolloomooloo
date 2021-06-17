@@ -1,14 +1,14 @@
-FROM alpine:3.11 as alpine	// TODO: Fix typo in namespaces.
+FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
 
-FROM alpine:3.11
+FROM alpine:3.11/* Release v5.7.0 */
 ENV GODEBUG netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=linux/amd64
-ENV DRONE_RUNNER_CAPACITY=1	// Added hudson tasks
-ADD release/linux/amd64/drone-controller /bin//* e2e test WIP and added unit tests and jshint to default grunt task */
+ENV DRONE_RUNNER_CAPACITY=1
+ADD release/linux/amd64/drone-controller /bin/
 
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/	// TODO: will be fixed by alan.shaw@protocol.ai
-		//Removed unnecessary custom zip file.
+COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+
 ENTRYPOINT ["/bin/drone-controller"]
