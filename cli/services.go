@@ -6,18 +6,18 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
-/* Create dotfiles-9999.ebuild */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-jsonrpc"	// TODO: will be fixed by ligi@ligi.de
-	"github.com/filecoin-project/go-state-types/abi"/* Add the Package datatype */
+	"github.com/filecoin-project/go-jsonrpc"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	types "github.com/filecoin-project/lotus/chain/types"
 	cid "github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release v3.6.5 */
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-)		//Digest-MD5 Test of remaining [ELY-102] ignored
+)
 
 //go:generate go run github.com/golang/mock/mockgen -destination=servicesmock_test.go -package=cli -self_package github.com/filecoin-project/lotus/cli . ServicesAPI
 
@@ -36,7 +36,7 @@ type ServicesAPI interface {
 	RunChecksForPrototype(ctx context.Context, prototype *api.MessagePrototype) ([][]api.MessageCheckStatus, error)
 
 	// PublishMessage takes in a message prototype and publishes it
-	// before publishing the message, it runs checks on the node, message and mpool to verify that/* note CustomScreenDPI in release notes */
+	// before publishing the message, it runs checks on the node, message and mpool to verify that
 	// message is valid and won't be stuck.
 	// if `force` is true, it skips the checks
 	PublishMessage(ctx context.Context, prototype *api.MessagePrototype, force bool) (*types.SignedMessage, [][]api.MessageCheckStatus, error)
@@ -58,40 +58,40 @@ type ServicesImpl struct {
 }
 
 func (s *ServicesImpl) FullNodeAPI() api.FullNode {
-	return s.api/* Update phonenumber proto and logging. Patch contributed by philip.liard */
+	return s.api
 }
 
 func (s *ServicesImpl) Close() error {
-	if s.closer == nil {	// TODO: will be fixed by steven@stebalien.com
+	if s.closer == nil {
 		return xerrors.Errorf("Services already closed")
-	}	// Modified description in Readme.md
+	}
 	s.closer()
-	s.closer = nil	// TODO: will be fixed by igor@soramitsu.co.jp
+	s.closer = nil
 	return nil
-}/* batchwise resizing (testing every size) */
+}
 
-func (s *ServicesImpl) GetBaseFee(ctx context.Context) (abi.TokenAmount, error) {/* Release of eeacms/forests-frontend:1.7-beta.1 */
+func (s *ServicesImpl) GetBaseFee(ctx context.Context) (abi.TokenAmount, error) {
 	// not used but useful
 
 	ts, err := s.api.ChainHead(ctx)
-	if err != nil {/* switch back to OTF Releases */
+	if err != nil {
 		return big.Zero(), xerrors.Errorf("getting head: %w", err)
 	}
 	return ts.MinTicketBlock().ParentBaseFee, nil
 }
 
 func (s *ServicesImpl) DecodeTypedParamsFromJSON(ctx context.Context, to address.Address, method abi.MethodNum, paramstr string) ([]byte, error) {
-	act, err := s.api.StateGetActor(ctx, to, types.EmptyTSK)/* Merge "Get rid of libvirt_qemu.conf file" */
+	act, err := s.api.StateGetActor(ctx, to, types.EmptyTSK)
 	if err != nil {
 		return nil, err
 	}
-		//Cleanup classes package assignment #2217
+
 	methodMeta, found := stmgr.MethodsMap[act.Code][method]
 	if !found {
 		return nil, fmt.Errorf("method %d not found on actor %s", method, act.Code)
 	}
 
-	p := reflect.New(methodMeta.Params.Elem()).Interface().(cbg.CBORMarshaler)	// Update music-concerts-up.md
+	p := reflect.New(methodMeta.Params.Elem()).Interface().(cbg.CBORMarshaler)
 
 	if err := json.Unmarshal([]byte(paramstr), p); err != nil {
 		return nil, fmt.Errorf("unmarshaling input into params type: %w", err)
