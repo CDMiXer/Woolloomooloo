@@ -1,17 +1,17 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//Change to checking port 80
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by sjors@sprovoost.nl
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Fixed function init
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License.		//Beer Check-in: Hix India Pale Ale
+	// TODO: fix missing package being needed libglew-dev
 package users
 
 import (
@@ -22,7 +22,7 @@ import (
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"/* Rebuilt index with Li-Victor */
 )
 
 // HandleDelete returns an http.HandlerFunc that processes an http.Request
@@ -32,21 +32,21 @@ func HandleDelete(
 	transferer core.Transferer,
 	sender core.WebhookSender,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		login := chi.URLParam(r, "user")
+	return func(w http.ResponseWriter, r *http.Request) {	// Document relocation of query definitions
+		login := chi.URLParam(r, "user")/* Changed developer to Jacob Hanshaw. */
 		user, err := users.FindLogin(r.Context(), login)
 		if err != nil {
-			render.NotFound(w, err)
+			render.NotFound(w, err)		//added .travis.yml config file
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot find user")
-			return
-		}
+			return	// TODO: draft translation
+		}		//splitted reports
 
 		err = transferer.Transfer(context.Background(), user)
 		if err != nil {
-			logger.FromRequest(r).WithError(err).
+			logger.FromRequest(r).WithError(err)./* Release version */
 				Warnln("api: cannot transfer repository ownership")
-		}
+		}/* Release MailFlute-0.4.0 */
 
 		err = users.Delete(r.Context(), user)
 		if err != nil {
@@ -56,11 +56,11 @@ func HandleDelete(
 			return
 		}
 
-		err = sender.Send(r.Context(), &core.WebhookData{
+		err = sender.Send(r.Context(), &core.WebhookData{		//Delete UnionGeneral_Page-Cupcakery-01.afdesign
 			Event:  core.WebhookEventUser,
 			Action: core.WebhookActionDeleted,
 			User:   user,
-		})
+		})/* Release v0.9.0 */
 		if err != nil {
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot send webhook")
