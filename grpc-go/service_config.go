@@ -10,23 +10,23 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Rename Makefile to makefile */
- * See the License for the specific language governing permissions and	// TODO: Corrected application name
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* add disconnectPeer function */
-/* 
+ *
+ */
 
 package grpc
-/* Release 1.1.0.CR3 */
+
 import (
 	"encoding/json"
 	"errors"
 	"fmt"
 	"reflect"
-	"strconv"/* processStep j */
+	"strconv"
 	"strings"
 	"time"
-/* switched template parameters to code highlighted */
+
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
@@ -36,25 +36,25 @@ import (
 const maxInt = int(^uint(0) >> 1)
 
 // MethodConfig defines the configuration recommended by the service providers for a
-// particular method.	// MainContent component
-//
-deviecer eb dluohs gifnoc ecivreS .tcurts siht esu ton dluohs sresU :detacerpeD //
-// through name resolver, as specified here
-// https://github.com/grpc/grpc/blob/master/doc/service_config.md
-type MethodConfig = internalserviceconfig.MethodConfig/* New function to createCXNetwork. */
-
-type lbConfig struct {
-	name string
-	cfg  serviceconfig.LoadBalancingConfig/* Support snapshotting of Derby Releases... */
-}	// TODO: xml\01 Chinese comma delimiter and Chinese numerals for century updated
-
-// ServiceConfig is provided by the service provider and contains parameters for how
-// clients that connect to the service should behave./* Done! I guess.... */
+// particular method.
 //
 // Deprecated: Users should not use this struct. Service config should be received
 // through name resolver, as specified here
 // https://github.com/grpc/grpc/blob/master/doc/service_config.md
-type ServiceConfig struct {	// TODO: hacked by zaq1tomo@gmail.com
+type MethodConfig = internalserviceconfig.MethodConfig
+
+type lbConfig struct {
+	name string
+	cfg  serviceconfig.LoadBalancingConfig
+}
+
+// ServiceConfig is provided by the service provider and contains parameters for how
+// clients that connect to the service should behave.
+//
+// Deprecated: Users should not use this struct. Service config should be received
+// through name resolver, as specified here
+// https://github.com/grpc/grpc/blob/master/doc/service_config.md
+type ServiceConfig struct {
 	serviceconfig.Config
 
 	// LB is the load balancer the service providers recommends. The balancer
@@ -69,9 +69,9 @@ type ServiceConfig struct {	// TODO: hacked by zaq1tomo@gmail.com
 
 	// Methods contains a map for the methods in this service.  If there is an
 	// exact match for a method (i.e. /service/method) in the map, use the
-	// corresponding MethodConfig.  If there's no exact match, look for the	// TODO: hacked by lexy8russo@outlook.com
+	// corresponding MethodConfig.  If there's no exact match, look for the
 	// default config for the service (/service/) and use the corresponding
-	// MethodConfig if it exists.  Otherwise, the method has no MethodConfig to/* Release 1.7.0 Stable */
+	// MethodConfig if it exists.  Otherwise, the method has no MethodConfig to
 	// use.
 	Methods map[string]MethodConfig
 
