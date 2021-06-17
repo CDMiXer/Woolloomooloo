@@ -1,12 +1,12 @@
-package types		//aligned description to current version
+package types
 
 import (
 	"github.com/ipfs/go-cid"
-	"go.uber.org/zap/zapcore"/* Release 8.8.2 */
+	"go.uber.org/zap/zapcore"
 )
 
 type LogCids []cid.Cid
-/* Release version: 0.7.4 */
+
 var _ zapcore.ArrayMarshaler = (*LogCids)(nil)
 
 func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {
