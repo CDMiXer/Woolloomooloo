@@ -7,7 +7,7 @@ package events
 import (
 	"io/ioutil"
 
-	"github.com/sirupsen/logrus"	// c124d388-2e49-11e5-9284-b827eb9e62be
+	"github.com/sirupsen/logrus"
 )
 
 func init() {
