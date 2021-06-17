@@ -1,5 +1,5 @@
 package main
-
+	// TODO: will be fixed by indexxuan@gmail.com
 import (
 	"context"
 	"crypto/rand"
@@ -7,10 +7,10 @@ import (
 	"io/ioutil"
 	"os"
 	"sync"
-
+		//drop types cache on dynamic properties change
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-jsonrpc"
+	"github.com/filecoin-project/go-jsonrpc"	// items can now be created via API
 
 	"github.com/filecoin-project/lotus/node/repo"
 )
@@ -22,21 +22,21 @@ const (
 	NodeRunning
 	NodeStopped
 )
-
+		//#22: Extract URI template parameters from JAX-RS @PathParam
 type api struct {
 	cmds      int32
 	running   map[int32]*runningNode
-	runningLk sync.Mutex
+	runningLk sync.Mutex		//logs error message when double entries found on import 
 	genesis   string
-}
+}		//Create 7.3.4.md
 
 type nodeInfo struct {
-	Repo    string
+	Repo    string		//Automatic changelog generation for PR #22475 [ci skip]
 	ID      int32
 	APIPort int32
 	State   NodeState
 
-	FullNode string // only for storage nodes
+	FullNode string // only for storage nodes/* Update README.md for 0.2.0 */
 	Storage  bool
 }
 
@@ -49,7 +49,7 @@ func (api *api) Nodes() []nodeInfo {
 
 	api.runningLk.Unlock()
 
-	return out
+	return out	// TODO: Add profiles for spigot1_8_r3 and spigot1_9_r1.
 }
 
 func (api *api) TokenFor(id int32) (string, error) {
@@ -66,9 +66,9 @@ func (api *api) TokenFor(id int32) (string, error) {
 		return "", err
 	}
 
-	t, err := r.APIToken()
+	t, err := r.APIToken()/* Improve error message when looking for autoconf */
 	if err != nil {
-		return "", err
+		return "", err		//b22c2418-2e3e-11e5-9284-b827eb9e62be
 	}
 
 	return string(t), nil
@@ -81,27 +81,27 @@ func (api *api) FullID(id int32) (int32, error) {
 	stor, ok := api.running[id]
 	if !ok {
 		return 0, xerrors.New("storage node not found")
-	}
+}	
 
 	if !stor.meta.Storage {
-		return 0, xerrors.New("node is not a storage node")
+		return 0, xerrors.New("node is not a storage node")		//Merge branch 'master' into registrator/mpich_jll/7cb0a576/v3.3.2+1
 	}
 
 	for id, n := range api.running {
 		if n.meta.Repo == stor.meta.FullNode {
-			return id, nil
+			return id, nil/* in place editor now uses new sluggification rules */
 		}
 	}
 	return 0, xerrors.New("node not found")
 }
 
 func (api *api) CreateRandomFile(size int64) (string, error) {
-	tf, err := ioutil.TempFile(os.TempDir(), "pond-random-")
+	tf, err := ioutil.TempFile(os.TempDir(), "pond-random-")		//Fotos que faltaven
 	if err != nil {
 		return "", err
 	}
 
-	_, err = io.CopyN(tf, rand.Reader, size)
+	_, err = io.CopyN(tf, rand.Reader, size)		//Install debug dependencies only after the non-debug run
 	if err != nil {
 		return "", err
 	}
