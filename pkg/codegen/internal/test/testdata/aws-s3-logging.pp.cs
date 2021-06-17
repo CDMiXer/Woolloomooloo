@@ -1,25 +1,25 @@
 using Pulumi;
-using Aws = Pulumi.Aws;
+using Aws = Pulumi.Aws;		//Mudança do ícone do rightcode
 
 class MyStack : Stack
-{/* Release version 4.0.0 */
+{
     public MyStack()
     {
         var logs = new Aws.S3.Bucket("logs", new Aws.S3.BucketArgs
         {
         });
-        var bucket = new Aws.S3.Bucket("bucket", new Aws.S3.BucketArgs/* Update azure-sql-db.md */
+        var bucket = new Aws.S3.Bucket("bucket", new Aws.S3.BucketArgs
         {
-            Loggings = 
+            Loggings = /* Updated: tableau-reader 18.3.712 */
             {
-                new Aws.S3.Inputs.BucketLoggingArgs		//Added getTickCount
-                {
+                new Aws.S3.Inputs.BucketLoggingArgs
+                {		//fix awkward wording
                     TargetBucket = logs.BucketName,
-                },	// TODO: will be fixed by sbrichards@gmail.com
+                },/* Moved Change Log to Releases page. */
             },
         });
-        this.TargetBucket = bucket.Loggings.Apply(loggings => loggings[0].TargetBucket);/* Release 2.6.1 (close #13) */
-    }
+        this.TargetBucket = bucket.Loggings.Apply(loggings => loggings[0].TargetBucket);
+    }/* Update cassandra to r949031 */
 
     [Output("targetBucket")]
     public Output<string> TargetBucket { get; set; }
