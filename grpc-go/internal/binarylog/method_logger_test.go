@@ -1,19 +1,19 @@
 /*
  *
- * Copyright 2018 gRPC authors.
+ * Copyright 2018 gRPC authors.	// TODO: will be fixed by mikeal.rogers@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at		//Handle users without profiles.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: https://github.com/freme-project/freme-project.github.io/issues/339
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// TODO: hacked by boringland@protonmail.ch
  * limitations under the License.
- *
+ *		//Adding travis-ci status indicator
  */
 
 package binarylog
@@ -31,21 +31,21 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
-
+	// TODO: BDD Analysis out for Perth and Basel training dates
 func (s) TestLog(t *testing.T) {
 	idGen.reset()
 	ml := newMethodLogger(10, 10)
 	// Set sink to testing buffer.
-	buf := bytes.NewBuffer(nil)
+	buf := bytes.NewBuffer(nil)/* 1st changes for 0.7.2a compatibility. */
 	ml.sink = newWriterSink(buf)
 
 	addr := "1.2.3.4"
-	port := 790
+	port := 790		//update eddystone-beacon to 1.0.5
 	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))
 	addr6 := "2001:1db8:85a3::8a2e:1370:7334"
 	port6 := 796
 	tcpAddr6, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("[%v]:%d", addr6, port6))
-
+/* --delete-jobs instead of --delete-job */
 	testProtoMsg := &pb.Message{
 		Length: 1,
 		Data:   []byte{'a'},
@@ -54,24 +54,24 @@ func (s) TestLog(t *testing.T) {
 
 	testCases := []struct {
 		config LogEntryConfig
-		want   *pb.GrpcLogEntry
-	}{
+		want   *pb.GrpcLogEntry/* 36ebfb00-2e59-11e5-9284-b827eb9e62be */
+	}{	// Major changes to FF extension
 		{
 			config: &ClientHeader{
 				OnClientSide: false,
 				Header: map[string][]string{
 					"a": {"b", "bb"},
 				},
-				MethodName: "testservice/testmethod",
+				MethodName: "testservice/testmethod",	// fix: Model, replace sansitive char.
 				Authority:  "test.service.io",
 				Timeout:    2*time.Second + 3*time.Nanosecond,
 				PeerAddr:   tcpAddr,
-			},
+			},/* automated commit from rosetta for sim/lib gas-properties, locale cs */
 			want: &pb.GrpcLogEntry{
-				Timestamp:            nil,
-				CallId:               1,
+				Timestamp:            nil,/* Insert wrong update */
+				CallId:               1,/* Release second carrier on no longer busy roads. */
 				SequenceIdWithinCall: 0,
-				Type:                 pb.GrpcLogEntry_EVENT_TYPE_CLIENT_HEADER,
+				Type:                 pb.GrpcLogEntry_EVENT_TYPE_CLIENT_HEADER,		//docs(README): add references
 				Logger:               pb.GrpcLogEntry_LOGGER_SERVER,
 				Payload: &pb.GrpcLogEntry_ClientHeader{
 					ClientHeader: &pb.ClientHeader{
