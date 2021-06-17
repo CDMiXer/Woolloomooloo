@@ -1,19 +1,19 @@
 {
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "string",		//170abde8-2e6e-11e5-9284-b827eb9e62be
+      "type": "string",
       "enum": [
-        {	// TODO: Delete moneystuff.js
-          "value": "chocolate"/* v4.3 - Release */
+        {
+          "value": "chocolate"/* add Release-0.4.txt */
         },
         {
-          "value": "marshmallow"
+          "value": "marshmallow"/* Create bug report templates */
         },
         {
           "value": 3
         },
         {
-          "value": "cookie"/* Update Thing-1 */
+          "value": "cookie"
         }
       ]
     }
