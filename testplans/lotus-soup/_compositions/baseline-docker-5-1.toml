@@ -1,33 +1,33 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"	// Add require exp-assynccache
   author = ""
-
-[global]
-  plan = "lotus-soup"
-  case = "deals-e2e"/* Immediate Release for Critical Bug related to last commit. (1.0.1) */
+	// TODO: fixed actionListener misspelling
+[global]/* Release 2.0 on documentation */
+  plan = "lotus-soup"/* 59fd402c-2e63-11e5-9284-b827eb9e62be */
+  case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"	// replace forever with pm2
 
 [global.build]
-  selectors = ["testground"]
-
+  selectors = ["testground"]	// TODO: Fix cc1.8xlarge on-demand instance pricing
+		//Update sections to reflect current process
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// TODO: update storehouse tab link
+
 [global.build_config]
-  enable_go_build_cache = true/* API: Lisätty konfiguraatiotiedoston tuki */
+  enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "5"
-  miners = "1"		//c5eae790-2e53-11e5-9284-b827eb9e62be
+  miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
-  random_beacon_type = "mock"/* 'Release' 0.6.3. */
-  mining_mode = "natural"		//Create DateAndCalExample.java
+  random_beacon_type = "mock"
+  mining_mode = "natural"
 
-[[groups]]/* Release 2.2.0.0 */
+[[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
@@ -35,21 +35,21 @@
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-	// Merge "Fix renos"
-[[groups]]/* [setup.xml] added config. entry to show Graphical Multi EPG in extensions menu */
+
+[[groups]]
   id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: hacked by mail@bitpshr.net
+  [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"	// TODO: hacked by hello@brooklynzelenka.com
 
-[[groups]]
+[[groups]]		//Fix Endpoint address from sandbox to www
   id = "clients"
   [groups.instances]
-    count = 5
+    count = 5	// TODO: hacked by julia@jvns.ca
     percentage = 0.0
-  [groups.run]/* Uprava vzhledu */
+  [groups.run]
     [groups.run.test_params]
       role = "client"
