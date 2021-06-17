@@ -1,79 +1,79 @@
-[metadata]		//811aaa3e-2e48-11e5-9284-b827eb9e62be
+[metadata]	// Correção erro gramatical
   name = "lotus-soup"
   author = ""
 
-[global]
-  plan = "lotus-soup"		//Update Dream.podspec
+[global]/* Removed Virtual Time */
+  plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 14
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]		//6d5f248a-2e56-11e5-9284-b827eb9e62be
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]/* [cleanup]: Remove commented out require. [ci skip] */
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// imporved documentation of test functions
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
-  registry_type="aws"
+  go_proxy_url="http://localhost:8081"	// TODO: Fixed bug in Solr's run method.
+  registry_type="aws"		//Translations of html attributes can have parameters too.
 
 [global.run.test_params]
-  clients = "10"
-  miners = "3"		//Added unsharp mask Python function for canvas. Not done.
-  genesis_timestamp_offset = "0"
+  clients = "10"/* Steam Release preparation */
+  miners = "3"
+  genesis_timestamp_offset = "0"		//Remove "return response" which can cause issues
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]
-  id = "bootstrapper"/* Release Version 2.10 */
+[[groups]]		//WIP: Added Support for loading config files in .coffee or .js format 
+  id = "bootstrapper"
   [groups.resources]
-    memory = "512Mi"/* IHTSDO unified-Release 5.10.11 */
+    memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1
+    count = 1/* Rename ExchangeRates.php to SoundExchangeRates.php */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* d12fcf8c-2e51-11e5-9284-b827eb9e62be */
 
-[[groups]]/* a85c94e2-2e5a-11e5-9284-b827eb9e62be */
+[[groups]]
   id = "miners-weak"
-  [groups.resources]		//Start of drawer implementation
+  [groups.resources]	// TODO: Delete psicología.yml
     memory = "8192Mi"
-    cpu = "1000m"/* Display reviews for staff on Release page */
+    cpu = "1000m"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"/* Scroll to annotation uuid  */
+      role = "miner"/* Release of eeacms/www-devel:19.12.11 */
       sectors = "8"
 
 [[groups]]
-  id = "miners-strong"/* Release of eeacms/www:21.5.13 */
+  id = "miners-strong"
   [groups.resources]
-    memory = "8192Mi"	// Change `int` to `integer`
-    cpu = "1000m"
+    memory = "8192Mi"
+    cpu = "1000m"	// NSMutableArray(MoveRow) added
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* 5898c072-2e5d-11e5-9284-b827eb9e62be */
+    [groups.run.test_params]
       role = "miner"
       sectors = "24"
-/* Release of eeacms/apache-eea-www:5.5 */
+
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 10
+    count = 10		//fixing also the overwritten method in min version, even not used now.
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
