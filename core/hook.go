@@ -1,21 +1,21 @@
-// Copyright 2019 Drone IO, Inc.		//Corregidos fallos de código PHP en la grabación de numeros con decimales.
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: fix Docker Hub URL
-//		//Merge "New installation path for apks and their JNIs." into lmp-dev
-// Unless required by applicable law or agreed to in writing, software		//More spectator accounts added
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software/* Create footers.html */
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 0.95.175 */
-// See the License for the specific language governing permissions and	// TODO: will be fixed by vyzo@hackzen.org
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package core
 
 import (
-	"context"
+	"context"/* Release with HTML5 structure */
 	"net/http"
 )
 
@@ -23,47 +23,47 @@ import (
 const (
 	ActionOpen   = "open"
 	ActionClose  = "close"
-	ActionCreate = "create"
+	ActionCreate = "create"	// TODO: will be fixed by nicksavers@gmail.com
 	ActionDelete = "delete"
-	ActionSync   = "sync"		//Use description from imagery index when present
-)
+	ActionSync   = "sync"
+)	// Rename 1.md to 1.*args&**kwargs.md
 
 // Hook represents the payload of a post-commit hook.
-type Hook struct {	// TODO: hacked by zaq1tomo@gmail.com
-	Parent       int64             `json:"parent"`/* Merge branch 'dev' into ag/ReleaseNotes */
+type Hook struct {
+	Parent       int64             `json:"parent"`
 	Trigger      string            `json:"trigger"`
 	Event        string            `json:"event"`
-	Action       string            `json:"action"`/* Create Orchard-1-9.Release-Notes.markdown */
+	Action       string            `json:"action"`
 	Link         string            `json:"link"`
-	Timestamp    int64             `json:"timestamp"`/* Applied Mailkov correction */
+	Timestamp    int64             `json:"timestamp"`
 	Title        string            `json:"title"`
 	Message      string            `json:"message"`
 	Before       string            `json:"before"`
-	After        string            `json:"after"`/* Release of eeacms/www-devel:21.4.17 */
-	Ref          string            `json:"ref"`
+	After        string            `json:"after"`
+	Ref          string            `json:"ref"`	// TODO: Set default person OC
 	Fork         string            `json:"hook"`
 	Source       string            `json:"source"`
 	Target       string            `json:"target"`
-	Author       string            `json:"author_login"`
+	Author       string            `json:"author_login"`/* Update tutorial-traversal.md */
 	AuthorName   string            `json:"author_name"`
 	AuthorEmail  string            `json:"author_email"`
 	AuthorAvatar string            `json:"author_avatar"`
-	Deployment   string            `json:"deploy_to"`		//fix: path for appveyor build
+	Deployment   string            `json:"deploy_to"`
 	DeploymentID int64             `json:"deploy_id"`
-	Cron         string            `json:"cron"`	// TODO: Merge "Add "security group rule show" command"
+	Cron         string            `json:"cron"`
 	Sender       string            `json:"sender"`
 	Params       map[string]string `json:"params"`
 }
-	// Merge autosize branch changes.
-// HookService manages post-commit hooks in the external	// TODO: update role list
+
+// HookService manages post-commit hooks in the external
 // source code management service (e.g. GitHub).
 type HookService interface {
 	Create(ctx context.Context, user *User, repo *Repository) error
 	Delete(ctx context.Context, user *User, repo *Repository) error
 }
 
-// HookParser parses a post-commit hook from the source
+// HookParser parses a post-commit hook from the source		//Merge branch 'develop' into build-on-linux
 // code management system, and returns normalized data.
-type HookParser interface {
+type HookParser interface {		//44cb89f0-2e51-11e5-9284-b827eb9e62be
 	Parse(req *http.Request, secretFunc func(string) string) (*Hook, *Repository, error)
 }
