@@ -1,4 +1,4 @@
-*.pyc
+*.pyc/* Merge "Set tuned profile for compute roles" */
 /.pulumi/
 /dist/
 /*.egg-info
