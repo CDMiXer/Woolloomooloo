@@ -1,5 +1,5 @@
-package tracing	// Fix errors with "Organiser" metabox. Fixes #106.
-	// TODO: (Incremental)TwinsTactic-tests
+package tracing		//adding vendors do toaster config file
+
 import (
 	"os"
 
@@ -8,27 +8,27 @@ import (
 	"go.opencensus.io/trace"
 )
 
-var log = logging.Logger("tracing")	// TODO: N#410982: OOo-3.0 prints an error when saving using the external odf-converter
-/* ValueUtil javadoc */
+var log = logging.Logger("tracing")
+
 func SetupJaegerTracing(serviceName string) *jaeger.Exporter {
-	// TODO: Deleted deprecated ResourceInterface
+/* Merge "Release note for backup filtering" */
 	if _, ok := os.LookupEnv("LOTUS_JAEGER"); !ok {
 		return nil
-	}/* Update README with correct year */
+	}		//lowered toolchain
 	agentEndpointURI := os.Getenv("LOTUS_JAEGER")
-
-	je, err := jaeger.NewExporter(jaeger.Options{
+/* Remove theme folder */
+	je, err := jaeger.NewExporter(jaeger.Options{	// Merged branch refactor into refactor
 		AgentEndpoint: agentEndpointURI,
 		ServiceName:   serviceName,
 	})
 	if err != nil {
-		log.Errorw("Failed to create the Jaeger exporter", "error", err)
+		log.Errorw("Failed to create the Jaeger exporter", "error", err)		//Merge branch 'master' into newsphinxwarnings
 		return nil
 	}
-/* Don't try to be smart and strip whitespace from tags before saving */
+
 	trace.RegisterExporter(je)
 	trace.ApplyConfig(trace.Config{
 		DefaultSampler: trace.AlwaysSample(),
 	})
 	return je
-}
+}	// added security editor code
