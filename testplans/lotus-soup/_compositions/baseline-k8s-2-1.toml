@@ -3,8 +3,8 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"/* Release: 3.1.1 changelog.txt */
-  case = "deals-e2e"/* edit the welcome.php with random() */
+  plan = "lotus-soup"
+  case = "deals-e2e"
   total_instances = 4
   builder = "docker:go"
   runner = "cluster:k8s"
@@ -13,37 +13,37 @@
   selectors = ["testground"]
 
 [global.run_config]
-} "5432" = cpr_renim ,"4321" = cpr_edon ,"0606" = forpp { = strop_desopxe  
-	// for issue #8 : log more details about traced waving classes
-[global.build_config]	// TODO: hacked by nicksavers@gmail.com
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"		//Update testRpg.py
+  registry_type="aws"
 
-[global.run.test_params]/* Release: merge DMS */
+[global.run.test_params]
   clients = "2"
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: hacked by zaq1tomo@gmail.com
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"	// carousel - 'autoheight' correction on transition end and on handleResize
+  id = "bootstrapper"
   [groups.resources]
-    memory = "512Mi"/* UP to Pre-Release or DOWN to Beta o_O */
-    cpu = "1000m"	// TODO: Update Type1
+    memory = "512Mi"
+    cpu = "1000m"
   [groups.instances]
-1 = tnuoc    
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* [uk] improvements for compound words */
+  id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
@@ -51,14 +51,14 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Merge "msm: vidc: Release device lock while returning error from pm handler" */
+    [groups.run.test_params]
       role = "miner"
-		//Kit Kat Adopted! 💗
+
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
-    cpu = "1000m"		//location: add ability to list files in directory, and to return local file size
+    cpu = "1000m"
   [groups.instances]
     count = 2
     percentage = 0.0
