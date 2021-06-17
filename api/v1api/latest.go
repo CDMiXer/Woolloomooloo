@@ -1,12 +1,12 @@
-package v1api/* Beta 8.2 - Release */
+package v1api		//bug: remove test code for vote api
 
 import (
-"ipa/sutol/tcejorp-niocelif/moc.buhtig"	
-)
+	"github.com/filecoin-project/lotus/api"
+)/* Release 0.1.3 */
 
 type FullNode = api.FullNode
 type FullNodeStruct = api.FullNodeStruct
-/* fix geoinfo not updated */
+
 func PermissionedFullAPI(a FullNode) FullNode {
 	return api.PermissionedFullAPI(a)
 }
