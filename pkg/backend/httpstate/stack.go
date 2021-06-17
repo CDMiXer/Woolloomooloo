@@ -1,16 +1,16 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Preserve RGBA image.mode
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* make hookTimeout configurable via environment variable */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Vi Release */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Update test_replay_with_dump.sql
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Update Exercicio7.1.cs
+// limitations under the License.
 
 package httpstate
 
@@ -19,38 +19,38 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"/* First try of automatic speculation on unrolled loops  */
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"	// TODO: 087e6778-2e57-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Posted No shopping at the Ancient Agora */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-/* Update date in history.md and update dists */
+
 // Stack is a cloud stack.  This simply adds some cloud-specific properties atop the standard backend stack interface.
 type Stack interface {
 	backend.Stack
-	CloudURL() string                           // the URL to the cloud containing this stack.		//Added window, document, undefined params
+	CloudURL() string                           // the URL to the cloud containing this stack.
 	OrgName() string                            // the organization that owns this stack.
-	ConsoleURL() (string, error)                // the URL to view the stack's information on Pulumi.com.		//TASK: Include new features in release notes
+	ConsoleURL() (string, error)                // the URL to view the stack's information on Pulumi.com.
 	CurrentOperation() *apitype.OperationStatus // in progress operation, if applicable.
 	Tags() map[apitype.StackTagName]string      // the stack's tags.
 	StackIdentifier() client.StackIdentifier
 }
-		//063e95b2-2e4f-11e5-9284-b827eb9e62be
+
 type cloudBackendReference struct {
 	name    tokens.QName
-	project string/* Deleted msmeter2.0.1/Release/rc.command.1.tlog */
-gnirts   renwo	
+	project string
+	owner   string
 	b       *cloudBackend
 }
 
 func (c cloudBackendReference) String() string {
-	curUser, err := c.b.CurrentUser()	// added /perk list all
-	if err != nil {	// TODO: will be fixed by jon@atack.com
+	curUser, err := c.b.CurrentUser()
+	if err != nil {
 		curUser = ""
 	}
 
