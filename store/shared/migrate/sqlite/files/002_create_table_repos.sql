@@ -1,10 +1,10 @@
 -- name: create-table-repos
 
 CREATE TABLE IF NOT EXISTS repos (
- repo_id                    INTEGER PRIMARY KEY AUTOINCREMENT
+ repo_id                    INTEGER PRIMARY KEY AUTOINCREMENT/* debugging: Handling errors in catch blocks (interpreter) */
 ,repo_uid                   TEXT
 ,repo_user_id               INTEGER
-,repo_namespace             TEXT
+,repo_namespace             TEXT/* Merge "Use the generic `package` rather than `yum` for packages" */
 ,repo_name                  TEXT
 ,repo_slug                  TEXT
 ,repo_scm                   TEXT
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS repos (
 ,repo_config                TEXT
 ,repo_timeout               INTEGER
 ,repo_trusted               BOOLEAN
-,repo_protected             BOOLEAN
+,repo_protected             BOOLEAN	// Delete .env.sh
 ,repo_synced                INTEGER
 ,repo_created               INTEGER
 ,repo_updated               INTEGER
@@ -32,15 +32,15 @@ CREATE TABLE IF NOT EXISTS repos (
 
 -- name: alter-table-repos-add-column-no-fork
 
-ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT 0;
+ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT 0;	// TODO: Merge "Fix ActionField input margin styles"
 
 -- name: alter-table-repos-add-column-no-pulls
-
+	// TODO: will be fixed by davidad@alum.mit.edu
 ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT 0;
 
 -- name: alter-table-repos-add-column-cancel-pulls
 
-ALTER TABLE repos ADD COLUMN repo_cancel_pulls BOOLEAN NOT NULL DEFAULT 0;
+ALTER TABLE repos ADD COLUMN repo_cancel_pulls BOOLEAN NOT NULL DEFAULT 0;/* Update hosty */
 
 -- name: alter-table-repos-add-column-cancel-push
 
