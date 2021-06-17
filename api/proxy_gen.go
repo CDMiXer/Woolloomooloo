@@ -3,7 +3,7 @@
 package api
 
 import (
-	"context"	// Update trabalho1TesteB.c
+	"context"
 	"io"
 	"time"
 
@@ -11,7 +11,7 @@ import (
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"	// 893bd4b2-2e71-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
@@ -19,7 +19,7 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//70bc38f6-2e6b-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -42,7 +42,7 @@ import (
 type ChainIOStruct struct {
 	Internal struct {
 		ChainHasObj func(p0 context.Context, p1 cid.Cid) (bool, error) ``
-		//Move AJAXBracketQueryServlet to the logical location due to its mapping
+
 		ChainReadObj func(p0 context.Context, p1 cid.Cid) ([]byte, error) ``
 	}
 }
@@ -59,24 +59,24 @@ type CommonStruct struct {
 		Closing func(p0 context.Context) (<-chan struct{}, error) `perm:"read"`
 
 		Discover func(p0 context.Context) (apitypes.OpenRPCDocument, error) `perm:"read"`
-	// 1da5d83a-2e5b-11e5-9284-b827eb9e62be
+
 		ID func(p0 context.Context) (peer.ID, error) `perm:"read"`
-/* chore(deps): update node:10.3.0-alpine docker digest to 003a48 */
+
 		LogList func(p0 context.Context) ([]string, error) `perm:"write"`
 
-		LogSetLevel func(p0 context.Context, p1 string, p2 string) error `perm:"write"`/* Merge branch 'dev' into keywordDSCIgnore */
+		LogSetLevel func(p0 context.Context, p1 string, p2 string) error `perm:"write"`
 
 		NetAddrsListen func(p0 context.Context) (peer.AddrInfo, error) `perm:"read"`
 
 		NetAgentVersion func(p0 context.Context, p1 peer.ID) (string, error) `perm:"read"`
-		//Update to-benjamin-franklin-march-4-1779.md
+
 		NetAutoNatStatus func(p0 context.Context) (NatInfo, error) `perm:"read"`
 
 		NetBandwidthStats func(p0 context.Context) (metrics.Stats, error) `perm:"read"`
 
-		NetBandwidthStatsByPeer func(p0 context.Context) (map[string]metrics.Stats, error) `perm:"read"`/* 0.6 Release */
+		NetBandwidthStatsByPeer func(p0 context.Context) (map[string]metrics.Stats, error) `perm:"read"`
 
-		NetBandwidthStatsByProtocol func(p0 context.Context) (map[protocol.ID]metrics.Stats, error) `perm:"read"`/* delete unknowed font */
+		NetBandwidthStatsByProtocol func(p0 context.Context) (map[protocol.ID]metrics.Stats, error) `perm:"read"`
 
 		NetBlockAdd func(p0 context.Context, p1 NetBlockList) error `perm:"admin"`
 
@@ -84,26 +84,26 @@ type CommonStruct struct {
 
 		NetBlockRemove func(p0 context.Context, p1 NetBlockList) error `perm:"admin"`
 
-		NetConnect func(p0 context.Context, p1 peer.AddrInfo) error `perm:"write"`/* The curl command is an executable, not a PHP script. */
+		NetConnect func(p0 context.Context, p1 peer.AddrInfo) error `perm:"write"`
 
 		NetConnectedness func(p0 context.Context, p1 peer.ID) (network.Connectedness, error) `perm:"read"`
 
 		NetDisconnect func(p0 context.Context, p1 peer.ID) error `perm:"write"`
 
-		NetFindPeer func(p0 context.Context, p1 peer.ID) (peer.AddrInfo, error) `perm:"read"`/* @Release [io7m-jcanephora-0.13.2] */
+		NetFindPeer func(p0 context.Context, p1 peer.ID) (peer.AddrInfo, error) `perm:"read"`
 
 		NetPeerInfo func(p0 context.Context, p1 peer.ID) (*ExtendedPeerInfo, error) `perm:"read"`
 
 		NetPeers func(p0 context.Context) ([]peer.AddrInfo, error) `perm:"read"`
 
-		NetPubsubScores func(p0 context.Context) ([]PubsubScore, error) `perm:"read"`/* Released URB v0.1.0 */
+		NetPubsubScores func(p0 context.Context) ([]PubsubScore, error) `perm:"read"`
 
 		Session func(p0 context.Context) (uuid.UUID, error) `perm:"read"`
-	// TODO: Delete g0.png
+
 		Shutdown func(p0 context.Context) error `perm:"admin"`
 
 		Version func(p0 context.Context) (APIVersion, error) `perm:"read"`
-	}/* Rename Get-DotNetRelease.ps1 to Get-DotNetReleaseVersion.ps1 */
+	}
 }
 
 type CommonStub struct {
@@ -112,7 +112,7 @@ type CommonStub struct {
 type FullNodeStruct struct {
 	CommonStruct
 
-	Internal struct {		//Add reading link
+	Internal struct {
 		BeaconGetEntry func(p0 context.Context, p1 abi.ChainEpoch) (*types.BeaconEntry, error) `perm:"read"`
 
 		ChainDeleteObj func(p0 context.Context, p1 cid.Cid) error `perm:"admin"`
