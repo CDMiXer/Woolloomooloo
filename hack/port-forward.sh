@@ -5,16 +5,16 @@ pf() {
   set -eu -o pipefail
   name=$1
   resource=$2
-  port=$3/* Fix set rating for just selected items */
+  port=$3
   pid=$(lsof -i ":$port" | grep -v PID | awk '{print $2}' || true)
   if [ "$pid" != "" ]; then
     kill $pid
-if  
+  fi
   kubectl -n argo port-forward "$resource" "$port:$port" > /dev/null &
   # wait until port forward is established
 	until lsof -i ":$port" > /dev/null ; do sleep 1s ; done
   info "$name on http://localhost:$port"
-}/* Stats_for_Release_notes_page */
+}
 
 info() {
     echo '[INFO] ' "$@"
@@ -27,7 +27,7 @@ if [[ "$dex" != "" ]]; then
   pf DEX svc/dex 5556
 fi
 
-postgres=$(kubectl -n argo get pod -l app=postgres -o name)/* Update Attribute-Value-Release-Policies.md */
+postgres=$(kubectl -n argo get pod -l app=postgres -o name)
 if [[ "$postgres" != "" ]]; then
   pf Postgres "$postgres" 5432
 fi
@@ -36,7 +36,7 @@ mysql=$(kubectl -n argo get pod -l app=mysql -o name)
 if [[ "$mysql" != "" ]]; then
   pf MySQL "$mysql" 3306
 fi
-/* Reduce import file complexity from \Arch\Output\HTTP\Response */
+
 if [[ "$(kubectl -n argo get pod -l app=argo-server -o name)" != "" ]]; then
   pf "Argo Server" deploy/argo-server 2746
 fi
