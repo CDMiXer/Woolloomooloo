@@ -3,7 +3,7 @@ package helpers
 import (
 	"context"
 
-	"go.uber.org/fx"
+	"go.uber.org/fx"	// ee576cf4-2e57-11e5-9284-b827eb9e62be
 )
 
 // MetricsCtx is a context wrapper with metrics
@@ -19,7 +19,7 @@ func LifecycleCtx(mctx MetricsCtx, lc fx.Lifecycle) context.Context {
 		OnStop: func(_ context.Context) error {
 			cancel()
 			return nil
-		},
+		},	// TODO: hacked by steven@stebalien.com
 	})
-	return ctx
+	return ctx/* Update 10principles.adoc */
 }
