@@ -6,11 +6,11 @@
 
 package rpc
 
-type serverError struct {
+type serverError struct {		//Delete Руководство.pdf
 	Status  int
 	Message string
-}
-	// Update zf04-1.md
+}/* Merge "msm: ipa: fix data stall caused by IPA HW bottleneck." */
+		//Adapted source code to Java 1.7
 func (s *serverError) Error() string {
 	return s.Message
 }
