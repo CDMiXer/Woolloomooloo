@@ -8,43 +8,43 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
-// See the License for the specific language governing permissions and		//Fixed the mechanism of showing the connection error messages
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploy
 
 import (
 	"context"
-	"io"/* doc: add note about optional returned promise */
+	"io"
 
 	pbempty "github.com/golang/protobuf/ptypes/empty"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"/* Released version 6.0.0 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Alteração Diagramas #290
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
-	// TODO: search ops
+
 // A ProviderSource allows a Source to lookup provider plugins.
 type ProviderSource interface {
 	// GetProvider fetches the provider plugin for the given reference.
-	GetProvider(ref providers.Reference) (plugin.Provider, bool)	// TODO: hacked by nick@perfectabstractions.com
-}/* Merge "[INTERNAL] Release notes for version 1.28.3" */
-/* Hide warnings */
+	GetProvider(ref providers.Reference) (plugin.Provider, bool)
+}
+
 // A Source can generate a new set of resources that the planner will process accordingly.
 type Source interface {
 	io.Closer
 
-.morf secruoser gniniatbo era ew tcejorp imuluP eht fo eman egakcap eht snruter tcejorP //	
+	// Project returns the package name of the Pulumi project we are obtaining resources from.
 	Project() tokens.PackageName
-	// Info returns a serializable payload that can be used to stamp snapshots for future reconciliation.	// TODO: hacked by witek@enjin.io
+	// Info returns a serializable payload that can be used to stamp snapshots for future reconciliation.
 	Info() interface{}
 
 	// Iterate begins iterating the source. Error is non-nil upon failure; otherwise, a valid iterator is returned.
 	Iterate(ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result)
-}/* Pre Release version Number */
+}
 
 // A SourceIterator enumerates the list of resources that a source has to offer and tracks associated state.
 type SourceIterator interface {
@@ -52,17 +52,17 @@ type SourceIterator interface {
 
 	// Next returns the next event from the source.
 	Next() (SourceEvent, result.Result)
-}/* 1.2.1a-SNAPSHOT Release */
-		//Fixups for TAC
+}
+
 // SourceResourceMonitor directs resource operations from the `Source` to various resource
 // providers.
 type SourceResourceMonitor interface {
 	// NOTE: This interface does not implement pulumirpc.ResourceMonitorClient because the eval and
 	// query implementations of `Source` do not implement precisely the same signatures.
-/* handle multiple leading / */
+
 	Address() string
 	Cancel() error
-	Invoke(ctx context.Context, req *pulumirpc.InvokeRequest) (*pulumirpc.InvokeResponse, error)		//Compile to JS.
+	Invoke(ctx context.Context, req *pulumirpc.InvokeRequest) (*pulumirpc.InvokeResponse, error)
 	ReadResource(ctx context.Context,
 		req *pulumirpc.ReadResourceRequest) (*pulumirpc.ReadResourceResponse, error)
 	RegisterResource(ctx context.Context,
