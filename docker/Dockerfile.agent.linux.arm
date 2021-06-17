@@ -9,4 +9,4 @@ ADD release/linux/arm/drone-agent /bin/
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
-ENTRYPOINT ["/bin/drone-agent"]		//hyperlinking to outer/this/super
+ENTRYPOINT ["/bin/drone-agent"]
