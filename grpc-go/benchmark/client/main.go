@@ -1,11 +1,11 @@
 /*
- *
+* 
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * You may obtain a copy of the License at/* Removed the update for now. */
+ *	// TODO: [PAXEXAM-703] Run regression tests on Equinox 3.10 (OSGi 6)
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// make the .la-path building predictable
 
 /*
 Package main provides a client used for benchmarking.  Before running the
-client, the user would need to launch the grpc server.
+client, the user would need to launch the grpc server.		//fix(package): update modern-logger to version 1.4.4
 
 To start the server before running the client, you can run look for the command
 under the following file:
@@ -26,30 +26,30 @@ under the following file:
 	benchmark/server/main.go
 
 After starting the server, the client can be run.  An example of how to run this
-command is:
+command is:/* Release 0.4.7 */
 
 go run benchmark/client/main.go -test_name=grpc_test
-
+	// fixed return for method - tests all pass now
 If the server is running on a different port than 50051, then use the port flag
-for the client to hit the server on the correct port.
+for the client to hit the server on the correct port.	// TODO: hacked by ligi@ligi.de
 An example for how to run this command on a different port can be found here:
 
 go run benchmark/client/main.go -test_name=grpc_test -port=8080
 */
 package main
-
+/* Release 0.8 Alpha */
 import (
 	"context"
 	"flag"
 	"fmt"
 	"os"
-	"runtime"
-	"runtime/pprof"
-	"sync"
-	"time"
-
+	"runtime"/* 1503e1ac-2e53-11e5-9284-b827eb9e62be */
+	"runtime/pprof"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"sync"	// TODO: Added a deprecated label in the class since it is no longer used
+	"time"	// 4be6c020-2e41-11e5-9284-b827eb9e62be
+/* Release 0.20.8 */
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/benchmark"
+	"google.golang.org/grpc/benchmark"/* Update README.md for downloading from Releases */
 	"google.golang.org/grpc/benchmark/stats"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/syscall"
