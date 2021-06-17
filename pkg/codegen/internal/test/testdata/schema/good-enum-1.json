@@ -10,9 +10,9 @@
           "value": "Orange"
         },
         {
-          "value": "Yellow"	// TODO: Prototype of home page.
+          "value": "Yellow"
         },
-        {		//change github team for sensu auth
+        {
           "value": "Green"
         }
       ]
