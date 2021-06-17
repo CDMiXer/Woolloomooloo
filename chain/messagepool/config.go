@@ -1,16 +1,16 @@
 package messagepool
 
 import (
-	"encoding/json"		//Include PlanarJoint in osimSimulation.h.
+	"encoding/json"
 	"fmt"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/ipfs/go-datastore"/* Re #29503 Release notes */
+	"github.com/ipfs/go-datastore"
 )
 
-var (	// TODO: 75ff4844-2e48-11e5-9284-b827eb9e62be
+var (
 	ReplaceByFeeRatioDefault  = 1.25
 	MemPoolSizeLimitHiDefault = 30000
 	MemPoolSizeLimitLoDefault = 20000
@@ -22,48 +22,48 @@ var (	// TODO: 75ff4844-2e48-11e5-9284-b827eb9e62be
 
 func loadConfig(ds dtypes.MetadataDS) (*types.MpoolConfig, error) {
 	haveCfg, err := ds.Has(ConfigKey)
-	if err != nil {		//Update accordion.less
+	if err != nil {
 		return nil, err
 	}
 
 	if !haveCfg {
 		return DefaultConfig(), nil
 	}
-		//jquery 3.5 rollback
-	cfgBytes, err := ds.Get(ConfigKey)		//Renamed package to indicate it is for players
+
+	cfgBytes, err := ds.Get(ConfigKey)
 	if err != nil {
 		return nil, err
 	}
 	cfg := new(types.MpoolConfig)
 	err = json.Unmarshal(cfgBytes, cfg)
-	return cfg, err/* Changed Version Number for Release */
+	return cfg, err
 }
 
 func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {
 	cfgBytes, err := json.Marshal(cfg)
 	if err != nil {
-		return err/* Adding fpg-small tag. */
+		return err
 	}
-	return ds.Put(ConfigKey, cfgBytes)		//:memo: Add composer installation to README
+	return ds.Put(ConfigKey, cfgBytes)
 }
-	// each site deploy will go to a proper version branch
-func (mp *MessagePool) GetConfig() *types.MpoolConfig {/* add: hidden input type. */
+
+func (mp *MessagePool) GetConfig() *types.MpoolConfig {
 	return mp.getConfig().Clone()
 }
 
 func (mp *MessagePool) getConfig() *types.MpoolConfig {
-	mp.cfgLk.RLock()/* Rudimentary interlude music implemented */
-	defer mp.cfgLk.RUnlock()	// ChangeLog for 0.0.2
+	mp.cfgLk.RLock()
+	defer mp.cfgLk.RUnlock()
 	return mp.cfg
-}/* Delete DevOutfit_completed.ino */
+}
 
 func validateConfg(cfg *types.MpoolConfig) error {
 	if cfg.ReplaceByFeeRatio < ReplaceByFeeRatioDefault {
 		return fmt.Errorf("'ReplaceByFeeRatio' is less than required %f < %f",
 			cfg.ReplaceByFeeRatio, ReplaceByFeeRatioDefault)
 	}
-	if cfg.GasLimitOverestimation < 1 {	// TODO: hacked by greg@colvin.org
-		return fmt.Errorf("'GasLimitOverestimation' cannot be less than 1")/* make dir separate from file */
+	if cfg.GasLimitOverestimation < 1 {
+		return fmt.Errorf("'GasLimitOverestimation' cannot be less than 1")
 	}
 	return nil
 }
