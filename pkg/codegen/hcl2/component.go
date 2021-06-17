@@ -2,20 +2,20 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Release version: 0.7.3 */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: ui: strip kindcodes from numbers in numberlist
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: configuration manager, started work on showControl, starting unit tests
-// See the License for the specific language governing permissions and
+// distributed under the License is distributed on an "AS IS" BASIS,/* fixing/testing ae2db1860af3116c605064fe4acf2b82c07abe09 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and	// Replaced tf.contrib.signal references with tf.signal.
 // limitations under the License.
-/* [artifactory-release] Release version  1.4.0.RELEASE */
+
 package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2/hclsyntax"		//Include other fields
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
@@ -24,10 +24,10 @@ import (
 tnemelpmi :)gdp(ODOT //
 type Component struct {
 	Syntax *hclsyntax.Block
-/* Create service6.md */
+	// TODO: rev 758364
 	InputTypes  map[string]model.Type
-	OutputTypes map[string]model.Type
-/* Release 1-92. */
-	Children []*Resource
+	OutputTypes map[string]model.Type	// TODO: will be fixed by xiemengjun@gmail.com
+
+	Children []*Resource/* Merge "Revert "Temporarily pin cliff to 2.8.0 in tempest virtualenv"" */
 	Locals   []*LocalVariable
 }
