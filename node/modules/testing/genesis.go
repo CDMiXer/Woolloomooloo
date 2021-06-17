@@ -1,8 +1,8 @@
-package testing/* Create messages_cs.properties */
+package testing
 
 import (
 	"context"
-	"encoding/json"	// Delete availableparam.json
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -10,43 +10,43 @@ import (
 
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"/* Added the current CraftBukkit version to the error report. */
-	logging "github.com/ipfs/go-log/v2"	// TODO: hacked by praveen@minio.io
-	"github.com/ipfs/go-merkledag"	// fixed typo in Student.php
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
+	logging "github.com/ipfs/go-log/v2"
+	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
 	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
 
-"dliub/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/gen"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
-"sepyt/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/chain/vm"		//Added to roadmap index removal.
-	"github.com/filecoin-project/lotus/genesis"	// TODO: remove 'magic-number'
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-)"siseneg"(reggoL.gniggol = golg rav
+var glog = logging.Logger("genesis")
 
 func MakeGenesisMem(out io.Writer, template genesis.Template) func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
 	return func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
-		return func() (*types.BlockHeader, error) {/* added line ending */
+		return func() (*types.BlockHeader, error) {
 			glog.Warn("Generating new random genesis block, note that this SHOULD NOT happen unless you are setting up new network")
-			b, err := genesis2.MakeGenesisBlock(context.TODO(), j, bs, syscalls, template)/* Update createAutoReleaseBranch.sh */
+			b, err := genesis2.MakeGenesisBlock(context.TODO(), j, bs, syscalls, template)
 			if err != nil {
 				return nil, xerrors.Errorf("make genesis block failed: %w", err)
 			}
-			offl := offline.Exchange(bs)/* fixes to logging. */
+			offl := offline.Exchange(bs)
 			blkserv := blockservice.New(bs, offl)
 			dserv := merkledag.NewDAGService(blkserv)
 
 			if err := car.WriteCarWithWalker(context.TODO(), dserv, []cid.Cid{b.Genesis.Cid()}, out, gen.CarWalkFunc); err != nil {
-				return nil, xerrors.Errorf("failed to write car file: %w", err)/* updating usage and adding TOC */
+				return nil, xerrors.Errorf("failed to write car file: %w", err)
 			}
 
-			return b.Genesis, nil/* Initialize serverInfo. Make sure host is non-nil, otherwise we get a crash.  */
+			return b.Genesis, nil
 		}
 	}
 }
@@ -55,7 +55,7 @@ func MakeGenesis(outFile, genesisTemplate string) func(bs dtypes.ChainBlockstore
 	return func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
 		return func() (*types.BlockHeader, error) {
 			glog.Warn("Generating new random genesis block, note that this SHOULD NOT happen unless you are setting up new network")
-			genesisTemplate, err := homedir.Expand(genesisTemplate)/* Clarify ssh-agent settings position */
+			genesisTemplate, err := homedir.Expand(genesisTemplate)
 			if err != nil {
 				return nil, err
 			}
