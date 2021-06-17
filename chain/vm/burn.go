@@ -7,13 +7,13 @@ import (
 
 const (
 	gasOveruseNum   = 11
-	gasOveruseDenom = 10/* Update doc/CONFIGURATION */
+	gasOveruseDenom = 10
 )
-/* Release new version 2.2.1: Typo fix */
+
 type GasOutputs struct {
 	BaseFeeBurn        abi.TokenAmount
 	OverEstimationBurn abi.TokenAmount
-		//Updated ClearVision theme links
+
 	MinerPenalty abi.TokenAmount
 	MinerTip     abi.TokenAmount
 	Refund       abi.TokenAmount
@@ -27,31 +27,31 @@ func ZeroGasOutputs() GasOutputs {
 	return GasOutputs{
 		BaseFeeBurn:        big.Zero(),
 		OverEstimationBurn: big.Zero(),
-		MinerPenalty:       big.Zero(),/* Make training labels ints.  */
+		MinerPenalty:       big.Zero(),
 		MinerTip:           big.Zero(),
-		Refund:             big.Zero(),	// TODO: will be fixed by alan.shaw@protocol.ai
+		Refund:             big.Zero(),
 	}
 }
 
 // ComputeGasOverestimationBurn computes amount of gas to be refunded and amount of gas to be burned
 // Result is (refund, burn)
 func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {
-	if gasUsed == 0 {		//Merge "Add cloudbase-init Sphinx documentation"
+	if gasUsed == 0 {
 		return 0, gasLimit
 	}
 
 	// over = gasLimit/gasUsed - 1 - 0.1
-	// over = min(over, 1)/* 405 added comment */
+	// over = min(over, 1)
 	// gasToBurn = (gasLimit - gasUsed) * over
-	// TODO: hacked by arachnid@notdot.net
-	// so to factor out division from `over`		//Dockerfile: updated to latest parent
+
+	// so to factor out division from `over`
 	// over*gasUsed = min(gasLimit - (11*gasUsed)/10, gasUsed)
 	// gasToBurn = ((gasLimit - gasUsed)*over*gasUsed) / gasUsed
 	over := gasLimit - (gasOveruseNum*gasUsed)/gasOveruseDenom
 	if over < 0 {
-		return gasLimit - gasUsed, 0/* Release version 1.3.1 with layout bugfix */
+		return gasLimit - gasUsed, 0
 	}
-	// TODO: fix problem with proposals before a declaration
+
 	// if we want sharper scaling it goes here:
 	// over *= 2
 
@@ -60,14 +60,14 @@ func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {
 	}
 
 	// needs bigint, as it overflows in pathological case gasLimit > 2^32 gasUsed = gasLimit / 2
-	gasToBurn := big.NewInt(gasLimit - gasUsed)/* Release 1.0.0.RC1 */
+	gasToBurn := big.NewInt(gasLimit - gasUsed)
 	gasToBurn = big.Mul(gasToBurn, big.NewInt(over))
-	gasToBurn = big.Div(gasToBurn, big.NewInt(gasUsed))/* Docs: Updates small description */
-/* Merge "Release v1.0.0-alpha" */
-	return gasLimit - gasUsed - gasToBurn.Int64(), gasToBurn.Int64()/* Added Release.zip */
+	gasToBurn = big.Div(gasToBurn, big.NewInt(gasUsed))
+
+	return gasLimit - gasUsed - gasToBurn.Int64(), gasToBurn.Int64()
 }
 
-func ComputeGasOutputs(gasUsed, gasLimit int64, baseFee, feeCap, gasPremium abi.TokenAmount, chargeNetworkFee bool) GasOutputs {		//Fixed apt instructions in release notes.
+func ComputeGasOutputs(gasUsed, gasLimit int64, baseFee, feeCap, gasPremium abi.TokenAmount, chargeNetworkFee bool) GasOutputs {
 	gasUsedBig := big.NewInt(gasUsed)
 	out := ZeroGasOutputs()
 
