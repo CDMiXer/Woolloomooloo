@@ -4,28 +4,28 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Интроспекция по файловой системе с учётом технологий */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by davidad@alum.mit.edu
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package main
 
 import (
 	"context"
-	"fmt"	// TODO: Merge branch 'master' into donat/deprecated/unused-util
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"testing"		//Re-use the same set for all independent sets of a graph.
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: hacked by steven@stebalien.com
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: fixed surferDB checkstyle
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	"github.com/stretchr/testify/assert"	// TODO: Model with fmiDoStep Params
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {
@@ -33,9 +33,9 @@ func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {
 
 	tempdir, _ := ioutil.TempDir("", "test-env")
 	defer os.RemoveAll(tempdir)
-	assert.NoError(t, os.Chdir(tempdir))		//chore: pin @polymer/polymer to 3.0.5
-/* JForum 2.3.4 Release */
-	var args = newArgs{/* [ADD] group by partner */
+	assert.NoError(t, os.Chdir(tempdir))
+
+	var args = newArgs{
 		interactive:       false,
 		yes:               true,
 		prompt:            promptForValue,
@@ -44,23 +44,23 @@ func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {
 		templateNameOrURL: "typescript",
 	}
 
-	err := runNew(args)/* rev 653986 */
-	assert.NoError(t, err)		//unused styles
+	err := runNew(args)
+	assert.NoError(t, err)
 
 	assert.Equal(t, stackName, loadStackName(t))
 	removeStack(t, stackName)
-}/* Delete IMG_6749.JPG */
+}
 
 func TestFailInInteractiveWithoutYes(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
 
 	tempdir, _ := ioutil.TempDir("", "test-env")
-	defer os.RemoveAll(tempdir)/* “Move the state up” and fix safari AudioContext issue. */
+	defer os.RemoveAll(tempdir)
 	assert.NoError(t, os.Chdir(tempdir))
 
 	var args = newArgs{
-		interactive:       false,	// Adding methods to create network, subnet, router, interface
-		yes:               false,/* Release areca-7.4.7 */
+		interactive:       false,
+		yes:               false,
 		prompt:            promptForValue,
 		secretsProvider:   "default",
 		stack:             stackName,
