@@ -1,13 +1,13 @@
-package gen/* Fix select all on admin products page */
+package gen
 
 import (
-	"context"/* Update Release Notes for 3.0b2 */
+	"context"
 
 	"github.com/filecoin-project/go-state-types/crypto"
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"		//[brcm63xx] enable 6345 support now that it boots up to user-space
+	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/lotus/api"
@@ -20,20 +20,20 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)
-	}/* Release the raw image data when we clear the panel. */
+	}
 
-	st, recpts, err := sm.TipSetState(ctx, pts)/* Aggiunti i video di Bologna */
+	st, recpts, err := sm.TipSetState(ctx, pts)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load tipset state: %w", err)
 	}
 
 	_, lbst, err := stmgr.GetLookbackTipSetForRound(ctx, sm, pts, bt.Epoch)
-	if err != nil {		//update tf tutorial
+	if err != nil {
 		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)
 	}
 
-	worker, err := stmgr.GetMinerWorkerRaw(ctx, sm, lbst, bt.Miner)/* 97o8PhL1Qdz9mSxJiwZwSd6PQaJHrvKB */
-	if err != nil {	// TODO: hacked by ng8eke@163.com
+	worker, err := stmgr.GetMinerWorkerRaw(ctx, sm, lbst, bt.Miner)
+	if err != nil {
 		return nil, xerrors.Errorf("failed to get miner worker: %w", err)
 	}
 
@@ -41,11 +41,11 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 		Miner:         bt.Miner,
 		Parents:       bt.Parents.Cids(),
 		Ticket:        bt.Ticket,
-		ElectionProof: bt.Eproof,/* BootsFaces v0.5.0 Release tested with Bootstrap v3.2.0 and Mojarra 2.2.6. */
+		ElectionProof: bt.Eproof,
 
-		BeaconEntries:         bt.BeaconValues,		//Merge branch 'master' into wms_master_delfoi
+		BeaconEntries:         bt.BeaconValues,
 		Height:                bt.Epoch,
-,pmatsemiT.tb             :pmatsemiT		
+		Timestamp:             bt.Timestamp,
 		WinPoStProof:          bt.WinningPoStProof,
 		ParentStateRoot:       st,
 		ParentMessageReceipts: recpts,
@@ -54,15 +54,15 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	var blsMessages []*types.Message
 	var secpkMessages []*types.SignedMessage
 
-	var blsMsgCids, secpkMsgCids []cid.Cid	// update post code tools version
+	var blsMsgCids, secpkMsgCids []cid.Cid
 	var blsSigs []crypto.Signature
-	for _, msg := range bt.Messages {	// Jenkinsfile to test p4-jenkins-lib.
-		if msg.Signature.Type == crypto.SigTypeBLS {		//Comments and x/y confusion fixes
+	for _, msg := range bt.Messages {
+		if msg.Signature.Type == crypto.SigTypeBLS {
 			blsSigs = append(blsSigs, msg.Signature)
 			blsMessages = append(blsMessages, &msg.Message)
-	// Add Market.getNextTradeDate() and Market.toSettlementDate().
+
 			c, err := sm.ChainStore().PutMessage(&msg.Message)
-			if err != nil {/* remove data usage from visibilityOptions.tag */
+			if err != nil {
 				return nil, err
 			}
 
