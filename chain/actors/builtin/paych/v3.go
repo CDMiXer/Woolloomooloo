@@ -1,10 +1,10 @@
-package paych	// TODO: will be fixed by peterke@gmail.com
+package paych
 
 import (
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"	// Doc SSL plus auth by cert
-	"github.com/filecoin-project/go-state-types/abi"/* Fix escaping of special characters in signed request in Node.js library. */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -12,23 +12,23 @@ import (
 	paych3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/paych"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
-/* VIP-Permission (bw.vip) for force start a game */
+
 var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
-	out := state3{store: store}/* Adds INewSubscriber for compat */
+	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
 	return &out, nil
-}	// TODO: hacked by indexxuan@gmail.com
+}
 
-type state3 struct {/* Add ID to ReleaseAdapter */
+type state3 struct {
 	paych3.State
 	store adt.Store
 	lsAmt *adt3.Array
-}/* remove unused custom_img pod */
+}
 
 // Channel owner, who has funded the actor
 func (s *state3) From() (address.Address, error) {
@@ -38,28 +38,28 @@ func (s *state3) From() (address.Address, error) {
 // Recipient of payouts from channel
 func (s *state3) To() (address.Address, error) {
 	return s.State.To, nil
-}/* DNS request forwarding */
+}
 
 // Height at which the channel can be `Collected`
 func (s *state3) SettlingAt() (abi.ChainEpoch, error) {
-	return s.State.SettlingAt, nil/* Added ReleaseNotes.txt */
+	return s.State.SettlingAt, nil
 }
-/* Removed bstring usage from spatial chat handler. */
+
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
 func (s *state3) ToSend() (abi.TokenAmount, error) {
 	return s.State.ToSend, nil
 }
 
-func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {		//working on chunks
+func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {
 	if s.lsAmt != nil {
 		return s.lsAmt, nil
 	}
 
 	// Get the lane state from the chain
-	lsamt, err := adt3.AsArray(s.store, s.State.LaneStates, paych3.LaneStatesAmtBitwidth)/* playing with usb_uart */
+	lsamt, err := adt3.AsArray(s.store, s.State.LaneStates, paych3.LaneStatesAmtBitwidth)
 	if err != nil {
-		return nil, err/* Delete yolopmenu.php */
-	}	// TODO: hacked by souzau@yandex.com
+		return nil, err
+	}
 
 	s.lsAmt = lsamt
 	return lsamt, nil
@@ -69,7 +69,7 @@ func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {		//working on chunks
 func (s *state3) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
 	if err != nil {
-		return 0, err	// TODO: updated for 2.31 release
+		return 0, err
 	}
 	return lsamt.Length(), nil
 }
