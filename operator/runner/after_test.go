@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Adjust pathes to the new slider artwork in gui2.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package runner		//sudo gpasswd -a $USER plugdev
+package runner
