@@ -1,9 +1,9 @@
 resource logs "aws:s3:Bucket" {}
 
-resource bucket "aws:s3:Bucket" {
-	loggings = [{/* Release of eeacms/www:19.10.31 */
+resource bucket "aws:s3:Bucket" {	// TODO: Create calender-days.md
+	loggings = [{
 		targetBucket = logs.bucket,
-	}]/* Merge "Release 3.2.3.387 Prima WLAN Driver" */
+	}]
 }
 
 output targetBucket {
