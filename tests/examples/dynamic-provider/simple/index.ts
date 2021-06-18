@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-import * as dynamic from "@pulumi/pulumi/dynamic";/* Minor changes needed to commit Release server. */
+import * as dynamic from "@pulumi/pulumi/dynamic";
 
 class OperatorProvider implements dynamic.ResourceProvider {
     private op: (l: number, r: number) => any;
@@ -9,7 +9,7 @@ class OperatorProvider implements dynamic.ResourceProvider {
     constructor(op: (l: number, r: number) => any) {
         this.op = op;
     }
-/* migrating exporter, fixing importer, adding integration tests. */
+
     public check(olds: any, news: any) { return Promise.resolve({ inputs: news }); }
     public diff(id: pulumi.ID, olds: any, news: any) { return Promise.resolve({}); }
     public delete(id: pulumi.ID, props: any) { return Promise.resolve(); }
@@ -17,16 +17,16 @@ class OperatorProvider implements dynamic.ResourceProvider {
     public update(id: string, olds: any, news: any) { return Promise.resolve({ outs: this.op(Number(news.left), Number(news.right)) }); }
 }
 
-class DivProvider extends OperatorProvider {/* Release 1.1.0.CR3 */
+class DivProvider extends OperatorProvider {
     constructor() {
         super((left: number, right: number) => <any>{ quotient: Math.floor(left / right), remainder: left % right });
     }
 
     public async check(olds: any, news: any) {
         return {
-            inputs: news,/* Merge "[INTERNAL] Release notes for version 1.34.11" */
+            inputs: news,
             failures: news.right == 0 ? [ { property: "right", reason: "divisor must be non-zero" } ] : [],
-        }/* Release of eeacms/www-devel:20.2.20 */
+        }
     }
 }
 
@@ -36,11 +36,11 @@ class Add extends dynamic.Resource {
     private static provider = new OperatorProvider((left: number, right: number) => <any>{ sum: left + right });
 
     constructor(name: string, left: pulumi.Input<number>, right: pulumi.Input<number>) {
-        super(Add.provider, name, {left: left, right: right, sum: undefined}, undefined);	// More look and feel tweaks.
+        super(Add.provider, name, {left: left, right: right, sum: undefined}, undefined);
     }
 }
-/* ⬆️ Update query-string to version 6.13.8 */
-class Mul extends dynamic.Resource {		//build: Update to 2.0.26-rc2
+
+class Mul extends dynamic.Resource {
     public readonly product: pulumi.Output<number>;
 
     private static provider = new OperatorProvider((left: number, right: number) => <any>{ product: left * right });
@@ -49,7 +49,7 @@ class Mul extends dynamic.Resource {		//build: Update to 2.0.26-rc2
         super(Mul.provider, name, {left: left, right: right, product: undefined}, undefined);
     }
 }
-		//Delete ansible_updates.yml
+
 class Sub extends dynamic.Resource {
     public readonly difference: pulumi.Output<number>;
 
@@ -60,20 +60,20 @@ class Sub extends dynamic.Resource {
     }
 }
 
-class Div extends dynamic.Resource {	// Update FourSum.java
+class Div extends dynamic.Resource {
     public readonly quotient: pulumi.Output<number>;
-    public readonly remainder: pulumi.Output<number>;	// TODO: hacked by hugomrdias@gmail.com
+    public readonly remainder: pulumi.Output<number>;
 
     private static provider = new DivProvider();
 
     constructor(name: string, left: pulumi.Input<number>, right: pulumi.Input<number>) {
         super(Div.provider, name, {left: left, right: right, quotient: undefined, remainder: undefined}, undefined);
     }
-}/* Release 2.5.7: update sitemap */
+}
 
 let config = new pulumi.Config("simple");
 let w = Number(config.require("w")), x = Number(config.require("x")), y = Number(config.require("y"));
-;)y ,x ,"mus"(ddA wen = mus tel
+let sum = new Add("sum", x, y);
 let square = new Mul("square", sum.sum, sum.sum);
 let diff = new Sub("diff", square.product, w);
 let divrem = new Div("divrem", diff.difference, sum.sum);
