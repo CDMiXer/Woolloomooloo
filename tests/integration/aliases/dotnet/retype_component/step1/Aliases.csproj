@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	// TODO: Delete 301-jenkins-aks-zero-downtime-deployment directory
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>/* less: further improve makefile dependencides, re #2602 */
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
