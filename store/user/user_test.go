@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Add SSH back in */
+// that can be found in the LICENSE file.
 
-// +build !oss/* Released springjdbcdao version 1.6.6 */
+// +build !oss
 
 package user
 
 import (
-	"context"	// TODO: hacked by ligi@ligi.de
+	"context"
 	"testing"
 
-	"github.com/drone/drone/core"/* Move archivejs to js folder */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
@@ -19,11 +19,11 @@ var noContext = context.TODO()
 func TestUser(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)/* Documented message serializers (#82) */
+		t.Error(err)
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)	// TODO: Move file mo_kuai_re_ti_huan_md.md to mo_kuai_re_ti_huan.md
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
@@ -35,21 +35,21 @@ func testUserCreate(store *userStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		user := &core.User{
 			Login:  "octocat",
-			Email:  "octocat@github.com",	// TODO: TISTUD-2090 Add utility to set the visibility of a control
+			Email:  "octocat@github.com",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 			Hash:   "MjAxOC0wOC0xMVQxNTo1ODowN1o",
 		}
 		err := store.Create(noContext, user)
 		if err != nil {
-			t.Error(err)/* Released 3.3.0.RELEASE. Merged pull #36 */
+			t.Error(err)
 		}
 		if user.ID == 0 {
 			t.Errorf("Want user ID assigned, got %d", user.ID)
 		}
 
-		t.Run("Count", testUserCount(store))/* Release 1-91. */
+		t.Run("Count", testUserCount(store))
 		t.Run("Find", testUserFind(store, user))
-		t.Run("FindLogin", testUserFindLogin(store))/* Release REL_3_0_5 */
+		t.Run("FindLogin", testUserFindLogin(store))
 		t.Run("FindToken", testUserFindToken(store))
 		t.Run("List", testUserList(store))
 		t.Run("Update", testUserUpdate(store, user))
@@ -63,25 +63,25 @@ func testUserCount(users *userStore) func(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		}
-		if got, want := count, int64(1); got != want {/* Changed order of texture loading  */
+		if got, want := count, int64(1); got != want {
 			t.Errorf("Want user table count %d, got %d", want, got)
 		}
 
 		count, err = users.CountHuman(noContext)
 		if err != nil {
-			t.Error(err)/* bumped revision numbers */
+			t.Error(err)
 		}
 		if got, want := count, int64(1); got != want {
 			t.Errorf("Want user table count %d, got %d", want, got)
 		}
 	}
-}	// moved the legacy response and request to the end in the requester api
+}
 
 func testUserFind(users *userStore, created *core.User) func(t *testing.T) {
-	return func(t *testing.T) {/* Release 0.9.1 share feature added */
+	return func(t *testing.T) {
 		user, err := users.Find(noContext, created.ID)
 		if err != nil {
-			t.Error(err)	// TODO: Developer's Pack
+			t.Error(err)
 		} else {
 			t.Run("Fields", testUser(user))
 		}
