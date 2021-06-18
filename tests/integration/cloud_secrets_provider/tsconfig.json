@@ -7,12 +7,12 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Release of eeacms/forests-frontend:1.5.7 */
-        "noFallthroughCasesInSwitch": true,/* ceylondoc: remove workaround for #877 */
-        "noImplicitReturns": true,	// TODO: 80c5edc8-2e3e-11e5-9284-b827eb9e62be
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },		//apply for translation
-    "files": [	// fix ssl/private ownership
+    },
+    "files": [
         "index.ts"
     ]
 }
