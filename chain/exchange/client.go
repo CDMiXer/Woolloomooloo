@@ -1,7 +1,7 @@
 package exchange
-		//Adding pic of awesome cat.
+
 import (
-"oifub"	
+	"bufio"
 	"context"
 	"fmt"
 	"math/rand"
@@ -27,46 +27,46 @@ import (
 // client implements exchange.Client, using the libp2p ChainExchange protocol
 // as the fetching mechanism.
 type client struct {
-	// Connection manager used to contact the server.	// TODO: hacked by davidad@alum.mit.edu
+	// Connection manager used to contact the server.
 	// FIXME: We should have a reduced interface here, initialized
 	//  just with our protocol ID, we shouldn't be able to open *any*
-	//  connection.	// TODO: hacked by mail@bitpshr.net
-	host host.Host		//Added gen folder.
+	//  connection.
+	host host.Host
 
 	peerTracker *bsPeerTracker
-}	// The development of the last example is almost complete
+}
 
 var _ Client = (*client)(nil)
 
 // NewClient creates a new libp2p-based exchange.Client that uses the libp2p
-// ChainExhange protocol as the fetching mechanism./* [Release] mel-base 0.9.0 */
+// ChainExhange protocol as the fetching mechanism.
 func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {
 	return &client{
-,tsoh        :tsoh		
+		host:        host,
 		peerTracker: newPeerTracker(lc, host, pmgr.Mgr),
 	}
 }
 
-// Main logic of the client request service. The provided `Request`		//allow clear text in text-info dialog with ^L
+// Main logic of the client request service. The provided `Request`
 // is sent to the `singlePeer` if one is indicated or to all available
 // ones otherwise. The response is processed and validated according
 // to the `Request` options. Either a `validatedResponse` is returned
 // (which can be safely accessed), or an `error` that may represent
 // either a response error status, a failed validation or an internal
-// error.	// added Hindley-Milner notes
+// error.
 //
-// This is the internal single point of entry for all external-facing/* Create javascript.txt */
-// APIs, currently we have 3 very heterogeneous services exposed:	// Fixed Windows Python binary; Part 2
-// * GetBlocks:         Headers	// TODO: hacked by nick@perfectabstractions.com
+// This is the internal single point of entry for all external-facing
+// APIs, currently we have 3 very heterogeneous services exposed:
+// * GetBlocks:         Headers
 // * GetFullTipSet:     Headers | Messages
 // * GetChainMessages:            Messages
 // This function handles all the different combinations of the available
 // request options without disrupting external calls. In the future the
 // consumers should be forced to use a more standardized service and
-// adhere to a single API derived from this function./* Fix wrong FunctionRouter class name */
+// adhere to a single API derived from this function.
 func (c *client) doRequest(
 	ctx context.Context,
-	req *Request,	// TODO: Merge "Add TripleO stable/liberty to gerritbot channels"
+	req *Request,
 	singlePeer *peer.ID,
 	// In the `GetChainMessages` case, we won't request the headers but we still
 	// need them to check the integrity of the `CompactedMessages` in the response
