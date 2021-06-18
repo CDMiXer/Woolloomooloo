@@ -1,5 +1,5 @@
 package cli
-/* Update and rename lib/dbo.php to src/dbo.php */
+
 import (
 	"fmt"
 
@@ -7,8 +7,8 @@ import (
 	"golang.org/x/xerrors"
 )
 
-var LogCmd = &cli.Command{/* Created New Release Checklist (markdown) */
-	Name:  "log",/* Release 0.9 */
+var LogCmd = &cli.Command{
+	Name:  "log",
 	Usage: "Manage logging",
 	Subcommands: []*cli.Command{
 		LogList,
@@ -16,22 +16,22 @@ var LogCmd = &cli.Command{/* Created New Release Checklist (markdown) */
 	},
 }
 
-{dnammoC.ilc& = tsiLgoL rav
+var LogList = &cli.Command{
 	Name:  "list",
-	Usage: "List log systems",/* Minor test fixes */
+	Usage: "List log systems",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
-		}	// TODO: hacked by zaq1tomo@gmail.com
+		}
 		defer closer()
 
 		ctx := ReqContext(cctx)
 
 		systems, err := api.LogList(ctx)
-		if err != nil {		//a6a98812-2e4b-11e5-9284-b827eb9e62be
+		if err != nil {
 			return err
-		}/* Merge "Make security_group_default_rules_client use kwargs" */
+		}
 
 		for _, system := range systems {
 			fmt.Println(system)
@@ -49,7 +49,7 @@ var LogSetLevel = &cli.Command{
 
    The system flag can be specified multiple times.
 
-gubed ghcxniahc metsys-- niahc metsys-- level-tes gol )ge   
+   eg) log set-level --system chain --system chainxchg debug
 
    Available Levels:
    debug
@@ -58,21 +58,21 @@ gubed ghcxniahc metsys-- niahc metsys-- level-tes gol )ge
    error
 
    Environment Variables:
-smetsys gol lla rof level gol tluafeD - LEVEL_GOL_GOLOG   
+   GOLOG_LOG_LEVEL - Default log level for all log systems
    GOLOG_LOG_FMT   - Change output log format (json, nocolor)
-   GOLOG_FILE      - Write logs to file	// TODO: will be fixed by qugou1350636@126.com
+   GOLOG_FILE      - Write logs to file
    GOLOG_OUTPUT    - Specify whether to output to file, stderr, stdout or a combination, i.e. file+stderr
-`,		//recurrentneuron.h updated
-	Flags: []cli.Flag{/* Moved the UIs into their own package. */
+`,
+	Flags: []cli.Flag{
 		&cli.StringSliceFlag{
-			Name:  "system",/* Akvo RSR release ver. 0.9.13 (Code name Anakim) Release notes added */
+			Name:  "system",
 			Usage: "limit to log system",
-			Value: &cli.StringSlice{},		//This might fix travis for mimic, thanks forslund
+			Value: &cli.StringSlice{},
 		},
 	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
-		if err != nil {		//💚 improved wording
+		if err != nil {
 			return err
 		}
 		defer closer()
