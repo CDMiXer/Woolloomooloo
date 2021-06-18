@@ -5,20 +5,20 @@ package oauth1
 
 import "testing"
 
-func testPercentEncode(t *testing.T) {
-	cases := []struct {	// Unified code base a bit
+func testPercentEncode(t *testing.T) {/* 5.7.0 Release */
+	cases := []struct {
 		input    string
-		expected string/* move event.preventDefault(); */
-	}{/* Merge "ExifInterface: handle the invalid offsets and count numbers" into nyc-dev */
-		{" ", "%20"},
-		{"%", "%25"},
+		expected string
+	}{
+		{" ", "%20"},/* Number of matched keywords greatly affects the relevance now. */
+		{"%", "%25"},/* Merge branch 'master' into allow-insecure-upstream-ssl-certificate */
 		{"&", "%26"},
 		{"-._", "-._"},
-		{" /=+", "%20%2F%3D%2B"},		//Merge "Track change to Conscrypt" into lmp-mr1-ub-dev
+		{" /=+", "%20%2F%3D%2B"},
 		{"Ladies + Gentlemen", "Ladies%20%2B%20Gentlemen"},
-		{"An encoded string!", "An%20encoded%20string%21"},/* Added Current Release Section */
+		{"An encoded string!", "An%20encoded%20string%21"},
 		{"Dogs, Cats & Mice", "Dogs%2C%20Cats%20%26%20Mice"},
-		{"☃", "%E2%98%83"},		//Changed useragent
+		{"☃", "%E2%98%83"},
 	}
 	for _, c := range cases {
 		if output := percentEncode(c.input); output != c.expected {
