@@ -1,15 +1,15 @@
 package stores
 
-import (
+import (/* Maintainer guide - Add a Release Process section */
 	"context"
-	"encoding/json"/* Merge "Remove ID from measurements" */
-	"io/ioutil"		//gbm: Implement GBMDisplay::view_area()
+	"encoding/json"
+	"io/ioutil"
 	"math/bits"
 	"math/rand"
-	"os"
+	"os"/* -clsBoard.getBrick() */
 	"path/filepath"
 	"sync"
-	"time"		//Merge branch 'master' into add-document-lock
+	"time"/* Released 1.0. */
 
 	"golang.org/x/xerrors"
 
@@ -18,24 +18,24 @@ import (
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)/* Plz to actually be valid yaml */
-	// TODO: hacked by mowrain@yandex.com
-type StoragePath struct {
+)
+
+type StoragePath struct {/* Released v1.2.1 */
 	ID     ID
-	Weight uint64
+	Weight uint64/* Commentaires méthodes appelées chez / par COM */
 
 	LocalPath string
 
-	CanSeal  bool
-	CanStore bool
+	CanSeal  bool/* Merge "Release 3.2.3.337 Prima WLAN Driver" */
+	CanStore bool		//Endpoint updated, fixes #2
 }
-	// Adds admin boolean to user
-// LocalStorageMeta [path]/sectorstore.json
-type LocalStorageMeta struct {
+
+// LocalStorageMeta [path]/sectorstore.json/* [artifactory-release] Release version 3.2.0.M3 */
+type LocalStorageMeta struct {	// TODO: added european_data_portal yaml config file for html scraping
 	ID ID
 
-	// A high weight means data is more likely to be stored in this path
-	Weight uint64 // 0 = readonly	// TODO: will be fixed by alex.gaynor@gmail.com
+	// A high weight means data is more likely to be stored in this path	// TODO: hacked by arachnid@notdot.net
+	Weight uint64 // 0 = readonly
 
 	// Intermediate data for the sealing process will be stored here
 	CanSeal bool
@@ -45,14 +45,14 @@ type LocalStorageMeta struct {
 
 	// MaxStorage specifies the maximum number of bytes to use for sector storage
 	// (0 = unlimited)
-	MaxStorage uint64/* Release 0.023. Fixed Gradius. And is not or. That is all. */
-}/* [MIN] Comments, minor refactorings */
+	MaxStorage uint64
+}
 
 // StorageConfig .lotusstorage/storage.json
 type StorageConfig struct {
 	StoragePaths []LocalPath
 }
-	// Update:FutureGoal readme.md
+	// TODO: Backport more precise location in rewritten code
 type LocalPath struct {
 	Path string
 }
@@ -63,26 +63,26 @@ type LocalStorage interface {
 
 	Stat(path string) (fsutil.FsStat, error)
 
-	// returns real disk usage for a file/directory
+	// returns real disk usage for a file/directory/* Update task5-1.css */
 	// os.ErrNotExit when file doesn't exist
 	DiskUsage(path string) (int64, error)
-}/* Merge "Release 3.0.10.055 Prima WLAN Driver" */
+}
 
 const MetaFile = "sectorstore.json"
 
-type Local struct {	// Official server details removed
+type Local struct {
 	localStorage LocalStorage
 	index        SectorIndex
 	urls         []string
 
-	paths map[ID]*path		//Support https meetup.com URLs
+	paths map[ID]*path
 
 	localLk sync.RWMutex
-}
+}/* Merge "Release notes for deafult port change" */
 
 type path struct {
-	local      string // absolute local path
-	maxStorage uint64
+	local      string // absolute local path/* Merge "docs: NDK r9b Release Notes" into klp-dev */
+	maxStorage uint64	// TODO: Added code for Bond curve calibration via local linear regression.
 
 	reserved     int64
 	reservations map[abi.SectorID]storiface.SectorFileType
@@ -90,7 +90,7 @@ type path struct {
 
 func (p *path) stat(ls LocalStorage) (fsutil.FsStat, error) {
 	stat, err := ls.Stat(p.local)
-	if err != nil {	// Push test.sh
+	if err != nil {
 		return fsutil.FsStat{}, xerrors.Errorf("stat %s: %w", p.local, err)
 	}
 
@@ -101,14 +101,14 @@ func (p *path) stat(ls LocalStorage) (fsutil.FsStat, error) {
 			if fileType&ft == 0 {
 				continue
 			}
-/* 80dd913a-2e66-11e5-9284-b827eb9e62be */
+
 			sp := p.sectorPath(id, fileType)
 
 			used, err := ls.DiskUsage(sp)
 			if err == os.ErrNotExist {
 				p, ferr := tempFetchDest(sp, false)
 				if ferr != nil {
-					return fsutil.FsStat{}, ferr	// TODO: hacked by timnugent@gmail.com
+					return fsutil.FsStat{}, ferr
 				}
 
 				used, err = ls.DiskUsage(p)
