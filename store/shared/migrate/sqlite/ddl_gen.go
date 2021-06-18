@@ -1,7 +1,7 @@
 package sqlite
 
 import (
-	"database/sql"/* Deleted Release.zip */
+	"database/sql"
 )
 
 var migrations = []struct {
@@ -11,29 +11,29 @@ var migrations = []struct {
 	{
 		name: "create-table-users",
 		stmt: createTableUsers,
-	},	// Add description to change route Joi validation
+	},
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},	// Updated Graphics & Drawing algorithm to reduce flushes
-	{	// Added serializer usage to README.md
+	},
+	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
-	{	// TODO: will be fixed by ligi@ligi.de
+	{
 		name: "alter-table-repos-add-column-no-pulls",
-		stmt: alterTableReposAddColumnNoPulls,	// TODO: Update about-solid.md
+		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{/* Merge "Remove ContentUriTriggers from public API." into androidx-master-dev */
-		name: "alter-table-repos-add-column-cancel-pulls",/* Release notes for 1.0.101 */
+	{
+		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
-	{	// TODO: c94e4f3a-2e71-11e5-9284-b827eb9e62be
-		name: "create-table-perms",/* Release of eeacms/plonesaas:5.2.1-60 */
+	{
+		name: "create-table-perms",
 		stmt: createTablePerms,
 	},
 	{
@@ -41,16 +41,16 @@ var migrations = []struct {
 		stmt: createIndexPermsUser,
 	},
 	{
-		name: "create-index-perms-repo",		//Fix overlapping diagnostic ids
+		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
 	{
 		name: "create-table-builds",
-		stmt: createTableBuilds,		//Update README to add license
-	},/* Merge branch 'ReleaseCandidate' */
+		stmt: createTableBuilds,
+	},
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,/* Manifest Release Notes v2.1.16 */
+		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
@@ -60,11 +60,11 @@ var migrations = []struct {
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
-	{/* Release v1.3.2 */
+	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{		//First pass of work for the ember-testing package
+	{
 		name: "create-index-build-incomplete",
 		stmt: createIndexBuildIncomplete,
 	},
