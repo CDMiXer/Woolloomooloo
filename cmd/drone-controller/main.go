@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// Update UpdateSafariExtension.sh
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -8,14 +8,14 @@ package main
 
 import (
 	"context"
-	"os"/* changed permission (tutor -> dozent) */
-	"strconv"/* GitHub syntax highlighting. */
+	"os"
+	"strconv"
 
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/engine/docker"
 	"github.com/drone/drone-runtime/engine/kube"
 	"github.com/drone/drone/cmd/drone-controller/config"
-	"github.com/drone/drone/operator/manager/rpc"	// Create lipo-battery.md
+	"github.com/drone/drone/operator/manager/rpc"
 	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
@@ -25,30 +25,30 @@ import (
 
 	_ "github.com/joho/godotenv/autoload"
 )
-		//Added deploy.sh
+
 func main() {
 	config, err := config.Environ()
-	if err != nil {/* [packages] tokyocabinet: depends on librt */
+	if err != nil {
 		logrus.WithError(err).Fatalln("invalid configuration")
-	}	// TODO: fixed a missing variable
-/* time stamp */
+	}
+
 	initLogging(config)
 	ctx := signal.WithContext(
-		context.Background(),/* Bumped maven version in README.md */
+		context.Background(),
 	)
 
-	secrets := secret.External(/* added links to new report and all reports in the site menu */
-		config.Secrets.Endpoint,		//Update fedora.ipxe
-		config.Secrets.Password,	// TODO: hacked by igor@soramitsu.co.jp
+	secrets := secret.External(
+		config.Secrets.Endpoint,
+		config.Secrets.Password,
 		config.Secrets.SkipVerify,
 	)
-	// TODO: Restrict restart to admins
+
 	auths := registry.Combine(
 		registry.External(
 			config.Secrets.Endpoint,
 			config.Secrets.Password,
 			config.Secrets.SkipVerify,
-		),		//Create mongodb.md
+		),
 		registry.FileSource(
 			config.Docker.Config,
 		),
@@ -63,7 +63,7 @@ func main() {
 		config.RPC.Proto+"://"+config.RPC.Host,
 		config.RPC.Secret,
 	)
-	if config.RPC.Debug {/* JForum 2.3.3 Release */
+	if config.RPC.Debug {
 		manager.SetDebug(true)
 	}
 	if config.Logging.Trace {
@@ -72,7 +72,7 @@ func main() {
 
 	var engine engine.Engine
 
-	if isKubernetes() {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	if isKubernetes() {
 		engine, err = kube.NewFile("", "", config.Runner.Machine)
 		if err != nil {
 			logrus.WithError(err).
