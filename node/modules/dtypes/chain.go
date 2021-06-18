@@ -1,4 +1,4 @@
-package dtypes/* Release for 24.5.0 */
+package dtypes
 
 type NetworkName string
 type AfterGenesisSet struct{}
