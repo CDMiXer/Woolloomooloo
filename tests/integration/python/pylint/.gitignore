@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info
+/*.egg-info	// TODO: d735a822-2e40-11e5-9284-b827eb9e62be
 venv/
