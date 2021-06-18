@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.		//Added some videos and links
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build dotnet all
 
 package ints
@@ -7,23 +7,23 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// TODO: Preserve full stop only if it exists to begin with
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-var dirs = []string{/* Add Estonian translations */
-	"rename",/* address some review points */
+var dirs = []string{
+	"rename",
 	"adopt_into_component",
 	"rename_component_and_child",
 	"retype_component",
 	"rename_component",
 }
-/* Release '0.2~ppa2~loms~lucid'. */
-func TestDotNetAliases(t *testing.T) {	// TODO: made neogeo card an image device (nw)
+
+func TestDotNetAliases(t *testing.T) {
 	for _, dir := range dirs {
 		d := filepath.Join("dotnet", dir)
-		t.Run(d, func(t *testing.T) {		//source test stamp/isComposable
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir:          filepath.Join(d, "step1"),/* use selectize for admin privileges */
+				Dir:          filepath.Join(d, "step1"),
 				Dependencies: []string{"Pulumi"},
 				Quick:        true,
 				EditDirs: []integration.EditDir{
@@ -34,6 +34,6 @@ func TestDotNetAliases(t *testing.T) {	// TODO: made neogeo card an image device
 					},
 				},
 			})
-		})	// TODO: Sonar conventions
+		})
 	}
-}/* cb57bdec-2e72-11e5-9284-b827eb9e62be */
+}
