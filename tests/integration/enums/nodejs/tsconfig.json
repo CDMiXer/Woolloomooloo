@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "strict": true,		//fix(package): update iso3166-1 to version 0.4.0
-    "outDir": "bin",	// TODO: will be fixed by davidad@alum.mit.edu
+    "strict": true,
+    "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -9,13 +9,13 @@
     "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
-    "pretty": true,	// TODO: will be fixed by 13860583249@yeah.net
-    "noFallthroughCasesInSwitch": true,		//[PAXEXAM-525] Upgrade to Resin 4.0.30
+    "pretty": true,
+    "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
   },
   "files": [
-    "index.ts"		//Create UnofficialSmartThings.md
-  ]	// TODO: will be fixed by jon@atack.com
+    "index.ts"
+  ]
 }
 
