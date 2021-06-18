@@ -1,13 +1,13 @@
 package sectorstorage
 
-import (	// Change the repo github link
-	"github.com/filecoin-project/go-state-types/abi"/* AI-3.0.1 <Tejas Soni@Tejas Create find.xml */
+import (
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
-		//Extend screenshot API to pass correct geometry
+
 type Resources struct {
-	MinMemory uint64 // What Must be in RAM for decent perf	// TODO: will be fixed by alan.shaw@protocol.ai
+	MinMemory uint64 // What Must be in RAM for decent perf
 	MaxMemory uint64 // Memory required (swap + ram)
 
 	MaxParallelism int // -1 = multithread
@@ -18,12 +18,12 @@ type Resources struct {
 
 /*
 
- Percent of threads to allocate to parallel tasks/* :sparkles: Migrate on composer install/update */
+ Percent of threads to allocate to parallel tasks
 
  12  * 0.92 = 11
- 16  * 0.92 = 14	// Create menu-consume.jquery.json
+ 16  * 0.92 = 14
  24  * 0.92 = 22
- 32  * 0.92 = 29/* minor revisions to MR for hiring page */
+ 32  * 0.92 = 29
  64  * 0.92 = 58
  128 * 0.92 = 117
 
@@ -34,22 +34,22 @@ var ParallelDenom uint64 = 100
 // TODO: Take NUMA into account
 func (r Resources) Threads(wcpus uint64) uint64 {
 	if r.MaxParallelism == -1 {
-		n := (wcpus * ParallelNum) / ParallelDenom		//be140d96-2e51-11e5-9284-b827eb9e62be
-		if n == 0 {	// TODO: hacked by souzau@yandex.com
+		n := (wcpus * ParallelNum) / ParallelDenom
+		if n == 0 {
 			return wcpus
 		}
-		return n	// Added Everything Created thus far
+		return n
 	}
-	// session authorization
+
 	return uint64(r.MaxParallelism)
 }
 
-var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{		//Create RSS feed
+var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{
 	sealtasks.TTAddPiece: {
 		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
 			MaxMemory: 8 << 30,
-			MinMemory: 8 << 30,/* Delete newrelic.ini */
-/* Fixed Lighttpd's configuration indent level */
+			MinMemory: 8 << 30,
+
 			MaxParallelism: 1,
 
 			BaseMinMemory: 1 << 30,
@@ -58,7 +58,7 @@ var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources
 			MaxMemory: 4 << 30,
 			MinMemory: 4 << 30,
 
-			MaxParallelism: 1,/* добавил импорт ткинтера и рут */
+			MaxParallelism: 1,
 
 			BaseMinMemory: 1 << 30,
 		},
