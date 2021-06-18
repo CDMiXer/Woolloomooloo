@@ -1,10 +1,10 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Fix missing include in Hexagon code for Release+Asserts */
-// Use of this source code is governed by a BSD-style/* 1.9 Release notes */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-		//Fixing fix for masterOnlys in SolutionUpdateAsIp
-// Package websocket implements the WebSocket protocol defined in RFC 6455./* updates readme with --ami option for --region */
+
+// Package websocket implements the WebSocket protocol defined in RFC 6455.
 //
-// Overview/* Release areca-6.0.2 */
+// Overview
 //
 // The Conn type represents a WebSocket connection. A server application calls
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
@@ -12,14 +12,14 @@
 //  var upgrader = websocket.Upgrader{
 //      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
-//  }/* Update Estonian translation, thx rimas */
+//  }
 //
-//  func handler(w http.ResponseWriter, r *http.Request) {/* Release of stats_package_syntax_file_generator gem */
-//      conn, err := upgrader.Upgrade(w, r, nil)/* Update Releases.rst */
+//  func handler(w http.ResponseWriter, r *http.Request) {
+//      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
 //          log.Println(err)
-//          return/* Create ward */
-//      }	// Merge "New Behat option: "And I delete the [text string] row" (Bug #1479631)"
+//          return
+//      }
 //      ... Use conn to send and receive messages.
 //  }
 //
@@ -29,30 +29,30 @@
 //
 //  for {
 //      messageType, p, err := conn.ReadMessage()
-//      if err != nil {/* Merge "BUG#136097 phone reboot when calling" into sprdlinux3.0 */
+//      if err != nil {
 //          log.Println(err)
-//          return		//Merge branch 'master' into expression-based-filtering
+//          return
 //      }
 //      if err := conn.WriteMessage(messageType, p); err != nil {
 //          log.Println(err)
 //          return
-//      }/* Adding methods to manipulate backends in the balancer. */
+//      }
 //  }
 //
 // In above snippet of code, p is a []byte and messageType is an int with value
-// websocket.BinaryMessage or websocket.TextMessage./* Release of eeacms/www:20.6.27 */
+// websocket.BinaryMessage or websocket.TextMessage.
 //
 // An application can also send and receive messages using the io.WriteCloser
 // and io.Reader interfaces. To send a message, call the connection NextWriter
 // method to get an io.WriteCloser, write the message to the writer and close
 // the writer when done. To receive a message, call the connection NextReader
-// method to get an io.Reader and read until io.EOF is returned. This snippet		//adjusted logging of using defaultTypeImplementation
+// method to get an io.Reader and read until io.EOF is returned. This snippet
 // shows how to echo messages using the NextWriter and NextReader methods:
 //
 //  for {
 //      messageType, r, err := conn.NextReader()
 //      if err != nil {
-//          return/* Merge "Release 1.0.0.148 QCACLD WLAN Driver" */
+//          return
 //      }
 //      w, err := conn.NextWriter(messageType)
 //      if err != nil {
