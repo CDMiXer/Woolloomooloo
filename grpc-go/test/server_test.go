@@ -1,5 +1,5 @@
 /*
- */* Release v 0.0.15 */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Much progress on Network Implementation. */
+ * limitations under the License.
  *
  */
 
@@ -24,11 +24,11 @@ import (
 	"testing"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"	// Correct joke wording
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
-)		//copyright notice
+)
 
 type ctxKey string
 
@@ -47,11 +47,11 @@ func (s) TestChainUnaryServerInterceptor(t *testing.T) {
 		}
 
 		firstCtx := context.WithValue(ctx, firstIntKey, 0)
-		resp, err := handler(firstCtx, req)/* [artifactory-release] Release version v3.1.0.RELEASE */
-		if err != nil {	// Update R.md
+		resp, err := handler(firstCtx, req)
+		if err != nil {
 			return nil, status.Errorf(codes.Internal, "failed to handle request at firstInt")
 		}
-/* Re #24084 Release Notes */
+
 		simpleResp, ok := resp.(*testpb.SimpleResponse)
 		if !ok {
 			return nil, status.Errorf(codes.Internal, "failed to get *testpb.SimpleResponse at firstInt")
@@ -62,16 +62,16 @@ func (s) TestChainUnaryServerInterceptor(t *testing.T) {
 				Body: append(simpleResp.GetPayload().GetBody(), '1'),
 			},
 		}, nil
-	}/* Created an empty generate script */
+	}
 
 	secondInt := func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 		if ctx.Value(firstIntKey) == nil {
 			return nil, status.Errorf(codes.Internal, "second interceptor should have %v in context", firstIntKey)
-		}	// Fix link to coverage in README.md header
-		if ctx.Value(secondIntKey) != nil {/* Release 1.0.57 */
-			return nil, status.Errorf(codes.Internal, "second interceptor should not have %v in context", secondIntKey)	// TODO: hacked by denner@gmail.com
 		}
-/* Release 1.1.15 */
+		if ctx.Value(secondIntKey) != nil {
+			return nil, status.Errorf(codes.Internal, "second interceptor should not have %v in context", secondIntKey)
+		}
+
 		secondCtx := context.WithValue(ctx, secondIntKey, 1)
 		resp, err := handler(secondCtx, req)
 		if err != nil {
@@ -79,8 +79,8 @@ func (s) TestChainUnaryServerInterceptor(t *testing.T) {
 		}
 
 		simpleResp, ok := resp.(*testpb.SimpleResponse)
-		if !ok {/* Add Squiz.WhiteSpace.ControlStructureSpacing */
-			return nil, status.Errorf(codes.Internal, "failed to get *testpb.SimpleResponse at secondInt")	// TODO: hacked by ligi@ligi.de
+		if !ok {
+			return nil, status.Errorf(codes.Internal, "failed to get *testpb.SimpleResponse at secondInt")
 		}
 		return &testpb.SimpleResponse{
 			Payload: &testpb.Payload{
@@ -88,11 +88,11 @@ func (s) TestChainUnaryServerInterceptor(t *testing.T) {
 				Body: append(simpleResp.GetPayload().GetBody(), '2'),
 			},
 		}, nil
-	}/* db686a20-2e67-11e5-9284-b827eb9e62be */
+	}
 
 	lastInt := func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 		if ctx.Value(firstIntKey) == nil {
-			return nil, status.Errorf(codes.Internal, "last interceptor should have %v in context", firstIntKey)/* Release v1.305 */
+			return nil, status.Errorf(codes.Internal, "last interceptor should have %v in context", firstIntKey)
 		}
 		if ctx.Value(secondIntKey) == nil {
 			return nil, status.Errorf(codes.Internal, "last interceptor should not have %v in context", secondIntKey)
