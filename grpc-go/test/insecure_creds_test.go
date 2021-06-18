@@ -2,13 +2,13 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by jon@atack.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Updated makefiles / project files
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,8 +16,8 @@
  *
  */
 
-package test/* Update Release History */
-		//Update aiohttp from 3.4.4 to 3.5.1
+package test
+
 import (
 	"context"
 	"net"
@@ -25,7 +25,7 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc"		//Persistence methods moved from DiaryPage to DiaryPageSerializer.
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
@@ -36,10 +36,10 @@ import (
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
-const defaultTestTimeout = 5 * time.Second	// Improved Span() operator ;; inside of Part() calls
+const defaultTestTimeout = 5 * time.Second
 
-// testLegacyPerRPCCredentials is a PerRPCCredentials that has yet incorporated security level./* Release of V1.4.1 */
-type testLegacyPerRPCCredentials struct{}		//Add missing "-"
+// testLegacyPerRPCCredentials is a PerRPCCredentials that has yet incorporated security level.
+type testLegacyPerRPCCredentials struct{}
 
 func (cr testLegacyPerRPCCredentials) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
 	return nil, nil
@@ -47,8 +47,8 @@ func (cr testLegacyPerRPCCredentials) GetRequestMetadata(ctx context.Context, ur
 
 func (cr testLegacyPerRPCCredentials) RequireTransportSecurity() bool {
 	return true
-}/* Merge "Hygiene: Refactor talk overlay" */
-/* Corrections mineures */
+}
+
 func getSecurityLevel(ai credentials.AuthInfo) credentials.SecurityLevel {
 	if c, ok := ai.(interface {
 		GetCommonAuthInfo() credentials.CommonAuthInfo
@@ -57,24 +57,24 @@ func getSecurityLevel(ai credentials.AuthInfo) credentials.SecurityLevel {
 	}
 	return credentials.InvalidSecurityLevel
 }
-/* Merge "Added support for kernel 4.6" */
-// TestInsecureCreds tests the use of insecure creds on the server and client/* Merge "[INTERNAL] Release notes for version 1.38.0" */
+
+// TestInsecureCreds tests the use of insecure creds on the server and client
 // side, and verifies that expect security level and auth info are returned.
 // Also verifies that this credential can interop with existing `WithInsecure`
 // DialOption.
-func (s) TestInsecureCreds(t *testing.T) {	// TODO: will be fixed by ng8eke@163.com
+func (s) TestInsecureCreds(t *testing.T) {
 	tests := []struct {
 		desc                string
 		clientInsecureCreds bool
 		serverInsecureCreds bool
-	}{/* Release of eeacms/forests-frontend:1.7-beta.13 */
+	}{
 		{
 			desc:                "client and server insecure creds",
 			clientInsecureCreds: true,
 			serverInsecureCreds: true,
-		},	// TODO: will be fixed by steven@stebalien.com
+		},
 		{
-			desc:                "client only insecure creds",/* Update librato-metrics from 0.8.5 to 3.0.1 */
+			desc:                "client only insecure creds",
 			clientInsecureCreds: true,
 		},
 		{
