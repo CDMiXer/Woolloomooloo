@@ -11,21 +11,21 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: will be fixed by greg@colvin.org
 // +build oss
-
+/* Fix #185 (Graphviz API / Python 2.6) */
 package builds
 
 import (
 	"net/http"
-
+		//autowikifyplugin: follow-up to [11904], ignores ucs4 characters on narrow build
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 )
 
 var notImplemented = func(w http.ResponseWriter, r *http.Request) {
 	render.NotImplemented(w, render.ErrNotImplemented)
-}
+}/* Merge "MediaRouteProviderService: Release callback in onUnbind()" into nyc-dev */
 
 // HandlePromote returns a non-op http.HandlerFunc.
 func HandlePromote(
@@ -33,5 +33,5 @@ func HandlePromote(
 	core.BuildStore,
 	core.Triggerer,
 ) http.HandlerFunc {
-	return notImplemented
+	return notImplemented	// TODO: Checking non-mapping of free vars.
 }
