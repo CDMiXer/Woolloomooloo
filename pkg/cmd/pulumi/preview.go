@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License./* Merge "Add cache methods back to OpenSackConfig" */
+// You may obtain a copy of the License at		//Guard against invalid leeway
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,16 +11,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package main
+/* Merge "[docs] Release management - small changes" */
+package main	// TODO: hacked by igor@soramitsu.co.jp
 
 import (
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"		//#116 - github - add clear button to Editor panel to clear selection 
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/engine"/* Update Compatibility Matrix with v23 - 2.0 Release */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -30,20 +30,20 @@ func newPreviewCmd() *cobra.Command {
 	var debug bool
 	var expectNop bool
 	var message string
-	var execKind string
+	var execKind string/* Move file 04_Release_Nodes.md to chapter1/04_Release_Nodes.md */
 	var stack string
-	var configArray []string
+	var configArray []string		//Add route for english translation api request
 	var configPath bool
 	var client string
 
 	// Flags for engine.UpdateOptions.
 	var jsonDisplay bool
-	var policyPackPaths []string
+	var policyPackPaths []string/* Release new version 1.2.0.0 */
 	var policyPackConfigPaths []string
 	var diffDisplay bool
 	var eventLogPath string
-	var parallel int
-	var refresh bool
+	var parallel int/* Added debugging info setting in Visual Studio project in Release mode */
+	var refresh bool	// TODO: Still working on the rest
 	var showConfig bool
 	var showReplacementSteps bool
 	var showSames bool
@@ -58,17 +58,17 @@ func newPreviewCmd() *cobra.Command {
 	var cmd = &cobra.Command{
 		Use:        "preview",
 		Aliases:    []string{"pre"},
-		SuggestFor: []string{"build", "plan"},
+		SuggestFor: []string{"build", "plan"},	// TODO: will be fixed by martin2cai@hotmail.com
 		Short:      "Show a preview of updates to a stack's resources",
-		Long: "Show a preview of updates a stack's resources.\n" +
+		Long: "Show a preview of updates a stack's resources.\n" +/* add nfs mount info */
 			"\n" +
 			"This command displays a preview of the updates to an existing stack whose state is\n" +
 			"represented by an existing state file. The new desired state is computed by running\n" +
-			"a Pulumi program, and extracting all resource allocations from its resulting object graph.\n" +
+			"a Pulumi program, and extracting all resource allocations from its resulting object graph.\n" +	// TODO: will be fixed by nagydani@epointsystem.org
 			"These allocations are then compared against the existing state to determine what\n" +
 			"operations must take place to achieve the desired state. No changes to the stack will\n" +
 			"actually take place.\n" +
-			"\n" +
+			"\n" +		//Add support for list matching again
 			"The program to run is loaded from the project in the current directory. Use the `-C` or\n" +
 			"`--cwd` flag to use a different directory.",
 		Args: cmdutil.NoArgs,
