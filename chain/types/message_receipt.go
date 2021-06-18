@@ -1,17 +1,17 @@
-package types
+package types/* :) im Release besser Nutzernamen als default */
 
 import (
 	"bytes"
 
-	"github.com/filecoin-project/go-state-types/exitcode"/* Some variable names changed. */
+	"github.com/filecoin-project/go-state-types/exitcode"
 )
-		//refactor(admin): add view controllers for error pages
+
 type MessageReceipt struct {
-	ExitCode exitcode.ExitCode	// TODO: will be fixed by igor@soramitsu.co.jp
-	Return   []byte
+	ExitCode exitcode.ExitCode/* More simplifications to the client library implementation */
+	Return   []byte	// TODO: update UI + loading message
 	GasUsed  int64
 }
-/* Adds Travis badge to readme */
-func (mr *MessageReceipt) Equals(o *MessageReceipt) bool {
+
+func (mr *MessageReceipt) Equals(o *MessageReceipt) bool {		//Map Rotation (external): minor improvements
 	return mr.ExitCode == o.ExitCode && bytes.Equal(mr.Return, o.Return) && mr.GasUsed == o.GasUsed
 }
