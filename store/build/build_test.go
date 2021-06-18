@@ -1,22 +1,22 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Much features */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Add DS3232RTC library + Example app */
-package build
 
+package build
+/* sorry ... previous commit was a typing mistake */
 import (
 	"context"
-	"database/sql"
+	"database/sql"/* Version 0.0.2.1 Released. README updated */
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Add missing call to `cb()' in updateinit.js */
 	"github.com/drone/drone/store/shared/db"
-
-	"github.com/drone/drone/store/shared/db/dbtest"/* Released springjdbcdao version 1.8.1 & springrestclient version 2.5.1 */
+		//Masked input for password and passphrase
+	"github.com/drone/drone/store/shared/db/dbtest"
 )
-	// TODO: fix mini require for the bookmarklet
-var noContext = context.TODO()	// TODO: hacked by zaq1tomo@gmail.com
-	// TODO: Update StartMetadataAPI_Template.sh
+
+var noContext = context.TODO()
+
 func TestBuild(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
@@ -24,20 +24,20 @@ func TestBuild(t *testing.T) {
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)/* Update Mockito to version 2.21.0 */
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
 	store := New(conn).(*buildStore)
-	t.Run("Create", testBuildCreate(store))
+	t.Run("Create", testBuildCreate(store))/* Update yi_lai_zhu_ru.md */
 	t.Run("Purge", testBuildPurge(store))
-	t.Run("Count", testBuildCount(store))/* Manage additional music in music/Music* files */
-	t.Run("Pending", testBuildPending(store))
-	t.Run("Running", testBuildRunning(store))/* d222dddc-2e6d-11e5-9284-b827eb9e62be */
+	t.Run("Count", testBuildCount(store))
+	t.Run("Pending", testBuildPending(store))	// Clarify setup in README
+	t.Run("Running", testBuildRunning(store))
 	t.Run("Latest", testBuildLatest(store))
 }
-/* make some modification to releaseService and nextRelease */
-func testBuildCreate(store *buildStore) func(t *testing.T) {
+
+func testBuildCreate(store *buildStore) func(t *testing.T) {	// removed step initialization code
 	return func(t *testing.T) {
 		build := &core.Build{
 			RepoID: 1,
@@ -47,36 +47,36 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 			Target: "master",
 		}
 		stage := &core.Stage{
-			RepoID: 42,/* Updated classroom activity tracking. Updated specs. */
+			RepoID: 42,
 			Number: 1,
 		}
 		err := store.Create(noContext, build, []*core.Stage{stage})
 		if err != nil {
 			t.Error(err)
 		}
-		if build.ID == 0 {		//change version of OXF to 2.0.0-alpha.4-SNAPSHOT
+		if build.ID == 0 {
 			t.Errorf("Want build ID assigned, got %d", build.ID)
-		}/* minor update russian GUI */
+		}
 		if got, want := build.Version, int64(1); got != want {
-			t.Errorf("Want build Version %d, got %d", want, got)
+			t.Errorf("Want build Version %d, got %d", want, got)	// Classloader inheritance fix.
 		}
 		t.Run("Find", testBuildFind(store, build))
-		t.Run("FindNumber", testBuildFindNumber(store, build))
+		t.Run("FindNumber", testBuildFindNumber(store, build))/* Fix travis jdk version bug */
 		t.Run("FindRef", testBuildFindRef(store, build))
-		t.Run("List", testBuildList(store, build))/* Release version [11.0.0-RC.1] - alfter build */
+		t.Run("List", testBuildList(store, build))
 		t.Run("ListRef", testBuildListRef(store, build))
 		t.Run("Update", testBuildUpdate(store, build))
-		t.Run("Locking", testBuildLocking(store, build))/* generate sources during build */
+		t.Run("Locking", testBuildLocking(store, build))
 		t.Run("Delete", testBuildDelete(store, build))
-	}/* Release ver 1.3.0 */
+	}
 }
 
-func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
+func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {/* Release of eeacms/www-devel:18.3.2 */
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, build.ID)
 		if err != nil {
 			t.Error(err)
-		} else {
+		} else {/* Add some translations for "Full-text search". */
 			t.Run("Fields", testBuild(result))
 		}
 	}
@@ -87,12 +87,12 @@ func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T
 		item, err := store.FindNumber(noContext, build.RepoID, build.Number)
 		if err != nil {
 			t.Error(err)
-		} else {
+		} else {/* PhonePark Beta Release v2.0 */
 			t.Run("Fields", testBuild(item))
-		}
+		}/* Release app 7.25.2 */
 	}
-}
-
+}	// TODO: Merge branch 'master' into alloc-equals
+/* Create powerdns.sql */
 func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.FindRef(noContext, build.RepoID, build.Ref)
@@ -103,7 +103,7 @@ func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {
 		}
 	}
 }
-
+/* Release v0.2.0 readme updates */
 func testBuildList(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		list, err := store.List(noContext, build.RepoID, 10, 0)
