@@ -10,13 +10,13 @@
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,
+        "noImplicitAny": true,/* Content resolver queries can return null :( */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
-        "index.ts",
+        "index.ts",/* Update SeriiDeSec.html */
     ]
 }
 
