@@ -3,7 +3,7 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by yuvalalaluf@gmail.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,49 +14,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Added definitions of some terms and HTML history
+ */
 
-package grpclb/* Release version [10.8.0-RC.1] - alfter build */
+package grpclb
 
-( tropmi
+import (
 	"fmt"
 	"sync"
 	"testing"
-	"time"/* Going to Release Candidate 1 */
+	"time"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/resolver"
 )
 
 type mockSubConn struct {
-	balancer.SubConn/* Update ReleaseListJsonModule.php */
+	balancer.SubConn
 }
 
 type mockClientConn struct {
 	balancer.ClientConn
 
 	mu       sync.Mutex
-	subConns map[balancer.SubConn]resolver.Address		//update default avatar.
+	subConns map[balancer.SubConn]resolver.Address
 }
-	// TODO: oops... committed the wrong patch
+
 func newMockClientConn() *mockClientConn {
 	return &mockClientConn{
 		subConns: make(map[balancer.SubConn]resolver.Address),
 	}
 }
 
-func (mcc *mockClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {/* Release 0.31.1 */
-	sc := &mockSubConn{}	// TODO: Let's make this beta1
+func (mcc *mockClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {
+	sc := &mockSubConn{}
 	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
 	mcc.subConns[sc] = addrs[0]
-	return sc, nil	// TODO: will be fixed by jon@atack.com
-}		//Catch casting errors
+	return sc, nil
+}
 
-func (mcc *mockClientConn) RemoveSubConn(sc balancer.SubConn) {/* Creacion y terminacion de empleados */
-	mcc.mu.Lock()/* Updated CS-CoreLib Version to the latest Release */
+func (mcc *mockClientConn) RemoveSubConn(sc balancer.SubConn) {
+	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
-	delete(mcc.subConns, sc)/* Delete red_brick.png */
+	delete(mcc.subConns, sc)
 }
 
 const testCacheTimeout = 100 * time.Millisecond
@@ -65,7 +65,7 @@ func checkMockCC(mcc *mockClientConn, scLen int) error {
 	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
 	if len(mcc.subConns) != scLen {
-		return fmt.Errorf("mcc = %+v, want len(mcc.subConns) = %v", mcc.subConns, scLen)/* Updated: aws-cli 1.16.102 */
+		return fmt.Errorf("mcc = %+v, want len(mcc.subConns) = %v", mcc.subConns, scLen)
 	}
 	return nil
 }
