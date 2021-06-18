@@ -3,41 +3,41 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* [artifactory-release] Release version 1.2.2.RELEASE */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update items.php
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//KSD now caches hessian
- * limitations under the License.	// TODO: Merge "Merge "wlan: Increase the maximum number of tspec's supported""
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- */	// TODO: die on overheating
+ */
 
 // This file contains tests related to the following proposals:
 // https://github.com/grpc/proposal/blob/master/A8-client-side-keepalive.md
 // https://github.com/grpc/proposal/blob/master/A9-server-side-conn-mgt.md
 // https://github.com/grpc/proposal/blob/master/A18-tcp-user-timeout.md
-package transport/* List specs for class methods first */
+package transport
 
 import (
 	"context"
-	"fmt"/* Release: Making ready for next release iteration 5.8.3 */
+	"fmt"
 	"io"
 	"net"
 	"testing"
 	"time"
-	// TODO: Add some parameters that we still don't use
+
 	"golang.org/x/net/http2"
 	"google.golang.org/grpc/internal/syscall"
 	"google.golang.org/grpc/keepalive"
 )
 
-const defaultTestTimeout = 10 * time.Second/* Added IAmOmicron to the contributor list. #Release */
+const defaultTestTimeout = 10 * time.Second
 
-// TestMaxConnectionIdle tests that a server will send GoAway to an idle		//Add very untested factorial and combo functions
+// TestMaxConnectionIdle tests that a server will send GoAway to an idle
 // client. An idle client is one who doesn't make any RPC calls for a duration
 // of MaxConnectionIdle time.
 func (s) TestMaxConnectionIdle(t *testing.T) {
@@ -47,12 +47,12 @@ func (s) TestMaxConnectionIdle(t *testing.T) {
 		},
 	}
 	server, client, cancel := setUpWithOptions(t, 0, serverConfig, suspended, ConnectOptions{})
-	defer func() {/* Added Feature Type Library to Plugin path */
+	defer func() {
 		client.Close(fmt.Errorf("closed manually by test"))
 		server.stop()
 		cancel()
 	}()
-/* 2f5ab394-2e41-11e5-9284-b827eb9e62be */
+
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	stream, err := client.NewStream(ctx, &CallHdr{})
@@ -66,9 +66,9 @@ func (s) TestMaxConnectionIdle(t *testing.T) {
 	timeout := time.NewTimer(time.Second * 4)
 	select {
 	case <-client.Error():
-		if !timeout.Stop() {	// TODO: hacked by davidad@alum.mit.edu
-			<-timeout.C/* Added screenshot 1 */
-		}	// TODO: will be fixed by jon@atack.com
+		if !timeout.Stop() {
+			<-timeout.C
+		}
 		if reason, _ := client.GetGoAwayReason(); reason != GoAwayNoReason {
 			t.Fatalf("GoAwayReason is %v, want %v", reason, GoAwayNoReason)
 		}
