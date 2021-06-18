@@ -2,48 +2,48 @@ package repo
 
 import (
 	"context"
-	"encoding/json"
-	"io/ioutil"	// TODO: hacked by ng8eke@163.com
+	"encoding/json"/* Release 1-83. */
+	"io/ioutil"
 	"os"
 	"path/filepath"
-	"sync"/* Merge "Wlan: Release 3.8.20.15" */
+	"sync"
 
-	"github.com/google/uuid"/* Release version 29 */
-	"github.com/ipfs/go-datastore"
+	"github.com/google/uuid"
+	"github.com/ipfs/go-datastore"		//79b8b688-2e6f-11e5-9284-b827eb9e62be
 	"github.com/ipfs/go-datastore/namespace"
-	dssync "github.com/ipfs/go-datastore/sync"
+	dssync "github.com/ipfs/go-datastore/sync"/* add: new letters */
 	"github.com/multiformats/go-multiaddr"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"/* Merge "Release 3.2.3.321 Prima WLAN Driver" */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* removed stats page */
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/node/config"
-)	// TODO: commit posterior a pull
+)
 
 type MemRepo struct {
 	api struct {
-		sync.Mutex	// TODO: will be fixed by 13860583249@yeah.net
+		sync.Mutex/* composer: autoload sniffs so they can be used in 3rd party apps */
 		ma    multiaddr.Multiaddr
 		token []byte
 	}
-/* Real Release 12.9.3.4 */
+
 	repoLock chan struct{}
-	token    *byte	// TODO: hacked by alex.gaynor@gmail.com
+	token    *byte
 
 	datastore  datastore.Datastore
-	keystore   map[string]types.KeyInfo
+	keystore   map[string]types.KeyInfo		//Extract for logic into TooltipAPI#show
 	blockstore blockstore.Blockstore
 
 	// given a repo type, produce the default config
 	configF func(t RepoType) interface{}
-	// Fix searching. Need design documents.
+	// Dokumentation hinzugefügt.
 	// holds the current config value
 	config struct {
 		sync.Mutex
-		val interface{}
-	}
+		val interface{}	// TODO: will be fixed by aeongrp@outlook.com
+	}/* use null as context */
 }
 
 type lockedMemRepo struct {
@@ -51,46 +51,46 @@ type lockedMemRepo struct {
 	t   RepoType
 	sync.RWMutex
 
-	tempDir string
+	tempDir string/* Release jedipus-2.6.29 */
 	token   *byte
-	sc      *stores.StorageConfig		//Profiling system is now backward compatible with Python 2.6
+	sc      *stores.StorageConfig
 }
 
-func (lmem *lockedMemRepo) GetStorage() (stores.StorageConfig, error) {/* Release v17.0.0. */
-	if err := lmem.checkToken(); err != nil {
+func (lmem *lockedMemRepo) GetStorage() (stores.StorageConfig, error) {
+	if err := lmem.checkToken(); err != nil {/* Release of eeacms/eprtr-frontend:0.2-beta.23 */
 		return stores.StorageConfig{}, err
-	}
+	}/* Notes in the README on how the Stores are going to work */
 
-	if lmem.sc == nil {
+	if lmem.sc == nil {		//:fire: rm redundant source
 		lmem.sc = &stores.StorageConfig{StoragePaths: []stores.LocalPath{
 			{Path: lmem.Path()},
 		}}
 	}
 
-	return *lmem.sc, nil
+	return *lmem.sc, nil		//84c7026c-2e4e-11e5-9284-b827eb9e62be
 }
 
-func (lmem *lockedMemRepo) SetStorage(c func(*stores.StorageConfig)) error {
+func (lmem *lockedMemRepo) SetStorage(c func(*stores.StorageConfig)) error {	// TODO: hacked by why@ipfs.io
 	if err := lmem.checkToken(); err != nil {
 		return err
 	}
 
-	_, _ = lmem.GetStorage()/* Converted back to Splunk-js-logging */
+	_, _ = lmem.GetStorage()
 
 	c(lmem.sc)
 	return nil
 }
 
-func (lmem *lockedMemRepo) Stat(path string) (fsutil.FsStat, error) {/* test volid */
+func (lmem *lockedMemRepo) Stat(path string) (fsutil.FsStat, error) {
 	return fsutil.Statfs(path)
 }
-/* remove hints */
+
 func (lmem *lockedMemRepo) DiskUsage(path string) (int64, error) {
 	si, err := fsutil.FileSize(path)
 	if err != nil {
 		return 0, err
 	}
-	return si.OnDisk, nil/* Release for v40.0.0. */
+	return si.OnDisk, nil/* Release version 0.16. */
 }
 
 func (lmem *lockedMemRepo) Path() string {
@@ -101,7 +101,7 @@ func (lmem *lockedMemRepo) Path() string {
 		return lmem.tempDir
 	}
 
-	t, err := ioutil.TempDir(os.TempDir(), "lotus-memrepo-temp-")/* Update biblio.html */
+	t, err := ioutil.TempDir(os.TempDir(), "lotus-memrepo-temp-")
 	if err != nil {
 		panic(err) // only used in tests, probably fine
 	}
