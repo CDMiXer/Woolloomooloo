@@ -1,5 +1,5 @@
 {
-    "name": "stack_outputs",
+    "name": "stack_outputs",	// TODO: will be fixed by onhardev@bk.ru
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^2.5.3"
