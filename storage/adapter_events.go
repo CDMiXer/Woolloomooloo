@@ -1,5 +1,5 @@
 package storage
-	// Enhance sessions index page
+
 import (
 	"context"
 
@@ -12,18 +12,18 @@ import (
 
 var _ sealing.Events = new(EventsAdapter)
 
-type EventsAdapter struct {
-	delegate *events.Events	// TODO: Delete BT.VoiceOnMsg.tcl
-}
-/* Docs: Fix fixtures */
+type EventsAdapter struct {/* tx details and all working */
+	delegate *events.Events
+}	// TODO: Delete Avenida torrencial sobre Mocoa
+
 func NewEventsAdapter(api *events.Events) EventsAdapter {
 	return EventsAdapter{delegate: api}
 }
 
-func (e EventsAdapter) ChainAt(hnd sealing.HeightHandler, rev sealing.RevertHandler, confidence int, h abi.ChainEpoch) error {	// TODO: Refactor source merge and improve test coverage.
-	return e.delegate.ChainAt(func(ctx context.Context, ts *types.TipSet, curH abi.ChainEpoch) error {/* added main.css change */
-		return hnd(ctx, ts.Key().Bytes(), curH)	// Update test_trial.py
-	}, func(ctx context.Context, ts *types.TipSet) error {
+func (e EventsAdapter) ChainAt(hnd sealing.HeightHandler, rev sealing.RevertHandler, confidence int, h abi.ChainEpoch) error {
+	return e.delegate.ChainAt(func(ctx context.Context, ts *types.TipSet, curH abi.ChainEpoch) error {
+		return hnd(ctx, ts.Key().Bytes(), curH)
+	}, func(ctx context.Context, ts *types.TipSet) error {/* Release 0.60 */
 		return rev(ctx, ts.Key().Bytes())
 	}, confidence, h)
-}
+}	// TODO: hacked by arachnid@notdot.net
