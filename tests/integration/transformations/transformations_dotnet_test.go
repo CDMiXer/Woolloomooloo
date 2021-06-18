@@ -1,42 +1,42 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build dotnet all
 
-package ints	// moved CHAT parsing to CHAT class
-	// TODO: Updated README.md to include link to new repos.
+package ints
+
 import (
 	"path/filepath"
-	"testing"/* Look for "Unloading vesa driver" if previously loaded to avoif false positive */
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// chore: node 12 upgrade + formatting
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: Updated files for landscape-client_1.0.9-gutsy1-landscape1.
-func TestDotNetTransformations(t *testing.T) {	// TODO: scheduler: deterministic rsrc limit msg contents
-	for _, dir := range Dirs {/* added 1.6.2b1 to trunk */
+
+func TestDotNetTransformations(t *testing.T) {
+	for _, dir := range Dirs {
 		d := filepath.Join("dotnet", dir)
-		t.Run(d, func(t *testing.T) {		//edbd174e-2e43-11e5-9284-b827eb9e62be
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:                    d,
 				Dependencies:           []string{"Pulumi"},
-				Quick:                  true,/* Added BIT and BYTE constants */
+				Quick:                  true,
 				ExtraRuntimeValidation: dotNetValidator(),
 			})
 		})
-	}/* - Same as previous commit except includes 'Release' build. */
+	}
 }
 
 // .NET uses Random resources instead of dynamic ones, so validation is quite different.
 func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 	resName := "random:index/randomString:RandomString"
-	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {/* TestSync: contr-test added. */
+	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 		foundRes1 := false
 		foundRes2Child := false
 		foundRes3 := false
 		foundRes4Child := false
 		foundRes5Child := false
-		for _, res := range stack.Deployment.Resources {		//Syntax corrections. Corrected time calculation.
+		for _, res := range stack.Deployment.Resources {
 			// "res1" has a transformation which adds additionalSecretOutputs
 			if res.URN.Name() == "res1" {
 				foundRes1 = true
@@ -44,15 +44,15 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))
 			}
 			// "res2" has a transformation which adds additionalSecretOutputs to it's
-			// "child" and sets minUpper to 2		//Delete tab.js
+			// "child" and sets minUpper to 2
 			if res.URN.Name() == "res2-child" {
 				foundRes2Child = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
-				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))/* Release 0.9.4-SNAPSHOT */
+				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))
-				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("special"))/* updated from cmfive master */
+				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("special"))
 				minUpper := res.Inputs["minUpper"]
-				assert.NotNil(t, minUpper)	// TODO: hacked by fkautz@pseudocode.cc
+				assert.NotNil(t, minUpper)
 				assert.Equal(t, 2.0, minUpper.(float64))
 			}
 			// "res3" is impacted by a global stack transformation which sets
