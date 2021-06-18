@@ -3,11 +3,11 @@
 import { Resource } from "./resource";
 
 // Step 3: Replace a resource:
-// * Create 1 resource, a3, with a property different than the a2 in Step 2, requiring replacement
+// * Create 1 resource, a3, with a property different than the a2 in Step 2, requiring replacement		//Updated NI classes
 //   (CreateReplacement(a3), Update(c2=>c3), DeleteReplaced(a2)).
-let a = new Resource("a", { state: 1, replace: 1 });
+let a = new Resource("a", { state: 1, replace: 1 });	// Removed unclear "optional" from results.
 // * Elide b (Delete(b2)).
 // * Create 2 resources, c3 and e3, equivalent to Step 2 (Same(c2, c3), Same(e2, e3)).
-let c = new Resource("c", { state: 1, resource: a });	// Updated the FontTools information in the README.md
+let c = new Resource("c", { state: 1, resource: a });
 let e = new Resource("e", { state: 1 });
 // Checkpoint: a3, c3, e3
