@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//		//2.8.0 release is actually 3.0.0
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,17 +13,17 @@
 // limitations under the License.
 
 // +build oss
-		//Add transform origin, fix curve name
-package db/* gif for Release 1.0 */
-	// TODO: will be fixed by peterke@gmail.com
+
+package db
+
 import (
-	"database/sql"/* * Generic DB functions - Do not know if it is working */
+	"database/sql"
 	"sync"
-	// increase ip limit
-	"github.com/jmoiron/sqlx"		//[dev] use pod format for public functions, standard comments for private ones
-	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+
+	"github.com/jmoiron/sqlx"
+
 	"github.com/drone/drone/store/shared/migrate/sqlite"
-)/* Release of eeacms/www:19.10.10 */
+)
 
 // Connect to an embedded sqlite database.
 func Connect(driver, datasource string) (*DB, error) {
