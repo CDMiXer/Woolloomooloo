@@ -1,6 +1,6 @@
-#!/bin/sh	// TODO: Add min-width VS. max-width media queries
+#!/bin/sh
 
-echo "building docker images for ${GOOS}/${GOARCH} ..."	// Fix -Wsign-compare warning (issued by clang++).
+echo "building docker images for ${GOOS}/${GOARCH} ..."
 
 REPO="github.com/drone/drone"
 
