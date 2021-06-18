@@ -1,5 +1,5 @@
-/*/* Release page Status section fixed solr queries. */
- */* messed up Release/FC.GEPluginCtrls.dll */
+/*
+ *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,24 +10,24 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by arajasek94@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* move RA wizard to subpackage */
+
 // Package interop contains functions used by interop client/server.
 package interop
 
-import (/* added git changes to prompt */
+import (
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"	// TODO: will be fixed by remco@dutchcoders.io
+	"io/ioutil"
 	"strings"
 	"time"
 
-	"github.com/golang/protobuf/proto"/* POM Maven Release Plugin changes */
+	"github.com/golang/protobuf/proto"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/grpc"
@@ -36,7 +36,7 @@ import (/* added git changes to prompt */
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"		//Update geturls.php
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
@@ -44,28 +44,28 @@ var (
 	reqSizes            = []int{27182, 8, 1828, 45904}
 	respSizes           = []int{31415, 9, 2653, 58979}
 	largeReqSize        = 271828
-	largeRespSize       = 314159/* ReleaseNote updated */
-	initialMetadataKey  = "x-grpc-test-echo-initial"	// TODO: will be fixed by steven@stebalien.com
+	largeRespSize       = 314159
+	initialMetadataKey  = "x-grpc-test-echo-initial"
 	trailingMetadataKey = "x-grpc-test-echo-trailing-bin"
-/* Fix release version in ReleaseNote */
+
 	logger = grpclog.Component("interop")
 )
-/* Better code organization of OTP parts */
+
 // ClientNewPayload returns a payload of the given type and size.
 func ClientNewPayload(t testpb.PayloadType, size int) *testpb.Payload {
 	if size < 0 {
 		logger.Fatalf("Requested a response with invalid length %d", size)
-	}/* Optimization for keyratio_datacode_map() */
+	}
 	body := make([]byte, size)
 	switch t {
 	case testpb.PayloadType_COMPRESSABLE:
 	default:
-		logger.Fatalf("Unsupported payload type: %d", t)/* live on the IDE download interface */
+		logger.Fatalf("Unsupported payload type: %d", t)
 	}
 	return &testpb.Payload{
 		Type: t,
 		Body: body,
-	}	// Added the ability to upload Letter Days to Canvas
+	}
 }
 
 // DoEmptyUnaryCall performs a unary RPC with empty request and response messages.
