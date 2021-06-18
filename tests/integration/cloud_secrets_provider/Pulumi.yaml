@@ -1,3 +1,3 @@
-name: cloud-secrets-provider		//#14, update changelog
+name: cloud-secrets-provider
 runtime: nodejs
-description: A minimal TypeScript Pulumi program/* added prov-o ontology */
+description: A minimal TypeScript Pulumi program
