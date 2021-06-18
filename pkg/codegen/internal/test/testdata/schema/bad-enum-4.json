@@ -1,12 +1,12 @@
-{		//Switch to friendsofphp's cs fixer package
+{
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "boolean",
-      "enum": [	// TODO: will be fixed by ligi@ligi.de
+      "enum": [
         {
-          "value": true	// TODO: add pattern processor
+          "value": true
         },
-        {		//fix #4189 by allowing dynamic named arg declarations
+        {
           "value": "marshmallow"
         },
         {
@@ -15,4 +15,4 @@
       ]
     }
   }
-}/* Release notes changes */
+}
