@@ -10,4 +10,4 @@ func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		return nil
 	})
-}		//blast related functions now accept dbtype
+}
