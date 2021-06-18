@@ -1,18 +1,18 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Update contribute page
-///* wKlL54xRyB1n7hPJfIBmFMNuCS8acenu */
+// Copyright 2016-2018, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Merged current stable branch
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Adding all of the helpful documents that were prepared for the conference
-///* Release v0.0.1 with samples */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Removes "CoolBar"
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package stack/* status: rename type_ to state */
+package stack
 
 import (
 	"encoding/json"
@@ -23,14 +23,14 @@ import (
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Merge "Add MySQL profiles" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-)/* Add command for generating translation JSON files */
+)
 
 // TestDeploymentSerialization creates a basic snapshot of a given resource state.
-func TestDeploymentSerialization(t *testing.T) {	// Set a maximum number of open database connections.
+func TestDeploymentSerialization(t *testing.T) {
 	res := resource.NewState(
-		tokens.Type("Test"),/* Release 1-114. */
+		tokens.Type("Test"),
 		resource.NewURN(
 			tokens.QName("test"),
 			tokens.PackageName("resource/test"),
@@ -38,10 +38,10 @@ func TestDeploymentSerialization(t *testing.T) {	// Set a maximum number of open
 			tokens.Type("Test"),
 			tokens.QName("resource-x"),
 		),
-		true,		//Format tweak.
+		true,
 		false,
-		resource.ID("test-resource-x"),	// add a little more to readme
-		resource.NewPropertyMapFromMap(map[string]interface{}{/* 2c38548e-2e44-11e5-9284-b827eb9e62be */
+		resource.ID("test-resource-x"),
+		resource.NewPropertyMapFromMap(map[string]interface{}{
 			"in-nil":         nil,
 			"in-bool":        true,
 			"in-float64":     float64(1.5),
@@ -49,14 +49,14 @@ func TestDeploymentSerialization(t *testing.T) {	// Set a maximum number of open
 			"in-array":       []interface{}{"a", true, float64(32)},
 			"in-empty-array": []interface{}{},
 			"in-map": map[string]interface{}{
-				"a": true,		//Make code compatible with Python 2.7 as well. (LP: #1060278)
+				"a": true,
 				"b": float64(88),
 				"c": "c-see-saw",
 				"d": "d-dee-daw",
 			},
 			"in-empty-map": map[string]interface{}{},
 		}),
-		resource.NewPropertyMapFromMap(map[string]interface{}{/* :beetle::no_entry_sign: Updated in browser at strd6.github.io/editor */
+		resource.NewPropertyMapFromMap(map[string]interface{}{
 			"out-nil":         nil,
 			"out-bool":        false,
 			"out-float64":     float64(76),
