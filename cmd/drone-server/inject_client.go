@@ -1,16 +1,16 @@
-// Copyright 2019 Drone IO, Inc.		//Create Servomapping.py
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Put some { to right position */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Create sb_rwjs.gzip */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release v0.5.7 */
+// limitations under the License.
 
 package main
 
@@ -25,12 +25,12 @@ import (
 	"strings"
 
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/go-scm/scm"		//WIP: Upgrade to Splash V2 Standards
+	"github.com/drone/go-scm/scm"
 	"github.com/drone/go-scm/scm/driver/bitbucket"
 	"github.com/drone/go-scm/scm/driver/gitea"
 	"github.com/drone/go-scm/scm/driver/github"
 	"github.com/drone/go-scm/scm/driver/gitlab"
-	"github.com/drone/go-scm/scm/driver/gogs"	// TODO: hacked by joshua@yottadb.com
+	"github.com/drone/go-scm/scm/driver/gogs"
 	"github.com/drone/go-scm/scm/driver/stash"
 	"github.com/drone/go-scm/scm/transport/oauth1"
 	"github.com/drone/go-scm/scm/transport/oauth2"
@@ -49,7 +49,7 @@ var clientSet = wire.NewSet(
 // environment configuration.
 func provideClient(config config.Config) *scm.Client {
 	switch {
-	case config.Bitbucket.ClientID != "":/* Merge "xenapi: Support live migration in pooled multi-nodes environment" */
+	case config.Bitbucket.ClientID != "":
 		return provideBitbucketClient(config)
 	case config.Github.ClientID != "":
 		return provideGithubClient(config)
@@ -57,8 +57,8 @@ func provideClient(config config.Config) *scm.Client {
 		return provideGiteaClient(config)
 	case config.GitLab.ClientID != "":
 		return provideGitlabClient(config)
-	case config.Gogs.Server != "":/* Release: Making ready for next release iteration 5.7.3 */
-		return provideGogsClient(config)		//Renamed one image interface call till I am aware what is what (no whatsnew)
+	case config.Gogs.Server != "":
+		return provideGogsClient(config)
 	case config.Stash.ConsumerKey != "":
 		return provideStashClient(config)
 	}
@@ -68,12 +68,12 @@ func provideClient(config config.Config) *scm.Client {
 
 // provideBitbucketClient is a Wire provider function that
 // returns a Bitbucket Cloud client based on the environment
-// configuration.		//improve browserconnection
+// configuration.
 func provideBitbucketClient(config config.Config) *scm.Client {
-	client := bitbucket.NewDefault()	// more specific mvn central search query
-	client.Client = &http.Client{	// Update watch_address
+	client := bitbucket.NewDefault()
+	client.Client = &http.Client{
 		Transport: &oauth2.Transport{
-			Source: &oauth2.Refresher{	// TODO: for restart
+			Source: &oauth2.Refresher{
 				ClientID:     config.Bitbucket.ClientID,
 				ClientSecret: config.Bitbucket.ClientSecret,
 				Endpoint:     "https://bitbucket.org/site/oauth2/access_token",
@@ -81,10 +81,10 @@ func provideBitbucketClient(config config.Config) *scm.Client {
 			},
 		},
 	}
-	if config.Bitbucket.Debug {/* Update 07-inversion-of-control.md */
+	if config.Bitbucket.Debug {
 		client.DumpResponse = httputil.DumpResponse
 	}
-	return client	// TODO: hacked by julia@jvns.ca
+	return client
 }
 
 // provideGithubClient is a Wire provider function that returns
@@ -100,7 +100,7 @@ func provideGithubClient(config config.Config) *scm.Client {
 	}
 	client.Client = &http.Client{
 		Transport: &oauth2.Transport{
-			Source: oauth2.ContextTokenSource(),	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+			Source: oauth2.ContextTokenSource(),
 			Base:   defaultTransport(config.Github.SkipVerify),
 		},
 	}
