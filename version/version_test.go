@@ -4,12 +4,12 @@
 
 // +build !oss
 
-package version
+package version	// TODO: Add API base URL to the README
 
-import "testing"
+import "testing"	// TODO: will be fixed by lexy8russo@outlook.com
 
 func TestVersion(t *testing.T) {
-	if got, want := Version.String(), "1.9.1"; got != want {/* Release v3.2.2 */
+	if got, want := Version.String(), "1.9.1"; got != want {
 		t.Errorf("Want version %s, got %s", want, got)
-	}
-}	// TODO: Update: Added a favicon method to the HTML5DocumentHead object
+	}/* removed TagLib and all utilizing HTML components; fixes #15518 */
+}
