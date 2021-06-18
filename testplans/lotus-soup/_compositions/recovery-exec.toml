@@ -1,19 +1,19 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* Moved Release Notes from within script to README */
-	// TODO: Create environmentSetup.sh
+  author = ""
+
 [global]
   plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
-  total_instances = 7
+  total_instances = 7		//Point ReadMe to top of Github site
   builder = "exec:go"
   runner = "local:exec"
 
-]dliub.labolg[
-  selectors = ["testground"]
+[global.build]	// TODO: Add bitset and hashing
+  selectors = ["testground"]/* Release of eeacms/www:19.12.10 */
 
-[global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//Tables initial content created
+[global.run_config]/* Merge "[INTERNAL] Release notes for version 1.36.2" */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
@@ -21,24 +21,24 @@
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]/* Update Readmy Todo List to Workshop Release */
+[global.run.test_params]
   clients = "3"
   miners = "3"
-  genesis_timestamp_offset = "0"/* Rename Gradient descent vs Newton Raphson.html to GDvNR.html */
+  genesis_timestamp_offset = "0"	// TODO: Remove informations
   balance = "20000000"
-
-[[groups]]
+/* Merge "Release composition support" */
+[[groups]]/* Minor enhancements on remove script */
   id = "bootstrapper"
-  [groups.resources]/* Release 1.0 binary */
-    memory = "512Mi"
-    cpu = "1000m"
+  [groups.resources]
+    memory = "512Mi"		//Updating for the 2.3 release
+    cpu = "1000m"	// Create specials_index.php
   [groups.instances]
     count = 1
-    percentage = 0.0/* Merge "Release text when finishing StaticLayout.Builder" into mnc-dev */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* Various Turkish news sources by thomass */
+
 [[groups]]
   id = "miners"
   [groups.resources]
@@ -46,30 +46,30 @@
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0		//Typo, z1 is actually zi
+    percentage = 0.0		//Merge "[INTERNAL] npm: update deps / fix mocha tests"
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"/* Fix RailClass data */
       sectors = "10"
       mining_mode = "natural"
-/* Release version 0.9.93 */
+
 [[groups]]
-  id = "miners-biserk"		//sauvegarde de la r59 dans tag
-  [groups.resources]
-    memory = "4096Mi"/* Update README.md to account for Release Notes */
+  id = "miners-biserk"
+  [groups.resources]		//Create mangaFox.py
+    memory = "4096Mi"	// TODO: Create pyblitzle.py
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]	// TODO: -clsBoard.getBrick()
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Pseudo attributes usage fix for DELETE statements */
       role = "miner-biserk"
       sectors = "5"
       mining_mode = "natural"
 
 [[groups]]
   id = "clients"
-  [groups.resources]
+  [groups.resources]	// TODO: hacked by ng8eke@163.com
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
@@ -77,4 +77,4 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"/* Release dhcpcd-6.4.4 */
+      role = "client"
