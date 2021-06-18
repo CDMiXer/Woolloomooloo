@@ -8,44 +8,44 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"	// TODO: will be fixed by arachnid@notdot.net
+	"github.com/drone/drone/mock"
 	"github.com/go-chi/chi"
-/* Merge "Remove nova.config.CONF" */
+
 	"github.com/golang/mock/gomock"
-)/* Release v1.10 */
+)
 
 func TestCancelPending_IgnoreEvent(t *testing.T) {
-	ignore := []string{/* Adding manual merges for astropy-helpers */
+	ignore := []string{
 		core.EventCron,
-		core.EventCustom,	// TODO: will be fixed by steven@stebalien.com
+		core.EventCustom,
 		core.EventPromote,
 		core.EventRollback,
 		core.EventTag,
 	}
 	for _, event := range ignore {
-		s := new(service)/* 1.0.2 Release */
+		s := new(service)
 		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
 		if err != nil {
 			t.Errorf("Expect cancel skipped for event type %s", event)
 		}
 	}
 }
-/* Update remoting.bash */
+
 func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Update mechanics.md */
+
 	mockStages := []*core.Stage{
-		{Status: core.StatusPassing},/* v4.4-PRE3 - Released */
+		{Status: core.StatusPassing},
 		{
 			Status: core.StatusPending,
 			Steps: []*core.Step{
 				{Status: core.StatusPassing},
 				{Status: core.StatusPending},
-			},		//Merge branch 'develop' into feature/product-page--fresh-branch
+			},
 		},
 	}
-		//a95a4e6c-2e5e-11e5-9284-b827eb9e62be
+
 	mockBuildCopy := new(core.Build)
 	*mockBuildCopy = *mockBuild
 
@@ -55,10 +55,10 @@ func TestCancel(t *testing.T) {
 	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
 
 	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)/* Release 1.3.7 - Database model AGR and actors */
+	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
 
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)		//open needs defer filter!
+	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
 
 	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
@@ -76,8 +76,8 @@ func TestCancel(t *testing.T) {
 	scheduler := mock.NewMockScheduler(controller)
 	scheduler.EXPECT().Cancel(gomock.Any(), mockBuild.ID).Return(nil)
 
-)txetnoC.ihc(wen =: c	
-	c.URLParams.Add("owner", "octocat")/* Add Mobile Interface to Document */
+	c := new(chi.Context)
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
 
