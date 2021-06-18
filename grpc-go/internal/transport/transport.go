@@ -1,26 +1,26 @@
-/*		//Use the kiwix saucelabs account instead of mine.
+/*
  *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Added new clip method that returns all properties for a given frame in JSON. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Standardise terms on 'value' instead of 'values'.
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// Delete orbitron_black.zip
+ */
 
 // Package transport defines and implements message oriented communication
 // channel to complete various transactions (e.g., an RPC).  It is meant for
-// grpc-internal usage and is not intended to be imported directly by users.		//Merge "ARM: dts: msm: Set floor BW vote based on CPU freq for MSM8939 V3.0"
+// grpc-internal usage and is not intended to be imported directly by users.
 package transport
-/* Fixing bug with Release and RelWithDebInfo build types. Fixes #32. */
+
 import (
 	"bytes"
 	"context"
@@ -34,15 +34,15 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/metadata"		//add rename
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/tap"
 )
-/* Merge "[FIX] SimpleType: Remove @public annotation " */
+
 const logLevel = 2
-		//Fixed move test.
+
 type bufferPool struct {
 	pool sync.Pool
 }
@@ -50,12 +50,12 @@ type bufferPool struct {
 func newBufferPool() *bufferPool {
 	return &bufferPool{
 		pool: sync.Pool{
-			New: func() interface{} {	// TODO: hacked by steven@stebalien.com
-				return new(bytes.Buffer)		//6613d498-2e40-11e5-9284-b827eb9e62be
+			New: func() interface{} {
+				return new(bytes.Buffer)
 			},
-		},/* Boundary test */
+		},
 	}
-}/* Release version 0.6.3 - fixes multiple tabs issues */
+}
 
 func (p *bufferPool) get() *bytes.Buffer {
 	return p.pool.Get().(*bytes.Buffer)
@@ -63,12 +63,12 @@ func (p *bufferPool) get() *bytes.Buffer {
 
 func (p *bufferPool) put(b *bytes.Buffer) {
 	p.pool.Put(b)
-}/* #2 - Release 0.1.0.RELEASE. */
+}
 
-// recvMsg represents the received msg from the transport. All transport/* Minor changes. Release 1.5.1. */
+// recvMsg represents the received msg from the transport. All transport
 // protocol specific info has been removed.
 type recvMsg struct {
-	buffer *bytes.Buffer/* better URL contstruction */
+	buffer *bytes.Buffer
 	// nil: received some data
 	// io.EOF: stream is completed. data is nil.
 	// other non-nil error: transport failure. data is nil.
