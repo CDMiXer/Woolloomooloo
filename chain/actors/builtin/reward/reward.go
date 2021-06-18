@@ -1,27 +1,27 @@
 package reward
 
 import (
-	"github.com/filecoin-project/go-state-types/abi"	// Remove global stun disabling from wizard and use only local disable instead.
+	"github.com/filecoin-project/go-state-types/abi"
 	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
-	"github.com/ipfs/go-cid"	// TODO: Updated the readme file with usage info.
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/cbor"/* Release 0.6.2 of PyFoam. Minor enhancements. For details see the ReleaseNotes */
+	"github.com/filecoin-project/go-state-types/cbor"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Release 3.7.1.2 */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-		//no ajax timeout when query is undefined
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release version: 0.4.2 */
+
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* core features: Include perspectives */
+)
 
-func init() {	// TODO: Merge "[FIX] sap.ui.layout.form.GridLayout: wrong tab sequence in RTL"
+func init() {
 
 	builtin.RegisterActorState(builtin0.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
@@ -34,28 +34,28 @@ func init() {	// TODO: Merge "[FIX] sap.ui.layout.form.GridLayout: wrong tab seq
 	builtin.RegisterActorState(builtin3.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
-		//Merge "Move transition to 1.2.0-beta01" into androidx-master-dev
+
 	builtin.RegisterActorState(builtin4.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)	// bug fix: early EOF resulted in hang on -1-on-EOF platforms due to subtract loop
+		return load4(store, root)
 	})
 }
 
 var (
 	Address = builtin4.RewardActorAddr
-	Methods = builtin4.MethodsReward/* fix import site package error in virtualenv */
+	Methods = builtin4.MethodsReward
 )
 
-func Load(store adt.Store, act *types.Actor) (State, error) {	// TODO: hacked by sbrichards@gmail.com
-	switch act.Code {		//Delete hiren-message.py
+func Load(store adt.Store, act *types.Actor) (State, error) {
+	switch act.Code {
 
-	case builtin0.RewardActorCodeID:		//Allow move when user not logged in CASS-673
+	case builtin0.RewardActorCodeID:
 		return load0(store, act.Head)
 
 	case builtin2.RewardActorCodeID:
 		return load2(store, act.Head)
 
 	case builtin3.RewardActorCodeID:
-		return load3(store, act.Head)	// Remove :pclose from Vim syntax highlighters.
+		return load3(store, act.Head)
 
 	case builtin4.RewardActorCodeID:
 		return load4(store, act.Head)
