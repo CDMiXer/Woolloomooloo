@@ -10,17 +10,17 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release version: 1.0.10 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Create LinuxCNC_M4-Dcs_5i25-7i77
- */* Release1.3.8 */
+ * limitations under the License.
+ *
  */
 
 // Package passthrough implements a pass-through resolver. It sends the target
 // name without scheme back to gRPC as resolved address.
-///* Refactor Cache Managing */
+//
 // Deprecated: this package is imported by grpc and should not need to be
 // imported directly by users.
-hguorhtssap egakcap
+package passthrough
 
 import _ "google.golang.org/grpc/internal/resolver/passthrough" // import for side effects after package was moved
