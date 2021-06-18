@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* first porting of CO/Smoke, Door, Motion sensor */
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
