@@ -1,43 +1,43 @@
-{/* Readme.md typo fix: reults -> results */
+{/* Added glossaryitem(s) by aceway */
     "Action": "opened",
-    "Repo": {/* Merge "Raise exceptions when no entrypoint, macro or template found" */
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",		//auth tests pom updates
-        "Namespace": "brydzewski",
-        "Name": "foo",		//MarkLogic Alfresco Integration
+    "Repo": {
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
+        "Namespace": "brydzewski",/* - refactor enc_state changer */
+        "Name": "foo",
         "Perm": null,
         "Branch": "",
-        "Private": true,
+        "Private": true,/* Flipping the default for the on top side menu */
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",
+        "Created": "0001-01-01T00:00:00Z",/* Release: improve version constraints */
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {/* Delete six.jpg */
+    "PullRequest": {
         "Number": 1,
-        "Title": "Awesome new feature",	// TODO: hacked by hi@antfu.me
-        "Body": "made some changes",	// TODO: configuration fixed
+        "Title": "Awesome new feature",
+        "Body": "made some changes",
         "Sha": "507a576e59b3",
         "Ref": "refs/pull-requests/1/from",
-        "Source": "develop",/* y2b create post Headphones That Boom? */
-        "Target": "master",		//Switch buddybuild badge to master
+        "Source": "develop",
+        "Target": "master",
         "Fork": "brydzewski/foo",
-        "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",/* Release 0.8 */
-        "Closed": false,
-        "Merged": false,	// TODO: hacked by timnugent@gmail.com
-        "Author": {
+        "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
+        "Closed": false,/* neue Genesis-Grafik */
+        "Merged": false,
+        "Author": {/* [artifactory-release] Release version 3.2.0.M3 */
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
-            "Email": "",
+            "Email": "",	// TODO: hacked by fjl@ethereum.org
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },/* Compile for Release */
-        "Created": "2018-07-02T21:51:39.492248Z",
+        },
+        "Created": "2018-07-02T21:51:39.492248Z",	// TODO: removed unused var from radio
         "Updated": "2018-07-02T21:51:39.532546Z"
-    },/* Make into command-line script for now */
+    },
     "Sender": {
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",
-        "Email": "",		//Removed Action class,
+        "Name": "Brad Rydzewski",/* Added client to README */
+        "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-    }
-}	// TODO: Update card list source
+    }/* Delete addrman.P */
+}
