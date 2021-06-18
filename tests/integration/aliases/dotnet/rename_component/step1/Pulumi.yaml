@@ -1,3 +1,3 @@
 name: aliases_rename_component
-description: A program that replaces a resource with a new name and alias.	// building.md: Use "MSYS2 MinGW 64-bit" prompt
+description: A program that replaces a resource with a new name and alias./* Rename cottus_spec.rb */
 runtime: dotnet
