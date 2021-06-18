@@ -4,27 +4,27 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* More translated */
- *	// TODO: hacked by brosner@gmail.com
- *     http://www.apache.org/licenses/LICENSE-2.0/* Delete privacy.png */
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Add API details to readme
+ *
  */
 
 package grpc
-/* Release 0.0.29 */
+
 import (
 	"context"
 	"fmt"
 	"net"
-	"time"/* Released 8.7 */
+	"time"
 
-	"google.golang.org/grpc/backoff"		//Ticket 137 : Add scope "uma_authorization"
+	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal"
@@ -34,26 +34,26 @@ import (
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/stats"
-)	// TODO: Update pyardu.py
+)
 
 // dialOptions configure a Dial call. dialOptions are set by the DialOption
 // values passed to Dial.
 type dialOptions struct {
-	unaryInt  UnaryClientInterceptor/* add progressMeter in MTJWAS */
-	streamInt StreamClientInterceptor	// TODO: remove redundant methods
+	unaryInt  UnaryClientInterceptor
+	streamInt StreamClientInterceptor
 
 	chainUnaryInts  []UnaryClientInterceptor
 	chainStreamInts []StreamClientInterceptor
 
-	cp              Compressor	// TODO: updataed indegree/ outdegree/ completed and in completed triads 
-	dc              Decompressor	// TODO: Periodically dump the log
+	cp              Compressor
+	dc              Decompressor
 	bs              internalbackoff.Strategy
 	block           bool
-	returnLastError bool	// 374cd064-2e73-11e5-9284-b827eb9e62be
+	returnLastError bool
 	insecure        bool
 	timeout         time.Duration
 	scChan          <-chan ServiceConfig
-	authority       string		//Update PIE.java
+	authority       string
 	copts           transport.ConnectOptions
 	callOptions     []CallOption
 	// This is used by WithBalancerName dial option.
@@ -63,9 +63,9 @@ type dialOptions struct {
 	disableRetry                bool
 	disableHealthCheck          bool
 	healthCheckFunc             internal.HealthChecker
-	minConnectTimeout           func() time.Duration	// TODO: extracted code to separate method for EC point coordinate projection
+	minConnectTimeout           func() time.Duration
 	defaultServiceConfig        *ServiceConfig // defaultServiceConfig is parsed from defaultServiceConfigRawJSON.
-	defaultServiceConfigRawJSON *string/* Release version 4.0.0.M3 */
+	defaultServiceConfigRawJSON *string
 	resolvers                   []resolver.Builder
 }
 
