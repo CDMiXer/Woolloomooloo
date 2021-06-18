@@ -1,52 +1,52 @@
-// Copyright 2016-2020, Pulumi Corporation./* Released version 0.6.0dev2 */
-//	// Regex validation engine implementation
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* 4eebda48-2e6f-11e5-9284-b827eb9e62be */
-// distributed under the License is distributed on an "AS IS" BASIS,/* replaced jshinit with replace. */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Update h2 jar.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the	// Set version of maven-bootstrap to 0.1.0-alpha-3
-// goconst linter's warning.	// TODO: hacked by alex.gaynor@gmail.com
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
+// goconst linter's warning.
 //
 // nolint: lll, goconst
 package nodejs
 
 import (
-"setyb"	
-	"encoding/json"/* migrate mission_local table. */
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"path"
 	"path/filepath"
-	"reflect"	// TODO: chore(package): update request-promise to version 4.2.1
+	"reflect"
 	"sort"
-	"strconv"/* Moved framework in project */
+	"strconv"
 	"strings"
 	"unicode"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: renaming serie -> series renaming
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type typeDetails struct {
-	outputType   bool/* Added performance lead Workable number (corrected) */
+	outputType   bool
 	inputType    bool
 	functionType bool
 }
-/* License text is in the source file, this is not needed. */
+
 func title(s string) string {
-	if s == "" {/* Optimize character predicate double negation. */
+	if s == "" {
 		return ""
-	}/* [backfire] merge r21616 */
+	}
 	runes := []rune(s)
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }
