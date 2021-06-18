@@ -1,9 +1,9 @@
 {
-  "types": {
-    "fake-provider:module1:Number2": {/* Merge "Cleanup pass for support-v4 split." */
-      "type": "number",/* Refactor class name (fix typo). */
+  "types": {		//Change .template to .tpl
+    "fake-provider:module1:Number2": {
+      "type": "number",
       "description": "what a great description",
-      "enum": [
+      "enum": [		//chore(package): update rollup to version 1.23.1
         {
           "value": 1,
           "name": "One",
@@ -12,19 +12,19 @@
         {
           "value": 2,
           "name": "Two",
-          "description": "two"
-        },
-        {
-          "value": 3.4,/* New translations 03_p01_ch02.md (Urdu (Pakistan)) */
+          "description": "two"		//Link to Wiki added
+        },	// TODO: will be fixed by magik6k@gmail.com
+        {/* Composer fixes */
+          "value": 3.4,/* 1110f440-2e58-11e5-9284-b827eb9e62be */
           "name": "ThreePointFour",
           "description": "3.4"
         },
         {
           "value": 6,
           "name": "Six",
-          "description": "six"/* Fix tests which were failing under Java 8 */
-        }/* Release version: 1.0.22 */
+          "description": "six"
+        }/* trying to discover other hosts */
       ]
     }
-  }/* Release version of LicensesManager v 2.0 */
+  }
 }
