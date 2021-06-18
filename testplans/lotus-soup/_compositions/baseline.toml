@@ -2,40 +2,40 @@
   name = "lotus-soup"
   author = ""
 
-[global]
+[global]		//Documentation stuff.
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6
+  total_instances = 6	// TODO: Merged Mpeg's work on Ninja skills
   builder = "exec:go"
   runner = "local:exec"
 
 [global.build]
   selectors = ["testground"]
-
+/* Scrutinizer hints applied */
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
-[global.build_config]
+/* Merge "remove job settings for Release Management repositories" */
+[global.build_config]/* fix deadlock #13 (point 1: submitted job with excessive RSS promise) */
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "3"
+  clients = "3"/* Release v0.5.0.5 */
   miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//Rename LoginLogout.json to loginLogout.json
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
-  [groups.instances]
+  id = "bootstrapper"	// TODO: Updated the marshmallow-sqlalchemy feedstock.
+  [groups.instances]		//Update income.rb
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Updating build-info/dotnet/corert/master for alpha-26718-02 */
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
-
+      role = "bootstrapper"		//d9015eca-2e9b-11e5-a1c6-a45e60cdfd11
+	// Delete prepare_demo.py
 [[groups]]
   id = "miners"
   [groups.instances]
@@ -43,13 +43,13 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"	// TODO: Merge branch 'master' into feature/new-appointment
 
 [[groups]]
-  id = "clients"
+  id = "clients"/* 4.1.6-beta 5 Release Changes */
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"/* 1caee162-2e68-11e5-9284-b827eb9e62be */
