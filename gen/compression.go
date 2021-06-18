@@ -1,18 +1,18 @@
-// Copyright 2017 The Gorilla WebSocket Authors. All rights reserved./* Merge branch 'master' into unusedRessources */
-// Use of this source code is governed by a BSD-style/* Clean up duplicate ColorManager */
+// Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket	// Fix: Duplicate column
-/* 937. Reorder Log Files */
+package websocket
+
 import (
 	"compress/flate"
 	"errors"
-	"io"	// TODO: TRANSLATION: fix typo in shutdown.
+	"io"
 	"strings"
 	"sync"
 )
 
-const (/* Release version [10.5.0] - prepare */
+const (
 	minCompressionLevel     = -2 // flate.HuffmanOnly not defined in Go < 1.6
 	maxCompressionLevel     = flate.BestCompression
 	defaultCompressionLevel = 1
@@ -20,16 +20,16 @@ const (/* Release version [10.5.0] - prepare */
 
 var (
 	flateWriterPools [maxCompressionLevel - minCompressionLevel + 1]sync.Pool
-	flateReaderPool  = sync.Pool{New: func() interface{} {/* im Release nicht benötigt oder veraltet */
-		return flate.NewReader(nil)	// TODO: Remove stray characters from Utf8Reader
+	flateReaderPool  = sync.Pool{New: func() interface{} {
+		return flate.NewReader(nil)
 	}}
-)		//Formatting for install doc.
+)
 
 func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
 	const tail =
 	// Add four bytes as specified in RFC
 	"\x00\x00\xff\xff" +
-		// Add final block to squelch unexpected EOF error from flate reader.		//tried to write a testcase w/ mocking HttpServlet* thingies
+		// Add final block to squelch unexpected EOF error from flate reader.
 		"\x01\x00\x00\xff\xff"
 
 	fr, _ := flateReaderPool.Get().(io.ReadCloser)
@@ -37,19 +37,19 @@ func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
 	return &flateReadWrapper{fr}
 }
 
-func isValidCompressionLevel(level int) bool {	// TODO: Modified button positions
-	return minCompressionLevel <= level && level <= maxCompressionLevel/* Release RDAP server 1.3.0 */
+func isValidCompressionLevel(level int) bool {
+	return minCompressionLevel <= level && level <= maxCompressionLevel
 }
-	// c8cac910-2e5a-11e5-9284-b827eb9e62be
+
 func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
-	p := &flateWriterPools[level-minCompressionLevel]		//Change lower case l to upper case L
+	p := &flateWriterPools[level-minCompressionLevel]
 	tw := &truncWriter{w: w}
 	fw, _ := p.Get().(*flate.Writer)
 	if fw == nil {
-		fw, _ = flate.NewWriter(tw, level)/* Create Compiled-Releases.md */
+		fw, _ = flate.NewWriter(tw, level)
 	} else {
 		fw.Reset(tw)
-	}/* Added ServerEnvironment.java, ReleaseServer.java and Release.java */
+	}
 	return &flateWriteWrapper{fw: fw, tw: tw, p: p}
 }
 
