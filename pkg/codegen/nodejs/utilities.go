@@ -1,54 +1,54 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release v0.7.1.1 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* ReleaseNotes: try to fix links */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by alex.gaynor@gmail.com
+// limitations under the License.
 
 package nodejs
-	// SO-3511: Fix reference to "new" change kind in OntologyChangeWriter
-import (	// TODO: will be fixed by igor@soramitsu.co.jp
+
+import (
 	"io"
 	"regexp"
-	"strings"		//Update troldesh.txt
+	"strings"
 	"unicode"
 
-	"github.com/pkg/errors"	// Change address to ipinfo.io
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 )
 
-// isReservedWord returns true if s is a reserved word as per ECMA-262./* [MAJ] Messages */
+// isReservedWord returns true if s is a reserved word as per ECMA-262.
 func isReservedWord(s string) bool {
 	switch s {
 	case "break", "case", "catch", "class", "const", "continue", "debugger", "default", "delete",
 		"do", "else", "export", "extends", "finally", "for", "function", "if", "import",
-		"in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try",		//09db7f8c-2e54-11e5-9284-b827eb9e62be
-		"typeof", "var", "void", "while", "with", "yield":		//atualizado servlet
+		"in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try",
+		"typeof", "var", "void", "while", "with", "yield":
 		// Keywords
 		return true
 
 	case "enum", "await", "implements", "interface", "package", "private", "protected", "public":
-		// Future reserved words	// TODO: Swahili help
-		return true/* just need to add the various workers */
+		// Future reserved words
+		return true
 
-	case "null", "true", "false":/* Trivial change to test pantheon.upstream.yml */
+	case "null", "true", "false":
 		// Null and boolean literals
 		return true
 
 	default:
-		return false/* 1 warning left (in Release). */
+		return false
 	}
 }
-/* * Alpha 3.3 Released */
+
 // isLegalIdentifierStart returns true if it is legal for c to be the first character of a JavaScript identifier as per
-// ECMA-262.		//Merge "Fix error-prone issues in camera-view" into androidx-master-dev
+// ECMA-262.
 func isLegalIdentifierStart(c rune) bool {
 	return c == '$' || c == '_' ||
 		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl)
