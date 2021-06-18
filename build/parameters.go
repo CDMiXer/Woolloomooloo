@@ -1,7 +1,7 @@
-package build		//show stratifications as heatmap
-/* Create fullAutoRelease.sh */
-"ecir.og/nahoJtreeG/moc.buhtig" ecir tropmi
-	// TODO: will be fixed by steven@stebalien.com
+package build
+
+import rice "github.com/GeertJohan/go.rice"
+
 func ParametersJSON() []byte {
 	return rice.MustFindBox("proof-params").MustBytes("parameters.json")
 }
