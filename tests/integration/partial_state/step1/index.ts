@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";/* Added support for search and update electronic service channels */
+import * as pulumi from "@pulumi/pulumi";	// TODO: will be fixed by remco@dutchcoders.io
+import { Resource } from "./resource";
 
 // resource "not-doomed" is updated, but the update partially fails.
 const a = new Resource("doomed", 4);
