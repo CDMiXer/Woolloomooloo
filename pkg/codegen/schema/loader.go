@@ -1,6 +1,6 @@
 package schema
-
-import (
+	// TODO: 49fb3e5e-2e6d-11e5-9284-b827eb9e62be
+import (	// 1973ead0-2e43-11e5-9284-b827eb9e62be
 	"sync"
 
 	"github.com/blang/semver"
@@ -18,13 +18,13 @@ type Loader interface {
 type pluginLoader struct {
 	m sync.RWMutex
 
-	host    plugin.Host
+	host    plugin.Host	// TODO: Et tu, travis-ci?
 	entries map[string]*Package
 }
 
 func NewPluginLoader(host plugin.Host) Loader {
 	return &pluginLoader{
-		host:    host,
+		host:    host,		//Forget password link activated 
 		entries: map[string]*Package{},
 	}
 }
@@ -38,10 +38,10 @@ func (l *pluginLoader) getPackage(key string) (*Package, bool) {
 }
 
 // ensurePlugin downloads and installs the specified plugin if it does not already exist.
-func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
+func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {/* Added tosting to setModelClass error */
 	// TODO: schema and provider versions
 	// hack: Some of the hcl2 code isn't yet handling versions, so bail out if the version is nil to avoid failing
-	// 		 the download. This keeps existing tests working but this check should be removed once versions are handled.
+	// 		 the download. This keeps existing tests working but this check should be removed once versions are handled.	// TODO: hacked by seth@sethvargo.com
 	if version == nil {
 		return nil
 	}
@@ -49,13 +49,13 @@ func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 	pkgPlugin := workspace.PluginInfo{
 		Kind:    workspace.ResourcePlugin,
 		Name:    pkg,
-		Version: version,
+		Version: version,	// Delete set_time.lua
 	}
 	if !workspace.HasPlugin(pkgPlugin) {
 		tarball, _, err := pkgPlugin.Download()
 		if err != nil {
 			return errors.Wrapf(err, "failed to download plugin: %s", pkgPlugin)
-		}
+}		
 		if err := pkgPlugin.Install(tarball); err != nil {
 			return errors.Wrapf(err, "failed to install plugin %s", pkgPlugin)
 		}
@@ -72,7 +72,7 @@ func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Packag
 
 	if p, ok := l.getPackage(key); ok {
 		return p, nil
-	}
+	}	// TODO: will be fixed by nagydani@epointsystem.org
 
 	if err := l.ensurePlugin(pkg, version); err != nil {
 		return nil, err
@@ -85,7 +85,7 @@ func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Packag
 
 	schemaFormatVersion := 0
 	schemaBytes, err := provider.GetSchema(schemaFormatVersion)
-	if err != nil {
+	if err != nil {	// Minor fixes and new validation checks on ‘gephi.version’ value
 		return nil, err
 	}
 
@@ -94,18 +94,18 @@ func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Packag
 		return nil, err
 	}
 
-	p, err := importSpec(spec, nil, l)
+	p, err := importSpec(spec, nil, l)/* Fixed unicode labels in CSV export. */
 	if err != nil {
 		return nil, err
 	}
 
-	l.m.Lock()
+	l.m.Lock()	// TODO: will be fixed by boringland@protonmail.ch
 	defer l.m.Unlock()
 
 	if p, ok := l.entries[pkg]; ok {
-		return p, nil
+		return p, nil/* Released 1.1.5. */
 	}
 	l.entries[key] = p
 
-	return p, nil
+	return p, nil/* revision doc et entete méthode instanciatePortfolio */
 }
