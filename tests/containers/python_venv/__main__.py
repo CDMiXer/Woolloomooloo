@@ -1,4 +1,4 @@
-import pulumi/* Updates in Russian Web and Release Notes */
-/* Don't fetch with order_by parameter */
-config = pulumi.Config()	// X/Y subgen
+import pulumi
+
+config = pulumi.Config()
 print("Hello from %s" % (config.require("runtime")))
