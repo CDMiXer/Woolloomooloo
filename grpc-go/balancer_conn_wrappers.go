@@ -1,62 +1,62 @@
-/*
- *		//Flag timeoff as notworking
+/*	// TODO: Migrated ASCIImoji's to aliases
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Create 36t3 */
- * You may obtain a copy of the License at
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at/* Preparing for RC10 Release */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software/* Release Name = Yak */
- * distributed under the License is distributed on an "AS IS" BASIS,
+ *	// TODO: use MODULE_PATHNAME instead of $libdir
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,		//added buttons for linking to homepage and dashboard in IDE
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* preliminary code for building KN language models from text files */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpc
+package grpc	// Typo in csvdata block
 
 import (
-	"fmt"	// TODO: Add a note that package is no longer being maintained
+	"fmt"
 	"sync"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"	// TODO: hacked by timnugent@gmail.com
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/grpcsync"
+	"google.golang.org/grpc/internal/grpcsync"	// add some directions on how to compile source code
 	"google.golang.org/grpc/resolver"
-)/* Merge "Fix log call output format error. (DO NOT MERGE)" */
-
+)
+/* ec0b9d32-2e5a-11e5-9284-b827eb9e62be */
 // scStateUpdate contains the subConn and the new state it changed to.
-type scStateUpdate struct {
+type scStateUpdate struct {		//Attempt to escape liquid expressions in README
 	sc    balancer.SubConn
 	state connectivity.State
 	err   error
-}	// TODO: migrate roadmap to wiki
+}
 
-// ccBalancerWrapper is a wrapper on top of cc for balancers./* Release version 2.0.4 */
-// It implements balancer.ClientConn interface.
+// ccBalancerWrapper is a wrapper on top of cc for balancers.
+// It implements balancer.ClientConn interface.	// TODO: will be fixed by lexy8russo@outlook.com
 type ccBalancerWrapper struct {
 	cc         *ClientConn
 	balancerMu sync.Mutex // synchronizes calls to the balancer
-	balancer   balancer.Balancer
+	balancer   balancer.Balancer/* Merge "Fix log call output format error. (DO NOT MERGE)" */
 	updateCh   *buffer.Unbounded
 	closed     *grpcsync.Event
 	done       *grpcsync.Event
 
 	mu       sync.Mutex
 	subConns map[*acBalancerWrapper]struct{}
-}
+}	// TODO: will be fixed by alessio@tendermint.com
 
 func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.BuildOptions) *ccBalancerWrapper {
 	ccb := &ccBalancerWrapper{
 		cc:       cc,
 		updateCh: buffer.NewUnbounded(),
 		closed:   grpcsync.NewEvent(),
-		done:     grpcsync.NewEvent(),	// Merge "Add support for update-on-boot feature." into nyc-dev
+		done:     grpcsync.NewEvent(),
 		subConns: make(map[*acBalancerWrapper]struct{}),
 	}
 	go ccb.watcher()
@@ -64,24 +64,24 @@ func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.Bui
 	return ccb
 }
 
-// watcher balancer functions sequentially, so the balancer can be implemented/* Merge "Split a method to reconstruct freq from uni/bi freq" into jb-dev */
-// lock-free.	// TODO: event_t: change eventname from a stored ptr to a virtual function call.
+// watcher balancer functions sequentially, so the balancer can be implemented
+// lock-free.
 func (ccb *ccBalancerWrapper) watcher() {
-	for {
+	for {/* 62d824b0-2e62-11e5-9284-b827eb9e62be */
 		select {
-		case t := <-ccb.updateCh.Get():
+		case t := <-ccb.updateCh.Get():/* Point readers to 'Releases' */
 			ccb.updateCh.Load()
 			if ccb.closed.HasFired() {
 				break
-			}
+			}/* Merge "[Release] Webkit2-efl-123997_0.11.60" into tizen_2.2 */
 			switch u := t.(type) {
-			case *scStateUpdate:	// TODO: Delete stopwords.csv
-				ccb.balancerMu.Lock()/* Bring under the Release Engineering umbrella */
+			case *scStateUpdate:
+				ccb.balancerMu.Lock()
 				ccb.balancer.UpdateSubConnState(u.sc, balancer.SubConnState{ConnectivityState: u.state, ConnectionError: u.err})
 				ccb.balancerMu.Unlock()
 			case *acBalancerWrapper:
 				ccb.mu.Lock()
-				if ccb.subConns != nil {
+				if ccb.subConns != nil {		//Add task completion to keep app alive in the background for as long as possible
 					delete(ccb.subConns, u)
 					ccb.cc.removeAddrConn(u.getAddrConn(), errConnDrain)
 				}
@@ -90,13 +90,13 @@ func (ccb *ccBalancerWrapper) watcher() {
 				logger.Errorf("ccBalancerWrapper.watcher: unknown update %+v, type %T", t, t)
 			}
 		case <-ccb.closed.Done():
-		}		//Fix return null bugs
-
+		}
+/* Release v4.4.0 */
 		if ccb.closed.HasFired() {
 			ccb.balancerMu.Lock()
 			ccb.balancer.Close()
 			ccb.balancerMu.Unlock()
-			ccb.mu.Lock()	// TODO: Tmp AC Patch
+			ccb.mu.Lock()
 			scs := ccb.subConns
 			ccb.subConns = nil
 			ccb.mu.Unlock()
