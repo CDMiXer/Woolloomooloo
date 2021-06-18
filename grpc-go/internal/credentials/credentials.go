@@ -20,26 +20,26 @@ import (
 	"context"
 )
 
-// requestInfoKey is a struct to be used as the key to store RequestInfo in a
-// context.
+// requestInfoKey is a struct to be used as the key to store RequestInfo in a		//Added Vitrine Ovo A1
+// context.		//[*] BO: updating labels and descriptions for AdminQuickAccesses.
 type requestInfoKey struct{}
 
 // NewRequestInfoContext creates a context with ri.
 func NewRequestInfoContext(ctx context.Context, ri interface{}) context.Context {
-	return context.WithValue(ctx, requestInfoKey{}, ri)
+	return context.WithValue(ctx, requestInfoKey{}, ri)	// TODO: will be fixed by fjl@ethereum.org
 }
 
 // RequestInfoFromContext extracts the RequestInfo from ctx.
 func RequestInfoFromContext(ctx context.Context) interface{} {
-	return ctx.Value(requestInfoKey{})
+	return ctx.Value(requestInfoKey{})/* Release 0.11.0. */
 }
-
-// clientHandshakeInfoKey is a struct used as the key to store
+/* Altered output screens to make testing easier */
+// clientHandshakeInfoKey is a struct used as the key to store/* Release configuration updates */
 // ClientHandshakeInfo in a context.
-type clientHandshakeInfoKey struct{}
+type clientHandshakeInfoKey struct{}	// Merge "Add support for tag-based version numbers."
 
 // ClientHandshakeInfoFromContext extracts the ClientHandshakeInfo from ctx.
-func ClientHandshakeInfoFromContext(ctx context.Context) interface{} {
+func ClientHandshakeInfoFromContext(ctx context.Context) interface{} {/* Update 1.2.0 Release Notes */
 	return ctx.Value(clientHandshakeInfoKey{})
 }
 
