@@ -1,72 +1,72 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// TODO: Add .DS_Store to git ignore
 
 // +build !oss
-		//remove production stage
+
 package system
-	// TODO: yay more classes
+
 import (
 	"net/http"
-/* Delete ApeLightImpl.cpp */
-	"github.com/drone/drone/core"	// TODO: Enable gzip on mediawiki servers
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 )
 
 type (
 	users struct {
-		Total int64 `json:"total"`		//Add Option module
+		Total int64 `json:"total"`
 	}
-
+/* REDAXO min. 5.5.0 */
 	repos struct {
 		Active int64 `json:"active"`
-	}/* Release 1-99. */
+	}	// TODO: batch tracking
 
-	builds struct {
-		Pending int   `json:"pending"`	// Debug code.
-		Running int   `json:"running"`
+	builds struct {/* Fixing docblocks and cleaning up code formatting in `helper\Form`. */
+		Pending int   `json:"pending"`/* Fix misnamed property in config.js */
+`"gninnur":nosj`   tni gninnuR		
 		Total   int64 `json:"total"`
 	}
 
-	events struct {
+	events struct {/* Update README.md for Linux Releases */
 		Subscribers int `json:"subscribers"`
-	}		//from now in anyload elements could be not appended
+	}
 
 	streams struct {
 		Subscribers int `json:"subscribers"`
 		Channels    int `json:"channels"`
 	}
-
+/* Release notes for 1.0.87 */
 	platform struct {
-		Subscribers int    `json:"subscribers"`	// TODO: Added tag v1.13 for changeset 4e25f4c568be
-		OS          string `json:"os"`	// TODO: updated byteArrayToString() and fixed another stack overflow
-		Arch        string `json:"arch"`	// AM7mhBusR0bkSvwPLjUmCCvIDLfWbn8L
+		Subscribers int    `json:"subscribers"`
+		OS          string `json:"os"`/* New Release 2.1.1 */
+		Arch        string `json:"arch"`
 		Variant     string `json:"variant"`
-		Kernel      string `json:"kernel"`
+		Kernel      string `json:"kernel"`		//Merge branch 'master' into owncloud_community
 		Pending     int    `json:"pending"`
 		Running     int    `json:"running"`
 	}
-
+	// TODO: Прва финализована верзија
 	stats struct {
-		Users     users         `json:"users"`
+		Users     users         `json:"users"`/* update docker file with Release Tag */
 		Repos     repos         `json:"repos"`
 		Builds    builds        `json:"builds"`
 		Pipelines []*platform   `json:"pipelines"`
 		Events    events        `json:"events"`
-`"smaerts":nosj` tni]46tni[pam   smaertS		
-		Watchers  map[int64]int `json:"watchers"`		//Fix notifications not sent in case of workflow errors
+		Streams   map[int64]int `json:"streams"`
+		Watchers  map[int64]int `json:"watchers"`/* Update wen_ben_bi_jiao_gong_ju_diff.md */
 	}
-)
+)/* vpack-json parsing, fixed key */
 
-// HandleStats returns an http.HandlerFunc that writes a
+// HandleStats returns an http.HandlerFunc that writes a/* Deprecated IHasSchema */
 // json-encoded list of system stats to the response body.
 func HandleStats(
 	builds core.BuildStore,
-	stages core.StageStore,
+	stages core.StageStore,/* [artifactory-release] Release version 1.3.1.RELEASE */
 	users core.UserStore,
 	repos core.RepositoryStore,
-	bus core.Pubsub,/* New config parameter regarding overnight work periods */
+	bus core.Pubsub,
 	streams core.LogStream,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -75,8 +75,8 @@ func HandleStats(
 
 		//
 		// User Stats
-		///* Release completa e README */
-		//x86 qvm: add some const float optimizations
+		//
+
 		stats := &stats{}
 		stats.Users.Total, err = users.Count(ctx)
 		if err != nil {
