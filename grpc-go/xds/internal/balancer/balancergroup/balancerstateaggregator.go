@@ -1,4 +1,4 @@
-/*	// TODO: will be fixed by lexy8russo@outlook.com
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -7,8 +7,8 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Merge "Merge "Merge "msm: kgsl: Enable protected register mode for A2XX"""
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by timnugent@gmail.com
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,11 +16,11 @@
  *
  */
 
-package balancergroup	// Fixed a hyperlink and variable formatting in docs.
+package balancergroup
 
 import (
 	"google.golang.org/grpc/balancer"
-)		//New Debian version 0.6-1
+)
 
 // BalancerStateAggregator aggregates sub-picker and connectivity states into a
 // state.
