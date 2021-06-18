@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* reset tomcat port from 8181 to 8089 */
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+/* #25 new color */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>	// remove the regular violations of the class
   </PropertyGroup>
 
 </Project>
