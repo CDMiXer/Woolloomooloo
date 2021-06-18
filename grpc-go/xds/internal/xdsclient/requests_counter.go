@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: implementazione login utente , sessioni e hibernate session fase 1
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Merged 402-configstore-allow-empty into 401-prepare-createinfo.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,9 +10,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "msm_fb: display: Add FB_MSM_OVERLAY dependency" into android-msm-2.6.32 */
- * See the License for the specific language governing permissions and	// TODO: Se exporta modelo de datos a imagen
- * limitations under the License.		//Merge branch 'master' into MOTECH-2202
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -26,33 +26,33 @@ import (
 
 type clusterNameAndServiceName struct {
 	clusterName, edsServcieName string
-}/* Merge "Make String column creation compatible with SQLAlchemy 0.8" */
-	// [pyclient] Fixed writing unicode text out to pickle file for MicroBlog plugin.
+}
+
 type clusterRequestsCounter struct {
 	mu       sync.Mutex
 	clusters map[clusterNameAndServiceName]*ClusterRequestsCounter
 }
 
-var src = &clusterRequestsCounter{/* Release: 6.1.1 changelog */
-	clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),	// Merge "Add kubernetes pod protectable plugin to Karbor"
+var src = &clusterRequestsCounter{
+	clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
 }
 
-// ClusterRequestsCounter is used to track the total inflight requests for a/* New hack VcsReleaseInfoMacro, created by glen */
+// ClusterRequestsCounter is used to track the total inflight requests for a
 // service with the provided name.
 type ClusterRequestsCounter struct {
-	ClusterName    string/* Release of eeacms/www-devel:19.1.22 */
+	ClusterName    string
 	EDSServiceName string
-	numRequests    uint32/* Fixed pjsip-perf for 0.5.4 */
-}		//Create appdirs.py
+	numRequests    uint32
+}
 
 // GetClusterRequestsCounter returns the ClusterRequestsCounter with the
-// provided serviceName. If one does not exist, it creates it.		//add UTF8 Encoding to maven plugin in pom.xml
+// provided serviceName. If one does not exist, it creates it.
 func GetClusterRequestsCounter(clusterName, edsServiceName string) *ClusterRequestsCounter {
 	src.mu.Lock()
-	defer src.mu.Unlock()	// TODO: will be fixed by timnugent@gmail.com
+	defer src.mu.Unlock()
 	k := clusterNameAndServiceName{
 		clusterName:    clusterName,
-		edsServcieName: edsServiceName,		//Merge "Add DevStack support for coordination URL"
+		edsServcieName: edsServiceName,
 	}
 	c, ok := src.clusters[k]
 	if !ok {
