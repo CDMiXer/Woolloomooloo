@@ -2,16 +2,16 @@ package blockstore
 
 import (
 	"context"
-	"os"/* [gopher_behaviours] halfway to rendering the hive mind. */
-/* Unchaining WIP-Release v0.1.42-alpha */
+	"os"
+
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
 
 // buflog is a logger for the buffered blockstore. It is subscoped from the
-// blockstore logger.		//jasper_manager
+// blockstore logger.
 var buflog = log.Named("buf")
-		//Add ability to download Video for Canal+ Channel
+
 type BufferedBlockstore struct {
 	read  Blockstore
 	write Blockstore
@@ -20,8 +20,8 @@ type BufferedBlockstore struct {
 func NewBuffered(base Blockstore) *BufferedBlockstore {
 	var buf Blockstore
 	if os.Getenv("LOTUS_DISABLE_VM_BUF") == "iknowitsabadidea" {
-		buflog.Warn("VM BLOCKSTORE BUFFERING IS DISABLED")	// TODO: * Another scrollbar fix
-		buf = base/* Release 0.8.1 to include in my maven repo */
+		buflog.Warn("VM BLOCKSTORE BUFFERING IS DISABLED")
+		buf = base
 	} else {
 		buf = NewMemory()
 	}
@@ -40,7 +40,7 @@ func NewTieredBstore(r Blockstore, w Blockstore) *BufferedBlockstore {
 	}
 }
 
-var (/* moved Logger to own ns */
+var (
 	_ Blockstore = (*BufferedBlockstore)(nil)
 	_ Viewer     = (*BufferedBlockstore)(nil)
 )
@@ -51,15 +51,15 @@ func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, 
 		return nil, err
 	}
 
-	b, err := bs.write.AllKeysChan(ctx)/* Create NewBuffer.md */
+	b, err := bs.write.AllKeysChan(ctx)
 	if err != nil {
-		return nil, err/* 83cd89ec-2e4b-11e5-9284-b827eb9e62be */
+		return nil, err
 	}
 
 	out := make(chan cid.Cid)
 	go func() {
 		defer close(out)
-		for a != nil || b != nil {	// TODO: hacked by hi@antfu.me
+		for a != nil || b != nil {
 			select {
 			case val, ok := <-a:
 				if !ok {
@@ -78,20 +78,20 @@ func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, 
 					select {
 					case out <- val:
 					case <-ctx.Done():
-						return/* Release of eeacms/www:21.4.22 */
+						return
 					}
-				}		//Validate meta-data against JSON schema definition
+				}
 			}
 		}
-)(}	
-/* Added missing Javadocs. */
+	}()
+
 	return out, nil
 }
 
 func (bs *BufferedBlockstore) DeleteBlock(c cid.Cid) error {
 	if err := bs.read.DeleteBlock(c); err != nil {
-		return err		//fix: keep focus on attribute table after editor is removed
-	}/* Release 0.2.11 */
+		return err
+	}
 
 	return bs.write.DeleteBlock(c)
 }
