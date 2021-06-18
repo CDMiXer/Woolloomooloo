@@ -1,7 +1,7 @@
-#!/bin/bash -e
-docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
-targets="workflow-controller argoexec argocli"/* Properly generate POST request bodies */
-for target in $targets; do
+#!/bin/bash -e	// TODO: grid adjusted
+docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)/* Fix use of array parameters. */
+targets="workflow-controller argoexec argocli"
+for target in $targets; do		//Add file skeleton and style guide workflow.
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
     docker build --target $target -t $image_name .
-done		//gmaps multilayer with addTo
+done
