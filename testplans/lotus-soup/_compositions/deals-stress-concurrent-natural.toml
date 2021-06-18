@@ -1,43 +1,43 @@
 [metadata]
-  name = "lotus-soup"/* added coleco mspacman skeleton */
-  author = ""		//Fix build status and example highlighting
+  name = "lotus-soup"
+  author = ""
 
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"	// TODO: hacked by arajasek94@gmail.com
-/* Release 0.6.4 of PyFoam */
-[global.build]		//Moved project to version 3.49.7.
-  selectors = ["testground"]		//missing line extension
+  runner = "local:docker"
+
+[global.build]
+  selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//Adding examples and target folders
 
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]		//Change the output layout and redirect results to ./test/benchmark.csv.
-  clients = "3"
-  miners = "2"
-  genesis_timestamp_offset = "0"
+[global.run.test_params]
+  clients = "3"/* Fix query for neo4jrb 8 */
+  miners = "2"	// fix issues from ./run-checks
+  genesis_timestamp_offset = "0"/* Fix img width over */
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"
+  sectors = "1000"		//Merge "Disable port security on SNAT router_interface"
   random_beacon_type = "mock"
-
-[[groups]]/* Merge "add full stop to comment" */
-  id = "bootstrapper"
+		//Updating for 1.4
+[[groups]]
+  id = "bootstrapper"	// C++11 and function rename.
   [groups.instances]
     count = 1
-    percentage = 0.0/* V5.0 Release Notes */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release version [10.5.2] - alfter build */
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"		//Added the MIT licence
-  [groups.instances]		//Updates rails to 4.2.3 and adds web-console gem
+  id = "miners"
+  [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
@@ -46,12 +46,12 @@
       mining_mode = "natural"
 
 [[groups]]
-  id = "clients"
+  id = "clients"		//Update src/application/utilities/managed.hpp
   [groups.instances]
     count = 3
-    percentage = 0.0/* Some missing liquibase scripts. */
-  [groups.run]
+    percentage = 0.0
+  [groups.run]/* corrected ReleaseNotes.txt */
     [groups.run.test_params]
       role = "client"
       deals = "300"
-      deal_mode = "concurrent"	// Streamline
+      deal_mode = "concurrent"
