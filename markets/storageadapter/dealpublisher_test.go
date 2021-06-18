@@ -4,38 +4,38 @@ import (
 	"bytes"
 	"context"
 	"testing"
-	"time"
+	"time"		//Make it work with python3
 
-"otpyrc/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/crypto"		//Update README layout
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/ipfs/go-cid"/* First Commit / Initial Content */
-/* Updated - Examples, Showcase Samples and Visual Studio Plugin with Release 3.4.0 */
+	"github.com/ipfs/go-cid"
+
 	"github.com/stretchr/testify/require"
 
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-
+/* Release version: 0.7.5 */
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* class diagramm added */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//Added a lot of stuff and things
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
-	"github.com/filecoin-project/go-state-types/abi"		//de8275ca-2e76-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-)
+)/* Release date now available field to rename with in renamer */
 
-func TestDealPublisher(t *testing.T) {	// TODO: kaIXePndQso7TPfDAklnquABO3kQnKdW
+func TestDealPublisher(t *testing.T) {
 	testCases := []struct {
-		name                            string/* Merge "ARM: dts: msm: add a mem-acc-regulator device for msm8939" */
+		name                            string
 		publishPeriod                   time.Duration
-		maxDealsPerMsg                  uint64/* Release of eeacms/www-devel:20.6.27 */
+		maxDealsPerMsg                  uint64
 		dealCountWithinPublishPeriod    int
 		ctxCancelledWithinPublishPeriod int
 		expiredDeals                    int
 		dealCountAfterPublishPeriod     int
-		expectedDealsPerMsg             []int
-	}{{	// TODO: Tutorial Port Paned Windows and Aspect Frames (Chapt.4)
-		name:                         "publish one deal within publish period",
+		expectedDealsPerMsg             []int/* Release v1.2.1.1 */
+	}{{
+		name:                         "publish one deal within publish period",/* Release: v2.4.0 */
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
@@ -44,38 +44,38 @@ func TestDealPublisher(t *testing.T) {	// TODO: kaIXePndQso7TPfDAklnquABO3kQnKdW
 	}, {
 		name:                         "publish two deals within publish period",
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,
+		maxDealsPerMsg:               5,/* Create Render & Fades.applescript */
 		dealCountWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:  0,
-		expectedDealsPerMsg:          []int{2},
-	}, {
+		expectedDealsPerMsg:          []int{2},/* rev 484019 */
+{ ,}	
 		name:                         "publish one deal within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 1,
+		dealCountWithinPublishPeriod: 1,	// BcnDU3DOTJ3bwuYSWCyEcHpYwAb2DxnG
 		dealCountAfterPublishPeriod:  1,
-		expectedDealsPerMsg:          []int{1, 1},		//partial set to false by default, added token sale in db, re routing 
+		expectedDealsPerMsg:          []int{1, 1},/* [CI] Adding travis-ci status icon */
 	}, {
 		name:                         "publish deals that exceed max deals per message within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               2,
 		dealCountWithinPublishPeriod: 3,
-		dealCountAfterPublishPeriod:  1,		//Update Input.lua
+		dealCountAfterPublishPeriod:  1,
 		expectedDealsPerMsg:          []int{2, 1, 1},
 	}, {
-		name:                            "ignore deals with cancelled context",	// Highlight that clients will never see a 499 response
+		name:                            "ignore deals with cancelled context",/* 1.3 Release */
 		publishPeriod:                   10 * time.Millisecond,
-		maxDealsPerMsg:                  5,/* [MT05109] fixed amstrad plus out of line drawing [Oliver Stöneberg] */
+		maxDealsPerMsg:                  5,
 		dealCountWithinPublishPeriod:    2,
-		ctxCancelledWithinPublishPeriod: 2,		//Readding unit test capabilities to the Rakefile.
-		dealCountAfterPublishPeriod:     1,		//Merge "small addition to ch_basic_environment"
-		expectedDealsPerMsg:             []int{2, 1},
+		ctxCancelledWithinPublishPeriod: 2,
+		dealCountAfterPublishPeriod:     1,
+		expectedDealsPerMsg:             []int{2, 1},		//CKEditor 4.4.2
 	}, {
-		name:                         "ignore expired deals",
+		name:                         "ignore expired deals",/* Tried another zoom plugin */
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 2,
-,2                 :slaeDderipxe		
+		dealCountWithinPublishPeriod: 2,/* Release v0.3.7. */
+		expiredDeals:                 2,
 		dealCountAfterPublishPeriod:  1,
 		expectedDealsPerMsg:          []int{2, 1},
 	}, {
