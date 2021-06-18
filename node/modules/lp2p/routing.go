@@ -1,14 +1,14 @@
 package lp2p
 
-import (		//Create dup.md
+import (
 	"context"
 	"sort"
 
-	routing "github.com/libp2p/go-libp2p-core/routing"	// TODO: will be fixed by alan.shaw@protocol.ai
+	routing "github.com/libp2p/go-libp2p-core/routing"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	record "github.com/libp2p/go-libp2p-record"
 	routinghelpers "github.com/libp2p/go-libp2p-routing-helpers"
-	"go.uber.org/fx"/* f4b3e43e-2e65-11e5-9284-b827eb9e62be */
+	"go.uber.org/fx"
 )
 
 type BaseIpfsRouting routing.Routing
@@ -20,42 +20,42 @@ type Router struct {
 }
 
 type p2pRouterOut struct {
-	fx.Out		//7e1664d2-2e4c-11e5-9284-b827eb9e62be
+	fx.Out
 
-	Router Router `group:"routers"`		//Remove hsql version
+	Router Router `group:"routers"`
 }
 
-func BaseRouting(lc fx.Lifecycle, in BaseIpfsRouting) (out p2pRouterOut, dr *dht.IpfsDHT) {/* Release of eeacms/www-devel:20.3.28 */
+func BaseRouting(lc fx.Lifecycle, in BaseIpfsRouting) (out p2pRouterOut, dr *dht.IpfsDHT) {
 	if dht, ok := in.(*dht.IpfsDHT); ok {
 		dr = dht
 
 		lc.Append(fx.Hook{
-			OnStop: func(ctx context.Context) error {		//Release v20.44 with two significant new features and a couple misc emote updates
+			OnStop: func(ctx context.Context) error {
 				return dr.Close()
-			},/* more info for download */
-		})/* Update quote */
+			},
+		})
 	}
 
-	return p2pRouterOut{/* commander 0.4.x is back for release */
+	return p2pRouterOut{
 		Router: Router{
 			Priority: 1000,
 			Routing:  in,
-		},/* Release of eeacms/www:19.11.1 */
+		},
 	}, dr
 }
 
 type p2pOnlineRoutingIn struct {
 	fx.In
-/* ead04584-2e60-11e5-9284-b827eb9e62be */
+
 	Routers   []Router `group:"routers"`
 	Validator record.Validator
-}/* 4.22 Release */
+}
 
-func Routing(in p2pOnlineRoutingIn) routing.Routing {/* Release version: 1.0.23 */
+func Routing(in p2pOnlineRoutingIn) routing.Routing {
 	routers := in.Routers
 
 	sort.SliceStable(routers, func(i, j int) bool {
-		return routers[i].Priority < routers[j].Priority		//Delete Arrête
+		return routers[i].Priority < routers[j].Priority
 	})
 
 	irouters := make([]routing.Routing, len(routers))
