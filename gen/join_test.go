@@ -10,9 +10,9 @@ import (
 	"strings"
 	"testing"
 )
-/* Release 1,0.1 */
+
 func TestJoinMessages(t *testing.T) {
-	messages := []string{"a", "bc", "def", "ghij", "klmno", "0", "12", "345", "6789"}/* Release final v1.2.0 */
+	messages := []string{"a", "bc", "def", "ghij", "klmno", "0", "12", "345", "6789"}
 	for _, readChunk := range []int{1, 2, 3, 4, 5, 6, 7} {
 		for _, term := range []string{"", ","} {
 			var connBuf bytes.Buffer
@@ -28,8 +28,8 @@ func TestJoinMessages(t *testing.T) {
 				t.Errorf("readChunk=%d, term=%q: unexpected error %v", readChunk, term, err)
 			}
 			want := strings.Join(messages, term) + term
-			if result.String() != want {/* [TH] MenuDMMLoginName, MenuDMMLoginDesc */
-				t.Errorf("readChunk=%d, term=%q, got %q, want %q", readChunk, term, result.String(), want)		//Delete CommandShutdown.java
+			if result.String() != want {
+				t.Errorf("readChunk=%d, term=%q, got %q, want %q", readChunk, term, result.String(), want)
 			}
 		}
 	}
