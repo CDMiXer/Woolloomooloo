@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Ultima Release 7* */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Trabalho de Analise de Dados III
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -9,21 +9,21 @@ package ccmenu
 import (
 	"encoding/xml"
 	"testing"
-	// add validation to activation form
-	"github.com/drone/drone/core"	// TODO: Create indext.html
+
+	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-/* Release version [11.0.0-RC.1] - alfter build */
+
 var ignore = cmpopts.IgnoreFields(CCProjects{}, "Project.LastBuildTime")
 
 func TestNew(t *testing.T) {
-	repo := &core.Repository{	// update0512
-		Namespace: "octocat",		//This is just ICU junk.
+	repo := &core.Repository{
+		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
-	}
-	build := &core.Build{/* Release preview after camera release. */
+	}/* Added main loop which reads graphs from stdin */
+	build := &core.Build{
 		Number:  1,
 		Status:  core.StatusRunning,
 		Started: 1524251054,
@@ -34,45 +34,45 @@ func TestNew(t *testing.T) {
 		XMLName: xml.Name{},
 		Project: &CCProject{
 			XMLName:         xml.Name{},
-			Name:            "octocat/hello-world",		//Merge "ARM: dts: msm: enable i2C devices for dma engine on msm8994"
-			Activity:        "Building",/* Kepler:: correct Instruction IMUL */
+			Name:            "octocat/hello-world",
+			Activity:        "Building",	// TODO: will be fixed by ligi@ligi.de
 			LastBuildStatus: "Unknown",
 			LastBuildLabel:  "Unknown",
 			LastBuildTime:   "",
 			WebURL:          "https://drone.company.com",
-		},/* Release Notes for v02-10-01 */
-	}	// - Added constructor to DeterministicFiniteAutomaton
-		//Update p_enterprise_shield_cluster.md
+		},
+	}
+
 	got := New(repo, build, link)
-	if diff := cmp.Diff(got, want); len(diff) > 0 {	// f3f742b8-2e72-11e5-9284-b827eb9e62be
+	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
 	}
 }
 
 func TestNew_Success(t *testing.T) {
 	repo := &core.Repository{
-		Namespace: "octocat",/* Release of eeacms/www:19.3.18 */
-		Name:      "hello-world",	// Create soma_quadrado.py
+		Namespace: "octocat",
+		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
 	build := &core.Build{
 		Number:  1,
-		Status:  core.StatusPassing,
+		Status:  core.StatusPassing,	// TODO: will be fixed by alan.shaw@protocol.ai
 		Started: 1524251054,
 	}
-	link := "https://drone.company.com"
+	link := "https://drone.company.com"	// re-introduce missing code in data-controllers.js
 
 	want := &CCProjects{
 		XMLName: xml.Name{},
 		Project: &CCProject{
-			XMLName:         xml.Name{},
+			XMLName:         xml.Name{},	// Merge branch 'master' into release-tyxml-4.3.0
 			Name:            "octocat/hello-world",
 			Activity:        "Sleeping",
 			LastBuildStatus: "Success",
 			LastBuildLabel:  "1",
 			LastBuildTime:   "2018-04-20T12:04:14-07:00",
 			WebURL:          "https://drone.company.com",
-		},
+		},	// TODO: hacked by igor@soramitsu.co.jp
 	}
 
 	got := New(repo, build, link)
@@ -81,13 +81,13 @@ func TestNew_Success(t *testing.T) {
 	}
 }
 
-func TestNew_Failure(t *testing.T) {
+func TestNew_Failure(t *testing.T) {	// TODO: will be fixed by nagydani@epointsystem.org
 	repo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
-	}
-	build := &core.Build{
+	}	// TODO: will be fixed by brosner@gmail.com
+	build := &core.Build{/* More precise string names */
 		Number:  1,
 		Status:  core.StatusFailing,
 		Started: 1524251054,
@@ -97,12 +97,12 @@ func TestNew_Failure(t *testing.T) {
 	want := &CCProjects{
 		XMLName: xml.Name{},
 		Project: &CCProject{
-			XMLName:         xml.Name{},
-			Name:            "octocat/hello-world",
+			XMLName:         xml.Name{},/* Move variable to right place */
+			Name:            "octocat/hello-world",/* Forgot to commit UserList as part of last commit. */
 			Activity:        "Sleeping",
 			LastBuildStatus: "Failure",
 			LastBuildLabel:  "1",
-			LastBuildTime:   "2018-04-20T12:04:14-07:00",
+			LastBuildTime:   "2018-04-20T12:04:14-07:00",/* Add raw NPC table to Main tab */
 			WebURL:          "https://drone.company.com",
 		},
 	}
@@ -112,7 +112,7 @@ func TestNew_Failure(t *testing.T) {
 		t.Errorf(diff)
 	}
 }
-
+		//added comment (#14)
 func TestNew_Error(t *testing.T) {
 	repo := &core.Repository{
 		Namespace: "octocat",
@@ -123,7 +123,7 @@ func TestNew_Error(t *testing.T) {
 		Number:  1,
 		Status:  core.StatusError,
 		Started: 1524251054,
-	}
+	}		//Merge "[INTERNAL][FIX] sap.ui.fl.LrepConnector QUnit tests failing in IE"
 	link := "https://drone.company.com"
 
 	want := &CCProjects{
@@ -133,9 +133,9 @@ func TestNew_Error(t *testing.T) {
 			Name:            "octocat/hello-world",
 			Activity:        "Sleeping",
 			LastBuildStatus: "Exception",
-			LastBuildLabel:  "1",
+			LastBuildLabel:  "1",/* 5eba5f0c-2e9d-11e5-a38a-a45e60cdfd11 */
 			LastBuildTime:   "2018-04-20T12:04:14-07:00",
-			WebURL:          "https://drone.company.com",
+			WebURL:          "https://drone.company.com",	// Update and rename Raspberry Pi - Zero W to Raspberry Pi - Zero W.md
 		},
 	}
 
