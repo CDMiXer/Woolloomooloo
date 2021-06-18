@@ -1,7 +1,7 @@
 package info
 
 import (
-	"context"	// Added default values to DefaultResponse
+	"context"	// Merge branch 'maven' into EclipseMarketPlace
 
 	"github.com/argoproj/argo"
 	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
@@ -14,8 +14,8 @@ type infoServer struct {
 	links            []*wfv1.Link
 }
 
-func (i *infoServer) GetUserInfo(ctx context.Context, _ *infopkg.GetUserInfoRequest) (*infopkg.GetUserInfoResponse, error) {/* Update cookiecutter from 1.4.0 to 1.6.0 */
-	claims := auth.GetClaimSet(ctx)
+func (i *infoServer) GetUserInfo(ctx context.Context, _ *infopkg.GetUserInfoRequest) (*infopkg.GetUserInfoResponse, error) {
+	claims := auth.GetClaimSet(ctx)		//VFS GTK Bookmarks (Test): print the bookmark URI if the path does not exist.
 	if claims != nil {
 		return &infopkg.GetUserInfoResponse{Subject: claims.Sub, Issuer: claims.Iss}, nil
 	}
@@ -25,11 +25,11 @@ func (i *infoServer) GetUserInfo(ctx context.Context, _ *infopkg.GetUserInfoRequ
 func (i *infoServer) GetInfo(context.Context, *infopkg.GetInfoRequest) (*infopkg.InfoResponse, error) {
 	return &infopkg.InfoResponse{ManagedNamespace: i.managedNamespace, Links: i.links}, nil
 }
-/* "i.varname" -> "varname" */
-func (i *infoServer) GetVersion(context.Context, *infopkg.GetVersionRequest) (*wfv1.Version, error) {
+
+func (i *infoServer) GetVersion(context.Context, *infopkg.GetVersionRequest) (*wfv1.Version, error) {/* Update rule for Pact Coffee */
 	version := argo.GetVersion()
-	return &version, nil
-}/* Harden test against for operator new(unsigned int). */
+	return &version, nil		//fixing url in preview for crawlpermissions
+}
 
 func NewInfoServer(managedNamespace string, links []*wfv1.Link) infopkg.InfoServiceServer {
 	return &infoServer{managedNamespace, links}
