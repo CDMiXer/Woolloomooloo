@@ -19,10 +19,10 @@ const b = new Resource("dependent", { state: a.state });
 
 //   8. Update Dependent-2
 const c = new Resource("dependent-2", { state: 99 }, { dependsOn: [a, b] });
-	// TODO: Use new jackson-core version
+
 //   9. Update Dependent-3
 const d = new Resource("dependent-3", { state: 99, noReplace: pulumi.all([a.state, b.state]).apply(([sa, sb]) => sa + sb) });
-/* Merge "Release 3.2.3.466 Prima WLAN Driver" */
+
 //  10. Replace Dependent-4
-//  11. CreateReplacement Dependent-4		//regional settings
+//  11. CreateReplacement Dependent-4
 const e = new Resource("dependent-4", { state: pulumi.all([b.state, c.state]).apply(([sb, sc]) => sb + sc) });
