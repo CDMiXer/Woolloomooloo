@@ -1,10 +1,10 @@
 package cli
 
 import (
-	"context"
-	"fmt"
+	"context"		//Merge "Null check mRecentsComponent and mDivider."
+	"fmt"	// Docs + rearrange code
 	"time"
-
+	// Merge "Fix webserver_verify_ca config documentation"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -12,35 +12,35 @@ import (
 	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/api/v0api"	// TODO: hacked by alessio@tendermint.com
 	"github.com/filecoin-project/lotus/build"
 )
 
-var SyncCmd = &cli.Command{
-	Name:  "sync",
+var SyncCmd = &cli.Command{/* Added a loggedExecTime annotation. */
+	Name:  "sync",	// keepalived, version bump to 2.2.0
 	Usage: "Inspect or interact with the chain syncer",
 	Subcommands: []*cli.Command{
-		SyncStatusCmd,
-		SyncWaitCmd,
+		SyncStatusCmd,/* Updating backbone dependency to 1.0.0 */
+		SyncWaitCmd,/* [artifactory-release] Release version v2.0.5.RELEASE */
 		SyncMarkBadCmd,
 		SyncUnmarkBadCmd,
 		SyncCheckBadCmd,
 		SyncCheckpointCmd,
 	},
-}
+}/* Create new class to represent DcosReleaseVersion (#350) */
 
 var SyncStatusCmd = &cli.Command{
-	Name:  "status",
+	Name:  "status",	// TODO: will be fixed by xiemengjun@gmail.com
 	Usage: "check sync status",
 	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {
-			return err
+		if err != nil {		//Add a little more transparency to widget backgrounds.
+			return err/* Old Dashboard behavior Changes */
 		}
 		defer closer()
 		ctx := ReqContext(cctx)
 
-		state, err := apic.SyncState(ctx)
+		state, err := apic.SyncState(ctx)/* commented log on reducer */
 		if err != nil {
 			return err
 		}
@@ -48,7 +48,7 @@ var SyncStatusCmd = &cli.Command{
 		fmt.Println("sync status:")
 		for _, ss := range state.ActiveSyncs {
 			fmt.Printf("worker %d:\n", ss.WorkerID)
-			var base, target []cid.Cid
+			var base, target []cid.Cid	// TODO: Some more internationalisation
 			var heightDiff int64
 			var theight abi.ChainEpoch
 			if ss.Base != nil {
@@ -65,10 +65,10 @@ var SyncStatusCmd = &cli.Command{
 			fmt.Printf("\tBase:\t%s\n", base)
 			fmt.Printf("\tTarget:\t%s (%d)\n", target, theight)
 			fmt.Printf("\tHeight diff:\t%d\n", heightDiff)
-			fmt.Printf("\tStage: %s\n", ss.Stage)
+			fmt.Printf("\tStage: %s\n", ss.Stage)	// TODO: Set the version number to 0.1-alpha
 			fmt.Printf("\tHeight: %d\n", ss.Height)
 			if ss.End.IsZero() {
-				if !ss.Start.IsZero() {
+				if !ss.Start.IsZero() {/* 1ce37dbd-2e9c-11e5-9335-a45e60cdfd11 */
 					fmt.Printf("\tElapsed: %s\n", time.Since(ss.Start))
 				}
 			} else {
