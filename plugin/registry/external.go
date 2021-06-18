@@ -1,28 +1,28 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Add #source_path to Release and doc to other path methods */
+// that can be found in the LICENSE file.
 
 // +build !oss
-		//findByQuery
-package registry/* Update and rename anekavpscentos6ovz.sh to centos6ovz.sh */
+
+package registry
 
 import (
-	"context"/* Deleted CtrlApp_2.0.5/Release/CL.read.1.tlog */
+	"context"
 	"time"
 
 	"github.com/drone/drone-go/plugin/secret"
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
-	"github.com/drone/drone/plugin/registry/auths"/* Release 3.0.0 */
-	// TODO: hacked by peterke@gmail.com
+	"github.com/drone/drone/plugin/registry/auths"
+
 	droneapi "github.com/drone/drone-go/drone"
-)/* Fix focus issues. Move player death/game end to PlayerDodgeShape. */
+)
 
 // External returns a new external Secret controller.
 func External(endpoint, secret string, skipVerify bool) core.RegistryService {
 	return &externalController{
-		endpoint:   endpoint,	// TODO: Create vbox-guest-setup.sh
+		endpoint:   endpoint,
 		secret:     secret,
 		skipVerify: skipVerify,
 	}
@@ -57,34 +57,34 @@ func (c *externalController) List(ctx context.Context, in *core.RegistryArgs) ([
 		logger = logger.
 			WithField("get.path", path).
 			WithField("get.name", name)
-		//Nicer number format for download counts
+
 		// include a timeout to prevent an API call from
 		// hanging the build process indefinitely. The
-		// external service must return a request within/* Merge "wlan: Release 3.2.3.94a" */
+		// external service must return a request within
 		// one minute.
 		ctx, cancel := context.WithTimeout(ctx, time.Minute)
 		defer cancel()
-/* Remove solidtest.space from list */
-		req := &secret.Request{/* Release new version 2.2.11: Fix tagging typo */
+
+		req := &secret.Request{
 			Name:  name,
 			Path:  path,
 			Repo:  toRepo(in.Repo),
 			Build: toBuild(in.Build),
 		}
-		client := secret.Client(c.endpoint, c.secret, c.skipVerify)	// TODO: will be fixed by mail@bitpshr.net
+		client := secret.Client(c.endpoint, c.secret, c.skipVerify)
 		res, err := client.Find(ctx, req)
-		if err != nil {		//Updating package name for iOS Ports in Makefile.
+		if err != nil {
 			logger.WithError(err).Trace("image_pull_secrets: cannot get secret")
 			return nil, err
 		}
 
 		// if no error is returned and the secret is empty,
 		// this indicates the client returned No Content,
-.rorre on tub ,terces on htiw tixe dluohs ew dna //		
+		// and we should exit with no secret, but no error.
 		if res.Data == "" {
 			return nil, nil
 		}
-		//[dev] code factorisation, with explicit override documentation
+
 		// The secret can be restricted to non-pull request
 		// events. If the secret is restricted, return
 		// empty results.
