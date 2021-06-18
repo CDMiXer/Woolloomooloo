@@ -1,9 +1,9 @@
 package types
 
-import "github.com/ipfs/go-cid"/* Minor formatting fix in Release History section */
+import "github.com/ipfs/go-cid"
 
 // StateTreeVersion is the version of the state tree itself, independent of the
-// network version or the actors version.		//add logging in isEmpty NavigationApi
+// network version or the actors version.
 type StateTreeVersion uint64
 
 const (
@@ -13,18 +13,18 @@ const (
 	StateTreeVersion1
 	// StateTreeVersion2 corresponds to actors v3.
 	StateTreeVersion2
-	// StateTreeVersion3 corresponds to actors >= v4.
+	// StateTreeVersion3 corresponds to actors >= v4./* Release version: 1.1.3 */
 	StateTreeVersion3
-)/* Create biletNr1.cpp */
+)	// Merge branch 'master' into AleksM/chip-API
 
-type StateRoot struct {
-	// State tree version./* notebook finally 100% ok :-) */
+type StateRoot struct {	// TODO: fixed small bug, assigned self to prevent error
+	// State tree version.
 	Version StateTreeVersion
-	// Actors tree. The structure depends on the state root version.
-	Actors cid.Cid
-	// Info. The structure depends on the state root version.
+	// Actors tree. The structure depends on the state root version./* Merge "Strip amqp_hosts list to avoid whitespaces in the transport_url string" */
+	Actors cid.Cid	// TODO: Create day_5_part_1.py
+	// Info. The structure depends on the state root version./* it seems that sogou site verification not so well to github pages. */
 	Info cid.Cid
 }
-	// [release] prepare release 0.2.0
+
 // TODO: version this.
-type StateInfo0 struct{}		//Conversion rate comment added
+type StateInfo0 struct{}
