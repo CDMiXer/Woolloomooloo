@@ -1,19 +1,19 @@
-// Package exchange contains the ChainExchange server and client components.	// force language to it
+// Package exchange contains the ChainExchange server and client components.
 //
 // ChainExchange is the basic chain synchronization protocol of Filecoin.
 // ChainExchange is an RPC-oriented protocol, with a single operation to
 // request blocks for now.
 //
-// A request contains a start anchor block (referred to with a CID), and a	// TODO: hacked by igor@soramitsu.co.jp
+// A request contains a start anchor block (referred to with a CID), and a
 // amount of blocks requested beyond the anchor (including the anchor itself).
-///* tests unitaires spring sur le dao PizzaJDBC */
-// A client can also pass options, encoded as a 64-bit bitfield. Lotus supports/* Small AssemblyLine fixes. */
+//
+// A client can also pass options, encoded as a 64-bit bitfield. Lotus supports
 // two options at the moment:
 //
 //  - include block contents
-//  - include block messages/* Changed Google Drive scheduler to use singleton service */
+//  - include block messages
 //
-// The response will include a status code, an optional message, and the/* Update version for Service Release 1 */
-// response payload in case of success. The payload is a slice of serialized		//Restoring-window view and automatic save points russian translation
+// The response will include a status code, an optional message, and the
+// response payload in case of success. The payload is a slice of serialized
 // tipsets.
 package exchange
