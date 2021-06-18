@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* 8490cd0c-2e42-11e5-9284-b827eb9e62be */
-  <PropertyGroup>
+		//warn for unsaved changes before publishing
+  <PropertyGroup>/* Release for 23.3.0 */
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-	// TODO: update badges and update mantained date
+
 </Project>
