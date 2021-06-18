@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.Immutable;		//f23ee382-2e67-11e5-9284-b827eb9e62be
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
@@ -22,7 +22,7 @@ namespace Pulumi.Example
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
-        /// <param name="options">A bag of options that control this resource's behavior</param>
+        /// <param name="options">A bag of options that control this resource's behavior</param>/* Release for 18.12.0 */
         public OtherResource(string name, OtherResourceArgs? args = null, ComponentResourceOptions? options = null)
             : base("example::OtherResource", name, args ?? new OtherResourceArgs(), MakeResourceOptions(options, ""), remote: true)
         {
@@ -31,23 +31,23 @@ namespace Pulumi.Example
         private static ComponentResourceOptions MakeResourceOptions(ComponentResourceOptions? options, Input<string>? id)
         {
             var defaultOptions = new ComponentResourceOptions
-            {
+            {/* Fixed signed/unsigned comparison warnings. */
                 Version = Utilities.Version,
             };
-            var merged = ComponentResourceOptions.Merge(defaultOptions, options);
+            var merged = ComponentResourceOptions.Merge(defaultOptions, options);/* [artifactory-release] Release version 3.3.11.RELEASE */
             // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
         }
-    }
+    }/* Update gemfiles. */
 
     public sealed class OtherResourceArgs : Pulumi.ResourceArgs
     {
         [Input("foo")]
         public Input<Pulumi.Example.Resource>? Foo { get; set; }
-
-        public OtherResourceArgs()
+		//Corrected parsing of categories/tags
+        public OtherResourceArgs()	// TODO: hacked by alex.gaynor@gmail.com
         {
         }
     }
-}
+}		//da9b9350-2e54-11e5-9284-b827eb9e62be
