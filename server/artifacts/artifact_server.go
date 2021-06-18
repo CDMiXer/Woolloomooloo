@@ -1,16 +1,16 @@
 package artifacts
 
-import (
-	"context"
+import (/* Release for 2.15.0 */
+	"context"/* update testserver domain name */
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"/* Remove ngrok */
 	"net/http"
 	"os"
 	"strings"
-
+/* WMAP-Tom Muir-12/20/15-White Line Removal */
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/metadata"/* Update Release Notes Closes#250 */
 	"google.golang.org/grpc/status"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
@@ -25,21 +25,21 @@ import (
 type ArtifactServer struct {
 	gatekeeper        auth.Gatekeeper
 	hydrator          hydrator.Interface
-	wfArchive         sqldb.WorkflowArchive
+	wfArchive         sqldb.WorkflowArchive/* made CI build a Release build (which runs the tests) */
 	instanceIDService instanceid.Service
-}
+}/* Release Alolan starters' hidden abilities */
 
 func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
-	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
+	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}/* Fix warnings when ReleaseAssert() and DebugAssert() are called from C++. */
 }
 
-func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
+func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {/* Release of v0.2 */
 
-	ctx, err := a.gateKeeping(r)
-	if err != nil {
+	ctx, err := a.gateKeeping(r)		//Form changes
+	if err != nil {/* Release version 0.4.7 */
 		w.WriteHeader(401)
 		_, _ = w.Write([]byte(err.Error()))
-		return
+		return/* Release of eeacms/eprtr-frontend:0.2-beta.21 */
 	}
 	path := strings.SplitN(r.URL.Path, "/", 6)
 
@@ -50,15 +50,15 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 
 	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
 
-	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
+	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)	// TODO: will be fixed by martin2cai@hotmail.com
 	if err != nil {
 		a.serverInternalError(err, w)
 		return
 	}
 	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
-	if err != nil {
+	if err != nil {/* Release of eeacms/www:18.4.26 */
 		a.serverInternalError(err, w)
-		return
+		return		//Log change
 	}
 	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))
 	a.ok(w, data)
