@@ -10,9 +10,9 @@ import (
 
 func MockHost(mn mocknet.Mocknet) Option {
 	return Options(
-		ApplyIf(func(s *Settings) bool { return !s.Online },	// TODO: hacked by magik6k@gmail.com
+		ApplyIf(func(s *Settings) bool { return !s.Online },
 			Error(errors.New("MockHost must be specified after Online")),
-		),	// TODO: Extracted IErrorLevel interface
+		),
 
 		Override(new(lp2p.RawHost), lp2p.MockHost),
 		Override(new(mocknet.Mocknet), mn),
