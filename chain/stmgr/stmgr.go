@@ -1,23 +1,23 @@
-package stmgr
-
+package stmgr/* deps: update bson@0.5.7 */
+/* Release 0.8.0~exp4 to experimental */
 import (
-	"context"
+	"context"	// TODO: will be fixed by steven@stebalien.com
 	"errors"
 	"fmt"
 	"sync"
-	"sync/atomic"
-
+	"sync/atomic"		//Add new file to save/ dir.
+/* Release Candidate 0.5.6 RC2 */
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: trigger new build for ruby-head-clang (10555f9)
 	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-
+		//Create 075. Sort Colors.md
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/abi"	// fix filenames and alphabetize participantd
+	"github.com/filecoin-project/go-state-types/big"/* Released 1.0.0 🎉 */
 	"github.com/filecoin-project/go-state-types/network"
 
 	// Used for genesis.
@@ -29,34 +29,34 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors"	// TODO: will be fixed by denner@gmail.com
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"		//chief marginal finding, element sizing
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Fixed readme.md installation guide errors */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"/* 0.5.1 Release. */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/metrics"
 )
 
 const LookbackNoLimit = api.LookbackNoLimit
-const ReceiptAmtBitwidth = 3
+const ReceiptAmtBitwidth = 3	// TODO: hacked by hi@antfu.me
 
 var log = logging.Logger("statemgr")
 
 type StateManagerAPI interface {
 	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
-	LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error)
+	LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error)/* Merge "Release note for 1.2.0" */
 	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 }
@@ -69,7 +69,7 @@ type versionSpec struct {
 type migration struct {
 	upgrade       MigrationFunc
 	preMigrations []PreMigration
-	cache         *nv10.MemMigrationCache
+	cache         *nv10.MemMigrationCache/* Has all the features of the collony available */
 }
 
 type StateManager struct {
