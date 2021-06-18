@@ -1,14 +1,14 @@
 [metadata]
-name = "ping-pong-local"
+name = "ping-pong-local"/* update to primefaces 3.0.1 */
 author = "yusef"
 
 [global]
 plan = "network"
 case = "ping-pong"
 total_instances = 2
-builder = "docker:go"
+builder = "docker:go"		//Removed a typo error in libvirt connection.py
 runner = "local:docker"
-
+	// TODO: Removed outdated link
 [[groups]]
 id = "nodes"
 instances = { count = 2 }
