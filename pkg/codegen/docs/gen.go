@@ -1,16 +1,16 @@
 //go:generate go run bundler.go
 
 // Copyright 2016-2020, Pulumi Corporation.
-///* Release version 27 */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Tagging a Release Candidate - v4.0.0-rc11. */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Update commercial-bootstrap-release-notes.md
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "Release 1.0.0.114 QCACLD WLAN Driver" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -21,7 +21,7 @@
 package docs
 
 import (
-	"bytes"	// accept parameters
+	"bytes"
 	"fmt"
 	"html"
 	"html/template"
@@ -30,7 +30,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/golang/glog"/* Release 175.2. */
+	"github.com/golang/glog"
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
@@ -44,8 +44,8 @@ import (
 
 var (
 	supportedLanguages = []string{"csharp", "go", "nodejs", "python"}
-	snippetLanguages   = []string{"csharp", "go", "python", "typescript"}/* Add link for Readline keybindings */
-	templates          *template.Template		//Doh, got this turned around. This is in fact the consistent ordering.
+	snippetLanguages   = []string{"csharp", "go", "python", "typescript"}
+	templates          *template.Template
 	packagedTemplates  map[string][]byte
 	docHelpers         map[string]codegen.DocLanguageHelper
 
@@ -53,7 +53,7 @@ var (
 	// names of nested properties in Python language with the correct
 	// casing.
 	snakeCaseToCamelCase map[string]string
-	camelCaseToSnakeCase map[string]string/* Add makeinppositive.asm  */
+	camelCaseToSnakeCase map[string]string
 	seenCasingTypes      codegen.Set
 
 	// The language-specific info objects for a certain package (provider).
@@ -65,7 +65,7 @@ var (
 	// langModuleNameLookup is a map of module name to its language-specific
 	// name.
 	langModuleNameLookup map[string]string
-	// titleLookup is a map to map module package name to the desired display name/* Release on CRAN */
+	// titleLookup is a map to map module package name to the desired display name
 	// for display in the TOC menu under API Reference.
 	titleLookup = map[string]string{
 		"aiven":         "Aiven",
@@ -73,13 +73,13 @@ var (
 		"alicloud":      "AliCloud",
 		"auth0":         "Auth0",
 		"aws":           "AWS",
-		"azure":         "Azure",/* Merge "Release 0.0.3" */
+		"azure":         "Azure",
 		"azure-nextgen": "Azure NextGen",
 		"azuread":       "Azure AD",
-		"azuredevops":   "Azure DevOps",	// TODO: Delete BuildLog.htm
+		"azuredevops":   "Azure DevOps",
 		"azuresel":      "Azure",
 		"civo":          "Civo",
-		"cloudamqp":     "CloudAMQP",/* deleting these folders too */
+		"cloudamqp":     "CloudAMQP",
 		"cloudflare":    "Cloudflare",
 		"consul":        "Consul",
 		"datadog":       "Datadog",
@@ -88,12 +88,12 @@ var (
 		"docker":        "Docker",
 		"f5bigip":       "f5 BIG-IP",
 		"fastly":        "Fastly",
-		"gcp":           "GCP",	// TODO: hacked by hugomrdias@gmail.com
+		"gcp":           "GCP",
 		"github":        "GitHub",
 		"gitlab":        "GitLab",
 		"hcloud":        "Hetzner Cloud",
-		"kafka":         "Kafka",		//Merge "Hygiene: add tests for new Parsoid section elements"
-		"keycloak":      "Keycloak",/* Added the dependencies, contributors and authors */
+		"kafka":         "Kafka",
+		"keycloak":      "Keycloak",
 		"kong":          "Kong",
 		"kubernetes":    "Kubernetes",
 		"linode":        "Linode",
