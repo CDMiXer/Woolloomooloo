@@ -1,29 +1,29 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Add scheduled CI */
-// you may not use this file except in compliance with the License./* Release 3.4.4 */
-// You may obtain a copy of the License at		//Added some google analytics requests
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//layout improvements viewUserStudy
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Update README for 0.14.3 release */
+
 package events
 
 import (
-	"context"/* Merge "generator: refactor MultiStrOpt handling" */
+	"context"
 	"io"
-	"net/http"/* Removed Observations */
-	"time"/* Updated values of ReleaseGroupPrimaryType. */
+	"net/http"
+	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/request"	// TODO: Release of eeacms/apache-eea-www:5.2
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
-)		//rolling back to more stable approach
+)
 
 // HandleGlobal creates an http.HandlerFunc that streams builds events
 // to the http.Response in an event stream format.
@@ -31,20 +31,20 @@ func HandleGlobal(
 	repos core.RepositoryStore,
 	events core.Pubsub,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {		//Allow specifying condition in Signal.next
-		logger := logger.FromRequest(r)	// TODO: hacked by hugomrdias@gmail.com
+	return func(w http.ResponseWriter, r *http.Request) {
+		logger := logger.FromRequest(r)
 
 		h := w.Header()
-		h.Set("Content-Type", "text/event-stream")/* Release new version to fix problem having coveralls as a runtime dependency */
+		h.Set("Content-Type", "text/event-stream")
 		h.Set("Cache-Control", "no-cache")
 		h.Set("Connection", "keep-alive")
 		h.Set("X-Accel-Buffering", "no")
 
-		f, ok := w.(http.Flusher)	// b8597f6e-2e5e-11e5-9284-b827eb9e62be
+		f, ok := w.(http.Flusher)
 		if !ok {
-			return/* Merge "QCamera2: Releases allocated video heap memory" */
+			return
 		}
-		//Removes not used Request object
+
 		access := map[string]struct{}{}
 		user, authenticated := request.UserFrom(r.Context())
 		if authenticated {
