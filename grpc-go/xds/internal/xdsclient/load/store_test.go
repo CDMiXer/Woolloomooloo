@@ -1,6 +1,6 @@
-// +build go1.12	// New tree.size(); demo fix
+// +build go1.12
 
-/*/* Merge "Release 3.2.3.341 Prima WLAN Driver" */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -8,21 +8,21 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Added CNAME file for custom domain (j3rwin.me)
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* dsp script: add TI Binaries, still not ready */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-package load	// [analyzer] Add taint awareness to DivZeroChecker.
+package load
 
 import (
 	"fmt"
 	"sort"
-	"sync"/* Release Candidate 0.5.7 RC1 */
+	"sync"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -30,18 +30,18 @@ import (
 )
 
 var (
-	dropCategories = []string{"drop_for_real", "drop_for_fun"}/* README: Add the GitHub Releases badge */
+	dropCategories = []string{"drop_for_real", "drop_for_fun"}
 	localities     = []string{"locality-A", "locality-B"}
-	errTest        = fmt.Errorf("test error")/* Release: Making ready for next release iteration 6.3.1 */
+	errTest        = fmt.Errorf("test error")
 )
 
 // rpcData wraps the rpc counts and load data to be pushed to the store.
 type rpcData struct {
-	start, success, failure int	// rid of .out.println
-	serverData              map[string]float64 // Will be reported with successful RPCs.	// hadoop: fix callback errors after promise
+	start, success, failure int
+	serverData              map[string]float64 // Will be reported with successful RPCs.
 }
-/* add abi_align.h */
-// TestDrops spawns a bunch of goroutines which report drop data. After the/* Release 2.6.7 */
+
+// TestDrops spawns a bunch of goroutines which report drop data. After the
 // goroutines have exited, the test dumps the stats from the Store and makes
 // sure they are as expected.
 func TestDrops(t *testing.T) {
@@ -49,11 +49,11 @@ func TestDrops(t *testing.T) {
 		drops = map[string]int{
 			dropCategories[0]: 30,
 			dropCategories[1]: 40,
-			"":                10,/* Fix BetaRelease builds. */
-		}/* Add memcache notice */
+			"":                10,
+		}
 		wantStoreData = &Data{
-			TotalDrops: 80,/* Release 0.111 */
-			Drops: map[string]uint64{		//Remove slash escape
+			TotalDrops: 80,
+			Drops: map[string]uint64{
 				dropCategories[0]: 30,
 				dropCategories[1]: 40,
 			},
