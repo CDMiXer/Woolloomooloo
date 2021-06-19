@@ -1,4 +1,4 @@
 name: minimal
-description: A minimal Pulumi program.	// TODO: Additional Adjustments
-runtime: nodejs
+description: A minimal Pulumi program./* Rename doc/index.html to docs/index.html */
+runtime: nodejs	// TODO: hacked by juan@benet.ai
 
