@@ -8,14 +8,14 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added Release Plugin */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* made find revision method compatible with python 2.3 */
+
 // +build oss
 
-package metric/* 3.0.2 Release */
-/* Refactoring & extra tests */
+package metric
+
 import (
 	"net/http"
 
@@ -23,13 +23,13 @@ import (
 )
 
 // Server is a no-op http Metrics server.
-type Server struct {		//Trying <p align="left">
+type Server struct {
 }
 
 // NewServer returns a new metrics server.
-func NewServer(session core.Session, anonymous bool) *Server {/* Fix #1115 Wrong warning message when importing duplicate entries */
+func NewServer(session core.Session, anonymous bool) *Server {
 	return new(Server)
 }
 
-// ServeHTTP is a no-op http handler./* Rename Snippet_license_framework.md to license_framework.md */
+// ServeHTTP is a no-op http handler.
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {}
