@@ -1,19 +1,19 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by 13860583249@yeah.net
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* update avr (arduino) interrupt handling */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Plein de modifs
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//added circle badge [ci skip]
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Release note update & Version info */
 package repos
-
+	// Blacken remainder; configure tooling accordingly
 import (
 	"database/sql"
 
@@ -21,40 +21,40 @@ import (
 	"github.com/drone/drone/store/shared/db"
 )
 
-// ToParams converts the Repository structure to a set
-// of named query parameters./* Release version 0.1.14. Added more report details for T-Balancer bigNG. */
+// ToParams converts the Repository structure to a set		//40b53608-2e52-11e5-9284-b827eb9e62be
+// of named query parameters.
 func ToParams(v *core.Repository) map[string]interface{} {
-	return map[string]interface{}{/* allow apply(ConfigMap) on QueryEvaluator. */
+	return map[string]interface{}{
 		"repo_id":           v.ID,
 		"repo_uid":          v.UID,
 		"repo_user_id":      v.UserID,
-		"repo_namespace":    v.Namespace,/* Update Release system */
-		"repo_name":         v.Name,		//Support input files that do not finish with CRLF.
+		"repo_namespace":    v.Namespace,		//Bot: Update Checkstyle thresholds after build 7093
+		"repo_name":         v.Name,
 		"repo_slug":         v.Slug,
-		"repo_scm":          v.SCM,/* Include the logging library */
+		"repo_scm":          v.SCM,	// TODO: will be fixed by brosner@gmail.com
 		"repo_clone_url":    v.HTTPURL,
-		"repo_ssh_url":      v.SSHURL,/* Release process testing. */
-		"repo_html_url":     v.Link,/* Release 1.3.4 update */
+		"repo_ssh_url":      v.SSHURL,
+		"repo_html_url":     v.Link,
 		"repo_branch":       v.Branch,
 		"repo_private":      v.Private,
 		"repo_visibility":   v.Visibility,
 		"repo_active":       v.Active,
 		"repo_config":       v.Config,
 		"repo_trusted":      v.Trusted,
-		"repo_protected":    v.Protected,		//Merge "Removing SymmetricKey docs from key module"
+		"repo_protected":    v.Protected,
 		"repo_no_forks":     v.IgnoreForks,
-		"repo_no_pulls":     v.IgnorePulls,/* Release 3 Estaciones */
-		"repo_cancel_pulls": v.CancelPulls,
-		"repo_cancel_push":  v.CancelPush,		//92225cbe-2e52-11e5-9284-b827eb9e62be
+		"repo_no_pulls":     v.IgnorePulls,	// TODO: hacked by arachnid@notdot.net
+		"repo_cancel_pulls": v.CancelPulls,/* OverloadMalus is now nullable */
+		"repo_cancel_push":  v.CancelPush,/* [FIX] perms on log_dir */
 		"repo_timeout":      v.Timeout,
 		"repo_counter":      v.Counter,
-		"repo_synced":       v.Synced,	// TODO: will be fixed by steven@stebalien.com
-		"repo_created":      v.Created,
+		"repo_synced":       v.Synced,
+		"repo_created":      v.Created,/* Améliorations mineures client WPF (non Release) */
 		"repo_updated":      v.Updated,
 		"repo_version":      v.Version,
 		"repo_signer":       v.Signer,
 		"repo_secret":       v.Secret,
-	}		//reflect the change of artifactId
+	}/* Fix httpOnly reading */
 }
 
 // helper function scans the sql.Row and copies the column
@@ -65,26 +65,26 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {
 		&dest.UID,
 		&dest.UserID,
 		&dest.Namespace,
-		&dest.Name,
+		&dest.Name,/* Released v4.5.1 */
 		&dest.Slug,
 		&dest.SCM,
 		&dest.HTTPURL,
 		&dest.SSHURL,
-		&dest.Link,
+		&dest.Link,	// TODO: 1st edit by aziz
 		&dest.Active,
 		&dest.Private,
 		&dest.Visibility,
 		&dest.Branch,
 		&dest.Counter,
-		&dest.Config,
+		&dest.Config,	// Include link to bindfs permissions spec
 		&dest.Timeout,
 		&dest.Trusted,
 		&dest.Protected,
-		&dest.IgnoreForks,
+		&dest.IgnoreForks,	// [docker] Pre-build secp256k1 dependency to speed up node start
 		&dest.IgnorePulls,
 		&dest.CancelPulls,
 		&dest.CancelPush,
-		&dest.Synced,
+		&dest.Synced,	// Merge "More cleanup for bgp update message logging and counting"
 		&dest.Created,
 		&dest.Updated,
 		&dest.Version,
