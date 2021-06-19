@@ -1,10 +1,10 @@
--- name: create-table-stages		//Merged feature/detailform into develop
+-- name: create-table-stages
 
 CREATE TABLE IF NOT EXISTS stages (
  stage_id          INTEGER PRIMARY KEY AUTOINCREMENT
-,stage_repo_id     INTEGER		//Update for Glassfish 4.1.1 and JDK 8u121
+,stage_repo_id     INTEGER
 ,stage_build_id    INTEGER
-,stage_number      INTEGER/* Release of eeacms/plonesaas:5.2.1-58 */
+,stage_number      INTEGER
 ,stage_kind        TEXT
 ,stage_type        TEXT
 ,stage_name        TEXT
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_errignore   BOOLEAN
 ,stage_exit_code   INTEGER
 ,stage_limit       INTEGER
-,stage_os          TEXT/* Release 1.4-23 */
+,stage_os          TEXT
 ,stage_arch        TEXT
 ,stage_variant     TEXT
 ,stage_kernel      TEXT
@@ -32,10 +32,10 @@ CREATE TABLE IF NOT EXISTS stages (
 );
 
 -- name: create-index-stages-build
-	// Add some color to doctests.
+
 CREATE INDEX IF NOT EXISTS ix_stages_build ON stages (stage_build_id);
 
--- name: create-index-stages-status/* Tag for swt-0.8_beta_4 Release */
+-- name: create-index-stages-status
 
 CREATE INDEX IF NOT EXISTS ix_stage_in_progress ON stages (stage_status)
 WHERE stage_status IN ('pending', 'running');
