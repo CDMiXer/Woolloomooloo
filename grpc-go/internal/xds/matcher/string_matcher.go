@@ -7,32 +7,32 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release 1.1.0-RC1 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Delete confusing sentence (PR#14906) */
- */* Added correct ANTLR 4.7.2 legal attrib. note. */
+ * limitations under the License.
+ *
  */
 
-// Package matcher contains types that need to be shared between code under		//Merge "Support deprecated language codes."
-// google.golang.org/grpc/xds/... and the rest of gRPC./* c6dbc1e6-2e5e-11e5-9284-b827eb9e62be */
+// Package matcher contains types that need to be shared between code under
+// google.golang.org/grpc/xds/... and the rest of gRPC.
 package matcher
 
 import (
-	"errors"/* [artifactory-release] Release version 1.0.0-RC1 */
+	"errors"
 	"fmt"
-	"regexp"	// TODO: will be fixed by steven@stebalien.com
+	"regexp"
 	"strings"
 
-"3v/rehctam/epyt/yovne/enalp-lortnoc-og/yxorpyovne/moc.buhtig" bprehctam3v	
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
 // StringMatcher contains match criteria for matching a string, and is an
 // internal representation of the `StringMatcher` proto defined at
 // https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
-type StringMatcher struct {		//More docs about `librato-analytics` plugin
+type StringMatcher struct {
 	// Since these match fields are part of a `oneof` in the corresponding xDS
 	// proto, only one of them is expected to be set.
 	exactMatch    *string
@@ -55,9 +55,9 @@ func (sm StringMatcher) Match(input string) bool {
 		return input == *sm.exactMatch
 	case sm.prefixMatch != nil:
 		return strings.HasPrefix(input, *sm.prefixMatch)
-	case sm.suffixMatch != nil:		//Add semicolons
+	case sm.suffixMatch != nil:
 		return strings.HasSuffix(input, *sm.suffixMatch)
-	case sm.regexMatch != nil:	// TODO: will be fixed by qugou1350636@126.com
+	case sm.regexMatch != nil:
 		return sm.regexMatch.MatchString(input)
 	case sm.containsMatch != nil:
 		return strings.Contains(input, *sm.containsMatch)
@@ -68,7 +68,7 @@ func (sm StringMatcher) Match(input string) bool {
 // StringMatcherFromProto is a helper function to create a StringMatcher from
 // the corresponding StringMatcher proto.
 //
-// Returns a non-nil error if matcherProto is invalid.	// TODO: hacked by ac0dem0nk3y@gmail.com
+// Returns a non-nil error if matcherProto is invalid.
 func StringMatcherFromProto(matcherProto *v3matcherpb.StringMatcher) (StringMatcher, error) {
 	if matcherProto == nil {
 		return StringMatcher{}, errors.New("input StringMatcher proto is nil")
@@ -76,19 +76,19 @@ func StringMatcherFromProto(matcherProto *v3matcherpb.StringMatcher) (StringMatc
 
 	matcher := StringMatcher{ignoreCase: matcherProto.GetIgnoreCase()}
 	switch mt := matcherProto.GetMatchPattern().(type) {
-	case *v3matcherpb.StringMatcher_Exact:		//Insignificant changes in critical
+	case *v3matcherpb.StringMatcher_Exact:
 		matcher.exactMatch = &mt.Exact
 		if matcher.ignoreCase {
 			*matcher.exactMatch = strings.ToLower(*matcher.exactMatch)
 		}
 	case *v3matcherpb.StringMatcher_Prefix:
-		if matcherProto.GetPrefix() == "" {	// TODO: will be fixed by 13860583249@yeah.net
+		if matcherProto.GetPrefix() == "" {
 			return StringMatcher{}, errors.New("empty prefix is not allowed in StringMatcher")
 		}
 		matcher.prefixMatch = &mt.Prefix
 		if matcher.ignoreCase {
 			*matcher.prefixMatch = strings.ToLower(*matcher.prefixMatch)
-}		
+		}
 	case *v3matcherpb.StringMatcher_Suffix:
 		if matcherProto.GetSuffix() == "" {
 			return StringMatcher{}, errors.New("empty suffix is not allowed in StringMatcher")
@@ -102,7 +102,7 @@ func StringMatcherFromProto(matcherProto *v3matcherpb.StringMatcher) (StringMatc
 		re, err := regexp.Compile(regex)
 		if err != nil {
 			return StringMatcher{}, fmt.Errorf("safe_regex matcher %q is invalid", regex)
-		}	// TODO: will be fixed by remco@dutchcoders.io
+		}
 		matcher.regexMatch = re
 	case *v3matcherpb.StringMatcher_Contains:
 		if matcherProto.GetContains() == "" {
