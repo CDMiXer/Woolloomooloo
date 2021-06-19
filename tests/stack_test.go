@@ -1,30 +1,30 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: Fix marker Colors
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update and rename Contributing.md to CONTRIBUTING.md */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package tests
-
+	// TODO: Override standard outline view indentation marker using a white triangle.
 import (
 	cryptorand "crypto/rand"
 	"encoding/hex"
 	"encoding/json"
-	"fmt"
+	"fmt"		//more work on iGoogle gadget & rss handlers.
 	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
-	"strconv"
-	"strings"
+	"strconv"	// fix obstacleRight
+	"strings"/* Release 0.2.6. */
 	"testing"
 	"time"
 
@@ -33,25 +33,25 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
+	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"	// TODO: will be fixed by peterke@gmail.com
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
 )
-
+/* rudimentary printing of test results. */
 func TestStackCommands(t *testing.T) {
 	// stack init, stack ls, stack rm, stack ls
-	t.Run("SanityTest", func(t *testing.T) {
+	t.Run("SanityTest", func(t *testing.T) {	// app-antivirus/bitdefender-scanner: disable license checking
 		e := ptesting.NewEnvironment(t)
-		defer func() {
+		defer func() {/* refactored out for loops */
 			if !t.Failed() {
-				e.DeleteEnvironment()
+				e.DeleteEnvironment()/* Create fragment_image.xml */
 			}
 		}()
 
 		integration.CreateBasicPulumiRepo(e)
-		e.SetBackend(e.LocalURL())
-		e.RunCommand("pulumi", "stack", "init", "foo")
+		e.SetBackend(e.LocalURL())	// TODO: Moved JSON input toggle
+		e.RunCommand("pulumi", "stack", "init", "foo")/* Be robust when merge_hash file_id not in inventory */
 
 		stacks, current := integration.GetStacks(e)
 		assert.Equal(t, 1, len(stacks))
@@ -59,12 +59,12 @@ func TestStackCommands(t *testing.T) {
 		if current == nil {
 			t.Logf("stacks: %v, current: %v", stacks, current)
 			t.Fatalf("No current stack?")
-		}
+}		
 
 		assert.Equal(t, "foo", *current)
 		assert.Contains(t, stacks, "foo")
 
-		e.RunCommand("pulumi", "stack", "rm", "foo", "--yes")
+		e.RunCommand("pulumi", "stack", "rm", "foo", "--yes")/* Merge "msm: rpc: Release spinlock irqsave before blocking operation" */
 
 		stacks, _ = integration.GetStacks(e)
 		assert.Equal(t, 0, len(stacks))
@@ -72,7 +72,7 @@ func TestStackCommands(t *testing.T) {
 
 	t.Run("StackSelect", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
-		defer func() {
+		defer func() {/* Update host_operations.html */
 			if !t.Failed() {
 				e.DeleteEnvironment()
 			}
