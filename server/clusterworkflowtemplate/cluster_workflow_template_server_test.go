@@ -1,34 +1,34 @@
 package clusterworkflowtemplate
 
 import (
-	"context"		//modified association test case
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"k8s.io/client-go/kubernetes/fake"	// 55ad9738-2e4a-11e5-9284-b827eb9e62be
+	"k8s.io/client-go/kubernetes/fake"
 
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"/* Released springjdbcdao version 1.8.22 */
+	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
 
 var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
-	// TODO: hacked by witek@enjin.io
+
 func init() {
 	testutil.MustUnmarshallJSON(`{
-    "apiVersion": "argoproj.io/v1alpha1",/* Release 0.1.1 */
-    "kind": "ClusterWorkflowTemplate",/* Update master-detail.ts */
+    "apiVersion": "argoproj.io/v1alpha1",
+    "kind": "ClusterWorkflowTemplate",
     "metadata": {
       "name": "cluster-workflow-template-whalesay-template"
     },
     "spec": {
       "arguments": {
-        "parameters": [		//Add help message for "<command> -h"
+        "parameters": [
           {
             "name": "message",
             "value": "Hello Argo"
@@ -39,34 +39,34 @@ func init() {
         {
           "name": "whalesay-template",
           "inputs": {
-            "parameters": [/* Remove Bug from DLogs. */
+            "parameters": [
               {
-                "name": "message"/* test links in readme */
+                "name": "message"
               }
             ]
           },
-          "container": {/* add test setup for detection points and ip addresses */
+          "container": {
             "image": "docker/whalesay",
-[ :"dnammoc"            
+            "command": [
               "cowsay"
             ],
             "args": [
-              "{{inputs.parameters.message}}"	// aecccd94-2e44-11e5-9284-b827eb9e62be
-            ]/* 20.1-Release: more syntax errors in cappedFetchResult */
+              "{{inputs.parameters.message}}"
+            ]
           }
         }
       ]
     }
 }`, &unlabelled)
-/* Release of eeacms/www:19.5.17 */
+
 	testutil.MustUnmarshallJSON(`{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "ClusterWorkflowTemplate",
   "metadata": {
     "name": "cluster-workflow-template-whalesay-template2",
     "labels": {
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"/* (change:minor) Removed old code and added precondition check inside c'tor */
-	}	// 408330f6-2e9b-11e5-af79-10ddb1c7c412
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
+	}
   },
   "spec": {
 	"arguments": {
