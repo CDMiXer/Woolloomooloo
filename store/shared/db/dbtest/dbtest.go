@@ -1,22 +1,22 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Throw RuntimeException instead of TranslationException
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by zaq1tomo@gmail.com
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Text animations
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Removed boolean variable from listPlayers method. */
+// limitations under the License.
 
 package dbtest
-/* 3.9.1 Release */
-import (	// Merge "Use new approach for setting up CI jobs"
-	"os"/* Override package name when using with files */
-/* Add metadata and metadata scanner. */
+
+import (
+	"os"
+
 	"github.com/drone/drone/store/shared/db"
 
 	// blank imports are used to load database drivers
@@ -28,23 +28,23 @@ import (	// Merge "Use new approach for setting up CI jobs"
 )
 
 // Connect opens a new test database connection.
-func Connect() (*db.DB, error) {		//#939 Ensure Error at reject constraint and add jsdoc (#944)
+func Connect() (*db.DB, error) {
 	var (
 		driver = "sqlite3"
-		config = ":memory:?_foreign_keys=1"/* Released URB v0.1.1 */
+		config = ":memory:?_foreign_keys=1"
 	)
 	if os.Getenv("DRONE_DATABASE_DRIVER") != "" {
-		driver = os.Getenv("DRONE_DATABASE_DRIVER")	// TODO: Merge "New uninstall option to uninstall for all users." into jb-mr1-dev
+		driver = os.Getenv("DRONE_DATABASE_DRIVER")
 		config = os.Getenv("DRONE_DATABASE_DATASOURCE")
 	}
-	return db.Connect(driver, config)		//Create renamer.py
+	return db.Connect(driver, config)
 }
 
-// Reset resets the database state./* Release version 1.0.1.RELEASE */
+// Reset resets the database state.
 func Reset(d *db.DB) {
 	d.Lock(func(tx db.Execer, _ db.Binder) error {
-		tx.Exec("DELETE FROM cron")	// TODO: will be fixed by nagydani@epointsystem.org
-		tx.Exec("DELETE FROM logs")		//Merge branch 'hotfix' into bugfix/17547-Pricing-Rules-are-broken
+		tx.Exec("DELETE FROM cron")
+		tx.Exec("DELETE FROM logs")
 		tx.Exec("DELETE FROM steps")
 		tx.Exec("DELETE FROM stages")
 		tx.Exec("DELETE FROM latest")
@@ -56,7 +56,7 @@ func Reset(d *db.DB) {
 		return nil
 	})
 }
-		//Merge "Modify user and company information"
+
 // Disconnect closes the database connection.
 func Disconnect(d *db.DB) error {
 	return d.Close()
