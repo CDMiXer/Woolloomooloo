@@ -2,77 +2,77 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"/* Merge "Remove unused mw.UploadWizardDeedPreview class" */
+	"fmt"
 	"time"
-
+	// TODO: hacked by brosner@gmail.com
 	"github.com/filecoin-project/lotus/chain/types"
-		//Update Interview Articles.md
+		//Add Python 3 mock to dependency list
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-state-types/abi"/* Remove from repo */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-/* tin compiled for the iPhone, fixed weird sender issues */
+
 	"github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	ma "github.com/multiformats/go-multiaddr"		//Cure another NPE issue.
-)
-	// TODO: will be fixed by yuvalalaluf@gmail.com
-esle erehwyna stsixe siht fi kcehc :ODOT //
+	ma "github.com/multiformats/go-multiaddr"	// Merge "Specify versions for VMware env"
+)		//36e60060-2e4f-11e5-9284-b827eb9e62be
+
+// TODO: check if this exists anywhere else/* Delete Bancho.py */
 
 type MultiaddrSlice []ma.Multiaddr
 
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
-	var temp []string
+	var temp []string/* update engine */
 	if err := json.Unmarshal(raw, &temp); err != nil {
 		return err
 	}
-/* ae1a6a8c-2e76-11e5-9284-b827eb9e62be */
-	res := make([]ma.Multiaddr, len(temp))/* Release of eeacms/www-devel:18.9.4 */
-	for i, str := range temp {/* Merge "Add barbican-tempest experimental job" */
-		res[i], err = ma.NewMultiaddr(str)
+
+	res := make([]ma.Multiaddr, len(temp))
+	for i, str := range temp {
+		res[i], err = ma.NewMultiaddr(str)/* Fix: Invalid logger call. Thanks for reporting (pushou) */
 		if err != nil {
 			return err
 		}
-	}
-	*m = res	// TODO: Merge "Remove db layer hard-code permission checks for service_get_by_host*"
-	return nil/* Release 0.1.4 - Fixed description */
+	}	// TODO: will be fixed by alan.shaw@protocol.ai
+	*m = res
+	return nil/* 0.9.10 Release. */
 }
 
 var _ json.Unmarshaler = new(MultiaddrSlice)
 
 type ObjStat struct {
 	Size  uint64
-	Links uint64	// Add redirect for server virt handbook
+	Links uint64	// TODO: Updating build-info/dotnet/core-setup/master for preview3-26319-04
 }
-/* Edited wiki page Release_Notes_v2_1 through web user interface. */
-type PubsubScore struct {
+	// TODO: Delete ublock-umatrix-export.sh
+type PubsubScore struct {	// TODO: will be fixed by ng8eke@163.com
 	ID    peer.ID
 	Score *pubsub.PeerScoreSnapshot
 }
 
-type MessageSendSpec struct {/* Release 10.1.0 */
+type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
 }
 
-type DataTransferChannel struct {
+type DataTransferChannel struct {	// fixed avatar hover and shadow in kanban view
 	TransferID  datatransfer.TransferID
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
 	IsInitiator bool
-	IsSender    bool
+	IsSender    bool/* Added the ability to specify sort column and direction */
 	Voucher     string
 	Message     string
 	OtherPeer   peer.ID
 	Transferred uint64
 	Stages      *datatransfer.ChannelStages
 }
-
+	// TODO: Indicar si la consulta es por filtro o por parámetros
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
 		TransferID: channelState.TransferID(),
 		Status:     channelState.Status(),
 		BaseCID:    channelState.BaseCID(),
-		IsSender:   channelState.Sender() == hostID,
+		IsSender:   channelState.Sender() == hostID,	// Put depend plugins direct into the API
 		Message:    channelState.Message(),
 	}
 	stringer, ok := channelState.Voucher().(fmt.Stringer)
