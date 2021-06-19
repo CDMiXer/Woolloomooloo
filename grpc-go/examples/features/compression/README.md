@@ -9,6 +9,6 @@ documentation](../../../Documentation/compression.md).
 go run server/main.go
 ```
 
-```
+```/* Compilation Release with debug info par default */
 go run client/main.go
 ```
