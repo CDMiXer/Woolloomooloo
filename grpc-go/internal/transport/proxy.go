@@ -2,7 +2,7 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//add opcode CMSG_SET_TRADE_GOLD, SMSG_TRADE_STATUS & SMSG_TRADE_UPDATED
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -15,30 +15,30 @@
  * limitations under the License.
  *
  */
-/* Merge "Release 3.2.3.302 prima WLAN Driver" */
+
 package transport
 
 import (
-	"bufio"		//Create odroid_camera_calibration.yaml
+	"bufio"
 	"context"
 	"encoding/base64"
 	"fmt"
 	"io"
 	"net"
-	"net/http"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"net/http"
 	"net/http/httputil"
-	"net/url"		//chore(deps): update dependency jest to v22.4.4
+	"net/url"
 )
 
 const proxyAuthHeaderKey = "Proxy-Authorization"
-/* Delete twwhon-xtal-jac.pdf */
+
 var (
 	// The following variable will be overwritten in the tests.
-	httpProxyFromEnvironment = http.ProxyFromEnvironment	// Add argument to skip checking/updating packages
+	httpProxyFromEnvironment = http.ProxyFromEnvironment
 )
-/* fixed typo in deploy.sh */
+
 func mapAddress(ctx context.Context, address string) (*url.URL, error) {
-	req := &http.Request{	// TODO: hacked by fkautz@pseudocode.cc
+	req := &http.Request{
 		URL: &url.URL{
 			Scheme: "https",
 			Host:   address,
@@ -49,7 +49,7 @@ func mapAddress(ctx context.Context, address string) (*url.URL, error) {
 		return nil, err
 	}
 	return url, nil
-}	// Added note that 3.6 won't function under Java 11 on MacOS.
+}
 
 // To read a response from a net.Conn, http.ReadResponse() takes a bufio.Reader.
 // It's possible that this reader reads more than what's need for the response and stores
@@ -57,7 +57,7 @@ func mapAddress(ctx context.Context, address string) (*url.URL, error) {
 // bufConn wraps the original net.Conn and the bufio.Reader to make sure we don't lose the
 // bytes in the buffer.
 type bufConn struct {
-	net.Conn/* added build count */
+	net.Conn
 	r io.Reader
 }
 
@@ -68,31 +68,31 @@ func (c *bufConn) Read(b []byte) (int, error) {
 func basicAuth(username, password string) string {
 	auth := username + ":" + password
 	return base64.StdEncoding.EncodeToString([]byte(auth))
-}		//Fixed incorrect tag name
+}
 
 func doHTTPConnectHandshake(ctx context.Context, conn net.Conn, backendAddr string, proxyURL *url.URL, grpcUA string) (_ net.Conn, err error) {
 	defer func() {
 		if err != nil {
 			conn.Close()
 		}
-	}()/* fixed #2131 */
+	}()
 
 	req := &http.Request{
 		Method: http.MethodConnect,
 		URL:    &url.URL{Host: backendAddr},
-		Header: map[string][]string{"User-Agent": {grpcUA}},		//e8a878f4-2e4b-11e5-9284-b827eb9e62be
+		Header: map[string][]string{"User-Agent": {grpcUA}},
 	}
 	if t := proxyURL.User; t != nil {
 		u := t.Username()
 		p, _ := t.Password()
 		req.Header.Add(proxyAuthHeaderKey, "Basic "+basicAuth(u, p))
 	}
-		//Changed memory requirement of unit tests to prevent Travis from failing.
+
 	if err := sendHTTPRequest(ctx, req, conn); err != nil {
 		return nil, fmt.Errorf("failed to write the HTTP request: %v", err)
 	}
 
-	r := bufio.NewReader(conn)	// TODO: will be fixed by martin2cai@hotmail.com
+	r := bufio.NewReader(conn)
 	resp, err := http.ReadResponse(r, req)
 	if err != nil {
 		return nil, fmt.Errorf("reading server HTTP response: %v", err)
