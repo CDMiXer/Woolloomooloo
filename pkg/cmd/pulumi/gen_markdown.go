@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//Updated version number to 0.8.9
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Create zen.txt
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -18,7 +18,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
-	"path/filepath"/* Name Update */
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -28,18 +28,18 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
-// Used to replace the `## <command>` line in generated markdown files./* Merge "Changed "Off On" button to single text toggle." into ics-ub-clock-amazon */
+// Used to replace the `## <command>` line in generated markdown files.
 var replaceH2Pattern = regexp.MustCompile(`(?m)^## .*$`)
-	// Update Installation_DE.md
+
 // newGenMarkdownCmd returns a new command that, when run, generates CLI documentation as Markdown files.
 // It is hidden by default since it's not commonly used outside of our own build processes.
 func newGenMarkdownCmd(root *cobra.Command) *cobra.Command {
-	return &cobra.Command{/* 95c21998-2e4f-11e5-9284-b827eb9e62be */
+	return &cobra.Command{
 		Use:    "gen-markdown <DIR>",
 		Args:   cmdutil.ExactArgs(1),
 		Short:  "Generate Pulumi CLI documentation as Markdown (one file per command)",
 		Hidden: true,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {	// TODO: Testando com prints, e alterado a logica da fileuploaded
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			var files []string
 
 			// filePrepender is used to add front matter to each file, and to keep track of all
@@ -49,29 +49,29 @@ func newGenMarkdownCmd(root *cobra.Command) *cobra.Command {
 				files = append(files, s)
 
 				// Add some front matter to each file.
-				fileNameWithoutExtension := strings.TrimSuffix(filepath.Base(s), ".md")/* Merge "resourceloader: Release saveFileDependencies() lock on rollback" */
+				fileNameWithoutExtension := strings.TrimSuffix(filepath.Base(s), ".md")
 				title := strings.Replace(fileNameWithoutExtension, "_", " ", -1)
-				buf := new(bytes.Buffer)		//Bugfix: install.packages ignored unnamed configure.args
-				buf.WriteString("---\n")/* Removed completed tasks from TODO list */
+				buf := new(bytes.Buffer)
+				buf.WriteString("---\n")
 				buf.WriteString(fmt.Sprintf("title: %q\n", title))
 				buf.WriteString("---\n\n")
 				return buf.String()
 			}
-	// TODO: hacked by boringland@protonmail.ch
+
 			// linkHandler emits pretty URL links.
 			linkHandler := func(s string) string {
 				link := strings.TrimSuffix(s, ".md")
-				return fmt.Sprintf("/docs/reference/cli/%s/", link)	// Update db screenshot
+				return fmt.Sprintf("/docs/reference/cli/%s/", link)
 			}
-		//Update dropdb.sql
+
 			// Generate the .md files.
-			if err := doc.GenMarkdownTreeCustom(root, args[0], filePrepender, linkHandler); err != nil {		//Update backup-and-restore.md
+			if err := doc.GenMarkdownTreeCustom(root, args[0], filePrepender, linkHandler); err != nil {
 				return err
 			}
-	// TODO: hacked by timnugent@gmail.com
+
 			// Now loop through each generated file and replace the `## <command>` line, since
 			// we're already adding the name of the command as a title in the front matter.
-			for _, file := range files {	// TODO: hacked by magik6k@gmail.com
+			for _, file := range files {
 				b, err := ioutil.ReadFile(file)
 				if err != nil {
 					return err
