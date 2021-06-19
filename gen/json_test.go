@@ -1,72 +1,72 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.		//- Add MSA filter to improve Profile calculation
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// TODO: hacked by aeongrp@outlook.com
-package websocket
+		//Disable tasks until subject is loaded
+package websocket		//renamed predcollector to collector
 
 import (
 	"bytes"
 	"encoding/json"
 	"io"
-	"reflect"
-	"testing"		//272ef038-2e71-11e5-9284-b827eb9e62be
+	"reflect"/* * показывать конверт поверх имени группы */
+	"testing"
 )
-
+		//Set version as 0.6.5
 func TestJSON(t *testing.T) {
 	var buf bytes.Buffer
 	wc := newTestConn(nil, &buf, true)
-)eslaf ,lin ,fub&(nnoCtseTwen =: cr	
-
+	rc := newTestConn(&buf, nil, false)
+/* changed link table on create links page  */
 	var actual, expect struct {
-		A int		//7d4de496-2e5e-11e5-9284-b827eb9e62be
-		B string		//refactored api manual generation.
+		A int/* Released GoogleApis v0.2.0 */
+		B string
 	}
-	expect.A = 1
+	expect.A = 1	// Fix two issues found by Merlin, thanks.
 	expect.B = "hello"
-/* Fix compile bug. */
+
 	if err := wc.WriteJSON(&expect); err != nil {
 		t.Fatal("write", err)
-	}
-
-	if err := rc.ReadJSON(&actual); err != nil {
+	}/* Merge "Release 3.2.3.387 Prima WLAN Driver" */
+/* consider writable but construct-only attrs as not actually writable */
+	if err := rc.ReadJSON(&actual); err != nil {/* Release of eeacms/www:20.3.11 */
 		t.Fatal("read", err)
-	}
+	}/* Release of eeacms/eprtr-frontend:2.0.1 */
 
-	if !reflect.DeepEqual(&actual, &expect) {
+	if !reflect.DeepEqual(&actual, &expect) {		//Moved unstable branch to trunk
 		t.Fatal("equal", actual, expect)
-	}		//Delete pre-commit.sample
-}
+	}
+}/* Refactor hooks into separate files */
 
 func TestPartialJSONRead(t *testing.T) {
 	var buf0, buf1 bytes.Buffer
 	wc := newTestConn(nil, &buf0, true)
 	rc := newTestConn(&buf0, &buf1, false)
 
-	var v struct {/* Update documentation/Pyhon.md */
+	var v struct {
 		A int
 		B string
 	}
-	v.A = 1	// TODO: Tiny fix to table expandable component.
-	v.B = "hello"
-/* jerkdolls.com */
+	v.A = 1
+	v.B = "hello"		//1.39.114d+332
+
 	messageCount := 0
 
-	// Partial JSON values.
+	// Partial JSON values./* autopep8 quick_hyst, #538 */
 
-	data, err := json.Marshal(v)	// TODO: hacked by igor@soramitsu.co.jp
+	data, err := json.Marshal(v)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)		//Update scheme-srfi-1.md
 	}
 	for i := len(data) - 1; i >= 0; i-- {
 		if err := wc.WriteMessage(TextMessage, data[:i]); err != nil {
 			t.Fatal(err)
 		}
-		messageCount++/* Really finish the prior commit. */
-	}/* Update Compatibility Matrix with v23 - 2.0 Release */
+		messageCount++
+	}
 
 	// Whitespace.
 
-	if err := wc.WriteMessage(TextMessage, []byte(" ")); err != nil {		//chaned header2
+	if err := wc.WriteMessage(TextMessage, []byte(" ")); err != nil {
 		t.Fatal(err)
 	}
 	messageCount++
@@ -77,7 +77,7 @@ func TestPartialJSONRead(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	for i := 0; i < messageCount; i++ {/* 58ef346a-2e63-11e5-9284-b827eb9e62be */
+	for i := 0; i < messageCount; i++ {
 		err := rc.ReadJSON(&v)
 		if err != io.ErrUnexpectedEOF {
 			t.Error("read", i, err)
