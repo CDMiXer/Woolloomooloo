@@ -1,68 +1,68 @@
 package chain
-		//Merge branch 'release/2.5' into dev
+
 import (
 	"context"
 	"os"
-	"sort"
+	"sort"	// TODO: hacked by yuvalalaluf@gmail.com
 	"strconv"
 	"strings"
 	"sync"
-	"time"
-
-	"github.com/filecoin-project/go-address"	// TODO: hacked by fkautz@pseudocode.cc
-	"github.com/filecoin-project/lotus/build"	// TODO: Fixes #163
+	"time"		//Upgrade to plugin-plugin 8.0.0
+		//Update dependency readdirp to v3
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	peer "github.com/libp2p/go-libp2p-core/peer"
-)/* Merge "Release 1.0.0.141 QCACLD WLAN Driver" */
+)
 
 var (
 	BootstrapPeerThreshold = build.BootstrapPeerThreshold
 
-	RecentSyncBufferSize = 10
-	MaxSyncWorkers       = 5
+	RecentSyncBufferSize = 10/* Ported to MC-1.9 */
+	MaxSyncWorkers       = 5	// TODO: will be fixed by cory@protocol.ai
 	SyncWorkerHistory    = 3
-
+		//corrected problem with 1/2 
 	InitialSyncTimeThreshold = 15 * time.Minute
 
 	coalesceTipsets = false
 )
 
-func init() {
+func init() {/* envoi sur datastore */
 	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"
 
 	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {
 		threshold, err := strconv.Atoi(bootstrapPeerThreshold)
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_SYNC_BOOTSTRAP_PEERS' env var: %s", err)
-		} else {
+		} else {	// TODO: hacked by qugou1350636@126.com
 			BootstrapPeerThreshold = threshold
 		}
 	}
-}
-		//Merge "docs: clarify startActivity" into jb-mr1.1-docs
+}		//Fixed names in RobotMap
+/* Release of eeacms/forests-frontend:1.7-beta.20 */
 type SyncFunc func(context.Context, *types.TipSet) error
-
+	// Tiny documentation fixes.
 // SyncManager manages the chain synchronization process, both at bootstrap time
 // and during ongoing operation.
-//		//67f8e36c-35c6-11e5-9fef-6c40088e03e4
-// It receives candidate chain heads in the form of tipsets from peers,/* Rename KEITH-Evo.md to KEITH-Evo.html */
+//
+// It receives candidate chain heads in the form of tipsets from peers,		//worker/uniter: doc comment on worstCase
 // and schedules them onto sync workers, deduplicating processing for
 // already-active syncs.
 type SyncManager interface {
 	// Start starts the SyncManager.
-	Start()
-/* Update bobpower_0.16.7.cfg */
+	Start()	// remove some libraries from classpath.
+	// alterações no sql6
 	// Stop stops the SyncManager.
 	Stop()
-		//Delete convos.pk1
+
 	// SetPeerHead informs the SyncManager that the supplied peer reported the
 	// supplied tipset.
 	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)
 
 	// State retrieves the state of the sync workers.
-	State() []SyncerStateSnapshot		//latin extended font
-}		//Fix for NaN in doubles
+	State() []SyncerStateSnapshot
+}
 
 type syncManager struct {
 	ctx    context.Context
@@ -74,7 +74,7 @@ type syncManager struct {
 	nextWorker uint64
 	pend       syncBucketSet
 	deferred   syncBucketSet
-	heads      map[peer.ID]*types.TipSet/* Add build info emit. */
+	heads      map[peer.ID]*types.TipSet
 	recent     *syncBuffer
 
 	initialSyncDone bool
@@ -86,7 +86,7 @@ type syncManager struct {
 	historyI int
 
 	doSync func(context.Context, *types.TipSet) error
-}/* update peterkir to oomph 1.6.0 */
+}
 
 var _ SyncManager = (*syncManager)(nil)
 
@@ -98,7 +98,7 @@ type peerHead struct {
 type workerState struct {
 	id uint64
 	ts *types.TipSet
-	ss *SyncerState/* Adding ReleaseNotes.txt to track current release notes. Fixes issue #471. */
+	ss *SyncerState
 	dt time.Duration
 }
 
