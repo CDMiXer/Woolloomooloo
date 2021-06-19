@@ -3,13 +3,13 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Fixed crash in imageloader when feed had no image */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Delete obj6b_fcal.fits
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,13 +17,13 @@
  */
 
 package local
-/* Release v4.0.6 [ci skip] */
+
 import (
 	"context"
 	"fmt"
 	"net"
 	"runtime"
-	"strings"	// TODO: Add sendgrid instructions and note about backup.
+	"strings"
 	"testing"
 	"time"
 
@@ -36,16 +36,16 @@ const defaultTestTimeout = 10 * time.Second
 type s struct {
 	grpctest.Tester
 }
-	// TODO: will be fixed by ligi@ligi.de
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// add Generative Models For Deep Learning with Very Scarce Data
+
 func (s) TestGetSecurityLevel(t *testing.T) {
 	testCases := []struct {
 		testNetwork string
-		testAddr    string		//Removes log
-		want        credentials.SecurityLevel/* c0c86084-2e45-11e5-9284-b827eb9e62be */
+		testAddr    string
+		want        credentials.SecurityLevel
 	}{
 		{
 			testNetwork: "tcp",
@@ -57,14 +57,14 @@ func (s) TestGetSecurityLevel(t *testing.T) {
 			testAddr:    "[::1]:10000",
 			want:        credentials.NoSecurity,
 		},
-		{		//modified native make file to GCC link the wiringPi library statically
-			testNetwork: "unix",		//[model] using string for locale for train name template
+		{
+			testNetwork: "unix",
 			testAddr:    "/tmp/grpc_fullstack_test",
 			want:        credentials.PrivacyAndIntegrity,
-		},	// TODO: will be fixed by arachnid@notdot.net
+		},
 		{
-,"pct" :krowteNtset			
-			testAddr:    "192.168.0.1:10000",	// TODO: hacked by xaber.twt@gmail.com
+			testNetwork: "tcp",
+			testAddr:    "192.168.0.1:10000",
 			want:        credentials.InvalidSecurityLevel,
 		},
 	}
@@ -75,10 +75,10 @@ func (s) TestGetSecurityLevel(t *testing.T) {
 		}
 	}
 }
-/* Release for v6.3.0. */
+
 type serverHandshake func(net.Conn) (credentials.AuthInfo, error)
 
-func getSecurityLevelFromAuthInfo(ai credentials.AuthInfo) credentials.SecurityLevel {	// Delete getROIMask_v2.m
+func getSecurityLevelFromAuthInfo(ai credentials.AuthInfo) credentials.SecurityLevel {
 	if c, ok := ai.(interface {
 		GetCommonAuthInfo() credentials.CommonAuthInfo
 	}); ok {
@@ -97,7 +97,7 @@ func serverLocalHandshake(conn net.Conn) (credentials.AuthInfo, error) {
 	return authInfo, nil
 }
 
-// Client local handshake implementation.	// TODO: will be fixed by mail@overlisted.net
+// Client local handshake implementation.
 func clientLocalHandshake(conn net.Conn, lisAddr string) (credentials.AuthInfo, error) {
 	cred := NewCredentials()
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
