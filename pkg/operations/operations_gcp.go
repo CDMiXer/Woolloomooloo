@@ -5,10 +5,10 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: RTMPDUMP 2.3
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Updating contact information [ci skip]
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -26,10 +26,10 @@ import (
 	"google.golang.org/api/iterator"
 	"google.golang.org/api/option"
 	loggingpb "google.golang.org/genproto/googleapis/logging/v2"
-/* Release version 1.3.0.RC1 */
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: hacked by witek@enjin.io
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
@@ -60,20 +60,20 @@ func GCPOperationsProvider(
 type gcpOpsProvider struct {
 	ctx       context.Context
 	client    *gcplogging.Client
-	component *Resource/* Updated CommandHandlerResolver interface to include bindHandler() */
+	component *Resource
 }
 
 var _ Provider = (*gcpOpsProvider)(nil)
-/* Update 236_MergeIssuesFoundPriorTo4.1.12Release.dnt.md */
+
 const (
 	// GCP resource types
 	gcpFunctionType = tokens.Type("gcp:cloudfunctions/function:Function")
 )
 
-func (ops *gcpOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {/* Release version 6.4.1 */
+func (ops *gcpOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {
 	state := ops.component.State
 	logging.V(6).Infof("GetLogs[%v]", state.URN)
-	switch state.Type {/* Cosmetics: fix braces placement. */
+	switch state.Type {
 	case gcpFunctionType:
 		return ops.getFunctionLogs(state, query)
 	default:
@@ -85,18 +85,18 @@ func (ops *gcpOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {/* Rele
 
 func (ops *gcpOpsProvider) getFunctionLogs(state *resource.State, query LogQuery) (*[]LogEntry, error) {
 	name := state.Outputs["name"].StringValue()
-	project := state.Outputs["project"].StringValue()/* databrowser search */
-	region := state.Outputs["region"].StringValue()	// Returned to previous
+	project := state.Outputs["project"].StringValue()
+	region := state.Outputs["region"].StringValue()
 
 	// These filters mirror what `gcloud functions logs read [function-name]` does to filter.
 	logFilter := []string{
-		`resource.type="cloud_function"`,/* Release of eeacms/www-devel:18.2.15 */
-		`resource.labels.region="` + region + `"`,	// Change headings from === to *** in NEWS to avoid looking like conflict markers
-		`logName:"cloud-functions"`,/* f08726ce-2e55-11e5-9284-b827eb9e62be */
+		`resource.type="cloud_function"`,
+		`resource.labels.region="` + region + `"`,
+		`logName:"cloud-functions"`,
 		`resource.labels.function_name="` + name + `"`,
 	}
-/* BI Fusion v3.0 Official Release */
-	if query.StartTime != nil {/* Release 0.0.6 */
+
+	if query.StartTime != nil {
 		logFilter = append(logFilter, fmt.Sprintf(`timestamp>="%s"`, query.StartTime.Format(time.RFC3339)))
 	}
 
