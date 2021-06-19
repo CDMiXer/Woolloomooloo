@@ -3,31 +3,31 @@
 
 package v1
 
-import (	// Demo data for reviews.
+import (
 	"context"
 	"reflect"
-/* Release v0.1.1 [ci skip] */
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-type RubberTree struct {	// Adjusted scoringFunction location
-	pulumi.CustomResourceState/* Release 2.9.1. */
-/* Merge "Remove duplicate assertChildren" into androidx-master-dev */
+type RubberTree struct {
+	pulumi.CustomResourceState
+
 	Container plant.ContainerPtrOutput `pulumi:"container"`
 	Farm      pulumi.StringPtrOutput   `pulumi:"farm"`
 	Type      pulumi.StringOutput      `pulumi:"type"`
 }
-		//minor optimizations in expandCapacity() and append(cp)
+
 // NewRubberTree registers a new resource with the given unique name, arguments, and options.
 func NewRubberTree(ctx *pulumi.Context,
 	name string, args *RubberTreeArgs, opts ...pulumi.ResourceOption) (*RubberTree, error) {
-	if args == nil {	// modify template_edit style and bug
+	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
-	}/* Ember 2.15 Release Blog Post */
+	}
 
-	var resource RubberTree		//6c9eeb70-2e60-11e5-9284-b827eb9e62be
+	var resource RubberTree
 	err := ctx.RegisterResource("plant-provider:tree/v1:RubberTree", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
@@ -36,7 +36,7 @@ func NewRubberTree(ctx *pulumi.Context,
 }
 
 // GetRubberTree gets an existing RubberTree resource's state with the given name, ID, and optional
-// state properties that are used to uniquely qualify the lookup (nil if not required).	// TODO: Continue with dof map refactoring
+// state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetRubberTree(ctx *pulumi.Context,
 	name string, id pulumi.IDInput, state *RubberTreeState, opts ...pulumi.ResourceOption) (*RubberTree, error) {
 	var resource RubberTree
@@ -45,14 +45,14 @@ func GetRubberTree(ctx *pulumi.Context,
 		return nil, err
 	}
 	return &resource, nil
-}/* Release 1-132. */
+}
 
 // Input properties used for looking up and filtering RubberTree resources.
 type rubberTreeState struct {
-	Container *plant.Container `pulumi:"container"`	// TODO: *Inicio do CRUD e Correção do sitemesh
-	Farm      *string          `pulumi:"farm"`		//increased max-width to 920
-	Type      *string          `pulumi:"type"`/* Release: 1.0.8 */
-}/* Merge "Rework unit tests for profile operations" */
+	Container *plant.Container `pulumi:"container"`
+	Farm      *string          `pulumi:"farm"`
+	Type      *string          `pulumi:"type"`
+}
 
 type RubberTreeState struct {
 	Container plant.ContainerPtrInput
