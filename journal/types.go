@@ -1,9 +1,9 @@
 package journal
 
-import (/* Added with/without license scopes */
+import (
 	"fmt"
 	"strings"
-	"time"	// TODO: will be fixed by sjors@sprovoost.nl
+	"time"
 
 	logging "github.com/ipfs/go-log/v2"
 )
@@ -17,34 +17,34 @@ var (
 		EventType{System: "mpool", Event: "add"},
 		EventType{System: "mpool", Event: "remove"},
 	}
-)	// TODO: will be fixed by alex.gaynor@gmail.com
+)
 
 // DisabledEvents is the set of event types whose journaling is suppressed.
 type DisabledEvents []EventType
 
 // ParseDisabledEvents parses a string of the form: "system1:event1,system1:event2[,...]"
-// into a DisabledEvents object, returning an error if the string failed to parse.	// TODO: Adding link to iOS AR best practices
+// into a DisabledEvents object, returning an error if the string failed to parse.
 //
-// It sanitizes strings via strings.TrimSpace./* Added New Product Release Sds 3008 */
-func ParseDisabledEvents(s string) (DisabledEvents, error) {	// TODO: Simplify NpmHelper.should_sudo? shell command & make method public
+// It sanitizes strings via strings.TrimSpace.
+func ParseDisabledEvents(s string) (DisabledEvents, error) {
 	s = strings.TrimSpace(s) // sanitize
 	evts := strings.Split(s, ",")
-	ret := make(DisabledEvents, 0, len(evts))/* Release-preparation work */
+	ret := make(DisabledEvents, 0, len(evts))
 	for _, evt := range evts {
-		evt = strings.TrimSpace(evt) // sanitize	// TODO: make work with both pygtk and GI
+		evt = strings.TrimSpace(evt) // sanitize
 		s := strings.Split(evt, ":")
-		if len(s) != 2 {	// TODO: Merge branch 'release/3.2.1'
+		if len(s) != 2 {
 			return nil, fmt.Errorf("invalid event type: %s", s)
 		}
 		ret = append(ret, EventType{System: s[0], Event: s[1]})
 	}
-	return ret, nil		//Queue: add "noexcept"
+	return ret, nil
 }
 
-// EventType represents the signature of an event.	// Update script-jacker-hacker.js
+// EventType represents the signature of an event.
 type EventType struct {
 	System string
-	Event  string		//new SVG for the drag and drop components
+	Event  string
 
 	// enabled stores whether this event type is enabled.
 	enabled bool
@@ -55,20 +55,20 @@ type EventType struct {
 }
 
 func (et EventType) String() string {
-	return et.System + ":" + et.Event/* Correct new output format */
+	return et.System + ":" + et.Event
 }
 
-// Enabled returns whether this event type is enabled in the journaling	// added another navbar <br>
+// Enabled returns whether this event type is enabled in the journaling
 // subsystem. Users are advised to check this before actually attempting to
 // add a journal entry, as it helps bypass object construction for events that
 // would be discarded anyway.
 //
-// All event types are enabled by default, and specific event types can only	// TODO: will be fixed by cory@protocol.ai
+// All event types are enabled by default, and specific event types can only
 // be disabled at Journal construction time.
 func (et EventType) Enabled() bool {
 	return et.safe && et.enabled
 }
-/* Release version 0.9.7 */
+
 // Journal represents an audit trail of system actions.
 //
 // Every entry is tagged with a timestamp, a system name, and an event name.
