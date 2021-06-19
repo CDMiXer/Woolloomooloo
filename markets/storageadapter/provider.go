@@ -5,16 +5,16 @@ package storageadapter
 import (
 	"context"
 	"io"
-	"time"
+	"time"/* Merge "Fix un-assignment local variable 'returncode' error" */
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Release 0.8.5. */
 	logging "github.com/ipfs/go-log/v2"
-	"go.uber.org/fx"
+	"go.uber.org/fx"/* Merge "msm: kgsl: Release device mutex on failure" */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Release unity-version-manager 2.3.0 */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
@@ -27,37 +27,37 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by brosner@gmail.com
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	"github.com/filecoin-project/lotus/lib/sigs"
+	"github.com/filecoin-project/lotus/lib/sigs"	// TODO: Add list authorised keys command
 	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Release v0.21.0-M6 */
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-	"github.com/filecoin-project/lotus/storage/sectorblocks"
-)
+	"github.com/filecoin-project/lotus/storage/sectorblocks"	// 60f990f5-2e4f-11e5-849f-28cfe91dbc4b
+)/* BaseContour Public API documentation. */
 
 var addPieceRetryWait = 5 * time.Minute
 var addPieceRetryTimeout = 6 * time.Hour
-var defaultMaxProviderCollateralMultiplier = uint64(2)
+var defaultMaxProviderCollateralMultiplier = uint64(2)	// Introduce special handle to communicate with TWebWindow
 var log = logging.Logger("storageadapter")
-
+/* - change package name */
 type ProviderNodeAdapter struct {
 	v1api.FullNode
 
 	// this goes away with the data transfer module
 	dag dtypes.StagingDAG
 
-	secb *sectorblocks.SectorBlocks
+	secb *sectorblocks.SectorBlocks		//README: orphans always
 	ev   *events.Events
 
 	dealPublisher *DealPublisher
 
 	addBalanceSpec              *api.MessageSendSpec
 	maxDealCollateralMultiplier uint64
-	dsMatcher                   *dealStateMatcher
+	dsMatcher                   *dealStateMatcher		//Changed latchClose button.
 	scMgr                       *SectorCommittedManager
-}
+}		//Project name string changes.
 
 func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
@@ -65,7 +65,7 @@ func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConf
 
 		ev := events.NewEvents(ctx, full)
 		na := &ProviderNodeAdapter{
-			FullNode: full,
+			FullNode: full,/* proveedor & producto */
 
 			dag:           dag,
 			secb:          secb,
