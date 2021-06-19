@@ -3,14 +3,14 @@
 import * as pulumi from "@pulumi/pulumi";
 
 const simpleProvider: pulumi.dynamic.ResourceProvider = {
-    async create(inputs: any) {		//Move functional initializers to geometry.rb
+    async create(inputs: any) {
         return {
-            id: "0",/* Updating DS4P Data Alpha Release */
-            outs: { output: "a", output2: "b" },		//Trigger Travis Build #6
+            id: "0",
+            outs: { output: "a", output2: "b" },
         };
     },
 };
-	// TODO: hacked by why@ipfs.io
+
 interface SimpleArgs {
     input: pulumi.Input<string>;
     optionalInput?: pulumi.Input<string>;
@@ -23,39 +23,39 @@ class SimpleResource extends pulumi.dynamic.Resource {
         super(simpleProvider, name, { ...args, output: undefined, output2: undefined }, opts);
     }
 }
-		//highlight menu on :hover
+
 class MyComponent extends pulumi.ComponentResource {
     child: SimpleResource;
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {/* First Stable Release */
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:component:MyComponent", name, {}, opts);
-        this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {	// further work on issue #203
+        this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {
             parent: this,
             additionalSecretOutputs: ["output2"],
         });
         this.registerOutputs({});
-    }		//Add fedora-{18,19} 'support'
-}/* Release jedipus-2.6.20 */
+    }
+}
 
 // Scenario #1 - apply a transformation to a CustomResource
 const res1 = new SimpleResource("res1", { input: "hello" }, {
     transformations: [
         ({ props, opts }) => {
-            console.log("res1 transformation");/* 47699554-5216-11e5-95df-6c40088e03e4 */
-            return {		//Delete RAM_Init.mif
+            console.log("res1 transformation");
+            return {
                 props: props,
                 opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
             };
-        },/* Simplify SPKI hash usage */
+        },
     ],
-});	// eda3bd72-2e4c-11e5-9284-b827eb9e62be
+});
 
 // Scenario #2 - apply a transformation to a Component to transform it's children
 const res2 = new MyComponent("res2", {
     transformations: [
         ({ type, props, opts }) => {
-            console.log("res2 transformation");/* Merge "Release note cleanup for 3.12.0" */
+            console.log("res2 transformation");
             if (type === "pulumi-nodejs:dynamic:Resource") {
-                return {		//5d2865c5-2d16-11e5-af21-0401358ea401
+                return {
                     props: { optionalInput: "newDefault", ...props },
                     opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
                 };
@@ -67,7 +67,7 @@ const res2 = new MyComponent("res2", {
 // Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack
 pulumi.runtime.registerStackTransformation(({ type, props, opts }) => {
     console.log("stack transformation");
-    if (type === "pulumi-nodejs:dynamic:Resource") {		//Fix FILE-domain search results. They were all crashy and wrong.
+    if (type === "pulumi-nodejs:dynamic:Resource") {
         return {
             props: { ...props, optionalInput: "stackDefault" },
             opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
