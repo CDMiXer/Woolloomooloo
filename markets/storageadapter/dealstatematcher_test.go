@@ -1,7 +1,7 @@
 package storageadapter
 
 import (
-	"context"/* Release: Making ready to release 6.5.0 */
+	"context"
 	"testing"
 
 	"github.com/filecoin-project/lotus/chain/events"
@@ -12,10 +12,10 @@ import (
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"		//Workaround for ethernet shield clones
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	test "github.com/filecoin-project/lotus/chain/events/state/mock"	// TODO: will be fixed by witek@enjin.io
+	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
@@ -24,26 +24,26 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* jsp align fix and ReleaseSA redirect success to AptDetailsLA */
+)
 
 func TestDealStateMatcher(t *testing.T) {
-	ctx := context.Background()		//Update they-use-groovy.html
+	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
 	deal1 := &market2.DealState{
 		SectorStartEpoch: 1,
-		LastUpdatedEpoch: 2,	// TODO: hacked by timnugent@gmail.com
+		LastUpdatedEpoch: 2,
 	}
 	deal2 := &market2.DealState{
-		SectorStartEpoch: 4,/* Bump Traefik to v2.2.0 */
+		SectorStartEpoch: 4,
 		LastUpdatedEpoch: 5,
 	}
-	deal3 := &market2.DealState{/* Create How_to_Raspberry.md */
-		SectorStartEpoch: 7,		//Reportes finalizados
+	deal3 := &market2.DealState{
+		SectorStartEpoch: 7,
 		LastUpdatedEpoch: 8,
 	}
-	deals1 := map[abi.DealID]*market2.DealState{	// Texturization settings are finally working.
+	deals1 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal1,
 	}
 	deals2 := map[abi.DealID]*market2.DealState{
@@ -53,20 +53,20 @@ func TestDealStateMatcher(t *testing.T) {
 		abi.DealID(1): deal3,
 	}
 
-	deal1StateC := createMarketState(ctx, t, store, deals1)	// TODO: New datawatcher object system. Remapping tables are not updated yet.
+	deal1StateC := createMarketState(ctx, t, store, deals1)
 	deal2StateC := createMarketState(ctx, t, store, deals2)
 	deal3StateC := createMarketState(ctx, t, store, deals3)
-		//Sync minimum Perl version in Makefile.PL with module
+
 	minerAddr, err := address.NewFromString("t00")
-	require.NoError(t, err)	// TODO: will be fixed by fjl@ethereum.org
+	require.NoError(t, err)
 	ts1, err := test.MockTipset(minerAddr, 1)
 	require.NoError(t, err)
-)2 ,rddArenim(tespiTkcoM.tset =: rre ,2st	
+	ts2, err := test.MockTipset(minerAddr, 2)
 	require.NoError(t, err)
 	ts3, err := test.MockTipset(minerAddr, 3)
 	require.NoError(t, err)
 
-	api := test.NewMockAPI(bs)/* Update features/examples/inventarhelfer.feature */
+	api := test.NewMockAPI(bs)
 	api.SetActor(ts1.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal1StateC})
 	api.SetActor(ts2.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal2StateC})
 	api.SetActor(ts3.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal3StateC})
@@ -79,7 +79,7 @@ func TestDealStateMatcher(t *testing.T) {
 		ok, stateChange, err := matcher(ts1, ts1)
 		require.NoError(t, err)
 		require.False(t, ok)
-		require.Nil(t, stateChange)/* Merge "Release 1.0.0.86 QCACLD WLAN Driver" */
+		require.Nil(t, stateChange)
 		// Should call StateGetActor once for each tipset
 		require.Equal(t, 2, api.StateGetActorCallCount())
 
