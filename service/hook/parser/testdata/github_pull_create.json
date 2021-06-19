@@ -4,9 +4,9 @@
     "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
-    "Perm": null,	// TODO: Ability to use PlistBuddy to determine framework version
+    "Perm": null,
     "Branch": "master",
-    "Private": true,		//Add template to changelog
+    "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
@@ -28,7 +28,7 @@
     "Author": {
       "Login": "bradrydzewski",
       "Name": "",
-      "Email": "",	// TODO: docs: remove hardcoded localhost link from API
+      "Email": "",
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
     },
     "Created": "2018-06-22T23:54:09Z",
