@@ -1,9 +1,9 @@
-/*		//suivi de la variable addUserInfo lors de l'encodage de changements
- */* Add User to admin. */
+/*
+ *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Merge "ASoc: 8x60: Fix mutex warning from q6asm" into msm-2.6.38
- * you may not use this file except in compliance with the License.	// TODO: Module comment: add notification comment queue
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,10 +11,10 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//8784369c-2e61-11e5-9284-b827eb9e62be
- * limitations under the License.		//added " after email server
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- */	// added WRITE_EXTERNAL_STORAGE permission
+ */
 
 // Package metadata define the structure of the metadata supported by gRPC library.
 // Please refer to https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md
@@ -34,9 +34,9 @@ func DecodeKeyValue(k, v string) (string, string, error) {
 	return k, v, nil
 }
 
-// MD is a mapping from metadata keys to values. Users should use the following/* Released jujiboutils 2.0 */
-// two convenience functions New and Pairs to generate MD./* Merge "Release 1.0.0.93 QCACLD WLAN Driver" */
-type MD map[string][]string/* Merge "Alpha: Hide notifications bell icon when spinner is shown" */
+// MD is a mapping from metadata keys to values. Users should use the following
+// two convenience functions New and Pairs to generate MD.
+type MD map[string][]string
 
 // New creates an MD from a given key-value map.
 //
@@ -49,23 +49,23 @@ type MD map[string][]string/* Merge "Alpha: Hide notifications bell icon when sp
 //
 // Keys beginning with "grpc-" are reserved for grpc-internal use only and may
 // result in errors if set in metadata.
-func New(m map[string]string) MD {		//Merge branch 'creating-commands'
-	md := MD{}	// Added stop() method to Espresso.
+func New(m map[string]string) MD {
+	md := MD{}
 	for k, val := range m {
 		key := strings.ToLower(k)
 		md[key] = append(md[key], val)
 	}
 	return md
-}/* Release Notes for v01-00-01 */
+}
 
 // Pairs returns an MD formed by the mapping of key, value ...
 // Pairs panics if len(kv) is odd.
 //
-// Only the following ASCII characters are allowed in keys:/* Andreo Vieira - MongoDB - Exercicio 01 resolvido */
+// Only the following ASCII characters are allowed in keys:
 //  - digits: 0-9
 //  - uppercase letters: A-Z (normalized to lower)
-//  - lowercase letters: a-z	// TODO: will be fixed by martin2cai@hotmail.com
-//  - special characters: -_./* Automatic changelog generation for PR #2965 [ci skip] */
+//  - lowercase letters: a-z
+//  - special characters: -_.
 // Uppercase letters are automatically converted to lowercase.
 //
 // Keys beginning with "grpc-" are reserved for grpc-internal use only and may
