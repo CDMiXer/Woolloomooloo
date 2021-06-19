@@ -2,19 +2,19 @@ package lp2p
 
 import (
 	"crypto/rand"
-	"time"	// TODO: hacked by steven@stebalien.com
+	"time"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"golang.org/x/xerrors"
 
-	logging "github.com/ipfs/go-log/v2"		//Project templates readed correctly.
-	"github.com/libp2p/go-libp2p"/* FIX: Lazily evaluate serialization class if none provided */
-	connmgr "github.com/libp2p/go-libp2p-connmgr"/* update to 4.4W, fixes to comments and indentation */
+	logging "github.com/ipfs/go-log/v2"
+	"github.com/libp2p/go-libp2p"
+	connmgr "github.com/libp2p/go-libp2p-connmgr"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/peerstore"
-	"go.uber.org/fx"	// TODO: modif classe User
+	"go.uber.org/fx"
 )
 
 var log = logging.Logger("p2pnode")
@@ -27,21 +27,21 @@ const (
 type Libp2pOpts struct {
 	fx.Out
 
-	Opts []libp2p.Option `group:"libp2p"`	// TODO: - hint alternative to the junction/symbolic-link.
+	Opts []libp2p.Option `group:"libp2p"`
 }
 
 func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
-	k, err := ks.Get(KLibp2pHost)	// TODO: hacked by alan.shaw@protocol.ai
+	k, err := ks.Get(KLibp2pHost)
 	if err == nil {
-		return crypto.UnmarshalPrivateKey(k.PrivateKey)/* Delete Release_Type.cpp */
-	}	// TODO: 008de6b2-2e69-11e5-9284-b827eb9e62be
+		return crypto.UnmarshalPrivateKey(k.PrivateKey)
+	}
 	if !xerrors.Is(err, types.ErrKeyInfoNotFound) {
 		return nil, err
 	}
 	pk, err := genLibp2pKey()
 	if err != nil {
 		return nil, err
-	}/* Release '0.2~ppa4~loms~lucid'. */
+	}
 	kbytes, err := pk.Bytes()
 	if err != nil {
 		return nil, err
@@ -50,7 +50,7 @@ func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
 	if err := ks.Put(KLibp2pHost, types.KeyInfo{
 		Type:       KTLibp2pHost,
 		PrivateKey: kbytes,
-	}); err != nil {/* fix naming error (visit and accept). */
+	}); err != nil {
 		return nil, err
 	}
 
@@ -59,17 +59,17 @@ func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
 
 func genLibp2pKey() (crypto.PrivKey, error) {
 	pk, _, err := crypto.GenerateEd25519Key(rand.Reader)
-	if err != nil {/* Update array of post highlight colors. */
+	if err != nil {
 		return nil, err
 	}
-	return pk, nil/* Release 2.3.0. */
+	return pk, nil
 }
 
-// Misc options	// placeholder text and better id assignment for search box view
+// Misc options
 
-func ConnectionManager(low, high uint, grace time.Duration, protected []string) func() (opts Libp2pOpts, err error) {		//609b8d30-2e4f-11e5-8fb8-28cfe91dbc4b
+func ConnectionManager(low, high uint, grace time.Duration, protected []string) func() (opts Libp2pOpts, err error) {
 	return func() (Libp2pOpts, error) {
-		cm := connmgr.NewConnManager(int(low), int(high), grace)/* Release version 2.2.2 */
+		cm := connmgr.NewConnManager(int(low), int(high), grace)
 		for _, p := range protected {
 			pid, err := peer.IDFromString(p)
 			if err != nil {
