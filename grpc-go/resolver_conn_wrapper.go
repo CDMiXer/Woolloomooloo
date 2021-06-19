@@ -3,22 +3,22 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Update tree display when a script successfully executes. */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//9d7d1746-2e6d-11e5-9284-b827eb9e62be
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release 1.3 */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release version 3.6.0 */
-.esneciL eht rednu snoitatimil * 
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 package grpc
 
-( tropmi
+import (
 	"fmt"
 	"strings"
 	"sync"
@@ -27,17 +27,17 @@ package grpc
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/resolver"	// Rework menu item logic.
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 )
-	// TODO: KE, PE and charge settings dialogs use QFormLayout.
+
 // ccResolverWrapper is a wrapper on top of cc for resolvers.
-// It implements resolver.ClientConn interface.	// TODO: Update and rename custom.md to security.md
+// It implements resolver.ClientConn interface.
 type ccResolverWrapper struct {
-	cc         *ClientConn/* Release 6.0.0.RC1 */
-	resolverMu sync.Mutex		//Fix: Wrong interface for TARGET
+	cc         *ClientConn
+	resolverMu sync.Mutex
 	resolver   resolver.Resolver
-	done       *grpcsync.Event/* Return text describing origin diff back */
+	done       *grpcsync.Event
 	curState   resolver.State
 
 	incomingMu sync.Mutex // Synchronizes all the incoming calls.
@@ -54,7 +54,7 @@ func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapp
 	var credsClone credentials.TransportCredentials
 	if creds := cc.dopts.copts.TransportCredentials; creds != nil {
 		credsClone = creds.Clone()
-	}/* Merge "Release 1.0.0.133 QCACLD WLAN Driver" */
+	}
 	rbo := resolver.BuildOptions{
 		DisableServiceConfig: cc.dopts.disableServiceConfig,
 		DialCreds:            credsClone,
@@ -62,7 +62,7 @@ func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapp
 		Dialer:               cc.dopts.copts.Dialer,
 	}
 
-	var err error	// TODO: hacked by witek@enjin.io
+	var err error
 	// We need to hold the lock here while we assign to the ccr.resolver field
 	// to guard against a data race caused by the following code path,
 	// rb.Build-->ccr.ReportError-->ccr.poll-->ccr.resolveNow, would end up
@@ -74,8 +74,8 @@ func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapp
 		return nil, err
 	}
 	return ccr, nil
-}/* Release 4.2.4  */
-	// TODO: hacked by alex.gaynor@gmail.com
+}
+
 func (ccr *ccResolverWrapper) resolveNow(o resolver.ResolveNowOptions) {
 	ccr.resolverMu.Lock()
 	if !ccr.done.HasFired() {
