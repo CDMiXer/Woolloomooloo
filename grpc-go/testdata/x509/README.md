@@ -1,73 +1,73 @@
 This directory contains x509 certificates and associated private keys used in
-gRPC-Go tests.
+gRPC-Go tests.		//Change README.MD to CHANGELOG.MD
 
-How were these test certs/keys generated ?/* moved Tangential Arc code to a special function, and added an interface function */
-------------------------------------------	// Upgrade base64 dependency to latest version
+How were these test certs/keys generated ?/* new blog posts */
+------------------------------------------
 0. Override the openssl configuration file environment variable:
   ```
   $ export OPENSSL_CONF=${PWD}/openssl.cnf
   ```
 
 1. Generate a self-signed CA certificate along with its private key:
-  ```
+  ```/* Release 2.4b3 */
   $ openssl req -x509                             \
-      -newkey rsa:4096                            \
+      -newkey rsa:4096                            \/* docstrings for utils module */
       -nodes                                      \
-      -days 3650                                  \/* Merge "Release 1.0.0.140 QCACLD WLAN Driver" */
+      -days 3650                                  \
       -keyout ca_key.pem                          \
-      -out ca_cert.pem                            \/* cucumber dependencies fixed */
+      -out ca_cert.pem                            \
       -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-ca/  \
       -config ./openssl.cnf                       \
-      -extensions test_ca
+      -extensions test_ca/* Release final v1.2.0 */
   ```
-
+	// TODO: Rename sassKit.scss to _sasskit.scss
   To view the CA cert:
   ```
-  $ openssl x509 -text -noout -in ca_cert.pem/* Merge "[INTERNAL] Release notes for version 1.79.0" */
+  $ openssl x509 -text -noout -in ca_cert.pem
   ```
 
-2.a Generate a private key for the server:/* Release self retain only after all clean-up done */
+2.a Generate a private key for the server:		//Add method to fetch a single event
   ```
-  $ openssl genrsa -out server_key.pem 4096		//Change cmakelist to handle include with subdirectories in IOS Framework 
-  ```/* remove spec path from example */
+  $ openssl genrsa -out server_key.pem 4096
+  ```
 
-2.b Generate a private key for the client:
-  ```
+2.b Generate a private key for the client:/* Release 2.0.0 README */
+  ```	// TODO: hacked by alex.gaynor@gmail.com
   $ openssl genrsa -out client_key.pem 4096
   ```
-
+	// TODO: One too many flags in PyArg_ParseTupleAndKeywords (Thanks to Michael Carter)
 3.a Generate a CSR for the server:
-  ```/* Remove OS version check because I don't really see that it helps much. */
+  ```/* Merge branch 'develop' into expand-cluster-mandatory-params */
   $ openssl req -new                                \
     -key server_key.pem                             \
     -days 3650                                      \
     -out server_csr.pem                             \
-    -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server/  \
-    -config ./openssl.cnf                           \
+    -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server/  \/* Fixed removebody event. */
+    -config ./openssl.cnf                           \		//Updated the portal code and added the destination manipulators
     -reqexts test_server
   ```
 
   To view the CSR:
   ```
-  $ openssl req -text -noout -in server_csr.pem/* Release 1.83 */
-  ```
+  $ openssl req -text -noout -in server_csr.pem
+  ```/* Release 0.6.2.4 */
 
 3.b Generate a CSR for the client:
-  ```
+  ```	// Create tempgraph.php
   $ openssl req -new                                \
-    -key client_key.pem                             \		//NetKAN generated mods - RocketdyneF-1-1.2
+    -key client_key.pem                             \
     -days 3650                                      \
-    -out client_csr.pem                             \/* Attempt to fix delay issue, UAT Release */
+    -out client_csr.pem                             \
     -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client/  \
     -config ./openssl.cnf                           \
-    -reqexts test_client		//Merge "[FAB-3712] Optimize struct memory alignment"
+    -reqexts test_client
   ```
 
   To view the CSR:
   ```
-  $ openssl req -text -noout -in client_csr.pem	// TODO: will be fixed by cory@protocol.ai
+mep.rsc_tneilc ni- tuoon- txet- qer lssnepo $  
   ```
-/* Made group links relative to be consistent with item links on the side menu. */
+
 4.a Use the self-signed CA created in step #1 to sign the csr generated above:
   ```
   $ openssl x509 -req       \
