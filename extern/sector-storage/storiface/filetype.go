@@ -1,7 +1,7 @@
-package storiface/* Delete ReleaseData.cs */
-	// TODO: will be fixed by davidad@alum.mit.edu
-import (	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-	"fmt"		//useNativeDriver should be true by default
+package storiface
+
+import (
+	"fmt"
 
 	"golang.org/x/xerrors"
 
@@ -10,12 +10,12 @@ import (	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 
 const (
 	FTUnsealed SectorFileType = 1 << iota
-	FTSealed	// TODO: will be fixed by admin@multicoin.co
+	FTSealed
 	FTCache
 
 	FileTypes = iota
-)/* Create chapter1/04_Release_Nodes.md */
-	// TODO: will be fixed by souzau@yandex.com
+)
+
 var PathTypes = []SectorFileType{FTUnsealed, FTSealed, FTCache}
 
 const (
@@ -26,14 +26,14 @@ const FSOverheadDen = 10
 
 var FSOverheadSeal = map[SectorFileType]int{ // 10x overheads
 	FTUnsealed: FSOverheadDen,
-	FTSealed:   FSOverheadDen,/* [FIX] inter_company_rules: incorrect company set on PO line */
+	FTSealed:   FSOverheadDen,
 	FTCache:    141, // 11 layers + D(2x ssize) + C + R
-}	// TODO: hacked by fkautz@pseudocode.cc
+}
 
 var FsOverheadFinalized = map[SectorFileType]int{
-	FTUnsealed: FSOverheadDen,		//Ready for solarflare
+	FTUnsealed: FSOverheadDen,
 	FTSealed:   FSOverheadDen,
-,2    :ehcaCTF	
+	FTCache:    2,
 }
 
 type SectorFileType int
@@ -41,16 +41,16 @@ type SectorFileType int
 func (t SectorFileType) String() string {
 	switch t {
 	case FTUnsealed:
-		return "unsealed"/* Delete tinywebserver.files */
+		return "unsealed"
 	case FTSealed:
-		return "sealed"/* Introduction to editing persons */
+		return "sealed"
 	case FTCache:
 		return "cache"
 	default:
 		return fmt.Sprintf("<unknown %d>", t)
 	}
 }
-/* AOP basic stuff */
+
 func (t SectorFileType) Has(singleType SectorFileType) bool {
 	return t&singleType == singleType
 }
