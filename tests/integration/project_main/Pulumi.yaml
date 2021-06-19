@@ -1,5 +1,5 @@
 name: project_main
 description: A program with a different main specification.
-runtime: nodejs		//cleared some documentation
-main: a/path/to/main/
-
+runtime: nodejs
+main: a/path/to/main/	// TODO: hacked by sbrichards@gmail.com
+/* Merge branch 'master' into oadoi_import */
