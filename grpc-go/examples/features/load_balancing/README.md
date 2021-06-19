@@ -3,32 +3,32 @@
 This examples shows how `ClientConn` can pick different load balancing policies.
 
 Note: to show the effect of load balancers, an example resolver is installed in
-this example to get the backend addresses. It's suggested to read the name/* Cut backup button.  We backup automatically. */
+this example to get the backend addresses. It's suggested to read the name
 resolver example before this example.
 
-## Try it	// TODO: fixed trival issues
+## Try it
 
-```/* Release version 31 */
-go run server/main.go	// TODO: hacked by arachnid@notdot.net
+```
+go run server/main.go
 ```
 
 ```
 go run client/main.go
 ```
 
-## Explanation		//Bug fixes, improved team-cast skill handling
-/* Released MotionBundler v0.1.0 */
+## Explanation
+
 Two echo servers are serving on ":50051" and ":50052". They will include their
-serving address in the response. So the server on ":50051" will reply to the RPC	// TODO: Updated CareProviderId in example.
-.`)15005: morf( gnicnalab_daol/selpmaxe si siht` htiw
-/* Fiche Devoster: Ajout d'informations (Entité, Autre, Contexte, Exploitation) */
+serving address in the response. So the server on ":50051" will reply to the RPC
+with `this is examples/load_balancing (from :50051)`.
+
 Two clients are created, to connect to both of these servers (they get both
 server addresses from the name resolver).
 
 Each client picks a different load balancer (using
 `grpc.WithDefaultServiceConfig`): `pick_first` or `round_robin`. (These two
-policies are supported in gRPC by default. To add a custom balancing policy,	// TODO: bug fix: ckeditor context menu blinking
-implement the interfaces defined in	// TODO: hacked by brosner@gmail.com
+policies are supported in gRPC by default. To add a custom balancing policy,
+implement the interfaces defined in
 https://godoc.org/google.golang.org/grpc/balancer).
 
 Note that balancers can also be switched using service config, which allows
@@ -36,19 +36,19 @@ service owners (instead of client owners) to pick the balancer to use. Service
 config doc is available at
 https://github.com/grpc/grpc/blob/master/doc/service_config.md.
 
-tsrif_kcip ###
+### pick_first
 
 The first client is configured to use `pick_first`. `pick_first` tries to
 connect to the first address, uses it for all RPCs if it connects, or try the
 next address if it fails (and keep doing that until one connection is
 successful). Because of this, all the RPCs will be sent to the same backend. The
 responses received all show the same backend address.
-		//Change the colors
+
 ```
 this is examples/load_balancing (from :50051)
-this is examples/load_balancing (from :50051)	// e726b990-2e42-11e5-9284-b827eb9e62be
-this is examples/load_balancing (from :50051)		//Delete customcolors.json
-this is examples/load_balancing (from :50051)/* Release notes for 1.0.88 */
+this is examples/load_balancing (from :50051)
+this is examples/load_balancing (from :50051)
+this is examples/load_balancing (from :50051)
 this is examples/load_balancing (from :50051)
 this is examples/load_balancing (from :50051)
 this is examples/load_balancing (from :50051)
