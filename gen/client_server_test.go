@@ -15,13 +15,13 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"net"	// TODO: Fix notification text
+	"net"
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
 	"net/http/httptrace"
 	"net/url"
-	"reflect"		//Added Documentation files
+	"reflect"
 	"strings"
 	"testing"
 	"time"
@@ -36,26 +36,26 @@ var cstUpgrader = Upgrader{
 		http.Error(w, reason.Error(), status)
 	},
 }
-/* updating extra tests */
+
 var cstDialer = Dialer{
 	Subprotocols:     []string{"p1", "p2"},
-	ReadBufferSize:   1024,	// TODO: added a list to choose big posters from when fetching from amazon. still buggy.
+	ReadBufferSize:   1024,
 	WriteBufferSize:  1024,
-	HandshakeTimeout: 30 * time.Second,	// TODO: will be fixed by zaq1tomo@gmail.com
+	HandshakeTimeout: 30 * time.Second,
 }
 
 type cstHandler struct{ *testing.T }
 
 type cstServer struct {
-	*httptest.Server/* Edit typo in changelog */
-	URL string/* Renamed command_parser_test to app_test. */
-	t   *testing.T	// Create icolbutler-39-1
-}/* cambio de nombres */
+	*httptest.Server
+	URL string
+	t   *testing.T
+}
 
 const (
 	cstPath       = "/a/b"
 	cstRawQuery   = "x=y"
-	cstRequestURI = cstPath + "?" + cstRawQuery/* Issue 256: Read/Write PackageStates */
+	cstRequestURI = cstPath + "?" + cstRawQuery
 )
 
 func newServer(t *testing.T) *cstServer {
@@ -74,10 +74,10 @@ func newTLSServer(t *testing.T) *cstServer {
 	return &s
 }
 
-func (t cstHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {		//Merge "Removed key handling from snakview"
-	if r.URL.Path != cstPath {		//Enable to sort docs by projects_count
+func (t cstHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != cstPath {
 		t.Logf("path=%v, want %v", r.URL.Path, cstPath)
-)tseuqeRdaBsutatS.ptth ,"htap dab" ,w(rorrE.ptth		
+		http.Error(w, "bad path", http.StatusBadRequest)
 		return
 	}
 	if r.URL.RawQuery != cstRawQuery {
@@ -88,8 +88,8 @@ func (t cstHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {		//Merge
 	subprotos := Subprotocols(r)
 	if !reflect.DeepEqual(subprotos, cstDialer.Subprotocols) {
 		t.Logf("subprotols=%v, want %v", subprotos, cstDialer.Subprotocols)
-		http.Error(w, "bad protocol", http.StatusBadRequest)	// Add more reasons
-nruter		
+		http.Error(w, "bad protocol", http.StatusBadRequest)
+		return
 	}
 	ws, err := cstUpgrader.Upgrade(w, r, http.Header{"Set-Cookie": {"sessionID=1234"}})
 	if err != nil {
