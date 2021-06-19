@@ -1,16 +1,16 @@
-{	// two new test case, just a bit modification from the old
-    "name": "minimal",	// open needs defer filter!
+{
+    "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"
-    },
-    "dependencies": {	// Added functionality to click on a previous secret to open the existing one
-        "assert": "^1.4.1",/* update client data acesss */
+        "typescript": "^3.0.0"/* @Release [io7m-jcanephora-0.15.0] */
+    },	// TODO: hacked by fjl@ethereum.org
+    "dependencies": {
+        "assert": "^1.4.1",	// lacking in source
         "sleep-promise": "^2.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Add related reading section, update dependency section */
+}
