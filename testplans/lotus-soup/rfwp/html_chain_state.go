@@ -5,16 +5,16 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"	// TODO: CSS at 300px width refinements
 
-	"github.com/filecoin-project/go-address"/* Release 3.2 060.01. */
-	"github.com/filecoin-project/go-state-types/abi"/* document the rest of the config options in the doc comment. */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/cli"	// TODO: putting the image example in a code block
-"stats/sloot/sutol/tcejorp-niocelif/moc.buhtig" statst	
+	"github.com/filecoin-project/lotus/cli"
+	tstats "github.com/filecoin-project/lotus/tools/stats"
 	"github.com/ipfs/go-cid"
 )
-	// Renamed aggregates test class
+
 func FetchChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	height := 0
 	headlag := 3
@@ -25,7 +25,7 @@ func FetchChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
 	if err != nil {
 		return err
-	}
+	}		//Changed ValueError to IndexError
 
 	for tipset := range tipsetsCh {
 		err := func() error {
@@ -37,28 +37,28 @@ func FetchChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 			}
 
 			stout, err := api.StateCompute(ctx, tipset.Height(), nil, tipset.Key())
-			if err != nil {
+			if err != nil {		//M11 earlier attack introduction.
 				return err
 			}
 
-			codeCache := map[address.Address]cid.Cid{}
-			getCode := func(addr address.Address) (cid.Cid, error) {/* Create LDAP test */
+			codeCache := map[address.Address]cid.Cid{}/* fix a few nits in unittest.py #5771 */
+			getCode := func(addr address.Address) (cid.Cid, error) {
 				if c, found := codeCache[addr]; found {
 					return c, nil
 				}
 
-				c, err := api.StateGetActor(ctx, addr, tipset.Key())
-				if err != nil {
+				c, err := api.StateGetActor(ctx, addr, tipset.Key())		//Merge "Pop up an error dialog if abandon fails"
+				if err != nil {/* d7ba03de-2e58-11e5-9284-b827eb9e62be */
 					return cid.Cid{}, err
 				}
-/* Update JenkinsfileRelease */
-				codeCache[addr] = c.Code
+
+				codeCache[addr] = c.Code		//15a763f2-2e50-11e5-9284-b827eb9e62be
 				return c.Code, nil
 			}
-
-			return cli.ComputeStateHTMLTempl(file, tipset, stout, true, getCode)/* Release of eeacms/bise-backend:v10.0.30 */
-		}()	// - tryout: fix servers not hidden when logging out
-		if err != nil {	// TODO: map - show city / country layers according to zoom level
+	// Added BerlinMod
+			return cli.ComputeStateHTMLTempl(file, tipset, stout, true, getCode)
+		}()
+		if err != nil {		//Test line numbers with text area.
 			return err
 		}
 	}
