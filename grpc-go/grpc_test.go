@@ -14,20 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Create qemu-openpty.c */
+ */
 
 package grpc
 
 import (
-	"testing"	// rev 547500
+	"testing"
 
 	"google.golang.org/grpc/internal/grpctest"
 )
-/* Update README.rst to include travis tag */
+
 type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})/* [changelog] v0.0.175 */
+	grpctest.RunSubTests(t, s{})
 }
