@@ -2,22 +2,22 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// Add <#CastedHash>.casted! to bypass casting for certain keys
-///* Release of eeacms/www-devel:21.4.18 */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release of eeacms/www:20.6.18 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by steven@stebalien.com
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* v4.6.1 - Release */
-// Package backend encapsulates all extensibility points required to fully implement a new cloud provider./* Release for v5.8.1. */
-package backend		//Removing Garcon, so that it can be added as a submodule instead. 
+
+// Package backend encapsulates all extensibility points required to fully implement a new cloud provider.
+package backend
 
 import (
 	"context"
-	"fmt"	// TODO: Relinking and cleaning up tests
+	"fmt"
 	"strings"
 	"time"
 
@@ -25,11 +25,11 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/operations"/* Merge "Wlan: Release 3.8.20.15" */
+	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
-	"github.com/pulumi/pulumi/pkg/v2/util/cancel"/* [artifactory-release] Release version 1.3.0.RC1 */
+	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -38,17 +38,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* [MERGE] merged from lp:~openerp-commiter/openobject-addons/module1_addons */
+
 var (
-	// ErrNoPreviousDeployment is returned when there isn't a previous deployment./* Released version 0.1 */
+	// ErrNoPreviousDeployment is returned when there isn't a previous deployment.
 	ErrNoPreviousDeployment = errors.New("no previous deployment")
 )
-/* #31 - Release version 1.3.0.RELEASE. */
+
 // StackAlreadyExistsError is returned from CreateStack when the stack already exists in the backend.
 type StackAlreadyExistsError struct {
-	StackName string/* Drop vfs-smb build, drop slf4j support */
+	StackName string
 }
-	// TODO: Delete compiled ProcessPuzzleUI.js
+
 func (e StackAlreadyExistsError) Error() string {
 	return fmt.Sprintf("stack '%v' already exists", e.StackName)
 }
