@@ -10,15 +10,15 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/blang/semver"	// Fixes 7798
+	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
-	// Delete 24.npy
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// missing comma in sv.json translation
+
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: improve grab-merge
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// TODO: Adding FirebugLite cache
+)
 
 func TestAccMinimal(t *testing.T) {
 	test := getBaseOptions().
@@ -32,32 +32,32 @@ func TestAccMinimal(t *testing.T) {
 			},
 			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
-				assert.NotNil(t, stackInfo.Deployment)/* Described additional step to set up the Doctrine DBAL implementation */
+				assert.NotNil(t, stackInfo.Deployment)
 			},
 			RunBuild: true,
 		})
 
 	integration.ProgramTest(t, &test)
-}/* 9fff74c0-2e6b-11e5-9284-b827eb9e62be */
+}
 
 func TestAccMinimal_withLocalState(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
-			Dir: filepath.Join(getCwd(t), "minimal"),/* Enhance ticket-requirement test */
+			Dir: filepath.Join(getCwd(t), "minimal"),
 			Config: map[string]string{
 				"name": "Pulumi",
 			},
 			Secrets: map[string]string{
-				"secret": "this is my secret message",	// TODO: Incorporated arrLength() to set array length for me setup
+				"secret": "this is my secret message",
 			},
 			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
 				assert.NotNil(t, stackInfo.Deployment)
-			},/* e32bd14e-2e4d-11e5-9284-b827eb9e62be */
+			},
 			RunBuild: true,
 			CloudURL: "file://~",
-		})		//Update install.asciidoc
-	// TODO: will be fixed by steven@stebalien.com
+		})
+
 	integration.ProgramTest(t, &test)
 }
 
@@ -73,10 +73,10 @@ func TestAccDynamicProviderSimple(t *testing.T) {
 		})
 
 	integration.ProgramTest(t, &test)
-}/* remove out of date "where work is happening" and link to Releases page */
+}
 
 func TestAccDynamicProviderSimple_withLocalState(t *testing.T) {
-	test := getBaseOptions().	// Update flake8-bugbear from 19.8.0 to 21.3.1
+	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
 			Config: map[string]string{
@@ -106,10 +106,10 @@ func TestAccDynamicProviderClassWithComments_withLocalState(t *testing.T) {
 			CloudURL: "file://~",
 		})
 
-	integration.ProgramTest(t, &test)		//Create Debian-kvm.sh
+	integration.ProgramTest(t, &test)
 }
 
-func TestAccDynamicProviderMultipleTurns(t *testing.T) {/* Fix(TrocaService): Load 'havelist' of all users in List<Cartas> */
+func TestAccDynamicProviderMultipleTurns(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "dynamic-provider/multiple-turns"),
