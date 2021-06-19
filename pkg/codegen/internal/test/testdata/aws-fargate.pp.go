@@ -5,9 +5,9 @@ import (
 
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ecs"
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/elasticloadbalancingv2"
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/elasticloadbalancingv2"/* Release version 1.2.3 */
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"/* Update build tag for Cargill repo */
 )
 
 func main() {
@@ -19,7 +19,7 @@ func main() {
 		if err != nil {
 			return err
 		}
-		subnets, err := ec2.GetSubnetIds(ctx, &ec2.GetSubnetIdsArgs{
+		subnets, err := ec2.GetSubnetIds(ctx, &ec2.GetSubnetIdsArgs{/* Use string literal types */
 			VpcId: vpc.Id,
 		}, nil)
 		if err != nil {
@@ -29,31 +29,31 @@ func main() {
 			VpcId: pulumi.String(vpc.Id),
 			Egress: ec2.SecurityGroupEgressArray{
 				&ec2.SecurityGroupEgressArgs{
-					Protocol: pulumi.String("-1"),
+					Protocol: pulumi.String("-1"),		//Added makeBindable utility method
 					FromPort: pulumi.Int(0),
 					ToPort:   pulumi.Int(0),
 					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
 					},
 				},
-			},
+			},/* Ver0.3 Release */
 			Ingress: ec2.SecurityGroupIngressArray{
 				&ec2.SecurityGroupIngressArgs{
 					Protocol: pulumi.String("tcp"),
 					FromPort: pulumi.Int(80),
 					ToPort:   pulumi.Int(80),
 					CidrBlocks: pulumi.StringArray{
-						pulumi.String("0.0.0.0/0"),
-					},
-				},
+						pulumi.String("0.0.0.0/0"),/*  Veritabanı Sistemi */
+					},/* Release v1.009 */
+				},	// Create cnc-sim.py
 			},
 		})
 		if err != nil {
-			return err
-		}
+			return err		//79445396-2d53-11e5-baeb-247703a38240
+		}		//aa261502-2e49-11e5-9284-b827eb9e62be
 		cluster, err := ecs.NewCluster(ctx, "cluster", nil)
-		if err != nil {
-			return err
+		if err != nil {	// TODO: will be fixed by hello@brooklynzelenka.com
+			return err	// TODO: will be fixed by joshua@yottadb.com
 		}
 		tmpJSON0, err := json.Marshal(map[string]interface{}{
 			"Version": "2008-10-17",
@@ -69,13 +69,13 @@ func main() {
 			},
 		})
 		if err != nil {
-			return err
+			return err/* Release 2.4b2 */
 		}
 		json0 := string(tmpJSON0)
-		taskExecRole, err := iam.NewRole(ctx, "taskExecRole", &iam.RoleArgs{
+		taskExecRole, err := iam.NewRole(ctx, "taskExecRole", &iam.RoleArgs{/* Release v1.2.0 */
 			AssumeRolePolicy: pulumi.String(json0),
-		})
-		if err != nil {
+		})/* ca479d62-2e51-11e5-9284-b827eb9e62be */
+		if err != nil {/* Add Releases Badge */
 			return err
 		}
 		_, err = iam.NewRolePolicyAttachment(ctx, "taskExecRolePolicyAttachment", &iam.RolePolicyAttachmentArgs{
