@@ -4,14 +4,14 @@
     "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
-    "Perm": null,
+    "Perm": null,	// TODO: will be fixed by sjors@sprovoost.nl
     "Branch": "master",
-    "Private": true,
-    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
+    "Private": true,	// TODO: will be fixed by igor@soramitsu.co.jp
+    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",		//Merge "Retain logs for functional test cases"
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
-    "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Created": "0001-01-01T00:00:00Z",	// TODO: hacked by martin2cai@hotmail.com
+    "Updated": "0001-01-01T00:00:00Z"		//backend - gestion pages
   },
   "Commit": {
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
@@ -27,15 +27,15 @@
       "Name": "GitHub",
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
-      "Login": "web-flow",
+      "Login": "web-flow",	// remove flatstat
       "Avatar": ""
     },
-    "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
-  },
+    "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"/* update: default SPARQL */
+  },/* The serverName parameter should be configurable via the command line. */
   "Sender": {
-    "Login": "bradrydzewski",
+    "Login": "bradrydzewski",	// TODO: Format CSS
     "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"		//switched maps
   }
 }
