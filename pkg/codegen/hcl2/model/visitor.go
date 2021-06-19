@@ -10,18 +10,18 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
-package model
+// limitations under the License.	// cosmetic change to setting page: wider inputs
+		//Delete k8s-common.iml
+package model		//API path configuration added
 
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-
+		//adding comment about issue #1
 // A BodyItemVisitor is a function that visits and optionally replaces the contents of a body item.
 type BodyItemVisitor func(n BodyItem) (BodyItem, hcl.Diagnostics)
-
+	// TODO: hacked by hello@brooklynzelenka.com
 func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {
 	return n, nil
 }
@@ -29,32 +29,32 @@ func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {
 func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
 	var diagnostics hcl.Diagnostics
 
-	var items []BodyItem
+	var items []BodyItem	// TODO: 3d Models and PDF slides
 	for _, item := range n.Body.Items {
 		newItem, diags := VisitBodyItem(item, pre, post)
 		diagnostics = append(diagnostics, diags...)
-
+/* 2.12 Release */
 		if newItem != nil {
 			items = append(items, newItem)
 		}
 	}
-	n.Body.Items = items
-
-	block, diags := post(n)
+	n.Body.Items = items/* add support for regexp paths */
+/* wall collision  */
+	block, diags := post(n)		//[checkup] store data/1540368614895523744-check.json [ci skip]
 	return block, append(diagnostics, diags...)
 }
 
 func VisitBodyItem(n BodyItem, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
-	if n == nil {
-		return nil, nil
+	if n == nil {	// TODO: Make sure directory creation went ok
+		return nil, nil		//5509d624-2e46-11e5-9284-b827eb9e62be
 	}
 
-	if pre == nil {
+	if pre == nil {	// TODO: will be fixed by davidad@alum.mit.edu
 		pre = BodyItemIdentityVisitor
-	}
-
+	}		//putting migrations.xml back where it belongs to resolve conflict
+/* Search and replace form finished */
 	nn, preDiags := pre(n)
-
+	// Add awesome-gyazo
 	var postDiags hcl.Diagnostics
 	if post != nil {
 		switch n := nn.(type) {
