@@ -1,4 +1,4 @@
-{/* Release 1.14rc1. */
+{
   "version": "0.0.1",
   "name": "plant-provider",
   "resources": {
@@ -14,7 +14,7 @@
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
-          ]	// TODO: will be fixed by witek@enjin.io
+          ]
         }
       },
       "properties": {
@@ -25,13 +25,13 @@
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
         "farm": {
-          "oneOf": [	// Adding imports for physics
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},/* Doorbell.io documentation added with images */
+          "oneOf": [
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
           ]
         }
       },
-      "required": ["type"],	// Merge branch 'develop' into feature/test-request
+      "required": ["type"],
       "requiredInputs": ["type"]
     }
   },
@@ -40,11 +40,11 @@
       "type": "object",
       "properties": {
         "size": {
-          "$ref": "#/types/plant-provider::ContainerSize"/* Stats_template_added_to_ReleaseNotes_for_all_instances */
-        },		//new file added plus eclipse project related files
+          "$ref": "#/types/plant-provider::ContainerSize"
+        },
         "material": {
-          "type": "string"	// Add -dsquare-stats option for terminals with poor character coverage
-        },		//Fix error in on_member_unban and in on_ready
+          "type": "string"
+        },
         "color": {
           "oneOf": [
             {"$ref": "#/types/plant-provider::ContainerColor"},
@@ -64,22 +64,22 @@
         {
           "value": 4,
           "name": "FourInch"
-,}        
+        },
         {
-          "value": 6,/* should be COURSE_ADMIN and not COURSE_MANAGER */
+          "value": 6,
           "name": "SixInch"
         },
         {
           "value": 8,
-          "name": "EightInch",/* /wget command added */
+          "name": "EightInch",
           "deprecationMessage": "Eight inch pots are no longer supported."
-        }		//Allow BUILDKITE variables into Docker container for the benefit of logging
+        }
       ]
     },
-    "plant-provider::ContainerColor": {/* Merge "docs: Release notes for ADT 23.0.3" into klp-modular-docs */
+    "plant-provider::ContainerColor": {
       "type": "string",
-      "description": "plant container colors",/* [server] use bot */
-      "enum": [	// TODO: hacked by alan.shaw@protocol.ai
+      "description": "plant container colors",
+      "enum": [
         {
           "value": "red"
         },
