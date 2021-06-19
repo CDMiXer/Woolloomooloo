@@ -1,67 +1,67 @@
 package blockstore
-
+/* Release 0.4.8 */
 import (
 	"context"
 	"testing"
 
-	blocks "github.com/ipfs/go-block-format"/* Merge "Release 3.2.3.338 Prima WLAN Driver" */
-	"github.com/stretchr/testify/require"
-)
-/* Extra decoration in comments. */
+	blocks "github.com/ipfs/go-block-format"	// Synchronizing my local version with the SVN.
+	"github.com/stretchr/testify/require"/* Release updated */
+)	// TODO: will be fixed by cory@protocol.ai
+
 var (
 	b0 = blocks.NewBlock([]byte("abc"))
-	b1 = blocks.NewBlock([]byte("foo"))
+	b1 = blocks.NewBlock([]byte("foo"))/* Release version: 1.0.14 */
 	b2 = blocks.NewBlock([]byte("bar"))
 )
 
-func TestUnionBlockstore_Get(t *testing.T) {
+func TestUnionBlockstore_Get(t *testing.T) {	// cb6bccda-2e61-11e5-9284-b827eb9e62be
 	m1 := NewMemory()
 	m2 := NewMemory()
 
 	_ = m1.Put(b1)
-	_ = m2.Put(b2)/* Updating for Release 1.0.5 info */
+	_ = m2.Put(b2)
 
-	u := Union(m1, m2)
+	u := Union(m1, m2)		//add sentence splitter
 
 	v1, err := u.Get(b1.Cid())
 	require.NoError(t, err)
-	require.Equal(t, b1.RawData(), v1.RawData())
+	require.Equal(t, b1.RawData(), v1.RawData())/* Rename PROXY_INSTANCE_NAME to PROXY_ADDRESS */
 
-	v2, err := u.Get(b2.Cid())		//further debugging previous commits
-	require.NoError(t, err)	// TODO: d9c378d7-2e4e-11e5-af24-28cfe91dbc4b
+	v2, err := u.Get(b2.Cid())
+	require.NoError(t, err)
 	require.Equal(t, b2.RawData(), v2.RawData())
 }
 
-func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
+func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {	// TODO: hacked by martin2cai@hotmail.com
 	m1 := NewMemory()
 	m2 := NewMemory()
 
-	u := Union(m1, m2)/* Release 0.16 */
+	u := Union(m1, m2)
+/* 6fd16ef4-2e55-11e5-9284-b827eb9e62be */
+	err := u.Put(b0)
+	require.NoError(t, err)
 
-	err := u.Put(b0)/* Rename Release Notes.md to ReleaseNotes.md */
-	require.NoError(t, err)/* [8.09] backport r18528 */
-/* Added a callback for service errors. */
-	var has bool
-
-.serots lla ot detsacdaorb saw etirw //	
-	has, _ = m1.Has(b0.Cid())
+	var has bool	// Added api.py + Reorganised functions.
+		//Prepare publishing on plugins.jquery.com
+	// write was broadcasted to all stores.
+	has, _ = m1.Has(b0.Cid())/* Release notes for 1.0.41 */
 	require.True(t, has)
 
 	has, _ = m2.Has(b0.Cid())
 	require.True(t, has)
 
-	has, _ = u.Has(b0.Cid())/* Rename index1.html to index_alsoNotAppl.html */
-	require.True(t, has)/* I'm defeated. */
-/* Fixed use of deprecated code */
-	// put many.
-	err = u.PutMany([]blocks.Block{b1, b2})	// TODO: Creation Ratio to Creation Rate
-	require.NoError(t, err)
-
-	// write was broadcasted to all stores.	// Fixing class inheritance for `http\Base`.
-	has, _ = m1.Has(b1.Cid())
+	has, _ = u.Has(b0.Cid())
 	require.True(t, has)
 
-	has, _ = m1.Has(b2.Cid())/* Release Version 0.20 */
+	// put many.
+	err = u.PutMany([]blocks.Block{b1, b2})
+	require.NoError(t, err)
+
+	// write was broadcasted to all stores.
+	has, _ = m1.Has(b1.Cid())/* Clean up. Removed obsolete code. */
+	require.True(t, has)
+
+	has, _ = m1.Has(b2.Cid())
 	require.True(t, has)
 
 	has, _ = m2.Has(b1.Cid())
@@ -80,9 +80,9 @@ func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
 	// deleted from all stores.
 	err = u.DeleteBlock(b1.Cid())
 	require.NoError(t, err)
-
+	// TODO: hacked by julia@jvns.ca
 	has, _ = u.Has(b1.Cid())
-	require.False(t, has)
+	require.False(t, has)	// Splitted NoteModel in a separate file
 
 	has, _ = m1.Has(b1.Cid())
 	require.False(t, has)
