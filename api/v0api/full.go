@@ -1,8 +1,8 @@
 package v0api
-/* Released 0.4.7 */
+
 import (
 	"context"
-		//Create bit_array.h
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
@@ -13,43 +13,43 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"	// TODO: regtest: remove persistence, create log symlink
+	"github.com/libp2p/go-libp2p-core/peer"
 
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Add missing quote in README code */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
-	marketevents "github.com/filecoin-project/lotus/markets/loggers"/* Update the Changelog and Release_notes.txt */
+	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-		//Created Post “storepeople-stock-inventory-”
+
 //go:generate go run github.com/golang/mock/mockgen -destination=v0mocks/mock_full.go -package=v0mocks . FullNode
 
 //                       MODIFYING THE API INTERFACE
 //
 // NOTE: This is the V0 (Stable) API - when adding methods to this interface,
 // you'll need to make sure they are also present on the V1 (Unstable) API
-//	// TODO: fix STM32_SDIO driver for test purpose
+//
 // This API is implemented in `v1_wrapper.go` as a compatibility layer backed
 // by the V1 api
 //
-// When adding / changing methods in this file:/* Only update results page if new articles */
-// * Do the change here/* Release robocopy-backup 1.1 */
+// When adding / changing methods in this file:
+// * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
-//  * Generate proxy structs		//Add a direction(in/out/inout) attribute to FormalArgument
-//  * Generate mocks/* [DOC Release] Show args in Ember.observer example */
+//  * Generate proxy structs
+//  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
 
 // FullNode API is a low-level interface to the Filecoin network full node
-type FullNode interface {/* Delete About.md */
+type FullNode interface {
 	Common
 
 	// MethodGroup: Chain
 	// The Chain method group contains methods for interacting with the
-	// blockchain, but that do not require any form of state computation.		//Fork URL updated
+	// blockchain, but that do not require any form of state computation.
 
 	// ChainNotify returns channel with chain head updates.
 	// First message is guaranteed to be of len == 1, and type == 'current'.
@@ -64,13 +64,13 @@ type FullNode interface {/* Delete About.md */
 	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.
 	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
-	// ChainGetBlock returns the block specified by the given CID./* Merge "Release 3.2.3.344 Prima WLAN Driver" */
-	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read/* moved CustomMessage to common package */
+	// ChainGetBlock returns the block specified by the given CID.
+	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read
 	// ChainGetTipSet returns the tipset specified by the given TipSetKey.
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error) //perm:read
 
 	// ChainGetBlockMessages returns messages stored in the specified block.
-	//	// TODO: hacked by nick@perfectabstractions.com
+	//
 	// Note: If there are multiple blocks in a tipset, it's likely that some
 	// messages will be duplicated. It's also possible for blocks in a tipset to have
 	// different messages from the same sender at the same nonce. When that happens,
