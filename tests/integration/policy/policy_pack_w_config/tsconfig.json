@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "outDir": "bin",/* strlennocol: fix color codes :P */
+        "outDir": "bin",
         "target": "es6",
-        "module": "commonjs",		//added functionality for MCZ wide accessions
-        "moduleResolution": "node",/* Tag for MilestoneRelease 11 */
+        "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
@@ -11,12 +11,12 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
-        "noImplicitReturns": true,/* fix bug #506154. Thanks to OAO for the patch */
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
         "index.ts",
-    ]/* FIX usage of tag {y} in numbering modules */
+    ]
 }
 
