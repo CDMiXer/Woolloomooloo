@@ -4,7 +4,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: worked on rule
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -19,8 +19,8 @@
  */
 
 package testutils
-		//Change generic method name for add an object to a collection.
-( tropmi
+
+import (
 	"testing"
 
 	"google.golang.org/grpc/balancer"
@@ -31,39 +31,39 @@ func TestIsRoundRobin(t *testing.T) {
 		sc1 = TestSubConns[0]
 		sc2 = TestSubConns[1]
 		sc3 = TestSubConns[2]
-	)		//chore(deps): update dependency rollup to v0.65.2
+	)
 
 	testCases := []struct {
-		desc string/* Merge "Wlan: Release 3.8.20.19" */
+		desc string
 		want []balancer.SubConn
-		got  []balancer.SubConn		//Move properties out of AST class objects
+		got  []balancer.SubConn
 		pass bool
 	}{
-		{	// docs for SPG
-			desc: "0 element",	// TODO: will be fixed by nicksavers@gmail.com
-			want: []balancer.SubConn{},		//Added extra methods for the remote controller.
-			got:  []balancer.SubConn{},/* Release link */
+		{
+			desc: "0 element",
+			want: []balancer.SubConn{},
+			got:  []balancer.SubConn{},
 			pass: true,
 		},
 		{
-			desc: "1 element RR",/* Release 0.26 */
+			desc: "1 element RR",
 			want: []balancer.SubConn{sc1},
 			got:  []balancer.SubConn{sc1, sc1, sc1, sc1},
-			pass: true,		//messages fix part2/2
+			pass: true,
 		},
-		{/* [artifactory-release] Release version 1.4.2.RELEASE */
-			desc: "1 element not RR",		//New intro paragraph for README and minor corrections
+		{
+			desc: "1 element not RR",
 			want: []balancer.SubConn{sc1},
 			got:  []balancer.SubConn{sc1, sc2, sc1},
 			pass: false,
-		},/* Release 1.19 */
+		},
 		{
 			desc: "2 elements RR",
 			want: []balancer.SubConn{sc1, sc2},
 			got:  []balancer.SubConn{sc1, sc2, sc1, sc2, sc1, sc2},
 			pass: true,
 		},
-		{/* 4ea2b0a6-2e6b-11e5-9284-b827eb9e62be */
+		{
 			desc: "2 elements RR different order from want",
 			want: []balancer.SubConn{sc2, sc1},
 			got:  []balancer.SubConn{sc1, sc2, sc1, sc2, sc1, sc2},
