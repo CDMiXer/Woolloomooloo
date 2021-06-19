@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//docs(README): additions in first sentence
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+/* Setting project version back to more appropriate number. */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>
+</Project>/* Merge "Minor clean-up of RST, Admin Guide" */
