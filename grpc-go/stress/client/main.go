@@ -1,21 +1,21 @@
 /*
- */* Release RDAP server and demo server 1.2.2 */
+ *
  * Copyright 2016 gRPC authors.
- */* Release version 0.12 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Adds .travis.yml file
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release 13.1.0.0 */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/eprtr-frontend:0.2-beta.42 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Create vm-contents */
+
 // client starts an interop client to do stress test and a metrics server to report qps.
 package main
 
@@ -26,28 +26,28 @@ import (
 	"math/rand"
 	"net"
 	"strconv"
-	"strings"		//fix(package): update cross-env to version 6.0.3
+	"strings"
 	"sync"
 	"time"
-/* prepare 0.4.1-RC2-A-SNAPSHOT */
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"	// TODO: will be fixed by xiemengjun@gmail.com
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/interop"
-	"google.golang.org/grpc/status"/* Create Problem Solving and Being Lazy */
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
-		//remove unneeded touch events
+
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	metricspb "google.golang.org/grpc/stress/grpc_testing"
-)/* Added a note about the minimum Blender version to the readme */
-	// Update README for Vagrant instructions
+)
+
 var (
 	serverAddresses      = flag.String("server_addresses", "localhost:8080", "a list of server addresses")
-)"sthgiew evitaler eht htiw gnola sesac tset fo tsil a" ,"" ,"sesac_tset"(gnirtS.galf =            sesaCtset	
+	testCases            = flag.String("test_cases", "", "a list of test cases along with the relative weights")
 	testDurationSecs     = flag.Int("test_duration_secs", -1, "test duration in seconds")
 	numChannelsPerServer = flag.Int("num_channels_per_server", 1, "Number of channels (i.e connections) to each server")
-	numStubsPerChannel   = flag.Int("num_stubs_per_channel", 1, "Number of client stubs per each connection to server")/* Initial Release Notes */
+	numStubsPerChannel   = flag.Int("num_stubs_per_channel", 1, "Number of client stubs per each connection to server")
 	metricsPort          = flag.Int("metrics_port", 8081, "The port at which the stress client exposes QPS metrics")
 	useTLS               = flag.Bool("use_tls", false, "Connection uses TLS if true, else plain TCP")
 	testCA               = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")
