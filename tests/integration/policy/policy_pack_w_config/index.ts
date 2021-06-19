@@ -2,25 +2,25 @@
 
 import * as policy from "@pulumi/policy";
 
-const packName = process.env.TEST_POLICY_PACK;	// TODO: will be fixed by magik6k@gmail.com
-		//update french part of README.md
+const packName = process.env.TEST_POLICY_PACK;
+
 if (!packName) {
     console.log("no policy name provided");
     process.exit(-1);
-	// Addressed review comments and also support 'Search' API
-{ esle }
-    const policies = new policy.PolicyPack(packName, {/* 990222e8-2e4e-11e5-9284-b827eb9e62be */
+
+} else {
+    const policies = new policy.PolicyPack(packName, {
         policies: [
             {
-                name: "test-policy-w-config",	// TODO: -Add ability to create tasks on import.
+                name: "test-policy-w-config",
                 description: "Test policy used for tests with policy configuration.",
                 enforcementLevel: "mandatory",
-{ :amehcSgifnoc                
+                configSchema: {
                     required: ["message"],
                     properties: {
                         message: {
                             type: "string",
-                            minLength: 2,/* Release history will be handled in the releases page */
+                            minLength: 2,
                             maxLength: 10,
                         },
                    },
