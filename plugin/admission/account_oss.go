@@ -3,17 +3,17 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* New figure basic mode */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//dev.size("cm") {+ graphics:: fix}
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil //
+// limitations under the License.
 
 // +build oss
-/* Release: 6.8.0 changelog */
+
 package admission
 
 import "github.com/drone/drone/core"
