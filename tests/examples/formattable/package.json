@@ -1,7 +1,7 @@
-{		//Add mention of cross-posting
-    "name": "minimal",	// utilities self destruct so dont destroy
+{
+    "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {/* Release Candidate 2 changes. */
+    "devDependencies": {
         "typescript": "^3.0.0"
-    }/* rev 839399 */
-}/* Merge branch 'develop' into config-context */
+    }/* Release of eeacms/eprtr-frontend:0.4-beta.29 */
+}
