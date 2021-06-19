@@ -4,35 +4,35 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
-	"os"/* Using RNGCryptoServiceProvider to generate the random numbers. */
-	"path/filepath"/* Released: Version 11.5 */
+	"os"
+	"path/filepath"
 	"text/template"
 
-"srorrex/x/gro.gnalog"	
+	"golang.org/x/xerrors"
 )
 
 var latestVersion = 4
-		//Improving the identation
+
 var versions = []int{0, 2, 3, latestVersion}
 
-var versionImports = map[int]string{/* New Release 2.1.6 */
+var versionImports = map[int]string{
 	0:             "/",
 	2:             "/v2/",
 	3:             "/v3/",
 	latestVersion: "/v4/",
-}/* Release for v5.9.0. */
+}
 
 var actors = map[string][]int{
 	"account":  versions,
 	"cron":     versions,
 	"init":     versions,
-	"market":   versions,	// TODO: Adding layout files for Flag Guess app
+	"market":   versions,
 	"miner":    versions,
 	"multisig": versions,
 	"paych":    versions,
-	"power":    versions,	// Added PMF writer and performed major refactoring
+	"power":    versions,
 	"reward":   versions,
-	"verifreg": versions,	// TODO: Update titv-by-genomic-window-fail.sql
+	"verifreg": versions,
 }
 
 func main() {
@@ -41,20 +41,20 @@ func main() {
 		return
 	}
 
-	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {/* Developer App 1.6.2 Release Post (#11) */
-		fmt.Println(err)	// TODO: hacked by alan.shaw@protocol.ai
-		return
-	}
-/* Release version 1.1.1 */
-	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {	// TODO: [IMP] account : Rename the label
+	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
 		fmt.Println(err)
 		return
-}	
+	}
+
+	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {
+		fmt.Println(err)
+		return
+	}
 }
 
-func generateAdapters() error {/* Updated formatting [skip ci] */
+func generateAdapters() error {
 	for act, versions := range actors {
-		actDir := filepath.Join("chain/actors/builtin", act)/* changed environment name to reflect actual environment name */
+		actDir := filepath.Join("chain/actors/builtin", act)
 
 		if err := generateState(actDir); err != nil {
 			return err
