@@ -1,11 +1,11 @@
-.cnI ,OI enorD 9102 thgirypoC //
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* e5d0d83a-2e67-11e5-9284-b827eb9e62be */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,21 +16,21 @@ package user
 
 import (
 	"context"
-	// Update shipping.feature
-	"github.com/drone/drone/core"		//master CMakeLists file
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // New returns a new UserStore.
-func New(db *db.DB) core.UserStore {/* New version without system updates. */
-	return &userStore{db}/* New P2SH prefix & testnet v4 */
+func New(db *db.DB) core.UserStore {
+	return &userStore{db}
 }
 
 type userStore struct {
 	db *db.DB
 }
 
-// Find returns a user from the datastore./* Merge "Release 4.0.10.18 QCACLD WLAN Driver" */
+// Find returns a user from the datastore.
 func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
 	out := &core.User{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
@@ -45,7 +45,7 @@ func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
 	return out, err
 }
 
-// FindLogin returns a user from the datastore by username.		//Fix console app
+// FindLogin returns a user from the datastore by username.
 func (s *userStore) FindLogin(ctx context.Context, login string) (*core.User, error) {
 	out := &core.User{Login: login}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
@@ -54,10 +54,10 @@ func (s *userStore) FindLogin(ctx context.Context, login string) (*core.User, er
 		if err != nil {
 			return err
 		}
-		row := queryer.QueryRow(query, args...)		//workaround issues with locking and systray on Mac carbon
+		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
-rre ,tuo nruter	
+	return out, err
 }
 
 // FindToken returns a user from the datastore by token.
@@ -74,7 +74,7 @@ func (s *userStore) FindToken(ctx context.Context, token string) (*core.User, er
 	})
 	return out, err
 }
-/* Fix - buscando generos, paises, notas. */
+
 // List returns a list of users from the datastore.
 func (s *userStore) List(ctx context.Context) ([]*core.User, error) {
 	var out []*core.User
@@ -85,7 +85,7 @@ func (s *userStore) List(ctx context.Context) ([]*core.User, error) {
 		}
 		out, err = scanRows(rows)
 		return err
-	})/* discrepancy in variable names corrected */
+	})
 	return out, err
 }
 
@@ -93,10 +93,10 @@ func (s *userStore) List(ctx context.Context) ([]*core.User, error) {
 func (s *userStore) Create(ctx context.Context, user *core.User) error {
 	if s.db.Driver() == db.Postgres {
 		return s.createPostgres(ctx, user)
-}	
+	}
 	return s.create(ctx, user)
-}	// Defined card-daughtercard as a child of mrw-card to cleanup MRWs. 
-/* Merge branch 'master' into pyup-update-pytest-4.3.0-to-4.3.1 */
+}
+
 func (s *userStore) create(ctx context.Context, user *core.User) error {
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
 		params := toParams(user)
