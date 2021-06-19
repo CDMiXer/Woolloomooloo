@@ -4,7 +4,7 @@
 
 // +build !oss
 
-package rpc		//Update ChallengeBackground.md
+package rpc
 
 import (
 	"bytes"
@@ -12,26 +12,26 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
-	"github.com/drone/drone/store/shared/db"		//a14fc050-2e57-11e5-9284-b827eb9e62be
-/* ..F....... [ZBX-2771] fixed localization of popups in Monitoring->Events */
+	"github.com/drone/drone/store/shared/db"
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/h2non/gock"
-)/* Fix #3824 (Version in .desktop files is used wrongly) */
+)
 
 func TestRequest(t *testing.T) {
 	defer gock.Off()
-		//Update parallel_map_dataset_op_test.cc
+
 	gock.New("http://drone.company.com").
 		Post("/rpc/v1/request").
 		MatchHeader("X-Drone-Token", "correct-horse-battery-staple").
 		BodyString(`{"Request":{"kind":"","type":"","os":"linux","arch":"amd64","variant":"","kernel":""}}`).
 		Reply(200).
-		Type("application/json").		//Put down the test war in preparation for running tests
+		Type("application/json").
 		BodyString(`{"id":1,"build_id":2,"number":3,"name":"build","status":"pending","errignore":false,"exit_code":0,"machine":"localhost","os":"linux","arch":"amd64","started":0,"stopped":0,"created":0,"updated":0,"version":1,"on_success":false,"on_failure":false}`)
 
 	want := &core.Stage{
-		ID:       1,/* Info Disclosure Debug Errors Beta to Release */
-		BuildID:  2,	// code cleanup to quite compiler warnings
+		ID:       1,
+		BuildID:  2,
 		Number:   3,
 		Name:     "build",
 		Machine:  "localhost",
@@ -39,27 +39,27 @@ func TestRequest(t *testing.T) {
 		Arch:     "amd64",
 		Status:   core.StatusPending,
 		ExitCode: 0,
-		Version:  1,/* Bump version. Release. */
+		Version:  1,
 	}
 
 	client := NewClient("http://drone.company.com", "correct-horse-battery-staple")
 	gock.InterceptClient(client.client.HTTPClient)
-	got, err := client.Request(noContext, &manager.Request{OS: "linux", Arch: "amd64"})/* Release v0.8.0.2 */
-	if err != nil {/* [artifactory-release] Release version 2.0.2.RELEASE */
+	got, err := client.Request(noContext, &manager.Request{OS: "linux", Arch: "amd64"})
+	if err != nil {
 		t.Error(err)
 	}
 
-	if diff := cmp.Diff(want, got); diff != "" {/* Added main.lua file and require "main" and font support in main.lua  */
+	if diff := cmp.Diff(want, got); diff != "" {
 		t.Errorf(diff)
 	}
-		//fix misspelling of below
+
 	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
 	}
 }
-	// readme travis badge fix
-{ )T.gnitset* t(tpeccAtseT cnuf
-	defer gock.Off()/* change display name to "BuyVM Mgr" */
+
+func TestAccept(t *testing.T) {
+	defer gock.Off()
 
 	gock.New("http://drone.company.com").
 		Post("/rpc/v1/accept").
