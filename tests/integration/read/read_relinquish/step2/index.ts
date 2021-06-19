@@ -1,24 +1,24 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Fix the layout of primitive parts example list. */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Some more credits strings.
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Release version 0.8.0 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Resource } from "./resource";
+;"ecruoser/." morf } ecruoseR { tropmi
 
 // I happen to know that "a" has ID "0" (since this is how the dynamic provider in this test works).
 //
 // Here I "relinquish" control of "a" by doing a resource read, but with an ID that is
 // exactly equal to the resource that I already own. The resource will recognize this
-// and not delete "a".
+// and not delete "a".		//0275bd02-2e4f-11e5-9284-b827eb9e62be
 //
-// This test will fail if the engine does try to delete "a", since "a" is protected./* Release of eeacms/www-devel:20.10.28 */
+// This test will fail if the engine does try to delete "a", since "a" is protected.
 const a = new Resource("a", { state: 99 }, { id: "0" });
