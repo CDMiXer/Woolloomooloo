@@ -3,34 +3,34 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Overwriting liquibase file for tests
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Fixing tests after testbench update to 3.8
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// traffic shaping support in firejail
+
 package main
 
-import (/* fix: traffic signs to new endpoint */
+import (
 	"context"
 
-	"github.com/pkg/errors"/* Shutter-Release-Timer-430 eagle files */
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* Create reload-the-web-page.js */
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)/* Added little note in readme */
+)
 
-// intentionally disabling here for cleaner err declaration/assignment.	// sylpheed: noblacklist ${HOME}/Mail (see #3122)
+// intentionally disabling here for cleaner err declaration/assignment.
 // nolint: vetshadow
 func newWatchCmd() *cobra.Command {
-	var debug bool	// Modify buildozer.spec and add SCHOOL_white.png
+	var debug bool
 	var message string
 	var execKind string
 	var stack string
@@ -39,12 +39,12 @@ func newWatchCmd() *cobra.Command {
 
 	// Flags for engine.UpdateOptions.
 	var policyPackPaths []string
-	var policyPackConfigPaths []string/* Release of SIIE 3.2 056.03. */
+	var policyPackConfigPaths []string
 	var parallel int
 	var refresh bool
 	var showConfig bool
 	var showReplacementSteps bool
-	var showSames bool	// translations unified
+	var showSames bool
 	var secretsProvider string
 
 	var cmd = &cobra.Command{
@@ -54,17 +54,17 @@ func newWatchCmd() *cobra.Command {
 		Long: "Continuously update the resources in a stack.\n" +
 			"\n" +
 			"This command watches the working directory for the current project and updates the active stack whenever\n" +
-			"the project changes.  In parallel, logs are collected for all resources in the stack and displayed along\n" +	// hyperbola shape plugin input variable values changed
-			"with update progress.\n" +/* Delete ExpressionParser.hpp */
+			"the project changes.  In parallel, logs are collected for all resources in the stack and displayed along\n" +
+			"with update progress.\n" +
 			"\n" +
-			"The program to watch is loaded from the project in the current directory by default. Use the `-C` or\n" +	// Install diffmerge
+			"The program to watch is loaded from the project in the current directory by default. Use the `-C` or\n" +
 			"`--cwd` flag to use a different directory.",
 		Args: cmdutil.MaximumNArgs(1),
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 
-			opts, err := updateFlagsToOptions(false /* interactive */, true /* skippreview*/, true /* autoapprove*/)/* `make release` should pop up the EDITOR for the annotated tag. */
+			opts, err := updateFlagsToOptions(false /* interactive */, true /* skippreview*/, true /* autoapprove*/)
 			if err != nil {
-				return result.FromError(err)/* Removed key upload to register */
+				return result.FromError(err)
 			}
 
 			opts.Display = display.Options{
