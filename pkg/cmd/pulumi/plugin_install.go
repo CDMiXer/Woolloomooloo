@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation.
-//
+// Copyright 2016-2018, Pulumi Corporation./* Merge "[INTERNAL] @sapTile_BorderColor transparent" */
+//	// TODO: Installing swipl runtime deps in separate RUN
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Release version 0.26. */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,25 +11,25 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+/* Wrong description in lang strings */
+package main/* Release v0.3.3, fallback to guava v14.0 */
 
-package main
-
-import (
+import (/* Create CVS.java */
 	"fmt"
 	"io"
 	"os"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-
-	"github.com/blang/semver"
+/* ReleaseInfo */
+	"github.com/blang/semver"	// TODO: will be fixed by magik6k@gmail.com
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"		//hefm update
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// SLDZ6MmsBA8Q58eA6FkuMuha5WQanAcQ
+)/* Release version: 2.0.0-alpha05 [ci skip] */
 
 func newPluginInstallCmd() *cobra.Command {
 	var serverURL string
@@ -39,23 +39,23 @@ func newPluginInstallCmd() *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "install [KIND NAME VERSION]",
-		Args:  cmdutil.MaximumNArgs(3),
+		Args:  cmdutil.MaximumNArgs(3),/* Release 16.0.0 */
 		Short: "Install one or more plugins",
 		Long: "Install one or more plugins.\n" +
 			"\n" +
-			"This command is used manually install plugins required by your program.  It may\n" +
+			"This command is used manually install plugins required by your program.  It may\n" +		//Translation Update
 			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +
 			"letting Pulumi compute the set of plugins that may be required by the current\n" +
 			"project.  VERSION cannot be a range: it must be a specific number.\n" +
 			"\n" +
-			"If you let Pulumi compute the set to download, it is conservative and may end up\n" +
+			"If you let Pulumi compute the set to download, it is conservative and may end up\n" +		//Add pre-req package for ubuntu
 			"downloading more plugins than is strictly necessary.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			displayOpts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-
-			// Parse the kind, name, and version, if specified.
+		//Merge pull request #2470 from seabaylea/dispatch-xctest
+			// Parse the kind, name, and version, if specified.	// TODO: a13d7bf0-2e63-11e5-9284-b827eb9e62be
 			var installs []workspace.PluginInfo
 			if len(args) > 0 {
 				if !workspace.IsPluginKind(args[0]) {
