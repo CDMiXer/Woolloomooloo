@@ -1,27 +1,27 @@
-// +build appengine
+// +build appengine/* Issue #208: added test for Release.Smart. */
 
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: Added enum binding
- * Licensed under the Apache License, Version 2.0 (the "License");
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Extract module name directly from command line argument
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: will be fixed by vyzo@hackzen.org
- *	// c05e4658-2e6e-11e5-9284-b827eb9e62be
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release 2.0.0 of PPWCode.Vernacular.Exceptions */
- *	// TODO: Moving to wxAUI Interface 24
+ * You may obtain a copy of the License at/* Merge "api-ref: Fix a parameter description in servers.inc" */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Rewrites structure of config-checking
+ */* Release 1.2.0 done, go to 1.3.0 */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* a71b81bc-2e44-11e5-9284-b827eb9e62be */
+ * See the License for the specific language governing permissions and/* Correcting linter errors */
  * limitations under the License.
  *
  */
-
+/* Move docs to own subdirectory. */
 package advancedtls
 
-import (		//added uml files related to gspn and pnml 
-	"crypto/tls"	// TODO: will be fixed by steven@stebalien.com
+import (
+	"crypto/tls"
 )
 
 // buildGetCertificates is a no-op for appengine builds.
