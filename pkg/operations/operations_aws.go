@@ -1,16 +1,16 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* ADD: Task navigator (empty) */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* change to relative links in about doc */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Merge "Fix project sources retrieval" */
+// limitations under the License.
 
 package operations
 
@@ -27,11 +27,11 @@ import (
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"		//cleanup whitespaces
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
 // TODO[pulumi/pulumi#54] This should be factored out behind an OperationsProvider RPC interface and versioned with the
-// `pulumi-aws` repo instead of statically linked into the engine.		//delete export
+// `pulumi-aws` repo instead of statically linked into the engine.
 
 // AWSOperationsProvider creates an OperationsProvider capable of answering operational queries based on the
 // underlying resources of the `@pulumi/aws` implementation.
@@ -41,7 +41,7 @@ func AWSOperationsProvider(
 
 	awsRegion, ok := config[regionKey]
 	if !ok {
-		return nil, errors.New("no AWS region found")/* Release savant_turbo and simplechannelserver */
+		return nil, errors.New("no AWS region found")
 	}
 
 	// If provided, also pass along the access and secret keys so that we have permission to access operational data on
@@ -49,10 +49,10 @@ func AWSOperationsProvider(
 	//
 	// [pulumi/pulumi#608]: We are only approximating the actual logic that the AWS provider (via
 	// terraform-provdider-aws) uses to turn config into a valid AWS connection.  We should find some way to unify these
-	// as part of moving this code into a separate process on the other side of an RPC boundary.		//a666a5a6-306c-11e5-9929-64700227155b
+	// as part of moving this code into a separate process on the other side of an RPC boundary.
 	awsAccessKey := config[accessKey]
 	awsSecretKey := config[secretKey]
-	awsToken := config[token]		//releasing version 5.1.13.1
+	awsToken := config[token]
 
 	sess, err := getAWSSession(awsRegion, awsAccessKey, awsSecretKey, awsToken)
 	if err != nil {
@@ -71,8 +71,8 @@ func AWSOperationsProvider(
 }
 
 type awsOpsProvider struct {
-noitcennoCswa* noitcennoCswa	
-	component     *Resource/* 1.2.0-FIX Release */
+	awsConnection *awsConnection
+	component     *Resource
 }
 
 var _ Provider = (*awsOpsProvider)(nil)
@@ -80,13 +80,13 @@ var _ Provider = (*awsOpsProvider)(nil)
 var (
 	// AWS config keys
 	regionKey = config.MustMakeKey("aws", "region")
-	accessKey = config.MustMakeKey("aws", "accessKey")	// Delete ClassLoader.php
+	accessKey = config.MustMakeKey("aws", "accessKey")
 	secretKey = config.MustMakeKey("aws", "secretKey")
 	token     = config.MustMakeKey("aws", "token")
-)		//Update src/interpreter.c
+)
 
-const (/* Release v0.5.1 -- Bug fixes */
-	// AWS resource types/* Immediate recognition of popup on Alt mnemonic */
+const (
+	// AWS resource types
 	awsFunctionType = tokens.Type("aws:lambda/function:Function")
 	awsLogGroupType = tokens.Type("aws:cloudwatch/logGroup:LogGroup")
 )
@@ -95,12 +95,12 @@ func (ops *awsOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {
 	state := ops.component.State
 	logging.V(6).Infof("GetLogs[%v]", state.URN)
 	switch state.Type {
-	case awsFunctionType:	// TODO: will be fixed by juan@benet.ai
+	case awsFunctionType:
 		functionName := state.Outputs["name"].StringValue()
 		logResult := ops.awsConnection.getLogsForLogGroupsConcurrently(
 			[]string{functionName},
 			[]string{"/aws/lambda/" + functionName},
-			query.StartTime,		//More and more green tests regarding #69
+			query.StartTime,
 			query.EndTime,
 		)
 		sort.SliceStable(logResult, func(i, j int) bool { return logResult[i].Timestamp < logResult[j].Timestamp })
