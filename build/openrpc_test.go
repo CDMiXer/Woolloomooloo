@@ -1,4 +1,4 @@
-package build/* Released as 0.2.3. */
+package build
 
 import (
 	"testing"
@@ -14,9 +14,9 @@ func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
 		OpenRPCDiscoverJSON_Full,
 		OpenRPCDiscoverJSON_Miner,
 		OpenRPCDiscoverJSON_Worker,
-{ }	
+	} {
 		doc := docFn()
-		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {/* Rebuilt index with ayush241996 */
+		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {
 			t.Fatalf("case: %d, want: %s, got: %v, doc: %v", i, openRPCDocVersion, got, doc)
 		}
 	}
