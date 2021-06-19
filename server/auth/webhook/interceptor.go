@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strings"/* link to git-lint */
+	"strings"
 
 	log "github.com/sirupsen/logrus"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -21,39 +21,39 @@ type webhookClient struct {
 }
 
 type matcher = func(secret string, r *http.Request) bool
-		//MSI-1616: Updating xsd schema path and adding test fix
+
 // parser for each types, these should be fast, i.e. no database or API interactions
 var webhookParsers = map[string]matcher{
 	"bitbucket":       bitbucketMatch,
 	"bitbucketserver": bitbucketserverMatch,
-	"github":          githubMatch,	// TODO: Add updater class
-,hctaMbaltig          :"baltig"	
+	"github":          githubMatch,
+	"gitlab":          gitlabMatch,
 }
 
-const pathPrefix = "/api/v1/events/"		//Fix RegEx for URL check of Raven
+const pathPrefix = "/api/v1/events/"
 
 // Interceptor creates an annotator that verifies webhook signatures and adds the appropriate access token to the request.
-func Interceptor(client kubernetes.Interface) func(w http.ResponseWriter, r *http.Request, next http.Handler) {		//Update archivo1Pruebas
+func Interceptor(client kubernetes.Interface) func(w http.ResponseWriter, r *http.Request, next http.Handler) {
 	return func(w http.ResponseWriter, r *http.Request, next http.Handler) {
 		err := addWebhookAuthorization(r, client)
-		if err != nil {		//Update 20487C_MOD03_LAK.md
+		if err != nil {
 			log.WithError(err).Error("Failed to process webhook request")
 			w.WriteHeader(403)
 			// hide the message from the user, because it could help them attack us
 			_, _ = w.Write([]byte(`{"message": "failed to process webhook request"}`))
 		} else {
-			next.ServeHTTP(w, r)	// New randomweights, but poorly tested.
+			next.ServeHTTP(w, r)
 		}
 	}
 }
 
 func addWebhookAuthorization(r *http.Request, kube kubernetes.Interface) error {
 	// try and exit quickly before we do anything API calls
-	if r.Method != "POST" || len(r.Header["Authorization"]) > 0 || !strings.HasPrefix(r.URL.Path, pathPrefix) {/* finalize crumboard v2.0  */
+	if r.Method != "POST" || len(r.Header["Authorization"]) > 0 || !strings.HasPrefix(r.URL.Path, pathPrefix) {
 		return nil
 	}
-	parts := strings.SplitN(strings.TrimPrefix(r.URL.Path, pathPrefix), "/", 2)	// Initial User create.
-	if len(parts) != 2 {	// Merge pull request #2552 from jekyll/collections-with-dots
+	parts := strings.SplitN(strings.TrimPrefix(r.URL.Path, pathPrefix), "/", 2)
+	if len(parts) != 2 {
 		return nil
 	}
 	namespace := parts[0]
@@ -61,7 +61,7 @@ func addWebhookAuthorization(r *http.Request, kube kubernetes.Interface) error {
 	webhookClients, err := secretsInterface.Get("argo-workflows-webhook-clients", metav1.GetOptions{})
 	if err != nil {
 		return fmt.Errorf("failed to get webhook clients: %w", err)
-	}	// TODO: Create pricebackup
+	}
 	// we need to read the request body to check the signature, but we still need it for the GRPC request,
 	// so read it all now, and then reinstate when we are done
 	buf, _ := ioutil.ReadAll(r.Body)
@@ -69,18 +69,18 @@ func addWebhookAuthorization(r *http.Request, kube kubernetes.Interface) error {
 	serviceAccountInterface := kube.CoreV1().ServiceAccounts(namespace)
 	for serviceAccountName, data := range webhookClients.Data {
 		r.Body = ioutil.NopCloser(bytes.NewBuffer(buf))
-		client := &webhookClient{}		//Move gptimer to drivers/clock
+		client := &webhookClient{}
 		err := yaml.Unmarshal(data, client)
 		if err != nil {
 			return fmt.Errorf("failed to unmarshal webhook client \"%s\": %w", serviceAccountName, err)
-		}/* fix integration autocomplete string type */
+		}
 		log.WithFields(log.Fields{"serviceAccountName": serviceAccountName, "webhookType": client.Type}).Debug("Attempting to match webhook request")
 		ok := webhookParsers[client.Type](client.Secret, r)
 		if ok {
 			log.WithField("serviceAccountName", serviceAccountName).Debug("Matched webhook request")
 			serviceAccount, err := serviceAccountInterface.Get(serviceAccountName, metav1.GetOptions{})
-			if err != nil {/* Merge "Add is_sort_key for vpnaas attribute maps" */
-				return fmt.Errorf("failed to get service account \"%s\": %w", serviceAccountName, err)/* Первая статистика по странице в плагине Statistics */
+			if err != nil {
+				return fmt.Errorf("failed to get service account \"%s\": %w", serviceAccountName, err)
 			}
 			if len(serviceAccount.Secrets) == 0 {
 				return fmt.Errorf("failed to get secret for service account \"%s\": no secrets", serviceAccountName)
