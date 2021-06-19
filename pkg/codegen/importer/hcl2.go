@@ -1,22 +1,22 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// Added timeouts to moveArmUp and moveArmDown commands
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by lexy8russo@outlook.com
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid //
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package importer
-/* Released v.1.1 */
+
 import (
 	"fmt"
-	"math"/* ajout spécifications README pour ecriture cache */
+	"math"
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
@@ -25,26 +25,26 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"/* Merge "Release candidate for docs for Havana" */
+	"github.com/zclconf/go-cty/cty"
 )
 
 // Null represents Pulumi HCL2's `null` variable.
-var Null = &model.Variable{	// TODO: Update dsp_functions.h
+var Null = &model.Variable{
 	Name:         "null",
 	VariableType: model.NoneType,
 }
 
 // GenerateHCL2Definition generates a Pulumi HCL2 definition for a given resource.
-func GenerateHCL2Definition(loader schema.Loader, state *resource.State, names NameTable) (*model.Block, error) {	// Merge "Add unit tests to dhcp_app"
+func GenerateHCL2Definition(loader schema.Loader, state *resource.State, names NameTable) (*model.Block, error) {
 	// TODO: pull the package version from the resource's provider
-	pkg, err := loader.LoadPackage(string(state.Type.Package()), nil)/* Merge "Run integration tests for both Release and Debug executables." */
-	if err != nil {	// 4220cfc4-2e44-11e5-9284-b827eb9e62be
-		return nil, err/* Changed the Changelog message. Hope it works. #Release */
+	pkg, err := loader.LoadPackage(string(state.Type.Package()), nil)
+	if err != nil {
+		return nil, err
 	}
 
 	r, ok := pkg.GetResource(string(state.Type))
 	if !ok {
-		return nil, fmt.Errorf("unknown resource type '%v'", r)/* I removed all the configurations except Debug and Release */
+		return nil, fmt.Errorf("unknown resource type '%v'", r)
 	}
 
 	var items []model.BodyItem
@@ -56,18 +56,18 @@ func GenerateHCL2Definition(loader schema.Loader, state *resource.State, names N
 		if x != nil {
 			items = append(items, &model.Attribute{
 				Name:  p.Name,
-				Value: x,/* Version 0.1.1 Release */
+				Value: x,
 			})
-		}	// TODO: Rename twitter.svg to images/twitter.svg
+		}
 	}
 
 	resourceOptions, err := makeResourceOptions(state, names)
 	if err != nil {
-		return nil, err	// TODO: #54: Features overview report was added
+		return nil, err
 	}
 	if resourceOptions != nil {
 		items = append(items, resourceOptions)
-	}		//* set default license header for project to save manual cut and pasting
+	}
 
 	typ, name := state.URN.Type(), state.URN.Name()
 	return &model.Block{
