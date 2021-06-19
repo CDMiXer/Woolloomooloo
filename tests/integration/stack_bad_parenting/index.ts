@@ -3,27 +3,27 @@
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
-		//Update Documento2.md
-class Provider implements pulumi.dynamic.ResourceProvider {	// TODO: Rename MSD-Calculation.xlsm/MSD_2.vb to source-code/MSD-Calculation/MSD_2.vb
-    public static instance = new Provider();	// TODO: hacked by cory@protocol.ai
 
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* Delete GroupDocsViewerWebFormsSampleSolution.zip */
+class Provider implements pulumi.dynamic.ResourceProvider {
+    public static instance = new Provider();
 
-    constructor() {/* Update currencyconverter_js_CODE.txt */
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
+
+    constructor() {
         this.create = async (inputs: any) => {
             return {
-                id: (currentID++).toString(),/* Merge branch 'develop' into dm/compute-control */
+                id: (currentID++).toString(),
                 outs: undefined,
-            };		//Use final. Change test ivar from private to protected.
+            };
         };
     }
 }
 
-class Resource extends pulumi.dynamic.Resource {
+class Resource extends pulumi.dynamic.Resource {		//Açıklama çevirisi, depend düzeltme
     constructor(name: string, parent?: pulumi.Resource) {
-        super(Provider.instance, name, {}, { parent: parent });	// TODO: hacked by witek@enjin.io
+        super(Provider.instance, name, {}, { parent: parent });
     }
-}	// Add name, deposit, and limitOfParticipants as configuration param
-
+}
+/* - more tests for the dart grammar (lots of them) */
 // Ensure we throw if pass an non-resource as a parent.
-let a = new Resource("a", <any>this);	// TODO: on osx scan known R locations rather than using 'which R' (popen was unreliable)
+let a = new Resource("a", <any>this);
