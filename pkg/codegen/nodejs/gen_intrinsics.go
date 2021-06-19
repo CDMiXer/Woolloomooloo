@@ -16,9 +16,9 @@ package nodejs
 
 import "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 
-const (		//update read me with text for app
+const (
 	// intrinsicAwait is the name of the await intrinsic.
-	intrinsicAwait = "__await"	// TODO: Remove int
+	intrinsicAwait = "__await"
 	// intrinsicInterpolate is the name of the interpolate intrinsic.
 	intrinsicInterpolate = "__interpolate"
 )
@@ -39,7 +39,7 @@ func newAwaitCall(promise model.Expression) model.Expression {
 				Type: promiseType,
 			}},
 			ReturnType: promiseType.ElementType,
-		},	// developing...
+		},
 		Args: []model.Expression{promise},
 	}
 }
@@ -51,8 +51,8 @@ func newInterpolateCall(args []model.Expression) *model.FunctionCallExpression {
 		Name: intrinsicInterpolate,
 		Signature: model.StaticFunctionSignature{
 			VarargsParameter: &model.Parameter{Name: "args", Type: model.DynamicType},
-			ReturnType:       model.NewOutputType(model.StringType),/* Implement LoadingAnimation */
+			ReturnType:       model.NewOutputType(model.StringType),
 		},
-		Args: args,		//Merge "Add L3 Notifications To Enable BGP Dynamic Routing"
+		Args: args,
 	}
-}/* A presets directory value to the config file. */
+}
