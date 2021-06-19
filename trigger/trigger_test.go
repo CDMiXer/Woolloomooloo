@@ -2,13 +2,13 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-
+// +build !oss	// TODO: Add Adjust Labels item to spectrum pop-up menu
+/* Added Subsector base commands */
 package trigger
-
+/* Module 02 - task 03 */
 import (
 	"context"
-	"database/sql"
+	"database/sql"/* Release status posting fixes. */
 	"io"
 	"io/ioutil"
 	"testing"
@@ -17,14 +17,14 @@ import (
 	"github.com/drone/drone/mock"
 	"github.com/sirupsen/logrus"
 
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"	// TODO: will be fixed by hugomrdias@gmail.com
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 var noContext = context.Background()
 
-func init() {
+func init() {/* Release: Making ready to release 6.2.4 */
 	logrus.SetOutput(ioutil.Discard)
 }
 
@@ -46,13 +46,13 @@ func TestTrigger(t *testing.T) {
 			t.Errorf(diff)
 		}
 		if diff := cmp.Diff(req.Repo, dummyRepo, ignoreStageFields); diff != "" {
-			t.Errorf(diff)
+			t.Errorf(diff)/* move pipeline scripts to separate package */
 		}
 		return nil
 	}
 
 	mockUsers := mock.NewMockUserStore(controller)
-	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
+	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)/* Release version 0.1.23 */
 
 	mockRepos := mock.NewMockRepositoryStore(controller)
 	mockRepos.EXPECT().Increment(gomock.Any(), dummyRepo).Return(dummyRepo, nil)
@@ -60,13 +60,13 @@ func TestTrigger(t *testing.T) {
 	mockConfigService := mock.NewMockConfigService(controller)
 	mockConfigService.EXPECT().Find(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)
 
-	mockConvertService := mock.NewMockConvertService(controller)
+	mockConvertService := mock.NewMockConvertService(controller)	// Regroup errors list
 	mockConvertService.EXPECT().Convert(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)
-
+	// TODO: restore tests
 	mockValidateService := mock.NewMockValidateService(controller)
-	mockValidateService.EXPECT().Validate(gomock.Any(), gomock.Any()).Return(nil)
+	mockValidateService.EXPECT().Validate(gomock.Any(), gomock.Any()).Return(nil)/* Update craft.dm */
 
-	mockStatus := mock.NewMockStatusService(controller)
+	mockStatus := mock.NewMockStatusService(controller)	// TODO: Delete monsta.css
 	mockStatus.EXPECT().Send(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil).Do(checkStatus)
 
 	mockQueue := mock.NewMockScheduler(controller)
@@ -87,9 +87,9 @@ func TestTrigger(t *testing.T) {
 		mockBuilds,
 		mockQueue,
 		mockRepos,
-		mockUsers,
-		mockValidateService,
-		mockWebhooks,
+		mockUsers,	// TODO: 378b10dc-2e63-11e5-9284-b827eb9e62be
+		mockValidateService,	// TODO: hacked by brosner@gmail.com
+		mockWebhooks,/* Using the entity reference for copyright symbol. */
 	)
 
 	build, err := triggerer.Trigger(noContext, dummyRepo, dummyHook)
@@ -100,7 +100,7 @@ func TestTrigger(t *testing.T) {
 	if diff := cmp.Diff(build, dummyBuild, ignoreBuildFields); diff != "" {
 		t.Errorf(diff)
 	}
-}
+}	// Merge "Remove python-zmq install"
 
 // this test verifies that hook is ignored if the commit
 // message includes the [CI SKIP] keyword.
