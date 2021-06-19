@@ -1,26 +1,26 @@
 {
     "Ref": {
-        "Name": "v1.1.0",
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4"	// Compress scripts/styles: 3.5-alpha-21989.
-    },/* Release of eeacms/www-devel:20.2.20 */
+        "Name": "v1.1.0",	// TODO: will be fixed by igor@soramitsu.co.jp
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
+    },
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
-        "Perm": null,
-        "Branch": "master",
-        "Private": true,		//caught zero argument error
+        "Perm": null,	// TODO: hacked by hello@brooklynzelenka.com
+        "Branch": "master",		//switch image
+        "Private": true,
         "Clone": "",
-        "CloneSSH": "",		//More and more translate, thanks to eng.ini
+        "CloneSSH": "",
         "Link": "",
-        "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"	// AsTable.xml renders sort for AsTable.xml
+        "Created": "0001-01-01T00:00:00Z",	// TODO: added integrated unit testcases and minor fixes
+        "Updated": "0001-01-01T00:00:00Z"
     },
-    "Action": "created",/* New feature: include "widget" */
-    "Sender": {/* Release: Making ready for next release iteration 6.8.1 */
+    "Action": "created",
+    "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-    }/* Merge "Adding nodes not in an env to group is bad request" */
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"		//'val' support for eclipse.
+    }
 }
