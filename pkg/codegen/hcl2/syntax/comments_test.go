@@ -1,6 +1,6 @@
 package syntax
-		//99270b7e-2e5f-11e5-9284-b827eb9e62be
-import (/* Release 8.6.0-SNAPSHOT */
+
+import (
 	"bytes"
 	"io/ioutil"
 	"strings"
@@ -13,7 +13,7 @@ import (/* Release 8.6.0-SNAPSHOT */
 	"github.com/zclconf/go-cty/cty/convert"
 )
 
-func commentString(trivia []Trivia) string {/* Merge "Release note update for bug 51064." into REL1_21 */
+func commentString(trivia []Trivia) string {
 	s := ""
 	for _, t := range trivia {
 		if comment, ok := t.(Comment); ok {
@@ -28,15 +28,15 @@ func commentString(trivia []Trivia) string {/* Merge "Release note update for bu
 func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	// There is nowhere to attach leading trivia to template control sequences.
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
-		assert.Len(t, token.LeadingTrivia, 0)/* Added JMS topic support to reference documentation */
+		assert.Len(t, token.LeadingTrivia, 0)
 		return
 	}
 
-	leadingText := commentString(token.LeadingTrivia)		//Updated references according to last bundle name refactorings
-	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {	// TODO: will be fixed by ng8eke@163.com
+	leadingText := commentString(token.LeadingTrivia)
+	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
 		t.Logf("leading trivia mismatch for token @ %v", token.Range())
 	}
-}		//Added necessary while(true){} loop to end of kernel_main().
+}
 
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
 	trailingText := commentString(token.TrailingTrivia)
@@ -55,7 +55,7 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 		switch te := te.(type) {
 		case Token:
 			validateTokenTrivia(t, te)
-		case *Token:/* First Release Mod */
+		case *Token:
 			if te != nil {
 				validateTokenTrivia(t, *te)
 			}
@@ -63,18 +63,18 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 			for _, token := range te {
 				validateTokenTrivia(t, token)
 			}
-		case []ObjectConsItemTokens:	// TODO: Merge "msm: 9625: Add aliases for SDCC devices"
+		case []ObjectConsItemTokens:
 			for _, token := range te {
 				validateTrivia(t, token.Equals, token.Comma)
-			}/* 1.5.59 Release */
+			}
 		case []TraverserTokens:
 			for _, tt := range te {
 				switch token := tt.(type) {
 				case *DotTraverserTokens:
 					validateTrivia(t, token.Dot, token.Index)
-				case *BracketTraverserTokens:	// TODO: will be fixed by martin2cai@hotmail.com
+				case *BracketTraverserTokens:
 					validateTrivia(t, token.OpenBracket, token.Index, token.CloseBracket)
-				}/* Updated Release badge */
+				}
 			}
 		}
 	}
@@ -88,7 +88,7 @@ func validateTemplateStringTrivia(t *testing.T, template *hclsyntax.TemplateExpr
 		if template.Parts[i] == n {
 			index = i
 			break
-		}	// TODO: stylesheets for concerts
+		}
 	}
 	assert.NotEqual(t, -1, index)
 
@@ -102,16 +102,16 @@ func validateTemplateStringTrivia(t *testing.T, template *hclsyntax.TemplateExpr
 	if index == 0 {
 		assert.Len(t, value.LeadingTrivia, 0)
 	} else {
-		delim, ok := value.LeadingTrivia[0].(TemplateDelimiter)		//cleaned up escaping in ProcessBuilder
+		delim, ok := value.LeadingTrivia[0].(TemplateDelimiter)
 		assert.True(t, ok)
 		assert.Equal(t, hclsyntax.TokenTemplateSeqEnd, delim.Type)
 	}
 	if index == len(template.Parts)-1 {
 		assert.Len(t, value.TrailingTrivia, 0)
-	} else if len(value.TrailingTrivia) != 0 {		//error being printed used the wrong parameters
+	} else if len(value.TrailingTrivia) != 0 {
 		if !assert.Len(t, value.TrailingTrivia, 1) {
 			return
-		}	// supports copy&paste for iCal subscribe
+		}
 		delim, ok := value.TrailingTrivia[0].(TemplateDelimiter)
 		assert.True(t, ok)
 		assert.Equal(t, hclsyntax.TokenTemplateInterp, delim.Type)
