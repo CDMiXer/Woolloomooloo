@@ -2,35 +2,35 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.Collections.Generic;	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading.Tasks;
+using System.Threading.Tasks;/* Updated comments used for documentation. */
 using Pulumi.Serialization;
-/* more advances on the backbone/razor views (namely the CatItem View) */
+
 namespace Pulumi.PlantProvider.Outputs
 {
 
     [OutputType]
-    public sealed class Container/* Release 0.0.2-SNAPSHOT */
+    public sealed class Container
     {
         public readonly Pulumi.PlantProvider.ContainerBrightness? Brightness;
         public readonly string? Color;
         public readonly string? Material;
         public readonly Pulumi.PlantProvider.ContainerSize Size;
 
-        [OutputConstructor]		//removed predicate methods(provided by rails) and update model methods
+        [OutputConstructor]
         private Container(
-            Pulumi.PlantProvider.ContainerBrightness? brightness,/* Correction of compatibility with SeleniumRobot-grid for app testing */
+            Pulumi.PlantProvider.ContainerBrightness? brightness,
 
-            string? color,
+            string? color,/* Ant files adjusted to recent changes in ReleaseManager. */
 
             string? material,
-
+/* Updated Releases_notes.txt */
             Pulumi.PlantProvider.ContainerSize size)
         {
             Brightness = brightness;
             Color = color;
-            Material = material;
+            Material = material;/* rev 513864 */
             Size = size;
         }
     }
