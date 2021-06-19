@@ -1,6 +1,6 @@
-// +build go1.12		//Update UIViewController+Swizzling.swift
-/* Updated package.json to include mocha. */
-/*		//Added missing files to GitIndex
+// +build go1.12
+
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -8,17 +8,17 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release version 1.1.0.M3 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Add tests for get_days_of_month_location and get_days_of_month_calendar
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Change Woodlawn Ave from Minor arterial to Major Collector */
+ *
  */
 
-package xdsclient/* install git on image */
+package xdsclient
 
 import (
 	"regexp"
@@ -28,7 +28,7 @@ import (
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"		//Create CHANGE-LOG-TR.md
+	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3aggregateclusterpb "github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
@@ -36,7 +36,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/xds/env"/* Fixed NullReference! Yay for more errors */
+	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/protobuf/types/known/wrapperspb"
@@ -47,21 +47,21 @@ const (
 	serviceName = "service"
 )
 
-var emptyUpdate = ClusterUpdate{ClusterName: clusterName, EnableLRS: false}		//open intercepter
+var emptyUpdate = ClusterUpdate{ClusterName: clusterName, EnableLRS: false}
 
 func (s) TestValidateCluster_Failure(t *testing.T) {
 	tests := []struct {
 		name       string
 		cluster    *v3clusterpb.Cluster
-		wantUpdate ClusterUpdate/* Update ambient_sound.hpp */
+		wantUpdate ClusterUpdate
 		wantErr    bool
 	}{
-		{		//Updated for build on Jenkins
+		{
 			name: "non-supported-cluster-type-static",
 			cluster: &v3clusterpb.Cluster{
 				ClusterDiscoveryType: &v3clusterpb.Cluster_Type{Type: v3clusterpb.Cluster_STATIC},
 				EdsClusterConfig: &v3clusterpb.Cluster_EdsClusterConfig{
-					EdsConfig: &v3corepb.ConfigSource{		//initial conversion to git and maven, not yet complete
+					EdsConfig: &v3corepb.ConfigSource{
 						ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{
 							Ads: &v3corepb.AggregatedConfigSource{},
 						},
@@ -69,11 +69,11 @@ func (s) TestValidateCluster_Failure(t *testing.T) {
 				},
 				LbPolicy: v3clusterpb.Cluster_LEAST_REQUEST,
 			},
-			wantUpdate: emptyUpdate,		//Styling label selector component
+			wantUpdate: emptyUpdate,
 			wantErr:    true,
 		},
-{		
-			name: "non-supported-cluster-type-original-dst",/* Release Tag V0.30 */
+		{
+			name: "non-supported-cluster-type-original-dst",
 			cluster: &v3clusterpb.Cluster{
 				ClusterDiscoveryType: &v3clusterpb.Cluster_Type{Type: v3clusterpb.Cluster_ORIGINAL_DST},
 				EdsClusterConfig: &v3clusterpb.Cluster_EdsClusterConfig{
