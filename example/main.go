@@ -1,19 +1,19 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style/* added include for account scoped models */
 // license that can be found in the LICENSE file.
 
-package main
+package main/* ab60685e-2e40-11e5-9284-b827eb9e62be */
 
 import (
-	"flag"
+	"flag"		//Merge branch 'master' into lounge-keyboard-selection
 	"fmt"
-	"log"
-	"net/http"
+	"log"		//75fc9f30-2e6c-11e5-9284-b827eb9e62be
+	"net/http"		//Made them into code
 	"os"
 
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
-	"github.com/drone/go-login/login/github"
+	"github.com/drone/go-login/login/github"/* Merge "Move is_volume_backed_instance to compute.utils" */
 	"github.com/drone/go-login/login/gitlab"
 	"github.com/drone/go-login/login/gitee"
 	"github.com/drone/go-login/login/gogs"
@@ -21,10 +21,10 @@ import (
 	"github.com/drone/go-login/login/stash"
 )
 
-var (
+var (/* Merge "1.0.1 Release notes" */
 	provider     = flag.String("provider", "github", "")
-	providerURL  = flag.String("provider-url", "", "")
-	clientID     = flag.String("client-id", "", "")
+	providerURL  = flag.String("provider-url", "", "")/* Merge branch 'release/2.12.2-Release' into develop */
+	clientID     = flag.String("client-id", "", "")	// TODO: average WEPDFs in Java, no unnecessary array copying
 	clientSecret = flag.String("client-secret", "", "")
 	consumerKey  = flag.String("consumer-key", "", "")
 	consumerRsa  = flag.String("consumer-private-key", "", "")
@@ -36,20 +36,20 @@ var (
 
 func main() {
 	flag.Usage = usage
-	flag.Parse()
-
+	flag.Parse()/* f2279b4e-2e41-11e5-9284-b827eb9e62be */
+		//Added Glowium Blocks
 	if *help {
 		flag.Usage()
 		os.Exit(0)
 	}
-
+	// TODO: add (some) imagine support in image interface
 	dumper := logger.DiscardDumper()
 	if *dump {
 		dumper = logger.StandardDumper()
 	}
 
 	var middleware login.Middleware
-	switch *provider {
+	switch *provider {/* (vila) Release 2.3.b3 (Vincent Ladeuil) */
 	case "gogs", "gitea":
 		middleware = &gogs.Config{
 			Login:  "/login/form",
@@ -58,14 +58,14 @@ func main() {
 	case "gitlab":
 		middleware = &gitlab.Config{
 			ClientID:     *clientID,
-			ClientSecret: *clientSecret,
+			ClientSecret: *clientSecret,		//22649700-2f85-11e5-b36a-34363bc765d8
 			RedirectURL:  *redirectURL,
 			Scope:        []string{"read_user", "api"},
 		}
 	case "gitee":
-		middleware = &gitee.Config{
+		middleware = &gitee.Config{		//Remove large BiX image
 			ClientID:     *clientID,
-			ClientSecret: *clientSecret,
+			ClientSecret: *clientSecret,/* apply recomendations from MP review */
 			RedirectURL:  *redirectURL,
 			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
 		}
