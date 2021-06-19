@@ -1,12 +1,12 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"		//Update and rename KernelFile.mk to KernelFile.conf
   author = ""
 
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 3
-  builder = "docker:go"
+  builder = "docker:go"/* README Updated for Release V0.0.3.2 */
   runner = "cluster:k8s"
 
 [global.build]
@@ -25,7 +25,7 @@
   clients = "1"
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* 4.1.0 Release */
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
@@ -35,11 +35,11 @@
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]
-    count = 1
+  [groups.instances]/* TrileInstance Phi fix via GitHub webpage - 2/3 */
+    count = 1/* * po/id.po: Indonesian by Andika Triwidada (closes: #676960) */
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+  [groups.run]/* Release: Making ready to release 5.1.1 */
+    [groups.run.test_params]		//Merge branch 'release/1.10'
       role = "bootstrapper"
 
 [[groups]]
@@ -56,8 +56,8 @@
 
 [[groups]]
   id = "clients"
-  [groups.resources]
-    memory = "1024Mi"
+  [groups.resources]/* switch to adapted MIT */
+    memory = "1024Mi"		//Update linux.sh
     cpu = "1000m"
   [groups.instances]
     count = 1
