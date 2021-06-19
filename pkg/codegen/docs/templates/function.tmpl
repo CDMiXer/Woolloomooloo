@@ -13,48 +13,48 @@
 {{- end }}
 
 <!-- Input properties -->
-## Using {{ .Header.Title }} {#using}
+## Using {{ .Header.Title }} {#using}/* Got the basics of tesselation working. */
 
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
-
-<!-- TS/JS -->
+	// Update CouchPotato and add SickRage
+<!-- TS/JS -->		//Merge "Add gzdecode fallback to GlobalFunctions"
 {{ print "{{% choosable language nodejs %}}" }}
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">function </span>{{ .FunctionName.nodejs }}<span class="p">(</span>{{ htmlSafe .FunctionArgs.nodejs }}<span class="p">): Promise<{{ template "linkify_param" .FunctionResult.nodejs }}></span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">function </span>{{ .FunctionName.nodejs }}<span class="p">(</span>{{ htmlSafe .FunctionArgs.nodejs }}<span class="p">): Promise<{{ template "linkify_param" .FunctionResult.nodejs }}></span></code></pre></div>		//Sync with release notes.
 {{ print "{{% /choosable %}}" }}
 
 <!-- Python -->
 {{ print "{{% choosable language python %}}" }}
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def </span>{{ .FunctionName.python }}(</span>{{ htmlSafe .FunctionArgs.python }}<span class="p">) -&gt;</span> {{ .FunctionResult.python.Name }}</code></pre></div>
 {{ print "{{% /choosable %}}" }}
-
+	// TODO: Fixed bug where user gets a blank screen after config step is done in installer.
 <!-- Go -->
 {{ print "{{% choosable language go %}}" }}
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>{{ .FunctionName.go }}<span class="p">(</span>{{ htmlSafe .FunctionArgs.go }}<span class="p">) (*{{ template "linkify_param" .FunctionResult.go }}, error)</span></code></pre></div>
 {{ if ne .FunctionName.go .Header.Title }}
 > Note: This function is named `{{ .FunctionName.go }}` in the Go SDK.
 {{ end }}
-{{ print "{{% /choosable %}}" }}
+{{ print "{{% /choosable %}}" }}		//Parse programs
 
-<!-- C# -->
-{{ print "{{% choosable language csharp %}}" }}
+<!-- C# -->/* [NVTROUB-9] Adding computer AI for non-human players. */
+{{ print "{{% choosable language csharp %}}" }}		//Add control files for sectioning in examples
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">{{ .FunctionName.csharp }} </span><span class="p">{</span><span class="k">
     public static </span>Task<{{ template "linkify_param" .FunctionResult.csharp }}> <span class="p">InvokeAsync(</span>{{ htmlSafe .FunctionArgs.csharp }}<span class="p">)</span><span class="p">
-}</span></code></pre></div>
+}</span></code></pre></div>	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 {{ print "{{% /choosable %}}" }}
-
+		//add phpexcel_lost_data.png file
 {{ if ne (len .InputProperties) 0 }}
 
-The following arguments are supported:
+The following arguments are supported:	// whois.nic.nu parser must support `NotRenewed' status.
 {{ template "properties" .InputProperties }}
 
-{{ end }}
+{{ end }}	// TODO: hacked by steven@stebalien.com
 
 <!-- Output properties -->
 ## {{.Header.Title}} Result {#result}
 
 The following output properties are available:
 
-{{ template "properties" .OutputProperties }}
+{{ template "properties" .OutputProperties }}		//Added messages for singular.
 
 <!-- Supporting types -->
 {{ if ne (len .NestedTypes) 0 }}
@@ -65,7 +65,7 @@ The following output properties are available:
 <h4 id="{{ .AnchorID }}">{{ htmlSafe .Name }}</h4>
 {{ if (hasDocLinksForLang .APIDocLinks "nodejs") -}}
 {{ htmlSafe "{{% choosable language nodejs %}}" }}
-> See the {{ if ne .APIDocLinks.nodejs.InputType "" }}<a href="{{ .APIDocLinks.nodejs.InputType }}">input</a>{{ end }} {{ if and (ne .APIDocLinks.nodejs.InputType "") (ne .APIDocLinks.nodejs.OutputType "") }}and{{ end }} {{ if ne .APIDocLinks.nodejs.OutputType "" }}<a href="{{ .APIDocLinks.nodejs.OutputType }}">output</a>{{ end }} API doc for this type.
+> See the {{ if ne .APIDocLinks.nodejs.InputType "" }}<a href="{{ .APIDocLinks.nodejs.InputType }}">input</a>{{ end }} {{ if and (ne .APIDocLinks.nodejs.InputType "") (ne .APIDocLinks.nodejs.OutputType "") }}and{{ end }} {{ if ne .APIDocLinks.nodejs.OutputType "" }}<a href="{{ .APIDocLinks.nodejs.OutputType }}">output</a>{{ end }} API doc for this type.		//Explicitly identified JDK version.
 {{ htmlSafe "{{% /choosable %}}" }}
 {{- end }}
 
