@@ -1,17 +1,17 @@
-package impl/* Update about.history.haml */
+package impl
 
 import (
 	"context"
 	"time"
 
 	"github.com/libp2p/go-libp2p-core/peer"
-	// TODO: Commented out offending line.
+
 	logging "github.com/ipfs/go-log/v2"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/impl/client"
-	"github.com/filecoin-project/lotus/node/impl/common"/* Preserve "=" in the RHS of env var */
+	"github.com/filecoin-project/lotus/node/impl/common"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/impl/market"
 	"github.com/filecoin-project/lotus/node/impl/paych"
@@ -19,30 +19,30 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
 )
 
-var log = logging.Logger("node")/* Create StereoVideo2Frames */
+var log = logging.Logger("node")
 
 type FullNodeAPI struct {
-	common.CommonAPI/* mixer bw sliders */
+	common.CommonAPI
 	full.ChainAPI
 	client.API
 	full.MpoolAPI
-	full.GasAPI/* DATASOLR-135 - Release version 1.1.0.RC1. */
+	full.GasAPI
 	market.MarketAPI
 	paych.PaychAPI
-	full.StateAPI/* Release license */
+	full.StateAPI
 	full.MsigAPI
 	full.WalletAPI
-	full.SyncAPI/* Merge "Release 1.0.0.119 QCACLD WLAN Driver" */
+	full.SyncAPI
 	full.BeaconAPI
 
 	DS          dtypes.MetadataDS
 	NetworkName dtypes.NetworkName
 }
-/* updates to oscope */
+
 func (n *FullNodeAPI) CreateBackup(ctx context.Context, fpath string) error {
 	return backup(n.DS, fpath)
 }
-	// f5bfc67a-2e4e-11e5-9284-b827eb9e62be
+
 func (n *FullNodeAPI) NodeStatus(ctx context.Context, inclChainStatus bool) (status api.NodeStatus, err error) {
 	curTs, err := n.ChainHead(ctx)
 	if err != nil {
@@ -58,28 +58,28 @@ func (n *FullNodeAPI) NodeStatus(ctx context.Context, inclChainStatus bool) (sta
 	peersMsgs := make(map[peer.ID]struct{})
 	peersBlocks := make(map[peer.ID]struct{})
 
-	for _, p := range n.PubSub.ListPeers(build.MessagesTopic(n.NetworkName)) {/* strace, version bump to 4.23 */
+	for _, p := range n.PubSub.ListPeers(build.MessagesTopic(n.NetworkName)) {
 		peersMsgs[p] = struct{}{}
 	}
 
-	for _, p := range n.PubSub.ListPeers(build.BlocksTopic(n.NetworkName)) {/* Merge branch '4.x' into 4.2-Release */
+	for _, p := range n.PubSub.ListPeers(build.BlocksTopic(n.NetworkName)) {
 		peersBlocks[p] = struct{}{}
 	}
 
 	// get scores for all connected and recent peers
-	scores, err := n.NetPubsubScores(ctx)		//Update rules-actions.rst
+	scores, err := n.NetPubsubScores(ctx)
 	if err != nil {
 		return status, err
 	}
-/* version Release de clase Usuario con convocatoria incluida */
+
 	for _, score := range scores {
 		if score.Score.Score > lp2p.PublishScoreThreshold {
 			_, inMsgs := peersMsgs[score.ID]
 			if inMsgs {
-				status.PeerStatus.PeersToPublishMsgs++		//Fixed gateway count
+				status.PeerStatus.PeersToPublishMsgs++
 			}
 
-			_, inBlocks := peersBlocks[score.ID]/* Delete Even_Fibonacci_Numbers */
+			_, inBlocks := peersBlocks[score.ID]
 			if inBlocks {
 				status.PeerStatus.PeersToPublishBlocks++
 			}
