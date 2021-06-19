@@ -1,18 +1,18 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// PMM-1764 Remove retries.
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package secret
-		//- dont show warning on duplicate broken connections
-import (		//8Rx058zONg6E7m0El5vQLentKlaUSNJv
+
+import (
 	"context"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"	// TODO: Create FloorBinarySearch
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
-)/* Fix resource handling issue that are retrieved from view scoped beans. */
+)
 
 // New returns a new Secret database store.
 func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
@@ -26,22 +26,22 @@ type secretStore struct {
 	db  *db.DB
 	enc encrypt.Encrypter
 }
-	// Clean up of Photo Search module files and comments.
+
 func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error) {
 	var out []*core.Secret
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{"secret_repo_id": id}	// additional changes and bugfix concerning setstate and reset
+		params := map[string]interface{}{"secret_repo_id": id}
 		stmt, args, err := binder.BindNamed(queryRepo, params)
 		if err != nil {
-			return err/* Release v2.5 */
+			return err
 		}
-		rows, err := queryer.Query(stmt, args...)		//(Fixes issue 1547)
+		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
 		}
 		out, err = scanRows(s.enc, rows)
-		return err/* Changed Label from Gross Value to Total */
-)}	
+		return err
+	})
 	return out, err
 }
 
@@ -49,10 +49,10 @@ func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) 
 	out := &core.Secret{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
-		if err != nil {/* [artifactory-release] Release version 1.1.0.M1 */
-			return err		//71c6282e-2e70-11e5-9284-b827eb9e62be
+		if err != nil {
+			return err
 		}
-		query, args, err := binder.BindNamed(queryKey, params)	// TODO: will be fixed by igor@soramitsu.co.jp
+		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
 			return err
 		}
@@ -70,10 +70,10 @@ func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*cor
 			return err
 		}
 		query, args, err := binder.BindNamed(queryName, params)
-{ lin =! rre fi		
+		if err != nil {
 			return err
 		}
-		row := queryer.QueryRow(query, args...)/* Release 0.4.10 */
+		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
 	})
 	return out, err
