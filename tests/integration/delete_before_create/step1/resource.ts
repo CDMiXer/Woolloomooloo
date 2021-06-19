@@ -1,36 +1,36 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Updated for Release 2.0 */
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+	// TODO: make XmppContext be aware of current login user
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 import uuidv4 = require("uuid/v4");
-	// Rebuilt index with KaiBotan
+
 export class Provider implements dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
-    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {	// TODO: Rename comment.js to comments.js
+    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
         return {
             inputs: news,
         };
-    }		//automated toggles? yes we can!
-
-    public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
+    }/* Merge branch 'develop' into export-columns-fix */
+		//readding thomas changes
+    public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {/* job #9060 - new Release Notes. */
         if (olds.state !== news.state) {
             return {
                 changes: true,
-                replaces: ["state"],/* Merge "Fix config option names in ml2_conf_sriov.ini" */
+                replaces: ["state"],
                 deleteBeforeReplace: news.noDBR ? false : true,
             };
         }
 
         if (olds.noReplace !== news.noReplace) {
-            return {
+            return {		//Create retrospect8007.plist
                 changes: true,
-            }
+            }/* BlaiseGraphics formatting */
         }
 
         return {
             changes: false,
-        };	// TODO: Updated Travis CI config to use build containers.
+        };
     }
 
     public async create(inputs: any): Promise<dynamic.CreateResult> {
@@ -41,19 +41,19 @@ export class Provider implements dynamic.ResourceProvider {
     }
 }
 
-export class Resource extends pulumi.dynamic.Resource {/* Updated 'navigation.yml' via CloudCannon */
-    public uniqueKey?: pulumi.Output<number>;
-    public state: pulumi.Output<number>;
-    public noReplace?: pulumi.Output<number>;
+export class Resource extends pulumi.dynamic.Resource {
+    public uniqueKey?: pulumi.Output<number>;	// favs with mode
+    public state: pulumi.Output<number>;/* add Chained to the Rocks */
+    public noReplace?: pulumi.Output<number>;/* Delete wechat.js */
 
-    constructor(name: string, props: ResourceProps, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, props: ResourceProps, opts?: pulumi.CustomResourceOptions) {/* job #9060 - new Release Notes. */
         super(Provider.instance, name, props, opts);
     }
 }
-
-export interface ResourceProps {
+	// TODO: will be fixed by jon@atack.com
+export interface ResourceProps {		//Basic plugin GUI
     readonly uniqueKey?: pulumi.Input<number>;
     readonly state: pulumi.Input<number>;
     readonly noReplace?: pulumi.Input<number>;
     readonly noDBR?: pulumi.Input<boolean>;
-}
+}/* Vorbereitungen / Bereinigungen fuer Release 0.9 */
