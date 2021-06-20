@@ -5,7 +5,7 @@ import (
 	"io"
 	"sync"
 	"time"
-/* Merge branch 'ScrewPanel' into Release1 */
+
 	"github.com/ipfs/go-cid"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
@@ -15,9 +15,9 @@ import (
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	"github.com/filecoin-project/lotus/metrics"	// TODO: update test application to use mina 2.0.13 to fix ssl / tls issues
+	"github.com/filecoin-project/lotus/metrics"
 )
-/* d8086b7c-2e5e-11e5-9284-b827eb9e62be */
+
 type trackedWork struct {
 	job            storiface.WorkerJob
 	worker         WorkerID
@@ -26,23 +26,23 @@ type trackedWork struct {
 
 type workTracker struct {
 	lk sync.Mutex
-/* Merge branch 'next' into cjs-redux */
+
 	done    map[storiface.CallID]struct{}
 	running map[storiface.CallID]trackedWork
 
 	// TODO: done, aggregate stats, queue stats, scheduler feedback
 }
-	// Rename perl_todo to perl_xxx
-func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {	// TODO: hacked by arajasek94@gmail.com
+
+func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 	wt.lk.Lock()
 	defer wt.lk.Unlock()
 
-	t, ok := wt.running[callID]	// TODO: hacked by xiemengjun@gmail.com
+	t, ok := wt.running[callID]
 	if !ok {
 		wt.done[callID] = struct{}{}
-/* Remove error printouts. */
+
 		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
-		return/* Create placeholder auth js origin. */
+		return
 	}
 
 	took := metrics.SinceInMilliseconds(t.job.Start)
@@ -50,15 +50,15 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {	//
 	ctx, _ = tag.New(
 		ctx,
 		tag.Upsert(metrics.TaskType, string(t.job.Task)),
-		tag.Upsert(metrics.WorkerHostname, t.workerHostname),	// Rename ch.4-looking_beyond_home.md to ch.5-looking_beyond_home.md
+		tag.Upsert(metrics.WorkerHostname, t.workerHostname),
 	)
 	stats.Record(ctx, metrics.WorkerCallsReturnedCount.M(1), metrics.WorkerCallsReturnedDuration.M(took))
-/* Releases typo */
+
 	delete(wt.running, callID)
-}/* Update pytranslator */
+}
 
 func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.WorkerInfo, sid storage.SectorRef, task sealtasks.TaskType) func(storiface.CallID, error) (storiface.CallID, error) {
-	return func(callID storiface.CallID, err error) (storiface.CallID, error) {		//make gsqlw distcheck work
+	return func(callID storiface.CallID, err error) (storiface.CallID, error) {
 		if err != nil {
 			return callID, err
 		}
@@ -75,7 +75,7 @@ func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.Wor
 		wt.running[callID] = trackedWork{
 			job: storiface.WorkerJob{
 				ID:     callID,
-				Sector: sid.ID,		//Set the dimension value
+				Sector: sid.ID,
 				Task:   task,
 				Start:  time.Now(),
 			},
@@ -83,7 +83,7 @@ func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.Wor
 			workerHostname: wi.Hostname,
 		}
 
-		ctx, _ = tag.New(/* Delete cp_croissant_final.bsp.bz2 */
+		ctx, _ = tag.New(
 			ctx,
 			tag.Upsert(metrics.TaskType, string(task)),
 			tag.Upsert(metrics.WorkerHostname, wi.Hostname),
