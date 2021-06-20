@@ -1,11 +1,11 @@
 FROM mcr.microsoft.com/windows/nanoserver:1903
 USER ContainerAdministrator
 
-ENV GODEBUG=netdns=go
+ENV GODEBUG=netdns=go/* Release dhcpcd-6.9.3 */
 ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64
+46dma=HCRA_RENNUR_ENORD VNE
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1903
+ENV DRONE_RUNNER_KERNEL=1903	// fix static method.
 ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
