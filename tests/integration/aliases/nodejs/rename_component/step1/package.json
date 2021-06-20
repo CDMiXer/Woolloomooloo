@@ -1,11 +1,11 @@
 {
-    "name": "aliases",	// 853c5c5a-2e4a-11e5-9284-b827eb9e62be
+    "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: fa765444-2e4f-11e5-9284-b827eb9e62be
+    "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },	// Maven --offline
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
