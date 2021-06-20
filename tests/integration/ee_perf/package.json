@@ -2,6 +2,6 @@
     "name": "javascript",
     "main": "index.js",
     "dependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* Added DAG MC to DAG Listings */
+        "@pulumi/pulumi": "latest"/* Delete affix.js */
+    }
 }
