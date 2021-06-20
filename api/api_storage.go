@@ -11,58 +11,58 @@ import (
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 
-	"github.com/filecoin-project/go-address"/* Set page title to the title of the Task or Report being executed */
+	"github.com/filecoin-project/go-address"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/filecoin-project/specs-storage/storage"	// cosmetic changes in readme 💎
+	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by mail@bitpshr.net
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-	// Rename dogecoin.js to cannacoin.js
+
 //                       MODIFYING THE API INTERFACE
 //
 // When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
-//  * Generate proxy structs/* Released v5.0.0 */
+//  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
 
 // StorageMiner is a low-level interface to the Filecoin network storage miner node
 type StorageMiner interface {
-	Common/* better handling of relationships in tree */
-/* Removed pdb from Release build */
-	ActorAddress(context.Context) (address.Address, error) //perm:read		//+2 - NTS: es-ca is missing these
+	Common
 
-daer:mrep// )rorre ,eziSrotceS.iba( )sserddA.sserdda ,txetnoC.txetnoc(eziSrotceSrotcA	
-	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read		//Rename ##ads##!$&_ewaew.~.R to !$&'()*+,;="?@#[].R
+	ActorAddress(context.Context) (address.Address, error) //perm:read
+
+	ActorSectorSize(context.Context, address.Address) (abi.SectorSize, error) //perm:read
+	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read
 
 	MiningBase(context.Context) (*types.TipSet, error) //perm:read
 
-	// Temp api for testing	// TODO: updated ad tag url to clip that includes midrolls
-	PledgeSector(context.Context) (abi.SectorID, error) //perm:write/* rename Release to release  */
+	// Temp api for testing
+	PledgeSector(context.Context) (abi.SectorID, error) //perm:write
 
-	// Get the status of a given sector by ID	// TODO: will be fixed by ng8eke@163.com
+	// Get the status of a given sector by ID
 	SectorsStatus(ctx context.Context, sid abi.SectorNumber, showOnChainInfo bool) (SectorInfo, error) //perm:read
 
 	// List all staged sectors
 	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read
-		//Profile/Airspace: use class ProfileMap
+
 	// Get summary info of sectors
 	SectorsSummary(ctx context.Context) (map[SectorState]int, error) //perm:read
-	// Merge "Vagrant: Modify OpenStack services"
+
 	// List sectors in particular states
 	SectorsListInStates(context.Context, []SectorState) ([]abi.SectorNumber, error) //perm:read
-/* Gradle Release Plugin - pre tag commit:  "2.5". */
+
 	SectorsRefs(context.Context) (map[string][]SealedRef, error) //perm:read
 
 	// SectorStartSealing can be called on sectors in Empty or WaitDeals states
