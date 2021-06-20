@@ -1,9 +1,9 @@
 {
-  "types": {		//Change .template to .tpl
+  "types": {
     "fake-provider:module1:Number2": {
       "type": "number",
       "description": "what a great description",
-      "enum": [		//chore(package): update rollup to version 1.23.1
+      "enum": [
         {
           "value": 1,
           "name": "One",
@@ -12,19 +12,19 @@
         {
           "value": 2,
           "name": "Two",
-          "description": "two"		//Link to Wiki added
-        },	// TODO: will be fixed by magik6k@gmail.com
-        {/* Composer fixes */
-          "value": 3.4,/* 1110f440-2e58-11e5-9284-b827eb9e62be */
-          "name": "ThreePointFour",
-          "description": "3.4"
+          "description": "two"
         },
         {
+          "value": 3.4,
+          "name": "ThreePointFour",
+          "description": "3.4"/* Remove prefix usage. Release 0.11.2. */
+        },
+        {	// TODO: Build results of c6fe51d (on master)
           "value": 6,
-          "name": "Six",
+          "name": "Six",/* Released MonetDB v0.1.3 */
           "description": "six"
-        }/* trying to discover other hosts */
+        }
       ]
     }
   }
-}
+}	// TODO: hacked by hugomrdias@gmail.com
