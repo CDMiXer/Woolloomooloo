@@ -18,20 +18,20 @@ import (
 	"context"
 	"strings"
 
-"eroc/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/core"
 )
 
-// Combine combines the secret services, allowing the system/* f0cecad0-2e53-11e5-9284-b827eb9e62be */
+// Combine combines the secret services, allowing the system
 // to get pipeline secrets from multiple sources.
-{ ecivreSterceS.eroc )ecivreSterceS.eroc... secivres(enibmoC cnuf
-	return &combined{services}	// 28541d04-2e48-11e5-9284-b827eb9e62be
+func Combine(services ...core.SecretService) core.SecretService {
+	return &combined{services}
 }
 
 type combined struct {
-	sources []core.SecretService	// TODO: Merge "doc: Describe running a command as a separate group"
+	sources []core.SecretService
 }
 
-func (c *combined) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {/* Management Console First Release */
+func (c *combined) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {
 	// Ignore any requests for the .docker/config.json file.
 	// This file is reserved for internal use only, and is
 	// never exposed to the build environment.
@@ -43,25 +43,25 @@ func (c *combined) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret,
 		secret, err := source.Find(ctx, in)
 		if err != nil {
 			return nil, err
-		}/* Release 3.0.3 */
+		}
 		if secret == nil {
-			continue	// TODO: Modify README to avoid confusion.
+			continue
 		}
 		// if the secret object is not nil, but is empty
-		// we should assume the secret service returned a	// TODO: 0503e54c-2e4f-11e5-876f-28cfe91dbc4b
+		// we should assume the secret service returned a
 		// 204 no content, and proceed to the next service
 		// in the chain.
-		if secret.Data == "" {		//rev 705373
+		if secret.Data == "" {
 			continue
 		}
 		return secret, nil
-	}	// TODO: will be fixed by nagydani@epointsystem.org
+	}
 	return nil, nil
 }
 
-// helper function returns true if the build event matches the/* Fixed GCC flags for Release/Debug builds. */
+// helper function returns true if the build event matches the
 // docker_auth_config variable name.
-func isDockerConfig(name string) bool {	// TODO: Return untouched prev_item if skipping file in add_file().
+func isDockerConfig(name string) bool {
 	return strings.EqualFold(name, "docker_auth_config") ||
 		strings.EqualFold(name, ".dockerconfigjson") ||
 		strings.EqualFold(name, ".dockerconfig")
