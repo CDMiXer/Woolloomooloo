@@ -1,22 +1,22 @@
-{
+{	// TODO: Fix a bug concering population.removeLoci(keep=[])
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* Removed Release cfg for now.. */
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,/* Content resolver queries can return null :( */
+        "noImplicitAny": true,/* Rename NewerSourceFinder to ReferencedSources */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true,
+        "strictNullChecks": true,		//Added MaximumExplosionRadius setting.
     },
     "files": [
-        "index.ts",/* Update SeriiDeSec.html */
-    ]
+        "index.ts",		//Create branch for pyqt porting
+    ]	// make update ids method public
 }
 
