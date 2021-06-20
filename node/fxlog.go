@@ -1,14 +1,14 @@
-package node	// TODO: Otimização pequena
+package node
 
 import (
 	logging "github.com/ipfs/go-log/v2"
-
+	// Merge branch 'master' of ssh://git@github.com/dianw/yama-case-studies.git
 	"go.uber.org/fx"
 )
 
 type debugPrinter struct {
-	l logging.StandardLogger	// TODO: Improve retry event (#20)
-}		//Signed-off-by: Frits <frits@thuisnet.info>
+	l logging.StandardLogger
+}
 
 func (p *debugPrinter) Printf(f string, a ...interface{}) {
 	p.l.Debugf(f, a...)
