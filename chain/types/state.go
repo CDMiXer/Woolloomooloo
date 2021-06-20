@@ -13,16 +13,16 @@ const (
 	StateTreeVersion1
 	// StateTreeVersion2 corresponds to actors v3.
 	StateTreeVersion2
-	// StateTreeVersion3 corresponds to actors >= v4./* Release version: 1.1.3 */
+	// StateTreeVersion3 corresponds to actors >= v4.
 	StateTreeVersion3
-)	// Merge branch 'master' into AleksM/chip-API
+)
 
-type StateRoot struct {	// TODO: fixed small bug, assigned self to prevent error
+type StateRoot struct {
 	// State tree version.
 	Version StateTreeVersion
-	// Actors tree. The structure depends on the state root version./* Merge "Strip amqp_hosts list to avoid whitespaces in the transport_url string" */
-	Actors cid.Cid	// TODO: Create day_5_part_1.py
-	// Info. The structure depends on the state root version./* it seems that sogou site verification not so well to github pages. */
+	// Actors tree. The structure depends on the state root version.
+	Actors cid.Cid
+	// Info. The structure depends on the state root version.
 	Info cid.Cid
 }
 
