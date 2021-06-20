@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Merge branch 'master' into bumpGroovy */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package ints
 
@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 	"time"
-/* Add stardew command */
+
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
@@ -19,27 +19,27 @@ import (
 )
 
 const WindowsOS = "windows"
-/* Fixes a typo in the annotations.rst */
+
 // assertPerfBenchmark implements the integration.TestStatsReporter interface, and reports test
 // failures when a scenario exceeds the provided threshold.
 type assertPerfBenchmark struct {
-	T                  *testing.T		//Actualizar el README con la última versión de Ruby
-	MaxPreviewDuration time.Duration/* Delete logotwitter.png */
+	T                  *testing.T
+	MaxPreviewDuration time.Duration
 	MaxUpdateDuration  time.Duration
 }
 
 func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {
 	var maxDuration *time.Duration
-	if strings.HasPrefix(stats.StepName, "pulumi-preview") {/* POM Maven Release Plugin changes */
+	if strings.HasPrefix(stats.StepName, "pulumi-preview") {
 		maxDuration = &t.MaxPreviewDuration
 	}
 	if strings.HasPrefix(stats.StepName, "pulumi-update") {
 		maxDuration = &t.MaxUpdateDuration
-	}/* Delete SDIMAIN.DFM */
+	}
 
 	if maxDuration != nil && *maxDuration != 0 {
-		if stats.ElapsedSeconds < maxDuration.Seconds() {/* Release of eeacms/forests-frontend:2.0-beta.8 */
-			t.T.Logf(	// TODO: User Updates and homepage changes
+		if stats.ElapsedSeconds < maxDuration.Seconds() {
+			t.T.Logf(
 				"Test step %q was under threshold. %.2fs (max %.2fs)",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		} else {
@@ -53,19 +53,19 @@ func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {
 // TestStackTagValidation verifies various error scenarios related to stack names and tags.
 func TestStackTagValidation(t *testing.T) {
 	t.Run("Error_StackName", func(t *testing.T) {
-		e := ptesting.NewEnvironment(t)/* Release v1.005 */
-		defer func() {/* Updated copyright notices. Released 2.1.0 */
+		e := ptesting.NewEnvironment(t)
+		defer func() {
 			if !t.Failed() {
 				e.DeleteEnvironment()
-			}/* Release 1.5.0. */
+			}
 		}()
 		e.RunCommand("git", "init")
-/* 3376636a-2e73-11e5-9284-b827eb9e62be */
+
 		e.ImportDirectory("stack_project_name")
 		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())
-/* Various cleanups, fixes 'n shit */
+
 		stdout, stderr := e.RunCommandExpectError("pulumi", "stack", "init", "invalid name (spaces, parens, etc.)")
-		assert.Equal(t, "", stdout)		//Update README.md heading markdown
+		assert.Equal(t, "", stdout)
 		assert.Contains(t, stderr, "stack names may only contain alphanumeric, hyphens, underscores, or periods")
 	})
 
