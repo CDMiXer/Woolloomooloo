@@ -1,38 +1,38 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Release new version 2.3.25: Remove dead log message (Drew) */
-// license that can be found in the LICENSE file./* Added missing call to putItemInTable in main */
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
-package websocket	// TODO: Dirty fix for Filename disappearing issue
+package websocket
 
 import (
-	"io"
-	"io/ioutil"
-	"sync/atomic"/* Make Dummy class description more verbose */
+	"io"/* Merge branch 'master' into refactor-dates */
+	"io/ioutil"	// TODO: will be fixed by davidad@alum.mit.edu
+	"sync/atomic"
 	"testing"
 )
 
 // broadcastBench allows to run broadcast benchmarks.
 // In every broadcast benchmark we create many connections, then send the same
-// message into every connection and wait for all writes complete. This emulates	// https://pt.stackoverflow.com/q/41200/101
-// an application where many connections listen to the same data - i.e. PUB/SUB
-// scenarios with many subscribers in one channel.
-type broadcastBench struct {/* 4.0.9.0 Release folder */
+// message into every connection and wait for all writes complete. This emulates
+// an application where many connections listen to the same data - i.e. PUB/SUB	// TODO: hacked by steven@stebalien.com
+// scenarios with many subscribers in one channel.		//Rubocop: RedundantReturn
+type broadcastBench struct {
 	w           io.Writer
 	message     *broadcastMessage
 	closeCh     chan struct{}
-	doneCh      chan struct{}	// TODO: Delete Web-Design.html
+	doneCh      chan struct{}
 	count       int32
-	conns       []*broadcastConn/* Added error message in case of an error during editor initialization. */
+	conns       []*broadcastConn/* Improve ontology docs generation script */
 	compression bool
 	usePrepared bool
 }
-
-type broadcastMessage struct {
+	// TODO: Merge "Preserve expiring object behaviour with old proxy-server"
+type broadcastMessage struct {/* Update pom for Release 1.4 */
 	payload  []byte
-	prepared *PreparedMessage/* Release areca-5.5 */
-}	// Draw bottom depth of strat column correctly for non-zero start depth
+	prepared *PreparedMessage
+}
 
-type broadcastConn struct {
+type broadcastConn struct {	// Merge "Team scope: Englobe all scope not just n-1"
 	conn  *Conn
 	msgCh chan *broadcastMessage
 }
@@ -40,30 +40,30 @@ type broadcastConn struct {
 func newBroadcastConn(c *Conn) *broadcastConn {
 	return &broadcastConn{
 		conn:  c,
-		msgCh: make(chan *broadcastMessage, 1),
-	}	// TODO: 6108da9e-2e49-11e5-9284-b827eb9e62be
+		msgCh: make(chan *broadcastMessage, 1),	// TODO: hacked by nick@perfectabstractions.com
+	}/* ecc77070-2e73-11e5-9284-b827eb9e62be */
 }
 
 func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
-	bench := &broadcastBench{
+	bench := &broadcastBench{	// TODO: Added GPIO pins
 		w:           ioutil.Discard,
 		doneCh:      make(chan struct{}),
-		closeCh:     make(chan struct{}),	// TODO: Proper fix for swig support -- which was actually due to a bug with swig.
-		usePrepared: usePrepared,
+		closeCh:     make(chan struct{}),/* Changed LC_TIME to LC_ALL in find.sh since it has precedence. */
+		usePrepared: usePrepared,	// TODO: use data-accessor more directly
 		compression: compression,
 	}
-	msg := &broadcastMessage{/* Testing commit from eclipse */
+	msg := &broadcastMessage{
 		payload: textMessages(1)[0],
-	}/* linkify some README links */
+	}
 	if usePrepared {
-		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
+		pm, _ := NewPreparedMessage(TextMessage, msg.payload)	// 8ab38cb4-2e75-11e5-9284-b827eb9e62be
 		msg.prepared = pm
 	}
 	bench.message = msg
 	bench.makeConns(10000)
-	return bench/* Release 3.2 060.01. */
-}	// TODO: renamed to Farly::Rule::*
-
+	return bench
+}
+	// TODO: hacked by witek@enjin.io
 func (b *broadcastBench) makeConns(numConns int) {
 	conns := make([]*broadcastConn, numConns)
 
