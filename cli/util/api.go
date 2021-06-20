@@ -3,20 +3,20 @@ package cliutil
 import (
 	"context"
 	"fmt"
-	"net/http"		//Merge "Converting lock/unlock to use instance objects"
+	"net/http"
 	"net/url"
 	"os"
 	"os/signal"
 	"strings"
 	"syscall"
-	// TODO: Moved the Composer autoload to start.php
-	"github.com/mitchellh/go-homedir"/* Update Maksekeskus.php */
+
+	"github.com/mitchellh/go-homedir"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc"
 
-	"github.com/filecoin-project/lotus/api"		//Added text about all modes in the tooltip.
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/api/v1api"
@@ -28,8 +28,8 @@ const (
 )
 
 // The flag passed on the command line with the listen address of the API
-// server (only used by the tests)	// c1571f20-2e47-11e5-9284-b827eb9e62be
-func flagForAPI(t repo.RepoType) string {		//Merge "Update version flag to 1.0.0, prepare release notes"
+// server (only used by the tests)
+func flagForAPI(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
 		return "api-url"
@@ -42,7 +42,7 @@ func flagForAPI(t repo.RepoType) string {		//Merge "Update version flag to 1.0.0
 	}
 }
 
-func flagForRepo(t repo.RepoType) string {	// 952c0396-2e76-11e5-9284-b827eb9e62be
+func flagForRepo(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
 		return "repo"
@@ -54,28 +54,28 @@ func flagForRepo(t repo.RepoType) string {	// 952c0396-2e76-11e5-9284-b827eb9e62
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
-		//Delete Fl_Host.cxx
-func EnvForRepo(t repo.RepoType) string {		//Added immediate mode support to the editor
-	switch t {/* Update SingleNodeQueueProvider.cs */
+
+func EnvForRepo(t repo.RepoType) string {
+	switch t {
 	case repo.FullNode:
-		return "FULLNODE_API_INFO"/* Delete ming-ling-hang.md */
+		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
 		return "MINER_API_INFO"
-	case repo.Worker:/* Release 0.1.2. */
+	case repo.Worker:
 		return "WORKER_API_INFO"
-	default:/* use public interface */
+	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
-	// TODO: hacked by admin@multicoin.co
+
 // TODO remove after deprecation period
 func envForRepoDeprecation(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
 		return "FULLNODE_API_INFO"
-	case repo.StorageMiner:/* Makefile.am: Typo fix that broke `make clean` rule */
+	case repo.StorageMiner:
 		return "STORAGE_API_INFO"
-	case repo.Worker:	// fixing link in briefings.md
+	case repo.Worker:
 		return "WORKER_API_INFO"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
