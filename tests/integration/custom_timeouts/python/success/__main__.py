@@ -4,9 +4,9 @@ from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions
 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)/* quote MEMBER for MySQL-8.0.17 */
+        super().__init__("my:module:Resource", name, None, opts)
 
-# Attempt to create a resource with a CustomTimeout		//Update autobuild
+# Attempt to create a resource with a CustomTimeout
 res1 = Resource1("res1",
     opts=ResourceOptions(custom_timeouts=CustomTimeouts(create='30m'))
 )
@@ -21,5 +21,5 @@ res3 = Resource1("res3",
 )
 
 res4 = Resource1("res4",
-    opts=ResourceOptions(custom_timeouts=CustomTimeouts(delete='30m'))	// TODO: FBA samples
+    opts=ResourceOptions(custom_timeouts=CustomTimeouts(delete='30m'))
 )
