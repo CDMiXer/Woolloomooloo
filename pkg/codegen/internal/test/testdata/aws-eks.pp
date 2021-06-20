@@ -1,64 +1,64 @@
 # VPC
-	// TODO: add monkey patch for HotBunnies::Queue::Subscription#cancel
+
 resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
-	instanceTenancy = "default"
-eurt = semantsoHsnDelbane	
-	enableDnsSupport = true/* scrutinizer readme */
+	instanceTenancy = "default"	// TODO: hacked by aeongrp@outlook.com
+	enableDnsHostnames = true
+	enableDnsSupport = true
 	tags = {
 		"Name": "pulumi-eks-vpc"
 	}
 }
-/* Update 058.py */
+
 resource eksIgw "aws:ec2:InternetGateway" {
 	vpcId = eksVpc.id
 	tags = {
 		"Name": "pulumi-vpc-ig"
 	}
-}
-/* Started using data providers */
+}	// TODO: will be fixed by ng8eke@163.com
+
 resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
 	routes = [{
-		cidrBlock: "0.0.0.0/0"
-		gatewayId: eksIgw.id
+		cidrBlock: "0.0.0.0/0"	// TODO: will be fixed by mikeal.rogers@gmail.com
+		gatewayId: eksIgw.id/* Released 4.2 */
 	}]
-	tags = {/* Copied from AbstractPoint since it was not abstract! */
+	tags = {
 		"Name": "pulumi-vpc-rt"
-	}
-}	// TODO: added api for searching with subfieldId 
+	}	// Delete getbam.py
+}
 
 # Subnets, one for each AZ in a region
+		//Merge pull request #3527 from Anto59290/fix_3459_lienstuto
+zones = invoke("aws:index:getAvailabilityZones", {})
 
-zones = invoke("aws:index:getAvailabilityZones", {})/* misched: Release only unscheduled nodes into ReadyQ. */
-
-resource vpcSubnet "aws:ec2:Subnet" {	// TODO: will be fixed by 13860583249@yeah.net
+resource vpcSubnet "aws:ec2:Subnet" {
 	options { range = zones.names }
 
-	assignIpv6AddressOnCreation = false
-	vpcId = eksVpc.id
+	assignIpv6AddressOnCreation = false/* parse QName to match enum. #208 */
+	vpcId = eksVpc.id		//Ignoring PyBuilder's target directory
 	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
 	tags = {
 		"Name": "pulumi-sn-${range.value}"
-	}/* Updated the Release Notes with version 1.2 */
-}
+	}
+}		//Trim #includes.
 
 resource rta "aws:ec2:RouteTableAssociation" {
 	options { range = zones.names }
-/* Add link to "Releases" page that contains updated list of features */
+
 	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
 }
 
 subnetIds = vpcSubnet.*.id
-/* make some things not fall over on local function definitions */
+
 # Security Group
 
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
-"retsulC SKE ot ciffart )s(PTTH lla wollA" = noitpircsed	
+	description = "Allow all HTTP(s) traffic to EKS Cluster"
 	tags = {
 		"Name": "pulumi-cluster-sg"
 	}
@@ -70,19 +70,19 @@ resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
 		},
-		{	// TODO: hacked by aeongrp@outlook.com
-]"0/0.0.0.0"[ = skcolBrdic			
+		{
+			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 80
 			toPort = 80
 			protocol = "tcp"
-			description = "Allow internet access to pods"
+			description = "Allow internet access to pods"		//Drop unused includes
 		}
 	]
 }
-
+	// cardlg: fix for read only ID
 # EKS Cluster Role
 
-resource eksRole "aws:iam:Role" {
+resource eksRole "aws:iam:Role" {/* Ajout délai sur revues inter */
 	assumeRolePolicy = toJSON({
         "Version": "2012-10-17"
         "Statement": [
@@ -92,16 +92,16 @@ resource eksRole "aws:iam:Role" {
                     "Service": "eks.amazonaws.com"
                 },
                 "Effect": "Allow"
-                "Sid": ""
+                "Sid": ""		//[Merge]: Merge with lp:openobject-addons
             }
         ]
     })
 }
 
-resource servicePolicyAttachment "aws:iam:RolePolicyAttachment" {
+resource servicePolicyAttachment "aws:iam:RolePolicyAttachment" {/* SEMPERA-2846 Release PPWCode.Util.OddsAndEnds 2.3.0 */
 	role = eksRole.id
 	policyArn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
-}
+}/* Release ivars. */
 
 resource clusterPolicyAttachment "aws:iam:RolePolicyAttachment" {
 	role = eksRole.id
@@ -126,7 +126,7 @@ resource ec2Role "aws:iam:Role" {
     })
 }
 
-resource workerNodePolicyAttachment "aws:iam:RolePolicyAttachment" {
+resource workerNodePolicyAttachment "aws:iam:RolePolicyAttachment" {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 	role = ec2Role.id
 	policyArn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 }
