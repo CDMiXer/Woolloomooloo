@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	// Implementação código Tabela Price
-  <PropertyGroup>
+
+  <PropertyGroup>/* 1.1 Release notes */
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>	// TODO: you know what? i like typing slashes into the command line.
-
+  </PropertyGroup>
+/* Deleted Release 1.2 for Reupload */
 </Project>
