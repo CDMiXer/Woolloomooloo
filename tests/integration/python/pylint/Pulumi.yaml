@@ -1,3 +1,3 @@
-name: pylint	// TODO: Put dmenu in X too
-description: A simple Python program that should be pylint clean./* Fix for issue #9 */
+name: pylint/* Add missing build dependency */
+description: A simple Python program that should be pylint clean.
 runtime: python
