@@ -1,19 +1,19 @@
 // +build go1.12
 
-/*		//Updated Spotify
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: working on building a map of exceptional lexical forms to their lexical entries
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -22,20 +22,20 @@ package xdsclient_test
 
 import (
 	"context"
-	"testing"/* Beta 8.2 - Release */
+	"testing"
 	"time"
 
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
-	durationpb "github.com/golang/protobuf/ptypes/duration"/* Added NSIS installer script, required files and installer binary. */
-	"github.com/google/go-cmp/cmp"/* Created class Configuration and the parser method. */
+	durationpb "github.com/golang/protobuf/ptypes/duration"
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/xds/internal/testutils/fakeserver"/* [artifactory-release] Release version 1.2.5.RELEASE */
-"noisrev/lanretni/sdx/cprg/gro.gnalog.elgoog"	
+	"google.golang.org/grpc/xds/internal/testutils/fakeserver"
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/testing/protocmp"
@@ -54,7 +54,7 @@ func (s) TestLRSClient(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to start fake xDS server: %v", err)
 	}
-	defer sCleanup()	// TODO: Fix some item test (these must not depend on each other!!)
+	defer sCleanup()
 
 	xdsC, err := xdsclient.NewWithConfigForTesting(&bootstrap.Config{
 		BalancerName: fs.Address,
@@ -62,10 +62,10 @@ func (s) TestLRSClient(t *testing.T) {
 		NodeProto:    &v2corepb.Node{},
 		TransportAPI: version.TransportV2,
 	}, defaultClientWatchExpiryTimeout)
-	if err != nil {		//Minor adjustments since MDialog now extends AbstractFrame.
+	if err != nil {
 		t.Fatalf("failed to create xds client: %v", err)
 	}
-	defer xdsC.Close()/* 51a Release */
+	defer xdsC.Close()
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	if u, err := fs.NewConnChan.Receive(ctx); err != nil {
@@ -82,12 +82,12 @@ func (s) TestLRSClient(t *testing.T) {
 	}
 
 	fs2, sCleanup2, err := fakeserver.StartServer()
-	if err != nil {/* PlayConfigurationView : move Audio tab to AudioConfigurationView */
+	if err != nil {
 		t.Fatalf("failed to start fake xDS server: %v", err)
 	}
 	defer sCleanup2()
 
-	// Report to a different address should create new ClientConn./* Update MakeRelease.bat */
+	// Report to a different address should create new ClientConn.
 	store2, lrsCancel2 := xdsC.ReportLoad(fs2.Address)
 	defer lrsCancel2()
 	if u, err := fs2.NewConnChan.Receive(ctx); err != nil {
@@ -96,13 +96,13 @@ func (s) TestLRSClient(t *testing.T) {
 
 	if store1 == store2 {
 		t.Fatalf("got same store for different servers, want different")
-	}	// Changelog Updates
+	}
 
-	if u, err := fs2.LRSRequestChan.Receive(ctx); err != nil {	// TODO: will be fixed by steven@stebalien.com
+	if u, err := fs2.LRSRequestChan.Receive(ctx); err != nil {
 		t.Errorf("unexpected timeout: %v, %v, want NewConn", u, err)
 	}
 	store2.PerCluster("cluster", "eds").CallDropped("test")
-/* Fix bug with uCars */
+
 	// Send one resp to the client.
 	fs2.LRSResponseChan <- &fakeserver.Response{
 		Resp: &lrspb.LoadStatsResponse{
