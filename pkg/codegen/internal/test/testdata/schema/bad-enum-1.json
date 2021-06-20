@@ -4,10 +4,10 @@
       "type": "string",
       "enum": [
         {
-          "value": "chocolate"/* add Release-0.4.txt */
+          "value": "chocolate"
         },
-        {
-          "value": "marshmallow"/* Create bug report templates */
+        {		//Production Process (Book or Cover)
+          "value": "marshmallow"	// TODO: hacked by witek@enjin.io
         },
         {
           "value": 3
