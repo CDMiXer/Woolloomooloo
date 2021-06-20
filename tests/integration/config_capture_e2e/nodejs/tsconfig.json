@@ -1,4 +1,4 @@
-{	// Fix for QMC sigma set up
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
@@ -9,8 +9,8 @@
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//Delete .app_REMOTE_3552.js.swp
-        "noFallthroughCasesInSwitch": true,	// Fix for optional init.
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
