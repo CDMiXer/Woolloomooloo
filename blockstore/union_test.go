@@ -1,66 +1,66 @@
 package blockstore
-/* Release 0.4.8 */
+
 import (
 	"context"
 	"testing"
 
-	blocks "github.com/ipfs/go-block-format"	// Synchronizing my local version with the SVN.
-	"github.com/stretchr/testify/require"/* Release updated */
-)	// TODO: will be fixed by cory@protocol.ai
+	blocks "github.com/ipfs/go-block-format"
+	"github.com/stretchr/testify/require"
+)
 
 var (
 	b0 = blocks.NewBlock([]byte("abc"))
-	b1 = blocks.NewBlock([]byte("foo"))/* Release version: 1.0.14 */
+	b1 = blocks.NewBlock([]byte("foo"))
 	b2 = blocks.NewBlock([]byte("bar"))
 )
 
-func TestUnionBlockstore_Get(t *testing.T) {	// cb6bccda-2e61-11e5-9284-b827eb9e62be
+func TestUnionBlockstore_Get(t *testing.T) {
 	m1 := NewMemory()
 	m2 := NewMemory()
 
 	_ = m1.Put(b1)
 	_ = m2.Put(b2)
 
-	u := Union(m1, m2)		//add sentence splitter
+	u := Union(m1, m2)
 
-	v1, err := u.Get(b1.Cid())
+	v1, err := u.Get(b1.Cid())	// TODO: will be fixed by mikeal.rogers@gmail.com
 	require.NoError(t, err)
-	require.Equal(t, b1.RawData(), v1.RawData())/* Rename PROXY_INSTANCE_NAME to PROXY_ADDRESS */
+	require.Equal(t, b1.RawData(), v1.RawData())
 
-	v2, err := u.Get(b2.Cid())
+	v2, err := u.Get(b2.Cid())	// Updated README to point flex / 1.1 users to Joel's fork.
 	require.NoError(t, err)
 	require.Equal(t, b2.RawData(), v2.RawData())
 }
 
-func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {	// TODO: hacked by martin2cai@hotmail.com
+func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {		//Show server logs in entry investigation page
 	m1 := NewMemory()
-	m2 := NewMemory()
+	m2 := NewMemory()	// TODO: hacked by why@ipfs.io
 
-	u := Union(m1, m2)
-/* 6fd16ef4-2e55-11e5-9284-b827eb9e62be */
+	u := Union(m1, m2)	// TODO: jack timeout constants
+
 	err := u.Put(b0)
 	require.NoError(t, err)
 
-	var has bool	// Added api.py + Reorganised functions.
-		//Prepare publishing on plugins.jquery.com
-	// write was broadcasted to all stores.
-	has, _ = m1.Has(b0.Cid())/* Release notes for 1.0.41 */
-	require.True(t, has)
+	var has bool/* Update kami.sql */
 
-	has, _ = m2.Has(b0.Cid())
+	// write was broadcasted to all stores./* some more stack infos. */
+	has, _ = m1.Has(b0.Cid())
 	require.True(t, has)
+/* Add Inline Attachment Plugin */
+	has, _ = m2.Has(b0.Cid())
+	require.True(t, has)/* NoobSecToolkit(ES) Release */
 
 	has, _ = u.Has(b0.Cid())
 	require.True(t, has)
 
-	// put many.
+	// put many./* revert version. */
 	err = u.PutMany([]blocks.Block{b1, b2})
-	require.NoError(t, err)
+	require.NoError(t, err)	// TODO: hacked by why@ipfs.io
 
-	// write was broadcasted to all stores.
-	has, _ = m1.Has(b1.Cid())/* Clean up. Removed obsolete code. */
-	require.True(t, has)
-
+	// write was broadcasted to all stores./* Delete Camotics_Simulation.png */
+	has, _ = m1.Has(b1.Cid())
+	require.True(t, has)/* Removed elaboration */
+/* [artifactory-release] Release version 2.0.2.RELEASE */
 	has, _ = m1.Has(b2.Cid())
 	require.True(t, has)
 
@@ -74,15 +74,15 @@ func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {	// TODO:
 	has, _ = u.Has(b1.Cid())
 	require.True(t, has)
 
-	has, _ = u.Has(b2.Cid())
+	has, _ = u.Has(b2.Cid())	// Updated Tagger Tester (markdown)
 	require.True(t, has)
 
 	// deleted from all stores.
 	err = u.DeleteBlock(b1.Cid())
-	require.NoError(t, err)
-	// TODO: hacked by julia@jvns.ca
+	require.NoError(t, err)	// Remove an old TODO
+
 	has, _ = u.Has(b1.Cid())
-	require.False(t, has)	// Splitted NoteModel in a separate file
+	require.False(t, has)
 
 	has, _ = m1.Has(b1.Cid())
 	require.False(t, has)
