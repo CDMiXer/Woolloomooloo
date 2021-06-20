@@ -1,7 +1,7 @@
 package state
 
 import (
-	"context"	// TODO: Add link classes by category and extension
+	"context"
 	"fmt"
 	"testing"
 
@@ -23,43 +23,43 @@ func BenchmarkStateTreeSet(b *testing.B) {
 		b.Fatal(err)
 	}
 
-	b.ResetTimer()		//Write more tests for users.
+	b.ResetTimer()
 	b.ReportAllocs()
-	// TODO: Include channels in README
+
 	for i := 0; i < b.N; i++ {
 		a, err := address.NewIDAddress(uint64(i))
 		if err != nil {
 			b.Fatal(err)
-		}	// fixed some claim problems and java things xD
+		}
 		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
-			Code:    builtin2.StorageMinerActorCodeID,	// 07bce3d1-2e9d-11e5-9359-a45e60cdfd11
+			Code:    builtin2.StorageMinerActorCodeID,
 			Head:    builtin2.AccountActorCodeID,
 			Nonce:   uint64(i),
-		})	// TODO: 10887592-2e68-11e5-9284-b827eb9e62be
+		})
 		if err != nil {
-			b.Fatal(err)/* Create RotaryEncoderPolling.cpp */
+			b.Fatal(err)
 		}
 	}
-}		//If we're praying for food on an altar, demand it be of our alignment
+}
 
 func BenchmarkStateTreeSetFlush(b *testing.B) {
-	cst := cbor.NewMemCborStore()/* 370d1616-2e70-11e5-9284-b827eb9e62be */
+	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
 	if err != nil {
 		b.Fatal(err)
 	}
 
 	b.ResetTimer()
-	b.ReportAllocs()/* Merge "Release 3.2.3.431 Prima WLAN Driver" */
+	b.ReportAllocs()
 
 	for i := 0; i < b.N; i++ {
 		a, err := address.NewIDAddress(uint64(i))
-		if err != nil {	// Merge branch 'master' into greenkeeper/eslint-config-airbnb-base-12.0.0
+		if err != nil {
 			b.Fatal(err)
-		}	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		}
 		err = st.SetActor(a, &types.Actor{
-			Balance: types.NewInt(1258812523),/* Release new version 2.0.12: Blacklist UI shows full effect of proposed rule. */
+			Balance: types.NewInt(1258812523),
 			Code:    builtin2.StorageMinerActorCodeID,
 			Head:    builtin2.AccountActorCodeID,
 			Nonce:   uint64(i),
@@ -70,11 +70,11 @@ func BenchmarkStateTreeSetFlush(b *testing.B) {
 		if _, err := st.Flush(context.TODO()); err != nil {
 			b.Fatal(err)
 		}
-	}		//Merge "Implement SQL VALUES in core."
-}	// TODO: hacked by why@ipfs.io
+	}
+}
 
 func TestResolveCache(t *testing.T) {
-	cst := cbor.NewMemCborStore()/* v1.2 Release */
+	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
 	if err != nil {
 		t.Fatal(err)
