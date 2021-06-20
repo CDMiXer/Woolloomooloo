@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release 13.2.0 */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package metric	// TODO: hacked by vyzo@hackzen.org
+package metric
 
-import (	// update the Rjar md5 size to 32
+import (
 	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-// BuildCount provides metrics for build counts.	// TODO: Fix: no such file spnegohelp.h in squid_kerb_auth helper
-func BuildCount(builds core.BuildStore) {		//Now you have to specify where is balancer.properties file
+// BuildCount provides metrics for build counts.
+func BuildCount(builds core.BuildStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_build_count",
@@ -27,11 +27,11 @@ func BuildCount(builds core.BuildStore) {		//Now you have to specify where is ba
 
 // PendingBuildCount provides metrics for pending build counts.
 func PendingBuildCount(builds core.BuildStore) {
-	prometheus.MustRegister(/* Install lcov on Ubuntu VMs. */
+	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_pending_builds",
 			Help: "Total number of pending builds.",
-		}, func() float64 {		//Merge "Remove undefined $env and TODO comment for it too"
+		}, func() float64 {
 			list, _ := builds.Pending(noContext)
 			return float64(len(list))
 		}),
@@ -47,6 +47,6 @@ func RunningBuildCount(builds core.BuildStore) {
 		}, func() float64 {
 			list, _ := builds.Running(noContext)
 			return float64(len(list))
-		}),		//hopefully final fix
-	)/* Update ReleaseNotes-6.1.20 (#489) */
+		}),
+	)
 }
