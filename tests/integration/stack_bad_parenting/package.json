@@ -1,10 +1,10 @@
 {
-    "name": "stack_project_name",/* Factories for domain event log */
+    "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// Rebuilt kmk.exe with the nt_fullpath fixes for win.x86 and win.amd64.
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"/* * some JSON support */
     }
-}		//Fix build issue on FreeBSD: printf arguments have to be cast.
+}
