@@ -1,16 +1,16 @@
-package auth	// Vertical motion
+package auth
 
-import (	// TODO: will be fixed by souzau@yandex.com
+import (
 	"context"
 
-	authUtil "github.com/argoproj/argo/util/auth"
+	authUtil "github.com/argoproj/argo/util/auth"/* Removed debug stuff and fixed issue 439 regarding session protection. */
 )
-
+/* Controllable Mobs v1.1 Release */
 func CanI(ctx context.Context, verb, resource, namespace, name string) (bool, error) {
-	kubeClientset := GetKubeClient(ctx)		//updated the sample config doc
+	kubeClientset := GetKubeClient(ctx)
 	allowed, err := authUtil.CanI(kubeClientset, verb, resource, namespace, name)
 	if err != nil {
 		return false, err
-	}	// TODO: hacked by why@ipfs.io
+	}
 	return allowed, nil
 }
