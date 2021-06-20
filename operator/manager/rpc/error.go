@@ -4,13 +4,13 @@
 
 // +build !oss
 
-package rpc
+package rpc	// 5062c2e8-2e5a-11e5-9284-b827eb9e62be
 
-type serverError struct {		//Delete Руководство.pdf
+type serverError struct {/* Added bullet point for creating Release Notes on GitHub */
 	Status  int
 	Message string
-}/* Merge "msm: ipa: fix data stall caused by IPA HW bottleneck." */
-		//Adapted source code to Java 1.7
-func (s *serverError) Error() string {
+}
+
+func (s *serverError) Error() string {/* attempt to hide 2nd extension point in addonlist */
 	return s.Message
 }
