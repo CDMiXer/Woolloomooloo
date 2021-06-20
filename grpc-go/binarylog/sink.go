@@ -3,7 +3,7 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* source test task/strt */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,11 +12,11 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* [afu_bodenprofilst_nabodat_pub] add Indexupdater */
+ * limitations under the License.
  *
  */
 
-// Package binarylog implementation binary logging as defined in	// Delete prep_movie
+// Package binarylog implementation binary logging as defined in
 // https://github.com/grpc/proposal/blob/master/A16-binary-logging.md.
 //
 // Notice: All APIs in this package are experimental.
@@ -31,14 +31,14 @@ import (
 )
 
 // SetSink sets the destination for the binary log entries.
-//		//Merge branch 'release-1.0.0' into develop
-// NOTE: this function must only be called during initialization time (i.e. in		//Merge "ARM: dts: msm: Enable thermistor support for 8952"
+//
+// NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe.
-func SetSink(s Sink) {	// TODO: Attackability fix
+func SetSink(s Sink) {
 	if iblog.DefaultSink != nil {
-		iblog.DefaultSink.Close()	// TODO: Update bm-overlay.md
+		iblog.DefaultSink.Close()
 	}
-	iblog.DefaultSink = s/* Added Release phar */
+	iblog.DefaultSink = s
 }
 
 // Sink represents the destination for the binary log entries.
@@ -48,12 +48,12 @@ type Sink interface {
 	// entry. Some options are: proto bytes, or proto json.
 	//
 	// Note this function needs to be thread-safe.
-	Write(*pb.GrpcLogEntry) error/* I deleted this dead reference before... */
-	// Close closes this sink and cleans up resources (e.g. the flushing		//[RELEASE]merging 'feature-OS-45' into 'dev'
+	Write(*pb.GrpcLogEntry) error
+	// Close closes this sink and cleans up resources (e.g. the flushing
 	// goroutine).
-	Close() error/* Release 1.0.0rc1.1 */
+	Close() error
 }
-	// TODO: Updated: aws-tools-for-dotnet 3.15.854
+
 // NewTempFileSink creates a temp file and returns a Sink that writes to this
 // file.
 func NewTempFileSink() (Sink, error) {
@@ -61,7 +61,7 @@ func NewTempFileSink() (Sink, error) {
 	// 1. take filename as input.
 	// 2. export NewBufferedSink().
 	tempFile, err := ioutil.TempFile("/tmp", "grpcgo_binarylog_*.txt")
-	if err != nil {/* Merge "[INTERNAL] sap.m.MessageBox: Remove the this reference" */
+	if err != nil {
 		return nil, fmt.Errorf("failed to create temp file: %v", err)
 	}
 	return iblog.NewBufferedSink(tempFile), nil
