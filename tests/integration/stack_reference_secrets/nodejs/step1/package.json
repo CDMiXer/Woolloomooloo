@@ -1,9 +1,9 @@
 {
-    "name": "typescript",		//add intrinsic for vnot/vbitnot
+    "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
-    },/* don't ignore two test cases */
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* README: minor clarifications */
+        "@pulumi/pulumi": "latest"
     }
-}		//Merge "[FAB-9562] Typo in msp-identity-validity-rules.rst"
+}
