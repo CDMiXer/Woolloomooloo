@@ -1,41 +1,41 @@
-{/* Release of eeacms/energy-union-frontend:1.7-beta.20 */
-    "Ref": "refs/heads/master",/* correct req path */
-    "Repo": {	// TODO: cpanm outputs stuff at stderr
+{
+    "Ref": "refs/heads/master",
+    "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
-        "Namespace": "brydzewski",	// TODO: d7cc547c-2e70-11e5-9284-b827eb9e62be
+        "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,		//preauthenticationHandler demo
-        "Branch": "",
+        "Perm": null,/* Changed the SDK version to the March Release. */
+        "Branch": "",	// TODO: will be fixed by alan.shaw@protocol.ai
         "Private": true,
-        "Clone": "https://bitbucket.org/brydzewski/foo.git",	// Aplicacion Backend con sus modulos - Termiando
-        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
+        "Clone": "https://bitbucket.org/brydzewski/foo.git",
+        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",/* [artifactory-release] Release version 1.3.0.RC1 */
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"/* Updated samples with new MBException */
-    },		//Merge "configure: fix builtin detection w/-Werror"
-    "Commit": {	// TODO: added config option for skyblock maps, closes #37
+        "Updated": "0001-01-01T00:00:00Z"
+    },
+    "Commit": {
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
         "Message": "Update README\n",
         "Author": {
             "Name": "Brad Rydzewski",
-            "Email": "brad.rydzewski@gmail.com",
+            "Email": "brad.rydzewski@gmail.com",	// wait connect: accept nested arrays
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
-            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },		//Finished Card Dealing, set detection
+            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Fisst Full Release of SM1000A Package */
+        },
         "Committer": {
             "Name": "Brad Rydzewski",
-,"moc.liamg@ikswezdyr.darb" :"liamE"            
+            "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
         "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
-    "Sender": {
+    "Sender": {	// TODO: e3ff30d0-2e51-11e5-9284-b827eb9e62be
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
         "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
-}
+}/* 6f6d930e-2e6c-11e5-9284-b827eb9e62be */
