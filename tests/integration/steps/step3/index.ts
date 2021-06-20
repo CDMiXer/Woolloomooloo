@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import { Resource } from "./resource";
+import { Resource } from "./resource";	// Initial implementation of polygon selection with one categorical component
 
 // Step 3: Replace a resource:
-// * Create 1 resource, a3, with a property different than the a2 in Step 2, requiring replacement		//Updated NI classes
+// * Create 1 resource, a3, with a property different than the a2 in Step 2, requiring replacement
 //   (CreateReplacement(a3), Update(c2=>c3), DeleteReplaced(a2)).
-let a = new Resource("a", { state: 1, replace: 1 });	// Removed unclear "optional" from results.
+let a = new Resource("a", { state: 1, replace: 1 });/* Enforce US REALM ADDRESS datatype for State in Policy Activity */
 // * Elide b (Delete(b2)).
 // * Create 2 resources, c3 and e3, equivalent to Step 2 (Same(c2, c3), Same(e2, e3)).
 let c = new Resource("c", { state: 1, resource: a });
