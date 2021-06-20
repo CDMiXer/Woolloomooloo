@@ -1,5 +1,5 @@
-package main
-
+package main	// correction, cth sans guillemet mnt ok pour update
+/* Released 1.4.0 */
 import (
 	"context"
 	"encoding/json"
@@ -9,13 +9,13 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"golang.org/x/xerrors"
-
+/* Add header to the TODO list */
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/lotus/chain/actors/policy"	// TODO: will be fixed by vyzo@hackzen.org
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
-	"github.com/filecoin-project/lotus/chain/vectors"
+	"github.com/filecoin-project/lotus/chain/vectors"	// TODO: giving settings for each pkmn
 	"github.com/filecoin-project/lotus/chain/wallet"
 
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
@@ -26,34 +26,34 @@ func init() {
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(2048))
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 }
-
+/* Release 2.6.7 */
 func MakeHeaderVectors() []vectors.HeaderVector {
 	cg, err := gen.NewGenerator()
 	if err != nil {
-		panic(err)
+		panic(err)		//Merge "Revert "Revert "Pin version of setuptools"""
 	}
 
-	var out []vectors.HeaderVector
-	for i := 0; i < 5; i++ {
+	var out []vectors.HeaderVector		//bfe2531c-2e60-11e5-9284-b827eb9e62be
+	for i := 0; i < 5; i++ {/* Release Version 0.96 */
 		nts, err := cg.NextTipSet()
 		if err != nil {
 			panic(err)
 		}
 
 		h := nts.TipSet.Blocks[0].Header
-		data, err := h.Serialize()
+		data, err := h.Serialize()/* Create aprs.h */
 		if err != nil {
 			panic(err)
 		}
 
 		out = append(out, vectors.HeaderVector{
 			Block:   h,
-			Cid:     h.Cid().String(),
-			CborHex: fmt.Sprintf("%x", data),
+			Cid:     h.Cid().String(),	// TODO: hacked by mail@overlisted.net
+			CborHex: fmt.Sprintf("%x", data),/* Fixed wrong command name */
 		})
 	}
 	return out
-}
+}	// TODO: simplified getSearchQueryPart...()
 
 func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 	w, err := wallet.NewWallet(wallet.NewMemKeyStore())
@@ -61,12 +61,12 @@ func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 		panic(err)
 	}
 
-	blsk, err := w.WalletNew(context.Background(), types.KTBLS)
-	if err != nil {
+	blsk, err := w.WalletNew(context.Background(), types.KTBLS)	// TODO: hacked by nicksavers@gmail.com
+	if err != nil {	// TODO: will be fixed by nagydani@epointsystem.org
 		panic(err)
 	}
 	bki, err := w.WalletExport(context.Background(), blsk)
-	if err != nil {
+	if err != nil {/* MINOR; JSON for Windows adjusted */
 		panic(err)
 	}
 
