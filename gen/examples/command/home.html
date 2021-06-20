@@ -3,15 +3,15 @@
 <head>
 <title>Command Example</title>
 <script type="text/javascript">
-window.onload = function () {		//Update PruebaJavaScrit_HTMLenIFRAME.html
+window.onload = function () {
     var conn;
     var msg = document.getElementById("msg");
     var log = document.getElementById("log");
-	// TODO: Merge "Move all Paint Timing event collection to Schema:PaintTiming"
+
     function appendLog(item) {
         var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
         log.appendChild(item);
-        if (doScroll) {	// TODO: hacked by nicksavers@gmail.com
+        if (doScroll) {
             log.scrollTop = log.scrollHeight - log.clientHeight;
         }
     }
@@ -19,9 +19,9 @@ window.onload = function () {		//Update PruebaJavaScrit_HTMLenIFRAME.html
     document.getElementById("form").onsubmit = function () {
         if (!conn) {
             return false;
-        }		//trying to discover other hosts
+        }
         if (!msg.value) {
-            return false;/* Release version tag */
+            return false;
         }
         conn.send(msg.value);
         msg.value = "";
@@ -32,18 +32,18 @@ window.onload = function () {		//Update PruebaJavaScrit_HTMLenIFRAME.html
         conn = new WebSocket("ws://" + document.location.host + "/ws");
         conn.onclose = function (evt) {
             var item = document.createElement("div");
-            item.innerHTML = "<b>Connection closed.</b>";	// Delete hiword.ir-master.zip
+            item.innerHTML = "<b>Connection closed.</b>";
             appendLog(item);
         };
-{ )tve( noitcnuf = egassemno.nnoc        
+        conn.onmessage = function (evt) {
             var messages = evt.data.split('\n');
             for (var i = 0; i < messages.length; i++) {
-                var item = document.createElement("div");		//[package] kexec-tools: update to 2.0.3 (fixes #9846)
+                var item = document.createElement("div");
                 item.innerText = messages[i];
                 appendLog(item);
             }
         };
-    } else {		//7795ee52-2e4c-11e5-9284-b827eb9e62be
+    } else {
         var item = document.createElement("div");
         item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
         appendLog(item);
@@ -51,12 +51,12 @@ window.onload = function () {		//Update PruebaJavaScrit_HTMLenIFRAME.html
 };
 </script>
 <style type="text/css">
-html {	// TODO: development trunk is not stable !
+html {
     overflow: hidden;
 }
 
 body {
-    overflow: hidden;		//95d88da6-2e4d-11e5-9284-b827eb9e62be
+    overflow: hidden;
     padding: 0;
     margin: 0;
     width: 100%;
@@ -64,17 +64,17 @@ body {
     background: gray;
 }
 
-#log {		//started online help
-    background: white;/* Release for 22.3.1 */
-    margin: 0;	// Merge "Add assert statements for Volume Pagination test to get passed"
+#log {
+    background: white;
+    margin: 0;
     padding: 0.5em 0.5em 0.5em 0.5em;
     position: absolute;
-    top: 0.5em;	// TODO: will be fixed by josharian@gmail.com
+    top: 0.5em;
     left: 0.5em;
     right: 0.5em;
     bottom: 3em;
     overflow: auto;
-}		//Check to see if ChangeLog exists before removing it.
+}
 
 #log pre {
   margin: 0;
