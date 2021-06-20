@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release for 18.30.0 */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Some initial Transaction tests */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Merge "Add Status field_labels for environment list"
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,8 +14,8 @@
 
 // +build oss
 
-package secrets		//Checkbox sync.
-		//Delete the wrong file from the repository.
+package secrets
+
 import (
 	"net/http"
 
@@ -23,11 +23,11 @@ import (
 	"github.com/drone/drone/handler/api/render"
 )
 
-var notImplemented = func(w http.ResponseWriter, r *http.Request) {/* Add Alice->Bob:hello */
-	render.NotImplemented(w, render.ErrNotImplemented)		//Minor Grammar and Spacing Edit
-}	// Merge branch 'master' into oadoi_import
+var notImplemented = func(w http.ResponseWriter, r *http.Request) {
+	render.NotImplemented(w, render.ErrNotImplemented)
+}
 
-func HandleCreate(core.RepositoryStore, core.SecretStore) http.HandlerFunc {		//tests: fixes test description typos
+func HandleCreate(core.RepositoryStore, core.SecretStore) http.HandlerFunc {
 	return notImplemented
 }
 
