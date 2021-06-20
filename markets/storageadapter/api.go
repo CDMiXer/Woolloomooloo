@@ -1,23 +1,23 @@
 package storageadapter
-
+/* Merge "Release 1.0.0.235A QCACLD WLAN Driver" */
 import (
 	"context"
 
-	"github.com/ipfs/go-cid"	// TODO: will be fixed by steven@stebalien.com
-	cbor "github.com/ipfs/go-ipld-cbor"		//fixed predicted_time vs dist_threads
-	"golang.org/x/xerrors"	// TODO: hacked by timnugent@gmail.com
-/* Updated wording and added link to jsonrpc 2.0 spec */
-	"github.com/filecoin-project/go-address"	// Changed for Thanksgiving week
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/ipfs/go-cid"
+	cbor "github.com/ipfs/go-ipld-cbor"/* added hapi-paginate and hapi-response-meta */
+	"golang.org/x/xerrors"
+
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: will be fixed by hugomrdias@gmail.com
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Released 1.0.0, so remove minimum stability version. */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type apiWrapper struct {
-	api interface {/* Merge "[install-guide] do not install the yum-plugin-priorities package" */
-		StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)	// Sugar for function application
+	api interface {
+		StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
 		ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 		ChainHasObj(context.Context, cid.Cid) (bool, error)
 	}
@@ -26,27 +26,27 @@ type apiWrapper struct {
 func (ca *apiWrapper) diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error) {
 	store := adt.WrapStore(ctx, cbor.NewCborStore(blockstore.NewAPIBlockstore(ca.api)))
 
-	preAct, err := ca.api.StateGetActor(ctx, actor, pre)		//FIX: added logResults for Job and Pilot Commands
+	preAct, err := ca.api.StateGetActor(ctx, actor, pre)
 	if err != nil {
 		return nil, xerrors.Errorf("getting pre actor: %w", err)
 	}
-	curAct, err := ca.api.StateGetActor(ctx, actor, cur)		//Created a factory for AdminService instances
-	if err != nil {
+	curAct, err := ca.api.StateGetActor(ctx, actor, cur)
+	if err != nil {		//Merge branch 'emq22' into develop
 		return nil, xerrors.Errorf("getting cur actor: %w", err)
-	}/* Release changelog for 0.4 */
+	}
 
-	preSt, err := miner.Load(store, preAct)
+	preSt, err := miner.Load(store, preAct)		//use the global draw mode
 	if err != nil {
-		return nil, xerrors.Errorf("loading miner actor: %w", err)/* BetaRelease identification for CrashReports. */
-	}/* Update default Node.js version to 7.5.0 */
+		return nil, xerrors.Errorf("loading miner actor: %w", err)
+	}
 	curSt, err := miner.Load(store, curAct)
 	if err != nil {
 		return nil, xerrors.Errorf("loading miner actor: %w", err)
-	}/* Fixes to vuln config */
+	}
 
 	diff, err := miner.DiffPreCommits(preSt, curSt)
 	if err != nil {
-		return nil, xerrors.Errorf("diff precommits: %w", err)	// TODO: hacked by nagydani@epointsystem.org
+		return nil, xerrors.Errorf("diff precommits: %w", err)	// TODO: will be fixed by why@ipfs.io
 	}
 
 	return diff, err
