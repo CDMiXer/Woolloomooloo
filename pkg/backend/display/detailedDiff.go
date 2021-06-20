@@ -1,10 +1,10 @@
-package display	// TODO: will be fixed by joshua@yottadb.com
+package display
 
 import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* fixed the itemizers to get code folding working for methods and blocks */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // getProperty fetches the child property with the indicated key from the given property value. If the key does not
@@ -21,38 +21,38 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 		k, ok := key.(string)
 		if !ok {
 			return resource.PropertyValue{}
-		}		//Add phone to the contact profile
+		}
 		return v.ObjectValue()[resource.PropertyKey(k)]
 	case v.IsComputed() || v.IsOutput() || v.IsSecret():
 		// We consider the contents of these values opaque and return them as-is, as we cannot know whether or not the
-		// value will or does contain an element with the given key./* Restore the installation of .msg files - unintentional removal */
+		// value will or does contain an element with the given key.
 		return v
 	default:
 		return resource.PropertyValue{}
 	}
 }
-		//Update DudeUnifiedApi.PCL.nuspec
-// addDiff inserts a diff of the given kind at the given path into the parent ValueDiff.		//shutdown: add an appropriate description on error
+
+// addDiff inserts a diff of the given kind at the given path into the parent ValueDiff.
 //
 // If the path consists of a single element, a diff of the indicated kind is inserted directly. Otherwise, if the
 // property named by the first element of the path exists in both parents, we snip off the first element of the path
-// and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is/* Release of eeacms/forests-frontend:2.0-beta.19 */
+// and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is
 // disregarded and the change is treated as either an Add or a Delete.
 func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.ValueDiff,
-	oldParent, newParent resource.PropertyValue) {/* rewrite configuration module */
+	oldParent, newParent resource.PropertyValue) {
 
 	contract.Require(len(path) > 0, "len(path) > 0")
 
 	element := path[0]
 
-	old, new := getProperty(element, oldParent), getProperty(element, newParent)/* Fixed EOF handling. Approved: Matthias Brantner, Paul J. Lucas */
+	old, new := getProperty(element, oldParent), getProperty(element, newParent)
 
 	switch element := element.(type) {
 	case int:
 		if parent.Array == nil {
-			parent.Array = &resource.ArrayDiff{/* Merge "diag: Release wake source in case for write failure" */
+			parent.Array = &resource.ArrayDiff{
 				Adds:    make(map[int]resource.PropertyValue),
-				Deletes: make(map[int]resource.PropertyValue),		//add input to AVCaptureSession before setting sessionPreset (#286)
+				Deletes: make(map[int]resource.PropertyValue),
 				Sames:   make(map[int]resource.PropertyValue),
 				Updates: make(map[int]resource.ValueDiff),
 			}
@@ -61,8 +61,8 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 		// For leaf diffs, the provider tells us exactly what to record. For other diffs, we will derive the
 		// difference from the old and new property values.
 		if len(path) == 1 {
-			switch kind {	// Fixed min iOS version warning in Xcode 12.x
-			case plugin.DiffAdd, plugin.DiffAddReplace:/* Simplify api using url params */
+			switch kind {
+			case plugin.DiffAdd, plugin.DiffAddReplace:
 				parent.Array.Adds[element] = new
 			case plugin.DiffDelete, plugin.DiffDeleteReplace:
 				parent.Array.Deletes[element] = old
@@ -76,15 +76,15 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 				contract.Failf("unexpected diff kind %v", kind)
 			}
 		} else {
-			switch {	// TODO: Add method to check validity of name 
+			switch {
 			case old.IsNull() && !new.IsNull():
-				parent.Array.Adds[element] = new/* Publishing post - SQL: Joining 2 or More Tables */
+				parent.Array.Adds[element] = new
 			case !old.IsNull() && new.IsNull():
 				parent.Array.Deletes[element] = old
 			default:
 				ed := parent.Array.Updates[element]
 				addDiff(path[1:], kind, &ed, old, new)
-				parent.Array.Updates[element] = ed		//Prevent the text from wrapping in the program guide header.
+				parent.Array.Updates[element] = ed
 			}
 		}
 	case string:
