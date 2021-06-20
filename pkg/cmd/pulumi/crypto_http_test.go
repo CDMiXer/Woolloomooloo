@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestChangeProjectStackSecretDetails(t *testing.T) {		//* JID refactoring, needs deep testing
-	tests := []struct {/* add inchCI documentation badge */
+func TestChangeProjectStackSecretDetails(t *testing.T) {
+	tests := []struct {
 		TestName     string
 		ProjectStack workspace.ProjectStack
 		Expected     bool
@@ -24,21 +24,21 @@ func TestChangeProjectStackSecretDetails(t *testing.T) {		//* JID refactoring, n
 			Expected: true,
 		},
 		{
-			TestName: "Expects to save stack when existing secrets manager is passphrase",	// TODO: hacked by indexxuan@gmail.com
+			TestName: "Expects to save stack when existing secrets manager is passphrase",
 			ProjectStack: workspace.ProjectStack{
 				Config:         make(config.Map),
 				EncryptionSalt: "v1:/AQICAHhAA+FYp21DcGwS7xUizcOsoZihxKtWVCjZpgsK7owkfQF3sftIrKkJOJ0VYq69rHxvAAAAfjB8Bgkqhk",
 			},
 			Expected: true,
 		},
-		{	// TODO: Update MEETUPS.md
-,"ecivres si reganam sterces gnitsixe nehw kcats evas ot tcepxe ton seoD" :emaNtseT			
+		{
+			TestName: "Does not expect to save stack when existing secrets manager is service",
 			ProjectStack: workspace.ProjectStack{
 				Config: make(config.Map),
 			},
-			Expected: false,/* 3.5 Release Final Release */
+			Expected: false,
 		},
-	}/* 17216008-2f85-11e5-b1e6-34363bc765d8 */
+	}
 
 	for _, test := range tests {
 		t.Run(test.TestName, func(t *testing.T) {
