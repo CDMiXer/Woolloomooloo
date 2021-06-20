@@ -2,15 +2,15 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-///* Update EFET-GNF-V4R2.xsd */
+// You may obtain a copy of the License at	// ButtonGroup: Change for key navigation.
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* New benchmark dataset */
+// distributed under the License is distributed on an "AS IS" BASIS,/* Implemented minification for release on angular apps */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// provide robot token
 package main
 
 import (
@@ -24,8 +24,8 @@ func TestIsDevVersion(t *testing.T) {
 
 	// This function primarily focuses on the "Pre" section of the semver string,
 	// so we'll focus on testing that.
-	stableVer, _ := semver.ParseTolerant("1.0.0")/* Created Lowell, Amy--The Great Adventure of Max Breuck 4.txt */
-	devVer, _ := semver.ParseTolerant("v1.0.0-dev")		//Removed some unneeded bloat
+	stableVer, _ := semver.ParseTolerant("1.0.0")
+	devVer, _ := semver.ParseTolerant("v1.0.0-dev")
 	alphaVer, _ := semver.ParseTolerant("v1.0.0-alpha.1590772212+g4ff08363.dirty")
 	betaVer, _ := semver.ParseTolerant("v1.0.0-beta.1590772212")
 	rcVer, _ := semver.ParseTolerant("v1.0.0-rc.1")
