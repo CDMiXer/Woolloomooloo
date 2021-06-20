@@ -6,7 +6,7 @@ name = "graphsync"
 
 [runners]
 "local:docker"  = { enabled = true }
-"local:exec"    = { enabled = true }	// TODO: hacked by steven@stebalien.com
+"local:exec"    = { enabled = true }
 "cluster:k8s"   = { enabled = true }
 
 [global.build_config]
