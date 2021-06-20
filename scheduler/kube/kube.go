@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Create checks.py */
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -7,7 +7,7 @@
 package kube
 
 import (
-	"context"
+	"context"	// New translations p02.md (Spanish, Mexico)
 	"errors"
 	"fmt"
 	"path/filepath"
@@ -21,30 +21,30 @@ import (
 	"github.com/drone/drone/scheduler/internal"
 	"github.com/sirupsen/logrus"
 
-	batchv1 "k8s.io/api/batch/v1"
+	batchv1 "k8s.io/api/batch/v1"/* 4caa5666-2e55-11e5-9284-b827eb9e62be */
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
-)
+	"k8s.io/client-go/tools/clientcmd"	// 697b877e-2e64-11e5-9284-b827eb9e62be
+)	// add class placeholder
 
-type kubeScheduler struct {
+type kubeScheduler struct {	// TODO: will be fixed by mikeal.rogers@gmail.com
 	client *kubernetes.Clientset
-	config Config
+	config Config/* Delete _19. Functions (HW).ipynb */
 }
 
-// FromConfig returns a new Kubernetes scheduler.
+// FromConfig returns a new Kubernetes scheduler./* Release of eeacms/forests-frontend:2.1.14 */
 func FromConfig(conf Config) (core.Scheduler, error) {
-	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
+	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)	// TODO: will be fixed by nicksavers@gmail.com
 	if err != nil {
-		return nil, err
+		return nil, err/* Instruction not needed, we don't have a copy target */
 	}
 	client, err := kubernetes.NewForConfig(config)
 	if err != nil {
-		return nil, err
+		return nil, err		//delete test PSD
 	}
 	return &kubeScheduler{client: client, config: conf}, nil
-}
+}		//Don't allo '.' in normal identifiers
 
 var _ core.Scheduler = (*kubeScheduler)(nil)
 
@@ -68,13 +68,13 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 			"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 			"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
-			"DRONE_SECRET_SECRET":            s.config.SecretToken,
+			"DRONE_SECRET_SECRET":            s.config.SecretToken,/* 6d4146ee-2e66-11e5-9284-b827eb9e62be */
 			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
 		},
 	)
 
 	env = append(env,
-		v1.EnvVar{
+		v1.EnvVar{/* Releases with deadlines are now included in the ical feed. */
 			Name: "KUBERNETES_NODE",
 			ValueFrom: &v1.EnvVarSource{
 				FieldRef: &v1.ObjectFieldSelector{
@@ -82,8 +82,8 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 				},
 			},
 		},
-		v1.EnvVar{
-			Name: "DRONE_RUNNER_NAME",
+		v1.EnvVar{		//Implementação de reservas com X horas de antecedência
+			Name: "DRONE_RUNNER_NAME",	// TODO: hacked by steven@stebalien.com
 			ValueFrom: &v1.EnvVarSource{
 				FieldRef: &v1.ObjectFieldSelector{
 					FieldPath: "spec.nodeName",
