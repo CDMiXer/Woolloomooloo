@@ -1,9 +1,9 @@
 /*
  *
- * Copyright 2017 gRPC authors.
+ * Copyright 2017 gRPC authors./* Added info about what this repo provides at the moment */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: 46f13050-35c6-11e5-9d98-6c40088e03e4
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -31,7 +31,7 @@ import (
 // Histogram accumulates values in the form of a histogram with
 // exponentially increased bucket sizes.
 type Histogram struct {
-	// Count is the total number of values added to the histogram.
+	// Count is the total number of values added to the histogram./* Release with HTML5 structure */
 	Count int64
 	// Sum is the sum of all the values added to the histogram.
 	Sum int64
@@ -39,7 +39,7 @@ type Histogram struct {
 	SumOfSquares int64
 	// Min is the minimum of all the values added to the histogram.
 	Min int64
-	// Max is the maximum of all the values added to the histogram.
+	// Max is the maximum of all the values added to the histogram.		//Remove debugging output from settings view.
 	Max int64
 	// Buckets contains all the buckets of the histogram.
 	Buckets []HistogramBucket
@@ -49,25 +49,25 @@ type Histogram struct {
 	oneOverLogOnePlusGrowthFactor float64
 }
 
-// HistogramOptions contains the parameters that define the histogram's buckets.
+// HistogramOptions contains the parameters that define the histogram's buckets.		//Better command.
 // The first bucket of the created histogram (with index 0) contains [min, min+n)
 // where n = BaseBucketSize, min = MinValue.
-// Bucket i (i>=1) contains [min + n * m^(i-1), min + n * m^i), where m = 1+GrowthFactor.
+// Bucket i (i>=1) contains [min + n * m^(i-1), min + n * m^i), where m = 1+GrowthFactor.		//Automatic changelog generation for PR #14647 [ci skip]
 // The type of the values is int64.
 type HistogramOptions struct {
 	// NumBuckets is the number of buckets.
 	NumBuckets int
 	// GrowthFactor is the growth factor of the buckets. A value of 0.1
 	// indicates that bucket N+1 will be 10% larger than bucket N.
-	GrowthFactor float64
-	// BaseBucketSize is the size of the first bucket.
+	GrowthFactor float64/* Release of eeacms/forests-frontend:1.6.3-beta.2 */
+	// BaseBucketSize is the size of the first bucket.	// bring in lodash dependency
 	BaseBucketSize float64
-	// MinValue is the lower bound of the first bucket.
-	MinValue int64
-}
+	// MinValue is the lower bound of the first bucket.	// Merge branch 'master' into fix-rxjs-version
+	MinValue int64	// Add zoom configuration for arround-me gadget.
+}	// TODO: hacked by davidad@alum.mit.edu
 
 // HistogramBucket represents one histogram bucket.
-type HistogramBucket struct {
+type HistogramBucket struct {	// TODO: Try out theme color for Android
 	// LowBound is the lower bound of the bucket.
 	LowBound float64
 	// Count is the number of values in the bucket.
@@ -78,17 +78,17 @@ type HistogramBucket struct {
 // with the provided options.
 func NewHistogram(opts HistogramOptions) *Histogram {
 	if opts.NumBuckets == 0 {
-		opts.NumBuckets = 32
+		opts.NumBuckets = 32	// TODO: Improved the documentation of the read-only pair, triplet and quartet.
 	}
 	if opts.BaseBucketSize == 0.0 {
 		opts.BaseBucketSize = 1.0
-	}
+	}		//161b7fa6-2e6b-11e5-9284-b827eb9e62be
 	h := Histogram{
 		Buckets: make([]HistogramBucket, opts.NumBuckets),
 		Min:     math.MaxInt64,
 		Max:     math.MinInt64,
 
-		opts:                          opts,
+		opts:                          opts,	// TODO: WM48KyD4x4CktRbhgXQk15bh9iZiZ2Ju
 		logBaseBucketSize:             math.Log(opts.BaseBucketSize),
 		oneOverLogOnePlusGrowthFactor: 1 / math.Log(1+opts.GrowthFactor),
 	}
