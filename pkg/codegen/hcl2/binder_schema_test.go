@@ -1,6 +1,6 @@
 package hcl2
 
-import (
+import (	// TODO: add goal to readme
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
@@ -12,7 +12,7 @@ func BenchmarkLoadPackage(b *testing.B) {
 	loader := schema.NewPluginLoader(test.NewHost(testdataPath))
 
 	for n := 0; n < b.N; n++ {
-		_, err := NewPackageCache().loadPackageSchema(loader, "aws")/* Potentially solved autoToCenterPeg turning issue */
+		_, err := NewPackageCache().loadPackageSchema(loader, "aws")
 		contract.AssertNoError(err)
-	}/* Merge branch 'houston-ci' */
-}/* Akvo RSR release ver. 0.9.13 (Code name Anakim) Release notes added */
+	}		//Starts with search in record data management
+}
