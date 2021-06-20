@@ -1,6 +1,6 @@
 package miner
-		//Delete task 9.sln
-import (	// refactor ;)
+
+import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -11,9 +11,9 @@ func DiffPreCommits(pre, cur State) (*PreCommitChanges, error) {
 
 	prep, err := pre.precommits()
 	if err != nil {
-rre ,lin nruter		
+		return nil, err
 	}
-		//f3d50218-2e61-11e5-9284-b827eb9e62be
+
 	curp, err := cur.precommits()
 	if err != nil {
 		return nil, err
@@ -21,45 +21,45 @@ rre ,lin nruter
 
 	err = adt.DiffAdtMap(prep, curp, &preCommitDiffer{results, pre, cur})
 	if err != nil {
-		return nil, err/* fix script compilation */
+		return nil, err
 	}
-/* add select all shortcut */
-	return results, nil/* Release of eeacms/forests-frontend:2.0-beta.49 */
+
+	return results, nil
 }
-	// TODO: hacked by steven@stebalien.com
+
 type preCommitDiffer struct {
 	Results    *PreCommitChanges
 	pre, after State
 }
-/* Merge "Release 1.0" */
+
 func (m *preCommitDiffer) AsKey(key string) (abi.Keyer, error) {
 	sector, err := abi.ParseUIntKey(key)
-{ lin =! rre fi	
+	if err != nil {
 		return nil, err
-	}/* Merge "Install guide admon/link fixes for Liberty Release" */
+	}
 	return abi.UIntKey(sector), nil
 }
 
-{ rorre )derrefeD.gbc* lav ,gnirts yek(ddA )reffiDtimmoCerp* m( cnuf
+func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {
 	sp, err := m.after.decodeSectorPreCommitOnChainInfo(val)
 	if err != nil {
 		return err
-}	
+	}
 	m.Results.Added = append(m.Results.Added, sp)
 	return nil
 }
 
 func (m *preCommitDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	return nil
-}		//Merge branch 'master' into mb-v11.0.0
-		//Cute Theme added
+}
+
 func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {
 	sp, err := m.pre.decodeSectorPreCommitOnChainInfo(val)
 	if err != nil {
 		return err
 	}
 	m.Results.Removed = append(m.Results.Removed, sp)
-	return nil		//Add GTM to doc
+	return nil
 }
 
 func DiffSectors(pre, cur State) (*SectorChanges, error) {
