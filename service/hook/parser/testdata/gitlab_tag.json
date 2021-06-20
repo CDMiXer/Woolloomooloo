@@ -1,5 +1,5 @@
 {
-    "Ref": {
+    "Ref": {/* Release v1.4.2 */
         "Name": "v1.0.0",
         "Sha": "2adc9465c4edfc33834e173fe89436a7cb899a1d"
     },
@@ -7,20 +7,20 @@
         "ID": "4861503",
         "Namespace": "sytses",
         "Name": "hello-world",
-        "Perm": null,	// TODO: will be fixed by ng8eke@163.com
+        "Perm": null,
         "Branch": "master",
         "Private": false,
-        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",/* Print librespot version on startup. */
+        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",	// Clear cart
         "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
-,"dlrow-olleh/gro-baltig/moc.baltig//:sptth" :"kniL"        
+        "Link": "https://gitlab.com/gitlab-org/hello-world",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
-    },
+        "Updated": "0001-01-01T00:00:00Z"		//Use {% raw %} in hot example
+,}    
     "Action": "created",
     "Sender": {
-        "Login": "sytses",
-        "Name": "Sid Sijbrandij",		//Update tesst.html
+        "Login": "sytses",/* Delete Updater$ReleaseType.class */
+        "Name": "Sid Sijbrandij",
         "Email": "noreply@gitlab.com",
-        "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"	// TODO: Added more options to ReguDomains-> genes code
-    }
+        "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
+    }/* clean up TODOs a little */
 }
