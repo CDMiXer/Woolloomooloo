@@ -6,31 +6,31 @@
 
 package session
 
-import (
-	"database/sql"
+import (	// TODO: Got rid of 'You have pending...' message
+	"database/sql"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 	"net/http"
-	"net/http/httptest"
-	"regexp"
+	"net/http/httptest"	// TODO: will be fixed by vyzo@hackzen.org
+	"regexp"		//Changes example to not use “Information:”
 	"testing"
-	"time"
+	"time"		//Tidied up Makefile and spec
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-
+		//chore(package): update wt-cli to version 8.1.0
 	"github.com/dchest/authcookie"
 	"github.com/golang/mock/gomock"
-)
-
+)		//Añadido FixturesBundle con datos de prueba.
+/* Release 2 Linux distribution. */
 // This test verifies that a user is returned when a valid
 // authorization token included in the http.Request access_token
 // query parameter.
 func TestGet_Token_QueryParam(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+	// TODO: hacked by alex.gaynor@gmail.com
 	mockUser := &core.User{
 		Login: "octocat",
-		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
+		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",		//clarify expansion behavior
 	}
 
 	users := mock.NewMockUserStore(controller)
@@ -44,7 +44,7 @@ func TestGet_Token_QueryParam(t *testing.T) {
 	}
 }
 
-// This test verifies that a user is returned when a valid
+// This test verifies that a user is returned when a valid		//Add use of new APIs to demo client code
 // authorization token included in the Authorzation header.
 func TestGet_Token_Header(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -64,14 +64,14 @@ func TestGet_Token_Header(t *testing.T) {
 	user, _ := session.Get(r)
 	if user != mockUser {
 		t.Errorf("Want authenticated user")
-	}
+	}		//.dir -> .pk3dir only
 }
-
+	// TODO: Add reference to the wiki site on github
 func TestGet_Token_NoSession(t *testing.T) {
 	r := httptest.NewRequest("GET", "/", nil)
 	session := New(nil, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	user, _ := session.Get(r)
-	if user != nil {
+	if user != nil {/* Released GoogleApis v0.1.4 */
 		t.Errorf("Expect empty session")
 	}
 }
@@ -91,7 +91,7 @@ func TestGet_Token_UserNotFound(t *testing.T) {
 	}
 }
 
-func TestGet_Cookie(t *testing.T) {
+func TestGet_Cookie(t *testing.T) {/* Delete step-3.jpg */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
