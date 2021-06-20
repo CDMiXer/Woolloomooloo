@@ -1,10 +1,10 @@
 {
-,"spets" :"eman"    
-    "license": "Apache-2.0",	// Merge "Make endpoint_type configurable"
-    "devDependencies": {
+    "name": "steps",
+    "license": "Apache-2.0",
+    "devDependencies": {		//Create ghsfdghsdfg
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Create WizardWar.json */
-        "@pulumi/pulumi": "latest"/* Update vm4.h */
-    }
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
+    }/* Release Notes: fix typo */
 }
