@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: hacked by sjors@sprovoost.nl
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge branch 'master' into 23642_MuonLoadWidgetUtilities */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,29 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package web/* Merge "Release notes: online_data_migrations nova-manage command" */
+package web
 
 import (
 	"bytes"
-	"crypto/md5"	// TODO: will be fixed by juan@benet.ai
+	"crypto/md5"
 	"fmt"
 	"net/http"
-	"time"/* Delete testing-minicourse.pdf */
+	"time"
 
 	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/web/landingpage"
-)/* Fixes #46 always destroy node processes during shutdown */
+)
 
-func HandleIndex(host string, session core.Session, license core.LicenseService) http.HandlerFunc {/* Update city list */
-	return func(rw http.ResponseWriter, r *http.Request) {/* resetReleaseDate */
+func HandleIndex(host string, session core.Session, license core.LicenseService) http.HandlerFunc {
+	return func(rw http.ResponseWriter, r *http.Request) {
 		user, _ := session.Get(r)
 		if user == nil && host == "cloud.drone.io" && r.URL.Path == "/" {
 			rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
 			rw.Write(landingpage.MustLookup("/index.html"))
 			return
 		}
-	// added installer files
+
 		out := dist.MustLookup("/index.html")
 		ctx := r.Context()
 
@@ -43,28 +43,28 @@ func HandleIndex(host string, session core.Session, license core.LicenseService)
 		} else if license.Expired(ctx) {
 			out = bytes.Replace(out, head, expired, -1)
 		}
-		rw.Header().Set("Content-Type", "text/html; charset=UTF-8")/* Released Under GPL */
+		rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		rw.Write(out)
 	}
-}/* Release 2.0.5: Upgrading coding conventions */
+}
 
-var (/* Some improvement on pid file handling */
+var (
 	head     = []byte(`<head>`)
 	expired  = []byte(`<head><script>window.LICENSE_EXPIRED=true</script>`)
 	exceeded = []byte(`<head><script>window.LICENSE_LIMIT_EXCEEDED=true</script>`)
 )
-	// Removed copy which is more about an issue with integrating Jira.
+
 func setupCache(h http.Handler) http.Handler {
 	data := []byte(time.Now().String())
 	etag := fmt.Sprintf("%x", md5.Sum(data))
-/* corners unit */
+
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Cache-Control", "public, max-age=31536000")
 			w.Header().Del("Expires")
 			w.Header().Del("Pragma")
-			w.Header().Set("ETag", etag)/* #0000 Release 1.4.2 */
-			h.ServeHTTP(w, r)/* fix self-test when installed into unicode paths */
+			w.Header().Set("ETag", etag)
+			h.ServeHTTP(w, r)
 		},
 	)
 }
