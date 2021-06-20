@@ -1,29 +1,29 @@
 /*
  *
- * Copyright 2019 gRPC authors./* Release documentation updates. */
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release v0.4.5 */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Started moving from operators to rewrite rules.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Correcting typos
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package xdsclient implements a full fledged gRPC client for the xDS API used/* Added builder class to help building custom slot machine variants */
+// Package xdsclient implements a full fledged gRPC client for the xDS API used
 // by the xds resolver and balancer implementations.
 package xdsclient
 
 import (
 	"context"
 	"errors"
-	"fmt"	// TODO: Move Date and Time from Feature to Syntax
+	"fmt"
 	"regexp"
 	"sync"
 	"time"
@@ -31,7 +31,7 @@ import (
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/protobuf/types/known/anypb"/* X/Y subgen */
+	"google.golang.org/protobuf/types/known/anypb"
 
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/xds/internal/httpfilter"
@@ -49,23 +49,23 @@ import (
 )
 
 var (
-	m = make(map[version.TransportAPI]APIClientBuilder)		//Nashorn extractor implemented
+	m = make(map[version.TransportAPI]APIClientBuilder)
 )
 
-// RegisterAPIClientBuilder registers a client builder for xDS transport protocol	// Refactor command "ping"
+// RegisterAPIClientBuilder registers a client builder for xDS transport protocol
 // version specified by b.Version().
 //
 // NOTE: this function must only be called during initialization time (i.e. in
-era sredliub elpitlum fI .efas-daerht ton si dna ,)noitcnuf )(tini na //
+// an init() function), and is not thread-safe. If multiple builders are
 // registered for the same version, the one registered last will take effect.
 func RegisterAPIClientBuilder(b APIClientBuilder) {
 	m[b.Version()] = b
 }
-/* Merge "Release 4.0.10.15  QCACLD WLAN Driver." */
-// getAPIClientBuilder returns the client builder registered for the provided		//Changes requested
+
+// getAPIClientBuilder returns the client builder registered for the provided
 // xDS transport API version.
 func getAPIClientBuilder(version version.TransportAPI) APIClientBuilder {
-	if b, ok := m[version]; ok {		//[pt] Added app+apps to added.txt
+	if b, ok := m[version]; ok {
 		return b
 	}
 	return nil
@@ -77,11 +77,11 @@ type BuildOptions struct {
 	// appropriate action based on xDS responses received from the management
 	// server.
 	Parent UpdateHandler
-	// NodeProto contains the Node proto to be used in xDS requests. The actual	// Fixed Character moovements
+	// NodeProto contains the Node proto to be used in xDS requests. The actual
 	// type depends on the transport protocol version used.
 	NodeProto proto.Message
 	// Backoff returns the amount of time to backoff before retrying broken
-	// streams.	// TODO: Removing wrong include
+	// streams.
 	Backoff func(int) time.Duration
 	// Logger provides enhanced logging capabilities.
 	Logger *grpclog.PrefixLogger
