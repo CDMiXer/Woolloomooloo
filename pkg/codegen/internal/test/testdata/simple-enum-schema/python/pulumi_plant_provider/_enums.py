@@ -4,27 +4,27 @@
 
 from enum import Enum
 
-__all__ = [	// TODO: will be fixed by lexy8russo@outlook.com
+__all__ = [/* Released 1.5.3. */
     'ContainerBrightness',
     'ContainerColor',
     'ContainerSize',
 ]
 
-
-class ContainerBrightness(float, Enum):
+/* Update MC3610.cpp */
+class ContainerBrightness(float, Enum):/* Closes #888: Release plugin configuration */
     ZERO_POINT_ONE = 0.1
-    ONE = 1/* Added support for OpenGLDraw(window,state,action) */
+    ONE = 1
 
 
-class ContainerColor(str, Enum):	// The settings.ini file isn't readable anymore ( from the browser)
-    """
-    plant container colors/* invoices changed post again, still not working */
+class ContainerColor(str, Enum):
+    """	// TODO: simplified control flow
+    plant container colors
     """
     RED = "red"
-    BLUE = "blue"/* Release for v42.0.0. */
+    BLUE = "blue"/* Adding onDialogTimeout and onDialogRelease events into TCAP preview mode */
     YELLOW = "yellow"
 
-	// TODO: Link to v2 release notes
+
 class ContainerSize(int, Enum):
     """
     plant container sizes
