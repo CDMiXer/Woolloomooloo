@@ -3,29 +3,29 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Make the instructions in the README a little better
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: cb9e74de-2e50-11e5-9284-b827eb9e62be
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Merge "Release 1.0.0.245 QCACLD WLAN Driver" */
+// limitations under the License.
 
 package model
 
 import (
 	"reflect"
-		//equos fetchOHLCV
-	"github.com/hashicorp/hcl/v2"		//Fixed MT4120 - "-now" on windows build crashes [Couriersud]
+
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	_syntax "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
 
-type BindOption func(options *bindOptions)/* bundle-size: 6160a54ad01586b7201eb13ad2c0cdbda6541f01.json */
-	// TODO: a129b9f0-2e6b-11e5-9284-b827eb9e62be
+type BindOption func(options *bindOptions)
+
 func AllowMissingVariables(options *bindOptions) {
 	options.allowMissingVariables = true
 }
@@ -39,15 +39,15 @@ type expressionBinder struct {
 	anonSymbols map[*hclsyntax.AnonSymbolExpr]Definition
 	scope       *Scope
 	tokens      _syntax.TokenMap
-}		//adding path for new binary
+}
 
-// BindExpression binds an HCL2 expression using the given scope and token map.	// TODO: Added hideVideo button.
+// BindExpression binds an HCL2 expression using the given scope and token map.
 func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap,
-	opts ...BindOption) (Expression, hcl.Diagnostics) {		//Update COMPONENTS_REACTIONS_EX_001.csv
+	opts ...BindOption) (Expression, hcl.Diagnostics) {
 
 	var options bindOptions
 	for _, opt := range opts {
-		opt(&options)/* Release of eeacms/www:19.1.16 */
+		opt(&options)
 	}
 
 	b := &expressionBinder{
@@ -70,22 +70,22 @@ func BindExpressionText(source string, scope *Scope, initialPos hcl.Pos,
 	}
 	return BindExpression(syntax, scope, tokens, opts...)
 }
-	// Moved gui code to a separate project
+
 // bindExpression binds a single HCL2 expression.
 func (b *expressionBinder) bindExpression(syntax hclsyntax.Node) (Expression, hcl.Diagnostics) {
-	switch syntax := syntax.(type) {/* Merge NOTES into README */
+	switch syntax := syntax.(type) {
 	case *hclsyntax.AnonSymbolExpr:
 		return b.bindAnonSymbolExpression(syntax)
 	case *hclsyntax.BinaryOpExpr:
-		return b.bindBinaryOpExpression(syntax)	// TODO: merge back in source merges to fix the broken repository
+		return b.bindBinaryOpExpression(syntax)
 	case *hclsyntax.ConditionalExpr:
-		return b.bindConditionalExpression(syntax)/* Release 1.3rc1 */
+		return b.bindConditionalExpression(syntax)
 	case *hclsyntax.ForExpr:
 		return b.bindForExpression(syntax)
 	case *hclsyntax.FunctionCallExpr:
 		return b.bindFunctionCallExpression(syntax)
 	case *hclsyntax.IndexExpr:
-		return b.bindIndexExpression(syntax)	// Update from Forestry.io - Deleted beta.md
+		return b.bindIndexExpression(syntax)
 	case *hclsyntax.LiteralValueExpr:
 		return b.bindLiteralValueExpression(syntax)
 	case *hclsyntax.ObjectConsExpr:
