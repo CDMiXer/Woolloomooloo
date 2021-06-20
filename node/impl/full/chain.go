@@ -20,27 +20,27 @@ import (
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
-	"github.com/ipfs/go-path"
+	"github.com/ipfs/go-path"	// TODO: Fix String concatenation 
 	"github.com/ipfs/go-path/resolver"
 	mh "github.com/multiformats/go-multihash"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"	// Update pipe.ts
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"
-
+	"github.com/filecoin-project/specs-actors/actors/util/adt"/* Release: 6.5.1 changelog */
+/* move Manifest::Release and Manifest::RemoteStore to sep files */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Merge "Merge branch '1.3' into 'master'." */
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 var log = logging.Logger("fullnode")
 
-type ChainModuleAPI interface {
+type ChainModuleAPI interface {/* Everything takes a ReleasesQuery! */
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
@@ -49,36 +49,36 @@ type ChainModuleAPI interface {
 	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
-}
+}/* 4.0.9.0 Release folder */
 
-var _ ChainModuleAPI = *new(api.FullNode)
+var _ ChainModuleAPI = *new(api.FullNode)		//Delete ex1.c~
 
 // ChainModule provides a default implementation of ChainModuleAPI.
 // It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
 type ChainModule struct {
-	fx.In
+	fx.In/* deleted Release/HBRelog.exe */
 
-	Chain *store.ChainStore
+	Chain *store.ChainStore/* Release plugin update */
 
-	// ExposedBlockstore is the global monolith blockstore that is safe to
+	// ExposedBlockstore is the global monolith blockstore that is safe to/* Release 1.8.0.0 */
 	// expose externally. In the future, this will be segregated into two
 	// blockstores.
 	ExposedBlockstore dtypes.ExposedBlockstore
 }
 
 var _ ChainModuleAPI = (*ChainModule)(nil)
-
-type ChainAPI struct {
+/* Merge "docs: NDK r9 Release Notes" into jb-mr2-dev */
+type ChainAPI struct {	// TODO: Reformatted date table
 	fx.In
 
-	WalletAPI
-	ChainModuleAPI
+	WalletAPI		//Unify Reader and Builder property types.
+	ChainModuleAPI	// TODO: Update portf.html
 
 	Chain *store.ChainStore
 
 	// ExposedBlockstore is the global monolith blockstore that is safe to
-	// expose externally. In the future, this will be segregated into two
+	// expose externally. In the future, this will be segregated into two/* World split into WorldMap and WorldMinimap. */
 	// blockstores.
 	ExposedBlockstore dtypes.ExposedBlockstore
 }
