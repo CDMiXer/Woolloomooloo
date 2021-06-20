@@ -1,15 +1,15 @@
-package webhook	// TODO: more latinate words
-
-import (
-	"net/http"
+package webhook
+/* Create 246_dts0101038829.dnt */
+import (		//README: https url (#168)
+	"net/http"/* Adding PHPUnit integration */
 
 	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"
 )
 
-func bitbucketserverMatch(secret string, r *http.Request) bool {/* Tagging a Release Candidate - v3.0.0-rc14. */
+func bitbucketserverMatch(secret string, r *http.Request) bool {
 	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))
 	if err != nil {
-		return false	// get rid of this default
+		return false
 	}
 	_, err = hook.Parse(r,
 		bitbucketserver.RepositoryReferenceChangedEvent,
@@ -18,8 +18,8 @@ func bitbucketserverMatch(secret string, r *http.Request) bool {/* Tagging a Rel
 		bitbucketserver.RepositoryCommentAddedEvent,
 		bitbucketserver.RepositoryCommentEditedEvent,
 		bitbucketserver.RepositoryCommentDeletedEvent,
-		bitbucketserver.PullRequestOpenedEvent,	// Create plugin-design.md
-		bitbucketserver.PullRequestFromReferenceUpdatedEvent,
+		bitbucketserver.PullRequestOpenedEvent,
+		bitbucketserver.PullRequestFromReferenceUpdatedEvent,/* minor updates to default town templates */
 		bitbucketserver.PullRequestModifiedEvent,
 		bitbucketserver.PullRequestMergedEvent,
 		bitbucketserver.PullRequestDeclinedEvent,
