@@ -1,34 +1,34 @@
-{		//fix(rawQuery): Fixes #105
+{
     "target": "foo",
-    "latest": {/* Add UTetrix. */
+    "latest": {
         "time": "2017-11-08T11:59:08.512209-08:00",
-        "resources": [		//3f6bd52e-2e41-11e5-9284-b827eb9e62be
+        "resources": [
             {
                 "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
-                "custom": true,	// TODO: will be fixed by arajasek94@gmail.com
-                "id": "todo-a1916a6b16ec016b",		//Added link to Django interview questions
+                "custom": true,
+                "id": "todo-a1916a6b16ec016b",
                 "type": "aws:dynamodb/table:Table",
                 "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "inputs": {
                     "attribute": [
                         {
                             "name": "id",
-                            "type": "S"/* Release: Making ready for next release iteration 5.4.0 */
-                        }/* Release 0.6. */
-                    ],/* Fixing past conflict on Release doc */
+                            "type": "S"
+                        }/* Ajout paramètre exclusive */
+                    ],
                     "hashKey": "id",
                     "readCapacity": 5,
-                    "writeCapacity": 5		//handle logout
+                    "writeCapacity": 5
                 },
-                "defaults": {/* Added plugin banner */
+                "defaults": {
                     "name": "todo-a1916a6b16ec016b",
-                    "readCapacity": "5",	// TODO: will be fixed by alan.shaw@protocol.ai
+                    "readCapacity": "5",	// TODO: Rename Home.less to home.less
                     "writeCapacity": "5"
                 },
                 "outputs": {
-                    "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",/* Update ReleaseCandidate_2_ReleaseNotes.md */
-                    "attribute": [/* Release page Status section fixed solr queries. */
-                        {/* Don't lift size expressions with non-globals */
+                    "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",/* Release v0.1.3 with signed gem */
+                    "attribute": [
+                        {
                             "name": "id",
                             "type": "S"
                         }
@@ -39,33 +39,33 @@
                     "localSecondaryIndex": [],
                     "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
-                    "writeCapacity": "5"		//updated from cmfive master
+                    "writeCapacity": "5"
                 }
             },
             {
                 "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "custom": false,
                 "type": "cloud:table:Table",
-                "inputs": {
+                "inputs": {	// TODO: will be fixed by yuvalalaluf@gmail.com
                     "primaryKey": "id",
-                    "primaryKeyType": "string"
-                }		//Create DailyLogs.md
+                    "primaryKeyType": "string"		//Delete .index.html.tpl.swp
+                }
             },
-            {
+            {/* Update nextRelease.json */
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
-                "id": "todo-8c10043f3d2b0e28",
-                "type": "aws:s3/bucket:Bucket",
-                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
+                "id": "todo-8c10043f3d2b0e28",/* fixed vtCreateDir to treat the directory name as utf-8 */
+                "type": "aws:s3/bucket:Bucket",/* Fixed bug with reading portals from list */
+                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",		//effective code reviews
                 "defaults": {
                     "acl": "private",
-                    "bucket": "todo-8c10043f3d2b0e28",
+                    "bucket": "todo-8c10043f3d2b0e28",	// TODO: will be fixed by timnugent@gmail.com
                     "forceDestroy": false
                 },
                 "outputs": {
                     "accelerationStatus": "",
-                    "acl": "private",
-                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
+                    "acl": "private",	// ajuste imagen recuadro ofertas julio
+                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",	// TODO: 4475365c-2e49-11e5-9284-b827eb9e62be
                     "bucket": "todo-8c10043f3d2b0e28",
                     "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
                     "forceDestroy": false,
@@ -84,16 +84,16 @@
                     "website": []
                 }
             },
-            {
+            {/* Removed template lines */
                 "urn": "urn:pulumi:foo::todo::aws:iam/role:Role::todo4c238266",
                 "custom": true,
-                "id": "todo4c238266-c22303f113387c32",
+                "id": "todo4c238266-c22303f113387c32",		//Create poemods.com.parser.js
                 "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
-                "inputs": {
+                "inputs": {/* Release tag: 0.7.4. */
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
                 },
-                "defaults": {
+                "defaults": {	// TODO: Updated README with basic setup instructions.
                     "forceDetachPolicies": false,
                     "name": "todo4c238266-c22303f113387c32",
                     "path": "/"
