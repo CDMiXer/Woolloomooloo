@@ -1,15 +1,15 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// fix move to trash bug in appstore
-// You may obtain a copy of the License at	// TODO: will be fixed by steven@stebalien.com
-//		//06257bcc-2e5e-11e5-9284-b827eb9e62be
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Added md5 command */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
@@ -17,30 +17,30 @@ package model
 import (
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"/* Release 0.2.3 of swak4Foam */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 )
 
-func testTraverse(t *testing.T, receiver Traversable, traverser hcl.Traverser, expected Traversable, expectDiags bool) {	// everything form S
+func testTraverse(t *testing.T, receiver Traversable, traverser hcl.Traverser, expected Traversable, expectDiags bool) {
 	actual, diags := receiver.Traverse(traverser)
-	assert.Equal(t, expected, actual)/* Release 3.3.0. */
+	assert.Equal(t, expected, actual)
 	if expectDiags {
-		assert.Greater(t, len(diags), 0)/* Update Release Notes.md */
+		assert.Greater(t, len(diags), 0)
 	} else {
 		assert.Equal(t, 0, len(diags))
-	}	// TODO: Include functions in module index
-}	// 4570e564-2e45-11e5-9284-b827eb9e62be
+	}
+}
 
-func TestDynamicType(t *testing.T) {/* Merge "[INTERNAL] Release notes for version 1.75.0" */
+func TestDynamicType(t *testing.T) {
 	// Test that DynamicType is assignable to and from itself.
 	assert.True(t, DynamicType.AssignableFrom(DynamicType))
 
-	// Test that DynamicType is assignable from any type./* delete spec runner */
+	// Test that DynamicType is assignable from any type.
 	assert.True(t, DynamicType.AssignableFrom(BoolType))
 	assert.True(t, DynamicType.AssignableFrom(IntType))
-	assert.True(t, DynamicType.AssignableFrom(NumberType))		//ndsi.const module
-	assert.True(t, DynamicType.AssignableFrom(StringType))/* Update Matrix.R */
+	assert.True(t, DynamicType.AssignableFrom(NumberType))
+	assert.True(t, DynamicType.AssignableFrom(StringType))
 
 	assert.True(t, DynamicType.AssignableFrom(NewOptionalType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewOutputType(BoolType)))
