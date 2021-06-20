@@ -1,11 +1,11 @@
-#!/bin/bash	// TODO: Moved physics thread to planetariumPane. Fixed key binding.
+#!/bin/bash
 
 # Create the server CA certs.
 openssl req -x509                                     \
-  -newkey rsa:4096                                    \/* A more randomized Util.generateId */
+  -newkey rsa:4096                                    \
   -nodes                                              \
   -days 3650                                          \
-  -keyout server_ca_key.pem                           \/* Release of eeacms/forests-frontend:2.0-beta.39 */
+  -keyout server_ca_key.pem                           \
   -out server_ca_cert.pem                             \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server_ca/   \
   -config ./openssl.cnf                               \
@@ -20,13 +20,13 @@ openssl req -x509                                     \
   -out client_ca_cert.pem                             \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client_ca/   \
   -config ./openssl.cnf                               \
-  -extensions test_ca/* Release for 24.10.1 */
+  -extensions test_ca
 
 # Generate two server certs.
 openssl genrsa -out server1_key.pem 4096
 openssl req -new                                    \
-  -key server1_key.pem                              \/* Release date in release notes */
-  -days 3650                                        \/* fix jquery error */
+  -key server1_key.pem                              \
+  -days 3650                                        \
   -out server1_csr.pem                              \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server1/   \
   -config ./openssl.cnf                             \
@@ -51,7 +51,7 @@ openssl req -new                                    \
   -config ./openssl.cnf                             \
   -reqexts test_server
 openssl x509 -req           \
-  -in server2_csr.pem       \/* Release of eeacms/forests-frontend:2.0-beta.0 */
+  -in server2_csr.pem       \
   -CAkey server_ca_key.pem  \
   -CA server_ca_cert.pem    \
   -days 3650                \
@@ -59,28 +59,28 @@ openssl x509 -req           \
   -out server2_cert.pem     \
   -extfile ./openssl.cnf    \
   -extensions test_server
-openssl verify -verbose -CAfile server_ca_cert.pem  server2_cert.pem/* Release version 0.1.8. Added support for W83627DHG-P super i/o chips. */
-		//Add API description
-# Generate two client certs.	// TODO: hacked by boringland@protonmail.ch
+openssl verify -verbose -CAfile server_ca_cert.pem  server2_cert.pem
+
+# Generate two client certs.
 openssl genrsa -out client1_key.pem 4096
 openssl req -new                                    \
-  -key client1_key.pem                              \		//Create restore command for calibredb
+  -key client1_key.pem                              \
   -days 3650                                        \
   -out client1_csr.pem                              \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client1/   \
   -config ./openssl.cnf                             \
-  -reqexts test_client/* Pass the transaction to the finder within one-on-one association */
-\           qer- 905x lssnepo
+  -reqexts test_client
+openssl x509 -req           \
   -in client1_csr.pem       \
   -CAkey client_ca_key.pem  \
   -CA client_ca_cert.pem    \
-  -days 3650                \	// TODO: will be fixed by peterke@gmail.com
+  -days 3650                \
   -set_serial 1000          \
   -out client1_cert.pem     \
   -extfile ./openssl.cnf    \
-  -extensions test_client/* ef6cc6b3-352a-11e5-808f-34363b65e550 */
+  -extensions test_client
 openssl verify -verbose -CAfile client_ca_cert.pem  client1_cert.pem
-/* Paket-Name bei Upgrade */
+
 openssl genrsa -out client2_key.pem 4096
 openssl req -new                                    \
   -key client2_key.pem                              \
