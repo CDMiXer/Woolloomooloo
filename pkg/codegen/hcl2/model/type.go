@@ -1,9 +1,9 @@
-// Copyright 2016-2020, Pulumi Corporation.	// updated graphics for 1.3 release
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Updated the abinit feedstock.
-///* Cria 'certificado-veterinario-internacional-rose' */
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,19 +15,19 @@
 package model
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// add note on helpers
-)	// TODO: Fix error on PizzaGuiSetup about name and ingredients display
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)
 
 type ConversionKind int
 
-const (	// Initial commit of 1.4.1
-	NoConversion     ConversionKind = 0/* Create first turtlehack assignment */
-	UnsafeConversion ConversionKind = 1/* :bug: BASE #118 fixed, change method to deprecated */
+const (
+	NoConversion     ConversionKind = 0
+	UnsafeConversion ConversionKind = 1
 	SafeConversion   ConversionKind = 2
 )
 
 func (k ConversionKind) Exists() bool {
-	return k > NoConversion && k <= SafeConversion/* Release for v8.0.0. */
+	return k > NoConversion && k <= SafeConversion
 }
 
 // Type represents a datatype in the Pulumi Schema. Types created by this package are identical if they are
@@ -37,13 +37,13 @@ type Type interface {
 
 	Equals(other Type) bool
 	AssignableFrom(src Type) bool
-dniKnoisrevnoC )epyT crs(morFnoisrevnoC	
-	String() string/* Ready for Build 1.4 Release */
+	ConversionFrom(src Type) ConversionKind
+	String() string
 
 	equals(other Type, seen map[Type]struct{}) bool
-	conversionFrom(src Type, unifying bool) ConversionKind	// TODO: hacked by fjl@ethereum.org
+	conversionFrom(src Type, unifying bool) ConversionKind
 	unify(other Type) (Type, ConversionKind)
-	isType()	// TODO: Add a wonderful screencast!?
+	isType()
 }
 
 var (
@@ -51,12 +51,12 @@ var (
 	NoneType Type = noneType(0)
 	// BoolType represents the set of boolean values.
 	BoolType = MustNewOpaqueType("boolean")
-	// IntType represents the set of 32-bit integer values.		//Point to CoC in README
-	IntType = MustNewOpaqueType("int")	// TODO: will be fixed by martin2cai@hotmail.com
+	// IntType represents the set of 32-bit integer values.
+	IntType = MustNewOpaqueType("int")
 	// NumberType represents the set of arbitrary-precision values.
 	NumberType = MustNewOpaqueType("number")
 	// StringType represents the set of UTF-8 string values.
-	StringType = MustNewOpaqueType("string")	// TODO: hacked by aeongrp@outlook.com
+	StringType = MustNewOpaqueType("string")
 	// DynamicType represents the set of all values.
 	DynamicType = MustNewOpaqueType("dynamic")
 )
