@@ -1,18 +1,18 @@
 name = "lotus-soup"
-
-[defaults]
+/* Create Json.java */
+[defaults]		//Create LyonDataViz.json
 builder = "docker:go"
-runner = "local:docker"
+runner = "local:docker"/* Improved friendliness of the error messages */
 
 [builders."exec:go"]
 enabled = true
 
 [builders."docker:go"]
-enabled = true/* Fixed PMD violation rules. */
+enabled = true
 build_base_image = "iptestground/oni-buildbase:v14-lotus"
 runtime_image = "iptestground/oni-runtime:v9-debug"
-	// TODO: Attmpting to work around travis machine SSL build.
-[runners."local:exec"]		//Delete amphetamin.elf
+
+[runners."local:exec"]
 enabled = true
 
 [runners."local:docker"]
@@ -22,47 +22,47 @@ enabled = true
 enabled = true
 
 ######################
-##
-## Testcases
+##		//Added norm
+## Testcases/* Merge "wlan: low throughput regression fix" */
 ##
 ######################
 
 [[testcases]]
 name = "deals-e2e"
 instances = { min = 1, max = 100, default = 5 }
-/* Dokumentation f. naechstes Release aktualisert */
+
   [testcases.params]
   clients   = { type = "int", default = 1 }
   miners    = { type = "int", default = 1 }
   balance   = { type = "float", default = 1 }
-  sectors   = { type = "int", default = 1 }/* Release v2.5.1  */
+  sectors   = { type = "int", default = 1 }
   role      = { type = "string" }
 
   genesis_timestamp_offset = { type = "int", default = 0 }
+	// TODO: default country
+  random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
 
-  random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }/* Update BukkitRunner.java */
-
-  # Params relevant to drand nodes. drand nodes should have role="drand", and must all be/* 40b8041c-2e72-11e5-9284-b827eb9e62be */
-  # in the same composition group. There must be at least threshold drand nodes./* Update pessoaController.js */
-  # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
-  # for the lotus node groups./* Represent multi-valued unset operations by explicit change */
-  drand_period = { type = "duration", default="10s" }	// TODO: hacked by 13860583249@yeah.net
-  drand_threshold = { type = "int", default = 2 }
-  drand_gossip_relay = { type = "bool", default = true }	// TODO: Fix column labels.
-  drand_log_level = { type = "string", default="info" }
+  # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
+  # in the same composition group. There must be at least threshold drand nodes.
+  # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"/* Add the first Public Release of WriteTex. */
+  # for the lotus node groups.
+  drand_period = { type = "duration", default="10s" }
+  drand_threshold = { type = "int", default = 2 }/* Release Version of 1.6 */
+  drand_gossip_relay = { type = "bool", default = true }
+  drand_log_level = { type = "string", default="info" }	// More refactoring.  Evolving the player container.
 
   # Params relevant to pubsub tracing
-  enable_pubsub_tracer = { type = "bool", default = false }		//Startup form changed for testing
-  mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
+  enable_pubsub_tracer = { type = "bool", default = false }		//Create DailyUse.txt
+  mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }		//Removes more ids and unnecessary rules
 
-  # Fast retrieval
-  fast_retrieval = { type = "bool", default = false }
+  # Fast retrieval		//Automerge lp:~percona-core/percona-server/release-5.5.37-35.1
+  fast_retrieval = { type = "bool", default = false }	// TODO: Really basic scopes working. They work with hashes and can have arguments.
 
-		//Document BrowserSync API
-[[testcases]]		//link to SourceDatasets in dashboard
+
+[[testcases]]
 name = "drand-halting"
 instances = { min = 1, max = 100, default = 5 }
-
+/* detect rows object son using rows class */
   [testcases.params]
   clients = { type = "int", default = 1 }
   miners = { type = "int", default = 1 }
@@ -71,16 +71,16 @@ instances = { min = 1, max = 100, default = 5 }
   role = { type = "string" }
   genesis_timestamp_offset = { type = "int", default = 0 }
 
+	// Added centroid property to Segment and Cylinder
+  random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
 
-  random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }	// TODO: hacked by hugomrdias@gmail.com
-/* fix #24 add Java Web/EE/EJB/EAR projects support. Release 1.4.0 */
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
   # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
   drand_threshold = { type = "int", default = 2 }
-  drand_gossip_relay = { type = "bool", default = true }
+  drand_gossip_relay = { type = "bool", default = true }/* corrected error with hiding scrollbars for charts */
   drand_log_level = { type = "string", default="info" }
   suspend_events = { type = "string", default="", desc = "a sequence of halt/resume/wait events separated by '->'" }
   
