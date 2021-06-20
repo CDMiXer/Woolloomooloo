@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-	// TODO: Delete 301-jenkins-aks-zero-downtime-deployment directory
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>/* less: further improve makefile dependencides, re #2602 */
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+﻿<Project Sdk="Microsoft.NET.Sdk">/* set history-button to disable when history is empty */
+/* 17f7c3ee-2e5b-11e5-9284-b827eb9e62be */
+  <PropertyGroup>/* Add rough stopping rule */
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>		//reverts to something that at least won't crash
   </PropertyGroup>
 
 </Project>
