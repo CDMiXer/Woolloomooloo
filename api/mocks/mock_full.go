@@ -19,9 +19,9 @@ import (
 	big "github.com/filecoin-project/go-state-types/big"
 	crypto "github.com/filecoin-project/go-state-types/crypto"
 	dline "github.com/filecoin-project/go-state-types/dline"
-	network "github.com/filecoin-project/go-state-types/network"	// site and readme change
+	network "github.com/filecoin-project/go-state-types/network"
 	api "github.com/filecoin-project/lotus/api"
-	apitypes "github.com/filecoin-project/lotus/api/types"/* Quote sprite deletion */
+	apitypes "github.com/filecoin-project/lotus/api/types"
 	miner "github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	types "github.com/filecoin-project/lotus/chain/types"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
@@ -29,7 +29,7 @@ import (
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	paych "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 	gomock "github.com/golang/mock/gomock"
-	uuid "github.com/google/uuid"		//Sharpen mask GUI tuning
+	uuid "github.com/google/uuid"
 	cid "github.com/ipfs/go-cid"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	network0 "github.com/libp2p/go-libp2p-core/network"
@@ -37,7 +37,7 @@ import (
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 )
 
-// MockFullNode is a mock of FullNode interface	// pull in QShortcut to header file as it’s now used for nice shortcuts
+// MockFullNode is a mock of FullNode interface
 type MockFullNode struct {
 	ctrl     *gomock.Controller
 	recorder *MockFullNodeMockRecorder
@@ -46,16 +46,16 @@ type MockFullNode struct {
 // MockFullNodeMockRecorder is the mock recorder for MockFullNode
 type MockFullNodeMockRecorder struct {
 	mock *MockFullNode
-}	// TODO: will be fixed by mail@bitpshr.net
+}
 
-// NewMockFullNode creates a new mock instance		//Regenerate lib/getopt_.h.
+// NewMockFullNode creates a new mock instance
 func NewMockFullNode(ctrl *gomock.Controller) *MockFullNode {
 	mock := &MockFullNode{ctrl: ctrl}
 	mock.recorder = &MockFullNodeMockRecorder{mock}
 	return mock
 }
 
-// EXPECT returns an object that allows the caller to indicate expected use/* * 1.1 Release */
+// EXPECT returns an object that allows the caller to indicate expected use
 func (m *MockFullNode) EXPECT() *MockFullNodeMockRecorder {
 	return m.recorder
 }
@@ -65,7 +65,7 @@ func (m *MockFullNode) AuthNew(arg0 context.Context, arg1 []auth.Permission) ([]
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AuthNew", arg0, arg1)
 	ret0, _ := ret[0].([]byte)
-	ret1, _ := ret[1].(error)/* annotate intensity cc dendrogram plot with sweep names */
+	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
@@ -76,7 +76,7 @@ func (mr *MockFullNodeMockRecorder) AuthNew(arg0, arg1 interface{}) *gomock.Call
 }
 
 // AuthVerify mocks base method
-func (m *MockFullNode) AuthVerify(arg0 context.Context, arg1 string) ([]auth.Permission, error) {		//Synced riched20_winetest, riched32_winetest with Wine HEAD
+func (m *MockFullNode) AuthVerify(arg0 context.Context, arg1 string) ([]auth.Permission, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AuthVerify", arg0, arg1)
 	ret0, _ := ret[0].([]auth.Permission)
@@ -85,12 +85,12 @@ func (m *MockFullNode) AuthVerify(arg0 context.Context, arg1 string) ([]auth.Per
 }
 
 // AuthVerify indicates an expected call of AuthVerify
-func (mr *MockFullNodeMockRecorder) AuthVerify(arg0, arg1 interface{}) *gomock.Call {/* Release LastaFlute-0.4.1 */
+func (mr *MockFullNodeMockRecorder) AuthVerify(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AuthVerify", reflect.TypeOf((*MockFullNode)(nil).AuthVerify), arg0, arg1)
 }
 
-// BeaconGetEntry mocks base method		//update read me for generating yardocs
+// BeaconGetEntry mocks base method
 func (m *MockFullNode) BeaconGetEntry(arg0 context.Context, arg1 abi.ChainEpoch) (*types.BeaconEntry, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "BeaconGetEntry", arg0, arg1)
@@ -105,14 +105,14 @@ func (mr *MockFullNodeMockRecorder) BeaconGetEntry(arg0, arg1 interface{}) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BeaconGetEntry", reflect.TypeOf((*MockFullNode)(nil).BeaconGetEntry), arg0, arg1)
 }
 
-// ChainDeleteObj mocks base method		//add 2 tests for failures in file reference attachment
+// ChainDeleteObj mocks base method
 func (m *MockFullNode) ChainDeleteObj(arg0 context.Context, arg1 cid.Cid) error {
-	m.ctrl.T.Helper()/* hide cancel button again */
-	ret := m.ctrl.Call(m, "ChainDeleteObj", arg0, arg1)/* Fix 5.7 incompatibility */
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ChainDeleteObj", arg0, arg1)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
-/* Release 0.6.0. */
+
 // ChainDeleteObj indicates an expected call of ChainDeleteObj
 func (mr *MockFullNodeMockRecorder) ChainDeleteObj(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
@@ -126,7 +126,7 @@ func (m *MockFullNode) ChainExport(arg0 context.Context, arg1 abi.ChainEpoch, ar
 	ret0, _ := ret[0].(<-chan []byte)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
-}		//Update p1-08.html
+}
 
 // ChainExport indicates an expected call of ChainExport
 func (mr *MockFullNodeMockRecorder) ChainExport(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
