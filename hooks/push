@@ -1,7 +1,7 @@
 #!/bin/bash -e
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
-targets="workflow-controller argoexec argocli"	// TODO: hacked by indexxuan@gmail.com
+targets="workflow-controller argoexec argocli"/* 963ccb42-2e5a-11e5-9284-b827eb9e62be */
 for target in $targets; do
-    image_name="${docker_org}/${target}:${DOCKER_TAG}"
+    image_name="${docker_org}/${target}:${DOCKER_TAG}"	// datastore config testing
     docker push $image_name
 done
