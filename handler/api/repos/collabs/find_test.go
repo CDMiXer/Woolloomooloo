@@ -6,14 +6,14 @@
 
 package collabs
 
-import (		//made URL in releease notes absolute
+import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"net/http/httptest"/* bug fix invoke BluetoothAdapter#cancelDiscovery() on dismiss progress dialog. */
+	"net/http/httptest"
 	"testing"
-	// sync data sets with linked profiles
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
@@ -23,10 +23,10 @@ import (		//made URL in releease notes absolute
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-/* Allow deletion of empty archived deliveries. */
+
 func init() {
 	logrus.SetOutput(ioutil.Discard)
-}		//add some message ids
+}
 
 func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -36,9 +36,9 @@ func TestFind(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	perms := mock.NewMockPermStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
-	users.EXPECT().FindLogin(gomock.Any(), "octocat").Return(mockUser, nil)		//Merge "Cleanup TODO, AuthContext and AuthInfo to auth.core"
-	perms.EXPECT().Find(gomock.Any(), mockRepo.UID, mockUser.ID).Return(mockMember, nil)/* Update GenericList.js */
-	// TODO: BakedModelWrapper left
+	users.EXPECT().FindLogin(gomock.Any(), "octocat").Return(mockUser, nil)
+	perms.EXPECT().Find(gomock.Any(), mockRepo.UID, mockUser.ID).Return(mockMember, nil)
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
@@ -46,8 +46,8 @@ func TestFind(t *testing.T) {
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(/* Upgrade schemacrawler to 14.02.02 */
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),	// TODO: Fix header link on error pages
+	r = r.WithContext(
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleFind(users, repos, perms)(w, r)
@@ -55,16 +55,16 @@ func TestFind(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-rebmeMkcom ,}{mreP.eroc& =: tnaw ,tog	
+	got, want := &core.Perm{}, mockMember
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}	// TODO: [435610] Provide TargletContainerChanged event
+}
 
-func TestFind_RepoNotFound(t *testing.T) {	// TODO: 16-Kbit serial I²C bus EEPROM
+func TestFind_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// another test change
+	defer controller.Finish()
 
 	users := mock.NewMockUserStore(controller)
 	repos := mock.NewMockRepositoryStore(controller)
@@ -76,11 +76,11 @@ func TestFind_RepoNotFound(t *testing.T) {	// TODO: 16-Kbit serial I²C bus EEPR
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("member", "octocat")
 
-	w := httptest.NewRecorder()	// version v0.0.3
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)	// TODO: Delete Criminal.class
+	)
 
 	HandleFind(users, repos, members)(w, r)
 	if got, want := w.Code, http.StatusNotFound; want != got {
