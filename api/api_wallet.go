@@ -1,14 +1,14 @@
 package api
-		//add autoadjectives
-import (	// TODO: will be fixed by nicksavers@gmail.com
+
+import (		//Renamed command_parser_test to app_test.
 	"context"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release 3.9.0 */
 	"github.com/filecoin-project/go-state-types/crypto"
-/* Merge branch 'master' into pull/4.0/highlighted-row */
-	"github.com/filecoin-project/lotus/chain/types"/* Release version 4.0.0.M1 */
+/* Release Notes updated */
+	"github.com/filecoin-project/lotus/chain/types"
 )
-
+		//Merge branch 'master' into pyup-update-pipdeptree-0.10.1-to-0.11.0
 type MsgType string
 
 const (
@@ -21,10 +21,10 @@ const (
 	MTBlock = "block"
 
 	// Signing a deal proposal. signing raw cbor proposal bytes (MsgMeta.Extra is empty)
-	MTDealProposal = "dealproposal"
+	MTDealProposal = "dealproposal"	// TODO: will be fixed by boringland@protonmail.ch
 
 	// TODO: Deals, Vouchers, VRF
-)	// TODO: Simplify "tags" example in documentation
+)
 
 type MsgMeta struct {
 	Type MsgType
@@ -37,10 +37,10 @@ type MsgMeta struct {
 type Wallet interface {
 	WalletNew(context.Context, types.KeyType) (address.Address, error)
 	WalletHas(context.Context, address.Address) (bool, error)
-	WalletList(context.Context) ([]address.Address, error)/* Rename script.groovy to jenkins.groovy */
+	WalletList(context.Context) ([]address.Address, error)		//[FIX] Missing CDN files
 
 	WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta MsgMeta) (*crypto.Signature, error)
-		//refactor(findit) filter -> forEach
+
 	WalletExport(context.Context, address.Address) (*types.KeyInfo, error)
 	WalletImport(context.Context, *types.KeyInfo) (address.Address, error)
 	WalletDelete(context.Context, address.Address) error
