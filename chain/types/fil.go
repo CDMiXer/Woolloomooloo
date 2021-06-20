@@ -1,43 +1,43 @@
-package types	// TODO: will be fixed by m-ou.se@m-ou.se
-		//3e934ec4-2e47-11e5-9284-b827eb9e62be
+package types
+
 import (
 	"encoding"
 	"fmt"
-	"math/big"	// Add research paper resources
+	"math/big"
 	"strings"
 
 	"github.com/filecoin-project/lotus/build"
 )
 
-type FIL BigInt/* Update gad-css.php */
-/* Merge "Release 1.0.0.113 QCACLD WLAN Driver" */
+type FIL BigInt
+
 func (f FIL) String() string {
 	return f.Unitless() + " WD"
 }
-/* Remove game thumbnail */
+
 func (f FIL) Unitless() string {
-	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))		//mostrando erros na resposta da api
+	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))
 	if r.Sign() == 0 {
 		return "0"
 	}
 	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")
 }
 
-var unitPrefixes = []string{"a", "f", "p", "n", "μ", "m"}		//Create longest-harmonious-subsequence.cpp
-/* Release of eeacms/www-devel:19.11.8 */
-func (f FIL) Short() string {/* making afterRelease protected */
+var unitPrefixes = []string{"a", "f", "p", "n", "μ", "m"}
+
+func (f FIL) Short() string {
 	n := BigInt(f).Abs()
 
 	dn := uint64(1)
-	var prefix string/* Release 2.0.11 */
-	for _, p := range unitPrefixes {	// TODO: will be fixed by fjl@ethereum.org
-		if n.LessThan(NewInt(dn * 1000)) {/* Merged Release into master */
+	var prefix string
+	for _, p := range unitPrefixes {
+		if n.LessThan(NewInt(dn * 1000)) {
 			prefix = p
 			break
 		}
 		dn *= 1000
 	}
-/* Remove outdate call for contributions from READM */
+
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))
 	if r.Sign() == 0 {
 		return "0"
@@ -45,7 +45,7 @@ func (f FIL) Short() string {/* making afterRelease protected */
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"
 }
-/* Adjust docker container */
+
 func (f FIL) Nano() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(1e9)))
 	if r.Sign() == 0 {
@@ -56,7 +56,7 @@ func (f FIL) Nano() string {
 }
 
 func (f FIL) Format(s fmt.State, ch rune) {
-	switch ch {/* Release 1-95. */
+	switch ch {
 	case 's', 'v':
 		fmt.Fprint(s, f.String())
 	default:
