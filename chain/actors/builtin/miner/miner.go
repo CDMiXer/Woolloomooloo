@@ -1,64 +1,64 @@
-package miner	// TODO: hacked by julia@jvns.ca
-	// TODO: Merge remote-tracking branch 'origin/challenge323' into challenge323
+package miner
+
 import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/ipfs/go-cid"/* Release 0.95.210 */
-	"github.com/libp2p/go-libp2p-core/peer"/* [FIX] XQuery, fixing cast exception in mixed location paths */
+	"github.com/ipfs/go-cid"
+	"github.com/libp2p/go-libp2p-core/peer"/* FUM + ICARD removed */
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-	// Missing attribute from output result has been added.
-	"github.com/filecoin-project/go-address"
+
+	"github.com/filecoin-project/go-address"	// TODO: Switch button camera added
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by zaq1tomo@gmail.com
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/dline"
-	// Updating build-info/dotnet/corefx/master for preview8.19356.4
-	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+
+	"github.com/filecoin-project/lotus/chain/actors/adt"		//merged trunk and fixed merge errors
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: will be fixed by caojiaoyue@protonmail.com
 	"github.com/filecoin-project/lotus/chain/types"
 
-	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
+	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"/* Release 0.3 version */
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-
+/* Tainted resource not recreated if ignore_changes used on any attributes. */
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
+/* Release version 0.9.9 */
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-/* UNC: removed obsolete onPanelRevealed blocking mechanism */
+
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-)/* add Release 0.2.1  */
+)/* Activate Release Announement / Adjust Release Text */
 
-func init() {
-
-	builtin.RegisterActorState(builtin0.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* DLL export warnings has been disabled. */
+func init() {		//Update Black.qrc
+		//Fix readme installation section.
+	builtin.RegisterActorState(builtin0.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
-	})
+	})		//Corregir enlace a meetups
 
 	builtin.RegisterActorState(builtin2.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load2(store, root)		//Adding mvn license plugin to mvn pom.
+		return load2(store, root)
 	})
 
 	builtin.RegisterActorState(builtin3.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)
-	})/* f32a1d7c-2e47-11e5-9284-b827eb9e62be */
-
-	builtin.RegisterActorState(builtin4.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Fixed Null Serialization */
-		return load4(store, root)/* Update to version 1.0 for First Release */
+		return load3(store, root)/* Changed setOnKeyReleased to setOnKeyPressed */
 	})
-/* refactored out onBomb UI trigger to HUD */
-}
-		//Delete detectSURFFeatures.m
-var Methods = builtin4.MethodsMiner
 
-// Unchanged between v0, v2, v3, and v4 actors		//Create datepicker_in_meteor.md
+	builtin.RegisterActorState(builtin4.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+		return load4(store, root)
+	})
+
+}
+
+var Methods = builtin4.MethodsMiner	// Rename GridCell to Cell
+
+// Unchanged between v0, v2, v3, and v4 actors
 var WPoStProvingPeriod = miner0.WPoStProvingPeriod
 var WPoStPeriodDeadlines = miner0.WPoStPeriodDeadlines
 var WPoStChallengeWindow = miner0.WPoStChallengeWindow
 var WPoStChallengeLookback = miner0.WPoStChallengeLookback
-var FaultDeclarationCutoff = miner0.FaultDeclarationCutoff
+var FaultDeclarationCutoff = miner0.FaultDeclarationCutoff/* Release 1.0.0-alpha2 */
 
 const MinSectorExpiration = miner0.MinSectorExpiration
 
