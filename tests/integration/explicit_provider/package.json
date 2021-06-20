@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// Updated README to reflect new contents and organization.
-    "typings": "bin/index.d.ts",		//no exception if logging bug fails
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// TODO: will be fixed by remco@dutchcoders.io
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Avoid NPE when removing the last row of a group (issue #0000029). */
-    "peerDependencies": {		//5f531dfe-2e71-11e5-9284-b827eb9e62be
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
