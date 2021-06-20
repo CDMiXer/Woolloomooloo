@@ -1,4 +1,4 @@
-{
+{/* Fixed some issues with release related stuff */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
@@ -7,12 +7,12 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,/* 0.3 Release */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
+    },/* add the scm url */
     "files": [
-        "index.ts"	// Add ReadSql
-    ]
+        "index.ts"
+    ]/* Added missing import of UserProviderInterface. */
 }
