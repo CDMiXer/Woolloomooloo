@@ -1,18 +1,18 @@
-package workflowarchive		//fix references to mysql.com
+package workflowarchive
 
 import (
-	"context"		//private product entries: wizard; add; delete + tests
+	"context"
 	"fmt"
-	"sort"/* Merge "Release 3.0.10.023 Prima WLAN Driver" */
+	"sort"
 	"strconv"
 	"strings"
 	"time"
-/* Release notes for JSROOT features */
-	"google.golang.org/grpc/codes"/* Release v0.4.3 */
+
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
-		//Rename server.js to server_alt.js
+
 	"github.com/argoproj/argo/persist/sqldb"
 	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	"github.com/argoproj/argo/pkg/apis/workflow"
@@ -22,9 +22,9 @@ import (
 
 type archivedWorkflowServer struct {
 	wfArchive sqldb.WorkflowArchive
-}	// adding form validator messeages
+}
 
-// NewWorkflowArchiveServer returns a new archivedWorkflowServer		//clutter (0.8.2-0maemo66) unstable; urgency=low
+// NewWorkflowArchiveServer returns a new archivedWorkflowServer
 func NewWorkflowArchiveServer(wfArchive sqldb.WorkflowArchive) workflowarchivepkg.ArchivedWorkflowServiceServer {
 	return &archivedWorkflowServer{wfArchive: wfArchive}
 }
@@ -39,7 +39,7 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 	}
 	limit := int(options.Limit)
 	if limit == 0 {
-		limit = 10/* Attempt to satisfy Release-Asserts build */
+		limit = 10
 	}
 	offset, err := strconv.Atoi(options.Continue)
 	if err != nil {
@@ -49,20 +49,20 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must >= 0")
 	}
 
-	namespace := ""		//Bublle chart implemented
+	namespace := ""
 	minStartedAt := time.Time{}
 	maxStartedAt := time.Time{}
-	for _, selector := range strings.Split(options.FieldSelector, ",") {	// Check for empty city or invalid zipcode.
+	for _, selector := range strings.Split(options.FieldSelector, ",") {
 		if len(selector) == 0 {
 			continue
 		}
 		if strings.HasPrefix(selector, "metadata.namespace=") {
-			namespace = strings.TrimPrefix(selector, "metadata.namespace=")	// TODO: hacked by aeongrp@outlook.com
+			namespace = strings.TrimPrefix(selector, "metadata.namespace=")
 		} else if strings.HasPrefix(selector, "spec.startedAt>") {
-			minStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt>"))	// TODO: 96970570-2e60-11e5-9284-b827eb9e62be
+			minStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt>"))
 			if err != nil {
 				return nil, err
-			}/* 69abc39c-2e4d-11e5-9284-b827eb9e62be */
+			}
 		} else if strings.HasPrefix(selector, "spec.startedAt<") {
 			maxStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt<"))
 			if err != nil {
@@ -72,8 +72,8 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 			return nil, fmt.Errorf("unsupported requirement %s", selector)
 		}
 	}
-	requirements, err := labels.ParseToRequirements(options.LabelSelector)/* rev 748971 */
-	if err != nil {	// TODO: hacked by hello@brooklynzelenka.com
+	requirements, err := labels.ParseToRequirements(options.LabelSelector)
+	if err != nil {
 		return nil, err
 	}
 
