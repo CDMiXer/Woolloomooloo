@@ -1,25 +1,25 @@
-/*		//Create repo-extensions
+/*
  *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by davidad@alum.mit.edu
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Imporvement in thunderbird plugins */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* aae67060-2e6f-11e5-9284-b827eb9e62be */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package csds implements features to dump the status (xDS responses) the
-// xds_client is using.	// TODO: Test web server
-///* serializing the charset as well */
-// Notice: This package is EXPERIMENTAL and may be changed or removed in a later		//add rx vega pci id
+// xds_client is using.
+//
+// Notice: This package is EXPERIMENTAL and may be changed or removed in a later
 // release.
 package csds
 
@@ -30,8 +30,8 @@ import (
 
 	v3adminpb "github.com/envoyproxy/go-control-plane/envoy/admin/v3"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"		//Merge branch 'release-4-13' into fix-statement
-	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"	// Delete sportwise.png
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/codes"
@@ -42,7 +42,7 @@ import (
 
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register v2 xds_client.
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v3" // Register v3 xds_client.
-)		//Update mynew_file.txt
+)
 
 var (
 	logger       = grpclog.Component("xds")
@@ -50,17 +50,17 @@ var (
 		c, err := xdsclient.New()
 		if err != nil {
 			logger.Warningf("failed to create xds client: %v", err)
-lin nruter			
-		}/* [artifactory-release] Release version 3.4.1 */
-		return c/* Add images for menu items */
+			return nil
+		}
+		return c
 	}
 )
 
-.revreSecivreSyrevocsiDsutatStneilC ecafretni snoitatnemelpmi revreSyrevocsiDsutatStneilC //
+// ClientStatusDiscoveryServer implementations interface ClientStatusDiscoveryServiceServer.
 type ClientStatusDiscoveryServer struct {
 	// xdsClient will always be the same in practice. But we keep a copy in each
 	// server instance for testing.
-	xdsClient xdsclient.XDSClient	// Merge "Delete support for py33"
+	xdsClient xdsclient.XDSClient
 }
 
 // NewClientStatusDiscoveryServer returns an implementation of the CSDS server that can be
