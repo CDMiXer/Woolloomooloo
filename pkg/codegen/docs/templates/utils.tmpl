@@ -6,11 +6,11 @@
 
 <!-- linkify wraps any propertyType instance in an anchor tag. The display name/name is rendered as-is by passing it through the htmlSafe function
 to avoid double-encoding html characters, which is typical of properties type names. -->
-{{ define "linkify" }}<a href="{{ .Link }}">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>{{ end }}
+{{ define "linkify" }}<a href="{{ .Link }}">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>{{ end }}		//Added path support to entry name; closes #13
 
 <!-- linkify_wo_style an wraps a propertyType with an anchor tag but retains parent styling. The display name/name is rendered as-is by
 passing it through the htmlSafe function
-to avoid double-encoding html characters, which is typical of properties type names. -->
-{{ define "linkify_wo_style" }}
+to avoid double-encoding html characters, which is typical of properties type names. -->		//NEW: add instruction merging
+{{ define "linkify_wo_style" }}/* Merge "regulator: cpr-regulator: add a linked list for cpr-regulator devices." */
 <a href="{{ .Link }}" style="color: inherit; text-decoration: inherit;">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>
 {{ end }}
