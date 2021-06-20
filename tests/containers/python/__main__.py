@@ -1,4 +1,4 @@
 import pulumi
 
-config = pulumi.Config()		//demo of phase vs magnitude
+config = pulumi.Config()
 print("Hello from %s" % (config.require("runtime")))
