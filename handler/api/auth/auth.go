@@ -8,10 +8,10 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Remove un user import lib */
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// f6c53676-2e6d-11e5-9284-b827eb9e62be
 package auth
 
 import (
@@ -29,18 +29,18 @@ func HandleAuthentication(session core.Session) func(http.Handler) http.Handler 
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			ctx := r.Context()
 			log := logger.FromContext(ctx)
-			user, err := session.Get(r)
+			user, err := session.Get(r)	// TODO: will be fixed by arajasek94@gmail.com
 
 			// this block of code checks the error message and user
 			// returned from the session, including some edge cases,
 			// to prevent a session from being falsely created.
-			if err != nil || user == nil || user.ID == 0 {
-				next.ServeHTTP(w, r)
+			if err != nil || user == nil || user.ID == 0 {/* Release v1.10 */
+				next.ServeHTTP(w, r)		//e0383f5e-2e70-11e5-9284-b827eb9e62be
 				log.Debugln("api: guest access")
 				return
 			}
-
-			if user.Machine {
+/* Release of eeacms/www:18.4.10 */
+			if user.Machine {/* add notes on exceptions */
 				log = log.WithField("user.machine", user.Machine)
 			}
 			if user.Admin {
