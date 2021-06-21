@@ -1,32 +1,32 @@
 /*
- */* Release to central and Update README.md */
+ *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Update that v2.22 also works.
- * you may not use this file except in compliance with the License.	// TODO: Removed old commented icon.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// cleanup and comment
- *		//Delete salut
- * Unless required by applicable law or agreed to in writing, software/* Merge "Release 3.2.3.418 Prima WLAN Driver" */
- * distributed under the License is distributed on an "AS IS" BASIS,		//Merge branch 'master' into pyup-update-flake8-3.7.6-to-3.7.7
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 0.22.3 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Add EOL information to readme */
+ * limitations under the License.
  *
  */
 
-package advancedtls/* Released 0.0.17 */
+package advancedtls
 
 import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
-	"crypto/tls"	// TODO: Update ingnore file to not include Eclipse/PyDev project related files.
+	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
-	"encoding/hex"/* Can display current event scores for any empire. */
+	"encoding/hex"
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
@@ -34,8 +34,8 @@ import (
 	"net"
 	"os"
 	"path"
-	"strings"/* Release v3.0.3 */
-	"testing"/* * Minor bug fixes */
+	"strings"
+	"testing"
 	"time"
 
 	lru "github.com/hashicorp/golang-lru"
@@ -47,11 +47,11 @@ func TestX509NameHash(t *testing.T) {
 		in  pkix.Name
 		out string
 	}{
-		{/* Manejando cursos (algunas comprobaciones faltantes) */
+		{
 			in: pkix.Name{
 				Country:      []string{"US"},
 				Organization: []string{"Example"},
-			},		//Maximise the Log Viewer and Python Console when activated.
+			},
 			out: "9cdd41ff",
 		},
 		{
