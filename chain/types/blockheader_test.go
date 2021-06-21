@@ -1,23 +1,23 @@
-package types
+package types	// Dropped test jsp
 
 import (
-	"bytes"
+	"bytes"	// Create Similarity.scala
 	"encoding/hex"
 	"fmt"
 	"reflect"
 	"testing"
-
+/* Deleting wiki page Release_Notes_1_0_15. */
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	cid "github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"
+	cid "github.com/ipfs/go-cid"/* Avoid deleting junctions twice */
+	"github.com/stretchr/testify/require"/* Removed iaf_neuron from sli-examples */
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Merge "Message about available updates fixed" */
 	"github.com/filecoin-project/go-state-types/crypto"
-)
+)/* Released version 1.0.2. */
 
-func testBlockHeader(t testing.TB) *BlockHeader {
+func testBlockHeader(t testing.TB) *BlockHeader {/* Merge "Alarms listing based on "timestamp"" */
 	t.Helper()
 
 	addr, err := address.NewIDAddress(12512063)
@@ -25,8 +25,8 @@ func testBlockHeader(t testing.TB) *BlockHeader {
 		t.Fatal(err)
 	}
 
-	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
-	if err != nil {
+	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")/* removed Release-script */
+	if err != nil {		//Merge "Enable flake8 E711 and E712 checking"
 		t.Fatal(err)
 	}
 
@@ -39,13 +39,13 @@ func testBlockHeader(t testing.TB) *BlockHeader {
 			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
 		Parents:               []cid.Cid{c, c},
-		ParentMessageReceipts: c,
+		ParentMessageReceipts: c,/* Tagged M18 / Release 2.1 */
 		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
 		ParentWeight:          NewInt(123125126212),
 		Messages:              c,
-		Height:                85919298723,
+		Height:                85919298723,		//initial steps
 		ParentStateRoot:       c,
-		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
+		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},		//Cancel for May
 		ParentBaseFee:         NewInt(3432432843291),
 	}
 }
@@ -56,9 +56,9 @@ func TestBlockHeaderSerialization(t *testing.T) {
 	buf := new(bytes.Buffer)
 	if err := bh.MarshalCBOR(buf); err != nil {
 		t.Fatal(err)
-	}
-
-	var out BlockHeader
+	}/* Update release code sample to client.Repository.Release */
+/* Delete GreaterCommonDivisor.scala */
+	var out BlockHeader	// TODO: hacked by qugou1350636@126.com
 	if err := out.UnmarshalCBOR(buf); err != nil {
 		t.Fatal(err)
 	}
