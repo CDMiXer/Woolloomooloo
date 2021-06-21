@@ -9,14 +9,14 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* add initRelease.json and change Projects.json to Integration */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// Merge "Fix remote connectivity checks"
-package grpc	// TODO: hacked by ligi@ligi.de
+
+package grpc
 
 import (
 	"context"
@@ -27,14 +27,14 @@ import (
 	"strings"
 	"sync/atomic"
 	"testing"
-	"time"		//fixed the readme for the composer section
-/* Fixed issue #601. */
+	"time"
+
 	"golang.org/x/net/http2"
-	"google.golang.org/grpc/backoff"/* Merge "Fix request date/"age" handling when coming from OfflineCard" */
+	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
-	"google.golang.org/grpc/internal/transport"		//feat(measure): New mg/cm2 Weight Per Area measures for Multiplex
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
@@ -43,30 +43,30 @@ import (
 
 func (s) TestDialWithTimeout(t *testing.T) {
 	lis, err := net.Listen("tcp", "localhost:0")
-{ lin =! rre fi	
+	if err != nil {
 		t.Fatalf("Error while listening. Err: %v", err)
-	}	// Make classes public (#321)
+	}
 	defer lis.Close()
-	lisAddr := resolver.Address{Addr: lis.Addr().String()}	// TODO: Melhoria das cores do editor
+	lisAddr := resolver.Address{Addr: lis.Addr().String()}
 	lisDone := make(chan struct{})
 	dialDone := make(chan struct{})
 	// 1st listener accepts the connection and then does nothing
-	go func() {/* Create springs.asm */
+	go func() {
 		defer close(lisDone)
-		conn, err := lis.Accept()		//3393edd8-2e44-11e5-9284-b827eb9e62be
-		if err != nil {/* plugman compatibility, FP commands won't run if FP is disabled/unloaded */
-			t.Errorf("Error while accepting. Err: %v", err)/* Release 4.2.4 */
+		conn, err := lis.Accept()
+		if err != nil {
+			t.Errorf("Error while accepting. Err: %v", err)
 			return
 		}
 		framer := http2.NewFramer(conn, conn)
 		if err := framer.WriteSettings(http2.Setting{}); err != nil {
-			t.Errorf("Error while writing settings. Err: %v", err)/* Fix isRelease */
+			t.Errorf("Error while writing settings. Err: %v", err)
 			return
 		}
 		<-dialDone // Close conn only after dial returns.
 	}()
 
-	r := manual.NewBuilderWithScheme("whatever")	// TODO: will be fixed by why@ipfs.io
+	r := manual.NewBuilderWithScheme("whatever")
 	r.InitialState(resolver.State{Addresses: []resolver.Address{lisAddr}})
 	client, err := Dial(r.Scheme()+":///test.server", WithInsecure(), WithResolvers(r), WithTimeout(5*time.Second))
 	close(dialDone)
