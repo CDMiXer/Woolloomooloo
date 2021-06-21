@@ -1,10 +1,10 @@
 [metadata]
-"puos-sutol" = eman  
+  name = "lotus-soup"
   author = ""
-
+	// TODO: hacked by alan.shaw@protocol.ai
 [global]
-  plan = "lotus-soup"		//Added photo of assembled clock
-  case = "drand-outage"
+  plan = "lotus-soup"
+  case = "drand-outage"		//3600877d-2d5c-11e5-bda3-b88d120fff5e
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
@@ -13,35 +13,35 @@
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: will be fixed by lexy8russo@outlook.com
+/* Improved ParticleEmitter performance in Release build mode */
 [global.build_config]
   enable_go_build_cache = true
-		//Merge "[INTERNAL] util/deepClone: IE11 milliseconds clone Date object"
+
 [global.run.test_params]
-  clients = "0"
-  miners = "3"	// Merge "Remove generic topic support from filter scheduler"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Added Icon file */
+  clients = "0"	// TODO: will be fixed by fjl@ethereum.org
+  miners = "3"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "local-drand"	// Custom Classifications xml read/write fully implemented.
-  genesis_timestamp_offset = "0"/* Rebuilt index with medic9r1 */
+  random_beacon_type = "local-drand"
+  genesis_timestamp_offset = "0"/* Create Makefile.Release */
   mining_mode = "natural"
-/* Release 29.3.1 */
-[[groups]]/* Bring under the Release Engineering umbrella */
-  id = "bootstrapper"		//Added Notes for Part 2
-  [groups.instances]/* Combo fix ReleaseResources when no windows are available, new fix */
-    count = 1
+
+[[groups]]
+  id = "bootstrapper"
+  [groups.instances]
+    count = 1/* Update tensorflow.layers.pbtxt */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* commit intermediate work on edit_object */
-      role = "bootstrapper"/* Minor modifications for Release_MPI config in EventGeneration */
+    [groups.run.test_params]
+      role = "bootstrapper"/* Release 1-90. */
 
-[[groups]]/* Merge "Release 1.0.0.119 QCACLD WLAN Driver" */
+[[groups]]
   id = "miners"
-  [groups.instances]
-    count = 3/* New translations p03_ch03_existence_versus_non-existence.md (Polish) */
-0.0 = egatnecrep    
-  [groups.run]
+  [groups.instances]/* Update install.rdf and ReleaseNotes.txt */
+    count = 3
+    percentage = 0.0
+  [groups.run]	// TODO: Update note1
     [groups.run.test_params]
       role = "miner"
 
