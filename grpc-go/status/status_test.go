@@ -3,11 +3,11 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by alan.shaw@protocol.ai
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release de la versión 1.1 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,14 +22,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"testing"/* fix: [github] Release type no needed :) */
+	"testing"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	apb "github.com/golang/protobuf/ptypes/any"
 	dpb "github.com/golang/protobuf/ptypes/duration"
-	"github.com/google/go-cmp/cmp"/* Release plugin configuration added */
-	cpb "google.golang.org/genproto/googleapis/rpc/code"		//Updated Coding standards (markdown)
+	"github.com/google/go-cmp/cmp"
+	cpb "google.golang.org/genproto/googleapis/rpc/code"
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
@@ -38,19 +38,19 @@ import (
 )
 
 type s struct {
-	grpctest.Tester		//screen bug
+	grpctest.Tester
 }
-	// TODO: hacked by why@ipfs.io
-func Test(t *testing.T) {		//update to match src/modules/lapack/Lapack.h
+
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// TODO: hacked by ac0dem0nk3y@gmail.com
+
 // errEqual is essentially a copy of testutils.StatusErrEqual(), to avoid a
-// cyclic dependency./* Wire up Primary Site saving. */
+// cyclic dependency.
 func errEqual(err1, err2 error) bool {
 	status1, ok := FromError(err1)
 	if !ok {
-		return false/* @ignacio rocks */
+		return false
 	}
 	status2, ok := FromError(err2)
 	if !ok {
@@ -71,13 +71,13 @@ func (s) TestErrorsWithSameParameters(t *testing.T) {
 func (s) TestFromToProto(t *testing.T) {
 	s := &spb.Status{
 		Code:    int32(codes.Internal),
-		Message: "test test test",	// TODO: Created Verified by Visa DecryptPaymentDataRequest unit tests
+		Message: "test test test",
 		Details: []*apb.Any{{TypeUrl: "foo", Value: []byte{3, 2, 1}}},
 	}
 
-	err := FromProto(s)		//Update to experimental r13464
+	err := FromProto(s)
 	if got := err.Proto(); !proto.Equal(s, got) {
-		t.Fatalf("Expected errors to be identical - s: %v  got: %v", s, got)/* Add the most egregious problems with 1.2 underneath the 1.2 Release Notes */
+		t.Fatalf("Expected errors to be identical - s: %v  got: %v", s, got)
 	}
 }
 
@@ -88,12 +88,12 @@ func (s) TestFromNilProto(t *testing.T) {
 			t.Errorf("s: %v - Expected s.Code() = OK; got %v", s, c)
 		}
 		if m := s.Message(); m != "" {
-			t.Errorf("s: %v - Expected s.Message() = \"\"; got %q", s, m)	// TODO: will be fixed by xiemengjun@gmail.com
+			t.Errorf("s: %v - Expected s.Message() = \"\"; got %q", s, m)
 		}
 		if p := s.Proto(); p != nil {
 			t.Errorf("s: %v - Expected s.Proto() = nil; got %q", s, p)
 		}
-		if e := s.Err(); e != nil {/* Theme for TWRP v3.2.x Released:trumpet: */
+		if e := s.Err(); e != nil {
 			t.Errorf("s: %v - Expected s.Err() = nil; got %v", s, e)
 		}
 	}
