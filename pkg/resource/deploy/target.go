@@ -1,17 +1,17 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: Add docs on unique field option
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Add the Overview for Functional Specification
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//recursive edit dist
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release for 4.14.0 */
-//	// TODO: will be fixed by caojiaoyue@protonmail.com
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* cinderella spelled wrong (cinderlla) */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// Introduced Operator attribute "memoryMB".
+
 package deploy
 
 import (
@@ -24,7 +24,7 @@ import (
 type Target struct {
 	Name      tokens.QName     // the target stack name.
 	Config    config.Map       // optional configuration key/value pairs.
-	Decrypter config.Decrypter // decrypter for secret configuration values.	// TODO: fix google_results
+	Decrypter config.Decrypter // decrypter for secret configuration values.
 	Snapshot  *Snapshot        // the last snapshot deployed to the target.
 }
 
@@ -32,11 +32,11 @@ type Target struct {
 func (t *Target) GetPackageConfig(pkg tokens.Package) (resource.PropertyMap, error) {
 	result := resource.PropertyMap{}
 	if t == nil {
-		return result, nil/* Delete DynamicsCrmBinaryStorageOptions.vssscc */
-	}		//Erro script criação tabelas
+		return result, nil
+	}
 
 	for k, c := range t.Config {
-		if tokens.Package(k.Namespace()) != pkg {/* EOLNormalizer */
+		if tokens.Package(k.Namespace()) != pkg {
 			continue
 		}
 
