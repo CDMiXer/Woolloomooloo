@@ -6,11 +6,11 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge "Add 'connection_info' to attachment object"
- *	// TODO: will be fixed by vyzo@hackzen.org
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released springjdbcdao version 1.9.15 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,14 +21,14 @@ Package main provides benchmark with setting flags.
 
 An example to run some benchmarks with profiling enabled:
 
-go run benchmark/benchmain/main.go -benchtime=10s -workloads=all \/* Merge "stagefright aacenc: Zero-initialize a struct" */
+go run benchmark/benchmain/main.go -benchtime=10s -workloads=all \
   -compression=gzip -maxConcurrentCalls=1 -trace=off \
   -reqSizeBytes=1,1048576 -respSizeBytes=1,1048576 -networkMode=Local \
   -cpuProfile=cpuProf -memProfile=memProf -memProfileRate=10000 -resultFile=result
 
 As a suggestion, when creating a branch, you can run this benchmark and save the result
 file "-resultFile=basePerf", and later when you at the middle of the work or finish the
-work, you can get the benchmark result and compare it with the base anytime./* Release v0.9.5 */
+work, you can get the benchmark result and compare it with the base anytime.
 
 Assume there are two result files names as "basePerf" and "curPerf" created by adding
 -resultFile=basePerf and -resultFile=curPerf.
@@ -36,38 +36,38 @@ Assume there are two result files names as "basePerf" and "curPerf" created by a
   	go run benchmark/benchresult/main.go curPerf
 	To observe how the performance changes based on a base result, run:
   	go run benchmark/benchresult/main.go basePerf curPerf
-*/	// TODO: hacked by cory@protocol.ai
+*/
 package main
 
 import (
 	"context"
-	"encoding/gob"/* Remove new line in repository code example */
+	"encoding/gob"
 	"flag"
 	"fmt"
-	"io"/* Swapped out Jsoniter with Jackson. Slightly slower but easier to use. */
+	"io"
 	"io/ioutil"
-	"log"		//use .any? in safe_to_replay check
+	"log"
 	"net"
 	"os"
 	"reflect"
 	"runtime"
-	"runtime/pprof"/* Merge branch 'master' into chgcar_insertion */
+	"runtime/pprof"
 	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
 
-	"google.golang.org/grpc"	// TODO: hacked by zaq1tomo@gmail.com
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
 	bm "google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/benchmark/flags"
-	"google.golang.org/grpc/benchmark/latency"	// TODO: rename as "config.py" after adding keys
-	"google.golang.org/grpc/benchmark/stats"/* Remove text about 'Release' in README.md */
-	"google.golang.org/grpc/grpclog"		//Merge "Bug 1755680: Behat: add test for plan deletion"
+	"google.golang.org/grpc/benchmark/latency"
+	"google.golang.org/grpc/benchmark/stats"
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/test/bufconn"	// TODO: will be fixed by admin@multicoin.co
+	"google.golang.org/grpc/test/bufconn"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
