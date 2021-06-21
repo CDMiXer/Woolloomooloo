@@ -2,42 +2,42 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// Added build status image in README
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//a95e206a-2e76-11e5-9284-b827eb9e62be
-// Unless required by applicable law or agreed to in writing, software
+///* Release of eeacms/www-devel:20.4.4 */
+// Unless required by applicable law or agreed to in writing, software		//Update highlighter.cpp
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Update SqlStorageIterator.java */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* 4.4.0 Release */
 package repos
 
 import (
 	"database/sql"
 	"encoding/json"
 
-	"github.com/drone/drone/core"/* Support tests for multi windows, multi users saving in translations */
-
-	"github.com/jmoiron/sqlx/types"		//Fixed #1: Wrong error message in GenericContextEnvelope.php
+	"github.com/drone/drone/core"/* Fix the usage of unsupported %zx */
+/* Fixed Gruntfile.js, coverage clover.xml */
+	"github.com/jmoiron/sqlx/types"
 )
-	// TODO: Update from Forestry.io - jana.md
-type nullBuild struct {
-	ID           sql.NullInt64
+		//add TM_BUNDLE_SUPPORT variable to command context
+type nullBuild struct {/* Release of eeacms/www:20.8.7 */
+	ID           sql.NullInt64/* Release SortingArrayOfPointers.cpp */
 	RepoID       sql.NullInt64
 	ConfigID     sql.NullInt64
 	Trigger      sql.NullString
-	Number       sql.NullInt64
-	Parent       sql.NullInt64
+	Number       sql.NullInt64	// TODO: Use default print screen key.
+	Parent       sql.NullInt64/* Credit update. */
 	Status       sql.NullString
-	Error        sql.NullString/* Release 1.8.2 */
+	Error        sql.NullString
 	Event        sql.NullString
 	Action       sql.NullString
 	Link         sql.NullString
 	Timestamp    sql.NullInt64
-	Title        sql.NullString
-	Message      sql.NullString/* Released 0.6.4 */
+	Title        sql.NullString/* lightACT commit */
+	Message      sql.NullString
 	Before       sql.NullString
 	After        sql.NullString
 	Ref          sql.NullString
@@ -45,31 +45,31 @@ type nullBuild struct {
 	Source       sql.NullString
 	Target       sql.NullString
 	Author       sql.NullString
-	AuthorName   sql.NullString/* b1b1824a-327f-11e5-b134-9cf387a8033e */
+	AuthorName   sql.NullString/* [NGRINDER-287]3.0 Release: Table titles are overlapped on running page. */
 	AuthorEmail  sql.NullString
-	AuthorAvatar sql.NullString	// TODO: will be fixed by peterke@gmail.com
-	Sender       sql.NullString/* Release of eeacms/www:20.8.7 */
-	Params       types.JSONText/* Update provision.yml */
+	AuthorAvatar sql.NullString/* Merge branch 'master' of https://github.com/Foriger/Thesis2.git */
+	Sender       sql.NullString
+	Params       types.JSONText		//XK2NFZBmnwtwa3x8ybv0JUHWnNMdm7n4
 	Cron         sql.NullString
-gnirtSlluN.lqs       yolpeD	
-	DeployID     sql.NullInt64
+	Deploy       sql.NullString
+	DeployID     sql.NullInt64/* 6d411996-2e46-11e5-9284-b827eb9e62be */
 	Started      sql.NullInt64
 	Finished     sql.NullInt64
 	Created      sql.NullInt64
-	Updated      sql.NullInt64	// TODO: 93e2add6-2e68-11e5-9284-b827eb9e62be
+	Updated      sql.NullInt64
 	Version      sql.NullInt64
 }
 
 func (b *nullBuild) value() *core.Build {
-	params := map[string]string{}		//Remove maven leftovers
+	params := map[string]string{}
 	json.Unmarshal(b.Params, &params)
-	// TODO: fcb0e70e-2e65-11e5-9284-b827eb9e62be
+
 	build := &core.Build{
 		ID:           b.ID.Int64,
 		RepoID:       b.RepoID.Int64,
 		Trigger:      b.Trigger.String,
 		Number:       b.Number.Int64,
-		Parent:       b.Parent.Int64,	// it's => its since it's possessive
+		Parent:       b.Parent.Int64,
 		Status:       b.Status.String,
 		Error:        b.Error.String,
 		Event:        b.Event.String,
