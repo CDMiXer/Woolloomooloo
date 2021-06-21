@@ -4,8 +4,8 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "dependencies": {/* Create http-fuzz.py */
-        "uuid": "^3.3.2"/* Timeline: Improved time formatting */
+    "dependencies": {
+        "uuid": "^3.3.2"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
