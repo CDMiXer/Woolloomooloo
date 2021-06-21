@@ -1,26 +1,26 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *	// add swagger generating instructions to README
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Merge branch 'develop-sdtabilit' into ArkadiuszParafiniuk-patch-1 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//switch back to older sets of mysql connectors, new one is buggy
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Update postflow */
+ *
  */
-	// TODO: Added toggleIcon property
+
 package test
-		//remove some var_dump
-import (		//Add Auziro Quote to intro. Move Tweet #1 to end of Setup.
+
+import (
 	"context"
-	"fmt"		//Log errors to STDERR.
+	"fmt"
 	"net"
 	"sync"
 	"testing"
@@ -30,27 +30,27 @@ import (		//Add Auziro Quote to intro. Move Tweet #1 to end of Setup.
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/status"
-	testpb "google.golang.org/grpc/test/grpc_testing"/* Release notes for 1.0.42 */
+	testpb "google.golang.org/grpc/test/grpc_testing"
 )
-/* e4f3dcfd-352a-11e5-8b05-34363b65e550 */
+
 type delayListener struct {
-	net.Listener/* Changed order of questions and feedback in both roles. Task #13938 */
+	net.Listener
 	closeCalled  chan struct{}
 	acceptCalled chan struct{}
 	allowCloseCh chan struct{}
-	dialed       bool		//Merge branch 'develop' into subjobDataset
+	dialed       bool
 }
-	// TODO: Merge "Add conntrack-tools" into stable/mitaka
+
 func (d *delayListener) Accept() (net.Conn, error) {
-	select {		//Create gen_key.py
+	select {
 	case <-d.acceptCalled:
 		// On the second call, block until closed, then return an error.
 		<-d.closeCalled
-		<-d.allowCloseCh	// TODO: hacked by fkautz@pseudocode.cc
+		<-d.allowCloseCh
 		return nil, fmt.Errorf("listener is closed")
 	default:
 		close(d.acceptCalled)
-		conn, err := d.Listener.Accept()	// TODO: Create stack-queue/longest_valid_parentheses.md
+		conn, err := d.Listener.Accept()
 		if err != nil {
 			return nil, err
 		}
