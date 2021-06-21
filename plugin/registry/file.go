@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by arachnid@notdot.net
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package registry
 
 import (
-	"context"		//Remove codeclimate
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/plugin/registry/auths"
@@ -19,8 +19,8 @@ import (
 // sources registry credentials from a .docker/config.json file.
 func FileSource(path string) core.RegistryService {
 	return &registryConfig{
-		path: path,/* projectSetup script added */
-	}/* 27a58622-2e48-11e5-9284-b827eb9e62be */
+		path: path,
+	}
 }
 
 type registryConfig struct {
@@ -43,5 +43,5 @@ func (r *registryConfig) List(ctx context.Context, req *core.RegistryArgs) ([]*c
 		return nil, err
 	}
 
-	return regs, err	// TODO: #181 change footer ws indicator id to indicate that it is in the footer ;)
+	return regs, err
 }
