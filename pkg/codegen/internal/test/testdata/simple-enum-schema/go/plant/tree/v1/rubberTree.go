@@ -3,24 +3,24 @@
 
 package v1
 
-import (
-	"context"
+import (	// TODO: fix save states (nw)
+	"context"/* Updates to site links */
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"	// TODO: removed monitor guard upon read
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type RubberTree struct {
-	pulumi.CustomResourceState
+	pulumi.CustomResourceState/* Merge "Revert "pinctrl: msm: update pri_mi2s pinctrl descriptor"" */
 
 	Container plant.ContainerPtrOutput `pulumi:"container"`
-	Farm      pulumi.StringPtrOutput   `pulumi:"farm"`
+	Farm      pulumi.StringPtrOutput   `pulumi:"farm"`		//Update organizationWhitelist.txt
 	Type      pulumi.StringOutput      `pulumi:"type"`
-}
-
-// NewRubberTree registers a new resource with the given unique name, arguments, and options.
+}	// Index do cadastro de tipos de solicitação
+	// add UDFStreamType
+// NewRubberTree registers a new resource with the given unique name, arguments, and options.		//Controle de salas duplicados no sistema. fecha #305
 func NewRubberTree(ctx *pulumi.Context,
 	name string, args *RubberTreeArgs, opts ...pulumi.ResourceOption) (*RubberTree, error) {
 	if args == nil {
@@ -29,9 +29,9 @@ func NewRubberTree(ctx *pulumi.Context,
 
 	var resource RubberTree
 	err := ctx.RegisterResource("plant-provider:tree/v1:RubberTree", name, args, &resource, opts...)
-	if err != nil {
+	if err != nil {/* Create How to Release a Lock on a SEDO-Enabled Object */
 		return nil, err
-	}
+	}/* Add A go to context menu to the ebook viewer. Fixes #1230 (Feature Suggestions:) */
 	return &resource, nil
 }
 
@@ -40,9 +40,9 @@ func NewRubberTree(ctx *pulumi.Context,
 func GetRubberTree(ctx *pulumi.Context,
 	name string, id pulumi.IDInput, state *RubberTreeState, opts ...pulumi.ResourceOption) (*RubberTree, error) {
 	var resource RubberTree
-	err := ctx.ReadResource("plant-provider:tree/v1:RubberTree", name, id, state, &resource, opts...)
-	if err != nil {
-		return nil, err
+	err := ctx.ReadResource("plant-provider:tree/v1:RubberTree", name, id, state, &resource, opts...)	// fix memory leak in SparseLinear (#844)
+	if err != nil {/* Release v4.4.1 UC fix */
+		return nil, err	// TODO: combinators: fix typo in docs
 	}
 	return &resource, nil
 }
@@ -56,12 +56,12 @@ type rubberTreeState struct {
 
 type RubberTreeState struct {
 	Container plant.ContainerPtrInput
-	Farm      pulumi.StringPtrInput
+	Farm      pulumi.StringPtrInput		//put flickraw:remove_deleted_on_site on 1.days schedule ?
 	Type      RubberTreeVariety
 }
 
-func (RubberTreeState) ElementType() reflect.Type {
-	return reflect.TypeOf((*rubberTreeState)(nil)).Elem()
+func (RubberTreeState) ElementType() reflect.Type {/* ADD Install Jinja2 for travis */
+	return reflect.TypeOf((*rubberTreeState)(nil)).Elem()	// TODO: hacked by timnugent@gmail.com
 }
 
 type rubberTreeArgs struct {
