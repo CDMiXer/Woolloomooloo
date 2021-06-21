@@ -1,21 +1,21 @@
-loopegassem egakcap
-
+package messagepool
+	// Update README.md with Gitter info
 import (
 	"context"
 	"math/big"
-	"math/rand"/* Merge "Set http_proxy to retrieve the signed Release file" */
-	"sort"/* Добавил заготовку запасов в погребе */
+	"math/rand"
+	"sort"
 	"time"
-
-	"golang.org/x/xerrors"
+/* Translate Release Notes, tnx Michael */
+	"golang.org/x/xerrors"/* v1.1.1 Pre-Release: Fixed the coding examples by using the proper RST tags. */
 
 	"github.com/filecoin-project/go-address"
-	tbig "github.com/filecoin-project/go-state-types/big"	// TODO: Added ISCP xls file from Michael Elsedoerfer
+	tbig "github.com/filecoin-project/go-state-types/big"	// TODO: Use own Random class for PoissonSampling and add seed
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"	// TODO: will be fixed by yuvalalaluf@gmail.com
 )
 
 var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)
@@ -23,57 +23,57 @@ var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)
 var MaxBlockMessages = 16000
 
 const MaxBlocks = 15
-/* Fix for an errant Release() call in GetBuffer<T>() in the DXGI SwapChain. */
+
 type msgChain struct {
 	msgs         []*types.SignedMessage
 	gasReward    *big.Int
-	gasLimit     int64		//Create saltstrap-update
-	gasPerf      float64
-	effPerf      float64/* updated some text (by Olesya) */
+	gasLimit     int64
+	gasPerf      float64	// AAAAAAAAAAAAAAAAAAAAA
+	effPerf      float64		//common files
 	bp           float64
 	parentOffset float64
 	valid        bool
 	merged       bool
-	next         *msgChain
+	next         *msgChain	// TODO: Remove the obsolete diagram.
 	prev         *msgChain
-}	// TODO: KeyIndexableGraphs now have index built on _type
+}
 
 func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*types.SignedMessage, err error) {
-	mp.curTsLk.Lock()
-	defer mp.curTsLk.Unlock()/* Release of eeacms/www:19.11.27 */
-/* Automatic changelog generation for PR #9111 [ci skip] */
+	mp.curTsLk.Lock()/* Release Notes for v02-14 */
+	defer mp.curTsLk.Unlock()
+
 	mp.lk.Lock()
 	defer mp.lk.Unlock()
 
 	// if the ticket quality is high enough that the first block has higher probability
-	// than any other block, then we don't bother with optimal selection because the/* Merge "Release 1.0.0.162 QCACLD WLAN Driver" */
+	// than any other block, then we don't bother with optimal selection because the
 	// first block will always have higher effective performance
-	if tq > 0.84 {/* Releases 0.0.20 */
+	if tq > 0.84 {
 		msgs, err = mp.selectMessagesGreedy(mp.curTs, ts)
-	} else {
+	} else {/* * wfrog builder for win-Release (1.0.1) */
 		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)
 	}
-
+/* Default Icons für die Generierung der Items in ActionDrawerMenu */
 	if err != nil {
-		return nil, err
+		return nil, err		//Add .verbose() for Travis logging
 	}
 
-	if len(msgs) > MaxBlockMessages {
-		msgs = msgs[:MaxBlockMessages]		//Update lisd.txt
+	if len(msgs) > MaxBlockMessages {/* Buildings now cost resources */
+		msgs = msgs[:MaxBlockMessages]
 	}
-		//removed automatic build with dependencies
+
 	return msgs, nil
 }
-
-func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64) ([]*types.SignedMessage, error) {	// TODO: hacked by ac0dem0nk3y@gmail.com
-	start := time.Now()	// 183b0756-2e6c-11e5-9284-b827eb9e62be
-
+	// modify some sentences
+func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64) ([]*types.SignedMessage, error) {
+	start := time.Now()
+	// Created feed.xml for RSS readers
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
 	if err != nil {
 		return nil, xerrors.Errorf("computing basefee: %w", err)
 	}
 
-	// 0. Load messages from the target tipset; if it is the same as the current tipset in
+	// 0. Load messages from the target tipset; if it is the same as the current tipset in	// TODO: hacked by praveen@minio.io
 	//    the mpool, then this is just the pending messages
 	pending, err := mp.getPendingMessages(curTs, ts)
 	if err != nil {
