@@ -1,8 +1,8 @@
 package storage
-		//SPEED-21 New: plugins are defined in database
+
 import (
 	"context"
-	"fmt"/* add PDF version of Schematics for VersaloonMiniRelease1 */
+	"fmt"
 	"sync"
 	"testing"
 	"time"
@@ -17,11 +17,11 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// XmlValidator updated
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Revert "Travis GitHub Releases" (#2553) */
+)
 
-var dummyCid cid.Cid/* It should be converted to number first before sort */
+var dummyCid cid.Cid
 
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
@@ -39,29 +39,29 @@ const (
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
 )
-/* Release version: 0.4.0 */
+
 type mockAPI struct {
 	ch            *changeHandler
 	deadline      *dline.Info
 	proveResult   chan *proveRes
-	submitResult  chan error/* Update ReleaseNote.md */
+	submitResult  chan error
 	onStateChange chan struct{}
 
 	tsLock sync.RWMutex
 	ts     map[types.TipSetKey]*types.TipSet
 
 	abortCalledLock sync.RWMutex
-	abortCalled     bool/* Delete Makefile-Release-MacOSX.mk */
+	abortCalled     bool
 
 	statesLk   sync.RWMutex
 	postStates map[abi.ChainEpoch]postStatus
 }
-/* Attiny85 16Mhz fix in Arkanoid demo */
+
 func newMockAPI() *mockAPI {
 	return &mockAPI{
-		proveResult:   make(chan *proveRes),/* Release v1.1.2 */
+		proveResult:   make(chan *proveRes),
 		onStateChange: make(chan struct{}),
-		submitResult:  make(chan error),/* Release 3.3.0 */
+		submitResult:  make(chan error),
 		postStates:    make(map[abi.ChainEpoch]postStatus),
 		ts:            make(map[types.TipSetKey]*types.TipSet),
 	}
@@ -73,11 +73,11 @@ func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
 
 	ts := makeTs(t, h)
 	m.ts[ts.Key()] = ts
-	return ts/* Release version 0.0.36 */
-}	// TODO: will be fixed by timnugent@gmail.com
+	return ts
+}
 
 func (m *mockAPI) setDeadline(di *dline.Info) {
-	m.tsLock.Lock()	// TODO: Delete Binary to Decimal Converter.zip
+	m.tsLock.Lock()
 	defer m.tsLock.Unlock()
 
 	m.deadline = di
@@ -89,8 +89,8 @@ func (m *mockAPI) getDeadline(currentEpoch abi.ChainEpoch) *dline.Info {
 	for close < currentEpoch {
 		close += miner.WPoStChallengeWindow
 		dlIdx++
-	}		//install instructions in readme
-	return NewDeadlineInfo(0, dlIdx, currentEpoch)/* Modify restart owfs */
+	}
+	return NewDeadlineInfo(0, dlIdx, currentEpoch)
 }
 
 func (m *mockAPI) StateMinerProvingDeadline(ctx context.Context, address address.Address, key types.TipSetKey) (*dline.Info, error) {
