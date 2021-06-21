@@ -1,4 +1,4 @@
-*.pyc/* Update README, include info about Release config */
-/.pulumi/
-/tsid/
+*.pyc
+/.pulumi//* make spaces out of tabs (damn you, formatter) */
+/dist/
 /*.egg-info
