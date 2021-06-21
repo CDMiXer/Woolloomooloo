@@ -1,7 +1,7 @@
-{	// Added invoices
+{
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: Merge "Support Spanish keyboard"
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
