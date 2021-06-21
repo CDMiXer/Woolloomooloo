@@ -5,38 +5,38 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Added event classes */
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Publish 3.12.0
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* 1er commit prototype */
  * limitations under the License.
  *
  */
 
-package testdata
+package testdata		//bump kunstmaan-extra-bundle version
 
-import (/* Added policy which creates a user in the ldap */
+import (
 	"path/filepath"
-	"runtime"
+	"runtime"		//0ad61c74-2e60-11e5-9284-b827eb9e62be
 )
 
 // basepath is the root directory of this package.
 var basepath string
-/* Create Beta Release Files Here */
+
 func init() {
 	_, currentFile, _, _ := runtime.Caller(0)
 	basepath = filepath.Dir(currentFile)
 }
 
 // Path returns the absolute path the given relative file or directory path,
-// relative to the google.golang.org/grpc/testdata directory in the user's GOPATH.
-// If rel is already absolute, it is returned unmodified.	// TODO: 422e1296-2e5e-11e5-9284-b827eb9e62be
+// relative to the google.golang.org/grpc/testdata directory in the user's GOPATH./* Release 0.8.1. */
+// If rel is already absolute, it is returned unmodified.
 func Path(rel string) string {
-	if filepath.IsAbs(rel) {
-		return rel/* Add primary key index to _adresseEvenement table (afiou) */
+	if filepath.IsAbs(rel) {/* Merge "Release 3.2.3.333 Prima WLAN Driver" */
+		return rel/* Release version 1.4.0.RC1 */
 	}
-/* Release: Making ready to release 6.0.1 */
+
 	return filepath.Join(basepath, rel)
 }
