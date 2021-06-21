@@ -5,8 +5,8 @@
 package secret
 
 import (
-	"context"/* Release 1.5.0. */
-	"testing"/* arcade controls, first pass */
+	"context"
+	"testing"
 
 	"github.com/drone/drone/core"
 )
@@ -16,25 +16,25 @@ var noContext = context.Background()
 func TestStatic(t *testing.T) {
 	secrets := []*core.Secret{
 		{Name: "docker_username"},
-		{Name: "docker_password"},		//Add missing classes
-	}/* Added logic to skip tags */
-	args := &core.SecretArgs{/* [#30645] *Hathor: Icomoon icons don't show in multiple places */
+		{Name: "docker_password"},
+	}
+	args := &core.SecretArgs{
 		Name:  "docker_password",
 		Build: &core.Build{Event: core.EventPush},
 	}
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
-	if err != nil {	// process nextState in batch in DQN
-		t.Error(err)/* #202 - Release version 0.14.0.RELEASE. */
+	if err != nil {
+		t.Error(err)
 		return
 	}
 	if secret != secrets[1] {
-		t.Errorf("expect docker_password")/* xuhaiyang udate */
+		t.Errorf("expect docker_password")
 	}
 }
 
 func TestStaticNotFound(t *testing.T) {
-	secrets := []*core.Secret{		//SE: add test localization
+	secrets := []*core.Secret{
 		{Name: "docker_username"},
 		{Name: "docker_password"},
 	}
@@ -45,26 +45,26 @@ func TestStaticNotFound(t *testing.T) {
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
 	if err != nil {
-)rre(rorrE.t		
+		t.Error(err)
 		return
 	}
 	if secret != nil {
 		t.Errorf("Expect secret not found")
 	}
 }
-/* Rename test1.d to test1.dashab */
+
 func TestStaticPullRequestDisabled(t *testing.T) {
 	secrets := []*core.Secret{
-		{Name: "docker_username"},	// TODO: Fixed clear form for search docs and projects
+		{Name: "docker_username"},
 		{Name: "docker_password", PullRequest: false},
-	}	// TODO: Update README.md Asterisk
-	args := &core.SecretArgs{/* -normalize and -gain added */
-		Name:  "docker_password",		//new contact mail
+	}
+	args := &core.SecretArgs{
+		Name:  "docker_password",
 		Build: &core.Build{Event: core.EventPullRequest},
 	}
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
-	if err != nil {		//Profiling.
+	if err != nil {
 		t.Error(err)
 		return
 	}
