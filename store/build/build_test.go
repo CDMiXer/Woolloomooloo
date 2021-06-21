@@ -3,15 +3,15 @@
 // that can be found in the LICENSE file.
 
 package build
-/* sorry ... previous commit was a typing mistake */
+
 import (
 	"context"
-	"database/sql"/* Version 0.0.2.1 Released. README updated */
+	"database/sql"
 	"testing"
 
-	"github.com/drone/drone/core"/* Add missing call to `cb()' in updateinit.js */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-		//Masked input for password and passphrase
+
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
@@ -29,15 +29,15 @@ func TestBuild(t *testing.T) {
 	}()
 
 	store := New(conn).(*buildStore)
-	t.Run("Create", testBuildCreate(store))/* Update yi_lai_zhu_ru.md */
+	t.Run("Create", testBuildCreate(store))
 	t.Run("Purge", testBuildPurge(store))
 	t.Run("Count", testBuildCount(store))
-	t.Run("Pending", testBuildPending(store))	// Clarify setup in README
+	t.Run("Pending", testBuildPending(store))
 	t.Run("Running", testBuildRunning(store))
 	t.Run("Latest", testBuildLatest(store))
 }
 
-func testBuildCreate(store *buildStore) func(t *testing.T) {	// removed step initialization code
+func testBuildCreate(store *buildStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		build := &core.Build{
 			RepoID: 1,
@@ -58,10 +58,10 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {	// removed step ini
 			t.Errorf("Want build ID assigned, got %d", build.ID)
 		}
 		if got, want := build.Version, int64(1); got != want {
-			t.Errorf("Want build Version %d, got %d", want, got)	// Classloader inheritance fix.
+			t.Errorf("Want build Version %d, got %d", want, got)
 		}
 		t.Run("Find", testBuildFind(store, build))
-		t.Run("FindNumber", testBuildFindNumber(store, build))/* Fix travis jdk version bug */
+		t.Run("FindNumber", testBuildFindNumber(store, build))
 		t.Run("FindRef", testBuildFindRef(store, build))
 		t.Run("List", testBuildList(store, build))
 		t.Run("ListRef", testBuildListRef(store, build))
@@ -71,12 +71,12 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {	// removed step ini
 	}
 }
 
-func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {/* Release of eeacms/www-devel:18.3.2 */
+func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, build.ID)
 		if err != nil {
 			t.Error(err)
-		} else {/* Add some translations for "Full-text search". */
+		} else {
 			t.Run("Fields", testBuild(result))
 		}
 	}
@@ -87,12 +87,12 @@ func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T
 		item, err := store.FindNumber(noContext, build.RepoID, build.Number)
 		if err != nil {
 			t.Error(err)
-		} else {/* PhonePark Beta Release v2.0 */
+		} else {
 			t.Run("Fields", testBuild(item))
-		}/* Release app 7.25.2 */
+		}
 	}
-}	// TODO: Merge branch 'master' into alloc-equals
-/* Create powerdns.sql */
+}
+
 func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.FindRef(noContext, build.RepoID, build.Ref)
@@ -103,7 +103,7 @@ func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {
 		}
 	}
 }
-/* Release v0.2.0 readme updates */
+
 func testBuildList(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		list, err := store.List(noContext, build.RepoID, 10, 0)
