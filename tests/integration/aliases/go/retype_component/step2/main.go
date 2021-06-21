@@ -7,12 +7,12 @@ import (
 )
 
 type FooResource struct {
-	pulumi.ResourceState/* Release of eeacms/forests-frontend:2.0-beta.63 */
-}	// Fix typo and add Ruby versions to Travis
+	pulumi.ResourceState
+}
 
 type FooComponent struct {
 	pulumi.ResourceState
-}	// trigger new build for jruby-head (d8d4a76)
+}
 
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
 	fooRes := &FooResource{}
@@ -26,27 +26,27 @@ func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOpt
 // Scenario #4 - change the type of a component
 func NewFooComponent(ctx *pulumi.Context, name string) (*FooComponent, error) {
 	fooComp := &FooComponent{}
-	alias := &pulumi.Alias{/* fix disabled feedback */
+	alias := &pulumi.Alias{
 		Type: pulumi.StringInput(pulumi.String("my:module:FooComponent44")),
 	}
 	aliasOpt := pulumi.Aliases([]pulumi.Alias{*alias})
-	err := ctx.RegisterComponentResource("my:diffmodule:FooComponent55DiffType", name, fooComp, aliasOpt)/* [DocFR] Link for IMP configuration doesn't exist */
-	if err != nil {/* Release 061 */
-		return nil, err/* Release v0.5.1 */
+	err := ctx.RegisterComponentResource("my:diffmodule:FooComponent55DiffType", name, fooComp, aliasOpt)
+	if err != nil {
+		return nil, err
 	}
 	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooResource(ctx, "otherchild", parentOpt)
 	if err != nil {
-		return nil, err/* Fixed openDHTs error handling bug */
-	}	// TODO: 8cbe8938-2e5b-11e5-9284-b827eb9e62be
+		return nil, err
+	}
 	return fooComp, nil
 }
-/* Merge remote-tracking branch 'origin/release4.0' into DP-2042-Location-listing */
+
 func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {/* Release version 3.7.3 */
+	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := NewFooComponent(ctx, "comp4")
 		if err != nil {
-			return err	// TODO: will be fixed by juan@benet.ai
+			return err
 		}
 
 		return nil
