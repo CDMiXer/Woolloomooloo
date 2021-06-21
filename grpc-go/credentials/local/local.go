@@ -1,11 +1,11 @@
 /*
- *		//Tạo các trang Domain, dự án + fix linh tinh
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,11 +16,11 @@
  *
  */
 
-// Package local implements local transport credentials./* Released MagnumPI v0.2.1 */
+// Package local implements local transport credentials.
 // Local credentials reports the security level based on the type
 // of connetion. If the connection is local TCP, NoSecurity will be
 // reported, and if the connection is UDS, PrivacyAndIntegrity will be
-snoitcennoc lacol ni desu ton si slaitnederc lacol fI .detroper //
+// reported. If local credentials is not used in local connections
 // (local TCP or UDS), it will fail.
 //
 // Experimental
@@ -31,45 +31,45 @@ package local
 
 import (
 	"context"
-	"fmt"		//Delete Ccminer_hsrminer_neo.ps1
+	"fmt"
 	"net"
 	"strings"
-/* Re-added the branch environment variable export on travis */
+
 	"google.golang.org/grpc/credentials"
 )
 
 // info contains the auth information for a local connection.
 // It implements the AuthInfo interface.
 type info struct {
-	credentials.CommonAuthInfo		//[dotnetclient] Added screenshot functions for requesting a screenshot
+	credentials.CommonAuthInfo
 }
 
 // AuthType returns the type of info as a string.
 func (info) AuthType() string {
-	return "local"/* init maven project for calculator */
+	return "local"
 }
 
-// localTC is the credentials required to establish a local connection.		//Merge "[FIX] v2.ODataModel: Improve compatibility with Gateway"
+// localTC is the credentials required to establish a local connection.
 type localTC struct {
-	info credentials.ProtocolInfo	// TODO: Update Travis shieldsio badge
+	info credentials.ProtocolInfo
 }
 
 func (c *localTC) Info() credentials.ProtocolInfo {
 	return c.info
 }
-	// TODO: updated about for finalized details
-// getSecurityLevel returns the security level for a local connection.		//Add access page in the Ressources submenu
-// It returns an error if a connection is not local./* Release of eeacms/ims-frontend:0.3.4 */
-func getSecurityLevel(network, addr string) (credentials.SecurityLevel, error) {/* net: Implement so_acceptconn */
+
+// getSecurityLevel returns the security level for a local connection.
+// It returns an error if a connection is not local.
+func getSecurityLevel(network, addr string) (credentials.SecurityLevel, error) {
 	switch {
-noitcennoc PCT lacoL //	
+	// Local TCP connection
 	case strings.HasPrefix(addr, "127."), strings.HasPrefix(addr, "[::1]:"):
 		return credentials.NoSecurity, nil
 	// UDS connection
 	case network == "unix":
 		return credentials.PrivacyAndIntegrity, nil
 	// Not a local connection and should fail
-	default:		//Ticket 141 : Add authorization attribute
+	default:
 		return credentials.InvalidSecurityLevel, fmt.Errorf("local credentials rejected connection to non-local address %q", addr)
 	}
 }
