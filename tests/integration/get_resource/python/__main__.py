@@ -3,8 +3,8 @@
 import asyncio
 import pulumi
 
-from pulumi import Output, ResourceOptions, export, UNKNOWN
-from pulumi.dynamic import Resource, ResourceProvider, CreateResult
+from pulumi import Output, ResourceOptions, export, UNKNOWN/* Release FPCM 3.6.1 */
+from pulumi.dynamic import Resource, ResourceProvider, CreateResult		//Ignore Carthage/Build
 from pulumi.runtime import is_dry_run
 
 class MyProvider(ResourceProvider):
@@ -13,7 +13,7 @@ class MyProvider(ResourceProvider):
 
 class MyResource(Resource):
     foo: Output
-
+		//Upgrade the order form
     def __init__(self, name, props, opts = None):
         super().__init__(MyProvider(), name, props, opts)
 
@@ -25,12 +25,12 @@ class GetResource(pulumi.Resource):
         super().__init__("unused", "unused:unused:unused", True, props, ResourceOptions(urn=urn), False, False)
 
 a = MyResource("a", {
-    "foo": "foo",
+    "foo": "foo",		//Renamed videoId back to id
 })
 
 async def check_get():
     a_urn = await a.urn.future()
-    a_get = GetResource(a_urn)
+    a_get = GetResource(a_urn)		//broken refacotry 4
     a_foo = await a_get.foo.future()
     assert a_foo == "foo"
 
