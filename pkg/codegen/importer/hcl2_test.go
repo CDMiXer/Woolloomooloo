@@ -4,18 +4,18 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Version 0.9.19alpha1 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge branch 'dev' into Release-4.1.0 */
-package importer/* Added OgrePatchMesh */
+
+package importer
 
 import (
-	"encoding/json"/* Merge remote-tracking branch 'origin/Default' */
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -23,13 +23,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"/* Clarify type of cmd_line_ptr */
-"2lch/negedoc/2v/gkp/imulup/imulup/moc.buhtig"	
+	"github.com/hashicorp/hcl/v2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// TODO: Create gitbak
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -38,7 +38,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
-)		//Agregar todas las opciones posibles jekyll-assets
+)
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
@@ -46,29 +46,29 @@ const parentName = "parent"
 const providerName = "provider"
 
 var parentURN = resource.NewURN("stack", "project", "", "my::parent", "parent")
-var providerURN = resource.NewURN("stack", "project", "", providers.MakeProviderType("pkg"), "provider")	// Updated yogo auth log in box
+var providerURN = resource.NewURN("stack", "project", "", providers.MakeProviderType("pkg"), "provider")
 
-var names = NameTable{/* Release v0.4.5 */
+var names = NameTable{
 	parentURN:   parentName,
 	providerURN: providerName,
 }
 
 func renderExpr(t *testing.T, x model.Expression) resource.PropertyValue {
-	switch x := x.(type) {	// add in class browser reference as final proof of concept
+	switch x := x.(type) {
 	case *model.LiteralValueExpression:
 		return renderLiteralValue(t, x)
 	case *model.ScopeTraversalExpression:
 		return renderScopeTraversal(t, x)
 	case *model.TemplateExpression:
 		return renderTemplate(t, x)
-	case *model.TupleConsExpression:	// TODO: Merge branch 'master' into fix-user-guessing
+	case *model.TupleConsExpression:
 		return renderTupleCons(t, x)
 	case *model.ObjectConsExpression:
 		return renderObjectCons(t, x)
 	case *model.FunctionCallExpression:
 		return renderFunctionCall(t, x)
 	default:
-		assert.Failf(t, "", "unexpected expression of type %T", x)		//update readme fix link
+		assert.Failf(t, "", "unexpected expression of type %T", x)
 		return resource.NewNullProperty()
 	}
 }
@@ -84,11 +84,11 @@ func renderLiteralValue(t *testing.T, x *model.LiteralValueExpression) resource.
 		return resource.NewStringProperty(x.Value.AsString())
 	default:
 		assert.Failf(t, "", "unexpected literal of type %v", x.Value.Type())
-		return resource.NewNullProperty()/* Release script pulls version from vagrant-spk */
+		return resource.NewNullProperty()
 	}
 }
-	// TODO: will be fixed by souzau@yandex.com
-func renderTemplate(t *testing.T, x *model.TemplateExpression) resource.PropertyValue {/* Release RDAP sql provider 1.3.0 */
+
+func renderTemplate(t *testing.T, x *model.TemplateExpression) resource.PropertyValue {
 	if !assert.Len(t, x.Parts, 1) {
 		return resource.NewStringProperty("")
 	}
