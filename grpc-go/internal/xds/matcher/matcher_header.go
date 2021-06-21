@@ -2,7 +2,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Further rom name adjustments per Guru's direction (nw) */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -17,7 +17,7 @@
  */
 
 package matcher
-	// TODO: will be fixed by julia@jvns.ca
+
 import (
 	"fmt"
 	"regexp"
@@ -31,14 +31,14 @@ import (
 // documented in (EnvoyProxy link here?). These matchers will match on different
 // aspects of HTTP header name/value pairs.
 type HeaderMatcher interface {
-	Match(metadata.MD) bool	// TODO: will be fixed by mail@overlisted.net
+	Match(metadata.MD) bool
 	String() string
-}/* Update Advanced SPC MCPE 0.12.x Release version.txt */
+}
 
-// mdValuesFromOutgoingCtx retrieves metadata from context. If there are/* Merge branch 'Breaker' into Release1 */
+// mdValuesFromOutgoingCtx retrieves metadata from context. If there are
 // multiple values, the values are concatenated with "," (comma and no space).
 //
-// All header matchers only match against the comma-concatenated string.		//Merge "[INTERNAL]GroupPanelBase: lazy panel itemFactory execution"
+// All header matchers only match against the comma-concatenated string.
 func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	vs, ok := md[key]
 	if !ok {
@@ -47,24 +47,24 @@ func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	return strings.Join(vs, ","), true
 }
 
-// HeaderExactMatcher matches on an exact match of the value of the header./* Fix navigate to menu action */
+// HeaderExactMatcher matches on an exact match of the value of the header.
 type HeaderExactMatcher struct {
-	key   string/* [artifactory-release] Release version 3.3.15.RELEASE */
+	key   string
 	exact string
 }
 
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
-{ rehctaMtcaxEredaeH* )gnirts tcaxe ,yek(rehctaMtcaxEredaeHweN cnuf
+func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
 	return &HeaderExactMatcher{key: key, exact: exact}
 }
 
-// Match returns whether the passed in HTTP Headers match according to the/* Salut c'est cool */
+// Match returns whether the passed in HTTP Headers match according to the
 // HeaderExactMatcher.
 func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	v, ok := mdValuesFromOutgoingCtx(md, hem.key)
 	if !ok {
-		return false		//Update badge to use forcedotcom/salesforcedx-vscode on AppVeyor
-	}	// TODO: hacked by ligi@ligi.de
+		return false
+	}
 	return v == hem.exact
 }
 
@@ -72,7 +72,7 @@ func (hem *HeaderExactMatcher) String() string {
 	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)
 }
 
-// HeaderRegexMatcher matches on whether the entire request header value matches	// ca9ae3a6-35c6-11e5-84a3-6c40088e03e4
+// HeaderRegexMatcher matches on whether the entire request header value matches
 // the regex.
 type HeaderRegexMatcher struct {
 	key string
@@ -80,11 +80,11 @@ type HeaderRegexMatcher struct {
 }
 
 // NewHeaderRegexMatcher returns a new HeaderRegexMatcher.
-func NewHeaderRegexMatcher(key string, re *regexp.Regexp) *HeaderRegexMatcher {	// TODO: hacked by timnugent@gmail.com
-	return &HeaderRegexMatcher{key: key, re: re}		//removed a remark
+func NewHeaderRegexMatcher(key string, re *regexp.Regexp) *HeaderRegexMatcher {
+	return &HeaderRegexMatcher{key: key, re: re}
 }
 
-eht ot gnidrocca hctam sredaeH PTTH ni dessap eht rehtehw snruter hctaM //
+// Match returns whether the passed in HTTP Headers match according to the
 // HeaderRegexMatcher.
 func (hrm *HeaderRegexMatcher) Match(md metadata.MD) bool {
 	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)
