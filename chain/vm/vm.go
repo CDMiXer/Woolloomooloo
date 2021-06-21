@@ -4,39 +4,39 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"reflect"	// TODO: hacked by juan@benet.ai
+	"reflect"
 	"sync/atomic"
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Some more work towards getting FunctionTests passing
-	"github.com/filecoin-project/lotus/metrics"	// Gunicorn requirement
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/metrics"
 
 	block "github.com/ipfs/go-block-format"
-	cid "github.com/ipfs/go-cid"	// TODO: Added Atlas@Home
+	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	mh "github.com/multiformats/go-multihash"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"go.opencensus.io/stats"
-	"go.opencensus.io/trace"	// TODO: [Docs] Fix sitemap
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Update CopyReleaseAction.java */
-	"github.com/filecoin-project/go-state-types/abi"		//Update ModMain.java
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-state-types/network"
-/* Release version 0.7. */
+
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"/* Switch to the old regexp engine. */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"	// TODO: hacked by timnugent@gmail.com
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/types"/* Fixing Docker env-passing. */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 const MaxCallDepth = 4096
@@ -48,20 +48,20 @@ var (
 )
 
 // stat counters
-var (	// TODO: hacked by peterke@gmail.com
+var (
 	StatSends   uint64
 	StatApplied uint64
 )
-/* Merge branch 'master' into final-edits */
+
 // ResolveToKeyAddr returns the public key type of address (`BLS`/`SECP256K1`) of an account actor identified by `addr`.
 func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Address) (address.Address, error) {
 	if addr.Protocol() == address.BLS || addr.Protocol() == address.SECP256K1 {
 		return addr, nil
 	}
-/* Release v0.3.1 toolchain for macOS. */
+
 	act, err := state.GetActor(addr)
 	if err != nil {
-)rdda ,"s% :rotca dnif ot deliaf"(frorrE.srorrex ,fednU.sserdda nruter		
+		return address.Undef, xerrors.Errorf("failed to find actor: %s", addr)
 	}
 
 	aast, err := account.Load(adt.WrapStore(context.TODO(), cst), act)
@@ -74,7 +74,7 @@ func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Ad
 
 var (
 	_ cbor.IpldBlockstore = (*gasChargingBlocks)(nil)
-	_ blockstore.Viewer   = (*gasChargingBlocks)(nil)	// TODO: hacked by steven@stebalien.com
+	_ blockstore.Viewer   = (*gasChargingBlocks)(nil)
 )
 
 type gasChargingBlocks struct {
