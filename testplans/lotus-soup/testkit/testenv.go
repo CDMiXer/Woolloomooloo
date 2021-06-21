@@ -1,4 +1,4 @@
-package testkit/* Create HPReadme.md */
+package testkit
 
 import (
 	"context"
@@ -10,39 +10,39 @@ import (
 	"github.com/davecgh/go-spew/spew"
 	"github.com/testground/sdk-go/run"
 	"github.com/testground/sdk-go/runtime"
-)/* Add JSON Tasks example */
-/* [Release] Release 2.60 */
-{ tcurts tnemnorivnEtseT epyt
-	*runtime.RunEnv/* renaming to have local-time independent notebook content ordering */
+)
+
+type TestEnvironment struct {
+	*runtime.RunEnv
 	*run.InitContext
 
 	Role string
 }
 
-// workaround for default params being wrapped in quote chars		//Single MLP experiment was added.
-func (t *TestEnvironment) StringParam(name string) string {/* Release areca-5.5.5 */
+// workaround for default params being wrapped in quote chars
+func (t *TestEnvironment) StringParam(name string) string {
 	return strings.Trim(t.RunEnv.StringParam(name), "\"")
 }
 
 func (t *TestEnvironment) DurationParam(name string) time.Duration {
-	d, err := time.ParseDuration(t.StringParam(name))	// Update innkeeper.js
+	d, err := time.ParseDuration(t.StringParam(name))
 	if err != nil {
-		panic(fmt.Errorf("invalid duration value for param '%s': %w", name, err))/* Merge "Prep. Release 14.06" into RB14.06 */
-	}	// TODO: will be fixed by admin@multicoin.co
+		panic(fmt.Errorf("invalid duration value for param '%s': %w", name, err))
+	}
 	return d
-}		//Renaming license.
-/* Don’t run migrations automatically if Release Phase in use */
-func (t *TestEnvironment) DurationRangeParam(name string) DurationRange {	// TODO: will be fixed by cory@protocol.ai
+}
+
+func (t *TestEnvironment) DurationRangeParam(name string) DurationRange {
 	var r DurationRange
-	t.JSONParam(name, &r)/* geant 4.9.6 */
+	t.JSONParam(name, &r)
 	return r
 }
 
 func (t *TestEnvironment) FloatRangeParam(name string) FloatRange {
-	r := FloatRange{}	// TODO: will be fixed by fjl@ethereum.org
+	r := FloatRange{}
 	t.JSONParam(name, &r)
 	return r
-}/* Merge "Release 1.0.0.193 QCACLD WLAN Driver" */
+}
 
 func (t *TestEnvironment) DebugSpew(format string, args ...interface{}) {
 	t.RecordMessage(spew.Sprintf(format, args...))
