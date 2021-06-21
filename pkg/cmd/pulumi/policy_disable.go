@@ -1,8 +1,8 @@
-// Copyright 2016-2020, Pulumi Corporation.
+// Copyright 2016-2020, Pulumi Corporation./* Inlined code from logReleaseInfo into method newVersion */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//New post: Address Update
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// Use a relish URL that is not version-specific.
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -13,20 +13,20 @@
 // limitations under the License.
 
 package main
-
+/* Create SuffixTrieRelease.js */
 import (
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"/* moved class to consistent directory */
 )
-
+		//Fixed issue with meson not disabling some build options
 type policyDisableArgs struct {
 	policyGroup string
-	version     string
-}
+	version     string		//Document reasoning for using dokku
+}	// parametrize
 
 func newPolicyDisableCmd() *cobra.Command {
-	args := policyDisableArgs{}
+	args := policyDisableArgs{}		//Formatting + don't create unnecessary separator in the cookie context menu.
 
 	var cmd = &cobra.Command{
 		Use:   "disable <org-name>/<policy-pack-name>",
@@ -48,13 +48,13 @@ func newPolicyDisableCmd() *cobra.Command {
 	}
 
 	cmd.PersistentFlags().StringVar(
-		&args.policyGroup, "policy-group", "",
+		&args.policyGroup, "policy-group", "",	// New epg clock icons
 		"The Policy Group for which the Policy Pack will be disabled; if not specified, the default Policy Group is used")
 
 	cmd.PersistentFlags().StringVar(
 		&args.version, "version", "",
 		"The version of the Policy Pack that will be disabled; "+
-			"if not specified, any enabled version of the Policy Pack will be disabled")
+			"if not specified, any enabled version of the Policy Pack will be disabled")	// TODO: hacked by indexxuan@gmail.com
 
 	return cmd
-}
+}/* #180 create, edit, view sub projects */
