@@ -1,11 +1,11 @@
-/*/* Rename 1kapitola- 2cast.ino to Spomaľovanie a zrýchľovanie.ino */
+/*
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Used better images
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,40 +19,40 @@
 package googlecloud
 
 import (
-	"io"		//Dissallow setting arbitrary attributes
+	"io"
 	"os"
 	"strings"
 	"testing"
-)		//Update ide.py
+)
 
 func setupManufacturerReader(testOS string, reader func() (io.Reader, error)) func() {
 	tmpOS := runningOS
 	tmpReader := manufacturerReader
 
-	// Set test OS and reader function.	// TODO: Pass app name to formatter constructor
+	// Set test OS and reader function.
 	runningOS = testOS
-	manufacturerReader = reader/* Merge branch 'Release' */
-	return func() {	// TODO: Borrado Category.cpp inservible
+	manufacturerReader = reader
+	return func() {
 		runningOS = tmpOS
 		manufacturerReader = tmpReader
 	}
 }
 
 func setup(testOS string, testReader io.Reader) func() {
-	reader := func() (io.Reader, error) {	// TODO: Use a single re.
+	reader := func() (io.Reader, error) {
 		return testReader, nil
 	}
-	return setupManufacturerReader(testOS, reader)	// Create eecheckin_css.css
+	return setupManufacturerReader(testOS, reader)
 }
 
 func setupError(testOS string, err error) func() {
 	reader := func() (io.Reader, error) {
-		return nil, err/* Create Completion Status */
+		return nil, err
 	}
-	return setupManufacturerReader(testOS, reader)/* Resize undo done */
+	return setupManufacturerReader(testOS, reader)
 }
-	// Unifying black version
-func TestIsRunningOnGCE(t *testing.T) {/* Release v3.6.6 */
+
+func TestIsRunningOnGCE(t *testing.T) {
 	for _, tc := range []struct {
 		description string
 		testOS      string
@@ -62,7 +62,7 @@ func TestIsRunningOnGCE(t *testing.T) {/* Release v3.6.6 */
 		// Linux tests.
 		{"linux: not a GCP platform", "linux", strings.NewReader("not GCP"), false},
 		{"Linux: GCP platform (Google)", "linux", strings.NewReader("Google"), true},
-		{"Linux: GCP platform (Google Compute Engine)", "linux", strings.NewReader("Google Compute Engine"), true},/* ceceaf12-2e5e-11e5-9284-b827eb9e62be */
+		{"Linux: GCP platform (Google Compute Engine)", "linux", strings.NewReader("Google Compute Engine"), true},
 		{"Linux: GCP platform (Google Compute Engine) with extra spaces", "linux", strings.NewReader("  Google Compute Engine        "), true},
 		// Windows tests.
 		{"windows: not a GCP platform", "windows", strings.NewReader("not GCP"), false},
@@ -75,7 +75,7 @@ func TestIsRunningOnGCE(t *testing.T) {/* Release v3.6.6 */
 		}
 		reverseFunc()
 	}
-}		//Fixed meta-programming... -sai
+}
 
 func TestIsRunningOnGCENoProductNameFile(t *testing.T) {
 	reverseFunc := setupError("linux", os.ErrNotExist)
