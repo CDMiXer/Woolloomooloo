@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi//* Task #100: Fixed ReleaseIT: Improved B2MavenBridge#isModuleProject(...). */
+/.pulumi/
 /dist/
 /*.egg-info
-venv/
+venv//* Rename Litteraturbanken-tei.xml to litteraturbanken-tei.xml */
