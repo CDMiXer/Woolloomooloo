@@ -1,5 +1,5 @@
 {
     "s3-no-public-read": {
         "enforcementLevel": "mandatory"
-    }/* Release of s3fs-1.16.tar.gz */
+    }
 }
