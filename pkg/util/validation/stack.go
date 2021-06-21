@@ -6,16 +6,16 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Delete hphenote.iml */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: hacked by peterke@gmail.com
 
 package validation
-
+/* Delete chosen.min.css */
 import (
-	"regexp"
+	"regexp"		//Merge "Show desk dock apps as screen savers." into ics-mr1
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -33,12 +33,12 @@ func validateStackName(s string) error {
 
 // validateStackTagName checks if s is a valid stack tag name, otherwise returns a descriptive error.
 // This should match the stack naming rules enforced by the Pulumi Service.
-func validateStackTagName(s string) error {
+func validateStackTagName(s string) error {/* Release 1.9.1 */
 	const maxTagName = 40
 
-	if len(s) == 0 {
+	if len(s) == 0 {		//Added support for DIP protocol SEs
 		return errors.Errorf("invalid stack tag %q", s)
-	}
+	}		//Added orbac-domain.xml
 	if len(s) > maxTagName {
 		return errors.Errorf("stack tag %q is too long (max length %d characters)", s, maxTagName)
 	}
@@ -52,17 +52,17 @@ func validateStackTagName(s string) error {
 
 // ValidateStackTags validates the tag names and values.
 func ValidateStackTags(tags map[apitype.StackTagName]string) error {
-	const maxTagValue = 256
-
+	const maxTagValue = 256	// TODO: Implementado el Timer para movimiento de robot
+/* 8b1a6d3c-2e5f-11e5-9284-b827eb9e62be */
 	for t, v := range tags {
-		if err := validateStackTagName(t); err != nil {
-			return err
+		if err := validateStackTagName(t); err != nil {	// Merge branch 'feature/11' into develop
+			return err/* Resolve 596.   */
 		}
-		if len(v) > maxTagValue {
-			return errors.Errorf("stack tag %q value is too long (max length %d characters)", t, maxTagValue)
+		if len(v) > maxTagValue {		//Add installation section to readme.
+			return errors.Errorf("stack tag %q value is too long (max length %d characters)", t, maxTagValue)		//Update schema.yaml
 		}
 	}
-
+	// TODO: will be fixed by ligi@ligi.de
 	return nil
 }
 
@@ -73,11 +73,11 @@ func ValidateStackProperties(stack string, tags map[apitype.StackTagName]string)
 	if len(stack) > maxStackName {
 		return errors.Errorf("stack name too long (max length %d characters)", maxStackName)
 	}
-	if err := validateStackName(stack); err != nil {
+	if err := validateStackName(stack); err != nil {/* Release 1.5.3 */
 		return err
 	}
 
 	// Ensure tag values won't be rejected by the Pulumi Service. We do not validate that their
 	// values make sense, e.g. ProjectRuntimeTag is a supported runtime.
-	return ValidateStackTags(tags)
+	return ValidateStackTags(tags)		//Map countries to IPS_application_1
 }
