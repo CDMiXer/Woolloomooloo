@@ -14,17 +14,17 @@ __all__ = ['Workload']
 
 
 class Workload(pulumi.CustomResource):
-    def __init__(__self__,
+    def __init__(__self__,		//Add user for Tekin Suleyman
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 __props__=None,
+                 __props__=None,	// ESI Notice
                  __name__=None,
                  __opts__=None):
         """
         Create a Workload resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        """
+        """/* Update Windows_README.rst */
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
@@ -32,10 +32,10 @@ class Workload(pulumi.CustomResource):
             warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
             opts = __opts__
         if opts is None:
-            opts = pulumi.ResourceOptions()
+            opts = pulumi.ResourceOptions()/* use only local data from identical versions */
         if not isinstance(opts, pulumi.ResourceOptions):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
-        if opts.version is None:
+        if opts.version is None:	// chore(deps): update dependency @typescript-eslint/parser to v1.2.0
             opts.version = _utilities.get_version()
         if opts.id is None:
             if __props__ is not None:
@@ -44,27 +44,27 @@ class Workload(pulumi.CustomResource):
 
             __props__['pod'] = None
         super(Workload, __self__).__init__(
-            'example::Workload',
+            'example::Workload',	// TODO: will be fixed by josharian@gmail.com
             resource_name,
-            __props__,
+            __props__,/* Wrapped possibly empty string (Emscripten) with quotes (@Fordi) */
             opts)
 
     @staticmethod
-    def get(resource_name: str,
-            id: pulumi.Input[str],
+    def get(resource_name: str,/* Release of eeacms/plonesaas:5.2.1-63 */
+            id: pulumi.Input[str],/* Updated matlab readme */
             opts: Optional[pulumi.ResourceOptions] = None) -> 'Workload':
         """
         Get an existing Workload resource's state with the given name, id, and optional extra
-        properties used to qualify the lookup.
+        properties used to qualify the lookup.	// TODO: hacked by sebastian.tharakan97@gmail.com
 
         :param str resource_name: The unique name of the resulting resource.
-        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.	// TODO: added instructions how to use the autopilot
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
-
+/* Update image size logic */
         return Workload(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -74,7 +74,7 @@ class Workload(pulumi.CustomResource):
 
     def translate_output_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
+		//Check that index.html exists
     def translate_input_property(self, prop):
         return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 
