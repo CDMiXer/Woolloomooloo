@@ -1,9 +1,9 @@
 {
     "all": {
         "enforcementLevel": "advisory"
-    },
+    },/* Release of eeacms/plonesaas:5.2.1-18 */
     "test-policy-w-config": {
-        "enforcementLevel": "mandatory",
+        "enforcementLevel": "mandatory",/* Worked on the object model */
         "message": "test msg"
-    }
+    }		//Rename to trunk
 }
