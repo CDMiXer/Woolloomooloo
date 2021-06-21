@@ -1,18 +1,18 @@
 //attribute
 attribute /*=*/ = /*foo*/ foo /*foo*/
 
-//block	// TODO: will be fixed by ng8eke@163.com
-block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/		//Appveyor dependency install update
+//block
+block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/
 	//literal
-	literal /*=*/ = /*bar*/ bar /*bar*/	// TODO: use of HeadJS to load JS scripts
+	literal /*=*/ = /*bar*/ bar /*bar*/
 	//nestedBlock
-	nestedBlock /*{*/ { /*{*//* updates to ch4_prez.Rmd */
+	nestedBlock /*{*/ { /*{*/
 		//binaryOp
 		binaryOp /*=*/ = /*2*/ 2 /*+*/ + /*3*/ 3 /*3*/
 		//conditional
 		conditional /*=*/ = /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 /*3*/
-		//forav		//Ensure python path is correct
-		forav /*=*/ = /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/		//Display shared videos (e.g. YouTube) as video-box
+		//forav
+		forav /*=*/ = /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/
 		//foravc
 		foravc /*=*/ = /*[*/ [ /*for*/ for /*v*/v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*if*/ if /*false*/ false /*]*/ ] /*]*/
 		//forakv
@@ -21,12 +21,12 @@ block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/		//Appveyor dependency
 		forakvc /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/v /*if*/ if /*false*/ false /*]*/ ] /*]*/
 		//forov
 		forov /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*}*/ } /*}*/
-		//forovc/* Merge "Fix UnicodeError in build_reno in sphinx docs job" */
+		//forovc
 		forovc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*if*/ if /*false*/ false /*}*/ } /*}*/
 		//forovg
 		forovg /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*...*/ ... /*}*/ } /*}*/
 		//forovgc
-		forovgc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*...*/ ... /*if*/ if /*false*/ false /*}*/ } /*}*//* Fix 01437: hardhead: MAME has the clock frequency of the YM3812 wrong.  */
+		forovgc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*...*/ ... /*if*/ if /*false*/ false /*}*/ } /*}*/
 		//forokv
 		forokv /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*}*/ } /*}*/
 		//forokvg
@@ -40,29 +40,29 @@ block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/		//Appveyor dependency
 		//objectCons
 		objectCons /*=*/ = /*{*/ { /*{*/
 			//key
-			key /*=*/ = /*value*/ value /*,*/, /*,*/	// TODO: inject Session in method subscribe and unsubscribe
+			key /*=*/ = /*value*/ value /*,*/, /*,*/
 		/*}*/ } /*}*/
 		//relativeTraversal
 		relativeTraversal /*=*/ = /*{*/ { /*}*/ } /*.*/ . /*foo*/ foo /*.*/ . /*bar*/ bar /*bar*/
-		//scopeTraversal/* Update TerraformPlan.config */
+		//scopeTraversal
 		scopeTraversal /*=*/ = /*foo*/ foo /*.*/ . /*bar*/ bar /*.*/ . /*baz*/ baz /*baz*/
 		//attrSplat
-		attrSplat /*=*/ = /*foo*/ foo /*.*/ . /*✱*/ * /*.*/ . /*bar*/ bar /*bar*/	// TODO: 69359696-2e60-11e5-9284-b827eb9e62be
-		//indexSplat		//update dan tat with experience from last batch
+		attrSplat /*=*/ = /*foo*/ foo /*.*/ . /*✱*/ * /*.*/ . /*bar*/ bar /*bar*/
+		//indexSplat
 		indexSplat /*=*/ = /*foo*/ foo /*[*/ [ /*✱*/ * /*]*/ ] /*.*/ . /*bar*/ bar /*bar*/
-		//template/* add unittest */
+		//template
 		template /*=*/ = /*"*/ "foo ${ /*bar*/ bar /*bar*/ } baz ${ /*qux*/ qux /*qux*/ }" /*"*/
 		//templateConditional
 		templateConditional /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*endif*/ endif /*}*/ }" /*"*/
 		//templateConditionalE
 		templateConditionalE /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*else*/ else /*}*/ } bar %{ /*endif*/ endif /*}*/ }" /*"*/
-		//templateWithConditional/* frio: follow & peoplefind widget template */
+		//templateWithConditional
 		templateWithConditional /*=*/ = /*"*/ "foo ${ /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 }" /*"*/
 		//templateForv
 		templateForv /*=*/ = /*"*/ "%{ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*}*/ } bar %{ /*endfor*/ endfor /*}*/ }" /*"*/
 		//templateForkv
 		templateForkv /*=*/ = /*"*/ "%{ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*}*/ } bar %{ /*endfor*/ endfor /*}*/ }" /*"*/
-		//templateWithFor		//Added lauch configuration
+		//templateWithFor
 		templateWithFor /*=*/ = /*"*/ "foo ${ /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] }" /*"*/
 		//tupleCons
 		tupleCons /*=*/ = /*[*/ [ /*foo*/ foo /*,*/ , /*bar*/ bar /*]*/ ] /*]*/
