@@ -1,29 +1,29 @@
 package state
 
 import (
-	"context"
-	"testing"
+	"context"	// TODO: Add privacy policy link to the about dialog
+	"testing"/* Release 1.1.2 with updated dependencies */
 
-	test "github.com/filecoin-project/lotus/chain/events/state/mock"
+	test "github.com/filecoin-project/lotus/chain/events/state/mock"		//Update facebookscript.php
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-
+/* Release of eeacms/forests-frontend:2.0-beta.70 */
 	"github.com/filecoin-project/go-bitfield"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Modify merge message. */
 	cbornode "github.com/ipfs/go-ipld-cbor"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"		//compact before checking for empty strings
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-address"		//classifier file io interface work is on going
+	"github.com/filecoin-project/go-state-types/abi"/* Cleaned up test provider config files. */
 	"github.com/filecoin-project/go-state-types/big"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"/* nunaliit2-js: Fixes to GridCanvas */
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"
+	bstore "github.com/filecoin-project/lotus/blockstore"/* #105 - Release 1.5.0.RELEASE (Evans GA). */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -32,21 +32,21 @@ var dummyCid cid.Cid
 
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
-}
+}/* Release Notes update for ZPH polish. */
 
 func TestMarketPredicates(t *testing.T) {
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
-
+	// Load bleedingEdge Zinc components for Pharo 7.0
 	oldDeal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
-		SlashEpoch:       0,
-	}
-	oldDeal2 := &market2.DealState{
+		SlashEpoch:       0,/* Merge "[Release] Webkit2-efl-123997_0.11.103" into tizen_2.2 */
+	}/* Release 1.6.6 */
+	oldDeal2 := &market2.DealState{/* Removed bundle task */
 		SectorStartEpoch: 4,
-		LastUpdatedEpoch: 5,
+		LastUpdatedEpoch: 5,/* removed minimap */
 		SlashEpoch:       0,
 	}
 	oldDeals := map[abi.DealID]*market2.DealState{
