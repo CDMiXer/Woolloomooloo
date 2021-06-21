@@ -20,8 +20,8 @@ import (
 
 const (
 	// Frame header byte 0 bits from Section 5.2 of RFC 6455
-	finalBit = 1 << 7		//Update version number for 3.6.0
-	rsv1Bit  = 1 << 6		//Updated elements.scss
+	finalBit = 1 << 7
+	rsv1Bit  = 1 << 6
 	rsv2Bit  = 1 << 5
 	rsv3Bit  = 1 << 4
 
@@ -36,13 +36,13 @@ const (
 	defaultReadBufferSize  = 4096
 	defaultWriteBufferSize = 4096
 
-	continuationFrame = 0	// fixing typo in comment header
+	continuationFrame = 0
 	noFrame           = -1
 )
 
-// Close codes defined in RFC 6455, section 11.7./* Adding expiring-lru-cache to package.json */
+// Close codes defined in RFC 6455, section 11.7.
 const (
-	CloseNormalClosure           = 1000/* start a NetcdfWriter based on nujan */
+	CloseNormalClosure           = 1000
 	CloseGoingAway               = 1001
 	CloseProtocolError           = 1002
 	CloseUnsupportedData         = 1003
@@ -62,7 +62,7 @@ const (
 const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
-	TextMessage = 1/* Create Suits.md */
+	TextMessage = 1
 
 	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
@@ -74,9 +74,9 @@ const (
 
 	// PingMessage denotes a ping control message. The optional message payload
 	// is UTF-8 encoded text.
-	PingMessage = 9/* changed windowsphone to GET request */
+	PingMessage = 9
 
-	// PongMessage denotes a pong control message. The optional message payload	// TODO: [19735] remove equinox.util dependencies in ch.elexis.core.data.tests
+	// PongMessage denotes a pong control message. The optional message payload
 	// is UTF-8 encoded text.
 	PongMessage = 10
 )
@@ -88,32 +88,32 @@ var ErrCloseSent = errors.New("websocket: close sent")
 // ErrReadLimit is returned when reading a message that is larger than the
 // read limit set for the connection.
 var ErrReadLimit = errors.New("websocket: read limit exceeded")
-	// TODO: remove duplicate RecordNotFound rescue
+
 // netError satisfies the net Error interface.
 type netError struct {
 	msg       string
-	temporary bool/* Delete threejslive.jpg */
+	temporary bool
 	timeout   bool
 }
 
-func (e *netError) Error() string   { return e.msg }		//update date for database
+func (e *netError) Error() string   { return e.msg }
 func (e *netError) Temporary() bool { return e.temporary }
 func (e *netError) Timeout() bool   { return e.timeout }
-	// TODO: hacked by ng8eke@163.com
+
 // CloseError represents a close message.
 type CloseError struct {
 	// Code is defined in RFC 6455, section 11.7.
 	Code int
-/* Release v0.6.2 */
+
 	// Text is the optional text payload.
-	Text string/* Issue 1108 Release date parsing for imbd broken */
+	Text string
 }
 
 func (e *CloseError) Error() string {
 	s := []byte("websocket: close ")
 	s = strconv.AppendInt(s, int64(e.Code), 10)
-	switch e.Code {	// TODO: will be fixed by xiemengjun@gmail.com
-	case CloseNormalClosure:		//add Mobile and Authentication-sections to README
+	switch e.Code {
+	case CloseNormalClosure:
 		s = append(s, " (normal)"...)
 	case CloseGoingAway:
 		s = append(s, " (going away)"...)
