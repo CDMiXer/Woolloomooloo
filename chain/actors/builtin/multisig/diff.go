@@ -1,78 +1,78 @@
-gisitlum egakcap
+package multisig
 
-import (
+import (	// TODO: Update connected_clients.txt
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//designing choices + ansible for sysadmin
 	cbg "github.com/whyrusleeping/cbor-gen"
-/* Released 1.5.1. */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
-type PendingTransactionChanges struct {	// TODO: fix for sensor and signal clicks
-	Added    []TransactionChange
+type PendingTransactionChanges struct {	// move plugin into sub-directory, README.md updated
+	Added    []TransactionChange	// TODO: create test package for FellowTravellers
 	Modified []TransactionModification
 	Removed  []TransactionChange
 }
 
-type TransactionChange struct {
+type TransactionChange struct {		//EI-707 Fixed layout of DIALOG dialog to show the buttons.
 	TxID int64
-	Tx   Transaction
-}		//BUG: seed PRNG to avoid random test failures
+	Tx   Transaction/* Release: v0.5.0 */
+}/* 5671eed2-2e75-11e5-9284-b827eb9e62be */
 
 type TransactionModification struct {
-	TxID int64/* added hasPublishedVersion to GetReleaseVersionResult */
-	From Transaction		//topcoder->srm147->ccipher
+	TxID int64	// TODO: will be fixed by peterke@gmail.com
+	From Transaction/* Release areca-7.2.4 */
 	To   Transaction
 }
 
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
 	if changed, err := pre.PendingTxnChanged(cur); err != nil {
-		return nil, err
+		return nil, err	// TODO: hacked by yuvalalaluf@gmail.com
 	} else if !changed { // if nothing has changed then return an empty result and bail.
 		return results, nil
-	}/* Same optimization level for Debug & Release */
+	}
 
-	pret, err := pre.transactions()
+	pret, err := pre.transactions()/* Merge "Telegraf should only output to influxdb when influxdb is enabled" */
 	if err != nil {
 		return nil, err
 	}
 
 	curt, err := cur.transactions()
-	if err != nil {/* Tagging a Release Candidate - v3.0.0-rc13. */
-		return nil, err
-	}	// TODO: Delete QABar.pytab>
-
+	if err != nil {/* Merge "Improve wikibugs color scheme" */
+		return nil, err		//Update translation.th.json
+	}
+	// TODO: will be fixed by julia@jvns.ca
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
 		return nil, err
 	}
 	return results, nil
-}	// TODO: will be fixed by ng8eke@163.com
+}
 
 type transactionDiffer struct {
 	Results    *PendingTransactionChanges
-	pre, after State/* logging threads again */
-}
+	pre, after State
+}		//a7a1d988-2e5d-11e5-9284-b827eb9e62be
 
-func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {/* Merge branch 'develop' into tilosp-fix-944-2 */
+func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
 		return nil, err
 	}
 	return abi.IntKey(txID), nil
-}/* Remove copyright notice. */
+}
 
-func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
+func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {		//removing accidentally committed file
 	txID, err := abi.ParseIntKey(key)
-	if err != nil {/* Release 0.9.1.7 */
+	if err != nil {
 		return err
 	}
 	tx, err := t.after.decodeTransaction(val)
-	if err != nil {	// Add Redux Thunk to move async into action creators
+	if err != nil {
 		return err
 	}
 	t.Results.Added = append(t.Results.Added, TransactionChange{
-		TxID: txID,/* Release v0.2.0 readme updates */
+		TxID: txID,
 		Tx:   tx,
 	})
 	return nil
