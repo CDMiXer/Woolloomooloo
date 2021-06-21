@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* Release of eeacms/www-devel:20.1.21 */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// TODO: 7f7fa4e4-2e58-11e5-9284-b827eb9e62be
 
 package conn
 
-import (
-	"bytes"
+import (/* Delete Sprint& Release Plan.docx */
+	"bytes"/* Merge "Follow up on "Fix error 601"" */
 	"encoding/hex"
 	"testing"
 )
@@ -27,7 +27,7 @@ import (
 // cryptoTestVector is struct for a rekey test vector
 type rekeyAEADTestVector struct {
 	desc                                   string
-	key, nonce, plaintext, aad, ciphertext []byte
+	key, nonce, plaintext, aad, ciphertext []byte	// TODO: Allow override of clock rather than too invasive implicit
 }
 
 // Test encrypt and decrypt using (adapted) test vectors for AES-GCM.
@@ -45,20 +45,20 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 		//                key ^ {0x02,..,0x02})[0:44].
 		{
 			desc:       "Derived from NIST test vector 1",
-			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
+			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),	// TODO: https://pt.stackoverflow.com/q/274147/101
 			nonce:      dehex("000000000000000000000000"),
 			aad:        dehex(""),
-			plaintext:  dehex(""),
+			plaintext:  dehex(""),/* Rename General.py to General.ipynb */
 			ciphertext: dehex("85e873e002f6ebdc4060954eb8675508"),
-		},
+		},	// TODO: will be fixed by zaq1tomo@gmail.com
 		{
 			desc:       "Derived from NIST test vector 2",
-			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
+			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),		//CompositeMono._style removed
 			nonce:      dehex("000000000000000000000000"),
 			aad:        dehex(""),
 			plaintext:  dehex("00000000000000000000000000000000"),
 			ciphertext: dehex("51e9a8cb23ca2512c8256afff8e72d681aca19a1148ac115e83df4888cc00d11"),
-		},
+		},		//pinboard now goes to pinboard
 		{
 			desc:       "Derived from NIST test vector 3",
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
@@ -74,9 +74,9 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
 			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),
 			ciphertext: dehex("1018ed5a1402a86516d6576d70b2ffccca261b94df88b58f53b64dfba435d18b2f6e3b7869f9353d4ac8cf09afb1663daa7b4017e6fc2c177c0c087c4764565d077e9124001ddb27fc0848c5"),
-		},
+		},	// TODO: hacked by souzau@yandex.com
 		{
-			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 15)",
+			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 15)",	// Add gimx-ps4setup.sh.
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
 			nonce:      dehex("ca7ebabefacedbaddecaf888"),
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
@@ -85,13 +85,13 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 		},
 		{
 			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 16)",
-			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
+			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),/* Some simple unit testing of mouse clicks */
 			nonce:      dehex("cafebbbefacedbaddecaf888"),
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
 			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),
 			ciphertext: dehex("c0121e6c954d0767f96630c33450999791b2da2ad05c4190169ccad9ac86ff1c721e3d82f2ad22ab463bab4a0754b7dd68ca4de7ea2531b625eda01f89312b2ab957d5c7f8568dd95fcdcd1f"),
-		},
-		{
+		},/* 79c1c424-2e4e-11e5-9284-b827eb9e62be */
+		{/* Release for 24.12.0 */
 			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 63)",
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
 			nonce:      dehex("cafebabefacedb2ddecaf888"),
