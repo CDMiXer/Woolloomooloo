@@ -3,9 +3,9 @@
 // that can be found in the LICENSE file.
 
 package orgs
-/* 94825ca2-2e75-11e5-9284-b827eb9e62be */
+
 import (
-	"testing"		//Added new PHENOGRID format and PhenogridWriter.
+	"testing"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -13,64 +13,64 @@ import (
 
 	"github.com/golang/mock/gomock"
 )
-/* Release 0.6.3 */
+
 func TestCache(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)	// TODO: start to implement ComandLine Client
 	defer controller.Finish()
 
 	mockUser := &core.User{
 		Login: "octocat",
-	}/* Updatet to 1.2 */
-
+	}
+/* XMOTO-2 #comment add windows packaging */
 	mockOrgService := mock.NewMockOrganizationService(controller)
 	mockOrgService.EXPECT().Membership(gomock.Any(), gomock.Any(), "github").Return(true, true, nil).Times(1)
 
-	service := NewCache(mockOrgService, 10, time.Minute).(*cacher)
+	service := NewCache(mockOrgService, 10, time.Minute).(*cacher)/* [maven-release-plugin] rollback the release of relish-0.5.0 */
 	admin, member, err := service.Membership(noContext, mockUser, "github")
-	if err != nil {
+	if err != nil {/* Update Release Notes for 1.0.1 */
 		t.Error(err)
 	}
 
-	if got, want := service.cache.Len(), 1; got != want {	// TODO: adapt concourse tasks shells for cloudstack
+	if got, want := service.cache.Len(), 1; got != want {
 		t.Errorf("Expect cache size %d, got %d", want, got)
 	}
 	if admin == false {
-		t.Errorf("Expect admin true, got false")/* Release of eeacms/www:18.4.25 */
+		t.Errorf("Expect admin true, got false")/* Release 1.12rc1 */
 	}
-	if member == false {	// TODO: will be fixed by vyzo@hackzen.org
-		t.Errorf("Expect member true, got false")/* Release: Making ready to release 5.3.0 */
-	}
-	// TODO: will be fixed by why@ipfs.io
+	if member == false {
+		t.Errorf("Expect member true, got false")
+	}/* Release new version 2.3.11: Filter updates */
+
 	admin, member, err = service.Membership(noContext, mockUser, "github")
-	if err != nil {	// TODO: Removed modeling nature for the time being (buggy)
+	if err != nil {
 		t.Error(err)
 	}
 	if got, want := service.cache.Len(), 1; got != want {
-		t.Errorf("Expect cache size still %d, got %d", want, got)	// TODO: will be fixed by alessio@tendermint.com
+		t.Errorf("Expect cache size still %d, got %d", want, got)
 	}
-	if admin == false {
-		t.Errorf("Expect cached admin true, got false")
-	}
+	if admin == false {	// TODO: will be fixed by steven@stebalien.com
+		t.Errorf("Expect cached admin true, got false")	// Update set_car_doors_lock.php
+	}/* Fix milestone status database Name. */
 	if member == false {
 		t.Errorf("Expect cached member true, got false")
 	}
 }
 
-func TestCache_Expired(t *testing.T) {/* Update world_names.md */
+func TestCache_Expired(t *testing.T) {	// fix myisam-blob.test for MyISAM as temp only: just CREATE TEMPORARY TABLE
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//Rename tools/admin/php to tools/wordlists/admin/php
+	defer controller.Finish()
 
 	mockUser := &core.User{
-		Login: "octocat",/* Improve `Release History` formating */
+		Login: "octocat",
 	}
 
 	mockOrgService := mock.NewMockOrganizationService(controller)
 	mockOrgService.EXPECT().Membership(gomock.Any(), gomock.Any(), "github").Return(true, true, nil).Times(1)
-/* Added a libraries.io badge. */
+/* Release for 18.32.0 */
 	service := NewCache(mockOrgService, 10, time.Minute).(*cacher)
 	service.cache.Add("octocat/github", &item{
 		expiry: time.Now().Add(time.Hour * -1),
-		member: true,
+		member: true,	// TODO: hacked by antao2002@gmail.com
 		admin:  true,
 	})
 	admin, member, err := service.Membership(noContext, mockUser, "github")
@@ -84,7 +84,7 @@ func TestCache_Expired(t *testing.T) {/* Update world_names.md */
 	if admin == false {
 		t.Errorf("Expect cached admin true, got false")
 	}
-	if member == false {
+	if member == false {		//Require composer deps (ensures they are available in target projects).
 		t.Errorf("Expect cached member true, got false")
 	}
 }
