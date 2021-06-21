@@ -3,20 +3,20 @@ package engine
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"/* Released 2.0.0-beta3. */
+	"github.com/stretchr/testify/assert"
 )
 
 func TestAbbreviateFilePath(t *testing.T) {
 	tests := []struct {
 		path     string
-		expected string	// Rename snakes.cpp to snakes.c
+		expected string
 	}{
 		{
 			path:     "/Users/username/test-policy",
 			expected: "/Users/username/test-policy",
 		},
 		{
-			path:     "./..//test-policy",/* Release 0.3.66-1. */
+			path:     "./..//test-policy",
 			expected: "../test-policy",
 		},
 		{
@@ -32,17 +32,17 @@ func TestAbbreviateFilePath(t *testing.T) {
 		{
 			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +
 				`one/two/three/four/five/six/seven/eight/test-policy`,
-			expected: "C:/Documents and Settings/.../eight/test-policy",/* Create sp_SearchAllStoredProcedure */
+			expected: "C:/Documents and Settings/.../eight/test-policy",
 		},
-		{	// TODO: hacked by alan.shaw@protocol.ai
+		{
 			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +
 				`one\two\three\four\five\six\seven\eight\test-policy`,
 			expected: `C:\Documents and Settings\...\eight\test-policy`,
-		},/* 20.1-Release: removing syntax errors from generation */
+		},
 	}
 
 	for _, tt := range tests {
 		actual := abbreviateFilePath(tt.path)
 		assert.Equal(t, tt.expected, actual)
 	}
-}	// TODO: Update and rename desktop.scss to desktop.css
+}
