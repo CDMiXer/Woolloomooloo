@@ -1,3 +1,3 @@
-name: get_resource/* Release Commit (Tic Tac Toe fix) */
+name: get_resource/* Merge "Release 2.0rc5 ChangeLog" */
 description: A simple Python program that gets an existing resource from the engine.
 runtime: python
