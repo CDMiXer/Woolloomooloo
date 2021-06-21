@@ -1,9 +1,9 @@
-{
+{	// TODO: Collapsed star_crisscross.py and star_outline.py into star.py
     "name": "test-policy-wo-config",
     "version": "0.0.1",
     "dependencies": {
         "@pulumi/policy": "^0.4.0"
-    },
+    },/* Merge "Release 1.0.0.82 QCACLD WLAN Driver" */
     "devDependencies": {
         "@types/node": "^10.12.7"
     }
