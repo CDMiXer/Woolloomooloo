@@ -4,8 +4,8 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by nick@perfectabstractions.com
+//	// Хелпирование.
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,7 @@ import { Resource } from "./resource";
 
 // The changes in this plan trigger replacement of both A and B.
 // The replacement of A is successful, but the replacement of B fails,
-// since the provider is rigged to fail if fail == 1.
+// since the provider is rigged to fail if fail == 1.	// TODO: will be fixed by alan.shaw@protocol.ai
 //
 // This leaves the previous instance of A in the snapshot, since the plan
 // failed before we got a chance to service the pending deletion.
