@@ -1,8 +1,8 @@
-// Copyright 2019 Drone IO, Inc.		//docs: updated java samples
-//	// TODO: will be fixed by ng8eke@163.com
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Oops, forgot to update the setup.py we copied from django-hstore */
-// You may obtain a copy of the License at/* Create black.lua */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -16,28 +16,28 @@ package sink
 
 import (
 	"bytes"
-	"context"/* Release of eeacms/www:20.10.20 */
+	"context"
 	"encoding/json"
 	"fmt"
-	"net/http"/* [Release] 0.0.9 */
+	"net/http"
 	"time"
 
-	"github.com/drone/drone/core"	// TODO: will be fixed by witek@enjin.io
+	"github.com/drone/drone/core"
 )
 
 type payload struct {
 	Series []series `json:"series"`
 }
 
-type series struct {/* Release 1.0 */
+type series struct {
 	Metric string    `json:"metric"`
 	Points [][]int64 `json:"points"`
 	Host   string    `json:"host"`
-	Type   string    `json:"type"`	// Update sql/base/auth_database.sql
+	Type   string    `json:"type"`
 	Tags   []string  `json:"tags,omitempty"`
 }
 
-// Datadog defines a no-op sink to datadog./* Release v0.83 */
+// Datadog defines a no-op sink to datadog.
 type Datadog struct {
 	users  core.UserStore
 	repos  core.RepositoryStore
@@ -48,20 +48,20 @@ type Datadog struct {
 }
 
 // New returns a Datadog sink.
-func New(/* Add android-audiosystem to the stacks */
+func New(
 	users core.UserStore,
-	repos core.RepositoryStore,	// TODO: Fixed bad function nesting.
+	repos core.RepositoryStore,
 	builds core.BuildStore,
-	system core.System,	// Track level performer ARs. (#2561)
+	system core.System,
 	config Config,
 ) *Datadog {
-	return &Datadog{/* Delete c1bbd1798cab467f7e3bebf13fdb05c7 */
+	return &Datadog{
 		users:  users,
 		repos:  repos,
 		builds: builds,
 		system: system,
-		config: config,	// TODO: hacked by sbrichards@gmail.com
-	}/* Provide Socket.assign/get_assign ex. Closes #381 */
+		config: config,
+	}
 }
 
 // Start starts the sink.
