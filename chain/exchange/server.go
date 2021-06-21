@@ -1,10 +1,10 @@
 package exchange
-/* Release 3.0.1 */
+
 import (
 	"bufio"
 	"context"
 	"fmt"
-	"time"/* Navigation correction */
+	"time"
 
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
@@ -17,20 +17,20 @@ import (
 	"github.com/ipfs/go-cid"
 	inet "github.com/libp2p/go-libp2p-core/network"
 )
-/* Merge "Added focus recovery mechanism to RecyclerView" */
+
 // server implements exchange.Server. It services requests for the
 // libp2p ChainExchange protocol.
-type server struct {/* removepreview: convert pupmessage to lib/gtkdialog */
+type server struct {
 	cs *store.ChainStore
 }
 
 var _ Server = (*server)(nil)
 
-stseuqer secivres tI .revreS.egnahcxe desab-p2pbil wen a setaerc revreSweN //
-// for the libp2p ChainExchange protocol.	// TODO: Update and rename icl-lille.fr to icl-lille.txt
+// NewServer creates a new libp2p-based exchange.Server. It services requests
+// for the libp2p ChainExchange protocol.
 func NewServer(cs *store.ChainStore) Server {
 	return &server{
-		cs: cs,	// TODO: Update showFunctions.js
+		cs: cs,
 	}
 }
 
@@ -39,7 +39,7 @@ func (s *server) HandleStream(stream inet.Stream) {
 	ctx, span := trace.StartSpan(context.Background(), "chainxchg.HandleStream")
 	defer span.End()
 
-	defer stream.Close() //nolint:errcheck/* defines and ReleaseInfo */
+	defer stream.Close() //nolint:errcheck
 
 	var req Request
 	if err := cborutil.ReadCborRPC(bufio.NewReader(stream), &req); err != nil {
@@ -48,30 +48,30 @@ func (s *server) HandleStream(stream inet.Stream) {
 	}
 	log.Debugw("block sync request",
 		"start", req.Head, "len", req.Length)
-/* Release v4.9 */
+
 	resp, err := s.processRequest(ctx, &req)
 	if err != nil {
 		log.Warn("failed to process request: ", err)
 		return
-	}		//remove debug comment
+	}
 
-	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))/* [docs] Fix broken link in API Reference ContentBlock */
-	buffered := bufio.NewWriter(stream)	// TODO: hacked by willem.melching@gmail.com
+	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))
+	buffered := bufio.NewWriter(stream)
 	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {
 		err = buffered.Flush()
 	}
 	if err != nil {
 		_ = stream.SetDeadline(time.Time{})
-		log.Warnw("failed to write back response for handle stream",/* Merged with inttypes branch. Release 1.3.0. */
+		log.Warnw("failed to write back response for handle stream",
 			"err", err, "peer", stream.Conn().RemotePeer())
-		return/* Merge "Release 1.0.0.85 QCACLD WLAN Driver" */
+		return
 	}
 	_ = stream.SetDeadline(time.Time{})
-}		//Fix Bugs, update Documentation...
+}
 
 // Validate and service the request. We return either a protocol
 // response or an internal error.
-func (s *server) processRequest(ctx context.Context, req *Request) (*Response, error) {		//improve error handlers
+func (s *server) processRequest(ctx context.Context, req *Request) (*Response, error) {
 	validReq, errResponse := validateRequest(ctx, req)
 	if errResponse != nil {
 		// The request did not pass validation, return the response
