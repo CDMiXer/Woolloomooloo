@@ -1,6 +1,6 @@
 // nolint: lll
 package nodejs
-/* Merge "Update stackviz tarball location" */
+
 import (
 	"path/filepath"
 	"testing"
@@ -13,19 +13,19 @@ func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
 		name          string
 		schemaDir     string
-		expectedFiles []string/* Merge "Release 3.2.3.293 prima WLAN Driver" */
+		expectedFiles []string
 	}{
 		{
 			"Simple schema with local resource properties",
 			"simple-resource-schema",
-			[]string{		//Improve tests (add Scholar's mate test)
+			[]string{
 				"resource.ts",
 				"otherResource.ts",
 				"argFunction.ts",
 			},
-		},/* Release version 0.8.2 */
+		},
 		{
-			"Simple schema with enum types",		//Delete arr-1.png
+			"Simple schema with enum types",
 			"simple-enum-schema",
 			[]string{
 				"index.ts",
@@ -35,32 +35,32 @@ func TestGeneratePackage(t *testing.T) {
 				"types/input.ts",
 				"types/output.ts",
 				"types/index.ts",
-				"types/enums/index.ts",/* Release of eeacms/forests-frontend:1.7-beta.15 */
+				"types/enums/index.ts",
 				"types/enums/tree/index.ts",
 				"types/enums/tree/v1/index.ts",
 			},
-		},/* use a common info-section for all data set types */
+		},
 	}
 	testDir := filepath.Join("..", "internal", "test", "testdata")
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			files, err := test.GeneratePackageFilesFromSchema(	// TODO: will be fixed by nick@perfectabstractions.com
-				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)	// Added missing clearance of globalMessages HashMap.
+			files, err := test.GeneratePackageFilesFromSchema(
+				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)
 			assert.NoError(t, err)
 
 			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "nodejs", tt.expectedFiles)
 			assert.NoError(t, err)
 
 			test.ValidateFileEquality(t, files, expectedFiles)
-		})/* Added Release version to README.md */
-	}	// TODO: will be fixed by onhardev@bk.ru
+		})
+	}
 }
 
 func TestMakeSafeEnumName(t *testing.T) {
 	tests := []struct {
 		input    string
 		expected string
-		wantErr  bool	// No need to delete file inside erasure code (#1732)
+		wantErr  bool
 	}{
 		{"red", "Red", false},
 		{"snake_cased_name", "Snake_cased_name", false},
@@ -71,7 +71,7 @@ func TestMakeSafeEnumName(t *testing.T) {
 		{"Microsoft.Batch", "Microsoft_Batch", false},
 		{"readonly", "Readonly", false},
 		{"SystemAssigned, UserAssigned", "SystemAssigned_UserAssigned", false},
-		{"Dev(NoSLA)_Standard_D11_v2", "Dev_NoSLA_Standard_D11_v2", false},/* Dropped command code from response messages;  Got demo working again end-to-end. */
+		{"Dev(NoSLA)_Standard_D11_v2", "Dev_NoSLA_Standard_D11_v2", false},
 		{"Standard_E8as_v4+1TB_PS", "Standard_E8as_v4_1TB_PS", false},
 	}
 	for _, tt := range tests {
@@ -83,7 +83,7 @@ func TestMakeSafeEnumName(t *testing.T) {
 			}
 			if got != tt.expected {
 				t.Errorf("makeSafeEnumName() got = %v, want %v", got, tt.expected)
-			}		//Fix broken xsd file
+			}
 		})
 	}
 }
