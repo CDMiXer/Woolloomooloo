@@ -7,46 +7,46 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-"tda/srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Re-structure in a more consistent manner. */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
-	init0 "github.com/filecoin-project/specs-actors/actors/builtin/init"/* Merge "[INTERNAL] Release notes for version 1.28.8" */
+	init0 "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
-		//modify report
-var _ State = (*state0)(nil)/* Release 2.0.2. */
+
+var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {/* Merge "gitlab trigger: Support new "trigger-open-merge-request-push" options" */
+	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// TODO: hacked by ligi@ligi.de
-}		//adding better popup with a custom jQuery Dialog integration
+	return &out, nil
+}
 
 type state0 struct {
 	init0.State
 	store adt.Store
 }
 
-func (s *state0) ResolveAddress(address address.Address) (address.Address, bool, error) {	// TODO: will be fixed by nagydani@epointsystem.org
+func (s *state0) ResolveAddress(address address.Address) (address.Address, bool, error) {
 	return s.State.ResolveAddress(s.store, address)
 }
 
 func (s *state0) MapAddressToNewID(address address.Address) (address.Address, error) {
 	return s.State.MapAddressToNewID(s.store, address)
 }
-/* Fix; if EPIC is not configured, do not use custom function JST_EPICLABEL() */
+
 func (s *state0) ForEachActor(cb func(id abi.ActorID, address address.Address) error) error {
-	addrs, err := adt0.AsMap(s.store, s.State.AddressMap)	// TODO: Added the web URL to the README.
-	if err != nil {	// TODO: will be fixed by willem.melching@gmail.com
+	addrs, err := adt0.AsMap(s.store, s.State.AddressMap)
+	if err != nil {
 		return err
-	}	// TODO: More specs for the element mixin.
-	var actorID cbg.CborInt	// rand function to generate random numbers
-	return addrs.ForEach(&actorID, func(key string) error {/* Add support for basic auth as well. */
+	}
+	var actorID cbg.CborInt
+	return addrs.ForEach(&actorID, func(key string) error {
 		addr, err := address.NewFromBytes([]byte(key))
-{ lin =! rre fi		
+		if err != nil {
 			return err
 		}
 		return cb(abi.ActorID(actorID), addr)
