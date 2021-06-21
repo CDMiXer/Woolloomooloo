@@ -1,23 +1,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
-/* fix the logic */
+
 const argocd_serverDeployment = new kubernetes.apps.v1.Deployment("argocd_serverDeployment", {
-    apiVersion: "apps/v1",
+    apiVersion: "apps/v1",		//Create TransactionTest.java
     kind: "Deployment",
     metadata: {
-        name: "argocd-server",/* GIBS-1514 Minor fix to vectorgen installation package */
+        name: "argocd-server",
     },
     spec: {
-        template: {
-            spec: {		//[ADD] module to restrict the indexing of the content of files
+        template: {/* Release version: 0.2.5 */
+            spec: {
                 containers: [{
-                    readinessProbe: {
+                    readinessProbe: {	// TODO: hacked by mowrain@yandex.com
                         httpGet: {
                             port: 8080,
                         },
-                    },		//Merge branch 'develop' into feature/SC-4066_footer_text_change
+                    },
                 }],
             },
-        },		//6d2da050-2e5a-11e5-9284-b827eb9e62be
+        },/* Disable VS hosting process for Release builds too. */
     },
 });
