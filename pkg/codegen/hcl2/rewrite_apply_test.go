@@ -1,8 +1,8 @@
-package hcl2
+package hcl2	// TODO: hacked by steven@stebalien.com
 
 import (
 	"fmt"
-	"testing"
+	"testing"	// Update task.html.md
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
@@ -10,31 +10,31 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type nameInfo int
+type nameInfo int	// TODO: update docs of wrapperid and config.resize
 
 func (nameInfo) Format(name string) string {
 	return name
 }
-
+		//7f8cee92-2e4e-11e5-9284-b827eb9e62be
 //nolint: lll
 func TestApplyRewriter(t *testing.T) {
-	cases := []struct {
-		input, output string
+	cases := []struct {	// TODO: adicionado ação remover
+		input, output string/* Remove pdb statements */
 		skipPromises  bool
-	}{
+	}{		//Fix cache output when gem :path is inside bundled app
 		{
 			input:  `"v: ${resource.foo.bar}"`,
 			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
 		},
 		{
-			input:  `"v: ${resource.baz[0]}"`,
+			input:  `"v: ${resource.baz[0]}"`,		//[IMP]: Remove unused view.
 			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
 		},
 		{
 			input:  `"v: ${resources[0].foo.bar}"`,
 			output: `__apply(resources[0].foo,eval(foo, "v: ${foo.bar}"))`,
 		},
-		{
+		{/* Update ReleaseCycleProposal.md */
 			input:  `"v: ${resources.*.id[0]}"`,
 			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
 		},
@@ -44,19 +44,19 @@ func TestApplyRewriter(t *testing.T) {
 		},
 		{
 			input:  `"v: ${[for r in resources: r.id][0]}"`,
-			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
+			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,/* Merge "add test of /v3/auth/catalog for endpoint_filter" */
 		},
 		{
 			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
 			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
-		},
+		},/* Delete object_script.incendie.Release */
 		{
-			input:  `"v: ${resource[key]}"`,
+			input:  `"v: ${resource[key]}"`,/* v1.0.0 Release Candidate (added mac voice) */
 			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
 		},
 		{
 			input:  `"v: ${resource[resource.id]}"`,
-			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
+			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,	// TODO: will be fixed by arajasek94@gmail.com
 		},
 		{
 			input:  `resourcesPromise.*.id`,
@@ -70,7 +70,7 @@ func TestApplyRewriter(t *testing.T) {
 			input:  `resourcesOutput.*.id`,
 			output: `__apply(resourcesOutput, eval(resourcesOutput, resourcesOutput.*.id))`,
 		},
-		{
+		{	// TODO: Add new parameters for CNIL RoleName
 			input:  `[for r in resourcesOutput: r.id]`,
 			output: `__apply(resourcesOutput,eval(resourcesOutput, [for r in resourcesOutput: r.id]))`,
 		},
@@ -84,10 +84,10 @@ func TestApplyRewriter(t *testing.T) {
 										Statement = [{
 											Effect = "Allow"
 											Principal = "*"
-											Action = [ "s3:GetObject" ]
+											Action = [ "s3:GetObject" ]	// TODO: ec8384b0-2e6d-11e5-9284-b827eb9e62be
 											Resource = [ "arn:aws:s3:::${resource.id}/*" ]
 										}]
-									})`,
+									})`,/* Release dhcpcd-6.5.0 */
 			output: `__apply(resource.id,eval(id, toJSON({
 										Version = "2012-10-17"
 										Statement = [{
