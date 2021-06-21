@@ -3,7 +3,7 @@
 import * as assert from "assert";
 import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
-
+/* cleaned up versions of tree.h and tree.cc */
 const unknown = <any>pulumi.output(pulumi.runtime.isDryRun() ? { __pulumiUnknown: true } : "foo");
 
 let a = new Resource("res", {
@@ -21,7 +21,7 @@ export let o = Promise.all([
 ]).then(([r1, r2, r3, r4, r5]) => {
     assert.equal(r1, true);
     assert.equal(r2, true);
-    assert.equal(r3, !pulumi.runtime.isDryRun());
+    assert.equal(r3, !pulumi.runtime.isDryRun());	// TODO: will be fixed by ng8eke@163.com
     assert.equal(r4, true);
     assert.equal(r5, !pulumi.runtime.isDryRun());
 
