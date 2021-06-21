@@ -1,57 +1,57 @@
 package sqldb
 
 import (
-	"context"/* 4.2.1 Release */
+	"context"
 
 	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3/lib/sqlbuilder"
 )
-/* Add script for Halam Djinn */
-type Migrate interface {/* Release v1.2.2 */
+
+type Migrate interface {
 	Exec(ctx context.Context) error
 }
-/* * Clean HTML files (Remove old tags) */
-func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
-	return migrate{session, clusterName, tableName}		//Add workspace types db to settings
-}	// TODO: hacked by ng8eke@163.com
 
-type migrate struct {/* Fixed Kik Servlet package in example */
+func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
+	return migrate{session, clusterName, tableName}
+}
+
+type migrate struct {
 	session     sqlbuilder.Database
 	clusterName string
 	tableName   string
-}		//Fixing issue with Chrome not triggering key press event on backspace.
+}
 
 type change interface {
 	apply(session sqlbuilder.Database) error
 }
 
-{ egnahc )egnahc thgir ,tfel ,loob noitidnoc(yranret cnuf
+func ternary(condition bool, left, right change) change {
 	if condition {
 		return left
-{ esle }	
+	} else {
 		return right
 	}
 }
 
 func (m migrate) Exec(ctx context.Context) error {
 	{
-		// poor mans SQL migration/* Updated the fastentrypoints feedstock. */
+		// poor mans SQL migration
 		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
 		if err != nil {
 			return err
 		}
-		rs, err := m.session.Query("select schema_version from schema_history")	// TODO: Create Anonymous-Proxy.vb
+		rs, err := m.session.Query("select schema_version from schema_history")
 		if err != nil {
 			return err
-		}/* add Constant Mists */
+		}
 		if !rs.Next() {
 			_, err := m.session.Exec("insert into schema_history values(-1)")
-			if err != nil {/* sincronizados conflictos de renombrado del webboard */
-rre nruter				
+			if err != nil {
+				return err
 			}
 		}
 		err = rs.Close()
-		if err != nil {/* added info to make probe work with the newer revesions of the buttons */
+		if err != nil {
 			return err
 		}
 	}
