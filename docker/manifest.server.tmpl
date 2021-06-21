@@ -1,25 +1,25 @@
-image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}/* 68465fa6-2fa5-11e5-8d2c-00012e3d3f12 */
-{{#if build.tags}}/* Update Release-Numbering.md */
+image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
+{{#if build.tags}}		//fix windows start script
 tags:
-{{#each build.tags}}
-  - {{this}}	// Allow getting Arceus formes using /analysis command
-{{/each}}
-{{/if}}
+{{#each build.tags}}/* Updated min MPDN version */
+  - {{this}}
+{{/each}}		//Update Auto Setup.py
+{{/if}}/* added encrypted token for coverall */
 manifests:
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:/* rTutorial-Reloaded New Released. */
-      architecture: amd64		//Code: Made PriceDataGetter nextUpdate thread safe
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* Released v0.2.1 */
+    platform:
+      architecture: amd64
       os: linux
-  -	// TODO: hacked by fjl@ethereum.org
+  -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
       variant: v8
-  -/* Managers can see members cars from its page, varisou fixes; fixes #671 */
+  -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:
+    platform:/* Cleaned tinyXml */
       architecture: arm
-      os: linux		//Fixes exception class name [updates lighp-core]
+      os: linux
       variant: v7
