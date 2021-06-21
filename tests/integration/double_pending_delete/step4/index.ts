@@ -1,17 +1,17 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Merge branch 'master' into NodeVisMechan */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by brosner@gmail.com
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by peterke@gmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by jon@atack.com
+
 import { Resource } from "./resource";
 
 // We'll complete our disaster recovery by triggering replacements of A and B again,
@@ -25,7 +25,7 @@ const a = new Resource("a", { fail: 4 });
 // Create B
 const b = new Resource("b", { fail: 2 }, { dependsOn: a });
 
-// Delete A/* make the grid look good */
+// Delete A
 // Delete B
 
 // Like the last step, this is interesting because we delete A's URN three times in the same plan.
