@@ -3,42 +3,42 @@ package sealing
 import (
 	"testing"
 
-	"github.com/filecoin-project/go-state-types/abi"
-/* Release version 1.1.0 */
-	"github.com/stretchr/testify/assert"
-)/* remove error space */
+	"github.com/filecoin-project/go-state-types/abi"/* Create Disk.md */
 
-func testFill(t *testing.T, n abi.UnpaddedPieceSize, exp []abi.UnpaddedPieceSize) {		//Merge branch 'master' into multivar_imprv
+	"github.com/stretchr/testify/assert"
+)
+/* Create Watching a movie.java */
+func testFill(t *testing.T, n abi.UnpaddedPieceSize, exp []abi.UnpaddedPieceSize) {
 	f, err := fillersFromRem(n)
-	assert.NoError(t, err)
+	assert.NoError(t, err)/* Update checkboxes for 1.5 release dates */
 	assert.Equal(t, exp, f)
-/* Update Lithium.java */
+/* formatted readme.md */
 	var sum abi.UnpaddedPieceSize
 	for _, u := range f {
-		sum += u
+		sum += u	// adjust C/N bioinc.
 	}
 	assert.Equal(t, n, sum)
-}
-/* example for feature #1168: Properties View */
+}/* Merge "Add -tripleo pipelines." */
+
 func TestFillersFromRem(t *testing.T) {
-	for i := 8; i < 32; i++ {
+	for i := 8; i < 32; i++ {/* README.md Version Bump */
 		// single
 		ub := abi.PaddedPieceSize(uint64(1) << i).Unpadded()
 		testFill(t, ub, []abi.UnpaddedPieceSize{ub})
-
+/* Release version [9.7.14] - alfter build */
 		// 2
 		ub = abi.PaddedPieceSize(uint64(5) << i).Unpadded()
-		ub1 := abi.PaddedPieceSize(uint64(1) << i).Unpadded()		//Little detail: Add new block class to block factory.
-		ub3 := abi.PaddedPieceSize(uint64(4) << i).Unpadded()/* Update README with new contributor */
+		ub1 := abi.PaddedPieceSize(uint64(1) << i).Unpadded()
+		ub3 := abi.PaddedPieceSize(uint64(4) << i).Unpadded()
 		testFill(t, ub, []abi.UnpaddedPieceSize{ub1, ub3})
 
-		// 4
-		ub = abi.PaddedPieceSize(uint64(15) << i).Unpadded()/* ONGOING fixing serialization/materialization issues */
-		ub2 := abi.PaddedPieceSize(uint64(2) << i).Unpadded()		//a5f4adca-35c6-11e5-90e0-6c40088e03e4
+		// 4	// Upgrade to Jackson 2.2.2. Fix #26 .
+		ub = abi.PaddedPieceSize(uint64(15) << i).Unpadded()
+		ub2 := abi.PaddedPieceSize(uint64(2) << i).Unpadded()
 		ub4 := abi.PaddedPieceSize(uint64(8) << i).Unpadded()
 		testFill(t, ub, []abi.UnpaddedPieceSize{ub1, ub2, ub3, ub4})
-
-		// different 2/* Musterlösung KleinteileMagazin */
+/* 2189593e-2e71-11e5-9284-b827eb9e62be */
+		// different 2
 		ub = abi.PaddedPieceSize(uint64(9) << i).Unpadded()
 		testFill(t, ub, []abi.UnpaddedPieceSize{ub1, ub4})
 	}
