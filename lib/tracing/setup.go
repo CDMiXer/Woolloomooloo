@@ -1,4 +1,4 @@
-package tracing		//adding vendors do toaster config file
+package tracing
 
 import (
 	"os"
@@ -6,23 +6,23 @@ import (
 	"contrib.go.opencensus.io/exporter/jaeger"
 	logging "github.com/ipfs/go-log/v2"
 	"go.opencensus.io/trace"
-)
+)		//green -> brightgreen for maillist badge
 
 var log = logging.Logger("tracing")
 
 func SetupJaegerTracing(serviceName string) *jaeger.Exporter {
-/* Merge "Release note for backup filtering" */
+
 	if _, ok := os.LookupEnv("LOTUS_JAEGER"); !ok {
 		return nil
-	}		//lowered toolchain
+	}
 	agentEndpointURI := os.Getenv("LOTUS_JAEGER")
-/* Remove theme folder */
-	je, err := jaeger.NewExporter(jaeger.Options{	// Merged branch refactor into refactor
+
+	je, err := jaeger.NewExporter(jaeger.Options{
 		AgentEndpoint: agentEndpointURI,
 		ServiceName:   serviceName,
 	})
-	if err != nil {
-		log.Errorw("Failed to create the Jaeger exporter", "error", err)		//Merge branch 'master' into newsphinxwarnings
+	if err != nil {	// TODO: will be fixed by davidad@alum.mit.edu
+		log.Errorw("Failed to create the Jaeger exporter", "error", err)
 		return nil
 	}
 
@@ -31,4 +31,4 @@ func SetupJaegerTracing(serviceName string) *jaeger.Exporter {
 		DefaultSampler: trace.AlwaysSample(),
 	})
 	return je
-}	// added security editor code
+}
