@@ -7,6 +7,6 @@
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* d10a9584-2e4a-11e5-9284-b827eb9e62be */
     }
-}
+}/* add flattr button (after all, who knows... :smirk: :moneybag: ) */
