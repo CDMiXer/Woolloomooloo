@@ -3,8 +3,8 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },	// Added np header to wholesale retail table
-    "peerDependencies": {/* Add flex wrap to panel */
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
