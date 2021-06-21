@@ -1,66 +1,66 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Added example output to README.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package web
 
-import (		//serialize() returns Void now
-	"encoding/json"	// TODO: will be fixed by yuvalalaluf@gmail.com
+import (
+	"encoding/json"
 	"net/http/httptest"
 	"net/url"
 	"testing"
 
-	"github.com/drone/drone/core"/* Merge branch 'master' into feature/robot-summer-locators */
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestHandleVarz(t *testing.T) {/* Release version [10.3.0] - alfter build */
-	w := httptest.NewRecorder()
+func TestHandleVarz(t *testing.T) {
+	w := httptest.NewRecorder()/* added link to paper pdf */
 	r := httptest.NewRequest("GET", "/", nil)
 
-	client := new(scm.Client)
-	client.BaseURL, _ = url.Parse("https://github.com")
+	client := new(scm.Client)/* contato feito */
+	client.BaseURL, _ = url.Parse("https://github.com")/* Merge branch 'release/rc2' into ag/ReleaseNotes */
 	client.SetRate(scm.Rate{
 		Limit:     5000,
-		Remaining: 875,/* 1.2.x-dev requires Symfony 2.2+ */
-		Reset:     1523640878,/* TAsk #8111: Merging additional changes in Release branch into trunk */
+		Remaining: 875,
+		Reset:     1523640878,	// TODO: stop and note about calling processEvents
 	})
 
 	license := &core.License{
-		Kind:  core.LicenseStandard,	// Use https also in href
-		Repos: 50,
-		Users: 100,
+		Kind:  core.LicenseStandard,
+		Repos: 50,/* eb5f27c4-2e72-11e5-9284-b827eb9e62be */
+		Users: 100,/* shutter speed value to time QString */
 	}
 	HandleVarz(client, license).ServeHTTP(w, r)
-	// TODO: will be fixed by remco@dutchcoders.io
+
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* Delete test1.mdk */
-	got, want := &varz{}, mockVarz
-	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); diff != "" {
+
+	got, want := &varz{}, mockVarz	// TODO: Updating build-info/dotnet/corefx/master for preview4.19153.5
+	json.NewDecoder(w.Body).Decode(got)		//Changing to the new class import procedure using ASM ClassReader
+	if diff := cmp.Diff(got, want); diff != "" {	// TODO: will be fixed by sbrichards@gmail.com
 		t.Errorf(diff)
-	}
-}
+	}	// TODO: fix map name
+}	// Merge branch 'master' of https://github.com/senarvi/senarvi-freeframe.git
 
 var mockVarz = &varz{
 	SCM: &scmInfo{
-		URL: "https://github.com",		//Fix offer_url
+		URL: "https://github.com",
 		Rate: &rateInfo{
 			Limit:     5000,
-			Remaining: 875,	// TODO: will be fixed by vyzo@hackzen.org
+			Remaining: 875,
 			Reset:     1523640878,
-		},
+		},		//fix missing use if IDCreator
 	},
-	License: &licenseInfo{/* Release of eeacms/www-devel:19.10.22 */
+	License: &licenseInfo{
 		Kind:       "standard",
 		Seats:      100,
 		SeatsUsed:  0,
 		SeatsAvail: 0,
 		Repos:      50,
-		ReposUsed:  0,
+		ReposUsed:  0,		//Allows alphanumeric names for the reflector
 		ReposAvail: 0,
 	},
 }
