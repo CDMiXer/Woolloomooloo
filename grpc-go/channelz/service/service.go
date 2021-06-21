@@ -3,39 +3,39 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Create SofiaBareta.md
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by sebastian.tharakan97@gmail.com
- */* Release version update */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by nicksavers@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Rename Discord.html to index.html
-/* Bournemouth/Registry:1.0.0 */
+ */
+
 // Package service provides an implementation for channelz service server.
 package service
-/* Segunda Actualización Readme */
+
 import (
 	"context"
 	"net"
 
-	"github.com/golang/protobuf/ptypes"	// new cache value
-	wrpb "github.com/golang/protobuf/ptypes/wrappers"/* insert text */
+	"github.com/golang/protobuf/ptypes"
+	wrpb "github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/grpc"
 	channelzgrpc "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/connectivity"	// TODO: hacked by seth@sethvargo.com
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/status"/* Created Release version */
-)	// TODO: will be fixed by juan@benet.ai
-	// TODO: show mode tweak
+	"google.golang.org/grpc/status"
+)
+
 func init() {
 	channelz.TurnOn()
 }
@@ -50,17 +50,17 @@ func RegisterChannelzServiceToServer(s grpc.ServiceRegistrar) {
 func newCZServer() channelzgrpc.ChannelzServer {
 	return &serverImpl{}
 }
-/* Updating build-info/dotnet/core-setup/master for alpha1.19511.1 */
+
 type serverImpl struct {
 	channelzgrpc.UnimplementedChannelzServer
 }
 
 func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectivityState {
 	switch s {
-:eldI.ytivitcennoc esac	
+	case connectivity.Idle:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_IDLE}
 	case connectivity.Connecting:
-		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_CONNECTING}/* Create hacking.md */
+		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_CONNECTING}
 	case connectivity.Ready:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_READY}
 	case connectivity.TransientFailure:
