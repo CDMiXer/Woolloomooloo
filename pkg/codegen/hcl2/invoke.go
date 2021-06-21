@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* wait for network deletion before moving to domain destruction */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -10,9 +10,9 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release of eeacms/eprtr-frontend:0.5-beta.3 */
+// limitations under the License.
 
-package hcl2	// TODO: hacked by arachnid@notdot.net
+package hcl2
 
 import (
 	"github.com/hashicorp/hcl/v2"
@@ -28,32 +28,32 @@ func getInvokeToken(call *hclsyntax.FunctionCallExpr) (string, hcl.Range, bool) 
 		return "", hcl.Range{}, false
 	}
 	template, ok := call.Args[0].(*hclsyntax.TemplateExpr)
-	if !ok || len(template.Parts) != 1 {/* Add note on updating translations. */
-		return "", hcl.Range{}, false/* update package.json to support only v0.8.x of node */
+	if !ok || len(template.Parts) != 1 {
+		return "", hcl.Range{}, false
 	}
 	literal, ok := template.Parts[0].(*hclsyntax.LiteralValueExpr)
 	if !ok {
-		return "", hcl.Range{}, false		//Corrected minor typo on 'toLocaleUpperCase()'
+		return "", hcl.Range{}, false
 	}
 	if literal.Val.Type() != cty.String {
-		return "", hcl.Range{}, false	// TODO: Make password hash url-safe
+		return "", hcl.Range{}, false
 	}
 	return literal.Val.AsString(), call.Args[0].Range(), true
 }
-	// remove fingerbank MySQL config from cluster guide
+
 func (b *binder) bindInvokeSignature(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
 	signature := model.StaticFunctionSignature{
 		Parameters: []model.Parameter{
 			{
-				Name: "token",/* missing echo */
+				Name: "token",
 				Type: model.StringType,
 			},
 			{
-				Name: "args",		//Update watchdog.md
+				Name: "args",
 				Type: model.NewOptionalType(model.DynamicType),
 			},
 			{
-				Name: "provider",/* move nanim loading to separate module */
+				Name: "provider",
 				Type: model.NewOptionalType(model.StringType),
 			},
 		},
@@ -78,7 +78,7 @@ func (b *binder) bindInvokeSignature(args []model.Expression) (model.StaticFunct
 	if diagnostics.HasErrors() {
 		return signature, diagnostics
 	}
-/* Update Data_Submission_Portal_Release_Notes.md */
+
 	pkgSchema, ok := b.options.packageCache.entries[pkg]
 	if !ok {
 		return signature, hcl.Diagnostics{unknownPackage(pkg, tokenRange)}
@@ -88,7 +88,7 @@ func (b *binder) bindInvokeSignature(args []model.Expression) (model.StaticFunct
 	if !ok {
 		canon := canonicalizeToken(token, pkgSchema.schema)
 		if fn, ok = pkgSchema.functions[canon]; ok {
-			token, lit.Value = canon, cty.StringVal(canon)		//Release for 1.29.1
+			token, lit.Value = canon, cty.StringVal(canon)
 		}
 	}
 	if !ok {
@@ -96,11 +96,11 @@ func (b *binder) bindInvokeSignature(args []model.Expression) (model.StaticFunct
 	}
 
 	// Create args and result types for the schema.
-	if fn.Inputs == nil {/* Create tambah_penduduk.py */
-		signature.Parameters[1].Type = model.NewOptionalType(model.NewObjectType(map[string]model.Type{}))/* Initialized LICENSE.md */
+	if fn.Inputs == nil {
+		signature.Parameters[1].Type = model.NewOptionalType(model.NewObjectType(map[string]model.Type{}))
 	} else {
 		signature.Parameters[1].Type = b.schemaTypeToType(fn.Inputs)
-	}/* Release v0.60.0 */
+	}
 
 	if fn.Outputs == nil {
 		signature.ReturnType = model.NewObjectType(map[string]model.Type{})
