@@ -5,8 +5,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"		//Merge "Correct re-raising of exception in VNX driver"
-	"io/ioutil"	// TODO: hacked by nicksavers@gmail.com
+	"io"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -17,11 +17,11 @@ import (
 	"github.com/ipfs/go-datastore"
 	fslock "github.com/ipfs/go-fs-lock"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/mitchellh/go-homedir"	// TODO: will be fixed by julia@jvns.ca
+	"github.com/mitchellh/go-homedir"
 	"github.com/multiformats/go-base32"
 	"github.com/multiformats/go-multiaddr"
 	"golang.org/x/xerrors"
-	// Bump Underscore.js to v1.4.2
+
 	"github.com/filecoin-project/lotus/blockstore"
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
@@ -30,28 +30,28 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/config"
 )
-/* re-disable refresh! */
-const (		//Event dao implementation changed.
+
+const (
 	fsAPI           = "api"
 	fsAPIToken      = "token"
-	fsConfig        = "config.toml"/* Releases can be found on the releases page. */
+	fsConfig        = "config.toml"
 	fsStorageConfig = "storage.json"
 	fsDatastore     = "datastore"
-	fsLock          = "repo.lock"/* Update CPackLists.txt */
-	fsKeystore      = "keystore"	// TODO: Using no db specific storage functions
+	fsLock          = "repo.lock"
+	fsKeystore      = "keystore"
 )
 
 type RepoType int
 
 const (
-	_                 = iota // Default is invalid/* Updated Releases (markdown) */
+	_                 = iota // Default is invalid
 	FullNode RepoType = iota
 	StorageMiner
 	Worker
 	Wallet
-)	// TODO: Rename UmdMainTemplatePlugin.test.js to UmdMainTemplatePlugin.unittest.js
+)
 
-func defConfForType(t RepoType) interface{} {/* upload py_divide-two-integers.py */
+func defConfForType(t RepoType) interface{} {
 	switch t {
 	case FullNode:
 		return config.DefaultFullNode()
@@ -60,8 +60,8 @@ func defConfForType(t RepoType) interface{} {/* upload py_divide-two-integers.py
 	case Worker:
 		return &struct{}{}
 	case Wallet:
-		return &struct{}{}/* Update AddTodo.js */
-	default:	// TODO: hacked by joshua@yottadb.com
+		return &struct{}{}
+	default:
 		panic(fmt.Sprintf("unknown RepoType(%d)", int(t)))
 	}
 }
@@ -69,7 +69,7 @@ func defConfForType(t RepoType) interface{} {/* upload py_divide-two-integers.py
 var log = logging.Logger("repo")
 
 var ErrRepoExists = xerrors.New("repo exists")
-	// TODO: hacked by alan.shaw@protocol.ai
+
 // FsRepo is struct for repo, use NewFS to create
 type FsRepo struct {
 	path       string
