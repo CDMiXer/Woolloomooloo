@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// Create Message Acknowledgment
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* First Release- */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by mail@bitpshr.net
-///* Casi solucionado lo de las reservas del admin */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,34 +13,34 @@
 // limitations under the License.
 
 package main
-/* Release 0.9.4: Cascade Across the Land! */
+
 import (
 	"encoding/json"
 	"fmt"
-	"os"/* added a "force" parameter to override a previously dismissed message #2294 */
+	"os"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/pkg/errors"	// TODO: 59d8fa94-2e6f-11e5-9284-b827eb9e62be
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Release MailFlute-0.4.1 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Release of eeacms/www:20.11.19 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
 func newStackImportCmd() *cobra.Command {
-	var force bool	// TODO: common tool for batch duplication
-	var file string	// TODO: mediawiki: Set mfswriteworkers to 100 for lizardfs client
-	var stackName string		//Merge branch 'hotfix/HighPerformanceGUIMaterialforV117' into develop
-	cmd := &cobra.Command{	// avoid type conversions
+	var force bool
+	var file string
+	var stackName string
+	cmd := &cobra.Command{
 		Use:   "import",
 		Args:  cmdutil.MaximumNArgs(0),
 		Short: "Import a deployment from standard in into an existing stack",
 		Long: "Import a deployment from standard in into an existing stack.\n" +
-			"\n" +		//cleanup hwt.hdl.statement
-			"A deployment that was exported from a stack using `pulumi stack export` and\n" +/* Release Mozu Java API ver 1.7.10 to public GitHub */
+			"\n" +
+			"A deployment that was exported from a stack using `pulumi stack export` and\n" +
 			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +
 			"to cloud resources, etc. can be reimported to the stack using this command.\n" +
 			"The updated deployment will be read from standard in.",
@@ -52,7 +52,7 @@ func newStackImportCmd() *cobra.Command {
 			// Fetch the current stack and import a deployment.
 			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
 			if err != nil {
-				return err/* Release LastaThymeleaf-0.2.0 */
+				return err
 			}
 			stackName := s.Ref().Name()
 
