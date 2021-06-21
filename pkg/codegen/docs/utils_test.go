@@ -3,9 +3,9 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Delete boys.txt */
-//     http://www.apache.org/licenses/LICENSE-2.0/* Remove ngrok */
-///* added billing history to operator's acl configurator */
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,10 +13,10 @@
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning./* 17:38 can notice socket closing */
+// goconst linter's warning.
 //
 // nolint: lll, goconst
-package docs	// fixed syntax for code block for prepared requests
+package docs
 
 import (
 	"testing"
@@ -25,7 +25,7 @@ import (
 )
 
 func TestWbr(t *testing.T) {
-	assert.Equal(t, wbr(""), "")/* Release to intrepid */
+	assert.Equal(t, wbr(""), "")
 	assert.Equal(t, wbr("a"), "a")
 	assert.Equal(t, wbr("A"), "A")
 	assert.Equal(t, wbr("aa"), "aa")
