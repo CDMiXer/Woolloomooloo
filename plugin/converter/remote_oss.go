@@ -1,6 +1,6 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Fix #85, bad message when api is broken
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//On pull request merge, delete the branch [skip ci]
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -16,7 +16,7 @@
 
 package converter
 
-import (		//Updating build-info/dotnet/roslyn/dev16.5 for beta3-20066-04
+import (
 	"time"
 
 	"github.com/drone/drone/core"
