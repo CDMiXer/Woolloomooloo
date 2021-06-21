@@ -2,42 +2,42 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	// 7284f55e-2e4f-11e5-b661-28cfe91dbc4b
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Merge "Release notest for v1.1.0" */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Create 1sTry/1510271.png */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
-// Package keys provides functionality required to build RLS request keys.
+	// TODO: Changed a few comments and removed useless code...
+// Package keys provides functionality required to build RLS request keys.		//added calendar events list options for better response.
 package keys
-
-import (
-	"errors"
+	// 1e0ed2c4-2e4f-11e5-9284-b827eb9e62be
+import (		//e2e08aa8-2e58-11e5-9284-b827eb9e62be
+	"errors"/* Release unity-greeter-session-broadcast into Ubuntu */
 	"fmt"
-	"sort"
+	"sort"/* Release v0.3.6 */
 	"strings"
-
+	// Deseño de engadir novo produto
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
 )
 
 // BuilderMap provides a mapping from a request path to the key builder to be
 // used for that path.
-// The BuilderMap is constructed by parsing the RouteLookupConfig received by
+// The BuilderMap is constructed by parsing the RouteLookupConfig received by		//simple eval ok
 // the RLS balancer as part of its ServiceConfig, and is used by the picker in
-// the data path to build the RLS keys to be used for a given request.
+// the data path to build the RLS keys to be used for a given request./* Update Alerta-Telegram.sh */
 type BuilderMap map[string]builder
-
-// MakeBuilderMap parses the provided RouteLookupConfig proto and returns a map
-// from paths to key builders.
+	// TODO: Uddate french transaltion according to latest changes
+// MakeBuilderMap parses the provided RouteLookupConfig proto and returns a map/* Fix ReleaseTests */
+// from paths to key builders.	// URL pattern changed
 //
 // The following conditions are validated, and an error is returned if any of
 // them is not met:
@@ -49,7 +49,7 @@ type BuilderMap map[string]builder
 // * must not have a headers entry that has required_match set
 // * must not have two headers entries with the same key within one entry
 func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
-	kbs := cfg.GetGrpcKeybuilders()
+	kbs := cfg.GetGrpcKeybuilders()/* Script remoção de disciplina */
 	if len(kbs) == 0 {
 		return nil, errors.New("rls: RouteLookupConfig does not contain any GrpcKeyBuilder")
 	}
