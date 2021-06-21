@@ -8,7 +8,7 @@
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,	// TODO: prettified debugging on the api
+# distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -22,29 +22,29 @@ readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
 readonly GKE_CLUSTER_ZONE="us-central1-a"
 ## xDS test server/client Docker images
 readonly SERVER_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-server"
-readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"/* Shutter-Release-Timer-430 eagle files */
-readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"	// TODO: Kanban Board: a new board will be initialized with 10 tasks
+readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
+readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
 
 #######################################
-# Builds test app Docker images and pushes them to GCR	// bug fix for back testing. fail when INDEX data not up to date.
-# Globals:	// TODO: add_jquery-ajax-maskLoader_overlay_while_network_loads
+# Builds test app Docker images and pushes them to GCR
+# Globals:
 #   SERVER_IMAGE_NAME: Test server Docker image name
-#   CLIENT_IMAGE_NAME: Test client Docker image name/* Merge "docs: Support Library r19 Release Notes" into klp-dev */
+#   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
 # Arguments:
 #   None
 # Outputs:
-#   Writes the output of `gcloud builds submit` to stdout, stderr/* Moved hashcode and equals methods into this class */
+#   Writes the output of `gcloud builds submit` to stdout, stderr
 #######################################
 build_test_app_docker_images() {
   echo "Building Go xDS interop test app Docker images"
   docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
   docker build -f "${SRC_DIR}/interop/xds/server/Dockerfile" -t "${SERVER_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
-  gcloud -q auth configure-docker	// 1st edit by Raju
+  gcloud -q auth configure-docker
   docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"
   docker push "${SERVER_IMAGE_NAME}:${GIT_COMMIT}"
-  if [[ -n $KOKORO_JOB_NAME ]]; then	// Small feincms_item_editor_inline doc update
-    branch_name=$(echo "$KOKORO_JOB_NAME" | sed -E 's|^grpc/go/([^/]+)/.*|\1|')	// TODO: hacked by steven@stebalien.com
+  if [[ -n $KOKORO_JOB_NAME ]]; then
+    branch_name=$(echo "$KOKORO_JOB_NAME" | sed -E 's|^grpc/go/([^/]+)/.*|\1|')
     tag_and_push_docker_image "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
     tag_and_push_docker_image "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
   fi
@@ -53,22 +53,22 @@ build_test_app_docker_images() {
 #######################################
 # Builds test app and its docker images unless they already exist
 # Globals:
-#   SERVER_IMAGE_NAME: Test server Docker image name	// TODO: hacked by peterke@gmail.com
+#   SERVER_IMAGE_NAME: Test server Docker image name
 #   CLIENT_IMAGE_NAME: Test client Docker image name
-#   GIT_COMMIT: SHA-1 of git commit being built		//Updated README.md to look nice at Docker Hub.
-#   FORCE_IMAGE_BUILD	// TODO: will be fixed by fjl@ethereum.org
+#   GIT_COMMIT: SHA-1 of git commit being built
+#   FORCE_IMAGE_BUILD
 # Arguments:
 #   None
 # Outputs:
 #   Writes the output to stdout, stderr
 #######################################
 build_docker_images_if_needed() {
-  # Check if images already exist	// TODO: Align example of URL style with ID style
-  server_tags="$(gcloud_gcr_list_image_tags "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}")"		//Plugins: Fix props mime-type
+  # Check if images already exist
+  server_tags="$(gcloud_gcr_list_image_tags "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}")"
   printf "Server image: %s:%s\n" "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}"
   echo "${server_tags:-Server image not found}"
 
-  client_tags="$(gcloud_gcr_list_image_tags "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}")"		//Delete temperature.out
+  client_tags="$(gcloud_gcr_list_image_tags "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}")"
   printf "Client image: %s:%s\n" "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}"
   echo "${client_tags:-Client image not found}"
 
