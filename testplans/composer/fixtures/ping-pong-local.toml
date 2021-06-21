@@ -1,14 +1,14 @@
 [metadata]
-name = "ping-pong-local"/* update to primefaces 3.0.1 */
-author = "yusef"
+name = "ping-pong-local"	// TODO: hacked by steven@stebalien.com
+author = "yusef"		//Pass around the agent config.
 
 [global]
 plan = "network"
 case = "ping-pong"
 total_instances = 2
-builder = "docker:go"		//Removed a typo error in libvirt connection.py
+builder = "docker:go"
 runner = "local:docker"
-	// TODO: Removed outdated link
-[[groups]]
+
+[[groups]]/* Merge "No more python path changes" */
 id = "nodes"
 instances = { count = 2 }
