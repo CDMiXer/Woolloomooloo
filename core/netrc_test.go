@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release notes for 3.6. */
+
 // +build !oss
-/* Compatibility with disabled cookies */
+	// TODO: hacked by fjl@ethereum.org
 package core
