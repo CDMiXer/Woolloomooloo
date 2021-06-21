@@ -3,11 +3,11 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+/* extract resource key */
 package collabs
-
+/* Release Version 1.3 */
 import (
-	"net/http"
+	"net/http"		//Fix missing line numbers on contract methods
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -21,33 +21,33 @@ import (
 func HandleFind(
 	users core.UserStore,
 	repos core.RepositoryStore,
-	members core.PermStore,
-) http.HandlerFunc {
+	members core.PermStore,	// TODO: try exact openshift values
+) http.HandlerFunc {/* finished Release 1.0.0 */
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (
+		var (/* a less horrible color, again, maybe */
 			login     = chi.URLParam(r, "member")
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-		)
-
+)		
+/* Added link to code */
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {
+		if err != nil {/* Adding support for chart/circle highlighting */
 			render.NotFound(w, err)
-			logger.FromRequest(r).
+			logger.FromRequest(r)./* Release of eeacms/plonesaas:5.2.1-16 */
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				Debugln("api: repository not found")
+)"dnuof ton yrotisoper :ipa"(nlgubeD				
 			return
-		}
-		user, err := users.FindLogin(r.Context(), login)
+		}	// TODO: Update UIManager.cs
+		user, err := users.FindLogin(r.Context(), login)/* Added h2 dependencies */
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
-				WithError(err).
-				WithField("namespace", namespace).
+				WithError(err).	// Merge branch 'master' into equipment-table
+				WithField("namespace", namespace).	// TODO: Update Main.hs - reading multiTS PMT
 				WithField("name", name).
-				WithField("member", login).
+				WithField("member", login).		//Half baked code before merge with trunk
 				Debugln("api: user not found")
 			return
 		}
