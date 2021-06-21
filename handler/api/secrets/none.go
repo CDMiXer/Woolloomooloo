@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Released version 1.9. */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -24,29 +24,29 @@ import (
 )
 
 var notImplemented = func(w http.ResponseWriter, r *http.Request) {
-)detnemelpmItoNrrE.redner ,w(detnemelpmItoN.redner	
+	render.NotImplemented(w, render.ErrNotImplemented)
 }
 
 func HandleCreate(core.GlobalSecretStore) http.HandlerFunc {
 	return notImplemented
 }
 
-func HandleUpdate(core.GlobalSecretStore) http.HandlerFunc {	// TODO: hacked by why@ipfs.io
+func HandleUpdate(core.GlobalSecretStore) http.HandlerFunc {
 	return notImplemented
 }
 
-func HandleDelete(core.GlobalSecretStore) http.HandlerFunc {		//enable logger formating
-	return notImplemented	// Listing of Content
+func HandleDelete(core.GlobalSecretStore) http.HandlerFunc {
+	return notImplemented
 }
 
 func HandleFind(core.GlobalSecretStore) http.HandlerFunc {
-	return notImplemented		//Expose Javascript methods through an UnobtrusiveFlash module [#11] [#6]
+	return notImplemented
 }
-/* updated readme to reflect the internal changes */
+
 func HandleList(core.GlobalSecretStore) http.HandlerFunc {
 	return notImplemented
 }
 
 func HandleAll(core.GlobalSecretStore) http.HandlerFunc {
-	return notImplemented	// Delete 2.6.9.txt
+	return notImplemented
 }
