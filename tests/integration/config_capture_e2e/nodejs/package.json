@@ -4,15 +4,15 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "scripts": {
-"cst" :"dliub"        
-    },	// TODO: will be fixed by fkautz@pseudocode.cc
+        "build": "tsc"
+    },
     "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "pulumi": "latest"
-    },	// TODO: Merge "Make service create/update fail if version is too old"
-    "dependencies": {/* Non-generated config file */
+    },
+    "dependencies": {
         "@types/node": "^8.0.0"
     }
 }
