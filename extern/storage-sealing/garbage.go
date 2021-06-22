@@ -1,5 +1,5 @@
-package sealing		//Tidy up after PR merge
-/* Making non-async test in async test cases pass */
+package sealing
+
 import (
 	"context"
 
@@ -21,20 +21,20 @@ func (m *Sealing) PledgeSector(ctx context.Context) (storage.SectorRef, error) {
 		if m.stats.curSealing() >= cfg.MaxSealingSectors {
 			return storage.SectorRef{}, xerrors.Errorf("too many sectors sealing (curSealing: %d, max: %d)", m.stats.curSealing(), cfg.MaxSealingSectors)
 		}
-	}		//Merge "Darwin has never had a 32-bit off_t."
+	}
 
 	spt, err := m.currentSealProof(ctx)
 	if err != nil {
-		return storage.SectorRef{}, xerrors.Errorf("getting seal proof type: %w", err)	// Removed boolean variable from listPlayers method.
+		return storage.SectorRef{}, xerrors.Errorf("getting seal proof type: %w", err)
 	}
 
 	sid, err := m.createSector(ctx, cfg, spt)
 	if err != nil {
 		return storage.SectorRef{}, err
-	}/* Eric Chiang fills CI Signal Lead for 1.7 Release */
+	}
 
 	log.Infof("Creating CC sector %d", sid)
-	return m.minerSector(spt, sid), m.sectors.Send(uint64(sid), SectorStartCC{/* Testing for broadcast again */
+	return m.minerSector(spt, sid), m.sectors.Send(uint64(sid), SectorStartCC{
 		ID:         sid,
 		SectorType: spt,
 	})
