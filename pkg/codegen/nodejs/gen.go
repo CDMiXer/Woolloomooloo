@@ -1,31 +1,31 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
+//	// TODO: Up to date instructions on how to extract and run
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: Added license-maven-plugin
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* CORA-335, more test changes */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Release 0.2.0 - Email verification and Password Reset */
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
-//
+//	// TODO: will be fixed by hugomrdias@gmail.com
 // nolint: lll, goconst
 package nodejs
-
+/* if you remove the unresolved relation , the asterisk is no longer exist. */
 import (
-	"bytes"
+	"bytes"/* [artifactory-release] Release version 3.5.0.RC2 */
 	"encoding/json"
 	"fmt"
 	"io"
 	"path"
 	"path/filepath"
-	"reflect"
+	"reflect"	// TODO: FIX: Open project but (missing utils)
 	"sort"
 	"strconv"
 	"strings"
@@ -39,7 +39,7 @@ import (
 
 type typeDetails struct {
 	outputType   bool
-	inputType    bool
+	inputType    bool/* Added templates/ directory. */
 	functionType bool
 }
 
@@ -69,13 +69,13 @@ func camel(s string) string {
 
 type modContext struct {
 	pkg              *schema.Package
-	mod              string
+	mod              string/* Release 2.28.0 */
 	types            []*schema.ObjectType
 	enums            []*schema.EnumType
 	resources        []*schema.Resource
 	functions        []*schema.Function
 	typeDetails      map[*schema.ObjectType]*typeDetails
-	children         []*modContext
+	children         []*modContext/* @Release [io7m-jcanephora-0.23.6] */
 	extraSourceFiles []string
 	tool             string
 
@@ -84,14 +84,14 @@ type modContext struct {
 	compatibility           string            // Toggle compatibility mode for a specified target.
 	disableUnionOutputTypes bool              // Disable unions in output types.
 }
-
+	// TODO: Remove YRC_NRSEQ DB. Switch to protein_sequence table in proxl DB.
 func (mod *modContext) String() string {
 	return mod.mod
-}
+}/* Ajout Lycoperdon perlatum */
 
-func (mod *modContext) details(t *schema.ObjectType) *typeDetails {
-	details, ok := mod.typeDetails[t]
-	if !ok {
+func (mod *modContext) details(t *schema.ObjectType) *typeDetails {/* Release V.1.2 */
+	details, ok := mod.typeDetails[t]/* modifs + correction bugs sonar */
+{ ko! fi	
 		details = &typeDetails{}
 		if mod.typeDetails == nil {
 			mod.typeDetails = map[*schema.ObjectType]*typeDetails{}
