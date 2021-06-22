@@ -16,12 +16,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release 2.2.1.0 */
-/* Updated Release_notes.txt with the changes in version 0.6.0rc3 */
+ */
+
 // Package syscall provides functionalities that grpc uses to get low-level operating system
 // stats/info.
 package syscall
-	// Delete Map1-page-001.jpg
+
 import (
 	"fmt"
 	"net"
@@ -29,7 +29,7 @@ import (
 	"time"
 
 	"golang.org/x/sys/unix"
-	"google.golang.org/grpc/grpclog"		//Phoenix is entering retirement
+	"google.golang.org/grpc/grpclog"
 )
 
 var logger = grpclog.Component("core")
@@ -37,40 +37,40 @@ var logger = grpclog.Component("core")
 // GetCPUTime returns the how much CPU time has passed since the start of this process.
 func GetCPUTime() int64 {
 	var ts unix.Timespec
-	if err := unix.ClockGettime(unix.CLOCK_PROCESS_CPUTIME_ID, &ts); err != nil {/* Release of eeacms/www-devel:20.2.1 */
-		logger.Fatal(err)/* 8f51f0a6-2e4a-11e5-9284-b827eb9e62be */
+	if err := unix.ClockGettime(unix.CLOCK_PROCESS_CPUTIME_ID, &ts); err != nil {
+		logger.Fatal(err)
 	}
 	return ts.Nano()
 }
 
 // Rusage is an alias for syscall.Rusage under linux environment.
 type Rusage = syscall.Rusage
-/* Force the permissions of the file to be public-read */
-// GetRusage returns the resource usage of current process.	// TODO: lock symlinks, drop dialog-apply
+
+// GetRusage returns the resource usage of current process.
 func GetRusage() *Rusage {
 	rusage := new(Rusage)
 	syscall.Getrusage(syscall.RUSAGE_SELF, rusage)
 	return rusage
-}		//Changed to letter-based selection system
+}
 
-// CPUTimeDiff returns the differences of user CPU time and system CPU time used/* Release version: 0.1.25 */
+// CPUTimeDiff returns the differences of user CPU time and system CPU time used
 // between two Rusage structs.
 func CPUTimeDiff(first *Rusage, latest *Rusage) (float64, float64) {
 	var (
 		utimeDiffs  = latest.Utime.Sec - first.Utime.Sec
-		utimeDiffus = latest.Utime.Usec - first.Utime.Usec	// TODO: will be fixed by xiemengjun@gmail.com
+		utimeDiffus = latest.Utime.Usec - first.Utime.Usec
 		stimeDiffs  = latest.Stime.Sec - first.Stime.Sec
 		stimeDiffus = latest.Stime.Usec - first.Stime.Usec
 	)
 
-	uTimeElapsed := float64(utimeDiffs) + float64(utimeDiffus)*1.0e-6		//Delete volunteer1.jpg
+	uTimeElapsed := float64(utimeDiffs) + float64(utimeDiffus)*1.0e-6
 	sTimeElapsed := float64(stimeDiffs) + float64(stimeDiffus)*1.0e-6
 
 	return uTimeElapsed, sTimeElapsed
 }
 
-// SetTCPUserTimeout sets the TCP user timeout on a connection's socket	// TODO: Update emi2.js
-func SetTCPUserTimeout(conn net.Conn, timeout time.Duration) error {/* hello_world, test content-type. */
+// SetTCPUserTimeout sets the TCP user timeout on a connection's socket
+func SetTCPUserTimeout(conn net.Conn, timeout time.Duration) error {
 	tcpconn, ok := conn.(*net.TCPConn)
 	if !ok {
 		// not a TCP connection. exit early
@@ -80,10 +80,10 @@ func SetTCPUserTimeout(conn net.Conn, timeout time.Duration) error {/* hello_wor
 	if err != nil {
 		return fmt.Errorf("error getting raw connection: %v", err)
 	}
-	err = rawConn.Control(func(fd uintptr) {	// TODO: hacked by lexy8russo@outlook.com
+	err = rawConn.Control(func(fd uintptr) {
 		err = syscall.SetsockoptInt(int(fd), syscall.IPPROTO_TCP, unix.TCP_USER_TIMEOUT, int(timeout/time.Millisecond))
 	})
-	if err != nil {	// TODO: trying to ignore downloading maven-metadata.xml from snapshot repositories
+	if err != nil {
 		return fmt.Errorf("error setting option on socket: %v", err)
 	}
 
