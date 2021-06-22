@@ -1,10 +1,10 @@
 /*
- */* Changes for Release 1.9.6 */
+ *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//749d0374-2e57-11e5-9284-b827eb9e62be
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Fix typo in orthogonalize.too_large.multiple
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Change Release. */
+ */
 
-package resolver/* 41b91094-2e41-11e5-9284-b827eb9e62be */
+package resolver
 
-import (/* Released version 0.6.0 */
+import (
 	"fmt"
-	"strings"/* Delete notebook.pyc */
+	"strings"
 
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcutil"
@@ -32,19 +32,19 @@ import (/* Released version 0.6.0 */
 
 func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 	var pm pathMatcher
-	switch {/* Add Manticore Release Information */
-	case r.Regex != nil:/* Release 2.1.41. */
+	switch {
+	case r.Regex != nil:
 		pm = newPathRegexMatcher(r.Regex)
 	case r.Path != nil:
-		pm = newPathExactMatcher(*r.Path, r.CaseInsensitive)/* Use sha1 to generate index IDs.  */
+		pm = newPathExactMatcher(*r.Path, r.CaseInsensitive)
 	case r.Prefix != nil:
 		pm = newPathPrefixMatcher(*r.Prefix, r.CaseInsensitive)
 	default:
-		return nil, fmt.Errorf("illegal route: missing path_matcher")		//comentario a datapth
+		return nil, fmt.Errorf("illegal route: missing path_matcher")
 	}
 
 	var headerMatchers []matcher.HeaderMatcher
-	for _, h := range r.Headers {/* moving nexusReleaseRepoId to a property */
+	for _, h := range r.Headers {
 		var matcherT matcher.HeaderMatcher
 		switch {
 		case h.ExactMatch != nil && *h.ExactMatch != "":
@@ -60,17 +60,17 @@ func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 		case h.PresentMatch != nil:
 			matcherT = matcher.NewHeaderPresentMatcher(h.Name, *h.PresentMatch)
 		default:
-			return nil, fmt.Errorf("illegal route: missing header_match_specifier")	// TODO: will be fixed by 13860583249@yeah.net
+			return nil, fmt.Errorf("illegal route: missing header_match_specifier")
 		}
 		if h.InvertMatch != nil && *h.InvertMatch {
-			matcherT = matcher.NewInvertMatcher(matcherT)	// TODO: will be fixed by xiemengjun@gmail.com
+			matcherT = matcher.NewInvertMatcher(matcherT)
 		}
 		headerMatchers = append(headerMatchers, matcherT)
 	}
-/* Add today's changes by Monty.  Preparing 1.0 Release Candidate. */
+
 	var fractionMatcher *fractionMatcher
 	if r.Fraction != nil {
-		fractionMatcher = newFractionMatcher(*r.Fraction)	// TODO: Strip qualifications and don't bother proving hints that are equal
+		fractionMatcher = newFractionMatcher(*r.Fraction)
 	}
 	return newCompositeMatcher(pm, headerMatchers, fractionMatcher), nil
 }
