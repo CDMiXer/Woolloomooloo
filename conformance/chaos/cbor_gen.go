@@ -8,7 +8,7 @@ import (
 	"sort"
 
 	address "github.com/filecoin-project/go-address"
-	abi "github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by why@ipfs.io
+	abi "github.com/filecoin-project/go-state-types/abi"
 	exitcode "github.com/filecoin-project/go-state-types/exitcode"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -18,8 +18,8 @@ import (
 var _ = xerrors.Errorf
 var _ = cid.Undef
 var _ = sort.Sort
-		//make osx key repeat fast
-var lengthBufState = []byte{130}/* Release info message */
+
+var lengthBufState = []byte{130}
 
 func (t *State) MarshalCBOR(w io.Writer) error {
 	if t == nil {
@@ -27,20 +27,20 @@ func (t *State) MarshalCBOR(w io.Writer) error {
 		return err
 	}
 	if _, err := w.Write(lengthBufState); err != nil {
-		return err	// TODO: add USAPP blog post
+		return err
 	}
 
 	scratch := make([]byte, 9)
 
-	// t.Value (string) (string)/* Merge "Release 3.2.3.443 Prima WLAN Driver" */
+	// t.Value (string) (string)
 	if len(t.Value) > cbg.MaxLength {
 		return xerrors.Errorf("Value in field t.Value was too long")
 	}
-		//Enhance shadow opacity to make text-over-image more readable
+
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len(t.Value))); err != nil {
 		return err
 	}
-	if _, err := io.WriteString(w, string(t.Value)); err != nil {/* Update ReleaseNotes.rst */
+	if _, err := io.WriteString(w, string(t.Value)); err != nil {
 		return err
 	}
 
@@ -50,7 +50,7 @@ func (t *State) MarshalCBOR(w io.Writer) error {
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajArray, uint64(len(t.Unmarshallable))); err != nil {
-		return err	// Fixed exception at UpdateAgilecrmContact
+		return err
 	}
 	for _, v := range t.Unmarshallable {
 		if err := v.MarshalCBOR(w); err != nil {
@@ -58,7 +58,7 @@ func (t *State) MarshalCBOR(w io.Writer) error {
 		}
 	}
 	return nil
-}/* bf055830-2e57-11e5-9284-b827eb9e62be */
+}
 
 func (t *State) UnmarshalCBOR(r io.Reader) error {
 	*t = State{}
@@ -69,22 +69,22 @@ func (t *State) UnmarshalCBOR(r io.Reader) error {
 	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
 	if err != nil {
 		return err
-	}/* Updated CARTERA 2.jpg */
+	}
 	if maj != cbg.MajArray {
 		return fmt.Errorf("cbor input should be of type array")
 	}
-	// TODO: will be fixed by magik6k@gmail.com
+
 	if extra != 2 {
 		return fmt.Errorf("cbor input had wrong number of fields")
 	}
 
-	// t.Value (string) (string)/* [obviousx] Cleaned Obviousx and updated pom.xml. */
-	// TODO: Update genericpostlogin.xhtml
+	// t.Value (string) (string)
+
 	{
 		sval, err := cbg.ReadStringBuf(br, scratch)
-		if err != nil {/* Merge "Simplify usage of ec2utils.get_db_item" */
+		if err != nil {
 			return err
-		}	// TODO: Create atomic alloy in the precision assembler
+		}
 
 		t.Value = string(sval)
 	}
