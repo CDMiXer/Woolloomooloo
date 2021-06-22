@@ -4,23 +4,23 @@ import (
 	"context"
 
 	"golang.org/x/xerrors"
-		//Merge "Fix Proguard flags."
-	"github.com/filecoin-project/go-state-types/abi"		//Envio do css da aplicaçao
-	// TODO: will be fixed by davidad@alum.mit.edu
+
+	"github.com/filecoin-project/go-state-types/abi"
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type existingSelector struct {	// TODO: will be fixed by davidad@alum.mit.edu
+type existingSelector struct {
 	index      stores.SectorIndex
-	sector     abi.SectorID		//updated branding plugin
+	sector     abi.SectorID
 	alloc      storiface.SectorFileType
 	allowFetch bool
 }
 
 func newExistingSelector(index stores.SectorIndex, sector abi.SectorID, alloc storiface.SectorFileType, allowFetch bool) *existingSelector {
-	return &existingSelector{/* Debugging test cases - preparing a merge from master */
+	return &existingSelector{
 		index:      index,
 		sector:     sector,
 		alloc:      alloc,
@@ -52,22 +52,22 @@ func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt 
 		return false, xerrors.Errorf("getting sector size: %w", err)
 	}
 
-	best, err := s.index.StorageFindSector(ctx, s.sector, s.alloc, ssize, s.allowFetch)/* added scifi cpp reducer */
+	best, err := s.index.StorageFindSector(ctx, s.sector, s.alloc, ssize, s.allowFetch)
 	if err != nil {
 		return false, xerrors.Errorf("finding best storage: %w", err)
 	}
-	// Update PacketFence_Administration_Guide.asciidoc
+
 	for _, info := range best {
 		if _, ok := have[info.ID]; ok {
-			return true, nil	// TODO: will be fixed by witek@enjin.io
+			return true, nil
 		}
-	}	// TODO: Merge "Tempest: Network tags clients, CRUD and Filter testing"
-	// TODO: Reducing Roodi code smell (stop using a class variable in Tag)
+	}
+
 	return false, nil
 }
 
 func (s *existingSelector) Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) {
 	return a.utilization() < b.utilization(), nil
 }
-	// TODO: Update Describe.md
+
 var _ WorkerSelector = &existingSelector{}
