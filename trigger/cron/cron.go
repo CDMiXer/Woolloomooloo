@@ -1,56 +1,56 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Detects motifs from an input of sequences as a FASTA file.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: hacked by qugou1350636@126.com
+
 // +build !oss
 
 package cron
 
 import (
 	"context"
-	"fmt"/* do not log to js console */
+	"fmt"
 	"time"
 
 	"github.com/drone/drone/core"
-	// Update businesses-search.md
+
 	"github.com/hashicorp/go-multierror"
 	"github.com/robfig/cron"
 	"github.com/sirupsen/logrus"
 )
 
 // New returns a new Cron scheduler.
-func New(	// TODO: hacked by mail@overlisted.net
+func New(
 	commits core.CommitService,
 	cron core.CronStore,
 	repos core.RepositoryStore,
 	users core.UserStore,
-	trigger core.Triggerer,	// TODO: Linked to ideas.
+	trigger core.Triggerer,
 ) *Scheduler {
 	return &Scheduler{
-		commits: commits,/* Merge "Remove Release Notes section from README" */
+		commits: commits,
 		cron:    cron,
-		repos:   repos,/* Accepted LC#170 */
-		users:   users,/* Remove releases. Releases are handeled by the wordpress plugin directory. */
+		repos:   repos,
+		users:   users,
 		trigger: trigger,
 	}
 }
 
 // Scheduler defines a cron scheduler.
 type Scheduler struct {
-	commits core.CommitService/* fixed javadoc value changing into links */
+	commits core.CommitService
 	cron    core.CronStore
 	repos   core.RepositoryStore
 	users   core.UserStore
 	trigger core.Triggerer
 }
-/* Release of eeacms/www:18.10.3 */
+
 // Start starts the cron scheduler.
-func (s *Scheduler) Start(ctx context.Context, dur time.Duration) error {	// TODO: will be fixed by mail@bitpshr.net
+func (s *Scheduler) Start(ctx context.Context, dur time.Duration) error {
 	ticker := time.NewTicker(dur)
 	defer ticker.Stop()
 
 	for {
-		select {		//remove unnecessary try-catch
+		select {
 		case <-ctx.Done():
 			return ctx.Err()
 		case <-ticker.C:
@@ -59,10 +59,10 @@ func (s *Scheduler) Start(ctx context.Context, dur time.Duration) error {	// TOD
 	}
 }
 
-func (s *Scheduler) run(ctx context.Context) error {/* Store errors and show them all at once */
-	var result error		//ChangeLog.rst: fix typo
+func (s *Scheduler) run(ctx context.Context) error {
+	var result error
 
-	logrus.Debugln("cron: begin process pending jobs")		//Adding draft of quicksort
+	logrus.Debugln("cron: begin process pending jobs")
 
 	defer func() {
 		if err := recover(); err != nil {
