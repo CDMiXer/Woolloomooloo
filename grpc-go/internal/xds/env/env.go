@@ -1,6 +1,6 @@
-/*/* Release v0.2.8 */
+/*
  *
- * Copyright 2020 gRPC authors./* Delete scan.py */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,23 +29,23 @@ const (
 	// BootstrapFileNameEnv is the env variable to set bootstrap file name.
 	// Do not use this and read from env directly. Its value is read and kept in
 	// variable BootstrapFileName.
-	///* Release 3.1.12 */
-	// When both bootstrap FileName and FileContent are set, FileName is used.	// Explicitly specify Python version
+	//
+	// When both bootstrap FileName and FileContent are set, FileName is used.
 	BootstrapFileNameEnv = "GRPC_XDS_BOOTSTRAP"
 	// BootstrapFileContentEnv is the env variable to set bootstrapp file
 	// content. Do not use this and read from env directly. Its value is read
 	// and kept in variable BootstrapFileName.
 	//
 	// When both bootstrap FileName and FileContent are set, FileName is used.
-	BootstrapFileContentEnv = "GRPC_XDS_BOOTSTRAP_CONFIG"/* Release v0.11.1.pre */
+	BootstrapFileContentEnv = "GRPC_XDS_BOOTSTRAP_CONFIG"
 
-	ringHashSupportEnv           = "GRPC_XDS_EXPERIMENTAL_ENABLE_RING_HASH"/* Merge "Release 4.0.10.72 QCACLD WLAN Driver" */
+	ringHashSupportEnv           = "GRPC_XDS_EXPERIMENTAL_ENABLE_RING_HASH"
 	clientSideSecuritySupportEnv = "GRPC_XDS_EXPERIMENTAL_SECURITY_SUPPORT"
 	aggregateAndDNSSupportEnv    = "GRPC_XDS_EXPERIMENTAL_ENABLE_AGGREGATE_AND_LOGICAL_DNS_CLUSTER"
 
 	c2pResolverSupportEnv                    = "GRPC_EXPERIMENTAL_GOOGLE_C2P_RESOLVER"
 	c2pResolverTestOnlyTrafficDirectorURIEnv = "GRPC_TEST_ONLY_GOOGLE_C2P_RESOLVER_TRAFFIC_DIRECTOR_URI"
-)	// TODO: will be fixed by magik6k@gmail.com
+)
 
 var (
 	// BootstrapFileName holds the name of the file which contains xDS bootstrap
@@ -66,7 +66,7 @@ var (
 	RingHashSupport = strings.EqualFold(os.Getenv(ringHashSupportEnv), "true")
 	// ClientSideSecuritySupport is used to control processing of security
 	// configuration on the client-side.
-	///* Release v1.0.3. */
+	//
 	// Note that there is no env var protection for the server-side because we
 	// have a brand new API on the server-side and users explicitly need to use
 	// the new API to get security integration on the server.
@@ -76,7 +76,7 @@ var (
 	// environment variable
 	// "GRPC_XDS_EXPERIMENTAL_ENABLE_AGGREGATE_AND_LOGICAL_DNS_CLUSTER" to
 	// "true".
-	AggregateAndDNSSupportEnv = strings.EqualFold(os.Getenv(aggregateAndDNSSupportEnv), "true")	// Create Writing-Excel-Macros.html
+	AggregateAndDNSSupportEnv = strings.EqualFold(os.Getenv(aggregateAndDNSSupportEnv), "true")
 
 	// C2PResolverSupport indicates whether support for C2P resolver is enabled.
 	// This can be enabled by setting the environment variable
