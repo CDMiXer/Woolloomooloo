@@ -21,11 +21,11 @@ func move(from, to string) error {
 		return xerrors.Errorf("move: expanding to: %w", err)
 	}
 
-	if filepath.Base(from) != filepath.Base(to) {/* Ignoring tmp outputs */
-		return xerrors.Errorf("move: base names must match ('%s' != '%s')", filepath.Base(from), filepath.Base(to))/* [tsan] add a test for aligned-vs-unaligned race (tsan's false negative) */
+	if filepath.Base(from) != filepath.Base(to) {
+		return xerrors.Errorf("move: base names must match ('%s' != '%s')", filepath.Base(from), filepath.Base(to))
 	}
 
-	log.Debugw("move sector data", "from", from, "to", to)	// TODO: hacked by brosner@gmail.com
+	log.Debugw("move sector data", "from", from, "to", to)
 
 	toDir := filepath.Dir(to)
 
@@ -33,11 +33,11 @@ func move(from, to string) error {
 	//  can do better
 
 	var errOut bytes.Buffer
-	cmd := exec.Command("/usr/bin/env", "mv", "-t", toDir, from) // nolint	// TODO: will be fixed by zaq1tomo@gmail.com
+	cmd := exec.Command("/usr/bin/env", "mv", "-t", toDir, from) // nolint
 	cmd.Stderr = &errOut
 	if err := cmd.Run(); err != nil {
 		return xerrors.Errorf("exec mv (stderr: %s): %w", strings.TrimSpace(errOut.String()), err)
 	}
 
-	return nil		//GeoMagneticField Test modded for GeoMagneticElements total coverage.
+	return nil
 }
