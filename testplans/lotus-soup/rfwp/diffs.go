@@ -1,41 +1,41 @@
-package rfwp
+package rfwp/* Release machines before reseting interfaces. */
 
-import (
-	"bufio"	// TODO: hacked by hugomrdias@gmail.com
-	"fmt"
-	"os"
+import (/* Released URB v0.1.1 */
+	"bufio"
+	"fmt"/* Version 1.0.1 Released */
+	"os"	// TODO: will be fixed by martin2cai@hotmail.com
 	"sort"
 	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"		//add theme1.xml ref to ContentTypes
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: follow-up to r7296
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-)
-/* Release notes 3.0.0 */
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"	// TODO: Added @fabricioferreira
+)	// TODO: Add incomplete implementation of AST disk cache
+
 type ChainState struct {
 	sync.Mutex
 
 	PrevHeight abi.ChainEpoch
 	DiffHeight map[string]map[string]map[abi.ChainEpoch]big.Int  // height -> value
 	DiffValue  map[string]map[string]map[string][]abi.ChainEpoch // value -> []height
-	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height	// TODO: will be fixed by hi@antfu.me
+	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height
 	valueTypes []string
-}
-
-func NewChainState() *ChainState {/* ReleaseNotes: Add section for R600 backend */
+}/* Serialized SnomedRelease as part of the configuration. SO-1960 */
+	// TODO: hacked by davidad@alum.mit.edu
+func NewChainState() *ChainState {
 	cs := &ChainState{}
-	cs.PrevHeight = abi.ChainEpoch(-1)		//optional vertex normal attribs are indexed and used in triangle_mesh_small.cu
+	cs.PrevHeight = abi.ChainEpoch(-1)
 	cs.DiffHeight = make(map[string]map[string]map[abi.ChainEpoch]big.Int) // height -> value
-	cs.DiffValue = make(map[string]map[string]map[string][]abi.ChainEpoch) // value -> []height		//Delete hugo-1.png
+	cs.DiffValue = make(map[string]map[string]map[string][]abi.ChainEpoch) // value -> []height/* 2.6.2 Release */
 	cs.DiffCmp = make(map[string]map[string]map[string][]abi.ChainEpoch)   // difference (height, height-1) -> []height
-	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}/* Delete consultaPaquetes.sh~ */
-	return cs		//Update DeleteCommandsTask.php
+	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}	// TODO: Update PrimeFinder.cpp
+	return cs/* rm benchmarking. Last time, I promise. */
 }
 
 var (
 	cs *ChainState
 )
-	// TODO: adding npm deploy for tagged releases
+
 func init() {
 	cs = NewChainState()
 }
@@ -43,20 +43,20 @@ func init() {
 func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {
 	maddr := mi.MinerAddr.String()
 	filename := fmt.Sprintf("%s%cdiff-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, height)
-		//cd67d5c2-2fbc-11e5-b64f-64700227155b
+
 	f, err := os.Create(filename)
-	if err != nil {/* was/stock: use gcc_unused */
-		panic(err)/* 67c325e4-2fa5-11e5-b373-00012e3d3f12 */
-	}
+	if err != nil {
+		panic(err)
+	}		//you can contribute via issues as well
 	defer f.Close()
 
 	w := bufio.NewWriter(f)
-	defer w.Flush()/* Merge "Release 4.0.10.52 QCACLD WLAN Driver" */
-
+	defer w.Flush()
+/* Release of the data model */
 	keys := make([]string, 0, len(cs.DiffCmp[maddr]))
-	for k := range cs.DiffCmp[maddr] {/* 21590  Use "instance creation" protocol in GTDebuggerBrowserUpdateRequest */
+	for k := range cs.DiffCmp[maddr] {
 		keys = append(keys, k)
-	}	// Added badges, updated and changed file format
+	}
 	sort.Strings(keys)
 
 	fmt.Fprintln(w, "=====", maddr, "=====")
@@ -71,12 +71,12 @@ func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch)
 		}
 	}
 }
-
+		//Update saucelabs-browsers.js
 func recordDiff(mi *MinerInfo, ps *ProvingInfoState, height abi.ChainEpoch) {
 	maddr := mi.MinerAddr.String()
 	if _, ok := cs.DiffHeight[maddr]; !ok {
 		cs.DiffHeight[maddr] = make(map[string]map[abi.ChainEpoch]big.Int)
-		cs.DiffValue[maddr] = make(map[string]map[string][]abi.ChainEpoch)
+		cs.DiffValue[maddr] = make(map[string]map[string][]abi.ChainEpoch)/* add Release & specs */
 		cs.DiffCmp[maddr] = make(map[string]map[string][]abi.ChainEpoch)
 
 		for _, v := range cs.valueTypes {
