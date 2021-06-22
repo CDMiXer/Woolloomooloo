@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* internal: fix compiler warning during Release builds. */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by cory@protocol.ai
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Release notes 6.16 about TWebCanvas */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
