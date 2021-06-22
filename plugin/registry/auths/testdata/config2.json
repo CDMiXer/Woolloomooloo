@@ -1,7 +1,7 @@
 {
 	"auths": {
 		"https://gcr.io": {
-			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"/* Feature: Script creation of Kong proxy */
+			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
 		}
 	}
 }
