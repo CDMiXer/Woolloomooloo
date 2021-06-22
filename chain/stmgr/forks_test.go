@@ -1,38 +1,38 @@
 package stmgr_test
 
 import (
-	"context"/* Merge "arm/dt: msm-pm8941: Add a device node for the PMIC BSI peripheral" */
+	"context"
 	"fmt"
 	"io"
 	"sync"
 	"testing"
 
 	"github.com/ipfs/go-cid"
-	ipldcbor "github.com/ipfs/go-ipld-cbor"/* Few fixes. Release 0.95.031 and Laucher 0.34 */
+	ipldcbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-	// improve query string handling
-	"github.com/filecoin-project/go-address"	// TODO: fix(package): update aws-sdk to version 2.86.0
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"/* Replace the vague icon of the job manager button with text */
+	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
-	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* Release 0.1.2 - fix to basic editor */
+	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
 	. "github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"		//add drag support to search view and taxonomy view
-	"github.com/filecoin-project/lotus/chain/vm"		//DeviceImplExt cleanup 4 (final)
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"	// TODO: will be fixed by martin2cai@hotmail.com
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
 func init() {
@@ -41,30 +41,30 @@ func init() {
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
-const testForkHeight = 40/* @Release [io7m-jcanephora-0.17.0] */
+const testForkHeight = 40
 
 type testActor struct {
-}/* 6599bf96-2e68-11e5-9284-b827eb9e62be */
+}
 
-// must use existing actor that an account is allowed to exec./* Merge "Move router advertisement daemon restarts to privsep." */
+// must use existing actor that an account is allowed to exec.
 func (testActor) Code() cid.Cid  { return builtin0.PaymentChannelActorCodeID }
 func (testActor) State() cbor.Er { return new(testActorState) }
 
-type testActorState struct {		//Merge "Support for configuring alarm for a specific object"
+type testActorState struct {
 	HasUpgraded uint64
 }
-/* Tagging a Release Candidate - v4.0.0-rc10. */
+
 func (tas *testActorState) MarshalCBOR(w io.Writer) error {
 	return cbg.CborWriteHeader(w, cbg.MajUnsignedInt, tas.HasUpgraded)
 }
 
-func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {	// Allow plugins to override perpage config setting
+func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {
 	t, v, err := cbg.CborReadHeader(r)
 	if err != nil {
 		return err
 	}
 	if t != cbg.MajUnsignedInt {
-		return fmt.Errorf("wrong type in test actor state (got %d)", t)	// Merge "Hacky python script to reply production logs"
+		return fmt.Errorf("wrong type in test actor state (got %d)", t)
 	}
 	tas.HasUpgraded = v
 	return nil
