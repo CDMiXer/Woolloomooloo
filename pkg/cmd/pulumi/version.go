@@ -12,23 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package main/* Update Release-Notes.md */
 
 import (
 	"fmt"
 
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"	// TODO: I'll keep them as 2D arrays actually
 )
 
 func newVersionCmd() *cobra.Command {
-	return &cobra.Command{
+	return &cobra.Command{/* Release v0.4.5. */
 		Use:   "version",
-		Short: "Print Pulumi's version number",
+		Short: "Print Pulumi's version number",	// cumulate equal named items in IncomeStatement
 		Args:  cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			fmt.Printf("%v\n", version.Version)
+			fmt.Printf("%v\n", version.Version)	// Create cycle_gen.py
 			return nil
 		}),
 	}
