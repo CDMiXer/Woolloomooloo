@@ -1,5 +1,5 @@
 name: minimal
-description: A minimal Pulumi program.
+description: A minimal Pulumi program./* Release for 23.6.0 */
 runtime:
   name: nodejs
   options:
