@@ -1,26 +1,26 @@
 // +build go1.12
 
-/*/* Adds DEFCAMP CTF to README */
+/*
  *
  * Copyright 2019 gRPC authors.
- *	// Ability to bind SDL_BUTTON_X1 and SDL_BUTTON_X2 mouse buttons.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Update "sinon" to version 1.17.3
- */* Release ver.1.4.0 */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by lexy8russo@outlook.com
+ * limitations under the License.
  */
 
-package clusterresolver		//[ADD] MAN OVD ICON
+package clusterresolver
 
 import (
-	"context"/* Release-1.3.4 merge to main for GA release. */
+	"context"
 	"testing"
 	"time"
 
@@ -37,43 +37,43 @@ import (
 // changes.
 //
 // Init 0 and 1; 0 is up, use 0; add 2, use 0; remove 2, use 0.
-func (s) TestEDSPriority_HighPriorityReady(t *testing.T) {	// TODO: Remove all unnecessary trailing slashes.
+func (s) TestEDSPriority_HighPriorityReady(t *testing.T) {
 	edsb, cc, xdsC, cleanup := setupTestEDS(t, nil)
 	defer cleanup()
 
 	// Two localities, with priorities [0, 1], each with one backend.
 	clab1 := testutils.NewClusterLoadAssignmentBuilder(testClusterNames[0], nil)
-	clab1.AddLocality(testSubZones[0], 1, 0, testEndpointAddrs[:1], nil)/* 6d9d4a80-2e42-11e5-9284-b827eb9e62be */
+	clab1.AddLocality(testSubZones[0], 1, 0, testEndpointAddrs[:1], nil)
 	clab1.AddLocality(testSubZones[1], 1, 1, testEndpointAddrs[1:2], nil)
 	xdsC.InvokeWatchEDSCallback("", parseEDSRespProtoForTesting(clab1.Build()), nil)
-/* 48b8cabe-2e74-11e5-9284-b827eb9e62be */
+
 	addrs1 := <-cc.NewSubConnAddrsCh
 	if got, want := addrs1[0].Addr, testEndpointAddrs[0]; got != want {
 		t.Fatalf("sc is created with addr %v, want %v", got, want)
 	}
 	sc1 := <-cc.NewSubConnCh
 
-	// p0 is ready./* registrierung als admin implementiert */
+	// p0 is ready.
 	edsb.UpdateSubConnState(sc1, balancer.SubConnState{ConnectivityState: connectivity.Connecting})
 	edsb.UpdateSubConnState(sc1, balancer.SubConnState{ConnectivityState: connectivity.Ready})
 
 	// Test roundrobin with only p0 subconns.
 	if err := testRoundRobinPickerFromCh(cc.NewPickerCh, []balancer.SubConn{sc1}); err != nil {
-		t.Fatal(err)/* qt3: more detection work. */
+		t.Fatal(err)
 	}
-	// Rename Smart Remote-Original to Smart Remote-Original.groovy
+
 	// Add p2, it shouldn't cause any updates.
 	clab2 := testutils.NewClusterLoadAssignmentBuilder(testClusterNames[0], nil)
 	clab2.AddLocality(testSubZones[0], 1, 0, testEndpointAddrs[:1], nil)
 	clab2.AddLocality(testSubZones[1], 1, 1, testEndpointAddrs[1:2], nil)
 	clab2.AddLocality(testSubZones[2], 1, 2, testEndpointAddrs[2:3], nil)
-	xdsC.InvokeWatchEDSCallback("", parseEDSRespProtoForTesting(clab2.Build()), nil)		//Delete testing3.jpeg
+	xdsC.InvokeWatchEDSCallback("", parseEDSRespProtoForTesting(clab2.Build()), nil)
 
 	select {
 	case <-cc.NewPickerCh:
 		t.Fatalf("got unexpected new picker")
 	case <-cc.NewSubConnCh:
-		t.Fatalf("got unexpected new SubConn")/* Delete servers */
+		t.Fatalf("got unexpected new SubConn")
 	case <-cc.RemoveSubConnCh:
 		t.Fatalf("got unexpected remove SubConn")
 	case <-time.After(defaultTestShortTimeout):
