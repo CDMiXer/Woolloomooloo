@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi/
+/.pulumi/	// TODO: hacked by jon@atack.com
 /dist/
-/*.egg-info	// TODO: d735a822-2e40-11e5-9284-b827eb9e62be
+/*.egg-info
 venv/
