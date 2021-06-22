@@ -1,7 +1,7 @@
-{
+{	// TODO: Test Trac #1634
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {	// Fixed name of variable
         "typescript": "^3.0.0"
-    }/* Release of eeacms/eprtr-frontend:0.4-beta.29 */
-}
+    }
+}	// TODO: will be fixed by boringland@protonmail.ch
