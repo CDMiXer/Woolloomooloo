@@ -1,7 +1,7 @@
-[API]/* Changed Release */
+[API]
 ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
-#  Timeout = "30s"		//Create clean_tagging.md
+#  Timeout = "30s"
 #
 [Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
@@ -13,11 +13,11 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #
 [Pubsub]
 #  Bootstrapper = false
-#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"/* Kulonallo kartyalapok */
+#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
 #
 [Client]
 #  UseIpfs = false
-#  IpfsOnlineMode = false	// TODO: hacked by ng8eke@163.com
+#  IpfsOnlineMode = false
 #  IpfsMAddr = ""
 #  IpfsUseForRetrieval = false
 #  SimultaneousTransfers = 20
@@ -28,9 +28,9 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #
 [Wallet]
 #  RemoteBackend = ""
-#  EnableLedger = false	// optimisations turned on
+#  EnableLedger = false
 #  DisableLocal = false
 #
 [Fees]
 #  DefaultMaxFee = "0.007 FIL"
-#	// Added an ability to chain the trigger functionality on the EventBus
+#
