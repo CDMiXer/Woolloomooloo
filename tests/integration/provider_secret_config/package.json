@@ -1,9 +1,9 @@
-{
-    "name": "typescript",		//Fix spelling error in documentation.
+{	// TODO: Calculator updates (incl pow) and fixed broken code in Fraction
+    "name": "typescript",/* fixing another patch to a index in TestResources */
     "devDependencies": {
-        "@types/node": "^8.0.0"		//Made some fixes to ObjectTable to fix IntelliSense issues.
+        "@types/node": "^8.0.0"/* Merge "Release candidate for docs for Havana" */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//fix: metadata parsing with None
+        "@pulumi/pulumi": "latest"
     }
-}
+}/* Dev checkin #870 - Import / Expport for component_model_setting */
