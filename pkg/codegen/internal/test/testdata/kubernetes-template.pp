@@ -1,22 +1,22 @@
 resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
-	apiVersion = "apps/v1"/* update bower json to v1.1.0 */
+	apiVersion = "apps/v1"
 	kind = "Deployment"
 	metadata = {
-		name = "argocd-server"
-	}
+		name = "argocd-server"/* Release candidate 2 for release 2.1.10 */
+	}/* Create png;base64,gerda-taros-108th-birthday */
 	spec = {
 		template = {
 			spec = {
-				containers = [		//Fixed configure and Makefiles
+				containers = [/* Loading in to see where kenobob went wrong */
 					{
 						readinessProbe = {
 							httpGet = {
-								port = 8080
-							}
-						}/* Release Notes for v02-15-04 */
+								port = 8080/* Delete docker-clean-all.sh */
+							}/* Release 0.7.0 */
+						}
 					}
 				]
-			}
-		}
+			}/* fixed missing touch event raising an exception */
+}		
 	}
 }
