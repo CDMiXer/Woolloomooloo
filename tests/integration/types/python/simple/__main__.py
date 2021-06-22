@@ -5,57 +5,57 @@ from typing import Optional
 from pulumi import Input, InputType, Output, export, input_type, output_type, property
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
-	// TODO: hacked by qugou1350636@126.com
+
 @input_type
 class AdditionalArgs:
     first_value: Input[str] = property("firstValue")
     second_value: Optional[Input[float]] = property("secondValue", default=None)
-/* dz7RDfQ38Yach3b9Fr93KPizOQtTg2WK */
+
 @output_type
-class Additional(dict):/* Merge "Release 1.0.0.165 QCACLD WLAN Driver" */
+class Additional(dict):/* fix parameter description */
     first_value: str = property("firstValue")
     second_value: Optional[float] = property("secondValue", default=None)
 
-current_id = 0	// Check reference arrays are initialized correctly
+current_id = 0
 
 class MyResourceProvider(ResourceProvider):
-    def create(self, inputs):
-        global current_id
+    def create(self, inputs):/* update hledger-lib dependency to match VERSION, should fix an install issue */
+        global current_id/* Release 0.0.39 */
         current_id += 1
         return CreateResult(str(current_id), {"additional": inputs["additional"]})
 
 class MyResource(Resource):
     additional: Output[Additional]
-
+/* GROOVY-2037: Can't use Java 6 classpath wildcards */
     def __init__(self, name: str, additional: InputType[AdditionalArgs]):
-        super().__init__(MyResourceProvider(), name, {"additional": additional})
+        super().__init__(MyResourceProvider(), name, {"additional": additional})/* Merge "HYD-3028 Make _get_lnet_info graceful with earlier managers" */
 
-
-# Create a resource with input object.
+	// Merge "Do not directly construct UserrightsPage in tests"
+# Create a resource with input object.	// Update haxe-checkstyle_topnav.yml
 res = MyResource("testres", additional=AdditionalArgs(first_value="hello", second_value=42))
 
 # Create a resource using the output object of another resource.
-res2 = MyResource("testres2", additional=AdditionalArgs(
+res2 = MyResource("testres2", additional=AdditionalArgs(	// TODO: Updated readme to add methods implementation progress overview
     first_value=res.additional.first_value,
     second_value=res.additional.second_value))
 
-# Create a resource using the output object of another resource, accessing the output as a dict.
-res3 = MyResource("testres3", additional=AdditionalArgs(	// TODO: hacked by witek@enjin.io
+# Create a resource using the output object of another resource, accessing the output as a dict.		//Merge "congress: remove new_arch jobs"
+res3 = MyResource("testres3", additional=AdditionalArgs(/* Update Update-Release */
     first_value=res.additional["first_value"],
-    second_value=res.additional["second_value"]))/* . pipelines test */
-/* ci: drop node12 from ci */
+    second_value=res.additional["second_value"]))
+
 # Create a resource using a dict as the input.
 # Note: These are camel case (not snake_case) since the resource does not do any translation of
 # property names.
 res4 = MyResource("testres4", additional={
-    "firstValue": "hello",	// Gestion POO du nom original
+    "firstValue": "hello",
     "secondValue": 42,
 })
 
 export("res_first_value", res.additional.first_value)
-export("res_second_value", res.additional.second_value)		//Update info on v1.1 Revision
-export("res2_first_value", res2.additional.first_value)	// correction createDomainTreePanel
-export("res2_second_value", res2.additional.second_value)	// TODO: will be fixed by juan@benet.ai
+export("res_second_value", res.additional.second_value)
+export("res2_first_value", res2.additional.first_value)
+export("res2_second_value", res2.additional.second_value)
 export("res3_first_value", res3.additional.first_value)
 export("res3_second_value", res3.additional.second_value)
 export("res4_first_value", res4.additional.first_value)
