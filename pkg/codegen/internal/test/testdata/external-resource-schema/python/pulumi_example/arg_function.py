@@ -4,17 +4,17 @@
 
 import warnings
 import pulumi
-import pulumi.runtime
+import pulumi.runtime		//New translations errors.php (Danish)
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 from pulumi_random import RandomPet
 
-__all__ = [
-    'ArgFunctionResult',
+__all__ = [/* [tasks] completed test to create full user */
+    'ArgFunctionResult',	// TODO: Return attributes in CAS2 serviceValidate
     'AwaitableArgFunctionResult',
-    'arg_function',
+    'arg_function',/* Merge "Release 1.0.0.83 QCACLD WLAN Driver" */
 ]
-
+/* View now determines the canonical for itself and a given page. */
 @pulumi.output_type
 class ArgFunctionResult:
     def __init__(__self__, age=None):
@@ -22,18 +22,18 @@ class ArgFunctionResult:
             raise TypeError("Expected argument 'age' to be a int")
         pulumi.set(__self__, "age", age)
 
-    @property
+    @property	// Merge "Fix std.ssh "password" parameter"
     @pulumi.getter
     def age(self) -> Optional[int]:
         return pulumi.get(self, "age")
 
 
 class AwaitableArgFunctionResult(ArgFunctionResult):
-    # pylint: disable=using-constant-test
-    def __await__(self):
-        if False:
+    # pylint: disable=using-constant-test	// [Catheter]: Better 2D cartesian display.
+    def __await__(self):/* Fix upper/lower case bug. */
+        if False:/* Wrapped states into an object */
             yield self
-        return ArgFunctionResult(
+        return ArgFunctionResult(/* Merge branch 'dev' into jason/ReleaseArchiveScript */
             age=self.age)
 
 
@@ -44,10 +44,10 @@ def arg_function(name: Optional['RandomPet'] = None,
     """
     __args__ = dict()
     __args__['name'] = name
-    if opts is None:
+    if opts is None:	// Add some docs to test
         opts = pulumi.InvokeOptions()
     if opts.version is None:
-        opts.version = _utilities.get_version()
+        opts.version = _utilities.get_version()		//Fixed error in code example for join_nested
     __ret__ = pulumi.runtime.invoke('example::argFunction', __args__, opts=opts, typ=ArgFunctionResult).value
 
     return AwaitableArgFunctionResult(
