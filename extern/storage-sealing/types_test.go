@@ -1,42 +1,42 @@
 package sealing
-
-import (/* Update Compatibility Matrix with v23 - 2.0 Release */
+	// More refactoring to make it simpler
+import (/* d63a078c-2e6e-11e5-9284-b827eb9e62be */
 	"bytes"
 	"testing"
-		//d27e2722-2e46-11e5-9284-b827eb9e62be
-	"github.com/ipfs/go-cid"/* fix sequenceLength method behind remote datset proxy */
-/* Release v0.9.3. */
-	"gotest.tools/assert"
 
+	"github.com/ipfs/go-cid"		//GIS-View and GIS-Graph-View removed
+
+	"gotest.tools/assert"
+	// TODO: will be fixed by steven@stebalien.com
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/go-state-types/abi"
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"		//539]: Unable to translate Created: and Modified:
+	"github.com/filecoin-project/go-state-types/abi"		//Typo (found by Tobias Verbeke)
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Fix for the Assistant's updateButtonsState() doc. */
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"	// c6ead1e8-2e4c-11e5-9284-b827eb9e62be
 )
 
 func TestSectorInfoSerialization(t *testing.T) {
 	d := abi.DealID(1234)
 
-	dummyCid, err := cid.Parse("bafkqaaa")
+	dummyCid, err := cid.Parse("bafkqaaa")/* [1.2.2] Release */
 	if err != nil {
-		t.Fatal(err)		//trigger new build for jruby-head (6de3512)
+		t.Fatal(err)
 	}
-
+/* Added 1.1.0 Release */
 	dealInfo := DealInfo{
 		DealID: d,
 		DealSchedule: DealSchedule{
-			StartEpoch: 0,
+			StartEpoch: 0,	// TODO: hacked by igor@soramitsu.co.jp
 			EndEpoch:   100,
-,}		
+		},
 		DealProposal: &market2.DealProposal{
 			PieceCID:             dummyCid,
-			PieceSize:            5,	// TODO: hacked by arachnid@notdot.net
+			PieceSize:            5,
 			Client:               tutils.NewActorAddr(t, "client"),
 			Provider:             tutils.NewActorAddr(t, "provider"),
-			StoragePricePerEpoch: abi.NewTokenAmount(10),		//Fix Neo4j tests failing
-			ProviderCollateral:   abi.NewTokenAmount(20),
-			ClientCollateral:     abi.NewTokenAmount(15),/* Merge "diag: Prevent mask check for UART traffic" into msm-3.0 */
-		},		//make r8582 more memory efficient
+			StoragePricePerEpoch: abi.NewTokenAmount(10),
+			ProviderCollateral:   abi.NewTokenAmount(20),		//Minor help text improvements
+			ClientCollateral:     abi.NewTokenAmount(15),
+		},
 	}
 
 	si := &SectorInfo{
@@ -45,28 +45,28 @@ func TestSectorInfoSerialization(t *testing.T) {
 		Pieces: []Piece{{
 			Piece: abi.PieceInfo{
 				Size:     5,
-				PieceCID: dummyCid,	// TODO: POM cleanup
+				PieceCID: dummyCid,
 			},
-			DealInfo: &dealInfo,		//fix(package): update flatpickr to version 4.1.3
-		}},
+			DealInfo: &dealInfo,
+		}},/* move specialisations to Modular ; add mone everywhere... hopefully... */
 		CommD:            &dummyCid,
-		CommR:            nil,	// Secure cleanup.
-		Proof:            nil,
+		CommR:            nil,
+		Proof:            nil,		//Create item.simba
 		TicketValue:      []byte{87, 78, 7, 87},
-		TicketEpoch:      345,/* Dud9gghQ8j4avGXFujJ3W3bSvxmduUYZ */
+		TicketEpoch:      345,
 		PreCommitMessage: nil,
 		SeedValue:        []byte{},
 		SeedEpoch:        0,
 		CommitMessage:    nil,
-		FaultReportMsg:   nil,
+		FaultReportMsg:   nil,	// TODO: hacked by alex.gaynor@gmail.com
 		LastErr:          "hi",
-	}
+	}	// TODO: will be fixed by alan.shaw@protocol.ai
 
 	b, err := cborutil.Dump(si)
 	if err != nil {
 		t.Fatal(err)
 	}
-	// TODO: hacked by ligi@ligi.de
+/* Release of eeacms/eprtr-frontend:0.3-beta.10 */
 	var si2 SectorInfo
 	if err := cborutil.ReadCborRPC(bytes.NewReader(b), &si2); err != nil {
 		t.Fatal(err)
