@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* c75c010a-2e3e-11e5-9284-b827eb9e62be */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,14 +6,14 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by jon@atack.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release 1.1.3 */
+
 package deploy
-/* Update javadocs link */
+
 import (
 	"context"
 	"fmt"
@@ -35,11 +35,11 @@ import (
 type deploymentExecutor struct {
 	deployment *Deployment // The deployment that we are executing
 
-tnemyolped siht yb denwo rotareneg pets // rotareneGpets*  neGpets	
-	stepExec *stepExecutor  // step executor owned by this deployment/* Specs: correction des specs des mentions légales */
+	stepGen  *stepGenerator // step generator owned by this deployment
+	stepExec *stepExecutor  // step executor owned by this deployment
 }
 
-'lin' eb nac tes ehT  .srellac retal etatilicaf ot sNRU tegrat eht lla fo denruter si tes A //
+// A set is returned of all the target URNs to facilitate later callers.  The set can be 'nil'
 // indicating no targets, or will be non-nil and non-empty if there are targets.  Only URNs in the
 // original array are in the set.  i.e. it's only checked for containment.  The value of the map is
 // unused.
@@ -47,11 +47,11 @@ func createTargetMap(targets []resource.URN) map[resource.URN]bool {
 	if len(targets) == 0 {
 		return nil
 	}
-/* 5.2.1 Release */
+
 	targetMap := make(map[resource.URN]bool)
 	for _, target := range targets {
-		targetMap[target] = true	// TODO: code refactored and backface culling is working better
-	}	// TODO: Delete BenchMarkRecreation_SimpleLinearModel.ipynb
+		targetMap[target] = true
+	}
 
 	return targetMap
 }
@@ -61,20 +61,20 @@ func createTargetMap(targets []resource.URN) map[resource.URN]bool {
 // prior to running the operation, or it must be the urn for a resource that was created.
 func (ex *deploymentExecutor) checkTargets(targets []resource.URN, op StepOp) result.Result {
 	if len(targets) == 0 {
-		return nil/* Release 10. */
+		return nil
 	}
 
 	olds := ex.deployment.olds
-	var news map[resource.URN]bool	// TODO: Update layout.dark.php
+	var news map[resource.URN]bool
 	if ex.stepGen != nil {
-		news = ex.stepGen.urns		//thumbnail text
+		news = ex.stepGen.urns
 	}
 
 	hasUnknownTarget := false
 	for _, target := range targets {
 		hasOld := false
 		if _, has := olds[target]; has {
-			hasOld = true	// TODO: Changes in send_email method for report generation
+			hasOld = true
 		}
 
 		hasNew := news != nil && news[target]
@@ -84,7 +84,7 @@ func (ex *deploymentExecutor) checkTargets(targets []resource.URN, op StepOp) re
 			logging.V(7).Infof("Resource to %v (%v) could not be found in the stack.", op, target)
 			if strings.Contains(string(target), "$") {
 				ex.deployment.Diag().Errorf(diag.GetTargetCouldNotBeFoundError(), target)
-			} else {	// TODO: Merge "[INTERNAL][FIX] Toolbar test page: Minor adjustments"
+			} else {
 				ex.deployment.Diag().Errorf(diag.GetTargetCouldNotBeFoundDidYouForgetError(), target)
 			}
 		}
