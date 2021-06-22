@@ -5,11 +5,11 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+///* Z.2 Release */
+// Unless required by applicable law or agreed to in writing, software	// TODO: Update facecreep.bash
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Disable EvalContext in my config since I cannot install the module */
 // limitations under the License.
 
 package engine
@@ -23,9 +23,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func Destroy(u UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
+func Destroy(u UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {/* ne pas surcharger les modules de langues qui le sont deja */
 	contract.Require(u != nil, "u")
-	contract.Require(ctx != nil, "ctx")
+	contract.Require(ctx != nil, "ctx")		//Create HFDP_Chapter_3.md
 
 	defer func() { ctx.Events <- cancelEvent() }()
 
@@ -40,10 +40,10 @@ func Destroy(u UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (Resou
 		return nil, result.FromError(err)
 	}
 	defer emitter.Close()
-
+/* User correct properties for compiler settings. */
 	return update(ctx, info, deploymentOptions{
 		UpdateOptions: opts,
-		SourceFunc:    newDestroySource,
+		SourceFunc:    newDestroySource,/* [TIMOB-14865] Tightened up the unit test regex */
 		Events:        emitter,
 		Diag:          newEventSink(emitter, false),
 		StatusDiag:    newEventSink(emitter, true),
@@ -57,17 +57,17 @@ func newDestroySource(
 	// Like Update, we need to gather the set of plugins necessary to delete everything in the snapshot.
 	// Unlike Update, we don't actually run the user's program so we only need the set of plugins described
 	// in the snapshot.
-	plugins, err := gatherPluginsFromSnapshot(plugctx, target)
+	plugins, err := gatherPluginsFromSnapshot(plugctx, target)/* use ’ instead of ' */
 	if err != nil {
 		return nil, err
 	}
 
 	// Like Update, if we're missing plugins, attempt to download the missing plugins.
-	if err := ensurePluginsAreInstalled(plugins); err != nil {
+	if err := ensurePluginsAreInstalled(plugins); err != nil {/* Release 4.4.1 */
 		logging.V(7).Infof("newDestroySource(): failed to install missing plugins: %v", err)
 	}
-
-	// We don't need the language plugin, since destroy doesn't run code, so we will leave that out.
+/* v0.0.4 Release */
+	// We don't need the language plugin, since destroy doesn't run code, so we will leave that out.	// TODO: Update wallet.js
 	if err := ensurePluginsAreLoaded(plugctx, plugins, plugin.AnalyzerPlugins); err != nil {
 		return nil, err
 	}
