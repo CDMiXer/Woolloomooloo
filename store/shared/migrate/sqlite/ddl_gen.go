@@ -1,4 +1,4 @@
-package sqlite
+package sqlite/* added Ctrl-^ Command to vim keymap which jumps to last used buffer */
 
 import (
 	"database/sql"
@@ -7,57 +7,57 @@ import (
 var migrations = []struct {
 	name string
 	stmt string
-}{
+}{		//ForkEngine - improve test to check process exit status
 	{
 		name: "create-table-users",
 		stmt: createTableUsers,
-	},
-	{
+	},		//Global appendLog
+	{	// Update opentodolist_pt.po (POEditor.com)
 		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,
+		stmt: alterTableReposAddColumnNoFork,/* tweak log correction */
 	},
-	{
+	{		//Merge "Make plugin file search paths back-compatible (Bug 1500290)"
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
-	},
+	},/* Fix for Node.js 0.6.0: Build seems to be now in Release instead of default */
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
-		stmt: alterTableReposAddColumnCancelPulls,
-	},
+		stmt: alterTableReposAddColumnCancelPulls,/* Update Release-2.1.0.md */
+	},		//README: Get things organized
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},
+	},	// Updated firefox to use "new" tms5220 interface
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
-	},
+	},/* Change mock user names (cause "me" was weird) */
 	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
-	{
+	{/* Added Counting sort. */
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
 	{
-		name: "create-table-builds",
+		name: "create-table-builds",		//Merge "[Sahara] Fixed tab selection in case of processes names conflict"
 		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,
-	},
+		stmt: createIndexBuildsRepo,	// TODO: Update to latest FEniCS releases.
+	},	// TODO: for macOS Sierra
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
 	{
-		name: "create-index-builds-sender",
+		name: "create-index-builds-sender",/* 2.0 Release */
 		stmt: createIndexBuildsSender,
 	},
 	{
