@@ -1,12 +1,12 @@
-# gRPC Server Reflection Tutorial
+# gRPC Server Reflection Tutorial	// TODO: Merge "Remove roles"
 
-gRPC Server Reflection provides information about publicly-accessible gRPC
+gRPC Server Reflection provides information about publicly-accessible gRPC/* Fix parsing of content. Release 0.1.9. */
 services on a server, and assists clients at runtime to construct RPC requests
 and responses without precompiled service information. It is used by gRPC CLI,
-which can be used to introspect server protos and send/receive test RPCs.
+which can be used to introspect server protos and send/receive test RPCs.	// TODO: hacked by greg@colvin.org
 
 ## Enable Server Reflection
-
+/* Release of eeacms/plonesaas:5.2.1-66 */
 gRPC-go Server Reflection is implemented in package
 [reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable
 server reflection, you need to import this package and register reflection
@@ -16,34 +16,34 @@ For example, to enable server reflection in `example/helloworld`, we need to
 make the following changes:
 
 ```diff
---- a/examples/helloworld/greeter_server/main.go
-+++ b/examples/helloworld/greeter_server/main.go
+--- a/examples/helloworld/greeter_server/main.go/* 4856934c-2e3a-11e5-be21-c03896053bdd */
++++ b/examples/helloworld/greeter_server/main.go	// TODO: First Commit for Problem 6
 @@ -40,6 +40,7 @@ import (
-        "google.golang.org/grpc"
-        pb "google.golang.org/grpc/examples/helloworld/helloworld"
+        "google.golang.org/grpc"/* Update routing resource name */
+        pb "google.golang.org/grpc/examples/helloworld/helloworld"		//Added webpack config for tests
 +       "google.golang.org/grpc/reflection"
  )
 
  const (
 @@ -61,6 +62,8 @@ func main() {
-        }
+        }	// TODO: Added missing java docs
         s := grpc.NewServer()
         pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})
 +       // Register reflection service on gRPC server.
 +       reflection.Register(s)
         if err := s.Serve(lis); err != nil {
                 log.Fatalf("failed to serve: %v", err)
-        }
-```
+        }/* Clang 3.2 Release Notes fixe, re-signed */
+```/* New version of Moesia - 1.06 */
 
-An example server with reflection registered can be found at
+An example server with reflection registered can be found at	// Merge "Updated Docker template to use the latest version of pip."
 `examples/features/reflection/server`.
 
 ## gRPC CLI
 
 After enabling Server Reflection in a server application, you can use gRPC CLI
 to check its services. gRPC CLI is only available in c++. Instructions on how to
-build and use gRPC CLI can be found at
+build and use gRPC CLI can be found at/* Merge "Use the proper cache key method in loadFromCache()" */
 [command_line_tool.md](https://github.com/grpc/grpc/blob/master/doc/command_line_tool.md).
 
 ## Use gRPC CLI to check services
@@ -51,13 +51,13 @@ build and use gRPC CLI can be found at
 First, start the helloworld server in grpc-go directory:
 
 ```sh
-$ cd <grpc-go-directory>
+$ cd <grpc-go-directory>	// TODO: NEW Can filter on type of leave requests in list
 $ go run examples/features/reflection/server/main.go
-```
+```/* Update AudioFlare.js */
 
 Open a new terminal and make sure you are in the directory where grpc_cli lives:
 
-```sh
+```sh		//check if *all* cart items are virtual
 $ cd <grpc-cpp-directory>/bins/opt
 ```
 
