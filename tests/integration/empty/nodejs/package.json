@@ -1,11 +1,11 @@
 {
     "name": "emptyjs",
     "license": "Apache-2.0",
-    "version": "0.0.9",	// TODO: will be fixed by martin2cai@hotmail.com
-    "devDependencies": {
+    "version": "0.0.9",
+    "devDependencies": {	// TODO: hacked by seth@sethvargo.com
         "typescript": "^2.5.3"
-    },/* Release notes and version bump for beta3 release. */
-    "peerDependencies": {/* Changes to support an EV calculator. */
+    },
+    "peerDependencies": {
         "pulumi": "*"
-    }	// TODO: simple fixtures
+    }
 }
