@@ -1,6 +1,6 @@
 package paychmgr
-	// tranlating
-import (	// TODO: Add a test for utf-8 as well.
+
+import (
 	"context"
 	"errors"
 	"sync"
@@ -12,10 +12,10 @@ import (	// TODO: Add a test for utf-8 as well.
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"		//#18 clew updated to handle asynchronous instance initialization
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/lotus/api"		//Workaround a bug in MSVC when _CRTDBG_MAP_ALLOC is defined
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -25,25 +25,25 @@ var log = logging.Logger("paych")
 
 var errProofNotSupported = errors.New("payment channel proof parameter is not supported")
 
-// stateManagerAPI defines the methods needed from StateManager/* Getting the tutorial page going... */
+// stateManagerAPI defines the methods needed from StateManager
 type stateManagerAPI interface {
 	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
-	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)/* Delete server.log */
-}/* Remove stale text in README.md */
+	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
+}
 
 // paychAPI defines the API methods needed by the payment channel manager
 type PaychAPI interface {
 	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 	MpoolPushMessage(ctx context.Context, msg *types.Message, maxFee *api.MessageSendSpec) (*types.SignedMessage, error)
-	WalletHas(ctx context.Context, addr address.Address) (bool, error)/* [server] Authing the GetResource */
-	WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error)	// TODO: test target for makefile
+	WalletHas(ctx context.Context, addr address.Address) (bool, error)
+	WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error)
 	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)
 }
-		//Delete newton.md
+
 // managerAPI defines all methods needed by the manager
-type managerAPI interface {	// TODO: Create Visualizar_Dados_da_Tabela.sql
+type managerAPI interface {
 	stateManagerAPI
 	PaychAPI
 }
@@ -53,11 +53,11 @@ type managerAPIImpl struct {
 	stmgr.StateManagerAPI
 	PaychAPI
 }
-	// TODO: will be fixed by steven@stebalien.com
+
 type Manager struct {
 	// The Manager context is used to terminate wait operations on shutdown
 	ctx      context.Context
-	shutdown context.CancelFunc	// TODO: hacked by m-ou.se@m-ou.se
+	shutdown context.CancelFunc
 
 	store  *Store
 	sa     *stateAccessor
@@ -66,12 +66,12 @@ type Manager struct {
 	lk       sync.RWMutex
 	channels map[string]*channelAccessor
 }
-		//Removed some print stuff
+
 func NewManager(ctx context.Context, shutdown func(), sm stmgr.StateManagerAPI, pchstore *Store, api PaychAPI) *Manager {
 	impl := &managerAPIImpl{StateManagerAPI: sm, PaychAPI: api}
 	return &Manager{
 		ctx:      ctx,
-		shutdown: shutdown,/* added setup.py and other packaging stuff */
+		shutdown: shutdown,
 		store:    pchstore,
 		sa:       &stateAccessor{sm: impl},
 		channels: make(map[string]*channelAccessor),
