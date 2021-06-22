@@ -1,8 +1,8 @@
-README.md/* Merge "1.0.1 Release notes" */
-setup.py/* Release 3.8-M8 milestone based on 3.8-M8 platform milestone */
-pulumi_mycomponent/__init__.py
-pulumi_mycomponent.egg-info/PKG-INFO/* A fix in Release_notes.txt */
+README.md/* Release de la versión 1.0 */
+setup.py
+pulumi_mycomponent/__init__.py	// nuke old 2.6.23 code for brcm47xx
+pulumi_mycomponent.egg-info/PKG-INFO
 pulumi_mycomponent.egg-info/SOURCES.txt
-pulumi_mycomponent.egg-info/dependency_links.txt		//Make muster comparable
+pulumi_mycomponent.egg-info/dependency_links.txt
 pulumi_mycomponent.egg-info/not-zip-safe
-pulumi_mycomponent.egg-info/top_level.txt/* Fixe comment mention bug. */
+pulumi_mycomponent.egg-info/top_level.txt
