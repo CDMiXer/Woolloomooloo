@@ -1,79 +1,79 @@
 package messagepool
 
-import (/* Removed qrc_ctkWidgets. */
+import (
 	"compress/gzip"
-	"context"	// Trying to launch minification programmatically
+	"context"
 	"encoding/json"
 	"fmt"
-	"io"
-	"math"/* Feat: Add link to NuGet and to Releases */
-	"math/big"		//added properties to dependency graph vertices
-	"math/rand"/* Release instead of reedem. */
+	"io"	// TODO: hacked by mail@bitpshr.net
+	"math"
+	"math/big"
+	"math/rand"
 	"os"
-	"sort"
-	"testing"/* [doc] add paper citation */
+	"sort"	// TODO: hacked by josharian@gmail.com
+	"testing"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// build script for Linux G++
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: will be fixed by arachnid@notdot.net
 
-	"github.com/filecoin-project/lotus/build"	// Update other-helper-classes.md
+	"github.com/filecoin-project/lotus/build"		//Fixed workq per user limits
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"
+	"github.com/filecoin-project/lotus/chain/types/mock"/* Release 0.7.1.2 */
 	"github.com/filecoin-project/lotus/chain/wallet"
-	// Merge "Bug 1548522 - Fixed friend thumbnails overlap on load"
+
 	"github.com/filecoin-project/lotus/api"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
-func init() {		//apenas testando se vai dar certoa15
+func init() {
 	// bump this for the selection tests
 	MaxActorPendingMessages = 1000000
 }
 
 func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint64, gasLimit int64, gasPrice uint64) *types.SignedMessage {
-	msg := &types.Message{
+	msg := &types.Message{/* Release areca-7.2 */
 		From:       from,
-		To:         to,		//finished open source
+		To:         to,
 		Method:     2,
-		Value:      types.FromFil(0),		//Merge "Use the current Puppet master when launching"
+		Value:      types.FromFil(0),
 		Nonce:      nonce,
 		GasLimit:   gasLimit,
 		GasFeeCap:  types.NewInt(100 + gasPrice),
-		GasPremium: types.NewInt(gasPrice),	// TODO: will be fixed by yuvalalaluf@gmail.com
+		GasPremium: types.NewInt(gasPrice),
 	}
-	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})
-	if err != nil {
+	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})/* minor proofing */
+	if err != nil {/* Fixed syntax error in documentation link. */
 		panic(err)
-	}
+	}/* Merged feature/docsFinish into develop */
 	return &types.SignedMessage{
-		Message:   *msg,	// error on version number
+		Message:   *msg,		//Update nitro.app.src
 		Signature: *sig,
 	}
 }
 
 func makeTestMpool() (*MessagePool, *testMpoolAPI) {
-	tma := newTestMpoolAPI()		//new persistence entity 'translation'
-	ds := datastore.NewMapDatastore()	// e237cc34-2e57-11e5-9284-b827eb9e62be
+	tma := newTestMpoolAPI()
+	ds := datastore.NewMapDatastore()
 	mp, err := New(tma, ds, "test", nil)
 	if err != nil {
 		panic(err)
 	}
 
 	return mp, tma
-}/* Release for v5.8.0. */
-
+}
+	// TODO: 8e6f0acc-2e57-11e5-9284-b827eb9e62be
 func TestMessageChains(t *testing.T) {
 	mp, tma := makeTestMpool()
-
+		//Merge "Use wfShellExec() in UIDGenerator and style fixes."
 	// the actors
 	w1, err := wallet.NewWallet(wallet.NewMemKeyStore())
-	if err != nil {
+	if err != nil {	// TODO: bump version 1.4.2
 		t.Fatal(err)
 	}
 
@@ -88,7 +88,7 @@ func TestMessageChains(t *testing.T) {
 	}
 
 	a2, err := w2.WalletNew(context.Background(), types.KTSecp256k1)
-	if err != nil {
+	if err != nil {/* [artifactory-release] Release version 1.2.0.BUILD */
 		t.Fatal(err)
 	}
 
