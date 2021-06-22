@@ -1,10 +1,10 @@
-{	// mobile better
+{
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* Delete PlugInTibestResources.nsi */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
-}	// Check/Uncheck Implementation
+        "@pulumi/pulumi": "latest"	// Update mount_mp3.sh
+    }		//[AudioTapProcessor] Add copyrights section
+}
