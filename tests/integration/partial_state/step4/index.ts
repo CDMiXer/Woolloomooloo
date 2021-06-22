@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+	// TODO: will be fixed by fjl@ethereum.org
 import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
 
