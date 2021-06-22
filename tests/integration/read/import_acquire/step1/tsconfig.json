@@ -1,16 +1,16 @@
 {
-    "compilerOptions": {		//Update default chart version to v0.1.1
+    "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",	// 959372e2-2e4e-11e5-9284-b827eb9e62be
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* Renamed custom fields */
-        "pretty": true,/* Update CopyReleaseAction.java */
-        "noFallthroughCasesInSwitch": true,/* Deleting wiki page ReleaseNotes_1_0_14. */
-,eurt :"snruteRticilpmIon"        
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
@@ -18,4 +18,4 @@
         "index.ts"
     ]
 }
-	// Use an interval timer for async notifications to guarantee at-least-once
+
