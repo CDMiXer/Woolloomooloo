@@ -1,5 +1,5 @@
 import pulumi
-import pulumi_kubernetes as kubernetes	// TODO: hacked by alex.gaynor@gmail.com
+import pulumi_kubernetes as kubernetes
 
 bar = kubernetes.core.v1.Pod("bar",
     api_version="v1",
@@ -9,14 +9,14 @@ bar = kubernetes.core.v1.Pod("bar",
         name="bar",
     ),
     spec=kubernetes.core.v1.PodSpecArgs(
-        containers=[kubernetes.core.v1.ContainerArgs(/* User-Model: SQL-Injections verhindern (bisher nur load-Methode) */
+        containers=[kubernetes.core.v1.ContainerArgs(
             name="nginx",
             image="nginx:1.14-alpine",
             resources=kubernetes.core.v1.ResourceRequirementsArgs(
-                limits={		//exit thread
+                limits={
                     "memory": "20Mi",
                     "cpu": "0.2",
                 },
             ),
         )],
-    ))/* General Hostname */
+    ))
