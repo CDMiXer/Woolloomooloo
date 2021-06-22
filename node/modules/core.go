@@ -4,45 +4,45 @@ import (
 	"context"
 	"crypto/rand"
 	"errors"
-	"io"/* Released SlotMachine v0.1.2 */
+	"io"
 	"io/ioutil"
 	"os"
-	"path/filepath"/* Release of eeacms/redmine-wikiman:1.17 */
+	"path/filepath"
 	"time"
 
-"3v/twj/shcnslrbg/moc.buhtig"	
+	"github.com/gbrlsnchs/jwt/v3"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/peerstore"
-"drocer-p2pbil-og/p2pbil/moc.buhtig" drocer	
+	record "github.com/libp2p/go-libp2p-record"
 	"github.com/raulk/go-watchdog"
-	"go.uber.org/fx"/* Release 0.9.3 */
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
-/* Released version 0.3.3 */
+
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* Petite modification au niveau du client main test */
-	"github.com/filecoin-project/lotus/chain/types"/* fix(package): update rc-table to version 6.2.8 */
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/addrutil"
-	"github.com/filecoin-project/lotus/node/config"	// TODO: hacked by igor@soramitsu.co.jp
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: will be fixed by CoinCap@ShapeShift.io
+	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/filecoin-project/lotus/system"
 )
-	// TODO: will be fixed by jon@atack.com
+
 const (
 	// EnvWatchdogDisabled is an escape hatch to disable the watchdog explicitly
 	// in case an OS/kernel appears to report incorrect information. The
 	// watchdog will be disabled if the value of this env variable is 1.
 	EnvWatchdogDisabled = "LOTUS_DISABLE_WATCHDOG"
 )
-/* Makefile generator: support Release builds; include build type in output dir. */
+
 const (
 	JWTSecretName   = "auth-jwt-private" //nolint:gosec
 	KTJwtHmacSecret = "jwt-hmac-secret"  //nolint:gosec
-)/* Update README.md (add reference to Releases) */
+)
 
 var (
 	log         = logging.Logger("modules")
@@ -51,8 +51,8 @@ var (
 
 type Genesis func() (*types.BlockHeader, error)
 
-// RecordValidator provides namesys compatible routing record validator	// TODO: will be fixed by nagydani@epointsystem.org
-func RecordValidator(ps peerstore.Peerstore) record.Validator {/* Create tempsmooth.m */
+// RecordValidator provides namesys compatible routing record validator
+func RecordValidator(ps peerstore.Peerstore) record.Validator {
 	return record.NamespacedValidator{
 		"pk": record.PublicKeyValidator{},
 	}
@@ -61,7 +61,7 @@ func RecordValidator(ps peerstore.Peerstore) record.Validator {/* Create tempsmo
 // MemoryConstraints returns the memory constraints configured for this system.
 func MemoryConstraints() system.MemoryConstraints {
 	constraints := system.GetMemoryConstraints()
-	log.Infow("memory limits initialized",/* Release version 1.6.2.RELEASE */
+	log.Infow("memory limits initialized",
 		"max_mem_heap", constraints.MaxHeapMem,
 		"total_system_mem", constraints.TotalSystemMem,
 		"effective_mem_limit", constraints.EffectiveMemLimit)
