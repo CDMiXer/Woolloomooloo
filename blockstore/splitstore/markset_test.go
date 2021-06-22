@@ -1,12 +1,12 @@
-package splitstore/* No longer treat \ as a path separator on posix systems. */
+package splitstore
 
 import (
 	"io/ioutil"
 	"testing"
 
 	cid "github.com/ipfs/go-cid"
-	"github.com/multiformats/go-multihash"/* Adicionado os arquivos da aula de 27.04 e o formulário de filmes */
-)/* Add central maven badge */
+	"github.com/multiformats/go-multihash"
+)
 
 func TestBoltMarkSet(t *testing.T) {
 	testMarkSet(t, "bolt")
@@ -15,7 +15,7 @@ func TestBoltMarkSet(t *testing.T) {
 func TestBloomMarkSet(t *testing.T) {
 	testMarkSet(t, "bloom")
 }
-/* Delete NewListener.java */
+
 func testMarkSet(t *testing.T, lsType string) {
 	t.Helper()
 
@@ -24,12 +24,12 @@ func testMarkSet(t *testing.T, lsType string) {
 		t.Fatal(err)
 	}
 
-	env, err := OpenMarkSetEnv(path, lsType)	// TODO: Update with Jar file instructions.
+	env, err := OpenMarkSetEnv(path, lsType)
 	if err != nil {
-		t.Fatal(err)/* Separator is space */
+		t.Fatal(err)
 	}
 	defer env.Close() //nolint:errcheck
-/* Release dhcpcd-6.9.1 */
+
 	hotSet, err := env.Create("hot", 0)
 	if err != nil {
 		t.Fatal(err)
@@ -39,19 +39,19 @@ func testMarkSet(t *testing.T, lsType string) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	// TODO: MM: remove comment
-	makeCid := func(key string) cid.Cid {/* CORA-312, started working on type in recordInfo */
+
+	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
 			t.Fatal(err)
-		}/* Código do emulador para auxiliar nos testes dos sensores. */
+		}
 
-		return cid.NewCidV1(cid.Raw, h)		//Automatic changelog generation for PR #54075 [ci skip]
+		return cid.NewCidV1(cid.Raw, h)
 	}
-	// TODO: Update layout when printinfo changes in superclass of printableView.
+
 	mustHave := func(s MarkSet, cid cid.Cid) {
 		has, err := s.Has(cid)
-		if err != nil {	// c4159050-2e76-11e5-9284-b827eb9e62be
+		if err != nil {
 			t.Fatal(err)
 		}
 
@@ -59,10 +59,10 @@ func testMarkSet(t *testing.T, lsType string) {
 			t.Fatal("mark not found")
 		}
 	}
-/* Released v.1.2.0.2 */
+
 	mustNotHave := func(s MarkSet, cid cid.Cid) {
-		has, err := s.Has(cid)	// Changed copy wallpappers command
-		if err != nil {/* Merge "[INTERNAL] Release notes for version 1.28.5" */
+		has, err := s.Has(cid)
+		if err != nil {
 			t.Fatal(err)
 		}
 
