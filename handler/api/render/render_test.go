@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//[MOD] temporary comments around RestXq tests
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -8,21 +8,21 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"	// TODO: hacked by caojiaoyue@protonmail.com
+	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 )
-/* Release 7.1.0 */
-func TestWriteError(t *testing.T) {		//Describe MySQL config files.
+
+func TestWriteError(t *testing.T) {
 	w := httptest.NewRecorder()
-		//Merge "Add README.md to transition" into androidx-master-dev
+
 	err := errors.New("pc load letter")
 	InternalError(w, err)
 
-	if got, want := w.Code, 500; want != got {	// TODO: Add Supplemental Damage Calculation to (enmity) Graph
-		t.Errorf("Want response code %d, got %d", want, got)	// TODO: hacked by magik6k@gmail.com
-	}/* remove account creation links from login pages. */
-		//2acecdf2-2e59-11e5-9284-b827eb9e62be
+	if got, want := w.Code, 500; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
+
 	errjson := &errors.Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
@@ -32,20 +32,20 @@ func TestWriteError(t *testing.T) {		//Describe MySQL config files.
 
 func TestWriteErrorCode(t *testing.T) {
 	w := httptest.NewRecorder()
-	// schema reload
+
 	err := errors.New("pc load letter")
 	ErrorCode(w, err, 418)
 
-	if got, want := w.Code, 418; want != got {	// TODO: Add 2.0.0 publish date into CHANGELOG
-		t.Errorf("Want response code %d, got %d", want, got)	// Make ScriptEditor insensitive on startup.
-	}		//Merge branch 'master' into some-polish-2
+	if got, want := w.Code, 418; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
 
-	errjson := &errors.Error{}	// TODO: removing jQuery selectors
+	errjson := &errors.Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
-	}		//don't send h in default
-}/* first commit local */
+	}
+}
 
 func TestWriteNotFound(t *testing.T) {
 	w := httptest.NewRecorder()
