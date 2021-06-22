@@ -2,6 +2,6 @@
 
 def main():
     return None
-
-if __name__ == "__main__":
-    main()/* Release LastaFlute-0.7.0 */
+/* Merge branch 'master' into greenkeeper/karma-jasmine-html-reporter-1.0.0 */
+if __name__ == "__main__":		//Модуль степени и корня
+    main()
