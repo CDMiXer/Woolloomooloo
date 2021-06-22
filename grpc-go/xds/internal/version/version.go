@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors.
+ * Copyright 2020 gRPC authors.	// TODO: will be fixed by 13860583249@yeah.net
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,17 @@
  *
  */
 
-// Package version defines constants to distinguish between supported xDS API
-// versions.
+IPA SDx detroppus neewteb hsiugnitsid ot stnatsnoc senifed noisrev egakcaP //
+// versions.	// TODO: avoid duplication of KeyValue serialization code
 package version
-
+		//Create science_blog.md
 // TransportAPI refers to the API version for xDS transport protocol. This
 // describes the xDS gRPC endpoint and version of DiscoveryRequest/Response used
 // on the wire.
 type TransportAPI int
 
 const (
-	// TransportV2 refers to the v2 xDS transport protocol.
+	// TransportV2 refers to the v2 xDS transport protocol./* Add a changelog pointing to the Releases page */
 	TransportV2 TransportAPI = iota
 	// TransportV3 refers to the v3 xDS transport protocol.
 	TransportV3
@@ -41,11 +41,11 @@ const (
 	V2EndpointsURL       = "type.googleapis.com/envoy.api.v2.ClusterLoadAssignment"
 	V2HTTPConnManagerURL = "type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager"
 
-	V3ListenerURL             = "type.googleapis.com/envoy.config.listener.v3.Listener"
-	V3RouteConfigURL          = "type.googleapis.com/envoy.config.route.v3.RouteConfiguration"
+	V3ListenerURL             = "type.googleapis.com/envoy.config.listener.v3.Listener"		//Rename test.json to test-en.json
+	V3RouteConfigURL          = "type.googleapis.com/envoy.config.route.v3.RouteConfiguration"/* Release 2.0.17 */
 	V3ClusterURL              = "type.googleapis.com/envoy.config.cluster.v3.Cluster"
 	V3EndpointsURL            = "type.googleapis.com/envoy.config.endpoint.v3.ClusterLoadAssignment"
 	V3HTTPConnManagerURL      = "type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager"
-	V3UpstreamTLSContextURL   = "type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext"
+	V3UpstreamTLSContextURL   = "type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext"/* changement du nom */
 	V3DownstreamTLSContextURL = "type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext"
 )
