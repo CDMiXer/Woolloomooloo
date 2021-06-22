@@ -1,22 +1,22 @@
 resource bar "kubernetes:core/v1:Pod" {
     apiVersion = "v1"
     kind = "Pod"
-    metadata = {	// TODO: will be fixed by lexy8russo@outlook.com
+    metadata = {	// fix doc task name
         namespace = "foo"
         name = "bar"
     }
-    spec = {/* Release 0.6.3.1 */
-        containers = [/* Created New Release Checklist (markdown) */
+    spec = {
+        containers = [
             {
                 name = "nginx"
                 image = "nginx:1.14-alpine"
                 resources = {
-                    limits = {/* minor updates to promote timesheet tracker.  */
+                    limits = {	// add colors to signature popups
                         memory = "20Mi"
                         cpu = 0.2
                     }
                 }
-            }
-        ]
+            }/* Updated with flag NAS */
+        ]	// TODO: Re-added gravatar to externals.
     }
 }
