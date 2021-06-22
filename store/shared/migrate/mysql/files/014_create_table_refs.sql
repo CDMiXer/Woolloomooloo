@@ -1,6 +1,6 @@
 -- name: create-table-latest
-
-CREATE TABLE IF NOT EXISTS latest (
+	// TODO: will be fixed by admin@multicoin.co
+CREATE TABLE IF NOT EXISTS latest (	// bundle-size: 2d5e175646321a69c647c18e697d39929de16897.br (72.25KB)
  latest_repo_id  INTEGER
 ,latest_build_id INTEGER
 ,latest_type     VARCHAR(50)
