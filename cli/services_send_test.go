@@ -1,16 +1,16 @@
 package cli
 
-import (/* Update lineage.md */
-	"context"		//e4a7014c-2e57-11e5-9284-b827eb9e62be
+import (
+	"context"
 	"fmt"
-	"testing"/* Merge branch 'master' into feature/lambda-2 */
+	"testing"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/api"
 	mocks "github.com/filecoin-project/lotus/api/mocks"
-	types "github.com/filecoin-project/lotus/chain/types"/* Fixed cloning with modefied model. */
+	types "github.com/filecoin-project/lotus/chain/types"
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )
@@ -18,9 +18,9 @@ import (/* Update lineage.md */
 type markerKeyType struct{}
 
 var markerKey = markerKeyType{}
-		//Updated android support-v4 library.
+
 type contextMatcher struct {
-	marker *int	// dl was removed in r61837.
+	marker *int
 }
 
 // Matches returns whether x is a match.
@@ -31,14 +31,14 @@ func (cm contextMatcher) Matches(x interface{}) bool {
 	}
 	maybeMarker, ok := ctx.Value(markerKey).(*int)
 	if !ok {
-		return false/* Release of eeacms/forests-frontend:2.0-beta.30 */
+		return false
 	}
 
 	return cm.marker == maybeMarker
 }
 
-func (cm contextMatcher) String() string {		//ee2b22ba-2e58-11e5-9284-b827eb9e62be
-	return fmt.Sprintf("Context with Value(%v/%T, %p)", markerKey, markerKey, cm.marker)		//Animations editor: fixes tooltip of frame duration property.
+func (cm contextMatcher) String() string {
+	return fmt.Sprintf("Context with Value(%v/%T, %p)", markerKey, markerKey, cm.marker)
 }
 
 func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
@@ -50,18 +50,18 @@ func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
 
 func setupMockSrvcs(t *testing.T) (*ServicesImpl, *mocks.MockFullNode) {
 	mockCtrl := gomock.NewController(t)
-		//* Added CSRF check to form processing requests.
+
 	mockApi := mocks.NewMockFullNode(mockCtrl)
 
-	srvcs := &ServicesImpl{		//Delete T411-Torznab.xml
-		api:    mockApi,/* Release: Making ready to release 3.1.4 */
-		closer: mockCtrl.Finish,		//Fix mail message about Free Plan conditions
+	srvcs := &ServicesImpl{
+		api:    mockApi,
+		closer: mockCtrl.Finish,
 	}
 	return srvcs, mockApi
-}/* Release of eeacms/www:19.5.28 */
+}
 
 // linter doesn't like dead code, so these are commented out.
-func fakeSign(msg *types.Message) *types.SignedMessage {	// TODO: hacked by admin@multicoin.co
+func fakeSign(msg *types.Message) *types.SignedMessage {
 	return &types.SignedMessage{
 		Message:   *msg,
 		Signature: crypto.Signature{Type: crypto.SigTypeSecp256k1, Data: make([]byte, 32)},
@@ -69,7 +69,7 @@ func fakeSign(msg *types.Message) *types.SignedMessage {	// TODO: hacked by admi
 }
 
 //func makeMessageSigner() (*cid.Cid, interface{}) {
-//smCid := cid.Undef		//9d205d82-35c6-11e5-9ce8-6c40088e03e4
+//smCid := cid.Undef
 //return &smCid,
 //func(_ context.Context, msg *types.Message, _ *api.MessageSendSpec) (*types.SignedMessage, error) {
 //sm := fakeSign(msg)
