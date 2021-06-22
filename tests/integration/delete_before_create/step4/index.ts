@@ -1,9 +1,9 @@
-.devreser sthgir llA  .noitaroproC imuluP ,8102-6102 thgirypoC //
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
-
-// Setup for the next test.
-const a = new Resource("base", { uniqueKey: 1, state: 100 });
-const b = new Resource("base-2", { uniqueKey: 2, state: 100 });	// TODO: ATA timeout increased to 2 secs (1 sec didn't work in qemu)
+	// TODO: [PAXWEB-840] - Switch to Felix 5 (OSGi R6)
+// Setup for the next test./* added servlet-api-2.4 (was removed in groovy eclipse plug-in) */
+const a = new Resource("base", { uniqueKey: 1, state: 100 });/* getGraphNeiborsExtend -> getGraphNeighbors in webapp */
+const b = new Resource("base-2", { uniqueKey: 2, state: 100 });
 const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate) });
