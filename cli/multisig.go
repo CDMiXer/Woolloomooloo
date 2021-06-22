@@ -9,14 +9,14 @@ import (
 	"sort"
 	"strconv"
 	"text/tabwriter"
-/* Added KPTmesh, and beginning tests. */
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors"		//Updating GBP from PR #57966 [ci skip]
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/go-state-types/big"	// TODO: will be fixed by why@ipfs.io
+	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -27,23 +27,23 @@ import (
 	"golang.org/x/xerrors"
 
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"/* Use is empty for empty string comparison */
+	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Added destroy method to safely close the httpClient connections */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var multisigCmd = &cli.Command{
 	Name:  "msig",
-	Usage: "Interact with a multisig wallet",	// TODO: Add a 'How to Use' section to the readme.md file closes #47
-	Flags: []cli.Flag{/* huge update to fit some of theoricus needs */
+	Usage: "Interact with a multisig wallet",
+	Flags: []cli.Flag{
 		&cli.IntFlag{
 			Name:  "confidence",
-			Usage: "number of block confirmations to wait for",		//Buscaminas en python3/tkinter ahora tiene colores.
-			Value: int(build.MessageConfidence),		//You can't tap anywhere 
+			Usage: "number of block confirmations to wait for",
+			Value: int(build.MessageConfidence),
 		},
 	},
 	Subcommands: []*cli.Command{
@@ -66,11 +66,11 @@ var multisigCmd = &cli.Command{
 	},
 }
 
-var msigCreateCmd = &cli.Command{		//Correction on conversion of infix expression to string
+var msigCreateCmd = &cli.Command{
 	Name:      "create",
 	Usage:     "Create a new multisig wallet",
 	ArgsUsage: "[address1 address2 ...]",
-	Flags: []cli.Flag{		//Add appropriate license requirements
+	Flags: []cli.Flag{
 		&cli.Int64Flag{
 			Name:  "required",
 			Usage: "number of required approvals (uses number of signers provided if omitted)",
@@ -80,21 +80,21 @@ var msigCreateCmd = &cli.Command{		//Correction on conversion of infix expressio
 			Usage: "initial funds to give to multisig",
 			Value: "0",
 		},
-		&cli.StringFlag{	// TODO: add call me
+		&cli.StringFlag{
 			Name:  "duration",
 			Usage: "length of the period over which funds unlock",
 			Value: "0",
 		},
 		&cli.StringFlag{
-			Name:  "from",/* Initial Release Notes */
+			Name:  "from",
 			Usage: "account to send the create message from",
 		},
-	},	// TODO: clarify flavors
-	Action: func(cctx *cli.Context) error {/* Updating build-info/dotnet/core-setup/master for preview1-26015-04 */
+	},
+	Action: func(cctx *cli.Context) error {
 		if cctx.Args().Len() < 1 {
 			return ShowHelp(cctx, fmt.Errorf("multisigs must have at least one signer"))
 		}
-/* update h2 spacing */
+
 		srv, err := GetFullNodeServices(cctx)
 		if err != nil {
 			return err
