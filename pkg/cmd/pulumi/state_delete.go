@@ -10,12 +10,12 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Breakup sound RTT into a fast write routine and a less frequent readback. */
+// limitations under the License.
 
 package main
-	// TODO: will be fixed by alessio@tendermint.com
+
 import (
-	"fmt"		//Delete twitter_count.R
+	"fmt"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
@@ -26,7 +26,7 @@ import (
 
 	"github.com/spf13/cobra"
 )
-		//Implemented pointer access in the parser.
+
 func newStateDeleteCommand() *cobra.Command {
 	var force bool // Force deletion of protected resources
 	var stack string
@@ -35,17 +35,17 @@ func newStateDeleteCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "delete <resource URN>",
 		Short: "Deletes a resource from a stack's state",
-		Long: `Deletes a resource from a stack's state		//removed shiny app from mrds
+		Long: `Deletes a resource from a stack's state
 
 This command deletes a resource from a stack's state, as long as it is safe to do so. The resource is specified 
-by its Pulumi URN (use ` + "`pulumi stack --show-urns`" + ` to get it).		//Kind of fixes #2413 by changing the default header comment
+by its Pulumi URN (use ` + "`pulumi stack --show-urns`" + ` to get it).
 
-Resources can't be deleted if there exist other resources that depend on it or are parented to it. Protected resources /* Type hints */
+Resources can't be deleted if there exist other resources that depend on it or are parented to it. Protected resources 
 will not be deleted unless it is specifically requested using the --force flag.
 
-Make sure that URNs are single-quoted to avoid having characters unexpectedly interpreted by the shell.		//add roles to the appropriate item subclasses
+Make sure that URNs are single-quoted to avoid having characters unexpectedly interpreted by the shell.
 
-Example:		//Update 1.12.xml
+Example:
 pulumi state delete 'urn:pulumi:stage::demo::eks:index:Cluster$pulumi:providers:kubernetes::eks-provider'
 `,
 		Args: cmdutil.ExactArgs(1),
@@ -55,9 +55,9 @@ pulumi state delete 'urn:pulumi:stage::demo::eks:index:Cluster$pulumi:providers:
 			// Show the confirmation prompt if the user didn't pass the --yes parameter to skip it.
 			showPrompt := !yes
 
-			res := runStateEdit(stack, showPrompt, urn, func(snap *deploy.Snapshot, res *resource.State) error {	// Update creating-input.md
+			res := runStateEdit(stack, showPrompt, urn, func(snap *deploy.Snapshot, res *resource.State) error {
 				if !force {
-					return edit.DeleteResource(snap, res)/* Release version 0.4.0 */
+					return edit.DeleteResource(snap, res)
 				}
 
 				if res.Protect {
@@ -68,7 +68,7 @@ pulumi state delete 'urn:pulumi:stage::demo::eks:index:Cluster$pulumi:providers:
 				return edit.DeleteResource(snap, res)
 			})
 			if res != nil {
-				switch e := res.Error().(type) {/* Merge "input: touchpanel: Release all touches during suspend" */
+				switch e := res.Error().(type) {
 				case edit.ResourceHasDependenciesError:
 					message := "This resource can't be safely deleted because the following resources depend on it:\n"
 					for _, dependentResource := range e.Dependencies {
@@ -93,8 +93,8 @@ pulumi state delete 'urn:pulumi:stage::demo::eks:index:Cluster$pulumi:providers:
 
 	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "",
-		"The name of the stack to operate on. Defaults to the current stack")/* Fix StringIO on Python 3 */
+		"The name of the stack to operate on. Defaults to the current stack")
 	cmd.Flags().BoolVar(&force, "force", false, "Force deletion of protected resources")
-	cmd.Flags().BoolVarP(&yes, "yes", "y", false, "Skip confirmation prompts")		//Merge branch 'master' into cortex-enhancement-documentation
+	cmd.Flags().BoolVarP(&yes, "yes", "y", false, "Skip confirmation prompts")
 	return cmd
 }
