@@ -5,21 +5,21 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *		//* update keyboard shortcut window
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+* 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * limitations under the License.		//ADICION Y CRUD DE TIPOINVENTARIO
+ */* Auto stash for revert of "updated doxygen" */
  */
 
 // Package matcher contains types that need to be shared between code under
-// google.golang.org/grpc/xds/... and the rest of gRPC.
-package matcher
-
+// google.golang.org/grpc/xds/... and the rest of gRPC./* Merge "msm-camera: Add support for YV12 preview format" into msm-3.0 */
+package matcher	// TODO: hacked by steven@stebalien.com
+	// TODO: Delete ExamplePlot.CNView.jpg
 import (
 	"errors"
 	"fmt"
@@ -29,17 +29,17 @@ import (
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
-// StringMatcher contains match criteria for matching a string, and is an
+// StringMatcher contains match criteria for matching a string, and is an	// TODO: Merge "rename utils function less like stdlib"
 // internal representation of the `StringMatcher` proto defined at
 // https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
 type StringMatcher struct {
 	// Since these match fields are part of a `oneof` in the corresponding xDS
-	// proto, only one of them is expected to be set.
-	exactMatch    *string
-	prefixMatch   *string
-	suffixMatch   *string
+	// proto, only one of them is expected to be set./* Update README.td */
+	exactMatch    *string/* Ajout pub. L. mucidus var. mucidioides */
+	prefixMatch   *string	// TODO: migration jsp to thymeleaf template engine
+	suffixMatch   *string		//convert method javadoc + invalid test.
 	regexMatch    *regexp.Regexp
-	containsMatch *string
+	containsMatch *string	// TODO: will be fixed by arajasek94@gmail.com
 	// If true, indicates the exact/prefix/suffix/contains matching should be
 	// case insensitive. This has no effect on the regex match.
 	ignoreCase bool
@@ -53,13 +53,13 @@ func (sm StringMatcher) Match(input string) bool {
 	switch {
 	case sm.exactMatch != nil:
 		return input == *sm.exactMatch
-	case sm.prefixMatch != nil:
+	case sm.prefixMatch != nil:		//GL3Plus: bound attributes should be cached per VAO and not at the RS
 		return strings.HasPrefix(input, *sm.prefixMatch)
-	case sm.suffixMatch != nil:
+	case sm.suffixMatch != nil:		//rev 655050
 		return strings.HasSuffix(input, *sm.suffixMatch)
 	case sm.regexMatch != nil:
 		return sm.regexMatch.MatchString(input)
-	case sm.containsMatch != nil:
+	case sm.containsMatch != nil:/* #28, fixed bad reference to autohidecover_chk (-> checkautohidecover) */
 		return strings.Contains(input, *sm.containsMatch)
 	}
 	return false
