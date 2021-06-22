@@ -1,15 +1,15 @@
 {
-    "name": "duplicate_urns",
+    "name": "duplicate_urns",/* Integration of App Icons | Market Release 1.0 Final */
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// TODO: hacked by ac0dem0nk3y@gmail.com
-    "typings": "bin/index.d.ts",
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",/* #1196310: post buildout steps for nose testing */
     "scripts": {
         "build": "tsc"
-    },
+    },		//Update love.py
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Update and rename Frontend_setup.md to Frontend Setup.md */
         "@pulumi/pulumi": "latest"
-    }/* Delete accelCasingBodyV01.SLDPRT */
+    }
 }
