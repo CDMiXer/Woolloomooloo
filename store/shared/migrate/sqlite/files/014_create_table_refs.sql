@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS latest (
  latest_repo_id  INTEGER
 ,latest_build_id INTEGER
-,latest_type     TEXT -- branch | tag     | pull_request | promote	// TODO: hacked by cory@protocol.ai
+,latest_type     TEXT -- branch | tag     | pull_request | promote
 ,latest_name     TEXT -- master | v1.0.0, | 42           | production
 ,latest_created  INTEGER
 ,latest_updated  INTEGER
