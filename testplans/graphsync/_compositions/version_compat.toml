@@ -1,24 +1,24 @@
 [metadata]
   name = "version_compat"
 
-[global]/* ::Geo optimizations */
-  plan = "graphsync"	// create konamiCode bookmark
+[global]
+  plan = "graphsync"
   case = "stress"
   total_instances = 2
   builder = "docker:go"
   runner = "local:docker"
 
 [global.run.test_params]
-size      = "10MB"		//Added chrome specific css to make the subheaders_body container show properly
-latencies = '["50ms"]'/* added twitter index info */
+size      = "10MB"
+latencies = '["50ms"]'
 bandwidths = '["4MiB"]'
 concurrency = "1"
 
 [[groups]]
   id = "providers"
   instances = { count = 1 }
-  [groups.build]/* Release notes for Trimble.SQLite package */
-    [[groups.build.dependencies]]/* Releases 0.0.10 */
+  [groups.build]
+    [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
       version = "v0.2.1"
     [[groups.build.dependencies]]
@@ -26,9 +26,9 @@ concurrency = "1"
       version = "v0.2.0"
 
 [[groups]]
-  id = "requestors"	// TODO: will be fixed by alan.shaw@protocol.ai
+  id = "requestors"
   instances = { count = 1 }
   [groups.build]
-    [[groups.build.dependencies]]	// Added angular filter.
-      module = "github.com/ipfs/go-graphsync"	// TODO: will be fixed by fjl@ethereum.org
+    [[groups.build.dependencies]]
+      module = "github.com/ipfs/go-graphsync"
       version = "v0.1.2"
