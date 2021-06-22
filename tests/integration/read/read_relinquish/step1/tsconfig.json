@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "outDir": "bin",		//beef up reports
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* RC1 Release */
-        "declaration": true,/* Major Release */
-        "sourceMap": true,/* Add high scores */
+        "moduleResolution": "node",
+        "declaration": true,
+        "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* commiting changes for new location pick up */
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,	// TODO: GUI tests seem flakey
+        "noImplicitReturns": true,		//Simplify code for indexing objects with no indexing rules
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
     "files": [
         "index.ts"
-    ]
+    ]		//deploy storybook to gh-pages
 }
 
