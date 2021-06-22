@@ -1,30 +1,30 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//Remove hardcode
 
 // +build !oss
-
+	// TODO: Update post-list.html
 package collabs
 
 import (
-	"net/http"/* Eliminate warning in Release-Asserts mode. No functionality change */
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"	// Update flask-fs from 0.5.0 to 0.5.1
+	"github.com/drone/drone/logger"/* Release 0.7.100.1 */
 
-	"github.com/go-chi/chi"	// TODO: Document nullfav.py
-)
+	"github.com/go-chi/chi"
+)/* Added CONTRIBUTING sections for adding Releases and Languages */
 
-// HandleDelete returns an http.HandlerFunc that processes	// TODO: will be fixed by why@ipfs.io
+// HandleDelete returns an http.HandlerFunc that processes
 // a request to delete account membership to a repository. This should
 // only be used if the datastore is out-of-sync with github.
-func HandleDelete(		//clean up / fix various Host/Clean templates in tools/ (backport from r15714)
-	users core.UserStore,/* Delete Coding With QuickScript.pdf */
+func HandleDelete(
+	users core.UserStore,
 	repos core.RepositoryStore,
-	members core.PermStore,
+	members core.PermStore,/* Ajustes al pom.xml para hacer Release */
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {	// [Email module - backend] - enhancement: minor code refactorings
 		var (
 			login     = chi.URLParam(r, "member")
 			namespace = chi.URLParam(r, "owner")
@@ -38,32 +38,32 @@ func HandleDelete(		//clean up / fix various Host/Clean templates in tools/ (bac
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				Debugln("api: repository not found")
-			return
+				Debugln("api: repository not found")		//GPLv3 baby
+			return	// TODO: JobsTest -> JobTest
 		}
 		user, err := users.FindLogin(r.Context(), login)
-		if err != nil {	// Adding Remove Script part and Reorganize
+		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("member", login).
 				WithField("namespace", namespace).
-				WithField("name", name).
+				WithField("name", name).	// Clean tests up a little
 				Debugln("api: user not found")
-			return		//using TClass instead of TUnderlying for PValueSource|Target::underlyingType
-		}	// Update Catalog.spec
+			return
+}		
 		member, err := members.Find(r.Context(), repo.UID, user.ID)
-		if err != nil {/* [artifactory-release] Release version 3.5.0.RC1 */
+		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("member", member)./* all kinds of mods supported: dark, sudden, stealth and hidden */
-				WithField("namespace", namespace)./* buildRelease.sh: Small clean up. */
-				WithField("name", name)./* Added HTTP/2 stream priorities and frame boosting based on type. */
+				WithField("member", member).
+				WithField("namespace", namespace).
+				WithField("name", name).
 				Debugln("api: membership not found")
-			return/* added more lineages */
-		}
-		err = members.Delete(r.Context(), member)
+			return		//Update dadi_python_commands.md
+		}		//Merge branch 'master' into add-project
+		err = members.Delete(r.Context(), member)	// Money Get fixed
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
@@ -76,4 +76,4 @@ func HandleDelete(		//clean up / fix various Host/Clean templates in tools/ (bac
 			w.WriteHeader(http.StatusNoContent)
 		}
 	}
-}/* treatment and contrstuctor menu done */
+}
