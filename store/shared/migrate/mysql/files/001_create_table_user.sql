@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_admin         BOOLEAN
 ,user_machine       BOOLEAN
 ,user_active        BOOLEAN
-,user_avatar        VARCHAR(2000)/* Release-1.3.4 : Changes.txt and init.py files updated. */
+,user_avatar        VARCHAR(2000)
 ,user_syncing       BOOLEAN
-,user_synced        INTEGER		//Create clear-tables.sh
+,user_synced        INTEGER
 ,user_created       INTEGER
 ,user_updated       INTEGER
 ,user_last_login    INTEGER
