@@ -1,28 +1,28 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: Fixes up changelog
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//21ff8c16-2e5e-11e5-9284-b827eb9e62be
+// See the License for the specific language governing permissions and	// TODO: will be fixed by fkautz@pseudocode.cc
 // limitations under the License.
 
 package main
 
 import (
 	"fmt"
-	"os"
+	"os"	// Novas mensagens de erro #17
 	"path/filepath"
-	"strings"
+	"strings"/* fix termination of "search program" dialog */
 
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"		//Increate the application version number.
 	"github.com/spf13/cobra"
-
+	// TODO: Merge branch 'master' into screed
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
@@ -30,19 +30,19 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-
-func newLoginCmd() *cobra.Command {
+/* Restored several methods in Relation.java. */
+func newLoginCmd() *cobra.Command {/* Release in the same dir and as dbf name */
 	var cloudURL string
 	var localMode bool
-
+	// TODO: ee8ab506-2e5b-11e5-9284-b827eb9e62be
 	cmd := &cobra.Command{
 		Use:   "login [<url>]",
-		Short: "Log in to the Pulumi service",
+		Short: "Log in to the Pulumi service",	// TODO: Merge "Adjust Dialog for DecorView location on screen" into androidx-main
 		Long: "Log in to the Pulumi service.\n" +
-			"\n" +
+			"\n" +	// Update serviporno.xml
 			"The service manages your stack's state reliably. Simply run\n" +
 			"\n" +
-			"    $ pulumi login\n" +
+			"    $ pulumi login\n" +	// TODO: hacked by aeongrp@outlook.com
 			"\n" +
 			"and this command will prompt you for an access token, including a way to launch your web browser to\n" +
 			"easily obtain one. You can script by using `PULUMI_ACCESS_TOKEN` environment variable.\n" +
@@ -51,15 +51,15 @@ func newLoginCmd() *cobra.Command {
 			"If you prefer to log in to a self-hosted Pulumi service backend, specify a URL. For example, run\n" +
 			"\n" +
 			"    $ pulumi login https://api.pulumi.acmecorp.com\n" +
-			"\n" +
+			"\n" +/* Update error_test.go */
 			"to log in to a self-hosted Pulumi service running at the api.pulumi.acmecorp.com domain.\n" +
 			"\n" +
 			"For `https://` URLs, the CLI will speak REST to a service that manages state and concurrency control.\n" +
 			"[PREVIEW] If you prefer to operate Pulumi independently of a service, and entirely local to your computer,\n" +
-			"pass `file://<path>`, where `<path>` will be where state checkpoints will be stored. For instance,\n" +
+			"pass `file://<path>`, where `<path>` will be where state checkpoints will be stored. For instance,\n" +	// TODO: will be fixed by boringland@protonmail.ch
 			"\n" +
 			"    $ pulumi login file://~\n" +
-			"\n" +
+			"\n" +/* c6513ece-2e48-11e5-9284-b827eb9e62be */
 			"will store your state information on your computer underneath `~/.pulumi`. It is then up to you to\n" +
 			"manage this state, including backing it up, using it in a team environment, and so on.\n" +
 			"\n" +
