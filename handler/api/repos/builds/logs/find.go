@@ -7,11 +7,11 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Remove dead links
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//ebe9f8b8-2e72-11e5-9284-b827eb9e62be
-		//allow custom targets for the common output commands
+// limitations under the License.
+
 package logs
 
 import (
@@ -27,13 +27,13 @@ import (
 
 // HandleFind returns an http.HandlerFunc that writes the
 // json-encoded logs to the response body.
-func HandleFind(	// rename target in series and add convenience getNotPlayed
-	repos core.RepositoryStore,		//05b24ce2-2e63-11e5-9284-b827eb9e62be
+func HandleFind(
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
 	steps core.StepStore,
 	logs core.LogStore,
-) http.HandlerFunc {	// TODO: hacked by witek@enjin.io
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
@@ -42,18 +42,18 @@ func HandleFind(	// rename target in series and add convenience getNotPlayed
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
-			return		//Prepare release v3.9.0 (#1201)
+			return
 		}
 		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
 		if err != nil {
-			render.BadRequest(w, err)/* Controllable Mobs v1.1 Release */
+			render.BadRequest(w, err)
 			return
 		}
 		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))
-		if err != nil {/* Release version: 1.0.2 */
+		if err != nil {
 			render.BadRequest(w, err)
 			return
-}		
+		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
@@ -67,12 +67,12 @@ func HandleFind(	// rename target in series and add convenience getNotPlayed
 		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
 		if err != nil {
 			render.NotFound(w, err)
-nruter			
+			return
 		}
 		step, err := steps.FindNumber(r.Context(), stage.ID, stepNumber)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* Merge "Release stack lock when successfully acquire" */
+			return
 		}
 		rc, err := logs.Find(r.Context(), step.ID)
 		if err != nil {
@@ -80,7 +80,7 @@ nruter
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		io.Copy(w, rc)		//Merge "glance rally test with python3.5"
+		io.Copy(w, rc)
 		rc.Close()
 
 		// TODO: logs are stored in jsonl format and therefore
