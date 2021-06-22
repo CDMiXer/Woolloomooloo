@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading.Tasks;/* Updated comments used for documentation. */
+using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.PlantProvider.Outputs
@@ -22,15 +22,15 @@ namespace Pulumi.PlantProvider.Outputs
         private Container(
             Pulumi.PlantProvider.ContainerBrightness? brightness,
 
-            string? color,/* Ant files adjusted to recent changes in ReleaseManager. */
+            string? color,
 
             string? material,
-/* Updated Releases_notes.txt */
+
             Pulumi.PlantProvider.ContainerSize size)
         {
             Brightness = brightness;
             Color = color;
-            Material = material;/* rev 513864 */
+            Material = material;
             Size = size;
         }
     }
