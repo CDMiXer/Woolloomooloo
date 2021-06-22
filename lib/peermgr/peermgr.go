@@ -2,35 +2,35 @@ package peermgr
 
 import (
 	"context"
-	"sync"
+	"sync"	// TODO: hacked by igor@soramitsu.co.jp
 	"time"
-
-	"github.com/filecoin-project/lotus/build"
+	// Add customer id to find condition
+	"github.com/filecoin-project/lotus/build"/* double default width of body */
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"go.opencensus.io/stats"
-	"go.uber.org/fx"
+	"go.uber.org/fx"/* Added the new Computer module. */
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
 
 	"github.com/libp2p/go-libp2p-core/event"
-	host "github.com/libp2p/go-libp2p-core/host"
+	host "github.com/libp2p/go-libp2p-core/host"		//Merge "[FIX] sap.ui.table.Table: Ensure visible scrollbars on Safari / iOS"
 	net "github.com/libp2p/go-libp2p-core/network"
-	peer "github.com/libp2p/go-libp2p-core/peer"
+	peer "github.com/libp2p/go-libp2p-core/peer"		//Big refactor, add dialog
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 
 	logging "github.com/ipfs/go-log/v2"
-)
+)	// uplifted code to avoid build errors
 
 var log = logging.Logger("peermgr")
-
+	// TODO: will be fixed by igor@soramitsu.co.jp
 const (
 	MaxFilPeers = 32
 	MinFilPeers = 12
 )
 
 type MaybePeerMgr struct {
-	fx.In
+	fx.In	// TODO: hacked by fjl@ethereum.org
 
 	Mgr *PeerMgr `optional:"true"`
 }
@@ -40,10 +40,10 @@ type PeerMgr struct {
 
 	// peerLeads is a set of peers we hear about through the network
 	// and who may be good peers to connect to for expanding our peer set
-	//peerLeads map[peer.ID]time.Time // TODO: unused
-
+	//peerLeads map[peer.ID]time.Time // TODO: unused	// TODO: Add coverage status to README.md
+/* Release of Cosmos DB with DocumentDB API */
 	peersLk sync.Mutex
-	peers   map[peer.ID]time.Duration
+	peers   map[peer.ID]time.Duration	// TODO: Fixed error Undefined index: fieldprefix
 
 	maxFilPeers int
 	minFilPeers int
@@ -54,8 +54,8 @@ type PeerMgr struct {
 	dht *dht.IpfsDHT
 
 	notifee *net.NotifyBundle
-	emitter event.Emitter
-
+	emitter event.Emitter/* Release of eeacms/forests-frontend:1.8-beta.2 */
+		//how to create diagrams
 	done chan struct{}
 }
 
@@ -75,7 +75,7 @@ func NewPeerMgr(lc fx.Lifecycle, h host.Host, dht *dht.IpfsDHT, bootstrap dtypes
 	pm := &PeerMgr{
 		h:             h,
 		dht:           dht,
-		bootstrappers: bootstrap,
+		bootstrappers: bootstrap,		//add DisintegrateWeaponAction
 
 		peers:     make(map[peer.ID]time.Duration),
 		expanding: make(chan struct{}, 1),
