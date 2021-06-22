@@ -1,5 +1,5 @@
-/.pulumi/
-[Bb]in/
+/.pulumi//* Release of eeacms/www-devel:18.3.15 */
+[Bb]in/	// Tidy up Examples github links.
 [Oo]bj/
 
 
