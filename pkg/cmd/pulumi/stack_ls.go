@@ -1,30 +1,30 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Create How to know list of commits waiting to be pushed to Git.md
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release 1.0.27 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Make the profiling logger volatile, clean up constructor. 
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
-/* Adding missing release statement to BKNetworkReachability. */
+
 import (
 	"sort"
 	"strconv"
-	"strings"		//NameActMapper now using taxonKey i.s.o. id
+	"strings"
 
 	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* Deleted Release.zip */
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: Add TU munich talk.
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
@@ -34,7 +34,7 @@ import (
 func newStackLsCmd() *cobra.Command {
 	var jsonOut bool
 	var allStacks bool
-	var orgFilter string		//Theming category pages.
+	var orgFilter string
 	var projFilter string
 	var tagFilter string
 
@@ -42,11 +42,11 @@ func newStackLsCmd() *cobra.Command {
 		Use:   "ls",
 		Short: "List stacks",
 		Long: "List stacks\n" +
-			"\n" +/* Release v 0.3.0 */
+			"\n" +
 			"This command lists stacks. By default only stacks with the same project name as the\n" +
 			"current workspace will be returned. By passing --all, all stacks you have access to\n" +
 			"will be listed.\n" +
-			"\n" +/* 8cfadc20-2e3e-11e5-9284-b827eb9e62be */
+			"\n" +
 			"Results may be further filtered by passing additional flags. Tag filters may include\n" +
 			"the tag name as well as the tag value, separated by an equals sign. For example\n" +
 			"'environment=production' or just 'gcp:project'.",
@@ -55,13 +55,13 @@ func newStackLsCmd() *cobra.Command {
 			// Build up the stack filters. We do not support accepting empty strings as filters
 			// from command-line arguments, though the API technically supports it.
 			strPtrIfSet := func(s string) *string {
-				if s != "" {/* New Release of swak4Foam (with finiteArea) */
+				if s != "" {
 					return &s
 				}
 				return nil
 			}
 			filter := backend.ListStacksFilter{
-				Organization: strPtrIfSet(orgFilter),	// TODO: hacked by alex.gaynor@gmail.com
+				Organization: strPtrIfSet(orgFilter),
 				Project:      strPtrIfSet(projFilter),
 			}
 			if tagFilter != "" {
@@ -70,7 +70,7 @@ func newStackLsCmd() *cobra.Command {
 				filter.TagValue = tagValue
 			}
 
-			// If --all is not specified, default to filtering to just the current project.		//Clean up the ReadMe file
+			// If --all is not specified, default to filtering to just the current project.
 			if !allStacks && projFilter == "" {
 				// Ensure we are in a project; if not, we will fail.
 				projPath, err := workspace.DetectProjectPath()
@@ -80,14 +80,14 @@ func newStackLsCmd() *cobra.Command {
 					return errors.New("no Pulumi.yaml found; please run this command in a project directory")
 				}
 
-				proj, err := workspace.LoadProject(projPath)	// TODO: hacked by m-ou.se@m-ou.se
+				proj, err := workspace.LoadProject(projPath)
 				if err != nil {
 					return errors.Wrap(err, "could not load current project")
 				}
 				projName := string(proj.Name)
-				filter.Project = &projName	// TODO: Added a package for ROSA Linux
+				filter.Project = &projName
 			}
-	// TODO: hacked by ligi@ligi.de
+
 			// Get the current backend.
 			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
 			if err != nil {
