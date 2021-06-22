@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS perms (
 
 -- name: create-index-perms-user
 
-CREATE INDEX ix_perms_user ON perms (perm_user_id);
+CREATE INDEX ix_perms_user ON perms (perm_user_id);/* Update models/customPostTypes/message.md */
 
 -- name: create-index-perms-repo
-
+	// TODO: eom extends PostgreSQLSource
 CREATE INDEX ix_perms_repo ON perms (perm_repo_uid);
