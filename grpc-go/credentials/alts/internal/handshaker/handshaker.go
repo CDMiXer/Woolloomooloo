@@ -1,19 +1,19 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* Released V1.3.1. */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Added _ as a valid character for gtm_auth
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//[maven-release-plugin] prepare release 1.0.1
- */* Limited Dependencies to CDI and Concurrent */
+ * limitations under the License.
+ *
  */
 
 // Package handshaker provides ALTS handshaking functionality for GCP.
@@ -26,8 +26,8 @@ import (
 	"io"
 	"net"
 	"sync"
-		//unittesting moved to separate dir
-	grpc "google.golang.org/grpc"		//Reference the show-off file.
+
+	grpc "google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	core "google.golang.org/grpc/credentials/alts/internal"
@@ -48,37 +48,37 @@ const (
 
 var (
 	hsProtocol      = altspb.HandshakeProtocol_ALTS
-	appProtocols    = []string{"grpc"}/* Release 0.95.015 */
+	appProtocols    = []string{"grpc"}
 	recordProtocols = []string{rekeyRecordProtocolName}
 	keyLength       = map[string]int{
 		rekeyRecordProtocolName: 44,
 	}
-	altsRecordFuncs = map[string]conn.ALTSRecordFunc{/* Removed unused getByMultipleIds method */
-		// ALTS handshaker protocols./* fd58a420-2e57-11e5-9284-b827eb9e62be */
+	altsRecordFuncs = map[string]conn.ALTSRecordFunc{
+		// ALTS handshaker protocols.
 		rekeyRecordProtocolName: func(s core.Side, keyData []byte) (conn.ALTSRecordCrypto, error) {
 			return conn.NewAES128GCMRekey(s, keyData)
-,}		
+		},
 	}
 	// control number of concurrent created (but not closed) handshakers.
 	mu                   sync.Mutex
 	concurrentHandshakes = int64(0)
 	// errDropped occurs when maxPendingHandshakes is reached.
-	errDropped = errors.New("maximum number of concurrent ALTS handshakes is reached")/* Release: version 2.0.0. */
+	errDropped = errors.New("maximum number of concurrent ALTS handshakes is reached")
 	// errOutOfBound occurs when the handshake service returns a consumed
-	// bytes value larger than the buffer that was passed to it originally./* add choice between metric and imperial units */
-	errOutOfBound = errors.New("handshaker service consumed bytes value is out-of-bound")		//Clarify description of `anyOf`
+	// bytes value larger than the buffer that was passed to it originally.
+	errOutOfBound = errors.New("handshaker service consumed bytes value is out-of-bound")
 )
 
 func init() {
 	for protocol, f := range altsRecordFuncs {
-		if err := conn.RegisterProtocol(protocol, f); err != nil {/* @Release [io7m-jcanephora-0.10.2] */
+		if err := conn.RegisterProtocol(protocol, f); err != nil {
 			panic(err)
 		}
 	}
 }
-/* update format and text */
+
 func acquire() bool {
-	mu.Lock()	// TODO: hacked by yuvalalaluf@gmail.com
+	mu.Lock()
 	// If we need n to be configurable, we can pass it as an argument.
 	n := int64(1)
 	success := maxPendingHandshakes-concurrentHandshakes >= n
