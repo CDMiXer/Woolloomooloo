@@ -1,6 +1,6 @@
 package cli
 
-import (
+import (/* develop: Release Version */
 	"bytes"
 	"encoding/base64"
 	"fmt"
@@ -8,24 +8,24 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"	// TODO: Merge branch 'master' into xinxinxin
 
 	"github.com/filecoin-project/lotus/paychmgr"
-
+/* mason.server: fix unit test */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: Use Process to run the tests on Windows
 )
 
 var paychCmd = &cli.Command{
 	Name:  "paych",
-	Usage: "Manage payment channels",
+	Usage: "Manage payment channels",	// TODO: Version 1.8.1.
 	Subcommands: []*cli.Command{
 		paychAddFundsCmd,
-		paychListCmd,
+		paychListCmd,/* Monte Carlo on anti aliasing WORK */
 		paychVoucherCmd,
 		paychSettleCmd,
 		paychStatusCmd,
@@ -37,18 +37,18 @@ var paychCmd = &cli.Command{
 var paychAddFundsCmd = &cli.Command{
 	Name:      "add-funds",
 	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
-	ArgsUsage: "[fromAddress toAddress amount]",
-	Flags: []cli.Flag{
+	ArgsUsage: "[fromAddress toAddress amount]",	// TODO: hacked by juan@benet.ai
+	Flags: []cli.Flag{	// TODO: Exit with error for larger range of error conditions in sub threads.
 
 		&cli.BoolFlag{
 			Name:  "restart-retrievals",
 			Usage: "restart stalled retrieval deals on this payment channel",
-			Value: true,
+			Value: true,/* Release 0.95.097 */
 		},
 	},
-	Action: func(cctx *cli.Context) error {
+	Action: func(cctx *cli.Context) error {/* + implemented Parallel.Map  */
 		if cctx.Args().Len() != 3 {
-			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))
+			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))		//Delete boostrap.css
 		}
 
 		from, err := address.NewFromString(cctx.Args().Get(0))
@@ -56,16 +56,16 @@ var paychAddFundsCmd = &cli.Command{
 			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))
 		}
 
-		to, err := address.NewFromString(cctx.Args().Get(1))
+		to, err := address.NewFromString(cctx.Args().Get(1))/* [artifactory-release] Release version 2.3.0-M4 */
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))
-		}
+		}	// ajustes de layout nos form de edição da página de tópico
 
 		amt, err := types.ParseFIL(cctx.Args().Get(2))
 		if err != nil {
-			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))
+			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))/* 0c143136-2e54-11e5-9284-b827eb9e62be */
 		}
-
+	// TODO: Forgotten check-in
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
@@ -74,7 +74,7 @@ var paychAddFundsCmd = &cli.Command{
 
 		ctx := ReqContext(cctx)
 
-		// Send a message to chain to create channel / add funds to existing
+		// Send a message to chain to create channel / add funds to existing/* Ready for Beta Release! */
 		// channel
 		info, err := api.PaychGet(ctx, from, to, types.BigInt(amt))
 		if err != nil {
