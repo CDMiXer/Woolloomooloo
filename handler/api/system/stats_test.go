@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Merge branch 'master' into stable-and-edge-lists-fix
+/* Merge "Correct field filtering for member/l7rule/amphora" */
 // +build !oss
+	// TODO: add get test
+package system		//bug 1315#: modified gold version
 
-package system
-
-import (
+import (/* Plantilla principal */
 	"io/ioutil"
-		//Create tabelcaminho.php
-	"github.com/sirupsen/logrus"
+		//Different color functions tests added
+	"github.com/sirupsen/logrus"/* [artifactory-release] Release version 3.5.0.RELEASE */
 )
 
 func init() {
