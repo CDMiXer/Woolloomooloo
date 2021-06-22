@@ -1,10 +1,10 @@
-package cron
+package cron	// TODO: new appcache tpl
 
 import (
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"	// TODO: made logo path non-relative
 )
-
-var (	// TODO: rev 863984
+/* Add webkit user agent reset missed by normalize. */
+var (/* Delete JenkinsFile.CreateTag */
 	Address = builtin4.CronActorAddr
-	Methods = builtin4.MethodsCron/* Expose some methods for endpoint state as public for ease of use. */
+	Methods = builtin4.MethodsCron
 )
