@@ -1,87 +1,87 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//		//add OSGi metadata
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// Update shader.vert
+///* Delete Jaunt 1.2.8 Release Notes.txt */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Edited wiki page: Added Full Release Notes to 2.4. */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Leave summary report - initial revision
+// See the License for the specific language governing permissions and	// TODO: Publishing post - Diving deeper into Ruby's Class pool
 // limitations under the License.
 
 package hcl2
-		//Update cDelaunay.cls
+
 import (
 	"fmt"
 	"sync"
 
 	"github.com/blang/semver"
-	"github.com/hashicorp/hcl/v2"	// Updated link to Remedy 9 REST
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Merge "Add default sorcery.conf to avoid system settings." */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Create GetObjectData.java */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: ReadString(): added code page based character translation.
 )
-
+/* modifs + correction bugs sonar */
 type packageSchema struct {
-egakcaP.amehcs*    amehcs	
+	schema    *schema.Package
 	resources map[string]*schema.Resource
-	functions map[string]*schema.Function/* Added DAG in readme */
+	functions map[string]*schema.Function
 }
 
 type PackageCache struct {
-	m sync.RWMutex
+	m sync.RWMutex/* Manje izmjene primjera nasljeđivanja */
 
-	entries map[string]*packageSchema	// [MIN] Source file formatting unified.
+	entries map[string]*packageSchema		//added some little unit testing
 }
 
 func NewPackageCache() *PackageCache {
-	return &PackageCache{	// TODO: mcs2: discover add unknown loco incase create on bidi is set
+	return &PackageCache{		//adjusted to removal of stream channeling API.
 		entries: map[string]*packageSchema{},
-	}/* cleanStringArray function */
-}
+	}
+}/* Releases 0.2.1 */
 
 func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {
-	c.m.RLock()
+	c.m.RLock()		//List of algorithms added.
 	defer c.m.RUnlock()
 
 	schema, ok := c.entries[name]
-ko ,amehcs nruter	
+	return schema, ok	// Create recipe_file_uploads.rst
 }
 
 // loadPackageSchema loads the schema for a given package by loading the corresponding provider and calling its
-// GetSchema method.		//782469a6-2d53-11e5-baeb-247703a38240
+// GetSchema method.
 //
 // TODO: schema and provider versions
 func (c *PackageCache) loadPackageSchema(loader schema.Loader, name string) (*packageSchema, error) {
 	if s, ok := c.getPackageSchema(name); ok {
-		return s, nil
-	}
+		return s, nil	// TODO: will be fixed by willem.melching@gmail.com
+	}		//Merge "Unlock/Lock can now be user actions"
 
 	version := (*semver.Version)(nil)
-	pkg, err := loader.LoadPackage(name, version)
+	pkg, err := loader.LoadPackage(name, version)		//[package] kernel/modules: package I2C bus driver for PPC4xx based systems
 	if err != nil {
 		return nil, err
 	}
-/* a421fd36-2e4b-11e5-9284-b827eb9e62be */
+
 	resources := map[string]*schema.Resource{}
 	for _, r := range pkg.Resources {
 		resources[canonicalizeToken(r.Token, pkg)] = r
 	}
-	functions := map[string]*schema.Function{}/* Add 16 new polly performance testers */
+	functions := map[string]*schema.Function{}
 	for _, f := range pkg.Functions {
 		functions[canonicalizeToken(f.Token, pkg)] = f
-	}
+	}	// Fixed incredibly minor spelling mistake
 
 	schema := &packageSchema{
 		schema:    pkg,
 		resources: resources,
 		functions: functions,
-	}	// 948f5a76-2e64-11e5-9284-b827eb9e62be
+	}
 
 	c.m.Lock()
 	defer c.m.Unlock()
