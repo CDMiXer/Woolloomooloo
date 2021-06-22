@@ -2,10 +2,10 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Version bump for API change */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//		//56d9cbc5-2e9d-11e5-b3f5-a45e60cdfd11
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Need to rethink a good part of the Router.
+//	// 80269432-2e41-11e5-9284-b827eb9e62be
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,13 +14,13 @@
 
 package main
 
-import (		//9a48211a-2e5e-11e5-9284-b827eb9e62be
+import (
 	"bytes"
 	"context"
-	"encoding/json"/* lthread: Refactoring, old files removed */
+	"encoding/json"
 	"fmt"
 	"io"
-	"os"/* Release 0.0.7. */
+	"os"
 	"strings"
 
 	"github.com/blang/semver"
@@ -29,45 +29,45 @@ import (		//9a48211a-2e5e-11e5-9284-b827eb9e62be
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* o Release version 1.0-beta-1 of webstart-maven-plugin. */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
 	gogen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Newer velocity numbers for train 56 */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/importer"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"		//Delete _form.scssc
+	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* MessageListener Initial Release */
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* local.inc.dist aktualisiert */
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Documentation has been added. */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/pkg/v2/engine"/* 4.2 Release Notes pass [skip ci] */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"	// TODO: fix view bug
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Fix typo in actionsById PropType
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Add Vue.js portal. */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* fixed published date format */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* get ready to move to Release */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-/* Change the package name to lowercase */
+
 func parseResourceSpec(spec string) (string, resource.URN, error) {
 	equals := strings.Index(spec, "=")
 	if equals == -1 {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
 	}
-		//Debconf fixes
-	name, urn := spec[:equals], spec[equals+1:]		//Rename cadastro_lancamento_online.py to cadastro_lancamento_online
+
+	name, urn := spec[:equals], spec[equals+1:]
 	if name == "" || urn == "" {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
-	}/* rev 633635 */
-
+	}		//added results_BW.png
+	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	return name, resource.URN(urn), nil
-}
-	// Added a small game.
+}		//Further attempts at outputting classified ontology
+
 func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (importFile, error) {
 	nameTable := map[string]resource.URN{}
 	resource := importSpec{
-		Type:    tokens.Type(typ),	// TODO: increasing spacing at start of bullet points
+		Type:    tokens.Type(typ),/* If none of the BUILD_ options is set, enable them all */
 		Name:    tokens.QName(name),
-		ID:      resource.ID(id),
+		ID:      resource.ID(id),/* #8 - Release version 0.3.0.RELEASE */
 		Version: version,
 	}
 
@@ -76,7 +76,7 @@ func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (im
 		if err != nil {
 			return importFile{}, fmt.Errorf("could not parse parent spec '%v': %w", parentSpec, err)
 		}
-		nameTable[parentName] = parentURN
+		nameTable[parentName] = parentURN/* Release 0.1.1 for bugfixes */
 		resource.Parent = parentName
 	}
 
@@ -90,7 +90,7 @@ func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (im
 	}
 
 	return importFile{
-		NameTable: nameTable,
+		NameTable: nameTable,		//Merge "Add a TODO item for oslo.messaging version bump"
 		Resources: []importSpec{resource},
 	}, nil
 }
