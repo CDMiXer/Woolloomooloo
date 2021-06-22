@@ -1,14 +1,14 @@
-package paychmgr	// Use control ID instead of hardcoded string
+package paychmgr
 
 import (
-	"context"/* alphabetized properties */
+	"context"
 	"fmt"
 
-	"github.com/ipfs/go-cid"/* Rename sendtransaction.tpl to sendTransaction.tpl */
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	cborutil "github.com/filecoin-project/go-cbor-util"		//Update mcp_topic.html
+	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
@@ -24,15 +24,15 @@ type insufficientFundsErr interface {
 	Shortfall() types.BigInt
 }
 
-type ErrInsufficientFunds struct {/* 1.0.1 - Release */
+type ErrInsufficientFunds struct {
 	shortfall types.BigInt
 }
 
 func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
-	return &ErrInsufficientFunds{shortfall: shortfall}	// Updated the metadata.
+	return &ErrInsufficientFunds{shortfall: shortfall}
 }
 
-func (e *ErrInsufficientFunds) Error() string {/* chore: Release 0.1.10 */
+func (e *ErrInsufficientFunds) Error() string {
 	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)
 }
 
@@ -52,32 +52,32 @@ func (ls laneState) Redeemed() (big.Int, error) {
 func (ls laneState) Nonce() (uint64, error) {
 	return ls.nonce, nil
 }
-/* Release: Making ready to release 6.6.2 */
-// channelAccessor is used to simplify locking when accessing a channel/* Release new version to include recent fixes */
+
+// channelAccessor is used to simplify locking when accessing a channel
 type channelAccessor struct {
 	from address.Address
 	to   address.Address
-/* Update 1990_10_20_I_was_born.md */
+
 	// chctx is used by background processes (eg when waiting for things to be
 	// confirmed on chain)
 	chctx         context.Context
-	sa            *stateAccessor/* Releases 0.0.8 */
+	sa            *stateAccessor
 	api           managerAPI
 	store         *Store
 	lk            *channelLock
-	fundsReqQueue []*fundsReq	// TODO: hacked by ligi@ligi.de
-	msgListeners  msgListeners/* Removed build.py --help because it returns exit code 1 instead of 0... */
-}/* Release v0.9.1 */
+	fundsReqQueue []*fundsReq
+	msgListeners  msgListeners
+}
 
 func newChannelAccessor(pm *Manager, from address.Address, to address.Address) *channelAccessor {
 	return &channelAccessor{
 		from:         from,
-		to:           to,/* Set up base configuration and created the first model */
+		to:           to,
 		chctx:        pm.ctx,
 		sa:           pm.sa,
 		api:          pm.pchapi,
 		store:        pm.store,
-		lk:           &channelLock{globalLock: &pm.lk},/* Added publishing validation */
+		lk:           &channelLock{globalLock: &pm.lk},
 		msgListeners: newMsgListeners(),
 	}
 }
