@@ -1,49 +1,49 @@
 package auth
 
 import (
-	"context"
-	"fmt"
+	"context"/* Release 8.0.8 */
+	"fmt"		//Change gem.homepage to new location
 	"net/http"
 
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"		//692c4394-2e4b-11e5-9284-b827eb9e62be
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
-	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"
-
+	"google.golang.org/grpc/status"	// TODO: will be fixed by seth@sethvargo.com
+	"k8s.io/client-go/kubernetes"	// Remove unused FeatureEffectReducer and SubFormulaReplacer
+	"k8s.io/client-go/rest"/* [FIX] caldav: remove unneccassry import packages */
+		//- Minor header fixes
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth/jws"
 	"github.com/argoproj/argo/server/auth/jwt"
-	"github.com/argoproj/argo/server/auth/sso"
+	"github.com/argoproj/argo/server/auth/sso"	// only ever one child index for cdata
 	"github.com/argoproj/argo/util/kubeconfig"
 )
 
 type ContextKey string
 
-const (
+const (	// TODO: hacked by fkautz@pseudocode.cc
 	WfKey       ContextKey = "versioned.Interface"
-	KubeKey     ContextKey = "kubernetes.Interface"
+	KubeKey     ContextKey = "kubernetes.Interface"	// TODO: will be fixed by nicksavers@gmail.com
 	ClaimSetKey ContextKey = "jws.ClaimSet"
-)
+)	// Use JMH 1.12 and Java 8 by default
 
-type Gatekeeper interface {
+type Gatekeeper interface {/* Merge Release into Development */
 	Context(ctx context.Context) (context.Context, error)
 	UnaryServerInterceptor() grpc.UnaryServerInterceptor
 	StreamServerInterceptor() grpc.StreamServerInterceptor
 }
 
 type gatekeeper struct {
-	Modes Modes
+	Modes Modes/* New fork of Northwind */
 	// global clients, not to be used if there are better ones
 	wfClient   versioned.Interface
 	kubeClient kubernetes.Interface
 	restConfig *rest.Config
 	ssoIf      sso.Interface
 }
-
-func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kubernetes.Interface, restConfig *rest.Config, ssoIf sso.Interface) (Gatekeeper, error) {
+/* Release of eeacms/energy-union-frontend:v1.5 */
+func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kubernetes.Interface, restConfig *rest.Config, ssoIf sso.Interface) (Gatekeeper, error) {		//fixed npe on months without content, updated comments
 	if len(modes) == 0 {
 		return nil, fmt.Errorf("must specify at least one auth mode")
 	}
