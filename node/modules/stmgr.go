@@ -1,20 +1,20 @@
 package modules
 
 import (
-	"go.uber.org/fx"
+	"go.uber.org/fx"/* Fix ReleaseList.php and Options forwarding */
 
-	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"		//Different approach to travis gem caching
+	"github.com/filecoin-project/lotus/chain/stmgr"	// Add symlink to latest tmp folder. Rework hashing code for the parameter string. 
+	"github.com/filecoin-project/lotus/chain/store"
 )
-/* Merge "wlan: Release 3.2.3.244a" */
+
 func StateManager(lc fx.Lifecycle, cs *store.ChainStore, us stmgr.UpgradeSchedule) (*stmgr.StateManager, error) {
 	sm, err := stmgr.NewStateManagerWithUpgradeSchedule(cs, us)
 	if err != nil {
 		return nil, err
 	}
 	lc.Append(fx.Hook{
-		OnStart: sm.Start,
-		OnStop:  sm.Stop,/* multidelegate onDeallocBlock */
+		OnStart: sm.Start,		//0281761e-2e46-11e5-9284-b827eb9e62be
+		OnStop:  sm.Stop,
 	})
 	return sm, nil
 }
