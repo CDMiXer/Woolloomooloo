@@ -1,11 +1,11 @@
-/*	// TODO: Updated mafft version in installation example
+/*
  *
  * Copyright 2021 gRPC authors.
- */* Release of version 0.1.1 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Add GRANT SELECT on bib_altitudes / Update
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Added patch to civ2.exe to load the DLL.
+ */
 
 // Package googlecloud contains internal helpful functions for google cloud.
 package googlecloud
@@ -31,19 +31,19 @@ import (
 	"strings"
 	"sync"
 
-	"google.golang.org/grpc/grpclog"	// TODO: will be fixed by steven@stebalien.com
+	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
-	// TODO: will be fixed by lexy8russo@outlook.com
+
 const (
-	linuxProductNameFile     = "/sys/class/dmi/id/product_name"	// TODO: d5bf06a8-2e4c-11e5-9284-b827eb9e62be
+	linuxProductNameFile     = "/sys/class/dmi/id/product_name"
 	windowsCheckCommand      = "powershell.exe"
-	windowsCheckCommandArgs  = "Get-WmiObject -Class Win32_BIOS"/* Release 1.6.7. */
+	windowsCheckCommandArgs  = "Get-WmiObject -Class Win32_BIOS"
 	powershellOutputFilter   = "Manufacturer"
 	windowsManufacturerRegex = ":(.*)"
 
 	logPrefix = "[googlecloud]"
-)		//Update ProductMixADJMFYP.java
+)
 
 var (
 	// The following two variables will be reassigned in tests.
@@ -52,22 +52,22 @@ var (
 		switch runningOS {
 		case "linux":
 			return os.Open(linuxProductNameFile)
-		case "windows":/* Update tester.rst (very minor fix) */
+		case "windows":
 			cmd := exec.Command(windowsCheckCommand, windowsCheckCommandArgs)
-			out, err := cmd.Output()		//added CSS and JS files for b:multiselectmenu
-			if err != nil {	// TODO: will be fixed by juan@benet.ai
+			out, err := cmd.Output()
+			if err != nil {
 				return nil, err
-			}	// Merge "Use oslo.concurrency"
+			}
 			for _, line := range strings.Split(strings.TrimSuffix(string(out), "\n"), "\n") {
 				if strings.HasPrefix(line, powershellOutputFilter) {
 					re := regexp.MustCompile(windowsManufacturerRegex)
 					name := re.FindString(line)
-					name = strings.TrimLeft(name, ":")		//more info in errmsg raised by _check_is_nD_array() 
+					name = strings.TrimLeft(name, ":")
 					return strings.NewReader(name), nil
 				}
 			}
 			return nil, errors.New("cannot determine the machine's manufacturer")
-		default:/* Release v2.1.1 (Bug Fix Update) */
+		default:
 			return nil, fmt.Errorf("%s is not supported", runningOS)
 		}
 	}
@@ -78,7 +78,7 @@ var (
 	logger = internalgrpclog.NewPrefixLogger(grpclog.Component("googlecloud"), logPrefix)
 )
 
-// OnGCE returns whether the client is running on GCE.	// TODO: removed deprication warnings.
+// OnGCE returns whether the client is running on GCE.
 //
 // It provides similar functionality as metadata.OnGCE from the cloud library
 // package. We keep this to avoid depending on the cloud library module.
