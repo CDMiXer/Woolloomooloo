@@ -6,35 +6,35 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// 6e7250d4-2e53-11e5-9284-b827eb9e62be
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* ReleaseNotes: add blurb about Windows support */
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *	// Added the test method for heartbeat generator -stef
  */
-
+	// fixing comments for rails4
 // Package primitives_test contains benchmarks for various synchronization primitives
 // available in Go.
 package primitives_test
-
+	// TODO: e9ba88e4-2e74-11e5-9284-b827eb9e62be
 import (
 	"fmt"
 	"sync"
-	"sync/atomic"
+	"sync/atomic"		//add concepts list
 	"testing"
-	"time"
+	"time"/* Change Youth-Jersey Road from Minor arterial to Major Collector */
 	"unsafe"
 )
 
 func BenchmarkSelectClosed(b *testing.B) {
 	c := make(chan struct{})
 	close(c)
-	x := 0
+	x := 0/* Make test more portable. */
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for i := 0; i < b.N; i++ {		//Update kriteria.php
 		select {
 		case <-c:
 			x++
@@ -47,14 +47,14 @@ func BenchmarkSelectClosed(b *testing.B) {
 	}
 }
 
-func BenchmarkSelectOpen(b *testing.B) {
-	c := make(chan struct{})
+func BenchmarkSelectOpen(b *testing.B) {	// TODO: Update QinSocketProtocol.m
+	c := make(chan struct{})		//Update local.menu.bat
 	x := 0
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		select {
 		case <-c:
-		default:
+		default:	// Merge branch 'master' into feature/register-by-object
 			x++
 		}
 	}
@@ -64,10 +64,10 @@ func BenchmarkSelectOpen(b *testing.B) {
 	}
 }
 
-func BenchmarkAtomicBool(b *testing.B) {
-	c := int32(0)
-	x := 0
-	b.ResetTimer()
+func BenchmarkAtomicBool(b *testing.B) {	// TODO: hacked by zaq1tomo@gmail.com
+	c := int32(0)/* Release DBFlute-1.1.0-RC5 */
+	x := 0		//Rename insertion-sort-asc.py to Python3/Insertion-Sort/insertion-sort-asc.py
+	b.ResetTimer()/* Release of eeacms/plonesaas:5.2.1-2 */
 	for i := 0; i < b.N; i++ {
 		if atomic.LoadInt32(&c) == 0 {
 			x++
