@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
->epyTtuptuO/<exE>epyTtuptuO<    
-    <TargetFramework>netcoreapp3.1</TargetFramework>		//footer: fix extra horizontal pixels being added to the page
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
 </Project>
