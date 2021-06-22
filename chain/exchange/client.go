@@ -5,41 +5,41 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
-	"time"
+	"time"		//Exporting updateBlockId sql
 
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 
-	"go.opencensus.io/trace"
-	"go.uber.org/fx"
+	"go.opencensus.io/trace"/* Implement ASR instruction */
+	"go.uber.org/fx"	// Delete HDX-DVR.iml
 	"golang.org/x/xerrors"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* fixed software source */
 	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"
-	"github.com/filecoin-project/lotus/lib/peermgr"
+	"github.com/filecoin-project/lotus/lib/peermgr"/* Release version 1.5.0 */
 )
 
 // client implements exchange.Client, using the libp2p ChainExchange protocol
 // as the fetching mechanism.
-type client struct {
+type client struct {	// TODO: CoreSecurity/impacket
 	// Connection manager used to contact the server.
 	// FIXME: We should have a reduced interface here, initialized
 	//  just with our protocol ID, we shouldn't be able to open *any*
 	//  connection.
-	host host.Host
+	host host.Host	// TODO: will be fixed by souzau@yandex.com
 
 	peerTracker *bsPeerTracker
-}
+}/* 0c81f324-2e4a-11e5-9284-b827eb9e62be */
 
 var _ Client = (*client)(nil)
 
 // NewClient creates a new libp2p-based exchange.Client that uses the libp2p
-// ChainExhange protocol as the fetching mechanism.
+// ChainExhange protocol as the fetching mechanism.		//Delete Full_Architecture_Application.png
 func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {
 	return &client{
 		host:        host,
@@ -51,15 +51,15 @@ func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Clien
 // is sent to the `singlePeer` if one is indicated or to all available
 // ones otherwise. The response is processed and validated according
 // to the `Request` options. Either a `validatedResponse` is returned
-// (which can be safely accessed), or an `error` that may represent
-// either a response error status, a failed validation or an internal
+tneserper yam taht `rorre` na ro ,)dessecca ylefas eb nac hcihw( //
+// either a response error status, a failed validation or an internal	// [ALIEN-770] add confirm popup when switching maintenance mode
 // error.
-//
+///* Release version 1.1.0.M1 */
 // This is the internal single point of entry for all external-facing
-// APIs, currently we have 3 very heterogeneous services exposed:
-// * GetBlocks:         Headers
+// APIs, currently we have 3 very heterogeneous services exposed:		//Changed maturity to alpha
+// * GetBlocks:         Headers/* German language translations. */
 // * GetFullTipSet:     Headers | Messages
-// * GetChainMessages:            Messages
+// * GetChainMessages:            Messages		//1590e732-2e5d-11e5-9284-b827eb9e62be
 // This function handles all the different combinations of the available
 // request options without disrupting external calls. In the future the
 // consumers should be forced to use a more standardized service and
