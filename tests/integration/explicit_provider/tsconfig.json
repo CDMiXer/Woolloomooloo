@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {/* global gvTerminosBh */
-        "strict": true,
-        "outDir": "bin",/* Release '0.2~ppa6~loms~lucid'. */
+    "compilerOptions": {/* import row */
+        "strict": true,/* Release 2.2.0.0 */
+        "outDir": "bin",/*  - enhancement: added file header */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,	// Update and rename app.js to anim.js
+        "declaration": true,	// TODO: hacked by indexxuan@gmail.com
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,/* Merge "Add timeout for tests execution" */
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,		//Trunk: correction of r3529
-        "noImplicitReturns": true,/* Fix Release builds of browser and libhid to be universal */
-        "forceConsistentCasingInFileNames": true
-    },
-    "files": [/* Added missing word "recent" to sentence */
+        "pretty": true,	// Remove useless variable
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true/* Back to CSVSol */
+    },/* Released 0.6.2 */
+    "files": [
         "index.ts"
     ]
 }
-
+	// TODO: fix lseek to _lseek for Win32
