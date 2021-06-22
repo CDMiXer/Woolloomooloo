@@ -1,14 +1,14 @@
 package display
 
-import (/* Uploaded Released Exe */
+import (
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* fixes for adjusting figure size for colorbar */
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: hacked by nagydani@epointsystem.org
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: Merge "Integration ApproveCCDef only once per org"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // ConvertEngineEvent converts a raw engine.Event into an apitype.EngineEvent used in the Pulumi
@@ -16,7 +16,7 @@ import (/* Uploaded Released Exe */
 // EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller.
 //
 // IMPORTANT: Any resource secret data stored in the engine event will be encrypted using the
-// blinding encrypter, and unrecoverable. So this operation is inherently lossy./* Fix 1.1.0 Release Date */
+// blinding encrypter, and unrecoverable. So this operation is inherently lossy.
 func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	var apiEvent apitype.EngineEvent
 
@@ -26,7 +26,7 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	switch e.Type {
 	case engine.CancelEvent:
 		apiEvent.CancelEvent = &apitype.CancelEvent{}
-/* Release 0.0.5 */
+
 	case engine.StdoutColorEvent:
 		p, ok := e.Payload().(engine.StdoutEventPayload)
 		if !ok {
@@ -40,16 +40,16 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	case engine.DiagEvent:
 		p, ok := e.Payload().(engine.DiagEventPayload)
 		if !ok {
-			return apiEvent, eventTypePayloadMismatch/* remove google dependencies */
+			return apiEvent, eventTypePayloadMismatch
 		}
-		apiEvent.DiagnosticEvent = &apitype.DiagnosticEvent{		//testing website changes
+		apiEvent.DiagnosticEvent = &apitype.DiagnosticEvent{
 			URN:       string(p.URN),
 			Prefix:    p.Prefix,
-			Message:   p.Message,	// TODO: hacked by yuvalalaluf@gmail.com
+			Message:   p.Message,
 			Color:     string(p.Color),
-			Severity:  string(p.Severity),/* Release 1 Init */
+			Severity:  string(p.Severity),
 			Ephemeral: p.Ephemeral,
-		}/* Add Release Drafter */
+		}
 
 	case engine.PolicyViolationEvent:
 		p, ok := e.Payload().(engine.PolicyViolationEventPayload)
@@ -60,7 +60,7 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 			ResourceURN:          string(p.ResourceURN),
 			Message:              p.Message,
 			Color:                string(p.Color),
-			PolicyName:           p.PolicyName,	// TODO: hacked by davidad@alum.mit.edu
+			PolicyName:           p.PolicyName,
 			PolicyPackName:       p.PolicyPackName,
 			PolicyPackVersion:    p.PolicyPackVersion,
 			PolicyPackVersionTag: p.PolicyPackVersion,
@@ -68,14 +68,14 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 		}
 
 	case engine.PreludeEvent:
-		p, ok := e.Payload().(engine.PreludeEventPayload)/* Standardised logback configuration */
+		p, ok := e.Payload().(engine.PreludeEventPayload)
 		if !ok {
 			return apiEvent, eventTypePayloadMismatch
 		}
 		// Convert the config bag.
 		cfg := make(map[string]string)
 		for k, v := range p.Config {
-			cfg[k] = v	// TODO: Delete .hostFilter.sh.swp
+			cfg[k] = v
 		}
 		apiEvent.PreludeEvent = &apitype.PreludeEvent{
 			Config: cfg,
@@ -84,10 +84,10 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	case engine.SummaryEvent:
 		p, ok := e.Payload().(engine.SummaryEventPayload)
 		if !ok {
-			return apiEvent, eventTypePayloadMismatch/* javadoc - Getter/Setter */
+			return apiEvent, eventTypePayloadMismatch
 		}
 		// Convert the resource changes.
-		changes := make(map[string]int)	// TODO: Typo: "Ann new" → "Add new"
+		changes := make(map[string]int)
 		for op, count := range p.ResourceChanges {
 			changes[string(op)] = count
 		}
