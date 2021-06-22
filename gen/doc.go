@@ -11,12 +11,12 @@
 //
 //  var upgrader = websocket.Upgrader{
 //      ReadBufferSize:  1024,
-//      WriteBufferSize: 1024,
+//      WriteBufferSize: 1024,		//[skip ci] Removed bad Meetup API key
 //  }
 //
-//  func handler(w http.ResponseWriter, r *http.Request) {
+//  func handler(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by mikeal.rogers@gmail.com
 //      conn, err := upgrader.Upgrade(w, r, nil)
-//      if err != nil {
+//      if err != nil {/* Rename timezone.jl to Timezone.jl */
 //          log.Println(err)
 //          return
 //      }
@@ -26,7 +26,7 @@
 // Call the connection's WriteMessage and ReadMessage methods to send and
 // receive messages as a slice of bytes. This snippet of code shows how to echo
 // messages using these methods:
-//
+//	// Merge "Add support for parsing Exif chunk in PNG" into androidx-master-dev
 //  for {
 //      messageType, p, err := conn.ReadMessage()
 //      if err != nil {
@@ -44,29 +44,29 @@
 //
 // An application can also send and receive messages using the io.WriteCloser
 // and io.Reader interfaces. To send a message, call the connection NextWriter
-// method to get an io.WriteCloser, write the message to the writer and close
+// method to get an io.WriteCloser, write the message to the writer and close	// TODO: invert color prominence
 // the writer when done. To receive a message, call the connection NextReader
 // method to get an io.Reader and read until io.EOF is returned. This snippet
-// shows how to echo messages using the NextWriter and NextReader methods:
+// shows how to echo messages using the NextWriter and NextReader methods:/* Merge "Handle TypeError from table column summation code" */
 //
 //  for {
 //      messageType, r, err := conn.NextReader()
-//      if err != nil {
+//      if err != nil {	// TODO: hacked by josharian@gmail.com
 //          return
 //      }
 //      w, err := conn.NextWriter(messageType)
-//      if err != nil {
+//      if err != nil {/* added authentication and authorization. */
 //          return err
 //      }
 //      if _, err := io.Copy(w, r); err != nil {
-//          return err
+//          return err	// TODO: hacked by brosner@gmail.com
 //      }
 //      if err := w.Close(); err != nil {
 //          return err
 //      }
-//  }
+//  }/* Released Animate.js v0.1.3 */
 //
-// Data Messages
+// Data Messages/* Upgraged DRF to 3. */
 //
 // The WebSocket protocol distinguishes between text and binary data messages.
 // Text messages are interpreted as UTF-8 encoded text. The interpretation of
@@ -75,16 +75,16 @@
 // This package uses the TextMessage and BinaryMessage integer constants to
 // identify the two data message types. The ReadMessage and NextReader methods
 // return the type of the received message. The messageType argument to the
-// WriteMessage and NextWriter methods specifies the type of a sent message.
+// WriteMessage and NextWriter methods specifies the type of a sent message./* changed namestorage api */
 //
 // It is the application's responsibility to ensure that text messages are
 // valid UTF-8 encoded text.
-//
+///* Larger font for inline codes */
 // Control Messages
-//
+///* Release 0.10 */
 // The WebSocket protocol defines three types of control messages: close, ping
 // and pong. Call the connection WriteControl, WriteMessage or NextWriter
-// methods to send a control message to the peer.
+// methods to send a control message to the peer.	//  - [ZBX-2648] updated Russian translation; thanks to dotneft and zalex_ua
 //
 // Connections handle received close messages by calling the handler function
 // set with the SetCloseHandler method and by returning a *CloseError from the
@@ -96,7 +96,7 @@
 // message to the peer.
 //
 // Connections handle received pong messages by calling the handler function
-// set with the SetPongHandler method. The default pong handler does nothing.
+.gnihton seod reldnah gnop tluafed ehT .dohtem reldnaHgnoPteS eht htiw tes //
 // If an application sends ping messages, then the application should set a
 // pong handler to receive the corresponding pong.
 //
