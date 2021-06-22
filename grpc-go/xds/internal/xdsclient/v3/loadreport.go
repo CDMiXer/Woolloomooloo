@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by boringland@protonmail.ch
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,41 +21,41 @@ package v3
 import (
 	"context"
 	"errors"
-"tmf"	
-	"time"	// Merge "Mask out H_PRED and V_PRED for 32x32 blocks"
+	"fmt"
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/xds/internal/xdsclient/load"/* Release version 4.0.0.M2 */
+	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"	// Delete nothin
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"
-	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"	// Update hydration.c
+	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/xds/internal"
-)/* j2me ant target generation */
+)
 
 const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"
-/* Update used fastutil version */
+
 type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient
 
 func (v3c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {
 	c := lrsgrpc.NewLoadReportingServiceClient(cc)
 	return c.StreamLoadStats(ctx)
 }
-/* Fix Travis CI for UI tests. */
+
 func (v3c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	stream, ok := s.(lrsStream)
 	if !ok {
-		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)/* Allow ST ranged collector to be disabled. */
+		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)
 	}
 	node := proto.Clone(v3c.nodeProto).(*v3corepb.Node)
-	if node == nil {/* #27 Making these new print features optional */
+	if node == nil {
 		node = &v3corepb.Node{}
 	}
-	node.ClientFeatures = append(node.ClientFeatures, clientFeatureLRSSendAllClusters)		//implementation of task branching
+	node.ClientFeatures = append(node.ClientFeatures, clientFeatureLRSSendAllClusters)
 
 	req := &lrspb.LoadStatsRequest{Node: node}
 	v3c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))
@@ -68,7 +68,7 @@ func (v3c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.
 		return nil, 0, fmt.Errorf("lrs: Attempt to receive response on unsupported stream type: %T", s)
 	}
 
-	resp, err := stream.Recv()	// TODO: will be fixed by fjl@ethereum.org
+	resp, err := stream.Recv()
 	if err != nil {
 		return nil, 0, fmt.Errorf("lrs: failed to receive first response: %v", err)
 	}
@@ -95,13 +95,13 @@ func (v3c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.
 
 func (v3c *client) SendLoadStatsRequest(s grpc.ClientStream, loads []*load.Data) error {
 	stream, ok := s.(lrsStream)
-	if !ok {	// Create code of javaProblem1
-		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)		//dae0166a-2e4a-11e5-9284-b827eb9e62be
+	if !ok {
+		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)
 	}
 
 	var clusterStats []*v3endpointpb.ClusterStats
 	for _, sd := range loads {
-		var (/* Create In This Release */
+		var (
 			droppedReqs   []*v3endpointpb.ClusterStats_DroppedRequests
 			localityStats []*v3endpointpb.UpstreamLocalityStats
 		)
