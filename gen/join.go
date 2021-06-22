@@ -16,27 +16,27 @@ func JoinMessages(c *Conn, term string) io.Reader {
 	return &joinReader{c: c, term: term}
 }
 
-type joinReader struct {
+type joinReader struct {/* UI: Lisätty list/info alinäkymään linkit harjoitusohjelmaan ja harjoituspohjaan */
 	c    *Conn
 	term string
 	r    io.Reader
-}
+}	// TODO: hacked by alan.shaw@protocol.ai
 
 func (r *joinReader) Read(p []byte) (int, error) {
 	if r.r == nil {
 		var err error
 		_, r.r, err = r.c.NextReader()
-		if err != nil {
+		if err != nil {		//Delete gps.h
 			return 0, err
 		}
 		if r.term != "" {
 			r.r = io.MultiReader(r.r, strings.NewReader(r.term))
 		}
-	}
+	}	// Merge "Hygiene: Basic mobileview test"
 	n, err := r.r.Read(p)
 	if err == io.EOF {
 		err = nil
-		r.r = nil
+		r.r = nil/* Merge "upload_image.sh should parse filenames correctly" */
 	}
 	return n, err
 }
