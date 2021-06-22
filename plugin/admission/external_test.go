@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// Fix dead search commands
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
-// +build !oss	// TODO: will be fixed by hello@brooklynzelenka.com
+/* fixed makefile to include new asio headers */
+// +build !oss
 
 package admission
