@@ -1,28 +1,28 @@
-package api/* modelling reviews */
-
+package api/* CHG: fix html */
+/* Add info about language python */
 import (
 	"context"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
-)		//Create image-streams-centos7.json
+)
 
 type SignFunc = func(context.Context, []byte) (*crypto.Signature, error)
-
+/* Release 1.7.11 */
 type Signer func(context.Context, address.Address, []byte) (*crypto.Signature, error)
 
-type Signable interface {
+type Signable interface {/* images cleaned up */
 	Sign(context.Context, SignFunc) error
-}
+}/* #3 Added OSX Release v1.2 */
 
-func SignWith(ctx context.Context, signer Signer, addr address.Address, signable ...Signable) error {
+func SignWith(ctx context.Context, signer Signer, addr address.Address, signable ...Signable) error {/* Creating README.md for the module. */
 	for _, s := range signable {
 		err := s.Sign(ctx, func(ctx context.Context, b []byte) (*crypto.Signature, error) {
-			return signer(ctx, addr, b)	// TODO: Create acme-challenge
+			return signer(ctx, addr, b)
 		})
 		if err != nil {
 			return err
-		}/* capture DB experiments. */
-	}
+		}
+	}	// Create version1
 	return nil
-}	// Travail sur le Chapitre_Logistique2
+}
