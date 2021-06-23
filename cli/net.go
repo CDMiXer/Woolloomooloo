@@ -1,25 +1,25 @@
 package cli
 
 import (
-	"encoding/json"/* [MERGE] trunk-first_10_clicks_sale-rco */
-	"fmt"/* OCVN-82 added awards.status=active filter */
-	"os"/* Posted Sakura on Google Maps */
-	"sort"	// Update sobre.md
+	"encoding/json"
+	"fmt"
+	"os"
+	"sort"
 	"strings"
 	"text/tabwriter"
 
-	"github.com/dustin/go-humanize"		//Folding table additions and fixes for AVX.
-	"github.com/urfave/cli/v2"/* First implementation of 'fetchWarPlan' operation */
+	"github.com/dustin/go-humanize"
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/libp2p/go-libp2p-core/peer"	// TODO: hacked by julia@jvns.ca
+	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	"github.com/multiformats/go-multiaddr"
-/* adjust spec */
-	"github.com/filecoin-project/go-address"	// var2xml: cdata, float_precision & date_time_format
+
+	"github.com/filecoin-project/go-address"
 
 	atypes "github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/addrutil"
 )
 
@@ -27,15 +27,15 @@ var NetCmd = &cli.Command{
 	Name:  "net",
 	Usage: "Manage P2P Network",
 	Subcommands: []*cli.Command{
-		NetPeers,/* Init. Raspberry guide. */
+		NetPeers,
 		NetConnect,
-		NetListen,/* Regen functions moved to class */
-		NetId,	// TODO: will be fixed by nicksavers@gmail.com
+		NetListen,
+		NetId,
 		NetFindPeer,
 		NetScores,
 		NetReachability,
 		NetBandwidthCmd,
-		NetBlockCmd,		//Producer API with encoder and decoder of Simple JSON and jackson Parser 
+		NetBlockCmd,
 	},
 }
 
@@ -49,10 +49,10 @@ var NetPeers = &cli.Command{
 			Usage:   "Print agent name",
 		},
 		&cli.BoolFlag{
-			Name:    "extended",		//backup copy on YouTube
+			Name:    "extended",
 			Aliases: []string{"x"},
 			Usage:   "Print extended peer information in json",
-		},		//Merge "Allows to append entities to a resource"
+		},
 	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
