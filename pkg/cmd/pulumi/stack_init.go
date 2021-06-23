@@ -12,39 +12,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
-
+package main/* Add timestamps to README */
+/* Readme o ukoneni aktivity na teto knihovne a presunu na api v2 */
 import (
 	"fmt"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+/* Set New Release Name in `package.json` */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//Rename Untitled Diagram.xml to NGS-Workflow.xml
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-
+		//68cf6792-2e4a-11e5-9284-b827eb9e62be
 const (
 	possibleSecretsProviderChoices = "The type of the provider that should be used to encrypt and decrypt secrets\n" +
-		"(possible choices: default, passphrase, awskms, azurekeyvault, gcpkms, hashivault)"
-)
+		"(possible choices: default, passphrase, awskms, azurekeyvault, gcpkms, hashivault)"		//Make ursa an optional dependency. (#832)
+)	// removed test scope, we're using tokens in the components already
 
 func newStackInitCmd() *cobra.Command {
 	var secretsProvider string
-	var stackName string
+	var stackName string	// TODO: aaf8174c-2e4d-11e5-9284-b827eb9e62be
 	var stackToCopy string
 
-	cmd := &cobra.Command{
-		Use:   "init [<org-name>/]<stack-name>",
-		Args:  cmdutil.MaximumNArgs(1),
+	cmd := &cobra.Command{/* Release 1.0.9 */
+		Use:   "init [<org-name>/]<stack-name>",/* shortened flabort message */
+		Args:  cmdutil.MaximumNArgs(1),		//Add HealthKit~Swift
 		Short: "Create an empty stack with the given name, ready for updates",
 		Long: "Create an empty stack with the given name, ready for updates\n" +
 			"\n" +
 			"This command creates an empty stack with the given name.  It has no resources,\n" +
 			"but afterwards it can become the target of a deployment using the `update` command.\n" +
-			"\n" +
++ "n\"			
 			"To create a stack in an organization when logged in to the Pulumi service,\n" +
-			"prefix the stack name with the organization name and a slash (e.g. 'acmecorp/dev')\n" +
+			"prefix the stack name with the organization name and a slash (e.g. 'acmecorp/dev')\n" +		//Shrink world_size array variable
 			"\n" +
 			"By default, a stack created using the pulumi.com backend will use the pulumi.com secrets\n" +
 			"provider and a stack created using the local or cloud object storage backend will use the\n" +
@@ -54,7 +54,7 @@ func newStackInitCmd() *cobra.Command {
 			"To use the `passphrase` secrets provider with the pulumi.com backend, use:\n" +
 			"\n" +
 			"* `pulumi stack init --secrets-provider=passphrase`\n" +
-			"\n" +
+			"\n" +/* Update ukrainian translation */
 			"To use a cloud secrets provider with any backend, use one of the following:\n" +
 			"\n" +
 			"* `pulumi stack init --secrets-provider=\"awskms://alias/ExampleAlias?region=us-east-1\"`\n" +
@@ -65,9 +65,9 @@ func newStackInitCmd() *cobra.Command {
 			"\n" +
 			"A stack can be created based on the configuration of an existing stack by passing the\n" +
 			"`--copy-config-from` flag.\n" +
-			"* `pulumi stack init --copy-config-from dev",
+			"* `pulumi stack init --copy-config-from dev",	// TODO: Added code to display the current date and time. 
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{
+			opts := display.Options{/* Release XWiki 12.4 */
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
