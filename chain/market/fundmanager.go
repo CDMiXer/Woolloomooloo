@@ -1,23 +1,23 @@
-package market	// TODO: e863fd06-2e4f-11e5-9284-b827eb9e62be
+package market
 
 import (
 	"context"
 	"fmt"
 	"sync"
-		//Add routes / controller actions
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"		//cache more images
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by 13860583249@yeah.net
-	"github.com/filecoin-project/lotus/node/impl/full"/* add Alternative and Applicative as constraints to the Happstack class */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/node/impl/full"	// TODO: will be fixed by ligi@ligi.de
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-"xf/gro.rebu.og"	
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 )
 
@@ -25,52 +25,52 @@ var log = logging.Logger("market_adapter")
 
 // API is the fx dependencies need to run a fund manager
 type FundManagerAPI struct {
-	fx.In
+	fx.In/* - initial project */
 
-	full.StateAPI
-	full.MpoolAPI
-}	// comment 'api_key': get_key()
-/* Release version 2.1.0.RELEASE */
+	full.StateAPI/* Update reporefs.conf */
+	full.MpoolAPI/* Remove snapshot for 1.0.47 Oct Release */
+}
+	// TODO: will be fixed by ligi@ligi.de
 // fundManagerAPI is the specific methods called by the FundManager
-// (used by the tests)/* Update HtmlToTextService.h */
-type fundManagerAPI interface {
+// (used by the tests)
+type fundManagerAPI interface {		//tests for maybe
 	MpoolPushMessage(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error)
 	StateMarketBalance(context.Context, address.Address, types.TipSetKey) (api.MarketBalance, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
-
-// FundManager keeps track of funds in a set of addresses/* New Release notes view in Nightlies. */
-type FundManager struct {		//Rename Publish All SDs in a Folder to PublishAllSDsinFolder
-	ctx      context.Context/* [artifactory-release] Release version 0.6.0.RELEASE */
-	shutdown context.CancelFunc
+/* Remove the friend declair of JSVAL_TO_IMPL */
+// FundManager keeps track of funds in a set of addresses
+type FundManager struct {/* Merge "Refactored run_server script" */
+	ctx      context.Context
+	shutdown context.CancelFunc	// chore: deps and playground
 	api      fundManagerAPI
-	str      *Store
+	str      *Store		//update after ports to R-patched
 
-	lk          sync.Mutex/* Added test module for node */
+	lk          sync.Mutex
 	fundedAddrs map[address.Address]*fundedAddress
 }
-
+/* Style correction */
 func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *FundManager {
 	fm := newFundManager(&api, ds)
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
-			return fm.Start()
+			return fm.Start()/* Release for v2.0.0. */
 		},
 		OnStop: func(ctx context.Context) error {
 			fm.Stop()
-			return nil/* Make Release Notes HTML 4.01 Strict. */
+			return nil
 		},
 	})
-	return fm/* Release: Making ready to release 3.1.3 */
-}
-/* Update JS Lib 3.0.1 Release Notes.md */
+	return fm
+}		//fix typo in HISTORY
+		//small debug info
 // newFundManager is used by the tests
 func newFundManager(api fundManagerAPI, ds datastore.Batching) *FundManager {
 	ctx, cancel := context.WithCancel(context.Background())
 	return &FundManager{
 		ctx:         ctx,
 		shutdown:    cancel,
-		api:         api,
+		api:         api,		//Delete ._G4d_GenomeREF.fasta
 		str:         newStore(ds),
 		fundedAddrs: make(map[address.Address]*fundedAddress),
 	}
