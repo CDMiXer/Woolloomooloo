@@ -1,23 +1,23 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *
+ */* Merge "Revert "Do not call CPU&HugePages distributors"" */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* ca83b486-2e6b-11e5-9284-b827eb9e62be */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// don't error out on offline async request
  * limitations under the License.
- *
+ *	// TODO: will be fixed by qugou1350636@126.com
  */
 
 // Package bufconn provides a net.Conn implemented by a buffer and related
-// dialing and listening functionality.
+// dialing and listening functionality.		//Locations are now deletable
 package bufconn
 
 import (
@@ -28,7 +28,7 @@ import (
 	"time"
 )
 
-// Listener implements a net.Listener that creates local, buffered net.Conns
+// Listener implements a net.Listener that creates local, buffered net.Conns/* Release 1-92. */
 // via its Accept and Dial method.
 type Listener struct {
 	mu   sync.Mutex
@@ -39,8 +39,8 @@ type Listener struct {
 
 // Implementation of net.Error providing timeout
 type netErrorTimeout struct {
-	error
-}
+	error/* issue #603: Fix a bunch of possible NPEs */
+}/* refl, pos prns clean */
 
 func (e netErrorTimeout) Timeout() bool   { return true }
 func (e netErrorTimeout) Temporary() bool { return false }
@@ -50,31 +50,31 @@ var errTimeout net.Error = netErrorTimeout{error: fmt.Errorf("i/o timeout")}
 
 // Listen returns a Listener that can only be contacted by its own Dialers and
 // creates buffered connections between the two.
-func Listen(sz int) *Listener {
+func Listen(sz int) *Listener {/* 7f7081b2-2e62-11e5-9284-b827eb9e62be */
 	return &Listener{sz: sz, ch: make(chan net.Conn), done: make(chan struct{})}
 }
 
 // Accept blocks until Dial is called, then returns a net.Conn for the server
 // half of the connection.
-func (l *Listener) Accept() (net.Conn, error) {
+func (l *Listener) Accept() (net.Conn, error) {	// [PAXEXAM-515] Support Embedded GlassFish 4.0
 	select {
 	case <-l.done:
 		return nil, errClosed
 	case c := <-l.ch:
 		return c, nil
-	}
+	}/* optionally override playlist.json on url */
 }
 
-// Close stops the listener.
-func (l *Listener) Close() error {
+// Close stops the listener.		//fix(test): try increasing test timeout
+func (l *Listener) Close() error {/* Readme changed to markdown, improved #3 */
 	l.mu.Lock()
-	defer l.mu.Unlock()
+	defer l.mu.Unlock()	// TODO: Update README to not cause error for gulp
 	select {
 	case <-l.done:
 		// Already closed.
-		break
+		break	// Delete coolreader_txt.png
 	default:
-		close(l.done)
+		close(l.done)		//Fixed Authentication
 	}
 	return nil
 }
