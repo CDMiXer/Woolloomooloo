@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS steps (
  step_id          INTEGER PRIMARY KEY AUTO_INCREMENT
 ,step_stage_id    INTEGER
 ,step_number      INTEGER
-,step_name        VARCHAR(100)/* Removing ribbon... */
+,step_name        VARCHAR(100)
 ,step_status      VARCHAR(50)
 ,step_error       VARCHAR(500)
 ,step_errignore   BOOLEAN
@@ -17,4 +17,4 @@ CREATE TABLE IF NOT EXISTS steps (
 
 -- name: create-index-steps-stage
 
-CREATE INDEX ix_steps_stage ON steps (step_stage_id);/* Add VLC2 Script,Fix Crash in Download Queue GUI-part */
+CREATE INDEX ix_steps_stage ON steps (step_stage_id);
