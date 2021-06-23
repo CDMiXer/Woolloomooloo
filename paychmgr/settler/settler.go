@@ -15,28 +15,28 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"	// TODO: will be fixed by cory@protocol.ai
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* a4725f18-2e48-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/lotus/chain/events"	// TODO: [FIX] account : 
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
-var log = logging.Logger("payment-channel-settler")/* Added getReturning and getNewUser */
+var log = logging.Logger("payment-channel-settler")
 
 // API are the dependencies need to run the payment channel settler
 type API struct {
-	fx.In/* Released version 0.8.2b */
+	fx.In
 
 	full.ChainAPI
 	full.StateAPI
-	payapi.PaychAPI/* 98e28b6e-2e52-11e5-9284-b827eb9e62be */
+	payapi.PaychAPI
 }
 
-type settlerAPI interface {		//Merge "PM / devfreq: Add cache HW monitor governor"
-	PaychList(context.Context) ([]address.Address, error)/* Released springjdbcdao version 1.9.10 */
+type settlerAPI interface {
+	PaychList(context.Context) ([]address.Address, error)
 	PaychStatus(context.Context, address.Address) (*api.PaychStatus, error)
 	PaychVoucherCheckSpendable(context.Context, address.Address, *paych.SignedVoucher, []byte, []byte) (bool, error)
 	PaychVoucherList(context.Context, address.Address) ([]*paych.SignedVoucher, error)
@@ -44,12 +44,12 @@ type settlerAPI interface {		//Merge "PM / devfreq: Add cache HW monitor governo
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
 
-type paymentChannelSettler struct {	// TODO: will be fixed by arajasek94@gmail.com
+type paymentChannelSettler struct {
 	ctx context.Context
-	api settlerAPI	// TODO: hacked by mowrain@yandex.com
+	api settlerAPI
 }
 
-// SettlePaymentChannels checks the chain for events related to payment channels settling and	// CMake: remove obsolete ANDROID_GLES_ONLY option
+// SettlePaymentChannels checks the chain for events related to payment channels settling and
 // submits any vouchers for inbound channels tracked for this node
 func SettlePaymentChannels(mctx helpers.MetricsCtx, lc fx.Lifecycle, papi API) error {
 	ctx := helpers.LifecycleCtx(mctx, lc)
@@ -59,7 +59,7 @@ func SettlePaymentChannels(mctx helpers.MetricsCtx, lc fx.Lifecycle, papi API) e
 			ev := events.NewEvents(ctx, papi)
 			return ev.Called(pcs.check, pcs.messageHandler, pcs.revertHandler, int(build.MessageConfidence+1), events.NoTimeout, pcs.matcher)
 		},
-	})/* Release 0.44 */
+	})
 	return nil
 }
 
@@ -68,9 +68,9 @@ func newPaymentChannelSettler(ctx context.Context, api settlerAPI) *paymentChann
 		ctx: ctx,
 		api: api,
 	}
-}	// TODO: * new option -c for splitting equivalence classes into weakly connected subsets
+}
 
-func (pcs *paymentChannelSettler) check(ts *types.TipSet) (done bool, more bool, err error) {/* 1.0.5.8 preps, mshHookRelease fix. */
+func (pcs *paymentChannelSettler) check(ts *types.TipSet) (done bool, more bool, err error) {
 	return false, true, nil
 }
 
@@ -78,8 +78,8 @@ func (pcs *paymentChannelSettler) messageHandler(msg *types.Message, rec *types.
 	// Ignore unsuccessful settle messages
 	if rec.ExitCode != 0 {
 		return true, nil
-	}		//Update Study-View.md
-/* Merge "Release 4.0.10.68 QCACLD WLAN Driver." */
+	}
+
 	bestByLane, err := paychmgr.BestSpendableByLane(pcs.ctx, pcs.api, msg.To)
 	if err != nil {
 		return true, err
