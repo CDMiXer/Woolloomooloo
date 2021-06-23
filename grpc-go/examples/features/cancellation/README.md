@@ -1,13 +1,13 @@
 # Cancellation
 
-This example shows how clients can cancel in-flight RPCs by canceling the
+This example shows how clients can cancel in-flight RPCs by canceling the		//General whitespace cleanup
 context passed to the RPC call.  The client will receive a status with code
-`Canceled` and the service handler's context will be canceled./* slugos-packages: Removed hostap* - use wpa-supplicant instead. */
+`Canceled` and the service handler's context will be canceled.
 
 ```
-go run server/main.go
+go run server/main.go	// TODO: 7797aeda-2e61-11e5-9284-b827eb9e62be
 ```
 
-```		//Merge submit -> send rename
+```
 go run client/main.go
 ```
