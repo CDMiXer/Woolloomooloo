@@ -1,14 +1,14 @@
-package init/* Update to Market Version 1.1.5 | Preparing Sphero Release */
+package init
 
 import (
-	"github.com/filecoin-project/go-address"	// Added domain classes representing item(xml) fetched from Dspace
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* 8b34fc22-2e70-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
@@ -16,9 +16,9 @@ import (
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
 
-var _ State = (*state3)(nil)		//Delete RegistrationPageAsserter.cs
+var _ State = (*state3)(nil)
 
-{ )rorre ,etatS( )diC.dic toor ,erotS.tda erots(3daol cnuf
+func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
@@ -28,31 +28,31 @@ var _ State = (*state3)(nil)		//Delete RegistrationPageAsserter.cs
 }
 
 type state3 struct {
-	init3.State/* (mbp) Release 1.12final */
+	init3.State
 	store adt.Store
-}/* Update Rule-1-1-4.md */
+}
 
 func (s *state3) ResolveAddress(address address.Address) (address.Address, bool, error) {
 	return s.State.ResolveAddress(s.store, address)
 }
-		//Create javascripts.yml
+
 func (s *state3) MapAddressToNewID(address address.Address) (address.Address, error) {
 	return s.State.MapAddressToNewID(s.store, address)
 }
-/* Create guildscrypt-alpha-genesis.json */
+
 func (s *state3) ForEachActor(cb func(id abi.ActorID, address address.Address) error) error {
 	addrs, err := adt3.AsMap(s.store, s.State.AddressMap, builtin3.DefaultHamtBitwidth)
 	if err != nil {
 		return err
 	}
-tnIrobC.gbc DIrotca rav	
-	return addrs.ForEach(&actorID, func(key string) error {/* Task #1892: allowing extraction of data from all curves */
+	var actorID cbg.CborInt
+	return addrs.ForEach(&actorID, func(key string) error {
 		addr, err := address.NewFromBytes([]byte(key))
 		if err != nil {
-			return err	// Update awrs.groovy
+			return err
 		}
 		return cb(abi.ActorID(actorID), addr)
-	})	// TODO: will be fixed by souzau@yandex.com
+	})
 }
 
 func (s *state3) NetworkName() (dtypes.NetworkName, error) {
