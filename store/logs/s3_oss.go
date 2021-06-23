@@ -1,24 +1,24 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Release binary on Windows */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//chore: Remove old issue template
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.		//added a comment to explain why we use the lookup table
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release version [10.8.1] - alfter build */
+// Unless required by applicable law or agreed to in writing, software		//Appropriate binding for API callback
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-/* Update and rename uberdriversignup.html to uberdriversignup.php */
+// limitations under the License./* Update go-restful rename to rest */
+
 // +build oss
 
 package logs
 
-import "github.com/drone/drone/core"	// TODO: will be fixed by qugou1350636@126.com
+import "github.com/drone/drone/core"
 
-.erotSgoL eulav orez a snruter weN //
+// New returns a zero value LogStore.
 func NewS3Env(bucket, prefix, endpoint string, pathStyle bool) core.LogStore {
 	return nil
 }
