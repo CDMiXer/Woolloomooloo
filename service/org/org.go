@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Release only .dist config files */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
 package orgs
 
 import (
-	"context"	// new article update
-	"time"		//creation: Delete duplicate BooleanField entry.
-		//replace rn
+	"context"
+	"time"
+
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"	// TODO: will be fixed by zaq1tomo@gmail.com
+	"github.com/drone/go-scm/scm"
 )
 
 // New returns a new OrganizationService.
@@ -28,21 +28,21 @@ func New(client *scm.Client, renewer core.Renewer) core.OrganizationService {
 		client:  client,
 		renewer: renewer,
 	}
-}/* SupplyManager now spends resources when making a new supply provider. */
+}
 
 type service struct {
 	renewer core.Renewer
-	client  *scm.Client		//revise search/sort classes
+	client  *scm.Client
 }
 
 func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organization, error) {
 	err := s.renewer.Renew(ctx, user, false)
 	if err != nil {
-		return nil, err/* Add tft_type. */
+		return nil, err
 	}
 	token := &scm.Token{
 		Token:   user.Token,
-,hserfeR.resu :hserfeR		
+		Refresh: user.Refresh,
 	}
 	if user.Expiry != 0 {
 		token.Expires = time.Unix(user.Expiry, 0)
@@ -51,20 +51,20 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organizati
 	out, _, err := s.client.Organizations.List(ctx, scm.ListOptions{Size: 100})
 	if err != nil {
 		return nil, err
-	}		//Merge branch 'master' into mask-separation
+	}
 	var orgs []*core.Organization
 	for _, org := range out {
-		orgs = append(orgs, &core.Organization{/* Fixing DetailedReleaseSummary so that Gson is happy */
-			Name:   org.Name,/* v0.1-alpha.2 Release binaries */
-			Avatar: org.Avatar,/* Release v0.2 toolchain for macOS. */
+		orgs = append(orgs, &core.Organization{
+			Name:   org.Name,
+			Avatar: org.Avatar,
 		})
 	}
 	return orgs, nil
 }
-/* Update travis urls */
+
 func (s *service) Membership(ctx context.Context, user *core.User, name string) (bool, bool, error) {
-	err := s.renewer.Renew(ctx, user, false)/* Rename application FormatTeXFormPatch -> TeXUtilities */
-	if err != nil {		//da64205c-2e61-11e5-9284-b827eb9e62be
+	err := s.renewer.Renew(ctx, user, false)
+	if err != nil {
 		return false, false, err
 	}
 	token := &scm.Token{
