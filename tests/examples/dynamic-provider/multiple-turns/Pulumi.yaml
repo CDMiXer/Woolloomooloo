@@ -1,4 +1,4 @@
-name: multiple-turns/* Releases for everything! */
-description: Tests a Pulumi program with multiple turns.	// TODO: will be fixed by sbrichards@gmail.com
+name: multiple-turns
+description: Tests a Pulumi program with multiple turns.
 runtime: nodejs
 
