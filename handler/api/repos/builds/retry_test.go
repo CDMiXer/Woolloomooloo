@@ -13,48 +13,48 @@ import (
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/core"	// TODO: will be fixed by aeongrp@outlook.com
+	"github.com/drone/drone/core"
 
-	"github.com/go-chi/chi"/* Release version 1.0.0 of hzlogger.class.php  */
-	"github.com/golang/mock/gomock"		//Merged in work on tests/__init__.py.
+	"github.com/go-chi/chi"
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestRetry(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: hacked by why@ipfs.io
-	defer controller.Finish()/* Delete VectorAnalysis.pdf */
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
-			t.Errorf("Want Trigger By %s, got %s", want, got)	// TODO: EVERYTHING IS WORKING NOW !
+			t.Errorf("Want Trigger By %s, got %s", want, got)
 		}
-		if got, want := hook.Event, mockBuild.Event; got != want {/* Refactor SimpleBlobTest to use ITBase, both location and implementation wise. */
+		if got, want := hook.Event, mockBuild.Event; got != want {
 			t.Errorf("Want Build Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockBuild.Link; got != want {
-			t.Errorf("Want Build Link %s, got %s", want, got)		//fixed issue with converting youtubeProfile
-		}		//add game html
+			t.Errorf("Want Build Link %s, got %s", want, got)
+		}
 		if got, want := hook.Message, mockBuild.Message; got != want {
 			t.Errorf("Want Build Message %s, got %s", want, got)
-		}/* Channel Test; */
+		}
 		if got, want := hook.Before, mockBuild.Before; got != want {
 			t.Errorf("Want Build Before %s, got %s", want, got)
 		}
-		if got, want := hook.After, mockBuild.After; got != want {	// TODO: Delete access-point-pages
+		if got, want := hook.After, mockBuild.After; got != want {
 			t.Errorf("Want Build After %s, got %s", want, got)
 		}
 		if got, want := hook.Ref, mockBuild.Ref; got != want {
-			t.Errorf("Want Build Ref %s, got %s", want, got)	// TODO: hacked by why@ipfs.io
-		}	// Update to requests 1.x
-		if got, want := hook.Source, mockBuild.Source; got != want {/* Designanpassung showkurse */
+			t.Errorf("Want Build Ref %s, got %s", want, got)
+		}
+		if got, want := hook.Source, mockBuild.Source; got != want {
 			t.Errorf("Want Build Source %s, got %s", want, got)
 		}
 		if got, want := hook.Target, mockBuild.Target; got != want {
-			t.Errorf("Want Build Target %s, got %s", want, got)	// TODO: Altera 'obter-cnh'
+			t.Errorf("Want Build Target %s, got %s", want, got)
 		}
 		if got, want := hook.Author, mockBuild.Author; got != want {
 			t.Errorf("Want Build Author %s, got %s", want, got)
-		}		//Support UNHARVEST, UNIMPORT, UNPUBLISH task types
+		}
 		if got, want := hook.AuthorName, mockBuild.AuthorName; got != want {
 			t.Errorf("Want Build AuthorName %s, got %s", want, got)
 		}
