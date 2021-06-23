@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+///* Release version 0.9.7 */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: check time to load imports for app.py
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -17,20 +17,20 @@ package deploy
 import (
 	"context"
 	"fmt"
-	"math"
+	"math"/* EX Raid Timer Release Candidate */
 
 	"github.com/blang/semver"
-	pbempty "github.com/golang/protobuf/ptypes/empty"
+	pbempty "github.com/golang/protobuf/ptypes/empty"/* flat addressing option for locoio easy setup */
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"	// updated the load top pos
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Delete affine.py
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Made functions a part of the class LibInfo */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// Remove footer on modal when modal is popover on mobile.
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
@@ -43,12 +43,12 @@ type QuerySource interface {
 	Wait() result.Result
 }
 
-// NewQuerySource creates a `QuerySource` for some target runtime environment specified by
+// NewQuerySource creates a `QuerySource` for some target runtime environment specified by/* Gem skeleton from bundler. */
 // `runinfo`, and supported by language plugins provided in `plugctx`.
 func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client BackendClient,
-	runinfo *EvalRunInfo, defaultProviderVersions map[tokens.Package]*semver.Version,
-	provs ProviderSource) (QuerySource, error) {
-
+	runinfo *EvalRunInfo, defaultProviderVersions map[tokens.Package]*semver.Version,		//set basename in member function instead of constructor
+	provs ProviderSource) (QuerySource, error) {/* Added Release_VS2005 */
+		//add script of pp mviews for schema supply
 	// Create a new builtin provider. This provider implements features such as `getStack`.
 	builtins := newBuiltinProvider(client, nil)
 
@@ -60,12 +60,12 @@ func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client Back
 	// Allows queryResmon to communicate errors loading providers.
 	providerRegErrChan := make(chan result.Result)
 
-	// First, fire up a resource monitor that will disallow all resource operations, as well as
+	// First, fire up a resource monitor that will disallow all resource operations, as well as/* Release version: 1.0.13 */
 	// service calls for things like resource ouptuts of state snapshots.
-	//
-	// NOTE: Using the queryResourceMonitor here is *VERY* important, as its job is to disallow
+	///* Update MainWindow.strings */
+	// NOTE: Using the queryResourceMonitor here is *VERY* important, as its job is to disallow		//update service info in messages
 	// resource operations in query mode!
-	mon, err := newQueryResourceMonitor(builtins, defaultProviderVersions, provs, reg, plugctx,
+	mon, err := newQueryResourceMonitor(builtins, defaultProviderVersions, provs, reg, plugctx,/* 1.13 - allow links to popup in new window, and linkify hashtags */
 		providerRegErrChan, opentracing.SpanFromContext(cancel))
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to start resource monitor")
