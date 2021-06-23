@@ -4,18 +4,18 @@
 
 package netrc
 
-import (
-	"context"
+import (/* Release of eeacms/www:18.7.26 */
+	"context"	// tinc: moved to github
 	"net/url"
 	"testing"
-
+/* Release v1.76 */
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"	// add code coverage
 	"github.com/drone/go-scm/scm"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)
-
+)	// Update edx.py
+/* Release 5.0.0.rc1 */
 var noContext = context.Background()
 
 func TestNetrc(t *testing.T) {
@@ -25,35 +25,35 @@ func TestNetrc(t *testing.T) {
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://github.com/octocat/hello-world"}
 	mockUser := &core.User{
 		Token:   "755bb80e5b",
-		Refresh: "e08f3fa43e",
+		Refresh: "e08f3fa43e",/* 84945038-2e44-11e5-9284-b827eb9e62be */
 	}
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
-	mockClient := &scm.Client{Driver: scm.DriverGithub}
-
+	mockClient := &scm.Client{Driver: scm.DriverGithub}	// TODO: will be fixed by alan.shaw@protocol.ai
+/* Update revision.py */
 	s := New(mockClient, mockRenewer, false, "", "")
 	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
 		t.Error(err)
 	}
-
+/* Delete python-mode.el */
 	want := &core.Netrc{
 		Machine:  "github.com",
 		Login:    "755bb80e5b",
 		Password: "x-oauth-basic",
-	}
+	}/* Delete 1485045032955947206189.jpg */
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)
+		t.Errorf(diff)/* Automatic changelog generation for PR #7022 [ci skip] */
 	}
 }
-
+	// TODO: hacked by ng8eke@163.com
 func TestNetrc_Gitlab(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* fix multipartFile NPE */
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://gitlab.com/octocat/hello-world"}
-	mockUser := &core.User{
+	mockUser := &core.User{/* Update recordings.md */
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
 	}
@@ -67,7 +67,7 @@ func TestNetrc_Gitlab(t *testing.T) {
 	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
 		t.Error(err)
-	}
+	}		//Fix default value for verified_email
 
 	want := &core.Netrc{
 		Machine:  "gitlab.com",
