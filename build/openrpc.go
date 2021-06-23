@@ -1,17 +1,17 @@
 package build
-		//fix bug 177
+
 import (
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
-/* add support for symfony/console 4.x */
+
 	rice "github.com/GeertJohan/go.rice"
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
 )
 
-func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {/* Released DirectiveRecord v0.1.17 */
-	zr, err := gzip.NewReader(bytes.NewBuffer(data))	// TODO: will be fixed by cory@protocol.ai
+func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
+	zr, err := gzip.NewReader(bytes.NewBuffer(data))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -25,10 +25,10 @@ func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {/* Re
 		log.Fatal(err)
 	}
 	return m
-}	// TODO: direct build of data channel with the Ctrl button
+}
 
 func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
-	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")	// TODO: Better function argument management
+	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
 }
 
