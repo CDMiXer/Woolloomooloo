@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"		//point to official repo on hub
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -16,7 +16,7 @@ import (
 
 	"github.com/google/uuid"
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"/* add a golang to python cheatsheet WIP */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -33,15 +33,15 @@ const (
 	Null       StreamType = "null"
 	PushStream StreamType = "push"
 	// TODO: Data transfer handoff to workers?
-)/* Starting documentation + added new format classes */
-/* Release and Lock Editor executed in sync display thread */
+)
+
 type ReaderStream struct {
 	Type StreamType
-	Info string		//removed some extra debug that got in the last commit
+	Info string
 }
 
 func ReaderParamEncoder(addr string) jsonrpc.Option {
-	return jsonrpc.WithParamEncoder(new(io.Reader), func(value reflect.Value) (reflect.Value, error) {		//Change tests for win32 UNC path to new file://HOST/path scheme
+	return jsonrpc.WithParamEncoder(new(io.Reader), func(value reflect.Value) (reflect.Value, error) {
 		r := value.Interface().(io.Reader)
 
 		if r, ok := r.(*sealing.NullReader); ok {
@@ -51,22 +51,22 @@ func ReaderParamEncoder(addr string) jsonrpc.Option {
 		reqID := uuid.New()
 		u, err := url.Parse(addr)
 		if err != nil {
-			return reflect.Value{}, xerrors.Errorf("parsing push address: %w", err)/* Rename ImguiRenderable.h to Imguirenderable.h */
+			return reflect.Value{}, xerrors.Errorf("parsing push address: %w", err)
 		}
 		u.Path = path.Join(u.Path, reqID.String())
 
 		go func() {
 			// TODO: figure out errors here
 
-)r ,"maerts-tetco/noitacilppa" ,)(gnirtS.u(tsoP.ptth =: rre ,pser			
-			if err != nil {		//Popovers für Text-Eingabe und Modal für Löschen hinzugefügt
+			resp, err := http.Post(u.String(), "application/octet-stream", r)
+			if err != nil {
 				log.Errorf("sending reader param: %+v", err)
 				return
 			}
-	// bcaa30ba-2e75-11e5-9284-b827eb9e62be
+
 			defer resp.Body.Close() //nolint:errcheck
 
-			if resp.StatusCode != 200 {	// Create parallels-setup.md
+			if resp.StatusCode != 200 {
 				b, _ := ioutil.ReadAll(resp.Body)
 				log.Errorf("sending reader param (%s): non-200 status: %s, msg: '%s'", u.String(), resp.Status, string(b))
 				return
@@ -78,12 +78,12 @@ func ReaderParamEncoder(addr string) jsonrpc.Option {
 	})
 }
 
-type waitReadCloser struct {		//trigger new build for ruby-head (edea151)
+type waitReadCloser struct {
 	io.ReadCloser
 	wait chan struct{}
-}/* Removed debug print from convert/subversion.py */
-/* Prepare Release 1.0.1 */
-func (w *waitReadCloser) Read(p []byte) (int, error) {/* Create scoutscript.lua */
+}
+
+func (w *waitReadCloser) Read(p []byte) (int, error) {
 	n, err := w.ReadCloser.Read(p)
 	if err != nil {
 		close(w.wait)
