@@ -1,18 +1,18 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build go all	// TODO: Merge branch 'master' into verification-title
-/* Update Geräte - Sound.reg */
+// +build go all
+
 package ints
 
 import (
-	"os"/* Release version 1.2. */
-	"path/filepath"		//Styling in correct less-file
+	"os"
+	"path/filepath"
 	"runtime"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/stretchr/testify/assert"/* Release of eeacms/forests-frontend:1.6.3-beta.1 */
-)/* links to spending proposal authors from results */
+	"github.com/stretchr/testify/assert"
+)
 
 // TestEmptyGo simply tests that we can build and run an empty Go project.
 func TestEmptyGo(t *testing.T) {
@@ -21,40 +21,40 @@ func TestEmptyGo(t *testing.T) {
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
-		Quick: true,	// TODO: will be fixed by aeongrp@outlook.com
+		Quick: true,
 	})
 }
 
-// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.	// TODO: Final Draft with edits
+// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
 func TestEmptyGoRun(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "gorun"),/* ENBR - redone @MajorTomMueller */
+		Dir: filepath.Join("empty", "gorun"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
 	})
-}/* no mention in afk */
-	// TODO: 7041c3c6-2e5e-11e5-9284-b827eb9e62be
+}
+
 // TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml
-func TestEmptyGoRunMain(t *testing.T) {	// TODO: Update _list_form.html.haml
+func TestEmptyGoRunMain(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun_main"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
-		},/* Rename package to clue/packagist-api-react to match blocking version */
+		},
 		Quick: true,
 	})
 }
 
 // Tests basic configuration from the perspective of a Pulumi Go program.
-{ )T.gnitset* t(oGcisaBgifnoCtseT cnuf
+func TestConfigBasicGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("config_basic", "go"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
-		Quick: true,/* Re-insert include file */
+		Quick: true,
 		Config: map[string]string{
 			"aConfigValue": "this value is a value",
 		},
