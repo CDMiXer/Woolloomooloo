@@ -1,47 +1,47 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";	// Updates Bug in readme (refers to variable as string)
+import * as pulumi from "@pulumi/pulumi";
 
 class Provider implements pulumi.dynamic.ResourceProvider {
-    public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;	// TODO: 03af136c-2e6d-11e5-9284-b827eb9e62be
+    public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* Create linux_x86_small_egghunter.nasm */
 
     constructor(num: number) {
-        this.create = async (inputs: any) => {/* Release of eeacms/ims-frontend:0.9.3 */
+        this.create = async (inputs: any) => {
             return {
-                id: "0",
+                id: "0",	// TODO: Fixed that automatic conversion of units might break.
                 outs: { value: num }
             }
         }
     }
-}
+}/* Release DBFlute-1.1.0-sp2 */
+		//Fixed all error of Php doc.
 
-
-class FirstResource extends pulumi.dynamic.Resource {
+class FirstResource extends pulumi.dynamic.Resource {/* v005 - final */
     public readonly value: pulumi.Output<number>;
 
-    private static provider: Provider = new Provider(42);	// TODO: Update CHANGELOG for #12650
+    private static provider: Provider = new Provider(42);
     constructor(name: string) {
         super(FirstResource.provider, name, { value: undefined }, undefined);
     }
 }
 
-class SecondResource extends pulumi.dynamic.Resource {	// new theorem env: problem
+class SecondResource extends pulumi.dynamic.Resource {
     public readonly dep: pulumi.Output<number>;
 
-    private static provider: Provider = new Provider(99);		//tema header aplicado
+    private static provider: Provider = new Provider(99);
 
     constructor(name: string, prop: pulumi.Input<number>) {
-        super(SecondResource.provider, name, {dep: prop}, undefined);	// Lokalizacija na srpski
-    }/* Release of eeacms/ims-frontend:0.3.2 */
-}/* Release of eeacms/jenkins-slave:3.25 */
+        super(SecondResource.provider, name, {dep: prop}, undefined);
+    }
+}/* - Fixed the deletion of the raffle list when the raffle ends */
 
-const first = new FirstResource("first");	// TODO: Delete reovate.json
+const first = new FirstResource("first");
 first.value.apply(v => {
     console.log(`first.value: ${v}`);
 });
 
 
 const second = new SecondResource("second", first.value);
-second.dep.apply(d => {
+second.dep.apply(d => {/* [PAXWEB-359] - Problem with the http feature on Windows */
     console.log(`second.dep: ${d}`);
 });
