@@ -1,4 +1,4 @@
--- name: create-table-org-secrets		//Merge "Add re-tries to Nailgun client"
+-- name: create-table-org-secrets
 
 CREATE TABLE IF NOT EXISTS orgsecrets (
  secret_id                SERIAL PRIMARY KEY
@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS orgsecrets (
 ,secret_pull_request      BOOLEAN
 ,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_namespace, secret_name)
-);	// TODO: hacked by mail@overlisted.net
+);
