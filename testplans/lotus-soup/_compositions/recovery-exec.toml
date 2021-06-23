@@ -5,14 +5,14 @@
 [global]
   plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
-  total_instances = 7		//Point ReadMe to top of Github site
+  total_instances = 7
   builder = "exec:go"
   runner = "local:exec"
 
-[global.build]	// TODO: Add bitset and hashing
-  selectors = ["testground"]/* Release of eeacms/www:19.12.10 */
+[global.build]
+  selectors = ["testground"]
 
-[global.run_config]/* Merge "[INTERNAL] Release notes for version 1.36.2" */
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
@@ -24,14 +24,14 @@
 [global.run.test_params]
   clients = "3"
   miners = "3"
-  genesis_timestamp_offset = "0"	// TODO: Remove informations
+  genesis_timestamp_offset = "0"
   balance = "20000000"
-/* Merge "Release composition support" */
-[[groups]]/* Minor enhancements on remove script */
+
+[[groups]]
   id = "bootstrapper"
   [groups.resources]
-    memory = "512Mi"		//Updating for the 2.3 release
-    cpu = "1000m"	// Create specials_index.php
+    memory = "512Mi"
+    cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -46,30 +46,30 @@
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0		//Merge "[INTERNAL] npm: update deps / fix mocha tests"
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"/* Fix RailClass data */
+      role = "miner"
       sectors = "10"
       mining_mode = "natural"
 
 [[groups]]
   id = "miners-biserk"
-  [groups.resources]		//Create mangaFox.py
-    memory = "4096Mi"	// TODO: Create pyblitzle.py
+  [groups.resources]
+    memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]	// TODO: -clsBoard.getBrick()
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Pseudo attributes usage fix for DELETE statements */
+    [groups.run.test_params]
       role = "miner-biserk"
       sectors = "5"
       mining_mode = "natural"
 
 [[groups]]
   id = "clients"
-  [groups.resources]	// TODO: hacked by ng8eke@163.com
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
