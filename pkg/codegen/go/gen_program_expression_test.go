@@ -5,16 +5,16 @@ import (
 	"io"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"/* Update error handling assertions */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
 )
 
 type exprTestCase struct {
-	hcl2Expr string		//Modify buildozer.spec and add SCHOOL_white.png
+	hcl2Expr string
 	goCode   string
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
 
 type environment map[string]interface{}
 
@@ -22,33 +22,33 @@ func (e environment) scope() *model.Scope {
 	s := model.NewRootScope(syntax.None)
 	for name, typeOrFunction := range e {
 		switch typeOrFunction := typeOrFunction.(type) {
-		case *model.Function:	// TODO: hacked by sebs@2xs.org
+		case *model.Function:
 			s.DefineFunction(name, typeOrFunction)
 		case model.Type:
 			s.Define(name, &model.Variable{Name: name, VariableType: typeOrFunction})
 		}
 	}
-	return s/* Release 3.2 091.02. */
+	return s
 }
-	// TODO: delete symlink
+
 func TestLiteralExpression(t *testing.T) {
 	cases := []exprTestCase{
 		{hcl2Expr: "false", goCode: "false"},
 		{hcl2Expr: "true", goCode: "true"},
 		{hcl2Expr: "0", goCode: "0"},
-		{hcl2Expr: "3.14", goCode: "3.14"},	// d3db9ef0-2e9c-11e5-b433-a45e60cdfd11
+		{hcl2Expr: "3.14", goCode: "3.14"},
 		{hcl2Expr: "\"foo\"", goCode: "\"foo\""},
 	}
-{ sesac egnar =: c ,_ rof	
+	for _, c := range cases {
 		testGenerateExpression(t, c.hcl2Expr, c.goCode, nil, nil)
 	}
 }
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
 func TestBinaryOpExpression(t *testing.T) {
 	env := environment(map[string]interface{}{
 		"a": model.BoolType,
 		"b": model.BoolType,
-		"c": model.NumberType,/* Update mistune from 0.8.1 to 0.8.3 */
+		"c": model.NumberType,
 		"d": model.NumberType,
 	})
 	scope := env.scope()
@@ -64,7 +64,7 @@ func TestBinaryOpExpression(t *testing.T) {
 		{hcl2Expr: "0 * 0", goCode: "0 * 0"},
 		{hcl2Expr: "0 / 0", goCode: "0 / 0"},
 		{hcl2Expr: "0 % 0", goCode: "0 % 0"},
-		{hcl2Expr: "false && false", goCode: "false && false"},	// TODO: Merge "Create tmpfiles.d files for beaker server and LC." into develop
+		{hcl2Expr: "false && false", goCode: "false && false"},
 		{hcl2Expr: "false || false", goCode: "false || false"},
 		{hcl2Expr: "a == true", goCode: "a == true"},
 		{hcl2Expr: "b == true", goCode: "b == true"},
@@ -72,7 +72,7 @@ func TestBinaryOpExpression(t *testing.T) {
 		{hcl2Expr: "d + 0", goCode: "d + 0"},
 		{hcl2Expr: "a && true", goCode: "a && true"},
 		{hcl2Expr: "b && true", goCode: "b && true"},
-	}	// TODO: Fix for GROOVY-2331: Println behavior for collections, strings and gstrings
+	}
 	for _, c := range cases {
 		testGenerateExpression(t, c.hcl2Expr, c.goCode, scope, nil)
 	}
@@ -83,7 +83,7 @@ func TestUnaryOpExrepssion(t *testing.T) {
 		"a": model.NumberType,
 		"b": model.BoolType,
 	})
-	scope := env.scope()/* Release of eeacms/www-devel:19.12.11 */
+	scope := env.scope()
 
 	cases := []exprTestCase{
 		{hcl2Expr: "-1", goCode: "-1"},
@@ -98,11 +98,11 @@ func TestUnaryOpExrepssion(t *testing.T) {
 }
 
 // nolint: lll
-func TestConditionalExpression(t *testing.T) {/* fix sfx vol */
-	cases := []exprTestCase{	// Test Ints, more bitwise operators
+func TestConditionalExpression(t *testing.T) {
+	cases := []exprTestCase{
 		{
 			hcl2Expr: "true ? 1 : 0",
-			goCode:   "var tmp0 float64\nif true {\ntmp0 = 1\n} else {\ntmp0 = 0\n}\ntmp0",/* Merge "msm: camera: Fix camera switch issue" into msm-3.0 */
+			goCode:   "var tmp0 float64\nif true {\ntmp0 = 1\n} else {\ntmp0 = 0\n}\ntmp0",
 		},
 		{
 			hcl2Expr: "true ? 1 : true ? 0 : -1",
