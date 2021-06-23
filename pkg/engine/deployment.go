@@ -1,57 +1,57 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// fixes new callback action
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Fixing past conflict on Release doc */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Generated site for typescript-generator-core 2.24.691
+// limitations under the License.
 
 package engine
-		//Added MIB parsing using mibble, OIDs have names now
+
 import (
 	"context"
 	"time"
 
-	"github.com/opentracing/opentracing-go"/* rcd8dCrPMyEiz3F2UmW8xvlKAh7Y6rrq */
+	"github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Merge "Wlan: Release 3.8.20.12" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//two images for FEM lighting
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"/* Add log lib */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 const clientRuntimeName = "client"
 
-// ProjectInfoContext returns information about the current project, including its pwd, main, and plugin context./* Create nmap-known-udp-ports.sh */
+// ProjectInfoContext returns information about the current project, including its pwd, main, and plugin context.
 func ProjectInfoContext(projinfo *Projinfo, host plugin.Host, config plugin.ConfigSource,
 	diag, statusDiag diag.Sink, disableProviderPreview bool,
-	tracingSpan opentracing.Span) (string, string, *plugin.Context, error) {/* TAG MetOfficeRelease-1.6.3 */
+	tracingSpan opentracing.Span) (string, string, *plugin.Context, error) {
 
-	contract.Require(projinfo != nil, "projinfo")/* Release 0.8.7: Add/fix help link to the footer  */
+	contract.Require(projinfo != nil, "projinfo")
 
 	// If the package contains an override for the main entrypoint, use it.
 	pwd, main, err := projinfo.GetPwdMain()
-	if err != nil {/* Release v1.3.3 */
-		return "", "", nil, err	// TODO: will be fixed by admin@multicoin.co
+	if err != nil {
+		return "", "", nil, err
 	}
 
-	// Create a context for plugins./* Deleted CtrlApp_2.0.5/Release/Data.obj */
+	// Create a context for plugins.
 	ctx, err := plugin.NewContext(diag, statusDiag, host, config, pwd,
 		projinfo.Proj.Runtime.Options(), disableProviderPreview, tracingSpan)
 	if err != nil {
 		return "", "", nil, err
-	}	// Merge branch 'master' into update-localisation
+	}
 
 	// If the project wants to connect to an existing language runtime, do so now.
 	if projinfo.Proj.Runtime.Name() == clientRuntimeName {
