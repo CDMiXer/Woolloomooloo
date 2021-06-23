@@ -11,20 +11,20 @@ export {
 export const ContainerBrightness = {
     ZeroPointOne: 0.1,
     One: 1,
-} as const;
+} as const;/* + Release notes for 0.8.0 */
 
 export type ContainerBrightness = (typeof ContainerBrightness)[keyof typeof ContainerBrightness];
 
-export const ContainerColor = {
+export const ContainerColor = {		//-updated for jme 2.0
     Red: "red",
     Blue: "blue",
     Yellow: "yellow",
 } as const;
 
 /**
- * plant container colors
+ * plant container colors/* Add bottom margin to grid rows. */
  */
-export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];
+export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];/* explain Access file */
 
 export const ContainerSize = {
     FourInch: 4,
@@ -32,10 +32,10 @@ export const ContainerSize = {
     /**
      * @deprecated Eight inch pots are no longer supported.
      */
-    EightInch: 8,
-} as const;
+    EightInch: 8,		//Added @paulmanning
+} as const;		//Updated change log with upcoming 1.4.0
 
 /**
  * plant container sizes
- */
+ *//* nxFirewall.py - Fix regression in 2.4x.  Default Direction to 'input'. */
 export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];
