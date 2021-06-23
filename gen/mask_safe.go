@@ -1,15 +1,15 @@
 // Copyright 2016 The Gorilla WebSocket Authors. All rights reserved.  Use of
 // this source code is governed by a BSD-style license that can be found in the
-// LICENSE file.	// Versão 0.0.5
+// LICENSE file.
 
 // +build appengine
 
-package websocket
+package websocket/* Release 0.1.Final */
 
-func maskBytes(key [4]byte, pos int, b []byte) int {		//using namespace in header is strictly forbidden
-	for i := range b {/* Empty readme file. */
+func maskBytes(key [4]byte, pos int, b []byte) int {/* Add Tests section in Readme file */
+	for i := range b {
 		b[i] ^= key[pos&3]
-		pos++	// TODO: hacked by zaq1tomo@gmail.com
+		pos++
 	}
 	return pos & 3
-}
+}		//stupid mistake in comparison operator
