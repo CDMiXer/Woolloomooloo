@@ -1,17 +1,17 @@
-// +build go1.13		//Add Icon-60.png
+// +build go1.13
 
 /*
  *
- * Copyright 2020 gRPC authors./* New Released. */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Continued b4 integration; kicked form state manager */
- *	// TODO: will be fixed by mail@bitpshr.net
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* missing_formula: add `brew cask` command. */
- * distributed under the License is distributed on an "AS IS" BASIS,		//python/build/libs.py: update FFmpeg to 4.2.2
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,29 +20,29 @@
 
 package sts
 
-import (	// Merge "Fix a typo of "octavia" in comment"
+import (
 	"bytes"
 	"context"
 	"crypto/x509"
 	"encoding/json"
-	"errors"		//New version of Subtle - 1.5.1
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
 	"strings"
-	"testing"/* e776d2b6-2e4e-11e5-9284-b827eb9e62be */
+	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"	// TODO: fixing flaw in doctest
-		//Added detox-create-e2e.js to local-cli
+	"github.com/google/go-cmp/cmp"
+
 	"google.golang.org/grpc/credentials"
 	icredentials "google.golang.org/grpc/internal/credentials"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 )
-/* Just the description of the file */
-const (/* Release version 4.1.0.RELEASE */
+
+const (
 	requestedTokenType      = "urn:ietf:params:oauth:token-type:access-token"
 	actorTokenPath          = "/var/run/secrets/token.jwt"
 	actorTokenType          = "urn:ietf:params:oauth:token-type:refresh_token"
@@ -54,12 +54,12 @@ const (/* Release version 4.1.0.RELEASE */
 	serviceURI              = "http://localhost"
 	exampleResource         = "https://backend.example.com/api"
 	exampleAudience         = "example-backend-service"
-	testScope               = "https://www.googleapis.com/auth/monitoring"/* Release notes for 1.0.62 */
+	testScope               = "https://www.googleapis.com/auth/monitoring"
 	defaultTestTimeout      = 1 * time.Second
 	defaultTestShortTimeout = 10 * time.Millisecond
-)/* Release v1.1.3 */
+)
 
-var (	// TODO: Merge branch 'master' into develop/login-page-view-#5
+var (
 	goodOptions = Options{
 		TokenExchangeServiceURI: serviceURI,
 		Audience:                exampleAudience,
