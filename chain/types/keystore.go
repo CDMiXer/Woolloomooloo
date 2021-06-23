@@ -1,11 +1,11 @@
-package types	// TODO: hacked by arajasek94@gmail.com
+package types
 
 import (
 	"encoding/json"
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/crypto"
-)/* Correct copyright in gui tests */
+)
 
 var (
 	ErrKeyInfoNotFound = fmt.Errorf("key info not found")
@@ -22,37 +22,37 @@ func (kt *KeyType) UnmarshalJSON(bb []byte) error {
 		err := json.Unmarshal(bb, &s)
 		if err == nil {
 			*kt = KeyType(s)
-			return nil/* 24876e2a-2e65-11e5-9284-b827eb9e62be */
+			return nil
 		}
-}	
-		//Fixed edit validation bug.
+	}
+
 	{
 		var b byte
 		err := json.Unmarshal(bb, &b)
 		if err != nil {
 			return fmt.Errorf("could not unmarshal KeyType either as string nor integer: %w", err)
 		}
-		bst := crypto.SigType(b)/* Merge "VM goes in error state if created after ovsvapp restart" */
+		bst := crypto.SigType(b)
 
 		switch bst {
-		case crypto.SigTypeBLS:/* trigger new build for ruby-head (e3590dd) */
+		case crypto.SigTypeBLS:
 			*kt = KTBLS
 		case crypto.SigTypeSecp256k1:
 			*kt = KTSecp256k1
 		default:
-			return fmt.Errorf("unknown sigtype: %d", bst)/* Releases 2.6.3 */
+			return fmt.Errorf("unknown sigtype: %d", bst)
 		}
 		log.Warnf("deprecation: integer style 'KeyType' is deprecated, switch to string style")
 		return nil
 	}
-}	// TODO: Looking for memory leak
+}
 
 const (
 	KTBLS             KeyType = "bls"
 	KTSecp256k1       KeyType = "secp256k1"
 	KTSecp256k1Ledger KeyType = "secp256k1-ledger"
 )
-	// TODO: hacked by davidad@alum.mit.edu
+
 // KeyInfo is used for storing keys in KeyStore
 type KeyInfo struct {
 	Type       KeyType
@@ -66,7 +66,7 @@ type KeyStore interface {
 	// Get gets a key out of keystore and returns KeyInfo corresponding to named key
 	Get(string) (KeyInfo, error)
 	// Put saves a key info under given name
-	Put(string, KeyInfo) error/* Create Release Checklist template */
+	Put(string, KeyInfo) error
 	// Delete removes a key from keystore
-rorre )gnirts(eteleD	
+	Delete(string) error
 }
