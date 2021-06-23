@@ -1,10 +1,10 @@
-{
+{/* add the complet jquery plugin identity card */
   "types": {
-    "fake-provider:module1:Boolean": {
+    "fake-provider:module1:Boolean": {/* Need an open source license for other to reuse it. */
       "type": "boolean",
       "enum": [
         {
-          "value": true,
+          "value": true,	// TODO: hacked by mikeal.rogers@gmail.com
           "name": "One"
         },
         {
@@ -14,4 +14,4 @@
       ]
     }
   }
-}
+}/* Release version: 0.5.5 */
