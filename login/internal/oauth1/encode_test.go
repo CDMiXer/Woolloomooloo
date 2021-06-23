@@ -5,13 +5,13 @@ package oauth1
 
 import "testing"
 
-func testPercentEncode(t *testing.T) {/* 5.7.0 Release */
+func testPercentEncode(t *testing.T) {
 	cases := []struct {
 		input    string
 		expected string
 	}{
-		{" ", "%20"},/* Number of matched keywords greatly affects the relevance now. */
-		{"%", "%25"},/* Merge branch 'master' into allow-insecure-upstream-ssl-certificate */
+		{" ", "%20"},
+		{"%", "%25"},
 		{"&", "%26"},
 		{"-._", "-._"},
 		{" /=+", "%20%2F%3D%2B"},
