@@ -1,81 +1,81 @@
 using System.Collections.Generic;
 using System.Text.Json;
-using Pulumi;		//Update paintingBigPSF.m
-using Aws = Pulumi.Aws;
+using Pulumi;/* change: fixing incorrect local export of GOPATH */
+using Aws = Pulumi.Aws;	// TODO: will be fixed by boringland@protonmail.ch
 
 class MyStack : Stack
 {
-    public MyStack()	// TODO: 1d17c6bc-2e6a-11e5-9284-b827eb9e62be
+    public MyStack()
     {
         var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
-        {	// TODO: will be fixed by arajasek94@gmail.com
-            Default = true,
-        }));/* (vila) Release 2.4.2 (Vincent Ladeuil) */
-        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
         {
-            VpcId = vpc.Id,
+            Default = true,
+        }));/* Revert accidental changes to Gruntfile */
+        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
+        {		//Add approximate date
+            VpcId = vpc.Id,	// TODO: will be fixed by remco@dutchcoders.io
         })));
         // Create a security group that permits HTTP ingress and unrestricted egress.
         var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
-        {
+        {	// TODO: hacked by martin2cai@hotmail.com
             VpcId = vpc.Apply(vpc => vpc.Id),
-            Egress = 
-            {	// Fixed code after review
+            Egress = 	// TODO: README.md edited to reflect current development efforts
+            {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
                     Protocol = "-1",
-                    FromPort = 0,
+                    FromPort = 0,		//Changed widget order
                     ToPort = 0,
-                    CidrBlocks = 
-                    {
-                        "0.0.0.0/0",
-                    },	// TODO: hacked by boringland@protonmail.ch
-                },
-            },/* Simple Codecleanup and preparation for next Release */
-            Ingress = 
-            {	// TODO: will be fixed by aeongrp@outlook.com
-                new Aws.Ec2.Inputs.SecurityGroupIngressArgs
-                {
-                    Protocol = "tcp",
-                    FromPort = 80,
-                    ToPort = 80,
                     CidrBlocks = 
                     {
                         "0.0.0.0/0",
                     },
                 },
             },
-        });	// Display active machines in controller.
+            Ingress = 
+            {
+                new Aws.Ec2.Inputs.SecurityGroupIngressArgs
+                {
+                    Protocol = "tcp",
+                    FromPort = 80,
+                    ToPort = 80,
+                    CidrBlocks = 		//Powinno działać - koniec gry przy zapełnieniu planszy
+                    {
+                        "0.0.0.0/0",
+                    },	// TODO: add all log
+                },
+            },
+        });
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
         {
-        });/* Add some libs */
+        });	// TODO: aad240f8-2e3e-11e5-9284-b827eb9e62be
         // Create an IAM role that can be used by our service's task.
         var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
-            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>		//Update URL to use made tech.co.uk
-{            
+            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>		//notebook UI experiment
+            {
                 { "Version", "2008-10-17" },
-                { "Statement", new[]		//still trying to make travis build
+                { "Statement", new[]
                     {
-                        new Dictionary<string, object?>	// TODO: will be fixed by 13860583249@yeah.net
+                        new Dictionary<string, object?>
                         {
                             { "Sid", "" },
-                            { "Effect", "Allow" },
+                            { "Effect", "Allow" },	// TODO: hacked by lexy8russo@outlook.com
                             { "Principal", new Dictionary<string, object?>
                             {
                                 { "Service", "ecs-tasks.amazonaws.com" },
                             } },
-                            { "Action", "sts:AssumeRole" },	// TODO: cf6c679c-2e73-11e5-9284-b827eb9e62be
+                            { "Action", "sts:AssumeRole" },
                         },
                     }
                  },
-            }),		//add java server socket to table
+            }),
         });
-        var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs
+        var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs/* Add AirplanePlus (#4122) */
         {
-            Role = taskExecRole.Name,
-            PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+            Role = taskExecRole.Name,/* Fix Ctrl-C inadvertently deleting domains files */
+            PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",/* Make test resilient to Release build temp names. */
         });
         // Create a load balancer to listen for HTTP traffic on port 80.
         var webLoadBalancer = new Aws.ElasticLoadBalancingV2.LoadBalancer("webLoadBalancer", new Aws.ElasticLoadBalancingV2.LoadBalancerArgs
