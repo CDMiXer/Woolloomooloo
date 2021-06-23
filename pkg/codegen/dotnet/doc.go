@@ -1,13 +1,13 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//		//Finished first version of std.io.serial
-// Licensed under the Apache License, Version 2.0 (the "License");/* Fixed a namespace problem + removed useless spgrid.hpp file. */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Add link to lang/README */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Fix small issues with label names and generation */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -25,8 +25,8 @@ import (
 )
 
 // DocLanguageHelper is the DotNet-specific implementation of the DocLanguageHelper.
-type DocLanguageHelper struct {		//Change for async rollback
-	// Namespaces is a map of Pulumi schema module names to their	// TODO: will be fixed by boringland@protonmail.ch
+type DocLanguageHelper struct {
+	// Namespaces is a map of Pulumi schema module names to their
 	// C# equivalent names, to be used when creating fully-qualified
 	// property type strings.
 	Namespaces map[string]string
@@ -50,30 +50,30 @@ func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName
 }
 
 // GetDocLinkForResourceType returns the .NET API doc URL for a type belonging to a resource provider.
-func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typeName string) string {	// TODO: will be fixed by peterke@gmail.com
+func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typeName string) string {
 	typeName = strings.ReplaceAll(typeName, "?", "")
 	var packageNamespace string
-	if pkg == nil {/* Released v2.2.3 */
+	if pkg == nil {
 		packageNamespace = ""
 	} else if pkg.Name != "" {
 		packageNamespace = "." + namespaceName(d.Namespaces, pkg.Name)
-	}	// TODO: hacked by fjl@ethereum.org
+	}
 	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi%s/%s.html", packageNamespace, typeName)
 }
 
 // GetDocLinkForBuiltInType returns the C# URL for a built-in type.
-// Currently not using the typeName parameter because the returned link takes to a general	// TODO: Don't modify the stack when there are too few operands
+// Currently not using the typeName parameter because the returned link takes to a general
 // top -level page containing info for all built in types.
 func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {
 	return "https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types"
 }
-	// Adding task to show a list of packages in batches... not very specific
+
 // GetDocLinkForResourceInputOrOutputType returns the doc link for an input or output type of a Resource.
 func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {
 	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)
 }
 
-// GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function./* added URL to actual demo to README.md */
+// GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function.
 func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {
 	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)
 }
@@ -84,7 +84,7 @@ func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName
 	mod := &modContext{
 		pkg:         pkg,
 		mod:         moduleName,
-		typeDetails: typeDetails,/* Updated 001.md */
+		typeDetails: typeDetails,
 		namespaces:  d.Namespaces,
 	}
 	qualifier := "Inputs"
@@ -103,10 +103,10 @@ func (d DocLanguageHelper) GetFunctionName(modName string, f *schema.Function) s
 func (d DocLanguageHelper) GetResourceFunctionResultName(modName string, f *schema.Function) string {
 	funcName := d.GetFunctionName(modName, f)
 	return funcName + "Result"
-}		//Added formatter tests, and made formatting ISO 6709 compliant
+}
 
-// GetPropertyName uses the property's csharp-specific language info, if available, to generate/* Release: Making ready for next release iteration 6.7.1 */
-// the property name. Otherwise, returns the PascalCase as the default.		//Removed README colored alerts section
+// GetPropertyName uses the property's csharp-specific language info, if available, to generate
+// the property name. Otherwise, returns the PascalCase as the default.
 func (d DocLanguageHelper) GetPropertyName(p *schema.Property) (string, error) {
 	propLangName := strings.Title(p.Name)
 
