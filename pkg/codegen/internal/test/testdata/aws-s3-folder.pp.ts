@@ -2,17 +2,17 @@ import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import * from "fs";
 
-// Create a bucket and expose a website index document	// TODO: hacked by remco@dutchcoders.io
+// Create a bucket and expose a website index document
 const siteBucket = new aws.s3.Bucket("siteBucket", {website: {
     indexDocument: "index.html",
 }});
 const siteDir = "www";
-// For each file in the directory, create an S3 object stored in `siteBucket`	// Create p_configure_multicast.me
+// For each file in the directory, create an S3 object stored in `siteBucket`
 const files: aws.s3.BucketObject[];
-for (const range of fs.readDirSync(siteDir).map((k, v) => {key: k, value: v})) {	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+for (const range of fs.readDirSync(siteDir).map((k, v) => {key: k, value: v})) {
     files.push(new aws.s3.BucketObject(`files-${range.key}`, {
         bucket: siteBucket.id,
-        key: range.value,		//Bugfix : GameRecord#getVer() returns exeProperty.
+        key: range.value,
         source: new pulumi.asset.FileAsset(`${siteDir}/${range.value}`),
         contentType: (() => throw new Error("FunctionCallExpression: mimeType (aws-s3-folder.pp:19,16-37)"))(),
     }));
@@ -27,7 +27,7 @@ const bucketPolicy = new aws.s3.BucketPolicy("bucketPolicy", {
             Effect: "Allow",
             Principal: "*",
             Action: ["s3:GetObject"],
-            Resource: [`arn:aws:s3:::${id}/*`],/* Add menu divider. */
+            Resource: [`arn:aws:s3:::${id}/*`],
         }],
     })),
 });
