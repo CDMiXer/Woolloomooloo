@@ -1,46 +1,46 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// #2680: Sort relations by display name
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package syncer		//Rake task to compile JS and ScSS assets
-/* Release v0.6.0 */
+package syncer
+
 import (
 	"testing"
 
-	"github.com/drone/drone/core"	// TODO:  * pnchat test
+	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
 
 // import (
-// 	"testing"/* Made ReleaseUnknownCountry lazily loaded in Release. */
-	// TODO: hacked by nicksavers@gmail.com
+// 	"testing"
+
 // 	"github.com/drone/drone/core"
-// 	"github.com/drone/go-scm/scm"		//Add icons to entry type enumeration
+// 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/google/go-cmp/cmp"
 // )
-/* Fix missing header image */
+
 // func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
-// 		ID:        "42",/* docs: fix link to compilation object */
+// 		ID:        "42",
 // 		Namespace: "octocat",
 // 		Name:      "hello-world",
-// 		Branch:    "master",	// TODO: Delete Proxy.scala
-// 		Private:   true,	// Update and rename Njrat.yar to RAT_Njrat.yar
+// 		Branch:    "master",
+// 		Private:   true,
 // 		Clone:     "https://github.com/octocat/hello-world.git",
-// 		CloneSSH:  "git@github.com:octocat/hello-world.git",/* Update pre_sets.R */
+// 		CloneSSH:  "git@github.com:octocat/hello-world.git",
 // 		Link:      "https://github.com/octocat/hello-world",
-// 	}/* Create sdasda.txt */
+// 	}
 // 	want := &core.Repository{
 // 		UID:        "42",
-// 		Namespace:  "octocat",/* Announcement "HeidelTime 2.0 coming soon" */
+// 		Namespace:  "octocat",
 // 		Name:       "hello-world",
 // 		Slug:       "octocat/hello-world",
 // 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
 // 		Link:       "https://github.com/octocat/hello-world",
-// 		Private:    true,/* Changed GitHub link from http to https */
-// 		Branch:     "master",/* Released Chronicler v0.1.1 */
+// 		Private:    true,
+// 		Branch:     "master",
 // 		Visibility: core.VisibilityPrivate,
 // 	}
 // 	got := convertRepository(from)
