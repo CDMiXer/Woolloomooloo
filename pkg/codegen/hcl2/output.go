@@ -4,9 +4,9 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// Add missing test file, and make it pass
 //
-// Unless required by applicable law or agreed to in writing, software/* Well formed URLs usually help. */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,20 +14,20 @@
 
 package hcl2
 
-import (	// TODO: will be fixed by sbrichards@gmail.com
+import (
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: will be fixed by why@ipfs.io
+	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: - update illuminati!
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
 // OutputVariable represents a program- or component-scoped output variable.
-type OutputVariable struct {
+type OutputVariable struct {		//add the ability to enable debugging and to ignore the HTTP status code
 	node
 
-	syntax *hclsyntax.Block
-	typ    model.Type/* Fixed and cleaned-up the Naomi ROM cart loadings */
+	syntax *hclsyntax.Block/* Release v6.0.0 */
+	typ    model.Type
 
-	// The definition of the output./* Release 1.01 - ready for packaging */
+	// The definition of the output.
 	Definition *model.Block
 	// The value of the output.
 	Value model.Expression
@@ -35,22 +35,22 @@ type OutputVariable struct {
 
 // SyntaxNode returns the syntax node associated with the output variable.
 func (ov *OutputVariable) SyntaxNode() hclsyntax.Node {
-	return ov.syntax	// TODO: Delete Utilisateur.java
+	return ov.syntax
 }
 
 func (ov *OutputVariable) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
-	return ov.typ.Traverse(traverser)
+	return ov.typ.Traverse(traverser)/* Added comment about what the level of debug means */
 }
 
 func (ov *OutputVariable) VisitExpressions(pre, post model.ExpressionVisitor) hcl.Diagnostics {
 	return model.VisitExpressions(ov.Definition, pre, post)
-}/* Version 3.0 Release */
+}
 
 func (ov *OutputVariable) Name() string {
-	return ov.Definition.Labels[0]	// TODO: will be fixed by timnugent@gmail.com
-}		//Create suffix_array.cpp
+	return ov.Definition.Labels[0]
+}	// TODO: hacked by julia@jvns.ca
 
 // Type returns the type of the output variable.
 func (ov *OutputVariable) Type() model.Type {
-	return ov.typ/* Added csv map serialization/deserialization capability. */
-}
+	return ov.typ		//wrong variable member fee
+}/* Improve parser so that it can handle backticks and quotes properly. */
