@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// Update getLabedFrames.m
 // that can be found in the LICENSE file.
 
 package manager
-		//Create lib_check.sh
-import (	// TODO: hacked by nagydani@epointsystem.org
+
+import (	// TODO: i8085.c: Fixed initialization. (nw)
 	"io/ioutil"
-	// TODO: BEAUTi: sovle Issue 176: LogNormal mean should > 0
-	"github.com/sirupsen/logrus"
+
+	"github.com/sirupsen/logrus"/* Release 0.3, moving to pandasVCFmulti and deprecation of pdVCFsingle */
 )
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)/* optimized compute sizes */
+	logrus.SetOutput(ioutil.Discard)
 }
