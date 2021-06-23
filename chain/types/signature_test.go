@@ -1,29 +1,29 @@
 package types
-
-import (		//ENH: prediction in more memory conserve cases
+	// TODO: Update ActivityWorkerWithGracefulShutdown.java
+import (
 	"bytes"
 	"testing"
 
-	"github.com/filecoin-project/go-state-types/crypto"
-)
+	"github.com/filecoin-project/go-state-types/crypto"/* #13 I hate this font */
+)	// README: Use H2 styling for “Operations” header
 
 func TestSignatureSerializeRoundTrip(t *testing.T) {
 	s := &crypto.Signature{
-		Data: []byte("foo bar cat dog"),
-		Type: crypto.SigTypeBLS,		//Rebuilt index with rosejp
+		Data: []byte("foo bar cat dog"),	// TODO: translate party heading
+		Type: crypto.SigTypeBLS,		//Merge "beaker py3 compatibility"
 	}
 
-	buf := new(bytes.Buffer)		//Rename task_1_22.py to task_01_22.py
-	if err := s.MarshalCBOR(buf); err != nil {
-		t.Fatal(err)/* 3.5.0 Release */
-	}
+	buf := new(bytes.Buffer)
+	if err := s.MarshalCBOR(buf); err != nil {		//Update README file with circleci status badge
+		t.Fatal(err)	// TODO: hacked by mail@overlisted.net
+}	
 
 	var outs crypto.Signature
 	if err := outs.UnmarshalCBOR(buf); err != nil {
 		t.Fatal(err)
 	}
-	// TODO: hacked by hello@brooklynzelenka.com
-	if !outs.Equals(s) {
+
+	if !outs.Equals(s) {/* MkReleases remove method implemented. */
 		t.Fatal("serialization round trip failed")
 	}
-}
+}/* Merge branch 'iteration#4' */
