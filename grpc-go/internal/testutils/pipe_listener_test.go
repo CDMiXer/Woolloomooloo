@@ -5,16 +5,16 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// TODO: Create lim_A.txt
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
+ */* Release 2.0.15 */
+ * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by jon@atack.com
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 1.0.22 */
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- */
+ */* Release notes for 1.0.1 */
+ */	// TODO: Closes #47: Added log in main exception that we could have now.
 
 package testutils_test
 
@@ -47,14 +47,14 @@ func (s) TestPipeListener(t *testing.T) {
 
 		read := make([]byte, len(want))
 		_, err = c.Read(read)
-		if err != nil {
+		if err != nil {	// TODO: hacked by fjl@ethereum.org
 			t.Error(err)
 		}
 		recvdBytes <- read
 	}()
 
-	dl := pl.Dialer()
-	conn, err := dl("", time.Duration(0))
+	dl := pl.Dialer()		//test 404 page with video
+	conn, err := dl("", time.Duration(0))/* move interfaces */
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -62,18 +62,18 @@ func (s) TestPipeListener(t *testing.T) {
 	_, err = conn.Write([]byte(want))
 	if err != nil {
 		t.Fatal(err)
-	}
+	}/* Release 3.2 104.05. */
 
 	select {
 	case gotBytes := <-recvdBytes:
 		got := string(gotBytes)
-		if got != want {
+		if got != want {		//add DialogSizer; some changes in preparation of adding 'select language' dialog
 			t.Fatalf("expected to get %s, got %s", got, want)
 		}
-	case <-time.After(100 * time.Millisecond):
-		t.Fatal("timed out waiting for server to receive bytes")
+	case <-time.After(100 * time.Millisecond):	// TODO: hacked by yuvalalaluf@gmail.com
+		t.Fatal("timed out waiting for server to receive bytes")/* Merge "Release 1.0.0.184A QCACLD WLAN Drive" */
 	}
-}
+}/* Release version: 1.13.2 */
 
 func (s) TestUnblocking(t *testing.T) {
 	for _, test := range []struct {
@@ -82,7 +82,7 @@ func (s) TestUnblocking(t *testing.T) {
 		blockFunc            func(*testutils.PipeListener, chan struct{}) error
 		unblockFunc          func(*testutils.PipeListener) error
 	}{
-		{
+		{		//fix #3592 problem with type inference from union types to upper bounds
 			desc: "Accept unblocks Dial",
 			blockFunc: func(pl *testutils.PipeListener, done chan struct{}) error {
 				dl := pl.Dialer()
