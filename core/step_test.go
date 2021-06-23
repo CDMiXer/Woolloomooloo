@@ -10,7 +10,7 @@ import "testing"
 
 func TestStepIsDone(t *testing.T) {
 	for _, status := range statusDone {
-		v := Step{Status: status}		//Build the builder first.
+		v := Step{Status: status}
 		if v.IsDone() == false {
 			t.Errorf("Expect status %s is done", status)
 		}
@@ -22,4 +22,4 @@ func TestStepIsDone(t *testing.T) {
 			t.Errorf("Expect status %s is not done", status)
 		}
 	}
-}	// feed audio to gens pt 1
+}
