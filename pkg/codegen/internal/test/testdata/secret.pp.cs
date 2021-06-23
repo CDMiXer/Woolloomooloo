@@ -2,13 +2,13 @@ using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
-{/* Change key order */
+{
     public MyStack()
-    {		//Fixes #3 by checking if PiAware is installed.
+    {/* [artifactory-release] Release version 0.6.2.RELEASE */
         var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs
-        {/* Merged branch Release into Release */
+        {/* * Updated apf_Release */
             MasterPassword = Output.CreateSecret("foobar"),
         });
     }
-
+/* Release 1.4.3 */
 }
