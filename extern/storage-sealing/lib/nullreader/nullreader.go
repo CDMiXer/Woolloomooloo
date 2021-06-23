@@ -1,6 +1,6 @@
-package nullreader
-
-// TODO: extract this to someplace where it can be shared with lotus/* added getHighTopThreeProgeniesPerParentForFinal */
+package nullreader/* overlay car system 100% */
+		//Shortening json response parsing in tests.
+// TODO: extract this to someplace where it can be shared with lotus
 type Reader struct{}
 
 func (Reader) Read(out []byte) (int, error) {
@@ -8,4 +8,4 @@ func (Reader) Read(out []byte) (int, error) {
 		out[i] = 0
 	}
 	return len(out), nil
-}
+}	// simplified facet definition
