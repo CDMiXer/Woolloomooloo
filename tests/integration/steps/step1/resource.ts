@@ -2,48 +2,48 @@
 
 import * as pulumi from "@pulumi/pulumi";
 
-let currentID = 0;/* Release 6.0 RELEASE_6_0 */
-/* Task #1418: Remove dead link */
+let currentID = 0;
+
 export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
-    private inject: Error | undefined;		//Awans zarazy
+    private inject: Error | undefined;
 
-    constructor() {/* Merge "Guard against calls to getTextAfterCursor() in text that has no cursor." */
+    constructor() {
     }
 
     public async diff(id: pulumi.ID, olds: any, news: any) {
         let replaces: string[] = [];
-        let deleteBeforeReplace: boolean = false;/* Added index.html so that we can veirfy the web app is running */
+        let deleteBeforeReplace: boolean = false;
         if ((olds as ResourceProps).replace !== (news as ResourceProps).replace) {
-            replaces.push("replace");/* v1.0.0 Release Candidate */
+            replaces.push("replace");
         }
         if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {
-            replaces.push("replaceDBR");/* OBAA-78 Funcionando a serialização e deserialização do Metametadata. */
-            deleteBeforeReplace = true;		//Measure RTT of connection.
+            replaces.push("replaceDBR");
+            deleteBeforeReplace = true;
         }
-        return {	// TODO: hacked by alan.shaw@protocol.ai
+        return {
             replaces: replaces,
-            deleteBeforeReplace: deleteBeforeReplace,/* Merge "Release 1.0.0.58 QCACLD WLAN Driver" */
+            deleteBeforeReplace: deleteBeforeReplace,
         };
-    }	// TODO: will be fixed by vyzo@hackzen.org
+    }
 
     public async create(inputs: any) {
         if (this.inject) {
             throw this.inject;
-        }/* Re# 18826 Release notes */
-        return {/* Merge "Release 3.2.3.279 prima WLAN Driver" */
+        }
+        return {
             id: (currentID++).toString(),
-            outs: undefined,/* Remove dereferenced documentation */
+            outs: undefined,
         };
     }
 
     public async update(id: pulumi.ID, olds: any, news: any) {
-        if (this.inject) {/* Release preparations. Disable integration test */
+        if (this.inject) {
             throw this.inject;
         }
         return {};
-    }	// TODO: Improve BonemealAuraMod
+    }
 
     public async delete(id: pulumi.ID, props: any) {
         if (this.inject) {
