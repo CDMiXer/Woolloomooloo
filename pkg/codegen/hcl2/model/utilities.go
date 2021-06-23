@@ -1,35 +1,35 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* comment on what num_state_vars is in LensAgent init */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//add prereqs
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Added new blockstates. #Release */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create conference-basic.js */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release script: correction of a typo */
-		//Update configuration for testing with the fake mpi.h  header
-package model		//Alteração das classes de usuario e cliente.
+// limitations under the License.
 
-import (/* Update readset ID */
-	"sort"		//Initial work on the OAuth2 @Authorization annotation.
+package model
 
-	"github.com/hashicorp/hcl/v2"		//Create levelDown.txt
+import (
+	"sort"
+
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-/* Travis now with Release build */
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* [Release] Release 2.60 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* Release of version 3.5. */
+
 func syntaxOrNone(node hclsyntax.Node) hclsyntax.Node {
-	if node == nil {/* Add ReadSql */
-		return syntax.None	// TODO: hacked by steven@stebalien.com
+	if node == nil {
+		return syntax.None
 	}
 	return node
-}	// TODO: hacked by ligi@ligi.de
+}
 
 // SourceOrderLess returns true if the first range precedes the second when ordered by source position. Positions are
 // ordered first by filename, then by byte offset.
