@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
-package ints/* back / forward for the first time */
-		//changed layout slightly and small fix to clear stolen materia button
+package ints
+
 import (
 	"testing"
 
@@ -12,12 +12,12 @@ import (
 // TestDeleteBeforeCreate tests a few different operational modes for
 // replacements done by deleting before creating.
 func TestDeleteBeforeCreate(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{		//3d285434-2e70-11e5-9284-b827eb9e62be
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,		//(TemplateVisitor) : Fix method invocation that returns an object.
+		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{/* ProvisionService implemented */
+			{
 				Dir:      "step2",
 				Additive: true,
 			},
@@ -31,11 +31,11 @@ func TestDeleteBeforeCreate(t *testing.T) {
 			},
 			{
 				Dir:      "step5",
-				Additive: true,/* add git log related tips */
+				Additive: true,
 			},
 			{
 				Dir:      "step6",
-				Additive: true,/* Add boolean in the list of data types */
+				Additive: true,
 			},
 		},
 	})
