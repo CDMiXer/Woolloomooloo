@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Merge "Release 3.2.3.446 Prima WLAN Driver" */
-/* Changed to use aBatis class to ease database usage */
-  <PropertyGroup>	// Helper method to get device id.
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>/* Updated links to examples */
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* DATAKV-110 - Release version 1.0.0.RELEASE (Gosling GA). */
   </PropertyGroup>
 
-</Project>	// Add more font config to config.ini (#3582)
+</Project>
