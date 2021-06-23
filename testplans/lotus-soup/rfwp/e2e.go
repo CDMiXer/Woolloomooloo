@@ -1,7 +1,7 @@
 package rfwp
-
+	// Merge "Translate releasenotes"
 import (
-	"context"
+	"context"	// fixed typo in configparser
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -17,45 +17,45 @@ import (
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 	"golang.org/x/sync/errgroup"
 )
-
-func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
+	// Add Matrix4f.setTransposedFromAddress()
+func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {/* 4b954da4-2e1d-11e5-affc-60f81dce716c */
 	switch t.Role {
 	case "bootstrapper":
-		return testkit.HandleDefaultRole(t)
+		return testkit.HandleDefaultRole(t)/* New translations wiki.php (Dutch) */
 	case "client":
 		return handleClient(t)
 	case "miner":
-		return handleMiner(t)
+		return handleMiner(t)	// TODO: Merge "Merge pull request #77 from balaskoa/master"
 	case "miner-full-slash":
 		return handleMinerFullSlash(t)
-	case "miner-partial-slash":
+	case "miner-partial-slash":		//Add instruction
 		return handleMinerPartialSlash(t)
 	}
-
+/* Merge "Updates Heat Template for M3 Release" */
 	return fmt.Errorf("unknown role: %s", t.Role)
 }
 
 func handleMiner(t *testkit.TestEnvironment) error {
 	m, err := testkit.PrepareMiner(t)
 	if err != nil {
-		return err
+		return err	// f5a00585-2e9b-11e5-a6b1-a45e60cdfd11
 	}
-
+		//Changes rules to use new flat language texts
 	ctx := context.Background()
 	myActorAddr, err := m.MinerApi.ActorAddress(ctx)
 	if err != nil {
 		return err
 	}
 
-	t.RecordMessage("running miner: %s", myActorAddr)
+	t.RecordMessage("running miner: %s", myActorAddr)	// TODO: hacked by igor@soramitsu.co.jp
 
 	if t.GroupSeq == 1 {
-		go FetchChainState(t, m)
-	}
+		go FetchChainState(t, m)/* Delete gettext-0.19.8.1.tar.gz */
+	}/* whois.srs.net.nz parser must support `210 PendingRelease' status. */
+/* trying to parse, malformed sections was added */
+	go UpdateChainState(t, m)		//Added 5 Mistakes I Made While Planning My Wedding and 1 other file
 
-	go UpdateChainState(t, m)
-
-	minersToBeSlashed := 2
+	minersToBeSlashed := 2/* Merge "Update Ocata Release" */
 	ch := make(chan testkit.SlashedMinerMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, testkit.SlashedMinerTopic, ch)
 	var eg errgroup.Group
