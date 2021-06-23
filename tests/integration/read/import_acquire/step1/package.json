@@ -1,12 +1,12 @@
-{	// add Nexttransitions
+{
     "name": "read_relinquish",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-{ :"stpircs"    
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: Analysis requester work
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
