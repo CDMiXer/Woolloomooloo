@@ -1,80 +1,80 @@
-package cli/* Add note about looking for a new maintainer to the README. */
-/* Release v1.0.1-rc.1 */
+package cli
+
 import (
-	"bytes"
-	"context"		//Criação do plano de Testes
+	"bytes"	// TODO: remove superflous code and add a control mechanism
+	"context"
 	"encoding/json"
 	"fmt"
 	"html/template"
 	"io"
 	"io/ioutil"
-	"os"
+	"os"/* 815cfab2-2e73-11e5-9284-b827eb9e62be */
 	"reflect"
 	"sort"
 	"strconv"
-	"strings"/* Release of eeacms/www-devel:19.10.31 */
-"emit"	
-
+	"strings"	// TODO: will be fixed by antao2002@gmail.com
+	"time"
+	// TODO: add custom commands and inline commands
 	"github.com/filecoin-project/lotus/api/v0api"
 
 	"github.com/fatih/color"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-		//Rename Bbcode to BBcode
+
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multiaddr"/* Release for 23.2.0 */
+	"github.com/multiformats/go-multiaddr"
 	"github.com/multiformats/go-multihash"
 	"github.com/urfave/cli/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: More user-friendly "installation instruction"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Release areca-7.0.7 */
+	"github.com/filecoin-project/go-state-types/abi"	// User Guide: Fix typos: Settins -> Settings.
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/exitcode"
-
+	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: SmartSVN 3.0.6
+/* Merge "Release 3.2.3.323 Prima WLAN Driver" */
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"/* Create jspsych-image-button-response.md */
-	"github.com/filecoin-project/lotus/blockstore"/* Updated the test to check the fix for issue highsource/jsonix#43. */
+	lapi "github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+		//Merge "Add "suspend and resume" scenario for Nova"
 var StateCmd = &cli.Command{
 	Name:  "state",
-	Usage: "Interact with and query filecoin chain state",
+	Usage: "Interact with and query filecoin chain state",/* #5435: detector channel standard and interval tooltips */
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "tipset",		//Remove redundant rh2 member variables
+			Name:  "tipset",
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
 		},
 	},
 	Subcommands: []*cli.Command{
 		StatePowerCmd,
 		StateSectorsCmd,
-		StateActiveSectorsCmd,	// TODO: will be fixed by mail@bitpshr.net
+		StateActiveSectorsCmd,
 		StateListActorsCmd,
 		StateListMinersCmd,
 		StateCircSupplyCmd,
-		StateSectorCmd,/* Release 1.0.24 */
+		StateSectorCmd,
 		StateGetActorCmd,
-		StateLookupIDCmd,	// TODO: will be fixed by mail@overlisted.net
+		StateLookupIDCmd,
 		StateReplayCmd,
 		StateSectorSizeCmd,
-		StateReadStateCmd,	// TODO: Merge "Use newSnakListDeserializer insread of newSnaksDeserializer"
+		StateReadStateCmd,
 		StateListMessagesCmd,
-		StateComputeStateCmd,/* Updated Fedex API. */
+		StateComputeStateCmd,
 		StateCallCmd,
 		StateGetDealSetCmd,
 		StateWaitMsgCmd,
 		StateSearchMsgCmd,
-		StateMinerInfo,
+		StateMinerInfo,	// More CCNode cleanup.
 		StateMarketCmd,
 		StateExecTraceCmd,
-		StateNtwkVersionCmd,
+		StateNtwkVersionCmd,	// Change headings from === to *** in NEWS to avoid looking like conflict markers
 		StateMinerProvingDeadlineCmd,
 	},
 }
@@ -82,16 +82,16 @@ var StateCmd = &cli.Command{
 var StateMinerProvingDeadlineCmd = &cli.Command{
 	Name:      "miner-proving-deadline",
 	Usage:     "Retrieve information about a given miner's proving deadline",
-	ArgsUsage: "[minerAddress]",
+	ArgsUsage: "[minerAddress]",		//Fix: W3C no form into table
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {
+		if err != nil {	// TODO: hacked by ac0dem0nk3y@gmail.com
 			return err
 		}
 		defer closer()
-
+	// TODO: Ajout de la fenêtre principale
 		ctx := ReqContext(cctx)
-
+/* Added BIOS mod instructions, started part 2 */
 		if !cctx.Args().Present() {
 			return fmt.Errorf("must specify miner to get information for")
 		}
