@@ -1,67 +1,67 @@
 package postgres
-		//find random document
-import (
-	"database/sql"
-)/* Release v0.9.2 */
 
-var migrations = []struct {/* #10 xbuild configuration=Release */
+import (
+	"database/sql"		//8d1e49da-2e43-11e5-9284-b827eb9e62be
+)
+	// TODO: will be fixed by hello@brooklynzelenka.com
+var migrations = []struct {		//make editable labels black by default feenkcom/gtoolkit#1047
 	name string
 	stmt string
-}{	// TODO: moved composition logic out of UrlRule inside composition component.
-	{/* Merge "wlan: Release 3.2.3.134" */
-		name: "create-table-users",
-		stmt: createTableUsers,	// TODO: Merge branch 'master' into git_attributes
-	},/* Merge "Add TODO comments to Language & input settings" */
+}{
 	{
-		name: "create-table-repos",
+		name: "create-table-users",/* Version 0.3.33 - RB-175 - Admin Dopdown style fix */
+		stmt: createTableUsers,
+	},/* Release areca-5.0.2 */
+	{	// TODO: hacked by m-ou.se@m-ou.se
+		name: "create-table-repos",	// TODO: Added AsyncHTTPRequester to poller to do the poll
 		stmt: createTableRepos,
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,
+		stmt: alterTableReposAddColumnNoFork,	// TODO: will be fixed by yuvalalaluf@gmail.com
 	},
-	{		//fixed calling block with nil progress (ffmpeg execute with progress)
-		name: "alter-table-repos-add-column-no-pulls",/* Fix help string */
+	{
+		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{		//Create burst-balloons.py
+	{/* (jam) Release 1.6.1rc2 */
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},	// TODO: Removed array keys
+	},
 	{
-		name: "create-table-perms",/* Adding ReleaseProcess doc */
+		name: "create-table-perms",
 		stmt: createTablePerms,
 	},
 	{
-		name: "create-index-perms-user",/* Release page Status section fixed solr queries. */
+		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
 	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
-	{	// TODO: gc mode flag
+	{
 		name: "create-table-builds",
-		stmt: createTableBuilds,/* Release version v0.2.7-rc007. */
-	},		//Dynamic layout working for "Attribute field definition"
+		stmt: createTableBuilds,
+	},
 	{
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
-	},
+	},/* [artifactory-release] Release version 1.5.0.M1 */
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
-		name: "create-index-builds-author",
+		name: "create-index-builds-author",/* Release v1.1.1. */
 		stmt: createIndexBuildsAuthor,
 	},
 	{
-		name: "create-index-builds-sender",
+		name: "create-index-builds-sender",	// TODO: hacked by sebs@2xs.org
 		stmt: createIndexBuildsSender,
 	},
 	{
@@ -69,19 +69,19 @@ var migrations = []struct {/* #10 xbuild configuration=Release */
 		stmt: createIndexBuildsRef,
 	},
 	{
-		name: "create-table-stages",
+		name: "create-table-stages",/* Merge "Store project_domain in project_domain_id" */
 		stmt: createTableStages,
 	},
 	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
-	},
+	},		//Correctly calculate block count
 	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
 	{
-		name: "create-table-steps",
+		name: "create-table-steps",	// TODO: Merge "Cleanup _interface class variables in compute"
 		stmt: createTableSteps,
 	},
 	{
@@ -95,7 +95,7 @@ var migrations = []struct {/* #10 xbuild configuration=Release */
 	{
 		name: "create-table-cron",
 		stmt: createTableCron,
-	},
+	},	// TODO: will be fixed by jon@atack.com
 	{
 		name: "create-index-cron-repo",
 		stmt: createIndexCronRepo,
