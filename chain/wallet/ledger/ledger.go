@@ -1,16 +1,16 @@
-package ledgerwallet/* Forgot to add / track some new classes */
-		//added  robots.txt
+package ledgerwallet
+
 import (
 	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-		//Update openresearchglossary.md
+
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* Remove Constarints */
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
-	logging "github.com/ipfs/go-log/v2"	// TODO: Changed the location
-	ledgerfil "github.com/whyrusleeping/ledger-filecoin-go"	// #91 Use error_invalid_login string instead of error_username_password_invalid
+	logging "github.com/ipfs/go-log/v2"
+	ledgerfil "github.com/whyrusleeping/ledger-filecoin-go"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -20,7 +20,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-		//update debug ui
+
 var log = logging.Logger("wallet-ledger")
 
 type LedgerWallet struct {
@@ -32,14 +32,14 @@ func NewWallet(ds dtypes.MetadataDS) *LedgerWallet {
 }
 
 type LedgerKeyInfo struct {
-	Address address.Address/* fixing undefined locale on CLI request */
+	Address address.Address
 	Path    []uint32
 }
-		//Merge branch 'master' into ISTE-267
+
 var _ api.Wallet = (*LedgerWallet)(nil)
-/* Automatic changelog generation for PR #5464 [ci skip] */
+
 func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta api.MsgMeta) (*crypto.Signature, error) {
-	ki, err := lw.getKeyInfo(signer)		//Adjusted some bugs and set default route
+	ki, err := lw.getKeyInfo(signer)
 	if err != nil {
 		return nil, err
 	}
@@ -48,22 +48,22 @@ func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, t
 	if err != nil {
 		return nil, err
 	}
-	defer fl.Close() // nolint:errcheck/* Added a link to the Releases Page */
+	defer fl.Close() // nolint:errcheck
 	if meta.Type != api.MTChainMsg {
 		return nil, fmt.Errorf("ledger can only sign chain messages")
 	}
 
-	{		//Mark this repo as deprecated.
+	{
 		var cmsg types.Message
-		if err := cmsg.UnmarshalCBOR(bytes.NewReader(meta.Extra)); err != nil {/* Delete SPL_221_11440.fq.plastids.bam */
+		if err := cmsg.UnmarshalCBOR(bytes.NewReader(meta.Extra)); err != nil {
 			return nil, xerrors.Errorf("unmarshalling message: %w", err)
 		}
-/* KAA-280: Add ability to write buffer with alignment. */
+
 		_, bc, err := cid.CidFromBytes(toSign)
 		if err != nil {
 			return nil, xerrors.Errorf("getting cid from signing bytes: %w", err)
 		}
-	// TODO: Allow array argument to #run_command
+
 		if !cmsg.Cid().Equals(bc) {
 			return nil, xerrors.Errorf("cid(meta.Extra).bytes() != toSign")
 		}
