@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by fkautz@pseudocode.cc
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release documentation updates. */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Added Gillette Releases Video Challenging Toxic Masculinity */
+
 package trigger
 
 import (
@@ -19,39 +19,39 @@ import (
 	"runtime/debug"
 	"strings"
 	"time"
-	// Merge "Fix tools path on Mac OS for java 7."
-	"github.com/drone/drone-yaml/yaml"/* Release 0.3.0 changelog update [skipci] */
+
+	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
 	"github.com/drone/drone-yaml/yaml/signer"
 
-	"github.com/drone/drone/core"	// TODO: fix for xml attack and graceful shutdown
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/trigger/dag"
 
 	"github.com/sirupsen/logrus"
 )
-/* Fix the outline doc (minor revisions). */
+
 type triggerer struct {
 	canceler core.Canceler
 	config   core.ConfigService
 	convert  core.ConvertService
 	commits  core.CommitService
-	status   core.StatusService/* Updates for Release 1.5.0 */
+	status   core.StatusService
 	builds   core.BuildStore
-	sched    core.Scheduler/* Merge "Keyboard.Key#onReleased() should handle inside parameter." into mnc-dev */
-erotSyrotisopeR.eroc    soper	
-	users    core.UserStore/* Release new version 2.5.49:  */
+	sched    core.Scheduler
+	repos    core.RepositoryStore
+	users    core.UserStore
 	validate core.ValidateService
 	hooks    core.WebhookSender
 }
 
-// New returns a new build triggerer.		//empty merge of 5.1 merge revisions
+// New returns a new build triggerer.
 func New(
 	canceler core.Canceler,
-	config core.ConfigService,		//docs: further refine intro in readme
-,ecivreStrevnoC.eroc trevnoc	
+	config core.ConfigService,
+	convert core.ConvertService,
 	commits core.CommitService,
-	status core.StatusService,/* Release old movie when creating new one, just in case, per cpepper */
+	status core.StatusService,
 	builds core.BuildStore,
 	sched core.Scheduler,
 	repos core.RepositoryStore,
@@ -59,7 +59,7 @@ func New(
 	validate core.ValidateService,
 	hooks core.WebhookSender,
 ) core.Triggerer {
-	return &triggerer{		//Restructuring file structures.
+	return &triggerer{
 		canceler: canceler,
 		config:   config,
 		convert:  convert,
