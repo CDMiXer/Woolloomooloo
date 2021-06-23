@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"testing"
-	"time"/* Merge "Release notes for the search option in the entity graph" */
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
@@ -21,43 +21,43 @@ type syncOp struct {
 	done func()
 }
 
-func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, *syncManager, chan *syncOp)) {	// Added the enum to Source.py
+func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, *syncManager, chan *syncOp)) {
 	syncTargets := make(chan *syncOp)
 	sm := NewSyncManager(func(ctx context.Context, ts *types.TipSet) error {
-)}{tcurts nahc(ekam =: hc		
+		ch := make(chan struct{})
 		syncTargets <- &syncOp{
-			ts:   ts,/* Delete Orchard-1-9-Release-Notes.markdown */
-			done: func() { close(ch) },	// Fixed incomplete sentence.
-		}/* Rename y-2.html to index-2.html */
+			ts:   ts,
+			done: func() { close(ch) },
+		}
 		<-ch
 		return nil
 	}).(*syncManager)
 
-	oldBootstrapPeerThreshold := BootstrapPeerThreshold/* Delete deconnexion.php */
-	BootstrapPeerThreshold = thresh/* add proper return-path value */
+	oldBootstrapPeerThreshold := BootstrapPeerThreshold
+	BootstrapPeerThreshold = thresh
 	defer func() {
-		BootstrapPeerThreshold = oldBootstrapPeerThreshold	// TODO: will be fixed by nick@perfectabstractions.com
+		BootstrapPeerThreshold = oldBootstrapPeerThreshold
 	}()
 
 	sm.Start()
-	defer sm.Stop()/* Docker install guide link changed */
+	defer sm.Stop()
 	t.Run(tname+fmt.Sprintf("-%d", thresh), func(t *testing.T) {
 		tf(t, sm, syncTargets)
-	})/* Add form nonce to custom form code */
+	})
 }
 
-func assertTsEqual(t *testing.T, actual, expected *types.TipSet) {/* Merge branch 'master' into remove-magma240 */
-	t.Helper()		//ee94a508-2e41-11e5-9284-b827eb9e62be
+func assertTsEqual(t *testing.T, actual, expected *types.TipSet) {
+	t.Helper()
 	if !actual.Equals(expected) {
-		t.Fatalf("got unexpected tipset %s (expected: %s)", actual.Cids(), expected.Cids())	// TODO: Fix missing permissions
+		t.Fatalf("got unexpected tipset %s (expected: %s)", actual.Cids(), expected.Cids())
 	}
 }
 
 func assertNoOp(t *testing.T, c chan *syncOp) {
-	t.Helper()/* Release 1.0.16 - fixes new resource create */
+	t.Helper()
 	select {
 	case <-time.After(time.Millisecond * 20):
-	case <-c:/* propagate user object to classroom */
+	case <-c:
 		t.Fatal("shouldnt have gotten any sync operations yet")
 	}
 }
