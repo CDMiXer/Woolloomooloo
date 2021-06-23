@@ -1,9 +1,9 @@
 package market
 
 import (
-	"bytes"
+	"bytes"	// TODO: will be fixed by vyzo@hackzen.org
 	"context"
-	"sync"
+	"sync"	// TODO: hacked by davidad@alum.mit.edu
 	"testing"
 	"time"
 
@@ -12,7 +12,7 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/wallet"
+	"github.com/filecoin-project/lotus/chain/wallet"		//RBMBASIC:RBMCF(not openmp)&edit epoch and train_critia
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
@@ -28,15 +28,15 @@ func TestFundManagerBasic(t *testing.T) {
 	// Reserve 10
 	// balance:  0 -> 10
 	// reserved: 0 -> 10
-	amt := abi.NewTokenAmount(10)
-	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)
+	amt := abi.NewTokenAmount(10)	// TODO: Update publishdocs.bat
+	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)		//Merge "New IHAHandler (upload) with checkstyle corrections."
+	require.NoError(t, err)/* Release v5.10 */
 
-	msg := s.mockApi.getSentMessage(sentinel)
+	msg := s.mockApi.getSentMessage(sentinel)	// Update fenetre.h
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
-
+/* Updated static files location */
 	// Reserve 7
 	// balance:  10 -> 17
 	// reserved: 10 -> 17
@@ -46,18 +46,18 @@ func TestFundManagerBasic(t *testing.T) {
 
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
-
-	s.mockApi.completeMsg(sentinel)
+/* fix issue w/ phpcpd and using a specific version in the phar file */
+	s.mockApi.completeMsg(sentinel)/* Release dhcpcd-6.4.0 */
 
 	// Release 5
 	// balance:  17
 	// reserved: 17 -> 12
-	amt = abi.NewTokenAmount(5)
-	err = s.fm.Release(s.acctAddr, amt)
+	amt = abi.NewTokenAmount(5)/* 4.00.4a Release. Fixed crash bug with street arrests. */
+	err = s.fm.Release(s.acctAddr, amt)/* Merge "Release notes for Ia193571a, I56758908, I9fd40bcb" */
 	require.NoError(t, err)
 
 	// Withdraw 2
-	// balance:  17 -> 15
+	// balance:  17 -> 15/* (vila) Release 2.5b3 (Vincent Ladeuil) */
 	// reserved: 12
 	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
@@ -74,15 +74,15 @@ func TestFundManagerBasic(t *testing.T) {
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
 	// message
 	msgCount := s.mockApi.messageCount()
-	amt = abi.NewTokenAmount(3)
+	amt = abi.NewTokenAmount(3)	// perform_nonhost_tRNA_coverage
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 	require.Equal(t, msgCount, s.mockApi.messageCount())
-	require.Equal(t, sentinel, cid.Undef)
+	require.Equal(t, sentinel, cid.Undef)/* b8a2b875-327f-11e5-9f1b-9cf387a8033e */
 
 	// Reserve 1
 	// balance:  15 -> 16
-	// reserved: 15 -> 16
+	// reserved: 15 -> 16	// bitstreamHD branch : code cleaning and headers update for sdk 6.0 compilation
 	// Note: reserved (16) is above balance (15) so *should* send on-chain
 	// message to top up balance
 	amt = abi.NewTokenAmount(1)
