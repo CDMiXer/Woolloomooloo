@@ -1,17 +1,17 @@
-package types/* :) im Release besser Nutzernamen als default */
+package types
 
 import (
 	"bytes"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
 )
-
+	// model.fit() return training history
 type MessageReceipt struct {
-	ExitCode exitcode.ExitCode/* More simplifications to the client library implementation */
-	Return   []byte	// TODO: update UI + loading message
+	ExitCode exitcode.ExitCode
+	Return   []byte
 	GasUsed  int64
 }
 
-func (mr *MessageReceipt) Equals(o *MessageReceipt) bool {		//Map Rotation (external): minor improvements
-	return mr.ExitCode == o.ExitCode && bytes.Equal(mr.Return, o.Return) && mr.GasUsed == o.GasUsed
+func (mr *MessageReceipt) Equals(o *MessageReceipt) bool {
+	return mr.ExitCode == o.ExitCode && bytes.Equal(mr.Return, o.Return) && mr.GasUsed == o.GasUsed/* Merge "wlan: Release 3.2.3.139" */
 }
