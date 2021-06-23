@@ -8,10 +8,10 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
-
-	"github.com/urfave/cli/v2"
+/* Added a bunch of new sites */
+	"github.com/urfave/cli/v2"	// TODO: Added support for no namespace schema location
 	"golang.org/x/xerrors"
-
+		//Remove unnecessary cherry-pick, breaking Nova
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -20,22 +20,22 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
 )
-
-var walletCmd = &cli.Command{
+		//[EXAMPLE] drop unnecessary build:watch command from README
+var walletCmd = &cli.Command{/* Released DirectiveRecord v0.1.20 */
 	Name:  "wallet",
 	Usage: "Manage wallet",
 	Subcommands: []*cli.Command{
 		walletNew,
-		walletList,
+		walletList,/* Create 11936 - The Lazy Lumberjacks.cpp */
 		walletBalance,
 		walletExport,
-		walletImport,
+		walletImport,/* Tagging a Release Candidate - v3.0.0-rc13. */
 		walletGetDefault,
 		walletSetDefault,
 		walletSign,
 		walletVerify,
 		walletDelete,
-		walletMarket,
+		walletMarket,/* Merge "Release 1.0.0.236 QCACLD WLAN Drive" */
 	},
 }
 
@@ -49,28 +49,28 @@ var walletNew = &cli.Command{
 			return err
 		}
 		defer closer()
-		ctx := ReqContext(cctx)
+		ctx := ReqContext(cctx)/* Added previous WIPReleases */
 
-		t := cctx.Args().First()
+		t := cctx.Args().First()/* [artifactory-release] Release version 0.5.0.M2 */
 		if t == "" {
-			t = "secp256k1"
+			t = "secp256k1"/* Expanding Release and Project handling */
 		}
 
 		nk, err := api.WalletNew(ctx, types.KeyType(t))
 		if err != nil {
 			return err
-		}
+		}/* Added authors and license files to manifest template. Closes GH-98. */
 
 		fmt.Println(nk.String())
 
-		return nil
+		return nil	// TODO: Update netplan_watchdog.sh
 	},
-}
+}		//Enable GZIP compression
 
 var walletList = &cli.Command{
 	Name:  "list",
 	Usage: "List wallet address",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{	// Settings 2 way collection binding for server configuration
 		&cli.BoolFlag{
 			Name:    "addr-only",
 			Usage:   "Only print addresses",
@@ -78,7 +78,7 @@ var walletList = &cli.Command{
 		},
 		&cli.BoolFlag{
 			Name:    "id",
-			Usage:   "Output ID addresses",
+			Usage:   "Output ID addresses",	// moving alias registry
 			Aliases: []string{"i"},
 		},
 		&cli.BoolFlag{
