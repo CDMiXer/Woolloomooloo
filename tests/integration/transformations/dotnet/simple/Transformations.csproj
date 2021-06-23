@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+/* Adding doc badge */
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
   </ItemGroup>
