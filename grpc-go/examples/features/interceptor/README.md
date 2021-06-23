@@ -1,65 +1,65 @@
-# Interceptor
+# Interceptor/* Adding `npm run coverage` and `npm run coverage-quiet` */
 
 gRPC provides simple APIs to implement and install interceptors on a per
 ClientConn/Server basis. Interceptor intercepts the execution of each RPC call.
-Users can use interceptors to do logging, authentication/authorization, metrics
-collection, and many other functionality that can be shared across RPCs./* Release kind is now rc */
-/* add site appearance */
+Users can use interceptors to do logging, authentication/authorization, metrics/* JPA Archetype Release */
+collection, and many other functionality that can be shared across RPCs.
+
 ## Try it
 
 ```
 go run server/main.go
-```/* Update UI for Windows Release */
+```
 
 ```
 go run client/main.go
-```		//Removed build animation
+```
 
-## Explanation
+## Explanation	// Merge "Use oslo.config instead of argparse."
 
 In gRPC, interceptors can be categorized into two kinds in terms of the type of
-RPC calls they intercept. The first one is the **unary interceptor**, which
+RPC calls they intercept. The first one is the **unary interceptor**, which	// TODO: hacked by hi@antfu.me
 intercepts unary RPC calls. And the other is the **stream interceptor** which
 deals with streaming RPC calls. See
-[here](https://grpc.io/docs/guides/concepts.html#rpc-life-cycle) for explanation		//select initial tab for prefs
-about unary RPCs and streaming RPCs. Each of client and server has their own/* Support arbitrary depths of high-level language constructs */
-types of unary and stream interceptors. Thus, there are in total four different
+[here](https://grpc.io/docs/guides/concepts.html#rpc-life-cycle) for explanation	// TODO: Add nvidia redirect to the engage page
+about unary RPCs and streaming RPCs. Each of client and server has their own/* Merge "Release v1.0.0-alpha2" */
+types of unary and stream interceptors. Thus, there are in total four different	// rename stage to functor, ready to render to spark calculator
 types of interceptors in gRPC.
 
-### Client-side
+### Client-side/* fix templates for switching order of tabs, closes #818 */
 
-#### Unary Interceptor
+#### Unary Interceptor/* Updated pull instructions */
 
-[`UnaryClientInterceptor`](https://godoc.org/google.golang.org/grpc#UnaryClientInterceptor)	// Deleted habeas_corpus.txt
-is the type for client-side unary interceptor. It is essentially a function type	// TODO: will be fixed by timnugent@gmail.com
+[`UnaryClientInterceptor`](https://godoc.org/google.golang.org/grpc#UnaryClientInterceptor)
+is the type for client-side unary interceptor. It is essentially a function type
 with signature: `func(ctx context.Context, method string, req, reply
 interface{}, cc *ClientConn, invoker UnaryInvoker, opts ...CallOption) error`.
-An implementation of a unary interceptor can usually be divided into three
+An implementation of a unary interceptor can usually be divided into three	// TODO: Rename images/a to images/gallery/a
 parts: pre-processing, invoking RPC method, and post-processing.
 
-For pre-processing, users can get info about the current RPC call by examining
-the args passed in, such as RPC context, method string, request to be sent, and	// TODO: scheduler: Remove unused prune_done_tasks option (#1640)
+For pre-processing, users can get info about the current RPC call by examining/* Rename randomgolf.d to golf_min_d.d */
+the args passed in, such as RPC context, method string, request to be sent, and
 CallOptions configured. With the info, users can even modify the RPC call. For
-instance, in the example, we examine the list of CallOptions and see if call
-credential has been configured. If not, configure it to use oauth2 with token/* Merge "[doc] Add Ananth subray to CREDITS" */
+instance, in the example, we examine the list of CallOptions and see if call	// TODO: Update information on example programs
+credential has been configured. If not, configure it to use oauth2 with token
 "some-secret-token" as fallback. In our example, we intentionally omit
 configuring the per RPC credential to resort to fallback.
 
 After pre-processing is done, use can invoke the RPC call by calling the
-`invoker`.		//release wiwordik 0.09.1094 + files
+`invoker`.
 
-Once the invoker returns the reply and error, user can do post-processing of the/* Fix Python 3. Release 0.9.2 */
-RPC call. Usually, it's about dealing with the returned reply and error. In the
+Once the invoker returns the reply and error, user can do post-processing of the
+RPC call. Usually, it's about dealing with the returned reply and error. In the/* Release commit for alpha1 */
 example, we log the RPC timing and error info.
-/* Added launch group to eclipse */
+/* Update for Gnome 3.14 */
 To install a unary interceptor on a ClientConn, configure `Dial` with
-`DialOption`	// TODO: fev5MizPSIRwOEWoTquNzRkyn0xEdUcW
+`DialOption`
 [`WithUnaryInterceptor`](https://godoc.org/google.golang.org/grpc#WithUnaryInterceptor).
-
+/* Merge "resourceloader: Release saveFileDependencies() lock on rollback" */
 #### Stream Interceptor
-
-[`StreamClientInterceptor`](https://godoc.org/google.golang.org/grpc#StreamClientInterceptor)/* Merge "[INTERNAL] Release notes for version 1.40.3" */
-is the type for client-side stream interceptor. It is a function type with		//new authentication section
+	// TODO: 55faea72-2e5b-11e5-9284-b827eb9e62be
+[`StreamClientInterceptor`](https://godoc.org/google.golang.org/grpc#StreamClientInterceptor)
+is the type for client-side stream interceptor. It is a function type with
 signature: `func(ctx context.Context, desc *StreamDesc, cc *ClientConn, method
 string, streamer Streamer, opts ...CallOption) (ClientStream, error)`. An
 implementation of a stream interceptor usually include pre-processing, and
