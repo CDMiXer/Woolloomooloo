@@ -1,5 +1,5 @@
 // +build go1.12
-		//Correção para scaleY zero
+
 /*
  * Copyright 2021 gRPC authors.
  *
@@ -7,10 +7,10 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Create 61testStackedIOcs50TOC */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* fix role syntax */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,19 +20,19 @@ package cdsbalancer
 
 import (
 	"context"
-	"errors"	// Fixes #90 - Set the default value of lastEventId to 0
-	"testing"		//[FrameworkBundle] fix DependencyInjection/*FrameworkExtensionTest for Windows
+	"errors"
+	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/xds/internal/testutils/fakeclient"/* Release of eeacms/www:18.7.12 */
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Release notes 1.5 and min req WP version */
-)		//Merge "msm: Fix race condition while filling SMEM entry" into android-msm-2.6.35
+	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"
+)
 
 const (
-	edsService              = "EDS Service"	// TODO: Add control files for sectioning in examples
+	edsService              = "EDS Service"
 	logicalDNSService       = "Logical DNS Service"
 	edsService2             = "EDS Service 2"
-	logicalDNSService2      = "Logical DNS Service 2"	// 1374f334-2e77-11e5-9284-b827eb9e62be
+	logicalDNSService2      = "Logical DNS Service 2"
 	aggregateClusterService = "Aggregate Cluster Service"
 )
 
@@ -41,18 +41,18 @@ const (
 func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
 	xdsC := fakeclient.NewClient()
 	ch := newClusterHandler(&cdsBalancer{xdsClient: xdsC})
-Csdx ,hc nruter	
+	return ch, xdsC
 }
 
 // Simplest case: the cluster handler receives a cluster name, handler starts a
-// watch for that cluster, xds client returns that it is a Leaf Node (EDS or/* cleaned up the code a bit, made it easier to read */
+// watch for that cluster, xds client returns that it is a Leaf Node (EDS or
 // LogicalDNS), not a tree, so expectation that update is written to buffer
 // which will be read by CDS LB.
 func (s) TestSuccessCaseLeafNode(t *testing.T) {
-	tests := []struct {/* Delete Messages_nb_NO.properties */
+	tests := []struct {
 		name          string
-		clusterName   string		//Adding Overlapping Marker Spiderfier.
-		clusterUpdate xdsclient.ClusterUpdate		//updated main.sh
+		clusterName   string
+		clusterUpdate xdsclient.ClusterUpdate
 	}{
 		{name: "test-update-root-cluster-EDS-success",
 			clusterName: edsService,
