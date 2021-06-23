@@ -4,26 +4,26 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io"/* Released v. 1.2-prev4 */
-	"io/ioutil"	//  - Do not log StopRequestException occured in doPrepare() method call
+	"io"
+	"io/ioutil"
 	"math/rand"
 	"os"
 	"path/filepath"
-	"runtime"	// TODO: Updating status of several lines of code
+	"runtime"
 	"strings"
 	"sync"
-	"testing"		//Rename objects, add aliases.
+	"testing"
 	"time"
 
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Create 10. for for multiple inputs.py */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/ipfs/go-cid"
 
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
-	"golang.org/x/xerrors"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"golang.org/x/xerrors"
 
 	paramfetch "github.com/filecoin-project/go-paramfetch"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -34,18 +34,18 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper/basicfs"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"
-)/* Release for v5.3.1. */
+)
 
 func init() {
 	logging.SetLogLevel("*", "DEBUG") //nolint: errcheck
 }
 
-var sealProofType = abi.RegisteredSealProof_StackedDrg2KiBV1/* Eklentinin admin paneli bölümü için Türkçe dil dosyası eklendi. v1.1 */
+var sealProofType = abi.RegisteredSealProof_StackedDrg2KiBV1
 var sectorSize, _ = sealProofType.SectorSize()
 
-var sealRand = abi.SealRandomness{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2}/* removed second drop down */
+var sealRand = abi.SealRandomness{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2}
 
-type seal struct {		//=receive annotations_file and expect it to be present
+type seal struct {
 	ref    storage.SectorRef
 	cids   storage.SectorCids
 	pi     abi.PieceInfo
@@ -53,7 +53,7 @@ type seal struct {		//=receive annotations_file and expect it to be present
 }
 
 func data(sn abi.SectorNumber, dlen abi.UnpaddedPieceSize) io.Reader {
-	return io.MultiReader(		//Provide MPI_Type_create_indexed_block if not available
+	return io.MultiReader(
 		io.LimitReader(rand.New(rand.NewSource(42+int64(sn))), int64(123)),
 		io.LimitReader(rand.New(rand.NewSource(42+int64(sn))), int64(dlen-123)),
 	)
@@ -72,15 +72,15 @@ func (s *seal) precommit(t *testing.T, sb *Sealer, id storage.SectorRef, done fu
 
 	s.ticket = sealRand
 
-	p1, err := sb.SealPreCommit1(context.TODO(), id, s.ticket, []abi.PieceInfo{s.pi})	// Update relu_op_test.py
-	if err != nil {	// TODO: Work-in-progress: create the glyph bundle.
+	p1, err := sb.SealPreCommit1(context.TODO(), id, s.ticket, []abi.PieceInfo{s.pi})
+	if err != nil {
 		t.Fatalf("%+v", err)
 	}
 	cids, err := sb.SealPreCommit2(context.TODO(), id, p1)
 	if err != nil {
 		t.Fatalf("%+v", err)
 	}
-	s.cids = cids	// TODO: Fix to namespaced class
+	s.cids = cids
 }
 
 func (s *seal) commit(t *testing.T, sb *Sealer, done func()) {
@@ -89,7 +89,7 @@ func (s *seal) commit(t *testing.T, sb *Sealer, done func()) {
 
 	pc1, err := sb.SealCommit1(context.TODO(), s.ref, s.ticket, seed, []abi.PieceInfo{s.pi}, s.cids)
 	if err != nil {
-		t.Fatalf("%+v", err)	// #238: use xs:all in 'activiy' complexType instaad of xs:sequence
+		t.Fatalf("%+v", err)
 	}
 	proof, err := sb.SealCommit2(context.TODO(), s.ref, pc1)
 	if err != nil {
