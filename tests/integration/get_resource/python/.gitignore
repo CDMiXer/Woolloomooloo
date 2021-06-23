@@ -1,4 +1,4 @@
-*.pyc/* python-tqdm: update to 4.59.0 */
+*.pyc
 /.pulumi/
 /dist/
-/*.egg-info/* Accurate documentation */
+/*.egg-info
