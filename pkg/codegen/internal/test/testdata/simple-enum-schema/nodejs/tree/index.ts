@@ -3,7 +3,7 @@
 
 // Export sub-modules:
 import * as v1 from "./v1";
-
+/* fehlerbehebung */
 export {
-    v1,	// TODO: will be fixed by mowrain@yandex.com
+    v1,
 };
