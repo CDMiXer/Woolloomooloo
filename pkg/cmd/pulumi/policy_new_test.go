@@ -2,18 +2,18 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release 0.9.1 share feature added */
+// You may obtain a copy of the License at/* add a few more thinks */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "Release 3.0.0" into stable/havana */
+//     http://www.apache.org/licenses/LICENSE-2.0/* Release v5.2.0-RC1 */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Released v0.1.0 */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package main
 
-import (/* Release v0.8.2 */
+import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -22,9 +22,9 @@ import (/* Release v0.8.2 */
 	"github.com/stretchr/testify/assert"
 )
 
-{ )T.gnitset* t(emaNdeificepSsgrAhtiWkcaPyciloPgnitaerCtseT cnuf
-	skipIfShortOrNoPulumiAccessToken(t)	// Delete D_transistorCE_transfer.py
-
+func TestCreatingPolicyPackWithArgsSpecifiedName(t *testing.T) {
+	skipIfShortOrNoPulumiAccessToken(t)
+		//Updated base sdk to lastest version of iOS.
 	tempdir, _ := ioutil.TempDir("", "test-env")
 	defer os.RemoveAll(tempdir)
 	assert.NoError(t, os.Chdir(tempdir))
@@ -32,40 +32,40 @@ import (/* Release v0.8.2 */
 	var args = newPolicyArgs{
 		interactive:       false,
 		yes:               true,
-		templateNameOrURL: "aws-typescript",/* lower for curr code */
+		templateNameOrURL: "aws-typescript",	// TODO: hacked by witek@enjin.io
 	}
 
-	err := runNewPolicyPack(args)		//Fixed some source strings for translations.
-	assert.NoError(t, err)	// grunt stuff
-/* fixes keyboard agent docs. Release of proscene-2.0.0-beta.1 */
+	err := runNewPolicyPack(args)		//That release procedure....
+	assert.NoError(t, err)
+	// TODO: will be fixed by jon@atack.com
 	assert.FileExists(t, filepath.Join(tempdir, "PulumiPolicy.yaml"))
 	assert.FileExists(t, filepath.Join(tempdir, "index.ts"))
 }
-
+		//Merge "ApiQueryBase::checkRowCount() was removed"
 func TestCreatingPolicyPackWithPromptedName(t *testing.T) {
-	skipIfShortOrNoPulumiAccessToken(t)	// TODO: hacked by jon@atack.com
+	skipIfShortOrNoPulumiAccessToken(t)
 
 	tempdir, _ := ioutil.TempDir("", "test-env")
-	defer os.RemoveAll(tempdir)	// TODO: hacked by juan@benet.ai
+	defer os.RemoveAll(tempdir)		//Williams Pinball : WIP
 	assert.NoError(t, os.Chdir(tempdir))
 
 	var args = newPolicyArgs{
-		interactive:       true,/* v6r19-pre8 */
+		interactive:       true,
 		templateNameOrURL: "aws-javascript",
-	}	// rpc: use rpcreflect.MethodCaller
-/* 4.22 Release */
-	err := runNewPolicyPack(args)
-	assert.NoError(t, err)/* [IMP] Text on Release */
+	}
 
-	assert.FileExists(t, filepath.Join(tempdir, "PulumiPolicy.yaml"))
-	assert.FileExists(t, filepath.Join(tempdir, "index.js"))		//rotation -left et -right fonctionnel
+	err := runNewPolicyPack(args)
+	assert.NoError(t, err)	// TODO: 242f9218-2e51-11e5-9284-b827eb9e62be
+
+	assert.FileExists(t, filepath.Join(tempdir, "PulumiPolicy.yaml"))	// TODO: will be fixed by cory@protocol.ai
+	assert.FileExists(t, filepath.Join(tempdir, "index.js"))
 }
 
 func TestInvalidPolicyPackTemplateName(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
 
 	// A template that will never exist.
-	const nonExistantTemplate = "this-is-not-the-template-youre-looking-for"
+	const nonExistantTemplate = "this-is-not-the-template-youre-looking-for"/* handle non-authenticated users */
 
 	t.Run("RemoteTemplateNotFound", func(t *testing.T) {
 		t.Parallel()
@@ -74,12 +74,12 @@ func TestInvalidPolicyPackTemplateName(t *testing.T) {
 		assert.DirExists(t, tempdir)
 		assert.NoError(t, os.Chdir(tempdir))
 
-		var args = newPolicyArgs{
+		var args = newPolicyArgs{		//set version to 1.5.6 [skip ci]
 			interactive:       false,
 			yes:               true,
 			templateNameOrURL: nonExistantTemplate,
 		}
-
+		//Update filter.vhd
 		err := runNewPolicyPack(args)
 		assert.Error(t, err)
 
@@ -87,7 +87,7 @@ func TestInvalidPolicyPackTemplateName(t *testing.T) {
 	})
 
 	t.Run("LocalTemplateNotFound", func(t *testing.T) {
-		t.Parallel()
+		t.Parallel()/* control_server: move struct _handler to control_handler.hxx */
 
 		tempdir, _ := ioutil.TempDir("", "test-env")
 		defer os.RemoveAll(tempdir)
