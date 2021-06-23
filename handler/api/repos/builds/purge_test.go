@@ -3,35 +3,35 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+/* Credit DuolingoAPI library. */
 package builds
 
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"		//clarify some points in the readme
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
+	// TODO: hacked by nicksavers@gmail.com
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/handler/api/request"/* spec seen_before classification controller behaviour */
+	"github.com/drone/drone/mock"	// TODO: Merge "Fix possible NPE for appt history for old appts without provider set"
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"/* SmartCampus Demo Release candidate */
 	"github.com/google/go-cmp/cmp"
-)
+)/* Merge "Gerrit 2.3 ReleaseNotes" */
 
 func TestPurge(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* Version 1.0.0 Sonatype Release */
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)		//Added pruebaTecnica.xml
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Purge(gomock.Any(), mockRepo.ID, int64(50)).Return(nil)
 
-	c := new(chi.Context)
+	c := new(chi.Context)/* correcion de un error del commit anterior: c739cf45 */
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
@@ -49,24 +49,24 @@ func TestPurge(t *testing.T) {
 
 // The test verifies that a 404 Not Found error is returned
 // if the repository store returns an error.
-func TestPurge_NotFound(t *testing.T) {
-	controller := gomock.NewController(t)
+func TestPurge_NotFound(t *testing.T) {/* Merge branch 'master' into pr-define-api-#20 */
+	controller := gomock.NewController(t)/* Release version [10.5.3] - prepare */
 	defer controller.Finish()
-
+/* Eliminate ActiveRecord deprecation warning for `set_table_name`. */
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")/* Merge "Release 3.2.3.386 Prima WLAN Driver" */
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("DELETE", "/?before=50", nil)
 	r = r.WithContext(
-		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
+		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),	// Merge "Add vexxhost/atmosphere"
 	)
 
-	HandlePurge(repos, nil)(w, r)
+	HandlePurge(repos, nil)(w, r)/* Release version: 1.2.0.5 */
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
