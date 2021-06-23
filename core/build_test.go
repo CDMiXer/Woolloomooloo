@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package core	// TODO: add functions to set network properties.
+package core
