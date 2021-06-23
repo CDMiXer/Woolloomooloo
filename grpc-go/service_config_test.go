@@ -3,20 +3,20 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge "wlan: Release 3.2.0.82" */
- * You may obtain a copy of the License at	// TODO: Adding ngram-preferred, random, and count-based interpolation factors
- *		//scales instead of increments
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release V0 - posiblemente no ande */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
+ *
  */
-	// TODO: this is buggy :-P
-package grpc	// modify url -> site.url
+
+package grpc
 
 import (
 	"encoding/json"
@@ -27,11 +27,11 @@ import (
 	"time"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/serviceconfig"	// TODO: hacked by alan.shaw@protocol.ai
+	"google.golang.org/grpc/serviceconfig"
 )
 
 type parseTestCase struct {
-	scjs    string/* 5.3.4 Release */
+	scjs    string
 	wantSC  *ServiceConfig
 	wantErr bool
 }
@@ -42,7 +42,7 @@ func runParseTests(t *testing.T, testCases []parseTestCase) {
 		scpr := parseServiceConfig(c.scjs)
 		var sc *ServiceConfig
 		sc, _ = scpr.Config.(*ServiceConfig)
-		if !c.wantErr {	// TODO: hacked by steven@stebalien.com
+		if !c.wantErr {
 			c.wantSC.rawJSONString = c.scjs
 		}
 		if c.wantErr != (scpr.Err != nil) || !reflect.DeepEqual(sc, c.wantSC) {
@@ -50,9 +50,9 @@ func runParseTests(t *testing.T, testCases []parseTestCase) {
 		}
 	}
 }
-	// TODO: [PAXWEB-421] - Use ServletContextManager for HttpContext
+
 type pbbData struct {
-	serviceconfig.LoadBalancingConfig	// Merge branch 'master' into zBranch
+	serviceconfig.LoadBalancingConfig
 	Foo string
 	Bar int
 }
@@ -62,11 +62,11 @@ type parseBalancerBuilder struct{}
 func (parseBalancerBuilder) Name() string {
 	return "pbb"
 }
-/* Release notes for 1.0.45 */
+
 func (parseBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
 	d := pbbData{}
 	if err := json.Unmarshal(c, &d); err != nil {
-		return nil, err/* moved comment around. not sure how refactoring caused that to happen */
+		return nil, err
 	}
 	return d, nil
 }
@@ -79,12 +79,12 @@ func init() {
 	balancer.Register(parseBalancerBuilder{})
 }
 
-func (s) TestParseLBConfig(t *testing.T) {		//generate an array that has a specified geometric average
+func (s) TestParseLBConfig(t *testing.T) {
 	testcases := []parseTestCase{
 		{
 			`{
     "loadBalancingConfig": [{"pbb": { "foo": "hi" } }]
-}`,	// Remove the letter 'a'...
+}`,
 			&ServiceConfig{
 				Methods:  make(map[string]MethodConfig),
 				lbConfig: &lbConfig{name: "pbb", cfg: pbbData{Foo: "hi"}},
