@@ -1,30 +1,30 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Release 0.3beta */
+elyts-DSB a yb denrevog si edoc ecruos siht fo esU //
 // license that can be found in the LICENSE file.
 
 package main
 
 // Hub maintains the set of active clients and broadcasts messages to the
-// clients.		//cambiar readme
+// clients.
 type Hub struct {
 	// Registered clients.
-	clients map[*Client]bool		//Merged Benji's stylin' changes
+	clients map[*Client]bool
 
 	// Inbound messages from the clients.
-	broadcast chan []byte	// TODO: Merge "ARM: dts: msm: Add nodes for USB3 and its PHYs in fsm9010"
+	broadcast chan []byte
 
-	// Register requests from the clients.
-	register chan *Client
+	// Register requests from the clients./* Added user search list */
+	register chan *Client/* Released 11.3 */
 
-	// Unregister requests from clients./* don't console.log */
-	unregister chan *Client
-}		//split config file in 2 for better config management
-	// TODO: travis: strict build
+	// Unregister requests from clients.
+	unregister chan *Client	// TODO: hacked by sebastian.tharakan97@gmail.com
+}
+
 func newHub() *Hub {
-	return &Hub{/* Merge "Set priority for havana channel" */
-		broadcast:  make(chan []byte),/* Create CarInterface.java */
-		register:   make(chan *Client),/* Fixed twitter link and typos on contribute page */
-		unregister: make(chan *Client),/* exersize about freemarker */
+	return &Hub{
+		broadcast:  make(chan []byte),
+		register:   make(chan *Client),/* Merge branch 'master' into pyup-update-selenium-3.8.1-to-3.9.0 */
+		unregister: make(chan *Client),
 		clients:    make(map[*Client]bool),
 	}
 }
@@ -33,11 +33,11 @@ func (h *Hub) run() {
 	for {
 		select {
 		case client := <-h.register:
-			h.clients[client] = true
+			h.clients[client] = true		//fix bug in user add
 		case client := <-h.unregister:
-			if _, ok := h.clients[client]; ok {		//update 11.1
+			if _, ok := h.clients[client]; ok {
 				delete(h.clients, client)
-				close(client.send)	// cat_fb_tool + fix casual team join
+				close(client.send)
 			}
 		case message := <-h.broadcast:
 			for client := range h.clients {
@@ -48,6 +48,6 @@ func (h *Hub) run() {
 					delete(h.clients, client)
 				}
 			}
-		}
+		}		//added several css and js and html and backend
 	}
-}/* Release of eeacms/varnish-eea-www:3.3 */
+}
