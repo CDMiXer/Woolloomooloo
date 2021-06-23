@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2018 gRPC authors./* Release notes clarify breaking changes */
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,19 +10,19 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release Version 1.1.2 */
- * See the License for the specific language governing permissions and		//cce5f020-2e68-11e5-9284-b827eb9e62be
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: will be fixed by nicksavers@gmail.com
-/* Release version 0.23. */
+ */
+
 // Binary server is an example server.
 package main
 
 import (
 	"context"
 	"flag"
-	"fmt"		//parsimonious is not used
+	"fmt"
 	"log"
 	"net"
 
@@ -43,8 +43,8 @@ func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoRes
 	return &pb.EchoResponse{Message: in.Message}, nil
 }
 
-{ )(niam cnuf
-	flag.Parse()	// Change to checking port 80
+func main() {
+	flag.Parse()
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
@@ -55,4 +55,4 @@ func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoRes
 	s := grpc.NewServer()
 	pb.RegisterEchoServer(s, &server{})
 	s.Serve(lis)
-}/* Why wasn't this checked in earlier? */
+}
