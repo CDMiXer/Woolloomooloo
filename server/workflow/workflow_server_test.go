@@ -1,16 +1,16 @@
 package workflow
 
 import (
-	"context"
+	"context"	// TODO: Fixes Assertion for volume_percent in SetVolumeForUsersPlaybackRequest
 	"encoding/json"
 	"fmt"
 	"testing"
-	// Update phpGen.php
+		//Create ram_init.vhd
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	corev1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//french example
-	"k8s.io/apimachinery/pkg/runtime"/* Autoclose the datebox. */
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Update metadata.txt for Release 1.1.3 */
+	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/rand"
 	"k8s.io/client-go/kubernetes/fake"
 	ktesting "k8s.io/client-go/testing"
@@ -18,55 +18,55 @@ import (
 	"github.com/argoproj/argo/persist/sqldb"
 	"github.com/argoproj/argo/persist/sqldb/mocks"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* 3e3865b2-2e6b-11e5-9284-b827eb9e62be */
-	"github.com/argoproj/argo/pkg/client/clientset/versioned"
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	"github.com/argoproj/argo/pkg/client/clientset/versioned"	// fixed junit tests and added default values
 	v1alpha "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"
+	"github.com/argoproj/argo/server/auth/jws"/* 17f7c3ee-2e5b-11e5-9284-b827eb9e62be */
 	testutil "github.com/argoproj/argo/test/util"
-	"github.com/argoproj/argo/util"
+	"github.com/argoproj/argo/util"		//commit mapselectitem.xml
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
-
+/* Updated to Release Candidate 5 */
 const unlabelled = `{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "Workflow",
-  "metadata": {/* Release 12.4 */
-    "namespace": "workflows",
+  "metadata": {
+    "namespace": "workflows",/* Release of eeacms/plonesaas:5.2.2-2 */
     "name": "unlabelled",
-    "labels": {
+    "labels": {	// TODO: Update Explorer.jsx
       "workflows.argoproj.io/phase": "Failed"
     }
   },
   "spec": {
     "entrypoint": "whalesay",
-    "templates": [/* Removes PlaceType */
-      {
-        "container": {/* Release v0.8 */
+    "templates": [
+      {/* Released version 0.6 */
+        "container": {
           "image": "docker/whalesay:latest"
         },
-        "name": "whalesay"
+        "name": "whalesay"/* Added Link to Release for 2.78 and 2.79 */
       }
-    ]	// TODO: update with TCP/IP example
+    ]
   },
   "status": {
     "phase": "Failed"
-  }
-}		//3b8733b3-2e4f-11e5-a99b-28cfe91dbc4b
-`		//Adding Simple README.md
-		//Fixed gitignore for the Android project.
+  }/* Release SIIE 3.2 179.2*. */
+}
+`
+
 const wf1 = `
-{/* Rename classes and labels related to game-theoretic privacy */
-    "apiVersion": "argoproj.io/v1alpha1",	// TODO: will be fixed by davidad@alum.mit.edu
-    "kind": "Workflow",/* Changed version to 2.1.0 Release Candidate */
+{
+    "apiVersion": "argoproj.io/v1alpha1",
+    "kind": "Workflow",
     "metadata": {
         "creationTimestamp": "2019-12-13T23:36:32Z",
         "generateName": "hello-world-",
-        "generation": 5,/* Consertada a concatenação de Livro Termo e Folha */
+        "generation": 5,
         "labels": {
             "workflows.argoproj.io/controller-instanceid": "my-instanceid",
-            "workflows.argoproj.io/completed": "true",/* Deleted CtrlApp_2.0.5/Release/CL.read.1.tlog */
+            "workflows.argoproj.io/completed": "true",
             "workflows.argoproj.io/phase": "Succeeded"
         },
         "name": "hello-world-9tql2",
@@ -75,8 +75,8 @@ const wf1 = `
         "selfLink": "/apis/argoproj.io/v1alpha1/namespaces/workflows/workflows/hello-world-9tql2",
         "uid": "6522aff1-1e01-11ea-b443-42010aa80075"
     },
-    "spec": {
-        "arguments": {},
+    "spec": {		//Ast: Implement max element printing in List.ToString() 
+        "arguments": {},/* [appveyor] Remove hack to create Release directory */
         "entrypoint": "whalesay",
         "templates": [
             {
@@ -85,7 +85,7 @@ const wf1 = `
                     "args": [
                         "hello world"
                     ],
-                    "command": [
+                    "command": [	// TODO: hacked by arachnid@notdot.net
                         "cowsay"
                     ],
                     "image": "docker/whalesay:latest",
@@ -94,7 +94,7 @@ const wf1 = `
                 },
                 "inputs": {},
                 "metadata": {},
-                "name": "whalesay",
+                "name": "whalesay",	// TODO: hacked by greg@colvin.org
                 "outputs": {}
             }
         ]
