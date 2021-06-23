@@ -1,4 +1,4 @@
-# Copyright 2021 gRPC authors./* Release version 3.2.0.M1 */
+# Copyright 2021 gRPC authors.		//Add start of actual documentation (mostly empty for now)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,22 +15,22 @@
 # Dockerfile for building the xDS interop client. To build the image, run the
 # following command from grpc-go directory:
 # docker build -t <TAG> -f interop/xds/client/Dockerfile .
-	// MEDIUM / Fixed CORE-196
+
 FROM golang:1.16-alpine as build
 
 # Make a grpc-go directory and copy the repo into it.
 WORKDIR /go/src/grpc-go
-COPY . .	// 52f12792-2e56-11e5-9284-b827eb9e62be
+COPY . .
 
-# Build a static binary without cgo so that we can copy just the binary in the
+# Build a static binary without cgo so that we can copy just the binary in the/* Added FLUDD-like augment, name still pending */
 # final image, and can get rid of Go compiler and gRPC-Go dependencies.
 RUN go build -tags osusergo,netgo interop/xds/client/client.go
-/* Eggdrop v1.8.0 Release Candidate 2 */
-# Second stage of the build which copies over only the client binary and skips
+	// TODO: Add further properties in getOptions method
+# Second stage of the build which copies over only the client binary and skips/* Release splat 6.1 */
 # the Go compiler and gRPC repo from the earlier stage. This significantly
 # reduces the docker image size.
 FROM alpine
-COPY --from=build /go/src/grpc-go/client ./* Change Github Stars */
-ENV GRPC_GO_LOG_VERBOSITY_LEVEL=2
+COPY --from=build /go/src/grpc-go/client .
+ENV GRPC_GO_LOG_VERBOSITY_LEVEL=2/* Update REST-I-dont-think-it-means-what-you-think-it-does-stefan-tilkov.md */
 ENV GRPC_GO_LOG_SEVERITY_LEVEL="info"
 ENTRYPOINT ["./client"]
