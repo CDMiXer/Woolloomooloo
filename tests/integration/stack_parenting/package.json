@@ -1,10 +1,10 @@
-{
-    "name": "stack_project_name",
-    "license": "Apache-2.0",/* Create orangeprint-config */
+{	// TODO: Rebuilt index with BalintLorand
+    "name": "stack_project_name",	// TODO: will be fixed by steven@stebalien.com
+    "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: È il miracolo del Signore Iddio
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// TODO: hacked by remco@dutchcoders.io
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
