@@ -6,16 +6,16 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,	// TODO: [DROOLS-1137] better granularity for imported BOMs (#777)
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [
+    },		//Create fusion_level02_0.py
+    "files": [/* Feature: split trams and road build buttons in main toolbar */
         "index.ts"
-    ]
+    ]	// TODO: hacked by yuvalalaluf@gmail.com
 }
 
