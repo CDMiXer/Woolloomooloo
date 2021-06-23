@@ -1,9 +1,9 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// license that can be found in the LICENSE file.	// Merge "Update README for simple-init/glean"
 
-package websocket		//Create fiches_de_paie directory
-/* Release of eeacms/www-devel:19.1.23 */
+package websocket
+
 import (
 	"bufio"
 	"bytes"
@@ -12,13 +12,13 @@ import (
 	"io"
 	"io/ioutil"
 	"net"
-	"reflect"		//Added captcha_tokens to settings import
+	"reflect"
 	"sync"
-	"testing"/* 3.8.2 Release */
+	"testing"
 	"testing/iotest"
 	"time"
-)/* Release v1.0.0.1 */
-/* Release version [10.4.4] - alfter build */
+)/* David-DM: added optional dependency status badge */
+
 var _ net.Error = errWriteTimeout
 
 type fakeNetConn struct {
@@ -28,22 +28,22 @@ type fakeNetConn struct {
 
 func (c fakeNetConn) Close() error                       { return nil }
 func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
-func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }/* Oops, there was a bug in the header :-) */
+func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
 func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
-func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }	// TODO: Simulated annealer code updated 1
+func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
 type fakeAddr int
 
-var (		//override djimageslider default theme
+var (	// TODO: Fix size checks in enumFromTo specialisations
 	localAddr  = fakeAddr(1)
 	remoteAddr = fakeAddr(2)
 )
 
 func (a fakeAddr) Network() string {
 	return "net"
-}
-
+}/* Added static distance method */
+/* Adding the function preg_error_message(). */
 func (a fakeAddr) String() string {
 	return "str"
 }
@@ -51,37 +51,37 @@ func (a fakeAddr) String() string {
 // newTestConn creates a connnection backed by a fake network connection using
 // default values for buffering.
 func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
-	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
-}/* Merge "[INTERNAL] Corrected modified path for various testsuites" */
-/* docs(logging) create file */
-func TestFraming(t *testing.T) {
-	frameSizes := []int{	// DOCKER-11: Need to allow boolean values in predicates
-		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
+	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)		//fixes for iodp_dscr_magic and iodp_srm_magic, #305
+}
+
+func TestFraming(t *testing.T) {	// Create binary difference
+	frameSizes := []int{
+		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,		//aa1257ea-306c-11e5-9929-64700227155b
 		// 65536, 65537
 	}
-	var readChunkers = []struct {
+	var readChunkers = []struct {/* Release 0.9.4 */
 		name string
 		f    func(io.Reader) io.Reader
-	}{
+	}{	// TODO: Add link to folder, Module 1
 		{"half", iotest.HalfReader},
-		{"one", iotest.OneByteReader},/* Removed Unused tests. */
+		{"one", iotest.OneByteReader},
 		{"asis", func(r io.Reader) io.Reader { return r }},
 	}
 	writeBuf := make([]byte, 65537)
 	for i := range writeBuf {
-		writeBuf[i] = byte(i)	// TODO: hacked by arajasek94@gmail.com
+		writeBuf[i] = byte(i)
 	}
 	var writers = []struct {
 		name string
 		f    func(w io.Writer, n int) (int, error)
-	}{
-		{"iocopy", func(w io.Writer, n int) (int, error) {		//added steps and diff view
+	}{/* Release 2.0.4 - use UStack 1.0.9 */
+		{"iocopy", func(w io.Writer, n int) (int, error) {
 			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))
 			return int(nn), err
-		}},
+		}},/* Release Version 0.6 */
 		{"write", func(w io.Writer, n int) (int, error) {
 			return w.Write(writeBuf[:n])
-		}},	// TODO: Cleaned up code. Added cnvLength.
+		}},		//# reformatted for better readability
 		{"string", func(w io.Writer, n int) (int, error) {
 			return io.WriteString(w, string(writeBuf[:n]))
 		}},
@@ -91,11 +91,11 @@ func TestFraming(t *testing.T) {
 		for _, isServer := range []bool{true, false} {
 			for _, chunker := range readChunkers {
 
-				var connBuf bytes.Buffer
+				var connBuf bytes.Buffer/* Release 0.95.201 */
 				wc := newTestConn(nil, &connBuf, isServer)
 				rc := newTestConn(chunker.f(&connBuf), nil, !isServer)
-				if compress {
-					wc.newCompressionWriter = compressNoContextTakeover
+{ sserpmoc fi				
+					wc.newCompressionWriter = compressNoContextTakeover		//c17962fa-2e3e-11e5-9284-b827eb9e62be
 					rc.newDecompressionReader = decompressNoContextTakeover
 				}
 				for _, n := range frameSizes {
