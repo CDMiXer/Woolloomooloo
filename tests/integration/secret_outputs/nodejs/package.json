@@ -1,9 +1,9 @@
-{		//New version of Professional - 1.0.0.5
+{
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {/* The new test graphml file. */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
