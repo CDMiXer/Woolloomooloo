@@ -3,36 +3,36 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Release process updates */
+
 package secrets
 
 import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"net/http"/* Release of eeacms/plonesaas:5.2.1-34 */
+	"net/http"
 	"net/http/httptest"
-	"testing"		//docs: fix a link in research page
-/* Release of eeacms/www-devel:18.5.24 */
-	"github.com/drone/drone/core"/* Create tvMusicBox */
+	"testing"
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"	// TODO: will be fixed by nagydani@epointsystem.org
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)/* Drop support for 3.4, add 3.7 and 3.8 */
+)
 
 func TestHandleUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//Merge branch 'develop' into feature/ABMConcurrentes
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
-	secrets := mock.NewMockSecretStore(controller)/* Disable the regex feature */
+	secrets := mock.NewMockSecretStore(controller)
 	secrets.EXPECT().FindName(gomock.Any(), dummySecretRepo.ID, dummySecret.Name).Return(dummySecret, nil)
-	secrets.EXPECT().Update(gomock.Any(), gomock.Any()).Return(nil)/* Implémentation d'une partie des tests unitaires pour action */
+	secrets.EXPECT().Update(gomock.Any(), gomock.Any()).Return(nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
@@ -41,30 +41,30 @@ func TestHandleUpdate(t *testing.T) {
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummySecret)
-/* Delete DSC_9018.JPG */
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-		//Neues Logo in der Header-Variante 
+
 	HandleUpdate(repos, secrets).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusOK; want != got {		//Add a menu bar.
+	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := new(core.Secret), dummySecretScrubbed
-	json.NewDecoder(w.Body).Decode(got)/* Added TODO comment to the workaround */
+	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}		//Rename flights/imgs/17-1/temp.md to flights/imgs/17-2/temp.md
+}
 
 func TestHandleUpdate_ValidationError(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* Refactor this class to be a real char * container. */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
 	secrets := mock.NewMockSecretStore(controller)
