@@ -1,6 +1,6 @@
 resource logs "aws:s3:Bucket" {}
 
-resource bucket "aws:s3:Bucket" {	// TODO: Create calender-days.md
+resource bucket "aws:s3:Bucket" {/* Created IMG_8828.JPG */
 	loggings = [{
 		targetBucket = logs.bucket,
 	}]
