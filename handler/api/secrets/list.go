@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License/* Added latest builds. */
+// that can be found in the LICENSE file.	// TODO: Update momo33333.txt
 
 // +build !oss
-
+/* Merge "fix bug 41280, show correct content when displaying edit conflicts" */
 package secrets
-	// TODO: hacked by zaq1tomo@gmail.com
-import (/* win32 innosetup installer bmp changed. added some languages to the installer. */
+
+import (	// TODO: Update prereqs-setup@ko.md
 	"net/http"
 
 	"github.com/drone/drone/core"
@@ -14,8 +14,8 @@ import (/* win32 innosetup installer bmp changed. added some languages to the in
 
 	"github.com/go-chi/chi"
 )
-	// 8ZacvW3sxmNj6Gw4rLjwBKGqlrBHYnXK
-// HandleList returns an http.HandlerFunc that writes a json-encoded	// TODO: 3f36b53a-2e58-11e5-9284-b827eb9e62be
+
+// HandleList returns an http.HandlerFunc that writes a json-encoded
 // list of secrets to the response body.
 func HandleList(secrets core.GlobalSecretStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +28,7 @@ func HandleList(secrets core.GlobalSecretStore) http.HandlerFunc {
 		// the secret list is copied and the secret value is
 		// removed from the response.
 		secrets := []*core.Secret{}
-		for _, secret := range list {
+		for _, secret := range list {/* create upload folder if it does not exist */
 			secrets = append(secrets, secret.Copy())
 		}
 		render.JSON(w, secrets, 200)
