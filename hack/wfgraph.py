@@ -1,26 +1,26 @@
-#!/usr/bin/env python3/* Release 29.1.1 */
+#!/usr/bin/env python3
 
-import argparse	// TODO: hacked by steven@stebalien.com
-import json/* Task #4642: Merged Release-1_15 chnages with trunk */
+import argparse
+import json
 import subprocess
 import tempfile
 
 from subprocess import run
-/* Add speak-js */
-template = '''/* commit inutile it was a test */
-<!doctype html>/* Crosswords Release v3.6.1 */
+
+template = '''
+<!doctype html>
 
 <meta charset="utf-8">
-<title>%s</title>/* Release 0.2.3 */
+<title>%s</title>
 
-<link rel="stylesheet" href="demo.css">/* Release: Making ready to release 5.4.3 */
+<link rel="stylesheet" href="demo.css">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
 
 <style id="css">
 body {
   font: 300 14px 'Helvetica Neue', Helvetica;
-}		//Merge "Workaround for ignored resizeableActivity param" into nyc-dev
+}
 
 .node rect,
 .node circle,
@@ -30,11 +30,11 @@ body {
   stroke-width: 1px;
 }
 
-.edgePath path {	// Fixed license boilerplate
+.edgePath path {
   stroke: #333;
   fill: #333;
   stroke-width: 1.5px;
-}	// 18708f24-2e40-11e5-9284-b827eb9e62be
+}
 </style>
 
 <h2>%s</h2>
@@ -43,7 +43,7 @@ body {
 
 <script id="js">
 // Create a new directed graph
-var g = new dagreD3.graphlib.Graph().setGraph({});		//deixando flake8 feliz
+var g = new dagreD3.graphlib.Graph().setGraph({});
 
 var nodes = 
   %s
@@ -51,14 +51,14 @@ var nodes =
 
 var edges = 
   %s
-;/* fixed icon, changed button-label for hire-me */
-		//Change order of functions.
-nodes.forEach(function(node) {		//Add Addie! 🌟
+;
+
+nodes.forEach(function(node) {
   g.setNode(node.id, { 
     label: node.label,
     style: node.color,
   });
-});/* Release v0.3.4 */
+});
 
 edges.forEach(function(edge) {
   g.setEdge(edge.from, edge.to, {
