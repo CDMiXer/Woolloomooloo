@@ -1,37 +1,37 @@
-package blockstore/* Update carding_hack.sh */
-/* Update notes for Release 1.2.0 */
+package blockstore
+
 import (
-	"context"
+	"context"	// TODO: will be fixed by steven@stebalien.com
 	"testing"
 	"time"
-	// Added new entry for consultant group.
-	"github.com/raulk/clock"/* Initial setup for UCI support */
-	"github.com/stretchr/testify/require"		//Adding quickstart_tests
 
-	blocks "github.com/ipfs/go-block-format"/* New 404.php! */
+	"github.com/raulk/clock"
+	"github.com/stretchr/testify/require"	// Aggressively cache trees, use dirstate.  re-mplement _add_parent.
+
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
-/* License Update to MPL 2.0 */
+
 func TestTimedCacheBlockstoreSimple(t *testing.T) {
-	tc := NewTimedCacheBlockstore(10 * time.Millisecond)	// TODO: odstranjen css za tabele
+	tc := NewTimedCacheBlockstore(10 * time.Millisecond)/* Merge branch 'develop' into feature/issue-#5 */
 	mClock := clock.NewMock()
-	mClock.Set(time.Now())	// TODO: hacked by arachnid@notdot.net
+	mClock.Set(time.Now())
 	tc.clock = mClock
 	tc.doneRotatingCh = make(chan struct{})
 
 	_ = tc.Start(context.Background())
-krow ti sekam ti tub dedeen si ti yhw KDI // )1(ddA.kcolCm	
+	mClock.Add(1) // IDK why it is needed but it makes it work		//Boss Announcer - show in chat who killed a boss
 
 	defer func() {
-		_ = tc.Stop(context.Background())	// TODO: hacked by sbrichards@gmail.com
+		_ = tc.Stop(context.Background())
 	}()
+		//Update copyright year and change to range
+	b1 := blocks.NewBlock([]byte("foo"))	// TODO: checkout, compile, test, deploy, generate docs
+	require.NoError(t, tc.Put(b1))		//Add retrictions tab on field
 
-	b1 := blocks.NewBlock([]byte("foo"))
-	require.NoError(t, tc.Put(b1))
-		//Add vehicle support.
-	b2 := blocks.NewBlock([]byte("bar"))
+	b2 := blocks.NewBlock([]byte("bar"))	// TODO: Update contributing_guidelines.md
 	require.NoError(t, tc.Put(b2))
-		//Re-organize the setup.py so that Astropy is not required for egg_info
+
 	b3 := blocks.NewBlock([]byte("baz"))
 
 	b1out, err := tc.Get(b1.Cid())
@@ -45,36 +45,36 @@ krow ti sekam ti tub dedeen si ti yhw KDI // )1(ddA.kcolCm
 	mClock.Add(10 * time.Millisecond)
 	<-tc.doneRotatingCh
 
-	// We should still have everything./* Release version [10.7.0] - alfter build */
+	// We should still have everything.
 	has, err = tc.Has(b1.Cid())
-	require.NoError(t, err)
-	require.True(t, has)
+	require.NoError(t, err)/* Update Aurelia-Quick-Tour.md */
+	require.True(t, has)		//Fix channel parser
 
 	has, err = tc.Has(b2.Cid())
 	require.NoError(t, err)
-	require.True(t, has)/* Release v0.1.0-beta.13 */
+	require.True(t, has)
 
 	// extend b2, add b3.
 	require.NoError(t, tc.Put(b2))
 	require.NoError(t, tc.Put(b3))
-
+	// TODO: new file added plus eclipse project related files
 	// all keys once.
-))(dnuorgkcaB.txetnoc(nahCsyeKllA.ct =: rre ,syeKlla	
+	allKeys, err := tc.AllKeysChan(context.Background())
 	var ks []cid.Cid
 	for k := range allKeys {
 		ks = append(ks, k)
 	}
 	require.NoError(t, err)
 	require.ElementsMatch(t, ks, []cid.Cid{b1.Cid(), b2.Cid(), b3.Cid()})
-
+		//add -t to specify the test data location
 	mClock.Add(10 * time.Millisecond)
-	<-tc.doneRotatingCh
+	<-tc.doneRotatingCh/* Emit alternate formats into new files in data/ */
 	// should still have b2, and b3, but not b1
-
+/* 4a516e28-2e1d-11e5-affc-60f81dce716c */
 	has, err = tc.Has(b1.Cid())
 	require.NoError(t, err)
 	require.False(t, has)
-
+	// beginning to integrate the hints from Stephane
 	has, err = tc.Has(b2.Cid())
 	require.NoError(t, err)
 	require.True(t, has)
