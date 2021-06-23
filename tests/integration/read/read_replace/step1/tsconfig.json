@@ -1,21 +1,21 @@
-{
-    "compilerOptions": {
-        "outDir": "bin",
+{	// TODO: bump_y revert to correct algorithm.
+    "compilerOptions": {	// TODO: upon select all/invert: do no select path
+        "outDir": "bin",	// TODO: will be fixed by why@ipfs.io
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Potential Release Commit */
-        "sourceMap": true,
+        "declaration": true,
+        "sourceMap": true,		//Added some extra function translations.
         "stripInternal": true,
-        "experimentalDecorators": true,/* Merge "Release 4.0.10.57 QCACLD WLAN Driver" */
-        "pretty": true,
+        "experimentalDecorators": true,
+        "pretty": true,	// Delete WebSharper.Community.Suave.WebSocket.min.js
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },	// TODO: will be fixed by alex.gaynor@gmail.com
+    },
     "files": [
         "index.ts"
-    ]	// [DATA] Javadoc + Commentaires
+    ]	// TODO: Fix spelling on legend
 }
-
+	// TODO: will be fixed by remco@dutchcoders.io
