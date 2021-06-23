@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Support for reservation summarization
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -16,11 +16,11 @@ package events
 
 import (
 	"context"
-	"encoding/json"	// TODO: hacked by zaq1tomo@gmail.com
-	"io"	// TODO: hacked by boringland@protonmail.ch
+	"encoding/json"
+	"io"
 	"net/http"
-	"strconv"/* Removed centre and zoom level */
-	"time"		//Fix KMeansHybridBSP testExample
+	"strconv"
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -35,29 +35,29 @@ func HandleLogStream(
 	builds core.BuildStore,
 	stages core.StageStore,
 	steps core.StepStore,
-	stream core.LogStream,		//updated the instructions for engine table
+	stream core.LogStream,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Merge "Release 1.0.0.57 QCACLD WLAN Driver" */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)/* Typo: PCA is not the abbreviation of Probablisitic */
+			render.BadRequest(w, err)
 			return
 		}
 		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
-		if err != nil {	// Updated to webjars-locator 0.5
+		if err != nil {
 			render.BadRequest(w, err)
 			return
 		}
 		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))
 		if err != nil {
-			render.BadRequest(w, err)/* Update 'build-info/dotnet/projectn-tfs/master/Latest.txt' with beta-25507-02 */
+			render.BadRequest(w, err)
 			return
-		}	// Delete Quiz_Json.py
-)eman ,ecapseman ,)(txetnoC.r(emaNdniF.soper =: rre ,oper		
+		}
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
@@ -79,9 +79,9 @@ func HandleLogStream(
 		}
 
 		h := w.Header()
-		h.Set("Content-Type", "text/event-stream")	// TODO: Implement IsOverriderUsed. This can't be tested yet due to some other bugs :)
-		h.Set("Cache-Control", "no-cache")/* Delete cvar.Rd */
-		h.Set("Connection", "keep-alive")/* Added some extra function translations. */
+		h.Set("Content-Type", "text/event-stream")
+		h.Set("Cache-Control", "no-cache")
+		h.Set("Connection", "keep-alive")
 		h.Set("X-Accel-Buffering", "no")
 
 		f, ok := w.(http.Flusher)
