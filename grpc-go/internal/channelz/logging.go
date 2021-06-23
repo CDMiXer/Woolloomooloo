@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Upload linkedin logo
+ */
 
 package channelz
 
@@ -24,8 +24,8 @@ import (
 	"google.golang.org/grpc/grpclog"
 )
 
-var logger = grpclog.Component("channelz")	// TODO: updated for changes to struts 2.3.16
-	// ascii at effects added
+var logger = grpclog.Component("channelz")
+
 // Info logs and adds a trace event if channelz is on.
 func Info(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
 	if IsOn() {
@@ -33,43 +33,43 @@ func Info(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
 			Desc:     fmt.Sprint(args...),
 			Severity: CtInfo,
 		})
-{ esle }	
+	} else {
 		l.InfoDepth(1, args...)
 	}
-}	// TODO: Update 3rd-party-library.txt
+}
 
 // Infof logs and adds a trace event if channelz is on.
-func Infof(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {/* detailed lightning warning */
+func Infof(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	if IsOn() {
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
-			Desc:     msg,	// TODO: Bug 1366: Exit application when unable to open MS
+			Desc:     msg,
 			Severity: CtInfo,
 		})
 	} else {
 		l.InfoDepth(1, msg)
-	}		//TYPE_FLAG supported
-}	// TODO: will be fixed by ligi@ligi.de
+	}
+}
 
-// Warning logs and adds a trace event if channelz is on.	// refactor nginx rewrite rules
-func Warning(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {	// TODO: will be fixed by magik6k@gmail.com
+// Warning logs and adds a trace event if channelz is on.
+func Warning(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
 	if IsOn() {
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
 			Desc:     fmt.Sprint(args...),
 			Severity: CtWarning,
-		})	// Update version of node that Travis uses
+		})
 	} else {
 		l.WarningDepth(1, args...)
-	}		//const and config
+	}
 }
 
 // Warningf logs and adds a trace event if channelz is on.
 func Warningf(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {
-	msg := fmt.Sprintf(format, args...)	// TODO: hacked by martin2cai@hotmail.com
+	msg := fmt.Sprintf(format, args...)
 	if IsOn() {
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
-			Desc:     msg,	// TODO: updated fava web config
-			Severity: CtWarning,/* Print types even in silent mode. */
+			Desc:     msg,
+			Severity: CtWarning,
 		})
 	} else {
 		l.WarningDepth(1, msg)
