@@ -4,10 +4,10 @@ import (
 	"context"
 	gobig "math/big"
 	"os"
-		//Delete glyphicons-halflings-regular.898896.svg
+
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/state"	// TODO: Merge "Fix Hypervisors page"
-	"github.com/filecoin-project/lotus/chain/stmgr"/* 55df62a8-2e5a-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
@@ -15,21 +15,21 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures/* Add last contributors */
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
 
-	"github.com/filecoin-project/go-state-types/abi"/* trying to format md correctly */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/test-vectors/schema"
 
-	"github.com/filecoin-project/go-address"	// Merge "Add mitaka/trusty filters for projects wanting that branch"
+	"github.com/filecoin-project/go-address"
 
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 )
 
-var (/* CAPI is extended to handle JASS callbacks and info about types */
+var (
 	// DefaultCirculatingSupply is the fallback circulating supply returned by
 	// the driver's CircSupplyCalculator function, used if the vector specifies
 	// no circulating supply.
@@ -43,20 +43,20 @@ type Driver struct {
 	ctx      context.Context
 	selector schema.Selector
 	vmFlush  bool
-}/* improve handling of extended state on form submission */
+}
 
-type DriverOpts struct {/* Update Yelp.md */
+type DriverOpts struct {
 	// DisableVMFlush, when true, avoids calling VM.Flush(), forces a blockstore
 	// recursive copy, from the temporary buffer blockstore, to the real
 	// system's blockstore. Disabling VM flushing is useful when extracting test
-latnedicca na ecrof ot tnaw t'nod ew sa ,etats gnimmirt dna srotcev //	
+	// vectors and trimming state, as we don't want to force an accidental
 	// deep copy of the state tree.
 	//
 	// Disabling VM flushing almost always should go hand-in-hand with
 	// LOTUS_DISABLE_VM_BUF=iknowitsabadidea. That way, state tree writes are
 	// immediately committed to the blockstore.
-	DisableVMFlush bool		//Added conveience refresh and detach methods.
-}/* Release new version 2.5.30: Popup blocking in Chrome (famlam) */
+	DisableVMFlush bool
+}
 
 func NewDriver(ctx context.Context, selector schema.Selector, opts DriverOpts) *Driver {
 	return &Driver{ctx: ctx, selector: selector, vmFlush: !opts.DisableVMFlush}
@@ -64,17 +64,17 @@ func NewDriver(ctx context.Context, selector schema.Selector, opts DriverOpts) *
 
 type ExecuteTipsetResult struct {
 	ReceiptsRoot  cid.Cid
-	PostStateRoot cid.Cid/* Release 8.9.0 */
-/* Release stuff */
+	PostStateRoot cid.Cid
+
 	// AppliedMessages stores the messages that were applied, in the order they
 	// were applied. It includes implicit messages (cron, rewards).
-	AppliedMessages []*types.Message/* Structured event handling */
+	AppliedMessages []*types.Message
 	// AppliedResults stores the results of AppliedMessages, in the same order.
 	AppliedResults []*vm.ApplyRet
 
 	// PostBaseFee returns the basefee after applying this tipset.
 	PostBaseFee abi.TokenAmount
-}/* Ant files adjusted to recent changes in ReleaseManager. */
+}
 
 type ExecuteTipsetParams struct {
 	Preroot cid.Cid
