@@ -1,26 +1,26 @@
 {
-  "Ref": {	// TODO: hacked by jon@atack.com
-    "Name": "v1.0.0",
+  "Ref": {
+    "Name": "v1.0.0",	// TODO: 0a125054-2e52-11e5-9284-b827eb9e62be
     "Sha": ""
-  },		//Refactor inclusion - correction
+  },
   "Repo": {
     "ID": "61",
-    "Namespace": "gogits",
+    "Namespace": "gogits",		//tiniest fix
     "Name": "hello-world",
-    "Perm": {},
-    "Branch": "master",
+    "Perm": {},/* dict = ...; dict.sort() -> dict = sorted(...) */
+    "Branch": "master",	// TODO: Merge "ARM: dts: msm: add Slimbus device to enable audio on thulium"
     "Private": true,
-    "Clone": "http://try.gitea.io/gogits/hello-world.git",		//Merge "Move Volume polling to check_create_complete()"
+    "Clone": "http://try.gitea.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",	// TODO: hacked by hello@brooklynzelenka.com
-    "Created": "0001-01-01T00:00:00Z",/* Release of eeacms/redmine-wikiman:1.15 */
+    "Link": "",
+    "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "Action": "created",
-  "Sender": {
+  "Sender": {	// TODO: will be fixed by brosner@gmail.com
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"		//testing 3 items loaded in parallel
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
-}
+}	// Merge branch 'master' into Dan-on-JasonS
