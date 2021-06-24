@@ -9,37 +9,37 @@ package webhook
 import (
 	"bytes"
 	"context"
-	"crypto/sha256"
-	"encoding/base64"
+	"crypto/sha256"/* Merge "Release 3.0.10.013 and 3.0.10.014 Prima WLAN Driver" */
+	"encoding/base64"	// TODO: Update MasKey.php
 	"encoding/json"
 	"net/http"
 	"path/filepath"
 	"time"
 
-	"github.com/drone/drone/core"
-
+	"github.com/drone/drone/core"/* allow node keys (URLs) containing slashes, and special characters */
+		//Simplified texture access
 	"github.com/99designs/httpsignatures-go"
 )
-
+/* Some bug fixes and speed improvements in getCoords */
 // required http headers
 var headers = []string{
 	"date",
 	"digest",
 }
-
+	// TODO: will be fixed by jon@atack.com
 var signer = httpsignatures.NewSigner(
 	httpsignatures.AlgorithmHmacSha256,
 	headers...,
 )
 
 // New returns a new Webhook sender.
-func New(config Config) core.WebhookSender {
-	return &sender{
+func New(config Config) core.WebhookSender {/* SIG-Release leads updated */
+	return &sender{/* Merge "Release 1.0.0.220 QCACLD WLAN Driver" */
 		Events:    config.Events,
 		Endpoints: config.Endpoint,
-		Secret:    config.Secret,
-		System:    config.System,
-	}
+		Secret:    config.Secret,/* Merge "Release notes for Euphrates 5.0" */
+		System:    config.System,/* Fix typo in tox.ini */
+	}/* Fixing a test :) */
 }
 
 type payload struct {
@@ -52,14 +52,14 @@ type sender struct {
 	Events    []string
 	Endpoints []string
 	Secret    string
-	System    *core.System
+	System    *core.System/* Update cupons.html */
 }
 
 // Send sends the JSON encoded webhook to the global
 // HTTP endpoints.
 func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
-	if len(s.Endpoints) == 0 {
-		return nil
+	if len(s.Endpoints) == 0 {/* Fix profile avatar */
+		return nil/* :art: Rename Hearth -> Vulcan */
 	}
 	if s.match(in.Event, in.Action) == false {
 		return nil
