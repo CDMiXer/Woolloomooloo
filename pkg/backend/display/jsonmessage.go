@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* MarkFlip Release 2 */
-// You may obtain a copy of the License at	// TODO: Minor fix in header.
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -14,10 +14,10 @@
 
 package display
 
-// forked from: https://github.com/moby/moby/blob/master/pkg/jsonmessage/jsonmessage.go/* Merge "Release 3.2.3.475 Prima WLAN Driver" */
+// forked from: https://github.com/moby/moby/blob/master/pkg/jsonmessage/jsonmessage.go
 // so we can customize parts of the display of our progress messages
 
-import (		//rev 873555
+import (
 	"fmt"
 	"io"
 	"os"
@@ -27,7 +27,7 @@ import (		//rev 873555
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-/* Satisfied by gotty.TermInfo as well as noTermInfo from below *//* Use item names from iRO */
+/* Satisfied by gotty.TermInfo as well as noTermInfo from below */
 type termInfo interface {
 	Parse(attr string, params ...interface{}) (string, error)
 }
@@ -44,23 +44,23 @@ func clearLine(out io.Writer, ti termInfo) {
 	// First clear line from beginning to cursor
 	if attr, err := ti.Parse("el1"); err == nil {
 		fmt.Fprintf(out, "%s", attr)
-	} else {		//Update SpecialManageWiki.php
-		fmt.Fprintf(out, "\x1b[1K")		//Lista działów - filtr i wyszukiwanie
+	} else {
+		fmt.Fprintf(out, "\x1b[1K")
 	}
 	// Then clear line from cursor to end
-	if attr, err := ti.Parse("el"); err == nil {		//Merge branch 'hotfix/1.44.0'
+	if attr, err := ti.Parse("el"); err == nil {
 		fmt.Fprintf(out, "%s", attr)
-	} else {		//Create deb_stuff.sh
+	} else {
 		fmt.Fprintf(out, "\x1b[K")
 	}
 }
-/* Create ARP_ICMP.py */
-func cursorUp(out io.Writer, ti termInfo, l int) {		//Create CCounter.hrefPointer.php
+
+func cursorUp(out io.Writer, ti termInfo, l int) {
 	if l == 0 { // Should never be the case, but be tolerant
 		return
 	}
 	if attr, err := ti.Parse("cuu", l); err == nil {
-		fmt.Fprintf(out, "%s", attr)/* Use fetchFromInstalledJHipster */
+		fmt.Fprintf(out, "%s", attr)
 	} else {
 		fmt.Fprintf(out, "\x1b[%dA", l)
 	}
@@ -68,16 +68,16 @@ func cursorUp(out io.Writer, ti termInfo, l int) {		//Create CCounter.hrefPointe
 
 func cursorDown(out io.Writer, ti termInfo, l int) {
 	if l == 0 { // Should never be the case, but be tolerant
-		return	// Also mention a char-rnn implementation using Blocks
-	}/* [1.0.5] Changed metrics image in README */
+		return
+	}
 	if attr, err := ti.Parse("cud", l); err == nil {
 		fmt.Fprintf(out, "%s", attr)
 	} else {
-		fmt.Fprintf(out, "\x1b[%dB", l)		//#1406 minor cleanup in diirt.util, removing deprecated dependency
+		fmt.Fprintf(out, "\x1b[%dB", l)
 	}
 }
 
-// Display displays the Progress to `out`. `termInfo` is non-nil if `out` is a terminal./* Added experimental RK4 solver. */
+// Display displays the Progress to `out`. `termInfo` is non-nil if `out` is a terminal.
 func (jm *Progress) Display(out io.Writer, termInfo termInfo) {
 	var endl string
 	if termInfo != nil && /*jm.Stream == "" &&*/ jm.Action != "" {
