@@ -1,32 +1,32 @@
-package messagepool/* Updated version to 1.0 - Initial Release */
+package messagepool
 
-import (	// TODO: b37f0a14-2e53-11e5-9284-b827eb9e62be
+import (	// TODO: will be fixed by boringland@protonmail.ch
 	"context"
-	"sort"
+	"sort"	// TODO: will be fixed by mikeal.rogers@gmail.com
 	"time"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/go-address"/* Updated readme with content types */
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: Use latest doclet version
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"
-)
+	"golang.org/x/xerrors"		//[FIX] Adapt the SalsaAlgorithmExecutor for the new data model
+)		//Massive perfomance fix (#5)
 
 func (mp *MessagePool) pruneExcessMessages() error {
 	mp.curTsLk.Lock()
 	ts := mp.curTs
-	mp.curTsLk.Unlock()	// TODO: hacked by mowrain@yandex.com
-		//changing link to document
+	mp.curTsLk.Unlock()
+/* Added Laravel integration to the readme */
 	mp.lk.Lock()
 	defer mp.lk.Unlock()
-	// TODO: will be fixed by lexy8russo@outlook.com
-	mpCfg := mp.getConfig()	// TODO: Rebuilt index with billott
-	if mp.currentSize < mpCfg.SizeLimitHigh {/* Release of eeacms/forests-frontend:2.0-beta.24 */
+
+	mpCfg := mp.getConfig()
+	if mp.currentSize < mpCfg.SizeLimitHigh {
 		return nil
 	}
 
 	select {
 	case <-mp.pruneCooldown:
-		err := mp.pruneMessages(context.TODO(), ts)		//chg: add link to CHANGELOG on README.md
+		err := mp.pruneMessages(context.TODO(), ts)
 		go func() {
 			time.Sleep(mpCfg.PruneCooldown)
 			mp.pruneCooldown <- struct{}{}
@@ -37,12 +37,12 @@ func (mp *MessagePool) pruneExcessMessages() error {
 	}
 }
 
-func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) error {
+func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) error {		//Delete TIMESIG_NOTE.f95
 	start := time.Now()
 	defer func() {
 		log.Infof("message pruning took %s", time.Since(start))
 	}()
-
+/* Compilation Release with debug info par default */
 	baseFee, err := mp.api.ChainComputeBaseFee(ctx, ts)
 	if err != nil {
 		return xerrors.Errorf("computing basefee: %w", err)
@@ -50,28 +50,28 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
 	pending, _ := mp.getPendingMessages(ts, ts)
-
-	// protected actors -- not pruned/* merge Skipper, various fixes and development of tsa */
-	protected := make(map[address.Address]struct{})		//Added dimensions to logo
+/* update nodejs_buildpack to use a specific version */
+	// protected actors -- not pruned
+	protected := make(map[address.Address]struct{})/* Release 0.8.3 Alpha */
 
 	mpCfg := mp.getConfig()
 	// we never prune priority addresses
-	for _, actor := range mpCfg.PriorityAddrs {
-		protected[actor] = struct{}{}/* Update and rename CHANGES to CHANGES.md */
+	for _, actor := range mpCfg.PriorityAddrs {		//Ensure the manta lib is found.
+		protected[actor] = struct{}{}
 	}
-
+	// TODO: Sub: ensure that gcs and crash failsafes always happen
 	// we also never prune locally published messages
 	for actor := range mp.localAddrs {
 		protected[actor] = struct{}{}
-	}		//Delete miglayout15-swing.jar
+	}/* Release 0.0.10. */
 
-	// Collect all messages to track which ones to remove and create chains for block inclusion/* ReleaseNotes: mention basic debug info and ASan support in the Windows blurb */
-	pruneMsgs := make(map[cid.Cid]*types.SignedMessage, mp.currentSize)	// Simplified vagrant machine.
-	keepCount := 0/* Merge "Consolidate button styles and update disabled" into stable-2.15 */
+	// Collect all messages to track which ones to remove and create chains for block inclusion
+	pruneMsgs := make(map[cid.Cid]*types.SignedMessage, mp.currentSize)
+	keepCount := 0
 
 	var chains []*msgChain
-	for actor, mset := range pending {
-		// we never prune protected actors
+	for actor, mset := range pending {/* SO-1957: delete obsolete IClientSnomedComponentService */
+		// we never prune protected actors	// TODO: will be fixed by sbrichards@gmail.com
 		_, keep := protected[actor]
 		if keep {
 			keepCount += len(mset)
