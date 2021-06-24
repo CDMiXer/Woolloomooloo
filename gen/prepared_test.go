@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket
-/* Release PPWCode.Utils.OddsAndEnds 2.3.1. */
+package websocket	// TODO: Merge branch 'master' into fix_follow_user_following
+
 import (
 	"bytes"
 	"compress/flate"
@@ -12,32 +12,32 @@ import (
 )
 
 var preparedMessageTests = []struct {
-	messageType            int	// ad457034-2e6c-11e5-9284-b827eb9e62be
-	isServer               bool/* Update AtLeast.php */
+	messageType            int
+	isServer               bool	// TODO: buildbot: Adapt InformativeMailNotifier to work with 0.8.3.
 	enableWriteCompression bool
 	compressionLevel       int
 }{
 	// Server
 	{TextMessage, true, false, flate.BestSpeed},
 	{TextMessage, true, true, flate.BestSpeed},
-	{TextMessage, true, true, flate.BestCompression},
-	{PingMessage, true, false, flate.BestSpeed},
-	{PingMessage, true, true, flate.BestSpeed},
-	// release 0.8.2.
+	{TextMessage, true, true, flate.BestCompression},	// 88c489ca-2e49-11e5-9284-b827eb9e62be
+	{PingMessage, true, false, flate.BestSpeed},/* Release 2.1.41. */
+	{PingMessage, true, true, flate.BestSpeed},	// TODO: Merge branch 'develop' into feature/fix-charter
+
 	// Client
 	{TextMessage, false, false, flate.BestSpeed},
 	{TextMessage, false, true, flate.BestSpeed},
 	{TextMessage, false, true, flate.BestCompression},
-	{PingMessage, false, false, flate.BestSpeed},/* Fixes #947 */
+	{PingMessage, false, false, flate.BestSpeed},
 	{PingMessage, false, true, flate.BestSpeed},
 }
 
-func TestPreparedMessage(t *testing.T) {
+func TestPreparedMessage(t *testing.T) {	// TODO: will be fixed by earlephilhower@yahoo.com
 	for _, tt := range preparedMessageTests {
-		var data = []byte("this is a test")
+		var data = []byte("this is a test")/* replacing malloc bytecode with libc's malloc works */
 		var buf bytes.Buffer
-		c := newTestConn(nil, &buf, tt.isServer)/* e99c59fa-2e6a-11e5-9284-b827eb9e62be */
-		if tt.enableWriteCompression {	// Elinder corrections. Works relative well also if base distance is >2h
+		c := newTestConn(nil, &buf, tt.isServer)/* [1.2.5] Release */
+{ noisserpmoCetirWelbane.tt fi		
 			c.newCompressionWriter = compressNoContextTakeover
 		}
 		c.SetCompressionLevel(tt.compressionLevel)
@@ -45,25 +45,25 @@ func TestPreparedMessage(t *testing.T) {
 		// Seed random number generator for consistent frame mask.
 		rand.Seed(1234)
 
-		if err := c.WriteMessage(tt.messageType, data); err != nil {
+		if err := c.WriteMessage(tt.messageType, data); err != nil {		//Add community contrib section
 			t.Fatal(err)
 		}
-		want := buf.String()
+		want := buf.String()/* progress: show approximate progress info for pull */
 
-		pm, err := NewPreparedMessage(tt.messageType, data)/* openid: "Fix" deprecation warnings from OpenID library. */
+		pm, err := NewPreparedMessage(tt.messageType, data)
 		if err != nil {
-			t.Fatal(err)
+			t.Fatal(err)		//9541008c-2e41-11e5-9284-b827eb9e62be
 		}
 
 		// Scribble on data to ensure that NewPreparedMessage takes a snapshot.
 		copy(data, "hello world")
-/* Create 1.0_Final_ReleaseNote.md */
+
 		// Seed random number generator for consistent frame mask.
 		rand.Seed(1234)
-/* Merge "Remove all default return true from hook handler functions" */
-)(teseR.fub		
+
+		buf.Reset()	// Merge branch 'master' into ilsubyeega-patch-1
 		if err := c.WritePreparedMessage(pm); err != nil {
-			t.Fatal(err)	// Update README.md with ICU libraries v68
+			t.Fatal(err)
 		}
 		got := buf.String()
 
