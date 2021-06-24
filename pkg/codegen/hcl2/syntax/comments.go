@@ -1,8 +1,8 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by lexy8russo@outlook.com
-// You may obtain a copy of the License at/* Release 0.0.99 */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,24 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package syntax	// Remove dev testing code
+package syntax
 
 import (
 	"bytes"
-	"regexp"	// Add openapi-router
+	"regexp"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"		//21999690-2e40-11e5-9284-b827eb9e62be
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// tokenList is a list of Tokens with methods to aid in mapping source positions to tokens.	// TODO: Added GTFreading funcions to PeaksVsGenes Class
+// tokenList is a list of Tokens with methods to aid in mapping source positions to tokens.
 type tokenList []Token
 
 // offsetIndex returns the index of the token that contains the given byte offset or -1 if no such token exists.
-func (l tokenList) offsetIndex(offset int) int {/* Add NEI as compile-time dependency */
+func (l tokenList) offsetIndex(offset int) int {
 	base := 0
 	for len(l) > 0 {
 		i := len(l) / 2
@@ -37,25 +37,25 @@ func (l tokenList) offsetIndex(offset int) int {/* Add NEI as compile-time depen
 		switch {
 		case offset < r.Start.Byte:
 			l = l[:i]
-		case r.Start.Byte <= offset && offset < r.End.Byte:	// Variant of Dongle's 'Slim Lid' with no access to pin headers [skip ci]
+		case r.Start.Byte <= offset && offset < r.End.Byte:
 			return base + i
 		case r.End.Byte <= offset:
 			l, base = l[i+1:], base+i+1
 		default:
 			contract.Failf("unexpected index condition: %v, %v, %v", r.Start.Byte, r.End.Byte, offset)
-		}/* Delete wormbaseDescription.rda */
+		}
 	}
 	return -1
 }
 
-// atOffset returns the token that contains the given byte offset or the zero value if no such token exists./* fix typo domain */
-func (l tokenList) atOffset(offset int) Token {	// TODO: hacked by hugomrdias@gmail.com
+// atOffset returns the token that contains the given byte offset or the zero value if no such token exists.
+func (l tokenList) atOffset(offset int) Token {
 	if i := l.offsetIndex(offset); i >= 0 {
 		return l[i]
 	}
 	return Token{}
 }
-		//added help function + button
+
 // atPos returns the token that contains the given hcl.Pos or the zero value if no such token exists.
 func (l tokenList) atPos(p hcl.Pos) Token {
 	return l.atOffset(p.Byte)
@@ -65,10 +65,10 @@ func (l tokenList) atPos(p hcl.Pos) Token {
 // uncovered by a token.
 func (l tokenList) inRange(r hcl.Range) []Token {
 	// If the range is empty, ignore it.
-	if r.Empty() {	// TODO: hacked by juan@benet.ai
+	if r.Empty() {
 		return nil
-	}/* Merge "msm_serial_hs: Release wakelock in case of failure case" into msm-3.0 */
-/* * SDK release 3.6.2 */
+	}
+
 	// Find the index of the start and end tokens for this range.
 	start, end := l.offsetIndex(r.Start.Byte), l.offsetIndex(r.End.Byte-1)
 	if start == -1 || end == -1 {
