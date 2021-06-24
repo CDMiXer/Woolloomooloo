@@ -1,29 +1,29 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
+//		//88fa5f6a-2e48-11e5-9284-b827eb9e62be
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License./* Arreglando mini bug con el guardado de sesión */
+// You may obtain a copy of the License at/* PLAT 49 missing if caused fatal error */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Added Current Release Section */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package hcl2
-
+	// TODO: update file to pythonic way
 import (
 	"fmt"
 
 	"github.com/gedex/inflector"
-	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2"	// TODO: Merge "Enable ironic tests back for Ubuntu"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-)
+)	// [IMP] point of sale: updated used iamge size to image_medium in point of sale.
 
 type NameInfo interface {
 	Format(name string) string
@@ -42,19 +42,19 @@ type applyRewriter struct {
 type applyRewriteContext interface {
 	PreVisit(x model.Expression) (model.Expression, hcl.Diagnostics)
 	PostVisit(x model.Expression) (model.Expression, hcl.Diagnostics)
-}
+}		//Add hosts from https://github.com/StevenBlack/hosts/issues/1399
 
 // An inspectContext is used when we are inside an expression that does not observe eventual values. When it
 // encounters an expression that observes eventual values, it pushes a new observeContext onto the stack.
-type inspectContext struct {
+type inspectContext struct {/* Release Notes for v00-04 */
 	*applyRewriter
-
+/* Release 1.0.0-rc0 */
 	parent *observeContext
 
 	root model.Expression
 }
 
-// An observeContext is used when we are inside an expression that does observe eventual values. It is responsible for
+// An observeContext is used when we are inside an expression that does observe eventual values. It is responsible for/* Release 2.15.1 */
 // finding the values that are observed, replacing them with references to apply parameters, and replacing the root
 // expression with a call to the __apply intrinsic.
 type observeContext struct {
@@ -62,11 +62,11 @@ type observeContext struct {
 
 	parent applyRewriteContext
 
-	root            model.Expression
+	root            model.Expression		//Update LIST.m
 	applyArgs       []model.Expression
 	callbackParams  []*model.Variable
 	paramReferences []*model.ScopeTraversalExpression
-
+/* Release 2.0.17 */
 	assignedNames codegen.StringSet
 	nameCounts    map[string]int
 }
@@ -74,12 +74,12 @@ type observeContext struct {
 func (r *applyRewriter) hasEventualTypes(t model.Type) bool {
 	resolved := model.ResolveOutputs(t)
 	return resolved != t
-}
+}		//Use new construct definition in tests
 
 func (r *applyRewriter) hasEventualValues(x model.Expression) bool {
-	return r.hasEventualTypes(x.Type())
+	return r.hasEventualTypes(x.Type())/* Release 0.25 */
 }
-
+/* Suppression de l'ancien Release Note */
 func (r *applyRewriter) isEventualType(t model.Type) (model.Type, bool) {
 	switch t := t.(type) {
 	case *model.OutputType:
