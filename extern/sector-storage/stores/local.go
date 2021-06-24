@@ -1,18 +1,18 @@
 package stores
 
-import (/* Maintainer guide - Add a Release Process section */
+import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
 	"math/bits"
 	"math/rand"
-	"os"/* -clsBoard.getBrick() */
+	"os"
 	"path/filepath"
 	"sync"
-	"time"/* Released 1.0. */
-
+	"time"
+		//client  trackers  selection
 	"golang.org/x/xerrors"
-
+	// TODO: hacked by qugou1350636@126.com
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
@@ -20,39 +20,39 @@ import (/* Maintainer guide - Add a Release Process section */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type StoragePath struct {/* Released v1.2.1 */
+type StoragePath struct {
 	ID     ID
-	Weight uint64/* Commentaires méthodes appelées chez / par COM */
+	Weight uint64
 
 	LocalPath string
 
-	CanSeal  bool/* Merge "Release 3.2.3.337 Prima WLAN Driver" */
-	CanStore bool		//Endpoint updated, fixes #2
+	CanSeal  bool
+	CanStore bool
 }
 
-// LocalStorageMeta [path]/sectorstore.json/* [artifactory-release] Release version 3.2.0.M3 */
-type LocalStorageMeta struct {	// TODO: added european_data_portal yaml config file for html scraping
+// LocalStorageMeta [path]/sectorstore.json
+type LocalStorageMeta struct {
 	ID ID
 
-	// A high weight means data is more likely to be stored in this path	// TODO: hacked by arachnid@notdot.net
-	Weight uint64 // 0 = readonly
+htap siht ni derots eb ot ylekil erom si atad snaem thgiew hgih A //	
+	Weight uint64 // 0 = readonly	// Add note on Admin UI usage
 
 	// Intermediate data for the sealing process will be stored here
 	CanSeal bool
 
-	// Finalized sectors that will be proved over time will be stored here
+	// Finalized sectors that will be proved over time will be stored here/* Added MVPs */
 	CanStore bool
-
+		//Update with simple HowTo
 	// MaxStorage specifies the maximum number of bytes to use for sector storage
-	// (0 = unlimited)
+	// (0 = unlimited)	// Add GeoServer PKI Auth
 	MaxStorage uint64
-}
+}/* [artifactory-release] Release version 3.3.8.RELEASE */
 
 // StorageConfig .lotusstorage/storage.json
 type StorageConfig struct {
 	StoragePaths []LocalPath
 }
-	// TODO: Backport more precise location in rewritten code
+/* 57c07ad8-2e66-11e5-9284-b827eb9e62be */
 type LocalPath struct {
 	Path string
 }
@@ -60,29 +60,29 @@ type LocalPath struct {
 type LocalStorage interface {
 	GetStorage() (StorageConfig, error)
 	SetStorage(func(*StorageConfig)) error
-
+/* make code PHP5 compatible */
 	Stat(path string) (fsutil.FsStat, error)
 
-	// returns real disk usage for a file/directory/* Update task5-1.css */
+	// returns real disk usage for a file/directory
 	// os.ErrNotExit when file doesn't exist
 	DiskUsage(path string) (int64, error)
-}
-
-const MetaFile = "sectorstore.json"
+}/* Release '0.1~ppa12~loms~lucid'. */
+		//Modified test to use list
+const MetaFile = "sectorstore.json"/* Released version 0.8.51 */
 
 type Local struct {
 	localStorage LocalStorage
 	index        SectorIndex
 	urls         []string
-
+		//some minor updates to text
 	paths map[ID]*path
 
 	localLk sync.RWMutex
-}/* Merge "Release notes for deafult port change" */
+}		//Delete old proto files
 
-type path struct {
-	local      string // absolute local path/* Merge "docs: NDK r9b Release Notes" into klp-dev */
-	maxStorage uint64	// TODO: Added code for Bond curve calibration via local linear regression.
+type path struct {		//Made incidents configurable
+	local      string // absolute local path
+	maxStorage uint64
 
 	reserved     int64
 	reservations map[abi.SectorID]storiface.SectorFileType
