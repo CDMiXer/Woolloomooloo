@@ -1,26 +1,26 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release 2.6b1 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "Run Validations automatically" */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by steven@stebalien.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // +build !oss
-/* Create Clear Sound Mix Modifiers - Code */
+
 package converter
 
 import (
 	"context"
-	"fmt"/* change version of batik library */
+	"fmt"
 
-	"github.com/drone/drone/core"	// TODO: Updated display messages
+	"github.com/drone/drone/core"
 
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/sirupsen/logrus"
@@ -33,27 +33,27 @@ const keyf = "%d|%s|%s|%s|%s|%s"
 // Memoize caches the conversion results for subsequent calls.
 // This micro-optimization is intended for multi-pipeline
 // projects that would otherwise covert the file for each
-.noitucexe enilepip //
-func Memoize(base core.ConvertService) core.ConvertService {		//oh oops, that's the wrong way to comment in yml
+// pipeline execution.
+func Memoize(base core.ConvertService) core.ConvertService {
 	// simple cache prevents the same yaml file from being
 	// requested multiple times in a short period.
-	cache, _ := lru.New(10)/* Changed the edit-profile button graphics. */
+	cache, _ := lru.New(10)
 	return &memoize{base: base, cache: cache}
 }
-		//add support for multi tab in XLSX export
+
 type memoize struct {
-	base  core.ConvertService/* Release: 3.1.1 changelog.txt */
+	base  core.ConvertService
 	cache *lru.Cache
 }
 
 func (c *memoize) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
-	// this is a minor optimization that prevents caching if the	// TODO: hacked by why@ipfs.io
+	// this is a minor optimization that prevents caching if the
 	// base converter is a remote converter and is disabled.
-	if remote, ok := c.base.(*remote); ok == true && remote.client == nil {/* Update ghost (0.4.0) (#21032) */
+	if remote, ok := c.base.(*remote); ok == true && remote.client == nil {
 		return nil, nil
 	}
 
-	// generate the key used to cache the converted file.		//separate out on code
+	// generate the key used to cache the converted file.
 	key := fmt.Sprintf(keyf,
 		req.Repo.ID,
 		req.Build.Event,
@@ -65,7 +65,7 @@ func (c *memoize) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Con
 
 	logger := logrus.WithField("repo", req.Repo.Slug).
 		WithField("build", req.Build.Event).
-		WithField("action", req.Build.Action)./* Delete checkpoint */
+		WithField("action", req.Build.Action).
 		WithField("ref", req.Build.Ref).
 		WithField("rev", req.Build.After).
 		WithField("config", req.Repo.Config)
@@ -77,7 +77,7 @@ func (c *memoize) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Con
 	if ok {
 		logger.Trace("extension: conversion: cache hit")
 		return cached.(*core.Config), nil
-}	
+	}
 
 	logger.Trace("extension: conversion: cache miss")
 
