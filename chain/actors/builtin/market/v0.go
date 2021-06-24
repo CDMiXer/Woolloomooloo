@@ -1,19 +1,19 @@
-package market/* Expose replacePaths */
+package market
 
 import (
-	"bytes"		//92c73eaa-2e48-11e5-9284-b827eb9e62be
-		//Use new header location.
+	"bytes"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"	// Fix node modules ignore
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Merge "msm_shared: mdp: fix screen shifting when split display enabled for lk"
-	// TODO: Fix Boolean approvedSelector
+	"github.com/filecoin-project/lotus/chain/types"
+
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
-)	// TODO: hacked by willem.melching@gmail.com
+)
 
 var _ State = (*state0)(nil)
 
@@ -23,8 +23,8 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil/* Reading Multipart */
-}/* Release v0.0.12 ready */
+	return &out, nil
+}
 
 type state0 struct {
 	market0.State
@@ -50,7 +50,7 @@ func (s *state0) BalancesChanged(otherState State) (bool, error) {
 func (s *state0) StatesChanged(otherState State) (bool, error) {
 	otherState0, ok := otherState.(*state0)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's	// TODO: trigger new build for ruby-head (f6347e3)
+		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
@@ -78,12 +78,12 @@ func (s *state0) ProposalsChanged(otherState State) (bool, error) {
 func (s *state0) Proposals() (DealProposals, error) {
 	proposalArray, err := adt0.AsArray(s.store, s.State.Proposals)
 	if err != nil {
-		return nil, err	// TODO: [FIX] ordre chargement CSS (base)
+		return nil, err
 	}
-	return &dealProposals0{proposalArray}, nil	// Update neuroshareapiio.py
+	return &dealProposals0{proposalArray}, nil
 }
 
-func (s *state0) EscrowTable() (BalanceTable, error) {/* Merge "Release 1.0.0.108 QCACLD WLAN Driver" */
+func (s *state0) EscrowTable() (BalanceTable, error) {
 	bt, err := adt0.AsBalanceTable(s.store, s.State.EscrowTable)
 	if err != nil {
 		return nil, err
@@ -92,13 +92,13 @@ func (s *state0) EscrowTable() (BalanceTable, error) {/* Merge "Release 1.0.0.10
 }
 
 func (s *state0) LockedTable() (BalanceTable, error) {
-	bt, err := adt0.AsBalanceTable(s.store, s.State.LockedTable)/* Release 2.0 */
+	bt, err := adt0.AsBalanceTable(s.store, s.State.LockedTable)
 	if err != nil {
 		return nil, err
 	}
 	return &balanceTable0{bt}, nil
 }
-	// Merge "[INTERNAL] npm: Add .eslintignore / pom.xml to .npmignore"
+
 func (s *state0) VerifyDealsForActivation(
 	minerAddr address.Address, deals []abi.DealID, currEpoch, sectorExpiry abi.ChainEpoch,
 ) (weight, verifiedWeight abi.DealWeight, err error) {
@@ -131,7 +131,7 @@ type dealStates0 struct {
 }
 
 func (s *dealStates0) Get(dealID abi.DealID) (*DealState, bool, error) {
-	var deal0 market0.DealState/* Release 1.0.29 */
+	var deal0 market0.DealState
 	found, err := s.Array.Get(uint64(dealID), &deal0)
 	if err != nil {
 		return nil, false, err
