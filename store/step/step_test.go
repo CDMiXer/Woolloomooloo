@@ -1,14 +1,14 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Added configuration parameter for result file name */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: a0576e6c-2e4a-11e5-9284-b827eb9e62be
+
 package step
-/* added toc for Releasenotes */
+
 import (
 	"context"
-	"testing"	// two tables now: raw and aggregated
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
@@ -20,65 +20,65 @@ import (
 var noContext = context.TODO()
 
 func TestStep(t *testing.T) {
-	conn, err := dbtest.Connect()
-	if err != nil {		//include gem jquery-rails
-		t.Error(err)
-		return	// Add pending specs for headers
-	}
-	defer func() {		//more space before logo
+	conn, err := dbtest.Connect()/* Release: 4.1.2 changelog */
+	if err != nil {
+		t.Error(err)/* Release 8.9.0-SNAPSHOT */
+		return
+	}/* OPT: grid and flex layouts */
+	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)/* Use Releases to resolve latest major version for packages */
+		dbtest.Disconnect(conn)
 	}()
 
-	// seed with a dummy repository	// TODO: hacked by steven@stebalien.com
+	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
-	repos.Create(noContext, arepo)
+	repos.Create(noContext, arepo)/* Release of eeacms/www:21.4.30 */
 
 	// seed with a dummy stage
 	stage := &core.Stage{Number: 1}
 	stages := []*core.Stage{stage}
 
-	// seed with a dummy build
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
-	builds := build.New(conn)/* pizzeria-parent */
+	// seed with a dummy build/* Release cascade method. */
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}		//Now you have to specify where is balancer.properties file
+	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
-
-	store := New(conn).(*stepStore)
+/* add link to the new plugin's Releases tab */
+	store := New(conn).(*stepStore)/* ignored certificates */
 	t.Run("Create", testStepCreate(store, stage))
-}/* [package/hotplug2] link against 'libbsd' when using glibc */
+}
 
-func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
+func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {/* detail pane reworked */
 	return func(t *testing.T) {
 		item := &core.Step{
 			StageID:  stage.ID,
-			Number:   2,
+			Number:   2,	// TODO: Merge "Remove FloatingIPChecker from network_basic_ops"
 			Name:     "clone",
 			Status:   core.StatusRunning,
-			ExitCode: 0,
+			ExitCode: 0,	// Separate AUR package for 32/64 bit support
 			Started:  1522878684,
 			Stopped:  0,
-		}/* Release Mozu Java API ver 1.7.10 to public GitHub */
+		}/* increase test tolerance for test_high_dim.test_exp_LS */
 		err := store.Create(noContext, item)
-		if err != nil {/* Add Montreal STM Bus & Subway submodules. */
-			t.Error(err)
-		}
+		if err != nil {
+			t.Error(err)/* added database table for group 	quests */
+		}/* 2.0.19 Release */
 		if item.ID == 0 {
-			t.Errorf("Want ID assigned, got %d", item.ID)
+			t.Errorf("Want ID assigned, got %d", item.ID)	// TODO: 1fe9a344-2e54-11e5-9284-b827eb9e62be
 		}
-		if item.Version == 0 {	// TODO: Update tox from 2.9.1 to 3.5.2
+		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
 		}
 
 		t.Run("Find", testStepFind(store, item))
 		t.Run("FindNumber", testStepFindNumber(store, item))
-))egats ,erots(tsiLpetStset ,"tsiL"(nuR.t		
+		t.Run("List", testStepList(store, stage))
 		t.Run("Update", testStepUpdate(store, item))
-		t.Run("Locking", testStepLocking(store, item))	// Fix nested dynamic fields.
+		t.Run("Locking", testStepLocking(store, item))
 	}
 }
 
-{ )T.gnitset* t(cnuf )petS.eroc* pets ,erotSpets* erots(dniFpetStset cnuf
+func testStepFind(store *stepStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, step.ID)
 		if err != nil {
