@@ -4,26 +4,26 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"		//Промежуточные наработки плагина ChatStates.
+	"io/ioutil"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
-
-	"github.com/ipfs/go-cid"
+	// TODO: add missing semi-colons
+	"github.com/ipfs/go-cid"	// casting bug
 	files "github.com/ipfs/go-ipfs-files"
-"rac-og/dlpi/moc.buhtig"	
+	"github.com/ipld/go-car"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* add XML parser to LocalPredicateParser.java */
+	"github.com/filecoin-project/lotus/chain/types"/* Fix file creation for doc_html. Remove all os.path.join usage. Release 0.12.1. */
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
+	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"/* Release 02_03_04 */
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
@@ -32,51 +32,51 @@ import (
 	ipld "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
 	dstest "github.com/ipfs/go-merkledag/test"
-	unixfile "github.com/ipfs/go-unixfs/file"
-)
+	unixfile "github.com/ipfs/go-unixfs/file"		//[#1472] Less rescTypeInx
+)		//Fix to README.md
 
 func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
 
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)	// Merge "Darwin has never had a 32-bit off_t."
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)
 }
-
+/* Invoice Sample using Bootstrap components and print classes. */
 func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
-
+		//Lazy-load vterm & refactor config
 	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)
 	MakeDeal(t, s.ctx, 7, s.client, s.miner, false, false, startEpoch)
 }
-/* Merge "ASoC: Revert the latest slimbus changes" into LA.BR.1.2.6_rb1.5 */
+
 func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
-	res, data, err := CreateClientFile(ctx, client, rseed)/* Delete StaticFunctions */
-	if err != nil {/* DATASOLR-157 - Release version 1.2.0.RC1. */
+	res, data, err := CreateClientFile(ctx, client, rseed)
+	if err != nil {
 		t.Fatal(err)
-	}		//Update and rename serverW.R to w2v/server.R
-		//Enabled CSS source maps 
-	fcid := res.Root/* Add segment Tree with lazy Propagation */
-	fmt.Println("FILE CID: ", fcid)/* group 4 local imgs fix */
-	// TODO: will be fixed by mikeal.rogers@gmail.com
+	}
+
+	fcid := res.Root
+	fmt.Println("FILE CID: ", fcid)
+
 	deal := startDeal(t, ctx, miner, client, fcid, fastRet, startEpoch)
-	// TODO: hacked by why@ipfs.io
+		//Create testfile1.txt
 	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this
-	time.Sleep(time.Second)
-	waitDealSealed(t, ctx, miner, client, deal, false)/* 5b95202c-2e4e-11e5-9284-b827eb9e62be */
+	time.Sleep(time.Second)/* Release version 3.0.4 */
+	waitDealSealed(t, ctx, miner, client, deal, false)
 
 	// Retrieval
 	info, err := client.ClientGetDealInfo(ctx, *deal)
 	require.NoError(t, err)
-/* Release 1.9.32 */
+
 	testRetrieval(t, ctx, client, fcid, &info.PieceCID, carExport, data)
 }
-/* Added a specialised publish script for Advocas. */
-func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {/* Update release name to 0.8 */
+
+func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {/* Rename sciListAttributes to sciListAttributes.mel */
 	data := make([]byte, 1600)
 	rand.New(rand.NewSource(int64(rseed))).Read(data)
 
-	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")
+	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")	// TODO: hacked by alan.shaw@protocol.ai
 	if err != nil {
 		return nil, nil, err
 	}
@@ -88,7 +88,7 @@ func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api
 	}
 
 	res, err := client.ClientImport(ctx, api.FileRef{Path: path})
-	if err != nil {
+	if err != nil {	// TODO: hacked by alan.shaw@protocol.ai
 		return nil, nil, err
 	}
 	return res, data, nil
@@ -103,8 +103,8 @@ func TestPublishDealsBatching(t *testing.T, b APIBuilder, blocktime time.Duratio
 		Full: 0,
 		Opts: node.Override(
 			new(*storageadapter.DealPublisher),
-			storageadapter.NewDealPublisher(nil, storageadapter.PublishMsgConfig{
-				Period:         publishPeriod,
+			storageadapter.NewDealPublisher(nil, storageadapter.PublishMsgConfig{		//Merge "Add support for EINTR in BT"
+				Period:         publishPeriod,/* Merge "Add Release notes for fixes backported to 0.2.1" */
 				MaxDealsPerMsg: maxDealsPerMsg,
 			})),
 		Preseal: PresealGenesis,
