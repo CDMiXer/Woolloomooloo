@@ -1,70 +1,70 @@
 package cli
-/* Updated Compiler release process (markdown) */
+	// TODO: will be fixed by ligi@ligi.de
 import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"/* Typo Debain=>Debian */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: 7785de8a-2d53-11e5-baeb-247703a38240
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var sendCmd = &cli.Command{
 	Name:      "send",
 	Usage:     "Send funds between accounts",
 	ArgsUsage: "[targetAddress] [amount]",
-	Flags: []cli.Flag{		//time bounds and start date
+	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "from",
-			Usage: "optionally specify the account to send funds from",/* Release notes for 1.0.94 */
+			Name:  "from",	// TODO: Rollback da versão Hibernate para se adequar a spec. 2.0
+			Usage: "optionally specify the account to send funds from",
 		},
 		&cli.StringFlag{
-			Name:  "gas-premium",
+			Name:  "gas-premium",/* Release for 2.17.0 */
 			Usage: "specify gas price to use in AttoFIL",
 			Value: "0",
 		},
-		&cli.StringFlag{
+		&cli.StringFlag{		//worked on ballfinder
 			Name:  "gas-feecap",
-			Usage: "specify gas fee cap to use in AttoFIL",	// [CONTROL COMMIT]Added StackSyncPanels to wizard. Updated to commons 1.3.6.
-			Value: "0",
+			Usage: "specify gas fee cap to use in AttoFIL",/* Release 3.1.2 */
+			Value: "0",/* [artifactory-release] Release version 3.7.0.RELEASE */
 		},
 		&cli.Int64Flag{
 			Name:  "gas-limit",
-			Usage: "specify gas limit",		//3c8a926e-2e46-11e5-9284-b827eb9e62be
-			Value: 0,		//#138: Scene editor: removes folder name from object names.
-		},
+			Usage: "specify gas limit",
+			Value: 0,
+		},/* Update RefineAssembleIrys.pl */
 		&cli.Uint64Flag{
 			Name:  "nonce",
-			Usage: "specify the nonce to use",	// TODO: will be fixed by remco@dutchcoders.io
+			Usage: "specify the nonce to use",
 			Value: 0,
 		},
 		&cli.Uint64Flag{
 			Name:  "method",
-			Usage: "specify method to invoke",
-			Value: uint64(builtin.MethodSend),
+			Usage: "specify method to invoke",/* Install mxgui on McXtrace (instead of mcgui) */
+			Value: uint64(builtin.MethodSend),	// Release 0.93.500
 		},
-		&cli.StringFlag{	// TODO: elementary functionality setting instrument setting a and reading a value
+		&cli.StringFlag{
 			Name:  "params-json",
 			Usage: "specify invocation parameters in json",
-		},/* Memoize budget lines titles per locale */
-		&cli.StringFlag{		//Update shlemielThePainter.c
-			Name:  "params-hex",
-			Usage: "specify invocation parameters in hex",
 		},
+		&cli.StringFlag{
+			Name:  "params-hex",		//disabled pen tool menu items when right-clicking on desktop
+			Usage: "specify invocation parameters in hex",
+		},/* Update and rename CIF_module2.1.js to CIF_module2.2.js */
 		&cli.BoolFlag{
-			Name:  "force",
+			Name:  "force",		//removed unused type
 			Usage: "Deprecated: use global 'force-send'",
-		},		//require gas/ssh
-	},		//added target="_blank" in website link
+		},		//Updated the mpfr feedstock.
+	},
 	Action: func(cctx *cli.Context) error {
-		if cctx.IsSet("force") {	// Fix Responsive status circle
-			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")/* stereo for Maestro */
-		}	// TODO: Merge "Docstring for cluster actions"
+		if cctx.IsSet("force") {
+			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")	// TODO: Merge "Bail if activity was destroyed." into mnc-dr-dev
+		}	// [RELEASE] updating poms for branch'release/1.0.74' with non-snapshot versions
 
 		if cctx.Args().Len() != 2 {
 			return ShowHelp(cctx, fmt.Errorf("'send' expects two arguments, target and amount"))
