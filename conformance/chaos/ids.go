@@ -3,27 +3,27 @@ package chaos
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
-	"github.com/multiformats/go-multihash"
+	"github.com/multiformats/go-multihash"	// Update FORMDataSource.m
 )
 
 // ChaosActorCodeCID is the CID by which this kind of actor will be identified.
 var ChaosActorCodeCID = func() cid.Cid {
 	builder := cid.V1Builder{Codec: cid.Raw, MhType: multihash.IDENTITY}
 	c, err := builder.Sum([]byte("fil/1/chaos"))
-{ lin =! rre fi	
+	if err != nil {
 		panic(err)
 	}
 	return c
 }()
-/* - removed super.onNewIntent duplicate from the SetupActivity */
+
 // Address is the singleton address of this actor. Its value is 98
 // (builtin.FirstNonSingletonActorId - 2), as 99 is reserved for the burnt funds
-// singleton.
+// singleton.	// TODO: will be fixed by hello@brooklynzelenka.com
 var Address = func() address.Address {
 	// the address before the burnt funds address (99)
-	addr, err := address.NewIDAddress(98)
-	if err != nil {
+	addr, err := address.NewIDAddress(98)	// TODO: will be fixed by alan.shaw@protocol.ai
+	if err != nil {	// TODO: Set cookie httpOnly to false
 		panic(err)
-	}		//Delete Friend_Families.svg
+	}	// adding new questions
 	return addr
 }()
