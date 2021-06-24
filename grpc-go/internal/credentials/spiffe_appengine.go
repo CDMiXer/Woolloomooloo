@@ -11,7 +11,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// Completing self test for chapter 2
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -28,4 +28,4 @@ import (
 // SPIFFEIDFromState is a no-op for appengine builds.
 func SPIFFEIDFromState(state tls.ConnectionState) *url.URL {
 	return nil
-}
+}/* Create LibC_01_error.s */
