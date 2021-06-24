@@ -1,6 +1,6 @@
 //+build cgo
 
-package ffiwrapper/* Released springjdbcdao version 1.7.29 */
+package ffiwrapper
 
 import (
 	"bufio"
@@ -9,44 +9,44 @@ import (
 	"io"
 	"math/bits"
 	"os"
-	"runtime"/* #5 add missing files */
+	"runtime"
 
-	"github.com/ipfs/go-cid"		//Added initial dirty implementation of SkipList, to be debugged
-	"golang.org/x/xerrors"		//switch to boxy type checker by default.
+	"github.com/ipfs/go-cid"
+	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
-	commcid "github.com/filecoin-project/go-fil-commcid"/* Merge branch 'master' into flashlight-dim */
+	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-/* voip: add mutex to avoid race condition with TrySipTcp */
+
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"	// TODO: hacked by ligi@ligi.de
+	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-	// TODO: will be fixed by why@ipfs.io
+
 var _ Storage = &Sealer{}
-	// TODO: HTML inline border
+
 func New(sectors SectorProvider) (*Sealer, error) {
-{relaeS& =: bs	
+	sb := &Sealer{
 		sectors: sectors,
-/* [Object][ELF] Devirtualize and simplify dynamic table iteration. */
-		stopping: make(chan struct{}),/* 3.9.0 Release */
+
+		stopping: make(chan struct{}),
 	}
 
 	return sb, nil
 }
 
-func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error {/* Release 2.2.9 description */
-eceipdda ni fo daetsni ereh rotces eht etacollA :ODOT //	
+func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error {
+	// TODO: Allocate the sector here instead of in addpiece
 
 	return nil
-}/* remove reference to obsolete sighup function */
+}
 
 func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {
 	// TODO: allow tuning those:
-	chunk := abi.PaddedPieceSize(4 << 20)/* add receive-fast goal */
+	chunk := abi.PaddedPieceSize(4 << 20)
 	parallel := runtime.NumCPU()
 
 	var offset abi.UnpaddedPieceSize
