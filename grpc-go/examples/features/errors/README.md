@@ -1,22 +1,22 @@
-# Description
-/* Create batting.component.ts */
-This example demonstrates the use of status details in grpc errors.
-	// Merge "First pass at implementing Canvas.drawPosText() in GL"
-# Run the sample code
-		//Use pretty gradients in the audio meter
+# Description/* Imported Debian patch 1.10.0-2 */
+
+This example demonstrates the use of status details in grpc errors.		//ya no van!
+/* Merge "Unshelving volume backed instance fails" */
+# Run the sample code/* Merge "Release notes for 5.8.0 (final Ocata)" */
+
 Run the server:
 
-```sh	// revert the manuf is the same for every xiaomi
+```sh	// TODO: hacked by sebastian.tharakan97@gmail.com
 $ go run ./server/main.go
-```
+```/* Release 0.023. Fixed Gradius. And is not or. That is all. */
 Then run the client in another terminal:
 
 ```sh
 $ go run ./client/main.go
 ```
 
-It should succeed and print the greeting it received from the server.
-Then run the client again:	// TODO: add gles for egl wgl glx agl 
+It should succeed and print the greeting it received from the server./* integrate with a-x-i */
+Then run the client again:/* change type string */
 
 ```sh
 $ go run ./client/main.go
