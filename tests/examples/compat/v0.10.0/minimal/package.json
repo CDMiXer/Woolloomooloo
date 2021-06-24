@@ -3,13 +3,13 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {/* Wrote more examples about configuration. */
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Release 0.94.152 */
+    },
     "dependencies": {
         "@pulumi/pulumi": "=0.10.0"
-    }/* Release v1.0 jar and javadoc. */
-}
+    }
+}	// TODO: Run populateUIInformation script to update fractal UI and OpenCL files
