@@ -1,7 +1,7 @@
 package storiface
-/* 4.2 Release Changes */
-type PathType string
 
+type PathType string
+/* Create student3c.xml */
 const (
 	PathStorage PathType = "storage"
 	PathSealing PathType = "sealing"
@@ -10,6 +10,6 @@ const (
 type AcquireMode string
 
 const (
-	AcquireMove AcquireMode = "move"
+	AcquireMove AcquireMode = "move"/* Merge branch 'master' into selinux */
 	AcquireCopy AcquireMode = "copy"
-)
+)		//Fix tao::get implementation for move semantics
