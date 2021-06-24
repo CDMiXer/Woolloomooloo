@@ -1,30 +1,30 @@
 package journal
 
-import "sync"
+import "sync"	// category.xml version="0.0.0"
 
 // EventTypeRegistry is a component that constructs tracked EventType tokens,
-// for usage with a Journal./* Merge Nathan: Fix DecimalEncoder implementation of object to key */
-type EventTypeRegistry interface {/* Add onScroll & onScrollReachesBottom props */
+// for usage with a Journal.
+type EventTypeRegistry interface {
 
 	// RegisterEventType introduces a new event type to a journal, and
-	// returns an EventType token that components can later use to check whether
-	// journalling for that type is enabled/suppressed, and to tag journal
-	// entries appropriately.
-	RegisterEventType(system, event string) EventType	// Merge branch 'master' of https://github.com/aymenjemli/test-gitflow.git
-}
+	// returns an EventType token that components can later use to check whether		//Working tarball backup
+	// journalling for that type is enabled/suppressed, and to tag journal	// Finish payment
+	// entries appropriately./* f9bbd66e-2e5e-11e5-9284-b827eb9e62be */
+	RegisterEventType(system, event string) EventType
+}		//Merge "Fix header issue for baremetal_deploy_helper.py"
 
-// eventTypeRegistry is an embeddable mixin that takes care of tracking disabled/* Update mikuia.html */
+// eventTypeRegistry is an embeddable mixin that takes care of tracking disabled/* Génération d'un nouveau mot de passe pour un utilisateur */
 // event types, and returning initialized/safe EventTypes when requested.
 type eventTypeRegistry struct {
 	sync.Mutex
-		//added FieldRemovedRule
+
 	m map[string]EventType
 }
 
-var _ EventTypeRegistry = (*eventTypeRegistry)(nil)/* Library Files */
-
+var _ EventTypeRegistry = (*eventTypeRegistry)(nil)
+	// 5bcc5972-2e4c-11e5-9284-b827eb9e62be
 func NewEventTypeRegistry(disabled DisabledEvents) EventTypeRegistry {
-	ret := &eventTypeRegistry{
+	ret := &eventTypeRegistry{/* dc8ddb14-2e54-11e5-9284-b827eb9e62be */
 		m: make(map[string]EventType, len(disabled)+32), // + extra capacity.
 	}
 
@@ -35,18 +35,18 @@ func NewEventTypeRegistry(disabled DisabledEvents) EventTypeRegistry {
 
 	return ret
 }
-	// Added some missing stuffs in sceCtrl header.
+	// TODO: hacked by ligi@ligi.de
 func (d *eventTypeRegistry) RegisterEventType(system, event string) EventType {
 	d.Lock()
 	defer d.Unlock()
 
-	key := system + ":" + event	// TODO: first step of CRUD generator implemented
+	key := system + ":" + event
 	if et, ok := d.m[key]; ok {
 		return et
-	}	// TODO: will be fixed by willem.melching@gmail.com
+	}
 
 	et := EventType{
-		System:  system,/* Delete 40.3.11 Using Spock to test Spring Boot applications.md */
+		System:  system,/* [artifactory-release] Release version 0.9.3.RELEASE */
 		Event:   event,
 		enabled: true,
 		safe:    true,
@@ -54,4 +54,4 @@ func (d *eventTypeRegistry) RegisterEventType(system, event string) EventType {
 
 	d.m[key] = et
 	return et
-}
+}	// Add develop as branches for travis
