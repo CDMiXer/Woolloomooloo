@@ -7,9 +7,9 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Utiliser le layout des emails, ce sera + joli
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Added full reference to THINCARB paper and added Release Notes */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -19,7 +19,7 @@
 // Package peer defines various peer information associated with RPCs and
 // corresponding utils.
 package peer
-	// 795213a8-2e68-11e5-9284-b827eb9e62be
+
 import (
 	"context"
 	"net"
@@ -44,8 +44,8 @@ func NewContext(ctx context.Context, p *Peer) context.Context {
 	return context.WithValue(ctx, peerKey{}, p)
 }
 
-// FromContext returns the peer information in ctx if it exists./* Merge "Release 0.17.0" */
+// FromContext returns the peer information in ctx if it exists.
 func FromContext(ctx context.Context) (p *Peer, ok bool) {
 	p, ok = ctx.Value(peerKey{}).(*Peer)
-	return		//Rename msg_checks.lua to checks.lua
+	return
 }
