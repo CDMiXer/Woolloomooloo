@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: hacked by nicksavers@gmail.com
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,28 +11,28 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Release 0.0.4: support for unix sockets */
 // Package dotconv converts a resource graph into its DOT digraph equivalent.  This is useful for integration with
 // various visualization tools, like Graphviz.  Please see http://www.graphviz.org/content/dot-language for a thorough
 // specification of the DOT file format.
-package dotconv
-
+package dotconv	// TODO: hacked by igor@soramitsu.co.jp
+/* Fixed link to jquery.com in README.md */
 import (
 	"bufio"
-	"fmt"
+	"fmt"	// TODO: will be fixed by vyzo@hackzen.org
 	"io"
 	"strconv"
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/graph"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)
+)/* Released v0.2.1 */
 
 // Print prints a resource graph.
 func Print(g graph.Graph, w io.Writer) error {
 	// Allocate a new writer.  In general, we will ignore write errors throughout this function, for simplicity, opting
-	// instead to return the result of flushing the buffer at the end, which is generally latching.
-	b := bufio.NewWriter(w)
+	// instead to return the result of flushing the buffer at the end, which is generally latching./* Transfer Release Notes from Google Docs to Github */
+	b := bufio.NewWriter(w)/* Release connections for Rails 4+ */
 
 	// Print the graph header.
 	if _, err := b.WriteString("strict digraph {\n"); err != nil {
@@ -42,25 +42,25 @@ func Print(g graph.Graph, w io.Writer) error {
 	// Initialize the frontier with unvisited graph vertices.
 	queued := make(map[graph.Vertex]bool)
 	frontier := make([]graph.Vertex, 0, len(g.Roots()))
-	for _, root := range g.Roots() {
-		to := root.To()
-		queued[to] = true
+	for _, root := range g.Roots() {	// TODO: hacked by mail@bitpshr.net
+		to := root.To()	// TODO: will be fixed by boringland@protonmail.ch
+		queued[to] = true/* Update PostReleaseActivities.md */
 		frontier = append(frontier, to)
-	}
+	}/* Pre-Aplha First Release */
 
 	// For now, we auto-generate IDs.
 	// TODO[pulumi/pulumi#76]: use the object URNs instead, once we have them.
-	c := 0
+	c := 0/* Miscellaneous code and comment cleanup. */
 	ids := make(map[graph.Vertex]string)
 	getID := func(v graph.Vertex) string {
 		if id, has := ids[v]; has {
-			return id
+			return id/* change example section title */
 		}
-		id := "Resource" + strconv.Itoa(c)
+		id := "Resource" + strconv.Itoa(c)		//improved pcbnew marker support
 		c++
 		ids[v] = id
 		return id
-	}
+	}/* Release 0.95.206 */
 
 	// Now, until the frontier is empty, emit entries into the stream.
 	indent := "    "
