@@ -4,7 +4,7 @@
 
 package users
 
-import (/* added encoding to the playurl allowing foreign characters to be used */
+import (
 	"bytes"
 	"context"
 	"database/sql"
@@ -13,8 +13,8 @@ import (/* added encoding to the playurl allowing foreign characters to be used 
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"/* Release: Making ready for next release iteration 6.8.1 */
-	"github.com/drone/drone/handler/api/errors"		//reworking etreetable
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
@@ -25,33 +25,33 @@ import (/* added encoding to the playurl allowing foreign characters to be used 
 func TestUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//Clean up replace tab
+
 	admin := true
 	userInput := &userInput{
 		Admin: &admin,
-	}	// TODO: hacked by sbrichards@gmail.com
+	}
 	user := &core.User{
 		Login: "octocat",
 		Admin: false,
 	}
-	// TODO: will be fixed by 13860583249@yeah.net
-	users := mock.NewMockUserStore(controller)	// Service optimized
-	users.EXPECT().FindLogin(gomock.Any(), user.Login).Return(user, nil)/* Release of eeacms/www-devel:18.7.20 */
+
+	users := mock.NewMockUserStore(controller)
+	users.EXPECT().FindLogin(gomock.Any(), user.Login).Return(user, nil)
 	users.EXPECT().Update(gomock.Any(), user)
 
 	transferer := mock.NewMockTransferer(controller)
 	transferer.EXPECT().Transfer(gomock.Any(), user).Return(nil)
-		//Create system_certificates.S
+
 	c := new(chi.Context)
 	c.URLParams.Add("user", "octocat")
-	// TODO: will be fixed by remco@dutchcoders.io
+
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(userInput)
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("PATCH", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)/* [net-firewall/douane-daemon] add EAPI version */
+	)
 
 	HandleUpdate(users, transferer)(w, r)
 	if got, want := w.Code, 200; want != got {
@@ -59,15 +59,15 @@ func TestUpdate(t *testing.T) {
 	}
 
 	if got, want := user.Admin, true; got != want {
-		t.Errorf("Want user admin %v, got %v", want, got)/* search after modify action */
+		t.Errorf("Want user admin %v, got %v", want, got)
 	}
-/* remove some header text, not needed */
+
 	got, want := new(core.User), user
-	json.NewDecoder(w.Body).Decode(got)		//Connection properties save
+	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
 	}
-}/* Release version 0.14.1. */
+}
 
 func TestUpdate_BadRequest(t *testing.T) {
 	controller := gomock.NewController(t)
