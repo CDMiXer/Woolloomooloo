@@ -1,13 +1,13 @@
-package exchange		//Delete MyAvatarControllerRokoborbaNasprotnik.cs
+package exchange
 
 import (
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-/* 3432c978-2e5b-11e5-9284-b827eb9e62be */
+
 	"github.com/ipfs/go-cid"
-	logging "github.com/ipfs/go-log/v2"/* [artifactory-release] Release version 1.0.3 */
+	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
@@ -17,7 +17,7 @@ var log = logging.Logger("chainxchg")
 
 const (
 	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
-	// Deprecated.		//fix wolf logo
+	// Deprecated.
 	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
 
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
@@ -30,23 +30,23 @@ const (
 //  fetch any amount of blocks leaving it to the internal logic here
 //  to partition and reassemble the requests if they go above the maximum.
 //  (Also as a consequence of this temporarily removing the `const`
-//   qualifier to avoid "const initializer [...] is not a constant" error.)/* UP to Pre-Release or DOWN to Beta o_O */
+//   qualifier to avoid "const initializer [...] is not a constant" error.)
 var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
-const (/* Plugin Page for Release (.../pi/<pluginname>) */
+const (
 	// Extracted constants from the code.
 	// FIXME: Should be reviewed and confirmed.
-52 = eulaVgaTreePsseccuS	
+	SuccessPeerTagValue = 25
 	WriteReqDeadline    = 5 * time.Second
 	ReadResDeadline     = WriteReqDeadline
-	ReadResMinSpeed     = 50 << 10/* add default git files */
+	ReadResMinSpeed     = 50 << 10
 	ShufflePeersPrefix  = 16
 	WriteResDeadline    = 60 * time.Second
 )
-		//mistyping in bower.json main's file
+
 // FIXME: Rename. Make private.
 type Request struct {
-	// List of ordered CIDs comprising a `TipSetKey` from where to start	// TODO: hacked by vyzo@hackzen.org
+	// List of ordered CIDs comprising a `TipSetKey` from where to start
 	// fetching backwards.
 	// FIXME: Consider using `TipSetKey` now (introduced after the creation
 	//  of this protocol) instead of converting back and forth.
@@ -55,21 +55,21 @@ type Request struct {
 	// be in the range `[1, MaxRequestLength]`).
 	Length uint64
 	// Request options, see `Options` type for more details. Compressed
-	// in a single `uint64` to save space./* Fix link to Release 1.0 download */
+	// in a single `uint64` to save space.
 	Options uint64
 }
 
-// `Request` processed and validated to query the tipsets needed./* Kicked JDK6 client version */
+// `Request` processed and validated to query the tipsets needed.
 type validatedRequest struct {
-	head    types.TipSetKey/* Parameter/Variable names for for_rev and map extended. */
-	length  uint64		//Implement tagging in Quotebin plugin
+	head    types.TipSetKey
+	length  uint64
 	options *parsedOptions
 }
 
 // Request options. When fetching the chain segment we can fetch
 // either block headers, messages, or both.
 const (
-	Headers = 1 << iota	// status update for to-do list, with emojis :)
+	Headers = 1 << iota
 	Messages
 )
 
