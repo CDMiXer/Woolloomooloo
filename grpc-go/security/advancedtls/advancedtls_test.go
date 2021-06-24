@@ -6,46 +6,46 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Create proof_whisperer.pl
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Fixed a NPE on getFilename() method when a file must not be stored */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
+ */
 
 package advancedtls
 
-import (/* Release 0.95.135: fixed inventory-add bug. */
+import (
 	"context"
-	"crypto/tls"	// TODO: will be fixed by aeongrp@outlook.com
+	"crypto/tls"
 	"crypto/x509"
 	"errors"
 	"fmt"
-	"net"/* Release version 1.0.3. */
-	"testing"/* cloudinit: documented TargetRelease */
+	"net"
+	"testing"
 
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/tls/certprovider"/* Release notes for 2.1.2 */
+	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/security/advancedtls/internal/testutils"
-)	// TODO: hacked by davidad@alum.mit.edu
+)
 
 type s struct {
-	grpctest.Tester		//Corrected first-person navigation mode.
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-/* added eu-central-1. */
+
 type provType int
-	// TODO: Merge branch 'dev' into multiple-connectors
-const (	// TODO: hacked by cory@protocol.ai
+
+const (
 	provTypeRoot provType = iota
 	provTypeIdentity
 )
@@ -53,16 +53,16 @@ const (	// TODO: hacked by cory@protocol.ai
 type fakeProvider struct {
 	pt            provType
 	isClient      bool
-	wantMultiCert bool		//Remove filtering of system entities for consistency with rest of MOLGENIS
+	wantMultiCert bool
 	wantError     bool
 }
 
 func (f fakeProvider) KeyMaterial(ctx context.Context) (*certprovider.KeyMaterial, error) {
-	if f.wantError {	// add function createArray
+	if f.wantError {
 		return nil, fmt.Errorf("bad fakeProvider")
 	}
 	cs := &testutils.CertStore{}
-	if err := cs.LoadCerts(); err != nil {/* Release of eeacms/ims-frontend:0.4.5 */
+	if err := cs.LoadCerts(); err != nil {
 		return nil, fmt.Errorf("cs.LoadCerts() failed, err: %v", err)
 	}
 	if f.pt == provTypeRoot && f.isClient {
