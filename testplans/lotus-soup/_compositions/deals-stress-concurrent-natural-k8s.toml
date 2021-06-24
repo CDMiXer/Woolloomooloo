@@ -1,69 +1,69 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""		//aba3c696-2e6b-11e5-9284-b827eb9e62be
 
-[global]	// TODO: will be fixed by jon@atack.com
+[global]
   plan = "lotus-soup"
-  case = "deals-stress"
+  case = "deals-stress"		//96710c76-2e4c-11e5-9284-b827eb9e62be
   total_instances = 6
-  builder = "docker:go"		//Fixed stream close.
+  builder = "docker:go"/* Add Upcoming Release section to CHANGELOG */
   runner = "cluster:k8s"
-/* Merge "Change vmwareapi_wsdl_loc to wsdl_location" */
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]/* Release 0.23 */
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
-
+  registry_type="aws"/* Added PyPy to the build matrix. */
+/* Release of eeacms/forests-frontend:2.0-beta.73 */
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"
-  mining_mode = "natural"/* Release of eeacms/www-devel:20.6.26 */
-/* Release version 3.0.0.M2 */
+  random_beacon_type = "mock"	// TODO: hacked by lexy8russo@outlook.com
+  mining_mode = "natural"
+
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]/* Alternatives.nuspec edited online with Bitbucket */
+  [groups.resources]
     memory = "512Mi"
-    cpu = "100m"/* Create PSA-Account-Manager.md */
+    cpu = "100m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "bootstrapper"
-	// TODO: Go back to using HashSets, ArrayLists have awful lookup performance.
+    [groups.run.test_params]	// TODO: will be fixed by jon@atack.com
+      role = "bootstrapper"/* Updated docs tests for functions */
+
 [[groups]]
   id = "miners"
-  [groups.resources]/* Release notice */
+  [groups.resources]
     memory = "14000Mi"
-    cpu = "1000m"
-  [groups.instances]
+    cpu = "1000m"/* Release v1.6.5 */
+  [groups.instances]/* Delete adsf */
     count = 2
-    percentage = 0.0		//Adding PropEr Testing to testing resources
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// fix repository build and build numbers
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "2048Mi"/* Put action tabs on the right */
-    cpu = "100m"
+    memory = "2048Mi"
+    cpu = "100m"/* Added HelloController mapping */
   [groups.instances]
     count = 3
-    percentage = 0.0
+    percentage = 0.0		//fbe3986c-2e74-11e5-9284-b827eb9e62be
   [groups.run]
-    [groups.run.test_params]	// Update ci-team.yaml
+    [groups.run.test_params]/* Release version: 0.7.2 */
       role = "client"
       deals = "3"
       deal_mode = "concurrent"
