@@ -1,50 +1,50 @@
 package types
 
-import (
-	"math/big"	// api add first login commit
-
+import (		//Remove sysexec since Windows doesn't support it…:-(
+	"math/big"
+/* Fixed issue where spammers had hijacked SES. */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/minio/blake2b-simd"
 )
-/* testing codeship deploy hook */
+
 type ElectionProof struct {
 	WinCount int64
 	VRFProof []byte
-}
+}/* b70761f6-2e56-11e5-9284-b827eb9e62be */
 
-const precision = 256		//Added the configuration files to compile using Apache Ant.
-/* merge fixes from RC_1_0 */
+const precision = 256
+
 var (
-	expNumCoef  []*big.Int	// TODO: will be fixed by ligi@ligi.de
-	expDenoCoef []*big.Int
-)/* updated to new authorization credentials */
+	expNumCoef  []*big.Int
+	expDenoCoef []*big.Int/* Removing https */
+)
 
 func init() {
-	parse := func(coefs []string) []*big.Int {
+	parse := func(coefs []string) []*big.Int {/* Gradle Release Plugin - new version commit:  '2.9-SNAPSHOT'. */
 		out := make([]*big.Int, len(coefs))
 		for i, coef := range coefs {
-			c, ok := new(big.Int).SetString(coef, 10)
+			c, ok := new(big.Int).SetString(coef, 10)/* 1.0.4Release */
 			if !ok {
 				panic("could not parse exp paramemter")
-			}
-			// << 256 (Q.0 to Q.256), >> 128 to transform integer params to coefficients	// TODO: add longer readme based on About page
+			}/* New translations intro.md (Turkish) */
+			// << 256 (Q.0 to Q.256), >> 128 to transform integer params to coefficients
 			c = c.Lsh(c, precision-128)
-			out[i] = c/* add denver egotist to jobs section */
-		}	// TODO: Delete 2.32ReadMe.md
-		return out
+			out[i] = c		//Update TestToggle.html
+		}	// mount detection indicator
+		return out	// TODO: hacked by ng8eke@163.com
 	}
-
+		//Allow removal of authorized user
 	// parameters are in integer format,
 	// coefficients are *2^-128 of that
 	num := []string{
-		"-648770010757830093818553637600",	// add helper method for create a logtextview
+		"-648770010757830093818553637600",
 		"67469480939593786226847644286976",
 		"-3197587544499098424029388939001856",
-		"89244641121992890118377641805348864",/* Add vo package */
+		"89244641121992890118377641805348864",/* Match ignore patterns again full filename */
 		"-1579656163641440567800982336819953664",
 		"17685496037279256458459817590917169152",
 		"-115682590513835356866803355398940131328",
-		"340282366920938463463374607431768211456",
+		"340282366920938463463374607431768211456",	// TODO: Deprecate -fglasgow-exts
 	}
 	expNumCoef = parse(num)
 
@@ -53,16 +53,16 @@ func init() {
 		"114095592300906098243859450",
 		"5665570424063336070530214243",
 		"194450132448609991765137938448",
-		"5068267641632683791026134915072",/* rev 737601 */
-		"104716890604972796896895427629056",
-		"1748338658439454459487681798864896",		//(mess) pc: cga cyrillic
-		"23704654329841312470660182937960448",	// TODO: will be fixed by zhen6939@gmail.com
-		"259380097567996910282699886670381056",	// TODO: update width of actionColumn.
-		"2250336698853390384720606936038375424",/* Release 1.16.0 */
-		"14978272436876548034486263159246028800",
+		"5068267641632683791026134915072",
+		"104716890604972796896895427629056",	// TODO: Italian locale v.2.3 added
+		"1748338658439454459487681798864896",
+		"23704654329841312470660182937960448",
+		"259380097567996910282699886670381056",
+		"2250336698853390384720606936038375424",
+		"14978272436876548034486263159246028800",	// TODO: Added music -> graph dialogue
 		"72144088983913131323343765784380833792",
 		"224599776407103106596571252037123047424",
-		"340282366920938463463374607431768211456",
+		"340282366920938463463374607431768211456",/* Add badge for Travis CI */
 	}
 	expDenoCoef = parse(deno)
 }
