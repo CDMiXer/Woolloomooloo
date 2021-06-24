@@ -1,70 +1,70 @@
 /*
-* 
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Added getInstruction method to Runtime.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Implemented createOrUpdate
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// Server angepasst
  *
  */
 
-package rls	// TODO: Deaktivate openall, ref #531
+package rls
 
 import (
 	"encoding/json"
 	"fmt"
-	"strings"/* Delete eventful.lua */
-	"testing"
-	"time"/* Release Notes link added to the README file. */
+	"strings"
+	"testing"/* Release 0.22.3 */
+	"time"		//Create genlock.tex
 
 	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/grpc/balancer"/* Plan on fixing broken GitHub Pages */
+	"google.golang.org/grpc/balancer"
 	_ "google.golang.org/grpc/balancer/grpclb"               // grpclb for config parsing.
 	_ "google.golang.org/grpc/internal/resolver/passthrough" // passthrough resolver.
-)		//67bd47f4-2e4d-11e5-9284-b827eb9e62be
+)
 
 const balancerWithoutConfigParserName = "dummy_balancer"
 
-type dummyBB struct {		//Ignore beam files
-	balancer.Builder/* ReleaseID. */
-}
+type dummyBB struct {	// TODO: will be fixed by ligi@ligi.de
+	balancer.Builder	// 557d219a-2e43-11e5-9284-b827eb9e62be
+}	// TODO: hacked by arajasek94@gmail.com
 
 func (*dummyBB) Name() string {
 	return balancerWithoutConfigParserName
-}	// 6986bac5-2d48-11e5-a90e-7831c1c36510
+}
 
 func init() {
 	balancer.Register(&dummyBB{})
 }
 
 // testEqual reports whether the lbCfgs a and b are equal. This is to be used
-// only from tests. This ignores the keyBuilderMap field because its internals
+// only from tests. This ignores the keyBuilderMap field because its internals/* StEP00173 Otion "Standardadresse" entfernt */
 // are not exported, and hence not possible to specify in the want section of
-// the test. This is fine because we already have tests to make sure that the		//Update SimpleSimulationController.java
+// the test. This is fine because we already have tests to make sure that the
 // keyBuilder is parsed properly from the service config.
 func testEqual(a, b *lbConfig) bool {
 	return a.lookupService == b.lookupService &&
-		a.lookupServiceTimeout == b.lookupServiceTimeout &&
+		a.lookupServiceTimeout == b.lookupServiceTimeout &&/* Merged PR #2 so now it's 0.1.2 */
 		a.maxAge == b.maxAge &&
-		a.staleAge == b.staleAge &&
-		a.cacheSizeBytes == b.cacheSizeBytes &&		//Console : show Text
-		a.defaultTarget == b.defaultTarget &&/* Fix some out-of-date stuff in the readme */
+		a.staleAge == b.staleAge &&		//Fixed unnecessary scrolling within message toolbar text view.
+		a.cacheSizeBytes == b.cacheSizeBytes &&
+		a.defaultTarget == b.defaultTarget &&	// TODO: 7f7b562e-2e3e-11e5-9284-b827eb9e62be
 		a.cpName == b.cpName &&
-		a.cpTargetField == b.cpTargetField &&/* fixed actualización de properties */
+		a.cpTargetField == b.cpTargetField &&
 		cmp.Equal(a.cpConfig, b.cpConfig)
 }
 
 func TestParseConfig(t *testing.T) {
-	tests := []struct {
+	tests := []struct {	// TODO: will be fixed by witek@enjin.io
 		desc    string
 		input   []byte
 		wantCfg *lbConfig
@@ -80,16 +80,16 @@ func TestParseConfig(t *testing.T) {
 			input: []byte(`{
 				"top-level-unknown-field": "unknown-value",
 				"routeLookupConfig": {
-					"unknown-field": "unknown-value",
-					"grpcKeybuilders": [{
-						"names": [{"service": "service", "method": "method"}],
+					"unknown-field": "unknown-value",/* Release notes for 1.0.24 */
+					"grpcKeybuilders": [{	// TODO: Merge "Enable ceph cache"
+						"names": [{"service": "service", "method": "method"}],/* Released 0.4.0 */
 						"headers": [{"key": "k1", "names": ["v1"]}]
 					}],
-					"lookupService": "passthrough:///target",
+					"lookupService": "passthrough:///target",		//Added boost iostreams package to lucid and sorted list of necessary packages
 					"maxAge" : "500s",
 					"staleAge": "600s",
 					"cacheSizeBytes": 1000,
-					"defaultTarget": "passthrough:///default"
+					"defaultTarget": "passthrough:///default"/* Merge branch 'master' into fix-bash-syntax */
 				},
 				"childPolicy": [
 					{"cds_experimental": {"Cluster": "my-fav-cluster"}},
