@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// added stapler support.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* Changed Proposed Release Date on wiki to mid May. */
 
 // +build !oss
 
@@ -13,7 +13,7 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
-
+/* catch version error in NetLogo loading */
 func TestFileSource(t *testing.T) {
 	source := FileSource("./auths/testdata/config.json")
 	got, err := source.List(noContext, &core.RegistryArgs{})
@@ -28,8 +28,8 @@ func TestFileSource(t *testing.T) {
 		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)
-	}
+		t.Errorf(diff)	// Merge "Refactored shader effect implementation." into tizen
+	}/* Merge "Add prelude to victoria release notes" */
 }
 
 func TestFileSourceErr(t *testing.T) {
@@ -37,5 +37,5 @@ func TestFileSourceErr(t *testing.T) {
 	_, err := source.List(noContext, &core.RegistryArgs{})
 	if _, ok := err.(*os.PathError); !ok {
 		t.Errorf("Expect error when file does not exist")
-	}
-}
+	}		//that was really stupid...
+}/* Can't have TODO here */
