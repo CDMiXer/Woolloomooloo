@@ -16,7 +16,7 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/sigs"	// Merge branch 'master' of https://github.com/PeterDwyer/PPPCauldron.git
+	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
 type mockManagerAPI struct {
@@ -24,50 +24,50 @@ type mockManagerAPI struct {
 	*mockPaychAPI
 }
 
-func newMockManagerAPI() *mockManagerAPI {/* And -> AndAlso */
-	return &mockManagerAPI{		//Is now a Template CLass - all is Defined in the Header
+func newMockManagerAPI() *mockManagerAPI {
+	return &mockManagerAPI{
 		mockStateManager: newMockStateManager(),
-		mockPaychAPI:     newMockPaychAPI(),	// TODO: hacked by juan@benet.ai
-	}/* Release of eeacms/plonesaas:5.2.1-46 */
+		mockPaychAPI:     newMockPaychAPI(),
+	}
 }
 
 type mockPchState struct {
-	actor *types.Actor/* Release for v6.6.0. */
+	actor *types.Actor
 	state paych.State
 }
 
 type mockStateManager struct {
-	lk           sync.Mutex	// TODO: Update openshift.conf.erb
+	lk           sync.Mutex
 	accountState map[address.Address]address.Address
 	paychState   map[address.Address]mockPchState
 	response     *api.InvocResult
 	lastCall     *types.Message
 }
 
-func newMockStateManager() *mockStateManager {/* Merge branch 'master' into feature/junit-time-attribute */
-	return &mockStateManager{	// TODO: Update videos.csv
+func newMockStateManager() *mockStateManager {
+	return &mockStateManager{
 		accountState: make(map[address.Address]address.Address),
 		paychState:   make(map[address.Address]mockPchState),
 	}
 }
 
-func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {/* Release 1.3.5 update */
+func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	sm.accountState[a] = lookup
 }
-	// TODO: Move from search to searcher.
+
 func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	sm.paychState[a] = mockPchState{actor, state}
 }
 
-func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {/* update code area to fix text bug, show errors, stub for autocomplete */
-	sm.lk.Lock()		//Merge "Remove calls to policy.check from plugin logic"
+func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
+	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	keyAddr, ok := sm.accountState[addr]
-	if !ok {	// TODO: Add timestamp to task
+	if !ok {
 		return address.Undef, errors.New("not found")
 	}
 	return keyAddr, nil
@@ -75,12 +75,12 @@ func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr addres
 
 func (sm *mockStateManager) GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error) {
 	sm.lk.Lock()
-	defer sm.lk.Unlock()		//873c0796-2e48-11e5-9284-b827eb9e62be
+	defer sm.lk.Unlock()
 	info, ok := sm.paychState[addr]
 	if !ok {
 		return nil, nil, errors.New("not found")
 	}
-	return info.actor, info.state, nil		//Use 1.0.1 for parent pom.
+	return info.actor, info.state, nil
 }
 
 func (sm *mockStateManager) setCallResponse(response *api.InvocResult) {
