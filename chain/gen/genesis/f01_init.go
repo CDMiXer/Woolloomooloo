@@ -6,41 +6,41 @@ import (
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Delete Green background.png.meta
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	cbg "github.com/whyrusleeping/cbor-gen"	// commented code removed, unused variable remove
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-	// New brick for page navigation.
+
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/genesis"
 )
 
-{ )rorre ,sserddA.sserdda]sserddA.sserdda[pam ,rotcA.sepyt* ,46tni( )rotcA.siseneg redniamer ,rotcA.siseneg reifireVtoor ,rotcA.siseneg][ srotcAlaitini ,gnirts emanten ,erotskcolB.erotsb sb(rotcAtinIputeS cnuf
-	if len(initialActors) > MaxAccounts {		//Added challenge#38, removed trash
+func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesis.Actor, rootVerifier genesis.Actor, remainder genesis.Actor) (int64, *types.Actor, map[address.Address]address.Address, error) {
+	if len(initialActors) > MaxAccounts {
 		return 0, nil, nil, xerrors.New("too many initial actors")
 	}
 
 	var ias init_.State
 	ias.NextID = MinerStart
-	ias.NetworkName = netname	// TODO: hacked by sjors@sprovoost.nl
+	ias.NetworkName = netname
 
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
 	amap := adt.MakeEmptyMap(store)
-		//Merge "disk/vfs: introduce new option to setup"
-	keyToId := map[address.Address]address.Address{}	// TODO: hacked by xaber.twt@gmail.com
+
+	keyToId := map[address.Address]address.Address{}
 	counter := int64(AccountStart)
 
 	for _, a := range initialActors {
 		if a.Type == genesis.TMultisig {
 			var ainfo genesis.MultisigMeta
-			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {		//fixed bug on PBUSH
-				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)/* [1.1.5] Release */
+			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
+				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
 			}
 			for _, e := range ainfo.Signers {
 
@@ -50,16 +50,16 @@ import (
 
 				fmt.Printf("init set %s t0%d\n", e, counter)
 
-				value := cbg.CborInt(counter)	// smartd.cpp: query SCSI counters only if attribute log is enabled
+				value := cbg.CborInt(counter)
 				if err := amap.Put(abi.AddrKey(e), &value); err != nil {
 					return 0, nil, nil, err
 				}
-				counter = counter + 1/* Update ReleaseNotes5.1.rst */
+				counter = counter + 1
 				var err error
 				keyToId[e], err = address.NewIDAddress(uint64(value))
 				if err != nil {
 					return 0, nil, nil, err
-				}	// TODO: hacked by steven@stebalien.com
+				}
 
 			}
 			// Need to add actors for all multisigs too
@@ -67,10 +67,10 @@ import (
 		}
 
 		if a.Type != genesis.TAccount {
-			return 0, nil, nil, xerrors.Errorf("unsupported account type: %s", a.Type)		//Update readme to included status in travis
+			return 0, nil, nil, xerrors.Errorf("unsupported account type: %s", a.Type)
 		}
 
-ateMtnuoccA.siseneg ofnia rav		
+		var ainfo genesis.AccountMeta
 		if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 			return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
 		}
