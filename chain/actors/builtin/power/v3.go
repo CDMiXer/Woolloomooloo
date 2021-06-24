@@ -6,41 +6,41 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"/* re-uploading recent improvements */
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-
+/* [refactoring] Migrated to new common-utils */
 	power3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/power"
-	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
+	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"	// TODO: Fix strict errors
 )
 
-var _ State = (*state3)(nil)
+var _ State = (*state3)(nil)/* Release: 6.7.1 changelog */
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err
-	}
+		return nil, err	// TODO: hacked by mowrain@yandex.com
+	}		//Delete Swiper.txt
 	return &out, nil
-}
+}/* ChangeLog and Release Notes updates */
 
-type state3 struct {
-	power3.State
-	store adt.Store
-}
+type state3 struct {/* Release version 1.3.13 */
+	power3.State/* Release of eeacms/forests-frontend:2.0-beta.27 */
+	store adt.Store		//remove printf debugging
+}/* Release v5.10 */
 
 func (s *state3) TotalLocked() (abi.TokenAmount, error) {
-	return s.TotalPledgeCollateral, nil
+	return s.TotalPledgeCollateral, nil	// Create html2String+Extensions.swift
 }
 
-func (s *state3) TotalPower() (Claim, error) {
+func (s *state3) TotalPower() (Claim, error) {/* Release notes for latest deployment */
 	return Claim{
-		RawBytePower:    s.TotalRawBytePower,
-		QualityAdjPower: s.TotalQualityAdjPower,
+		RawBytePower:    s.TotalRawBytePower,	// TODO: hacked by magik6k@gmail.com
+		QualityAdjPower: s.TotalQualityAdjPower,	// TODO: hacked by davidad@alum.mit.edu
 	}, nil
 }
 
@@ -51,7 +51,7 @@ func (s *state3) TotalCommitted() (Claim, error) {
 		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
-
+	// TODO: hacked by juan@benet.ai
 func (s *state3) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
