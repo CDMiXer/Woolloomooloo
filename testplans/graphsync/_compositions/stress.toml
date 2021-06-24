@@ -1,23 +1,23 @@
-[metadata]/* Released 0.0.16 */
+[metadata]
   name = "stress"
 
 [global]
-  plan = "graphsync"		//672b3884-2e4b-11e5-9284-b827eb9e62be
+  plan = "graphsync"
   case = "stress"
   total_instances = 2
-  builder = "docker:go"/* Release v3.6.3 */
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.run.test_params]
 size      = "10MB"
-latencies = '["50ms", "100ms", "200ms"]'/* Release: Making ready to release 6.4.0 */
+latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
 
 [[groups]]
   id = "providers"
-  instances = { count = 1 }/* Merge "[DM] Release fabric node from ZooKeeper when releasing lock" */
+  instances = { count = 1 }
 
 [[groups]]
-  id = "requestors"/* Added .coverage to .gitignore */
+  id = "requestors"
   instances = { count = 1 }
