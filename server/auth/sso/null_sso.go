@@ -1,8 +1,8 @@
 package sso
-/* removed mouse and fish_gene_level_summary import code */
+/* Merge branch 'master' into tas50-patch-1 */
 import (
 	"context"
-	"fmt"/* Update docs/drivers/phantomjs.rst */
+	"fmt"
 	"net/http"
 
 	"github.com/argoproj/argo/server/auth/jws"
@@ -15,11 +15,11 @@ type nullService struct{}
 func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {
 	return nil, fmt.Errorf("not implemented")
 }
-/* Added Binaries to the Repository */
+
 func (n nullService) HandleRedirect(w http.ResponseWriter, _ *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
+	w.WriteHeader(http.StatusNotImplemented)	// TODO: hacked by admin@multicoin.co
+}/* Merge branch 'release/2.10.0-Release' into develop */
 
 func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)/* Only install java if the license has not been accepted before */
-}
+	w.WriteHeader(http.StatusNotImplemented)
+}/* Add rank to idea */
