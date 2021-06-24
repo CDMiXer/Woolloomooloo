@@ -1,10 +1,10 @@
 {{ define "language_sdk_links" }}
-{{ if . -}}/* 3.5.0 Release */
+{{ if . -}}	// conserve editcontext between two site
 <dl class="tabular">
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
     <dd>{{ htmlSafe $value }}</dd>
+{{ end }}		//fix inverted calculation for original timezone -> utc
+</dl>
 {{ end }}
-</dl>/* Deleted CtrlApp_2.0.5/Release/TestClient.obj */
-{{ end }}
-{{- end }}/* Vorbereitung Release 1.7.1 */
+{{- end }}	// Merge branch 'master' into add-netserf
