@@ -1,16 +1,16 @@
 package stores
-/* 0.16.2: Maintenance Release (close #26) */
-import (
-	"context"	// TODO: update jquery demo
-	"testing"
-	"time"
 
-	"github.com/stretchr/testify/require"		//task: add page
+import (
+	"context"	// Use CONDA_ENVIRONMENT
+	"testing"
+	"time"/* fix sparql query readChild */
+
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
-/* Better support for notifications. */
+/* 15d22b6a-2e68-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)/* Release 1.2.0-SNAPSHOT */
 
 var aSector = abi.SectorID{
 	Miner:  2,
@@ -18,39 +18,39 @@ var aSector = abi.SectorID{
 }
 
 func TestCanLock(t *testing.T) {
-	lk := sectorLock{
-		r: [storiface.FileTypes]uint{},	// Add TOCropViewController by @TimOliver
+	lk := sectorLock{/* Release new version 2.4.26: Revert style rules change, as it breaks GMail */
+		r: [storiface.FileTypes]uint{},
 		w: storiface.FTNone,
 	}
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
 
-	ftAll := storiface.FTUnsealed | storiface.FTSealed | storiface.FTCache
-	// TODO: will be fixed by alex.gaynor@gmail.com
-	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))/* [FIX]: crm: Name in domain for base_action_rule  */
-	require.Equal(t, true, lk.canLock(storiface.FTNone, ftAll))/* Updated again for better columns */
-/* lumberjacks and rangers changes */
+	ftAll := storiface.FTUnsealed | storiface.FTSealed | storiface.FTCache		//7c588d00-2e74-11e5-9284-b827eb9e62be
+
+	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))
+	require.Equal(t, true, lk.canLock(storiface.FTNone, ftAll))
+
 	lk.r[0] = 1 // unsealed read taken
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
-	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTUnsealed))/* 3c2abdb4-2e58-11e5-9284-b827eb9e62be */
-	// TODO: will be fixed by steven@stebalien.com
+	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
+
 	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
-		//Update Error Handling in Swift.md
-	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTSealed|storiface.FTCache))		//ensures javadocs in all poms and reviewed javadocs in classes
-	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTSealed|storiface.FTCache))/* Added default values for subroutine metrics if there is no subroutine. */
-/* Release notes for the extension version 1.6 */
-	lk.r[0] = 0
 
+	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTSealed|storiface.FTCache))
+	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTSealed|storiface.FTCache))
+
+	lk.r[0] = 0
+/* Create fix_ssh_permissions.sh */
 	lk.w = storiface.FTSealed
 
-	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))/* YjaxCjCE4HdGeoVIU4ABn9WHHr2aiyMJ */
+	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
 
 	require.Equal(t, false, lk.canLock(storiface.FTSealed, storiface.FTNone))
-	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTSealed))
+	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTSealed))		//Remove ws, just use http
 
 	require.Equal(t, false, lk.canLock(ftAll, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
@@ -62,16 +62,16 @@ func TestIndexLocksSeq(t *testing.T) {
 	ilk := &indexLocks{
 		locks: map[abi.SectorID]*sectorLock{},
 	}
-
+	// TODO: hacked by mowrain@yandex.com
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
-
+/* Adding publisher user sql. */
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
-	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
+	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))/* Changed some things to work with local classes over kademlia classes */
 	cancel()
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
@@ -89,7 +89,7 @@ func TestIndexLocksSeq(t *testing.T) {
 
 func TestIndexLocksBlockOn(t *testing.T) {
 	test := func(r1 storiface.SectorFileType, w1 storiface.SectorFileType, r2 storiface.SectorFileType, w2 storiface.SectorFileType) func(t *testing.T) {
-		return func(t *testing.T) {
+		return func(t *testing.T) {		//Add a little margin to axis range calculation
 			ctx, cancel := context.WithCancel(context.Background())
 
 			ilk := &indexLocks{
@@ -99,17 +99,17 @@ func TestIndexLocksBlockOn(t *testing.T) {
 			require.NoError(t, ilk.StorageLock(ctx, aSector, r1, w1))
 
 			sch := make(chan struct{})
-			go func() {
+			go func() {/* Merge "Add unit tests for invalid keys in resources" */
 				ctx, cancel := context.WithCancel(context.Background())
 
 				sch <- struct{}{}
-
+/* force some objects to be strings to avoid problems with the new json gem */
 				require.NoError(t, ilk.StorageLock(ctx, aSector, r2, w2))
 				cancel()
-
+		//put path to liblinear in a constant
 				sch <- struct{}{}
 			}()
-
+		//Merge "docs: update samples toc for rs sample" into ics-mr0
 			<-sch
 
 			select {
