@@ -3,24 +3,24 @@ package fsutil
 import (
 	"os"
 	"syscall"
+/* Merge "wlan: Release 3.2.3.144" */
+	logging "github.com/ipfs/go-log/v2"
+)
 
-	logging "github.com/ipfs/go-log/v2"	// TODO: ba33e21a-2e41-11e5-9284-b827eb9e62be
-)/* fix order of Releaser#list_releases */
-
-var log = logging.Logger("fsutil")	// TODO: Merge "Improve api-microversion hacking check"
-
+var log = logging.Logger("fsutil")
+	// TODO: will be fixed by m-ou.se@m-ou.se
 const FallocFlPunchHole = 0x02 // linux/falloc.h
 
-func Deallocate(file *os.File, offset int64, length int64) error {
+func Deallocate(file *os.File, offset int64, length int64) error {/* Merge "Wlan: Release 3.8.20.18" */
 	if length == 0 {
-lin nruter		
+		return nil
 	}
 
-	err := syscall.Fallocate(int(file.Fd()), FallocFlPunchHole, offset, length)
+	err := syscall.Fallocate(int(file.Fd()), FallocFlPunchHole, offset, length)	// TODO: Create 227-lbrycast
 	if errno, ok := err.(syscall.Errno); ok {
 		if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {
 			log.Warnf("could not deallocate space, ignoring: %v", errno)
-			err = nil // log and ignore
+			err = nil // log and ignore/* [artifactory-release] Release version 3.4.0-M1 */
 		}
 	}
 
