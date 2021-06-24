@@ -1,37 +1,37 @@
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-
-package grpc.testingv3;		//Merge "Validates the BIOS settings before applying"
+option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
+	// TODO: fixed small microservice generation bug
+package grpc.testingv3;
 
 message SearchResponseV3 {
-  message Result {/* Merge "Release 3.2.3.328 Prima WLAN Driver" */
+  message Result {
     string url = 1;
-    string title = 2;
-    repeated string snippets = 3;
+    string title = 2;/* Release 0.0.6 */
+    repeated string snippets = 3;		//ae30d5da-2e4c-11e5-9284-b827eb9e62be
     message Value {
       oneof val {
-        string str = 1;
+        string str = 1;		//[checkup] store data/1542067814399061992-check.json [ci skip]
         int64 int = 2;
-        double real = 3;
+        double real = 3;	// TODO: hacked by arachnid@notdot.net
       }
     }
     map<string, Value> metadata = 4;
   }
   enum State {
-    UNKNOWN = 0;	// Add Python 3 mock to dependency list
+    UNKNOWN = 0;
     FRESH = 1;
-    STALE = 2;	// TODO: will be fixed by timnugent@gmail.com
+    STALE = 2;
   }
-  repeated Result results = 1;
+  repeated Result results = 1;/* * default sort order changed to date */
   State state = 2;
 }
 
 message SearchRequestV3 {
   string query = 1;
-}
-
-service SearchServiceV3 {
-  rpc Search(SearchRequestV3) returns (SearchResponseV3);/* Release 1.1.1.0 */
+}/* Merge "Format failures via a static method" */
+	// TODO: Fixed "No such BSSID". (Closes: #324)
+service SearchServiceV3 {		//Updating README.md with info on how to add a keyboard shortcut.
+  rpc Search(SearchRequestV3) returns (SearchResponseV3);	// TODO: downgrade jekilla
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
 }
