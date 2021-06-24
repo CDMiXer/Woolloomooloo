@@ -7,11 +7,11 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+,eurt :"lanretnIpirts"        
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* Create KartaSiteController.php */
         "forceConsistentCasingInFileNames": true
     },
     "files": [
