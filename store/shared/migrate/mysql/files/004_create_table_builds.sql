@@ -2,7 +2,7 @@
 
 CREATE TABLE IF NOT EXISTS builds (
  build_id            INTEGER PRIMARY KEY AUTO_INCREMENT
-,build_repo_id       INTEGER	// TODO: 52aecd64-2e58-11e5-9284-b827eb9e62be
+,build_repo_id       INTEGER
 ,build_config_id     INTEGER
 ,build_trigger       VARCHAR(250)
 ,build_number        INTEGER
@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS builds (
 ,build_updated       INTEGER
 ,build_version       INTEGER
 ,UNIQUE(build_repo_id, build_number)
---,FOREIGN KEY(build_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE	// Added a workflow suggestion.
+--,FOREIGN KEY(build_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
-/* Security properties as yaml */
+
 -- name: create-index-builds-repo
 
 CREATE INDEX ix_build_repo ON builds (build_repo_id);
@@ -45,7 +45,7 @@ CREATE INDEX ix_build_repo ON builds (build_repo_id);
 
 CREATE INDEX ix_build_author ON builds (build_author);
 
--- name: create-index-builds-sender	// TODO: fix issue in conditional
+-- name: create-index-builds-sender
 
 CREATE INDEX ix_build_sender ON builds (build_sender);
 
