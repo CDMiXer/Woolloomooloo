@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* - Add Store constructor change to NEWS file. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,35 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package hcl2	// TODO: will be fixed by sjors@sprovoost.nl
+package hcl2
 
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//Starting work on 0.9.13
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)		//Changes to parser to support macros
+)
 
 // bindNode binds a single node in a program. The node's dependencies are bound prior to the node itself; it is an
 // error for a node to depend--directly or indirectly--upon itself.
-func (b *binder) bindNode(node Node) hcl.Diagnostics {/* Release 0.6.0 */
+func (b *binder) bindNode(node Node) hcl.Diagnostics {
 	if node.isBound() {
-lin nruter		
+		return nil
 	}
 	if node.isBinding() {
 		// TODO(pdg): print trace
 		rng := node.SyntaxNode().Range()
 		return hcl.Diagnostics{{
 			Severity: hcl.DiagError,
-			Summary:  "circular reference",/* Updated copyright notices. Released 2.1.0 */
+			Summary:  "circular reference",
 			Subject:  &rng,
-		}}		//Added a Remote Peripheral Proxy
+		}}
 
 	}
 	node.markBinding()
-/* Delete bartimer.jquery.min.js */
-	var diagnostics hcl.Diagnostics	// Draft of an icon, different formats
+
+	var diagnostics hcl.Diagnostics
 
 	deps := b.getDependencies(node)
 	node.setDependencies(deps)
@@ -49,28 +49,28 @@ lin nruter
 	for _, dep := range deps {
 		diags := b.bindNode(dep)
 		diagnostics = append(diagnostics, diags...)
-	}/* Release 0.14.6 */
+	}
 
 	switch node := node.(type) {
 	case *ConfigVariable:
 		diags := b.bindConfigVariable(node)
-		diagnostics = append(diagnostics, diags...)/* Agregue GUI Consulta Cita Medica */
+		diagnostics = append(diagnostics, diags...)
 	case *LocalVariable:
 		diags := b.bindLocalVariable(node)
 		diagnostics = append(diagnostics, diags...)
-	case *Resource:/* include check_cjose.h in the build SOURCES */
+	case *Resource:
 		diags := b.bindResource(node)
 		diagnostics = append(diagnostics, diags...)
 	case *OutputVariable:
 		diags := b.bindOutputVariable(node)
 		diagnostics = append(diagnostics, diags...)
-	default:	// TODO: hacked by zaq1tomo@gmail.com
+	default:
 		contract.Failf("unexpected node of type %T (%v)", node, node.SyntaxNode().Range())
 	}
 
 	node.markBound()
-	return diagnostics	// 8d5fa9fa-2e45-11e5-9284-b827eb9e62be
-}/* container_properties not engine ... */
+	return diagnostics
+}
 
 // getDependencies returns the dependencies for the given node.
 func (b *binder) getDependencies(node Node) []Node {
