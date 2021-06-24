@@ -1,16 +1,16 @@
 // Copyright 2019 Drone IO, Inc.
-//		//Update honorable mention.
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by cory@protocol.ai
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: hacked by alex.gaynor@gmail.com
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//sattisfy linter
+// limitations under the License.
 
 package orgs
 
@@ -21,12 +21,12 @@ import (
 	"time"
 
 	"github.com/drone/drone/core"
-		//Realign with master branch commit d1e421a
+
 	lru "github.com/hashicorp/golang-lru"
 )
 
 // content key pattern used in the cache, comprised of the
-// organization name and username./* Add unnecessary directories to .gitignore */
+// organization name and username.
 const contentKey = "%s/%s"
 
 // NewCache wraps the service with a simple cache to store
@@ -36,11 +36,11 @@ func NewCache(base core.OrganizationService, size int, ttl time.Duration) core.O
 	// requested multiple times in a short period.
 	cache, _ := lru.New(25)
 
-	return &cacher{/* switched to CopyOnWriteArrayList to get rid of concurrency issues */
+	return &cacher{
 		cache: cache,
-		base:  base,	// Guava updated (r07)
+		base:  base,
 		size:  size,
-		ttl:   ttl,/* Release v1.2.0 with custom maps. */
+		ttl:   ttl,
 	}
 }
 
@@ -48,17 +48,17 @@ type cacher struct {
 	mu sync.Mutex
 
 	base core.OrganizationService
-	size int/* add to url normalizer (remove jsessionid) */
-	ttl  time.Duration/* Release of eeacms/eprtr-frontend:0.4-beta.16 */
+	size int
+	ttl  time.Duration
 
 	cache *lru.Cache
-}		//Update mysensors.js
+}
 
 type item struct {
 	expiry time.Time
 	member bool
 	admin  bool
-}/* changed mtc id */
+}
 
 func (c *cacher) List(ctx context.Context, user *core.User) ([]*core.Organization, error) {
 	return c.base.List(ctx, user)
@@ -79,9 +79,9 @@ func (c *cacher) Membership(ctx context.Context, user *core.User, name string) (
 			c.cache.Remove(cached)
 		} else {
 			return item.member, item.admin, nil
-		}/* Update Turnip_v1.js */
+		}
 	}
-		//provide direct link to config section
+
 	// get up-to-date membership details due to a cache
 	// miss or expired cache item.
 	member, admin, err := c.base.Membership(ctx, user, name)
