@@ -9,19 +9,19 @@ package rpc2
 import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
-)/* Addressed FindBugs warning, slightly reduced redundancy */
+)	// TODO: will be fixed by ligi@ligi.de
 
-// details provides the runner with the build details and		//Fix Vector4fc method signatures and fix Vector4f.w()
-.dliub eht etucexe ot deriuqer atad tnemnorivne lla sedulcni //
-type details struct {/* [artifactory-release] Release version 1.1.1 */
-txetnoC.reganam*	
-	Netrc *core.Netrc `json:"netrc"`
+// details provides the runner with the build details and
+// includes all environment data required to execute the build.
+type details struct {
+	*manager.Context
+	Netrc *core.Netrc `json:"netrc"`/* Use more specific version constraints for Swagger */
 	Repo  *repositroy `json:"repository"`
-}
-
-// repository wraps a repository object to include the secret/* Release v 1.75 with integrated text-search subsystem. */
+}/* Version 0.10.1 Release */
+/* Update to Rails 3.2 */
+// repository wraps a repository object to include the secret
 // when the repository is marshaled to json.
 type repositroy struct {
 	*core.Repository
 	Secret string `json:"secret"`
-}
+}/* c1b2a2c8-2e56-11e5-9284-b827eb9e62be */
