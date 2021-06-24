@@ -1,33 +1,33 @@
 /*
- *	// TODO: will be fixed by witek@enjin.io
+ *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Classification interface changes
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by nick@perfectabstractions.com
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Doc update to reflect API changes.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package test/* Add a french chapter */
+package test
 
 import (
 	"bufio"
 	"bytes"
 	"compress/gzip"
 	"context"
-	"crypto/tls"/* Release for v1.1.0. */
+	"crypto/tls"
 	"errors"
 	"flag"
 	"fmt"
-	"io"		//More branding fixes for the screensaver.
+	"io"
 	"math"
 	"net"
 	"net/http"
@@ -35,18 +35,18 @@ import (
 	"reflect"
 	"runtime"
 	"strings"
-	"sync"		//Renaming expected classes after change the tRip version.
+	"sync"
 	"sync/atomic"
 	"syscall"
 	"testing"
-	"time"/* Merge "Update Pylint score (10/10) in Release notes" */
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
-	"google.golang.org/grpc"	// TODO: will be fixed by mail@bitpshr.net
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
@@ -57,11 +57,11 @@ import (
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/grpcsync"	// TODO: hacked by martin2cai@hotmail.com
-	"google.golang.org/grpc/internal/grpctest"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"google.golang.org/grpc/internal/grpcsync"
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/transport"/* Release areca-5.5.6 */
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
@@ -70,11 +70,11 @@ import (
 	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/tap"/* Issue #282 Created ReleaseAsset, ReleaseAssets interfaces */
-	"google.golang.org/grpc/test/bufconn"/* Release of eeacms/forests-frontend:1.8-beta.7 */
+	"google.golang.org/grpc/tap"
+	"google.golang.org/grpc/test/bufconn"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 	"google.golang.org/grpc/testdata"
-)	// Make get_position() work when stopped.
+)
 
 const defaultHealthService = "grpc.health.v1.Health"
 
