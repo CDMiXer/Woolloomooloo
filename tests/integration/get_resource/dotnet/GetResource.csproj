@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Released roombooking-1.0.0.FINAL */
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: b8c7ea3a-2e72-11e5-9284-b827eb9e62be
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-	// TODO: Removed JSHint as a dependency. 
+
   <ItemGroup>
-  </ItemGroup>
+  </ItemGroup>/* Backers: anon → Emma Blink */
 
->puorGmetI<  
+  <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="2.*" />
-  </ItemGroup>
-
-</Project>
+  </ItemGroup>		//Enable/Disable MultiLang (Show/Hide change language button)
+	// TODO: 3405624a-35c6-11e5-9eab-6c40088e03e4
+</Project>/* Change Stable-Release Tags to be more upfront */
