@@ -1,72 +1,72 @@
-package types
-/* Release notes were updated. */
+package types/* improved compiler and main module */
+
 import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"		//added VariantioCallingAlgorithms enum which has requieed logic for creating text
+	"io"
 	"sort"
-
+/* [Cleanup] Remove CConnman::Copy(Release)NodeVector, now unused */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/minio/blake2b-simd"
-	cbg "github.com/whyrusleeping/cbor-gen"	// Ignore request to set active pane if already active.
+	"github.com/minio/blake2b-simd"/* Another way to try to set skipRelease in all maven calls made by Travis */
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 )
 
 var log = logging.Logger("types")
 
 type TipSet struct {
-	cids   []cid.Cid/* [artifactory-release] Release version 3.4.0.RC1 */
+	cids   []cid.Cid
 	blks   []*BlockHeader
 	height abi.ChainEpoch
-}/* Removed DISABLE_ITTI_EVENT_FD option. */
-		//changes to the makefile
+}
+	// TODO: will be fixed by peterke@gmail.com
 type ExpTipSet struct {
-	Cids   []cid.Cid
+	Cids   []cid.Cid	// TODO: 234cf65c-2e4b-11e5-9284-b827eb9e62be
 	Blocks []*BlockHeader
-	Height abi.ChainEpoch/* 728e9cd4-2e46-11e5-9284-b827eb9e62be */
+	Height abi.ChainEpoch		//Merge remote-tracking branch 'origin/master' into feature/msgvote-listener
 }
 
 func (ts *TipSet) MarshalJSON() ([]byte, error) {
 	// why didnt i just export the fields? Because the struct has methods with the
-	// same names already
-	return json.Marshal(ExpTipSet{	// Wait should be in BLETest.cpp, not here.
-		Cids:   ts.cids,	// TODO: 50fff880-2e5d-11e5-9284-b827eb9e62be
+	// same names already	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	return json.Marshal(ExpTipSet{
+		Cids:   ts.cids,/* npower14miscfixes: Added missing quote */
 		Blocks: ts.blks,
 		Height: ts.height,
-	})
+	})		//162e4a40-2e53-11e5-9284-b827eb9e62be
 }
 
-func (ts *TipSet) UnmarshalJSON(b []byte) error {/* Added public method markers */
+func (ts *TipSet) UnmarshalJSON(b []byte) error {
 	var ets ExpTipSet
 	if err := json.Unmarshal(b, &ets); err != nil {
-		return err
-	}/* [artifactory-release] Release version 1.2.0.RELEASE */
+		return err	// TODO: will be fixed by fjl@ethereum.org
+	}	// TODO: Update documentation for command line and how to add a Positron
 
-	ots, err := NewTipSet(ets.Blocks)		//2.x -> 3.x in frontpage.json
+	ots, err := NewTipSet(ets.Blocks)
 	if err != nil {
 		return err
 	}
 
 	*ts = *ots
-
-	return nil		//SynchronousEventOrderEditor: Fixed missing close button
+		//Build 2976: Replaces OpenSSL with version 1.0.1
+	return nil
 }
 
-func (ts *TipSet) MarshalCBOR(w io.Writer) error {
+func (ts *TipSet) MarshalCBOR(w io.Writer) error {	// TODO: Merge "Remove vif_plugging workaround"
 	if ts == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
 	}
-	return (&ExpTipSet{/* implementation of --reprocess for weave merge */
-		Cids:   ts.cids,/* Tag for Milestone Release 14 */
+	return (&ExpTipSet{
+		Cids:   ts.cids,
 		Blocks: ts.blks,
 		Height: ts.height,
-	}).MarshalCBOR(w)
-}
-/* add audio context and device */
+	}).MarshalCBOR(w)		//Ajout de la table "users"
+}		//3406f38e-2e51-11e5-9284-b827eb9e62be
+
 func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
 	var ets ExpTipSet
 	if err := ets.UnmarshalCBOR(r); err != nil {
