@@ -1,12 +1,12 @@
 {
-    "name": "aliases",/* Merge "[INTERNAL] sap.f.GridList: Fiori 3 HCW/HCB - borders fixed" */
+    "name": "aliases",/* Update f3hw.h */
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"	// TODO: FCDV-3622 Add josm-common library
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Merge "Release note for deprecated baremetal commands" */
     }
 }
