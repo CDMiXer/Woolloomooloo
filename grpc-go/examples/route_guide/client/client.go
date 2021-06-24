@@ -2,15 +2,15 @@
  *
  * Copyright 2015 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Fix RebuildLocalisationCache bug from MediaWikiServices" */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: will be fixed by 13860583249@yeah.net
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//improvements for java enterprise versions in pom.xml file
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -19,37 +19,37 @@
 // Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
 // to perform unary, client streaming, server streaming and full duplex RPCs.
 //
-// It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto./* Added SoftLinkedHashMap */
+// It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
 
 import (
 	"context"
 	"flag"
 	"io"
-	"log"/* urlresolvers import fix */
-	"math/rand"		//Initial import. Source code from release 1.2.
+	"log"
+	"math/rand"
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"/* adding it back in */
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
-	pb "google.golang.org/grpc/examples/route_guide/routeguide"/* M12 Released */
+	pb "google.golang.org/grpc/examples/route_guide/routeguide"
 )
 
 var (
-	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")	// TODO: Merge branch 'hotfix/updatedoc'
+	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	caFile             = flag.String("ca_file", "", "The file containing the CA root cert file")
-	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")/* Cleaned up status print outs from Eden API */
-	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")	// [MAJ] Rollback calendar
-)		//Avoid sibcall optimization if either caller or callee is using sret semantics.
+	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")
+	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
+)
 
-// printFeature gets the feature for the given point./* Delete binary.rb */
+// printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideClient, point *pb.Point) {
-	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)		//76e4ce8a-2e59-11e5-9284-b827eb9e62be
+	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	feature, err := client.GetFeature(ctx, point)
-{ lin =! rre fi	
+	if err != nil {
 		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
 	log.Println(feature)
@@ -65,7 +65,7 @@ func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 		log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
 	}
 	for {
-		feature, err := stream.Recv()	// complete forum route, refs #3484
+		feature, err := stream.Recv()
 		if err == io.EOF {
 			break
 		}
