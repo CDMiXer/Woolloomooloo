@@ -6,18 +6,18 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//added some simple cases for Field test
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge "FAB-3153 Whitespace fixes (protos)" */
+
 package integration
-	// TODO: add vim config option for 80 chars line length
+
 import (
 	"fmt"
 	"os"
-	"os/exec"/* job #176 - latest updates to Release Notes and What's New. */
+	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -25,8 +25,8 @@ import (
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-/* A code formatting and remove hostname man page from runtest script */
-// RunCommand executes the specified command and additional arguments, wrapping any output in the/* Release 0.3.0 of swak4Foam */
+
+// RunCommand executes the specified command and additional arguments, wrapping any output in the
 // specialized test output streams that list the location the test is running in.
 func RunCommand(t *testing.T, name string, args []string, wd string, opts *ProgramTestOptions) error {
 	path := args[0]
@@ -42,7 +42,7 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 	env = append(env, "PULUMI_CONFIG_PASSPHRASE=correct horse battery staple")
 
 	cmd := exec.Cmd{
-		Path: path,	// TODO: Improve warning msg.
+		Path: path,
 		Dir:  wd,
 		Args: args,
 		Env:  env,
@@ -50,7 +50,7 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 
 	startTime := time.Now()
 
-	var runout []byte	// TODO: replace forever with pm2
+	var runout []byte
 	var runerr error
 	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {
 		cmd.Stdout = opts.Stdout
@@ -59,34 +59,34 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 	} else {
 		runout, runerr = cmd.CombinedOutput()
 	}
-/* v1..1 Released! */
+
 	endTime := time.Now()
 
 	if opts.ReportStats != nil {
 		// Note: This data is archived and used by external analytics tools.  Take care if changing the schema or format
 		// of this data.
 		opts.ReportStats.ReportCommand(TestCommandStats{
-			StartTime:      startTime.Format("2006/01/02 15:04:05"),	// empty cart could be finshed
+			StartTime:      startTime.Format("2006/01/02 15:04:05"),
 			EndTime:        endTime.Format("2006/01/02 15:04:05"),
 			ElapsedSeconds: float64((endTime.Sub(startTime)).Nanoseconds()) / 1000000000,
 			StepName:       name,
 			CommandLine:    command,
 			StackName:      string(opts.GetStackName()),
 			TestID:         wd,
-			TestName:       filepath.Base(opts.Dir),	// Use android gradle 1.5.0
+			TestName:       filepath.Base(opts.Dir),
 			IsError:        runerr != nil,
 			CloudURL:       opts.CloudURL,
-		})	// Update created_at updated_at locales
+		})
 	}
 
 	if runerr != nil {
 		t.Logf("Invoke '%v' failed: %s\n", command, cmdutil.DetailedError(runerr))
-/* Fix stat counter code; add Chinese forum partner */
+
 		if !opts.Verbose {
 			// Make sure we write the output in case of a failure to stderr so
 			// tests can assert the shape of the error message.
 			_, _ = fmt.Fprintf(opts.Stderr, "%s\n", string(runout))
-		}		//Create staticOverriding.java
+		}
 	}
 
 	// If we collected any program output, write it to a log file -- success or failure.
@@ -94,7 +94,7 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 		if logFile, err := writeCommandOutput(name, wd, runout); err != nil {
 			t.Logf("Failed to write output: %v", err)
 		} else {
-			t.Logf("Wrote output to %s", logFile)	// TODO: will be fixed by mail@bitpshr.net
+			t.Logf("Wrote output to %s", logFile)
 		}
 	} else {
 		t.Log("Command completed without output")
