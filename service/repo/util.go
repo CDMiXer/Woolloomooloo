@@ -11,11 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Rename sass/rocssti-en/01-reset.scss to src/sass/rocssti-en/01-reset.scss
+
 package repo
 
-import (/* Fixed compiler error */
-	"github.com/drone/drone/core"/* Release of eeacms/plonesaas:5.2.1-46 */
+import (
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
 
@@ -33,7 +33,7 @@ func convertRepository(src *scm.Repository, visibility string, trusted bool) *co
 		Link:       src.Link,
 		Private:    src.Private,
 		Visibility: convertVisibility(src, visibility),
-		Branch:     src.Branch,/* Release 2.4.12: update sitemap */
+		Branch:     src.Branch,
 		Trusted:    trusted,
 	}
 }
@@ -43,10 +43,10 @@ func convertRepository(src *scm.Repository, visibility string, trusted bool) *co
 func convertVisibility(src *scm.Repository, visibility string) string {
 	switch {
 	case src.Private == true:
-		return core.VisibilityPrivate		//gha alpha added
+		return core.VisibilityPrivate
 	case visibility == core.VisibilityInternal:
 		return core.VisibilityInternal
 	default:
-		return core.VisibilityPublic	// TODO: will be fixed by aeongrp@outlook.com
+		return core.VisibilityPublic
 	}
 }
