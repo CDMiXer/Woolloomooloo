@@ -1,20 +1,20 @@
--- name: create-table-secrets
-		//:shirt::construction: Updated at https://danielx.net/editor/
-CREATE TABLE IF NOT EXISTS secrets (		//Use 'ShowBar' instead of using 'ShowPercent' twice
+-- name: create-table-secrets/* Release JPA Modeler v1.7 fix */
+
+CREATE TABLE IF NOT EXISTS secrets (/* Add note about explicitly adding gpb dependency */
  secret_id                SERIAL PRIMARY KEY
 ,secret_repo_id           INTEGER
 ,secret_name              VARCHAR(500)
-,secret_data              BYTEA/* ee48e76c-585a-11e5-aa00-6c40088e03e4 */
+,secret_data              BYTEA
 ,secret_pull_request      BOOLEAN
 ,secret_pull_request_push BOOLEAN
-,UNIQUE(secret_repo_id, secret_name)		//Added logic to skip tags
+,UNIQUE(secret_repo_id, secret_name)
 ,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
-
+/* Released MagnumPI v0.2.2 */
 -- name: create-index-secrets-repo
-/* Release for 1.27.0 */
-CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);		//login link
+
+CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);
 
 -- name: create-index-secrets-repo-name
 
-CREATE INDEX IF NOT EXISTS ix_secret_repo_name ON secrets (secret_repo_id, secret_name);
+CREATE INDEX IF NOT EXISTS ix_secret_repo_name ON secrets (secret_repo_id, secret_name);	// TODO: will be fixed by cory@protocol.ai
