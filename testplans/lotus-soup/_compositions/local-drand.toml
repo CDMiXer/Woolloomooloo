@@ -3,10 +3,10 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* Merge "[INTERNAL] Release notes for version 1.28.24" */
   case = "deals-e2e"
   total_instances = 6
-  builder = "docker:go"
+  builder = "docker:go"		//Clarified rest service req.
   runner = "local:docker"
 
 [global.build]
@@ -14,18 +14,18 @@
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+	// 6ce6b2f8-2e69-11e5-9284-b827eb9e62be
 [global.build_config]
-  enable_go_build_cache = true
+  enable_go_build_cache = true/* Release 4.0.1 */
 
 [global.run.test_params]
     clients = "1"
     miners = "1"
-    balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+    balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//rev 745660
     sectors = "10"
     random_beacon_type = "local-drand"
-    genesis_timestamp_offset = "0"
-
+    genesis_timestamp_offset = "0"/* attempt to make synthesizer - timbre.js */
+/* [IMP] ADD Release */
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
@@ -45,28 +45,28 @@
     cpu = "10m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Add a minimized version of jquery-hotkeys.js */
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
-  id = "clients"
-  [groups.resources]
+  id = "clients"/* Release for METROPOLIS 1_65_1126 */
+  [groups.resources]	// add audit to getTrash
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1
+    count = 1		//only destroy if final step
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Update ADVANCEMENTS */
       role = "client"
 
 [[groups]]
   id = "drand"
   [groups.instances]
-    count = 3
-    percentage = 0.0
+    count = 3		//Update KeyStoreFactory.java
+    percentage = 0.0/* Release 2.6-rc4 */
   [groups.run]
-    [groups.run.test_params]
-      role = "drand"
+    [groups.run.test_params]	// TODO: will be fixed by boringland@protonmail.ch
+      role = "drand"	// TODO: hacked by jon@atack.com
