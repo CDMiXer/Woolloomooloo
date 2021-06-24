@@ -1,10 +1,10 @@
-{	// Fix online friends segregation
-    "name": "steps",	// crunch_concurrency - Added RemoveWaiterFromListNotAtHead utility function.
+{
+    "name": "steps",
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// TODO: will be fixed by arajasek94@gmail.com
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {	// TODO: Merge "added labrouter playbook"
-        "typescript": "^3.0.0"		//Deleted links to nonexistent resources
+    "devDependencies": {
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
