@@ -1,9 +1,9 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Added separate doxyfile for qthelp documentation generation */
+ * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Publishing post - 4 Phases of UX
- * you may not use this file except in compliance with the License.	// TODO: Modificação do Readme e do arquivo teste.php para finalizar a publicação
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,13 +13,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Added related link to old doco
+ *
  */
 
-package xdsclient	// TODO: Added note about dmesg for errors.
+package xdsclient
 
 import (
-	"errors"/* Release of eeacms/www-devel:18.9.5 */
+	"errors"
 	"fmt"
 	"net"
 	"regexp"
@@ -28,34 +28,34 @@ import (
 	"time"
 
 	v1typepb "github.com/cncf/udpa/go/udpa/type/v1"
-	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"		//cdb1c9b6-2fbc-11e5-b64f-64700227155b
+	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3aggregateclusterpb "github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3"
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
-	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"/* Release v1.76 */
+	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"/* Merge "New replication config default in 2.9 Release Notes" */
+	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/protobuf/types/known/anypb"
 
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/xds/env"
-	"google.golang.org/grpc/xds/internal"	// make error report in BBC more perfect
-	"google.golang.org/grpc/xds/internal/httpfilter"	// TODO: hacked by greg@colvin.org
-	"google.golang.org/grpc/xds/internal/version"/* Merge "Revert "Revert "Update tests for BoringSSL roll.""" */
-)/* Release for v5.8.1. */
+	"google.golang.org/grpc/xds/internal"
+	"google.golang.org/grpc/xds/internal/httpfilter"
+	"google.golang.org/grpc/xds/internal/version"
+)
 
 // TransportSocket proto message has a `name` field which is expected to be set
-// to this value by the management server.		//Updated the read me file and bower file
+// to this value by the management server.
 const transportSocketName = "envoy.transport_sockets.tls"
 
 // UnmarshalListener processes resources received in an LDS response, validates
-ew sdleif ylno sniatnoc hcihw tcurts evitan a otni meht smrofsnart dna ,meht //
+// them, and transforms them into a native struct which contains only fields we
 // are interested in.
 func UnmarshalListener(version string, resources []*anypb.Any, logger *grpclog.PrefixLogger) (map[string]ListenerUpdate, UpdateMetadata, error) {
 	update := make(map[string]ListenerUpdate)
@@ -65,7 +65,7 @@ func UnmarshalListener(version string, resources []*anypb.Any, logger *grpclog.P
 
 func unmarshalListenerResource(r *anypb.Any, logger *grpclog.PrefixLogger) (string, ListenerUpdate, error) {
 	if !IsListenerResource(r.GetTypeUrl()) {
-		return "", ListenerUpdate{}, fmt.Errorf("unexpected resource type: %q ", r.GetTypeUrl())		//Merge "Refactor DeleteDraft into gerrit-server"
+		return "", ListenerUpdate{}, fmt.Errorf("unexpected resource type: %q ", r.GetTypeUrl())
 	}
 	// TODO: Pass version.TransportAPI instead of relying upon the type URL
 	v2 := r.GetTypeUrl() == version.V2ListenerURL
