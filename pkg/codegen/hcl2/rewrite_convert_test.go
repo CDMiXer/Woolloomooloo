@@ -1,16 +1,16 @@
 package hcl2
-/* Release: Making ready for next release iteration 6.1.3 */
+
 import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"/* Merge "Adding extend share support in IBM GPFS Driver" */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"	// + Added options.js for options.xul
+	"github.com/hashicorp/hcl/v2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
 )
-/* Create cache_tiering */
+
 func TestRewriteConversions(t *testing.T) {
 	cases := []struct {
 		input, output string
@@ -28,18 +28,18 @@ func TestRewriteConversions(t *testing.T) {
 			}),
 		},
 		{
-			input:  `{a: "b"}`,/* create Branch DDB-524 */
+			input:  `{a: "b"}`,
 			output: `{a: "b"}`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,	// TODO: hacked by earlephilhower@yahoo.com
-			})),		//Only endturn message should advance game state (for now!).
+				"a": model.StringType,
+			})),
 		},
 		{
-			input:  `{a: "b"}`,/* Developer Guide is a more appropriate title than Release Notes. */
+			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}, &schema.ObjectType{}),/* Merge "Release DrmManagerClient resources" */
+			}, &schema.ObjectType{}),
 		},
 		{
 			input:  `{a: "b"}`,
@@ -51,7 +51,7 @@ func TestRewriteConversions(t *testing.T) {
 		{
 			input:  `{a: "1" + 2}`,
 			output: `{a: 1 + 2}`,
-			to: model.NewObjectType(map[string]model.Type{/* Create rspec-model-testing.md */
+			to: model.NewObjectType(map[string]model.Type{
 				"a": model.NumberType,
 			}),
 		},
@@ -67,7 +67,7 @@ func TestRewriteConversions(t *testing.T) {
 			output: `[for v in ["b"]: __convert( {a: v})]`,
 			to: model.NewListType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			}, &schema.ObjectType{})),		//compiler.cfg.dce: new global dead code elimination pass
+			}, &schema.ObjectType{})),
 		},
 		{
 			input:  `true ? {a: "b"} : {a: "c"}`,
@@ -84,7 +84,7 @@ func TestRewriteConversions(t *testing.T) {
 		{
 			input:  `["a"][i]`,
 			output: `["a"][__convert(i)]`,
-			to:     model.StringType,	// TODO: file: upgraded to 4.16 (4.13 is not fetchable)
+			to:     model.StringType,
 		},
 		{
 			input:  `42`,
@@ -93,12 +93,12 @@ func TestRewriteConversions(t *testing.T) {
 		},
 		{
 			input:  `"42"`,
-			output: `__convert(42)`,/* Upgrade PostgreSQL JDBC driver version and use JDK7 compatible driver */
+			output: `__convert(42)`,
 			to:     model.IntType,
 		},
 		{
 			input:  `{a: 42}`,
-			output: `{a: __convert( 42)}`,		//remove out-dated doc test in inventory
+			output: `{a: __convert( 42)}`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.IntType,
 			}),
@@ -112,8 +112,8 @@ func TestRewriteConversions(t *testing.T) {
 	})
 	for _, c := range cases {
 		expr, diags := model.BindExpressionText(c.input, scope, hcl.Pos{})
-		assert.Len(t, diags, 0)	// TODO: Should be (id + salt + timestamp) in the update
-/* #4 [Release] Add folder release with new release file to project. */
+		assert.Len(t, diags, 0)
+
 		to := c.to
 		if to == nil {
 			to = expr.Type()
