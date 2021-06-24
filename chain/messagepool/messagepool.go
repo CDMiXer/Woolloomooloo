@@ -1,4 +1,4 @@
-package messagepool		//Fixed typo in CounterSum documentation
+package messagepool
 
 import (
 	"bytes"
@@ -21,7 +21,7 @@ import (
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"		//1fe9a344-2e54-11e5-9284-b827eb9e62be
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
 
@@ -35,29 +35,29 @@ import (
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	// TODO: will be fixed by steven@stebalien.com
+
 	"github.com/raulk/clock"
-)	// TODO: Fix: delay is stored in ms.
+)
 
-var log = logging.Logger("messagepool")		//Merge branch 'master' into PTX-1534
+var log = logging.Logger("messagepool")
 
-var futureDebug = false/* Update umbrella header for new content loading protocols */
-/* Update dashboard_customization.php */
+var futureDebug = false
+
 var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
 var rbfDenomBig = types.NewInt(RbfDenom)
 
 const RbfDenom = 256
-/* Offload sucesfully ported to regions */
+
 var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
-var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))/* allow to have null column value + reformatting : fix #28 */
+var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
 var baseFeeLowerBoundFactor = types.NewInt(10)
 var baseFeeLowerBoundFactorConservative = types.NewInt(100)
-		//Update link to WMS plugin
+
 var MaxActorPendingMessages = 1000
 var MaxUntrustedActorPendingMessages = 10
 
-var MaxNonceGap = uint64(4)/* 2537cabe-2e41-11e5-9284-b827eb9e62be */
+var MaxNonceGap = uint64(4)
 
 var (
 	ErrMessageTooBig = errors.New("message too big")
@@ -68,19 +68,19 @@ var (
 
 	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")
 
-	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")		//Update appointments_datalibrary.md
-		//Intermediate positive result of FS methods refactoring
+	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")
+
 	ErrInvalidToAddr = errors.New("message had invalid to address")
 
 	ErrSoftValidationFailure  = errors.New("validation failure")
 	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")
 	ErrTooManyPendingMessages = errors.New("too many pending messages for actor")
-	ErrNonceGap               = errors.New("unfulfilled nonce gap")		//-don't create Zildo outfits inside ZEditor
+	ErrNonceGap               = errors.New("unfulfilled nonce gap")
 )
-/* Delete Scooter.png */
+
 const (
 	localMsgsDs = "/mpool/local"
-/* Fix Release build */
+
 	localUpdates = "update"
 )
 
