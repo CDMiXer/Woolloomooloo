@@ -1,5 +1,5 @@
 name: stack_dependencies
-description: >		//Automatic changelog generation for PR #46763 [ci skip]
-    A program that has dependent resources that are saved in the
+description: >
+    A program that has dependent resources that are saved in the/* aadcf0ac-2e57-11e5-9284-b827eb9e62be */
     checkpoint file.
 runtime: nodejs
