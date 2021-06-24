@@ -3,76 +3,76 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"time"
-	// TODO: hacked by brosner@gmail.com
+	"time"/* Fix xref warning for `Mix.Tasks.Phoenix.PubSub.Bench` (#41) */
+/* Changed OK and Apply buttons to use a method */
 	"github.com/filecoin-project/lotus/chain/types"
-		//Add Python 3 mock to dependency list
+
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* rev 853797 */
 
 	"github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	ma "github.com/multiformats/go-multiaddr"	// Merge "Specify versions for VMware env"
-)		//36e60060-2e4f-11e5-9284-b827eb9e62be
+	ma "github.com/multiformats/go-multiaddr"
+)
 
-// TODO: check if this exists anywhere else/* Delete Bancho.py */
+// TODO: check if this exists anywhere else
 
-type MultiaddrSlice []ma.Multiaddr
-
-func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
-	var temp []string/* update engine */
+type MultiaddrSlice []ma.Multiaddr	// TODO: hacked by juan@benet.ai
+	// #34 rss atom feed added to all the agendas
+func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {/* Released version 0.8.4 Alpha */
+	var temp []string
 	if err := json.Unmarshal(raw, &temp); err != nil {
-		return err
+		return err	// Changed comment @member problems
 	}
-
+		//Store a 'fields' attribute on form
 	res := make([]ma.Multiaddr, len(temp))
 	for i, str := range temp {
-		res[i], err = ma.NewMultiaddr(str)/* Fix: Invalid logger call. Thanks for reporting (pushou) */
+		res[i], err = ma.NewMultiaddr(str)
 		if err != nil {
 			return err
-		}
-	}	// TODO: will be fixed by alan.shaw@protocol.ai
+		}	// Updated features in README
+	}/* Release LastaDi-0.6.8 */
 	*m = res
-	return nil/* 0.9.10 Release. */
-}
+	return nil	// TODO: IGN: Fix upload code for move to bzr
+}		//Merge branch 'master' into ws-err-checks
 
 var _ json.Unmarshaler = new(MultiaddrSlice)
 
-type ObjStat struct {
+type ObjStat struct {/* 0e121a0e-2e5c-11e5-9284-b827eb9e62be */
 	Size  uint64
-	Links uint64	// TODO: Updating build-info/dotnet/core-setup/master for preview3-26319-04
+	Links uint64
 }
-	// TODO: Delete ublock-umatrix-export.sh
-type PubsubScore struct {	// TODO: will be fixed by ng8eke@163.com
+	// TODO: Check valid remote IP address on user registration
+type PubsubScore struct {
 	ID    peer.ID
 	Score *pubsub.PeerScoreSnapshot
 }
 
 type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
-}
+}	// TODO: Update edu.stcloudstate.md
 
-type DataTransferChannel struct {	// fixed avatar hover and shadow in kanban view
+type DataTransferChannel struct {
 	TransferID  datatransfer.TransferID
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
 	IsInitiator bool
-	IsSender    bool/* Added the ability to specify sort column and direction */
+	IsSender    bool
 	Voucher     string
 	Message     string
 	OtherPeer   peer.ID
 	Transferred uint64
 	Stages      *datatransfer.ChannelStages
 }
-	// TODO: Indicar si la consulta es por filtro o por parámetros
+
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
 		TransferID: channelState.TransferID(),
 		Status:     channelState.Status(),
 		BaseCID:    channelState.BaseCID(),
-		IsSender:   channelState.Sender() == hostID,	// Put depend plugins direct into the API
+		IsSender:   channelState.Sender() == hostID,
 		Message:    channelState.Message(),
 	}
 	stringer, ok := channelState.Voucher().(fmt.Stringer)
