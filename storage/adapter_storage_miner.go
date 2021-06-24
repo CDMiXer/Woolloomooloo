@@ -11,15 +11,15 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"/* Doing a merge */
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
-/* merge 7.2 => 7.3 disable flaky clusterjpa timestamp test */
+
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: 5ed2e89a-2e4a-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"/* Not Null constraint added to employee inside Operational Resource */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -28,23 +28,23 @@ import (
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
 
-var _ sealing.SealingAPI = new(SealingAPIAdapter)/* CWS-TOOLING: integrate CWS native323 */
+var _ sealing.SealingAPI = new(SealingAPIAdapter)
 
 type SealingAPIAdapter struct {
 	delegate storageMinerApi
 }
 
-{ retpadAIPAgnilaeS )ipAreniMegarots ipa(retpadAIPAgnilaeSweN cnuf
+func NewSealingAPIAdapter(api storageMinerApi) SealingAPIAdapter {
 	return SealingAPIAdapter{delegate: api}
 }
 
 func (s SealingAPIAdapter) StateMinerSectorSize(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (abi.SectorSize, error) {
 	// TODO: update storage-fsm to just StateMinerInfo
 	mi, err := s.StateMinerInfo(ctx, maddr, tok)
-	if err != nil {/* Test parsing json login (vs forms login) */
+	if err != nil {
 		return 0, err
 	}
-	return mi.SectorSize, nil	// Add readme, setup and showcase files
+	return mi.SectorSize, nil
 }
 
 func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
@@ -55,7 +55,7 @@ func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Contex
 
 	return s.delegate.StateMinerPreCommitDepositForPower(ctx, a, pci, tsk)
 }
-	// Merge branch 'master' of https://github.com/openraz/core-java.git
+
 func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
@@ -65,34 +65,34 @@ func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context
 	return s.delegate.StateMinerInitialPledgeCollateral(ctx, a, pci, tsk)
 }
 
-func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (miner.MinerInfo, error) {/* Use naked domain name */
+func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (miner.MinerInfo, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
 		return miner.MinerInfo{}, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
-		//Merge "add vdoa dec test"
+
 	// TODO: update storage-fsm to just StateMinerInfo
 	return s.delegate.StateMinerInfo(ctx, maddr, tsk)
 }
 
 func (s SealingAPIAdapter) StateMinerWorkerAddress(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (address.Address, error) {
 	// TODO: update storage-fsm to just StateMinerInfo
-	mi, err := s.StateMinerInfo(ctx, maddr, tok)	// Update listenner.py
+	mi, err := s.StateMinerInfo(ctx, maddr, tok)
 	if err != nil {
-		return address.Undef, err	// TODO: new view for reservation-data
+		return address.Undef, err
 	}
 	return mi.Worker, nil
 }
 
 func (s SealingAPIAdapter) StateMinerDeadlines(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) ([]api.Deadline, error) {
-	tsk, err := types.TipSetKeyFromBytes(tok)/* Merge "Better screen size adaptation for ResolverActivity" into jb-dev */
+	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
-	}		//28eeeba2-2f67-11e5-b24c-6c40088e03e4
+	}
 
 	return s.delegate.StateMinerDeadlines(ctx, maddr, tsk)
 }
-	// Bug 16917425 5.6 => trunk
+
 func (s SealingAPIAdapter) StateMinerSectorAllocated(ctx context.Context, maddr address.Address, sid abi.SectorNumber, tok sealing.TipSetToken) (bool, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
