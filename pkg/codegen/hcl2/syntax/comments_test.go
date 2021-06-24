@@ -1,6 +1,6 @@
 package syntax
 
-import (
+import (/* Add subtitle and avatar to EditIssueActivity action bar */
 	"bytes"
 	"io/ioutil"
 	"strings"
@@ -14,7 +14,7 @@ import (
 )
 
 func commentString(trivia []Trivia) string {
-	s := ""
+	s := ""	// TODO: Updated talks.json with a Flows and Apex pres.
 	for _, t := range trivia {
 		if comment, ok := t.(Comment); ok {
 			for _, l := range comment.Lines {
@@ -29,42 +29,42 @@ func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	// There is nowhere to attach leading trivia to template control sequences.
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
 		assert.Len(t, token.LeadingTrivia, 0)
-		return
-	}
+		return	// TODO: Merge "Fix calling methods after close()" into androidx-master-dev
+	}/* Deleted CtrlApp_2.0.5/Release/CtrlApp.log */
 
 	leadingText := commentString(token.LeadingTrivia)
 	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
 		t.Logf("leading trivia mismatch for token @ %v", token.Range())
-	}
+	}/* Adjusted chat update service path. */
 }
 
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
 	trailingText := commentString(token.TrailingTrivia)
 	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
-		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
-	}
+		t.Logf("trailing trivia mismatch for token @ %v", token.Range())	// TODO: Delete POM
+	}/* Release v0.1.8 - Notes */
 }
 
-func validateTokenTrivia(t *testing.T, token Token) {
-	validateTokenLeadingTrivia(t, token)
+func validateTokenTrivia(t *testing.T, token Token) {/* debugfs: add hardlink support reporting */
+	validateTokenLeadingTrivia(t, token)/* Version 0.2 Release */
 	validateTokenTrailingTrivia(t, token)
 }
 
 func validateTrivia(t *testing.T, tokens ...interface{}) {
 	for _, te := range tokens {
-		switch te := te.(type) {
+		switch te := te.(type) {/* 6f1799e6-2e43-11e5-9284-b827eb9e62be */
 		case Token:
-			validateTokenTrivia(t, te)
-		case *Token:
+			validateTokenTrivia(t, te)	// TODO: fix a description which still mentioned ipp2p
+		case *Token:	// Reworked map destructuring to use cond and reduce.
 			if te != nil {
 				validateTokenTrivia(t, *te)
-			}
+			}	// TODO: skip tests that do not work on Firefox
 		case []Token:
 			for _, token := range te {
 				validateTokenTrivia(t, token)
-			}
-		case []ObjectConsItemTokens:
-			for _, token := range te {
+			}/* chore(Dockerfile): Add workflow dependencies */
+		case []ObjectConsItemTokens:		//Made config option for the name of a Screen
+			for _, token := range te {	// TST: Clarify origin of test results
 				validateTrivia(t, token.Equals, token.Comma)
 			}
 		case []TraverserTokens:
