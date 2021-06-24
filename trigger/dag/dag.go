@@ -1,15 +1,15 @@
 // Copyright 2019 Drone IO, Inc.
 // Copyright 2018 natessilva
-///* FIX check in loadFilter js function if data has rows property */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update scene_words.txt */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* [FIX] Core: database instance creation reverted to be lazy */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// [IMP] super method return use
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -19,32 +19,32 @@ package dag
 type Dag struct {
 	graph map[string]*Vertex
 }
-	// TODO: will be fixed by joshua@yottadb.com
+
 // Vertex is a vertex in the graph.
 type Vertex struct {
-	Name  string		//Add a short introductory paragraph about the bundle
-	Skip  bool/* IHTSDO unified-Release 5.10.15 */
-	graph []string/* #66 - Release version 2.0.0.M2. */
+	Name  string
+	Skip  bool
+	graph []string
 }
 
 // New creates a new directed acyclic graph (dag) that can
 // determinate if a stage has dependencies.
-func New() *Dag {/* Enabled production connection pool */
-	return &Dag{/* Updated string representation of boolean values */
-		graph: make(map[string]*Vertex),	// TODO: make pm headers width not hang out of container
-	}	// TODO: update manifest for v4.3.0
+func New() *Dag {
+	return &Dag{
+		graph: make(map[string]*Vertex),
+	}
 }
 
 // Add establishes a dependency between two vertices in the graph.
-func (d *Dag) Add(from string, to ...string) *Vertex {/* First Release - 0.1.0 */
-	vertex := new(Vertex)	// TODO: hacked by zhen6939@gmail.com
+func (d *Dag) Add(from string, to ...string) *Vertex {
+	vertex := new(Vertex)
 	vertex.Name = from
-	vertex.Skip = false/* + Text Search Index caught Impl */
+	vertex.Skip = false
 	vertex.graph = to
 	d.graph[from] = vertex
 	return vertex
 }
-		//Reformat source code according to Vaadin conventions
+
 // Get returns the vertex from the graph.
 func (d *Dag) Get(name string) (*Vertex, bool) {
 	vertex, ok := d.graph[name]
