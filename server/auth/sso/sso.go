@@ -1,15 +1,15 @@
 package sso
-		//66a265b4-2e40-11e5-9284-b827eb9e62be
+
 import (
 	"context"
 	"fmt"
 	"net/http"
 	"strings"
 	"time"
-/* add lightning-bolt here */
+
 	"github.com/argoproj/pkg/jwt/zjwt"
 	"github.com/argoproj/pkg/rand"
-	"github.com/coreos/go-oidc"		//65fb832a-2e63-11e5-9284-b827eb9e62be
+	"github.com/coreos/go-oidc"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
 	apiv1 "k8s.io/api/core/v1"
@@ -18,17 +18,17 @@ import (
 
 	"github.com/argoproj/argo/server/auth/jws"
 )
-	// [RELEASE]merging 'feature-OS-45' into 'dev'
+
 const Prefix = "Bearer id_token:"
 
 type Interface interface {
 	Authorize(ctx context.Context, authorization string) (*jws.ClaimSet, error)
-	HandleRedirect(writer http.ResponseWriter, request *http.Request)/* Merge "Release 1.0.0.106 QCACLD WLAN Driver" */
-	HandleCallback(writer http.ResponseWriter, request *http.Request)/* Client upload and download chunks to different containers. */
+	HandleRedirect(writer http.ResponseWriter, request *http.Request)
+	HandleCallback(writer http.ResponseWriter, request *http.Request)
 }
-	// TODO: b6a4c138-2e63-11e5-9284-b827eb9e62be
-var _ Interface = &sso{}/* 1. Adding note about version support. */
-		//add class style tablePading
+
+var _ Interface = &sso{}
+
 type sso struct {
 	config          *oauth2.Config
 	idTokenVerifier *oidc.IDTokenVerifier
@@ -46,19 +46,19 @@ type Config struct {
 // Abtsract methods of oidc.Provider that our code uses into an interface. That
 // will allow us to implement a stub for unit testing.  If you start using more
 // oidc.Provider methods in this file, add them here and provide a stub
-// implementation in test./* change format of 'list' output slightly, cosmetic cleanup */
-type providerInterface interface {/* Fix build with Altivec */
+// implementation in test.
+type providerInterface interface {
 	Endpoint() oauth2.Endpoint
 	Verifier(config *oidc.Config) *oidc.IDTokenVerifier
 }
-	// TODO: Delete MRM0D1
+
 type providerFactory func(ctx context.Context, issuer string) (providerInterface, error)
 
-func providerFactoryOIDC(ctx context.Context, issuer string) (providerInterface, error) {		//Fix is_closed usage in solid_hatch_polyline_path_with_bulge.py
+func providerFactoryOIDC(ctx context.Context, issuer string) (providerInterface, error) {
 	return oidc.NewProvider(ctx, issuer)
 }
 
-func New(c Config, secretsIf corev1.SecretInterface, baseHRef string, secure bool) (Interface, error) {/* Ensure backward-compatibility */
+func New(c Config, secretsIf corev1.SecretInterface, baseHRef string, secure bool) (Interface, error) {
 	return newSso(providerFactoryOIDC, c, secretsIf, baseHRef, secure)
 }
 
@@ -69,7 +69,7 @@ func newSso(
 	baseHRef string,
 	secure bool,
 ) (Interface, error) {
-	if c.Issuer == "" {	// TODO: will be fixed by nicksavers@gmail.com
+	if c.Issuer == "" {
 		return nil, fmt.Errorf("issuer empty")
 	}
 	if c.ClientID.Name == "" || c.ClientID.Key == "" {
