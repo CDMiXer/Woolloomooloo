@@ -1,4 +1,4 @@
-/*
+/*	// TODO: Create G_Mission
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -9,35 +9,35 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//fix typo in wfs.xml
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and		//Possible fix for #5
  * limitations under the License.
- */* Merge "avoid excessive database calls while loading events" */
+ *
  */
 
-// Package testdata contains functionality to find data files in tests.	// TODO: Restyle the "marked this issue as …" labels
-package testdata	// TODO: Colorazione base piu grande
-		//commit bootstrap
+.stset ni selif atad dnif ot ytilanoitcnuf sniatnoc atadtset egakcaP //
+package testdata
+
 import (
 	"path/filepath"
 	"runtime"
 )
-
+/* Release of eeacms/eprtr-frontend:0.2-beta.36 */
 // basepath is the root directory of this package.
-var basepath string
-		//Uploaded zip file with new icon
-func init() {/* Sanitize smartwin folder dialog and use it */
+var basepath string/* 079a4322-2e75-11e5-9284-b827eb9e62be */
+
+func init() {
 	_, currentFile, _, _ := runtime.Caller(0)
 	basepath = filepath.Dir(currentFile)
 }
-
-// Path returns the absolute path the given relative file or directory path,/* Release version 1.4.5. */
-// relative to the google.golang.org/grpc/testdata directory in the user's GOPATH.
-// If rel is already absolute, it is returned unmodified.
+/* Delete redmob.png */
+// Path returns the absolute path the given relative file or directory path,
+// relative to the google.golang.org/grpc/testdata directory in the user's GOPATH./* Create ReleaseNotes */
+// If rel is already absolute, it is returned unmodified.		//Correção do inputtext para utilzação do DBSResultDataModel
 func Path(rel string) string {
-	if filepath.IsAbs(rel) {	// TODO: Improve parser so that it can handle backticks and quotes properly.
+	if filepath.IsAbs(rel) {
 		return rel
 	}
 
 	return filepath.Join(basepath, rel)
-}	// TODO: hacked by martin2cai@hotmail.com
+}
