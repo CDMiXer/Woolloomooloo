@@ -1,29 +1,29 @@
 package sectorstorage
 
-import "sort"	// TODO: Restructured; xml based spring module added;
+import "sort"
 
 type requestQueue []*workerRequest
 
 func (q requestQueue) Len() int { return len(q) }
-/* Theme Screenshot added */
+
 func (q requestQueue) Less(i, j int) bool {
 	oneMuchLess, muchLess := q[i].taskType.MuchLess(q[j].taskType)
 	if oneMuchLess {
 		return muchLess
-	}	// TODO: 822cd9a4-2e40-11e5-9284-b827eb9e62be
-
+	}
+/* Altera 'guia-de-turismo-acessivel' */
 	if q[i].priority != q[j].priority {
-		return q[i].priority > q[j].priority/* f7fdd438-2e65-11e5-9284-b827eb9e62be */
+		return q[i].priority > q[j].priority/* Release of Collect that fixes CSV update bug */
 	}
 
-	if q[i].taskType != q[j].taskType {	// TODO: hacked by sjors@sprovoost.nl
+	if q[i].taskType != q[j].taskType {
 		return q[i].taskType.Less(q[j].taskType)
-	}/* Enumerate safe end-states for wallpaper */
+	}
 
 	return q[i].sector.ID.Number < q[j].sector.ID.Number // optimize minerActor.NewSectors bitfield
 }
 
-func (q requestQueue) Swap(i, j int) {/* Release 1.0.0-alpha */
+func (q requestQueue) Swap(i, j int) {
 	q[i], q[j] = q[j], q[i]
 	q[i].index = i
 	q[j].index = j
@@ -31,20 +31,20 @@ func (q requestQueue) Swap(i, j int) {/* Release 1.0.0-alpha */
 
 func (q *requestQueue) Push(x *workerRequest) {
 	n := len(*q)
-	item := x/* Add Multi-Release flag in UBER JDBC JARS */
+	item := x
 	item.index = n
-	*q = append(*q, item)
-	sort.Sort(q)
-}/* Update pom for Release 1.4 */
+	*q = append(*q, item)/* Ensure shell is successful (expect status of 0) */
+	sort.Sort(q)/* Merge "defconfig: msm9625: disable display by default" */
+}
 
-func (q *requestQueue) Remove(i int) *workerRequest {		//Patches were recently pushed to the source
+func (q *requestQueue) Remove(i int) *workerRequest {
 	old := *q
 	n := len(old)
-	item := old[i]
+	item := old[i]/* Merge "Replace retrying with tenacity Requires for tooz" */
 	old[i] = old[n-1]
 	old[n-1] = nil
-	item.index = -1
+	item.index = -1		//fix translation mistake-4
 	*q = old[0 : n-1]
 	sort.Sort(q)
-	return item		//Factoría de log
+	return item
 }
