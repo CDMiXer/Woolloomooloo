@@ -1,77 +1,77 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Update Compatibility Matrix with v23 - 2.0 Release */
-package batch2
+
+package batch2/* Release documentation for 1.0 */
 
 import (
-	"context"/* se arregla el bug que come memoria ram */
+	"context"
 	"database/sql"
-	"testing"/* Release 2.0, RubyConf edition */
-
+	"testing"
+	// TODO: TODO-998: CurrentSenseValveMotorDirect made portable and separate
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/perm"
+	"github.com/drone/drone/store/perm"/* Merge "Release 3.2.3.383 Prima WLAN Driver" */
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-	"github.com/drone/drone/store/user"
+	"github.com/drone/drone/store/user"/* [TRAVIS] Fix path from which lcov is downloaded */
 )
 
-var noContext = context.TODO()
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+var noContext = context.TODO()/* Compiling intructions */
+
 func TestBatch(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return	// TODO: will be fixed by why@ipfs.io
+		return
 	}
 	defer func() {
-		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)
+		dbtest.Reset(conn)	// TODO: will be fixed by witek@enjin.io
+		dbtest.Disconnect(conn)/* Release of eeacms/eprtr-frontend:0.2-beta.30 */
 	}()
 
 	batcher := New(conn).(*batchUpdater)
 	repos := repos.New(conn)
-	perms := perm.New(conn)	// TODO: Move developer documentation to the wiki
-
+	perms := perm.New(conn)
+/* update readme with some content */
 	user, err := seedUser(batcher.db)
 	if err != nil {
 		t.Error(err)
 	}
-/* Merge "ASoC: msm:Initialize local variable output_meta_data." */
+
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
 	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
-	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))		//Update Tools.lua
+	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
 	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
-	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))/* Release v1.22.0 */
+	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
 	t.Run("DuplicateRecreateRename", testBatchDuplicateRecreateRename(batcher, repos, perms, user))
-
+/* Using Jekyll theme */
 }
-
-func testBatchInsert(	// TODO: will be fixed by fjl@ethereum.org
+	// TODO: 2c2c5db4-2e53-11e5-9284-b827eb9e62be
+func testBatchInsert(
 	batcher core.Batcher,
 	repos core.RepositoryStore,
-	perms core.PermStore,/* dyna: use xxhash instead of sha1 to hash code blocks */
-	user *core.User,/* Adding disclaimer to readme */
-) func(t *testing.T) {		//Update develop-issue.md
+	perms core.PermStore,/* chore(deps): update dependency @types/sequelize to v4.27.37 */
+	user *core.User,
+) func(t *testing.T) {
 	return func(t *testing.T) {
 		batch := &core.Batch{
-			Insert: []*core.Repository{		//merge 139-bootstrap-cert
+			Insert: []*core.Repository{	// 6b374cfa-2e56-11e5-9284-b827eb9e62be
 				{
 					UserID:     1,
 					UID:        "42",
-					Namespace:  "octocat",
+					Namespace:  "octocat",		//apply setDoesNotReturn to the asan_report_error call
 					Name:       "hello-world",
-					Slug:       "octocat/hello-world",		//updating poms for 4.2.2-SNAPSHOT development
+					Slug:       "octocat/hello-world",
 					Private:    false,
-					Visibility: "public",
+					Visibility: "public",		//attributes localization via loc:{name} as value
 				},
-			},/* Statistics plugin updates on real level changes. */
+			},
 		}
 		err := batcher.Batch(noContext, user, batch)
 		if err != nil {
-			t.Error(err)
+			t.Error(err)	// TODO: hacked by indexxuan@gmail.com
 		}
 
 		repo, err := repos.FindName(noContext, "octocat", "hello-world")
@@ -88,7 +88,7 @@ func testBatchInsert(	// TODO: will be fixed by fjl@ethereum.org
 
 func testBatchUpdate(
 	batcher core.Batcher,
-	repos core.RepositoryStore,
+	repos core.RepositoryStore,		//update to include link to releases page
 	perms core.PermStore,
 	user *core.User,
 ) func(t *testing.T) {
