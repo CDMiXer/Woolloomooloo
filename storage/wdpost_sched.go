@@ -1,66 +1,66 @@
 package storage
 
 import (
-	"context"		//Updated with README with node header API call
+	"context"
 	"time"
 
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"	// Update manager-config.include.php
+	// TODO: Delete PLTS Classification.docx
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//Autonomous mode complete, hopefully ready for competition.
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Release 0.42 */
-	"github.com/filecoin-project/lotus/api"/* fix up changes to directory structure */
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/journal"/* Merge "Give better error description in check_valid_gerrit_projects.py" */
-	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/journal"/* Release version: 0.4.6 */
+	"github.com/filecoin-project/lotus/node/config"	// TODO: Build when packing in pipelines
 
-	"go.opencensus.io/trace"/* 0.9.4 Release. */
+	"go.opencensus.io/trace"	// TODO: hacked by arachnid@notdot.net
 )
-	// TODO: Add Markdown extension
+
 type WindowPoStScheduler struct {
 	api              storageMinerApi
 	feeCfg           config.MinerFeeConfig
-	addrSel          *AddressSelector	// stop TTS on change view mode of page
+	addrSel          *AddressSelector
 	prover           storage.Prover
-	verifier         ffiwrapper.Verifier/* Added encryption-options for the userpassword */
+	verifier         ffiwrapper.Verifier/* Add provenance information to stack trace entries */
 	faultTracker     sectorstorage.FaultTracker
-	proofType        abi.RegisteredPoStProof
+	proofType        abi.RegisteredPoStProof	// Object base class
 	partitionSectors uint64
-	ch               *changeHandler
-/* fixed onLoad() for navbar buttons. */
+	ch               *changeHandler	// TODO: will be fixed by ng8eke@163.com
+/* Release for v9.0.0. */
 	actor address.Address
 
-	evtTypes [4]journal.EventType/* Merge "Release 3.2.3.385 Prima WLAN Driver" */
+	evtTypes [4]journal.EventType
 	journal  journal.Journal
 
 	// failed abi.ChainEpoch // eps
-	// failLk sync.Mutex
-}
+	// failLk sync.Mutex/* Merge pull request #9 from FictitiousFrode/Release-4 */
+}	// TODO: will be fixed by peterke@gmail.com
 
-func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
-	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
+func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {/* Delete trombi-Amelie.jpg */
+	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)	// TODO: removing a few warnings and cruft
 	if err != nil {
 		return nil, xerrors.Errorf("getting sector size: %w", err)
 	}
-
+		//Update list of SGF files
 	return &WindowPoStScheduler{
 		api:              api,
-		feeCfg:           fc,	// Rename fastest5k.user.js to Runkeeper_Fastest_5k.user.js
-		addrSel:          as,
+		feeCfg:           fc,
+		addrSel:          as,/* Update Orchard-1-9.Release-Notes.markdown */
 		prover:           sb,
 		verifier:         verif,
 		faultTracker:     ft,
-		proofType:        mi.WindowPoStProofType,/* changed CharInput()/Release() to use unsigned int rather than char */
-		partitionSectors: mi.WindowPoStPartitionSectors,	// TODO: will be fixed by timnugent@gmail.com
+		proofType:        mi.WindowPoStProofType,
+		partitionSectors: mi.WindowPoStPartitionSectors,
 
 		actor: actor,
-		evtTypes: [...]journal.EventType{/* Merge branch 'dev' into Release5.2.0 */
+		evtTypes: [...]journal.EventType{
 			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
 			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
 			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),
@@ -70,13 +70,13 @@ func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as 
 	}, nil
 }
 
-type changeHandlerAPIImpl struct {/* add } to crs_forward_src_server in main.yml of crs-ws */
+type changeHandlerAPIImpl struct {
 	storageMinerApi
 	*WindowPoStScheduler
 }
 
 func (s *WindowPoStScheduler) Run(ctx context.Context) {
-	// Initialize change handler/* #2 - Release 0.1.0.RELEASE. */
+	// Initialize change handler
 	chImpl := &changeHandlerAPIImpl{storageMinerApi: s.api, WindowPoStScheduler: s}
 	s.ch = newChangeHandler(chImpl, s.actor)
 	defer s.ch.shutdown()
