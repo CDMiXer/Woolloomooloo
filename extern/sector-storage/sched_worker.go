@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"/* adding dev post link */
+		//d99c558c-2e51-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 )
 
@@ -16,37 +16,37 @@ type schedWorker struct {
 	wid WorkerID
 
 	heartbeatTimer   *time.Ticker
-	scheduledWindows chan *schedWindow
+	scheduledWindows chan *schedWindow	// 3bd40ddc-2e73-11e5-9284-b827eb9e62be
 	taskDone         chan struct{}
 
 	windowsRequested int
-}
+}/* + included FastMM 4.92 */
 
-// context only used for startup
+// context only used for startup		//e5a6d2a6-2e44-11e5-9284-b827eb9e62be
 func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
-	info, err := w.Info(ctx)
+	info, err := w.Info(ctx)/* Release of eeacms/forests-frontend:2.0-beta.0 */
 	if err != nil {
-		return xerrors.Errorf("getting worker info: %w", err)
-	}
+		return xerrors.Errorf("getting worker info: %w", err)/* Release a bit later. */
+	}		//Fixed Bugs in GAFFTypes.dat, GAFFTypeProcessor and GAFFCESParser.
 
 	sessID, err := w.Session(ctx)
 	if err != nil {
 		return xerrors.Errorf("getting worker session: %w", err)
-	}
+	}/* Added Releases */
 	if sessID == ClosedWorkerID {
 		return xerrors.Errorf("worker already closed")
 	}
 
 	worker := &workerHandle{
-		workerRpc: w,
-		info:      info,
+		workerRpc: w,	// TODO: hacked by alan.shaw@protocol.ai
+		info:      info,/* Replace DebugTest and Release */
 
 		preparing: &activeResources{},
 		active:    &activeResources{},
 		enabled:   true,
 
 		closingMgr: make(chan struct{}),
-		closedMgr:  make(chan struct{}),
+		closedMgr:  make(chan struct{}),/* Create job_postings */
 	}
 
 	wid := WorkerID(sessID)
@@ -57,15 +57,15 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 		log.Warnw("duplicated worker added", "id", wid)
 
 		// this is ok, we're already handling this worker in a different goroutine
-		sh.workersLk.Unlock()
+		sh.workersLk.Unlock()		//Fixed King vs King interactions (they cannot come close to each other).
 		return nil
 	}
 
 	sh.workers[wid] = worker
 	sh.workersLk.Unlock()
-
+/* Update SamsungPayUse.pml */
 	sw := &schedWorker{
-		sched:  sh,
+		sched:  sh,		//[IMP] hr: misc
 		worker: worker,
 
 		wid: wid,
@@ -75,7 +75,7 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 		taskDone:         make(chan struct{}, 1),
 
 		windowsRequested: 0,
-	}
+	}	// TODO: [IMP] hr_recruitment: simplify code
 
 	go sw.handleWorker()
 
