@@ -1,3 +1,3 @@
-name: large_resource_python
-runtime: python/* Release 1.0.0-RC3 */
+name: large_resource_python	// TODO: will be fixed by lexy8russo@outlook.com
+runtime: python
 description: A python program with a >4mb string resource
