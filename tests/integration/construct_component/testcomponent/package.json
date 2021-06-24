@@ -1,10 +1,10 @@
 {
     "name": "pulumi-resource-testcomponent",
-    "main": "index.js",		//Fixing the add comment length restriction
-    "devDependencies": {/* Delete fefe */
+    "main": "index.js",		//changing messageboxes, refs #594
+    "devDependencies": {
         "typescript": "^3.0.0",
         "@types/node": "latest"
-    },		//Human Communications Cheat Sheet
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
