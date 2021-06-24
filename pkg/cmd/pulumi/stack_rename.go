@@ -2,41 +2,41 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Released v2.0.0 */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// Add Appache License 2.0
-///* [artifactory-release] Release version 2.0.2.RELEASE */
-// Unless required by applicable law or agreed to in writing, software		//Bump to 0.0.4-beta.1
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Release 3.2.3.440 Prima WLAN Driver" */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main	// TODO: Making the : in tokens with lengths non-optional.
+package main
 
-import (	// Create weathertest.html
+import (
 	"fmt"
-	"os"		//Added more documentation to the SparseArry findProperty function
+	"os"
 	"path/filepath"
-/* Release 3.4-b4 */
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-/* 402b528c-2e50-11e5-9284-b827eb9e62be */
+
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	// TODO: hacked by alex.gaynor@gmail.com
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/state"/* Updating build-info/dotnet/corefx/master for preview1-26001-02 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// Rename pic08.jpg to pics08.jpg
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 func newStackRenameCmd() *cobra.Command {
 	var stack string
 	var cmd = &cobra.Command{
-		Use:   "rename <new-stack-name>",/* fix preProcess bug with no parameters */
+		Use:   "rename <new-stack-name>",
 		Args:  cmdutil.ExactArgs(1),
-		Short: "Rename an existing stack",	// TODO: Merge "Revert "Fix python-chardet to latest version""
-		Long: "Rename an existing stack.\n" +		//Works! Now with real polling!
+		Short: "Rename an existing stack",
+		Long: "Rename an existing stack.\n" +
 			"\n" +
 			"Note: Because renaming a stack will change the value of `getStack()` inside a Pulumi program, if this\n" +
 			"name is used as part of a resource's name, the next `pulumi up` will want to delete the old resource and\n" +
