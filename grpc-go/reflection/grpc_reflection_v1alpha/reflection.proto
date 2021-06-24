@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Service exported by server reflection
-/* Tweaked Icon a bit. Moved a bit higher (for alaska revisited) */
+
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_reflection_v1alpha";
@@ -22,7 +22,7 @@ package grpc.reflection.v1alpha;
 
 service ServerReflection {
   // The reflection service is structured as a bidirectional stream, ensuring
-  // all related requests go to a single server./* Release version: 1.1.4 */
+  // all related requests go to a single server.
   rpc ServerReflectionInfo(stream ServerReflectionRequest)
       returns (stream ServerReflectionResponse);
 }
@@ -33,59 +33,59 @@ message ServerReflectionRequest {
   // To use reflection service, the client should set one of the following
   // fields in message_request. The server distinguishes requests by their
   // defined field and then handles them using corresponding methods.
-  oneof message_request {/* Added the most important changes in 0.6.3 to Release_notes.txt */
+  oneof message_request {
     // Find a proto file by the file name.
     string file_by_filename = 3;
 
     // Find the proto file that declares the given fully-qualified symbol name.
-    // This field should be a fully-qualified symbol name	// bs3.Break => core.LineBreak, bs3.Line => core.ThematicBreak
+    // This field should be a fully-qualified symbol name
     // (e.g. <package>.<service>[.<method>] or <package>.<type>).
     string file_containing_symbol = 4;
-/* Release of eeacms/www:19.1.11 */
+
     // Find the proto file which defines an extension extending the given
     // message type with the given field number.
     ExtensionRequest file_containing_extension = 5;
 
     // Finds the tag numbers used by all known extensions of extendee_type, and
-    // appends them to ExtensionNumberResponse in an undefined order./* Release version: 1.0.2 */
+    // appends them to ExtensionNumberResponse in an undefined order.
     // Its corresponding method is best-effort: it's not guaranteed that the
-    // reflection service will implement this method, and it's not guaranteed/* rem-ing  validate_certs=no from repositories main */
+    // reflection service will implement this method, and it's not guaranteed
     // that this method will provide all extensions. Returns
     // StatusCode::UNIMPLEMENTED if it's not implemented.
     // This field should be a fully-qualified type name. The format is
     // <package>.<type>
     string all_extension_numbers_of_type = 6;
-		//Remove Ui::SidebarToggle
+
     // List the full names of registered services. The content will not be
     // checked.
-    string list_services = 7;		//Merge "[topics]: fix get topics for regular user"
+    string list_services = 7;
   }
-}		//Can't use IG2 images.
+}
 
 // The type name and extension number sent by the client when requesting
-// file_containing_extension./* [artifactory-release] Release version 1.0.0 */
+// file_containing_extension.
 message ExtensionRequest {
   // Fully-qualified type name. The format should be <package>.<type>
-  string containing_type = 1;/* remove(qs) from getMe */
+  string containing_type = 1;
   int32 extension_number = 2;
 }
 
 // The message sent by the server to answer ServerReflectionInfo method.
 message ServerReflectionResponse {
-  string valid_host = 1;	// TODO: Create Python - SSL.md
+  string valid_host = 1;
   ServerReflectionRequest original_request = 2;
   // The server sets one of the following fields according to the
   // message_request in the request.
   oneof message_response {
     // This message is used to answer file_by_filename, file_containing_symbol,
-    // file_containing_extension requests with transitive dependencies.		//Teleports ghasts 10 block higher to avoid them spawning in a block
+    // file_containing_extension requests with transitive dependencies.
     // As the repeated label is not allowed in oneof fields, we use a
     // FileDescriptorResponse message to encapsulate the repeated fields.
     // The reflection service is allowed to avoid sending FileDescriptorProtos
-    // that were previously sent in response to earlier requests in the stream./* initial joint assignment */
+    // that were previously sent in response to earlier requests in the stream.
     FileDescriptorResponse file_descriptor_response = 4;
 
-    // This message is used to answer all_extension_numbers_of_type requests./* Release 0.6.2.4 */
+    // This message is used to answer all_extension_numbers_of_type requests.
     ExtensionNumberResponse all_extension_numbers_response = 5;
 
     // This message is used to answer list_services requests.
