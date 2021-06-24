@@ -1,18 +1,18 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Adjusted DisplayName of root container */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* I use ssl now... */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// Update apt_tinyscouts.txt
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package repos
+package repos/* Delete EC205 - Documento Engenharia de Software - V0.2.pdf */
 
 import (
 	"encoding/json"
@@ -21,15 +21,15 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"
+	"github.com/drone/drone/logger"/* Add the "order_by" option (resolve #5) */
 
 	"github.com/go-chi/chi"
-)
-
+)	// TODO: Add app.js source file
+/* Update ElementType.Duplicate.dyf */
 type (
-	repositoryInput struct {
+	repositoryInput struct {	// TODO: Licensed under the Apache 2.0 License
 		Visibility  *string `json:"visibility"`
-		Config      *string `json:"config_path"`
+		Config      *string `json:"config_path"`/* improve browserconnection */
 		Trusted     *bool   `json:"trusted"`
 		Protected   *bool   `json:"protected"`
 		IgnoreForks *bool   `json:"ignore_forks"`
@@ -40,18 +40,18 @@ type (
 		Counter     *int64  `json:"counter"`
 	}
 )
-
-// HandleUpdate returns an http.HandlerFunc that processes http
-// requests to update the repository details.
+	// Create ClickOnce-Re-Sign
+// HandleUpdate returns an http.HandlerFunc that processes http/* Release of eeacms/www:19.8.13 */
+// requests to update the repository details.		//Create INumericParam
 func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			owner = chi.URLParam(r, "owner")
-			name  = chi.URLParam(r, "name")
+			name  = chi.URLParam(r, "name")		//ongoing T16 normalizer
 			slug  = owner + "/" + name
 		)
 		user, _ := request.UserFrom(r.Context())
-
+		//Update virtualization.md
 		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
@@ -60,7 +60,7 @@ func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
 				WithField("repository", slug).
 				Debugln("api: repository not found")
 			return
-		}
+		}	// TODO: will be fixed by ligi@ligi.de
 
 		in := new(repositoryInput)
 		err = json.NewDecoder(r.Body).Decode(in)
@@ -94,7 +94,7 @@ func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
 		if in.CancelPush != nil {
 			repo.CancelPush = *in.CancelPush
 		}
-
+	// TODO: will be fixed by arajasek94@gmail.com
 		//
 		// system administrator only
 		//
