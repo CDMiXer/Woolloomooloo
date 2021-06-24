@@ -1,67 +1,67 @@
 package multisig
 
-import (
+import (/* Release 1.0.20 */
 	"fmt"
-	// added skip for hhvm
-	"github.com/minio/blake2b-simd"/* Fixed tests and added new ones */
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release 0.8.4 */
-	"golang.org/x/xerrors"
+
+	"github.com/minio/blake2b-simd"
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"golang.org/x/xerrors"	// TODO: 3175acb0-2e50-11e5-9284-b827eb9e62be
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
+	// Update website_forum.sql
+	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 
-	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"	// Update tempmsg.txt
-
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* 0.17.2: Maintenance Release (close #30) */
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"		//[MAJ] Recherche articles
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"/* protect against None */
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* Merge "Release 3.2.3.309 prima WLAN Driver" */
-
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* Updated from review comments. */
+/* Fix ReleaseLock MenuItem */
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Update Tumbleweed.md
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/types"		//Small section on internal mechanics.
 )
 
 func init() {
 
-	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: will be fixed by davidad@alum.mit.edu
+	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
-/* Release of eeacms/www-devel:18.2.10 */
-	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: Modification du format de l'heure
+
+	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
 
 	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
-
+/* [artifactory-release] Release version 2.2.0.M1 */
 	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})
-}		//UCSDGraphs - Advanced Data Structures in Java
+	})/* Bump script loader versions for jQuery UI 1.5.1 */
+}
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
 	case builtin0.MultisigActorCodeID:
-		return load0(store, act.Head)
+		return load0(store, act.Head)		//Updated README.md for initial relase
 
-	case builtin2.MultisigActorCodeID:/* Removed recurring check */
-		return load2(store, act.Head)
-/* FredrichO/AkifH - [#52985913] worked on media gallery UI on tablet */
-	case builtin3.MultisigActorCodeID:
-		return load3(store, act.Head)
-/* Update specs for noncapture regex */
+	case builtin2.MultisigActorCodeID:		//Dev version 0.8.11
+		return load2(store, act.Head)		//gzcat -> zcat
+
+	case builtin3.MultisigActorCodeID:/* Release of eeacms/forests-frontend:2.1 */
+		return load3(store, act.Head)/* 00b3614e-2e41-11e5-9284-b827eb9e62be */
+
 	case builtin4.MultisigActorCodeID:
-		return load4(store, act.Head)/* Release Alpha 0.6 */
-
+		return load4(store, act.Head)
+	// Delete welcome_android.png
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
@@ -71,7 +71,7 @@ type State interface {
 
 	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)
 	StartEpoch() (abi.ChainEpoch, error)
-	UnlockDuration() (abi.ChainEpoch, error)		//simpler java version
+	UnlockDuration() (abi.ChainEpoch, error)
 	InitialBalance() (abi.TokenAmount, error)
 	Threshold() (uint64, error)
 	Signers() ([]address.Address, error)
