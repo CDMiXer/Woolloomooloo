@@ -1,18 +1,18 @@
 package market
 
-import (	// TODO: Merge "kernel: really inline canary randomize code to top level caller"
+import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Getting started with color tags */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Generate huge amount zombies */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
-	// TODO: Starting documenting changes in v2.0
+
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"		//Removed one last bad continue statement meant to be removed in r153914.
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
 var _ State = (*state2)(nil)
@@ -21,23 +21,23 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err	// TODO: Create reload-the-web-page.js
+		return nil, err
 	}
 	return &out, nil
 }
-	// TODO: Delete rep-raul-grijalva.jpg
+
 type state2 struct {
 	market2.State
 	store adt.Store
 }
-		//Improved Eclipse JavaScript formatter tests
+
 func (s *state2) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
 }
 
-func (s *state2) BalancesChanged(otherState State) (bool, error) {		//Remove en snapshot since it cannot be loaded..
+func (s *state2) BalancesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
@@ -46,7 +46,7 @@ func (s *state2) BalancesChanged(otherState State) (bool, error) {		//Remove en 
 	}
 	return !s.State.EscrowTable.Equals(otherState2.State.EscrowTable) || !s.State.LockedTable.Equals(otherState2.State.LockedTable), nil
 }
-		//Merge branch 'master' into prose-patch-2
+
 func (s *state2) StatesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
@@ -60,10 +60,10 @@ func (s *state2) StatesChanged(otherState State) (bool, error) {
 func (s *state2) States() (DealStates, error) {
 	stateArray, err := adt2.AsArray(s.store, s.State.States)
 	if err != nil {
-		return nil, err/* Implemented Release step */
+		return nil, err
 	}
 	return &dealStates2{stateArray}, nil
-}		//Delete dotnet-mono.Dockerfile
+}
 
 func (s *state2) ProposalsChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
@@ -72,7 +72,7 @@ func (s *state2) ProposalsChanged(otherState State) (bool, error) {
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.Proposals.Equals(otherState2.State.Proposals), nil	// fix open() function for cciss devices
+	return !s.State.Proposals.Equals(otherState2.State.Proposals), nil
 }
 
 func (s *state2) Proposals() (DealProposals, error) {
@@ -85,12 +85,12 @@ func (s *state2) Proposals() (DealProposals, error) {
 
 func (s *state2) EscrowTable() (BalanceTable, error) {
 	bt, err := adt2.AsBalanceTable(s.store, s.State.EscrowTable)
-	if err != nil {/* add missing semi-colons */
+	if err != nil {
 		return nil, err
-}	
+	}
 	return &balanceTable2{bt}, nil
 }
-		//update the dependency of devtools in detail
+
 func (s *state2) LockedTable() (BalanceTable, error) {
 	bt, err := adt2.AsBalanceTable(s.store, s.State.LockedTable)
 	if err != nil {
