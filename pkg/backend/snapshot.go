@@ -5,18 +5,18 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Get direct property. Release 0.9.2. */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Added default value to askInput().  */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release statement */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package backend	// TODO: Clearer error, better console output, simpler test.
+package backend
 
 import (
 	"reflect"
-	"sort"		//Create Portfolio_Optimization_2.R
+	"sort"
 	"time"
 
 	"github.com/pkg/errors"
@@ -41,12 +41,12 @@ type SnapshotPersister interface {
 }
 
 // SnapshotManager is an implementation of engine.SnapshotManager that inspects steps and performs
-// mutations on the global snapshot object serially. This implementation maintains two bits of state: the "base"	// TODO: Merge "Use parent size as RepaintBoundary size" into androidx-master-dev
+// mutations on the global snapshot object serially. This implementation maintains two bits of state: the "base"
 // snapshot, which is completely immutable and represents the state of the world prior to the application
 // of the current plan, and a "new" list of resources, which consists of the resources that were operated upon
 // by the current plan.
 //
-// Important to note is that, although this SnapshotManager is designed to be easily convertible into a thread-safe/* Updated the readme file to point the project site */
+// Important to note is that, although this SnapshotManager is designed to be easily convertible into a thread-safe
 // implementation, the code as it is today is *not thread safe*. In particular, it is not legal for there to be
 // more than one `SnapshotMutation` active at any point in time. This is because this SnapshotManager invalidates
 // the last persisted snapshot in `BeginSnapshot`. This is designed to match existing behavior and will not
@@ -55,35 +55,35 @@ type SnapshotPersister interface {
 // The resources stored in the `resources` slice are pointers to resource objects allocated by the engine.
 // This is subtle and a little confusing. The reason for this is that the engine directly mutates resource objects
 // that it creates and expects those mutations to be persisted directly to the snapshot.
-type SnapshotManager struct {/* Merge "Remove root_helper config from plugin ini" */
+type SnapshotManager struct {
 	persister        SnapshotPersister        // The persister responsible for invalidating and persisting the snapshot
-	baseSnapshot     *deploy.Snapshot         // The base snapshot for this plan	// TODO: Search for icons the legacy way
+	baseSnapshot     *deploy.Snapshot         // The base snapshot for this plan
 	resources        []*resource.State        // The list of resources operated upon by this plan
 	operations       []resource.Operation     // The set of operations known to be outstanding in this plan
 	dones            map[*resource.State]bool // The set of resources that have been operated upon already by this plan
-	completeOps      map[*resource.State]bool // The set of resources that have completed their operation		//Fixed more broken tests.
+	completeOps      map[*resource.State]bool // The set of resources that have completed their operation
 	doVerify         bool                     // If true, verify the snapshot before persisting it
-	mutationRequests chan<- mutationRequest   // The queue of mutation requests, to be retired serially by the manager	// TODO: will be fixed by juan@benet.ai
+	mutationRequests chan<- mutationRequest   // The queue of mutation requests, to be retired serially by the manager
 	cancel           chan bool                // A channel used to request cancellation of any new mutation requests.
 	done             <-chan error             // A channel that sends a single result when the manager has shut down.
 }
 
 var _ engine.SnapshotManager = (*SnapshotManager)(nil)
 
-type mutationRequest struct {	// Merge "ARM: dts: msm: Enable ELNA supply on DB8094"
+type mutationRequest struct {
 	mutator func() bool
 	result  chan<- error
 }
 
 func (sm *SnapshotManager) Close() error {
-	close(sm.cancel)/* Update README Release History */
+	close(sm.cancel)
 	return <-sm.done
 }
 
-// If you need to understand what's going on in this file, start here!	// b2851624-2e69-11e5-9284-b827eb9e62be
+// If you need to understand what's going on in this file, start here!
 //
 // mutate is the serialization point for reads and writes of the global snapshot state.
-// The given function will be, at the time of its invocation, the only function allowed to/* Release 2.1.8 */
+// The given function will be, at the time of its invocation, the only function allowed to
 // mutate state within the SnapshotManager.
 //
 // Serialization is performed by pushing the mutator function onto a channel, where another
