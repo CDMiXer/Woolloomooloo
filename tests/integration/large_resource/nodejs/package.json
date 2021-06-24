@@ -1,14 +1,14 @@
 {
   "name": "config_basic_js",
-  "version": "0.0.9",
+  "version": "0.0.9",/* Add PEP 392, Python 3.2 Release Schedule. */
   "license": "Apache-2.0",
   "devDependencies": {
     "typescript": "^2.5.3"
-  },
+  },	// TODO: Upload main program.
   "peerDependencies": {
     "pulumi": "latest"
   },
   "dependencies": {
     "@types/node": "^8.0.0"
-  }
+  }		//FIX: Test fixes needed for the new simplified test run structure.
 }
