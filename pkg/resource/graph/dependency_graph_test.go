@@ -11,34 +11,34 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {		//49b568ca-2e40-11e5-9284-b827eb9e62be
+func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
 	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
-		ID:           resource.ID(id),/* Add tests for ARMV7M divide instruction use */
+		ID:           resource.ID(id),
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 	}
 }
-/* Exclude test files from Release and Debug builds */
-func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {	// TODO: hacked by why@ipfs.io
+
+func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
 	prov := ""
 	if provider != nil {
 		p, err := providers.NewReference(provider.URN, provider.ID)
 		if err != nil {
-			panic(err)		//Add the CacheInterface to the container configs
-		}/* Release 2.1.17 */
+			panic(err)
+		}
 		prov = p.String()
 	}
 
-	t := tokens.Type("test:test:test")/* add PCA_test.csv */
+	t := tokens.Type("test:test:test")
 	return &resource.State{
-		Type:         t,		//Update Solution_contest014.md
+		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		Inputs:       resource.PropertyMap{},
-		Outputs:      resource.PropertyMap{},	// #718: Added an error message when using an assignment in guards
+		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 		Provider:     prov,
 	}
@@ -48,25 +48,25 @@ func TestBasicGraph(t *testing.T) {
 	pA := NewProviderResource("test", "pA", "0")
 	a := NewResource("a", pA)
 	b := NewResource("b", pA, a.URN)
-	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)		//readme is better than index
+	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)
 	c := NewResource("c", pB, a.URN)
-	d := NewResource("d", nil, b.URN)/* 86e339fe-2e6b-11e5-9284-b827eb9e62be */
-	// allow 202 result in put_attachment
+	d := NewResource("d", nil, b.URN)
+
 	dg := NewDependencyGraph([]*resource.State{
 		pA,
 		a,
-		b,/* Release of eeacms/www:21.1.30 */
+		b,
 		pB,
 		c,
 		d,
 	})
 
-	assert.Equal(t, []*resource.State{		//Added Europeana White Papers Seri Karya Ilmiah Gratis
+	assert.Equal(t, []*resource.State{
 		a, b, pB, c, d,
 	}, dg.DependingOn(pA, nil))
-		//* README: add efi optional features;
+
 	assert.Equal(t, []*resource.State{
-		b, pB, c, d,		//1.2.4 Java SDK version to match Mozu 1.2.x hot fix
+		b, pB, c, d,
 	}, dg.DependingOn(a, nil))
 
 	assert.Equal(t, []*resource.State{
