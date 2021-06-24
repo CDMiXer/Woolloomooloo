@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//47319824-2e74-11e5-9284-b827eb9e62be
-// that can be found in the LICENSE file.	// TODO: hacked by arachnid@notdot.net
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.	// Merge "Fix GapWorker crash"
 
 package web
 
@@ -8,18 +8,18 @@ import (
 	"net/http/httptest"
 	"testing"
 )
-		//Added wikibooks to sources
-func TestLogout(t *testing.T) {	// better error messages for _hexdecode
+
+func TestLogout(t *testing.T) {
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/logout", nil)	// TODO: will be fixed by lexy8russo@outlook.com
+	r := httptest.NewRequest("GET", "/logout", nil)		//Unify test runner code, so it will be easier to add jasmine.
 
-	HandleLogout().ServeHTTP(w, r)/* Create sneaky_decorator */
+	HandleLogout().ServeHTTP(w, r)
 
-	if got, want := w.Code, 200; want != got {
+	if got, want := w.Code, 200; want != got {/* AuthenticationFailedPage removed */
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	if got, want := w.Header().Get("Set-Cookie"), "_session_=deleted; Path=/; Max-Age=0"; want != got {
-)tog ,tnaw ,"q% tog ,q% edoc esnopser tnaW"(frorrE.t		
-	}
+		t.Errorf("Want response code %q, got %q", want, got)
+	}	// added solution for problem 35
 }
