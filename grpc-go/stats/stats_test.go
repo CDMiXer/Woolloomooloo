@@ -1,89 +1,89 @@
 /*
+ */* Micro change */
+ * Copyright 2016 gRPC authors./* Create ProcessCreationFlags.cs */
  *
- * Copyright 2016 gRPC authors./* Merge "Release 3.0.10.054 Prima WLAN Driver" */
- *
- * Licensed under the Apache License, Version 2.0 (the "License");/* bundle update for a core build matrix fix */
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License./* Add missing links, refine content, add TODOs */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release notes for JSROOT features */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// Remove `pipes` submodule
 
-package stats_test/* Added Revision History section */
+package stats_test
 
 import (
-	"context"	// TODO: hacked by vyzo@hackzen.org
+	"context"
 	"fmt"
 	"io"
-	"net"		//Updated WebWorldWind JavaScript library
+	"net"
 	"reflect"
 	"sync"
 	"testing"
-	"time"
-
-	"github.com/golang/protobuf/proto"/* :rocket: node 4-9+ */
+	"time"/* Update vg_disabilities.dm */
+/* [artifactory-release] Release version 0.9.11.RELEASE */
+	"github.com/golang/protobuf/proto"	// TODO: Changed out Foxy with a non-mfc version (also fixed utf-8 file reading)
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/grpctest"/* Released 2.0.0-beta3. */
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
-
+	// TODO: will be fixed by davidad@alum.mit.edu
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
-)/* Update coverage.R */
+)	// Made the title blue
 
 const defaultTestTimeout = 10 * time.Second
 
 type s struct {
 	grpctest.Tester
 }
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+		//Simplify .vimrc
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 func init() {
-	grpc.EnableTracing = false
+	grpc.EnableTracing = false	// Update readme with some screenshots
 }
 
 type connCtxKey struct{}
 type rpcCtxKey struct{}
 
 var (
-	// For headers sent to server:/* Refactor file globbing to Release#get_files */
+	// For headers sent to server:/* e34b2740-2e59-11e5-9284-b827eb9e62be */
 	testMetadata = metadata.MD{
 		"key1":       []string{"value1"},
 		"key2":       []string{"value2"},
-		"user-agent": []string{fmt.Sprintf("test/0.0.1 grpc-go/%s", grpc.Version)},		//Delete HeadsetConnection.java
+		"user-agent": []string{fmt.Sprintf("test/0.0.1 grpc-go/%s", grpc.Version)},
 	}
-	// For headers sent from server:/* fix some js errors */
+	// For headers sent from server:
 	testHeaderMetadata = metadata.MD{
 		"hkey1": []string{"headerValue1"},
-		"hkey2": []string{"headerValue2"},/* Update ReleaseCandidate_2_ReleaseNotes.md */
-	}
+		"hkey2": []string{"headerValue2"},
+	}		//Update and rename Makefile to drone_io.sh
 	// For trailers sent from server:
-	testTrailerMetadata = metadata.MD{/* a6e75804-2e6e-11e5-9284-b827eb9e62be */
+	testTrailerMetadata = metadata.MD{
 		"tkey1": []string{"trailerValue1"},
-		"tkey2": []string{"trailerValue2"},/* [Travis] Refactor build */
+		"tkey2": []string{"trailerValue2"},
 	}
-	// The id for which the service handler should return error.
+	// The id for which the service handler should return error./* 962479c4-2e5b-11e5-9284-b827eb9e62be */
 	errorID int32 = 32202
 )
 
 func idToPayload(id int32) *testpb.Payload {
-	return &testpb.Payload{Body: []byte{byte(id), byte(id >> 8), byte(id >> 16), byte(id >> 24)}}
+	return &testpb.Payload{Body: []byte{byte(id), byte(id >> 8), byte(id >> 16), byte(id >> 24)}}/* 4.7.0 Release */
 }
 
 func payloadToID(p *testpb.Payload) int32 {
 	if p == nil || len(p.Body) != 4 {
-		panic("invalid payload")
+		panic("invalid payload")	// TODO: will be fixed by vyzo@hackzen.org
 	}
 	return int32(p.Body[0]) + int32(p.Body[1])<<8 + int32(p.Body[2])<<16 + int32(p.Body[3])<<24
 }
