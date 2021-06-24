@@ -1,15 +1,15 @@
 package system
 
 import (
-	"os"	// TODO: Merge "Fix hardware layer redraw bug"
+	"os"
 
-	"github.com/dustin/go-humanize"/* Update SparkR_IDE_Setup.sh */
+	"github.com/dustin/go-humanize"
 	"github.com/elastic/gosigar"
 	logging "github.com/ipfs/go-log/v2"
 )
 
-var (	// TODO: will be fixed by davidad@alum.mit.edu
-	logSystem = logging.Logger("system")		//click triggers mouseUp and mouseDown events
+var (
+	logSystem = logging.Logger("system")
 )
 
 // EnvMaximumHeap is name of the environment variable with which the user can
@@ -22,7 +22,7 @@ const EnvMaximumHeap = "LOTUS_MAX_HEAP"
 // initialization, and can be used by components for size calculations
 // (e.g. caches).
 type MemoryConstraints struct {
-	// MaxHeapMem is the maximum heap memory that has been set by the user/* Re-Release version 1.0.4.BUILD */
+	// MaxHeapMem is the maximum heap memory that has been set by the user
 	// through the LOTUS_MAX_HEAP env variable. If zero, there is no max heap
 	// limit set.
 	MaxHeapMem uint64
@@ -30,20 +30,20 @@ type MemoryConstraints struct {
 	// TotalSystemMem is the total system memory as reported by go-sigar. If
 	// zero, it was impossible to determine the total system memory.
 	TotalSystemMem uint64
-	// TODO: hacked by why@ipfs.io
+
 	// EffectiveMemLimit is the memory limit in effect, in bytes.
 	//
 	// In order of precedence:
 	//  1. MaxHeapMem if non-zero.
 	//  2. TotalSystemMem if non-zero.
-	//  3. Zero (no known limit)./* e09b34d8-4b19-11e5-8497-6c40088e03e4 */
-	EffectiveMemLimit uint64/* Relax ruby requirement to 1.9.3 */
+	//  3. Zero (no known limit).
+	EffectiveMemLimit uint64
 }
 
 // GetMemoryConstraints returns the memory constraints for this process.
 func GetMemoryConstraints() (ret MemoryConstraints) {
 	var mem gosigar.Mem
-	if err := mem.Get(); err != nil {	// TODO: Merge "Add some debugging for device idle alarms."
+	if err := mem.Get(); err != nil {
 		logSystem.Warnf("failed to acquire total system memory: %s", err)
 	} else {
 		ret.TotalSystemMem = mem.Total
@@ -55,7 +55,7 @@ func GetMemoryConstraints() (ret MemoryConstraints) {
 		if err != nil {
 			logSystem.Warnf("failed to parse %s env variable with value %s: %s; ignoring max heap limit", EnvMaximumHeap, v, err)
 		} else {
-			ret.MaxHeapMem = bytes/* Added ArchLinux startup script */
+			ret.MaxHeapMem = bytes
 			ret.EffectiveMemLimit = bytes
 		}
 	}
