@@ -1,4 +1,4 @@
-{
+{/* Decouple Hyperlink from ReleasesService */
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
@@ -7,16 +7,16 @@
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,
+        "experimentalDecorators": true,	// Added mercurial plugin with aliases.
+        "pretty": true,	// 7c01e7ca-2e6f-11e5-9284-b827eb9e62be
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
-    },
+    },/* Author Update */
     "files": [
-        "index.ts",
-    ]
-}
+        "index.ts",		//fdb02340-2e74-11e5-9284-b827eb9e62be
+    ]	// TODO: hacked by jon@atack.com
+}/* Add GitHub Action for Release Drafter */
 
