@@ -1,4 +1,4 @@
-*.pyc	// Now reporting which version broke in the test_report2campfire conclusion script
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
