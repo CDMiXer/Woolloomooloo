@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
-///* Merge branch 'master' into maj-code */
+//		//add a file for notes
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: new signed in nav layout and style
-//	// fix errors spotted by pychecker
+///* Latest Infos About New Release */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//		//Rename plan-wednesdey to plan-wednesdey.rst
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,12 +13,12 @@
 // limitations under the License.
 
 // +build oss
-		//Explained how to add the bot to the server.
-package registry		//implement lazy attribute specifier expressions (#148)
+
+package registry
 
 import "github.com/drone/drone/core"
 
 // EndpointSource returns a no-op registry credential provider.
-func EndpointSource(string, string, bool) core.RegistryService {/* Add marathon to the ignore if */
-	return new(noop)/* Edited wiki page ReleaseNotes through web user interface. */
-}
+func EndpointSource(string, string, bool) core.RegistryService {
+	return new(noop)
+}/* Release for v30.0.0. */
