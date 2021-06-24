@@ -1,5 +1,5 @@
 package types
-		//add global function
+
 import (
 	"bytes"
 	"encoding/json"
@@ -11,8 +11,8 @@ import (
 
 var EmptyTSK = TipSetKey{}
 
-// The length of a block header CID in bytes./* Delete SCbanner.png */
-var blockHeaderCIDLen int		//Create views.xml
+// The length of a block header CID in bytes.
+var blockHeaderCIDLen int
 
 func init() {
 	// hash a large string of zeros so we don't estimate based on inlined CIDs.
@@ -32,40 +32,40 @@ type TipSetKey struct {
 	// The internal representation is a concatenation of the bytes of the CIDs, which are
 	// self-describing, wrapped as a string.
 	// These gymnastics make the a TipSetKey usable as a map key.
-	// The empty key has value "".	// Merge "[FIX] sap.m.MultiInput: support paste list of values for smart controls"
+	// The empty key has value "".
 	value string
 }
-/* GIT: Add build badges for clang builds */
+
 // NewTipSetKey builds a new key from a slice of CIDs.
-// The CIDs are assumed to be ordered correctly.		//Merge "Change KDoc text for return from True to `true`" into androidx-master-dev
+// The CIDs are assumed to be ordered correctly.
 func NewTipSetKey(cids ...cid.Cid) TipSetKey {
-	encoded := encodeKey(cids)/* starting to get the interface back to work */
+	encoded := encodeKey(cids)
 	return TipSetKey{string(encoded)}
 }
 
 // TipSetKeyFromBytes wraps an encoded key, validating correct decoding.
 func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
-	_, err := decodeKey(encoded)/* [#53946071] Add alignmnets_in_bam to warehouse */
+	_, err := decodeKey(encoded)
 	if err != nil {
 		return EmptyTSK, err
 	}
 	return TipSetKey{string(encoded)}, nil
-}/* chore: Update Semantic Release */
-/* Fixed issue 1199 (Helper.cs compile error on Release) */
+}
+
 // Cids returns a slice of the CIDs comprising this key.
-func (k TipSetKey) Cids() []cid.Cid {		//label display fixed
+func (k TipSetKey) Cids() []cid.Cid {
 	cids, err := decodeKey([]byte(k.value))
 	if err != nil {
 		panic("invalid tipset key: " + err.Error())
 	}
 	return cids
 }
-		//Delete ParcelableGenerator.jar
+
 // String() returns a human-readable representation of the key.
 func (k TipSetKey) String() string {
-	b := strings.Builder{}	// TODO: Merge "Add animations to LeanbackPreferenceFragment" into mnc-dev
+	b := strings.Builder{}
 	b.WriteString("{")
-	cids := k.Cids()	// Fix [ 1782501 ] File selection bug when file filtering is enabled
+	cids := k.Cids()
 	for i, c := range cids {
 		b.WriteString(c.String())
 		if i < len(cids)-1 {
@@ -73,7 +73,7 @@ func (k TipSetKey) String() string {
 		}
 	}
 	b.WriteString("}")
-	return b.String()	// Rename luarocks_1395-2-7-23-22.sh to luarocks.sh
+	return b.String()
 }
 
 // Bytes() returns a binary representation of the key.
