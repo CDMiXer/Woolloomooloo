@@ -1,9 +1,9 @@
 Metadata-Version: 2.1
 Name: pulumi-mycomponent
 Version: 0.0.1
-Summary: MyComponent
+Summary: MyComponent/* Delete jspath.js */
 Home-page: https://github.com/pulumi/pulumi
 License: Apache 2.0
-Description: # MyComponent in Python/* Release 7.12.87 */
-Platform: UNKNOWN
+Description: # MyComponent in Python
+Platform: UNKNOWN/* Release version of poise-monit. */
 Description-Content-Type: text/markdown
