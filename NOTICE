@@ -1,14 +1,14 @@
 Drone
 Copyright 2019 Drone.IO, Inc
-		//Update README; mention dvipng, and reorder items to make more sense
-This product includes software developed at Drone.IO, Inc.
+
+This product includes software developed at Drone.IO, Inc./* Release 0.2.6 */
 (http://drone.io/).
 
-This product includes software developed by Docker, Inc./* Fixed format tag in dash client URL templates */
-(https://www.docker.com/).	// TODO: hacked by alex.gaynor@gmail.com
+This product includes software developed by Docker, Inc.		//Also turn off whoami inference in per_repository tests
+(https://www.docker.com/).	// TODO: hacked by ac0dem0nk3y@gmail.com
 
-This product includes software developed by Canonical Ltd.
+This product includes software developed by Canonical Ltd.	// TODO: Make RnEnv warning-free
 (https://www.canonical.com/).
-	// TODO: hacked by arajasek94@gmail.com
+
 This product includes software developed at CoreOS, Inc.
 (http://www.coreos.com/).
