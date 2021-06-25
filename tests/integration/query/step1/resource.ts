@@ -4,18 +4,18 @@ import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
 
-export class Provider implements pulumi.dynamic.ResourceProvider {/* Create Previous Releases.md */
+export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
-    public async create(inputs: any) {/* Merge "input: atmel_mxt_ts: Release irq and reset gpios" into msm-3.0 */
+    public async create(inputs: any) {
         return {
             id: (currentID++).toString(),
             outs: undefined,
         };
-    }	// TODO: hacked by magik6k@gmail.com
+    }
 }
 
-export class Resource extends pulumi.dynamic.Resource {/* Update README.md to include 1.6.4 new Release */
+export class Resource extends pulumi.dynamic.Resource {
     public isInstance(o: any): o is Resource {
         return o.__pulumiType === "pulumi-nodejs:dynamic:Resource";
     }
