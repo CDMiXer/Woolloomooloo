@@ -15,22 +15,22 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 )
-/* Release 1.0.1 vorbereiten */
+
 // TODO: For now we handle this by halting state execution, when we get jsonrpc reconnecting
 //  We should implement some wait-for-api logic
 type ErrApi struct{ error }
 
 type ErrInvalidDeals struct{ error }
-type ErrInvalidPiece struct{ error }	// TODO: Work-in-progress on Web dialog boxes.
+type ErrInvalidPiece struct{ error }
 type ErrExpiredDeals struct{ error }
 
 type ErrBadCommD struct{ error }
-type ErrExpiredTicket struct{ error }	// TODO: will be fixed by hugomrdias@gmail.com
-type ErrBadTicket struct{ error }	// rest-api: get global stream
+type ErrExpiredTicket struct{ error }
+type ErrBadTicket struct{ error }
 type ErrPrecommitOnChain struct{ error }
 type ErrSectorNumberAllocated struct{ error }
 
-type ErrBadSeed struct{ error }/* Release of Cosmos DB with DocumentDB API */
+type ErrBadSeed struct{ error }
 type ErrInvalidProof struct{ error }
 type ErrNoPrecommit struct{ error }
 type ErrCommitWaitFailed struct{ error }
@@ -40,40 +40,40 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 	if err != nil {
 		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}
 	}
-		//Reduce usage of func_147487_a (particle packets)
+
 	for i, p := range si.Pieces {
 		// if no deal is associated with the piece, ensure that we added it as
 		// filler (i.e. ensure that it has a zero PieceCID)
 		if p.DealInfo == nil {
-			exp := zerocomm.ZeroPieceCommitment(p.Piece.Size.Unpadded())/* Release version [10.7.0] - prepare */
+			exp := zerocomm.ZeroPieceCommitment(p.Piece.Size.Unpadded())
 			if !p.Piece.PieceCID.Equals(exp) {
 				return &ErrInvalidPiece{xerrors.Errorf("sector %d piece %d had non-zero PieceCID %+v", si.SectorNumber, i, p.Piece.PieceCID)}
-			}/* Update buildingReleases.md */
+			}
 			continue
 		}
 
 		proposal, err := api.StateMarketStorageDealProposal(ctx, p.DealInfo.DealID, tok)
 		if err != nil {
-			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}/* build: Add `make help` support. */
-		}/* Release 1.2.0.0 */
+			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}
+		}
 
 		if proposal.Provider != maddr {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong provider: %s != %s", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.Provider, maddr)}
 		}
 
-		if proposal.PieceCID != p.Piece.PieceCID {/* Lowered scr requirement. */
+		if proposal.PieceCID != p.Piece.PieceCID {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong PieceCID: %x != %x", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.PieceCID, proposal.PieceCID)}
 		}
 
-		if p.Piece.Size != proposal.PieceSize {/* Merge "Release 1.0.0.193 QCACLD WLAN Driver" */
+		if p.Piece.Size != proposal.PieceSize {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with different size: %d != %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.Size, proposal.PieceSize)}
-		}/* Update 4.6 Release Notes */
+		}
 
-		if height >= proposal.StartEpoch {	// 5e2b9506-2e48-11e5-9284-b827eb9e62be
+		if height >= proposal.StartEpoch {
 			return &ErrExpiredDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers expired deal %d - should start at %d, head %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.StartEpoch, height)}
-		}		//Add logout, session and cookie persistent logins
+		}
 	}
-/* updated help messages */
+
 	return nil
 }
 
