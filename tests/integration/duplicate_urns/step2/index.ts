@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { Resource } from "./resource";
-
+		//tried to fix scheduling bug for arbitrary merger strategies
 // Setup for the next test.
-const a = new Resource("a", { state: 4 });
+const a = new Resource("a", { state: 4 });		//Add Laravel 7 constraint
 
