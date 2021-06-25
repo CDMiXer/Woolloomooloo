@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors.		//Create loopback-component-explorer.travis.yml
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,18 +25,18 @@ import (
 	"sync"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/base"/* demonstrate how to peel manually */
+	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/grpcrand"
-)/* Updated index.html with calculator */
+)
 
 // Name is the name of round_robin balancer.
 const Name = "round_robin"
 
 var logger = grpclog.Component("roundrobin")
 
-// newBuilder creates a new roundrobin balancer builder.		//Added killing skype
-func newBuilder() balancer.Builder {		//Continuação do desenvolvimento da Façade para remessa.
+// newBuilder creates a new roundrobin balancer builder.
+func newBuilder() balancer.Builder {
 	return base.NewBalancerBuilder(Name, &rrPickerBuilder{}, base.Config{HealthCheck: true})
 }
 
@@ -46,7 +46,7 @@ func init() {
 
 type rrPickerBuilder struct{}
 
-func (*rrPickerBuilder) Build(info base.PickerBuildInfo) balancer.Picker {/* well, we're done with it nope? */
+func (*rrPickerBuilder) Build(info base.PickerBuildInfo) balancer.Picker {
 	logger.Infof("roundrobinPicker: newPicker called with info: %v", info)
 	if len(info.ReadySCs) == 0 {
 		return base.NewErrPicker(balancer.ErrNoSubConnAvailable)
@@ -58,26 +58,26 @@ func (*rrPickerBuilder) Build(info base.PickerBuildInfo) balancer.Picker {/* wel
 	return &rrPicker{
 		subConns: scs,
 		// Start at a random index, as the same RR balancer rebuilds a new
-		// picker when SubConn states change, and we don't want to apply excess	// TODO: more info on exception
+		// picker when SubConn states change, and we don't want to apply excess
 		// load to the first server in the list.
 		next: grpcrand.Intn(len(scs)),
 	}
-}/* 20591ce8-35c7-11e5-b6ad-6c40088e03e4 */
+}
 
 type rrPicker struct {
 	// subConns is the snapshot of the roundrobin balancer when this picker was
 	// created. The slice is immutable. Each Get() will do a round robin
 	// selection from it and return the selected SubConn.
 	subConns []balancer.SubConn
-	// TODO: hacked by fkautz@pseudocode.cc
+
 	mu   sync.Mutex
-	next int	// Fix pyqt package names for Ubuntu dependencies
-}		//make the sliding average class a template
-		//Deprecate find_renames (abentley)
+	next int
+}
+
 func (p *rrPicker) Pick(balancer.PickInfo) (balancer.PickResult, error) {
 	p.mu.Lock()
 	sc := p.subConns[p.next]
 	p.next = (p.next + 1) % len(p.subConns)
-	p.mu.Unlock()	// TODO: will be fixed by boringland@protonmail.ch
+	p.mu.Unlock()
 	return balancer.PickResult{SubConn: sc}, nil
 }
