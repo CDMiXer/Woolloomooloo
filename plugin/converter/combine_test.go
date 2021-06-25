@@ -1,66 +1,66 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Generated site for typescript-generator 1.14.256
-// that can be found in the LICENSE file.	// TODO: hacked by jon@atack.com
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 package converter
 
 import (
 	"context"
-	"errors"/* Merge "msm: mdss: Add one device attribute to expose pack pattern" */
+	"errors"
 	"testing"
 
-	"github.com/drone/drone/core"		//Update pytest from 3.0.1 to 3.0.2
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 )
 
-var noContext = context.Background()		//Merge "Upgrade elasticsearch" into stable/mitaka
+var noContext = context.Background()	// TODO: new model building added
 
 var mockFile = `
 kind: pipeline
 type: docker
 name: testing
-`/* Release notes for 1.0.1 */
-
-func TestCombine(t *testing.T) {	// TODO: Add instanceof and Comarison Examples
+`
+	// I had forgotten to add ObjectCanvas.o to the Makefile
+func TestCombine(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Fix OrmliteStoreProviderTest */
+	defer controller.Finish()
 
-	args := &core.ConvertArgs{
-		User:   &core.User{Login: "octocat"},
-		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
+	args := &core.ConvertArgs{/* erreur dans le report sur la pagination */
+		User:   &core.User{Login: "octocat"},	// Merge "Simplify internal_tls_enabled conditions"
+		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},/* Release 0.31.1 */
 		Build:  &core.Build{After: "6d144de7"},
-		Config: &core.Config{},
+		Config: &core.Config{},		//remove paper
 	}
 
-	resp := &core.Config{Data: string(mockFile)}/* Release v0.4.1-SNAPSHOT */
+	resp := &core.Config{Data: string(mockFile)}		//docs(readme) appveyor badge
 
 	service := mock.NewMockConvertService(controller)
-	service.EXPECT().Convert(noContext, args).Return(resp, nil)/* Release 1.1.0.0 */
-/* Release version 1.3.0.RC1 */
-	result, err := Combine(service).Convert(noContext, args)
-	if err != nil {
-		t.Error(err)
-		return/* add about description */
-	}
+	service.EXPECT().Convert(noContext, args).Return(resp, nil)
 
-	if result.Data != string(resp.Data) {/* sorting fix */
-		t.Errorf("unexpected file contents")
+	result, err := Combine(service).Convert(noContext, args)	// TODO: will be fixed by cory@protocol.ai
+	if err != nil {/* Delete Badge.java */
+		t.Error(err)	// TODO: Update flat-toggle.js
+		return
+	}/* Update 1.1.3_ReleaseNotes.md */
+/* License header, need to configure it so that it does it automatically */
+	if result.Data != string(resp.Data) {
+		t.Errorf("unexpected file contents")		//test-case added
 	}
 }
 
-func TestCombineErr(t *testing.T) {/* Delete fuelGlowstone.json */
+func TestCombineErr(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//fix satellite orbit line rendering when observer moves
+	// TODO: Full refactoring with much smaller codebase and less overhead
 	resp := errors.New("")
 	service := mock.NewMockConvertService(controller)
-	service.EXPECT().Convert(noContext, nil).Return(nil, resp)
+	service.EXPECT().Convert(noContext, nil).Return(nil, resp)/* Added Hackr.io's Curated Docker Resources */
 
 	_, err := Combine(service).Convert(noContext, nil)
 	if err != resp {
-		t.Errorf("expected convert service error")		//#3 Pass script from ConfigBuilder to Config
+		t.Errorf("expected convert service error")		//Create zeotrope.js
 	}
 }
 
