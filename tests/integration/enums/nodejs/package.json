@@ -1,10 +1,10 @@
-{		//Collecting requests from kharon-hermes and saving the access among them
+{
   "name": "enum_output_ts",
   "devDependencies": {
-    "typescript": "^4.0.0",		//merge back updated values-de/strings.xml
+    "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
   },
-  "peerDependencies": {/* Update derivetype.test.ts */
+  "peerDependencies": {/* CBR: use fallback for solidRAR archives */
     "@pulumi/pulumi": "latest"
-  }/* Release Notes: fix mirrors link URL */
+  }
 }
