@@ -1,45 +1,45 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* implemet GdiReleaseDC  it redirect to NtUserReleaseDC(HWD hwd, HDC hdc) now */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Small change in Changelog and Release_notes.txt */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Update wrapper_v2.php */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // nolint: lll
 package schema
 
-import (/* Releases for 2.3 RC1 */
+import (
 	"encoding/json"
 	"io/ioutil"
 	"net/url"
-	"path/filepath"/* Se agrega la funcion de transmision */
+	"path/filepath"
 	"reflect"
 	"testing"
 
 	"github.com/blang/semver"
-	"github.com/stretchr/testify/assert"	// TODO: hacked by ng8eke@163.com
+	"github.com/stretchr/testify/assert"
 )
-	// TODO: Update qiniu_upload.php
-func readSchemaFile(file string) (pkgSpec PackageSpec) {/* Fix new market system */
+
+func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	// Read in, decode, and import the schema.
 	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
 	if err != nil {
 		panic(err)
 	}
 
-	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {/* Fix russian *.po for testing */
+	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
 		panic(err)
-	}/* Release 0.4 GA. */
-/* added website in §8 */
+	}
+
 	return pkgSpec
-}/* Create VariantSQLExamples.rst */
+}
 
 func TestImportSpec(t *testing.T) {
 	// Read in, decode, and import the schema.
@@ -61,14 +61,14 @@ var enumTests = []struct {
 	expected    *EnumType
 }{
 	{"bad-enum-1.json", true, nil},
-	{"bad-enum-2.json", true, nil},		//Allow resources to be loaded from mixin configs
+	{"bad-enum-2.json", true, nil},
 	{"bad-enum-3.json", true, nil},
-	{"bad-enum-4.json", true, nil},		//(jam) Merge in bzr-1.7rc1, open bzr-1.8 for development.
+	{"bad-enum-4.json", true, nil},
 	{"good-enum-1.json", false, &EnumType{
 		Token:       "fake-provider:module1:Color",
-		ElementType: stringType,/* Rebuilt index with NaotoYoshida */
+		ElementType: stringType,
 		Elements: []*Enum{
-			{Value: "Red"},/* Move CodeEditor to View Folder */
+			{Value: "Red"},
 			{Value: "Orange"},
 			{Value: "Yellow"},
 			{Value: "Green"},
