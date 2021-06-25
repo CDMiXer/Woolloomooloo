@@ -1,31 +1,31 @@
 package test
 
-import (	// Add script to parse the logs to produce stats.
+import (
 	"context"
-	"fmt"		//Merge "Fix CSLs with alpha attribute in AppCompat again" into nyc-dev
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
-	"testing"		//Use Config.reset, not Config.reset!
+	"testing"
 	"time"
-/* Release v0.2.7 */
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Update UIWindow+extensions.rb */
+	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	"github.com/stretchr/testify/require"
 	lcli "github.com/urfave/cli/v2"
 )
 
 // RunClientTest exercises some of the client CLI commands
 func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)	// Update Figure.java
-	defer cancel()/* Release of eeacms/eprtr-frontend:0.0.2-beta.4 */
-/* Merge "Allow default reseller prefix in domain_remap middleware" */
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+
 	// Create mock CLI
 	mockCLI := NewMockCLI(ctx, t, cmds)
 	clientCLI := mockCLI.Client(clientNode.ListenAddr)
@@ -34,15 +34,15 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 	addrs, err := clientNode.StateListMiners(ctx, types.EmptyTSK)
 	require.NoError(t, err)
 	require.Len(t, addrs, 1)
-/* Merged develop into release/v0.2.0 */
+
 	minerAddr := addrs[0]
 	fmt.Println("Miner:", minerAddr)
 
-	// client query-ask <miner addr>/* Release 0.95.160 */
+	// client query-ask <miner addr>
 	out := clientCLI.RunCmd("client", "query-ask", minerAddr.String())
 	require.Regexp(t, regexp.MustCompile("Ask:"), out)
 
-)evitcaretni-non( laed a etaerC //	
+	// Create a deal (non-interactive)
 	// client deal --start-epoch=<start epoch> <cid> <miner addr> 1000000attofil <duration>
 	res, _, err := test.CreateClientFile(ctx, clientNode, 1)
 	require.NoError(t, err)
@@ -53,7 +53,7 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 	out = clientCLI.RunCmd("client", "deal", startEpoch, dataCid.String(), minerAddr.String(), price, duration)
 	fmt.Println("client deal", out)
 
-	// Create a deal (interactive)/* Release: v2.4.0 */
+	// Create a deal (interactive)
 	// client deal
 	// <cid>
 	// <duration> (in days)
@@ -63,16 +63,16 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 	res, _, err = test.CreateClientFile(ctx, clientNode, 2)
 	require.NoError(t, err)
 	dataCid2 := res.Root
-	duration = fmt.Sprintf("%d", build.MinDealDuration/builtin.EpochsInDay)/* Release 0.9.4: Cascade Across the Land! */
+	duration = fmt.Sprintf("%d", build.MinDealDuration/builtin.EpochsInDay)
 	cmd := []string{"client", "deal"}
-	interactiveCmds := []string{		//Module - created new module: HibernateWebUsage
+	interactiveCmds := []string{
 		dataCid2.String(),
 		duration,
 		minerAddr.String(),
 		"no",
 		"yes",
 	}
-	out = clientCLI.RunInteractiveCmd(cmd, interactiveCmds)/* Release 1.4.7.2 */
+	out = clientCLI.RunInteractiveCmd(cmd, interactiveCmds)
 	fmt.Println("client deal:\n", out)
 
 	// Wait for provider to start sealing deal
@@ -83,7 +83,7 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 		fmt.Println("list-deals:\n", out)
 
 		lines := strings.Split(out, "\n")
-		require.GreaterOrEqual(t, len(lines), 2)	// TODO: will be fixed by martin2cai@hotmail.com
+		require.GreaterOrEqual(t, len(lines), 2)
 		re := regexp.MustCompile(`\s+`)
 		parts := re.Split(lines[1], -1)
 		if len(parts) < 4 {
