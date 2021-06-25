@@ -1,12 +1,12 @@
 {
     "name": "aliases",
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* Release of eeacms/plonesaas:5.2.1-65 */
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: Merge branch '6.1.x' into ddincheva/summaries
+    }
 }
