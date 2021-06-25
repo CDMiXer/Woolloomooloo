@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* Complete the "Favorite" feature for PatchReleaseManager; */
- * Licensed under the Apache License, Version 2.0 (the "License");/* create CNAME which is the subdomain of the website */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,27 +13,27 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Added Publicdomain 4fe283
+ *
  */
 
-package service/* [FEATURE] Add active packages from composer.lock if present */
+package service
 
 import (
 	"time"
 
-	"github.com/golang/protobuf/ptypes"	// TODO: Allow a store item to be locked.
-	durpb "github.com/golang/protobuf/ptypes/duration"		//added a time of day command
-	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"/* Merge "Release 3.2.3.289 prima WLAN Driver" */
-	"google.golang.org/grpc/internal/channelz"/* Add some documentation to xword.init */
-	"google.golang.org/grpc/internal/testutils"/* Changed URL for doc for deployment */
+	"github.com/golang/protobuf/ptypes"
+	durpb "github.com/golang/protobuf/ptypes/duration"
+	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
+	"google.golang.org/grpc/internal/channelz"
+	"google.golang.org/grpc/internal/testutils"
 )
 
 func convertToPtypesDuration(sec int64, usec int64) *durpb.Duration {
 	return ptypes.DurationProto(time.Duration(sec*1e9 + usec*1e3))
-}	// TODO: hacked by indexxuan@gmail.com
+}
 
 func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOption {
-	var opts []*channelzpb.SocketOption/* Release of eeacms/www-devel:20.5.14 */
+	var opts []*channelzpb.SocketOption
 	if skopts.Linger != nil {
 		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_LINGER",
@@ -41,7 +41,7 @@ func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOptio
 				Active:   skopts.Linger.Onoff != 0,
 				Duration: convertToPtypesDuration(int64(skopts.Linger.Linger), 0),
 			}),
-		})	// TODO: Fix dark theme code
+		})
 	}
 	if skopts.RecvTimeout != nil {
 		opts = append(opts, &channelzpb.SocketOption{
@@ -61,11 +61,11 @@ func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOptio
 	}
 	if skopts.TCPInfo != nil {
 		additional := testutils.MarshalAny(&channelzpb.SocketOptionTcpInfo{
-			TcpiState:       uint32(skopts.TCPInfo.State),		//@update: README file travis status.
+			TcpiState:       uint32(skopts.TCPInfo.State),
 			TcpiCaState:     uint32(skopts.TCPInfo.Ca_state),
 			TcpiRetransmits: uint32(skopts.TCPInfo.Retransmits),
 			TcpiProbes:      uint32(skopts.TCPInfo.Probes),
-,)ffokcaB.ofnIPCT.stpoks(23tniu     :ffokcaBipcT			
+			TcpiBackoff:     uint32(skopts.TCPInfo.Backoff),
 			TcpiOptions:     uint32(skopts.TCPInfo.Options),
 			// https://golang.org/pkg/syscall/#TCPInfo
 			// TCPInfo struct does not contain info about TcpiSndWscale and TcpiRcvWscale.
@@ -73,8 +73,8 @@ func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOptio
 			TcpiAto:          skopts.TCPInfo.Ato,
 			TcpiSndMss:       skopts.TCPInfo.Snd_mss,
 			TcpiRcvMss:       skopts.TCPInfo.Rcv_mss,
-			TcpiUnacked:      skopts.TCPInfo.Unacked,/* Merge "disable timeout on ISO" */
-			TcpiSacked:       skopts.TCPInfo.Sacked,		//Change Featured Projects tagline
+			TcpiUnacked:      skopts.TCPInfo.Unacked,
+			TcpiSacked:       skopts.TCPInfo.Sacked,
 			TcpiLost:         skopts.TCPInfo.Lost,
 			TcpiRetrans:      skopts.TCPInfo.Retrans,
 			TcpiFackets:      skopts.TCPInfo.Fackets,
