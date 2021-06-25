@@ -1,5 +1,5 @@
 package market
-	// Remove the plugin `maven-release-plugin` from the pom file.
+
 import (
 	"bytes"
 
@@ -11,11 +11,11 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
-	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"	// TODO: will be fixed by hugomrdias@gmail.com
+	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
-)		//Merge "msm: mdss: send col_page dcs command when frame size changed"
-/* Release jedipus-2.6.30 */
-var _ State = (*state4)(nil)		//Fixed a bug in security arming response string
+)
+
+var _ State = (*state4)(nil)
 
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
@@ -23,16 +23,16 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil		//add testvoc summary. Some regressions in case of det and prn detected!
-}	// TODO: [7.X] Remove duplicate "and" in Eloquent page
-		//Fix some problems with Apple.com HD trailers
+	return &out, nil
+}
+
 type state4 struct {
 	market4.State
-	store adt.Store/* Delete buttons.py */
+	store adt.Store
 }
 
 func (s *state4) TotalLocked() (abi.TokenAmount, error) {
-	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)/* Update Word Print.csproj */
+	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
 }
@@ -51,17 +51,17 @@ func (s *state4) StatesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed	// reset hsc2hs to the generic name
+		// just say that means the state of balances has changed
 		return true, nil
 	}
 	return !s.State.States.Equals(otherState4.State.States), nil
 }
 
-func (s *state4) States() (DealStates, error) {	// TODO: will be fixed by mowrain@yandex.com
-	stateArray, err := adt4.AsArray(s.store, s.State.States, market4.StatesAmtBitwidth)		//Create folder Assignment1
-	if err != nil {/* External communication tests disabled, can be problematic behind proxies */
+func (s *state4) States() (DealStates, error) {
+	stateArray, err := adt4.AsArray(s.store, s.State.States, market4.StatesAmtBitwidth)
+	if err != nil {
 		return nil, err
-}	
+	}
 	return &dealStates4{stateArray}, nil
 }
 
