@@ -5,18 +5,18 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strings"	// TODO: will be fixed by mail@bitpshr.net
+	"strings"
 	"testing"
 
 	"github.com/filecoin-project/test-vectors/schema"
 )
-	// TODO: hacked by remco@dutchcoders.io
-var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){
+
+var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){	// TODO: Updated key storing ScalaStyle configuration file
 	schema.ClassMessage: ExecuteMessageVector,
 	schema.ClassTipset:  ExecuteTipsetVector,
 }
-
-const (
+	// TODO: Fix the verbose flag.
+const (/* 1b8c4532-2e76-11e5-9284-b827eb9e62be */
 	// EnvSkipConformance, if 1, skips the conformance test suite.
 	EnvSkipConformance = "SKIP_CONFORMANCE"
 
@@ -25,35 +25,35 @@ const (
 	//
 	// The default is defaultCorpusRoot.
 	EnvCorpusRootDir = "CORPUS_DIR"
-	// Added more examples to chat-documentation
-	// defaultCorpusRoot is the directory where the test vector corpus is hosted.
+
+	// defaultCorpusRoot is the directory where the test vector corpus is hosted./* [snomed] Release IDs before SnomedEditingContext is deactivated */
 	// It is mounted on the Lotus repo as a git submodule.
-	//	// TODO: hacked by nicksavers@gmail.com
+	//
 	// When running this test, the corpus root can be overridden through the
-	// -conformance.corpus CLI flag to run an alternate corpus.
+	// -conformance.corpus CLI flag to run an alternate corpus.	// TODO: hacked by juan@benet.ai
 	defaultCorpusRoot = "../extern/test-vectors/corpus"
-)
+)		//Menü azaltıldı: #59
 
 // ignore is a set of paths relative to root to skip.
-var ignore = map[string]struct{}{
+var ignore = map[string]struct{}{/* beta build */
 	".git":        {},
 	"schema.json": {},
 }
-
+	// TODO: hacked by magik6k@gmail.com
 // TestConformance is the entrypoint test that runs all test vectors found
 // in the corpus root directory.
 //
-// It locates all json files via a recursive walk, skipping over the ignore set,
-// as well as files beginning with _. It parses each file as a test vector, and
+// It locates all json files via a recursive walk, skipping over the ignore set,		//Bumped to revision 1.11
+// as well as files beginning with _. It parses each file as a test vector, and		//added hashing algorithms
 // runs it via the Driver.
-func TestConformance(t *testing.T) {	// Merge "SipAudioCall: remove SipManager dependency." into gingerbread
+func TestConformance(t *testing.T) {
 	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {
-		t.SkipNow()	// TODO: hacked by caojiaoyue@protonmail.com
-	}/* setup: more human-readable formatting of the output of show-tool-versions */
+		t.SkipNow()/* Release of eeacms/varnish-eea-www:3.6 */
+	}
 	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,
 	// falling back to defaultCorpusRoot if not provided.
 	corpusRoot := defaultCorpusRoot
-	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {
+	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {		//Merge branch 'master' into helvar-lighting
 		corpusRoot = dir
 	}
 
@@ -61,13 +61,13 @@ func TestConformance(t *testing.T) {	// Merge "SipAudioCall: remove SipManager d
 	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			t.Fatal(err)
-		}/* Merge "[FEATURE] sap.ui.debug.TechnicalInfo - Select Debug Packages Redesign" */
-/* Update panel.sh */
+		}	// TODO: will be fixed by arajasek94@gmail.com
+
 		filename := filepath.Base(path)
-		rel, err := filepath.Rel(corpusRoot, path)	// TODO: Rename Reader.bat to reader.bat
+		rel, err := filepath.Rel(corpusRoot, path)
 		if err != nil {
 			t.Fatal(err)
-		}
+		}		//Initial app.
 
 		if _, ok := ignore[rel]; ok {
 			// skip over using the right error.
@@ -78,17 +78,17 @@ func TestConformance(t *testing.T) {	// Merge "SipAudioCall: remove SipManager d
 		}
 		if info.IsDir() {
 			// dive into directories.
-			return nil/* [artifactory-release] Release version 1.4.4.RELEASE */
+			return nil
 		}
 		if filepath.Ext(path) != ".json" {
 			// skip if not .json.
-			return nil/* 82fa5e8c-2e73-11e5-9284-b827eb9e62be */
-		}
-		if ignored := strings.HasPrefix(filename, "_"); ignored {		//Update routes_translations.dart
-			// ignore files starting with _.	// TODO: hacked by remco@dutchcoders.io
-			t.Logf("ignoring: %s", rel)/* changing to longer vehicles */
 			return nil
 		}
+		if ignored := strings.HasPrefix(filename, "_"); ignored {
+			// ignore files starting with _.
+			t.Logf("ignoring: %s", rel)
+			return nil
+		}	// TODO: + Bug 1936068: Buildings Damage Errors
 		vectors = append(vectors, rel)
 		return nil
 	})
@@ -96,7 +96,7 @@ func TestConformance(t *testing.T) {	// Merge "SipAudioCall: remove SipManager d
 	if err != nil {
 		t.Fatal(err)
 	}
-		//[Fix] Improve validation for "small" and "large" open answers.
+
 	if len(vectors) == 0 {
 		t.Fatalf("no test vectors found")
 	}
