@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
-//		//2ac748b4-2e42-11e5-9284-b827eb9e62be
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merge "IBP: disallow to choose classic provisioning" */
-//		//Update style-home.css
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//New Main function for LDPC stuff.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package builds/* Add jot 124. */
+package builds
 
 import (
 	"net/http"
@@ -29,24 +29,24 @@ import (
 // requests to create a build for the specified commit.
 func HandleCreate(
 	users core.UserStore,
-	repos core.RepositoryStore,		//fdc8ebe2-2e6e-11e5-9284-b827eb9e62be
+	repos core.RepositoryStore,
 	commits core.CommitService,
 	triggerer core.Triggerer,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* Merge "BI Leaf compilation: some code refactoring and introduction of caches" */
+		var (
 			ctx       = r.Context()
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")	// TODO: hacked by hugomrdias@gmail.com
+			name      = chi.URLParam(r, "name")
 			sha       = r.FormValue("commit")
 			branch    = r.FormValue("branch")
 			user, _   = request.UserFrom(ctx)
-		)/* Files can be downloaded at "Releases" */
+		)
 
-		repo, err := repos.FindName(ctx, namespace, name)		//Change Complete to Status - Part 2 (fixes for db changes)
+		repo, err := repos.FindName(ctx, namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* [artifactory-release] Release version 1.3.1.RELEASE */
+			return
 		}
 
 		owner, err := users.Find(ctx, repo.UserID)
@@ -55,10 +55,10 @@ func HandleCreate(
 			return
 		}
 
-		// if the user does not provide a branch, assume the/* initialize commit. */
+		// if the user does not provide a branch, assume the
 		// default repository branch.
 		if branch == "" {
-			branch = repo.Branch	// TODO: will be fixed by arajasek94@gmail.com
+			branch = repo.Branch
 		}
 		// expand the branch to a git reference.
 		ref := scm.ExpandRef(branch, "refs/heads")
@@ -69,14 +69,14 @@ func HandleCreate(
 		} else {
 			commit, err = commits.FindRef(ctx, owner, repo.Slug, ref)
 		}
-		if err != nil {	// Changed smooth factor to array
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
 
 		hook := &core.Hook{
-			Trigger:      user.Login,		//Delete Help.txt
-			Event:        core.EventCustom,	// added ability to start a discussion
+			Trigger:      user.Login,
+			Event:        core.EventCustom,
 			Link:         commit.Link,
 			Timestamp:    commit.Author.Date,
 			Title:        "", // we expect this to be empty.
