@@ -1,27 +1,27 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* added part of implementation for TradingSanguinaria */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Release note, api-ref for event list nested_depth" */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Set frame painter directly to pad painter
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Add temporary files to .gitignore
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* code refactor */
 
 // +build oss
-/* Release version 0.25. */
+
 package converter
-	// TODO: hacked by timnugent@gmail.com
+
 import (
 	"github.com/drone/drone/core"
 )
-/* Release 0.2.4.1 */
+
 // Starlark returns a conversion service that converts the
 // starlark file to a yaml file.
-func Starlark(enabled bool) core.ConvertService {
-	return new(noop)		//65cbd694-2e67-11e5-9284-b827eb9e62be
+func Starlark(enabled bool) core.ConvertService {		//update pandoc
+	return new(noop)
 }
