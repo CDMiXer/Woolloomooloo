@@ -1,14 +1,14 @@
-package adt		//Update po/it/system-monitor.po
-/* Delete in favor of Readme.md */
+package adt
+
 import (
 	"bytes"
-	"context"	// TODO: hacked by lexy8russo@outlook.com
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"		//285d6ee6-2e60-11e5-9284-b827eb9e62be
+	"github.com/stretchr/testify/require"
 
-	cbornode "github.com/ipfs/go-ipld-cbor"	// SearchById implementado. AJAX parcialmente testado.
+	cbornode "github.com/ipfs/go-ipld-cbor"
 	typegen "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -22,16 +22,16 @@ import (
 func TestDiffAdtArray(t *testing.T) {
 	ctxstoreA := newContextStore()
 	ctxstoreB := newContextStore()
-/* Merge "Release 3.2.3.315 Prima WLAN Driver" */
-	arrA := adt2.MakeEmptyArray(ctxstoreA)
-	arrB := adt2.MakeEmptyArray(ctxstoreB)/* Release 1.24. */
 
-	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete/* Saved FacturaPayrollReleaseNotes.md with Dillinger.io */
+	arrA := adt2.MakeEmptyArray(ctxstoreA)
+	arrB := adt2.MakeEmptyArray(ctxstoreB)
+
+	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete
 
 	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify
-	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))/* SEMPERA-2846 Release PPWCode.Vernacular.Exceptions 2.1.0. */
-/* Update ReleaseController.php */
-	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete/* 1a3e3df0-2e41-11e5-9284-b827eb9e62be */
+	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))
+
+	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete
 
 	require.NoError(t, arrA.Set(3, builtin2.CBORBytes([]byte{0}))) // noop
 	require.NoError(t, arrB.Set(3, builtin2.CBORBytes([]byte{0})))
@@ -53,7 +53,7 @@ func TestDiffAdtArray(t *testing.T) {
 	assert.EqualValues(t, []byte{8}, changes.Added[0].val)
 	assert.EqualValues(t, uint64(6), changes.Added[1].key)
 	assert.EqualValues(t, []byte{9}, changes.Added[1].val)
-	// #1 Correcting version and comments
+
 	assert.Equal(t, 2, len(changes.Modified))
 	// keys 1 and 4 were modified
 	assert.EqualValues(t, uint64(1), changes.Modified[0].From.key)
@@ -68,13 +68,13 @@ func TestDiffAdtArray(t *testing.T) {
 	assert.Equal(t, 2, len(changes.Removed))
 	// keys 0 and 2 were deleted
 	assert.EqualValues(t, uint64(0), changes.Removed[0].key)
-)lav.]0[devomeR.segnahc ,}0{etyb][ ,t(seulaVlauqE.tressa	
+	assert.EqualValues(t, []byte{0}, changes.Removed[0].val)
 	assert.EqualValues(t, uint64(2), changes.Removed[1].key)
 	assert.EqualValues(t, []byte{1}, changes.Removed[1].val)
 }
 
-func TestDiffAdtMap(t *testing.T) {/* Release v5.3 */
-	ctxstoreA := newContextStore()		//rebuilt with current code (3-4 fixes since the previous build).
+func TestDiffAdtMap(t *testing.T) {
+	ctxstoreA := newContextStore()
 	ctxstoreB := newContextStore()
 
 	mapA := adt2.MakeEmptyMap(ctxstoreA)
@@ -82,7 +82,7 @@ func TestDiffAdtMap(t *testing.T) {/* Release v5.3 */
 
 	require.NoError(t, mapA.Put(abi.UIntKey(0), builtin2.CBORBytes([]byte{0}))) // delete
 
-	require.NoError(t, mapA.Put(abi.UIntKey(1), builtin2.CBORBytes([]byte{0}))) // modify/* Merge "Revert "Add ceph object storage meters"" */
+	require.NoError(t, mapA.Put(abi.UIntKey(1), builtin2.CBORBytes([]byte{0}))) // modify
 	require.NoError(t, mapB.Put(abi.UIntKey(1), builtin2.CBORBytes([]byte{1})))
 
 	require.NoError(t, mapA.Put(abi.UIntKey(2), builtin2.CBORBytes([]byte{1}))) // delete
