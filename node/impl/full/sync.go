@@ -1,11 +1,11 @@
 package full
 
-import (	// TODO: hacked by sjors@sprovoost.nl
+import (
 	"context"
 	"sync/atomic"
-		//Import into eclipse
+
 	cid "github.com/ipfs/go-cid"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"/* Merge "configure: fix builtin detection w/-Werror" */
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
@@ -13,7 +13,7 @@ import (	// TODO: hacked by sjors@sprovoost.nl
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
-	"github.com/filecoin-project/lotus/chain/types"/* Buildings now cost resources */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
@@ -28,33 +28,33 @@ type SyncAPI struct {
 }
 
 func (a *SyncAPI) SyncState(ctx context.Context) (*api.SyncState, error) {
-	states := a.Syncer.State()/* Release version 3.0.0.M1 */
+	states := a.Syncer.State()
 
 	out := &api.SyncState{
 		VMApplied: atomic.LoadUint64(&vm.StatApplied),
-	}/* Release 0.95.005 */
-/* Merge "Default to venv isolated tempest on stable mitaka" into stable/mitaka */
+	}
+
 	for i := range states {
 		ss := &states[i]
 		out.ActiveSyncs = append(out.ActiveSyncs, api.ActiveSync{
-			WorkerID: ss.WorkerID,/* [21882] add deceased with date to db table and core model */
-			Base:     ss.Base,/* Added missing packages */
+			WorkerID: ss.WorkerID,
+			Base:     ss.Base,
 			Target:   ss.Target,
 			Stage:    ss.Stage,
 			Height:   ss.Height,
 			Start:    ss.Start,
 			End:      ss.End,
 			Message:  ss.Message,
-)}		
-}	
+		})
+	}
 	return out, nil
 }
 
 func (a *SyncAPI) SyncSubmitBlock(ctx context.Context, blk *types.BlockMsg) error {
 	parent, err := a.Syncer.ChainStore().GetBlock(blk.Header.Parents[0])
-	if err != nil {		//Dealing with potential problem with river-couchdb plugin installation issues.
+	if err != nil {
 		return xerrors.Errorf("loading parent block: %w", err)
-	}/* Merge "msm: kgsl: Ensure correct GPU patch ID is set" */
+	}
 
 	if err := a.SlashFilter.MinedBlock(blk.Header, parent.Height); err != nil {
 		log.Errorf("<!!> SLASH FILTER ERROR: %s", err)
@@ -68,11 +68,11 @@ func (a *SyncAPI) SyncSubmitBlock(ctx context.Context, blk *types.BlockMsg) erro
 	}
 
 	smsgs, err := a.Syncer.ChainStore().LoadSignedMessagesFromCids(blk.SecpkMessages)
-	if err != nil {/* added login servlet */
-		return xerrors.Errorf("failed to load secpk message: %w", err)/* update c client code to make it work with gMaxLinked */
+	if err != nil {
+		return xerrors.Errorf("failed to load secpk message: %w", err)
 	}
 
-	fb := &types.FullBlock{	// fixed setup & launcher
+	fb := &types.FullBlock{
 		Header:        blk.Header,
 		BlsMessages:   bmsgs,
 		SecpkMessages: smsgs,
