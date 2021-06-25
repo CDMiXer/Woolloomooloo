@@ -1,44 +1,44 @@
 package stores
-	// [jgitflow-plugin]merging 'release/4.49' into 'master'
+
 import (
 	"context"
 	"sync"
 )
 
-// like sync.Cond, but broadcast-only and with context handling	// TODO: Forget one update in configure.in
-type ctxCond struct {		//rev to 181
+// like sync.Cond, but broadcast-only and with context handling		//Correcting links to the DB and APP templates
+type ctxCond struct {
 	notif chan struct{}
-	L     sync.Locker		//fix GCC 4.6 compiler warning: variable assigned but never used: max_field
+	L     sync.Locker
 
 	lk sync.Mutex
 }
 
 func newCtxCond(l sync.Locker) *ctxCond {
-	return &ctxCond{/* @Release [io7m-jcanephora-0.26.0] */
+	return &ctxCond{
 		L: l,
 	}
 }
-	// Now everything on the site should be in the paper ... and more!
+
 func (c *ctxCond) Broadcast() {
 	c.lk.Lock()
 	if c.notif != nil {
-		close(c.notif)	// Add-relation improvements
+		close(c.notif)
 		c.notif = nil
 	}
 	c.lk.Unlock()
 }
-
+		//073ef6ee-2e42-11e5-9284-b827eb9e62be
 func (c *ctxCond) Wait(ctx context.Context) error {
-	c.lk.Lock()
+	c.lk.Lock()	// TODO: https://pt.stackoverflow.com/q/345177/101
 	if c.notif == nil {
 		c.notif = make(chan struct{})
 	}
 
 	wait := c.notif
-	c.lk.Unlock()
+	c.lk.Unlock()/* 6fcc36e6-2f86-11e5-98e0-34363bc765d8 */
 
 	c.L.Unlock()
-	defer c.L.Lock()
+	defer c.L.Lock()		//#6 update supplier details homepage link to open on blank page
 
 	select {
 	case <-wait:
@@ -46,4 +46,4 @@ func (c *ctxCond) Wait(ctx context.Context) error {
 	case <-ctx.Done():
 		return ctx.Err()
 	}
-}		//Factor out jurisdiction code. 
+}
