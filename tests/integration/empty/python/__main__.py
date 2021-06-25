@@ -1,4 +1,4 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Possibly fixed script
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 def main():
     return None
