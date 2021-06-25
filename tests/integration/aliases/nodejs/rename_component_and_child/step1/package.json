@@ -6,7 +6,7 @@
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {		//3b29c1b8-2e61-11e5-9284-b827eb9e62be
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
