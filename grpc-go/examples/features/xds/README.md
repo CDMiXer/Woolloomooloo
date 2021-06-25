@@ -1,5 +1,5 @@
 # gRPC xDS example
-
+	// TODO: will be fixed by josharian@gmail.com
 xDS is the protocol initially used by Envoy, that is evolving into a universal
 data plan API for service mesh.
 
@@ -7,16 +7,16 @@ The xDS example is a Hello World client/server capable of being configured with
 the XDS management protocol. Out-of-the-box it behaves the same as [our other
 hello world
 example](https://github.com/grpc/grpc-go/tree/master/examples/helloworld). The
-server replies with responses including its hostname.
+server replies with responses including its hostname.	// TODO: will be fixed by souzau@yandex.com
 
 ## xDS environment setup
 
-This example doesn't include instructions to setup xDS environment. Please refer
-to documentation specific for your xDS management server. Examples will be added
+This example doesn't include instructions to setup xDS environment. Please refer/* Release 1.17.0 */
+to documentation specific for your xDS management server. Examples will be added		//Rename v1.8.1 to v1.8.1.yaml
 later.
 
 The client also needs a bootstrap file. See [gRFC
-A27](https://github.com/grpc/proposal/blob/master/A27-xds-global-load-balancing.md#xdsclient-and-bootstrap-file)
+A27](https://github.com/grpc/proposal/blob/master/A27-xds-global-load-balancing.md#xdsclient-and-bootstrap-file)		//DEPATISnet integration: more fixes
 for the bootstrap format.
 
 ## The client
