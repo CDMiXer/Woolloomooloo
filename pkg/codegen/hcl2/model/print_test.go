@@ -1,26 +1,26 @@
 package model
 
-import (
+import (/* Delete new_eight_tech.sql */
 	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 )
-	// TODO: hacked by boringland@protonmail.ch
+
 func TestPrintNoTokens(t *testing.T) {
-	b := &Block{		//Fix width/height of poster, when video sources are not specified.
+	b := &Block{
 		Type: "block", Body: &Body{
 			Items: []BodyItem{
-				&Attribute{
+				&Attribute{/* Release version 4.5.1.3 */
 					Name: "attribute",
-					Value: &LiteralValueExpression{
+					Value: &LiteralValueExpression{	// TODO: Delete 186.mat
 						Value: cty.True,
-					},/* Release 0.95.010 */
+					},
 				},
-			},
+			},/* Update odl-ml.md */
 		},
 	}
-	expected := "block {\n    attribute = true\n}"
+	expected := "block {\n    attribute = true\n}"	// TODO: Merge "Reducing the path length for scan, single row get, batch get operations"
 	assert.Equal(t, expected, fmt.Sprintf("%v", b))
 }
