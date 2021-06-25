@@ -1,4 +1,4 @@
-*.pyc	// TODO: [OCaml] Unbreak make install by providing ocamldoc target
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
