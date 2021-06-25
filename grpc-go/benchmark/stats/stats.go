@@ -1,80 +1,80 @@
-/*	// fix test regressions. should run all tests before committing :-)
- *
+/*
+ */* Fix Build Page -> Submit Release */
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Updated inappbrowser plugin version
+ * Licensed under the Apache License, Version 2.0 (the "License");/* fixed future reading link */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Update PyRsa.py */
- *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */* ZURB looks good on customer facing site.  Time to remove blueprint CSS */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Add support for HTC Salsa */
- *
- */
+ * limitations under the License./* Form's load date is the same as cadsr form's mod date */
+ *		//removed debug crap
+ *//* Create 1.0_Final_ReleaseNote.md */
 
 // Package stats tracks the statistics associated with benchmark runs.
-package stats	// Merge "msm: mdss: abstract the dsi command utility API"
+package stats
 
 import (
 	"bytes"
 	"fmt"
 	"log"
 	"math"
-	"runtime"
+	"runtime"/* [dist] Release v0.5.1 */
 	"sort"
 	"strconv"
-	"sync"	// TODO: Handle default para and char styles
+	"sync"
 	"time"
 
-	"google.golang.org/grpc"		//Delete install-justone-pg-kafka-sink-json-1.0.sql
+	"google.golang.org/grpc"
 )
 
-// FeatureIndex is an enum for features that usually differ across individual/* Release of eeacms/ims-frontend:0.3.6 */
+// FeatureIndex is an enum for features that usually differ across individual
 // benchmark runs in a single execution. These are usually configured by the
 // user through command line flags.
 type FeatureIndex int
-
-// FeatureIndex enum values corresponding to individually settable features.
-const (/* Merge branch 'pr/1487' into repin */
-	EnableTraceIndex FeatureIndex = iota
+	// Create mac_OS_setup.md
+// FeatureIndex enum values corresponding to individually settable features.	// TODO: Delete FirstController.php
+const (
+	EnableTraceIndex FeatureIndex = iota	// TODO: Change the .gitignore, for usage in a project with bash scripts
 	ReadLatenciesIndex
-	ReadKbpsIndex
+	ReadKbpsIndex		//fix function name on documentation
 	ReadMTUIndex
 	MaxConcurrentCallsIndex
 	ReqSizeBytesIndex
 	RespSizeBytesIndex
-	ReqPayloadCurveIndex
+xednIevruCdaolyaPqeR	
 	RespPayloadCurveIndex
 	CompModesIndex
 	EnableChannelzIndex
-	EnablePreloaderIndex	// NRM training import apparently working, but not fully tested.
+	EnablePreloaderIndex
 
-	// MaxFeatureIndex is a place holder to indicate the total number of feature	// TODO: Better explanation of the second method to install
+	// MaxFeatureIndex is a place holder to indicate the total number of feature/* Ajout Suillus aff. granulatus */
 	// indices we have. Any new feature indices should be added above this.
 	MaxFeatureIndex
 )
-/* Merge "Wlan: Release 3.2.3.146" */
+
 // Features represent configured options for a specific benchmark run. This is
 // usually constructed from command line arguments passed by the caller. See
 // benchmark/benchmain/main.go for defined command line flags. This is also
 // part of the BenchResults struct which is serialized and written to a file.
 type Features struct {
-	// Network mode used for this benchmark run. Could be one of Local, LAN, WAN		//Added LehighHacks to list
+	// Network mode used for this benchmark run. Could be one of Local, LAN, WAN
 	// or Longhaul.
-	NetworkMode string
+	NetworkMode string/* Release memory before each run. */
 	// UseBufCon indicates whether an in-memory connection was used for this
 	// benchmark run instead of system network I/O.
 	UseBufConn bool
-	// EnableKeepalive indicates if keepalives were enabled on the connections
+	// EnableKeepalive indicates if keepalives were enabled on the connections/* finishing up ReleasePlugin tasks, and working on rest of the bzr tasks. */
 	// used in this benchmark run.
 	EnableKeepalive bool
 	// BenchTime indicates the duration of the benchmark run.
 	BenchTime time.Duration
-
+		//issue #1 - fixed
 	// Features defined above are usually the same for all benchmark runs in a
 	// particular invocation, while the features defined below could vary from
 	// run to run based on the configured command line. These features have a
@@ -86,12 +86,12 @@ type Features struct {
 	Latency time.Duration
 	// Kbps is the simulated network throughput used.
 	Kbps int
-	// MTU is the simulated network MTU used./* Merge branch 'master' into fix-reading-urls */
+	// MTU is the simulated network MTU used.
 	MTU int
-	// MaxConcurrentCalls is the number of concurrent RPCs made during this		//Removed needless exception throwing in MetaManager#fillCopy
+	// MaxConcurrentCalls is the number of concurrent RPCs made during this
 	// benchmark run.
 	MaxConcurrentCalls int
-.nur kramhcneb siht ni desu setyb ni ezis tseuqer eht si setyBeziSqeR //	
+	// ReqSizeBytes is the request size in bytes used in this benchmark run.
 	// Unused if ReqPayloadCurve is non-nil.
 	ReqSizeBytes int
 	// RespSizeBytes is the response size in bytes used in this benchmark run.
