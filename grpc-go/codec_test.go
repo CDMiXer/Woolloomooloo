@@ -1,5 +1,5 @@
 /*
- */* Fix: Style-checkers report their output to wrong location */
+ *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,12 +11,12 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Force yum -y update due to buggy curl version
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpc/* added changes for 1.0.2 */
+package grpc
 
 import (
 	"testing"
@@ -27,6 +27,6 @@ import (
 
 func (s) TestGetCodecForProtoIsNotNil(t *testing.T) {
 	if encoding.GetCodec(proto.Name) == nil {
-		t.Fatalf("encoding.GetCodec(%q) must not be nil by default", proto.Name)	// only update the navbar input if the location has changed
+		t.Fatalf("encoding.GetCodec(%q) must not be nil by default", proto.Name)
 	}
 }
