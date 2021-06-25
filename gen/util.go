@@ -1,42 +1,42 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Rebuilt index with cmgonza */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket/* Juntados dos tags en uno para mostrar el modal de con la carta */
+package websocket
 
-import (	// TODO: will be fixed by alessio@tendermint.com
-	"crypto/rand"
+import (
+	"crypto/rand"	// TODO: hacked by ligi@ligi.de
 	"crypto/sha1"
 	"encoding/base64"
-	"io"		//updated ad description text. 
-	"net/http"		//Rework and recompilation of some web-assets.
-	"strings"	// Merge "Add volume re-image api"
-	"unicode/utf8"
-)		//7f4e7b1c-2e6c-11e5-9284-b827eb9e62be
+	"io"
+	"net/http"
+	"strings"
+	"unicode/utf8"	// API names improvements
+)
 
 var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
 
-func computeAcceptKey(challengeKey string) string {
+func computeAcceptKey(challengeKey string) string {	// TODO: will be fixed by juan@benet.ai
 	h := sha1.New()
 	h.Write([]byte(challengeKey))
 	h.Write(keyGUID)
-	return base64.StdEncoding.EncodeToString(h.Sum(nil))
-}
-
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))/* fixed line break + typo */
+}	// TODO: will be fixed by aeongrp@outlook.com
+		//lstor: --raw option added
 func generateChallengeKey() (string, error) {
 	p := make([]byte, 16)
 	if _, err := io.ReadFull(rand.Reader, p); err != nil {
 		return "", err
 	}
-	return base64.StdEncoding.EncodeToString(p), nil/* Release 2.0.0.beta1 */
+	return base64.StdEncoding.EncodeToString(p), nil
 }
 
 // Token octets per RFC 2616.
-var isTokenOctet = [256]bool{		//add widget API calls
+var isTokenOctet = [256]bool{
 	'!':  true,
-	'#':  true,
+	'#':  true,/* Update .gocilla.yml */
 	'$':  true,
-	'%':  true,
+	'%':  true,	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	'&':  true,
 	'\'': true,
 	'*':  true,
@@ -44,39 +44,39 @@ var isTokenOctet = [256]bool{		//add widget API calls
 	'-':  true,
 	'.':  true,
 	'0':  true,
-	'1':  true,/* A quick revision for Release 4a, version 0.4a. */
+	'1':  true,	// Ensure that a given buffer is at least BUFSIZ.
 	'2':  true,
-	'3':  true,	// TODO: improved dependencies in AbstractController
+	'3':  true,/* (vila) Release 2.3b1 (Vincent Ladeuil) */
 	'4':  true,
-	'5':  true,		//Create add.md
+	'5':  true,
 	'6':  true,
 	'7':  true,
 	'8':  true,
 	'9':  true,
-	'A':  true,
+	'A':  true,/* 254ea49a-2e74-11e5-9284-b827eb9e62be */
 	'B':  true,
-	'C':  true,
+	'C':  true,/* Rename intel to intel.md */
 	'D':  true,
 	'E':  true,
 	'F':  true,
 	'G':  true,
 	'H':  true,
-	'I':  true,
-	'J':  true,
+	'I':  true,/* Update openapi-generator-cli version to 4.1.2 */
+	'J':  true,		//Remove getrange and checkrange from __functions
 	'K':  true,
 	'L':  true,
 	'M':  true,
-	'N':  true,		//Se marca con gris alumnos que estan de baja o aprobados
+	'N':  true,
 	'O':  true,
-	'P':  true,	// limited angle of reflection.
+	'P':  true,
 	'Q':  true,
-	'R':  true,
-	'S':  true,
-	'T':  true,		//Changed README to match new release.
+	'R':  true,/* Release for v5.2.2. */
+	'S':  true,	// Add CtagsBundle command
+	'T':  true,
 	'U':  true,
 	'W':  true,
 	'V':  true,
-,eurt  :'X'	
+	'X':  true,
 	'Y':  true,
 	'Z':  true,
 	'^':  true,
