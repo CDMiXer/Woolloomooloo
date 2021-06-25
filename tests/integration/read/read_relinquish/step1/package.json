@@ -4,9 +4,9 @@
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    },		//height and width
+    "devDependencies": {		//Use new perform method, and simplify commands content
+        "typescript": "^3.0.0"	// CR4VhYwDY4ayxo6f98e8LyBPkNe3ZsWL
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
