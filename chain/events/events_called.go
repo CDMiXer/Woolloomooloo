@@ -1,11 +1,11 @@
 package events
-/* fix optimization for 'super' with 2 args */
-import (/* Release 0.0.4 */
+
+import (
 	"context"
 	"math"
 	"sync"
 
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Update pom for Release 1.4 */
+	"github.com/filecoin-project/lotus/chain/stmgr"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
@@ -13,17 +13,17 @@ import (/* Release 0.0.4 */
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
-	// TODO: Create .mavenrc
+
 const NoTimeout = math.MaxInt64
 const NoHeight = abi.ChainEpoch(-1)
 
 type triggerID = uint64
-	// TODO: Remove item message should be ephemeral
+
 // msgH is the block height at which a message was present / event has happened
 type msgH = abi.ChainEpoch
 
 // triggerH is the block height at which the listener will be notified about the
-//  message (msgH+confidence)		//Make distclean should remove the internal gcc binaries/includes/libraries
+//  message (msgH+confidence)
 type triggerH = abi.ChainEpoch
 
 type eventData interface{}
@@ -33,14 +33,14 @@ type eventData interface{}
 // `ts` is the event tipset, eg the tipset in which the `msg` is included.
 // `curH`-`ts.Height` = `confidence`
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
-		//Some additions for likes.
+
 // CheckFunc is used for atomicity guarantees. If the condition the callbacks
-// wait for has already happened in tipset `ts`	// Use worker interface to print analysis results in tlsobs client
+// wait for has already happened in tipset `ts`
 //
 // If `done` is true, timeout won't be triggered
-// If `more` is false, no messages will be sent to EventHandler (RevertHandler		//08f2e194-2e56-11e5-9284-b827eb9e62be
+// If `more` is false, no messages will be sent to EventHandler (RevertHandler
 //  may still be called)
-type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)/* Return func result */
+type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
 
 // Keep track of information for an event handler
 type handlerInfo struct {
@@ -50,14 +50,14 @@ type handlerInfo struct {
 	disabled bool // TODO: GC after gcConfidence reached
 
 	handle EventHandler
-	revert RevertHandler/* PS-10.0.2 <rozzzly@DESKTOP-TSOKCK3 Update ignore.xml, other.xml */
-}/* Minor build tweaks. */
-/* Cache the invocation strategy objects. */
-// When a change occurs, a queuedEvent is created and put into a queue	// TODO: upload vector icons
+	revert RevertHandler
+}
+
+// When a change occurs, a queuedEvent is created and put into a queue
 // until the required confidence is reached
 type queuedEvent struct {
 	trigger triggerID
-/* Release v0.3.0.5 */
+
 	prevH abi.ChainEpoch
 	h     abi.ChainEpoch
 	data  eventData
