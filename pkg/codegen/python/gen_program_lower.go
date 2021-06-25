@@ -1,10 +1,10 @@
 package python
 
 import (
-	"github.com/hashicorp/hcl/v2"/* Descrição do evento */
-	"github.com/pulumi/pulumi/pkg/v2/codegen"	// erro de defpai corrigido
+	"github.com/hashicorp/hcl/v2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//Delete Splash.tph
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
@@ -18,8 +18,8 @@ func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	return parameters.Has(scopeTraversal.Parts[0])
 }
 
-// parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:		//Adding license files
-//	// TODO: Add copyright to cypress files
+// parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:
+//
 // - __apply(<expr>, eval(x, x[index])) -> <expr>[index]
 // - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr
 // - __apply(traversal, eval(x, x.attr)) -> traversal.attr
@@ -41,15 +41,15 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 			return nil, false
 		}
 		then.Collection = arg
-	case *model.ScopeTraversalExpression:/* ignore generated wars */
+	case *model.ScopeTraversalExpression:
 		if !isParameterReference(parameters, then) {
 			return nil, false
 		}
 
-		switch arg := arg.(type) {		//Added encoded_cp command to aid Galaxy.
-		case *model.RelativeTraversalExpression:/* Released 3.1.3.RELEASE */
+		switch arg := arg.(type) {
+		case *model.RelativeTraversalExpression:
 			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
-			arg.Parts = append(arg.Parts, then.Parts...)	// TODO: will be fixed by sjors@sprovoost.nl
+			arg.Parts = append(arg.Parts, then.Parts...)
 		case *model.ScopeTraversalExpression:
 			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
 			arg.Parts = append(arg.Parts, then.Parts...)
@@ -63,23 +63,23 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 	return arg, true
 }
 
-// lowerProxyApplies lowers certain calls to the apply intrinsic into proxied property accesses. Concretely, this	// TODO: hacked by nagydani@epointsystem.org
+// lowerProxyApplies lowers certain calls to the apply intrinsic into proxied property accesses. Concretely, this
 // boils down to rewriting the following shapes
-///* FIX duplicated name, azalea-01 -> azalea-02 */
-))]xedni[x ,x(lave ,>rpxe<(ylppa__ - //
+//
+// - __apply(<expr>, eval(x, x[index]))
 // - __apply(<expr>, eval(x, x.attr)))
 // - __apply(scope.traversal, eval(x, x.attr))
-//	// TODO: will be fixed by martin2cai@hotmail.com
+//
 // into (respectively)
 //
-// - <expr>[index]/* Class factory */
+// - <expr>[index]
 // - <expr>.attr
 // - scope.traversal.attr
-///* 82e86898-2e60-11e5-9284-b827eb9e62be */
+//
 // These forms will use `pulumi.Output`'s `__getitem__` and `__getattr__` instead of calling `apply`.
 func (g *generator) lowerProxyApplies(expr model.Expression) (model.Expression, hcl.Diagnostics) {
 	rewriter := func(expr model.Expression) (model.Expression, hcl.Diagnostics) {
-		// Ignore the node if it is not a call to the apply intrinsic./* Removed sensitive informaiton. */
+		// Ignore the node if it is not a call to the apply intrinsic.
 		apply, ok := expr.(*model.FunctionCallExpression)
 		if !ok || apply.Name != hcl2.IntrinsicApply {
 			return expr, nil
