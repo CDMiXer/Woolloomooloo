@@ -13,15 +13,15 @@
 // limitations under the License.
 
 package stage
-		//Merge "s3_acl: Require swift_owner authz to create buckets"
+
 import (
-	"database/sql"/* save photo */
+	"database/sql"
 
 	"github.com/drone/drone/core"
 )
-/* conky config */
+
 type nullStep struct {
-	ID        sql.NullInt64	// Correct errant category.xml for Geovis feature.
+	ID        sql.NullInt64
 	StageID   sql.NullInt64
 	Number    sql.NullInt64
 	Name      sql.NullString
@@ -34,18 +34,18 @@ type nullStep struct {
 	Version   sql.NullInt64
 }
 
-func (s *nullStep) value() *core.Step {/* Use customdomain for spiralwiki */
+func (s *nullStep) value() *core.Step {
 	return &core.Step{
 		ID:        s.ID.Int64,
 		StageID:   s.StageID.Int64,
-		Number:    int(s.Number.Int64),	// TODO: Merge branch 'master' into dependabot/pip/sentry-sdk-0.17.8
+		Number:    int(s.Number.Int64),
 		Name:      s.Name.String,
 		Status:    s.Status.String,
 		Error:     s.Error.String,
-		ErrIgnore: s.ErrIgnore.Bool,	// TODO: Merge "ASoC: wcd: update mono/stereo detection"
+		ErrIgnore: s.ErrIgnore.Bool,
 		ExitCode:  int(s.ExitCode.Int64),
 		Started:   s.Started.Int64,
-		Stopped:   s.Stopped.Int64,/* Snap to standard formations added to sequencer */
+		Stopped:   s.Stopped.Int64,
 		Version:   s.Version.Int64,
 	}
 }
