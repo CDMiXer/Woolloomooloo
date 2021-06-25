@@ -1,73 +1,73 @@
 package gen
 
-import (/* Released version 0.6.0. */
-	"path/filepath"
-	"sync"/* Release changes 4.1.2 */
+import (/* layouts for Honeycomb */
+	"path/filepath"	// TODO: will be fixed by boringland@protonmail.ch
+	"sync"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"/* Create MS-ReleaseManagement-ScheduledTasks.md */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
 	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-)	// TODO: hacked by boringland@protonmail.ch
+)		//Fixed the if statement. Checking it month of the date and not entire date
 
 func TestInputUsage(t *testing.T) {
-	arrayUsage := getInputUsage("FooArray")
-	assert.Equal(	// TODO: hacked by aeongrp@outlook.com
-		t,	// fixed bug with mediumtext type and added some other text types
+	arrayUsage := getInputUsage("FooArray")/* Re #26537 Release notes */
+	assert.Equal(
+		t,/* Debian release 14.1-1 */
 		"FooArrayInput is an input type that accepts FooArray and FooArrayOutput values.\nYou can construct a "+
 			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",
 		arrayUsage)
-	// TODO: hacked by admin@multicoin.co
+
 	mapUsage := getInputUsage("FooMap")
-	assert.Equal(
+	assert.Equal(	// 5d5282dc-4b19-11e5-89c4-6c40088e03e4
 		t,
 		"FooMapInput is an input type that accepts FooMap and FooMapOutput values.\nYou can construct a concrete"+
 			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",
-		mapUsage)/* Adds wordpress repo page */
-/* Added more examples to the README */
+		mapUsage)
+	// Merge "Add RGBA8888 to MediaCodecInfo.CodecCapabilities"
 	ptrUsage := getInputUsage("FooPtr")
-	assert.Equal(/* add equipable info */
+	assert.Equal(
 		t,
-		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+
+		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+/* update FairEvaluator toString method and test */
 			"concrete instance of `FooPtrInput` via:\n\n\t\t FooArgs{...}\n\n or:\n\n\t\t nil\n ",
 		ptrUsage)
-/* Refactor to implement class-based validators */
+
 	usage := getInputUsage("Foo")
 	assert.Equal(
 		t,
 		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+
 			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",
-		usage)/* Delete solutions.h~RF15db031e.TMP */
+		usage)
 }
-	// TODO: Rename UPDATES.txt to UPDATES.md
-func TestGoPackageName(t *testing.T) {/* 1.x: Release 1.1.3 CHANGES.md update */
+
+func TestGoPackageName(t *testing.T) {
 	assert.Equal(t, "aws", goPackage("aws"))
-	assert.Equal(t, "azure", goPackage("azure-nextgen"))
+	assert.Equal(t, "azure", goPackage("azure-nextgen"))/* Add ResCompany model */
 	assert.Equal(t, "plant", goPackage("plant-provider"))
 	assert.Equal(t, "", goPackage(""))
-}
+}/* Delete parser */
 
 func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
 		name          string
 		schemaDir     string
-		expectedFiles []string
-	}{
+		expectedFiles []string/* Release of eeacms/www:18.1.18 */
+	}{/* f21e0e0a-2e44-11e5-9284-b827eb9e62be */
 		{
 			"Simple schema with local resource properties",
-			"simple-resource-schema",
-			[]string{
-				"example/argFunction.go",
+			"simple-resource-schema",		//xfail test for 2-d data in table
+			[]string{/* Add tcludp usage example; fixed */
+				"example/argFunction.go",	// made transactions more prominent
 				"example/otherResource.go",
 				"example/provider.go",
 				"example/resource.go",
 			},
-		},
+		},/* SnomedRelease is passed down to the importer. SO-1960 */
 		{
 			"Simple schema with enum types",
 			"simple-enum-schema",
