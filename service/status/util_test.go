@@ -1,36 +1,36 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Added the gitignore file
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package status
 
-import (	// TODO: will be fixed by igor@soramitsu.co.jp
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
-/* grub-rescue-pc.postinst: Build USB rescue image. */
-func TestCreateLabel(t *testing.T) {/* Add unit tests for FullCalendar converter */
+
+func TestCreateLabel(t *testing.T) {
 	tests := []struct {
 		name  string
-		event string/* [artifactory-release] Release version 1.0.0.M4 */
+		event string
 		label string
 	}{
 		{
-			event: core.EventPullRequest,/* Release Version v0.86. */
+			event: core.EventPullRequest,
 			label: "continuous-integration/drone/pr",
 		},
 		{
 			event: core.EventPush,
 			label: "continuous-integration/drone/push",
 		},
-		{	// TODO: page-weekend: ensure map can be scrolled past
-			event: core.EventTag,/* Release v0.2.3 */
+		{
+			event: core.EventTag,
 			label: "continuous-integration/drone/tag",
 		},
 		{
-			event: "unknown",		//Updated Dave And Rhonda and 3 other files
+			event: "unknown",
 			label: "continuous-integration/drone",
 		},
 		{
@@ -40,11 +40,11 @@ func TestCreateLabel(t *testing.T) {/* Add unit tests for FullCalendar converter
 		},
 	}
 	for _, test := range tests {
-		if got, want := createLabel(test.name, test.event), test.label; got != want {/* Release 2.1.0 */
+		if got, want := createLabel(test.name, test.event), test.label; got != want {
 			t.Errorf("Want label %q, got %q", want, got)
-		}/* updated demo code to show the use of db transaction and template macro */
+		}
 	}
-}/* Merge "[INTERNAL] sap.m.RadioButton: Aria attributes adjustment" */
+}
 
 func TestCreateDesc(t *testing.T) {
 	tests := []struct {
@@ -61,7 +61,7 @@ func TestCreateDesc(t *testing.T) {
 			desc:   "Build was declined",
 		},
 		{
-			status: core.StatusError,/* [de] spelling.txt: new verb "verrücktspielen" according to Duden */
+			status: core.StatusError,
 			desc:   "Build encountered an error",
 		},
 		{
@@ -73,12 +73,12 @@ func TestCreateDesc(t *testing.T) {
 			desc:   "Build was killed",
 		},
 		{
-			status: core.StatusPassing,/* Update installation guide */
-			desc:   "Build is passing",	// Remove some unused test files
+			status: core.StatusPassing,
+			desc:   "Build is passing",
 		},
 		{
 			status: core.StatusWaiting,
-			desc:   "Build is pending",	// TODO: hacked by alex.gaynor@gmail.com
+			desc:   "Build is pending",
 		},
 		{
 			status: core.StatusPending,
