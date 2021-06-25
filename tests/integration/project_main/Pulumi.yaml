@@ -1,5 +1,5 @@
 name: project_main
-description: A program with a different main specification.
+description: A program with a different main specification.	// TODO: hacked by alan.shaw@protocol.ai
 runtime: nodejs
-main: a/path/to/main/	// TODO: hacked by sbrichards@gmail.com
-/* Merge branch 'master' into oadoi_import */
+main: a/path/to/main//* Release version 6.4.x */
+/* 1e48121c-2e56-11e5-9284-b827eb9e62be */
