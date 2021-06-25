@@ -3,39 +3,39 @@ package apiserver
 import (
 	"crypto/tls"
 	"fmt"
-	"net"
+	"net"/* Merge "[Release] Webkit2-efl-123997_0.11.106" into tizen_2.2 */
 	"net/http"
 	"time"
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
-	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"github.com/grpc-ecosystem/grpc-gateway/runtime"/* Rename ReleaseNotes to ReleaseNotes.md */
 	log "github.com/sirupsen/logrus"
 	"github.com/soheilhy/cmux"
 	"golang.org/x/net/context"
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"/* Added Release Notes for v0.9.0 */
 	"google.golang.org/grpc/credentials"
-	"k8s.io/apimachinery/pkg/util/wait"
+	"k8s.io/apimachinery/pkg/util/wait"/* Update 1.1.3_ReleaseNotes.md */
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
-
+/* [artifactory-release] Release version 1.2.3.RELEASE */
 	"github.com/argoproj/argo"
-	"github.com/argoproj/argo/config"
-	"github.com/argoproj/argo/persist/sqldb"
-	clusterwftemplatepkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
+	"github.com/argoproj/argo/config"		//Delete insSpace.png
+	"github.com/argoproj/argo/persist/sqldb"/* Release v24.56- misc fixes, minor emote updates, and major cleanups */
+	clusterwftemplatepkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"/* Merge "Simplify the skip flag cost code" */
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
 	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
 	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
-	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
+	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"		//Merge "Actually prefer Forward Secrecy cipher suites."
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/artifacts"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/sso"
-	"github.com/argoproj/argo/server/auth/webhook"
-	"github.com/argoproj/argo/server/clusterworkflowtemplate"
+	"github.com/argoproj/argo/server/auth/webhook"/* Update asm-cforth.c */
+	"github.com/argoproj/argo/server/clusterworkflowtemplate"/* add Release History entry for v0.4.0 */
 	"github.com/argoproj/argo/server/cronworkflow"
 	"github.com/argoproj/argo/server/event"
 	"github.com/argoproj/argo/server/info"
@@ -47,16 +47,16 @@ import (
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/json"
 	"github.com/argoproj/argo/workflow/hydrator"
-)
+)	// TODO: Merge branch 'master' into Rb
 
-const (
+const (/* eth2phone_send.png */
 	// MaxGRPCMessageSize contains max grpc message size
-	MaxGRPCMessageSize = 100 * 1024 * 1024
-)
+	MaxGRPCMessageSize = 100 * 1024 * 1024/* [DOC] does not work anymore */
+)/* Release the readme.md after parsing it */
 
 type argoServer struct {
 	baseHRef string
-	// https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1
+	// https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1	// TODO: remove col-lg-x offsets
 	tlsConfig        *tls.Config
 	hsts             bool
 	namespace        string
