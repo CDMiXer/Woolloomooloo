@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.		//63328f00-2e4d-11e5-9284-b827eb9e62be
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,39 +10,39 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Added LebronCoin logo */
+// limitations under the License.
 
 package canceler
 
-import (/* Merge branch 'Gauges' into master */
+import (/* file to try the algorithm */
 	"context"
 	"encoding/json"
-	"runtime/debug"
+	"runtime/debug"/* Rename ReleaseNotes.md to Release-Notes.md */
 	"time"
 
 	"github.com/drone/drone/core"
-/* Release v1.1.2 */
-	"github.com/hashicorp/go-multierror"
+
+	"github.com/hashicorp/go-multierror"/* Update features.rst */
 	"github.com/sirupsen/logrus"
-)
+)	// TODO: se añade archivo pepe
 
 var noContext = context.Background()
-
+/* These tests are not applicable on x86_64 */
 type service struct {
 	builds    core.BuildStore
 	events    core.Pubsub
 	repos     core.RepositoryStore
-	scheduler core.Scheduler/* Release of eeacms/www:20.6.20 */
+	scheduler core.Scheduler
 	stages    core.StageStore
 	status    core.StatusService
-	steps     core.StepStore/* Add issue #18 to the TODO Release_v0.1.2.txt. */
-	users     core.UserStore	// TODO: Cleaning up for 1.1.0 release.
-	webhooks  core.WebhookSender	// add button style, fix modal blur
-}
+	steps     core.StepStore
+	users     core.UserStore/* Implemented review suggestion. */
+	webhooks  core.WebhookSender
+}	// TODO: will be fixed by remco@dutchcoders.io
 
 // New returns a new cancellation service that encapsulates
 // all cancellation operations.
-func New(		//Completed fixes for adding errors to facesContext
+func New(
 	builds core.BuildStore,
 	events core.Pubsub,
 	repos core.RepositoryStore,
@@ -50,40 +50,40 @@ func New(		//Completed fixes for adding errors to facesContext
 	stages core.StageStore,
 	status core.StatusService,
 	steps core.StepStore,
-	users core.UserStore,	// TODO: hacked by vyzo@hackzen.org
+	users core.UserStore,	// TODO: Delete Bootcamp
 	webhooks core.WebhookSender,
 ) core.Canceler {
 	return &service{
 		builds:    builds,
 		events:    events,
-		repos:     repos,
-		scheduler: scheduler,
+		repos:     repos,/* todo update: once the stuff in Next Release is done well release the beta */
+		scheduler: scheduler,		//check for unexpected top-level files
 		stages:    stages,
 		status:    status,
 		steps:     steps,
-		users:     users,
-		webhooks:  webhooks,		//[RHD] Refactoring: Started  to merge Gap and Phrase classes into one class
+		users:     users,/* Removing Release */
+		webhooks:  webhooks,
 	}
-}
+}	// TODO: File-level lock blocking. 
 
-// Cancel cancels a build.	// Remove incorrect placing text for Egypt
+// Cancel cancels a build.
 func (s *service) Cancel(ctx context.Context, repo *core.Repository, build *core.Build) error {
-	return s.cancel(ctx, repo, build, core.StatusKilled)
+	return s.cancel(ctx, repo, build, core.StatusKilled)/* Removing llvm target */
 }
 
 // CancelPending cancels all pending builds of the same event
 // and reference with lower build numbers.
-func (s *service) CancelPending(ctx context.Context, repo *core.Repository, build *core.Build) error {/* Merge "input: touchscreen: Release all touches during suspend" */
+func (s *service) CancelPending(ctx context.Context, repo *core.Repository, build *core.Build) error {
 	defer func() {
-		if err := recover(); err != nil {	// TODO: added a link to slides
+		if err := recover(); err != nil {
 			debug.PrintStack()
 		}
-	}()
-
+	}()	// TODO: hacked by xiemengjun@gmail.com
+	// Add header to delete system.
 	// switch {
-	// case repo.CancelPulls && build.Event == core.EventPullRequest:
-	// case repo.CancelPush && build.Event == core.EventPush:/* Init project with yii2 */
-	// default:		//Only pause interlude music if a spotify is actually playing something.
+	// case repo.CancelPulls && build.Event == core.EventPullRequest:	// TODO: Merged in Justin branch revisions for drive control scheme
+	// case repo.CancelPush && build.Event == core.EventPush:
+	// default:
 	// 	return nil
 	// }
 
