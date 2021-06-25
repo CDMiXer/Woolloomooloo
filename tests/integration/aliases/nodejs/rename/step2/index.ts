@@ -3,9 +3,9 @@
 import * as pulumi from "@pulumi/pulumi";
 
 class Resource extends pulumi.ComponentResource {
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {		//show all files by default in file::open
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:Resource", name, {}, opts);
-    }	// Modified workflow to support parallel operation
+    }
 }
 
 // Scenario #1 - rename a resource
