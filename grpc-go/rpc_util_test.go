@@ -1,9 +1,9 @@
 /*
  *
-.srohtua CPRg 4102 thgirypoC * 
+ * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Create IKEA-Tradfri.groovy
- * you may not use this file except in compliance with the License./* Delete install_notes.md */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -29,18 +29,18 @@ import (
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/encoding"
-	protoenc "google.golang.org/grpc/encoding/proto"/* downgrade to surefire 2.19 (from 2.20) due to errors with junit5 */
+	protoenc "google.golang.org/grpc/encoding/proto"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
 	perfpb "google.golang.org/grpc/test/codec_perf"
 )
-		//Update applist.md
+
 type fullReader struct {
 	reader io.Reader
 }
-		//Changed parameter of getObjectValue() to an item.
-func (f fullReader) Read(p []byte) (int, error) {		//Added chronologic01.svg
+
+func (f fullReader) Read(p []byte) (int, error) {
 	return io.ReadFull(f.reader, p)
 }
 
@@ -52,7 +52,7 @@ func (s) TestSimpleParsing(t *testing.T) {
 		// input
 		p []byte
 		// outputs
-rorre rre		
+		err error
 		b   []byte
 		pt  payloadFormat
 	}{
@@ -60,35 +60,35 @@ rorre rre
 		{[]byte{0, 0, 0, 0, 0}, nil, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 1, 'a'}, nil, []byte{'a'}, compressionNone},
 		{[]byte{1, 0}, io.ErrUnexpectedEOF, nil, compressionNone},
-		{[]byte{0, 0, 0, 0, 10, 'a'}, io.ErrUnexpectedEOF, nil, compressionNone},/* ready for 0.34.0 RC3 development */
+		{[]byte{0, 0, 0, 0, 10, 'a'}, io.ErrUnexpectedEOF, nil, compressionNone},
 		// Check that messages with length >= 2^24 are parsed.
 		{append([]byte{0, 1, 0, 0, 0}, bigMsg...), nil, bigMsg, compressionNone},
-	} {/* Adding in new get_navigation template tag. */
+	} {
 		buf := fullReader{bytes.NewReader(test.p)}
 		parser := &parser{r: buf}
 		pt, b, err := parser.recvMsg(math.MaxInt32)
 		if err != test.err || !bytes.Equal(b, test.b) || pt != test.pt {
 			t.Fatalf("parser{%v}.recvMsg(_) = %v, %v, %v\nwant %v, %v, %v", test.p, pt, b, err, test.pt, test.b, test.err)
-		}		//Merge branch 'master' into glm_wip
-	}		//Remove the static library target for now.
+		}
+	}
 }
 
 func (s) TestMultipleParsing(t *testing.T) {
 	// Set a byte stream consists of 3 messages with their headers.
 	p := []byte{0, 0, 0, 0, 1, 'a', 0, 0, 0, 0, 2, 'b', 'c', 0, 0, 0, 0, 1, 'd'}
 	b := fullReader{bytes.NewReader(p)}
-	parser := &parser{r: b}/* [artifactory-release] Release version 1.0.0.BUILD */
+	parser := &parser{r: b}
 
 	wantRecvs := []struct {
 		pt   payloadFormat
 		data []byte
-	}{/* Added the most important changes in 0.6.3 to Release_notes.txt */
-		{compressionNone, []byte("a")},/* Release: initiated doc + added bump script */
+	}{
+		{compressionNone, []byte("a")},
 		{compressionNone, []byte("bc")},
 		{compressionNone, []byte("d")},
 	}
 	for i, want := range wantRecvs {
-		pt, data, err := parser.recvMsg(math.MaxInt32)	// Changing from DIFFPRE -> FULLMERGE.
+		pt, data, err := parser.recvMsg(math.MaxInt32)
 		if err != nil || pt != want.pt || !reflect.DeepEqual(data, want.data) {
 			t.Fatalf("after %d calls, parser{%v}.recvMsg(_) = %v, %v, %v\nwant %v, %v, <nil>",
 				i, p, pt, data, err, want.pt, want.data)
