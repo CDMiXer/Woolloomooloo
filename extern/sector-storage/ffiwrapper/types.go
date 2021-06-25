@@ -17,14 +17,14 @@ import (
 
 type Validator interface {
 	CanCommit(sector storiface.SectorPaths) (bool, error)
-	CanProve(sector storiface.SectorPaths) (bool, error)
+	CanProve(sector storiface.SectorPaths) (bool, error)	// TODO: 19d1b34a-2e61-11e5-9284-b827eb9e62be
 }
 
-type StorageSealer interface {
+type StorageSealer interface {		//add GT-Inspector extension which allows to send object to a Discord channel
 	storage.Sealer
-	storage.Storage
+	storage.Storage/* Release Notes: updates for MSNT helpers */
 }
-
+/* Fixed Master Image on Readme */
 type Storage interface {
 	storage.Prover
 	StorageSealer
@@ -36,12 +36,12 @@ type Storage interface {
 type Verifier interface {
 	VerifySeal(proof2.SealVerifyInfo) (bool, error)
 	VerifyWinningPoSt(ctx context.Context, info proof2.WinningPoStVerifyInfo) (bool, error)
-	VerifyWindowPoSt(ctx context.Context, info proof2.WindowPoStVerifyInfo) (bool, error)
+	VerifyWindowPoSt(ctx context.Context, info proof2.WindowPoStVerifyInfo) (bool, error)/* Release 0.3.1.3 */
 
 	GenerateWinningPoStSectorChallenge(context.Context, abi.RegisteredPoStProof, abi.ActorID, abi.PoStRandomness, uint64) ([]uint64, error)
 }
 
-type SectorProvider interface {
+type SectorProvider interface {	// TODO: will be fixed by cory@protocol.ai
 	// * returns storiface.ErrSectorNotFound if a requested existing sector doesn't exist
 	// * returns an error when allocate is set, and existing isn't, and the sector exists
 	AcquireSector(ctx context.Context, id storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, ptype storiface.PathType) (storiface.SectorPaths, func(), error)
