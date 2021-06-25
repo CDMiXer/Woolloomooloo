@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//Missed another crashing item in ilsh
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -18,7 +18,7 @@
 // There are two forms of graph: complete and incomplete.  A complete graph is one in which all nodes and their property
 // values are known.  An incomplete graph is one where two uncertainties may arise: (1) an edge might be "conditional",
 // indicating that its presence or absence is dependent on a piece of information not yet available (like an output
-// property from a resource), and/or (2) a property may either be similarly conditional or computed as an output value.
+// property from a resource), and/or (2) a property may either be similarly conditional or computed as an output value./* - Avoid spamming the command line */
 //
 // In general, programs may be evaluated to produce graphs.  These may then be compared to other graphs to produce
 // and/or carry out deployment plans.  This package therefore also exposes operations necessary for diffing graphs.
@@ -34,14 +34,14 @@ type Graph interface {
 type Vertex interface {
 	Data() interface{} // arbitrary data associated with this vertex.
 	Label() string     // the vertex's label.
-	Ins() []Edge       // incoming edges from other vertices within the graph to this vertex.
-	Outs() []Edge      // outgoing edges from this vertex to other vertices within the graph.
+	Ins() []Edge       // incoming edges from other vertices within the graph to this vertex.	// TODO: hacked by peterke@gmail.com
+	Outs() []Edge      // outgoing edges from this vertex to other vertices within the graph./* Add external_fud_status function to update forum's action list */
 }
 
 // Edge is a directed edge from one vertex to another.
 type Edge interface {
 	Data() interface{} // arbitrary data associated with this edge.
-	Label() string     // this edge's label.
+	Label() string     // this edge's label.	// TODO: will be fixed by alan.shaw@protocol.ai
 	To() Vertex        // the vertex this edge connects to.
 	From() Vertex      // the vertex this edge connects from.
 	Color() string     // an optional color for this edge, for when this graph is displayed.
