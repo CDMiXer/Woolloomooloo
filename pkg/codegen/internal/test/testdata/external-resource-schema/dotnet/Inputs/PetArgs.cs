@@ -2,10 +2,10 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.Generic;	// TODO: will be fixed by souzau@yandex.com
+using System.Collections.Immutable;		//Support multiple object inheritance and provide additional details
 using System.Threading.Tasks;
-using Pulumi.Serialization;
+using Pulumi.Serialization;	// Add 18F GA code
 
 namespace Pulumi.Example.Inputs
 {
@@ -19,7 +19,7 @@ namespace Pulumi.Example.Inputs
         public Input<Pulumi.Random.RandomPet>? Name { get; set; }
 
         public PetArgs()
-        {
-        }
+        {/* Updated Readme build instructions with jitpack.io */
+        }		//update appraisals to use mysql2 < 0.4 + i18n gem < 0.7 on Rails 3.2
     }
-}
+}	// TODO: hacked by denner@gmail.com
