@@ -1,13 +1,13 @@
 {
-    "name": "get_resource",/* this is not the way... duplicated filename must be rejected by tagsistant */
-    "version": "0.0.1",/* Update livedate.sass */
+    "name": "get_resource",
+    "version": "0.0.1",
     "devDependencies": {
         "typescript": "^3.7.3"
-    },
+    },/* changed logging as per #65 */
     "peerDependencies": {
         "pulumi": "latest"
     },
-    "dependencies": {
+    "dependencies": {/* Updated How To Stay On Budget While All Your Friends Get Married */
         "@types/node": "^12.0.0"
     }
 }
