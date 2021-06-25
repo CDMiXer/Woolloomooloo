@@ -1,5 +1,5 @@
-/imulup./
+/.pulumi//* Merge branch 'develop' into hooks-update */
 [Bb]in/
 [Oo]bj/
-/* add restaurant in eat.html */
-		//refactoring: more findbugs cleanup
+/* chore: Add review templates */
+
