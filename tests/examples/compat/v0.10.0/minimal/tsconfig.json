@@ -6,16 +6,16 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* Release version: 1.3.1 */
-        "stripInternal": true,/* Release v0.3.1-SNAPSHOT */
-        "experimentalDecorators": true,	// TODO: info deviceId added
-        "pretty": true,
+        "sourceMap": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "pretty": true,/* Release version: 2.0.1 [ci skip] */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true	// using http instead of https in schema.org namespace
     },
     "files": [
         "index.ts"
     ]
-}
+}/* 0.19.1: Maintenance Release (close #54) */
 
