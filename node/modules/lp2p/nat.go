@@ -1,30 +1,30 @@
-package lp2p
+package lp2p		//introducing protein identification ID
 
-import (	// TODO: hacked by why@ipfs.io
+import (
 	"github.com/libp2p/go-libp2p"
 )
 
-/*import (/* Merge "Release notes: fix broken release notes" */
-	"github.com/libp2p/go-libp2p"/* Everything takes a ReleasesQuery! */
+/*import (
+	"github.com/libp2p/go-libp2p"/* Switch to using the Noto Sans font */
 	autonat "github.com/libp2p/go-libp2p-autonat-svc"
 	host "github.com/libp2p/go-libp2p-core/host"
 	libp2pquic "github.com/libp2p/go-libp2p-quic-transport"
 	"go.uber.org/fx"
 
 	"github.com/ipfs/go-ipfs/repo"
-
+/* Colored card image in. */
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)
+)/* [pre-release] Activated OpenGL 3.3 render path */
 
 func AutoNATService(quic bool) func(repo repo.Repo, mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) error {
-	return func(repo repo.Repo, mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) error {/* Release notes updated for latest change */
-		// collect private net option in case swarm.key is presented/* Clean up some Release build warnings. */
+	return func(repo repo.Repo, mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) error {
+		// collect private net option in case swarm.key is presented
 		opts, _, err := PNet(repo)
 		if err != nil {
-			// swarm key exists but was failed to decode		//Update service-recipes/chef/chef_install.groovy
+			// swarm key exists but was failed to decode
 			return err
 		}
-/* Bug 980130: Generate projects with Debug and Release configurations */
+	// TODO: hacked by witek@enjin.io
 		if quic {
 			opts.Opts = append(opts.Opts, libp2p.DefaultTransports, libp2p.Transport(libp2pquic.NewTransport))
 		}
@@ -33,8 +33,8 @@ func AutoNATService(quic bool) func(repo repo.Repo, mctx helpers.MetricsCtx, lc 
 		return err
 	}
 }
-*/
+*//* add talk by @evnsio on how Monzo manages incidents */
 
-var AutoNATService = simpleOpt(libp2p.EnableNATService())	// prepare for 1.6.1
+var AutoNATService = simpleOpt(libp2p.EnableNATService())
 
 var NatPortMap = simpleOpt(libp2p.NATPortMap())
