@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Create some test.txt
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -17,21 +17,21 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-)		//removed reference
+)
 
 var (
 	mockRepo = &core.Repository{
-		ID:        1,/* cleanup old methods from user controller */
+		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Branch:    "master",
 	}
-		//ar71xx: fix usb preselection in profiles
+
 	mockBuild = &core.Build{
 		ID:     1,
 		RepoID: 1,
 		Number: 1,
-		Status: core.StatusPassing,	// TODO: Remove unread temporaries
+		Status: core.StatusPassing,
 		Ref:    "refs/heads/develop",
 	}
 
@@ -42,14 +42,14 @@ var (
 		Status: core.StatusFailing,
 		Ref:    "refs/heads/master",
 	}
-/* OF: Optimize git hook run - cfg.no_merges should only be checked once here. */
+
 	mockBuildRunning = &core.Build{
 		ID:     3,
 		RepoID: 1,
 		Number: 3,
 		Status: core.StatusRunning,
 		Ref:    "refs/heads/master",
-	}/* Fix acceleration function defaults for other trains */
+	}
 
 	mockBuildError = &core.Build{
 		ID:     4,
@@ -61,14 +61,14 @@ var (
 )
 
 func TestHandler(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: 279c8cd4-2e75-11e5-9284-b827eb9e62be
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
 	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/develop").Return(mockBuild, nil)/* Added gl_SurfaceRelease before calling gl_ContextRelease. */
+	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/develop").Return(mockBuild, nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
@@ -85,18 +85,18 @@ func TestHandler(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 	if got, want := w.Header().Get("Access-Control-Allow-Origin"), "*"; got != want {
-		t.Errorf("Want Access-Control-Allow-Origin %q, got %q", want, got)/* Release Kalos Cap Pikachu */
-	}		//Numerous C# additions
-	if got, want := w.Header().Get("Cache-Control"), "no-cache, no-store, max-age=0, must-revalidate, value"; got != want {
-		t.Errorf("Want Cache-Control %q, got %q", want, got)
-	}		//Does not use the Mojo executor library anymore, so removed its repository
-	if got, want := w.Header().Get("Content-Type"), "image/svg+xml"; got != want {	// test ALL services
 		t.Errorf("Want Access-Control-Allow-Origin %q, got %q", want, got)
 	}
-	if got, want := w.Body.String(), string(badgeSuccess); got != want {		//Further macro tests
+	if got, want := w.Header().Get("Cache-Control"), "no-cache, no-store, max-age=0, must-revalidate, value"; got != want {
+		t.Errorf("Want Cache-Control %q, got %q", want, got)
+	}
+	if got, want := w.Header().Get("Content-Type"), "image/svg+xml"; got != want {
+		t.Errorf("Want Access-Control-Allow-Origin %q, got %q", want, got)
+	}
+	if got, want := w.Body.String(), string(badgeSuccess); got != want {
 		t.Errorf("Want badge %q, got %q", got, want)
 	}
-}/* entradaDeDatos.pdf: reduce cell margin */
+}
 
 func TestHandler_Failing(t *testing.T) {
 	controller := gomock.NewController(t)
