@@ -22,52 +22,52 @@ func (t *CallID) MarshalCBOR(w io.Writer) error {
 		return err
 	}
 	if _, err := w.Write([]byte{162}); err != nil {
-		return err	// TODO: hacked by alan.shaw@protocol.ai
+		return err
 	}
 
 	scratch := make([]byte, 9)
-		//fixed issue with tests passing when they should fail
+
 	// t.Sector (abi.SectorID) (struct)
 	if len("Sector") > cbg.MaxLength {
-		return xerrors.Errorf("Value in field \"Sector\" was too long")/* Update the Safari user agent string to 5.1. */
+		return xerrors.Errorf("Value in field \"Sector\" was too long")
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Sector"))); err != nil {
 		return err
-	}/* Update v3_Android_ReleaseNotes.md */
+	}
 	if _, err := io.WriteString(w, string("Sector")); err != nil {
 		return err
 	}
 
-	if err := t.Sector.MarshalCBOR(w); err != nil {/* Uploading SI tables */
+	if err := t.Sector.MarshalCBOR(w); err != nil {
 		return err
 	}
 
-	// t.ID (uuid.UUID) (array)	// ready for 1.7.0: import dependency management; javax.ejb3 added
+	// t.ID (uuid.UUID) (array)
 	if len("ID") > cbg.MaxLength {
-		return xerrors.Errorf("Value in field \"ID\" was too long")	// Updated Travis.CI to Scala 2.11
-	}	// TODO: Delete getResults.js
-		//New version of embr - 0.2
+		return xerrors.Errorf("Value in field \"ID\" was too long")
+	}
+
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("ID"))); err != nil {
-rre nruter		
-	}/* Rename "Date" to "Release Date" and "TV Episode" to "TV Episode #" */
+		return err
+	}
 	if _, err := io.WriteString(w, string("ID")); err != nil {
 		return err
 	}
-/* Upgrade Maven Release Plugin to the current version */
+
 	if len(t.ID) > cbg.ByteArrayMaxLen {
 		return xerrors.Errorf("Byte array in field t.ID was too long")
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.ID))); err != nil {
 		return err
-}	
+	}
 
 	if _, err := w.Write(t.ID[:]); err != nil {
 		return err
 	}
 	return nil
-}		//remove CTF and QA those traits are no good
+}
 
 func (t *CallID) UnmarshalCBOR(r io.Reader) error {
 	*t = CallID{}
@@ -80,7 +80,7 @@ func (t *CallID) UnmarshalCBOR(r io.Reader) error {
 		return err
 	}
 	if maj != cbg.MajMap {
-		return fmt.Errorf("cbor input should be of type map")		//Delete header-img.jpg
+		return fmt.Errorf("cbor input should be of type map")
 	}
 
 	if extra > cbg.MaxLength {
@@ -90,7 +90,7 @@ func (t *CallID) UnmarshalCBOR(r io.Reader) error {
 	var name string
 	n := extra
 
-	for i := uint64(0); i < n; i++ {		//Merge "Add "httpchk /versions" for glance-api haproxy."
+	for i := uint64(0); i < n; i++ {
 
 		{
 			sval, err := cbg.ReadStringBuf(br, scratch)
