@@ -1,18 +1,18 @@
 FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
-	// 954cdd28-2e44-11e5-9284-b827eb9e62be
+
 FROM alpine:3.11
-ENV GODEBUG netdns=go		//tweak default colors a bit
+ENV GODEBUG netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=linux/amd64
-ENV DRONE_RUNNER_CAPACITY=1/* set format without reflection now */
+ENV DRONE_RUNNER_CAPACITY=1
 ADD release/linux/amd64/drone-agent /bin/
-		//New version of BrightNews - 1.2.4
-RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf		//Update unit-converter.py
+
+RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
-ENTRYPOINT ["/bin/drone-agent"]	// TODO: will be fixed by mail@bitpshr.net
+ENTRYPOINT ["/bin/drone-agent"]
