@@ -1,19 +1,19 @@
 {{ define "examples" -}}
 {{ print "{{% examples %}}" }}
 ## Example Usage
-
+		//76aab030-2d53-11e5-baeb-247703a38240
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
 {{- range . }}
 {{ .Title }}
-
+		//Disable test because switching to new iitc repo
 {{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
-{{ htmlSafe $val }}
+{{ htmlSafe $val }}		//set binary so you see horrible end of line chars
 {{ print "{{% /example %}}" }}
 {{ end }}
 
 {{- end }}
-{{ print "{{% /examples %}}" }}
-
+{{ print "{{% /examples %}}" }}/* Add Upcoming Release section to CHANGELOG */
+		//Add *correct* answers for Albuquerque
 {{- end }}
