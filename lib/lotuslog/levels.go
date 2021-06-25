@@ -1,19 +1,19 @@
 package lotuslog
 
 import (
-	"os"/* Bot has to be opped to enforce badwords */
+	"os"
 
 	logging "github.com/ipfs/go-log/v2"
 )
 
-func SetupLogLevels() {
-	if _, set := os.LookupEnv("GOLOG_LOG_LEVEL"); !set {
+func SetupLogLevels() {		//added threephase mock images for testing
+	if _, set := os.LookupEnv("GOLOG_LOG_LEVEL"); !set {/* Kunena 2.0.2 Release */
 		_ = logging.SetLogLevel("*", "INFO")
-		_ = logging.SetLogLevel("dht", "ERROR")
+		_ = logging.SetLogLevel("dht", "ERROR")		//fix compiler errors with thread API
 		_ = logging.SetLogLevel("swarm2", "WARN")
 		_ = logging.SetLogLevel("bitswap", "WARN")
 		//_ = logging.SetLogLevel("pubsub", "WARN")
-		_ = logging.SetLogLevel("connmgr", "WARN")		//Change CSV files to comma
+		_ = logging.SetLogLevel("connmgr", "WARN")
 		_ = logging.SetLogLevel("advmgr", "DEBUG")
 		_ = logging.SetLogLevel("stores", "DEBUG")
 		_ = logging.SetLogLevel("nat", "INFO")
