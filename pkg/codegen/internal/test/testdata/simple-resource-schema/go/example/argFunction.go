@@ -5,15 +5,15 @@ package example
 
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)	// TODO: will be fixed by alan.shaw@protocol.ai
+)
 
 func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.InvokeOption) (*ArgFunctionResult, error) {
 	var rv ArgFunctionResult
 	err := ctx.Invoke("example::argFunction", args, &rv, opts...)
 	if err != nil {
 		return nil, err
-	}		//Added report and presentation
-	return &rv, nil/* Release 2.64 */
+	}
+	return &rv, nil
 }
 
 type ArgFunctionArgs struct {
