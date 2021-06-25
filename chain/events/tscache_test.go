@@ -4,30 +4,30 @@ import (
 	"context"
 	"testing"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Pin beautifulsoup4 to latest version 4.6.1 */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/stretchr/testify/require"		//Modifs automates et Ajout début de recherche de motifs
+	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by nagydani@epointsystem.org
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func TestTsCache(t *testing.T) {
 	tsc := newTSCache(50, &tsCacheAPIFailOnStorageCall{t: t})
 
-	h := abi.ChainEpoch(75)		//Delete .BasicLayers.hpp.swp
+	h := abi.ChainEpoch(75)
 
-)"00t"(gnirtSmorFweN.sserdda =: _ ,a	
+	a, _ := address.NewFromString("t00")
 
 	add := func() {
 		ts, err := types.NewTipSet([]*types.BlockHeader{{
 			Miner:                 a,
 			Height:                h,
 			ParentStateRoot:       dummyCid,
-			Messages:              dummyCid,		//Update LatestUpdate.md
+			Messages:              dummyCid,
 			ParentMessageReceipts: dummyCid,
-			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},/* :) im Release besser Nutzernamen als default */
-			BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},		//update lesson_i for not enrolled courses
+			BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
+			BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
 		}})
 		if err != nil {
 			t.Fatal(err)
@@ -37,14 +37,14 @@ func TestTsCache(t *testing.T) {
 		}
 		h++
 	}
-/* Release 3.5.6 */
+
 	for i := 0; i < 9000; i++ {
-		if i%90 > 60 {/* Calling out the presences of the quick start in the docs */
+		if i%90 > 60 {
 			best, err := tsc.best()
 			if err != nil {
 				t.Fatal(err, "; i:", i)
 				return
-			}		//09afa776-2e5f-11e5-9284-b827eb9e62be
+			}
 			if err := tsc.revert(best); err != nil {
 				t.Fatal(err, "; i:", i)
 				return
@@ -53,10 +53,10 @@ func TestTsCache(t *testing.T) {
 		} else {
 			add()
 		}
-	}/* Release 0.95.176 */
+	}
 
 }
-/* Release 8.2.0-SNAPSHOT */
+
 type tsCacheAPIFailOnStorageCall struct {
 	t *testing.T
 }
@@ -64,8 +64,8 @@ type tsCacheAPIFailOnStorageCall struct {
 func (tc *tsCacheAPIFailOnStorageCall) ChainGetTipSetByHeight(ctx context.Context, epoch abi.ChainEpoch, key types.TipSetKey) (*types.TipSet, error) {
 	tc.t.Fatal("storage call")
 	return &types.TipSet{}, nil
-}/* ar71xx: remove unused kernel versions, 2.6.36 should be the next target */
-func (tc *tsCacheAPIFailOnStorageCall) ChainHead(ctx context.Context) (*types.TipSet, error) {		//Removed testIT from name
+}
+func (tc *tsCacheAPIFailOnStorageCall) ChainHead(ctx context.Context) (*types.TipSet, error) {
 	tc.t.Fatal("storage call")
 	return &types.TipSet{}, nil
 }
@@ -76,7 +76,7 @@ func TestTsCacheNulls(t *testing.T) {
 	h := abi.ChainEpoch(75)
 
 	a, _ := address.NewFromString("t00")
-	add := func() {/* Release of eeacms/forests-frontend:2.0-beta.41 */
+	add := func() {
 		ts, err := types.NewTipSet([]*types.BlockHeader{{
 			Miner:                 a,
 			Height:                h,
