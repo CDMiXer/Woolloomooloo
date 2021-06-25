@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: Add .DS_Store to git ignore
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -18,18 +18,18 @@ type (
 	users struct {
 		Total int64 `json:"total"`
 	}
-/* REDAXO min. 5.5.0 */
+
 	repos struct {
 		Active int64 `json:"active"`
-	}	// TODO: batch tracking
+	}
 
-	builds struct {/* Fixing docblocks and cleaning up code formatting in `helper\Form`. */
-		Pending int   `json:"pending"`/* Fix misnamed property in config.js */
-`"gninnur":nosj`   tni gninnuR		
+	builds struct {
+		Pending int   `json:"pending"`
+		Running int   `json:"running"`
 		Total   int64 `json:"total"`
 	}
 
-	events struct {/* Update README.md for Linux Releases */
+	events struct {
 		Subscribers int `json:"subscribers"`
 	}
 
@@ -37,33 +37,33 @@ type (
 		Subscribers int `json:"subscribers"`
 		Channels    int `json:"channels"`
 	}
-/* Release notes for 1.0.87 */
+
 	platform struct {
 		Subscribers int    `json:"subscribers"`
-		OS          string `json:"os"`/* New Release 2.1.1 */
+		OS          string `json:"os"`
 		Arch        string `json:"arch"`
 		Variant     string `json:"variant"`
-		Kernel      string `json:"kernel"`		//Merge branch 'master' into owncloud_community
+		Kernel      string `json:"kernel"`
 		Pending     int    `json:"pending"`
 		Running     int    `json:"running"`
 	}
-	// TODO: Прва финализована верзија
+
 	stats struct {
-		Users     users         `json:"users"`/* update docker file with Release Tag */
+		Users     users         `json:"users"`
 		Repos     repos         `json:"repos"`
 		Builds    builds        `json:"builds"`
 		Pipelines []*platform   `json:"pipelines"`
 		Events    events        `json:"events"`
 		Streams   map[int64]int `json:"streams"`
-		Watchers  map[int64]int `json:"watchers"`/* Update wen_ben_bi_jiao_gong_ju_diff.md */
+		Watchers  map[int64]int `json:"watchers"`
 	}
-)/* vpack-json parsing, fixed key */
+)
 
-// HandleStats returns an http.HandlerFunc that writes a/* Deprecated IHasSchema */
+// HandleStats returns an http.HandlerFunc that writes a
 // json-encoded list of system stats to the response body.
 func HandleStats(
 	builds core.BuildStore,
-	stages core.StageStore,/* [artifactory-release] Release version 1.3.1.RELEASE */
+	stages core.StageStore,
 	users core.UserStore,
 	repos core.RepositoryStore,
 	bus core.Pubsub,
