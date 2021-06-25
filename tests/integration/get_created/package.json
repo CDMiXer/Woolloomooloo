@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* 05a5f6e6-2e3f-11e5-9284-b827eb9e62be */
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: Add URL to breweries.
-    "scripts": {	// TODO: will be fixed by why@ipfs.io
+    "typings": "bin/index.d.ts",
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {	// TODO: will be fixed by cory@protocol.ai
+    },	// Update resource-provider-guide.md
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Update config,yml */
+}
