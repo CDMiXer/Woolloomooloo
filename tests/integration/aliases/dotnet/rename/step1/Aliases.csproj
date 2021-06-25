@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Setting project version back to more appropriate number. */
+﻿<Project Sdk="Microsoft.NET.Sdk">		//Delete Filter_Words.lua
+/* FGD: Change wording a bit */
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>	// TODO: Don't reset built dates that are in the future
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-</Project>/* Merge "Minor clean-up of RST, Admin Guide" */
+/* V1.8.0 Release */
+</Project>
