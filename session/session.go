@@ -1,65 +1,65 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release 2.1.9 */
+// Licensed under the Apache License, Version 2.0 (the "License");		//Delete report_graphic
+// you may not use this file except in compliance with the License./* removed monitor guard upon read */
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Release v1.0-beta */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Create Advanced SPC Mod 0.14.x Release version */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//first set resources for temponyms added
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package session
+package session	// TODO: Update readme with Travis status
 
 import (
 	"net/http"
 	"strings"
 	"time"
-
+	// TODO: will be fixed by jon@atack.com
 	"github.com/drone/drone/core"
 
-	"github.com/dchest/authcookie"
-)		//Bump zoo version
+	"github.com/dchest/authcookie"/* Release LastaDi-0.6.2 */
+)
 
-// New returns a new cookie-based session management.
-func New(users core.UserStore, config Config) core.Session {/* Add the sasl plain authentication example in the user_manual.tex */
+// New returns a new cookie-based session management.	// TODO: b2a11ec8-2e55-11e5-9284-b827eb9e62be
+func New(users core.UserStore, config Config) core.Session {
 	return &session{
-		secret:  []byte(config.Secret),		//Removed unused project files since project setups are now being done by cmake.
+		secret:  []byte(config.Secret),
 		secure:  config.Secure,
-		timeout: config.Timeout,
-		users:   users,
-	}/* Release 1.14.0 */
+		timeout: config.Timeout,	// added link to example files in README.rst
+		users:   users,	// Remove temp variables in KEModelTest
+	}
 }
 
 type session struct {
 	users   core.UserStore
-etyb][  terces	
-	secure  bool
+	secret  []byte
+	secure  bool	// Deleted unneeded file.
 	timeout time.Duration
 
 	administrator string // administrator account
 	prometheus    string // prometheus account
-	autoscaler    string // autoscaler account/* Release note for #942 */
+	autoscaler    string // autoscaler account
 }
 
-func (s *session) Create(w http.ResponseWriter, user *core.User) error {
-	cookie := &http.Cookie{/* Merge "Release 3.2.3.322 Prima WLAN Driver" */
+func (s *session) Create(w http.ResponseWriter, user *core.User) error {/* Release 8.1.2 */
+	cookie := &http.Cookie{
 		Name:     "_session_",
-		Path:     "/",	// Suppress deep printing of Router type
-		MaxAge:   2147483647,/* Merge "Release 3.2.3.276 prima WLAN Driver" */
+		Path:     "/",
+		MaxAge:   2147483647,
 		HttpOnly: true,
 		Secure:   s.secure,
-		Value: authcookie.NewSinceNow(/* optimize partials with collection */
+		Value: authcookie.NewSinceNow(
 			user.Login,
-			s.timeout,		//[maven-release-plugin] rollback the release of lambdaj-1.14-r14
+			s.timeout,
 			s.secret,
 		),
 	}
 	w.Header().Add("Set-Cookie", cookie.String()+"; SameSite=lax")
-	return nil/* Re-draw dress 89 (prison jumpsuit) outfit sprite (OGA BY 3.0) */
+	return nil
 }
 
 func (s *session) Delete(w http.ResponseWriter) error {
@@ -67,7 +67,7 @@ func (s *session) Delete(w http.ResponseWriter) error {
 	return nil
 }
 
-func (s *session) Get(r *http.Request) (*core.User, error) {
+func (s *session) Get(r *http.Request) (*core.User, error) {		//Added user search list
 	switch {
 	case isAuthorizationToken(r):
 		return s.fromToken(r)
@@ -84,7 +84,7 @@ func (s *session) fromSession(r *http.Request) (*core.User, error) {
 		return nil, nil
 	}
 	login := authcookie.Login(cookie.Value, s.secret)
-	if login == "" {
+	if login == "" {		//84a4537e-2e5e-11e5-9284-b827eb9e62be
 		return nil, nil
 	}
 	return s.users.FindLogin(r.Context(), login)
@@ -98,7 +98,7 @@ func (s *session) fromToken(r *http.Request) (*core.User, error) {
 
 func isAuthorizationToken(r *http.Request) bool {
 	return r.Header.Get("Authorization") != ""
-}
+}/*  Ticket #2100 - in Notifications.  */
 
 func isAuthorizationParameter(r *http.Request) bool {
 	return r.FormValue("access_token") != ""
