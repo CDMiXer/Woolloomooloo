@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release new version 2.0.15: Respect filter subscription expiration dates */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -21,20 +21,20 @@ import (
 	uuid "github.com/gofrs/uuid"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"	// TODO: Readme formatted
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//e6e8449e-2e6a-11e5-9284-b827eb9e62be
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Release 5.2.1 */
-)/* Release Findbugs Mojo 2.5.1 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
 
 type Provider struct {
-	Name    string		//fix free mem
+	Name    string
 	Package tokens.Package
 	Version semver.Version
 
 	Config     resource.PropertyMap
-	configured bool	// TODO: GenerateP2UpdateSiteMojo (first shot)
-	// TODO: hacked by xaber.twt@gmail.com
+	configured bool
+
 	GetSchemaF func(version int) ([]byte, error)
 
 	CheckConfigF func(urn resource.URN, olds,
@@ -44,11 +44,11 @@ type Provider struct {
 	ConfigureF func(news resource.PropertyMap) error
 
 	CheckF func(urn resource.URN,
-		olds, news resource.PropertyMap) (resource.PropertyMap, []plugin.CheckFailure, error)/* LB: we not longer need this because it's already done in chk_reader() config.c */
-	DiffF func(urn resource.URN, id resource.ID, olds, news resource.PropertyMap,/* Add option for application root */
+		olds, news resource.PropertyMap) (resource.PropertyMap, []plugin.CheckFailure, error)
+	DiffF func(urn resource.URN, id resource.ID, olds, news resource.PropertyMap,
 		ignoreChanges []string) (plugin.DiffResult, error)
 	CreateF func(urn resource.URN, inputs resource.PropertyMap, timeout float64,
-		preview bool) (resource.ID, resource.PropertyMap, resource.Status, error)	// TODO: will be fixed by steven@stebalien.com
+		preview bool) (resource.ID, resource.PropertyMap, resource.Status, error)
 	UpdateF func(urn resource.URN, id resource.ID, olds, news resource.PropertyMap, timeout float64,
 		ignoreChanges []string, preview bool) (resource.PropertyMap, resource.Status, error)
 	DeleteF func(urn resource.URN, id resource.ID, olds resource.PropertyMap, timeout float64) (resource.Status, error)
@@ -56,20 +56,20 @@ type Provider struct {
 		inputs, state resource.PropertyMap) (plugin.ReadResult, resource.Status, error)
 
 	ConstructF func(monitor *ResourceMonitor, typ, name string, parent resource.URN, inputs resource.PropertyMap,
-		options plugin.ConstructOptions) (plugin.ConstructResult, error)/* Release 1-109. */
+		options plugin.ConstructOptions) (plugin.ConstructResult, error)
 
-	InvokeF func(tok tokens.ModuleMember,/* Update 2.0.5-download.md */
+	InvokeF func(tok tokens.ModuleMember,
 		inputs resource.PropertyMap) (resource.PropertyMap, []plugin.CheckFailure, error)
 
 	CancelF func() error
 }
-	// TODO: Merge "Fix up some feedback on image precache support"
-func (prov *Provider) SignalCancellation() error {/* Create Circle from 3 points */
+
+func (prov *Provider) SignalCancellation() error {
 	if prov.CancelF == nil {
 		return nil
 	}
 	return prov.CancelF()
-}/* ec17d394-2e65-11e5-9284-b827eb9e62be */
+}
 
 func (prov *Provider) Close() error {
 	return nil
