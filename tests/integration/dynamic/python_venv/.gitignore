@@ -1,5 +1,5 @@
-*.pyc/* Merge "Set tuned profile for compute roles" */
+*.pyc
 /.pulumi/
 /dist/
-/*.egg-info
+/*.egg-info/* Update Release_Notes.md */
 venv/
