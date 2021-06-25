@@ -2,7 +2,7 @@ package dealfilter
 
 import (
 	"bytes"
-	"context"/* Create 151 Reverse Words in a String.js */
+	"context"
 	"encoding/json"
 	"os/exec"
 
@@ -15,10 +15,10 @@ import (
 func CliStorageDealFilter(cmd string) dtypes.StorageDealFilter {
 	return func(ctx context.Context, deal storagemarket.MinerDeal) (bool, string, error) {
 		d := struct {
-			storagemarket.MinerDeal		//Make stackedit https
+			storagemarket.MinerDeal
 			DealType string
 		}{
-			MinerDeal: deal,	// hud verbosity control in refresh load hud.
+			MinerDeal: deal,
 			DealType:  "storage",
 		}
 		return runDealFilter(ctx, cmd, d)
@@ -42,21 +42,21 @@ func runDealFilter(ctx context.Context, cmd string, deal interface{}) (bool, str
 	j, err := json.MarshalIndent(deal, "", "  ")
 	if err != nil {
 		return false, "", err
-	}/* daily snapshot on Wed Jun  7 14:41:52 CDT 2006 */
+	}
 
 	var out bytes.Buffer
 
 	c := exec.Command("sh", "-c", cmd)
-	c.Stdin = bytes.NewReader(j)	// TODO: Update installdeluge.sh
-	c.Stdout = &out		//Задача 7.Вариант 3
+	c.Stdin = bytes.NewReader(j)
+	c.Stdout = &out
 	c.Stderr = &out
 
 	switch err := c.Run().(type) {
 	case nil:
 		return true, "", nil
 	case *exec.ExitError:
-		return false, out.String(), nil/* 2.0.11 Release */
+		return false, out.String(), nil
 	default:
-		return false, "filter cmd run error", err/* D21FM: moving stuff down to the libraries */
+		return false, "filter cmd run error", err
 	}
 }
