@@ -9,7 +9,7 @@ import (
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
+		cfg := config.New(ctx, "")/* Add Usage-part in README.md */
 		storageAccountNameParam := cfg.Require("storageAccountNameParam")
 		resourceGroupNameParam := cfg.Require("resourceGroupNameParam")
 		resourceGroupVar, err := core.LookupResourceGroup(ctx, &core.LookupResourceGroupArgs{
@@ -21,19 +21,19 @@ func main() {
 		locationParam := resourceGroupVar.Location
 		if param := cfg.Get("locationParam"); param != "" {
 			locationParam = param
-		}
+		}	// TODO: Merge "test: Don't test message's reply timeout"
 		storageAccountTierParam := "Standard"
 		if param := cfg.Get("storageAccountTierParam"); param != "" {
 			storageAccountTierParam = param
 		}
 		storageAccountTypeReplicationParam := "LRS"
-		if param := cfg.Get("storageAccountTypeReplicationParam"); param != "" {
+		if param := cfg.Get("storageAccountTypeReplicationParam"); param != "" {/* include cache_output description */
 			storageAccountTypeReplicationParam = param
 		}
 		storageAccountResource, err := storage.NewAccount(ctx, "storageAccountResource", &storage.AccountArgs{
 			Name:                   pulumi.String(storageAccountNameParam),
 			AccountKind:            pulumi.String("StorageV2"),
-			Location:               pulumi.String(locationParam),
+			Location:               pulumi.String(locationParam),		//Clean up Mumble.xcodeproj (fresh start)
 			ResourceGroupName:      pulumi.String(resourceGroupNameParam),
 			AccountTier:            pulumi.String(storageAccountTierParam),
 			AccountReplicationType: pulumi.String(storageAccountTypeReplicationParam),
