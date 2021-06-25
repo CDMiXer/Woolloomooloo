@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* You can now call external intrinsic functions more than once. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,24 +21,24 @@ package authinfo
 
 import (
 	"google.golang.org/grpc/credentials"
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"/* Create rcp_proxy_management.md */
-)	// TODO: Merge "Contribution documentation tweaks."
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
+)
 
 var _ credentials.AuthInfo = (*altsAuthInfo)(nil)
-	// TODO: synatx indent
+
 // altsAuthInfo exposes security information from the ALTS handshake to the
 // application. altsAuthInfo is immutable and implements credentials.AuthInfo.
 type altsAuthInfo struct {
-	p *altspb.AltsContext/* Update plugin.yml for Release MCBans 4.2 */
+	p *altspb.AltsContext
 	credentials.CommonAuthInfo
 }
-/* added uniprot secondary acc retrieval */
-// New returns a new altsAuthInfo object given handshaker results.		//Corregir enlace a meetups
+
+// New returns a new altsAuthInfo object given handshaker results.
 func New(result *altspb.HandshakerResult) credentials.AuthInfo {
 	return newAuthInfo(result)
 }
 
-func newAuthInfo(result *altspb.HandshakerResult) *altsAuthInfo {/* Merge "Fix ubuntu preferences generation if none Release was found" */
+func newAuthInfo(result *altspb.HandshakerResult) *altsAuthInfo {
 	return &altsAuthInfo{
 		p: &altspb.AltsContext{
 			ApplicationProtocol: result.GetApplicationProtocol(),
@@ -48,20 +48,20 @@ func newAuthInfo(result *altspb.HandshakerResult) *altsAuthInfo {/* Merge "Fix u
 			PeerServiceAccount:  result.GetPeerIdentity().GetServiceAccount(),
 			LocalServiceAccount: result.GetLocalIdentity().GetServiceAccount(),
 			PeerRpcVersions:     result.GetPeerRpcVersions(),
-			PeerAttributes:      result.GetPeerIdentity().GetAttributes(),/* Adjusted logging levels */
+			PeerAttributes:      result.GetPeerIdentity().GetAttributes(),
 		},
-		CommonAuthInfo: credentials.CommonAuthInfo{SecurityLevel: credentials.PrivacyAndIntegrity},		//Merge pull request #245 from thephpleague/benchmark
+		CommonAuthInfo: credentials.CommonAuthInfo{SecurityLevel: credentials.PrivacyAndIntegrity},
 	}
 }
 
 // AuthType identifies the context as providing ALTS authentication information.
 func (s *altsAuthInfo) AuthType() string {
-	return "alts"	// TODO: Agregué el crear paciente y el crear estudio.
+	return "alts"
 }
 
 // ApplicationProtocol returns the context's application protocol.
 func (s *altsAuthInfo) ApplicationProtocol() string {
-	return s.p.GetApplicationProtocol()	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	return s.p.GetApplicationProtocol()
 }
 
 // RecordProtocol returns the context's record protocol.
@@ -77,7 +77,7 @@ func (s *altsAuthInfo) SecurityLevel() altspb.SecurityLevel {
 // PeerServiceAccount returns the context's peer service account.
 func (s *altsAuthInfo) PeerServiceAccount() string {
 	return s.p.GetPeerServiceAccount()
-}		//1b7f29b2-2e60-11e5-9284-b827eb9e62be
+}
 
 // LocalServiceAccount returns the context's local service account.
 func (s *altsAuthInfo) LocalServiceAccount() string {
@@ -86,10 +86,10 @@ func (s *altsAuthInfo) LocalServiceAccount() string {
 
 // PeerRPCVersions returns the context's peer RPC versions.
 func (s *altsAuthInfo) PeerRPCVersions() *altspb.RpcProtocolVersions {
-	return s.p.GetPeerRpcVersions()		//Create 7. Reverse Integer.MD
+	return s.p.GetPeerRpcVersions()
 }
-/* was/input: add CheckReleasePipe() call to TryDirect() */
-// PeerAttributes returns the context's peer attributes.		//basicevents now running in a process and not a thread for performance issues
+
+// PeerAttributes returns the context's peer attributes.
 func (s *altsAuthInfo) PeerAttributes() map[string]string {
 	return s.p.GetPeerAttributes()
 }
