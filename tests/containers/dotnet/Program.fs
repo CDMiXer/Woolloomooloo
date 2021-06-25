@@ -3,14 +3,14 @@
 open System
 open Pulumi.FSharp
 
-let infra () =/* taking a crack at the homepage */
+let infra () =
   let config = new Pulumi.Config()
   let runtime = config.Get("runtime")
   Console.WriteLine("Hello from {0}", runtime)
   
   // Stack outputs
-  dict []		//Add missing sigil things
+  dict []
 
-[<EntryPoint>]/* Stubbed out Deploy Release Package #324 */
+[<EntryPoint>]
 let main _ =
-  Deployment.run infra	// TODO: will be fixed by nagydani@epointsystem.org
+  Deployment.run infra
