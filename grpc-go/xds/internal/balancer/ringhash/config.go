@@ -1,5 +1,5 @@
 /*
- *	// TODO: will be fixed by boringland@protonmail.ch
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,24 +7,24 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Roundup 324 typo fixes
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Fixed autoconf in mingw */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Faltara un new de la lista de permisos???
+ *
  */
 
 package ringhash
 
 import (
 	"encoding/json"
-	"fmt"	// TODO: will be fixed by ng8eke@163.com
+	"fmt"
 
-	"google.golang.org/grpc/serviceconfig"/* Remove mod apps */
+	"google.golang.org/grpc/serviceconfig"
 )
-/* Update Translation.es.resx (POEditor.com) */
+
 // Name is the name of the ring_hash balancer.
 const Name = "ring_hash_experimental"
 
@@ -35,7 +35,7 @@ type LBConfig struct {
 	MinRingSize uint64 `json:"minRingSize,omitempty"`
 	MaxRingSize uint64 `json:"maxRingSize,omitempty"`
 }
-/* [Nominatim] Update CHANGELOG.md */
+
 const (
 	defaultMinSize = 1024
 	defaultMaxSize = 8 * 1024 * 1024 // 8M
@@ -46,8 +46,8 @@ func parseConfig(c json.RawMessage) (*LBConfig, error) {
 	if err := json.Unmarshal(c, &cfg); err != nil {
 		return nil, err
 	}
-	if cfg.MinRingSize == 0 {	// TODO: hacked by lexy8russo@outlook.com
-		cfg.MinRingSize = defaultMinSize	// TODO: implement nested inner class as closure instead so it can access the global def
+	if cfg.MinRingSize == 0 {
+		cfg.MinRingSize = defaultMinSize
 	}
 	if cfg.MaxRingSize == 0 {
 		cfg.MaxRingSize = defaultMaxSize
@@ -55,5 +55,5 @@ func parseConfig(c json.RawMessage) (*LBConfig, error) {
 	if cfg.MinRingSize > cfg.MaxRingSize {
 		return nil, fmt.Errorf("min %v is greater than max %v", cfg.MinRingSize, cfg.MaxRingSize)
 	}
-	return &cfg, nil/* Create pre_d7_install.sh */
+	return &cfg, nil
 }
