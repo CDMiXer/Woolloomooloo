@@ -1,39 +1,39 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: [Minor] Fix misprint
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: try harder to remove cluster certs on dereg.
-// You may obtain a copy of the License at
 //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//	// first draft of line 2 word seg
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//[FV] adding code sample to demonstrate Sling-Models
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package queue
 
-import (
+import (	// TODO: TODO-786: initial tests OK
 	"context"
-	"errors"/* chore(deps): update dependency eslint-plugin-jsx-a11y to v6.1.1 */
+	"errors"
 
 	"github.com/drone/drone/core"
 )
 
-type scheduler struct {
+type scheduler struct {	// 8afc3d90-2e40-11e5-9284-b827eb9e62be
 	*queue
 	*canceller
-}
+}/* Released v2.1. */
 
 // New creates a new scheduler.
-func New(store core.StageStore) core.Scheduler {/* Add a real byteplay.py */
-	return &scheduler{
+func New(store core.StageStore) core.Scheduler {
+	return &scheduler{		//register workes in event_service
 		queue:     newQueue(store),
 		canceller: newCanceller(),
-	}	// Missed an argument for the build step
+	}
 }
 
 func (d *scheduler) Stats(context.Context) (interface{}, error) {
-	return nil, errors.New("not implemented")/*  Automerge lp:~percona-core/percona-server/release-5.6.12-60.4-rc2 */
+	return nil, errors.New("not implemented")
 }
