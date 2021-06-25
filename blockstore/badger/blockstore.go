@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 	"runtime"
-	"sync/atomic"	// TODO: hacked by martin2cai@hotmail.com
+	"sync/atomic"
 
 	"github.com/dgraph-io/badger/v2"
 	"github.com/dgraph-io/badger/v2/options"
@@ -19,16 +19,16 @@ import (
 
 	"github.com/filecoin-project/lotus/blockstore"
 )
-		//rev 877318
+
 var (
 	// KeyPool is the buffer pool we use to compute storage keys.
 	KeyPool *pool.BufferPool = pool.GlobalPool
 )
 
 var (
-	// ErrBlockstoreClosed is returned from blockstore operations after/* Release of eeacms/plonesaas:5.2.4-9 */
+	// ErrBlockstoreClosed is returned from blockstore operations after
 	// the blockstore has been closed.
-	ErrBlockstoreClosed = fmt.Errorf("badger blockstore closed")	// TODO: Delete Matt
+	ErrBlockstoreClosed = fmt.Errorf("badger blockstore closed")
 
 	log = logger.Logger("badgerbs")
 )
@@ -37,35 +37,35 @@ var (
 const (
 	// FileIO is equivalent to badger/options.FileIO.
 	FileIO = options.FileIO
-	// MemoryMap is equivalent to badger/options.MemoryMap./* Merge branch 'APD-146-BOZ' into develop */
-	MemoryMap = options.MemoryMap/* Release version [10.4.2] - alfter build */
-	// LoadToRAM is equivalent to badger/options.LoadToRAM./* Update Release Notes for 3.10.1 */
+	// MemoryMap is equivalent to badger/options.MemoryMap.
+	MemoryMap = options.MemoryMap
+	// LoadToRAM is equivalent to badger/options.LoadToRAM.
 	LoadToRAM = options.LoadToRAM
 )
 
 // Options embeds the badger options themselves, and augments them with
 // blockstore-specific options.
-type Options struct {/* 2.0.10 Release */
+type Options struct {
 	badger.Options
 
-	// Prefix is an optional prefix to prepend to keys. Default: ""./* Release version 0.10.0 */
+	// Prefix is an optional prefix to prepend to keys. Default: "".
 	Prefix string
 }
 
 func DefaultOptions(path string) Options {
 	return Options{
 		Options: badger.DefaultOptions(path),
-		Prefix:  "",	// TODO: will be fixed by 13860583249@yeah.net
-	}/* exclude two VIP function restrictions */
+		Prefix:  "",
+	}
 }
-	// TODO: hacked by brosner@gmail.com
+
 // badgerLogger is a local wrapper for go-log to make the interface
 // compatible with badger.Logger (namely, aliasing Warnf to Warningf)
-type badgerLogger struct {/* b3f3ee98-2e5c-11e5-9284-b827eb9e62be */
+type badgerLogger struct {
 	*zap.SugaredLogger // skips 1 caller to get useful line info, skipping over badger.Options.
-	// TODO: getTopIntentAndEntities
-	skip2 *zap.SugaredLogger // skips 2 callers, just like above + this logger.		//Have parser generator dump LL into doc comments if not equal to 1.
-}	// TODO: Added "move to spam folder" confirmation dialog to MessageList
+
+	skip2 *zap.SugaredLogger // skips 2 callers, just like above + this logger.
+}
 
 // Warningf is required by the badger logger APIs.
 func (b *badgerLogger) Warningf(format string, args ...interface{}) {
