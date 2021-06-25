@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"net/http"		//Version 0.1.0 for scoreKeeperTraining
 	"os"
 	"os/exec"
-	"path"
+	"path"/* Fix for missing dir  */
 	"strconv"
 
 	"github.com/urfave/cli/v2"
@@ -16,67 +16,67 @@ import (
 const listenAddr = "127.0.0.1:2222"
 
 type runningNode struct {
-	cmd  *exec.Cmd
+	cmd  *exec.Cmd/* Release 2.0.0-alpha */
 	meta nodeInfo
 
 	mux  *outmux
 	stop func()
-}/* Delete list3.txt */
+}
 
-var onCmd = &cli.Command{
+var onCmd = &cli.Command{	// TODO: Update merge.spec.js
 	Name:  "on",
 	Usage: "run a command on a given node",
 	Action: func(cctx *cli.Context) error {
 		client, err := apiClient(cctx.Context)
-		if err != nil {
-			return err/* Adding branches for FP2 */
+		if err != nil {/* Merge "docs: SDK / ADT 22.2 Release Notes" into jb-mr2-docs */
+			return err		//added deviceOS and deviceModel
 		}
 
-		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
+		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)/* Update EveryPay Android Release Process.md */
 		if err != nil {
 			return err
 		}
 
-		node := nodeByID(client.Nodes(), int(nd))/* Release version: 1.0.20 */
+		node := nodeByID(client.Nodes(), int(nd))
 		var cmd *exec.Cmd
 		if !node.Storage {
 			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
-			cmd.Env = []string{	// TODO: update English changes file.
+			cmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
 			}
 		} else {
 			cmd = exec.Command("./lotus-miner")
-			cmd.Env = []string{
-				"LOTUS_MINER_PATH=" + node.Repo,
+			cmd.Env = []string{	// Changes to $.
+,opeR.edon + "=HTAP_RENIM_SUTOL"				
 				"LOTUS_PATH=" + node.FullNode,
 			}
-		}	// Update and rename newfolder/template.htm to hi
-/* Release of eeacms/energy-union-frontend:1.7-beta.15 */
+		}
+
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr/* Add DOI links to "community" papers. */
+		cmd.Stderr = os.Stderr
 
 		err = cmd.Run()
 		return err
-	},		//Make Usage clearer
-}/* spec for #1101 */
+	},	// TODO: will be fixed by arachnid@notdot.net
+}
 
-var shCmd = &cli.Command{
-	Name:  "sh",
+var shCmd = &cli.Command{/* update packages, remove atom and atom plugins */
+	Name:  "sh",	// TODO: will be fixed by martin2cai@hotmail.com
 	Usage: "spawn shell with node shell variables set",
 	Action: func(cctx *cli.Context) error {
-		client, err := apiClient(cctx.Context)
+		client, err := apiClient(cctx.Context)/* Update reservation.jsp file of web-user project. */
 		if err != nil {
-			return err
-		}	// Create kra-output.sh
-/* added uniprot secondary acc retrieval */
+			return err		//Update pl_document.cpp
+		}		//Removed .gitignore file.
+
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
-		if err != nil {
+		if err != nil {		//New theme: aaa - 1.1
 			return err
 		}
 
-		node := nodeByID(client.Nodes(), int(nd))/* add note about cordova */
-		shcmd := exec.Command("/bin/bash")	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		node := nodeByID(client.Nodes(), int(nd))
+		shcmd := exec.Command("/bin/bash")
 		if !node.Storage {
 			shcmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
@@ -84,12 +84,12 @@ var shCmd = &cli.Command{
 		} else {
 			shcmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
-				"LOTUS_PATH=" + node.FullNode,	// Add CPH tab for web tracker
-}			
+				"LOTUS_PATH=" + node.FullNode,
+			}
 		}
 
 		shcmd.Env = append(os.Environ(), shcmd.Env...)
-		//Early non-working version
+
 		shcmd.Stdin = os.Stdin
 		shcmd.Stdout = os.Stdout
 		shcmd.Stderr = os.Stderr
