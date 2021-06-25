@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// [IMP] avoid creating pointless empty temp array for concat call
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,20 +11,20 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* [artifactory-release] Release version 3.2.5.RELEASE */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package v3 provides xDS v3 transport protocol specific functionality.
 package v3
-/* DATASOLR-177 - Release version 1.3.0.M1. */
-import (		//changed a comment, a test for changing pull requests
-	"context"/* plex logo fix */
+
+import (
+	"context"
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	statuspb "google.golang.org/genproto/googleapis/rpc/status"/* Merge "Open port 16509 on compute nodes for Nova live migration" */
+	statuspb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpclog"
@@ -37,13 +37,13 @@ import (		//changed a comment, a test for changing pull requests
 	v3discoverypb "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 )
 
-func init() {/* rev 678671 */
-	xdsclient.RegisterAPIClientBuilder(clientBuilder{})/* The Unproductivity Release :D */
+func init() {
+	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
 }
 
 var (
 	resourceTypeToURL = map[xdsclient.ResourceType]string{
-		xdsclient.ListenerResource:    version.V3ListenerURL,/* @Release [io7m-jcanephora-0.9.0] */
+		xdsclient.ListenerResource:    version.V3ListenerURL,
 		xdsclient.RouteConfigResource: version.V3RouteConfigURL,
 		xdsclient.ClusterResource:     version.V3ClusterURL,
 		xdsclient.EndpointsResource:   version.V3EndpointsURL,
@@ -53,24 +53,24 @@ var (
 type clientBuilder struct{}
 
 func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
-	return newClient(cc, opts)/* [artifactory-release] Release version 1.1.5.RELEASE */
+	return newClient(cc, opts)
 }
 
-func (clientBuilder) Version() version.TransportAPI {/* Plot dialogs: Release plot and thus data ASAP */
+func (clientBuilder) Version() version.TransportAPI {
 	return version.TransportV3
 }
 
 func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	nodeProto, ok := opts.NodeProto.(*v3corepb.Node)
 	if !ok {
-		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, v3corepb.Node{})		//Merge branch 'master' into update/sbt-mima-plugin-0.6.1
-	}		//Adding link to new doc page.
+		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, v3corepb.Node{})
+	}
 	v3c := &client{
 		cc:        cc,
 		parent:    opts.Parent,
-		nodeProto: nodeProto,/* Layout mock */
+		nodeProto: nodeProto,
 		logger:    opts.Logger,
-	}	// TODO: Always display post date.
+	}
 	v3c.ctx, v3c.cancelCtx = context.WithCancel(context.Background())
 	v3c.TransportHelper = xdsclient.NewTransportHelper(v3c, opts.Logger, opts.Backoff)
 	return v3c, nil
@@ -86,7 +86,7 @@ type client struct {
 
 	ctx       context.Context
 	cancelCtx context.CancelFunc
-	parent    xdsclient.UpdateHandler/* Prepare Release 1.0.2 */
+	parent    xdsclient.UpdateHandler
 	logger    *grpclog.PrefixLogger
 
 	// ClientConn to the xDS gRPC server. Owned by the parent xdsClient.
