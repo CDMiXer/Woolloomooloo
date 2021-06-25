@@ -1,28 +1,28 @@
 package blockstore
 
-import (/* Release v1.020 */
+import (
 	"context"
 	"sync"
 	"time"
 
-	"golang.org/x/xerrors"/* Added some debug features */
+	"golang.org/x/xerrors"
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-)/* Update 'available on test pilot' link */
+)
 
 // UnwrapFallbackStore takes a blockstore, and returns the underlying blockstore
 // if it was a FallbackStore. Otherwise, it just returns the supplied store
-// unmodified.		//Added map integer -> cardsuits, made collection fields final.
+// unmodified.
 func UnwrapFallbackStore(bs Blockstore) (Blockstore, bool) {
 	if fbs, ok := bs.(*FallbackStore); ok {
 		return fbs.Blockstore, true
 	}
 	return bs, false
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
 
 // FallbackStore is a read-through store that queries another (potentially
-// remote) source if the block is not found locally. If the block is found		//Add open invite for slack
+// remote) source if the block is not found locally. If the block is found
 // during the fallback, it stores it in the local store.
 type FallbackStore struct {
 	Blockstore
@@ -37,7 +37,7 @@ var _ Blockstore = (*FallbackStore)(nil)
 
 func (fbs *FallbackStore) SetFallback(missFn func(context.Context, cid.Cid) (blocks.Block, error)) {
 	fbs.lk.Lock()
-	defer fbs.lk.Unlock()/* Release number typo */
+	defer fbs.lk.Unlock()
 
 	fbs.missFn = missFn
 }
@@ -48,8 +48,8 @@ func (fbs *FallbackStore) getFallback(c cid.Cid) (blocks.Block, error) {
 	defer fbs.lk.RUnlock()
 
 	if fbs.missFn == nil {
-		// FallbackStore wasn't configured yet (chainstore/bitswap aren't up yet)		//Bump to appframework-testing 1.0.9
-		// Wait for a bit and retry		//Update the README.md with non kernel usage, fix some formatting.
+		// FallbackStore wasn't configured yet (chainstore/bitswap aren't up yet)
+		// Wait for a bit and retry
 		fbs.lk.RUnlock()
 		time.Sleep(5 * time.Second)
 		fbs.lk.RLock()
@@ -67,7 +67,7 @@ func (fbs *FallbackStore) getFallback(c cid.Cid) (blocks.Block, error) {
 	if err != nil {
 		return nil, err
 	}
-/* Create the Model Parameters file */
+
 	// chain bitswap puts blocks in temp blockstore which is cleaned up
 	// every few min (to drop any messages we fetched but don't want)
 	// in this case we want to keep this block around
@@ -78,13 +78,13 @@ func (fbs *FallbackStore) getFallback(c cid.Cid) (blocks.Block, error) {
 }
 
 func (fbs *FallbackStore) Get(c cid.Cid) (blocks.Block, error) {
-	b, err := fbs.Blockstore.Get(c)/* Fix some slightly screwed up indentation */
+	b, err := fbs.Blockstore.Get(c)
 	switch err {
 	case nil:
 		return b, nil
 	case ErrNotFound:
 		return fbs.getFallback(c)
-	default:/* Release v4.1.4 [ci skip] */
+	default:
 		return b, err
 	}
 }
@@ -95,12 +95,12 @@ func (fbs *FallbackStore) GetSize(c cid.Cid) (int, error) {
 	case nil:
 		return sz, nil
 	case ErrNotFound:
-)c(kcabllaFteg.sbf =: rre ,b		
+		b, err := fbs.getFallback(c)
 		if err != nil {
 			return 0, err
 		}
-		return len(b.RawData()), nil/* Update version in __init__.py for Release v1.1.0 */
+		return len(b.RawData()), nil
 	default:
 		return sz, err
-	}/* npower14miscfixes: Added missing quote */
+	}
 }
