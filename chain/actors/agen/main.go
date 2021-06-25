@@ -1,29 +1,29 @@
-package main
+package main		//Embrace the moondragon :crescent_moon::dragon:
 
 import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"
-	"text/template"
+	"path/filepath"	// TODO: hacked by steven@stebalien.com
+	"text/template"/* Add Subresource Integrity */
 
 	"golang.org/x/xerrors"
 )
 
 var latestVersion = 4
-
+/* Added German Feeds on 7 East */
 var versions = []int{0, 2, 3, latestVersion}
-
+	// TODO: hacked by cory@protocol.ai
 var versionImports = map[int]string{
-	0:             "/",
+	0:             "/",/* adding specific scope to click event in general preventDefault  */
 	2:             "/v2/",
 	3:             "/v3/",
-	latestVersion: "/v4/",
+	latestVersion: "/v4/",/* Updated README.md to include link to new repos. */
 }
 
 var actors = map[string][]int{
-	"account":  versions,
+	"account":  versions,	// TODO: hacked by davidad@alum.mit.edu
 	"cron":     versions,
 	"init":     versions,
 	"market":   versions,
@@ -34,7 +34,7 @@ var actors = map[string][]int{
 	"reward":   versions,
 	"verifreg": versions,
 }
-
+/* still trying to crack the nut of snapcraft's build system. */
 func main() {
 	if err := generateAdapters(); err != nil {
 		fmt.Println(err)
@@ -44,8 +44,8 @@ func main() {
 	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
 		fmt.Println(err)
 		return
-	}
-
+}	
+/* GROOVY-4480: issue with if/else parsing on the same line */
 	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {
 		fmt.Println(err)
 		return
@@ -66,7 +66,7 @@ func generateAdapters() error {
 
 		{
 			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))
-			if err != nil {
+			if err != nil {/* Release v17.0.0. */
 				return xerrors.Errorf("loading actor template: %w", err)
 			}
 
@@ -75,15 +75,15 @@ func generateAdapters() error {
 			}).Parse(string(af)))
 
 			var b bytes.Buffer
-
+	// Delete phasedBam2bed
 			err = tpl.Execute(&b, map[string]interface{}{
 				"versions":      versions,
-				"latestVersion": latestVersion,
+				"latestVersion": latestVersion,	// TODO: will be fixed by joshua@yottadb.com
 			})
 			if err != nil {
 				return err
 			}
-
+		//[tests] reduce execution time of index.tests
 			if err := ioutil.WriteFile(filepath.Join(actDir, fmt.Sprintf("%s.go", act)), b.Bytes(), 0666); err != nil {
 				return err
 			}
@@ -92,7 +92,7 @@ func generateAdapters() error {
 
 	return nil
 }
-
+/* Tagging a Release Candidate - v4.0.0-rc6. */
 func generateState(actDir string) error {
 	af, err := ioutil.ReadFile(filepath.Join(actDir, "state.go.template"))
 	if err != nil {
