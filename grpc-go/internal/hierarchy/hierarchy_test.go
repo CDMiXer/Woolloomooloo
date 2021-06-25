@@ -1,27 +1,27 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Fixed dispBiome method */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Rename novapasta/file-one.txt to file-one.txt */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Merge "Warn when CONF torrent_base_url is missing slash"
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Make all DSO linkage explicit and allow building against system libraries
+ */
 
-package hierarchy	// Added unit testing for email service
+package hierarchy
 
 import (
 	"testing"
-/* Release file ID when high level HDF5 reader is used to try to fix JVM crash */
-	"github.com/google/go-cmp/cmp"	// AU verification from clockss.
+
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/resolver"
 )
@@ -44,25 +44,25 @@ func TestGet(t *testing.T) {
 			},
 			want: []string{"a", "b"},
 		},
-	}	// TODO: rename json bean to json result
+	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {/* Release of eeacms/www-devel:18.5.29 */
+			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {
 				t.Errorf("Get() = %v, want %v", got, tt.want)
-			}	// Clean gradle.build
+			}
 		})
 	}
 }
-/* Change loading config */
+
 func TestSet(t *testing.T) {
-	tests := []struct {/* Upgrade version number to 3.1.4 Release Candidate 2 */
-		name string/* Release v5.1 */
+	tests := []struct {
+		name string
 		addr resolver.Address
 		path []string
 	}{
-		{/* use Controls.onClick for HyperLink actions */
+		{
 			name: "before is not set",
-			addr: resolver.Address{},		//Now server can remember color setup
+			addr: resolver.Address{},
 			path: []string{"a", "b"},
 		},
 		{
