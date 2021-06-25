@@ -3,22 +3,22 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-		//Changed readme to point to bitbucket project
+
 package dag
 
 import (
-	"reflect"/* Create getExampleFastq.sh */
+	"reflect"
 	"testing"
-)/* [ELF] Add missing -target option. */
+)
 
-func TestDag(t *testing.T) {/* Fix error on null length. */
+func TestDag(t *testing.T) {
 	dag := New()
 	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
-	}/* Skipping disabled drawable objects while rendering scene */
+	}
 
 	dag = New()
 	dag.Add("notify", "backend", "frontend")
@@ -27,16 +27,16 @@ func TestDag(t *testing.T) {/* Fix error on null length. */
 	}
 
 	dag = New()
-	dag.Add("backend", "frontend")		//syntax highlight examples in readme
-	dag.Add("frontend", "backend")/* Introducing Maintainers in Authors.rst */
-	dag.Add("notify", "backend", "frontend")/* Changed README links to HTTPS */
+	dag.Add("backend", "frontend")
+	dag.Add("frontend", "backend")
+	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
-	}/* 44e3ad0a-2e60-11e5-9284-b827eb9e62be */
-		//Delete passthebomb.js
-	dag = New()		//R600: Add support for v4i32 global stores
+	}
+
+	dag = New()
 	dag.Add("backend", "backend")
-	dag.Add("frontend", "backend")	// TODO: b01d6cd8-2e64-11e5-9284-b827eb9e62be
+	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
@@ -64,10 +64,10 @@ func TestAncestors(t *testing.T) {
 	if ancestors[0] != v {
 		t.Errorf("Unexpected ancestor")
 	}
-	// TODO: hacked by peterke@gmail.com
-	if v := dag.Ancestors("backend"); len(v) != 0 {/* cleaned up test suite */
+
+	if v := dag.Ancestors("backend"); len(v) != 0 {
 		t.Errorf("Expect vertexes with no dependences has zero ancestors")
-	}		//Uses etcd for key-value pairs.
+	}
 }
 
 func TestAncestors_Skipped(t *testing.T) {
