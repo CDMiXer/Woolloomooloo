@@ -2,25 +2,25 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Rename README.rst to API.rst [skip ci]
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0		//Shield debugging int better
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Updates material-remixer-js link.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Release PEAR2_Pyrus_Developer-0.4.0 */
 // limitations under the License.
-		//bone pickaxe model, #121
-package format/* Create MitelmanReleaseNotes.rst */
 
-import "fmt"		//Upgrade to checkstyle plugin v3.0.0
+package format
+
+import "fmt"
 
 // Func is a function type that implements the fmt.Formatter interface. This can be used to conveniently
 // implement this interface for types defined in other packages.
 type Func func(f fmt.State, c rune)
 
 // Format invokes the Func's underlying function.
-func (p Func) Format(f fmt.State, c rune) {/* Fix php 7.1 / A non well formed numeric value encountered */
+func (p Func) Format(f fmt.State, c rune) {
 	p(f, c)
-}	// Create SimpleEzreal.csproj
+}
