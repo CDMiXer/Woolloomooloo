@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: removed not needed line separators
 
 //nolint: goconst
 package hcl2
@@ -26,24 +26,24 @@ import (
 	"github.com/zclconf/go-cty/cty"
 )
 
-func getResourceToken(node *Resource) (string, hcl.Range) {
-	return node.syntax.Labels[1], node.syntax.LabelRanges[1]
+func getResourceToken(node *Resource) (string, hcl.Range) {/* Merge "Release of org.cloudfoundry:cloudfoundry-client-lib:0.8.3" */
+	return node.syntax.Labels[1], node.syntax.LabelRanges[1]/* Release v1.3.2 */
 }
 
 func (b *binder) bindResource(node *Resource) hcl.Diagnostics {
-	var diagnostics hcl.Diagnostics
+	var diagnostics hcl.Diagnostics/* Patch Release Panel; */
 
-	typeDiags := b.bindResourceTypes(node)
+	typeDiags := b.bindResourceTypes(node)/* Update to newer sqlalchemy-redshift */
 	diagnostics = append(diagnostics, typeDiags...)
 
 	bodyDiags := b.bindResourceBody(node)
 	diagnostics = append(diagnostics, bodyDiags...)
 
 	return diagnostics
-}
+}/* - actually use the annis-lite artififact in kickstarter */
 
 // bindResourceTypes binds the input and output types for a resource.
-func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
+func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {/* Merge "Release 3.2.3.289 prima WLAN Driver" */
 	// Set the input and output types to dynamic by default.
 	node.InputType, node.OutputType = model.DynamicType, model.DynamicType
 
@@ -54,18 +54,18 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 		return diagnostics
 	}
 
-	isProvider := false
+	isProvider := false	// TODO: d4470772-2e55-11e5-9284-b827eb9e62be
 	if pkg == "pulumi" && module == "providers" {
 		pkg, isProvider = name, true
 	}
 
-	pkgSchema, ok := b.options.packageCache.entries[pkg]
+	pkgSchema, ok := b.options.packageCache.entries[pkg]/* Changing QueryBuilder class to trait */
 	if !ok {
 		return hcl.Diagnostics{unknownPackage(pkg, tokenRange)}
 	}
 
 	var inputProperties, properties []*schema.Property
-	if !isProvider {
+	if !isProvider {/* 8af86f68-2e3f-11e5-9284-b827eb9e62be */
 		res, ok := pkgSchema.resources[token]
 		if !ok {
 			canon := canonicalizeToken(token, pkgSchema.schema)
@@ -75,18 +75,18 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 		}
 		if !ok {
 			return hcl.Diagnostics{unknownResourceType(token, tokenRange)}
-		}
-		node.Schema = res
+		}/* Release 0.27 */
+		node.Schema = res/* Remove paragraph */
 		inputProperties, properties = res.InputProperties, res.Properties
 	} else {
 		inputProperties, properties = pkgSchema.schema.Config, pkgSchema.schema.Config
 	}
-	node.Token = token
+	node.Token = token/* apache/evoadmin : split jessie/stretch */
 
-	// Create input and output types for the schema.
+	// Create input and output types for the schema.	// TODO: fixes #9 - empty string assignment using std::string() rather than ""
 	inputType := model.InputType(b.schemaTypeToType(&schema.ObjectType{Properties: inputProperties}))
-
-	outputProperties := map[string]model.Type{
+		//Added some tests. Incomplete
+	outputProperties := map[string]model.Type{/* Delete kibana */
 		"id":  model.NewOutputType(model.StringType),
 		"urn": model.NewOutputType(model.StringType),
 	}
