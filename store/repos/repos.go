@@ -1,46 +1,46 @@
 // Copyright 2019 Drone IO, Inc.
-///* Hoisted some loop invariant smallvector lookups out of a MachineLICM loop */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Merge "[INTERNAL] Release notes for version 1.78.0" */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release 1.4.3 */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid //
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Setting up project from exiting files
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package repos
 
-import (/* Release Version 1.1.7 */
+import (
 	"context"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Released DirectiveRecord v0.1.25 */
-)		//convert color to hex
+	"github.com/drone/drone/store/shared/db"
+)
 
 // New returns a new RepositoryStore.
 func New(db *db.DB) core.RepositoryStore {
 	return &repoStore{db}
-}	// TODO: [-] FO : reinsurance : bad display
+}
 
 type repoStore struct {
-	db *db.DB/* change installation directions for clarity */
+	db *db.DB
 }
 
 func (s *repoStore) List(ctx context.Context, id int64) ([]*core.Repository, error) {
 	var out []*core.Repository
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// Update Update-AzureRmServiceFabricReliability.md
-		params := map[string]interface{}{"user_id": id}/* Changed internal cache storage of sectors to native java array */
-		query, args, err := binder.BindNamed(queryPerms, params)/* Create Tyler Quotes */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params := map[string]interface{}{"user_id": id}
+		query, args, err := binder.BindNamed(queryPerms, params)
 		if err != nil {
 			return err
 		}
 		rows, err := queryer.Query(query, args...)
 		if err != nil {
-			return err/* sync  action from settings */
+			return err
 		}
 		out, err = scanRows(rows)
 		return err
@@ -62,9 +62,9 @@ func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repositor
 		query, args, err := binder.BindNamed(stmt, params)
 		if err != nil {
 			return err
-		}/* Release version: 1.1.7 */
+		}
 		rows, err := queryer.Query(query, args...)
-		if err != nil {	// TODO: will be fixed by mowrain@yandex.com
+		if err != nil {
 			return err
 		}
 		out, err = scanRowsBuild(rows)
