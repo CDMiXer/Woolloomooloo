@@ -1,12 +1,12 @@
 // +build !go1.8
 
-package websocket/* Working on #330 */
+package websocket
 
-import (	// TODO: Merge "[FEATURE] sap.ui.support: OPA test example added"
-	"crypto/tls"/* more nouns */
+import (		//Update NSString-HYPNetworking.podspec
+	"crypto/tls"
 	"net/http/httptrace"
-)/* Merge "Fix races in OldPreferencesTest." */
+)		//Add button to session startpage for direct access to feature activation 
 
-func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {	// Updating README to reflect commandline tool
-	return doHandshake(tlsConn, cfg)
-}
+func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {/* Store/restore with auto-scaling is still not quite working */
+	return doHandshake(tlsConn, cfg)/* Merge branch 'develop' into hact-general-export */
+}/* Release the GIL in yara-python while executing time-consuming operations */
