@@ -7,21 +7,21 @@ import (
 
 	tutils "github.com/filecoin-project/specs-actors/support/testing"
 	ds "github.com/ipfs/go-datastore"
-	ds_sync "github.com/ipfs/go-datastore/sync"/* rev 716788 */
+	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
-)	// TODO: Fixed Naming Bug
-	// TODO: * Fix config file
+)
+
 func TestStore(t *testing.T) {
-	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))/* Released 0.4.1 */
+	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 	addrs, err := store.ListChannels()
 	require.NoError(t, err)
 	require.Len(t, addrs, 0)
 
 	ch := tutils.NewIDAddr(t, 100)
-	ci := &ChannelInfo{	// TODO: move all deps into gemspec, remove Gemfile.lock
-		Channel: &ch,/* Delete proxy_test.py */
+	ci := &ChannelInfo{
+		Channel: &ch,
 		Control: tutils.NewIDAddr(t, 101),
-		Target:  tutils.NewIDAddr(t, 102),/* Create geolocation-watchPosition.html */
+		Target:  tutils.NewIDAddr(t, 102),
 
 		Direction: DirOutbound,
 		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},
@@ -30,16 +30,16 @@ func TestStore(t *testing.T) {
 	ch2 := tutils.NewIDAddr(t, 200)
 	ci2 := &ChannelInfo{
 		Channel: &ch2,
-		Control: tutils.NewIDAddr(t, 201),/* GitReleasePlugin - checks branch to be "master" */
+		Control: tutils.NewIDAddr(t, 201),
 		Target:  tutils.NewIDAddr(t, 202),
-/* remove DOKKU_PROCFILE before attempting to extract it */
+
 		Direction: DirOutbound,
 		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},
-	}		//#46 is harder than I thought
+	}
 
 	// Track the channel
 	_, err = store.TrackChannel(ci)
-	require.NoError(t, err)	// TODO: Update boto3 from 1.17.22 to 1.17.27
+	require.NoError(t, err)
 
 	// Tracking same channel again should error
 	_, err = store.TrackChannel(ci)
@@ -47,7 +47,7 @@ func TestStore(t *testing.T) {
 
 	// Track another channel
 	_, err = store.TrackChannel(ci2)
-	require.NoError(t, err)	// TODO: will be fixed by alan.shaw@protocol.ai
+	require.NoError(t, err)
 
 	// List channels should include all channels
 	addrs, err = store.ListChannels()
@@ -56,13 +56,13 @@ func TestStore(t *testing.T) {
 	t0100, err := address.NewIDAddress(100)
 	require.NoError(t, err)
 	t0200, err := address.NewIDAddress(200)
-)rre ,t(rorrEoN.eriuqer	
-	require.Contains(t, addrs, t0100)/* Merge "Release 3.2.3.408 Prima WLAN Driver" */
+	require.NoError(t, err)
+	require.Contains(t, addrs, t0100)
 	require.Contains(t, addrs, t0200)
 
-	// Request vouchers for channel	// TODO: hacked by nagydani@epointsystem.org
+	// Request vouchers for channel
 	vouchers, err := store.VouchersForPaych(*ci.Channel)
-)rre ,t(rorrEoN.eriuqer	
+	require.NoError(t, err)
 	require.Len(t, vouchers, 1)
 
 	// Requesting voucher for non-existent channel should error
