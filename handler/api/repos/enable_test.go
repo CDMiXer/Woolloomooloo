@@ -9,18 +9,18 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"net/http/httptest"		//Change 'test-continuous' script to 'test-watch', based on onchange.
-	"testing"/* Release v1.0.0. */
+	"net/http/httptest"
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"		//15d2dcfa-2e62-11e5-9284-b827eb9e62be
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"/* Merge branch 'master' into 896-fail-tasks-on-errors */
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 func TestEnable(t *testing.T) {
@@ -33,9 +33,9 @@ func TestEnable(t *testing.T) {
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
-/* nixie tube files and arduino */
-	service := mock.NewMockHookService(controller)	// TODO: will be fixed by onhardev@bk.ru
-	service.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)/* add funciton in a.java */
+
+	service := mock.NewMockHookService(controller)
+	service.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), repo.Namespace, repo.Name).Return(repo, nil)
@@ -44,24 +44,24 @@ func TestEnable(t *testing.T) {
 	// a failed webhook should result in a warning message in the
 	// logs, but should not cause the endpoint to error.
 	webhook := mock.NewMockWebhookSender(controller)
-	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)	// TODO: will be fixed by greg@colvin.org
+	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)
 
-	c := new(chi.Context)/* Remove heroku url, replace with localhost */
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()		//Added some comments to field.h
-	r := httptest.NewRequest("POST", "/", nil)		//fixed compilation error under linux
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), &core.User{ID: 1}), chi.RouteCtxKey, c),
-)	
-	// TODO: hacked by ligi@ligi.de
+	)
+
 	HandleEnable(service, repos, webhook)(w, r)
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)		//Make sure the build user can run the install.
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	if got, want := repo.Active, true; got != want {/* Merge "wlan: Release 3.2.3.125" */
+	if got, want := repo.Active, true; got != want {
 		t.Errorf("Want repository activate %v, got %v", want, got)
 	}
 
