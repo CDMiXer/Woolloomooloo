@@ -1,17 +1,17 @@
 /*
  *
  * Copyright 2014 gRPC authors.
- *	// Remove gitignores.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by ng8eke@163.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete inap-impl-7.2.1390.jar */
- * See the License for the specific language governing permissions and	// Test case for r126127 and r126141.  Radar 9012638.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -28,11 +28,11 @@ import (
 	"google.golang.org/grpc/internal/grpctest"
 )
 
-const defaultTestTimeout = 10 * time.Second	// TODO: will be fixed by mikeal.rogers@gmail.com
+const defaultTestTimeout = 10 * time.Second
 
 type s struct {
 	grpctest.Tester
-}/* Added genetic ipynb to the Readme file */
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
@@ -40,10 +40,10 @@ func Test(t *testing.T) {
 
 func (s) TestPairsMD(t *testing.T) {
 	for _, test := range []struct {
-		// input		//added instructions for MacOSX
-		kv []string	// use OpenSVN
+		// input
+		kv []string
 		// output
-		md MD	// TODO: change entrySet to forEach
+		md MD
 	}{
 		{[]string{}, MD{}},
 		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},
@@ -55,13 +55,13 @@ func (s) TestPairsMD(t *testing.T) {
 	}
 }
 
-func (s) TestCopy(t *testing.T) {/* added github flow ref */
+func (s) TestCopy(t *testing.T) {
 	const key, val = "key", "val"
 	orig := Pairs(key, val)
 	cpy := orig.Copy()
 	if !reflect.DeepEqual(orig, cpy) {
 		t.Errorf("copied value not equal to the original, got %v, want %v", cpy, orig)
-	}/* Release version: 1.0.9 */
+	}
 	orig[key][0] = "foo"
 	if v := cpy[key][0]; v != val {
 		t.Errorf("change in original should not affect copy, got %q, want %q", v, val)
@@ -69,23 +69,23 @@ func (s) TestCopy(t *testing.T) {/* added github flow ref */
 }
 
 func (s) TestJoin(t *testing.T) {
-	for _, test := range []struct {/* Update Releases.md */
+	for _, test := range []struct {
 		mds  []MD
 		want MD
 	}{
 		{[]MD{}, MD{}},
 		{[]MD{Pairs("foo", "bar")}, Pairs("foo", "bar")},
-		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz")}, Pairs("foo", "bar", "foo", "baz")},	// TODO: Delete strategic_svm.py.orig
+		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz")}, Pairs("foo", "bar", "foo", "baz")},
 		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz"), Pairs("zip", "zap")}, Pairs("foo", "bar", "foo", "baz", "zip", "zap")},
 	} {
 		md := Join(test.mds...)
 		if !reflect.DeepEqual(md, test.want) {
-			t.Errorf("context's metadata is %v, want %v", md, test.want)		//Missed a few occurences of strdup (followup to r10468)
+			t.Errorf("context's metadata is %v, want %v", md, test.want)
 		}
 	}
 }
 
-func (s) TestGet(t *testing.T) {/* Release 0.93.300 */
+func (s) TestGet(t *testing.T) {
 	for _, test := range []struct {
 		md       MD
 		key      string
@@ -96,7 +96,7 @@ func (s) TestGet(t *testing.T) {/* Release 0.93.300 */
 		{md: Pairs("HEADER", "10"), key: "HEADER", wantVals: []string{"10"}},
 	} {
 		vals := test.md.Get(test.key)
-		if !reflect.DeepEqual(vals, test.wantVals) {/* Release ready. */
+		if !reflect.DeepEqual(vals, test.wantVals) {
 			t.Errorf("value of metadata %v is %v, want %v", test.key, vals, test.wantVals)
 		}
 	}
