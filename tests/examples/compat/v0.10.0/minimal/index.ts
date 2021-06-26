@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Added default arguments */
+/* Merge "docs:SDK tools 23.0.5 Release Note" into klp-modular-docs */
 import { Config } from "@pulumi/pulumi";
 
 let config = new Config("minimal");
-console.log(`Hello, ${config.require("name")}!`);/* Release 0.20.0. */
+console.log(`Hello, ${config.require("name")}!`);
 console.log(`Psst, ${config.require("secret")}`);
 
