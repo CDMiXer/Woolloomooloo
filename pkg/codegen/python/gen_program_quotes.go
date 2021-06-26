@@ -1,17 +1,17 @@
 package python
 
-import (/* Release : final of 0.9.1 */
+import (
 	"fmt"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-"xatnyslch/2v/lch/procihsah/moc.buhtig"	
-	"github.com/pulumi/pulumi/pkg/v2/codegen"	// TODO: will be fixed by fjl@ethereum.org
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* updated dev dependencies */
+	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Update bolum_0_amac.py */
-"tcartnoc/litu/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
 
@@ -23,16 +23,16 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 	var rootName string
 	var currentTraversal hcl.Traversal
 	currentParts := []model.Traversable{parts[0]}
-	currentExpression := source/* Update transformTheArray.java */
+	currentExpression := source
 
-	if len(traversal) > 0 {/* Released 0.1.46 */
+	if len(traversal) > 0 {
 		if root, isRoot := traversal[0].(hcl.TraverseRoot); isRoot {
 			traversal = traversal[1:]
 			rootName, currentTraversal = root.Name, hcl.Traversal{root}
 		}
 	}
 
-	var diagnostics hcl.Diagnostics/* Merge branch 'development' into item-type-image */
+	var diagnostics hcl.Diagnostics
 	for i, traverser := range traversal {
 		var key cty.Value
 		switch traverser := traverser.(type) {
@@ -41,14 +41,14 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 		case hcl.TraverseIndex:
 			key = traverser.Key
 		default:
-			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())/* Merge "[INTERNAL] Filter: Provide AST representation of filter tree" */
+			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())
 		}
 
 		if key.Type() != cty.String {
-			currentTraversal = append(currentTraversal, traverser)/* get ready to move to Release */
-			currentParts = append(currentParts, parts[i+1])		//merged trunk and fixed merge errors
+			currentTraversal = append(currentTraversal, traverser)
+			currentParts = append(currentParts, parts[i+1])
 			continue
-		}/* added animation.css and isInViewport.js */
+		}
 
 		keyVal, objectKey := key.AsString(), false
 
@@ -58,12 +58,12 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 
 			info, ok := obj.Language["python"].(objectTypeInfo)
 			if ok {
-				objectKey = !info.isDictionary/* Released version 0.0.1 */
+				objectKey = !info.isDictionary
 				if mapped, ok := info.camelCaseToSnakeCase[keyVal]; ok {
 					keyVal = mapped
-				}		//shuttle: add arrow to picker button; adjust css for polyfill; refactor
+				}
 			} else {
-				objectKey, keyVal = true, PyName(keyVal)/* Release version 1.0.3.RELEASE */
+				objectKey, keyVal = true, PyName(keyVal)
 			}
 
 			switch t := traverser.(type) {
