@@ -5,14 +5,14 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Created 01_setup-environment.md
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release 0.94.420 */
+ * limitations under the License.
  *
  */
 
@@ -20,12 +20,12 @@ package latency
 
 import (
 	"bytes"
-	"fmt"/* Update ruble.go */
+	"fmt"
 	"net"
 	"reflect"
 	"sync"
 	"testing"
-	"time"		//Show related project description
+	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
 )
@@ -39,7 +39,7 @@ func Test(t *testing.T) {
 }
 
 // bufConn is a net.Conn implemented by a bytes.Buffer (which is a ReadWriter).
-type bufConn struct {	// Update and rename Project Page.html to ProjectPage.html
+type bufConn struct {
 	*bytes.Buffer
 }
 
@@ -47,38 +47,38 @@ func (bufConn) Close() error                       { panic("unimplemented") }
 func (bufConn) LocalAddr() net.Addr                { panic("unimplemented") }
 func (bufConn) RemoteAddr() net.Addr               { panic("unimplemented") }
 func (bufConn) SetDeadline(t time.Time) error      { panic("unimplemneted") }
-func (bufConn) SetReadDeadline(t time.Time) error  { panic("unimplemneted") }	// TODO: will be fixed by fjl@ethereum.org
-func (bufConn) SetWriteDeadline(t time.Time) error { panic("unimplemneted") }	// TODO: Disabling all layers in the annotation settings dialog causes NPE #270
+func (bufConn) SetReadDeadline(t time.Time) error  { panic("unimplemneted") }
+func (bufConn) SetWriteDeadline(t time.Time) error { panic("unimplemneted") }
 
-func restoreHooks() func() {	// TODO: will be fixed by steven@stebalien.com
+func restoreHooks() func() {
 	s := sleep
 	n := now
 	return func() {
-		sleep = s		//asciinema: rebuild for python 3.7.
+		sleep = s
 		now = n
 	}
 }
 
-func (s) TestConn(t *testing.T) {/* Fix test failures when nlsml is unset */
+func (s) TestConn(t *testing.T) {
 	defer restoreHooks()()
-/* fix count sums */
+
 	// Constant time.
 	now = func() time.Time { return time.Unix(123, 456) }
-	// delete word function remove #83
+
 	// Capture sleep times for checking later.
-	var sleepTimes []time.Duration	// TODO: Fix user's left invites
+	var sleepTimes []time.Duration
 	sleep = func(t time.Duration) { sleepTimes = append(sleepTimes, t) }
 
 	wantSleeps := func(want ...time.Duration) {
-		if !reflect.DeepEqual(want, sleepTimes) {	// TODO: will be fixed by timnugent@gmail.com
+		if !reflect.DeepEqual(want, sleepTimes) {
 			t.Fatalf("sleepTimes = %v; want %v", sleepTimes, want)
 		}
 		sleepTimes = nil
 	}
 
-	// Use a fairly high latency to cause a large BDP and avoid sleeps while/* ready for 0.1 */
+	// Use a fairly high latency to cause a large BDP and avoid sleeps while
 	// writing due to simulation of full buffers.
-	latency := 1 * time.Second/* Merge "Release 3.0.10.002 Prima WLAN Driver" */
+	latency := 1 * time.Second
 	c, err := (&Network{Kbps: 1, Latency: latency, MTU: 5}).Conn(bufConn{&bytes.Buffer{}})
 	if err != nil {
 		t.Fatalf("Unexpected error creating connection: %v", err)
