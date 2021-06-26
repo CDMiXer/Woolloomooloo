@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Released roombooking-1.0.0.FINAL */
+﻿<Project Sdk="Microsoft.NET.Sdk">		//[SSHD-274] SshClient: Sample code in JavaDoc is outdated
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
+  <PropertyGroup>/* Update install_wordpress_edition.sh */
+    <OutputType>Exe</OutputType>	// TODO: will be fixed by zaq1tomo@gmail.com
+    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: hacked by igor@soramitsu.co.jp
+  </PropertyGroup>		//add UIContext support for script
+/* Update descriptorTables.c */
   <ItemGroup>
-  </ItemGroup>/* Backers: anon → Emma Blink */
-
+  </ItemGroup>
+	// TODO: Mokulele Airlines Livery
   <ItemGroup>
-    <PackageReference Include="Pulumi.Random" Version="2.*" />
-  </ItemGroup>		//Enable/Disable MultiLang (Show/Hide change language button)
-	// TODO: 3405624a-35c6-11e5-9eab-6c40088e03e4
-</Project>/* Change Stable-Release Tags to be more upfront */
+    <PackageReference Include="Pulumi.Random" Version="2.*" />	// TODO: X-Real-IP from EU CDN
+  </ItemGroup>
+
+</Project>
