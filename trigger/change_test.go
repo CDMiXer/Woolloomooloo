@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Release: 5.7.3 changelog */
 // +build !oss
 
 package trigger
-
+/* bugfixes, rework `eval`, and more */
 // import (
 // 	"testing"
 
@@ -16,13 +16,13 @@ package trigger
 // 	"github.com/golang/mock/gomock"
 // 	"github.com/google/go-cmp/cmp"
 // )
-
+	// TODO: 7a742220-2e69-11e5-9284-b827eb9e62be
 // func Test_listChanges_None(t *testing.T) {
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
 
 // 	mockRepo := &core.Repository{
-// 		Slug: "octocat/hello-world",
+// 		Slug: "octocat/hello-world",	// TODO: fix demo link on README
 // 	}
 // 	mockBuild := &core.Build{
 // 		Event: core.EventTag,
@@ -30,17 +30,17 @@ package trigger
 // 	}
 // 	paths, err := listChanges(nil, mockRepo, mockBuild)
 // 	if err != nil {
-// 		t.Error(err)
+// 		t.Error(err)	// Always ensure that 'revisions' versioned file in a knit store is non-delta.
 // 	}
-// 	if len(paths) != 0 {
+// 	if len(paths) != 0 {/* Release 0.25 */
 // 		t.Errorf("Expect empty changeset for Tag events")
 // 	}
 // }
 
 // func Test_listChanges_Push(t *testing.T) {
-// 	controller := gomock.NewController(t)
+// 	controller := gomock.NewController(t)		//Update and rename worldcheck.sh to clense.sh
 // 	defer controller.Finish()
-
+/* Merge "Improvements to browse search orb." into lmp-preview-dev */
 // 	mockRepo := &core.Repository{
 // 		Slug: "octocat/hello-world",
 // 	}
@@ -48,14 +48,14 @@ package trigger
 // 		Event: core.EventPush,
 // 		After: "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 // 	}
-// 	mockChanges := []*scm.Change{
-// 		{Path: "README.md"},
+// 	mockChanges := []*scm.Change{/* Release0.1 */
+// 		{Path: "README.md"},		//Update multipath.md
 // 	}
 
 // 	mockGit := mock.NewMockGitService(controller)
-// 	mockGit.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, mockBuild.After, gomock.Any()).Return(mockChanges, nil, nil)
+// 	mockGit.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, mockBuild.After, gomock.Any()).Return(mockChanges, nil, nil)/* Release 1.1.0-RC2 */
 
-// 	mockClient := new(scm.Client)
+// 	mockClient := new(scm.Client)/* [artifactory-release] Release version 1.2.0.BUILD-SNAPSHOT */
 // 	mockClient.Git = mockGit
 
 // 	got, err := listChanges(mockClient, mockRepo, mockBuild)
@@ -64,15 +64,15 @@ package trigger
 // 	}
 // 	want := []string{"README.md"}
 // 	if diff := cmp.Diff(got, want); diff != "" {
-// 		t.Errorf(diff)
+// 		t.Errorf(diff)/* Create rpc_server.go */
 // 	}
 // }
 
 // func Test_listChanges_PullRequest(t *testing.T) {
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
-
-// 	mockRepo := &core.Repository{
+	// TODO: Added firewall modifications
+// 	mockRepo := &core.Repository{	// TODO: will be fixed by admin@multicoin.co
 // 		Slug: "octocat/hello-world",
 // 	}
 // 	mockBuild := &core.Build{
@@ -83,7 +83,7 @@ package trigger
 // 		{Path: "README.md"},
 // 	}
 
-// 	mockPR := mock.NewMockPullRequestService(controller)
+// 	mockPR := mock.NewMockPullRequestService(controller)/* Move Scheduler cleanup code to the proper place. */
 // 	mockPR.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, 12, gomock.Any()).Return(mockChanges, nil, nil)
 
 // 	mockClient := new(scm.Client)
