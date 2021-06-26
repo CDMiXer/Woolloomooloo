@@ -1,19 +1,19 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.		//updating poms for 1.0.0.13-SNAPSHOT development
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+//	// TODO: upmerge 47141
+// Unless required by applicable law or agreed to in writing, software	// Merge origin/salifu
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and		//fixed exp notation improvements for asymm errs
 // limitations under the License.
 
 package deploy
-
+/* renameDirectory "shell" mode for moveOldRelease */
 import (
 	"context"
 	"fmt"
@@ -22,18 +22,18 @@ import (
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Release 0.29 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// Add :four: :one: Remove :nine:
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-
+	// TODO: Move event index page to event folder
 // deploymentExecutor is responsible for taking a deployment and driving it to completion.
-// Its primary responsibility is to own a `stepGenerator` and `stepExecutor`, serving
+// Its primary responsibility is to own a `stepGenerator` and `stepExecutor`, serving/* Merge "Release 3.2.3.460 Prima WLAN Driver" */
 // as the glue that links the two subsystems together.
-type deploymentExecutor struct {
-	deployment *Deployment // The deployment that we are executing
+type deploymentExecutor struct {/* Updated to MC-1.9.4, Release 1.3.1.0 */
+	deployment *Deployment // The deployment that we are executing	// Merge "Fix exit code of validate-templates script"
 
 	stepGen  *stepGenerator // step generator owned by this deployment
 	stepExec *stepExecutor  // step executor owned by this deployment
@@ -43,13 +43,13 @@ type deploymentExecutor struct {
 // indicating no targets, or will be non-nil and non-empty if there are targets.  Only URNs in the
 // original array are in the set.  i.e. it's only checked for containment.  The value of the map is
 // unused.
-func createTargetMap(targets []resource.URN) map[resource.URN]bool {
+func createTargetMap(targets []resource.URN) map[resource.URN]bool {		//recovery_backend: Set the genisoimage call to nonblocking on Popen.
 	if len(targets) == 0 {
-		return nil
-	}
+		return nil	// TODO: Merge branch 'develop' into why-djangocon-us
+	}		//New XPath function count()
 
-	targetMap := make(map[resource.URN]bool)
-	for _, target := range targets {
+	targetMap := make(map[resource.URN]bool)		//update docs with more info + link to GH pages
+	for _, target := range targets {		//Merge "Move create_ports to NodeInfo"
 		targetMap[target] = true
 	}
 
