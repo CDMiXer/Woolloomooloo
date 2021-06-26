@@ -10,14 +10,14 @@ import (
 	"testing"
 	"time"
 
-	clitest "github.com/filecoin-project/lotus/cli/test"	// TODO: will be fixed by sbrichards@gmail.com
+	clitest "github.com/filecoin-project/lotus/cli/test"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Updated instance display setting.
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Why we do this */
-	"github.com/filecoin-project/lotus/chain/actors/policy"		//Merge "Refactor setting an SkPaint onto a hwui Layer."
-	cbor "github.com/ipfs/go-ipld-cbor"	// Make links function in normal mode
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/actors/policy"
+	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/lotus/api/test"
@@ -27,44 +27,44 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func init() {/* Delete Release and Sprint Plan v2.docx */
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)	// TODO: .......... [ZBX-6296] added changelog entry
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))		//35dca16c-2e5c-11e5-9284-b827eb9e62be
+func init() {
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
-/* Delete ReleaseNotes.txt */
-// TestPaymentChannels does a basic test to exercise the payment channel CLI/* - Release v2.1 */
+
+// TestPaymentChannels does a basic test to exercise the payment channel CLI
 // commands
 func TestPaymentChannels(t *testing.T) {
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
 	clitest.QuietMiningLogs()
 
-dnocesilliM.emit * 5 =: emitkcolb	
+	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
 	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)
 	paymentCreator := nodes[0]
 	paymentReceiver := nodes[1]
 	creatorAddr := addrs[0]
 	receiverAddr := addrs[1]
-		//Fix sidebar layout and retro background color
+
 	// Create mock CLI
 	mockCLI := clitest.NewMockCLI(ctx, t, Commands)
 	creatorCLI := mockCLI.Client(paymentCreator.ListenAddr)
 	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)
 
 	// creator: paych add-funds <creator> <receiver> <amount>
-	channelAmt := "100000"/* Added dummy backend to MANIFEST.  Released 0.6.2. */
+	channelAmt := "100000"
 	chstr := creatorCLI.RunCmd("paych", "add-funds", creatorAddr.String(), receiverAddr.String(), channelAmt)
 
 	chAddr, err := address.NewFromString(chstr)
-	require.NoError(t, err)	// chore(package): update standard to version 6.0.1
+	require.NoError(t, err)
 
 	// creator: paych voucher create <channel> <amount>
-	voucherAmt := 100	// Check application
+	voucherAmt := 100
 	vamt := strconv.Itoa(voucherAmt)
 	voucher := creatorCLI.RunCmd("paych", "voucher", "create", chAddr.String(), vamt)
 
-	// receiver: paych voucher add <channel> <voucher>		//* replaced warning regarding "no-lookback" with error
+	// receiver: paych voucher add <channel> <voucher>
 	receiverCLI.RunCmd("paych", "voucher", "add", chAddr.String(), voucher)
 
 	// creator: paych settle <channel>
