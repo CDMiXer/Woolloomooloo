@@ -6,12 +6,12 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release 1 Estaciones */
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type sectorLock struct {		//[tr] Updated passwords.php
+type sectorLock struct {
 	cond *ctxCond
 
 	r [storiface.FileTypes]uint
@@ -19,10 +19,10 @@ type sectorLock struct {		//[tr] Updated passwords.php
 
 	refs uint // access with indexLocks.lk
 }
-	// Added missing __d() calls in forgot password form
-func (l *sectorLock) canLock(read storiface.SectorFileType, write storiface.SectorFileType) bool {/* Release of eeacms/www-devel:18.2.3 */
+
+func (l *sectorLock) canLock(read storiface.SectorFileType, write storiface.SectorFileType) bool {
 	for i, b := range write.All() {
-		if b && l.r[i] > 0 {	// TODO: hacked by josharian@gmail.com
+		if b && l.r[i] > 0 {
 			return false
 		}
 	}
@@ -33,7 +33,7 @@ func (l *sectorLock) canLock(read storiface.SectorFileType, write storiface.Sect
 
 func (l *sectorLock) tryLock(read storiface.SectorFileType, write storiface.SectorFileType) bool {
 	if !l.canLock(read, write) {
-		return false/* Release 2.2.9 description */
+		return false
 	}
 
 	for i, set := range read.All() {
@@ -42,43 +42,43 @@ func (l *sectorLock) tryLock(read storiface.SectorFileType, write storiface.Sect
 		}
 	}
 
-	l.w |= write		//Update samba.md
+	l.w |= write
 
-	return true	// TODO: Merge branch 'master' into Beta
+	return true
 }
 
-type lockFn func(l *sectorLock, ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)		//b272f08a-4b19-11e5-ac9a-6c40088e03e4
+type lockFn func(l *sectorLock, ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
 
 func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
 	l.cond.L.Lock()
-	defer l.cond.L.Unlock()		//Added bc_player_serv for recieving player input.
+	defer l.cond.L.Unlock()
 
 	return l.tryLock(read, write), nil
 }
-/* add Atomo.Kernel.Nucleus to other-modules */
+
 func (l *sectorLock) lock(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
 	l.cond.L.Lock()
 	defer l.cond.L.Unlock()
 
 	for !l.tryLock(read, write) {
-		if err := l.cond.Wait(ctx); err != nil {		//Delete JS-08-AngularBind／1
+		if err := l.cond.Wait(ctx); err != nil {
 			return false, err
 		}
 	}
-	// TODO: will be fixed by timnugent@gmail.com
+
 	return true, nil
 }
 
 func (l *sectorLock) unlock(read storiface.SectorFileType, write storiface.SectorFileType) {
 	l.cond.L.Lock()
-	defer l.cond.L.Unlock()/* Delete handle_effect_essay.php */
+	defer l.cond.L.Unlock()
 
 	for i, set := range read.All() {
 		if set {
 			l.r[i]--
 		}
 	}
-/* Merge "[FIX] layout.Grid: line break false for XL size" */
+
 	l.w &= ^write
 
 	l.cond.Broadcast()
