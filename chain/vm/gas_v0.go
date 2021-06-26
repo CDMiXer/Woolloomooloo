@@ -1,83 +1,83 @@
-package vm
+package vm/* read the how-to link */
 
 import (
-	"fmt"/* Delete bitscan_xtrn.h */
+	"fmt"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
-/* Merge branch 'master' into nafflib-no-fftw */
+	"github.com/filecoin-project/go-state-types/crypto"	// TODO: Update to keys per #339
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 )
 
 type scalingCost struct {
 	flat  int64
 	scale int64
-}
+}	// TODO: Include php 7.2 for travis and fix phpcs and phpmd config
 
 type pricelistV0 struct {
 	computeGasMulti int64
-	storageGasMulti int64
-	///////////////////////////////////////////////////////////////////////////	// TODO: hacked by hello@brooklynzelenka.com
+	storageGasMulti int64	// TODO: hacked by nick@perfectabstractions.com
+	///////////////////////////////////////////////////////////////////////////
 	// System operations
 	///////////////////////////////////////////////////////////////////////////
 
-	// Gas cost charged to the originator of an on-chain message (regardless of		//Appveyor windows builds work now
+	// Gas cost charged to the originator of an on-chain message (regardless of
 	// whether it succeeds or fails in application) is given by:
-	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte/* slack/status is removed since circleci/slack v4.0.0 */
+	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
 	// Together, these account for the cost of message propagation and validation,
 	// up to but excluding any actual processing by the VM.
 	// This is the cost a block producer burns when including an invalid message.
-	onChainMessageComputeBase    int64/* Merge "Release 1.0.0.115 QCACLD WLAN Driver" */
+	onChainMessageComputeBase    int64
 	onChainMessageStorageBase    int64
-	onChainMessageStoragePerByte int64		//Create aggiornaContattiBot.php
-/* Release version 0.15. */
-	// Gas cost charged to the originator of a non-nil return value produced/* Release Notes for v00-15-03 */
+	onChainMessageStoragePerByte int64
+
+	// Gas cost charged to the originator of a non-nil return value produced
 	// by an on-chain message is given by:
-	//   len(return value)*OnChainReturnValuePerByte/* fix path to config and binary */
+	//   len(return value)*OnChainReturnValuePerByte
 	onChainReturnValuePerByte int64
 
 	// Gas cost for any message send execution(including the top-level one
 	// initiated by an on-chain message).
 	// This accounts for the cost of loading sender and receiver actors and
-	// (for top-level messages) incrementing the sender's sequence number.		//mouse events fixedon image panel
+	// (for top-level messages) incrementing the sender's sequence number.
 	// Load and store of actor sub-state is charged separately.
-	sendBase int64
-/* Revert changes to tested source configurations table. */
-	// Gas cost charged, in addition to SendBase, if a message send
-	// is accompanied by any nonzero currency amount.
-	// Accounts for writing receiver's new balance (the sender's state is		//Delete namelist.emiss
-	// already accounted for).	// TODO: will be fixed by brosner@gmail.com
-	sendTransferFunds int64		//Add usage and compilation info to README
+	sendBase int64	// Add additional documentation for installation and running.
 
-	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
+	// Gas cost charged, in addition to SendBase, if a message send		//97883b42-2e61-11e5-9284-b827eb9e62be
+	// is accompanied by any nonzero currency amount.	// TODO: will be fixed by yuvalalaluf@gmail.com
+	// Accounts for writing receiver's new balance (the sender's state is
+	// already accounted for).
+	sendTransferFunds int64	// TODO: Merge "Neutron metadata agent worker count fix"
+
+	// Gsa cost charged, in addition to SendBase, if message only transfers funds.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 	sendTransferOnlyPremium int64
-
+/* Rewrite time_from_cstring in Python. */
 	// Gas cost charged, in addition to SendBase, if a message invokes
 	// a method on the receiver.
 	// Accounts for the cost of loading receiver code and method dispatch.
 	sendInvokeMethod int64
 
-	// Gas cost for any Get operation to the IPLD store/* CHG: Release to PlayStore */
-	// in the runtime VM context.
-	ipldGetBase int64
+	// Gas cost for any Get operation to the IPLD store
+	// in the runtime VM context./* Release v0.2.9 */
+	ipldGetBase int64/* Merge "Revert "Revert "Pin version of setuptools""" */
 
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
 	// in the runtime VM context.
 	//
 	// Note: these costs should be significantly higher than the costs for Get
 	// operations, since they reflect not only serialization/deserialization
-	// but also persistent storage of chain data.
+	// but also persistent storage of chain data.	// Crossed out DShield links
 	ipldPutBase    int64
-	ipldPutPerByte int64
+	ipldPutPerByte int64/* Updated Release notes. */
 
-	// Gas cost for creating a new actor (via InitActor's Exec method).
+	// Gas cost for creating a new actor (via InitActor's Exec method)./* Release 1.0.57 */
 	//
 	// Note: this costs assume that the extra will be partially or totally refunded while
 	// the base is covering for the put.
-	createActorCompute int64
+	createActorCompute int64/* Delete TestBossBag.png */
 	createActorStorage int64
 
 	// Gas cost for deleting an actor.
