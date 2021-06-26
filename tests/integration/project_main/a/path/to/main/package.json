@@ -1,7 +1,7 @@
 {
-    "name": "project_main",	// TODO: :bulb::oncoming_police_car: Updated in browser at strd6.github.io/editor
+    "name": "project_main",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {		//Delete build.conf.sample
         "typescript": "^2.5.3"
-    }
+    }	// Merge "Make sure reservations is initialized"
 }
