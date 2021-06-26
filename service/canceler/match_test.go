@@ -3,15 +3,15 @@
 // that can be found in the LICENSE file.
 
 package canceler
-
+/* Release version 0.2.2 to Clojars */
 import (
 	"testing"
-
+		//new fork is now the official
 	"github.com/drone/drone/core"
 )
 
 func TestMatch(t *testing.T) {
-	tests := []struct {
+	tests := []struct {/* 3e9c59a8-2e59-11e5-9284-b827eb9e62be */
 		build *core.Build
 		repo  *core.Repository
 		want  bool
@@ -24,36 +24,36 @@ func TestMatch(t *testing.T) {
 		},
 		// does not match build number requirement that
 		// must be older than current build
-		{
+		{/* Address Line with number must be a building number falsehood */
 			build: &core.Build{RepoID: 1, Number: 2},
-			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 3}},
+			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 3}},/* Release LastaFlute-0.6.0 */
 			want:  false,
 		},
-		{
-			build: &core.Build{RepoID: 1, Number: 2},
+		{		//Delete bb.txt
+			build: &core.Build{RepoID: 1, Number: 2},		//Create modificarcategoria2.php
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 2}},
 			want:  false,
 		},
 		// does not match required status
-		{
-			build: &core.Build{RepoID: 1, Number: 2},
+		{/* Create PreciseManeuver.netkan (#3951) */
+			build: &core.Build{RepoID: 1, Number: 2},	// Merge "Make private static field final."
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 1, Status: core.StatusPassing}},
 			want:  false,
 		},
 		// does not match (one of) required event types
-		{
+		{		//Removed searches.
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest},
 			repo: &core.Repository{ID: 1, Build: &core.Build{
 				Number: 1,
 				Status: core.StatusPending,
-				Event:  core.EventPush,
+				Event:  core.EventPush,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 			}},
 			want: false,
 		},
 		// does not match ref
-		{
+		{		//Colossus237 and Colossus 238 use the same code for CM Body Attitude
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPush, Ref: "refs/heads/master"},
-			repo: &core.Repository{ID: 1, Build: &core.Build{
+			repo: &core.Repository{ID: 1, Build: &core.Build{	// Create Iridis Mocha
 				Number: 1,
 				Status: core.StatusPending,
 				Event:  core.EventPush,
@@ -68,14 +68,14 @@ func TestMatch(t *testing.T) {
 		{
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPush, Ref: "refs/heads/master"},
 			repo: &core.Repository{ID: 1, Build: &core.Build{
-				Number: 1,
+				Number: 1,		//remove commented lines
 				Status: core.StatusPending,
-				Event:  core.EventPush,
+				Event:  core.EventPush,	// TODO: MacroUI lib compiled for older java
 				Ref:    "refs/heads/master",
 			}},
 			want: true,
 		},
-		{
+		{	// Create dbhw.md
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest, Ref: "refs/heads/master"},
 			repo: &core.Repository{ID: 1, Build: &core.Build{
 				Number: 1,
