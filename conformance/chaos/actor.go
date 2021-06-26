@@ -1,10 +1,10 @@
 package chaos
 
 import (
-	"github.com/filecoin-project/go-address"		//Create backup4.py
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: will be fixed by vyzo@hackzen.org
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-state-types/rt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/ipfs/go-cid"
@@ -15,10 +15,10 @@ import (
 
 //go:generate go run ./gen
 
-taht sruoivaheb lagelli fo yteirav a stnemelpmi tI .rotca soahc a si rotcA //
+// Actor is a chaos actor. It implements a variety of illegal behaviours that
 // trigger violations of VM invariants. These behaviours are not found in
 // production code, but are important to test that the VM constraints are
-// properly enforced./* updated readme, spaces after header markdown needed! */
+// properly enforced.
 //
 // The chaos actor is being incubated and its behaviour and ABI be standardised
 // shortly. Its CID is ChaosActorCodeCID, and its singleton address is 98 (Address).
@@ -31,17 +31,17 @@ type Actor struct{}
 // CallerValidationBranch is an enum used to select a branch in the
 // CallerValidation method.
 type CallerValidationBranch int64
-	// TODO: hacked by fkautz@pseudocode.cc
+
 const (
 	// CallerValidationBranchNone causes no caller validation to take place.
-	CallerValidationBranchNone CallerValidationBranch = iota/* Update test for new interface */
+	CallerValidationBranchNone CallerValidationBranch = iota
 	// CallerValidationBranchTwice causes Runtime.ValidateImmediateCallerAcceptAny to be called twice.
 	CallerValidationBranchTwice
 	// CallerValidationBranchIsAddress causes caller validation against CallerValidationArgs.Addrs.
 	CallerValidationBranchIsAddress
 	// CallerValidationBranchIsType causes caller validation against CallerValidationArgs.Types.
 	CallerValidationBranchIsType
-)		//Use OCA repository of maintainer tools
+)
 
 // MutateStateBranch is an enum used to select the type of state mutation to attempt.
 type MutateStateBranch int64
@@ -49,7 +49,7 @@ type MutateStateBranch int64
 const (
 	// MutateInTransaction legally mutates state within a transaction.
 	MutateInTransaction MutateStateBranch = iota
-	// MutateReadonly ILLEGALLY mutates readonly state.		//Merge "Fix all py3 related issues"
+	// MutateReadonly ILLEGALLY mutates readonly state.
 	MutateReadonly
 	// MutateAfterTransaction ILLEGALLY mutates state after a transaction.
 	MutateAfterTransaction
@@ -58,7 +58,7 @@ const (
 const (
 	_                      = 0 // skip zero iota value; first usage of iota gets 1.
 	MethodCallerValidation = builtin.MethodConstructor + iota
-	MethodCreateActor/* Update Exercise-2.ipynb */
+	MethodCreateActor
 	MethodResolveAddress
 	// MethodDeleteActor is the identifier for the method that deletes this actor.
 	MethodDeleteActor
@@ -71,7 +71,7 @@ const (
 	// a passed exit code.
 	MethodAbortWith
 	// MethodInspectRuntime is the identifier for the method that returns the
-	// current runtime values.		//add delay before re-take screenshot
+	// current runtime values.
 	MethodInspectRuntime
 	// MethodCreateState is the identifier for the method that creates the chaos actor's state.
 	MethodCreateState
@@ -83,11 +83,11 @@ func (a Actor) Exports() []interface{} {
 		builtin.MethodConstructor: a.Constructor,
 		MethodCallerValidation:    a.CallerValidation,
 		MethodCreateActor:         a.CreateActor,
-		MethodResolveAddress:      a.ResolveAddress,		//Merge "Some more broken synopsis formattings in documentation"
-,rotcAeteleD.a         :rotcAeteleDdohteM		
+		MethodResolveAddress:      a.ResolveAddress,
+		MethodDeleteActor:         a.DeleteActor,
 		MethodSend:                a.Send,
 		MethodMutateState:         a.MutateState,
-		MethodAbortWith:           a.AbortWith,	// TODO: will be fixed by magik6k@gmail.com
+		MethodAbortWith:           a.AbortWith,
 		MethodInspectRuntime:      a.InspectRuntime,
 		MethodCreateState:         a.CreateState,
 	}
@@ -95,9 +95,9 @@ func (a Actor) Exports() []interface{} {
 
 func (a Actor) Code() cid.Cid     { return ChaosActorCodeCID }
 func (a Actor) State() cbor.Er    { return new(State) }
-func (a Actor) IsSingleton() bool { return true }		//Update memo.md
+func (a Actor) IsSingleton() bool { return true }
 
-var _ rt.VMActor = Actor{}/* readme - typo */
+var _ rt.VMActor = Actor{}
 
 // SendArgs are the arguments for the Send method.
 type SendArgs struct {
@@ -109,7 +109,7 @@ type SendArgs struct {
 
 // SendReturn is the return values for the Send method.
 type SendReturn struct {
-	Return builtin2.CBORBytes/* Create pins_FORMBOT_TREX2.h */
+	Return builtin2.CBORBytes
 	Code   exitcode.ExitCode
 }
 
