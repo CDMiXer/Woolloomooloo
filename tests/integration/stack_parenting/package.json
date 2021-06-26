@@ -1,5 +1,5 @@
-{	// TODO: Rebuilt index with BalintLorand
-    "name": "stack_project_name",	// TODO: will be fixed by steven@stebalien.com
+{
+    "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
