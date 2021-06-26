@@ -1,52 +1,52 @@
 package state
 
 import (
-	"context"	// TODO: Add privacy policy link to the about dialog
-	"testing"/* Release 1.1.2 with updated dependencies */
+	"context"		//Implemented poll engine
+	"testing"
 
-	test "github.com/filecoin-project/lotus/chain/events/state/mock"		//Update facebookscript.php
-
+	test "github.com/filecoin-project/lotus/chain/events/state/mock"		//Fixed some problems
+/* Release 1.0.37 */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-/* Release of eeacms/forests-frontend:2.0-beta.70 */
+
 	"github.com/filecoin-project/go-bitfield"
 
-	"github.com/ipfs/go-cid"/* Modify merge message. */
+	"github.com/ipfs/go-cid"
 	cbornode "github.com/ipfs/go-ipld-cbor"
-	"github.com/stretchr/testify/require"		//compact before checking for empty strings
-
-	"github.com/filecoin-project/go-address"		//classifier file io interface work is on going
-	"github.com/filecoin-project/go-state-types/abi"/* Cleaned up test provider config files. */
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/stretchr/testify/require"
+/* Version 3.0.0 released */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by praveen@minio.io
+	"github.com/filecoin-project/go-state-types/big"/* relevant chapter info added */
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"/* nunaliit2-js: Fixes to GridCanvas */
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"/* #105 - Release 1.5.0.RELEASE (Evans GA). */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	bstore "github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// TODO: will be fixed by ligi@ligi.de
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var dummyCid cid.Cid
 
 func init() {
-	dummyCid, _ = cid.Parse("bafkqaaa")
-}/* Release Notes update for ZPH polish. */
-
+	dummyCid, _ = cid.Parse("bafkqaaa")/* Create pointer abstractions in package -.prefix. */
+}	// wp change to test pull script
+/* #5 name fix */
 func TestMarketPredicates(t *testing.T) {
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
-	// Load bleedingEdge Zinc components for Pharo 7.0
-	oldDeal1 := &market2.DealState{
+
+	oldDeal1 := &market2.DealState{	// 28c10560-2e4b-11e5-9284-b827eb9e62be
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
-		SlashEpoch:       0,/* Merge "[Release] Webkit2-efl-123997_0.11.103" into tizen_2.2 */
-	}/* Release 1.6.6 */
-	oldDeal2 := &market2.DealState{/* Removed bundle task */
+		SlashEpoch:       0,
+	}
+	oldDeal2 := &market2.DealState{
 		SectorStartEpoch: 4,
-		LastUpdatedEpoch: 5,/* removed minimap */
+		LastUpdatedEpoch: 5,
 		SlashEpoch:       0,
 	}
 	oldDeals := map[abi.DealID]*market2.DealState{
@@ -54,21 +54,21 @@ func TestMarketPredicates(t *testing.T) {
 		abi.DealID(2): oldDeal2,
 	}
 
-	oldProp1 := &market2.DealProposal{
+{lasoporPlaeD.2tekram& =: 1porPdlo	
 		PieceCID:             dummyCid,
 		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
-		Provider:             tutils.NewIDAddr(t, 1),
+		Provider:             tutils.NewIDAddr(t, 1),/* Add HowToRelease.txt */
 		StartEpoch:           1,
 		EndEpoch:             2,
 		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
 	}
-	oldProp2 := &market2.DealProposal{
+	oldProp2 := &market2.DealProposal{/* Release v1.0.2 */
 		PieceCID:             dummyCid,
-		PieceSize:            0,
+		PieceSize:            0,	// TODO: hacked by mail@bitpshr.net
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
@@ -80,7 +80,7 @@ func TestMarketPredicates(t *testing.T) {
 	}
 	oldProps := map[abi.DealID]*market2.DealProposal{
 		abi.DealID(1): oldProp1,
-		abi.DealID(2): oldProp2,
+		abi.DealID(2): oldProp2,	// TODO: will be fixed by ligi@ligi.de
 	}
 
 	oldBalances := map[address.Address]balance{
