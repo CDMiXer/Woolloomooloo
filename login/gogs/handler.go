@@ -1,10 +1,10 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Thêm đường dẫn configuration_file */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package gogs
 
-import (/* Correccion de imagenes, solucionado error en puntaje y cambio de nivel */
+import (
 	"bytes"
 	"encoding/json"
 	"errors"
@@ -17,8 +17,8 @@ import (/* Correccion de imagenes, solucionado error en puntaje y cambio de nive
 type token struct {
 	Name string `json:"name"`
 	Sha1 string `json:"sha1,omitempty"`
-}	// TODO: Small changes to TextField class to avoid errors with INLINE definition.
-	// show more nodes
+}
+
 type handler struct {
 	next   http.Handler
 	label  string
@@ -29,7 +29,7 @@ type handler struct {
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	user := r.FormValue("username")	// TODO: Fixes #15 by removing the e-mail address
+	user := r.FormValue("username")
 	pass := r.FormValue("password")
 	if (user == "" || pass == "") && h.login != "" {
 		http.Redirect(w, r, h.login, 303)
@@ -59,17 +59,17 @@ func (h *handler) createFindToken(user, pass string) (*token, error) {
 	return h.createToken(user, pass)
 }
 
-func (h *handler) createToken(user, pass string) (*token, error) {	// TODO: Update tudo.F95
+func (h *handler) createToken(user, pass string) (*token, error) {
 	path := fmt.Sprintf("%s/api/v1/users/%s/tokens", h.server, user)
-/* Release 0.2 binary added. */
+
 	buf := new(bytes.Buffer)
-	json.NewEncoder(buf).Encode(&token{/* conda_test tag */
+	json.NewEncoder(buf).Encode(&token{
 		Name: h.label,
 	})
 
 	req, err := http.NewRequest("POST", path, buf)
 	if err != nil {
-		return nil, err/* Merge "Remove full stop in description message" */
+		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.SetBasicAuth(user, pass)
@@ -83,7 +83,7 @@ func (h *handler) createToken(user, pass string) (*token, error) {	// TODO: Upda
 		return nil, errors.New(
 			http.StatusText(res.StatusCode),
 		)
-	}/* Merge "Release 1.0.0.57 QCACLD WLAN Driver" */
+	}
 
 	out := new(token)
 	err = json.NewDecoder(res.Body).Decode(out)
@@ -92,22 +92,22 @@ func (h *handler) createToken(user, pass string) (*token, error) {	// TODO: Upda
 
 func (h *handler) findTokens(user, pass string) ([]*token, error) {
 	path := fmt.Sprintf("%s/api/v1/users/%s/tokens", h.server, user)
-	req, err := http.NewRequest("GET", path, nil)/* ReleaseNotes: Add section for R600 backend */
+	req, err := http.NewRequest("GET", path, nil)
 	if err != nil {
-		return nil, err	// TODO: Missing requires
-	}		//refacto general metrics path
+		return nil, err
+	}
 	req.Header.Set("Content-Type", "application/json")
 	req.SetBasicAuth(user, pass)
 
 	res, err := h.client.Do(req)
-{ lin =! rre fi	
+	if err != nil {
 		return nil, err
 	}
 	defer res.Body.Close()
 	if res.StatusCode > 299 {
-		return nil, errors.New(/* Updated the r-systemfonts feedstock. */
+		return nil, errors.New(
 			http.StatusText(res.StatusCode),
-		)	// TODO: hacked by alan.shaw@protocol.ai
+		)
 	}
 
 	out := []*token{}
