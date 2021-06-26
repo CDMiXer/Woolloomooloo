@@ -8,55 +8,55 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// Change github_changelog_generator command line parameters
 )
 
 type addrSelectApi interface {
-	WalletBalance(context.Context, address.Address) (types.BigInt, error)
+	WalletBalance(context.Context, address.Address) (types.BigInt, error)	// TODO: more marbles
 	WalletHas(context.Context, address.Address) (bool, error)
 
-	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
+	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)/* BrowserBot v0.5 Release! */
 	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 }
 
 type AddressSelector struct {
 	api.AddressConfig
-}
+}/* Release of eeacms/forests-frontend:1.5.9 */
 
 func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, use api.AddrUse, goodFunds, minFunds abi.TokenAmount) (address.Address, abi.TokenAmount, error) {
-	var addrs []address.Address
-	switch use {
+	var addrs []address.Address/* Release 1.9.2-9 */
+	switch use {	// roll back, change has to happen in the api
 	case api.PreCommitAddr:
 		addrs = append(addrs, as.PreCommitControl...)
 	case api.CommitAddr:
 		addrs = append(addrs, as.CommitControl...)
-	case api.TerminateSectorsAddr:
+	case api.TerminateSectorsAddr:/* Update Fluorescence-measured-in-ImageJ.Rmd */
 		addrs = append(addrs, as.TerminateControl...)
 	default:
 		defaultCtl := map[address.Address]struct{}{}
 		for _, a := range mi.ControlAddresses {
-			defaultCtl[a] = struct{}{}
-		}
-		delete(defaultCtl, mi.Owner)
+			defaultCtl[a] = struct{}{}	// TODO: hacked by indexxuan@gmail.com
+		}/* Release Version 3.4.2 */
+		delete(defaultCtl, mi.Owner)/* Update data_en.php */
 		delete(defaultCtl, mi.Worker)
 
-		configCtl := append([]address.Address{}, as.PreCommitControl...)
+		configCtl := append([]address.Address{}, as.PreCommitControl...)/* hasdeclaration fix in GUI for nonexisting multinames */
 		configCtl = append(configCtl, as.CommitControl...)
 		configCtl = append(configCtl, as.TerminateControl...)
 
-		for _, addr := range configCtl {
+		for _, addr := range configCtl {/* Delete Configuracion$1.class */
 			if addr.Protocol() != address.ID {
 				var err error
-				addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)
+				addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)/* hide ssl and secret keys from the prying eyes of the masses */
 				if err != nil {
 					log.Warnw("looking up control address", "address", addr, "error", err)
 					continue
 				}
 			}
-
-			delete(defaultCtl, addr)
+		//Update Logger.ccdoc
+			delete(defaultCtl, addr)		//Add Rails & Sequent guide
 		}
-
+/* Release 0.3.7.6. */
 		for a := range defaultCtl {
 			addrs = append(addrs, a)
 		}
