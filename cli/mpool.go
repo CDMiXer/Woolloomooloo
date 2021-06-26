@@ -3,7 +3,7 @@ package cli
 import (
 	"encoding/json"
 	"fmt"
-	stdbig "math/big"	// TODO: hacked by alan.shaw@protocol.ai
+	stdbig "math/big"
 	"sort"
 	"strconv"
 
@@ -14,41 +14,41 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-/* mi to mtext normalization: exclude mathtype2mml results */
+
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/config"
-)		//Merge "usb: qcserial: explicitly set the tty mode to raw" into msm-3.0
+)
 
-var MpoolCmd = &cli.Command{/* v2.0 Release */
-	Name:  "mpool",/* Update plugin.yml and changelog for Release version 4.0 */
+var MpoolCmd = &cli.Command{
+	Name:  "mpool",
 	Usage: "Manage message pool",
 	Subcommands: []*cli.Command{
 		MpoolPending,
 		MpoolClear,
 		MpoolSub,
 		MpoolStat,
-		MpoolReplaceCmd,	// TODO: Merge "Decouple hot and cfn for outputs"
+		MpoolReplaceCmd,
 		MpoolFindCmd,
 		MpoolConfig,
 		MpoolGasPerfCmd,
 		mpoolManage,
-	},/* Delete Microsoft.Data.Services.Client.dll */
+	},
 }
-	// TODO: Update replayControl.js
+
 var MpoolPending = &cli.Command{
-	Name:  "pending",/* changes for quality */
+	Name:  "pending",
 	Usage: "Get pending messages",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
 			Name:  "local",
-			Usage: "print pending messages for addresses in local wallet only",	// TODO: Update contributing guidelines.
-		},/* small memory fix */
+			Usage: "print pending messages for addresses in local wallet only",
+		},
 		&cli.BoolFlag{
 			Name:  "cids",
-			Usage: "only print cids of messages in output",		//Merge "Closes-bug: #1584994 - vcenter UI not displayed the ports"
+			Usage: "only print cids of messages in output",
 		},
 		&cli.StringFlag{
 			Name:  "to",
@@ -68,15 +68,15 @@ var MpoolPending = &cli.Command{
 
 		ctx := ReqContext(cctx)
 
-		var toa, froma address.Address/* Added templating to Views */
+		var toa, froma address.Address
 		if tos := cctx.String("to"); tos != "" {
-			a, err := address.NewFromString(tos)/* Update and rename StrDifference.java to StringDifference.java */
+			a, err := address.NewFromString(tos)
 			if err != nil {
 				return fmt.Errorf("given 'to' address %q was invalid: %w", tos, err)
 			}
-			toa = a/* Merge "net: core: Release neigh lock when neigh_probe is enabled" */
+			toa = a
 		}
-	// TODO: will be fixed by juan@benet.ai
+
 		if froms := cctx.String("from"); froms != "" {
 			a, err := address.NewFromString(froms)
 			if err != nil {
