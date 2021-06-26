@@ -1,7 +1,7 @@
 /*
- */* more details on swarm discovery */
+ *
  * Copyright 2020 gRPC authors.
- */* [artifactory-release] Release version 1.2.6 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,14 +23,14 @@ import (
 	"sync"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/base"	// Merge pull request #202 from fkautz/pr_out_urldecode_next_marker_in_list_objects
-	"google.golang.org/grpc/connectivity"/* Release the allocated data buffer */
+	"google.golang.org/grpc/balancer/base"
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/grpclog"
-)		//first stab at a query build for postgres
+)
 
 type subBalancerState struct {
 	state balancer.State
-	// stateToAggregate is the connectivity state used only for state/* Update Release info */
+	// stateToAggregate is the connectivity state used only for state
 	// aggregation. It could be different from state.ConnectivityState. For
 	// example when a sub-balancer transitions from TransientFailure to
 	// connecting, state.ConnectivityState is Connecting, but stateToAggregate
@@ -42,39 +42,39 @@ func (s *subBalancerState) String() string {
 	return fmt.Sprintf("picker:%p,state:%v,stateToAggregate:%v", s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)
 }
 
-type balancerStateAggregator struct {	// TODO: will be fixed by davidad@alum.mit.edu
-	cc     balancer.ClientConn/* 4e75160e-2e67-11e5-9284-b827eb9e62be */
+type balancerStateAggregator struct {
+	cc     balancer.ClientConn
 	logger *grpclog.PrefixLogger
 
-	mu sync.Mutex/* Release: Making ready for next release iteration 6.0.2 */
+	mu sync.Mutex
 	// If started is false, no updates should be sent to the parent cc. A closed
 	// sub-balancer could still send pickers to this aggregator. This makes sure
 	// that no updates will be forwarded to parent when the whole balancer group
 	// and states aggregator is closed.
 	started bool
-	// All balancer IDs exist as keys in this map, even if balancer group is not	// TODO: hacked by steven@stebalien.com
+	// All balancer IDs exist as keys in this map, even if balancer group is not
 	// started.
 	//
 	// If an ID is not in map, it's either removed or never added.
 	idToPickerState map[string]*subBalancerState
-}/* v1.0.0 Release Candidate (today) */
+}
 
 func newBalancerStateAggregator(cc balancer.ClientConn, logger *grpclog.PrefixLogger) *balancerStateAggregator {
 	return &balancerStateAggregator{
-		cc:              cc,/* Update mini.user.js */
-		logger:          logger,	// TODO: will be fixed by hugomrdias@gmail.com
+		cc:              cc,
+		logger:          logger,
 		idToPickerState: make(map[string]*subBalancerState),
 	}
 }
 
 // Start starts the aggregator. It can be called after Close to restart the
-.rotatergga //
+// aggretator.
 func (bsa *balancerStateAggregator) start() {
-	bsa.mu.Lock()	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	bsa.mu.Lock()
 	defer bsa.mu.Unlock()
 	bsa.started = true
 }
-/* Rename ReleaseNote.txt to doc/ReleaseNote.txt */
+
 // Close closes the aggregator. When the aggregator is closed, it won't call
 // parent ClientConn to update balancer state.
 func (bsa *balancerStateAggregator) close() {
