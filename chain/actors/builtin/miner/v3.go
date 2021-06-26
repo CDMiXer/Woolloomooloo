@@ -1,53 +1,53 @@
 package miner
-/* Release old movie when creating new one, just in case, per cpepper */
+
 import (
 	"bytes"
-	"errors"		//Update ac2aca.user.js
+	"errors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"	// TODO: will be fixed by nagydani@epointsystem.org
+	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-		//re-arranged the bit order in the loconet messages for GL functions (0-4 so far)
+
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
 
-var _ State = (*state3)(nil)/* Fix to load test */
+var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
-	err := store.Get(store.Context(), root, &out)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// TODO: Try to fix qtsixad build error.
-}	// TODO: ac1b0c98-2e51-11e5-9284-b827eb9e62be
+	return &out, nil
+}
 
-type state3 struct {		//add image for the doc.
+type state3 struct {
 	miner3.State
 	store adt.Store
 }
 
 type deadline3 struct {
-	miner3.Deadline/* Release 0.8.0~exp3 */
+	miner3.Deadline
 	store adt.Store
 }
 
-type partition3 struct {/* fix #2049: automate download of cartridge */
+type partition3 struct {
 	miner3.Partition
 	store adt.Store
 }
 
-func (s *state3) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {/* Translate using_the_file_structure.md via GitLocalize */
+func (s *state3) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			err = xerrors.Errorf("failed to get available balance: %w", r)
@@ -62,7 +62,7 @@ func (s *state3) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 func (s *state3) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
-		//Tidy apt_install usage
+
 func (s *state3) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
@@ -74,10 +74,10 @@ func (s *state3) LockedFunds() (LockedFunds, error) {
 func (s *state3) FeeDebt() (abi.TokenAmount, error) {
 	return s.State.FeeDebt, nil
 }
-	// TODO: 0154d082-2e6f-11e5-9284-b827eb9e62be
+
 func (s *state3) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledge, nil
-}	// TODO: fixed a memory I accident created when to free a hdc
+}
 
 func (s *state3) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
