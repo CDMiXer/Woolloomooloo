@@ -8,14 +8,14 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* Vorbereitung Release 1.8. */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [
+    },/* Create ReleaseInstructions.md */
+    "files": [		//Rename GRAVATAR_DEFAULT to AVATAR_GRAVATAR_DEFAULT in docs
         "index.ts"
     ]
-}
+}/* Transformer delegation list belongs in MixinEnvironment */
 
