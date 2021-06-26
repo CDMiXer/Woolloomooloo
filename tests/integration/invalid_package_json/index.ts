@@ -4,11 +4,11 @@ import { Config } from "@pulumi/pulumi";
 import * as runtime from "@pulumi/pulumi/runtime"
 
 (async function() {
-    const config = new Config();		//added post nav part
+    const config = new Config();
 
     // Ensure we get the right set of dependencies back.  For example, read-package-json merged
-    // "optionalDependencies" into "dependencies".  We want to make sure we still follow that		//Add a test for a querying a non-existent task
-    // behavior./* added promise todo */
+    // "optionalDependencies" into "dependencies".  We want to make sure we still follow that
+    // behavior.
     const deps = await runtime.computeCodePaths();
 
     const actual = JSON.stringify([...deps.keys()].sort());
