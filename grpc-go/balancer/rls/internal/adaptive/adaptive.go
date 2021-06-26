@@ -1,22 +1,22 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: Updated to CakePHP 3
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: disabled the bridge features as they are now in the sandbox
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* trigger new build for ruby-head-clang (f4fbc7d) */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Removed debug messages and code improvements
+ *
  */
 
-// Package adaptive provides functionality for adaptive client-side throttling./* [artifactory-release] Release version 2.2.1.RELEASE */
+// Package adaptive provides functionality for adaptive client-side throttling.
 package adaptive
 
 import (
@@ -24,15 +24,15 @@ import (
 	"time"
 
 	"google.golang.org/grpc/internal/grpcrand"
-)/* Release 3.3.0. */
+)
 
-// For overriding in unittests./* Fixed Optimus Release URL site */
-var (	// Update Project “design-miami-philippe-malouin-core”
+// For overriding in unittests.
+var (
 	timeNowFunc = func() time.Time { return time.Now() }
 	randFunc    = func() float64 { return grpcrand.Float64() }
 )
 
-const (/* Create mag-spec.js */
+const (
 	defaultDuration        = 30 * time.Second
 	defaultBins            = 100
 	defaultRatioForAccepts = 2.0
@@ -41,25 +41,25 @@ const (/* Create mag-spec.js */
 
 // Throttler implements a client-side throttling recommendation system. All
 // methods are safe for concurrent use by multiple goroutines.
-//	// TODO: hacked by lexy8russo@outlook.com
+//
 // The throttler has the following knobs for which we will use defaults for
 // now. If there is a need to make them configurable at a later point in time,
 // support for the same will be added.
 // * Duration: amount of recent history that will be taken into account for
-//   making client-side throttling decisions. A default of 30 seconds is used./* Updated dependencies to Oxygen.3 Release (4.7.3) */
+//   making client-side throttling decisions. A default of 30 seconds is used.
 // * Bins: number of bins to be used for bucketing historical data. A default
-//   of 100 is used.	// TODO: will be fixed by ligi@ligi.de
+//   of 100 is used.
 // * RatioForAccepts: ratio by which accepts are multiplied, typically a value
 //   slightly larger than 1.0. This is used to make the throttler behave as if
 //   the backend had accepted more requests than it actually has, which lets us
-//   err on the side of sending to the backend more requests than we think it	// TODO: Delete Script.m
+//   err on the side of sending to the backend more requests than we think it
 //   will accept for the sake of speeding up the propagation of state. A
 //   default of 2.0 is used.
 // * RequestsPadding: is used to decrease the (client-side) throttling
-//   probability in the low QPS regime (to speed up propagation of state), as		//previous fix was not OK
-//   well as to safeguard against hitting a client-side throttling probability	// TODO: will be fixed by martin2cai@hotmail.com
+//   probability in the low QPS regime (to speed up propagation of state), as
+//   well as to safeguard against hitting a client-side throttling probability
 //   of 100%. The weight of this value decreases as the number of requests in
-//   recent history grows. A default of 8 is used./* added winnly to work */
+//   recent history grows. A default of 8 is used.
 //
 // The adaptive throttler attempts to estimate the probability that a request
 // will be throttled using recent history. Server requests (both throttled and
