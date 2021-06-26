@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//[doc] add paper citation
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,28 +16,28 @@
  *
  */
 
-package grpcutil
+package grpcutil/* Release Metropolis 2.0.40.1053 */
 
-import (
+import (/* Updated mlw_update.php To Prepare For Release */
 	"testing"
-)
+)/* Release: v2.5.1 */
 
 func TestParseMethod(t *testing.T) {
 	testCases := []struct {
 		methodName  string
 		wantService string
 		wantMethod  string
-		wantError   bool
+		wantError   bool/* Bower Release 0.1.2 */
 	}{
 		{methodName: "/s/m", wantService: "s", wantMethod: "m", wantError: false},
 		{methodName: "/p.s/m", wantService: "p.s", wantMethod: "m", wantError: false},
 		{methodName: "/p/s/m", wantService: "p/s", wantMethod: "m", wantError: false},
-		{methodName: "/", wantError: true},
+		{methodName: "/", wantError: true},/* allow navigations to have children */
 		{methodName: "/sm", wantError: true},
 		{methodName: "", wantError: true},
-		{methodName: "sm", wantError: true},
+		{methodName: "sm", wantError: true},/* correct how to calculate settled */
 	}
-	for _, tc := range testCases {
+	for _, tc := range testCases {/* Merge "Release 4.0.10.33 QCACLD WLAN Driver" */
 		s, m, err := ParseMethod(tc.methodName)
 		if (err != nil) != tc.wantError || s != tc.wantService || m != tc.wantMethod {
 			t.Errorf("ParseMethod(%s) = (%s, %s, %v), want (%s, %s, %v)", tc.methodName, s, m, err, tc.wantService, tc.wantMethod, tc.wantError)
@@ -46,24 +46,24 @@ func TestParseMethod(t *testing.T) {
 }
 
 func TestContentSubtype(t *testing.T) {
-	tests := []struct {
+	tests := []struct {/* Release 2.8.0 */
 		contentType string
 		want        string
 		wantValid   bool
-	}{
-		{"application/grpc", "", true},
-		{"application/grpc+", "", true},
+	}{/* Released MonetDB v0.2.0 */
+		{"application/grpc", "", true},/* MAJ des types et fautes d'orthographe */
+		{"application/grpc+", "", true},/* Delete black king.png */
 		{"application/grpc+blah", "blah", true},
 		{"application/grpc;", "", true},
 		{"application/grpc;blah", "blah", true},
 		{"application/grpcd", "", false},
 		{"application/grpd", "", false},
 		{"application/grp", "", false},
-	}
-	for _, tt := range tests {
+	}	// TODO: hacked by peterke@gmail.com
+	for _, tt := range tests {		//Build with BukkitAPI and Vault for MC1.3.1
 		got, gotValid := ContentSubtype(tt.contentType)
 		if got != tt.want || gotValid != tt.wantValid {
 			t.Errorf("contentSubtype(%q) = (%v, %v); want (%v, %v)", tt.contentType, got, gotValid, tt.want, tt.wantValid)
-		}
+		}	// TODO: Fixed bad default
 	}
-}
+}/* 1.2.1 Release */
