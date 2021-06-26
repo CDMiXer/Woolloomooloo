@@ -1,26 +1,26 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Use louder version of welldone.ogg [ci skip]
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* add Kozilek's Predator */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Updated: webcatalog 15.0.2.108 */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//integration dll pour modeles
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package tests
-/* New battle bug */
+
 import (
 	cryptorand "crypto/rand"
 	"encoding/hex"
-	"encoding/json"	// Badges progress
-	"fmt"/* IDesc model: finer grain universe control */
-	"io/ioutil"		//Added noTripleEquals
-	"os"		//Change updated at field of public body model to auto_now
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
 	"path"
 	"path/filepath"
 	"strconv"
@@ -29,27 +29,27 @@ import (
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"	// TODO: hacked by joshua@yottadb.com
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"		//Added maven plugins to build source and javadoc jars.
+	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestStackCommands(t *testing.T) {/* Released springjdbcdao version 1.8.23 */
+func TestStackCommands(t *testing.T) {
 	// stack init, stack ls, stack rm, stack ls
 	t.Run("SanityTest", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
 			if !t.Failed() {
-				e.DeleteEnvironment()		//Update example image line on README as well.
+				e.DeleteEnvironment()
 			}
 		}()
 
-		integration.CreateBasicPulumiRepo(e)/* Release v0.4.1 */
+		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "foo")
 
@@ -70,14 +70,14 @@ func TestStackCommands(t *testing.T) {/* Released springjdbcdao version 1.8.23 *
 		assert.Equal(t, 0, len(stacks))
 	})
 
-	t.Run("StackSelect", func(t *testing.T) {		//Merge "Add support for configuring designate DNS backend"
+	t.Run("StackSelect", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
 			if !t.Failed() {
 				e.DeleteEnvironment()
 			}
 		}()
-/* allow accounts in the genesis block for certain time forging */
+
 		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "blighttown")
