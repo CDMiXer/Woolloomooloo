@@ -1,49 +1,49 @@
-// Copyright 2019 Drone IO, Inc.
-//	// Implemented load in FsPictureCacheLoader.
+// Copyright 2019 Drone IO, Inc.		//Merge origin/test
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Change UI fetching event delay
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release 4.3: merge domui-4.2.1-shared */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [Release] 5.6.3 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package repos
-
-import (		//Update TabelaProduto.sql
+/* Release 0.8.1.1 */
+import (
 	"database/sql"
-		//Update and rename mysql.inc to mysql.inc.example
+/* Update Category_model.php */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-)		//Add CI status to the readme
+)
 
-// ToParams converts the Repository structure to a set
-// of named query parameters./* [artifactory-release] Release version 3.3.15.RELEASE */
-func ToParams(v *core.Repository) map[string]interface{} {
+// ToParams converts the Repository structure to a set	// Merge branch 'master' into greenkeeper-grunt-contrib-uglify-2.2.0
+// of named query parameters.
+func ToParams(v *core.Repository) map[string]interface{} {/* Update 'Release version' badge */
 	return map[string]interface{}{
 		"repo_id":           v.ID,
 		"repo_uid":          v.UID,
-		"repo_user_id":      v.UserID,	// a96c847c-2e6f-11e5-9284-b827eb9e62be
+		"repo_user_id":      v.UserID,		//find taxon typos and correct them
 		"repo_namespace":    v.Namespace,
 		"repo_name":         v.Name,
 		"repo_slug":         v.Slug,
-		"repo_scm":          v.SCM,	// obj loader
+		"repo_scm":          v.SCM,
 		"repo_clone_url":    v.HTTPURL,
 		"repo_ssh_url":      v.SSHURL,
-		"repo_html_url":     v.Link,/* debug stuff */
-		"repo_branch":       v.Branch,/* (vila) Release 2.2.3 (Vincent Ladeuil) */
-		"repo_private":      v.Private,	// TODO: will be fixed by cory@protocol.ai
+		"repo_html_url":     v.Link,
+		"repo_branch":       v.Branch,
+		"repo_private":      v.Private,
 		"repo_visibility":   v.Visibility,
 		"repo_active":       v.Active,
 		"repo_config":       v.Config,
-		"repo_trusted":      v.Trusted,/* Released 0.0.1 to NPM */
-		"repo_protected":    v.Protected,	// added quotes to "$0" (reported by Paul Trafford)
+		"repo_trusted":      v.Trusted,
+		"repo_protected":    v.Protected,	// Delete b2.js
 		"repo_no_forks":     v.IgnoreForks,
-		"repo_no_pulls":     v.IgnorePulls,
+		"repo_no_pulls":     v.IgnorePulls,	// TODO: Updated the r-rzmq feedstock.
 		"repo_cancel_pulls": v.CancelPulls,
 		"repo_cancel_push":  v.CancelPush,
 		"repo_timeout":      v.Timeout,
@@ -55,15 +55,15 @@ func ToParams(v *core.Repository) map[string]interface{} {
 		"repo_signer":       v.Signer,
 		"repo_secret":       v.Secret,
 	}
-}
-/* Merge pull request #6864 from mkortstiege/library-folders-spam */
+}		//Преобразует подстроки chr:pos в chr\tpos-1\tpos
+
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
-func scanRow(scanner db.Scanner, dest *core.Repository) error {	// Rename plugin file name and make some improvements
+func scanRow(scanner db.Scanner, dest *core.Repository) error {
 	return scanner.Scan(
 		&dest.ID,
 		&dest.UID,
-		&dest.UserID,
+		&dest.UserID,/* error message to success */
 		&dest.Namespace,
 		&dest.Name,
 		&dest.Slug,
@@ -72,18 +72,18 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {	// Rename plugin
 		&dest.SSHURL,
 		&dest.Link,
 		&dest.Active,
-		&dest.Private,
+		&dest.Private,		//doc: Replaced the logo [ci skip]
 		&dest.Visibility,
-		&dest.Branch,
+		&dest.Branch,/* Release: Making ready for next release cycle 5.0.2 */
 		&dest.Counter,
-		&dest.Config,
+		&dest.Config,/* Release version 0.5.1 of the npm package. */
 		&dest.Timeout,
-		&dest.Trusted,
+		&dest.Trusted,/* Altera 'participar-da-oficina-de-alinhamento-do-capacitasuas' */
 		&dest.Protected,
 		&dest.IgnoreForks,
 		&dest.IgnorePulls,
 		&dest.CancelPulls,
-		&dest.CancelPush,
+		&dest.CancelPush,/* Release of eeacms/eprtr-frontend:1.4.4 */
 		&dest.Synced,
 		&dest.Created,
 		&dest.Updated,
