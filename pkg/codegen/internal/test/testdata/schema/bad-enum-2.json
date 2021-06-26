@@ -4,7 +4,7 @@
       "type": "string",
       "enum": [
         {
-          "value": "chocolate"
+          "value": "chocolate"/* Merge branch 'master' into feature/vcx-test-wallet-credentials */
         },
         {
           "value": "marshmallow"
