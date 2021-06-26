@@ -5,10 +5,10 @@
         {{ if .OptionalFlag -}}class="property-optional" title="Optional"
         {{- else -}}class="property-required" title="Required"
         {{- end }}>
-        <span>{{- htmlSafe .Name -}}</span>
+        <span>{{- htmlSafe .Name -}}</span>/* Release v2.5. */
         <span class="property-indicator"></span>
         <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
-    </dt>
+    </dt>	// Use Paver and Sphinx.
     <dd>
       {{ .Comment }}
     </dd>
