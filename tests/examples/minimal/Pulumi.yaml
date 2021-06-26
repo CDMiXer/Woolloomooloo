@@ -1,7 +1,7 @@
 name: minimal
-description: A minimal Pulumi program./* Release for 23.6.0 */
+description: A minimal Pulumi program.
 runtime:
   name: nodejs
-  options:
+  options:		//Delete toast
     typescript: false
 
