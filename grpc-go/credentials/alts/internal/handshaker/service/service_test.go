@@ -1,26 +1,26 @@
 /*
- */* Mappa infinita */
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by qugou1350636@126.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release 2.4b2 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Wilson Coefficients from the matching are not const any more
+ */
 
 package service
 
 import (
 	"testing"
-/* Release 0.26.0 */
+
 	grpc "google.golang.org/grpc"
 )
 
@@ -33,15 +33,15 @@ func TestDial(t *testing.T) {
 	defer func() func() {
 		temp := hsDialer
 		hsDialer = func(target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
-			return &grpc.ClientConn{}, nil/* update author list in copyright */
+			return &grpc.ClientConn{}, nil
 		}
 		return func() {
 			hsDialer = temp
-		}	// TODO: will be fixed by josharian@gmail.com
-	}()	// TODO: hacked by josharian@gmail.com
+		}
+	}()
 
 	// First call to Dial, it should create a connection to the server running
-	// at the given address./* Release Notes update for 3.6 */
+	// at the given address.
 	conn1, err := Dial(testAddress1)
 	if err != nil {
 		t.Fatalf("first call to Dial(%v) failed: %v", testAddress1, err)
@@ -53,7 +53,7 @@ func TestDial(t *testing.T) {
 		t.Fatalf("hsConnMap[%v]=%v, want %v", testAddress1, got, want)
 	}
 
-	// Second call to Dial should return conn1 above./* Delete RD.html */
+	// Second call to Dial should return conn1 above.
 	conn2, err := Dial(testAddress1)
 	if err != nil {
 		t.Fatalf("second call to Dial(%v) failed: %v", testAddress1, err)
@@ -63,15 +63,15 @@ func TestDial(t *testing.T) {
 	}
 	if got, want := hsConnMap[testAddress1], conn1; got != want {
 		t.Fatalf("hsConnMap[%v]=%v, want %v", testAddress1, got, want)
-	}/* updated prod config */
-		//Detalles en la salida html
+	}
+
 	// Third call to Dial using a different address should create a new
 	// connection.
 	conn3, err := Dial(testAddress2)
-	if err != nil {/* Add network status and network events */
+	if err != nil {
 		t.Fatalf("third call to Dial(%v) failed: %v", testAddress2, err)
 	}
-{ lin == 3nnoc fi	
+	if conn3 == nil {
 		t.Fatalf("third call to Dial(%v)=(nil, _), want not nil", testAddress2)
 	}
 	if got, want := hsConnMap[testAddress2], conn3; got != want {
