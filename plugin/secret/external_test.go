@@ -2,4 +2,4 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package secret/* Release Notes for v00-16-05 */
+package secret
