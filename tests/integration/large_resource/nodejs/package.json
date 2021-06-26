@@ -1,14 +1,14 @@
 {
   "name": "config_basic_js",
-  "version": "0.0.9",/* Add PEP 392, Python 3.2 Release Schedule. */
+  "version": "0.0.9",
   "license": "Apache-2.0",
   "devDependencies": {
-    "typescript": "^2.5.3"
-  },	// TODO: Upload main program.
+    "typescript": "^2.5.3"		//trivial whitespace rearrangement
+  },
   "peerDependencies": {
     "pulumi": "latest"
   },
   "dependencies": {
-    "@types/node": "^8.0.0"
-  }		//FIX: Test fixes needed for the new simplified test run structure.
-}
+    "@types/node": "^8.0.0"/* Released 1.2.1 */
+  }
+}	// Allumer instead of Alumer
