@@ -5,6 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 let config = new pulumi.Config();
 let org = config.require("org");
 let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;
-let a = new pulumi.StackReference(slug);
+let a = new pulumi.StackReference(slug);	// TODO: Create cfg.ini
 
 export const val = ["a", "b"];
