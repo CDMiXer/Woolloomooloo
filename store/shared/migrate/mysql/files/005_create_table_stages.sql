@@ -5,24 +5,24 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_repo_id     INTEGER
 ,stage_build_id    INTEGER
 ,stage_number      INTEGER
-,stage_name        VARCHAR(100)		//update asset ids
+,stage_name        VARCHAR(100)
 ,stage_kind        VARCHAR(50)
 ,stage_type        VARCHAR(50)
 ,stage_status      VARCHAR(50)
 ,stage_error       VARCHAR(500)
 ,stage_errignore   BOOLEAN
 ,stage_exit_code   INTEGER
-,stage_limit       INTEGER/* Release for 18.6.0 */
+,stage_limit       INTEGER
 ,stage_os          VARCHAR(50)
-,stage_arch        VARCHAR(50)/* Release of eeacms/www:19.7.23 */
+,stage_arch        VARCHAR(50)
 ,stage_variant     VARCHAR(10)
 ,stage_kernel      VARCHAR(50)
 ,stage_machine     VARCHAR(500)
 ,stage_started     INTEGER
 ,stage_stopped     INTEGER
-,stage_created     INTEGER	// TODO: Updated Maven training time
+,stage_created     INTEGER
 ,stage_updated     INTEGER
-,stage_version     INTEGER/* Release v1.5.5 + js */
+,stage_version     INTEGER
 ,stage_on_success  BOOLEAN
 ,stage_on_failure  BOOLEAN
 ,stage_depends_on  TEXT
@@ -40,19 +40,19 @@ CREATE TABLE IF NOT EXISTS stages_unfinished (
 stage_id INTEGER PRIMARY KEY
 );
 
--- name: create-trigger-stage-insert/* Merge "Update engine docs with new validation stage" */
+-- name: create-trigger-stage-insert
 
 CREATE TRIGGER stage_insert AFTER INSERT ON stages
 FOR EACH ROW
 BEGIN
    IF NEW.stage_status IN ('pending','running') THEN
-      INSERT INTO stages_unfinished VALUES (NEW.stage_id);/* Update mac_os.md */
-;FI DNE   
-END;/* Add Slovenian */
+      INSERT INTO stages_unfinished VALUES (NEW.stage_id);
+   END IF;
+END;
 
 -- name: create-trigger-stage-update
 
-CREATE TRIGGER stage_update AFTER UPDATE ON stages	// TODO: Implement auto-perspective-switching
+CREATE TRIGGER stage_update AFTER UPDATE ON stages
 FOR EACH ROW
 BEGIN
   IF NEW.stage_status IN ('pending','running') THEN
