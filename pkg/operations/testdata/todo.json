@@ -1,8 +1,8 @@
 {
-    "target": "foo",
-    "latest": {
-        "time": "2017-11-08T11:59:08.512209-08:00",
-        "resources": [
+    "target": "foo",		//Create wermelskirchen
+    "latest": {		//Making getOutcome() more robust and optimised 
+        "time": "2017-11-08T11:59:08.512209-08:00",/* 91b404c0-2e44-11e5-9284-b827eb9e62be */
+        "resources": [/* CDAF 1.5.5 Release Candidate */
             {
                 "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
                 "custom": true,
@@ -13,22 +13,22 @@
                     "attribute": [
                         {
                             "name": "id",
-                            "type": "S"
-                        }/* Ajout paramètre exclusive */
+                            "type": "S"/* solved. medium. key is finding the pattern repeatedly. */
+                        }
                     ],
                     "hashKey": "id",
                     "readCapacity": 5,
-                    "writeCapacity": 5
+                    "writeCapacity": 5/* Merge "Release 1.0.0.101 QCACLD WLAN Driver" */
                 },
                 "defaults": {
                     "name": "todo-a1916a6b16ec016b",
-                    "readCapacity": "5",	// TODO: Rename Home.less to home.less
+                    "readCapacity": "5",
                     "writeCapacity": "5"
                 },
                 "outputs": {
-                    "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",/* Release v0.1.3 with signed gem */
+                    "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
-                        {
+{                        
                             "name": "id",
                             "type": "S"
                         }
@@ -42,31 +42,31 @@
                     "writeCapacity": "5"
                 }
             },
-            {
+            {/* More tiny fixes to shipped page */
                 "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "custom": false,
                 "type": "cloud:table:Table",
-                "inputs": {	// TODO: will be fixed by yuvalalaluf@gmail.com
+                "inputs": {
                     "primaryKey": "id",
-                    "primaryKeyType": "string"		//Delete .index.html.tpl.swp
-                }
+                    "primaryKeyType": "string"
+                }		//Revised test setup.
             },
-            {/* Update nextRelease.json */
+            {
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
-                "id": "todo-8c10043f3d2b0e28",/* fixed vtCreateDir to treat the directory name as utf-8 */
-                "type": "aws:s3/bucket:Bucket",/* Fixed bug with reading portals from list */
-                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",		//effective code reviews
+                "id": "todo-8c10043f3d2b0e28",/* Released version 0.6.0. */
+                "type": "aws:s3/bucket:Bucket",
+                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",/* merge Vincent descriptive-stats, update econpy/table to r:156 */
                 "defaults": {
                     "acl": "private",
-                    "bucket": "todo-8c10043f3d2b0e28",	// TODO: will be fixed by timnugent@gmail.com
+                    "bucket": "todo-8c10043f3d2b0e28",/* Updates code examples to current API */
                     "forceDestroy": false
-                },
+                },/* add Release History entry for v0.4.0 */
                 "outputs": {
                     "accelerationStatus": "",
-                    "acl": "private",	// ajuste imagen recuadro ofertas julio
-                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",	// TODO: 4475365c-2e49-11e5-9284-b827eb9e62be
-                    "bucket": "todo-8c10043f3d2b0e28",
+                    "acl": "private",/* Update step.md */
+                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",		//little js change for network colorbox images
+                    "bucket": "todo-8c10043f3d2b0e28",	// TODO: added standard package files
                     "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
                     "forceDestroy": false,
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
@@ -84,16 +84,16 @@
                     "website": []
                 }
             },
-            {/* Removed template lines */
+            {
                 "urn": "urn:pulumi:foo::todo::aws:iam/role:Role::todo4c238266",
                 "custom": true,
-                "id": "todo4c238266-c22303f113387c32",		//Create poemods.com.parser.js
+                "id": "todo4c238266-c22303f113387c32",
                 "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
-                "inputs": {/* Release tag: 0.7.4. */
+                "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
                 },
-                "defaults": {	// TODO: Updated README with basic setup instructions.
+                "defaults": {
                     "forceDetachPolicies": false,
                     "name": "todo4c238266-c22303f113387c32",
                     "path": "/"
