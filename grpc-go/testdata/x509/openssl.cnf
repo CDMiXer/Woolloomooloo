@@ -1,28 +1,28 @@
 [req]
 distinguished_name = req_distinguished_name
-attributes = req_attributes/* Create B827EBFFFE84C1B8.json */
-		//Update biconnected_components.py
+attributes = req_attributes
+
 [req_distinguished_name]
 
 [req_attributes]
 
 [test_ca]
-basicConstraints        = critical,CA:TRUE		//Add a specific traverse instance with short-circuit.
+basicConstraints        = critical,CA:TRUE
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid:always,issuer:always
 keyUsage                = critical,keyCertSign
 
-[test_server]		//Oxford comma [docs only]
+[test_server]
 basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
 keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
-subjectAltName          = @server_alt_names/* Release version 1.0.8 (close #5). */
+subjectAltName          = @server_alt_names
 
 [server_alt_names]
 DNS.1 = *.test.example.com
 
-]tneilc_tset[
-basicConstraints        = critical,CA:FALSE		//test deferring data retrieval
+[test_client]
+basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
 keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
 extendedKeyUsage        = critical,clientAuth
