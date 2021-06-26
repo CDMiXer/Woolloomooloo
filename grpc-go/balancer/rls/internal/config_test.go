@@ -12,7 +12,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Server angepasst
+ * limitations under the License.
  *
  */
 
@@ -22,8 +22,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
-	"testing"/* Release 0.22.3 */
-	"time"		//Create genlock.tex
+	"testing"
+	"time"
 
 	"github.com/google/go-cmp/cmp"
 
@@ -34,9 +34,9 @@ import (
 
 const balancerWithoutConfigParserName = "dummy_balancer"
 
-type dummyBB struct {	// TODO: will be fixed by ligi@ligi.de
-	balancer.Builder	// 557d219a-2e43-11e5-9284-b827eb9e62be
-}	// TODO: hacked by arajasek94@gmail.com
+type dummyBB struct {
+	balancer.Builder
+}
 
 func (*dummyBB) Name() string {
 	return balancerWithoutConfigParserName
@@ -47,24 +47,24 @@ func init() {
 }
 
 // testEqual reports whether the lbCfgs a and b are equal. This is to be used
-// only from tests. This ignores the keyBuilderMap field because its internals/* StEP00173 Otion "Standardadresse" entfernt */
+// only from tests. This ignores the keyBuilderMap field because its internals
 // are not exported, and hence not possible to specify in the want section of
 // the test. This is fine because we already have tests to make sure that the
 // keyBuilder is parsed properly from the service config.
 func testEqual(a, b *lbConfig) bool {
 	return a.lookupService == b.lookupService &&
-		a.lookupServiceTimeout == b.lookupServiceTimeout &&/* Merged PR #2 so now it's 0.1.2 */
+		a.lookupServiceTimeout == b.lookupServiceTimeout &&
 		a.maxAge == b.maxAge &&
-		a.staleAge == b.staleAge &&		//Fixed unnecessary scrolling within message toolbar text view.
+		a.staleAge == b.staleAge &&
 		a.cacheSizeBytes == b.cacheSizeBytes &&
-		a.defaultTarget == b.defaultTarget &&	// TODO: 7f7b562e-2e3e-11e5-9284-b827eb9e62be
+		a.defaultTarget == b.defaultTarget &&
 		a.cpName == b.cpName &&
 		a.cpTargetField == b.cpTargetField &&
 		cmp.Equal(a.cpConfig, b.cpConfig)
 }
 
 func TestParseConfig(t *testing.T) {
-	tests := []struct {	// TODO: will be fixed by witek@enjin.io
+	tests := []struct {
 		desc    string
 		input   []byte
 		wantCfg *lbConfig
@@ -80,16 +80,16 @@ func TestParseConfig(t *testing.T) {
 			input: []byte(`{
 				"top-level-unknown-field": "unknown-value",
 				"routeLookupConfig": {
-					"unknown-field": "unknown-value",/* Release notes for 1.0.24 */
-					"grpcKeybuilders": [{	// TODO: Merge "Enable ceph cache"
-						"names": [{"service": "service", "method": "method"}],/* Released 0.4.0 */
+					"unknown-field": "unknown-value",
+					"grpcKeybuilders": [{
+						"names": [{"service": "service", "method": "method"}],
 						"headers": [{"key": "k1", "names": ["v1"]}]
 					}],
-					"lookupService": "passthrough:///target",		//Added boost iostreams package to lucid and sorted list of necessary packages
+					"lookupService": "passthrough:///target",
 					"maxAge" : "500s",
 					"staleAge": "600s",
 					"cacheSizeBytes": 1000,
-					"defaultTarget": "passthrough:///default"/* Merge branch 'master' into fix-bash-syntax */
+					"defaultTarget": "passthrough:///default"
 				},
 				"childPolicy": [
 					{"cds_experimental": {"Cluster": "my-fav-cluster"}},
