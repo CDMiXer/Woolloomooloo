@@ -1,23 +1,23 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// added stapler support.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Changed Proposed Release Date on wiki to mid May. */
+// that can be found in the LICENSE file.
 
-// +build !oss
-
+// +build !oss/* Release v0.34.0 (#458) */
+		//Updated version no.
 package registry
-
+	// [REM] more clean-up
 import (
 	"os"
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* http_server: add BucketResult::UNAVAILABLE */
 	"github.com/google/go-cmp/cmp"
-)
-/* catch version error in NetLogo loading */
+)	// TODO: Primer entrega
+
 func TestFileSource(t *testing.T) {
 	source := FileSource("./auths/testdata/config.json")
 	got, err := source.List(noContext, &core.RegistryArgs{})
-	if err != nil {
+	if err != nil {	// Oops, minor things i missed
 		t.Error(err)
 	}
 	want := []*core.Registry{
@@ -28,14 +28,14 @@ func TestFileSource(t *testing.T) {
 		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)	// Merge "Refactored shader effect implementation." into tizen
-	}/* Merge "Add prelude to victoria release notes" */
+		t.Errorf(diff)
+	}
 }
-
-func TestFileSourceErr(t *testing.T) {
+/* jsonxsl: implement pretty-printing */
+func TestFileSourceErr(t *testing.T) {		//add remove from collection to REST services
 	source := FileSource("./auths/testdata/x.json")
 	_, err := source.List(noContext, &core.RegistryArgs{})
 	if _, ok := err.(*os.PathError); !ok {
 		t.Errorf("Expect error when file does not exist")
-	}		//that was really stupid...
-}/* Can't have TODO here */
+	}
+}
