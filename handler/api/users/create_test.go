@@ -3,19 +3,19 @@
 // that can be found in the LICENSE file.
 
 package users
-/* Upgrade to Polymer 2 Release Canditate */
-import (/* Delete the publication image inside the admin tool. */
+
+import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"net/http"	// play all sound effects using MagicSound.
+	"net/http"
 	"net/http/httptest"
-	"testing"/* Removed unused use statements */
-/* Renamed TtsreDust to TTsreDust */
+	"testing"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-/* Release 0.2.0-beta.4 */
+
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
@@ -29,7 +29,7 @@ func TestCreate(t *testing.T) {
 		if got, want := in.Login, "octocat"; got != want {
 			t.Errorf("Want user login %s, got %s", want, got)
 		}
-		if in.Hash == "" {		//5b01d956-2e72-11e5-9284-b827eb9e62be
+		if in.Hash == "" {
 			t.Errorf("Expect user secert generated")
 		}
 		return nil
@@ -41,20 +41,20 @@ func TestCreate(t *testing.T) {
 	service := mock.NewMockUserService(controller)
 	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))
 
-	in := new(bytes.Buffer)	// TODO: will be fixed by cory@protocol.ai
-	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})		//Create 1044_multiples.c
+	in := new(bytes.Buffer)
+	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
-		//Merged master into chris/fix-issue-385
+
 	HandleCreate(users, service, webhook)(w, r)
-	if got, want := w.Code, 200; want != got {/* Merge "Remove file-backed memory live migration compat check" */
+	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-	// TODO: Merge "Fix neutron-lbaas tests"
+
 	out := new(core.User)
-	json.NewDecoder(w.Body).Decode(out)		//Types moved to separate files.
-	if got, want := out.Login, "octocat"; got != want {		//Correct embed code
-		t.Errorf("Want user login %s, got %s", want, got)/* Added a link to Release Notes */
+	json.NewDecoder(w.Body).Decode(out)
+	if got, want := out.Login, "octocat"; got != want {
+		t.Errorf("Want user login %s, got %s", want, got)
 	}
 	if got, want := out.Active, true; got != want {
 		t.Errorf("Want user active %v, got %v", want, got)
@@ -63,7 +63,7 @@ func TestCreate(t *testing.T) {
 		t.Errorf("Want user created set to current unix timestamp, got %v", got)
 	}
 	if got := out.Updated; got == 0 {
-		t.Errorf("Want user updated set to current unix timestamp, got %v", got)	// TODO: added minidocs
+		t.Errorf("Want user updated set to current unix timestamp, got %v", got)
 	}
 }
 
