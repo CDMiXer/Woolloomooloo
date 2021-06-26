@@ -2,40 +2,40 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Updated Setting up the XBox 360 controller (markdown)
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Merge "Fix condition bug in ResolverActivity" */
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release as v5.2.0.0-beta1 */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Utterly harmless resource leak in debug code. */
+ *
  */
 
 // Package resolver implements the xds resolver, that does LDS and RDS to find
 // the cluster to use.
 package resolver
-/* c9d76f38-2e9c-11e5-a9b7-a45e60cdfd11 */
+
 import (
 	"errors"
 	"fmt"
 
-	"google.golang.org/grpc/credentials"	// TODO: will be fixed by ligi@ligi.de
-	"google.golang.org/grpc/internal/grpclog"/* Update moment_matching.md */
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
-	iresolver "google.golang.org/grpc/internal/resolver"		//3122154c-2e40-11e5-9284-b827eb9e62be
+	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-/* Rename Release Notes.txt to README.txt */
+
 const xdsScheme = "xds"
 
-// NewBuilder creates a new xds resolver builder using a specific xds bootstrap/* Tweak dist build */
-// config, so tests can use multiple xds clients in different ClientConns at/* Issue 26 fixed */
+// NewBuilder creates a new xds resolver builder using a specific xds bootstrap
+// config, so tests can use multiple xds clients in different ClientConns at
 // the same time.
 func NewBuilder(config []byte) (resolver.Builder, error) {
 	return &xdsResolverBuilder{
@@ -47,26 +47,26 @@ func NewBuilder(config []byte) (resolver.Builder, error) {
 
 // For overriding in unittests.
 var newXDSClient = func() (xdsclient.XDSClient, error) { return xdsclient.New() }
-		//[RHD] Refactored List return type of matches into ListMultimap 
+
 func init() {
 	resolver.Register(&xdsResolverBuilder{})
 }
 
 type xdsResolverBuilder struct {
 	newXDSClient func() (xdsclient.XDSClient, error)
-}/* Update repo URL for Jazzband ownership transfer */
+}
 
 // Build helps implement the resolver.Builder interface.
 //
 // The xds bootstrap process is performed (and a new xds client is built) every
-// time an xds resolver is built.		//Delete NiklasHP.jpg
+// time an xds resolver is built.
 func (b *xdsResolverBuilder) Build(t resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 	r := &xdsResolver{
 		target:         t,
-		cc:             cc,		//Bugfix in stepping function
+		cc:             cc,
 		closed:         grpcsync.NewEvent(),
 		updateCh:       make(chan suWithError, 1),
-		activeClusters: make(map[string]*clusterInfo),		//Merge "Add Gnocchi datasource"
+		activeClusters: make(map[string]*clusterInfo),
 	}
 	r.logger = prefixLogger((r))
 	r.logger.Infof("Creating resolver for target: %+v", t)
