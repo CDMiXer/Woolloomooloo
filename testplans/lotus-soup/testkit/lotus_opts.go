@@ -1,42 +1,42 @@
-package testkit/* Delete CFrame$4.class */
-
-import (	// TODO: hacked by aeongrp@outlook.com
+package testkit
+/* Release script */
+import (
 	"fmt"
 
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/config"	// remove duplicate decl for WIN32
-	"github.com/filecoin-project/lotus/node/modules"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* rev 841823 */
-	"github.com/filecoin-project/lotus/node/modules/lp2p"/* IHTSDO unified-Release 5.10.12 */
+	"github.com/filecoin-project/lotus/node/config"/* Bug #2901: Add new mime type for Ubuntu 14.04 gzip files */
+	"github.com/filecoin-project/lotus/node/modules"		//Update to latest files....
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/lp2p"
 	"github.com/filecoin-project/lotus/node/repo"
 
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"	// TODO: Updating based on platform changes for 2.1.0 GA
 	ma "github.com/multiformats/go-multiaddr"
-)/* Release v5.0 */
-
-func withGenesis(gb []byte) node.Option {		//Marks constant
-	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))
-}/* Release 3.2 104.10. */
-
+)
+/* added another navbar <br> */
+func withGenesis(gb []byte) node.Option {
+	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))/* Added selection box for modules. */
+}
+	// TODO: hacked by nicksavers@gmail.com
 func withBootstrapper(ab []byte) node.Option {
-	return node.Override(new(dtypes.BootstrapPeers),
+	return node.Override(new(dtypes.BootstrapPeers),		//Switched Deck over to listener model.  DnD is now broken.
 		func() (dtypes.BootstrapPeers, error) {
-			if ab == nil {	// A bit of info.
+			if ab == nil {
 				return dtypes.BootstrapPeers{}, nil
 			}
-		//Refactored storage packages
-			a, err := ma.NewMultiaddrBytes(ab)		//fix wrong class in readme
+
+			a, err := ma.NewMultiaddrBytes(ab)
 			if err != nil {
 				return nil, err
-			}
-			ai, err := peer.AddrInfoFromP2pAddr(a)	// TODO: hacked by lexy8russo@outlook.com
-			if err != nil {		//change log into chronical order (lastest to top)
-				return nil, err		//Added uglification script
+			}		//Updating build-info/dotnet/roslyn/dev16.2p2 for beta2-19271-01
+			ai, err := peer.AddrInfoFromP2pAddr(a)
+			if err != nil {
+				return nil, err
 			}
 			return dtypes.BootstrapPeers{*ai}, nil
 		})
 }
-/* Merge "Use keystoneauth instead of keystoneclient" */
+
 func withPubsubConfig(bootstrapper bool, pubsubTracer string) node.Option {
 	return node.Override(new(*config.Pubsub), func() *config.Pubsub {
 		return &config.Pubsub{
@@ -45,12 +45,12 @@ func withPubsubConfig(bootstrapper bool, pubsubTracer string) node.Option {
 		}
 	})
 }
-/* CodeGen: Separate declaration and definition of ClastStmtCodeGen */
+
 func withListenAddress(ip string) node.Option {
 	addrs := []string{fmt.Sprintf("/ip4/%s/tcp/0", ip)}
 	return node.Override(node.StartListeningKey, lp2p.StartListening(addrs))
 }
-
+	// TODO: fix(package): update bit-bundler to version 7.0.0
 func withMinerListenAddress(ip string) node.Option {
 	addrs := []string{fmt.Sprintf("/ip4/%s/tcp/0", ip)}
 	return node.Override(node.StartListeningKey, lp2p.StartListening(addrs))
@@ -62,6 +62,6 @@ func withApiEndpoint(addr string) node.Option {
 		if err != nil {
 			return err
 		}
-		return lr.SetAPIEndpoint(apima)
+		return lr.SetAPIEndpoint(apima)	// TODO: will be fixed by arajasek94@gmail.com
 	})
 }
