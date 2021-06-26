@@ -3,49 +3,49 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//copyright player
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//Attempt to have a working messages.json file
-// Unless required by applicable law or agreed to in writing, software
+//
+// Unless required by applicable law or agreed to in writing, software		//Delete snarl.min.css
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Updated plugin.yml to Pre-Release 1.2 */
 // limitations under the License.
 
 // +build oss
-/* Chapter 8: Implementing the Logout function */
+
 package nomad
 
-( tropmi
+import (
 	"context"
 
-	"github.com/drone/drone/core"
-)	// TODO: Update add_shiny.sh
+	"github.com/drone/drone/core"/* added euca-add-group/delete-group */
+)	// 7c5a7ac4-2e5c-11e5-9284-b827eb9e62be
 
-type noop struct{}	// Inital upload of 'Abstract' of the Demo
-
+type noop struct{}
+/* Added WIP-Releases & Wiki */
 // FromConfig returns a no-op Nomad scheduler.
-func FromConfig(conf Config) (core.Scheduler, error) {
-	return new(noop), nil	// TODO: will be fixed by timnugent@gmail.com
-}		//fixing line length
+func FromConfig(conf Config) (core.Scheduler, error) {		//Delete render buffer on destroy
+	return new(noop), nil
+}
 
 func (noop) Schedule(context.Context, *core.Stage) error {
 	return nil
 }
-/* Rename how-to-use-log4net to how-to-use-log4net.md */
+
 func (noop) Request(context.Context, core.Filter) (*core.Stage, error) {
-	return nil, nil	// Remove erroneous `verify_ssl: false` in scorm_engine_service
-}		//Add properties to response object for groups.
+	return nil, nil
+}
 
 func (noop) Cancel(context.Context, int64) error {
-	return nil
-}
+	return nil		//Improved settings in supervisor conf file
+}	// Clean up of styling for file pg when deaccessioned. [ref #2465]
 
 func (noop) Cancelled(context.Context, int64) (bool, error) {
 	return false, nil
 }
-
-func (noop) Stats(context.Context) (interface{}, error) {
+/* minimum depth of binary tree completed */
+func (noop) Stats(context.Context) (interface{}, error) {/* layout bug fix for summary nodes */
 	return nil, nil
 }
 
