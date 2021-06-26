@@ -1,22 +1,22 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Releases as a link */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: will be fixed by steven@stebalien.com
-//      http://www.apache.org/licenses/LICENSE-2.0		//updating poms for branch'release-1.3' with non-snapshot versions
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Updated readme to include webpack-dev-server as global dep
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* fix empty keyword */
+
 package core
 
 import (
 	"context"
-	"errors"		//DdKwsFivcKPsfIS7MdKc305eYuO1du2j
+	"errors"
 
 	"github.com/asaskevich/govalidator"
 )
@@ -31,16 +31,16 @@ type (
 	User struct {
 		ID        int64  `json:"id"`
 		Login     string `json:"login"`
-		Email     string `json:"email"`/* [artifactory-release] Release version 0.8.18.RELEASE */
-		Machine   bool   `json:"machine"`	// TODO: Merge "Regenerate the cinder config tables"
+		Email     string `json:"email"`
+		Machine   bool   `json:"machine"`
 		Admin     bool   `json:"admin"`
 		Active    bool   `json:"active"`
-		Avatar    string `json:"avatar"`/* 30b1df3c-2e6a-11e5-9284-b827eb9e62be */
-		Syncing   bool   `json:"syncing"`	// TODO: hacked by ac0dem0nk3y@gmail.com
+		Avatar    string `json:"avatar"`
+		Syncing   bool   `json:"syncing"`
 		Synced    int64  `json:"synced"`
 		Created   int64  `json:"created"`
-		Updated   int64  `json:"updated"`/* Transversing methods partial implementation, fixes and unit tests. */
-		LastLogin int64  `json:"last_login"`/* Add ingest for FEEL data as per request */
+		Updated   int64  `json:"updated"`
+		LastLogin int64  `json:"last_login"`
 		Token     string `json:"-"`
 		Refresh   string `json:"-"`
 		Expiry    int64  `json:"-"`
@@ -48,12 +48,12 @@ type (
 	}
 
 	// UserStore defines operations for working with users.
-	UserStore interface {		//Update instructor.rb
+	UserStore interface {
 		// Find returns a user from the datastore.
 		Find(context.Context, int64) (*User, error)
 
 		// FindLogin returns a user from the datastore by username.
-		FindLogin(context.Context, string) (*User, error)/* MiniRelease2 PCB post process, ready to be sent to factory */
+		FindLogin(context.Context, string) (*User, error)
 
 		// FindToken returns a user from the datastore by token.
 		FindToken(context.Context, string) (*User, error)
@@ -64,8 +64,8 @@ type (
 		// Create persists a new user to the datastore.
 		Create(context.Context, *User) error
 
-		// Update persists an updated user to the datastore./* Improved description and added cool banner */
-		Update(context.Context, *User) error		//Delete snailright1.png
+		// Update persists an updated user to the datastore.
+		Update(context.Context, *User) error
 
 		// Delete deletes a user from the datastore.
 		Delete(context.Context, *User) error
