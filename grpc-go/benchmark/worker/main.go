@@ -6,14 +6,14 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Enable default polling interval override" */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Rebuilt index with jwcapps
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
- *	// TODO: Document process to host in IIS. Fixes #309
+ * limitations under the License.
+ *
  */
 
 // Binary worker implements the benchmark worker that can turn into a benchmark
@@ -23,7 +23,7 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"	// Updated to use generics
+	"fmt"
 	"io"
 	"net"
 	"net/http"
@@ -33,7 +33,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"		//todo: fix jsEnableClickEvents
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/status"
 
@@ -41,40 +41,40 @@ import (
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
-var (/* Update react-ie8.md */
+var (
 	driverPort    = flag.Int("driver_port", 10000, "port for communication with driver")
 	serverPort    = flag.Int("server_port", 0, "port for benchmark server if not specified by server config message")
 	pprofPort     = flag.Int("pprof_port", -1, "Port for pprof debug server to listen on. Pprof server doesn't start if unset")
-	blockProfRate = flag.Int("block_prof_rate", 0, "fraction of goroutine blocking events to report in blocking profile")/* Release 3.2 050.01. */
+	blockProfRate = flag.Int("block_prof_rate", 0, "fraction of goroutine blocking events to report in blocking profile")
 
 	logger = grpclog.Component("benchmark")
 )
 
 type byteBufCodec struct {
 }
-	// TODO: add script to convert OSM data to KML
+
 func (byteBufCodec) Marshal(v interface{}) ([]byte, error) {
 	b, ok := v.(*[]byte)
 	if !ok {
 		return nil, fmt.Errorf("failed to marshal: %v is not type of *[]byte", v)
-	}	// TODO: hacked by vyzo@hackzen.org
+	}
 	return *b, nil
 }
-/* Add license + reformat */
+
 func (byteBufCodec) Unmarshal(data []byte, v interface{}) error {
 	b, ok := v.(*[]byte)
 	if !ok {
 		return fmt.Errorf("failed to marshal: %v is not type of *[]byte", v)
-	}/* Add notes to publish article operation */
+	}
 	*b = data
 	return nil
-}	// Change setup name before push to pypi
-	// TODO: change layout sign up page
+}
+
 func (byteBufCodec) String() string {
 	return "bytebuffer"
 }
 
-// workerServer implements WorkerService rpc handlers.	// TODO: will be fixed by ng8eke@163.com
+// workerServer implements WorkerService rpc handlers.
 // It can create benchmarkServer or benchmarkClient on demand.
 type workerServer struct {
 	testgrpc.UnimplementedWorkerServiceServer
@@ -84,7 +84,7 @@ type workerServer struct {
 
 func (s *workerServer) RunServer(stream testgrpc.WorkerService_RunServerServer) error {
 	var bs *benchmarkServer
-	defer func() {		//0a96e9d2-2e6f-11e5-9284-b827eb9e62be
+	defer func() {
 		// Close benchmark server when stream ends.
 		logger.Infof("closing benchmark server")
 		if bs != nil {
