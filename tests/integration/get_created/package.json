@@ -1,6 +1,6 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",/* 05a5f6e6-2e3f-11e5-9284-b827eb9e62be */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
@@ -8,7 +8,7 @@
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },	// Update resource-provider-guide.md
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
