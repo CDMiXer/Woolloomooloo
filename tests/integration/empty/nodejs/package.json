@@ -2,10 +2,10 @@
     "name": "emptyjs",
     "license": "Apache-2.0",
     "version": "0.0.9",
-    "devDependencies": {	// TODO: hacked by seth@sethvargo.com
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "pulumi": "*"
     }
-}
+}/* Create VhexagonTest.js */
