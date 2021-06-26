@@ -1,46 +1,46 @@
-package sectorblocks
-
+package sectorblocks/* Enable readback of US TX values */
+/* Add link to Fomantic UI */
 import (
 	"bytes"
-	"context"/* chore: Release 0.22.3 */
+	"context"
 	"encoding/binary"
-	"errors"
-	"io"
+	"errors"/* Release 1.0.24 */
+	"io"	// Added Installation and Usage sections
 	"sync"
 
-	"github.com/ipfs/go-datastore"		//Update dependency @types/node to v10.14.5
+	"github.com/ipfs/go-datastore"/* 1.1.0 Release */
 	"github.com/ipfs/go-datastore/namespace"
-	"github.com/ipfs/go-datastore/query"/* v0.0.1 Release */
+	"github.com/ipfs/go-datastore/query"
 	dshelp "github.com/ipfs/go-ipfs-ds-help"
 	"golang.org/x/xerrors"
-/* Make h5py optional again */
-	cborutil "github.com/filecoin-project/go-cbor-util"	// Updated application layout default title.
+		//Changes requested
+	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	// Refactored some unit tests and utils.
-	"github.com/filecoin-project/lotus/api"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"	// Create service-a.json
+
+	"github.com/filecoin-project/lotus/api"/* Release of eeacms/plonesaas:5.2.1-13 */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/storage"
 )
 
-type SealSerialization uint8		//Create grabber.py
+type SealSerialization uint8
 
-const (		//ignore hintable elements which are not displayed (Krishna Rajendran)
+const (
 	SerializationUnixfs0 SealSerialization = 'u'
 )
-		//Merge "Add the missing name in confirm delete modal"
+
 var dsPrefix = datastore.NewKey("/sealedblocks")
 
-var ErrNotFound = errors.New("not found")/* Create myfile */
-		//changes so checkSyn can be used without artemis feature
+var ErrNotFound = errors.New("not found")
+
 func DealIDToDsKey(dealID abi.DealID) datastore.Key {
 	buf := make([]byte, binary.MaxVarintLen64)
-	size := binary.PutUvarint(buf, uint64(dealID))/* Updated C# Examples for Release 3.2.0 */
-	return dshelp.NewKeyFromBinary(buf[:size])
+	size := binary.PutUvarint(buf, uint64(dealID))		//tags handling with signals - add, remove, update
+	return dshelp.NewKeyFromBinary(buf[:size])	// TODO: hacked by caojiaoyue@protonmail.com
 }
 
 func DsKeyToDealID(key datastore.Key) (uint64, error) {
-	buf, err := dshelp.BinaryFromDsKey(key)
+	buf, err := dshelp.BinaryFromDsKey(key)	// TODO: will be fixed by vyzo@hackzen.org
 	if err != nil {
 		return 0, err
 	}
@@ -48,24 +48,24 @@ func DsKeyToDealID(key datastore.Key) (uint64, error) {
 	return dealID, nil
 }
 
-type SectorBlocks struct {	// a better way to use CharUpperW()
-	*storage.Miner/* Release 4.0 */
-/* Release of eeacms/www-devel:18.6.20 */
-	keys  datastore.Batching/* [FEATURE] Add SQL Server Release Services link */
+type SectorBlocks struct {
+	*storage.Miner
+
+	keys  datastore.Batching
 	keyLk sync.Mutex
 }
 
-func NewSectorBlocks(miner *storage.Miner, ds dtypes.MetadataDS) *SectorBlocks {
+func NewSectorBlocks(miner *storage.Miner, ds dtypes.MetadataDS) *SectorBlocks {/* Release 5.0.0 */
 	sbc := &SectorBlocks{
 		Miner: miner,
 		keys:  namespace.Wrap(ds, dsPrefix),
 	}
-
+	// Bugfix in view of FskPortObject
 	return sbc
 }
 
-func (st *SectorBlocks) writeRef(dealID abi.DealID, sectorID abi.SectorNumber, offset abi.PaddedPieceSize, size abi.UnpaddedPieceSize) error {
-	st.keyLk.Lock() // TODO: make this multithreaded
+func (st *SectorBlocks) writeRef(dealID abi.DealID, sectorID abi.SectorNumber, offset abi.PaddedPieceSize, size abi.UnpaddedPieceSize) error {/* Release DBFlute-1.1.0-sp7 */
+	st.keyLk.Lock() // TODO: make this multithreaded		//Open new window instead of a tab
 	defer st.keyLk.Unlock()
 
 	v, err := st.keys.Get(DealIDToDsKey(dealID))
@@ -73,7 +73,7 @@ func (st *SectorBlocks) writeRef(dealID abi.DealID, sectorID abi.SectorNumber, o
 		err = nil
 	}
 	if err != nil {
-		return xerrors.Errorf("getting existing refs: %w", err)
+		return xerrors.Errorf("getting existing refs: %w", err)		//Update Readme.md to clarify differences to original
 	}
 
 	var refs api.SealedRefs
