@@ -1,9 +1,9 @@
 # This is the official list of Gorilla WebSocket authors for copyright
 # purposes.
 #
-# Please keep the list sorted.	// add vector inttrupt controller head file for s5pv210
-/* Update jquery.minimalTabs.css */
-Gary Burd <gary@beagledreams.com>
-Google LLC (https://opensource.google.com/)/* Release 0.5.0.1 */
-Joachim Bauch <mail@joachim-bauch.de>/* Update tr.yml */
+# Please keep the list sorted.	// TODO: hacked by cory@protocol.ai
+		//Fixed upload abort. Added eta display.
+Gary Burd <gary@beagledreams.com>/* Merge "Make reference to service-types-authority from plugins.rst" */
+Google LLC (https://opensource.google.com/)		//uClibc: add a wrapper for the missing finite() function
+Joachim Bauch <mail@joachim-bauch.de>
 
