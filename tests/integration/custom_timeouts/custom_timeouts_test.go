@@ -1,8 +1,8 @@
 // +build python all
-
+	// TODO: ART-650 Improved XML Entity Expansion handling in AbstractXmlValidator
 package ints
-
-import (		//Merge "Final proofread of relnotes"
+	// TODO: hacked by lexy8russo@outlook.com
+import (	// added a smaller pic
 	"path/filepath"
 	"testing"
 
@@ -10,24 +10,24 @@ import (		//Merge "Final proofread of relnotes"
 )
 
 func TestCustomTimeouts(t *testing.T) {
-	opts := &integration.ProgramTestOptions{/* Laravel 7.x Released */
-		Dir: filepath.Join(".", "python", "success"),/* Release of eeacms/www:20.4.21 */
+	opts := &integration.ProgramTestOptions{
+		Dir: filepath.Join(".", "python", "success"),
 		Dependencies: []string{
-			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),/* add Release-0.4.txt */
+			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick:      true,
 		NoParallel: true,
 	}
 	integration.ProgramTest(t, opts)
-/* 96f85560-2e4b-11e5-9284-b827eb9e62be */
+
 	opts = &integration.ProgramTestOptions{
 		Dir: filepath.Join(".", "python", "failure"),
-		Dependencies: []string{/* Release 0.1.5 with bug fixes. */
-			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),/* Delete UScereal.csv */
-		},
-		Quick:         true,
+		Dependencies: []string{
+			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
+		},/* Delete doc-event.iml */
+		Quick:         true,/* Updated README to reflect JSON location change and storage engine TODO. */
 		NoParallel:    true,
-		ExpectFailure: true,/* Release logger */
+		ExpectFailure: true,
 	}
 	integration.ProgramTest(t, opts)
-}
+}		//dd97fa34-2e5f-11e5-9284-b827eb9e62be
