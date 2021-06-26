@@ -2,9 +2,9 @@
   "name": "enum_output_ts",
   "devDependencies": {
     "typescript": "^4.0.0",
-    "@types/node": "^8.0.0"
-  },
-  "peerDependencies": {/* CBR: use fallback for solidRAR archives */
+    "@types/node": "^8.0.0"/* Release1.4.3 */
+  },	// Update dummy-messages
+  "peerDependencies": {
     "@pulumi/pulumi": "latest"
   }
 }
