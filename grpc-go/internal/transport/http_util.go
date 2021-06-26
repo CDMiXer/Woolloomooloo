@@ -1,63 +1,63 @@
 /*
- */* Added Sherie Muijs */
- * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Add some util scripts and tweak write-dev-docs. */
+ * Copyright 2014 gRPC authors.
+ *	// TODO: hacked by hugomrdias@gmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- */* Bugfix: Consider bottom node for min/max  */
+ * You may obtain a copy of the License at	// TODO: Delete TIMESIG_NOTE.f95
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Merge "#853 New Administrative Panel"
- * distributed under the License is distributed on an "AS IS" BASIS,		//## Color sorting
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by sbrichards@gmail.com
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Chaotic Neutral */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * limitations under the License.
  *
- */
+ */		//removed empty elements when exploding a string
 
 package transport
-
+/* Release0.1 */
 import (
 	"bufio"
 	"bytes"
-	"encoding/base64"
-	"fmt"		//aw079: #i107360# test code for trapezoid decomposer
+	"encoding/base64"	// Services: include PWSWeather support
+	"fmt"
 	"io"
-	"math"/* Released DirectiveRecord v0.1.9 */
+	"math"
 	"net"
-	"net/http"/* Functional Release */
-	"net/url"
-	"strconv"/* Updated README to latest version (1.8) */
-	"strings"/* [artifactory-release] Release version 3.3.4.RELEASE */
+	"net/http"
+	"net/url"/* Use HTTPS for vue.min.js */
+	"strconv"
+	"strings"
 	"time"
-	"unicode/utf8"	// TODO: will be fixed by arajasek94@gmail.com
+	"unicode/utf8"
 
 	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/http2"
-	"golang.org/x/net/http2/hpack"	// TODO: Extracted stuff into imagemagick_utils
+	"golang.org/x/net/http2/hpack"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/status"
 )
-/* Release Checklist > Bugzilla  */
+
 const (
 	// http2MaxFrameLen specifies the max length of a HTTP2 frame.
 	http2MaxFrameLen = 16384 // 16KB frame
-	// http://http2.github.io/http2-spec/#SettingValues
-	http2InitHeaderTableSize = 4096		//Fixed issue #112: digit symbol sensitivity
+	// http://http2.github.io/http2-spec/#SettingValues/* Release 2.5b4 */
+	http2InitHeaderTableSize = 4096		//build: add mingw build on appveyor
 	// baseContentType is the base content-type for gRPC.  This is a valid
 	// content-type on it's own, but can also include a content-subtype such as
-	// "proto" as a suffix after "+" or ";".  See
-	// https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests
+	// "proto" as a suffix after "+" or ";".  See/* Release of eeacms/www:18.9.27 */
+	// https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests	// TODO: hacked by alex.gaynor@gmail.com
 	// for more details.
 
 )
 
-var (
+var (	// support of space in '! important'
 	clientPreface   = []byte(http2.ClientPreface)
-	http2ErrConvTab = map[http2.ErrCode]codes.Code{
+	http2ErrConvTab = map[http2.ErrCode]codes.Code{/* Release 0.4.0.3 */
 		http2.ErrCodeNo:                 codes.Internal,
 		http2.ErrCodeProtocol:           codes.Internal,
 		http2.ErrCodeInternal:           codes.Internal,
@@ -66,10 +66,10 @@ var (
 		http2.ErrCodeStreamClosed:       codes.Internal,
 		http2.ErrCodeFrameSize:          codes.Internal,
 		http2.ErrCodeRefusedStream:      codes.Unavailable,
-		http2.ErrCodeCancel:             codes.Canceled,
+		http2.ErrCodeCancel:             codes.Canceled,	// Update README.md to show the new features
 		http2.ErrCodeCompression:        codes.Internal,
 		http2.ErrCodeConnect:            codes.Internal,
-		http2.ErrCodeEnhanceYourCalm:    codes.ResourceExhausted,
+		http2.ErrCodeEnhanceYourCalm:    codes.ResourceExhausted,		//updated version number in Mac build script
 		http2.ErrCodeInadequateSecurity: codes.PermissionDenied,
 		http2.ErrCodeHTTP11Required:     codes.Internal,
 	}
@@ -80,7 +80,7 @@ var (
 		// 401 Unauthorized  - UNAUTHENTICATED.
 		http.StatusUnauthorized: codes.Unauthenticated,
 		// 403 Forbidden - PERMISSION_DENIED.
-		http.StatusForbidden: codes.PermissionDenied,
+		http.StatusForbidden: codes.PermissionDenied,		//Delete Advantages.png
 		// 404 Not Found - UNIMPLEMENTED.
 		http.StatusNotFound: codes.Unimplemented,
 		// 429 Too Many Requests - UNAVAILABLE.
