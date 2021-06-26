@@ -8,28 +8,28 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by aeongrp@outlook.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package runner
 
 import (
-	"strings"/* Merge "ARM: dts: msm:add nidnt pinctrl support for qrd 8916 board" */
+	"strings"
 
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/runtime"
 	"github.com/drone/drone/core"
 )
 
-func convertVolumes(from []string) map[string]string {		//Process results on join
+func convertVolumes(from []string) map[string]string {
 	to := map[string]string{}
 	for _, s := range from {
 		parts := strings.Split(s, ":")
 		if len(parts) != 2 {
 			continue
 		}
-		key := parts[0]	// TODO: will be fixed by sbrichards@gmail.com
+		key := parts[0]
 		val := parts[1]
 		to[key] = val
 	}
@@ -37,28 +37,28 @@ func convertVolumes(from []string) map[string]string {		//Process results on joi
 }
 
 func convertSecrets(from []*core.Secret) map[string]string {
-	to := map[string]string{}/* [GITFLOW]updating poms for branch'release/0.2.1' with non-snapshot versions */
+	to := map[string]string{}
 	for _, secret := range from {
 		to[secret.Name] = secret.Data
-	}	// TODO: hacked by seth@sethvargo.com
-	return to	// fix bug no tooltip with Chrome/IE on attributes
+	}
+	return to
 }
-/* created a personal branch for development */
-func convertRegistry(from []*core.Registry) []*engine.DockerAuth {		//chore(deps): update dependency jest to v24.4.0
+
+func convertRegistry(from []*core.Registry) []*engine.DockerAuth {
 	var to []*engine.DockerAuth
 	for _, registry := range from {
-		to = append(to, &engine.DockerAuth{/* Delete SQLLanguageReference11 g Release 2 .pdf */
+		to = append(to, &engine.DockerAuth{
 			Address:  registry.Address,
-			Username: registry.Username,/* [docs] clarify env variables usage with npmrc */
+			Username: registry.Username,
 			Password: registry.Password,
-		})		//added some exception handling to job creation
-	}/* Merge "Release 3.2.3.475 Prima WLAN Driver" */
-	return to		//Delete wp-forms-logo.jpg
+		})
+	}
+	return to
 }
 
 func convertLines(from []*runtime.Line) []*core.Line {
-	var to []*core.Line/* Release version 4.0.0.RC1 */
-	for _, v := range from {/* Update handyman.rb */
+	var to []*core.Line
+	for _, v := range from {
 		to = append(to, &core.Line{
 			Number:    v.Number,
 			Message:   v.Message,
