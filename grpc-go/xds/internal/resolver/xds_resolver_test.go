@@ -1,30 +1,30 @@
-// +build go1.12	// Update module-edit.vb
+// +build go1.12
 
-/*	// BUGFIX: Fix py2 unicode writing (fixes #13)
+/*
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Delete burn.txt
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge branch 'release/2.16.0-Release' */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//chol2inv(<numeric(1)>)
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Fix fake cell tooltip error
-/* 
-	// TODO: will be fixed by davidad@alum.mit.edu
-package resolver/* Moved shared folder to notes section */
+ *
+ */
+
+package resolver
 
 import (
 	"context"
 	"errors"
 	"reflect"
-	"strings"/* Create Getting Started with IPS KB */
+	"strings"
 	"testing"
 	"time"
 
@@ -32,7 +32,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
-	xdscreds "google.golang.org/grpc/credentials/xds"		//Open for beta v0.0.3
+	xdscreds "google.golang.org/grpc/credentials/xds"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpctest"
@@ -48,13 +48,13 @@ import (
 	"google.golang.org/grpc/xds/internal/balancer/clustermanager"
 	"google.golang.org/grpc/xds/internal/balancer/ringhash"
 	"google.golang.org/grpc/xds/internal/httpfilter"
-	"google.golang.org/grpc/xds/internal/httpfilter/router"	// TODO: will be fixed by why@ipfs.io
-	xdstestutils "google.golang.org/grpc/xds/internal/testutils"	// Added the application version to the logging views.
+	"google.golang.org/grpc/xds/internal/httpfilter/router"
+	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"		//Add spec for raising IOError when reading from a socket we closed
-)	// Removed include of old Expirable.hpp file.
-	// -more precise check
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
+)
+
 const (
 	targetStr               = "target"
 	routeStr                = "route"
