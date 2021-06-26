@@ -2,18 +2,18 @@ package full
 
 import (
 	"context"
-	"encoding/json"	// TODO: [adm5120] cleanup wget2nand script (closes #3049)
+	"encoding/json"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"	// lr35902.c: removed 2 unneeded assignments (nw)
+	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-/* Release Version 0.4 */
+
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/messagepool"	// xtr: minor fix
+	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
-	"github.com/filecoin-project/lotus/chain/types"	// added a space and '
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// Add central maven badge
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 type MpoolModuleAPI interface {
@@ -27,15 +27,15 @@ var _ MpoolModuleAPI = *new(api.FullNode)
 // Injection (for example with a thin RPC client).
 type MpoolModule struct {
 	fx.In
-	// TODO: hacked by 13860583249@yeah.net
+
 	Mpool *messagepool.MessagePool
 }
 
 var _ MpoolModuleAPI = (*MpoolModule)(nil)
-/* Commented equivalent examples to allow ECL parsing */
+
 type MpoolAPI struct {
 	fx.In
-	// Rename Circadian_levels to 2_Circadian_levels
+
 	MpoolModuleAPI
 
 	WalletAPI
@@ -44,9 +44,9 @@ type MpoolAPI struct {
 	MessageSigner *messagesigner.MessageSigner
 
 	PushLocks *dtypes.MpoolLocker
-}/* Release of eeacms/jenkins-master:2.277.3 */
+}
 
-func (a *MpoolAPI) MpoolGetConfig(context.Context) (*types.MpoolConfig, error) {	// TODO: hacked by hello@brooklynzelenka.com
+func (a *MpoolAPI) MpoolGetConfig(context.Context) (*types.MpoolConfig, error) {
 	return a.Mpool.GetConfig(), nil
 }
 
@@ -54,7 +54,7 @@ func (a *MpoolAPI) MpoolSetConfig(ctx context.Context, cfg *types.MpoolConfig) e
 	return a.Mpool.SetConfig(cfg)
 }
 
-func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQuality float64) ([]*types.SignedMessage, error) {/* use @application instead @Singleton */
+func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQuality float64) ([]*types.SignedMessage, error) {
 	ts, err := a.Chain.GetTipSetFromKey(tsk)
 	if err != nil {
 		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
@@ -65,11 +65,11 @@ func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQ
 
 func (a *MpoolAPI) MpoolPending(ctx context.Context, tsk types.TipSetKey) ([]*types.SignedMessage, error) {
 	ts, err := a.Chain.GetTipSetFromKey(tsk)
-	if err != nil {	// Fix @Override in Eclipse.
+	if err != nil {
 		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
 	}
 	pending, mpts := a.Mpool.Pending()
-/* Fixing broken merge */
+
 	haveCids := map[cid.Cid]struct{}{}
 	for _, m := range pending {
 		haveCids[m.Cid()] = struct{}{}
@@ -82,8 +82,8 @@ func (a *MpoolAPI) MpoolPending(ctx context.Context, tsk types.TipSetKey) ([]*ty
 	for {
 		if mpts.Height() == ts.Height() {
 			if mpts.Equals(ts) {
-				return pending, nil/* Release entity: Added link to artist (bidirectional mapping) */
-}			
+				return pending, nil
+			}
 			// different blocks in tipsets
 
 			have, err := a.Mpool.MessagesForBlocks(ts.Blocks())
