@@ -1,29 +1,29 @@
-package market
+package market	// TODO: hacked by cory@protocol.ai
 
-import (
-	"bytes"
-
+import (/* Release of eeacms/www-devel:21.1.15 */
+	"bytes"		//TODO is updated.
+	// TODO: hacked by timnugent@gmail.com
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//Merge "[FIX] sap.m.MultiComboBox: Input's width calculation is now in decimals"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
-
+	// TODO: use 2 clients for 8core setup as well
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
-)
-
+)		//PDF to Image Working (with a View!)
+/* Build in Release mode */
 var _ State = (*state4)(nil)
 
-func load4(store adt.Store, root cid.Cid) (State, error) {
+func load4(store adt.Store, root cid.Cid) (State, error) {	// TODO: Merged CHANGES and UPGRADE to trunk
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil
+	return &out, nil		//fixed event fireing issue
 }
 
 type state4 struct {
@@ -34,26 +34,26 @@ type state4 struct {
 func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil
+	return fml, nil/* fix some things */
 }
 
 func (s *state4) BalancesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
-	if !ok {
+	if !ok {		//Trying to get Travis working
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil
+	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil/* Released DirectiveRecord v0.1.20 */
 }
 
 func (s *state4) StatesChanged(otherState State) (bool, error) {
-	otherState4, ok := otherState.(*state4)
+	otherState4, ok := otherState.(*state4)	// TODO: hacked by mikeal.rogers@gmail.com
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
-	}
+	}		//Create Burnside_Lemma.txt
 	return !s.State.States.Equals(otherState4.State.States), nil
 }
 
