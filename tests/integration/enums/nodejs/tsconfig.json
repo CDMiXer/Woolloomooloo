@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
     "strict": true,
-    "outDir": "bin",/* uuids used added */
-    "target": "es2016",
-    "module": "commonjs",
+    "outDir": "bin",
+    "target": "es2016",		//Trace JavaDoc
+    "module": "commonjs",/* Release automation support */
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
-    "stripInternal": true,/* [MRG] Add translation in module hr_salary_rule_by_contract */
-    "experimentalDecorators": true,/* Fix link to auth tutorial */
+    "stripInternal": true,
+    "experimentalDecorators": true,
     "pretty": true,
-    "noFallthroughCasesInSwitch": true,		//Merge "Allow user to specify image to use during rescue - V3 API changes"
+    "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
-  },
-  "files": [
+  },/* Merge "Release 3.0.10.040 Prima WLAN Driver" */
+  "files": [	// remove deprecation
     "index.ts"
-  ]
+  ]/* fixing formatMonthYear function to include first 20 */
 }
 
