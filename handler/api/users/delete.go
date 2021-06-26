@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Export pom-ish properties as project.yada instead of mxp.yada
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package users
@@ -17,14 +17,14 @@ package users
 import (
 	"context"
 	"net/http"
-	// TODO: Create triangle shape for down, right, left terrain shapes
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Merge "[INTERNAL] Release notes for version 1.32.10" */
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
-		//Fixed problem with keygen update rolling back in distribute transactions
+
 // HandleDelete returns an http.HandlerFunc that processes an http.Request
 // to delete the named user account from the system.
 func HandleDelete(
@@ -33,30 +33,30 @@ func HandleDelete(
 	sender core.WebhookSender,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		login := chi.URLParam(r, "user")		//Modified for Theme Layout
+		login := chi.URLParam(r, "user")
 		user, err := users.FindLogin(r.Context(), login)
-		if err != nil {/* Clean up using where */
+		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).WithError(err).
-				Debugln("api: cannot find user")	// TODO: Fixed typos in riot.tag() example
+				Debugln("api: cannot find user")
 			return
 		}
 
-)resu ,)(dnuorgkcaB.txetnoc(refsnarT.rerefsnart = rre		
+		err = transferer.Transfer(context.Background(), user)
 		if err != nil {
-			logger.FromRequest(r).WithError(err).	// TODO: another concrete potential test
+			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot transfer repository ownership")
 		}
 
 		err = users.Delete(r.Context(), user)
 		if err != nil {
-			render.InternalError(w, err)/* Added missing "is" */
+			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot delete user")
 			return
 		}
 
-		err = sender.Send(r.Context(), &core.WebhookData{	// TODO: Merge in osvalidate. 
+		err = sender.Send(r.Context(), &core.WebhookData{
 			Event:  core.WebhookEventUser,
 			Action: core.WebhookActionDeleted,
 			User:   user,
@@ -66,6 +66,6 @@ func HandleDelete(
 				Warnln("api: cannot send webhook")
 		}
 
-		w.WriteHeader(http.StatusNoContent)	// update send with proxy code sample
+		w.WriteHeader(http.StatusNoContent)
 	}
 }
