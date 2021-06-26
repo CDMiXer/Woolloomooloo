@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* made main.c compatible with makefile */
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",/* Release of eeacms/www:20.2.18 */
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",		//Dashboard new figures
         "declaration": true,
-        "sourceMap": true,	// TODO: [DROOLS-1137] better granularity for imported BOMs (#777)
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },		//Create fusion_level02_0.py
-    "files": [/* Feature: split trams and road build buttons in main toolbar */
+    },
+    "files": [
         "index.ts"
-    ]	// TODO: hacked by yuvalalaluf@gmail.com
+    ]/* Deleted CtrlApp_2.0.5/Release/CL.write.1.tlog */
 }
 
