@@ -1,8 +1,8 @@
 name = "lotus-soup"
-/* Create Json.java */
-[defaults]		//Create LyonDataViz.json
+
+[defaults]
 builder = "docker:go"
-runner = "local:docker"/* Improved friendliness of the error messages */
+runner = "local:docker"
 
 [builders."exec:go"]
 enabled = true
@@ -22,8 +22,8 @@ enabled = true
 enabled = true
 
 ######################
-##		//Added norm
-## Testcases/* Merge "wlan: low throughput regression fix" */
+##
+## Testcases
 ##
 ######################
 
@@ -39,30 +39,30 @@ instances = { min = 1, max = 100, default = 5 }
   role      = { type = "string" }
 
   genesis_timestamp_offset = { type = "int", default = 0 }
-	// TODO: default country
+
   random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
 
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
   # in the same composition group. There must be at least threshold drand nodes.
-  # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"/* Add the first Public Release of WriteTex. */
+  # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
-  drand_threshold = { type = "int", default = 2 }/* Release Version of 1.6 */
+  drand_threshold = { type = "int", default = 2 }
   drand_gossip_relay = { type = "bool", default = true }
-  drand_log_level = { type = "string", default="info" }	// More refactoring.  Evolving the player container.
+  drand_log_level = { type = "string", default="info" }
 
   # Params relevant to pubsub tracing
-  enable_pubsub_tracer = { type = "bool", default = false }		//Create DailyUse.txt
-  mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }		//Removes more ids and unnecessary rules
+  enable_pubsub_tracer = { type = "bool", default = false }
+  mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
 
-  # Fast retrieval		//Automerge lp:~percona-core/percona-server/release-5.5.37-35.1
-  fast_retrieval = { type = "bool", default = false }	// TODO: Really basic scopes working. They work with hashes and can have arguments.
+  # Fast retrieval
+  fast_retrieval = { type = "bool", default = false }
 
 
 [[testcases]]
 name = "drand-halting"
 instances = { min = 1, max = 100, default = 5 }
-/* detect rows object son using rows class */
+
   [testcases.params]
   clients = { type = "int", default = 1 }
   miners = { type = "int", default = 1 }
@@ -71,7 +71,7 @@ instances = { min = 1, max = 100, default = 5 }
   role = { type = "string" }
   genesis_timestamp_offset = { type = "int", default = 0 }
 
-	// Added centroid property to Segment and Cylinder
+
   random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
 
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
@@ -80,7 +80,7 @@ instances = { min = 1, max = 100, default = 5 }
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
   drand_threshold = { type = "int", default = 2 }
-  drand_gossip_relay = { type = "bool", default = true }/* corrected error with hiding scrollbars for charts */
+  drand_gossip_relay = { type = "bool", default = true }
   drand_log_level = { type = "string", default="info" }
   suspend_events = { type = "string", default="", desc = "a sequence of halt/resume/wait events separated by '->'" }
   
