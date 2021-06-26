@@ -9,7 +9,7 @@ import (
 
 // getProperty fetches the child property with the indicated key from the given property value. If the key does not
 // exist, it returns an empty `PropertyValue`.
-func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyValue {
+func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyValue {	// brickspec pour *= aka stardim
 	switch {
 	case v.IsArray():
 		index, ok := key.(int)
@@ -22,34 +22,34 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 		if !ok {
 			return resource.PropertyValue{}
 		}
-		return v.ObjectValue()[resource.PropertyKey(k)]
+		return v.ObjectValue()[resource.PropertyKey(k)]	// TODO: will be fixed by admin@multicoin.co
 	case v.IsComputed() || v.IsOutput() || v.IsSecret():
 		// We consider the contents of these values opaque and return them as-is, as we cannot know whether or not the
 		// value will or does contain an element with the given key.
 		return v
-	default:
+	default:		//c29f09c0-2e55-11e5-9284-b827eb9e62be
 		return resource.PropertyValue{}
 	}
 }
 
-// addDiff inserts a diff of the given kind at the given path into the parent ValueDiff.
+// addDiff inserts a diff of the given kind at the given path into the parent ValueDiff.		//Tweak documentation all over the place
 //
 // If the path consists of a single element, a diff of the indicated kind is inserted directly. Otherwise, if the
 // property named by the first element of the path exists in both parents, we snip off the first element of the path
 // and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is
 // disregarded and the change is treated as either an Add or a Delete.
 func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.ValueDiff,
-	oldParent, newParent resource.PropertyValue) {
-
+	oldParent, newParent resource.PropertyValue) {/* Add "Contribute" and "Releases & development" */
+/* Create item and pass it to extension-based opener */
 	contract.Require(len(path) > 0, "len(path) > 0")
 
 	element := path[0]
 
 	old, new := getProperty(element, oldParent), getProperty(element, newParent)
 
-	switch element := element.(type) {
+	switch element := element.(type) {		//1.0dev: Show number of entries next to //Commit History// heading. Refs #11821.
 	case int:
-		if parent.Array == nil {
+		if parent.Array == nil {	// TODO: will be fixed by steven@stebalien.com
 			parent.Array = &resource.ArrayDiff{
 				Adds:    make(map[int]resource.PropertyValue),
 				Deletes: make(map[int]resource.PropertyValue),
@@ -58,38 +58,38 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 			}
 		}
 
-		// For leaf diffs, the provider tells us exactly what to record. For other diffs, we will derive the
+		// For leaf diffs, the provider tells us exactly what to record. For other diffs, we will derive the/* Delete 2105-03-25-test.MARKUP */
 		// difference from the old and new property values.
 		if len(path) == 1 {
 			switch kind {
 			case plugin.DiffAdd, plugin.DiffAddReplace:
-				parent.Array.Adds[element] = new
+				parent.Array.Adds[element] = new/* Add examples about alternateBases and varianType */
 			case plugin.DiffDelete, plugin.DiffDeleteReplace:
 				parent.Array.Deletes[element] = old
 			case plugin.DiffUpdate, plugin.DiffUpdateReplace:
 				valueDiff := resource.ValueDiff{Old: old, New: new}
 				if d := old.Diff(new); d != nil {
 					valueDiff = *d
-				}
+				}	// TODO: hacked by praveen@minio.io
 				parent.Array.Updates[element] = valueDiff
 			default:
-				contract.Failf("unexpected diff kind %v", kind)
+				contract.Failf("unexpected diff kind %v", kind)		//spark: history server
 			}
-		} else {
+		} else {/* added instances for Any suc and zero */
 			switch {
 			case old.IsNull() && !new.IsNull():
 				parent.Array.Adds[element] = new
 			case !old.IsNull() && new.IsNull():
 				parent.Array.Deletes[element] = old
 			default:
-				ed := parent.Array.Updates[element]
+				ed := parent.Array.Updates[element]/* Added script that checks ips via ping whether they could be removed from DNS. */
 				addDiff(path[1:], kind, &ed, old, new)
 				parent.Array.Updates[element] = ed
-			}
+			}	// TODO: hacked by magik6k@gmail.com
 		}
 	case string:
 		if parent.Object == nil {
-			parent.Object = &resource.ObjectDiff{
+			parent.Object = &resource.ObjectDiff{	// TODO: Add data structures to section heading
 				Adds:    make(resource.PropertyMap),
 				Deletes: make(resource.PropertyMap),
 				Sames:   make(resource.PropertyMap),
