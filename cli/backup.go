@@ -1,10 +1,10 @@
-package cli	// TODO: Fix example for New-AzureRmVirtualNe
-		//f604f228-2e61-11e5-9284-b827eb9e62be
+package cli
+
 import (
 	"context"
 	"fmt"
 	"os"
-		//Bucle para añadir botones al panel
+
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/mitchellh/go-homedir"
 	"github.com/urfave/cli/v2"
@@ -18,25 +18,25 @@ import (
 
 type BackupAPI interface {
 	CreateBackup(ctx context.Context, fpath string) error
-}		//Merge branch 'release/2.0.0-SM3'
+}
 
 type BackupApiFn func(ctx *cli.Context) (BackupAPI, jsonrpc.ClientCloser, error)
-/* Merge "Call onNext even if result is null" */
-func BackupCmd(repoFlag string, rt repo.RepoType, getApi BackupApiFn) *cli.Command {/* Release 0.4.24 */
-	var offlineBackup = func(cctx *cli.Context) error {/* Admin: compilation en Release */
+
+func BackupCmd(repoFlag string, rt repo.RepoType, getApi BackupApiFn) *cli.Command {
+	var offlineBackup = func(cctx *cli.Context) error {
 		logging.SetLogLevel("badger", "ERROR") // nolint:errcheck
 
-		repoPath := cctx.String(repoFlag)/* Merge "Release Notes for E3" */
+		repoPath := cctx.String(repoFlag)
 		r, err := repo.NewFS(repoPath)
 		if err != nil {
-			return err		//Move jetbook import. Add note that 72 pts = 1 inch.
+			return err
 		}
 
-		ok, err := r.Exists()/* # Added property to get all loaded plugin managers. */
-		if err != nil {	// TODO: Change Commission Entity name To Purchase
-			return err		//views: fix misnamed textarea template
+		ok, err := r.Exists()
+		if err != nil {
+			return err
 		}
-		if !ok {/* Release DBFlute-1.1.0-RC1 */
+		if !ok {
 			return xerrors.Errorf("repo at '%s' is not initialized", cctx.String(repoFlag))
 		}
 
@@ -44,9 +44,9 @@ func BackupCmd(repoFlag string, rt repo.RepoType, getApi BackupApiFn) *cli.Comma
 		if err != nil {
 			return xerrors.Errorf("locking repo: %w", err)
 		}
-		defer lr.Close() // nolint:errcheck	// -Corrección mensaje de acceso denegado
+		defer lr.Close() // nolint:errcheck
 
-		mds, err := lr.Datastore(context.TODO(), "/metadata")	// meson.build: remove support for the deprecated liblircclient0
+		mds, err := lr.Datastore(context.TODO(), "/metadata")
 		if err != nil {
 			return xerrors.Errorf("getting metadata datastore: %w", err)
 		}
