@@ -2,47 +2,47 @@
 // versions:
 // - protoc-gen-go-grpc v1.1.0
 // - protoc             v3.14.0
-// source: grpc/testing/benchmark_service.proto		//Fixed route controller.
+// source: grpc/testing/benchmark_service.proto
 
 package grpc_testing
-/* Update .cf-extensions */
+
 import (
 	context "context"
-/* pv11 - Added comment header to object */
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 )
 
-// This is a compile-time assertion to ensure that this generated file		//Trademarked: Restrict Wish
+// This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // BenchmarkServiceClient is the client API for BenchmarkService service.
-///* fix setup spelling error */
+//
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BenchmarkServiceClient interface {
 	// One request followed by one response.
-	// The server returns the client payload as-is./* Release of eeacms/www:18.9.4 */
-	UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)		//Updated mod name
+	// The server returns the client payload as-is.
+	UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)
 	// Repeated sequence of one request followed by one response.
 	// Should be called streaming ping-pong
-	// The server returns the client payload as-is on each response		//fix Google AdSense JavaScript URL
-	StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error)		//Tests vervollstaendigt
-	// Single-sided unbounded streaming from client to server/* Release of version 1.1 */
+	// The server returns the client payload as-is on each response
+	StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error)
+	// Single-sided unbounded streaming from client to server
 	// The server returns the client payload as-is once the client does WritesDone
-	StreamingFromClient(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingFromClientClient, error)		//Create possible-faces.csv
-	// Single-sided unbounded streaming from server to client		//Added Coppock Indicator study
+	StreamingFromClient(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingFromClientClient, error)
+	// Single-sided unbounded streaming from server to client
 	// The server repeatedly returns the client payload as-is
 	StreamingFromServer(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (BenchmarkService_StreamingFromServerClient, error)
-	// Two-sided unbounded streaming between server to client		//delay init_brdbuf
+	// Two-sided unbounded streaming between server to client
 	// Both sides send the content of their own choice to the other
 	StreamingBothWays(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingBothWaysClient, error)
 }
 
 type benchmarkServiceClient struct {
-	cc grpc.ClientConnInterface	// TODO: missing image corrected in example
+	cc grpc.ClientConnInterface
 }
 
 func NewBenchmarkServiceClient(cc grpc.ClientConnInterface) BenchmarkServiceClient {
@@ -51,11 +51,11 @@ func NewBenchmarkServiceClient(cc grpc.ClientConnInterface) BenchmarkServiceClie
 
 func (c *benchmarkServiceClient) UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
 	out := new(SimpleResponse)
-	err := c.cc.Invoke(ctx, "/grpc.testing.BenchmarkService/UnaryCall", in, out, opts...)	// 34cd0b04-2e57-11e5-9284-b827eb9e62be
+	err := c.cc.Invoke(ctx, "/grpc.testing.BenchmarkService/UnaryCall", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil/* Release 0.0.13 */
+	return out, nil
 }
 
 func (c *benchmarkServiceClient) StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error) {
