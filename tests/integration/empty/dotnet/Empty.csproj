@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>/* 1.1 Release notes */
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-/* Deleted Release 1.2 for Reupload */
+	// TODO: hacked by sebastian.tharakan97@gmail.com
 </Project>
