@@ -2,31 +2,31 @@ html, body {
     margin: 0px;
     padding: 0px;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
+}	// TODO: will be fixed by vyzo@hackzen.org
 
-section {		//updating spec to reflect the config.editorUrlRegEx change.
+section {
     padding: 60px;
-}/* l_on_cseq: renew on recovery sets owner to self */
+}
 
 footer {
     padding: 60px 30px;
 }
-	// Try travis with node 6
 
+		//Normalizes spacing in router.js and inbox.html
 
 .center {
-    max-width:900px;
+    max-width:900px;	// TODO: hacked by fjl@ethereum.org
     margin:0px auto;
-}
+}	// TODO: will be fixed by timnugent@gmail.com
 
 /*
  * Code
  */
 
-code {
+code {	// TODO: will be fixed by alex.gaynor@gmail.com
     text-align:left;
     background: #222;
-    color: #FFF;	// TODO: separate some repeating code into static function
+    color: #FFF;
     margin: 0px auto;
     font-family: 'Source Code Pro';
     font-size: 13px;
@@ -36,48 +36,48 @@ code {
 }
 
 code div {
-    white-space: pre;/* [lifenews] Minor improvements */
-    padding: 0px 30px;		//Rename 1019.52707.261_fnu.csv to 1019.52707.261_JPAS_fnu.csv
+    white-space: pre;
+    padding: 0px 30px;
 }
 
-code span.group {
+code span.group {/* Released springrestcleint version 2.4.13 */
     background: #333;
-    display: block;
+    display: block;	// TODO: hacked by mail@bitpshr.net
     padding: 5px 0px;
 }
-/* Create lib_check.sh */
+/* CAF-3183 Updates to Release Notes in preparation of release */
 code span.c0 {
     color: #00E5FF;
 }
 
-code span.c1 {	// TODO: hacked by martin2cai@hotmail.com
+code span.c1 {	// Delete EditCounterActivity.java
     color: #FF8A80;
 }
 
-.code .center {
+.code .center {/* Release version 1.4.0.M1 */
     text-align: center;
 }
 
-.code p {/* Merge "InternalAccountQuery: Remove unused methods" */
-    max-width:500px;
+.code p {
+    max-width:500px;	// TODO: added to test resources
     text-align:center;
     margin:30px auto;
 }
 
-.code .grid {/* Add Frietzing sketch */
-    display: grid;		//remove in development badge
+.code .grid {		//fix: removed more docstring for maven-javadoc-plugin
+    display: grid;
     grid-template-columns: 225px 450px 225px;
-    grid-template-rows: auto auto auto;	// TODO: moved bencode tests
+    grid-template-rows: auto auto auto;
 }
-
+		//labelcolor.rb: added description
 .code .grid code {
-    grid-column: 2;
+    grid-column: 2;/* Add forgotten KeAcquire/ReleaseQueuedSpinLock exported funcs to hal.def */
     grid-row-start: 1;
     grid-row-end: 4;
-    margin: 0px;
+    margin: 0px;		//rocview: test with auto double buffering
 }
 
-.info {
+.info {/* better example in README */
     background: #EEE;
     margin-right: 20px;
     border-radius: 5px;
@@ -88,9 +88,9 @@ code span.c1 {	// TODO: hacked by martin2cai@hotmail.com
 
 .info:first-of-type {
     grid-column: 1;
-    grid-row: 1;		//Merge branch '4.0-dev' into j4/es6
+    grid-row: 1;
     margin-top: 15px;
-}/* Release version: 0.7.14 */
+}
 
 .info:nth-of-type(2) {
     grid-column: 3;
