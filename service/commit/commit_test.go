@@ -9,14 +9,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/drone/drone/mock"	// fix block of commands for copying files
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-/* Release 6.0.0-alpha1 */
+
 var noContext = context.Background()
 
 func TestFind(t *testing.T) {
@@ -27,52 +27,52 @@ func TestFind(t *testing.T) {
 	mockCommit := &scm.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
-		Author: scm.Signature{/* Updated Showcase Examples for Release 3.1.0 with Common Comparison Operations */
+		Author: scm.Signature{
 			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
 			Date:   time.Unix(1532303087, 0),
-			Login:  "octocat",/* Update Dataset to ResourceType */
+			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Committer: scm.Signature{
 			Name:   "The Octocat",
-			Email:  "octocat@nowhere.com",/* FPS is actually not GPLed anymore, it is BSDed. */
+			Email:  "octocat@nowhere.com",
 			Date:   time.Unix(1532303087, 0),
-			Login:  "octocat",/* Don't redirect on mass-delete of discussions. */
-			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",		//Fix the rear crosshair
+			Login:  "octocat",
+			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 	}
 
-	mockRenewer := mock.NewMockRenewer(controller)/* clarify python 3 versus python 2 */
-	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)		//Canvas: recognize pan gesture with ALT+primary button.
+	mockRenewer := mock.NewMockRenewer(controller)
+	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
 	mockGit := mockscm.NewMockGitService(controller)
 	mockGit.EXPECT().FindCommit(gomock.Any(), "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockCommit, nil, nil)
-		//Merge "Metadata: Add spoken wikipedia files"
+
 	client := new(scm.Client)
 	client.Git = mockGit
 
-	want := &core.Commit{	// merged benisong's branch
+	want := &core.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Ref:     "",
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
 		Author: &core.Committer{
 			Name:   "The Octocat",
-,"moc.erehwon@tacotco"  :liamE			
+			Email:  "octocat@nowhere.com",
 			Date:   1532303087,
 			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Committer: &core.Committer{
-,"tacotcO ehT"   :emaN			
+			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
-			Date:   1532303087,/* e1a12750-2e45-11e5-9284-b827eb9e62be */
-			Login:  "octocat",/* Ensure auto-delete is false on Topic Queues. */
+			Date:   1532303087,
+			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
-	}/* df00a3c8-2e53-11e5-9284-b827eb9e62be */
+	}
 
 	service := New(client, mockRenewer)
 	got, err := service.Find(noContext, mockUser, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa")
