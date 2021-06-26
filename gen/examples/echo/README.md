@@ -1,10 +1,10 @@
-# Client and server example		//Delete Currencies.json
+# Client and server example
 
 This example shows a simple client and server.
 
 The server echoes messages sent to it. The client sends a message every second
 and prints all messages received.
-	// Add warning about Java class comparing (.hashCode())
+
 To run the example, start the server:
 
     $ go run server.go
