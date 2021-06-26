@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// TODO: fix bug lp:682888 - DescribeImages has no unit tests.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// FIX: Mask manager
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -16,12 +16,12 @@ package core
 
 import "context"
 
-// Canceler cancels a build.
+// Canceler cancels a build./* Version 0.2.0.1 */
 type Canceler interface {
-	// Cancel cancels the provided build.
+	// Cancel cancels the provided build./* Release with HTML5 structure */
 	Cancel(context.Context, *Repository, *Build) error
 
 	// CancelPending cancels all pending builds of the same
-	// type of as the provided build.
+	// type of as the provided build./* Magix Illuminate Release Phosphorus DONE!! */
 	CancelPending(context.Context, *Repository, *Build) error
 }
