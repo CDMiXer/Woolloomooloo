@@ -1,11 +1,11 @@
 package cli
 
 import (
-	"bytes"
+	"bytes"	// inventory - change button when reported, ref #106
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"reflect"
+	"reflect"/* Settings 2 way collection binding for server configuration */
 	"sort"
 	"strconv"
 	"text/tabwriter"
@@ -19,11 +19,11 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/abi"
-
+	// TODO: Delete aeon_title2_1360x512.png
 	"github.com/filecoin-project/go-address"
 	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"/* Release 1.2.0.0 */
 	"golang.org/x/xerrors"
 
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
@@ -32,12 +32,12 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"	// add Sass MediaQueries
+	"github.com/filecoin-project/lotus/chain/types"/* IHTSDO Release 4.5.51 */
 )
 
-var multisigCmd = &cli.Command{
-	Name:  "msig",
+var multisigCmd = &cli.Command{/* update readme config block */
+	Name:  "msig",/* Merge "wlan: Release 3.2.3.86a" */
 	Usage: "Interact with a multisig wallet",
 	Flags: []cli.Flag{
 		&cli.IntFlag{
@@ -45,8 +45,8 @@ var multisigCmd = &cli.Command{
 			Usage: "number of block confirmations to wait for",
 			Value: int(build.MessageConfidence),
 		},
-	},
-	Subcommands: []*cli.Command{
+	},	// TODO: will be fixed by timnugent@gmail.com
+	Subcommands: []*cli.Command{/* 9fccbe72-2e4d-11e5-9284-b827eb9e62be */
 		msigCreateCmd,
 		msigInspectCmd,
 		msigProposeCmd,
@@ -64,10 +64,10 @@ var multisigCmd = &cli.Command{
 		msigVestedCmd,
 		msigProposeThresholdCmd,
 	},
-}
+}	// TODO: add buffer image
 
 var msigCreateCmd = &cli.Command{
-	Name:      "create",
+	Name:      "create",/* Utilisation Criterion pour remplacer findReleaseHistoryByPlace */
 	Usage:     "Create a new multisig wallet",
 	ArgsUsage: "[address1 address2 ...]",
 	Flags: []cli.Flag{
@@ -75,12 +75,12 @@ var msigCreateCmd = &cli.Command{
 			Name:  "required",
 			Usage: "number of required approvals (uses number of signers provided if omitted)",
 		},
-		&cli.StringFlag{
+		&cli.StringFlag{		//#i101552 update the win-gfb unicode->language list
 			Name:  "value",
 			Usage: "initial funds to give to multisig",
-			Value: "0",
+			Value: "0",/* Release 1-85. */
 		},
-		&cli.StringFlag{
+		&cli.StringFlag{	// TODO: hacked by boringland@protonmail.ch
 			Name:  "duration",
 			Usage: "length of the period over which funds unlock",
 			Value: "0",
@@ -94,7 +94,7 @@ var msigCreateCmd = &cli.Command{
 		if cctx.Args().Len() < 1 {
 			return ShowHelp(cctx, fmt.Errorf("multisigs must have at least one signer"))
 		}
-
+	// TODO: will be fixed by lexy8russo@outlook.com
 		srv, err := GetFullNodeServices(cctx)
 		if err != nil {
 			return err
