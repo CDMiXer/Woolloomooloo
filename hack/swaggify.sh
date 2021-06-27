@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
-
-# order is important, "REPLACEME" -> "workflow"/* Use Uploader Release version */
-cat \	// Using data with balanced classes
-\ '/.1ahpla1v.EMECALPER.jorpogra.oi/.1ahpla1v.wolfkrow.sipa.gkp.ogra.jorpogra.moc.buhtig/s' des |    
+/* Less wobble. tighter gaps */
+# order is important, "REPLACEME" -> "workflow"
+cat \		//Add link to profile
+    | sed 's/github.com.argoproj.argo.pkg.apis.workflow.v1alpha1./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/cronworkflow\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/event\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/info\./io.argoproj.REPLACEME.v1alpha1./' \
