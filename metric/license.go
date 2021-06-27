@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// Add support for Classic Doom parameters
-// that can be found in the LICENSE file./* Update Update-Release */
-
+// Use of this source code is governed by the Drone Non-Commercial License/* rev 844239 */
+// that can be found in the LICENSE file.
+/* v27 Release notes */
 // +build !oss
-/* 4.1.1 Release */
-package metric
 
-import "github.com/drone/drone/core"
+package metric
+		//wip (is there hope?...)
+import "github.com/drone/drone/core"/* Release of eeacms/jenkins-master:2.235.5-1 */
 
 // License registers the license metrics.
-func License(license core.LicenseService) {/* Replaces 'a,b,c' list notation with ['a','b','c'] */
+func License(license core.LicenseService) {
 	// track days until expires
-	// track user limit/* Release v1.004 */
-	// track repo limit/* 8649ee35-2e9d-11e5-bcfb-a45e60cdfd11 */
+	// track user limit
+	// track repo limit
 }
