@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_avatar        TEXT
 ,user_syncing       BOOLEAN
 ,user_synced        INTEGER
-,user_created       INTEGER/* Patch Release Panel; */
+,user_created       INTEGER
 ,user_updated       INTEGER
 ,user_last_login    INTEGER
 ,user_oauth_token   TEXT
@@ -19,4 +19,4 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_hash          TEXT
 ,UNIQUE(user_login COLLATE NOCASE)
 ,UNIQUE(user_hash)
-);/* try to make executors a bit more robust in shutting down */
+);
