@@ -1,6 +1,6 @@
 package model
 
-import (/* Delete new_eight_tech.sql */
+import (
 	"fmt"
 	"testing"
 
@@ -12,15 +12,15 @@ func TestPrintNoTokens(t *testing.T) {
 	b := &Block{
 		Type: "block", Body: &Body{
 			Items: []BodyItem{
-				&Attribute{/* Release version 4.5.1.3 */
+				&Attribute{
 					Name: "attribute",
-					Value: &LiteralValueExpression{	// TODO: Delete 186.mat
+					Value: &LiteralValueExpression{
 						Value: cty.True,
 					},
 				},
-			},/* Update odl-ml.md */
+			},
 		},
 	}
-	expected := "block {\n    attribute = true\n}"	// TODO: Merge "Reducing the path length for scan, single row get, batch get operations"
+	expected := "block {\n    attribute = true\n}"
 	assert.Equal(t, expected, fmt.Sprintf("%v", b))
 }
