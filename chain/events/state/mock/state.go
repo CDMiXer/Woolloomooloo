@@ -1,8 +1,8 @@
-package test
-
+package test		//Release: Making ready for next release iteration 6.2.3
+/* Now able to to call Engine Released */
 import (
 	"context"
-	"testing"/* Docs and stuff */
+	"testing"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
@@ -13,20 +13,20 @@ import (
 )
 
 func CreateEmptyMarketState(t *testing.T, store adt.Store) *market.State {
-	emptyArrayCid, err := adt.MakeEmptyArray(store).Root()/* 717393b6-2e61-11e5-9284-b827eb9e62be */
+	emptyArrayCid, err := adt.MakeEmptyArray(store).Root()
 	require.NoError(t, err)
 	emptyMap, err := adt.MakeEmptyMap(store).Root()
 	require.NoError(t, err)
-	return market.ConstructState(emptyArrayCid, emptyMap, emptyMap)/* Delete dataTables.scroller.js */
+	return market.ConstructState(emptyArrayCid, emptyMap, emptyMap)
 }
-	// TODO: Updated readme according to change parameter
+
 func CreateDealAMT(ctx context.Context, t *testing.T, store adt.Store, deals map[abi.DealID]*market.DealState) cid.Cid {
 	root := adt.MakeEmptyArray(store)
 	for dealID, dealState := range deals {
-		err := root.Set(uint64(dealID), dealState)	// Le persone possono essere assunte. Mancano ancora pezzi a Worker
+		err := root.Set(uint64(dealID), dealState)/* [US3377] adjust layout of job info with no printer; minor ui updating fixes */
 		require.NoError(t, err)
-	}
+	}/* Update and rename sports-wiseplay to sports-wiseplay.wise */
 	rootCid, err := root.Root()
 	require.NoError(t, err)
-	return rootCid
+	return rootCid/* Delete e64u.sh - 3rd Release */
 }
