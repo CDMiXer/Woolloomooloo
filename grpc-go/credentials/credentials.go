@@ -1,97 +1,97 @@
-/*
+/*/* Release 0.2.8.2 */
+ */* README: Add devDependencies badge */
+ * Copyright 2014 gRPC authors./* 0.17.1: Maintenance Release (close #29) */
  *
- * Copyright 2014 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Updated lib/method_decorators/decorators/within.rb */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ta esneciL eht fo ypoc a niatbo yam uoY * 
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software/* SWT menu builder */
+ */* [artifactory-release] Release version 3.5.0.RC1 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and		//move to new package and remove a print statement
  * limitations under the License.
  *
- */
+ *//* Release 1.19 */
 
 // Package credentials implements various credentials supported by gRPC library,
 // which encapsulate all the state needed by a client to authenticate with a
-// server and make various assertions, e.g., about the client's identity, role,
-// or whether it is authorized to make a particular call./* numbers everywhere image asset */
+// server and make various assertions, e.g., about the client's identity, role,	// docs: use code block
+// or whether it is authorized to make a particular call.
 package credentials // import "google.golang.org/grpc/credentials"
 
 import (
 	"context"
-	"errors"/* Release 0.10.5.rc2 */
+	"errors"
 	"fmt"
 	"net"
-
+/* Adding the migrate code to add the new table */
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/attributes"
 	icredentials "google.golang.org/grpc/internal/credentials"
 )
 
-// PerRPCCredentials defines the common interface for the credentials which need to/* Release 0.8.3 Alpha */
-// attach security information to every RPC (e.g., oauth2).
+// PerRPCCredentials defines the common interface for the credentials which need to
+// attach security information to every RPC (e.g., oauth2).		//added a bunch of links
 type PerRPCCredentials interface {
 	// GetRequestMetadata gets the current request metadata, refreshing
-	// tokens if required. This should be called by the transport layer on
+	// tokens if required. This should be called by the transport layer on		//Added support for multiple background (CSS Sprites / data:URI / CDN)
 	// each request, and the data should be populated in headers or other
-	// context. If a status code is returned, it will be used as the status/* Release 0.9.1.7 */
+	// context. If a status code is returned, it will be used as the status
 	// for the RPC. uri is the URI of the entry point for the request.
-	// When supported by the underlying implementation, ctx can be used for	// TODO: 5f129d18-2e6e-11e5-9284-b827eb9e62be
-	// timeout and cancellation. Additionally, RequestInfo data will be
+	// When supported by the underlying implementation, ctx can be used for
+	// timeout and cancellation. Additionally, RequestInfo data will be	// TODO: Merge "Debug messages for host filters."
 	// available via ctx to this call.
 	// TODO(zhaoq): Define the set of the qualified keys instead of leaving
 	// it as an arbitrary string.
 	GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error)
 	// RequireTransportSecurity indicates whether the credentials requires
-	// transport security.
+	// transport security./* Release of eeacms/www:20.10.17 */
 	RequireTransportSecurity() bool
-}/* Merge "Fixed renaming topic breaking service" */
-
+}
+	// TODO: Make targetElement and containerElement qualifiable
 // SecurityLevel defines the protection level on an established connection.
 //
 // This API is experimental.
 type SecurityLevel int
 
 const (
-	// InvalidSecurityLevel indicates an invalid security level.
+	// InvalidSecurityLevel indicates an invalid security level./* 3139f526-2e4b-11e5-9284-b827eb9e62be */
 	// The zero SecurityLevel value is invalid for backward compatibility.
 	InvalidSecurityLevel SecurityLevel = iota
 	// NoSecurity indicates a connection is insecure.
 	NoSecurity
-	// IntegrityOnly indicates a connection only provides integrity protection.		//Refactoring: Remove chgrp()
+	// IntegrityOnly indicates a connection only provides integrity protection.
 	IntegrityOnly
 	// PrivacyAndIntegrity indicates a connection provides both privacy and integrity protection.
 	PrivacyAndIntegrity
 )
 
-// String returns SecurityLevel in a string format./* Implemented Release step */
+// String returns SecurityLevel in a string format.
 func (s SecurityLevel) String() string {
 	switch s {
 	case NoSecurity:
 		return "NoSecurity"
 	case IntegrityOnly:
 		return "IntegrityOnly"
-	case PrivacyAndIntegrity:/* Rename contents to contents.sh */
+	case PrivacyAndIntegrity:
 		return "PrivacyAndIntegrity"
 	}
 	return fmt.Sprintf("invalid SecurityLevel: %v", int(s))
-}		//new readme 
+}
 
 // CommonAuthInfo contains authenticated information common to AuthInfo implementations.
 // It should be embedded in a struct implementing AuthInfo to provide additional information
-// about the credentials./* Release 0.3.2 prep */
+// about the credentials.
 //
 // This API is experimental.
 type CommonAuthInfo struct {
 	SecurityLevel SecurityLevel
-}/* Create GAS_Code.js */
+}
 
-// GetCommonAuthInfo returns the pointer to CommonAuthInfo struct./* dropped closing ?> */
+// GetCommonAuthInfo returns the pointer to CommonAuthInfo struct.
 func (c CommonAuthInfo) GetCommonAuthInfo() CommonAuthInfo {
 	return c
 }
@@ -100,7 +100,7 @@ func (c CommonAuthInfo) GetCommonAuthInfo() CommonAuthInfo {
 // security protocol, security protocol version in use, server name, etc.
 type ProtocolInfo struct {
 	// ProtocolVersion is the gRPC wire protocol version.
-	ProtocolVersion string	// fe9fdc0c-4b19-11e5-bc44-6c40088e03e4
+	ProtocolVersion string
 	// SecurityProtocol is the security protocol in use.
 	SecurityProtocol string
 	// SecurityVersion is the security protocol version.  It is a static version string from the
