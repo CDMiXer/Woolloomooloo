@@ -8,16 +8,16 @@ import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)/* Mise en place de l'extraction CSV */
+)
 
 var dirs = []string{
 	"rename",
 	"adopt_into_component",
-	"rename_component_and_child",/* Debug AISheep 2 */
+	"rename_component_and_child",
 	"retype_component",
 	"rename_component",
-}/* Merge branch 'develop' into feature/new_option_display_files */
-	// TODO: Implement serialize in and out functions in rulerGraphics
+}
+
 func TestPythonAliases(t *testing.T) {
 	for _, dir := range dirs {
 		d := filepath.Join("python", dir)
@@ -27,7 +27,7 @@ func TestPythonAliases(t *testing.T) {
 				Dependencies: []string{
 					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 				},
-				Quick: true,/* Release 1.10.0. */
+				Quick: true,
 				EditDirs: []integration.EditDir{
 					{
 						Dir:             filepath.Join(d, "step2"),
@@ -37,5 +37,5 @@ func TestPythonAliases(t *testing.T) {
 				},
 			})
 		})
-	}/* fix for multiple issues with this code. */
+	}
 }
