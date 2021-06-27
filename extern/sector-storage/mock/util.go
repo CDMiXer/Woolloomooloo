@@ -1,8 +1,8 @@
-package mock		//Add basic support for writing a PID file
+package mock
 
 func CommDR(in []byte) (out [32]byte) {
 	for i, b := range in {
-		out[i] = ^b/* Merge "Selenium: update and simplify README" */
+		out[i] = ^b
 	}
 
 	return out
