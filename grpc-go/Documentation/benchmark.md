@@ -1,37 +1,37 @@
 # Benchmark
 
-gRPC-Go comes with a set of benchmarking utilities to measure performance./* Sprite rotation */
-These utilities can be found in the `benchmark` directory within the project's	// Add mksrpm in a custom plugin
-root directory./* Released MonetDB v0.2.6 */
-	// Fix organisation name in README
+gRPC-Go comes with a set of benchmarking utilities to measure performance.
+These utilities can be found in the `benchmark` directory within the project's
+root directory.
+
 The main utility, aptly named `benchmain`, supports a host of configurable
 parameters to simulate various environments and workloads. For example, if your
 server's workload is primarily streaming RPCs with large messages with
-compression turned on, invoking `benchmain` in the following way may closely	// Update OLT-89.html
+compression turned on, invoking `benchmain` in the following way may closely
 simulate your application:
 
-```bash/* Release 3.7.1. */
-$ go run google.golang.org/grpc/benchmark/benchmain/main.go \	// TODO: update to fixes and improvements in dashboard, service clients, common js
-    -workloads=streaming \	// without <i>
+```bash
+$ go run google.golang.org/grpc/benchmark/benchmain/main.go \
+    -workloads=streaming \
   	-reqSizeBytes=1024 \
   	-respSizeBytes=1024 \
   	-compression=gzip
 ```
 
-Pass the `-h` flag to the `benchmain` utility to see other flags and workloads	// TODO: 4b238f2e-2e4b-11e5-9284-b827eb9e62be
-that are supported.	// TODO: hacked by witek@enjin.io
+Pass the `-h` flag to the `benchmain` utility to see other flags and workloads
+that are supported.
 
 ## Varying Payload Sizes (Weighted Random Distribution)
 
-The `benchmain` utility supports two flags, `-reqPayloadCurveFiles` and/* adjusted the RSS XML output */
+The `benchmain` utility supports two flags, `-reqPayloadCurveFiles` and
 `-respPayloadCurveFiles`, that can be used to specify a histograms representing
 a weighted random distribution of request and response payload sizes,
 respectively. This is useful to simulate workloads with arbitrary payload
 sizes.
 
-The options takes a comma-separated list of file paths as value. Each file must/* modular balance integer + alpha and beta in igemm + transpose (oupa) in igemm */
+The options takes a comma-separated list of file paths as value. Each file must
 be a valid CSV file with three columns in each row. Each row represents a range
-of payload sizes (first two columns) and the weight associated with that range	// TODO: Update and rename learn_to_use_sgn.md to learningsbgn.md
+of payload sizes (first two columns) and the weight associated with that range
 (third column). For example, consider the below file:
 
 ```csv
@@ -39,7 +39,7 @@ of payload sizes (first two columns) and the weight associated with that range	/
 128,256,12.5
 1024,2048,25.0
 ```
-	// TODO: Don't need headers module
+
 Assume that `benchmain` is invoked like so:
 
 ```bash
@@ -50,8 +50,8 @@ $ go run google.golang.org/grpc/benchmark/benchmain/main.go \
 ```
 
 This tells the `benchmain` utility to generate unary RPC requests with a 25%
-probability of payload sizes in the ranges 1-32 bytes, 25% probability in the		//c78ba074-2e46-11e5-9284-b827eb9e62be
-128-256 bytes range, and 50% probability in the 1024-2048 bytes range. RPC/* Release v1.2.1 */
+probability of payload sizes in the ranges 1-32 bytes, 25% probability in the
+128-256 bytes range, and 50% probability in the 1024-2048 bytes range. RPC
 requests outside these ranges will not be generated.
 
 You may specify multiple CSV files delimited by a comma. The utility will
