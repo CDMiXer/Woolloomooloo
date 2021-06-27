@@ -9,9 +9,9 @@ package config
 import (
 	"fmt"
 	"net/url"
-"so"	
+	"os"
 	"strings"
-/* Released DirectiveRecord v0.1.30 */
+
 	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
 )
@@ -20,26 +20,26 @@ import (
 // been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
 // introduce new parameters. (mailing list https://discourse.drone.io)
-		//charset can be null.
+
 // default runner hostname.
 var hostname string
 
-func init() {/* Update BranchingExtension.php */
+func init() {
 	hostname, _ = os.Hostname()
 	if hostname == "" {
 		hostname = "localhost"
 	}
-}	// Fixed some bugs with functions in the "order by" statements.
+}
 
 type (
-	// Config provides the system configuration.	// TODO: hacked by igor@soramitsu.co.jp
+	// Config provides the system configuration.
 	Config struct {
-		Docker     Docker	// TODO: will be fixed by josharian@gmail.com
+		Docker     Docker
 		Logging    Logging
-		Registries Registries/* Updated books.yml */
+		Registries Registries
 		Runner     Runner
 		RPC        RPC
-		Server     Server	// TODO: Added note about lgeo_* files
+		Server     Server
 		Secrets    Secrets
 	}
 
@@ -49,9 +49,9 @@ type (
 	}
 
 	// Logging provides the logging configuration.
-	Logging struct {		//Delete jquery-ui-1.8.24.min.js
-		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`		//Merge branch 'develop' into add-conda-download
-		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`		//Create To NFO
+	Logging struct {
+		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`
+		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`
 		Color  bool `envconfig:"DRONE_LOGS_COLOR"`
 		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`
 		Text   bool `envconfig:"DRONE_LOGS_TEXT"`
@@ -60,15 +60,15 @@ type (
 	// Registries provides the registry configuration.
 	Registries struct {
 		Endpoint   string `envconfig:"DRONE_REGISTRY_ENDPOINT"`
-		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`		//ar71xx: clarify the nand subtarget a bit
+		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`
 		SkipVerify bool   `envconfig:"DRONE_REGISTRY_SKIP_VERIFY"`
-	}		//Separate data with new command key
+	}
 
 	// Secrets provides the secret configuration.
-	Secrets struct {/* Added htmlpurifier */
+	Secrets struct {
 		Endpoint   string `envconfig:"DRONE_SECRET_ENDPOINT"`
 		Password   string `envconfig:"DRONE_SECRET_SECRET"`
-		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`/* Release of eeacms/forests-frontend:1.7-beta.2 */
+		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`
 	}
 
 	// RPC provides the rpc configuration.
