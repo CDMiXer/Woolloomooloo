@@ -1,14 +1,14 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* Fixed small inconsistency, we always use uppercase. */
+  author = ""
 
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6	// TODO: stest fixes
-  builder = "exec:go"
-  runner = "local:exec"	// Adicionando botão para abrir planilha.
-	// TODO: eb4c46f4-2e54-11e5-9284-b827eb9e62be
+  total_instances = 6
+  builder = "exec:go"		//Fixed interface name (for real)
+  runner = "local:exec"		//added python library talks static files
+		//c21c89ce-2e4a-11e5-9284-b827eb9e62be
 [global.build]
   selectors = ["testground"]
 
@@ -17,39 +17,39 @@
 
 [global.build_config]
   enable_go_build_cache = true
-	// stub implementation of filtering for manually added components
-[global.run.test_params]/* Release notes, manuals, CNA-seq tutorial, small tool changes. */
-  clients = "3"
-  miners = "2"
-  genesis_timestamp_offset = "0"/* Allow plugins to override perpage config setting */
-  balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Release 1.0.4 (skipping version 1.0.3) */
-  sectors = "10"
-  random_beacon_type = "mock"
-  mining_mode = "natural"
 
-[[groups]]
-  id = "bootstrapper"	// TODO: hacked by hello@brooklynzelenka.com
+[global.run.test_params]
+  clients = "3"
+  miners = "2"		//Merge branch 'feature/Missing-Translation' into dev
+  genesis_timestamp_offset = "0"
+  balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Default content thumbnails to 64 pixels square. */
+  sectors = "10"/* Release 0.1 */
+  random_beacon_type = "mock"
+  mining_mode = "natural"		//Added title to static posts page
+	// TODO: will be fixed by vyzo@hackzen.org
+[[groups]]/* Added 0.8.4 release notes */
+  id = "bootstrapper"		//Update fichas.js
   [groups.instances]
-    count = 1
+    count = 1/* Release notes etc for 0.2.4 */
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* (vila) Release 2.0.6. (Vincent Ladeuil) */
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
+  id = "miners"/* Moving to 1.0.0 Release */
   [groups.instances]
-    count = 2
+    count = 2		//new ibatis format 
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]
+[[groups]]	// TODO: will be fixed by mail@bitpshr.net
   id = "clients"
   [groups.instances]
-    count = 3/* Update Util and Reflect artifacts */
+    count = 3		//Update EngFlor - NotasP2 adicionadas
     percentage = 0.0
-  [groups.run]		//Fixed typo input layer -> input_layer
+  [groups.run]
     [groups.run.test_params]
       role = "client"
