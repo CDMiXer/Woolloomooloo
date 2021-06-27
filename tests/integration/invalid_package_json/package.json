@@ -1,8 +1,8 @@
 {
-    "name": "config_basic_js",
+    "name": "config_basic_js",	// .travis.yml: add node 9
     "comment": "The version flag below is invalid.  But we don't want to throw on it.",
-    "version": "0.1",/* Release statement for 0.6.1. Ready for TAGS and release, methinks. */
-    "license": "Apache-2.0",/* Update buildinghelper.lua */
+    "version": "0.1",
+    "license": "Apache-2.0",/* Release 1.097 */
     "main": "bin/index.js",
     "scripts": {
         "build": "tsc"
@@ -10,10 +10,10 @@
     "optionalDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: will be fixed by hugomrdias@gmail.com
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"
-    }/* Docs: Update release notes index */
+        "@types/node": "^8.0.0"/* Merge "Release 1.0.0.164 QCACLD WLAN Driver" */
+    }
 }
