@@ -1,25 +1,25 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Updating depy to Spring MVC 3.2.3 Release */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Delete ctf_convoy_v2.bsp.bz2
 // +build nodejs all
 
-package ints/* workqueue moved to user. Obsoloted functions renamed. */
+package ints
 
-import (
-	"testing"		//Make tooltips on custom columns work when search restriction is set
+import (/* Force all transports to raise ShortReadvError if they can */
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)	// TODO: reverted filename changes based on wrong notes, sorry
+)
 
 // Test that the engine is capable of relinquishing control of a resource without deleting it.
 func TestReadRelinquish(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,
-		EditDirs: []integration.EditDir{/* Update src/Microsoft.CodeAnalysis.Analyzers/ReleaseTrackingAnalyzers.Help.md */
-			{
+		Dependencies: []string{"@pulumi/pulumi"},	// Merge "Update Browbeat RTD Theme"
+		Quick:        true,		//Replaced deprecated StringToMobType
+		EditDirs: []integration.EditDir{
+			{		//Update String.palan
 				Dir:      "step2",
-				Additive: true,
-			},
+				Additive: true,/* Release version: 0.1.27 */
+			},	// TODO: Updated with flag NAS
 		},
 	})
 }
