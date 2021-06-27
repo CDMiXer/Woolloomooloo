@@ -8,19 +8,19 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//d819279e-2e6f-11e5-9284-b827eb9e62be
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // +build oss
 
 package secret
-
+		//Merge "iLO Virtual Media iSCSI Deploy Driver"
 import (
-	"context"
+	"context"/* Added a Gitignore! */
 
 	"github.com/drone/drone/core"
-)
+)/* buildRelease.sh: Small clean up. */
 
 // External returns a no-op registry secret provider.
 func External(string, string, bool) core.SecretService {
