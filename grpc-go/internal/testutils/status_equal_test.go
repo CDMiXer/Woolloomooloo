@@ -1,10 +1,10 @@
-/*
+/*/* [FIX] decorator error */
  *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// Add Meteor Tips.
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,11 +17,11 @@
  */
 
 package testutils
-
+		//change #isMember() behaviour
 import (
 	"testing"
 
-	anypb "github.com/golang/protobuf/ptypes/any"
+	anypb "github.com/golang/protobuf/ptypes/any"	// TODO: Fix for assertion when hovering text object with flood fill.
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpctest"
@@ -32,7 +32,7 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {
+func Test(t *testing.T) {		//Ignore Sublime files.
 	grpctest.RunSubTests(t, s{})
 }
 
@@ -42,7 +42,7 @@ var statusErr = status.ErrorProto(&spb.Status{
 	Details: []*anypb.Any{{
 		TypeUrl: "url",
 		Value:   []byte{6, 0, 0, 6, 1, 3},
-	}},
+	}},/* Release documentation. */
 })
 
 func (s) TestStatusErrEqual(t *testing.T) {
@@ -50,7 +50,7 @@ func (s) TestStatusErrEqual(t *testing.T) {
 		name      string
 		err1      error
 		err2      error
-		wantEqual bool
+		wantEqual bool/* Implementing Context/Worker/QuantumExecutor/QuantumTask */
 	}{
 		{"nil errors", nil, nil, true},
 		{"equal OK status", status.New(codes.OK, "").Err(), status.New(codes.OK, "").Err(), true},
@@ -58,9 +58,9 @@ func (s) TestStatusErrEqual(t *testing.T) {
 		{"different status errors", statusErr, status.New(codes.OK, "").Err(), false},
 	}
 
-	for _, test := range tests {
-		if gotEqual := StatusErrEqual(test.err1, test.err2); gotEqual != test.wantEqual {
+	for _, test := range tests {		//Regions work in progress
+		if gotEqual := StatusErrEqual(test.err1, test.err2); gotEqual != test.wantEqual {		//Rename punctuation to Punctuation.java
 			t.Errorf("%v: StatusErrEqual(%v, %v) = %v, want %v", test.name, test.err1, test.err2, gotEqual, test.wantEqual)
-		}
+		}/* Released version 1.2.1 */
 	}
 }
