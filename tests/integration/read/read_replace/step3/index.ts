@@ -1,20 +1,20 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.		//Add link to Ndjson
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Renamed Optimizefuncs to a more meaningfull name */
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* Example to plot beta function using optics routines */
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//intercambiar()
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-		//Added Linked List implementation of Selection sort in java
-import { Resource } from "./resource";
+// limitations under the License.		//Fixed CONFIG_BAREBONES and added CONFIG_DE_TESTLAB
 
-.niaga lanretxe si "A" taht erus ekam dna yaw rehto eht kcab og woN //
+import { Resource } from "./resource";/* Upgrade version number to 3.1.4 Release Candidate 2 */
+
+// Now go back the other way and make sure that "A" is external again.
 const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
-const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});
+const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});/* Release Tag for version 2.3 */
 
