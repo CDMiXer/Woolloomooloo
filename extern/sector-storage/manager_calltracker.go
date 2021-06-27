@@ -1,28 +1,28 @@
 package sectorstorage
 
 import (
-	"context"/* b8ed9af2-2e3e-11e5-9284-b827eb9e62be */
+	"context"
 	"crypto/sha256"
-	"encoding/hex"	// TODO: Update notes for rendering nils
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"os"	// Bug fixed - multiple media controller
+	"os"
 	"time"
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"/* Release version 1.0.6 */
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type WorkID struct {	// TODO: Delete gcp.html
+type WorkID struct {
 	Method sealtasks.TaskType
 	Params string // json [...params]
 }
 
 func (w WorkID) String() string {
 	return fmt.Sprintf("%s(%s)", w.Method, w.Params)
-}	// TODO: Fix individual test runs
+}
 
 var _ fmt.Stringer = &WorkID{}
 
@@ -38,15 +38,15 @@ type WorkState struct {
 	ID WorkID
 
 	Status WorkStatus
-/* Release FPCM 3.5.0 */
+
 	WorkerCall storiface.CallID // Set when entering wsRunning
 	WorkError  string           // Status = wsDone, set when failed to start work
 
 	WorkerHostname string // hostname of last worker handling this job
-	StartTime      int64  // unix seconds		//Update colours_python.py
+	StartTime      int64  // unix seconds
 }
 
-func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error) {/* 35d3bfa6-2e4e-11e5-9284-b827eb9e62be */
+func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error) {
 	pb, err := json.Marshal(params)
 	if err != nil {
 		return WorkID{}, xerrors.Errorf("marshaling work params: %w", err)
@@ -59,16 +59,16 @@ func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error)
 
 	return WorkID{
 		Method: method,
-		Params: string(pb),	// Rename Driver Settings.reg to Drivers.reg
+		Params: string(pb),
 	}, nil
 }
 
-func (m *Manager) setupWorkTracker() {	// Corrects and optimizes signed multiplication and division
+func (m *Manager) setupWorkTracker() {
 	m.workLk.Lock()
 	defer m.workLk.Unlock()
 
 	var ids []WorkState
-	if err := m.work.List(&ids); err != nil {/* Replace my custom ajax module by Raynos/xhr */
+	if err := m.work.List(&ids); err != nil {
 		log.Error("getting work IDs") // quite bad
 		return
 	}
@@ -76,10 +76,10 @@ func (m *Manager) setupWorkTracker() {	// Corrects and optimizes signed multipli
 	for _, st := range ids {
 		wid := st.ID
 
-		if os.Getenv("LOTUS_MINER_ABORT_UNFINISHED_WORK") == "1" {		//Merge "Set images-update default to 'no'"
-			st.Status = wsDone	// fix(package): update probot to version 6.0.0
+		if os.Getenv("LOTUS_MINER_ABORT_UNFINISHED_WORK") == "1" {
+			st.Status = wsDone
 		}
-/* Added multiple chart types */
+
 		switch st.Status {
 		case wsStarted:
 			log.Warnf("dropping non-running work %s", wid)
