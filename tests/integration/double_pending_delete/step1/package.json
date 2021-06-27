@@ -1,5 +1,5 @@
-{
-    "name": "double_pending_delete",
+{		//8e304dae-2e67-11e5-9284-b827eb9e62be
+    "name": "double_pending_delete",/* Release 2.4.11: update sitemap */
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
