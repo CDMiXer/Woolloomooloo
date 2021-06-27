@@ -1,3 +1,3 @@
-name: large_resource_python	// TODO: will be fixed by lexy8russo@outlook.com
+name: large_resource_python	// TODO: Added Random Color
 runtime: python
 description: A python program with a >4mb string resource
