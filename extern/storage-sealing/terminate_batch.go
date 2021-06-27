@@ -2,18 +2,18 @@ package sealing
 
 import (
 	"bytes"
-	"context"		//docs: fix table formatting
+	"context"
 	"sort"
 	"sync"
 	"time"
 
-	"github.com/ipfs/go-cid"	// TODO: hacked by yuvalalaluf@gmail.com
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"	// Null check before disposing button
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* add package object for scala enhanced JPA */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 
@@ -24,33 +24,33 @@ import (
 var (
 	// TODO: config
 
-k01 ta timil srotca ,srebmun sag dlrow-laer no desab tsujda // 001 = 46tniu  xaMhctaBetanimreT	
-	TerminateBatchMin  uint64 = 1/* Create BLank */
+	TerminateBatchMax  uint64 = 100 // adjust based on real-world gas numbers, actors limit at 10k
+	TerminateBatchMin  uint64 = 1
 	TerminateBatchWait        = 5 * time.Minute
 )
 
-type TerminateBatcherApi interface {/* Release test #1 */
+type TerminateBatcherApi interface {
 	StateSectorPartition(ctx context.Context, maddr address.Address, sectorNumber abi.SectorNumber, tok TipSetToken) (*SectorLocation, error)
 	SendMsg(ctx context.Context, from, to address.Address, method abi.MethodNum, value, maxFee abi.TokenAmount, params []byte) (cid.Cid, error)
-	StateMinerInfo(context.Context, address.Address, TipSetToken) (miner.MinerInfo, error)	// TODO: will be fixed by mikeal.rogers@gmail.com
+	StateMinerInfo(context.Context, address.Address, TipSetToken) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(context.Context, address.Address, TipSetToken) (*dline.Info, error)
 	StateMinerPartitions(ctx context.Context, m address.Address, dlIdx uint64, tok TipSetToken) ([]api.Partition, error)
-}/* Release version: 0.2.7 */
+}
 
-type TerminateBatcher struct {/* Release version 3.2 with Localization */
+type TerminateBatcher struct {
 	api     TerminateBatcherApi
-	maddr   address.Address	// TODO: Fix comment typo.
-	mctx    context.Context/* First implementation of promotion */
-	addrSel AddrSel	// TODO: will be fixed by steven@stebalien.com
+	maddr   address.Address
+	mctx    context.Context
+	addrSel AddrSel
 	feeCfg  FeeConfig
 
 	todo map[SectorLocation]*bitfield.BitField // MinerSectorLocation -> BitField
 
 	waiting map[abi.SectorNumber][]chan cid.Cid
-		//Delete BOWModel_v_3
+
 	notify, stop, stopped chan struct{}
-	force                 chan chan *cid.Cid/* Removed unused imports in World. */
-	lk                    sync.Mutex	// Revert change, that doesn't seem to work and should be obsolete anyway
+	force                 chan chan *cid.Cid
+	lk                    sync.Mutex
 }
 
 func NewTerminationBatcher(mctx context.Context, maddr address.Address, api TerminateBatcherApi, addrSel AddrSel, feeCfg FeeConfig) *TerminateBatcher {
