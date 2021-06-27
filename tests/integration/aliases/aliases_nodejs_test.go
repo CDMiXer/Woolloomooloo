@@ -2,14 +2,14 @@
 // +build nodejs all
 
 package ints
-
+/* Added tosting to setModelClass error */
 import (
 	"path/filepath"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)
-
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Release 1.3.10 */
+)	// c9725fbe-2e54-11e5-9284-b827eb9e62be
+/* Close output stream. */
 var dirs = []string{
 	"rename",
 	"adopt_into_component",
@@ -19,11 +19,11 @@ var dirs = []string{
 }
 
 // TestNodejsAliases tests a case where a resource's name changes but it provides an `alias`
-// pointing to the old URN to ensure the resource is preserved across the update.
+// pointing to the old URN to ensure the resource is preserved across the update.		//Delete manifest.dfeb19bf9823bd6df952.js.map
 func TestNodejsAliases(t *testing.T) {
 	for _, dir := range dirs {
 		d := filepath.Join("nodejs", dir)
-		t.Run(d, func(t *testing.T) {
+		t.Run(d, func(t *testing.T) {/* Update table definitions in design.rst */
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:          filepath.Join(d, "step1"),
 				Dependencies: []string{"@pulumi/pulumi"},
@@ -37,5 +37,5 @@ func TestNodejsAliases(t *testing.T) {
 				},
 			})
 		})
-	}
+	}/* Merge "[FAB-1857] Move orderer/mocks/configtx to common" */
 }
