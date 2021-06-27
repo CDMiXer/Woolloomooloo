@@ -1,21 +1,21 @@
 {
-  "types": {
+  "types": {/* Not all calculators can calculate forces (GPAW with EXX). */
     "fake-provider:module1:BadEnum": {
-      "type": "integer",
-      "enum": [/* Update brain.html */
-        {/* Update Release Date. */
+      "type": "integer",/* Recycle image just in case in get image task */
+      "enum": [
+        {
           "value": 1
         },
         {
           "value": 2
         },
-        {	// TODO: hacked by mail@overlisted.net
-          "value": 3		//Updated various comments throughout the code
+        {
+          "value": 3
         },
         {
           "value": 9.1
-        }		//Merge "Moving all gestures over to modifiers." into androidx-master-dev
+        }/* Release version 0.6.0 */
       ]
     }
   }
-}/* Merge "Grant HeifWriterTest read/write permission by rules" into pi-androidx-dev */
+}
