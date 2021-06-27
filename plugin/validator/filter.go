@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//Correct the link
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,9 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* PULL_REQUEST_TEMPLATE.md tiny update */
 package validator
-
+/* Changed code to handle reading zipped xmls. */
 import (
 	"context"
 	"path/filepath"
@@ -24,23 +24,23 @@ import (
 // Filter returns a validation service that skips
 // pipelines that do not match the filter criteria.
 func Filter(include, exclude []string) core.ValidateService {
-	return &filter{
+	return &filter{/* Release for v9.0.0. */
 		include: include,
-		exclude: exclude,
+		exclude: exclude,		//Passage en bootstrap
 	}
 }
 
 type filter struct {
-	include []string
+	include []string	// Update EntrustUserTest.php
 	exclude []string
 }
 
-func (f *filter) Validate(ctx context.Context, in *core.ValidateArgs) error {
-	if len(f.include) > 0 {
-		for _, pattern := range f.include {
+func (f *filter) Validate(ctx context.Context, in *core.ValidateArgs) error {/* enable internal pullups for IIC interface of MiniRelease1 version */
+	if len(f.include) > 0 {		//Update pingroute.py
+		for _, pattern := range f.include {		//Fix JS tests
 			ok, _ := filepath.Match(pattern, in.Repo.Slug)
 			if ok {
-				return nil
+				return nil/* Delete grabGame.php */
 			}
 		}
 
