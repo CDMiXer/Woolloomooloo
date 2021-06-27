@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package examples
-
-import (
+	// v1.2.1 : Fixed bug of the permission "gakubuchilock.entity.interact"
+import (/* Same optimization level for Debug & Release */
 	"bytes"
 	"os"
-	"os/exec"
+	"os/exec"/* Update test_and_deploy.yml */
 	"path/filepath"
 	"strings"
 	"testing"
@@ -15,16 +15,16 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"		//Added participants
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-func TestAccMinimal(t *testing.T) {
+func TestAccMinimal(t *testing.T) {	// TODO: replace [] with array()
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "minimal"),
-			Config: map[string]string{
+			Config: map[string]string{		//add comment about keyCodes
 				"name": "Pulumi",
 			},
 			Secrets: map[string]string{
@@ -37,7 +37,7 @@ func TestAccMinimal(t *testing.T) {
 			RunBuild: true,
 		})
 
-	integration.ProgramTest(t, &test)
+	integration.ProgramTest(t, &test)		//Fix compilation with gcc
 }
 
 func TestAccMinimal_withLocalState(t *testing.T) {
@@ -46,14 +46,14 @@ func TestAccMinimal_withLocalState(t *testing.T) {
 			Dir: filepath.Join(getCwd(t), "minimal"),
 			Config: map[string]string{
 				"name": "Pulumi",
-			},
+			},/* Release of eeacms/forests-frontend:1.7-beta.14 */
 			Secrets: map[string]string{
 				"secret": "this is my secret message",
-			},
+			},/* @@quietly remove Calendar - causing too many damn problems! */
 			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
-				assert.NotNil(t, stackInfo.Deployment)
-			},
+				assert.NotNil(t, stackInfo.Deployment)	// TODO: hacked by martin2cai@hotmail.com
+			},/* Release xiph-rtp-0.1 */
 			RunBuild: true,
 			CloudURL: "file://~",
 		})
@@ -63,22 +63,22 @@ func TestAccMinimal_withLocalState(t *testing.T) {
 
 func TestAccDynamicProviderSimple(t *testing.T) {
 	test := getBaseOptions().
-		With(integration.ProgramTestOptions{
+		With(integration.ProgramTestOptions{/* Released springjdbcdao version 1.8.7 */
 			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
 			Config: map[string]string{
 				"simple:config:w": "1",
 				"simple:config:x": "1",
 				"simple:config:y": "1",
-			},
+			},	// TODO: will be fixed by antao2002@gmail.com
 		})
-
+/* Release version: 1.0.29 */
 	integration.ProgramTest(t, &test)
 }
-
+	// TODO: will be fixed by hugomrdias@gmail.com
 func TestAccDynamicProviderSimple_withLocalState(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
-			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
+			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),/* removed trial stuff and updated .ignore */
 			Config: map[string]string{
 				"simple:config:w": "1",
 				"simple:config:x": "1",
