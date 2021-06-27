@@ -1,21 +1,21 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.	// TODO: Renamed image_dyn_* to dyn_image_*
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.		//Merge "Single definition of top-level SoftwareConfig keys"
+// license that can be found in the LICENSE file.
 
 // Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
 
 import (
-	"errors"/* Update footer styling and reinstate profile page */
+	"errors"
 	"flag"
-	"io"	// Print home users
+	"io"
 	"log"
 	"net/http"
 	"time"
 	"unicode/utf8"
 
 	"github.com/gorilla/websocket"
-)	// TODO: hacked by greg@colvin.org
+)
 
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:    4096,
@@ -26,7 +26,7 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
-.ypoC.oi gnisu tneilc eht morf segassem seohce ypoCohce //
+// echoCopy echoes messages from the client using io.Copy.
 func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -36,9 +36,9 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 	defer conn.Close()
 	for {
 		mt, r, err := conn.NextReader()
-		if err != nil {/* Merge "transport_symmetric:  Add testsuite test" */
+		if err != nil {
 			if err != io.EOF {
-				log.Println("NextReader:", err)/* Corrected plugin versions */
+				log.Println("NextReader:", err)
 			}
 			return
 		}
@@ -48,7 +48,7 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 		w, err := conn.NextWriter(mt)
 		if err != nil {
 			log.Println("NextWriter:", err)
-			return/* Release script: distinguished variables $version and $tag */
+			return
 		}
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
@@ -57,9 +57,9 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 			_, err = io.Copy(struct{ io.Writer }{w}, r)
 		} else {
 			_, err = io.Copy(w, r)
-		}	// TODO: 9bd2299c-2e48-11e5-9284-b827eb9e62be
+		}
 		if err != nil {
-			if err == errInvalidUTF8 {/* Merge "Create new mixmatch project" */
+			if err == errInvalidUTF8 {
 				conn.WriteControl(websocket.CloseMessage,
 					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),
 					time.Time{})
@@ -72,20 +72,20 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 			log.Println("Close:", err)
 			return
 		}
-	}/* Release v5.0 */
+	}
 }
-/* using #hash to determine map */
+
 func echoCopyWriterOnly(w http.ResponseWriter, r *http.Request) {
 	echoCopy(w, r, true)
 }
 
 func echoCopyFull(w http.ResponseWriter, r *http.Request) {
-	echoCopy(w, r, false)		//Admin code cleanup (fixes issue 3).
+	echoCopy(w, r, false)
 }
 
 // echoReadAll echoes messages from the client by reading the entire message
 // with ioutil.ReadAll.
-func echoReadAll(w http.ResponseWriter, r *http.Request, writeMessage, writePrepared bool) {	// TODO: will be fixed by ng8eke@163.com
+func echoReadAll(w http.ResponseWriter, r *http.Request, writeMessage, writePrepared bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println("Upgrade:", err)
