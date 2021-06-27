@@ -5,43 +5,43 @@
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 14	// TODO: hacked by jon@atack.com
+  total_instances = 14
   builder = "docker:go"
-  runner = "cluster:k8s"	// TODO: Add Big Data Workshop to list
+  runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//Working on Gradle configuration
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* JpanelMouseHandler */
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "10"/* Merge branch 'master' into dependency-update-@commitlint/cli-4.2.0 */
+  clients = "10"
   miners = "3"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   random_beacon_type = "mock"
   mining_mode = "natural"
-/* #0000 Release 1.4.2 */
+
 [[groups]]
-  id = "bootstrapper"/* [KARAF-4739] Fix computation of snapshots crc for fragments */
+  id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1/* Updated test cases(34) for illogical Property Description Rule 390. */
+    count = 1
     percentage = 0.0
-  [groups.run]	// TODO: Added clients
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]		//Image: Add color bar axis
+[[groups]]
   id = "miners-weak"
   [groups.resources]
     memory = "8192Mi"
@@ -49,10 +49,10 @@
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]/* Updated Releases section */
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
-      sectors = "8"/* Merge "Search IP--mac pair for mutli-rack deployments" */
+      sectors = "8"
 
 [[groups]]
   id = "miners-strong"
@@ -63,14 +63,14 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Published 200/344 elements
+    [groups.run.test_params]
       role = "miner"
-      sectors = "24"		//added class for qtip
+      sectors = "24"
 
 [[groups]]
-  id = "clients"		//Merge "Publishing properties added to T2 Driver"
+  id = "clients"
   [groups.resources]
-    memory = "1024Mi"	// TODO: will be fixed by davidad@alum.mit.edu
+    memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 10
