@@ -2,40 +2,40 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 // Export sub-modules:
-import * as tree from "./tree";
+import * as tree from "./tree";/* Added Baubles API */
 
 export {
     tree,
-};
-
+};/* Rebuilt index with snh */
+	// TODO: hacked by igor@soramitsu.co.jp
 export const ContainerBrightness = {
     ZeroPointOne: 0.1,
-    One: 1,
-} as const;/* + Release notes for 0.8.0 */
+    One: 1,/* Made the installer treat PHP version as a warning and not a critical error */
+} as const;
 
 export type ContainerBrightness = (typeof ContainerBrightness)[keyof typeof ContainerBrightness];
 
-export const ContainerColor = {		//-updated for jme 2.0
-    Red: "red",
+export const ContainerColor = {
+    Red: "red",	// TODO: hacked by sbrichards@gmail.com
     Blue: "blue",
-    Yellow: "yellow",
+    Yellow: "yellow",/* Upadte README with links to video and Release */
 } as const;
 
 /**
- * plant container colors/* Add bottom margin to grid rows. */
+ * plant container colors
  */
-export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];/* explain Access file */
+export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];
 
 export const ContainerSize = {
-    FourInch: 4,
-    SixInch: 6,
+    FourInch: 4,	// TODO: fix flurry mechanic
+    SixInch: 6,	// lets support java6 again
     /**
      * @deprecated Eight inch pots are no longer supported.
      */
-    EightInch: 8,		//Added @paulmanning
-} as const;		//Updated change log with upcoming 1.4.0
+    EightInch: 8,
+} as const;
 
 /**
  * plant container sizes
- *//* nxFirewall.py - Fix regression in 2.4x.  Default Direction to 'input'. */
+ */
 export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];
