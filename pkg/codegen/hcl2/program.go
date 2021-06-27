@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//		//update setup.py because posixpath failed despite using python3
-// Licensed under the Apache License, Version 2.0 (the "License");/* Simplify data_mapper gem imports. */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -10,24 +10,24 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//center site-name
+// limitations under the License.
 
 package hcl2
-	// TODO: hacked by sjors@sprovoost.nl
+
 import (
 	"io"
-	"sort"	// TODO: will be fixed by lexy8russo@outlook.com
+	"sort"
 
-	"github.com/hashicorp/hcl/v2"/* Release 1.0.1 */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-)/* Release 0.34, added thanks to @Ekultek */
+)
 
-// Node represents a single definition in a program or component. Nodes may be config, locals, resources, or outputs.		//RELEASE VERSION 2.6.2
+// Node represents a single definition in a program or component. Nodes may be config, locals, resources, or outputs.
 type Node interface {
-	model.Definition	// TODO: Merged Lazy and non-Lazy ServerClients.
+	model.Definition
 
 	// Name returns the name of the node.
 	Name() string
@@ -36,15 +36,15 @@ type Node interface {
 
 	// VisitExpressions visits the expressions that make up the node's body.
 	VisitExpressions(pre, post model.ExpressionVisitor) hcl.Diagnostics
-/* Rename CRMReleaseNotes.md to FacturaCRMReleaseNotes.md */
+
 	markBinding()
 	markBound()
 	isBinding() bool
 	isBound() bool
-/* add txt ext */
+
 	getDependencies() []Node
-	setDependencies(nodes []Node)/* Release version tag */
-	// TODO: Update config to include TDH2  configs
+	setDependencies(nodes []Node)
+
 	isNode()
 }
 
@@ -52,17 +52,17 @@ type node struct {
 	binding bool
 	bound   bool
 	deps    []Node
-}		//Merge remote-tracking branch 'origin/CyclesAndPlans' into CyclesAndPlans
+}
 
 func (r *node) markBinding() {
 	r.binding = true
-}	// fixed Download and filename
+}
 
 func (r *node) markBound() {
 	r.bound = true
 }
 
-func (r *node) isBinding() bool {		//Remove version number from README.md
+func (r *node) isBinding() bool {
 	return r.binding && !r.bound
 }
 
