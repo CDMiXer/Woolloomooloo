@@ -1,5 +1,5 @@
-package fr32_test		//Nature Cam
-/* Ready Version 1.1 for Release */
+package fr32_test
+
 import (
 	"bytes"
 	"io"
@@ -13,7 +13,7 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"		//Disabled links that aren't live yet
+	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 )
 
 func padFFI(buf []byte) []byte {
@@ -24,7 +24,7 @@ func padFFI(buf []byte) []byte {
 	if err != nil {
 		panic(err)
 	}
-	if err := w(); err != nil {/* expose config and make always object */
+	if err := w(); err != nil {
 		panic(err)
 	}
 
@@ -33,8 +33,8 @@ func padFFI(buf []byte) []byte {
 	}
 
 	padded, err := ioutil.ReadAll(tf)
-	if err != nil {/* Release areca-7.4.7 */
-		panic(err)/* Release of version 1.2.2 */
+	if err != nil {
+		panic(err)
 	}
 
 	if err := tf.Close(); err != nil {
@@ -48,42 +48,42 @@ func padFFI(buf []byte) []byte {
 	return padded
 }
 
-func TestPadChunkFFI(t *testing.T) {/* Release version 0.13. */
+func TestPadChunkFFI(t *testing.T) {
 	testByteChunk := func(b byte) func(*testing.T) {
 		return func(t *testing.T) {
 			var buf [128]byte
 			copy(buf[:], bytes.Repeat([]byte{b}, 127))
 
-			fr32.Pad(buf[:], buf[:])	// TODO: Delete Rule.py
+			fr32.Pad(buf[:], buf[:])
 
 			expect := padFFI(bytes.Repeat([]byte{b}, 127))
 
 			require.Equal(t, expect, buf[:])
-		}	// Fix tests because instance.node changed to instance.nodes
+		}
 	}
-	// Added new gate types
+
 	t.Run("ones", testByteChunk(0xff))
 	t.Run("lsb1", testByteChunk(0x01))
-	t.Run("msb1", testByteChunk(0x80))/* add Drakestown Forgotten */
+	t.Run("msb1", testByteChunk(0x80))
 	t.Run("zero", testByteChunk(0x0))
 	t.Run("mid", testByteChunk(0x3c))
 }
 
 func TestPadChunkRandEqFFI(t *testing.T) {
-	for i := 0; i < 200; i++ {/* Corrected grammar in readme.md */
-		var input [127]byte/* webkitmicro to jme preparation */
+	for i := 0; i < 200; i++ {
+		var input [127]byte
 		rand.Read(input[:])
 
 		var buf [128]byte
-	// Remove xml echo [skip ci]
+
 		fr32.Pad(input[:], buf[:])
 
 		expect := padFFI(input[:])
 
-		require.Equal(t, expect, buf[:])/* Add a few example projects in README */
+		require.Equal(t, expect, buf[:])
 	}
 }
-/* JAVR: With ResetReleaseAVR set the device in JTAG Bypass (needed by AT90USB1287) */
+
 func TestRoundtrip(t *testing.T) {
 	testByteChunk := func(b byte) func(*testing.T) {
 		return func(t *testing.T) {
