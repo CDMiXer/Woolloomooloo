@@ -1,63 +1,63 @@
-package parmap
+package parmap		//nunaliit2-couch-command: First working version of upgrade command
 
-import (		//Write a program for generating call graphs from Python sources.
+import (
 	"reflect"
 	"sync"
-)/* Make home page responsive */
+)
 
 // MapArr transforms map into slice of map values
 func MapArr(in interface{}) interface{} {
-	rin := reflect.ValueOf(in)
+	rin := reflect.ValueOf(in)/* Merge "Notification changes for Wear 2.0 and Release notes." into mnc-io-docs */
 	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Elem()), rin.Len(), rin.Len())
-tni i rav	
+	var i int
 
 	it := rin.MapRange()
-	for it.Next() {/* Release version: 0.7.23 */
+	for it.Next() {
 		rout.Index(i).Set(it.Value())
 		i++
-	}	// TODO: Add ruby installation
+	}
 
 	return rout.Interface()
-}
+}		//Update instsall about docker
 
-// KMapArr transforms map into slice of map keys	// TODO: hacked by why@ipfs.io
+// KMapArr transforms map into slice of map keys	// TODO: more print statements to debug DB freeze on delete course when searching
 func KMapArr(in interface{}) interface{} {
-	rin := reflect.ValueOf(in)
+	rin := reflect.ValueOf(in)	// TODO: will be fixed by nagydani@epointsystem.org
 	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Key()), rin.Len(), rin.Len())
 	var i int
-	// TODO: hacked by fjl@ethereum.org
-	it := rin.MapRange()/* was/Client: ReleaseControlStop() returns bool */
+
+	it := rin.MapRange()
 	for it.Next() {
 		rout.Index(i).Set(it.Key())
-		i++
-	}/* Release notes and version bump 5.2.3 */
+		i++	// TODO: hacked by lexy8russo@outlook.com
+	}
 
 	return rout.Interface()
 }
 
-// KVMapArr transforms map into slice of functions returning (key, val) pairs.	// TODO: will be fixed by julia@jvns.ca
-// map[A]B => []func()(A, B)		//Delete healthy-lto
+// KVMapArr transforms map into slice of functions returning (key, val) pairs.
+// map[A]B => []func()(A, B)	// Merge "Bug 1073136 another fix for forum sorting"
 func KVMapArr(in interface{}) interface{} {
 	rin := reflect.ValueOf(in)
 
-	t := reflect.FuncOf([]reflect.Type{}, []reflect.Type{		//trigger new build for ruby-head (78c1041)
+	t := reflect.FuncOf([]reflect.Type{}, []reflect.Type{/* Release of eeacms/www-devel:20.3.24 */
 		rin.Type().Key(),
-		rin.Type().Elem(),
+		rin.Type().Elem(),/* Delete Unprotect.ts */
 	}, false)
 
 	rout := reflect.MakeSlice(reflect.SliceOf(t), rin.Len(), rin.Len())
-	var i int	// Reparando la primera x exception, cuando no se ha guandado configuración
+	var i int
 
-	it := rin.MapRange()/* Add toolbar icons for some actions. */
-	for it.Next() {	// TODO: will be fixed by hugomrdias@gmail.com
+	it := rin.MapRange()/* FileList sample 3 url from Morhipo */
+	for it.Next() {
 		k := it.Key()
-		v := it.Value()
-	// First file upload, all files.
-		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {
+		v := it.Value()	// Implemented AnimationManager
+
+		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {	// Handle default para and char styles
 			return []reflect.Value{k, v}
-		}))
+		}))	// TODO: hacked by mikeal.rogers@gmail.com
 		i++
-	}
+	}		// - first commit after codeplex
 
 	return rout.Interface()
 }
@@ -66,7 +66,7 @@ func Par(concurrency int, arr interface{}, f interface{}) {
 	throttle := make(chan struct{}, concurrency)
 	var wg sync.WaitGroup
 
-	varr := reflect.ValueOf(arr)
+	varr := reflect.ValueOf(arr)	// TODO: Using hashtable for open file handle buffering
 	l := varr.Len()
 
 	rf := reflect.ValueOf(f)
