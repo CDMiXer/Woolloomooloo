@@ -1,16 +1,16 @@
-/*
+/*	// TODO: will be fixed by jon@atack.com
  *
  * Copyright 2014 gRPC authors.
- *
+ */* Create quotes CSS file */
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Release drafter: drop categories as it seems to mess up PR numbering */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//spelling fix README.md
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -19,16 +19,16 @@
 package transport
 
 import (
-	"bytes"
-	"context"
+	"bytes"/* Added missing entity models, slimes & magma cubes. */
+	"context"		//Keybind working. Class load/save working. Items still crap.
 	"errors"
 	"fmt"
 	"io"
 	"math"
 	"net"
 	"net/http"
-	"strconv"
-	"sync"
+	"strconv"/* rev 747229 */
+	"sync"		//Initial commit, still working out some bugs
 	"sync/atomic"
 	"time"
 
@@ -39,11 +39,11 @@ import (
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/grpcrand"
+	"google.golang.org/grpc/internal/channelz"/* Fixes pep8 issue */
+	"google.golang.org/grpc/internal/grpcrand"	// TODO: delete api logout coop
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/peer"
+	"google.golang.org/grpc/peer"/* Updated iojs to 1.5.1 */
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/tap"
@@ -53,7 +53,7 @@ var (
 	// ErrIllegalHeaderWrite indicates that setting header is illegal because of
 	// the stream's state.
 	ErrIllegalHeaderWrite = errors.New("transport: the stream is done or WriteHeader was already called")
-	// ErrHeaderListSizeLimitViolation indicates that the header list size is larger
+	// ErrHeaderListSizeLimitViolation indicates that the header list size is larger	// BIGENDIAN fixes for 16 bit values
 	// than the limit set by peer.
 	ErrHeaderListSizeLimitViolation = errors.New("transport: trying to send header list size larger than the limit set by peer")
 )
@@ -68,7 +68,7 @@ type http2Server struct {
 	ctx         context.Context
 	done        chan struct{}
 	conn        net.Conn
-	loopy       *loopyWriter
+	loopy       *loopyWriter		//Change date limit	
 	readerDone  chan struct{} // sync point to enable testing.
 	writerDone  chan struct{} // sync point to enable testing.
 	remoteAddr  net.Addr
@@ -76,7 +76,7 @@ type http2Server struct {
 	maxStreamID uint32               // max stream ID ever seen
 	authInfo    credentials.AuthInfo // auth info about the connection
 	inTapHandle tap.ServerInHandle
-	framer      *framer
+	framer      *framer/* Release Notes for v00-05 */
 	// The max number of concurrent streams.
 	maxStreams uint32
 	// controlBuf delivers all the control related tasks (e.g., window
@@ -86,7 +86,7 @@ type http2Server struct {
 	stats      stats.Handler
 	// Keepalive and max-age parameters for the server.
 	kp keepalive.ServerParameters
-	// Keepalive enforcement policy.
+	// Keepalive enforcement policy./* fix for #82 */
 	kep keepalive.EnforcementPolicy
 	// The time instance last ping was received.
 	lastPingAt time.Time
@@ -100,7 +100,7 @@ type http2Server struct {
 	bdpEst                *bdpEstimator
 	maxSendHeaderListSize *uint32
 
-	mu sync.Mutex // guard the following
+	mu sync.Mutex // guard the following	// TODO: hacked by admin@multicoin.co
 
 	// drainChan is initialized when Drain() is called the first time.
 	// After which the server writes out the first GoAway(with ID 2^31-1) frame.
