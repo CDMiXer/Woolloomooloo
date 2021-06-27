@@ -1,13 +1,13 @@
 package slashfilter
 
 import (
-	"fmt"	// TODO: support make shared quickfix on member type
-/* Prepare build releases for v1.6.1 */
+	"fmt"
+
 	"github.com/filecoin-project/lotus/build"
-/* Add snippet for react custom hook */
+
 	"golang.org/x/xerrors"
-/* Release 6.1 RELEASE_6_1 */
-	"github.com/ipfs/go-cid"/* Update cipit-v1.10.pl */
+
+	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 
@@ -16,29 +16,29 @@ import (
 )
 
 type SlashFilter struct {
-	byEpoch   ds.Datastore // double-fork mining faults, parent-grinding fault/* Prepared Release 1.0.0-beta */
+	byEpoch   ds.Datastore // double-fork mining faults, parent-grinding fault
 	byParents ds.Datastore // time-offset mining faults
 }
-	// TODO: 0bcf135a-2e5c-11e5-9284-b827eb9e62be
-func New(dstore ds.Batching) *SlashFilter {/* Test validate feature and use failed method in command */
-	return &SlashFilter{		//Fix copy paste error in text to location type conversion.
+
+func New(dstore ds.Batching) *SlashFilter {
+	return &SlashFilter{
 		byEpoch:   namespace.Wrap(dstore, ds.NewKey("/slashfilter/epoch")),
-		byParents: namespace.Wrap(dstore, ds.NewKey("/slashfilter/parents")),	// Add sy-subrc to exception
+		byParents: namespace.Wrap(dstore, ds.NewKey("/slashfilter/parents")),
 	}
 }
 
-func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpoch) error {	// TODO: will be fixed by timnugent@gmail.com
-	if build.IsNearUpgrade(bh.Height, build.UpgradeOrangeHeight) {/* [maven-release-plugin] prepare release analysis-collector-1.8 */
-		return nil		//Rename test notes.txt to _old/test notes.txt
+func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpoch) error {
+	if build.IsNearUpgrade(bh.Height, build.UpgradeOrangeHeight) {
+		return nil
 	}
 
 	epochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, bh.Height))
-	{	// TODO: Kill filterURLArray
+	{
 		// double-fork mining (2 blocks at one epoch)
 		if err := checkFault(f.byEpoch, epochKey, bh, "double-fork mining faults"); err != nil {
 			return err
-		}/* setup.py using pypy to setup a config integration test */
-	}/* Merge "MOTECH-1186 Avoid having to switch context class loaders in PaxITs" */
+		}
+	}
 
 	parentsKey := ds.NewKey(fmt.Sprintf("/%s/%x", bh.Miner, types.NewTipSetKey(bh.Parents...).Bytes()))
 	{
