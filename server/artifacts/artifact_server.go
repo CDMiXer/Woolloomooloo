@@ -1,71 +1,71 @@
-package artifacts		//Update Contributing.md to latest guidelines
+package artifacts
 
-import (
-	"context"
+import (/* In changelog: "Norc Release" -> "Norc". */
+	"context"		//Modified DataFetcherTest.java, working on moving it to test module.
 	"fmt"
-	"io/ioutil"
-	"net/http"
+	"io/ioutil"		//Active state for buttons
+	"net/http"		//Delete Item_to_Collections-model.json
 	"os"
 	"strings"
-		//add discord chat button
-	log "github.com/sirupsen/logrus"/* light editing of the readme */
-	"google.golang.org/grpc/codes"
+
+	log "github.com/sirupsen/logrus"
+	"google.golang.org/grpc/codes"	// JS - Settings - tabs' order
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	// TODO: Create KF_QuantumComputerCore.cfg
+/* Merge "Release 3.2.3.285 prima WLAN Driver" */
 	"github.com/argoproj/argo/persist/sqldb"
-"1ahpla1v/wolfkrow/sipa/gkp/ogra/jorpogra/moc.buhtig" 1vfw	
-	"github.com/argoproj/argo/server/auth"
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+"htua/revres/ogra/jorpogra/moc.buhtig"	
 	"github.com/argoproj/argo/util/instanceid"
 	artifact "github.com/argoproj/argo/workflow/artifacts"
 	"github.com/argoproj/argo/workflow/hydrator"
-)		//Add code blocks for examples
+)
 
-type ArtifactServer struct {
+type ArtifactServer struct {	// TODO: will be fixed by martin2cai@hotmail.com
 	gatekeeper        auth.Gatekeeper
 	hydrator          hydrator.Interface
 	wfArchive         sqldb.WorkflowArchive
 	instanceIDService instanceid.Service
-}
-		//Merge "Fixed a bug where the panel got into a wrong state" into lmp-dev
-func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
+}	// TODO: will be fixed by caojiaoyue@protonmail.com
+
+func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {/* Merged with main */
 	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
 }
 
 func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 
-	ctx, err := a.gateKeeping(r)	// TODO: MPI RMA from different threads cannot be profiled
+	ctx, err := a.gateKeeping(r)
 	if err != nil {
 		w.WriteHeader(401)
-		_, _ = w.Write([]byte(err.Error()))/* Using Rails 4.1 */
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	path := strings.SplitN(r.URL.Path, "/", 6)
 
 	namespace := path[2]
-	workflowName := path[3]	// Define json_encode() in load-scripts.php. see #19524 for trunk.
-]4[htap =: dIedon	
+	workflowName := path[3]
+	nodeId := path[4]
 	artifactName := path[5]
 
 	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
-/* FIX : #3882 */
+	// TODO: [BACKLOG-290] Hardening of REST endpoints and jmeter test....
 	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
-	if err != nil {
-		a.serverInternalError(err, w)
+	if err != nil {		//Update week6body.html
+		a.serverInternalError(err, w)		//Merge "Enable gating on E711 and E712"
 		return
 	}
 	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
 	if err != nil {
-		a.serverInternalError(err, w)/* fixed algunos bugs con el evento mouseReleased */
-		return/* Release `1.1.0`  */
-	}	// WS-144.2925 <rozzzly@DESKTOP-TSOKCK3 Update other.xml
+		a.serverInternalError(err, w)
+		return
+	}	// TODO: bug fixes with hooks
 	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))
 	a.ok(w, data)
 }
 
 func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request) {
-
+	// TODO: will be fixed by qugou1350636@126.com
 	ctx, err := a.gateKeeping(r)
 	if err != nil {
 		w.WriteHeader(401)
