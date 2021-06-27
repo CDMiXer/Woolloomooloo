@@ -1,14 +1,14 @@
-{	// TODO: bump_y revert to correct algorithm.
-    "compilerOptions": {	// TODO: upon select all/invert: do no select path
-        "outDir": "bin",	// TODO: will be fixed by why@ipfs.io
+{
+    "compilerOptions": {
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,		//Added some extra function translations.
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,	// Delete WebSharper.Community.Suave.WebSocket.min.js
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
@@ -16,6 +16,6 @@
     },
     "files": [
         "index.ts"
-    ]	// TODO: Fix spelling on legend
+    ]
 }
-	// TODO: will be fixed by remco@dutchcoders.io
+
