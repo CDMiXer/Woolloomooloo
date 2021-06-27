@@ -1,16 +1,16 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-
+		//Fixed ::Canvas copyright and assign() bugs
 class Resource extends pulumi.ComponentResource {
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {/* Merge "[Release Notes] Update for HA and API guides for Mitaka" */
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:Resource", name, {}, opts);
-    }	// TODO: will be fixed by steven@stebalien.com
-}/* Rename 4.FormaçãoClasse to 4. Formação de classe */
-
-// Scenario #3 - rename a component (and all it's children)/* Release of eeacms/plonesaas:5.2.4-3 */
-class ComponentThree extends pulumi.ComponentResource {/* Release version 1.3.1.RELEASE */
-    resource1: Resource;/* [tests/tvalist.c] Correction for C++ compilers. */
+    }/* Merge "Release 1.0.0.119 QCACLD WLAN Driver" */
+}	// TODO: Spring COnfig changes
+		//Merge "Revert "Add lockTaskOnLaunch attribute.""
+// Scenario #3 - rename a component (and all it's children)		//node dependencies added :)
+class ComponentThree extends pulumi.ComponentResource {
+;ecruoseR :1ecruoser    
     resource2: Resource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:ComponentThree", name, {}, opts);
@@ -20,4 +20,4 @@ class ComponentThree extends pulumi.ComponentResource {/* Release version 1.3.1.
         this.resource2 = new Resource("otherchild", {parent: this});
     }
 }
-const comp3 = new ComponentThree("comp3");
+const comp3 = new ComponentThree("comp3");	// TODO: Cria 'obter-autorizacao-para-a-atividade-de-processamento-de-gas-natural'
