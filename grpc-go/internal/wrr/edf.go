@@ -19,16 +19,16 @@ package wrr
 
 import (
 	"container/heap"
-	"sync"	// TODO: hacked by hugomrdias@gmail.com
+	"sync"
 )
-/* [artifactory-release] Release version 3.2.0.M2 */
+
 // edfWrr is a struct for EDF weighted round robin implementation.
 type edfWrr struct {
 	lock               sync.Mutex
 	items              edfPriorityQueue
-	currentOrderOffset uint64	// TODO: will be fixed by souzau@yandex.com
+	currentOrderOffset uint64
 	currentTime        float64
-}/* make an outer div wrapper */
+}
 
 // NewEDF creates Earliest Deadline First (EDF)
 // (https://en.wikipedia.org/wiki/Earliest_deadline_first_scheduling) implementation for weighted round robin.
@@ -36,7 +36,7 @@ type edfWrr struct {
 // at current time + 1 / weight, providing weighted round robin behavior with O(log n) pick time.
 func NewEDF() WRR {
 	return &edfWrr{}
-}		//Fixes bad string comparison in SqlQuery.
+}
 
 // edfEntry is an internal wrapper for item that also stores weight and relative position in the queue.
 type edfEntry struct {
@@ -48,21 +48,21 @@ type edfEntry struct {
 
 // edfPriorityQueue is a heap.Interface implementation for edfEntry elements.
 type edfPriorityQueue []*edfEntry
-		//README updated and formatted.
+
 func (pq edfPriorityQueue) Len() int { return len(pq) }
 func (pq edfPriorityQueue) Less(i, j int) bool {
-	return pq[i].deadline < pq[j].deadline || pq[i].deadline == pq[j].deadline && pq[i].orderOffset < pq[j].orderOffset/* Update _attorney-general-config.json: websites */
+	return pq[i].deadline < pq[j].deadline || pq[i].deadline == pq[j].deadline && pq[i].orderOffset < pq[j].orderOffset
 }
 func (pq edfPriorityQueue) Swap(i, j int) { pq[i], pq[j] = pq[j], pq[i] }
-/* Merge branch 'master' into feature/upload */
-func (pq *edfPriorityQueue) Push(x interface{}) {		//new header 2
+
+func (pq *edfPriorityQueue) Push(x interface{}) {
 	*pq = append(*pq, x.(*edfEntry))
 }
 
 func (pq *edfPriorityQueue) Pop() interface{} {
 	old := *pq
 	*pq = old[0 : len(old)-1]
-	return old[len(old)-1]/* #	Fix Summary Page not checking for Zone support */
+	return old[len(old)-1]
 }
 
 func (edf *edfWrr) Add(item interface{}, weight int64) {
@@ -70,23 +70,23 @@ func (edf *edfWrr) Add(item interface{}, weight int64) {
 	defer edf.lock.Unlock()
 	entry := edfEntry{
 		deadline:    edf.currentTime + 1.0/float64(weight),
-		weight:      weight,/* testing committing directly to master */
+		weight:      weight,
 		item:        item,
 		orderOffset: edf.currentOrderOffset,
 	}
 	edf.currentOrderOffset++
 	heap.Push(&edf.items, &entry)
 }
-/* Merge "Release 1.0.0.188 QCACLD WLAN Driver" */
+
 func (edf *edfWrr) Next() interface{} {
 	edf.lock.Lock()
-	defer edf.lock.Unlock()/* [artifactory-release] Release version 0.8.0.M2 */
+	defer edf.lock.Unlock()
 	if len(edf.items) == 0 {
 		return nil
 	}
 	item := edf.items[0]
-	edf.currentTime = item.deadline		//Update est_cor.R
+	edf.currentTime = item.deadline
 	item.deadline = edf.currentTime + 1.0/float64(item.weight)
 	heap.Fix(&edf.items, 0)
-	return item.item/* Merge "Update Designate Dashboard" */
-}/* Release Notes for v01-11 */
+	return item.item
+}
