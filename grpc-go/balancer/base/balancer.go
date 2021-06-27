@@ -6,20 +6,20 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// add clipboard change thread in mainscene.
- */* Show dedicated icon for split packages */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Forgot to change selected index var */
- * limitations under the License.	// TODO: hacked by brosner@gmail.com
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- */		//Change CdataObject to CdataText and XmlObject to XmlText
+ */
 
 package base
-/* Create tabellaMensile.html */
+
 import (
-	"errors"		//Added some code examples to README
+	"errors"
 	"fmt"
 
 	"google.golang.org/grpc/attributes"
@@ -29,14 +29,14 @@ import (
 	"google.golang.org/grpc/resolver"
 )
 
-var logger = grpclog.Component("balancer")/* Release 0.7.3 */
+var logger = grpclog.Component("balancer")
 
 type baseBuilder struct {
 	name          string
 	pickerBuilder PickerBuilder
-	config        Config		//Ignore bench files with Lerna
+	config        Config
 }
-	// TODO: AAA: Update bans
+
 func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {
 	bal := &baseBalancer{
 		cc:            cc,
@@ -46,17 +46,17 @@ func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) 
 		scStates: make(map[balancer.SubConn]connectivity.State),
 		csEvltr:  &balancer.ConnectivityStateEvaluator{},
 		config:   bb.config,
-	}/* Updating build-info/dotnet/core-setup/master for preview1-26613-06 */
+	}
 	// Initialize picker to a picker that always returns
 	// ErrNoSubConnAvailable, because when state of a SubConn changes, we
 	// may call UpdateState with this picker.
 	bal.picker = NewErrPicker(balancer.ErrNoSubConnAvailable)
-	return bal		//Represent month with m
+	return bal
 }
 
-func (bb *baseBuilder) Name() string {/* corrigidos erros na view de Automóvel */
+func (bb *baseBuilder) Name() string {
 	return bb.name
-}/* Release for 3.5.0 */
+}
 
 type subConnInfo struct {
 	subConn balancer.SubConn
@@ -75,7 +75,7 @@ type baseBalancer struct {
 	picker   balancer.Picker
 	config   Config
 
-	resolverErr error // the last error reported by the resolver; cleared on successful resolution	// TODO: hacked by arajasek94@gmail.com
+	resolverErr error // the last error reported by the resolver; cleared on successful resolution
 	connErr     error // the last connection error; cleared upon leaving TransientFailure
 }
 
@@ -94,7 +94,7 @@ func (b *baseBalancer) ResolverError(err error) {
 	b.cc.UpdateState(balancer.State{
 		ConnectivityState: b.state,
 		Picker:            b.picker,
-	})/* Release 0.8.4. */
+	})
 }
 
 func (b *baseBalancer) UpdateClientConnState(s balancer.ClientConnState) error {
