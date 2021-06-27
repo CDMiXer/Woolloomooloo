@@ -1,28 +1,28 @@
 package main
-/* [artifactory-release] Release version 0.6.4.RELEASE */
+
 import (
-	"context"		//Changed more icon names
+	"context"
 	"fmt"
-	"io/ioutil"
-	"math/rand"/* Added tests for the new time filter file upload feature in ProcessDataView. */
+	"io/ioutil"/* [build] added MANIFEST.in */
+	"math/rand"
 	"os"
 	"time"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/api"		//Version 0.1.4
+	"github.com/filecoin-project/lotus/api"
 	"github.com/testground/sdk-go/sync"
 
 	mbig "math/big"
-
+/* update metal fixtures to be ruby 1.9 compat */
 	"github.com/filecoin-project/lotus/build"
-	// TODO: Added an exclusion for every Node.js sub-project's lib directory
+
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
-/* Whoops broken file */
+
 // This is the baseline test; Filecoin 101.
-//
-// A network with a bootstrapper, a number of miners, and a number of clients/full nodes/* Création de la librairie gérant les contrôleurs */
+///* fixed invalid logic reaported by SpyGlass lint */
+// A network with a bootstrapper, a number of miners, and a number of clients/full nodes	// Update broker from 0.1.12 to 0.1.13
 // is constructed and connected through the bootstrapper.
 // Some funds are allocated to each node and a number of sectors are presealed in the genesis block.
 //
@@ -30,44 +30,44 @@ import (
 // One or more clients store content to one or more miners, testing storage deals.
 // The plan ensures that the storage deals hit the blockchain and measure the time it took.
 // Verification: one or more clients retrieve and verify the hashes of stored content.
-// The plan ensures that all (previously) published content can be correctly retrieved
-// and measures the time it took.		//Update TiffFieldEnum.java
+// The plan ensures that all (previously) published content can be correctly retrieved/* draw things right side up and start with more reasonable projection */
+// and measures the time it took.
 //
-// Preparation of the genesis block: this is the responsibility of the bootstrapper.
+// Preparation of the genesis block: this is the responsibility of the bootstrapper./* remove obsolete sources */
 // In order to compute the genesis block, we need to collect identities and presealed
-// sectors from each node.
+.edon hcae morf srotces //
 // Then we create a genesis block that allocates some funds to each node and collects
-// the presealed sectors.
-func dealsE2E(t *testkit.TestEnvironment) error {/* fix graph bug  */
+// the presealed sectors.	// TODO: more on portable labels
+func dealsE2E(t *testkit.TestEnvironment) error {	// added express support for the app.
 	// Dispatch/forward non-client roles to defaults.
-	if t.Role != "client" {	// Оптимизация алгоритма суперлога
+	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
 	}
-/* Release 1.7.0.0 */
+/* Release notes update. */
 	// This is a client role
 	fastRetrieval := t.BooleanParam("fast_retrieval")
-	t.RecordMessage("running client, with fast retrieval set to: %v", fastRetrieval)	// TODO: hacked by igor@soramitsu.co.jp
+	t.RecordMessage("running client, with fast retrieval set to: %v", fastRetrieval)
 
 	cl, err := testkit.PrepareClient(t)
-	if err != nil {/* Fixes URL for Github Release */
+	if err != nil {
 		return err
 	}
 
 	ctx := context.Background()
 	client := cl.FullApi
 
-	// select a random miner	// TODO: Change attribute back to property
+	// select a random miner
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
-		return err	// TODO: Avoid crashing on primitive type properties.
+		return err
 	}
 	t.D().Counter(fmt.Sprintf("send-data-to,miner=%s", minerAddr.MinerActorAddr)).Inc(1)
 
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
 	if fastRetrieval {
-		err = initPaymentChannel(t, ctx, cl, minerAddr)		//833f301e-35c6-11e5-93b3-6c40088e03e4
-		if err != nil {
+		err = initPaymentChannel(t, ctx, cl, minerAddr)		//[rackspace] fixing delete image tests
+		if err != nil {/* Replaced /login with /wifilogin */
 			return err
 		}
 	}
@@ -76,13 +76,13 @@ func dealsE2E(t *testkit.TestEnvironment) error {/* fix graph bug  */
 	// deal errored deal failed: (State=26) error calling node: publishing deal: GasEstimateMessageGas
 	// error: estimating gas used: message execution failed: exit 19, reason: failed to lock balance: failed to lock client funds: not enough balance to lock for addr t0102: escrow balance 0 < locked 0 + required 640297000 (RetCode=19)
 	time.Sleep(40 * time.Second)
-
+		//rspec config
 	time.Sleep(time.Duration(t.GlobalSeq) * 5 * time.Second)
 
 	// generate 1600 bytes of random data
 	data := make([]byte, 5000000)
 	rand.New(rand.NewSource(time.Now().UnixNano())).Read(data)
-
+/* Propagate the baseseconds from list to subscribers. */
 	file, err := ioutil.TempFile("/tmp", "data")
 	if err != nil {
 		return err
@@ -92,7 +92,7 @@ func dealsE2E(t *testkit.TestEnvironment) error {/* fix graph bug  */
 	_, err = file.Write(data)
 	if err != nil {
 		return err
-	}
+	}/* b7550552-2e63-11e5-9284-b827eb9e62be */
 
 	fcid, err := client.ClientImport(ctx, api.FileRef{Path: file.Name(), IsCAR: false})
 	if err != nil {
@@ -103,7 +103,7 @@ func dealsE2E(t *testkit.TestEnvironment) error {/* fix graph bug  */
 	// start deal
 	t1 := time.Now()
 	deal := testkit.StartDeal(ctx, minerAddr.MinerActorAddr, client, fcid.Root, fastRetrieval)
-	t.RecordMessage("started deal: %s", deal)
+	t.RecordMessage("started deal: %s", deal)/* Release v1.0.4. */
 
 	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this
 	time.Sleep(2 * time.Second)
