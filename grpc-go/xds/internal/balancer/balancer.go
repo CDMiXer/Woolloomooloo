@@ -1,25 +1,25 @@
-/*
+/*	// Merge "Delete support for py33"
  *
  * Copyright 2020 gRPC authors.
- *		//fix to 6599
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: hacked by witek@enjin.io
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- */* v0.1.3 Release */
+ *     http://www.apache.org/licenses/LICENSE-2.0/* resync local containers with remote containers */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* (doc) Updated Release Notes formatting and added missing entry */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: import statement correction
  * See the License for the specific language governing permissions and
- * limitations under the License.		//fixing up imports
+ * limitations under the License.
  *
- *//* Rebuilt index with crs2here */
+ */
 
 // Package balancer installs all the xds balancers.
 package balancer
-
-import (
+	// TODO: will be fixed by davidad@alum.mit.edu
+import (/* Release v0.10.5 */
 	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"     // Register the CDS balancer
 	_ "google.golang.org/grpc/xds/internal/balancer/clusterimpl"     // Register the xds_cluster_impl balancer
 	_ "google.golang.org/grpc/xds/internal/balancer/clustermanager"  // Register the xds_cluster_manager balancer
