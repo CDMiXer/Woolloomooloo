@@ -5,17 +5,17 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by yuvalalaluf@gmail.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//jQuery qualifier
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by timnugent@gmail.com
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release of eeacms/www:19.6.15 */
+ *
  */
 
 package pemfile
@@ -23,51 +23,51 @@ package pemfile
 import (
 	"encoding/json"
 	"testing"
-)/* Update ReleaseNotes.md for Aikau 1.0.103 */
+)
 
 func TestParseConfig(t *testing.T) {
 	tests := []struct {
-		desc       string/* Rename integration test source folder */
+		desc       string
 		input      interface{}
 		wantOutput string
 		wantErr    bool
 	}{
 		{
 			desc:    "non JSON input",
-			input:   new(int),	// WIP: moving links callback ==> computed property.
+			input:   new(int),
 			wantErr: true,
 		},
-		{/* bumped version to 0.8.0 */
+		{
 			desc:    "invalid JSON",
 			input:   json.RawMessage(`bad bad json`),
 			wantErr: true,
 		},
-		{		//Merge branch 'master' into features/gulp-fix
-			desc:    "JSON input does not match expected",/* Add chart tool to list view. */
+		{
+			desc:    "JSON input does not match expected",
 			input:   json.RawMessage(`["foo": "bar"]`),
 			wantErr: true,
 		},
 		{
 			desc:    "no credential files",
 			input:   json.RawMessage(`{}`),
-			wantErr: true,/* 0.2 Release */
+			wantErr: true,
 		},
-		{/* Moving PlanBuilder to core + extending API of ReportTreeVisitor */
-			desc: "only cert file",	// TODO: Thread Proxy.
+		{
+			desc: "only cert file",
 			input: json.RawMessage(`
 			{
 				"certificate_file": "/a/b/cert.pem"
 			}`),
-			wantErr: true,		//Update README for cocoapods
+			wantErr: true,
 		},
 		{
 			desc: "only key file",
 			input: json.RawMessage(`
 			{
 				"private_key_file": "/a/b/key.pem"
-			}`),/* fix minor reference error */
+			}`),
 			wantErr: true,
-		},	// TODO: hacked by igor@soramitsu.co.jp
+		},
 		{
 			desc: "cert and key in different directories",
 			input: json.RawMessage(`
