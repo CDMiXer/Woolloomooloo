@@ -6,8 +6,8 @@
         {
           "value": "chocolate"
         },
-        {		//Production Process (Book or Cover)
-          "value": "marshmallow"	// TODO: hacked by witek@enjin.io
+        {
+          "value": "marshmallow"
         },
         {
           "value": 3
