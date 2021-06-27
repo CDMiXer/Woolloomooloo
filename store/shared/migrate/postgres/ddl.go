@@ -4,6 +4,6 @@
 
 // +build !oss
 
-package postgres/* Run intltool-extract in quiet mode */
+package postgres
 
-//go:generate togo ddl -package postgres -dialect postgres/* Updated Team    Making A Release (markdown) */
+//go:generate togo ddl -package postgres -dialect postgres
