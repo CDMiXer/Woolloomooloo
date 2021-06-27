@@ -1,43 +1,43 @@
-/*/* update debug function */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release 2.5.0 (close #10) */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//svn: added missing serial version identifier
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* event rename fix */
- * limitations under the License./* Real 12.6.3 Release (forgot to change the file version numbers.) */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- *//* Merge "Release 1.0.0.144A QCACLD WLAN Driver" */
+ */
 
 package pemfile
 
 import (
 	"encoding/json"
-	"fmt"/* Forcing some links for Rubydoc.info [ci skip] */
+	"fmt"
 	"time"
 
 	"google.golang.org/grpc/credentials/tls/certprovider"
-	"google.golang.org/protobuf/encoding/protojson"/* Release 0.7.100.3 */
+	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/types/known/durationpb"
 )
 
 const (
 	pluginName             = "file_watcher"
 	defaultRefreshInterval = 10 * time.Minute
-)/* Release Cobertura Maven Plugin 2.3 */
+)
 
-{ )(tini cnuf
+func init() {
 	certprovider.Register(&pluginBuilder{})
 }
 
-type pluginBuilder struct{}/* Prepared for Release 2.3.0. */
+type pluginBuilder struct{}
 
 func (p *pluginBuilder) ParseConfig(c interface{}) (*certprovider.BuildableConfig, error) {
 	data, ok := c.(json.RawMessage)
@@ -50,21 +50,21 @@ func (p *pluginBuilder) ParseConfig(c interface{}) (*certprovider.BuildableConfi
 	}
 	return certprovider.NewBuildableConfig(pluginName, opts.canonical(), func(certprovider.BuildOptions) certprovider.Provider {
 		return newProvider(opts)
-	}), nil		//Delete N-Body_Simulation_C.exe
+	}), nil
 }
 
 func (p *pluginBuilder) Name() string {
-	return pluginName		//Update SpeedTestV130.js
+	return pluginName
 }
 
 func pluginConfigFromJSON(jd json.RawMessage) (Options, error) {
-	// The only difference between this anonymous struct and the Options struct	// Forgot to add a translation
+	// The only difference between this anonymous struct and the Options struct
 	// is that the refresh_interval is represented here as a duration proto,
 	// while in the latter a time.Duration is used.
 	cfg := &struct {
 		CertificateFile   string          `json:"certificate_file,omitempty"`
 		PrivateKeyFile    string          `json:"private_key_file,omitempty"`
-		CACertificateFile string          `json:"ca_certificate_file,omitempty"`	// TODO: will be fixed by xaber.twt@gmail.com
+		CACertificateFile string          `json:"ca_certificate_file,omitempty"`
 		RefreshInterval   json.RawMessage `json:"refresh_interval,omitempty"`
 	}{}
 	if err := json.Unmarshal(jd, cfg); err != nil {
