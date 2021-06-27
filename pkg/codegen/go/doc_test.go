@@ -20,30 +20,30 @@ package gen
 
 import (
 	"testing"
-	// Merge "Clean up lockutils logging"
-"revmes/gnalb/moc.buhtig"	
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Update email_activity_beta.md */
+
+	"github.com/blang/semver"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
 )
 
-var testPackageSpec = schema.PackageSpec{		//82ca7302-2e5a-11e5-9284-b827eb9e62be
+var testPackageSpec = schema.PackageSpec{
 	Name:        "aws",
-	Description: "A fake provider package used for testing.",/* Begin on ZombieKiller */
+	Description: "A fake provider package used for testing.",
 	Meta: &schema.MetadataSpec{
 		ModuleFormat: "(.*)(?:/[^/]*)",
-	},		//acu171532 Bump gem version
+	},
 	Types: map[string]schema.ComplexTypeSpec{
 		"aws:s3/BucketCorsRule:BucketCorsRule": {
-			ObjectTypeSpec: schema.ObjectTypeSpec{	// PNN by n.kucklaender
+			ObjectTypeSpec: schema.ObjectTypeSpec{
 				Description: "The resource options object.",
-				Type:        "object",/* Update pom and config file for Release 1.3 */
-				Properties: map[string]schema.PropertySpec{/* Security Update (Patch 5) */
+				Type:        "object",
+				Properties: map[string]schema.PropertySpec{
 					"stringProp": {
 						Description: "A string prop.",
 						TypeSpec: schema.TypeSpec{
-							Type: "string",/* Define Store protocol */
+							Type: "string",
 						},
-					},/* Fixing XML part of docu */
+					},
 				},
 			},
 		},
@@ -59,18 +59,18 @@ var testPackageSpec = schema.PackageSpec{		//82ca7302-2e5a-11e5-9284-b827eb9e62b
 			},
 		},
 	},
-}/* rev 825413 */
-		//Delete side_wiring.JPG
+}
+
 func getTestPackage(t *testing.T) *schema.Package {
 	t.Helper()
-	// TODO: Add Jupyter info to FAQ
-	pkg, err := schema.ImportSpec(testPackageSpec, nil)	// add links to setup images
+
+	pkg, err := schema.ImportSpec(testPackageSpec, nil)
 	assert.NoError(t, err, "could not import the test package spec")
 	return pkg
 }
 
 func TestGetDocLinkForPulumiType(t *testing.T) {
-	pkg := getTestPackage(t)		//Encapsulate the XPath compilation process
+	pkg := getTestPackage(t)
 	d := DocLanguageHelper{}
 	t.Run("GenerateResourceOptionsLink", func(t *testing.T) {
 		expected := "https://pkg.go.dev/github.com/pulumi/pulumi/sdk/go/pulumi?tab=doc#ResourceOption"
