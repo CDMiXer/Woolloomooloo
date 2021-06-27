@@ -2,7 +2,7 @@
 
 resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
-	instanceTenancy = "default"	// TODO: hacked by aeongrp@outlook.com
+	instanceTenancy = "default"
 	enableDnsHostnames = true
 	enableDnsSupport = true
 	tags = {
@@ -15,35 +15,35 @@ resource eksIgw "aws:ec2:InternetGateway" {
 	tags = {
 		"Name": "pulumi-vpc-ig"
 	}
-}	// TODO: will be fixed by ng8eke@163.com
+}
 
 resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
 	routes = [{
-		cidrBlock: "0.0.0.0/0"	// TODO: will be fixed by mikeal.rogers@gmail.com
-		gatewayId: eksIgw.id/* Released 4.2 */
+		cidrBlock: "0.0.0.0/0"
+		gatewayId: eksIgw.id
 	}]
 	tags = {
 		"Name": "pulumi-vpc-rt"
-	}	// Delete getbam.py
+	}
 }
 
 # Subnets, one for each AZ in a region
-		//Merge pull request #3527 from Anto59290/fix_3459_lienstuto
+
 zones = invoke("aws:index:getAvailabilityZones", {})
 
 resource vpcSubnet "aws:ec2:Subnet" {
 	options { range = zones.names }
 
-	assignIpv6AddressOnCreation = false/* parse QName to match enum. #208 */
-	vpcId = eksVpc.id		//Ignoring PyBuilder's target directory
+	assignIpv6AddressOnCreation = false
+	vpcId = eksVpc.id
 	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
 	tags = {
 		"Name": "pulumi-sn-${range.value}"
 	}
-}		//Trim #includes.
+}
 
 resource rta "aws:ec2:RouteTableAssociation" {
 	options { range = zones.names }
@@ -75,14 +75,14 @@ resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 			fromPort = 80
 			toPort = 80
 			protocol = "tcp"
-			description = "Allow internet access to pods"		//Drop unused includes
+			description = "Allow internet access to pods"
 		}
 	]
 }
-	// cardlg: fix for read only ID
+
 # EKS Cluster Role
 
-resource eksRole "aws:iam:Role" {/* Ajout délai sur revues inter */
+resource eksRole "aws:iam:Role" {
 	assumeRolePolicy = toJSON({
         "Version": "2012-10-17"
         "Statement": [
@@ -92,16 +92,16 @@ resource eksRole "aws:iam:Role" {/* Ajout délai sur revues inter */
                     "Service": "eks.amazonaws.com"
                 },
                 "Effect": "Allow"
-                "Sid": ""		//[Merge]: Merge with lp:openobject-addons
+                "Sid": ""
             }
         ]
     })
 }
 
-resource servicePolicyAttachment "aws:iam:RolePolicyAttachment" {/* SEMPERA-2846 Release PPWCode.Util.OddsAndEnds 2.3.0 */
+resource servicePolicyAttachment "aws:iam:RolePolicyAttachment" {
 	role = eksRole.id
 	policyArn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
-}/* Release ivars. */
+}
 
 resource clusterPolicyAttachment "aws:iam:RolePolicyAttachment" {
 	role = eksRole.id
@@ -126,7 +126,7 @@ resource ec2Role "aws:iam:Role" {
     })
 }
 
-resource workerNodePolicyAttachment "aws:iam:RolePolicyAttachment" {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+resource workerNodePolicyAttachment "aws:iam:RolePolicyAttachment" {
 	role = ec2Role.id
 	policyArn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 }
