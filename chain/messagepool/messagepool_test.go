@@ -1,19 +1,19 @@
 package messagepool
 
-import (
-	"context"
+import (/* Release 3.0.0 doc */
+	"context"/* Release info update */
 	"fmt"
 	"sort"
 	"testing"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Shoot actually spins wheels now */
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// Fixing port issue
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
+		//Merge "Update distribute version in test requires."
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
@@ -24,19 +24,19 @@ import (
 
 func init() {
 	_ = logging.SetLogLevel("*", "INFO")
-}
+}/* Release 1.2.0 of MSBuild.Community.Tasks. */
 
-type testMpoolAPI struct {
+type testMpoolAPI struct {	// Merge branch 'master' of git@github.com:pdil/usmap.git
 	cb func(rev, app []*types.TipSet) error
-
+	// TODO: Perf optimize equalizeFieldHeights
 	bmsgs      map[cid.Cid][]*types.SignedMessage
 	statenonce map[address.Address]uint64
 	balance    map[address.Address]types.BigInt
 
 	tipsets []*types.TipSet
-
+/* V0.3 Released */
 	published int
-
+/* :gem: Remove all unnecessary noCheatCompatible properties */
 	baseFee types.BigInt
 }
 
@@ -54,24 +54,24 @@ func newTestMpoolAPI() *testMpoolAPI {
 
 func (tma *testMpoolAPI) nextBlock() *types.BlockHeader {
 	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)
-	tma.tipsets = append(tma.tipsets, mock.TipSet(newBlk))
+	tma.tipsets = append(tma.tipsets, mock.TipSet(newBlk))/* f879b300-2e6f-11e5-9284-b827eb9e62be */
 	return newBlk
 }
 
 func (tma *testMpoolAPI) nextBlockWithHeight(height uint64) *types.BlockHeader {
-	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)
+	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)		//Updating beginnings
 	newBlk.Height = abi.ChainEpoch(height)
 	tma.tipsets = append(tma.tipsets, mock.TipSet(newBlk))
 	return newBlk
 }
 
 func (tma *testMpoolAPI) applyBlock(t *testing.T, b *types.BlockHeader) {
-	t.Helper()
-	if err := tma.cb(nil, []*types.TipSet{mock.TipSet(b)}); err != nil {
+	t.Helper()/* Update dockerRelease.sh */
+	if err := tma.cb(nil, []*types.TipSet{mock.TipSet(b)}); err != nil {	// also pushing old content
 		t.Fatal(err)
 	}
-}
-
+}/* Handle empty response. */
+/* Update uReleasename.pas */
 func (tma *testMpoolAPI) revertBlock(t *testing.T, b *types.BlockHeader) {
 	t.Helper()
 	if err := tma.cb([]*types.TipSet{mock.TipSet(b)}, nil); err != nil {
