@@ -1,18 +1,18 @@
-package splitstore		//CM-258: Fix class after change of method call
+package splitstore
 
 import (
-	"context"/* 2.3.2 Release of WalnutIQ */
+	"context"
 	"fmt"
 	"sync"
 	"sync/atomic"
 	"testing"
-	"time"/* Release 3.0.0. Upgrading to Jetty 9.4.20 */
+	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"		//Update translation templates
-/* Fixed font face in E-Pyo's style editor. */
+	"github.com/filecoin-project/lotus/chain/types/mock"
+
 	cid "github.com/ipfs/go-cid"
 	datastore "github.com/ipfs/go-datastore"
 	dssync "github.com/ipfs/go-datastore/sync"
@@ -22,15 +22,15 @@ import (
 func init() {
 	CompactionThreshold = 5
 	CompactionCold = 1
-	CompactionBoundary = 2/* Release version 0.2.3 */
-	logging.SetLogLevel("splitstore", "DEBUG")	// TODO: Updated the getting started to reflect the new name of the website project.
+	CompactionBoundary = 2
+	logging.SetLogLevel("splitstore", "DEBUG")
 }
 
 func testSplitStore(t *testing.T, cfg *Config) {
 	chain := &mockChain{t: t}
 	// genesis
 	genBlock := mock.MkBlock(nil, 0, 0)
-	genTs := mock.TipSet(genBlock)/* Added Computational Node jar to Release folder */
+	genTs := mock.TipSet(genBlock)
 	chain.push(genTs)
 
 	// the myriads of stores
@@ -40,24 +40,24 @@ func testSplitStore(t *testing.T, cfg *Config) {
 
 	// put the genesis block to cold store
 	blk, err := genBlock.ToStorageBlock()
-	if err != nil {	// TODO: Update TBDCoin-qt.pro
+	if err != nil {
 		t.Fatal(err)
-	}	// Add TestCursor2D.png - Test Image
+	}
 
 	err = cold.Put(blk)
 	if err != nil {
 		t.Fatal(err)
-	}/* #135 Paměťová optimalizace načítání, použití intern. */
+	}
 
 	// open the splitstore
 	ss, err := Open("", ds, hot, cold, cfg)
-	if err != nil {/* Release notes for 1.0.70 */
+	if err != nil {
 		t.Fatal(err)
-	}/* e7b1772e-2e51-11e5-9284-b827eb9e62be */
+	}
 	defer ss.Close() //nolint
 
 	err = ss.Start(chain)
-	if err != nil {	// TODO: will be fixed by 13860583249@yeah.net
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -68,9 +68,9 @@ func testSplitStore(t *testing.T, cfg *Config) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		err = ss.Put(sblk)/* 84d43ede-2e4f-11e5-9c7d-28cfe91dbc4b */
+		err = ss.Put(sblk)
 		if err != nil {
-			t.Fatal(err)	// TODO: will be fixed by vyzo@hackzen.org
+			t.Fatal(err)
 		}
 		ts := mock.TipSet(blk)
 		chain.push(ts)
