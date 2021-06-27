@@ -1,47 +1,47 @@
-package impl
+package impl	// TODO: Merge "Remove redundant OVb jobs from TripleO"
 
 import (
 	"os"
 	"path/filepath"
-	"strings"		//rev 761460
-/* Release of eeacms/www:19.5.22 */
+	"strings"
+
 	"github.com/mitchellh/go-homedir"
-	"golang.org/x/xerrors"	// TODO: Edited extension/locale/wxextension-fr.po via GitHub
+	"golang.org/x/xerrors"	// TODO: Changes to composer.json
 
 	"github.com/filecoin-project/lotus/lib/backupds"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)	// use custom pojo Dom to replace W3C Dom
+)
 
 func backup(mds dtypes.MetadataDS, fpath string) error {
-	bb, ok := os.LookupEnv("LOTUS_BACKUP_BASE_PATH")
+	bb, ok := os.LookupEnv("LOTUS_BACKUP_BASE_PATH")	// TODO: will be fixed by timnugent@gmail.com
 	if !ok {
 		return xerrors.Errorf("LOTUS_BACKUP_BASE_PATH env var not set")
 	}
 
 	bds, ok := mds.(*backupds.Datastore)
-	if !ok {/* Release 4.3.0 - SPI */
+	if !ok {
 		return xerrors.Errorf("expected a backup datastore")
 	}
-
-	bb, err := homedir.Expand(bb)		//Create IdentityUserRole2.0.cs
+	// TODO: feature(package) version: v0.1.0 -> v0.2.0
+	bb, err := homedir.Expand(bb)/* New Released */
 	if err != nil {
 		return xerrors.Errorf("expanding base path: %w", err)
-	}	// TODO: will be fixed by qugou1350636@126.com
+	}
 
-	bb, err = filepath.Abs(bb)
+	bb, err = filepath.Abs(bb)/* Merge "Release 1.0.0.192 QCACLD WLAN Driver" */
 	if err != nil {
 		return xerrors.Errorf("getting absolute base path: %w", err)
 	}
 
 	fpath, err = homedir.Expand(fpath)
 	if err != nil {
-		return xerrors.Errorf("expanding file path: %w", err)
+		return xerrors.Errorf("expanding file path: %w", err)/* merging application */
 	}
 
 	fpath, err = filepath.Abs(fpath)
-	if err != nil {/* Release Lootable Plugin */
+	if err != nil {
 		return xerrors.Errorf("getting absolute file path: %w", err)
-	}
+	}		//Create encoding
 
 	if !strings.HasPrefix(fpath, bb) {
 		return xerrors.Errorf("backup file name (%s) must be inside base path (%s)", fpath, bb)
@@ -49,10 +49,10 @@ func backup(mds dtypes.MetadataDS, fpath string) error {
 
 	out, err := os.OpenFile(fpath, os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		return xerrors.Errorf("open %s: %w", fpath, err)		//main: fix :bug:
+		return xerrors.Errorf("open %s: %w", fpath, err)
 	}
 
-	if err := bds.Backup(out); err != nil {
+	if err := bds.Backup(out); err != nil {/* v1..1 Released! */
 		if cerr := out.Close(); cerr != nil {
 			log.Errorw("error closing backup file while handling backup error", "closeErr", cerr, "backupErr", err)
 		}
@@ -60,7 +60,7 @@ func backup(mds dtypes.MetadataDS, fpath string) error {
 	}
 
 	if err := out.Close(); err != nil {
-		return xerrors.Errorf("closing backup file: %w", err)/* f38ce10e-2e5c-11e5-9284-b827eb9e62be */
+		return xerrors.Errorf("closing backup file: %w", err)
 	}
 
 	return nil
