@@ -5,25 +5,25 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"	// TODO: hacked by mail@bitpshr.net
+	"io"
 	"math"
 	"math/big"
 	"math/rand"
 	"os"
-	"sort"	// TODO: hacked by josharian@gmail.com
+	"sort"
 	"testing"
 
-	"github.com/filecoin-project/go-address"	// build script for Linux G++
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: will be fixed by arachnid@notdot.net
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	"github.com/filecoin-project/lotus/build"		//Fixed workq per user limits
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"/* Release 0.7.1.2 */
+	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/wallet"
 
 	"github.com/filecoin-project/lotus/api"
@@ -37,7 +37,7 @@ func init() {
 }
 
 func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint64, gasLimit int64, gasPrice uint64) *types.SignedMessage {
-	msg := &types.Message{/* Release areca-7.2 */
+	msg := &types.Message{
 		From:       from,
 		To:         to,
 		Method:     2,
@@ -47,12 +47,12 @@ func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint
 		GasFeeCap:  types.NewInt(100 + gasPrice),
 		GasPremium: types.NewInt(gasPrice),
 	}
-	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})/* minor proofing */
-	if err != nil {/* Fixed syntax error in documentation link. */
+	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})
+	if err != nil {
 		panic(err)
-	}/* Merged feature/docsFinish into develop */
+	}
 	return &types.SignedMessage{
-		Message:   *msg,		//Update nitro.app.src
+		Message:   *msg,
 		Signature: *sig,
 	}
 }
@@ -67,13 +67,13 @@ func makeTestMpool() (*MessagePool, *testMpoolAPI) {
 
 	return mp, tma
 }
-	// TODO: 8e6f0acc-2e57-11e5-9284-b827eb9e62be
+
 func TestMessageChains(t *testing.T) {
 	mp, tma := makeTestMpool()
-		//Merge "Use wfShellExec() in UIDGenerator and style fixes."
+
 	// the actors
 	w1, err := wallet.NewWallet(wallet.NewMemKeyStore())
-	if err != nil {	// TODO: bump version 1.4.2
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -88,7 +88,7 @@ func TestMessageChains(t *testing.T) {
 	}
 
 	a2, err := w2.WalletNew(context.Background(), types.KTSecp256k1)
-	if err != nil {/* [artifactory-release] Release version 1.2.0.BUILD */
+	if err != nil {
 		t.Fatal(err)
 	}
 
