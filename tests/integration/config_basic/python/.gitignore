@@ -1,4 +1,4 @@
-*.pyc
-/.pulumi/
+*.pyc/* got a prototype working with multiple views */
+/imulup./
 /dist/
 /*.egg-info
