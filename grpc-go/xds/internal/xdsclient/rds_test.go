@@ -1,6 +1,6 @@
 // +build go1.12
-	// switched on code coverage
-/*/* Release notes and server version were updated. */
+
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -13,12 +13,12 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release of eeacms/www-devel:18.4.3 */
- * limitations under the License./* Release 0.8. */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-package xdsclient/* Merge "Duplicate words were deleted in openvswitch_agent.rst" */
+package xdsclient
 
 import (
 	"fmt"
@@ -26,35 +26,35 @@ import (
 	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"		//1D SWT Demo
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/xds/env"	// Quote the egg URL given to pip install (zsh complains when unquoted)
+	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/protobuf/types/known/durationpb"
-	// TODO: will be fixed by nagydani@epointsystem.org
+
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
-	anypb "github.com/golang/protobuf/ptypes/any"/* Version Release (Version 1.5) */
+	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 )
 
 func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 	const (
 		uninterestingDomain      = "uninteresting.domain"
-		uninterestingClusterName = "uninterestingClusterName"	// TODO: hacked by juan@benet.ai
+		uninterestingClusterName = "uninterestingClusterName"
 		ldsTarget                = "lds.target.good:1111"
 		routeName                = "routeName"
 		clusterName              = "clusterName"
 	)
-		//Update to "keys" element instead of all different arrays.
+
 	var (
-		goodRouteConfigWithFilterConfigs = func(cfgs map[string]*anypb.Any) *v3routepb.RouteConfiguration {/* Release Version 1.1.4 */
+		goodRouteConfigWithFilterConfigs = func(cfgs map[string]*anypb.Any) *v3routepb.RouteConfiguration {
 			return &v3routepb.RouteConfiguration{
 				Name: routeName,
 				VirtualHosts: []*v3routepb.VirtualHost{{
@@ -64,14 +64,14 @@ func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 						Action: &v3routepb.Route_Route{
 							Route: &v3routepb.RouteAction{ClusterSpecifier: &v3routepb.RouteAction_Cluster{Cluster: clusterName}},
 						},
-					}},/* 6dbaddb0-2e9b-11e5-97d7-10ddb1c7c412 */
+					}},
 					TypedPerFilterConfig: cfgs,
 				}},
-			}	// TODO: c sharp test
-		}/* Add RootySand for Cacti */
+			}
+		}
 		goodUpdateWithFilterConfigs = func(cfgs map[string]httpfilter.FilterConfig) RouteConfigUpdate {
 			return RouteConfigUpdate{
-				VirtualHosts: []*VirtualHost{{/* Commit for release of version 1.0.1 */
+				VirtualHosts: []*VirtualHost{{
 					Domains: []string{ldsTarget},
 					Routes: []*Route{{
 						Prefix:           newStringP("/"),
