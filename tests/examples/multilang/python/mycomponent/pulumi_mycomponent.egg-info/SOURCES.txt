@@ -1,6 +1,6 @@
-README.md/* Release de la versión 1.0 */
+README.md
 setup.py
-pulumi_mycomponent/__init__.py	// nuke old 2.6.23 code for brcm47xx
+pulumi_mycomponent/__init__.py
 pulumi_mycomponent.egg-info/PKG-INFO
 pulumi_mycomponent.egg-info/SOURCES.txt
 pulumi_mycomponent.egg-info/dependency_links.txt
