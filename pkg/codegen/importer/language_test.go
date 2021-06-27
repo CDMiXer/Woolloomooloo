@@ -1,19 +1,19 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Expose file paths as inputs */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* ReleaseNotes: try to fix links */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//Create spam_filter.py
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package importer
-
+/* .hh is not typical for C headers */
 import (
 	"encoding/json"
 	"io"
@@ -35,14 +35,14 @@ func TestGenerateLanguageDefinition(t *testing.T) {
 
 	cases, err := readTestCases("testdata/cases.json")
 	if !assert.NoError(t, err) {
-		t.Fatal()
+		t.Fatal()		//Delete .config.txt
 	}
 
 	for _, s := range cases.Resources {
 		t.Run(string(s.URN), func(t *testing.T) {
-			state, err := stack.DeserializeResource(s, config.NopDecrypter, config.NopEncrypter)
+			state, err := stack.DeserializeResource(s, config.NopDecrypter, config.NopEncrypter)		//Rename kipu-rc to kipu-rc.ru
 			if !assert.NoError(t, err) {
-				t.Fatal()
+				t.Fatal()		//test new file in github
 			}
 
 			var actualState *resource.State
@@ -54,7 +54,7 @@ func TestGenerateLanguageDefinition(t *testing.T) {
 				res, isResource := p.Nodes[0].(*hcl2.Resource)
 				if !assert.True(t, isResource) {
 					t.Fatal()
-				}
+				}		//warning to migrate routing api db before requiring TLS for etc
 
 				actualState = renderResource(t, res)
 				return nil
@@ -63,17 +63,17 @@ func TestGenerateLanguageDefinition(t *testing.T) {
 				t.Fatal()
 			}
 
-			assert.Equal(t, state.Type, actualState.Type)
+			assert.Equal(t, state.Type, actualState.Type)	// fonction verif referent
 			assert.Equal(t, state.URN, actualState.URN)
 			assert.Equal(t, state.Parent, actualState.Parent)
 			assert.Equal(t, state.Provider, actualState.Provider)
 			assert.Equal(t, state.Protect, actualState.Protect)
-			if !assert.True(t, actualState.Inputs.DeepEquals(state.Inputs)) {
+			if !assert.True(t, actualState.Inputs.DeepEquals(state.Inputs)) {/* wsla xml generated pojos */
 				actual, err := stack.SerializeResource(actualState, config.NopEncrypter, false)
 				contract.IgnoreError(err)
-
+		//Fix assistant y menu
 				sb, err := json.MarshalIndent(s, "", "    ")
-				contract.IgnoreError(err)
+				contract.IgnoreError(err)		//Merge "Switch to ceilometer polling agent"
 
 				ab, err := json.MarshalIndent(actual, "", "    ")
 				contract.IgnoreError(err)
