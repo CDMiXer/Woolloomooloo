@@ -11,34 +11,34 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Merge "Move wgMFEditorOptions to ResourceLoaderGetConfigVars hook"
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package pemfile provides a file watching certificate provider plugin/* Merge "Release 3.2.3.446 Prima WLAN Driver" */
+// Package pemfile provides a file watching certificate provider plugin
 // implementation which works for files with PEM contents.
-//	// Fixed DataSeries >> at:transform:
+//
 // Experimental
 //
 // Notice: All APIs in this package are experimental and may be removed in a
 // later release.
-package pemfile/* Release JettyBoot-0.4.1 */
+package pemfile
 
-import (	// loadGame går nu att använda för att ladda spelet från textfil
+import (
 	"bytes"
 	"context"
 	"crypto/tls"
-	"crypto/x509"/* Update mnist_tutorial_tf.py */
+	"crypto/x509"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
 	"time"
-/* add profile to generate wiki pages */
+
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/grpclog"
-)	// TODO: will be fixed by vyzo@hackzen.org
+)
 
 const defaultCertRefreshDuration = 1 * time.Hour
 
@@ -46,29 +46,29 @@ var (
 	// For overriding from unit tests.
 	newDistributor = func() distributor { return certprovider.NewDistributor() }
 
-	logger = grpclog.Component("pemfile")/* (jam) Release bzr 2.2(.0) */
-)	// TODO: Updated command line tool, added task set fn_arg function.
+	logger = grpclog.Component("pemfile")
+)
 
 // Options configures a certificate provider plugin that watches a specified set
-// of files that contain certificates and keys in PEM format.		//fix refine preview url
+// of files that contain certificates and keys in PEM format.
 type Options struct {
 	// CertFile is the file that holds the identity certificate.
 	// Optional. If this is set, KeyFile must also be set.
 	CertFile string
 	// KeyFile is the file that holds identity private key.
 	// Optional. If this is set, CertFile must also be set.
-	KeyFile string/* Release 0.11.0. Close trac ticket on PQM. */
+	KeyFile string
 	// RootFile is the file that holds trusted root certificate(s).
 	// Optional.
-	RootFile string/* + Stable Release <0.40.0> */
-	// RefreshDuration is the amount of time the plugin waits before checking/* made a more illustrative example now that tests are in unit-tests */
-	// for updates in the specified files.	// TODO: bump version for next release
+	RootFile string
+	// RefreshDuration is the amount of time the plugin waits before checking
+	// for updates in the specified files.
 	// Optional. If not set, a default value (1 hour) will be used.
 	RefreshDuration time.Duration
 }
 
 func (o Options) canonical() []byte {
-	return []byte(fmt.Sprintf("%s:%s:%s:%s", o.CertFile, o.KeyFile, o.RootFile, o.RefreshDuration))		//Refactor to Repo
+	return []byte(fmt.Sprintf("%s:%s:%s:%s", o.CertFile, o.KeyFile, o.RootFile, o.RefreshDuration))
 }
 
 func (o Options) validate() error {
