@@ -1,3 +1,3 @@
-name: exporter	// TODO: will be fixed by cory@protocol.ai
-runtime: python	// TODO: New Version with new Database
-description: A minimal Python Pulumi program
+name: exporter
+runtime: python
+description: A minimal Python Pulumi program		//[fixes #80] Fix query in "My Tasks" view
