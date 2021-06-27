@@ -1,57 +1,57 @@
-[metadata]/* Update Ugprade.md for 1.0.0 Release */
+[metadata]
   name = "lotus-soup"
   author = ""
-
+/* Released v0.2.1 */
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"	// TODO: will be fixed by fjl@ethereum.org
+  case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"		//Merge branch 'master' of https://github.com/jarmokortetjarvi/futural.git
+  runner = "local:docker"
 
-[global.build]	// cfc05b72-2e6e-11e5-9284-b827eb9e62be
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
-  enable_go_build_cache = true
-
+[global.build_config]	// Create sonata_media.yml
+  enable_go_build_cache = true	// TODO: Add data.company
+		//Update dockermaster.sh
 [global.run.test_params]
-  clients = "3"
-  miners = "2"
-  genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  clients = "3"	// TODO: Forgot to add soffice to the list of things to kill.
+  miners = "2"		//Fixed namespacing.
+  genesis_timestamp_offset = "0"/* 0.0.4 Release */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Release 3.5.0 */
   sectors = "1000"
   random_beacon_type = "mock"
-	// Fixed typo's in Executing/Call.cs
-[[groups]]
+
+[[groups]]/* Release-Historie um required changes erweitert */
   id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]		//Generated site for typescript-generator 2.12.480
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.instances]
+  [groups.instances]/* Fixed footprint calculation script */
     count = 2
-    percentage = 0.0
+    percentage = 0.0		//TC-8287 update Movie Model for Sync
   [groups.run]
-    [groups.run.test_params]	// Add libmysqclient dependency to nprobe (#3306)
-      role = "miner"	// Create Search2DMatrix.cpp
-      mining_mode = "natural"/* 1.0.5 Release */
+    [groups.run.test_params]
+      role = "miner"/* Writing links to events */
+      mining_mode = "natural"
 
 [[groups]]
   id = "clients"
-  [groups.instances]/* some metadata fix */
+  [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
       deals = "300"
-      deal_mode = "serial"/* chore: Release 0.22.1 */
+      deal_mode = "serial"
