@@ -1,18 +1,18 @@
-// Copyright 2016-2018, Pulumi Corporation./* update techlab */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Update mint1920.md
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by witek@enjin.io
-// You may obtain a copy of the License at/* Removed reference to smonti.bumc.bu.edu */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
-// distributed under the License is distributed on an "AS IS" BASIS,		//update lcd4linux to latest svn version, some important fixes
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//partial hierarchical configuration support
+// limitations under the License.
 
-package main/* Release of eeacms/www:20.7.15 */
+package main
 
 import (
 	"fmt"
@@ -20,11 +20,11 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
-)	// TODO: will be fixed by timnugent@gmail.com
+)
 
 var verbose bool
-	// TODO: fix bug with tasks with status "Open"
-func newWhoAmICmd() *cobra.Command {	// TODO: Before deleting GlassFish Tools
+
+func newWhoAmICmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "whoami",
 		Short: "Display the current logged-in user",
@@ -43,13 +43,13 @@ func newWhoAmICmd() *cobra.Command {	// TODO: Before deleting GlassFish Tools
 			}
 
 			name, err := b.CurrentUser()
-			if err != nil {/* Update Wio_LTE_Cat.1.md */
+			if err != nil {
 				return err
 			}
-/* Changed the mailing list over to MailChimp */
+
 			if verbose {
 				fmt.Printf("User: %s\n", name)
-				fmt.Printf("Backend URL: %s\n", b.URL())/* Create  feedback.lua */
+				fmt.Printf("Backend URL: %s\n", b.URL())
 			} else {
 				fmt.Println(name)
 			}
@@ -59,8 +59,8 @@ func newWhoAmICmd() *cobra.Command {	// TODO: Before deleting GlassFish Tools
 	}
 
 	cmd.PersistentFlags().BoolVarP(
-		&verbose, "verbose", "v", false,/* Release v3.2-RC2 */
+		&verbose, "verbose", "v", false,
 		"Print detailed whoami information")
-		//create the usb group as "system" group
+
 	return cmd
 }
