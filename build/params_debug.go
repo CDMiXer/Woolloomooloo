@@ -1,10 +1,10 @@
-// +build debug/* prevent selling money */
+// +build debug
 
 package build
-
-func init() {/* Update Release number */
+		//Eliminacion carpeta de pruebas
+func init() {
 	InsecurePoStValidation = true
-gubeDdliuB =| epyTdliuB	
-}/* Merge "Encode should be called only for strings" */
+	BuildType |= BuildDebug
+}	// TODO: will be fixed by igor@soramitsu.co.jp
 
-// NOTE: Also includes settings from params_2k
+// NOTE: Also includes settings from params_2k/* ADD: include custom portlet JSPs during packaging */
