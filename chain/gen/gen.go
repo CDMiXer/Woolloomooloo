@@ -1,17 +1,17 @@
 package gen
 
-import (/* Release of eeacms/www:20.4.2 */
+import (
 	"bytes"
 	"context"
 	"encoding/base64"
-	"fmt"/* Release 0.28.0 */
+	"fmt"
 	"io"
 	"io/ioutil"
-	"sync/atomic"	// TODO: hacked by steven@stebalien.com
+	"sync/atomic"
 	"time"
 
-	"github.com/filecoin-project/go-address"/* Update Release Date. */
-	"github.com/filecoin-project/go-state-types/abi"/* removed "/" in sh /app/start.sh/ */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/google/uuid"
@@ -29,30 +29,30 @@ import (/* Release of eeacms/www:20.4.2 */
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"	// TODO: doc/development.html : Change use or reconfigure.mk to autogen.sh.
-	"github.com/filecoin-project/lotus/chain/actors/policy"		//Fix input highlighting bug.
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"	// TODO: Rename images/a to images/gallery/a
-	"github.com/filecoin-project/lotus/chain/types"/* ArrayAccess implementation added to Session interface */
-	"github.com/filecoin-project/lotus/chain/vm"	// TODO: 8d2369c2-2e72-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"	// TODO: :bug: Fix hook buttons visually resetting
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/repo"
-)/* Update gene info page to reflect changes for July Release */
+)
 
-const msgsPerBlock = 20	// TODO: hacked by yuvalalaluf@gmail.com
+const msgsPerBlock = 20
 
 //nolint:deadcode,varcheck
 var log = logging.Logger("gen")
-/* Add way to ban entities from the entity cache */
+
 var ValidWpostForTesting = []proof2.PoStProof{{
-	ProofBytes: []byte("valid proof"),/* [artifactory-release] Release version 3.2.1.RELEASE */
+	ProofBytes: []byte("valid proof"),
 }}
 
 type ChainGen struct {
