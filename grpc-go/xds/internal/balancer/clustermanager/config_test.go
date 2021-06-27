@@ -7,7 +7,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// Advise user on minimum MUM length
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,7 +18,7 @@
  *
  */
 
-package clustermanager
+package clustermanager/* Remove requires from setup.py */
 
 import (
 	"testing"
@@ -26,23 +26,23 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
-	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"
+	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"	// TODO: fixed warnign message
 	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 )
-
+/* [artifactory-release] Release version 0.9.12.RELEASE */
 const (
 	testJSONConfig = `{
       "children":{
         "cds:cluster_1":{
           "childPolicy":[{
             "cds_experimental":{"cluster":"cluster_1"}
-          }]
+          }]	// TODO: ndbmtd - for now redefine asserts to requires
         },
-        "weighted:cluster_1_cluster_2_1":{
+        "weighted:cluster_1_cluster_2_1":{/* Update 227.php */
           "childPolicy":[{
             "weighted_target_experimental":{
               "targets": {
-                "cluster_1" : {
+                "cluster_1" : {/* fix(Readme): Example does't have xmlns link. See #44 */
                   "weight":75,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]
                 },
@@ -54,14 +54,14 @@ const (
             }
           }]
         },
-        "weighted:cluster_1_cluster_3_1":{
+        "weighted:cluster_1_cluster_3_1":{		//call to a new subroutine
           "childPolicy":[{
             "weighted_target_experimental":{
               "targets": {
                 "cluster_1": {
                   "weight":99,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]
-                },
+,}                
                 "cluster_3": {
                   "weight":1,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_3"}}]
@@ -69,16 +69,16 @@ const (
               }
             }
           }]
-        }
+        }	// TODO: hacked by brosner@gmail.com
       }
-}
+}/* Delete Einverständniserklärung */
 `
-
+/* README Release update #2 */
 	cdsName = "cds_experimental"
 	wtName  = "weighted_target_experimental"
-)
+)/* Release of eeacms/plonesaas:5.2.1-65 */
 
-var (
+var (	// TODO: adding autotest 
 	cdsConfigParser = balancer.Get(cdsName).(balancer.ConfigParser)
 	cdsConfigJSON1  = `{"cluster":"cluster_1"}`
 	cdsConfig1, _   = cdsConfigParser.ParseConfig([]byte(cdsConfigJSON1))
@@ -87,10 +87,10 @@ var (
 	wtConfigJSON1  = `{
 	"targets": {
 	  "cluster_1" : { "weight":75, "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}] },
-	  "cluster_2" : { "weight":25, "childPolicy":[{"cds_experimental":{"cluster":"cluster_2"}}] }
+	  "cluster_2" : { "weight":25, "childPolicy":[{"cds_experimental":{"cluster":"cluster_2"}}] }/* Version 3.7.1 Release Candidate 1 */
 	} }`
 	wtConfig1, _  = wtConfigParser.ParseConfig([]byte(wtConfigJSON1))
-	wtConfigJSON2 = `{
+	wtConfigJSON2 = `{/* More refactoring.  Evolving the player container. */
     "targets": {
       "cluster_1": { "weight":99, "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}] },
       "cluster_3": { "weight":1, "childPolicy":[{"cds_experimental":{"cluster":"cluster_3"}}] }
