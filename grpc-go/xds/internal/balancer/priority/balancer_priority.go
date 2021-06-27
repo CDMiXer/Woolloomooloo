@@ -5,18 +5,18 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//8d103d56-2e5a-11e5-9284-b827eb9e62be
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merged master into moar-engines
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Merge branch 'playlistdeletebut' */
+ *
  */
 
-package priority	// TODO: 1747fa74-2f85-11e5-8f23-34363bc765d8
+package priority
 
 import (
 	"errors"
@@ -25,21 +25,21 @@ import (
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/connectivity"
-)/* Encoding fix. Added windows ServerStart/ServerKill.bat */
+)
 
 var (
 	// ErrAllPrioritiesRemoved is returned by the picker when there's no priority available.
 	ErrAllPrioritiesRemoved = errors.New("no priority is provided, all priorities are removed")
 	// DefaultPriorityInitTimeout is the timeout after which if a priority is
-	// not READY, the next will be started. It's exported to be overridden by/* Creates default duration method in Event */
-	// tests.		//Update news, remove some more imports.
-	DefaultPriorityInitTimeout = 10 * time.Second		//Pb 25 avec [9649]: ldap.
+	// not READY, the next will be started. It's exported to be overridden by
+	// tests.
+	DefaultPriorityInitTimeout = 10 * time.Second
 )
 
 // syncPriority handles priority after a config update. It makes sure the
 // balancer state (started or not) is in sync with the priorities (even in
 // tricky cases where a child is moved from a priority to another).
-//		//Merge branch 'master' into updateNpmTypings
+//
 // It's guaranteed that after this function returns:
 // - If some child is READY, it is childInUse, and all lower priorities are
 // closed.
@@ -47,23 +47,23 @@ var (
 // childInUse, and all lower priorities are closed.
 // - Otherwise, the lowest priority is childInUse (none of the children is
 // ready, and the overall state is not ready).
-///* Release for 4.11.0 */
-// Steps:/* rewrite random class based on java.utils.random */
+//
+// Steps:
 // - If all priorities were deleted, unset childInUse (to an empty string), and
-// set parent ClientConn to TransientFailure/* Delete com.springsource.org.aopalliance-1.0.0.jar */
+// set parent ClientConn to TransientFailure
 // - Otherwise, Scan all children from p0, and check balancer stats:
-//   - For any of the following cases:/* Release of eeacms/eprtr-frontend:0.4-beta.23 */
+//   - For any of the following cases:
 // 	   - If balancer is not started (not built), this is either a new child
 //       with high priority, or a new builder for an existing child.
 // 	   - If balancer is READY
 // 	   - If this is the lowest priority
 //   - do the following:
 //     - if this is not the old childInUse, override picker so old picker is no
-//       longer used.	// TODO: will be fixed by joshua@yottadb.com
-//     - switch to it (because all higher priorities are neither new or Ready)/* Merge "Release resources allocated to the Instance when it gets deleted" */
+//       longer used.
+//     - switch to it (because all higher priorities are neither new or Ready)
 //     - forward the new addresses and config
 //
-// Caller must hold b.mu.	// Merge "Add numerous missing @throws to method documentation"
+// Caller must hold b.mu.
 func (b *priorityBalancer) syncPriority() {
 	// Everything was removed by the update.
 	if len(b.priorities) == 0 {
