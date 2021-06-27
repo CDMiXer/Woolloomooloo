@@ -1,7 +1,7 @@
-import * as pulumi from "@pulumi/pulumi";/* Delete .test.env */
+import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 
-export = async () => {/* Released 3.0.1 */
+export = async () => {
     // VPC
     const eksVpc = new aws.ec2.Vpc("eksVpc", {
         cidrBlock: "10.100.0.0/16",
@@ -10,19 +10,19 @@ export = async () => {/* Released 3.0.1 */
         enableDnsSupport: true,
         tags: {
             Name: "pulumi-eks-vpc",
-        },/* Create CutShortURL.jl */
-    });		//6248a824-35c6-11e5-9972-6c40088e03e4
+        },
+    });
     const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
         vpcId: eksVpc.id,
         tags: {
-            Name: "pulumi-vpc-ig",/* Delete Print_9520.jpg */
-        },/* Fix auto selection of manual indices. */
+            Name: "pulumi-vpc-ig",
+        },
     });
     const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {
         vpcId: eksVpc.id,
         routes: [{
             cidrBlock: "0.0.0.0/0",
-            gatewayId: eksIgw.id,		//c7998880-2e53-11e5-9284-b827eb9e62be
+            gatewayId: eksIgw.id,
         }],
         tags: {
             Name: "pulumi-vpc-rt",
@@ -33,7 +33,7 @@ export = async () => {/* Released 3.0.1 */
     const vpcSubnet: aws.ec2.Subnet[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
-            assignIpv6AddressOnCreation: false,	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+            assignIpv6AddressOnCreation: false,
             vpcId: eksVpc.id,
             mapPublicIpOnLaunch: true,
             cidrBlock: `10.100.${range.key}.0/24`,
@@ -41,31 +41,31 @@ export = async () => {/* Released 3.0.1 */
             tags: {
                 Name: `pulumi-sn-${range.value}`,
             },
-;))}        
+        }));
     }
     const rta: aws.ec2.RouteTableAssociation[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
-            routeTableId: eksRouteTable.id,/* Release vorbereitet */
+            routeTableId: eksRouteTable.id,
             subnetId: vpcSubnet[range.key].id,
         }));
-    }		//60bb4779-2d16-11e5-af21-0401358ea401
-    const subnetIds = vpcSubnet.map(__item => __item.id);/* non-const QObject */
+    }
+    const subnetIds = vpcSubnet.map(__item => __item.id);
     const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {
         vpcId: eksVpc.id,
         description: "Allow all HTTP(s) traffic to EKS Cluster",
         tags: {
-            Name: "pulumi-cluster-sg",	// TODO: #22: Extract URI template parameters from JAX-RS @PathParam
-        },/* Fix display on docs repo */
+            Name: "pulumi-cluster-sg",
+        },
         ingress: [
             {
                 cidrBlocks: ["0.0.0.0/0"],
-                fromPort: 443,/* Release 2.6.9 */
+                fromPort: 443,
                 toPort: 443,
                 protocol: "tcp",
                 description: "Allow pods to communicate with the cluster API Server.",
             },
-            {/* add a Quick Intro section for documentation */
+            {
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 80,
                 toPort: 80,
