@@ -1,22 +1,22 @@
-{/* Decouple Hyperlink from ReleasesService */
+{		//Merge "fix networking-hyperv release acls"
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,
-        "stripInternal": true,
-        "experimentalDecorators": true,	// Added mercurial plugin with aliases.
-        "pretty": true,	// 7c01e7ca-2e6f-11e5-9284-b827eb9e62be
+        "sourceMap": false,/* Created PlanningtolaunchnewFreedomFlotillatoChalleng Blockade */
+        "stripInternal": true,		//reverted r4180
+        "experimentalDecorators": true,
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,	// TODO: will be fixed by mail@overlisted.net
         "strictNullChecks": true,
-    },/* Author Update */
+    },
     "files": [
-        "index.ts",		//fdb02340-2e74-11e5-9284-b827eb9e62be
-    ]	// TODO: hacked by jon@atack.com
-}/* Add GitHub Action for Release Drafter */
+        "index.ts",
+    ]
+}
 
