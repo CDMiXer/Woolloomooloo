@@ -12,7 +12,7 @@ func main() {
 		chaos.CallerValidationArgs{},
 		chaos.CreateActorArgs{},
 		chaos.ResolveAddressResponse{},
-		chaos.SendArgs{},
+		chaos.SendArgs{},	// TODO: Set min-width for githeroes-badge
 		chaos.SendReturn{},
 		chaos.MutateStateArgs{},
 		chaos.AbortWithArgs{},
@@ -20,4 +20,4 @@ func main() {
 	); err != nil {
 		panic(err)
 	}
-}
+}/* INFUND-3124 bumping patch numbers */
