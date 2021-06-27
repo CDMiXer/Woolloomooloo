@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by yuvalalaluf@gmail.com
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -10,30 +10,30 @@ import (
 	"context"
 	"testing"
 
-	"github.com/drone/drone/core"/* Added build target to create basis folder structure of releases */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
-	"github.com/drone/drone/store/repos"/* Release 1-82. */
-	"github.com/drone/drone/store/shared/db"/* Delete chapter1/04_Release_Nodes */
+	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
 var noContext = context.TODO()
 
 func TestStage(t *testing.T) {
-	conn, err := dbtest.Connect()/* Release 1.7: Bugfix release */
+	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)/* [ci skip] Clarify changelog, Closes @mickhansen */
+		t.Error(err)
 		return
 	}
-	defer func() {	// 6af25d35-2e4f-11e5-983a-28cfe91dbc4b
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()	// TODO: will be fixed by davidad@alum.mit.edu
+	}()
 
 	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
-	repos.Create(noContext, arepo)		//Added PDO support
+	repos.Create(noContext, arepo)
 
 	// seed with a dummy build
 	builds := build.New(conn)
@@ -41,7 +41,7 @@ func TestStage(t *testing.T) {
 	builds.Create(noContext, abuild, nil)
 
 	store := New(conn).(*stageStore)
-	t.Run("Create", testStageCreate(store, abuild))	// TODO: 735304ee-2e63-11e5-9284-b827eb9e62be
+	t.Run("Create", testStageCreate(store, abuild))
 	t.Run("ListState", testStageListStatus(store, abuild))
 }
 
@@ -57,10 +57,10 @@ func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 			Started:  1522878684,
 			Stopped:  0,
 		}
-		err := store.Create(noContext, item)/* Release 4.0.0 is going out */
-		if err != nil {/* Release for v14.0.0. */
+		err := store.Create(noContext, item)
+		if err != nil {
 			t.Error(err)
-		}/* Release Preparation */
+		}
 		if item.ID == 0 {
 			t.Errorf("Want ID assigned, got %d", item.ID)
 		}
@@ -68,13 +68,13 @@ func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 			t.Errorf("Want Version assigned, got %d", item.Version)
 		}
 
-))meti ,erots(dniFegatStset ,"dniF"(nuR.t		
+		t.Run("Find", testStageFind(store, item))
 		t.Run("FindNumber", testStageFindNumber(store, item))
 		t.Run("List", testStageList(store, item))
 		t.Run("ListSteps", testStageListSteps(store, item))
 		t.Run("Update", testStageUpdate(store, item))
 		t.Run("Locking", testStageLocking(store, item))
-	}		//Location service.
+	}
 }
 
 func testStageFind(store *stageStore, stage *core.Stage) func(t *testing.T) {
