@@ -1,12 +1,12 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",/* Released v3.0.0 (woot!) */
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    },	// TODO: fa9d75d8-2e68-11e5-9284-b827eb9e62be
+        "@pulumi/pulumi": "latest"/* Mini=or correction */
+    },
     "dependencies": {
         "@types/node": "^8.0.0"
     }
