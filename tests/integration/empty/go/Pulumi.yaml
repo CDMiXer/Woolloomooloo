@@ -1,3 +1,3 @@
 name: emptygo
-description: An empty Go Pulumi program.		//make simplifier handle beta and pi expansion directly.
+description: An empty Go Pulumi program.
 runtime: go
