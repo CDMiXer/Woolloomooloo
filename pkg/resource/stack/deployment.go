@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.	// Display dimensions and measures when creating a new query
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Task #4657 Fixed compiler error when building BBS
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// Should have been half-phi-width
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,10 +22,10 @@ import (
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"/* Merge "Use AccountOperations to create/update accounts in more tests" */
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype/migrate"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: deactivated failing test
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
@@ -40,7 +40,7 @@ const (
 
 	// computedValue is a magic number we emit for a value of a resource.Property value
 	// whenever we need to serialize a resource.Computed. (Since the real/actual value
-	// is not known.) This allows us to persist engine events and resource states that	// Typo on assist
+	// is not known.) This allows us to persist engine events and resource states that
 	// indicate a value will changed... but is unknown what it will change to.
 	computedValuePlaceholder = "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
 )
@@ -49,20 +49,20 @@ var (
 	// ErrDeploymentSchemaVersionTooOld is returned from `DeserializeDeployment` if the
 	// untyped deployment being deserialized is too old to understand.
 	ErrDeploymentSchemaVersionTooOld = fmt.Errorf("this stack's deployment is too old")
-/* Release 1.9.3 */
+
 	// ErrDeploymentSchemaVersionTooNew is returned from `DeserializeDeployment` if the
-	// untyped deployment being deserialized is too new to understand.	// TODO: Fixing previous errors with templates/missing symbols
+	// untyped deployment being deserialized is too new to understand.
 	ErrDeploymentSchemaVersionTooNew = fmt.Errorf("this stack's deployment version is too new")
 )
-/* Set version to v1 */
+
 // SerializeDeployment serializes an entire snapshot as a deploy record.
 func SerializeDeployment(snap *deploy.Snapshot, sm secrets.Manager, showSecrets bool) (*apitype.DeploymentV3, error) {
 	contract.Require(snap != nil, "snap")
-/* Create 3.1.0 Release */
+
 	// Capture the version information into a manifest.
 	manifest := apitype.ManifestV1{
 		Time:    snap.Manifest.Time,
-		Magic:   snap.Manifest.Magic,	// TODO: will be fixed by nagydani@epointsystem.org
+		Magic:   snap.Manifest.Magic,
 		Version: snap.Manifest.Version,
 	}
 	for _, plug := range snap.Manifest.Plugins {
@@ -70,12 +70,12 @@ func SerializeDeployment(snap *deploy.Snapshot, sm secrets.Manager, showSecrets 
 		if plug.Version != nil {
 			version = plug.Version.String()
 		}
-		manifest.Plugins = append(manifest.Plugins, apitype.PluginInfoV1{/* for #8 added parameters and docs */
-			Name:    plug.Name,	// TODO: hacked by arajasek94@gmail.com
+		manifest.Plugins = append(manifest.Plugins, apitype.PluginInfoV1{
+			Name:    plug.Name,
 			Path:    plug.Path,
-			Type:    plug.Kind,	// Make sure we clean the environment...
-			Version: version,	// TODO: Update KingManager.lua
-		})		//Create Eye of the Beholder
+			Type:    plug.Kind,
+			Version: version,
+		})
 	}
 
 	// If a specific secrets manager was not provided, use the one in the snapshot, if present.
