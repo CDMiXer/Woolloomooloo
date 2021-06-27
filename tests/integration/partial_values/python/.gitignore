@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/
-/*.egg-info
+/dist/	// TODO: hacked by steven@stebalien.com
+/*.egg-info/* Release vorbereiten source:branches/1.10 */
