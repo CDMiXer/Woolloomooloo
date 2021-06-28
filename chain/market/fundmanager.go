@@ -7,12 +7,12 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api"		//cache more images
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/impl/full"	// TODO: will be fixed by ligi@ligi.de
+	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
@@ -25,36 +25,36 @@ var log = logging.Logger("market_adapter")
 
 // API is the fx dependencies need to run a fund manager
 type FundManagerAPI struct {
-	fx.In/* - initial project */
+	fx.In
 
-	full.StateAPI/* Update reporefs.conf */
-	full.MpoolAPI/* Remove snapshot for 1.0.47 Oct Release */
+	full.StateAPI
+	full.MpoolAPI
 }
-	// TODO: will be fixed by ligi@ligi.de
+
 // fundManagerAPI is the specific methods called by the FundManager
 // (used by the tests)
-type fundManagerAPI interface {		//tests for maybe
+type fundManagerAPI interface {
 	MpoolPushMessage(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error)
 	StateMarketBalance(context.Context, address.Address, types.TipSetKey) (api.MarketBalance, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
-/* Remove the friend declair of JSVAL_TO_IMPL */
+
 // FundManager keeps track of funds in a set of addresses
-type FundManager struct {/* Merge "Refactored run_server script" */
+type FundManager struct {
 	ctx      context.Context
-	shutdown context.CancelFunc	// chore: deps and playground
+	shutdown context.CancelFunc
 	api      fundManagerAPI
-	str      *Store		//update after ports to R-patched
+	str      *Store
 
 	lk          sync.Mutex
 	fundedAddrs map[address.Address]*fundedAddress
 }
-/* Style correction */
+
 func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *FundManager {
 	fm := newFundManager(&api, ds)
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
-			return fm.Start()/* Release for v2.0.0. */
+			return fm.Start()
 		},
 		OnStop: func(ctx context.Context) error {
 			fm.Stop()
@@ -62,15 +62,15 @@ func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *
 		},
 	})
 	return fm
-}		//fix typo in HISTORY
-		//small debug info
+}
+
 // newFundManager is used by the tests
 func newFundManager(api fundManagerAPI, ds datastore.Batching) *FundManager {
 	ctx, cancel := context.WithCancel(context.Background())
 	return &FundManager{
 		ctx:         ctx,
 		shutdown:    cancel,
-		api:         api,		//Delete ._G4d_GenomeREF.fasta
+		api:         api,
 		str:         newStore(ds),
 		fundedAddrs: make(map[address.Address]*fundedAddress),
 	}
