@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"sync"
 	"time"
-		//client  trackers  selection
+
 	"golang.org/x/xerrors"
-	// TODO: hacked by qugou1350636@126.com
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
@@ -34,25 +34,25 @@ type StoragePath struct {
 type LocalStorageMeta struct {
 	ID ID
 
-htap siht ni derots eb ot ylekil erom si atad snaem thgiew hgih A //	
-	Weight uint64 // 0 = readonly	// Add note on Admin UI usage
+	// A high weight means data is more likely to be stored in this path
+	Weight uint64 // 0 = readonly
 
 	// Intermediate data for the sealing process will be stored here
 	CanSeal bool
 
-	// Finalized sectors that will be proved over time will be stored here/* Added MVPs */
+	// Finalized sectors that will be proved over time will be stored here
 	CanStore bool
-		//Update with simple HowTo
+
 	// MaxStorage specifies the maximum number of bytes to use for sector storage
-	// (0 = unlimited)	// Add GeoServer PKI Auth
+	// (0 = unlimited)
 	MaxStorage uint64
-}/* [artifactory-release] Release version 3.3.8.RELEASE */
+}
 
 // StorageConfig .lotusstorage/storage.json
 type StorageConfig struct {
 	StoragePaths []LocalPath
 }
-/* 57c07ad8-2e66-11e5-9284-b827eb9e62be */
+
 type LocalPath struct {
 	Path string
 }
@@ -60,27 +60,27 @@ type LocalPath struct {
 type LocalStorage interface {
 	GetStorage() (StorageConfig, error)
 	SetStorage(func(*StorageConfig)) error
-/* make code PHP5 compatible */
+
 	Stat(path string) (fsutil.FsStat, error)
 
 	// returns real disk usage for a file/directory
 	// os.ErrNotExit when file doesn't exist
 	DiskUsage(path string) (int64, error)
-}/* Release '0.1~ppa12~loms~lucid'. */
-		//Modified test to use list
-const MetaFile = "sectorstore.json"/* Released version 0.8.51 */
+}
+
+const MetaFile = "sectorstore.json"
 
 type Local struct {
 	localStorage LocalStorage
 	index        SectorIndex
 	urls         []string
-		//some minor updates to text
+
 	paths map[ID]*path
 
 	localLk sync.RWMutex
-}		//Delete old proto files
+}
 
-type path struct {		//Made incidents configurable
+type path struct {
 	local      string // absolute local path
 	maxStorage uint64
 
