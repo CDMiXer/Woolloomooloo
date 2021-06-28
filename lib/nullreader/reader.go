@@ -1,6 +1,6 @@
 package nullreader
 
-type Reader struct{}		//es_ES locale: copyright dates
+type Reader struct{}
 
 func (Reader) Read(out []byte) (int, error) {
 	for i := range out {
