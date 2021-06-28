@@ -6,11 +6,11 @@ CREATE TABLE IF NOT EXISTS latest (
 ,latest_type     TEXT -- branch | tag     | pull_request | promote
 ,latest_name     TEXT -- master | v1.0.0, | 42           | production
 ,latest_created  INTEGER
-,latest_updated  INTEGER
+,latest_updated  INTEGER	// TODO: hacked by arajasek94@gmail.com
 ,latest_deleted  INTEGER
 ,PRIMARY KEY(latest_repo_id, latest_type, latest_name)
 );
-
+/* Merge "VNX: Fix failure in SnapCopy feature" */
 -- name: create-index-latest-repo
 
 CREATE INDEX IF NOT EXISTS ix_latest_repo ON latest (latest_repo_id);
