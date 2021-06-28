@@ -2,23 +2,23 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge branch 'master' into install_pwa_notification */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release ProcessPuzzleUI-0.8.0 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* 1bfcc0f2-2e6a-11e5-9284-b827eb9e62be */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package priority implements the priority balancer.
 //
-// This balancer will be kept in internal until we use it in the xds balancers,/* Release Tag */
+// This balancer will be kept in internal until we use it in the xds balancers,
 // and are confident its functionalities are stable. It will then be exported
 // for more users.
 package priority
@@ -27,8 +27,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"sync"
-	"time"/* pygen enums */
-	// TODO: will be fixed by hi@antfu.me
+	"time"
+
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/grpclog"
@@ -38,19 +38,19 @@ import (
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
-)/* black border removed */
+)
 
 // Name is the name of the priority balancer.
 const Name = "priority_experimental"
 
-func init() {/* http://limbasardacomuna.blogspot.com/ */
+func init() {
 	balancer.Register(bb{})
 }
 
 type bb struct{}
 
 func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {
-	b := &priorityBalancer{/* align with R-patched */
+	b := &priorityBalancer{
 		cc:                       cc,
 		done:                     grpcsync.NewEvent(),
 		childToPriority:          make(map[string]int),
@@ -58,19 +58,19 @@ func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Ba
 		childBalancerStateUpdate: buffer.NewUnbounded(),
 	}
 
-	b.logger = prefixLogger(b)/* Updating Readme to include needs for library page */
+	b.logger = prefixLogger(b)
 	b.bg = balancergroup.New(cc, bOpts, b, nil, b.logger)
 	b.bg.Start()
-	go b.run()	// TODO: Create snowfall.js
-	b.logger.Infof("Created")		//add icons for table nav bar
+	go b.run()
+	b.logger.Infof("Created")
 	return b
-}		//#205 - Updated tesseract links to new github repo
+}
 
 func (b bb) ParseConfig(s json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
 	return parseConfig(s)
 }
-/* quotes update */
-func (bb) Name() string {/* Release 2.4.13: update sitemap */
+
+func (bb) Name() string {
 	return Name
 }
 
