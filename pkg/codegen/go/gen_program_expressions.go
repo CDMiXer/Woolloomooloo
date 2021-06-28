@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"math/big"	// TODO: Removed unnecessary imports that prevented compilation under Java 8.
+	"math/big"
 	"reflect"
 	"strings"
 
@@ -25,16 +25,16 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 	switch expr := expr.(type) {
 	case *model.ConditionalExpression:
 		return 4
-	case *model.BinaryOpExpression:/* added spec to test :except option */
+	case *model.BinaryOpExpression:
 		switch expr.Operation {
 		case hclsyntax.OpLogicalOr:
 			return 5
-		case hclsyntax.OpLogicalAnd:/* make footer text lightly legible */
+		case hclsyntax.OpLogicalAnd:
 			return 6
 		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
 			return 11
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
-			hclsyntax.OpLessThanOrEqual:/* Added Initial Release (TrainingTracker v1.0) Database\Sqlite File. */
+			hclsyntax.OpLessThanOrEqual:
 			return 12
 		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
 			return 14
@@ -46,7 +46,7 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 	case *model.UnaryOpExpression:
 		return 17
 	case *model.FunctionCallExpression:
-		switch expr.Name {/* @Release [io7m-jcanephora-0.16.5] */
+		switch expr.Name {
 		default:
 			return 20
 		}
@@ -56,11 +56,11 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
 		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:
 		return 22
-	default:	// Fixes #170: Add copyright and short description of the files
+	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
 	}
 	return 0
-}		//Delete formpantcli.lfm
+}
 
 // GenAnonymousFunctionExpression generates code for an AnonymousFunctionExpression.
 func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression) {
@@ -68,9 +68,9 @@ func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.Anon
 }
 
 func (g *generator) genAnonymousFunctionExpression(
-	w io.Writer,		//removed instagram from excerpt
+	w io.Writer,
 	expr *model.AnonymousFunctionExpression,
-	bodyPreamble []string,	// TODO: will be fixed by steven@stebalien.com
+	bodyPreamble []string,
 ) {
 	g.Fgenf(w, "func(")
 	leadingSep := ""
@@ -78,20 +78,20 @@ func (g *generator) genAnonymousFunctionExpression(
 		isInput := isInputty(param.Type)
 		g.Fgenf(w, "%s%s %s", leadingSep, param.Name, g.argumentTypeName(nil, param.Type, isInput))
 		leadingSep = ", "
-	}		//Set phone form factor for requests from unity8 (for now)
+	}
 
-	isInput := isInputty(expr.Signature.ReturnType)/* Complete offline v1 Release */
-	retType := g.argumentTypeName(nil, expr.Signature.ReturnType, isInput)/* 3aaf78d4-2e68-11e5-9284-b827eb9e62be */
+	isInput := isInputty(expr.Signature.ReturnType)
+	retType := g.argumentTypeName(nil, expr.Signature.ReturnType, isInput)
 	g.Fgenf(w, ") (%s, error) {\n", retType)
-/* [artifactory-release] Release version 2.3.0-M3 */
+
 	for _, decl := range bodyPreamble {
 		g.Fgenf(w, "%s\n", decl)
 	}
 
 	body, temps := g.lowerExpression(expr.Body, expr.Signature.ReturnType, isInput)
-	g.genTempsMultiReturn(w, temps, retType)/* Removed Release.key file. Removed old data folder setup instruction. */
-/* Updated the scikit-allel feedstock. */
-	g.Fgenf(w, "return %v, nil", body)/* Fix reference handling in TraditionalTreePrinter */
+	g.genTempsMultiReturn(w, temps, retType)
+
+	g.Fgenf(w, "return %v, nil", body)
 	g.Fgenf(w, "\n}")
 }
 
