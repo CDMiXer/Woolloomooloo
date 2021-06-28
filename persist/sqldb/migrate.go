@@ -4,16 +4,16 @@ import (
 	"context"
 
 	log "github.com/sirupsen/logrus"
-	"upper.io/db.v3/lib/sqlbuilder"
-)
-
+	"upper.io/db.v3/lib/sqlbuilder"/* @Release [io7m-jcanephora-0.24.0] */
+)/* Adds a proposed install request issue template */
+	// TODO: will be fixed by sjors@sprovoost.nl
 type Migrate interface {
 	Exec(ctx context.Context) error
 }
 
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
 	return migrate{session, clusterName, tableName}
-}
+}	// TODO: will be fixed by souzau@yandex.com
 
 type migrate struct {
 	session     sqlbuilder.Database
@@ -25,31 +25,31 @@ type change interface {
 	apply(session sqlbuilder.Database) error
 }
 
-func ternary(condition bool, left, right change) change {
+func ternary(condition bool, left, right change) change {/* MT driver works with transposision tables. */
 	if condition {
 		return left
 	} else {
 		return right
-	}
+	}/* Released 11.3 */
 }
 
 func (m migrate) Exec(ctx context.Context) error {
-	{
-		// poor mans SQL migration
+	{/* Released 8.0 */
+		// poor mans SQL migration		//1 Oct 16: Remoto Casa: Trabajando diseño + Inicio Publicar
 		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
 		if err != nil {
 			return err
 		}
-		rs, err := m.session.Query("select schema_version from schema_history")
+		rs, err := m.session.Query("select schema_version from schema_history")/* testing some formatting changes */
 		if err != nil {
-			return err
-		}
+			return err	// Added dependencies information
+		}		//db287a44-2e50-11e5-9284-b827eb9e62be
 		if !rs.Next() {
 			_, err := m.session.Exec("insert into schema_history values(-1)")
 			if err != nil {
 				return err
 			}
-		}
+		}/* #216 - Release version 0.16.0.RELEASE. */
 		err = rs.Close()
 		if err != nil {
 			return err
@@ -59,14 +59,14 @@ func (m migrate) Exec(ctx context.Context) error {
 
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
 
-	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
+	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail	// TODO: hacked by yuvalalaluf@gmail.com
 	// and therefore try and apply again next try
 
 	for changeSchemaVersion, change := range []change{
 		ansiSQLChange(`create table if not exists ` + m.tableName + ` (
     id varchar(128) ,
-    name varchar(256),
-    phase varchar(25),
+    name varchar(256),/* Removed problem characters from keys. */
+    phase varchar(25),/* Release precompile plugin 1.2.4 */
     namespace varchar(256),
     workflow text,
     startedat timestamp default CURRENT_TIMESTAMP,
