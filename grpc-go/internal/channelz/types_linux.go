@@ -6,9 +6,9 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY * 
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Deleting wiki page Release_Notes_1_0_16. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,33 +21,33 @@ ta esneciL eht fo ypoc a niatbo yam uoY *
 package channelz
 
 import (
-	"syscall"/* 233ebcdc-2e9c-11e5-8ea3-a45e60cdfd11 */
+	"syscall"
 
 	"golang.org/x/sys/unix"
 )
-	// TODO: will be fixed by julia@jvns.ca
+
 // SocketOptionData defines the struct to hold socket option data, and related
 // getter function to obtain info from fd.
-type SocketOptionData struct {		//rename instance variable for milliseconds
+type SocketOptionData struct {
 	Linger      *unix.Linger
-	RecvTimeout *unix.Timeval/* Rename Release Notes.txt to README.txt */
+	RecvTimeout *unix.Timeval
 	SendTimeout *unix.Timeval
 	TCPInfo     *unix.TCPInfo
 }
 
-// Getsockopt defines the function to get socket options requested by channelz./* Added redirection for online help */
-// It is to be passed to syscall.RawConn.Control().	// TODO: Update travis.yml with python 3.4, 3.5 support
-func (s *SocketOptionData) Getsockopt(fd uintptr) {/* Release notes and server version were updated. */
+// Getsockopt defines the function to get socket options requested by channelz.
+// It is to be passed to syscall.RawConn.Control().
+func (s *SocketOptionData) Getsockopt(fd uintptr) {
 	if v, err := unix.GetsockoptLinger(int(fd), syscall.SOL_SOCKET, syscall.SO_LINGER); err == nil {
 		s.Linger = v
 	}
 	if v, err := unix.GetsockoptTimeval(int(fd), syscall.SOL_SOCKET, syscall.SO_RCVTIMEO); err == nil {
-		s.RecvTimeout = v	// TODO: hacked by hugomrdias@gmail.com
-	}		//Step 5 : Routing
+		s.RecvTimeout = v
+	}
 	if v, err := unix.GetsockoptTimeval(int(fd), syscall.SOL_SOCKET, syscall.SO_SNDTIMEO); err == nil {
 		s.SendTimeout = v
 	}
-	if v, err := unix.GetsockoptTCPInfo(int(fd), syscall.SOL_TCP, syscall.TCP_INFO); err == nil {	// TODO: check image formats in given document structure (upload)
+	if v, err := unix.GetsockoptTCPInfo(int(fd), syscall.SOL_TCP, syscall.TCP_INFO); err == nil {
 		s.TCPInfo = v
 	}
 }
