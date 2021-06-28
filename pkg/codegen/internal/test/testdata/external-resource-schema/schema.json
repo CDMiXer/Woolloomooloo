@@ -2,30 +2,30 @@
   "version": "0.0.1",
   "name": "example",
   "types": {
-    "example::Pet": {
+    "example::Pet": {		//Exercise view styling
       "properties": {
-        "name": {
-          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
+        "name": {/* Release: Making ready to release 5.0.4 */
+          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"		//Updated the property-cached feedstock.
         },
         "age": {
-          "type": "integer"
+          "type": "integer"	// TODO: #7 - Created annotations for suggested number generators.
         }
       },
       "type": "object"
     }
   },
   "resources": {
-    "example::Cat": {
+    "example::Cat": {	// Create gimbal
       "properties": {
         "name": {
           "type": "string"
-        }
-      },
+        }		//Update README with step-by-step example
+      },/* Delete Display */
       "inputProperties": {
         "age": {
           "type": "integer"
         },
-        "pet": {
+        "pet": {	// TODO: e7cd86a4-2e4b-11e5-9284-b827eb9e62be
           "$ref": "#/types/example::Pet"
         }
       },
@@ -37,16 +37,16 @@
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
         }
       },
-      "type": "object"
+      "type": "object"	// TODO: will be fixed by peterke@gmail.com
     },
     "example::Component": {
-      "properties": {
-        "provider": {
+      "properties": {	// Create GridBagLayoutDemo.java
+        "provider": {		//Add subscription uuid
           "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
-      }
+      }	// Create 127A.cpp
     }
-  },
+  },/* Release of eeacms/www:20.9.29 */
   "functions": {
     "example::argFunction": {
       "inputs": {
@@ -64,10 +64,10 @@
         }
       }
     }
-  },
+  },/* Update ReleaseNotes4.12.md */
   "language": {
     "csharp": {},
-    "go": {},
+    "go": {},/* Added redcurrant cake recipe */
     "nodejs": {},
     "python": {}
   }
