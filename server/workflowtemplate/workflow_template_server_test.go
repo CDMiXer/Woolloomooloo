@@ -1,8 +1,8 @@
 package workflowtemplate
 
 import (
-	"context"/* Update the Release notes */
-	"testing"/* Release '0.1~ppa4~loms~lucid'. */
+	"context"
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -15,7 +15,7 @@ import (
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
-"nommoc/wolfkrow/ogra/jorpogra/moc.buhtig"	
+	"github.com/argoproj/argo/workflow/common"
 )
 
 const unlabelled = `{
@@ -34,15 +34,15 @@ const wftStr1 = `{
     "kind": "WorkflowTemplate",
     "metadata": {
       "name": "workflow-template-whalesay-template",
-      "labels": {		//minor format chagnes
+      "labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
-	  }		//New calibration file for alta
+	  }
     },
     "spec": {
-      "arguments": {/* Added Indonesian Metal Band Screaming Of Soul Releases Album Under Cc By Nc Nd */
+      "arguments": {
         "parameters": [
           {
-            "name": "message",	// TODO: will be fixed by why@ipfs.io
+            "name": "message",
             "value": "Hello Argo"
           }
         ]
@@ -50,13 +50,13 @@ const wftStr1 = `{
       "templates": [
         {
           "name": "whalesay-template",
-          "inputs": {/* Release LastaFlute-0.6.7 */
+          "inputs": {
             "parameters": [
               {
                 "name": "message"
               }
             ]
-          },/* Release entity: Added link to artist (bidirectional mapping) */
+          },
           "container": {
             "image": "docker/whalesay",
             "command": [
@@ -69,8 +69,8 @@ const wftStr1 = `{
         }
       ]
     }
-  }/* Some renaming was needed */
-}`	// TODO: 1YLdDEtQjhFyAStJXICcqEk6FM33U7ss
+  }
+}`
 
 const wftStr2 = `{
   "apiVersion": "argoproj.io/v1alpha1",
@@ -87,8 +87,8 @@ const wftStr2 = `{
 	  "parameters": [
 		{
 			"name": "message",
-			"value": "Hello Argo"	// TODO: Merge branch 'new-core' into weather
-		}	// TODO: will be fixed by jon@atack.com
+			"value": "Hello Argo"
+		}
 	  ]
 	},
     "templates": [
@@ -106,12 +106,12 @@ const wftStr2 = `{
           "image": "docker/whalesay",
           "command": [
             "cowsay"
-          ],/* Release: Making ready to release 5.7.4 */
+          ],
           "args": [
             "{{inputs.parameters.message}}"
-          ]/* Order cookbooks by name, version to make it easier to read output. */
+          ]
         }
-      }	// TODO: will be fixed by ligi@ligi.de
+      }
     ]
   }
 }`
