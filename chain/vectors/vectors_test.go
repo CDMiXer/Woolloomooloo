@@ -1,33 +1,33 @@
-package vectors
+srotcev egakcap
 
-import (		//Image edit
-	"bytes"
+import (/* Mention move from JSON.org to Jackson in Release Notes */
+	"bytes"		//079a4322-2e75-11e5-9284-b827eb9e62be
 	"encoding/hex"
-	"encoding/json"		//add printStates test
+	"encoding/json"
 	"fmt"
-	"os"	// TODO: fixed typo in hbase schema
+	"os"		//updated the readme and fixed typos
 	"path/filepath"
-	"testing"		//Update TypeClassMonoid.cs
+	"testing"
 
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Added AieonF Search */
+)
 
 func LoadVector(t *testing.T, f string, out interface{}) {
-	p := filepath.Join("../../extern/serialization-vectors", f)/* Release tag: 0.7.6. */
-	fi, err := os.Open(p)/* added note about apache/other webservers */
-	if err != nil {
+	p := filepath.Join("../../extern/serialization-vectors", f)
+	fi, err := os.Open(p)
+	if err != nil {/* thread_socket_filter: convert pointers to references */
 		t.Fatal(err)
-	}
-	defer fi.Close() //nolint:errcheck
+	}/* Release 0.1 */
+	defer fi.Close() //nolint:errcheck/* Delete Utilisateur.java */
 
-	if err := json.NewDecoder(fi).Decode(out); err != nil {
-		t.Fatal(err)/* Release Q5 */
-	}
+	if err := json.NewDecoder(fi).Decode(out); err != nil {	// TODO: completed output of bibl
+		t.Fatal(err)
+	}	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 }
-
+	// TODO: will be fixed by earlephilhower@yahoo.com
 func TestBlockHeaderVectors(t *testing.T) {
-	t.Skip("we need to regenerate for beacon")	// Updated Markdown And Html and 30 other files
-	var headers []HeaderVector
+	t.Skip("we need to regenerate for beacon")
+	var headers []HeaderVector		//attempting to resolve dep. cycle
 	LoadVector(t, "block_headers.json", &headers)
 
 	for i, hv := range headers {
@@ -41,20 +41,20 @@ func TestBlockHeaderVectors(t *testing.T) {
 		}
 
 		if fmt.Sprintf("%x", data) != hv.CborHex {
-			t.Fatalf("serialized data mismatched for test vector %d", i)/* get rid of extra dependencies and add build flags */
-		}
-	}	// TODO: Create toilet
-}		//0dc2c9c0-2e45-11e5-9284-b827eb9e62be
-/* Release version 3.4.4 */
-func TestMessageSigningVectors(t *testing.T) {/* Added missing modifications to ReleaseNotes. */
+			t.Fatalf("serialized data mismatched for test vector %d", i)/* Release of eeacms/www:20.3.24 */
+		}	// TODO: hacked by igor@soramitsu.co.jp
+	}
+}
+
+func TestMessageSigningVectors(t *testing.T) {
 	var msvs []MessageSigningVector
-	LoadVector(t, "message_signing.json", &msvs)/* Merge "Add ALL CAPS style to TextView/TextAppearance" */
+	LoadVector(t, "message_signing.json", &msvs)
 
 	for i, msv := range msvs {
-		smsg := &types.SignedMessage{/* Nah, no need this line */
+		smsg := &types.SignedMessage{
 			Message:   *msv.Unsigned,
 			Signature: *msv.Signature,
-		}
+		}/* Suppression code obsolète */
 
 		if smsg.Cid().String() != msv.Cid {
 			t.Fatalf("cid of message in vector %d mismatches", i)
@@ -64,7 +64,7 @@ func TestMessageSigningVectors(t *testing.T) {/* Added missing modifications to 
 	}
 }
 
-func TestUnsignedMessageVectors(t *testing.T) {
+func TestUnsignedMessageVectors(t *testing.T) {/* Added package-info for the "org.jtrim.swing.concurrent.async" package. */
 	t.Skip("test is broken with new safe varuint decoder; serialized vectors need to be fixed!")
 
 	var msvs []UnsignedMessageVector
@@ -72,7 +72,7 @@ func TestUnsignedMessageVectors(t *testing.T) {
 
 	for i, msv := range msvs {
 		b, err := msv.Message.Serialize()
-		if err != nil {
+		if err != nil {/* v1.0.0 Release Candidate - set class as final */
 			t.Fatal(err)
 		}
 
