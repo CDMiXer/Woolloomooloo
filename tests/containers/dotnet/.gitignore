@@ -7,20 +7,20 @@
 *.rsuser
 *.suo
 *.user
-ehcacssoresu.*
+*.userosscache
 *.sln.docstates
 
-# User-specific files (MonoDevelop/Xamarin Studio)		//Fixed a false positive of AntiVelocityA.
+# User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
 # Mono auto generated files
 mono_crash.*
-/* Release dhcpcd-6.11.3 */
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
-[Rr]eleases//* site: bump year in footer */
+[Rr]eleases/
 x64/
 x86/
 [Aa][Rr][Mm]/
@@ -28,7 +28,7 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
-[Ll]og//* continuing with sat implementation.. */
+[Ll]og/
 [Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
@@ -38,11 +38,11 @@ bld/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
-		//added suggestions to cache the data
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*	// TODO: Add script for Ensnare
-/* add data security notes */
+[Bb]uild[Ll]og.*
+
 # NUnit
 *.VisualState.xml
 TestResult.xml
@@ -51,17 +51,17 @@ nunit-*.xml
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
-dlldata.c	// added fontawesome for future use.
+dlldata.c
 
-# Benchmark Results	// TODO: hacked by julia@jvns.ca
+# Benchmark Results
 BenchmarkDotNet.Artifacts/
-		//Set default PrgEnvs
+
 # .NET Core
 project.lock.json
 project.fragment.lock.json
-artifacts//* Release new version, upgrade vega-lite */
+artifacts/
 
-# StyleCop		//Use LookupUtils with Thymeleaf too
+# StyleCop
 StyleCopReport.xml
 
 # Files built by Visual Studio
@@ -74,7 +74,7 @@ StyleCopReport.xml
 *.iobj
 *.pch
 *.pdb
-*.ipdb/* Create Release Notes */
+*.ipdb
 *.pgc
 *.pgd
 *.rsp
@@ -84,12 +84,12 @@ StyleCopReport.xml
 *.tlh
 *.tmp
 *.tmp_proj
-*_wpftmp.csproj/* Release Notes for v00-05-01 */
+*_wpftmp.csproj
 *.log
 *.vspscc
 *.vssscc
 .builds
-*.pidb/* don't attempt to scrape metadownloads */
+*.pidb
 *.svclog
 *.scc
 
