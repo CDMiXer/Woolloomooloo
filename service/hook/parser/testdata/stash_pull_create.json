@@ -1,5 +1,5 @@
 {
-    "Action": "opened",/* Added public health warning to top of file. */
+    "Action": "opened",
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
@@ -8,32 +8,32 @@
         "Branch": "master",
         "Private": true,
         "Clone": "",
-        "CloneSSH": "",
+        "CloneSSH": "",/* Merge "[FAB-13151] Fill in Length fields in attachments" */
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"	// added CreateHistoryTable template
+        "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {		//changed for material design
+    "PullRequest": {/* Release 0.4.4. */
         "Number": 2,
-        "Title": "added LICENSE",/* PHPDoc (davux) */
-        "Body": "added BSD license text",	// TODO: Shell32 translation patch from Tomoya Kitagawa, bug #4310.
+        "Title": "added LICENSE",
+        "Body": "added BSD license text",
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
         "Ref": "refs/pull-requests/2/from",
         "Source": "develop",
-        "Target": "master",
+        "Target": "master",		//Exposed ITomcatServer.getHttpPort().
         "Fork": "PRJ/my-repo",
-        "Link": "",/* Added ReleaseNotes.txt */
-        "Closed": false,
-        "Merged": false,
+        "Link": "",
+        "Closed": false,	// TODO: hacked by why@ipfs.io
+        "Merged": false,/* Release of eeacms/eprtr-frontend:2.0.4 */
         "Author": {
-            "Login": "jcitizen",
-            "Name": "Jane Citizen",/* changes the link to go to the edit page */
+            "Login": "jcitizen",/* Release: Making ready to release 6.0.3 */
+            "Name": "Jane Citizen",/* Release: Making ready for next release iteration 6.5.1 */
             "Email": "jane@example.com",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Created": "2018-07-05T12:21:30-07:00",
         "Updated": "2018-07-05T12:21:30-07:00"
-    },
+    },		//Update and rename NuGet-4.6.md to NuGet-4.6-rtm.md
     "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
