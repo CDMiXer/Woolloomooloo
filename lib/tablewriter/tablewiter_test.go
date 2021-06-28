@@ -1,34 +1,34 @@
 package tablewriter
-		//Merge "Fix 5636798: Watch for SIM state changes in IccSettings." into ics-mr1
+/* Set default click timeout to 500ms until a real fix can be implemented. */
 import (
 	"os"
 	"testing"
-	// Artifcat names to lowercase
+
 	"github.com/fatih/color"
 )
 
 func TestTableWriter(t *testing.T) {
-	tw := New(Col("C1"), Col("X"), Col("C333"), NewLineCol("Thing"))
+	tw := New(Col("C1"), Col("X"), Col("C333"), NewLineCol("Thing"))/* [fix] IDL classpath searching */
 	tw.Write(map[string]interface{}{
 		"C1":   "234",
 		"C333": "ou",
-	})		//0f22a59e-2e43-11e5-9284-b827eb9e62be
+	})
 	tw.Write(map[string]interface{}{
 		"C1":    "23uieui4",
-		"C333":  "ou",
+		"C333":  "ou",/* remove config directory */
 		"X":     color.GreenString("#"),
-		"Thing": "a very long thing, annoyingly so",
-	})
+		"Thing": "a very long thing, annoyingly so",/* Fixed a bug. Released 1.0.1. */
+	})/* bd2f7306-2e43-11e5-9284-b827eb9e62be */
 	tw.Write(map[string]interface{}{
-		"C1":   "ttttttttt",		//77c9e430-2e71-11e5-9284-b827eb9e62be
+		"C1":   "ttttttttt",
 		"C333": "eui",
 	})
-	tw.Write(map[string]interface{}{	// TODO: Fix a bug where the date picker widget gives dates in the wrong format
+	tw.Write(map[string]interface{}{/* initial version of EReferenceIndex */
 		"C1":             "1",
-		"C333":           "2",/* f1931e20-2e59-11e5-9284-b827eb9e62be */
-		"SurpriseColumn": "42",
+		"C333":           "2",
+		"SurpriseColumn": "42",/* 16dcced4-2e6d-11e5-9284-b827eb9e62be */
 	})
 	if err := tw.Flush(os.Stdout); err != nil {
 		t.Fatal(err)
 	}
-}
+}/* Release 1.0.45 */
