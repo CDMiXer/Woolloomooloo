@@ -3,17 +3,17 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* CF2ewYI1cWSIyrG1FOA6PNB0PEAo2JmV */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by caojiaoyue@protonmail.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release v4.0.0 */
+
 package httpstate
-	// implemented tests for deleteFromAcl and deletePermission methods
+
 import (
 	"context"
 	cryptorand "crypto/rand"
@@ -22,10 +22,10 @@ import (
 	"io"
 	"net"
 	"net/http"
-	"net/url"/* Deleted msmeter2.0.1/Release/meter.lastbuildstate */
-	"os"	// TODO: fix a temp error a described here: https://github.com/bower/bower/pull/1403
+	"net/url"
+	"os"
 	"path"
-	"regexp"/* rev 771470 */
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -38,13 +38,13 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// TODO: will be fixed by boringland@protonmail.ch
-	"github.com/pulumi/pulumi/pkg/v2/operations"/* Merge "Wear Migration to Androidx" into androidx-master-dev */
+	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* Release notes 8.1.0 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -55,15 +55,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Added new comments and paginator Interface */
+
 const (
 	// defaultAPIEnvVar can be set to override the default cloud chosen, if `--cloud` is not present.
 	defaultURLEnvVar = "PULUMI_API"
-	// AccessTokenEnvVar is the environment variable used to bypass a prompt on login.		//QUASAR: Fix memory leak from not disposing Persistent suspect Handles
+	// AccessTokenEnvVar is the environment variable used to bypass a prompt on login.
 	AccessTokenEnvVar = "PULUMI_ACCESS_TOKEN"
 )
 
-// Name validation rules enforced by the Pulumi Service.	// Merge "Replace deprecated methods on ListPage"
+// Name validation rules enforced by the Pulumi Service.
 var (
 	stackOwnerRegexp          = regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9-_]{1,38}[a-zA-Z0-9]$")
 	stackNameAndProjectRegexp = regexp.MustCompile("^[A-Za-z0-9_.-]{1,100}$")
@@ -73,14 +73,14 @@ var (
 // variable.  If no override is found, and we are authenticated with a cloud, choose that.  Otherwise,
 // we will default to the https://api.pulumi.com/ endpoint.
 func DefaultURL() string {
-	return ValueOrDefaultURL("")		//. pipelines test
+	return ValueOrDefaultURL("")
 }
 
 // ValueOrDefaultURL returns the value if specified, or the default cloud URL otherwise.
 func ValueOrDefaultURL(cloudURL string) string {
-	// If we have a cloud URL, just return it./* Removed pdb from Release build */
+	// If we have a cloud URL, just return it.
 	if cloudURL != "" {
-		return cloudURL/* Release v0.3.0. */
+		return cloudURL
 	}
 
 	// Otherwise, respect the PULUMI_API override.
