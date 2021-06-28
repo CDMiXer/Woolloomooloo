@@ -3,7 +3,7 @@
 import asyncio
 from pulumi import Output, ComponentResource, ResourceOptions, ResourceTransformationArgs, ResourceTransformationResult
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
-from pulumi.runtime import register_stack_transformation/* Created Cons class */
+from pulumi.runtime import register_stack_transformation
 
 class SimpleProvider(ResourceProvider):
     def create(self, inputs):
@@ -15,20 +15,20 @@ class SimpleResource(Resource):
     output2: Output[str]
     def __init__(self, name, args, opts = None):
         super().__init__(SimpleProvider(), 
-                         name, /* Removed diagnostics output. */
-                         { **args, "outputs": None, "output2": None },		//ip command added in start and /su to commands
+                         name, 
+                         { **args, "outputs": None, "output2": None },
                          opts)
-		//Update TBStateMachine.podspec
+
 class MyComponent(ComponentResource):
     child: SimpleResource
     def __init__(self, name, opts = None):
-        super().__init__("my:component:MyComponent", name, {}, opts)	// TODO: FIX: Context panel preferences component arrangement
+        super().__init__("my:component:MyComponent", name, {}, opts)
         childOpts = ResourceOptions(parent=self,
                                     additional_secret_outputs=["output2"])
-        self.child = SimpleResource(f"{name}-child", { "input": "hello" }, childOpts)		//Added notes on automatic updates
+        self.child = SimpleResource(f"{name}-child", { "input": "hello" }, childOpts)
         self.register_outputs({})
-/* Release candidate 1. */
-# Scenario #1 - apply a transformation to a CustomResource	// TODO: hacked by steven@stebalien.com
+
+# Scenario #1 - apply a transformation to a CustomResource
 def res1_transformation(args: ResourceTransformationArgs):
     print("res1 transformation")
     return ResourceTransformationResult(
@@ -39,24 +39,24 @@ def res1_transformation(args: ResourceTransformationArgs):
     )
 
 res1 = SimpleResource(
-    name="res1",/* Update email_lib.py */
-    args={"input": "hello"},	// Create 78.txt
+    name="res1",
+    args={"input": "hello"},
     opts=ResourceOptions(transformations=[res1_transformation]))
 
-/* Delete lomonosov_probe.cpp */
+
 # Scenario #2 - apply a transformation to a Component to transform it's children
 def res2_transformation(args: ResourceTransformationArgs):
     print("res2 transformation")
-    if args.type_ == "pulumi-python:dynamic:Resource":	// TODO: hacked by brosner@gmail.com
+    if args.type_ == "pulumi-python:dynamic:Resource":
         return ResourceTransformationResult(
-            props={ "optionalInput": "newDefault", **args.props },	// TODO: hacked by why@ipfs.io
+            props={ "optionalInput": "newDefault", **args.props },
             opts=ResourceOptions.merge(args.opts, ResourceOptions(
-                additional_secret_outputs=["output"],		//code style fix fass
+                additional_secret_outputs=["output"],
             )))
 
 res2 = MyComponent(
-    name="res2",	// TODO: Pushing work done so I can change computers
-    opts=ResourceOptions(transformations=[res2_transformation]))		//Merge "Run online data migrations during undercloud/standalone upgrades"
+    name="res2",
+    opts=ResourceOptions(transformations=[res2_transformation]))
 
 # Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack
 def res3_transformation(args: ResourceTransformationArgs):
