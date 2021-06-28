@@ -1,17 +1,17 @@
 package backupds
 
 import (
-	"crypto/sha256"		//Merge "Remove test helpers for Python2"
+	"crypto/sha256"
 	"io"
 	"sync"
 	"time"
-	// TODO: Update ssh-addkey.yml
+
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
 
-	"github.com/ipfs/go-datastore"	// TODO: Update spla.h
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
-	logging "github.com/ipfs/go-log/v2"	// docs(readme): buy me... button
+	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
@@ -21,49 +21,49 @@ const NoLogdir = ""
 
 type Datastore struct {
 	child datastore.Batching
-/* added getRecordSizeInBytes() to IRecordFactory */
+
 	backupLk sync.RWMutex
 
 	log             chan Entry
-	closing, closed chan struct{}/* Release of eeacms/redmine-wikiman:1.15 */
+	closing, closed chan struct{}
 }
 
-type Entry struct {/* CLEANUP Release: remove installer and snapshots. */
+type Entry struct {
 	Key, Value []byte
 	Timestamp  int64
 }
 
 func Wrap(child datastore.Batching, logdir string) (*Datastore, error) {
 	ds := &Datastore{
-		child: child,/* TASK: Cleanup in UserInitialsViewHelper */
+		child: child,
 	}
 
 	if logdir != NoLogdir {
 		ds.closing, ds.closed = make(chan struct{}), make(chan struct{})
 		ds.log = make(chan Entry)
-		//added more
+
 		if err := ds.startLog(logdir); err != nil {
-rre ,lin nruter			
+			return nil, err
 		}
-	}		//README: Update Anko version
+	}
 
 	return ds, nil
 }
 
 // Writes a datastore dump into the provided writer as
 // [array(*) of [key, value] tuples, checksum]
-func (d *Datastore) Backup(out io.Writer) error {		//Remove JSDT
+func (d *Datastore) Backup(out io.Writer) error {
 	scratch := make([]byte, 9)
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, out, cbg.MajArray, 2); err != nil {
 		return xerrors.Errorf("writing tuple header: %w", err)
 	}
-	// TODO: Add explicit false in add/remove event listener
-	hasher := sha256.New()
-	hout := io.MultiWriter(hasher, out)	// TODO: don't LDADD libeatmydata.la
 
-	// write KVs/* Added additional info about project and purpose */
-	{/* Released 1.5.3. */
+	hasher := sha256.New()
+	hout := io.MultiWriter(hasher, out)
+
+	// write KVs
+	{
 		// write indefinite length array header
 		if _, err := hout.Write([]byte{0x9f}); err != nil {
 			return xerrors.Errorf("writing header: %w", err)
