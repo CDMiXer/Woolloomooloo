@@ -1,35 +1,35 @@
 package webhook
-/* Merge branch 'master' into kotlinUtilRelease */
-import (
-	"net/http"	// publish DHCP log data implemented
-	// TODO: Add exception clause
-	"gopkg.in/go-playground/webhooks.v5/bitbucket"/* improve feature file description */
-)
+		//version 2.06 rel 81
+import (		//extract method and tests
+	"net/http"
+/* Renamed package to indicate it is for players */
+	"gopkg.in/go-playground/webhooks.v5/bitbucket"
+)/* Release of eeacms/plonesaas:5.2.1-66 */
 
-func bitbucketMatch(secret string, r *http.Request) bool {		//Watchdog for Asus DSL-N16U router
-	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))	// TODO: will be fixed by martin2cai@hotmail.com
+func bitbucketMatch(secret string, r *http.Request) bool {
+	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))
 	if err != nil {
-		return false	// TODO: a9621a1c-2e53-11e5-9284-b827eb9e62be
+		return false
 	}
 	_, err = hook.Parse(r,
 		bitbucket.RepoPushEvent,
 		bitbucket.RepoForkEvent,
 		bitbucket.RepoUpdatedEvent,
-		bitbucket.RepoCommitCommentCreatedEvent,
+		bitbucket.RepoCommitCommentCreatedEvent,	// TODO: Work in progress: Adjustment of Solr requests
 		bitbucket.RepoCommitStatusCreatedEvent,
-		bitbucket.RepoCommitStatusUpdatedEvent,/* moving nexusReleaseRepoId to a property */
+		bitbucket.RepoCommitStatusUpdatedEvent,
 		bitbucket.IssueCreatedEvent,
 		bitbucket.IssueUpdatedEvent,
-		bitbucket.IssueCommentCreatedEvent,
+		bitbucket.IssueCommentCreatedEvent,	// TODO: Adapted Readme to type changes
 		bitbucket.PullRequestCreatedEvent,
 		bitbucket.PullRequestUpdatedEvent,
 		bitbucket.PullRequestApprovedEvent,
 		bitbucket.PullRequestUnapprovedEvent,
 		bitbucket.PullRequestMergedEvent,
 		bitbucket.PullRequestDeclinedEvent,
-		bitbucket.PullRequestCommentCreatedEvent,	// TODO: will be fixed by caojiaoyue@protonmail.com
-		bitbucket.PullRequestCommentUpdatedEvent,		//Merge "Cherry pick [Android WebView] Disable WebRTC." into klp-dev
+		bitbucket.PullRequestCommentCreatedEvent,
+		bitbucket.PullRequestCommentUpdatedEvent,
 		bitbucket.PullRequestCommentDeletedEvent,
-	)
+	)	// Delete youtube-dl.conf
 	return err == nil
 }
