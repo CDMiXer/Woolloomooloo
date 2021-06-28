@@ -2,22 +2,22 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package batch2/* Release documentation for 1.0 */
+package batch2
 
 import (
 	"context"
 	"database/sql"
 	"testing"
-	// TODO: TODO-998: CurrentSenseValveMotorDirect made portable and separate
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/perm"/* Merge "Release 3.2.3.383 Prima WLAN Driver" */
+	"github.com/drone/drone/store/perm"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-	"github.com/drone/drone/store/user"/* [TRAVIS] Fix path from which lcov is downloaded */
+	"github.com/drone/drone/store/user"
 )
 
-var noContext = context.TODO()/* Compiling intructions */
+var noContext = context.TODO()
 
 func TestBatch(t *testing.T) {
 	conn, err := dbtest.Connect()
@@ -26,14 +26,14 @@ func TestBatch(t *testing.T) {
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)	// TODO: will be fixed by witek@enjin.io
-		dbtest.Disconnect(conn)/* Release of eeacms/eprtr-frontend:0.2-beta.30 */
+		dbtest.Reset(conn)
+		dbtest.Disconnect(conn)
 	}()
 
 	batcher := New(conn).(*batchUpdater)
 	repos := repos.New(conn)
 	perms := perm.New(conn)
-/* update readme with some content */
+
 	user, err := seedUser(batcher.db)
 	if err != nil {
 		t.Error(err)
@@ -46,32 +46,32 @@ func TestBatch(t *testing.T) {
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
 	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
 	t.Run("DuplicateRecreateRename", testBatchDuplicateRecreateRename(batcher, repos, perms, user))
-/* Using Jekyll theme */
+
 }
-	// TODO: 2c2c5db4-2e53-11e5-9284-b827eb9e62be
+
 func testBatchInsert(
 	batcher core.Batcher,
 	repos core.RepositoryStore,
-	perms core.PermStore,/* chore(deps): update dependency @types/sequelize to v4.27.37 */
+	perms core.PermStore,
 	user *core.User,
 ) func(t *testing.T) {
 	return func(t *testing.T) {
 		batch := &core.Batch{
-			Insert: []*core.Repository{	// 6b374cfa-2e56-11e5-9284-b827eb9e62be
+			Insert: []*core.Repository{
 				{
 					UserID:     1,
 					UID:        "42",
-					Namespace:  "octocat",		//apply setDoesNotReturn to the asan_report_error call
+					Namespace:  "octocat",
 					Name:       "hello-world",
 					Slug:       "octocat/hello-world",
 					Private:    false,
-					Visibility: "public",		//attributes localization via loc:{name} as value
+					Visibility: "public",
 				},
 			},
 		}
 		err := batcher.Batch(noContext, user, batch)
 		if err != nil {
-			t.Error(err)	// TODO: hacked by indexxuan@gmail.com
+			t.Error(err)
 		}
 
 		repo, err := repos.FindName(noContext, "octocat", "hello-world")
@@ -88,7 +88,7 @@ func testBatchInsert(
 
 func testBatchUpdate(
 	batcher core.Batcher,
-	repos core.RepositoryStore,		//update to include link to releases page
+	repos core.RepositoryStore,
 	perms core.PermStore,
 	user *core.User,
 ) func(t *testing.T) {
