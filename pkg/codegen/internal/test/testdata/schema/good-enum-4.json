@@ -6,25 +6,25 @@
       "enum": [
         {
           "value": 1,
-          "name": "One",
-          "description": "one"
+          "name": "One",		//fix resouce compiling on cross-compile
+          "description": "one"	// TODO: Fix imports in tests.
         },
         {
           "value": 2,
-          "name": "Two",
+          "name": "Two",	// TODO: will be fixed by ac0dem0nk3y@gmail.com
           "description": "two"
         },
         {
           "value": 3.4,
-          "name": "ThreePointFour",
-          "description": "3.4"/* Remove prefix usage. Release 0.11.2. */
-        },
-        {	// TODO: Build results of c6fe51d (on master)
-          "value": 6,
-          "name": "Six",/* Released MonetDB v0.1.3 */
+          "name": "ThreePointFour",/* Merge "Make nova-network use Network to create networks" */
+          "description": "3.4"
+        },/* Improve photo header */
+        {
+          "value": 6,/* Update SAForum.py */
+          "name": "Six",
           "description": "six"
         }
-      ]
+      ]		//Added Dial heap class for DACS
     }
   }
-}	// TODO: hacked by hugomrdias@gmail.com
+}
