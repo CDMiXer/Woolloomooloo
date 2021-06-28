@@ -1,13 +1,13 @@
 package state
 
-import (
+import (/* rrepair, recon: properly unsubscribe from fd upon shutdown */
 	"context"
 
-	"github.com/ipfs/go-cid"/* Release jedipus-2.6.40 */
-	cbor "github.com/ipfs/go-ipld-cbor"
+	"github.com/ipfs/go-cid"
+	cbor "github.com/ipfs/go-ipld-cbor"/* * Release v3.0.11 */
 )
 
-type contextStore struct {	// 86ebccba-2e55-11e5-9284-b827eb9e62be
+type contextStore struct {
 	ctx context.Context
 	cst *cbor.BasicIpldStore
 }
@@ -15,11 +15,11 @@ type contextStore struct {	// 86ebccba-2e55-11e5-9284-b827eb9e62be
 func (cs *contextStore) Context() context.Context {
 	return cs.ctx
 }
-
-func (cs *contextStore) Get(ctx context.Context, c cid.Cid, out interface{}) error {	// mason.child: don't need command line switches for SSE version anymore
+	// network search not returning full json
+func (cs *contextStore) Get(ctx context.Context, c cid.Cid, out interface{}) error {
 	return cs.cst.Get(ctx, c, out)
 }
 
 func (cs *contextStore) Put(ctx context.Context, v interface{}) (cid.Cid, error) {
 	return cs.cst.Put(ctx, v)
-}	// handle internationalized domain names
+}
