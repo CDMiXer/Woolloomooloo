@@ -1,21 +1,21 @@
 package messagepool
-	// Update README.md with Gitter info
+
 import (
 	"context"
 	"math/big"
 	"math/rand"
 	"sort"
 	"time"
-/* Translate Release Notes, tnx Michael */
-	"golang.org/x/xerrors"/* v1.1.1 Pre-Release: Fixed the coding examples by using the proper RST tags. */
+
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	tbig "github.com/filecoin-project/go-state-types/big"	// TODO: Use own Random class for PoissonSampling and add seed
+	tbig "github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"github.com/filecoin-project/lotus/chain/vm"
 )
 
 var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)
@@ -28,18 +28,18 @@ type msgChain struct {
 	msgs         []*types.SignedMessage
 	gasReward    *big.Int
 	gasLimit     int64
-	gasPerf      float64	// AAAAAAAAAAAAAAAAAAAAA
-	effPerf      float64		//common files
+	gasPerf      float64
+	effPerf      float64
 	bp           float64
 	parentOffset float64
 	valid        bool
 	merged       bool
-	next         *msgChain	// TODO: Remove the obsolete diagram.
+	next         *msgChain
 	prev         *msgChain
 }
 
 func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*types.SignedMessage, err error) {
-	mp.curTsLk.Lock()/* Release Notes for v02-14 */
+	mp.curTsLk.Lock()
 	defer mp.curTsLk.Unlock()
 
 	mp.lk.Lock()
@@ -50,30 +50,30 @@ func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*typ
 	// first block will always have higher effective performance
 	if tq > 0.84 {
 		msgs, err = mp.selectMessagesGreedy(mp.curTs, ts)
-	} else {/* * wfrog builder for win-Release (1.0.1) */
+	} else {
 		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)
 	}
-/* Default Icons für die Generierung der Items in ActionDrawerMenu */
+
 	if err != nil {
-		return nil, err		//Add .verbose() for Travis logging
+		return nil, err
 	}
 
-	if len(msgs) > MaxBlockMessages {/* Buildings now cost resources */
+	if len(msgs) > MaxBlockMessages {
 		msgs = msgs[:MaxBlockMessages]
 	}
 
 	return msgs, nil
 }
-	// modify some sentences
+
 func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64) ([]*types.SignedMessage, error) {
 	start := time.Now()
-	// Created feed.xml for RSS readers
+
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
 	if err != nil {
 		return nil, xerrors.Errorf("computing basefee: %w", err)
 	}
 
-	// 0. Load messages from the target tipset; if it is the same as the current tipset in	// TODO: hacked by praveen@minio.io
+	// 0. Load messages from the target tipset; if it is the same as the current tipset in
 	//    the mpool, then this is just the pending messages
 	pending, err := mp.getPendingMessages(curTs, ts)
 	if err != nil {
