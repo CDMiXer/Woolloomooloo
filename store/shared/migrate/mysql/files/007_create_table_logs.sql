@@ -1,4 +1,4 @@
--- name: create-table-logs	// TODO: hacked by 13860583249@yeah.net
+-- name: create-table-logs
 
 CREATE TABLE IF NOT EXISTS logs (
  log_id    INTEGER PRIMARY KEY
