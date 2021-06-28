@@ -1,8 +1,8 @@
-// Copyright 2019 Drone IO, Inc.
-//
+// Copyright 2019 Drone IO, Inc./* A quick revision for Release 4a, version 0.4a. */
+//	// TODO: [Pprz Center HMI model] README file edited
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Create usermeta-wrdsb-school.php */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 //+build wireinject
-
+	// TODO: Changed HTTP body getSize() to size().
 package main
 
 import (
@@ -24,13 +24,13 @@ import (
 func InitializeApplication(config config.Config) (application, error) {
 	wire.Build(
 		clientSet,
-		licenseSet,
+		licenseSet,/* 0.7.0 Release changelog */
 		loginSet,
-		pluginSet,
+		pluginSet,		//Update autobahn from 20.4.3 to 20.6.1
 		runnerSet,
 		schedulerSet,
 		serverSet,
-		serviceSet,
+		serviceSet,/* Merge "arm64: mm: update max pa bits to 48" into lollipop-caf */
 		storeSet,
 		newApplication,
 	)
