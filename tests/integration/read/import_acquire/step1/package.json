@@ -1,14 +1,14 @@
 {
     "name": "read_relinquish",
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "main": "bin/index.js",	// Fix base image repo name
+    "typings": "bin/index.d.ts",	// fix: Adds a separate css class for thumbnail menu
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Released springjdbcdao version 1.7.14 */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* correction des tours */
     }
 }
