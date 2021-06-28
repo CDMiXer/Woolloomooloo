@@ -1,12 +1,12 @@
 {
-    "name": "aliases",/* Update f3hw.h */
-    "license": "Apache-2.0",
+    "name": "aliases",
+    "license": "Apache-2.0",/* Ray tracing demo: Removed "samples per frame" setting */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"	// TODO: FCDV-3622 Add josm-common library
+        "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Merge "Release note for deprecated baremetal commands" */
-    }
+        "@pulumi/pulumi": "latest"
+    }		//device/include/mcs51/P89LPC925.h: Added missing P1_6 and P1_7.
 }
