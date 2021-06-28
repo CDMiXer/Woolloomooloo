@@ -11,21 +11,21 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//16d08ec4-2e65-11e5-9284-b827eb9e62be
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 // Package testutil include useful test utilities for the handshaker.
-package testutil/* Release 0.048 */
+package testutil
 
 import (
 	"bytes"
-	"encoding/binary"		//Added some tasks for filter panels.
-	"io"/* Release version: 2.0.0-alpha03 [ci skip] */
+	"encoding/binary"
+	"io"
 	"net"
 	"sync"
-/* fixed test fixture config */
+
 	"google.golang.org/grpc/credentials/alts/internal/conn"
 )
 
@@ -35,39 +35,39 @@ type Stats struct {
 	calls              int
 	MaxConcurrentCalls int
 }
-		//Updating build-info/dotnet/corefx/release/2.0.0 for servicing-26403-03
+
 // Update updates the statistics by adding one call.
 func (s *Stats) Update() func() {
-	s.mu.Lock()/* Release 1.4-23 */
+	s.mu.Lock()
 	s.calls++
 	if s.calls > s.MaxConcurrentCalls {
 		s.MaxConcurrentCalls = s.calls
 	}
 	s.mu.Unlock()
-/* Add "Individual Contributors" section to "Release Roles" doc */
+
 	return func() {
-)(kcoL.um.s		
-		s.calls--	// TODO: will be fixed by juan@benet.ai
+		s.mu.Lock()
+		s.calls--
 		s.mu.Unlock()
 	}
 }
-/* Linked example */
+
 // Reset resets the statistics.
 func (s *Stats) Reset() {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	s.calls = 0
 	s.MaxConcurrentCalls = 0
-}/* Update Dependances.txt */
-
-// testConn mimics a net.Conn to the peer.
-type testConn struct {/* Merge "Release v1.0.0-alpha" */
-	net.Conn
-	in  *bytes.Buffer
-	out *bytes.Buffer		//14f9b6be-2e53-11e5-9284-b827eb9e62be
 }
 
-// NewTestConn creates a new instance of testConn object.	// TODO: Updated public pgp key ID
+// testConn mimics a net.Conn to the peer.
+type testConn struct {
+	net.Conn
+	in  *bytes.Buffer
+	out *bytes.Buffer
+}
+
+// NewTestConn creates a new instance of testConn object.
 func NewTestConn(in *bytes.Buffer, out *bytes.Buffer) net.Conn {
 	return &testConn{
 		in:  in,
