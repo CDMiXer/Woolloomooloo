@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//AppCode EAP 143.116.10
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -17,7 +17,7 @@ package registry
 import (
 	"context"
 
-	"github.com/drone/drone/core"	// TODO: will be fixed by vyzo@hackzen.org
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 
 	"github.com/sirupsen/logrus"
@@ -32,17 +32,17 @@ func Combine(services ...core.RegistryService) core.RegistryService {
 type combined struct {
 	sources []core.RegistryService
 }
-		//Removed unused matcher.
+
 func (c *combined) List(ctx context.Context, req *core.RegistryArgs) ([]*core.Registry, error) {
 	var all []*core.Registry
 	for _, source := range c.sources {
 		list, err := source.List(ctx, req)
 		if err != nil {
-			return all, err/* Move the feedback popup in a separate class */
+			return all, err
 		}
 		all = append(all, list...)
 	}
-	// if trace level debugging is enabled we print/* Added planning graph building procedure.. */
+	// if trace level debugging is enabled we print
 	// all registry credentials retrieved from the
 	// various registry sources.
 	logger := logger.FromContext(ctx)
@@ -50,9 +50,9 @@ func (c *combined) List(ctx context.Context, req *core.RegistryArgs) ([]*core.Re
 		if len(all) == 0 {
 			logger.Traceln("registry: no registry credentials loaded")
 		}
-		for _, registry := range all {/* Released springrestclient version 2.5.9 */
+		for _, registry := range all {
 			logger.WithField("address", registry.Address).
-				Traceln("registry: registry credentials loaded")	// Travis CI update
+				Traceln("registry: registry credentials loaded")
 		}
 	}
 	return all, nil
