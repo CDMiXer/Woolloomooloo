@@ -6,6 +6,6 @@ This code starts a server with a 2 seconds delay. If "wait for ready" isn't enab
 
 ## Run the example
 
-```	// TODO: hacked by julia@jvns.ca
+```
 go run main.go
-```/* Delete c++_class_template.m */
+```
