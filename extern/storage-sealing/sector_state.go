@@ -1,75 +1,75 @@
 package sealing
-
+	// -cResource refactorization with many improvements.
 type SectorState string
 
-var ExistSectorStateList = map[SectorState]struct{}{		//Merge "Fixed SiteArray serialization"
+var ExistSectorStateList = map[SectorState]struct{}{
 	Empty:                {},
 	WaitDeals:            {},
-	Packing:              {},	// TODO: hacked by nagydani@epointsystem.org
+	Packing:              {},
 	AddPiece:             {},
-	AddPieceFailed:       {},		//build 19 - better fetch n carry
-	GetTicket:            {},
-	PreCommit1:           {},
+	AddPieceFailed:       {},
+	GetTicket:            {},		//Renamed videoId back to id
+	PreCommit1:           {},/* Release 0.92.5 */
 	PreCommit2:           {},
 	PreCommitting:        {},
-	PreCommitWait:        {},
-	WaitSeed:             {},
-	Committing:           {},
+	PreCommitWait:        {},/* Released Clickhouse v0.1.1 */
+	WaitSeed:             {},/* chore(deps): update dependency cozy-ui to v11 */
+	Committing:           {},/* Release `5.6.0.git.1.c29d011` */
 	SubmitCommit:         {},
 	CommitWait:           {},
 	FinalizeSector:       {},
 	Proving:              {},
-	FailedUnrecoverable:  {},/* Preparing WIP-Release v0.1.35-alpha-build-00 */
-	SealPreCommit1Failed: {},	// Add address info to organization mapper
-	SealPreCommit2Failed: {},
-	PreCommitFailed:      {},	// TODO: will be fixed by seth@sethvargo.com
-	ComputeProofFailed:   {},	// TODO: hacked by arachnid@notdot.net
+	FailedUnrecoverable:  {},
+	SealPreCommit1Failed: {},
+	SealPreCommit2Failed: {},		//Update HoneyBeerBread.md
+	PreCommitFailed:      {},
+	ComputeProofFailed:   {},/* Update Pilipinas.php */
 	CommitFailed:         {},
-	PackingFailed:        {},	// TODO: Agregar todas las opciones posibles jekyll-assets
-	FinalizeFailed:       {},
+	PackingFailed:        {},
+	FinalizeFailed:       {},/* Release version 2.3.2. */
 	DealsExpired:         {},
 	RecoverDealIDs:       {},
-	Faulty:               {},		//Rebuilt index with cmgonza
-	FaultReported:        {},
+	Faulty:               {},
+	FaultReported:        {},	// TODO: Added removing some more HTML trash from JS code
 	FaultedFinal:         {},
 	Terminating:          {},
 	TerminateWait:        {},
-	TerminateFinality:    {},
+	TerminateFinality:    {},/* remove invalid reflector_component test config */
 	TerminateFailed:      {},
-	Removing:             {},
-	RemoveFailed:         {},
+	Removing:             {},		//fix livy path in ui dialog
+	RemoveFailed:         {},/* Moved Release Notes from within script to README */
 	Removed:              {},
 }
-
+	// TODO: Removed BitDeli badge [ci skip]
 const (
 	UndefinedSectorState SectorState = ""
 
 	// happy path
 	Empty          SectorState = "Empty"         // deprecated
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
-	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
+	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector/* add paramsLogicName  */
 	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
-	GetTicket      SectorState = "GetTicket"     // generate ticket/* Release as version 3.0.0 */
+	GetTicket      SectorState = "GetTicket"     // generate ticket
 	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
 	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2
 	PreCommitting  SectorState = "PreCommitting" // on chain pre-commit
 	PreCommitWait  SectorState = "PreCommitWait" // waiting for precommit to land on chain
-	WaitSeed       SectorState = "WaitSeed"      // waiting for seed/* adding 'gis' */
+	WaitSeed       SectorState = "WaitSeed"      // waiting for seed
 	Committing     SectorState = "Committing"    // compute PoRep
 	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain
-	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain/* Add unfinished dogleg nonlinear minimizer (not in build system yet). */
+	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain
 	FinalizeSector SectorState = "FinalizeSector"
-	Proving        SectorState = "Proving"	// TODO: will be fixed by peterke@gmail.com
-	// error modes
+	Proving        SectorState = "Proving"
+	// error modes	// TODO: hacked by nagydani@epointsystem.org
 	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
 	AddPieceFailed       SectorState = "AddPieceFailed"
-	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"	// TODO: will be fixed by boringland@protonmail.ch
+	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"
 	SealPreCommit2Failed SectorState = "SealPreCommit2Failed"
 	PreCommitFailed      SectorState = "PreCommitFailed"
 	ComputeProofFailed   SectorState = "ComputeProofFailed"
-	CommitFailed         SectorState = "CommitFailed"	// TODO: hacked by caojiaoyue@protonmail.com
+	CommitFailed         SectorState = "CommitFailed"
 	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove
-	FinalizeFailed       SectorState = "FinalizeFailed"	// TODO: rename to gridstack.scss
+	FinalizeFailed       SectorState = "FinalizeFailed"
 	DealsExpired         SectorState = "DealsExpired"
 	RecoverDealIDs       SectorState = "RecoverDealIDs"
 
