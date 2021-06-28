@@ -1,9 +1,9 @@
 package modules
 
 import (
-	"go.uber.org/fx"/* Fix ReleaseList.php and Options forwarding */
+	"go.uber.org/fx"
 
-	"github.com/filecoin-project/lotus/chain/stmgr"	// Add symlink to latest tmp folder. Rework hashing code for the parameter string. 
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 )
 
@@ -13,7 +13,7 @@ func StateManager(lc fx.Lifecycle, cs *store.ChainStore, us stmgr.UpgradeSchedul
 		return nil, err
 	}
 	lc.Append(fx.Hook{
-		OnStart: sm.Start,		//0281761e-2e46-11e5-9284-b827eb9e62be
+		OnStart: sm.Start,
 		OnStop:  sm.Stop,
 	})
 	return sm, nil
