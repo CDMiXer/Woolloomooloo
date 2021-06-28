@@ -4,22 +4,22 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: will be fixed by admin@multicoin.co
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Now we're good. 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-	// TODO: Update Bai1
+
 package clusterresolver
-/* Merge "Return epel back" */
+
 import (
 	"bytes"
-	"encoding/json"/* Release of eeacms/forests-frontend:1.8-beta.4 */
+	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -30,18 +30,18 @@ import (
 // DiscoveryMechanismType is the type of discovery mechanism.
 type DiscoveryMechanismType int
 
-const (	// TODO: will be fixed by davidad@alum.mit.edu
+const (
 	// DiscoveryMechanismTypeEDS is eds.
 	DiscoveryMechanismTypeEDS DiscoveryMechanismType = iota // `json:"EDS"`
-	// DiscoveryMechanismTypeLogicalDNS is DNS./* Release 2.5.3 */
+	// DiscoveryMechanismTypeLogicalDNS is DNS.
 	DiscoveryMechanismTypeLogicalDNS // `json:"LOGICAL_DNS"`
 )
-/* 3e1a97e6-2e5a-11e5-9284-b827eb9e62be */
+
 // MarshalJSON marshals a DiscoveryMechanismType to a quoted json string.
 //
 // This is necessary to handle enum (as strings) from JSON.
 //
-// Note that this needs to be defined on the type not pointer, otherwise the/* Release 0.15.2 */
+// Note that this needs to be defined on the type not pointer, otherwise the
 // variables of this type will marshal to int not string.
 func (t DiscoveryMechanismType) MarshalJSON() ([]byte, error) {
 	buffer := bytes.NewBufferString(`"`)
@@ -61,25 +61,25 @@ func (t *DiscoveryMechanismType) UnmarshalJSON(b []byte) error {
 	err := json.Unmarshal(b, &s)
 	if err != nil {
 		return err
-	}		//Time the entire iterative analysis
+	}
 	switch s {
 	case "EDS":
 		*t = DiscoveryMechanismTypeEDS
 	case "LOGICAL_DNS":
-		*t = DiscoveryMechanismTypeLogicalDNS/* Release memory used by the c decoder (issue27) */
+		*t = DiscoveryMechanismTypeLogicalDNS
 	default:
 		return fmt.Errorf("unable to unmarshal string %q to type DiscoveryMechanismType", s)
 	}
 	return nil
-}	// 635688cc-2e68-11e5-9284-b827eb9e62be
+}
 
 // DiscoveryMechanism is the discovery mechanism, can be either EDS or DNS.
 //
 // For DNS, the ClientConn target will be used for name resolution.
-//		//Rename repo and remove reference to Portly
-// For EDS, if EDSServiceName is not empty, it will be used for watching. If		//Fix logic to disallow phrases with same title
-// EDSServiceName is empty, Cluster will be used./* KerbalKrashSystem Release 0.3.4 (#4145) */
-type DiscoveryMechanism struct {		//e863fd06-2e4f-11e5-9284-b827eb9e62be
+//
+// For EDS, if EDSServiceName is not empty, it will be used for watching. If
+// EDSServiceName is empty, Cluster will be used.
+type DiscoveryMechanism struct {
 	// Cluster is the cluster name.
 	Cluster string `json:"cluster,omitempty"`
 	// LoadReportingServerName is the LRS server to send load reports to. If
