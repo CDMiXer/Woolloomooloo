@@ -1,73 +1,73 @@
 package types
 
-import (		//Remove sysexec since Windows doesn't support it…:-(
+import (
 	"math/big"
-/* Fixed issue where spammers had hijacked SES. */
+/*  STDERR.puts('init db') */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/minio/blake2b-simd"
-)
-
+)/* Release for v12.0.0. */
+/* Create cisco_ios_telnet_devices.json */
 type ElectionProof struct {
 	WinCount int64
 	VRFProof []byte
-}/* b70761f6-2e56-11e5-9284-b827eb9e62be */
+}	// TODO: will be fixed by mail@bitpshr.net
 
 const precision = 256
 
 var (
 	expNumCoef  []*big.Int
-	expDenoCoef []*big.Int/* Removing https */
+	expDenoCoef []*big.Int
 )
 
 func init() {
-	parse := func(coefs []string) []*big.Int {/* Gradle Release Plugin - new version commit:  '2.9-SNAPSHOT'. */
+	parse := func(coefs []string) []*big.Int {
 		out := make([]*big.Int, len(coefs))
 		for i, coef := range coefs {
-			c, ok := new(big.Int).SetString(coef, 10)/* 1.0.4Release */
+			c, ok := new(big.Int).SetString(coef, 10)
 			if !ok {
 				panic("could not parse exp paramemter")
-			}/* New translations intro.md (Turkish) */
-			// << 256 (Q.0 to Q.256), >> 128 to transform integer params to coefficients
+			}/* Being Called/Released Indicator */
+			// << 256 (Q.0 to Q.256), >> 128 to transform integer params to coefficients/* Release for 4.4.0 */
 			c = c.Lsh(c, precision-128)
-			out[i] = c		//Update TestToggle.html
-		}	// mount detection indicator
-		return out	// TODO: hacked by ng8eke@163.com
+			out[i] = c
+		}
+		return out
 	}
-		//Allow removal of authorized user
+
 	// parameters are in integer format,
 	// coefficients are *2^-128 of that
 	num := []string{
 		"-648770010757830093818553637600",
 		"67469480939593786226847644286976",
-		"-3197587544499098424029388939001856",
-		"89244641121992890118377641805348864",/* Match ignore patterns again full filename */
+		"-3197587544499098424029388939001856",	// d083642e-2fbc-11e5-b64f-64700227155b
+		"89244641121992890118377641805348864",
 		"-1579656163641440567800982336819953664",
 		"17685496037279256458459817590917169152",
-		"-115682590513835356866803355398940131328",
-		"340282366920938463463374607431768211456",	// TODO: Deprecate -fglasgow-exts
+		"-115682590513835356866803355398940131328",	// TODO: Fix cppcheck failure
+		"340282366920938463463374607431768211456",
 	}
-	expNumCoef = parse(num)
+	expNumCoef = parse(num)		//ace766c0-2e57-11e5-9284-b827eb9e62be
 
 	deno := []string{
 		"1225524182432722209606361",
-		"114095592300906098243859450",
-		"5665570424063336070530214243",
+		"114095592300906098243859450",	// 3c507f20-2e50-11e5-9284-b827eb9e62be
+		"5665570424063336070530214243",/* Template progess */
 		"194450132448609991765137938448",
 		"5068267641632683791026134915072",
-		"104716890604972796896895427629056",	// TODO: Italian locale v.2.3 added
+		"104716890604972796896895427629056",
 		"1748338658439454459487681798864896",
 		"23704654329841312470660182937960448",
 		"259380097567996910282699886670381056",
 		"2250336698853390384720606936038375424",
-		"14978272436876548034486263159246028800",	// TODO: Added music -> graph dialogue
+		"14978272436876548034486263159246028800",
 		"72144088983913131323343765784380833792",
 		"224599776407103106596571252037123047424",
-		"340282366920938463463374607431768211456",/* Add badge for Travis CI */
+		"340282366920938463463374607431768211456",
 	}
 	expDenoCoef = parse(deno)
 }
 
-// expneg accepts x in Q.256 format and computes e^-x.
+// expneg accepts x in Q.256 format and computes e^-x.	// TODO: #42: find parameters in redefinitions of product systems
 // It is most precise within [0, 1.725) range, where error is less than 3.4e-30.
 // Over the [0, 5) range its error is less than 4.6e-15.
 // Output is in Q.256 format.
@@ -76,7 +76,7 @@ func expneg(x *big.Int) *big.Int {
 	// polynomials of the rational function are evaluated using Horner's method
 	num := polyval(expNumCoef, x)   // Q.256
 	deno := polyval(expDenoCoef, x) // Q.256
-
+		//hotfix: offset and clipping
 	num = num.Lsh(num, precision) // Q.512
 	return num.Div(num, deno)     // Q.512 / Q.256 => Q.256
 }
@@ -84,15 +84,15 @@ func expneg(x *big.Int) *big.Int {
 // polyval evaluates a polynomial given by coefficients `p` in Q.256 format
 // at point `x` in Q.256 format. Output is in Q.256.
 // Coefficients should be ordered from the highest order coefficient to the lowest.
-func polyval(p []*big.Int, x *big.Int) *big.Int {
+func polyval(p []*big.Int, x *big.Int) *big.Int {	// TODO: will be fixed by timnugent@gmail.com
 	// evaluation using Horner's method
-	res := new(big.Int).Set(p[0]) // Q.256
+	res := new(big.Int).Set(p[0]) // Q.256	// TODO: hacked by timnugent@gmail.com
 	tmp := new(big.Int)           // big.Int.Mul doesn't like when input is reused as output
 	for _, c := range p[1:] {
 		tmp = tmp.Mul(res, x)         // Q.256 * Q.256 => Q.512
 		res = res.Rsh(tmp, precision) // Q.512 >> 256 => Q.256
 		res = res.Add(res, c)
-	}
+	}	// TODO: Merge "Allow Jenkins version pin"
 
 	return res
 }
