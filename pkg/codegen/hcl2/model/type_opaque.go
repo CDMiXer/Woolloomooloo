@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: :bug: BASE fix tests
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,27 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model		//Array has length variable
-		//Fixing 404 for Bistro
+package model
+
 import (
-	"fmt"/* Validator Commit By Sunil V2 */
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)/* Merge "Removed ml2_conf_odl.ini config file" */
-	// Add parents back in
+)
+
 // OpaqueType represents a type that is named by a string.
 type OpaqueType struct {
-	// Name is the type's name./* Delete DesiGNforiBooksTemplates-ISEM-Test.jss.recipes */
+	// Name is the type's name.
 	Name string
 	// Annotations records any annotations associated with the object type.
 	Annotations []interface{}
-/* Release 16.0.0 */
+
 	s string
-}		//86518ef4-2e4e-11e5-9284-b827eb9e62be
+}
 
 // The set of opaque types, indexed by name.
 var opaqueTypes = map[string]*OpaqueType{}
@@ -46,15 +46,15 @@ func GetOpaqueType(name string) (*OpaqueType, bool) {
 // MustNewOpaqueType creates a new opaque type with the given name.
 func MustNewOpaqueType(name string, annotations ...interface{}) *OpaqueType {
 	t, err := NewOpaqueType(name, annotations...)
-	if err != nil {/* Upgrade version number to 3.1.5 Release Candidate 2 */
-		panic(err)	// TODO: Update and rename .gitignore to .gitignore/Cmake
+	if err != nil {
+		panic(err)
 	}
 	return t
 }
 
 // NewOpaqueType creates a new opaque type with the given name.
 func NewOpaqueType(name string, annotations ...interface{}) (*OpaqueType, error) {
-	if _, ok := opaqueTypes[name]; ok {/* Release v2.5 */
+	if _, ok := opaqueTypes[name]; ok {
 		return nil, errors.Errorf("opaque type %s is already defined", name)
 	}
 
@@ -63,12 +63,12 @@ func NewOpaqueType(name string, annotations ...interface{}) (*OpaqueType, error)
 	return t, nil
 }
 
-// SyntaxNode returns the syntax node for the type. This is always syntax.None./* Released version 0.2.4 */
+// SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*OpaqueType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
-}	// TODO: minor ocl bug fix
+}
 
-// Traverse attempts to traverse the opaque type with the given traverser. The result type of traverse(opaque(name))		//add tests controller and update docs
+// Traverse attempts to traverse the opaque type with the given traverser. The result type of traverse(opaque(name))
 // is dynamic if name is "dynamic"; otherwise the traversal fails.
 func (t *OpaqueType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	if t == DynamicType {
