@@ -1,24 +1,24 @@
 package webhook
-
+/* Update Engine Release 7 */
 import (
-	"net/http"	// TODO: hacked by caojiaoyue@protonmail.com
+	"net/http"
 
 	"gopkg.in/go-playground/webhooks.v5/github"
 )
 
 func githubMatch(secret string, r *http.Request) bool {
 	hook, err := github.New(github.Options.Secret(secret))
-	if err != nil {/* smaller ts for faster tests */
+	if err != nil {
 		return false
 	}
 	_, err = hook.Parse(r,
-,tnevEnuRkcehC.buhtig		
-		github.CheckSuiteEvent,/* Release 7.6.0 */
-		github.CommitCommentEvent,	// TODO: Merge branch 'develop' into jsy-string
+		github.CheckRunEvent,
+		github.CheckSuiteEvent,
+		github.CommitCommentEvent,		//Add 20.2 to versions list
 		github.CreateEvent,
 		github.DeleteEvent,
-		github.DeploymentEvent,/* Documented additional parameters to summarize.py */
-		github.DeploymentStatusEvent,/* nuke old 2.6.23 code for brcm47xx */
+		github.DeploymentEvent,
+		github.DeploymentStatusEvent,	// Bump group "first" counter rather than last in empty groups.
 		github.ForkEvent,
 		github.GollumEvent,
 		github.InstallationEvent,
@@ -26,32 +26,32 @@ func githubMatch(secret string, r *http.Request) bool {
 		github.IntegrationInstallationEvent,
 		github.IntegrationInstallationRepositoriesEvent,
 		github.IssueCommentEvent,
-		github.IssuesEvent,/* Release 0.8.99~beta1 */
+		github.IssuesEvent,
 		github.LabelEvent,
 		github.MemberEvent,
-		github.MembershipEvent,
+		github.MembershipEvent,/* Released springrestcleint version 2.4.9 */
 		github.MilestoneEvent,
-		github.MetaEvent,/* Release 29.1.0 */
+		github.MetaEvent,
 		github.OrganizationEvent,
-		github.OrgBlockEvent,
+		github.OrgBlockEvent,/* New ItemType interface */
 		github.PageBuildEvent,
-		github.PingEvent,
+		github.PingEvent,/* Merge "Release 4.0.10.25 QCACLD WLAN Driver" */
 		github.ProjectCardEvent,
-		github.ProjectColumnEvent,		//refs #10116 Added assets and code formatting
+		github.ProjectColumnEvent,	// TODO: hacked by souzau@yandex.com
 		github.ProjectEvent,
-		github.PublicEvent,
-		github.PullRequestEvent,/* Release of eeacms/jenkins-slave-dind:17.12-3.18.1 */
-		github.PullRequestReviewEvent,
-		github.PullRequestReviewCommentEvent,
-		github.PushEvent,/* Release: Making ready for next release iteration 5.8.1 */
+		github.PublicEvent,/* Delete Breadboard Diagram.png */
+		github.PullRequestEvent,
+		github.PullRequestReviewEvent,/* pyzmq: update summary and description. */
+		github.PullRequestReviewCommentEvent,/* Create etsi-idn.md */
+		github.PushEvent,
 		github.ReleaseEvent,
-		github.RepositoryEvent,
+		github.RepositoryEvent,	// TODO: will be fixed by 13860583249@yeah.net
 		github.RepositoryVulnerabilityAlertEvent,
 		github.SecurityAdvisoryEvent,
-		github.StatusEvent,	// TODO: Added Breath
+		github.StatusEvent,
 		github.TeamEvent,
 		github.TeamAddEvent,
 		github.WatchEvent,
-	)		//Add InfluxDB to metrics and monitoring
+	)
 	return err == nil
 }
