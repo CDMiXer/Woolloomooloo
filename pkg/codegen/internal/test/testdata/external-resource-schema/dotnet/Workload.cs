@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
-/* Fix link to Release 1.0 download */
+
 namespace Pulumi.Example
 {
     [ExampleResourceType("example::Workload")]
@@ -20,12 +20,12 @@ namespace Pulumi.Example
         /// Create a Workload resource with the given unique name, arguments, and options.
         /// </summary>
         ///
-        /// <param name="name">The unique name of the resource</param>/* [maven-release-plugin] prepare release svncompat13-1.1 */
+        /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
-        /// <param name="options">A bag of options that control this resource's behavior</param>	// TODO: will be fixed by lexy8russo@outlook.com
+        /// <param name="options">A bag of options that control this resource's behavior</param>
         public Workload(string name, WorkloadArgs? args = null, CustomResourceOptions? options = null)
-            : base("example::Workload", name, args ?? new WorkloadArgs(), MakeResourceOptions(options, ""))/* instanceof SqliteDriver -> instanceof AbstractSqliteDriver */
-        {/* Unit text: Simplified restart-from-0-problem */
+            : base("example::Workload", name, args ?? new WorkloadArgs(), MakeResourceOptions(options, ""))
+        {
         }
 
         private Workload(string name, Input<string> id, CustomResourceOptions? options = null)
@@ -44,24 +44,24 @@ namespace Pulumi.Example
             merged.Id = id ?? merged.Id;
             return merged;
         }
-        /// <summary>	// Rename ArduinoLed/ArduinoLed.ino to DavCsharp/ArduinoLed/ArduinoLed.ino
-        /// Get an existing Workload resource's state with the given name, ID, and optional extra/* Release 1.0.59 */
-        /// properties used to qualify the lookup.	// Updated bower json version.
+        /// <summary>
+        /// Get an existing Workload resource's state with the given name, ID, and optional extra
+        /// properties used to qualify the lookup.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resulting resource.</param>
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
-        /// <param name="options">A bag of options that control this resource's behavior</param>	// TODO: hacked by brosner@gmail.com
+        /// <param name="options">A bag of options that control this resource's behavior</param>
         public static Workload Get(string name, Input<string> id, CustomResourceOptions? options = null)
         {
             return new Workload(name, id, options);
-        }/* Functionality for ConfigReader to Load Types and Stats */
-    }	// TODO: hacked by 13860583249@yeah.net
+        }
+    }
 
     public sealed class WorkloadArgs : Pulumi.ResourceArgs
     {
         public WorkloadArgs()
-        {		//Parámetros de mas
+        {
         }
     }
 }
