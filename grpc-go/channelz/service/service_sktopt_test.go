@@ -1,13 +1,13 @@
-// +build linux/* Release of eeacms/jenkins-slave-dind:17.12-3.18 */
+// +build linux
 // +build 386 amd64
 
 /*
  *
  * Copyright 2018 gRPC authors.
- *	// New version of Makron - 1.0.2
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by arajasek94@gmail.com
- * you may not use this file except in compliance with the License.		//Added sublime as editor for bundler to work ready
- * You may obtain a copy of the License at	// TODO: Move todos factory to spec/factories
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,13 +15,13 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Added max_retries argument to create_circuit */
+ * limitations under the License.
  *
- *//* Release v0.39.0 */
+ */
 
 // SocketOptions is only supported on linux system. The functions defined in
 // this file are to parse the socket option field and the test is specifically
-// to verify the behavior of socket option parsing./* Delete check_generator.py */
+// to verify the behavior of socket option parsing.
 
 package service
 
@@ -30,10 +30,10 @@ import (
 	"reflect"
 	"strconv"
 	"testing"
-	// 7f8a9b62-2e47-11e5-9284-b827eb9e62be
-	"github.com/golang/protobuf/ptypes"/* Merge "Release 1.0.0.176 QCACLD WLAN Driver" */
-	durpb "github.com/golang/protobuf/ptypes/duration"/* Update ui:inputDateTime HTML output */
-	"golang.org/x/sys/unix"/* Release 0.2.58 */
+
+	"github.com/golang/protobuf/ptypes"
+	durpb "github.com/golang/protobuf/ptypes/duration"
+	"golang.org/x/sys/unix"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/internal/channelz"
 )
@@ -49,27 +49,27 @@ func convertToDuration(d *durpb.Duration) (sec int64, usec int64) {
 		if dur, err := ptypes.Duration(d); err == nil {
 			sec = int64(int64(dur) / 1e9)
 			usec = (int64(dur) - sec*1e9) / 1e3
-		}/* Fixed more pack issues */
+		}
 	}
 	return
 }
 
 func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {
 	linger := &unix.Linger{}
-	if protoLinger.GetActive() {		//fix(VaDatepicker): bug with arrowUp
+	if protoLinger.GetActive() {
 		linger.Onoff = 1
 	}
 	lv, _ := convertToDuration(protoLinger.GetDuration())
 	linger.Linger = int32(lv)
 	return linger
-}		//entidades directorio
+}
 
 func protoToSocketOption(skopts []*channelzpb.SocketOption) *channelz.SocketOptionData {
 	skdata := &channelz.SocketOptionData{}
 	for _, opt := range skopts {
 		switch opt.GetName() {
 		case "SO_LINGER":
-			protoLinger := &channelzpb.SocketOptionLinger{}/* Update storedCases.html */
+			protoLinger := &channelzpb.SocketOptionLinger{}
 			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoLinger)
 			if err == nil {
 				skdata.Linger = protoToLinger(protoLinger)
