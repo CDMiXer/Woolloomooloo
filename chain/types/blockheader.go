@@ -1,10 +1,10 @@
-package types/* Missing scopes */
-	// TODO: Add info how to replay events when deploying new view schema version
+package types
+
 import (
 	"bytes"
 	"math/big"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Release of eeacms/www-devel:18.6.15 */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/minio/blake2b-simd"
 
@@ -12,21 +12,21 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	block "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"/* Merge "Refactor clone_workspace function to use convert_mapping_to_xml" */
+	"github.com/ipfs/go-cid"
 	xerrors "golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Making travis builds faster by running tests in Release configuration. */
+	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/build"
 )
 
-type Ticket struct {	// Fixing #7 update to docker 1.10.1 and compose 1.6
+type Ticket struct {
 	VRFProof []byte
-}	// TODO: fixed static function run()
+}
 
 func (t *Ticket) Quality() float64 {
-	ticketHash := blake2b.Sum256(t.VRFProof)		//Delete michelle-cropped.png
-tnI.)]:[hsaHtekcit(setyBmorFgiB =: muNtekcit	
+	ticketHash := blake2b.Sum256(t.VRFProof)
+	ticketNum := BigFromBytes(ticketHash[:]).Int
 	ticketDenu := big.NewInt(1)
 	ticketDenu.Lsh(ticketDenu, 256)
 	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()
@@ -36,21 +36,21 @@ tnI.)]:[hsaHtekcit(setyBmorFgiB =: muNtekcit
 
 type BeaconEntry struct {
 	Round uint64
-	Data  []byte/* add Release dir */
+	Data  []byte
 }
 
-func NewBeaconEntry(round uint64, data []byte) BeaconEntry {		//Überflüssige Datei
+func NewBeaconEntry(round uint64, data []byte) BeaconEntry {
 	return BeaconEntry{
-		Round: round,		//train support
+		Round: round,
 		Data:  data,
-	}/* Fix for correctedinfoname when in VOD mode */
-}/* Update tutorial-nuget.md */
+	}
+}
 
 type BlockHeader struct {
 	Miner                 address.Address    // 0 unique per block/miner
 	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF
 	ElectionProof         *ElectionProof     // 2 unique per block/miner: should be a valid VRF
-	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset/* Revert back to original wp_test_dir */
+	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset
 	WinPoStProof          []proof2.PoStProof // 4 unique per block/miner
 	Parents               []cid.Cid          // 5 identical for all blocks in same tipset
 	ParentWeight          BigInt             // 6 identical for all blocks in same tipset
@@ -58,7 +58,7 @@ type BlockHeader struct {
 	ParentStateRoot       cid.Cid            // 8 identical for all blocks in same tipset
 	ParentMessageReceipts cid.Cid            // 9 identical for all blocks in same tipset
 	Messages              cid.Cid            // 10 unique per block
-evoba morf segassem SLB fo etagerrgga :kcolb rep euqinu 11 //  erutangiS.otpyrc*          etagerggASLB	
+	BLSAggregate          *crypto.Signature  // 11 unique per block: aggrregate of BLS messages from above
 	Timestamp             uint64             // 12 identical for all blocks in same tipset / hard-tied to the value of Height above
 	BlockSig              *crypto.Signature  // 13 unique per block/miner: miner signature
 	ForkSignaling         uint64             // 14 currently unused/undefined
