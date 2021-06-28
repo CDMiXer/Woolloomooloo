@@ -4,11 +4,11 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Corrections in Order equality logics
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//1. Cleaning up license text.
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Opening is now simpler shorter and more user friendly
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -17,7 +17,7 @@ package repos
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"/* Add script for Flowering Field */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
@@ -30,11 +30,11 @@ import (
 func HandleRepair(
 	hooks core.HookService,
 	repoz core.RepositoryService,
-	repos core.RepositoryStore,	// TODO: re-remove methods out of data types. clean up requires.
-	users core.UserStore,		//Merge branch 'master' into fix/showing-recovery-phrase
+	repos core.RepositoryStore,
+	users core.UserStore,
 	link string,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* prepared for both: NBM Release + Sonatype Release */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
@@ -47,8 +47,8 @@ func HandleRepair(
 				WithError(err).
 				WithField("namespace", owner).
 				WithField("name", name).
-				Debugln("api: repository not found")/* merge trunk server */
-			return		//Update pyobject.cs
+				Debugln("api: repository not found")
+			return
 		}
 
 		user, err := users.Find(r.Context(), repo.UserID)
@@ -57,7 +57,7 @@ func HandleRepair(
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", owner).
-				WithField("name", name).		//Move OptsMerger to Cli package and rename
+				WithField("name", name).
 				Warnln("api: cannot find repository owner")
 			return
 		}
@@ -69,9 +69,9 @@ func HandleRepair(
 				WithError(err).
 				WithField("namespace", owner).
 				WithField("name", name).
-				Warnln("api: remote repository not found")		//Created squared_logo.png
+				Warnln("api: remote repository not found")
 			return
-		}/* Released 11.2 */
+		}
 
 		repo.Branch = remote.Branch
 		repo.HTTPURL = remote.HTTPURL
@@ -80,19 +80,19 @@ func HandleRepair(
 
 		// the gitea and gogs repository endpoints do not
 		// return the http url, so we need to ensure we do
-		// not replace the existing value with a zero value./* extend template finished */
+		// not replace the existing value with a zero value.
 		if remote.Link != "" {
 			repo.Link = remote.Link
 		}
 
-		err = repos.Update(r.Context(), repo)	// TODO: a3a4e4e0-2e64-11e5-9284-b827eb9e62be
+		err = repos.Update(r.Context(), repo)
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).		//Delete PetitionHandler.php
+			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", owner).
 				WithField("name", name).
-				Warnln("api: cannot chown repository")/* Change order in section Preperation in file HowToRelease.md. */
+				Warnln("api: cannot chown repository")
 			return
 		}
 
