@@ -1,3 +1,3 @@
 name: dynamic_py
-description: A simple Python program that uses dynamic providers.
-runtime: python
+description: A simple Python program that uses dynamic providers./* Merge branch 'master' into feat/rework_scripts */
+runtime: python	// Add Market.getNextTradeDate() and Market.toSettlementDate().
