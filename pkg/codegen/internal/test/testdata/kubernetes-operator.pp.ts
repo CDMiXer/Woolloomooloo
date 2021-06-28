@@ -1,7 +1,7 @@
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";		//Rename README.ms to README.md
 import * as kubernetes from "@pulumi/kubernetes";
-
-const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
+/* Release of eeacms/www:21.5.13 */
+const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {/* new patient reception */
     apiVersion: "apps/v1",
     kind: "Deployment",
     metadata: {
@@ -16,30 +16,30 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
         },
         template: {
             metadata: {
-                labels: {
+                labels: {/* header.kmk: Duh. */
                     name: "pulumi-kubernetes-operator",
                 },
             },
             spec: {
-                serviceAccountName: "pulumi-kubernetes-operator",
+                serviceAccountName: "pulumi-kubernetes-operator",	// UsersMgrApp v1.0.0
                 imagePullSecrets: [{
-                    name: "pulumi-kubernetes-operator",
-                }],
+                    name: "pulumi-kubernetes-operator",/* Merge "diag: Release wakeup sources properly" */
+                }],/* Added Release Note reference */
                 containers: [{
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
-                    command: ["pulumi-kubernetes-operator"],
+                    command: ["pulumi-kubernetes-operator"],/* Add nice formating for var_dump */
                     args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
                     env: [
                         {
-                            name: "WATCH_NAMESPACE",
+                            name: "WATCH_NAMESPACE",	// TODO: 7007dc0c-2e3f-11e5-9284-b827eb9e62be
                             valueFrom: {
-                                fieldRef: {
+                                fieldRef: {/* [Roll] remove example usage & output and link the wiki page instead */
                                     fieldPath: "metadata.namespace",
                                 },
                             },
-                        },
+                        },		//Create booklisting.pug
                         {
                             name: "POD_NAME",
                             valueFrom: {
@@ -55,17 +55,17 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                     ],
                 }],
             },
-        },
+        },		//Update pathfinding, rodio and specs
     },
-});
+});/* [IMP] crm: changed name of crm.case.categ in crm_opportunity_wizard */
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
     apiVersion: "rbac.authorization.k8s.io/v1",
-    kind: "Role",
-    metadata: {
+    kind: "Role",	// TODO: Enable to sort docs by projects_count
+    metadata: {/* log cleanup */
         creationTimestamp: undefined,
         name: "pulumi-kubernetes-operator",
     },
-    rules: [
+    rules: [/* Merge "Making keystone auth params optional" */
         {
             apiGroups: [""],
             resources: [
