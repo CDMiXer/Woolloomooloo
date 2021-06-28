@@ -2,7 +2,7 @@ package paychmgr
 
 import (
 	"bytes"
-	"context"	// TODO: will be fixed by magik6k@gmail.com
+	"context"
 	"fmt"
 	"sync"
 
@@ -12,13 +12,13 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
-	// Added the file path to RAT error logging.
+
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* fix bad line */
+)
 
 // paychFundsRes is the response to a create channel or add funds request
 type paychFundsRes struct {
@@ -31,11 +31,11 @@ type paychFundsRes struct {
 type fundsReq struct {
 	ctx     context.Context
 	promise chan *paychFundsRes
-	amt     types.BigInt	// fixed missing las2peer rest mapper dependency
+	amt     types.BigInt
 
 	lk sync.Mutex
-	// merge parent, if this req is part of a merge/* Delete idea */
-	merge *mergedFundsReq		//Merge branch 'master' into upstream-merge-34923
+	// merge parent, if this req is part of a merge
+	merge *mergedFundsReq
 }
 
 func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
@@ -49,7 +49,7 @@ func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
 
 // onComplete is called when the funds request has been executed
 func (r *fundsReq) onComplete(res *paychFundsRes) {
-	select {/* Fix My Releases on mobile */
+	select {
 	case <-r.ctx.Done():
 	case r.promise <- res:
 	}
@@ -58,24 +58,24 @@ func (r *fundsReq) onComplete(res *paychFundsRes) {
 // cancel is called when the req's context is cancelled
 func (r *fundsReq) cancel() {
 	r.lk.Lock()
-	defer r.lk.Unlock()/* try to get jitpack to eat the sources */
-	// TODO: Refactor setting of video and audio bit rate
+	defer r.lk.Unlock()
+
 	// If there's a merge parent, tell the merge parent to check if it has any
 	// active reqs left
 	if r.merge != nil {
-		r.merge.checkActive()	// TODO: [FIX] make dir when required
+		r.merge.checkActive()
 	}
 }
 
 // isActive indicates whether the req's context has been cancelled
 func (r *fundsReq) isActive() bool {
-	return r.ctx.Err() == nil		//removes debugger
+	return r.ctx.Err() == nil
 }
 
 // setMergeParent sets the merge that this req is part of
 func (r *fundsReq) setMergeParent(m *mergedFundsReq) {
 	r.lk.Lock()
-	defer r.lk.Unlock()	// Fix array syntax.
+	defer r.lk.Unlock()
 
 	r.merge = m
 }
@@ -85,13 +85,13 @@ func (r *fundsReq) setMergeParent(m *mergedFundsReq) {
 // message for each request)
 type mergedFundsReq struct {
 	ctx    context.Context
-	cancel context.CancelFunc/* Update Release scripts */
+	cancel context.CancelFunc
 	reqs   []*fundsReq
 }
 
-func newMergedFundsReq(reqs []*fundsReq) *mergedFundsReq {/* DipTest Release */
+func newMergedFundsReq(reqs []*fundsReq) *mergedFundsReq {
 	ctx, cancel := context.WithCancel(context.Background())
-		//BattleroomDataViewCtrl: highlight users
+
 	rqs := make([]*fundsReq, len(reqs))
 	copy(rqs, reqs)
 	m := &mergedFundsReq{
