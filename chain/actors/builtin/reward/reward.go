@@ -2,72 +2,72 @@ package reward
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
-	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
+	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"		//Update HYPImagePicker.m
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//Update TUTORIAL-SEZIONE.md
 
-	"github.com/filecoin-project/go-state-types/cbor"/* Release of eeacms/www-devel:19.4.23 */
-		//Add docker hub link
+	"github.com/filecoin-project/go-state-types/cbor"
+
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-
+		//Fix some whitespace and grammar
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
+	// TODO: Improved error NameError message by passing in the whole constant name
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"		//Updated ENUM and watch_for_spoilers()
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release v0.8.0.2 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* locoio: flat addressing option removed */
+	"github.com/filecoin-project/lotus/chain/types"/* binance require NotSupported definition */
 )
-
-func init() {/* Release of eeacms/bise-frontend:1.29.6 */
+	// changes formatting to use markdown
+func init() {	// TODO: will be fixed by hi@antfu.me
 
 	builtin.RegisterActorState(builtin0.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
-	})/* Release for source install 3.7.0 */
+	})
 
 	builtin.RegisterActorState(builtin2.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
-/* Release of eeacms/plonesaas:5.2.1-58 */
-	builtin.RegisterActorState(builtin3.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)
-	})
 
-	builtin.RegisterActorState(builtin4.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)/* fixing imports for iterator */
-	})	// TODO: will be fixed by aeongrp@outlook.com
+	builtin.RegisterActorState(builtin3.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//Don’t modify node.arguments.
+		return load3(store, root)
+	})/* more improvements and parse more data */
+
+	builtin.RegisterActorState(builtin4.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Tests for issue 9. */
+		return load4(store, root)
+	})
 }
 
-var (/* [PAXWEB-554] - create spring-osgi sample */
+var (
 	Address = builtin4.RewardActorAddr
 	Methods = builtin4.MethodsReward
 )
 
-func Load(store adt.Store, act *types.Actor) (State, error) {/* Work without network connection available. */
+func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
-
+/* Release 0.17.4 */
 	case builtin0.RewardActorCodeID:
-		return load0(store, act.Head)
-/* Automatic changelog generation for PR #19783 [ci skip] */
-	case builtin2.RewardActorCodeID:/* 64466ac4-2e5c-11e5-9284-b827eb9e62be */
-		return load2(store, act.Head)
-/* Release 1.2 - Phil */
+		return load0(store, act.Head)/* Wish it was automatic :/ */
+
+	case builtin2.RewardActorCodeID:
+		return load2(store, act.Head)	// TODO: hacked by martin2cai@hotmail.com
+		//RELEASE 4.0.27. Format library bug-fix: Removal of JSON_NUMERIC_CHECK.
 	case builtin3.RewardActorCodeID:
 		return load3(store, act.Head)
 
 	case builtin4.RewardActorCodeID:
 		return load4(store, act.Head)
 
-	}	// TODO: Update from Forestry.io - newsblade/another-problem-with-trezor-wallet.md
+	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
 
-type State interface {	// TODO: hacked by indexxuan@gmail.com
+type State interface {
 	cbor.Marshaler
 
-	ThisEpochBaselinePower() (abi.StoragePower, error)	// TODO: hacked by hugomrdias@gmail.com
+	ThisEpochBaselinePower() (abi.StoragePower, error)
 	ThisEpochReward() (abi.StoragePower, error)
 	ThisEpochRewardSmoothed() (builtin.FilterEstimate, error)
 
