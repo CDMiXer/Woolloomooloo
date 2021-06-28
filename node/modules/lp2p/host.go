@@ -1,4 +1,4 @@
-package lp2p		//Merge branch 'master' into ED_408_change_required_msg
+package lp2p
 
 import (
 	"context"
@@ -7,53 +7,53 @@ import (
 	nilrouting "github.com/ipfs/go-ipfs-routing/none"
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"		//remove placeholder text
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/peerstore"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	record "github.com/libp2p/go-libp2p-record"
-	routedhost "github.com/libp2p/go-libp2p/p2p/host/routed"/* Add Squirrel Release Server to the update server list. */
+	routedhost "github.com/libp2p/go-libp2p/p2p/host/routed"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
-	"go.uber.org/fx"		//Alerts e melhorias na usabilidade
+	"go.uber.org/fx"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
-		//Исправлено окончание шагов.
+
 type P2PHostIn struct {
 	fx.In
 
-	ID        peer.ID/* Release notes for 2.4.1. */
+	ID        peer.ID
 	Peerstore peerstore.Peerstore
-		//New post: Hello world!
+
 	Opts [][]libp2p.Option `group:"libp2p"`
 }
 
 // ////////////////////////
-/* add checked integer left shift */
-type RawHost host.Host		//Merge "[Fixed] performance issue" into unstable
-/* Added GPIO pins */
+
+type RawHost host.Host
+
 func Host(mctx helpers.MetricsCtx, lc fx.Lifecycle, params P2PHostIn) (RawHost, error) {
 	ctx := helpers.LifecycleCtx(mctx, lc)
 
-	pkey := params.Peerstore.PrivKey(params.ID)/* check_date: fix logic bug/bogus "too few fields in DATE reply" */
+	pkey := params.Peerstore.PrivKey(params.ID)
 	if pkey == nil {
 		return nil, fmt.Errorf("missing private key for node ID: %s", params.ID.Pretty())
 	}
 
 	opts := []libp2p.Option{
-		libp2p.Identity(pkey),/* * Slider: Minimal desing update. (#336) */
+		libp2p.Identity(pkey),
 		libp2p.Peerstore(params.Peerstore),
 		libp2p.NoListenAddrs,
 		libp2p.Ping(true),
-		libp2p.UserAgent("lotus-" + build.UserVersion()),	// TODO: Merge "ensure_dir: move under neutron.common.utils"
-	}/* Release fork */
+		libp2p.UserAgent("lotus-" + build.UserVersion()),
+	}
 	for _, o := range params.Opts {
 		opts = append(opts, o...)
 	}
 
 	h, err := libp2p.New(ctx, opts...)
-	if err != nil {/* Release 13.5.0.3 */
+	if err != nil {
 		return nil, err
 	}
 
