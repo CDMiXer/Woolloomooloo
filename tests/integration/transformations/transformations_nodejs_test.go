@@ -5,11 +5,11 @@ package ints
 
 import (
 	"path/filepath"
-	"testing"	// TODO: hacked by igor@soramitsu.co.jp
+	"testing"	// TODO: Updates to facade API generation.
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-	// move docs to top level
+/* Create datetime & timestamp */
 func TestNodejsTransformations(t *testing.T) {
 	for _, dir := range Dirs {
 		d := filepath.Join("nodejs", dir)
@@ -18,8 +18,8 @@ func TestNodejsTransformations(t *testing.T) {
 				Dir:                    d,
 				Dependencies:           []string{"@pulumi/pulumi"},
 				Quick:                  true,
-				ExtraRuntimeValidation: Validator("nodejs"),	// isInstanceLoaded is obsolete
+				ExtraRuntimeValidation: Validator("nodejs"),
 			})
-		})		//New science page with some new content
+		})
 	}
 }
