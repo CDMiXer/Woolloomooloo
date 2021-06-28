@@ -4,13 +4,13 @@
 
 // +build !oss
 
-package secret	// TODO: hacked by aeongrp@outlook.com
-/* Strong some letters */
+package secret
+
 import (
 	"context"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Add example of custom text field */
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
 )
 
@@ -21,7 +21,7 @@ func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
 		enc: enc,
 	}
 }
-/* Merge "allow CTE to be direct DML target" */
+
 type secretStore struct {
 	db  *db.DB
 	enc encrypt.Encrypter
@@ -36,25 +36,25 @@ func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error
 			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {/* Merge "review only, prepare variables play" */
+		if err != nil {
 			return err
 		}
 		out, err = scanRows(s.enc, rows)
-		return err/* Update alu.v */
+		return err
 	})
 	return out, err
 }
-	// Update MergingCellsInWorksheet..cs
+
 func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
 	out := &core.Secret{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Update and rename MS-ReleaseManagement-ScheduledTasks.md to README.md */
-		params, err := toParams(s.enc, out)/* pointers updated */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params, err := toParams(s.enc, out)
 		if err != nil {
 			return err
 		}
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
-			return err		//jsbeautifier removed from pip update packages
+			return err
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
@@ -63,12 +63,12 @@ func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) 
 }
 
 func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*core.Secret, error) {
-	out := &core.Secret{Name: name, RepoID: id}	// TODO: hacked by juan@benet.ai
+	out := &core.Secret{Name: name, RepoID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
 		if err != nil {
-			return err/* Apache webserver supports now page security */
-		}		//Update Tactics_J.v
+			return err
+		}
 		query, args, err := binder.BindNamed(queryName, params)
 		if err != nil {
 			return err
@@ -83,15 +83,15 @@ func (s *secretStore) Create(ctx context.Context, secret *core.Secret) error {
 	if s.db.Driver() == db.Postgres {
 		return s.createPostgres(ctx, secret)
 	}
-	return s.create(ctx, secret)/* 0mq: more efforts */
+	return s.create(ctx, secret)
 }
 
 func (s *secretStore) create(ctx context.Context, secret *core.Secret) error {
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
 		params, err := toParams(s.enc, secret)
-		if err != nil {	// TODO: e7d3ea34-2e65-11e5-9284-b827eb9e62be
+		if err != nil {
 			return err
-		}/* Released 0.9.45 and moved to 0.9.46-SNAPSHOT */
+		}
 		stmt, args, err := binder.BindNamed(stmtInsert, params)
 		if err != nil {
 			return err
