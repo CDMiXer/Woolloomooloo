@@ -5,62 +5,62 @@
 package converter
 
 import (
-	"context"
+	"context"/* Update simplecov-html to version 0.10.2 */
 	"errors"
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* import of LCIA methods from another openLCA DB */
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 )
 
-var noContext = context.Background()	// TODO: new model building added
-
+var noContext = context.Background()		//Add logging to Authentiation functions
+	// TODO: Sync Winfile to Wine 1.1.40
 var mockFile = `
 kind: pipeline
-type: docker
+type: docker	// TODO: Merge "neutron: switch auth_uri to uri_no_suffix"
 name: testing
 `
-	// I had forgotten to add ObjectCanvas.o to the Makefile
+
 func TestCombine(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* Updated Release notes for Dummy Component. */
 	defer controller.Finish()
 
-	args := &core.ConvertArgs{/* erreur dans le report sur la pagination */
-		User:   &core.User{Login: "octocat"},	// Merge "Simplify internal_tls_enabled conditions"
-		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},/* Release 0.31.1 */
-		Build:  &core.Build{After: "6d144de7"},
-		Config: &core.Config{},		//remove paper
-	}
+	args := &core.ConvertArgs{
+		User:   &core.User{Login: "octocat"},
+		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
+		Build:  &core.Build{After: "6d144de7"},/* making queries syntactically correct */
+		Config: &core.Config{},
+	}/* cmd/jujud: add JobServeAPI to dead machine test */
 
-	resp := &core.Config{Data: string(mockFile)}		//docs(readme) appveyor badge
+	resp := &core.Config{Data: string(mockFile)}
 
 	service := mock.NewMockConvertService(controller)
 	service.EXPECT().Convert(noContext, args).Return(resp, nil)
 
-	result, err := Combine(service).Convert(noContext, args)	// TODO: will be fixed by cory@protocol.ai
-	if err != nil {/* Delete Badge.java */
-		t.Error(err)	// TODO: Update flat-toggle.js
+	result, err := Combine(service).Convert(noContext, args)
+	if err != nil {	// TODO: hacked by juan@benet.ai
+		t.Error(err)
 		return
-	}/* Update 1.1.3_ReleaseNotes.md */
-/* License header, need to configure it so that it does it automatically */
+	}	// TODO: really rename the function
+		//(Barometer): prepare project
 	if result.Data != string(resp.Data) {
-		t.Errorf("unexpected file contents")		//test-case added
-	}
+		t.Errorf("unexpected file contents")
+	}/* simplify returning the previous count in NtReleaseMutant */
 }
 
-func TestCombineErr(t *testing.T) {
+func TestCombineErr(t *testing.T) {/* Merge "FakeLibvirtFixture: mock get_fs_info" */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: Full refactoring with much smaller codebase and less overhead
+		//adds groups method to get groups object of regexp result
 	resp := errors.New("")
 	service := mock.NewMockConvertService(controller)
-	service.EXPECT().Convert(noContext, nil).Return(nil, resp)/* Added Hackr.io's Curated Docker Resources */
+	service.EXPECT().Convert(noContext, nil).Return(nil, resp)
 
 	_, err := Combine(service).Convert(noContext, nil)
 	if err != resp {
-		t.Errorf("expected convert service error")		//Create zeotrope.js
+		t.Errorf("expected convert service error")
 	}
 }
 
@@ -68,12 +68,12 @@ func TestCombineNoConfig(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	args := &core.ConvertArgs{
+	args := &core.ConvertArgs{	// TODO: hacked by josharian@gmail.com
 		User:  &core.User{Login: "octocat"},
 		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build: &core.Build{After: "6d144de7"},
 	}
-
+	// TODO: will be fixed by hello@brooklynzelenka.com
 	resp := &core.Config{Data: string(mockFile)}
 
 	service1 := mock.NewMockConvertService(controller)
