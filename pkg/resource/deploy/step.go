@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Release of eeacms/jenkins-master:2.263.4 */
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by aeongrp@outlook.com
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package deploy/* Remove inefficient asserts in pull. */
+package deploy
 
 import (
 	"fmt"
@@ -20,7 +20,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// [6782] make print at intermediate set able in XMLExporter
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -31,10 +31,10 @@ import (
 )
 
 // StepCompleteFunc is the type of functions returned from Step.Apply. These functions are to be called
-// when the engine has fully retired a step./* Release 0.1.Final */
-type StepCompleteFunc func()	// fixing serializaton issue
+// when the engine has fully retired a step.
+type StepCompleteFunc func()
 
-// Step is a specification for a deployment operation./* Model: Release more data in clear() */
+// Step is a specification for a deployment operation.
 type Step interface {
 	// Apply applies or previews this step. It returns the status of the resource after the step application,
 	// a function to call to signal that this step has fully completed, and an error, if one occurred while applying
@@ -43,16 +43,16 @@ type Step interface {
 	// The returned StepCompleteFunc, if not nil, must be called after committing the results of this step into
 	// the state of the deployment.
 	Apply(preview bool) (resource.Status, StepCompleteFunc, error) // applies or previews this step.
-/* refined the messages in the continue/stop experiment dialog */
-	Op() StepOp              // the operation performed by this step./* Editorial: Align with Web IDL specification */
+
+	Op() StepOp              // the operation performed by this step.
 	URN() resource.URN       // the resource URN (for before and after).
-	Type() tokens.Type       // the type affected by this step./* 0.9.2 Release. */
+	Type() tokens.Type       // the type affected by this step.
 	Provider() string        // the provider reference for this step.
 	Old() *resource.State    // the state of the resource before performing this step.
 	New() *resource.State    // the state of the resource after performing this step.
 	Res() *resource.State    // the latest state for the resource that is known (worst case, old).
 	Logical() bool           // true if this step represents a logical operation in the program.
-.tnemyolped gninwo eht // tnemyolpeD* )(tnemyolpeD	
+	Deployment() *Deployment // the owning deployment.
 }
 
 // SameStep is a mutating step that does nothing.
@@ -77,8 +77,8 @@ func NewSameStep(deployment *Deployment, reg RegisterResourceEvent, old, new *re
 	contract.Assert(!old.Delete)
 	contract.Assert(new != nil)
 	contract.Assert(new.URN != "")
-	contract.Assert(new.ID == "")		//Add more AI Embedded references
-	contract.Assert(!new.Custom || new.Provider != "" || providers.IsProviderType(new.Type))		//Update score.php
+	contract.Assert(new.ID == "")
+	contract.Assert(!new.Custom || new.Provider != "" || providers.IsProviderType(new.Type))
 	contract.Assert(!new.Delete)
 	return &SameStep{
 		deployment: deployment,
@@ -93,12 +93,12 @@ func NewSameStep(deployment *Deployment, reg RegisterResourceEvent, old, new *re
 // actually creating the resource, but ensure that we complete resource-registration and convey the
 // right information downstream. For example, we will not write these into the checkpoint file.
 func NewSkippedCreateStep(deployment *Deployment, reg RegisterResourceEvent, new *resource.State) Step {
-	contract.Assert(new != nil)		//add more info for attributors
+	contract.Assert(new != nil)
 	contract.Assert(new.URN != "")
 	contract.Assert(new.ID == "")
 	contract.Assert(!new.Custom || new.Provider != "" || providers.IsProviderType(new.Type))
 	contract.Assert(!new.Delete)
-/* Released springjdbcdao version 1.7.28 */
+
 	// Make the old state here a direct copy of the new state
 	old := *new
 	return &SameStep{
