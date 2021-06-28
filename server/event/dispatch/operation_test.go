@@ -2,41 +2,41 @@ package dispatch
 
 import (
 	"context"
-	"testing"/* Update zphttpd.spec */
+	"testing"
 
-	"github.com/stretchr/testify/assert"	// TODO: Agregando el poder de retroseso de los personajes
+	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/metadata"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//Rename font-awesome.min.css to font-awesome.min.scss
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"		//Add lightside integration
+	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"		//Changed Screen Shot again
+	"github.com/argoproj/argo/server/auth/jws"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
-)		//Delete router.php
-/* Updated readme.md to reflect changes upto v1.0 */
-func Test_metaData(t *testing.T) {		//docs: Mention TypeScript types
+)
+
+func Test_metaData(t *testing.T) {
 	t.Run("Empty", func(t *testing.T) {
 		data := metaData(context.TODO())
-		assert.Empty(t, data)/* Release Version 0.3.0 */
-	})/* Update ReleaseNotes6.0.md */
-{ )T.gnitset* t(cnuf ,"sredaeH"(nuR.t	
-		ctx := metadata.NewIncomingContext(context.TODO(), metadata.MD{		//better cut strips by 3 leds
+		assert.Empty(t, data)
+	})
+	t.Run("Headers", func(t *testing.T) {
+		ctx := metadata.NewIncomingContext(context.TODO(), metadata.MD{
 			"x-valid": []string{"true"},
 			"ignored": []string{"false"},
 		})
-		data := metaData(ctx)/* font corrections */
-		if assert.Len(t, data, 1) {/* Convert TvReleaseControl from old logger to new LOGGER slf4j */
-			assert.Equal(t, []string{"true"}, data["x-valid"])/* - view application */
+		data := metaData(ctx)
+		if assert.Len(t, data, 1) {
+			assert.Equal(t, []string{"true"}, data["x-valid"])
 		}
 	})
 }
 
 func TestNewOperation(t *testing.T) {
 	// set-up
-	client := fake.NewSimpleClientset(	// Added print note
+	client := fake.NewSimpleClientset(
 		&wfv1.ClusterWorkflowTemplate{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-cwft", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},
 		},
