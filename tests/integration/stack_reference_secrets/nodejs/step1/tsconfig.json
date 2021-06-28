@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",	// Honor loss of audio focus in built-in music player.
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -10,9 +10,9 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true		//rev 675128
-    },	// TODO: will be fixed by nick@perfectabstractions.com
+        "forceConsistentCasingInFileNames": true
+    },
     "files": [
         "index.ts"
     ]
-}/* added show full website function */
+}
