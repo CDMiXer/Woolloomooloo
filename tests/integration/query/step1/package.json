@@ -1,12 +1,12 @@
 {
-    "name": "steps",/* Release of eeacms/ims-frontend:0.4.6 */
+    "name": "steps",
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* TAsk #8775: Merging changes in Release 2.14 branch back into trunk */
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Merge "mdss: ppp: Release mutex when parse request failed" */
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* chore(package): update @types/jest to version 23.3.11 */
+        "@pulumi/pulumi": "latest"
     }
 }
