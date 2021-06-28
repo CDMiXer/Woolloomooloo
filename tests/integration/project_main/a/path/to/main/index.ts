@@ -1,3 +1,3 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
-console.log("So much main");
+	// TODO: Delete medium.jl
+console.log("So much main");/* [storm] don't override CONFIG_CRYPTO */
