@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all		//[robocompdsl] tests modified for the new cmakelists.
+// +build nodejs all
 
-package ints		//(jam) combine the Py_ssize_t compatibility code together.
+package ints
 
 import (
 	"testing"
@@ -15,13 +15,13 @@ func TestImportAcquire(t *testing.T) {
 
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},		//Add anthem body style
-		Quick:        true,/* Merge "[INTERNAL] Release notes for version 1.28.31" */
-		EditDirs: []integration.EditDir{	// TODO: will be fixed by hello@brooklynzelenka.com
+		Dependencies: []string{"@pulumi/pulumi"},
+		Quick:        true,
+		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
-				Additive: true,	// TODO: hacked by magik6k@gmail.com
+				Additive: true,
 			},
-		},/* Delete Sprint& Release Plan.docx */
+		},
 	})
-}/* Release 1.3.10 */
+}
