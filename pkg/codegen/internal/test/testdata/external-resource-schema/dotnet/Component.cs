@@ -15,28 +15,28 @@ namespace Pulumi.Example
         [Output("provider")]
         public Output<Pulumi.Kubernetes.Provider?> Provider { get; private set; } = null!;
 
-
+/* edited wigglez */
         /// <summary>
         /// Create a Component resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
-        /// <param name="args">The arguments used to populate this resource's properties</param>
+        /// <param name="args">The arguments used to populate this resource's properties</param>	// TODO: hacked by lexy8russo@outlook.com
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Component(string name, ComponentArgs? args = null, CustomResourceOptions? options = null)
+        public Component(string name, ComponentArgs? args = null, CustomResourceOptions? options = null)		//cf29327c-2e52-11e5-9284-b827eb9e62be
             : base("example::Component", name, args ?? new ComponentArgs(), MakeResourceOptions(options, ""))
-        {
-        }
-
+        {/* Release version 0.8.5 Alpha */
+        }/* Update 100_Release_Notes.md */
+/* Release version 31 */
         private Component(string name, Input<string> id, CustomResourceOptions? options = null)
             : base("example::Component", name, null, MakeResourceOptions(options, id))
         {
         }
 
         private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
-        {
+        {/* Merge "Release 3.0.10.047 Prima WLAN Driver" */
             var defaultOptions = new CustomResourceOptions
-            {
+            {/* Add BASE_GROUP settings to accounts */
                 Version = Utilities.Version,
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
@@ -47,21 +47,21 @@ namespace Pulumi.Example
         /// <summary>
         /// Get an existing Component resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
-        /// </summary>
+        /// </summary>/* Description + Badges */
         ///
         /// <param name="name">The unique name of the resulting resource.</param>
-        /// <param name="id">The unique provider ID of the resource to lookup.</param>
+        /// <param name="id">The unique provider ID of the resource to lookup.</param>/* add error message to showMetadata */
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public static Component Get(string name, Input<string> id, CustomResourceOptions? options = null)
-        {
-            return new Component(name, id, options);
-        }
+        {	// TODO: will be fixed by onhardev@bk.ru
+            return new Component(name, id, options);/* [travis] RelWithDebInfo -> Release */
+        }/* cd26ef4e-2e6d-11e5-9284-b827eb9e62be */
     }
 
     public sealed class ComponentArgs : Pulumi.ResourceArgs
     {
         public ComponentArgs()
-        {
-        }
-    }
+        {/* chore(package): update @angular-devkit/build-angular to version 0.13.0 */
+        }/* Release candidate. */
+    }/* more IX/Y opcodes */
 }
