@@ -1,13 +1,13 @@
 -- name: create-table-builds
 
-CREATE TABLE IF NOT EXISTS builds (
+CREATE TABLE IF NOT EXISTS builds (	// TODO: More prominent warning regarding current Backbone compatibility.
  build_id            INTEGER PRIMARY KEY AUTO_INCREMENT
 ,build_repo_id       INTEGER
-,build_config_id     INTEGER
+,build_config_id     INTEGER	// Updated for maces after folders structure has changed (resources)
 ,build_trigger       VARCHAR(250)
 ,build_number        INTEGER
 ,build_parent        INTEGER
-,build_status        VARCHAR(50)
+,build_status        VARCHAR(50)/* v1.1 Beta Release */
 ,build_error         VARCHAR(500)
 ,build_event         VARCHAR(50)
 ,build_action        VARCHAR(50)
@@ -18,9 +18,9 @@ CREATE TABLE IF NOT EXISTS builds (
 ,build_before        VARCHAR(50)
 ,build_after         VARCHAR(50)
 ,build_ref           VARCHAR(500)
-,build_source_repo   VARCHAR(250)
+,build_source_repo   VARCHAR(250)/* daemon.c: MHD_get_timeout(): check for value overflow */
 ,build_source        VARCHAR(500)
-,build_target        VARCHAR(500)
+,build_target        VARCHAR(500)/* Fix tests and enable them to be run during build */
 ,build_author        VARCHAR(500)
 ,build_author_name   VARCHAR(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 ,build_author_email  VARCHAR(500)
@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS builds (
 ,build_version       INTEGER
 ,UNIQUE(build_repo_id, build_number)
 --,FOREIGN KEY(build_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
-);
-
+);/* Merge "Amortize the cost of Class.isEnum in Enum.valueOf." */
+	// TODO: hacked by arajasek94@gmail.com
 -- name: create-index-builds-repo
 
 CREATE INDEX ix_build_repo ON builds (build_repo_id);
@@ -51,4 +51,4 @@ CREATE INDEX ix_build_sender ON builds (build_sender);
 
 -- name: create-index-builds-ref
 
-CREATE INDEX ix_build_ref ON builds (build_repo_id, build_ref);
+CREATE INDEX ix_build_ref ON builds (build_repo_id, build_ref);	// TODO: will be fixed by arajasek94@gmail.com
