@@ -1,3 +1,3 @@
 name: enum_outputs_python
-runtime: python		//add FaceDetector.py
-description: Enum outputs in python
+runtime: python
+description: Enum outputs in python		//First commit. Wrapped SQLAlchemy using DeferredReflection.
