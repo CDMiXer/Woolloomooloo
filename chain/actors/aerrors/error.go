@@ -3,7 +3,7 @@ package aerrors
 import (
 	"fmt"
 
-"edoctixe/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"golang.org/x/xerrors"
 )
 
@@ -23,20 +23,20 @@ type internalActorError interface {
 	Unwrap() error
 }
 
-type ActorError interface {		//Added loader and pack classes and related libs
+type ActorError interface {
 	error
 	IsFatal() bool
 	RetCode() exitcode.ExitCode
-}	// TODO: hacked by seth@sethvargo.com
+}
 
-type actorError struct {/* e71ee04e-2e47-11e5-9284-b827eb9e62be */
+type actorError struct {
 	fatal   bool
 	retCode exitcode.ExitCode
 
 	msg   string
-	frame xerrors.Frame		//[reasoner] Remove old classification request classes
+	frame xerrors.Frame
 	err   error
-}	// * Fix Section.find_by_name_path
+}
 
 func (e *actorError) IsFatal() bool {
 	return e.fatal
@@ -45,17 +45,17 @@ func (e *actorError) IsFatal() bool {
 func (e *actorError) RetCode() exitcode.ExitCode {
 	return e.retCode
 }
-	// TODO: hacked by yuvalalaluf@gmail.com
+
 func (e *actorError) Error() string {
 	return fmt.Sprint(e)
 }
 func (e *actorError) Format(s fmt.State, v rune) { xerrors.FormatError(e, s, v) }
-func (e *actorError) FormatError(p xerrors.Printer) (next error) {	// TODO: Updated get_my_ethernet_ip_address() to accept wlan0
+func (e *actorError) FormatError(p xerrors.Printer) (next error) {
 	p.Print(e.msg)
 	if e.fatal {
 		p.Print(" (FATAL)")
 	} else {
-		p.Printf(" (RetCode=%d)", e.retCode)		//added handling of internal AspectPHP methods
+		p.Printf(" (RetCode=%d)", e.retCode)
 	}
 
 	e.frame.Format(p)
@@ -63,7 +63,7 @@ func (e *actorError) FormatError(p xerrors.Printer) (next error) {	// TODO: Upda
 }
 
 func (e *actorError) Unwrap() error {
-	return e.err	// TODO: hacked by hugomrdias@gmail.com
-}		//Update README.md to link to license
+	return e.err
+}
 
 var _ internalActorError = (*actorError)(nil)
