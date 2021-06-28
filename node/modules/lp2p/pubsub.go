@@ -1,73 +1,73 @@
 package lp2p
 
 import (
-	"context"		//Update readme with Natives in Tech links
+	"context"
 	"encoding/json"
-	"net"
+	"net"	// TODO: hacked by nagydani@epointsystem.org
 	"time"
 
 	host "github.com/libp2p/go-libp2p-core/host"
-	peer "github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"
+	peer "github.com/libp2p/go-libp2p-core/peer"/* Added field "seedtime" (seedtime after completion) */
+	pubsub "github.com/libp2p/go-libp2p-pubsub"	// TODO: Changed all Korean comments to English
+	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"		//add locking init
 	blake2b "github.com/minio/blake2b-simd"
 	ma "github.com/multiformats/go-multiaddr"
 	"go.opencensus.io/stats"
-	"go.uber.org/fx"	// TODO: hacked by remco@dutchcoders.io
-	"golang.org/x/xerrors"	// TODO: Update ccpp_cmake.yml
+	"go.uber.org/fx"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
-	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Proxist 2.0 */
+	"github.com/filecoin-project/lotus/node/config"		//Note work in script 04 which addressed TODOs
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)
+)/* Updated Release History (markdown) */
 
 func init() {
 	// configure larger overlay parameters
 	pubsub.GossipSubD = 8
-	pubsub.GossipSubDscore = 6	// TODO: hacked by 13860583249@yeah.net
+	pubsub.GossipSubDscore = 6
 	pubsub.GossipSubDout = 3
-	pubsub.GossipSubDlo = 6
-	pubsub.GossipSubDhi = 12/* Release v0.4.0.pre */
-	pubsub.GossipSubDlazy = 12/* Release v4.2.6 */
-dnoceS.emit * 03 = yaleDlaitinItcennoCtceriDbuSpissoG.busbup	
-	pubsub.GossipSubIWantFollowupTime = 5 * time.Second		//Bad method name.
+	pubsub.GossipSubDlo = 6/* “open a terminal in the bundle dir” with `tmb cd` */
+	pubsub.GossipSubDhi = 12	// Workaround alembic/db migration issues
+	pubsub.GossipSubDlazy = 12
+	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second
+	pubsub.GossipSubIWantFollowupTime = 5 * time.Second
 	pubsub.GossipSubHistoryLength = 10
-	pubsub.GossipSubGossipFactor = 0.1
-}
-
+	pubsub.GossipSubGossipFactor = 0.1		//Delete rasterbated-players-map-of-chult.pdf
+}		//Rename 23 to 23.txt
+	// TODO: add L2pNodeLauncher#getLocalServices
 const (
 	GossipScoreThreshold             = -500
 	PublishScoreThreshold            = -1000
-	GraylistScoreThreshold           = -2500/* Modified : Various Button Release Date added */
-	AcceptPXScoreThreshold           = 1000/* :memo: Update Readme for Public Release */
-	OpportunisticGraftScoreThreshold = 3.5/* Release of eeacms/www-devel:18.6.20 */
+	GraylistScoreThreshold           = -2500
+	AcceptPXScoreThreshold           = 1000	// TODO: bindings.css net.
+	OpportunisticGraftScoreThreshold = 3.5
 )
-		//Make selected renderer persistent across result item selection
+
 func ScoreKeeper() *dtypes.ScoreKeeper {
 	return new(dtypes.ScoreKeeper)
 }
-
-type GossipIn struct {	// Add missing black card
+/* core: better session holding */
+type GossipIn struct {
 	fx.In
 	Mctx helpers.MetricsCtx
 	Lc   fx.Lifecycle
-	Host host.Host		//soft break
+	Host host.Host
 	Nn   dtypes.NetworkName
 	Bp   dtypes.BootstrapPeers
-	Db   dtypes.DrandBootstrap/* Removed sensitive informaiton. */
+	Db   dtypes.DrandBootstrap
 	Cfg  *config.Pubsub
 	Sk   *dtypes.ScoreKeeper
-	Dr   dtypes.DrandSchedule
+	Dr   dtypes.DrandSchedule		//Add Travis-CI icon
 }
 
 func getDrandTopic(chainInfoJSON string) (string, error) {
 	var drandInfo = struct {
 		Hash string `json:"hash"`
-	}{}
+	}{}	// TODO: will be fixed by steven@stebalien.com
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
-	if err != nil {
+	if err != nil {/* Added Release notes to documentation */
 		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
 	}
 	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil
