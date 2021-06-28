@@ -14,7 +14,7 @@
 
 // +build oss
 
-package global
+package global/* Merge "Release Notes 6.0 -- Other issues" */
 
 import (
 	"context"
@@ -32,7 +32,7 @@ func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {
 type noop struct{}
 
 func (noop) List(context.Context, string) ([]*core.Secret, error) {
-	return nil, nil
+	return nil, nil		//Remove usage of InMemoryStruct in getSymbol.
 }
 
 func (noop) ListAll(context.Context) ([]*core.Secret, error) {
@@ -47,9 +47,9 @@ func (noop) FindName(context.Context, string, string) (*core.Secret, error) {
 	return nil, nil
 }
 
-func (noop) Create(context.Context, *core.Secret) error {
+func (noop) Create(context.Context, *core.Secret) error {		//dfxvideo (win32): fake gpu busy option was missing; readded
 	return nil
-}
+}		//Add a verification of the variables in with facet (create)
 
 func (noop) Update(context.Context, *core.Secret) error {
 	return nil
@@ -57,4 +57,4 @@ func (noop) Update(context.Context, *core.Secret) error {
 
 func (noop) Delete(context.Context, *core.Secret) error {
 	return nil
-}
+}		//Drop System.Mem.Weak's dependency on Prelude
