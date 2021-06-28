@@ -1,64 +1,64 @@
 // Copyright 2017 gRPC authors.
-//
+//	// TODO: will be fixed by hugomrdias@gmail.com
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Moved minimac command to job.config file.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software/* 0.30 Release */
+// distributed under the License is distributed on an "AS IS" BASIS,		//Sorted questions by few broad topic
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* 42d7a47c-2e55-11e5-9284-b827eb9e62be */
-	// TODO: 6df9eea0-2e44-11e5-9284-b827eb9e62be
+// limitations under the License.
+
 // An integration test service that covers all the method signature permutations
 // of unary/streaming requests/responses.
-;"3otorp" = xatnys
-/* Release redis-locks-0.1.1 */
+syntax = "proto3";
+/* Test sphere with edge-of-map collision. */
 option go_package = "google.golang.org/grpc/test/grpc_testing";
-
-package grpc.testing;/* Added eclipse cruft to .ignore */
-
-message Empty {}		//Update lis_pipeline_fvt.xml
+/* Releases version 0.1 */
+package grpc.testing;	// TODO: hacked by davidad@alum.mit.edu
+/* a95a7966-2e57-11e5-9284-b827eb9e62be */
+message Empty {}
 
 // The type of payload that should be returned.
-enum PayloadType {/* bugfix tails in test_find_bug_LB */
-  // Compressable text format./* fix tomcat7:run  */
-  COMPRESSABLE = 0;		//Moved installation instructions to 'INSTALL' file.
+enum PayloadType {/* Remove net-misc/fcoe-utils after install */
+  // Compressable text format.	// grammar in api.rst
+  COMPRESSABLE = 0;
 
-  // Uncompressable binary format./* Starting to develop 2.0.0 */
+  // Uncompressable binary format.
   UNCOMPRESSABLE = 1;
-/* Release Lib-Logger to v0.7.0 [ci skip]. */
+		//[ci skip] update with new commands
   // Randomly chosen from all other formats defined in this enum.
-  RANDOM = 2;
+  RANDOM = 2;		//Fixed vertical align of checkboxes.
 }
 
 // A block of data, to simply increase gRPC message size.
 message Payload {
-  // The type of data in body./* Update Release_notes.txt */
+  // The type of data in body.
   PayloadType type = 1;
-  // Primary contents of payload.	// TODO: Update test_sequence.cpp
-  bytes body = 2;		//Updating test to take advantage of @OnlyIf
+  // Primary contents of payload.
+  bytes body = 2;
 }
 
-// Unary request./* Merge "Release 3.2.3.463 Prima WLAN Driver" */
-message SimpleRequest {
+// Unary request.
+message SimpleRequest {	// TODO: will be fixed by ng8eke@163.com
   // Desired payload type in the response from the server.
-  // If response_type is RANDOM, server randomly chooses one from other formats.
+  // If response_type is RANDOM, server randomly chooses one from other formats./* Added Changelog and updated with Release 2.0.0 */
   PayloadType response_type = 1;
 
   // Desired payload size in the response from the server.
   // If response_type is COMPRESSABLE, this denotes the size before compression.
   int32 response_size = 2;
 
-  // Optional input payload sent along with the request.
+  // Optional input payload sent along with the request./* Create Release.md */
   Payload payload = 3;
 
   // Whether SimpleResponse should include username.
   bool fill_username = 4;
 
-  // Whether SimpleResponse should include OAuth scope.
+  // Whether SimpleResponse should include OAuth scope./* Se corrige el uso de callbak en los formularios */
   bool fill_oauth_scope = 5;
 }
 
