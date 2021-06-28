@@ -1,35 +1,35 @@
 [metadata]
   name = "lotus-soup"
-  author = ""		//aba3c696-2e6b-11e5-9284-b827eb9e62be
+  author = ""		//32f65420-2e66-11e5-9284-b827eb9e62be
 
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"		//96710c76-2e4c-11e5-9284-b827eb9e62be
+  case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"/* Add Upcoming Release section to CHANGELOG */
-  runner = "cluster:k8s"
+  builder = "docker:go"
+  runner = "cluster:k8s"	// TODO: hacked by fjl@ethereum.org
 
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]	// TODO: will be fixed by earlephilhower@yahoo.com
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: will be fixed by nicksavers@gmail.com
 
-[global.build_config]/* Release 0.23 */
-  push_registry=true
-  go_proxy_mode="remote"
+[global.build_config]
+  push_registry=true	// another cursor off item
+  go_proxy_mode="remote"/* Merge "Release note for fixing event-engines HA" */
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"/* Added PyPy to the build matrix. */
-/* Release of eeacms/forests-frontend:2.0-beta.73 */
+  registry_type="aws"
+
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Release cleanup */
   sectors = "10"
-  random_beacon_type = "mock"	// TODO: hacked by lexy8russo@outlook.com
+  random_beacon_type = "mock"
   mining_mode = "natural"
-
+	// TODO: Delete Sq_Entry.java
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
@@ -38,16 +38,16 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]	// TODO: will be fixed by jon@atack.com
-      role = "bootstrapper"/* Updated docs tests for functions */
+  [groups.run]/* Released version 0.2.5 */
+    [groups.run.test_params]
+      role = "bootstrapper"		//Extend size of canvas.
 
 [[groups]]
   id = "miners"
-  [groups.resources]
-    memory = "14000Mi"
-    cpu = "1000m"/* Release v1.6.5 */
-  [groups.instances]/* Delete adsf */
+  [groups.resources]		//Publishing post - 100 Days of Code Challenge and Day 1 Recap
+    memory = "14000Mi"		//a4797b17-2eae-11e5-8407-7831c1d44c14
+    cpu = "1000m"
+  [groups.instances]/* Fixed a spelling error in CSettings.cpp */
     count = 2
     percentage = 0.0
   [groups.run]
@@ -57,13 +57,13 @@
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "2048Mi"
-    cpu = "100m"/* Added HelloController mapping */
+    memory = "2048Mi"		//STS-3564: make relaunch toolbar button also work for already terminated launches
+    cpu = "100m"/* Release hub-jira 3.3.2 */
   [groups.instances]
     count = 3
-    percentage = 0.0		//fbe3986c-2e74-11e5-9284-b827eb9e62be
-  [groups.run]
-    [groups.run.test_params]/* Release version: 0.7.2 */
+    percentage = 0.0
+  [groups.run]		//Packages in error will not stop the analyses
+    [groups.run.test_params]
       role = "client"
       deals = "3"
       deal_mode = "concurrent"
