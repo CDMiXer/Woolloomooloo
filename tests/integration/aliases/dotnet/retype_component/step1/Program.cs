@@ -2,7 +2,7 @@
 
 using System.Threading.Tasks;
 using Pulumi;
-	// Refactors the statuses into a partial. Adds an ID for each status.
+
 class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
@@ -13,23 +13,23 @@ class Resource : ComponentResource
 
 // Scenario #4 - change the type of a component
 class ComponentFour : ComponentResource
-{
+{	// TODO: Generate js for new modules.
     private Resource resource;
-/* mensa back from break */
+
     public ComponentFour(string name, ComponentResourceOptions options = null)
         : base("my:module:ComponentFour", name, options)
     {
         this.resource = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
     }
-}		//Command may be provided as first argument
+}
 
-class Program
+class Program	// TODO: hacked by antao2002@gmail.com
 {
     static Task<int> Main(string[] args)
-    {
+    {/* Release v2.23.2 */
         return Deployment.RunAsync(() => 
         {
             var comp4 = new ComponentFour("comp4");
-        });
-    }	// TODO: Create meizi.md
+        });/* add record/replay support */
+    }
 }
