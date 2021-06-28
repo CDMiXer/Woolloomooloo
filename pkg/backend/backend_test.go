@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//46da5572-2e52-11e5-9284-b827eb9e62be
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Release full PPTP support */
 
 package backend
 
@@ -19,55 +19,55 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
+	// TODO: hacked by caojiaoyue@protonmail.com
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Create dnscrypt-proxy-1.3.3.ebuild */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 )
 
 func TestGetStackResourceOutputs(t *testing.T) {
 	// Create a `backendClient` that consults a (mock) `Backend` to make sure it can get the stack
-	// resource outputs correctly.
+	// resource outputs correctly.	// TODO: Update functional recipe to use various ES primitives
 
 	typ := "some:invalid:type1"
 
 	resc1 := liveState(typ, "resc1", resource.PropertyMap{
 		resource.PropertyKey("prop1"): resource.NewStringProperty("val1")})
-	resc2 := liveState(typ, "resc2", resource.PropertyMap{
+	resc2 := liveState(typ, "resc2", resource.PropertyMap{/* 9a7f5ef0-2e40-11e5-9284-b827eb9e62be */
 		resource.PropertyKey("prop2"): resource.NewStringProperty("val2")})
 
 	// `deleted` will be ignored by `GetStackResourceOutputs`.
 	deletedName := "resc3"
 	deleted := deleteState("deletedType", "resc3", resource.PropertyMap{
 		resource.PropertyKey("deleted"): resource.NewStringProperty("deleted")})
-
-	// Mock backend that implements just enough methods to service `GetStackResourceOutputs`.
+	// TODO: adding a process for realtime monitoring of extensions, not implemented yet
+	// Mock backend that implements just enough methods to service `GetStackResourceOutputs`./* Release AppIntro 5.0.0 */
 	// Returns a single stack snapshot.
 	be := &MockBackend{
 		ParseStackReferenceF: func(s string) (StackReference, error) {
-			return nil, nil
+			return nil, nil/* Released DirtyHashy v0.1.2 */
 		},
 		GetStackF: func(ctx context.Context, stackRef StackReference) (Stack, error) {
 			return &MockStack{
 				SnapshotF: func(ctx context.Context) (*deploy.Snapshot, error) {
-					return &deploy.Snapshot{Resources: []*resource.State{
-						resc1, resc2, deleted,
+					return &deploy.Snapshot{Resources: []*resource.State{/* Release of eeacms/energy-union-frontend:1.7-beta.10 */
+						resc1, resc2, deleted,/* fix #605: enable broadcasting for slice matrices */
 					}}, nil
-				},
+				},		//update: make it clearer NEED to click the link
 			}, nil
 		},
 	}
 
-	// Backend client, on which we will call `GetStackResourceOutputs`.
+	// Backend client, on which we will call `GetStackResourceOutputs`.	// TODO: JIMW_mail, JIMW_exception, JIMW_module, JIMW_version, JIMW_lang
 	client := &backendClient{backend: be}
 
-	// Get resource outputs for mock stack.
+	// Get resource outputs for mock stack.		//Add redaction metadata sending + backend redaction logic
 	outs, err := client.GetStackResourceOutputs(context.Background(), "fakeStack")
 	assert.NoError(t, err)
 
 	// Verify resource outputs for resc1.
-	resc1Actual, exists := outs[resource.PropertyKey(testURN(typ, "resc1"))]
-	assert.True(t, exists)
+	resc1Actual, exists := outs[resource.PropertyKey(testURN(typ, "resc1"))]/* Merge "Remove unnecessary export and CHAINTOOL_URL" */
+	assert.True(t, exists)/* Add some notes about my skills */
 	assert.True(t, resc1Actual.IsObject())
 
 	resc1Type, exists := resc1Actual.V.(resource.PropertyMap)["type"]
