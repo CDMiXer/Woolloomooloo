@@ -9,13 +9,13 @@
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Release version: 2.0.1 [ci skip] */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// using http instead of https in schema.org namespace
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
     ]
-}/* 0.19.1: Maintenance Release (close #54) */
+}
 
