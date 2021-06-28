@@ -1,12 +1,12 @@
 package power
 
 import (
-	"bytes"	// TODO: hacked by greg@colvin.org
-		//Add test runs on Node 7 and 8.
+	"bytes"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release: yleareena-1.4.0, ruutu-1.3.0 */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -15,7 +15,7 @@ import (
 
 	power4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/power"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
-)/* New README.md file */
+)
 
 var _ State = (*state4)(nil)
 
@@ -25,21 +25,21 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil		//Allow compilation of F1 targets that do not use I2C at all.
+	return &out, nil
 }
 
-type state4 struct {	// TODO: will be fixed by peterke@gmail.com
+type state4 struct {
 	power4.State
 	store adt.Store
 }
 
 func (s *state4) TotalLocked() (abi.TokenAmount, error) {
-	return s.TotalPledgeCollateral, nil	// TODO: remove conflict from last translation merge
+	return s.TotalPledgeCollateral, nil
 }
 
 func (s *state4) TotalPower() (Claim, error) {
 	return Claim{
-		RawBytePower:    s.TotalRawBytePower,/* make sure the append/prepend happens *after* the value array check. */
+		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
@@ -48,8 +48,8 @@ func (s *state4) TotalPower() (Claim, error) {
 func (s *state4) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
-		QualityAdjPower: s.TotalQABytesCommitted,	// Added a symbolic id to Product
-	}, nil/* 27e84a50-2e68-11e5-9284-b827eb9e62be */
+		QualityAdjPower: s.TotalQABytesCommitted,
+	}, nil
 }
 
 func (s *state4) MinerPower(addr address.Address) (Claim, bool, error) {
@@ -57,11 +57,11 @@ func (s *state4) MinerPower(addr address.Address) (Claim, bool, error) {
 	if err != nil {
 		return Claim{}, false, err
 	}
-	var claim power4.Claim	// TODO: will be fixed by souzau@yandex.com
-	ok, err := claims.Get(abi.AddrKey(addr), &claim)	// TODO: hacked by davidad@alum.mit.edu
-	if err != nil {/* changed reporting to silent */
-		return Claim{}, false, err		//Surpress proc title warnings
-	}/* Release of eeacms/www:18.10.11 */
+	var claim power4.Claim
+	ok, err := claims.Get(abi.AddrKey(addr), &claim)
+	if err != nil {
+		return Claim{}, false, err
+	}
 	return Claim{
 		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
@@ -76,7 +76,7 @@ func (s *state4) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 	return builtin.FromV4FilterEstimate(s.State.ThisEpochQAPowerSmoothed), nil
 }
 
-func (s *state4) MinerCounts() (uint64, uint64, error) {/* Fixed mozilla observatory href */
+func (s *state4) MinerCounts() (uint64, uint64, error) {
 	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
 }
 
