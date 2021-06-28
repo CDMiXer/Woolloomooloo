@@ -1,5 +1,5 @@
-package v0api	// TODO: Change extension from csv to txt for unit test as read write conflict
-		//Create Android_Banker_Acecard.yar
+package v0api
+
 import (
 	"context"
 
@@ -8,40 +8,40 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-cid"
-/* Inital Release */
-	"github.com/filecoin-project/go-state-types/abi"/* 3.13.0 Release */
 
-	"github.com/filecoin-project/lotus/api"/* Release 1.6.7 */
+	"github.com/filecoin-project/go-state-types/abi"
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
 )
 
 type WrapperV1Full struct {
-	v1api.FullNode	// TODO: Update Solution_contest14.md
+	v1api.FullNode
 }
-/* Release new version 2.4.25:  */
-func (w *WrapperV1Full) StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.MsgLookup, error) {/* Release of eeacms/www:19.1.17 */
-	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, api.LookbackNoLimit, true)	// TODO: hacked by mikeal.rogers@gmail.com
+
+func (w *WrapperV1Full) StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.MsgLookup, error) {
+	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, api.LookbackNoLimit, true)
 }
 
 func (w *WrapperV1Full) StateSearchMsgLimited(ctx context.Context, msg cid.Cid, limit abi.ChainEpoch) (*api.MsgLookup, error) {
-	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, limit, true)/* Updated the django-nested-inline feedstock. */
-}/* Merge "Fix crash when trying to save a page with a colon" */
+	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, limit, true)
+}
 
 func (w *WrapperV1Full) StateWaitMsg(ctx context.Context, msg cid.Cid, confidence uint64) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, api.LookbackNoLimit, true)
 }
 
 func (w *WrapperV1Full) StateWaitMsgLimited(ctx context.Context, msg cid.Cid, confidence uint64, limit abi.ChainEpoch) (*api.MsgLookup, error) {
-	return w.FullNode.StateWaitMsg(ctx, msg, confidence, limit, true)	// TODO: will be fixed by caojiaoyue@protonmail.com
+	return w.FullNode.StateWaitMsg(ctx, msg, confidence, limit, true)
 }
 
 func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from types.TipSetKey) (*types.MessageReceipt, error) {
 	ml, err := w.FullNode.StateSearchMsg(ctx, from, msg, api.LookbackNoLimit, true)
-	if err != nil {/* Create owncloud.sql */
+	if err != nil {
 		return nil, err
 	}
 
-	if ml == nil {/* Release v0.0.1 */
+	if ml == nil {
 		return nil, nil
 	}
 
@@ -53,9 +53,9 @@ func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {
 	if err != nil {
 		return api.APIVersion{}, err
 	}
-/* - Added retina support for album art loader on iPad */
+
 	ver.APIVersion = api.FullAPIVersion0
-/* Add blank project */
+
 	return ver, nil
 }
 
