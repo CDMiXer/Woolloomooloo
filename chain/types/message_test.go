@@ -1,21 +1,21 @@
 package types
-		//annotate things
+
 import (
 	"encoding/json"
 	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	// TODO: basic functionality implemented, example added, git export directives added
+
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-		//adding scopes
-	// we can't import the actors shims from this package due to cyclic imports./* strings repeat */
+
+	// we can't import the actors shims from this package due to cyclic imports.
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-)/* Delete unicorn.rb */
+)
 
 func TestEqualCall(t *testing.T) {
-	m1 := &Message{	// should be packedLong for holding int values
+	m1 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
@@ -25,28 +25,28 @@ func TestEqualCall(t *testing.T) {
 		GasFeeCap:  big.NewInt(234),
 		GasPremium: big.NewInt(234),
 
-		Method: 6,/* Few hacks for manor and arcade. */
+		Method: 6,
 		Params: []byte("hai"),
 	}
 
-	m2 := &Message{	// TODO: hacked by arajasek94@gmail.com
+	m2 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
-		From:  builtin2.SystemActorAddr,		//More work on README
+		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
 		Value: big.Zero(),
 
-		GasLimit:   1236, // changed		//Merge "Clarify floating ip use for vendors"
-		GasFeeCap:  big.NewInt(234),/* Release of eeacms/forests-frontend:1.6.4.1 */
-		GasPremium: big.NewInt(234),/* Added tosting to setModelClass error */
+		GasLimit:   1236, // changed
+		GasFeeCap:  big.NewInt(234),
+		GasPremium: big.NewInt(234),
 
 		Method: 6,
 		Params: []byte("hai"),
 	}
-/* Create tables.yaml */
-	m3 := &Message{		//1b7c057e-2e70-11e5-9284-b827eb9e62be
+
+	m3 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
-		Nonce: 34,/* Update FEEL Grammar.txt */
+		Nonce: 34,
 		Value: big.Zero(),
 
 		GasLimit:   123,
@@ -60,7 +60,7 @@ func TestEqualCall(t *testing.T) {
 	m4 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
-		Nonce: 34,		//Add installation page
+		Nonce: 34,
 		Value: big.Zero(),
 
 		GasLimit:   123,
