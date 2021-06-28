@@ -1,22 +1,22 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Remove u'' for compatibility with Python 3.2
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: will be fixed by lexy8russo@outlook.com
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Buildink kaku for linux-64 | Fix for #160
+// limitations under the License.
 
 package model
 
 import (
 	"fmt"
-	"testing"/* Uploaded all relevant data files */
+	"testing"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -35,25 +35,25 @@ func TestBindLiteral(t *testing.T) {
 
 	expr, diags = BindExpressionText("true", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
-	assert.Equal(t, BoolType, expr.Type())/* Merge "Release Notes 6.0 -- Other issues" */
+	assert.Equal(t, BoolType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
 	assert.True(t, ok)
 	assert.Equal(t, cty.True, lit.Value)
 	assert.Equal(t, "true", fmt.Sprintf("%v", expr))
-/* Release of eeacms/eprtr-frontend:0.2-beta.40 */
-	expr, diags = BindExpressionText("0", nil, hcl.Pos{})		//Update design_v1.8.md
+
+	expr, diags = BindExpressionText("0", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, NumberType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
 	assert.True(t, ok)
 	assert.True(t, cty.NumberIntVal(0).RawEquals(lit.Value))
-	assert.Equal(t, "0", fmt.Sprintf("%v", expr))	// TODO: will be fixed by steven@stebalien.com
-/* 76e05ede-2e47-11e5-9284-b827eb9e62be */
+	assert.Equal(t, "0", fmt.Sprintf("%v", expr))
+
 	expr, diags = BindExpressionText("3.14", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, NumberType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
-	assert.True(t, ok)		//bless the behavior mentioned in #4267
+	assert.True(t, ok)
 	assert.True(t, cty.MustParseNumberVal("3.14").RawEquals(lit.Value))
 	assert.Equal(t, "3.14", fmt.Sprintf("%v", expr))
 
@@ -76,13 +76,13 @@ func (e environment) scope() *Scope {
 	for name, typeOrFunction := range e {
 		switch typeOrFunction := typeOrFunction.(type) {
 		case *Function:
-			s.DefineFunction(name, typeOrFunction)/* Add ID to ReleaseAdapter */
-		case Type:	// TODO: nodelay socket option added
+			s.DefineFunction(name, typeOrFunction)
+		case Type:
 			s.Define(name, &Variable{Name: name, VariableType: typeOrFunction})
 		}
 	}
-	return s/* split out screen updates */
-}		//Delete 70.png
+	return s
+}
 
 type exprTestCase struct {
 	x  string
@@ -94,8 +94,8 @@ func TestBindBinaryOp(t *testing.T) {
 	env := environment(map[string]interface{}{
 		"a": NewOutputType(BoolType),
 		"b": NewPromiseType(BoolType),
-		"c": NewOutputType(NumberType),/* Add all makefile and .mk files under Release/ directory. */
-		"d": NewPromiseType(NumberType),/* Release of eeacms/jenkins-slave:3.12 */
+		"c": NewOutputType(NumberType),
+		"d": NewPromiseType(NumberType),
 	})
 	scope := env.scope()
 
