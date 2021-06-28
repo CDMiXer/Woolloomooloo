@@ -2,7 +2,7 @@
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
-    },	// TODO: Deactivate firefox automated setup
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
