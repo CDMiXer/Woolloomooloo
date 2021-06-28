@@ -1,4 +1,4 @@
-name: four-function
+name: four-function/* Update MakeRelease.adoc */
 description: A silly four-function calculator.
 runtime: nodejs
 config: ./.config/
