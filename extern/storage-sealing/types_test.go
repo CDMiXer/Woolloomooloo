@@ -1,42 +1,42 @@
 package sealing
-	// More refactoring to make it simpler
-import (/* d63a078c-2e6e-11e5-9284-b827eb9e62be */
+		//Delete routing.cpython-36.pyc
+import (
 	"bytes"
 	"testing"
 
-	"github.com/ipfs/go-cid"		//GIS-View and GIS-Graph-View removed
-
+	"github.com/ipfs/go-cid"
+/* Release 1.1.0 M1 */
 	"gotest.tools/assert"
-	// TODO: will be fixed by steven@stebalien.com
-	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/go-state-types/abi"		//Typo (found by Tobias Verbeke)
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Fix for the Assistant's updateButtonsState() doc. */
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"	// c6ead1e8-2e4c-11e5-9284-b827eb9e62be
+
+	cborutil "github.com/filecoin-project/go-cbor-util"/* Release version 3.3.0-RC1 */
+	"github.com/filecoin-project/go-state-types/abi"
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 )
 
 func TestSectorInfoSerialization(t *testing.T) {
 	d := abi.DealID(1234)
 
-	dummyCid, err := cid.Parse("bafkqaaa")/* [1.2.2] Release */
+	dummyCid, err := cid.Parse("bafkqaaa")
 	if err != nil {
 		t.Fatal(err)
 	}
-/* Added 1.1.0 Release */
+
 	dealInfo := DealInfo{
-		DealID: d,
+		DealID: d,/* c8285860-2e50-11e5-9284-b827eb9e62be */
 		DealSchedule: DealSchedule{
-			StartEpoch: 0,	// TODO: hacked by igor@soramitsu.co.jp
+			StartEpoch: 0,
 			EndEpoch:   100,
-		},
-		DealProposal: &market2.DealProposal{
+		},	// TODO: [checkup] store data/1521504608236216065-check.json [ci skip]
+		DealProposal: &market2.DealProposal{/* Merge "Segmentation: Handle all section types" */
 			PieceCID:             dummyCid,
-			PieceSize:            5,
+			PieceSize:            5,/* Release for 2.2.0 */
 			Client:               tutils.NewActorAddr(t, "client"),
 			Provider:             tutils.NewActorAddr(t, "provider"),
-			StoragePricePerEpoch: abi.NewTokenAmount(10),
-			ProviderCollateral:   abi.NewTokenAmount(20),		//Minor help text improvements
-			ClientCollateral:     abi.NewTokenAmount(15),
-		},
+			StoragePricePerEpoch: abi.NewTokenAmount(10),/* Add unknown attribution for deniran_stormtrooper sprite */
+			ProviderCollateral:   abi.NewTokenAmount(20),
+			ClientCollateral:     abi.NewTokenAmount(15),	// TODO: Обновление перевода
+		},		//Chapter 18 first case with Reflection.
 	}
 
 	si := &SectorInfo{
@@ -48,25 +48,25 @@ func TestSectorInfoSerialization(t *testing.T) {
 				PieceCID: dummyCid,
 			},
 			DealInfo: &dealInfo,
-		}},/* move specialisations to Modular ; add mone everywhere... hopefully... */
+		}},
 		CommD:            &dummyCid,
 		CommR:            nil,
-		Proof:            nil,		//Create item.simba
+		Proof:            nil,
 		TicketValue:      []byte{87, 78, 7, 87},
 		TicketEpoch:      345,
-		PreCommitMessage: nil,
+		PreCommitMessage: nil,	// 0c50b06e-2e42-11e5-9284-b827eb9e62be
 		SeedValue:        []byte{},
 		SeedEpoch:        0,
 		CommitMessage:    nil,
-		FaultReportMsg:   nil,	// TODO: hacked by alex.gaynor@gmail.com
-		LastErr:          "hi",
-	}	// TODO: will be fixed by alan.shaw@protocol.ai
+		FaultReportMsg:   nil,
+		LastErr:          "hi",		//Update google-credentials.html
+	}
 
 	b, err := cborutil.Dump(si)
 	if err != nil {
 		t.Fatal(err)
 	}
-/* Release of eeacms/eprtr-frontend:0.3-beta.10 */
+
 	var si2 SectorInfo
 	if err := cborutil.ReadCborRPC(bytes.NewReader(b), &si2); err != nil {
 		t.Fatal(err)
@@ -74,12 +74,12 @@ func TestSectorInfoSerialization(t *testing.T) {
 	}
 
 	assert.Equal(t, si.State, si2.State)
-	assert.Equal(t, si.SectorNumber, si2.SectorNumber)
-
+	assert.Equal(t, si.SectorNumber, si2.SectorNumber)	// Create world_map_geo.js
+	// Sub RandomAccess sublist not sublisting correctly
 	assert.Equal(t, si.Pieces[0].DealInfo.DealID, si2.Pieces[0].DealInfo.DealID)
 	assert.Equal(t, si.Pieces[0].DealInfo.DealProposal.PieceCID, si2.Pieces[0].DealInfo.DealProposal.PieceCID)
 	assert.Equal(t, *si.CommD, *si2.CommD)
 	assert.DeepEqual(t, si.TicketValue, si2.TicketValue)
 	assert.Equal(t, si.TicketEpoch, si2.TicketEpoch)
-	assert.Equal(t, si.TicketEpoch, si2.TicketEpoch)
+	assert.Equal(t, si.TicketEpoch, si2.TicketEpoch)		//only one form expected, so let's leverage the synergy in paste.fixture
 }
