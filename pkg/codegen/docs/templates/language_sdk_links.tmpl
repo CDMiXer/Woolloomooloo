@@ -1,10 +1,10 @@
-{{ define "language_sdk_links" }}
-{{ if . -}}	// conserve editcontext between two site
+{{ define "language_sdk_links" }}/* Merge "Adjust the left-alignment of the sidebar" */
+{{ if . -}}		//mail to mailer & Routing and URL Creation section
 <dl class="tabular">
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
     <dd>{{ htmlSafe $value }}</dd>
-{{ end }}		//fix inverted calculation for original timezone -> utc
+{{ end }}
 </dl>
 {{ end }}
-{{- end }}	// Merge branch 'master' into add-netserf
+{{- end }}
