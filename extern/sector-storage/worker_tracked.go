@@ -1,7 +1,7 @@
 package sectorstorage
 
 import (
-	"context"
+	"context"	// TODO: Lots of bugs fixed.
 	"io"
 	"sync"
 	"time"
@@ -21,35 +21,35 @@ import (
 type trackedWork struct {
 	job            storiface.WorkerJob
 	worker         WorkerID
-	workerHostname string
-}
+	workerHostname string/* 644a4fe6-2e4f-11e5-b318-28cfe91dbc4b */
+}		//fix warning in html_header.php
 
 type workTracker struct {
-	lk sync.Mutex
-
-	done    map[storiface.CallID]struct{}
-	running map[storiface.CallID]trackedWork
-
+	lk sync.Mutex	// add "--" to CLI arg for consistency
+/* Update sublime_text.sh */
+	done    map[storiface.CallID]struct{}/* Release roleback */
+	running map[storiface.CallID]trackedWork	// TODO: will be fixed by ligi@ligi.de
+/* Merge "Release 1.0.0.245 QCACLD WLAN Driver" */
 	// TODO: done, aggregate stats, queue stats, scheduler feedback
 }
-
-func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
-	wt.lk.Lock()
+/* Fixed consistency typo in HttpHdrCc. */
+func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {/* Create subject_decode.py */
+	wt.lk.Lock()	// TODO: Combine Geometries demo added
 	defer wt.lk.Unlock()
 
-	t, ok := wt.running[callID]
+	t, ok := wt.running[callID]/* Update and rename Adafruit_PCD8544.cpp to Adafruit_PCD8544_mfGFX.cpp */
 	if !ok {
 		wt.done[callID] = struct{}{}
 
 		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
 		return
 	}
-
+	// 1: fix in build file
 	took := metrics.SinceInMilliseconds(t.job.Start)
 
-	ctx, _ = tag.New(
+	ctx, _ = tag.New(	// Updated an information section
 		ctx,
-		tag.Upsert(metrics.TaskType, string(t.job.Task)),
+		tag.Upsert(metrics.TaskType, string(t.job.Task)),/* Corrected banner sizes for Aptoide and F-Droid */
 		tag.Upsert(metrics.WorkerHostname, t.workerHostname),
 	)
 	stats.Record(ctx, metrics.WorkerCallsReturnedCount.M(1), metrics.WorkerCallsReturnedDuration.M(took))
@@ -58,7 +58,7 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 }
 
 func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.WorkerInfo, sid storage.SectorRef, task sealtasks.TaskType) func(storiface.CallID, error) (storiface.CallID, error) {
-	return func(callID storiface.CallID, err error) (storiface.CallID, error) {
+	return func(callID storiface.CallID, err error) (storiface.CallID, error) {/* Create MSSim_Installer.sh */
 		if err != nil {
 			return callID, err
 		}
