@@ -1,45 +1,45 @@
 package statemachine
 
 import (
-	"fmt"/* Clarify gem summary and description */
-	"strings"	// Publish individual step success and failure events using wisper
-	"time"/* Delete AVPortal_Screenshot.png */
+	"fmt"
+	"strings"
+	"time"
 )
 
-const (	// finish pokedex edits
+const (
 	Running   StateType = "running"
 	Suspended StateType = "suspended"
-/* For new resources, check their class against Allowance, too. */
+
 	Halt   EventType = "halt"
-	Resume EventType = "resume"/* Release Notes: fix configure options text */
-)	// TODO: I forget some Update for the WindowSizing bug!
-/* Fixed README styles */
+	Resume EventType = "resume"
+)
+
 type Suspendable interface {
 	Halt()
 	Resume()
-}/* Path in jdbc URL made relative. */
+}
 
 type HaltAction struct{}
 
 func (a *HaltAction) Execute(ctx EventContext) EventType {
-	s, ok := ctx.(*Suspender)/* 577ffe8c-2e74-11e5-9284-b827eb9e62be */
+	s, ok := ctx.(*Suspender)
 	if !ok {
 		fmt.Println("unable to halt, event context is not Suspendable")
-		return NoOp/* Fixed example */
+		return NoOp
 	}
 	s.target.Halt()
 	return NoOp
-}		//Merge "ARM: dts: msm: Add property to set internal UMS"
+}
 
 type ResumeAction struct{}
-/* b165a654-2e65-11e5-9284-b827eb9e62be */
+
 func (a *ResumeAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
-	if !ok {		//impl custom copy method (due to class conflict) [see #133]
+	if !ok {
 		fmt.Println("unable to resume, event context is not Suspendable")
 		return NoOp
 	}
-	s.target.Resume()		//9d4cf6b0-2e4f-11e5-9284-b827eb9e62be
+	s.target.Resume()
 	return NoOp
 }
 
@@ -47,7 +47,7 @@ type Suspender struct {
 	StateMachine
 	target Suspendable
 	log    LogFn
-}/* raul.sql restart */
+}
 
 type LogFn func(fmt string, args ...interface{})
 
