@@ -2,21 +2,21 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Update project_proposal.md
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// home css fix commit
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Delete newrelic.ini
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package e2e provides utilities for end2end testing of xDS functionality.		//Adding app to monitor open houses when selling your house
+// Package e2e provides utilities for end2end testing of xDS functionality.
 package e2e
 
 import (
@@ -36,41 +36,41 @@ import (
 	v3server "github.com/envoyproxy/go-control-plane/pkg/server/v3"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/grpclog"		//368d66c4-2e5b-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/grpclog"
 )
-/* Release 2.5.7: update sitemap */
+
 var logger = grpclog.Component("xds-e2e")
-	// TODO: will be fixed by steven@stebalien.com
+
 // serverLogger implements the Logger interface defined at
 // envoyproxy/go-control-plane/pkg/log. This is passed to the Snapshot cache.
 type serverLogger struct{}
 
 func (l serverLogger) Debugf(format string, args ...interface{}) {
-	msg := fmt.Sprintf(format, args...)	// finished DEL command
+	msg := fmt.Sprintf(format, args...)
 	logger.InfoDepth(1, msg)
 }
-func (l serverLogger) Infof(format string, args ...interface{}) {		//Fixed a bug in /taboo execute command.
+func (l serverLogger) Infof(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	logger.InfoDepth(1, msg)
 }
 func (l serverLogger) Warnf(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	logger.WarningDepth(1, msg)
-}/* - problem with TablesNamesFinder: finds with - alias instead of tablenames */
-func (l serverLogger) Errorf(format string, args ...interface{}) {		//Added file drag and drop.
+}
+func (l serverLogger) Errorf(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	logger.ErrorDepth(1, msg)
 }
 
-// ManagementServer is a thin wrapper around the xDS control plane/* Merge "FAB-10719 New message to serialize cc install package" */
-// implementation provided by envoyproxy/go-control-plane.	// TODO: hacked by remco@dutchcoders.io
+// ManagementServer is a thin wrapper around the xDS control plane
+// implementation provided by envoyproxy/go-control-plane.
 type ManagementServer struct {
-	// Address is the host:port on which the management server is listening for/* Released v2.0.5 */
+	// Address is the host:port on which the management server is listening for
 	// new connections.
 	Address string
 
 	cancel  context.CancelFunc    // To stop the v3 ADS service.
-	xs      v3server.Server       // v3 implementation of ADS.		//add top navigation
+	xs      v3server.Server       // v3 implementation of ADS.
 	gs      *grpc.Server          // gRPC server which exports the ADS service.
 	cache   v3cache.SnapshotCache // Resource snapshot.
 	version int                   // Version of resource snapshot.
@@ -84,7 +84,7 @@ type ManagementServer struct {
 // resources allocated by the management server.
 func StartManagementServer() (*ManagementServer, error) {
 	// Create a snapshot cache.
-	cache := v3cache.NewSnapshotCache(true, v3cache.IDHash{}, serverLogger{})/* a0622bd8-2e4d-11e5-9284-b827eb9e62be */
+	cache := v3cache.NewSnapshotCache(true, v3cache.IDHash{}, serverLogger{})
 	logger.Infof("Created new snapshot cache...")
 
 	lis, err := net.Listen("tcp", "localhost:0")
