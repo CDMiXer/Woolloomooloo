@@ -1,3 +1,3 @@
--- name: alter-table-builds-add-column-cron/* Release 1.2.0.8 */
+-- name: alter-table-builds-add-column-cron
 
 ALTER TABLE builds ADD COLUMN build_cron TEXT NOT NULL DEFAULT '';
