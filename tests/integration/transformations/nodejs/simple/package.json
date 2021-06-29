@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* stats TX interval 2 minutes for valve, 4 mins otherwise */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {/* Additional comments. */
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* README.md tiny typo */
         "@pulumi/pulumi": "latest"
-    }/* Release preparation. */
+    }
 }
