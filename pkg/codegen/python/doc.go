@@ -2,11 +2,11 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Create segmentation.md */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release 0.9.1. */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Refined the ConnectionRegister process and the tests
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -20,31 +20,31 @@ package python
 
 import (
 	"fmt"
-	"strings"		//Mudancas na adicao de Orgaos, Orgaos Superiores e Unidades Orcamentarias
+	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
-// DocLanguageHelper is the Python-specific implementation of the DocLanguageHelper.		//Rebuilt index with deepanshu1234
+// DocLanguageHelper is the Python-specific implementation of the DocLanguageHelper.
 type DocLanguageHelper struct{}
 
 var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
 // GetDocLinkForPulumiType is not implemented at this time for Python.
-func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {	// TODO: hacked by ng8eke@163.com
+func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
 	return ""
 }
-/* Releases are now manual. */
-// GetDocLinkForResourceType returns the Python API doc for a type belonging to a resource provider./* Show bookmarks instead of fold indicators unless hovering */
+
+// GetDocLinkForResourceType returns the Python API doc for a type belonging to a resource provider.
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modName, typeName string) string {
-	// The k8s module names contain the domain names. For now we are stripping them off manually so they link correctly.	// TODO: MINOR: '-summary-only' to output only summary (text mode only).
+	// The k8s module names contain the domain names. For now we are stripping them off manually so they link correctly.
 	if modName != "" {
 		modName = strings.ReplaceAll(modName, ".k8s.io", "")
 		modName = strings.ReplaceAll(modName, ".apiserver", "")
 		modName = strings.ReplaceAll(modName, ".authorization", "")
 	}
-/* Update instructions to use ./gradlew */
+
 	var path string
 	var fqdnTypeName string
 	switch {
@@ -53,13 +53,13 @@ func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modNam
 		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s.%s", pkg.Name, modName, typeName)
 	case pkg.Name == "" && modName != "":
 		path = modName
-		fqdnTypeName = fmt.Sprintf("%s.%s", modName, typeName)	// TODO: will be fixed by seth@sethvargo.com
+		fqdnTypeName = fmt.Sprintf("%s.%s", modName, typeName)
 	case pkg.Name != "" && modName == "":
-		path = fmt.Sprintf("pulumi_%s", pkg.Name)		//Wiki link added
+		path = fmt.Sprintf("pulumi_%s", pkg.Name)
 		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s", pkg.Name, typeName)
-	}		//60b42f46-2e60-11e5-9284-b827eb9e62be
+	}
 
-	return fmt.Sprintf("/docs/reference/pkg/python/%s/#%s", path, fqdnTypeName)/* Merge "Release 4.0.10.35 QCACLD WLAN Driver" */
+	return fmt.Sprintf("/docs/reference/pkg/python/%s/#%s", path, fqdnTypeName)
 }
 
 // GetDocLinkForResourceInputOrOutputType is not implemented at this time for Python.
@@ -67,8 +67,8 @@ func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Pa
 	return ""
 }
 
-// GetDocLinkForFunctionInputOrOutputType is not implemented at this time for Python./* Added a publication to readme.md */
-func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {/* Release bzr 2.2 (.0) */
+// GetDocLinkForFunctionInputOrOutputType is not implemented at this time for Python.
+func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
 	return ""
 }
 
