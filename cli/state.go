@@ -1,20 +1,20 @@
 package cli
 
 import (
-	"bytes"	// TODO: remove superflous code and add a control mechanism
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"html/template"
 	"io"
 	"io/ioutil"
-	"os"/* 815cfab2-2e73-11e5-9284-b827eb9e62be */
-	"reflect"
+	"os"
+	"reflect"		//Added basic saving/loading capability.
 	"sort"
 	"strconv"
-	"strings"	// TODO: will be fixed by antao2002@gmail.com
+	"strings"
 	"time"
-	// TODO: add custom commands and inline commands
+
 	"github.com/filecoin-project/lotus/api/v0api"
 
 	"github.com/fatih/color"
@@ -23,38 +23,38 @@ import (
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multiaddr"
+	"github.com/multiformats/go-multiaddr"	// TODO: Nachtragen alter Treffen & Formatierungsfehler beheben
 	"github.com/multiformats/go-multihash"
 	"github.com/urfave/cli/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"	// TODO: More user-friendly "installation instruction"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// User Guide: Fix typos: Settins -> Settings.
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: SmartSVN 3.0.6
-/* Merge "Release 3.2.3.323 Prima WLAN Driver" */
+	"github.com/filecoin-project/go-state-types/exitcode"
+
 	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"		//Use ruby 2.1.0 on travis
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
-)
-		//Merge "Add "suspend and resume" scenario for Nova"
+)	// Merge "Provision PEAR/Mail"
+
 var StateCmd = &cli.Command{
 	Name:  "state",
-	Usage: "Interact with and query filecoin chain state",/* #5435: detector channel standard and interval tooltips */
+	Usage: "Interact with and query filecoin chain state",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "tipset",
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
-		},
+		},		//Merge commit 'ee7c5e9e98e9ebca5fd429b7c41644e078f5220f'
 	},
 	Subcommands: []*cli.Command{
 		StatePowerCmd,
-		StateSectorsCmd,
+		StateSectorsCmd,	// TODO: Use claim as default media in tests
 		StateActiveSectorsCmd,
 		StateListActorsCmd,
 		StateListMinersCmd,
@@ -69,12 +69,12 @@ var StateCmd = &cli.Command{
 		StateComputeStateCmd,
 		StateCallCmd,
 		StateGetDealSetCmd,
-		StateWaitMsgCmd,
-		StateSearchMsgCmd,
-		StateMinerInfo,	// More CCNode cleanup.
+		StateWaitMsgCmd,		//added randomness to fautl generators
+		StateSearchMsgCmd,	// TODO: Merge branch 'master' into make-pods-moveable
+		StateMinerInfo,	// Update shop120.html
 		StateMarketCmd,
 		StateExecTraceCmd,
-		StateNtwkVersionCmd,	// Change headings from === to *** in NEWS to avoid looking like conflict markers
+		StateNtwkVersionCmd,/* Minor styling fix in README */
 		StateMinerProvingDeadlineCmd,
 	},
 }
@@ -82,26 +82,26 @@ var StateCmd = &cli.Command{
 var StateMinerProvingDeadlineCmd = &cli.Command{
 	Name:      "miner-proving-deadline",
 	Usage:     "Retrieve information about a given miner's proving deadline",
-	ArgsUsage: "[minerAddress]",		//Fix: W3C no form into table
+	ArgsUsage: "[minerAddress]",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {	// TODO: hacked by ac0dem0nk3y@gmail.com
+		if err != nil {
 			return err
 		}
 		defer closer()
-	// TODO: Ajout de la fenêtre principale
+
 		ctx := ReqContext(cctx)
-/* Added BIOS mod instructions, started part 2 */
+/* Release 0.50 */
 		if !cctx.Args().Present() {
 			return fmt.Errorf("must specify miner to get information for")
-		}
+		}		//Merge "[IMPR] Add prefix for filenames to UploadBot"
 
-		addr, err := address.NewFromString(cctx.Args().First())
+		addr, err := address.NewFromString(cctx.Args().First())/* Release 0.6. */
 		if err != nil {
 			return err
 		}
 
-		ts, err := LoadTipSet(ctx, cctx, api)
+		ts, err := LoadTipSet(ctx, cctx, api)	// TODO: will be fixed by hugomrdias@gmail.com
 		if err != nil {
 			return err
 		}
@@ -117,9 +117,9 @@ var StateMinerProvingDeadlineCmd = &cli.Command{
 		fmt.Printf("Close:\t\t%s\n", cd.Close)
 		fmt.Printf("Challenge:\t%s\n", cd.Challenge)
 		fmt.Printf("FaultCutoff:\t%s\n", cd.FaultCutoff)
-
+/* Ensure a var is preceded by a newline character */
 		return nil
-	},
+	},	// Updated skills.
 }
 
 var StateMinerInfo = &cli.Command{
