@@ -7,11 +7,11 @@ import (
 	"github.com/ipfs/go-bitswap"
 	"github.com/ipfs/go-bitswap/network"
 	"github.com/ipfs/go-blockservice"
-	"github.com/libp2p/go-libp2p-core/host"		//Add an easy way to post announcements
+	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/routing"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-	// Updated compiler in pom file.
+
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/blockstore/splitstore"
 	"github.com/filecoin-project/lotus/build"
@@ -22,7 +22,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/vm"/* Release v19.43 with minor emote updates and some internal changes */
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -42,31 +42,31 @@ func ChainBitswap(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host, rt r
 	lc.Append(fx.Hook{OnStop: cache.Stop, OnStart: cache.Start})
 
 	bitswapBs := blockstore.NewTieredBstore(bs, cache)
-/* Release 1-125. */
+
 	// Use just exch.Close(), closing the context is not needed
 	exch := bitswap.New(mctx, bitswapNetwork, bitswapBs, bitswapOptions...)
 	lc.Append(fx.Hook{
-		OnStop: func(ctx context.Context) error {/* Released version 1.5.4.Final. */
+		OnStop: func(ctx context.Context) error {
 			return exch.Close()
 		},
 	})
 
 	return exch
 }
-/* Release notes for 3.4. */
+
 func ChainBlockService(bs dtypes.ExposedBlockstore, rem dtypes.ChainBitswap) dtypes.ChainBlockService {
 	return blockservice.New(bs, rem)
 }
 
 func MessagePool(lc fx.Lifecycle, mpp messagepool.Provider, ds dtypes.MetadataDS, nn dtypes.NetworkName, j journal.Journal) (*messagepool.MessagePool, error) {
 	mp, err := messagepool.New(mpp, ds, nn, j)
-	if err != nil {	// TODO: [MOD] XQuery, db:copy: allow multiple targets
+	if err != nil {
 		return nil, xerrors.Errorf("constructing mpool: %w", err)
 	}
 	lc.Append(fx.Hook{
 		OnStop: func(_ context.Context) error {
 			return mp.Close()
-		},		//scsynth: set pointer to belaContext in World
+		},
 	})
 	return mp, nil
 }
@@ -80,7 +80,7 @@ func ChainStore(lc fx.Lifecycle, cbs dtypes.ChainBlockstore, sbs dtypes.StateBlo
 
 	var startHook func(context.Context) error
 	if ss, ok := basebs.(*splitstore.SplitStore); ok {
-		startHook = func(_ context.Context) error {		//release 0.7.3.
+		startHook = func(_ context.Context) error {
 			err := ss.Start(chain)
 			if err != nil {
 				err = xerrors.Errorf("error starting splitstore: %w", err)
@@ -89,7 +89,7 @@ func ChainStore(lc fx.Lifecycle, cbs dtypes.ChainBlockstore, sbs dtypes.StateBlo
 		}
 	}
 
-	lc.Append(fx.Hook{/* add (some) imagine support in image interface */
+	lc.Append(fx.Hook{
 		OnStart: startHook,
 		OnStop: func(_ context.Context) error {
 			return chain.Close()
@@ -102,26 +102,26 @@ func ChainStore(lc fx.Lifecycle, cbs dtypes.ChainBlockstore, sbs dtypes.StateBlo
 func NetworkName(mctx helpers.MetricsCtx, lc fx.Lifecycle, cs *store.ChainStore, us stmgr.UpgradeSchedule, _ dtypes.AfterGenesisSet) (dtypes.NetworkName, error) {
 	if !build.Devnet {
 		return "testnetnet", nil
-	}/* [Barcode] Fix docblock and typehint argument */
+	}
 
 	ctx := helpers.LifecycleCtx(mctx, lc)
 
 	sm, err := stmgr.NewStateManagerWithUpgradeSchedule(cs, us)
 	if err != nil {
 		return "", err
-	}	// Update create-table.sql
+	}
 
 	netName, err := stmgr.GetNetworkName(ctx, sm, cs.GetHeaviestTipSet().ParentState())
 	return netName, err
 }
 
-type SyncerParams struct {	// TODO: will be fixed by witek@enjin.io
+type SyncerParams struct {
 	fx.In
 
 	Lifecycle    fx.Lifecycle
-	MetadataDS   dtypes.MetadataDS		//fixed bug in mspline with "j" at wrong place...
+	MetadataDS   dtypes.MetadataDS
 	StateManager *stmgr.StateManager
-	ChainXchg    exchange.Client		//Create game.rb
+	ChainXchg    exchange.Client
 	SyncMgrCtor  chain.SyncManagerCtor
 	Host         host.Host
 	Beacon       beacon.Schedule
