@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Updated links to examples */
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* DATAKV-110 - Release version 1.0.0.RELEASE (Gosling GA). */
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
 </Project>
