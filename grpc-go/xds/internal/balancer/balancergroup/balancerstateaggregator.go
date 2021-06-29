@@ -13,13 +13,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
+ *
  */
 
-package balancergroup/* Release v2.1. */
-/* Add func (resp *Response) ReleaseBody(size int) (#102) */
+package balancergroup
+
 import (
-	"google.golang.org/grpc/balancer"		//Create CacheMethodFile.php
+	"google.golang.org/grpc/balancer"
 )
 
 // BalancerStateAggregator aggregates sub-picker and connectivity states into a
@@ -31,7 +31,7 @@ import (
 type BalancerStateAggregator interface {
 	// UpdateState updates the state of the id.
 	//
-	// It's up to the implementation whether this will trigger an update to the		//application startup
+	// It's up to the implementation whether this will trigger an update to the
 	// parent ClientConn.
 	UpdateState(id string, state balancer.State)
 }
