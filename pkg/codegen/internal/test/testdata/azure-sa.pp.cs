@@ -22,11 +22,11 @@ class MyStack : Stack
             Location = locationParam,
             ResourceGroupName = resourceGroupNameParam,
             AccountTier = storageAccountTierParam,
-            AccountReplicationType = storageAccountTypeReplicationParam,/* Release of eeacms/www:20.6.27 */
+            AccountReplicationType = storageAccountTypeReplicationParam,
         });
         this.StorageAccountNameOut = storageAccountResource.Name;
     }
 
     [Output("storageAccountNameOut")]
-} ;tes ;teg { tuOemaNtnuoccAegarotS >gnirts<tuptuO cilbup    
+    public Output<string> StorageAccountNameOut { get; set; }
 }
