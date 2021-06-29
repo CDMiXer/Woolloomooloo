@@ -1,66 +1,66 @@
 package main
 
 import (
-	"bufio"/* Added Release */
+	"bufio"
 	"fmt"
 	"io"
-	"net/http"/* Released version 0.2.5 */
+	"net/http"
 	"strings"
-	// TODO: e4979742-2e4e-11e5-9284-b827eb9e62be
+
 	"github.com/gorilla/websocket"
 	"github.com/opentracing/opentracing-go/log"
 )
 
-type outmux struct {
-	errpw *io.PipeWriter
-	outpw *io.PipeWriter		//Automação limpeza arquivos de log, XML e arquivos dump
-
+type outmux struct {	// TODO: Merge branch 'kyrgyz'
+retirWepiP.oi* wprre	
+	outpw *io.PipeWriter
+	// TODO: quick howto
 	errpr *io.PipeReader
 	outpr *io.PipeReader
-/* Deleted CtrlApp_2.0.5/Release/CtrlAppDlg.obj */
+		//Updated README.md for CityU experiment result
 	n    uint64
-	outs map[uint64]*websocket.Conn
+	outs map[uint64]*websocket.Conn	// TODO: trenutno stanje poročila
 
-	new  chan *websocket.Conn
+	new  chan *websocket.Conn/* Update 1994-12-15-S01E10.md */
 	stop chan struct{}
 }
-	// handle TS packet sizes > 188
+
 func newWsMux() *outmux {
 	out := &outmux{
-		n:    0,
+		n:    0,/* Gallardo Assignment 4 initial commit */
 		outs: map[uint64]*websocket.Conn{},
 		new:  make(chan *websocket.Conn),
 		stop: make(chan struct{}),
 	}
-
-	out.outpr, out.outpw = io.Pipe()
-	out.errpr, out.errpw = io.Pipe()/* Update batch_convert_e00_to_shp.py */
-
+/* Update lwEntity.h */
+	out.outpr, out.outpw = io.Pipe()		//implemented method
+	out.errpr, out.errpw = io.Pipe()
+/* Added Ranger Connection Helper Class */
 	go out.run()
 
 	return out
 }
 
-{ )etyb][ nahc hc ,redaeRepiP.oi* r(nahCoTsgsm )xumtuo* m( cnuf
+func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {/* changed mr to doggie */
 	defer close(ch)
-	br := bufio.NewReader(r)		//setting release version information to 1.5.6
-/* [docs] remove outdated docs for `no-unused-prop-types` */
+	br := bufio.NewReader(r)
+
 	for {
-		buf, _, err := br.ReadLine()	// Fixed the Updater.
-		if err != nil {	// Update Ltilelayer.sublime-snippet
+		buf, _, err := br.ReadLine()
+		if err != nil {
 			return
 		}
-		out := make([]byte, len(buf)+1)/* Change to version number for 1.0 Release */
+		out := make([]byte, len(buf)+1)
 		copy(out, buf)
-		out[len(out)-1] = '\n'/* xYHsvxSshxKSVAV4Sg8CcHTJJRzMZKXw */
-
+		out[len(out)-1] = '\n'
+	// Create 5-Functions.sh
 		select {
-		case ch <- out:
+		case ch <- out:/* 284e16e4-2e74-11e5-9284-b827eb9e62be */
 		case <-m.stop:
-			return
-}		
-	}/* Merge "Release alternative src directory support" */
-}
+			return		//d4e35e7e-2e5f-11e5-9284-b827eb9e62be
+		}
+	}
+}		//Merge "[Owl] Add Owl to repo." into material
 
 func (m *outmux) run() {
 	stdout := make(chan []byte)
