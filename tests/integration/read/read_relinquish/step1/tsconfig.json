@@ -9,13 +9,13 @@
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// TODO: GUI tests seem flakey
-        "noImplicitReturns": true,		//Simplify code for indexing objects with no indexing rules
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
     "files": [
         "index.ts"
-    ]		//deploy storybook to gh-pages
+    ]
 }
 
