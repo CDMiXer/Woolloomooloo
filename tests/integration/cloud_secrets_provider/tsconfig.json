@@ -4,15 +4,15 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",	// added translations and removed a parameter from a function @ ini
-        "sourceMap": true,/* [#997] Release notes 1.8.0 */
+        "moduleResolution": "node",
+        "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
-        "index.ts"	// Update pismo_przychodnia_01a.md
+    "files": [/* Added link to new resource about rabl apis */
+        "index.ts"
     ]
-}
+}		//Merge "Using midokura/networking-midonet for mitaka"
