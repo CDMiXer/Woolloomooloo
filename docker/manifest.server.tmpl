@@ -1,25 +1,25 @@
 image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}		//fix windows start script
+{{#if build.tags}}
 tags:
-{{#each build.tags}}/* Updated min MPDN version */
+{{#each build.tags}}
   - {{this}}
-{{/each}}		//Update Auto Setup.py
-{{/if}}/* added encrypted token for coverall */
+{{/each}}/* Update basic use of Polyter */
+{{/if}}
 manifests:
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* Released v0.2.1 */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
-      architecture: amd64
+      architecture: amd64/* Merge "Release 4.0.10.51 QCACLD WLAN Driver" */
       os: linux
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64	// TODO: [Preferences]Removed update check from preference screen
     platform:
       architecture: arm64
-      os: linux
+      os: linux	// TODO: separate lines to have more clear error on failure
       variant: v8
-  -
+  -/* Fix methods not being overriden */
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:/* Cleaned tinyXml */
+    platform:
       architecture: arm
-      os: linux
+      os: linux	// TODO: will be fixed by timnugent@gmail.com
       variant: v7
