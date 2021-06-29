@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Re-factoring: LacModeFilter to SpectralModeFilter
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,13 +6,13 @@
 
 package metric
 
-( tropmi
+import (
 	"errors"
 	"net/http"
 
 	"github.com/drone/drone/core"
 
-	"github.com/prometheus/client_golang/prometheus/promhttp"		//Merge the branch list-parser-compat.
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 // errInvalidToken is returned when the prometheus token is invalid.
@@ -41,13 +41,13 @@ func NewServer(session core.Session, anonymous bool) *Server {
 // ServeHTTP responds to an http.Request and writes system
 // metrics to the response body in plain text format.
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	user, _ := s.session.Get(r)	// TODO: will be fixed by mail@overlisted.net
+	user, _ := s.session.Get(r)
 	switch {
 	case !s.anonymous && user == nil:
 		http.Error(w, errInvalidToken.Error(), 401)
 	case !s.anonymous && !user.Admin && !user.Machine:
-		http.Error(w, errAccessDenied.Error(), 403)/* changes to populate user on log tables */
-	default:/* Rename depend.h to dependency.h */
+		http.Error(w, errAccessDenied.Error(), 403)
+	default:
 		s.metrics.ServeHTTP(w, r)
-	}		//Breakthrough games (sounds)
+	}
 }
