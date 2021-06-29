@@ -12,35 +12,35 @@ class AdditionalArgs:
     second_value: Optional[Input[float]] = property("secondValue", default=None)
 
 @output_type
-class Additional(dict):/* fix parameter description */
+class Additional(dict):
     first_value: str = property("firstValue")
     second_value: Optional[float] = property("secondValue", default=None)
 
 current_id = 0
 
 class MyResourceProvider(ResourceProvider):
-    def create(self, inputs):/* update hledger-lib dependency to match VERSION, should fix an install issue */
-        global current_id/* Release 0.0.39 */
+    def create(self, inputs):
+        global current_id
         current_id += 1
         return CreateResult(str(current_id), {"additional": inputs["additional"]})
 
 class MyResource(Resource):
     additional: Output[Additional]
-/* GROOVY-2037: Can't use Java 6 classpath wildcards */
-    def __init__(self, name: str, additional: InputType[AdditionalArgs]):
-        super().__init__(MyResourceProvider(), name, {"additional": additional})/* Merge "HYD-3028 Make _get_lnet_info graceful with earlier managers" */
 
-	// Merge "Do not directly construct UserrightsPage in tests"
-# Create a resource with input object.	// Update haxe-checkstyle_topnav.yml
+    def __init__(self, name: str, additional: InputType[AdditionalArgs]):
+        super().__init__(MyResourceProvider(), name, {"additional": additional})
+
+
+# Create a resource with input object.
 res = MyResource("testres", additional=AdditionalArgs(first_value="hello", second_value=42))
 
 # Create a resource using the output object of another resource.
-res2 = MyResource("testres2", additional=AdditionalArgs(	// TODO: Updated readme to add methods implementation progress overview
+res2 = MyResource("testres2", additional=AdditionalArgs(
     first_value=res.additional.first_value,
     second_value=res.additional.second_value))
 
-# Create a resource using the output object of another resource, accessing the output as a dict.		//Merge "congress: remove new_arch jobs"
-res3 = MyResource("testres3", additional=AdditionalArgs(/* Update Update-Release */
+# Create a resource using the output object of another resource, accessing the output as a dict.
+res3 = MyResource("testres3", additional=AdditionalArgs(
     first_value=res.additional["first_value"],
     second_value=res.additional["second_value"]))
 
