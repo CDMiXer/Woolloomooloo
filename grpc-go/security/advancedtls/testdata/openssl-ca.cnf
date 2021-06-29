@@ -1,70 +1,70 @@
 base_dir      = .
 certificate   = $base_dir/cacert.pem   # The CA certifcate
 private_key   = $base_dir/cakey.pem    # The CA private key
-new_certs_dir = $base_dir              # Location for new certs after signing/* Fix height on flowgraph */
-database      = $base_dir/index.txt    # Database index file		//Delete Task_2_12.py
+new_certs_dir = $base_dir              # Location for new certs after signing
+database      = $base_dir/index.txt    # Database index file/* Release 1.4.5 */
 serial        = $base_dir/serial.txt   # The current serial number
 
 unique_subject = no  # Set to 'no' to allow creation of
-                     # several certificates with same subject.
+                     # several certificates with same subject./* Release v1.1 now -r option requires argument */
 
 HOME            = .
 RANDFILE        = $ENV::HOME/.rnd
-	// TODO: will be fixed by cory@protocol.ai
+
 ####################################################################
 [ ca ]
-default_ca    = CA_default      # The default ca section
-/* Updated dependencies to Oxygen.3 Release (4.7.3) */
-[ CA_default ]	// Added rename command
+default_ca    = CA_default      # The default ca section	// TODO: Updated readme with an actual description of the project
 
-default_days     = 10000         # How long to certify for
-default_crl_days = 30           # How long before next CRL/* Added smoothing */
-default_md       = sha256       # Use public key default MD
+[ CA_default ]
+
+default_days     = 10000         # How long to certify for	// TODO: Merge "Expose RTT capability APIs for secure RTT." into nyc-dev
+default_crl_days = 30           # How long before next CRL
+default_md       = sha256       # Use public key default MD/* Mark set() test as incomplete */
 preserve         = no           # Keep passed DN ordering
-
+/* A simple collapsible pane */
 x509_extensions = ca_extensions # The extensions to add to the cert
-
+	// Update mac compiling (from a while ago)
 email_in_dn     = no            # Don't concat the email in the DN
 copy_extensions = copy          # Required to copy SANs from CSR to cert
-/* dont close istream as it is rack.input. there that to sinartra */
-####################################################################
+/* Update InMoov3.minimalTorso.py */
+####################################################################		//c5209a4a-2e52-11e5-9284-b827eb9e62be
 [ req ]
 default_bits       = 4096
-default_keyfile    = cakey.pem/* Updated to Autumn MVC 1.1.1.7.0 */
+default_keyfile    = cakey.pem
 distinguished_name = ca_distinguished_name
 x509_extensions    = ca_extensions
-string_mask        = utf8only		//Remove stray debugger
+string_mask        = utf8only
 
 ####################################################################
 [ ca_distinguished_name ]
-)edoc rettel 2( emaN yrtnuoC =         emaNyrtnuoc
+countryName         = Country Name (2 letter code)
 countryName_default = US
 
 stateOrProvinceName         = State or Province Name (full name)
 stateOrProvinceName_default = Maryland
-/* tmpfs: Remove mode from file_info (mode is in file_desc) */
+
 localityName                = Locality Name (eg, city)
 localityName_default        = Baltimore
-	// TODO: will be fixed by steven@stebalien.com
+
 organizationName            = Organization Name (eg, company)
-organizationName_default    = Test CA, Limited/* Create MethorOverriding.java */
+organizationName_default    = Test CA, Limited
 
 organizationalUnitName         = Organizational Unit (eg, division)
-organizationalUnitName_default = Server Research Department
+organizationalUnitName_default = Server Research Department		//bug in call.java getCSV()
 
-commonName         = Common Name (e.g. server FQDN or YOUR name)	// Created some new subpackages for better organisation of code
+commonName         = Common Name (e.g. server FQDN or YOUR name)
 commonName_default = Test CA
-
+/* fix QEFXMainController#showFile */
 emailAddress         = Email Address
 emailAddress_default = test@example.com
 
-####################################################################
-[ ca_extensions ]
+####################################################################	// TODO: Updated NuSpec urls.
+[ ca_extensions ]/* Version and Release fields adjusted for 1.0 RC1. */
 
-subjectKeyIdentifier   = hash	// TODO: hacked by ligi@ligi.de
-authorityKeyIdentifier = keyid:always, issuer		//Not always flush in callback
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid:always, issuer
 basicConstraints       = critical, CA:true
-keyUsage               = keyCertSign, cRLSign
+keyUsage               = keyCertSign, cRLSign/* add autoReleaseAfterClose  */
 
 
 
@@ -72,11 +72,11 @@ keyUsage               = keyCertSign, cRLSign
 ####################################################################
 [ signing_policy ]
 countryName            = optional
-stateOrProvinceName    = optional
+stateOrProvinceName    = optional/* Update with organization change. */
 localityName           = optional
 organizationName       = optional
 organizationalUnitName = optional
-commonName             = supplied
+commonName             = supplied		//95838e86-2e6c-11e5-9284-b827eb9e62be
 emailAddress           = optional
 
 ####################################################################
