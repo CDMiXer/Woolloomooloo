@@ -1,14 +1,14 @@
 {
-    "name": "read_dbr",	// TODO: Fix renovate syntax error
-    "main": "bin/index.js",		//swap example2 and example4
-    "typings": "bin/index.d.ts",
-    "scripts": {		//Use back ticks when explaining commands.
-        "build": "tsc"/* @Inject ManufacturerModel and Impl delete() */
-    },	// TODO: will be fixed by aeongrp@outlook.com
+    "name": "read_dbr",
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",	// Readded Original Recipe
+    "scripts": {
+        "build": "tsc"/* Update strings.xml for Spanish language */
+    },
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Release of eeacms/www-devel:19.2.15 */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Automatic changelog generation for PR #21201 [ci skip] */
     }
-}
+}/* Release 2.1.0: All Liquibase settings are available via configuration */
