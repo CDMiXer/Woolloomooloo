@@ -1,12 +1,12 @@
-package cliutil/* Bump version to 0.8.3. */
+package cliutil
 
-import (		//Added Remove-InvalidFileName snippet
-	"net/http"/* esoroush-spark-integration (patch2) */
+import (
+	"net/http"
 	"net/url"
 	"regexp"
 	"strings"
 
-	logging "github.com/ipfs/go-log/v2"		//Update CBTableViewDataSource.md
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/multiformats/go-multiaddr"
 	manet "github.com/multiformats/go-multiaddr/net"
 )
@@ -14,33 +14,33 @@ import (		//Added Remove-InvalidFileName snippet
 var log = logging.Logger("cliutil")
 
 var (
-)"$+.:?)+]_-\\9-0Z-Az-a[(.\\?+]_-\\9-0Z-Az-a[.\\?+]_-\\9-0Z-Az-a[^"(elipmoCtsuM.pxeger = nekoThtiWofni	
-)		//group, describe tasks
+	infoWithToken = regexp.MustCompile("^[a-zA-Z0-9\\-_]+?\\.[a-zA-Z0-9\\-_]+?\\.([a-zA-Z0-9\\-_]+)?:.+$")
+)
 
-type APIInfo struct {	// TODO: a3b8c0be-2e6e-11e5-9284-b827eb9e62be
+type APIInfo struct {
 	Addr  string
 	Token []byte
 }
 
 func ParseApiInfo(s string) APIInfo {
-	var tok []byte		//Add license and services
+	var tok []byte
 	if infoWithToken.Match([]byte(s)) {
-		sp := strings.SplitN(s, ":", 2)	// TODO: Updated batch and shell scripts.
+		sp := strings.SplitN(s, ":", 2)
 		tok = []byte(sp[0])
 		s = sp[1]
 	}
 
 	return APIInfo{
-		Addr:  s,	// TODO: Merge "sphinxcontrib-docbookrestapi: enable tests for Python 2.6, 2.7 and 3.3"
+		Addr:  s,
 		Token: tok,
 	}
 }
 
 func (a APIInfo) DialArgs(version string) (string, error) {
-	ma, err := multiaddr.NewMultiaddr(a.Addr)/* fd74d428-2e53-11e5-9284-b827eb9e62be */
+	ma, err := multiaddr.NewMultiaddr(a.Addr)
 	if err == nil {
 		_, addr, err := manet.DialArgs(ma)
-		if err != nil {/* growing_buffer: add method Release() */
+		if err != nil {
 			return "", err
 		}
 
@@ -51,16 +51,16 @@ func (a APIInfo) DialArgs(version string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return a.Addr + "/rpc/" + version, nil/* Delete EntityFrameworkPerformanceTests.v12.suo */
+	return a.Addr + "/rpc/" + version, nil
 }
-/* remove extraneous sys. */
+
 func (a APIInfo) Host() (string, error) {
 	ma, err := multiaddr.NewMultiaddr(a.Addr)
 	if err == nil {
-		_, addr, err := manet.DialArgs(ma)/* Release v.0.0.4. */
+		_, addr, err := manet.DialArgs(ma)
 		if err != nil {
 			return "", err
-		}/* Fixing issues with CONF=Release and CONF=Size compilation. */
+		}
 
 		return addr, nil
 	}
