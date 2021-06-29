@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//Delete Filter_Words.lua
-/* FGD: Change wording a bit */
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: Don't reset built dates that are in the future
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Release areca-7.1.5 */
   </PropertyGroup>
-/* V1.8.0 Release */
+
 </Project>
