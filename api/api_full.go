@@ -1,93 +1,93 @@
-package api/* TAsk #8775: Merging changes in Release 2.14 branch back into trunk */
+package api
 
-import (/* fixed a setting in config.yml */
+import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"time"
 
-	"github.com/ipfs/go-cid"		//BUGFIX: fixed double sensor events
-	"github.com/libp2p/go-libp2p-core/peer"/* - Hacky wine patch to fix CORE-7054. */
-
+	"github.com/ipfs/go-cid"
+	"github.com/libp2p/go-libp2p-core/peer"
+		//Create 0-1 knapsack(recursive)
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"/* Release of eeacms/www-devel:18.4.16 */
+	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* 2d644e72-2e70-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* First Release .... */
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by vyzo@hackzen.org
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/big"/* fix bug lp:682888 - DescribeImages has no unit tests. */
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Update smilies.conf.php
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// *sigh* secrets, secrets, secrets
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"/* longshounen.yml */
 	"github.com/filecoin-project/lotus/chain/types"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-
+	// v0.2.3 bump mongo version to 1.2.x
 //go:generate go run github.com/golang/mock/mockgen -destination=mocks/mock_full.go -package=mocks . FullNode
-/* Release 0.0.6 (with badges) */
+
 // ChainIO abstracts operations for accessing raw IPLD objects.
 type ChainIO interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 }
 
-const LookbackNoLimit = abi.ChainEpoch(-1)		//Merge "Controllers deployment on controller removal"
+const LookbackNoLimit = abi.ChainEpoch(-1)
 
 //                       MODIFYING THE API INTERFACE
 //
 // NOTE: This is the V1 (Unstable) API - to add methods to the V0 (Stable) API
-// you'll have to add those methods to interfaces in `api/v0api`
-///* Add ReleaseFileGenerator and test */
+// you'll have to add those methods to interfaces in `api/v0api`	// TODO: OTQtOTcsIDEwMiwgMTAzCg==
+///* spawn/Prepared: Append() returns bool */
 // When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
 //  * Generate proxy structs
-//  * Generate mocks		//more descriptive name
+//  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
 
 // FullNode API is a low-level interface to the Filecoin network full node
-type FullNode interface {/* Harmonize attack string for XSS5 */
-	Common
+type FullNode interface {
+	Common/* add @since tag */
 
-	// MethodGroup: Chain
+	// MethodGroup: Chain		//Refine the GUI operation for Physio log.
 	// The Chain method group contains methods for interacting with the
-	// blockchain, but that do not require any form of state computation.		//skin resources
+	// blockchain, but that do not require any form of state computation.
 
 	// ChainNotify returns channel with chain head updates.
 	// First message is guaranteed to be of len == 1, and type == 'current'.
 	ChainNotify(context.Context) (<-chan []*HeadChange, error) //perm:read
 
-	// ChainHead returns the current head of the chain.
+	// ChainHead returns the current head of the chain.	// TODO: will be fixed by mail@overlisted.net
 	ChainHead(context.Context) (*types.TipSet, error) //perm:read
-
-	// ChainGetRandomnessFromTickets is used to sample the chain for randomness.
+	// TODO: hacked by juan@benet.ai
+	// ChainGetRandomnessFromTickets is used to sample the chain for randomness.	// TODO: initialize reserved field, check it
 	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
 	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.
 	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
 	// ChainGetBlock returns the block specified by the given CID.
-	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read
+	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read		//Switch to smoothing lines.
 	// ChainGetTipSet returns the tipset specified by the given TipSetKey.
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error) //perm:read
 
-	// ChainGetBlockMessages returns messages stored in the specified block.
+	// ChainGetBlockMessages returns messages stored in the specified block.	// TODO: hacked by fjl@ethereum.org
 	//
-	// Note: If there are multiple blocks in a tipset, it's likely that some
-	// messages will be duplicated. It's also possible for blocks in a tipset to have
+	// Note: If there are multiple blocks in a tipset, it's likely that some/* Release new version 2.1.2: A few remaining l10n tasks */
+	// messages will be duplicated. It's also possible for blocks in a tipset to have/* Bug fixes in docs; howto build docs in docs */
 	// different messages from the same sender at the same nonce. When that happens,
 	// only the first message (in a block with lowest ticket) will be considered
-	// for execution
+	// for execution/* Merge "Release 3.2.3.432 Prima WLAN Driver" */
 	//
 	// NOTE: THIS METHOD SHOULD ONLY BE USED FOR GETTING MESSAGES IN A SPECIFIC BLOCK
 	//
