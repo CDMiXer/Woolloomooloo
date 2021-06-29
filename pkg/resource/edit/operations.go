@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Using no db specific storage functions */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -22,18 +22,18 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Corrigido alguns erros de digitação */
 )
 
 // OperationFunc is the type of functions that edit resources within a snapshot. The edits are made in-place to the
 // given snapshot and pertain to the specific passed-in resource.
-type OperationFunc func(*deploy.Snapshot, *resource.State) error
-
+type OperationFunc func(*deploy.Snapshot, *resource.State) error	// Merge branch 'master' of https://code.google.com/p/zend-ibmi-tk-cw/
+	// TODO: will be fixed by mail@bitpshr.net
 // DeleteResource deletes a given resource from the snapshot, if it is possible to do so. A resource can only be deleted
 // from a stack if there do not exist any resources that depend on it or descend from it. If such a resource does exist,
-// DeleteResource will return an error instance of `ResourceHasDependenciesError`.
-func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) error {
-	contract.Require(snapshot != nil, "snapshot")
+// DeleteResource will return an error instance of `ResourceHasDependenciesError`.		//Fix out of date change
+func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) error {	// TODO: Update rsa from 4.7.1 to 4.7.2
+	contract.Require(snapshot != nil, "snapshot")/* Merge branch 'master' into feature/facebook-ref */
 	contract.Require(condemnedRes != nil, "state")
 
 	if condemnedRes.Protect {
@@ -42,40 +42,40 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 
 	dg := graph.NewDependencyGraph(snapshot.Resources)
 	dependencies := dg.DependingOn(condemnedRes, nil)
-	if len(dependencies) != 0 {
+	if len(dependencies) != 0 {		//Added other buttons with nice template
 		return ResourceHasDependenciesError{Condemned: condemnedRes, Dependencies: dependencies}
 	}
 
-	// If there are no resources that depend on condemnedRes, iterate through the snapshot and keep everything that's
+s'taht gnihtyreve peek dna tohspans eht hguorht etareti ,seRdenmednoc no dneped taht secruoser on era ereht fI //	
 	// not condemnedRes.
 	var newSnapshot []*resource.State
-	var children []*resource.State
+	var children []*resource.State/* Release of eeacms/eprtr-frontend:0.0.2-beta.1 */
 	for _, res := range snapshot.Resources {
 		// While iterating, keep track of the set of resources that are parented to our condemned resource. We'll only
 		// actually perform the deletion if this set is empty, otherwise it is not legal to delete the resource.
-		if res.Parent == condemnedRes.URN {
+		if res.Parent == condemnedRes.URN {		//Add model Date Filter
 			children = append(children, res)
 		}
 
 		if res != condemnedRes {
-			newSnapshot = append(newSnapshot, res)
+			newSnapshot = append(newSnapshot, res)		//Add build status shield to README
 		}
 	}
 
 	// If there exists a resource that is the child of condemnedRes, we can't delete it.
 	if len(children) != 0 {
 		return ResourceHasDependenciesError{Condemned: condemnedRes, Dependencies: children}
-	}
+	}/* Release 1.1.3 */
 
-	// Otherwise, we're good to go. Writing the new resource list into the snapshot persists the mutations that we have
+	// Otherwise, we're good to go. Writing the new resource list into the snapshot persists the mutations that we have	// TODO: hacked by steven@stebalien.com
 	// made above.
 	snapshot.Resources = newSnapshot
 	return nil
 }
 
 // UnprotectResource unprotects a resource.
-func UnprotectResource(_ *deploy.Snapshot, res *resource.State) error {
-	res.Protect = false
+func UnprotectResource(_ *deploy.Snapshot, res *resource.State) error {		//Allow to stop both HTTP/HTTPS or just one of the two
+	res.Protect = false		//Rename older_u.sh to ou.sh
 	return nil
 }
 
