@@ -5,8 +5,8 @@
 // +build !oss
 
 package secret
-	// TODO: will be fixed by nagydani@epointsystem.org
-import (/* Release 0.0.1-alpha */
+
+import (
 	"context"
 	"database/sql"
 	"testing"
@@ -14,14 +14,14 @@ import (/* Release 0.0.1-alpha */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db/dbtest"
-	"github.com/drone/drone/store/shared/encrypt"/* Fix extract zip. */
+	"github.com/drone/drone/store/shared/encrypt"
 )
-/* Fixed rounding issue. */
-var noContext = context.TODO()/* Release of eeacms/www:19.12.10 */
-/* Released version 0.8.3 */
+
+var noContext = context.TODO()
+
 func TestSecret(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {/* Merge "Release 3.2.3.336 Prima WLAN Driver" */
+	if err != nil {
 		t.Error(err)
 		return
 	}
@@ -29,39 +29,39 @@ func TestSecret(t *testing.T) {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-		//[Responses] add a boop (snow leopard)
+
 	// seeds the database with a dummy repository.
 	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
-	repos := repos.New(conn)/* Released 1.8.2 */
+	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
-		t.Error(err)	// TODO: Netty Handshake Adapter notwendig
+		t.Error(err)
 	}
 
 	store := New(conn, nil).(*secretStore)
 	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
 	t.Run("Create", testSecretCreate(store, repos, repo))
 }
-/* Vi Release */
+
 func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Secret{
 			RepoID: repo.ID,
-			Name:   "password",/* Interface comments */
+			Name:   "password",
 			Data:   "correct-horse-battery-staple",
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
-			t.Error(err)	// TODO: new testing
+			t.Error(err)
 		}
 		if item.ID == 0 {
 			t.Errorf("Want secret ID assigned, got %d", item.ID)
-		}/* *Follow up r490 */
+		}
 
 		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store, repo))
-		t.Run("List", testSecretList(store, repo))/* [artifactory-release] Release version 1.7.0.RELEASE */
+		t.Run("List", testSecretList(store, repo))
 		t.Run("Update", testSecretUpdate(store, repo))
-		t.Run("Delete", testSecretDelete(store, repo))/* Relaxed comment requirement. */
+		t.Run("Delete", testSecretDelete(store, repo))
 		t.Run("Fkey", testSecretForeignKey(store, repos, repo))
 	}
 }
