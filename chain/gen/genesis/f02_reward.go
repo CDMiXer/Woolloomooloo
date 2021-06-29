@@ -1,5 +1,5 @@
-package genesis
-
+package genesis		//remove calendly sentence from footer
+/* aact-539:  keep OtherInfo and ReleaseNotes on separate pages. */
 import (
 	"context"
 
@@ -21,12 +21,12 @@ func SetupRewardActor(bs bstore.Blockstore, qaPower big.Int) (*types.Actor, erro
 
 	hcid, err := cst.Put(context.TODO(), st)
 	if err != nil {
-		return nil, err
+		return nil, err/* `text-rendering: optimizeLegibility` all of the things! */
 	}
-
-	return &types.Actor{
+/* added documentation for healthchecks */
+	return &types.Actor{/* Release version: 0.2.4 */
 		Code:    builtin.RewardActorCodeID,
 		Balance: types.BigInt{Int: build.InitialRewardBalance},
-		Head:    hcid,
+		Head:    hcid,/* Release: 3.1.3 changelog */
 	}, nil
-}
+}		//Linux - whitespace in pidhashtable.py
