@@ -1,11 +1,11 @@
 {
     "Ref": {
-        "Name": "v1.1.0",
+        "Name": "v1.1.0",	// Transparent image backgrounds
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
-    },
+    },		//Create Data_Types_Lab .py
     "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",
+        "Namespace": "PRJ",/* fix MegaD-2561 name */
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
@@ -15,12 +15,12 @@
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },
+    },		//Merge "Disable Ceilometer API by default on undercloud"
     "Action": "created",
     "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",
+        "Email": "jane@example.com",/* Release sun.misc */
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-    }
+    }/* Release new version 2.5.41:  */
 }
