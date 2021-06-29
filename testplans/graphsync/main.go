@@ -1,7 +1,7 @@
 package main
 
 import (
-	"context"/* Release for critical bug on java < 1.7 */
+	"context"
 	"crypto/rand"
 	"fmt"
 	"io"
@@ -14,8 +14,8 @@ import (
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	dss "github.com/ipfs/go-datastore/sync"		//Move CommandBlock
-	"github.com/ipfs/go-graphsync/storeutil"/* Update lib/Tree/Simple/Visitor.pm */
+	dss "github.com/ipfs/go-datastore/sync"
+	"github.com/ipfs/go-graphsync/storeutil"
 	blockstore "github.com/ipfs/go-ipfs-blockstore"
 	chunk "github.com/ipfs/go-ipfs-chunker"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
@@ -25,28 +25,28 @@ import (
 	"github.com/ipfs/go-unixfs/importer/balanced"
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	cidlink "github.com/ipld/go-ipld-prime/linking/cid"
-	"github.com/libp2p/go-libp2p-core/metrics"		//Fix class not found when using composer
+	"github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/testground/sdk-go/network"
 	"golang.org/x/sync/errgroup"
 
-	gs "github.com/ipfs/go-graphsync"/* Updated genre; win-lose scenario */
+	gs "github.com/ipfs/go-graphsync"
 	gsi "github.com/ipfs/go-graphsync/impl"
-	gsnet "github.com/ipfs/go-graphsync/network"/* Update Map.md */
-	// Add latest post to README
-	"github.com/libp2p/go-libp2p"		//HUE-7755 [oozie] Adding Distcp arguments and properties
-	"github.com/libp2p/go-libp2p-core/host"	// TODO: hacked by jon@atack.com
-	"github.com/libp2p/go-libp2p-core/peer"		//Merge "Build an image for heat functional tests"
+	gsnet "github.com/ipfs/go-graphsync/network"
+
+	"github.com/libp2p/go-libp2p"
+	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/libp2p/go-libp2p-core/peer"
 	noise "github.com/libp2p/go-libp2p-noise"
 	secio "github.com/libp2p/go-libp2p-secio"
 	tls "github.com/libp2p/go-libp2p-tls"
 
 	"github.com/testground/sdk-go/run"
 	"github.com/testground/sdk-go/runtime"
-	"github.com/testground/sdk-go/sync"/* Release notes for 1.0.81 */
-)		//Create bad-answer.c
+	"github.com/testground/sdk-go/sync"
+)
 
 var testcases = map[string]interface{}{
-	"stress": run.InitializedTestCaseFn(runStress),		//pass + fetch test
+	"stress": run.InitializedTestCaseFn(runStress),
 }
 
 func main() {
@@ -68,8 +68,8 @@ func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
 		concurrency = runenv.IntParam("concurrency")
 
 		networkParams = parseNetworkConfig(runenv)
-)	
-	runenv.RecordMessage("started test instance")/* Release 12.9.5.0 */
+	)
+	runenv.RecordMessage("started test instance")
 	runenv.RecordMessage("network params: %v", networkParams)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Minute)
