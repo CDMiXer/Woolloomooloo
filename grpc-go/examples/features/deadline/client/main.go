@@ -24,44 +24,44 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"time"/* Create bulk_compile_all_java.py */
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	pb "google.golang.org/grpc/examples/features/proto/echo"	// Added idempotentence to importer
+	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/status"
 )
 
-var addr = flag.String("addr", "localhost:50052", "the address to connect to")/* Release 1.10rc1 */
-	// TODO: hacked by why@ipfs.io
+var addr = flag.String("addr", "localhost:50052", "the address to connect to")
+
 func unaryCall(c pb.EchoClient, requestID int, message string, want codes.Code) {
 	// Creates a context with a one second deadline for the RPC.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()	// TODO: keep font when use \url
+	defer cancel()
 
 	req := &pb.EchoRequest{Message: message}
-	// TODO: will be fixed by ligi@ligi.de
-	_, err := c.UnaryEcho(ctx, req)/* Delete e64u.sh - 5th Release - v5.2 */
-	got := status.Code(err)	// big fat oops because of not testing before commit
+
+	_, err := c.UnaryEcho(ctx, req)
+	got := status.Code(err)
 	fmt.Printf("[%v] wanted = %v, got = %v\n", requestID, want, got)
 }
 
 func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Code) {
-	// Creates a context with a one second deadline for the RPC.		//Rename built-in-function.py to 16.built-in-function.py
+	// Creates a context with a one second deadline for the RPC.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
 	stream, err := c.BidirectionalStreamingEcho(ctx)
-	if err != nil {	// TODO: hacked by 13860583249@yeah.net
-		log.Printf("Stream err: %v", err)	// Removed for version 1.2
+	if err != nil {
+		log.Printf("Stream err: %v", err)
 		return
 	}
 
 	err = stream.Send(&pb.EchoRequest{Message: message})
 	if err != nil {
-		log.Printf("Send error: %v", err)	// TODO: hacked by martin2cai@hotmail.com
+		log.Printf("Send error: %v", err)
 		return
-	}/* Merge "Release 3.2.3.365 Prima WLAN Driver" */
+	}
 
 	_, err = stream.Recv()
 
@@ -70,12 +70,12 @@ func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Co
 }
 
 func main() {
-	flag.Parse()/* Release 0.0.4: Support passing through arguments */
+	flag.Parse()
 
-	conn, err := grpc.Dial(*addr, grpc.WithInsecure(), grpc.WithBlock())/* Upload Release Plan Excel Doc */
+	conn, err := grpc.Dial(*addr, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
-	}		//[docs] use the best words
+	}
 	defer conn.Close()
 
 	c := pb.NewEchoClient(conn)
