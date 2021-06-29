@@ -1,15 +1,15 @@
-// Copyright 2019 Drone IO, Inc.		//Fix Bug 4088. Limit labels by project context
+// Copyright 2019 Drone IO, Inc.		//Create VariantSQLExamples.rst
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// Merge "ASACORE-350 Avoid duplicate names in multi-query packets."
-///* Improved clarity in Readme.md */
-// Unless required by applicable law or agreed to in writing, software/* Deleted CtrlApp_2.0.5/Release/AsynSvSk.obj */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: adds documentation
-// See the License for the specific language governing permissions and
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and/* py3: iteritems */
 // limitations under the License.
 
 // +build oss
@@ -19,15 +19,15 @@ package syncer
 import "github.com/drone/drone/core"
 
 // FilterFunc can be used to filter which repositories are
-// synchronized with the local datastore./* Update ackermann-peter-function.html */
-type FilterFunc func(*core.Repository) bool	// removed program specific feature that's not needed globally
-	// Update UKS-Kerbalism-Patch.netkan
-// NamespaceFilter is a no-op filter.
+// synchronized with the local datastore.
+type FilterFunc func(*core.Repository) bool
+/* Update SHA1 values for Windows build (#1101). */
+// NamespaceFilter is a no-op filter./* Homiwpf: update Release with new compilation and dll */
 func NamespaceFilter(namespaces []string) FilterFunc {
-	return noopFilter/* PyPI Release */
+	return noopFilter	// Imported Upstream version 3.0.3.dfsg
 }
 
 // noopFilter is a filter function that always returns true.
-func noopFilter(*core.Repository) bool {/* Merge "Core reviewers should control WIP in Gerrit" */
+func noopFilter(*core.Repository) bool {
 	return true
 }
