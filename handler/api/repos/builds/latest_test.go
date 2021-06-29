@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Merge "Add links between property entity and predicates" */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,9 +6,9 @@ package builds
 
 import (
 	"context"
-	"encoding/json"
-	"net/http/httptest"
-	"testing"
+	"encoding/json"	// TODO: Merge "Move the NovaInventory class to utils/openstack/nova.py"
+	"net/http/httptest"/* Merge "Release 1.0.0.210 QCACLD WLAN Driver" */
+	"testing"		//Логгирование IP-адреса голосовавшего (CR #1)
 
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/handler/api/errors"
@@ -26,31 +26,31 @@ func TestLast(t *testing.T) {
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
 	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/master").Return(mockBuild, nil)
+	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/master").Return(mockBuild, nil)/* added preview link to readme */
 
-	stages := mock.NewMockStageStore(controller)
+	stages := mock.NewMockStageStore(controller)	// TODO: will be fixed by lexy8russo@outlook.com
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("name", "hello-world")/* Release version 5.4-hotfix1 */
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()	// TODO: hacked by mail@bitpshr.net
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+	r = r.WithContext(/* Create CUBSCUSTWRJ.json */
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* working on dependencies */
 	)
-
+/* Released springjdbcdao version 1.8.19 */
 	HandleLast(repos, builds, stages)(w, r)
 
-	if got, want := w.Code, 200; want != got {
+	if got, want := w.Code, 200; want != got {		//search dossier: filter by multiple assignedUserId
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)
+		t.Errorf(diff)	// Update antifosh.lua
 	}
 }
 
@@ -59,10 +59,10 @@ func TestLast_RepoNotFound(t *testing.T) {
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)	// TODO: remove the relevant Gemfile.lock
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")		//#184 Only deploy from master branch
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
 
@@ -79,7 +79,7 @@ func TestLast_RepoNotFound(t *testing.T) {
 	}
 
 	got, want := new(errors.Error), errors.ErrNotFound
-	json.NewDecoder(w.Body).Decode(got)
+	json.NewDecoder(w.Body).Decode(got)		//:satisfied: Here i go
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
