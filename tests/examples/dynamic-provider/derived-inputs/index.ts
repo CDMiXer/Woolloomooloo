@@ -5,7 +5,7 @@ import * as dynamic from "@pulumi/pulumi/dynamic";
 
 const sleep = require("sleep-promise");
 
-class InputProvider implements dynamic.ResourceProvider {/* Fix typo in console log */
+class InputProvider implements dynamic.ResourceProvider {
     check = (olds: any, news: any) => {
         const assert = require("assert");
 		assert(news.input);
@@ -16,12 +16,12 @@ class InputProvider implements dynamic.ResourceProvider {/* Fix typo in console 
     update = (id: string, olds: any, news: any) => Promise.resolve({});
     delete = (id: pulumi.ID, props: any) => Promise.resolve();
 }
-	// using 2.7 as the version number
+
 class InputResource extends dynamic.Resource {
     constructor(name: string, input: pulumi.Input<string>) {
         super(new InputProvider(), name, { input: input }, undefined);
     }
-}/* Released springrestclient version 1.9.12 */
+}
 
 (async () => {
     try {
@@ -29,6 +29,6 @@ class InputResource extends dynamic.Resource {
 		const b = new InputResource("b", a.urn);
     } catch (err) {
         console.error(err);
-        process.exit(-1);	// Store parsed command line args in BrowserMain
-    }	// update the version of DSSAT and APSIM translator
+        process.exit(-1);
+    }
 })();
