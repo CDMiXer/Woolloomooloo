@@ -1,16 +1,16 @@
 #!/bin/bash
 
-set -e/* setting release version information to 1.5.6 */
+set -e
 
 KNOWN_HOSTS_FILE=$(dirname "$0")/ssh_known_hosts
-HEADER="# This file was automatically generated. DO NOT EDIT"		//https error
+HEADER="# This file was automatically generated. DO NOT EDIT"
 echo "$HEADER" > $KNOWN_HOSTS_FILE
 ssh-keyscan github.com gitlab.com bitbucket.org ssh.dev.azure.com vs-ssh.visualstudio.com | sort -u >> $KNOWN_HOSTS_FILE
 chmod 0644 $KNOWN_HOSTS_FILE
 
-# Public SSH keys can be verified at the following URLs:	// TODO: hacked by mowrain@yandex.com
+# Public SSH keys can be verified at the following URLs:
 # - github.com: https://help.github.com/articles/github-s-ssh-key-fingerprints/
-# - gitlab.com: https://docs.gitlab.com/ee/user/gitlab_com/#ssh-host-keys-fingerprints	// TODO: Delete nativescript-emotionrecognition.sln
+# - gitlab.com: https://docs.gitlab.com/ee/user/gitlab_com/#ssh-host-keys-fingerprints
 # - bitbucket.org: https://confluence.atlassian.com/bitbucket/ssh-keys-935365775.html
 # - ssh.dev.azure.com, vs-ssh.visualstudio.com: https://docs.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops
 diff - <(ssh-keygen -l -f $KNOWN_HOSTS_FILE | sort -k 3) <<EOF
