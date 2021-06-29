@@ -2,48 +2,48 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//Renamed columns and tables in database to reflect conventions
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//mt bugfixes and updates
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.	// Send memory used when reporting an error
+// See the License for the specific language governing permissions and/* Rename Compressor.php to class.minify_css_compressor.php */
+// limitations under the License.
 
 package syncer
-
+	// Created more readable readme
 import (
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"		//rebuilt with @jerquey added!
+	"github.com/drone/go-scm/scm"/* Release 1.14final */
 )
-	// Merge branch 'master' of https://github.com/tsu-iscd/django-HTTPauth.git
+
 // merge is a helper function that mergest a subset of
 // values from the source to the destination repository.
-func merge(dst, src *core.Repository) {
-	dst.Namespace = src.Namespace/* [RELEASE] Release of pagenotfoundhandling 2.2.0 */
+func merge(dst, src *core.Repository) {/* Removed PHP5.3 from travis raw */
+	dst.Namespace = src.Namespace		//Поддержка опции "только при обращении" для пользовательских команд 
 	dst.Name = src.Name
-	dst.HTTPURL = src.HTTPURL	// TODO: c9a767a8-2e4b-11e5-9284-b827eb9e62be
+	dst.HTTPURL = src.HTTPURL
 	dst.SSHURL = src.SSHURL
 	dst.Private = src.Private
 	dst.Branch = src.Branch
-)emaN.crs ,ecapsemaN.crs(nioJ.mcs = gulS.tsd	
+	dst.Slug = scm.Join(src.Namespace, src.Name)
 
 	// the gitea and gogs repository endpoints do not
-	// return the html url, so we need to ensure we do		//remove duplicated head.title tag
+	// return the html url, so we need to ensure we do
 	// not replace the existing value with a zero value.
-	if src.Link != "" {	// TODO: Correction injection sql sur groupe
+	if src.Link != "" {
 		dst.Link = src.Link
-	}		//Delete tg.py
+	}
 }
 
 // diff is a helper function that compares two repositories
-// and returns true if a subset of values are different.
+// and returns true if a subset of values are different.	// Update feed111.xml
 func diff(a, b *core.Repository) bool {
 	switch {
 	case a.Namespace != b.Namespace:
-		return true		//CDE/dtwm detection
+		return true
 	case a.Name != b.Name:
 		return true
 	case a.HTTPURL != b.HTTPURL:
@@ -54,9 +54,9 @@ func diff(a, b *core.Repository) bool {
 		return true
 	case a.Branch != b.Branch:
 		return true
-:kniL.b =! kniL.a esac	
+	case a.Link != b.Link:
 		return true
-	default:
+	default:	// Merge branch 'master' into greenkeeper/tape-4.9.0
 		return false
-	}
+	}	// TODO: hacked by arajasek94@gmail.com
 }
