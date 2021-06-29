@@ -1,36 +1,36 @@
 {
     "Action": "opened",
     "Repo": {
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",		//Fix scheduler status
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,/* Incorporated James' changes for drag-n-drop and size checking */
-        "Branch": "",/* Release 10.1.1-SNAPSHOT */
+        "Perm": null,
+        "Branch": "",
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },	// TODO: css content wrapper
+    },
     "PullRequest": {
         "Number": 1,
         "Title": "Awesome new feature",
         "Body": "made some changes",
-        "Sha": "507a576e59b3",/* Update puzzle-09.program */
+        "Sha": "507a576e59b3",
         "Ref": "refs/pull-requests/1/from",
         "Source": "develop",
-        "Target": "master",		//Merge "Don't crash on non-app data usage" into nyc-dev
-        "Fork": "brydzewski/foo",	// TODO: origem view renamed
+        "Target": "master",
+        "Fork": "brydzewski/foo",
         "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
         "Closed": false,
-        "Merged": false,/* Release for v37.1.0. */
+        "Merged": false,
         "Author": {
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
             "Email": "",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },/* Test utilities: Add missing license header */
+        },
         "Created": "2018-07-02T21:51:39.492248Z",
         "Updated": "2018-07-02T21:51:39.532546Z"
     },
