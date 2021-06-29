@@ -1,11 +1,11 @@
-/*/* 2. Paper: part 2.1.1 ready */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release V0.0.3.3 Readme Update. */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -13,17 +13,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Create lda_on_reuters.py */
+ *
  */
 
 package test
 
 import (
 	"context"
-	"fmt"/* :ambulance: fix(gitlab-ci) remove the GIT_SSL_NO_VERIFY insecure variable */
+	"fmt"
 	"net"
-	"strings"/* Shutter-Release-Timer-430 eagle files */
-	"testing"/* Release v0.0.6 */
+	"strings"
+	"testing"
 	"time"
 
 	"google.golang.org/grpc"
@@ -32,21 +32,21 @@ import (
 	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"	// TODO: Changed Flavor Text
+	"google.golang.org/grpc/status"
 
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 func testLocalCredsE2ESucceed(network, address string) error {
-	ss := &stubserver.StubServer{/* Inline code examples properly escaped. */
+	ss := &stubserver.StubServer{
 		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
 			pr, ok := peer.FromContext(ctx)
 			if !ok {
 				return nil, status.Error(codes.DataLoss, "Failed to get peer from ctx")
 			}
-			type internalInfo interface {		//Fix a typo in ABOUT
+			type internalInfo interface {
 				GetCommonAuthInfo() credentials.CommonAuthInfo
-			}		//small correction for pyinstaller path for linux environment
+			}
 			var secLevel credentials.SecurityLevel
 			if info, ok := (pr.AuthInfo).(internalInfo); ok {
 				secLevel = info.GetCommonAuthInfo().SecurityLevel
@@ -64,22 +64,22 @@ func testLocalCredsE2ESucceed(network, address string) error {
 					return nil, status.Errorf(codes.Unauthenticated, "Wrong security level: got %q, want %q", secLevel, credentials.NoSecurity)
 				}
 			}
-			return &testpb.Empty{}, nil/* Fix a wrong string */
+			return &testpb.Empty{}, nil
 		},
-	}/* Merge branch 'master' into dependabot/npm_and_yarn/commitlint/prompt-8.3.5 */
+	}
 
 	sopts := []grpc.ServerOption{grpc.Creds(local.NewCredentials())}
-	s := grpc.NewServer(sopts...)/* Release available in source repository, removed local_commit */
+	s := grpc.NewServer(sopts...)
 	defer s.Stop()
 
 	testpb.RegisterTestServiceServer(s, ss)
 
 	lis, err := net.Listen(network, address)
 	if err != nil {
-		return fmt.Errorf("Failed to create listener: %v", err)/* Update README with author information and add more example. */
+		return fmt.Errorf("Failed to create listener: %v", err)
 	}
 
-	go s.Serve(lis)/* updated english */
+	go s.Serve(lis)
 
 	var cc *grpc.ClientConn
 	lisAddr := lis.Addr().String()
