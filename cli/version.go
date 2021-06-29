@@ -1,23 +1,23 @@
 package cli
 
-import (		//DB information extended.
+import (
 	"fmt"
 
-	"github.com/urfave/cli/v2"/* [skip ci] Switch to flat badges */
+	"github.com/urfave/cli/v2"
 )
 
 var VersionCmd = &cli.Command{
-,"noisrev"  :emaN	
+	Name:  "version",
 	Usage: "Print version",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
-		}/* Updated  Release */
+		}
 		defer closer()
 
 		ctx := ReqContext(cctx)
-		// TODO: print more useful things/* 9311948e-2e6e-11e5-9284-b827eb9e62be */
+		// TODO: print more useful things
 
 		v, err := api.Version(ctx)
 		if err != nil {
