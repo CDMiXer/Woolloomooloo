@@ -1,29 +1,15 @@
 {
-  "version": "0.0.1",/* Added dependency-reduced-pom.xml to ignore list */
+  "version": "0.0.1",
   "name": "plant-provider",
-  "resources": {/* Add the PrePrisonerReleasedEvent for #9, not all that useful event tbh. */
+  "resources": {
     "plant-provider:tree/v1:RubberTree": {
-      "inputProperties": {/* Allow duplicate intent response keys */
+      "inputProperties": {
         "container": {
-          "$ref": "#/types/plant-provider::Container"	// TODO: Ajout Peziza atrovinosa
+          "$ref": "#/types/plant-provider::Container"
         },
-        "type": {		//Merge "#3891 TDIS Routing Issues"
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"/* feature #3748: Remove unneeded helpers */
-        },/* Type : Super Keyword in Java */
-        "farm": {
-          "oneOf": [/* Merge branch 'master' of https://github.com/fusesource/jansi.git */
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},	// Default numbers for github stats
-            {"type": "string"}
-          ]
-        }
-      },
-      "properties": {		//Create icon.txt
-        "container": {
-          "$ref": "#/types/plant-provider::Container"/* Release link. */
-        },	// TODO: Add sprint toggle (SHIFT)
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
-        },/* renamed all packages to sirhomersimpson (from rikkisnah) */
+        },
         "farm": {
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
@@ -31,7 +17,21 @@
           ]
         }
       },
-      "required": ["type"],/* Release 3.2 029 new table constants. */
+      "properties": {
+        "container": {
+          "$ref": "#/types/plant-provider::Container"
+        },
+        "type": {
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+        },
+        "farm": {
+          "oneOf": [
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
+            {"type": "string"}
+          ]
+        }
+      },
+      "required": ["type"],
       "requiredInputs": ["type"]
     }
   },
@@ -41,7 +41,7 @@
       "properties": {
         "size": {
           "$ref": "#/types/plant-provider::ContainerSize"
-        },/* Release 2.1 master line. */
+        },
         "material": {
           "type": "string"
         },
@@ -51,7 +51,7 @@
             {"type": "string"}
           ]
         },
-{ :"ssenthgirb"        
+        "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
         }
       },
