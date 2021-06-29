@@ -1,31 +1,31 @@
-// Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2014 The Gorilla WebSocket Authors. All rights reserved./* Release under Apache 2.0 license */
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* 1.9.0 Release Message */
+/* Delete old Socialize references. */
 package websocket
 
-import (
+import (	// TODO: hacked by 13860583249@yeah.net
 	"net/url"
 	"testing"
 )
-	// fix vcpkg bootstrap typo in error message
-var hostPortNoPortTests = []struct {
+
+var hostPortNoPortTests = []struct {/* Release of eeacms/forests-frontend:1.8-beta.5 */
 	u                    *url.URL
 	hostPort, hostNoPort string
-}{
-	{&url.URL{Scheme: "ws", Host: "example.com"}, "example.com:80", "example.com"},
-	{&url.URL{Scheme: "wss", Host: "example.com"}, "example.com:443", "example.com"},	// TODO: hacked by igor@soramitsu.co.jp
+}{		//only output selected snps for each family
+	{&url.URL{Scheme: "ws", Host: "example.com"}, "example.com:80", "example.com"},/* Merge "Release JNI local references as soon as possible." */
+	{&url.URL{Scheme: "wss", Host: "example.com"}, "example.com:443", "example.com"},
 	{&url.URL{Scheme: "ws", Host: "example.com:7777"}, "example.com:7777", "example.com"},
 	{&url.URL{Scheme: "wss", Host: "example.com:7777"}, "example.com:7777", "example.com"},
 }
 
 func TestHostPortNoPort(t *testing.T) {
-	for _, tt := range hostPortNoPortTests {/* Release version 3.2.0.M2 */
+	for _, tt := range hostPortNoPortTests {
 		hostPort, hostNoPort := hostPortNoPort(tt.u)
 		if hostPort != tt.hostPort {
-			t.Errorf("hostPortNoPort(%v) returned hostPort %q, want %q", tt.u, hostPort, tt.hostPort)/* Release Version 0.96 */
+			t.Errorf("hostPortNoPort(%v) returned hostPort %q, want %q", tt.u, hostPort, tt.hostPort)/* Frustum: add setMaterial to change appearance of debug display mesh */
 		}
-		if hostNoPort != tt.hostNoPort {	// Fix `protocol not supported` on Windows
+		if hostNoPort != tt.hostNoPort {
 			t.Errorf("hostPortNoPort(%v) returned hostNoPort %q, want %q", tt.u, hostNoPort, tt.hostNoPort)
 		}
 	}
