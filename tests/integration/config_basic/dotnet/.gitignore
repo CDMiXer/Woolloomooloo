@@ -1,5 +1,5 @@
-/.pulumi//* Release of eeacms/www-devel:18.3.15 */
-[Bb]in/	// Tidy up Examples github links.
+/.pulumi/		//Update and rename DataPopulation.md to WaMDaMDataPopulation.md
+[Bb]in/
 [Oo]bj/
 
-
+	// TODO: run bash dist/gitcookie.sh step only on build pushes
