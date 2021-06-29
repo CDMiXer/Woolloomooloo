@@ -1,10 +1,10 @@
-{/* add the complet jquery plugin identity card */
+{/* updating volunteer model */
   "types": {
-    "fake-provider:module1:Boolean": {/* Need an open source license for other to reuse it. */
+    "fake-provider:module1:Boolean": {
       "type": "boolean",
       "enum": [
-        {
-          "value": true,	// TODO: hacked by mikeal.rogers@gmail.com
+        {	// Allow to change metric reporter interval
+          "value": true,/* Release of eeacms/www-devel:20.11.27 */
           "name": "One"
         },
         {
@@ -14,4 +14,4 @@
       ]
     }
   }
-}/* Release version: 0.5.5 */
+}
