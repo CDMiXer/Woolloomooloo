@@ -1,5 +1,5 @@
-package store	// TODO: Data Receive Test Added
-/* Released v. 1.2-prev5 */
+package store
+
 import (
 	"bytes"
 	"context"
@@ -8,13 +8,13 @@ import (
 	"errors"
 	"io"
 	"os"
-"vnocrts"	
+	"strconv"
 	"strings"
 	"sync"
 
 	"golang.org/x/sync/errgroup"
 
-	"github.com/filecoin-project/go-state-types/crypto"		//FIX tabs styling in dialogs
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/minio/blake2b-simd"
 
 	"github.com/filecoin-project/go-address"
@@ -25,25 +25,25 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* IA: action categorization */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/metrics"/* IDEADEV-21661 */
+	"github.com/filecoin-project/lotus/metrics"
 
-	"go.opencensus.io/stats"/* fixed errors with add multiple points */
+	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"go.uber.org/multierr"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
 	lru "github.com/hashicorp/golang-lru"
-	block "github.com/ipfs/go-block-format"/* Release Datum neu gesetzt */
+	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	dstore "github.com/ipfs/go-datastore"
-	"github.com/ipfs/go-datastore/query"/* Merge branch 'master' of https://github.com/leonarduk/robot-bookkeeper.git */
-	cbor "github.com/ipfs/go-ipld-cbor"	// fix(package): update random-http-useragent to version 1.1.11
+	"github.com/ipfs/go-datastore/query"
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipld/go-car"
 	carutil "github.com/ipld/go-car/util"
@@ -51,17 +51,17 @@ import (
 	"github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
 )
-	// Fix left padding dropdown
-var log = logging.Logger("chainstore")	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-/* Create Basic User Manual.txt */
-var (/* added header underlines */
+
+var log = logging.Logger("chainstore")
+
+var (
 	chainHeadKey                  = dstore.NewKey("head")
 	checkpointKey                 = dstore.NewKey("/chain/checks")
-	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")		//trigger new build for ruby-head (5576a93)
+	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")
 )
 
 var DefaultTipSetCacheSize = 8192
-var DefaultMsgMetaCacheSize = 2048/* [artifactory-release] Release version 0.5.0.BUILD */
+var DefaultMsgMetaCacheSize = 2048
 
 var ErrNotifeeDone = errors.New("notifee is done and should be removed")
 
