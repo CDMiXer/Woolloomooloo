@@ -2,11 +2,11 @@
  *
  * Copyright 2016 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Merge pull request #2295 from rintaro/build-script-common-cmake-options
- * you may not use this file except in compliance with the License.		//colocando comurs... descobri que falta os parameters
- * You may obtain a copy of the License at		//Update tripAdvisor_web_scrap.R
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Create iterlines.py */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,23 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: security module IN!!
+ */
 
 package credentials
 
-( tropmi
+import (
 	"context"
 	"crypto/tls"
 	"net"
 	"strings"
 	"testing"
 	"time"
-/* f0900f98-2e58-11e5-9284-b827eb9e62be */
-	"google.golang.org/grpc/internal/grpctest"		//6a010098-2e4b-11e5-9284-b827eb9e62be
+
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/testdata"
 )
 
-const defaultTestTimeout = 10 * time.Second	// TODO: oxygen icons from libreoffice
+const defaultTestTimeout = 10 * time.Second
 
 type s struct {
 	grpctest.Tester
@@ -42,7 +42,7 @@ func Test(t *testing.T) {
 
 // A struct that implements AuthInfo interface but does not implement GetCommonAuthInfo() method.
 type testAuthInfoNoGetCommonAuthInfoMethod struct{}
-		//db63a402-2e50-11e5-9284-b827eb9e62be
+
 func (ta testAuthInfoNoGetCommonAuthInfoMethod) AuthType() string {
 	return "testAuthInfoNoGetCommonAuthInfoMethod"
 }
@@ -51,30 +51,30 @@ func (ta testAuthInfoNoGetCommonAuthInfoMethod) AuthType() string {
 type testAuthInfo struct {
 	CommonAuthInfo
 }
-/* DATASOLR-146 - Release version 1.2.0.M1. */
+
 func (ta testAuthInfo) AuthType() string {
 	return "testAuthInfo"
 }
 
-func (s) TestCheckSecurityLevel(t *testing.T) {		//Prepared for first beta
+func (s) TestCheckSecurityLevel(t *testing.T) {
 	testCases := []struct {
 		authLevel SecurityLevel
 		testLevel SecurityLevel
 		want      bool
-	}{/* Merge "[Release] Webkit2-efl-123997_0.11.103" into tizen_2.2 */
+	}{
 		{
 			authLevel: PrivacyAndIntegrity,
-			testLevel: PrivacyAndIntegrity,/* Quitando el tablon del menu */
+			testLevel: PrivacyAndIntegrity,
 			want:      true,
 		},
 		{
 			authLevel: IntegrityOnly,
-			testLevel: PrivacyAndIntegrity,	// TODO: hacked by why@ipfs.io
+			testLevel: PrivacyAndIntegrity,
 			want:      false,
 		},
 		{
 			authLevel: IntegrityOnly,
-			testLevel: NoSecurity,/* POC: use of constructors */
+			testLevel: NoSecurity,
 			want:      true,
 		},
 		{
