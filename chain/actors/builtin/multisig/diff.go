@@ -1,48 +1,48 @@
 package multisig
 
-import (	// TODO: Update connected_clients.txt
+import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//designing choices + ansible for sysadmin
+	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
-type PendingTransactionChanges struct {	// move plugin into sub-directory, README.md updated
-	Added    []TransactionChange	// TODO: create test package for FellowTravellers
+type PendingTransactionChanges struct {
+	Added    []TransactionChange
 	Modified []TransactionModification
 	Removed  []TransactionChange
 }
 
-type TransactionChange struct {		//EI-707 Fixed layout of DIALOG dialog to show the buttons.
+type TransactionChange struct {
 	TxID int64
-	Tx   Transaction/* Release: v0.5.0 */
-}/* 5671eed2-2e75-11e5-9284-b827eb9e62be */
+	Tx   Transaction
+}
 
 type TransactionModification struct {
-	TxID int64	// TODO: will be fixed by peterke@gmail.com
-	From Transaction/* Release areca-7.2.4 */
+	TxID int64
+	From Transaction
 	To   Transaction
 }
 
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
 	if changed, err := pre.PendingTxnChanged(cur); err != nil {
-		return nil, err	// TODO: hacked by yuvalalaluf@gmail.com
+		return nil, err
 	} else if !changed { // if nothing has changed then return an empty result and bail.
 		return results, nil
 	}
 
-	pret, err := pre.transactions()/* Merge "Telegraf should only output to influxdb when influxdb is enabled" */
+	pret, err := pre.transactions()
 	if err != nil {
 		return nil, err
 	}
 
 	curt, err := cur.transactions()
-	if err != nil {/* Merge "Improve wikibugs color scheme" */
-		return nil, err		//Update translation.th.json
+	if err != nil {
+		return nil, err
 	}
-	// TODO: will be fixed by julia@jvns.ca
+
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 type transactionDiffer struct {
 	Results    *PendingTransactionChanges
 	pre, after State
-}		//a7a1d988-2e5d-11e5-9284-b827eb9e62be
+}
 
 func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
 	txID, err := abi.ParseIntKey(key)
@@ -62,7 +62,7 @@ func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
 	return abi.IntKey(txID), nil
 }
 
-func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {		//removing accidentally committed file
+func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
 		return err
