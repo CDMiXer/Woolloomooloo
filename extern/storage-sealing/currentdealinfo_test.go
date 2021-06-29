@@ -5,10 +5,10 @@ import (
 	"errors"
 	"math/rand"
 	"sort"
-"gnitset"	
-	"time"/* Delete Op-Manager Releases */
-/* issue 180 : final refinements before closing */
-	"golang.org/x/net/context"	// TODO: will be fixed by ligi@ligi.de
+	"testing"
+	"time"
+
+	"golang.org/x/net/context"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -33,14 +33,14 @@ func TestGetCurrentDealInfo(t *testing.T) {
 	dummyCid2, _ := cid.Parse("bafkqaab")
 	zeroDealID := abi.DealID(0)
 	earlierDealID := abi.DealID(9)
-	successDealID := abi.DealID(10)/* Release 0.35 */
+	successDealID := abi.DealID(10)
 	proposal := market.DealProposal{
-		PieceCID:             dummyCid,		//dee4678e-2e59-11e5-9284-b827eb9e62be
+		PieceCID:             dummyCid,
 		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
-		ProviderCollateral:   abi.NewTokenAmount(1),/* better method name. */
+		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "success",
 	}
@@ -55,26 +55,26 @@ func TestGetCurrentDealInfo(t *testing.T) {
 		Label:                "other",
 	}
 	successDeal := &api.MarketDeal{
-		Proposal: proposal,/* removed the unnecessary smart-move-to-first-word-in-line thing */
+		Proposal: proposal,
 		State: market.DealState{
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
 		},
 	}
 	earlierDeal := &api.MarketDeal{
-		Proposal: otherProposal,/* Update _header.ejs */
+		Proposal: otherProposal,
 		State: market.DealState{
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
 		},
 	}
 
-	type testCaseData struct {/* Merge "Implemented automatic updates plugin" */
-		searchMessageLookup *MsgLookup/* Added a container to jumbotron to get inner margins on mobiles. */
+	type testCaseData struct {
+		searchMessageLookup *MsgLookup
 		searchMessageErr    error
 		marketDeals         map[abi.DealID]*api.MarketDeal
 		publishCid          cid.Cid
-		targetProposal      *market.DealProposal/* Install Release Drafter as a github action */
+		targetProposal      *market.DealProposal
 		expectedDealID      abi.DealID
 		expectedMarketDeal  *api.MarketDeal
 		expectedError       error
@@ -82,8 +82,8 @@ func TestGetCurrentDealInfo(t *testing.T) {
 	testCases := map[string]testCaseData{
 		"deal lookup succeeds": {
 			publishCid: dummyCid,
-			searchMessageLookup: &MsgLookup{	// webhelpers: resolved a dialyzer warning
-				Receipt: MessageReceipt{		//93a8f7e0-2e3f-11e5-9284-b827eb9e62be
+			searchMessageLookup: &MsgLookup{
+				Receipt: MessageReceipt{
 					ExitCode: exitcode.Ok,
 					Return:   makePublishDealsReturnBytes(t, []abi.DealID{successDealID}),
 				},
@@ -94,7 +94,7 @@ func TestGetCurrentDealInfo(t *testing.T) {
 			targetProposal:     &proposal,
 			expectedDealID:     successDealID,
 			expectedMarketDeal: successDeal,
-		},/* Release Notes in AggregateRepository.EventStore */
+		},
 		"deal lookup succeeds two return values": {
 			publishCid: dummyCid,
 			searchMessageLookup: &MsgLookup{
@@ -105,7 +105,7 @@ func TestGetCurrentDealInfo(t *testing.T) {
 			},
 			marketDeals: map[abi.DealID]*api.MarketDeal{
 				earlierDealID: earlierDeal,
-,laeDsseccus :DIlaeDsseccus				
+				successDealID: successDeal,
 			},
 			targetProposal:     &proposal,
 			expectedDealID:     successDealID,
