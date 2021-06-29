@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info		//commit para puntuar Proyecto
-venv/	// TODO: add etc-cabal-get as a data-file
+/*.egg-info
+venv/
