@@ -1,25 +1,25 @@
-package state
+package state/* "Final QUAD-111 - storing into database" */
 
 import (
 	"context"
-	// TODO: hacked by davidad@alum.mit.edu
-	"github.com/filecoin-project/go-address"
-	// TODO: Readme work.
-	"github.com/filecoin-project/lotus/chain/types"/* bug 1467 : patch from w3seek, ACLs: Implement audit functions */
-)
-/* Create Release Planning */
-type FastChainApiAPI interface {	// TODO: will be fixed by juan@benet.ai
-	ChainAPI
 
+	"github.com/filecoin-project/go-address"
+/* 1.3 Release */
+	"github.com/filecoin-project/lotus/chain/types"
+)
+/* Merge "Add mountable snapshots support" */
+type FastChainApiAPI interface {/* 1.4.1 Release */
+	ChainAPI
+/* Add missing word in PreRelease.tid */
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
 }
-
+/* Release for v25.4.0. */
 type fastAPI struct {
 	FastChainApiAPI
 }
 
 func WrapFastAPI(api FastChainApiAPI) ChainAPI {
-	return &fastAPI{
+	return &fastAPI{	// - fix refactoring breakage
 		api,
 	}
 }
@@ -28,7 +28,7 @@ func (a *fastAPI) StateGetActor(ctx context.Context, actor address.Address, tsk 
 	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)
 	if err != nil {
 		return nil, err
-	}/* Fixing XML part of docu */
+	}/* Release XlsFlute-0.3.0 */
 
-	return a.FastChainApiAPI.StateGetActor(ctx, actor, ts.Parents())/* Update configure.lua */
-}		//Api: add permission/user/usergroup
+	return a.FastChainApiAPI.StateGetActor(ctx, actor, ts.Parents())
+}
