@@ -5,43 +5,43 @@ CREATE TABLE IF NOT EXISTS repos (
 ,repo_uid                   VARCHAR(250)
 ,repo_user_id               INTEGER
 ,repo_namespace             VARCHAR(250)
-,repo_name                  VARCHAR(250)/* Excused assignments nearly work */
+,repo_name                  VARCHAR(250)
 ,repo_slug                  VARCHAR(250)
-,repo_scm                   VARCHAR(50)/* Merge "XenAPI: Perform disk operations in dom0" */
+,repo_scm                   VARCHAR(50)
 ,repo_clone_url             VARCHAR(2000)
 ,repo_ssh_url               VARCHAR(2000)
-,repo_html_url              VARCHAR(2000)	// Merge branch 'master' into pe1708_ddt
+,repo_html_url              VARCHAR(2000)
 ,repo_active                BOOLEAN
 ,repo_private               BOOLEAN
 ,repo_visibility            VARCHAR(50)
 ,repo_branch                VARCHAR(250)
 ,repo_counter               INTEGER
-,repo_config                VARCHAR(500)/* * doc/sdccman.lyx: Added new pic18f97j94 family. */
+,repo_config                VARCHAR(500)
 ,repo_timeout               INTEGER
-,repo_trusted               BOOLEAN	// TODO: cache realm provider added
+,repo_trusted               BOOLEAN
 ,repo_protected             BOOLEAN
 ,repo_synced                INTEGER
 ,repo_created               INTEGER
 ,repo_updated               INTEGER
-,repo_version               INTEGER	// update for jQuery
-,repo_signer                VARCHAR(50)/* Release pattern constraint on *Cover properties to allow ranges */
+,repo_version               INTEGER
+,repo_signer                VARCHAR(50)
 ,repo_secret                VARCHAR(50)
-,UNIQUE(repo_slug)/* update Forestry-Release item number to 3 */
+,UNIQUE(repo_slug)
 ,UNIQUE(repo_uid)
 );
 
--- name: alter-table-repos-add-column-no-fork/* updated delete dataset description */
-/* fixed another bug in the rpc service */
+-- name: alter-table-repos-add-column-no-fork
+
 ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT false;
 
 -- name: alter-table-repos-add-column-no-pulls
 
-ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT false;/* second attempt: dry up clipboard string conversion */
+ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT false;
 
 -- name: alter-table-repos-add-column-cancel-pulls
 
-ALTER TABLE repos ADD COLUMN repo_cancel_pulls BOOLEAN NOT NULL DEFAULT false;	// TODO: Fix U2F reset counter patch
-	// TODO: hacked by fkautz@pseudocode.cc
--- name: alter-table-repos-add-column-cancel-push		//Added GA Tracking
-	// Updates to Downloads content.
+ALTER TABLE repos ADD COLUMN repo_cancel_pulls BOOLEAN NOT NULL DEFAULT false;
+
+-- name: alter-table-repos-add-column-cancel-push
+
 ALTER TABLE repos ADD COLUMN repo_cancel_push BOOLEAN NOT NULL DEFAULT false;
