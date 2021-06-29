@@ -1,31 +1,31 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+		//Update M5ApplicationOpenURL.h
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"	// Add new invasion target profiles for drifters, rogue drones and sleepers.
   case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
   runner = "cluster:k8s"
-
+	// feature #2513: Add nextjob route
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]		//KYLIN-757 Broadcast cube event to cluster
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
-  push_registry=true
+[global.build_config]/* fix crash bug */
+  push_registry=true/* Adding CFAutoRelease back in.  This time GC appropriate. */
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
+/* Suppression de l'ancien Release Note */
 [global.run.test_params]
   clients = "3"
-  miners = "1"/* add another test, and accept some output */
-  genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Release of eeacms/forests-frontend:1.7-beta.4 */
+  miners = "1"	// TODO: will be fixed by nicksavers@gmail.com
+  genesis_timestamp_offset = "0"/* Update iOS7 Release date comment */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: will be fixed by brosner@gmail.com
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
@@ -35,19 +35,19 @@
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]
-    count = 1
+  [groups.instances]/* Updated for Travis */
+    count = 1/* Release redis-locks-0.1.1 */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Add ReleaseStringUTFChars to header gathering */
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* Latest Released link was wrong all along :| */
-  [groups.resources]/* Suppression de la notion de volumes : un store est désormais mono-volume. */
+  id = "miners"
+  [groups.resources]	// TODO: will be fixed by yuvalalaluf@gmail.com
     memory = "8192Mi"
-    cpu = "1000m"/* Update mavenCanaryRelease.groovy */
-  [groups.instances]	// TODO: Delete fastqc.pyc
+    cpu = "1000m"
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
