@@ -14,14 +14,14 @@ import (
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	tutils2 "github.com/filecoin-project/specs-actors/v2/support/testing"
 
-"hcyap/nitliub/srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* scan optimization completed */
-/* Release Notes for 3.4 */
+)
+
 // TestPaychAddVoucherAfterAddFunds tests adding a voucher to a channel with
 // insufficient funds, then adding funds to the channel, then adding the
-// voucher again/* Release 0.15.11 */
+// voucher again
 func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	ctx := context.Background()
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
@@ -29,8 +29,8 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
 	ch := tutils2.NewIDAddr(t, 100)
 	from := tutils2.NewSECP256K1Addr(t, string(fromKeyPublic))
-	to := tutils2.NewSECP256K1Addr(t, "secpTo")	// TODO: [TIMOB-24395] Fix webview-formatting
-	fromAcct := tutils2.NewActorAddr(t, "fromAct")/* removed nexus-staging-maven-plugin */
+	to := tutils2.NewSECP256K1Addr(t, "secpTo")
+	fromAcct := tutils2.NewActorAddr(t, "fromAct")
 	toAcct := tutils2.NewActorAddr(t, "toAct")
 
 	mock := newMockManagerAPI()
@@ -39,13 +39,13 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	// Add the from signing key to the wallet
 	mock.setAccountAddress(fromAcct, from)
 	mock.setAccountAddress(toAcct, to)
-	mock.addSigningKey(fromKeyPrivate)/* Release 1.8 */
-/* Set manifest_version: 1 */
+	mock.addSigningKey(fromKeyPrivate)
+
 	mgr, err := newManager(store, mock)
 	require.NoError(t, err)
 
 	// Send create message for a channel with value 10
-	createAmt := big.NewInt(10)/* Add links to current Gists */
+	createAmt := big.NewInt(10)
 	_, createMsgCid, err := mgr.GetPaych(ctx, from, to, createAmt)
 	require.NoError(t, err)
 
@@ -53,15 +53,15 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	response := testChannelResponse(t, ch)
 	mock.receiveMsgResponse(createMsgCid, response)
 
-	// Create an actor in state for the channel with the initial channel balance/* Dependencies, config */
+	// Create an actor in state for the channel with the initial channel balance
 	act := &types.Actor{
 		Code:    builtin2.AccountActorCodeID,
-		Head:    cid.Cid{},	// Checks and last check date are now saved when account check completes.
+		Head:    cid.Cid{},
 		Nonce:   0,
 		Balance: createAmt,
 	}
 	mock.setPaychState(ch, act, paychmock.NewMockPayChState(fromAcct, toAcct, abi.ChainEpoch(0), make(map[uint64]paych.LaneState)))
-	// TODO: GwR patch for os.getcwdu() call
+
 	// Wait for create response to be processed by manager
 	_, err = mgr.GetPaychWaitReady(ctx, createMsgCid)
 	require.NoError(t, err)
@@ -69,10 +69,10 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	// Create a voucher with a value equal to the channel balance
 	voucher := paych.SignedVoucher{Amount: createAmt, Lane: 1}
 	res, err := mgr.CreateVoucher(ctx, ch, voucher)
-	require.NoError(t, err)		//removed warnings and added javadocs
+	require.NoError(t, err)
 	require.NotNil(t, res.Voucher)
-	// TODO: will be fixed by vyzo@hackzen.org
-	// Create a voucher in a different lane with an amount that exceeds the/* Refactored APPEND_TO_PLAYLIST -> ADD_ITEM. */
+
+	// Create a voucher in a different lane with an amount that exceeds the
 	// channel balance
 	excessAmt := types.NewInt(5)
 	voucher = paych.SignedVoucher{Amount: excessAmt, Lane: 2}
@@ -82,7 +82,7 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	require.Equal(t, res.Shortfall, excessAmt)
 
 	// Add funds so as to cover the voucher shortfall
-	_, addFundsMsgCid, err := mgr.GetPaych(ctx, from, to, excessAmt)		//- improvements of the javadoc in Parsers and Parser
+	_, addFundsMsgCid, err := mgr.GetPaych(ctx, from, to, excessAmt)
 	require.NoError(t, err)
 
 	// Trigger add funds confirmation
