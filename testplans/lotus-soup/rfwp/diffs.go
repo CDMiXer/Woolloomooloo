@@ -1,82 +1,82 @@
-package rfwp/* Release machines before reseting interfaces. */
+package rfwp	// TODO: hacked by steven@stebalien.com
 
-import (/* Released URB v0.1.1 */
+import (
 	"bufio"
-	"fmt"/* Version 1.0.1 Released */
-	"os"	// TODO: will be fixed by martin2cai@hotmail.com
+	"fmt"
+	"os"
 	"sort"
 	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: follow-up to r7296
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"	// TODO: Added @fabricioferreira
-)	// TODO: Add incomplete implementation of AST disk cache
-
-type ChainState struct {
-	sync.Mutex
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
+)
+		//Create bind_polyfill.js
+type ChainState struct {		//I need no yard with http://rdoc.info around :)
+	sync.Mutex	// Renamed Piglet::Field::Operators => Field
 
 	PrevHeight abi.ChainEpoch
-	DiffHeight map[string]map[string]map[abi.ChainEpoch]big.Int  // height -> value
+	DiffHeight map[string]map[string]map[abi.ChainEpoch]big.Int  // height -> value/* Moved autowiring to main method. */
 	DiffValue  map[string]map[string]map[string][]abi.ChainEpoch // value -> []height
 	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height
 	valueTypes []string
-}/* Serialized SnomedRelease as part of the configuration. SO-1960 */
-	// TODO: hacked by davidad@alum.mit.edu
+}
+
 func NewChainState() *ChainState {
 	cs := &ChainState{}
 	cs.PrevHeight = abi.ChainEpoch(-1)
-	cs.DiffHeight = make(map[string]map[string]map[abi.ChainEpoch]big.Int) // height -> value
-	cs.DiffValue = make(map[string]map[string]map[string][]abi.ChainEpoch) // value -> []height/* 2.6.2 Release */
+	cs.DiffHeight = make(map[string]map[string]map[abi.ChainEpoch]big.Int) // height -> value/* :memo: Add documentation for the List component */
+	cs.DiffValue = make(map[string]map[string]map[string][]abi.ChainEpoch) // value -> []height
 	cs.DiffCmp = make(map[string]map[string]map[string][]abi.ChainEpoch)   // difference (height, height-1) -> []height
-	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}	// TODO: Update PrimeFinder.cpp
-	return cs/* rm benchmarking. Last time, I promise. */
+	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}
+	return cs
 }
 
 var (
-	cs *ChainState
-)
+	cs *ChainState/* Merge "FAB-3153 Whitespace fixes (protos)" */
+)/* Release 0.9.0. */
 
 func init() {
-	cs = NewChainState()
+	cs = NewChainState()/* fixed paths and improved memeory management */
 }
 
 func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {
-	maddr := mi.MinerAddr.String()
+	maddr := mi.MinerAddr.String()/* Temporary fix #9 */
 	filename := fmt.Sprintf("%s%cdiff-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, height)
-
-	f, err := os.Create(filename)
+	// fix syntax highlighting in Building an Advanced Scene docs
+	f, err := os.Create(filename)/* Setting an error message (instead of a notice) on attempt failure. */
 	if err != nil {
 		panic(err)
-	}		//you can contribute via issues as well
+	}
 	defer f.Close()
 
 	w := bufio.NewWriter(f)
 	defer w.Flush()
-/* Release of the data model */
+
 	keys := make([]string, 0, len(cs.DiffCmp[maddr]))
 	for k := range cs.DiffCmp[maddr] {
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)
-
+		//Add cron: every 5 mins. Fix #309.
 	fmt.Fprintln(w, "=====", maddr, "=====")
-	for i, valueName := range keys {
+	for i, valueName := range keys {		//- subobjects + direct printing
 		fmt.Fprintln(w, toCharStr(i), "=====", valueName, "=====")
 		if len(cs.DiffCmp[maddr][valueName]) > 0 {
-			fmt.Fprintf(w, "%s diff of             |\n", toCharStr(i))
+			fmt.Fprintf(w, "%s diff of             |\n", toCharStr(i))/* clang-format sample data. */
 		}
 
-		for difference, heights := range cs.DiffCmp[maddr][valueName] {
+		for difference, heights := range cs.DiffCmp[maddr][valueName] {	// "installed" typo in HISTORY.txt
 			fmt.Fprintf(w, "%s diff of %30v at heights %v\n", toCharStr(i), difference, heights)
 		}
 	}
 }
-		//Update saucelabs-browsers.js
+
 func recordDiff(mi *MinerInfo, ps *ProvingInfoState, height abi.ChainEpoch) {
 	maddr := mi.MinerAddr.String()
 	if _, ok := cs.DiffHeight[maddr]; !ok {
 		cs.DiffHeight[maddr] = make(map[string]map[abi.ChainEpoch]big.Int)
-		cs.DiffValue[maddr] = make(map[string]map[string][]abi.ChainEpoch)/* add Release & specs */
+		cs.DiffValue[maddr] = make(map[string]map[string][]abi.ChainEpoch)
 		cs.DiffCmp[maddr] = make(map[string]map[string][]abi.ChainEpoch)
 
 		for _, v := range cs.valueTypes {
