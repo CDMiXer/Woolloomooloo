@@ -1,15 +1,15 @@
 
 {
    "options": {"failByDrop": false},
-   "outdir": "./reports/clients",/* Updated C# Examples for Release 3.2.0 */
+   "outdir": "./reports/clients",
    "servers": [
-        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},/* Released 0.6 */
+        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
         {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
         {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
         {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
-        {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}		//Added leeds meeples
+        {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
     ],
-   "cases": ["*"],/* Batch Script for new Release */
+   "cases": ["*"],
    "exclude-cases": [],
    "exclude-agent-cases": {}
-}		//association
+}
