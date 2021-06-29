@@ -1,7 +1,7 @@
-{	// TODO: Test Trac #1634
+{
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {	// Fixed name of variable
+    "devDependencies": {
         "typescript": "^3.0.0"
     }
-}	// TODO: will be fixed by boringland@protonmail.ch
+}
