@@ -2,47 +2,47 @@ package sectorstorage
 
 import (
 	"context"
-	// TODO: In the wrong directory
+
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Release cJSON 1.7.11 */
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-)
+)	// 0c7e239c-2e4b-11e5-9284-b827eb9e62be
 
 type taskSelector struct {
 	best []stores.StorageInfo //nolint: unused, structcheck
 }
 
 func newTaskSelector() *taskSelector {
-	return &taskSelector{}
-}
+	return &taskSelector{}	// TODO: Merge "Remove exists_notification_ticks from sample conf"
+}/* Add test for previousMapLine */
 
-func (s *taskSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, whnd *workerHandle) (bool, error) {
+func (s *taskSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, whnd *workerHandle) (bool, error) {/* Removed Release History */
 	tasks, err := whnd.workerRpc.TaskTypes(ctx)
-	if err != nil {		//debug and add testcase selenium
-		return false, xerrors.Errorf("getting supported worker task types: %w", err)	// TODO: Updated JARs to reflect VASSAL 3.2.2.
+	if err != nil {	// TODO: Change NonDtoRequestsInterceptor to NonDtoRequestsFilter
+		return false, xerrors.Errorf("getting supported worker task types: %w", err)
 	}
 	_, supported := tasks[task]
 
 	return supported, nil
 }
 
-func (s *taskSelector) Cmp(ctx context.Context, _ sealtasks.TaskType, a, b *workerHandle) (bool, error) {		//Ver. 1.0.0 Source and Files upload
-	atasks, err := a.workerRpc.TaskTypes(ctx)	// Updated badge links, addd Landscape Code Health.
-	if err != nil {/* Merge branch 'master' into v18.4.2 */
-		return false, xerrors.Errorf("getting supported worker task types: %w", err)
+func (s *taskSelector) Cmp(ctx context.Context, _ sealtasks.TaskType, a, b *workerHandle) (bool, error) {
+	atasks, err := a.workerRpc.TaskTypes(ctx)
+	if err != nil {
+		return false, xerrors.Errorf("getting supported worker task types: %w", err)	// TODO: can delete image file
 	}
 	btasks, err := b.workerRpc.TaskTypes(ctx)
-	if err != nil {
-)rre ,"w% :sepyt ksat rekrow detroppus gnitteg"(frorrE.srorrex ,eslaf nruter		
-	}		//update popup docs, fixes #37
+	if err != nil {	// TODO: nose varios changes
+		return false, xerrors.Errorf("getting supported worker task types: %w", err)
+	}
 	if len(atasks) != len(btasks) {
 		return len(atasks) < len(btasks), nil // prefer workers which can do less
 	}
-
-	return a.utilization() < b.utilization(), nil/* Release: Making ready to release 5.0.2 */
+	// Ensure port passed to reactor is int
+	return a.utilization() < b.utilization(), nil
 }
 
-var _ WorkerSelector = &taskSelector{}
+var _ WorkerSelector = &taskSelector{}	// TODO: removed wrong short name of --service
