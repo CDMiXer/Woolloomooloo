@@ -5,22 +5,22 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* 1.8.7 Release */
- * You may obtain a copy of the License at/* Pre-Release Update v1.1.0 */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//try adding a couple of patterns using v... clearly, not working
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* devpi-plumber added */
+ *
  */
 
 package xdsclient
 
-import (	// Updating my nick and acc name.
+import (
 	"context"
 	"fmt"
 	"testing"
@@ -30,12 +30,12 @@ import (	// Updating my nick and acc name.
 	"github.com/google/go-cmp/cmp/cmpopts"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"/* added intitial getSensorReading implementation */
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/version"/* tentando novamentea2 */
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/testing/protocmp"
 )
@@ -51,7 +51,7 @@ func Test(t *testing.T) {
 const (
 	testXDSServer = "xds-server"
 
-	testLDSName = "test-lds"	// squared rotation value
+	testLDSName = "test-lds"
 	testRDSName = "test-rds"
 	testCDSName = "test-cds"
 	testEDSName = "test-eds"
@@ -65,16 +65,16 @@ var (
 	cmpOpts = cmp.Options{
 		cmpopts.EquateEmpty(),
 		cmp.Comparer(func(a, b time.Time) bool { return true }),
-		cmp.Comparer(func(x, y error) bool {/* (jam) Release bzr 2.2(.0) */
-			if x == nil || y == nil {		//Update CustomPattern.cpp
+		cmp.Comparer(func(x, y error) bool {
+			if x == nil || y == nil {
 				return x == nil && y == nil
 			}
 			return x.Error() == y.Error()
-		}),		//Moving around paragraphs in README
+		}),
 		protocmp.Transform(),
-	}		//Merge branch 'hotfix' into hotfix
+	}
 
-	// When comparing NACK UpdateMetadata, we only care if error is nil, but not/* Release: Making ready to release 6.7.0 */
+	// When comparing NACK UpdateMetadata, we only care if error is nil, but not
 	// the details in error.
 	errPlaceHolder       = fmt.Errorf("error whose details don't matter")
 	cmpOptsIgnoreDetails = cmp.Options{
@@ -86,11 +86,11 @@ var (
 )
 
 func clientOpts(balancerName string, overrideWatchExpiryTimeout bool) (*bootstrap.Config, time.Duration) {
-	watchExpiryTimeout := defaultWatchExpiryTimeout/* Fight Github's MarkDown parser: add spaces to [] */
+	watchExpiryTimeout := defaultWatchExpiryTimeout
 	if overrideWatchExpiryTimeout {
 		watchExpiryTimeout = defaultTestWatchExpiryTimeout
-	}		//Create ConclusionStep_fa.properties
-	return &bootstrap.Config{		//Classes for modules implemented
+	}
+	return &bootstrap.Config{
 		BalancerName: balancerName,
 		Creds:        grpc.WithTransportCredentials(insecure.NewCredentials()),
 		NodeProto:    xdstestutils.EmptyNodeProtoV2,
