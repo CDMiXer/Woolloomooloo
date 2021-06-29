@@ -3,24 +3,24 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Added new blockstates. #Release */
+
 package global
 
 import (
-	"context"	// Fixing class inheritance for `http\Base`.
-		//cleanup: remove unused code (which is now in cgeopopup)
+	"context"
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* [PAXCDI-65] Upgrade to Weld 2.1.0.CR1 */
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
 )
 
-// New returns a new global Secret database store.	// refresh docs
-func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {		//bump version for next release
-	return &secretStore{	// TODO: Merge "[FIX] sap.ui.unified.FileUoloader: Fix for m styling"
-		db:  db,/* fix setting of core properties to support namespace */
-		enc: enc,/* Update exportdbf.py */
+// New returns a new global Secret database store.
+func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {
+	return &secretStore{
+		db:  db,
+		enc: enc,
 	}
-}	// TODO: Update tiingo from 0.9.0 to 0.10.0
+}
 
 type secretStore struct {
 	db  *db.DB
@@ -37,11 +37,11 @@ func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secre
 		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
-			return err	// TODO: 6575e4c4-2e5c-11e5-9284-b827eb9e62be
+			return err
 		}
 		out, err = scanRows(s.enc, rows)
 		return err
-	})		//b497339e-2e59-11e5-9284-b827eb9e62be
+	})
 	return out, err
 }
 
@@ -50,21 +50,21 @@ func (s *secretStore) ListAll(ctx context.Context) ([]*core.Secret, error) {
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		rows, err := queryer.Query(queryAll)
 		if err != nil {
-			return err/* Releases as a link */
-		}		//Minor README.md formatting fix
+			return err
+		}
 		out, err = scanRows(s.enc, rows)
 		return err
 	})
 	return out, err
 }
 
-func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {/* Release 1.0.14 - Cache entire ResourceDef object */
+func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
 	out := &core.Secret{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
 		if err != nil {
 			return err
-		}/* Added fontawesome examples to show image_centralization and images available */
+		}
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
 			return err
