@@ -1,10 +1,10 @@
 {
-    "name": "steps",
-    "license": "Apache-2.0",
-    "devDependencies": {
+    "name": "steps",	// Fixing makefile.
+    "license": "Apache-2.0",/* optimization execution speed */
+    "devDependencies": {	// renamed files to reflect what they are doing
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//Update 711.md
         "@pulumi/pulumi": "latest"
     }
 }
