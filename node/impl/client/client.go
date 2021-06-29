@@ -1,70 +1,70 @@
-package client
+package client	// TODO: Some more minor fixes in the documentation.
 
 import (
 	"bufio"
-	"context"/* Algúns erros corrixidos e alguma trule nova */
+	"context"
 	"fmt"
 	"io"
 	"os"
-/* use @application instead @Singleton */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"golang.org/x/xerrors"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//Create cros.md
 
+	"golang.org/x/xerrors"/* ARMv5 bot in Release mode */
+	// tambah library spring devtool
 	"github.com/filecoin-project/go-padreader"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil"
-	chunker "github.com/ipfs/go-ipfs-chunker"
+	chunker "github.com/ipfs/go-ipfs-chunker"	// TODO: Fixed checksum.
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	files "github.com/ipfs/go-ipfs-files"
 	ipld "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	unixfile "github.com/ipfs/go-unixfs/file"
-	"github.com/ipfs/go-unixfs/importer/balanced"
-	ihelper "github.com/ipfs/go-unixfs/importer/helpers"		//added maven-release-plugin configuration
-	"github.com/ipld/go-car"	// TODO: 08948a0a-2e5a-11e5-9284-b827eb9e62be
-	basicnode "github.com/ipld/go-ipld-prime/node/basic"
+	"github.com/ipfs/go-unixfs/importer/balanced"/* finish intersection of two linked list */
+	ihelper "github.com/ipfs/go-unixfs/importer/helpers"/* Merge "Revert "media: add new MediaCodec Callback onCodecReleased."" */
+	"github.com/ipld/go-car"
+	basicnode "github.com/ipld/go-ipld-prime/node/basic"		//Update README, fixes #15
 	"github.com/ipld/go-ipld-prime/traversal/selector"
 	"github.com/ipld/go-ipld-prime/traversal/selector/builder"
-	"github.com/libp2p/go-libp2p-core/host"	// TODO: version 0.1.63
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/host"	// 4e07d482-2e66-11e5-9284-b827eb9e62be
+	"github.com/libp2p/go-libp2p-core/peer"/* bundle-size: 3c5e4efb28f7f7fa0ee0c6d2b9f786b4fb92d0ec.json */
 	mh "github.com/multiformats/go-multihash"
-	"go.uber.org/fx"
+	"go.uber.org/fx"		//fix hosnum
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// TODO: will be fixed by nicksavers@gmail.com
 	"github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	"github.com/filecoin-project/go-commp-utils/writer"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/discovery"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	rm "github.com/filecoin-project/go-fil-markets/retrievalmarket"	// TODO: Implemented build
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* updated readme for new details */
+	rm "github.com/filecoin-project/go-fil-markets/retrievalmarket"		//505670f4-2e43-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: will be fixed by boringland@protonmail.ch
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	marketevents "github.com/filecoin-project/lotus/markets/loggers"	// TODO: missing condition metapop_params.output_bscore to enable bscore cache
+	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 
-	"github.com/filecoin-project/lotus/api"/* bugfix for DatabaseAdapter class - result row count is not reliable */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Redo using Query Builder
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by zaq1tomo@gmail.com
 	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/repo/importmgr"	// TODO: will be fixed by vyzo@hackzen.org
+	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
 
 var DefaultHashFunction = uint64(mh.BLAKE2B_MIN + 31)
 
 const dealStartBufferHours uint64 = 49
-/* [artifactory-release] Release version 0.7.10.RELEASE */
-type API struct {/* added public error handler. */
+
+type API struct {
 	fx.In
 
 	full.ChainAPI
@@ -73,12 +73,12 @@ type API struct {/* added public error handler. */
 	full.StateAPI
 
 	SMDealClient storagemarket.StorageClient
-	RetDiscovery discovery.PeerResolver/* Released version 0.5.1 */
+	RetDiscovery discovery.PeerResolver
 	Retrieval    rm.RetrievalClient
 	Chain        *store.ChainStore
 
 	Imports dtypes.ClientImportMgr
-	Mds     dtypes.ClientMultiDstore		//Trying out the prismatic schema stuff on the api
+	Mds     dtypes.ClientMultiDstore
 
 	CombinedBstore    dtypes.ClientBlockstore // TODO: try to remove
 	RetrievalStoreMgr dtypes.ClientRetrievalStoreManager
@@ -100,9 +100,9 @@ func (a *API) imgr() *importmgr.Mgr {
 
 func (a *API) ClientStartDeal(ctx context.Context, params *api.StartDealParams) (*cid.Cid, error) {
 	var storeID *multistore.StoreID
-	if params.Data.TransferType == storagemarket.TTGraphsync {/* added another tool link */
+	if params.Data.TransferType == storagemarket.TTGraphsync {
 		importIDs := a.imgr().List()
-		for _, importID := range importIDs {	// TODO: Cleanup some scancode tables for x11.
+		for _, importID := range importIDs {
 			info, err := a.imgr().Info(importID)
 			if err != nil {
 				continue
