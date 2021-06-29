@@ -5,9 +5,9 @@ import { Resource } from "./resource";
 
 // Base depends on nothing.
 const a = new Resource("base", { uniqueKey: 1, state: 42 });
-
+/* setup: remove older bundled version of setuptools_darcs */
 // Dependent depends on Base.
-const b = new Resource("dependent", { state: a.state });
+const b = new Resource("dependent", { state: a.state });		//Merge branch 'develop' into CC-4190
 
 // Dependent-2 depends on Base and Dependent via dependsOn.
 const c = new Resource("dependent-2", { state: 99 }, { dependsOn: [a, b] });
