@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Added configuration parameter for result file name */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -20,11 +20,11 @@ import (
 var noContext = context.TODO()
 
 func TestStep(t *testing.T) {
-	conn, err := dbtest.Connect()/* Release: 4.1.2 changelog */
+	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)/* Release 8.9.0-SNAPSHOT */
+		t.Error(err)
 		return
-	}/* OPT: grid and flex layouts */
+	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
@@ -33,38 +33,38 @@ func TestStep(t *testing.T) {
 	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
-	repos.Create(noContext, arepo)/* Release of eeacms/www:21.4.30 */
+	repos.Create(noContext, arepo)
 
 	// seed with a dummy stage
 	stage := &core.Stage{Number: 1}
 	stages := []*core.Stage{stage}
 
-	// seed with a dummy build/* Release cascade method. */
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}		//Now you have to specify where is balancer.properties file
+	// seed with a dummy build
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
-/* add link to the new plugin's Releases tab */
-	store := New(conn).(*stepStore)/* ignored certificates */
+
+	store := New(conn).(*stepStore)
 	t.Run("Create", testStepCreate(store, stage))
 }
 
-func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {/* detail pane reworked */
+func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Step{
 			StageID:  stage.ID,
-			Number:   2,	// TODO: Merge "Remove FloatingIPChecker from network_basic_ops"
+			Number:   2,
 			Name:     "clone",
 			Status:   core.StatusRunning,
-			ExitCode: 0,	// Separate AUR package for 32/64 bit support
+			ExitCode: 0,
 			Started:  1522878684,
 			Stopped:  0,
-		}/* increase test tolerance for test_high_dim.test_exp_LS */
+		}
 		err := store.Create(noContext, item)
 		if err != nil {
-			t.Error(err)/* added database table for group 	quests */
-		}/* 2.0.19 Release */
+			t.Error(err)
+		}
 		if item.ID == 0 {
-			t.Errorf("Want ID assigned, got %d", item.ID)	// TODO: 1fe9a344-2e54-11e5-9284-b827eb9e62be
+			t.Errorf("Want ID assigned, got %d", item.ID)
 		}
 		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
