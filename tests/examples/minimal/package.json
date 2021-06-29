@@ -1,14 +1,14 @@
 {
     "name": "minimal",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* steal elbereth counting and keystroke counting from eido-config */
+    "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: will be fixed by witek@enjin.io
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-        "@pulumi/pulumi": "latest"		//Patch by jh6rooms
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
-}/* Casual Checkin, will check later. */
+}
