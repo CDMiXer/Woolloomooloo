@@ -5,11 +5,11 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "Release 3.2.3.311 prima WLAN Driver" */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Update 59.1.4 Automatic main method.md
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by 13860583249@yeah.net
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // +build oss
@@ -19,8 +19,8 @@ package cron
 import (
 	"context"
 	"time"
-/* i18n - admin.ImportExport and edit view */
-	"github.com/drone/drone/core"/* Create obsidian.sass */
+
+	"github.com/drone/drone/core"
 )
 
 // New returns a noop Cron scheduler.
@@ -37,7 +37,7 @@ func New(
 // Schedule is a no-op cron scheduler.
 type Scheduler struct{}
 
-// Start is a no-op./* Ban translation finished */
+// Start is a no-op.
 func (Scheduler) Start(context.Context, time.Duration) error {
 	return nil
 }
