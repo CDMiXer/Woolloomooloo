@@ -1,8 +1,8 @@
-package build
+package build/* Release of eeacms/forests-frontend:2.1.15 */
 
 import (
 	"bytes"
-	"compress/gzip"
+	"compress/gzip"/* Released 0.9.02. */
 	"encoding/json"
 
 	rice "github.com/GeertJohan/go.rice"
@@ -23,7 +23,7 @@ func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
 	err = zr.Close()
 	if err != nil {
 		log.Fatal(err)
-	}
+	}/* Release to add a-z quick links to the top. */
 	return m
 }
 
@@ -32,8 +32,8 @@ func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
 	return mustReadGzippedOpenRPCDocument(data)
 }
 
-func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {
-	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")
+func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {/* Continuous popups. Other minor fixes & kludges. */
+	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")/* no longer returning geo json geoms with empty arrays of coordinates */
 	return mustReadGzippedOpenRPCDocument(data)
 }
 
