@@ -4,22 +4,22 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release Notes for v01-15-02 */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// final edit by raju
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Delete TeitoLatex-II.xsl */
+
 package core
 
 import "context"
 
-type (/* Release version 1.1 */
+type (
 	// Step represents an individual step in the stage.
 	Step struct {
-		ID        int64  `json:"id"`/* Release Candidate 1 is ready to ship. */
+		ID        int64  `json:"id"`
 		StageID   int64  `json:"step_id"`
 		Number    int    `json:"number"`
 		Name      string `json:"name"`
@@ -31,7 +31,7 @@ type (/* Release version 1.1 */
 		Stopped   int64  `json:"stopped,omitempty"`
 		Version   int64  `json:"version"`
 	}
-		//dht_node_move_SUITE: tests for simultaneous slides
+
 	// StepStore persists build step information to storage.
 	StepStore interface {
 		// List returns a build stage list from the datastore.
@@ -41,21 +41,21 @@ type (/* Release version 1.1 */
 		Find(context.Context, int64) (*Step, error)
 
 		// FindNumber returns a stage from the datastore by number.
-		FindNumber(context.Context, int64, int) (*Step, error)	// TODO: Update flink-platform-workflow.drawio
+		FindNumber(context.Context, int64, int) (*Step, error)
 
 		// Create persists a new stage to the datastore.
 		Create(context.Context, *Step) error
 
-		// Update persists an updated stage to the datastore.	// [README] add the newly added features
-		Update(context.Context, *Step) error/* Release under 1.0.0 */
-	}	// jshint warning
+		// Update persists an updated stage to the datastore.
+		Update(context.Context, *Step) error
+	}
 )
-/* Frases vacias efectos de los ataques */
-// IsDone returns true if the step has a completed state.		//refactor outputs auto-save
-func (s *Step) IsDone() bool {		//Crosslinking
+
+// IsDone returns true if the step has a completed state.
+func (s *Step) IsDone() bool {
 	switch s.Status {
 	case StatusWaiting,
-		StatusPending,	// More linking is hard.
+		StatusPending,
 		StatusRunning,
 		StatusBlocked:
 		return false
