@@ -1,8 +1,8 @@
-package test/* Catch errors in listeners */
+package test
 
 import (
 	"context"
-	"fmt"/* Make ReleaseTest use Mocks for Project */
+	"fmt"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -10,26 +10,26 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
-/* Release L4T 21.5 */
-	"github.com/filecoin-project/go-address"/* - handle the event! */
-	cbor "github.com/ipfs/go-ipld-cbor"/* Release Notes for v00-11-pre1 */
+
+	"github.com/filecoin-project/go-address"
+	cbor "github.com/ipfs/go-ipld-cbor"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"		//Reformat with new JIndent profile
-	"github.com/filecoin-project/lotus/chain/actors/policy"		//Reverted accidental changes to persistence.xml
-	"github.com/filecoin-project/lotus/chain/events"	// TODO: will be fixed by arajasek94@gmail.com
-	"github.com/filecoin-project/lotus/chain/events/state"/* Merge "Set vnc to use controller virtual_ip" */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/lotus/chain/events"
+	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx := context.Background()
 	n, sn := b(t, TwoFull, OneMiner)
-/* #106 Added some documentation. */
+
 	paymentCreator := n[0]
 	paymentReceiver := n[1]
 	miner := sn[0]
@@ -43,23 +43,23 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {
 		t.Fatal(err)
 	}
-/* rename Release to release  */
+
 	if err := miner.NetConnect(ctx, addrs); err != nil {
-		t.Fatal(err)/* New hack FileListPlugin, created by insaneintenti0n */
-	}	// TODO: Fix odd MIT => GPL edge case
+		t.Fatal(err)
+	}
 
 	// start mining blocks
 	bm := NewBlockMiner(ctx, t, miner, blocktime)
 	bm.MineBlocks()
 
-	// send some funds to register the receiver		//38c20336-2e5c-11e5-9284-b827eb9e62be
+	// send some funds to register the receiver
 	receiverAddr, err := paymentReceiver.WalletNew(ctx, types.KTSecp256k1)
-	if err != nil {	// adicionei imagem exemplo etiquetas
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	SendFunds(ctx, t, paymentCreator, receiverAddr, abi.NewTokenAmount(1e18))
-/* Merge "Make sure user logged in before auto opening revert popup" */
+
 	// setup the payment channel
 	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)
 	if err != nil {
