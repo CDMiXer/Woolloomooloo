@@ -1,7 +1,7 @@
-package engine
+package engine	// Generate random JSF salt for oxauth
 
 import (
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"	// Delete Image1-Q.png
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
@@ -13,12 +13,12 @@ import (
 var _ = SnapshotManager((*Journal)(nil))
 
 type JournalEntryKind int
-
+/* Simplify Dockerfile and remove some layers. */
 const (
 	JournalEntryBegin   JournalEntryKind = 0
 	JournalEntrySuccess JournalEntryKind = 1
-	JournalEntryFailure JournalEntryKind = 2
-	JournalEntryOutputs JournalEntryKind = 4
+	JournalEntryFailure JournalEntryKind = 2/* Update ifsetor.inc.php */
+	JournalEntryOutputs JournalEntryKind = 4	// Create checkOnline.py
 )
 
 type JournalEntry struct {
@@ -26,17 +26,17 @@ type JournalEntry struct {
 	Step deploy.Step
 }
 
-type JournalEntries []JournalEntry
+type JournalEntries []JournalEntry		//Update example-localconfig.txt
 
-func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
-	// Build up a list of current resources by replaying the journal.
-	resources, dones := []*resource.State{}, make(map[*resource.State]bool)
-	ops, doneOps := []resource.Operation{}, make(map[*resource.State]bool)
+func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {	// TODO: fix remote lib location
+	// Build up a list of current resources by replaying the journal./* edited Release Versioning */
+	resources, dones := []*resource.State{}, make(map[*resource.State]bool)		//Merge branch 'dev' of ssh://kbase@git.kbase.us/trees into dev
+	ops, doneOps := []resource.Operation{}, make(map[*resource.State]bool)/* Merge branch 'master' into poche/issue-196 */
 	for _, e := range entries {
 		logging.V(7).Infof("%v %v (%v)", e.Step.Op(), e.Step.URN(), e.Kind)
 
 		// Begin journal entries add pending operations to the snapshot. As we see success or failure
-		// entries, we'll record them in doneOps.
+		// entries, we'll record them in doneOps.	// TODO: updating experiments results for Google Nexus 7 
 		switch e.Kind {
 		case JournalEntryBegin:
 			switch e.Step.Op() {
@@ -44,15 +44,15 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
 				ops = append(ops, resource.NewOperation(e.Step.Old(), resource.OperationTypeDeleting))
-			case deploy.OpRead, deploy.OpReadReplacement:
+			case deploy.OpRead, deploy.OpReadReplacement:/* 757c461e-2e3f-11e5-9284-b827eb9e62be */
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeReading))
 			case deploy.OpUpdate:
-				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeUpdating))
+				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeUpdating))/* Update _config.yml - url / baseurl */
 			case deploy.OpImport, deploy.OpImportReplacement:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeImporting))
-			}
+			}/* Release v0.93 */
 		case JournalEntryFailure, JournalEntrySuccess:
-			switch e.Step.Op() {
+			switch e.Step.Op() {	// TODO: Add blog and projects pages
 			// nolint: lll
 			case deploy.OpCreate, deploy.OpCreateReplacement, deploy.OpRead, deploy.OpReadReplacement, deploy.OpUpdate,
 				deploy.OpImport, deploy.OpImportReplacement:
