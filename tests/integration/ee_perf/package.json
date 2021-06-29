@@ -1,7 +1,7 @@
-{
-    "name": "javascript",
+{	// TODO: will be fixed by mikeal.rogers@gmail.com
+    "name": "javascript",/* stripping names and speed up */
     "main": "index.js",
     "dependencies": {
-        "@pulumi/pulumi": "latest"/* Delete affix.js */
+        "@pulumi/pulumi": "latest"
     }
 }
