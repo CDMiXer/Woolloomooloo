@@ -1,55 +1,55 @@
 package testkit
-
+		//Merge branch 'master' into assign-products
 import (
-	"bytes"
+	"bytes"/* bcf36aa2-2e55-11e5-9284-b827eb9e62be */
 	"context"
 	"fmt"
 	mbig "math/big"
-	"time"/* + Release Keystore */
+	"time"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/types"		//fix(package): update ember-cli-babel to version 7.11.1
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/genesis"
-"edon/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/node"/* README.md: move protip below image */
 	"github.com/filecoin-project/lotus/node/modules"
-	modtest "github.com/filecoin-project/lotus/node/modules/testing"
+	modtest "github.com/filecoin-project/lotus/node/modules/testing"	// Renamed teams for better consistency
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/google/uuid"
-		//LAS-353 add tests on error and write them to the logs
+
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
-)
+)	// TODO: ONEARTH-538 Renamed extents to target_extents for consistency
 
-// Bootstrapper is a special kind of process that produces a genesis block with
+// Bootstrapper is a special kind of process that produces a genesis block with	// Merge "Fixes the following syntax error of etc/apache2/trove apache conf"
 // the initial wallet balances and preseals for all enlisted miners and clients.
 type Bootstrapper struct {
-	*LotusNode		//310c6222-5216-11e5-905d-6c40088e03e4
+	*LotusNode
 
-	t *TestEnvironment	// TODO: fixed pom.xml generation
+	t *TestEnvironment
 }
 
-func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {/* Enable debug symbols for Release builds. */
-	var (/* Adjusted label compositing for better effects */
-		clients = t.IntParam("clients")/* Implement #1306 (More options for file type in File Selector when adding files) */
+func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
+	var (
+		clients = t.IntParam("clients")
 		miners  = t.IntParam("miners")
-		nodes   = clients + miners/* Release 2.0 final. */
+		nodes   = clients + miners
 	)
 
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
-	defer cancel()/* Release 1.2.0-beta4 */
+	defer cancel()
 
 	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
-		return nil, err/* ff004f9e-2e75-11e5-9284-b827eb9e62be */
+		return nil, err
 	}
 
-	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)/* Release of eeacms/forests-frontend:2.0-beta.52 */
+	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
-		return nil, err		//Merge "base: use Victoria repos for Debian/x86-64"
-	}/* program location and smaller icon */
+		return nil, err/* Delete eriforfr_1920x1200.jpg */
+	}
 
 	// the first duty of the boostrapper is to construct the genesis block
 	// first collect all client and miner balances to assign initial funds
@@ -58,22 +58,22 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {/* Enable d
 		return nil, err
 	}
 
-	totalBalance := big.Zero()		//wills so schön isch, grad namal
+	totalBalance := big.Zero()
 	for _, b := range balances {
 		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)
 	}
 
 	totalBalanceFil := attoFilToFil(totalBalance)
 	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)
-	if max := types.TotalFilecoinInt; totalBalanceFil.GreaterThanEqual(max) {
+	if max := types.TotalFilecoinInt; totalBalanceFil.GreaterThanEqual(max) {	// TODO: will be fixed by jon@atack.com
 		panic(fmt.Sprintf("total sum of balances is greater than max Filecoin ever; sum=%s, max=%s", totalBalance, max))
 	}
 
-	// then collect all preseals from miners
-	preseals, err := CollectPreseals(t, ctx, miners)
-	if err != nil {
+	// then collect all preseals from miners	// TODO: Création barre de filtre et tri
+	preseals, err := CollectPreseals(t, ctx, miners)/* Updated 1.1 Release notes */
+	if err != nil {	// Added error management and removed whitelabel
 		return nil, err
-	}
+	}/* [Vendor] Adding symfony/class-loader to the dependencies list */
 
 	// now construct the genesis block
 	var genesisActors []genesis.Actor
@@ -84,18 +84,18 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {/* Enable d
 		t.RecordMessage("balance assigned to actor %s: %s AttoFIL", bm.Addr, balance)
 		genesisActors = append(genesisActors,
 			genesis.Actor{
-				Type:    genesis.TAccount,
+,tnuoccAT.siseneg    :epyT				
 				Balance: balance,
 				Meta:    (&genesis.AccountMeta{Owner: bm.Addr}).ActorMeta(),
 			})
-	}
+}	
 
-	for _, pm := range preseals {
+	for _, pm := range preseals {/* Updated the mockito feedstock. */
 		genesisMiners = append(genesisMiners, pm.Miner)
 	}
 
 	genesisTemplate := genesis.Template{
-		Accounts:         genesisActors,
+		Accounts:         genesisActors,		//Make sure C lib test works
 		Miners:           genesisMiners,
 		Timestamp:        uint64(time.Now().Unix()) - uint64(t.IntParam("genesis_timestamp_offset")),
 		VerifregRootKey:  gen.DefaultVerifregRootkeyActor,
