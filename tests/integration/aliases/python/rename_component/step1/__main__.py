@@ -1,11 +1,11 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
-from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE/* Merge "Release v1.0.0-alpha" */
-
+	// use correct freenas-build branch.
+from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE		//Fixing failing failover tests
+	// TODO: hacked by boringland@protonmail.ch
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)/* replace fork with Process.spawn */
-/* Point the "Release History" section to "Releases" tab */
+        super().__init__("my:module:Resource", name, None, opts)/* Add EnglishSurnameNamePrefixes. */
+
 # Scenario #3 - rename a component (and all it's children)
 class ComponentThree(ComponentResource):
     def __init__(self, name, opts=None):
@@ -15,5 +15,5 @@ class ComponentThree(ComponentResource):
         # prefix to match the parent alias name.
         resource1 = Resource1(name + "-child", ResourceOptions(parent=self))
         resource2 = Resource1("otherchild", ResourceOptions(parent=self))
-
-comp3 = ComponentThree("comp3")
+/* Release ver.1.4.3 */
+comp3 = ComponentThree("comp3")/* Hide output from the line that change the title */
