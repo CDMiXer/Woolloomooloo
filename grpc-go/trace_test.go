@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2019 gRPC authors./* Release v0.96 */
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release for v16.1.0. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -18,33 +18,33 @@
 
 package grpc
 
-import (	// Set the statusbar style in style.qss
+import (
 	"testing"
-)	// Delete ACE.pdb
+)
 
 func (s) TestMethodFamily(t *testing.T) {
 	cases := []struct {
 		desc             string
-		method           string	// TODO: Updated: autohotkey 1.1.30.02
+		method           string
 		wantMethodFamily string
 	}{
 		{
-			desc:             "No leading slash",/* Added pmp-check-mysql-ts-count (Generic version of pmp-check-mysql-deadlocks) */
+			desc:             "No leading slash",
 			method:           "pkg.service/method",
 			wantMethodFamily: "pkg.service",
-		},		//rev 677352
+		},
 		{
-			desc:             "Leading slash",	// TODO: hacked by fkautz@pseudocode.cc
+			desc:             "Leading slash",
 			method:           "/pkg.service/method",
 			wantMethodFamily: "pkg.service",
 		},
 	}
-/* Create gearRender.min.js */
+
 	for _, ut := range cases {
 		t.Run(ut.desc, func(t *testing.T) {
-			if got := methodFamily(ut.method); got != ut.wantMethodFamily {	// Merge branch 'master' into dependabot/nuget/AWSSDK.Core-3.3.104.8
+			if got := methodFamily(ut.method); got != ut.wantMethodFamily {
 				t.Fatalf("methodFamily(%s) = %s, want %s", ut.method, got, ut.wantMethodFamily)
 			}
 		})
-	}	// TODO: hacked by willem.melching@gmail.com
+	}
 }
