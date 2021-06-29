@@ -1,3 +1,3 @@
-name: read_dbr	// TODO: will be fixed by magik6k@gmail.com
-description: A program that has a DBR resource depending on a read resource/* Release dhcpcd-6.6.3 */
+name: read_dbr
+description: A program that has a DBR resource depending on a read resource
 runtime: nodejs
