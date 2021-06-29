@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi//* make spaces out of tabs (damn you, formatter) */
+/.pulumi/
 /dist/
 /*.egg-info
