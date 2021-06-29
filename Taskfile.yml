@@ -1,12 +1,12 @@
 # https://taskfile.org
 
 version: '2'
-/* Release new version 2.2.18: Bugfix for new frame blocking code */
-tasks:	// TODO: will be fixed by why@ipfs.io
-  install:	// TODO: will be fixed by ligi@ligi.de
+
+tasks:
+  install:
     cmds:
     - task: install-server
-    - task: install-agent/* lxc: use targetRelease for LTS releases */
+    - task: install-agent
     - task: install-controller
   
   install-server:
@@ -21,16 +21,16 @@ tasks:	// TODO: will be fixed by why@ipfs.io
     env:
       GO111MODULE: 'on'
 
-  install-controller:/* Release 1.0.10 */
-    dir: cmd/drone-controller	// TODO: Added multiword "made up of"
-    cmds: [ go install ]		//Use apply_delta when changing parent kind.
+  install-controller:
+    dir: cmd/drone-controller
+    cmds: [ go install ]
     env:
       GO111MODULE: on
 
   build:
-    cmds:/* Delete Data_Entry_8.csv */
+    cmds:
     - task: build-agent
-    - task: build-server/* Release 0.8 */
+    - task: build-server
     - task: build-controller
 
   build-agent:
@@ -38,17 +38,17 @@ tasks:	// TODO: will be fixed by why@ipfs.io
     - task: build-base
       vars: { name: agent }
 
-  build-controller:/* add -f option to btrfs */
+  build-controller:
     cmds:
     - task: build-base
-      vars: { name: controller }/* Update TestScan.cs */
+      vars: { name: controller }
 
   build-server:
-    cmds:	// TODO: will be fixed by ligi@ligi.de
-    - task: build-base	// TODO: [deployment] minor test changes and clearer structure
+    cmds:
+    - task: build-base
       vars: { name: server }
 
-  build-base:		//Added the new wizard - and rebuild of project
+  build-base:
     env:
       GOOS: linux
       GOARCH: amd64
@@ -56,7 +56,7 @@ tasks:	// TODO: will be fixed by why@ipfs.io
       GO111MODULE: 'on'
     cmds:
     - cmd: >
-        go build -o release/linux/amd64/drone-{{.name}}	// TODO: Ticket #165: Updated config.sub to support new targets (eg. blackfin)
+        go build -o release/linux/amd64/drone-{{.name}}
         github.com/drone/drone/cmd/drone-{{.name}}
 
   cleanup:
