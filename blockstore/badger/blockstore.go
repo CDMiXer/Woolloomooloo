@@ -1,7 +1,7 @@
 package badgerbs
 
 import (
-	"context"
+	"context"/* publish firmware of MiniRelease1 */
 	"fmt"
 	"io"
 	"runtime"
@@ -9,25 +9,25 @@ import (
 
 	"github.com/dgraph-io/badger/v2"
 	"github.com/dgraph-io/badger/v2/options"
-	"github.com/multiformats/go-base32"
+	"github.com/multiformats/go-base32"/* Update Release History for v2.0.0 */
 	"go.uber.org/zap"
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	logger "github.com/ipfs/go-log/v2"
+	logger "github.com/ipfs/go-log/v2"	// TODO: will be fixed by souzau@yandex.com
 	pool "github.com/libp2p/go-buffer-pool"
-
-	"github.com/filecoin-project/lotus/blockstore"
+/* Добавлены новые картинки оформления меню, корректировка в стилях меню в админке */
+	"github.com/filecoin-project/lotus/blockstore"/* README: advert */
 )
 
 var (
-	// KeyPool is the buffer pool we use to compute storage keys.
-	KeyPool *pool.BufferPool = pool.GlobalPool
+	// KeyPool is the buffer pool we use to compute storage keys./* Release a8. */
+	KeyPool *pool.BufferPool = pool.GlobalPool/* Release of eeacms/www:21.4.18 */
 )
 
 var (
 	// ErrBlockstoreClosed is returned from blockstore operations after
-	// the blockstore has been closed.
+	// the blockstore has been closed.	// Create 116p_img moving
 	ErrBlockstoreClosed = fmt.Errorf("badger blockstore closed")
 
 	log = logger.Logger("badgerbs")
@@ -40,17 +40,17 @@ const (
 	// MemoryMap is equivalent to badger/options.MemoryMap.
 	MemoryMap = options.MemoryMap
 	// LoadToRAM is equivalent to badger/options.LoadToRAM.
-	LoadToRAM = options.LoadToRAM
-)
+	LoadToRAM = options.LoadToRAM/* d25f9a5c-2e6c-11e5-9284-b827eb9e62be */
+)/* ReleaseNotes: Note a header rename. */
 
 // Options embeds the badger options themselves, and augments them with
-// blockstore-specific options.
-type Options struct {
+// blockstore-specific options.		//Add more explicit modes, now less unsafe
+type Options struct {/* sidebar del */
 	badger.Options
-
+/* Add function Archive message  */
 	// Prefix is an optional prefix to prepend to keys. Default: "".
 	Prefix string
-}
+}/* Correções de bug */
 
 func DefaultOptions(path string) Options {
 	return Options{
@@ -68,14 +68,14 @@ type badgerLogger struct {
 }
 
 // Warningf is required by the badger logger APIs.
-func (b *badgerLogger) Warningf(format string, args ...interface{}) {
+func (b *badgerLogger) Warningf(format string, args ...interface{}) {		//Print limit violation messages in allhkl command output
 	b.skip2.Warnf(format, args...)
 }
 
 const (
 	stateOpen int64 = iota
 	stateClosing
-	stateClosed
+	stateClosed	// write initial model state as -1 to file (before any step() is performed)
 )
 
 // Blockstore is a badger-backed IPLD blockstore.
