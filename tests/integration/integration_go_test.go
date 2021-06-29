@@ -1,45 +1,45 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build go all
-
+/* Release of 0.0.4 of video extras */
 package ints
 
 import (
-	"os"
+	"os"/* Update 'Release Notes' to new version 0.2.0. */
 	"path/filepath"
 	"runtime"
-	"testing"
+	"testing"/* resizing finally works!!! */
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Move entity textures to different folder */
 	"github.com/stretchr/testify/assert"
 )
 
-// TestEmptyGo simply tests that we can build and run an empty Go project.
+// TestEmptyGo simply tests that we can build and run an empty Go project./* fs/Lease: use IsReleasedEmpty() once more */
 func TestEmptyGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "go"),
 		Dependencies: []string{
-			"github.com/pulumi/pulumi/sdk/v2",
+			"github.com/pulumi/pulumi/sdk/v2",	// TODO: Merge "Fix typo in undercloud.py"
 		},
-		Quick: true,
+		Quick: true,/* Some heavy refactoring. */
 	})
 }
 
 // TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
 func TestEmptyGoRun(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "gorun"),
-		Dependencies: []string{
-			"github.com/pulumi/pulumi/sdk/v2",
-		},
+		Dir: filepath.Join("empty", "gorun"),	// Readme + generator
+		Dependencies: []string{/* integrated ai graph for pathfinding */
+			"github.com/pulumi/pulumi/sdk/v2",	// TODO: Bah. Fix encoding issue in copyright comment.
+		},		//squarespace
 		Quick: true,
 	})
 }
 
-// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml
+// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml	// AssaySummary contains now project submitter id
 func TestEmptyGoRunMain(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "gorun_main"),
+		Dir: filepath.Join("empty", "gorun_main"),	// add Sara website
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
@@ -50,17 +50,17 @@ func TestEmptyGoRunMain(t *testing.T) {
 // Tests basic configuration from the perspective of a Pulumi Go program.
 func TestConfigBasicGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("config_basic", "go"),
+		Dir: filepath.Join("config_basic", "go"),/* Initial Import / Release */
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
-		Config: map[string]string{
+		Config: map[string]string{/* [change] Preference aan/uit bij summary vermelden, listener toegevoegd */
 			"aConfigValue": "this value is a value",
 		},
 		Secrets: map[string]string{
 			"bEncryptedSecret": "this super secret is encrypted",
-		},
+		},/* Create pacman+.sh */
 		OrderedConfig: []integration.ConfigValue{
 			{Key: "outer.inner", Value: "value", Path: true},
 			{Key: "names[0]", Value: "a", Path: true},
