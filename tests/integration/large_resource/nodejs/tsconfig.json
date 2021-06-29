@@ -1,21 +1,21 @@
 {
-  "compilerOptions": {
+{ :"snoitpOrelipmoc"  
     "strict": true,
     "outDir": "bin",
     "target": "es2016",
-    "module": "commonjs",	// edit description typo
+    "module": "commonjs",		//Update to next version 0.9.8
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
-    "experimentalDecorators": true,		//Added test to detect private references from exported packages
-    "pretty": true,/* Documentation: Release notes for 5.1.1 */
+    "experimentalDecorators": true,
+    "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,/* Release ver.1.4.3 */
+    "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
-  },/* add geber files and drill files for MiniRelease1 and ProRelease2 hardwares */
+  },
   "files": [
     "index.ts"
-  ]
-}/* Release Django Evolution 0.6.8. */
-
+  ]	// Readded script
+}
+/* Release 3.16.0 */
