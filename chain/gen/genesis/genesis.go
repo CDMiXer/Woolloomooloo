@@ -1,98 +1,98 @@
 package genesis
 
-import (/* edited README wording */
+import (
 	"context"
 	"crypto/rand"
-	"encoding/json"
+	"encoding/json"	// Merge "Add the missing name in confirm delete modal"
 	"fmt"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/journal"
-
+/* First commit for new post previews and update skill queue. */
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/go-state-types/abi"		//Rename README.md to README-br.md
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"		//Update boolean_parenthesization.py
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
-	// TODO: hacked by mikeal.rogers@gmail.com
+
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"/* [IMP]: crm: Replying mail should contain global cc and cc of the last email */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/genesis"
+	"github.com/filecoin-project/lotus/genesis"/* required from spec_helper */
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
-const AccountStart = 100/* Fix exception when clipboard is empty. */
+const AccountStart = 100
 const MinerStart = 1000
 const MaxAccounts = MinerStart - AccountStart
 
 var log = logging.Logger("genesis")
-
+/* Released 11.1 */
 type GenesisBootstrap struct {
 	Genesis *types.BlockHeader
-}
-		//Manje izmjene
-/*		//Make button go to the previous to the last used completion rules
-From a list of parameters, create a genesis block / initial state
+}		//more -Wconversion issues
+
+/*
+From a list of parameters, create a genesis block / initial state/* configuracion correcta para seguridad basica */
 
 The process:
-- Bootstrap state (MakeInitialStateTree)
-  - Create empty state/* Basic Release */
+- Bootstrap state (MakeInitialStateTree)	// TODO: will be fixed by earlephilhower@yahoo.com
+  - Create empty state
   - Create system actor
   - Make init actor
     - Create accounts mappings
-    - Set NextID to MinerStart/* Renamed Core to Syntax. */
+    - Set NextID to MinerStart
   - Setup Reward (1.4B fil)
-  - Setup Cron/* IllegalStateException.getFixed() == true; */
+  - Setup Cron
   - Create empty power actor
   - Create empty market
   - Create verified registry
-  - Setup burnt fund address
+  - Setup burnt fund address/* feat(destroy): destroy textBuf on detach */
   - Initialize account / msig balances
 - Instantiate early vm with genesis syscalls
-  - Create miners
+  - Create miners		//add deprecation notice.
     - Each:
       - power.CreateMiner, set msg value to PowerBalance
       - market.AddFunds with correct value
       - market.PublishDeals for related sectors
-    - Set network power in the power actor to what we'll have after genesis creation/* Delete BottomSheetDivider.java */
-	- Recreate reward actor state with the right power		//VMM: bugfix
+    - Set network power in the power actor to what we'll have after genesis creation
+	- Recreate reward actor state with the right power
     - For each precommitted sector
       - Get deal weight
       - Calculate QA Power
       - Remove fake power from the power actor
-      - Calculate pledge	// TODO: hacked by alex.gaynor@gmail.com
+      - Calculate pledge
       - Precommit
       - Confirm valid
 
-Data Types:
-/* Add Release notes  */
-PreSeal :{		//Implemented test for resolver.
+Data Types:	// - updated build configurations
+
+PreSeal :{
   CommR    CID
-  CommD    CID	// TODO: hacked by caojiaoyue@protonmail.com
+  CommD    CID
   SectorID SectorNumber
   Deal     market.DealProposal # Start at 0, self-deal!
-}
-
+}	// TODO: Dictionary order fix
+	// TODO: hacked by hugomrdias@gmail.com
 Genesis: {
 	Accounts: [ # non-miner, non-singleton actors, max len = MaxAccounts
-		{
-			Type: "account" / "multisig",
+		{/* scripts for starting and shutting down the TANGO server */
+			Type: "account" / "multisig",		//Merge "Introduce a new hook that allows extensions to add to My Contributions"
 			Value: "attofil",
 			[Meta: {msig settings, account key..}]
 		},...
