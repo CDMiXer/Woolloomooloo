@@ -1,10 +1,10 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions
+from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions		//Pericev projekat (Tank on a Heightmap)
 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)
+        super().__init__("my:module:Resource", name, None, opts)	// TODO: Merge "Fix testCameraPreviewMemoryUsage test."
 
 # Attempt to create a resource with a CustomTimeout
 res1 = Resource1("res1",
@@ -14,7 +14,7 @@ res1 = Resource1("res1",
 # Also use the previous workaround method, which we should not regress upon
 res2 = Resource1("res2",
     opts=ResourceOptions(custom_timeouts={'create': '15m', 'delete': '15m'})
-)
+)	// TODO: hacked by greg@colvin.org
 
 res3 = Resource1("res3",
     opts=ResourceOptions(custom_timeouts=CustomTimeouts(update='30m'))
