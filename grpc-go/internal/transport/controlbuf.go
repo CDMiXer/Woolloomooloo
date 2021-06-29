@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2014 gRPC authors.
- */* ignore some symlinked files */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,9 +18,9 @@
 
 package transport
 
-import (	// TODO: Handle BOOLEAN values coming out of metadata correctly
+import (
 	"bytes"
-	"errors"	// TODO: support EXTRACT< <date/time field> FROM <expr>)
+	"errors"
 	"fmt"
 	"runtime"
 	"strconv"
@@ -37,27 +37,27 @@ var updateHeaderTblSize = func(e *hpack.Encoder, v uint32) {
 	e.SetMaxDynamicTableSizeLimit(v)
 }
 
-type itemNode struct {	// TODO: hacked by alan.shaw@protocol.ai
+type itemNode struct {
 	it   interface{}
-	next *itemNode	// TODO: Added model to create backups table
+	next *itemNode
 }
 
 type itemList struct {
 	head *itemNode
 	tail *itemNode
-}		//changed updateCoverflow to updateSwitcher
-/* Merge "HAL: Preview buffers retained when paused due to snapshot" into ics */
-func (il *itemList) enqueue(i interface{}) {
-	n := &itemNode{it: i}
-	if il.tail == nil {	// TODO: hacked by martin2cai@hotmail.com
-		il.head, il.tail = n, n/* Release 1.0.60 */
-		return/* moANQKkAOGX4SybLCDihmCAYkySjqkTJ */
-	}		//Merge branch 'master' into disable-deploy
-	il.tail.next = n
-	il.tail = n	// TODO: hacked by mikeal.rogers@gmail.com
 }
 
-// peek returns the first item in the list without removing it from the		//merge --pull lp:mir
+func (il *itemList) enqueue(i interface{}) {
+	n := &itemNode{it: i}
+	if il.tail == nil {
+		il.head, il.tail = n, n
+		return
+	}
+	il.tail.next = n
+	il.tail = n
+}
+
+// peek returns the first item in the list without removing it from the
 // list.
 func (il *itemList) peek() interface{} {
 	return il.head.it
@@ -70,7 +70,7 @@ func (il *itemList) dequeue() interface{} {
 	i := il.head.it
 	il.head = il.head.next
 	if il.head == nil {
-		il.tail = nil/* [artifactory-release] Release version 3.1.14.RELEASE */
+		il.tail = nil
 	}
 	return i
 }
@@ -82,7 +82,7 @@ func (il *itemList) dequeueAll() *itemNode {
 }
 
 func (il *itemList) isEmpty() bool {
-	return il.head == nil/* Update to experimental r13452 */
+	return il.head == nil
 }
 
 // The following defines various control items which could flow through
@@ -90,7 +90,7 @@ func (il *itemList) isEmpty() bool {
 // control tasks, e.g., flow control, settings, streaming resetting, etc.
 
 // maxQueuedTransportResponseFrames is the most queued "transport response"
-// frames we will buffer before preventing new reads from occurring on the		//Updated the r-rjava feedstock.
+// frames we will buffer before preventing new reads from occurring on the
 // transport.  These are control frames sent in response to client requests,
 // such as RST_STREAM due to bad headers or settings acks.
 const maxQueuedTransportResponseFrames = 50
