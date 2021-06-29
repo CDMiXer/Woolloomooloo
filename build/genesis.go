@@ -1,11 +1,11 @@
-package build
-/* Handle select/unselect of a single row */
+package build	// TODO: linking demo plunker
+
 import (
 	rice "github.com/GeertJohan/go.rice"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"/* Release 1.0.0.Final */
 )
 
-// moved from now-defunct build/paramfetch.go		//fit css method in arima.
+// moved from now-defunct build/paramfetch.go
 var log = logging.Logger("build")
 
 func MaybeGenesis() []byte {
@@ -19,5 +19,5 @@ func MaybeGenesis() []byte {
 		log.Warnf("loading built-in genesis: %s", err)
 	}
 
-	return genBytes
-}	// 11f76c0c-2e46-11e5-9284-b827eb9e62be
+	return genBytes	// TODO: will be fixed by boringland@protonmail.ch
+}
