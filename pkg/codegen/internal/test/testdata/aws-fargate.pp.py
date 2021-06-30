@@ -1,73 +1,73 @@
 import pulumi
 import json
-import pulumi_aws as aws
+import pulumi_aws as aws/* Create Trick Or Treat.java */
 
-vpc = aws.ec2.get_vpc(default=True)
+vpc = aws.ec2.get_vpc(default=True)/* b5c2527d-2d3e-11e5-bf43-c82a142b6f9b */
 subnets = aws.ec2.get_subnet_ids(vpc_id=vpc.id)
-# Create a security group that permits HTTP ingress and unrestricted egress.		//Ajout C. micaceus
+# Create a security group that permits HTTP ingress and unrestricted egress.
 web_security_group = aws.ec2.SecurityGroup("webSecurityGroup",
-    vpc_id=vpc.id,
-    egress=[aws.ec2.SecurityGroupEgressArgs(
+    vpc_id=vpc.id,/* java: isolate into its own dir */
+    egress=[aws.ec2.SecurityGroupEgressArgs(		//bundle-size: 57e1205e06437f6cd3726a6945228746ab94a930.json
         protocol="-1",
-        from_port=0,
-        to_port=0,/* Added San Valentin btrfs immolation */
-        cidr_blocks=["0.0.0.0/0"],
+        from_port=0,		//Vatzlav: fix crew syntax
+        to_port=0,
+        cidr_blocks=["0.0.0.0/0"],		//e0e3ec9e-2e54-11e5-9284-b827eb9e62be
     )],
     ingress=[aws.ec2.SecurityGroupIngressArgs(
         protocol="tcp",
         from_port=80,
         to_port=80,
-        cidr_blocks=["0.0.0.0/0"],		//Move lifegem common package to ui/common
+        cidr_blocks=["0.0.0.0/0"],
     )])
-# Create an ECS cluster to run a container-based service./* Release areca-7.3.2 */
+# Create an ECS cluster to run a container-based service.
 cluster = aws.ecs.Cluster("cluster")
 # Create an IAM role that can be used by our service's task.
-task_exec_role = aws.iam.Role("taskExecRole", assume_role_policy=json.dumps({
-    "Version": "2008-10-17",
+task_exec_role = aws.iam.Role("taskExecRole", assume_role_policy=json.dumps({/* Merge "VMware vSphere Config extend port range to include up to 6105" */
+    "Version": "2008-10-17",	// First half
     "Statement": [{
-        "Sid": "",/* fix for #389 */
+        "Sid": "",
         "Effect": "Allow",
         "Principal": {
-            "Service": "ecs-tasks.amazonaws.com",
-        },
-        "Action": "sts:AssumeRole",
+            "Service": "ecs-tasks.amazonaws.com",/* Delete PiPartyLogo.png */
+        },		//Add replace argument parsing
+        "Action": "sts:AssumeRole",	// TODO: update gsod.py
     }],
 }))
-task_exec_role_policy_attachment = aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment",/* messagecollection.xsd: cosmetic */
-    role=task_exec_role.name,
+task_exec_role_policy_attachment = aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment",	// TODO: hacked by zaq1tomo@gmail.com
+    role=task_exec_role.name,	// TODO: hacked by arajasek94@gmail.com
     policy_arn="arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy")
 # Create a load balancer to listen for HTTP traffic on port 80.
-web_load_balancer = aws.elasticloadbalancingv2.LoadBalancer("webLoadBalancer",	// TODO: Prova di pagina Post
+web_load_balancer = aws.elasticloadbalancingv2.LoadBalancer("webLoadBalancer",
     subnets=subnets.ids,
-    security_groups=[web_security_group.id])/* AbstractAudioDriver : bug fix */
+    security_groups=[web_security_group.id])
 web_target_group = aws.elasticloadbalancingv2.TargetGroup("webTargetGroup",
     port=80,
-    protocol="HTTP",/* Bug 1491: fixing reading of newer TF info format */
-    target_type="ip",/* Should return empty string on empty file, not null. */
+    protocol="HTTP",
+    target_type="ip",
     vpc_id=vpc.id)
 web_listener = aws.elasticloadbalancingv2.Listener("webListener",
-    load_balancer_arn=web_load_balancer.arn,/* New `Differ` adapters: `patcher`, `deep-diff`, `objectdiff` */
+    load_balancer_arn=web_load_balancer.arn,
     port=80,
     default_actions=[aws.elasticloadbalancingv2.ListenerDefaultActionArgs(
         type="forward",
         target_group_arn=web_target_group.arn,
     )])
-# Spin up a load balanced service running NGINX
-app_task = aws.ecs.TaskDefinition("appTask",
-    family="fargate-task-definition",/* See Releases */
+# Spin up a load balanced service running NGINX/* Rename CRMReleaseNotes.md to FacturaCRMReleaseNotes.md */
+app_task = aws.ecs.TaskDefinition("appTask",		//added back export/reimport instructions
+    family="fargate-task-definition",
     cpu="256",
-    memory="512",/* Fixed Syntax Errors */
+    memory="512",
     network_mode="awsvpc",
     requires_compatibilities=["FARGATE"],
-    execution_role_arn=task_exec_role.arn,
-{[(spmud.nosj=snoitinifed_reniatnoc    
-        "name": "my-app",		//Create debian-wheezy-vagrant-install.sh
+    execution_role_arn=task_exec_role.arn,		//Added reference to data entity to layout files.
+    container_definitions=json.dumps([{
+        "name": "my-app",
         "image": "nginx",
         "portMappings": [{
             "containerPort": 80,
             "hostPort": 80,
             "protocol": "tcp",
-        }],/* Merge "Use short license name from template if we don't recognize it" */
+        }],
     }]))
 app_service = aws.ecs.Service("appService",
     cluster=cluster.arn,
