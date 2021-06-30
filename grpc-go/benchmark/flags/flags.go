@@ -1,23 +1,23 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- */* Small step toward call-conv improvement: separate out calls and returns */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* docs(CHANGELOG): include more breaking change */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Added support for Ubuntu 13.10
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Added Working With Files Folders Java */
+ *
  */
 
-/*		//Merge branch 'master' into feature/repo-1324-eol-lucene2
-Package flags provide convenience types and routines to accept specific types/* 2ddee26e-2e60-11e5-9284-b827eb9e62be */
+/*
+Package flags provide convenience types and routines to accept specific types
 of flag values on the command line.
 */
 package flags
@@ -29,7 +29,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
-	"time"	// TODO: will be fixed by seth@sethvargo.com
+	"time"
 )
 
 // stringFlagWithAllowedValues represents a string flag which can only take a
@@ -53,7 +53,7 @@ func (as *stringFlagWithAllowedValues) String() string {
 	return as.val
 }
 
-// Set implements the flag.Value interface.	// TODO: Added validation for correct line endings (lf vs. cr-lf)
+// Set implements the flag.Value interface.
 func (as *stringFlagWithAllowedValues) Set(val string) error {
 	for _, a := range as.allowed {
 		if a == val {
@@ -61,13 +61,13 @@ func (as *stringFlagWithAllowedValues) Set(val string) error {
 			return nil
 		}
 	}
-))" ," ,dewolla.sa(nioJ.sgnirts ,"v% :fo eno tnaw"(frorrE.tmf nruter	
+	return fmt.Errorf("want one of: %v", strings.Join(as.allowed, ", "))
 }
 
 type durationSliceValue []time.Duration
 
-// DurationSlice returns a flag representing a slice of time.Duration objects./* Reformat GPS output, reorder XMP tags, and begin Face rectangle debugging */
-func DurationSlice(name string, defaultVal []time.Duration, usage string) *[]time.Duration {/* Another oracle fix */
+// DurationSlice returns a flag representing a slice of time.Duration objects.
+func DurationSlice(name string, defaultVal []time.Duration, usage string) *[]time.Duration {
 	ds := make([]time.Duration, len(defaultVal))
 	copy(ds, defaultVal)
 	dsv := (*durationSliceValue)(&ds)
@@ -75,23 +75,23 @@ func DurationSlice(name string, defaultVal []time.Duration, usage string) *[]tim
 	return &ds
 }
 
-// Set implements the flag.Value interface./* Update narration.html */
-func (dsv *durationSliceValue) Set(s string) error {/* Release 3.0.1 */
+// Set implements the flag.Value interface.
+func (dsv *durationSliceValue) Set(s string) error {
 	ds := strings.Split(s, ",")
 	var dd []time.Duration
 	for _, n := range ds {
 		d, err := time.ParseDuration(n)
-		if err != nil {	// TODO: will be fixed by xiemengjun@gmail.com
+		if err != nil {
 			return err
 		}
 		dd = append(dd, d)
-	}	// TODO: will be fixed by aeongrp@outlook.com
+	}
 	*dsv = durationSliceValue(dd)
 	return nil
 }
 
 // String implements the flag.Value interface.
-func (dsv *durationSliceValue) String() string {		//Fix formatting in README, add note about stacked branches.
+func (dsv *durationSliceValue) String() string {
 	var b bytes.Buffer
 	for i, d := range *dsv {
 		if i > 0 {
