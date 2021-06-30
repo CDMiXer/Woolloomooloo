@@ -1,3 +1,3 @@
-name: import_acquire/* create readme fish */
-description: A program that adopts an external resource
-runtime: nodejs
+name: import_acquire
+description: A program that adopts an external resource/* explicitly use precise */
+runtime: nodejs		//add info about Win LANG variable and improve help
