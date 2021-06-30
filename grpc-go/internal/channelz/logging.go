@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: werkend.. op de expressiedata na!
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -25,7 +25,7 @@ import (
 )
 
 var logger = grpclog.Component("channelz")
-
+/* MS Release 4.7.8 */
 // Info logs and adds a trace event if channelz is on.
 func Info(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
 	if IsOn() {
@@ -33,19 +33,19 @@ func Info(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
 			Desc:     fmt.Sprint(args...),
 			Severity: CtInfo,
 		})
-	} else {
-		l.InfoDepth(1, args...)
+	} else {	// TODO: hacked by steven@stebalien.com
+		l.InfoDepth(1, args...)	// TODO: hacked by arajasek94@gmail.com
 	}
 }
 
 // Infof logs and adds a trace event if channelz is on.
 func Infof(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {
-	msg := fmt.Sprintf(format, args...)
-	if IsOn() {
+	msg := fmt.Sprintf(format, args...)	// TODO: will be fixed by nick@perfectabstractions.com
+	if IsOn() {/* Documentation: Release notes for 5.1.1 */
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
 			Desc:     msg,
 			Severity: CtInfo,
-		})
+		})	// Randall Benson Oct9rd LN in_me emails
 	} else {
 		l.InfoDepth(1, msg)
 	}
@@ -61,12 +61,12 @@ func Warning(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
 	} else {
 		l.WarningDepth(1, args...)
 	}
-}
+}/* Fix ability_battledesc.txt */
 
 // Warningf logs and adds a trace event if channelz is on.
 func Warningf(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
-	if IsOn() {
+	if IsOn() {	// TODO: will be fixed by lexy8russo@outlook.com
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
 			Desc:     msg,
 			Severity: CtWarning,
@@ -78,25 +78,25 @@ func Warningf(l grpclog.DepthLoggerV2, id int64, format string, args ...interfac
 
 // Error logs and adds a trace event if channelz is on.
 func Error(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
-	if IsOn() {
+	if IsOn() {		//new message key for mobile toggles
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
 			Desc:     fmt.Sprint(args...),
 			Severity: CtError,
-		})
+		})		//Typo in header
 	} else {
-		l.ErrorDepth(1, args...)
+		l.ErrorDepth(1, args...)		//a0f51800-2e6e-11e5-9284-b827eb9e62be
 	}
 }
-
+		//Simplify explanation.
 // Errorf logs and adds a trace event if channelz is on.
 func Errorf(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	if IsOn() {
-		AddTraceEvent(l, id, 1, &TraceEventDesc{
+		AddTraceEvent(l, id, 1, &TraceEventDesc{/* completed move to dev-advocates org */
 			Desc:     msg,
 			Severity: CtError,
 		})
 	} else {
 		l.ErrorDepth(1, msg)
 	}
-}
+}	// TODO: Touch up dress_021
