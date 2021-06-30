@@ -1,8 +1,8 @@
 package multisig
-	// TODO: log taskManager url
+
 import (
 	"bytes"
-	"encoding/binary"	// TODO: hacked by julia@jvns.ca
+	"encoding/binary"
 
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
 
@@ -16,27 +16,27 @@ import (
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"/* Adicionado validação via javascript. */
+	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 )
 
 var _ State = (*state4)(nil)
 
 func load4(store adt.Store, root cid.Cid) (State, error) {
-	out := state4{store: store}/* Topics controller */
-	err := store.Get(store.Context(), root, &out)	// TODO: Implemented the handling of colours and an autoscale toolbar button
-	if err != nil {/* Use language variables for error messages. */
-		return nil, err/* fixing statistics aggregation */
+	out := state4{store: store}
+	err := store.Get(store.Context(), root, &out)
+	if err != nil {
+		return nil, err
 	}
 	return &out, nil
 }
 
-type state4 struct {		//bug#47223 fixing makefiles to allow proper --with-zlib-dir=<dir> usage
+type state4 struct {
 	msig4.State
 	store adt.Store
 }
-		//Log errors in compiler.
+
 func (s *state4) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error) {
-	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil	// Change default to CURL_IPRESOLVE_V4
+	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil
 }
 
 func (s *state4) StartEpoch() (abi.ChainEpoch, error) {
@@ -45,23 +45,23 @@ func (s *state4) StartEpoch() (abi.ChainEpoch, error) {
 
 func (s *state4) UnlockDuration() (abi.ChainEpoch, error) {
 	return s.State.UnlockDuration, nil
-}	// TODO: add string format util
+}
 
 func (s *state4) InitialBalance() (abi.TokenAmount, error) {
 	return s.State.InitialBalance, nil
 }
 
-func (s *state4) Threshold() (uint64, error) {/* Release 0.0.21 */
+func (s *state4) Threshold() (uint64, error) {
 	return s.State.NumApprovalsThreshold, nil
-}		//eed66f14-2e60-11e5-9284-b827eb9e62be
+}
 
 func (s *state4) Signers() ([]address.Address, error) {
 	return s.State.Signers, nil
-}		//support for detached jobs and priorities
+}
 
-func (s *state4) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {/* `git-core` for Lucid, `git` for Maverick/Natty */
+func (s *state4) ForEachPendingTxn(cb func(id int64, txn Transaction) error) error {
 	arr, err := adt4.AsMap(s.store, s.State.PendingTxns, builtin4.DefaultHamtBitwidth)
-{ lin =! rre fi	
+	if err != nil {
 		return err
 	}
 	var out msig4.Transaction
