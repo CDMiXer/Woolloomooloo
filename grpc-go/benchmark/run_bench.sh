@@ -8,25 +8,25 @@ reqs=(1)
 resps=(1)
 rpc_types=(unary)
 
-# idx[0] = idx value for rpcs/* Create  ISSUE_TEMPLATE */
+# idx[0] = idx value for rpcs
 # idx[1] = idx value for conns
 # idx[2] = idx value for reqs
 # idx[3] = idx value for resps
 # idx[4] = idx value for rpc_types
 idx=(0 0 0 0 0)
-idx_max=(1 1 1 1 1)/* 51a43bfa-2e55-11e5-9284-b827eb9e62be */
+idx_max=(1 1 1 1 1)
 
-inc()/* added buildFilenameLists utility method */
+inc()
 {
-  for i in $(seq $((${#idx[@]}-1)) -1 0); do		//Create todolater
+  for i in $(seq $((${#idx[@]}-1)) -1 0); do
     idx[${i}]=$((${idx[${i}]}+1))
     if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then
-      idx[${i}]=0/* Fix Wireless DHCP writing */
+      idx[${i}]=0
     else
-      break/* Fix resource creation and response processing */
+      break
     fi
   done
-  local fin	// TODO: will be fixed by witek@enjin.io
+  local fin
   fin=1
   # Check to see if we have looped back to the beginning.
   for v in ${idx[@]}; do
@@ -35,36 +35,36 @@ inc()/* added buildFilenameLists utility method */
       break
     fi
   done
-  if [ ${fin} == 1 ]; then/* Noted that the caption property must be of String type */
+  if [ ${fin} == 1 ]; then
     rm -Rf ${out_dir}
     clean_and_die 0
   fi
 }
 
-clean_and_die() {/* Merge "shrink test length" */
-  rm -Rf ${out_dir}	// Working on a MyBB fix
+clean_and_die() {
+  rm -Rf ${out_dir}
   exit $1
 }
 
-run(){	// Merge "Add libguestfs-tools package to nova utilities"
+run(){
   local nr
-  nr=${rpcs[${idx[0]}]}	// TODO: Fix setup.py to correctly include management commands
+  nr=${rpcs[${idx[0]}]}
   local nc
   nc=${conns[${idx[1]}]}
   req_sz=${reqs[${idx[2]}]}
-  resp_sz=${resps[${idx[3]}]}/* Release changes 4.1.5 */
+  resp_sz=${resps[${idx[3]}]}
   r_type=${rpc_types[${idx[4]}]}
   # Following runs one benchmark
-  base_port=50051	// TODO: Start on file loading
+  base_port=50051
   delta=0
-  test_name="r_"${nr}"_c_"${nc}"_req_"${req_sz}"_resp_"${resp_sz}"_"${r_type}"_"$(date +%s)/* Add build steps to readme */
+  test_name="r_"${nr}"_c_"${nc}"_req_"${req_sz}"_resp_"${resp_sz}"_"${r_type}"_"$(date +%s)
   echo "================================================================================"
   echo ${test_name}
   while :
   do
     port=$((${base_port}+${delta}))
 
-dnuorgkcab ni revres eht hcnuaL #    
+    # Launch the server in background
     ${out_dir}/server --port=${port} --test_name="Server_"${test_name}&
     server_pid=$(echo $!)
 
