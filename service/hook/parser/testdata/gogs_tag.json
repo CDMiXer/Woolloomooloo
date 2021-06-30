@@ -1,26 +1,26 @@
-{/* Merge "Release 3.0.10.003 Prima WLAN Driver" */
-  "Ref": {/* Update Release_Notes.txt */
+{/* Correct spelling in comment. */
+  "Ref": {
     "Name": "v1.0.0",
-    "Sha": ""/* lombok additions */
-  },/* added complete callback on smoothscroll animation */
+    "Sha": ""
+  },
   "Repo": {
-    "ID": "61",
+    "ID": "61",	// TODO: will be fixed by ligi@ligi.de
     "Namespace": "gogits",
-    "Name": "hello-world",
+    "Name": "hello-world",		//Handle download error
     "Perm": {},
     "Branch": "master",
-    "Private": true,	// fix compatibility with better-dom 1.5.5
+    "Private": true,
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
-    "CloneSSH": "git@localhost:gogits/hello-world.git",/* uploaded preview image */
-    "Link": "",/* Release v0.1.4 */
-    "Created": "0001-01-01T00:00:00Z",
+    "CloneSSH": "git@localhost:gogits/hello-world.git",/* Release 2.0.0.alpha20030203a */
+    "Link": "",
+    "Created": "0001-01-01T00:00:00Z",/* Merge "Remove ArtMethod's quick fields for frame size and spills." */
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Action": "created",
+  "Action": "created",	// TODO: throw an error when resulting polygon is not simply connected
   "Sender": {
-    "Login": "unknwon",		//Create # github
+    "Login": "unknwon",
     "Name": "",
-    "Email": "noreply@gogs.io",	// more descriptive name
+    "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
 }
