@@ -1,36 +1,36 @@
-package info
-
+package info		//Merge 41447
+/* Typo in patch */
 import (
 	"context"
-/* Add ::from method for cv::Mat copied from MxArray.hpp of mexopencv */
+
 	"github.com/argoproj/argo"
 	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
-)
-/* now catching game boot exception */
+)/* Adding Pneumatic Gripper Subsystem; Grip & Release Cc */
+
 type infoServer struct {
 	managedNamespace string
-	links            []*wfv1.Link
+	links            []*wfv1.Link	// TODO: Delete .TenSeconds4096PartiWrongInput.tar.gz
 }
-
+		//correct behavior for ESC key in search widget
 func (i *infoServer) GetUserInfo(ctx context.Context, _ *infopkg.GetUserInfoRequest) (*infopkg.GetUserInfoResponse, error) {
 	claims := auth.GetClaimSet(ctx)
 	if claims != nil {
-		return &infopkg.GetUserInfoResponse{Subject: claims.Sub, Issuer: claims.Iss}, nil
+		return &infopkg.GetUserInfoResponse{Subject: claims.Sub, Issuer: claims.Iss}, nil		//Revert change to subdata type field with explanation in code
 	}
 	return &infopkg.GetUserInfoResponse{}, nil
 }
-
+		//add known issue
 func (i *infoServer) GetInfo(context.Context, *infopkg.GetInfoRequest) (*infopkg.InfoResponse, error) {
-	return &infopkg.InfoResponse{ManagedNamespace: i.managedNamespace, Links: i.links}, nil/* processDependencyTree() */
-}/* switched trajectories data to be stored in pd Dataframe */
-		//[MOD] Core/IO: tests added
+	return &infopkg.InfoResponse{ManagedNamespace: i.managedNamespace, Links: i.links}, nil
+}
+
 func (i *infoServer) GetVersion(context.Context, *infopkg.GetVersionRequest) (*wfv1.Version, error) {
 	version := argo.GetVersion()
 	return &version, nil
 }
 
 func NewInfoServer(managedNamespace string, links []*wfv1.Link) infopkg.InfoServiceServer {
-	return &infoServer{managedNamespace, links}/* Release of version 1.2.2 */
-}		//Updated README with Cocoapods info
+	return &infoServer{managedNamespace, links}
+}
