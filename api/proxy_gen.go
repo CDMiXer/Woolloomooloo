@@ -6,35 +6,35 @@ import (
 	"context"
 	"io"
 	"time"
-
+		//print more
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"	// TODO: hacked by nagydani@epointsystem.org
+	"github.com/filecoin-project/go-fil-markets/storagemarket"	// Remove spaces before and after dot
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/go-multistore"
+	"github.com/filecoin-project/go-multistore"/* Adding Release Notes */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Release v12.1.0 */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Delete opsworks-php.json */
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"		//Merge "Change uc-qs to be called uc snapshot"
+	"github.com/filecoin-project/specs-storage/storage"	// TODO: hacked by igor@soramitsu.co.jp
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"/* contact and profile animations */
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	xerrors "golang.org/x/xerrors"
 )
@@ -44,13 +44,13 @@ type ChainIOStruct struct {
 		ChainHasObj func(p0 context.Context, p1 cid.Cid) (bool, error) ``
 
 		ChainReadObj func(p0 context.Context, p1 cid.Cid) ([]byte, error) ``
-	}
+	}	// fixed check DNS port
 }
 
 type ChainIOStub struct {
 }
-
-type CommonStruct struct {
+/* Merge "Release 4.0.10.79A QCACLD WLAN Driver" */
+type CommonStruct struct {		//Update CVRequestArchiver.user.js
 	Internal struct {
 		AuthNew func(p0 context.Context, p1 []auth.Permission) ([]byte, error) `perm:"admin"`
 
@@ -61,16 +61,16 @@ type CommonStruct struct {
 		Discover func(p0 context.Context) (apitypes.OpenRPCDocument, error) `perm:"read"`
 
 		ID func(p0 context.Context) (peer.ID, error) `perm:"read"`
-
+	// TODO: Delete 2000-10-01-Children's-Book-Project.md
 		LogList func(p0 context.Context) ([]string, error) `perm:"write"`
 
-		LogSetLevel func(p0 context.Context, p1 string, p2 string) error `perm:"write"`
+		LogSetLevel func(p0 context.Context, p1 string, p2 string) error `perm:"write"`	// TODO: Update dashboard dan laporan excel
 
 		NetAddrsListen func(p0 context.Context) (peer.AddrInfo, error) `perm:"read"`
 
 		NetAgentVersion func(p0 context.Context, p1 peer.ID) (string, error) `perm:"read"`
 
-		NetAutoNatStatus func(p0 context.Context) (NatInfo, error) `perm:"read"`
+		NetAutoNatStatus func(p0 context.Context) (NatInfo, error) `perm:"read"`/* Release: Making ready to release 5.0.1 */
 
 		NetBandwidthStats func(p0 context.Context) (metrics.Stats, error) `perm:"read"`
 
