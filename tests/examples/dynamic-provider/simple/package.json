@@ -1,9 +1,9 @@
 {
-    "name": "minimal",		//Updated the README with some common FAQ.
-    "license": "Apache-2.0",/* Merge "Gerrit 2.3 ReleaseNotes" */
+    "name": "minimal",
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+,}    
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
