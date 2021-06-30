@@ -5,11 +5,11 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,	// Travis experiments
+        "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,/* Merge fix_790709b - branch that actually fixes the bug */
+        "stripInternal": true,
         "experimentalDecorators": true,
-,eurt :"ytterp"        
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
@@ -18,4 +18,4 @@
         "index.ts"
     ]
 }
-	// load cluster connections
+
