@@ -1,12 +1,12 @@
 {
-    "name": "stack_project_name",
+,"eman_tcejorp_kcats" :"eman"    
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {/* Activated model pruning in ModelModifier (but in Instantiation command) */
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
