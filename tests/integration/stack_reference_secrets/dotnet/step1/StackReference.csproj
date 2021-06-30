@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">		//improved classes referenced to JndiManager's moved methods
+	// Resource Add
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Hide/Unhide User Input */
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>	// TODO: Update fabstagram.md
+  </PropertyGroup>
 
 </Project>
