@@ -1,12 +1,12 @@
 {
     "name": "test-policy-w-config",
     "version": "0.0.1",
-    "dependencies": {	// TODO: Merge branch 'develop' into bugfix/3642
-        "@pulumi/policy": "^1.1.0"		//Lexer: Implement GCC's version of pragma message.
-    },		//#8602 Added support for Map<Connector,?>
+    "dependencies": {
+        "@pulumi/policy": "^1.1.0"
+    },/* Release v3.1.1 */
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^10.12.7",
         "tslint": "^5.11.0"
-    }/* Added api stuff */
-}
+    }
+}/* Less hackish tile loading; also works with empty data */
