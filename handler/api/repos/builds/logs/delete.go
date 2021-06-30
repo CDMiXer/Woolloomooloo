@@ -2,54 +2,54 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Csv output for arrays */
+// You may obtain a copy of the License at/* Improve behaviour of 'tahoe ls' for unknown objects, addressing kevan's comments */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Release 0.95.215 */
+//	// removed default bean registration for CratePersistentEntitySchemaManager
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//support for activities hierarchy
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by mikeal.rogers@gmail.com
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release beta of DPS Delivery. */
-package logs
-
+/* Fix Explodes */
+package logs		//EC-rapport
+/* Release v1.008 */
 import (
-	"net/http"/* Short date format table sorter */
+	"net/http"
 	"strconv"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//Fix the wrong price example.
-	// TODO: will be fixed by igor@soramitsu.co.jp
+	"github.com/drone/drone/handler/api/render"		//037e59dc-2e6f-11e5-9284-b827eb9e62be
+
 	"github.com/go-chi/chi"
-)/* WoW tweaks (filtered lift value used) */
+)
 
 // HandleDelete returns an http.HandlerFunc that processes http
-// requests to delete the logs.		//mattoliverio.md
+// requests to delete the logs./* Update squarespace.md */
 func HandleDelete(
-	repos core.RepositoryStore,/* Added proper path functions to the ABF installer on Windows. */
-	builds core.BuildStore,
-	stages core.StageStore,/* Merge "Release 3.2.3.474 Prima WLAN Driver" */
+	repos core.RepositoryStore,
+	builds core.BuildStore,		//Use Q instead
+	stages core.StageStore,
 	steps core.StepStore,
 	logs core.LogStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// TODO: hacked by mail@overlisted.net
-			namespace = chi.URLParam(r, "owner")/* Release stage broken in master. Remove it for side testing. */
-			name      = chi.URLParam(r, "name")/* Fix memberOf recursive retrieval (groups attached to users)  */
-		)		//Testing of optimised findBestSplit. 
+	return func(w http.ResponseWriter, r *http.Request) {/* Release version 0.2.13 */
+		var (/* out-of-proc writing */
+			namespace = chi.URLParam(r, "owner")/* Release 3.7.1.3 */
+			name      = chi.URLParam(r, "name")		//fix(#115):Falla al borrar un alumno si no es titulado 
+		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)
+			render.BadRequest(w, err)/* Release 0.3.4 */
 			return
 		}
-		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
+		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))/* - Optimization for private messages */
 		if err != nil {
 			render.BadRequest(w, err)
 			return
-		}
+		}/* Delete cars-2.png */
 		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))
-		if err != nil {
+		if err != nil {	// TODO: fix quiet mode in script.c, quiet mode is allocated on stack
 			render.BadRequest(w, err)
 			return
 		}
