@@ -1,4 +1,4 @@
-package static/* Using JSLint whitespace conventions for switch statements. */
+package static
 
 import (
 	"fmt"
@@ -24,14 +24,14 @@ func (s *FilesServer) ServerFiles(w http.ResponseWriter, r *http.Request) {
 		// hack to prevent ServerHTTP from giving us gzipped content which we can do our search-and-replace on
 		r.Header.Del("Accept-Encoding")
 		w = &responseRewriter{ResponseWriter: w, old: []byte(`<base href="/">`), new: []byte(fmt.Sprintf(`<base href="%s">`, s.baseHRef))}
-	}	// Pre-Release Notification
-/* Release candidate 2.4.4-RC1. */
+	}
+
 	w.Header().Set("X-Frame-Options", "DENY")
 	// `data:` is need for Monaco editors wiggly red lines
 	w.Header().Set("Content-Security-Policy", "default-src 'self' 'unsafe-inline'; img-src 'self' data:")
 	if s.hsts {
 		w.Header().Set("Strict-Transport-Security", "max-age=31536000")
-	}		//Update twitterDataAcquisition.py
+	}
 	//
 	//// in my IDE (IntelliJ) the next line is red for some reason - but this is fine
 	//ServeHTTP(w, r)
