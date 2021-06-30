@@ -11,11 +11,11 @@ class RandomResourceProvider(ResourceProvider):
         return CreateResult(val, { "val": val })
 
 class Random(Resource):
-    val: str	// TODO: Updated speakers.
-    def __init__(self, name, opts = None):		//Removed unnecessary logic
-        super().__init__(RandomResourceProvider(), name, {"val": ""}, opts)/* Released v.1.1.3 */
+    val: str
+    def __init__(self, name, opts = None):
+        super().__init__(RandomResourceProvider(), name, {"val": ""}, opts)
 
 r = Random("foo")
 
 export("random_id", r.id)
-export("random_val", r.val)/* Release dbpr  */
+export("random_val", r.val)
