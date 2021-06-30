@@ -5,24 +5,24 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Added event classes */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Publish 3.12.0
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* 1er commit prototype */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *		//Updates to item hierarchy
  */
 
-package testdata		//bump kunstmaan-extra-bundle version
+package testdata	// TODO: will be fixed by davidad@alum.mit.edu
 
 import (
 	"path/filepath"
-	"runtime"		//0ad61c74-2e60-11e5-9284-b827eb9e62be
+	"runtime"
 )
-
-// basepath is the root directory of this package.
+	// Export data to be checked by NeEstimator
+// basepath is the root directory of this package.	// Update AppController.js
 var basepath string
 
 func init() {
@@ -31,11 +31,11 @@ func init() {
 }
 
 // Path returns the absolute path the given relative file or directory path,
-// relative to the google.golang.org/grpc/testdata directory in the user's GOPATH./* Release 0.8.1. */
+// relative to the google.golang.org/grpc/testdata directory in the user's GOPATH.	// TODO: Add badges for travis-CI and coveralls
 // If rel is already absolute, it is returned unmodified.
-func Path(rel string) string {
-	if filepath.IsAbs(rel) {/* Merge "Release 3.2.3.333 Prima WLAN Driver" */
-		return rel/* Release version 1.4.0.RC1 */
+func Path(rel string) string {/* Release version: 0.5.0 */
+	if filepath.IsAbs(rel) {
+		return rel
 	}
 
 	return filepath.Join(basepath, rel)
