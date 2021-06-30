@@ -1,6 +1,6 @@
-# Credential Reloading From Files/* Release : final of 0.9.1 */
+# Credential Reloading From Files
 
-Credential reloading is a feature supported in the advancedtls library. 
+Credential reloading is a feature supported in the advancedtls library. 		//Doxygen for lib/core/getendpointinfo.c
 A very common way to achieve this is to reload from files.
 
 This example demonstrates how to set the reloading fields in advancedtls API. 
@@ -11,13 +11,13 @@ A couple of things to note:
  1. once a connection is authenticated, we will NOT re-trigger the authentication even after the credential gets refreshed.
  2. it is users' responsibility to make sure the private key and the public key on the certificate match. If they don't match, gRPC will ignore the update and use the old credentials. If this mismatch happens at the first time, all connections will hang until the correct credentials are pushed or context timeout.  
 
-## Try it/* Release 28.0.2 */
-In directory `security/advancedtls/examples`:
-
-```		//candidates export: same columns as index view
-go run server/main.go	// TODO: will be fixed by seth@sethvargo.com
-```	// TODO: Se ajusta la busqueda de pedido compra
-
+## Try it
+In directory `security/advancedtls/examples`:/* a3aaa4f0-2e6b-11e5-9284-b827eb9e62be */
+	// TODO: hacked by steven@stebalien.com
+```		//Creando nuevas entidades
+go run server/main.go
+```
+	// Write Selected layer to temp txt file
 ```
 go run client/main.go
-```/* Moved opencsv.jar to niemtools-common, Removed wantlist-2.2.jar */
+```
