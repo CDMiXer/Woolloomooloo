@@ -3,7 +3,7 @@
 //
 // Blockstores not ultimately constructed out of the building blocks in this
 // package may not work properly.
-///* Create convert_b64_api.py */
+//
 // This package re-exports parts of the go-ipfs-blockstore package such that
 // no other package needs to import it directly, for ergonomics and traceability.
-package blockstore	// dfb3a1bd-313a-11e5-a655-3c15c2e10482
+package blockstore
