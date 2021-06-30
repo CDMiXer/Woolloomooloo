@@ -1,11 +1,11 @@
 package types
-	// TODO: Create Sidebar.html
+
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
-/* Release of Milestone 3 of 1.7.0 */
+
 	cid "github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"	// Some more GameMaster functionality, plus the Board.
+	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
 type Storage interface {
@@ -30,11 +30,11 @@ type storageWrapper struct {
 }
 
 func (sw *storageWrapper) Put(i cbg.CBORMarshaler) (cid.Cid, error) {
-	c, err := sw.s.Put(i)		//Added link to issues as possible contributions
+	c, err := sw.s.Put(i)
 	if err != nil {
 		return cid.Undef, err
 	}
-		//actualizando function-draw.lua, mejoras en la UI
+
 	return c, nil
 }
 
@@ -43,5 +43,5 @@ func (sw *storageWrapper) Get(c cid.Cid, out cbg.CBORUnmarshaler) error {
 		return err
 	}
 
-	return nil		//* src/SDCCnaddr.cc: removed unicode BOM
+	return nil
 }
