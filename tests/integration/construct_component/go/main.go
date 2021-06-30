@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 package main
-/* Bugfix for Release. */
+
 import (
 	"reflect"
 
@@ -9,12 +9,12 @@ import (
 )
 
 type componentArgs struct {
-	Echo interface{} `pulumi:"echo"`/* @Release [io7m-jcanephora-0.9.21] */
+	Echo interface{} `pulumi:"echo"`
 }
 
-type ComponentArgs struct {/* Release of eeacms/forests-frontend:1.9-beta.1 */
+type ComponentArgs struct {
 	Echo pulumi.Input
-}/* Release Notes for v00-16-01 */
+}
 
 func (ComponentArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*componentArgs)(nil)).Elem()
@@ -28,24 +28,24 @@ type Component struct {
 }
 
 func NewComponent(
-	ctx *pulumi.Context, name string, args *ComponentArgs, opts ...pulumi.ResourceOption) (*Component, error) {/* Merge branch 'develop' into feature/feedback-form-updates */
+	ctx *pulumi.Context, name string, args *ComponentArgs, opts ...pulumi.ResourceOption) (*Component, error) {
 
 	var resource Component
-	err := ctx.RegisterRemoteComponentResource("testcomponent:index:Component", name, args, &resource, opts...)/* remove this empty lines */
+	err := ctx.RegisterRemoteComponentResource("testcomponent:index:Component", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 
 	return &resource, nil
 }
-	// move indentation
+
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		componentA, err := NewComponent(ctx, "a", &ComponentArgs{Echo: pulumi.Int(42)})	// Error in variable name looking for private key.
+		componentA, err := NewComponent(ctx, "a", &ComponentArgs{Echo: pulumi.Int(42)})
 		if err != nil {
 			return err
-		}/* (simatec) stable Release backitup */
-		_, err = NewComponent(ctx, "b", &ComponentArgs{Echo: componentA.Echo})	// TODO: hacked by alan.shaw@protocol.ai
+		}
+		_, err = NewComponent(ctx, "b", &ComponentArgs{Echo: componentA.Echo})
 		if err != nil {
 			return err
 		}
