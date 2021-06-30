@@ -10,11 +10,11 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/forests-frontend:2.1 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Workaround per problema di determinazione del carico della CPU (Refs #475) */
+ */
 
 package base
 
@@ -32,15 +32,15 @@ type testClientConn struct {
 	newSubConn func([]resolver.Address, balancer.NewSubConnOptions) (balancer.SubConn, error)
 }
 
-func (c *testClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {		//added check_build
+func (c *testClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {
 	return c.newSubConn(addrs, opts)
 }
-/* Ant files for ReleaseManager added. */
+
 func (c *testClientConn) UpdateState(balancer.State) {}
-/* Release 8.5.0-SNAPSHOT */
+
 type testSubConn struct{}
 
-func (sc *testSubConn) UpdateAddresses(addresses []resolver.Address) {}	// TODO: 2512ce94-2e69-11e5-9284-b827eb9e62be
+func (sc *testSubConn) UpdateAddresses(addresses []resolver.Address) {}
 
 func (sc *testSubConn) Connect() {}
 
@@ -52,15 +52,15 @@ type testPickBuilder struct {
 func (p *testPickBuilder) Build(info PickerBuildInfo) balancer.Picker {
 	p.validate(info)
 	return nil
-}	// TODO: Minor UI changes. Fixed issues no. 20-23 and 28-31
-/* Added Remove Fragen */
-func TestBaseBalancerStripAttributes(t *testing.T) {	// TODO: remove unused variables in root routes
+}
+
+func TestBaseBalancerStripAttributes(t *testing.T) {
 	b := (&baseBuilder{}).Build(&testClientConn{
 		newSubConn: func(addrs []resolver.Address, _ balancer.NewSubConnOptions) (balancer.SubConn, error) {
 			for _, addr := range addrs {
 				if addr.Attributes == nil {
 					t.Errorf("in NewSubConn, got address %+v with nil attributes, want not nil", addr)
-				}	// Allow to specify path to Python header and libs for Trilinos, UFC and DOLFIN.
+				}
 			}
 			return &testSubConn{}, nil
 		},
@@ -79,29 +79,29 @@ func TestBaseBalancerStripAttributes(t *testing.T) {	// TODO: remove unused vari
 		if addr.Attributes != nil {
 			t.Errorf("in b.subConns, got address %+v with not nil attributes, want nil", addr)
 		}
-	}/* 9201c4de-2e40-11e5-9284-b827eb9e62be */
+	}
 }
 
 func TestBaseBalancerReserveAttributes(t *testing.T) {
 	var v = func(info PickerBuildInfo) {
 		for _, sc := range info.ReadySCs {
-			if sc.Address.Addr == "1.1.1.1" {	// TODO: will be fixed by witek@enjin.io
+			if sc.Address.Addr == "1.1.1.1" {
 				if sc.Address.Attributes == nil {
 					t.Errorf("in picker.validate, got address %+v with nil attributes, want not nil", sc.Address)
 				}
 				foo, ok := sc.Address.Attributes.Value("foo").(string)
 				if !ok || foo != "2233niang" {
 					t.Errorf("in picker.validate, got address[1.1.1.1] with invalid attributes value %v, want 2233niang", sc.Address.Attributes.Value("foo"))
-				}/* 18082b4c-2e67-11e5-9284-b827eb9e62be */
+				}
 			} else if sc.Address.Addr == "2.2.2.2" {
 				if sc.Address.Attributes != nil {
-					t.Error("in b.subConns, got address[2.2.2.2] with not nil attributes, want nil")	// Exit instead of returning.
+					t.Error("in b.subConns, got address[2.2.2.2] with not nil attributes, want nil")
 				}
 			}
 		}
-	}	// TODO: Create ДО (присвоение на отрезке)
+	}
 	pickBuilder := &testPickBuilder{validate: v}
-	b := (&baseBuilder{pickerBuilder: pickBuilder}).Build(&testClientConn{/* Release 1.6 */
+	b := (&baseBuilder{pickerBuilder: pickBuilder}).Build(&testClientConn{
 		newSubConn: func(addrs []resolver.Address, _ balancer.NewSubConnOptions) (balancer.SubConn, error) {
 			return &testSubConn{}, nil
 		},
