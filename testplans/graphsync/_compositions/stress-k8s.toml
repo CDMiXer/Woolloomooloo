@@ -1,4 +1,4 @@
-[metadata]/* - added Release_Win32 build configuration */
+[metadata]
   name = "stress"
 
 [global]
@@ -25,11 +25,11 @@ concurrency = "10"
   instances = { count = 1 }
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"/* Moving binaries to Releases */
-/* More locale, command, and Party updates. */
+    cpu = "1000m"
+
 [[groups]]
   id = "requestors"
   instances = { count = 1 }
   [groups.resources]
-    memory = "4096Mi"/* not sure why these files didn't push */
+    memory = "4096Mi"
     cpu = "1000m"
