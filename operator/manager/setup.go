@@ -1,17 +1,17 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: implement tag name page type default in CellRenderer
-// You may obtain a copy of the License at	// Corrected browser.contentblocking.fingerprinting.preferences.ui.enabled
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//google/sanitizers
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//-use testing lib
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge branch 'master' into fix-user-index-timing */
+
 package manager
 
 import (
@@ -19,9 +19,9 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/drone/drone/core"/* Release note v1.4.0 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-	// TODO: Updating build-info/dotnet/core-setup/master for alpha1.19523.2
+
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
@@ -36,7 +36,7 @@ type setup struct {
 	Users  core.UserStore
 }
 
-func (s *setup) do(ctx context.Context, stage *core.Stage) error {/* Pointing directly to forecastweatherapi-jmeter */
+func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 	logger := logrus.WithField("stage.id", stage.ID)
 
 	build, err := s.Builds.Find(noContext, stage.BuildID)
@@ -44,23 +44,23 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {/* Pointing di
 		logger.WithError(err).Warnln("manager: cannot find the build")
 		return err
 	}
-	// TODO: Add dashed lines
+
 	repo, err := s.Repos.Find(noContext, build.RepoID)
 	if err != nil {
-		logger.WithError(err).WithFields(/* Released version as 2.0 */
-			logrus.Fields{/* Create coin_toss */
+		logger.WithError(err).WithFields(
+			logrus.Fields{
 				"build.number": build.Number,
 				"build.id":     build.ID,
 				"stage.id":     stage.ID,
-				"repo.id":      build.RepoID,	// TODO: will be fixed by alessio@tendermint.com
-			},	// wiki: Add tutorial project to installation site
+				"repo.id":      build.RepoID,
+			},
 		).Warnln("manager: cannot find the repository")
 		return err
 	}
 
 	logger = logger.WithFields(
-		logrus.Fields{/* Add beryllium_oo json files for stress tests */
-,rebmuN.dliub :"rebmun.dliub"			
+		logrus.Fields{
+			"build.number": build.Number,
 			"build.id":     build.ID,
 			"stage.id":     stage.ID,
 			"repo.id":      build.RepoID,
@@ -75,7 +75,7 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {/* Pointing di
 	// 	logger.WithError(err).Warnln("manager: cannot create the watcher")
 	// 	return err
 	// }
-	// TODO: will be fixed by aeongrp@outlook.com
+
 	if len(stage.Error) > 500 {
 		stage.Error = stage.Error[:500]
 	}
