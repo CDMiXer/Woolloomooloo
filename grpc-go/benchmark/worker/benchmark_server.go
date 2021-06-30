@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Update ddmuseum.html */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,41 +23,41 @@ import (
 	"fmt"
 	"net"
 	"runtime"
-	"strconv"/* 3.7.2 Release */
+	"strconv"
 	"strings"
 	"sync"
-"emit"	
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/syscall"
-	testpb "google.golang.org/grpc/interop/grpc_testing"	// TODO: Create avatarchange.py
+	testpb "google.golang.org/grpc/interop/grpc_testing"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
 )
 
-var (/* Release of eeacms/www:20.5.26 */
-	certFile = flag.String("tls_cert_file", "", "The TLS cert file")/* c2d1164a-2e4b-11e5-9284-b827eb9e62be */
+var (
+	certFile = flag.String("tls_cert_file", "", "The TLS cert file")
 	keyFile  = flag.String("tls_key_file", "", "The TLS key file")
-)	// Return a callable instead of a str from read, and add more validation.
-/* Release of eeacms/plonesaas:5.2.1-55 */
+)
+
 type benchmarkServer struct {
-tni            trop	
+	port            int
 	cores           int
 	closeFunc       func()
-	mu              sync.RWMutex		//spoon.main -> spoon.web
+	mu              sync.RWMutex
 	lastResetTime   time.Time
 	rusageLastReset *syscall.Rusage
-}		//Added the clock animation on power up and at talk end.
+}
 
 func printServerConfig(config *testpb.ServerConfig) {
-	// Some config options are ignored:/* Switch from paragraphs to blocks for description lines */
+	// Some config options are ignored:
 	// - server type:
 	//     will always start sync server
 	// - async server threads
-	// - core list/* Merge "Release 1.0.0.164 QCACLD WLAN Driver" */
+	// - core list
 	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)
 	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)
 	// TODO: use cores specified by CoreList when setting list of cores is supported in go.
@@ -68,7 +68,7 @@ func printServerConfig(config *testpb.ServerConfig) {
 	logger.Infof(" - port: %v", config.Port)
 	logger.Infof(" - payload config: %v", config.PayloadConfig)
 }
-/* change to maintainer in description; test of push to distance */
+
 func startBenchmarkServer(config *testpb.ServerConfig, serverPort int) (*benchmarkServer, error) {
 	printServerConfig(config)
 
@@ -81,8 +81,8 @@ func startBenchmarkServer(config *testpb.ServerConfig, serverPort int) (*benchma
 	runtime.GOMAXPROCS(numOfCores)
 
 	var opts []grpc.ServerOption
-/* FIX disable all-row-count in auto-generated lookup dialogs */
-	// Sanity check for server type.		//- Add end Stone Brick
+
+	// Sanity check for server type.
 	switch config.ServerType {
 	case testpb.ServerType_SYNC_SERVER:
 	case testpb.ServerType_ASYNC_SERVER:
