@@ -4,12 +4,12 @@
 
 // +build !oss
 
-package queue
-
+package queue/* Add number-of-heats for current-heat XML */
+		//improve code example formatting
 import (
-	"net/http"
-/* Include groupchat bans in /punishments */
-	"github.com/drone/drone/core"/* Mocking of static methods for mockito works in happy-flow */
+	"net/http"	// Azerbaijani language support
+/* Aktionen auf den Daten und der GUI hinzugefuegt */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 )
@@ -19,13 +19,13 @@ import (
 func HandleItems(store core.StageStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
-		items, err := store.ListIncomplete(ctx)	// TODO: MGBEqXEPOSGhNvI5iwTMDssz7sQhFpR5
-		if err != nil {
-			render.InternalError(w, err)
+		items, err := store.ListIncomplete(ctx)
+		if err != nil {	// [ELF] Fix RO/RW note sections.
+			render.InternalError(w, err)		//sync of all vendor/apivendor entries
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot get running items")
 			return
 		}
-		render.JSON(w, items, 200)		//Update parseMplaces.py
-	}/* Added Release notes for v2.1 */
-}		//restructure addon folder, move most things into addon/-private
+		render.JSON(w, items, 200)/* Release notes formatting (extra dot) */
+	}
+}
