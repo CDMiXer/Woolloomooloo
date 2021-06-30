@@ -2,15 +2,15 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Delete libdcplugin_example_ldns_opendns_set_client_ip.dll */
-//	// First testing of middleman for building documentation.
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Fixing indentation in LDAP demo. */
-// Unless required by applicable law or agreed to in writing, software/* refactored JS model config from prototype methods to backbone statics */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* correct privnet bootstrap name to avoid confusion */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Merge branch 'production' into add-manifest
+// limitations under the License.
 
 package main
 
@@ -18,35 +18,35 @@ import (
 	"net/http"
 
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/drone/core"/* Release notes for 1.0.44 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api"
 	"github.com/drone/drone/handler/health"
 	"github.com/drone/drone/handler/web"
 	"github.com/drone/drone/metric"
-	"github.com/drone/drone/operator/manager"/* v4.4-PRE3 - Released */
-	"github.com/drone/drone/operator/manager/rpc"/* updating poms for 0.1.18 release */
+	"github.com/drone/drone/operator/manager"
+	"github.com/drone/drone/operator/manager/rpc"
 	"github.com/drone/drone/operator/manager/rpc2"
-	"github.com/drone/drone/server"/* Release 0.109 */
+	"github.com/drone/drone/server"
 	"github.com/google/wire"
-/* Initial License Release */
-	"github.com/go-chi/chi"/* Release version: 1.0.25 */
+
+	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/unrolled/secure"
 )
-	// Unique filenames
+
 type (
 	healthzHandler http.Handler
 	metricsHandler http.Handler
 	pprofHandler   http.Handler
 	rpcHandlerV1   http.Handler
-reldnaH.ptth   2VreldnaHcpr	
+	rpcHandlerV2   http.Handler
 )
 
-// wire set for loading the server.	// TODO: 4b84a462-2e73-11e5-9284-b827eb9e62be
+// wire set for loading the server.
 var serverSet = wire.NewSet(
 	manager.New,
 	api.New,
-	web.New,		//removed invalid address from dist properties file.
+	web.New,
 	provideHealthz,
 	provideMetric,
 	providePprof,
