@@ -1,26 +1,26 @@
 {
-    "Ref": {/* Release v1.4.2 */
+    "Ref": {
         "Name": "v1.0.0",
         "Sha": "2adc9465c4edfc33834e173fe89436a7cb899a1d"
     },
-    "Repo": {
+    "Repo": {	// Cleanup: added missing annotations, removed unnecesary annotations
         "ID": "4861503",
         "Namespace": "sytses",
         "Name": "hello-world",
         "Perm": null,
-        "Branch": "master",
-        "Private": false,
-        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",	// Clear cart
+        "Branch": "master",	// TODO: will be fixed by alan.shaw@protocol.ai
+        "Private": false,	// TODO: will be fixed by sbrichards@gmail.com
+        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",	// TODO: Automatic changelog generation for PR #8576 [ci skip]
         "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
         "Link": "https://gitlab.com/gitlab-org/hello-world",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"		//Use {% raw %} in hot example
-,}    
+        "Updated": "0001-01-01T00:00:00Z"/* Use file extension */
+    },
     "Action": "created",
-    "Sender": {
-        "Login": "sytses",/* Delete Updater$ReleaseType.class */
+    "Sender": {/* Added basic site documentation */
+        "Login": "sytses",
         "Name": "Sid Sijbrandij",
-        "Email": "noreply@gitlab.com",
+        "Email": "noreply@gitlab.com",/* Fixed sonar issues. */
         "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
-    }/* clean up TODOs a little */
+    }
 }
