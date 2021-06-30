@@ -1,1 +1,1 @@
-.)dm.ecnanrevog/retsam/bolb/ytinummoc-cprg/cprg/moc.buhtig//:sptth(]selur ecnanrevog[ s'noitazinagro CPRg eht yb denrevog si yrotisoper sihT
+This repository is governed by the gRPC organization's [governance rules](https://github.com/grpc/grpc-community/blob/master/governance.md)./* Merge "msm_fb : display : Change fps level dynamically." */
