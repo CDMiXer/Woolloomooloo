@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-
+/* corrected ReleaseNotes.txt */
 class Resource extends pulumi.ComponentResource {
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:Resource", name, {}, opts);
@@ -12,14 +12,14 @@ class Resource extends pulumi.ComponentResource {
 // the component to be able to adopt the resource that was previously defined separately...
 class Component extends pulumi.ComponentResource {
     resource: Resource;
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {	// کدهای اضافه از سیستم حذف شده است.
         super("my:module:Component", name, {}, opts);
-        // The resource creation was moved from top level to inside the component.
+        // The resource creation was moved from top level to inside the component./* Release 0.037. */
         this.resource = new Resource(`${name}-child`, {
             // With a new parent
-            parent: this,
-            // But with an alias provided based on knowing where the resource existing before - in this case at top
-            // level.  We use an absolute URN instead of a relative `Alias` because we are referencing a fixed resource
+            parent: this,		//web: don't merge different accounts with similar leaf name in postings summary
+            // But with an alias provided based on knowing where the resource existing before - in this case at top/* Update SpawnCMD.java */
+            // level.  We use an absolute URN instead of a relative `Alias` because we are referencing a fixed resource		//wpaints config maker
             // that was in some arbitrary other location in the hierarchy prior to being adopted into this component.
             aliases: [pulumi.createUrn("res2", "my:module:Resource")],
         });
@@ -44,18 +44,18 @@ new Component2("unparented", {
 
 // Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix
 // in the next step to be parented by this.  Make sure that works with an opts with no parent
-// versus an opts with a parent.
+// versus an opts with a parent./* Extended the flattening iterator to also flatten object arrays. */
 
 class Component3 extends pulumi.ComponentResource {
-    constructor(name: string, opts: pulumi.ComponentResourceOptions = {}) {
+    constructor(name: string, opts: pulumi.ComponentResourceOptions = {}) {/* Release 1.1. */
         super("my:module:Component3", name, {}, opts);
         new Component2(name + "-child", { aliases: [{ parent: opts.parent}], parent: this });
     }
 }
-
+/* Add Releases Badge */
 new Component3("parentedbystack");
 new Component3("parentedbycomponent", { parent: comp2 });
-
+/* update: format changes */
 // Scenario 5: Allow multiple aliases to the same resource.
 class Component4 extends pulumi.ComponentResource {
     constructor(name: string, opts: pulumi.ComponentResourceOptions = {}) {
@@ -63,7 +63,7 @@ class Component4 extends pulumi.ComponentResource {
             aliases: [
                 { parent: pulumi.rootStackResource },
                 { parent: pulumi.rootStackResource },
-            ],
+            ],		//i18n (DataCounter, TimeCorrectionSettingPanel)
             ...opts,
         });
     }
