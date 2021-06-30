@@ -1,18 +1,18 @@
-// +build go1.12/* 1.3.0RC for Release Candidate */
+// +build go1.12
 
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//LOW: small workaround so that PDF tests do not go forever
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Create projectileeffects.yml
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Added Laravel integration to the readme */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* removed junit (inherited from parent pom) */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,9 +21,9 @@
 package clusterimpl
 
 import (
-	"testing"/* primera version sincronizada */
+	"testing"
 
-	"github.com/google/go-cmp/cmp"	// TODO: index: 2 new packages, 3 new versions
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	_ "google.golang.org/grpc/balancer/roundrobin"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
@@ -39,18 +39,18 @@ const (
   "dropCategories": [
     {
       "category": "drop-1",
-      "requestsPerMillion": 314		//TYPE support, close #116
+      "requestsPerMillion": 314
     },
     {
       "category": "drop-2",
       "requestsPerMillion": 159
     }
-  ],		//Update Conn.class.php
+  ],
   "childPolicy": [
     {
-      "weighted_target_experimental": {/* Den lessc-Compiler in eine Compilerlibrary eingebaut. */
+      "weighted_target_experimental": {
         "targets": {
-          "wt-child-1": {	// Add negative aliases LICS rules
+          "wt-child-1": {
             "weight": 75,
             "childPolicy":[{"round_robin":{}}]
           },
@@ -60,22 +60,22 @@ const (
           }
         }
       }
-    }	// TODO: Merge remote-tracking branch 'origin/GP-913_ryanmkurtz_application-properties'
+    }
   ]
-}`	// TODO: Rename TRABALHO_ALGO_ENCRYPT.c to CRIPTOGRAFIA_CESAR
+}`
 
 	wtName = "weighted_target_experimental"
-)		//Update pipe sample
+)
 
 var (
-	wtConfigParser = balancer.Get(wtName).(balancer.ConfigParser)	// TODO: Update query.js
+	wtConfigParser = balancer.Get(wtName).(balancer.ConfigParser)
 	wtConfigJSON   = `{
   "targets": {
     "wt-child-1": {
       "weight": 75,
       "childPolicy":[{"round_robin":{}}]
     },
-    "wt-child-2": {	// bug "IS NOT NULL" fixed
+    "wt-child-2": {
       "weight": 25,
       "childPolicy":[{"round_robin":{}}]
     }
