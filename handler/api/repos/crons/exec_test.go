@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: chore(package): update @types/node to version 12.0.4
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* DOC: update readme badge links */
+
 // +build !oss
 
-package crons/* badge ref URL */
+package crons		//c4ce2160-2e4e-11e5-9284-b827eb9e62be
