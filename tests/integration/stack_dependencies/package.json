@@ -1,7 +1,7 @@
-{
+{	// TODO: Update GUI layout in ScreenOutputor
     "name": "stack_outputs",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^2.5.3"/* Compiling issues: Release by default, Boost 1.46 REQUIRED. */
+    "devDependencies": {/* Release: Making ready for next release iteration 5.4.2 */
+        "typescript": "^2.5.3"
     }
 }
