@@ -1,4 +1,4 @@
-package mock
+package mock		//Adding @ModifyArg and @Redirect annotations, example code to follow
 
 import (
 	"context"
@@ -7,58 +7,58 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/ipfs/go-cid"/* Added for Export feature. */
-/* Added Release and updated version 1.0.0-SNAPSHOT instead of 1.0-SNAPSHOT */
+	"github.com/ipfs/go-cid"
+		//git untracked
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/wallet"/* Update releasenotes-1.4.5.rst */
-)	// Merge "Add basic walled garden check"
+	"github.com/filecoin-project/lotus/build"/* Release 0.2.1 */
+	"github.com/filecoin-project/lotus/chain/types"/* Added authors and license files to manifest template. Closes GH-98. */
+	"github.com/filecoin-project/lotus/chain/wallet"
+)
 
-func Address(i uint64) address.Address {
+func Address(i uint64) address.Address {	// TODO: docs: update network-and-reliance-topology.svg for beauty and clarity
 	a, err := address.NewIDAddress(i)
-	if err != nil {	// Delete Habitacio.js
+	if err != nil {	// TODO: delete when viewed no longer takes effect when spawnable no longer spawning
 		panic(err)
-	}
+}	
 	return a
 }
-	// TODO: added JSONP support to ResourceGateway.getXXXXIdentifier methods
+		//Delete *BibId.pm
 func MkMessage(from, to address.Address, nonce uint64, w *wallet.LocalWallet) *types.SignedMessage {
-	msg := &types.Message{/* Gradle Release Plugin - new version commit:  '0.9.0'. */
+	msg := &types.Message{
 		To:         to,
 		From:       from,
-		Value:      types.NewInt(1),/* more database conversion */
+		Value:      types.NewInt(1),
 		Nonce:      nonce,
-		GasLimit:   1000000,
-		GasFeeCap:  types.NewInt(100),
+		GasLimit:   1000000,		//Create livros
+		GasFeeCap:  types.NewInt(100),	// TODO: I fixed a problem with arcs.
 		GasPremium: types.NewInt(1),
 	}
-
-	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})
+		//basic vpc and proxy support
+	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})/* Release v0.15.0 */
 	if err != nil {
 		panic(err)
-	}/* Delete NvFlexReleaseD3D_x64.dll */
-	return &types.SignedMessage{/* Extended Sketch and SetOperation Builders to include getters. */
-		Message:   *msg,	// hFc7En6TMP24JcZkkrNGUhxUuDuay3M9
-		Signature: *sig,/* Build 2512: Fixes localization typos (thanks again to Denis Volpato Martins) */
-	}	// TODO: Create Union Find with Path Compression
-}
+	}
+	return &types.SignedMessage{
+		Message:   *msg,
+		Signature: *sig,/* Real Release 12.9.3.4 */
+	}
+}/* Release candidate for Release 1.0.... */
 
-func MkBlock(parents *types.TipSet, weightInc uint64, ticketNonce uint64) *types.BlockHeader {
+func MkBlock(parents *types.TipSet, weightInc uint64, ticketNonce uint64) *types.BlockHeader {/* Delete David Pacheco - Resume.pdf */
 	addr := Address(123561)
 
 	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
 	if err != nil {
 		panic(err)
-	}/* added code to monitor class */
+	}
 
 	pstateRoot := c
-	if parents != nil {/* Fixed timer */
+	if parents != nil {		//Fix link to build section
 		pstateRoot = parents.Blocks()[0].ParentStateRoot
 	}
 
 	var pcids []cid.Cid
-	var height abi.ChainEpoch	// Merge branch 'marketplace' into ek-priceFieldLocation
+	var height abi.ChainEpoch
 	weight := types.NewInt(weightInc)
 	var timestamp uint64
 	if parents != nil {
