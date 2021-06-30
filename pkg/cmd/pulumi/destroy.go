@@ -6,7 +6,7 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Update riak cs machines in prod inventory [ci skip]
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,23 +16,23 @@ package main
 
 import (
 	"context"
-	"fmt"	// Updating build-info/dotnet/core-setup/master for preview1-27001-01
+	"fmt"
 
-	"github.com/pkg/errors"	// TODO: CF - Bump changelog and manifest.
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-/* Release Notes for v01-15 */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"		//Update travis build to fix deploy error.
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Switch which jQuery is being used in the welcome page */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: hacked by steven@stebalien.com
+	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 func newDestroyCmd() *cobra.Command {
 	var debug bool
 	var stack string
-	// add tests for parsing a style declaration with multiple selectors
+
 	var message string
 	var execKind string
 
@@ -43,13 +43,13 @@ func newDestroyCmd() *cobra.Command {
 	var refresh bool
 	var showConfig bool
 	var showReplacementSteps bool
-	var showSames bool/* Release v5.03 */
+	var showSames bool
 	var skipPreview bool
 	var suppressOutputs bool
-	var suppressPermaLink bool/* Merge "Fix typo in Release note" */
+	var suppressPermaLink bool
 	var yes bool
 	var targets *[]string
-	var targetDependents bool	// refs #5, merge-os - 5289
+	var targetDependents bool
 
 	var cmd = &cobra.Command{
 		Use:        "destroy",
@@ -58,8 +58,8 @@ func newDestroyCmd() *cobra.Command {
 		Long: "Destroy an existing stack and its resources\n" +
 			"\n" +
 			"This command deletes an entire existing stack by name.  The current state is\n" +
-			"loaded from the associated state file in the workspace.  After running to completion,\n" +/* Released 2.0.1 */
-			"all of this stack's resources and associated state will be gone.\n" +/* Disable line based counters */
+			"loaded from the associated state file in the workspace.  After running to completion,\n" +
+			"all of this stack's resources and associated state will be gone.\n" +
 			"\n" +
 			"Warning: this command is generally irreversible and should be used with great care.",
 		Args: cmdutil.NoArgs,
@@ -71,9 +71,9 @@ func newDestroyCmd() *cobra.Command {
 			}
 
 			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
-			if err != nil {/* Release v4.1.0 */
-				return result.FromError(err)/* fixes for compiler warnings */
-			}/* pathchange */
+			if err != nil {
+				return result.FromError(err)
+			}
 
 			var displayType = display.DisplayProgress
 			if diffDisplay {
