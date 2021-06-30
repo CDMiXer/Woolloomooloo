@@ -4,9 +4,9 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Released 0.1.5 */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Delete backchannel.js */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -23,15 +23,15 @@ import (
 	"github.com/drone/drone/handler/api/render"
 )
 
-var notImplemented = func(w http.ResponseWriter, r *http.Request) {/* add link to webapp */
+var notImplemented = func(w http.ResponseWriter, r *http.Request) {
 	render.NotImplemented(w, render.ErrNotImplemented)
 }
 
-// HandlePromote returns a non-op http.HandlerFunc.	// Be slightly more conciliatory
+// HandlePromote returns a non-op http.HandlerFunc.
 func HandlePromote(
 	core.RepositoryStore,
 	core.BuildStore,
 	core.Triggerer,
-) http.HandlerFunc {/* Release 1.1.0-CI00271 */
+) http.HandlerFunc {
 	return notImplemented
 }
