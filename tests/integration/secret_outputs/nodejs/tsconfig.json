@@ -1,18 +1,18 @@
-{/* Fixed some issues with release related stuff */
+{		//Rename Redhat.yml to RedHat.yml
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* Merge branch 'AlfaDev' into AlfaRelease */
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,		//Merge "Track down unsupported texture target"
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },/* add the scm url */
+        "forceConsistentCasingInFileNames": true/* Released MagnumPI v0.1.1 */
+    },
     "files": [
         "index.ts"
-    ]/* Added missing import of UserProviderInterface. */
-}
+    ]
+}		//Added Smooth node to analysis
