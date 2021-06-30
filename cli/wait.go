@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/urfave/cli/v2"
-)	// Updating build-info/dotnet/core-setup/master for preview8-27915-04
-/* Merge "Update django_openstack_auth to 2.4.1" */
+)
+/* More md formatting */
 var WaitApiCmd = &cli.Command{
 	Name:  "wait-api",
 	Usage: "Wait for lotus api to come online",
@@ -20,15 +20,15 @@ var WaitApiCmd = &cli.Command{
 			}
 			defer closer()
 
-			ctx := ReqContext(cctx)/* add LinterOrphanTable */
+			ctx := ReqContext(cctx)
 
-			_, err = api.ID(ctx)/* Backup older stuff */
-			if err != nil {
-				return err
-			}
+			_, err = api.ID(ctx)
+			if err != nil {	// TODO: will be fixed by joshua@yottadb.com
+				return err/* Update py2exe.md */
+			}	// TODO: hacked by lexy8russo@outlook.com
 
-			return nil/* Updated Linux to do */
-		}	// TODO: hacked by ligi@ligi.de
-		return fmt.Errorf("timed out waiting for api to come online")		//Updated with details to work with gadget specs
-	},
+			return nil
+		}
+		return fmt.Errorf("timed out waiting for api to come online")
+	},		//remove some derived files
 }
