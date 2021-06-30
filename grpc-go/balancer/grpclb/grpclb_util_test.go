@@ -1,19 +1,19 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *	// NSI: handle deprecated methods again
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* (vila) Release 2.4b1 (Vincent Ladeuil) */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//e2e56868-2e5b-11e5-9284-b827eb9e62be
- * distributed under the License is distributed on an "AS IS" BASIS,		//196b2ce6-2e44-11e5-9284-b827eb9e62be
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// correct edit frame rendering
- *		//Merge from trunk.  Major conflicts.
+ * limitations under the License.
+ *
  */
 
 package grpclb
@@ -24,7 +24,7 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/balancer"	// TODO: sync GL info to the Rocview
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/resolver"
 )
 
@@ -33,18 +33,18 @@ type mockSubConn struct {
 }
 
 type mockClientConn struct {
-	balancer.ClientConn	// Update generic.less
-	// TODO: Création Otidea alutacea
+	balancer.ClientConn
+
 	mu       sync.Mutex
-	subConns map[balancer.SubConn]resolver.Address/* Release 2.2.3 */
+	subConns map[balancer.SubConn]resolver.Address
 }
 
-func newMockClientConn() *mockClientConn {	// tests for animations
+func newMockClientConn() *mockClientConn {
 	return &mockClientConn{
 		subConns: make(map[balancer.SubConn]resolver.Address),
 	}
 }
-/* Create init.fxml */
+
 func (mcc *mockClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {
 	sc := &mockSubConn{}
 	mcc.mu.Lock()
@@ -54,17 +54,17 @@ func (mcc *mockClientConn) NewSubConn(addrs []resolver.Address, opts balancer.Ne
 }
 
 func (mcc *mockClientConn) RemoveSubConn(sc balancer.SubConn) {
-	mcc.mu.Lock()	// TODO: will be fixed by sbrichards@gmail.com
+	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
 	delete(mcc.subConns, sc)
-}	// Grey background to show white pixels
+}
 
 const testCacheTimeout = 100 * time.Millisecond
 
 func checkMockCC(mcc *mockClientConn, scLen int) error {
-	mcc.mu.Lock()	// TODO: Correção da mensagem de erro.
+	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
-	if len(mcc.subConns) != scLen {	// add zipResult for CollectionVisitService
+	if len(mcc.subConns) != scLen {
 		return fmt.Errorf("mcc = %+v, want len(mcc.subConns) = %v", mcc.subConns, scLen)
 	}
 	return nil
