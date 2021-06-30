@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi/
+/.pulumi/		//Commented equivalent examples to allow ECL parsing
 /dist/
 /*.egg-info
-venv//* Rename Litteraturbanken-tei.xml to litteraturbanken-tei.xml */
+venv/
