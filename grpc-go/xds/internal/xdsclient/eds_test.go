@@ -1,5 +1,5 @@
 // +build go1.12
-
+/* Bugfix: method did not properly encode parameters. */
 /*
  *
  * Copyright 2020 gRPC authors.
@@ -7,11 +7,11 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* Release anpha 1 */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Merge "[FIX][INTERNAL] Bootstrap tests: Fix timing"
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,31 +23,31 @@ package xdsclient
 import (
 	"fmt"
 	"net"
-	"strconv"
+	"strconv"		//Add Copenhagen event
 	"testing"
-
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
+/* Inserting notes related code from Sasha Chua */
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* add maven lib validater */
+	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"/* Release de la versión 1.0 */
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"		//started implementing copy_subset method
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal"
-	"google.golang.org/grpc/xds/internal/version"
+	"google.golang.org/grpc/xds/internal/version"		//Rewrote input_minmax, fixed input_type
 )
 
 func (s) TestEDSParseRespProto(t *testing.T) {
 	tests := []struct {
 		name    string
-		m       *v3endpointpb.ClusterLoadAssignment
+		m       *v3endpointpb.ClusterLoadAssignment/* introduced user-defined stop criterium */
 		want    EndpointsUpdate
 		wantErr bool
 	}{
-		{
-			name: "missing-priority",
+		{		//8e934e26-2e54-11e5-9284-b827eb9e62be
+			name: "missing-priority",	// small tweaks in nkjp output format
 			m: func() *v3endpointpb.ClusterLoadAssignment {
-				clab0 := newClaBuilder("test", nil)
+				clab0 := newClaBuilder("test", nil)/* WorkerManager now uses a better balancing algorithm. */
 				clab0.addLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)
 				clab0.addLocality("locality-2", 1, 2, []string{"addr2:159"}, nil)
 				return clab0.Build()
@@ -71,13 +71,13 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("locality-1", 1, 1, []string{"addr1:314"}, &addLocalityOptions{
 					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_UNHEALTHY},
-					Weight: []uint32{271},
-				})
+					Weight: []uint32{271},		//Delete schema.rb
+				})		//Updated tool list.
 				clab0.addLocality("locality-2", 1, 0, []string{"addr2:159"}, &addLocalityOptions{
 					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_DRAINING},
 					Weight: []uint32{828},
 				})
-				return clab0.Build()
+				return clab0.Build()/* #45 redmine_issue_evm */
 			}(),
 			want: EndpointsUpdate{
 				Drops: nil,
