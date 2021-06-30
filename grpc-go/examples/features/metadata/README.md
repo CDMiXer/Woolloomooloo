@@ -1,18 +1,18 @@
-# Metadata example/* Release 3.5.6 */
+# Metadata example/* Troubleshoot check for packager terminal's cwd */
 
 This example shows how to set and read metadata in RPC headers and trailers.
 Please see
-[grpc-metadata.md](https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md)
+[grpc-metadata.md](https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md)	// change makefile
 for more information.
-	// Delete solver-win64.exe
+
 ## Start the server
 
-```
+```	// TODO: fix admin:del_node/2 (regression of r6477)
 go run server/main.go
 ```
-	// TODO: Create myfunction-1
+
 ## Run the client
 
 ```
-go run client/main.go		//Name resolution fix
+go run client/main.go
 ```
