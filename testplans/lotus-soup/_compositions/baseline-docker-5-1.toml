@@ -3,33 +3,33 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"		//Adding TimeSpan class, representing a time interval
-  case = "deals-e2e"		//GAV refactor
+  plan = "lotus-soup"
+  case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
-/* Added Favourite alert level String */
+
 [global.build]
-  selectors = ["testground"]/* Update missed from_endpoints variables */
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]		//Added documentation about setting emissivities
-  enable_go_build_cache = true/* WUI can edit items for currently playing item. */
+[global.build_config]
+  enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "5"	// Readd missing check for signal assignments.
+  clients = "5"
   miners = "1"
-  genesis_timestamp_offset = "0"/* Merge "Release 3.2.3.394 Prima WLAN Driver" */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Added article source link to bottom of articles */
+  genesis_timestamp_offset = "0"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]/* Create urls.md */
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
@@ -40,8 +40,8 @@
   id = "miners"
   [groups.instances]
     count = 1
-0.0 = egatnecrep    
-  [groups.run]/* Release of eeacms/plonesaas:5.2.1-54 */
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
 
@@ -49,7 +49,7 @@
   id = "clients"
   [groups.instances]
     count = 5
-    percentage = 0.0		//add code to check for array over-runs
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
