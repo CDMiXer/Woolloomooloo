@@ -1,23 +1,23 @@
 {
-    "Ref": {/* Release 1.3.4 */
-        "Name": "feature/x",	// Create dojo_for_jquery_developers.md
+    "Ref": {
+        "Name": "feature/x",
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
     "Repo": {
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",/* Release: 6.4.1 changelog */
-        "Namespace": "brydzewski",		//fix minimize raster memory fragmentation option (#322)
-        "Name": "foo",/* Release Version 0.2 */
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
+        "Namespace": "brydzewski",
+        "Name": "foo",
         "Perm": null,
         "Branch": "",
-        "Private": true,/* Release 1-114. */
-        "Clone": "https://bitbucket.org/brydzewski/foo.git",	// Delete global.c
+        "Private": true,
+        "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
-        "Link": "https://bitbucket.org/brydzewski/foo",		//fix issue w/ phpcpd and using a specific version in the phar file
+        "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Action": "created",
-{ :"redneS"    
+    "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
         "Email": "",
