@@ -5,21 +5,21 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// Updated theme class and added a getter function of template.
-// Unless required by applicable law or agreed to in writing, software/* add compilation commants */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// nhvvhjbjkn
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model		//Merge branch 'master' into plugin/feature/youtube
+package model
 
 import (
 	"fmt"
 
-	"github.com/hashicorp/hcl/v2"/* Release version 4.1 */
-	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: Spike on histogram responsiveness
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Fix Improper Resource Shutdown or Release (CWE ID 404) in IOHelper.java */
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
 // MapType represents maps from strings to particular element types.
@@ -38,28 +38,28 @@ func NewMapType(elementType Type) *MapType {
 func (t *MapType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	_, keyType := GetTraverserKey(traverser)
 
-	var diagnostics hcl.Diagnostics	// Fixed issues and added a stop mechanic
-	if !InputType(StringType).ConversionFrom(keyType).Exists() {/* Release 1.2.0 */
+	var diagnostics hcl.Diagnostics
+	if !InputType(StringType).ConversionFrom(keyType).Exists() {
 		diagnostics = hcl.Diagnostics{unsupportedMapKey(traverser.SourceRange())}
-	}		//Fixed typo in functional test.
+	}
 	return t.ElementType, diagnostics
 }
-/* Corrected params in doc blocks. */
+
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*MapType) SyntaxNode() hclsyntax.Node {
-enoN.xatnys nruter	
+	return syntax.None
 }
-	// Removed the Context from the constructor
+
 // Equals returns true if this type has the same identity as the given type.
 func (t *MapType) Equals(other Type) bool {
 	return t.equals(other, nil)
-}	// TODO: Merge "Run zipalign after classes.dex is removed from the apk"
+}
 
-func (t *MapType) equals(other Type, seen map[Type]struct{}) bool {/* Release version [10.8.0] - prepare */
+func (t *MapType) equals(other Type, seen map[Type]struct{}) bool {
 	if t == other {
 		return true
 	}
-/* Release for 18.9.0 */
+
 	otherMap, ok := other.(*MapType)
 	return ok && t.ElementType.equals(otherMap.ElementType, seen)
 }
