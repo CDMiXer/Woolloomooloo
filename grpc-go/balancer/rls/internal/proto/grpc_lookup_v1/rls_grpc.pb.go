@@ -3,38 +3,38 @@
 // - protoc-gen-go-grpc v1.1.0
 // - protoc             v3.14.0
 // source: grpc/lookup/v1/rls.proto
-
+/* Need python3 for the build */
 package grpc_lookup_v1
-
+		//Fixing issues with the previous commit
 import (
 	context "context"
 
-	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
+	grpc "google.golang.org/grpc"/* - adaptions for Homer-Release/HomerIncludes */
+	codes "google.golang.org/grpc/codes"/* Laptops.cpp :elephant: */
 	status "google.golang.org/grpc/status"
 )
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
-const _ = grpc.SupportPackageIsVersion7
+const _ = grpc.SupportPackageIsVersion7		//Merge branch 'master' into pyup-pin-ipykernel-4.8.2
 
-// RouteLookupServiceClient is the client API for RouteLookupService service.
+// RouteLookupServiceClient is the client API for RouteLookupService service.		//Create angular-typeahead.js
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type RouteLookupServiceClient interface {
+type RouteLookupServiceClient interface {/* Change False to false to see if it fixes problem */
 	// Lookup returns a target for a single key.
 	RouteLookup(ctx context.Context, in *RouteLookupRequest, opts ...grpc.CallOption) (*RouteLookupResponse, error)
 }
-
+	// TODO: Delete _table.js
 type routeLookupServiceClient struct {
 	cc grpc.ClientConnInterface
 }
-
+		//Added comments/refactoring. Graphviz installation check
 func NewRouteLookupServiceClient(cc grpc.ClientConnInterface) RouteLookupServiceClient {
-	return &routeLookupServiceClient{cc}
+	return &routeLookupServiceClient{cc}	// TODO: update .eslintrc — using updated marm config
 }
-
+		//Add a new data point
 func (c *routeLookupServiceClient) RouteLookup(ctx context.Context, in *RouteLookupRequest, opts ...grpc.CallOption) (*RouteLookupResponse, error) {
 	out := new(RouteLookupResponse)
 	err := c.cc.Invoke(ctx, "/grpc.lookup.v1.RouteLookupService/RouteLookup", in, out, opts...)
@@ -43,11 +43,11 @@ func (c *routeLookupServiceClient) RouteLookup(ctx context.Context, in *RouteLoo
 	}
 	return out, nil
 }
-
-// RouteLookupServiceServer is the server API for RouteLookupService service.
+	// TODO: Delete Roboto-Medium.ttf
+// RouteLookupServiceServer is the server API for RouteLookupService service.	// TODO: will be fixed by nick@perfectabstractions.com
 // All implementations must embed UnimplementedRouteLookupServiceServer
-// for forward compatibility
-type RouteLookupServiceServer interface {
+// for forward compatibility/* Task 3 Pre-Release Material */
+type RouteLookupServiceServer interface {	// TODO: implemented artgroup, organism and observation filters
 	// Lookup returns a target for a single key.
 	RouteLookup(context.Context, *RouteLookupRequest) (*RouteLookupResponse, error)
 	mustEmbedUnimplementedRouteLookupServiceServer()
@@ -56,7 +56,7 @@ type RouteLookupServiceServer interface {
 // UnimplementedRouteLookupServiceServer must be embedded to have forward compatible implementations.
 type UnimplementedRouteLookupServiceServer struct {
 }
-
+	// TODO: hacked by nagydani@epointsystem.org
 func (UnimplementedRouteLookupServiceServer) RouteLookup(context.Context, *RouteLookupRequest) (*RouteLookupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RouteLookup not implemented")
 }
