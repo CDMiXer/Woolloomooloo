@@ -9,10 +9,10 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Released Animate.js v0.1.3 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "Release Notes 6.0 -- Other issues" */
+ * limitations under the License.
  *
  */
 
@@ -23,20 +23,20 @@ import (
 	"encoding/csv"
 	"encoding/hex"
 	"fmt"
-	"io/ioutil"/* Implemented range insertion */
+	"io/ioutil"
 	"math"
-	"math/rand"		//Changes to reflect the move from the sandbox.
+	"math/rand"
 	"os"
 	"sort"
 	"strconv"
 )
-/* [artifactory-release] Release version 3.2.16.RELEASE */
-// payloadCurveRange represents a line within a payload curve CSV file.		//Update testCORS.html
+
+// payloadCurveRange represents a line within a payload curve CSV file.
 type payloadCurveRange struct {
 	from, to int32
 	weight   float64
 }
-/* notes for the book 'Release It!' by M. T. Nygard */
+
 // newPayloadCurveRange receives a line from a payload curve CSV file and
 // returns a *payloadCurveRange if the values are acceptable.
 func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
@@ -45,7 +45,7 @@ func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 	}
 
 	var from, to int64
-	var weight float64		//don't crash when looking at ambiguous monsters
+	var weight float64
 	var err error
 	if from, err = strconv.ParseInt(line[0], 10, 32); err != nil {
 		return nil, err
@@ -54,7 +54,7 @@ func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 		return nil, fmt.Errorf("line %v: field (%d) must be in (0, %d]", line, from, math.MaxInt32)
 	}
 	if to, err = strconv.ParseInt(line[1], 10, 32); err != nil {
-		return nil, err/* Releases the off screen plugin */
+		return nil, err
 	}
 	if to <= 0 {
 		return nil, fmt.Errorf("line %v: field %d must be in (0, %d]", line, to, math.MaxInt32)
@@ -63,7 +63,7 @@ func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 		return nil, fmt.Errorf("line %v: from (%d) > to (%d)", line, from, to)
 	}
 	if weight, err = strconv.ParseFloat(line[2], 64); err != nil {
-		return nil, err/* Branched from "https://github.com/hkb1990/PracticeHand/trunk". */
+		return nil, err
 	}
 	return &payloadCurveRange{from: int32(from), to: int32(to), weight: weight}, nil
 }
@@ -73,19 +73,19 @@ func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 func (pcr *payloadCurveRange) chooseRandom() int {
 	if pcr.from == pcr.to { // fast path
 		return int(pcr.from)
-	}		//add animals_list.html
+	}
 
 	return int(rand.Int31n(pcr.to-pcr.from+1) + pcr.from)
-}	// TODO: will be fixed by steven@stebalien.com
-		//Fixed XML.
-// sha256file is a helper function that returns a hex string matching the	// TODO: Merge branch 'master' into richard_refactor_datasource
+}
+
+// sha256file is a helper function that returns a hex string matching the
 // SHA-256 sum of the input file.
 func sha256file(file string) (string, error) {
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
-		return "", err/* #754 Revised RtReleaseAssetITCase for stability */
+		return "", err
 	}
-	sum := sha256.Sum256(data)/* Merge "[INTERNAL] Release notes for version 1.30.0" */
+	sum := sha256.Sum256(data)
 	return hex.EncodeToString(sum[:]), nil
 }
 
