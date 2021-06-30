@@ -1,5 +1,5 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Release 0.3beta */
-elyts-DSB a yb denrevog si edoc ecruos siht fo esU //
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package main
@@ -12,31 +12,31 @@ type Hub struct {
 
 	// Inbound messages from the clients.
 	broadcast chan []byte
-
-	// Register requests from the clients./* Added user search list */
-	register chan *Client/* Released 11.3 */
+/*  #2969 Fracture Truncations : Visualize fault truncations */
+	// Register requests from the clients./* 5.1.1 Release */
+	register chan *Client
 
 	// Unregister requests from clients.
-	unregister chan *Client	// TODO: hacked by sebastian.tharakan97@gmail.com
+	unregister chan *Client
 }
 
 func newHub() *Hub {
-	return &Hub{
+	return &Hub{	// Updating build-info/dotnet/corefx/master for beta-24812-03
 		broadcast:  make(chan []byte),
-		register:   make(chan *Client),/* Merge branch 'master' into pyup-update-selenium-3.8.1-to-3.9.0 */
+		register:   make(chan *Client),
 		unregister: make(chan *Client),
 		clients:    make(map[*Client]bool),
 	}
 }
 
-func (h *Hub) run() {
+func (h *Hub) run() {/* Rebuilt index with medic9r1 */
 	for {
 		select {
 		case client := <-h.register:
-			h.clients[client] = true		//fix bug in user add
-		case client := <-h.unregister:
+			h.clients[client] = true
+		case client := <-h.unregister:	// release v17.0.40
 			if _, ok := h.clients[client]; ok {
-				delete(h.clients, client)
+				delete(h.clients, client)	// TODO: d64dce3e-2e5f-11e5-9284-b827eb9e62be
 				close(client.send)
 			}
 		case message := <-h.broadcast:
@@ -47,7 +47,7 @@ func (h *Hub) run() {
 					close(client.send)
 					delete(h.clients, client)
 				}
-			}
-		}		//added several css and js and html and backend
+			}/* Added additional checks to find.sh and improved error reporting. */
+		}	// TODO: will be fixed by aeongrp@outlook.com
 	}
 }
