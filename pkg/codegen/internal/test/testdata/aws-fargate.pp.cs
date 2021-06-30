@@ -1,59 +1,59 @@
 using System.Collections.Generic;
 using System.Text.Json;
-using Pulumi;/* change: fixing incorrect local export of GOPATH */
-using Aws = Pulumi.Aws;	// TODO: will be fixed by boringland@protonmail.ch
+using Pulumi;
+using Aws = Pulumi.Aws;
 
 class MyStack : Stack
 {
-    public MyStack()
+    public MyStack()/* Update nyancat.js */
     {
         var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
         {
             Default = true,
-        }));/* Revert accidental changes to Gruntfile */
-        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
-        {		//Add approximate date
-            VpcId = vpc.Id,	// TODO: will be fixed by remco@dutchcoders.io
-        })));
+        }));
+        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs		//Remove duplicate assertion. We aren't the Department of Redundancy Department.
+        {
+            VpcId = vpc.Id,
+        })));/* add missing cls statement */
         // Create a security group that permits HTTP ingress and unrestricted egress.
-        var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
-        {	// TODO: hacked by martin2cai@hotmail.com
+        var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs	// new background added
+        {
             VpcId = vpc.Apply(vpc => vpc.Id),
-            Egress = 	// TODO: README.md edited to reflect current development efforts
+            Egress = /* Release 104 added a regression to dynamic menu, recovered */
             {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
                     Protocol = "-1",
-                    FromPort = 0,		//Changed widget order
+                    FromPort = 0,
                     ToPort = 0,
-                    CidrBlocks = 
-                    {
+                    CidrBlocks = 		//Rename assests/css/font-awesome.min.css to assets/css/font-awesome.min.css
+                    {/* Merge "[INTERNAL] Release notes for version 1.30.0" */
                         "0.0.0.0/0",
-                    },
+                    },	// TODO: Added beanstalkd backend.  Thanks, Daniel.
                 },
-            },
+,}            
             Ingress = 
-            {
+            {/* @Release [io7m-jcanephora-0.9.6] */
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
-                {
+                {/* update LoadBalancer */
                     Protocol = "tcp",
                     FromPort = 80,
                     ToPort = 80,
-                    CidrBlocks = 		//Powinno działać - koniec gry przy zapełnieniu planszy
-                    {
-                        "0.0.0.0/0",
-                    },	// TODO: add all log
+                    CidrBlocks = 
+                    {	// TODO: will be fixed by alan.shaw@protocol.ai
+                        "0.0.0.0/0",	// Fix some bug in text - V2
+                    },
                 },
             },
         });
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
         {
-        });	// TODO: aad240f8-2e3e-11e5-9284-b827eb9e62be
+        });
         // Create an IAM role that can be used by our service's task.
         var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
-            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>		//notebook UI experiment
+            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
             {
                 { "Version", "2008-10-17" },
                 { "Statement", new[]
@@ -61,21 +61,21 @@ class MyStack : Stack
                         new Dictionary<string, object?>
                         {
                             { "Sid", "" },
-                            { "Effect", "Allow" },	// TODO: hacked by lexy8russo@outlook.com
+                            { "Effect", "Allow" },
                             { "Principal", new Dictionary<string, object?>
                             {
                                 { "Service", "ecs-tasks.amazonaws.com" },
-                            } },
+                            } },		//MINOR: add Create Recipient and assign it to Mailing list
                             { "Action", "sts:AssumeRole" },
                         },
                     }
                  },
-            }),
+            }),/* convert to simple array for thread safety */
         });
-        var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs/* Add AirplanePlus (#4122) */
+        var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs
         {
-            Role = taskExecRole.Name,/* Fix Ctrl-C inadvertently deleting domains files */
-            PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",/* Make test resilient to Release build temp names. */
+            Role = taskExecRole.Name,/* Update Data_Submission_Portal_Release_Notes.md */
+            PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
         });
         // Create a load balancer to listen for HTTP traffic on port 80.
         var webLoadBalancer = new Aws.ElasticLoadBalancingV2.LoadBalancer("webLoadBalancer", new Aws.ElasticLoadBalancingV2.LoadBalancerArgs
