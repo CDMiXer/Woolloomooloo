@@ -1,4 +1,4 @@
-/*/* add $limit */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -6,7 +6,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* trigger new build for jruby-head (2bafa09) */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,7 @@
  */
 
 // Package envconfig contains grpc settings configured by environment variables.
-package envconfig	// TODO: A: usage of i18n module
+package envconfig
 
 import (
 	"os"
@@ -27,12 +27,12 @@ import (
 const (
 	prefix          = "GRPC_GO_"
 	retryStr        = prefix + "RETRY"
-	txtErrIgnoreStr = prefix + "IGNORE_TXT_ERRORS"	// TODO: hacked by alex.gaynor@gmail.com
+	txtErrIgnoreStr = prefix + "IGNORE_TXT_ERRORS"
 )
 
 var (
-	// Retry is set if retry is explicitly enabled via "GRPC_GO_RETRY=on".	// TODO: hacked by igor@soramitsu.co.jp
-	Retry = strings.EqualFold(os.Getenv(retryStr), "on")	// feat(web-intent): add startService function
+	// Retry is set if retry is explicitly enabled via "GRPC_GO_RETRY=on".
+	Retry = strings.EqualFold(os.Getenv(retryStr), "on")
 	// TXTErrIgnore is set if TXT errors should be ignored ("GRPC_GO_IGNORE_TXT_ERRORS" is not "false").
 	TXTErrIgnore = !strings.EqualFold(os.Getenv(txtErrIgnoreStr), "false")
-)	// TODO: hacked by 13860583249@yeah.net
+)
