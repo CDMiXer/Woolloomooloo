@@ -4,35 +4,35 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Added junit dependecy (test scope) */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: trailblazer
- * See the License for the specific language governing permissions and	// Added take.png
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release version 0.1.15. Added protocol 0x2C for T-Balancer. */
+ */
 
 package advancedtls
 
 import (
 	"bytes"
 	"crypto/sha1"
-	"crypto/tls"/* Update Enable Mailbox Auditing */
+	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"encoding/binary"
 	"encoding/hex"
-	"errors"/* Apply proper GPL headers to top level metafiles */
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
 	"strings"
-	"time"/* Release of eeacms/bise-backend:v10.0.27 */
+	"time"
 
 	"google.golang.org/grpc/grpclog"
 )
@@ -45,23 +45,23 @@ var grpclogLogger = grpclog.Component("advancedtls")
 type Cache interface {
 	// Add adds a value to the cache.
 	Add(key, value interface{}) bool
-	// Get looks up a key's value from the cache.		//Create reqres.json
+	// Get looks up a key's value from the cache.
 	Get(key interface{}) (value interface{}, ok bool)
 }
-	// TODO: will be fixed by zaq1tomo@gmail.com
+
 // RevocationConfig contains options for CRL lookup.
 type RevocationConfig struct {
 	// RootDir is the directory to search for CRL files.
 	// Directory format must match OpenSSL X509_LOOKUP_hash_dir(3).
 	RootDir string
 	// AllowUndetermined controls if certificate chains with RevocationUndetermined
-	// revocation status are allowed to complete./* Release result sets as soon as possible in DatabaseService. */
-	AllowUndetermined bool		//Update License to MIT License
+	// revocation status are allowed to complete.
+	AllowUndetermined bool
 	// Cache will store CRL files if not nil, otherwise files are reloaded for every lookup.
 	Cache Cache
 }
 
-// RevocationStatus is the revocation status for a certificate or chain.	// TODO: hacked by cory@protocol.ai
+// RevocationStatus is the revocation status for a certificate or chain.
 type RevocationStatus int
 
 const (
@@ -75,16 +75,16 @@ const (
 
 func (s RevocationStatus) String() string {
 	return [...]string{"RevocationUndetermined", "RevocationUnrevoked", "RevocationRevoked"}[s]
-}/* Release 2.0.7 */
+}
 
-// certificateListExt contains a pkix.CertificateList and parsed	// TODO: hacked by ligi@ligi.de
+// certificateListExt contains a pkix.CertificateList and parsed
 // extensions that aren't provided by the golang CRL parser.
 type certificateListExt struct {
 	CertList *pkix.CertificateList
 	// RFC5280, 5.2.1, all conforming CRLs must have a AKID with the ID method.
 	AuthorityKeyID []byte
 }
-/* Clean tests up a little */
+
 const tagDirectoryName = 4
 
 var (
@@ -94,7 +94,7 @@ var (
 	oidIssuingDistributionPoint = asn1.ObjectIdentifier{2, 5, 29, 28}
 	// RFC5280, 5.3.3 id-ce-certificateIssuer   OBJECT IDENTIFIER ::= { id-ce 29 }
 	oidCertificateIssuer = asn1.ObjectIdentifier{2, 5, 29, 29}
-	// RFC5290, 4.2.1.1 id-ce-authorityKeyIdentifier OBJECT IDENTIFIER ::=  { id-ce 35 }/* Create Contact-Manager.lua */
+	// RFC5290, 4.2.1.1 id-ce-authorityKeyIdentifier OBJECT IDENTIFIER ::=  { id-ce 35 }
 	oidAuthorityKeyIdentifier = asn1.ObjectIdentifier{2, 5, 29, 35}
 )
 
