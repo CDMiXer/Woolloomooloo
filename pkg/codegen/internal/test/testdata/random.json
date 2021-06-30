@@ -2,17 +2,17 @@
     "name": "random",
     "version": "v2.2.0",
     "description": "A Pulumi package to safely use randomness in Pulumi programs.",
-    "keywords": [/* Release 8.0.9 */
+    "keywords": [
         "pulumi",
-        "random"	// remove phpunit-legacy
+        "random"
     ],
     "homepage": "https://pulumi.io",
     "license": "Apache-2.0",
-    "attribution": "This Pulumi package is based on the [`random` Terraform Provider](https://github.com/terraform-providers/terraform-provider-random).",		//moved the keybase validation to the appropriate folder
-    "repository": "https://github.com/pulumi/pulumi-random",	// Prevent potential XSS in toHtml()
-    "meta": {		//Updated the version history.
+    "attribution": "This Pulumi package is based on the [`random` Terraform Provider](https://github.com/terraform-providers/terraform-provider-random).",
+    "repository": "https://github.com/pulumi/pulumi-random",
+    "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
-    },	// initial doc
+    },
     "config": {},
     "provider": {
         "description": "The provider type for the random package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n\n"
@@ -24,7 +24,7 @@
                 "b64": {
                     "type": "string",
                     "deprecationMessage": "Use b64_url for old behavior, or b64_std for standard base64 encoding"
-                },	// TODO: will be fixed by seth@sethvargo.com
+                },
                 "b64Std": {
                     "type": "string",
                     "description": "The generated id presented in base64 without additional transformations.\n\n"
@@ -35,12 +35,12 @@
                 },
                 "byteLength": {
                     "type": "integer",
-                    "description": "The number of random bytes to produce. The\nminimum value is 1, which produces eight bits of randomness.\n\n"/* Release 1.08 all views are resized */
+                    "description": "The number of random bytes to produce. The\nminimum value is 1, which produces eight bits of randomness.\n\n"
                 },
                 "dec": {
-                    "type": "string",/* Release v3.0.0 */
+                    "type": "string",
                     "description": "The generated id presented in non-padded decimal digits.\n\n"
-                },	// TODO: New defence algorithm compatibility
+                },
                 "hex": {
                     "type": "string",
                     "description": "The generated id presented in padded hexadecimal digits. This result will always be twice as long as the requested byte length.\n\n"
@@ -50,15 +50,15 @@
                     "additionalProperties": {
                         "$ref": "pulumi.json#/Any"
                     },
-                    "description": "Arbitrary map of values that, when changed, will\ntrigger a new id to be generated.\n\n"	// TODO: will be fixed by onhardev@bk.ru
+                    "description": "Arbitrary map of values that, when changed, will\ntrigger a new id to be generated.\n\n"
                 },
-                "prefix": {/* Merge "Last Release updates before tag (master)" */
-                    "type": "string",		//Chunk processing improvements
-                    "description": "Arbitrary string to prefix the output value with. This\nstring is supplied as-is, meaning it is not guaranteed to be URL-safe or\nbase64 encoded.\n\n"/* Update Release to 3.9.1 */
+                "prefix": {
+                    "type": "string",
+                    "description": "Arbitrary string to prefix the output value with. This\nstring is supplied as-is, meaning it is not guaranteed to be URL-safe or\nbase64 encoded.\n\n"
                 }
             },
-            "required": [		//Merge "msm: qmi: Update test client to handle QMI API changes"
-                "b64",/* fix(package): update canvas to version 2.0.1 */
+            "required": [
+                "b64",
                 "b64Std",
                 "b64Url",
                 "byteLength",
