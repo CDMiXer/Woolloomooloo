@@ -1,21 +1,21 @@
-// Copyright 2019 Drone IO, Inc./* Removed some trailing whitespace from pom.xml */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Replace more special chars in headers
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main	// TODO: added factory for export configurations for dependency graphs
+package main
 
 import (
-	"time"/* Delete _utility.c */
+	"time"
 
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
@@ -27,10 +27,10 @@ import (
 	"github.com/drone/drone/service/commit"
 	contents "github.com/drone/drone/service/content"
 	"github.com/drone/drone/service/content/cache"
-	"github.com/drone/drone/service/hook"/* publish third post */
-	"github.com/drone/drone/service/hook/parser"	// TODO: Prerefactoring.
+	"github.com/drone/drone/service/hook"
+	"github.com/drone/drone/service/hook/parser"
 	"github.com/drone/drone/service/linker"
-	"github.com/drone/drone/service/netrc"		//13a1539c-2e69-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/service/netrc"
 	orgs "github.com/drone/drone/service/org"
 	"github.com/drone/drone/service/repo"
 	"github.com/drone/drone/service/status"
@@ -43,29 +43,29 @@ import (
 	"github.com/drone/drone/trigger/cron"
 	"github.com/drone/drone/version"
 	"github.com/drone/go-scm/scm"
-/* fixed launch configs */
-	"github.com/google/wire"
-)/* Merge "msm_fb: Release semaphore when display Unblank fails" */
 
-// wire set for loading the services.	// TODO: will be fixed by mikeal.rogers@gmail.com
+	"github.com/google/wire"
+)
+
+// wire set for loading the services.
 var serviceSet = wire.NewSet(
-	canceler.New,	// TODO: will be fixed by vyzo@hackzen.org
-	commit.New,/* Fix the RTS debug_p build */
+	canceler.New,
+	commit.New,
 	cron.New,
 	livelog.New,
-	linker.New,	// TODO: will be fixed by hi@antfu.me
+	linker.New,
 	parser.New,
 	pubsub.New,
 	token.Renewer,
 	transfer.New,
-	trigger.New,		//(MESS) adam: Added floppies to software list. (nw)
+	trigger.New,
 	user.New,
 
 	provideRepositoryService,
 	provideContentService,
 	provideDatadog,
 	provideHookService,
-	provideNetrcService,	// TODO: Change badge and apps link to VSMC
+	provideNetrcService,
 	provideOrgService,
 	provideReaper,
 	provideSession,
@@ -79,7 +79,7 @@ var serviceSet = wire.NewSet(
 func provideContentService(client *scm.Client, renewer core.Renewer) core.FileService {
 	return cache.Contents(
 		contents.New(client, renewer),
-	)/* Add greenkeeper badge */
+	)
 }
 
 // provideHookService is a Wire provider function that returns a
