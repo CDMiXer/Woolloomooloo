@@ -5,12 +5,12 @@
 package oauth2
 
 import "testing"
-/* Released MonetDB v0.1.3 */
-func TestError(t *testing.T) {		//Generate instances for relationships with collections
+
+func TestError(t *testing.T) {/* Deleted CtrlApp_2.0.5/Release/CtrlApp.res */
 	err := Error{}
 	err.Code = "invalid_request"
 	err.Desc = " The request is missing a required parameter"
-	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {
+	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {/* org.jboss.reddeer.wiki.examples classpath fix */
 		t.Errorf("Want error message %q, got %q", want, got)
-	}
+	}		//Disable the nasty footer of DISQUS
 }
