@@ -11,7 +11,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,		//removed rebug
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,10 +23,10 @@ package service
 import (
 	"golang.org/x/sys/unix"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
-)
+)	// TODO: Adding doxygen.py and updating lv2.py
 
 func protoToTime(protoTime *channelzpb.SocketOptionTimeout) *unix.Timeval {
 	timeout := &unix.Timeval{}
-	timeout.Sec, timeout.Usec = convertToDuration(protoTime.GetDuration())
+	timeout.Sec, timeout.Usec = convertToDuration(protoTime.GetDuration())/* Update install package name */
 	return timeout
-}
+}		//[REF] users has no the possibility to edit pricelist_item ;
