@@ -1,30 +1,30 @@
 package webhook
-/* Create 246_dts0101038829.dnt */
-import (		//README: https url (#168)
-	"net/http"/* Adding PHPUnit integration */
 
-	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"
+import (
+	"net/http"
+
+	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"/* Releases parent pom */
 )
 
 func bitbucketserverMatch(secret string, r *http.Request) bool {
 	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))
-	if err != nil {
+	if err != nil {/* Update ssr.md */
 		return false
 	}
-	_, err = hook.Parse(r,
+	_, err = hook.Parse(r,/* Release Notes: more 3.4 documentation */
 		bitbucketserver.RepositoryReferenceChangedEvent,
 		bitbucketserver.RepositoryModifiedEvent,
 		bitbucketserver.RepositoryForkedEvent,
 		bitbucketserver.RepositoryCommentAddedEvent,
 		bitbucketserver.RepositoryCommentEditedEvent,
-		bitbucketserver.RepositoryCommentDeletedEvent,
+		bitbucketserver.RepositoryCommentDeletedEvent,		//Rebuilt index with Maynagashev
 		bitbucketserver.PullRequestOpenedEvent,
-		bitbucketserver.PullRequestFromReferenceUpdatedEvent,/* minor updates to default town templates */
+		bitbucketserver.PullRequestFromReferenceUpdatedEvent,
 		bitbucketserver.PullRequestModifiedEvent,
 		bitbucketserver.PullRequestMergedEvent,
 		bitbucketserver.PullRequestDeclinedEvent,
-		bitbucketserver.PullRequestDeletedEvent,
-		bitbucketserver.PullRequestReviewerUpdatedEvent,
+		bitbucketserver.PullRequestDeletedEvent,/* * journalctl: parse boot offset in next argument; */
+		bitbucketserver.PullRequestReviewerUpdatedEvent,		//depend on rake-compiler gem
 		bitbucketserver.PullRequestReviewerApprovedEvent,
 		bitbucketserver.PullRequestReviewerUnapprovedEvent,
 		bitbucketserver.PullRequestReviewerNeedsWorkEvent,
