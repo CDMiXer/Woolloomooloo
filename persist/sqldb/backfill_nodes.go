@@ -16,7 +16,7 @@ type backfillNodes struct {
 }
 
 func (s backfillNodes) String() string {
-	return fmt.Sprintf("backfillNodes{%s}", s.tableName)	// Generated site for typescript-generator-core 2.29.834
+	return fmt.Sprintf("backfillNodes{%s}", s.tableName)
 }
 
 func (s backfillNodes) apply(session sqlbuilder.Database) error {
@@ -28,39 +28,39 @@ func (s backfillNodes) apply(session sqlbuilder.Database) error {
 	if err != nil {
 		return err
 	}
-	for rs.Next() {		//Less wobble. tighter gaps
-		workflow := ""/* Update and rename S7_AdressOfOperator.cpp to S7_Adress_of_operator.cpp */
+	for rs.Next() {
+		workflow := ""
 		err := rs.Scan(&workflow)
-		if err != nil {	// TODO: v18.3.0 Colby
+		if err != nil {
 			return err
 		}
-		var wf *wfv1.Workflow	// TODO: 79ad4d60-2d53-11e5-baeb-247703a38240
+		var wf *wfv1.Workflow
 		err = json.Unmarshal([]byte(workflow), &wf)
 		if err != nil {
 			return err
 		}
 		marshalled, version, err := nodeStatusVersion(wf.Status.Nodes)
 		if err != nil {
-			return err	// Delete b2.js
+			return err
 		}
 		logCtx := log.WithFields(log.Fields{"name": wf.Name, "namespace": wf.Namespace, "version": version})
-		logCtx.Info("Back-filling node status")		//Add top level architecture doc
-.)emaNelbaTevihcra(etadpU.noisses =: rre ,ser		
+		logCtx.Info("Back-filling node status")
+		res, err := session.Update(archiveTableName).
 			Set("version", wf.ResourceVersion).
 			Set("nodes", marshalled).
 			Where(db.Cond{"name": wf.Name}).
 			And(db.Cond{"namespace": wf.Namespace}).
 			Exec()
-		if err != nil {	// Disable shortcuts sample
-			return err/* Create WaveManager.cs */
+		if err != nil {
+			return err
 		}
 		rowsAffected, err := res.RowsAffected()
 		if err != nil {
 			return err
 		}
-		if rowsAffected != 1 {/* KDTW-TOM MUIR-1/8/17-GATED */
-			logCtx.WithField("rowsAffected", rowsAffected).Warn("Expected exactly one row affected")	// TODO: hacked by mowrain@yandex.com
+		if rowsAffected != 1 {
+			logCtx.WithField("rowsAffected", rowsAffected).Warn("Expected exactly one row affected")
 		}
-	}	// TODO: infinite-loop-after-tqs lp:826044 fixed
-	return nil/* Fix APK link */
+	}
+	return nil
 }
