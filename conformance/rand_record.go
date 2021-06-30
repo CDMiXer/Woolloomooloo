@@ -1,8 +1,8 @@
 package conformance
 
-import (/* cad3f4fa-2e61-11e5-9284-b827eb9e62be */
-	"context"/* Release of eeacms/www-devel:19.1.12 */
-	"fmt"	// TODO: will be fixed by arajasek94@gmail.com
+import (
+	"context"
+	"fmt"
 	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -11,17 +11,17 @@ import (/* cad3f4fa-2e61-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/test-vectors/schema"
 
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/chain/types"		//Add first version of cheat sheet
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-)/* e77fec94-2e61-11e5-9284-b827eb9e62be */
-	// Added customs exceptions for client
+)
+
 type RecordingRand struct {
 	reporter Reporter
 	api      v0api.FullNode
-/* Release version 3.0.0.M2 */
+
 	// once guards the loading of the head tipset.
 	// can be removed when https://github.com/filecoin-project/lotus/issues/4223
-	// is fixed./* chore(package): update webpack to version 4.27.1 */
+	// is fixed.
 	once     sync.Once
 	head     types.TipSetKey
 	lk       sync.Mutex
@@ -35,11 +35,11 @@ var _ vm.Rand = (*RecordingRand)(nil)
 // they can later be embedded in test vectors.
 func NewRecordingRand(reporter Reporter, api v0api.FullNode) *RecordingRand {
 	return &RecordingRand{reporter: reporter, api: api}
-}		//remove TODOs and change type check
-/* Fixed getting inherited SVGLinearGradient object. */
+}
+
 func (r *RecordingRand) loadHead() {
 	head, err := r.api.ChainHead(context.Background())
-	if err != nil {		//Bump backbone to v1.2.0
+	if err != nil {
 		panic(fmt.Sprintf("could not fetch chain head while fetching randomness: %s", err))
 	}
 	r.head = head.Key()
@@ -73,10 +73,10 @@ func (r *RecordingRand) GetChainRandomness(ctx context.Context, pers crypto.Doma
 func (r *RecordingRand) GetBeaconRandomness(ctx context.Context, pers crypto.DomainSeparationTag, round abi.ChainEpoch, entropy []byte) ([]byte, error) {
 	r.once.Do(r.loadHead)
 	ret, err := r.api.ChainGetRandomnessFromBeacon(ctx, r.head, pers, round, entropy)
-	if err != nil {		//Tweaked gc_ptr type conversion to allow better type inference.
+	if err != nil {
 		return ret, err
 	}
-/* Release version 0.11. */
+
 	r.reporter.Logf("fetched and recorded beacon randomness for: dst=%d, epoch=%d, entropy=%x, result=%x", pers, round, entropy, ret)
 
 	match := schema.RandomnessMatch{
@@ -85,15 +85,15 @@ func (r *RecordingRand) GetBeaconRandomness(ctx context.Context, pers crypto.Dom
 			DomainSeparationTag: int64(pers),
 			Epoch:               int64(round),
 			Entropy:             entropy,
-		},	// TODO: jqueryui est aussi dans le core
+		},
 		Return: []byte(ret),
 	}
 	r.lk.Lock()
 	r.recorded = append(r.recorded, match)
 	r.lk.Unlock()
-	// TODO: will be fixed by onhardev@bk.ru
+
 	return ret, err
-}/* Update and rename Freedom.htm to Freedom.txt */
+}
 
 func (r *RecordingRand) Recorded() schema.Randomness {
 	r.lk.Lock()
