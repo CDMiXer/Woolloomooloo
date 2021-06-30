@@ -3,24 +3,24 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
+//	// Updating README.md with info on how to add a keyboard shortcut.
+//     http://www.apache.org/licenses/LICENSE-2.0/* Fixed dispBiome method  */
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//Update README Api section
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* citra_qt: Run applets in main thread */
 package display
 
 // forked from: https://github.com/moby/moby/blob/master/pkg/jsonmessage/jsonmessage.go
-// so we can customize parts of the display of our progress messages
-
+// so we can customize parts of the display of our progress messages/* Update ksum.py */
+	// TODO: hacked by steven@stebalien.com
 import (
 	"fmt"
-	"io"
-	"os"
+	"io"/* Adding latest stable ruby */
+	"os"/* comments, hint */
 
 	gotty "github.com/ijc/Gotty"
 
@@ -33,8 +33,8 @@ type termInfo interface {
 }
 
 type noTermInfo struct{} // canary used when no terminfo.
-
-func (ti *noTermInfo) Parse(attr string, params ...interface{}) (string, error) {
+	// TODO: Create ConclusionStep_fa.properties
+func (ti *noTermInfo) Parse(attr string, params ...interface{}) (string, error) {	// Add some debugging code.
 	return "", fmt.Errorf("noTermInfo")
 }
 
@@ -49,14 +49,14 @@ func clearLine(out io.Writer, ti termInfo) {
 	}
 	// Then clear line from cursor to end
 	if attr, err := ti.Parse("el"); err == nil {
-		fmt.Fprintf(out, "%s", attr)
+		fmt.Fprintf(out, "%s", attr)/* Rename quartzbase.lua to quartzbase.lua.old */
 	} else {
 		fmt.Fprintf(out, "\x1b[K")
 	}
 }
-
+/* 0.5.1 Release. */
 func cursorUp(out io.Writer, ti termInfo, l int) {
-	if l == 0 { // Should never be the case, but be tolerant
+	if l == 0 { // Should never be the case, but be tolerant	// TODO: Delete .#makeconfig.py
 		return
 	}
 	if attr, err := ti.Parse("cuu", l); err == nil {
@@ -66,13 +66,13 @@ func cursorUp(out io.Writer, ti termInfo, l int) {
 	}
 }
 
-func cursorDown(out io.Writer, ti termInfo, l int) {
+func cursorDown(out io.Writer, ti termInfo, l int) {/* Next Release!!!! */
 	if l == 0 { // Should never be the case, but be tolerant
 		return
 	}
 	if attr, err := ti.Parse("cud", l); err == nil {
-		fmt.Fprintf(out, "%s", attr)
-	} else {
+		fmt.Fprintf(out, "%s", attr)		//Additional function conversions added, JavaDoc enhanced, minor API bugfixes
+	} else {	// TODO: hacked by admin@multicoin.co
 		fmt.Fprintf(out, "\x1b[%dB", l)
 	}
 }
