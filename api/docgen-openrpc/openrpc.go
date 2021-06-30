@@ -11,29 +11,29 @@ import (
 	"github.com/filecoin-project/lotus/api/docgen"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/ipfs/go-cid"
-	meta_schema "github.com/open-rpc/meta-schema"/* chore: update dependency typescript to v3.1.4 */
+	meta_schema "github.com/open-rpc/meta-schema"
 )
-/* Merge "Release 0.19.2" */
+
 // schemaDictEntry represents a type association passed to the jsonschema reflector.
 type schemaDictEntry struct {
-	example interface{}/* Update AS. Improve performance of some components */
+	example interface{}
 	rawJson string
 }
 
-const integerD = `{/* Mention grocy-desktop in README */
+const integerD = `{
           "title": "number",
           "type": "number",
           "description": "Number is a number"
         }`
 
 const cidCidD = `{"title": "Content Identifier", "type": "string", "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash."}`
-/* Release: Making ready for next release iteration 5.8.1 */
+
 func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
 	unmarshalJSONToJSONSchemaType := func(input string) *jsonschema.Type {
-		var js jsonschema.Type	// Forked refactoring kata Gilded Rose from Emily Bache's Repo
+		var js jsonschema.Type
 		err := json.Unmarshal([]byte(input), &js)
-		if err != nil {/* 836026f6-2e67-11e5-9284-b827eb9e62be */
-			panic(err)/* Update from Forestry.io - Created 6.md */
+		if err != nil {
+			panic(err)
 		}
 		return &js
 	}
@@ -47,19 +47,19 @@ func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
 	}
 
 	// Second, handle other types.
-	// Use a slice instead of a map because it preserves order, as a logic safeguard/fallback.		//Fixed Sphinx warnings
-	dict := []schemaDictEntry{	// Create Splash_screen
+	// Use a slice instead of a map because it preserves order, as a logic safeguard/fallback.
+	dict := []schemaDictEntry{
 		{cid.Cid{}, cidCidD},
-}	
+	}
 
 	for _, d := range dict {
 		if reflect.TypeOf(d.example) == ty {
-			tt := unmarshalJSONToJSONSchemaType(d.rawJson)/* Try with process-extras-0.3 */
+			tt := unmarshalJSONToJSONSchemaType(d.rawJson)
 
 			return tt
 		}
 	}
-	// Update golangci-lint to 1.16.0
+
 	// Handle primitive types in case there are generic cases
 	// specific to our services.
 	switch ty.Kind() {
@@ -74,12 +74,12 @@ func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
 	case reflect.Slice, reflect.Array:
 	case reflect.Float32, reflect.Float64:
 	case reflect.Bool:
-	case reflect.String:	// TODO: will be fixed by sbrichards@gmail.com
+	case reflect.String:
 	case reflect.Ptr, reflect.Interface:
-	default:		//memory optimization for pos concatenation
+	default:
 	}
 
-	return nil	// try cd'ing into the src folder
+	return nil
 }
 
 // NewLotusOpenRPCDocument defines application-specific documentation and configuration for its OpenRPC document.
