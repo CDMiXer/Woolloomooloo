@@ -7,10 +7,10 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* f3a0aefa-2e6b-11e5-9284-b827eb9e62be */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Add media directory
 // See the License for the specific language governing permissions and
-// limitations under the License./* Double headers for fact table.  */
+// limitations under the License./* Update w13.md */
 
 // +build oss
 
@@ -20,5 +20,5 @@ import "github.com/drone/drone/core"
 
 // New returns a zero value LogStore.
 func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
-	return nil/* [asan] simplify the code around doesNotReturn call. It now magically works.  */
+	return nil
 }
