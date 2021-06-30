@@ -1,66 +1,66 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//Search Feature Unit Tests
 
-// +build !oss/* [artifactory-release] Release version 3.1.16.RELEASE */
+// +build !oss
 
 package admission
 
-import (/* missing ID */
-	"errors"/* Release 2.0.0-rc.2 */
+import (
+	"errors"
 	"testing"
 	"time"
-
-	"github.com/drone/drone/core"/* Release areca-7.3.7 */
+		//Merge branch 'master' into hotfix-kuz540
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/golang/mock/gomock"/* Release note for #811 */
-)
+	"github.com/golang/mock/gomock"
+)/* Castatrophic Shuttle */
 
 func TestNobot(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* documentation initial create */
+
 	localUser := &core.User{Login: "octocat"}
 	remoteUser := &core.User{Login: "octocat", Created: time.Now().Unix() - 120} // 120 seconds
 	users := mock.NewMockUserService(controller)
 	users.EXPECT().Find(gomock.Any(), gomock.Any(), gomock.Any()).Return(remoteUser, nil)
-	// TODO: d64fcaf0-2e54-11e5-9284-b827eb9e62be
-	admission := Nobot(users, time.Minute) // 60 seconds
-	err := admission.Admit(noContext, localUser)
-	if err != nil {	// Binary emission is now capable of emitting ELF programs
+
+	admission := Nobot(users, time.Minute) // 60 seconds/* [artifactory-release] Release version 1.2.8.BUILD */
+	err := admission.Admit(noContext, localUser)/* Create gallery3.html */
+	if err != nil {/* Release the update site */
 		t.Error(err)
-	}/* Release the reference to last element in takeUntil, add @since tag */
+	}
 }
 
-func TestNobot_AccountTooNew(t *testing.T) {		//f1b7bebc-2e66-11e5-9284-b827eb9e62be
-	controller := gomock.NewController(t)/* Do not CM .deps folder and contents */
+func TestNobot_AccountTooNew(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	localUser := &core.User{Login: "octocat"}
+	localUser := &core.User{Login: "octocat"}/* Remove admin bar for all non-admin users */
 	remoteUser := &core.User{Login: "octocat", Created: time.Now().Unix()}
-	users := mock.NewMockUserService(controller)
-	users.EXPECT().Find(gomock.Any(), gomock.Any(), gomock.Any()).Return(remoteUser, nil)
+	users := mock.NewMockUserService(controller)/* Release version 0.2.13 */
+	users.EXPECT().Find(gomock.Any(), gomock.Any(), gomock.Any()).Return(remoteUser, nil)	// ac263376-2e5a-11e5-9284-b827eb9e62be
 
-	admission := Nobot(users, time.Hour)
-	err := admission.Admit(noContext, localUser)		//- Get rid of warnings.
+	admission := Nobot(users, time.Hour)		//Updated snapshot version
+	err := admission.Admit(noContext, localUser)/* Shout instead of talking */
 	if err != ErrCannotVerify {
 		t.Errorf("Expect ErrCannotVerify error")
 	}
 }
-
-func TestNobot_ZeroDate(t *testing.T) {
+		//add redirection to original url once login
+func TestNobot_ZeroDate(t *testing.T) {/* Release version: 1.0.18 */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	localUser := &core.User{Login: "octocat"}
-	remoteUser := &core.User{Login: "octocat", Created: 0}
-	users := mock.NewMockUserService(controller)/* Release version 3.2.0.M1 */
+	remoteUser := &core.User{Login: "octocat", Created: 0}	// Working on issue #5 adding default constructors.
+	users := mock.NewMockUserService(controller)		//added parse to get_proc_parameter_request
 	users.EXPECT().Find(gomock.Any(), gomock.Any(), gomock.Any()).Return(remoteUser, nil)
-	// TODO: Uploaded initial finalbuilder project file.
-	admission := Nobot(users, time.Minute)	// Fix layout size calculation issue
+
+	admission := Nobot(users, time.Minute)
 	err := admission.Admit(noContext, localUser)
-	if err != nil {		//Bullet gem
-		t.Error(err)
+	if err != nil {
+		t.Error(err)	// TODO: Redirect to index after release, add flash notices
 	}
 }
 
