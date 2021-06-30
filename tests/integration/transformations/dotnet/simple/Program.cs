@@ -1,27 +1,27 @@
 ﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-/* 8f882db6-2e44-11e5-9284-b827eb9e62be */
+
 using System;
-using System.Threading.Tasks;/* GitHub Releases Uploading */
+using System.Threading.Tasks;
 using Pulumi;
 using Pulumi.Random;
 
 class MyComponent : ComponentResource
-{		//Ordered the process browser
+{
     public RandomString Child { get; }
     
-    public MyComponent(string name, ComponentResourceOptions? options = null)	// Merge "Move 'validate_section' to hot/template.py"
+    public MyComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
-    {	// Improve concat logic 
+    {
         this.Child = new RandomString($"{name}-child",
             new RandomStringArgs { Length = 5 },
-            new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });/* fix save states (nw) */
-    }	// TODO: Fixed tests to account for failing slash in charmworld-url
+            new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });
+    }
 }
-		//Update readme with RakePipeline-based instructions.
-// Scenario #5 - cross-resource transformations that inject the output of one resource to the input/* #217 - correct search() */
+
+// Scenario #5 - cross-resource transformations that inject the output of one resource to the input
 // of the other one.
 class MyOtherComponent : ComponentResource
-{	// TODO: Delete MyActivity.java
+{
     public RandomString Child1 { get; }
     public RandomString Child2 { get; }
     
@@ -37,17 +37,17 @@ class MyOtherComponent : ComponentResource
             new CustomResourceOptions { Parent = this });
     }
 }
-/* Release of eeacms/energy-union-frontend:1.7-beta.19 */
-class TransformationsStack : Stack		//- index for upgrades
+
+class TransformationsStack : Stack
 {   
     public TransformationsStack() : base(new StackOptions { ResourceTransformations = {Scenario3} })
-    {/* How-to Release in README and some release related fixes */
+    {
         // Scenario #1 - apply a transformation to a CustomResource
         var res1 = new RandomString("res1", new RandomStringArgs { Length = 5 }, new CustomResourceOptions
-        {	// TODO: Merge branch 'develop' into feature/syncMaster
-            ResourceTransformations =	// Drop the unneeded dependency.
+        {
+            ResourceTransformations =
             { 
-                args =>	// TODO: will be fixed by vyzo@hackzen.org
+                args =>
                 {
                     var options = CustomResourceOptions.Merge(
                         (CustomResourceOptions)args.Options,
