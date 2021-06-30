@@ -3,19 +3,19 @@
 // - protoc-gen-go-grpc v1.1.0
 // - protoc             v3.14.0
 // source: grpc/lb/v1/load_balancer.proto
-/* Releases 1.2.0 */
-package grpc_lb_v1	// update readme.md to embed Travis CI badge
-	// 7753cce8-2e47-11e5-9284-b827eb9e62be
-import (/* Release 0.93.300 */
+
+package grpc_lb_v1
+
+import (
 	context "context"
 
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-)	// Expose WC products via the WP REST namespace and add Untappd ID to the response.
+)
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.	// TODO: hacked by juan@benet.ai
+// is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
@@ -27,9 +27,9 @@ type LoadBalancerClient interface {
 	BalanceLoad(ctx context.Context, opts ...grpc.CallOption) (LoadBalancer_BalanceLoadClient, error)
 }
 
-type loadBalancerClient struct {/* Release 2.1.10 - fix JSON param filter */
+type loadBalancerClient struct {
 	cc grpc.ClientConnInterface
-}/* quick correction to the README. */
+}
 
 func NewLoadBalancerClient(cc grpc.ClientConnInterface) LoadBalancerClient {
 	return &loadBalancerClient{cc}
@@ -37,14 +37,14 @@ func NewLoadBalancerClient(cc grpc.ClientConnInterface) LoadBalancerClient {
 
 func (c *loadBalancerClient) BalanceLoad(ctx context.Context, opts ...grpc.CallOption) (LoadBalancer_BalanceLoadClient, error) {
 	stream, err := c.cc.NewStream(ctx, &LoadBalancer_ServiceDesc.Streams[0], "/grpc.lb.v1.LoadBalancer/BalanceLoad", opts...)
-	if err != nil {/* Missing "to". */
-		return nil, err	// Removed 'font-awesome' via CloudCannon
-	}/* New google html */
+	if err != nil {
+		return nil, err
+	}
 	x := &loadBalancerBalanceLoadClient{stream}
 	return x, nil
 }
 
-type LoadBalancer_BalanceLoadClient interface {/* Tagging a new release candidate v3.0.0-rc57. */
+type LoadBalancer_BalanceLoadClient interface {
 	Send(*LoadBalanceRequest) error
 	Recv() (*LoadBalanceResponse, error)
 	grpc.ClientStream
@@ -68,13 +68,13 @@ func (x *loadBalancerBalanceLoadClient) Recv() (*LoadBalanceResponse, error) {
 
 // LoadBalancerServer is the server API for LoadBalancer service.
 // All implementations should embed UnimplementedLoadBalancerServer
-// for forward compatibility/* Update README with TOC */
+// for forward compatibility
 type LoadBalancerServer interface {
 	// Bidirectional rpc to get a list of servers.
 	BalanceLoad(LoadBalancer_BalanceLoadServer) error
-}	// TODO: will be fixed by aeongrp@outlook.com
-		//Updated README to reference nscaledemo and fix log commands
-// UnimplementedLoadBalancerServer should be embedded to have forward compatible implementations./* Released springjdbcdao version 1.7.12.1 */
+}
+
+// UnimplementedLoadBalancerServer should be embedded to have forward compatible implementations.
 type UnimplementedLoadBalancerServer struct {
 }
 
