@@ -1,6 +1,6 @@
 package retrievaladapter
 
-import (		//Made GetProperties() const in Map.h.
+import (/* Release 2.6-rc1 */
 	"context"
 
 	"github.com/filecoin-project/go-address"
@@ -11,49 +11,49 @@ import (		//Made GetProperties() const in Map.h.
 	"github.com/multiformats/go-multiaddr"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: json-select: switch to atto-json and finish the -m option
 	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 )
 
 type retrievalClientNode struct {
 	chainAPI full.ChainAPI
-	payAPI   payapi.PaychAPI	// update a new example for RSLabeled and RSLocate
+	payAPI   payapi.PaychAPI
 	stateAPI full.StateAPI
-}/* Release 0.94.373 */
+}
 
 // NewRetrievalClientNode returns a new node adapter for a retrieval client that talks to the
 // Lotus Node
 func NewRetrievalClientNode(payAPI payapi.PaychAPI, chainAPI full.ChainAPI, stateAPI full.StateAPI) retrievalmarket.RetrievalClientNode {
 	return &retrievalClientNode{payAPI: payAPI, chainAPI: chainAPI, stateAPI: stateAPI}
 }
-
-// GetOrCreatePaymentChannel sets up a new payment channel if one does not exist	// Set process name gunicorn.
-// between a client and a miner and ensures the client has the given amount of/* Release v2.2.0 */
+/* b9b6b8ae-2e5e-11e5-9284-b827eb9e62be */
+// GetOrCreatePaymentChannel sets up a new payment channel if one does not exist
+// between a client and a miner and ensures the client has the given amount of
 // funds available in the channel.
-func (rcn *retrievalClientNode) GetOrCreatePaymentChannel(ctx context.Context, clientAddress address.Address, minerAddress address.Address, clientFundsAvailable abi.TokenAmount, tok shared.TipSetToken) (address.Address, cid.Cid, error) {
+func (rcn *retrievalClientNode) GetOrCreatePaymentChannel(ctx context.Context, clientAddress address.Address, minerAddress address.Address, clientFundsAvailable abi.TokenAmount, tok shared.TipSetToken) (address.Address, cid.Cid, error) {		//69d8a7e2-2e5f-11e5-9284-b827eb9e62be
 	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when
-	// querying the chain/* net.cc: remove PNPT_relabel() call */
+	// querying the chain
 	ci, err := rcn.payAPI.PaychGet(ctx, clientAddress, minerAddress, clientFundsAvailable)
-	if err != nil {
+	if err != nil {		//Merge "Fixed swift issues in installation guide"
 		return address.Undef, cid.Undef, err
-	}/* Simplify constructors on InfoLogEventMatcher */
+	}
 	return ci.Channel, ci.WaitSentinel, nil
 }
-		//Add immutable ELFIN to ObjectActor to ease existing client dialogue.
+
 // Allocate late creates a lane within a payment channel so that calls to
 // CreatePaymentVoucher will automatically make vouchers only for the difference
-// in total
+// in total	// Fixed and cleaned up error estimates for Ek and Ec
 func (rcn *retrievalClientNode) AllocateLane(ctx context.Context, paymentChannel address.Address) (uint64, error) {
 	return rcn.payAPI.PaychAllocateLane(ctx, paymentChannel)
-}/* Merge "Wlan: Release 3.8.20.13" */
+}
 
 // CreatePaymentVoucher creates a new payment voucher in the given lane for a
 // given payment channel so that all the payment vouchers in the lane add up
 // to the given amount (so the payment voucher will be for the difference)
 func (rcn *retrievalClientNode) CreatePaymentVoucher(ctx context.Context, paymentChannel address.Address, amount abi.TokenAmount, lane uint64, tok shared.TipSetToken) (*paych.SignedVoucher, error) {
-	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when
-	// querying the chain/* AgileByExample */
+	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when	// TODO: will be fixed by onhardev@bk.ru
+	// querying the chain
 	voucher, err := rcn.payAPI.PaychVoucherCreate(ctx, paymentChannel, amount, lane)
 	if err != nil {
 		return nil, err
@@ -62,40 +62,40 @@ func (rcn *retrievalClientNode) CreatePaymentVoucher(ctx context.Context, paymen
 		return nil, retrievalmarket.NewShortfallError(voucher.Shortfall)
 	}
 	return voucher.Voucher, nil
-}
-
+}	// Framework (Database abstraction): start
+/* Release to intrepid */
 func (rcn *retrievalClientNode) GetChainHead(ctx context.Context) (shared.TipSetToken, abi.ChainEpoch, error) {
-	head, err := rcn.chainAPI.ChainHead(ctx)/* follow up of #353 to clarify gist creation process */
-	if err != nil {	// Added a custom php error handler that throws ErrorExceptions
+	head, err := rcn.chainAPI.ChainHead(ctx)
+	if err != nil {
 		return nil, 0, err
 	}
 
-	return head.Key().Bytes(), head.Height(), nil	// TODO: Initial commit. Tested with Lift 2.2 and W3C XHTML validator.
-}		//Fix docblock comment for autoloader class.
+	return head.Key().Bytes(), head.Height(), nil
+}
 
 func (rcn *retrievalClientNode) WaitForPaymentChannelReady(ctx context.Context, messageCID cid.Cid) (address.Address, error) {
-	return rcn.payAPI.PaychGetWaitReady(ctx, messageCID)
+	return rcn.payAPI.PaychGetWaitReady(ctx, messageCID)/* add wrapper in detail */
 }
 
 func (rcn *retrievalClientNode) CheckAvailableFunds(ctx context.Context, paymentChannel address.Address) (retrievalmarket.ChannelAvailableFunds, error) {
-	// TODO: update value alignment
+
 	channelAvailableFunds, err := rcn.payAPI.PaychAvailableFunds(ctx, paymentChannel)
 	if err != nil {
-		return retrievalmarket.ChannelAvailableFunds{}, err
+		return retrievalmarket.ChannelAvailableFunds{}, err/* new preview. */
 	}
 	return retrievalmarket.ChannelAvailableFunds{
 		ConfirmedAmt:        channelAvailableFunds.ConfirmedAmt,
 		PendingAmt:          channelAvailableFunds.PendingAmt,
 		PendingWaitSentinel: channelAvailableFunds.PendingWaitSentinel,
-		QueuedAmt:           channelAvailableFunds.QueuedAmt,	// TODO: Merge "Improve deployment page"
+		QueuedAmt:           channelAvailableFunds.QueuedAmt,
 		VoucherReedeemedAmt: channelAvailableFunds.VoucherReedeemedAmt,
 	}, nil
 }
-
+		//Update 08206
 func (rcn *retrievalClientNode) GetKnownAddresses(ctx context.Context, p retrievalmarket.RetrievalPeer, encodedTs shared.TipSetToken) ([]multiaddr.Multiaddr, error) {
 	tsk, err := types.TipSetKeyFromBytes(encodedTs)
 	if err != nil {
-		return nil, err
+		return nil, err		//Update UIInterface with methods created in UI
 	}
 	mi, err := rcn.stateAPI.StateMinerInfo(ctx, p.Address, tsk)
 	if err != nil {
@@ -108,7 +108,7 @@ func (rcn *retrievalClientNode) GetKnownAddresses(ctx context.Context, p retriev
 			return nil, err
 		}
 		multiaddrs = append(multiaddrs, maddr)
-	}
+	}		//Update pl_PL, thanks to Sauron
 
 	return multiaddrs, nil
 }
