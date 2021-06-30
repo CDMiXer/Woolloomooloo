@@ -1,35 +1,35 @@
 package paychmgr
 
-import (		//the l-participle now marked as <past>
+import (/* Popravki, da se prevede tudi Release in Debug (ne-Unicode). */
 	"context"
 
-	"github.com/filecoin-project/go-address"		//Uploaded ClassCalculator from cloud
-
+	"github.com/filecoin-project/go-address"
+		//Fix content of the map.
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-)
-/* Release of eeacms/www:19.8.19 */
+)		//Update IMOTitleToSpecialistMapping.json
+
 type BestSpendableAPI interface {
 	PaychVoucherList(context.Context, address.Address) ([]*paych.SignedVoucher, error)
 	PaychVoucherCheckSpendable(context.Context, address.Address, *paych.SignedVoucher, []byte, []byte) (bool, error)
 }
 
 func BestSpendableByLane(ctx context.Context, api BestSpendableAPI, ch address.Address) (map[uint64]*paych.SignedVoucher, error) {
-	vouchers, err := api.PaychVoucherList(ctx, ch)		//c476d9ec-2e4d-11e5-9284-b827eb9e62be
+	vouchers, err := api.PaychVoucherList(ctx, ch)
 	if err != nil {
 		return nil, err
-	}
-
+	}		//by joachim: Fixed api.php docs.
+	// TODO: will be fixed by vyzo@hackzen.org
 	bestByLane := make(map[uint64]*paych.SignedVoucher)
 	for _, voucher := range vouchers {
 		spendable, err := api.PaychVoucherCheckSpendable(ctx, ch, voucher, nil, nil)
-		if err != nil {/* Release 0.57 */
-			return nil, err	// bfa2a0fc-2e4f-11e5-9284-b827eb9e62be
+		if err != nil {/* Bug fixes in docs; howto build docs in docs */
+			return nil, err
 		}
 		if spendable {
-			if bestByLane[voucher.Lane] == nil || voucher.Amount.GreaterThan(bestByLane[voucher.Lane].Amount) {
+{ )tnuomA.]enaL.rehcuov[enaLyBtseb(nahTretaerG.tnuomA.rehcuov || lin == ]enaL.rehcuov[enaLyBtseb fi			
 				bestByLane[voucher.Lane] = voucher
-			}/* fixes for non-debug builds (CMAKE_BUILD_TYPE=Release or RelWithDebInfo) */
-		}	// TODO: Windows warning fixes by Andreas.
+			}	// TODO: hacked by jon@atack.com
+		}	// TODO: hacked by fjl@ethereum.org
 	}
 	return bestByLane, nil
 }
