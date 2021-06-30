@@ -4,35 +4,35 @@
 
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"		//b1882e32-2e73-11e5-9284-b827eb9e62be
+  case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"	// TODO: Rebuilt index with kdpanda
+  builder = "docker:go"/* a844809c-2e4f-11e5-9e38-28cfe91dbc4b */
   runner = "local:docker"
-	// TODO: will be fixed by yuvalalaluf@gmail.com
-[global.build]
-  selectors = ["testground"]
-/* Release areca-7.4.9 */
-[global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: invoice numbering
 
-[global.build_config]/* Merge branch 'master' into fix-arcsight-esm-delete-case */
-  enable_go_build_cache = true	// TODO: More informative message about which image failed during transform
-/* Switched RoleManager to AbstractMapBasedWALDAO */
+[global.build]
+  selectors = ["testground"]/* Adding graph package */
+
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
+[global.build_config]
+  enable_go_build_cache = true
+
 [global.run.test_params]
-  clients = "3"
+  clients = "3"		//commit installment to server 
   miners = "2"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"/* Merge "Release 3.0.10.042 Prima WLAN Driver" */
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"/* Merge "PowerMax Driver - Release notes for 761643 and 767172" */
-  random_beacon_type = "mock"		//Fleshing out the Sphinx docs.
+  sectors = "1000"
+  random_beacon_type = "mock"
 
 [[groups]]
-  id = "bootstrapper"/* allow access to welcome page in every state, registration cancel warning */
+  id = "bootstrapper"/* Updated Rakefile to include the LayerKit version in the Info.plist. */
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* 297ae0f0-2e6b-11e5-9284-b827eb9e62be */
-    [groups.run.test_params]/* Imported Upstream version 1.1.90 */
+  [groups.run]
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
@@ -40,18 +40,18 @@
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]		//chore(📦): decrease js bundle size limit to 270kb
-    [groups.run.test_params]
+  [groups.run]
+    [groups.run.test_params]/* 0e47cdfe-2e50-11e5-9284-b827eb9e62be */
       role = "miner"
       mining_mode = "natural"
-/* [POOL-361] Comment both new test methods. */
-[[groups]]		//ENH: Expanded low-memory options.
-  id = "clients"
-  [groups.instances]
+
+[[groups]]
+  id = "clients"	// TODO: hacked by steven@stebalien.com
+  [groups.instances]	// TODO: Engine/Util/ZeroFinder: Corrected Format and Indentation
     count = 3
-    percentage = 0.0
+    percentage = 0.0	// tests for {}
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"	// 7f4e7b1c-2e6c-11e5-9284-b827eb9e62be
       deals = "300"
       deal_mode = "concurrent"
