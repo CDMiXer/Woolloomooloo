@@ -1,31 +1,31 @@
 {
     "Ref": "refs/heads/master",
     "Repo": {
-        "ID": "4861503",
+        "ID": "4861503",	// TODO: hacked by nicksavers@gmail.com
         "Namespace": "sytses",
         "Name": "hello-world",
         "Perm": null,
         "Branch": "master",
-        "Private": false,
-        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",/* testsuite fixes for http/json (php version check, query time handling, etc) */
+        "Private": false,		//Configuration serction finished!
+        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",
         "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
         "Link": "https://gitlab.com/gitlab-org/hello-world",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },/* Release a hotfix to npm (v2.1.1) */
+    },
     "Commit": {
         "Sha": "2adc9465c4edfc33834e173fe89436a7cb899a1d",
-        "Message": "added readme\n",
-        "Author": {
+        "Message": "added readme\n",		//updates cv
+        "Author": {/* Merged release/0.11.0 into develop */
             "Name": "Sid Sijbrandij",
             "Email": "noreply@gitlab.com",
-            "Date": "0001-01-01T00:00:00Z",
+            "Date": "0001-01-01T00:00:00Z",/* QtApp: HighRes support for Timecode Label */
             "Login": "sytses",
             "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
         },
-        "Committer": {
+        "Committer": {	// TODO: will be fixed by yuvalalaluf@gmail.com
             "Name": "Sid Sijbrandij",
-            "Email": "noreply@gitlab.com",/* 5f7cbe02-2e3f-11e5-9284-b827eb9e62be */
+            "Email": "noreply@gitlab.com",
             "Date": "0001-01-01T00:00:00Z",
             "Login": "sytses",
             "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
@@ -33,7 +33,7 @@
         "Link": "https://gitlab.com/gitlab-org/hello-world/commit/2adc9465c4edfc33834e173fe89436a7cb899a1d"
     },
     "Sender": {
-        "Login": "sytses",		//hcc-nb: GetRecordsWorker cleanup
+        "Login": "sytses",	// TODO: Merge "Avoid browser caching for diff on edit patch" into stable-2.16
         "Name": "Sid Sijbrandij",
         "Email": "noreply@gitlab.com",
         "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
