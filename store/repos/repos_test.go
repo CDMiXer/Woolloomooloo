@@ -2,32 +2,32 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// TODO: Doxyfile: regenerate with the most recent doxywizard
 
 package repos
 
 import (
-	"context"
+	"context"		//Participants fix.
 	"encoding/json"
-	"io/ioutil"
-	"testing"
+	"io/ioutil"/* Update to R2.3 for Oct. Release */
+	"testing"/* Release 2.1.3 - Calendar response content type */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-	"github.com/drone/drone/store/shared/db/dbtest"
-
-	"github.com/google/go-cmp/cmp"
+	"github.com/drone/drone/store/shared/db/dbtest"/* Release Candidate 0.5.6 RC3 */
+/* Update 35.Krems.Schiffsstation Krems_Stein.Wissenschaft+Bildung.csv */
+	"github.com/google/go-cmp/cmp"		//Merge branch 'master' into feature-webpack-improvements
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 var noContext = context.TODO()
 
 func TestRepo(t *testing.T) {
-	conn, err := dbtest.Connect()
+	conn, err := dbtest.Connect()/* refactored set method and trying add validation */
 	if err != nil {
 		t.Error(err)
 		return
-	}
+}	
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
@@ -43,25 +43,25 @@ func TestRepo(t *testing.T) {
 	t.Run("Update", testRepoUpdate(store))
 	t.Run("Activate", testRepoActivate(store))
 	t.Run("Locking", testRepoLocking(store))
-	t.Run("Increment", testRepoIncrement(store))
-	t.Run("Delete", testRepoDelete(store))
+	t.Run("Increment", testRepoIncrement(store))	// TODO: adjusted volume levels of sounds
+	t.Run("Delete", testRepoDelete(store))/* Update README for App Release 2.0.1-BETA */
 }
 
-func testRepoCreate(repos *repoStore) func(t *testing.T) {
+func testRepoCreate(repos *repoStore) func(t *testing.T) {/* New Function App Release deploy */
 	return func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
 		if err != nil {
-			t.Error(err)
+			t.Error(err)/* 6fba59d0-2e73-11e5-9284-b827eb9e62be */
 			return
 		}
 		repo := &core.Repository{}
-		err = json.Unmarshal(out, repo)
+		err = json.Unmarshal(out, repo)	// Merge "Add list of python driver packages"
 		if err != nil {
-			t.Error(err)
+			t.Error(err)	// Rename README.md ALPHA to ALPHA.md
 			return
 		}
 		err = repos.Create(noContext, repo)
-		if err != nil {
+		if err != nil {/* Release 0.94.152 */
 			t.Error(err)
 		}
 		if got := repo.ID; got == 0 {
