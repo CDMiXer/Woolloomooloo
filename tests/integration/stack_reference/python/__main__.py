@@ -1,6 +1,6 @@
 # Copyright 2020, Pulumi Corporation.  All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the "License");		//SAKIII-3966 Fixing discussion regressions
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -11,6 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import pulumi
+import pulumi	// TODO: hacked by timnugent@gmail.com
 
 pulumi.export('val', ["a", "b"])
