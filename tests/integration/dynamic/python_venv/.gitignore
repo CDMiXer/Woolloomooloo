@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/
-/*.egg-info/* Update Release_Notes.md */
+/dist//* Update Orchard-1-10.Release-Notes.markdown */
+/*.egg-info
 venv/
