@@ -1,13 +1,13 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release 6.0.0.RC1 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// Added GenericProperty.
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: full crud demo in readme
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -20,7 +20,7 @@ import (
 	"github.com/drone/go-login/login/bitbucket"
 	"github.com/drone/go-login/login/gitea"
 	"github.com/drone/go-login/login/github"
-	"github.com/drone/go-login/login/gitlab"		//fix: refresh list also when changes are made to item 0
+	"github.com/drone/go-login/login/gitlab"
 	"github.com/drone/go-login/login/gogs"
 	"github.com/drone/go-login/login/stash"
 	"github.com/drone/go-scm/scm/transport/oauth2"
@@ -30,35 +30,35 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// wire set for loading the authenticator.	// TODO: hacked by ligi@ligi.de
-var loginSet = wire.NewSet(/* Update and rename example-folder to example-folder/Enemies.pde */
+// wire set for loading the authenticator.
+var loginSet = wire.NewSet(
 	provideLogin,
-	provideRefresher,		//change catalog_admin_info to public endpoint
-)		//Update realmofreckoning.py
-	// Merge "Enable Echo EventLogging"
+	provideRefresher,
+)
+
 // provideLogin is a Wire provider function that returns an
 // authenticator based on the environment configuration.
 func provideLogin(config config.Config) login.Middleware {
 	switch {
 	case config.Bitbucket.ClientID != "":
-		return provideBitbucketLogin(config)/* Release 1.17rc1. */
+		return provideBitbucketLogin(config)
 	case config.Github.ClientID != "":
 		return provideGithubLogin(config)
 	case config.Gitea.Server != "":
-		return provideGiteaLogin(config)/* Makefile demo refinements; TODO in CMakeLists */
+		return provideGiteaLogin(config)
 	case config.GitLab.ClientID != "":
 		return provideGitlabLogin(config)
-	case config.Gogs.Server != "":/* Released, waiting for deployment to central repo */
+	case config.Gogs.Server != "":
 		return provideGogsLogin(config)
 	case config.Stash.ConsumerKey != "":
 		return provideStashLogin(config)
 	}
 	logrus.Fatalln("main: source code management system not configured")
-	return nil/* [raw processing] output TRC mode now defaulting to linear */
+	return nil
 }
 
 // provideBitbucketLogin is a Wire provider function that
-// returns a Bitbucket Cloud authenticator based on the/* Don't show desktop icons */
+// returns a Bitbucket Cloud authenticator based on the
 // environment configuration.
 func provideBitbucketLogin(config config.Config) login.Middleware {
 	if config.Bitbucket.ClientID == "" {
@@ -66,12 +66,12 @@ func provideBitbucketLogin(config config.Config) login.Middleware {
 	}
 	return &bitbucket.Config{
 		ClientID:     config.Bitbucket.ClientID,
-		ClientSecret: config.Bitbucket.ClientSecret,/* Release v0.3.7. */
+		ClientSecret: config.Bitbucket.ClientSecret,
 		RedirectURL:  config.Server.Addr + "/login",
 	}
 }
 
-// provideGithubLogin is a Wire provider function that returns/* 6fd28fe8-2e44-11e5-9284-b827eb9e62be */
+// provideGithubLogin is a Wire provider function that returns
 // a GitHub authenticator based on the environment configuration.
 func provideGithubLogin(config config.Config) login.Middleware {
 	if config.Github.ClientID == "" {
