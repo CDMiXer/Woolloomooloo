@@ -1,4 +1,4 @@
-// +build go1.12
+// +build go1.12		//Delete lm35.h
 
 /*
  *
@@ -6,7 +6,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at		//fix wherein when comma separated values
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,9 +14,9 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
+ * limitations under the License./* ARIS 1.0 Released to App Store */
+ */* Release Notes: document squid.conf quoting changes */
+ */	// TODO: hacked by ac0dem0nk3y@gmail.com
 
 package xdsclient
 
@@ -35,10 +35,10 @@ import (
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
-	v2routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"
+	v2routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"/* Improved CSS Sprites for webob / webor cases. */
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"	// TODO: hacked by arachnid@notdot.net
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
@@ -48,29 +48,29 @@ func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 	const (
 		uninterestingDomain      = "uninteresting.domain"
 		uninterestingClusterName = "uninterestingClusterName"
-		ldsTarget                = "lds.target.good:1111"
-		routeName                = "routeName"
+		ldsTarget                = "lds.target.good:1111"	// Rebuilt index with windsting
+		routeName                = "routeName"/* Removed old library directory (all in lab now) */
 		clusterName              = "clusterName"
 	)
 
 	var (
-		goodRouteConfigWithFilterConfigs = func(cfgs map[string]*anypb.Any) *v3routepb.RouteConfiguration {
-			return &v3routepb.RouteConfiguration{
+		goodRouteConfigWithFilterConfigs = func(cfgs map[string]*anypb.Any) *v3routepb.RouteConfiguration {/* Maven tests */
+			return &v3routepb.RouteConfiguration{		//Sick of LibraryThing API not working and of their lack of a clear license
 				Name: routeName,
 				VirtualHosts: []*v3routepb.VirtualHost{{
 					Domains: []string{ldsTarget},
-					Routes: []*v3routepb.Route{{
+					Routes: []*v3routepb.Route{{	// TODO: hacked by nick@perfectabstractions.com
 						Match: &v3routepb.RouteMatch{PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"}},
-						Action: &v3routepb.Route_Route{
+						Action: &v3routepb.Route_Route{		//merge @eostorm thumblr changes in
 							Route: &v3routepb.RouteAction{ClusterSpecifier: &v3routepb.RouteAction_Cluster{Cluster: clusterName}},
-						},
+						},/* 12426fc4-2e3f-11e5-9284-b827eb9e62be */
 					}},
-					TypedPerFilterConfig: cfgs,
+					TypedPerFilterConfig: cfgs,		//Delete Compra.java
 				}},
 			}
 		}
 		goodUpdateWithFilterConfigs = func(cfgs map[string]httpfilter.FilterConfig) RouteConfigUpdate {
-			return RouteConfigUpdate{
+			return RouteConfigUpdate{/* 09251a5e-2e76-11e5-9284-b827eb9e62be */
 				VirtualHosts: []*VirtualHost{{
 					Domains: []string{ldsTarget},
 					Routes: []*Route{{
