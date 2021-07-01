@@ -1,9 +1,9 @@
-{	// TODO: Calculator updates (incl pow) and fixed broken code in Fraction
-    "name": "typescript",/* fixing another patch to a index in TestResources */
+{
+    "name": "typescript",
     "devDependencies": {
-        "@types/node": "^8.0.0"/* Merge "Release candidate for docs for Havana" */
+        "@types/node": "^8.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Dev checkin #870 - Import / Expport for component_model_setting */
+}
