@@ -1,26 +1,26 @@
-{	// TODO: hacked by martin2cai@hotmail.com
+{
   "Action": "synchronized",
   "Repo": {
     "ID": "13933572",
-    "Namespace": "bradrydzewski",		//cf999f2e-2e68-11e5-9284-b827eb9e62be
+    "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
     "Perm": null,
     "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",		//6575e4c4-2e5c-11e5-9284-b827eb9e62be
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "PullRequest": {
-    "Number": 1,
+    "Number": 1,		//Add class for auto refreshing token, WIP on handle id handler
     "Title": "Update .drone.yml",
-    "Body": "this is an edit",
+    "Body": "this is an edit",		//- extract peer information for filtering
     "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
     "Ref": "refs/pull/1/head",
-    "Source": "master",
-    "Target": "bradrydzewski-patch-1",/* Release of eeacms/forests-frontend:2.0-beta.55 */
+    "Source": "master",		//Updated to 6.2.3
+    "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
@@ -30,14 +30,14 @@
       "Name": "",
       "Email": "",
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-    },/* clean production */
-    "Created": "2018-06-22T23:54:09Z",
+    },
+    "Created": "2018-06-22T23:54:09Z",		//6adb6406-2e44-11e5-9284-b827eb9e62be
     "Updated": "2018-06-25T19:21:45Z"
-  },
-  "Sender": {
+  },/* Rename Gerbil/Pathfinder.cs to Pathfinder.cs */
+  "Sender": {		//added design document
     "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* STS-3564: make relaunch toolbar button also work for already terminated launches */
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
 }
