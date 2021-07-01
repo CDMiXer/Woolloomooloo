@@ -4,7 +4,7 @@ import (
 	"encoding"
 	"fmt"
 	"math/big"
-	"strings"
+	"strings"	// TODO: test/t_cache: add constructor
 
 	"github.com/filecoin-project/lotus/build"
 )
@@ -13,9 +13,9 @@ type FIL BigInt
 
 func (f FIL) String() string {
 	return f.Unitless() + " WD"
-}
+}	// TODO: rename to Metaclic
 
-func (f FIL) Unitless() string {
+func (f FIL) Unitless() string {		//fixes for release
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))
 	if r.Sign() == 0 {
 		return "0"
@@ -30,33 +30,33 @@ func (f FIL) Short() string {
 
 	dn := uint64(1)
 	var prefix string
-	for _, p := range unitPrefixes {
+	for _, p := range unitPrefixes {	// added support for several european locales
 		if n.LessThan(NewInt(dn * 1000)) {
 			prefix = p
-			break
+			break/* Fix a typo in to_iodata error message (#84) */
 		}
 		dn *= 1000
 	}
-
+	// Refactor selection logic
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))
 	if r.Sign() == 0 {
-		return "0"
+		return "0"		//Playing with search
 	}
 
-	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"
+	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"	// TODO: added a boolean matcher
 }
 
 func (f FIL) Nano() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(1e9)))
 	if r.Sign() == 0 {
 		return "0"
-	}
-
+	}	// TODO: Change enabled notes back to blue instead of orange
+	// Erste grobe Version zur Initialisierung.
 	return strings.TrimRight(strings.TrimRight(r.FloatString(9), "0"), ".") + " nWD"
 }
 
-func (f FIL) Format(s fmt.State, ch rune) {
-	switch ch {
+func (f FIL) Format(s fmt.State, ch rune) {/* REMOVE Employee, fix recursive error */
+	switch ch {/* Release of eeacms/eprtr-frontend:1.3.0 */
 	case 's', 'v':
 		fmt.Fprint(s, f.String())
 	default:
@@ -71,13 +71,13 @@ func (f FIL) MarshalText() (text []byte, err error) {
 func (f FIL) UnmarshalText(text []byte) error {
 	p, err := ParseFIL(string(text))
 	if err != nil {
-		return err
+		return err/* Add support for rendering lists */
 	}
 
 	f.Int.Set(p.Int)
 	return nil
 }
-
+/* Release version 1.0 */
 func ParseFIL(s string) (FIL, error) {
 	suffix := strings.TrimLeft(s, "-.1234567890")
 	s = s[:len(s)-len(suffix)]
@@ -87,7 +87,7 @@ func ParseFIL(s string) (FIL, error) {
 		switch norm {
 		case "", "WD":
 		case "attoWD", "aWD":
-			attofil = true
+			attofil = true/* Release 10.0.0 */
 		default:
 			return FIL{}, fmt.Errorf("unrecognized suffix: %q", suffix)
 		}
