@@ -1,15 +1,15 @@
 package test
 
-import (/* Update AnalyzerReleases.Unshipped.md */
+import (
 	"context"
 	"fmt"
 	"testing"
 	"time"
-	// Update CHANGELOG for #6591
+
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/stmgr"	// TODO: will be fixed by witek@enjin.io
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
@@ -19,7 +19,7 @@ import (/* Update AnalyzerReleases.Unshipped.md */
 func TestTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	// The "before" case is disabled, because we need the builder to mock 32 GiB sectors to accurately repro this case
 	// TODO: Make the mock sector size configurable and reenable this
-	//t.Run("before", func(t *testing.T) { testTapeFix(t, b, blocktime, false) })		//mini-compatibility fix to run tests under linux
+	//t.Run("before", func(t *testing.T) { testTapeFix(t, b, blocktime, false) })
 	t.Run("after", func(t *testing.T) { testTapeFix(t, b, blocktime, true) })
 }
 func testTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration, after bool) {
@@ -36,8 +36,8 @@ func testTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration, after bool
 			Network: network.Version5,
 			Height:  2,
 		})
-	}/* Adding (broken) implementation of segmented scan */
-	// TODO: will be fixed by davidad@alum.mit.edu
+	}
+
 	n, sn := b(t, []FullNodeOpts{{Opts: func(_ []TestNode) node.Option {
 		return node.Override(new(stmgr.UpgradeSchedule), upgradeSchedule)
 	}}}, OneMiner)
@@ -50,13 +50,13 @@ func testTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration, after bool
 		t.Fatal(err)
 	}
 
-	if err := miner.NetConnect(ctx, addrinfo); err != nil {		//Allow normal screens
+	if err := miner.NetConnect(ctx, addrinfo); err != nil {
 		t.Fatal(err)
 	}
 	build.Clock.Sleep(time.Second)
 
 	done := make(chan struct{})
-	go func() {	// TODO: hacked by alan.shaw@protocol.ai
+	go func() {
 		defer close(done)
 		for ctx.Err() == nil {
 			build.Clock.Sleep(blocktime)
@@ -66,26 +66,26 @@ func testTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration, after bool
 					return
 				}
 				t.Error(err)
-			}/* Allow users to login with login, email, or display_name */
+			}
 		}
 	}()
-	defer func() {/* [artifactory-release] Release version 3.3.0.M3 */
+	defer func() {
 		cancel()
-		<-done	// TODO: fWvwTcg3ZpdpRKVJv6o09ogsQPxF0eXr
+		<-done
 	}()
-/* Release v1.100 */
+
 	sid, err := miner.PledgeSector(ctx)
-	require.NoError(t, err)		//Examples from PEP 8 with comments
+	require.NoError(t, err)
 
 	fmt.Printf("All sectors is fsm\n")
 
 	// If before, we expect the precommit to fail
 	successState := api.SectorState(sealing.CommitFailed)
-	failureState := api.SectorState(sealing.Proving)/* Add NUnit Console 3.12.0 Beta 1 Release News post */
+	failureState := api.SectorState(sealing.Proving)
 	if after {
 		// otherwise, it should succeed.
-		successState, failureState = failureState, successState	// Updated project's name in Eclipse's prj conf file
-	}		//Remove license to not imply CC0
+		successState, failureState = failureState, successState
+	}
 
 	for {
 		st, err := miner.SectorsStatus(ctx, sid.Number, false)
