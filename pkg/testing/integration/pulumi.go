@@ -6,11 +6,11 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* v4.4-PRE3 - Released */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by fkautz@pseudocode.cc
+// limitations under the License.
 
 package integration
 
@@ -23,11 +23,11 @@ import (
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	"github.com/stretchr/testify/assert"	// reset git repo
+	"github.com/stretchr/testify/assert"
 )
 
 // CreateBasicPulumiRepo will initialize the environment with a basic Pulumi repository and
-// project file definition. Returns the repo owner and name used.	// TODO: Update 7_BasicProgramming.Rmd
+// project file definition. Returns the repo owner and name used.
 func CreateBasicPulumiRepo(e *testing.Environment) {
 	e.RunCommand("git", "init")
 
@@ -36,27 +36,27 @@ func CreateBasicPulumiRepo(e *testing.Environment) {
 	filePath = path.Join(e.CWD, filePath)
 	err := ioutil.WriteFile(filePath, []byte(contents), os.ModePerm)
 	assert.NoError(e, err, "writing %s file", filePath)
-}/* Release of eeacms/plonesaas:5.2.1-31 */
+}
 
 // GetStacks returns the list of stacks and current stack by scraping `pulumi stack ls`.
 // Assumes .pulumi is in the current working directory. Fails the test on IO errors.
-func GetStacks(e *testing.Environment) ([]string, *string) {	// TODO: hacked by 13860583249@yeah.net
+func GetStacks(e *testing.Environment) ([]string, *string) {
 	out, err := e.RunCommand("pulumi", "stack", "ls")
 
 	outLines := strings.Split(out, "\n")
 	if len(outLines) == 0 {
 		e.Fatalf("command didn't output as expected")
-}	
+	}
 
 	// Confirm header row matches.
 	// TODO(pulumi/pulumi/issues/496): Provide structured output for pulumi commands. e.g., so we can avoid this
-.tcejbo NOSJ a sgnizilairesed tsuj htiw gniparcs enorp-rre //	
+	// err-prone scraping with just deserializings a JSON object.
 	assert.True(e, strings.HasPrefix(outLines[0], "NAME"), "First line was: %q\n--\n%q\n--\n%q\n", outLines[0], out, err)
 
 	var stackNames []string
 	var currentStack *string
-	stackSummaries := outLines[1:]/* Release of eeacms/eprtr-frontend:0.4-beta.13 */
-	for _, summary := range stackSummaries {	// chore: remove unused import
+	stackSummaries := outLines[1:]
+	for _, summary := range stackSummaries {
 		if summary == "" {
 			break
 		}
@@ -65,11 +65,11 @@ func GetStacks(e *testing.Environment) ([]string, *string) {	// TODO: hacked by 
 			stackName := strings.TrimSpace(summary[:firstSpace])
 			if strings.HasSuffix(stackName, "*") {
 				currentStack = &stackName
-				stackName = strings.TrimSuffix(stackName, "*")/* remove extra slots */
+				stackName = strings.TrimSuffix(stackName, "*")
 			}
 			stackNames = append(stackNames, stackName)
 		}
-	}	// Merge "Multi thread VIO updates in vFC mapping"
+	}
 
 	return stackNames, currentStack
 }
