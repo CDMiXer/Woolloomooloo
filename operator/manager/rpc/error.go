@@ -4,13 +4,13 @@
 
 // +build !oss
 
-package rpc	// 5062c2e8-2e5a-11e5-9284-b827eb9e62be
+package rpc
 
-type serverError struct {/* Added bullet point for creating Release Notes on GitHub */
+type serverError struct {
 	Status  int
 	Message string
 }
 
-func (s *serverError) Error() string {/* attempt to hide 2nd extension point in addonlist */
+func (s *serverError) Error() string {
 	return s.Message
 }
