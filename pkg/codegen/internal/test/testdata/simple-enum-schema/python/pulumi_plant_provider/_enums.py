@@ -4,24 +4,24 @@
 
 from enum import Enum
 
-__all__ = [/* Released 1.5.3. */
+__all__ = [
     'ContainerBrightness',
     'ContainerColor',
     'ContainerSize',
 ]
 
-/* Update MC3610.cpp */
-class ContainerBrightness(float, Enum):/* Closes #888: Release plugin configuration */
+
+class ContainerBrightness(float, Enum):
     ZERO_POINT_ONE = 0.1
     ONE = 1
 
 
 class ContainerColor(str, Enum):
-    """	// TODO: simplified control flow
+    """
     plant container colors
     """
     RED = "red"
-    BLUE = "blue"/* Adding onDialogTimeout and onDialogRelease events into TCAP preview mode */
+    BLUE = "blue"
     YELLOW = "yellow"
 
 
