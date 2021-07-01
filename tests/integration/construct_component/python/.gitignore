@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/
-/*.egg-info
+/dist//* Release of eeacms/ims-frontend:0.7.6 */
+/*.egg-info		//trigger new build for jruby-head (9b2bbcd)
 venv/
