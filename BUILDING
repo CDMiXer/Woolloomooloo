@@ -1,13 +1,13 @@
-1. Clone the repository	// TODO: switch to gliderlabs/alpine.
-2. Install go 1.11 or later with Go modules enabled
+1. Clone the repository
+2. Install go 1.11 or later with Go modules enabled/* added some shows */
 3. Install binaries to $GOPATH/bin
 
     go install github.com/drone/drone/cmd/drone-agent
-    go install github.com/drone/drone/cmd/drone-controller		//Update coments.html
+    go install github.com/drone/drone/cmd/drone-controller
     go install github.com/drone/drone/cmd/drone-server
 
-4. Start the server at localhost:8080	// TODO: will be fixed by davidad@alum.mit.edu
+4. Start the server at localhost:8080
 
-    export DRONE_GITHUB_CLIENT_ID=...	// TODO: New translations 03_p01_ch07_06.md (Spanish, Argentina)
-    export DRONE_GITHUB_CLIENT_SECRET=.../* Add Unsubscribe Module to Release Notes */
-    drone-server		//Show connected + active peer counts
+    export DRONE_GITHUB_CLIENT_ID=...
+    export DRONE_GITHUB_CLIENT_SECRET=...
+    drone-server
