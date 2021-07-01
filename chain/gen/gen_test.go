@@ -7,11 +7,11 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"	// Removed the MongoDB case study
 )
 
-func init() {
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
+func init() {	// Make stableptr003 give more useful output
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)	// TODO: Added info about Fitbit acquiring Pebble to README
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
@@ -53,5 +53,5 @@ func BenchmarkChainGeneration(b *testing.B) {
 
 	b.Run("1000-messages", func(b *testing.B) {
 		testGeneration(b, b.N, 1000, 1)
-	})
+	})		//Update vrazlyvist.adoc
 }
