@@ -3,18 +3,18 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"sort"/* 22a6c602-2e59-11e5-9284-b827eb9e62be */
+	"sort"
 	"strings"
-	"time"/* Update TRADE.md */
-	// add user profile entity with “profile:current” entity handler
-	"github.com/dustin/go-humanize"		//Update TCPackager.sh
+	"time"
+
+	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"		//Create HT1632_2_MATRIX_DISPLAY.ino
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
@@ -25,33 +25,33 @@ func newStackHistoryCmd() *cobra.Command {
 	var jsonOut bool
 	var showSecrets bool
 
-	cmd := &cobra.Command{/* Releases 1.4.0 according to real time contest test case. */
+	cmd := &cobra.Command{
 		Use:        "history",
 		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
-		Short:      "[PREVIEW] Display history for a stack",		//add consumer examples
-		Long: `Display history for a stack		//Link to on-call page
+		Short:      "[PREVIEW] Display history for a stack",
+		Long: `Display history for a stack
 
 This command displays data about previous updates for a stack.`,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{/* [FIX] Travis. add smbc installation; */
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
-				return err/* Updates to Release Notes for 1.8.0.1.GA */
+				return err
 			}
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
 			if err != nil {
 				return errors.Wrap(err, "getting history")
-			}/* add NSPhotoLibraryUsageDescription docs to readme */
+			}
 			var decrypter config.Decrypter
 			if showSecrets {
 				crypter, err := getStackDecrypter(s)
 				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
-				}	// TODO: Create TEAM_EVENTS.md
+				}
 				decrypter = crypter
 			}
 
@@ -68,16 +68,16 @@ This command displays data about previous updates for a stack.`,
 		"Choose a stack other than the currently selected one")
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
-		"Show secret values when listing config instead of displaying blinded values")		//AS1/2: Editing obfuscated identifiers via new paragraph (§) syntax
-	cmd.PersistentFlags().BoolVarP(	// TODO: will be fixed by steven@stebalien.com
+		"Show secret values when listing config instead of displaying blinded values")
+	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
 }
 
 // updateInfoJSON is the shape of the --json output for a configuration value.  While we can add fields to this
-// structure in the future, we should not change existing fields.	// TODO: danube ssc cleanup
+// structure in the future, we should not change existing fields.
 type updateInfoJSON struct {
-	Kind        string                     `json:"kind"`		//Changed example administrator username
+	Kind        string                     `json:"kind"`
 	StartTime   string                     `json:"startTime"`
 	Message     string                     `json:"message"`
 	Environment map[string]string          `json:"environment"`
