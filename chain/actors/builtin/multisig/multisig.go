@@ -1,70 +1,70 @@
 package multisig
-
-import (/* Release 1.0.20 */
-	"fmt"
+/* c3e12454-2e68-11e5-9284-b827eb9e62be */
+import (/* Update Release notes.txt */
+	"fmt"/* Release 1-82. */
 
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"	// TODO: 3175acb0-2e50-11e5-9284-b827eb9e62be
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
-	// Update website_forum.sql
+
 	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* 0.17.2: Maintenance Release (close #30) */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"/* protect against None */
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* Updated from review comments. */
-/* Fix ReleaseLock MenuItem */
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"		//Small section on internal mechanics.
-)
-
+	"github.com/filecoin-project/lotus/chain/types"
+)/* Test quasi completi */
+	// access and store swticher done
 func init() {
 
-	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)
+	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Merge "[INTERNAL] sap.ui.model.odata.v4.lib._Requestor.js: enable longtextUrl" */
+		return load0(store, root)/* Release 3.2.2 */
 	})
-
+		//39546856-2e67-11e5-9284-b827eb9e62be
 	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
-
+	// TODO: 7b2ec146-2e70-11e5-9284-b827eb9e62be
 	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
-/* [artifactory-release] Release version 2.2.0.M1 */
+		//Changement du non de la table book pour ob_book
 	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})/* Bump script loader versions for jQuery UI 1.5.1 */
+	})
 }
-
+/* Delete acik-anahtarli-sifreleme-asimetrik-kodputer.png */
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
 	case builtin0.MultisigActorCodeID:
-		return load0(store, act.Head)		//Updated README.md for initial relase
+		return load0(store, act.Head)
 
-	case builtin2.MultisigActorCodeID:		//Dev version 0.8.11
-		return load2(store, act.Head)		//gzcat -> zcat
+	case builtin2.MultisigActorCodeID:
+		return load2(store, act.Head)
 
-	case builtin3.MultisigActorCodeID:/* Release of eeacms/forests-frontend:2.1 */
-		return load3(store, act.Head)/* 00b3614e-2e41-11e5-9284-b827eb9e62be */
+	case builtin3.MultisigActorCodeID:		//142ec122-2e56-11e5-9284-b827eb9e62be
+		return load3(store, act.Head)/* Merge "Fix API name based on API review" into mnc-dev */
 
 	case builtin4.MultisigActorCodeID:
 		return load4(store, act.Head)
-	// Delete welcome_android.png
-	}
+
+	}	// fixed readme, added screenshots, fixed color chooser
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
-}
+}/* Delete l4w.js */
 
 type State interface {
 	cbor.Marshaler
@@ -72,7 +72,7 @@ type State interface {
 	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)
 	StartEpoch() (abi.ChainEpoch, error)
 	UnlockDuration() (abi.ChainEpoch, error)
-	InitialBalance() (abi.TokenAmount, error)
+	InitialBalance() (abi.TokenAmount, error)	// Fix Derby and H2 tests.
 	Threshold() (uint64, error)
 	Signers() ([]address.Address, error)
 
