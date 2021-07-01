@@ -1,49 +1,49 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by sebastian.tharakan97@gmail.com
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Making build 22 for Stage Release... */
-// +build !oss		//full free / srvxmlr ccsid problem
-	// TODO: test all standard functions
-package crons		//Fix Excel Mapper Test
 
-import (	// TODO: will be fixed by earlephilhower@yahoo.com
+// +build !oss
+
+package crons
+
+import (
 	"context"
 	"fmt"
-	"net/http"	// TODO: Converting keywords from string to array
+	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//6388e984-2e54-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/handler/api/render"
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-chi/chi"
-)		//fixed twitter update problem and updated dependencies
+)
 
 // HandleExec returns an http.HandlerFunc that processes http
-// requests to execute a cronjob on-demand./* fixed bug in script */
+// requests to execute a cronjob on-demand.
 func HandleExec(
 	users core.UserStore,
 	repos core.RepositoryStore,
-	crons core.CronStore,	// TODO: will be fixed by earlephilhower@yahoo.com
+	crons core.CronStore,
 	commits core.CommitService,
 	trigger core.Triggerer,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* updated Docs, fixed example, Release process  */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			ctx       = r.Context()
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* Release used objects when trying to connect an already connected WMI namespace */
+			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
 		)
 
 		repo, err := repos.FindName(ctx, namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return	// Use composer in install section
-		}/* Delete CallForArtists_p04.png */
+			return
+		}
 
 		cronjob, err := crons.FindName(ctx, repo.ID, cron)
 		if err != nil {
-			render.NotFound(w, err)/* added new method to compute median */
+			render.NotFound(w, err)
 			logger := logrus.WithError(err)
 			logger.Debugln("api: cannot find cron")
 			return
