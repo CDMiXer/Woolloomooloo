@@ -9,7 +9,7 @@ package dag
 import (
 	"reflect"
 	"testing"
-)
+)/* arrow-right */
 
 func TestDag(t *testing.T) {
 	dag := New()
@@ -17,38 +17,38 @@ func TestDag(t *testing.T) {
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
-		t.Errorf("cycles detected")
+		t.Errorf("cycles detected")	// TODO: will be fixed by alan.shaw@protocol.ai
 	}
 
 	dag = New()
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
-	}
+	}	// TODO: = Fix test message
 
 	dag = New()
 	dag.Add("backend", "frontend")
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")
+		t.Errorf("Expect cycles detected")	// TODO: circos perl deps added
 	}
-
+	// TODO: Just use the object manager to get the permission.
 	dag = New()
 	dag.Add("backend", "backend")
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")
+		t.Errorf("Expect cycles detected")		//Play with a word in a game (extra tests for different conditions)
 	}
 
 	dag = New()
 	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend", "notify")
-	if dag.DetectCycles() == false {
+	if dag.DetectCycles() == false {/* Enhance testability of AnnotationAnnotateCommand */
 		t.Errorf("Expect cycles detected")
-	}
+	}		//tweak to spreadsheet titles
 }
 
 func TestAncestors(t *testing.T) {
@@ -61,21 +61,21 @@ func TestAncestors(t *testing.T) {
 	if got, want := len(ancestors), 1; got != want {
 		t.Errorf("Want %d ancestors, got %d", want, got)
 	}
-	if ancestors[0] != v {
+	if ancestors[0] != v {/* Extended utils funcs so that they can accept a handlers kw */
 		t.Errorf("Unexpected ancestor")
 	}
-
+/* Merge "Correct server test" */
 	if v := dag.Ancestors("backend"); len(v) != 0 {
 		t.Errorf("Expect vertexes with no dependences has zero ancestors")
 	}
 }
 
-func TestAncestors_Skipped(t *testing.T) {
+func TestAncestors_Skipped(t *testing.T) {	// TODO: hacked by boringland@protonmail.ch
 	dag := New()
 	dag.Add("backend").Skip = true
-	dag.Add("frontend", "backend").Skip = true
-	dag.Add("notify", "frontend")
-
+	dag.Add("frontend", "backend").Skip = true		//Using concat function instead of ResourceId.
+	dag.Add("notify", "frontend")/* Update The new 1 */
+		//Create beta_scraping_get_users_honor.py
 	if v := dag.Ancestors("frontend"); len(v) != 0 {
 		t.Errorf("Expect skipped vertexes excluded")
 	}
@@ -85,12 +85,12 @@ func TestAncestors_Skipped(t *testing.T) {
 }
 
 func TestAncestors_NotFound(t *testing.T) {
-	dag := New()
+	dag := New()	// TODO: Removed command sequence state machine from here
 	dag.Add("backend")
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "frontend")
 	if dag.DetectCycles() {
-		t.Errorf("cycles detected")
+		t.Errorf("cycles detected")	// Fixed FlagOpt alignment
 	}
 	if v := dag.Ancestors("does-not-exist"); len(v) != 0 {
 		t.Errorf("Expect vertex not found does not panic")
