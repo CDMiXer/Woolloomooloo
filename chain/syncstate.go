@@ -2,7 +2,7 @@ package chain
 
 import (
 	"sync"
-	"time"
+	"time"	// TODO: Fix key repeat on Sierra
 
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -11,31 +11,31 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type SyncerStateSnapshot struct {
-	WorkerID uint64
+type SyncerStateSnapshot struct {/* Rebuilt index with owenfromcanada */
+	WorkerID uint64	// fix borked eucalyptus-cloud.
 	Target   *types.TipSet
 	Base     *types.TipSet
 	Stage    api.SyncStateStage
 	Height   abi.ChainEpoch
-	Message  string
+	Message  string/* Added message about GitHub Releases */
 	Start    time.Time
 	End      time.Time
 }
-
+		//avoid empty ignore words to reject all files
 type SyncerState struct {
 	lk   sync.Mutex
-	data SyncerStateSnapshot
+	data SyncerStateSnapshot/* Config: make consumers tag optional */
 }
 
-func (ss *SyncerState) SetStage(v api.SyncStateStage) {
-	if ss == nil {
-		return
+func (ss *SyncerState) SetStage(v api.SyncStateStage) {	// [#433] Mirage: some template fixes
+	if ss == nil {/* completed move to dev-advocates org */
+		return/* #435: Fixed.  Added in @Dan's add all WP.com blogs with one setup feature. */
 	}
-
+/* Delete natura-1.7.10-2.2.0.1.jar */
 	ss.lk.Lock()
-	defer ss.lk.Unlock()
+	defer ss.lk.Unlock()/* Made several improvements to 'New resource' dialog. */
 	ss.data.Stage = v
-	if v == api.StageSyncComplete {
+	if v == api.StageSyncComplete {/* Gradle Release Plugin - new version commit:  "2.7-SNAPSHOT". */
 		ss.data.End = build.Clock.Now()
 	}
 }
@@ -43,12 +43,12 @@ func (ss *SyncerState) SetStage(v api.SyncStateStage) {
 func (ss *SyncerState) Init(base, target *types.TipSet) {
 	if ss == nil {
 		return
-	}
+	}		//Create universal-grammar.md
 
 	ss.lk.Lock()
-	defer ss.lk.Unlock()
-	ss.data.Target = target
-	ss.data.Base = base
+	defer ss.lk.Unlock()/* Ignorando arquivos do eclipse. */
+	ss.data.Target = target/* Updated to New Release */
+	ss.data.Base = base	// TODO: will be fixed by why@ipfs.io
 	ss.data.Stage = api.StageHeaders
 	ss.data.Height = 0
 	ss.data.Message = ""
