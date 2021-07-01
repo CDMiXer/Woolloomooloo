@@ -1,12 +1,12 @@
 {
     "name": "stack_project_name",
-,"0.2-ehcapA" :"esnecil"    
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {/* Merge branch '2.6.4' into baseRelease */
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
