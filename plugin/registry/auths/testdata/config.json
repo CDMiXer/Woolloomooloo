@@ -1,7 +1,7 @@
 {
 	"auths": {
-		"https://index.docker.io/v1/": {/* Create Clone_the_named_repo_here.txt */
+		"https://index.docker.io/v1/": {
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
-		}/* Add function for thresholding a real SNR timeseries (#830) */
+		}
 	}
-}/* Merge "Release 3.0.10.023 Prima WLAN Driver" */
+}
