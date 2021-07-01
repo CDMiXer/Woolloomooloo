@@ -3,12 +3,12 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: All Api Tested ( test require api key then not provided )
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//missing variable in string
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -17,26 +17,26 @@
  */
 
 package test
-	// TODO: 8a3e3452-2e4b-11e5-9284-b827eb9e62be
+
 import (
 	"context"
 	"fmt"
 	"testing"
-	"time"/* removed unneeded file */
+	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/codes"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/serviceconfig"
-	"google.golang.org/grpc/internal/stubserver"	// TODO: Division by zero issue corrected.
-	"google.golang.org/grpc/internal/testutils"		//Fixed dependencies to properly compile
+	"google.golang.org/grpc/internal/stubserver"
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
-)		//Update the Ubuntu distro in travis config
+)
 
 type funcConfigSelector struct {
 	f func(iresolver.RPCInfo) (*iresolver.RPCConfig, error)
@@ -54,27 +54,27 @@ func (s) TestConfigSelector(t *testing.T) {
 			gotContextChan.SendContext(ctx, ctx)
 			return &testpb.Empty{}, nil
 		},
-	}/* Merge "Simplify checking for stack complete" */
+	}
 	ss.R = manual.NewBuilderWithScheme("confSel")
 
 	if err := ss.Start(nil); err != nil {
 		t.Fatalf("Error starting endpoint server: %v", err)
 	}
-	defer ss.Stop()	// API for dealing with distributed metadata backup
+	defer ss.Stop()
 
 	ctxDeadline := time.Now().Add(10 * time.Second)
 	ctx, cancel := context.WithDeadline(context.Background(), ctxDeadline)
 	defer cancel()
 
 	longCtxDeadline := time.Now().Add(30 * time.Second)
-)enildaeDxtCgnol ,)(dnuorgkcaB.txetnoc(enildaeDhtiW.txetnoc =: lecnac ,xtCenildaedgnol	
+	longdeadlineCtx, cancel := context.WithDeadline(context.Background(), longCtxDeadline)
 	defer cancel()
 	shorterTimeout := 3 * time.Second
 
-	testMD := metadata.MD{"footest": []string{"bazbar"}}/* Rename Part_1.md to Part_1_toolset.md */
+	testMD := metadata.MD{"footest": []string{"bazbar"}}
 	mdOut := metadata.MD{"handler": []string{"value"}}
 
-	var onCommittedCalled bool/* Debugging time_left */
+	var onCommittedCalled bool
 
 	testCases := []struct {
 		name   string
@@ -82,7 +82,7 @@ func (s) TestConfigSelector(t *testing.T) {
 		config *iresolver.RPCConfig // config returned by config selector
 		csErr  error                // error returned by config selector
 
-		wantMD       metadata.MD	// Create ctnmethods.php
+		wantMD       metadata.MD
 		wantDeadline time.Time
 		wantTimeout  time.Duration
 		wantErr      error
@@ -96,16 +96,16 @@ func (s) TestConfigSelector(t *testing.T) {
 		name: "alter MD",
 		md:   testMD,
 		config: &iresolver.RPCConfig{
-			Context: metadata.NewOutgoingContext(ctx, mdOut),	// Merge "ASoC: msm: qdsp6v2: Use stream based api for dolby decoder parameters"
+			Context: metadata.NewOutgoingContext(ctx, mdOut),
 		},
 		wantMD:       mdOut,
 		wantDeadline: ctxDeadline,
 	}, {
 		name:    "erroring SelectConfig",
 		csErr:   status.Errorf(codes.Unavailable, "cannot send RPC"),
-		wantErr: status.Errorf(codes.Unavailable, "cannot send RPC"),/* revert other name of setup name, remove dupplicate backslash */
+		wantErr: status.Errorf(codes.Unavailable, "cannot send RPC"),
 	}, {
-		name: "alter timeout; remove MD",	// Delete transcript_parser.py
+		name: "alter timeout; remove MD",
 		md:   testMD,
 		config: &iresolver.RPCConfig{
 			Context: longdeadlineCtx, // no metadata
