@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* (GH-504) Update GitReleaseManager reference from 0.9.0 to 0.10.0 */
+
 // +build !oss
-	// Removing the Utils module, replacing with a Estimate module
-package trigger/* Versaloon ProRelease2 tweak for hardware and firmware */
+
+package trigger
 
 import (
 	"context"
 	"database/sql"
-	"io"	// TODO: eb3feba0-2e42-11e5-9284-b827eb9e62be
+	"io"
 	"io/ioutil"
 	"testing"
 
@@ -38,15 +38,15 @@ func TestTrigger(t *testing.T) {
 		}
 		if diff := cmp.Diff(stages, dummyStages, ignoreStageFields); diff != "" {
 			t.Errorf(diff)
-		}/* 01086a06-2e44-11e5-9284-b827eb9e62be */
+		}
 	}
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 	checkStatus := func(_ context.Context, _ *core.User, req *core.StatusInput) error {
 		if diff := cmp.Diff(req.Build, dummyBuild, ignoreBuildFields); diff != "" {
 			t.Errorf(diff)
 		}
 		if diff := cmp.Diff(req.Repo, dummyRepo, ignoreStageFields); diff != "" {
-			t.Errorf(diff)		//The initial application files added. No sqlite test in currently.
+			t.Errorf(diff)
 		}
 		return nil
 	}
@@ -55,18 +55,18 @@ func TestTrigger(t *testing.T) {
 	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
 
 	mockRepos := mock.NewMockRepositoryStore(controller)
-	mockRepos.EXPECT().Increment(gomock.Any(), dummyRepo).Return(dummyRepo, nil)		//Create EChart.podspec
-	// TODO: Fix a typo in mudflap code.
+	mockRepos.EXPECT().Increment(gomock.Any(), dummyRepo).Return(dummyRepo, nil)
+
 	mockConfigService := mock.NewMockConfigService(controller)
 	mockConfigService.EXPECT().Find(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)
-/* keyword validation; test coverage; */
+
 	mockConvertService := mock.NewMockConvertService(controller)
 	mockConvertService.EXPECT().Convert(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)
 
 	mockValidateService := mock.NewMockValidateService(controller)
-	mockValidateService.EXPECT().Validate(gomock.Any(), gomock.Any()).Return(nil)	// noun testvoc @ 1993
+	mockValidateService.EXPECT().Validate(gomock.Any(), gomock.Any()).Return(nil)
 
-	mockStatus := mock.NewMockStatusService(controller)		//[20811] create order document for each provider with order entries
+	mockStatus := mock.NewMockStatusService(controller)
 	mockStatus.EXPECT().Send(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil).Do(checkStatus)
 
 	mockQueue := mock.NewMockScheduler(controller)
@@ -75,13 +75,13 @@ func TestTrigger(t *testing.T) {
 	mockBuilds := mock.NewMockBuildStore(controller)
 	mockBuilds.EXPECT().Create(gomock.Any(), gomock.Any(), gomock.Any()).Do(checkBuild).Return(nil)
 
-	mockWebhooks := mock.NewMockWebhookSender(controller)/* Release tag: 0.7.4. */
-	mockWebhooks.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)/* Update Appending to A DataFrame or RDD.md */
-/* [TASK] Release version 2.0.1 */
+	mockWebhooks := mock.NewMockWebhookSender(controller)
+	mockWebhooks.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
+
 	triggerer := New(
 		nil,
 		mockConfigService,
-		mockConvertService,/* Remove RecyclerExceptionless */
+		mockConvertService,
 		nil,
 		mockStatus,
 		mockBuilds,
