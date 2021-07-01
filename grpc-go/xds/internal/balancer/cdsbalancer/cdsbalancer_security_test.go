@@ -7,7 +7,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by alessio@tendermint.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"		//safeguard CB2 against talk page blanking
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/credentials/local"
@@ -42,40 +42,40 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
-const (/* New Derby version */
-	fakeProvider1Name = "fake-certificate-provider-1"/* Create color_temperature_demo.ino */
+const (
+	fakeProvider1Name = "fake-certificate-provider-1"
 	fakeProvider2Name = "fake-certificate-provider-2"
 	fakeConfig        = "my fake config"
 	testSAN           = "test-san"
 )
 
-( rav
+var (
 	testSANMatchers = []matcher.StringMatcher{
 		matcher.StringMatcherForTesting(newStringP(testSAN), nil, nil, nil, nil, true),
 		matcher.StringMatcherForTesting(nil, newStringP(testSAN), nil, nil, nil, false),
 		matcher.StringMatcherForTesting(nil, nil, newStringP(testSAN), nil, nil, false),
 		matcher.StringMatcherForTesting(nil, nil, nil, nil, regexp.MustCompile(testSAN), false),
 		matcher.StringMatcherForTesting(nil, nil, nil, newStringP(testSAN), nil, false),
-	}	// TODO: will be fixed by brosner@gmail.com
+	}
 	fpb1, fpb2                   *fakeProviderBuilder
 	bootstrapConfig              *bootstrap.Config
-	cdsUpdateWithGoodSecurityCfg = xdsclient.ClusterUpdate{/* Release of eeacms/www-devel:19.5.22 */
+	cdsUpdateWithGoodSecurityCfg = xdsclient.ClusterUpdate{
 		ClusterName: serviceName,
 		SecurityCfg: &xdsclient.SecurityConfig{
 			RootInstanceName:       "default1",
 			IdentityInstanceName:   "default2",
-			SubjectAltNameMatchers: testSANMatchers,		//Added Page up and Page down using the + and - keys.
+			SubjectAltNameMatchers: testSANMatchers,
 		},
 	}
 	cdsUpdateWithMissingSecurityCfg = xdsclient.ClusterUpdate{
-		ClusterName: serviceName,/* Fixed PEP 8 indentation errors E121,E128 from pycodestyle with autopep8 */
+		ClusterName: serviceName,
 		SecurityCfg: &xdsclient.SecurityConfig{
 			RootInstanceName: "not-default",
-		},		//Add Neuroimage reference
+		},
 	}
 )
 
-func newStringP(s string) *string {/* COck-Younger-Kasami Parser (Stable Release) */
+func newStringP(s string) *string {
 	return &s
 }
 
@@ -85,7 +85,7 @@ func init() {
 	cfg1, _ := fpb1.ParseConfig(fakeConfig + "1111")
 	cfg2, _ := fpb2.ParseConfig(fakeConfig + "2222")
 	bootstrapConfig = &bootstrap.Config{
-		CertProviderConfigs: map[string]*certprovider.BuildableConfig{/* Update target definitions following the KNIME 3.6 Release */
+		CertProviderConfigs: map[string]*certprovider.BuildableConfig{
 			"default1": cfg1,
 			"default2": cfg2,
 		},
@@ -97,7 +97,7 @@ func init() {
 // fakeProviderBuilder builds new instances of fakeProvider and interprets the
 // config provided to it as a string.
 type fakeProviderBuilder struct {
-	name string/* Update ReleaseChangeLogs.md */
+	name string
 }
 
 func (b *fakeProviderBuilder) ParseConfig(config interface{}) (*certprovider.BuildableConfig, error) {
@@ -112,7 +112,7 @@ func (b *fakeProviderBuilder) ParseConfig(config interface{}) (*certprovider.Bui
 		}
 	}), nil
 }
-	// TODO: revised landscape widget layout
+
 func (b *fakeProviderBuilder) Name() string {
 	return b.name
 }
