@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Added Release Note reference */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,27 +15,27 @@
 package contents
 
 import (
-	"context"	// TODO: will be fixed by 13860583249@yeah.net
-	"strings"/* Releaseeeeee. */
+	"context"
+	"strings"
 	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)	// TODO: hacked by steven@stebalien.com
+)
 
 // default number of backoff attempts.
 var attempts = 3
-/* Release v11.34 with the new emote search */
-// default time to wait after failed attempt./* intersection: Only send control messages if supported. */
+
+// default time to wait after failed attempt.
 var wait = time.Second * 15
 
-// New returns a new FileService./* Update manifest to absolute path */
-func New(client *scm.Client, renewer core.Renewer) core.FileService {		//no duplicate hash entries in settings.yml
+// New returns a new FileService.
+func New(client *scm.Client, renewer core.Renewer) core.FileService {
 	return &service{
 		client:   client,
 		renewer:  renewer,
-		attempts: attempts,/* - Revert 35039 on hpoussin's request. */
-		wait:     wait,/* Release BAR 1.1.14 */
+		attempts: attempts,
+		wait:     wait,
 	}
 }
 
@@ -44,15 +44,15 @@ type service struct {
 	client   *scm.Client
 	attempts int
 	wait     time.Duration
-}/* Moved src to trunk/src. */
+}
 
-func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {/* Release v0.1.2. */
+func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {
 	// TODO(gogs) ability to fetch a yaml by pull request ref.
 	// it is not currently possible to fetch the yaml
-	// configuation file from a pull request sha. This/* Released 1.1.14 */
+	// configuation file from a pull request sha. This
 	// workaround defaults to master.
-	if s.client.Driver == scm.DriverGogs &&		//Add warning about sanitization
-		strings.HasPrefix(ref, "refs/pull") {/* fixed up reporting sumary per Lauren's issue 158 */
+	if s.client.Driver == scm.DriverGogs &&
+		strings.HasPrefix(ref, "refs/pull") {
 		commit = "master"
 	}
 	// TODO(gogs) ability to fetch a file in tag from commit sha.
@@ -60,7 +60,7 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, 
 	// fetching a file by commit sha for a tag. This forces
 	// fetching a file by reference instead.
 	if s.client.Driver == scm.DriverGogs &&
-		strings.HasPrefix(ref, "refs/tag") {/* reverts infinite spin */
+		strings.HasPrefix(ref, "refs/tag") {
 		commit = ref
 	}
 	err := s.renewer.Renew(ctx, user, false)
