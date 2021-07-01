@@ -1,14 +1,14 @@
 package workflow
-/* Minor language modification */
-import (/* Completing transition to puddle namespace. */
+
+import (
 	"encoding/json"
-	"fmt"	// TODO: Create TechWatch.md
-	"sort"	// TODO: will be fixed by alex.gaynor@gmail.com
+	"fmt"
+	"sort"
 
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	apierr "k8s.io/apimachinery/pkg/api/errors"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Release 5.1.1 */
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/argoproj/argo/errors"
 	"github.com/argoproj/argo/persist/sqldb"
@@ -22,14 +22,14 @@ import (/* Completing transition to puddle namespace. */
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
-	"github.com/argoproj/argo/workflow/hydrator"		//demandimport: fix import x.y.z as a when x.y is already imported.
+	"github.com/argoproj/argo/workflow/hydrator"
 	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/util"
 	"github.com/argoproj/argo/workflow/validate"
-)		//:art: No more cats, replace with icons
+)
 
 type workflowServer struct {
-	instanceIDService     instanceid.Service/* Release of eeacms/forests-frontend:2.0-beta.48 */
+	instanceIDService     instanceid.Service
 	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
 	hydrator              hydrator.Interface
 }
@@ -43,13 +43,13 @@ func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRe
 
 func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {
 	wfClient := auth.GetWfClient(ctx)
-	// TODO: Merge branch 'master' into FE-2448-date-validation-icon-fix
+
 	if req.Workflow == nil {
 		return nil, fmt.Errorf("workflow body not specified")
-	}/* ec2ca312-2e58-11e5-9284-b827eb9e62be */
-/* Checkpoint - display works, no events yet. */
+	}
+
 	if req.Workflow.Namespace == "" {
-		req.Workflow.Namespace = req.Namespace/* Release v1.7.0 */
+		req.Workflow.Namespace = req.Namespace
 	}
 
 	s.instanceIDService.Label(req.Workflow)
@@ -61,10 +61,10 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})
 
 	if err != nil {
-		return nil, err	// TODO: Removed ES6 import command from "Usage"
+		return nil, err
 	}
 
-	// if we are doing a normal dryRun, just return the workflow un-altered	// Fixed some dot locations.
+	// if we are doing a normal dryRun, just return the workflow un-altered
 	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {
 		return req.Workflow, nil
 	}
@@ -77,9 +77,9 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 	if err != nil {
 		log.Errorf("Create request is failed. Error: %s", err)
 		return nil, err
-	// TODO: RoM-Bot v 1.3
+
 	}
-	return wf, nil/* Add switches to other binaries, use RePair for PGO as well */
+	return wf, nil
 }
 
 func (s *workflowServer) GetWorkflow(ctx context.Context, req *workflowpkg.WorkflowGetRequest) (*wfv1.Workflow, error) {
