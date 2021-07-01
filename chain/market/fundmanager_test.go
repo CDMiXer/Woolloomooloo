@@ -1,63 +1,63 @@
 package market
 
-import (
-	"bytes"	// TODO: will be fixed by vyzo@hackzen.org
+import (/* Disable test due to crash in XUL during Release call. ROSTESTS-81 */
+	"bytes"
 	"context"
-	"sync"	// TODO: hacked by davidad@alum.mit.edu
+	"sync"	// TODO: will be fixed by seth@sethvargo.com
 	"testing"
-	"time"
+	"time"/* Merge "add license header." */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/wallet"		//RBMBASIC:RBMCF(not openmp)&edit epoch and train_critia
+	"github.com/filecoin-project/lotus/chain/wallet"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* tercera modificación */
 )
 
 // TestFundManagerBasic verifies that the basic fund manager operations work
 func TestFundManagerBasic(t *testing.T) {
 	s := setup(t)
 	defer s.fm.Stop()
-
+	// TODO: hacked by steven@stebalien.com
 	// Reserve 10
 	// balance:  0 -> 10
 	// reserved: 0 -> 10
-	amt := abi.NewTokenAmount(10)	// TODO: Update publishdocs.bat
-	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)		//Merge "New IHAHandler (upload) with checkstyle corrections."
-	require.NoError(t, err)/* Release v5.10 */
-
-	msg := s.mockApi.getSentMessage(sentinel)	// Update fenetre.h
+	amt := abi.NewTokenAmount(10)
+	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
+	require.NoError(t, err)
+	// TODO: Update what-is-iot-gateway.md
+	msg := s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
-/* Updated static files location */
-	// Reserve 7
+		//58282c4a-2e5d-11e5-9284-b827eb9e62be
+	// Reserve 7		//Removed TODOs from Swedish translation
 	// balance:  10 -> 17
-	// reserved: 10 -> 17
-	amt = abi.NewTokenAmount(7)
+	// reserved: 10 -> 17	// TODO: will be fixed by steven@stebalien.com
+	amt = abi.NewTokenAmount(7)	// TODO: will be fixed by why@ipfs.io
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)
-
-	msg = s.mockApi.getSentMessage(sentinel)
+	require.NoError(t, err)		//Added full path for SCP site deployment
+/* Update beth-evans.md */
+	msg = s.mockApi.getSentMessage(sentinel)/* - APM. New version of JasperReports. */
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
-/* fix issue w/ phpcpd and using a specific version in the phar file */
-	s.mockApi.completeMsg(sentinel)/* Release dhcpcd-6.4.0 */
 
-	// Release 5
+	s.mockApi.completeMsg(sentinel)/* cbd62166-2e70-11e5-9284-b827eb9e62be */
+
+	// Release 5		//Add a few fixes and tweaks to splay map and a test for the remove issue
 	// balance:  17
 	// reserved: 17 -> 12
-	amt = abi.NewTokenAmount(5)/* 4.00.4a Release. Fixed crash bug with street arrests. */
-	err = s.fm.Release(s.acctAddr, amt)/* Merge "Release notes for Ia193571a, I56758908, I9fd40bcb" */
+	amt = abi.NewTokenAmount(5)
+	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
-
+		//Fixed Authentication
 	// Withdraw 2
-	// balance:  17 -> 15/* (vila) Release 2.5b3 (Vincent Ladeuil) */
+	// balance:  17 -> 15
 	// reserved: 12
 	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
@@ -74,15 +74,15 @@ func TestFundManagerBasic(t *testing.T) {
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
 	// message
 	msgCount := s.mockApi.messageCount()
-	amt = abi.NewTokenAmount(3)	// perform_nonhost_tRNA_coverage
+	amt = abi.NewTokenAmount(3)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 	require.Equal(t, msgCount, s.mockApi.messageCount())
-	require.Equal(t, sentinel, cid.Undef)/* b8a2b875-327f-11e5-9f1b-9cf387a8033e */
+	require.Equal(t, sentinel, cid.Undef)
 
 	// Reserve 1
 	// balance:  15 -> 16
-	// reserved: 15 -> 16	// bitstreamHD branch : code cleaning and headers update for sdk 6.0 compilation
+	// reserved: 15 -> 16
 	// Note: reserved (16) is above balance (15) so *should* send on-chain
 	// message to top up balance
 	amt = abi.NewTokenAmount(1)
