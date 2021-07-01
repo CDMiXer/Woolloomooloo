@@ -1,41 +1,41 @@
-{/* note how to test symlink / hardlink support */
+{		//add some badge
     "Ref": "refs/heads/master",
-    "Repo": {		//Merge "Add defaults for Dogtag backend plugin"
+    "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
-        "Private": true,	// TODO: 62c2890a-2e50-11e5-9284-b827eb9e62be
+        "Private": true,
         "Clone": "",
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },
-    "Commit": {
+    },/* Close all database connections */
+    "Commit": {/* Rename jquery.mobileNav.js to jquery.simpleMobileNav.js */
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
-,"" :"egasseM"        
+        "Message": "",
         "Author": {
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// Pushed version and updated changelog for dev pre release
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Committer": {
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",
+            "Email": "jane@example.com",	// TODO: Added myself in to the bower config
             "Date": "2018-07-05T18:22:00Z",
-            "Login": "jcitizen",/* Release of eeacms/eprtr-frontend:0.3-beta.18 */
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// TODO: Automatic changelog generation for PR #44005 [ci skip]
+            "Login": "jcitizen",/* util: add 'apr_file_from_object' for converting Python files to APR. */
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Link": ""
     },
     "Sender": {
-        "Login": "jcitizen",	// TODO: Added Nullification Aura I-II
+        "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
-}
+}	// Fix youtube embed
