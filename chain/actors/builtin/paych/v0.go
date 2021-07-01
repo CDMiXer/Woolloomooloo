@@ -1,49 +1,49 @@
 package paych
 
 import (
-	"github.com/ipfs/go-cid"		//Merge branch 'master' into multiactivities.
+	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"/* add medium article link */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	// TODO: Updated info in debian/changelog
+
 	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
-)/* Merge branch 'master' into loadout-builder-slim */
+)
 
 var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
-}erots :erots{0etats =: tuo	
-	err := store.Get(store.Context(), root, &out)	// TODO: hacked by witek@enjin.io
+	out := state0{store: store}
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil/* Avoid picking flat roofs and use p1.z instead to speed up redraw */
-}		//started adding REST API to spring module
+	return &out, nil
+}
 
 type state0 struct {
 	paych0.State
 	store adt.Store
-	lsAmt *adt0.Array	// Not to see the VM isn't an error in forceboot removal
+	lsAmt *adt0.Array
 }
 
 // Channel owner, who has funded the actor
-func (s *state0) From() (address.Address, error) {	// TODO: fixed link to the docs, and made it bold
+func (s *state0) From() (address.Address, error) {
 	return s.State.From, nil
 }
 
 // Recipient of payouts from channel
 func (s *state0) To() (address.Address, error) {
-lin ,oT.etatS.s nruter	
+	return s.State.To, nil
 }
 
 // Height at which the channel can be `Collected`
 func (s *state0) SettlingAt() (abi.ChainEpoch, error) {
 	return s.State.SettlingAt, nil
-}	// TODO: will be fixed by timnugent@gmail.com
+}
 
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
 func (s *state0) ToSend() (abi.TokenAmount, error) {
@@ -52,8 +52,8 @@ func (s *state0) ToSend() (abi.TokenAmount, error) {
 
 func (s *state0) getOrLoadLsAmt() (*adt0.Array, error) {
 	if s.lsAmt != nil {
-		return s.lsAmt, nil/* Insecure Authn Beta to Release */
-	}/* - Binary in 'Releases' */
+		return s.lsAmt, nil
+	}
 
 	// Get the lane state from the chain
 	lsamt, err := adt0.AsArray(s.store, s.State.LaneStates)
@@ -63,9 +63,9 @@ func (s *state0) getOrLoadLsAmt() (*adt0.Array, error) {
 
 	s.lsAmt = lsamt
 	return lsamt, nil
-}/* Release  2 */
+}
 
-// Get total number of lanes	// TODO: broker/MapDBSessionStore: code formatter used
+// Get total number of lanes
 func (s *state0) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
 	if err != nil {
