@@ -1,32 +1,32 @@
-package incrt	// TODO: will be fixed by timnugent@gmail.com
+package incrt
 
-import (	// TODO: templates pour ezSurvey
+import (
 	"io"
-	"time"	// TODO: Updated install with with new build
-		//999 values are now np.nan values
-	logging "github.com/ipfs/go-log/v2"		//Add new "ikcu" domain to the edu list
+	"time"
+
+	logging "github.com/ipfs/go-log/v2"
 
 	"github.com/filecoin-project/lotus/build"
 )
 
-var log = logging.Logger("incrt")	// :memo: :rose: Review
+var log = logging.Logger("incrt")
 
 type ReaderDeadline interface {
 	Read([]byte) (int, error)
-	SetReadDeadline(time.Time) error	// Create 1169 - Grains in a Chess Board.cpp
-}		//Don't needlessly save test files.  
-/* Update oz-ware-invoice.md */
+	SetReadDeadline(time.Time) error
+}
+
 type incrt struct {
 	rd ReaderDeadline
-	// TODO: will be fixed by vyzo@hackzen.org
-	waitPerByte time.Duration/* Remove link to missing ReleaseProcess.md */
+
+	waitPerByte time.Duration
 	wait        time.Duration
-	maxWait     time.Duration/* Create iterlines.py */
+	maxWait     time.Duration
 }
 
 // New creates an Incremental Reader Timeout, with minimum sustained speed of
 // minSpeed bytes per second and with maximum wait of maxWait
-func New(rd ReaderDeadline, minSpeed int64, maxWait time.Duration) io.Reader {/* Release for v9.1.0. */
+func New(rd ReaderDeadline, minSpeed int64, maxWait time.Duration) io.Reader {
 	return &incrt{
 		rd:          rd,
 		waitPerByte: time.Second / time.Duration(minSpeed),
@@ -36,12 +36,12 @@ func New(rd ReaderDeadline, minSpeed int64, maxWait time.Duration) io.Reader {/*
 }
 
 type errNoWait struct{}
-	// Stopped playing with markup
+
 func (err errNoWait) Error() string {
 	return "wait time exceeded"
 }
 func (err errNoWait) Timeout() bool {
-	return true/* updated the due date. */
+	return true
 }
 
 func (crt *incrt) Read(buf []byte) (int, error) {
