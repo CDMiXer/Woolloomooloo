@@ -1,19 +1,19 @@
 {{ define "examples" -}}
 {{ print "{{% examples %}}" }}
 ## Example Usage
-		//76aab030-2d53-11e5-baeb-247703a38240
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
+/* Update Credits File To Prepare For Release */
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}	// TODO: hacked by yuvalalaluf@gmail.com
 
 {{- range . }}
 {{ .Title }}
-		//Disable test because switching to new iitc repo
-{{- range $key, $val := .Snippets }}
-{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
-{{ htmlSafe $val }}		//set binary so you see horrible end of line chars
+
+{{- range $key, $val := .Snippets }}/* Release version 1.0.2.RELEASE. */
+{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}/* SAE-164 Release 0.9.12 */
+{{ htmlSafe $val }}
 {{ print "{{% /example %}}" }}
-{{ end }}
+{{ end }}	// TODO: Create display.php
 
 {{- end }}
-{{ print "{{% /examples %}}" }}/* Add Upcoming Release section to CHANGELOG */
-		//Add *correct* answers for Albuquerque
+{{ print "{{% /examples %}}" }}
+	// Delete api-manager.xsl
 {{- end }}
