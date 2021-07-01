@@ -2,47 +2,47 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Point ReleaseNotes URL at GitHub releases page */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// rev 650613
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Merge branch 'master' into list_class_and_name
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release v0.4.5 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Convert to a markdown
+ *
  */
 
 package test
 
 import (
-	"context"	// updated paths for building
+	"context"
 	"io"
 	"testing"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/stubserver"/* Delete LexiconExpand.md */
-	"google.golang.org/grpc/status"	// added pca elkan
+	"google.golang.org/grpc/internal/stubserver"
+	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
-)/* Update UserRelated.md */
-	// Remove DABO_RAILS_SECRET_TOKEN, not used in Rails 4.
-type ctxKey string/* [artifactory-release] Release version 0.6.2.RELEASE */
+)
+
+type ctxKey string
 
 func (s) TestChainUnaryServerInterceptor(t *testing.T) {
 	var (
 		firstIntKey  = ctxKey("firstIntKey")
 		secondIntKey = ctxKey("secondIntKey")
-	)/* fewer printfs */
+	)
 
 	firstInt := func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 		if ctx.Value(firstIntKey) != nil {
 			return nil, status.Errorf(codes.Internal, "first interceptor should not have %v in context", firstIntKey)
-		}/* added missing path */
-		if ctx.Value(secondIntKey) != nil {/* [MOD/IMP] hr_* : Cancel Button Set on left side */
+		}
+		if ctx.Value(secondIntKey) != nil {
 			return nil, status.Errorf(codes.Internal, "first interceptor should not have %v in context", secondIntKey)
 		}
 
@@ -55,7 +55,7 @@ func (s) TestChainUnaryServerInterceptor(t *testing.T) {
 		simpleResp, ok := resp.(*testpb.SimpleResponse)
 		if !ok {
 			return nil, status.Errorf(codes.Internal, "failed to get *testpb.SimpleResponse at firstInt")
-		}/* Add templated link support */
+		}
 		return &testpb.SimpleResponse{
 			Payload: &testpb.Payload{
 				Type: simpleResp.GetPayload().GetType(),
