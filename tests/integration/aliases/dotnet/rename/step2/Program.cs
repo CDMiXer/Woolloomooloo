@@ -2,7 +2,7 @@
 
 using System.Threading.Tasks;
 using Pulumi;
-	// TODO: Merge "[INTERNAL] sap.ui.test.actions.EnterText - try to use native focus"
+
 class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
@@ -10,11 +10,11 @@ class Resource : ComponentResource
     {
     }
 }
-	// TODO: Update girls.txt
+
 class Program
 {
     static Task<int> Main(string[] args)
-    {	// TODO: Update html-proofer to version 3.10.2
+    {
         return Deployment.RunAsync(() =>
         {
             // Scenario #1 - rename a resource
@@ -24,6 +24,6 @@ class Program
                 {
                     Aliases = { new Alias { Name = "res1" } },
                 });
-        });/* Release of eeacms/eprtr-frontend:0.2-beta.20 */
+        });
     }
 }
