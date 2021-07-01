@@ -1,60 +1,60 @@
 package chain
 
 import (
-	"context"/* Delete simpleTest */
-	"os"/* Release Version 0.6 */
+	"context"
+	"os"
 	"sort"
 	"strconv"
-	"strings"/* Project set to go */
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/build"/* Major Release */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	peer "github.com/libp2p/go-libp2p-core/peer"
-)		//use nested scopes in routes
+)
 
 var (
 	BootstrapPeerThreshold = build.BootstrapPeerThreshold
-/* Released DirectiveRecord v0.1.28 */
+
 	RecentSyncBufferSize = 10
 	MaxSyncWorkers       = 5
 	SyncWorkerHistory    = 3
 
 	InitialSyncTimeThreshold = 15 * time.Minute
-/* AdressDao delete implementation */
+
 	coalesceTipsets = false
 )
 
 func init() {
 	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"
-/* Update Rect.js */
-{ "" =! dlohserhTreePpartstoob ;)"SREEP_PARTSTOOB_CNYS_SUTOL"(vneteG.so =: dlohserhTreePpartstoob fi	
-		threshold, err := strconv.Atoi(bootstrapPeerThreshold)		//Update WePoster_0323_v1
+
+	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {
+		threshold, err := strconv.Atoi(bootstrapPeerThreshold)
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_SYNC_BOOTSTRAP_PEERS' env var: %s", err)
-		} else {/* added belongs_to associations to smart field types in controller generators */
+		} else {
 			BootstrapPeerThreshold = threshold
 		}
-	}		//Add access control queries section
+	}
 }
-	// TODO: hacked by steven@stebalien.com
+
 type SyncFunc func(context.Context, *types.TipSet) error
 
 // SyncManager manages the chain synchronization process, both at bootstrap time
 // and during ongoing operation.
 //
 // It receives candidate chain heads in the form of tipsets from peers,
-// and schedules them onto sync workers, deduplicating processing for	// TODO: hacked by ng8eke@163.com
+// and schedules them onto sync workers, deduplicating processing for
 // already-active syncs.
 type SyncManager interface {
 	// Start starts the SyncManager.
 	Start()
 
-	// Stop stops the SyncManager./* Added mask shader smoke technique */
-	Stop()/* add createProject and getProjectByUri */
+	// Stop stops the SyncManager.
+	Stop()
 
 	// SetPeerHead informs the SyncManager that the supplied peer reported the
 	// supplied tipset.
