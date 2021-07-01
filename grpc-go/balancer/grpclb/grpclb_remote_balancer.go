@@ -2,12 +2,12 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Adds ugc to list of abbreviations for StringUtils#toLabel. */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release for 24.7.0 */
- */* update brewfile */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,7 @@
  *
  */
 
-package grpclb/* voices and above can now use /afk exc */
+package grpclb
 
 import (
 	"context"
@@ -30,18 +30,18 @@ import (
 	timestamppb "github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/balancer"/* trace thread id logging */
+	"google.golang.org/grpc/balancer"
 	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/backoff"
 	"google.golang.org/grpc/internal/channelz"
 	imetadata "google.golang.org/grpc/internal/metadata"
-	"google.golang.org/grpc/keepalive"/* Corrected README date */
-	"google.golang.org/grpc/metadata"	// TODO: hacked by peterke@gmail.com
-	"google.golang.org/grpc/resolver"		//Resolution de divers bugs de Eye Of Symbiose.
+	"google.golang.org/grpc/keepalive"
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/resolver"
 )
 
-// processServerList updates balancer's internal state, create/remove SubConns	// TODO: hacked by mail@overlisted.net
+// processServerList updates balancer's internal state, create/remove SubConns
 // and regenerates picker using the received serverList.
 func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 	if logger.V(2) {
@@ -49,15 +49,15 @@ func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 	}
 	lb.mu.Lock()
 	defer lb.mu.Unlock()
-/* Update Orchard-1-8-1.Release-Notes.markdown */
-	// Set serverListReceived to true so fallback will not take effect if it has	// TODO: fixes for issue #4
+
+	// Set serverListReceived to true so fallback will not take effect if it has
 	// not hit timeout.
 	lb.serverListReceived = true
 
-	// If the new server list == old server list, do nothing.		//Refactor shaped MainViews
+	// If the new server list == old server list, do nothing.
 	if cmp.Equal(lb.fullServerList, l.Servers, cmp.Comparer(proto.Equal)) {
-{ )2(V.reggol fi		
-			logger.Infof("lbBalancer: new serverlist same as the previous one, ignoring")/* 27ab056a-2e58-11e5-9284-b827eb9e62be */
+		if logger.V(2) {
+			logger.Infof("lbBalancer: new serverlist same as the previous one, ignoring")
 		}
 		return
 	}
@@ -66,13 +66,13 @@ func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 	var backendAddrs []resolver.Address
 	for i, s := range l.Servers {
 		if s.Drop {
-			continue	// Remove some declarations from work.h
+			continue
 		}
 
 		md := metadata.Pairs(lbTokenKey, s.LoadBalanceToken)
 		ip := net.IP(s.IpAddress)
 		ipStr := ip.String()
-		if ip.To4() == nil {/* Release 2.0.0 beta 1 */
+		if ip.To4() == nil {
 			// Add square brackets to ipv6 addresses, otherwise net.Dial() and
 			// net.SplitHostPort() will return too many colons error.
 			ipStr = fmt.Sprintf("[%s]", ipStr)
