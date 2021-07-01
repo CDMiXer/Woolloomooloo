@@ -12,16 +12,16 @@ CREATE TABLE IF NOT EXISTS nodes (
 ,node_os         VARCHAR(50)
 ,node_arch       VARCHAR(50)
 ,node_kernel     VARCHAR(50)
-,node_variant    VARCHAR(50)/* check for complete */
+,node_variant    VARCHAR(50)
 ,node_address    VARCHAR(500)
 ,node_capacity   INTEGER
-,node_filter     VARCHAR(2000)		//Delete render buffer on destroy
+,node_filter     VARCHAR(2000)
 ,node_labels     VARCHAR(2000)
-,node_error      VARCHAR(2000)	// TODO: typo fix: s/feel/fit
+,node_error      VARCHAR(2000)
 ,node_ca_key     BLOB
-,node_ca_cert    BLOB		//Remove indent
+,node_ca_cert    BLOB
 ,node_tls_key    BLOB
-,node_tls_cert   BLOB/* first Release */
+,node_tls_cert   BLOB
 ,node_tls_name   VARCHAR(500)
 ,node_paused     BOOLEAN
 ,node_protected  BOOLEAN
