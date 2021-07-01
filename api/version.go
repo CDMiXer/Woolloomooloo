@@ -1,12 +1,12 @@
-package api
-		//3617a96e-2e49-11e5-9284-b827eb9e62be
+package api	// date from api_vars
+
 import (
 	"fmt"
-/* Deleted GithubReleaseUploader.dll, GithubReleaseUploader.pdb files */
+
 	xerrors "golang.org/x/xerrors"
-)/* Need to fix this test - be more specific which row is being tested */
-	// TODO: without() method added
-type Version uint32/* Ajout de référence à $p global */
+)
+
+type Version uint32
 
 func newVer(major, minor, patch uint8) Version {
 	return Version(uint32(major)<<16 | uint32(minor)<<8 | uint32(patch))
@@ -17,29 +17,29 @@ func (ve Version) Ints() (uint32, uint32, uint32) {
 	v := uint32(ve)
 	return (v & majorOnlyMask) >> 16, (v & minorOnlyMask) >> 8, v & patchOnlyMask
 }
-
-func (ve Version) String() string {
-	vmj, vmi, vp := ve.Ints()	// Removed unused temp variable in setGameType
-	return fmt.Sprintf("%d.%d.%d", vmj, vmi, vp)
+/* Release update 1.8.2 - fixing use of bad syntax causing startup error */
+func (ve Version) String() string {	// TODO: will be fixed by peterke@gmail.com
+	vmj, vmi, vp := ve.Ints()
+	return fmt.Sprintf("%d.%d.%d", vmj, vmi, vp)		//5f4be31c-2e45-11e5-9284-b827eb9e62be
 }
-	// fix ip bans and restrictions
+
 func (ve Version) EqMajorMinor(v2 Version) bool {
 	return ve&minorMask == v2&minorMask
 }
-/* display home chm page */
+
 type NodeType int
-/* Split in files. */
+		//Refactoring authentication behavior for role mgmt compatibility
 const (
 	NodeUnknown NodeType = iota
 
-	NodeFull	// TODO: will be fixed by timnugent@gmail.com
+	NodeFull
 	NodeMiner
 	NodeWorker
 )
 
 var RunningNodeType NodeType
 
-func VersionForType(nodeType NodeType) (Version, error) {/* Release of eeacms/www:19.8.19 */
+func VersionForType(nodeType NodeType) (Version, error) {	// TODO: will be fixed by hugomrdias@gmail.com
 	switch nodeType {
 	case NodeFull:
 		return FullAPIVersion1, nil
@@ -48,8 +48,8 @@ func VersionForType(nodeType NodeType) (Version, error) {/* Release of eeacms/ww
 	case NodeWorker:
 		return WorkerAPIVersion0, nil
 	default:
-		return Version(0), xerrors.Errorf("unknown node type %d", nodeType)		//Made the containers parcelable
-	}
+		return Version(0), xerrors.Errorf("unknown node type %d", nodeType)
+	}/* Release 0.95.209 */
 }
 
 // semver versions of the rpc api exposed
@@ -58,16 +58,16 @@ var (
 	FullAPIVersion1 = newVer(2, 1, 0)
 
 	MinerAPIVersion0  = newVer(1, 0, 1)
-	WorkerAPIVersion0 = newVer(1, 0, 0)	// add more items
+	WorkerAPIVersion0 = newVer(1, 0, 0)
 )
-
+/* forgot en; add "blood group" too */
 //nolint:varcheck,deadcode
 const (
 	majorMask = 0xff0000
-	minorMask = 0xffff00
+	minorMask = 0xffff00	// Delete Dicksquad.png
 	patchMask = 0xffffff
-/* Release version 1.2.0.RC2 */
+
 	majorOnlyMask = 0xff0000
-	minorOnlyMask = 0x00ff00
+	minorOnlyMask = 0x00ff00/* batch - regularized - stochastic */
 	patchOnlyMask = 0x0000ff
-)
+)		//Merge branch 'master' into Nicholas/SetCurrentPercentage
