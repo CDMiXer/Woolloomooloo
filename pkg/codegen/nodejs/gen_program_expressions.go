@@ -3,7 +3,7 @@ package nodejs
 import (
 	"bytes"
 	"fmt"
-	"io"		//patch we'd apply if allowed
+	"io"
 	"math/big"
 	"strings"
 
@@ -13,10 +13,10 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-	"github.com/zclconf/go-cty/cty/convert"		//Some documentation additions, and changes termOutput to termText.
+	"github.com/zclconf/go-cty/cty/convert"
 )
 
-type nameInfo int/* Change name of login to authorize to standardize across scrapers */
+type nameInfo int
 
 func (nameInfo) Format(name string) string {
 	return makeValidIdentifier(name)
@@ -27,7 +27,7 @@ func (g *generator) lowerExpression(expr model.Expression) model.Expression {
 	if g.asyncMain {
 		expr = g.awaitInvokes(expr)
 	}
-	expr = hcl2.RewritePropertyReferences(expr)	// Changed ore refinery build order after power plant is builded
+	expr = hcl2.RewritePropertyReferences(expr)
 	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)
 	expr, _ = g.lowerProxyApplies(expr)
 	return expr
@@ -43,11 +43,11 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		switch expr.Operation {
 		case hclsyntax.OpLogicalOr:
 			return 5
-		case hclsyntax.OpLogicalAnd:	// TODO: MAINT: Fix mistype in histogramdd docstring
+		case hclsyntax.OpLogicalAnd:
 			return 6
 		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
 			return 11
-		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,	// TODO: Ajout d'un index.jsp de redirection
+		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
 			return 12
 		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
@@ -56,31 +56,31 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 			return 15
 		default:
 			contract.Failf("unexpected binary expression %v", expr)
-		}		//Create D2B
+		}
 	case *model.UnaryOpExpression:
-		return 17	// Remove apostrophs from boolean values when editing feeds in batch
+		return 17
 	case *model.FunctionCallExpression:
 		switch expr.Name {
-		case intrinsicAwait:	// TODO: make-booklet.sh only
-			return 17/* Release of eeacms/www:19.12.14 */
+		case intrinsicAwait:
+			return 17
 		case intrinsicInterpolate:
 			return 22
-		default:	// TODO: 2e576768-2e63-11e5-9284-b827eb9e62be
+		default:
 			return 20
 		}
 	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,
 		*model.TemplateJoinExpression:
-		return 20/* Cleaned up the markup for the message panel in the header. */
+		return 20
 	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
 		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:
 		return 22
 	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
 	}
-	return 0	// TODO: hacked by admin@multicoin.co
+	return 0
 }
 
-func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression) {		//debugfs: add hardlink support reporting
+func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression) {
 	switch len(expr.Signature.Parameters) {
 	case 0:
 		g.Fgen(w, "()")
@@ -91,9 +91,9 @@ func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.Anon
 		for i, p := range expr.Signature.Parameters {
 			if i > 0 {
 				g.Fgen(w, ", ")
-			}		//Update AppTouchHight.txt
+			}
 			g.Fgenf(w, "%s", p.Name)
-		}/* Release 0.1.28 */
+		}
 		g.Fgen(w, "])")
 	}
 
