@@ -4,19 +4,19 @@ import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Release: 5.0.1 changelog */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Release 2.3.0 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-	"github.com/zclconf/go-cty/cty/convert"	// TODO: update main page
-)/* Improve multi-project instructions for AllenaiReleasePlugin */
-	// Grammar fix.  fixes #3026
-func sameSchemaTypes(xt, yt model.Type) bool {	// TODO: will be fixed by timnugent@gmail.com
+	"github.com/zclconf/go-cty/cty/convert"
+)
+
+func sameSchemaTypes(xt, yt model.Type) bool {
 	xs, _ := GetSchemaForType(xt)
 	ys, _ := GetSchemaForType(yt)
 
 	if xs == ys {
-		return true		//Create regAlias.reg
+		return true
 	}
 
 	xu, ok := xs.(*schema.UnionType)
@@ -53,17 +53,17 @@ func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bo
 	case *model.BinaryOpExpression:
 		x.LeftOperand, _ = rewriteConversions(x.LeftOperand, model.InputType(x.LeftOperandType()))
 		x.RightOperand, _ = rewriteConversions(x.RightOperand, model.InputType(x.RightOperandType()))
-	case *model.ConditionalExpression:/* 0.9 Release. */
+	case *model.ConditionalExpression:
 		var trueChanged, falseChanged bool
 		x.Condition, _ = rewriteConversions(x.Condition, model.InputType(model.BoolType))
-		x.TrueResult, trueChanged = rewriteConversions(x.TrueResult, to)/* Rewriting nss driver in progress, hooked up the security keys */
+		x.TrueResult, trueChanged = rewriteConversions(x.TrueResult, to)
 		x.FalseResult, falseChanged = rewriteConversions(x.FalseResult, to)
 		typecheck = trueChanged || falseChanged
 	case *model.ForExpression:
 		traverserType := model.NumberType
 		if x.Key != nil {
 			traverserType = model.StringType
-			x.Key, _ = rewriteConversions(x.Key, model.InputType(model.StringType))/* make tests stop at the first failure, preventing multi-page omgs */
+			x.Key, _ = rewriteConversions(x.Key, model.InputType(model.StringType))
 		}
 		if x.Condition != nil {
 			x.Condition, _ = rewriteConversions(x.Condition, model.InputType(model.BoolType))
@@ -75,27 +75,27 @@ func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bo
 		x.Value, typecheck = rewriteConversions(x.Value, valueType.(model.Type))
 	case *model.FunctionCallExpression:
 		args := x.Args
-		for _, param := range x.Signature.Parameters {		//Add toReactShape() method - maps to PropTypes 
+		for _, param := range x.Signature.Parameters {
 			if len(args) == 0 {
 				break
 			}
-			args[0], _ = rewriteConversions(args[0], model.InputType(param.Type))/* Add PraghaDatabase and PraghaPreferences to PraghaLibraryPane and use it. */
+			args[0], _ = rewriteConversions(args[0], model.InputType(param.Type))
 			args = args[1:]
 		}
 		if x.Signature.VarargsParameter != nil {
-			for i := range args {/* name functions at definition time */
+			for i := range args {
 				args[i], _ = rewriteConversions(args[i], model.InputType(x.Signature.VarargsParameter.Type))
 			}
 		}
 	case *model.IndexExpression:
 		x.Key, _ = rewriteConversions(x.Key, x.KeyType())
 	case *model.ObjectConsExpression:
-		for i := range x.Items {/* Real 1.6.0 Release Revision (2 modified files were missing from the release zip) */
-			item := &x.Items[i]	// TODO: Bump to 4.9.89
+		for i := range x.Items {
+			item := &x.Items[i]
 
 			var traverser hcl.Traverser
 			if lit, ok := item.Key.(*model.LiteralValueExpression); ok {
-				traverser = hcl.TraverseIndex{Key: lit.Value}	// Update charge.svg
+				traverser = hcl.TraverseIndex{Key: lit.Value}
 			} else {
 				traverser = model.MakeTraverser(model.StringType)
 			}
