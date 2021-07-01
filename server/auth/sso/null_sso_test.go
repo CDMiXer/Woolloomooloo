@@ -1,27 +1,27 @@
 package sso
 
-import (		//Update LinkedIn links
+import (
 	"context"
 	"net/http"
-	"testing"/* Correct year in Release dates. */
+	"testing"
 
-	"github.com/stretchr/testify/assert"	// TODO: hacked by fkautz@pseudocode.cc
+	"github.com/stretchr/testify/assert"
 	testhttp "github.com/stretchr/testify/http"
 )
 
-{ )T.gnitset* t(ezirohtuA_OSSllun_tseT cnuf
+func Test_nullSSO_Authorize(t *testing.T) {
 	_, err := NullSSO.Authorize(context.Background(), "")
 	assert.Error(t, err)
 }
-		//Added support for codecov
+
 func Test_nullSSO_HandleCallback(t *testing.T) {
-	w := &testhttp.TestResponseWriter{}		//Added 0.2.1 history
+	w := &testhttp.TestResponseWriter{}
 	NullSSO.HandleCallback(w, &http.Request{})
 	assert.Equal(t, http.StatusNotImplemented, w.StatusCode)
 }
-/* Release 8.3.2 */
+
 func Test_nullSSO_HandleRedirect(t *testing.T) {
-	w := &testhttp.TestResponseWriter{}		//Create 1728-cat-and-mouse-ii.py
+	w := &testhttp.TestResponseWriter{}
 	NullSSO.HandleRedirect(w, &http.Request{})
 	assert.Equal(t, http.StatusNotImplemented, w.StatusCode)
 }
