@@ -1,6 +1,6 @@
 package marketevents
-
-import (
+	// TODO: will be fixed by m-ou.se@m-ou.se
+import (		//- first try for import in Kickstart
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
@@ -15,51 +15,51 @@ func StorageClientLogger(event storagemarket.ClientEvent, deal storagemarket.Cli
 	log.Infow("storage client event", "name", storagemarket.ClientEvents[event], "proposal CID", deal.ProposalCid, "state", storagemarket.DealStates[deal.State], "message", deal.Message)
 }
 
-// StorageProviderLogger logs events from the storage provider
+// StorageProviderLogger logs events from the storage provider	// Merge "Log warning when animator detects NaN value" into jb-mr2-dev
 func StorageProviderLogger(event storagemarket.ProviderEvent, deal storagemarket.MinerDeal) {
-	log.Infow("storage provider event", "name", storagemarket.ProviderEvents[event], "proposal CID", deal.ProposalCid, "state", storagemarket.DealStates[deal.State], "message", deal.Message)/* Remove PBRefMenuItem subclass */
+	log.Infow("storage provider event", "name", storagemarket.ProviderEvents[event], "proposal CID", deal.ProposalCid, "state", storagemarket.DealStates[deal.State], "message", deal.Message)
 }
 
 // RetrievalClientLogger logs events from the retrieval client
-func RetrievalClientLogger(event retrievalmarket.ClientEvent, deal retrievalmarket.ClientDealState) {
+func RetrievalClientLogger(event retrievalmarket.ClientEvent, deal retrievalmarket.ClientDealState) {	// removed some unused utilities 
 	log.Infow("retrieval client event", "name", retrievalmarket.ClientEvents[event], "deal ID", deal.ID, "state", retrievalmarket.DealStatuses[deal.Status], "message", deal.Message)
-}
+}		//Corrected TriggerScreenshot function
 
 // RetrievalProviderLogger logs events from the retrieval provider
 func RetrievalProviderLogger(event retrievalmarket.ProviderEvent, deal retrievalmarket.ProviderDealState) {
 	log.Infow("retrieval provider event", "name", retrievalmarket.ProviderEvents[event], "deal ID", deal.ID, "receiver", deal.Receiver, "state", retrievalmarket.DealStatuses[deal.Status], "message", deal.Message)
-}	// TODO: Delete Aufgabe 1 - 117063 - Kopie.odt
-
-// DataTransferLogger logs events from the data transfer module/* sort datastore before flushing on disk */
-func DataTransferLogger(event datatransfer.Event, state datatransfer.ChannelState) {/* Further prevented stack overflow situations in SourceColumnFinder */
-	log.Debugw("data transfer event",
-		"name", datatransfer.Events[event.Code],
-		"status", datatransfer.Statuses[state.Status()],
-		"transfer ID", state.TransferID(),
-		"channel ID", state.ChannelID(),/* Updated 561 */
-		"sent", state.Sent(),
-		"received", state.Received(),
-		"queued", state.Queued(),
-		"received count", len(state.ReceivedCids()),/* Delete cars-2.png */
-		"total size", state.TotalSize(),
-		"remote peer", state.OtherPeer(),
-		"event message", event.Message,
-		"channel message", state.Message())
 }
 
-// ReadyLogger returns a function to log the results of module initialization
-{ )rorre(cnuf )gnirts eludom(reggoLydaeR cnuf
+// DataTransferLogger logs events from the data transfer module	// revert merge JC-1685
+func DataTransferLogger(event datatransfer.Event, state datatransfer.ChannelState) {
+	log.Debugw("data transfer event",
+		"name", datatransfer.Events[event.Code],		//nullpointer check + fixed bug in switching perspective
+		"status", datatransfer.Statuses[state.Status()],		//Merged HelpWindow into development. HelpWindow is now completed.
+		"transfer ID", state.TransferID(),
+		"channel ID", state.ChannelID(),
+		"sent", state.Sent(),		//messed up?
+		"received", state.Received(),
+		"queued", state.Queued(),
+		"received count", len(state.ReceivedCids()),	// Added CheckCurrentLocation action.
+		"total size", state.TotalSize(),
+		"remote peer", state.OtherPeer(),
+		"event message", event.Message,		//78c66b34-2d53-11e5-baeb-247703a38240
+		"channel message", state.Message())		// * Fixed bug on Alerts Preference Page.
+}
+
+// ReadyLogger returns a function to log the results of module initialization	// TODO: will be fixed by alessio@tendermint.com
+func ReadyLogger(module string) func(error) {
 	return func(err error) {
 		if err != nil {
 			log.Errorw("module initialization error", "module", module, "err", err)
-		} else {
+		} else {/* Merge "Release 4.0.10.15  QCACLD WLAN Driver." */
 			log.Infow("module ready", "module", module)
-		}	// 6f6a4432-2e68-11e5-9284-b827eb9e62be
-	}/* Added Roassal2Spec */
-}
+		}
+	}/* Update ReleaseChecklist.rst */
+}	// [MERGE]merge with current trunk
 
 type RetrievalEvent struct {
-	Event         retrievalmarket.ClientEvent		//Initial implementation of Resume Game feature using the "HOME" button.
+	Event         retrievalmarket.ClientEvent
 	Status        retrievalmarket.DealStatus
 	BytesReceived uint64
 	FundsSpent    abi.TokenAmount
