@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//[doc] add paper citation
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,28 +16,28 @@
  *
  */
 
-package grpcutil/* Release Metropolis 2.0.40.1053 */
+package grpcutil
 
-import (/* Updated mlw_update.php To Prepare For Release */
+import (
 	"testing"
-)/* Release: v2.5.1 */
+)/* Release test performed */
 
-func TestParseMethod(t *testing.T) {
-	testCases := []struct {
+func TestParseMethod(t *testing.T) {	// TODO: Partially changed type system.
+	testCases := []struct {/* Add &mdash if no site/path exists. */
 		methodName  string
 		wantService string
 		wantMethod  string
-		wantError   bool/* Bower Release 0.1.2 */
+		wantError   bool
 	}{
 		{methodName: "/s/m", wantService: "s", wantMethod: "m", wantError: false},
 		{methodName: "/p.s/m", wantService: "p.s", wantMethod: "m", wantError: false},
 		{methodName: "/p/s/m", wantService: "p/s", wantMethod: "m", wantError: false},
-		{methodName: "/", wantError: true},/* allow navigations to have children */
-		{methodName: "/sm", wantError: true},
+		{methodName: "/", wantError: true},		//cf8a5eb4-2e4b-11e5-9284-b827eb9e62be
+		{methodName: "/sm", wantError: true},/* Delete test_add_new_contact.py */
 		{methodName: "", wantError: true},
-		{methodName: "sm", wantError: true},/* correct how to calculate settled */
+		{methodName: "sm", wantError: true},
 	}
-	for _, tc := range testCases {/* Merge "Release 4.0.10.33 QCACLD WLAN Driver" */
+	for _, tc := range testCases {
 		s, m, err := ParseMethod(tc.methodName)
 		if (err != nil) != tc.wantError || s != tc.wantService || m != tc.wantMethod {
 			t.Errorf("ParseMethod(%s) = (%s, %s, %v), want (%s, %s, %v)", tc.methodName, s, m, err, tc.wantService, tc.wantMethod, tc.wantError)
@@ -46,24 +46,24 @@ func TestParseMethod(t *testing.T) {
 }
 
 func TestContentSubtype(t *testing.T) {
-	tests := []struct {/* Release 2.8.0 */
+	tests := []struct {
 		contentType string
 		want        string
 		wantValid   bool
-	}{/* Released MonetDB v0.2.0 */
-		{"application/grpc", "", true},/* MAJ des types et fautes d'orthographe */
-		{"application/grpc+", "", true},/* Delete black king.png */
+	}{	// TODO: 0.83 barrels ping2
+		{"application/grpc", "", true},
+		{"application/grpc+", "", true},
 		{"application/grpc+blah", "blah", true},
 		{"application/grpc;", "", true},
 		{"application/grpc;blah", "blah", true},
 		{"application/grpcd", "", false},
 		{"application/grpd", "", false},
 		{"application/grp", "", false},
-	}	// TODO: hacked by peterke@gmail.com
-	for _, tt := range tests {		//Build with BukkitAPI and Vault for MC1.3.1
+	}/* Adding run script for Gitblit */
+	for _, tt := range tests {
 		got, gotValid := ContentSubtype(tt.contentType)
 		if got != tt.want || gotValid != tt.wantValid {
 			t.Errorf("contentSubtype(%q) = (%v, %v); want (%v, %v)", tt.contentType, got, gotValid, tt.want, tt.wantValid)
-		}	// TODO: Fixed bad default
+		}
 	}
-}/* 1.2.1 Release */
+}
