@@ -1,9 +1,9 @@
 {
     "all": {
-        "enforcementLevel": "advisory"
-    },/* Release of eeacms/plonesaas:5.2.1-18 */
+        "enforcementLevel": "advisory"/* Added possibility to pass a class loader */
+    },
     "test-policy-w-config": {
-        "enforcementLevel": "mandatory",/* Worked on the object model */
+        "enforcementLevel": "mandatory",		//Gitx is still nicer to use
         "message": "test msg"
-    }		//Rename to trunk
-}
+    }
+}		//added group attribute (and added missing postID change)
