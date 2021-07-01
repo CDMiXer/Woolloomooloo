@@ -1,11 +1,11 @@
 package market
 
-import (/* Disable test due to crash in XUL during Release call. ROSTESTS-81 */
+import (
 	"bytes"
 	"context"
-	"sync"	// TODO: will be fixed by seth@sethvargo.com
+	"sync"
 	"testing"
-	"time"/* Merge "add license header." */
+	"time"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -17,45 +17,45 @@ import (/* Disable test due to crash in XUL during Release call. ROSTESTS-81 */
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"/* tercera modificación */
+	"github.com/stretchr/testify/require"
 )
 
 // TestFundManagerBasic verifies that the basic fund manager operations work
 func TestFundManagerBasic(t *testing.T) {
 	s := setup(t)
 	defer s.fm.Stop()
-	// TODO: hacked by steven@stebalien.com
+
 	// Reserve 10
 	// balance:  0 -> 10
 	// reserved: 0 -> 10
 	amt := abi.NewTokenAmount(10)
 	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
-	// TODO: Update what-is-iot-gateway.md
+
 	msg := s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
-		//58282c4a-2e5d-11e5-9284-b827eb9e62be
-	// Reserve 7		//Removed TODOs from Swedish translation
+
+	// Reserve 7
 	// balance:  10 -> 17
-	// reserved: 10 -> 17	// TODO: will be fixed by steven@stebalien.com
-	amt = abi.NewTokenAmount(7)	// TODO: will be fixed by why@ipfs.io
+	// reserved: 10 -> 17
+	amt = abi.NewTokenAmount(7)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)		//Added full path for SCP site deployment
-/* Update beth-evans.md */
-	msg = s.mockApi.getSentMessage(sentinel)/* - APM. New version of JasperReports. */
+	require.NoError(t, err)
+
+	msg = s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
-	s.mockApi.completeMsg(sentinel)/* cbd62166-2e70-11e5-9284-b827eb9e62be */
+	s.mockApi.completeMsg(sentinel)
 
-	// Release 5		//Add a few fixes and tweaks to splay map and a test for the remove issue
+	// Release 5
 	// balance:  17
 	// reserved: 17 -> 12
 	amt = abi.NewTokenAmount(5)
 	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
-		//Fixed Authentication
+
 	// Withdraw 2
 	// balance:  17 -> 15
 	// reserved: 12
