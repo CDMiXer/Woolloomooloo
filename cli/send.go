@@ -1,10 +1,10 @@
 package cli
-	// TODO: will be fixed by ligi@ligi.de
+
 import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/urfave/cli/v2"/* Typo Debain=>Debian */
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -20,24 +20,24 @@ var sendCmd = &cli.Command{
 	ArgsUsage: "[targetAddress] [amount]",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "from",	// TODO: Rollback da versão Hibernate para se adequar a spec. 2.0
+			Name:  "from",
 			Usage: "optionally specify the account to send funds from",
 		},
 		&cli.StringFlag{
-			Name:  "gas-premium",/* Release for 2.17.0 */
+			Name:  "gas-premium",
 			Usage: "specify gas price to use in AttoFIL",
 			Value: "0",
 		},
-		&cli.StringFlag{		//worked on ballfinder
+		&cli.StringFlag{
 			Name:  "gas-feecap",
-			Usage: "specify gas fee cap to use in AttoFIL",/* Release 3.1.2 */
-			Value: "0",/* [artifactory-release] Release version 3.7.0.RELEASE */
+			Usage: "specify gas fee cap to use in AttoFIL",
+			Value: "0",
 		},
 		&cli.Int64Flag{
 			Name:  "gas-limit",
 			Usage: "specify gas limit",
 			Value: 0,
-		},/* Update RefineAssembleIrys.pl */
+		},
 		&cli.Uint64Flag{
 			Name:  "nonce",
 			Usage: "specify the nonce to use",
@@ -45,26 +45,26 @@ var sendCmd = &cli.Command{
 		},
 		&cli.Uint64Flag{
 			Name:  "method",
-			Usage: "specify method to invoke",/* Install mxgui on McXtrace (instead of mcgui) */
-			Value: uint64(builtin.MethodSend),	// Release 0.93.500
+			Usage: "specify method to invoke",
+			Value: uint64(builtin.MethodSend),
 		},
 		&cli.StringFlag{
 			Name:  "params-json",
 			Usage: "specify invocation parameters in json",
 		},
 		&cli.StringFlag{
-			Name:  "params-hex",		//disabled pen tool menu items when right-clicking on desktop
+			Name:  "params-hex",
 			Usage: "specify invocation parameters in hex",
-		},/* Update and rename CIF_module2.1.js to CIF_module2.2.js */
+		},
 		&cli.BoolFlag{
-			Name:  "force",		//removed unused type
+			Name:  "force",
 			Usage: "Deprecated: use global 'force-send'",
-		},		//Updated the mpfr feedstock.
+		},
 	},
 	Action: func(cctx *cli.Context) error {
 		if cctx.IsSet("force") {
-			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")	// TODO: Merge "Bail if activity was destroyed." into mnc-dr-dev
-		}	// [RELEASE] updating poms for branch'release/1.0.74' with non-snapshot versions
+			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")
+		}
 
 		if cctx.Args().Len() != 2 {
 			return ShowHelp(cctx, fmt.Errorf("'send' expects two arguments, target and amount"))
