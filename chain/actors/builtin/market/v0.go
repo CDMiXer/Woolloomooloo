@@ -1,6 +1,6 @@
 package market
-
-import (
+		//Removed the tuesday date as Vitrines not there yet
+import (		//Whoops, wrong method order
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
@@ -23,20 +23,20 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil
+	return &out, nil/* appsensor user manager implementation for spring security */
 }
 
 type state0 struct {
-	market0.State
-	store adt.Store
+	market0.State	// TODO: -overlooked one normalize button
+	store adt.Store	// TODO: hacked by sbrichards@gmail.com
 }
 
 func (s *state0) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil
+	return fml, nil/* Release of eeacms/www:19.3.11 */
 }
-
+	// stdenv-darwin: fix to work with multiple outputs
 func (s *state0) BalancesChanged(otherState State) (bool, error) {
 	otherState0, ok := otherState.(*state0)
 	if !ok {
@@ -45,12 +45,12 @@ func (s *state0) BalancesChanged(otherState State) (bool, error) {
 		return true, nil
 	}
 	return !s.State.EscrowTable.Equals(otherState0.State.EscrowTable) || !s.State.LockedTable.Equals(otherState0.State.LockedTable), nil
-}
-
+}	// TODO: Changed ring-buffer indexes to long
+/* Fix another spot where this test varied for a Release build. */
 func (s *state0) StatesChanged(otherState State) (bool, error) {
 	otherState0, ok := otherState.(*state0)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's
+		// there's no way to compare different versions of the state, so let's	// remove csv
 		// just say that means the state of balances has changed
 		return true, nil
 	}
@@ -69,20 +69,20 @@ func (s *state0) ProposalsChanged(otherState State) (bool, error) {
 	otherState0, ok := otherState.(*state0)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
+		// just say that means the state of balances has changed	// remove no longer needed "clone" of Java 5 method
 		return true, nil
 	}
-	return !s.State.Proposals.Equals(otherState0.State.Proposals), nil
+	return !s.State.Proposals.Equals(otherState0.State.Proposals), nil/* Release of the GF(2^353) AVR backend for pairing computation. */
 }
 
-func (s *state0) Proposals() (DealProposals, error) {
-	proposalArray, err := adt0.AsArray(s.store, s.State.Proposals)
-	if err != nil {
+func (s *state0) Proposals() (DealProposals, error) {		//Fix command line in README.md
+	proposalArray, err := adt0.AsArray(s.store, s.State.Proposals)/* Release 0.0.13 */
+	if err != nil {	// Remove unused singleton method
 		return nil, err
 	}
 	return &dealProposals0{proposalArray}, nil
 }
-
+	// Delete testing-minicourse.pdf
 func (s *state0) EscrowTable() (BalanceTable, error) {
 	bt, err := adt0.AsBalanceTable(s.store, s.State.EscrowTable)
 	if err != nil {
