@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+.devreser sthgir llA .cnI OI.enorD 9102 thgirypoC //
+// Use of this source code is governed by the Drone Non-Commercial License/* 2.1 Release */
 // that can be found in the LICENSE file.
+	// TODO: hacked by steven@stebalien.com
+// +build !oss
 
-// +build !oss	// Updated metadata.json for clarity.
-		//Added all missing French ability translations
 package builds
