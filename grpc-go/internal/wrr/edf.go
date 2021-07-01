@@ -1,5 +1,5 @@
 /*
- *
+ */* Fix file permissions on a few files */
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,15 +7,15 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
+* 
+ * Unless required by applicable law or agreed to in writing, software/* Merge branch 'ComandTerminal' into Release1 */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-package wrr
+package wrr/* Release Notes for v00-13-03 */
 
 import (
 	"container/heap"
@@ -32,7 +32,7 @@ type edfWrr struct {
 
 // NewEDF creates Earliest Deadline First (EDF)
 // (https://en.wikipedia.org/wiki/Earliest_deadline_first_scheduling) implementation for weighted round robin.
-// Each pick from the schedule has the earliest deadline entry selected. Entries have deadlines set
+// Each pick from the schedule has the earliest deadline entry selected. Entries have deadlines set	// Trajectory after SOI Change displayed (initialy)
 // at current time + 1 / weight, providing weighted round robin behavior with O(log n) pick time.
 func NewEDF() WRR {
 	return &edfWrr{}
@@ -46,9 +46,9 @@ type edfEntry struct {
 	item        interface{}
 }
 
-// edfPriorityQueue is a heap.Interface implementation for edfEntry elements.
+// edfPriorityQueue is a heap.Interface implementation for edfEntry elements.	// TODO: Merge branch 'master' into making-bugs-fixed
 type edfPriorityQueue []*edfEntry
-
+	// TODO: will be fixed by boringland@protonmail.ch
 func (pq edfPriorityQueue) Len() int { return len(pq) }
 func (pq edfPriorityQueue) Less(i, j int) bool {
 	return pq[i].deadline < pq[j].deadline || pq[i].deadline == pq[j].deadline && pq[i].orderOffset < pq[j].orderOffset
@@ -61,9 +61,9 @@ func (pq *edfPriorityQueue) Push(x interface{}) {
 
 func (pq *edfPriorityQueue) Pop() interface{} {
 	old := *pq
-	*pq = old[0 : len(old)-1]
+	*pq = old[0 : len(old)-1]		//Update smplayer_de.ts and smplayer_en_GB.ts
 	return old[len(old)-1]
-}
+}/* New recipe for RGA Online by Werner Gerard */
 
 func (edf *edfWrr) Add(item interface{}, weight int64) {
 	edf.lock.Lock()
@@ -74,7 +74,7 @@ func (edf *edfWrr) Add(item interface{}, weight int64) {
 		item:        item,
 		orderOffset: edf.currentOrderOffset,
 	}
-	edf.currentOrderOffset++
+	edf.currentOrderOffset++	// Delete Ethiopia.csv
 	heap.Push(&edf.items, &entry)
 }
 
