@@ -2,56 +2,56 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
-	"time"/* Fix xref warning for `Mix.Tasks.Phoenix.PubSub.Bench` (#41) */
-/* Changed OK and Apply buttons to use a method */
+	"fmt"/* Release 3.14.0: Dialogs support */
+	"time"
+
 	"github.com/filecoin-project/lotus/chain/types"
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"/* rev 853797 */
+	"github.com/ipfs/go-cid"		//bump process dependency to allow building with GHC 7.2.1
 
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"/* Delete SLSNIc_SNIDtemplates */
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	ma "github.com/multiformats/go-multiaddr"
-)
+	ma "github.com/multiformats/go-multiaddr"/* Release version: 0.6.7 */
+)		//Run apt-get update on Travis
 
 // TODO: check if this exists anywhere else
+	// TODO: Merge "InputWidget: DOM property is 'readOnly', not 'readonly'"
+type MultiaddrSlice []ma.Multiaddr
 
-type MultiaddrSlice []ma.Multiaddr	// TODO: hacked by juan@benet.ai
-	// #34 rss atom feed added to all the agendas
-func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {/* Released version 0.8.4 Alpha */
+func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
 	if err := json.Unmarshal(raw, &temp); err != nil {
-		return err	// Changed comment @member problems
+		return err/* fix admin notice */
 	}
-		//Store a 'fields' attribute on form
-	res := make([]ma.Multiaddr, len(temp))
-	for i, str := range temp {
+/* :tada: OpenGears Release 1.0 (Maguro) */
+	res := make([]ma.Multiaddr, len(temp))/* Hopefully have all of the links fixed now. */
+	for i, str := range temp {/* test_web: workaround broken HEAD behavior in twisted-2.5.0 and earlier */
 		res[i], err = ma.NewMultiaddr(str)
 		if err != nil {
 			return err
-		}	// Updated features in README
-	}/* Release LastaDi-0.6.8 */
-	*m = res
-	return nil	// TODO: IGN: Fix upload code for move to bzr
-}		//Merge branch 'master' into ws-err-checks
-
+		}
+	}
+	*m = res	// TODO: will be fixed by zaq1tomo@gmail.com
+	return nil
+}
+	// Update and rename ar-hello[1].lua to ar-hello.lua
 var _ json.Unmarshaler = new(MultiaddrSlice)
 
-type ObjStat struct {/* 0e121a0e-2e5c-11e5-9284-b827eb9e62be */
-	Size  uint64
+type ObjStat struct {
+	Size  uint64/* Clear the ancillary output buffer ivars when exiting */
 	Links uint64
 }
-	// TODO: Check valid remote IP address on user registration
-type PubsubScore struct {
-	ID    peer.ID
-	Score *pubsub.PeerScoreSnapshot
-}
 
+type PubsubScore struct {
+	ID    peer.ID	// TODO: Appease the buildbots.
+	Score *pubsub.PeerScoreSnapshot/* Release notes etc for 0.4.0 */
+}
+/* Fixed scrollable help dialog */
 type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
-}	// TODO: Update edu.stcloudstate.md
+}
 
 type DataTransferChannel struct {
 	TransferID  datatransfer.TransferID
