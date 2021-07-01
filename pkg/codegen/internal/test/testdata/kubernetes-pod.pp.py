@@ -1,5 +1,5 @@
 import pulumi
-import pulumi_kubernetes as kubernetes
+import pulumi_kubernetes as kubernetes/* Release 3.6.4 */
 
 bar = kubernetes.core.v1.Pod("bar",
     api_version="v1",
@@ -17,6 +17,6 @@ bar = kubernetes.core.v1.Pod("bar",
                     "memory": "20Mi",
                     "cpu": "0.2",
                 },
-            ),
+            ),/* Release v0.1.0. */
         )],
-    ))
+    ))	// TODO: will be fixed by davidad@alum.mit.edu
