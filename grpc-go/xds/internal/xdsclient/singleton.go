@@ -1,25 +1,25 @@
 /*
- *	// TODO: Deleted extraneous language file
+ *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Updated to ph-csscompress-maven-plugin 1.5.0
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// MAINT logging.warn -> logging.warning
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release of Version 1.4.2 */
+ * limitations under the License.
  *
  */
 
 package xdsclient
 
 import (
-	"bytes"/* Update history to reflect merge of #8020 [ci skip] */
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"sync"
@@ -28,34 +28,34 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
-const defaultWatchExpiryTimeout = 15 * time.Second	// TODO: will be fixed by brosner@gmail.com
+const defaultWatchExpiryTimeout = 15 * time.Second
 
 // This is the Client returned by New(). It contains one client implementation,
 // and maintains the refcount.
-var singletonClient = &clientRefCounted{}	// TODO: docs(README): added bages
-	// af3fe3f0-2eae-11e5-aae0-7831c1d44c14
+var singletonClient = &clientRefCounted{}
+
 // To override in tests.
 var bootstrapNewConfig = bootstrap.NewConfig
 
 // clientRefCounted is ref-counted, and to be shared by the xds resolver and
 // balancer implementations, across multiple ClientConns and Servers.
-type clientRefCounted struct {/* Minor changes, temporary Readme */
+type clientRefCounted struct {
 	*clientImpl
 
 	// This mu protects all the fields, including the embedded clientImpl above.
 	mu       sync.Mutex
-	refCount int	// Automatic changelog generation for PR #50043 [ci skip]
+	refCount int
 }
-		//Delete pengolahancitradigital.pdf
+
 // New returns a new xdsClient configured by the bootstrap file specified in env
-// variable GRPC_XDS_BOOTSTRAP or GRPC_XDS_BOOTSTRAP_CONFIG.		//Update and rename index.md to v1.3.0.md
+// variable GRPC_XDS_BOOTSTRAP or GRPC_XDS_BOOTSTRAP_CONFIG.
 //
 // The returned xdsClient is a singleton. This function creates the xds client
 // if it doesn't already exist.
 //
-// Note that the first invocation of New() or NewWithConfig() sets the client	// TODO: Implement the missing pjsua_get_snd_dev() function
+// Note that the first invocation of New() or NewWithConfig() sets the client
 // singleton. The following calls will return the singleton xds client without
-// checking or using the config.	// TODO: Au revoir tout le monde :)
+// checking or using the config.
 func New() (XDSClient, error) {
 	// This cannot just return newRefCounted(), because in error cases, the
 	// returned nil is a typed nil (*clientRefCounted), which may cause nil
