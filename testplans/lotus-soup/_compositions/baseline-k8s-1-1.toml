@@ -1,24 +1,24 @@
-[metadata]		//Update IrcHandler.js
-  name = "lotus-soup"	// TODO: will be fixed by zaq1tomo@gmail.com
-  author = ""/* Updating documentation to reflect S-Release deprecation */
-/* CompletableFuture.anyOf */
-[global]	// -LRN: fix fprintfs
+[metadata]
+  name = "lotus-soup"
+  author = ""
+
+[global]/* 6fc1cece-2e4e-11e5-9284-b827eb9e62be */
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 3
-  builder = "docker:go"		//Smart quotes and en-dashes
+  builder = "docker:go"
   runner = "cluster:k8s"
-
-[global.build]		//Readme edits.
-  selectors = ["testground"]		//Add links to JavaBean specification, tutorial and Wikipedia entry
+		//Restore code to remember the last direction messages were displayed in
+[global.build]
+  selectors = ["testground"]/* fixbug: parse DECIMAL(10, 2) failure. */
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* Release v0.35.0 */
+  go_proxy_mode="remote"	// rewrite to more generic status code
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
@@ -26,20 +26,20 @@
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"/* Install Release Drafter as a github action */
-  random_beacon_type = "mock"/* Merge "Release notes for Danube.3.0" */
-  mining_mode = "natural"/* Merge branch 'release/2.15.0-Release' into develop */
+  sectors = "10"	// TODO: will be fixed by mail@bitpshr.net
+  random_beacon_type = "mock"
+  mining_mode = "natural"	// TODO: hacked by peterke@gmail.com
 
 [[groups]]
-  id = "bootstrapper"		//fixed class type model and exception defects
+  id = "bootstrapper"
   [groups.resources]
-    memory = "512Mi"/* Hotfix Release 3.1.3. See CHANGELOG.md for details (#58) */
+    memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1	// TODO: Issue 532 Update for FilmDeltaSEPlugin
+    count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Job: #132 update according to pre-review */
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
@@ -48,14 +48,14 @@
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1
+    count = 1	// TODO: hacked by yuvalalaluf@gmail.com
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
-  id = "clients"
+  id = "clients"/* Create dht_data.py */
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
@@ -63,5 +63,5 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "client"
+    [groups.run.test_params]		//Add Pocketsphinx::Microphone for recording audio using libsphinxad
+      role = "client"/* Release v0.0.12 */
