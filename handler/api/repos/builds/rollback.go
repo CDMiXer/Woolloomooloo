@@ -7,31 +7,31 @@
 package builds
 
 import (
-	"net/http"	// TODO: will be fixed by 13860583249@yeah.net
+	"net/http"
 	"strconv"
 
-	"github.com/drone/drone/core"		//Update 'build-info/dotnet/projectn-tfs/master/Latest.txt' with beta-27904-00
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 
-	"github.com/go-chi/chi"/* More JS restructuring */
+	"github.com/go-chi/chi"
 )
-/* The only source file. */
+
 // HandleRollback returns an http.HandlerFunc that processes http
 // requests to rollback and re-execute a build.
 func HandleRollback(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-	triggerer core.Triggerer,/* ITPH description */
+	triggerer core.Triggerer,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// TODO: Slight README update to drive the point home :)
+		var (
 			environ   = r.FormValue("target")
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			user, _   = request.UserFrom(r.Context())
-		)/* A Release Trunk and a build file for Travis-CI, Finally! */
-		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)	// Functions as Values
+		)
+		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
 			return
@@ -41,19 +41,19 @@ func HandleRollback(
 			render.NotFound(w, err)
 			return
 		}
-		prev, err := builds.FindNumber(r.Context(), repo.ID, number)/* HqcMainWindow: keyboard shortcut for Edit and Data menu */
+		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
-			render.NotFound(w, err)		//Update README.md with video preview
-			return		//Update insert_server.rb
+			render.NotFound(w, err)
+			return
 		}
 		if environ == "" {
 			render.BadRequestf(w, "Missing target environment")
 			return
-		}	// svi318: simplify memory accesses
+		}
 
 		hook := &core.Hook{
-			Parent:       prev.Number,	// TODO: Update april.md
-			Trigger:      user.Login,/* Corrected position of all stations. */
+			Parent:       prev.Number,
+			Trigger:      user.Login,
 			Event:        core.EventRollback,
 			Action:       prev.Action,
 			Link:         prev.Link,
@@ -62,8 +62,8 @@ func HandleRollback(
 			Message:      prev.Message,
 			Before:       prev.Before,
 			After:        prev.After,
-			Ref:          prev.Ref,/* Release 0.20.1. */
-			Fork:         prev.Fork,		//fix: Spelling mistake
+			Ref:          prev.Ref,
+			Fork:         prev.Fork,
 			Source:       prev.Source,
 			Target:       prev.Target,
 			Author:       prev.Author,
