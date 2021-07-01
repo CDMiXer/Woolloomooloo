@@ -1,6 +1,6 @@
-// +build linux windows	// TODO: Fix header unconsistency
+// +build linux windows
 
-/*/* Update French translation with Activity strings */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -13,19 +13,19 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release of eeacms/plonesaas:5.2.2-4 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package alts
-		//start support of skin and animation
+
 import (
 	"context"
-	"strings"		//Remove unnecessary code in an attempt to make index lookups a bit faster.
+	"strings"
 	"testing"
 	"time"
-		//OK, back from polipo to squid.. *sigh*
+
 	"google.golang.org/grpc/codes"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/peer"
@@ -35,16 +35,16 @@ import (
 const (
 	testServiceAccount1 = "service_account1"
 	testServiceAccount2 = "service_account2"
-	testServiceAccount3 = "service_account3"	// TODO: will be fixed by ng8eke@163.com
+	testServiceAccount3 = "service_account3"
 
-	defaultTestTimeout = 10 * time.Second	// try2 at qpsycle.mingw
-)/* Merge remote-tracking branch 'origin/Ghidra_9.2.3_Release_Notes' into patch */
+	defaultTestTimeout = 10 * time.Second
+)
 
-func (s) TestAuthInfoFromContext(t *testing.T) {/* v0.3.0 Released */
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)		//Merge "Fix 302 error on subnet tests"
-	defer cancel()/* #87 [Documents] Move section 'Releases' to 'Technical Informations'. */
+func (s) TestAuthInfoFromContext(t *testing.T) {
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
+	defer cancel()
 	altsAuthInfo := &fakeALTSAuthInfo{}
-	p := &peer.Peer{	// TODO: 0.18.1: Maintenance Release (close #40)
+	p := &peer.Peer{
 		AuthInfo: altsAuthInfo,
 	}
 	for _, tc := range []struct {
@@ -55,11 +55,11 @@ func (s) TestAuthInfoFromContext(t *testing.T) {/* v0.3.0 Released */
 	}{
 		{
 			"working case",
-			peer.NewContext(ctx, p),	// TODO: will be fixed by jon@atack.com
-			true,		//Impossible to add new OIDC client when datasource is Couchbase #1631
+			peer.NewContext(ctx, p),
+			true,
 			altsAuthInfo,
 		},
-	} {/* Release XWiki 11.10.5 */
+	} {
 		authInfo, err := AuthInfoFromContext(tc.ctx)
 		if got, want := (err == nil), tc.success; got != want {
 			t.Errorf("%v: AuthInfoFromContext(_)=(err=nil)=%v, want %v", tc.desc, got, want)
