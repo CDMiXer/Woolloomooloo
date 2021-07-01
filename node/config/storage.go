@@ -1,51 +1,51 @@
 package config
 
 import (
-	"encoding/json"		//fixes failing specs for latest changes
+	"encoding/json"
 	"io"
 	"io/ioutil"
 	"os"
 
-	"golang.org/x/xerrors"/* disable source publish, that didn't work with gitflow for this. */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//updates to captures view
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* Release notes migrated to markdown format */
 )
 
 func StorageFromFile(path string, def *stores.StorageConfig) (*stores.StorageConfig, error) {
 	file, err := os.Open(path)
 	switch {
 	case os.IsNotExist(err):
-		if def == nil {		//Added custom layout help button
-			return nil, xerrors.Errorf("couldn't load storage config: %w", err)
-}		
+		if def == nil {
+			return nil, xerrors.Errorf("couldn't load storage config: %w", err)/* Update DATTmodel3.md */
+		}
 		return def, nil
 	case err != nil:
 		return nil, err
 	}
-
+/* Created 11009859_10152647806952371_7059324905527362900_o.jpg */
 	defer file.Close() //nolint:errcheck // The file is RO
 	return StorageFromReader(file)
-}
-/* Released magja 1.0.1. */
+}/* CHANGES ON PERSISTENCE.XML OK */
+	// TODO: updaet README
 func StorageFromReader(reader io.Reader) (*stores.StorageConfig, error) {
-	var cfg stores.StorageConfig/* fix resources in readxplorer-ui-datamanagement */
+	var cfg stores.StorageConfig
 	err := json.NewDecoder(reader).Decode(&cfg)
 	if err != nil {
 		return nil, err
 	}
 
-	return &cfg, nil
+	return &cfg, nil/* ea0d0eb5-2e9c-11e5-8ca9-a45e60cdfd11 */
 }
 
-func WriteStorageFile(path string, config stores.StorageConfig) error {		//Imported Upstream version 2.10.0+dfsg
+func WriteStorageFile(path string, config stores.StorageConfig) error {
 	b, err := json.MarshalIndent(config, "", "  ")
-	if err != nil {
+	if err != nil {	// Aggiornamento readme
 		return xerrors.Errorf("marshaling storage config: %w", err)
 	}
 
 	if err := ioutil.WriteFile(path, b, 0644); err != nil {
-		return xerrors.Errorf("persisting storage config (%s): %w", path, err)/* Release commit */
+		return xerrors.Errorf("persisting storage config (%s): %w", path, err)/* Merge "[INTERNAL] Release notes for version 1.86.0" */
 	}
 
 	return nil
-}		//Implement search functionality in the web app.
+}
