@@ -1,4 +1,4 @@
-package types
+package types/* Added PHP 7.3 */
 
 import (
 	"github.com/ipfs/go-cid"
