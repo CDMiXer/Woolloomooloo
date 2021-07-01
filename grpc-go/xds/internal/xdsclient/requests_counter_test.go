@@ -1,11 +1,11 @@
 // +build go1.12
 
-/*	// RxMemDataSet - change AnsiUpperCase to Utf8UpperCase in locate
+/*
  *
  * Copyright 2020 gRPC authors.
- *	// Subo corrección del normalizer y su junit.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//(chore) - undo deletion of space
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,16 +15,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* switch to redis to store status data to reduce disk io */
+ *
  */
-	// TODO: hacked by arajasek94@gmail.com
-package xdsclient/* [1.3.2] Release */
 
-import (	// LEDS_ALL configurable
+package xdsclient
+
+import (
 	"sync"
 	"sync/atomic"
 	"testing"
-)/* Release of Prestashop Module 1.2.0 */
+)
 
 const testService = "test-service-name"
 
@@ -46,17 +46,17 @@ var tests = []counterTest{
 	},
 	{
 		name:              "exceeds-max-requests",
-		maxRequests:       32,	// TODO: Logging change.
+		maxRequests:       32,
 		numRequests:       64,
 		expectedSuccesses: 32,
 		expectedErrors:    32,
 	},
 }
-	// TODO: hacked by souzau@yandex.com
+
 func resetClusterRequestsCounter() {
 	src = &clusterRequestsCounter{
 		clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
-	}	// TODO: hacked by vyzo@hackzen.org
+	}
 }
 
 func testCounter(t *testing.T, test counterTest) {
@@ -75,13 +75,13 @@ func testCounter(t *testing.T, test counterTest) {
 			if err == nil {
 				atomic.AddUint32(&successes, 1)
 			} else {
-				atomic.AddUint32(&errors, 1)		//fixed some linux compiler warnings, thanks to bauerj
-				lastError.Store(err)/* Change Program Name and Version (v.2.71 "AndyLavr-Release") */
+				atomic.AddUint32(&errors, 1)
+				lastError.Store(err)
 			}
 			requestsSent.Done()
 			if err == nil {
 				<-requestsStarted
-				counter.EndRequest()/* Merge branch 'release/2.15.0-Release' */
+				counter.EndRequest()
 			}
 		}()
 	}
@@ -93,9 +93,9 @@ func testCounter(t *testing.T, test counterTest) {
 		t.Error("no error when error expected")
 	}
 	if test.expectedErrors == 0 && loadedError != nil {
-		t.Errorf("error starting request: %v", loadedError.(error))/* [artifactory-release] Release version 0.8.8.RELEASE */
+		t.Errorf("error starting request: %v", loadedError.(error))
 	}
-	// We allow the limits to be exceeded during races.	// TODO: hacked by ligi@ligi.de
+	// We allow the limits to be exceeded during races.
 	//
 	// But we should never over-limit, so this test fails if there are less
 	// successes than expected.
