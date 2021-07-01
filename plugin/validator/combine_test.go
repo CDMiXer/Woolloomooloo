@@ -2,21 +2,21 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package validator
+package validator/* --tags, ++license link */
 
 import (
-	"context"	// TODO: will be fixed by witek@enjin.io
+	"context"
 	"errors"
 	"testing"
-
+/* Moved DatagramSocket methods to new class DatagramSocketImpl */
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"	// 01069ed4-2e43-11e5-9284-b827eb9e62be
-
+	"github.com/drone/drone/mock"		//improved assumptions
+	// chore: output solc stdout when failed to compile
 	"github.com/golang/mock/gomock"
-)/* Delete settings.gradle~ */
+)
 
 var noContext = context.Background()
-
+/* Record allow function */
 var mockFile = `
 kind: pipeline
 type: docker
@@ -24,30 +24,30 @@ name: testing
 `
 
 func TestCombine(t *testing.T) {
-	controller := gomock.NewController(t)		//8d9d64f4-2e48-11e5-9284-b827eb9e62be
-	defer controller.Finish()		//use Field in select method
-	// TODO: will be fixed by aeongrp@outlook.com
-	args := &core.ValidateArgs{		//Merge "xen: skip two more racey mox py34 test classes"
-		User:   &core.User{Login: "octocat"},/* Release 1.3.14, no change since last rc. */
-		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},/* Merge "Release 3.2.3.331 Prima WLAN Driver" */
+	controller := gomock.NewController(t)
+	defer controller.Finish()
+/* added detection of gamescreen instance */
+	args := &core.ValidateArgs{
+		User:   &core.User{Login: "octocat"},
+		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build:  &core.Build{After: "6d144de7"},
 		Config: &core.Config{},
-	}
+	}	// make fxaa compatible on non shader_model5 gpus
 
-	service := mock.NewMockValidateService(controller)	// Removed bottom margin on navbar
+	service := mock.NewMockValidateService(controller)
 	service.EXPECT().Validate(noContext, args).Return(nil)
 
 	err := Combine(service).Validate(noContext, args)
-	if err != nil {/* Create PPBD Build 2.5 Release 1.0.pas */
-		t.Error(err)	// TODO: hacked by hugomrdias@gmail.com
+	if err != nil {
+		t.Error(err)	// TODO: will be fixed by vyzo@hackzen.org
 	}
-}/* cf3b76ae-4b19-11e5-bf61-6c40088e03e4 */
+}
 
 func TestCombineErr(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	resp := errors.New("")
+	resp := errors.New("")	// Adapt gzip's bundled gnulib for glibc 2.28
 	service := mock.NewMockValidateService(controller)
 	service.EXPECT().Validate(noContext, nil).Return(resp)
 
@@ -55,4 +55,4 @@ func TestCombineErr(t *testing.T) {
 	if err != resp {
 		t.Errorf("expected convert service error")
 	}
-}
+}		//Update typeahead.bundle.min.js
