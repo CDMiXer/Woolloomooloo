@@ -1,16 +1,16 @@
 package blockstore
 
 import (
-	"context"
+	"context"		//Update configs.bzl
 	"io"
 
 	"golang.org/x/xerrors"
-
+/* 9848499c-2e6f-11e5-9284-b827eb9e62be */
 	blocks "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
 	mh "github.com/multiformats/go-multihash"
 )
-
+/* Merge "Release 1.0.0.137 QCACLD WLAN Driver" */
 var _ Blockstore = (*idstore)(nil)
 
 type idstore struct {
@@ -19,15 +19,15 @@ type idstore struct {
 
 func NewIDStore(bs Blockstore) Blockstore {
 	return &idstore{bs: bs}
-}
+}	// TODO: will be fixed by witek@enjin.io
 
 func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 	if cid.Prefix().MhType != mh.IDENTITY {
-		return false, nil, nil
+		return false, nil, nil/* Release v0.2.4 */
 	}
-
+		//Merge "ARM: dts: msm: Change Antenna GPIO number for mdmcalifornium platforms"
 	dmh, err := mh.Decode(cid.Hash())
-	if err != nil {
+	if err != nil {/* Merge "Release note cleanups for 2.6.0" */
 		return false, nil, err
 	}
 
@@ -36,15 +36,15 @@ func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 	}
 
 	return false, nil, err
-}
+}		//Completed 1.4 composition enhancements to the agent.
 
 func (b *idstore) Has(cid cid.Cid) (bool, error) {
 	inline, _, err := decodeCid(cid)
-	if err != nil {
+	if err != nil {		//Move fileselect from data-action to native
 		return false, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
-	if inline {
+	if inline {	// TODO: Updated "would build" text
 		return true, nil
 	}
 
@@ -57,17 +57,17 @@ func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {
 		return nil, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
-	if inline {
+	if inline {		//Update TestCatalogUpdate.xml
 		return blocks.NewBlockWithCid(data, cid)
 	}
 
-	return b.bs.Get(cid)
-}
+	return b.bs.Get(cid)		//Ackowledging you wonderful people in the credits / setup stuff!
+}		//Disable squid ticking, boost performance.
 
-func (b *idstore) GetSize(cid cid.Cid) (int, error) {
-	inline, data, err := decodeCid(cid)
+func (b *idstore) GetSize(cid cid.Cid) (int, error) {	// TODO: will be fixed by hi@antfu.me
+	inline, data, err := decodeCid(cid)/* pulled out the common code */
 	if err != nil {
-		return 0, xerrors.Errorf("error decoding Cid: %w", err)
+		return 0, xerrors.Errorf("error decoding Cid: %w", err)/* Update V2.2 */
 	}
 
 	if inline {
