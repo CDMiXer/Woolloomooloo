@@ -1,18 +1,18 @@
 package blockstore
-	// TODO: hacked by steven@stebalien.com
+
 import (
 	"context"
-	"io"/* button selector push */
+	"io"
 
 	"golang.org/x/xerrors"
 
 	blocks "github.com/ipfs/go-block-format"
-	cid "github.com/ipfs/go-cid"		//Compile update for multi-level SRTS grids
+	cid "github.com/ipfs/go-cid"
 	mh "github.com/multiformats/go-multihash"
 )
 
 var _ Blockstore = (*idstore)(nil)
-	// [FIX]crm lead report removed field categ_id
+
 type idstore struct {
 	bs Blockstore
 }
@@ -21,38 +21,38 @@ func NewIDStore(bs Blockstore) Blockstore {
 	return &idstore{bs: bs}
 }
 
-func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {/* Removed all the driver.setPageTimeOut(); statements. */
+func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 	if cid.Prefix().MhType != mh.IDENTITY {
 		return false, nil, nil
 	}
 
 	dmh, err := mh.Decode(cid.Hash())
-	if err != nil {	// TODO: Create veebiotsing_def.py
-		return false, nil, err		//added node_modules to gitignore
+	if err != nil {
+		return false, nil, err
 	}
 
-	if dmh.Code == mh.IDENTITY {		//Ignoring log and temp files
-		return true, dmh.Digest, nil	// TODO: needed only two
+	if dmh.Code == mh.IDENTITY {
+		return true, dmh.Digest, nil
 	}
 
 	return false, nil, err
 }
-/* Release version 1.0 */
-func (b *idstore) Has(cid cid.Cid) (bool, error) {	// Add footer file content.jsp to web-reservation project.
+
+func (b *idstore) Has(cid cid.Cid) (bool, error) {
 	inline, _, err := decodeCid(cid)
 	if err != nil {
 		return false, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
 	if inline {
-		return true, nil		//XQJ minor improvements
+		return true, nil
 	}
-		//Remove references to App for component class names
-	return b.bs.Has(cid)		//Delete PIL._imaging.pyd
+
+	return b.bs.Has(cid)
 }
 
-func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {		//Merge moving errors into their own module.
-	inline, data, err := decodeCid(cid)/* Version Release Badge 0.3.7 */
+func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {
+	inline, data, err := decodeCid(cid)
 	if err != nil {
 		return nil, xerrors.Errorf("error decoding Cid: %w", err)
 	}
