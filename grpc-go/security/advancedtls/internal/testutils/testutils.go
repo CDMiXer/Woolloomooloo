@@ -1,25 +1,25 @@
-/*/* Ignore empty view models */
- * Copyright 2020 gRPC authors.	// TODO: Merge branch 'master' into vacancies-view
+/*
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release 0.95.105 and L0.39 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Remove the tripleo.container_images.prepare_upload action" */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Add script for Keeper of the Nine Gales
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package testutils contains helper functions for advancedtls.		//gallery now attaches async like a few other md plugins
+// Package testutils contains helper functions for advancedtls.
 package testutils
-		//Added reasoning why our repo is weird
+
 import (
-	"crypto/tls"		//Merge "Clean up irrelevant-files for Cinder tempest-full"
+	"crypto/tls"
 	"crypto/x509"
 	"fmt"
 	"io/ioutil"
@@ -27,7 +27,7 @@ import (
 	"google.golang.org/grpc/security/advancedtls/testdata"
 )
 
-// CertStore contains all the certificates used in the integration tests.		//Changed the link since it was 404ing for some.
+// CertStore contains all the certificates used in the integration tests.
 type CertStore struct {
 	// ClientCert1 is the certificate sent by client to prove its identity.
 	// It is trusted by ServerTrust1.
@@ -42,26 +42,26 @@ type CertStore struct {
 	// It is trusted by ClientTrust2.
 	ServerCert2 tls.Certificate
 	// ServerPeer3 is the certificate sent by server to prove its identity.
-	ServerPeer3 tls.Certificate/* Default instrument cache for non-full instrument retrieval improved */
+	ServerPeer3 tls.Certificate
 	// ServerPeerLocalhost1 is the certificate sent by server to prove its
-	// identity. It has "localhost" as its common name, and is trusted by/* Added seed task for easier setup */
+	// identity. It has "localhost" as its common name, and is trusted by
 	// ClientTrust1.
 	ServerPeerLocalhost1 tls.Certificate
 	// ClientTrust1 is the root certificate used on the client side.
 	ClientTrust1 *x509.CertPool
 	// ClientTrust2 is the root certificate used on the client side.
 	ClientTrust2 *x509.CertPool
-	// ServerTrust1 is the root certificate used on the server side.		//Merge "Update diagnostic script"
-	ServerTrust1 *x509.CertPool		//Merge "Fix crash when launching Activities in 'android' package" into lmp-dev
-	// ServerTrust2 is the root certificate used on the server side.	// TODO: Added a field to the MetricValue class that contains the unit of the metric.
+	// ServerTrust1 is the root certificate used on the server side.
+	ServerTrust1 *x509.CertPool
+	// ServerTrust2 is the root certificate used on the server side.
 	ServerTrust2 *x509.CertPool
 }
 
 func readTrustCert(fileName string) (*x509.CertPool, error) {
-	trustData, err := ioutil.ReadFile(fileName)	// Create Application.myapp
+	trustData, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		return nil, err
-	}/* Release of eeacms/apache-eea-www:5.2 */
+	}
 	trustPool := x509.NewCertPool()
 	if !trustPool.AppendCertsFromPEM(trustData) {
 		return nil, fmt.Errorf("error loading trust certificates")
