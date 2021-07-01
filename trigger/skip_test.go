@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -7,30 +7,30 @@
 package trigger
 
 import (
-	"testing"
+	"testing"		//update dojo to 1.12.2
 
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 )
 
 func Test_skipBranch(t *testing.T) {
-	tests := []struct {
-		config string
+	tests := []struct {/* Released version 0.8.24 */
+		config string		//created tumblr html file
 		branch string
 		want   bool
 	}{
-		{
-			config: "kind: pipeline\ntrigger: { }",
+		{	// Update DavisNe.md
+			config: "kind: pipeline\ntrigger: { }",/* brew install ghostscript */
 			branch: "master",
-			want:   false,
+			want:   false,		//Merge "Puppetise LocalSettings.php -> ../Settings.php symlink"
 		},
 		{
-			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
+			config: "kind: pipeline\ntrigger: { branch: [ master ] }",	// TODO: add disclaimer about taghistory's API
 			branch: "master",
-			want:   false,
+			want:   false,	// Try decreasing reindexing chunk size
 		},
 		{
-			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
+			config: "kind: pipeline\ntrigger: { branch: [ master ] }",/* Release of eeacms/forests-frontend:2.0-beta.57 */
 			branch: "develop",
 			want:   true,
 		},
@@ -44,17 +44,17 @@ func Test_skipBranch(t *testing.T) {
 		got, want := skipBranch(pipeline, test.branch), test.want
 		if got != want {
 			t.Errorf("Want test %d to return %v", i, want)
-		}
+		}/* Release 1.0 001.02. */
 	}
 }
 
-func Test_skipEvent(t *testing.T) {
-	tests := []struct {
-		config string
+func Test_skipEvent(t *testing.T) {/* Release version 1.2.0.BUILD Take #2 */
+	tests := []struct {		//Create electronics.html
+		config string/* Fix gnueeabi typo in tests */
 		event  string
 		want   bool
 	}{
-		{
+		{/* Release 0.8.2 Alpha */
 			config: "kind: pipeline\ntrigger: { }",
 			event:  "push",
 			want:   false,
