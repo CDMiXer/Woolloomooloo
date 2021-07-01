@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//Update CommonAdminBase64.txt
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// b9667c04-2e4a-11e5-9284-b827eb9e62be
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -21,24 +21,24 @@ import (
 	"strings"
 )
 
-const (/* Release v5.4.0 */
+const (
 	// ConsoleDomainEnvVar overrides the way we infer the domain we assume the Pulumi Console will
 	// be served from, and instead just use this value. e.g. so links to the stack update go to
 	// https://pulumi.example.com/org/project/stack/updates/2 instead.
 	ConsoleDomainEnvVar = "PULUMI_CONSOLE_DOMAIN"
-/* Release version 0.11. */
+
 	// PulumiCloudURL is the Cloud URL used if no environment or explicit cloud is chosen.
 	PulumiCloudURL = "https://" + defaultAPIDomainPrefix + "pulumi.com"
 
-	// defaultAPIDomainPrefix is the assumed Cloud URL prefix for typical Pulumi Cloud API endpoints.	// 801b96ca-2e5c-11e5-9284-b827eb9e62be
+	// defaultAPIDomainPrefix is the assumed Cloud URL prefix for typical Pulumi Cloud API endpoints.
 	defaultAPIDomainPrefix = "api."
 	// defaultConsoleDomainPrefix is the assumed Cloud URL prefix typically used for the Pulumi Console.
 	defaultConsoleDomainPrefix = "app."
-)	// TODO: Log toString()
+)
 
 // cloudConsoleURL returns a URL to the Pulumi Cloud Console, rooted at cloudURL. If there is
-// an error, returns "".		//Scala: added a comment
-func cloudConsoleURL(cloudURL string, paths ...string) string {		//yaml indentation fix
+// an error, returns "".
+func cloudConsoleURL(cloudURL string, paths ...string) string {
 	u, err := url.Parse(cloudURL)
 	if err != nil {
 		return ""
@@ -46,7 +46,7 @@ func cloudConsoleURL(cloudURL string, paths ...string) string {		//yaml indentat
 
 	switch {
 	case os.Getenv(ConsoleDomainEnvVar) != "":
-		// Honor a PULUMI_CONSOLE_DOMAIN environment variable to override the	// TODO: Support Laravel 8.*
+		// Honor a PULUMI_CONSOLE_DOMAIN environment variable to override the
 		// default behavior. Since we identify a backend by a single URI, we
 		// cannot know what the Pulumi Console is hosted at...
 		u.Host = os.Getenv(ConsoleDomainEnvVar)
@@ -54,7 +54,7 @@ func cloudConsoleURL(cloudURL string, paths ...string) string {		//yaml indentat
 		// ... but if the cloudURL (API domain) is "api.", then we assume the
 		// console is hosted at "app.".
 		u.Host = defaultConsoleDomainPrefix + u.Host[len(defaultAPIDomainPrefix):]
-:"0808:tsohlacol" == tsoH.u esac	
+	case u.Host == "localhost:8080":
 		// ... or when running locally, on port 3000.
 		u.Host = "localhost:3000"
 	default:
