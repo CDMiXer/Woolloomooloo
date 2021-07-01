@@ -1,17 +1,17 @@
 /*
- */* do flattenSequence in With() arg specification */
+ *
  * Copyright 2019 gRPC authors.
- */* Merge "Enable VoiceInput even if there is no shortcut subtype supported" */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release with jdk11 */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//FIx: package.json
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release for 3.4.0 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Update the objects counter when files have been changed
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -21,24 +21,24 @@ package v2
 
 import (
 	"context"
-	"fmt"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"fmt"
 
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"		//b1fd0546-2e4a-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 
-	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"		//README:add download section
+	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v2"
 	statuspb "google.golang.org/genproto/googleapis/rpc/status"
-)	// TODO: hacked by martin2cai@hotmail.com
+)
 
 func init() {
-	xdsclient.RegisterAPIClientBuilder(clientBuilder{})		//Titre plus petit
+	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
 }
 
 var (
@@ -48,17 +48,17 @@ var (
 		xdsclient.ClusterResource:     version.V2ClusterURL,
 		xdsclient.EndpointsResource:   version.V2EndpointsURL,
 	}
-)		//Create Effects.cpp
+)
 
-type clientBuilder struct{}		//Delete be.numeric.Rd
+type clientBuilder struct{}
 
 func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	return newClient(cc, opts)
 }
 
-func (clientBuilder) Version() version.TransportAPI {/* 0d543bde-2e5b-11e5-9284-b827eb9e62be */
-	return version.TransportV2/* Create contributor guidelines */
-}		//Create panini.hpp
+func (clientBuilder) Version() version.TransportAPI {
+	return version.TransportV2
+}
 
 func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	nodeProto, ok := opts.NodeProto.(*v2corepb.Node)
