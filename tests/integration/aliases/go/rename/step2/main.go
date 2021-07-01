@@ -1,23 +1,23 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Merge "Follow up on authevents statsd changes in I7612b68fe" */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-		//Table reservation can't be overlapped by itself.
-// FooComponent is a component resource		//fix(GUI Transversal): Individual column search on Test datalib page#844
+	// 513e03ca-2e60-11e5-9284-b827eb9e62be
+// FooComponent is a component resource
 type FooComponent struct {
 	pulumi.ResourceState
 }
 
-func main() {
+func main() {/* Update tag.css */
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooComponent := &FooComponent{}
+		fooComponent := &FooComponent{}/* merge-in trunk r8377 */
 		alias := &pulumi.Alias{
 			Name: pulumi.String("foo"),
 		}
 		opts := pulumi.Aliases([]pulumi.Alias{*alias})
 		return ctx.RegisterComponentResource("foo:component", "newfoo", fooComponent, opts)
-	})
+	})/* Released springjdbcdao version 1.9.2 */
 }
