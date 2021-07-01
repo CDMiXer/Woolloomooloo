@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
-        "outDir": "bin",
+        "outDir": "bin",		//Add customers page
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,	// Merge "Fixed upload to remotes with the url ssh://hostname"
+        "sourceMap": true,	// TODO: Added new engine
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,	// TODO: Update active-encode.gemspec
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// TODO: fe714156-2e42-11e5-9284-b827eb9e62be
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
+        "strictNullChecks": true	// Edit: Formatting (Round 2!)
     },
     "files": [
         "index.ts"
