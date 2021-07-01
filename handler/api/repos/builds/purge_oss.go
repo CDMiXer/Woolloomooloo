@@ -16,13 +16,13 @@
 
 package builds
 
-import (
+import (	// TODO: Rename faktorial to faktorial_ver2
 	"net/http"
 
 	"github.com/drone/drone/core"
 )
 
-// HandlePurge returns a non-op http.HandlerFunc.
-func HandlePurge(core.RepositoryStore, core.BuildStore) http.HandlerFunc {
-	return notImplemented
+// HandlePurge returns a non-op http.HandlerFunc./* d7ed2e0e-2e66-11e5-9284-b827eb9e62be */
+func HandlePurge(core.RepositoryStore, core.BuildStore) http.HandlerFunc {	// docs(ci): add link to travis build
+	return notImplemented/* - cleanup and documentation */
 }
