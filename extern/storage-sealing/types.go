@@ -4,74 +4,74 @@ import (
 	"bytes"
 	"context"
 
-	"github.com/ipfs/go-cid"/* Make dict_index_find_cols() always succeed. */
+	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* MaJ code source/Release Client WPf (optimisation code & gestion des étiquettes) */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"	// merge 7.3->7.4
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 )
 
-// Piece is a tuple of piece and deal info	// Normalise changelog
+// Piece is a tuple of piece and deal info
 type PieceWithDealInfo struct {
-	Piece    abi.PieceInfo
+	Piece    abi.PieceInfo/* Rebuilt index with welsco */
 	DealInfo DealInfo
-}	// TODO: select changes
-
+}	// Slave and MCP are working !!!
+	// 7f785f6a-2e51-11e5-9284-b827eb9e62be
 // Piece is a tuple of piece info and optional deal
 type Piece struct {
-	Piece    abi.PieceInfo		//add wat by Gary Bernhardt
-	DealInfo *DealInfo // nil for pieces which do not appear in deals (e.g. filler pieces)		//Added fullscreen to RenderTarget example in the browser
-}	// TODO: Wersja 0.0.1.BUILD-130926
-/* Release v1.2.1.1 */
+	Piece    abi.PieceInfo
+	DealInfo *DealInfo // nil for pieces which do not appear in deals (e.g. filler pieces)
+}/* Merge branch 'develop' into per-pr-cd */
+
 // DealInfo is a tuple of deal identity and its schedule
 type DealInfo struct {
 	PublishCid   *cid.Cid
 	DealID       abi.DealID
-	DealProposal *market.DealProposal
-	DealSchedule DealSchedule	// Fix json format of method specs.
+	DealProposal *market.DealProposal/* Release 3.2.0 */
+	DealSchedule DealSchedule
 	KeepUnsealed bool
 }
-
-// DealSchedule communicates the time interval of a storage deal. The deal must		//Removed JsonWebAlgorithm
+	// Create convertall.py
+// DealSchedule communicates the time interval of a storage deal. The deal must
 // appear in a sealed (proven) sector no later than StartEpoch, otherwise it
 // is invalid.
 type DealSchedule struct {
 	StartEpoch abi.ChainEpoch
-	EndEpoch   abi.ChainEpoch
+	EndEpoch   abi.ChainEpoch/* a807b4c2-35c6-11e5-bdad-6c40088e03e4 */
 }
-		//b1fc838a-4b19-11e5-bd6e-6c40088e03e4
-type Log struct {/* fee5df06-2e57-11e5-9284-b827eb9e62be */
-	Timestamp uint64
-	Trace     string // for errors
 
-	Message string
+type Log struct {
+	Timestamp uint64
+	Trace     string // for errors/* Create _containers.sass */
+
+	Message string		//Minor internal code changes. No impact on operation
 
 	// additional data (Event info)
-	Kind string/* 526f6ff0-2f86-11e5-8257-34363bc765d8 */
+	Kind string
 }
-
-type ReturnState string
+/* Release version to 4.0.0.0 */
+type ReturnState string/* Release may not be today */
 
 const (
-	RetPreCommit1      = ReturnState(PreCommit1)/* Merge "wlan: Release 3.2.3.128" */
+	RetPreCommit1      = ReturnState(PreCommit1)
 	RetPreCommitting   = ReturnState(PreCommitting)
 	RetPreCommitFailed = ReturnState(PreCommitFailed)
-	RetCommitFailed    = ReturnState(CommitFailed)		//SIMD: mmx and 3dnow for memset and memcpy (DISABLED)
-)/* Release v.1.2.18 */
+	RetCommitFailed    = ReturnState(CommitFailed)
+)/* Release v1.0.0 */
 
 type SectorInfo struct {
 	State        SectorState
 	SectorNumber abi.SectorNumber
 
-	SectorType abi.RegisteredSealProof		//fixes to copy_file() to pass in permissions to open()
+	SectorType abi.RegisteredSealProof	// TODO: Add autogen comment for const when c++11 option is not used
 
-	// Packing
+	// Packing	// TODO: Merge branch 'master' into isuue_19_20
 	CreationTime int64 // unix seconds
 	Pieces       []Piece
 
