@@ -3,22 +3,22 @@
 using System.Threading.Tasks;
 using Pulumi;
 
-class Resource : ComponentResource		//Add link to input size excercise
+class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)	// TODO: Added a few new operations!
+        : base("my:module:Resource", name, options)
     {
     }
 }
-
+	// ca2166bc-2e40-11e5-9284-b827eb9e62be
 class Program
-{/* Release 9. */
-    static Task<int> Main(string[] args)	// Delete update_saglik.json
+{
+    static Task<int> Main(string[] args)		//Merge "Add EntityHandler::makeParserOptions"
     {
-        return Deployment.RunAsync(() => /* Updated labor category mappings */
+        return Deployment.RunAsync(() => 
         {
-            // Scenario #1 - rename a resource/* #153 - Release version 1.6.0.RELEASE. */
+            // Scenario #1 - rename a resource	// TODO: will be fixed by caojiaoyue@protonmail.com
             var res1 = new Resource("res1");
         });
     }
-}/* Don't require JAVA_HOME if it can be guessed from javac location */
+}
