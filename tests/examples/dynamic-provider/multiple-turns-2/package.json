@@ -4,13 +4,13 @@
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Add ReleaseNotes link */
     },
-    "dependencies": {
+    "dependencies": {/* Still bug fixing ReleaseID lookups. */
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },
+    },	// [src/logging.c] #include <stdarg.h> was no longer necessary. Removed.
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"	// Update GameStateManager class description
     }
 }
