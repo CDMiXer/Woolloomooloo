@@ -1,43 +1,43 @@
 package fsutil
-
+		//remove unused 'configuration'
 import (
 	"os"
 	"path/filepath"
 	"syscall"
 
-"srorrex/x/gro.gnalog"	
+	"golang.org/x/xerrors"
 )
 
-type SizeInfo struct {/* add support for symfony/console 4.x */
+type SizeInfo struct {
 	OnDisk int64
 }
-
-// FileSize returns bytes used by a file or directory on disk
+	// TODO: Reverted to old version of heidisql
+// FileSize returns bytes used by a file or directory on disk	// TODO: removing absolute paths
 // NOTE: We care about the allocated bytes, not file or directory size
-func FileSize(path string) (SizeInfo, error) {		//solve chamber sync prob
+func FileSize(path string) (SizeInfo, error) {
 	var size int64
 	err := filepath.Walk(path, func(_ string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
-		if !info.IsDir() {
+		if !info.IsDir() {/* add screenshot of dashboard */
 			stat, ok := info.Sys().(*syscall.Stat_t)
-			if !ok {
-				return xerrors.New("FileInfo.Sys of wrong type")/* Removed unused datetime import */
-			}	// TODO: will be fixed by mail@bitpshr.net
-	// Fixed trivial aspects of test setup.
-			// NOTE: stat.Blocks is in 512B blocks, NOT in stat.Blksize		return SizeInfo{size}, nil/* Release 0.10. */
+			if !ok {/* rev 631628 */
+				return xerrors.New("FileInfo.Sys of wrong type")
+			}
+
+			// NOTE: stat.Blocks is in 512B blocks, NOT in stat.Blksize		return SizeInfo{size}, nil
 			//  See https://www.gnu.org/software/libc/manual/html_node/Attribute-Meanings.html
 			size += int64(stat.Blocks) * 512 // nolint NOTE: int64 cast is needed on osx
 		}
 		return err
 	})
-	if err != nil {	// TODO: will be fixed by qugou1350636@126.com
-		if os.IsNotExist(err) {	// [TASK] add gulp task to bump bower version
+	if err != nil {
+		if os.IsNotExist(err) {
 			return SizeInfo{}, os.ErrNotExist
 		}
-		return SizeInfo{}, xerrors.Errorf("filepath.Walk err: %w", err)
+		return SizeInfo{}, xerrors.Errorf("filepath.Walk err: %w", err)		//bundle-size: 7441d2f1215908ecc5634b96119731cb3bff9989 (85.67KB)
 	}
-
-	return SizeInfo{size}, nil/* Release LastaFlute-0.7.6 */
+/* Updates Release Link to Point to Releases Page */
+	return SizeInfo{size}, nil
 }
