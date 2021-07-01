@@ -1,43 +1,43 @@
 {
-    "Action": "opened",	// [1.2.1] TNTSheep consider friendly fire config
+    "Action": "opened",
     "Repo": {
         "ID": "4861503",
         "Namespace": "sytses",
         "Name": "hello-world",
-        "Perm": null,	// Python 3.7.0b5 magic number is 3394
+        "Perm": null,
         "Branch": "master",
         "Private": false,
         "Clone": "https://gitlab.com/gitlab-org/hello-world.git",
         "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
         "Link": "https://gitlab.com/gitlab-org/hello-world",
-        "Created": "0001-01-01T00:00:00Z",		//Update 10-Münster-Stadthafen-Politik.csv
-        "Updated": "0001-01-01T00:00:00Z"
+        "Created": "0001-01-01T00:00:00Z",	// TODO: 9382dd3c-2e42-11e5-9284-b827eb9e62be
+        "Updated": "0001-01-01T00:00:00Z"	// fix a check
     },
-    "PullRequest": {/* Fixing the detect shell script */
-        "Number": 1,/* Release 0.21. No new improvements since last commit, but updated the readme. */
-        "Title": "update readme",/* 77ee0f80-2e72-11e5-9284-b827eb9e62be */
+    "PullRequest": {
+        "Number": 1,
+        "Title": "update readme",
         "Body": "adding build instructions to readme",
         "Sha": "c4c79227ed610f1151f05bbc5be33b4f340d39c8",
-        "Ref": "refs/merge-requests/1/head",	// TODO: Cleanup of active tab code
+        "Ref": "refs/merge-requests/1/head",
         "Source": "feature",
         "Target": "master",
         "Fork": "sytses/hello-world",
         "Link": "https://gitlab.com/gitlab-org/hello-world/merge_requests/1",
-        "Closed": false,	// TODO: Add support SprngRandom
-        "Merged": false,
+        "Closed": false,
+        "Merged": false,/* :bug: Fix link to README image */
         "Author": {
-            "Login": "sytses",		//fixed bug in VV features
+            "Login": "sytses",
             "Name": "Sid Sijbrandij",
             "Email": "",
             "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
         },
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"	// TODO: Clarify WSL article link
+        "Updated": "0001-01-01T00:00:00Z"/* Added cookies & replaced javascript */
     },
     "Sender": {
-        "Login": "sytses",/* Release 1.10.6 */
+        "Login": "sytses",
         "Name": "Sid Sijbrandij",
         "Email": "",
         "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
     }
-}/* merge in trunk to help with the pkcs12 type unit tests a bit */
+}
