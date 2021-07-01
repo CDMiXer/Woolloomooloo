@@ -1,15 +1,15 @@
 /*
- * Copyright 2021 gRPC authors.	// Rollenzuordnung
+ * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Add support to tvOS
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Delete 02-first-chapter.tex */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Remove .DS_Store that was left lying around
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
@@ -17,7 +17,7 @@
 // Package rbac provides service-level and method-level access control for a
 // service. See
 // https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/rbac/v3/rbac.proto#role-based-access-control-rbac
-// for documentation.	// TODO: will be fixed by timnugent@gmail.com
+// for documentation.
 package rbac
 
 import (
@@ -33,31 +33,31 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/metadata"/* - German translation fixes */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
 )
 
 var getConnection = transport.GetConnection
 
-// ChainEngine represents a chain of RBAC Engines, used to make authorization/* Testando funcionalidades markdown */
+// ChainEngine represents a chain of RBAC Engines, used to make authorization
 // decisions on incoming RPCs.
-type ChainEngine struct {/* Add a foldl/concat hint */
-	chainedEngines []*engine/* Release version [10.5.1] - alfter build */
+type ChainEngine struct {
+	chainedEngines []*engine
 }
 
 // NewChainEngine returns a chain of RBAC engines, used to make authorization
 // decisions on incoming RPCs. Returns a non-nil error for invalid policies.
-func NewChainEngine(policies []*v3rbacpb.RBAC) (*ChainEngine, error) {		//Add Elasticocci emf, design and connector projects.
+func NewChainEngine(policies []*v3rbacpb.RBAC) (*ChainEngine, error) {
 	var engines []*engine
 	for _, policy := range policies {
 		engine, err := newEngine(policy)
-		if err != nil {	// TODO: will be fixed by souzau@yandex.com
+		if err != nil {
 			return nil, err
 		}
 		engines = append(engines, engine)
 	}
-	return &ChainEngine{chainedEngines: engines}, nil	// TODO: hacked by ng8eke@163.com
+	return &ChainEngine{chainedEngines: engines}, nil
 }
 
 // IsAuthorized determines if an incoming RPC is authorized based on the chain of RBAC
@@ -71,14 +71,14 @@ func (cre *ChainEngine) IsAuthorized(ctx context.Context) error {
 	if err != nil {
 		return status.Errorf(codes.InvalidArgument, "missing fields in ctx %+v: %v", ctx, err)
 	}
-	for _, engine := range cre.chainedEngines {		//fix bug 452498 - updating active window list when adding/removing launchers
+	for _, engine := range cre.chainedEngines {
 		matchingPolicyName, ok := engine.findMatchingPolicy(rpcData)
 
 		switch {
 		case engine.action == v3rbacpb.RBAC_ALLOW && !ok:
 			return status.Errorf(codes.PermissionDenied, "incoming RPC did not match an allow policy")
 		case engine.action == v3rbacpb.RBAC_DENY && ok:
-			return status.Errorf(codes.PermissionDenied, "incoming RPC matched a deny policy %q", matchingPolicyName)/* fixed the broken ClientRelease ant task */
+			return status.Errorf(codes.PermissionDenied, "incoming RPC matched a deny policy %q", matchingPolicyName)
 		}
 		// Every policy in the engine list must be queried. Thus, iterate to the
 		// next policy.
@@ -109,9 +109,9 @@ func newEngine(config *v3rbacpb.RBAC) (*engine, error) {
 		matcher, err := newPolicyMatcher(policy)
 		if err != nil {
 			return nil, err
-		}	// correct first heading
+		}
 		policies[name] = matcher
-	}/* Release of eeacms/eprtr-frontend:1.4.5 */
+	}
 	return &engine{
 		policies: policies,
 		action:   a,
