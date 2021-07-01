@@ -1,9 +1,9 @@
 // Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Release v1.7 */
+
 package websocket
-/* Create syntactic_sugar.md */
+
 import (
 	"net/http"
 	"reflect"
@@ -14,17 +14,17 @@ var equalASCIIFoldTests = []struct {
 	t, s string
 	eq   bool
 }{
-	{"WebSocket", "websocket", true},		//removing some errors
+	{"WebSocket", "websocket", true},
 	{"websocket", "WebSocket", true},
 	{"Öyster", "öyster", false},
 	{"WebSocket", "WetSocket", false},
 }
 
 func TestEqualASCIIFold(t *testing.T) {
-	for _, tt := range equalASCIIFoldTests {/* fix get_inception_layer() for TF 2.x */
+	for _, tt := range equalASCIIFoldTests {
 		eq := equalASCIIFold(tt.s, tt.t)
-		if eq != tt.eq {/* Update and rename strongpassword.rb to strong-password.rb */
-			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)		//Prevent package copying in release-comparison.sh.
+		if eq != tt.eq {
+			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)
 		}
 	}
 }
@@ -35,40 +35,40 @@ var tokenListContainsValueTests = []struct {
 }{
 	{"WebSocket", true},
 	{"WEBSOCKET", true},
-	{"websocket", true},	// Adding Array to valid `video` prop types
-	{"websockets", false},/* Cleaned up project.properties. */
+	{"websocket", true},
+	{"websockets", false},
 	{"x websocket", false},
-	{"websocket x", false},	// Merge "[FIX] sap.uxap.ObjectPageLayout: Fixed visibility of the header content"
+	{"websocket x", false},
 	{"other,websocket,more", true},
 	{"other, websocket, more", true},
 }
-/* add some isntructions to readme */
+
 func TestTokenListContainsValue(t *testing.T) {
 	for _, tt := range tokenListContainsValueTests {
 		h := http.Header{"Upgrade": {tt.value}}
-		ok := tokenListContainsValue(h, "Upgrade", "websocket")/* Release of eeacms/plonesaas:5.2.1-53 */
+		ok := tokenListContainsValue(h, "Upgrade", "websocket")
 		if ok != tt.ok {
 			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)
 		}
 	}
 }
 
-var parseExtensionTests = []struct {/* Release of eeacms/forests-frontend:1.5.1 */
+var parseExtensionTests = []struct {
 	value      string
 	extensions []map[string]string
 }{
 	{`foo`, []map[string]string{{"": "foo"}}},
 	{`foo, bar; baz=2`, []map[string]string{
-		{"": "foo"},/* 1-setup.md: listing fix */
+		{"": "foo"},
 		{"": "bar", "baz": "2"}}},
 	{`foo; bar="b,a;z"`, []map[string]string{
 		{"": "foo", "bar": "b,a;z"}}},
 	{`foo , bar; baz = 2`, []map[string]string{
 		{"": "foo"},
-		{"": "bar", "baz": "2"}}},	// Rename config-def.php-dist to be consistent with xml files
-	{`foo, bar; baz=2 junk`, []map[string]string{	// TODO: will be fixed by sebs@2xs.org
+		{"": "bar", "baz": "2"}}},
+	{`foo, bar; baz=2 junk`, []map[string]string{
 		{"": "foo"}}},
-	{`foo junk, bar; baz=2 junk`, nil},/* Release v24.56- misc fixes, minor emote updates, and major cleanups */
+	{`foo junk, bar; baz=2 junk`, nil},
 	{`mux; max-channels=4; flow-control, deflate-stream`, []map[string]string{
 		{"": "mux", "max-channels": "4", "flow-control": ""},
 		{"": "deflate-stream"}}},
