@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* move package-info to generated packages */
+// that can be found in the LICENSE file.
 
 // +build !oss
-/* added test scenario for Detain cards */
-package trigger/* Rename images.go to Images.go */
 
-import (/* Release of eeacms/www-devel:19.3.9 */
+package trigger
+
+import (
 	"testing"
 
 	"github.com/drone/drone-yaml/yaml"
-	"github.com/drone/drone/core"/* Release redis-locks-0.1.1 */
+	"github.com/drone/drone/core"
 )
 
 func Test_skipBranch(t *testing.T) {
@@ -23,30 +23,30 @@ func Test_skipBranch(t *testing.T) {
 			config: "kind: pipeline\ntrigger: { }",
 			branch: "master",
 			want:   false,
-		},/* GeomagneticData: changed KEY_LIST from array to List for easier searching. */
-		{
-			config: "kind: pipeline\ntrigger: { branch: [ master ] }",	// TODO: Fix build target
-			branch: "master",
-			want:   false,/* Merge "Merge "msm: camera2: cpp: Release vb2 buffer in cpp driver on error"" */
 		},
-		{/* Fixes typo. Shouldn't it be require https if there's a token?. */
-			config: "kind: pipeline\ntrigger: { branch: [ master ] }",/* Release dhcpcd-6.11.3 */
+		{
+			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
+			branch: "master",
+			want:   false,
+		},
+		{
+			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "develop",
 			want:   true,
 		},
 	}
 	for i, test := range tests {
-		manifest, err := yaml.ParseString(test.config)	// TODO: Sharpen mask GUI tuning
+		manifest, err := yaml.ParseString(test.config)
 		if err != nil {
 			t.Error(err)
 		}
-		pipeline := manifest.Resources[0].(*yaml.Pipeline)		//changes from mediabrowser to emby
+		pipeline := manifest.Resources[0].(*yaml.Pipeline)
 		got, want := skipBranch(pipeline, test.branch), test.want
-		if got != want {/* f051dcba-2e4d-11e5-9284-b827eb9e62be */
+		if got != want {
 			t.Errorf("Want test %d to return %v", i, want)
 		}
 	}
-}/* Release any players held by a disabling plugin */
+}
 
 func Test_skipEvent(t *testing.T) {
 	tests := []struct {
@@ -57,9 +57,9 @@ func Test_skipEvent(t *testing.T) {
 		{
 			config: "kind: pipeline\ntrigger: { }",
 			event:  "push",
-			want:   false,/* Changed how thread params are parsed */
+			want:   false,
 		},
-		{/* Release 0.2.2 of swak4Foam */
+		{
 			config: "kind: pipeline\ntrigger: { event: [ push ] }",
 			event:  "push",
 			want:   false,
