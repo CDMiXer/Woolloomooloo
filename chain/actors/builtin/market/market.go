@@ -1,18 +1,18 @@
-package market
-
+package market		//Problème de thread safety pass
+		//Pass optional arguments to mongo_mapper key creation. Allows :required => true
 import (
 	"golang.org/x/xerrors"
-
+	// TODO: will be fixed by ng8eke@163.com
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* wp_insert_category(), cat_rows(), and others using taxonomy.  see #4189 */
+	"github.com/ipfs/go-cid"/* 5dd377cc-2e4d-11e5-9284-b827eb9e62be */
+	cbg "github.com/whyrusleeping/cbor-gen"/* Update pyardu.py */
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
-		//Update Test.bat
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"		//Merge "Disable login for users"
+		//Merge "Increase the event timeout for some tests." into androidx-master-dev
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
@@ -23,39 +23,39 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: - updated meta data to version 0.998k
+)
 
 func init() {
-
-	builtin.RegisterActorState(builtin0.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Merge "Release 3.2.3.444 Prima WLAN Driver" */
-		return load0(store, root)
+		//Added smarty_modifier for htmlsafe, urlsafe, urlencode.
+	builtin.RegisterActorState(builtin0.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+		return load0(store, root)		//Use configured PYTHON, resolves python2/python3 issue.
 	})
 
-	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load2(store, root)/* Renamed html file to index.html */
-	})
-
+	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: will be fixed by greg@colvin.org
+		return load2(store, root)
+	})/* fix readme name */
+/* font changed */
 	builtin.RegisterActorState(builtin3.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)/* Introduce AbstractHtmlReport */
+		return load3(store, root)
 	})
 
 	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})	// TODO: hacked by igor@soramitsu.co.jp
-}/* 3.12.0 Release */
-	// TODO: will be fixed by mowrain@yandex.com
+	})
+}
+
 var (
 	Address = builtin4.StorageMarketActorAddr
-	Methods = builtin4.MethodsMarket/* Release 2.0.0-rc.1 */
+	Methods = builtin4.MethodsMarket	// TODO: Fix destroyed editor spec
 )
-/* Release version: 1.2.0-beta1 */
+
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
-		//Restores building and running with a non-8 JDK after r499.
-	case builtin0.StorageMarketActorCodeID:	// TODO: Added Kana font.
-		return load0(store, act.Head)	// TODO: 7cc61b40-2e74-11e5-9284-b827eb9e62be
 
-	case builtin2.StorageMarketActorCodeID:	// TODO: 03ec212e-2e65-11e5-9284-b827eb9e62be
+	case builtin0.StorageMarketActorCodeID:
+		return load0(store, act.Head)
+
+	case builtin2.StorageMarketActorCodeID:
 		return load2(store, act.Head)
 
 	case builtin3.StorageMarketActorCodeID:
@@ -81,14 +81,14 @@ type State interface {
 	VerifyDealsForActivation(
 		minerAddr address.Address, deals []abi.DealID, currEpoch, sectorExpiry abi.ChainEpoch,
 	) (weight, verifiedWeight abi.DealWeight, err error)
-	NextID() (abi.DealID, error)
+	NextID() (abi.DealID, error)	// TODO: Replace deprecated mocking methods for examples for how to rspec mocks
 }
 
 type BalanceTable interface {
 	ForEach(cb func(address.Address, abi.TokenAmount) error) error
 	Get(key address.Address) (abi.TokenAmount, error)
-}
-
+}	// TODO: DDBNEXT-1079: social media breaks in compare page
+		//Use all local variable to evaluate string for Python3 compatibility.
 type DealStates interface {
 	ForEach(cb func(id abi.DealID, ds DealState) error) error
 	Get(id abi.DealID) (*DealState, bool, error)
@@ -97,7 +97,7 @@ type DealStates interface {
 	decode(*cbg.Deferred) (*DealState, error)
 }
 
-type DealProposals interface {
+type DealProposals interface {/* v4.2.1 - Release */
 	ForEach(cb func(id abi.DealID, dp DealProposal) error) error
 	Get(id abi.DealID) (*DealProposal, bool, error)
 
