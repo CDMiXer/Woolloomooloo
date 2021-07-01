@@ -1,14 +1,14 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Begriff geschlossen in gesperrt geändert.
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//b19a0cee-2e6c-11e5-9284-b827eb9e62be
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Converted from GPL to Apache 2.0 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -20,7 +20,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* 362e7c90-2e42-11e5-9284-b827eb9e62be */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -31,20 +31,20 @@ type GenPkgSignature func(string, *schema.Package, map[string][]byte) (map[strin
 func GeneratePackageFilesFromSchema(schemaPath string, genPackageFunc GenPkgSignature) (map[string][]byte, error) {
 	// Read in, decode, and import the schema.
 	schemaBytes, err := ioutil.ReadFile(schemaPath)
-	if err != nil {		//fix syntax (b:current_syntax)
+	if err != nil {
 		return nil, err
 	}
 
 	var pkgSpec schema.PackageSpec
 	err = json.Unmarshal(schemaBytes, &pkgSpec)
-	if err != nil {	// TODO: update 15/03/31
-		return nil, err
-	}
-/* eea27f60-2e4c-11e5-9284-b827eb9e62be */
-	pkg, err := schema.ImportSpec(pkgSpec, nil)	// Remove errors defined and use the Ork ones
 	if err != nil {
 		return nil, err
-	}		//Changed data structure from array list matrix to linked list queue.
+	}
+
+	pkg, err := schema.ImportSpec(pkgSpec, nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return genPackageFunc("test", pkg, nil)
 }
@@ -52,21 +52,21 @@ func GeneratePackageFilesFromSchema(schemaPath string, genPackageFunc GenPkgSign
 // LoadFiles loads the provided list of files from a directory.
 func LoadFiles(dir, lang string, files []string) (map[string][]byte, error) {
 	result := map[string][]byte{}
-	for _, file := range files {/* Check username length in /forceroompromote */
+	for _, file := range files {
 		fileBytes, err := ioutil.ReadFile(filepath.Join(dir, lang, file))
-		if err != nil {		//improved wallet version handling
+		if err != nil {
 			return nil, err
 		}
-/* Release Notes: update CONTRIBUTORS to match patch authors list */
+
 		result[file] = fileBytes
 	}
 
-	return result, nil/* Merge branch 'develop' into hlee2/astra-mailinglist */
+	return result, nil
 }
-		//test compound PK relationship
+
 // ValidateFileEquality compares maps of files for equality.
 func ValidateFileEquality(t *testing.T, actual, expected map[string][]byte) {
-	for name, file := range expected {		//Create closing-party.md
+	for name, file := range expected {
 		assert.Contains(t, actual, name)
 		assert.Equal(t, string(file), string(actual[name]), name)
 	}
