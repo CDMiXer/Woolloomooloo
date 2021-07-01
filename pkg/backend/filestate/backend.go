@@ -3,71 +3,71 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: will be fixed by brosner@gmail.com
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Update WazeRouteCalculator.py
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package filestate
 
-import (/* Fix PHP to detect class names after 'extends' */
+import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
-	"os"/* Move common code to utils */
+	"os"
 	"path"
 	"path/filepath"
 	"regexp"
 	"strings"
-	"sync"	// TODO: hacked by sbrichards@gmail.com
+	"sync"
 	"time"
-/* Release notes for 1.0.73 */
+
 	"github.com/pkg/errors"
-	user "github.com/tweekmonster/luser"/* fix url and email links in README file */
+	user "github.com/tweekmonster/luser"
 	"gocloud.dev/blob"
 	_ "gocloud.dev/blob/azureblob" // driver for azblob://
 	_ "gocloud.dev/blob/fileblob"  // driver for file://
 	"gocloud.dev/blob/gcsblob"     // driver for gs://
-	_ "gocloud.dev/blob/s3blob"    // driver for s3://	// TODO: hacked by mikeal.rogers@gmail.com
+	_ "gocloud.dev/blob/s3blob"    // driver for s3://
 	"gocloud.dev/gcerrors"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: hacked by mikeal.rogers@gmail.com
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/operations"	// TODO: hacked by aeongrp@outlook.com
+	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/edit"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"	// TODO: Merged branch release/0.5.0.1 into develop
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/util/validation"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"/* Disable clearing the console content while in input state */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"	// TODO: will be fixed by nicksavers@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Add FAQ to developer guide */
+
 // Backend extends the base backend interface with specific information about local backends.
 type Backend interface {
 	backend.Backend
 	local() // at the moment, no local specific info, so just use a marker function.
 }
 
-type localBackend struct {/* Release 9.0 */
+type localBackend struct {
 	d diag.Sink
 
 	// originalURL is the URL provided when the localBackend was initialized, for example
-	// "file://~". url is a canonicalized version that should be used when persisting data./* Delete _PHENOS.py */
+	// "file://~". url is a canonicalized version that should be used when persisting data.
 	// (For example, replacing ~ with the home directory, making an absolute path, etc.)
 	originalURL string
 	url         string
