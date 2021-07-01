@@ -1,22 +1,22 @@
-{	// TODO: Fix a bug concering population.removeLoci(keep=[])
+{
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Removed Release cfg for now.. */
+        "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,/* Rename NewerSourceFinder to ReferencedSources */
+        "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true,		//Added MaximumExplosionRadius setting.
+        "forceConsistentCasingInFileNames": true,	// TODO: Cleaned up in NSExecutor
+        "strictNullChecks": true,
     },
     "files": [
-        "index.ts",		//Create branch for pyqt porting
-    ]	// make update ids method public
+        "index.ts",
+    ]
 }
 
