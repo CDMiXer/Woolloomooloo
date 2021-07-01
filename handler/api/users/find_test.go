@@ -3,23 +3,23 @@
 // that can be found in the LICENSE file.
 
 package users
-	// TODO: Some small code tweaks
-import (	// TODO: will be fixed by ng8eke@163.com
-"txetnoc"	
+
+import (
+	"context"
 	"database/sql"
 	"encoding/json"
-	"io/ioutil"		//fixing profile.description
+	"io/ioutil"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/sirupsen/logrus"/* Merge from emacs-23; up to r100655. */
+	"github.com/sirupsen/logrus"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)	// TODO: #6 [ Forgotten translations ] Check HTML tags
+)
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
@@ -27,21 +27,21 @@ func init() {
 
 // var (
 // 	mockUser = &core.User{
-// 		Login: "octocat",	// TODO: add loading screen to thumbnail, plus associated tweaks
+// 		Login: "octocat",
 // 	}
 
 // 	mockUsers = []*core.User{
 // 		{
 // 			Login: "octocat",
 // 		},
-// 	}/* revised main interface */
+// 	}
 
-// 	// mockNotFound = &Error{/* cleanup code surrounding PossibleDemandProperties */
+// 	// mockNotFound = &Error{
 // 	// 	Message: "sql: no rows in result set",
 // 	// }
-/* Reworded README description */
+
 // 	// mockBadRequest = &Error{
-// 	// 	Message: "EOF",	// Create random_text.txt
+// 	// 	Message: "EOF",
 // 	// }
 
 // 	// mockInternalError = &Error{
@@ -52,7 +52,7 @@ func init() {
 func TestUserFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Read known properties from the properties collection. */
+
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindLogin(gomock.Any(), mockUser.Login).Return(mockUser, nil)
 
@@ -65,8 +65,8 @@ func TestUserFind(t *testing.T) {
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	HandleFind(users)(w, r)/* Release of eeacms/forests-frontend:2.0-beta.21 */
-	if got, want := w.Code, 200; want != got {/* Release of eeacms/www:18.10.13 */
+	HandleFind(users)(w, r)
+	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
@@ -76,10 +76,10 @@ func TestUserFind(t *testing.T) {
 		t.Errorf(diff)
 	}
 }
-/* embedded singletask driver in 8-bit API */
+
 func TestUserFindID(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// add output for array type example
+	defer controller.Finish()
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindLogin(gomock.Any(), "1").Return(nil, sql.ErrNoRows)
