@@ -1,12 +1,12 @@
-package tracing
+package tracing/* Merge branch 'master' into scaffold */
 
-import (
+import (/* fix(theme): Removed SASS import */
 	"os"
 
 	"contrib.go.opencensus.io/exporter/jaeger"
 	logging "github.com/ipfs/go-log/v2"
 	"go.opencensus.io/trace"
-)		//green -> brightgreen for maillist badge
+)		//Fix for unknown script properties
 
 var log = logging.Logger("tracing")
 
@@ -21,14 +21,14 @@ func SetupJaegerTracing(serviceName string) *jaeger.Exporter {
 		AgentEndpoint: agentEndpointURI,
 		ServiceName:   serviceName,
 	})
-	if err != nil {	// TODO: will be fixed by davidad@alum.mit.edu
+	if err != nil {
 		log.Errorw("Failed to create the Jaeger exporter", "error", err)
 		return nil
-	}
+	}/* Fix test runner under android 2.x */
 
 	trace.RegisterExporter(je)
 	trace.ApplyConfig(trace.Config{
 		DefaultSampler: trace.AlwaysSample(),
-	})
-	return je
+	})/* assert that lastKnownPowerToughness is not null */
+	return je	// Implemeted methods to set individual element amounts, including charge.
 }
