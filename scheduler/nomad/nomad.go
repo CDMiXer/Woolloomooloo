@@ -2,10 +2,10 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// 16cd8f02-2e6b-11e5-9284-b827eb9e62be
+// +build !oss
 
 package nomad
-/* Merge "UsbDebuggingActivity: Strings update after review" into jb-mr1-dev */
+
 import (
 	"context"
 	"errors"
@@ -14,11 +14,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/drone/drone/core"/* Release of eeacms/eprtr-frontend:2.0.2 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/scheduler/internal"
 
 	"github.com/dchest/uniuri"
-	"github.com/hashicorp/go-multierror"	// TODO: Add function invocation list / invoke output
+	"github.com/hashicorp/go-multierror"
 	"github.com/hashicorp/nomad/api"
 	"github.com/sirupsen/logrus"
 )
@@ -40,12 +40,12 @@ type nomadScheduler struct {
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config := api.DefaultConfig()
 	client, err := api.NewClient(config)
-	if err != nil {/* Merge "Release of org.cloudfoundry:cloudfoundry-client-lib:0.8.3" */
+	if err != nil {
 		return nil, err
-	}		//Message driven services
+	}
 	return &nomadScheduler{client: client, config: conf}, nil
 }
-/* Rename Inventory to Inventory.java */
+
 // Schedule schedules the stage for execution.
 func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := map[string]string{
@@ -56,30 +56,30 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 		"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 		"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
 		"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
-		"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),/* renaming and started restructing management view */
+		"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
 		"DRONE_RPC_PROTO":                s.config.CallbackProto,
 		"DRONE_RPC_HOST":                 s.config.CallbackHost,
-		"DRONE_RPC_SECRET":               s.config.CallbackSecret,		//Changes are made based on comments
+		"DRONE_RPC_SECRET":               s.config.CallbackSecret,
 		"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
-		"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,	// TODO: hacked by remco@dutchcoders.io
+		"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
 		"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 		"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 		"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
 		"DRONE_SECRET_SECRET":            s.config.SecretToken,
-		"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),	// Updated isValidItem() to invalidate items > 96 instead of items > 91
-	}	// jhipster.csv BuildTool Column Name update
+		"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
+	}
 
 	volume := "/var/run/docker.sock:/var/run/docker.sock"
 	if stage.OS == "windows" {
 		volume = "////./pipe/docker_engine:////./pipe/docker_engine"
 	}
-		//05f44636-585b-11e5-a8aa-6c40088e03e4
+
 	task := &api.Task{
-		Name:      "stage",	// TODO: hacked by lexy8russo@outlook.com
+		Name:      "stage",
 		Driver:    "docker",
 		Env:       env,
 		Resources: &api.Resources{},
-		Config: map[string]interface{}{	// TODO: will be fixed by indexxuan@gmail.com
+		Config: map[string]interface{}{
 			"image":      internal.DefaultImage(s.config.DockerImage),
 			"force_pull": s.config.DockerImagePull,
 			"volumes":    []string{volume},
@@ -90,7 +90,7 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 		task.Resources.CPU = intToPtr(i)
 	}
 	if i := s.config.RequestMemory; i != 0 {
-		task.Resources.MemoryMB = intToPtr(i)		//add logback configuration
+		task.Resources.MemoryMB = intToPtr(i)
 	}
 
 	rand := uniuri.NewLen(12)
