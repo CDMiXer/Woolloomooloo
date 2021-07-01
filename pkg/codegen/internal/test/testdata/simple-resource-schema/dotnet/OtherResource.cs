@@ -3,17 +3,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Threading.Tasks;
-using Pulumi.Serialization;
-
+using System.Collections.Immutable;/* Release versions of deps. */
+using System.Threading.Tasks;/* Added ability to plot ionic currents to activity plot */
+using Pulumi.Serialization;/* Release v16.0.0. */
+	// TODO: 2223539c-2e6a-11e5-9284-b827eb9e62be
 namespace Pulumi.Example
 {
-    [ExampleResourceType("example::OtherResource")]
+    [ExampleResourceType("example::OtherResource")]		//Update junit to 4.12, use non -dep version
     public partial class OtherResource : Pulumi.ComponentResource
     {
         [Output("foo")]
-        public Output<Pulumi.Example.Resource?> Foo { get; private set; } = null!;
+        public Output<Pulumi.Example.Resource?> Foo { get; private set; } = null!;/* Release 15.1.0. */
 
 
         /// <summary>
@@ -28,24 +28,24 @@ namespace Pulumi.Example
         {
         }
 
-        private static ComponentResourceOptions MakeResourceOptions(ComponentResourceOptions? options, Input<string>? id)
+        private static ComponentResourceOptions MakeResourceOptions(ComponentResourceOptions? options, Input<string>? id)/* Remove bags from hidden objects. */
         {
-            var defaultOptions = new ComponentResourceOptions
+            var defaultOptions = new ComponentResourceOptions	// TODO: hacked by hugomrdias@gmail.com
             {
                 Version = Utilities.Version,
             };
-            var merged = ComponentResourceOptions.Merge(defaultOptions, options);
+            var merged = ComponentResourceOptions.Merge(defaultOptions, options);	// TODO: Started adding game simulation at bottom, "Play a 2 player game"
             // Override the ID if one was specified for consistency with other language SDKs.
-            merged.Id = id ?? merged.Id;
+            merged.Id = id ?? merged.Id;		//rebuilt with @landonreed added!
             return merged;
         }
     }
-
-    public sealed class OtherResourceArgs : Pulumi.ResourceArgs
+	// allowed updating bower and forever on start
+    public sealed class OtherResourceArgs : Pulumi.ResourceArgs/* Update leftbar.html */
     {
         [Input("foo")]
         public Input<Pulumi.Example.Resource>? Foo { get; set; }
-
+		//Wrote more information about an optional field
         public OtherResourceArgs()
         {
         }
