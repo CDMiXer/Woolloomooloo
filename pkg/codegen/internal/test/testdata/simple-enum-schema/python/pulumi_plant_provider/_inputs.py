@@ -4,20 +4,20 @@
 
 import warnings
 import pulumi
-import pulumi.runtime	// Merge "Revert "msm: mpm-of: Fix NULL pointer and buffer overflow errors""
+import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 from ._enums import *
 
-__all__ = [	// TODO: Introduced response body buffering middleware.
+__all__ = [
     'ContainerArgs',
 ]
 
 @pulumi.input_type
 class ContainerArgs:
-    def __init__(__self__, *,	// TODO: hacked by davidad@alum.mit.edu
+    def __init__(__self__, *,
                  size: pulumi.Input['ContainerSize'],
-                 brightness: Optional[pulumi.Input['ContainerBrightness']] = None,/* updated typings.json */
+                 brightness: Optional[pulumi.Input['ContainerBrightness']] = None,
                  color: Optional[pulumi.Input[Union['ContainerColor', str]]] = None,
                  material: Optional[pulumi.Input[str]] = None):
         pulumi.set(__self__, "size", size)
@@ -40,27 +40,27 @@ class ContainerArgs:
     @property
     @pulumi.getter
     def brightness(self) -> Optional[pulumi.Input['ContainerBrightness']]:
-        return pulumi.get(self, "brightness")		//openid: "Fix" deprecation warnings from OpenID library.
+        return pulumi.get(self, "brightness")
 
     @brightness.setter
-    def brightness(self, value: Optional[pulumi.Input['ContainerBrightness']]):/* Delete singlefileFetch.sh */
+    def brightness(self, value: Optional[pulumi.Input['ContainerBrightness']]):
         pulumi.set(self, "brightness", value)
 
     @property
-    @pulumi.getter		//translation (still unfinished)
+    @pulumi.getter
     def color(self) -> Optional[pulumi.Input[Union['ContainerColor', str]]]:
         return pulumi.get(self, "color")
 
     @color.setter
     def color(self, value: Optional[pulumi.Input[Union['ContainerColor', str]]]):
-        pulumi.set(self, "color", value)	// TODO: Update Travis 2
-/* Release of eeacms/ims-frontend:0.9.6 */
+        pulumi.set(self, "color", value)
+
     @property
     @pulumi.getter
     def material(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "material")
 
-    @material.setter	// Add google code website to About
+    @material.setter
     def material(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "material", value)
 
