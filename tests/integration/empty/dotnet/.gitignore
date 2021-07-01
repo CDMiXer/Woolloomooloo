@@ -1,5 +1,5 @@
-/.pulumi//* Update NBot.CampfireAdapter.nuspec */
+/.pulumi//* Release 0.6.8 */
 [Bb]in/
 [Oo]bj/
-
+/* Handle download error */
 
