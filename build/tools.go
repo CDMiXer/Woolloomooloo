@@ -1,4 +1,4 @@
-//+build tools
+//+build tools		//JMPredicate - add negate()
 
 package build
 
