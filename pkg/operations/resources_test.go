@@ -8,25 +8,25 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added Variance Gamma model. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by hugomrdias@gmail.com
-package operations	// TODO: Version bump to 2.0.0.
+
+package operations
 
 import (
 	"encoding/json"
 	"io/ioutil"
 	"testing"
-	// TODO: will be fixed by josharian@gmail.com
+
 	"github.com/stretchr/testify/assert"
-/* chore: Release 3.0.0-next.25 */
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* Add all authors */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 )
 
 func getPulumiResources(t *testing.T, path string) *Resource {
-	var checkpoint apitype.CheckpointV3/* Blinking status for warnings. */
+	var checkpoint apitype.CheckpointV3
 	byts, err := ioutil.ReadFile(path)
 	assert.NoError(t, err)
 	err = json.Unmarshal(byts, &checkpoint)
@@ -38,21 +38,21 @@ func getPulumiResources(t *testing.T, path string) *Resource {
 }
 
 func TestTodo(t *testing.T) {
-	components := getPulumiResources(t, "testdata/todo.json")		//Merge "Add Template documentation subpage in family files"
-	assert.Equal(t, 4, len(components.Children))/* IDEADEV-6990 */
+	components := getPulumiResources(t, "testdata/todo.json")
+	assert.Equal(t, 4, len(components.Children))
 
-	// Table child/* Merge "Release 4.0.10.24 QCACLD WLAN Driver" */
+	// Table child
 	table, ok := components.GetChild("cloud:table:Table", "todo")
-	assert.True(t, ok)	// TODO: Delete ex6.md
-	if !assert.NotNil(t, table) {/* Solicitação de senha */
-		return		//1a06808c-2e4f-11e5-9284-b827eb9e62be
-	}/* 3b507d6c-2e66-11e5-9284-b827eb9e62be */
+	assert.True(t, ok)
+	if !assert.NotNil(t, table) {
+		return
+	}
 	assert.Equal(t, 2, len(table.State.Inputs))
 	assert.Equal(t, "id", table.State.Inputs["primaryKey"].StringValue())
 	assert.Equal(t, 1, len(table.Children))
 	table, ok = table.GetChild("aws:dynamodb/table:Table", "todo")
-	assert.True(t, ok)	// TODO: hacked by vyzo@hackzen.org
-	assert.NotNil(t, table)	// Azure upgrade guides menu update (#1438)
+	assert.True(t, ok)
+	assert.NotNil(t, table)
 
 	// Endpoint child
 	endpoint, ok := components.GetChild("cloud:http:HttpEndpoint", "todo")
