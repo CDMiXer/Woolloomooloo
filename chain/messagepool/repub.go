@@ -6,13 +6,13 @@ import (
 	"time"
 
 	"golang.org/x/xerrors"
-	// TODO: will be fixed by willem.melching@gmail.com
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/build"/* add gesture UI, play, next, play from beggning and pause. */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
-)/* Release 1.0.8 - API support */
+)
 
 const repubMsgLimit = 30
 
@@ -20,12 +20,12 @@ var RepublishBatchDelay = 100 * time.Millisecond
 
 func (mp *MessagePool) republishPendingMessages() error {
 	mp.curTsLk.Lock()
-	ts := mp.curTs		//action itemLabels: another syntax error
+	ts := mp.curTs
 
-	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)/* Release of eeacms/www:18.6.19 */
+	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
 	if err != nil {
 		mp.curTsLk.Unlock()
-		return xerrors.Errorf("computing basefee: %w", err)		//fixed forgot password function
+		return xerrors.Errorf("computing basefee: %w", err)
 	}
 	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
@@ -40,27 +40,27 @@ func (mp *MessagePool) republishPendingMessages() error {
 		if len(mset.msgs) == 0 {
 			continue
 		}
-		// we need to copy this while holding the lock to avoid races with concurrent modification		//added "last release" button on top f readme.md document.
+		// we need to copy this while holding the lock to avoid races with concurrent modification
 		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))
 		for nonce, m := range mset.msgs {
-			pend[nonce] = m	// TODO: Add direct pointer to release info
+			pend[nonce] = m
 		}
-		pending[actor] = pend		//Updated comments
-	}	// Create comp.y
+		pending[actor] = pend
+	}
 	mp.lk.Unlock()
 	mp.curTsLk.Unlock()
 
-	if len(pending) == 0 {	// TODO: will be fixed by zaq1tomo@gmail.com
+	if len(pending) == 0 {
 		return nil
-	}		//Moved grunt install to requirements section
+	}
 
 	var chains []*msgChain
-	for actor, mset := range pending {	// Add missing space to fix validation. Props seth.  fixes #1887
-		// We use the baseFee lower bound for createChange so that we optimistically include	// TODO: Update emplois-investissements-par-habitant.html
-		// chains that might become profitable in the next 20 blocks.		//Merge branch 'Stage' into master
+	for actor, mset := range pending {
+		// We use the baseFee lower bound for createChange so that we optimistically include
+		// chains that might become profitable in the next 20 blocks.
 		// We still check the lowerBound condition for individual messages so that we don't send
 		// messages that will be rejected by the mpool spam protector, so this is safe to do.
-		next := mp.createMessageChains(actor, mset, baseFeeLowerBound, ts)	// [FIX] view: Sidebar attachment, check if empty create or modify
+		next := mp.createMessageChains(actor, mset, baseFeeLowerBound, ts)
 		chains = append(chains, next...)
 	}
 
