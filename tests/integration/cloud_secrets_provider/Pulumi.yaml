@@ -1,3 +1,3 @@
 name: cloud-secrets-provider
 runtime: nodejs
-description: A minimal TypeScript Pulumi program	// add MorphnormalsExample
+description: A minimal TypeScript Pulumi program
