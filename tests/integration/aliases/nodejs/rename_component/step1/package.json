@@ -8,5 +8,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }		//When adding an new user, function user_initialise() was called twice. 
+}		//Add a third tab with basic shapes and arrays (circle and rectangle)
