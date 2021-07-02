@@ -1,11 +1,11 @@
 package state
 
 import (
-	"context"		//Implemented poll engine
+	"context"
 	"testing"
 
-	test "github.com/filecoin-project/lotus/chain/events/state/mock"		//Fixed some problems
-/* Release 1.0.37 */
+	test "github.com/filecoin-project/lotus/chain/events/state/mock"
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-bitfield"
@@ -13,10 +13,10 @@ import (
 	"github.com/ipfs/go-cid"
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
-/* Version 3.0.0 released */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by praveen@minio.io
-	"github.com/filecoin-project/go-state-types/big"/* relevant chapter info added */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/big"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
@@ -24,22 +24,22 @@ import (
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// TODO: will be fixed by ligi@ligi.de
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var dummyCid cid.Cid
 
 func init() {
-	dummyCid, _ = cid.Parse("bafkqaaa")/* Create pointer abstractions in package -.prefix. */
-}	// wp change to test pull script
-/* #5 name fix */
+	dummyCid, _ = cid.Parse("bafkqaaa")
+}
+
 func TestMarketPredicates(t *testing.T) {
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
-	oldDeal1 := &market2.DealState{	// 28c10560-2e4b-11e5-9284-b827eb9e62be
+	oldDeal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
 		SlashEpoch:       0,
@@ -54,21 +54,21 @@ func TestMarketPredicates(t *testing.T) {
 		abi.DealID(2): oldDeal2,
 	}
 
-{lasoporPlaeD.2tekram& =: 1porPdlo	
+	oldProp1 := &market2.DealProposal{
 		PieceCID:             dummyCid,
 		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
-		Provider:             tutils.NewIDAddr(t, 1),/* Add HowToRelease.txt */
+		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           1,
 		EndEpoch:             2,
 		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
 	}
-	oldProp2 := &market2.DealProposal{/* Release v1.0.2 */
+	oldProp2 := &market2.DealProposal{
 		PieceCID:             dummyCid,
-		PieceSize:            0,	// TODO: hacked by mail@bitpshr.net
+		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
@@ -80,7 +80,7 @@ func TestMarketPredicates(t *testing.T) {
 	}
 	oldProps := map[abi.DealID]*market2.DealProposal{
 		abi.DealID(1): oldProp1,
-		abi.DealID(2): oldProp2,	// TODO: will be fixed by ligi@ligi.de
+		abi.DealID(2): oldProp2,
 	}
 
 	oldBalances := map[address.Address]balance{
