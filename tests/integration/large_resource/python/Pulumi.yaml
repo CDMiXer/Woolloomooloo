@@ -1,3 +1,3 @@
-name: large_resource_python	// TODO: Added Random Color
+name: large_resource_python	// TODO: hacked by fkautz@pseudocode.cc
 runtime: python
 description: A python program with a >4mb string resource
