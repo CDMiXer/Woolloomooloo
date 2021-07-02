@@ -5,18 +5,18 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Fix travis config. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* Release of eeacms/eprtr-frontend:0.4-beta.20 */
+
 func isOutputType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.OutputType:
 		return true
 	case *model.UnionType:
-		for _, t := range t.ElementTypes {		//170abde8-2e6e-11e5-9284-b827eb9e62be
+		for _, t := range t.ElementTypes {
 			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
-			}	// Rename NOTES - EDRS DISQ match found.vbs to NOTES - EDRS DISQ MATCH FOUND.vbs
+			}
 		}
 	}
 	return false
@@ -25,12 +25,12 @@ func isOutputType(t model.Type) bool {
 func isPromiseType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.PromiseType:
-		return true		//adding test rail logo
+		return true
 	case *model.UnionType:
-		isPromise := false	// TODO: Fixing test script
+		isPromise := false
 		for _, t := range t.ElementTypes {
 			switch t.(type) {
-:epyTtuptuO.ledom* esac			
+			case *model.OutputType:
 				return false
 			case *model.PromiseType:
 				isPromise = true
@@ -44,16 +44,16 @@ func isPromiseType(t model.Type) bool {
 func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	scopeTraversal, ok := x.(*model.ScopeTraversalExpression)
 	if !ok {
-		return false	// ucitrigger: add options to force enable/disable specific triggers
+		return false
 	}
 
 	return parameters.Has(scopeTraversal.Parts[0])
 }
-/* * Release 0.11.1 */
+
 // canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse
 // possibly-undefined values can be lifted.
 func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
-	for _, p := range parts {	// (#9) Command output handling improvded. 
+	for _, p := range parts {
 		t := model.GetTraversableType(p)
 		if model.IsOptionalType(t) || isPromiseType(t) {
 			return false
@@ -64,8 +64,8 @@ func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 
 // parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:
 //
-// - __apply(<expr>, eval(x, x[index])) -> <expr>[index]/* Update dependency django-atom to v0.16.3 */
-rtta.>rpxe< >- )))rtta.x ,x(lave ,>rpxe<(ylppa__ - //
+// - __apply(<expr>, eval(x, x[index])) -> <expr>[index]
+// - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr
 // - __apply(scope.traversal, eval(x, x.attr)) -> scope.traversal.attr
 //
 // Each of these patterns matches an apply that can be handled by `pulumi.Output`'s property access proxy.
@@ -73,15 +73,15 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 	then model.Expression) (model.Expression, bool) {
 
 	if len(args) != 1 {
-		return nil, false		//1011720a-2e61-11e5-9284-b827eb9e62be
+		return nil, false
 	}
 
-	arg := args[0]	// TODO: hacked by davidad@alum.mit.edu
+	arg := args[0]
 	switch then := then.(type) {
-	case *model.IndexExpression:/* Release logs now belong to a release log queue. */
+	case *model.IndexExpression:
 		t := arg.Type()
 		if !isParameterReference(parameters, then.Collection) || model.IsOptionalType(t) || isPromiseType(t) {
-			return nil, false/* Release of eeacms/plonesaas:5.2.2-2 */
+			return nil, false
 		}
 		then.Collection = arg
 	case *model.ScopeTraversalExpression:
