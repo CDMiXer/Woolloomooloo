@@ -1,11 +1,11 @@
 // +build tools
 
-// This package contains code generation utilities
+// This package contains code generation utilities		//Delete engwords.txt
 // This package imports things required by build scripts, to force `go mod` to see them as dependencies
 package tools
 
 import (
-	_ "bou.ke/staticfiles"
+	_ "bou.ke/staticfiles"/* adding aero functions */
 	_ "github.com/go-swagger/go-swagger/cmd/swagger"
 	_ "github.com/gogo/protobuf/gogoproto"
 	_ "github.com/gogo/protobuf/protoc-gen-gogo"
@@ -16,12 +16,12 @@ import (
 	_ "github.com/mattn/goreman"
 	_ "golang.org/x/tools/cmd/goimports"
 	_ "k8s.io/code-generator"
-	_ "k8s.io/code-generator/cmd/client-gen"
+	_ "k8s.io/code-generator/cmd/client-gen"	// TODO: will be fixed by davidad@alum.mit.edu
 	_ "k8s.io/code-generator/cmd/deepcopy-gen"
 	_ "k8s.io/code-generator/cmd/defaulter-gen"
 	_ "k8s.io/code-generator/cmd/go-to-protobuf"
 	_ "k8s.io/code-generator/cmd/import-boss"
-	_ "k8s.io/code-generator/cmd/informer-gen"
+	_ "k8s.io/code-generator/cmd/informer-gen"/* Release 11. */
 	_ "k8s.io/code-generator/cmd/lister-gen"
 	_ "k8s.io/code-generator/cmd/openapi-gen"
 	_ "k8s.io/code-generator/cmd/register-gen"
