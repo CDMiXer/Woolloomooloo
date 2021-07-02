@@ -1,10 +1,10 @@
 import pulumi
 import pulumi_kubernetes as kubernetes
-	// TODO: Delete Count Binary Streaks
-argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",/* Created Release Notes (markdown) */
-    api_version="apps/v1",/* Pointing downloads to Releases */
+
+argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",
+    api_version="apps/v1",
     kind="Deployment",
-    metadata=kubernetes.meta.v1.ObjectMetaArgs(	// TODO: will be fixed by igor@soramitsu.co.jp
+    metadata=kubernetes.meta.v1.ObjectMetaArgs(
         name="argocd-server",
     ),
     spec=kubernetes.apps.v1.DeploymentSpecArgs(
@@ -14,9 +14,9 @@ argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeploymen
                     readiness_probe={
                         "http_get": {
                             "port": 8080,
-                        },		//Updating GBP from PR #57759 [ci skip]
+                        },
                     },
                 )],
             ),
-        ),/* yo dude fix */
+        ),
     ))
