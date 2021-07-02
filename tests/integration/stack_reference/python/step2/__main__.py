@@ -1,17 +1,17 @@
 # Copyright 2020, Pulumi Corporation.  All rights reserved.
 
-import pulumi
+import pulumi	// TODO: Update aiohttp from 2.2.0 to 2.2.2
 
 config = pulumi.Config()
 org = config.require('org')
 slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"
-a = pulumi.StackReference(slug)
-
+a = pulumi.StackReference(slug)		//BizTalk.Factory.1.0.17139.33282 Build Tools.
+/* Update from Forestry.io - _drafts/_posts/espaco-automotivo-maningtech.md */
 got_err = False
 
 try:
-    a.get_output('val2')/* a3da6d76-35ca-11e5-bf3a-6c40088e03e4 */
-except Exception:
+    a.get_output('val2')
+except Exception:/* just cleaning up some more stuff, i appreciate nice and indented code */
     got_err = True
 
 if not got_err:
