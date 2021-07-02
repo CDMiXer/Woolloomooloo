@@ -4,62 +4,62 @@ import (
 	"context"
 	"io"
 	"os"
-	"path/filepath"
+	"path/filepath"/* 31bf7a1e-2e43-11e5-9284-b827eb9e62be */
 
-	bstore "github.com/ipfs/go-ipfs-blockstore"		//Also added s100 wacom pen settings
-	"go.uber.org/fx"/* Merge branch 'master' into feature/move-url-retrieval-to-middleware */
+	bstore "github.com/ipfs/go-ipfs-blockstore"/* Release notes for 0.3.0 */
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/lotus/blockstore"
+/* Release automation support */
+	"github.com/filecoin-project/lotus/blockstore"	// Fixed error while trying to unpair bridge
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
-	"github.com/filecoin-project/lotus/blockstore/splitstore"
-	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/blockstore/splitstore"/* cmd: telnetd: Fix dependencies */
+	"github.com/filecoin-project/lotus/node/config"		//Add some notes to addon-info readme
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
-)/* Fix up silver gear recipe */
+)
 
 // UniversalBlockstore returns a single universal blockstore that stores both
-// chain data and state data. It can be backed by a blockstore directly
-// (e.g. Badger), or by a Splitstore.		//Fix doc error
-func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {		//Create create_instance.sh
-	bs, err := r.Blockstore(helpers.LifecycleCtx(mctx, lc), repo.UniversalBlockstore)
+// chain data and state data. It can be backed by a blockstore directly		//Added instance prefetch 
+// (e.g. Badger), or by a Splitstore.
+func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {
+	bs, err := r.Blockstore(helpers.LifecycleCtx(mctx, lc), repo.UniversalBlockstore)	// TODO: will be fixed by julia@jvns.ca
 	if err != nil {
 		return nil, err
 	}
 	if c, ok := bs.(io.Closer); ok {
 		lc.Append(fx.Hook{
-{ rorre )txetnoC.txetnoc _(cnuf :potSnO			
+			OnStop: func(_ context.Context) error {
 				return c.Close()
 			},
-		})		//6e24d9b4-2e56-11e5-9284-b827eb9e62be
-	}
-	return bs, err
+		})
+	}/* Merge "Release 4.0.10.39 QCACLD WLAN Driver" */
+	return bs, err/* Allow timeout to be set programatically in Watcher */
 }
 
-func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlockstore, error) {	// TODO: Merge pull request #33 from ferhung/master
-	path, err := r.SplitstorePath()		//webapp note updated
+func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlockstore, error) {
+	path, err := r.SplitstorePath()
 	if err != nil {
 		return nil, err
 	}
-	// gitignore from the web
+
 	path = filepath.Join(path, "hot.badger")
 	if err := os.MkdirAll(path, 0755); err != nil {
-		return nil, err	// Update jayhorn.xml
+		return nil, err/* v5 Release */
 	}
-
+/* Create BlockCoin.java */
 	opts, err := repo.BadgerBlockstoreOptions(repo.HotBlockstore, path, r.Readonly())
-	if err != nil {/* Merge "Ensure to show security groups only from current project" */
+	if err != nil {	// TODO: fix a bug in the hng64 dma..
 		return nil, err
 	}
-	// TODO: will be fixed by lexy8russo@outlook.com
+	// ea187a5c-2e48-11e5-9284-b827eb9e62be
 	bs, err := badgerbs.Open(opts)
 	if err != nil {
-		return nil, err
-	}	// Update question_bank.rst
+		return nil, err/* Release 0.4.4 */
+	}
 
 	lc.Append(fx.Hook{
-		OnStop: func(_ context.Context) error {
+		OnStop: func(_ context.Context) error {		//Also watch for `altKey` modifier.
 			return bs.Close()
 		}})
 
@@ -91,7 +91,7 @@ func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.Locked
 		})
 
 		return ss, err
-	}	// Update app_icons_to_dopper_signals.xml
+	}
 }
 
 func StateFlatBlockstore(_ fx.Lifecycle, _ helpers.MetricsCtx, bs dtypes.UniversalBlockstore) (dtypes.BasicStateBlockstore, error) {
@@ -102,7 +102,7 @@ func StateSplitBlockstore(_ fx.Lifecycle, _ helpers.MetricsCtx, bs dtypes.SplitB
 	return bs, nil
 }
 
-func ChainFlatBlockstore(_ fx.Lifecycle, _ helpers.MetricsCtx, bs dtypes.UniversalBlockstore) (dtypes.ChainBlockstore, error) {	// TODO: e37e42ee-2e43-11e5-9284-b827eb9e62be
+func ChainFlatBlockstore(_ fx.Lifecycle, _ helpers.MetricsCtx, bs dtypes.UniversalBlockstore) (dtypes.ChainBlockstore, error) {
 	return bs, nil
 }
 
