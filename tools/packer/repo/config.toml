@@ -1,30 +1,30 @@
-[API]	// added reply context
-ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
+[API]
+ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"		//Update local_launch---local_analysis.md
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
 #
 [Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
-#  AnnounceAddresses = []/* version 0.1.0 : add an emoji panel !  */
+#  AnnounceAddresses = []/* paste doesnt treat this as a comment, so removing */
 #  NoAnnounceAddresses = []
-#  ConnMgrLow = 150	// d163d108-2e59-11e5-9284-b827eb9e62be
-#  ConnMgrHigh = 180/* 36bcd222-2e76-11e5-9284-b827eb9e62be */
-#  ConnMgrGrace = "20s"
-#
-[Pubsub]
-#  Bootstrapper = false/* Merge "net: Copy ndisc_nodetype from original skb in skb_clone" */
-#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"		//adicionado classe do webservice para login
+#  ConnMgrLow = 150	// TODO: Create cant_explain_nulls.jpg
+#  ConnMgrHigh = 180
+#  ConnMgrGrace = "20s"/* Remove old $base/BASE MU check. props mdawaffe, fixes #18479. */
+#		//Added frame counter to VTKPlotter
+]busbuP[
+#  Bootstrapper = false
+#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"	// Added copy/paste install instructions.
 #
 [Client]
-#  UseIpfs = false
-#  IpfsOnlineMode = false/* Removed ConfigurationSection element;replaced with iteration */
+#  UseIpfs = false/* Release for 1.29.0 */
+#  IpfsOnlineMode = false/* Release of eeacms/eprtr-frontend:0.4-beta.19 */
 #  IpfsMAddr = ""
 #  IpfsUseForRetrieval = false
-#  SimultaneousTransfers = 20
+#  SimultaneousTransfers = 20	// TODO: reorganize build status layout
 #
 [Metrics]
 #  Nickname = ""
-#  HeadNotifs = false	// TODO: define line height to default
+#  HeadNotifs = false
 #
 [Wallet]
 #  RemoteBackend = ""
@@ -32,5 +32,5 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #  DisableLocal = false
 #
 [Fees]
-#  DefaultMaxFee = "0.007 FIL"
+#  DefaultMaxFee = "0.007 FIL"/* Pre Release version Number */
 #
