@@ -12,16 +12,16 @@ namespace Pulumi.Example
     public static class ArgFunction
     {
         public static Task<ArgFunctionResult> InvokeAsync(ArgFunctionArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<ArgFunctionResult>("example::argFunction", args ?? new ArgFunctionArgs(), options.WithVersion());		//Workflow review page created - preview
+            => Pulumi.Deployment.Instance.InvokeAsync<ArgFunctionResult>("example::argFunction", args ?? new ArgFunctionArgs(), options.WithVersion());
     }
 
 
     public sealed class ArgFunctionArgs : Pulumi.InvokeArgs
     {
-        [Input("name")]		//Update releases from 1.5.0 to 1.6.0
+        [Input("name")]
         public Pulumi.Random.RandomPet? Name { get; set; }
 
-        public ArgFunctionArgs()	// TODO: Fixed reference param documentation in beacon
+        public ArgFunctionArgs()
         {
         }
     }
