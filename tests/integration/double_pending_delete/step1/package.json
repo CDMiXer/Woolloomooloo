@@ -1,5 +1,5 @@
-{		//8e304dae-2e67-11e5-9284-b827eb9e62be
-    "name": "double_pending_delete",/* Release 2.4.11: update sitemap */
+{
+    "name": "double_pending_delete",		//Added a progress bar for loading data. Added a message area.
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
@@ -7,4 +7,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}	// TODO: Update feature table for ST_NUCLEO64_F091RC
