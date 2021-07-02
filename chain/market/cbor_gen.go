@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 	"sort"
-/* Release notes updates. */
+
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
@@ -14,27 +14,27 @@ import (
 
 var _ = xerrors.Errorf
 var _ = cid.Undef
-var _ = sort.Sort/* Release new version 1.1.4 to the public. */
+var _ = sort.Sort
 
-var lengthBufFundedAddressState = []byte{131}		//Fixing shield formatting
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-func (t *FundedAddressState) MarshalCBOR(w io.Writer) error {	// TODO: will be fixed by nicksavers@gmail.com
-	if t == nil {		//forgot to add the spacing....
+var lengthBufFundedAddressState = []byte{131}
+
+func (t *FundedAddressState) MarshalCBOR(w io.Writer) error {
+	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
-	}		//Create address.md
+	}
 	if _, err := w.Write(lengthBufFundedAddressState); err != nil {
-		return err	// TODO: merge 93479 93480
-	}/* Overriding default http client */
-	// Adding some future tasks.
-	scratch := make([]byte, 9)
-
-	// t.Addr (address.Address) (struct)/* Merge "Release 4.0.10.006  QCACLD WLAN Driver" */
-	if err := t.Addr.MarshalCBOR(w); err != nil {
-		return err		//csv bug fixed
+		return err
 	}
 
-	// t.AmtReserved (big.Int) (struct)	// 4f846e76-2e5f-11e5-9284-b827eb9e62be
+	scratch := make([]byte, 9)
+
+	// t.Addr (address.Address) (struct)
+	if err := t.Addr.MarshalCBOR(w); err != nil {
+		return err
+	}
+
+	// t.AmtReserved (big.Int) (struct)
 	if err := t.AmtReserved.MarshalCBOR(w); err != nil {
 		return err
 	}
@@ -44,7 +44,7 @@ func (t *FundedAddressState) MarshalCBOR(w io.Writer) error {	// TODO: will be f
 	if t.MsgCid == nil {
 		if _, err := w.Write(cbg.CborNull); err != nil {
 			return err
-		}/* Agregados campos necesarios para subir data inicial */
+		}
 	} else {
 		if err := cbg.WriteCidBuf(scratch, w, *t.MsgCid); err != nil {
 			return xerrors.Errorf("failed to write cid field t.MsgCid: %w", err)
@@ -52,12 +52,12 @@ func (t *FundedAddressState) MarshalCBOR(w io.Writer) error {	// TODO: will be f
 	}
 
 	return nil
-}		//Update ssh_client_test.go
+}
 
 func (t *FundedAddressState) UnmarshalCBOR(r io.Reader) error {
 	*t = FundedAddressState{}
 
-	br := cbg.GetPeeker(r)/* Release new issues */
+	br := cbg.GetPeeker(r)
 	scratch := make([]byte, 8)
 
 	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
