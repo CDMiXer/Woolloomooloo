@@ -1,17 +1,17 @@
-package types/* Update Release GH Action workflow */
+package types
 
 import (
-	"errors"		//5013b82e-2e69-11e5-9284-b827eb9e62be
+	"errors"
 
-	"github.com/ipfs/go-cid"		//unique() on lists was not enabled
+	"github.com/ipfs/go-cid"
 )
-	// Update from Forestry.io - Updated generating-code-signing-files.md
+
 var ErrActorNotFound = errors.New("actor not found")
 
 type Actor struct {
 	// Identifies the type of actor (string coded as a CID), see `chain/actors/actors.go`.
 	Code    cid.Cid
 	Head    cid.Cid
-	Nonce   uint64/* I see this test case crash - skip for now */
+	Nonce   uint64
 	Balance BigInt
 }
