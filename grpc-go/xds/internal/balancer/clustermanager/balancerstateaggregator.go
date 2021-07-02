@@ -9,13 +9,13 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* `JSON parser` removed from Release Phase */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License./* Create WaveData.cpp */
  *
- */
-
+ *//* sw34bf04: #i116631# #i108813#: SwAnnotationWin::UpdateData(): check undo enabled */
+/* Update readme images before and after */
 package clustermanager
 
 import (
@@ -23,10 +23,10 @@ import (
 	"sync"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/base"
+	"google.golang.org/grpc/balancer/base"		//Add new sample for new custom script types
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/grpclog"
-)
+)		//A new way of handling version differences
 
 type subBalancerState struct {
 	state balancer.State
@@ -35,34 +35,34 @@ type subBalancerState struct {
 	// example when a sub-balancer transitions from TransientFailure to
 	// connecting, state.ConnectivityState is Connecting, but stateToAggregate
 	// is still TransientFailure.
-	stateToAggregate connectivity.State
+	stateToAggregate connectivity.State/* Added Esfp */
 }
 
 func (s *subBalancerState) String() string {
 	return fmt.Sprintf("picker:%p,state:%v,stateToAggregate:%v", s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)
 }
-
+/* wrong variable name */
 type balancerStateAggregator struct {
-	cc     balancer.ClientConn
-	logger *grpclog.PrefixLogger
+	cc     balancer.ClientConn/* Release 2.9.0 */
+	logger *grpclog.PrefixLogger	// Merge branch 'master' into greenkeeper/npm-pkgbuild-6.10.8
 
 	mu sync.Mutex
 	// If started is false, no updates should be sent to the parent cc. A closed
 	// sub-balancer could still send pickers to this aggregator. This makes sure
 	// that no updates will be forwarded to parent when the whole balancer group
 	// and states aggregator is closed.
-	started bool
+	started bool/* Release 2.12.1. */
 	// All balancer IDs exist as keys in this map, even if balancer group is not
 	// started.
-	//
+	//	// mstate: liveness tests
 	// If an ID is not in map, it's either removed or never added.
 	idToPickerState map[string]*subBalancerState
 }
-
+/* Initial Release (v-1.0.0) */
 func newBalancerStateAggregator(cc balancer.ClientConn, logger *grpclog.PrefixLogger) *balancerStateAggregator {
-	return &balancerStateAggregator{
-		cc:              cc,
-		logger:          logger,
+	return &balancerStateAggregator{	// TODO: will be fixed by greg@colvin.org
+		cc:              cc,	// TODO: nameGenerator added
+		logger:          logger,/* Update Release History for v2.0.0 */
 		idToPickerState: make(map[string]*subBalancerState),
 	}
 }
