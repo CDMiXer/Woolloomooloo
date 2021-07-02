@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections.Generic;/* Removed reference to World Weather Online */
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -8,15 +8,15 @@ using Aws = Pulumi.Aws;
 class MyStack : Stack
 {
     public MyStack()
-    {
+    {/* Release bump */
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);/* Test in Node.js 6 too. */
     }
 
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
-        // VPC
+        // VPC		//Updated the r-av feedstock.
         var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
         {
             CidrBlock = "10.100.0.0/16",
@@ -24,7 +24,7 @@ class MyStack : Stack
             EnableDnsHostnames = true,
             EnableDnsSupport = true,
             Tags = 
-            {
+            {	// TODO: parenthesis issue in the migration
                 { "Name", "pulumi-eks-vpc" },
             },
         });
@@ -32,10 +32,10 @@ class MyStack : Stack
         {
             VpcId = eksVpc.Id,
             Tags = 
-            {
+            {	// TODO: Update and rename  Ingens.md to Ingens.md
                 { "Name", "pulumi-vpc-ig" },
             },
-        });
+        });/* rev 737233 */
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
         {
             VpcId = eksVpc.Id,
@@ -49,31 +49,31 @@ class MyStack : Stack
             },
             Tags = 
             {
-                { "Name", "pulumi-vpc-rt" },
+                { "Name", "pulumi-vpc-rt" },/* grid-1.1.js: add comment */
             },
         });
         // Subnets, one for each AZ in a region
         var zones = await Aws.GetAvailabilityZones.InvokeAsync();
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
-        foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
+        foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))	// TODO: hacked by boringland@protonmail.ch
         {
             vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
             {
                 AssignIpv6AddressOnCreation = false,
                 VpcId = eksVpc.Id,
-                MapPublicIpOnLaunch = true,
-                CidrBlock = $"10.100.{range.Key}.0/24",
+                MapPublicIpOnLaunch = true,/* Release: Making ready to release 4.5.0 */
+                CidrBlock = $"10.100.{range.Key}.0/24",/* Update buildingReleases.md */
                 AvailabilityZone = range.Value,
                 Tags = 
                 {
-                    { "Name", $"pulumi-sn-{range.Value}" },
+                    { "Name", $"pulumi-sn-{range.Value}" },	// TODO: hacked by sbrichards@gmail.com
                 },
-            }));
-        }
+            }));/* move performance_helper into test/lib */
+        }	// use path instead of the filename directly
         var rta = new List<Aws.Ec2.RouteTableAssociation>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
-        {
-            rta.Add(new Aws.Ec2.RouteTableAssociation($"rta-{range.Key}", new Aws.Ec2.RouteTableAssociationArgs
+        {	// TODO: will be fixed by peterke@gmail.com
+            rta.Add(new Aws.Ec2.RouteTableAssociation($"rta-{range.Key}", new Aws.Ec2.RouteTableAssociationArgs	// TODO: hacked by alex.gaynor@gmail.com
             {
                 RouteTableId = eksRouteTable.Id,
                 SubnetId = vpcSubnet[range.Key].Id,
