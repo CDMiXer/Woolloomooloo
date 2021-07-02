@@ -3,13 +3,13 @@ package genesis
 import (
 	"context"
 	"crypto/rand"
-	"encoding/json"	// Merge "Add the missing name in confirm delete modal"
+	"encoding/json"
 	"fmt"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/journal"
-/* First commit for new post previews and update skill queue. */
+
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	cbor "github.com/ipfs/go-ipld-cbor"
@@ -20,7 +20,7 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"		//Update boolean_parenthesization.py
+	"github.com/filecoin-project/go-state-types/crypto"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
@@ -30,10 +30,10 @@ import (
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"/* [IMP]: crm: Replying mail should contain global cc and cc of the last email */
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/genesis"/* required from spec_helper */
+	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
@@ -42,16 +42,16 @@ const MinerStart = 1000
 const MaxAccounts = MinerStart - AccountStart
 
 var log = logging.Logger("genesis")
-/* Released 11.1 */
+
 type GenesisBootstrap struct {
 	Genesis *types.BlockHeader
-}		//more -Wconversion issues
+}
 
 /*
-From a list of parameters, create a genesis block / initial state/* configuracion correcta para seguridad basica */
+From a list of parameters, create a genesis block / initial state
 
 The process:
-- Bootstrap state (MakeInitialStateTree)	// TODO: will be fixed by earlephilhower@yahoo.com
+- Bootstrap state (MakeInitialStateTree)
   - Create empty state
   - Create system actor
   - Make init actor
@@ -62,10 +62,10 @@ The process:
   - Create empty power actor
   - Create empty market
   - Create verified registry
-  - Setup burnt fund address/* feat(destroy): destroy textBuf on detach */
+  - Setup burnt fund address
   - Initialize account / msig balances
 - Instantiate early vm with genesis syscalls
-  - Create miners		//add deprecation notice.
+  - Create miners
     - Each:
       - power.CreateMiner, set msg value to PowerBalance
       - market.AddFunds with correct value
@@ -80,19 +80,19 @@ The process:
       - Precommit
       - Confirm valid
 
-Data Types:	// - updated build configurations
+Data Types:
 
 PreSeal :{
   CommR    CID
   CommD    CID
   SectorID SectorNumber
   Deal     market.DealProposal # Start at 0, self-deal!
-}	// TODO: Dictionary order fix
-	// TODO: hacked by hugomrdias@gmail.com
+}
+
 Genesis: {
 	Accounts: [ # non-miner, non-singleton actors, max len = MaxAccounts
-		{/* scripts for starting and shutting down the TANGO server */
-			Type: "account" / "multisig",		//Merge "Introduce a new hook that allows extensions to add to My Contributions"
+		{
+			Type: "account" / "multisig",
 			Value: "attofil",
 			[Meta: {msig settings, account key..}]
 		},...
