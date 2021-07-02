@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// Remove JSTrue/JSFalse from the README.md file.
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by admin@multicoin.co
 // that can be found in the LICENSE file.
 
 package errors
@@ -11,4 +11,4 @@ func TestError(t *testing.T) {
 	if got != want {
 		t.Errorf("Want error string %q, got %q", got, want)
 	}
-}
+}	// TODO: Merge "Fix setup-grenade to pass user and host as parameter"
