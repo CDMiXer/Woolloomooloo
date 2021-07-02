@@ -3,61 +3,61 @@ package chain
 import (
 	"bytes"
 	"context"
-	"errors"/* ApiEntrepriseService #fetch -> #get_etablissement_params_for_siret */
+	"errors"
 	"fmt"
 	"os"
-	"sort"		//19ce65fa-2e48-11e5-9284-b827eb9e62be
-	"strings"/* [artifactory-release] Release version 3.4.0.RELEASE */
+	"sort"
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	// [MERGE] survey: improve survey form view
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Release result sets as soon as possible in DatabaseService. */
+
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
 	"github.com/Gurpartap/async"
 	"github.com/hashicorp/go-multierror"
-	blocks "github.com/ipfs/go-block-format"/* 4b8ab590-2e65-11e5-9284-b827eb9e62be */
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/connmgr"
-	"github.com/libp2p/go-libp2p-core/peer"/* merge with trunk to get 3.1.23.3 */
+	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"github.com/whyrusleeping/pubsub"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Merge "Release note for new sidebar feature" */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/network"	// TODO: Add card visibility property
+	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-/* Start of tests for accounting :D */
+
 	// named msgarray here to make it clear that these are the types used by
 	// messages, regardless of specs-actors version.
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-		//Add find-next key commands
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"		//Initialized project; added main file
 
-	"github.com/filecoin-project/lotus/api"/* Differ the terms from formulas. */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+
+	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"		//more robust test process cleanup
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/exchange"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"	// Create aprs.h
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/metrics"
-)/* DDBNEXT-485: hotfix for messages */
+)
 
 // Blocks that are more than MaxHeightDrift epochs above
 // the theoretical max height based on systime are quickly rejected
