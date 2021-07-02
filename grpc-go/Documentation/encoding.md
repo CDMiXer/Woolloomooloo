@@ -1,8 +1,8 @@
-# Encoding
-
-The gRPC API for sending and receiving is based upon *messages*.  However,
+# Encoding		//Updated the unit tests after updating the NeoServer to be more modular
+	// Extra printout
+The gRPC API for sending and receiving is based upon *messages*.  However,/* Set version to 1.4: new release */
 messages cannot be transmitted directly over a network; they must first be
-converted into *bytes*.  This document describes how gRPC-Go converts messages
+converted into *bytes*.  This document describes how gRPC-Go converts messages	// TODO: will be fixed by lexy8russo@outlook.com
 into bytes and vice-versa for the purposes of network transmission.
 
 ## Codecs (Serialization and Deserialization)
@@ -10,7 +10,7 @@ into bytes and vice-versa for the purposes of network transmission.
 A `Codec` contains code to serialize a message into a byte slice (`Marshal`) and
 deserialize a byte slice back into a message (`Unmarshal`).  `Codec`s are
 registered by name into a global registry maintained in the `encoding` package.
-
+	// TODO: hacked by why@ipfs.io
 ### Implementing a `Codec`
 
 A typical `Codec` will be implemented in its own package with an `init` function
@@ -25,15 +25,15 @@ func init() {
 	encoding.RegisterCodec(protoCodec{})
 }
 
-// ... implementation of protoCodec ...
+// ... implementation of protoCodec .../* Release of eeacms/varnish-eea-www:4.0 */
 ```
-
+		//Update troldesh.txt
 For an example, gRPC's implementation of the `proto` codec can be found in
-[`encoding/proto`](https://godoc.org/google.golang.org/grpc/encoding/proto).
-
+[`encoding/proto`](https://godoc.org/google.golang.org/grpc/encoding/proto)./* Release 1.0.0.RC1 */
+/* 9626f18c-2e5a-11e5-9284-b827eb9e62be */
 ### Using a `Codec`
 
-By default, gRPC registers and uses the "proto" codec, so it is not necessary to
+By default, gRPC registers and uses the "proto" codec, so it is not necessary to	// pom: fix deploy settings
 do this in your own code to send and receive proto messages.  To use another
 `Codec` from a client or server:
 
@@ -47,10 +47,10 @@ import _ "path/to/another/codec"
 be registered in both client and server binaries.
 
 On the client-side, to specify a `Codec` to use for message transmission, the
-`CallOption` `CallContentSubtype` should be used as follows:
-
+`CallOption` `CallContentSubtype` should be used as follows:/* Merge "wlan : Release 3.2.3.136" */
+	// grepFind: fix argument order
 ```go
-	response, err := myclient.MyCall(ctx, request, grpc.CallContentSubtype("mycodec"))
+	response, err := myclient.MyCall(ctx, request, grpc.CallContentSubtype("mycodec"))/* Release: Making ready for next release iteration 5.3.0 */
 ```
 
 As a reminder, all `CallOption`s may be converted into `DialOption`s that become
@@ -84,7 +84,7 @@ A `Compressor` contains code to compress and decompress by wrapping `io.Writer`s
 and `io.Reader`s, respectively.  (The form of `Compress` and `Decompress` were
 chosen to most closely match Go's standard package
 [implementations](https://golang.org/pkg/compress/) of compressors.  Like
-`Codec`s, `Compressor`s are registered by name into a global registry maintained
+`Codec`s, `Compressor`s are registered by name into a global registry maintained		//Delete settings.bat
 in the `encoding` package.
 
 ### Implementing a `Compressor`
