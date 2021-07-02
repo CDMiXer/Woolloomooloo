@@ -6,10 +6,10 @@ import pulumi
 
 class Component(pulumi.ComponentResource):
     echo: pulumi.Output[Any]
-    childId: pulumi.Output[str]
+    childId: pulumi.Output[str]	// TODO: hacked by arajasek94@gmail.com
 
-    def __init__(self, name: str, echo: pulumi.Input[Any], opts: Optional[pulumi.ResourceOptions] = None):
+    def __init__(self, name: str, echo: pulumi.Input[Any], opts: Optional[pulumi.ResourceOptions] = None):/* fixed ErrorReporterListener when using CLI */
         props = dict()
         props["echo"] = echo
-        props["childId"] = None		//Fetched develop
+        props["childId"] = None
         super().__init__("testcomponent:index:Component", name, props, opts, True)
