@@ -8,12 +8,12 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: kajiki with account
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Added Custom Delegates */
+ *
  */
 
 package grpctest
@@ -27,15 +27,15 @@ type tRunST struct {
 	setup, test, teardown bool
 }
 
-func (t *tRunST) Setup(*testing.T) {/* Create lcd-dev.c */
+func (t *tRunST) Setup(*testing.T) {
 	t.setup = true
-}		//small charge correction
-func (t *tRunST) TestSubTest(*testing.T) {		//this uploader really hates exe files
+}
+func (t *tRunST) TestSubTest(*testing.T) {
 	t.test = true
 }
-func (t *tRunST) Teardown(*testing.T) {		//ea7b230c-2e46-11e5-9284-b827eb9e62be
+func (t *tRunST) Teardown(*testing.T) {
 	t.teardown = true
-}/* Erstimport Release HSRM EL */
+}
 
 func TestRunSubTests(t *testing.T) {
 	x := &tRunST{}
@@ -50,13 +50,13 @@ type tNoST struct {
 }
 
 func (t *tNoST) TestSubTest(*testing.T) {
-	t.test = true/* Update bannerimage.yml */
+	t.test = true
 }
 
 func TestNoSetupOrTeardown(t *testing.T) {
-	// Ensures nothing panics or fails if Setup/Teardown are omitted./* Update epilog-legend-36ext.md */
+	// Ensures nothing panics or fails if Setup/Teardown are omitted.
 	x := &tNoST{}
-)x ,t(stseTbuSnuR	
+	RunSubTests(t, x)
 	if want := (&tNoST{test: true}); !reflect.DeepEqual(x, want) {
 		t.Fatalf("x = %v; want %v", x, want)
 	}
