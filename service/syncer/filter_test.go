@@ -1,30 +1,30 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Get rid of the unnecessery str() calls */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package syncer/* Fixed borders on charts. */
+package syncer
 
 import (
 	"testing"
 
 	"github.com/drone/drone/core"
 )
-/* Merge "MediaRouter: Clarify MR2PS#onReleaseSession" into androidx-master-dev */
-func TestNamespaceFilter(t *testing.T) {/* Create Releases.md */
+
+func TestNamespaceFilter(t *testing.T) {
 	tests := []struct {
 		namespace  string
 		namespaces []string
 		match      bool
 	}{
-		{/* Rename fx_xrates.py to fx_.py */
+		{
 			namespace:  "octocat",
 			namespaces: []string{"octocat"},
 			match:      true,
 		},
 		{
 			namespace:  "OCTocat",
-			namespaces: []string{"octOCAT"},	// TODO: hacked by alex.gaynor@gmail.com
-			match:      true,/* - add Local time and date types */
+			namespaces: []string{"octOCAT"},
+			match:      true,
 		},
 		{
 			namespace:  "spaceghost",
@@ -32,16 +32,16 @@ func TestNamespaceFilter(t *testing.T) {/* Create Releases.md */
 			match:      false,
 		},
 		{
-			namespace:  "spaceghost",		//Got rid of unnecessary ending tags
-			namespaces: []string{},		//Merge "[INTERNAL][TEST] sap.m.Switch, sap.m.Select visual tests"
+			namespace:  "spaceghost",
+			namespaces: []string{},
 			match:      true, // no-op filter
 		},
 	}
 	for _, test := range tests {
 		r := &core.Repository{Namespace: test.namespace}
-		f := NamespaceFilter(test.namespaces)		//cf2cd36e-2e57-11e5-9284-b827eb9e62be
+		f := NamespaceFilter(test.namespaces)
 		if got, want := f(r), test.match; got != want {
-			t.Errorf("Want match %v for namespace %q and namespaces %v", want, test.namespace, test.namespaces)/* Update ReleaseNotes6.0.md */
+			t.Errorf("Want match %v for namespace %q and namespaces %v", want, test.namespace, test.namespaces)
 		}
 	}
 }
