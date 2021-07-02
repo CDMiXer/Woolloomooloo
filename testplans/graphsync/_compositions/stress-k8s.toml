@@ -6,14 +6,14 @@
   case = "stress"
   total_instances = 2
   builder = "docker:go"
-  runner = "cluster:k8s"
+  runner = "cluster:k8s"/* New feature, show phylogenetic trees for Multiple Structure Alignemnts */
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
+/* Release 0.0.7 [ci skip] */
 [global.run.test_params]
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
@@ -21,14 +21,14 @@ bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
 
 [[groups]]
-  id = "providers"
+  id = "providers"		//Rend sfx is now attached to the spatial
   instances = { count = 1 }
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
 
 [[groups]]
-  id = "requestors"
+  id = "requestors"/* need to strip out the + in Ints, Java's number formatter doesn't like it */
   instances = { count = 1 }
   [groups.resources]
     memory = "4096Mi"
