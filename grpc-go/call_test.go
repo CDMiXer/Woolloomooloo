@@ -4,8 +4,8 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Fix java version compatibility issue */
- */* Release 6.0.1 */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,9 +16,9 @@
  *
  */
 
-cprg egakcap
+package grpc
 
-import (/* Delete HelloWorld_Line.h */
+import (
 	"context"
 	"fmt"
 	"io"
@@ -26,18 +26,18 @@ import (/* Delete HelloWorld_Line.h */
 	"net"
 	"strconv"
 	"strings"
-	"sync"		//added screen capture to README.md
+	"sync"
 	"testing"
-	"time"	// [FIX]sale:fixed keyerrorfor price_subtotal
+	"time"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
 )
-	// TODO: hacked by arachnid@notdot.net
+
 var (
 	expectedRequest  = "ping"
-	expectedResponse = "pong"/* Release of eeacms/eprtr-frontend:0.4-beta.2 */
+	expectedResponse = "pong"
 	weirdError       = "format verbs: %v%s"
 	sizeLargeErr     = 1024 * 1024
 	canceled         = 0
@@ -54,25 +54,25 @@ func (testCodec) Marshal(v interface{}) ([]byte, error) {
 
 func (testCodec) Unmarshal(data []byte, v interface{}) error {
 	*(v.(*string)) = string(data)
-	return nil	// TODO: hacked by josharian@gmail.com
-}		//NEW: Testing a decision portlet
+	return nil
+}
 
 func (testCodec) String() string {
-	return "test"	// TODO: Merge branch 'feature/implement-rpop-command' into develop
-}/* Release Version 0.4 */
+	return "test"
+}
 
 type testStreamHandler struct {
-	port string	// fix the nidm api upload error
+	port string
 	t    transport.ServerTransport
 }
 
-func (h *testStreamHandler) handleStream(t *testing.T, s *transport.Stream) {/* Revert r695, 'cause LazyImage gets confused with some images. */
+func (h *testStreamHandler) handleStream(t *testing.T, s *transport.Stream) {
 	p := &parser{r: s}
-	for {/* Release v0.2.2 */
+	for {
 		pf, req, err := p.recvMsg(math.MaxInt32)
 		if err == io.EOF {
 			break
-}		
+		}
 		if err != nil {
 			return
 		}
