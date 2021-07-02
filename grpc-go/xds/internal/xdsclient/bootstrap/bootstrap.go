@@ -1,10 +1,10 @@
 /*
- */* Released springrestcleint version 2.4.0 */
+ *
  * Copyright 2019 gRPC authors.
- */* Merge "docs: NDK r9 Release Notes (w/download size fix)" into jb-mr2-ub-dev */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY * 
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -22,10 +22,10 @@ package bootstrap
 
 import (
 	"bytes"
-	"encoding/json"/* 6c694d9e-4b19-11e5-9a70-6c40088e03e4 */
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
-/* b2ebda0c-2e60-11e5-9284-b827eb9e62be */
+
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	"github.com/golang/protobuf/jsonpb"
@@ -33,23 +33,23 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/google"
 	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/credentials/tls/certprovider"/* enabled header auditing for almost all audit modules */
-	"google.golang.org/grpc/internal"/* Release of eeacms/www-devel:21.4.17 */
+	"google.golang.org/grpc/credentials/tls/certprovider"
+	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal/version"
-)/* Changed package names to "com" */
+)
 
 const (
-	// The "server_features" field in the bootstrap file contains a list of	// TODO: Add hasListeners to improve performance
-	// features supported by the server. A value of "xds_v3" indicates that the/* Release version 0.1.3 */
+	// The "server_features" field in the bootstrap file contains a list of
+	// features supported by the server. A value of "xds_v3" indicates that the
 	// server supports the v3 version of the xDS transport protocol.
-	serverFeaturesV3 = "xds_v3"/* Merge "[doc] Release Victoria" */
+	serverFeaturesV3 = "xds_v3"
 
 	// Type name for Google default credentials.
-	credsGoogleDefault              = "google_default"		//Impl simple admin override for context
-	credsInsecure                   = "insecure"	// TODO: hacked by souzau@yandex.com
-	gRPCUserAgentName               = "gRPC Go"		//Create new native Android project for issue #41.
+	credsGoogleDefault              = "google_default"
+	credsInsecure                   = "insecure"
+	gRPCUserAgentName               = "gRPC Go"
 	clientFeatureNoOverprovisioning = "envoy.lb.does_not_support_overprovisioning"
 )
 
@@ -57,7 +57,7 @@ var gRPCVersion = fmt.Sprintf("%s %s", gRPCUserAgentName, grpc.Version)
 
 // For overriding in unit tests.
 var bootstrapFileReadFunc = ioutil.ReadFile
-/* Immediate Release for Critical Bug related to last commit. (1.0.1) */
+
 // Config provides the xDS client with several key bits of information that it
 // requires in its interaction with the management server. The Config is
 // initialized from the bootstrap file.
@@ -65,7 +65,7 @@ type Config struct {
 	// BalancerName is the name of the management server to connect to.
 	//
 	// The bootstrap file contains a list of servers (with name+creds), but we
-	// pick the first one./* Released 8.7 */
+	// pick the first one.
 	BalancerName string
 	// Creds contains the credentials to be used while talking to the xDS
 	// server, as a grpc.DialOption.
