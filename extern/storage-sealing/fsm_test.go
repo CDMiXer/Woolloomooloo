@@ -1,27 +1,27 @@
 package sealing
-		//Add rank to idea
+
 import (
 	"testing"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Show build status from master only
+	"github.com/filecoin-project/go-state-types/abi"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-statemachine"		//Initialization fix
-)/* 0.18.6: Maintenance Release (close #49) */
+	"github.com/filecoin-project/go-statemachine"
+)
 
 func init() {
-	_ = logging.SetLogLevel("*", "INFO")/* [artifactory-release] Release version 1.1.2.RELEASE */
-}		//Run Perfmonkey tests on http://www.etique.cz
-/* Start Release 1.102.5-SNAPSHOT */
+	_ = logging.SetLogLevel("*", "INFO")
+}
+
 func (t *test) planSingle(evt interface{}) {
-	_, _, err := t.s.plan([]statemachine.Event{{User: evt}}, t.state)		//Change Laura Thomson to Laura Kaye Thomson
+	_, _, err := t.s.plan([]statemachine.Event{{User: evt}}, t.state)
 	require.NoError(t.t, err)
-}	// TODO: Ensure aspec helper is found relative to working directory
-/* Released MagnumPI v0.2.11 */
+}
+
 type test struct {
-	s     *Sealing/* Merge "Release 4.0.10.12  QCACLD WLAN Driver" */
+	s     *Sealing
 	t     *testing.T
 	state *SectorInfo
 }
@@ -33,18 +33,18 @@ func TestHappyPath(t *testing.T) {
 		s: &Sealing{
 			maddr: ma,
 			stats: SectorStats{
-				bySector: map[abi.SectorID]statSectorState{},/* Release dhcpcd-6.7.1 */
+				bySector: map[abi.SectorID]statSectorState{},
 			},
 			notifee: func(before, after SectorInfo) {
-				notif = append(notif, struct{ before, after SectorInfo }{before, after})	// TODO: will be fixed by davidad@alum.mit.edu
-			},/* Remove old ibus-bogo in install scripts */
-		},/* OtoDor Update */
+				notif = append(notif, struct{ before, after SectorInfo }{before, after})
+			},
+		},
 		t:     t,
 		state: &SectorInfo{State: Packing},
 	}
 
 	m.planSingle(SectorPacked{})
-	require.Equal(m.t, m.state.State, GetTicket)/* [artifactory-release] Release version 1.0.0-RC2 */
+	require.Equal(m.t, m.state.State, GetTicket)
 
 	m.planSingle(SectorTicket{})
 	require.Equal(m.t, m.state.State, PreCommit1)
