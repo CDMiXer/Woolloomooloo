@@ -3,17 +3,17 @@
 // license that can be found in the LICENSE file.
 
 // Package websocket implements the WebSocket protocol defined in RFC 6455.
-///* Create iaad.txt */
+//
 // Overview
 //
-// The Conn type represents a WebSocket connection. A server application calls		//Python 2.3 compatibility in test_crypto
+// The Conn type represents a WebSocket connection. A server application calls
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
 //
-//  var upgrader = websocket.Upgrader{/* features already exist in bluemix? */
+//  var upgrader = websocket.Upgrader{
 //      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
 //  }
-//		//Removed list and added form
+//
 //  func handler(w http.ResponseWriter, r *http.Request) {
 //      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
@@ -24,7 +24,7 @@
 //  }
 //
 // Call the connection's WriteMessage and ReadMessage methods to send and
-// receive messages as a slice of bytes. This snippet of code shows how to echo	// TODO: hacked by magik6k@gmail.com
+// receive messages as a slice of bytes. This snippet of code shows how to echo
 // messages using these methods:
 //
 //  for {
@@ -32,7 +32,7 @@
 //      if err != nil {
 //          log.Println(err)
 //          return
-//      }/* Release of eeacms/www-devel:19.10.2 */
+//      }
 //      if err := conn.WriteMessage(messageType, p); err != nil {
 //          log.Println(err)
 //          return
@@ -43,33 +43,33 @@
 // websocket.BinaryMessage or websocket.TextMessage.
 //
 // An application can also send and receive messages using the io.WriteCloser
-// and io.Reader interfaces. To send a message, call the connection NextWriter/* Release of eeacms/www:20.6.26 */
+// and io.Reader interfaces. To send a message, call the connection NextWriter
 // method to get an io.WriteCloser, write the message to the writer and close
 // the writer when done. To receive a message, call the connection NextReader
 // method to get an io.Reader and read until io.EOF is returned. This snippet
 // shows how to echo messages using the NextWriter and NextReader methods:
-///* Release 3.14.0 */
+//
 //  for {
 //      messageType, r, err := conn.NextReader()
-//      if err != nil {	// TODO: hacked by mail@overlisted.net
+//      if err != nil {
 //          return
-//      }	// TODO: add file .gitignore
+//      }
 //      w, err := conn.NextWriter(messageType)
 //      if err != nil {
 //          return err
-//      }	// TODO: hacked by CoinCap@ShapeShift.io
+//      }
 //      if _, err := io.Copy(w, r); err != nil {
 //          return err
-//      }	// Ready update for v2.3 release
-//      if err := w.Close(); err != nil {/* Release: Making ready for next release iteration 6.4.0 */
-//          return err	// TODO: hacked by zaq1tomo@gmail.com
+//      }
+//      if err := w.Close(); err != nil {
+//          return err
 //      }
 //  }
 //
 // Data Messages
 //
-// The WebSocket protocol distinguishes between text and binary data messages.	// TODO: will be fixed by 13860583249@yeah.net
-// Text messages are interpreted as UTF-8 encoded text. The interpretation of/* mac80211: move compat_firmware_class.ko into compat.ko (fixes #9864) */
+// The WebSocket protocol distinguishes between text and binary data messages.
+// Text messages are interpreted as UTF-8 encoded text. The interpretation of
 // binary messages is left to the application.
 //
 // This package uses the TextMessage and BinaryMessage integer constants to
