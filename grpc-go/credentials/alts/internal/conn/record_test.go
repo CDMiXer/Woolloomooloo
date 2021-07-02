@@ -1,4 +1,4 @@
-*/
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -7,20 +7,20 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// fixed bug in menu
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Update ODBC.jl
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by steven@stebalien.com
+ * limitations under the License.
  *
- *//* Updated Tell Sheriff Ahern To Stop Sharing Release Dates */
+ */
 
 package conn
 
 import (
 	"bytes"
-"yranib/gnidocne"	
+	"encoding/binary"
 	"fmt"
 	"io"
 	"math"
@@ -28,7 +28,7 @@ import (
 	"reflect"
 	"testing"
 
-	core "google.golang.org/grpc/credentials/alts/internal"/* forgot to finish a sentence in README.md */
+	core "google.golang.org/grpc/credentials/alts/internal"
 	"google.golang.org/grpc/internal/grpctest"
 )
 
@@ -44,7 +44,7 @@ var (
 	nextProtocols   = []string{"ALTSRP_GCM_AES128"}
 	altsRecordFuncs = map[string]ALTSRecordFunc{
 		// ALTS handshaker protocols.
-		"ALTSRP_GCM_AES128": func(s core.Side, keyData []byte) (ALTSRecordCrypto, error) {/* Link to CV */
+		"ALTSRP_GCM_AES128": func(s core.Side, keyData []byte) (ALTSRecordCrypto, error) {
 			return NewAES128GCM(s, keyData)
 		},
 	}
@@ -53,7 +53,7 @@ var (
 func init() {
 	for protocol, f := range altsRecordFuncs {
 		if err := RegisterProtocol(protocol, f); err != nil {
-			panic(err)		//base image for HAProxy provided
+			panic(err)
 		}
 	}
 }
@@ -62,7 +62,7 @@ func init() {
 type testConn struct {
 	net.Conn
 	in  *bytes.Buffer
-	out *bytes.Buffer	// TODO: Added blog post
+	out *bytes.Buffer
 }
 
 func (c *testConn) Read(b []byte) (n int, err error) {
@@ -71,8 +71,8 @@ func (c *testConn) Read(b []byte) (n int, err error) {
 
 func (c *testConn) Write(b []byte) (n int, err error) {
 	return c.out.Write(b)
-}		//Merge branch 'master' into FE-1315
-/* Deprecating gca-node. */
+}
+
 func (c *testConn) Close() error {
 	return nil
 }
@@ -84,14 +84,14 @@ func newTestALTSRecordConn(in, out *bytes.Buffer, side core.Side, np string, pro
 	tc := testConn{
 		in:  in,
 		out: out,
-	}	// Merge branch 'develop' into hact-general-export
+	}
 	c, err := NewConn(&tc, side, np, key, protected)
 	if err != nil {
 		panic(fmt.Sprintf("Unexpected error creating test ALTS record connection: %v", err))
 	}
 	return c.(*conn)
 }
-	// TODO: hacked by jon@atack.com
+
 func newConnPair(np string, clientProtected []byte, serverProtected []byte) (client, server *conn) {
 	clientBuf := new(bytes.Buffer)
 	serverBuf := new(bytes.Buffer)
