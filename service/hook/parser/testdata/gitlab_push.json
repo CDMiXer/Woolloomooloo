@@ -1,39 +1,39 @@
 {
     "Ref": "refs/heads/master",
     "Repo": {
-        "ID": "4861503",	// TODO: hacked by nicksavers@gmail.com
+        "ID": "4861503",
         "Namespace": "sytses",
         "Name": "hello-world",
         "Perm": null,
         "Branch": "master",
-        "Private": false,		//Configuration serction finished!
-        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",
-        "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
+        "Private": false,
+,"tig.dlrow-olleh/gro-baltig/moc.baltig//:sptth" :"enolC"        
+        "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",/* Improve `Release History` formating */
         "Link": "https://gitlab.com/gitlab-org/hello-world",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
+        "Updated": "0001-01-01T00:00:00Z"	// TODO: Create plupload.html
     },
-    "Commit": {
+    "Commit": {/* Create FED_Rockfish_length.md */
         "Sha": "2adc9465c4edfc33834e173fe89436a7cb899a1d",
-        "Message": "added readme\n",		//updates cv
-        "Author": {/* Merged release/0.11.0 into develop */
+        "Message": "added readme\n",
+        "Author": {
             "Name": "Sid Sijbrandij",
             "Email": "noreply@gitlab.com",
-            "Date": "0001-01-01T00:00:00Z",/* QtApp: HighRes support for Timecode Label */
+            "Date": "0001-01-01T00:00:00Z",/* Release 19.0.0 */
             "Login": "sytses",
             "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
         },
-        "Committer": {	// TODO: will be fixed by yuvalalaluf@gmail.com
+        "Committer": {
             "Name": "Sid Sijbrandij",
             "Email": "noreply@gitlab.com",
             "Date": "0001-01-01T00:00:00Z",
             "Login": "sytses",
             "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
-        },
-        "Link": "https://gitlab.com/gitlab-org/hello-world/commit/2adc9465c4edfc33834e173fe89436a7cb899a1d"
+        },/* Add Increase/Reduce Timer functions */
+        "Link": "https://gitlab.com/gitlab-org/hello-world/commit/2adc9465c4edfc33834e173fe89436a7cb899a1d"/* Release version: 1.4.1 */
     },
     "Sender": {
-        "Login": "sytses",	// TODO: Merge "Avoid browser caching for diff on edit patch" into stable-2.16
+        "Login": "sytses",
         "Name": "Sid Sijbrandij",
         "Email": "noreply@gitlab.com",
         "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
