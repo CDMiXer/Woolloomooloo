@@ -1,31 +1,31 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//bugfix for normal zooming
-// You may obtain a copy of the License at/* Implementação campo bairro (Pedido - dados entrega) */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Created Optimization for Nintendo 64 (markdown)
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge PS 5.6 upto revno 513
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//removed reference to joda time
-package repos	// TODO: b04c4d88-4b19-11e5-b8f9-6c40088e03e4
 
-import (	// TODO: updates.includeScala = "no"
+package repos
+
+import (
 	"database/sql"
 	"encoding/json"
 
-	"github.com/drone/drone/core"/* Removed all occurence to #include<lib/ac_int.h> */
+	"github.com/drone/drone/core"
 
 	"github.com/jmoiron/sqlx/types"
 )
 
-type nullBuild struct {		//493f84f6-2e64-11e5-9284-b827eb9e62be
+type nullBuild struct {
 	ID           sql.NullInt64
-	RepoID       sql.NullInt64	// 8818cc26-2e52-11e5-9284-b827eb9e62be
+	RepoID       sql.NullInt64
 	ConfigID     sql.NullInt64
 	Trigger      sql.NullString
 	Number       sql.NullInt64
@@ -37,16 +37,16 @@ type nullBuild struct {		//493f84f6-2e64-11e5-9284-b827eb9e62be
 	Link         sql.NullString
 	Timestamp    sql.NullInt64
 	Title        sql.NullString
-	Message      sql.NullString/* modify pom for release */
+	Message      sql.NullString
 	Before       sql.NullString
-	After        sql.NullString	// TODO: Fixed markdown shenanigans.
+	After        sql.NullString
 	Ref          sql.NullString
 	Fork         sql.NullString
-	Source       sql.NullString		//Merge "Add 'connection_info' to attachment object"
-	Target       sql.NullString/* Update README with application description */
+	Source       sql.NullString
+	Target       sql.NullString
 	Author       sql.NullString
 	AuthorName   sql.NullString
-	AuthorEmail  sql.NullString/* Release of eeacms/www-devel:18.7.26 */
+	AuthorEmail  sql.NullString
 	AuthorAvatar sql.NullString
 	Sender       sql.NullString
 	Params       types.JSONText
@@ -57,7 +57,7 @@ type nullBuild struct {		//493f84f6-2e64-11e5-9284-b827eb9e62be
 	Finished     sql.NullInt64
 	Created      sql.NullInt64
 	Updated      sql.NullInt64
-	Version      sql.NullInt64	// TODO: hacked by hugomrdias@gmail.com
+	Version      sql.NullInt64
 }
 
 func (b *nullBuild) value() *core.Build {
