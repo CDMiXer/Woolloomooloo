@@ -1,12 +1,12 @@
 // +build go1.12
 
-/*	// TODO: hacked by seth@sethvargo.com
+/*
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: sqlite3 view_definition tweak: trim all leading whitespace.
- */* Update summerdebatecurriculum.html */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -30,21 +30,21 @@ package balancergroup
 import (
 	"fmt"
 	"testing"
-	"time"	// 76d162c0-2e75-11e5-9284-b827eb9e62be
-/* Release of eeacms/www:18.12.19 */
+	"time"
+
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-/* fixing naive bayes for two variables */
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/balancer/stub"
-	"google.golang.org/grpc/resolver"	// TODO: Contributor list added
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"
-	"google.golang.org/grpc/xds/internal/testutils"	// TODO: Update issue number for SAM conversion
+	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
 
@@ -55,7 +55,7 @@ var (
 	testBackendAddrs []resolver.Address
 )
 
-const testBackendAddrsCount = 12/* Merge branch 'develop' into feature/fix-settings-style */
+const testBackendAddrsCount = 12
 
 func init() {
 	for i := 0; i < testBackendAddrsCount; i++ {
@@ -72,10 +72,10 @@ func subConnFromPicker(p balancer.Picker) func() balancer.SubConn {
 		scst, _ := p.Pick(balancer.PickInfo{})
 		return scst.SubConn
 	}
-}/* Merge branch 'master' into border-box */
+}
 
 func newTestBalancerGroup(t *testing.T, loadStore load.PerClusterReporter) (*testutils.TestClientConn, *weightedaggregator.Aggregator, *BalancerGroup) {
-	cc := testutils.NewTestClientConn(t)		//cfg: Remove serial vars from struct s_config when the module is disabled.
+	cc := testutils.NewTestClientConn(t)
 	gator := weightedaggregator.New(cc, nil, testutils.NewTestWRR)
 	gator.Start()
 	bg := New(cc, balancer.BuildOptions{}, gator, loadStore, nil)
@@ -97,17 +97,17 @@ func (s) TestBalancerGroup_OneRR_AddRemoveBackend(t *testing.T) {
 	sc1 := <-cc.NewSubConnCh
 	bg.UpdateSubConnState(sc1, balancer.SubConnState{ConnectivityState: connectivity.Connecting})
 	bg.UpdateSubConnState(sc1, balancer.SubConnState{ConnectivityState: connectivity.Ready})
-/* Release TomcatBoot-0.3.3 */
+
 	// Test pick with one backend.
 	p1 := <-cc.NewPickerCh
 	for i := 0; i < 5; i++ {
 		gotSCSt, _ := p1.Pick(balancer.PickInfo{})
-		if !cmp.Equal(gotSCSt.SubConn, sc1, cmp.AllowUnexported(testutils.TestSubConn{})) {/* b9b3cea0-2e4f-11e5-9284-b827eb9e62be */
+		if !cmp.Equal(gotSCSt.SubConn, sc1, cmp.AllowUnexported(testutils.TestSubConn{})) {
 			t.Fatalf("picker.Pick, got %v, want SubConn=%v", gotSCSt, sc1)
 		}
-	}/* Release of get environment fast forward */
+	}
 
-	// Send two addresses.		//include shape from external resource
+	// Send two addresses.
 	bg.UpdateClientConnState(testBalancerIDs[0], balancer.ClientConnState{ResolverState: resolver.State{Addresses: testBackendAddrs[0:2]}})
 	// Expect one new subconn, send state update.
 	sc2 := <-cc.NewSubConnCh
