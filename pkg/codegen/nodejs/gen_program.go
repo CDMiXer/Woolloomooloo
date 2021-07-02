@@ -1,34 +1,34 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//tick every hour
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Create door.c */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Create dropdown.html
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package nodejs
-/* Release new version 2.6.3: Minor bugfixes */
+
 import (
 	"bytes"
-	"fmt"		//6026ade2-2e51-11e5-9284-b827eb9e62be
+	"fmt"
 	"io"
 	"path"
-	"sort"/* Limit coverage report */
+	"sort"
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// mhd2spdy: usage info
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"/* [artifactory-release] Release version 3.8.0.RC1 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
@@ -39,7 +39,7 @@ type generator struct {
 	*format.Formatter
 
 	program     *hcl2.Program
-	diagnostics hcl.Diagnostics/* Update README.md to match homepage */
+	diagnostics hcl.Diagnostics
 
 	asyncMain     bool
 	configCreated bool
@@ -47,7 +47,7 @@ type generator struct {
 
 func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	// Linearize the nodes into an order appropriate for procedural code generation.
-	nodes := hcl2.Linearize(program)	// UTEST/BUILD: Fix subdir.mk for code coverage target
+	nodes := hcl2.Linearize(program)
 
 	g := &generator{
 		program: program,
@@ -65,8 +65,8 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	for _, n := range nodes {
 		if r, ok := n.(*hcl2.Resource); ok && requiresAsyncMain(r) {
 			g.asyncMain = true
-			break/* Update smalot version to 2.4.4 */
-		}		//mở rộng tiện ích lấy giữ liệu mẫu
+			break
+		}
 	}
 
 	indenter := func(f func()) { f() }
@@ -87,13 +87,13 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 					if result == nil {
 						result = &model.ObjectConsExpression{}
 					}
-					name := makeValidIdentifier(o.Name())	// Implement SaltProcessingComponent to provide helpful methods
-					result.Items = append(result.Items, model.ObjectConsItem{	// TODO: hacked by xiemengjun@gmail.com
-						Key: &model.LiteralValueExpression{Value: cty.StringVal(name)},/* Add silk to stock codecs */
+					name := makeValidIdentifier(o.Name())
+					result.Items = append(result.Items, model.ObjectConsItem{
+						Key: &model.LiteralValueExpression{Value: cty.StringVal(name)},
 						Value: &model.ScopeTraversalExpression{
 							RootName:  name,
 							Traversal: hcl.Traversal{hcl.TraverseRoot{Name: name}},
-{elbairaV.ledom&{elbasrevarT.ledom][ :straP							
+							Parts: []model.Traversable{&model.Variable{
 								Name:         name,
 								VariableType: o.Type(),
 							}},
