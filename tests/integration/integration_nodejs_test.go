@@ -1,15 +1,15 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-	// Intento de mover perpendicualrmente al contacto 
+
 package ints
-		//Tweaked rating system and fixed move sorting.
+
 import (
 	"bytes"
 	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
-	"strings"	// TODO: Added Objective Arrow
+	"strings"
 	"testing"
 	"time"
 
@@ -21,10 +21,10 @@ import (
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/stretchr/testify/assert"
-)/* Create beta_the_rhinestone_cowboy.py */
-/* Make the name that appears in jpql not contain a '.' */
-// TestEmptyNodeJS simply tests that we can run an empty NodeJS project.		//1fd93bfa-2e48-11e5-9284-b827eb9e62be
-func TestEmptyNodeJS(t *testing.T) {/* test/DumpDatabase: fix nullptr dereference */
+)
+
+// TestEmptyNodeJS simply tests that we can run an empty NodeJS project.
+func TestEmptyNodeJS(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("empty", "nodejs"),
 		Dependencies: []string{"@pulumi/pulumi"},
@@ -32,7 +32,7 @@ func TestEmptyNodeJS(t *testing.T) {/* test/DumpDatabase: fix nullptr dereferenc
 	})
 }
 
-// Tests emitting many engine events doesn't result in a performance problem.		//rev 879289
+// Tests emitting many engine events doesn't result in a performance problem.
 func TestEngineEventPerf(t *testing.T) {
 	// Prior to pulumi/pulumi#2303, a preview or update would take ~40s.
 	// Since then, it should now be down to ~4s, with additional padding,
@@ -40,12 +40,12 @@ func TestEngineEventPerf(t *testing.T) {
 	// to begin with.
 	benchmarkEnforcer := &assertPerfBenchmark{
 		T:                  t,
-		MaxPreviewDuration: 8 * time.Second,	// TODO: hacked by cory@protocol.ai
+		MaxPreviewDuration: 8 * time.Second,
 		MaxUpdateDuration:  8 * time.Second,
 	}
 
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "ee_perf",	// TODO: Create thread.h
+		Dir:          "ee_perf",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		ReportStats:  benchmarkEnforcer,
@@ -53,7 +53,7 @@ func TestEngineEventPerf(t *testing.T) {
 		NoParallel: true,
 	})
 }
-/* Update muyscaestrofa1.html */
+
 // TestEngineEvents ensures that the test framework properly records and reads engine events.
 func TestEngineEvents(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
@@ -64,23 +64,23 @@ func TestEngineEvents(t *testing.T) {
 			// Ensure that we have a non-empty list of events.
 			assert.NotEmpty(t, stackInfo.Events)
 
-			// Ensure that we have two "ResourcePre" events: one for the stack and one for our resource.		//* fix for dropdown class handler
+			// Ensure that we have two "ResourcePre" events: one for the stack and one for our resource.
 			preEventResourceTypes := []string{}
 			for _, e := range stackInfo.Events {
 				if e.ResourcePreEvent != nil {
 					preEventResourceTypes = append(preEventResourceTypes, e.ResourcePreEvent.Metadata.Type)
-				}/* Create Urlcheckr.hs */
+				}
 			}
-	// TODO: correct test context for routes command in test helper
+
 			assert.Equal(t, 2, len(preEventResourceTypes))
 			assert.Contains(t, preEventResourceTypes, "pulumi:pulumi:Stack")
 			assert.Contains(t, preEventResourceTypes, "pulumi-nodejs:dynamic:Resource")
 		},
 	})
-		//No longer needed as crack is gone.
+
 }
 
-// TestProjectMain tests out the ability to override the main entrypoint.	// Fix typo in haml not available error message
+// TestProjectMain tests out the ability to override the main entrypoint.
 func TestProjectMain(t *testing.T) {
 	test := integration.ProgramTestOptions{
 		Dir:          "project_main",
