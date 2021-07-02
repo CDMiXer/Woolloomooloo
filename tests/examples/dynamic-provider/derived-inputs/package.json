@@ -2,15 +2,15 @@
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",/* Changed required swiftmailer version to current */
+        "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
-    },
+    },/* Mantenimiento Metadocumentos List funcionando */
     "dependencies": {
-        "assert": "^1.4.1",/* 2cda5f92-2e51-11e5-9284-b827eb9e62be */
+        "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
-    "peerDependencies": {		//Added DocumentRenderer interface.
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: FIX: Issue 83:	Rename processor directory to CPU
+    }
 }
