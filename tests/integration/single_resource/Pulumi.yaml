@@ -1,3 +1,3 @@
 name: protect_resources
-description: A program that ensures we cannot delete protected resources.	// TODO: Patch Capabilities Report for "PROGRESS"
+description: A program that ensures we cannot delete protected resources./* Fixed crash in WLMessageBox. */
 runtime: nodejs
