@@ -1,44 +1,44 @@
-[metadata]		//User side (octagon)
+[metadata]
   name = "lotus-soup"
-  author = ""	// removing some un-used variables
-/* Initial Release of the README file */
-[global]		//Merge 41447
+  author = ""
+
+[global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6
+  total_instances = 6/* on-change event callback receives new editor value */
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]	// TODO: Fix line endings in .gitignore
+[global.build]	// Merge "input: sensor: set the ABS_MISC bit to absbit"
   selectors = ["testground"]
-	// 49a14de2-2e57-11e5-9284-b827eb9e62be
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// TODO: will be fixed by qugou1350636@126.com
-  enable_go_build_cache = true
+[global.build_config]
+  enable_go_build_cache = true/* Merge "Release 3.2.3.292 prima WLAN Driver" */
 
-[global.run.test_params]
+[global.run.test_params]	// Fixed Sidebar bug
   clients = "3"
-  miners = "2"/* Delete Release File */
+  miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"	// TODO: Update contribuer.md
+  sectors = "10"/* Release 0.12.0 */
   random_beacon_type = "mock"
 
-[[groups]]
+[[groups]]/* Adds a link to UWP documentation from primary README. */
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* apply translarions for 0.12.2RC1 */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]	// TODO: unified ctx naming convention
+[[groups]]
   id = "miners"
   [groups.instances]
-    count = 2/* Ensure Draft and LiveCI are namespaced in migrations */
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -46,10 +46,10 @@
       mining_mode = "natural"
 
 [[groups]]
-  id = "clients"/* Merged hotfix/1.6.2 into develop */
+  id = "clients"
   [groups.instances]
-    count = 3/* Release of primecount-0.16 */
+    count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]	// TODO: chore(package): update @commitlint/cli to version 7.5.2
       role = "client"
