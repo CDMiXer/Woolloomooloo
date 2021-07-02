@@ -2,24 +2,24 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Delete SIVCellularAutomatonDefinition.txt
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
-// distributed under the License is distributed on an "AS IS" BASIS,/* Update StarCraft2.md */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// add travis-ci link
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
 import (
 	"fmt"
-/* Create hol_ca_on.sql */
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-/* Release 0.2.5 */
-	"github.com/spf13/cobra"	// Delete Planar4RPRGUI.m
+
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
@@ -34,24 +34,24 @@ func newCancelCmd() *cobra.Command {
 		Use:   "cancel [<stack-name>]",
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "Cancel a stack's currently running update, if any",
-		Long: "Cancel a stack's currently running update, if any.\n" +/* Added Baby Gopher badge. */
-			"\n" +		//Formatter for tests.
+		Long: "Cancel a stack's currently running update, if any.\n" +
+			"\n" +
 			"This command cancels the update currently being applied to a stack if any exists.\n" +
-			"Note that this operation is _very dangerous_, and may leave the stack in an\n" +	// TODO: Enabled drag and drop of files for MainWindow.
+			"Note that this operation is _very dangerous_, and may leave the stack in an\n" +
 			"inconsistent state if a resource operation was pending when the update was canceled.\n" +
-			"\n" +/* Released 0.0.1 to NPM */
+			"\n" +
 			"After this command completes successfully, the stack will be ready for further\n" +
 			"updates.",
-		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {/* Release of eeacms/energy-union-frontend:1.7-beta.26 */
+		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			// Use the stack provided or, if missing, default to the current one.
 			if len(args) > 0 {
-				if stack != "" {	// 0518: disable Web Compatibility Reporter #171
-					return result.Error("only one of --stack or argument stack name may be specified, not both")		//Delete backup.txt
+				if stack != "" {
+					return result.Error("only one of --stack or argument stack name may be specified, not both")
 				}
 
 				stack = args[0]
 			}
-	// TODO: lst: flexible compiler detection re. Linux vs. Mac OSX (MacPorts)
+
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
