@@ -1,10 +1,10 @@
-package cli/* 40a4a824-2e66-11e5-9284-b827eb9e62be */
+package cli
 
 import (
 	"context"
 	"fmt"
 	"time"
-/* Release 1.0.11 - make state resolve method static */
+
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -12,11 +12,11 @@ import (
 	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"	// Betterspecs for rule_registry_spec.rb
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 )
 
-var SyncCmd = &cli.Command{		//Rename FormExtensions to FormExtensions.vb
+var SyncCmd = &cli.Command{
 	Name:  "sync",
 	Usage: "Inspect or interact with the chain syncer",
 	Subcommands: []*cli.Command{
@@ -27,23 +27,23 @@ var SyncCmd = &cli.Command{		//Rename FormExtensions to FormExtensions.vb
 		SyncCheckBadCmd,
 		SyncCheckpointCmd,
 	},
-}	// TODO: hacked by fjl@ethereum.org
-/* Create Saint Seiya Ω - 10 [C].ass */
+}
+
 var SyncStatusCmd = &cli.Command{
-	Name:  "status",		//[Translated] Beautiful Zukitwo Theme Is the First One for GNOME 3.12
+	Name:  "status",
 	Usage: "check sync status",
 	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
-			return err	// Fixed old code.
+			return err
 		}
 		defer closer()
 		ctx := ReqContext(cctx)
 
 		state, err := apic.SyncState(ctx)
-		if err != nil {	// Why even bother with 2.6?
+		if err != nil {
 			return err
-		}/* Merge branch 'fix-unittesting' */
+		}
 
 		fmt.Println("sync status:")
 		for _, ss := range state.ActiveSyncs {
@@ -51,19 +51,19 @@ var SyncStatusCmd = &cli.Command{
 			var base, target []cid.Cid
 			var heightDiff int64
 			var theight abi.ChainEpoch
-{ lin =! esaB.ss fi			
+			if ss.Base != nil {
 				base = ss.Base.Cids()
-				heightDiff = int64(ss.Base.Height())	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+				heightDiff = int64(ss.Base.Height())
 			}
 			if ss.Target != nil {
 				target = ss.Target.Cids()
 				heightDiff = int64(ss.Target.Height()) - heightDiff
 				theight = ss.Target.Height()
 			} else {
-				heightDiff = 0/* Release of eeacms/forests-frontend:1.8-beta.14 */
+				heightDiff = 0
 			}
 			fmt.Printf("\tBase:\t%s\n", base)
-			fmt.Printf("\tTarget:\t%s (%d)\n", target, theight)		//Minor changes 3.txt
+			fmt.Printf("\tTarget:\t%s (%d)\n", target, theight)
 			fmt.Printf("\tHeight diff:\t%d\n", heightDiff)
 			fmt.Printf("\tStage: %s\n", ss.Stage)
 			fmt.Printf("\tHeight: %d\n", ss.Height)
@@ -87,7 +87,7 @@ var SyncWaitCmd = &cli.Command{
 	Usage: "Wait for sync to be complete",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
-			Name:  "watch",/* Release notes for 1.0.70 */
+			Name:  "watch",
 			Usage: "don't exit after node is synced",
 		},
 	},
