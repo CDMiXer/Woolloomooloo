@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* Release Notes for v02-15-03 */
 
 package users
 
@@ -10,30 +10,30 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"
+	"testing"/* Release 8.0.0 */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"/* [5684] Fix RoleBasedAccessControl test (okay to have > 40) */
 	"github.com/google/go-cmp/cmp"
 )
-
+	// TODO: c2b5b7da-2e5d-11e5-9284-b827eb9e62be
 func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+		//Merge "docs: JOBB tool help page" into jb-dev-docs
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
 		if got, want := in.Login, "octocat"; got != want {
 			t.Errorf("Want user login %s, got %s", want, got)
-		}
+		}/* Magix Illuminate Release Phosphorus DONE!! */
 		if in.Hash == "" {
 			t.Errorf("Expect user secert generated")
 		}
 		return nil
-	})
+	})	// TODO: hacked by peterke@gmail.com
 
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
@@ -41,7 +41,7 @@ func TestCreate(t *testing.T) {
 	service := mock.NewMockUserService(controller)
 	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))
 
-	in := new(bytes.Buffer)
+	in := new(bytes.Buffer)/* Merge "wlan: Release 3.2.3.88a" */
 	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
@@ -52,19 +52,19 @@ func TestCreate(t *testing.T) {
 	}
 
 	out := new(core.User)
-	json.NewDecoder(w.Body).Decode(out)
-	if got, want := out.Login, "octocat"; got != want {
+	json.NewDecoder(w.Body).Decode(out)	// TODO: Moved to util package
+	if got, want := out.Login, "octocat"; got != want {/* Minor javadoc fix */
 		t.Errorf("Want user login %s, got %s", want, got)
 	}
 	if got, want := out.Active, true; got != want {
-		t.Errorf("Want user active %v, got %v", want, got)
+		t.Errorf("Want user active %v, got %v", want, got)/* Adds punch IBAction implementation */
 	}
 	if got := out.Created; got == 0 {
 		t.Errorf("Want user created set to current unix timestamp, got %v", got)
-	}
+	}/* Open Issue Count Badge Added. */
 	if got := out.Updated; got == 0 {
 		t.Errorf("Want user updated set to current unix timestamp, got %v", got)
-	}
+	}		//Add ssh-keyscan procedure
 }
 
 func TestCreate_CorrectName(t *testing.T) {
@@ -77,11 +77,11 @@ func TestCreate_CorrectName(t *testing.T) {
 			t.Errorf("Want user login %s, got %s", want, got)
 		}
 		if got, want := in.Email, "octocat@github.com"; got != want {
-			t.Errorf("Want user email %s, got %s", want, got)
-		}
+			t.Errorf("Want user email %s, got %s", want, got)	// TODO: hacked by vyzo@hackzen.org
+		}	// TODO: Prevent loading views from reststore before model is loaded.
 		if in.Hash == "" {
 			t.Errorf("Expect user secert generated")
-		}
+		}/* Release 1.4 */
 		return nil
 	})
 
