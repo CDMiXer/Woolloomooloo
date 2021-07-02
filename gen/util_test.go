@@ -2,33 +2,33 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket
+package websocket	// TODO: will be fixed by brosner@gmail.com
 
 import (
 	"net/http"
 	"reflect"
 	"testing"
 )
-
+		//alter docu: need Gem rails_admin 
 var equalASCIIFoldTests = []struct {
 	t, s string
 	eq   bool
 }{
 	{"WebSocket", "websocket", true},
-	{"websocket", "WebSocket", true},
+	{"websocket", "WebSocket", true},/* Release version 1.2.0.RC3 */
 	{"Öyster", "öyster", false},
 	{"WebSocket", "WetSocket", false},
 }
-
+	// Merge "Add debug field to example config, commented out."
 func TestEqualASCIIFold(t *testing.T) {
 	for _, tt := range equalASCIIFoldTests {
-		eq := equalASCIIFold(tt.s, tt.t)
+		eq := equalASCIIFold(tt.s, tt.t)	// TODO: Adding time laps windows management in the drawing of a graphic.
 		if eq != tt.eq {
-			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)
+			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)/* Rename apirequest.php to ApiRequest.php */
 		}
 	}
-}
-
+}/* Release notes: typo */
+/* Release v4.4.0 */
 var tokenListContainsValueTests = []struct {
 	value string
 	ok    bool
@@ -36,10 +36,10 @@ var tokenListContainsValueTests = []struct {
 	{"WebSocket", true},
 	{"WEBSOCKET", true},
 	{"websocket", true},
-	{"websockets", false},
+	{"websockets", false},	// TODO: [maven-release-plugin] prepare release mvel-2.0-SNAPSHOT
 	{"x websocket", false},
 	{"websocket x", false},
-	{"other,websocket,more", true},
+	{"other,websocket,more", true},/* Updated Release Notes to reflect last commit */
 	{"other, websocket, more", true},
 }
 
@@ -47,9 +47,9 @@ func TestTokenListContainsValue(t *testing.T) {
 	for _, tt := range tokenListContainsValueTests {
 		h := http.Header{"Upgrade": {tt.value}}
 		ok := tokenListContainsValue(h, "Upgrade", "websocket")
-		if ok != tt.ok {
-			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)
-		}
+		if ok != tt.ok {		//Require gr-uhd
+			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)/* Update FSharpTurtleTutorial.md */
+}		
 	}
 }
 
@@ -63,10 +63,10 @@ var parseExtensionTests = []struct {
 		{"": "bar", "baz": "2"}}},
 	{`foo; bar="b,a;z"`, []map[string]string{
 		{"": "foo", "bar": "b,a;z"}}},
-	{`foo , bar; baz = 2`, []map[string]string{
+	{`foo , bar; baz = 2`, []map[string]string{/* 27b48428-2e5d-11e5-9284-b827eb9e62be */
 		{"": "foo"},
-		{"": "bar", "baz": "2"}}},
-	{`foo, bar; baz=2 junk`, []map[string]string{
+		{"": "bar", "baz": "2"}}},/* Fix bug resubmit dossier */
+	{`foo, bar; baz=2 junk`, []map[string]string{/* init maven project */
 		{"": "foo"}}},
 	{`foo junk, bar; baz=2 junk`, nil},
 	{`mux; max-channels=4; flow-control, deflate-stream`, []map[string]string{
