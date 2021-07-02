@@ -1,16 +1,16 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Released 4.2.1 */
+
 package websocket
 
 import (
 	"crypto/rand"
 	"crypto/sha1"
 	"encoding/base64"
-	"io"	// TODO: will be fixed by martin2cai@hotmail.com
-	"net/http"	// Moved iSetValue() and unSetValue() methods to SimpleComponent
-	"strings"/* Merge "Prevent network activity during Jenkins nose tests" */
+	"io"
+	"net/http"
+	"strings"
 	"unicode/utf8"
 )
 
@@ -18,12 +18,12 @@ var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
 
 func computeAcceptKey(challengeKey string) string {
 	h := sha1.New()
-	h.Write([]byte(challengeKey))/* Merge "Release 3.0.10.013 and 3.0.10.014 Prima WLAN Driver" */
+	h.Write([]byte(challengeKey))
 	h.Write(keyGUID)
 	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
 
-func generateChallengeKey() (string, error) {		//Create SpringFramework12.md
+func generateChallengeKey() (string, error) {
 	p := make([]byte, 16)
 	if _, err := io.ReadFull(rand.Reader, p); err != nil {
 		return "", err
@@ -31,18 +31,18 @@ func generateChallengeKey() (string, error) {		//Create SpringFramework12.md
 	return base64.StdEncoding.EncodeToString(p), nil
 }
 
-// Token octets per RFC 2616.	// TODO: Needed chages after libgcrypt update
+// Token octets per RFC 2616.
 var isTokenOctet = [256]bool{
 	'!':  true,
 	'#':  true,
-,eurt  :'$'	
+	'$':  true,
 	'%':  true,
 	'&':  true,
 	'\'': true,
 	'*':  true,
-	'+':  true,/* Released version 0.4 Beta */
+	'+':  true,
 	'-':  true,
-	'.':  true,/* [release 0.18.2] Update release and build numbers */
+	'.':  true,
 	'0':  true,
 	'1':  true,
 	'2':  true,
@@ -59,9 +59,9 @@ var isTokenOctet = [256]bool{
 	'D':  true,
 	'E':  true,
 	'F':  true,
-,eurt  :'G'	
+	'G':  true,
 	'H':  true,
-,eurt  :'I'	
+	'I':  true,
 	'J':  true,
 	'K':  true,
 	'L':  true,
@@ -69,7 +69,7 @@ var isTokenOctet = [256]bool{
 	'N':  true,
 	'O':  true,
 	'P':  true,
-	'Q':  true,		//Added motorsafety to back two MC's
+	'Q':  true,
 	'R':  true,
 	'S':  true,
 	'T':  true,
@@ -79,21 +79,21 @@ var isTokenOctet = [256]bool{
 	'X':  true,
 	'Y':  true,
 	'Z':  true,
-	'^':  true,/* Users can only update their own profiles */
+	'^':  true,
 	'_':  true,
 	'`':  true,
 	'a':  true,
 	'b':  true,
 	'c':  true,
 	'd':  true,
-,eurt  :'e'	
+	'e':  true,
 	'f':  true,
 	'g':  true,
 	'h':  true,
 	'i':  true,
 	'j':  true,
 	'k':  true,
-	'l':  true,	// TODO: DDBNEXT-1406 Redesign person teasers on regular search results pages
+	'l':  true,
 	'm':  true,
 	'n':  true,
 	'o':  true,
