@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* change lower case */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package branches
@@ -26,16 +26,16 @@ import (
 
 // HandleDelete returns an http.HandlerFunc that handles an
 // http.Request to delete a branch entry from the datastore.
-func HandleDelete(		//submit new scaffold: my-blog
+func HandleDelete(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-) http.HandlerFunc {		//add documentation for epub:split-css
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			branch    = chi.URLParam(r, "*")
-		)/* Release JettyBoot-0.3.7 */
+		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
@@ -48,7 +48,7 @@ func HandleDelete(		//submit new scaffold: my-blog
 		}
 
 		err = builds.DeleteBranch(r.Context(), repo.ID, branch)
-		if err != nil {/* Delete GoogleCaptchaResponseData.java~ */
+		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
