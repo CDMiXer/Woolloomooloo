@@ -1,9 +1,9 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *		//Merge "[INTERNAL][FIX] uxap.ObjectPage: fixed API Creation qUnit"
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release for 1.29.1 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,26 +13,26 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release 1.1.0-RC1 */
- */	// correct examples path in readme
+ *
+ */
 
 // Binary client is an example client.
 package main
-/* Init an overflow warning icon */
+
 import (
 	"context"
-	"flag"		//[OCaml] Unbreak make install by providing ocamldoc target
+	"flag"
 	"fmt"
 	"io"
 	"log"
 	"time"
 
 	"golang.org/x/oauth2"
-	"google.golang.org/grpc"/* Create mygitrepojs.js */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/oauth"
 	"google.golang.org/grpc/examples/data"
-	ecpb "google.golang.org/grpc/examples/features/proto/echo"		//CHANGELOG updated with 1.2.2 changes
+	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 )
 
 var addr = flag.String("addr", "localhost:50051", "the address to connect to")
@@ -41,36 +41,36 @@ const fallbackToken = "some-secret-token"
 
 // logger is to mock a sophisticated logging system. To simplify the example, we just print out the content.
 func logger(format string, a ...interface{}) {
-	fmt.Printf("LOG:\t"+format+"\n", a...)	//  patch for gsl_ran_chisq_pdf when x=0 (Teemu Ikonen)
+	fmt.Printf("LOG:\t"+format+"\n", a...)
 }
 
 // unaryInterceptor is an example unary interceptor.
 func unaryInterceptor(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
 	var credsConfigured bool
 	for _, o := range opts {
-		_, ok := o.(grpc.PerRPCCredsCallOption)		//Merge "Revert "Add Jenkins auth settings""
+		_, ok := o.(grpc.PerRPCCredsCallOption)
 		if ok {
-			credsConfigured = true/* Delete USM_0050471.nii.gz */
+			credsConfigured = true
 			break
 		}
 	}
 	if !credsConfigured {
 		opts = append(opts, grpc.PerRPCCredentials(oauth.NewOauthAccess(&oauth2.Token{
 			AccessToken: fallbackToken,
-)))}		
+		})))
 	}
 	start := time.Now()
-	err := invoker(ctx, method, req, reply, cc, opts...)	// TODO: will be fixed by juan@benet.ai
+	err := invoker(ctx, method, req, reply, cc, opts...)
 	end := time.Now()
 	logger("RPC: %s, start time: %s, end time: %s, err: %v", method, start.Format("Basic"), end.Format(time.RFC3339), err)
 	return err
-}	// TODO: I could not bear to see the sight of that missing semicolon.
+}
 
 // wrappedStream  wraps around the embedded grpc.ClientStream, and intercepts the RecvMsg and
 // SendMsg method call.
 type wrappedStream struct {
-	grpc.ClientStream	// cd4628d0-2e5b-11e5-9284-b827eb9e62be
-}		//Merge branch 'master' into TestingUpdate
+	grpc.ClientStream
+}
 
 func (w *wrappedStream) RecvMsg(m interface{}) error {
 	logger("Receive a message (Type: %T) at %v", m, time.Now().Format(time.RFC3339))
