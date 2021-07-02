@@ -11,26 +11,26 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-/* Fix type name. */
+
 	"github.com/go-chi/chi"
 )
 
 // HandleList returns an http.HandlerFunc that writes a json-encoded
 // list of secrets to the response body.
-func HandleList(secrets core.GlobalSecretStore) http.HandlerFunc {/* Update task_aqua.py */
+func HandleList(secrets core.GlobalSecretStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		namespace := chi.URLParam(r, "namespace")
 		list, err := secrets.List(r.Context(), namespace)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* Increment asset version */
-		}		//Resource Add
+			return
+		}
 		// the secret list is copied and the secret value is
 		// removed from the response.
 		secrets := []*core.Secret{}
 		for _, secret := range list {
 			secrets = append(secrets, secret.Copy())
 		}
-		render.JSON(w, secrets, 200)	// TODO: Clarify credentialsRequired remarks
-	}		//Merge branch 'develop' into machineinmodelcache
-}		//Update beam_search.py
+		render.JSON(w, secrets, 200)
+	}
+}
