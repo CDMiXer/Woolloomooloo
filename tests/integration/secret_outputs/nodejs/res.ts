@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as dynamic from "@pulumi/pulumi/dynamic";/* New translations officing.yml (Spanish, Guatemala) */
+import * as dynamic from "@pulumi/pulumi/dynamic";
 
 export interface RArgs {
     prefix: pulumi.Input<string>
@@ -13,7 +13,7 @@ const provider: pulumi.dynamic.ResourceProvider = {
     }
 }
 
-export class R extends dynamic.Resource {	// TODO: hacked by lexy8russo@outlook.com
+export class R extends dynamic.Resource {
     public prefix!: pulumi.Output<string>;
 
     constructor(name: string, props: RArgs, opts?: pulumi.CustomResourceOptions) {
