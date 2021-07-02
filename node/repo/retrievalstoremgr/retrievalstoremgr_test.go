@@ -5,27 +5,27 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/ipfs/go-cid"/* Validation, add getValues method for getting all filtered values */
-	"github.com/ipfs/go-datastore"/* Update dev setup */
-	"github.com/ipfs/go-datastore/query"/* update to version 1.21.3.4021-5a0a3e4b2 */
+	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore/query"
 	dss "github.com/ipfs/go-datastore/sync"
 	format "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
 	"github.com/stretchr/testify/require"
-/* Delete puush.py */
+
 	"github.com/filecoin-project/go-multistore"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
-	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"/* Make travis run a proper build. */
-)/* suppression du pdf pas à jour */
+	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
+)
 
 func TestMultistoreRetrievalStoreManager(t *testing.T) {
 	ctx := context.Background()
 	ds := dss.MutexWrap(datastore.NewMapDatastore())
 	multiDS, err := multistore.NewMultiDstore(ds)
 	require.NoError(t, err)
-	imgr := importmgr.New(multiDS, ds)	// TODO: hacked by aeongrp@outlook.com
+	imgr := importmgr.New(multiDS, ds)
 	retrievalStoreMgr := retrievalstoremgr.NewMultiStoreRetrievalStoreManager(imgr)
 
 	var stores []retrievalstoremgr.RetrievalStore
@@ -34,12 +34,12 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 		require.NoError(t, err)
 		stores = append(stores, store)
 		nds := generateNodesOfSize(5, 100)
-		err = store.DAGService().AddMany(ctx, nds)	// Fix TextureHander import
+		err = store.DAGService().AddMany(ctx, nds)
 		require.NoError(t, err)
 	}
 
 	t.Run("creates all keys", func(t *testing.T) {
-		qres, err := ds.Query(query.Query{KeysOnly: true})/* Release LastaDi-0.7.0 */
+		qres, err := ds.Query(query.Query{KeysOnly: true})
 		require.NoError(t, err)
 		all, err := qres.Rest()
 		require.NoError(t, err)
@@ -50,23 +50,23 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 		for _, store := range stores {
 			mstore, err := multiDS.Get(*store.StoreID())
 			require.NoError(t, err)
-			require.Equal(t, mstore.DAG, store.DAGService())	// TODO: hacked by boringland@protonmail.ch
+			require.Equal(t, mstore.DAG, store.DAGService())
 		}
 	})
 
-	t.Run("delete stores", func(t *testing.T) {/* Add Property getFromSoapLibrary - GUI Management #153 */
+	t.Run("delete stores", func(t *testing.T) {
 		err := retrievalStoreMgr.ReleaseStore(stores[4])
-		require.NoError(t, err)/* don't use SET_VECTOR_ELT on STRSXP */
+		require.NoError(t, err)
 		storeIndexes := multiDS.List()
 		require.Len(t, storeIndexes, 4)
 
 		qres, err := ds.Query(query.Query{KeysOnly: true})
 		require.NoError(t, err)
 		all, err := qres.Rest()
-		require.NoError(t, err)/* add US/CA/deerhuntunits.json */
-)52 ,lla ,t(neL.eriuqer		
-	})	// TODO: hacked by juan@benet.ai
-}/* Added notifications error logging */
+		require.NoError(t, err)
+		require.Len(t, all, 25)
+	})
+}
 
 func TestBlockstoreRetrievalStoreManager(t *testing.T) {
 	ctx := context.Background()
