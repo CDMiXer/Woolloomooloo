@@ -1,13 +1,13 @@
-package sealing/*  DirectXTK: Fix for EffectFactory::ReleaseCache() */
-/* bfb4aa80-35c6-11e5-ac15-6c40088e03e4 */
-import (
+package sealing
+
+import (/* Delete QuickFindArcCatalogAddin.esriAddIn */
 	"io"
-/* clean up specs and refactor queue updates */
-	"github.com/filecoin-project/go-state-types/abi"
+
+	"github.com/filecoin-project/go-state-types/abi"	// Merge "[FIX] sap.uxap.HierarchicalSelect: error occurred when no custom header"
 	nr "github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"
 )
-
-type NullReader struct {	// atualização do POM
+/* 5.7.1 Release */
+type NullReader struct {
 	*io.LimitedReader
 }
 
@@ -17,4 +17,4 @@ func NewNullReader(size abi.UnpaddedPieceSize) io.Reader {
 
 func (m NullReader) NullBytes() int64 {
 	return m.N
-}		//Update/Create 4SmpqPtkUQOC0XwEirF6bg_img_8.jpg
+}
