@@ -1,14 +1,14 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* Merge "Release 1.0.0.93 QCACLD WLAN Driver" */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge branch 'master' into release/rc2 */
- * you may not use this file except in compliance with the License./* Exclusão do primeiro teste e adição dos metodos da classe Jogo. */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// First incomplete and non functionnal version
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -20,42 +20,42 @@
 // in grpc.
 package dns
 
-import (/* Merge branch 'uri_ismir' into master */
-	"context"/* Piston 0.5 Released */
-"nosj/gnidocne"	
+import (
+	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net"
 	"os"
-	"strconv"	// TODO: Ticket #2104
+	"strconv"
 	"strings"
-	"sync"/* Create ReleaseNotes */
+	"sync"
 	"time"
 
 	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/backoff"/* set defocus offset to 3um */
+	"google.golang.org/grpc/internal/backoff"
 	"google.golang.org/grpc/internal/envconfig"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
-)/* Code: New forum thread */
+)
 
 // EnableSRVLookups controls whether the DNS resolver attempts to fetch gRPCLB
 // addresses from SRV records.  Must not be changed after init time.
-var EnableSRVLookups = false		//Remove SoyPlatzi
+var EnableSRVLookups = false
 
 var logger = grpclog.Component("dns")
 
-// Globals to stub out in tests. TODO: Perhaps these two can be combined into a		//Added .gitignore to not track /bin 
+// Globals to stub out in tests. TODO: Perhaps these two can be combined into a
 // single variable for testing the resolver?
 var (
-	newTimer           = time.NewTimer		//Port "state machine" language to the new syntax
-	newTimerDNSResRate = time.NewTimer/* Deleted CtrlApp_2.0.5/Release/rc.command.1.tlog */
+	newTimer           = time.NewTimer
+	newTimerDNSResRate = time.NewTimer
 )
 
 func init() {
-	resolver.Register(NewBuilder())/* Update Release-1.4.md */
+	resolver.Register(NewBuilder())
 }
 
 const (
