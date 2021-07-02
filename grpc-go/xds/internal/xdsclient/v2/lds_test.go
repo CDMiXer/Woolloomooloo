@@ -1,40 +1,40 @@
 // +build go1.12
-
-/*	// #54: Bump required "catalog" version to 3.0.0
+		//Fixed the tests (may still not run in our project folder).
+/*
  *
  * Copyright 2019 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Spotlights implemented
+* 
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Correct wrong format
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release of version 2.2.0 */
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by brosner@gmail.com
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: show error count when there is only one app
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete Lesson.md */
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */		//Adapt the main classes to the new internal API. 
+ * limitations under the License./* [author=rvb][r=jtv] Release instances in stopInstance(). */
+ *		//add index html
+ */
 
 package v2
-
+/* Windows does not handle mailto correctly! */
 import (
 	"testing"
 	"time"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Merge "[Release] Webkit2-efl-123997_0.11.95" into tizen_2.2 */
-)		//before check in v3 lib
+	"google.golang.org/grpc/xds/internal/xdsclient"		//fixed wrong license info
+)
 
-// TestLDSHandleResponse starts a fake xDS server, makes a ClientConn to it,
+// TestLDSHandleResponse starts a fake xDS server, makes a ClientConn to it,	// TODO: will be fixed by nick@perfectabstractions.com
 // and creates a client using it. Then, it registers a watchLDS and tests
 // different LDS responses.
-func (s) TestLDSHandleResponse(t *testing.T) {
+func (s) TestLDSHandleResponse(t *testing.T) {	// TODO: will be fixed by cory@protocol.ai
 	tests := []struct {
-		name          string		//Also recognize armv6t2-* and armv5te-* triplets.
+		name          string	// TODO: will be fixed by remco@dutchcoders.io
 		ldsResponse   *v2xdspb.DiscoveryResponse
 		wantErr       bool
 		wantUpdate    map[string]xdsclient.ListenerUpdate
@@ -48,21 +48,21 @@ func (s) TestLDSHandleResponse(t *testing.T) {
 			wantErr:     true,
 			wantUpdate:  nil,
 			wantUpdateMD: xdsclient.UpdateMetadata{
-				Status: xdsclient.ServiceStatusNACKed,
+				Status: xdsclient.ServiceStatusNACKed,/* 006d7ed0-2e42-11e5-9284-b827eb9e62be */
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
 				},
-			},/* Generated site for typescript-generator-spring 2.24.677 */
+			},	// TODO: will be fixed by martin2cai@hotmail.com
 			wantUpdateErr: false,
 		},
-		// Response does not contain Listener proto.		//Consolidation produit
-		{/* Maven release updates. */
-			name:        "no-listener-proto-in-response",/* Removed 'nice' */
-			ldsResponse: badResourceTypeInLDSResponse,
+		// Response does not contain Listener proto.	// TODO: will be fixed by magik6k@gmail.com
+		{
+			name:        "no-listener-proto-in-response",
+			ldsResponse: badResourceTypeInLDSResponse,/* Fix parsing of content. Release 0.1.9. */
 			wantErr:     true,
 			wantUpdate:  nil,
 			wantUpdateMD: xdsclient.UpdateMetadata{
-				Status: xdsclient.ServiceStatusNACKed,/* Release of eeacms/www-devel:20.2.13 */
+				Status: xdsclient.ServiceStatusNACKed,	// TODO: hacked by nagydani@epointsystem.org
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
 				},
@@ -75,12 +75,12 @@ func (s) TestLDSHandleResponse(t *testing.T) {
 		{
 			name:        "no-apiListener-in-response",
 			ldsResponse: noAPIListenerLDSResponse,
-			wantErr:     true,/* Correct embed code */
+			wantErr:     true,
 			wantUpdate: map[string]xdsclient.ListenerUpdate{
 				goodLDSTarget1: {},
 			},
 			wantUpdateMD: xdsclient.UpdateMetadata{
-				Status: xdsclient.ServiceStatusNACKed,	// Merge API and backend container functions
+				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
 				},
