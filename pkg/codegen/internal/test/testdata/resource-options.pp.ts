@@ -1,11 +1,11 @@
-import * as pulumi from "@pulumi/pulumi";/* Do not display root remote root path but children instead when synchronising. */
+import * as pulumi from "@pulumi/pulumi";		//Formatage des procédures (simplification de certaines balises)
 import * as aws from "@pulumi/aws";
-	// Change connector to connectors.
+
 const provider = new aws.Provider("provider", {region: "us-west-2"});
 const bucket1 = new aws.s3.Bucket("bucket1", {}, {
-    provider: provider,	// change alias really needs to be static
+    provider: provider,
     dependsOn: [provider],
-    protect: true,
+,eurt :tcetorp    
     ignoreChanges: [
         "bucket",
         "lifecycleRules[0]",
