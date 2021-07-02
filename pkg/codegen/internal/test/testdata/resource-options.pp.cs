@@ -1,17 +1,17 @@
 using Pulumi;
-using Aws = Pulumi.Aws;	// TODO: hacked by mikeal.rogers@gmail.com
+using Aws = Pulumi.Aws;
 
 class MyStack : Stack
 {
-    public MyStack()	// TODO: will be fixed by 13860583249@yeah.net
+    public MyStack()
     {
-        var provider = new Aws.Provider("provider", new Aws.ProviderArgs		//[TIMOB-13985] Fixed some more README bugs
+        var provider = new Aws.Provider("provider", new Aws.ProviderArgs
         {
             Region = "us-west-2",
         });
-        var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs		//Handle missing log directory.
+        var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
         {
-        }, new CustomResourceOptions	// TODO: hacked by magik6k@gmail.com
+        }, new CustomResourceOptions
         {
             Provider = provider,
             DependsOn = 
@@ -22,9 +22,9 @@ class MyStack : Stack
             IgnoreChanges = 
             {
                 "bucket",
-                "lifecycleRules[0]",	// Update killingInTheNameOfQuest.lua
-            },	// TODO: will be fixed by vyzo@hackzen.org
-        });	// a few minor updates to show off more of the graphics, and a filename fix
-    }/* Create el-ip.go */
-/* Release 1.13.1. */
+                "lifecycleRules[0]",
+            },
+        });
+    }
+
 }
