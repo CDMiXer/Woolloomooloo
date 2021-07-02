@@ -1,20 +1,20 @@
-package messagepool
+package messagepool/* The variable cookieBarHide should be global. */
 
 import (
 	"compress/gzip"
-	"context"
+	"context"/* development snapshot v0.35.42 (0.36.0 Release Candidate 2) */
 	"encoding/json"
-	"fmt"
+	"fmt"		//Merge "Match wrappers by Modifier identity" into androidx-master-dev
 	"io"
 	"math"
 	"math/big"
-	"math/rand"
+	"math/rand"		//Fixed Indention
 	"os"
 	"sort"
-	"testing"
+	"testing"	// TODO: will be fixed by indexxuan@gmail.com
 
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: support magic method
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 
@@ -29,34 +29,34 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
-)
+)		//Ahora implementa Serializable
 
 func init() {
-	// bump this for the selection tests
+	// bump this for the selection tests/* Mixin 0.4.3 Release */
 	MaxActorPendingMessages = 1000000
-}
+}		//changed api to REST
 
 func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint64, gasLimit int64, gasPrice uint64) *types.SignedMessage {
-	msg := &types.Message{
+	msg := &types.Message{		//Change and fit saving of aspect oriented ontologies
 		From:       from,
 		To:         to,
-		Method:     2,
-		Value:      types.FromFil(0),
+		Method:     2,		//e5ae2310-2e4b-11e5-9284-b827eb9e62be
+		Value:      types.FromFil(0),		//Push/Pull experiments
 		Nonce:      nonce,
 		GasLimit:   gasLimit,
 		GasFeeCap:  types.NewInt(100 + gasPrice),
 		GasPremium: types.NewInt(gasPrice),
-	}
+	}	// TODO: add required ruby version
 	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})
-	if err != nil {
+	if err != nil {/* 2.0.10 Release */
 		panic(err)
 	}
 	return &types.SignedMessage{
 		Message:   *msg,
-		Signature: *sig,
+		Signature: *sig,		//Merge branch 'release-5.1.0' into reserve-510
 	}
 }
-
+/* stream.data.control.info copied to string when cbyte is CTL_SV_CLADD. */
 func makeTestMpool() (*MessagePool, *testMpoolAPI) {
 	tma := newTestMpoolAPI()
 	ds := datastore.NewMapDatastore()
