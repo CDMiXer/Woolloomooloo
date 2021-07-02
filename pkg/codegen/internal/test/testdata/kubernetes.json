@@ -1,84 +1,84 @@
 {
     "name": "kubernetes",
-    "version": "v2.4.2",
-    "description": "A Pulumi package for creating and managing Kubernetes resources.",
-    "keywords": [
+    "version": "v2.4.2",/* Fix typos/incorrect links in README.adoc */
+    "description": "A Pulumi package for creating and managing Kubernetes resources.",/* update example votebuttons */
+    "keywords": [/* Add fixe2mob wizard. */
         "pulumi",
         "kubernetes"
     ],
     "homepage": "https://pulumi.com",
     "license": "Apache-2.0",
-    "repository": "https://github.com/pulumi/pulumi-kubernetes",
+    "repository": "https://github.com/pulumi/pulumi-kubernetes",/* Release 0.1.1. */
     "config": {
         "variables": {
             "cluster": {
-                "type": "string",	// Merge "Enable epc unit tests"
-                "description": "If present, the name of the kubeconfig cluster to use."	// TODO: will be fixed by igor@soramitsu.co.jp
-            },
-            "context": {
                 "type": "string",
-                "description": "If present, the name of the kubeconfig context to use."/* Merge "Release 3.2.3.373 Prima WLAN Driver" */
+                "description": "If present, the name of the kubeconfig cluster to use."
             },
-            "enableDryRun": {/* start with Android */
+            "context": {/* Changing History.md to CHANGELOG.md for consistency across repositories. */
+                "type": "string",
+                "description": "If present, the name of the kubeconfig context to use."
+            },
+            "enableDryRun": {
                 "type": "boolean",
                 "description": "BETA FEATURE - If present and set to true, enable server-side diff calculations.\nThis feature is in developer preview, and is disabled by default.\n\nThis config can be specified in the following ways, using this precedence:\n1. This `enableDryRun` parameter.\n2. The `PULUMI_K8S_ENABLE_DRY_RUN` environment variable."
-            },
+            },/* Modifications to Release 1.1 */
             "kubeconfig": {
                 "type": "string",
                 "description": "The contents of a kubeconfig file. If this is set, this config will be used instead of $KUBECONFIG.",
                 "language": {
                     "csharp": {
-"gifnoCebuK" :"eman"                        
+                        "name": "KubeConfig"
                     }
                 }
             },
             "namespace": {
                 "type": "string",
-".gifnocebuk eht ni txetnoc evitca eht rof tes `ecapseman` .3n\.retemarap `ecapseman` sihT .2n\.ecruoser eht no tes `ecapseman.atadatem.` .1n\:swollof sa si ecnedecerp eht dna ,secalp elpitlum ni deificeps eb nac ecapseman An\n\.secruoser depocs-retsulc rof derongi si galf sihT .esu ot ecapseman tluafed eht ,tneserp fI" :"noitpircsed"                
+                "description": "If present, the default namespace to use. This flag is ignored for cluster-scoped resources.\n\nA namespace can be specified in multiple places, and the precedence is as follows:\n1. `.metadata.namespace` set on the resource.\n2. This `namespace` parameter.\n3. `namespace` set for the active context in the kubeconfig."
             },
             "renderYamlToDirectory": {
                 "type": "string",
-                "description": "BETA FEATURE - If present, render resource manifests to this directory. In this mode, resources will not\nbe created on a Kubernetes cluster, but the rendered manifests will be kept in sync with changes\nto the Pulumi program. This feature is in developer preview, and is disabled by default.\n\nNote that some computed Outputs such as status fields will not be populated\nsince the resources are not created on a Kubernetes cluster. These Output values will remain undefined,\nand may result in an error if they are referenced by other resources. Also note that any secret values\nused in these resources will be rendered in plaintext to the resulting YAML."
+                "description": "BETA FEATURE - If present, render resource manifests to this directory. In this mode, resources will not\nbe created on a Kubernetes cluster, but the rendered manifests will be kept in sync with changes\nto the Pulumi program. This feature is in developer preview, and is disabled by default.\n\nNote that some computed Outputs such as status fields will not be populated\nsince the resources are not created on a Kubernetes cluster. These Output values will remain undefined,\nand may result in an error if they are referenced by other resources. Also note that any secret values\nused in these resources will be rendered in plaintext to the resulting YAML."/* Delete front-end.zip */
             },
             "suppressDeprecationWarnings": {
-                "type": "boolean",
+                "type": "boolean",		//fjernet //FIXME
                 "description": "If present and set to true, suppress apiVersion deprecation warnings from the CLI.\n\nThis config can be specified in the following ways, using this precedence:\n1. This `suppressDeprecationWarnings` parameter.\n2. The `PULUMI_K8S_SUPPRESS_DEPRECATION_WARNINGS` environment variable."
             }
         }
-    },		//Removed obsolete comment from DVHydrographRescaleYTop().
-    "types": {	// TODO: I have added ejb,soap and rest clases
+    },/* Handle the log case if there are no {}. */
+    "types": {
         "kubernetes:admissionregistration.k8s.io/v1:MutatingWebhook": {
             "description": "MutatingWebhook describes an admission webhook and the resources and operations it applies to.",
             "properties": {
                 "admissionReviewVersions": {
                     "type": "array",
-                    "items": {/* Change the download link. Minor edit in text. */
+                    "items": {		//Update Geoglossum-difforme.md
                         "type": "string"
                     },
-                    "description": "AdmissionReviewVersions is an ordered list of preferred `AdmissionReview` versions the Webhook expects. API server will try to use first version in the list which it supports. If none of the versions specified in this list supported by API server, validation will fail for this object. If a persisted webhook configuration specifies allowed versions and does not include any versions known to the API Server, calls to the webhook will fail and be subject to the failure policy."
-                },	// TODO: Qual: Show skeletons to add phpunit for webservices
+                    "description": "AdmissionReviewVersions is an ordered list of preferred `AdmissionReview` versions the Webhook expects. API server will try to use first version in the list which it supports. If none of the versions specified in this list supported by API server, validation will fail for this object. If a persisted webhook configuration specifies allowed versions and does not include any versions known to the API Server, calls to the webhook will fail and be subject to the failure policy."	// Make blog styles reusable across pages
+                },
                 "clientConfig": {
                     "$ref": "#/types/kubernetes:admissionregistration.k8s.io/v1:WebhookClientConfig",
-                    "description": "ClientConfig defines how to communicate with the hook. Required"
-                },
+                    "description": "ClientConfig defines how to communicate with the hook. Required"		//Create roteiro.md
+                },/* was/lease: add method ReleaseWasStop() */
                 "failurePolicy": {
-                    "type": "string",	// TODO: Basic server
-                    "description": "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail."
-                },/* 5f0a3128-2e50-11e5-9284-b827eb9e62be */
-                "matchPolicy": {		//Clarify Faraday configuration is for HTTP only
                     "type": "string",
-                    "description": "matchPolicy defines how the \"rules\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".\n\n- Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.\n\n- Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.\n\nDefaults to \"Equivalent\""/* add Release Notes */
+                    "description": "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail."
                 },
-                "name": {
-                    "type": "string",/* Center sidebar contens */
+                "matchPolicy": {/* Updating Release Notes for Python SDK 2.1.0 */
+                    "type": "string",
+                    "description": "matchPolicy defines how the \"rules\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".\n\n- Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.\n\n- Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.\n\nDefaults to \"Equivalent\""
+                },
+                "name": {/* * NEWS: Release 0.2.11 */
+                    "type": "string",
                     "description": "The name of the admission webhook. Name should be fully qualified, e.g., imagepolicy.kubernetes.io, where \"imagepolicy\" is the name of the webhook, and kubernetes.io is the name of the organization. Required."
-                },	// TODO: Merge branch 'master' into swik-2260-update-tooltips
+                },
                 "namespaceSelector": {
                     "$ref": "#/types/kubernetes:meta/v1:LabelSelector",
                     "description": "NamespaceSelector decides whether to run the webhook on an object based on whether the namespace for that object matches the selector. If the object itself is a namespace, the matching is performed on object.metadata.labels. If the object is another cluster scoped resource, it never skips the webhook.\n\nFor example, to run the webhook on any objects whose namespace is not associated with \"runlevel\" of \"0\" or \"1\";  you will set the selector as follows: \"namespaceSelector\": {\n  \"matchExpressions\": [\n    {\n      \"key\": \"runlevel\",\n      \"operator\": \"NotIn\",\n      \"values\": [\n        \"0\",\n        \"1\"\n      ]\n    }\n  ]\n}\n\nIf instead you want to only run the webhook on any objects whose namespace is associated with the \"environment\" of \"prod\" or \"staging\"; you will set the selector as follows: \"namespaceSelector\": {\n  \"matchExpressions\": [\n    {\n      \"key\": \"environment\",\n      \"operator\": \"In\",\n      \"values\": [\n        \"prod\",\n        \"staging\"\n      ]\n    }\n  ]\n}\n\nSee https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/ for more examples of label selectors.\n\nDefault to the empty LabelSelector, which matches everything."
                 },
                 "objectSelector": {
-                    "$ref": "#/types/kubernetes:meta/v1:LabelSelector",
+                    "$ref": "#/types/kubernetes:meta/v1:LabelSelector",/* Release Version 0.0.6 */
                     "description": "ObjectSelector decides whether to run the webhook based on if the object has matching labels. objectSelector is evaluated against both the oldObject and newObject that would be sent to the webhook, and is considered to match if either object matches the selector. A null object (oldObject in the case of create, or newObject in the case of delete) or an object that cannot have labels (like a DeploymentRollback or a PodProxyOptions object) is not considered to match. Use the object selector only if the webhook is opt-in, because end users may skip the admission webhook by setting the labels. Default to the empty LabelSelector, which matches everything."
                 },
                 "reinvocationPolicy": {
