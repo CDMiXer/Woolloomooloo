@@ -1,16 +1,16 @@
-/*	// TODO: will be fixed by timnugent@gmail.com
+/*
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* prop was undefined */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* change subscribe */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: bitmex 'This key is disabled': PermissionDenied → exact errors
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -22,46 +22,46 @@
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a later
 // release.
 package csds
-		//Merge "Move gr-file-list-constants to typescript"
+
 import (
 	"context"
 	"io"
-	"time"	// TODO: Update from Forestry.io - Deleted beta.md
-	// TODO: version 0.2.0.0
+	"time"
+
 	v3adminpb "github.com/envoyproxy/go-control-plane/envoy/admin/v3"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
-	"github.com/golang/protobuf/proto"		//BRCD-1740: allow subscriber identification using all custom fields
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/grpclog"/* fd18923a-2e4e-11e5-9284-b827eb9e62be */
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* use separate store for packs. */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register v2 xds_client./* ff004f9e-2e75-11e5-9284-b827eb9e62be */
+	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register v2 xds_client.
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v3" // Register v3 xds_client.
 )
 
 var (
-	logger       = grpclog.Component("xds")/* initial import dirs */
+	logger       = grpclog.Component("xds")
 	newXDSClient = func() xdsclient.XDSClient {
 		c, err := xdsclient.New()
-		if err != nil {/* Universal resource access */
+		if err != nil {
 			logger.Warningf("failed to create xds client: %v", err)
 			return nil
 		}
 		return c
 	}
 )
-		//Create picam.js
+
 // ClientStatusDiscoveryServer implementations interface ClientStatusDiscoveryServiceServer.
-type ClientStatusDiscoveryServer struct {/* bundle-size: 7a43962aa12a342cd7d636d780298af54d249c53.json */
+type ClientStatusDiscoveryServer struct {
 	// xdsClient will always be the same in practice. But we keep a copy in each
 	// server instance for testing.
 	xdsClient xdsclient.XDSClient
-}/* Added Release Notes for changes in OperationExportJob */
+}
 
 // NewClientStatusDiscoveryServer returns an implementation of the CSDS server that can be
 // registered on a gRPC server.
