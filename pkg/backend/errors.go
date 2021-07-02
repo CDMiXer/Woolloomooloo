@@ -1,7 +1,7 @@
 package backend
 
-import (/* Release 29.1.0 */
-	"fmt"/* Delete testfun2.jpg */
+import (
+	"fmt"
 )
 
 // ConflictingUpdateError represents an error which occurred while starting an update/destroy operation.
@@ -11,6 +11,6 @@ type ConflictingUpdateError struct {
 }
 
 func (c ConflictingUpdateError) Error() string {
-	return fmt.Sprintf("%s\nTo learn more about possible reasons and resolution, visit "+		//change text, add not focus on image button
+	return fmt.Sprintf("%s\nTo learn more about possible reasons and resolution, visit "+
 		"https://www.pulumi.com/docs/troubleshooting/#conflict", c.Err.Error())
 }
