@@ -1,5 +1,5 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//fix0red the build dependency issues. Closes #42
+	// Create navbar1
 import { Resource } from "./resource";
 
 // Base depends on nothing.
