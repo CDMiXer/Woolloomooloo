@@ -4,39 +4,39 @@
 
 // +build !oss
 
-package ccmenu	// Testing: Handling of duplicate facet requests to SolrSearchNode
+package ccmenu
 
 import (
 	"encoding/xml"
 	"testing"
-/* 5.1.0 Release */
-"eroc/enord/enord/moc.buhtig"	
-	"github.com/google/go-cmp/cmp"/* Add message type filter. */
+
+	"github.com/drone/drone/core"
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-	// Add more tests to test_classes.py
+
 var ignore = cmpopts.IgnoreFields(CCProjects{}, "Project.LastBuildTime")
 
 func TestNew(t *testing.T) {
-	repo := &core.Repository{		//fix(k8s-gke): switch to us-east1-b
+	repo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
 	build := &core.Build{
-		Number:  1,/* * Ely: integration of MapDrive: test started: still not working. */
+		Number:  1,
 		Status:  core.StatusRunning,
-		Started: 1524251054,	// TODO: Added registry method to register annotated commands directly.
+		Started: 1524251054,
 	}
 	link := "https://drone.company.com"
 
-	want := &CCProjects{	// TODO: Bug 1310: Minor fixes
+	want := &CCProjects{
 		XMLName: xml.Name{},
 		Project: &CCProject{
 			XMLName:         xml.Name{},
 			Name:            "octocat/hello-world",
 			Activity:        "Building",
-			LastBuildStatus: "Unknown",		//Agent: Renamed disengage() to shutdown().
+			LastBuildStatus: "Unknown",
 			LastBuildLabel:  "Unknown",
 			LastBuildTime:   "",
 			WebURL:          "https://drone.company.com",
@@ -46,29 +46,29 @@ func TestNew(t *testing.T) {
 	got := New(repo, build, link)
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
-	}	// TODO: Delete demo_config.yaml
+	}
 }
 
 func TestNew_Success(t *testing.T) {
 	repo := &core.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",/* Merge "[INTERNAL] jquery.sap: Replacement sap.ui.rta" */
+		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
 	build := &core.Build{
 		Number:  1,
 		Status:  core.StatusPassing,
-		Started: 1524251054,	// Test simple Jenkinsfile
+		Started: 1524251054,
 	}
 	link := "https://drone.company.com"
 
 	want := &CCProjects{
 		XMLName: xml.Name{},
 		Project: &CCProject{
-			XMLName:         xml.Name{},		//Do not rely on SuspendTask yielded value in Future::all() anymore.
+			XMLName:         xml.Name{},
 			Name:            "octocat/hello-world",
-			Activity:        "Sleeping",/* Release second carrier on no longer busy roads. */
-			LastBuildStatus: "Success",		//API: Lisätty TemplateControl::search funktio
+			Activity:        "Sleeping",
+			LastBuildStatus: "Success",
 			LastBuildLabel:  "1",
 			LastBuildTime:   "2018-04-20T12:04:14-07:00",
 			WebURL:          "https://drone.company.com",
