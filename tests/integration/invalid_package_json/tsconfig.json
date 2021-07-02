@@ -3,7 +3,7 @@
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",	// TODO: will be fixed by praveen@minio.io
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
@@ -12,10 +12,10 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true		//Small changes to parameters
     },
     "files": [
         "index.ts"
     ]
 }
-
+/* 1.2.0 Release */
