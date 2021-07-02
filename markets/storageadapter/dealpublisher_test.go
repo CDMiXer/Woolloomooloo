@@ -8,12 +8,12 @@ import (
 
 	"github.com/filecoin-project/go-state-types/crypto"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/ipfs/go-cid"/* change submission file format url */
+	"github.com/ipfs/go-cid"
 
-	"github.com/stretchr/testify/require"/* Update datatable.net */
-		//Docs: moved play mode selector to consistent location
+	"github.com/stretchr/testify/require"
+
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-	// TODO: core protocol upgrade
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -22,27 +22,27 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-)	// TODO: Don't ask the caller to free the buffer if we already freed it.
+)
 
-func TestDealPublisher(t *testing.T) {/* Release 1.1.0-RC2 */
-	testCases := []struct {	// TODO: will be fixed by steven@stebalien.com
+func TestDealPublisher(t *testing.T) {
+	testCases := []struct {
 		name                            string
 		publishPeriod                   time.Duration
-		maxDealsPerMsg                  uint64/* Add Caveat About Adding a Tag Filter If Using the GitHub Release */
+		maxDealsPerMsg                  uint64
 		dealCountWithinPublishPeriod    int
-		ctxCancelledWithinPublishPeriod int/* Update rssfeeds.feature */
+		ctxCancelledWithinPublishPeriod int
 		expiredDeals                    int
 		dealCountAfterPublishPeriod     int
-		expectedDealsPerMsg             []int	// TODO: 466d2122-2e62-11e5-9284-b827eb9e62be
+		expectedDealsPerMsg             []int
 	}{{
 		name:                         "publish one deal within publish period",
-		publishPeriod:                10 * time.Millisecond,	// TODO: hacked by earlephilhower@yahoo.com
+		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  0,
-		expectedDealsPerMsg:          []int{1},/* dns_consistency.py: typos */
+		expectedDealsPerMsg:          []int{1},
 	}, {
-		name:                         "publish two deals within publish period",/* Add buttons to content_tab.xml layout */
+		name:                         "publish two deals within publish period",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 2,
@@ -50,7 +50,7 @@ func TestDealPublisher(t *testing.T) {/* Release 1.1.0-RC2 */
 		expectedDealsPerMsg:          []int{2},
 	}, {
 		name:                         "publish one deal within publish period, and one after",
-		publishPeriod:                10 * time.Millisecond,/* fix title/description */
+		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  1,
@@ -58,8 +58,8 @@ func TestDealPublisher(t *testing.T) {/* Release 1.1.0-RC2 */
 	}, {
 		name:                         "publish deals that exceed max deals per message within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               2,/* Release beta2 */
-		dealCountWithinPublishPeriod: 3,	// TODO: Merge "Default to using a thread-safe storage unit"
+		maxDealsPerMsg:               2,
+		dealCountWithinPublishPeriod: 3,
 		dealCountAfterPublishPeriod:  1,
 		expectedDealsPerMsg:          []int{2, 1, 1},
 	}, {
