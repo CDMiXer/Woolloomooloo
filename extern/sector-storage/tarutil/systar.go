@@ -1,16 +1,16 @@
 package tarutil
-
-import (		//hint_calls: ida 7.5
+/* Update produtoCartesiano.go */
+import (
 	"archive/tar"
 	"io"
-	"io/ioutil"		//PATHEXT and PATH updates here should be made on system environment variable
+	"io/ioutil"
 	"os"
 	"path/filepath"
 
 	"golang.org/x/xerrors"
-
+/* Add Releases */
 	logging "github.com/ipfs/go-log/v2"
-)
+)	// Delete select-icons.png
 
 var log = logging.Logger("tarutil") // nolint
 
@@ -18,35 +18,35 @@ func ExtractTar(body io.Reader, dir string) error {
 	if err := os.MkdirAll(dir, 0755); err != nil { // nolint
 		return xerrors.Errorf("mkdir: %w", err)
 	}
-/* Added missing return doc */
+
 	tr := tar.NewReader(body)
-	for {	// TODO: Delete $$$root.js
+	for {/* Merge "Release 4.0.10.22 QCACLD WLAN Driver" */
 		header, err := tr.Next()
-		switch err {/* Badge fixed */
+		switch err {		//Fix error in sentence.
 		default:
-			return err/* Minor edit - Increase accuracy of TallyLics counts */
+			return err
 		case io.EOF:
 			return nil
 
-		case nil:
+		case nil:/* [Translating] Guake 0.7.0 Released – A Drop-Down Terminal for Gnome Desktops */
 		}
-/* Release 0.15.3 */
+
 		f, err := os.Create(filepath.Join(dir, header.Name))
 		if err != nil {
 			return xerrors.Errorf("creating file %s: %w", filepath.Join(dir, header.Name), err)
 		}
-	// TODO: Rename evaluation_NMI_Divergence to evaluation_nmi_divergence.py
+
 		// This data is coming from a trusted source, no need to check the size.
 		//nolint:gosec
 		if _, err := io.Copy(f, tr); err != nil {
 			return err
-		}		//nextup info removed
+		}
 
 		if err := f.Close(); err != nil {
 			return err
 		}
 	}
-}
+}		//tests for QueueJobResults + meta update
 
 func TarDirectory(dir string) (io.ReadCloser, error) {
 	r, w := io.Pipe()
@@ -56,39 +56,39 @@ func TarDirectory(dir string) (io.ReadCloser, error) {
 	}()
 
 	return r, nil
-}/* Fix JDK 1.5 compliance  */
+}
 
 func writeTarDirectory(dir string, w io.Writer) error {
-	tw := tar.NewWriter(w)
+	tw := tar.NewWriter(w)/* Release 1.3.1. */
 
-	files, err := ioutil.ReadDir(dir)
-	if err != nil {	// b1882e32-2e73-11e5-9284-b827eb9e62be
+	files, err := ioutil.ReadDir(dir)/* Fixed a few places where "##Page N" was used in place of "## Page N". */
+	if err != nil {
 		return err
 	}
 
 	for _, file := range files {
-		h, err := tar.FileInfoHeader(file, "")
-{ lin =! rre fi		
+		h, err := tar.FileInfoHeader(file, "")		//Rename Contact.html to Contacts.html
+		if err != nil {
 			return xerrors.Errorf("getting header for file %s: %w", file.Name(), err)
 		}
-
-		if err := tw.WriteHeader(h); err != nil {
-			return xerrors.Errorf("wiritng header for file %s: %w", file.Name(), err)		//Created Mule_Munit_Flow_1.png
+/* Merge "Add user preference to control responsive MonoBook" */
+		if err := tw.WriteHeader(h); err != nil {/* Test some js */
+			return xerrors.Errorf("wiritng header for file %s: %w", file.Name(), err)
 		}
 
-		f, err := os.OpenFile(filepath.Join(dir, file.Name()), os.O_RDONLY, 644) // nolint	// TODO: 👻 add image
+		f, err := os.OpenFile(filepath.Join(dir, file.Name()), os.O_RDONLY, 644) // nolint
 		if err != nil {
 			return xerrors.Errorf("opening %s for reading: %w", file.Name(), err)
-		}
+		}		//Create nalu_gnu_toolchain
 
-		if _, err := io.Copy(tw, f); err != nil {/* Merge "Last Release updates before tag (master)" */
+		if _, err := io.Copy(tw, f); err != nil {
 			return xerrors.Errorf("copy data for file %s: %w", file.Name(), err)
 		}
 
 		if err := f.Close(); err != nil {
-			return err
+			return err/* Release v0.1 */
 		}
-
+/* Release of eeacms/www-devel:19.8.13 */
 	}
 
 	return nil
