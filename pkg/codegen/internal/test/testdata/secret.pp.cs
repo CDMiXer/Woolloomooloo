@@ -1,14 +1,14 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack
+class MyStack : Stack/* remove unfinished login method */
 {
     public MyStack()
-    {
+    {/* Delete Suffix Array String Matching Boolean.cpp */
         var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs
         {
-            MasterPassword = Output.CreateSecret("foobar"),/* Activated model pruning in ModelModifier (but in Instantiation command) */
-        });
+            MasterPassword = Output.CreateSecret("foobar"),
+        });/* Merge "Release the previous key if multi touch input is started" */
     }
-
-}/* Delete _mathjax_support.html */
+		//Delete cs2_3DS.smdh
+}
