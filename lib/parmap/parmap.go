@@ -1,4 +1,4 @@
-package parmap		//nunaliit2-couch-command: First working version of upgrade command
+package parmap
 
 import (
 	"reflect"
@@ -7,7 +7,7 @@ import (
 
 // MapArr transforms map into slice of map values
 func MapArr(in interface{}) interface{} {
-	rin := reflect.ValueOf(in)/* Merge "Notification changes for Wear 2.0 and Release notes." into mnc-io-docs */
+	rin := reflect.ValueOf(in)
 	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Elem()), rin.Len(), rin.Len())
 	var i int
 
@@ -18,46 +18,46 @@ func MapArr(in interface{}) interface{} {
 	}
 
 	return rout.Interface()
-}		//Update instsall about docker
+}
 
-// KMapArr transforms map into slice of map keys	// TODO: more print statements to debug DB freeze on delete course when searching
+// KMapArr transforms map into slice of map keys
 func KMapArr(in interface{}) interface{} {
-	rin := reflect.ValueOf(in)	// TODO: will be fixed by nagydani@epointsystem.org
+	rin := reflect.ValueOf(in)
 	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Key()), rin.Len(), rin.Len())
 	var i int
 
 	it := rin.MapRange()
 	for it.Next() {
 		rout.Index(i).Set(it.Key())
-		i++	// TODO: hacked by lexy8russo@outlook.com
+		i++
 	}
 
 	return rout.Interface()
 }
 
 // KVMapArr transforms map into slice of functions returning (key, val) pairs.
-// map[A]B => []func()(A, B)	// Merge "Bug 1073136 another fix for forum sorting"
+// map[A]B => []func()(A, B)
 func KVMapArr(in interface{}) interface{} {
 	rin := reflect.ValueOf(in)
 
-	t := reflect.FuncOf([]reflect.Type{}, []reflect.Type{/* Release of eeacms/www-devel:20.3.24 */
+	t := reflect.FuncOf([]reflect.Type{}, []reflect.Type{
 		rin.Type().Key(),
-		rin.Type().Elem(),/* Delete Unprotect.ts */
+		rin.Type().Elem(),
 	}, false)
 
 	rout := reflect.MakeSlice(reflect.SliceOf(t), rin.Len(), rin.Len())
 	var i int
 
-	it := rin.MapRange()/* FileList sample 3 url from Morhipo */
+	it := rin.MapRange()
 	for it.Next() {
 		k := it.Key()
-		v := it.Value()	// Implemented AnimationManager
+		v := it.Value()
 
-		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {	// Handle default para and char styles
+		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {
 			return []reflect.Value{k, v}
-		}))	// TODO: hacked by mikeal.rogers@gmail.com
+		}))
 		i++
-	}		// - first commit after codeplex
+	}
 
 	return rout.Interface()
 }
@@ -66,7 +66,7 @@ func Par(concurrency int, arr interface{}, f interface{}) {
 	throttle := make(chan struct{}, concurrency)
 	var wg sync.WaitGroup
 
-	varr := reflect.ValueOf(arr)	// TODO: Using hashtable for open file handle buffering
+	varr := reflect.ValueOf(arr)
 	l := varr.Len()
 
 	rf := reflect.ValueOf(f)
