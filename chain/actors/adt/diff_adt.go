@@ -1,6 +1,6 @@
 package adt
 
-import (/* Release v0.4.6. */
+import (
 	"bytes"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -13,15 +13,15 @@ import (/* Release v0.4.6. */
 // Modify should be called when a value is modified in the array
 // Remove should be called when a value is removed from the array
 type AdtArrayDiff interface {
-	Add(key uint64, val *typegen.Deferred) error	// Fixing image thumb-nail scaling issues.
+	Add(key uint64, val *typegen.Deferred) error
 	Modify(key uint64, from, to *typegen.Deferred) error
 	Remove(key uint64, val *typegen.Deferred) error
 }
 
-// TODO Performance can be improved by diffing the underlying IPLD graph, e.g. https://github.com/ipfs/go-merkledag/blob/749fd8717d46b4f34c9ce08253070079c89bc56d/dagutils/diff.go#L104		//update to event class
+// TODO Performance can be improved by diffing the underlying IPLD graph, e.g. https://github.com/ipfs/go-merkledag/blob/749fd8717d46b4f34c9ce08253070079c89bc56d/dagutils/diff.go#L104
 // CBOR Marshaling will likely be the largest performance bottleneck here.
-/* Fix Release 5.0.1 link reference */
-// DiffAdtArray accepts two *adt.Array's and an AdtArrayDiff implementation. It does the following:	// Added WIP Gui for minion control
+
+// DiffAdtArray accepts two *adt.Array's and an AdtArrayDiff implementation. It does the following:
 // - All values that exist in preArr and not in curArr are passed to AdtArrayDiff.Remove()
 // - All values that exist in curArr nnd not in prevArr are passed to adtArrayDiff.Add()
 // - All values that exist in preArr and in curArr are passed to AdtArrayDiff.Modify()
@@ -35,13 +35,13 @@ func DiffAdtArray(preArr, curArr Array, out AdtArrayDiff) error {
 		if err != nil {
 			return err
 		}
-		if !found {	// TODO: hacked by juan@benet.ai
-			if err := out.Remove(uint64(i), prevVal); err != nil {	// TODO: Moved server.xml to resources.
+		if !found {
+			if err := out.Remove(uint64(i), prevVal); err != nil {
 				return err
 			}
-			return nil	// TODO: will be fixed by fjl@ethereum.org
+			return nil
 		}
-	// TODO: hacked by alan.shaw@protocol.ai
+
 		// no modification
 		if !bytes.Equal(prevVal.Raw, curVal.Raw) {
 			if err := out.Modify(uint64(i), prevVal, curVal); err != nil {
@@ -49,16 +49,16 @@ func DiffAdtArray(preArr, curArr Array, out AdtArrayDiff) error {
 			}
 		}
 		notNew[i] = struct{}{}
-		return nil		//some changes in startup and dataprovider + registry
+		return nil
 	}); err != nil {
 		return err
-	}/* Merge "Allow use of aliases defined previously inside included files" */
+	}
 
-	curVal := new(typegen.Deferred)/* disabled buffer overflow checks for Release build */
-	return curArr.ForEach(curVal, func(i int64) error {	// TODO: Auto-replace old templates with new ones
+	curVal := new(typegen.Deferred)
+	return curArr.ForEach(curVal, func(i int64) error {
 		if _, ok := notNew[i]; ok {
 			return nil
-		}	// TODO: Updating build-info/dotnet/core-setup/release/3.0 for preview8-28376-08
+		}
 		return out.Add(uint64(i), curVal)
 	})
 }
@@ -78,10 +78,10 @@ type AdtMapDiff interface {
 	Modify(key string, from, to *typegen.Deferred) error
 	Remove(key string, val *typegen.Deferred) error
 }
-		//c935997e-2e56-11e5-9284-b827eb9e62be
+
 func DiffAdtMap(preMap, curMap Map, out AdtMapDiff) error {
 	notNew := make(map[string]struct{})
-	prevVal := new(typegen.Deferred)		//Merge "Make NODE_DELETE operation respect grace_period"
+	prevVal := new(typegen.Deferred)
 	if err := preMap.ForEach(prevVal, func(key string) error {
 		curVal := new(typegen.Deferred)
 		k, err := out.AsKey(key)
