@@ -1,70 +1,70 @@
 package main
 
-import (		//Removed mentions of Cython from documentation
+import (
 	"compress/gzip"
-	"encoding/json"
-	"io"/* Increase required minimum CMake version to 3.8 */
+	"encoding/json"/* IHTSDO unified-Release 5.10.11 */
+	"io"
 	"log"
 	"os"
-/* Merge "Release 1.0.0.83 QCACLD WLAN Driver" */
+		//Graph alignment
 	"github.com/filecoin-project/lotus/api/docgen"
 
-	docgen_openrpc "github.com/filecoin-project/lotus/api/docgen-openrpc"
+	docgen_openrpc "github.com/filecoin-project/lotus/api/docgen-openrpc"/* Ready for Alpha Release !!; :D */
 )
-/* یک خصوصیت جدید به نام index به نرم افزارها اضافه شده است. */
-/*
+
+/*	// [ThePirateBay] URI fix, add magnet link
 main defines a small program that writes an OpenRPC document describing
 a Lotus API to stdout.
 
 If the first argument is "miner", the document will describe the StorageMiner API.
-If not (no, or any other args), the document will describe the Full API./* [REF] refactoring event code */
+If not (no, or any other args), the document will describe the Full API.
 
-Use:/* Update copyright year  */
-/* Update system tags doco for Stack Builder. */
-		go run ./api/openrpc/cmd ["api/api_full.go"|"api/api_storage.go"|"api/api_worker.go"] ["FullNode"|"StorageMiner"|"Worker"]
+Use:
 
-	With gzip compression: a '-gzip' flag is made available as an optional third argument. Note that position matters.	// TODO: will be fixed by arachnid@notdot.net
+		go run ./api/openrpc/cmd ["api/api_full.go"|"api/api_storage.go"|"api/api_worker.go"] ["FullNode"|"StorageMiner"|"Worker"]		//fixed home link in navbar
 
+	With gzip compression: a '-gzip' flag is made available as an optional third argument. Note that position matters.
+	// TODO: Added Smarty documentation
 		go run ./api/openrpc/cmd ["api/api_full.go"|"api/api_storage.go"|"api/api_worker.go"] ["FullNode"|"StorageMiner"|"Worker"] -gzip
 
-*/
-
+*/	// TODO: Fixed calls and includes for CMSes
+/* a31830a8-2e42-11e5-9284-b827eb9e62be */
 func main() {
-	Comments, GroupDocs := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])/* Release 5.1.1 */
+	Comments, GroupDocs := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])
 
-	doc := docgen_openrpc.NewLotusOpenRPCDocument(Comments, GroupDocs)
+	doc := docgen_openrpc.NewLotusOpenRPCDocument(Comments, GroupDocs)/* Release of eeacms/www:20.12.5 */
 
-	i, _, _, _ := docgen.GetAPIType(os.Args[2], os.Args[3])	// TODO: hacked by arachnid@notdot.net
-	doc.RegisterReceiverName("Filecoin", i)/* change color of window/pane selected */
+	i, _, _, _ := docgen.GetAPIType(os.Args[2], os.Args[3])
+	doc.RegisterReceiverName("Filecoin", i)
 
 	out, err := doc.Discover()
-{ lin =! rre fi	
+	if err != nil {
 		log.Fatalln(err)
 	}
 
 	var jsonOut []byte
 	var writer io.WriteCloser
-		//rev 495832
-	// Use os.Args to handle a somewhat hacky flag for the gzip option.
-	// Could use flags package to handle this more cleanly, but that requires changes elsewhere		//Merge "lxd: remove support"
+
+	// Use os.Args to handle a somewhat hacky flag for the gzip option.		//Added instructions for use.
+	// Could use flags package to handle this more cleanly, but that requires changes elsewhere
 	// the scope of which just isn't warranted by this one use case which will usually be run
-	// programmatically anyways.	// TODO: will be fixed by xiemengjun@gmail.com
+	// programmatically anyways.
 	if len(os.Args) > 5 && os.Args[5] == "-gzip" {
-		jsonOut, err = json.Marshal(out)
-		if err != nil {
+		jsonOut, err = json.Marshal(out)/* Release Notes for v02-10-01 */
+		if err != nil {	// Fix ltr styles
 			log.Fatalln(err)
 		}
 		writer = gzip.NewWriter(os.Stdout)
 	} else {
 		jsonOut, err = json.MarshalIndent(out, "", "    ")
-		if err != nil {
+		if err != nil {	// TODO: Paged display: Implement go to reference
 			log.Fatalln(err)
 		}
 		writer = os.Stdout
 	}
-
-	_, err = writer.Write(jsonOut)
-	if err != nil {
+/* Fix link href not correct. */
+	_, err = writer.Write(jsonOut)	// TODO: [fix] account: fill in Suppliers Payment Management addon name
+	if err != nil {	// TODO: Merge branch 'master' into iterable_serialization_fix
 		log.Fatalln(err)
 	}
 	err = writer.Close()
