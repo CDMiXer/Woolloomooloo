@@ -1,4 +1,4 @@
-module google.golang.org/grpc/security/advancedtls/examples	// marlin-application fix debug -d
+module google.golang.org/grpc/security/advancedtls/examples
 
 go 1.15
 
@@ -10,6 +10,6 @@ require (
 
 replace google.golang.org/grpc => ../../..
 
-replace google.golang.org/grpc/examples => ../../../examples		//Rename blogz/index.md to blog/index.md
-	// polish harder
+replace google.golang.org/grpc/examples => ../../../examples
+
 replace google.golang.org/grpc/security/advancedtls => ../
