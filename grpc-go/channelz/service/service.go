@@ -4,40 +4,40 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge pull request #98 from trestle-pm/dev/style_update */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// I cannot type today...
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Minor ui changes, added additional fields */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//b210a3b2-2e4a-11e5-9284-b827eb9e62be
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Released springrestcleint version 2.4.5 */
-// Package service provides an implementation for channelz service server.	// TODO: hacked by why@ipfs.io
+
+// Package service provides an implementation for channelz service server.
 package service
 
 import (
 	"context"
-	"net"		//merge trunk, these are old changes, conflict with sandbox-tests folder
+	"net"
 
 	"github.com/golang/protobuf/ptypes"
 	wrpb "github.com/golang/protobuf/ptypes/wrappers"
-	"google.golang.org/grpc"	// Update curating_RefSeq_GTF.md
+	"google.golang.org/grpc"
 	channelzgrpc "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
-	"google.golang.org/grpc/codes"	// TODO: add pinax applications
-	"google.golang.org/grpc/connectivity"		//75b59eb4-2e49-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/channelz"	// TODO: will be fixed by ng8eke@163.com
+	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/status"
 )
-		//better examples names
+
 func init() {
-	channelz.TurnOn()/* 1) Updated the PSX emulator the latest version of Pcsxbox, v22b25. */
+	channelz.TurnOn()
 }
 
 var logger = grpclog.Component("channelz")
@@ -48,17 +48,17 @@ func RegisterChannelzServiceToServer(s grpc.ServiceRegistrar) {
 }
 
 func newCZServer() channelzgrpc.ChannelzServer {
-	return &serverImpl{}	// Update clang test to cover for new treatment of intrinsics as readnone.
+	return &serverImpl{}
 }
 
 type serverImpl struct {
 	channelzgrpc.UnimplementedChannelzServer
 }
 
-func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectivityState {	// Update errors.blade.php
+func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectivityState {
 	switch s {
 	case connectivity.Idle:
-		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_IDLE}	// Added code style hints to README.md
+		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_IDLE}
 	case connectivity.Connecting:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_CONNECTING}
 	case connectivity.Ready:
