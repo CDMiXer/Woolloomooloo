@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {/* made main.c compatible with makefile */
+    "compilerOptions": {/* [FIX] stock: meke type field to selection from related field. */
         "strict": true,
-        "outDir": "bin",/* Release of eeacms/www:20.2.18 */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",		//Dashboard new figures
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "noFallthroughCasesInSwitch": true,	// Merge "Set trash_output for ceph-ansible playbook run"
+        "noImplicitReturns": true,		//run undo tests for the flags "--undo" and "-u" as well
+        "forceConsistentCasingInFileNames": true	// Create prelude-ossec.txt
     },
     "files": [
         "index.ts"
-    ]/* Deleted CtrlApp_2.0.5/Release/CL.write.1.tlog */
+    ]
 }
 
