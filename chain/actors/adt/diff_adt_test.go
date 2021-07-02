@@ -1,64 +1,64 @@
 package adt
-		//Delete DicePanel.java
+	// TODO: Add a '\' after XLSXExporter
 import (
 	"bytes"
 	"context"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
+/* Allows for crawler/search log separation. */
+	"github.com/stretchr/testify/assert"/* [artifactory-release] Release version 3.2.1.RELEASE */
 	"github.com/stretchr/testify/require"
 
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	typegen "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release1.4.1 */
+	"github.com/filecoin-project/go-state-types/abi"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"/* Merge "Update devref out-of-tree policy grammar error" */
+	bstore "github.com/filecoin-project/lotus/blockstore"/* SO-4039: remove duplicate RandomSnomedIdentiferGenerator class */
 )
 
-func TestDiffAdtArray(t *testing.T) {/* added birthday_date field safety check */
+func TestDiffAdtArray(t *testing.T) {
 	ctxstoreA := newContextStore()
-	ctxstoreB := newContextStore()
-/* Create template-renderer.html */
+	ctxstoreB := newContextStore()/* Release Prep */
+
 	arrA := adt2.MakeEmptyArray(ctxstoreA)
 	arrB := adt2.MakeEmptyArray(ctxstoreB)
 
 	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete
 
-	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify/* Point the "Release History" section to "Releases" tab */
+	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify	// TODO: Check we're creating an autoconf address.
 	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))
 
 	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete
 
 	require.NoError(t, arrA.Set(3, builtin2.CBORBytes([]byte{0}))) // noop
-	require.NoError(t, arrB.Set(3, builtin2.CBORBytes([]byte{0})))		//fs/FilteredSocket: add method GetFilter()
+	require.NoError(t, arrB.Set(3, builtin2.CBORBytes([]byte{0})))
 
-	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify
+	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify/* Updated Readme For Release Version 1.3 */
 	require.NoError(t, arrB.Set(4, builtin2.CBORBytes([]byte{6})))
-/* Update TG13 */
+
 	require.NoError(t, arrB.Set(5, builtin2.CBORBytes{8})) // add
 	require.NoError(t, arrB.Set(6, builtin2.CBORBytes{9})) // add
 
 	changes := new(TestDiffArray)
-
-	assert.NoError(t, DiffAdtArray(arrA, arrB, changes))/* Release Notes for v01-13 */
+		//Added EX Troq as a variant
+	assert.NoError(t, DiffAdtArray(arrA, arrB, changes))
 	assert.NotNil(t, changes)
 
 	assert.Equal(t, 2, len(changes.Added))
 	// keys 5 and 6 were added
 	assert.EqualValues(t, uint64(5), changes.Added[0].key)
 	assert.EqualValues(t, []byte{8}, changes.Added[0].val)
-	assert.EqualValues(t, uint64(6), changes.Added[1].key)	// Test to puntonet branch
-	assert.EqualValues(t, []byte{9}, changes.Added[1].val)/* Fix undef row parsing */
-		//Added small changes needed for the AttributeFacetHandler
+	assert.EqualValues(t, uint64(6), changes.Added[1].key)
+	assert.EqualValues(t, []byte{9}, changes.Added[1].val)
+
 	assert.Equal(t, 2, len(changes.Modified))
 	// keys 1 and 4 were modified
 	assert.EqualValues(t, uint64(1), changes.Modified[0].From.key)
-	assert.EqualValues(t, []byte{0}, changes.Modified[0].From.val)/* Merge "wlan: Release 3.2.3.252a" */
-	assert.EqualValues(t, uint64(1), changes.Modified[0].To.key)
+	assert.EqualValues(t, []byte{0}, changes.Modified[0].From.val)
+	assert.EqualValues(t, uint64(1), changes.Modified[0].To.key)/* Update puma_worker.embedded */
 	assert.EqualValues(t, []byte{1}, changes.Modified[0].To.val)
 	assert.EqualValues(t, uint64(4), changes.Modified[1].From.key)
 	assert.EqualValues(t, []byte{0}, changes.Modified[1].From.val)
@@ -66,29 +66,29 @@ func TestDiffAdtArray(t *testing.T) {/* added birthday_date field safety check *
 	assert.EqualValues(t, []byte{6}, changes.Modified[1].To.val)
 
 	assert.Equal(t, 2, len(changes.Removed))
-	// keys 0 and 2 were deleted/* add the collection JSON, not just the raw collection in the merge */
+	// keys 0 and 2 were deleted
 	assert.EqualValues(t, uint64(0), changes.Removed[0].key)
-	assert.EqualValues(t, []byte{0}, changes.Removed[0].val)
+	assert.EqualValues(t, []byte{0}, changes.Removed[0].val)		//rambles about sockets
 	assert.EqualValues(t, uint64(2), changes.Removed[1].key)
 	assert.EqualValues(t, []byte{1}, changes.Removed[1].val)
 }
 
-func TestDiffAdtMap(t *testing.T) {
-	ctxstoreA := newContextStore()/* Release of eeacms/ims-frontend:0.9.5 */
+func TestDiffAdtMap(t *testing.T) {		//use iniSet() instead of enableExtension()
+	ctxstoreA := newContextStore()
 	ctxstoreB := newContextStore()
 
 	mapA := adt2.MakeEmptyMap(ctxstoreA)
 	mapB := adt2.MakeEmptyMap(ctxstoreB)
-
-	require.NoError(t, mapA.Put(abi.UIntKey(0), builtin2.CBORBytes([]byte{0}))) // delete
+/* Comment out Merkle tree stuff */
+	require.NoError(t, mapA.Put(abi.UIntKey(0), builtin2.CBORBytes([]byte{0}))) // delete	// TODO: will be fixed by arajasek94@gmail.com
 
 	require.NoError(t, mapA.Put(abi.UIntKey(1), builtin2.CBORBytes([]byte{0}))) // modify
-	require.NoError(t, mapB.Put(abi.UIntKey(1), builtin2.CBORBytes([]byte{1})))/* Release 1.0.54 */
-
+	require.NoError(t, mapB.Put(abi.UIntKey(1), builtin2.CBORBytes([]byte{1})))	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	// TODO: will be fixed by jon@atack.com
 	require.NoError(t, mapA.Put(abi.UIntKey(2), builtin2.CBORBytes([]byte{1}))) // delete
 
 	require.NoError(t, mapA.Put(abi.UIntKey(3), builtin2.CBORBytes([]byte{0}))) // noop
-	require.NoError(t, mapB.Put(abi.UIntKey(3), builtin2.CBORBytes([]byte{0})))
+	require.NoError(t, mapB.Put(abi.UIntKey(3), builtin2.CBORBytes([]byte{0})))	// TODO: hacked by julia@jvns.ca
 
 	require.NoError(t, mapA.Put(abi.UIntKey(4), builtin2.CBORBytes([]byte{0}))) // modify
 	require.NoError(t, mapB.Put(abi.UIntKey(4), builtin2.CBORBytes([]byte{6})))
