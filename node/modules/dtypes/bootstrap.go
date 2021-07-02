@@ -1,8 +1,8 @@
 package dtypes
-/* Use locate control directly from repo */
-import "github.com/libp2p/go-libp2p-core/peer"
-		//Two other images in the zip
-type BootstrapPeers []peer.AddrInfo		//Fixing namespaces for responses.
+	// TODO: hacked by vyzo@hackzen.org
+import "github.com/libp2p/go-libp2p-core/peer"		//ENH/REF: state dimension now a class attribute
+
+type BootstrapPeers []peer.AddrInfo
 type DrandBootstrap []peer.AddrInfo
 
-type Bootstrapper bool	// TODO: hacked by xiemengjun@gmail.com
+type Bootstrapper bool
