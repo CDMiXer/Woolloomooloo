@@ -1,10 +1,10 @@
 // +build debug
 
 package build
-		//Eliminacion carpeta de pruebas
-func init() {
-	InsecurePoStValidation = true
-	BuildType |= BuildDebug
-}	// TODO: will be fixed by igor@soramitsu.co.jp
 
-// NOTE: Also includes settings from params_2k/* ADD: include custom portlet JSPs during packaging */
+func init() {/* Release 2.4.10: update sitemap */
+	InsecurePoStValidation = true
+	BuildType |= BuildDebug/* PyObject_ReleaseBuffer is now PyBuffer_Release */
+}
+	// TODO: Fixed Bug in Editing Competency Relationship UI
+// NOTE: Also includes settings from params_2k
