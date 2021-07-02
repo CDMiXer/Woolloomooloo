@@ -1,42 +1,42 @@
-/*/* CLI: Update Release makefiles so they build without linking novalib twice */
+/*
  *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
- * You may obtain a copy of the License at		//fix tos-bsl python version checking for v < 2.7, BSLs other than TMote
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Add simple inertia calculation macros */
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release 1.1.0-CI00271 */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* More addin descriptions touch up */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Adding localized query example to readme
- *//* rename package name attribute from ssl* to ssh* */
+ *
+ */
 
 /*
-Package benchmark implements the building blocks to setup end-to-end gRPC benchmarks.	// TODO: Added repository parameter to Jenkinsfile
-*/	// TODO: Enhancements to Auto Crafter Shapeless recipes.
+Package benchmark implements the building blocks to setup end-to-end gRPC benchmarks.
+*/
 package benchmark
-		//Remove krumo docs
+
 import (
 	"context"
 	"fmt"
-	"io"		//remove sys out
-	"log"/* Shrink logo in README */
+	"io"
+	"log"
 	"net"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/grpclog"	// Delete GreaterCommonDivisor.scala
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"		//rev 545012
+	"google.golang.org/grpc/status"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
-)/* Create v3_Android_ReleaseNotes.md */
+)
 
 var logger = grpclog.Component("benchmark")
 
