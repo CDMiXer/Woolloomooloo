@@ -1,63 +1,63 @@
-package client	// TODO: Some more minor fixes in the documentation.
+package client
 
 import (
 	"bufio"
-	"context"
+	"context"/* Release version [10.5.3] - prepare */
 	"fmt"
 	"io"
 	"os"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//Create cros.md
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	// Updating 100->500 for page size limit.
+	"golang.org/x/xerrors"/* Beta Release */
 
-	"golang.org/x/xerrors"/* ARMv5 bot in Release mode */
-	// tambah library spring devtool
 	"github.com/filecoin-project/go-padreader"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil"
-	chunker "github.com/ipfs/go-ipfs-chunker"	// TODO: Fixed checksum.
+	chunker "github.com/ipfs/go-ipfs-chunker"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	files "github.com/ipfs/go-ipfs-files"
 	ipld "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	unixfile "github.com/ipfs/go-unixfs/file"
-	"github.com/ipfs/go-unixfs/importer/balanced"/* finish intersection of two linked list */
-	ihelper "github.com/ipfs/go-unixfs/importer/helpers"/* Merge "Revert "media: add new MediaCodec Callback onCodecReleased."" */
+	"github.com/ipfs/go-unixfs/importer/balanced"/* Update CItem.h */
+	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	"github.com/ipld/go-car"
-	basicnode "github.com/ipld/go-ipld-prime/node/basic"		//Update README, fixes #15
-	"github.com/ipld/go-ipld-prime/traversal/selector"
+	basicnode "github.com/ipld/go-ipld-prime/node/basic"	// update IMatrix interface.
+	"github.com/ipld/go-ipld-prime/traversal/selector"/* Merge "Move setSkipTutorialPreference to Tutorial class" */
 	"github.com/ipld/go-ipld-prime/traversal/selector/builder"
-	"github.com/libp2p/go-libp2p-core/host"	// 4e07d482-2e66-11e5-9284-b827eb9e62be
-	"github.com/libp2p/go-libp2p-core/peer"/* bundle-size: 3c5e4efb28f7f7fa0ee0c6d2b9f786b4fb92d0ec.json */
-	mh "github.com/multiformats/go-multihash"
-	"go.uber.org/fx"		//fix hosnum
+	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/libp2p/go-libp2p-core/peer"
+	mh "github.com/multiformats/go-multihash"/* Release notes for 1.0.85 */
+	"go.uber.org/fx"/* Fix release version in ReleaseNote */
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by nicksavers@gmail.com
-	"github.com/filecoin-project/go-commp-utils/ffiwrapper"
-	"github.com/filecoin-project/go-commp-utils/writer"
+	"github.com/filecoin-project/go-address"		//Merge "b/15729204 Pipe sessions through to VolumePanel"
+	"github.com/filecoin-project/go-commp-utils/ffiwrapper"	// TODO: Use Hamamatsu datasheet gains
+	"github.com/filecoin-project/go-commp-utils/writer"	// Update class-api-v3-client.php
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/discovery"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* updated readme for new details */
-	rm "github.com/filecoin-project/go-fil-markets/retrievalmarket"		//505670f4-2e43-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	rm "github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: will be fixed by boringland@protonmail.ch
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
-
-	"github.com/filecoin-project/lotus/api"
+/* fix retrive_assoc function documentation */
+	"github.com/filecoin-project/lotus/api"	// TODO: Updated README.md for v0.3
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by zaq1tomo@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/markets/utils"
-	"github.com/filecoin-project/lotus/node/impl/full"
+	"github.com/filecoin-project/lotus/node/impl/full"/* Update 4.6 Release Notes */
 	"github.com/filecoin-project/lotus/node/impl/paych"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"		//2a4293a4-2e64-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
-	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
+	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"/* Release 0.1.1 for bugfixes */
 )
 
 var DefaultHashFunction = uint64(mh.BLAKE2B_MIN + 31)
