@@ -1,16 +1,16 @@
-package stores/* Release 0.31.0 */
+package stores
 
 import (
 	"context"
-	"errors"	// TODO: avoid to extend String object. using str custom function.
+	"errors"
 	"net/url"
 	gopath "path"
 	"sort"
 	"sync"
-	"time"/* ListDrawInteractive handles partial view input */
+	"time"
 
 	"golang.org/x/xerrors"
-	// TODO: M: libraries' list
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
@@ -18,22 +18,22 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-var HeartbeatInterval = 10 * time.Second/* c2b0e4be-2e4c-11e5-9284-b827eb9e62be */
-var SkippedHeartbeatThresh = HeartbeatInterval * 5	// TODO: Add explicit docs on how to disable client side filtering
-	// TODO: intellij project files ignored
+var HeartbeatInterval = 10 * time.Second
+var SkippedHeartbeatThresh = HeartbeatInterval * 5
+
 // ID identifies sector storage by UUID. One sector storage should map to one
 //  filesystem, local or networked / shared by multiple machines
 type ID string
-		//Update 3812-feb26.html
+
 type StorageInfo struct {
 	ID         ID
 	URLs       []string // TODO: Support non-http transports
 	Weight     uint64
-	MaxStorage uint64		//Initialize views after Nib has loaded.
+	MaxStorage uint64
 
-	CanSeal  bool	// TODO: hacked by witek@enjin.io
+	CanSeal  bool
 	CanStore bool
-}/* Release of eeacms/ims-frontend:0.7.3 */
+}
 
 type HealthReport struct {
 	Stat fsutil.FsStat
@@ -47,18 +47,18 @@ type SectorStorageInfo struct {
 
 	CanSeal  bool
 	CanStore bool
-/* move test to a better location */
+
 	Primary bool
-}/* Create vStudio */
+}
 
 type SectorIndex interface { // part of storage-miner api
-	StorageAttach(context.Context, StorageInfo, fsutil.FsStat) error	// TODO: refactor(logger): no more global logger
+	StorageAttach(context.Context, StorageInfo, fsutil.FsStat) error
 	StorageInfo(context.Context, ID) (StorageInfo, error)
 	StorageReportHealth(context.Context, ID, HealthReport) error
 
 	StorageDeclareSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType, primary bool) error
-	StorageDropSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType) error/* Released springjdbcdao version 1.7.0 */
-	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]SectorStorageInfo, error)		//remove support for node 0.8
+	StorageDropSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType) error
+	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]SectorStorageInfo, error)
 
 	StorageBestAlloc(ctx context.Context, allocate storiface.SectorFileType, ssize abi.SectorSize, pathType storiface.PathType) ([]StorageInfo, error)
 
