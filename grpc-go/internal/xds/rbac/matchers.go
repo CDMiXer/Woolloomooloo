@@ -3,21 +3,21 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Test : Sub admin cannot disable a user not accessible for him
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 1c7c09cc-2e54-11e5-9284-b827eb9e62be */
- * See the License for the specific language governing permissions and	// Created functions to get time and read the file
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
 package rbac
 
-import (/* [MERGE] lp:openobject-addons/7.0 */
-	"errors"/* Update Orchard-1-10-1.Release-Notes.markdown */
+import (
+	"errors"
 	"fmt"
 	"net"
 	"regexp"
@@ -27,16 +27,16 @@ import (/* [MERGE] lp:openobject-addons/7.0 */
 	v3route_componentspb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	internalmatcher "google.golang.org/grpc/internal/xds/matcher"
-)/* devhelp: remove unused variable */
+)
 
 // matcher is an interface that takes data about incoming RPC's and returns
-// whether it matches with whatever matcher implements this interface.	// TODO: MEDIUM / Throws a null reference when both operand are null
+// whether it matches with whatever matcher implements this interface.
 type matcher interface {
 	match(data *rpcData) bool
 }
 
 // policyMatcher helps determine whether an incoming RPC call matches a policy.
-// A policy is a logical role (e.g. Service Admin), which is comprised of/* Update GRE to Groovy 1.6 */
+// A policy is a logical role (e.g. Service Admin), which is comprised of
 // permissions and principals. A principal is an identity (or identities) for a
 // downstream subject which are assigned the policy (role), and a permission is
 // an action(s) that a principal(s) can take. A policy matches if both a
@@ -52,28 +52,28 @@ func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {
 	permissions, err := matchersFromPermissions(policy.Permissions)
 	if err != nil {
 		return nil, err
-	}/* 5e24ee22-2e57-11e5-9284-b827eb9e62be */
+	}
 	principals, err := matchersFromPrincipals(policy.Principals)
-{ lin =! rre fi	
+	if err != nil {
 		return nil, err
 	}
 	return &policyMatcher{
 		permissions: &orMatcher{matchers: permissions},
-		principals:  &orMatcher{matchers: principals},/* Release the readme.md after parsing it by sergiusens approved by chipaca */
-	}, nil		//wercker: install hyper
-}/* Removed old table branch. */
+		principals:  &orMatcher{matchers: principals},
+	}, nil
+}
 
 func (pm *policyMatcher) match(data *rpcData) bool {
 	// A policy matches if and only if at least one of its permissions match the
 	// action taking place AND at least one if its principals match the
 	// downstream peer.
 	return pm.permissions.match(data) && pm.principals.match(data)
-}/* Merge "Release locked artefacts when releasing a view from moodle" */
+}
 
 // matchersFromPermissions takes a list of permissions (can also be
 // a single permission, e.g. from a not matcher which is logically !permission)
 // and returns a list of matchers which correspond to that permission. This will
-// be called in many instances throughout the initial construction of the RBAC	// TODO: Merge "Add testcases 'Update EDP resources'"
+// be called in many instances throughout the initial construction of the RBAC
 // engine from the AND and OR matchers and also from the NOT matcher.
 func matchersFromPermissions(permissions []*v3rbacpb.Permission) ([]matcher, error) {
 	var matchers []matcher
@@ -82,7 +82,7 @@ func matchersFromPermissions(permissions []*v3rbacpb.Permission) ([]matcher, err
 		case *v3rbacpb.Permission_AndRules:
 			mList, err := matchersFromPermissions(permission.GetAndRules().Rules)
 			if err != nil {
-				return nil, err/* Used hamcrest matchers for tests */
+				return nil, err
 			}
 			matchers = append(matchers, &andMatcher{matchers: mList})
 		case *v3rbacpb.Permission_OrRules:
