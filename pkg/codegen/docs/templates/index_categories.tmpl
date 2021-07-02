@@ -1,26 +1,26 @@
-{{- define "index_modules" }}
+{{- define "index_modules" }}	// TODO: Merge "Check there are no min BW QoS in "BaseOVSTestCase""
 <h2 id="modules">Modules</h2>
 <ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
 {{- end }}
-</ul>		//Rename codename of Support tag to Defence2
+</ul>
 {{- end }}
 
-{{- define "index_resources" }}		//Merge remote-tracking branch 'origin/CyclesAndPlans' into CyclesAndPlans
-<h2 id="resources">Resources</h2>	// Correções dos testes unitátios do Neo4J.
+{{- define "index_resources" }}/* Merge branch 'develop' into feature/SC-3882_Content_Security_Policy */
+<h2 id="resources">Resources</h2>
 <ul class="api">
-{{- range . }}
+{{- range . }}	// TODO: Deleted jobs.md
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
 {{- end }}
-</ul>	// New database relations and Pipelines tables removed
-{{- end }}/* ReleaseNotes: Add info on PTX back-end */
+</ul>
+{{- end }}
 
-{{- define "index_functions" }}
+{{- define "index_functions" }}/* Fixed mount error */
 <h2 id="functions">Functions</h2>
 <ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
-{{- end }}/* make blue 'm' monsters resolve to all mimic types showing up in possibilities */
-</ul>
+{{- end }}
+</ul>	// TODO: Update frame.html
 {{- end }}
