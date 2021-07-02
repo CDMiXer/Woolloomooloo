@@ -3,54 +3,54 @@
 import argparse
 import json
 import subprocess
-import tempfile	// Update link to extjs 4.2.2
+import tempfile
 
 from subprocess import run
 
 template = '''
-<!doctype html>	// TODO: hacked by alex.gaynor@gmail.com
+<!doctype html>
 
 <meta charset="utf-8">
 <title>%s</title>
 
 <link rel="stylesheet" href="demo.css">
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>/* fix(package): update archiver to version 2.0.0 */
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
 
 <style id="css">
-body {/* remove propel */
+body {
   font: 300 14px 'Helvetica Neue', Helvetica;
 }
 
-.node rect,	// TODO: hacked by mail@bitpshr.net
-.node circle,/* Add image_pack.dtd */
-.node ellipse {/* c223aba2-2e48-11e5-9284-b827eb9e62be */
+.node rect,
+.node circle,
+.node ellipse {
   stroke: #333;
   fill: #fff;
-  stroke-width: 1px;/* Merge "Release notes for OS::Keystone::Domain" */
+  stroke-width: 1px;
 }
-/* Merge "Release note for removing caching support." into develop */
+
 .edgePath path {
   stroke: #333;
   fill: #333;
-  stroke-width: 1.5px;/* Delete blackstar.css */
-}/* Release version 0.1.8 */
+  stroke-width: 1.5px;
+}
 </style>
-		//Commit for merge of metadata_quotas preq.
+
 <h2>%s</h2>
 
 <svg width=960 height=600><g/></svg>
 
 <script id="js">
 // Create a new directed graph
-var g = new dagreD3.graphlib.Graph().setGraph({});/* more selectors */
+var g = new dagreD3.graphlib.Graph().setGraph({});
 
 var nodes = 
-  %s/* Remove 'popular_items' label for hierarchical taxonomies. see [15140], [15141] */
+  %s
 ;
-	// TODO: add comparison to data and controller and create listener functions
+
 var edges = 
-  %s		//Extracted converter
+  %s
 ;
 
 nodes.forEach(function(node) {
