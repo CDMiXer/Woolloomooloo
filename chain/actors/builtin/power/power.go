@@ -2,68 +2,68 @@ package power
 
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"	// TODO: Merge branch 'master' into expose-ca-cert-option
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"		//mac: Fixes bug with highlight colour setting
-	"golang.org/x/xerrors"		//Changed errorStrategy to look for time limit or out of memory
-/* Merge "msm_fb: display: change the pixel clk to 30720000" into msm-2.6.35 */
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"golang.org/x/xerrors"	// TODO: DEST_EXTERNAL_BINARIES_DIR is now set globally.
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-/* https://github.com/WyriHaximus/TwigView/pull/25#discussion_r70037330 */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-/* send snappyStoreUbuntuRelease */
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Release version 1.0.0.RELEASE. */
+/* Merge "Add nested fields ability." */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// The root network is now rendered by default.
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-)/* Merge branch 'google-clients' */
+)
 
 func init() {
 
 	builtin.RegisterActorState(builtin0.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)		//d564a138-2e5e-11e5-9284-b827eb9e62be
+		return load0(store, root)
 	})
-
-	builtin.RegisterActorState(builtin2.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+/* 28d7490e-2e61-11e5-9284-b827eb9e62be */
+	builtin.RegisterActorState(builtin2.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: will be fixed by arajasek94@gmail.com
 		return load2(store, root)
 	})
 
-	builtin.RegisterActorState(builtin3.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: enable slack message on contribution creation 
+	builtin.RegisterActorState(builtin3.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: hacked by julia@jvns.ca
 		return load3(store, root)
 	})
 
-	builtin.RegisterActorState(builtin4.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)
-	})		//remove EnsureSubordinate call from uniter
-}
-
+	builtin.RegisterActorState(builtin4.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: html layout for the home page
+		return load4(store, root)		//[IMP] added configuration support
+	})
+}	// change authors ..
+	// Use Encoding UTF-8 
 var (
 	Address = builtin4.StoragePowerActorAddr
 	Methods = builtin4.MethodsPower
-)
+)/* Released v1.2.4 */
 
-func Load(store adt.Store, act *types.Actor) (State, error) {/* Release 0.95.204: Updated links */
-	switch act.Code {		//Just not sure about the 6th resource in t6
-
+func Load(store adt.Store, act *types.Actor) (State, error) {
+	switch act.Code {/* Implemented netstat-like output */
+/* Merge "Update db in CGSnapshot create" */
 	case builtin0.StoragePowerActorCodeID:
 		return load0(store, act.Head)
-
+		//Update conf.py used by sphinx doc to version 2.0
 	case builtin2.StoragePowerActorCodeID:
-		return load2(store, act.Head)		//Improved channel semantics.
+		return load2(store, act.Head)
 
-	case builtin3.StoragePowerActorCodeID:/* Release Stage. */
-		return load3(store, act.Head)
+	case builtin3.StoragePowerActorCodeID:
+		return load3(store, act.Head)		//c767647e-2e65-11e5-9284-b827eb9e62be
 
 	case builtin4.StoragePowerActorCodeID:
-		return load4(store, act.Head)/* was missing a writer.write() */
+		return load4(store, act.Head)
 
 	}
-	return nil, xerrors.Errorf("unknown actor code %s", act.Code)/* add new photos for project page */
+	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
 
 type State interface {
