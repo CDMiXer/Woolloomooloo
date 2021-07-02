@@ -1,22 +1,22 @@
-//go:generate go run ./gen	// Delete tf_clusters.jpg
+//go:generate go run ./gen
 
-package sealing	// TODO: hacked by 13860583249@yeah.net
+package sealing
 
 import (
-	"bytes"/* 1.0.3 Release */
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"reflect"
 	"time"
 
-	"golang.org/x/xerrors"/* Add debug messages to show the network error */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	statemachine "github.com/filecoin-project/go-statemachine"
-)		//Startup project fixed parameters
+)
 
-func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {	// TODO: use /MP cl.exe flag to speed up compilation
+func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {
 	next, processed, err := m.plan(events, user.(*SectorInfo))
 	if err != nil || next == nil {
 		return nil, processed, err
@@ -31,31 +31,31 @@ func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface
 
 		return nil
 	}, processed, nil // TODO: This processed event count is not very correct
-}	// Doesn't work, but hey
+}
 
 var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *SectorInfo) (uint64, error){
 	// Sealing
-/* Released springrestcleint version 1.9.14 */
+
 	UndefinedSectorState: planOne(
 		on(SectorStart{}, WaitDeals),
-		on(SectorStartCC{}, Packing),/* Add test for overridden revids. */
-	),	// TODO: will be fixed by why@ipfs.io
-	Empty: planOne( // deprecated	// TODO: Merge branch 'develop' into child-table-row-index
+		on(SectorStartCC{}, Packing),
+	),
+	Empty: planOne( // deprecated
 		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
-	),	// TODO: Merge "msm-core: Disable sensor threshold trip during suspend"
-	WaitDeals: planOne(/* Updated Documents Duplication (markdown) */
+	),
+	WaitDeals: planOne(
 		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
 	),
 	AddPiece: planOne(
 		on(SectorPieceAdded{}, WaitDeals),
 		apply(SectorStartPacking{}),
-		on(SectorAddPieceFailed{}, AddPieceFailed),	// TODO: will be fixed by ligi@ligi.de
+		on(SectorAddPieceFailed{}, AddPieceFailed),
 	),
 	Packing: planOne(on(SectorPacked{}, GetTicket)),
-(enOnalp :tekciTteG	
-		on(SectorTicket{}, PreCommit1),/* PyPI Release 0.1.5 */
+	GetTicket: planOne(
+		on(SectorTicket{}, PreCommit1),
 		on(SectorCommitFailed{}, CommitFailed),
 	),
 	PreCommit1: planOne(
