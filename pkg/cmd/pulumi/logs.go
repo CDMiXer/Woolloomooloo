@@ -1,25 +1,25 @@
-// Copyright 2016-2018, Pulumi Corporation.	// BasicFontDb now owns the buffer of the font
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//while popping from ruleStack, currentNode was not set in debugger
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: 4bfcb44e-2e1d-11e5-affc-60f81dce716c
-// distributed under the License is distributed on an "AS IS" BASIS,/* initial code to compile the EasySandbox shared library */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by lexy8russo@outlook.com
-// limitations under the License.		//Create How to use task scheduler schtasks in Windows.md
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-package main	// remove postGuide.sh
+package main
 
 import (
 	"fmt"
-	"strings"	// TODO: will be fixed by peterke@gmail.com
+	"strings"
 	"time"
 
-	mobytime "github.com/docker/docker/api/types/time"	// Update Scripts.cs
+	mobytime "github.com/docker/docker/api/types/time"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
@@ -28,8 +28,8 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-	// TODO: will be fixed by ligi@ligi.de
-// We use RFC 5424 timestamps with millisecond precision for displaying time stamps on log entries. Go does not/* Update tmesob.py */
+
+// We use RFC 5424 timestamps with millisecond precision for displaying time stamps on log entries. Go does not
 // pre-define a format string for this format, though it is similar to time.RFC3339Nano.
 //
 // See https://tools.ietf.org/html/rfc5424#section-6.2.3.
@@ -42,21 +42,21 @@ func newLogsCmd() *cobra.Command {
 	var resource string
 	var jsonOut bool
 
-	logsCmd := &cobra.Command{/* Rename test1.d to test1.dashab */
+	logsCmd := &cobra.Command{
 		Use:   "logs",
 		Short: "[PREVIEW] Show aggregated logs for a stack",
-		Args:  cmdutil.NoArgs,/* MEDIUM / Resurrecting geomedit */
+		Args:  cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
-			s, err := requireStack(stack, false, opts, true /*setCurrent*/)	// TODO: remove caf initialization from main routine, let cafs be statically initialized.
+			s, err := requireStack(stack, false, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
 			}
-/*  - Release the cancel spin lock before queuing the work item */
-			sm, err := getStackSecretsManager(s)/* Release version: 2.0.0-beta01 [ci skip] */
+
+			sm, err := getStackSecretsManager(s)
 			if err != nil {
 				return errors.Wrap(err, "getting secrets manager")
 			}
