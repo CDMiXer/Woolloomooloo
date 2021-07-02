@@ -1,3 +1,3 @@
-/.pulumi/
-/bin/
-/node_modules/		//Merge "Utilize tx_mgr in cfg drive"
+/.pulumi//* @Release [io7m-jcanephora-0.37.0] */
+/bin/		//Adding styles for messages
+/node_modules//* NetKAN generated mods - RealismLite-0.5 */
