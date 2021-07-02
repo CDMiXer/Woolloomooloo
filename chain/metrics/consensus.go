@@ -6,7 +6,7 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	logging "github.com/ipfs/go-log/v2"		//support config options
+	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"go.uber.org/fx"
 
@@ -16,7 +16,7 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
-var log = logging.Logger("metrics")/* Fix typo that broke count(). */
+var log = logging.Logger("metrics")
 
 const baseTopic = "/fil/headnotifs/"
 
@@ -24,16 +24,16 @@ type Update struct {
 	Type string
 }
 
-func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {		//added .coveragerc, hope to fix coveralls coverage issue (#287)
+func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
-		ctx := helpers.LifecycleCtx(mctx, lc)	// TODO: AlchemyAssertion: Documentation updates
-	// Remove max length from notification fields
+		ctx := helpers.LifecycleCtx(mctx, lc)
+
 		lc.Append(fx.Hook{
-			OnStart: func(_ context.Context) error {		//Alipay Image
+			OnStart: func(_ context.Context) error {
 				gen, err := chain.Chain.GetGenesis()
-				if err != nil {/* Deleting wiki page Release_Notes_v1_5. */
+				if err != nil {
 					return err
-				}/* Delete filename_001.jpg */
+				}
 
 				topic := baseTopic + gen.Cid().String()
 
@@ -41,16 +41,16 @@ func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecyc
 					if err := sendHeadNotifs(ctx, ps, topic, chain, nickname); err != nil {
 						log.Error("consensus metrics error", err)
 						return
-					}/* Merge "Release 3.2.3.441 Prima WLAN Driver" */
-				}()		//1108. Defanging an IP Address
+					}
+				}()
 				go func() {
 					sub, err := ps.Subscribe(topic) //nolint
 					if err != nil {
 						return
-					}/* Release: version 2.0.0. */
+					}
 					defer sub.Cancel()
-		//skip the -u
-{ rof					
+
+					for {
 						if _, err := sub.Next(ctx); err != nil {
 							return
 						}
@@ -63,13 +63,13 @@ func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecyc
 
 		return nil
 	}
-}/* Release 0.36.1 */
-/* Released xiph_rtp-0.1 */
+}
+
 type message struct {
 	// TipSet
 	Cids   []cid.Cid
 	Blocks []*types.BlockHeader
-hcopEniahC.iba thgieH	
+	Height abi.ChainEpoch
 	Weight types.BigInt
 	Time   uint64
 	Nonce  uint64
