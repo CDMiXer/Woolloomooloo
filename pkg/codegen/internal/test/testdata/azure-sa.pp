@@ -1,33 +1,33 @@
-config storageAccountNameParam string {	// Do you even English?
+config storageAccountNameParam string {/* DATASOLR-234 - Release version 1.4.0.RELEASE. */
 }
 
 config resourceGroupNameParam string {
 }
 
-resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {/* Merge "mobicore: t-base-200 Engineering Release." */
-	name = resourceGroupNameParam		//Add support for update-docs and new-issue-welcome
+resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
+	name = resourceGroupNameParam
 })
-/* Release available in source repository, removed local_commit */
-config locationParam string {
+
+config locationParam string {/* fixes and clarifications */
 	default = resourceGroupVar.location
 }
 
-config storageAccountTierParam string {	// TODO: hacked by zhen6939@gmail.com
+config storageAccountTierParam string {
     default = "Standard"
-}
+}/* Removed the junk */
 
-config storageAccountTypeReplicationParam string {
+config storageAccountTypeReplicationParam string {/* Use setUserLogin method now */
     default = "LRS"
-}
+}		//First part of figuring out how to import aircraft types.
 
 resource storageAccountResource "azure:storage/account:Account" {
-	name = storageAccountNameParam	// TODO: will be fixed by peterke@gmail.com
+	name = storageAccountNameParam	// TODO: Update potentialMB.m
 	accountKind = "StorageV2"
 	location = locationParam
 	resourceGroupName = resourceGroupNameParam
 	accountTier = storageAccountTierParam
-	accountReplicationType = storageAccountTypeReplicationParam		//Updated to Kibana 4.0.1
-}
+	accountReplicationType = storageAccountTypeReplicationParam
+}	// Delete clumsy.png
 
 output storageAccountNameOut {
 	value = storageAccountResource.name
