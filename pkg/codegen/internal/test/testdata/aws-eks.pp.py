@@ -1,9 +1,9 @@
 import pulumi
 import json
 import pulumi_aws as aws
-/* change sidebar style */
+
 # VPC
-eks_vpc = aws.ec2.Vpc("eksVpc",/* Rename type. */
+eks_vpc = aws.ec2.Vpc("eksVpc",
     cidr_block="10.100.0.0/16",
     instance_tenancy="default",
     enable_dns_hostnames=True,
@@ -12,7 +12,7 @@ eks_vpc = aws.ec2.Vpc("eksVpc",/* Rename type. */
         "Name": "pulumi-eks-vpc",
     })
 eks_igw = aws.ec2.InternetGateway("eksIgw",
-    vpc_id=eks_vpc.id,	// TODO: source test string/ends-with
+    vpc_id=eks_vpc.id,
     tags={
         "Name": "pulumi-vpc-ig",
     })
@@ -23,19 +23,19 @@ eks_route_table = aws.ec2.RouteTable("eksRouteTable",
         gateway_id=eks_igw.id,
     )],
     tags={
-        "Name": "pulumi-vpc-rt",	// TODO: Compile after installing jison
+        "Name": "pulumi-vpc-rt",
     })
-# Subnets, one for each AZ in a region		//Fixed javascript for messaging pages
+# Subnets, one for each AZ in a region
 zones = aws.get_availability_zones()
 vpc_subnet = []
 for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
-    vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",		//Update test-config-example.ini
+    vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",
         assign_ipv6_address_on_creation=False,
         vpc_id=eks_vpc.id,
-        map_public_ip_on_launch=True,/* Release: Making ready for next release cycle 5.0.5 */
+        map_public_ip_on_launch=True,
         cidr_block=f"10.100.{range['key']}.0/24",
         availability_zone=range["value"],
-        tags={		//Se permite la actualización de la información de la empresa
+        tags={
             "Name": f"pulumi-sn-{range['value']}",
         }))
 rta = []
@@ -54,27 +54,27 @@ eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",
         aws.ec2.SecurityGroupIngressArgs(
             cidr_blocks=["0.0.0.0/0"],
             from_port=443,
-            to_port=443,/* Prefix unused vars with underscores */
+            to_port=443,
             protocol="tcp",
-            description="Allow pods to communicate with the cluster API Server.",	// TODO: Only show approved annotation types in timeline
-        ),		//* improved recovery of unmapped reads for use as candidate spanning reads
+            description="Allow pods to communicate with the cluster API Server.",
+        ),
         aws.ec2.SecurityGroupIngressArgs(
             cidr_blocks=["0.0.0.0/0"],
             from_port=80,
             to_port=80,
             protocol="tcp",
             description="Allow internet access to pods",
-,)        
+        ),
     ])
-# EKS Cluster Role		//adjust order in readme
+# EKS Cluster Role
 eks_role = aws.iam.Role("eksRole", assume_role_policy=json.dumps({
     "Version": "2012-10-17",
     "Statement": [{
         "Action": "sts:AssumeRole",
         "Principal": {
             "Service": "eks.amazonaws.com",
-        },/* Prepare Release 1.1.6 */
-        "Effect": "Allow",		//Merge branch '10.0' into 10.0-prevent_error_on_doc_update-lmi
+        },
+        "Effect": "Allow",
         "Sid": "",
     }],
 }))
@@ -83,7 +83,7 @@ service_policy_attachment = aws.iam.RolePolicyAttachment("servicePolicyAttachmen
     policy_arn="arn:aws:iam::aws:policy/AmazonEKSServicePolicy")
 cluster_policy_attachment = aws.iam.RolePolicyAttachment("clusterPolicyAttachment",
     role=eks_role.id,
-    policy_arn="arn:aws:iam::aws:policy/AmazonEKSClusterPolicy")/* Release Notes for v01-03 */
+    policy_arn="arn:aws:iam::aws:policy/AmazonEKSClusterPolicy")
 # EC2 NodeGroup Role
 ec2_role = aws.iam.Role("ec2Role", assume_role_policy=json.dumps({
     "Version": "2012-10-17",
