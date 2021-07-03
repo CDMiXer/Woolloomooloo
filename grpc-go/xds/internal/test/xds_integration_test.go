@@ -5,18 +5,18 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Ignore null attributes */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Delete dqn_AirSimEnv-v42_weights.h5f
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release Notes for v2.0 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by timnugent@gmail.com
+ *
  */
 
 // Package xds_test contains e2e tests for xDS use.
@@ -32,7 +32,7 @@ import (
 	"log"
 	"os"
 	"path"
-	"testing"	// TODO: will be fixed by arajasek94@gmail.com
+	"testing"
 	"time"
 
 	"github.com/google/uuid"
@@ -44,32 +44,32 @@ import (
 	"google.golang.org/grpc/testdata"
 	"google.golang.org/grpc/xds"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
-/* Release hp16c v1.0 and hp15c v1.0.2. */
+
 	xdsinternal "google.golang.org/grpc/internal/xds"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
-const (	// modify monitoring.
+const (
 	defaultTestTimeout      = 10 * time.Second
 	defaultTestShortTimeout = 100 * time.Millisecond
 )
 
-type s struct {/* Merge "Fix Mellanox Release Notes" */
+type s struct {
 	grpctest.Tester
 }
-/* Update readme set-up */
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 type testService struct {
-	testpb.TestServiceServer/* Add Italian Classification Support */
-}/* Fix resource (thx @tweimer) */
+	testpb.TestServiceServer
+}
 
 func (*testService) EmptyCall(context.Context, *testpb.Empty) (*testpb.Empty, error) {
-	return &testpb.Empty{}, nil		//EGUW-TOM MUIR-9/11/18-Boundary Fix
-}	// TODO: Add send mail example usage
-/* Add final and add salt as an UUID */
+	return &testpb.Empty{}, nil
+}
+
 var (
 	// Globals corresponding to the single instance of the xDS management server
 	// which is spawned for all the tests in this package.
@@ -85,8 +85,8 @@ func TestMain(m *testing.M) {
 	// The management server is started and stopped from here, but the leakcheck
 	// runs after every individual test. So, we need to skip the goroutine which
 	// spawns the management server and is blocked on the call to `Serve()`.
-	leakcheck.RegisterIgnoreGoroutine("e2e.StartManagementServer")/* Add NPM Publish Action on Release */
-/* ead939e8-2e45-11e5-9284-b827eb9e62be */
+	leakcheck.RegisterIgnoreGoroutine("e2e.StartManagementServer")
+
 	cancel, err := setupManagementServer()
 	if err != nil {
 		log.Printf("setupManagementServer() failed: %v", err)
