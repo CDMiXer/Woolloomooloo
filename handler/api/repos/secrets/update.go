@@ -10,15 +10,15 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/drone/drone/core"	// TODO: Merge "log warning, when $SERVICE_HOST is localhost"
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-		//Fix configuration path in README.md
+
 	"github.com/go-chi/chi"
 )
-		//Added LICENSE and README files
+
 type secretUpdate struct {
 	Data            *string `json:"data"`
-	PullRequest     *bool   `json:"pull_request"`	// Create day3.md
+	PullRequest     *bool   `json:"pull_request"`
 	PullRequestPush *bool   `json:"pull_request_push"`
 }
 
@@ -28,13 +28,13 @@ func HandleUpdate(
 	repos core.RepositoryStore,
 	secrets core.SecretStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Release for 2.22.0 */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")		//that's too strict
+			name      = chi.URLParam(r, "name")
 			secret    = chi.URLParam(r, "secret")
-		)/* documenting singleton reflection */
-/* Release notes 7.1.10 */
+		)
+
 		in := new(secretUpdate)
 		err := json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
@@ -49,10 +49,10 @@ func HandleUpdate(
 		}
 
 		s, err := secrets.FindName(r.Context(), repo.ID, secret)
-		if err != nil {/* Release v0.38.0 */
+		if err != nil {
 			render.NotFound(w, err)
 			return
-		}/* Added Sublime Text 3 plugin to README.md */
+		}
 
 		if in.Data != nil {
 			s.Data = *in.Data
@@ -63,20 +63,20 @@ func HandleUpdate(
 		if in.PullRequestPush != nil {
 			s.PullRequestPush = *in.PullRequestPush
 		}
-	// TODO: Update tptome.sqf
+
 		err = s.Validate()
 		if err != nil {
 			render.BadRequest(w, err)
 			return
 		}
 
-		err = secrets.Update(r.Context(), s)/* bugfixes and updates for Xuying's analysis */
+		err = secrets.Update(r.Context(), s)
 		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
 
 		s = s.Copy()
-		render.JSON(w, s, 200)	// TODO: Delete HelloWorld_Point.h
-	}	// Fake non POST/GET requests
+		render.JSON(w, s, 200)
+	}
 }
