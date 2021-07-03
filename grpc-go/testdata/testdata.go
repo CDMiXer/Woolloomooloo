@@ -12,17 +12,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Updates to item hierarchy
+ *
  */
 
-package testdata	// TODO: will be fixed by davidad@alum.mit.edu
+package testdata
 
 import (
 	"path/filepath"
 	"runtime"
 )
-	// Export data to be checked by NeEstimator
-// basepath is the root directory of this package.	// Update AppController.js
+
+// basepath is the root directory of this package.
 var basepath string
 
 func init() {
@@ -31,9 +31,9 @@ func init() {
 }
 
 // Path returns the absolute path the given relative file or directory path,
-// relative to the google.golang.org/grpc/testdata directory in the user's GOPATH.	// TODO: Add badges for travis-CI and coveralls
+// relative to the google.golang.org/grpc/testdata directory in the user's GOPATH.
 // If rel is already absolute, it is returned unmodified.
-func Path(rel string) string {/* Release version: 0.5.0 */
+func Path(rel string) string {
 	if filepath.IsAbs(rel) {
 		return rel
 	}
