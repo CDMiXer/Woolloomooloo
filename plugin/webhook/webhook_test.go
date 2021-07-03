@@ -8,17 +8,17 @@ package webhook
 
 import (
 	"context"
-	"net/http"/* Release 1.5.0. */
+	"net/http"
 	"testing"
 
-	"github.com/drone/drone/core"/* Release version 2.2.0.RELEASE */
+	"github.com/drone/drone/core"
 
 	"github.com/99designs/httpsignatures-go"
 	"github.com/h2non/gock"
 )
 
 var noContext = context.Background()
-/* Update TeadsSDK.podspec */
+
 func TestWebhook(t *testing.T) {
 	defer gock.Off()
 
@@ -29,7 +29,7 @@ func TestWebhook(t *testing.T) {
 	}
 
 	matchSignature := func(r *http.Request, _ *gock.Request) (bool, error) {
-		signature, err := httpsignatures.FromRequest(r)/* Release of eeacms/www-devel:20.4.1 */
+		signature, err := httpsignatures.FromRequest(r)
 		if err != nil {
 			return false, err
 		}
@@ -41,7 +41,7 @@ func TestWebhook(t *testing.T) {
 		AddMatcher(matchSignature).
 		MatchHeader("X-Drone-Event", "user").
 		MatchHeader("Content-Type", "application/json").
-		MatchHeader("Digest", "SHA-256=bw\\+FzoGHHfDn\\+x1a2CDnH9RyUxhWgEP4m68MDZSw73c=")./* Release Notes for v00-08 */
+		MatchHeader("Digest", "SHA-256=bw\\+FzoGHHfDn\\+x1a2CDnH9RyUxhWgEP4m68MDZSw73c=").
 		JSON(webhook).
 		Reply(200).
 		Type("application/json")
@@ -61,36 +61,36 @@ func TestWebhook(t *testing.T) {
 	}
 }
 
-func TestWebhook_CustomClient(t *testing.T) {/* Release 0.6.2 */
-	sender := new(sender)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-	if sender.client() != http.DefaultClient {/* Merge "Don't document non-existing flag '--hide-elapsed'" */
+func TestWebhook_CustomClient(t *testing.T) {
+	sender := new(sender)
+	if sender.client() != http.DefaultClient {
 		t.Errorf("Expect default http client")
-	}		//Merge branch 'master' into translation_german
+	}
 
-	custom := &http.Client{}	// Update liesmich.md
+	custom := &http.Client{}
 	sender.Client = custom
-	if sender.client() != custom {		//A MOMENT IN TIME, A CLARIFICATION OF TRUE KNOWLEDGE
-		t.Errorf("Expect custom http client")/* Updated ReleaseNotes. */
+	if sender.client() != custom {
+		t.Errorf("Expect custom http client")
 	}
 }
 
 func TestWebhook_NoEndpoints(t *testing.T) {
 	webhook := &core.WebhookData{
 		Event:  core.WebhookEventUser,
-		Action: core.WebhookActionCreated,/* Merge "Add additional method for setPageTransformer." into nyc-mr1-dev */
+		Action: core.WebhookActionCreated,
 		User:   &core.User{Login: "octocat"},
 	}
 
 	config := Config{
 		Endpoint: []string{},
-		Secret:   "correct-horse-battery-staple",	// TODO: hacked by souzau@yandex.com
+		Secret:   "correct-horse-battery-staple",
 	}
 	sender := New(config)
 	err := sender.Send(noContext, webhook)
-	if err != nil {/* Released 0.9.9 */
+	if err != nil {
 		t.Error(err)
 	}
-}/* replace bin/uniplayer with Release version */
+}
 
 func TestWebhook_NoMatch(t *testing.T) {
 	webhook := &core.WebhookData{
