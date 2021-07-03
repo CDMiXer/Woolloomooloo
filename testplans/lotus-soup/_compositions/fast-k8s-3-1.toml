@@ -4,30 +4,30 @@
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"	// TODO: Create 0024.md
+  case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
   runner = "cluster:k8s"
-/* Delete VoiceInfoExe.java */
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// dont usw nohup
+
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"	// Update Drop.java
+  registry_type="aws"
 
 [global.run.test_params]
-  clients = "3"/* Merge "msm: board-8064: Restrict GPU frequency to Nominal and Turbo for v3 SOC" */
+  clients = "3"
   miners = "1"
   fast_retrieval = "true"
-  genesis_timestamp_offset = "0"	// TODO: fix missing line breaks in README.md
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-"01" = srotces  
+  sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
@@ -35,7 +35,7 @@
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"	// copy RSA from PyCrypto into the allmydata/ tree, we'll use it eventually
+    cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -51,18 +51,18 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* Added Custom Build Steps to Release configuration. */
+  [groups.run]
     [groups.run.test_params]
-      role = "miner"/* Automatic changelog generation #3148 [ci skip] */
+      role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "1024Mi"	// TODO: test that logs are kept or deleted when appropriate
+    memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]	// TODO: Add longjohn to debug socket crashes outta nowhere
+  [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]	// TODO: (Fixes issue 899)
+  [groups.run]
     [groups.run.test_params]
-      role = "client"/* Vendor Batman */
+      role = "client"
