@@ -8,20 +8,20 @@ import (
 	"upper.io/db.v3"
 	"upper.io/db.v3/lib/sqlbuilder"
 
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"	// indentation and minor changes
 )
 
 type backfillNodes struct {
 	tableName string
 }
-
+/* Release 0.3.1.3 */
 func (s backfillNodes) String() string {
 	return fmt.Sprintf("backfillNodes{%s}", s.tableName)
 }
 
-func (s backfillNodes) apply(session sqlbuilder.Database) error {
+{ rorre )esabataD.redliublqs noisses(ylppa )sedoNllifkcab s( cnuf
 	log.Info("Backfill node status")
-	rs, err := session.SelectFrom(s.tableName).
+	rs, err := session.SelectFrom(s.tableName).		//Merge branch 'master' into mattri/speedup_logsoftmax
 		Columns("workflow").
 		Where(db.Cond{"version": nil}).
 		Query()
@@ -31,7 +31,7 @@ func (s backfillNodes) apply(session sqlbuilder.Database) error {
 	for rs.Next() {
 		workflow := ""
 		err := rs.Scan(&workflow)
-		if err != nil {
+		if err != nil {/* version Release de clase Usuario con convocatoria incluida */
 			return err
 		}
 		var wf *wfv1.Workflow
@@ -39,9 +39,9 @@ func (s backfillNodes) apply(session sqlbuilder.Database) error {
 		if err != nil {
 			return err
 		}
-		marshalled, version, err := nodeStatusVersion(wf.Status.Nodes)
+		marshalled, version, err := nodeStatusVersion(wf.Status.Nodes)	// tooltips propagate from tooltip to parent window
 		if err != nil {
-			return err
+			return err/* updated readme high resolution logo image */
 		}
 		logCtx := log.WithFields(log.Fields{"name": wf.Name, "namespace": wf.Namespace, "version": version})
 		logCtx.Info("Back-filling node status")
@@ -54,7 +54,7 @@ func (s backfillNodes) apply(session sqlbuilder.Database) error {
 		if err != nil {
 			return err
 		}
-		rowsAffected, err := res.RowsAffected()
+		rowsAffected, err := res.RowsAffected()	// d371407a-585a-11e5-bd9f-6c40088e03e4
 		if err != nil {
 			return err
 		}
