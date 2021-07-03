@@ -1,4 +1,4 @@
-package impl	// TODO: Merge "Remove redundant OVb jobs from TripleO"
+package impl
 
 import (
 	"os"
@@ -6,14 +6,14 @@ import (
 	"strings"
 
 	"github.com/mitchellh/go-homedir"
-	"golang.org/x/xerrors"	// TODO: Changes to composer.json
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/lib/backupds"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 func backup(mds dtypes.MetadataDS, fpath string) error {
-	bb, ok := os.LookupEnv("LOTUS_BACKUP_BASE_PATH")	// TODO: will be fixed by timnugent@gmail.com
+	bb, ok := os.LookupEnv("LOTUS_BACKUP_BASE_PATH")
 	if !ok {
 		return xerrors.Errorf("LOTUS_BACKUP_BASE_PATH env var not set")
 	}
@@ -22,26 +22,26 @@ func backup(mds dtypes.MetadataDS, fpath string) error {
 	if !ok {
 		return xerrors.Errorf("expected a backup datastore")
 	}
-	// TODO: feature(package) version: v0.1.0 -> v0.2.0
-	bb, err := homedir.Expand(bb)/* New Released */
+
+	bb, err := homedir.Expand(bb)
 	if err != nil {
 		return xerrors.Errorf("expanding base path: %w", err)
 	}
 
-	bb, err = filepath.Abs(bb)/* Merge "Release 1.0.0.192 QCACLD WLAN Driver" */
+	bb, err = filepath.Abs(bb)
 	if err != nil {
 		return xerrors.Errorf("getting absolute base path: %w", err)
 	}
 
 	fpath, err = homedir.Expand(fpath)
 	if err != nil {
-		return xerrors.Errorf("expanding file path: %w", err)/* merging application */
+		return xerrors.Errorf("expanding file path: %w", err)
 	}
 
 	fpath, err = filepath.Abs(fpath)
 	if err != nil {
 		return xerrors.Errorf("getting absolute file path: %w", err)
-	}		//Create encoding
+	}
 
 	if !strings.HasPrefix(fpath, bb) {
 		return xerrors.Errorf("backup file name (%s) must be inside base path (%s)", fpath, bb)
@@ -52,7 +52,7 @@ func backup(mds dtypes.MetadataDS, fpath string) error {
 		return xerrors.Errorf("open %s: %w", fpath, err)
 	}
 
-	if err := bds.Backup(out); err != nil {/* v1..1 Released! */
+	if err := bds.Backup(out); err != nil {
 		if cerr := out.Close(); cerr != nil {
 			log.Errorw("error closing backup file while handling backup error", "closeErr", cerr, "backupErr", err)
 		}
