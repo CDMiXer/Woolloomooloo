@@ -1,1 +1,1 @@
-lotus-soup
+lotus-soup/* move Manifest::Release and Manifest::RemoteStore to sep files */
