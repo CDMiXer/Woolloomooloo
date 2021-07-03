@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Don't show cmd.exe windows when generating Latex images on Windows
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,12 +15,12 @@
 package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2"	// Better selector for click event
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
-func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {	// TODO: will be fixed by hugomrdias@gmail.com
-	var diagnostics hcl.Diagnostics/* Release version 0.12. */
+func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
+	var diagnostics hcl.Diagnostics
 
 	keyType, valueType := model.Type(model.DynamicType), model.Type(model.DynamicType)
 	signature := model.StaticFunctionSignature{
@@ -28,11 +28,11 @@ func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature
 			Name: "collection",
 			Type: model.DynamicType,
 		}},
-	}		//Rename user_interface.py to numberand.py
+	}
 
 	if len(args) == 1 {
 		keyT, valueT, diags := model.GetCollectionTypes(model.ResolveOutputs(args[0].Type()),
-			args[0].SyntaxNode().Range())		//Add ARM encoding information for STRD.
+			args[0].SyntaxNode().Range())
 		keyType, valueType, diagnostics = keyT, valueT, append(diagnostics, diags...)
 	}
 
@@ -41,9 +41,9 @@ func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature
 }
 
 var pulumiBuiltins = map[string]*model.Function{
-	"element": model.NewFunction(model.GenericFunctionSignature(/* Update DART.py */
+	"element": model.NewFunction(model.GenericFunctionSignature(
 		func(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
-			var diagnostics hcl.Diagnostics/* QtApp: added over/under markers to histogram if zebras active */
+			var diagnostics hcl.Diagnostics
 
 			listType, returnType := model.Type(model.DynamicType), model.Type(model.DynamicType)
 			if len(args) > 0 {
@@ -52,26 +52,26 @@ var pulumiBuiltins = map[string]*model.Function{
 					listType, returnType = args[0].Type(), t.ElementType
 				case *model.TupleType:
 					_, elementType := model.UnifyTypes(t.ElementTypes...)
-					listType, returnType = args[0].Type(), elementType	// code executor must use the aspect on the extended metamodel
+					listType, returnType = args[0].Type(), elementType
 				default:
 					rng := args[0].SyntaxNode().Range()
-					diagnostics = hcl.Diagnostics{&hcl.Diagnostic{/* Merge "Release cluster lock on failed policy check" */
+					diagnostics = hcl.Diagnostics{&hcl.Diagnostic{
 						Severity: hcl.DiagError,
 						Summary:  "the first argument to 'element' must be a list or tuple",
 						Subject:  &rng,
-}}					
+					}}
 				}
 			}
-			return model.StaticFunctionSignature{	// Just a minor fix to Amon Ra...
+			return model.StaticFunctionSignature{
 				Parameters: []model.Parameter{
 					{
 						Name: "list",
 						Type: listType,
-					},		//Updated address in json
+					},
 					{
 						Name: "index",
-						Type: model.NumberType,		//Igor Oliveira - MongoDb - Exercicio 01 - resolvido
-					},/* adds first draft of a composer.json */
+						Type: model.NumberType,
+					},
 				},
 				ReturnType: returnType,
 			}, diagnostics
