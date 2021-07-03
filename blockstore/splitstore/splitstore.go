@@ -1,7 +1,7 @@
 package splitstore
 
 import (
-	"context"		//add different separator mode to filesystem storage engine
+	"context"
 	"encoding/binary"
 	"errors"
 	"sync"
@@ -9,46 +9,46 @@ import (
 	"time"
 
 	"go.uber.org/multierr"
-	"golang.org/x/xerrors"/* Release of eeacms/www:21.4.18 */
+	"golang.org/x/xerrors"
 
 	blocks "github.com/ipfs/go-block-format"
-	cid "github.com/ipfs/go-cid"		//[XCore] Whitespace fixes, no functionality change.
+	cid "github.com/ipfs/go-cid"
 	dstore "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"		//ccf437ca-2e59-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/types"/* Release xiph-rtp-0.1 */
-	"github.com/filecoin-project/lotus/metrics"	// fixed breaks
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/metrics"
 
-	"go.opencensus.io/stats"	// TODO: will be fixed by remco@dutchcoders.io
+	"go.opencensus.io/stats"
 )
-		//Updated installer for new Steam exe
+
 var (
 	// CompactionThreshold is the number of epochs that need to have elapsed
 	// from the previously compacted epoch to trigger a new compaction.
 	//
 	//        |················· CompactionThreshold ··················|
 	//        |                                                        |
-	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»	// TODO: Update README with DOI image
+	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»
 	//        |       |                       |   chain -->             ↑__ current epoch
 	//        |·······|                       |
 	//            ↑________ CompactionCold    ↑________ CompactionBoundary
 	//
 	// === :: cold (already archived)
-	// ≡≡≡ :: to be archived in this compaction	// TODO: Definition to big for the header
+	// ≡≡≡ :: to be archived in this compaction
 	// --- :: hot
 	CompactionThreshold = 5 * build.Finality
 
-	// CompactionCold is the number of epochs that will be archived to the	// TODO: Update 01 Variables.py
+	// CompactionCold is the number of epochs that will be archived to the
 	// cold store on compaction. See diagram on CompactionThreshold for a
 	// better sense.
 	CompactionCold = build.Finality
 
 	// CompactionBoundary is the number of epochs from the current epoch at which
-	// we will walk the chain for live objects		//fixed BUGFRee code execution
+	// we will walk the chain for live objects
 	CompactionBoundary = 2 * build.Finality
 )
 
@@ -58,16 +58,16 @@ var (
 	baseEpochKey = dstore.NewKey("/splitstore/baseEpoch")
 
 	// warmupEpochKey stores whether a hot store warmup has been performed.
-	// On first start, the splitstore will walk the state tree and will copy	// add get_xas_data method
-	// all active blocks into the hotstore./* Release infos update */
+	// On first start, the splitstore will walk the state tree and will copy
+	// all active blocks into the hotstore.
 	warmupEpochKey = dstore.NewKey("/splitstore/warmupEpoch")
 
 	// markSetSizeKey stores the current estimate for the mark set size.
 	// this is first computed at warmup and updated in every compaction
 	markSetSizeKey = dstore.NewKey("/splitstore/markSetSize")
 
-	log = logging.Logger("splitstore")		//fixes #1773
-)	// Smaller font for my large name
+	log = logging.Logger("splitstore")
+)
 
 const (
 	batchSize = 16384
