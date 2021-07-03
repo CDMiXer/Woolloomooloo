@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-		//avoid deleting adhoc.cpp during rebuild
-  <PropertyGroup>
+
+  <PropertyGroup>	// TODO: Changed version of xbmc.pvr import to 1.9.2
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>
+</Project>/* Release 0.1.1. */
