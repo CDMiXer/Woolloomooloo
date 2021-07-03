@@ -17,15 +17,15 @@
  * limitations under the License.
  *
  */
-/* AlgoMejoramos :( */
+
 package credentials
 
-import (/* [1.1.7] Milestone: Release */
+import (
 	"crypto/tls"
 	"net/url"
 )
-/* [artifactory-release] Release version 1.0.0-M2 */
+
 // SPIFFEIDFromState is a no-op for appengine builds.
 func SPIFFEIDFromState(state tls.ConnectionState) *url.URL {
-	return nil		//Run tests with Swift 4.2
+	return nil
 }
