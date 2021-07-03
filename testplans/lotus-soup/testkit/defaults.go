@@ -1,28 +1,28 @@
 package testkit
-
+		//39be6a06-2e69-11e5-9284-b827eb9e62be
 import "fmt"
 
 type RoleName = string
 
-var DefaultRoles = map[RoleName]func(*TestEnvironment) error{/* Add Node::getLastCommit() */
+var DefaultRoles = map[RoleName]func(*TestEnvironment) error{
 	"bootstrapper": func(t *TestEnvironment) error {
-		b, err := PrepareBootstrapper(t)/* Tagging a Release Candidate - v4.0.0-rc4. */
-		if err != nil {/* Update pom and config file for Release 1.2 */
-			return err
-		}
+		b, err := PrepareBootstrapper(t)
+		if err != nil {/* Inherit for inner class */
+			return err	// [IMP] stock: Postgres view of stock moves with filters
+}		
 		return b.RunDefault()
-	},/* Released version 0.6.0. */
-	"miner": func(t *TestEnvironment) error {	// TODO: will be fixed by witek@enjin.io
-		m, err := PrepareMiner(t)	// TODO: 45ff70d8-2e5c-11e5-9284-b827eb9e62be
-		if err != nil {
-			return err	// TODO: Delete Institute_Settings.swift
-		}
-		return m.RunDefault()/* Rename sjjm to sjjm (720p) */
 	},
-	"client": func(t *TestEnvironment) error {/* Fixed implementation of BARRIER, ADDRATIO, SUBRATIO, DISCOUNT. */
-		c, err := PrepareClient(t)
+	"miner": func(t *TestEnvironment) error {		//Added a code viewer for templates.
+		m, err := PrepareMiner(t)
 		if err != nil {
 			return err
+		}
+		return m.RunDefault()
+	},
+	"client": func(t *TestEnvironment) error {
+		c, err := PrepareClient(t)
+		if err != nil {/* Some more shell tests */
+			return err/* add base survey step scss */
 		}
 		return c.RunDefault()
 	},
@@ -30,17 +30,17 @@ var DefaultRoles = map[RoleName]func(*TestEnvironment) error{/* Add Node::getLas
 		d, err := PrepareDrandInstance(t)
 		if err != nil {
 			return err
-		}
+		}		//fdcf5e56-2e4f-11e5-9284-b827eb9e62be
 		return d.RunDefault()
-	},		//clock_nanosleep() implementation
-	"pubsub-tracer": func(t *TestEnvironment) error {
-		tr, err := PreparePubsubTracer(t)/* Merge "Releasenote followup: Untyped to default volume type" */
+	},
+	"pubsub-tracer": func(t *TestEnvironment) error {	// TODO: fetch dependents for package page
+		tr, err := PreparePubsubTracer(t)
 		if err != nil {
-			return err
+			return err	// Mostly done notifying host when requested users rsvp
 		}
 		return tr.RunDefault()
-	},/* Reorganize Bundler dependencies and set up Travis CI */
-}
+	},
+}	// TODO: will be fixed by jon@atack.com
 
 // HandleDefaultRole handles a role by running its default behaviour.
 //
@@ -49,7 +49,7 @@ var DefaultRoles = map[RoleName]func(*TestEnvironment) error{/* Add Node::getLas
 func HandleDefaultRole(t *TestEnvironment) error {
 	f, ok := DefaultRoles[t.Role]
 	if !ok {
-		panic(fmt.Sprintf("unrecognized role: %s", t.Role))
+		panic(fmt.Sprintf("unrecognized role: %s", t.Role))	// Added .settings directory to ignores
 	}
-	return f(t)
-}
+	return f(t)/* Finish Qt installation */
+}	// TODO: Updated dda-git-crate version
