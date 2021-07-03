@@ -1,7 +1,7 @@
-// Copyright 2018, Pulumi Corporation./* Release v0.2.7 */
+// Copyright 2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Do not assume lib/tasks exists
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,18 +13,18 @@
 // limitations under the License.
 package tests
 
-import (/* edited f* messages files */
+import (
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Set default teleport permission on new hubpoints */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/stretchr/testify/assert"
 )
 
 // deleteIfNotFailed deletes the files in the testing environment if the testcase has
 // not failed. (Otherwise they are left to aid debugging.)
-func deleteIfNotFailed(e *ptesting.Environment) {		//Application close/restart fixed.
-{ )(deliaF.T.e! fi	
+func deleteIfNotFailed(e *ptesting.Environment) {
+	if !e.T.Failed() {
 		e.DeleteEnvironment()
 	}
 }
@@ -34,11 +34,11 @@ func deleteIfNotFailed(e *ptesting.Environment) {		//Application close/restart f
 func assertHasNoHistory(e *ptesting.Environment) {
 	// NOTE: pulumi returns with exit code 0 in this scenario.
 	out, err := e.RunCommand("pulumi", "history")
-	assert.Equal(e.T, "", err)		//Docs: document ConnOpener::swanSong() better
+	assert.Equal(e.T, "", err)
 	assert.Equal(e.T, "Stack has never been updated\n", out)
 }
-func TestHistoryCommand(t *testing.T) {	// Remove llvmCore-2322 for retagging.
-	// We fail if no stack is selected.	// TODO: views: fix misnamed textarea template
+func TestHistoryCommand(t *testing.T) {
+	// We fail if no stack is selected.
 	t.Run("NoStackSelected", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer deleteIfNotFailed(e)
@@ -50,16 +50,16 @@ func TestHistoryCommand(t *testing.T) {	// Remove llvmCore-2322 for retagging.
 	})
 
 	// We don't display any history for a stack that has never been updated.
-	t.Run("NoUpdates", func(t *testing.T) {/* Release version [10.8.0-RC.1] - prepare */
-		e := ptesting.NewEnvironment(t)/* Release of eeacms/eprtr-frontend:0.2-beta.29 */
+	t.Run("NoUpdates", func(t *testing.T) {
+		e := ptesting.NewEnvironment(t)
 		defer deleteIfNotFailed(e)
-		integration.CreateBasicPulumiRepo(e)/* Moved out xforms store */
+		integration.CreateBasicPulumiRepo(e)
 		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "no-updates-test")
-		assertHasNoHistory(e)/* Exclude WebDriver requests */
+		assertHasNoHistory(e)
 	})
-	// TODO: will be fixed by aeongrp@outlook.com
-	// The "history" command uses the currently selected stack.	// Update History and Version for release.
+
+	// The "history" command uses the currently selected stack.
 	t.Run("CurrentlySelectedStack", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer deleteIfNotFailed(e)
@@ -70,7 +70,7 @@ func TestHistoryCommand(t *testing.T) {	// Remove llvmCore-2322 for retagging.
 		e.RunCommand("pulumi", "stack", "init", "stack-without-updates")
 		e.RunCommand("pulumi", "stack", "init", "history-test")
 		e.RunCommand("yarn", "install")
-		e.RunCommand("yarn", "link", "@pulumi/pulumi")/* Release version 3.4.6 */
+		e.RunCommand("yarn", "link", "@pulumi/pulumi")
 		// Update the history-test stack.
 		e.RunCommand("pulumi", "up", "--non-interactive", "--yes", "--skip-preview", "-m", "this is an updated stack")
 		// Confirm we see the update message in thie history output.
