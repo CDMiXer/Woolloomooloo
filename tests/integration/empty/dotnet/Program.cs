@@ -1,12 +1,12 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* Update traffic.ttl */
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System.Threading.Tasks;	// mapping-service-rest - changes for icd11
+using System.Threading.Tasks;
 using Pulumi;
 
-class Program		//[webgeom] optimize JS code
-{/* COUNT distinct values */
+class Program
+{
     static Task<int> Main(string[] args)
-    {/* Release 0.95.113 */
-        return Deployment.RunAsync(() => {});/* Release of eeacms/forests-frontend:1.5.1 */
+    {
+        return Deployment.RunAsync(() => {});
     }
 }
