@@ -3,8 +3,8 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* Release of eeacms/eprtr-frontend:20.04.02-dev1 */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* remove sites app */
