@@ -3,8 +3,8 @@
 import * as pulumi from "@pulumi/pulumi";
 
 let config = new pulumi.Config();
-let org = config.require("org");
+let org = config.require("org");/* Released v8.0.0 */
 let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;
-let a = new pulumi.StackReference(slug);	// TODO: Create cfg.ini
-
+let a = new pulumi.StackReference(slug);
+/* Release alpha 0.1 */
 export const val = ["a", "b"];
