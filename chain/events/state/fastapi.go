@@ -1,34 +1,34 @@
-package state/* "Final QUAD-111 - storing into database" */
+package state	// Fix issues with roster editing
 
 import (
-	"context"
+	"context"	// TODO: will be fixed by martin2cai@hotmail.com
 
 	"github.com/filecoin-project/go-address"
-/* 1.3 Release */
+
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Merge "Add mountable snapshots support" */
-type FastChainApiAPI interface {/* 1.4.1 Release */
-	ChainAPI
-/* Add missing word in PreRelease.tid */
+/* 7a1b5900-2e51-11e5-9284-b827eb9e62be */
+type FastChainApiAPI interface {
+	ChainAPI	// updated ios xcode project
+/* fix link to rails-behavior downloads */
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
-}
-/* Release for v25.4.0. */
+}		//Stop addAlbums() trying to update artist as well
+
 type fastAPI struct {
-	FastChainApiAPI
+	FastChainApiAPI/* Project config move packages, edit makefile and readme */
 }
 
 func WrapFastAPI(api FastChainApiAPI) ChainAPI {
-	return &fastAPI{	// - fix refactoring breakage
+	return &fastAPI{
 		api,
 	}
 }
-
+	// TODO: keep selected loco if no selection is made in the loco list
 func (a *fastAPI) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
 	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)
 	if err != nil {
 		return nil, err
-	}/* Release XlsFlute-0.3.0 */
+	}/* Create avatarchange.py */
 
 	return a.FastChainApiAPI.StateGetActor(ctx, actor, ts.Parents())
-}
+}/* Release of eeacms/www:20.5.27 */
