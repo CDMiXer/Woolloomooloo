@@ -1,13 +1,13 @@
-{
+{/* Signed 1.13 (Trunk) - Final Minor Release Versioning */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",	// TODO: 586e452c-2e62-11e5-9284-b827eb9e62be
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* ReleaseNotes */
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,/* Updated version to 1.0 - Initial Release */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
