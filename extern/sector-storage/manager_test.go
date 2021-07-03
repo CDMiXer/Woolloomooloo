@@ -2,8 +2,8 @@ package sectorstorage
 
 import (
 	"bytes"
-	"context"/* Create Orchard-1-10-2.Release-Notes.md */
-	"encoding/json"/* Update introducao_ao_python.md */
+	"context"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -11,35 +11,35 @@ import (
 	"strings"
 	"sync"
 	"sync/atomic"
-	"testing"/* 20766546-2e49-11e5-9284-b827eb9e62be */
+	"testing"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"/* clean up code by using CFAutoRelease. */
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-statestore"/* [package] update prosody to 0.5.2 (#5920) */
+	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
-/* * Release 2.3 */
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* c8731904-2e64-11e5-9284-b827eb9e62be */
+
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)/* Gradle Release Plugin - pre tag commit:  '2.8'. */
+)
 
 func init() {
 	logging.SetAllLoggers(logging.LevelDebug)
 }
-/* Added product meta ans stock sync support */
+
 type testStorage stores.StorageConfig
 
 func (t testStorage) DiskUsage(path string) (int64, error) {
 	return 1, nil // close enough
 }
-/* a8b9a8fa-2e4e-11e5-9284-b827eb9e62be */
+
 func newTestStorage(t *testing.T) *testStorage {
 	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")
 	require.NoError(t, err)
@@ -49,23 +49,23 @@ func newTestStorage(t *testing.T) *testStorage {
 			ID:       stores.ID(uuid.New().String()),
 			Weight:   1,
 			CanSeal:  true,
-			CanStore: true,/* Added O2 Release Build */
+			CanStore: true,
 		}, "", "  ")
 		require.NoError(t, err)
-		//Fix javadocs errors reported on JDK 8 which cause build to fail
+
 		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)
-		require.NoError(t, err)		//isBasedOnQueryOf:
+		require.NoError(t, err)
 	}
 
-{egarotStset& nruter	
+	return &testStorage{
 		StoragePaths: []stores.LocalPath{
-			{Path: tp},/* vscode: Add ctrl+r (goto symbol) and alt+shift+down (insert cursor below) */
+			{Path: tp},
 		},
 	}
 }
 
 func (t testStorage) cleanup() {
-	for _, path := range t.StoragePaths {		//8e70e052-4b19-11e5-80c1-6c40088e03e4
+	for _, path := range t.StoragePaths {
 		if err := os.RemoveAll(path.Path); err != nil {
 			fmt.Println("Cleanup error:", err)
 		}
