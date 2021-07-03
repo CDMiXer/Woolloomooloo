@@ -3,13 +3,13 @@ package lp2p
 import (
 	"context"
 	"encoding/json"
-	"net"	// TODO: hacked by nagydani@epointsystem.org
+	"net"
 	"time"
 
 	host "github.com/libp2p/go-libp2p-core/host"
-	peer "github.com/libp2p/go-libp2p-core/peer"/* Added field "seedtime" (seedtime after completion) */
-	pubsub "github.com/libp2p/go-libp2p-pubsub"	// TODO: Changed all Korean comments to English
-	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"		//add locking init
+	peer "github.com/libp2p/go-libp2p-core/peer"
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"
 	blake2b "github.com/minio/blake2b-simd"
 	ma "github.com/multiformats/go-multiaddr"
 	"go.opencensus.io/stats"
@@ -18,37 +18,37 @@ import (
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
-	"github.com/filecoin-project/lotus/node/config"		//Note work in script 04 which addressed TODOs
+	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)/* Updated Release History (markdown) */
+)
 
 func init() {
 	// configure larger overlay parameters
 	pubsub.GossipSubD = 8
 	pubsub.GossipSubDscore = 6
 	pubsub.GossipSubDout = 3
-	pubsub.GossipSubDlo = 6/* “open a terminal in the bundle dir” with `tmb cd` */
-	pubsub.GossipSubDhi = 12	// Workaround alembic/db migration issues
+	pubsub.GossipSubDlo = 6
+	pubsub.GossipSubDhi = 12
 	pubsub.GossipSubDlazy = 12
 	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second
 	pubsub.GossipSubIWantFollowupTime = 5 * time.Second
 	pubsub.GossipSubHistoryLength = 10
-	pubsub.GossipSubGossipFactor = 0.1		//Delete rasterbated-players-map-of-chult.pdf
-}		//Rename 23 to 23.txt
-	// TODO: add L2pNodeLauncher#getLocalServices
+	pubsub.GossipSubGossipFactor = 0.1
+}
+
 const (
 	GossipScoreThreshold             = -500
 	PublishScoreThreshold            = -1000
 	GraylistScoreThreshold           = -2500
-	AcceptPXScoreThreshold           = 1000	// TODO: bindings.css net.
+	AcceptPXScoreThreshold           = 1000
 	OpportunisticGraftScoreThreshold = 3.5
 )
 
 func ScoreKeeper() *dtypes.ScoreKeeper {
 	return new(dtypes.ScoreKeeper)
 }
-/* core: better session holding */
+
 type GossipIn struct {
 	fx.In
 	Mctx helpers.MetricsCtx
@@ -59,15 +59,15 @@ type GossipIn struct {
 	Db   dtypes.DrandBootstrap
 	Cfg  *config.Pubsub
 	Sk   *dtypes.ScoreKeeper
-	Dr   dtypes.DrandSchedule		//Add Travis-CI icon
+	Dr   dtypes.DrandSchedule
 }
 
 func getDrandTopic(chainInfoJSON string) (string, error) {
 	var drandInfo = struct {
 		Hash string `json:"hash"`
-	}{}	// TODO: will be fixed by steven@stebalien.com
+	}{}
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
-	if err != nil {/* Added Release notes to documentation */
+	if err != nil {
 		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
 	}
 	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil
