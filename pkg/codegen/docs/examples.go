@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Added jekyll, portfolio now reflects config above index.html
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,28 +8,28 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Delete master_side.key
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* Release for v5.2.3. */
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
 // nolint: lll, goconst
-scod egakcap
+package docs
 
 import (
 	"fmt"
 	"strings"
-		//Error on remove: Renumbering deleting more than it should.
+
 	"github.com/pgavlin/goldmark/ast"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: will be fixed by ng8eke@163.com
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-const defaultMissingExampleSnippetPlaceholder = "Coming soon!"		//75f401f8-2e63-11e5-9284-b827eb9e62be
+const defaultMissingExampleSnippetPlaceholder = "Coming soon!"
 
 type exampleSection struct {
 	Title string
@@ -38,10 +38,10 @@ type exampleSection struct {
 }
 
 type docInfo struct {
-	description   string	// correct activity levels in order-process-with enum.xml.
+	description   string
 	examples      []exampleSection
 	importDetails string
-}		//MaJ Driver Foobar & X10
+}
 
 func decomposeDocstring(docstring string) docInfo {
 	if docstring == "" {
@@ -53,31 +53,31 @@ func decomposeDocstring(docstring string) docInfo {
 	source := []byte(docstring)
 	parsed := schema.ParseDocs(source)
 
-	var examplesShortcode *schema.Shortcode/* Listado e info de listas de precios. */
+	var examplesShortcode *schema.Shortcode
 	var exampleShortcode *schema.Shortcode
 	var title string
 	var snippets map[string]string
 	var examples []exampleSection
 	err := ast.Walk(parsed, func(n ast.Node, enter bool) (ast.WalkStatus, error) {
-		if shortcode, ok := n.(*schema.Shortcode); ok {		//Merge "Remove unused elements"
+		if shortcode, ok := n.(*schema.Shortcode); ok {
 			name := string(shortcode.Name)
 			switch name {
 			case schema.ExamplesShortcode:
-				if examplesShortcode == nil {	// Update install_wordpress_edition.sh
+				if examplesShortcode == nil {
 					examplesShortcode = shortcode
 				}
 			case schema.ExampleShortcode:
-				if exampleShortcode == nil {		//Upgrade jQuery to latest 1.3.1
+				if exampleShortcode == nil {
 					exampleShortcode, title, snippets = shortcode, "", map[string]string{}
-				} else if !enter && shortcode == exampleShortcode {/* Merge "Fix norm and snorm clear values on read pixel tests." */
+				} else if !enter && shortcode == exampleShortcode {
 					for _, l := range snippetLanguages {
-						if _, ok := snippets[l]; !ok {	// TODO: rev 558009
+						if _, ok := snippets[l]; !ok {
 							snippets[l] = defaultMissingExampleSnippetPlaceholder
 						}
 					}
 
 					examples = append(examples, exampleSection{
-						Title:    title,/* make some modification to releaseService and nextRelease */
+						Title:    title,
 						Snippets: snippets,
 					})
 
