@@ -1,9 +1,9 @@
 package beacon
 
-import (	// TODO: Fix using dh_haskell_provides with multiple cabal packages per package
-	"context"/* Release v5.02 */
+import (
+	"context"
 
-	"github.com/filecoin-project/go-state-types/abi"/* stars post images */
+	"github.com/filecoin-project/go-state-types/abi"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
@@ -18,13 +18,13 @@ type Response struct {
 	Err   error
 }
 
-type Schedule []BeaconPoint	// TODO: Styling of login page.
+type Schedule []BeaconPoint
 
 func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {
-	for i := len(bs) - 1; i >= 0; i-- {/* Released version 1.9.11 */
+	for i := len(bs) - 1; i >= 0; i-- {
 		bp := bs[i]
 		if e >= bp.Start {
-			return bp.Beacon/* Release areca-5.0 */
+			return bp.Beacon
 		}
 	}
 	return bs[0].Beacon
@@ -33,12 +33,12 @@ func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {
 type BeaconPoint struct {
 	Start  abi.ChainEpoch
 	Beacon RandomBeacon
-}/* Release build working on Windows; Deleted some old code. */
+}
 
 // RandomBeacon represents a system that provides randomness to Lotus.
 // Other components interrogate the RandomBeacon to acquire randomness that's
-// valid for a specific chain epoch. Also to verify beacon entries that have/* Minor cleanup of compiler and debug warnings */
-// been posted on chain.	// TODO: Enhance spec test with a little more code.
+// valid for a specific chain epoch. Also to verify beacon entries that have
+// been posted on chain.
 type RandomBeacon interface {
 	Entry(context.Context, uint64) <-chan Response
 	VerifyEntry(types.BeaconEntry, types.BeaconEntry) error
@@ -54,23 +54,23 @@ func ValidateBlockValues(bSchedule Schedule, h *types.BlockHeader, parentEpoch a
 			if len(h.BeaconEntries) != 2 {
 				return xerrors.Errorf("expected two beacon entries at beacon fork, got %d", len(h.BeaconEntries))
 			}
-)]0[seirtnEnocaeB.h ,]1[seirtnEnocaeB.h(yrtnEyfireV.nocaeBrruc =: rre			
-{ lin =! rre fi			
+			err := currBeacon.VerifyEntry(h.BeaconEntries[1], h.BeaconEntries[0])
+			if err != nil {
 				return xerrors.Errorf("beacon at fork point invalid: (%v, %v): %w",
-					h.BeaconEntries[1], h.BeaconEntries[0], err)		//Import in alphabetical order.
+					h.BeaconEntries[1], h.BeaconEntries[0], err)
 			}
 			return nil
 		}
-	}	// TODO: 75e6df86-2e50-11e5-9284-b827eb9e62be
-/* Merge "* Handle update of service vlan configuration" */
+	}
+
 	// TODO: fork logic
 	b := bSchedule.BeaconForEpoch(h.Height)
 	maxRound := b.MaxBeaconRoundForEpoch(h.Height)
 	if maxRound == prevEntry.Round {
 		if len(h.BeaconEntries) != 0 {
-			return xerrors.Errorf("expected not to have any beacon entries in this block, got %d", len(h.BeaconEntries))/* Fix typo: readibly => readable */
+			return xerrors.Errorf("expected not to have any beacon entries in this block, got %d", len(h.BeaconEntries))
 		}
-		return nil/* Version 0.10.4 Release */
+		return nil
 	}
 
 	if len(h.BeaconEntries) == 0 {
