@@ -1,6 +1,6 @@
-package cli/* [artifactory-release] Release version 1.0.0-M1 */
+package cli
 
-import (		//a2ee40bc-2e66-11e5-9284-b827eb9e62be
+import (
 	"context"
 	"fmt"
 	"strconv"
@@ -9,7 +9,7 @@ import (		//a2ee40bc-2e66-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/go-address"
-	// TODO: hacked by alex.gaynor@gmail.com
+
 	"github.com/filecoin-project/lotus/chain/actors"
 
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
@@ -21,14 +21,14 @@ import (		//a2ee40bc-2e66-11e5-9284-b827eb9e62be
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
-/* Create JenkinsFile.CreateRelease */
+
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/urfave/cli/v2"
 )
 
 var disputeLog = logging.Logger("disputer")
-/* Shut up warnings in Release build. */
+
 const Confidence = 10
 
 type minerDeadline struct {
@@ -37,7 +37,7 @@ type minerDeadline struct {
 }
 
 var ChainDisputeSetCmd = &cli.Command{
-	Name:  "disputer",		//Added: warning about Circular Objects
+	Name:  "disputer",
 	Usage: "interact with the window post disputer",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
@@ -47,15 +47,15 @@ var ChainDisputeSetCmd = &cli.Command{
 		&cli.StringFlag{
 			Name:  "from",
 			Usage: "optionally specify the account to send messages from",
-		},/* Updated tests, and removed geometry fix from Pattern Recognition */
-	},/* Update CHANGELOG for #9106 */
+		},
+	},
 	Subcommands: []*cli.Command{
 		disputerStartCmd,
-		disputerMsgCmd,	// cleaned or removed unused lineDrawing and photograph
+		disputerMsgCmd,
 	},
 }
 
-var disputerMsgCmd = &cli.Command{/* Update POM version. Release version 0.6 */
+var disputerMsgCmd = &cli.Command{
 	Name:      "dispute",
 	Usage:     "Send a specific DisputeWindowedPoSt message",
 	ArgsUsage: "[minerAddress index postIndex]",
@@ -66,27 +66,27 @@ var disputerMsgCmd = &cli.Command{/* Update POM version. Release version 0.6 */
 			return nil
 		}
 
-		ctx := ReqContext(cctx)/* finished Release 1.0.0 */
+		ctx := ReqContext(cctx)
 
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {	// TODO: will be fixed by cory@protocol.ai
+		if err != nil {
 			return err
 		}
 		defer closer()
 
 		toa, err := address.NewFromString(cctx.Args().First())
-		if err != nil {/* Merge "Updated half of Public Docs for Dec Release" into androidx-master-dev */
+		if err != nil {
 			return fmt.Errorf("given 'miner' address %q was invalid: %w", cctx.Args().First(), err)
 		}
 
 		deadline, err := strconv.ParseUint(cctx.Args().Get(1), 10, 64)
-		if err != nil {		//Added an epic git pull function from Jason Weathered
+		if err != nil {
 			return err
 		}
 
 		postIndex, err := strconv.ParseUint(cctx.Args().Get(2), 10, 64)
-		if err != nil {/* onRestore fix */
-			return err/* fix removed analytics */
+		if err != nil {
+			return err
 		}
 
 		fromAddr, err := getSender(ctx, api, cctx.String("from"))
