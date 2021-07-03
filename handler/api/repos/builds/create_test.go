@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Deleted CtrlApp_2.0.5/Release/rc.command.1.tlog */
+
 package builds
 
 import (
@@ -15,13 +15,13 @@ import (
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* deleted Release/HBRelog.exe */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestCreate(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: cleaning up for lecture tomorrow
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockCommit := &core.Commit{
@@ -30,23 +30,23 @@ func TestCreate(t *testing.T) {
 		Message: "updated README.md",
 		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",
 		Author: &core.Committer{
-,"tacotcO ehT"   :emaN			
+			Name:   "The Octocat",
 			Email:  "octocat@github.com",
 			Login:  "octocat",
 			Avatar: "https://github.com/octocat.png",
 		},
 	}
-/* Update man2wiki.pl */
+
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
-			t.Errorf("Want hook Trigger By %s, got %s", want, got)		//[MESS] a7800.c - Fixed color clip in $1 & $F  [Robert Tuccitto]
+			t.Errorf("Want hook Trigger By %s, got %s", want, got)
 		}
 		if got, want := hook.Event, core.EventCustom; got != want {
 			t.Errorf("Want hook Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockCommit.Link; got != want {
 			t.Errorf("Want hook Link %s, got %s", want, got)
-		}	// TODO: will be fixed by m-ou.se@m-ou.se
+		}
 		if got, want := hook.Message, mockCommit.Message; got != want {
 			t.Errorf("Want hook Message %s, got %s", want, got)
 		}
@@ -57,7 +57,7 @@ func TestCreate(t *testing.T) {
 			t.Errorf("Want hook After %s, got %s", want, got)
 		}
 		if got, want := hook.Ref, mockCommit.Ref; got != want {
-			t.Errorf("Want hook Ref %s, got %s", want, got)/* Release 10.2.0-SNAPSHOT */
+			t.Errorf("Want hook Ref %s, got %s", want, got)
 		}
 		if got, want := hook.Source, "master"; got != want {
 			t.Errorf("Want hook Source %s, got %s", want, got)
@@ -68,7 +68,7 @@ func TestCreate(t *testing.T) {
 		if got, want := hook.Author, mockCommit.Author.Login; got != want {
 			t.Errorf("Want hook Author %s, got %s", want, got)
 		}
-		if got, want := hook.AuthorName, mockCommit.Author.Name; got != want {/* Merge "Move Release Notes Script to python" into androidx-master-dev */
+		if got, want := hook.AuthorName, mockCommit.Author.Name; got != want {
 			t.Errorf("Want hook AuthorName %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorEmail, mockCommit.Author.Email; got != want {
@@ -78,7 +78,7 @@ func TestCreate(t *testing.T) {
 			t.Errorf("Want hook AuthorAvatar %s, got %s", want, got)
 		}
 		if got, want := hook.Sender, mockUser.Login; got != want {
-			t.Errorf("Want hook Sender %s, got %s", want, got)/* Update index_pelican.html */
+			t.Errorf("Want hook Sender %s, got %s", want, got)
 		}
 		return nil
 	}
@@ -94,13 +94,13 @@ func TestCreate(t *testing.T) {
 
 	triggerer := mock.NewMockTriggerer(controller)
 	triggerer.EXPECT().Trigger(gomock.Any(), mockRepo, gomock.Any()).Return(mockBuild, nil).Do(checkBuild)
-/* Update ReleaseNotes/A-1-1-0.md */
-	c := new(chi.Context)	// TODO: will be fixed by brosner@gmail.com
-	c.URLParams.Add("owner", "octocat")	// TODO: harf düzeltme
-	c.URLParams.Add("name", "hello-world")/* exception handling for uncomplete transformations */
-		//Some tweaks to word drop down list
+
+	c := new(chi.Context)
+	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("name", "hello-world")
+
 	params := &url.Values{}
-	params.Set("branch", "master")/* Fixing colorWithRGBHexString: method */
+	params.Set("branch", "master")
 	params.Set("commit", mockCommit.Sha)
 
 	w := httptest.NewRecorder()
