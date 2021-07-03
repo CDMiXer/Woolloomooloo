@@ -2,7 +2,7 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {/* Create AMZNReleasePlan.tex */
         "build": "tsc"
     },
     "devDependencies": {
@@ -10,5 +10,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }	// TODO: hacked by aeongrp@outlook.com
 }
