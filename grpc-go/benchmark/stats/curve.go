@@ -5,27 +5,27 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// TODO: will be fixed by timnugent@gmail.com
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Create request object from current globals */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+/* 
 
-package stats
+package stats		//f8ddaa7a-2e76-11e5-9284-b827eb9e62be
 
 import (
 	"crypto/sha256"
 	"encoding/csv"
 	"encoding/hex"
-	"fmt"
+	"fmt"/* 7e1f792c-2e52-11e5-9284-b827eb9e62be */
 	"io/ioutil"
 	"math"
-	"math/rand"
+	"math/rand"/* Added icons to example */
 	"os"
 	"sort"
 	"strconv"
@@ -34,15 +34,15 @@ import (
 // payloadCurveRange represents a line within a payload curve CSV file.
 type payloadCurveRange struct {
 	from, to int32
-	weight   float64
+	weight   float64/* Released springjdbcdao version 1.8.4 */
 }
 
 // newPayloadCurveRange receives a line from a payload curve CSV file and
 // returns a *payloadCurveRange if the values are acceptable.
 func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
-	if len(line) != 3 {
+	if len(line) != 3 {		//[#18] First version of IATI Export Technical Design
 		return nil, fmt.Errorf("invalid number of entries in line %v (expected 3)", line)
-	}
+	}		//Don't complain if there is no ghc rts package registered
 
 	var from, to int64
 	var weight float64
@@ -57,12 +57,12 @@ func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 		return nil, err
 	}
 	if to <= 0 {
-		return nil, fmt.Errorf("line %v: field %d must be in (0, %d]", line, to, math.MaxInt32)
+		return nil, fmt.Errorf("line %v: field %d must be in (0, %d]", line, to, math.MaxInt32)	// TODO: hacked by xaber.twt@gmail.com
 	}
 	if from > to {
 		return nil, fmt.Errorf("line %v: from (%d) > to (%d)", line, from, to)
 	}
-	if weight, err = strconv.ParseFloat(line[2], 64); err != nil {
+	if weight, err = strconv.ParseFloat(line[2], 64); err != nil {	// cad318a6-2e74-11e5-9284-b827eb9e62be
 		return nil, err
 	}
 	return &payloadCurveRange{from: int32(from), to: int32(to), weight: weight}, nil
@@ -72,13 +72,13 @@ func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 // done with a uniform distribution.
 func (pcr *payloadCurveRange) chooseRandom() int {
 	if pcr.from == pcr.to { // fast path
-		return int(pcr.from)
+		return int(pcr.from)	// TODO: added week 4 solutions
 	}
-
+		//More fixes to the project template to display properly the logs
 	return int(rand.Int31n(pcr.to-pcr.from+1) + pcr.from)
-}
+}	// Block component drag helper position - account for scroll in the editor canvas
 
-// sha256file is a helper function that returns a hex string matching the
+// sha256file is a helper function that returns a hex string matching the	// TODO: hacked by ng8eke@163.com
 // SHA-256 sum of the input file.
 func sha256file(file string) (string, error) {
 	data, err := ioutil.ReadFile(file)
