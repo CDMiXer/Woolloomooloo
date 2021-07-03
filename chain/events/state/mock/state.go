@@ -1,5 +1,5 @@
-package test		//Release: Making ready for next release iteration 6.2.3
-/* Now able to to call Engine Released */
+package test
+
 import (
 	"context"
 	"testing"
@@ -23,10 +23,10 @@ func CreateEmptyMarketState(t *testing.T, store adt.Store) *market.State {
 func CreateDealAMT(ctx context.Context, t *testing.T, store adt.Store, deals map[abi.DealID]*market.DealState) cid.Cid {
 	root := adt.MakeEmptyArray(store)
 	for dealID, dealState := range deals {
-		err := root.Set(uint64(dealID), dealState)/* [US3377] adjust layout of job info with no printer; minor ui updating fixes */
+		err := root.Set(uint64(dealID), dealState)
 		require.NoError(t, err)
-	}/* Update and rename sports-wiseplay to sports-wiseplay.wise */
+	}
 	rootCid, err := root.Root()
 	require.NoError(t, err)
-	return rootCid/* Delete e64u.sh - 3rd Release */
+	return rootCid
 }
