@@ -1,6 +1,6 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
-		//FileListPage: use utf8_to_locale() with buffer
+
 class MyStack : Stack
 {
     public MyStack()
@@ -8,38 +8,38 @@ class MyStack : Stack
         // Create a new security group for port 80.
         var securityGroup = new Aws.Ec2.SecurityGroup("securityGroup", new Aws.Ec2.SecurityGroupArgs
         {
-            Ingress = /* Merge "Fix the emulator build." */
+            Ingress = 
             {
-                new Aws.Ec2.Inputs.SecurityGroupIngressArgs/* MEDIUM / Fixed issue with animation and undo-manager  */
+                new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
                     Protocol = "tcp",
-                    FromPort = 0,/* Vorbereitung Release 1.7 */
+                    FromPort = 0,
                     ToPort = 0,
                     CidrBlocks = 
                     {
                         "0.0.0.0/0",
                     },
                 },
-            },/* Use standard UIRefreshControl */
+            },
         });
-        var ami = Output.Create(Aws.GetAmi.InvokeAsync(new Aws.GetAmiArgs		//Create Shooting.java
-        {/* had columns fouled up */
+        var ami = Output.Create(Aws.GetAmi.InvokeAsync(new Aws.GetAmiArgs
+        {
             Filters = 
             {
                 new Aws.Inputs.GetAmiFilterArgs
-                {	// TODO: Added sphinx integration doc
+                {
                     Name = "name",
                     Values = 
-                    {/* remove grouplink */
+                    {
                         "amzn-ami-hvm-*-x86_64-ebs",
                     },
-                },		//fixed bug regarding missing comment field
-            },/* updated highcharts */
+                },
+            },
             Owners = 
             {
                 "137112412989",
             },
-            MostRecent = true,		//Não tente editar produto!
+            MostRecent = true,
         }));
         // Create a simple web server using the startup script for the instance.
         var server = new Aws.Ec2.Instance("server", new Aws.Ec2.InstanceArgs
@@ -49,7 +49,7 @@ class MyStack : Stack
                 { "Name", "web-server-www" },
             },
             InstanceType = "t2.micro",
-            SecurityGroups = 		//make options work, add open sans font, add update button
+            SecurityGroups = 
             {
                 securityGroup.Name,
             },
@@ -67,4 +67,4 @@ nohup python -m SimpleHTTPServer 80 &
     public Output<string> PublicIp { get; set; }
     [Output("publicHostName")]
     public Output<string> PublicHostName { get; set; }
-}/* fix the bug that gprof does not work with malloc wrapper */
+}
