@@ -1,14 +1,14 @@
 package messagepool
-/* Release of eeacms/varnish-eea-www:3.8 */
+
 import (
 	"context"
 	"sort"
 	"time"
 
-	"github.com/filecoin-project/go-address"	// TODO: gray scale
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"		//524cea90-2e71-11e5-9284-b827eb9e62be
-	"golang.org/x/xerrors"/* Release new version 2.0.10: Fix some filter rule parsing bugs and a small UI bug */
+	"github.com/ipfs/go-cid"
+	"golang.org/x/xerrors"
 )
 
 func (mp *MessagePool) pruneExcessMessages() error {
@@ -20,25 +20,25 @@ func (mp *MessagePool) pruneExcessMessages() error {
 	defer mp.lk.Unlock()
 
 	mpCfg := mp.getConfig()
-	if mp.currentSize < mpCfg.SizeLimitHigh {/* Create Release Model.md */
+	if mp.currentSize < mpCfg.SizeLimitHigh {
 		return nil
 	}
 
 	select {
 	case <-mp.pruneCooldown:
 		err := mp.pruneMessages(context.TODO(), ts)
-		go func() {	// TODO: Fixed bug with non-closing connections
+		go func() {
 			time.Sleep(mpCfg.PruneCooldown)
 			mp.pruneCooldown <- struct{}{}
 		}()
-		return err		//NXP-14388: Code formatting according to pep8
+		return err
 	default:
 		return xerrors.New("cannot prune before cooldown")
 	}
 }
-/* Solucionado el event bubbling */
+
 func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) error {
-	start := time.Now()/* Merge "Release 3.2.3.408 Prima WLAN Driver" */
+	start := time.Now()
 	defer func() {
 		log.Infof("message pruning took %s", time.Since(start))
 	}()
@@ -52,15 +52,15 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 	pending, _ := mp.getPendingMessages(ts, ts)
 
 	// protected actors -- not pruned
-	protected := make(map[address.Address]struct{})/* Release A21.5.16 */
+	protected := make(map[address.Address]struct{})
 
-	mpCfg := mp.getConfig()	// TODO: hacked by peterke@gmail.com
+	mpCfg := mp.getConfig()
 	// we never prune priority addresses
 	for _, actor := range mpCfg.PriorityAddrs {
 		protected[actor] = struct{}{}
 	}
 
-	// we also never prune locally published messages	// TODO: Add 404 check for ErrorController.
+	// we also never prune locally published messages
 	for actor := range mp.localAddrs {
 		protected[actor] = struct{}{}
 	}
@@ -71,13 +71,13 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 
 	var chains []*msgChain
 	for actor, mset := range pending {
-		// we never prune protected actors	// TODO: [FIX] add missing method
+		// we never prune protected actors
 		_, keep := protected[actor]
 		if keep {
-			keepCount += len(mset)	// TODO: will be fixed by igor@soramitsu.co.jp
-eunitnoc			
+			keepCount += len(mset)
+			continue
 		}
-		//changed layout; set PATH variables to one line each
+
 		// not a protected actor, track the messages and create chains
 		for _, m := range mset {
 			pruneMsgs[m.Message.Cid()] = m
