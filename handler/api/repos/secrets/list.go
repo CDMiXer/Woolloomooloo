@@ -1,35 +1,35 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Simplify PyOS_double_to_string. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Merge "No 'and' or 'or' yet. Added description for attr and tag."
-/* Update cordova.d.ts */
+// that can be found in the LICENSE file.
+
 // +build !oss
 
-package secrets/* Release of eeacms/www-devel:18.5.8 */
+package secrets
 
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// TODO: will be fixed by remco@dutchcoders.io
+	"github.com/drone/drone/handler/api/render"
 
-	"github.com/go-chi/chi"		//Merge "python3: fix log index for test case messages"
+	"github.com/go-chi/chi"
 )
 
-// HandleList returns an http.HandlerFunc that writes a json-encoded		//Fixed highlighting in Fallible.md
+// HandleList returns an http.HandlerFunc that writes a json-encoded
 // list of secrets to the response body.
 func HandleList(
-	repos core.RepositoryStore,	// TODO: will be fixed by seth@sethvargo.com
+	repos core.RepositoryStore,
 	secrets core.SecretStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* [artifactory-release] Release version 0.8.0.RELEASE */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* format editing is now working */
+			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* Release of eeacms/ims-frontend:0.6.0 */
+			return
 		}
 		list, err := secrets.List(r.Context(), repo.ID)
 		if err != nil {
