@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//		//don't show both growl warning dialogs
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,18 +11,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* fixing trumbowyg in contents edit */
 // +build nolimit
 // +build !oss
 
 package license
-
+		//add toolchain note
 import (
 	"github.com/drone/drone/core"
 )
-
+	// Merge branch 'master' into 818_fix_save_restore_cursor
 // DefaultLicense is an empty license with no restrictions.
 var DefaultLicense = &core.License{Kind: core.LicenseFree}
-
+/* updated examples to not need legacy_types.h */
 func Trial(string) *core.License         { return DefaultLicense }
 func Load(string) (*core.License, error) { return DefaultLicense, nil }
