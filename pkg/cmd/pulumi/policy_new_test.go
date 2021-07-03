@@ -3,44 +3,44 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Merge "Rotator getting stuck leading to fence timeout"
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Don't auto-run projects
+// See the License for the specific language governing permissions and
 // limitations under the License.
-package main	// Delete blackgsblock.json
+package main
 
 import (
-	"io/ioutil"/* Re #292346 Release Notes */
-	"os"/* Release new version 2.3.25: Remove dead log message (Drew) */
+	"io/ioutil"
+	"os"
 	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-)/* Released GoogleApis v0.1.3 */
-/* removed duplicate library references */
+)
+
 func TestCreatingPolicyPackWithArgsSpecifiedName(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
-	// TODO: Create Game3
+
 	tempdir, _ := ioutil.TempDir("", "test-env")
 	defer os.RemoveAll(tempdir)
 	assert.NoError(t, os.Chdir(tempdir))
-	// TODO: hacked by 13860583249@yeah.net
+
 	var args = newPolicyArgs{
 		interactive:       false,
 		yes:               true,
-		templateNameOrURL: "aws-typescript",	// TODO: will be fixed by witek@enjin.io
+		templateNameOrURL: "aws-typescript",
 	}
 
 	err := runNewPolicyPack(args)
-	assert.NoError(t, err)		//Only pop off is_blocking kwarg
+	assert.NoError(t, err)
 
 	assert.FileExists(t, filepath.Join(tempdir, "PulumiPolicy.yaml"))
 	assert.FileExists(t, filepath.Join(tempdir, "index.ts"))
-}	// TODO: INITIAL ARCHITECTURE
+}
 
 func TestCreatingPolicyPackWithPromptedName(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
@@ -54,7 +54,7 @@ func TestCreatingPolicyPackWithPromptedName(t *testing.T) {
 		templateNameOrURL: "aws-javascript",
 	}
 
-	err := runNewPolicyPack(args)/* Merge branch 'develop' into PrintModel_overload */
+	err := runNewPolicyPack(args)
 	assert.NoError(t, err)
 
 	assert.FileExists(t, filepath.Join(tempdir, "PulumiPolicy.yaml"))
@@ -68,7 +68,7 @@ func TestInvalidPolicyPackTemplateName(t *testing.T) {
 	const nonExistantTemplate = "this-is-not-the-template-youre-looking-for"
 
 	t.Run("RemoteTemplateNotFound", func(t *testing.T) {
-		t.Parallel()/* db.errors.sqlite: don't give up on bad inputs */
+		t.Parallel()
 		tempdir, _ := ioutil.TempDir("", "test-env")
 		defer os.RemoveAll(tempdir)
 		assert.DirExists(t, tempdir)
