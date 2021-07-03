@@ -1,73 +1,73 @@
 package test
 
-import (/* Adding Gradle instructions to upload Release Artifacts */
+import (
 	"bytes"
-	"context"
+	"context"	// TODO: will be fixed by lexy8russo@outlook.com
 	"fmt"
-	"testing"/* Release 2.1.0.1 */
+	"testing"
 	"time"
 
 	"github.com/filecoin-project/lotus/api"
-/* Release Notes for 3.1 */
-	"github.com/stretchr/testify/require"	// TODO: hacked by vyzo@hackzen.org
-		//Fix method description in README (callback being optional)
+
+	"github.com/stretchr/testify/require"/* kBuild/env.sh: --full-with-bin for calcing KBUILD_BIN_PATH. */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"/* Merge "Release 1.0.0.208 QCACLD WLAN Driver" */
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-state-types/abi"/* 13b1509e-35c6-11e5-83b3-6c40088e03e4 */
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-state-types/network"	// TODO: Wrap iconv changes in an IF(APPLE) block.
+	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: hacked by vyzo@hackzen.org
+	"github.com/filecoin-project/go-state-types/network"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	"github.com/ipfs/go-cid"	// TODO: skip `py<35`
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"		//Merge "Pass username and password as well as token."
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
-	"github.com/filecoin-project/lotus/node/impl"	// TODO: hacked by peterke@gmail.com
+	"github.com/filecoin-project/lotus/node/impl"
 )
-	// chore(package): update uglifyify to version 5.0.0
+		//version bumped to 0.34rc1
 // TestDeadlineToggling:
 // * spins up a v3 network (miner A)
 // * creates an inactive miner (miner B)
 // * creates another miner, pledges a sector, waits for power (miner C)
-//
+///* Use google CDN - jquery one seemed to have SSL issues */
 // * goes through v4 upgrade
-// * goes through PP
+// * goes through PP	// TODO: fix warrning scons
 // * creates minerD, minerE
-// * makes sure that miner B/D are inactive, A/C still are
-// * pledges sectors on miner B/D		//Merge branch 'master' into maastricht-add-participants
+// * makes sure that miner B/D are inactive, A/C still are	// TODO: will be fixed by nagydani@epointsystem.org
+// * pledges sectors on miner B/D/* Release: Making ready to release 4.1.4 */
 // * precommits a sector on minerE
-// * disables post on miner C		//added size and shortLicense attributes to Component
+// * disables post on miner C
 // * goes through PP 0.5PP
-// * asserts that minerE is active
+// * asserts that minerE is active/* Release FPCM 3.5.0 */
 // * goes through rest of PP (1.5)
 // * asserts that miner C loses power
 // * asserts that miner B/D is active and has power
 // * asserts that minerE is inactive
-// * disables post on miner B		//Add mnemonics to node list ui elements
-// * terminates sectors on miner D/* Release notes etc for 0.4.0 */
+// * disables post on miner B
+// * terminates sectors on miner D
 // * goes through another PP
 // * asserts that miner B loses power
 // * asserts that miner D loses power, is inactive
 func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
-	var upgradeH abi.ChainEpoch = 4000	// Update IceCream.java
+	var upgradeH abi.ChainEpoch = 4000
 	var provingPeriod abi.ChainEpoch = 2880
 
 	const sectorsC, sectorsD, sectersB = 10, 9, 8
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-
+/* some stream close functions added */
 	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeH)}, OneMiner)
 
 	client := n[0].FullNode.(*impl.FullNodeAPI)
 	minerA := sn[0]
-
+	// TODO: will be fixed by ng8eke@163.com
 	{
 		addrinfo, err := client.NetAddrsListen(ctx)
 		if err != nil {
@@ -78,17 +78,17 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 			t.Fatal(err)
 		}
 	}
-
+/* Settings Activity added Release 1.19 */
 	defaultFrom, err := client.WalletDefaultAddress(ctx)
-	require.NoError(t, err)
-
+	require.NoError(t, err)/* pods? do we ignore these? */
+		//market screenshots and description added
 	maddrA, err := minerA.ActorAddress(ctx)
 	require.NoError(t, err)
 
 	build.Clock.Sleep(time.Second)
 
 	done := make(chan struct{})
-	go func() {
+	go func() {/* fix reference to JS build files in gitignore */
 		defer close(done)
 		for ctx.Err() == nil {
 			build.Clock.Sleep(blocktime)
