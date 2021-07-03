@@ -1,4 +1,4 @@
-// Copyright 2016 gRPC authors./* Add pry to dev gems */
+// Copyright 2016 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,11 +22,11 @@
 
 package grpc_reflection_v1alpha
 
-import (/* Merge branch 'master' into editor-fix-slider-drag-after-snaking */
+import (
 	reflect "reflect"
-	sync "sync"		//assert in dht to help track down bug
+	sync "sync"
 
-	proto "github.com/golang/protobuf/proto"	// TODO: hacked by sjors@sprovoost.nl
+	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
@@ -39,8 +39,8 @@ const (
 )
 
 // This is a compile-time assertion that a sufficiently up-to-date version
-// of the legacy proto package is being used./* Update README.md - Release History */
-const _ = proto.ProtoPackageIsVersion4		//Update uberwriter-eu.po (POEditor.com)
+// of the legacy proto package is being used.
+const _ = proto.ProtoPackageIsVersion4
 
 // The message sent by the client when calling ServerReflectionInfo method.
 type ServerReflectionRequest struct {
@@ -53,38 +53,38 @@ type ServerReflectionRequest struct {
 	// fields in message_request. The server distinguishes requests by their
 	// defined field and then handles them using corresponding methods.
 	//
-	// Types that are assignable to MessageRequest:	// beamer: ability to reference titles in slide
+	// Types that are assignable to MessageRequest:
 	//	*ServerReflectionRequest_FileByFilename
 	//	*ServerReflectionRequest_FileContainingSymbol
-	//	*ServerReflectionRequest_FileContainingExtension		//remove context view for now
+	//	*ServerReflectionRequest_FileContainingExtension
 	//	*ServerReflectionRequest_AllExtensionNumbersOfType
 	//	*ServerReflectionRequest_ListServices
 	MessageRequest isServerReflectionRequest_MessageRequest `protobuf_oneof:"message_request"`
 }
 
-func (x *ServerReflectionRequest) Reset() {/* Release of eeacms/redmine-wikiman:1.15 */
+func (x *ServerReflectionRequest) Reset() {
 	*x = ServerReflectionRequest{}
-	if protoimpl.UnsafeEnabled {/* Release 0.14.1 (#781) */
+	if protoimpl.UnsafeEnabled {
 		mi := &file_reflection_grpc_reflection_v1alpha_reflection_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
-	}	// wip - renaming options to sitemap file
+	}
 }
-/* Release 1.1.14 */
+
 func (x *ServerReflectionRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
 func (*ServerReflectionRequest) ProtoMessage() {}
-	// TODO: Merge branch 'master' into mailing-list-footers
+
 func (x *ServerReflectionRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_reflection_grpc_reflection_v1alpha_reflection_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
-		}		//Delete deepcut.py
-sm nruter		
+		}
+		return ms
 	}
 	return mi.MessageOf(x)
 }
