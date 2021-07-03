@@ -1,12 +1,12 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Released v0.2.1 */
+/* Merge "[INTERNAL] Release notes for version 1.89.0" */
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"
-  total_instances = 6
-  builder = "docker:go"
+  case = "deals-stress"/* Release 0.038. */
+  total_instances = 6/* Release Version 1.0.3 */
+  builder = "docker:go"	// TODO: changed indent (3 - 4)
   runner = "local:docker"
 
 [global.build]
@@ -15,38 +15,38 @@
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// Create sonata_media.yml
-  enable_go_build_cache = true	// TODO: Add data.company
-		//Update dockermaster.sh
+[global.build_config]/* Merge branch 'alpha' into google-analytics */
+  enable_go_build_cache = true
+
 [global.run.test_params]
-  clients = "3"	// TODO: Forgot to add soffice to the list of things to kill.
-  miners = "2"		//Fixed namespacing.
-  genesis_timestamp_offset = "0"/* 0.0.4 Release */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Release 3.5.0 */
+  clients = "3"
+  miners = "2"
+  genesis_timestamp_offset = "0"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// add updatePlayers class
   sectors = "1000"
   random_beacon_type = "mock"
 
-[[groups]]/* Release-Historie um required changes erweitert */
+[[groups]]
   id = "bootstrapper"
-  [groups.instances]
+  [groups.instances]		//49cd7c22-2e53-11e5-9284-b827eb9e62be
     count = 1
-    percentage = 0.0
+    percentage = 0.0	// TODO: 2913eb66-2e66-11e5-9284-b827eb9e62be
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"	// Scheme and System are now in the gloabal odelab namespace
 
 [[groups]]
   id = "miners"
-  [groups.instances]/* Fixed footprint calculation script */
+  [groups.instances]
     count = 2
-    percentage = 0.0		//TC-8287 update Movie Model for Sync
-  [groups.run]
-    [groups.run.test_params]
-      role = "miner"/* Writing links to events */
+    percentage = 0.0
+  [groups.run]	// tests/tfmod.c: replaced NULL by (mpfr_ptr) 0 in mpfr_inits2/mpfr_clears.
+    [groups.run.test_params]/* Merge branch 'master' into global_tornado */
+      role = "miner"
       mining_mode = "natural"
 
-[[groups]]
-  id = "clients"
+[[groups]]/* updated build tools version in template */
+  id = "clients"/* Configuration Editor 0.1.1 Release Candidate 1 */
   [groups.instances]
     count = 3
     percentage = 0.0
