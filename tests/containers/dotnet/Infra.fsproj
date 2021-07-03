@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>	// TODO: Removed mention of C# 7.3
-    <OutputType>Exe</OutputType>	// TODO: Added "migrated from" to README
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
-  </PropertyGroup>/* Add calculation parameters to functions (#919) */
-  <ItemGroup>	// TODO: hacked by brosner@gmail.com
+  </PropertyGroup>
+  <ItemGroup>
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
   </ItemGroup>
-</Project>	// TODO: added ReadVertical
+</Project>
