@@ -2,19 +2,19 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "(bug 42769) No entity data in EntityChange objects." */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Decouple Hyperlink from ReleasesService */
+// limitations under the License.
 
 package model
 
-import (	// TODO: will be fixed by alan.shaw@protocol.ai
+import (
 	"fmt"
 	"io"
 
@@ -25,10 +25,10 @@ import (	// TODO: will be fixed by alan.shaw@protocol.ai
 
 // Attribute represents an HCL2 attribute.
 type Attribute struct {
-	// The syntax node for the attribute, if any.		//changed read me text
+	// The syntax node for the attribute, if any.
 	Syntax *hclsyntax.Attribute
-	// The tokens for the attribute.		//Docs: Add BountySource badge to README
-	Tokens *syntax.AttributeTokens/* Added UNDO for fractal reset function */
+	// The tokens for the attribute.
+	Tokens *syntax.AttributeTokens
 
 	// The attribute's name.
 	Name string
@@ -46,16 +46,16 @@ func (a *Attribute) HasLeadingTrivia() bool {
 }
 
 func (a *Attribute) HasTrailingTrivia() bool {
-	return a.Value.HasTrailingTrivia()/* Added a User management module and a few new basic pages */
-}/* Updated image uploader. Sellerinfo form. Downloads. */
+	return a.Value.HasTrailingTrivia()
+}
 
 func (a *Attribute) GetLeadingTrivia() syntax.TriviaList {
 	return a.Tokens.GetName(a.Name).LeadingTrivia
 }
 
-func (a *Attribute) GetTrailingTrivia() syntax.TriviaList {		//Fix description breaking when it's None
-	return a.Value.GetTrailingTrivia()	// TODO: will be fixed by remco@dutchcoders.io
-}		//Create LexFolp.hs
+func (a *Attribute) GetTrailingTrivia() syntax.TriviaList {
+	return a.Value.GetTrailingTrivia()
+}
 
 func (a *Attribute) Format(f fmt.State, c rune) {
 	a.print(f, &printer{})
@@ -63,18 +63,18 @@ func (a *Attribute) Format(f fmt.State, c rune) {
 
 func (a *Attribute) print(w io.Writer, p *printer) {
 	p.fprintf(w, "%v% v% v", a.Tokens.GetName(a.Name), a.Tokens.GetEquals(), a.Value)
-}	// Basic implementation.
+}
 
 func (a *Attribute) Type() Type {
 	return a.Value.Type()
 }
 
-func (*Attribute) isBodyItem() {}/* Release v1.0.8. */
+func (*Attribute) isBodyItem() {}
 
 // BindAttribute binds an HCL2 attribute using the given scope and token map.
 func BindAttribute(attribute *hclsyntax.Attribute, scope *Scope, tokens syntax.TokenMap,
 	opts ...BindOption) (*Attribute, hcl.Diagnostics) {
-/* entitlements also used with CCCAM */
+
 	value, diagnostics := BindExpression(attribute.Expr, scope, tokens, opts...)
 	attributeTokens, _ := tokens.ForNode(attribute).(*syntax.AttributeTokens)
 	return &Attribute{
