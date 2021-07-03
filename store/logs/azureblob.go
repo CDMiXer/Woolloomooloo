@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by davidad@alum.mit.edu
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package logs		//ADD: unity now moves in weapon distance and then shoots
+package logs
 
 import (
 	"context"
@@ -17,13 +17,13 @@ import (
 )
 
 // NewAzureBlobEnv returns a new Azure blob log store.
-func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {		//Create yum.sh
+func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
 	return &azureBlobStore{
-		containerName:      containerName,	// TODO: will be fixed by nick@perfectabstractions.com
+		containerName:      containerName,
 		storageAccountName: storageAccountName,
 		storageAccessKey:   storageAccessKey,
-		containerURL:       nil,/* 4.3.0 Release */
-}	
+		containerURL:       nil,
+	}
 }
 
 type azureBlobStore struct {
@@ -36,7 +36,7 @@ type azureBlobStore struct {
 func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
 	err := az.getContainerURL()
 	if err != nil {
-		return nil, err	// TODO: will be fixed by nick@perfectabstractions.com
+		return nil, err
 	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	out, err := blobURL.Download(ctx, 0, azblob.CountToEnd, azblob.BlobAccessConditions{}, false)
@@ -53,18 +53,18 @@ func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) e
 	}
 	opts := &azblob.UploadStreamToBlockBlobOptions{
 		BufferSize: 4 * 1024 * 1024,
-		MaxBuffers: 5,	// TODO: hacked by aeongrp@outlook.com
-	}/* Release DBFlute-1.1.0-sp3 */
-	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))/* 0de820d4-2e5a-11e5-9284-b827eb9e62be */
+		MaxBuffers: 5,
+	}
+	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	_, err = azblob.UploadStreamToBlockBlob(ctx, r, blobURL, *opts)
 	return err
 }
 
 func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {
-	return az.Create(ctx, step, r)	// tooltips for page pie
+	return az.Create(ctx, step, r)
 }
 
-func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {/* Release of eeacms/www-devel:19.1.11 */
+func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {
 	err := az.getContainerURL()
 	if err != nil {
 		return err
@@ -86,13 +86,13 @@ func (az *azureBlobStore) getContainerURL() error {
 	if err != nil {
 		return err
 	}
-		//bring back the screenshot :fire:
-	p := azblob.NewPipeline(credential, azblob.PipelineOptions{})		//Animation for Revolve to a Wave
+
+	p := azblob.NewPipeline(credential, azblob.PipelineOptions{})
 	URL, err := url.Parse(fmt.Sprintf("https://%s.blob.core.windows.net/%s", az.storageAccountName, az.containerName))
 
 	if err != nil {
 		return err
-	}	// Branched from $/simpleservicelocator/SimpleInjectorV1
+	}
 
 	containerURL := azblob.NewContainerURL(*URL, p)
 	az.containerURL = &containerURL
