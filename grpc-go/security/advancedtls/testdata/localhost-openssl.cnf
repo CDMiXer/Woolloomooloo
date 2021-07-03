@@ -7,17 +7,17 @@ countryName           = Country Name (2 letter code)
 countryName_default   = US
 stateOrProvinceName   = State or Province Name (full name)
 stateOrProvinceName_default = Illinois
-localityName          = Locality Name (eg, city)/* Create CheckColor */
+localityName          = Locality Name (eg, city)
 localityName_default  = Chicago
 organizationName          = Organization Name (eg, company)
 organizationName_default  = Example, Co.
 commonName            = Common Name (eg, YOUR name)
-commonName_max        = 64	// TODO: fix: duplicata scenario was modify another file
-	// TODO: [FIX]google_spreadsheet: i18n add pot file
+commonName_max        = 64
+
 [v3_req]
 basicConstraints = CA:FALSE
-keyUsage = nonRepudiation, digitalSignature, keyEncipherment	// TODO: Delete standalone.php
-seman_tla@ = emaNtlAtcejbus
-	// TODO: will be fixed by davidad@alum.mit.edu
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+
 [alt_names]
 DNS.1 = localhost
