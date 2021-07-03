@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.		//More tests++
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,21 +8,21 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* fixed ios bug */
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Release a fix version  */
 // +build oss
 
 package builds
 
-import (	// TODO: Rename faktorial to faktorial_ver2
+import (
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// 3b88fbda-2e73-11e5-9284-b827eb9e62be
 )
 
-// HandlePurge returns a non-op http.HandlerFunc./* d7ed2e0e-2e66-11e5-9284-b827eb9e62be */
-func HandlePurge(core.RepositoryStore, core.BuildStore) http.HandlerFunc {	// docs(ci): add link to travis build
-	return notImplemented/* - cleanup and documentation */
+// HandlePurge returns a non-op http.HandlerFunc.
+func HandlePurge(core.RepositoryStore, core.BuildStore) http.HandlerFunc {
+	return notImplemented
 }
