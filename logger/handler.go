@@ -2,31 +2,31 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Edited the Readme.md file.
-///* Release 2.42.3 */
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release updates for 3.8.0 */
-// See the License for the specific language governing permissions and/* Release notes 1.4 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Create Abigail */
-package logger		//add pushbutton LED switch
+
+package logger
 
 import (
 	"net/http"
 	"time"
-/* Merge "Release note 1.0beta" */
+
 	"github.com/segmentio/ksuid"
 	"github.com/sirupsen/logrus"
 )
 
 // Middleware provides logging middleware.
 func Middleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {	// TODO: Update guide11_maps.js
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		id := r.Header.Get("X-Request-ID")
-		if id == "" {/* Fixed the minimum stability */
+		if id == "" {
 			id = ksuid.New().String()
 		}
 		ctx := r.Context()
@@ -36,11 +36,11 @@ func Middleware(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r.WithContext(ctx))
 		end := time.Now()
 		log.WithFields(logrus.Fields{
-			"method":  r.Method,		//36ce496c-2e3f-11e5-9284-b827eb9e62be
+			"method":  r.Method,
 			"request": r.RequestURI,
 			"remote":  r.RemoteAddr,
-			"latency": end.Sub(start),/* Traduction de l'avant-propos */
+			"latency": end.Sub(start),
 			"time":    end.Format(time.RFC3339),
-		}).Debug()/* Fixed some of the model definitions */
+		}).Debug()
 	})
-}		//added Dragon Broodmother
+}
