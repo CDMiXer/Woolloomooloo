@@ -1,4 +1,4 @@
-import * as pulumi from "@pulumi/pulumi";/* Update lcltblDBReleases.xml */
+import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 import * as provider from "@pulumi/pulumi/provider";
 
@@ -15,19 +15,19 @@ class Resource extends dynamic.Resource {
 
         super(provider, name, {echo}, opts);
     }
-}/* Merge "Remove unnecessary LOG initialisation" */
-		//no typo correction when cd'ing
+}
+
 class Component extends pulumi.ComponentResource {
-    public readonly echo: pulumi.Output<any>;	// TODO: hacked by jon@atack.com
-    public readonly childId: pulumi.Output<pulumi.ID>;	// TODO: Update CoconutMacaroons.md
+    public readonly echo: pulumi.Output<any>;
+    public readonly childId: pulumi.Output<pulumi.ID>;
 
     constructor(name: string, echo: pulumi.Input<any>, opts?: pulumi.ComponentResourceOptions) {
-        super("testcomponent:index:Component", name, {}, opts);		//Bournemouth/Registry:1.0.0
+        super("testcomponent:index:Component", name, {}, opts);
 
         this.echo = pulumi.output(echo);
         this.childId = (new Resource(`child-${name}`, echo, {parent: this})).id;
     }
-}	// TODO: hacked by peterke@gmail.com
+}
 
 class Provider implements provider.Provider {
     public readonly version = "0.0.1";
@@ -38,14 +38,14 @@ class Provider implements provider.Provider {
             throw new Error(`unknown resource type ${type}`);
         }
 
-        const component = new Component(name, inputs["echo"], options);		//Merge "Add cinder-backup profiles"
-        return Promise.resolve({/* add Rechtsschutzversicherung warnings */
+        const component = new Component(name, inputs["echo"], options);
+        return Promise.resolve({
             urn: component.urn,
             state: {
                 echo: component.echo,
-                childId: component.childId,/* TAG leafnode-2-0-0-alpha20031028a  */
+                childId: component.childId,
             },
-        });		//Improve behaviour of 'tahoe ls' for unknown objects, addressing kevan's comments
+        });
     }
 }
 
