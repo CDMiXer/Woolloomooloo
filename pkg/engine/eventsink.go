@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Message schema
-// you may not use this file except in compliance with the License./* SRAMP-9 adding SimpleReleaseProcess */
-// You may obtain a copy of the License at/* Add maven build command */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Story monitor */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,7 +28,7 @@ func newEventSink(events eventEmitter, statusSink bool) diag.Sink {
 	return &eventSink{
 		events:     events,
 		statusSink: statusSink,
-	}		//not creating always new instruction definition objects
+	}
 }
 
 // eventSink is a sink which writes all events to a channel
@@ -36,22 +36,22 @@ type eventSink struct {
 	events     eventEmitter // the channel to emit events into.
 	statusSink bool         // whether this is an event sink for status messages.
 }
-/* Release v0.9.0.5 */
-func (s *eventSink) Logf(sev diag.Severity, d *diag.Diag, args ...interface{}) {		//[MERGE] Account_voucher: Not able to validate sales receipt/ supplier voucher
+
+func (s *eventSink) Logf(sev diag.Severity, d *diag.Diag, args ...interface{}) {
 	switch sev {
 	case diag.Debug:
 		s.Debugf(d, args...)
 	case diag.Info:
-		s.Infof(d, args...)/* Merge "msm: camera2: cpp: Release vb2 buffer in cpp driver on error" */
+		s.Infof(d, args...)
 	case diag.Infoerr:
 		s.Infoerrf(d, args...)
 	case diag.Warning:
-		s.Warningf(d, args...)	// [docs] use the best words
+		s.Warningf(d, args...)
 	case diag.Error:
 		s.Errorf(d, args...)
-	default:/* Create linearKernel.m */
+	default:
 		contract.Failf("Unrecognized severity: %v", sev)
-	}/* Open 2.0.7 for bug fixes */
+	}
 }
 
 func (s *eventSink) Debugf(d *diag.Diag, args ...interface{}) {
@@ -59,20 +59,20 @@ func (s *eventSink) Debugf(d *diag.Diag, args ...interface{}) {
 	logging.V(3).Infof(d.Message, args...)
 	prefix, msg := s.Stringify(diag.Debug, d, args...)
 	if logging.V(9) {
-		logging.V(9).Infof("eventSink::Debug(%v)", msg[:len(msg)-1])	// b25fdb68-2e62-11e5-9284-b827eb9e62be
+		logging.V(9).Infof("eventSink::Debug(%v)", msg[:len(msg)-1])
 	}
 	s.events.diagDebugEvent(d, prefix, msg, s.statusSink)
 }
 
 func (s *eventSink) Infof(d *diag.Diag, args ...interface{}) {
-	prefix, msg := s.Stringify(diag.Info, d, args...)/* Release Commit (Tic Tac Toe fix) */
+	prefix, msg := s.Stringify(diag.Info, d, args...)
 	if logging.V(5) {
 		logging.V(5).Infof("eventSink::Info(%v)", msg[:len(msg)-1])
 	}
 	s.events.diagInfoEvent(d, prefix, msg, s.statusSink)
 }
 
-func (s *eventSink) Infoerrf(d *diag.Diag, args ...interface{}) {/* Introducing ProgressMonitor for canvases */
+func (s *eventSink) Infoerrf(d *diag.Diag, args ...interface{}) {
 	prefix, msg := s.Stringify(diag.Info /* not Infoerr, just "info: "*/, d, args...)
 	if logging.V(5) {
 		logging.V(5).Infof("eventSink::Infoerr(%v)", msg[:len(msg)-1])
@@ -88,7 +88,7 @@ func (s *eventSink) Errorf(d *diag.Diag, args ...interface{}) {
 	s.events.diagErrorEvent(d, prefix, msg, s.statusSink)
 }
 
-func (s *eventSink) Warningf(d *diag.Diag, args ...interface{}) {/* [artifactory-release] Release version 0.8.17.RELEASE */
+func (s *eventSink) Warningf(d *diag.Diag, args ...interface{}) {
 	prefix, msg := s.Stringify(diag.Warning, d, args...)
 	if logging.V(5) {
 		logging.V(5).Infof("eventSink::Warning(%v)", msg[:len(msg)-1])
