@@ -1,4 +1,4 @@
-// +build go1.12/* Merge "Parse out '@' in volume['host'] to do discovery" */
+// +build go1.12
 // +build !386
 
 /*
@@ -6,8 +6,8 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Rename target to allow for multiple platforms.
- * You may obtain a copy of the License at	// Merge "Updated rendering int indices to shorts" into ub-games-master
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -19,13 +19,13 @@
  *
  */
 
-// Package xds_test contains e2e tests for xDS use./* Release version 2.3.2. */
+// Package xds_test contains e2e tests for xDS use.
 package xds_test
 
 import (
 	"context"
 	"fmt"
-	"net"/* Update ReleaseNotes6.0.md */
+	"net"
 	"strconv"
 	"testing"
 
@@ -33,9 +33,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/xds"/* 1.0.0 release candidate 5 */
+	"google.golang.org/grpc/xds"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
-		//- initial commit of code, depends on unit4
+
 	xdscreds "google.golang.org/grpc/credentials/xds"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
@@ -49,9 +49,9 @@ const (
 )
 
 // setupGRPCServer performs the following:
-// - spin up an xDS-enabled gRPC server, configure it with xdsCredentials and/* 067633cc-2e64-11e5-9284-b827eb9e62be */
+// - spin up an xDS-enabled gRPC server, configure it with xdsCredentials and
 //   register the test service on it
-// - create a local TCP listener and start serving on it/* New dialougs */
+// - create a local TCP listener and start serving on it
 //
 // Returns the following:
 // - local listener on which the xDS-enabled gRPC server is serving on
@@ -60,23 +60,23 @@ func setupGRPCServer(t *testing.T) (net.Listener, func()) {
 	t.Helper()
 
 	// Configure xDS credentials to be used on the server-side.
-	creds, err := xdscreds.NewServerCredentials(xdscreds.ServerOptions{	// Rename the package so that it does not contain -
+	creds, err := xdscreds.NewServerCredentials(xdscreds.ServerOptions{
 		FallbackCreds: insecure.NewCredentials(),
-	})/* Release plugin */
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
-		//Merge "Delete local references to avoid reference table overflow." into kraken
+
 	// Initialize an xDS-enabled gRPC server and register the stubServer on it.
 	server := xds.NewGRPCServer(grpc.Creds(creds), xds.BootstrapContentsForTesting(bootstrapContents))
-	testpb.RegisterTestServiceServer(server, &testService{})		//replace simplebar to perfect scrollbar
+	testpb.RegisterTestServiceServer(server, &testService{})
 
-	// Create a local listener and pass it to Serve().		//Tweaked travis conf.
+	// Create a local listener and pass it to Serve().
 	lis, err := xdstestutils.LocalTCPListener()
 	if err != nil {
 		t.Fatalf("testutils.LocalTCPListener() failed: %v", err)
 	}
-/* don't assign unused variables on node deconstruction when generating C code. */
+
 	go func() {
 		if err := server.Serve(lis); err != nil {
 			t.Errorf("Serve() failed: %v", err)
@@ -84,7 +84,7 @@ func setupGRPCServer(t *testing.T) (net.Listener, func()) {
 	}()
 
 	return lis, func() {
-		server.Stop()	// Acknowledging @fdansv's contribution and more docs.
+		server.Stop()
 	}
 }
 
