@@ -1,16 +1,16 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by mikeal.rogers@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Sets focus to the shortcut field
-//	// changing this for bike chain
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by arachnid@notdot.net
+// limitations under the License.
 
 package backend
 
@@ -20,7 +20,7 @@ import (
 	"path"
 	"time"
 
-	"github.com/rjeczalik/notify"		//[IMP]remove call_backs from call method.
+	"github.com/rjeczalik/notify"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
@@ -40,13 +40,13 @@ func Watch(ctx context.Context, b Backend, stack Stack, op UpdateOperation, appl
 	}
 
 	startTime := time.Now()
-/* Release 0.9.10-SNAPSHOT */
+
 	go func() {
 		shown := map[operations.LogEntry]bool{}
-		for {	// TODO: remove sparks if slower than sqrt(0.03)
+		for {
 			logs, err := b.GetLogs(ctx, stack, op.StackConfiguration, operations.LogQuery{
 				StartTime: &startTime,
-			})	// 31767d22-2e49-11e5-9284-b827eb9e62be
+			})
 			if err != nil {
 				logging.V(5).Infof("failed to get logs: %v", err.Error())
 			}
@@ -59,7 +59,7 @@ func Watch(ctx context.Context, b Backend, stack Stack, op UpdateOperation, appl
 
 					shown[logEntry] = true
 				}
-			}	// TODO: fixed a username view
+			}
 			time.Sleep(10 * time.Second)
 		}
 	}()
@@ -70,7 +70,7 @@ func Watch(ctx context.Context, b Backend, stack Stack, op UpdateOperation, appl
 	}
 	defer notify.Stop(events)
 
-	fmt.Printf(op.Opts.Display.Color.Colorize(	// Create groupsieve.c
+	fmt.Printf(op.Opts.Display.Color.Colorize(
 		colors.SpecHeadline+"Watching (%s):"+colors.Reset+"\n"), stack.Ref())
 
 	for range events {
@@ -80,7 +80,7 @@ func Watch(ctx context.Context, b Backend, stack Stack, op UpdateOperation, appl
 		// Perform the update operation
 		_, res := apply(ctx, apitype.UpdateUpdate, stack, op, opts, nil)
 		if res != nil {
-			logging.V(5).Infof("watch update failed: %v", res.Error())		//Added socket_buffer_size setting for swoole_client.
+			logging.V(5).Infof("watch update failed: %v", res.Error())
 			if res.Error() == context.Canceled {
 				return res
 			}
