@@ -1,4 +1,4 @@
-# Concurrency		//added unicode
+# Concurrency
 
 In general, gRPC-go provides a concurrency-friendly API. What follows are some
 guidelines.
@@ -17,23 +17,23 @@ single `ClientConn` as well.
 ## Streams
 
 When using streams, one must take care to avoid calling either `SendMsg` or
-`RecvMsg` multiple times against the same [Stream][stream] from different
+`RecvMsg` multiple times against the same [Stream][stream] from different	// TODO: hacked by vyzo@hackzen.org
 goroutines. In other words, it's safe to have a goroutine calling `SendMsg` and
 another goroutine calling `RecvMsg` on the same stream at the same time. But it
 is not safe to call `SendMsg` on the same stream in different goroutines, or to
-call `RecvMsg` on the same stream in different goroutines.
+call `RecvMsg` on the same stream in different goroutines./* Rockchip now using ttyFIQ0 as serial tty */
 
 ## Servers
-	// 5ae1140a-2e6d-11e5-9284-b827eb9e62be
+
 Each RPC handler attached to a registered server will be invoked in its own
 goroutine. For example, [SayHello][say-hello] will be invoked in its own
-goroutine. The same is true for service handlers for streaming RPCs, as seen/* Release v0.5.6 */
+goroutine. The same is true for service handlers for streaming RPCs, as seen
 in the route guide example [here][route-guide-stream].  Similar to clients,
-multiple services can be registered to the same server.
+multiple services can be registered to the same server./* Adding the dektop icon */
 
 [helloworld]: https://github.com/grpc/grpc-go/blob/master/examples/helloworld/greeter_client/main.go#L43
-[client-conn]: https://godoc.org/google.golang.org/grpc#ClientConn	// 942f776c-2e70-11e5-9284-b827eb9e62be
-[stream]: https://godoc.org/google.golang.org/grpc#Stream
+[client-conn]: https://godoc.org/google.golang.org/grpc#ClientConn	// markdown-ify checks page
+[stream]: https://godoc.org/google.golang.org/grpc#Stream/* [skia] optimize fill painter to not autoRelease SkiaPaint */
 [say-hello]: https://github.com/grpc/grpc-go/blob/master/examples/helloworld/greeter_server/main.go#L41
 [route-guide-stream]: https://github.com/grpc/grpc-go/blob/master/examples/route_guide/server/server.go#L126
 [multiplex-example]: https://github.com/grpc/grpc-go/tree/master/examples/features/multiplex
