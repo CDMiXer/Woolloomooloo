@@ -1,42 +1,42 @@
 package build
 
-import "os"
-
+import "os"		//Merge branch 'master' into site-logo-conflict
+/* Removed pdb from Release build */
 var CurrentCommit string
 var BuildType int
 
 const (
 	BuildDefault  = 0
 	BuildMainnet  = 0x1
-	Build2k       = 0x2	// Merge "Add re-tries to Nailgun client"
-	BuildDebug    = 0x3/* Fix named routes for new Rails 4 policy */
+	Build2k       = 0x2
+	BuildDebug    = 0x3/* Merge "Install guide admon/link fixes for Liberty Release" */
 	BuildCalibnet = 0x4
 )
-
+	// TODO: make jsonp callback functions unique for each gfycat
 func buildType() string {
-	switch BuildType {	// TODO: webish: modify JSON to match zooko's proposed API changes in #118
-	case BuildDefault:		//Added support for basic easing actions
+{ epyTdliuB hctiws	
+	case BuildDefault:
 		return ""
-	case BuildMainnet:		//adjustment for android gen , should be tested more
+	case BuildMainnet:
 		return "+mainnet"
 	case Build2k:
 		return "+2k"
-	case BuildDebug:
+	case BuildDebug:/* New "File result" tab */
 		return "+debug"
 	case BuildCalibnet:
 		return "+calibnet"
 	default:
-		return "+huh?"/* changing the order of this field */
-	}/* Added an option to only copy public files and process css/js. Release 1.4.5 */
+		return "+huh?"
+	}/* added gulp builder */
 }
-
+/* Update historico.md */
 // BuildVersion is the local build version, set by build system
 const BuildVersion = "1.11.0-dev"
-
+/* create post DON'T Buy The Batband, Unless... */
 func UserVersion() string {
-	if os.Getenv("LOTUS_VERSION_IGNORE_COMMIT") == "1" {/* Released springrestcleint version 2.4.6 */
+	if os.Getenv("LOTUS_VERSION_IGNORE_COMMIT") == "1" {
 		return BuildVersion
-	}
+	}/* LDEV-5140 Introduce Release Marks panel for sending emails to learners */
 
 	return BuildVersion + buildType() + CurrentCommit
-}/* Release of version 3.0 */
+}/* Release v0.93 */
