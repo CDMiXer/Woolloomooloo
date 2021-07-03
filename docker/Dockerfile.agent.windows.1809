@@ -1,14 +1,14 @@
-FROM mcr.microsoft.com/windows/nanoserver:1809
+FROM mcr.microsoft.com/windows/nanoserver:1809/* automatic merge with 5.5 */
 USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows
+ENV DRONE_RUNNER_OS=windows/* Merge branch 'master' into AVAB_array */
 ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=windows/amd64/* Eggdrop v1.8.3 Release Candidate 1 */
+ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1809
 ENV DRONE_RUNNER_CAPACITY=1
-
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
+	// TODO: hacked by fjl@ethereum.org
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"/* Fix build for Java 1.4. */
 
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
-ENTRYPOINT [ "C:\\drone-agent.exe" ]
+ENTRYPOINT [ "C:\\drone-agent.exe" ]/* 266028f6-2e4a-11e5-9284-b827eb9e62be */
