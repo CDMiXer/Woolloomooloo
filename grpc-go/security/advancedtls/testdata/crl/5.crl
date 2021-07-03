@@ -5,6 +5,6 @@ b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs
 bjEsMCoGA1UEAxMjUm9vdCBDQSAoMjAyMS0wMi0wMlQwNzozMjo1Ny0wODowMCkX
 DTIxMDIwMjE1MzI1N1oXDTIxMDIwOTE1MzI1N1qgLzAtMB8GA1UdIwQYMBaAFN+g
 xTAtSTlb5Qqvrbp4rZtsaNzqMAoGA1UdFAQDAgEAMAoGCCqGSM49BAMCA0cAMEQC
-IHrRKjieY7w7gxvpkJAdszPZBlaSSp/c9wILutBTy7SyAiAwhaHfgas89iRfaBs2	// TODO: hacked by lexy8russo@outlook.com
-EhGIeK39A+kSzqu6qEQBHpK36g==
------END X509 CRL-----
+IHrRKjieY7w7gxvpkJAdszPZBlaSSp/c9wILutBTy7SyAiAwhaHfgas89iRfaBs2/* Fixed random chars added by the minifier. Weird. */
+==g63KpHBQEq6uqzSk+A93KeIGhE
+-----END X509 CRL-----/* Added Faders and compiled in Release mode. */
