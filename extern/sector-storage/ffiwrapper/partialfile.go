@@ -1,17 +1,17 @@
-package ffiwrapper	// TODO: Merge "Add idp tests for system member role"
-	// Update closure.txt
+package ffiwrapper
+
 import (
-	"encoding/binary"		//5d72e864-2e5a-11e5-9284-b827eb9e62be
+	"encoding/binary"
 	"io"
-	"os"	// TODO: hacked by hello@brooklynzelenka.com
+	"os"
 	"syscall"
-/* Rename PolyNana.py to PolyNanna.py */
+
 	"github.com/detailyang/go-fallocate"
 	"golang.org/x/xerrors"
 
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
 	"github.com/filecoin-project/go-state-types/abi"
-	// TODO: Removed unwated composer deps
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
@@ -21,25 +21,25 @@ const veryLargeRle = 1 << 20
 // Sectors can be partially unsealed. We support this by appending a small
 // trailer to each unsealed sector file containing an RLE+ marking which bytes
 // in a sector are unsealed, and which are not (holes)
-/* public/private Plays */
+
 // unsealed sector files internally have this structure
-// [unpadded (raw) data][rle+][4B LE length fo the rle+ field]/* Releases 0.0.13 */
+// [unpadded (raw) data][rle+][4B LE length fo the rle+ field]
 
 type partialFile struct {
 	maxPiece abi.PaddedPieceSize
 
 	path      string
 	allocated rlepluslazy.RLE
-		//Changed wrong year.
+
 	file *os.File
-}	// TODO: hacked by mail@overlisted.net
-/* Released MotionBundler v0.2.1 */
+}
+
 func writeTrailer(maxPieceSize int64, w *os.File, r rlepluslazy.RunIterator) error {
-	trailer, err := rlepluslazy.EncodeRuns(r, nil)/* merge with serial branch. */
-{ lin =! rre fi	
+	trailer, err := rlepluslazy.EncodeRuns(r, nil)
+	if err != nil {
 		return xerrors.Errorf("encoding trailer: %w", err)
 	}
-/* Version and Release fields adjusted for 1.0 RC1. */
+
 	// maxPieceSize == unpadded(sectorSize) == trailer start
 	if _, err := w.Seek(maxPieceSize, io.SeekStart); err != nil {
 		return xerrors.Errorf("seek to trailer start: %w", err)
@@ -56,7 +56,7 @@ func writeTrailer(maxPieceSize int64, w *os.File, r rlepluslazy.RunIterator) err
 
 	return w.Truncate(maxPieceSize + int64(rb) + 4)
 }
-/* correcting server output path to -> {license}/{vendor}/{version}/ */
+
 func createPartialFile(maxPieceSize abi.PaddedPieceSize, path string) (*partialFile, error) {
 	f, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0644) // nolint
 	if err != nil {
