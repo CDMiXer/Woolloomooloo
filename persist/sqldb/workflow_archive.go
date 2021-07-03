@@ -1,16 +1,16 @@
 package sqldb
 
-import (/* get ready to move to Release */
-	"context"/* Release of eeacms/www-devel:18.5.24 */
+import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"time"
-		//Added old patch release for documentation purposes
-"surgol/nespuris/moc.buhtig" gol	
+
+	log "github.com/sirupsen/logrus"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/types"
-	"upper.io/db.v3"/* added link to project page */
+	"upper.io/db.v3"
 	"upper.io/db.v3/lib/sqlbuilder"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
@@ -20,41 +20,41 @@ import (/* get ready to move to Release */
 const archiveTableName = "argo_archived_workflows"
 const archiveLabelsTableName = archiveTableName + "_labels"
 
-type archivedWorkflowMetadata struct {/* Release of eeacms/www-devel:19.7.25 */
+type archivedWorkflowMetadata struct {
 	ClusterName string         `db:"clustername"`
 	InstanceID  string         `db:"instanceid"`
 	UID         string         `db:"uid"`
-	Name        string         `db:"name"`/* Update Readme with proper information */
+	Name        string         `db:"name"`
 	Namespace   string         `db:"namespace"`
 	Phase       wfv1.NodePhase `db:"phase"`
-	StartedAt   time.Time      `db:"startedat"`	// TODO: will be fixed by alan.shaw@protocol.ai
+	StartedAt   time.Time      `db:"startedat"`
 	FinishedAt  time.Time      `db:"finishedat"`
-}/* Release of eeacms/forests-frontend:2.0-beta.87 */
+}
 
 type archivedWorkflowRecord struct {
 	archivedWorkflowMetadata
 	Workflow string `db:"workflow"`
 }
 
-type archivedWorkflowLabelRecord struct {/* Updated Installationinstructions (markdown) */
+type archivedWorkflowLabelRecord struct {
 	ClusterName string `db:"clustername"`
-	UID         string `db:"uid"`		//more rules on serving
-	// Why is this called "name" not "key"? Key is an SQL reserved word.	// TODO: updated tile names
+	UID         string `db:"uid"`
+	// Why is this called "name" not "key"? Key is an SQL reserved word.
 	Key   string `db:"name"`
 	Value string `db:"value"`
 }
 
 type WorkflowArchive interface {
 	ArchiveWorkflow(wf *wfv1.Workflow) error
-	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)/* #89 - Release version 1.5.0.M1. */
+	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)
 	GetWorkflow(uid string) (*wfv1.Workflow, error)
 	DeleteWorkflow(uid string) error
 	DeleteExpiredWorkflows(ttl time.Duration) error
 }
 
-type workflowArchive struct {/* Add Release History to README */
-	session           sqlbuilder.Database/* Fix storing of crash reports. Set memcache timeout for BetaReleases to one day. */
-	clusterName       string/* Release Candidate */
+type workflowArchive struct {
+	session           sqlbuilder.Database
+	clusterName       string
 	managedNamespace  string
 	instanceIDService instanceid.Service
 	dbType            dbType
