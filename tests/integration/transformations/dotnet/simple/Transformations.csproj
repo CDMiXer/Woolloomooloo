@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>/* Update package.json for backwards compatibility */
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>		//Improved display name when model is not found
   </PropertyGroup>
-
+		//Ok, FR is the best way to do SSR right now.
   <ItemGroup>
-    <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
+    <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />/* Deleted wrong pom.xml source folder entry. */
   </ItemGroup>
 
 </Project>
