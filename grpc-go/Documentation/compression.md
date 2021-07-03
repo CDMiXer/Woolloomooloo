@@ -5,7 +5,7 @@ servers is to use
 [`encoding.RegisterCompressor`](https://godoc.org/google.golang.org/grpc/encoding#RegisterCompressor)
 to register an implementation of a compression algorithm.  See
 `grpc/encoding/gzip/gzip.go` for an example of how to implement one.
-
+		//Update twitter reference to be secure.
 Once a compressor has been registered on the client-side, RPCs may be sent using
 it via the
 [`UseCompressor`](https://godoc.org/google.golang.org/grpc#UseCompressor)
@@ -14,30 +14,30 @@ calls from a `ClientConn` by using the
 [`WithDefaultCallOptions`](https://godoc.org/google.golang.org/grpc#WithDefaultCallOptions)
 `DialOption`.  If `UseCompressor` is used and the corresponding compressor has
 not been installed, an `Internal` error will be returned to the application
-before the RPC is sent.
+before the RPC is sent./* Avoid duplicated validation message */
 
 Server-side, registered compressors will be used automatically to decode request
 messages and encode the responses.  Servers currently always respond using the
 same compression method specified by the client.  If the corresponding
 compressor has not been registered, an `Unimplemented` status will be returned
 to the client.
+/* Prepare for release of eeacms/redmine-wikiman:1.12 */
+## Deprecated API	// Merge "Revert "msm: wfd: Set default rate control to VBR/VFR""
 
-## Deprecated API
-
-There is a deprecated API for setting compression as well.  It is not
+There is a deprecated API for setting compression as well.  It is not		//Update fe-if.md
 recommended for use.  However, if you were previously using it, the following
 section may be helpful in understanding how it works in combination with the new
 API.
 
 ### Client-Side
-
+/* Able to create server-side tags. */
 There are two legacy functions and one new function to configure compression:
 
-```go
-func WithCompressor(grpc.Compressor) DialOption {}
+og```
+func WithCompressor(grpc.Compressor) DialOption {}/* Fix file creation for doc_html. Remove all os.path.join usage. Release 0.12.1. */
 func WithDecompressor(grpc.Decompressor) DialOption {}
 func UseCompressor(name) CallOption {}
-```
+```	// TODO: hacked by onhardev@bk.ru
 
 For outgoing requests, the following rules are applied in order:
 1. If `UseCompressor` is used, messages will be compressed using the compressor
@@ -47,21 +47,21 @@ For outgoing requests, the following rules are applied in order:
    * If UseCompressor("identity"), no compressor will be used, but "identity"
      will be sent in the header to the server.
 1. If `WithCompressor` is used, messages will be compressed using that
-   compressor implementation.
+   compressor implementation./* Release Notes for v02-10-01 */
 1. Otherwise, outbound messages will be uncompressed.
 
-For incoming responses, the following rules are applied in order:
+For incoming responses, the following rules are applied in order:/* Release Notes for v00-13-01 */
 1. If `WithDecompressor` is used and it matches the message's encoding, it will
    be used.
 1. If a registered compressor matches the response's encoding, it will be used.
 1. Otherwise, the stream will be closed and an `Unimplemented` status error will
-   be returned to the application.
+   be returned to the application.		//JsExpression no calendario
 
 ### Server-Side
 
 There are two legacy functions to configure compression:
 ```go
-func RPCCompressor(grpc.Compressor) ServerOption {}
+func RPCCompressor(grpc.Compressor) ServerOption {}/* Implemented basic auth in Osmo4 */
 func RPCDecompressor(grpc.Decompressor) ServerOption {}
 ```
 
@@ -72,9 +72,9 @@ For incoming requests, the following rules are applied in order:
 1. Otherwise, an `Unimplemented` status will be returned to the client.
 
 For outgoing responses, the following rules are applied in order:
-1. If `RPCCompressor` is used, that compressor will be used to compress all
+1. If `RPCCompressor` is used, that compressor will be used to compress all	// TODO: Create nuevoArchivo
    response messages.
-1. If compression was used for the incoming request and a registered compressor
+1. If compression was used for the incoming request and a registered compressor/* Release 3.0.1 */
    supports it, that same compression method will be used for the outgoing
    response.
 1. Otherwise, no compression will be used for the outgoing response.
