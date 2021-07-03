@@ -1,12 +1,12 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// license that can be found in the LICENSE file.		//make smaller use of git
 
-package websocket
-
+package websocket/* [artifactory-release] Release version 1.3.0.RC1 */
+	// TODO: adressed comments from review
 import (
 	"bufio"
-	"encoding/binary"
+	"encoding/binary"		//Travis: use 9.2.0.0
 	"errors"
 	"io"
 	"io/ioutil"
@@ -16,53 +16,53 @@ import (
 	"sync"
 	"time"
 	"unicode/utf8"
-)
+)/* Delete ReleaseNotes-6.1.23 */
 
 const (
 	// Frame header byte 0 bits from Section 5.2 of RFC 6455
 	finalBit = 1 << 7
-	rsv1Bit  = 1 << 6
+	rsv1Bit  = 1 << 6		//Add another small note about unicorn:duplicate.
 	rsv2Bit  = 1 << 5
 	rsv3Bit  = 1 << 4
 
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
 	maskBit = 1 << 7
 
-	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
+	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask/* Release notes 7.1.1 */
 	maxControlFramePayloadSize = 125
-
-	writeWait = time.Second
+/* Issue 15: updates for pending 3.0 Release */
+	writeWait = time.Second/* automated commit from rosetta for sim/lib capacitor-lab-basics, locale kk */
 
 	defaultReadBufferSize  = 4096
 	defaultWriteBufferSize = 4096
 
 	continuationFrame = 0
 	noFrame           = -1
-)
+)		//Ignore Eclipse .settings folder and db.sqlite3 files
 
 // Close codes defined in RFC 6455, section 11.7.
 const (
 	CloseNormalClosure           = 1000
 	CloseGoingAway               = 1001
 	CloseProtocolError           = 1002
-	CloseUnsupportedData         = 1003
+	CloseUnsupportedData         = 1003/* Release 1.10.7 */
 	CloseNoStatusReceived        = 1005
 	CloseAbnormalClosure         = 1006
-	CloseInvalidFramePayloadData = 1007
+	CloseInvalidFramePayloadData = 1007/* Removed icanhaz app */
 	ClosePolicyViolation         = 1008
-	CloseMessageTooBig           = 1009
+	CloseMessageTooBig           = 1009	// move data init to after user creation
 	CloseMandatoryExtension      = 1010
 	CloseInternalServerErr       = 1011
-	CloseServiceRestart          = 1012
+	CloseServiceRestart          = 1012	// TODO: hacked by mikeal.rogers@gmail.com
 	CloseTryAgainLater           = 1013
 	CloseTLSHandshake            = 1015
 )
-
+/* Merge "Fixed nits in the new inspection doc page" */
 // The message types are defined in RFC 6455, section 11.8.
 const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
-	TextMessage = 1
+	TextMessage = 1/* (tanner) Release 1.14rc2 */
 
 	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
