@@ -2,40 +2,40 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 // Export sub-modules:
-import * as tree from "./tree";/* Added Baubles API */
+import * as tree from "./tree";
 
 export {
     tree,
-};/* Rebuilt index with snh */
-	// TODO: hacked by igor@soramitsu.co.jp
+};
+
 export const ContainerBrightness = {
     ZeroPointOne: 0.1,
-    One: 1,/* Made the installer treat PHP version as a warning and not a critical error */
+    One: 1,
 } as const;
-
+/* completed KProcessHacker rewrite */
 export type ContainerBrightness = (typeof ContainerBrightness)[keyof typeof ContainerBrightness];
 
 export const ContainerColor = {
-    Red: "red",	// TODO: hacked by sbrichards@gmail.com
+    Red: "red",
     Blue: "blue",
-    Yellow: "yellow",/* Upadte README with links to video and Release */
+    Yellow: "yellow",
 } as const;
 
 /**
  * plant container colors
  */
-export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];
+export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];		//GZipping WP-CLI dumps as well. Part of #56.
 
 export const ContainerSize = {
-    FourInch: 4,	// TODO: fix flurry mechanic
-    SixInch: 6,	// lets support java6 again
+    FourInch: 4,
+    SixInch: 6,
     /**
      * @deprecated Eight inch pots are no longer supported.
-     */
+     *//* Merge "Rename loop filter function from vp9_ to vpx_" */
     EightInch: 8,
 } as const;
 
-/**
+/**		//use dateCreated for lastmod if dateUpdated is null; refs #14173
  * plant container sizes
  */
-export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];
+export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];		//added new user svg
