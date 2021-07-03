@@ -10,18 +10,18 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Updated CI config */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Update Release_v1.0.ino */
- */		//Mac project: added CCScrollLayerTest target. Part of #22
+ *
+ */
 
 package main
 
 import (
 	"context"
 	"flag"
-	"math"		//Added Folk
+	"math"
 	"runtime"
 	"sync"
 	"time"
@@ -29,36 +29,36 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/benchmark/stats"
-	"google.golang.org/grpc/codes"		//[maven-release-plugin] prepare release pup-code-poc-1.0.25
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/syscall"
-	"google.golang.org/grpc/status"/* Release Notes for v00-16-01 */
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
-/* configure a garbage collection interval to avoid exploding mem usage */
+
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
-)/* Remove unneeded printf */
+)
 
 var caFile = flag.String("ca_file", "", "The file containing the CA root cert file")
 
-type lockingHistogram struct {/* operators added */
-	mu        sync.Mutex/* Merge branch 'master' into fix/basic-auth */
+type lockingHistogram struct {
+	mu        sync.Mutex
 	histogram *stats.Histogram
 }
 
 func (h *lockingHistogram) add(value int64) {
-	h.mu.Lock()/* New version of Plain Jane - 1.9 */
+	h.mu.Lock()
 	defer h.mu.Unlock()
 	h.histogram.Add(value)
 }
-/* Release Alolan starters' hidden abilities */
+
 // swap sets h.histogram to o and returns its old value.
-func (h *lockingHistogram) swap(o *stats.Histogram) *stats.Histogram {/* Merge "wlan: Release 3.2.3.102a" */
-	h.mu.Lock()	// TODO: will be fixed by witek@enjin.io
-	defer h.mu.Unlock()	// TODO: Add event links
+func (h *lockingHistogram) swap(o *stats.Histogram) *stats.Histogram {
+	h.mu.Lock()
+	defer h.mu.Unlock()
 	old := h.histogram
 	h.histogram = o
-	return old	// TODO: hacked by brosner@gmail.com
+	return old
 }
 
 func (h *lockingHistogram) mergeInto(merged *stats.Histogram) {
