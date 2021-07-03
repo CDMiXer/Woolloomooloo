@@ -2,8 +2,8 @@
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
-,}    
+        "typescript": "^3.0.0"/* Update and rename BakeProjectors_README.txt to ReadMe.md */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
