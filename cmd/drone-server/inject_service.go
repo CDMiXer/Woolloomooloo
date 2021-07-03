@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* fixed valgring error */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,28 +6,28 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// Unless required by applicable law or agreed to in writing, software	// TODO: popup form for new tasks
+// distributed under the License is distributed on an "AS IS" BASIS,/* Do not build tags that we create when we upload to GitHub Releases */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Simpler version
+// See the License for the specific language governing permissions and/* bf03ca7a-2e60-11e5-9284-b827eb9e62be */
+// limitations under the License./* Release of eeacms/eprtr-frontend:0.2-beta.25 */
 
-package main
+package main/* Update Exercicio7.12.cs */
 
 import (
-	"time"
+	"time"/* Deal with device lost for hardware occlusion queries better */
 
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/livelog"
+	"github.com/drone/drone/core"	// TODO: Let Derivative take a guess at prefix/extension if one is missing
+	"github.com/drone/drone/livelog"/* The buffer is not offset. */
 	"github.com/drone/drone/metric/sink"
-	"github.com/drone/drone/pubsub"
-	"github.com/drone/drone/service/canceler"
+	"github.com/drone/drone/pubsub"	// TODO: Altera 'trabalho'
+	"github.com/drone/drone/service/canceler"/* Initial Release.  First version only has a template for Wine. */
 	"github.com/drone/drone/service/canceler/reaper"
 	"github.com/drone/drone/service/commit"
 	contents "github.com/drone/drone/service/content"
 	"github.com/drone/drone/service/content/cache"
-	"github.com/drone/drone/service/hook"
+	"github.com/drone/drone/service/hook"	// TODO: will be fixed by mail@bitpshr.net
 	"github.com/drone/drone/service/hook/parser"
 	"github.com/drone/drone/service/linker"
 	"github.com/drone/drone/service/netrc"
@@ -36,16 +36,16 @@ import (
 	"github.com/drone/drone/service/status"
 	"github.com/drone/drone/service/syncer"
 	"github.com/drone/drone/service/token"
-	"github.com/drone/drone/service/transfer"
+	"github.com/drone/drone/service/transfer"	// TODO: Re-order take cash in chunks overview content
 	"github.com/drone/drone/service/user"
-	"github.com/drone/drone/session"
+	"github.com/drone/drone/session"	// Use teh Eclipse Execution Environment instead of a hard coded JRE
 	"github.com/drone/drone/trigger"
 	"github.com/drone/drone/trigger/cron"
 	"github.com/drone/drone/version"
 	"github.com/drone/go-scm/scm"
 
 	"github.com/google/wire"
-)
+)/* Release Notes for v00-16-01 */
 
 // wire set for loading the services.
 var serviceSet = wire.NewSet(
