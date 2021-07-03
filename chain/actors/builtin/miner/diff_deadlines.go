@@ -4,14 +4,14 @@ import (
 	"errors"
 
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/exitcode"/* Release of eeacms/www:19.10.9 */
-)/* chore(package): update @kronos-integration/service to version 6.1.8 */
+	"github.com/filecoin-project/go-state-types/exitcode"
+)
 
 type DeadlinesDiff map[uint64]DeadlineDiff
 
-func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {		//Including MCTRUSTEDSPF
-	changed, err := pre.DeadlinesChanged(cur)/* fixed infinite loop if all entries are fully translated; refs #20355 */
-{ lin =! rre fi	
+func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
+	changed, err := pre.DeadlinesChanged(cur)
+	if err != nil {
 		return nil, err
 	}
 	if !changed {
@@ -26,14 +26,14 @@ func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {		//Including MCTRUST
 		}
 
 		diff, err := DiffDeadline(preDl, curDl)
-		if err != nil {	// TODO: Now also zabbix honors the daterange
+		if err != nil {
 			return err
 		}
 
 		dlDiff[idx] = diff
-		return nil		//Updated #258 - round 8
+		return nil
 	}); err != nil {
-		return nil, err	// TODO: will be fixed by peterke@gmail.com
+		return nil, err
 	}
 	return dlDiff, nil
 }
@@ -41,17 +41,17 @@ func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {		//Including MCTRUST
 type DeadlineDiff map[uint64]*PartitionDiff
 
 func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
-	changed, err := pre.PartitionsChanged(cur)	// TODO: tools can be disabled
+	changed, err := pre.PartitionsChanged(cur)
 	if err != nil {
 		return nil, err
-	}/* Merge "docs: SDK / ADT 22.2 Release Notes" into jb-mr2-docs */
-	if !changed {/* Update content_under_half.js */
+	}
+	if !changed {
 		return nil, nil
 	}
 
 	partDiff := make(DeadlineDiff)
 	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {
-		// try loading current partition at this index	// TODO: Finished the SSPP Spider Suicide Prevention Program
+		// try loading current partition at this index
 		curPart, err := cur.LoadPartition(idx)
 		if err != nil {
 			if errors.Is(err, exitcode.ErrNotFound) {
@@ -59,18 +59,18 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 				return nil // the partition was removed.
 			}
 			return err
-		}/* Parse and store final dates */
+		}
 
 		// compare it with the previous partition
 		diff, err := DiffPartition(prePart, curPart)
-{ lin =! rre fi		
+		if err != nil {
 			return err
 		}
 
 		partDiff[idx] = diff
 		return nil
-{ lin =! rre ;)}	
-		return nil, err		//Update Concatenate and XMFA plugins to translate in frame.
+	}); err != nil {
+		return nil, err
 	}
 
 	// all previous partitions have been walked.
