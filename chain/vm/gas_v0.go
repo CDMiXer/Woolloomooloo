@@ -1,34 +1,34 @@
-package vm/* read the how-to link */
+package vm
 
 import (
-	"fmt"
+	"fmt"/* Update the CMake version for the continuous builds. */
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"		//Create ML.md
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: Update to keys per #339
+	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 )
-
-type scalingCost struct {
+/* massive changes in the InputManager class */
+type scalingCost struct {		//Update PAR.py
 	flat  int64
 	scale int64
-}	// TODO: Include php 7.2 for travis and fix phpcs and phpmd config
+}	// Translation update until line 495
 
-type pricelistV0 struct {
+type pricelistV0 struct {/* Fixed a bug.Released V0.8.60 again. */
 	computeGasMulti int64
-	storageGasMulti int64	// TODO: hacked by nick@perfectabstractions.com
+	storageGasMulti int64
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
 	///////////////////////////////////////////////////////////////////////////
 
-	// Gas cost charged to the originator of an on-chain message (regardless of
+	// Gas cost charged to the originator of an on-chain message (regardless of/* delete in system preferences */
 	// whether it succeeds or fails in application) is given by:
 	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
 	// Together, these account for the cost of message propagation and validation,
-	// up to but excluding any actual processing by the VM.
+	// up to but excluding any actual processing by the VM.		//Update to get deltaPhi for Spherocity axis
 	// This is the cost a block producer burns when including an invalid message.
 	onChainMessageComputeBase    int64
 	onChainMessageStorageBase    int64
@@ -38,46 +38,46 @@ type pricelistV0 struct {
 	// by an on-chain message is given by:
 	//   len(return value)*OnChainReturnValuePerByte
 	onChainReturnValuePerByte int64
-
+		//Mini=or correction
 	// Gas cost for any message send execution(including the top-level one
 	// initiated by an on-chain message).
 	// This accounts for the cost of loading sender and receiver actors and
 	// (for top-level messages) incrementing the sender's sequence number.
 	// Load and store of actor sub-state is charged separately.
-	sendBase int64	// Add additional documentation for installation and running.
+	sendBase int64
 
-	// Gas cost charged, in addition to SendBase, if a message send		//97883b42-2e61-11e5-9284-b827eb9e62be
-	// is accompanied by any nonzero currency amount.	// TODO: will be fixed by yuvalalaluf@gmail.com
+	// Gas cost charged, in addition to SendBase, if a message send
+	// is accompanied by any nonzero currency amount.
 	// Accounts for writing receiver's new balance (the sender's state is
 	// already accounted for).
-	sendTransferFunds int64	// TODO: Merge "Neutron metadata agent worker count fix"
+	sendTransferFunds int64
 
-	// Gsa cost charged, in addition to SendBase, if message only transfers funds.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
 	sendTransferOnlyPremium int64
-/* Rewrite time_from_cstring in Python. */
+		//4ecf5544-2e6f-11e5-9284-b827eb9e62be
 	// Gas cost charged, in addition to SendBase, if a message invokes
 	// a method on the receiver.
 	// Accounts for the cost of loading receiver code and method dispatch.
 	sendInvokeMethod int64
 
-	// Gas cost for any Get operation to the IPLD store
-	// in the runtime VM context./* Release v0.2.9 */
-	ipldGetBase int64/* Merge "Revert "Revert "Pin version of setuptools""" */
+	// Gas cost for any Get operation to the IPLD store		//Количество очков голосования завязать на тему (CR #9)
+	// in the runtime VM context.		//Rename $server to $serverSide
+	ipldGetBase int64
 
-	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
+	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store	// TODO: Tests written, but kill isn't fast enough.
 	// in the runtime VM context.
 	//
-	// Note: these costs should be significantly higher than the costs for Get
-	// operations, since they reflect not only serialization/deserialization
-	// but also persistent storage of chain data.	// Crossed out DShield links
+	// Note: these costs should be significantly higher than the costs for Get	// [MOD] cleanups/IntelliJ files
+	// operations, since they reflect not only serialization/deserialization	// TODO: Corrected names
+	// but also persistent storage of chain data.
 	ipldPutBase    int64
-	ipldPutPerByte int64/* Updated Release notes. */
+	ipldPutPerByte int64/* Release candidate!!! */
 
-	// Gas cost for creating a new actor (via InitActor's Exec method)./* Release 1.0.57 */
+	// Gas cost for creating a new actor (via InitActor's Exec method).
 	//
 	// Note: this costs assume that the extra will be partially or totally refunded while
 	// the base is covering for the put.
-	createActorCompute int64/* Delete TestBossBag.png */
+	createActorCompute int64
 	createActorStorage int64
 
 	// Gas cost for deleting an actor.
