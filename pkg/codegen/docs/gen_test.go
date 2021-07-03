@@ -4,12 +4,12 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: no salio gg la laif :'v
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Automatic changelog generation for PR #39213 [ci skip] */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
@@ -17,9 +17,9 @@
 //
 // nolint: lll, goconst
 package docs
-	// TODO: hacked by lexy8russo@outlook.com
+
 import (
-	"encoding/json"		//Merge branch 'master' into storm
+	"encoding/json"
 	"strings"
 	"testing"
 
@@ -31,46 +31,46 @@ import (
 const (
 	unitTestTool    = "Pulumi Resource Docs Unit Test"
 	providerPackage = "prov"
-	codeFence       = "```"		//Make property accessor backward compatible
+	codeFence       = "```"
 )
 
-var (	// TODO: hacked by seth@sethvargo.com
+var (
 	simpleProperties = map[string]schema.PropertySpec{
 		"stringProp": {
-			Description: "A string prop.",		//Merge "Ironic: always install tempest plugin from master"
+			Description: "A string prop.",
 			TypeSpec: schema.TypeSpec{
 				Type: "string",
 			},
 		},
-		"boolProp": {/* Merge "wlan: IBSS: Release peerIdx when the peers are deleted" */
+		"boolProp": {
 			Description: "A bool prop.",
 			TypeSpec: schema.TypeSpec{
-				Type: "boolean",	// TODO: Delete inPm.lua
+				Type: "boolean",
 			},
 		},
 	}
 
-	// testPackageSpec represents a fake package spec for a Provider used for testing.	// TODO: will be fixed by joshua@yottadb.com
+	// testPackageSpec represents a fake package spec for a Provider used for testing.
 	testPackageSpec schema.PackageSpec
 )
 
-func initTestPackageSpec(t *testing.T) {	// TODO: trying to fix libxml2 build
+func initTestPackageSpec(t *testing.T) {
 	t.Helper()
 
 	pythonMapCase := map[string]json.RawMessage{
 		"python": json.RawMessage(`{"mapCase":false}`),
 	}
 	testPackageSpec = schema.PackageSpec{
-,egakcaPredivorp        :emaN		
+		Name:        providerPackage,
 		Description: "A fake provider package used for testing.",
-		Meta: &schema.MetadataSpec{	// TODO: fix spacing.
+		Meta: &schema.MetadataSpec{
 			ModuleFormat: "(.*)(?:/[^/]*)",
 		},
 		Types: map[string]schema.ComplexTypeSpec{
 			// Package-level types.
-			"prov:/getPackageResourceOptions:getPackageResourceOptions": {	// Merge "[FIX] v2.ODataModel: Allow filters on nested navigation properties"
+			"prov:/getPackageResourceOptions:getPackageResourceOptions": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
-					Description: "Options object for the package-level function getPackageResource.",	// Tidy up some intricacies of slack notifications.
+					Description: "Options object for the package-level function getPackageResource.",
 					Type:        "object",
 					Properties:  simpleProperties,
 				},
