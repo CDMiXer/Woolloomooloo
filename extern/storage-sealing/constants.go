@@ -1,4 +1,4 @@
-package sealing		//update new tickle line
+package sealing
 
 // Epochs
-const InteractivePoRepConfidence = 6
+const InteractivePoRepConfidence = 6		//reduced: Exception handlers should preserve the original exception
